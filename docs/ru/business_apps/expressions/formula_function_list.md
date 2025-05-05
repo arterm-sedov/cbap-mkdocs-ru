@@ -109,7 +109,7 @@ ADD(DATE('2024-01-01T01:01:01'), DURATION('P3Y6M4DT12H30M5S'))
 </td>
 <td markdown="block">
 
-Добавляет к значению типа «Дата и время» в местном часовом поясе указанное число дней.
+Добавляет указанное число дней к значению типа «Дата и время» в часовом поясе, заданном на форме, в настройках аккаунта или глобальной конфигурации или указанном в значении аргумента.
 
 </td>
 </tr>
@@ -222,10 +222,10 @@ ADDDAYSUTC(dateTime, numberOfDays)
 <td markdown="block">
 
 ``` cs
-ADDDAYSUTC(DATE('2024-01-01T01:01:01'), 3)
+ADDDAYSUTC(DATE('2024-01-01T01:01:01+00:00'), 3)
 ```
 
-Результат: `04.01.2024 1:01:01`
+Результат: `04.01.2024 4:01:01`
 
 Здесь:
 
@@ -321,7 +321,7 @@ ADDDUR(DURATION('P1DT12H30M5S'), DURATION('P1DT12H30M5S'))
 </td>
 <td markdown="block">
 
-Добавляет указанное количество часов к значению типа «Дата и время».
+Добавляет указанное количество часов к значению типа «Дата и время» в часовом поясе, заданном на форме, в настройках аккаунта или глобальной конфигурации или указанном в значении аргумента.
 
 </td>
 </tr>
@@ -434,10 +434,10 @@ ADDHOURSUTC(dateTime, number)
 <td markdown="block">
 
 ``` cs
-ADDHOURSUTC(DATE('2024-01-01T01:01:01'), 3)
+ADDHOURSUTC(DATE('2024-01-01T01:01:01+00:00'), 3)
 ```
 
-Результат: `01.01.2024 4:01:01`
+Результат: `01.01.2024 7:01:01` для часового пояса UTC+3.
 
 Здесь:
 
@@ -463,7 +463,7 @@ ADDHOURSUTC(DATE('2024-01-01T01:01:01'), 3)
 </td>
 <td markdown="block">
 
-Добавляет значение типа «Длительность» к значению типа «Дата и время» в местном часовом поясе.
+Добавляет значение типа «Длительность» к значению типа «Дата и время» в часовом поясе, заданном на форме, в настройках аккаунта или глобальной конфигурации или указанном в значении аргумента.
 
 </td>
 </tr>
@@ -535,7 +535,7 @@ ADDLOC(DATE('2024-01-01T01:01:01'), DURATION('P1DT12H30M5S'))
 </td>
 <td markdown="block">
 
-Добавляет указанное количество минут к значению типа «Дата и время» в местном часовом поясе.
+Добавляет указанное количество минут к значению типа «Дата и время» в часовом поясе, заданном на форме, в настройках аккаунта или глобальной конфигурации или указанном в значении аргумента.
 
 </td>
 </tr>
@@ -648,10 +648,10 @@ ADDMINUTESUTC(dateTime, numberOfMinutes)
 <td markdown="block">
 
 ``` cs
-ADDMINUTESUTC(DATE('2024-01-01T01:01:01'), 3)
+ADDMINUTESUTC(DATE('2024-01-01T01:01:01+00:00'), 3)
 ```
 
-Результат: `01.01.2024 1:04:01`
+Результат: `01.01.2024 4:04:01` для часового пояса UTC+3.
 
 Здесь:
 
@@ -677,7 +677,7 @@ ADDMINUTESUTC(DATE('2024-01-01T01:01:01'), 3)
 </td>
 <td markdown="block">
 
-Добавляет указанное количество месяцев к значению типа «Дата и время» в местном часовом поясе.
+Добавляет указанное количество месяцев к значению типа «Дата и время» в часовом поясе, заданном на форме, в настройках аккаунта или глобальной конфигурации или указанном в значении аргумента.
 
 </td>
 </tr>
@@ -790,10 +790,10 @@ ADDMONTHSUTC(dateTime, numberOfMonths)
 <td markdown="block">
 
 ``` cs
-ADDMONTHSUTC(DATE('2024-01-01T01:01:01'), 3)
+ADDMONTHSUTC(DATE('2024-01-01T01:01:01+00:00'), 3)
 ```
 
-Результат: `01.04.2024 1:01:01`
+Результат: `01.04.2024 4:01:01` для часового пояса UTC+3.
 
 Здесь:
 
@@ -819,7 +819,7 @@ ADDMONTHSUTC(DATE('2024-01-01T01:01:01'), 3)
 </td>
 <td markdown="block">
 
-Добавляет указанное количество секунд к значению типа «Дата и время» в местном часовом поясе.
+Добавляет указанное количество секунд к значению типа «Дата и время» в часовом поясе, заданном на форме, в настройках аккаунта или глобальной конфигурации или указанном в значении аргумента.
 
 </td>
 </tr>
@@ -932,10 +932,10 @@ ADDSECONDSUTC(dateTime, number)
 <td markdown="block">
 
 ``` cs
-ADDSECONDSUTC(DATE('2024-01-01T01:01:01'), 3)
+ADDSECONDSUTC(DATE('2024-01-01T01:01:01+00:00'), 3)
 ```
 
-Результат: `01.01.2024 1:01:04`
+Результат: `01.01.2024 4:01:04` для часового пояса UTC+3.
 
 Здесь:
 
@@ -1003,10 +1003,10 @@ ADDUTC(dateTime, duration)
 <td markdown="block">
 
 ``` cs
-ADDUTC(DATE('2024-01-01T01:01:01'), DURATION('P1DT12H30M5S'))
+ADDUTC(DATE('2024-01-01T01:01:01+00:00'), DURATION('P1DT12H30M5S'))
 ```
 
-Результат: `02.01.2024 13:31:06`
+Результат: `02.01.2024 16:31:06` для часового пояса UTC+3.
 
 Здесь:
 
@@ -1033,7 +1033,7 @@ ADDUTC(DATE('2024-01-01T01:01:01'), DURATION('P1DT12H30M5S'))
 </td>
 <td markdown="block">
 
-Добавляет указанное количество лет к значению типа «Дата и время» в местном часовом поясе.
+Добавляет указанное количество лет к значению типа «Дата и время» в часовом поясе, заданном на форме, в настройках аккаунта или глобальной конфигурации или указанном в значении аргумента.
 
 </td>
 </tr>
@@ -1145,10 +1145,10 @@ ADDYEARSUTC(dateTime, number)
 <td markdown="block">
 
 ``` cs
-ADDYEARSUTC(DATE('2024-01-01T01:01:01'), 3)
+ADDYEARSUTC(DATE('2024-01-01T01:01:01+00:00'), 3)
 ```
 
-Результат: `01.01.2027 1:01:01`
+Результат: `01.01.2027 4:01:01` для часового пояса UTC+3.
 
 Здесь:
 
@@ -1207,7 +1207,26 @@ ALL(list)
 <td markdown="block">
 Логическое значение
 </td>
+</tr>
 
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+ALL(LIST(BOOL("true"), BOOL("true"), BOOL("false")))
+```
+
+Результат: `False`
+
+Здесь:
+
+- [`BOOL()`](#bool) — преобразует строку в логическое значение.
+- [`LIST()`](#list) — определяет список. Берет перечисление значений одного типа, разделяет их запятыми и возвращает список.
+
+</td>
 </tr>
 </tbody>
 </table>
@@ -1259,6 +1278,26 @@ AND(bool1, bool2)
 Логическое значение
 </td>
 </tr>
+
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+AND(BOOL("true"), BOOL("true"))
+```
+
+Результат: `True`
+
+Здесь:
+
+- [`BOOL()`](#bool) — преобразует строку в логическое значение.
+- [`LIST()`](#list) — определяет список. Берет перечисление значений одного типа, разделяет их запятыми и возвращает список.
+
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -1291,7 +1330,7 @@ AND(bool1, bool2)
 </td>
 <td markdown="block">
 
-```
+``` cs
 ANY(list), ANY((sequence))
 ```
 
@@ -1324,11 +1363,11 @@ ANY(list), ANY((sequence))
 </td>
 <td markdown="block">
 
-```
+``` cs
 ANY( from I in db->Tickets where i->product = 'Data Monsoon' select i->name)
 ```
 
-Возвращает значение `true`, если хотя бы один элемент имеет значение предиката `product` равным «`Data Monsoon`».
+Результат: `True`, если хотя бы один элемент имеет значение предиката `product` равным `Data Monsoon`.
 
 </td>
 </tr>
@@ -1362,7 +1401,10 @@ ANY( from I in db->Tickets where i->product = 'Data Monsoon' select i->name)
 </td>
 <td markdown="block">
 
-`ANY([(query), queryVar, boolEval])`
+``` cs
+ANY([(query), queryVar, boolEval])
+```
+
 </td>
 </tr>
 
@@ -1400,7 +1442,7 @@ ANY([(
     ])
 ```
 
-Возвращает значение `true`, если поступил хотя бы один запрос по продукту Data Monsoon, при обработке которого потребуется участие отдела QA.
+Результат: `True`, если поступил хотя бы один запрос по продукту `Data Monsoon`, для которого значение атрибута `NeedsQAHelp` равно `true`.
 
 </td>
 </tr>
@@ -1430,7 +1472,7 @@ ANY([(
 </td>
 <td markdown="block">
 
-```
+``` cs
 ASCENDING(list)
 ```
 
@@ -1441,7 +1483,7 @@ ASCENDING(list)
 **Аргументы**
 </td>
 <td markdown="block">
-`list`: список значений типа «Число» или строка
+`list`: список чисел или строк
 </td>
 </tr>
 <tr markdown="block">
@@ -1449,7 +1491,7 @@ ASCENDING(list)
 **Результат**
 </td>
 <td markdown="block">
-сортированный список значений
+Отсортированный список значений
 </td>
 </tr>
 <tr markdown="block">
@@ -1458,11 +1500,11 @@ ASCENDING(list)
 </td>
 <td markdown="block">
 
-```
+``` cs
 ASCENDING('л', 'а', 'и')
 ```
 
-Возвращает `(string:а string:и string:л)`
+Результат: `(SimpleString:а SimpleString:и SimpleString:л)`
 
 </td>
 </tr>
@@ -1492,7 +1534,11 @@ ASCENDING('л', 'а', 'и')
 **Синтаксис**
 </td>
 <td markdown="block">
+
+``` cs
 AVERAGE(value1, value2)
+```
+
 </td>
 </tr>
 <tr markdown="block">
@@ -1510,6 +1556,21 @@ AVERAGE(value1, value2)
 </td>
 <td markdown="block">
 Число
+</td>
+</tr>
+
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+AVERAGE(1, 3, 4, 7, 10)
+```
+
+Результат: `5`
+
 </td>
 </tr>
 </tbody>
@@ -1530,7 +1591,7 @@ AVERAGE(value1, value2)
 </td>
 <td markdown="block">
 
-Проверяет факт вхождения даты или длительности в заданный диапазон. Значения типа «Дата и время» должны быть в местном часовом поясе.
+Проверяет факт вхождения даты или длительности в заданный диапазон. Значения типа «Дата и время» должны быть в часовом поясе, заданном на форме, в настройках аккаунта или глобальной конфигурации или указанном в значении аргумента.
 
 </td>
 </tr>
@@ -1563,7 +1624,7 @@ BETWEEN(value, min, max)
 **Результат**
 </td>
 <td markdown="block">
-логическое значение
+Логическое значение
 </td>
 </tr>
 <tr markdown="block">
@@ -1576,7 +1637,7 @@ BETWEEN(value, min, max)
 BETWEEN(DURATION("PT3H15M"), DURATION("PT3H1M"), DURATION("PT3H25M"))
 ```
 
-Результат: `true`
+Результат: `True`
 
 Здесь:
 
@@ -1613,7 +1674,7 @@ BETWEEN(DURATION("PT3H15M"), DURATION("PT3H1M"), DURATION("PT3H25M"))
 <td markdown="block">
 
 ``` cs
-BETWEENUTC(вate, ыtartDate, уndDate)
+BETWEENUTC(value, min, max)
 ```
 
 </td>
@@ -1624,9 +1685,9 @@ BETWEENUTC(вate, ыtartDate, уndDate)
 </td>
 <td markdown="block">
 
-- `вate` — дата для проверки.
-- `ыtartDate` — начальное значение диапазона.
-- `уndDate` — конечное значение диапазона.
+- `value` — дата и время или длительность для проверки.
+- `min` — начальное значение диапазона.
+- `max` — конечное значение диапазона.
 
 </td>
 </tr>
@@ -1635,7 +1696,7 @@ BETWEENUTC(вate, ыtartDate, уndDate)
 **Результат**
 </td>
 <td markdown="block">
-логическое значение
+Логическое значение
 </td>
 </tr>
 <tr markdown="block">
@@ -1645,10 +1706,10 @@ BETWEENUTC(вate, ыtartDate, уndDate)
 <td markdown="block">
 
 ``` cs
-BETWEENUTC(DATE("2023-01-15"), DATE("2024-08-15"), DATE("2024-08-15"))
+BETWEENUTC(DATE("2023-01-15+00:00"), DATE("2024-02-15+01:00"), DATE("2024-08-15-01:00"))
 ```
 
-Результат: `false`
+Результат: `False`
 
 Здесь:
 
@@ -1673,7 +1734,7 @@ BETWEENUTC(DATE("2023-01-15"), DATE("2024-08-15"), DATE("2024-08-15"))
 **Описание**
 </td>
 <td markdown="block">
-Преобразует строку в логический тип. Для правильной конвертации, значение строки должно быть равно `true` или `false` без учёта регистра.
+Преобразует строку в логический значение. Для правильной конвертации значение строки должно быть равно `true` или `false` без учёта регистра.
 
 </td>
 </tr>
@@ -1684,7 +1745,7 @@ BETWEENUTC(DATE("2023-01-15"), DATE("2024-08-15"), DATE("2024-08-15"))
 <td markdown="block">
 
 ``` cs
-BOOL(String)
+BOOL(string)
 ```
 
 </td>
@@ -1695,7 +1756,7 @@ BOOL(String)
 </td>
 <td markdown="block">
 
-`String` — строка, которая преобразуется в логическое значение,  со значением `true` или `false` (без учёта регистра). При неподходящих значениях атрибута (0, 1, истина, ложь и т. п.) функция возвращает пустое значение.
+`string` — строка, которая преобразуется в логическое значение, со значением `true` или `false` (без учёта регистра). При неподходящих значениях атрибута (0, 1, истина, ложь и т. п.) функция возвращает пустое значение.
 
 </td>
 </tr>
@@ -1704,7 +1765,7 @@ BOOL(String)
 **Результат**
 </td>
 <td markdown="block">
-логическое значение
+Логическое значение
 </td>
 </tr>
 <tr markdown="block">
@@ -1717,7 +1778,7 @@ BOOL(String)
 BOOL('TrUE')
 ```
 
-Возвращает `True`
+Результат: `True`
 </td>
 </tr>
 </tbody>
@@ -1737,7 +1798,7 @@ BOOL('TrUE')
 **Описание**
 </td>
 <td markdown="block">
-Округляет до ближайшего большего целого.
+Округляет до ближайшего бо́льшего целого.
 
 </td>
 </tr>
@@ -1748,7 +1809,7 @@ BOOL('TrUE')
 <td markdown="block">
 
 ``` cs
-CEILING(Number)
+CEILING(number)
 ```
 
 </td>
@@ -1758,7 +1819,6 @@ CEILING(Number)
 **Аргументы**
 </td>
 <td markdown="block">
-
 
 `number` — число, которое будет округлено.
 
@@ -1782,7 +1842,7 @@ CEILING(Number)
 CEILING(4.1)
 ```
 
-Возвращает `5`
+Результат: `5`
 </td>
 </tr>
 </tbody>
@@ -1803,7 +1863,7 @@ CEILING(4.1)
 </td>
 <td markdown="block">
 
-Принимает аргумент типа «Дата и время» и возвращает числовое значение, соответствующее веку указанной даты в местном часовом поясе.
+Принимает аргумент типа «Дата и время» и возвращает числовое значение, соответствующее веку указанной даты в часовом поясе, заданном на форме, в настройках аккаунта или глобальной конфигурации или указанном в значении аргумента.
 
 </td>
 </tr>
@@ -1814,7 +1874,7 @@ CEILING(4.1)
 <td markdown="block">
 
 ``` cs
-CENTURY(DateTime)
+CENTURY(dateTime)
 ```
 
 </td>
@@ -1824,7 +1884,6 @@ CENTURY(DateTime)
 **Аргументы**
 </td>
 <td markdown="block">
-
 
 `dateTime` — дата, для которой требуется определить век.
 
@@ -1845,10 +1904,80 @@ CENTURY(DateTime)
 <td markdown="block">
 
 ``` cs
-CENTURY(DATE("2024-08-15T13:45:15"))
+CENTURY(DATE("2000-01-01T05:45:15"))
 ```
 
-Возвращает `21`
+Результат: `21`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `CENTURYUTC()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Принимает аргумент типа «Дата и время» и возвращает числовое значение, соответствующее веку указанной даты в формате UTC.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+CENTURYUTC(dateTime)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`dateTime` — дата, для которой требуется определить век.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+CENTURYUTC(DATE("2000-01-01T05:45:15+10:00"))
+```
+
+Результат: `20`
 
 Здесь:
 
@@ -1977,7 +2106,7 @@ CONCAT(list)
 **Результат**
 </td>
 <td markdown="block">
-строку
+Строка
 </td>
 </tr>
 <tr markdown="block">
@@ -1990,11 +2119,11 @@ CONCAT(list)
 CONCAT(LIST("Сумма доходов равна: ", "100000"))
 ```
 
-Возвращает `Сумма доходов равна: 100000`
+Результат: `Сумма доходов равна: 100000`
 
 Здесь:
 
-`LIST()` — функция, которая принимает значения одного типа, разделённые запятыми, и возвращает их список.
+[`LIST()`](#list) — функция, которая принимает значения, разделённые запятыми, и возвращает их список.
 
 </td>
 </tr>
@@ -2048,7 +2177,7 @@ CONTAINS(string, substring)
 **Результат**
 </td>
 <td markdown="block">
-логическое значение
+Логическое значение
 </td>
 </tr>
 <tr markdown="block">
@@ -2061,7 +2190,7 @@ CONTAINS(string, substring)
 CONTAINS("Это срочная заявка.", "срочн")
 ```
 
-Возвращает `True`
+Результат: `True`
 </td>
 </tr>
 </tbody>
@@ -2081,7 +2210,7 @@ CONTAINS("Это срочная заявка.", "срочн")
 **Описание**
 </td>
 <td markdown="block">
-Переводит значение типа «Дата и время» из локального часового пояса в заданный часовой пояс в формате IANA.
+Переводит значение типа «Дата и время» из часового пояса, заданного на форме, в настройках аккаунта или глобальной конфигурации или указанного в значении аргумента, в заданный часовой пояс в формате IANA.
 
 </td>
 </tr>
@@ -2103,8 +2232,8 @@ CONVERTTIMEZONE(date, timeZone)
 </td>
 <td markdown="block">
 
-- `date` — дата в местном часовом поясе.
-- `TimeZone` — целевой часовой пояс.
+- `date` — дата и время.
+- `timeZone` — целевой часовой пояс.
 
 </td>
 </tr>
@@ -2113,7 +2242,7 @@ CONVERTTIMEZONE(date, timeZone)
 **Результат**
 </td>
 <td markdown="block">
-логическое значение
+Логическое значение
 </td>
 </tr>
 <tr markdown="block">
@@ -2123,15 +2252,85 @@ CONVERTTIMEZONE(date, timeZone)
 <td markdown="block">
 
 ``` cs
-CONTAINS("Это срочная заявка.", "срочн")
+CONVERTTIMEZONE(DATE("2025-05-05T13:45:15+00:00"), "Europe/London")
 ```
-Возвращает `True`
+
+Результат: `05.05.2025 14:45:15` для часового пояса UTC+3.
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
+</tbody>
+</table>
 
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
 
+## `CONVERTTIMEZONEUTC()`
 
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+Переводит значение типа «Дата и время» в формате UTC в заданный часовой пояс в формате IANA.
 
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+CONVERTTIMEZONEUTC(date, timeZone)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+- `date` — дата с указанием часового пояса в формате UTC.
+- `timeZone` — целевой часовой пояс.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+CONVERTTIMEZONEUTC(DATE("2025-05-05T13:45:15+00:00"), "Europe/Moscow")
+```
+
+Результат: `05.05.2025 16:45:15`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -2158,7 +2357,11 @@ CONTAINS("Это срочная заявка.", "срочн")
 **Синтаксис**
 </td>
 <td markdown="block">
-COUNT(argument1)
+
+``` cs
+COUNT(list)
+```
+
 </td>
 </tr>
 <tr markdown="block">
@@ -2167,7 +2370,7 @@ COUNT(argument1)
 </td>
 <td markdown="block">
 
-`argument1`: список строк
+`list`: список элементов
 </td>
 </tr>
 <tr markdown="block">
@@ -2178,6 +2381,24 @@ COUNT(argument1)
 Число
 </td>
 </tr>
+
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+COUNT(LIST("a", 2, "c", "d", 5))
+```
+
+Результат: `5`
+
+Здесь:
+
+[`LIST()`](#list) — функция, которая принимает значения, разделённые запятыми, и возвращает их список.
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -2186,7 +2407,7 @@ COUNT(argument1)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `DATETIMEFROMSECONDS()`
+## `CREATEDATE()`
 
 </th>
 </tr>
@@ -2195,7 +2416,7 @@ COUNT(argument1)
 **Описание**
 </td>
 <td markdown="block">
-Преобразует заданное количество секунд в дату.
+Преобразует числовые аргументы в значение типа «Дата и время» в часовом поясе, заданном на форме, в настройках аккаунта или глобальной конфигурации.
 
 </td>
 </tr>
@@ -2204,7 +2425,16 @@ COUNT(argument1)
 **Синтаксис**
 </td>
 <td markdown="block">
-DATETIMEFROMSECONDS(argument1)
+
+``` cs
+CREATEDATE(year, month, day)
+```
+
+**или**
+
+``` cs
+CREATEDATE(year, month, day, hour, minute, second)
+
 </td>
 </tr>
 <tr markdown="block">
@@ -2213,7 +2443,8 @@ DATETIMEFROMSECONDS(argument1)
 </td>
 <td markdown="block">
 
-`argument1`: число
+`year, month, day, hour, minute, second`: число.
+
 </td>
 </tr>
 <tr markdown="block">
@@ -2224,6 +2455,20 @@ DATETIMEFROMSECONDS(argument1)
 Дата и время
 </td>
 </tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+CREATEDATE(2025, 5, 5, 15, 45, 15)
+```
+
+Результат: `05.05.2025 15:45:15`
+
+</td>
+</tr>
 </tbody>
 </table>
 
@@ -2232,7 +2477,7 @@ DATETIMEFROMSECONDS(argument1)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `DATETIMEINSECONDS()`
+## `CREATEDATEUTC()`
 
 </th>
 </tr>
@@ -2241,7 +2486,7 @@ DATETIMEFROMSECONDS(argument1)
 **Описание**
 </td>
 <td markdown="block">
-Преобразует заданную в качестве аргумента дату в количество секунд, прошедшее с 00:00:00 1 января 1970 года (Unix-время).
+Преобразует числовые аргументы в значение типа «Дата и время» в часовом поясе в формате UTC.
 
 </td>
 </tr>
@@ -2250,7 +2495,16 @@ DATETIMEFROMSECONDS(argument1)
 **Синтаксис**
 </td>
 <td markdown="block">
-DATETIMEINSECONDS(argument1)
+
+``` cs
+CREATEDATEUTC(year, month, day)
+```
+
+**или**
+
+``` cs
+CREATEDATEUTC(year, month, day, hour, minute, second)
+
 </td>
 </tr>
 <tr markdown="block">
@@ -2259,7 +2513,8 @@ DATETIMEINSECONDS(argument1)
 </td>
 <td markdown="block">
 
-`argument1`: дата и время
+`year, month, day, hour, minute, second`: число.
+
 </td>
 </tr>
 <tr markdown="block">
@@ -2267,7 +2522,21 @@ DATETIMEINSECONDS(argument1)
 **Результат**
 </td>
 <td markdown="block">
-Число
+Дата и время
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+CREATEDATEUTC(2025, 5, 5, 15, 45, 15)
+```
+
+Результат: `05.05.2025 15:45:15`
+
 </td>
 </tr>
 </tbody>
@@ -2287,7 +2556,7 @@ DATETIMEINSECONDS(argument1)
 **Описание**
 </td>
 <td markdown="block">
-Принимает аргумент типа «Дата и время» и возвращает числовое значение, соответствующее дню месяца указанной даты в местном часовом поясе.
+Принимает аргумент типа «Дата и время» и возвращает числовое значение, соответствующее дню месяца указанной даты в часовом поясе, заданном на форме, в настройках аккаунта или глобальной конфигурации или указанном в значении аргумента.
 
 </td>
 </tr>
@@ -2298,7 +2567,13 @@ DATETIMEINSECONDS(argument1)
 <td markdown="block">
 
 ``` cs
-DAY(dayTime)
+DAY(dateTime)
+```
+
+**или**
+
+``` cs
+DAY(dateTime, timeZone)
 ```
 
 </td>
@@ -2309,7 +2584,8 @@ DAY(dayTime)
 </td>
 <td markdown="block">
 
-`dayTime`: дата и время
+- `dateTime`: дата и время.
+- `timeZone`: часовой пояс в формате IANA.
 
 </td>
 </tr>
@@ -2319,6 +2595,369 @@ DAY(dayTime)
 </td>
 <td markdown="block">
 Число
+</td>
+</tr>
+
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+DAY(DATE("2025-05-05T23:45:15+00:00"), "Europe/Moscow")
+```
+
+Результат: `6`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `DAYOFWEEK()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+Принимает аргумент типа «Дата и время» и возвращает название дня недели указанной даты в часовом поясе, заданном на форме, в настройках аккаунта или глобальной конфигурации или указанном в значении аргумента.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+DAYOFWEEK(dateTime)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`dateTime`: дата и время.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число
+</td>
+</tr>
+
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+DAYOFWEEK(DATE("2025-05-05T23:45:15"))
+```
+
+Результат: `понедельник`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `DAYOFWEEKUTC()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+Принимает аргумент типа «Дата и время» и возвращает название дня недели указанной даты в формате UTC.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+DAYOFWEEKUTC(dateTime)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`dateTime`: дата и время.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число
+</td>
+</tr>
+
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+DAYOFWEEKUTC(DATE("2025-05-05T23:45:15+00:00"))
+```
+
+Результат: `понедельник`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `DAYOFYEAR()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+Принимает аргумент типа «Дата и время» и возвращает число, соответствующее дню года указанной даты в часовом поясе, заданном на форме, в настройках аккаунта или глобальной конфигурации или указанном в значении аргумента.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+DAYOFYEAR(dateTime)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`dateTime`: дата и время.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число
+</td>
+</tr>
+
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+DAYOFYEAR(DATE("2025-05-05T23:45:15"))
+```
+
+Результат: `125`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `DAYOFYEARUTC()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+Принимает аргумент типа «Дата и время» и возвращает число, соответствующее дню года указанной даты в формате UTC.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+DAYOFYEARUTC(dateTime)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`dateTime`: дата и время.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число
+</td>
+</tr>
+
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+DAYOFYEARUTC(DATE("2025-05-05T23:45:15+00:00"))
+```
+
+Результат: `125`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `DAYS()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+Возвращает количество дней для аргумента типа «Длительность».
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+DAYS(duration)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`duration`: длительность.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число
+</td>
+</tr>
+
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+DAYS(DURATION('P12DT64H75M1360S'))
+```
+
+Результат: `14,7344907407407`
+
+Здесь:
+
+`DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
