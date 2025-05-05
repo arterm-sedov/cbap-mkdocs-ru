@@ -73,7 +73,7 @@
 <video controls="controls" height="100%" width="100%">
 <source src="https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/restore_complete_backup_linux.mp4" type="video/mp4"/>
 </video>
-<h2 id="восстановление-базы-данных-и-скриптов">Восстановление базы данных и скриптов</h2>
+<h2 class="pageBreakBefore" id="восстановление-базы-данных-и-скриптов">Восстановление базы данных и скриптов</h2>
 <ol class="colored_numbers_list">
 <li>
 <p>Перейдите в режим суперпользователя:</p>
@@ -252,11 +252,11 @@
 <ul>
 <li>
 <p><strong>С авторизацией в OpenSearch (Elasticsearch):</strong></p>
-<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"https://&lt;openSearchHost&gt;:9200/_snapshot/&lt;repository_backup&gt;?pretty"</span><span class="w"> </span><span class="se">\</span></code> <br/><code>-u<span class="w"> </span>&lt;username&gt;:&lt;password&gt;<span class="w"> </span><span class="se">\</span></code> <br/><code>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span><span class="se">\</span></code> <br/><code><span class="s1">'{</span></code> <br/><code><span class="s1">    "type": "fs",</span></code> <br/><code><span class="s1">    "settings": {</span></code> <br/><code><span class="s1">        "location": "/var/backups/elasticsearch"</span></code> <br/><code><span class="s1">    }</span></code> <br/><code><span class="s1">}'</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"https://&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/&lt;repository_backup&gt;?pretty"</span><span class="w"> </span><span class="se">\</span></code> <br/><code>-u<span class="w"> </span>&lt;username&gt;:&lt;password&gt;<span class="w"> </span><span class="se">\</span></code> <br/><code>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span><span class="se">\</span></code> <br/><code><span class="s1">'{</span></code> <br/><code><span class="s1">    "type": "fs",</span></code> <br/><code><span class="s1">    "settings": {</span></code> <br/><code><span class="s1">        "location": "/var/backups/elasticsearch"</span></code> <br/><code><span class="s1">    }</span></code> <br/><code><span class="s1">}'</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p><strong>Без авторизации в OpenSearch (Elasticsearch):</strong></p>
-<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"https://&lt;openSearchHost&gt;:9200/_snapshot/&lt;repository_backup&gt;?verify=false&amp;pretty"</span><span class="w"> </span><span class="se">\</span></code> <br/><code>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span><span class="se">\</span></code> <br/><code><span class="s1">'{</span></code> <br/><code><span class="s1">    "type": "fs",</span></code> <br/><code><span class="s1">    "settings": {</span></code> <br/><code><span class="s1">        "location": "/var/backups/elasticsearch"</span></code> <br/><code><span class="s1">    }</span></code> <br/><code><span class="s1">}'</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"https://&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/&lt;repository_backup&gt;?verify=false&amp;pretty"</span><span class="w"> </span><span class="se">\</span></code> <br/><code>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span><span class="se">\</span></code> <br/><code><span class="s1">'{</span></code> <br/><code><span class="s1">    "type": "fs",</span></code> <br/><code><span class="s1">    "settings": {</span></code> <br/><code><span class="s1">        "location": "/var/backups/elasticsearch"</span></code> <br/><code><span class="s1">    }</span></code> <br/><code><span class="s1">}'</span></code> <br/></pre></code></div>
 </li>
 </ul>
 <p><a class="mkdocs_imported_link" id="s3_repository"></a></p>
@@ -270,11 +270,11 @@
 </li>
 <li>
 <p>Проверьте содержимое зарегистрированного репозитория:</p>
-<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">"https://&lt;openSearchHost&gt;:9200/_snapshot/&lt;repository_backup&gt;?pretty"</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">"https://&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/&lt;repository_backup&gt;?pretty"</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Восстановите снимок OpenSearch (Elasticsearch):</p>
-<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"https://&lt;openSearchHost&gt;:9200/_snapshot/&lt;repository_backup&gt;/&lt;backupsessionXX&gt;/_restore?pretty"</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"https://&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/&lt;repository_backup&gt;/&lt;backupsessionXX&gt;/_restore?pretty"</span></code> <br/></pre></code></div>
 <ul>
 <li>В качестве репозитория укажите имя репозитория, созданного на шаге 7, или префикс индекса OpenSearch (Elasticsearch) при восстановлении из хранилища S3 (см. <a class="mkdocs_imported_link" href="#s3_repository">примечание</a> выше).</li>
 <li>В качестве имени снимка укажите идентификатор резервной копии <strong>без точки перед номером и строчными буквами</strong> (например, <code>backupSession.123</code> указывайте как <code>backupsession123</code>) со страницы <a class="autorefs autorefs-internal mkdocs_imported_link" href="../configure.html#backup_configure_sessions_list" title="Просмотр списка сеансов резервного копирования">«Администрирование» – «Инфраструктура» – «Резервное копирование» – «Журнал»</a>.</li>
@@ -282,7 +282,7 @@
 </li>
 <li>
 <p>Проверьте наличие индексов в восстановленном каталоге:</p>
-<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">"https://&lt;openSearchHost&gt;:9200/_cat/indices?pretty"</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">"https://&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_cat/indices?pretty"</span></code> <br/></pre></code></div>
 </li>
 </ol>
 <div class="relatedTopics">

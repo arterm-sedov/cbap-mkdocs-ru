@@ -68,9 +68,9 @@ kbId: 4717
     - _[Отправка уведомлений с помощью Telegram-бота][telegram_send_notification]_
     - _[Отправка HTTP-запросов типа GET и обработка запросов в формате JSON][http_send_example]_
 - Получение и отправка электронной почты
-    - _[Отправка эл. почты из сценариев через SMTP и Exchange][scenario_send_email]_
-    - _[Получение эл. почты из сценариев через SMTP и Exchange][scenario_receive_email]_
-    - _[Согласование заявлений по эл. почте][process_email_configure]_
+    - _[Отправка эл.&nbsp;почты из сценариев через SMTP и Exchange][scenario_send_email]_
+    - _[Получение эл.&nbsp;почты из сценариев через SMTP и Exchange][scenario_receive_email]_
+    - _[Согласование заявлений по эл.&nbsp;почте][process_email_configure]_
 - Принудительная остановка бизнес-процессов и запрет на внесение изменений в записи
     - _[Проверка результата выражения в сценарии][scenario_actions_validate_expression]_
     - _[Проверка результата скрипта в сценарии][scenario_actions_validate_csharp]_

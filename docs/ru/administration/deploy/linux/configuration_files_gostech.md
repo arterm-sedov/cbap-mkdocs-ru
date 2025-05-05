@@ -34,23 +34,21 @@ kbId: 5067
 <!--instanceYML-start-->
 ``` yaml
 #################### Настройка базовых параметров ПО ####################
-# Имя экземпляра ПО
-# Устаревшая директива: instanceName
+# Имя экземпляра {{ productName }}.
 clusterName: <instanceName>
-# Имя узла экземпляра ПО
+# Имя узла экземпляра {{ productName }}.
 #nodeName: <instanceName>
-# Путь к экземпляру, по которому ПО находит свою конфигурацию
+# Путь к экземпляру, по которому {{ productName }} находит свою конфигурацию.
 configPath: <configPath>
-# Адрес службы журналирования ({{ openSearchVariants }}, OpenSearch)
-# Устаревшая директива: elasticsearchUri
+# Адрес службы журналирования {{ openSearchVariants }}.
 journal.server: http://<searchHostIP>:<searchHostPort>
-# Индекс службы журналирования ({{ openSearchVariants }}, OpenSearch)
+# Индекс службы журналирования {{ openSearchVariants }}.
 # journal.name: <instanceName>
-# URI-адрес экземпляра ПО
+# URI-адрес экземпляра {{ productName }}.
 fqdn: <hostName>
-# Порт экземпляра ПО
+# Порт экземпляра {{ productName }}.
 port: <portNumber>
-# Версия экземпляра ПО
+# Версия экземпляра {{ productName }}.
 version: <versionNumber>
 #################### Настройка базы данных ####################
 # Путь к базе данных

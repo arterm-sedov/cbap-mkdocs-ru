@@ -60,7 +60,7 @@
 <p>Для создания резервной копии соберите перечисленные ниже данные об экземпляре ПО.</p>
 <ol class="colored_numbers_list">
 <li>
-<p>Имя экземпляра ПО: <code>&lt;instanceName&gt;</code>. Можно получить в ответе на запрос localhost:9200/_cat/indices, например <code>cmw_cmw-study</code>, как показано на следующей иллюстрации.</p>
+<p>Имя экземпляра ПО: <code>&lt;instanceName&gt;</code>. Можно получить в ответе на запрос <code>&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_cat/indices</code>, например <code>cmw_cmw-study</code>, как показано на следующей иллюстрации.</p>
 <p><figure class="screenshot_with_caption" markdown=""><img alt="Определение имени экземпляра ПО" src="https://kb.comindware.ru/assets/Pasted%20image%2020221229181253.png"/><figcaption class="caption">Определение имени экземпляра ПО</figcaption></figure></p>
 </li>
 <li>
@@ -162,11 +162,11 @@
 </li>
 <li>
 <p>Зарегистрируйте репозиторий OpenSearch (Elasticsearch). Вместо <code>elasticsearch_repo_name</code> и <code>/var/www/backups/elasticsearch</code> подставьте своё имя репозитория и путь к его папке:</p>
-<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"localhost:9200/_snapshot/elasticsearch_repo_name?pretty"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">'{"type": "fs", "settings": {"location": "/var/www/backups/elasticsearch"}}'</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/elasticsearch_repo_name?pretty"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">'{"type": "fs", "settings": {"location": "/var/www/backups/elasticsearch"}}'</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Создайте снимок состояния OpenSearch (Elasticsearch), заменив <strong><em><code>elasticsearch_repo_name</code></em>*,</strong> <code>snapshot_name</code>* и <code>prefix_name</code>(префикс индекса, указанный в конфигурации экземпляра ПО) на свои значения:</p>
-<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"localhost:9200/_snapshot/elasticsearch_repo_name/snapshot_name_</span><span class="nv">$now</span><span class="s2">?wait_for_completion=true&amp;pretty"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">'{"indices": "cmw_prefix_name*", "ignore_unavailable": true, "include_global_state": false}'</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/elasticsearch_repo_name/snapshot_name_</span><span class="nv">$now</span><span class="s2">?wait_for_completion=true&amp;pretty"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">'{"indices": "cmw_prefix_name*", "ignore_unavailable": true, "include_global_state": false}'</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Создайте директории для хранения компонентов резервной копии:</p>

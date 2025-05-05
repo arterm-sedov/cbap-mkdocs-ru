@@ -34,25 +34,25 @@ kbId: 4622
                 # Укажите имя пространства имён
                 release_namespace: <namespaceName>
                 values:
-                global:
-                    # Укажите адрес Platform V Search 
-                    elasticsearch:
-                    elasticsearchUrl: "<platformVSearchIP>:9200"
-                    # Укажите адрес брокера сообщений
-                    kafka:
-                    service_bootstrap: "<kafkaIP>:9092"
+                    global:
+                        # Укажите адрес {{ openSearchVariants }} 
+                        elasticsearch:
+                            elasticsearchUrl: "<platformVSearchIP>:9200"
+                        # Укажите адрес брокера сообщений
+                        kafka:
+                            service_bootstrap: "<kafkaIP>:9092"
                 platform:
                     config:
-                    # Укажите данные данные интеграции с {{ authServiceVariants }}
-                    auth_openId_enabled: "true"
-                    auth_openId_server: <plarformViAMServerAddress>
-                    auth_openId_realm: <plarformViAMServerRealm>
-                    auth_openId_clientId: <plarformViAMServerClientId>
-                    auth_openId_clientSecret: <plarformViAMClientSecret>
+                        # Укажите данные данные интеграции с {{ authServiceVariants }}
+                        auth_openId_enabled: "true"
+                        auth_openId_server: <plarformViAMServerAddress>
+                        auth_openId_realm: <plarformViAMServerRealm>
+                        auth_openId_clientId: <plarformViAMServerClientId>
+                        auth_openId_clientSecret: <plarformViAMClientSecret>
                     env:
-                    # Задайте переменные среды, при необходимости
-                    #NEW_ENV_VAR: "<new_value>"
-                    #JAVA_HOME: "</new/java/home>"
+                        # Задайте переменные среды, при необходимости
+                        #NEW_ENV_VAR: "<new_value>"
+                        #JAVA_HOME: "</new/java/home>"
                 initContainers:
                     # Конфигурация репозитория резервных копий
                     url: "https://<new-url-for-backup>.tgz"

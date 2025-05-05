@@ -34,6 +34,8 @@
 
 [document_digital_signature]: {{ kbArticleURLPrefix }}4910
 
+[example_attribute_record_get_selected_ids]: {{ kbArticleURLPrefix }}5100
+
 [example_n3_button_local_variable]: {{ kbArticleURLPrefix }}4909
 
 [example_csharp_my_profile_button]: {{ kbArticleURLPrefix }}5006
@@ -151,8 +153,6 @@
 [logs_odata_inegration]: {{ kbArticleURLPrefix }}4673#logs_odata_inegration
 
 [map_configure]: {{ kbArticleURLPrefix }}4679
-
-[mobile_app_use]: {{ kbArticleURLPrefix }}5090
 
 [notification_types]: {{ kbArticleURLPrefix }}4682
 
@@ -281,6 +281,10 @@
 <!-- Руководство для ГосТех, администратора для Linux/Windows, отдельный учебник или экспорт в БЗ -->
 
 [http_send_post]: {{ kbArticleURLPrefix }}5075
+
+[mobile_app_use]: {{ kbArticleURLPrefix }}5090
+
+[password_restore]: {{ kbArticleURLPrefix }}5099
 
 {% endif %}
 
@@ -456,11 +460,15 @@
 
 [discussion_configure]: {{ kbArticleURLPrefix }}4788
 
+[discussion_configure_quick_answers]: {{ kbArticleURLPrefix }}4788#discussion_configure_quick_answers
+
 [discussion_configure_template]: {{ kbArticleURLPrefix }}4788#mcetoc_1h7hu3akn4
 
 [discussion_use]: {{ kbArticleURLPrefix }}4818
 
 [elasticdata_description]: {{ kbArticleURLPrefix }}4584
+
+[example_csharp_table_download_selections]: {{ kbArticleURLPrefix }}5008
 
 [example_document_clone_scenario_n3]: {{ kbArticleURLPrefix }}4883
 

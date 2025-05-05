@@ -28,9 +28,9 @@ kbId: 4644
     - Путь к репозиторию снимков {{ openSearchVariants }} — `elastic_backup_path`(например, `e:\elastic_backup`).
     - Имя снимка {{ openSearchVariants }} — `snapshot_name` (например, `<InstanceName>01022022080800` — в формате `<<InstanceName>><Date><Time>`). См. инструкции {{ openSearchVariants }} по формированию имён снимков с использованием текущей даты  (на английском языке): <https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html#api-date-math-index-names>.
 
-2. Настройте конфигурацию репозитория снимков сервера Elasticseach.
+2. Настройте конфигурацию репозитория снимков сервера {{ openSearchVariants }}.
 
-    1. Откройте файл `elasticsearch.yml` в папке с данными конфигурации Elasticseach (например: `C:\ElasticsearchData`)
+    1. Откройте файл `elasticsearch.yml` в папке с данными конфигурации {{ openSearchVariants }} (например: `C:\ElasticsearchData`)
 
     2. <a id="P1.2.2"></a>В файле `elasticsearch.yml` и добавьте директиву `path.repo` и через двоеточие укажите путь к репозиторию снимков (папке с резервными копиями), например:
 
@@ -54,7 +54,7 @@ kbId: 4644
 1. Чтобы зарегистрировать репозиторий, выполните следующую команду, указав в URL имя репозитория `repository_name` (см. _«[Подготовка к резервному копированию и восстановлению данных](#подготовка-к-резервному-копированию-и-восстановлению-данных)»_), а в параметре `location` — путь к репозиторию из директивы `path.repo` в файле конфигурации сервера {{ openSearchVariants }}:
 
     ``` sh
-    curl -X PUT "localhost:9200/_snapshot/repository_name?pretty" -H 'Content-Type: application/json' -d' {"type": "fs", "settings": {"location": "elastic_backup_path"}}'
+    curl -X PUT "<openSearchHost>:<opeSearchPort>/_snapshot/repository_name?pretty" -H 'Content-Type: application/json' -d' {"type": "fs", "settings": {"location": "elastic_backup_path"}}'
     ```
 
     Подробные сведения о регистрации репозитория {{ openSearchVariants }} см. в официальной документации (на английском языке): <https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html>
@@ -62,7 +62,7 @@ kbId: 4644
 2. Чтобы создать снимок {{ openSearchVariants }}, выполните следующую команду, указав имя снимка `snapshot_name`, а в параметре `indices` — индексы, которые требуется включить в снимок (индексы {{ productName }} имеют префикс, например, `cmw_<<InstanceName>>_`):
 
     ``` sh
-    curl -X PUT "localhost:9200/_snapshot/repository_name/snapshot_name?wait_for_completion=true&pretty" -H 'Content-Type: application/json' -d' {"indices": "cmw_<<InstanceName>>_*", "ignore_unavailable": true, "include_global_state": false}'
+    curl -X PUT "<openSearchHost>:<opeSearchPort>/_snapshot/repository_name/snapshot_name?wait_for_completion=true&pretty" -H 'Content-Type: application/json' -d' {"indices": "cmw_<<InstanceName>>_*", "ignore_unavailable": true, "include_global_state": false}'
     ```
 
     Подробные сведения о создании снимка {{ openSearchVariants }} см. в официальной документации (на английском языке): <https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-take-snapshot.html>
@@ -116,7 +116,7 @@ kbId: 4644
 1. Выполните следующую команду, указав имя репозитораия `repository_name` и имя снимка `snapshot_name` (см. _«[Подготовка к резервному копированию и восстановлению данных](#подготовка-к-резервному-копированию-и-восстановлению-данных)»_):
 
 ``` sh
-curl -X POST "localhost:9200/_snapshot/repository_name/snapshot_name/_restore?pretty"
+curl -X POST "<openSearchHost>:<opeSearchPort>/_snapshot/repository_name/snapshot_name/_restore?pretty"
 ```
 
 Подробные сведения о восстановлении снимков {{ openSearchVariants }} см. в официальной документации (на английском языке): <https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-restore-snapshot.html>
@@ -130,7 +130,7 @@ curl -X POST "localhost:9200/_snapshot/repository_name/snapshot_name/_restore?pr
 1. Запустите экземпляр ПО.
 2. При необходимости откроется страница настройки подключения к службе {{ openSearchVariants }}.
 3. В поле «URI» введите адрес автоматически своего сервера {{ openSearchVariants }}.
-4. Введите **префикс индекса**, **имя пользователя** и **пароль сервера {{ openSearchVariants }}**. .
+4. Введите **префикс индекса**, **имя пользователя** и **пароль сервера {{ openSearchVariants }}**.
 5. Нажмите кнопку «**Далее**».
 
     _![Настройка подключения к {{ openSearchVariants }}](https://kb.comindware.ru/assets/Picture16.png)_

@@ -1,17 +1,17 @@
 ---
-title: Установка, запуск, инициализация и остановка Comindware Platform
+title: 'Установка, запуск, инициализация и остановка Comindware Platform в Windows'
 kbId: 5063
 ---
 
-# Установка, запуск, инициализация и остановка {{ productName }} {: #deploy_guide_windows}
+# Установка, запуск, инициализация и остановка {{ productName }} в Windows {: #deploy_guide_windows}
 
-## Введение
+## Введение {: #deploy_guide_windows_intro }
 
 Для быстрого развёртывания **{{ productName }}** в Windows компания **{{ companyName }}** предоставляет дистрибутив с установщиком, настраивающим необходимое программное обеспечение.
 
 Здесь представлены инструкции по развёртыванию и инициализации **{{ productName }}** из дистрибутива в ОС Windows.
 
-## Требования к серверу
+## Требования к серверу {: #deploy_guide_windows_requirements }
 
 Для работы **{{ productName }}** требуются операционная система, сервер базы данных, веб-сервер, обратный прокси-сервер и сервер журналирования.
 
@@ -26,7 +26,7 @@ include-markdown ".snippets/elasticsearch_opensearch_configure.md"
 rewrite-relative-urls=false
 %}
 
-## Порядок установки ПО
+## Порядок установки ПО {: #deploy_guide_windows_order }
 
 1. Подготовьте сервер к установке ПО.
 2. Установите и настройте необходимое вспомогательное ПО.
@@ -35,7 +35,7 @@ rewrite-relative-urls=false
 5. Запустите экземпляр ПО.
 6. Инициализируйте экземпляр ПО.
 
-## Подготовка сервера к установке ПО
+## Подготовка сервера к установке ПО {: #deploy_guide_windows_server_prepare }
 
 1. Откройте **Диспетчер сервера**.
 2. Добавьте в список серверов компьютер, на котором будет установлено ПО **{{ productName }}**.
@@ -52,7 +52,7 @@ rewrite-relative-urls=false
 
 8. На шаге «**Подтверждение**» нажмите кнопку «**Установить**» и дождитесь завершения процесса.
 
-## Установка вспомогательного ПО {: #deploy_guide_windows_install_prerequisites}
+## Установка вспомогательного ПО {: #deploy_guide_windows_install_prerequisites }
 
 1. Скачайте и распакуйте архив с дистрибутивом вспомогательного ПО для **{{ productName }}**.
 2. Запустите _PowerShell_ от имени администратора.
@@ -107,7 +107,7 @@ rewrite-relative-urls=false
 
     Если какие-либо дополнительные компоненты не были установлены, повторите шаги 8–12.
 
-## Установка {{ productName }} {: #deploy_guide_windows_install_sw}
+## Установка {{ productName }} {: #deploy_guide_windows_install_sw }
 
 1. Скачайте и распакуйте архив с дистрибутивом **{{ productName }}**.
 2. Запустите _PowerShell_ от имени администратора.
@@ -152,7 +152,7 @@ rewrite-relative-urls=false
     .\version_list.ps1
     ```
 
-## Создание экземпляра ПО
+## Создание экземпляра ПО {: #deploy_guide_windows_instance_create }
 
 1. Перейдите в папку со скриптами для развёртывания ПО **{{ productName }}**:
 
@@ -180,7 +180,7 @@ rewrite-relative-urls=false
 
         Если не указать обязательный ключ для любого скрипта, он запросит его после запуска.
 
-## Запуск экземпляра ПО
+## Запуск экземпляра ПО {: #deploy_guide_windows_instance_start }
 
 1. Перейдите в папку со скриптами для развёртывания ПО **{{ productName }}**:
 
@@ -196,7 +196,7 @@ rewrite-relative-urls=false
 
     Здесь: `name <instanceName>` — **обязательный** ключ с именем экземпляра ПО.
 
-## Остановка экземпляра ПО
+## Остановка экземпляра ПО {: #deploy_guide_windows_instance_stop }
 
 1. Перейдите в папку со скриптами для развёртывания ПО **{{ productName }}**:
 
@@ -212,7 +212,7 @@ rewrite-relative-urls=false
 
     Здесь: `-name <instanceName>` — **обязательный** ключ с именем экземпляра ПО.
 
-## Инициализация {{ productName }} {: #initialize_instance}
+## Инициализация {{ productName }} {: #instance_initialize}
 
 {%
 include-markdown "../linux/deploy_guide.md"
@@ -220,7 +220,15 @@ start="<!--initialize-start-->"
 end="<!--initialize-end-->"
 %}
 
-## Обновление экземпляра ПО
+## Подготовка экземпляра ПО к разработке приложений {: #deploy_guide_windows_instance_prepare .pageBreakBefore }
+
+{%
+include-markdown "../linux/deploy_guide.md"
+start="<!--instance-prepare-start-->"
+end="<!--instance-prepare-end-->"
+%}
+
+## Обновление экземпляра ПО {: #deploy_guide_windows_instance_upgrade }
 
 1. Скачайте и установите ПО новой версии согласно инструкциям в параграфе _«[Установка {{ productName }}](#deploy_guide_windows_install_sw)»_.
 2. Перейдите в папку со скриптами для развёртывания ПО **{{ productName }}**:
@@ -250,7 +258,7 @@ end="<!--initialize-end-->"
 
 5. Рядом с именем экземпляра ПО отобразится номер версии.
 
-## Удаление экземпляра ПО
+## Удаление экземпляра ПО {: #deploy_guide_windows_instance_delete }
 
 1. Перейдите в папку со скриптами для развёртывания ПО **{{ productName }}**:
 
@@ -270,7 +278,7 @@ end="<!--initialize-end-->"
     - `deleteData` — удалить базу данных из папки вида `C:\ProgramData\Comindware\Instances\<instanceName>\Data` и пользовательские файлы экземпляра ПО из папки вида `C:\ProgramData\Comindware\Instances\<instanceName>\Streams`. Без указания этого ключа или ключа `clear` база данных экземпляра ПО не будет удалена.
     - `clear` — удалить все файлы, папки, базу данных и пользовательские файлы вместе с папкой вида `C:\ProgramData\Comindware\Instances\<instanceName>`, а также службы экземпляра ПО, сайт и пул приложения из IIS.
 
-## Удаление версии ПО
+## Удаление версии ПО {: #deploy_guide_windows_version_delete }
 
 1. Перейдите в папку со скриптами для развёртывания ПО **{{ productName }}**:
 
@@ -284,7 +292,7 @@ end="<!--initialize-end-->"
     .\instance_list.ps1
     ```
 
-3. Удалите все экземпляры с версией ПО, которую требуется удалить, или обновите их до другой версии. Удалить версию ПО, которая используется в каких-либо экземплярах, не удастся. См. _«[Удаление экземпляра ПО](#удаление-экземпляра-по)»_.
+3. Удалите все экземпляры с версией ПО, которую требуется удалить, или обновите их до другой версии. Удалить версию ПО, которая используется в каких-либо экземплярах, не удастся. См. _«[Удаление экземпляра ПО](#deploy_guide_windows_instance_delete)»_.
 4. Удалите версию ПО:
 
     ``` powershell
@@ -297,7 +305,9 @@ end="<!--initialize-end-->"
 
 --8<-- "related_topics_heading.md"
 
-- _[Пути и содержимое директорий экземпляра ПО][paths]_
+- [Пути и содержимое директорий экземпляра ПО][paths]
+- [Резервное копирование. Настройка, запуск и просмотр журнала сеансов][backup_configure]
+- [Отправка почты из процесса. Настройка подключения][process_sending_connection]
 
 </div>
 

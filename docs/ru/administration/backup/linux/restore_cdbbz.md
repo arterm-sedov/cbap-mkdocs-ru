@@ -277,7 +277,7 @@ hide: tags
     - **С авторизацией в {{ openSearchVariants }}:**
 
         ``` sh
-        curl -X PUT "https://<openSearchHost>:9200/_snapshot/<repository_backup>?pretty" \
+        curl -X PUT "https://<openSearchHost>:<opeSearchPort>/_snapshot/<repository_backup>?pretty" \
         -u <username>:<password> \
         -H 'Content-Type: application/json' -d \
         '{
@@ -292,7 +292,7 @@ hide: tags
     - **Без авторизации в {{ openSearchVariants }}:**
 
         ``` sh
-        curl -X PUT "https://<openSearchHost>:9200/_snapshot/<repository_backup>?verify=false&pretty" \
+        curl -X PUT "https://<openSearchHost>:<opeSearchPort>/_snapshot/<repository_backup>?verify=false&pretty" \
         -H 'Content-Type: application/json' -d \
         '{
             "type": "fs",
@@ -317,13 +317,13 @@ hide: tags
 8. Проверьте содержимое зарегистрированного репозитория:
 
     ``` sh
-    curl -X GET "https://<openSearchHost>:9200/_snapshot/<repository_backup>?pretty"
+    curl -X GET "https://<openSearchHost>:<opeSearchPort>/_snapshot/<repository_backup>?pretty"
     ```
 
 9. Восстановите снимок {{ openSearchVariants }}:
 
     ``` sh
-    curl -X POST "https://<openSearchHost>:9200/_snapshot/<repository_backup>/<backupsessionXX>/_restore?pretty"
+    curl -X POST "https://<openSearchHost>:<opeSearchPort>/_snapshot/<repository_backup>/<backupsessionXX>/_restore?pretty"
     ```
 
     - В качестве репозитория укажите имя репозитория, созданного на шаге 7, или префикс индекса {{ openSearchVariants }} при восстановлении из хранилища S3 (см. [примечание](#s3_repository) выше).
@@ -332,7 +332,7 @@ hide: tags
 10. Проверьте наличие индексов в восстановленном каталоге:
 
     ``` sh
-    curl -X GET "https://<openSearchHost>:9200/_cat/indices?pretty"
+    curl -X GET "https://<openSearchHost>:<opeSearchPort>/_cat/indices?pretty"
     ```
 
 <div class="relatedTopics" markdown="block">

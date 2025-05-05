@@ -63,9 +63,9 @@ kbId: 4624
     mkdir -p /var/backups/config_tmp/
     cd /var/www/<instanceName>/
     cp *.config *.yml *.json /var/backups/config_tmp/
-    cp /var/www/<instanceName>/data/Plugins/Agent/Agent.config /var/backups/config_tmp/
     cp /etc/nginx/sites-available/comindware<instanceName> /var/backups/config_tmp/
     cp /etc/sysconfig/comindware<instanceName>-env /var/backups/config_tmp/
+    cp /usr/share/comindware/configs/instance/<instanceName>.yml /var/backups/config_tmp/
     ```
 
     - **РЕД ОС**, **Rocky** (RPM-based)
@@ -74,9 +74,9 @@ kbId: 4624
     mkdir -p /var/backups/config_tmp/
     cd /var/www/<instanceName>/
     cp *.config *.yml *.json /var/backups/config_tmp/
-    cp /var/www/<instanceName>/data/Plugins/Agent/Agent.config /var/backups/config_tmp/
     cp /etc/nginx/conf.d/comindware<instanceName> /var/backups/config_tmp/
     cp /etc/sysconfig/comindware<instanceName>-env /var/backups/config_tmp/
+    cp /usr/share/comindware/configs/instance/<instanceName>.yml /var/backups/config_tmp/
     ```
 
     - **Альт Сервер**
@@ -85,50 +85,38 @@ kbId: 4624
     mkdir -p /var/backups/config_tmp/
     cd /var/www/<instanceName>/
     cp *.config *.yml *.json /var/backups/config_tmp/
-    cp /var/www/<instanceName>/data/Plugins/Agent/Agent.config /var/backups/config_tmp/
     cp /etc/nginx/sites-available.d/comindware<instanceName> /var/backups/config_tmp/
     cp /etc/sysconfig/comindware<instanceName>-env /var/backups/config_tmp/
+    cp /usr/share/comindware/configs/instance/<instanceName>.yml /var/backups/config_tmp/
     ```
 
     Здесь `<instanceName>` — имя экземпляра ПО.
 
-5. Остановите экземпляр ПО и вспомогательные службы и удостоверьтесь, что они остановлены:
+4. Остановите экземпляр ПО и вспомогательные службы и удостоверьтесь, что они остановлены:
 
     ``` sh
-    systemctl stop apigateway<instanceName> comindware<instanceName>
-    systemctl status apigateway<instanceName> comindware<instanceName>
+    systemctl stop apigateway<instanceName> adapterhost<instanceName> comindware<instanceName>
+    systemctl status apigateway<instanceName> adapterhost<instanceName> comindware<instanceName>
     ```
 
-6. Проверьте, выполняется ли сервис `Comindware.Adapter.Agent.exe`:
+5. Проверьте статус созданного экземпляра:
 
     ``` sh
-    ps fax | grep Agent
+    systemctl status comindware<instanceName>
     ```
 
-    - Если процесс `Comindware.Adapter.Agent.exe`, выполняется, завершите его по `PID`:
-
-        ``` sh
-        kill -9 <PID>
-        ```
-
-7. Проверьте имя и статус экземпляра:
-
-    ``` sh
-    systemctl status comindware*
-    ```
-
-8. Удалите (или переместите в резервное хранилище) неиспользуемые предыдущие дистрибутивы ПО (`<distPath>` — путь к директории с дистрибутивом, `<osname>` — название операционной системы):
+6. Удалите (или переместите в резервное хранилище) неиспользуемые предыдущие дистрибутивы ПО (`<distPath>` — путь к директории с дистрибутивом, `<osname>` — название операционной системы):
 
     ``` sh
     rm -rf <distPath>/CMW_<osname>
     ```
 
-9. Переместите директорию с базой данных экземпляра ПО (`<username>` — имя пользователя Linux):
+7. Переместите директорию с базой данных экземпляра ПО (`<username>` — имя пользователя Linux):
 {: #ConfigBackup }
 
     ```sh
     mkdir -p /home/<username>/<instanceName>
-    mv /var/lib/comindware/<instanceName> /home/<username>/<instanceName>
+    mv /var/lib/comindware/<instanceName> /home/<username>/
     ```
 
     {% include-markdown ".snippets/pdfEndOfBlockHack.md" %}
@@ -204,10 +192,10 @@ kbId: 4624
     ```
 
 8. Отобразится список установленных версий ПО на сервере.
-9. Удалите экземпляр ПО старой версии:
+9. Удалите экземпляр ПО старой версии и его данные:
 
     ```sh
-    bash instance_delete.sh -n=<instanceName>
+    bash instance_delete.sh -n=<instanceName> --deleteData
     ```
 
 10. Создайте экземпляр ПО новой версии:
@@ -307,13 +295,13 @@ kbId: 4624
 15. Перезапустите сервисы, настройки которых были изменены, например:
 
     ``` sh
-    systemctl restart apigateway<instanceName> comindware<instanceName>
+    systemctl restart apigateway<instanceName> adapterhost<instanceName> comindware<instanceName>
     ```
 
 16. Откройте сайт экземпляра ПО в браузере, одновременно открыв выдачу журналов экземпляра в терминале:
 
     ``` sh
-    tail -f /var/log/comindware/<instanceName>/Log/heartbeat*
+    tail -f /var/log/comindware/<instanceName>/Logs/heartbeat*
     ```
 
 17. В браузере выполните инициализацию экземпляра ПО, выполните вход и проверьте работоспособность ПО.
@@ -326,22 +314,30 @@ kbId: 4624
 19. Скопируйте в экземпляр ПО директорию с базой данных экземпляра ПО, сохранённую ранее (`<username>` — имя пользователя Linux):
 
     ```sh
-    cp  /home/<username>/<instanceName>/Database /var/lib/comindware/<instanceName>/Database
+    cp  -R /home/<username>/<instanceName>/Database /var/lib/comindware/<instanceName>/
     ```
 
-20. Запустите экземпляр ПО:
+20. Перейдите в папку с экземпляром ПО и поменяйте права для скопированной директории с базой данных:
+
+    ```sh
+    cd /var/lib/comindware/<instanceName>/
+    chmod -R 777 Database/ 
+    sudo chown -R www-data:www-data Database/
+    ```
+
+21. Запустите экземпляр ПО:
 
     ``` sh
     systemctl restart comindware<instanceName>
     ```
 
-21. Откройте сайт экземпляра ПО в браузере, дождитесь окончания загрузки, одновременно открыв выдачу журналов экземпляра в терминале:
+22. Откройте сайт экземпляра ПО в браузере, дождитесь окончания загрузки, одновременно открыв выдачу журналов экземпляра в терминале:
 
     ``` sh
-    tail -f /var/log/comindware/<instanceName>/Log/heartbeat*
+    tail -f /var/log/comindware/<instanceName>/Logs/heartbeat*
     ```
 
-22. Дождитесь завершения обновления структуры данных и проверьте его успешное выполнение.
+23. Дождитесь завершения обновления структуры данных и проверьте его успешное выполнение.
 {: #dataUpgrade }
 
     !!! warning "Внимание!"
@@ -353,8 +349,8 @@ kbId: 4624
         Поэтому продолжать обновление версии экземпляра ПО можно только после успешного обновления структуры данных. 
 
     - Удостоверьтесь, что появились журналы обновления:
-        - `/var/log/comindware/<instanceName>/Log/UpgradeOntology.log`
-        - `/var/log/comindware/<instanceName>/Log/upgrade<ГГГГ-ММ-ДД>.log`
+        - `/var/log/comindware/<instanceName>/Logs/UpgradeOntology.log`
+        - `/var/log/comindware/<instanceName>/Logs/upgrade<ГГГГ-ММ-ДД>.log`
     - Удостоверьтесь, что в журнале `UpgradeOntology.log` последняя запись содержит строку `Upgrade of ontology completed successfully`.
     - Удостоверьтесь, что в журнале `upgrade<ГГГГ-ММ-ДД>.log` последняя запись содержит строку `Upgrade completed`.
     - Удостоверьтесь, что в журналах отсутствуют ошибки обновления. Найдите их по ключевому слову `error`.
@@ -366,7 +362,7 @@ kbId: 4624
         3. Восстановите базу данных из резервной копии.
         4. Обратитесь в службу поддержки **{{ companyName }}**, предоставив журналы обновления и ошибок для анализа.
 
-23. Создайте резервную копию экземпляра ПО:
+24. Создайте резервную копию экземпляра ПО:
 
     - в формате `.CDBBZ` средствами **{{ productName }}**;
 
@@ -374,8 +370,8 @@ kbId: 4624
 
     - c помощью скрипта для создания снимка базы.
 
-24. Остановите экземпляр ПО.
-25. Распакуйте резервную копию и удалите из неё следующие директории кэшей:
+25. Остановите экземпляр ПО.
+26. Распакуйте резервную копию и удалите из неё следующие директории кэшей:
 
     ``` sh
     rm -rf cacheGroup-*-TableIdentity
@@ -388,14 +384,14 @@ kbId: 4624
     rm -rf cacheGroup-Keys
     ```
 
-26. Очистите директорию с базой данных экземпляра ПО:
+27. Очистите директорию с базой данных экземпляра ПО:
 
     ``` sh
     rm -rf /var/lib/comindware/<instanceName>/Database/*
     ```
 
-27. Скопируйте очищенную резервную копию в директорию с базой данных `/var/lib/comindware/<instanceName>/Database/`.
-28. Назначьте владельца директории с базой данных:
+28. Скопируйте очищенную резервную копию в директорию с базой данных `/var/lib/comindware/<instanceName>/Database/`.
+29. Назначьте владельца директории с базой данных:
 
     - **Astra Linux, Ubuntu, Debian** (DEB-based)
 
@@ -415,7 +411,7 @@ kbId: 4624
     chown -R _nginx:_nginx /var/lib/comindware/<instanceName>/Database
     ```
 
-29. Откройте сайт экземпляра ПО в браузере, дождитесь его инициализации и выполните вход.
+30. Откройте сайт экземпляра ПО в браузере, дождитесь его инициализации и выполните вход.
 
 <div class="relatedTopics" markdown="block">
 

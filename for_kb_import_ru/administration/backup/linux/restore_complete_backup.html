@@ -163,19 +163,19 @@
 </li>
 <li>
 <p>Зарегистрируйте новый репозиторий снимков OpenSearch (Elasticsearch):</p>
-<div class="highlight"><code><pre><span></span><code>curl -X PUT "localhost:9200/_snapshot/elastic_snap?pretty" -H 'Content-Type: application/json' -d' {"type": "fs", "settings": {"location": "/var/www/backups/elasticsearch"}}'</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl -X PUT "&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/elastic_snap?pretty" -H 'Content-Type: application/json' -d' {"type": "fs", "settings": {"location": "/var/www/backups/elasticsearch"}}'</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Проверьте содержимое зарегистрированного репозитория:</p>
-<div class="highlight"><code><pre><span></span><code>curl -X GET "localhost:9200/_cat/snapshots/elastic_snap?pretty"</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl -X GET "&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_cat/snapshots/elastic_snap?pretty"</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Выберите необходимый снимок и восстановите состояние OpenSearch (Elasticsearch):</p>
-<div class="highlight"><code><pre><span></span><code>curl -X POST "localhost:9200/_snapshot/elastic_snap/snapshot2023_01_23_10_17/_restore?pretty"</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl -X POST "&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/elastic_snap/snapshot2023_01_23_10_17/_restore?pretty"</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Проверьте наличие индексов в восстановленном каталоге:</p>
-<div class="highlight"><code><pre><span></span><code>curl -X GET "localhost:9200/_cat/indices?pretty"</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl -X GET "&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_cat/indices?pretty"</code> <br/></pre></code></div>
 </li>
 </ol>
 <figure class="screenshot_with_caption">

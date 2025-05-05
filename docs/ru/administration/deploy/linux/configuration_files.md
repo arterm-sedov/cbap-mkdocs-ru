@@ -9,7 +9,7 @@ kbId: 5067
 
 Здесь представлены инструкции по настройке файлов конфигурации после развёртывания и обновления ПО **{{ productName }}**, его компонентов и служб.
 
-## Конфигурация экземпляра ПО
+## Конфигурация экземпляра ПО {{ productName }} {: #configuration_files_linux_instance }
 
 1. Откройте файл конфигурации экземпляра ПО (`<instanceName>` — имя экземпляра ПО) для редактирования:
 
@@ -25,7 +25,7 @@ kbId: 5067
     - `db.name` — префикс кэшей в базе данных экземпляра ПО.
     - `userStorage.localDisk.path` — директория для хранения загруженных файлов.
     - `mq.server` — адрес сервера {{ apacheKafkaVariants }}.
-    - `backup.defaultFolder` — директория для хранения резервных копий экземпляра ПО.
+    - `backup.defaultFolder` — директория для хранения резервных копий экземпляра ПО.
     - `backup.defaultFileName` — имя файла резервной копии экземпляра ПО.
 
     --8<-- "instance_config_warning.md"
@@ -53,26 +53,26 @@ kbId: 5067
 <!--instanceYML-start-->
 ``` yaml
 
-##### Настройка базовых параметров ПО #####
-# Имя экземпляра ПО.
+##### Настройка базовых параметров {{ productName }} #####
+# Имя экземпляра {{ productName }}.
 # Устаревшая директива: instanceName
 clusterName: <instanceName>
-# Имя узла экземпляра ПО.
+# Имя узла экземпляра {{ productName }}.
 #nodeName: <instanceName>
-# Путь к экземпляру, по которому ПО находит свою конфигурацию.
+# Путь к экземпляру, по которому {{ productName }} находит свою конфигурацию.
 configPath: <configPath>
-# Адрес службы журналирования ({{ openSearchVariants }}).
+# Адрес службы журналирования {{ openSearchVariants }}.
 # Устаревшая директива: elasticsearchUri
 journal.server: http://<searchHostIP>:<searchHostPort>
 # Индекс службы журналирования.
 # journal.name: <prefix>-<instanceName>
 # Выключение службы журналирования.
 #journal.enabled: false
-# URI-адрес экземпляра ПО
+# URI-адрес экземпляра {{ productName }}.
 fqdn: <hostName>
-# Порт экземпляра ПО
+# Порт экземпляра {{ productName }}.
 port: <portNumber>
-# Версия экземпляра ПО
+# Версия экземпляра {{ productName }}.
 version: <versionNumber>
 
 ##### Настройка базы данных #####
@@ -297,7 +297,7 @@ backup.defaultFileName: <instanceName>
 #backup.journalRepository.s3.bucket:
 # Имя подключения, настроенного в конфигурации службы журналирования.
 #backup.journalRepository.s3.journalConnection: <s3ConnectionName>
-# Имя подключения к S3, настроенного в этом файле конфигурации экземпляра ПО.
+# Имя подключения к S3, настроенного в этом файле конфигурации экземпляра {{ productName }}.
 #backup.journalRepository.s3.platformConnection: <s3ConnectionName>
 
 ##### Конфигурация подключения к хранилищу S3 #####
@@ -356,7 +356,7 @@ backup.defaultFileName: <instanceName>
 #tracing.enabled: false
 
 ##### Настройки электронной почты #####
-# Выключение функции проверки наличия и получения новых писем.
+# Выключение функции проверки наличия и получения новых писем.
 #email.listenerEnabled: false
 # Выключение функции отправки эл. почты
 #email.senderEnabled: false
@@ -409,7 +409,7 @@ backup.defaultFileName: <instanceName>
     ```
 
 2. Измените необходимые параметры.
-3. Удостоверьтесь, что значение параметра `cluster.name` (имя экземпляра ПО) совпадает с `clusterName` и значение параметров `mq.server` (адрес и порт сервера очереди сообщений), `mq.group` (идентификатор группы очереди сообщений), `mq.node` (идентификатор узла очереди сообщений) — с аналогичными параметрами в [файле конфигурации экземпляра](#конфигурация-экземпляра-по).
+3. Удостоверьтесь, что значение параметра `cluster.name` (имя экземпляра ПО) совпадает с `clusterName` и значение параметров `mq.server` (адрес и порт сервера очереди сообщений), `mq.group` (идентификатор группы очереди сообщений), `mq.node` (идентификатор узла очереди сообщений) — с аналогичными параметрами в [файле конфигурации экземпляра](#configuration_files_linux_instance).
 4. Сохраните файл конфигурации.
 5. Перезапустите службу `apigateway`:
 

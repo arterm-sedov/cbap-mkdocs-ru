@@ -155,25 +155,25 @@ kbId: 4648
 6. Зарегистрируйте новый репозиторий снимков {{ openSearchVariants }}:
 
     ```
-    curl -X PUT "localhost:9200/_snapshot/elastic_snap?pretty" -H 'Content-Type: application/json' -d' {"type": "fs", "settings": {"location": "/var/www/backups/elasticsearch"}}'
+    curl -X PUT "<openSearchHost>:<opeSearchPort>/_snapshot/elastic_snap?pretty" -H 'Content-Type: application/json' -d' {"type": "fs", "settings": {"location": "/var/www/backups/elasticsearch"}}'
     ```
 
 7. Проверьте содержимое зарегистрированного репозитория:
 
     ```
-    curl -X GET "localhost:9200/_cat/snapshots/elastic_snap?pretty"
+    curl -X GET "<openSearchHost>:<opeSearchPort>/_cat/snapshots/elastic_snap?pretty"
     ```
 
 8. Выберите необходимый снимок и восстановите состояние {{ openSearchVariants }}:
 
     ```
-    curl -X POST "localhost:9200/_snapshot/elastic_snap/snapshot2023_01_23_10_17/_restore?pretty"
+    curl -X POST "<openSearchHost>:<opeSearchPort>/_snapshot/elastic_snap/snapshot2023_01_23_10_17/_restore?pretty"
     ```
 
 9. Проверьте наличие индексов в восстановленном каталоге:
 
     ```
-    curl -X GET "localhost:9200/_cat/indices?pretty"
+    curl -X GET "<openSearchHost>:<opeSearchPort>/_cat/indices?pretty"
     ```
 
 _![Отображение списка индексов {{ openSearchVariants }}](https://kb.comindware.ru/assets/Pasted image 20230127153756.png)_

@@ -86,20 +86,22 @@ def updateArticle(article_id):
     result = c.fetchone()
     
     if not result:
-        print(f'Article {article_id} not found')
-        return
+        print(f'Article {article_id} not found in the PHPKB database')
+        return False
     
     article_title = result[1]
-    article_content, mkdocs_title = getArticleContentById(article_id)
-    if article_content:
-        # Escape the HTML and backslashes for MySQL
-        article_content = html.escape(article_content).replace('\\','\\\\')
-        mkdocs_title = html.escape(mkdocs_title).replace('\\','\\\\')
-        contentFound = True
-    else:
-        print(f'Content for article {article_id} not found')
-        return
-      
+    content_result = getArticleContentById(article_id)
+    
+    if content_result is None:
+        print(f'Content for article {article_id} not found in files')
+        return False
+        
+    article_content, mkdocs_title = content_result
+    # Escape the HTML and backslashes for MySQL
+    article_content = html.escape(article_content).replace('\\','\\\\')
+    mkdocs_title = html.escape(mkdocs_title).replace('\\','\\\\')
+    contentFound = True
+    
     if contentFound:
         try:
             update = input(f"KB title:     {article_title}\nUpdate article {article_id} content and title? Y/N\n").lower() == 'y'
@@ -111,13 +113,19 @@ def updateArticle(article_id):
                         article_title=%s,
                         article_content=%s,
                         article_last_updation=%s,
-                        article_status='approved'
+                        article_status='approved',
+                        article_show='yes'
                         WHERE article_id=%s;
                         """, (mkdocs_title, article_content, article_last_updation, article_id))
+                CONNECTION.commit()
+                print(f"Updated article {article_id} updated")
+                return True
         except:
-            print("Couldn't update the article")
-            exit()
-    
+            print(f"Failed to update the article {article_id}")
+            return False
+
+    return False
+
 def fetchCategories(show='yes', status='public', language_id=2, parent_id=''):
 
     c = CONNECTION.cursor()    
@@ -187,8 +195,14 @@ def main():
         article_id = ''
         while article_id.lower() != 'e':
             article_id = str(input('Enter article ID to update or E to exit: '))
+            if article_id.lower() == 'e':
+                break
             if article_id.isnumeric():
-                updateArticle(article_id)
+                success = updateArticle(article_id)
+                if not success:
+                    print("Please try another article ID or press 'E' to exit")
+            else:
+                print("Please enter a valid numeric article ID or 'E' to exit")
     else:
         updateChildren = ''
         categoryId = ''

@@ -120,10 +120,10 @@
 </ul>
 </li>
 <li>
-<p>Настройте конфигурацию репозитория снимков сервера Elasticseach.</p>
+<p>Настройте конфигурацию репозитория снимков сервера OpenSearch (Elasticsearch).</p>
 <ol class="colored_numbers_list">
 <li>
-<p>Откройте файл <code>elasticsearch.yml</code> в папке с данными конфигурации Elasticseach (например: <code>C:\ElasticsearchData</code>)</p>
+<p>Откройте файл <code>elasticsearch.yml</code> в папке с данными конфигурации OpenSearch (Elasticsearch) (например: <code>C:\ElasticsearchData</code>)</p>
 </li>
 <li>
 <p><a class="mkdocs_imported_link" id="P1.2.2"></a>В файле <code>elasticsearch.yml</code> и добавьте директиву <code>path.repo</code> и через двоеточие укажите путь к репозиторию снимков (папке с резервными копиями), например:</p>
@@ -144,12 +144,12 @@
 <ol class="colored_numbers_list">
 <li>
 <p>Чтобы зарегистрировать репозиторий, выполните следующую команду, указав в URL имя репозитория <code>repository_name</code> (см. <em>«<a class="mkdocs_imported_link" href="#подготовка-к-резервному-копированию-и-восстановлению-данных">Подготовка к резервному копированию и восстановлению данных</a>»</em>), а в параметре <code>location</code> — путь к репозиторию из директивы <code>path.repo</code> в файле конфигурации сервера OpenSearch (Elasticsearch):</p>
-<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"localhost:9200/_snapshot/repository_name?pretty"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="s1">' {"type": "fs", "settings": {"location": "elastic_backup_path"}}'</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/repository_name?pretty"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="s1">' {"type": "fs", "settings": {"location": "elastic_backup_path"}}'</span></code> <br/></pre></code></div>
 <p>Подробные сведения о регистрации репозитория OpenSearch (Elasticsearch) см. в официальной документации (на английском языке): <a class="mkdocs_imported_link" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html</a></p>
 </li>
 <li>
 <p>Чтобы создать снимок OpenSearch (Elasticsearch), выполните следующую команду, указав имя снимка <code>snapshot_name</code>, а в параметре <code>indices</code> — индексы, которые требуется включить в снимок (индексы Comindware Platform имеют префикс, например, <code>cmw_&lt;&lt;InstanceName&gt;&gt;_</code>):</p>
-<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"localhost:9200/_snapshot/repository_name/snapshot_name?wait_for_completion=true&amp;pretty"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="s1">' {"indices": "cmw_&lt;&lt;InstanceName&gt;&gt;_*", "ignore_unavailable": true, "include_global_state": false}'</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/repository_name/snapshot_name?wait_for_completion=true&amp;pretty"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="s1">' {"indices": "cmw_&lt;&lt;InstanceName&gt;&gt;_*", "ignore_unavailable": true, "include_global_state": false}'</span></code> <br/></pre></code></div>
 <p>Подробные сведения о создании снимка OpenSearch (Elasticsearch) см. в официальной документации (на английском языке): <a class="mkdocs_imported_link" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-take-snapshot.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-take-snapshot.html</a></p>
 </li>
 </ol>
@@ -204,7 +204,7 @@
 <ol class="colored_numbers_list">
 <li>Выполните следующую команду, указав имя репозитораия <code>repository_name</code> и имя снимка <code>snapshot_name</code> (см. <em>«<a class="mkdocs_imported_link" href="#подготовка-к-резервному-копированию-и-восстановлению-данных">Подготовка к резервному копированию и восстановлению данных</a>»</em>):</li>
 </ol>
-<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"localhost:9200/_snapshot/repository_name/snapshot_name/_restore?pretty"</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/repository_name/snapshot_name/_restore?pretty"</span></code> <br/></pre></code></div>
 <p>Подробные сведения о восстановлении снимков OpenSearch (Elasticsearch) см. в официальной документации (на английском языке): <a class="mkdocs_imported_link" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-restore-snapshot.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-restore-snapshot.html</a></p>
 <h3 id="восстановление-базы-данных-экземпляра-продукта">Восстановление базы данных экземпляра продукта</h3>
 <ol class="colored_numbers_list">
@@ -215,7 +215,7 @@
 <li>Запустите экземпляр ПО.</li>
 <li>При необходимости откроется страница настройки подключения к службе OpenSearch (Elasticsearch).</li>
 <li>В поле «URI» введите адрес автоматически своего сервера OpenSearch (Elasticsearch).</li>
-<li>Введите <strong>префикс индекса</strong>, <strong>имя пользователя</strong> и <strong>пароль сервера OpenSearch (Elasticsearch)</strong>. .</li>
+<li>Введите <strong>префикс индекса</strong>, <strong>имя пользователя</strong> и <strong>пароль сервера OpenSearch (Elasticsearch)</strong>.</li>
 <li>
 <p>Нажмите кнопку «<strong>Далее</strong>».</p>
 <p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка подключения к OpenSearch (Elasticsearch)" src="https://kb.comindware.ru/assets/Picture16.png"/><figcaption class="caption">Настройка подключения к OpenSearch (Elasticsearch)</figcaption></figure></p>

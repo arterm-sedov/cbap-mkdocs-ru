@@ -56,13 +56,13 @@ kbId: 4685
 1. Заполните обязательные поля разделе «**App information**»:
 
     - в поле «**App name**» укажите, например «_Сайт Mycompany.ru»;_
-    - в поле «**User support email**» укажите, например, свой адрес эл. почты.
+    - в поле «**User support email**» укажите, например, свой адрес эл.&nbsp;почты.
 
     _![Настройка страницы согласия OAuth — название приложения и адрес службы поддержки](openid_connection_oath_new_app.png)_
 
 2. В разделе «**App domain**» в поле «**Application home page**» введите [адрес сервера](#проверка-адреса-сервера-comindware-platform), указанный в глобальной конфигурации {{ productName }}, например [https://mycompany.ru](https://mycompany.ru/)
 3. В разделе «**Authorized domains**» нажмите кнопку «**Add domain**» и введите в поле «**Authorized domain 1**» доменное имя сервера без префикса `https://`, например _mycompany.ru_
-4. В разделе «**Developer contact information**» в поле «**Email addresses**» введите, например, свой адрес эл. почты.
+4. В разделе «**Developer contact information**» в поле «**Email addresses**» введите, например, свой адрес эл.&nbsp;почты.
 {: .pageBreakAfter}
 5. Нажмите кнопку «**Save and continue**».
 

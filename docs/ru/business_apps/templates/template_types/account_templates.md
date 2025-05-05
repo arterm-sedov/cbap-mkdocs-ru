@@ -38,7 +38,7 @@ _![Свойства шаблона аккаунта](account_templates_propertie
 | --------------------------------- | ---------------- | ------------ |
 | `cmw.account.fullName`            | Ф. И. О.         | Текст        |
 | `cmw.account.manager`             | Руководитель     | Пользователь |
-| `cmw.account.mbox`                | Адрес эл. почты  | Текст        |
+| `cmw.account.mbox`                | Адрес эл.&nbsp;почты  | Текст        |
 | `cmw.account.phone`               | Телефон          | Текст        |
 | `cmw.account.username`            | Имя пользователя | Текст        |
 | `cmw.account.active`              | Включён          | Логический   |
