@@ -2968,58 +2968,6 @@ DAYS(DURATION('P12DT64H75M1360S'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `DAYTZ()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-Принимает аргумент типа «Дата и время» и возвращает числовое значение, соответствующее дню месяца указанной даты в заданном часовом поясе. Идентификатор часового пояса должен быть задан в формате базы данных часовых поясов IANA.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` cs
-DAYTZ(dayTime, timeZone)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-- `dayTime`: дата и время
-- `timeZone`: строка, часовой пояс
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Число
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
 ## `DECIMAL()`
 
 </th>
