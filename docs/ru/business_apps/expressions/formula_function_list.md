@@ -6886,6 +6886,143 @@ JOIN(", ", LIST("Аналитик", "Архитектор", "Администр�
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
+## `LAST()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Возвращает первый элемент из списка. При отсутствии элементов в списке `FIRST()` возвращает пустое значение.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+LAST(list)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`list`: список значений.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Тип возвращаемого значения совпадает с типом элементов списка.
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+LAST((from i in db->music where i->album == 'Whale Meditation' select i->song))
+```
+
+Результат: название последней песни из альбома `Whale Meditation`.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `LE()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Сравнивает значения двух аргументов типа «**Дата и время**» или «**Длительность**». Если первый аргумент меньше или равен второму, возвращает логическое значение `true`. В противном случае возвращает `false`.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+LE(argument1, argument2)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+- `argument1`, `argument2`: дата и время.
+- `argument1`, `argument2`: длительность.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+LE(DURATION('P2DT1H0M0S'), DURATION('P3DT1H0M0S'))
+```
+
+Результат: `True`
+
+Здесь:
+
+`DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
 ## `LENGTH()`
 
 </th>
@@ -6906,7 +7043,7 @@ JOIN(", ", LIST("Аналитик", "Архитектор", "Администр�
 <td markdown="block">
 
 ``` cs
-LENGTH(argument1)
+LENGTH(string)
 ```
 
 </td>
@@ -6917,7 +7054,7 @@ LENGTH(argument1)
 </td>
 <td markdown="block">
 
-`argument1`: строка
+`string`: строка
 </td>
 </tr>
 <tr markdown="block">
@@ -6926,6 +7063,20 @@ LENGTH(argument1)
 </td>
 <td markdown="block">
 Число
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+LENGTH("В этой строке 26 символов.")
+```
+
+Результат: `LENGTH("В этой строке 26 символов.")`
+
 </td>
 </tr>
 </tbody>
@@ -6945,7 +7096,8 @@ LENGTH(argument1)
 **Описание**
 </td>
 <td markdown="block">
-Возвращает логическое значение `true`, если аргумент1 меньше аргумента2, в противном случае возвращает результат `false`.
+
+Возвращает логическое значение `true`, если значение первого аргумента меньше второго, в противном случае возвращает `false`.
 
 </td>
 </tr>
@@ -6967,7 +7119,7 @@ LESS(argument1, argument2)
 </td>
 <td markdown="block">
 
-`argument1`, `argument2`: логическое значение, число, строка или дата и время.
+`argument1`, `argument2`: длительность, число, строка или дата и время.
 
 </td>
 </tr>
@@ -6977,6 +7129,20 @@ LESS(argument1, argument2)
 </td>
 <td markdown="block">
 Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+LESS(1, 2)
+```
+
+Результат: `True`
+
 </td>
 </tr>
 </tbody>
@@ -6996,7 +7162,8 @@ LESS(argument1, argument2)
 **Описание**
 </td>
 <td markdown="block">
-Возвращает логическое значение `true`, если аргумент1 меньше либо равен аргументу2, в противном случае возвращает результат `false`.
+
+Возвращает логическое значение `true`, если значение первого аргумента меньше либо равно второму, в противном случае возвращает `false`.
 
 </td>
 </tr>
@@ -7018,7 +7185,7 @@ LESSEQ(argument1, argument2)
 </td>
 <td markdown="block">
 
-`argument1`, `argument2`: логическое значение, число, строка или дата и время.
+`argument1`, `argument2`: длительность, число, строка или дата и время.
 
 </td>
 </tr>
@@ -7028,6 +7195,20 @@ LESSEQ(argument1, argument2)
 </td>
 <td markdown="block">
 Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+LESSEQ(1, 1)
+```
+
+Результат: `True`
+
 </td>
 </tr>
 </tbody>
