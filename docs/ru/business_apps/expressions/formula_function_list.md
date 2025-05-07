@@ -5587,7 +5587,7 @@ GTUTC(DATE('2025-05-05T05:05:25+00:00'), DATE('2025-05-05T05:05:25+05:00'))
 </td>
 <td markdown="block">
 
-Принимает аргумент типа «**Дата и время**» и возвращает числовое значение, соответствующее часу указанной даты в местном часовом поясе.
+Принимает аргумент типа «**Дата и время**» в часовом поясе, заданном на форме, в настройках аккаунта или глобальной конфигурации или указанном в значении аргумента и возвращает числовое значение, соответствующее часу указанной даты.
 
 </td>
 </tr>
@@ -5601,55 +5601,10 @@ GTUTC(DATE('2025-05-05T05:05:25+00:00'), DATE('2025-05-05T05:05:25+05:00'))
 HOUR(dateTime)
 ```
 
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`dateTime`: дата и время
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Число
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-## `HOURTZ()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Принимает аргумент типа «**Дата и время**» и возвращает числовое значение, соответствующее часу указанной даты в заданном часовом поясе. Идентификатор часового пояса должен быть задан в формате базы данных часовых поясов IANA.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
+**или**
 
 ``` cs
-HOURTZ(dateTime, timeZone)
+HOUR(dateTime, timeZone)
 ```
 
 </td>
@@ -5660,8 +5615,9 @@ HOURTZ(dateTime, timeZone)
 </td>
 <td markdown="block">
 
-- `dateTime`: дата и время
-- `timeZone`: строка, часовой пояс
+- `dateTime`: дата и время.
+- `timeZone`: строка, указание часового пояса в формате IANA.
+
 </td>
 </tr>
 <tr markdown="block">
@@ -5670,6 +5626,162 @@ HOURTZ(dateTime, timeZone)
 </td>
 <td markdown="block">
 Число
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+HOUR(DATE('2025-05-05T05:05:25+00:00'), "Europe/Moscow")
+```
+
+Результат: `8`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `HOURS()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Принимает аргумент типа «**Длительность**» и возвращает числовое значение, соответствующее количеству часов.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+HOURS(duration)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`duration`: длительность.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+HOURS(DURATION('P2DT1H0M0S'))
+```
+
+Результат: `49`
+
+Здесь:
+
+`DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `HOURUTC()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Принимает аргумент типа «**Дата и время**» с указанием часового пояса в формате UTC и возвращает числовое значение, соответствующее часу указанной даты.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+HOURUTC(dateTime)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+- `dateTime`: дата и время.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+HOURUTC(DATE('2025-05-05T05:05:25+03:00'))
+```
+
+Результат: `2`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -5700,7 +5812,7 @@ HOURTZ(dateTime, timeZone)
 <td markdown="block">
 
 ``` cs
-ID("objectID")
+ID(objectID)
 ```
 
 </td>
@@ -5728,7 +5840,11 @@ ID объекта
 </td>
 <td markdown="block">
 
-`ID("oa.21")` — возвращает идентификатор шаблона `oa.21`.
+``` cs
+ID("oa.1")
+```
+
+Результат: идентификатор шаблона `oa.1`.
 
 </td>
 </tr>
@@ -5749,7 +5865,7 @@ ID объекта
 **Описание**
 </td>
 <td markdown="block">
-Использует в качестве аргументов значения или выражения, результатом которых является некоторое значение. Возвращает аргумент2, если аргумент1 является Истиной, в противном случае возвращает аргумент3.
+Использует в качестве аргументов значения или выражения, результатом которых является некоторое значение. Возвращает второй аргумент, если значение первого является логическим `true`, в противном случае возвращает третий аргумент.
 
 </td>
 </tr>
@@ -5758,7 +5874,11 @@ ID объекта
 **Синтаксис**
 </td>
 <td markdown="block">
-IF(argument1, argumen2, argument3)
+
+``` cs
+IF(argument1, argument2, argument3)
+```
+
 </td>
 </tr>
 <tr markdown="block">
@@ -5767,8 +5887,8 @@ IF(argument1, argumen2, argument3)
 </td>
 <td markdown="block">
 
-`argument1`: логическое значение или выражение, возвращающее логическое значение.
-`argument2`, `argument3`: значение любого типа или выражение, результатом которого является значение любого типа.
+- `argument1`: логическое значение или выражение, возвращающее логическое значение.
+- `argument2`, `argument3`: значение любого типа или выражение, результатом которого является значение любого типа.
 
 </td>
 </tr>
@@ -5777,7 +5897,22 @@ IF(argument1, argumen2, argument3)
 **Результат**
 </td>
 <td markdown="block">
-Тип возвращаемого значения тот же, что у аргументов `argument2` и `argument3`
+
+Тип возвращаемого значения тот же, что у аргументов `argument2` и `argument3`.
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+IF(1==2, "Верно", "Не верно")
+```
+
+Результат: `Не верно`
+
 </td>
 </tr>
 </tbody>
@@ -5797,7 +5932,7 @@ IF(argument1, argumen2, argument3)
 **Описание**
 </td>
 <td markdown="block">
-Возвращает номер (отсчитываемый от нуля) позиции, на которой располагается искомая строка в исходной строке. Номер позиции может отсчитываться от произвольного положения (необязательно).
+Возвращает номер позиции (отсчёт идёт от 0), на которой располагается искомая строка в исходной строке. Номер позиции также может отсчитываться от указанного значения.
 
 </td>
 </tr>
@@ -5819,9 +5954,9 @@ INDEXOF(sourceString, stringToFind, [startIndex])
 </td>
 <td markdown="block">
 
-- `sourceString`: исходная строка,
-- `stringToFind`: искомая строка,
-- `startIndex` (необязательно): номер позиции, от которой производится отсчет
+- `sourceString`: исходная строка.
+- `stringToFind`: искомая строка.
+- `startIndex`: номер позиции, от которой производится отсчёт.
 
 </td>
 </tr>
@@ -5831,6 +5966,20 @@ INDEXOF(sourceString, stringToFind, [startIndex])
 </td>
 <td markdown="block">
 Число
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+INDEXOF("У ёлки иголки колки.", "лки", 4")
+```
+
+Результат: `10`
+
 </td>
 </tr>
 </tbody>
@@ -5850,7 +5999,8 @@ INDEXOF(sourceString, stringToFind, [startIndex])
 **Описание**
 </td>
 <td markdown="block">
-Преобразует значение длительности в секунды и наоборот.
+
+Преобразует значение аргумента типа «**Дата и время**» или «**Длительность**» в число, равное количество секунд. Преобразует значение аргумента типа «**Число**» в длительность в секундах.
 
 </td>
 </tr>
@@ -5859,7 +6009,11 @@ INDEXOF(sourceString, stringToFind, [startIndex])
 **Синтаксис**
 </td>
 <td markdown="block">
+
+``` cs
 INSECONDS(argument)
+```
+
 </td>
 </tr>
 <tr markdown="block">
@@ -5868,7 +6022,7 @@ INSECONDS(argument)
 </td>
 <td markdown="block">
 
-`argument`: длительность или число
+`argument`: дата и время, длительность или число.
 
 </td>
 </tr>
@@ -5878,10 +6032,232 @@ INSECONDS(argument)
 </td>
 <td markdown="block">
 
-Число, если в качестве аргумента используется значение длительности.
+- Число, если в качестве аргумента используется значение типа «**Дата и время**» или «**Длительность**».
+- Длительность, если в качестве аргумента используется значение типа «**Число**».
 
-Длительность, если в качестве аргумента используется число.
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
 
+``` cs
+INSECONDS(5)
+```
+
+Результат: `00:00:05`
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `INSECONDSUTC()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Преобразует значение аргумента типа «**Дата и время**» с указанием часового пояса в формате UTC или «**Длительность**» в число, равное количество секунд. Преобразует значение аргумента типа «**Число**» в длительность в секундах.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+INSECONDSUTC(argument)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`argument`: дата и время, длительность или число.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+
+- Число, если в качестве аргумента используется значение типа «**Дата и время**» или «**Длительность**».
+- Длительность, если в качестве аргумента используется значение типа «**Число**».
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+INSECONDSUTC(DATE('2025-05-05T05:05:25+00:00'))
+```
+
+Результат: `63882018325`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `ISLEAPYEAR()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Преобразует значение аргумента типа «**Дата и время**». Возвращает логическое значение `true`, если год указанной даты является високосным, в противном случае возвращает `false`.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+ISLEAPYEAR(dateTime)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`dateTime`: дата и время.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+ISLEAPYEAR(DATE('2025-01-01T01:01:01'))
+```
+
+Результат: `False`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `ISLEAPYEARUTC()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Преобразует значение аргумента типа «**Дата и время**» с указанием часового пояса в формате UTC. Возвращает логическое значение `true`, если год указанной даты является високосным, в противном случае возвращает `false`.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+ISLEAPYEARUTC(dateTime)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`dateTime`: дата и время.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+ISLEAPYEARUTC(DATE('2025-01-01T01:01:01+03:00'))
+```
+
+Результат: `True`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -5913,7 +6289,7 @@ INSECONDS(argument)
 <td markdown="block">
 
 ``` cs
-ISOFORMAT(argument1)
+ISOFORMAT(dateTime)
 ```
 
 </td>
@@ -5924,7 +6300,7 @@ ISOFORMAT(argument1)
 </td>
 <td markdown="block">
 
-`argument1`: дата и время
+`dateTime`: дата и время.
 </td>
 </tr>
 <tr markdown="block">
@@ -5933,6 +6309,91 @@ ISOFORMAT(argument1)
 </td>
 <td markdown="block">
 Строка
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+ISOFORMAT($_creationDate)
+```
+
+Результат: дата в формате ISO 8601.
+
+Здесь:
+
+`$_creationDate` — атрибут «**Дата создания**».
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `ISOFORMATUTC()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Преобразует значение типа «**Дата и время**» с указанием часового пояса в формате UTC в формат ISO.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+ISOFORMATUTC(dateTime)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`dateTime`: дата и время.
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Строка
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+ISOFORMATUTC($_creationDate)
+```
+
+Результат: дата в формате ISO 8601 для часового пояса UTC-0.
+
+Здесь:
+
+`$_creationDate` — атрибут «**Дата создания**».
 </td>
 </tr>
 </tbody>
@@ -5952,7 +6413,8 @@ ISOFORMAT(argument1)
 **Описание**
 </td>
 <td markdown="block">
-Возвращает значение `true`, если задана сегодняшняя дата. В противном случае возвращает результат `false`.
+
+Возвращает значение `true`, если значением аргумента является сегодняшняя дата. В противном случае возвращает результат `false`.
 
 </td>
 </tr>
@@ -5963,7 +6425,7 @@ ISOFORMAT(argument1)
 <td markdown="block">
 
 ``` cs
-ISTODAY(argument1)
+ISTODAY(dateTime)
 ```
 
 </td>
@@ -5974,7 +6436,8 @@ ISTODAY(argument1)
 </td>
 <td markdown="block">
 
-`argument1`: дата и время
+`dateTime`: дата и время.
+
 </td>
 </tr>
 <tr markdown="block">
@@ -5983,6 +6446,368 @@ ISTODAY(argument1)
 </td>
 <td markdown="block">
 Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+ISTODAY(NOW())
+```
+
+Результат: `True`
+
+Здесь:
+
+[`NOW()`](#now) — возвращает текущую дату и время.
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `ISTODAYUTC()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Возвращает значение `true`, если значением аргумента является сегодняшняя дата для часового пояса UTC-0. В противном случае возвращает результат `false`.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+ISTODAYUTC(dateTime)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`dateTime`: дата и время.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+ISTODAYUTC(NOW())
+```
+
+Результат: `True`, если в часовом поясе UTC-0 такая же дата.
+
+Здесь:
+
+[`NOW()`](#now) — возвращает текущую дату и время.
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `ISWEEKEND()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Возвращает значение `true`, если заданная дата является выходным днём. В противном случае возвращает результат `false`.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+ISWEEKEND(dateTime)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`dateTime`: дата и время.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+ISWEEKEND(DATE('2025-05-05T01:01:01'))
+```
+
+Результат: `False`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `ISWEEKENDUTC()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Возвращает значение `true`, если заданная дата с указанием часового пояса в формате UTC является выходным днём для часового пояса UTC-0. В противном случае возвращает результат `false`.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+ISWEEKENDUTC(dateTime)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`dateTime`: дата и время.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+ISWEEKENDUTC(DATE('2025-05-05T01:01:01+03:00'))
+```
+
+Результат: `True`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `ISWORKDAY()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Возвращает значение `true`, если заданная дата является рабочим днём. В противном случае возвращает результат `false`.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+ISWORKDAY(dateTime)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`dateTime`: дата и время.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+ISWORKDAY(DATE('2025-05-05T01:01:01'))
+```
+
+Результат: `True`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `ISWORKDAYUTC()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Возвращает значение `true`, если заданная дата с указанием часового пояса является рабочим днём для часового пояса UTC-0. В противном случае возвращает результат `false`.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+ISWORKDAYUTC(dateTime)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`dateTime`: дата и время.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+ISWORKDAYUTC(DATE('2025-05-05T01:01:01+03:00'))
+```
+
+Результат: `False`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -6013,7 +6838,7 @@ ISTODAY(argument1)
 <td markdown="block">
 
 ``` cs
-JOIN(argument1, LIST(argument2, argument3,. argumentN))
+JOIN(separator, LIST(string1, ..., stringN))
 ```
 
 </td>
@@ -6024,8 +6849,8 @@ JOIN(argument1, LIST(argument2, argument3,. argumentN))
 </td>
 <td markdown="block">
 
-`argument1`: разделитель объединяемых строк,
-`argument2`, `argument3`, ., `argumentN` (в функции `LIST()`): объединяемые строки
+`separator`: строка, разделитель объединяемых строк.
+`string1, ..., stringN`: объединяемые строки.
 </td>
 </tr>
 <tr markdown="block">
@@ -6034,6 +6859,23 @@ JOIN(argument1, LIST(argument2, argument3,. argumentN))
 </td>
 <td markdown="block">
 Строка
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+JOIN(", ", LIST("Аналитик", "Архитектор", "Администратор"))
+```
+
+Результат: `False`
+
+Здесь:
+
+[`LIST()`](#list) — функция, которая принимает значения, разделённые запятыми, и возвращает их список.
 </td>
 </tr>
 </tbody>
