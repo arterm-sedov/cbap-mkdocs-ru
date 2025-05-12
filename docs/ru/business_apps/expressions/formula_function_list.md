@@ -3384,7 +3384,7 @@ DISTINCT(list)
 DISTINCT(LIST('л', 'а', 'и', 'а', 'л'))
 ```
 
-Результат: `и`
+Результат: `л`, `а`, `и`
 
 Здесь:
 
@@ -4217,6 +4217,7 @@ ENDOFYEARUTC(DATE('2025-01-01T01:01:01+03:00'))
 **Описание**
 </td>
 <td markdown="block">
+
 Сравнивает две строки и возвращает значение `true`, если первая строка оканчивается на вторую строку, в противном случае возвращает `false`.
 
 </td>
@@ -4226,7 +4227,11 @@ ENDOFYEARUTC(DATE('2025-01-01T01:01:01+03:00'))
 **Синтаксис**
 </td>
 <td markdown="block">
-ENDSWITH(string, endstring)
+
+``` cs
+ENDSWITH(string, endString)
+```
+
 </td>
 </tr>
 <tr markdown="block">
@@ -4235,7 +4240,7 @@ ENDSWITH(string, endstring)
 </td>
 <td markdown="block">
 
-`string`, `endstring`: строка
+`string`, `endString`: строка.
 </td>
 </tr>
 <tr markdown="block">
@@ -4253,7 +4258,7 @@ ENDSWITH(string, endstring)
 <td markdown="block">
 
 ``` cs
-ENDSWITH("string", "ing")
+ENDSWITH("Строка", "ка")
 ```
 
 Результат: `True`
@@ -7892,10 +7897,10 @@ MINUTEUTC(dateTime)
 <td markdown="block">
 
 ``` cs
-MINUTEUTC(DATE('2025-05-05T01:01:01+03:00'))
+MINUTEUTC(DATE('2025-05-05T01:01:01+03:30'))
 ```
 
-Результат: `1`
+Результат: `31`
 
 Здесь:
 
@@ -8602,7 +8607,7 @@ NOW()
 **Описание**
 </td>
 <td markdown="block">
-Возвращает список ID записей из указанного шаблона, в которых указанный атрибут имеет указанное значение.
+Возвращает список ID записей из указанного шаблона, в которых указанный **текстовый** атрибут имеет указанное значение.
 </td>
 </tr>
 <tr markdown="block">
@@ -9737,7 +9742,7 @@ STARTOFDAY(DATE('2025-05-05T01:01:01'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `STARTOFDAY()`
+## `STARTOFDAYUTC()`
 
 </th>
 </tr>
@@ -9758,7 +9763,7 @@ STARTOFDAY(DATE('2025-05-05T01:01:01'))
 <td markdown="block">
 
 ``` cs
-STARTOFDAY(dateTime)
+STARTOFDAYUTC(dateTime)
 ```
 
 </td>
@@ -9816,6 +9821,7 @@ STARTOFDAYUTC(DATE('2025-05-05T01:01:01+03:00'))
 **Описание**
 </td>
 <td markdown="block">
+
 Принимает аргумент типа «**Дата и время**» и возвращает дату и время начала месяца, в пределах которого находится значение аргумента.
 
 </td>
@@ -9825,7 +9831,11 @@ STARTOFDAYUTC(DATE('2025-05-05T01:01:01+03:00'))
 **Синтаксис**
 </td>
 <td markdown="block">
-STARTOFMONTH(argument1)
+
+``` cs
+STARTOFMONTH(dateTime)
+```
+
 </td>
 </tr>
 <tr markdown="block">
@@ -9834,7 +9844,8 @@ STARTOFMONTH(argument1)
 </td>
 <td markdown="block">
 
-`argument1`: дата и время
+`dateTime`: дата и время.
+
 </td>
 </tr>
 <tr markdown="block">
@@ -9843,6 +9854,94 @@ STARTOFMONTH(argument1)
 </td>
 <td markdown="block">
 Дата и время
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+STARTOFMONTH(DATE('2025-05-01T01:01:01'))
+```
+
+Результат: `01.05.2025 0:00:00`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `STARTOFMONTHUTC()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Принимает аргумент типа «**Дата и время**» и возвращает дату и время начала месяца, в пределах которого находится значение аргумента для часового пояса UTC-0.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+STARTOFMONTHUTC(dateTime)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`dateTime`: дата и время.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Дата и время
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+STARTOFMONTHUTC(DATE('2025-05-01T01:01:01+03:00'))
+```
+
+Результат: `01.04.2025 0:00:00`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+
 </td>
 </tr>
 </tbody>
@@ -9862,6 +9961,7 @@ STARTOFMONTH(argument1)
 **Описание**
 </td>
 <td markdown="block">
+
 Принимает аргумент типа «**Дата и время**» и возвращает дату и время начала квартала, в пределах которого находится значение аргумента.
 
 </td>
@@ -9871,7 +9971,11 @@ STARTOFMONTH(argument1)
 **Синтаксис**
 </td>
 <td markdown="block">
-STARTOFQUARTER(argument1)
+
+``` cs
+STARTOFQUARTER(dateTime)
+```
+
 </td>
 </tr>
 <tr markdown="block">
@@ -9880,7 +9984,7 @@ STARTOFQUARTER(argument1)
 </td>
 <td markdown="block">
 
-`argument1`: дата и время
+`dateTime`: дата и время.
 </td>
 </tr>
 <tr markdown="block">
@@ -9889,6 +9993,93 @@ STARTOFQUARTER(argument1)
 </td>
 <td markdown="block">
 Дата и время
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+STARTOFQUARTER(DATE('2025-04-01T01:01:01'))
+```
+
+Результат: `01.04.2025 0:00:00`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `STARTOFQUARTERUTC()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Принимает аргумент типа «**Дата и время**» и возвращает дату и время начала квартала, в пределах которого находится значение аргумента для часового пояса UTC-0.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+STARTOFQUARTERUTC(dateTime)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`dateTime`: дата и время.
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Дата и время
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+STARTOFQUARTERUTC(DATE('2025-04-01T01:01:01+03:00'))
+```
+
+Результат: `01.01.2025 0:00:00`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+
 </td>
 </tr>
 </tbody>
@@ -9908,6 +10099,7 @@ STARTOFQUARTER(argument1)
 **Описание**
 </td>
 <td markdown="block">
+
 Принимает аргумент типа «**Дата и время**» и возвращает дату и время начала недели, в пределах которой находится значение аргумента.
 
 </td>
@@ -9919,7 +10111,7 @@ STARTOFQUARTER(argument1)
 <td markdown="block">
 
 ``` cs
-STARTOFWEEK(argument1)
+STARTOFWEEK(dateTime)
 ```
 
 </td>
@@ -9930,7 +10122,8 @@ STARTOFWEEK(argument1)
 </td>
 <td markdown="block">
 
-`argument1`: дата и время
+`dateTime`: дата и время.
+
 </td>
 </tr>
 <tr markdown="block">
@@ -9939,6 +10132,94 @@ STARTOFWEEK(argument1)
 </td>
 <td markdown="block">
 Дата и время
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+STARTOFWEEK(DATE('2025-05-05T01:01:01'))
+```
+
+Результат: `05.05.2025 0:00:00`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `STARTOFWEEKUTC()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Принимает аргумент типа «**Дата и время**» и возвращает дату и время начала недели, в пределах которой находится значение аргумента для часового пояса UTC-0.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+STARTOFWEEKUTC(dateTime)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`dateTime`: дата и время.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Дата и время
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+STARTOFWEEKUTC(DATE('2025-05-05T01:01:01+03:00'))
+```
+
+Результат: `28.04.2025 0:00:00`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+
 </td>
 </tr>
 </tbody>
@@ -9958,6 +10239,7 @@ STARTOFWEEK(argument1)
 **Описание**
 </td>
 <td markdown="block">
+
 Принимает аргумент типа «**Дата и время**» и возвращает дату и время начала года, в пределах которого находится значение аргумента.
 
 </td>
@@ -9969,7 +10251,7 @@ STARTOFWEEK(argument1)
 <td markdown="block">
 
 ``` cs
-STARTOFYEAR(argument1)
+STARTOFYEAR(dateTime)
 ```
 
 </td>
@@ -9980,7 +10262,7 @@ STARTOFYEAR(argument1)
 </td>
 <td markdown="block">
 
-`argument1`: дата и время
+`dateTime`: дата и время.
 </td>
 </tr>
 <tr markdown="block">
@@ -9989,6 +10271,93 @@ STARTOFYEAR(argument1)
 </td>
 <td markdown="block">
 Дата и время
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+STARTOFYEAR(DATE('2025-01-01T01:01:01'))
+```
+
+Результат: `01.01.2025 0:00:00`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `STARTOFYEARUTC()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Принимает аргумент типа «**Дата и время**» и возвращает дату и время начала года, в пределах которого находится значение аргумента для часового пояса UTC-0.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+STARTOFYEARUTC(dateTime)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`dateTime`: дата и время.
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Дата и время
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+STARTOFYEARUTC(DATE('2025-01-01T01:01:01+03:00'))
+```
+
+Результат: `01.01.2024 0:00:00`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+
 </td>
 </tr>
 </tbody>
@@ -10008,7 +10377,8 @@ STARTOFYEAR(argument1)
 **Описание**
 </td>
 <td markdown="block">
-Сравнивает два аргумента и возвращает значение `true`, если значение аргумента1 начинается с значения аргумента2, в противном случае возвращает `false`.
+
+Сравнивает две строки и возвращает значение `true`, если первая строка начинается на вторую строку, в противном случае возвращает `false`.
 
 </td>
 </tr>
@@ -10019,7 +10389,7 @@ STARTOFYEAR(argument1)
 <td markdown="block">
 
 ``` cs
-STARTSWITH(argument1, argument2)
+STARTSWITH(string, startString)
 ```
 
 </td>
@@ -10030,7 +10400,7 @@ STARTSWITH(argument1, argument2)
 </td>
 <td markdown="block">
 
-`argument1`, `argument2`: строка
+`string`, `startString`: строка.
 </td>
 </tr>
 <tr markdown="block">
@@ -10039,6 +10409,98 @@ STARTSWITH(argument1, argument2)
 </td>
 <td markdown="block">
 Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+STARTSWITH("Строка", "Стр")
+```
+
+Результат: `True`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `SUB()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Вычитает из значения аргумента типа «**Дата и время**» или «**Длительность**» значение типа «**Длительность**».
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+SUB(dateTime, duration)
+```
+
+**или**
+
+``` cs
+SUB(duration, duration)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+- `dateTime`: дата и время.
+- `duration`: длительность.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Дата и время
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+SUB(DATE('2025-01-01T01:01:01'), DURATION('P1DT1H30M0S'))
+```
+
+Результат: `30.12.2024 23:31:01`
+
+Здесь:
+
+- `DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+- `DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
+
 </td>
 </tr>
 </tbody>
@@ -10058,7 +10520,7 @@ STARTSWITH(argument1, argument2)
 **Описание**
 </td>
 <td markdown="block">
-Извлекает из строки подстроку определенной длины начиная с заданной позиции (задание длины опционально).
+Извлекает из строки подстроку, начиная с заданной позиции. При необходимости можно задать длину извлекаемой строки.
 
 </td>
 </tr>
@@ -10080,9 +10542,9 @@ SUBSTRING(sourceString, startIndex, [numberOfChars])
 </td>
 <td markdown="block">
 
-`sourceString`: строка
-`startIndex`: номер позиции подстроки (отсчитываемый от нуля)
-`numberOfChars`(необязательно): количество символов в подстроке
+- `sourceString`: строка.
+- `startIndex`: число, номер позиции начала подстроки, отсчитывается от 0.
+- `numberOfChars`: число, количество символов в подстроке, необязательный аргумент.
 
 </td>
 </tr>
@@ -10092,6 +10554,20 @@ SUBSTRING(sourceString, startIndex, [numberOfChars])
 </td>
 <td markdown="block">
 Строка
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+SUBSTRING("Раньше эта строка начиналась с другого слова.", 7, 31)
+```
+
+Результат: `эта строка начиналась с другого`
+
 </td>
 </tr>
 </tbody>
@@ -10111,7 +10587,7 @@ SUBSTRING(sourceString, startIndex, [numberOfChars])
 **Описание**
 </td>
 <td markdown="block">
-Вычитает значение аргумента2 из значения аргумента1.
+Вычитает значение второго аргумента из значения первого.
 
 </td>
 </tr>
@@ -10122,7 +10598,7 @@ SUBSTRING(sourceString, startIndex, [numberOfChars])
 <td markdown="block">
 
 ``` cs
-SUBTRACT(value1, value2)
+SUBTRACT(argument1, argument2)
 ```
 
 </td>
@@ -10133,10 +10609,10 @@ SUBTRACT(value1, value2)
 </td>
 <td markdown="block">
 
-`value1`: число; `value2`: число.
-`value1`: длительность; `value2`: длительность.
-`value1`: дата и время; `value2`: длительность.
-`value1`: дата и время; `value2`: дата и время.
+- `argument1`: число; `argument2`: число.
+- `argument1`: длительность; `argument2`: длительность.
+- `argument1`: дата и время; `argument2`: длительность.
+- `argument1`: дата и время; `argument2`: дата и время.
 
 </td>
 </tr>
@@ -10145,10 +10621,93 @@ SUBTRACT(value1, value2)
 **Результат**
 </td>
 <td markdown="block">
-Число
-длительность
-дата и время
-длительность
+Число, длительность или дата и время.
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+SUBTRACT(17, 10)
+```
+
+Результат: `7`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `SUB()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Вычитает из значения аргумента типа «**Дата и время**» значение типа «**Длительность**». Возвращает значение типа «**Дата и время**» для часового пояса UTC-0.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+SUB(dateTime, duration)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+- `dateTime`: дата и время.
+- `duration`: длительность.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Дата и время
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+SUBUTC(DATE('2025-01-01T01:01:01+00:00'), DURATION('P1DT1H30M0S'))
+```
+
+Результат: `31.12.2024 2:31:01` для часового пояса UTC+3.
+
+Здесь:
+
+- `DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+- `DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
+
 </td>
 </tr>
 </tbody>
@@ -10168,7 +10727,7 @@ SUBTRACT(value1, value2)
 **Описание**
 </td>
 <td markdown="block">
-Суммирует все значения списка, используемого в качестве аргумента. Конкатенация строк не поддерживается.
+Суммирует все значения аргументов типа «**Число**» или «**Длительность**».
 
 </td>
 </tr>
@@ -10179,7 +10738,7 @@ SUBTRACT(value1, value2)
 <td markdown="block">
 
 ``` cs
-SUM(valueList)
+SUM(argument1, ..., argumentN)
 ```
 
 </td>
@@ -10189,7 +10748,8 @@ SUM(valueList)
 **Аргументы**
 </td>
 <td markdown="block">
-`valueList`: список, состоящий из значений типа «**Число**» или «**Длительность**»
+
+`argument1, ..., argumentN`: число или длительность.
 </td>
 </tr>
 <tr markdown="block">
@@ -10197,7 +10757,21 @@ SUM(valueList)
 **Результат**
 </td>
 <td markdown="block">
-тип возвращаемого значения тот же, что и у элементов списка, являющегося аргументом
+Тип возвращаемого значения тот же, что и у элементов, являющихся аргументом.
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+SUM(1, 2, 3, 4)
+```
+
+Результат: `10`
+
 </td>
 </tr>
 </tbody>
