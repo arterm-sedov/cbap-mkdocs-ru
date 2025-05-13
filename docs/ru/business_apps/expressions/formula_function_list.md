@@ -1364,7 +1364,7 @@ ANY(list), ANY((sequence))
 <td markdown="block">
 
 ``` cs
-ANY( from I in db->Tickets where i->product = 'Data Monsoon' select i->name)
+ANY(from in db->Tickets where i->product = 'Data Monsoon' select i->name)
 ```
 
 Результат: `True`, если хотя бы один элемент имеет значение предиката `product` равным `Data Monsoon`.
@@ -11050,7 +11050,7 @@ TRIM("   В этой строке были лишние пробелы.   ")
 **Описание**
 </td>
 <td markdown="block">
-Находит объединение двух множеств.
+Возвращает список объектов после объединения двух объектов или списеов объектов.
 
 </td>
 </tr>
@@ -11072,7 +11072,7 @@ UNION(object1, object2)
 </td>
 <td markdown="block">
 
-`object1`, `object2`: запись.
+`object1`, `object2`: объект или список объектов.
 </td>
 </tr>
 <tr markdown="block">
@@ -11080,7 +11080,7 @@ UNION(object1, object2)
 **Результат**
 </td>
 <td markdown="block">
-Запись
+Список записей
 </td>
 </tr>
 <tr markdown="block">
@@ -11090,10 +11090,10 @@ UNION(object1, object2)
 <td markdown="block">
 
 ``` cs
-UNION(object1, object2)
+UNION(from i in db->music where i->album == 'Whale Meditation' select i->id, from i in db->music where i->album == 'Bird Song' select i->id)
 ```
 
-Результат: ``
+Результат: список записей из альбомов `Whale Meditation` и `Bird Song`.
 
 </td>
 </tr>
