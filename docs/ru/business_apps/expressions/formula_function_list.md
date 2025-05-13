@@ -10646,7 +10646,7 @@ SUBTRACT(17, 10)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `SUB()`
+## `SUBUTC()`
 
 </th>
 </tr>
@@ -10667,7 +10667,7 @@ SUBTRACT(17, 10)
 <td markdown="block">
 
 ``` cs
-SUB(dateTime, duration)
+SUBUTC(dateTime, duration)
 ```
 
 </td>
@@ -10727,6 +10727,7 @@ SUBUTC(DATE('2025-01-01T01:01:01+00:00'), DURATION('P1DT1H30M0S'))
 **Описание**
 </td>
 <td markdown="block">
+
 Суммирует все значения аргументов типа «**Число**» или «**Длительность**».
 
 </td>
@@ -10782,6 +10783,71 @@ SUM(1, 2, 3, 4)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
+## `TODURATION()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Конвертирует число в значение типа «**Длительность**» в секундах.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+TODURATION(number)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`number`: число.
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Длительность
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+TODURATION(12345)
+```
+
+Результат: `03:25:45`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
 ## `TOLOWER()`
 
 </th>
@@ -10791,7 +10857,8 @@ SUM(1, 2, 3, 4)
 **Описание**
 </td>
 <td markdown="block">
-Переводит строку в нижний регистр (к прописным буквам).
+
+Приводит все буквы в строке к нижнему регистру (прописным буквам).
 
 </td>
 </tr>
@@ -10812,7 +10879,8 @@ TOLOWER(string)
 **Аргументы**
 </td>
 <td markdown="block">
-`string`: строка
+
+`string`: строка.
 </td>
 </tr>
 <tr markdown="block">
@@ -10821,6 +10889,20 @@ TOLOWER(string)
 </td>
 <td markdown="block">
 Строка
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+TOLOWER("Все Буквы В Этой Строке Стали Прописными.")
+```
+
+Результат: `все буквы в этой строке стали прописными.`
+
 </td>
 </tr>
 </tbody>
@@ -10840,7 +10922,7 @@ TOLOWER(string)
 **Описание**
 </td>
 <td markdown="block">
-Переводит строку в верхний регистр (к заглавным буквам).
+Приводит все буквы в строке к верхнему регистру (заглавным буквам).
 
 </td>
 </tr>
@@ -10861,7 +10943,8 @@ TOUPPER(string)
 **Аргументы**
 </td>
 <td markdown="block">
-`string`: строка
+
+`string`: строка.
 </td>
 </tr>
 <tr markdown="block">
@@ -10870,6 +10953,148 @@ TOUPPER(string)
 </td>
 <td markdown="block">
 Строка
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+TOUPPER("Все Буквы В Этой Строке Стали Заглавными.")
+```
+
+Результат: `ВСЕ БУКВЫ В ЭТОЙ СТРОКЕ СТАЛИ ЗАГЛАВНЫМИ.`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `TRIM()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+Удаляет пробелы в начале и конце строки.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+TRIM(string)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`string`: строка.
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Строка
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+TRIM("   В этой строке были лишние пробелы.   ")
+```
+
+Результат: `В этой строке были лишние пробелы.`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `UNION()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+Находит объединение двух множеств.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+UNION(object1, object2)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`object1`, `object2`: запись.
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Запись
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+UNION(object1, object2)
+```
+
+Результат: ``
+
 </td>
 </tr>
 </tbody>
@@ -10889,7 +11114,7 @@ TOUPPER(string)
 **Описание**
 </td>
 <td markdown="block">
-Возвращает текущего пользователя или идентификатор текущего пользователя, в зависимости от того, к какому типу данных относится поле. Если вычисляемый атрибут принадлежит типу данных Пользователь, функция возвращает текущего пользователя. Если вычисляемый атрибут текстового типа, функция возвращает идентификатор текущего пользователя.
+Возвращает идентификатор текущего аккаунта.
 
 </td>
 </tr>
@@ -10910,7 +11135,7 @@ USER()
 **Аргументы**
 </td>
 <td markdown="block">
-аргументы не требуются
+Не требуются.
 </td>
 </tr>
 <tr markdown="block">
@@ -10918,7 +11143,21 @@ USER()
 **Результат**
 </td>
 <td markdown="block">
-пользователь или строка
+Идентификатор аккаунта
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+USER()
+```
+
+Результат: `account.XX` — ID аккаунта, который просматривает запись.
+
 </td>
 </tr>
 </tbody>
@@ -10961,8 +11200,8 @@ VALUE(argument, [defaultValue])
 </td>
 <td markdown="block">
 
-- `argument` — проверяемое выражение.
-- `defaultValue` — значение по умолчанию. Является необязательным аргументом.
+- `argument`: проверяемое выражение.
+- `defaultValue`: значение по умолчанию. Является необязательным аргументом.
 
 </td>
 </tr>
@@ -10971,7 +11210,7 @@ VALUE(argument, [defaultValue])
 **Результат**
 </td>
 <td markdown="block">
-тип возвращаемого значения совпадает с типом проверяемого выражения
+Тип возвращаемого значения совпадает с типом проверяемого выражения.
 </td>
 </tr>
 <tr markdown="block">
@@ -10984,7 +11223,145 @@ VALUE(argument, [defaultValue])
 VALUE($Amount, "Не заполнено поле Amount")
 ```
 
-Возвращает значение атрибута _Amount_. В противном случае вернёт текст _«Не заполнено поле Amount»_.
+Результат: значение атрибута _Amount_. В противном случае вернёт текст _«Не заполнено поле Amount»_.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `WEEKOFYEAR()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Принимает аргумент типа «**Дата и время**» и возвращает номер недели года, в пределах которого находится значение аргумента.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+WEEKOFYEAR(dateTime)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`dateTime`: дата и время.
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+WEEKOFYEAR(DATE('2025-05-06T01:01:01'))
+```
+
+Результат: `18`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `WEEKOFYEARUTC()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Принимает аргумент типа «**Дата и время**» и возвращает номер недели года, в пределах которого находится значение аргумента для часового пояса UTC-0.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+WEEKOFYEARUTC(dateTime)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`dateTime`: дата и время.
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+WEEKOFYEARUTC(DATE('2025-05-06T01:01:01+03:00'))
+```
+
+Результат: `17`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -11005,8 +11382,10 @@ VALUE($Amount, "Не заполнено поле Amount")
 **Описание**
 </td>
 <td markdown="block">
-Возвращает дату на основании количества рабочих дней с определенной даты, с поправкой на праздники и фактические выходные дни.
-Если часовой пояс рабочего офиса отличается от часового пояса сервера **{{ companyName }}**, используйте функцию WORKDAYSTZ().
+
+Прибавляет к указанной дате количество рабочих дней с учётом праздничных и выходных дней и возвращает получившуюся дату.
+
+Если часовой пояс рабочего офиса отличается от часового пояса сервера **{{ productName }}**, используйте функцию [WORKDAYSTZ()](#workdaystz).
 
 </td>
 </tr>
@@ -11018,7 +11397,7 @@ VALUE($Amount, "Не заполнено поле Amount")
 
 ``` cs
 WORKDAYS(startDateTime, workingDays,
-    [LIST(holiday1, holiday2, …, holidayN)]
+    [LIST(holidayDateTime1, …, holidayDateTimeN)]
     )
 ```
 
@@ -11030,9 +11409,9 @@ WORKDAYS(startDateTime, workingDays,
 </td>
 <td markdown="block">
 
-- `startDateTime`: дата и время начала работы,
-- `workingDays`: количество рабочих дней,
-- `LIST(holiday1, holiday2, …, holidayN)`: праздники и исключения из выходных дней, т. е. если в списке указан рабочий день, он считается праздником, и наоборот, если в списке выходной день, он считается рабочим.
+- `startDateTime`: дата и время.
+- `workingDays`: число, количество рабочих дней.
+- `LIST(holidayDateTime1, …, holidayDateTimeN)`: праздники и исключения из выходных дней, т. е. если в списке указан рабочий день, он считается праздником, и наоборот, если в списке выходной день, он считается рабочим.
 
 </td>
 </tr>
@@ -11044,59 +11423,23 @@ WORKDAYS(startDateTime, workingDays,
 Дата и время
 </td>
 </tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-## `WORKDAYSTZ()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-Возвращает дату на основании количества рабочих дней с определенной даты, с поправкой на праздники и фактические выходные дни, а также на временную зону рабочего офиса.
-
-</td>
-</tr>
 <tr markdown="block">
 <td markdown="block">
-**Синтаксис**
+**Пример**
 </td>
 <td markdown="block">
 
 ``` cs
-WORKDAYSTZ(startDay, workingDays,
-    LIST(holiday1, holiday2, …, holidayN),
-    timeZone)
+WORKDAYS(DATE('2025-05-01'), 10, LIST(DATE('2025-05-01'), 
+        DATE('2025-05-02'), DATE('2025-05-08'), DATE('2025-05-09')))
 ```
 
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
+Результат: `21.05.2025 0:00:00`
 
-- `startDateTime`: дата и время начала работы
-- `workingDays`: количество рабочих дней
-- `LIST(holiday1, holiday2, …, holidayN)`: праздники и исключения из выходных дней, т. е. если в списке указан рабочий день, он считается праздником, и наоборот, если в списке выходной день, он считается рабочим
-- `timeZone`: часовой пояс рабочего офиса в формате `Olson DB`
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Дата и время
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+
 </td>
 </tr>
 </tbody>
@@ -11116,8 +11459,10 @@ WORKDAYSTZ(startDay, workingDays,
 **Описание**
 </td>
 <td markdown="block">
-Возвращает продолжительность работы между двумя датами, на основании предположения, что рабочий день начинается в 00:00 и длится 24 часа.
-Если часовой пояс рабочего офиса отличается от часового пояса сервера **{{ companyName }}**, используйте функцию WORKDAYSDURATIONTZ ().
+
+Возвращает продолжительность между двумя датами с учётом праздничных и выходных дней.
+
+Если часовой пояс рабочего офиса отличается от часового пояса сервера **{{ productName }}**, используйте функцию [WORKDAYSDURATIONTZ()](#workdaysdurationtz).
 
 </td>
 </tr>
@@ -11129,7 +11474,8 @@ WORKDAYSTZ(startDay, workingDays,
 
 ``` cs
 WORKDAYSDURATION(startDateTime, endDateTime,
-    [LIST(holiday1, holiday2, …, holidayN)])
+    [LIST(holidayDateTime1, …, holidayDateTimeN)]
+    )
 ```
 
 </td>
@@ -11140,9 +11486,9 @@ WORKDAYSDURATION(startDateTime, endDateTime,
 </td>
 <td markdown="block">
 
-- `startDateTime`: дата и время начала работы,
-- `endDateTime`: дата и время окончания работы,
-- `LIST(holiday1, holiday2, …, holidayN)` (необязательно): праздники и исключения из выходных дней, т. е. если в списке указан рабочий день, он считается праздником, и наоборот, если в списке выходной день, он считается рабочим.
+- `startDateTime`: дата и время.
+- `endDateTime`: дата и время.
+- `LIST(holidayDateTime1, …, holidayDateTimeN)`: праздники и исключения из выходных дней, т. е. если в списке указан рабочий день, он считается праздником, и наоборот, если в списке выходной день, он считается рабочим.
 
 </td>
 </tr>
@@ -11152,6 +11498,25 @@ WORKDAYSDURATION(startDateTime, endDateTime,
 </td>
 <td markdown="block">
 Длительность
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+WORKDAYSDURATION(DATE('2025-05-01'), DATE('2025-05-12'), LIST(DATE('2025-05-01'), 
+        DATE('2025-05-02'), DATE('2025-05-08'), DATE('2025-05-09')))
+```
+
+Результат: `3.00:00:00`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+
 </td>
 </tr>
 </tbody>
@@ -11171,7 +11536,8 @@ WORKDAYSDURATION(startDateTime, endDateTime,
 **Описание**
 </td>
 <td markdown="block">
-Возвращает продолжительность работы между двумя датами с поправкой на временную зону рабочего офиса, на основании предположения, что рабочий день начинается в 00:00 и длится 24 часа.
+
+Возвращает продолжительность между двумя датами с учётом праздничных и выходных дней для указанного часового пояса.
 
 </td>
 </tr>
@@ -11183,7 +11549,154 @@ WORKDAYSDURATION(startDateTime, endDateTime,
 
 ``` cs
 WORKDAYSDURATIONTZ(startDateTime, endDateTime,
-    LIST(holiday1, holiday2, ., holidayN),
+    LIST(holidayDateTime1, …, holidayDateTimeN),
+    timeZone
+    )
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+- `startDateTime`: дата и время.
+- `endDateTime`: дата и время.
+- `LIST(holidayDateTime1, …, holidayDateTimeN)`: праздники и исключения из выходных дней, т. е. если в списке указан рабочий день, он считается праздником, и наоборот, если в списке выходной день, он считается рабочим.
+- `timeZone`: строка, часовой пояс в формате IANA.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Длительность
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+WORKDAYSDURATIONTZ(DATE('2025-05-01'), DATE('2025-05-12'), LIST(DATE('2025-05-01'), 
+        DATE('2025-05-02'), DATE('2025-05-08'), DATE('2025-05-09')), "Asia/Tokyo")
+```
+
+Результат: `3.06:00:00`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `WORKDAYSDURATIONUTC()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Возвращает продолжительность между двумя датами для часового пояса UTC-0 с учётом выходных дней.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+WORKDAYSDURATIONUTC(startDateTime, endDateTime)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`startDateTime`, `endDateTime`: дата и время.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Длительность
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+WORKDAYSDURATIONUTC(DATE('2025-05-01+03:00'), DATE('2025-05-12+00:00'))
+```
+
+Результат: `10`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `WORKDAYSTZ()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Прибавляет к указанной дате количество рабочих дней с учётом праздничных и выходных дней для указанного часового пояса и возвращает получившуюся дату.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+WORKDAYSTZ(startDay, workingDays,
+    LIST(holidayDateTime1, …, holidayDateTimeN),
     timeZone)
 ```
 
@@ -11195,10 +11708,10 @@ WORKDAYSDURATIONTZ(startDateTime, endDateTime,
 </td>
 <td markdown="block">
 
-- `startDateTime`: дата и время начала работы,
-- `endDateTime`: дата и время окончания работы,
-- `LIST(holiday1, holiday2, ., holidayN)`: праздники и исключения из выходных дней, т. е. если в списке указан рабочий день, он считается праздником, и наоборот, если в списке выходной день, он считается рабочим,
-- `timeZone`: часовой пояс рабочего офиса в формате `Olson DB`.
+- `startDateTime`: дата и время.
+- `workingDays`: число, количество рабочих дней.
+- `LIST(holidayDateTime1, …, holidayDateTimeN)`: праздники и исключения из выходных дней, т. е. если в списке указан рабочий день, он считается праздником, и наоборот, если в списке выходной день, он считается рабочим.
+- `timeZone`: строка, часовой пояс в формате IANA.
 
 </td>
 </tr>
@@ -11207,7 +11720,97 @@ WORKDAYSDURATIONTZ(startDateTime, endDateTime,
 **Результат**
 </td>
 <td markdown="block">
-Длительность
+Дата и время
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+WORKDAYSTZ(DATE('2025-05-01+03:00'), 10, LIST(DATE('2025-05-01'), 
+        DATE('2025-05-02'), DATE('2025-05-08'), DATE('2025-05-09')),
+        "America/Anchorage")
+```
+
+Результат: `20.05.2025 0:00:00`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `WORKDAYSUTC()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+Прибавляет к указанной дате количество рабочих дней с учётом выходных дней для часового пояса UTC-0 и возвращает получившуюся дату.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+WORKDAYSUTC(startDay, workingDays)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+- `startDateTime`: дата и время.
+- `workingDays`: число, количество рабочих дней.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Дата и время
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+WORKDAYSUTC()
+```
+
+Результат: ``
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+
 </td>
 </tr>
 </tbody>
@@ -11227,9 +11830,10 @@ WORKDAYSDURATIONTZ(startDateTime, endDateTime,
 **Описание**
 </td>
 <td markdown="block">
-Возвращает дату и время на основании количества рабочих часов с определенного момента времени, с поправкой на праздники и фактические выходные дни.
 
-Если часовой пояс рабочего офиса отличается от часового пояса сервера **{{ companyName }}**, используйте функцию `WORKHOURSTZ ()`.
+Принимает в качестве аргументов дату начала работы, количество часов, отведённых на работу, начала рабочего дня, продолжительность рабочего дня и список праздничных дней. Возвращает дату и время завершения работы.
+
+Если часовой пояс рабочего офиса отличается от часового пояса сервера **{{ productName }}**, используйте функцию [`WORKHOURSTZ()`](#workhourstz).
 
 </td>
 </tr>
@@ -11242,7 +11846,7 @@ WORKDAYSDURATIONTZ(startDateTime, endDateTime,
 ``` cs
 WORKHOURS(startDateTime, workingHours, 
     workingDayStart, workingDayDuration,
-    [LIST(holiday1, holiday2, ., holidayN)])
+    [LIST(holidayDateTime1, ..., holidayDateTimeN)])
 ```
 
 </td>
@@ -11253,11 +11857,11 @@ WORKHOURS(startDateTime, workingHours,
 </td>
 <td markdown="block">
 
-- `startDateTime`: дата и время начала работы,
-- `workingHours`: количество рабочих часов,
-- `workingDayStart`: время начала рабочего дня,
-- `workingDayDuration`: длительность рабочего дня (должна быть меньше разницы между 24 ч и временем начала рабочего дня),
-- `LIST(holiday1, holiday2, ., holidayN)` (необязательно): праздники и исключения из выходных дней, т. е. если в списке указан рабочий день, он считается праздником, и наоборот, если в списке выходной день, он считается рабочим.
+- `startDateTime`: дата и время.
+- `workingHours`: число, количество рабочих часов.
+- `workingDayStart`: длительность, время начала рабочего дня от 00:00.
+- `workingDayDuration`: длительность рабочего дня (должна быть меньше разницы между полуночью и временем начала рабочего дня).
+- `LIST(holidayDateTime1, ..., holidayDateTimeN)`: праздники и исключения из выходных дней, т. е. если в списке указан рабочий день, он считается праздником, и наоборот, если в списке выходной день, он считается рабочим.
 
 </td>
 </tr>
@@ -11267,6 +11871,26 @@ WORKHOURS(startDateTime, workingHours,
 </td>
 <td markdown="block">
 Дата и время
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+WORKHOURS(DATE('2025-05-01'), 5, DURATION('PT9H'), DURATION('PT4H'), LIST(DATE('2025-05-01'), 
+        DATE('2025-05-02'), DATE('2025-05-08'), DATE('2025-05-09')))
+```
+
+Результат: `06.05.2025 10:00:00`
+
+Здесь:
+
+- `DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+- `DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
+
 </td>
 </tr>
 </tbody>
@@ -11286,9 +11910,9 @@ WORKHOURS(startDateTime, workingHours,
 **Описание**
 </td>
 <td markdown="block">
-Возвращает продолжительность работы между двумя датами при условии, что рабочий день начинается в заданное время и имеет определенную длительность.
+Возвращает продолжительность рабочего времени между двумя датами при заданных начале рабочего дня и его продолжительности с учётом праздничных и выходных дней.
 
-Если часовой пояс рабочего офиса отличается от часового пояса сервера **{{ companyName }}**, используйте функцию `WORKHOURSDURATIONTZ()`.
+Если часовой пояс рабочего офиса отличается от часового пояса сервера **{{ companyName }}**, используйте функцию [`WORKHOURSDURATIONTZ()`](#workhoursdurationtz).
 
 </td>
 </tr>
@@ -11301,7 +11925,7 @@ WORKHOURS(startDateTime, workingHours,
 ``` cs
 WORKHOURSDURATION(startDateTime, endDateTime, 
     workingDayStart, workingDayDuration,
-    [LIST(holiday1, holiday2, ., holidayN)])
+    [LIST(holidayDateTime1, ..., holidayDateTimeN)])
 ```
 
 </td>
@@ -11312,11 +11936,11 @@ WORKHOURSDURATION(startDateTime, endDateTime,
 </td>
 <td markdown="block">
 
-- `startDateTime`: дата и время начала работы
-- `endDateTime`: дата и время окончания работы
-- `workingDayStart`: время начала рабочего дня
-- `workingDayDuration`: длительность рабочего дня (должна быть меньше разницы между 24 ч и временем начала рабочего дня)
-- `LIST(holiday1, holiday2, ., holidayN)` (необязательно): праздники и исключения из выходных дней, т. е. если в списке указан рабочий день, он считается праздником, и наоборот, если в списке выходной день, он считается рабочим.
+- `startDateTime`: дата и время.
+- `endDateTime`: дата и время.
+- `workingDayStart`: длительность, время начала рабочего дня от 00:00.
+- `workingDayEnd`: длительность рабочего дня (должна быть меньше разницы между полуночью и временем начала рабочего дня).
+- `LIST(holidayDateTime1, ..., holidayDateTimeN)` (необязательно): праздники и исключения из выходных дней, т. е. если в списке указан рабочий день, он считается праздником, и наоборот, если в списке выходной день, он считается рабочим.
 
 </td>
 </tr>
@@ -11326,6 +11950,26 @@ WORKHOURSDURATION(startDateTime, endDateTime,
 </td>
 <td markdown="block">
 Длительность
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+WORKHOURSDURATION(DATE('2025-05-01'), DATE('2025-05-07'), DURATION('PT8H'), DURATION('PT15H'), LIST(DATE('2025-05-01'), 
+        DATE('2025-05-02'), DATE('2025-05-08'), DATE('2025-05-09')))
+```
+
+Результат: `22:00:00`
+
+Здесь:
+
+- `DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+- `DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
+
 </td>
 </tr>
 </tbody>
@@ -11345,7 +11989,7 @@ WORKHOURSDURATION(startDateTime, endDateTime,
 **Описание**
 </td>
 <td markdown="block">
-Возвращает продолжительность работы между двумя датами с поправкой на временную зону рабочего офиса, при условии, что рабочий день начинается в заданное время и имеет определенную длительность.
+Возвращает продолжительность рабочего времени между двумя датами при заданных начале рабочего дня и его продолжительности с учётом праздничных и выходных дней для указанного часового пояса.
 
 </td>
 </tr>
@@ -11358,7 +12002,7 @@ WORKHOURSDURATION(startDateTime, endDateTime,
 ``` cs
 WORKHOURSDURATIONTZ(startDateTime, endDateTime, 
     workingDayStart, workingDayDuration,
-    LIST(holiday1, holiday2, ., holidayN),
+    LIST(holiday1, ..., holidayN),
     timeZone)
 ```
 
@@ -11370,12 +12014,12 @@ WORKHOURSDURATIONTZ(startDateTime, endDateTime,
 </td>
 <td markdown="block">
 
-- `startDateTime`: дата и время начала работы
-- `endDateTime`: дата и время окончания работы
-- `workingDayStart`: время начала рабочего дня
-- `workingDayDuration`: длительность рабочего дня (должна быть меньше разницы между 24 ч и временем начала рабочего дня)
-- `LIST(holiday1, holiday2, ., holidayN)`: праздники и исключения из выходных дней, т. е. если в списке указан рабочий день, он считается праздником, и наоборот, если в списке выходной день, он считается рабочим
-- `timeZone`: часовой пояс рабочего офиса в формате `Olson DB`.
+- `startDateTime`: дата и время.
+- `endDateTime`: дата и время.
+- `workingDayStart`: длительность, время начала рабочего дня.
+- `workingDayDuration`: длительность рабочего дня (должна быть меньше разницы между полуночью и временем начала рабочего дня).
+- `LIST(holiday1, ..., holidayN)`: праздники и исключения из выходных дней, т. е. если в списке указан рабочий день, он считается праздником, и наоборот, если в списке выходной день, он считается рабочим
+- `timeZone`: строка, часовой пояс в формате IANA.
 
 </td>
 </tr>
@@ -11385,6 +12029,27 @@ WORKHOURSDURATIONTZ(startDateTime, endDateTime,
 </td>
 <td markdown="block">
 Длительность
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+WORKHOURSDURATIONTZ(DATE('2025-05-01'), DATE('2025-05-07'), DURATION('PT8H'), DURATION('PT15H'), LIST(DATE('2025-05-01'), 
+        DATE('2025-05-02'), DATE('2025-05-08'), DATE('2025-05-09')),
+        "Asia/Tokyo")
+```
+
+Результат: `1.04:00:00`
+
+Здесь:
+
+- `DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+- `DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
+
 </td>
 </tr>
 </tbody>
@@ -11404,7 +12069,7 @@ WORKHOURSDURATIONTZ(startDateTime, endDateTime,
 **Описание**
 </td>
 <td markdown="block">
-Возвращает дату и время на основании количества рабочих часов с определенного момента времени, с поправкой на праздники и фактические выходные дни, а также на временную зону рабочего офиса.
+Принимает в качестве аргументов дату начала работы, количество часов, отведённых на работу, начала рабочего дня, продолжительность рабочего дня, список праздничных дней и часовой пояс. Возвращает дату и время завершения работы для указанного часового пояса.
 
 </td>
 </tr>
@@ -11417,7 +12082,7 @@ WORKHOURSDURATIONTZ(startDateTime, endDateTime,
 ``` cs
 WORKHOURSTZ(startDateTime, workingHours, 
     workingDayStart, workingDayDuration,
-    LIST(holiday1, holiday2, ., holidayN),
+    LIST(holidayDateTime1, ..., holidayDateTimeN),
     timeZone)
 ```
 
@@ -11429,12 +12094,12 @@ WORKHOURSTZ(startDateTime, workingHours,
 </td>
 <td markdown="block">
 
-- `startDateTime`: дата и время начала работы,
-- `workingHours`: количество рабочих часов,
-- `workingDayStart`: время начала рабочего дня,
-- `workingDayDuration`: длительность рабочего дня (должна быть меньше разницы между 24 ч и временем начала рабочего дня),
-- `LIST(holiday1, holiday2, ., holidayN), timeZone)`: праздники и исключения из выходных дней, т. е. если всписке указан рабочий день, он считается праздником, и наоборот, если в списке выходной день, он считается рабочим,
-- `timeZone`: часовой пояс рабочего офиса в формате `Olson DB`.
+- `startDateTime`: дата и время.
+- `workingHours`: число, количество рабочих часов.
+- `workingDayStart`: длительность, время начала рабочего дня от 00:00.
+- `workingDayDuration`: длительность рабочего дня (должна быть меньше разницы между полуночью и временем начала рабочего дня),
+- `LIST(holidayDateTime1, ..., holidayDateTimeN)`: праздники и исключения из выходных дней, т. е. если всписке указан рабочий день, он считается праздником, и наоборот, если в списке выходной день, он считается рабочим,
+- `timeZone`: строка, часовой пояс в формате IANA.
 
 </td>
 </tr>
@@ -11444,6 +12109,27 @@ WORKHOURSTZ(startDateTime, workingHours,
 </td>
 <td markdown="block">
 Дата и время
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+WORKHOURSTZ(DATE('2025-05-01'), 5, DURATION('PT9H'), DURATION('PT4H'), LIST(DATE('2025-05-01'), 
+        DATE('2025-05-02'), DATE('2025-05-08'), DATE('2025-05-09')),
+        "America/Anchorage")
+```
+
+Результат: `05.05.2025 10:00:00`
+
+Здесь:
+
+- `DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+- `DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
+
 </td>
 </tr>
 </tbody>
@@ -11463,7 +12149,149 @@ WORKHOURSTZ(startDateTime, workingHours,
 **Описание**
 </td>
 <td markdown="block">
-Принимает аргумент типа «**Дата и время**» и возвращает числовое значение, соответствующее году указанной даты в местном часовом поясе.
+
+Принимает аргумент типа «**Дата и время**» и возвращает числовое значение, соответствующее году указанной даты.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` cs
+YEAR(dateTime, [timeZone])
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+- `dateTime`: дата и время.
+- `timeZone`: строка, часовой пояс в формате IANA.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+YEAR(DATE('2025-01-01+03:00'), "America/Anchorage")
+```
+
+Результат: `2024`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `YEARS()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Возвращает количество лет для значения аргумента типа «**Длительность**».
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+```cs
+YEARS(duration)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`duration`: длительность.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+YEARS(DURATION('P183D'))
+```
+
+Результат: `0,5`
+
+Здесь:
+
+`DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `YEARUTC()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Принимает аргумент типа «**Дата и время**» и возвращает числовое значение, соответствующее году указанной даты для часового пояса UTC-0.
 
 </td>
 </tr>
@@ -11484,7 +12312,9 @@ YEAR(dateTime)
 **Аргументы**
 </td>
 <td markdown="block">
-`dateTime`: дата и время
+
+`dateTime`: дата и время.
+
 </td>
 </tr>
 <tr markdown="block">
@@ -11493,6 +12323,24 @@ YEAR(dateTime)
 </td>
 <td markdown="block">
 Число
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` cs
+YEARUTC(DATE('2025-01-01+03:00'))
+```
+
+Результат: `2024`
+
+Здесь:
+
+`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
+
 </td>
 </tr>
 </tbody>
@@ -11502,53 +12350,5 @@ YEAR(dateTime)
 <tbody markdown="block">
 <tr markdown="block">
 <th colspan="2" markdown="block">
-
-## `YEARTZ()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-Принимает аргумент типа «**Дата и время**» и возвращает числовое значение, соответствующее году указанной даты в заданном часовом поясе.
-
-Идентификатор часового пояса должен быть задан в формате базы данных часовых поясов IANA.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-```cs
-YEARTZ(dateTime, timeZone)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-- `dateTime`: дата и время
-- `timeZone`: строка
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Число
-</td>
-</tr>
-</tbody>
-</table>
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
