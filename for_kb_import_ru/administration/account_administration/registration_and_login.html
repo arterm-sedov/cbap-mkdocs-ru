@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4663" kb-title="Регистрация и вход. Настройка самостоятельной регистрации, CAPTCHA и входа через OpenID и Active Directory">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4663" kb-title="Самостоятельная регистрация и вход через сервер каталогов. Настройка">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -9,42 +9,35 @@
       </h2>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<a class="md-nav__link mkdocs_imported_link" href="#registration_and_login_intro">
 <span class="md-ellipsis">
       Введение
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#порядок-настройки">
+<a class="md-nav__link mkdocs_imported_link" href="#registration_and_login_configure">
 <span class="md-ellipsis">
-      Порядок настройки
+      Переход к настройке регистрации и входа
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#настройка-самостоятельной-регистрации-аккаунтов">
+<a class="md-nav__link mkdocs_imported_link" href="#registration_and_login_self_registration_configure">
 <span class="md-ellipsis">
       Настройка самостоятельной регистрации аккаунтов
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#настройка-подключения-к-внешней-службе">
+<a class="md-nav__link mkdocs_imported_link" href="#registration_and_login_directory_server_configure">
 <span class="md-ellipsis">
-      Настройка подключения к внешней службе
+      Настройка подключения к серверу каталогов
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#создание-подключения-к-серверу-каталогов">
-<span class="md-ellipsis">
-      Создание подключения к серверу каталогов
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#удаление-подключения-к-серверу-каталогов">
+<a class="md-nav__link mkdocs_imported_link" href="#registration_and_login_directory_server_delete">
 <span class="md-ellipsis">
       Удаление подключения к серверу каталогов
     </span>
@@ -62,61 +55,48 @@
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h2 id="введение">Введение</h2>
-<p>Страница «<strong>Регистрация и вход</strong>» позволяет просмотреть и настроить параметры самостоятельной регистрации новых аккаунтов, включить CAPTCHA на страницах входа и регистрации, а также настроить аутентификацию и синхронизацию аккаунтов с внешними службами: Azure Active Directory, AD Federation Services, Google OpenID Connect, Active Directory.</p>
-<h2 id="порядок-настройки">Порядок настройки</h2>
+<h2 id="registration_and_login_intro">Введение</h2>
+<p>Страница «<strong>Регистрация и вход</strong>» позволяет просмотреть и настроить параметры самостоятельной регистрации новых аккаунтов, а также настроить аутентификацию и синхронизацию аккаунтов с внешним сервером каталогов Active Directory, OpenLDAP или FreeIPA.</p>
+<h2 id="registration_and_login_configure">Переход к настройке регистрации и входа</h2>
 <ol class="colored_numbers_list">
-<li>На странице «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4661"><strong>Администрирование</strong></a>» в разделе — «<strong>Администрирование аккаунтов</strong> выберите пункт «<strong>Регистрация и вход</strong>» <i class="fa-light fa-user-plus">&zwnj;<!--icon--></i>.</li>
+<li>На странице «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4661"><strong>Администрирование</strong></a>» в разделе — «<strong>Администрирование аккаунтов</strong>» выберите пункт «<strong>Регистрация и вход</strong>» <i class="fa-light fa-user-plus">&zwnj;<!--icon--></i>.</li>
 <li>Отобразится страница «<strong>Регистрация и вход</strong>».</li>
 </ol>
 <figure class="screenshot_with_caption">
 <p><img alt="Страница «Регистрация и вход»" src="/platform/v5.0/administration/account_administration/img/registration_and_login.png"/><figcaption class="caption">Страница «Регистрация и вход»</figcaption></p>
 </figure>
-<h2 class="pageBreakBefore" id="настройка-самостоятельной-регистрации-аккаунтов">Настройка самостоятельной регистрации аккаунтов</h2>
-<p>Помимо создания аккаунтов с помощью раздела «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4653"><strong>Аккаунты</strong></a>» можно разрешить их самостоятельную регистрацию со страницы входа в систему.</p>
+<h2 class="pageBreakBefore" id="registration_and_login_self_registration_configure">Настройка самостоятельной регистрации аккаунтов</h2>
+<p>Помимо создания аккаунтов с помощью страницы «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4653"><strong>Аккаунты</strong></a>» можно разрешить пользователям самостоятельно регистрировать аккаунты на странице входа в систему без помощи администратора.</p>
 <ol class="colored_numbers_list">
 <li>Установите флажок «<strong>Разрешить самостоятельную регистрацию</strong>».</li>
-<li>При необходимости выберите или создайте группу, в которую следует включать самостоятельно зарегистрированные аккаунты. См. раздел «<strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4654">Группы</a></strong>»</li>
+<li>При необходимости выберите или создайте группу, в которую следует включать самостоятельно зарегистрированные аккаунты. См. раздел «<strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4654">Группы</a></strong>». Если аккаунту не назначить группу, то он будет включён только в группу «<strong>Все</strong>» с соответствующими правами.</li>
 <li>При необходимости выберите шаблон аккаунта, к которому следует привязывать самостоятельно зарегистрированные аккаунты.</li>
-<li>Чтобы на страницах самостоятельной регистрации и сброса пароля требовалось вводить контрольный код CAPTCHA, установите флажок «<strong>Включить CAPTCHA для публичных страниц</strong>».</li>
 <li>Нажмите кнопку «<strong>Сохранить</strong>».</li>
+<li>На странице входа появится кнопка «<strong>Регистрация</strong>» и пользователи смогут создавать собственные аккаунты.</li>
 </ol>
-<h2 id="настройка-подключения-к-внешней-службе">Настройка подключения к внешней службе</h2>
+<h2 id="registration_and_login_directory_server_configure">Настройка подключения к серверу каталогов</h2>
 <ol class="colored_numbers_list">
-<li>Нажмите плитку подключения или выберите в меню с троеточием на плитке пункт «<strong>Настроить</strong>».</li>
-<li>В отобразившемся окне «Свойства подключения» настройте параметры синхронизации аккаунтов с внешней службой.</li>
-<li>Чтобы включить или отключить возможность входа в систему для аккаунтов из внешней службы, используйте переключатель «<strong>Разрешить вход</strong>».</li>
+<li>Нажмите плитку подключения к серверу каталогов или выберите в меню с троеточием на плитке пункт «<strong>Настроить</strong>».</li>
+<li>Настройте <strong>свойства подключения</strong> к серверу каталогов для синхронизации аккаунтов. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4687">Сервер каталогов. Настройка подключения</a>»</em>.</li>
+<li>Включите или отключите возможность входа в систему для аккаунтов с сервера каталогов с помощью переключателя «<strong>Разрешить вход</strong>».</li>
 </ol>
 <figure class="screenshot_with_caption">
-<p><img alt="Настройка подключения к AD" src="/platform/v5.0/administration/account_administration/img/registration_and_login_connection_tile.png"/><figcaption class="caption">Настройка подключения к AD</figcaption></p>
+<p><img alt="Переход к настройке подключения к серверу каталогов" src="/platform/v5.0/administration/account_administration/img/registration_and_login_connection_tile.png"/><figcaption class="caption">Переход к настройке подключения к серверу каталогов</figcaption></p>
 </figure>
-<h2 class="pageBreakBefore" id="создание-подключения-к-серверу-каталогов">Создание подключения к серверу каталогов</h2>
-<ol class="colored_numbers_list">
-<li>Нажмите плитку Active Directory со ссылкой «<strong>Добавить</strong>».</li>
-<li>Отобразится окно «<strong>Новое подключение: Сервер каталогов</strong>».</li>
-<li>Настройте свойства подключения. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4687">Сервер каталогов. Настройка подключения</a>»</em>.</li>
-<li>Сохраните подключение.</li>
-</ol>
-<figure class="screenshot_with_caption">
-<p><img alt="Плитка нового подключения к серверу каталогов" src="/platform/v5.0/administration/account_administration/img/registration_and_login_add_ad.png"/><figcaption class="caption">Плитка нового подключения к серверу каталогов</figcaption></p>
-</figure>
-<h2 class="pageBreakBefore" id="удаление-подключения-к-серверу-каталогов">Удаление подключения к серверу каталогов</h2>
+<h2 class="pageBreakBefore" id="registration_and_login_directory_server_delete">Удаление подключения к серверу каталогов</h2>
 <ol class="colored_numbers_list">
 <li>В меню с троеточием на плитке подключения выберите пункт «<strong>Удалить</strong>».</li>
 <li>Подтвердите удаление в отобразившемся окне.</li>
 </ol>
-<figure class="screenshot_with_caption">
-<p><img alt="Удаление подключения к серверу каталогов" src="/platform/v5.0/administration/account_administration/img/registration_and_login_connection_ellipsis_menu.png"/><figcaption class="caption">Удаление подключения к серверу каталогов</figcaption></p>
-</figure>
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4687">Сервер каталогов. Настройка подключения</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4686">Аутентификация через WS-Federation. Настройка подключения, федеративного сервера и глобальной конфигурации</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4685">Аутентификация через OpenID Connect. Настройка подключения и служб</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4605">Аутентификация через Active Directory. Настройка контроллера домена и экземпляра ПО</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4613">Аутентификация через единый вход (SSO). Настройка контроллера домена, экземпляра ПО и компьютера конечного пользователя</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4657">Настройка единого входа (SSO-аутентификации) в ОС Windows</a></em></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4687">Сервер каталогов. Настройка подключения</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4686">Аутентификация через WS-Federation. Настройка подключения, федеративного сервера и глобальной конфигурации</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4685">Аутентификация через OpenID Connect. Настройка подключения и служб</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4605">Аутентификация через Active Directory. Настройка контроллера домена и экземпляра ПО</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4613">Аутентификация через единый вход (SSO). Настройка контроллера домена, экземпляра ПО и компьютера конечного пользователя</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4657">Настройка единого входа (SSO-аутентификации) в ОС Windows</a></li>
 </ul>
 </div>
 </article>

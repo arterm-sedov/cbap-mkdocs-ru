@@ -120,10 +120,6 @@
 <div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>stop<span class="w"> </span>apigateway&lt;instanceName&gt;<span class="w"> </span>adapterhost&lt;instanceName&gt;<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>status<span class="w"> </span>apigateway&lt;instanceName&gt;<span class="w"> </span>adapterhost&lt;instanceName&gt;<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Проверьте статус созданного экземпляра:</p>
-<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>status<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
-</li>
-<li>
 <p>Удалите (или переместите в резервное хранилище) неиспользуемые предыдущие дистрибутивы ПО (<code>&lt;distPath&gt;</code> — путь к директории с дистрибутивом, <code>&lt;osname&gt;</code> — название операционной системы):</p>
 <div class="highlight"><code><pre><span></span><code>rm<span class="w"> </span>-rf<span class="w"> </span>&lt;distPath&gt;/CMW_&lt;osname&gt;</code> <br/></pre></code></div>
 </li>
@@ -203,8 +199,7 @@
 <p>По окончании создания скрипт выведет информацию о компонентах экземпляра ПО. Удостоверьтесь, что компоненты успешно установлены.</p>
 <p>Пример результата выполнения скрипта:</p>
 <div class="highlight"><code><pre><span></span><code>...</code> <br/><code><span class="o">[</span>Done<span class="o">]</span><span class="w"> </span>Creating<span class="w"> </span>Log<span class="w"> </span>Directories.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>folder<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>Web<span class="w"> </span>config<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>Ignite<span class="w"> </span>config<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>binaries<span class="w"> </span>linked.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>config<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>Data<span class="w"> </span>folder<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>Database<span class="w"> </span>folder<span class="w"> </span>created:<span class="w"> </span>Yes</code> <br/><code>OK<span class="w">     </span>Streams<span class="w"> </span>folder<span class="w"> </span>created:<span class="w"> </span>No<span class="w"> </span></code> <br/><code>OK<span class="w">     </span>Logs<span class="w"> </span>folder<span class="w"> </span>created:<span class="w"> </span>Yes</code> <br/><code>OK<span class="w">     </span>Used<span class="w"> </span>version:<span class="w"> </span>&lt;version&gt;</code> <br/><code>OK<span class="w">     </span>Logs<span class="w"> </span>configured.</code> <br/><code>OK<span class="w">     </span>Sites<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>Sites<span class="w"> </span>enabled.</code> <br/><code>OK<span class="w">     </span>API<span class="w"> </span>Gateway<span class="w"> </span>configured.</code> <br/><code>OK<span class="w">     </span>Link<span class="w"> </span>to<span class="w"> </span>binaries<span class="w"> </span>is<span class="w"> </span>valid.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>service<span class="w"> </span>started.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>API<span class="w"> </span>gateway<span class="w"> </span>service<span class="w"> </span>started.</code> <br/><code>OK<span class="w">     </span>NGINX<span class="w"> </span>started.</code> <br/><code>OK<span class="w">     </span>Final<span class="w"> </span>status.</code> <br/><code><span class="o">[</span>Done<span class="o">]</span><span class="w"> </span>Upgrade<span class="w"> </span>CBAP<span class="w"> </span>instance.</code> <br/></pre></code></div>
-<p>Если какая-либо из служб имеет статус <code>FAILED</code>, перезапустите её, например:</p>
-<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>restart<span class="w"> </span>comindware&lt;instanceName&gt;.service</code> <br/><code>systemctl<span class="w"> </span>restart<span class="w"> </span>apigateway&lt;instanceName&gt;.service</code> <br/><code>systemctl<span class="w"> </span>restart<span class="w"> </span>adaperhost&lt;instanceName&gt;.service</code> <br/><code>systemctl<span class="w"> </span>restart<span class="w"> </span>kafka.service</code> <br/><code>systemctl<span class="w"> </span>restart<span class="w"> </span>elasticsearch.service<span class="w"> </span></code> <br/></pre></code></div>
+<p>Если какая-либо из служб имеет статус <code>FAILED</code>, исправьте конфигурацию, как указано ниже, и перезапустите службу.</p>
 </li>
 <li>
 <p>Отредактируйте конфигурацию NGINX для экземпляра ПО в соответствии с резервной копией, <a class="mkdocs_imported_link" href="#NginxBackup">сохранённой ранее</a>:</p>
@@ -239,8 +234,8 @@
 </div>
 </li>
 <li>
-<p>Перезапустите сервисы, настройки которых были изменены, например:</p>
-<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>restart<span class="w"> </span>apigateway&lt;instanceName&gt;<span class="w"> </span>adapterhost&lt;instanceName&gt;<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
+<p>Перезапустите сервисы <strong>Comindware Platform</strong>:</p>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>restart<span class="w"> </span>apigateway&lt;instanceName&gt;.service</code> <br/><code>systemctl<span class="w"> </span>restart<span class="w"> </span>adaperhost&lt;instanceName&gt;.service</code> <br/><code>systemctl<span class="w"> </span>restart<span class="w"> </span>comindware&lt;instanceName&gt;.service</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Откройте сайт экземпляра ПО в браузере, одновременно открыв выдачу журналов экземпляра в терминале:</p>
@@ -268,6 +263,7 @@
 <li>
 <p>Откройте сайт экземпляра ПО в браузере, дождитесь окончания загрузки, одновременно открыв выдачу журналов экземпляра в терминале:</p>
 <div class="highlight"><code><pre><span></span><code>tail<span class="w"> </span>-f<span class="w"> </span>/var/log/comindware/&lt;instanceName&gt;/Logs/heartbeat*</code> <br/></pre></code></div>
+<p>См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4623">Подсистема журналирования</a>»</em>.</p>
 </li>
 <li>
 <p id="dataUpgrade">Дождитесь завершения обновления структуры данных и проверьте его успешное выполнение.</p>
@@ -286,11 +282,11 @@
 <li>Удостоверьтесь, что в журнале <code>UpgradeOntology.log</code> последняя запись содержит строку <code>Upgrade of ontology completed successfully</code>.</li>
 <li>Удостоверьтесь, что в журнале <code>upgrade&lt;ГГГГ-ММ-ДД&gt;.log</code> последняя запись содержит строку <code>Upgrade completed</code>.</li>
 <li>Удостоверьтесь, что в журналах отсутствуют ошибки обновления. Найдите их по ключевому слову <code>error</code>.</li>
-<li>Если обновление выполнено успешно, переходите к шагу 23.</li>
+<li>Если обновление выполнено успешно, переходите к шагу 24.</li>
 <li>
 <p>Если в журнале обновления имеются ошибки:</p>
 <ol class="colored_numbers_list">
-<li>Не переходите к шагу 23.</li>
+<li>Не переходите к шагу 24.</li>
 <li>Снова установите для экземпляра старую версию ПО.</li>
 <li>Восстановите базу данных из резервной копии.</li>
 <li>Обратитесь в службу поддержки <strong>Comindware</strong>, предоставив журналы обновления и ошибок для анализа.</li>
@@ -340,16 +336,19 @@
 <div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>_nginx:_nginx<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/Database</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Откройте сайт экземпляра ПО в браузере, дождитесь его инициализации и выполните вход.</p>
+<p>Проверьте и при необходимости исправьте конфигурацию экземпляра ПО. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4651">Проверка и настройка конфигурации экземпляра ПО Comindware Platform после восстановления из резервной копии</a>»</em>.</p>
 </li>
+<li>Проверьте и работоспособность экземпляра ПО.</li>
+<li>Создайте резервную копию работоспособного экземпляра <strong>Comindware Platform</strong>.</li>
 </ol>
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5097">Обновление версии экземпляра ПО без его остановки</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622">Установка, запуск, инициализация и остановка ПО</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642">Резервное копирование. Настройка и запуск, просмотр журнала сеансов</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4623">Подсистема журналирования</a></em></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5097">Обновление версии экземпляра ПО без его остановки</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622">Установка, запуск, инициализация и остановка ПО</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642">Резервное копирование. Настройка и запуск, просмотр журнала сеансов</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4623">Подсистема журналирования</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4651">Проверка и настройка конфигурации экземпляра ПО Comindware Platform после восстановления из резервной копии</a></li>
 </ul>
 </div>
 </article>

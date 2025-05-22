@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4602" kb-title="Антивирусное ПО. Настройка исключений: пути и файлы {{ productName }}">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4602" kb-title="Антивирусное ПО. Настройка сканирования и исключений">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -9,14 +9,14 @@
       </h2>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<a class="md-nav__link mkdocs_imported_link" href="#antivirus_exceptions_configure_intro">
 <span class="md-ellipsis">
       Введение
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#процессы-файлы-и-пути-для-добавления-в-исключения-антивирусного-по">
+<a class="md-nav__link mkdocs_imported_link" href="#antivirus_exceptions_configure_objects">
 <span class="md-ellipsis">
       Процессы, файлы и пути для добавления в исключения антивирусного ПО
     </span>
@@ -24,7 +24,7 @@
 <nav aria-label="Процессы, файлы и пути для добавления в исключения антивирусного ПО" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#linux">
+<a class="md-nav__link mkdocs_imported_link" href="#antivirus_exceptions_configure_objects_linux">
 <span class="md-ellipsis">
       Linux
     </span>
@@ -32,30 +32,30 @@
 <nav aria-label="Linux" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#по-comindware-platform">
+<a class="md-nav__link mkdocs_imported_link" href="#antivirus_exceptions_configure_objects_linux_product">
 <span class="md-ellipsis">
       ПО Comindware Platform
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#apache-ignite">
+<a class="md-nav__link mkdocs_imported_link" href="#antivirus_exceptions_configure_objects_linux_ignite">
 <span class="md-ellipsis">
       Apache Ignite
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#apache-kafka">
+<a class="md-nav__link mkdocs_imported_link" href="#antivirus_exceptions_configure_objects_linux_kafka">
 <span class="md-ellipsis">
       Apache Kafka
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#elasticsearch">
+<a class="md-nav__link mkdocs_imported_link" href="#antivirus_exceptions_configure_objects_linux_elasticsearch">
 <span class="md-ellipsis">
-      ElasticSearch
+      OpenSearch (Elasticsearch)
     </span>
 </a>
 </li>
@@ -63,7 +63,7 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#windows">
+<a class="md-nav__link mkdocs_imported_link" href="#antivirus_exceptions_configure_objects_windows">
 <span class="md-ellipsis">
       Windows
     </span>
@@ -71,28 +71,28 @@
 <nav aria-label="Windows" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#по-comindware-platform_1">
+<a class="md-nav__link mkdocs_imported_link" href="#antivirus_exceptions_configure_objects_windows_product">
 <span class="md-ellipsis">
       ПО Comindware Platform
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#apache-ignite_1">
+<a class="md-nav__link mkdocs_imported_link" href="#antivirus_exceptions_configure_objects_windows_ignite">
 <span class="md-ellipsis">
       Apache Ignite
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#apache-kafka_1">
+<a class="md-nav__link mkdocs_imported_link" href="#antivirus_exceptions_configure_objects_windows_kafka">
 <span class="md-ellipsis">
       Apache Kafka
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#elasticsearch_1">
+<a class="md-nav__link mkdocs_imported_link" href="#antivirus_exceptions_configure_objects_windows_elasticsearch">
 <span class="md-ellipsis">
       ElasticSearch
     </span>
@@ -116,97 +116,110 @@
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h2 id="введение">Введение</h2>
+<h2 id="antivirus_exceptions_configure_intro">Введение</h2>
 <p>Здесь представлены сведения о настройке антивирусного программного обеспечения (далее «Антивирусное ПО») для обеспечения работоспособности ПО <strong>Comindware Platform</strong>. Перечисленные ниже компоненты ПО необходимы для его корректной работы, поэтому их необходимо добавить в список исключений в антивирусном и ином ПО, которое может их блокировать.</p>
 <p>Так как антивирусное ПО расходует вычислительные ресурсы, настоятельно рекомендуется протестировать всю систему на основе <strong>Comindware Platform</strong> под полной нагрузкой перед установкой и включением антивирусного ПО и после включения антивирусного ПО, чтобы измерить любые изменения стабильности и производительности. Это позволит определить, как антивирусное ПО влияет на производительность машины, на которой выполняется <strong>Comindware Platform</strong>.</p>
-<h2 id="процессы-файлы-и-пути-для-добавления-в-исключения-антивирусного-по">Процессы, файлы и пути для добавления в исключения антивирусного ПО</h2>
-<h3 id="linux">Linux</h3>
-<h4 id="по-comindware-platform">ПО Comindware Platform</h4>
+<p>Кроме того, здесь перечислены объекты, которые следует включить в область сканирования антивирусного ПО, для предотвращения загрузки вредоносных файлов пользователями.</p>
+<h2 id="antivirus_exceptions_configure_objects">Процессы, файлы и пути для добавления в исключения антивирусного ПО</h2>
+<h3 id="antivirus_exceptions_configure_objects_linux">Linux</h3>
+<h4 id="antivirus_exceptions_configure_objects_linux_product">ПО Comindware Platform</h4>
 <p>По умолчанию файлы экземпляра ПО находятся в каталоге <code>/var/lib/comindware/&lt;instanceName&gt;</code>, где <code>&lt;instanceName&gt;</code> — имя экземпляра ПО.</p>
 <p><em>См. также статью «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое папок экземпляра ПО</a>».</em></p>
-<p>Добавьте в исключения антивирусного ПО перечисленные ниже объекты.</p>
+<p>Обеспечьте санирование с помощью антивирусного ПО содержимого следующих директорий:</p>
+<ul>
+<li><code>/var/lib/comindware/&lt;instanceName&gt;/Temp</code> — временное хранилище загруженных файлов и скомпилированных C#-скриптов;</li>
+<li><code>/var/lib/comindware/&lt;instanceName&gt;/LocalTemp</code> — временные файлы резервных копий;</li>
+<li><code>/var/lib/comindware/&lt;instanceName&gt;/Streams</code> — файлы, загруженные пользователями и сформированные ПО.</li>
+</ul>
+<p>Добавьте в исключения антивирусного ПО следующие объекты:</p>
 <ul>
 <li>Процесс <code>w3wp / mono-boehm</code>.</li>
-<li><code>comindware&lt;instanceName&gt;.service</code> — служба экземпляра ПО.</li>
-<li><code>apigateway&lt;instanceName&gt;.service</code> — служба шлюза экземпляра ПО.</li>
+<li><code>comindware&lt;instanceName&gt;.service</code> — служба экземпляра ПО;</li>
+<li><code>apigateway&lt;instanceName&gt;.service</code> — служба шлюза экземпляра ПО;</li>
 <li><code>/var/lib/comindware/&lt;instanceName&gt;</code> — папка с экземпляром ПО;</li>
 <li><code>/usr/share/comindware/configs/instance/</code> — папка с конфигурациями экземпляров ПО;</li>
 <li><code>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code> — файл конфигурации экземпляра ПО;</li>
-<li>/var/www/<code>&lt;instanceName&gt;</code> — исполняемые и конфигурационные файлы экземпляра ПО.</li>
-<li><code>/var/lib/comindware/&lt;instanceName&gt;/Database/Scripts</code> — DLL-файлы, скомпилированные из скриптов на языке C#.</li>
-<li><code>/var/lib/comindware/&lt;instanceName&gt;/Database/FullTextSearch</code> — индексы полнотекстового поиска.</li>
-<li><code>/var/lib/comindware/&lt;instanceName&gt;/Temp</code> — временные файлы.</li>
+<li><code>/var/www/&lt;instanceName&gt;</code> — исполняемые и конфигурационные файлы экземпляра ПО;</li>
+<li><code>/var/lib/comindware/&lt;instanceName&gt;/Database/Scripts</code> — DLL-файлы, скомпилированные из скриптов на языке C#;</li>
+<li><code>/var/lib/comindware/&lt;instanceName&gt;/Database/FullTextSearch</code> — индексы полнотекстового поиска;</li>
 <li><code>/var/log/comindware/&lt;instanceName&gt;/Logs</code> — журналы экземпляра ПО.</li>
-<li><code>/var/lib/comindware/&lt;instanceName&gt;/Streams</code> — файлы, загруженные пользователями и сформированные ПО.</li>
 </ul>
-<h4 id="apache-ignite">Apache Ignite</h4>
-<p>Добавьте в исключения антивирусного ПО перечисленные ниже объекты.</p>
+<h4 id="antivirus_exceptions_configure_objects_linux_ignite">Apache Ignite</h4>
+<p>Добавьте в исключения антивирусного ПО следующие объекты:</p>
 <ul>
-<li><code>/var/lib/comindware/&lt;instanceName&gt;/Database/db</code> — база данных Apache Ignite.</li>
-<li><code>/var/lib/comindware/&lt;instanceName&gt;/Database/wal</code> — журнал предварительной записи Apache Ignite.</li>
-<li><code>/var/Lib/comindware/&lt;instanceName&gt;/Database/log</code> — журналы Apache Ignite.</li>
+<li><code>/var/lib/comindware/&lt;instanceName&gt;/Database/db</code> — база данных Apache Ignite;</li>
+<li><code>/var/lib/comindware/&lt;instanceName&gt;/Database/wal</code> — журнал предварительной записи Apache Ignite;</li>
+<li><code>/var/Lib/comindware/&lt;instanceName&gt;/Database/log</code> — журналы Apache Ignite;</li>
 <li><code>/var/lib/comindware/&lt;instanceName&gt;/Database/snapshots</code> — снимки БД Apache Ignite.</li>
 </ul>
-<h4 id="apache-kafka">Apache Kafka</h4>
-<p>Добавьте в исключения антивирусного ПО перечисленные ниже объекты.</p>
+<h4 id="antivirus_exceptions_configure_objects_linux_kafka">Apache Kafka</h4>
+<p>Добавьте в исключения антивирусного ПО следующие объекты:</p>
 <ul>
 <li><code>kafka.service</code> — служба Kafka.</li>
 <li><code>/usr/share/kafka/</code> — исполняемые файлы Kafka.</li>
 <li><code>/var/log/comindware/.kafka/</code> — база данных с топиками Kafka.</li>
 <li><code>/var/log/comindware/.kafka/</code> — журналы Kafka.</li>
 </ul>
-<h4 id="elasticsearch">ElasticSearch</h4>
-<p>Добавьте в исключения антивирусного ПО перечисленные ниже объекты.</p>
+<h4 id="antivirus_exceptions_configure_objects_linux_elasticsearch">OpenSearch (Elasticsearch)</h4>
+<p>Добавьте в исключения антивирусного ПО следующие объекты:</p>
 <ul>
 <li><code>elasticsearch.service</code> — служба ElasticSearch.</li>
-<li><code>/var/lib/elasticsearch</code> — БД ElasticSearch, см. директиву <code>path.data</code> в файле конфигурации <code>/etc/elasticsearch/elasticsearch.yml</code>.</li>
-<li><code>/var/backups/elasticsearch/logs</code> — журналы ElasticSearch, см. директиву <code>path.logs</code> в файле конфигурации <code>/etc/elasticsearch/elasticsearch.yml</code>.</li>
+<li><code>/var/lib/elasticsearch</code> — БД ElasticSearch, см. директиву <code>path.data</code> в файле конфигурации <code>/etc/elasticsearch/elasticsearch.yml</code>;</li>
+<li><code>/var/backups/elasticsearch/logs</code> — журналы ElasticSearch, см. директиву <code>path.logs</code> в файле конфигурации <code>/etc/elasticsearch/elasticsearch.yml</code>;</li>
 <li><code>/var/log/elasticsearch/repo</code> — репозиторий ElasticSearch, см. директиву <code>path.repo</code> в файле конфигурации <code>/etc/elasticsearch/elasticsearch.yml</code>.</li>
 </ul>
-<h3 id="windows">Windows</h3>
-<h4 id="по-comindware-platform_1">ПО Comindware Platform</h4>
+<h3 id="antivirus_exceptions_configure_objects_windows">Windows</h3>
+<h4 id="antivirus_exceptions_configure_objects_windows_product">ПО Comindware Platform</h4>
 <p>По умолчанию файлы экземпляра ПО находятся в каталоге <code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;</code>, где <code>&lt;instanceName&gt;</code> — имя экземпляра ПО.</p>
 <p><em>См. также статью «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое папок экземпляра ПО</a>».</em></p>
-<p>Добавьте в исключения антивируса перечисленные ниже объекты.</p>
+<p>Обеспечьте санирование с помощью антивирусного ПО содержимого следующих директорий:</p>
 <ul>
-<li><code>C:\Program Files\Comindware\CBAP</code> — исполняемые файлы ПО разных версий.</li>
-<li><code>C:\ProgramData\Comindware\configs</code> — общие файлы конфигурации ПО.</li>
-<li><code>C:\ProgramData\Comindware\Instances</code> — директория с экземплярами ПО.</li>
-<li><code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;</code> — экземпляр ПО.</li>
-<li><code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Config</code> — конфигурация экземпляра ПО.</li>
-<li><code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Data\Scripts</code> — DLL-файлы, скомпилированные из скриптов на языке C#.</li>
-<li><code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Data\FullTextSearch</code> — индексы полнотекстового поиска.</li>
-<li><code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Temp</code> — временные файлы.</li>
-<li><code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Logs</code> — журналы экземпляра ПО.</li>
+<li><code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Temp</code> — временное хранилище загруженных файлов и скомпилированных C#-скриптов;</li>
+<li><code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\LocalTemp</code> — временные файлы резервных копий;</li>
 <li><code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Streams</code> — файлы, загруженные пользователями и сформированные ПО.</li>
 </ul>
-<h4 id="apache-ignite_1">Apache Ignite</h4>
+<p>Добавьте в исключения антивирусного ПО следующие объекты:</p>
+<ul>
+<li><code>C:\Program Files\Comindware\CBAP</code> — исполняемые файлы ПО разных версий;</li>
+<li><code>C:\ProgramData\Comindware\configs</code> — общие файлы конфигурации ПО;</li>
+<li><code>C:\ProgramData\Comindware\Instances</code> — директория с экземплярами ПО;</li>
+<li><code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;</code> — экземпляр ПО;</li>
+<li><code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Config</code> — конфигурация экземпляра ПО;</li>
+<li><code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Data\Scripts</code> — DLL-файлы, скомпилированные из скриптов на языке C#;</li>
+<li><code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Data\FullTextSearch</code> — индексы полнотекстового поиска;</li>
+<li><code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Logs</code> — журналы экземпляра ПО.</li>
+</ul>
+<h4 id="antivirus_exceptions_configure_objects_windows_ignite">Apache Ignite</h4>
+<p>Добавьте в исключения антивирусного ПО следующие объекты:</p>
 <ul>
 <li><code>C:\Program Files\Comindware\CBAP\X.X.X.X\bin\Apache.Ignite*</code> — исполняемые файлы Apache Ignite для ПО версии <code>X.X.X.X</code>;</li>
-<li><code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Data\db</code> — БД Apache Ignite.</li>
-<li><code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Data\wal</code> — журнал предварительной записи Apache Ignite.</li>
-<li><code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Data\snapshots</code> — снимки БД Apache Ignite.</li>
+<li><code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Data\db</code> — БД Apache Ignite;</li>
+<li><code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Data\wal</code> — журнал предварительной записи Apache Ignite;</li>
+<li><code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Data\snapshots</code> — снимки БД Apache Ignite;</li>
 <li><code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Logs</code> — журналы Apache Ignite.</li>
 </ul>
-<h4 id="apache-kafka_1">Apache Kafka</h4>
-<p>Добавьте перечисленные ниже объекты в исключения антивирусного ПО, здесь X:\kafka_2.XX-X.X.X — директория, в которой установлено ПО Kafka версии 2.XX-X.X.X.</p>
+<h4 id="antivirus_exceptions_configure_objects_windows_kafka">Apache Kafka</h4>
+<p>Добавьте следующие объекты в исключения антивирусного ПО:</p>
 <ul>
-<li><code>C:\kafka_2.XX-X.X.X</code> — исполняемые файлы Kafka.</li>
-<li><code>C:\kafka_2.XX-X.X.X</code> — БД с топиками Kafka.</li>
-<li><code>C:\kafka_2.XX-X.X.X\zookeeper-data</code> — данные Zookeper.</li>
+<li><code>C:\kafka_2.XX-X.X.X</code> — исполняемые файлы Kafka;</li>
+<li><code>C:\kafka_2.XX-X.X.X</code> — БД с топиками Kafka;</li>
+<li><code>C:\kafka_2.XX-X.X.X\zookeeper-data</code> — данные Zookeper;</li>
 <li><code>C:\kafka_2.XX-X.X.X\kafka-logs</code> — журналы Kafka.</li>
 </ul>
-<h4 id="elasticsearch_1">ElasticSearch</h4>
+<p>Здесь <code>X:\kafka\_2.XX-X.X.X</code> — директория, в которой установлено ПО Kafka версии 2.XX-X.X.X.</p>
+<h4 id="antivirus_exceptions_configure_objects_windows_elasticsearch">ElasticSearch</h4>
+<p>Добавьте в исключения антивирусного ПО следующие объекты:</p>
 <ul>
-<li><code>C:\Program Files\Elastic\Elasticsearch\8.X.X</code> — директория с исполняемыми файлами ElasticSearch версии 8.X.X.</li>
-<li><code>C:\ProgramData\Elastic\Elasticsearch\data</code> — папка с БД, см. директиву <code>path.data</code> в файле конфигурации <code>X:\Program Files\Elastic\Elasticsearch\8.X.X\config\elasticsearch.yml</code>.</li>
-<li><code>C:\ProgramData\Elastic\Elasticsearch\repo</code> — папка с репозиторием, см. директиву <code>path.repo</code> в файле конфигурации <code>X:\Program Files\Elastic\Elasticsearch\8.X.X\config\elasticsearch.yml</code>.</li>
+<li><code>C:\Program Files\Elastic\Elasticsearch\8.X.X</code> — директория с исполняемыми файлами ElasticSearch версии 8.X.X;</li>
+<li><code>C:\ProgramData\Elastic\Elasticsearch\data</code> — папка с БД, см. директиву <code>path.data</code> в файле конфигурации <code>X:\Program Files\Elastic\Elasticsearch\8.X.X\config\elasticsearch.yml</code>;</li>
+<li><code>C:\ProgramData\Elastic\Elasticsearch\repo</code> — папка с репозиторием, см. директиву <code>path.repo</code> в файле конфигурации <code>X:\Program Files\Elastic\Elasticsearch\8.X.X\config\elasticsearch.yml</code>;</li>
 <li><code>C:\ProgramData\Elastic\Elasticsearch\logs</code> — папка с журналами, см. директиву <code>path.logs</code> в файле конфигурации <code>X:\Program Files\Elastic\Elasticsearch\8.X.X\config\elasticsearch.yml</code>.</li>
 </ul>
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое папок экземпляра ПО</a></em></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое папок экземпляра ПО</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5067">Конфигурация экземпляра, компонентов ПО и служб</a></li>
 </ul>
 </div>
 </article>

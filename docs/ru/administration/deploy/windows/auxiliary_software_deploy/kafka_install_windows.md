@@ -1,5 +1,6 @@
 ---
-title: Установка Apache Kafka в Windows
+title: 'Установка Apache Kafka в Windows'
+kbTitle: 'Установка Apache Kafka в ОС Windows и подключение к Comindware Platform'
 kbId: 4614
 tags:
     - установка Kafka
@@ -12,7 +13,7 @@ hide:
     - tags
 ---
 
-# Установка Apache Kafka В ОС Windows и подключение к {{ productName }}
+# Установка Apache Kafka в ОС Windows и подключение к {{ productName }} {: #kafka_deploy_windows }
 
 ## Введение
 

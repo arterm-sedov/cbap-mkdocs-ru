@@ -99,12 +99,6 @@ kbId: 4624
     systemctl status apigateway<instanceName> adapterhost<instanceName> comindware<instanceName>
     ```
 
-5. Проверьте статус созданного экземпляра:
-
-    ``` sh
-    systemctl status comindware<instanceName>
-    ```
-
 6. Удалите (или переместите в резервное хранилище) неиспользуемые предыдущие дистрибутивы ПО (`<distPath>` — путь к директории с дистрибутивом, `<osname>` — название операционной системы):
 
     ``` sh
@@ -241,15 +235,7 @@ kbId: 4624
     [Done] Upgrade CBAP instance.
     ```
 
-    Если какая-либо из служб имеет статус `FAILED`, перезапустите её, например:
-
-    ``` sh
-    systemctl restart comindware<instanceName>.service
-    systemctl restart apigateway<instanceName>.service
-    systemctl restart adaperhost<instanceName>.service
-    systemctl restart kafka.service
-    systemctl restart elasticsearch.service 
-    ```
+    Если какая-либо из служб имеет статус `FAILED`, исправьте конфигурацию, как указано ниже, и перезапустите службу.
 
 12. Отредактируйте конфигурацию NGINX для экземпляра ПО в соответствии с резервной копией, [сохранённой ранее](#NginxBackup):
 
@@ -292,10 +278,12 @@ kbId: 4624
         - В новейших версиях **{{ productName }}** отсутствует файл `Workers.config`.
         - Настройка соответствующих служб выполняется в файле конфигурации экземпляра ПО `<instanceName>.yml`.
 
-15. Перезапустите сервисы, настройки которых были изменены, например:
+15. Перезапустите сервисы **{{ productName }}**:
 
     ``` sh
-    systemctl restart apigateway<instanceName> adapterhost<instanceName> comindware<instanceName>
+    systemctl restart apigateway<instanceName>.service
+    systemctl restart adaperhost<instanceName>.service
+    systemctl restart comindware<instanceName>.service
     ```
 
 16. Откройте сайт экземпляра ПО в браузере, одновременно открыв выдачу журналов экземпляра в терминале:
@@ -337,6 +325,8 @@ kbId: 4624
     tail -f /var/log/comindware/<instanceName>/Logs/heartbeat*
     ```
 
+    См. _«[Подсистема журналирования][logging_engine]»_.
+
 23. Дождитесь завершения обновления структуры данных и проверьте его успешное выполнение.
 {: #dataUpgrade }
 
@@ -354,10 +344,10 @@ kbId: 4624
     - Удостоверьтесь, что в журнале `UpgradeOntology.log` последняя запись содержит строку `Upgrade of ontology completed successfully`.
     - Удостоверьтесь, что в журнале `upgrade<ГГГГ-ММ-ДД>.log` последняя запись содержит строку `Upgrade completed`.
     - Удостоверьтесь, что в журналах отсутствуют ошибки обновления. Найдите их по ключевому слову `error`.
-    - Если обновление выполнено успешно, переходите к шагу 23.
+    - Если обновление выполнено успешно, переходите к шагу 24.
     - Если в журнале обновления имеются ошибки:
 
-        1. Не переходите к шагу 23.
+        1. Не переходите к шагу 24.
         2. Снова установите для экземпляра старую версию ПО.
         3. Восстановите базу данных из резервной копии.
         4. Обратитесь в службу поддержки **{{ companyName }}**, предоставив журналы обновления и ошибок для анализа.
@@ -371,7 +361,7 @@ kbId: 4624
     - c помощью скрипта для создания снимка базы.
 
 25. Остановите экземпляр ПО.
-26. Распакуйте резервную копию и удалите из неё следующие директории кэшей:
+27. Распакуйте резервную копию и удалите из неё следующие директории кэшей:
 
     ``` sh
     rm -rf cacheGroup-*-TableIdentity
@@ -384,14 +374,14 @@ kbId: 4624
     rm -rf cacheGroup-Keys
     ```
 
-27. Очистите директорию с базой данных экземпляра ПО:
+28. Очистите директорию с базой данных экземпляра ПО:
 
     ``` sh
     rm -rf /var/lib/comindware/<instanceName>/Database/*
     ```
 
-28. Скопируйте очищенную резервную копию в директорию с базой данных `/var/lib/comindware/<instanceName>/Database/`.
-29. Назначьте владельца директории с базой данных:
+29. Скопируйте очищенную резервную копию в директорию с базой данных `/var/lib/comindware/<instanceName>/Database/`.
+30. Назначьте владельца директории с базой данных:
 
     - **Astra Linux, Ubuntu, Debian** (DEB-based)
 
@@ -411,16 +401,19 @@ kbId: 4624
     chown -R _nginx:_nginx /var/lib/comindware/<instanceName>/Database
     ```
 
-30. Откройте сайт экземпляра ПО в браузере, дождитесь его инициализации и выполните вход.
+31. Проверьте и при необходимости исправьте конфигурацию экземпляра ПО. См. _«[Проверка и настройка конфигурации экземпляра ПО {{ productName }} после восстановления из резервной копии][restore_test_configure]»_.
+32. Проверьте и работоспособность экземпляра ПО.
+33. Создайте резервную копию работоспособного экземпляра **{{ productName }}**.
 
 <div class="relatedTopics" markdown="block">
 
 --8<-- "related_topics_heading.md"
 
-- _[Обновление версии экземпляра ПО без его остановки][upgrade_version_linux_no_stop]_
-- _[Установка, запуск, инициализация и остановка ПО][deploy_guide_linux]_
-- _[Резервное копирование. Настройка и запуск, просмотр журнала сеансов][backup_configure]_
-- _[Подсистема журналирования][logging_engine]_
+- [Обновление версии экземпляра ПО без его остановки][upgrade_version_linux_no_stop]
+- [Установка, запуск, инициализация и остановка ПО][deploy_guide_linux]
+- [Резервное копирование. Настройка и запуск, просмотр журнала сеансов][backup_configure]
+- [Подсистема журналирования][logging_engine]
+- [Проверка и настройка конфигурации экземпляра ПО {{ productName }} после восстановления из резервной копии][restore_test_configure]
 
 </div>
 

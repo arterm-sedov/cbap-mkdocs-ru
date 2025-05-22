@@ -9,33 +9,26 @@
       </h2>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<a class="md-nav__link mkdocs_imported_link" href="#backup_restore_windows_intro">
 <span class="md-ellipsis">
       Введение
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#подготовка-к-резервному-копированию-и-восстановлению-данных">
+<a class="md-nav__link mkdocs_imported_link" href="#backup_restore_windows_prepare">
 <span class="md-ellipsis">
       Подготовка к резервному копированию и восстановлению данных
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#порядок-резервного-копирования-данных-экземпляра-продукта">
+<a class="md-nav__link mkdocs_imported_link" href="#backup_restore_windows_prepare_sequence_backup">
 <span class="md-ellipsis">
-      Порядок резервного копирования данных экземпляра продукта
+      Порядок резервного копирования данных экземпляра ПО
     </span>
 </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#выполнение-резервного-копирования">
-<span class="md-ellipsis">
-      Выполнение резервного копирования
-    </span>
-</a>
-<nav aria-label="Выполнение резервного копирования" class="md-nav">
+<nav aria-label="Порядок резервного копирования данных экземпляра ПО" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#backup_restore_windows_registry_snapshot">
@@ -44,31 +37,24 @@
     </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#сохранение-резервной-копии-базы-данных-экземпляра-продукта">
-<span class="md-ellipsis">
-      Сохранение резервной копии базы данных экземпляра продукта
-    </span>
-</a>
-</li>
 </ul>
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#порядок-восстановления-данных-экземпляра-продукта">
+<a class="md-nav__link mkdocs_imported_link" href="#backup_restore_windows_prepare_sequence_restore">
 <span class="md-ellipsis">
-      Порядок восстановления данных экземпляра продукта
+      Порядок восстановления данных экземпляра ПО
+    </span>
+</a>
+<nav aria-label="Порядок восстановления данных экземпляра ПО" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#backup_restore_windows_instance">
+<span class="md-ellipsis">
+      Восстановление базы данных экземпляра продукта
     </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#выполнение-восстановления">
-<span class="md-ellipsis">
-      Выполнение восстановления
-    </span>
-</a>
-<nav aria-label="Выполнение восстановления" class="md-nav">
-<ul class="md-nav__list">
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#backup_restore_windows_opensearch">
 <span class="md-ellipsis">
@@ -76,20 +62,13 @@
     </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#восстановление-базы-данных-экземпляра-продукта">
-<span class="md-ellipsis">
-      Восстановление базы данных экземпляра продукта
-    </span>
-</a>
-</li>
 </ul>
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#проверка-конфигурации-экземпляра-по">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
 <span class="md-ellipsis">
-      Проверка конфигурации экземпляра ПО
+      Связанные статьи
     </span>
 </a>
 </li>
@@ -98,177 +77,131 @@
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h2 id="введение">Введение</h2>
+<h2 id="backup_restore_windows_intro">Введение</h2>
 <p>Здесь представлены инструкции по резервному копированию и восстановлению данных <strong>Comindware Platform</strong> в ОС Windows.</p>
+<p>См. также «<em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642">Резервное копирование. Настройка и запуск, просмотр журнала сеансов</a>»</em>.</p>
+<h2 id="backup_restore_windows_prepare">Подготовка к резервному копированию и восстановлению данных</h2>
+<p>Для создания резервных копий и восстановления из них данных <strong>Comindware Platform</strong> необходимо подготовить перечисленные ниже сведения.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Подготовьте данные о конфигурации экземпляра ПО:</p>
+<ul>
+<li>Имя экземпляра ПО — <code>&lt;instanceName&gt;</code>.</li>
+<li>Путь к папке резервных копий базы данных — <code>&lt;DatabaseBackupPath&gt;</code> (например, <code>X:\DatabaseBackups</code>).  См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642#backup_configure_list_view">Настройка конфигураций и запуск резервного копирования</a>»</em>.</li>
+<li><code>&lt;distPath&gt;</code> — путь к распакованному дистрибутиву ПО <strong>Comindware Platform</strong>.</li>
+</ul>
+</li>
+<li>
+<p>Подготовьте данные о конфигурации OpenSearch (Elasticsearch):</p>
+<ul>
+<li>Путь к файлу конфигурации OpenSearch (Elasticsearch) <code>elasticsearch.yml</code> (например: <code>C:\ElasticsearchData\elasticsearch.yml</code>)</li>
+<li>Имя репозитория снимков OpenSearch (Elasticsearch) — <code>&lt;repository_name&gt;</code> (например, <code>elastic_backup</code>).</li>
+<li>Путь к репозиторию снимков OpenSearch (Elasticsearch) — <code>&lt;elastic_backup_path&gt;</code>(например, <code>e:\elastic_backup</code>).</li>
+<li>Имя снимка OpenSearch (Elasticsearch) — <code>&lt;snapshot_name&gt;</code> (например, <code>&lt;instanceName&gt;01022022080800</code> — в формате <code>&lt;instanceName&gt;&lt;Date&gt;&lt;Time&gt;</code>).</li>
+</ul>
+<p>См. <a class="mkdocs_imported_link" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html#api-date-math-index-names">документацию OpenSearch (Elasticsearch) по формированию имён снимков</a>.</p>
+</li>
+</ol>
+<h2 id="backup_restore_windows_prepare_sequence_backup">Порядок резервного копирования данных экземпляра ПО</h2>
+<p>Данные экземпляра ПО находятся в двух хранилищах: базе данных экземпляра ПО и на сервере OpenSearch (Elasticsearch). Cм. <em>«<a class="mkdocs_imported_link" href="#backup_restore_windows_prepare">Подготовка к резервному копированию и восстановлению данных</a>»</em>.</p>
+<p>Здесь представлен следующий порядок резервного копирования:</p>
+<ol class="colored_numbers_list">
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642#backup_configure_list_view">Сохраните резервную копию базы данных экземпляра продукта</a>.</li>
+<li><a class="mkdocs_imported_link" href="#backup_restore_windows_registry_snapshot">Создайте снимок сервера OpenSearch (Elasticsearch)</a>. Этот шаг может не потребоваться в зависимости от вашей конфигурации OpenSearch (Elasticsearch).</li>
+</ol>
+<h3 id="backup_restore_windows_registry_snapshot">Регистрация репозитория и создание снимка OpenSearch (Elasticsearch)</h3>
 <div class="notice notice-success">
 <p class="admonition-title">Определения</p>
 <p><strong>OpenSearch (Elasticsearch)</strong> — служба журналирования транзакций в составе <strong>Comindware Platform</strong>.</p>
 <p><strong>Снимок</strong> — набор данных, сохранённый на определённый момент времени.</p>
 </div>
-<h2 id="подготовка-к-резервному-копированию-и-восстановлению-данных">Подготовка к резервному копированию и восстановлению данных</h2>
-<p>Для создания резервных копий и восстановления из них данных Comindware Platform необходимо подготовить конфигурацию резервного копирования, как указано ниже.</p>
 <ol class="colored_numbers_list">
 <li>
-<p><a class="mkdocs_imported_link" id="P1.1"></a>Подготовьте следующие данные о конфигурации экземпляра продукта:</p>
-<ul>
-<li>Название экземпляра продукта — <code>&lt;InstanceName&gt;</code>(например, <code>CBAP4.2</code>).</li>
-<li>Путь к папке с базой данных экземпляра продукта, например <code>DatabasePath</code> (по умолчанию: <code>C:\ProgramData\Comindware\Instances\&lt;InstanceName&gt;\Data</code>).</li>
-<li>Путь к папке резервных копий базы данных — <code>DatabaseBackupPath</code> (например, <code>С:\DatabaseBackups</code>).</li>
-<li>Имя репозитория снимков OpenSearch (Elasticsearch) — <em><code>repository_name</code></em> (например, <code>elastic_backup</code>).</li>
-<li>Путь к репозиторию снимков OpenSearch (Elasticsearch) — <code>elastic_backup_path</code>(например, <code>e:\elastic_backup</code>).</li>
-<li>Имя снимка OpenSearch (Elasticsearch) — <code>snapshot_name</code> (например, <code>&lt;InstanceName&gt;01022022080800</code> — в формате <code>&lt;&lt;InstanceName&gt;&gt;&lt;Date&gt;&lt;Time&gt;</code>). См. инструкции OpenSearch (Elasticsearch) по формированию имён снимков с использованием текущей даты  (на английском языке): <a class="mkdocs_imported_link" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html#api-date-math-index-names">https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html#api-date-math-index-names</a>.</li>
-</ul>
+<p>Настройте конфигурацию репозитория снимков сервера OpenSearch (Elasticsearch) в файле <code>elasticsearch.yml</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nt">path.repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;elastic_backup_path&gt;</span></code> <br/></pre></code></div>
 </li>
 <li>
-<p>Настройте конфигурацию репозитория снимков сервера OpenSearch (Elasticsearch).</p>
-<ol class="colored_numbers_list">
-<li>
-<p>Откройте файл <code>elasticsearch.yml</code> в папке с данными конфигурации OpenSearch (Elasticsearch) (например: <code>C:\ElasticsearchData</code>)</p>
+<p>Чтобы зарегистрировать репозиторий, выполните следующую команду, указав в URL имя репозитория <code>&lt;repository_name&gt;</code> (см. <em>«<a class="mkdocs_imported_link" href="#backup_restore_windows_prepare">Подготовка к резервному копированию и восстановлению данных</a>»</em>), а в параметре <code>location</code> — путь к репозиторию из директивы <code>path.repo</code> в файле конфигурации сервера OpenSearch (Elasticsearch):</p>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/&lt;repository_name&gt;?pretty"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="s1">' {"type": "fs", "settings": {"location": "&lt;elastic_backup_path&gt;"}}'</span></code> <br/></pre></code></div>
+<p>См. <a class="mkdocs_imported_link" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html">документацию OpenSearch (Elasticsearch) по регистрации репозитория</a>.</p>
 </li>
 <li>
-<p><a class="mkdocs_imported_link" id="P1.2.2"></a>В файле <code>elasticsearch.yml</code> и добавьте директиву <code>path.repo</code> и через двоеточие укажите путь к репозиторию снимков (папке с резервными копиями), например:</p>
+<p>Чтобы создать снимок OpenSearch (Elasticsearch), выполните следующую команду, указав имя снимка <code>&lt;snapshot_name&gt;</code>, а в параметре <code>indices</code> — индексы, которые требуется включить в снимок (индексы Comindware Platform имеют префикс, например, <code>cmw_&lt;instanceName&gt;_</code>):</p>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/&lt;repository_name&gt;/&lt;snapshot_name&gt;?wait_for_completion=true&amp;pretty"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="s1">' {"indices": "cmw_&lt;instanceName&gt;_*", "ignore_unavailable": true, "include_global_state": false}'</span></code> <br/></pre></code></div>
+<p>См. <a class="mkdocs_imported_link" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-take-snapshot.html">документацию OpenSearch (Elasticsearch) по созданию снимков</a>.</p>
 </li>
 </ol>
-<div class="highlight"><code><pre><span></span><code><span class="nt">path.repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elastic_backup_path</span></code> <br/></pre></code></div>
-</li>
-</ol>
-<h2 id="порядок-резервного-копирования-данных-экземпляра-продукта">Порядок резервного копирования данных экземпляра продукта</h2>
-<p>Данные экземпляра продукта хранятся в двух независимых друг от друга хранилищах: на сервере OpenSearch (Elasticsearch) и в папке с базой данных экземпляра продукта — <code>DatabasePath</code>. Cм. <em>«<a class="mkdocs_imported_link" href="#подготовка-к-резервному-копированию-и-восстановлению-данных">Подготовка к резервному копированию и восстановлению данных</a>»</em>.</p>
-<p>Так как осуществить одновременное резервное копирование двух хранилищ не представляется возможным, резервное копирование данных из каждого хранилища выполняется отдельно в два этапа и в отдельные папки:</p>
-<ol class="colored_numbers_list">
-<li><a class="mkdocs_imported_link" href="#backup_restore_windows_registry_snapshot">Создание снимка сервера OpenSearch (Elasticsearch)</a> — данные истории и мониторинга копируются в отдельную папку.</li>
-<li><a class="mkdocs_imported_link" href="#сохранение-резервной-копии-базы-данных-экземпляра-продукта">Сохранение резервной копии базы данных экземпляра продукта</a> в папку <code>DatabaseBackupPath</code>.</li>
-</ol>
-<h2 id="выполнение-резервного-копирования">Выполнение резервного копирования</h2>
-<h3 id="backup_restore_windows_registry_snapshot">Регистрация репозитория и создание снимка OpenSearch (Elasticsearch)</h3>
-<ol class="colored_numbers_list">
-<li>
-<p>Чтобы зарегистрировать репозиторий, выполните следующую команду, указав в URL имя репозитория <code>repository_name</code> (см. <em>«<a class="mkdocs_imported_link" href="#подготовка-к-резервному-копированию-и-восстановлению-данных">Подготовка к резервному копированию и восстановлению данных</a>»</em>), а в параметре <code>location</code> — путь к репозиторию из директивы <code>path.repo</code> в файле конфигурации сервера OpenSearch (Elasticsearch):</p>
-<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/repository_name?pretty"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="s1">' {"type": "fs", "settings": {"location": "elastic_backup_path"}}'</span></code> <br/></pre></code></div>
-<p>Подробные сведения о регистрации репозитория OpenSearch (Elasticsearch) см. в официальной документации (на английском языке): <a class="mkdocs_imported_link" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html</a></p>
-</li>
-<li>
-<p>Чтобы создать снимок OpenSearch (Elasticsearch), выполните следующую команду, указав имя снимка <code>snapshot_name</code>, а в параметре <code>indices</code> — индексы, которые требуется включить в снимок (индексы Comindware Platform имеют префикс, например, <code>cmw_&lt;&lt;InstanceName&gt;&gt;_</code>):</p>
-<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/repository_name/snapshot_name?wait_for_completion=true&amp;pretty"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="s1">' {"indices": "cmw_&lt;&lt;InstanceName&gt;&gt;_*", "ignore_unavailable": true, "include_global_state": false}'</span></code> <br/></pre></code></div>
-<p>Подробные сведения о создании снимка OpenSearch (Elasticsearch) см. в официальной документации (на английском языке): <a class="mkdocs_imported_link" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-take-snapshot.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-take-snapshot.html</a></p>
-</li>
-</ol>
-<h3 id="сохранение-резервной-копии-базы-данных-экземпляра-продукта">Сохранение резервной копии базы данных экземпляра продукта</h3>
-<ol class="colored_numbers_list">
-<li>В экземпляре продукта откройте раздел «<strong>Администрирование</strong>» — «<strong>Инфраструктура</strong>» — «<strong>Резервное копирование</strong>».</li>
-<li>
-<p>Нажмите кнопку «<strong>Создать</strong>» в списке конфигураций резервного копирования.</p>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Создание новой конфигурации резервного копирования" src="https://kb.comindware.ru/assets/img_6321d80a2b32d.png"/><figcaption class="caption">Создание новой конфигурации резервного копирования</figcaption></figure></p>
-</li>
-<li>
-<p><a class="mkdocs_imported_link" id="P3.2.3"></a>В окне «<strong>Новая конфигурация резервного копирования</strong>»:</p>
-<ol class="colored_numbers_list">
-<li>В поле «<strong>Название</strong>» укажите наглядное название конфигурации (например, «<code>Резервная копия &lt;InstanceName&gt;</code>»).</li>
-<li>В поле «<strong>Путь к файлу</strong>» укажите путь к файлу резервной копии в папке <code>DatabaseBackupPath</code> на сервере. См. <em>«<a class="mkdocs_imported_link" href="#подготовка-к-резервному-копированию-и-восстановлению-данных">Подготовка к резервному копированию и восстановлению данных</a>»</em>.</li>
-<li>В поле «<strong>Имя файла</strong>» укажите имя файла резервной копии (например, <code>Backup</code>).</li>
-<li>Установите флажки «<strong>С файлами</strong>» и «<strong>Со скриптами</strong>».</li>
-<li>Нажмите кнопку «<strong>Сохранить</strong>».</li>
-</ol>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка новой конфигурации резервного копирования" src="https://kb.comindware.ru/assets/img_6321d7573245a.png"/><figcaption class="caption">Настройка новой конфигурации резервного копирования</figcaption></figure></p>
-</li>
-<li>
-<p>Запустите резервное копирование:</p>
-<ol class="colored_numbers_list">
-<li>В списке конфигураций резервного копирования с помощью флажка выбора выберите созданную на <a class="mkdocs_imported_link" href="#P3.2.3">шаге 3</a> конфигурацию.</li>
-<li>Нажмите кнопку «<strong>Запустить копирование</strong>».</li>
-</ol>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Запуск резервного копирования" src="https://kb.comindware.ru/assets/img_6321d902288c2.png"/><figcaption class="caption">Запуск резервного копирования</figcaption></figure></p>
-</li>
-<li>
-<p>В фоновом режиме начнется процесс резервного копирования.</p>
-</li>
-<li>Прогресс и результат резервного копирования можно просмотреть в журнале резервного копирования, выбрав вкладку «<strong>Журнал</strong>» над списком конфигураций резервного копирования.</li>
-<li>
-<p>В процессе резервного копирования к имени файла, указанному <a class="mkdocs_imported_link" href="#P3.2.3">на шаге 3</a> будут добавлена метка времени в формате <code>ГГГГММДДЧЧММ</code> и расширение <code>CDBBZ</code>, например для имени файла <code>Backup</code>: <code>Backup``.202202161625.cdbbz</code></p>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Переход к журналу резервного копирования" src="https://kb.comindware.ru/assets/img_6321dbd1da164.png"/><figcaption class="caption">Переход к журналу резервного копирования</figcaption></figure></p>
-</li>
-</ol>
-<h2 id="порядок-восстановления-данных-экземпляра-продукта">Порядок восстановления данных экземпляра продукта</h2>
-<p>Данные экземпляра продукта хранятся в трех независимых друг от друга хранилищах:  сервере Apache Ignite, сервере OpenSearch (Elasticsearch) и папке <code>DatabaseBackupPath</code> (см. <em>«<a class="mkdocs_imported_link" href="#подготовка-к-резервному-копированию-и-восстановлению-данных">Подготовка к резервному копированию и восстановлению данных</a>»</em>). Поэтому восстановление осуществляется последовательно для каждого хранилища.</p>
+<h2 id="backup_restore_windows_prepare_sequence_restore">Порядок восстановления данных экземпляра ПО</h2>
 <div class="notice notice-warning">
 <p class="admonition-title">Внимание!</p>
-<p>Восстановление следует выполнять при остановленном экземпляре продукта.</p>
+<p>Перед восстановлением данных остановите экземпляр ПО.</p>
+<p>См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5063">Установка, запуск, инициализация и остановка Comindware Platform в Windows</a>»</em>.</p>
 </div>
-<p>Восстановление данных из резервных копий выполняется в два этапа:</p>
 <ol class="colored_numbers_list">
-<li><a class="mkdocs_imported_link" href="#backup_restore_windows_opensearch">Восстановление снимка сервера OpenSearch (Elasticsearch)</a>.</li>
-<li><a class="mkdocs_imported_link" href="#восстановление-базы-данных-экземпляра-продукта">Восстановление базы данных экземпляра продукта</a> из папки <code>DatabaseBackupPath</code>.</li>
+<li><a class="mkdocs_imported_link" href="#backup_restore_windows_instance">Восстановите базу данных экземпляра ПО</a>.</li>
+<li><a class="mkdocs_imported_link" href="#backup_restore_windows_opensearch">Восстановите снимок данных OpenSearch (Elasticsearch)</a>. Этот шаг может не потребоваться в зависимости от вашей конфигурации OpenSearch (Elasticsearch).</li>
 </ol>
-<h2 id="выполнение-восстановления">Выполнение восстановления</h2>
+<h3 id="backup_restore_windows_instance">Восстановление базы данных экземпляра продукта</h3>
+<ol class="colored_numbers_list">
+<li>Запустите <em>PowerShell</em> от имени администратора.</li>
+<li>
+<p>Перейдите в директорию со скриптами для развёртывания ПО <strong>Comindware Platform</strong>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd </span><span class="s2">"&lt;distPath&gt;\CMW_Windows&lt;versionNumber&gt;\scripts"</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Остановите экземпляр ПО:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">instance_stop</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Удалите или переместите директорию <code>Database</code> из  директории  экземпляра ПО:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">Remove-Item</span> <span class="n">-Path</span> <span class="s2">"C:\ProgramData\comindware\Instances\&lt;instanceName&gt;\Database"</span> <span class="n">-Recurse</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Распакуйте zip-архив резервной копии экземпляра ПО с расширением <code>CDBBZ</code> из папки <code>&lt;DatabaseBackupPath&gt;</code>.</p>
+</li>
+<li>
+<p>Скопируйте в экземпляр ПО распакованную резервную копию базы данных:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">Copy-Item</span> <span class="n">-Path</span> <span class="s2">"&lt;config_backup_path&gt;\Database"</span> <span class="n">-Destination</span> <span class="s2">"C:\ProgramData\сomindware\Instances\&lt;instanceName&gt;"</span> <span class="n">-Recurse</span> <span class="n">-Force</span></code> <br/></pre></code></div>
+<p>Здесь: <code>&lt;config_backup_path&gt;</code> — директория с распакованной резервной копией.</p>
+</li>
+<li>
+<p>Запустите экземпляр ПО:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">instance_start</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Откройте сайт экземпляра ПО в браузере, одновременно открыв выдачу журналов экземпляра в <em>PowerShell</em>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">Get-Content</span> <span class="s2">"C:\ProgramData\comindware\Instances\&lt;instanceName&gt;\Logs\heartbeat_&lt;ГГГГ-ММ-ДД&gt;.log"</span> <span class="n">-Wait</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Проверьте и при необходимости исправьте конфигурацию экземпляра ПО. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4651">Проверка и настройка конфигурации экземпляра ПО Comindware Platform после восстановления из резервной копии</a>»</em>.</p>
+</li>
+<li>Проверьте и работоспособность экземпляра ПО.</li>
+<li>Создайте резервную копию работоспособного экземпляра <strong>Comindware Platform</strong>.</li>
+</ol>
 <h3 id="backup_restore_windows_opensearch">Восстановление снимка OpenSearch (Elasticsearch)</h3>
 <ol class="colored_numbers_list">
-<li>Выполните следующую команду, указав имя репозитораия <code>repository_name</code> и имя снимка <code>snapshot_name</code> (см. <em>«<a class="mkdocs_imported_link" href="#подготовка-к-резервному-копированию-и-восстановлению-данных">Подготовка к резервному копированию и восстановлению данных</a>»</em>):</li>
+<li>Выполните следующую команду, указав имя репозитория <code>&lt;repository_name&gt;</code> и имя снимка <code>&lt;snapshot_name&gt;</code> (см. <em>«<a class="mkdocs_imported_link" href="#backup_restore_windows_prepare">Подготовка к резервному копированию и восстановлению данных</a>»</em>):</li>
 </ol>
-<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/repository_name/snapshot_name/_restore?pretty"</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/&lt;repository_name&gt;/&lt;snapshot_name&gt;/_restore?pretty"</span></code> <br/></pre></code></div>
 <p>Подробные сведения о восстановлении снимков OpenSearch (Elasticsearch) см. в официальной документации (на английском языке): <a class="mkdocs_imported_link" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-restore-snapshot.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-restore-snapshot.html</a></p>
-<h3 id="восстановление-базы-данных-экземпляра-продукта">Восстановление базы данных экземпляра продукта</h3>
-<ol class="colored_numbers_list">
-<li>Восстановите базу данных экземпляра продукта согласно инструкциям в статье «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4639">Восстановление экземпляра продукта из резервной копии</a>».</li>
-</ol>
-<h2 id="проверка-конфигурации-экземпляра-по">Проверка конфигурации экземпляра ПО</h2>
-<ol class="colored_numbers_list">
-<li>Запустите экземпляр ПО.</li>
-<li>При необходимости откроется страница настройки подключения к службе OpenSearch (Elasticsearch).</li>
-<li>В поле «URI» введите адрес автоматически своего сервера OpenSearch (Elasticsearch).</li>
-<li>Введите <strong>префикс индекса</strong>, <strong>имя пользователя</strong> и <strong>пароль сервера OpenSearch (Elasticsearch)</strong>.</li>
-<li>
-<p>Нажмите кнопку «<strong>Далее</strong>».</p>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка подключения к OpenSearch (Elasticsearch)" src="https://kb.comindware.ru/assets/Picture16.png"/><figcaption class="caption">Настройка подключения к OpenSearch (Elasticsearch)</figcaption></figure></p>
-</li>
-<li>
-<p>При необходимости откроется страница инициализации данных в OpenSearch (Elasticsearch).</p>
-</li>
-<li>
-<p>Нажмите кнопку «<strong>Обновить</strong>».</p>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Страница инициализации данных в OpenSearch (Elasticsearch)" src="https://kb.comindware.ru/assets/Picture17.png"/><figcaption class="caption">Страница инициализации данных в OpenSearch (Elasticsearch)</figcaption></figure></p>
-</li>
-<li>
-<p>Дождитесь открытия начальной страницы <strong>Comindware Platform</strong>.</p>
-</li>
-<li>
-<p>Откройте страницу «<strong>Администрирование</strong>» — «<strong>Подключения</strong>».</p>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Переход к свойства подключения к OpenSearch (Elasticsearch)" src="https://kb.comindware.ru/assets/img_64d09fd6ec3ba.png"/><figcaption class="caption">Переход к свойства подключения к OpenSearch (Elasticsearch)</figcaption></figure></p>
-</li>
-<li>
-<p>Откройте подключение к серверу OpenSearch (Elasticsearch).</p>
-</li>
-<li>
-<p>Удостоверьтесь, что корректно указаны <strong>префикс индекса</strong> и <strong>URL подключения</strong> к серверу OpenSearch (Elasticsearch).</p>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Свойства подключения к серверу OpenSearch (Elasticsearch)" src="https://kb.comindware.ru/assets/img_64d0a41fc5e0b.png"/><figcaption class="caption">Свойства подключения к серверу OpenSearch (Elasticsearch)</figcaption></figure></p>
-</li>
-<li>
-<p>Откройте страницу «<strong>Администрирование</strong>» — «<strong>Глобальная конфигурация</strong>».</p>
-</li>
-<li>
-<p>Удостоверьтесь, что указан корректный <strong>URL-адрес сервера</strong>.</p>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="URL-адрес сервера в глобальной конфигурации" src="https://kb.comindware.ru/assets/img_64d0a4feebc80.png"/><figcaption class="caption">URL-адрес сервера в глобальной конфигурации</figcaption></figure></p>
-</li>
-<li>
-<p>Откройте страницу «<strong>Администрирование</strong>» — «<strong>Резервное копирование</strong>».</p>
-</li>
-<li>
-<p>Удостоверьтесь, что в конфигурациях резервного копирования правильно указаны пути для сохранения резервных копий.</p>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Путь к папке резервных копий в конфигурации резервного копирования" src="https://kb.comindware.ru/assets/img_64d0a5817d06a.png"/><figcaption class="caption">Путь к папке резервных копий в конфигурации резервного копирования</figcaption></figure></p>
-</li>
-<li>
-<p>При необходимости измените конфигурации резервного копирования, указав корректные пути к файлам.</p>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка пути к файлам резервной копии" src="https://kb.comindware.ru/assets/img_64d0a5f075838.png"/><figcaption class="caption">Настройка пути к файлам резервной копии</figcaption></figure></p>
-</li>
-</ol>
-</article>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642">Резервное копирование. Настройка и запуск, просмотр журнала сеансов</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5063">Установка, запуск, инициализация и остановка Comindware Platform в Windows</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4651">Проверка и настройка конфигурации экземпляра ПО Comindware Platform после восстановления из резервной копии</a></li>
+<li><a class="mkdocs_imported_link" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html#api-date-math-index-names">Документация OpenSearch (Elasticsearch) по формированию снимков (на английском языке)</a></li>
+<li><a class="mkdocs_imported_link" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html">Документация OpenSearch (Elasticsearch) по регистрации репозитория (на английском языке)</a></li>
+<li><a class="mkdocs_imported_link" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-take-snapshot.html">Документация OpenSearch (Elasticsearch) по созданию снимков (на английском языке)</a></li>
+<li><a class="mkdocs_imported_link" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-restore-snapshot.html">Документация OpenSearch (Elasticsearch) по о восстановлению снимков (на английском языке)</a></li>
+</ul>
+</article></div>
 </div>
-</div>
+</main></div>
 <a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
 <i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
             К началу
           </a>
-</main>
-</div>
 <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
 document$.subscribe(() => { lightbox.reload() });
 </script></div>

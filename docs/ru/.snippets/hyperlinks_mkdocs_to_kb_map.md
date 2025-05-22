@@ -104,6 +104,8 @@
 
 [backup_configure]: {{ kbArticleURLPrefix }}4642
 
+[backup_configure_list_view]: {{ kbArticleURLPrefix }}4642#backup_configure_list_view
+
 [backup_recommendations]: {{ kbArticleURLPrefix }}5082
 
 [changelog]: {{ kbArticleURLPrefix }}4589
@@ -714,6 +716,8 @@
 
 [variables]: {{ kbArticleURLPrefix }}4804
 
+[variables_csharp]: {{ kbArticleURLPrefix }}4804#variables_csharp
+
 [zabbix_deploy]: {{ kbArticleURLPrefix }}4609
 
 [zabbix_agent_deploy]: {{ kbArticleURLPrefix }}4608
@@ -752,7 +756,15 @@
 
 [db_move_manual_windows]: {{ kbArticleURLPrefix }}4646
 
+[deploy_guide_windows]: {{ kbArticleURLPrefix }}5063
+
+[deploy_guide_windows_install_prerequisites]: {{ kbArticleURLPrefix }}5063#deploy_guide_windows_install_prerequisites
+
+[deploy_guide_windows_version_delete]: {{ kbArticleURLPrefix }}5063#deploy_guide_windows_version_delete
+
 [elasticsearch_deploy_windows]: {{ kbArticleURLPrefix }}4617
+
+[kafka_deploy_windows]: {{ kbArticleURLPrefix }}4614
 
 [admin_utility_instance_configure]: {{ kbArticleURLPrefix }}4634
 
@@ -818,6 +830,8 @@
 
 [deploy_cluster_linux]: {{ kbArticleURLPrefix }}5080
 
+[elasticsearch_deploy_Linux]: {{ kbArticleURLPrefix }}4601
+
 [kafka_deploy_linux]: {{ kbArticleURLPrefix }}5074
 
 [paths_linux]: {{ kbArticleURLPrefix }}4620#paths_linux
@@ -835,6 +849,8 @@
 [accounts_dc_sync]: {{ kbArticleURLPrefix }}4655
 
 [admin_utility_instance_configure]: {{ kbArticleURLPrefix }}4634
+
+[architecture_landscape]: {{ kbArticleURLPrefix }}4596
 
 [auxiliary_software_list]: {{ kbArticleURLPrefix }}4582
 

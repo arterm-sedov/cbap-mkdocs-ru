@@ -191,16 +191,18 @@
 <p><strong>Альт Сервер, РЕД ОС</strong></p>
 <div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>/var/backups/comindware/&lt;instanceName&gt;</code> <br/><code>chmod<span class="w"> </span><span class="m">777</span><span class="w"> </span>/var/backups/comindware/&lt;instanceName&gt;</code> <br/><code>chown<span class="w"> </span>-R<span class="w"> </span>_nginx:_nginx<span class="w"> </span>/var/backups/comindware/&lt;instanceName&gt;</code> <br/></pre></code></div>
 <p><strong>Здесь</strong> <code>&lt;instanceName&gt;</code> — имя экземпляра ПО.</p>
+<p><strong>Windows</strong></p>
+<p>В Windows заранее создавать директорию для резервных копий и настраивать права доступа к ней не требуется. Экземпляр ПО сам создаст директорию, указанную в конфигурации резервного копирования. См. <em>«<a class="mkdocs_imported_link" href="#backup_configure_list_view">Настройка конфигураций и запуск резервного копирования</a>»</em>.</p>
 </li>
 <li>
-<p>Откройте для редактирования файл конфигурации экземпляра ПО (<code>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code>).</p>
+<p>Откройте для редактирования файл конфигурации экземпляра ПО (<code>&lt;instanceName&gt;.yml</code>). См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a>»</em>.</p>
 </li>
 <li>
 <p>Настройте используемые по умолчанию путь и имя файла резервной копии. Заданные в этих директивах параметры используются по умолчанию при создании конфигураций резервного копирования:</p>
-<div class="highlight"><code><pre><span></span><code><span class="c1">#################### Конфигурация резервного копирования ####################</span></code> <br/><code><span class="c1"># Папка для резервного копирования по умолчанию</span></code> <br/><code><span class="nt">backup.defaultFolder</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/comindware/&lt;instanceName&gt;/Backup</span></code> <br/><code></code> <br/><code><span class="c1"># Имя файла для резервного копирования по умолчанию</span></code> <br/><code><span class="c1"># К нему будут добавляться метка времени и расширение cdbbz, например:</span></code> <br/><code><span class="c1"># Backup.202202161625.cdbbz</span></code> <br/><code><span class="nt">backup.defaultFileName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Backup</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="c1">#################### Конфигурация резервного копирования ####################</span></code> <br/><code><span class="c1"># Директория для резервного копирования по умолчанию</span></code> <br/><code><span class="nt">backup.defaultFolder</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/comindware/&lt;instanceName&gt;/Backup</span></code> <br/><code><span class="c1"># Для Windows</span></code> <br/><code><span class="c1">#backup.defaultFolder: X:\comindware\&lt;instanceName&gt;\Backup</span></code> <br/><code></code> <br/><code><span class="c1"># Имя файла для резервного копирования по умолчанию</span></code> <br/><code><span class="c1"># К нему будут добавляться метка времени и расширение cdbbz, например:</span></code> <br/><code><span class="c1"># Backup.202202161625.cdbbz</span></code> <br/><code><span class="nt">backup.defaultFileName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Backup</span></code> <br/></pre></code></div>
 </li>
 <li>
-<p>Перезапустите <strong>Comindware Platform</strong></p>
+<p>Перезапустите <strong>Comindware Platform</strong>.</p>
 </li>
 <li>При необходимости настройте <a class="mkdocs_imported_link" href="#backup_configure_elasticsearch_s3">резервное копирование данных OpenSearch (Elasticsearch) на диск</a>.</li>
 <li>Настройте конфигурацию резервного копирования на диск c помощью <em>«<a class="mkdocs_imported_link" href="#backup_configure_list_view">списка конфигураций резервного копирования</a>»</em>.</li>
@@ -208,7 +210,7 @@
 <h3 class="pageBreakBefore" id="backup_configure_instance_s3">Настройка экземпляра ПО Comindware Platform для хранения резервных копий в S3</h3>
 <p>Эти инструкции следует выполнять на машине (сервере) с экземпляром ПО <strong>Comindware Platform</strong>.</p>
 <ol class="colored_numbers_list">
-<li>Откройте для редактирования файл конфигурации экземпляра ПО (<code>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code>).</li>
+<li>Откройте для редактирования файл конфигурации экземпляра ПО (<code>&lt;instanceName&gt;.yml</code>). См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a>»</em>.</li>
 <li>
 <p>Настройте подключение к хранилищу S3 по умолчанию.</p>
 <div class="notice notice-warning">
@@ -219,7 +221,7 @@
 <div class="highlight"><code><pre><span></span><code><span class="c1">##### Конфигурация подключения к хранилищу S3 по умолчанию #####</span></code> <br/><code><span class="c1"># Описание конфигурации.</span></code> <br/><code><span class="c1"># `default` — обязательное имя подключения</span></code> <br/><code><span class="c1"># для основного хранилища резервных копий</span></code> <br/><code><span class="nt">s3.default.description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Подключение к S3 для основного хранилища резервных копий</span></code> <br/><code><span class="c1"># Адрес и порт сервера S3.</span></code> <br/><code><span class="nt">s3.default.endpointURL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://&lt;s3hostname&gt;:&lt;s3port&gt;</span></code> <br/><code><span class="c1"># Информация учётной записи. Ключ подключения к хранилищу S3</span></code> <br/><code><span class="nt">s3.default.accessKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xxxx</span></code> <br/><code><span class="c1"># Информация учётной записи. Секретный ключ подключения к хранилищу S3.</span></code> <br/><code><span class="nt">s3.default.secretKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xxxx</span></code> <br/><code><span class="c1"># Установите значение true, если сервер принимает только запросы path-style вида:</span></code> <br/><code><span class="c1"># https://&lt;s3hostname&gt;/bucket-name/key-name</span></code> <br/><code><span class="c1">#s3.default.pathStyleAccess: true</span></code> <br/></pre></code></div>
 </li>
 <li>
-<p>Перезапустите <strong>Comindware Platform</strong></p>
+<p>Перезапустите <strong>Comindware Platform</strong>.</p>
 </li>
 <li>При необходимости настройте <a class="mkdocs_imported_link" href="#backup_configure_elasticsearch_s3">резервное копирование данных OpenSearch (Elasticsearch) в S3</a>.</li>
 <li>Настройте конфигурацию резервного копирования в хранилище S3 c помощью <em>«<a class="mkdocs_imported_link" href="#backup_configure_list_view">списка конфигураций резервного копирования</a>»</em>.</li>
@@ -236,7 +238,7 @@
 </ul>
 </div>
 <ol class="colored_numbers_list">
-<li>Откройте для редактирования файл конфигурации экземпляра ПО (<code>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code>).</li>
+<li>Откройте для редактирования файл конфигурации экземпляра ПО (<code>&lt;instanceName&gt;.yml</code>). См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a>»</em>.</li>
 <li>
 <p>Настройте дополнительное подключение к хранилищу S3.</p>
 <div class="highlight"><code><pre><span></span><code><span class="c1">##### Конфигурация дополнительного подключения к хранилищу S3 #####</span></code> <br/><code><span class="c1"># &lt;s3connectionName&gt; — задайте имя подключения.</span></code> <br/><code><span class="nt">s3.&lt;s3connectionName&gt;.description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Дополнительное подключение к S3</span></code> <br/><code><span class="nt">s3.&lt;s3connectionName&gt;.endpointURL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://&lt;s3hostnameForFiles&gt;:&lt;s3port&gt;</span></code> <br/><code><span class="nt">s3.&lt;s3connectionName&gt;.accessKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xxxx</span></code> <br/><code><span class="nt">s3.&lt;s3connectionName&gt;.secretKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xxxx</span></code> <br/><code><span class="c1">#s3.&lt;s3connectionName&gt;.pathStyleAccess: true</span></code> <br/></pre></code></div>
@@ -246,12 +248,16 @@
 <div class="highlight"><code><pre><span></span><code><span class="c1">##### Конфигурация резервного копирования по умолчанию #####</span></code> <br/><code><span class="c1"># &lt;backupName&gt; — имя конфигурации резервного копирования, без пробелов</span></code> <br/><code><span class="c1"># Имя файлов резервных копий.</span></code> <br/><code><span class="c1"># К нему будут добавляться метка времени и расширение cdbbz, например:</span></code> <br/><code><span class="c1"># Backup.202202161625.cdbbz</span></code> <br/><code><span class="nt">backup.default.&lt;backupName&gt;.name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Backup</span></code> <br/><code><span class="c1"># Тип хранилища.</span></code> <br/><code><span class="nt">backup.default.&lt;backupName&gt;.repository.type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">S3</span></code> <br/><code><span class="c1"># Имя корзины S3 для хранения файлов резервных копий.</span></code> <br/><code><span class="nt">backup.default.&lt;backupName&gt;.repository.s3.bucket</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;backup-files-bucket&gt;</span></code> <br/><code><span class="c1"># Имя подключения к S3, например 'default' или .</span></code> <br/><code><span class="nt">backup.default.&lt;backupName&gt;.repository.s3.connection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;s3connectionName&gt;</span></code> <br/><code><span class="c1"># Описание конфигурации</span></code> <br/><code><span class="nt">backup.default.&lt;backupName&gt;.description</span><span class="p">:</span></code> <br/><code><span class="c1"># Периодичность запуска резервного копирования.</span></code> <br/><code><span class="nt">backup.default.&lt;backupName&gt;.period</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">23:00</span></code> <br/><code><span class="c1"># Дни запуска резервного копирования.</span></code> <br/><code><span class="nt">backup.default.&lt;backupName&gt;.days</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">Sunday</span><span class="p p-Indicator">,</span><span class="w">  </span><span class="nv">Monday</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Tuesday</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Wednesday</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Thursday</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Friday</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">Saturday</span><span class="p p-Indicator">]</span></code> <br/><code><span class="c1"># Время начала запуска резервного копирования.</span></code> <br/><code><span class="nt">backup.default.&lt;backupName&gt;.timeFrom</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">00:01</span></code> <br/><code><span class="c1"># Время окончания запуска резервного копирования.</span></code> <br/><code><span class="nt">backup.default.&lt;backupName&gt;.timeUpTo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">23:59</span></code> <br/><code><span class="c1"># Количество резервных копий одновременно хранящихся в системе.</span></code> <br/><code><span class="c1"># Старые будут удалены автоматически.</span></code> <br/><code><span class="nt">backup.default.&lt;backupName&gt;.keepRecent</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span></code> <br/><code><span class="c1"># Управление составом резервной копии — загруженные файлы</span></code> <br/><code><span class="nt">backup.default.&lt;backupName&gt;.withStreams</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span></code> <br/><code><span class="c1"># Управление составом резервной копии —  файлы скриптов.</span></code> <br/><code><span class="nt">backup.default.&lt;backupName&gt;.withScripts</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span></code> <br/><code><span class="c1"># Управление составом резервной копии — файлы истории (OpenSearch (Elasticsearch)).</span></code> <br/><code><span class="nt">backup.default.&lt;backupName&gt;.withJournal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span></code> <br/></pre></code></div>
 </li>
 <li>
-<p>Перезапустите <strong>Comindware Platform</strong>:</p>
-<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>restart<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
+<p>Перезапустите <strong>Comindware Platform</strong>.</p>
 </li>
 </ol>
 <h2 class="pageBreakBefore" id="backup_configure_elasticsearch">Подготовка OpenSearch (Elasticsearch)</h2>
 <h3 id="backup_configure_elasticsearch_disk">Настройка резервного копирования данных OpenSearch (Elasticsearch) на диск</h3>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Здесь представлены инструкции по настройке OpenSearch (Elasticsearch) для Linux.</p>
+<p>Настройка для Windows выполняется аналогичным образом с указанием соответствующих путей. Подробные инструкции для Windows см. в документации <em>OpenSearch (Elasticsearch)</em>.</p>
+</div>
 <div class="notice notice-warning">
 <p class="admonition-title">Внимание!</p>
 <ul>
@@ -292,7 +298,7 @@
 <li>
 <p>Перейдите к настройке машины с экземпляром ПО <strong>Comindware Platform</strong>.</p>
 </li>
-<li>Откройте для редактирования файл конфигурации <code>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code>.</li>
+<li>Откройте для редактирования файл конфигурации <code>&lt;instanceName&gt;.yml</code>. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a>»</em>.</li>
 <li>
 <p>Укажите тип репозитория резервных копий OpenSearch (Elasticsearch): <code>LocalDisk</code>, и путь к репозиторию, например:</p>
 <div class="highlight"><code><pre><span></span><code><span class="c1"># Тип хранилища резервных копий OpenSearch (Elasticsearch) (LocalDisk | S3)</span></code> <br/><code><span class="nt">backup.journalRepository.type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LocalDisk</span></code> <br/><code><span class="c1"># Путь к файлам резервных копий.</span></code> <br/><code><span class="c1"># Укажите директорию из директивы path.repo файла elasticsearch.yml</span></code> <br/><code><span class="c1"># Репозиторий резервной копии OpenSearch (Elasticsearch) из этой директории</span></code> <br/><code><span class="c1"># будет скопирован в директорию History</span></code> <br/><code><span class="c1"># внутри файла .CDBBZ резервной копии Comindware Platform</span></code> <br/><code><span class="nt">backup.journalRepository.localDisk.path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/backups/elasticsearch</span></code> <br/></pre></code></div>
@@ -318,6 +324,11 @@
 </li>
 </ol>
 <h3 class="pageBreakBefore" id="backup_configure_elasticsearch_s3">Настройка резервного копирования данных OpenSearch (Elasticsearch) в хранилище S3</h3>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Здесь представлены инструкции по настройке OpenSearch (Elasticsearch) для Linux.</p>
+<p>Настройка для Windows выполняется аналогичным образом с указанием соответствующих путей. Подробные инструкции для Windows см. в документации <em>OpenSearch (Elasticsearch)</em>.</p>
+</div>
 <div class="notice notice-error">
 <p class="admonition-title">Внимание!</p>
 <ul>
@@ -357,7 +368,7 @@
 <li>
 <p>Перейдите к настройке машины с экземпляром ПО <strong>Comindware Platform</strong>.</p>
 </li>
-<li>Откройте для редактирования файл конфигурации <code>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code>.</li>
+<li>Откройте для редактирования файл конфигурации <code>&lt;instanceName&gt;.yml</code>.</li>
 <li>
 <p>Настройте подключение к хранилищу S3 для репозитория резервных копий, например:</p>
 <div class="highlight"><code><pre><span></span><code><span class="c1">#### Конфигурация подключения к хранилищу S3 на стороне Comindware Platform ####</span></code> <br/><code><span class="c1"># Описание конфигурации</span></code> <br/><code><span class="c1"># default — имя подключения, не изменять.</span></code> <br/><code><span class="nt">s3.default.description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Подключение к S3 для резервных копий истории</span></code> <br/><code><span class="c1"># Адрес и порт сервера S3.</span></code> <br/><code><span class="nt">s3.default.endpointURL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;s3hostname&gt;:&lt;s3port&gt;</span></code> <br/><code><span class="c1"># Информация учетной записи. Ключ подключения к хранилищу S3.</span></code> <br/><code><span class="nt">s3.default.accessKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xxxxx</span></code> <br/><code><span class="c1"># Информация учетной записи. Секретный ключ подключения к хранилищу S3.</span></code> <br/><code><span class="nt">s3.default.secretKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xxxxx</span></code> <br/><code><span class="c1"># Установите значение true, если сервер принимает только запросы path-style вида:</span></code> <br/><code><span class="c1"># https://&lt;s3hostname&gt;/bucket-name/key-name</span></code> <br/><code><span class="c1">#s3.default.pathStyleAccess: true</span></code> <br/></pre></code></div>
@@ -400,7 +411,7 @@
 </ul>
 <div class="notice notice-warning">
 <p class="admonition-title">Внимание!</p>
-<p>Для резервного копирования в основной и дополнительный репозитории будет использоваться только подключение <code>s3.default</code>, настроенное в файле конфигурации экземпляра ПО (<code>&lt;instanceName&gt;.yml</code>).</p>
+<p>Для резервного копирования в основной и дополнительный репозитории будет использоваться только подключение <code>s3.default</code>, настроенное в файле конфигурации экземпляра ПО (<code>&lt;instanceName&gt;.yml</code>). См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a>»</em>.</p>
 <p>См. <em>«<a class="mkdocs_imported_link" href="#backup_configure_instance_s3">Настройка экземпляра ПО Comindware Platform для хранения резервных копий в S3</a>»</em>.</p>
 </div>
 <div class="notice notice-tip">
@@ -499,15 +510,15 @@
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5082">Резервное копирование и восстановление. Рекомендации по организации и оптимизации</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4647">Восстановление базы данных из файла резервной копии в формате .CDBBZ</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4677">Хранилище S3. Настройка экземпляра ПО и подключения</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a></em></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5082">Резервное копирование и восстановление. Рекомендации по организации и оптимизации</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4647">Восстановление базы данных из файла резервной копии в формате .CDBBZ</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4677">Хранилище S3. Настройка экземпляра ПО и подключения</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a></li>
 <li>
-<p><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5067">Конфигурация экземпляра, компонентов ПО и служб. Настройка в Linux</a></em></p>
+<p><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5067">Конфигурация экземпляра, компонентов ПО и служб. Настройка в Linux</a></p>
 </li>
 <li>
-<p><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4643">Резервное копирование и восстановление. Содержание раздела</a></em></p>
+<p><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4643">Резервное копирование и восстановление. Содержание раздела</a></p>
 </li>
 </ul>
 </div>

@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5063" kb-title="Установка, запуск, инициализация и остановка Comindware Platform в Windows">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5063" kb-title="Установка, запуск, инициализация и остановка ПО в Windows">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -16,13 +16,6 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#deploy_guide_windows_requirements">
-<span class="md-ellipsis">
-      Требования к серверу
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#deploy_guide_windows_order">
 <span class="md-ellipsis">
       Порядок установки ПО
@@ -30,9 +23,41 @@
 </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#deploy_guide_windows_requirements">
+<span class="md-ellipsis">
+      Требования к серверу и окружению
+    </span>
+</a>
+<nav aria-label="Требования к серверу и окружению" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#требования-к-windows-серверу">
+<span class="md-ellipsis">
+      Требования к Windows-серверу
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#требования-к-внешним-службам">
+<span class="md-ellipsis">
+      Требования к внешним службам
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#deploy_guide_windows_notes">
+<span class="md-ellipsis">
+      Примечания по установке
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#deploy_guide_windows_server_prepare">
 <span class="md-ellipsis">
-      Подготовка сервера к установке ПО
+      Подготовка IIS к установке Comindware Platform
     </span>
 </a>
 </li>
@@ -86,13 +111,6 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#deploy_guide_windows_instance_upgrade">
-<span class="md-ellipsis">
-      Обновление экземпляра ПО
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#deploy_guide_windows_instance_delete">
 <span class="md-ellipsis">
       Удаление экземпляра ПО
@@ -121,48 +139,190 @@
 <h2 id="deploy_guide_windows_intro">Введение</h2>
 <p>Для быстрого развёртывания <strong>Comindware Platform</strong> в Windows компания <strong>Comindware</strong> предоставляет дистрибутив с установщиком, настраивающим необходимое программное обеспечение.</p>
 <p>Здесь представлены инструкции по развёртыванию и инициализации <strong>Comindware Platform</strong> из дистрибутива в ОС Windows.</p>
-<h2 id="deploy_guide_windows_requirements">Требования к серверу</h2>
-<p>Для работы <strong>Comindware Platform</strong> требуются операционная система, сервер базы данных, веб-сервер, обратный прокси-сервер и сервер журналирования.</p>
-<p>Перед установкой ПО убедитесь, что сервер соответствует следующим требованиям:</p>
-<ul>
-<li>сервер работает под управлением <em>Windows Server</em>;</li>
-<li>сервер настраивается от имени пользователя с правами администратора;</li>
-<li>установлена служба <em>IIS (Internet Information Services)</em>.</li>
-</ul>
-<div class="notice notice-info">
-<p class="admonition-title">Конфигурация сервера журналирования транзакций OpenSearch (Elasticsearch)</p>
-<ul>
-<li>В конфигурации сервера журналирования транзакций необходимо создать одного пользователя для <strong>Comindware Platform</strong>.</li>
-<li>В конфигурации экземпляра ПО необходимо указать адрес сервера и уникальный префикс индексов OpenSearch (Elasticsearch). Индекс префикса служит для идентификации данных экземпляра ПО на сервере журналирования транзакций. Поэтому во избежание конфликтов данных для каждого экземпляра ПО следует указывать собственный префикс индекса.</li>
-<li>При <a class="mkdocs_imported_link" href="#instance_initialize">инициализации экземпляра ПО</a> необходимо указать пользователя <strong>Comindware Platform</strong>, используемого сервером журналирования транзакций.</li>
-<li>Экземпляр ПО будет взаимодействовать с сервером журналирования транзакций под указанным пользователем и создавать, наполнять и читать индексы с заданным префиксом.</li>
-</ul>
-</div>
 <h2 id="deploy_guide_windows_order">Порядок установки ПО</h2>
 <ol class="colored_numbers_list">
-<li>Подготовьте сервер к установке ПО.</li>
+<li>Подготовьте сервер и окружение к установке ПО.</li>
 <li>Установите и настройте необходимое вспомогательное ПО.</li>
 <li>Установите ПО <strong>Comindware Platform</strong>.</li>
 <li>Создайте экземпляр ПО.</li>
 <li>Запустите экземпляр ПО.</li>
 <li>Инициализируйте экземпляр ПО.</li>
 </ol>
-<h2 id="deploy_guide_windows_server_prepare">Подготовка сервера к установке ПО</h2>
+<h2 id="deploy_guide_windows_requirements">Требования к серверу и окружению</h2>
+<p>Для работы <strong>Comindware Platform</strong> требуются:</p>
+<ul>
+<li>операционная система;</li>
+<li>веб-сервер;</li>
+<li>сервер журналирования транзакций;</li>
+<li>сервер очереди сообщений.</li>
+</ul>
+<p>Ниже представлены инструкции по установке и настройке необходимого ПО.</p>
+<h3 id="требования-к-windows-серверу">Требования к Windows-серверу</h3>
+<p>Перед установкой <strong>Comindware Platform</strong> убедитесь, что выполняются следующие требования:</p>
+<ul>
+<li>сервер работает под управлением операционной системы <em>Windows Server</em>;</li>
+<li>настройку сервера выполняет пользователь с правами администратора;</li>
+<li>установлена и настроена служба <em>IIS (Internet Information Services)</em>. См. <em>«<a class="autorefs autorefs-internal mkdocs_imported_link" href="#deploy_guide_windows_server_prepare">Подготовка IIS к установке Comindware Platform</a>»</em>.</li>
+<li>
+<p>установлено следующее вспомогательное ПО:</p>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://dotnet.microsoft.com/en-us/download/dotnet/8.0">.NET 8.0 SDK версии 8.0.408 или выше</a></li>
+<li><a class="mkdocs_imported_link" href="https://dotnet.microsoft.com/ru-ru/download/dotnet/thank-you/runtime-aspnetcore-8.0.15-windows-hosting-bundle-installer">ASP.NET Core 8.0 Runtime - Windows Hosting Bundle Installer</a></li>
+<li><a class="mkdocs_imported_link" href="https://learn.microsoft.com/en-us/java/openjdk/download#openjdk-17">Microsoft Build of OpenJDK версии 17 или выше</a></li>
+</ul>
+<p>Скачайте это ПО по приведённым выше ссылкам и установите его самостоятельно либо установите его из нашего дистрибутива, следуя инструкциям в параграфе <em>«<a class="mkdocs_imported_link" href="#deploy_guide_windows_install_prerequisites">Установка вспомогательного ПО</a>»</em>.</p>
+</li>
+</ul>
+<p>Также могут потребоваться:</p>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://www.7-zip.org/">7-Zip</a></li>
+<li><a class="mkdocs_imported_link" href="https://code.visualstudio.com/Download">VSCode</a></li>
+</ul>
+<h3 id="требования-к-внешним-службам">Требования к внешним службам</h3>
+<p>Для работы <strong>Comindware Platform</strong> необходимо развернуть следующие внешние службы:</p>
+<ul>
+<li>сервер журналирования транзакций OpenSearch (Elasticsearch);</li>
+<li>сервер брокера сообщений Apache Kafka.</li>
+</ul>
+<p>Установите и настройте это ПО согласно следующим инструкциям:</p>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4617">Elasticsearch. Установка в Windows</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4601">Elasticsearch. Установка в Linux</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4614">Apache Kafka. Установка в Windows</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5074">Apache Kafka. Установка в Linux</a></em></li>
+</ul>
+<h2 id="deploy_guide_windows_notes">Примечания по установке</h2>
+<div class="notice notice-info">
+<p class="admonition-title">Пути к файлам и директориям</p>
+<p>Используемые по умолчанию пути к файлам ПО <strong>Comindware Platform</strong> см. в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a>»</em>.</p>
+<p>В вашей конфигурации могут использоваться другие пути, поэтому внимательно подставляйте фактические пути в команды при выполнении инструкций.</p>
+</div>
+<div class="notice notice-tip">
+<p class="admonition-title">Вызов справки для скриптов</p>
+<p>Ключ <code>-h</code> позволяет просмотреть справку по ключам и назначению любого скрипта для развёртывания <strong>Comindware Platform</strong>.</p>
+<p>Используйте его без других ключей, например:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">version_install</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-h</span></code> <br/></pre></code></div>
+</div>
+<div class="notice notice-tip">
+<p class="admonition-title">Обязательные ключи для скриптов</p>
+<p>Если не указать обязательный ключ, скрипт запросит его после запуска.</p>
+</div>
+<div class="notice notice-info">
+<p class="admonition-title">Условные обозначения</p>
+<p>Значения, которые вы должны подставить согласно своей конфигурации, заключены в угловые скобки: </p>
+<ul>
+<li><code>&lt;instanceName&gt;</code> — имя экземпляра ПО;</li>
+<li><code>&lt;portNumber&gt;</code> —  номер порта;</li>
+<li><code>&lt;versionNumber&gt;</code> — номер версии ПО вида <code>X.X.XXXX.X</code> (например: <code>5.0.1234.0</code>);</li>
+<li><code>&lt;prerequisitesDistPath&gt;</code> — путь к распакованному дистрибутиву вспомогательного ПО;</li>
+<li><code>&lt;distPath&gt;</code> — путь к распакованному дистрибутиву ПО <strong>Comindware Platform</strong>.</li>
+</ul>
+</div>
+<p><a class="mkdocs_imported_link" href="" id="powershell_execution_policy"></a></p>
+<div class="notice notice-tip">
+<p class="admonition-title">Политика выполнения PowerShell</p>
+<p>В зависимости от конфигурации вашей системы для выполнения скриптов из дистрибутива <strong>Comindware Platform</strong> может потребоваться установить неограниченную политику выполнения <em>PowerShell</em>. Для этого может выполните указанные ниже действия.</p>
 <ol class="colored_numbers_list">
-<li>Откройте <strong>Диспетчер сервера</strong>.</li>
+<li>Запустите <em>PowerShell</em>.</li>
+<li>
+<p>Определите текущую политику выполнения <em>PowerShell</em>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">Get-ExecutionPolicy</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Если политика отличается от <code>Unrestricted</code>, установите неограниченную политику выполнения <em>PowerShell</em>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">Set-ExecutionPolicy</span> <span class="n">Unrestricted</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>В запросе на изменение политики выберите вариант «<strong>Да для всех</strong>», введя букву <span class="keys"><kbd class="key-a">A</kbd></span>.</p>
+</li>
+</ol>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>По окончании работы с дистрибутивом <strong>Comindware Platform</strong> верните исходную политику выполнения <em>PowerShell</em>.</p>
+</div>
+</div>
+<h2 id="deploy_guide_windows_server_prepare">Подготовка IIS к установке Comindware Platform</h2>
+<ol class="colored_numbers_list">
+<li>Откройте <strong>Диспетчер серверов</strong>.</li>
 <li>Добавьте в список серверов компьютер, на котором будет установлено ПО <strong>Comindware Platform</strong>.</li>
 <li>Запустите <strong>Мастер добавления ролей и компонентов</strong>, выбрав пункт «<strong>Добавить роли и компоненты</strong>» для данного сервера.</li>
 <li>На шаге «<strong>Тип установки</strong>» выберите пункт «<strong>Установка ролей или компонентов</strong>».</li>
 <li>На шаге «<strong>Выбор сервера</strong>» укажите сервер, на котором будет установлено ПО.</li>
-<li>На шаге «<strong>Роли сервера</strong>» установите флажок «<strong>Веб-сервер (IIS)</strong>».</li>
 <li>
-<p>На шаге «<strong>Компоненты</strong>» для компонента «<strong>Веб-сервер (IIS)</strong> — <strong>Веб-сервер</strong> — <strong>Разработка приложений</strong>» установите следующие флажки:</p>
+<p>На шаге «<strong>Роли сервера</strong>» установите следующие флажки</p>
 <ul>
-<li><strong>ASP.NET 4.8</strong> (или выше);</li>
-<li><strong>Расширяемость .NET 4.8</strong> (или выше);</li>
-<li><strong>Расширения ISAPI</strong>;</li>
-<li><strong>Фильтры ISAPI</strong>.</li>
+<li><strong>Web Server (IIS)</strong><ul>
+<li><strong>Web Server</strong><ul>
+<li><strong>Common HTTP Features</strong><ul>
+<li>Default Document</li>
+<li>HTTP Errors</li>
+<li>Static Content</li>
+<li>HTTP Redirection</li>
+<li>WebDAV Publishing</li>
 </ul>
+</li>
+<li><strong>Health and Diagnostics</strong><ul>
+<li>HTTP Logging</li>
+<li>Custom Logging</li>
+<li>Request Monitor</li>
+</ul>
+</li>
+<li><strong>Performance</strong><ul>
+<li>Static Content Compression</li>
+<li>Dynamic Content Compression</li>
+</ul>
+</li>
+<li><strong>Security</strong><ul>
+<li>Request Filtering</li>
+<li>Basic Authentication</li>
+<li>Centralized SSL</li>
+<li>IP and Domain Restrictions</li>
+<li>Windows Authentication</li>
+</ul>
+</li>
+<li><strong>Application Development</strong><ul>
+<li>ASP.NET 4.8 (или новее)</li>
+<li>Application Initialization</li>
+<li>WebSocket Protocol</li>
+<li>.NET Extensibility 4.8 (или новее)</li>
+<li>ISAPI Extensions</li>
+<li>ISAPI Filters</li>
+</ul>
+</li>
+<li><strong>Management Tools</strong><ul>
+<li>IIS Management Console</li>
+<li>IIS Management Scripts and Tools</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>На шаге «<strong>Компоненты</strong>» установите следующие флажки:</p>
+<ul>
+<li><strong>.NET Framework 4.8 Features</strong> (или новее)<ul>
+<li>.Net Framework 4.8</li>
+<li>ASP.NET 4.8</li>
+<li><strong>WCF Services</strong><ul>
+<li>HTTP Activation</li>
+<li>TCP Port Sharing</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Windows Process Activation Service</strong><ul>
+<li>Process Model</li>
+<li>Configuration API</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Сверьтесь со следующим примером корректной конфигурации IIS:</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Пример корректно настроенных ролей и компонентов веб-сервера IIS" src="/platform/v5.0/administration/deploy/windows/img/deploy_guide_windows_iis_components.png"/><figcaption class="caption">Пример корректно настроенных ролей и компонентов веб-сервера IIS</figcaption></figure></p>
 </li>
 <li>
 <p>На шаге «<strong>Подтверждение</strong>» нажмите кнопку «<strong>Установить</strong>» и дождитесь завершения процесса.</p>
@@ -172,26 +332,15 @@
 <ol class="colored_numbers_list">
 <li>Скачайте и распакуйте архив с дистрибутивом вспомогательного ПО для <strong>Comindware Platform</strong>.</li>
 <li>Запустите <em>PowerShell</em> от имени администратора.</li>
-<li>
-<p>Установите неограниченную политику выполнения <em>PowerShell</em>:</p>
-<div class="highlight"><code><pre><span></span><code><span class="nb">Set-ExecutionPolicy</span> <span class="n">Unrestricted</span></code> <br/></pre></code></div>
-</li>
-<li>
-<p>В запросе на изменение политики выберите вариант «<strong>Да для всех</strong>», введя букву <span class="keys"><kbd class="key-a">A</kbd></span>.</p>
-</li>
+<li>При необходимости установите неограниченную политику выполнения <em>PowerShell</em>. См. <em>«<a class="mkdocs_imported_link" href="#powershell_execution_policy">Политика выполнения PowerShell</a>»</em>.</li>
 <li>
 <p>Перейдите в папку со скриптами для развёртывания вспомогательного ПО:</p>
-<div class="highlight"><code><pre><span></span><code><span class="nb">cd </span><span class="s2">"X:\&lt;distPath&gt;\X.X-release-ru-&lt;versionNumber&gt;.prerequisites.windows\CMW_Windows&lt;versionNumber&gt;\scripts"</span></code> <br/></pre></code></div>
-<p>Здесь: <code>X:\&lt;distPath&gt;\X.X-release-ru-&lt;versionNumber&gt;.prerequisites.windows</code> — путь к распакованному дистрибутиву вспомогательного ПО, а <code>&lt;versionNumber&gt;</code> — номер версии ПО.</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd </span><span class="s2">"&lt;prerequisitesDistPath&gt;\CMW_Windows&lt;versionNumber&gt;\scripts"</span></code> <br/></pre></code></div>
+<p>Здесь <code>&lt;prerequisitesDistPath&gt;</code> — путь к распакованному дистрибутиву вспомогательного ПО (например, <code>X:\&lt;distPath&gt;\X.X-release-ru-&lt;versionNumber&gt;.prerequisites.windows</code>).</p>
 </li>
 <li>
-<p>Разблокируйте доступ к скачанным из Интернета установочным файлам:</p>
+<p>Разблокируйте доступ к скачанным из интернета установочным файлам:</p>
 <div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">files_unblock</span><span class="p">.</span><span class="n">ps1</span></code> <br/></pre></code></div>
-<div class="notice notice-tip">
-<p class="admonition-title">Вызов справки для скриптов</p>
-<p>Для ознакомления с ключами и назначением любого скрипта используйте ключ <code>-h</code> без каких-либо других ключей, например:</p>
-<div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">files_unblock</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-h</span></code> <br/></pre></code></div>
-</div>
 </li>
 <li>
 <p>Установите необходимое вспомогательное ПО:</p>
@@ -203,83 +352,71 @@
 <li>Запустите <em>PowerShell</em> от имени администратора.</li>
 <li>
 <p>Перейдите в папку со скриптами для развёртывания вспомогательного ПО:</p>
-<div class="highlight"><code><pre><span></span><code><span class="nb">cd </span><span class="s2">"X:\&lt;distPath&gt;\X.X-release-ru-&lt;versionNumber&gt;.prerequisites.windows\CMW_Windows&lt;versionNumber&gt;\scripts"</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd </span><span class="s2">"&lt;prerequisitesDistPath&gt;\CMW_Windows&lt;versionNumber&gt;\scripts"</span></code> <br/></pre></code></div>
 </li>
 <li>
-<p>Проверьте, что дополнительные компоненты установлены:</p>
+<p>Проверьте, что вспомогательное ПО установлено:</p>
 <div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">prerequisites_list</span><span class="p">.</span><span class="n">ps1</span></code> <br/></pre></code></div>
-<p>Если какие-либо дополнительные компоненты не были установлены, повторите шаги 8–12.</p>
+<p>Если какое-либо вспомогательное ПО не было установлено, повторите шаги 6–10.</p>
 </li>
 </ol>
 <h2 id="deploy_guide_windows_install_sw">Установка Comindware Platform</h2>
 <ol class="colored_numbers_list">
 <li>Скачайте и распакуйте архив с дистрибутивом <strong>Comindware Platform</strong>.</li>
 <li>Запустите <em>PowerShell</em> от имени администратора.</li>
-<li>
-<p>Установите неограниченную политику выполнения <em>PowerShell</em>:</p>
-<div class="highlight"><code><pre><span></span><code><span class="nb">Set-ExecutionPolicy</span> <span class="n">Unrestricted</span></code> <br/></pre></code></div>
-</li>
-<li>
-<p>В запросе на изменение политики выберите вариант «<strong>Да для всех</strong>», введя букву <span class="keys"><kbd class="key-a">A</kbd></span>.</p>
-</li>
+<li>При необходимости установите неограниченную политику выполнения <em>PowerShell</em>. См. <em>«<a class="mkdocs_imported_link" href="#powershell_execution_policy">Политика выполнения PowerShell</a>»</em>.</li>
 <li>
 <p>Перейдите в папку со скриптами для развёртывания ПО <strong>Comindware Platform</strong>:</p>
-<div class="highlight"><code><pre><span></span><code><span class="nb">cd </span><span class="s2">"X:\&lt;distPath&gt;\X.X-release-ru-&lt;versionNumber&gt;.windows\CMW_Windows&lt;versionNumber&gt;\scripts"</span></code> <br/></pre></code></div>
-<p>Здесь: <code>X:\&lt;distPath&gt;\X.X-release-ru-&lt;versionNumber&gt;.windows</code> — путь к распакованному дистрибутиву продукта, а <code>&lt;versionNumber&gt;</code> — номер версии ПО.</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd </span><span class="s2">"&lt;distPath&gt;\CMW_Windows&lt;versionNumber&gt;\scripts"</span></code> <br/></pre></code></div>
+<p>Здесь <code>&lt;distPath&gt;</code> — путь к распакованному дистрибутиву ПО <strong>Comindware Platform</strong> (например, <code>X:\&lt;distPath&gt;\X.X-release-ru-&lt;versionNumber&gt;.windows</code>).</p>
 </li>
 <li>
-<p>Разблокируйте доступ к скачанным из Интернета установочным файлам:</p>
+<p>Разблокируйте доступ к скачанным из интернета установочным файлам:</p>
 <div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">files_unblock</span><span class="p">.</span><span class="n">ps1</span></code> <br/></pre></code></div>
-<div class="notice notice-tip">
-<p class="admonition-title">Вызов справки для скриптов</p>
-<p>Для ознакомления с ключами и назначением любого скрипта используйте ключ <code>-h</code> без каких-либо других ключей, например:</p>
-<div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">files_unblock</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-h</span></code> <br/></pre></code></div>
-</div>
 </li>
 <li>
 <p>Установите версию ПО:</p>
 <div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">version_install</span><span class="p">.</span><span class="n">ps1</span></code> <br/></pre></code></div>
+<p>Пример результата выполнения скрипта:</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">Operation</span> <span class="n">complete</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="c">###############################################</span></code> <br/><code><span class="n">Installer</span> <span class="n">folder</span>    <span class="p">:</span> <span class="n">C</span><span class="p">:\</span><span class="n">install</span><span class="p">\</span><span class="n">CMW_Windows_5</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">13334</span><span class="p">.</span><span class="n">0</span></code> <br/><code><span class="n">Version</span> <span class="n">file</span> <span class="n">path</span>   <span class="p">:</span> <span class="n">C</span><span class="p">:\</span><span class="n">install</span><span class="p">\</span><span class="n">CMW_Windows_5</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">13334</span><span class="p">.</span><span class="n">0</span><span class="p">\</span><span class="n">core</span><span class="p">\</span><span class="n">bin</span><span class="p">\</span><span class="n">Comindware</span><span class="p">.</span><span class="n">Platform</span><span class="p">.</span><span class="n">Core</span><span class="p">.</span><span class="n">dll</span></code> <br/><code><span class="n">Version</span>             <span class="p">:</span> <span class="n">5</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">13334</span><span class="p">.</span><span class="n">0</span></code> <br/><code><span class="n">Source</span> <span class="n">bin</span> <span class="n">folder</span>   <span class="p">:</span> <span class="n">C</span><span class="p">:\</span><span class="n">install</span><span class="p">\</span><span class="n">CMW_Windows_5</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">13334</span><span class="p">.</span><span class="n">0</span><span class="p">\</span><span class="n">core</span><span class="p">\*</span></code> <br/><code><span class="n">Target</span> <span class="n">bin</span> <span class="n">path</span>     <span class="p">:</span> <span class="n">C</span><span class="p">:\</span><span class="n">Program</span> <span class="n">Files</span><span class="p">\</span><span class="n">Comindware</span><span class="p">\</span><span class="n">CBAP</span><span class="p">\</span><span class="n">5</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">13334</span><span class="p">.</span><span class="n">0</span></code> <br/><code><span class="n">Command</span> <span class="n">executed</span><span class="p">.</span></code> <br/><code><span class="n">Complete</span> <span class="n">script</span> <span class="n">version_install</span><span class="p">.</span><span class="n">ps1</span><span class="p">.</span></code> <br/><code><span class="c">###############################################</span></code> <br/><code><span class="n">Status</span><span class="p">:</span> <span class="n">Completed</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Удостоверьтесь, что ПО установлено, вызывав список установленных версий ПО:</p>
 <div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">version_list</span><span class="p">.</span><span class="n">ps1</span></code> <br/></pre></code></div>
+<p>Пример списка установленных версий ПО:</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">Running</span> <span class="n">script</span> <span class="n">version_list</span><span class="p">.</span><span class="n">ps1</span><span class="p">.</span></code> <br/><code><span class="p">====================================================================</span></code> <br/><code><span class="n">Source</span> <span class="n">folder</span><span class="p">:</span> <span class="n">C</span><span class="p">:\</span><span class="n">Program</span> <span class="n">Files</span><span class="p">\</span><span class="n">Comindware</span><span class="p">\</span><span class="n">CBAP</span></code> <br/><code><span class="p">====================================================================</span></code> <br/><code><span class="n">Version</span></code> <br/><code><span class="p">====================================================================</span></code> <br/><code><span class="n">5</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">13286</span><span class="p">.</span><span class="n">0</span></code> <br/><code><span class="n">5</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">13334</span><span class="p">.</span><span class="n">0</span></code> <br/><code></code> <br/><code><span class="c">####################################################################</span></code> <br/><code><span class="n">Command</span> <span class="n">executed</span><span class="p">.</span></code> <br/><code><span class="n">Complete</span> <span class="n">script</span> <span class="n">version_list</span><span class="p">.</span><span class="n">ps1</span><span class="p">.</span></code> <br/><code><span class="c">####################################################################</span></code> <br/><code><span class="n">Status</span><span class="p">:</span> <span class="n">Completed</span></code> <br/></pre></code></div>
 </li>
 </ol>
 <h2 id="deploy_guide_windows_instance_create">Создание экземпляра ПО</h2>
 <ol class="colored_numbers_list">
 <li>
 <p>Перейдите в папку со скриптами для развёртывания ПО <strong>Comindware Platform</strong>:</p>
-<div class="highlight"><code><pre><span></span><code><span class="nb">cd </span><span class="s2">"X:\&lt;distPath&gt;\X.X-release-ru-&lt;versionNumber&gt;.windows\CMW_Windows&lt;versionNumber&gt;\scripts"</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd </span><span class="s2">"&lt;distPath&gt;\CMW_Windows&lt;versionNumber&gt;\scripts"</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Разверните экземпляр ПО:</p>
-<div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">instance_create</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span> <span class="n">-port</span> <span class="p">&lt;</span><span class="n">portNumber</span><span class="p">&gt;</span> <span class="n">-version</span> <span class="p">&lt;</span><span class="n">versionNumber</span><span class="p">&gt;</span> </code> <br/></pre></code></div>
-<p>Скрипт <code>instance_create.ps1</code> поддерживает следующие ключи:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">instance_create</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span> <span class="n">-version</span> <span class="p">&lt;</span><span class="n">versionNumber</span><span class="p">&gt;</span></code> <br/></pre></code></div>
+<p>Ключи:</p>
 <ul>
-<li><code>name &lt;instanceName&gt;</code> — <strong>обязательный</strong> ключ с именем экземпляра ПО.</li>
-<li><code>port &lt;portNumber&gt;</code> — порт для экземпляра ПО, по умолчанию: 80 (необязательный ключ).</li>
-<li><code>version &lt;versionNumber&gt;</code> — развернуть ПО указанной версии вида <code>X.X.XXXX.X</code> (например: <code>5.0.1234.0</code>) из папки вида <code>C:\Program Files\Comindware\CBAP\&lt;versionNumber&gt;</code>.</li>
-<li><code>versionPath &lt;versionPath&gt;</code> — развернуть ПО из указанной папки <code>&lt;versionPath&gt;</code> с версией ПО.</li>
-<li><code>demoDB</code> — создать экземпляр ПО <strong>Comindware Platform</strong> c демонстрационной базой данных.</li>
-<li><code>fqdn &lt;hostName&gt;</code> — имя хоста для экземпляра ПО (необязательный ключ). По умолчанию: <code>localhost</code>.</li>
-<li><code>h</code> — вызвать справку по использованию скрипта (этот ключ следует указывать только без остальных ключей).</li>
+<li><code>-name</code> — имя экземпляра;</li>
+<li><code>-version</code> — номер версии ПО;</li>
+<li><code>-port</code> (необязательно) — порт для экземпляра ПО (по умолчанию: 80).</li>
 </ul>
-<div class="notice notice-tip">
-<p class="admonition-title">Обязательные ключи для скриптов</p>
-<p>Если не указать обязательный ключ для любого скрипта, он запросит его после запуска.</p>
-</div>
 </li>
 </ol>
 <h2 id="deploy_guide_windows_instance_start">Запуск экземпляра ПО</h2>
 <ol class="colored_numbers_list">
 <li>
 <p>Перейдите в папку со скриптами для развёртывания ПО <strong>Comindware Platform</strong>:</p>
-<div class="highlight"><code><pre><span></span><code><span class="nb">cd </span><span class="s2">"X:\&lt;distPath&gt;\X.X-release-ru-&lt;versionNumber&gt;.windows\CMW_Windows&lt;versionNumber&gt;\scripts"</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd </span><span class="s2">"&lt;distPath&gt;\CMW_Windows&lt;versionNumber&gt;\scripts"</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Запустите экземпляр ПО:</p>
 <div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">instance_start</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span></code> <br/></pre></code></div>
-<p>Здесь: <code>name &lt;instanceName&gt;</code> — <strong>обязательный</strong> ключ с именем экземпляра ПО.</p>
+<p>Ключ:</p>
+<ul>
+<li><code>-name</code> — имя экземпляра.</li>
+</ul>
 </li>
 </ol>
 <h2 id="deploy_guide_windows_instance_stop">Остановка экземпляра ПО</h2>
@@ -291,7 +428,10 @@
 <li>
 <p>Остановите экземпляр ПО:</p>
 <div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">instance_stop</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span></code> <br/></pre></code></div>
-<p>Здесь: <code>-name &lt;instanceName&gt;</code> — <strong>обязательный</strong> ключ с именем экземпляра ПО.</p>
+<p>Ключ:</p>
+<ul>
+<li><code>-name</code> — имя экземпляра.</li>
+</ul>
 </li>
 </ol>
 <h2 id="instance_initialize">Инициализация Comindware Platform</h2>
@@ -312,7 +452,7 @@
 <div class="notice notice-warning">
 <p class="admonition-title">Внимание!</p>
 <ul>
-<li>В экземпляре ПО всегда должен оставаться хотя бы один аккаунт администратора. Он может потребоваться для восстановления системы.</li>
+<li>В <strong>Comindware Platform</strong> всегда должен оставаться хотя бы один аккаунт администратора. Он может потребоваться для восстановления системы.</li>
 <li>Аккаунт администратора, созданный при инициализации экземпляра ПО, не следует удалять, даже если впоследствии аккаунты будут синхронизироваться с Active Directory.</li>
 </ul>
 </div>
@@ -367,46 +507,38 @@
 </li>
 <li>Теперь можно приступать к созданию приложений на основе <strong>Comindware Platform</strong>.</li>
 </ol>
-<h2 id="deploy_guide_windows_instance_upgrade">Обновление экземпляра ПО</h2>
-<ol class="colored_numbers_list">
-<li>Скачайте и установите ПО новой версии согласно инструкциям в параграфе <em>«<a class="mkdocs_imported_link" href="#deploy_guide_windows_install_sw">Установка Comindware Platform</a>»</em>.</li>
-<li>
-<p>Перейдите в папку со скриптами для развёртывания ПО <strong>Comindware Platform</strong>:</p>
-<div class="highlight"><code><pre><span></span><code><span class="nb">cd </span><span class="s2">"X:\&lt;distPath&gt;\X.X-release-ru-&lt;versionNumber&gt;.windows\CMW_Windows&lt;versionNumber&gt;\scripts"</span></code> <br/></pre></code></div>
-</li>
-<li>
-<p>Запустите обновление экземпляра ПО:</p>
-<div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">instance_upgrade</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span> <span class="n">-version</span> <span class="p">&lt;</span><span class="n">versionNumber</span><span class="p">&gt;</span> </code> <br/></pre></code></div>
-<p>Скрипт <code>instance_upgrade.ps1</code> поддерживает следующие ключи:</p>
-<ul>
-<li><code>name &lt;instanceName&gt;</code> — <strong>обязательный</strong> ключ с именем экземпляра ПО.</li>
-<li><code>version &lt;versionNumber&gt;</code> — обновить экземпляр ПО до указанной версии вида <code>X.X.XXXX.X</code> (например: <code>5.0.1234.0</code>) из папки вида <code>C:\Program Files\Comindware\CBAP\&lt;versionNumber&gt;</code>.</li>
-<li><code>versionPath &lt;versionPath&gt;</code> — обновить экземпляр ПО до версии из указанной папки <code>&lt;versionPath&gt;</code>.</li>
-<li><code>h</code> — вызвать справку по использованию скрипта (этот ключ следует указывать только без остальных ключей).</li>
-</ul>
-</li>
-<li>
-<p>Просмотрите список установленных экземпляров ПО:</p>
-<div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">instance_list</span><span class="p">.</span><span class="n">ps1</span></code> <br/></pre></code></div>
-</li>
-<li>
-<p>Рядом с именем экземпляра ПО отобразится номер версии.</p>
-</li>
-</ol>
 <h2 id="deploy_guide_windows_instance_delete">Удаление экземпляра ПО</h2>
 <ol class="colored_numbers_list">
 <li>
 <p>Перейдите в папку со скриптами для развёртывания ПО <strong>Comindware Platform</strong>:</p>
-<div class="highlight"><code><pre><span></span><code><span class="nb">cd </span><span class="s2">"X:\&lt;distPath&gt;\X.X-release-ru-&lt;versionNumber&gt;.windows\CMW_Windows&lt;versionNumber&gt;\scripts"</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd </span><span class="s2">"&lt;distPath&gt;\CMW_Windows&lt;versionNumber&gt;\scripts"</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Удалите экземпляр ПО:</p>
 <div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">instance_delete</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span></code> <br/></pre></code></div>
-<p>Скрипт <code>instance_delete.ps1</code> поддерживает следующие ключи:</p>
+<p>Ключи:</p>
 <ul>
-<li><code>name &lt;instanceName&gt;</code> — <strong>обязательный</strong> ключ с именем экземпляра ПО. Если не указать другие ключи, будет удалена только служба <code>comindware&lt;instanceName&gt;</code>.</li>
-<li><code>deleteData</code> — удалить базу данных из папки вида <code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Data</code> и пользовательские файлы экземпляра ПО из папки вида <code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Streams</code>. Без указания этого ключа или ключа <code>clear</code> база данных экземпляра ПО не будет удалена.</li>
-<li><code>clear</code> — удалить все файлы, папки, базу данных и пользовательские файлы вместе с папкой вида <code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;</code>, а также службы экземпляра ПО, сайт и пул приложения из IIS.</li>
+<li>
+<p><code>-name</code> — имя экземпляра.</p>
+<p>Если не указать другие ключи, будет удалена только служба <code>comindware&lt;instanceName&gt;</code>.</p>
+</li>
+<li>
+<p><code>-deleteData</code> (необязательно) — удалить следующие объекты:</p>
+<ul>
+<li>базу данных из папки вида <code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Data</code>;</li>
+<li>пользовательские файлы экземпляра ПО из папки вида <code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Streams</code>.</li>
+</ul>
+<p>Без указания этого ключа или ключа <code>-clear</code> база данных экземпляра ПО не будет удалена.</p>
+</li>
+<li>
+<p><code>-clear</code> (необязательно) — удалить следующие объекты:</p>
+<ul>
+<li>все файлы, папки, базу данных и пользовательские файлы экземпляра ПО;</li>
+<li>папку экземпляра ПО вида <code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;</code>;</li>
+<li>все службы экземпляра ПО;</li>
+<li>сайт и пул приложения из IIS.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ol>
@@ -414,27 +546,40 @@
 <ol class="colored_numbers_list">
 <li>
 <p>Перейдите в папку со скриптами для развёртывания ПО <strong>Comindware Platform</strong>:</p>
-<div class="highlight"><code><pre><span></span><code><span class="nb">cd </span><span class="s2">"X:\&lt;distPath&gt;\X.X-release-ru-&lt;versionNumber&gt;.windows\CMW_Windows&lt;versionNumber&gt;\scripts"</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd </span><span class="s2">"&lt;distPath&gt;\CMW_Windows&lt;versionNumber&gt;\scripts"</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Просмотрите список установленных экземпляров ПО:</p>
 <div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">instance_list</span><span class="p">.</span><span class="n">ps1</span></code> <br/></pre></code></div>
 </li>
 <li>
-<p>Удалите все экземпляры с версией ПО, которую требуется удалить, или обновите их до другой версии. Удалить версию ПО, которая используется в каких-либо экземплярах, не удастся. См. <em>«<a class="mkdocs_imported_link" href="#deploy_guide_windows_instance_delete">Удаление экземпляра ПО</a>»</em>.</p>
+<p>Удалите все экземпляры с версией ПО, которую требуется удалить, или обновите их до другой версии.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Удалить версию ПО, которая используется в каких-либо экземплярах, не удастся.</p>
+<p>Сначала удалите экземпляр по, см. <em>«<a class="mkdocs_imported_link" href="#deploy_guide_windows_instance_delete">Удаление экземпляра ПО</a>»</em>.</p>
+</div>
 </li>
 <li>
 <p>Удалите версию ПО:</p>
 <div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">version_delete</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-version</span> <span class="p">&lt;</span><span class="n">versionNumber</span><span class="p">&gt;</span></code> <br/></pre></code></div>
-<p>Здесь: <code>-version &lt;versionNumber&gt;</code> — указать номер версии ПО вида <code>X.X.XXXX.X</code> (например: <code>5.0.1234.0</code>).</p>
+<p>Ключ:</p>
+<ul>
+<li><code>-version</code> — номер версии ПО (например: <code>5.0.1234.0</code>).</li>
+</ul>
 </li>
 </ol>
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
 <li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a></li>
+<li><a class="autorefs autorefs-internal mkdocs_imported_link" href="upgrade_version.html#upgrade_version_windows">Обновление версии экземпляра ПО в Windows</a></li>
 <li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642">Резервное копирование. Настройка, запуск и просмотр журнала сеансов</a></li>
 <li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4690">Отправка почты из процесса. Настройка подключения</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4617">Elasticsearch. Установка в Windows</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4601">Elasticsearch. Установка в Linux</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4614">Apache Kafka. Установка в Windows</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5074">Apache Kafka. Установка в Linux</a></li>
 </ul>
 </div>
 </article>
