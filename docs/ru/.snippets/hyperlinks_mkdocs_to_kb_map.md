@@ -64,6 +64,8 @@
 
 [formula_function_list]: {{ kbArticleURLPrefix }}4993
 
+[formula_function_list_literals]: {{ kbArticleURLPrefix }}4993#formula_function_list_literals
+
 [formula_introduction]: {{ kbArticleURLPrefix }}4999
 
 [html_supported_tags]: {{ kbArticleURLPrefix }}4912
