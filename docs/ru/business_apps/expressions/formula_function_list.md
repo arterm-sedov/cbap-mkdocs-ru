@@ -1,5 +1,5 @@
 ---
-title: Список функций языка формул
+title: Функции и литералы в формулах 
 kbId: 4993
 tags:
     - язык выражений
@@ -13,9 +13,375 @@ hide:
     - tags
 ---
 
-# Список функций языка формул {{ companyName }} {: #formula_function_reference }
 
-Здесь представлен синтаксис и примеры использования функций в формулах **{{ companyName }}**.
+# Функции и литералы в формулах {: #formula_function_reference }
+
+Здесь представлены синтаксис и примеры использования функций в формулах **{{ companyName }}**.
+
+## Функции для объявления литералов {: #formula_function_list_literals }
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `BOOL()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Преобразует строку в логическое значение.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block" >
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+BOOL(string)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`string` — строка `true` или `false` (без учёта регистра).
+
+При неподходящих значениях атрибута (`0`, `1`, `истина`, `ложь` и т. п.) функция возвращает пустое значение.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+BOOL('true')
+```
+
+Результат: `True`
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `DATE()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Преобразует в строку в значение даты и времени.
+
+Строка должна быть представлена в формате ISO&nbsp;8601.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+DATE(argument1)
+```
+
+</td>
+</tr>
+
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+- `argument1`: строка в формате `YYYY-MM-DDThh:mm:ss`
+    - `YYYY-MM-DD` — год, месяц, число;
+    - `T` — разделитель даты и времени;
+    - `hh:mm:ss` — часы, минуты, секунды;
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+
+Дата и время
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Примеры**
+</td>
+<td markdown="block">
+
+- `DATE("2023-08-15")` — 15 августа 2023 г.
+- `DATE("2023-08-15T13:45:15")` — 13 часов 45 минут 15 секунд 15 августа 2023 г.  
+- `DATE("13:45:15")` — 13 часов 45 минут 15 секунд текущего дня.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `DECIMAL()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Преобразует строку в десятичное число.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+DECIMAL(string)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`string` — строка с числовым значением.
+
+Значение интерпретируется в соответствии с языком текущего аккаунта текущего пользователя, например:
+
+- `10000`, `10,5` для русского языка;
+- `10000`, `10.5` для английского языка.
+
+При неподходящих значениях аргумента (`1 р.`, `$50`, `10 000` и т. п.) функция возвращает пустое значение.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+IF (USER()->language=='ru',
+    DECIMAL(REPLACE("10000,5", ".", ",")),
+    DECIMAL(REPLACE("10000,5", ",", ".")))
+```
+
+Результат: `10000,5` для пользователей с любым языком аккаунта.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `DURATION()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Преобразует строку в значение длительности.
+
+Строка должна быть представлена в формате ISO&nbsp;8601.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+DURATION(argument1)
+```
+
+</td>
+</tr>
+
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+- `argument1`: строка в формате `P<n>Y<n>M<n>DT<n>H<n>M<n>S`
+    -  `P` — префикс периода, указывается всегда;
+    -  `Y` — годы;
+    -  `M` — месяцы;
+    -  `W` — недели;
+    -  `D` — дни;
+    -  `T` — префикс времени, указывается только при вводе времени;
+    -  `H` — часы;
+    -  `M` — минуты;
+    -  `S` — секунды.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+
+Длительность
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Примеры**
+</td>
+<td markdown="block">
+
+- `DURATION("P3Y6M4DT12H30M5S")` — 3 года 6 месяцев 4 дня 12 часов 30 минут 5 секунд.
+- `DURATION("PT3H15M")` — 3 часа 15 минут.
+- `DURATION("P3D")` — 3 дня.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+## `ID()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+Преобразует строку в идентификатор объекта.
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+ID(argument1)
+```
+
+</td>
+</tr>
+
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+- `argument1`: строка.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+
+Идентификатор объекта
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Примеры**
+</td>
+<td markdown="block">
+
+- `ID("136")` — идентификатор записи `136`.
+- `ID("account.2")` — идентификатор аккаунта `account.2`.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## Функции для вычислений
 
 <table markdown="block">
 <tbody markdown="block">
@@ -31,8 +397,7 @@ hide:
 **Описание**
 </td>
 <td markdown="block">
-Суммирует два значения. Конкатенация строк не поддерживается.
-
+Суммирует два значения типа «**Число**», «**Дата и время**» или «**Длительность**».
 </td>
 </tr>
 <tr markdown="block">
@@ -41,8 +406,8 @@ hide:
 </td>
 <td markdown="block">
 
-``` cs
-ADD(value1, value2)
+``` sql
+ADD(argument1, argument2)
 ```
 
 </td>
@@ -54,9 +419,9 @@ ADD(value1, value2)
 </td>
 <td markdown="block">
 
-- `value1`: число, `value2`: число.
-- `value1`: длительность, `value2`: длительность.
-- `value1`: дата и время, `value2`: длительность.
+- `argument1`: число, `argument2`: число.
+- `argument1`: длительность, `argument2`: длительность.
+- `argument1`: дата и время, `argument2`: длительность.
 
 </td>
 </tr>
@@ -78,16 +443,11 @@ ADD(value1, value2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADD(DATE('2024-01-01T01:01:01'), DURATION('P3Y6M4DT12H30M5S'))
 ```
 
 Результат: `03.07.2027 13:31:06`
-
-Здесь:
-
-- `DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
-- `DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -109,7 +469,9 @@ ADD(DATE('2024-01-01T01:01:01'), DURATION('P3Y6M4DT12H30M5S'))
 </td>
 <td markdown="block">
 
-Добавляет указанное число дней к значению типа «**Дата и время**» в часовом поясе, заданном на форме, в настройках аккаунта или глобальной конфигурации или указанном в значении аргумента.
+Добавляет указанное число дней к значению типа «**Дата и время**».
+
+Значение интерпретируется в часовом поясе, заданном на форме, в аккаунте текущего пользователя, в глобальной конфигурации или в самом аргументе.
 
 </td>
 </tr>
@@ -119,7 +481,7 @@ ADD(DATE('2024-01-01T01:01:01'), DURATION('P3Y6M4DT12H30M5S'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDDAYS(dateTime, numberOfDays)
 ```
 
@@ -132,7 +494,7 @@ ADDDAYS(dateTime, numberOfDays)
 <td markdown="block">
 
 - `dateTime`: дата и время.
-- `numberOfDays`: количество дней, которое требуется добавить к первому аргументу.
+- `numberOfDays`: число, количество дней, которое требуется добавить к первому аргументу.
 
 </td>
 </tr>
@@ -150,15 +512,11 @@ ADDDAYS(dateTime, numberOfDays)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDDAYS(DATE('2024-01-01T01:01:01'), 3)
 ```
 
 Результат: `04.01.2024 1:01:01`
-
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -190,7 +548,7 @@ ADDDAYS(DATE('2024-01-01T01:01:01'), 3)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDDAYSUTC(dateTime, numberOfDays)
 ```
 
@@ -221,15 +579,12 @@ ADDDAYSUTC(dateTime, numberOfDays)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDDAYSUTC(DATE('2024-01-01T01:01:01+00:00'), 3)
 ```
 
 Результат: `04.01.2024 4:01:01`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -261,7 +616,7 @@ ADDDAYSUTC(DATE('2024-01-01T01:01:01+00:00'), 3)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDDUR(duration1, duration2)
 ```
 
@@ -291,15 +646,13 @@ ADDDUR(duration1, duration2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDDUR(DURATION('P1DT12H30M5S'), DURATION('P1DT12H30M5S'))
 ```
 
 Результат: `3 д 1 ч 10 с`
 
-Здесь:
 
-`DURATION()` — преобразует в длительность  строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -331,7 +684,7 @@ ADDDUR(DURATION('P1DT12H30M5S'), DURATION('P1DT12H30M5S'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDHOURS(dateTime, number)
 ```
 
@@ -362,15 +715,12 @@ ADDHOURS(dateTime, number)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDHOURS(DATE('2024-01-01T01:01:01'), 3)
 ```
 
 Результат: `01.01.2024 4:01:01`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -402,7 +752,7 @@ ADDHOURS(DATE('2024-01-01T01:01:01'), 3)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDHOURSUTC(dateTime, number)
 ```
 
@@ -433,15 +783,11 @@ ADDHOURSUTC(dateTime, number)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDHOURSUTC(DATE('2024-01-01T01:01:01+00:00'), 3)
 ```
 
 Результат: `01.01.2024 7:01:01` для часового пояса UTC+3.
-
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -473,7 +819,7 @@ ADDHOURSUTC(DATE('2024-01-01T01:01:01+00:00'), 3)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDLOC(dateTime, duration)
 ```
 
@@ -504,16 +850,13 @@ ADDLOC(dateTime, duration)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDLOC(DATE('2024-01-01T01:01:01'), DURATION('P1DT12H30M5S'))
 ```
 
 Результат: `02.01.2024 13:31:06`
 
-Здесь:
 
-- `DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
-- `DURATION()` — преобразует в длительность  строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -545,7 +888,7 @@ ADDLOC(DATE('2024-01-01T01:01:01'), DURATION('P1DT12H30M5S'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDMINUTES(dateTime, numberOfMinutes)
 ```
 
@@ -576,15 +919,12 @@ ADDMINUTES(dateTime, numberOfMinutes)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDMINUTES(DATE('2024-01-01T01:01:01'), 3)
 ```
 
 Результат: `01.01.2024 1:04:01`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -616,7 +956,7 @@ ADDMINUTES(DATE('2024-01-01T01:01:01'), 3)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDMINUTESUTC(dateTime, numberOfMinutes)
 ```
 
@@ -647,15 +987,12 @@ ADDMINUTESUTC(dateTime, numberOfMinutes)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDMINUTESUTC(DATE('2024-01-01T01:01:01+00:00'), 3)
 ```
 
 Результат: `01.01.2024 4:04:01` для часового пояса UTC+3.
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -687,7 +1024,7 @@ ADDMINUTESUTC(DATE('2024-01-01T01:01:01+00:00'), 3)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDMONTHS(dateTime, numberOfMonths)
 ```
 
@@ -718,15 +1055,12 @@ ADDMONTHS(dateTime, numberOfMonths)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDMONTHS(DATE('2024-01-01T01:01:01'), 3)
 ```
 
 Результат: `01.04.2024 1:01:01`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -758,7 +1092,7 @@ ADDMONTHS(DATE('2024-01-01T01:01:01'), 3)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDMONTHSUTC(dateTime, numberOfMonths)
 ```
 
@@ -789,15 +1123,12 @@ ADDMONTHSUTC(dateTime, numberOfMonths)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDMONTHSUTC(DATE('2024-01-01T01:01:01+00:00'), 3)
 ```
 
 Результат: `01.04.2024 4:01:01` для часового пояса UTC+3.
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -829,7 +1160,7 @@ ADDMONTHSUTC(DATE('2024-01-01T01:01:01+00:00'), 3)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDSECONDS(dateTime, number)
 ```
 
@@ -860,15 +1191,12 @@ ADDSECONDS(dateTime, number)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDSECONDS(DATE('2024-01-01T01:01:01'), 3)
 ```
 
 Результат: `01.01.2024 1:01:04`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -900,7 +1228,7 @@ ADDSECONDS(DATE('2024-01-01T01:01:01'), 3)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDSECONDSUTC(dateTime, number)
 ```
 
@@ -931,15 +1259,12 @@ ADDSECONDSUTC(dateTime, number)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDSECONDSUTC(DATE('2024-01-01T01:01:01+00:00'), 3)
 ```
 
 Результат: `01.01.2024 4:01:04` для часового пояса UTC+3.
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -971,7 +1296,7 @@ ADDSECONDSUTC(DATE('2024-01-01T01:01:01+00:00'), 3)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDUTC(dateTime, duration)
 ```
 
@@ -1002,16 +1327,13 @@ ADDUTC(dateTime, duration)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDUTC(DATE('2024-01-01T01:01:01+00:00'), DURATION('P1DT12H30M5S'))
 ```
 
 Результат: `02.01.2024 16:31:06` для часового пояса UTC+3.
 
-Здесь:
 
-- `DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
-- `DURATION()` — преобразует в длительность  строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -1043,7 +1365,7 @@ ADDUTC(DATE('2024-01-01T01:01:01+00:00'), DURATION('P1DT12H30M5S'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDYEARS(dateTime, number)
 ```
 
@@ -1074,15 +1396,12 @@ ADDYEARS(dateTime, number)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDYEARS(DATE('2024-01-01T01:01:01'), 3)
 ```
 
 Результат: `01.01.2027 1:01:01`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -1113,7 +1432,7 @@ ADDYEARS(DATE('2024-01-01T01:01:01'), 3)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDYEARSUTC(dateTime, number)
 ```
 
@@ -1144,15 +1463,12 @@ ADDYEARSUTC(dateTime, number)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ADDYEARSUTC(DATE('2024-01-01T01:01:01+00:00'), 3)
 ```
 
 Результат: `01.01.2027 4:01:01` для часового пояса UTC+3.
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -1184,7 +1500,7 @@ ADDYEARSUTC(DATE('2024-01-01T01:01:01+00:00'), 3)
 
 <td markdown="block">
 
-``` cs
+``` sql
 ALL(list)
 ```
 
@@ -1215,16 +1531,11 @@ ALL(list)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ALL(LIST(BOOL("true"), BOOL("true"), BOOL("false")))
 ```
 
 Результат: `False`
-
-Здесь:
-
-- [`BOOL()`](#bool) — преобразует строку в логическое значение.
-- [`LIST()`](#list) — определяет список. Берёт перечисление значений, разделяет их запятыми и возвращает список.
 
 </td>
 </tr>
@@ -1255,7 +1566,7 @@ ALL(LIST(BOOL("true"), BOOL("true"), BOOL("false")))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 AND(bool1, bool2)
 ```
 
@@ -1285,16 +1596,12 @@ AND(bool1, bool2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 AND(BOOL("true"), BOOL("true"))
 ```
 
 Результат: `True`
 
-Здесь:
-
-- [`BOOL()`](#bool) — преобразует строку в логическое значение.
-- [`LIST()`](#list) — определяет список. Берёт перечисление значений, разделяет их запятыми и возвращает список.
 
 </td>
 </tr>
@@ -1330,7 +1637,7 @@ AND(BOOL("true"), BOOL("true"))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ANY(list), ANY((sequence))
 ```
 
@@ -1363,7 +1670,7 @@ ANY(list), ANY((sequence))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ANY(from in db->Tickets where i->product = 'Data Monsoon' select i->name)
 ```
 
@@ -1401,7 +1708,7 @@ ANY(from in db->Tickets where i->product = 'Data Monsoon' select i->name)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ANY([(query), queryVar, boolEval])
 ```
 
@@ -1434,7 +1741,7 @@ ANY([(query), queryVar, boolEval])
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ANY([(
     from i in db->Tickets where i->product=='Data Monsoon' select i),
     i,
@@ -1472,7 +1779,7 @@ ANY([(
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ASCENDING(list)
 ```
 
@@ -1500,7 +1807,7 @@ ASCENDING(list)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ASCENDING('л', 'а', 'и')
 ```
 
@@ -1535,8 +1842,8 @@ ASCENDING('л', 'а', 'и')
 </td>
 <td markdown="block">
 
-``` cs
-AVERAGE(value1, value2)
+``` sql
+AVERAGE(argument1, argument2)
 ```
 
 </td>
@@ -1547,7 +1854,7 @@ AVERAGE(value1, value2)
 </td>
 <td markdown="block">
 
-`value1`, `value2`: число
+`argument1`, `argument2`: число
 </td>
 </tr>
 <tr markdown="block">
@@ -1565,7 +1872,7 @@ AVERAGE(value1, value2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 AVERAGE(1, 3, 4, 7, 10)
 ```
 
@@ -1601,7 +1908,7 @@ AVERAGE(1, 3, 4, 7, 10)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 BETWEEN(value, min, max)
 ```
 
@@ -1633,15 +1940,12 @@ BETWEEN(value, min, max)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 BETWEEN(DURATION("PT3H15M"), DURATION("PT3H1M"), DURATION("PT3H25M"))
 ```
 
 Результат: `True`
 
-Здесь:
-
-`DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -1673,7 +1977,7 @@ BETWEEN(DURATION("PT3H15M"), DURATION("PT3H1M"), DURATION("PT3H25M"))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 BETWEENUTC(value, min, max)
 ```
 
@@ -1705,80 +2009,12 @@ BETWEENUTC(value, min, max)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 BETWEENUTC(DATE("2023-01-15+00:00"), DATE("2024-02-15+01:00"), DATE("2024-08-15-01:00"))
 ```
 
 Результат: `False`
 
-Здесь:
-
-- `DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-## `BOOL()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-Преобразует строку в логический значение. Для правильной конвертации значение строки должно быть равно `true` или `false` без учёта регистра.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block" >
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` cs
-BOOL(string)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`string` — строка, которая преобразуется в логическое значение, со значением `true` или `false` (без учёта регистра). При неподходящих значениях атрибута (0, 1, истина, ложь и т. п.) функция возвращает пустое значение.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Логическое значение
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` cs
-BOOL('TrUE')
-```
-
-Результат: `True`
 </td>
 </tr>
 </tbody>
@@ -1808,7 +2044,7 @@ BOOL('TrUE')
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 CEILING(number)
 ```
 
@@ -1838,7 +2074,7 @@ CEILING(number)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 CEILING(4.1)
 ```
 
@@ -1873,7 +2109,7 @@ CEILING(4.1)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 CENTURY(dateTime)
 ```
 
@@ -1903,15 +2139,12 @@ CENTURY(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 CENTURY(DATE("2000-01-01T05:45:15"))
 ```
 
 Результат: `21`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -1943,7 +2176,7 @@ CENTURY(DATE("2000-01-01T05:45:15"))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 CENTURYUTC(dateTime)
 ```
 
@@ -1973,15 +2206,12 @@ CENTURYUTC(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 CENTURYUTC(DATE("2000-01-01T05:45:15+10:00"))
 ```
 
 Результат: `20`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -2016,7 +2246,7 @@ CENTURYUTC(DATE("2000-01-01T05:45:15+10:00"))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 COMPARE(duration1, duration2)
 ```
 
@@ -2046,15 +2276,12 @@ COMPARE(duration1, duration2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 COMPARE(DURATION("PT3H15M"), DURATION("PT3H16M"))
 ```
 
 Возвращает `-1`
 
-Здесь:
-
-`DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -2085,7 +2312,7 @@ COMPARE(DURATION("PT3H15M"), DURATION("PT3H16M"))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 CONCAT(list)
 ```
 
@@ -2115,7 +2342,7 @@ CONCAT(list)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 CONCAT(LIST("Сумма доходов равна: ", "100000"))
 ```
 
@@ -2155,7 +2382,7 @@ CONCAT(LIST("Сумма доходов равна: ", "100000"))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 CONTAINS(string, substring)
 ```
 
@@ -2186,7 +2413,7 @@ CONTAINS(string, substring)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 CONTAINS("Это срочная заявка.", "срочн")
 ```
 
@@ -2220,7 +2447,7 @@ CONTAINS("Это срочная заявка.", "срочн")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 CONVERTTIMEZONE(date, timeZone)
 ```
 
@@ -2251,15 +2478,12 @@ CONVERTTIMEZONE(date, timeZone)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 CONVERTTIMEZONE(DATE("2025-05-05T13:45:15+00:00"), "Europe/London")
 ```
 
 Результат: `05.05.2025 14:45:15` для часового пояса UTC+3.
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -2289,7 +2513,7 @@ CONVERTTIMEZONE(DATE("2025-05-05T13:45:15+00:00"), "Europe/London")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 CONVERTTIMEZONEUTC(date, timeZone)
 ```
 
@@ -2320,15 +2544,12 @@ CONVERTTIMEZONEUTC(date, timeZone)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 CONVERTTIMEZONEUTC(DATE("2025-05-05T13:45:15+00:00"), "Europe/Moscow")
 ```
 
 Результат: `05.05.2025 16:45:15`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -2358,7 +2579,7 @@ CONVERTTIMEZONEUTC(DATE("2025-05-05T13:45:15+00:00"), "Europe/Moscow")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 COUNT(list)
 ```
 
@@ -2388,7 +2609,7 @@ COUNT(list)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 COUNT(LIST("a", 2, "c", "d", 5))
 ```
 
@@ -2426,13 +2647,13 @@ COUNT(LIST("a", 2, "c", "d", 5))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 CREATEDATE(year, month, day)
 ```
 
 **или**
 
-``` cs
+``` sql
 CREATEDATE(year, month, day, hour, minute, second)
 ```
 
@@ -2462,7 +2683,7 @@ CREATEDATE(year, month, day, hour, minute, second)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 CREATEDATE(2025, 5, 5, 15, 45, 15)
 ```
 
@@ -2497,13 +2718,13 @@ CREATEDATE(2025, 5, 5, 15, 45, 15)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 CREATEDATEUTC(year, month, day)
 ```
 
 **или**
 
-``` cs
+``` sql
 CREATEDATEUTC(year, month, day, hour, minute, second)
 ```
 
@@ -2533,7 +2754,7 @@ CREATEDATEUTC(year, month, day, hour, minute, second)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 CREATEDATEUTC(2025, 5, 5, 15, 45, 15)
 ```
 
@@ -2568,13 +2789,13 @@ CREATEDATEUTC(2025, 5, 5, 15, 45, 15)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 DAY(dateTime)
 ```
 
 **или**
 
-``` cs
+``` sql
 DAY(dateTime, timeZone)
 ```
 
@@ -2606,15 +2827,12 @@ DAY(dateTime, timeZone)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 DAY(DATE("2025-05-05T23:45:15+00:00"), "Europe/Moscow")
 ```
 
 Результат: `6`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -2644,7 +2862,7 @@ DAY(DATE("2025-05-05T23:45:15+00:00"), "Europe/Moscow")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 DAYOFWEEK(dateTime)
 ```
 
@@ -2675,15 +2893,12 @@ DAYOFWEEK(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 DAYOFWEEK(DATE("2025-05-05T23:45:15"))
 ```
 
 Результат: `понедельник`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -2713,7 +2928,7 @@ DAYOFWEEK(DATE("2025-05-05T23:45:15"))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 DAYOFWEEKUTC(dateTime)
 ```
 
@@ -2744,15 +2959,12 @@ DAYOFWEEKUTC(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 DAYOFWEEKUTC(DATE("2025-05-05T23:45:15+00:00"))
 ```
 
 Результат: `понедельник`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -2782,7 +2994,7 @@ DAYOFWEEKUTC(DATE("2025-05-05T23:45:15+00:00"))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 DAYOFYEAR(dateTime)
 ```
 
@@ -2813,15 +3025,12 @@ DAYOFYEAR(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 DAYOFYEAR(DATE("2025-05-05T23:45:15"))
 ```
 
 Результат: `125`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -2851,7 +3060,7 @@ DAYOFYEAR(DATE("2025-05-05T23:45:15"))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 DAYOFYEARUTC(dateTime)
 ```
 
@@ -2882,15 +3091,12 @@ DAYOFYEARUTC(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 DAYOFYEARUTC(DATE("2025-05-05T23:45:15+00:00"))
 ```
 
 Результат: `125`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -2920,7 +3126,7 @@ DAYOFYEARUTC(DATE("2025-05-05T23:45:15+00:00"))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 DAYS(duration)
 ```
 
@@ -2951,15 +3157,12 @@ DAYS(duration)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 DAYS(DURATION('P12DT64H75M1360S'))
 ```
 
 Результат: `14,7344907407407`
 
-Здесь:
-
-`DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -2989,13 +3192,13 @@ DAYS(DURATION('P12DT64H75M1360S'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 DAYSINMONTH(dateTime)
 ```
 
 **или**
 
-``` cs
+``` sql
 DAYSINMONTH(year, month)
 ```
 
@@ -3027,21 +3230,18 @@ DAYSINMONTH(year, month)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 DAYSINMONTH(2024, 02)
 ```
 
 Результат: `29`
 
-``` cs
+``` sql
 DAYSINMONTH(DATE("2025-02-05T23:45:15"))
 ```
 
 Результат: `28`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -3071,13 +3271,13 @@ DAYSINMONTH(DATE("2025-02-05T23:45:15"))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 DAYSINMONTHUTC(dateTime)
 ```
 
 **или**
 
-``` cs
+``` sql
 DAYSINMONTHUTC(year, month)
 ```
 
@@ -3109,21 +3309,18 @@ DAYSINMONTHUTC(year, month)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 DAYSINMONTHUTC(2025, 02)
 ```
 
 Результат: `28`
 
-``` cs
+``` sql
 DAYSINMONTHUTC(DATE("2025-02-28T23:45:15-02:00"))
 ```
 
 Результат: `31`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -3153,7 +3350,7 @@ DAYSINMONTHUTC(DATE("2025-02-28T23:45:15-02:00"))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 DAYUTC(dateTime)
 ```
 
@@ -3184,89 +3381,16 @@ DAYUTC(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 DAYUTC(DATE("2025-04-30T23:45:15-02:00"))
 ```
 
 Результат: `1`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
 </table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-## `DECIMAL()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Преобразует строку в число типа `Decimal`.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` cs
-DECIMAL(string)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`string` — строка с числовым значением (например, 10, 10,5, 10 000 для русского языка или 10, 10.5, 10,000 — для английского, т. е. значение интерпретируется в соответствии с языком текущего пользователя). При неподходящих значениях атрибута (1 р., $50 и т. п.) функция возвращает пустое значение.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Число
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` cs
-DECIMAL("10,5")
-```
-
-Результат: `10,5`
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
 
 ## `DESCENDING()`
 
@@ -3287,7 +3411,7 @@ DECIMAL("10,5")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 DESCENDING(list)
 ```
 
@@ -3317,7 +3441,7 @@ DESCENDING(list)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 DESCENDING('л', 'а', 'и')
 ```
 
@@ -3352,7 +3476,7 @@ DESCENDING('л', 'а', 'и')
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 DISTINCT(list)
 ```
 
@@ -3380,7 +3504,7 @@ DISTINCT(list)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 DISTINCT(LIST('л', 'а', 'и', 'а', 'л'))
 ```
 
@@ -3419,7 +3543,7 @@ DISTINCT(LIST('л', 'а', 'и', 'а', 'л'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 DIVIDE(dividend, divisor)
 ```
 
@@ -3450,7 +3574,7 @@ DIVIDE(dividend, divisor)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 DIVIDE (125, 25)
 ```
 
@@ -3485,7 +3609,7 @@ DIVIDE (125, 25)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 EMPTY(argument)
 ```
 
@@ -3515,7 +3639,7 @@ EMPTY(argument)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 EMPTY(DIVIDE(3, 3))
 ```
 
@@ -3555,7 +3679,7 @@ EMPTY(DIVIDE(3, 3))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ENDOFDAY(dateTime)
 ```
 
@@ -3585,15 +3709,12 @@ ENDOFDAY(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ENDOFDAY(DATE('2025-05-05T01:01:01'))
 ```
 
 Результат: `05.05.2025 23:59:59`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -3623,7 +3744,7 @@ ENDOFDAY(DATE('2025-05-05T01:01:01'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ENDOFDAYUTC(dateTime)
 ```
 
@@ -3653,15 +3774,12 @@ ENDOFDAYUTC(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ENDOFDAYUTC(DATE('2025-05-05T01:01:01+03:00'))
 ```
 
 Результат: `04.05.2025 23:59:59`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -3691,7 +3809,7 @@ ENDOFDAYUTC(DATE('2025-05-05T01:01:01+03:00'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ENDOFMONTH(dateTime)
 ```
 
@@ -3720,15 +3838,12 @@ ENDOFMONTH(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ENDOFMONTH(DATE('2025-05-05T01:01:01'))
 ```
 
 Результат: `31.05.2025 23:59:59`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -3758,7 +3873,7 @@ ENDOFMONTH(DATE('2025-05-05T01:01:01'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ENDOFMONTHUTC(dateTime)
 ```
 
@@ -3787,15 +3902,12 @@ ENDOFMONTHUTC(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ENDOFMONTHUTC(DATE('2025-05-01T01:01:01+03:00'))
 ```
 
 Результат: `30.04.2025 23:59:59`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -3825,7 +3937,7 @@ ENDOFMONTHUTC(DATE('2025-05-01T01:01:01+03:00'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ENDOFQUARTER(dateTime)
 ```
 
@@ -3854,15 +3966,12 @@ ENDOFQUARTER(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ENDOFQUARTER(DATE('2025-04-01T01:01:01'))
 ```
 
 Результат: `30.06.2025 23:59:59`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -3892,7 +4001,7 @@ ENDOFQUARTER(DATE('2025-04-01T01:01:01'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ENDOFQUARTERUTC(dateTime)
 ```
 
@@ -3921,15 +4030,12 @@ ENDOFQUARTERUTC(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ENDOFQUARTERUTC(DATE('2025-04-01T01:01:01+03:00'))
 ```
 
 Результат: `31.03.2025 23:59:59`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -3959,7 +4065,7 @@ ENDOFQUARTERUTC(DATE('2025-04-01T01:01:01+03:00'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ENDOFWEEK(dateTime)
 ```
 
@@ -3988,15 +4094,12 @@ ENDOFWEEK(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ENDOFWEEK(DATE('2025-05-05T01:01:01'))
 ```
 
 Результат: `11.05.2025 23:59:59`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -4026,7 +4129,7 @@ ENDOFWEEK(DATE('2025-05-05T01:01:01'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ENDOFWEEKUTC(dateTime)
 ```
 
@@ -4055,15 +4158,12 @@ ENDOFWEEKUTC(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ENDOFWEEKUTC(DATE('2025-05-05T01:01:01+03:00'))
 ```
 
 Результат: `04.05.2025 23:59:59`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -4093,7 +4193,7 @@ ENDOFWEEKUTC(DATE('2025-05-05T01:01:01+03:00'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ENDOFYEAR(dateTime)
 ```
 
@@ -4122,15 +4222,12 @@ ENDOFYEAR(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ENDOFYEAR(DATE('2025-01-01T01:01:01'))
 ```
 
 Результат: `31.12.2025 23:59:59`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -4160,7 +4257,7 @@ ENDOFYEAR(DATE('2025-01-01T01:01:01'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ENDOFYEARUTC(dateTime)
 ```
 
@@ -4189,15 +4286,12 @@ ENDOFYEARUTC(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ENDOFYEARUTC(DATE('2025-01-01T01:01:01+03:00'))
 ```
 
 Результат: `31.12.2024 23:59:59`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -4228,7 +4322,7 @@ ENDOFYEARUTC(DATE('2025-01-01T01:01:01+03:00'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ENDSWITH(string, endString)
 ```
 
@@ -4257,7 +4351,7 @@ ENDSWITH(string, endString)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ENDSWITH("Строка", "ка")
 ```
 
@@ -4293,7 +4387,7 @@ ENDSWITH("Строка", "ка")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ENUMVALUE("enumAttributeSystemName", "enumValueSystemName")
 ```
 
@@ -4325,7 +4419,7 @@ ENUMVALUE("enumAttributeSystemName", "enumValueSystemName")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 EQUALS($Status, ID(ENUMVALUE("Status", "Resolved")))
 ```
 
@@ -4366,8 +4460,8 @@ EQUALS($Status, ID(ENUMVALUE("Status", "Resolved")))
 </td>
 <td markdown="block">
 
-``` cs
-EQ(value1, value2)
+``` sql
+EQ(argument1, argument2)
 ```
 
 </td>
@@ -4378,8 +4472,8 @@ EQ(value1, value2)
 </td>
 <td markdown="block">
 
-- `value1`, `value2`: дата и время.
-- `value1`, `value2`: длительность.
+- `argument1`, `argument2`: дата и время.
+- `argument1`, `argument2`: длительность.
 
 </td>
 </tr>
@@ -4397,15 +4491,12 @@ EQ(value1, value2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 EQ(DURATION('P2DT1H30M30S'), DURATION('P1DT25H30M30S'))
 ```
 
 Результат: `True`
 
-Здесь:
-
-`DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -4437,8 +4528,8 @@ EQ(DURATION('P2DT1H30M30S'), DURATION('P1DT25H30M30S'))
 </td>
 <td markdown="block">
 
-``` cs
-EQUALS(value1, value2)
+``` sql
+EQUALS(argument1, argument2)
 ```
 
 </td>
@@ -4449,7 +4540,7 @@ EQUALS(value1, value2)
 </td>
 <td markdown="block">
 
-`value1`, `value2`: логическое значение, дата и время, число, строка или длительность.
+`argument1`, `argument2`: логическое значение, дата и время, число, строка или длительность.
 
 </td>
 </tr>
@@ -4467,7 +4558,7 @@ EQUALS(value1, value2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 EQUALS("string", 2)
 ```
 
@@ -4503,7 +4594,7 @@ EQUALS("string", 2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 EQUTC(dateTime1, dateTime2)
 ```
 
@@ -4533,15 +4624,12 @@ EQUTC(dateTime1, dateTime2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 EQUTC(DATE('2025-01-01T01:01:01+03:00'), DATE('2025-01-01T00:01:01+02:00'))
 ```
 
 Результат: `True`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -4573,7 +4661,7 @@ EQUTC(DATE('2025-01-01T01:01:01+03:00'), DATE('2025-01-01T00:01:01+02:00'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 FIRST(list)
 ```
 
@@ -4603,7 +4691,7 @@ FIRST(list)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 FIRST((from i in db->music where i->album == 'Whale Meditation' select i->song))
 ```
 
@@ -4639,7 +4727,7 @@ FIRST((from i in db->music where i->album == 'Whale Meditation' select i->song))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 FIRSTCAPITAL(string)
 ```
 
@@ -4669,7 +4757,7 @@ FIRSTCAPITAL(string)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 FIRSTCAPITAL("строка")
 ```
 
@@ -4704,7 +4792,7 @@ FIRSTCAPITAL("строка")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 FLOOR(number)
 ```
 
@@ -4733,7 +4821,7 @@ FLOOR(number)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 FLOOR(5.9)
 ```
 
@@ -4768,11 +4856,11 @@ FLOOR(5.9)
 </td>
 <td markdown="block">
 
-``` cs
-FORMAT("stringToFormat {0} {1} ... {N}", LIST(value0, value1, ..., valueN))
+``` sql
+FORMAT("stringToFormat {0} {1} ... {N}", LIST(argument0, argument1, ..., valueN))
 ```
 
-Эта функция принимает строку с заполнителями вида `{0}`…`{N}` и список значений. Функция подставляет значения из списка в соответствующие заполнители и возвращает результирующую строку.
+Эта функция принимает строку с заполнителями вида `{0}`…`{N}` и список значений. Функция подставляет значения из списка в соответствующие заполнители и возвращает результирующую строку.
 
 </td>
 </tr>
@@ -4783,7 +4871,7 @@ FORMAT("stringToFormat {0} {1} ... {N}", LIST(value0, value1, ..., valueN))
 <td markdown="block">
 
 - `"stringToFormat {0} {1} ... {N}"`: строка.
-- `LIST(value0, value1, ..., valueN)`: список значений любых типов.
+- `LIST(argument0, argument1, ..., argumentN)`: список значений любых типов.
 
 </td>
 </tr>
@@ -4802,7 +4890,7 @@ FORMAT("stringToFormat {0} {1} ... {N}", LIST(value0, value1, ..., valueN))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 FORMAT("Название: {0}, исполнитель: {1}", LIST("Yesterday","Beatles"))
 ```
 
@@ -4828,7 +4916,7 @@ FORMAT("Название: {0}, исполнитель: {1}", LIST("Yesterday","B
 </td>
 <td markdown="block">
 
-Выполняет форматирование значения типа «**Длительность**» в строку в формате ISO 8601.
+Выполняет форматирование значения типа «**Длительность**» в строку в формате ISO&nbsp;8601.
 
 </td>
 </tr>
@@ -4838,7 +4926,7 @@ FORMAT("Название: {0}, исполнитель: {1}", LIST("Yesterday","B
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 FORMATDUR(duration)
 ```
 
@@ -4869,7 +4957,7 @@ FORMATDUR(duration)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 FORMATDUR($Duration)
 ```
 
@@ -4908,7 +4996,7 @@ FORMATDUR($Duration)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 FORMATLOC(dateTime, formatString)
 ```
 
@@ -4940,15 +5028,12 @@ FORMATLOC(dateTime, formatString)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 FORMATLOC(DATE('2025-05-05T05:05:25'), "dd MMMM yyyy года hh:mm:ss")
 ```
 
 Результат: `05 мая 2025 года 05:05:25`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -4979,7 +5064,7 @@ FORMATLOC(DATE('2025-05-05T05:05:25'), "dd MMMM yyyy года hh:mm:ss")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 FORMATUTC(dateTime, formatString)
 ```
 
@@ -5011,15 +5096,12 @@ FORMATUTC(dateTime, formatString)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 FORMATUTC(DATE('2025-05-05T05:05:25+03:00'), "dd MMMM yyyy года hh:mm:ss")
 ```
 
 Результат: `05 мая 2025 года 02:05:25`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -5050,7 +5132,7 @@ FORMATUTC(DATE('2025-05-05T05:05:25+03:00'), "dd MMMM yyyy года hh:mm:ss")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 GE(argument1, argument2)
 ```
 
@@ -5081,15 +5163,12 @@ GE(argument1, argument2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 GE(DURATION('P1DT1H30M30S'), DURATION('P2DT1H30M30S'))
 ```
 
 Результат: `False`
 
-Здесь:
-
-`DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -5121,7 +5200,7 @@ GE(DURATION('P1DT1H30M30S'), DURATION('P2DT1H30M30S'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 GETSPAN(dateTime1, dateTime2)
 ```
 
@@ -5151,15 +5230,12 @@ GETSPAN(dateTime1, dateTime2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 GETSPAN(DATE('2025-05-05T05:05:25'), DATE('2025-05-05T10:10:50'))
 ```
 
 Результат: `-05:05:25`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -5191,7 +5267,7 @@ GETSPAN(DATE('2025-05-05T05:05:25'), DATE('2025-05-05T10:10:50'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 GETSPANUTC(dateTime1, dateTime2)
 ```
 
@@ -5221,15 +5297,12 @@ GETSPANUTC(dateTime1, dateTime2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 GETSPANUTC(DATE('2025-05-05T05:05:25+00:00'), DATE('2025-05-05T05:05:25+05:00'))
 ```
 
 Результат: `05:00:00`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -5261,7 +5334,7 @@ GETSPANUTC(DATE('2025-05-05T05:05:25+00:00'), DATE('2025-05-05T05:05:25+05:00'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 GEUTC(dateTime1, dateTime2)
 ```
 
@@ -5291,15 +5364,12 @@ GEUTC(dateTime1, dateTime2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 GEUTC(DATE('2025-05-05T05:05:25+00:00'), DATE('2025-05-05T05:05:25+05:00'))
 ```
 
 Результат: `True`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -5331,7 +5401,7 @@ GEUTC(DATE('2025-05-05T05:05:25+00:00'), DATE('2025-05-05T05:05:25+05:00'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 GREATER(argument1, argument2)
 ```
 
@@ -5361,7 +5431,7 @@ GREATER(argument1, argument2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 GREATER(1, 0)
 ```
 
@@ -5397,7 +5467,7 @@ GREATER(1, 0)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 GREATEREQ(argument1, argument2)
 ```
 
@@ -5427,7 +5497,7 @@ GREATEREQ(argument1, argument2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 GREATEREQ("Строка", "Сорока")
 ```
 
@@ -5463,7 +5533,7 @@ GREATEREQ("Строка", "Сорока")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 GT(argument1, argument2)
 ```
 
@@ -5494,15 +5564,12 @@ GT(argument1, argument2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 GT(DATE('2025-05-05T05:05:25'), DATE('2025-05-05T05:05:25'))
 ```
 
 Результат: `False`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -5533,7 +5600,7 @@ GT(DATE('2025-05-05T05:05:25'), DATE('2025-05-05T05:05:25'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 GTUTC(argument1, argument2)
 ```
 
@@ -5563,15 +5630,12 @@ GTUTC(argument1, argument2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 GTUTC(DATE('2025-05-05T05:05:25+00:00'), DATE('2025-05-05T05:05:25+05:00'))
 ```
 
 Результат: `True`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -5602,13 +5666,13 @@ GTUTC(DATE('2025-05-05T05:05:25+00:00'), DATE('2025-05-05T05:05:25+05:00'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 HOUR(dateTime)
 ```
 
 **или**
 
-``` cs
+``` sql
 HOUR(dateTime, timeZone)
 ```
 
@@ -5639,15 +5703,12 @@ HOUR(dateTime, timeZone)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 HOUR(DATE('2025-05-05T05:05:25+00:00'), "Europe/Moscow")
 ```
 
 Результат: `8`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -5678,7 +5739,7 @@ HOUR(DATE('2025-05-05T05:05:25+00:00'), "Europe/Moscow")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 HOURS(duration)
 ```
 
@@ -5708,15 +5769,12 @@ HOURS(duration)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 HOURS(DURATION('P2DT1H0M0S'))
 ```
 
 Результат: `49`
 
-Здесь:
-
-`DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -5748,7 +5806,7 @@ HOURS(DURATION('P2DT1H0M0S'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 HOURUTC(dateTime)
 ```
 
@@ -5778,15 +5836,12 @@ HOURUTC(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 HOURUTC(DATE('2025-05-05T05:05:25+03:00'))
 ```
 
 Результат: `2`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -5816,7 +5871,7 @@ HOURUTC(DATE('2025-05-05T05:05:25+03:00'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ID(objectID)
 ```
 
@@ -5845,7 +5900,7 @@ ID объекта
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ID("oa.1")
 ```
 
@@ -5880,7 +5935,7 @@ ID("oa.1")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 IF(argument1, argument2, argument3)
 ```
 
@@ -5912,7 +5967,7 @@ IF(argument1, argument2, argument3)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 IF(1==2, "Верно", "Не верно")
 ```
 
@@ -5947,7 +6002,7 @@ IF(1==2, "Верно", "Не верно")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 INDEXOF(sourceString, stringToFind, [startIndex])
 ```
 
@@ -5979,7 +6034,7 @@ INDEXOF(sourceString, stringToFind, [startIndex])
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 INDEXOF("У ёлки иголки колки.", "лки", 4")
 ```
 
@@ -6015,7 +6070,7 @@ INDEXOF("У ёлки иголки колки.", "лки", 4")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 INSECONDS(argument)
 ```
 
@@ -6048,7 +6103,7 @@ INSECONDS(argument)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 INSECONDS(5)
 ```
 
@@ -6083,7 +6138,7 @@ INSECONDS(5)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 INSECONDSUTC(argument)
 ```
 
@@ -6116,15 +6171,12 @@ INSECONDSUTC(argument)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 INSECONDSUTC(DATE('2025-05-05T05:05:25+00:00'))
 ```
 
 Результат: `63882018325`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -6155,7 +6207,7 @@ INSECONDSUTC(DATE('2025-05-05T05:05:25+00:00'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ISLEAPYEAR(dateTime)
 ```
 
@@ -6185,15 +6237,12 @@ ISLEAPYEAR(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ISLEAPYEAR(DATE('2025-01-01T01:01:01'))
 ```
 
 Результат: `False`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -6224,7 +6273,7 @@ ISLEAPYEAR(DATE('2025-01-01T01:01:01'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ISLEAPYEARUTC(dateTime)
 ```
 
@@ -6254,15 +6303,12 @@ ISLEAPYEARUTC(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ISLEAPYEARUTC(DATE('2025-01-01T01:01:01+03:00'))
 ```
 
 Результат: `True`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -6293,7 +6339,7 @@ ISLEAPYEARUTC(DATE('2025-01-01T01:01:01+03:00'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ISOFORMAT(dateTime)
 ```
 
@@ -6322,11 +6368,11 @@ ISOFORMAT(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ISOFORMAT($_creationDate)
 ```
 
-Результат: дата в формате ISO 8601.
+Результат: дата в формате ISO&nbsp;8601.
 
 Здесь:
 
@@ -6361,7 +6407,7 @@ ISOFORMAT($_creationDate)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ISOFORMATUTC(dateTime)
 ```
 
@@ -6390,11 +6436,11 @@ ISOFORMATUTC(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ISOFORMATUTC($_creationDate)
 ```
 
-Результат: дата в формате ISO 8601 для часового пояса UTC-0.
+Результат: дата в формате ISO&nbsp;8601 для часового пояса UTC-0.
 
 Здесь:
 
@@ -6429,7 +6475,7 @@ ISOFORMATUTC($_creationDate)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ISTODAY(dateTime)
 ```
 
@@ -6459,7 +6505,7 @@ ISTODAY(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ISTODAY(NOW())
 ```
 
@@ -6498,7 +6544,7 @@ ISTODAY(NOW())
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ISTODAYUTC(dateTime)
 ```
 
@@ -6528,7 +6574,7 @@ ISTODAYUTC(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ISTODAYUTC(NOW())
 ```
 
@@ -6567,7 +6613,7 @@ ISTODAYUTC(NOW())
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ISWEEKEND(dateTime)
 ```
 
@@ -6597,15 +6643,12 @@ ISWEEKEND(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ISWEEKEND(DATE('2025-05-05T01:01:01'))
 ```
 
 Результат: `False`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -6636,7 +6679,7 @@ ISWEEKEND(DATE('2025-05-05T01:01:01'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ISWEEKENDUTC(dateTime)
 ```
 
@@ -6666,15 +6709,12 @@ ISWEEKENDUTC(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ISWEEKENDUTC(DATE('2025-05-05T01:01:01+03:00'))
 ```
 
 Результат: `True`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -6705,7 +6745,7 @@ ISWEEKENDUTC(DATE('2025-05-05T01:01:01+03:00'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ISWORKDAY(dateTime)
 ```
 
@@ -6735,15 +6775,12 @@ ISWORKDAY(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ISWORKDAY(DATE('2025-05-05T01:01:01'))
 ```
 
 Результат: `True`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -6774,7 +6811,7 @@ ISWORKDAY(DATE('2025-05-05T01:01:01'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ISWORKDAYUTC(dateTime)
 ```
 
@@ -6804,15 +6841,12 @@ ISWORKDAYUTC(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ISWORKDAYUTC(DATE('2025-05-05T01:01:01+03:00'))
 ```
 
 Результат: `False`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 </td>
 </tr>
 </tbody>
@@ -6842,7 +6876,7 @@ ISWORKDAYUTC(DATE('2025-05-05T01:01:01+03:00'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 JOIN(separator, LIST(string1, ..., stringN))
 ```
 
@@ -6872,7 +6906,7 @@ JOIN(separator, LIST(string1, ..., stringN))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 JOIN(", ", LIST("Аналитик", "Архитектор", "Администратор"))
 ```
 
@@ -6911,7 +6945,7 @@ JOIN(", ", LIST("Аналитик", "Архитектор", "Администр�
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 LAST(list)
 ```
 
@@ -6941,7 +6975,7 @@ LAST(list)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 LAST((from i in db->music where i->album == 'Whale Meditation' select i->song))
 ```
 
@@ -6977,7 +7011,7 @@ LAST((from i in db->music where i->album == 'Whale Meditation' select i->song))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 LE(argument1, argument2)
 ```
 
@@ -7008,15 +7042,12 @@ LE(argument1, argument2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 LE(DURATION('P2DT1H0M0S'), DURATION('P3DT1H0M0S'))
 ```
 
 Результат: `True`
 
-Здесь:
-
-`DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -7047,7 +7078,7 @@ LE(DURATION('P2DT1H0M0S'), DURATION('P3DT1H0M0S'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 LENGTH(string)
 ```
 
@@ -7076,7 +7107,7 @@ LENGTH(string)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 LENGTH("В этой строке 26 символов.")
 ```
 
@@ -7112,7 +7143,7 @@ LENGTH("В этой строке 26 символов.")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 LESS(argument1, argument2)
 ```
 
@@ -7142,7 +7173,7 @@ LESS(argument1, argument2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 LESS(1, 2)
 ```
 
@@ -7178,7 +7209,7 @@ LESS(1, 2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 LESSEQ(argument1, argument2)
 ```
 
@@ -7208,7 +7239,7 @@ LESSEQ(argument1, argument2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 LESSEQ(1, 1)
 ```
 
@@ -7243,7 +7274,7 @@ LESSEQ(1, 1)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 LIST(argument1, …, argumentN)
 ```
 
@@ -7272,7 +7303,7 @@ Cписок значений
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 LIST(1, 2, "a", "b")
 ```
 
@@ -7308,7 +7339,7 @@ LIST(1, 2, "a", "b")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 LISTEQUALS(list1, list2)
 ```
 
@@ -7337,7 +7368,7 @@ LISTEQUALS(list1, list2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 LISTEQUALS(LIST(1, 2), LIST("a", "b"))
 ```
 
@@ -7377,7 +7408,7 @@ LISTEQUALS(LIST(1, 2), LIST("a", "b"))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 LT(argument1, argument2)
 ```
 
@@ -7408,15 +7439,12 @@ LT(argument1, argument2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 LT(DURATION('P2DT1H0M0S'), DURATION('P3DT1H0M0S'))
 ```
 
 Результат: `True`
 
-Здесь:
-
-`DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -7448,7 +7476,7 @@ LT(DURATION('P2DT1H0M0S'), DURATION('P3DT1H0M0S'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 LTUTC(dateTime1, dateTime2)
 ```
 
@@ -7478,15 +7506,12 @@ LTUTC(dateTime1, dateTime2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 LTUTC(DATE('2025-05-05T01:01:01+03:00'), DATE('2025-05-05T01:01:01+04:00'))
 ```
 
 Результат: `True`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -7517,7 +7542,7 @@ LTUTC(DATE('2025-05-05T01:01:01+03:00'), DATE('2025-05-05T01:01:01+04:00'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 MATCHES(string, regex)
 ```
 
@@ -7547,7 +7572,7 @@ MATCHES(string, regex)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 MATCHES("Требуется решить проблему срочно!", "([Cс]рочн.+?)")
 ```
 
@@ -7583,7 +7608,7 @@ MATCHES("Требуется решить проблему срочно!", "([Cс
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 MAX(list)
 ```
 
@@ -7614,15 +7639,12 @@ MAX(list)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 MAX(DURATION('P2DT1H0M0S'), DURATION('P3DT1H0M0S'))
 ```
 
 Результат: `3.01:00:00`
 
-Здесь:
-
-`DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -7654,7 +7676,7 @@ MAX(DURATION('P2DT1H0M0S'), DURATION('P3DT1H0M0S'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 MIN(list)
 ```
 
@@ -7685,15 +7707,12 @@ MIN(list)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 MIN(DURATION('P2DT1H0M0S'), DURATION('P3DT1H0M0S'))
 ```
 
 Результат: `2.01:00:00`
 
-Здесь:
-
-`DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -7725,7 +7744,7 @@ MIN(DURATION('P2DT1H0M0S'), DURATION('P3DT1H0M0S'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 MINUTE(dateTime, [timeZone])
 ```
 
@@ -7756,15 +7775,12 @@ MINUTE(dateTime, [timeZone])
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 MINUTE(DATE('2025-05-05T01:01:01'))
 ```
 
 Результат: `1`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -7796,7 +7812,7 @@ MINUTE(DATE('2025-05-05T01:01:01'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 MINUTES(duration)
 ```
 
@@ -7826,15 +7842,12 @@ MINUTES(duration)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 MINUTES(DURATION('P1DT1H30M0S'))
 ```
 
 Результат: `1530`
 
-Здесь:
-
-`DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -7866,7 +7879,7 @@ MINUTES(DURATION('P1DT1H30M0S'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 MINUTEUTC(dateTime)
 ```
 
@@ -7896,15 +7909,12 @@ MINUTEUTC(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 MINUTEUTC(DATE('2025-05-05T01:01:01+03:30'))
 ```
 
 Результат: `31`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -7936,7 +7946,7 @@ MINUTEUTC(DATE('2025-05-05T01:01:01+03:30'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 MONTH(dateTime, [timeZone])
 ```
 
@@ -7967,15 +7977,12 @@ MONTH(dateTime, [timeZone])
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 MONTH(DATE('2025-05-01T01:01:01+03:00'), "Europe/London")
 ```
 
 Результат: `4`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -8007,7 +8014,7 @@ MONTH(DATE('2025-05-01T01:01:01+03:00'), "Europe/London")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 MONTHS(duration)
 ```
 
@@ -8037,15 +8044,12 @@ MONTHS(duration)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 MONTHS(DURATION('P30D'))
 ```
 
 Результат: `1`
 
-Здесь:
-
-`DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -8077,7 +8081,7 @@ MONTHS(DURATION('P30D'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 MONTHUTC(dateTime)
 ```
 
@@ -8107,15 +8111,12 @@ MONTHUTC(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 MONTHUTC(DATE('2025-05-01T01:01:01+03:00'))
 ```
 
 Результат: `4`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -8147,7 +8148,7 @@ MONTHUTC(DATE('2025-05-01T01:01:01+03:00'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 NE(argument1, argument2)
 ```
 
@@ -8178,15 +8179,12 @@ NE(argument1, argument2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 NE(DURATION('P0DT25H30M0S'), DURATION('P1DT1H30M0S'))
 ```
 
 Результат: `False`
 
-Здесь:
-
-`DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -8218,7 +8216,7 @@ NE(DURATION('P0DT25H30M0S'), DURATION('P1DT1H30M0S'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 NEUTC(dateTime1, dateTime2)
 ```
 
@@ -8248,15 +8246,12 @@ NEUTC(dateTime1, dateTime2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 NEUTC(DATE('2025-05-01T01:01:01+03:00'), DATE('2025-05-01T01:01:01+02:00'))
 ```
 
 Результат: `True`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -8288,7 +8283,7 @@ NEUTC(DATE('2025-05-01T01:01:01+03:00'), DATE('2025-05-01T01:01:01+02:00'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 NORMALIZE(string)
 ```
 
@@ -8318,7 +8313,7 @@ NORMALIZE(string)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 NORMALIZE("В этой   строке  были    лишние  пробелы, но теперь   их    нет.")
 ```
 
@@ -8353,7 +8348,7 @@ NORMALIZE("В этой   строке  были    лишние  пробелы,
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 NOT(boolean)
 ```
 
@@ -8383,7 +8378,7 @@ NOT(boolean)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 NOT(EMPTY($_creationDate))
 ```
 
@@ -8424,7 +8419,7 @@ NOT(EMPTY($_creationDate))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 NOTEQUALS(argument1, argument2)
 ```
 
@@ -8454,7 +8449,7 @@ NOTEQUALS(argument1, argument2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 NOTEQUALS("Строка", "Сорока")
 ```
 
@@ -8489,7 +8484,7 @@ NOTEQUALS("Строка", "Сорока")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 NOTMATCHES(string, regex)
 ```
 
@@ -8520,7 +8515,7 @@ NOTMATCHES(string, regex)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 NOTMATCHES("Требуется решить проблему срочно!", "([Cс]рочн.+?)")
 ```
 
@@ -8554,7 +8549,7 @@ NOTMATCHES("Требуется решить проблему срочно!", "([
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 NOW()
 ```
 
@@ -8582,7 +8577,7 @@ NOW()
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 NOW()
 ```
 
@@ -8616,7 +8611,7 @@ NOW()
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 OBJECT("businessApp", "template", "attribute", "attributeValue")
 ```
 
@@ -8649,7 +8644,7 @@ OBJECT("businessApp", "template", "attribute", "attributeValue")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 OBJECT("Fleetmanagement", "Requires", "Status", "Завершено")
 ```
 
@@ -8684,7 +8679,7 @@ OBJECT("Fleetmanagement", "Requires", "Status", "Завершено")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 OR(boolean1, boolean2)
 ```
 
@@ -8696,7 +8691,7 @@ OR(boolean1, boolean2)
 </td>
 <td markdown="block">
 
-`booleant1`, `boolean2`: логическое значение.
+`boolean1`, `boolean2`: логическое значение.
 
 </td>
 </tr>
@@ -8714,15 +8709,11 @@ OR(boolean1, boolean2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 OR(BOOL("true"), BOOL("false"))
 ```
 
 Результат: `True`
-
-Здесь:
-
-[`BOOL()`](#bool) — преобразует строку в логическое значение.
 
 </td>
 </tr>
@@ -8754,7 +8745,7 @@ OR(BOOL("true"), BOOL("false"))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 PARSEDATE(string, stringFormat)
 ```
 
@@ -8785,7 +8776,7 @@ PARSEDATE(string, stringFormat)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 PARSEDATE("050525", "MMddyy")
 ```
 
@@ -8821,7 +8812,7 @@ PARSEDATE("050525", "MMddyy")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 PARSEDATE(string, stringFormat)
 ```
 
@@ -8852,7 +8843,7 @@ PARSEDATE(string, stringFormat)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 PARSEDATEUTC("0505250001", "MMddyyhhmm")
 ```
 
@@ -8887,7 +8878,7 @@ PARSEDATEUTC("0505250001", "MMddyyhhmm")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 POW(base, degree)
 ```
 
@@ -8918,7 +8909,7 @@ POW(base, degree)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 POW(2, 8)
 ```
 
@@ -8953,7 +8944,7 @@ POW(2, 8)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 PRODUCT(number1, number2)
 ```
 
@@ -8984,7 +8975,7 @@ PRODUCT(number1, number2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 PRODUCT(3, 4)
 ```
 
@@ -9020,7 +9011,7 @@ PRODUCT(3, 4)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 QUARTERS(duration)
 ```
 
@@ -9050,15 +9041,12 @@ QUARTERS(duration)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 QUARTERS(DURATION('P200DT1H30M0S'))
 ```
 
 Результат: `2,2`
 
-Здесь:
-
-`DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -9089,7 +9077,7 @@ QUARTERS(DURATION('P200DT1H30M0S'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 QUOTIENT(dividend, divisor)
 ```
 
@@ -9120,7 +9108,7 @@ QUOTIENT(dividend, divisor)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 QUOTIENT(5, 2)
 ```
 
@@ -9154,7 +9142,7 @@ QUOTIENT(5, 2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 REGEXREPLACE(sourceString, regEx, replacementString)
 ```
 
@@ -9220,7 +9208,7 @@ REGEXREPLACE(sourceString, regEx, replacementString)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 REMAINDER(dividend, divisor)
 ```
 
@@ -9250,7 +9238,7 @@ REMAINDER(dividend, divisor)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 REMAINDER(5, 2)
 ```
 
@@ -9285,7 +9273,7 @@ REMAINDER(5, 2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 REPLACE(string, subString1, subString2)
 ```
 
@@ -9315,7 +9303,7 @@ REPLACE(string, subString1, subString2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 REPLACE("НДС равен восемнадцати процентам.", "восемнадцати", "двадцати")
 ```
 
@@ -9350,7 +9338,7 @@ REPLACE("НДС равен восемнадцати процентам.", "во�
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ROUND(number)
 ```
 
@@ -9379,7 +9367,7 @@ ROUND(number)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 ROUND(3.5)
 ```
 
@@ -9415,7 +9403,7 @@ ROUND(3.5)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 SECOND(dateTime, [timeZone])
 ```
 
@@ -9446,15 +9434,12 @@ SECOND(dateTime, [timeZone])
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 SECOND(DATE('2025-05-05T01:01:01'), "Europe/London")
 ```
 
 Результат: `1`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -9486,7 +9471,7 @@ SECOND(DATE('2025-05-05T01:01:01'), "Europe/London")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 SECONDS(duration)
 ```
 
@@ -9516,15 +9501,12 @@ SECONDS(duration)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 SECONDS(DURATION('P1DT1H30M0S'))
 ```
 
 Результат: `91800`
 
-Здесь:
-
-`DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -9556,7 +9538,7 @@ SECONDS(DURATION('P1DT1H30M0S'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 SECONDUTC(dateTime)
 ```
 
@@ -9586,15 +9568,12 @@ SECONDUTC(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 SECONDUTC(DATE('2025-05-05T01:01:01+01:00'))
 ```
 
 Результат: `1`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -9626,7 +9605,7 @@ SECONDUTC(DATE('2025-05-05T01:01:01+01:00'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 SQRT(number)
 ```
 
@@ -9656,7 +9635,7 @@ SQRT(number)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 SQRT(25)
 ```
 
@@ -9692,7 +9671,7 @@ SQRT(25)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 STARTOFDAY(dateTime)
 ```
 
@@ -9722,15 +9701,12 @@ STARTOFDAY(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 STARTOFDAY(DATE('2025-05-05T01:01:01'))
 ```
 
 Результат: `05.05.2025 0:00:00`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -9762,7 +9738,7 @@ STARTOFDAY(DATE('2025-05-05T01:01:01'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 STARTOFDAYUTC(dateTime)
 ```
 
@@ -9792,15 +9768,12 @@ STARTOFDAYUTC(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 STARTOFDAYUTC(DATE('2025-05-05T01:01:01+03:00'))
 ```
 
 Результат: `04.05.2025 0:00:00`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -9832,7 +9805,7 @@ STARTOFDAYUTC(DATE('2025-05-05T01:01:01+03:00'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 STARTOFMONTH(dateTime)
 ```
 
@@ -9862,15 +9835,12 @@ STARTOFMONTH(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 STARTOFMONTH(DATE('2025-05-01T01:01:01'))
 ```
 
 Результат: `01.05.2025 0:00:00`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -9902,7 +9872,7 @@ STARTOFMONTH(DATE('2025-05-01T01:01:01'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 STARTOFMONTHUTC(dateTime)
 ```
 
@@ -9932,15 +9902,12 @@ STARTOFMONTHUTC(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 STARTOFMONTHUTC(DATE('2025-05-01T01:01:01+03:00'))
 ```
 
 Результат: `01.04.2025 0:00:00`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -9972,7 +9939,7 @@ STARTOFMONTHUTC(DATE('2025-05-01T01:01:01+03:00'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 STARTOFQUARTER(dateTime)
 ```
 
@@ -10001,15 +9968,12 @@ STARTOFQUARTER(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 STARTOFQUARTER(DATE('2025-04-01T01:01:01'))
 ```
 
 Результат: `01.04.2025 0:00:00`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -10041,7 +10005,7 @@ STARTOFQUARTER(DATE('2025-04-01T01:01:01'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 STARTOFQUARTERUTC(dateTime)
 ```
 
@@ -10070,15 +10034,12 @@ STARTOFQUARTERUTC(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 STARTOFQUARTERUTC(DATE('2025-04-01T01:01:01+03:00'))
 ```
 
 Результат: `01.01.2025 0:00:00`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -10110,7 +10071,7 @@ STARTOFQUARTERUTC(DATE('2025-04-01T01:01:01+03:00'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 STARTOFWEEK(dateTime)
 ```
 
@@ -10140,15 +10101,12 @@ STARTOFWEEK(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 STARTOFWEEK(DATE('2025-05-05T01:01:01'))
 ```
 
 Результат: `05.05.2025 0:00:00`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -10180,7 +10138,7 @@ STARTOFWEEK(DATE('2025-05-05T01:01:01'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 STARTOFWEEKUTC(dateTime)
 ```
 
@@ -10210,15 +10168,12 @@ STARTOFWEEKUTC(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 STARTOFWEEKUTC(DATE('2025-05-05T01:01:01+03:00'))
 ```
 
 Результат: `28.04.2025 0:00:00`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -10250,7 +10205,7 @@ STARTOFWEEKUTC(DATE('2025-05-05T01:01:01+03:00'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 STARTOFYEAR(dateTime)
 ```
 
@@ -10279,15 +10234,12 @@ STARTOFYEAR(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 STARTOFYEAR(DATE('2025-01-01T01:01:01'))
 ```
 
 Результат: `01.01.2025 0:00:00`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -10319,7 +10271,7 @@ STARTOFYEAR(DATE('2025-01-01T01:01:01'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 STARTOFYEARUTC(dateTime)
 ```
 
@@ -10348,15 +10300,12 @@ STARTOFYEARUTC(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 STARTOFYEARUTC(DATE('2025-01-01T01:01:01+03:00'))
 ```
 
 Результат: `01.01.2024 0:00:00`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -10388,7 +10337,7 @@ STARTOFYEARUTC(DATE('2025-01-01T01:01:01+03:00'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 STARTSWITH(string, startString)
 ```
 
@@ -10417,7 +10366,7 @@ STARTSWITH(string, startString)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 STARTSWITH("Строка", "Стр")
 ```
 
@@ -10453,13 +10402,13 @@ STARTSWITH("Строка", "Стр")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 SUB(dateTime, duration)
 ```
 
 **или**
 
-``` cs
+``` sql
 SUB(duration, duration)
 ```
 
@@ -10490,16 +10439,11 @@ SUB(duration, duration)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 SUB(DATE('2025-01-01T01:01:01'), DURATION('P1DT1H30M0S'))
 ```
 
 Результат: `30.12.2024 23:31:01`
-
-Здесь:
-
-- `DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
-- `DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -10530,7 +10474,7 @@ SUB(DATE('2025-01-01T01:01:01'), DURATION('P1DT1H30M0S'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 SUBSTRING(sourceString, startIndex, [numberOfChars])
 ```
 
@@ -10562,7 +10506,7 @@ SUBSTRING(sourceString, startIndex, [numberOfChars])
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 SUBSTRING("Раньше эта строка начиналась с другого слова.", 7, 31)
 ```
 
@@ -10597,7 +10541,7 @@ SUBSTRING("Раньше эта строка начиналась с другог
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 SUBTRACT(argument1, argument2)
 ```
 
@@ -10630,7 +10574,7 @@ SUBTRACT(argument1, argument2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 SUBTRACT(17, 10)
 ```
 
@@ -10666,7 +10610,7 @@ SUBTRACT(17, 10)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 SUBUTC(dateTime, duration)
 ```
 
@@ -10697,16 +10641,12 @@ SUBUTC(dateTime, duration)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 SUBUTC(DATE('2025-01-01T01:01:01+00:00'), DURATION('P1DT1H30M0S'))
 ```
 
 Результат: `31.12.2024 2:31:01` для часового пояса UTC+3.
 
-Здесь:
-
-- `DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
-- `DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -10738,7 +10678,7 @@ SUBUTC(DATE('2025-01-01T01:01:01+00:00'), DURATION('P1DT1H30M0S'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 SUM(argument1, ..., argumentN)
 ```
 
@@ -10767,7 +10707,7 @@ SUM(argument1, ..., argumentN)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 SUM(1, 2, 3, 4)
 ```
 
@@ -10803,7 +10743,7 @@ SUM(1, 2, 3, 4)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 TODURATION(number)
 ```
 
@@ -10832,7 +10772,7 @@ TODURATION(number)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 TODURATION(12345)
 ```
 
@@ -10868,7 +10808,7 @@ TODURATION(12345)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 TOLOWER(string)
 ```
 
@@ -10897,7 +10837,7 @@ TOLOWER(string)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 TOLOWER("Все Буквы В Этой Строке Стали Прописными.")
 ```
 
@@ -10932,7 +10872,7 @@ TOLOWER("Все Буквы В Этой Строке Стали Прописны�
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 TOUPPER(string)
 ```
 
@@ -10961,7 +10901,7 @@ TOUPPER(string)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 TOUPPER("Все Буквы В Этой Строке Стали Заглавными.")
 ```
 
@@ -10996,7 +10936,7 @@ TOUPPER("Все Буквы В Этой Строке Стали Заглавны�
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 TRIM(string)
 ```
 
@@ -11025,11 +10965,11 @@ TRIM(string)
 </td>
 <td markdown="block">
 
-``` cs
-TRIM("   В этой строке были лишние пробелы.   ")
+``` sql
+TRIM("   В этой строке были лишние пробелы.   ")
 ```
 
-Результат: `В этой строке были лишние пробелы.`
+Результат: `В этой строке были лишние пробелы.`
 
 </td>
 </tr>
@@ -11060,7 +11000,7 @@ TRIM("   В этой строке были лишние пробелы.   ")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 UNION(object1, object2)
 ```
 
@@ -11089,7 +11029,7 @@ UNION(object1, object2)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 UNION(from i in db->music where i->album == 'Whale Meditation' select i->id, from i in db->music where i->album == 'Bird Song' select i->id)
 ```
 
@@ -11124,7 +11064,7 @@ UNION(from i in db->music where i->album == 'Whale Meditation' select i->id, fro
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 USER()
 ```
 
@@ -11152,7 +11092,7 @@ USER()
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 USER()
 ```
 
@@ -11188,7 +11128,7 @@ USER()
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 VALUE(argument, [defaultValue])
 ```
 
@@ -11219,7 +11159,7 @@ VALUE(argument, [defaultValue])
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 VALUE($Amount, "Не заполнено поле Amount")
 ```
 
@@ -11255,7 +11195,7 @@ VALUE($Amount, "Не заполнено поле Amount")
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 WEEKOFYEAR(dateTime)
 ```
 
@@ -11284,15 +11224,12 @@ WEEKOFYEAR(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 WEEKOFYEAR(DATE('2025-05-06T01:01:01'))
 ```
 
 Результат: `18`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -11324,7 +11261,7 @@ WEEKOFYEAR(DATE('2025-05-06T01:01:01'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 WEEKOFYEARUTC(dateTime)
 ```
 
@@ -11353,15 +11290,12 @@ WEEKOFYEARUTC(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 WEEKOFYEARUTC(DATE('2025-05-06T01:01:01+03:00'))
 ```
 
 Результат: `17`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -11395,7 +11329,7 @@ WEEKOFYEARUTC(DATE('2025-05-06T01:01:01+03:00'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 WORKDAYS(startDateTime, workingDays,
     [LIST(holidayDateTime1, …, holidayDateTimeN)]
     )
@@ -11429,16 +11363,13 @@ WORKDAYS(startDateTime, workingDays,
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 WORKDAYS(DATE('2025-05-01'), 10, LIST(DATE('2025-05-01'), 
         DATE('2025-05-02'), DATE('2025-05-08'), DATE('2025-05-09')))
 ```
 
 Результат: `21.05.2025 0:00:00`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -11472,7 +11403,7 @@ WORKDAYS(DATE('2025-05-01'), 10, LIST(DATE('2025-05-01'),
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 WORKDAYSDURATION(startDateTime, endDateTime,
     [LIST(holidayDateTime1, …, holidayDateTimeN)]
     )
@@ -11506,16 +11437,13 @@ WORKDAYSDURATION(startDateTime, endDateTime,
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 WORKDAYSDURATION(DATE('2025-05-01'), DATE('2025-05-12'), LIST(DATE('2025-05-01'), 
         DATE('2025-05-02'), DATE('2025-05-08'), DATE('2025-05-09')))
 ```
 
 Результат: `3.00:00:00`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -11547,7 +11475,7 @@ WORKDAYSDURATION(DATE('2025-05-01'), DATE('2025-05-12'), LIST(DATE('2025-05-01')
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 WORKDAYSDURATIONTZ(startDateTime, endDateTime,
     LIST(holidayDateTime1, …, holidayDateTimeN),
     timeZone
@@ -11583,16 +11511,13 @@ WORKDAYSDURATIONTZ(startDateTime, endDateTime,
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 WORKDAYSDURATIONTZ(DATE('2025-05-01'), DATE('2025-05-12'), LIST(DATE('2025-05-01'), 
         DATE('2025-05-02'), DATE('2025-05-08'), DATE('2025-05-09')), "Asia/Tokyo")
 ```
 
 Результат: `3.06:00:00`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -11624,7 +11549,7 @@ WORKDAYSDURATIONTZ(DATE('2025-05-01'), DATE('2025-05-12'), LIST(DATE('2025-05-01
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 WORKDAYSDURATIONUTC(startDateTime, endDateTime)
 ```
 
@@ -11654,15 +11579,12 @@ WORKDAYSDURATIONUTC(startDateTime, endDateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 WORKDAYSDURATIONUTC(DATE('2025-05-01+03:00'), DATE('2025-05-12+00:00'))
 ```
 
 Результат: `10`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -11694,7 +11616,7 @@ WORKDAYSDURATIONUTC(DATE('2025-05-01+03:00'), DATE('2025-05-12+00:00'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 WORKDAYSTZ(startDay, workingDays,
     LIST(holidayDateTime1, …, holidayDateTimeN),
     timeZone)
@@ -11729,7 +11651,7 @@ WORKDAYSTZ(startDay, workingDays,
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 WORKDAYSTZ(DATE('2025-05-01+03:00'), 10, LIST(DATE('2025-05-01'), 
         DATE('2025-05-02'), DATE('2025-05-08'), DATE('2025-05-09')),
         "America/Anchorage")
@@ -11737,9 +11659,6 @@ WORKDAYSTZ(DATE('2025-05-01+03:00'), 10, LIST(DATE('2025-05-01'),
 
 Результат: `20.05.2025 0:00:00`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -11770,7 +11689,7 @@ WORKDAYSTZ(DATE('2025-05-01+03:00'), 10, LIST(DATE('2025-05-01'),
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 WORKDAYSUTC(startDay, workingDays)
 ```
 
@@ -11801,15 +11720,12 @@ WORKDAYSUTC(startDay, workingDays)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 WORKDAYSUTC()
 ```
 
 Результат: ``
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -11843,7 +11759,7 @@ WORKDAYSUTC()
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 WORKHOURS(startDateTime, workingHours, 
     workingDayStart, workingDayDuration,
     [LIST(holidayDateTime1, ..., holidayDateTimeN)])
@@ -11879,17 +11795,13 @@ WORKHOURS(startDateTime, workingHours,
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 WORKHOURS(DATE('2025-05-01'), 5, DURATION('PT9H'), DURATION('PT4H'), LIST(DATE('2025-05-01'), 
         DATE('2025-05-02'), DATE('2025-05-08'), DATE('2025-05-09')))
 ```
 
 Результат: `06.05.2025 10:00:00`
 
-Здесь:
-
-- `DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
-- `DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -11922,7 +11834,7 @@ WORKHOURS(DATE('2025-05-01'), 5, DURATION('PT9H'), DURATION('PT4H'), LIST(DATE('
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 WORKHOURSDURATION(startDateTime, endDateTime, 
     workingDayStart, workingDayDuration,
     [LIST(holidayDateTime1, ..., holidayDateTimeN)])
@@ -11958,17 +11870,13 @@ WORKHOURSDURATION(startDateTime, endDateTime,
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 WORKHOURSDURATION(DATE('2025-05-01'), DATE('2025-05-07'), DURATION('PT8H'), DURATION('PT15H'), LIST(DATE('2025-05-01'), 
         DATE('2025-05-02'), DATE('2025-05-08'), DATE('2025-05-09')))
 ```
 
 Результат: `22:00:00`
 
-Здесь:
-
-- `DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
-- `DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -11999,7 +11907,7 @@ WORKHOURSDURATION(DATE('2025-05-01'), DATE('2025-05-07'), DURATION('PT8H'), DURA
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 WORKHOURSDURATIONTZ(startDateTime, endDateTime, 
     workingDayStart, workingDayDuration,
     LIST(holiday1, ..., holidayN),
@@ -12037,7 +11945,7 @@ WORKHOURSDURATIONTZ(startDateTime, endDateTime,
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 WORKHOURSDURATIONTZ(DATE('2025-05-01'), DATE('2025-05-07'), DURATION('PT8H'), DURATION('PT15H'), LIST(DATE('2025-05-01'), 
         DATE('2025-05-02'), DATE('2025-05-08'), DATE('2025-05-09')),
         "Asia/Tokyo")
@@ -12045,10 +11953,6 @@ WORKHOURSDURATIONTZ(DATE('2025-05-01'), DATE('2025-05-07'), DURATION('PT8H'), DU
 
 Результат: `1.04:00:00`
 
-Здесь:
-
-- `DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
-- `DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -12079,7 +11983,7 @@ WORKHOURSDURATIONTZ(DATE('2025-05-01'), DATE('2025-05-07'), DURATION('PT8H'), DU
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 WORKHOURSTZ(startDateTime, workingHours, 
     workingDayStart, workingDayDuration,
     LIST(holidayDateTime1, ..., holidayDateTimeN),
@@ -12117,18 +12021,13 @@ WORKHOURSTZ(startDateTime, workingHours,
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 WORKHOURSTZ(DATE('2025-05-01'), 5, DURATION('PT9H'), DURATION('PT4H'), LIST(DATE('2025-05-01'), 
         DATE('2025-05-02'), DATE('2025-05-08'), DATE('2025-05-09')),
         "America/Anchorage")
 ```
 
 Результат: `05.05.2025 10:00:00`
-
-Здесь:
-
-- `DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
-- `DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -12160,7 +12059,7 @@ WORKHOURSTZ(DATE('2025-05-01'), 5, DURATION('PT9H'), DURATION('PT4H'), LIST(DATE
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 YEAR(dateTime, [timeZone])
 ```
 
@@ -12191,15 +12090,12 @@ YEAR(dateTime, [timeZone])
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 YEAR(DATE('2025-01-01+03:00'), "America/Anchorage")
 ```
 
 Результат: `2024`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -12261,15 +12157,12 @@ YEARS(duration)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 YEARS(DURATION('P183D'))
 ```
 
 Результат: `0,5`
 
-Здесь:
-
-`DURATION()` — преобразует в длительность строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -12301,7 +12194,7 @@ YEARS(DURATION('P183D'))
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 YEAR(dateTime)
 ```
 
@@ -12331,15 +12224,12 @@ YEAR(dateTime)
 </td>
 <td markdown="block">
 
-``` cs
+``` sql
 YEARUTC(DATE('2025-01-01+03:00'))
 ```
 
 Результат: `2024`
 
-Здесь:
-
-`DATE()` — преобразует в дату строковый литерал в формате ISO 8601.
 
 </td>
 </tr>
@@ -12350,5 +12240,15 @@ YEARUTC(DATE('2025-01-01+03:00'))
 <tbody markdown="block">
 <tr markdown="block">
 <th colspan="2" markdown="block">
+
+<div class="relatedTopics" markdown="block">
+
+--8<-- "related_topics_heading.md"
+
+- [Редактор выражений][expression_editor]
+- [Введение в язык формул Comindware][formula_introduction]
+- [Форматирование значений в шаблонах экспорта и формулах][export_template_file_formula_format_values]
+
+</div>
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
