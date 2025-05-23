@@ -230,7 +230,7 @@ DECIMAL(string)
 
 ``` sql
 IF (USER()->language=='ru',
-    DECIMAL(REPLACE("10000,5", ".", ",")),
+    DECIMAL(REPLACE("10000.5", ".", ",")),
     DECIMAL(REPLACE("10000,5", ",", ".")))
 ```
 
