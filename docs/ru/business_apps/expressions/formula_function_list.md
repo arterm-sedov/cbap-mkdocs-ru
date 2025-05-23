@@ -12235,10 +12235,6 @@ YEARUTC(DATE('2025-01-01+03:00'))
 </tbody>
 </table>
 
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
 
 <div class="relatedTopics" markdown="block">
 
