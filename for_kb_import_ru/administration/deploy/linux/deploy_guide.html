@@ -21,6 +21,17 @@
       Порядок развёртывания ПО Comindware Platform
     </span>
 </a>
+<nav aria-label="Порядок развёртывания ПО Comindware Platform" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#требования-к-внешним-службам">
+<span class="md-ellipsis">
+      Требования к внешним службам
+    </span>
+</a>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#deploy_guide_linux_prerequisites_install">
@@ -206,6 +217,17 @@
 <li>Запустите экземпляр ПО.</li>
 <li>Инициализируйте экземпляр ПО.</li>
 </ol>
+<h3 id="требования-к-внешним-службам">Требования к внешним службам</h3>
+<p>Для работы <strong>Comindware Platform</strong> необходимо развернуть следующие внешние службы:</p>
+<ul>
+<li>сервер журналирования транзакций OpenSearch (Elasticsearch);</li>
+<li>сервер брокера сообщений Apache Kafka.</li>
+</ul>
+<p>Установите и настройте это ПО согласно следующим инструкциям:</p>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4601">Elasticsearch. Установка в Linux</a></em></li>
+<li><em>[Apache Kafka. Установка в Linux][kafka_deploy_lin]</em></li>
+</ul>
 <h2 id="deploy_guide_linux_prerequisites_install">Установка вспомогательного ПО</h2>
 <p>Прежде чем приступать к установке вспомогательного ПО, необходимого для работы <strong>Comindware Platform</strong>, ознакомьтесь с демонстрационным роликом и инструкциями, представленными ниже.</p>
 <h3 id="deploy_guide_linux_prerequisites_install_video">Видеоинструкция</h3>
@@ -249,9 +271,8 @@
 <li>
 <p><code>-k</code> — установить службу Kafka (необязательный ключ).</p>
 </li>
-<li>
-<p><code>-kh=&lt;hostname&gt;</code> или <code>--kafkaHost=&lt;hostname&gt;</code> — использовать указанный хост для подключения к ПО Kafka (необязательный ключ).</p>
-</li>
+<li><code>-kc</code> — установить клиент Apache Kafka (необязательный ключ).</li>
+<li><code>-kh=&lt;hostname&gt;</code> или <code>--kafkaHost=&lt;hostname&gt;</code> — использовать указанный хост для подключения к ПО Kafka (необязательный ключ).</li>
 <li><code>-kp=&lt;portNumber&gt;</code> или <code>--kafkaPort=&lt;portNumber&gt;</code> — использовать указанный порт для подключения к ПО Kafka (необязательный ключ).</li>
 <li><code>-h</code> — вызов краткой справки по использованию скрипта (указывать только без остальных ключей).</li>
 </ul>
@@ -499,11 +520,11 @@
 </li>
 <li>
 <p>Удостоверьтесь, что основные службы установлены, запущены и имеют статус <code>Active (running)</code>:</p>
-<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>status<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>status<span class="w"> </span>apigateway&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>status<span class="w"> </span>adapterhost&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>status<span class="w"> </span>kafka</code> <br/><code>systemctl<span class="w"> </span>status<span class="w"> </span>nginx</code> <br/><code>systemctl<span class="w"> </span>status<span class="w"> </span>elasticsearch</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>status<span class="w"> </span>apigateway&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>status<span class="w"> </span>adapterhost&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>status<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Если какая-либо служба не работает, запустите её:</p>
-<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>start<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>start<span class="w"> </span>apigateway&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>start<span class="w"> </span>adapterhost&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>start<span class="w"> </span>kafka</code> <br/><code>systemctl<span class="w"> </span>start<span class="w"> </span>nginx</code> <br/><code>systemctl<span class="w"> </span>start<span class="w"> </span>elasticsearch</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>start<span class="w"> </span>apigateway&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>start<span class="w"> </span>adapterhost&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>start<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Выполните инициализацию ПО.</p>
@@ -639,11 +660,11 @@
 </li>
 <li>
 <p>Перед тем как выполнять любые действия с файлами ПО и базы данных, остановите службы, поддерживающие работу ПО:</p>
-<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>stop<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>stop<span class="w"> </span>apigateway&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>stop<span class="w"> </span>adapterhost&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>stop<span class="w"> </span>kafka</code> <br/><code>systemctl<span class="w"> </span>stop<span class="w"> </span>nginx</code> <br/><code>systemctl<span class="w"> </span>stop<span class="w"> </span>elasticsearch</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>stop<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>stop<span class="w"> </span>apigateway&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>stop<span class="w"> </span>adapterhost&lt;instanceName&gt;</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Удостоверьтесь, что службы остановлены:</p>
-<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>status<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>status<span class="w"> </span>apigateway&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>status<span class="w"> </span>adapterhost&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>status<span class="w"> </span>kafka</code> <br/><code>systemctl<span class="w"> </span>status<span class="w"> </span>nginx</code> <br/><code>systemctl<span class="w"> </span>status<span class="w"> </span>elasticsearch</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>status<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>status<span class="w"> </span>apigateway&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>status<span class="w"> </span>adapterhost&lt;instanceName&gt;</code> <br/></pre></code></div>
 </li>
 </ol>
 <h2 id="удаление-версии-и-экземпляра-по">Удаление версии и экземпляра ПО</h2>

@@ -124,6 +124,7 @@
 <p><code>&lt;config_backup_path&gt;</code> — путь к папке для сохранения резервных копий файлов конфигурации (например, <code>X:\backups\config_tmp</code>).</p>
 </li>
 <li><code>&lt;iis-config-backup&gt;</code> — имя резервной копии конфигурации IIS.</li>
+<li><code>&lt;instanceAppPool&gt;</code> — имя пула приложений для экземпляра ПО.</li>
 <li><code>&lt;ГГГГ-ММ-ДД&gt;</code> — текущая дата.</li>
 </ul>
 </div>
@@ -302,10 +303,7 @@
 </ul>
 </li>
 <li>
-<p>По окончании создания скрипт выведет информацию о компонентах экземпляра ПО. Удостоверьтесь, что компоненты успешно установлены.</p>
-<p>Если какая-либо из служб имеет статус <code>FAILED</code>, перезапустите её. Например:</p>
-<div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">instance_stop</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span></code> <br/><code><span class="p">.\</span><span class="n">adapterhost_stop</span><span class="p">.</span><span class="n">ps1</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span></code> <br/><code><span class="p">.\</span><span class="n">apigateway_stop</span><span class="p">.</span><span class="n">ps1</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span></code> <br/></pre></code></div>
-<div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">instance_start</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span></code> <br/><code><span class="p">.\</span><span class="n">adapterhost_start</span><span class="p">.</span><span class="n">ps1</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span></code> <br/><code><span class="p">.\</span><span class="n">apigateway_start</span><span class="p">.</span><span class="n">ps1</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span></code> <br/></pre></code></div>
+<p>По окончании создания экземпляра ПО скрипт выведет информацию об установленных службах. При наличии ошибок исправьте конфигурацию, как указано ниже, и перезапустите службу.</p>
 </li>
 <li>
 <p>Восстановите конфигурацию IIS для экземпляра ПО из резервной копии:</p>

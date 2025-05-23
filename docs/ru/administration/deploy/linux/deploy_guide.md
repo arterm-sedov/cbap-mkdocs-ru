@@ -23,6 +23,18 @@ kbId: 4622
 4. Запустите экземпляр ПО.
 5. Инициализируйте экземпляр ПО.
 
+### Требования к внешним службам
+
+Для работы **{{ productName }}** необходимо развернуть следующие внешние службы:
+
+- сервер журналирования транзакций {{ openSearchVariants }};
+- сервер брокера сообщений {{ apacheKafkaVariants }}.
+
+Установите и настройте это ПО согласно следующим инструкциям:
+
+- _[Elasticsearch. Установка в Linux][elasticsearch_deploy_Linux]_
+- _[Apache Kafka. Установка в Linux][kafka_deploy_lin]_
+
 ## Установка вспомогательного ПО {: #deploy_guide_linux_prerequisites_install }
 
 Прежде чем приступать к установке вспомогательного ПО, необходимого для работы **{{ productName }}**, ознакомьтесь с демонстрационным роликом и инструкциями, представленными ниже.
@@ -79,9 +91,7 @@ kbId: 4622
     - `-e` — установить службу Elasticsearch (необязательный ключ).
     {% endif %}
     - `-k` — установить службу Kafka (необязательный ключ).
-    {% if kafkaClientKey %}
-    - `-kc` — установить клиент Kafka (необязательный ключ).
-    {% endif %}
+    - `-kc` — установить клиент Apache Kafka (необязательный ключ).
     - `-kh=<hostname>` или `--kafkaHost=<hostname>` — использовать указанный хост для подключения к ПО Kafka (необязательный ключ).
     - `-kp=<portNumber>` или `--kafkaPort=<portNumber>` — использовать указанный порт для подключения к ПО Kafka (необязательный ключ).
     - `-h` — вызов краткой справки по использованию скрипта (указывать только без остальных ключей).
@@ -460,23 +470,17 @@ kbId: 4622
 2. Удостоверьтесь, что основные службы установлены, запущены и имеют статус `Active (running)`:
 
     ``` sh
-    systemctl status comindware<instanceName>
     systemctl status apigateway<instanceName>
     systemctl status adapterhost<instanceName>
-    systemctl status kafka
-    systemctl status nginx
-    systemctl status elasticsearch
+    systemctl status comindware<instanceName>
     ```
 
 3. Если какая-либо служба не работает, запустите её:
 
     ``` sh
-    systemctl start comindware<instanceName>
     systemctl start apigateway<instanceName>
     systemctl start adapterhost<instanceName>
-    systemctl start kafka
-    systemctl start nginx
-    systemctl start elasticsearch
+    systemctl start comindware<instanceName>
     ```
 
 4. Выполните инициализацию ПО.
@@ -627,9 +631,6 @@ mmap(PROT_NONE) failed
     systemctl stop comindware<instanceName>
     systemctl stop apigateway<instanceName>
     systemctl stop adapterhost<instanceName>
-    systemctl stop kafka
-    systemctl stop nginx
-    systemctl stop elasticsearch
     ```
 
 3. Удостоверьтесь, что службы остановлены:
@@ -638,9 +639,6 @@ mmap(PROT_NONE) failed
     systemctl status comindware<instanceName>
     systemctl status apigateway<instanceName>
     systemctl status adapterhost<instanceName>
-    systemctl status kafka
-    systemctl status nginx
-    systemctl status elasticsearch
     ```
 
 ## Удаление версии и экземпляра ПО
