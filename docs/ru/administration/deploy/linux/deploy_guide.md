@@ -33,7 +33,7 @@ kbId: 4622
 Установите и настройте это ПО согласно следующим инструкциям:
 
 - _[Elasticsearch. Установка в Linux][elasticsearch_deploy_Linux]_
-- _[Apache Kafka. Установка в Linux][kafka_deploy_lin]_
+- _[Apache Kafka. Установка в Linux][kafka_deploy_linux]_
 
 ## Установка вспомогательного ПО {: #deploy_guide_linux_prerequisites_install }
 
