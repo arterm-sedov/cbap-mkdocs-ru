@@ -95,6 +95,150 @@ BOOL('TRUE')
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
+### `CREATEDATE()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Преобразует числовые аргументы (год, месяц, день, часы, минуты, секунды) в значение типа «**Дата и время**».
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+CREATEDATE(year, month, day)
+```
+
+**или**
+
+``` sql
+CREATEDATE(year, month, day, hour, minute, second)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`year, month, day, hour, minute, second`: числа.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Дата и время
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+CREATEDATE(2025, 5, 5, 15, 45, 15)
+```
+
+Результат: `05.05.2025 15:45:15`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `CREATEDATEUTC()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Преобразует числовые аргументы (год, месяц, день, часы, минуты, секунды) в значение типа «**Дата и время**» в часовом поясе `UTC+00:00`.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+CREATEDATEUTC(year, month, day)
+```
+
+**или**
+
+``` sql
+CREATEDATEUTC(year, month, day, hour, minute, second)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`year, month, day, hour, minute, second`: числа.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Дата и время
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+CREATEDATEUTC(2025, 5, 5, 15, 45, 15)
+```
+
+Результат: `05.05.2025 15:45:15`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
 ### `DATE()`
 
 </th>
@@ -382,7 +526,8 @@ ID(string)
 </tbody>
 </table>
 
-## Функции для вычислений и обработки данных {: #formula_reference_functions }
+[](){: #formula_reference_functions }
+## Математические функции {: #formula_reference_functions_math }
 
 <table markdown="block">
 <tbody markdown="block">
@@ -456,6 +601,3526 @@ ADD(DATE('2024-01-01T01:01:01'), DURATION('P3Y6M4DT12H30M5S'))
 </tr>
 </tbody>
 </table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `CEILING()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Округляет аргумент до ближайшего бо́льшего целого.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block" >
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+CEILING(number)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`number` — число, которое требуется округлить.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+CEILING(4.1)
+```
+
+Результат: `5`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `DIVIDE()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Возвращает результат деления двух числовых аргументов.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+DIVIDE(dividend, divisor)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+- `dividend`: число, делимое
+- `divisor`: число, делитель
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+DIVIDE (125, 25)
+```
+
+Результат: `5`
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `FLOOR()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Округляет число до ближайшего меньшего целого.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+FLOOR(number)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`number`: число.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+FLOOR(5.9)
+```
+
+Результат: `5`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `POW()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Возводит первый аргумент в степень, указанную во втором аргументе, и возвращает результат.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+POW(base, degree)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+- `base`: число.
+- `degree`: число.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+POW(2, 8)
+```
+
+Результат: `256`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `PRODUCT()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Перемножает два числовых аргумента.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+PRODUCT(number1, number2)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+- `number1`: число.
+- `number2`: число.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+PRODUCT(3, 4)
+```
+
+Результат: `12`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `QUOTIENT()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Возвращает целую часть результата деления первого аргумента на второй.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+QUOTIENT(dividend, divisor)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+- `dividend`: число, делимое.
+- `divisor`: число, делитель.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+QUOTIENT(5, 2)
+```
+
+Результат: `2`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `REMAINDER()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Возвращает остаток от деления первого аргумента на второй.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+REMAINDER(dividend, divisor)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`dividend`: число, делимое.
+`divisor`: число, делитель.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+REMAINDER(5, 2)
+```
+
+Результат: `1`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `ROUND()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Округляет число до ближайшего целого.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+ROUND(number)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`number`: число.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+ROUND(3.5)
+```
+
+Результат: `4`
+
+``` sql
+ROUND(3.4)
+```
+
+Результат: `3`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `SQRT()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Вычисляет квадратный корень аргумента.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+SQRT(number)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`number`: число.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+SQRT(25)
+```
+
+Результат: `5`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `SUBTRACT()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Вычисляет разность двух аргументов типа «**Число**», «**Длительность**» или «**Дата и время**».
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+SUBTRACT(argument1, argument2)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+- `argument1`: число; `argument2`: число.
+- `argument1`: длительность; `argument2`: длительность.
+- `argument1`: дата и время; `argument2`: длительность.
+- `argument1`: дата и время; `argument2`: дата и время.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число, длительность или дата и время.
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+SUBTRACT(17, 10)
+```
+
+Результат: `7`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## Функции для сравнения {: #formula_reference_functions_compare }
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `EQUALS()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Сравнивает два аргумента и возвращает `True`, если они равны, в противном случае возвращает `False`.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+EQUALS(argument1, argument2)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`argument1`, `argument2`: логическия значения, дата и время, длительность, числа, или строки.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+EQUALS("string", 2)
+```
+
+Результат: `False`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `GREATER()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Возвращает логическое значение `True`, если первый аргумент больше второго, в противном случае возвращает `False`.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+GREATER(argument1, argument2)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`argument1`, `argument2`: числа, строки, длительность или дата и время.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+GREATER(1, 0)
+```
+
+Результат: `True`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `GREATEREQ()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Возвращает логическое значение `True`, если первый аргумент больше или равен второму, в противном случае возвращает `False`.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+GREATEREQ(argument1, argument2)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`argument1`, `argument2`: числа, строки, длительность или дата и время.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+GREATEREQ("Строка", "Сорока")
+```
+
+Результат: `True`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `LESS()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Сравнивает два аргумента, возвращает логическое значение `True`, если первый аргумент меньше второго, в противном случае возвращает `False`.
+
+Строки сравниваются лексикографически — по алфавиту.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+LESS(argument1, argument2)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`argument1`, `argument2`: число, строка, длительность или дата и время.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+LESS(0.1, 1)
+```
+
+Результат: `True`
+
+``` sql
+LESS("0,1", "0.1")
+```
+
+Результат: `True`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `LESSEQ()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Сравнивает два аргумента, возвращает логическое значение `True`, если первый аргумент меньше или равено второму, в противном случае возвращает `False`.
+
+Строки сравниваются лексикографически — по алфавиту.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+LESSEQ(argument1, argument2)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`argument1`, `argument2`: число, строка, длительность  или дата и время.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+LESSEQ(1.0, 1)
+```
+
+Результат: `True`
+
+``` sql
+LESSEQ("1.0", "1")
+```
+
+Результат: `False`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `NOTEQUALS()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Сравнивает два аргумента одинакового типа и возвращает логическое значение `True`, если первый аргумент не равен второму, в противном случае возвращает `False`.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+NOTEQUALS(argument1, argument2)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`argument1`, `argument2`: строка, логическое значение, дата и время, число или длительность.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+NOTEQUALS("Строка", "Сорока")
+```
+
+Результат: `True`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## Логические функции {: #formula_reference_functions_boolean }
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `ALL()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Принимает список логических значений и возвращает `True`, если все они имеют значение `True`.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+
+<td markdown="block">
+
+``` sql
+ALL(listBool)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`listBool`: список логических значений или выражений, возвращающих логические значения.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+ALL(LIST(BOOL("True"), BOOL("True"), BOOL("False")))
+```
+
+Результат: `False`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `AND()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Принимает два логических аргумента и возвращает результат их логического умножения (конъюнкции).
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+AND(bool1, bool2)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`bool1`, `bool2`: логические значения или выражения, возвращающие логическое значение.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+AND(BOOL("True"), BOOL("True"))
+```
+
+Результат: `True`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `ANY()` {: #any_not_empty }
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Проверка на непустую последовательность.
+
+Проверяет список или набор данных на наличие значений. Возвращает `True`, если аргумент содержит хотя бы одно значение.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+ANY(dataset)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`dataset`: список значений или набор данных (например сформированный с помощью запроса вида `from ... where ... select`).
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+ANY(from in db->Tickets where i->product == "Data Monsoon" select i->name)
+```
+
+Результат: `True`, если запрос вернёт хотя бы один элемент.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `ANY()` {: #any_predicate }
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Проверка предиката.
+
+Формирует набор данных и возвращает `True`, если в наборе данных есть хотя бы один элемент с истинным значением заданного предиката.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+ANY([(query), queryVar, boolEval])
+```
+
+</td>
+</tr>
+
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+- `query`: запрос, возвращающий набор данных, вида `from ... where ... select`.
+- `queryVar`: локальная переменная, используемая в запросе.
+- `boolEval`: выражение с элементом набора данных, возвращающее логическое значение.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+ANY([
+    (from i in db->Tickets where i->product=='Data Monsoon' select i),
+    i,
+    i->NeedsQAHelp
+    ])
+```
+
+Результат: `True`, если запрос вернёт хотя бы одну запись, в которой значение атрибута `NeedsQAHelp` равно `True`.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `IF()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Выполняет тренарную операцию.
+
+Принимает три аргумента. Если первый аргумент равен `True`,  возвращает второй аргумент в противном случае возвращает третий аргумент.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+IF(condition, resultTrue, resultFalse)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+- `condition`: логическое значение или выражение, возвращающее логическое значение.
+- `resultTrue`: значение любого типа, возвращаемое, когда `condition` равно `True`.
+- `resultFalse`: значение любого типа, возвращаемое, когда `condition` не равно `True`.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+
+Тип возвращаемого значения совпадает с типом аргамента `resultTrue` или `resultFalse`.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+IF(1==2, "Верно", "Не верно")
+```
+
+Результат: `Не верно`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `NOT()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Принимает логический аргумент и выполняет над ним операцию отрицания: возвращает логическое значение `True`, если аргумент имеет значение `False` и наоборот.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+NOT(boolean)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`boolean`: логическое значение.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+NOT(EMPTY(NOW()))
+```
+
+Результат: `True`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `OR()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Принимает два логических аргумента и возвращает результат их логического сложения (дизъюнкции).
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+OR(boolean1, boolean2)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`boolean1`, `boolean2`: логическоие значения.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+OR(BOOL("True"), BOOL("False"))
+```
+
+Результат: `True`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## Агрегатные функции {: #formula_reference_functions_aggregate }
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `ASCENDING()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Сортирует элементы списка в порядке возрастания.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+ASCENDING(list)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`list`: список чисел или строк
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Список
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+ASCENDING('в', 'а', 'б')
+```
+
+Результат: `а`, `б`, `в`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `AVERAGE()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Возвращает среднее арифметическое значение аргументов.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+AVERAGE(argument1, ... argumentN)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`argument1`, `argumentN`: числа
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число
+</td>
+</tr>
+
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+AVERAGE(1, 3, 4, 7, 10)
+```
+
+Результат: `5`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `COUNT()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Возвращает количество элементов в списке.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+COUNT(list)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`list`: список элементов
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число
+</td>
+</tr>
+
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+COUNT(LIST("a", 2, "c", "d", 5))
+```
+
+Результат: `5`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `DESCENDING()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Сортирует элементы списка в порядке возрастания.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+DESCENDING(list)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`list`: список чисел или строк
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Отсортированный список значений
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+DESCENDING('а', 'б', 'в')
+```
+
+Результат: `в`, `б`, `а`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `DISTINCT()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Удаляет дубликаты элементов из списка.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+DISTINCT(list)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+`list`: список чисел или строк
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Список уникальных значений
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+DISTINCT(LIST('а', 'а', 'в', 'б', 'Б', 'в'))
+```
+
+Результат: `а`, `б`, `Б`, `в`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `FIRST()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Возвращает первый элемент списка. При отсутствии элементов возвращает пустое значение.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+FIRST(list)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`list`: список значений.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Тип возвращаемого значения совпадает с типом элементов списка.
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+FIRST((from i in db->music where i->album == 'Whale Meditation' select i->song))
+```
+
+Результат: название первой песни из альбома `Whale Meditation`.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `LAST()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Возвращает последний элемент списка. При отсутствии элементов возвращает пустое значение.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+LAST(list)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`list`: список значений.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Тип возвращаемого значения совпадает с типом элементов списка.
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+LAST((from i in db->music where i->album == 'Whale Meditation' select i->song))
+```
+
+Результат: название последней песни из альбома `Whale Meditation`.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `LIST()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Принимает любое количество аргументов любых типов, разделённых запятыми, и возвращает список.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+LIST(argument1, …, argumentN)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`argument1`, …, `argumentN`: значения любых типов.
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Cписок значений таких же типов, как аргументы
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+LIST(1, 2, "a", "b")
+```
+
+Результат: `[1, 2, "a", "b"]`.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `LISTEQUALS()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Сравнивает два списка значений. Если они совпадают, возвращает логическое значение `True`, в противном случае возвращает `False`.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+LISTEQUALS(list1, list2)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`list1`, `list2`: списки значений.
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+LISTEQUALS(LIST(1, 2), LIST("1", "2"))
+```
+
+Результат: `False`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `MAX()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Принимает список значений и возвращает максимальное из значений его элементов.
+
+Все элементы списка должны быть одинакового типа: «**Число**», «**Дата и время**» или «**Длительность**».
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+MAX(list)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`list`: список значений типа «**Число**», «**Дата и время**» или «**Длительность**»
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+
+Тип возвращаемого значения совпадает с типом элементов списка
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+MAX(DURATION('P2DT1H0M0S'), DURATION('P3DT1H0M0S'))
+```
+
+Результат: `3.01:00:00`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `MIN()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Принимает список значений и возвращает минимальное из значений его элементов.
+
+Все элементы списка должны быть одинакового типа: «**Число**», «**Дата и время**» или «**Длительность**».
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+MIN(list)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`list`: список значений типа «**Число**», «**Дата и время**» или «**Длительность**»
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+
+Тип возвращаемого значения совпадает с типом элементов списка
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+MIN(DURATION('P2DT1H0M0S'), DURATION('P3DT1H0M0S'))
+```
+
+Результат: `2.01:00:00`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `SUM()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Принимает любое количество аргументов типа «**Число**» или «**Длительность**», перечисленных через запятую, и возвращает их сумму.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+SUM(argument1, ..., argumentN)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`argument1, ..., argumentN`: числа или длительность.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Тип возвращаемого значения совпадает с типом аргументов
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+SUM(1, 2, 3, 4)
+```
+
+Результат: `10`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `UNION()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Объединяет в один список два объекта или два списка объектов (ID записей или экземпляров процесса).
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+UNION(object1, object2)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`object1`, `object2`: объекты или списки объектов.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Список записей
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+UNION(
+    from i in db->music where i->album == 'Whale Meditation' select i->id, 
+    from i in db->music where i->album == 'Bird Song' select i->id)
+```
+
+Результат: список ID песен из альбомов `Whale Meditation` и `Bird Song`.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## Системные функции {: #formula_reference_functions_system }
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `EMPTY()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Проверяет, является ли пустым значение аргумента. Возвращает логическое значение `True`, если значение пустое, в противном случае возвращает `False`.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+EMPTY(argument)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`argument`: атрибут или выражение.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+EMPTY(DIVIDE(3, 3))
+```
+
+Результат: `False`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `ENUMVALUE()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Принимает системное имя атрибута атрибута типа «**Список значений**» и системное имя его значения и вовзрращает ID этого значения.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+ENUMVALUE("enumAttributeSystemName", "enumValueSystemName")
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+- `enumAttributeSystemName`: строка, системное имя атрибута типа «**Список значений**».
+- `enumValueSystemName`: строка, системное имя одного из значений атрибута типа «**Список значений**».
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Строку с ID искомого значения атрибута.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+EQUALS($Status, ID(ENUMVALUE("Status", "Resolved")))
+```
+
+Результат: `True`, если атрибут `Status` имеет значение `Resolved`.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `OBJECT()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Принимает четыре строковых аргумента: системные имена приложения, шаблона и атрибута, а также значение атрибута типа «**Текст**». Возвращает список ID записей из указанного шаблона, в которых указанный атрибут имеет заданное значение.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+OBJECT("businessApp", "template", "attribute", "attributeValue")
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+- `businessApp`: строка, системное имя приложения.
+- `template`: строка, системное имя шаблона.
+- `attribute`: строка, системное имя атрибута.
+- `attributeValue`: строка, искомое значение атрибута.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Список
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+OBJECT("Fleetmanagement", "Requests", "Status", "Завершено")
+```
+
+Результат: список ID записей шаблона _«Заявки»_ (системное имя — `Requests`) приложения _«Управление автопарком»_ (системное имя — `Fleetmanagement`), у которых значение атрибута _«Статус»_ (системное имя — `Status`) равно `Завершено`.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `USER()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Возвращает идентификатор аккаунта текущего пользователя.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+USER()
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+Не требуются.
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Идентификатор аккаунта
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+USER()
+```
+
+Результат: `account.XX` — ID аккаунта, который просматривает запись.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `VALUE()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Принимает два аргумента: проверяемое выражение и значение по умолчанию. Возвращает значение первого аргумента, если оно не пустое и не равно `NULL`, в противном случае возвращает значение второго аргумента, если он есть.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+VALUE(argument, defaultValue)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+- `argument`: проверяемое выражение, возвращающее значение любого типа.
+- `defaultValue`: значение по умолчанию любого типа (необязательный аргумент).
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Тип возвращаемого значения совпадает с типом первого или второго аргумента.
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+VALUE($Amount, "Не заполнено поле Amount")
+```
+
+Результат: значение атрибута _Amount_, если оно не пустое. В противном случае — текст _«Не заполнено поле Amount»_.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## Функции для обработки строк {: #formula_reference_functions_date_string }
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `CONCAT()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Объединяет строки из списка в одну строку.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block" >
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+CONCAT(list)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`list` — список строк, которые требуется объединить.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Строка
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+CONCAT(LIST("Сумма доходов равна: ", "100000"))
+```
+
+Результат: `Сумма доходов равна: 100000`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `CONTAINS()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Ищет подстроку в строке. Если первая строка содержит вторую, возвращает логическое значение `True`.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+CONTAINS(string, substring)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+- `string` — строка, в которой происходит поиск подстроки.
+- `substring` — подстрока, которую требуется найти.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+CONTAINS("Это срочная заявка.", "срочн")
+```
+
+Результат: `True`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `ENDSWITH()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Сравнивает две строки и возвращает значение `True`, если первая строка оканчивается на вторую, в противном случае возвращает `False`.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+ENDSWITH(string, endString)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`string`, `endString`: строка.
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+ENDSWITH("Строка", "ка")
+```
+
+Результат: `True`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `FIRSTCAPITAL()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Преобразует первую букву строки в прописную (заглавную).
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+FIRSTCAPITAL(string)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`string`: строка.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Строка.
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+FIRSTCAPITAL("строка")
+```
+
+Результат: `Строка`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `FORMAT()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Принимает строку с заполнителями вида `{0}`…`{N}` и список значений. Подставляет значения из списка в соответствующие заполнители, форматирует их по заданному шаблону и возвращает результирующую строку.
+
+См. также _«[Форматирование значений в шаблонах экспорта и формулах][export_template_file_formula_format_values]»_.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+FORMAT("stringToFormat {0} {1} ... {N}", LIST(argument0, argument1, ..., valueN))
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+- `"stringToFormat {0} {1} ... {N}"`: строка с заменителями.
+- `LIST(argument0, argument1, ..., argumentN)`: список значений любых типов.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Строка
+</td>
+</tr>
+
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+FORMAT(
+    "Название: {0}, исполнитель: {1}, дата релиза: {2:dd MMMM yyyy 'г.'}",
+    LIST("Yesterday","Beatles", DATE("1965-06-14"))
+    )
+```
+
+Результат: `Название: Yesterday, исполнитель: Beatles, дата релиза: 14 июня 1965 г.`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### `INDEXOF()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Ищет подстроку в строке. Возвращает номер позиции (по умолчанию поиск отсчёт идёт от `0`) искомой строки в исходной строке. Также можно указать номер начальной позиции для поиска.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+INDEXOF(sourceString, stringToFind, startIndex)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+- `sourceString`: исходная строка.
+- `stringToFind`: искомая строка.
+- `startIndex`: номер начальной позиции для поиска (необязательный аргумент).
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+INDEXOF("У ёлки иголки колки.", "лки", 4)
+```
+
+Результат: `10`
+
+``` sql
+INDEXOF("У ёлки иголки колки.", "лки")
+```
+
+Результат: `3`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `JOIN()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+Объединяет строки с использованием заданного разделителя.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+JOIN(separator, stringList)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`separator`: строка, разделитель объединяемых строк.
+`stringList`: список строк, которые требуется объединить.
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Строка
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+JOIN(", ", LIST("Аналитик", "Архитектор", "Администратор"))
+```
+
+Результат: `Аналитик, Архитектор, Администратор`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `LENGTH()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Возвращает количество символов в строке.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+LENGTH(string)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`string`: строка
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Число
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+LENGTH("В этой строке 26 символов.")
+```
+
+Результат: `26`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `MATCHES()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Принимает строку и регулярное выражение. Возвращает логическое значение `True`, если часть строки или вся строка соответствует регулярному выражению. В противном случае возвращает `False`.
+
+Для изучения и отладки регулярных выражений можно воспользоваться следующим инструментом: <https://regex101.com>
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+MATCHES(string, regex)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`string`: строка.
+`regex`: строка с регулярным выражением.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+MATCHES("Требуется решить проблему срочно!", "[Cс]рочн.+?")
+```
+
+Результат: `True`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `NORMALIZE()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Убирает лишние пробелы из строкового аргумента.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+NORMALIZE(string)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+`string`: строка.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Строка
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+NORMALIZE("В этой   строке  были    лишние  пробелы, но теперь   их    нет.")
+```
+
+Результат: `В этой строке были лишние пробелы, но теперь их нет.`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `NOTMATCHES()`
+
+</th>
+</tr>
+<tr markdown="block">
+<td markdown="block" class="functionDescriptionColumn">
+**Описание**
+</td>
+<td markdown="block">
+
+Принимает строку и регулярное выражение. Возвращает логическое значение `True`, если часть строки или вся строка не соответствует регулярному выражению. В противном случае возвращает `False`.
+
+Для изучения и отладки регулярных выражений можно воспользоваться следующим инструментом: <https://regex101.com>
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Синтаксис**
+</td>
+<td markdown="block">
+
+``` sql
+NOTMATCHES(string, regex)
+```
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Аргументы**
+</td>
+<td markdown="block">
+
+- `string`: строка.
+- `regex`: строка, задающая регулярное выражение.
+
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Результат**
+</td>
+<td markdown="block">
+Логическое значение
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+**Пример**
+</td>
+<td markdown="block">
+
+``` sql
+NOTMATCHES("Требуется решить проблему срочно!", "[Cс]рочн.+?")
+```
+
+Результат: `False`
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## Функции для обработки дат, времени и длительности {: #formula_reference_functions_date_time_duration }
 
 <table markdown="block">
 <tbody markdown="block">
@@ -1466,417 +5131,6 @@ ADDYEARSUTC(DATE('2024-01-01T01:01:01+00:00'), 3)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-### `ALL()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Принимает список логических значений и возвращает `True`, если все они имеют значение `True`.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-
-<td markdown="block">
-
-``` sql
-ALL(listBool)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`listBool`: список логических значений или выражений, возвращающих логические значения.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Логическое значение
-</td>
-</tr>
-
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-ALL(LIST(BOOL("True"), BOOL("True"), BOOL("False")))
-```
-
-Результат: `False`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `AND()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Принимает два логических аргумента и возвращает результат их логического умножения (конъюнкции).
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-AND(bool1, bool2)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`bool1`, `bool2`: логические значения или выражения, возвращающие логическое значение.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Логическое значение
-</td>
-</tr>
-
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-AND(BOOL("True"), BOOL("True"))
-```
-
-Результат: `True`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `ANY()` {: #any_not_empty }
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Проверка на непустую последовательность.
-
-Проверяет список или набор данных на наличие значений. Возвращает `True`, если аргумент содержит хотя бы одно значение.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-ANY(dataset)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`dataset`: список значений или набор данных (например сформированный с помощью запроса вида `from ... where ... select`).
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Логическое значение
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-ANY(from in db->Tickets where i->product == "Data Monsoon" select i->name)
-```
-
-Результат: `True`, если запрос вернёт хотя бы один элемент.
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `ANY()` {: #any_predicate }
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Проверка предиката.
-
-Формирует набор данных и возвращает `True`, если в наборе данных есть хотя бы один элемент с истинным значением заданного предиката.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-ANY([(query), queryVar, boolEval])
-```
-
-</td>
-</tr>
-
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-- `query`: запрос, возвращающий набор данных, вида `from ... where ... select`.
-- `queryVar`: локальная переменная, используемая в запросе.
-- `boolEval`: выражение с элементом набора данных, возвращающее логическое значение.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Логическое значение
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-ANY([
-    (from i in db->Tickets where i->product=='Data Monsoon' select i),
-    i,
-    i->NeedsQAHelp
-    ])
-```
-
-Результат: `True`, если запрос вернёт хотя бы одну запись, в которой значение атрибута `NeedsQAHelp` равно `True`.
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `ASCENDING()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Сортирует элементы списка в порядке возрастания.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-ASCENDING(list)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`list`: список чисел или строк
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Список
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-ASCENDING('в', 'а', 'б')
-```
-
-Результат: `а`, `б`, `в`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `AVERAGE()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Возвращает среднее арифметическое значение аргументов.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-AVERAGE(argument1, ... argumentN)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`argument1`, `argumentN`: числа
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Число
-</td>
-</tr>
-
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-AVERAGE(1, 3, 4, 7, 10)
-```
-
-Результат: `5`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
 ### `BETWEEN()`
 
 </th>
@@ -2006,72 +5260,6 @@ BETWEENUTC(
 ```
 
 Результат: `False`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `CEILING()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Округляет аргумент до ближайшего бо́льшего целого.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block" >
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-CEILING(number)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`number` — число, которое требуется округлить.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Число
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-CEILING(4.1)
-```
-
-Результат: `5`
 
 </td>
 </tr>
@@ -2285,139 +5473,6 @@ COMPARE(DURATION("PT3H15M"), DURATION("PT3H16M"))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-### `CONCAT()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Объединяет строки из списка в одну строку.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block" >
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-CONCAT(list)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`list` — список строк, которые требуется объединить.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Строка
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-CONCAT(LIST("Сумма доходов равна: ", "100000"))
-```
-
-Результат: `Сумма доходов равна: 100000`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `CONTAINS()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Ищет подстроку в строке. Если первая строка содержит вторую, возвращает логическое значение `True`.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-CONTAINS(string, substring)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-- `string` — строка, в которой происходит поиск подстроки.
-- `substring` — подстрока, которую требуется найти.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Логическое значение
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-CONTAINS("Это срочная заявка.", "срочн")
-```
-
-Результат: `True`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
 ### `CONVERTTIMEZONE()`
 
 </th>
@@ -2541,217 +5596,6 @@ CONVERTTIMEZONEUTC(DATE("2025-05-05T13:45:15+00:00"), "Europe/Moscow")
 ```
 
 Результат: `05.05.2025 16:45:15`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `COUNT()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Возвращает количество элементов в списке.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-COUNT(list)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`list`: список элементов
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Число
-</td>
-</tr>
-
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-COUNT(LIST("a", 2, "c", "d", 5))
-```
-
-Результат: `5`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `CREATEDATE()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Преобразует числовые аргументы (год, месяц, день, часы, минуты, секунды) в значение типа «**Дата и время**».
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-CREATEDATE(year, month, day)
-```
-
-**или**
-
-``` sql
-CREATEDATE(year, month, day, hour, minute, second)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`year, month, day, hour, minute, second`: числа.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Дата и время
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-CREATEDATE(2025, 5, 5, 15, 45, 15)
-```
-
-Результат: `05.05.2025 15:45:15`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `CREATEDATEUTC()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Преобразует числовые аргументы (год, месяц, день, часы, минуты, секунды) в значение типа «**Дата и время**» в часовом поясе `UTC+00:00`.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-CREATEDATEUTC(year, month, day)
-```
-
-**или**
-
-``` sql
-CREATEDATEUTC(year, month, day, hour, minute, second)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`year, month, day, hour, minute, second`: числа.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Дата и время
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-CREATEDATEUTC(2025, 5, 5, 15, 45, 15)
-```
-
-Результат: `05.05.2025 15:45:15`
 
 </td>
 </tr>
@@ -3382,268 +6226,6 @@ DAYUTC(DATE("2025-04-30T23:45:15-02:00"))
 ```
 
 Результат: `1`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `DESCENDING()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Сортирует элементы списка в порядке возрастания.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-DESCENDING(list)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`list`: список чисел или строк
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Отсортированный список значений
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-DESCENDING('а', 'б', 'в')
-```
-
-Результат: `в`, `б`, `а`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `DISTINCT()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Удаляет дубликаты элементов из списка.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-DISTINCT(list)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-`list`: список чисел или строк
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Список уникальных значений
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-DISTINCT(LIST('а', 'а', 'в', 'б', 'Б', 'в'))
-```
-
-Результат: `а`, `б`, `Б`, `в`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `DIVIDE()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Возвращает результат деления двух числовых аргументов.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-DIVIDE(dividend, divisor)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-- `dividend`: число, делимое
-- `divisor`: число, делитель
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Число
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-DIVIDE (125, 25)
-```
-
-Результат: `5`
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `EMPTY()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Проверяет, является ли пустым значение аргумента. Возвращает логическое значение `True`, если значение пустое, в противном случае возвращает `False`.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-EMPTY(argument)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`argument`: атрибут или выражение.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Логическое значение
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-EMPTY(DIVIDE(3, 3))
-```
-
-Результат: `False`
 
 </td>
 </tr>
@@ -4309,139 +6891,6 @@ ENDOFYEARUTC(DATE('2025-01-01T01:01:01+03:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-### `ENDSWITH()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Сравнивает две строки и возвращает значение `True`, если первая строка оканчивается на вторую, в противном случае возвращает `False`.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-ENDSWITH(string, endString)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`string`, `endString`: строка.
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Логическое значение
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-ENDSWITH("Строка", "ка")
-```
-
-Результат: `True`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `ENUMVALUE()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Принимает системное имя атрибута атрибута типа «**Список значений**» и системное имя его значения и вовзрращает ID этого значения.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-ENUMVALUE("enumAttributeSystemName", "enumValueSystemName")
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-- `enumAttributeSystemName`: строка, системное имя атрибута типа «**Список значений**».
-- `enumValueSystemName`: строка, системное имя одного из значений атрибута типа «**Список значений**».
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Строку с ID искомого значения атрибута.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-EQUALS($Status, ID(ENUMVALUE("Status", "Resolved")))
-```
-
-Результат: `True`, если атрибут `Status` имеет значение `Resolved`.
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
 ### `EQ()`
 
 </th>
@@ -4509,72 +6958,6 @@ EQ(DURATION('P2DT1H30M30S'), DURATION('P1DT25H30M30S'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-### `EQUALS()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Сравнивает два аргумента и возвращает `True`, если они равны, в противном случае возвращает `False`.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-EQUALS(argument1, argument2)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`argument1`, `argument2`: логическия значения, дата и время, длительность, числа, или строки.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Логическое значение
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-EQUALS("string", 2)
-```
-
-Результат: `False`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
 ### `EQUTC()`
 
 </th>
@@ -4630,278 +7013,6 @@ EQUTC(DATE('2025-01-01T01:01:01+03:00'), DATE('2025-01-01T00:01:01+02:00'))
 ```
 
 Результат: `True`
-
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `FIRST()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Возвращает первый элемент списка. При отсутствии элементов возвращает пустое значение.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-FIRST(list)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`list`: список значений.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Тип возвращаемого значения совпадает с типом элементов списка.
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-FIRST((from i in db->music where i->album == 'Whale Meditation' select i->song))
-```
-
-Результат: название первой песни из альбома `Whale Meditation`.
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `FIRSTCAPITAL()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Преобразует первую букву строки в прописную (заглавную).
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-FIRSTCAPITAL(string)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`string`: строка.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Строка.
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-FIRSTCAPITAL("строка")
-```
-
-Результат: `Строка`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `FLOOR()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Округляет число до ближайшего меньшего целого.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-FLOOR(number)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`number`: число.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Число
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-FLOOR(5.9)
-```
-
-Результат: `5`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `FORMAT()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Принимает строку с заполнителями вида `{0}`…`{N}` и список значений. Подставляет значения из списка в соответствующие заполнители, форматирует их по заданному шаблону и возвращает результирующую строку.
-
-См. также _«[Форматирование значений в шаблонах экспорта и формулах][export_template_file_formula_format_values]»_.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-FORMAT("stringToFormat {0} {1} ... {N}", LIST(argument0, argument1, ..., valueN))
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-- `"stringToFormat {0} {1} ... {N}"`: строка с заменителями.
-- `LIST(argument0, argument1, ..., argumentN)`: список значений любых типов.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Строка
-</td>
-</tr>
-
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-FORMAT(
-    "Название: {0}, исполнитель: {1}, дата релиза: {2:dd MMMM yyyy 'г.'}",
-    LIST("Yesterday","Beatles", DATE("1965-06-14"))
-    )
-```
-
-Результат: `Название: Yesterday, исполнитель: Beatles, дата релиза: 14 июня 1965 г.`
 
 </td>
 </tr>
@@ -5395,138 +7506,6 @@ GEUTC(DATE('2025-05-05T05:05:25+00:00'), DATE('2025-05-05T05:05:25+05:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-### `GREATER()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Возвращает логическое значение `True`, если первый аргумент больше второго, в противном случае возвращает `False`.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-GREATER(argument1, argument2)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`argument1`, `argument2`: числа, строки, длительность или дата и время.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Логическое значение
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-GREATER(1, 0)
-```
-
-Результат: `True`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `GREATEREQ()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Возвращает логическое значение `True`, если первый аргумент больше или равен второму, в противном случае возвращает `False`.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-GREATEREQ(argument1, argument2)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`argument1`, `argument2`: числа, строки, длительность или дата и время.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Логическое значение
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-GREATEREQ("Строка", "Сорока")
-```
-
-Результат: `True`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
 ### `GT()`
 
 </th>
@@ -5858,147 +7837,6 @@ HOURUTC(DATE('2025-05-05T05:05:25+03:00'))
 <tbody markdown="block">
 <tr markdown="block">
 <th colspan="2" markdown="block">
-
-### `IF()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Выполняет тренарную операцию.
-
-Принимает три аргумента. Если первый аргумент равен `True`,  возвращает второй аргумент в противном случае возвращает третий аргумент.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-IF(condition, resultTrue, resultFalse)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-- `condition`: логическое значение или выражение, возвращающее логическое значение.
-- `resultTrue`: значение любого типа, возвращаемое, когда `condition` равно `True`.
-- `resultFalse`: значение любого типа, возвращаемое, когда `condition` не равно `True`.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-
-Тип возвращаемого значения совпадает с типом аргамента `resultTrue` или `resultFalse`.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-IF(1==2, "Верно", "Не верно")
-```
-
-Результат: `Не верно`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `INDEXOF()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Ищет подстроку в строке. Возвращает номер позиции (по умолчанию поиск отсчёт идёт от `0`) искомой строки в исходной строке. Также можно указать номер начальной позиции для поиска.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-INDEXOF(sourceString, stringToFind, startIndex)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-- `sourceString`: исходная строка.
-- `stringToFind`: искомая строка.
-- `startIndex`: номер начальной позиции для поиска (необязательный аргумент).
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Число
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-INDEXOF("У ёлки иголки колки.", "лки", 4)
-```
-
-Результат: `10`
-
-``` sql
-INDEXOF("У ёлки иголки колки.", "лки")
-```
-
-Результат: `3`
-
-</td>
-</tr>
-</tbody>
-</table>
 
 <table markdown="block">
 <tbody markdown="block">
@@ -6804,137 +8642,6 @@ ISWORKDAYUTC(DATE('2025-05-05T01:01:01+03:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-### `JOIN()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-Объединяет строки с использованием заданного разделителя.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-JOIN(separator, stringList)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`separator`: строка, разделитель объединяемых строк.
-`stringList`: список строк, которые требуется объединить.
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Строка
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-JOIN(", ", LIST("Аналитик", "Архитектор", "Администратор"))
-```
-
-Результат: `Аналитик, Архитектор, Администратор`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `LAST()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Возвращает последний элемент списка. При отсутствии элементов возвращает пустое значение.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-LAST(list)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`list`: список значений.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Тип возвращаемого значения совпадает с типом элементов списка.
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-LAST((from i in db->music where i->album == 'Whale Meditation' select i->song))
-```
-
-Результат: название последней песни из альбома `Whale Meditation`.
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
 ### `LE()`
 
 </th>
@@ -6991,349 +8698,6 @@ LE(DURATION('P2DT1H0M0S'), DURATION('P3DT1H0M0S'))
 ```
 
 Результат: `True`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `LENGTH()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Возвращает количество символов в строке.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-LENGTH(string)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`string`: строка
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Число
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-LENGTH("В этой строке 26 символов.")
-```
-
-Результат: `26`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `LESS()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Сравнивает два аргумента, возвращает логическое значение `True`, если первый аргумент меньше второго, в противном случае возвращает `False`.
-
-Строки сравниваются лексикографически — по алфавиту.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-LESS(argument1, argument2)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`argument1`, `argument2`: число, строка, длительность или дата и время.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Логическое значение
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-LESS(0.1, 1)
-```
-
-Результат: `True`
-
-``` sql
-LESS("0,1", "0.1")
-```
-
-Результат: `True`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `LESSEQ()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Сравнивает два аргумента, возвращает логическое значение `True`, если первый аргумент меньше или равено второму, в противном случае возвращает `False`.
-
-Строки сравниваются лексикографически — по алфавиту.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-LESSEQ(argument1, argument2)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`argument1`, `argument2`: число, строка, длительность  или дата и время.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Логическое значение
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-LESSEQ(1.0, 1)
-```
-
-Результат: `True`
-
-``` sql
-LESSEQ("1.0", "1")
-```
-
-Результат: `False`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `LIST()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Принимает любое количество аргументов любых типов, разделённых запятыми, и возвращает список.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-LIST(argument1, …, argumentN)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`argument1`, …, `argumentN`: значения любых типов.
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Cписок значений таких же типов, как аргументы
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-LIST(1, 2, "a", "b")
-```
-
-Результат: `[1, 2, "a", "b"]`.
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `LISTEQUALS()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Сравнивает два списка значений. Если они совпадают, возвращает логическое значение `True`, в противном случае возвращает `False`.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-LISTEQUALS(list1, list2)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`list1`, `list2`: списки значений.
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Логическое значение
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-LISTEQUALS(LIST(1, 2), LIST("1", "2"))
-```
-
-Результат: `False`
 
 </td>
 </tr>
@@ -7468,215 +8832,6 @@ LTUTC(DATE('2025-05-05T01:01:01+03:00'), DATE('2025-05-05T01:01:01+04:00'))
 ```
 
 Результат: `False`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `MATCHES()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Принимает строку и регулярное выражение. Возвращает логическое значение `True`, если часть строки или вся строка соответствует регулярному выражению. В противном случае возвращает `False`.
-
-Для изучения и отладки регулярных выражений можно воспользоваться следующим инструментом: <https://regex101.com>
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-MATCHES(string, regex)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`string`: строка.
-`regex`: строка с регулярным выражением.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Логическое значение
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-MATCHES("Требуется решить проблему срочно!", "[Cс]рочн.+?")
-```
-
-Результат: `True`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `MAX()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Принимает список значений и возвращает максимальное из значений его элементов.
-
-Все элементы списка должны быть одинакового типа: «**Число**», «**Дата и время**» или «**Длительность**».
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-MAX(list)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`list`: список значений типа «**Число**», «**Дата и время**» или «**Длительность**»
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-
-Тип возвращаемого значения совпадает с типом элементов списка
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-MAX(DURATION('P2DT1H0M0S'), DURATION('P3DT1H0M0S'))
-```
-
-Результат: `3.01:00:00`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `MIN()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Принимает список значений и возвращает минимальное из значений его элементов.
-
-Все элементы списка должны быть одинакового типа: «**Число**», «**Дата и время**» или «**Длительность**».
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-MIN(list)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`list`: список значений типа «**Число**», «**Дата и время**» или «**Длительность**»
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-
-Тип возвращаемого значения совпадает с типом элементов списка
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-MIN(DURATION('P2DT1H0M0S'), DURATION('P3DT1H0M0S'))
-```
-
-Результат: `2.01:00:00`
 
 </td>
 </tr>
@@ -8230,273 +9385,6 @@ NEUTC(DATE('2025-05-01T01:01:01+03:00'), DATE('2025-05-01T01:01:01+02:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-### `NORMALIZE()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Убирает лишние пробелы из строкового аргумента.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-NORMALIZE(string)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`string`: строка.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Строка
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-NORMALIZE("В этой   строке  были    лишние  пробелы, но теперь   их    нет.")
-```
-
-Результат: `В этой строке были лишние пробелы, но теперь их нет.`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `NOT()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Принимает логический аргумент и выполняет над ним операцию отрицания: возвращает логическое значение `True`, если аргумент имеет значение `False` и наоборот.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-NOT(boolean)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`boolean`: логическое значение.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Логическое значение
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-NOT(EMPTY(NOW()))
-```
-
-Результат: `True`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `NOTEQUALS()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Сравнивает два аргумента одинакового типа и возвращает логическое значение `True`, если первый аргумент не равен второму, в противном случае возвращает `False`.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-NOTEQUALS(argument1, argument2)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`argument1`, `argument2`: строка, логическое значение, дата и время, число или длительность.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Логическое значение
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-NOTEQUALS("Строка", "Сорока")
-```
-
-Результат: `True`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `NOTMATCHES()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Принимает строку и регулярное выражение. Возвращает логическое значение `True`, если часть строки или вся строка не соответствует регулярному выражению. В противном случае возвращает `False`.
-
-Для изучения и отладки регулярных выражений можно воспользоваться следующим инструментом: <https://regex101.com>
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-NOTMATCHES(string, regex)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-- `string`: строка.
-- `regex`: строка, задающая регулярное выражение.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Логическое значение
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-NOTMATCHES("Требуется решить проблему срочно!", "[Cс]рочн.+?")
-```
-
-Результат: `False`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
 ### `NOW()`
 
 </th>
@@ -8548,141 +9436,6 @@ NOW()
 ```
 
 Результат: `28.05.2025 12:01:53`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `OBJECT()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Принимает четыре строковых аргумента: системные имена приложения, шаблона и атрибута, а также значение атрибута типа «**Текст**». Возвращает список ID записей из указанного шаблона, в которых указанный атрибут имеет заданное значение.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-OBJECT("businessApp", "template", "attribute", "attributeValue")
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-- `businessApp`: строка, системное имя приложения.
-- `template`: строка, системное имя шаблона.
-- `attribute`: строка, системное имя атрибута.
-- `attributeValue`: строка, искомое значение атрибута.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Список
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-OBJECT("Fleetmanagement", "Requests", "Status", "Завершено")
-```
-
-Результат: список ID записей шаблона _«Заявки»_ (системное имя — `Requests`) приложения _«Управление автопарком»_ (системное имя — `Fleetmanagement`), у которых значение атрибута _«Статус»_ (системное имя — `Status`) равно `Завершено`.
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `OR()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Принимает два логических аргумента и возвращает результат их логического сложения (дизъюнкции).
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-OR(boolean1, boolean2)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`boolean1`, `boolean2`: логическоие значения.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Логическое значение
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-OR(BOOL("True"), BOOL("False"))
-```
-
-Результат: `True`
 
 </td>
 </tr>
@@ -8823,139 +9576,6 @@ PARSEDATEUTC("0505250001", "MMddyyhhmm")
 </tbody>
 </table>
 
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `POW()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Возводит первый аргумент в степень, указанную во втором аргументе, и возвращает результат.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-POW(base, degree)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-- `base`: число.
-- `degree`: число.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Число
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-POW(2, 8)
-```
-
-Результат: `256`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `PRODUCT()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Перемножает два числовых аргумента.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-PRODUCT(number1, number2)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-- `number1`: число.
-- `number2`: число.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Число
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-PRODUCT(3, 4)
-```
-
-Результат: `12`
-
-</td>
-</tr>
-</tbody>
-</table>
 
 <table markdown="block">
 <tbody markdown="block">
@@ -9017,73 +9637,6 @@ QUARTERS(DURATION('P229D'))
 ```
 
 Результат: `2,5`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `QUOTIENT()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Возвращает целую часть результата деления первого аргумента на второй.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-QUOTIENT(dividend, divisor)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-- `dividend`: число, делимое.
-- `divisor`: число, делитель.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Число
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-QUOTIENT(5, 2)
-```
-
-Результат: `2`
 
 </td>
 </tr>
@@ -9177,73 +9730,6 @@ REGEXREPLACE($HTML,"&lt;p class=""title"">(.+)&lt;\/p>","&lt;h1>$1&lt;h1>")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-### `REMAINDER()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Возвращает остаток от деления первого аргумента на второй.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-REMAINDER(dividend, divisor)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`dividend`: число, делимое.
-`divisor`: число, делитель.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Число
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-REMAINDER(5, 2)
-```
-
-Результат: `1`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
 ### `REPLACE()`
 
 </th>
@@ -9299,78 +9785,6 @@ REPLACE("Заявка утверждена.", "утверждена", "одоб�
 ```
 
 Результат: `Заявка одобрена.`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `ROUND()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Округляет число до ближайшего целого.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-ROUND(number)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`number`: число.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Число
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-ROUND(3.5)
-```
-
-Результат: `4`
-
-``` sql
-ROUND(3.4)
-```
-
-Результат: `3`
 
 </td>
 </tr>
@@ -9572,72 +9986,6 @@ SECONDUTC(DATE('2025-05-05T01:01:01+01:00'))
 ```
 
 Результат: `1`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `SQRT()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Вычисляет квадратный корень аргумента.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-SQRT(number)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`number`: число.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Число
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-SQRT(25)
-```
-
-Результат: `5`
 
 </td>
 </tr>
@@ -10512,75 +10860,6 @@ SUBSTRING("Раньше эта строка начиналась с другог
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-### `SUBTRACT()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Вычисляет разность двух аргументов типа «**Число**», «**Длительность**» или «**Дата и время**».
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-SUBTRACT(argument1, argument2)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-- `argument1`: число; `argument2`: число.
-- `argument1`: длительность; `argument2`: длительность.
-- `argument1`: дата и время; `argument2`: длительность.
-- `argument1`: дата и время; `argument2`: дата и время.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Число, длительность или дата и время.
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-SUBTRACT(17, 10)
-```
-
-Результат: `7`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
 ### `SUBUTC()`
 
 </th>
@@ -10637,72 +10916,6 @@ SUBUTC(DATE('2025-01-01T01:01:01+00:00'), DURATION('P1DT1H30M0S'))
 ```
 
 Результат при `UTC+03:00` на сервере: `31.12.2024 02:31:01`.
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `SUM()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Принимает любое количество аргументов типа «**Число**» или «**Длительность**», перечисленных через запятую, и возвращает их сумму.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-SUM(argument1, ..., argumentN)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`argument1, ..., argumentN`: числа или длительность.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Тип возвращаемого значения совпадает с типом аргументов
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-SUM(1, 2, 3, 4)
-```
-
-Результат: `10`
 
 </td>
 </tr>
@@ -10964,205 +11177,6 @@ TRIM("   В этой строке были лишние пробелы.   ")
 ```
 
 Результат: `В этой строке были лишние пробелы.`
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `UNION()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Объединяет в один список два объекта или два списка объектов (ID записей или экземпляров процесса).
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-UNION(object1, object2)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-`object1`, `object2`: объекты или списки объектов.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Список записей
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-UNION(
-    from i in db->music where i->album == 'Whale Meditation' select i->id, 
-    from i in db->music where i->album == 'Bird Song' select i->id)
-```
-
-Результат: список ID песен из альбомов `Whale Meditation` и `Bird Song`.
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `USER()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Возвращает идентификатор аккаунта текущего пользователя.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-USER()
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-Не требуются.
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Идентификатор аккаунта
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-USER()
-```
-
-Результат: `account.XX` — ID аккаунта, который просматривает запись.
-
-</td>
-</tr>
-</tbody>
-</table>
-
-<table markdown="block">
-<tbody markdown="block">
-<tr markdown="block">
-<th colspan="2" markdown="block">
-
-### `VALUE()`
-
-</th>
-</tr>
-<tr markdown="block">
-<td markdown="block" class="functionDescriptionColumn">
-**Описание**
-</td>
-<td markdown="block">
-
-Принимает два аргумента: проверяемое выражение и значение по умолчанию. Возвращает значение первого аргумента, если оно не пустое и не равно `NULL`, в противном случае возвращает значение второго аргумента, если он есть.
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Синтаксис**
-</td>
-<td markdown="block">
-
-``` sql
-VALUE(argument, defaultValue)
-```
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Аргументы**
-</td>
-<td markdown="block">
-
-- `argument`: проверяемое выражение, возвращающее значение любого типа.
-- `defaultValue`: значение по умолчанию любого типа (необязательный аргумент).
-
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Результат**
-</td>
-<td markdown="block">
-Тип возвращаемого значения совпадает с типом первого или второго аргумента.
-</td>
-</tr>
-<tr markdown="block">
-<td markdown="block">
-**Пример**
-</td>
-<td markdown="block">
-
-``` sql
-VALUE($Amount, "Не заполнено поле Amount")
-```
-
-Результат: значение атрибута _Amount_, если оно не пустое. В противном случае — текст _«Не заполнено поле Amount»_.
 
 </td>
 </tr>

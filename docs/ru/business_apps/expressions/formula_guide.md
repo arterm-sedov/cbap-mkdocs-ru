@@ -137,7 +137,7 @@ $Driver->Name
     - Следующие слова нельзя использовать в запросе в качестве [локальной переменной](#formula_guide_queries_operators), так как они зарезервированы как системные:
         - `and`, `ascending`, `between`, `by`, `db`, `descending`, `equals`, `from`, `group`, `in`, `into`, `item`, `join`, `let`, `on`, `orderby`, `select`, `source`, `where`;
         - слова, начинающиеся с символа подчеркивания (`_`);
-        - имена [функций][formula_reference_functions] и [литералы][formula_reference_literals];
+        - имена [функций и литералов][formula_reference];
     - [Предложение `from`](#formula_guide_queries_operators) может содержать подзапросы (также начинающиеся с `from`).
 
 ### Операторы запросов {: #formula_guide_queries_operators }
