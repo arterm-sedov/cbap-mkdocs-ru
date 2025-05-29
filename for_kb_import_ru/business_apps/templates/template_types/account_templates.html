@@ -16,14 +16,21 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#свойства-шаблона-аккаунта">
+<a class="md-nav__link mkdocs_imported_link" href="#account_template_properties">
 <span class="md-ellipsis">
       Свойства шаблона аккаунта
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#использование-шаблона-аккаунта">
+<a class="md-nav__link mkdocs_imported_link" href="#account_template_attribute_system_names">
+<span class="md-ellipsis">
+      Системные атрибуты шаблона аккаунта
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#account_template_use">
 <span class="md-ellipsis">
       Использование шаблона аккаунта
     </span>
@@ -44,8 +51,10 @@
 <div class="notice notice-success">
 <h2 class="admonition-title" id="definitions">Определения</h2>
 <p><strong>Шаблон аккаунта</strong> — это специальный <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4759">шаблон записи</a>, в котором хранятся особые атрибуты аккаунтов.</p>
-<p>Стандартные атрибуты аккаунтов хранятся в <em>системном шаблоне аккаунта</em>, который не отображается в списках шаблонов и не подлежит изменению.</p>
-<p>Для настройки и хранения произвольных атрибутов аккаунтов используются дополнительные <strong>шаблоны аккаунтов</strong>.</p>
+<p>Информация об аккаунтах представлена на странице <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4653">«<strong>Администрирование</strong>» — «<strong>Аккаунты</strong>»</a>.</p>
+<p>В карточке аккаунта отображается базовая информация из <em>системного шаблона аккаунта</em>, хранящаяся в системных атрибутах аккаунта.</p>
+<p><a class="mkdocs_imported_link" href="#account_template_attribute_system_names">Системные атрибуты аккаунта</a> хранятся в <em>системном шаблоне аккаунта</em>, который не отображается в списках шаблонов и не подлежит изменению.</p>
+<p>Для настройки и хранения произвольных атрибутов, форм и таблиц аккаунтов используются <strong>шаблоны аккаунтов</strong>.</p>
 <p>Например, шаблон аккаунта <em>«Техник АЗС»</em> позволяет определить дополнительные атрибуты аккаунтов техников АЗС.</p>
 </div>
 <div class="notice notice-info">
@@ -55,13 +64,15 @@
 <li>Шаблон аккаунта можно связать с атрибутом типа «<strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4774">Аккаунт</a></strong>».</li>
 </ul>
 </div>
-<h2 class="pageBreakBefore" id="свойства-шаблона-аккаунта">Свойства шаблона аккаунта</h2>
+<h2 class="pageBreakBefore" id="account_template_properties">Свойства шаблона аккаунта</h2>
 <p>У шаблона аккаунта предусмотрены только <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4756">общие свойства</a>.</p>
 <figure class="screenshot_with_caption">
 <p><img alt="Свойства шаблона аккаунта" src="/platform/v5.0/business_apps/templates/template_types/img/account_templates_properties.png"/><figcaption class="caption">Свойства шаблона аккаунта</figcaption></p>
 </figure>
-<h2 class="pageBreakBefore" id="использование-шаблона-аккаунта">Использование шаблона аккаунта</h2>
-<p>Информация о всех пользователях системы содержится в системном разделе «<strong>Аккаунты</strong>». В карточке аккаунта отображается базовая информация из системного шаблона аккаунта, в котором предусмотрены следующие стандартные атрибуты:</p>
+<h2 id="account_template_attribute_system_names">Системные атрибуты шаблона аккаунта</h2>
+<p>Для того чтобы получить данные аккаунта для вычислений (например, ФИО или адрес эл. почты), необходимо знать системные имена атрибутов аккаунта.</p>
+<p>В шаблоне аккаунта предусмотрены перечисленные ниже системные атрибуты.</p>
+<p>В формулах, выражениях на N3 и скриптах C# к ним можно обращаться по указанным системным именам.</p>
 <table style="width: 100%;">
 <thead>
 <tr>
@@ -79,7 +90,7 @@
 <tr>
 <td><code>cmw.account.manager</code></td>
 <td>Руководитель</td>
-<td>Пользователь</td>
+<td>Аккаунт</td>
 </tr>
 <tr>
 <td><code>cmw.account.mbox</code></td>
@@ -104,7 +115,7 @@
 <tr>
 <td><code>id</code></td>
 <td>ID</td>
-<td>Ссылка</td>
+<td>Запись</td>
 </tr>
 <tr>
 <td><code>cmw.account.title</code></td>
@@ -143,6 +154,7 @@
 </tr>
 </tbody>
 </table>
+<h2 class="pageBreakBefore" id="account_template_use">Использование шаблона аккаунта</h2>
 <p>При разработке приложения может потребоваться расширение информации о пользователях дополнительными атрибутами, например:</p>
 <ul>
 <li>для службы персонала: табельный номер, дата выхода на работу, текущее количество дней отпуска, личные документы и т. д.;</li>

@@ -1,6 +1,6 @@
 ---
 title: 'Функции и литералы в формулах'
-kbTitle: 'Функции и литералы в формулах. Список и описания'
+kbTitle: 'Литералы и функции в формулах. Справочник, описания, примеры'
 kbId: 4993
 tags:
     - язык выражений
@@ -14,21 +14,21 @@ hide:
     - tags
 ---
 
+[](){: #formula_function_list }
+# Литералы и функции в формулах. Справочник, описания, примеры {: #formula_reference }
 
-# Функции и литералы в формулах. Список и описания {: #formula_function_reference }
-
-## Введение
+## Введение {: #formula_reference }
 
 Здесь представлены синтаксис и примеры использования функций в формулах **{{ companyName }}**.
 
-## Функции для объявления литералов {: #formula_function_list_literals }
+## Функции для объявления литералов {: #formula_reference_literals }
 
 <table markdown="block">
 <tbody markdown="block">
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `BOOL()`
+### `BOOL()`
 
 </th>
 </tr>
@@ -95,7 +95,7 @@ BOOL('TRUE')
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `DATE()`
+### `DATE()`
 
 </th>
 </tr>
@@ -171,7 +171,7 @@ DATE(string)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `DECIMAL()`
+### `DECIMAL()`
 
 </th>
 </tr>
@@ -246,7 +246,7 @@ IF (USER()->language=='ru',
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `DURATION()`
+### `DURATION()`
 
 </th>
 </tr>
@@ -325,7 +325,7 @@ DURATION(string)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ID()`
+### `ID()`
 
 </th>
 </tr>
@@ -382,14 +382,14 @@ ID(string)
 </tbody>
 </table>
 
-## Функции для вычислений
+## Функции для вычислений и обработки данных {: #formula_reference_functions }
 
 <table markdown="block">
 <tbody markdown="block">
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ADD()`
+### `ADD()`
 
 </th>
 </tr>
@@ -462,7 +462,7 @@ ADD(DATE('2024-01-01T01:01:01'), DURATION('P3Y6M4DT12H30M5S'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ADDDAYS()`
+### `ADDDAYS()`
 
 </th>
 </tr>
@@ -529,7 +529,7 @@ ADDDAYS(DATE('2024-01-01T01:01:01'), 3)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ADDDAYSUTC()`
+### `ADDDAYSUTC()`
 
 </th>
 </tr>
@@ -596,7 +596,7 @@ ADDDAYSUTC(DATE('2024-01-01T01:01:01+00:00'), 3)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ADDDUR()`
+### `ADDDUR()`
 
 </th>
 </tr>
@@ -662,7 +662,7 @@ ADDDUR(DURATION('P1DT12H30M5S'), DURATION('P1DT12H30M5S'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ADDHOURS()`
+### `ADDHOURS()`
 
 </th>
 </tr>
@@ -729,7 +729,7 @@ ADDHOURS(DATE('2024-01-01T01:01:01'), 3)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ADDHOURSUTC()`
+### `ADDHOURSUTC()`
 
 </th>
 </tr>
@@ -796,7 +796,7 @@ ADDHOURSUTC(DATE('2024-01-01T01:01:01+00:00'), 3)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ADDLOC()`
+### `ADDLOC()`
 
 </th>
 </tr>
@@ -863,7 +863,7 @@ ADDLOC(DATE('2024-01-01T01:01:01'), DURATION('P1DT12H30M5S'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ADDMINUTES()`
+### `ADDMINUTES()`
 
 </th>
 </tr>
@@ -930,7 +930,7 @@ ADDMINUTES(DATE('2024-01-01T01:01:01'), 3)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ADDMINUTESUTC()`
+### `ADDMINUTESUTC()`
 
 </th>
 </tr>
@@ -997,7 +997,7 @@ ADDMINUTESUTC(DATE('2024-01-01T01:01:01+00:00'), 3)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ADDMONTHS()`
+### `ADDMONTHS()`
 
 </th>
 </tr>
@@ -1064,7 +1064,7 @@ ADDMONTHS(DATE('2024-01-01T01:01:01'), 3)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ADDMONTHSUTC()`
+### `ADDMONTHSUTC()`
 
 </th>
 </tr>
@@ -1131,7 +1131,7 @@ ADDMONTHSUTC(DATE('2024-01-01T01:01:01+00:00'), 3)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ADDSECONDS()`
+### `ADDSECONDS()`
 
 </th>
 </tr>
@@ -1198,7 +1198,7 @@ ADDSECONDS(DATE('2024-01-01T01:01:01'), 3)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ADDSECONDSUTC()`
+### `ADDSECONDSUTC()`
 
 </th>
 </tr>
@@ -1265,7 +1265,7 @@ ADDSECONDSUTC(DATE('2024-01-01T01:01:01+00:00'), 3)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ADDUTC()`
+### `ADDUTC()`
 
 </th>
 </tr>
@@ -1332,7 +1332,7 @@ ADDUTC(DATE('2024-01-01T01:01:01+00:00'), DURATION('P1DT12H30M5S'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ADDYEARS()`
+### `ADDYEARS()`
 
 </th>
 </tr>
@@ -1399,7 +1399,7 @@ ADDYEARS(DATE('2024-01-01T01:01:01'), 3)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ADDYEARSUTC()`
+### `ADDYEARSUTC()`
 
 </th>
 </tr>
@@ -1466,7 +1466,7 @@ ADDYEARSUTC(DATE('2024-01-01T01:01:01+00:00'), 3)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ALL()`
+### `ALL()`
 
 </th>
 </tr>
@@ -1534,7 +1534,7 @@ ALL(LIST(BOOL("True"), BOOL("True"), BOOL("False")))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `AND()`
+### `AND()`
 
 </th>
 </tr>
@@ -1601,7 +1601,7 @@ AND(BOOL("True"), BOOL("True"))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ANY()` {: #any_not_empty }
+### `ANY()` {: #any_not_empty }
 
 </th>
 </tr>
@@ -1669,7 +1669,7 @@ ANY(from in db->Tickets where i->product == "Data Monsoon" select i->name)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ANY()` {: #any_predicate }
+### `ANY()` {: #any_predicate }
 
 </th>
 </tr>
@@ -1744,7 +1744,7 @@ ANY([
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ASCENDING()`
+### `ASCENDING()`
 
 </th>
 </tr>
@@ -1810,7 +1810,7 @@ ASCENDING('в', 'а', 'б')
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `AVERAGE()`
+### `AVERAGE()`
 
 </th>
 </tr>
@@ -1877,7 +1877,7 @@ AVERAGE(1, 3, 4, 7, 10)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `BETWEEN()`
+### `BETWEEN()`
 
 </th>
 </tr>
@@ -1945,7 +1945,7 @@ BETWEEN(DURATION("PT3H15M"), DURATION("PT3H1M"), DURATION("PT3H25M"))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `BETWEENUTC()`
+### `BETWEENUTC()`
 
 </th>
 </tr>
@@ -2017,7 +2017,7 @@ BETWEENUTC(
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `CEILING()`
+### `CEILING()`
 
 </th>
 </tr>
@@ -2083,7 +2083,7 @@ CEILING(4.1)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `CENTURY()`
+### `CENTURY()`
 
 </th>
 </tr>
@@ -2149,7 +2149,7 @@ CENTURY(DATE("2000-01-01T05:45:15"))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `CENTURYUTC()`
+### `CENTURYUTC()`
 
 </th>
 </tr>
@@ -2215,7 +2215,7 @@ CENTURYUTC(DATE("2000-01-01T05:45:15+10:00"))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `COMPARE()`
+### `COMPARE()`
 
 </th>
 </tr>
@@ -2285,7 +2285,7 @@ COMPARE(DURATION("PT3H15M"), DURATION("PT3H16M"))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `CONCAT()`
+### `CONCAT()`
 
 </th>
 </tr>
@@ -2351,7 +2351,7 @@ CONCAT(LIST("Сумма доходов равна: ", "100000"))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `CONTAINS()`
+### `CONTAINS()`
 
 </th>
 </tr>
@@ -2418,7 +2418,7 @@ CONTAINS("Это срочная заявка.", "срочн")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `CONVERTTIMEZONE()`
+### `CONVERTTIMEZONE()`
 
 </th>
 </tr>
@@ -2485,7 +2485,7 @@ CONVERTTIMEZONE(DATE("2025-05-05T13:45:15+00:00"), "Europe/London")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `CONVERTTIMEZONEUTC()`
+### `CONVERTTIMEZONEUTC()`
 
 </th>
 </tr>
@@ -2552,7 +2552,7 @@ CONVERTTIMEZONEUTC(DATE("2025-05-05T13:45:15+00:00"), "Europe/Moscow")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `COUNT()`
+### `COUNT()`
 
 </th>
 </tr>
@@ -2619,7 +2619,7 @@ COUNT(LIST("a", 2, "c", "d", 5))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `CREATEDATE()`
+### `CREATEDATE()`
 
 </th>
 </tr>
@@ -2691,7 +2691,7 @@ CREATEDATE(2025, 5, 5, 15, 45, 15)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `CREATEDATEUTC()`
+### `CREATEDATEUTC()`
 
 </th>
 </tr>
@@ -2763,7 +2763,7 @@ CREATEDATEUTC(2025, 5, 5, 15, 45, 15)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `DAY()`
+### `DAY()`
 
 </th>
 </tr>
@@ -2831,7 +2831,7 @@ DAY(DATE("2025-05-05T23:45:15+00:00"), "Europe/Moscow")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `DAYOFWEEK()`
+### `DAYOFWEEK()`
 
 </th>
 </tr>
@@ -2898,7 +2898,7 @@ DAYOFWEEK(DATE("2025-05-05T23:45:15"))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `DAYOFWEEKUTC()`
+### `DAYOFWEEKUTC()`
 
 </th>
 </tr>
@@ -2965,7 +2965,7 @@ DAYOFWEEKUTC(DATE("2025-05-05T20:45:15-01:00"))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `DAYOFYEAR()`
+### `DAYOFYEAR()`
 
 </th>
 </tr>
@@ -3032,7 +3032,7 @@ DAYOFYEAR(DATE("2025-05-05T23:45:15"))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `DAYOFYEARUTC()`
+### `DAYOFYEARUTC()`
 
 </th>
 </tr>
@@ -3099,7 +3099,7 @@ DAYOFYEARUTC(DATE("2025-05-05T23:45:15+00:00"))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `DAYS()`
+### `DAYS()`
 
 </th>
 </tr>
@@ -3166,7 +3166,7 @@ DAYS(DURATION('P12DT64H75M1360S'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `DAYSINMONTH()`
+### `DAYSINMONTH()`
 
 </th>
 </tr>
@@ -3246,7 +3246,7 @@ DAYSINMONTH(DATE("2025-02-05T23:45:15"))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `DAYSINMONTHUTC()`
+### `DAYSINMONTHUTC()`
 
 </th>
 </tr>
@@ -3326,7 +3326,7 @@ DAYSINMONTHUTC(DATE("2025-02-28T23:45:15-02:00"))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `DAYUTC()`
+### `DAYUTC()`
 
 </th>
 </tr>
@@ -3388,7 +3388,12 @@ DAYUTC(DATE("2025-04-30T23:45:15-02:00"))
 </tbody>
 </table>
 
-## `DESCENDING()`
+<table markdown="block">
+<tbody markdown="block">
+<tr markdown="block">
+<th colspan="2" markdown="block">
+
+### `DESCENDING()`
 
 </th>
 </tr>
@@ -3397,7 +3402,8 @@ DAYUTC(DATE("2025-04-30T23:45:15-02:00"))
 **Описание**
 </td>
 <td markdown="block">
-Сортирует элементы последовательности в порядке убывания.
+
+Сортирует элементы списка в порядке возрастания.
 
 </td>
 </tr>
@@ -3453,7 +3459,7 @@ DESCENDING('а', 'б', 'в')
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `DISTINCT()`
+### `DISTINCT()`
 
 </th>
 </tr>
@@ -3517,7 +3523,7 @@ DISTINCT(LIST('а', 'а', 'в', 'б', 'Б', 'в'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `DIVIDE()`
+### `DIVIDE()`
 
 </th>
 </tr>
@@ -3583,7 +3589,7 @@ DIVIDE (125, 25)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `EMPTY()`
+### `EMPTY()`
 
 </th>
 </tr>
@@ -3649,7 +3655,7 @@ EMPTY(DIVIDE(3, 3))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ENDOFDAY()`
+### `ENDOFDAY()`
 
 </th>
 </tr>
@@ -3715,7 +3721,7 @@ ENDOFDAY(DATE('2025-05-05T01:01:01'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ENDOFDAYUTC()`
+### `ENDOFDAYUTC()`
 
 </th>
 </tr>
@@ -3781,7 +3787,7 @@ ENDOFDAYUTC(DATE('2025-05-05T01:01:01+03:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ENDOFMONTH()`
+### `ENDOFMONTH()`
 
 </th>
 </tr>
@@ -3846,7 +3852,7 @@ ENDOFMONTH(DATE('2025-05-05T01:01:01'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ENDOFMONTHUTC()`
+### `ENDOFMONTHUTC()`
 
 </th>
 </tr>
@@ -3911,7 +3917,7 @@ ENDOFMONTHUTC(DATE('2025-05-01T01:01:01+03:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ENDOFQUARTER()`
+### `ENDOFQUARTER()`
 
 </th>
 </tr>
@@ -3977,7 +3983,7 @@ ENDOFQUARTER(DATE('2025-04-01T01:01:01'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ENDOFQUARTERUTC()`
+### `ENDOFQUARTERUTC()`
 
 </th>
 </tr>
@@ -4042,7 +4048,7 @@ ENDOFQUARTERUTC(DATE('2025-04-01T01:01:01+03:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ENDOFWEEK()`
+### `ENDOFWEEK()`
 
 </th>
 </tr>
@@ -4107,7 +4113,7 @@ ENDOFWEEK(DATE('2025-05-05T01:01:01'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ENDOFWEEKUTC()`
+### `ENDOFWEEKUTC()`
 
 </th>
 </tr>
@@ -4172,7 +4178,7 @@ ENDOFWEEKUTC(DATE('2025-05-05T01:01:01+03:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ENDOFYEAR()`
+### `ENDOFYEAR()`
 
 </th>
 </tr>
@@ -4238,7 +4244,7 @@ ENDOFYEAR(DATE('2025-01-01T01:01:01'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ENDOFYEARUTC()`
+### `ENDOFYEARUTC()`
 
 </th>
 </tr>
@@ -4303,7 +4309,7 @@ ENDOFYEARUTC(DATE('2025-01-01T01:01:01+03:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ENDSWITH()`
+### `ENDSWITH()`
 
 </th>
 </tr>
@@ -4368,7 +4374,7 @@ ENDSWITH("Строка", "ка")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ENUMVALUE()`
+### `ENUMVALUE()`
 
 </th>
 </tr>
@@ -4436,7 +4442,7 @@ EQUALS($Status, ID(ENUMVALUE("Status", "Resolved")))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `EQ()`
+### `EQ()`
 
 </th>
 </tr>
@@ -4503,7 +4509,7 @@ EQ(DURATION('P2DT1H30M30S'), DURATION('P1DT25H30M30S'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `EQUALS()`
+### `EQUALS()`
 
 </th>
 </tr>
@@ -4569,7 +4575,7 @@ EQUALS("string", 2)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `EQUTC()`
+### `EQUTC()`
 
 </th>
 </tr>
@@ -4636,7 +4642,7 @@ EQUTC(DATE('2025-01-01T01:01:01+03:00'), DATE('2025-01-01T00:01:01+02:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `FIRST()`
+### `FIRST()`
 
 </th>
 </tr>
@@ -4702,7 +4708,7 @@ FIRST((from i in db->music where i->album == 'Whale Meditation' select i->song))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `FIRSTCAPITAL()`
+### `FIRSTCAPITAL()`
 
 </th>
 </tr>
@@ -4768,7 +4774,7 @@ FIRSTCAPITAL("строка")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `FLOOR()`
+### `FLOOR()`
 
 </th>
 </tr>
@@ -4834,7 +4840,7 @@ FLOOR(5.9)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `FORMAT()`
+### `FORMAT()`
 
 </th>
 </tr>
@@ -4907,7 +4913,7 @@ FORMAT(
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `FORMATDUR()`
+### `FORMATDUR()`
 
 </th>
 </tr>
@@ -4984,7 +4990,7 @@ FORMATDUR(INSECONDS(5000000))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `FORMATLOC()`
+### `FORMATLOC()`
 
 </th>
 </tr>
@@ -5054,7 +5060,7 @@ FORMATLOC(DATE('2025-05-05T05:05:25'), "dd MMMM yyyy г. hh:mm:ss")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `FORMATUTC()`
+### `FORMATUTC()`
 
 </th>
 </tr>
@@ -5124,7 +5130,7 @@ FORMATUTC(DATE('2025-05-05T05:05:25+03:00'), "dd MMMM yyyy года hh:mm:ss")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `GE()`
+### `GE()`
 
 </th>
 </tr>
@@ -5191,7 +5197,7 @@ GE(DURATION('P1DT1H30M30S'), DURATION('P2DT1H30M30S'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `GETSPAN()`
+### `GETSPAN()`
 
 </th>
 </tr>
@@ -5257,7 +5263,7 @@ GETSPAN(DATE('2025-05-05T05:05:25'), DATE('2025-05-05T10:10:50'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `GETSPANUTC()`
+### `GETSPANUTC()`
 
 </th>
 </tr>
@@ -5323,7 +5329,7 @@ GETSPANUTC(DATE('2025-05-05T05:05:25+00:00'), DATE('2025-05-05T05:05:25+05:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `GEUTC()`
+### `GEUTC()`
 
 </th>
 </tr>
@@ -5389,7 +5395,7 @@ GEUTC(DATE('2025-05-05T05:05:25+00:00'), DATE('2025-05-05T05:05:25+05:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `GREATER()`
+### `GREATER()`
 
 </th>
 </tr>
@@ -5455,7 +5461,7 @@ GREATER(1, 0)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `GREATEREQ()`
+### `GREATEREQ()`
 
 </th>
 </tr>
@@ -5521,7 +5527,7 @@ GREATEREQ("Строка", "Сорока")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `GT()`
+### `GT()`
 
 </th>
 </tr>
@@ -5588,7 +5594,7 @@ GT(DATE('2025-05-05T05:05:25'), DATE('2025-05-05T05:05:25'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `GTUTC()`
+### `GTUTC()`
 
 </th>
 </tr>
@@ -5654,7 +5660,7 @@ GTUTC(DATE('2025-05-05T05:05:25+00:00'), DATE('2025-05-05T05:05:25+05:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `HOUR()`
+### `HOUR()`
 
 </th>
 </tr>
@@ -5721,7 +5727,7 @@ HOUR(DATE('2025-05-05T05:05:25+00:00'), "Europe/Moscow")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `HOURS()`
+### `HOURS()`
 
 </th>
 </tr>
@@ -5787,7 +5793,7 @@ HOURS(DURATION('P2DT1H30M0S'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `HOURUTC()`
+### `HOURUTC()`
 
 </th>
 </tr>
@@ -5853,7 +5859,7 @@ HOURUTC(DATE('2025-05-05T05:05:25+03:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `IF()`
+### `IF()`
 
 </th>
 </tr>
@@ -5925,7 +5931,7 @@ IF(1==2, "Верно", "Не верно")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `INDEXOF()`
+### `INDEXOF()`
 
 </th>
 </tr>
@@ -5999,7 +6005,7 @@ INDEXOF("У ёлки иголки колки.", "лки")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `INSECONDS()`
+### `INSECONDS()`
 
 </th>
 </tr>
@@ -6069,7 +6075,7 @@ INSECONDS(5)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `INSECONDSUTC()`
+### `INSECONDSUTC()`
 
 </th>
 </tr>
@@ -6140,7 +6146,7 @@ INSECONDSUTC(DATE('2025-05-05T05:05:25'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ISLEAPYEAR()`
+### `ISLEAPYEAR()`
 
 </th>
 </tr>
@@ -6206,7 +6212,7 @@ ISLEAPYEAR(DATE('2025-01-01T01:01:01'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ISLEAPYEARUTC()`
+### `ISLEAPYEARUTC()`
 
 </th>
 </tr>
@@ -6272,7 +6278,7 @@ ISLEAPYEARUTC(DATE('2025-01-01T01:01:01+03:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ISOFORMAT()`
+### `ISOFORMAT()`
 
 </th>
 </tr>
@@ -6337,7 +6343,7 @@ ISOFORMAT(NOW())
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ISOFORMATUTC()`
+### `ISOFORMATUTC()`
 
 </th>
 </tr>
@@ -6402,7 +6408,7 @@ ISOFORMATUTC(NOW())
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ISTODAY()`
+### `ISTODAY()`
 
 </th>
 </tr>
@@ -6468,7 +6474,7 @@ ISTODAY(NOW())
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ISTODAYUTC()`
+### `ISTODAYUTC()`
 
 </th>
 </tr>
@@ -6534,7 +6540,7 @@ ISTODAYUTC(NOW())
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ISWEEKEND()`
+### `ISWEEKEND()`
 
 </th>
 </tr>
@@ -6600,7 +6606,7 @@ ISWEEKEND(DATE('2025-05-05T01:01:01'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ISWEEKENDUTC()`
+### `ISWEEKENDUTC()`
 
 </th>
 </tr>
@@ -6666,7 +6672,7 @@ ISWEEKENDUTC(DATE('2025-05-05T01:01:01+03:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ISWORKDAY()`
+### `ISWORKDAY()`
 
 </th>
 </tr>
@@ -6732,7 +6738,7 @@ ISWORKDAY(DATE('2025-05-05T01:01:01'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ISWORKDAYUTC()`
+### `ISWORKDAYUTC()`
 
 </th>
 </tr>
@@ -6798,7 +6804,7 @@ ISWORKDAYUTC(DATE('2025-05-05T01:01:01+03:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `JOIN()`
+### `JOIN()`
 
 </th>
 </tr>
@@ -6863,7 +6869,7 @@ JOIN(", ", LIST("Аналитик", "Архитектор", "Администр�
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `LAST()`
+### `LAST()`
 
 </th>
 </tr>
@@ -6929,7 +6935,7 @@ LAST((from i in db->music where i->album == 'Whale Meditation' select i->song))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `LE()`
+### `LE()`
 
 </th>
 </tr>
@@ -6996,7 +7002,7 @@ LE(DURATION('P2DT1H0M0S'), DURATION('P3DT1H0M0S'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `LENGTH()`
+### `LENGTH()`
 
 </th>
 </tr>
@@ -7061,7 +7067,7 @@ LENGTH("В этой строке 26 символов.")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `LESS()`
+### `LESS()`
 
 </th>
 </tr>
@@ -7135,7 +7141,7 @@ LESS("0,1", "0.1")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `LESSEQ()`
+### `LESSEQ()`
 
 </th>
 </tr>
@@ -7209,7 +7215,7 @@ LESSEQ("1.0", "1")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `LIST()`
+### `LIST()`
 
 </th>
 </tr>
@@ -7274,7 +7280,7 @@ LIST(1, 2, "a", "b")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `LISTEQUALS()`
+### `LISTEQUALS()`
 
 </th>
 </tr>
@@ -7339,7 +7345,7 @@ LISTEQUALS(LIST(1, 2), LIST("1", "2"))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `LT()`
+### `LT()`
 
 </th>
 </tr>
@@ -7407,7 +7413,7 @@ LT(DURATION('P2DT1H0M0S'), DURATION('P3DT1H0M0S'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `LTUTC()`
+### `LTUTC()`
 
 </th>
 </tr>
@@ -7473,7 +7479,7 @@ LTUTC(DATE('2025-05-05T01:01:01+03:00'), DATE('2025-05-05T01:01:01+04:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `MATCHES()`
+### `MATCHES()`
 
 </th>
 </tr>
@@ -7542,7 +7548,7 @@ MATCHES("Требуется решить проблему срочно!", "[Cс]
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `MAX()`
+### `MAX()`
 
 </th>
 </tr>
@@ -7612,7 +7618,7 @@ MAX(DURATION('P2DT1H0M0S'), DURATION('P3DT1H0M0S'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `MIN()`
+### `MIN()`
 
 </th>
 </tr>
@@ -7682,7 +7688,7 @@ MIN(DURATION('P2DT1H0M0S'), DURATION('P3DT1H0M0S'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `MINUTE()`
+### `MINUTE()`
 
 </th>
 </tr>
@@ -7752,7 +7758,7 @@ MINUTE(DATE('2025-05-05T01:01:01'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `MINUTES()`
+### `MINUTES()`
 
 </th>
 </tr>
@@ -7818,7 +7824,7 @@ MINUTES(DURATION('P1DT1H30M30S'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `MINUTEUTC()`
+### `MINUTEUTC()`
 
 </th>
 </tr>
@@ -7884,7 +7890,7 @@ MINUTEUTC(DATE('2025-05-05T01:01:01+03:30'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `MONTH()`
+### `MONTH()`
 
 </th>
 </tr>
@@ -7959,7 +7965,7 @@ MONTH(DATE('2025-05-01T01:01:01+03:00'), "Europe/Moscow")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `MONTHS()`
+### `MONTHS()`
 
 </th>
 </tr>
@@ -8025,7 +8031,7 @@ MONTHS(DURATION('P45D'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `MONTHUTC()`
+### `MONTHUTC()`
 
 </th>
 </tr>
@@ -8091,7 +8097,7 @@ MONTHUTC(DATE('2025-05-01T01:01:01+03:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `NE()`
+### `NE()`
 
 </th>
 </tr>
@@ -8158,7 +8164,7 @@ NE(DURATION('P0DT25H30M0S'), DURATION('P1DT1H30M0S'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `NEUTC()`
+### `NEUTC()`
 
 </th>
 </tr>
@@ -8224,7 +8230,7 @@ NEUTC(DATE('2025-05-01T01:01:01+03:00'), DATE('2025-05-01T01:01:01+02:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `NORMALIZE()`
+### `NORMALIZE()`
 
 </th>
 </tr>
@@ -8290,7 +8296,7 @@ NORMALIZE("В этой   строке  были    лишние  пробелы,
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `NOT()`
+### `NOT()`
 
 </th>
 </tr>
@@ -8356,7 +8362,7 @@ NOT(EMPTY(NOW()))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `NOTEQUALS()`
+### `NOTEQUALS()`
 
 </th>
 </tr>
@@ -8422,7 +8428,7 @@ NOTEQUALS("Строка", "Сорока")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `NOTMATCHES()`
+### `NOTMATCHES()`
 
 </th>
 </tr>
@@ -8491,7 +8497,7 @@ NOTMATCHES("Требуется решить проблему срочно!", "[C
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `NOW()`
+### `NOW()`
 
 </th>
 </tr>
@@ -8553,7 +8559,7 @@ NOW()
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `OBJECT()`
+### `OBJECT()`
 
 </th>
 </tr>
@@ -8622,7 +8628,7 @@ OBJECT("Fleetmanagement", "Requests", "Status", "Завершено")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `OR()`
+### `OR()`
 
 </th>
 </tr>
@@ -8688,7 +8694,7 @@ OR(BOOL("True"), BOOL("False"))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `PARSEDATE()`
+### `PARSEDATE()`
 
 </th>
 </tr>
@@ -8755,7 +8761,7 @@ PARSEDATE("050525", "MMddyy")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `PARSEDATEUTC()`
+### `PARSEDATEUTC()`
 
 </th>
 </tr>
@@ -8822,7 +8828,7 @@ PARSEDATEUTC("0505250001", "MMddyyhhmm")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `POW()`
+### `POW()`
 
 </th>
 </tr>
@@ -8889,7 +8895,7 @@ POW(2, 8)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `PRODUCT()`
+### `PRODUCT()`
 
 </th>
 </tr>
@@ -8956,7 +8962,7 @@ PRODUCT(3, 4)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `QUARTERS()`
+### `QUARTERS()`
 
 </th>
 </tr>
@@ -9022,7 +9028,7 @@ QUARTERS(DURATION('P229D'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `QUOTIENT()`
+### `QUOTIENT()`
 
 </th>
 </tr>
@@ -9089,7 +9095,7 @@ QUOTIENT(5, 2)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `REGEXREPLACE()`
+### `REGEXREPLACE()`
 
 </th>
 </tr>
@@ -9171,7 +9177,7 @@ REGEXREPLACE($HTML,"&lt;p class=""title"">(.+)&lt;\/p>","&lt;h1>$1&lt;h1>")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `REMAINDER()`
+### `REMAINDER()`
 
 </th>
 </tr>
@@ -9238,7 +9244,7 @@ REMAINDER(5, 2)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `REPLACE()`
+### `REPLACE()`
 
 </th>
 </tr>
@@ -9304,7 +9310,7 @@ REPLACE("Заявка утверждена.", "утверждена", "одоб�
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `ROUND()`
+### `ROUND()`
 
 </th>
 </tr>
@@ -9376,7 +9382,7 @@ ROUND(3.4)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `SECOND()`
+### `SECOND()`
 
 </th>
 </tr>
@@ -9445,7 +9451,7 @@ SECOND(DATE('2025-05-05T01:01:01'), "Europe/London")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `SECONDS()`
+### `SECONDS()`
 
 </th>
 </tr>
@@ -9511,7 +9517,7 @@ SECONDS(DURATION('P1DT1H30M0S'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `SECONDUTC()`
+### `SECONDUTC()`
 
 </th>
 </tr>
@@ -9577,7 +9583,7 @@ SECONDUTC(DATE('2025-05-05T01:01:01+01:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `SQRT()`
+### `SQRT()`
 
 </th>
 </tr>
@@ -9643,7 +9649,7 @@ SQRT(25)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `STARTOFDAY()`
+### `STARTOFDAY()`
 
 </th>
 </tr>
@@ -9709,7 +9715,7 @@ STARTOFDAY(DATE('2025-05-05T01:01:01'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `STARTOFDAYUTC()`
+### `STARTOFDAYUTC()`
 
 </th>
 </tr>
@@ -9775,7 +9781,7 @@ STARTOFDAYUTC(DATE('2025-05-05T01:01:01+03:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `STARTOFMONTH()`
+### `STARTOFMONTH()`
 
 </th>
 </tr>
@@ -9841,7 +9847,7 @@ STARTOFMONTH(DATE('2025-05-01T01:01:01'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `STARTOFMONTHUTC()`
+### `STARTOFMONTHUTC()`
 
 </th>
 </tr>
@@ -9907,7 +9913,7 @@ STARTOFMONTHUTC(DATE('2025-05-01T01:01:01+03:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `STARTOFQUARTER()`
+### `STARTOFQUARTER()`
 
 </th>
 </tr>
@@ -9973,7 +9979,7 @@ STARTOFQUARTER(DATE('2025-04-01T01:01:01'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `STARTOFQUARTERUTC()`
+### `STARTOFQUARTERUTC()`
 
 </th>
 </tr>
@@ -10038,7 +10044,7 @@ STARTOFQUARTERUTC(DATE('2025-04-01T01:01:01+03:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `STARTOFWEEK()`
+### `STARTOFWEEK()`
 
 </th>
 </tr>
@@ -10104,7 +10110,7 @@ STARTOFWEEK(DATE('2025-05-05T01:01:01'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `STARTOFWEEKUTC()`
+### `STARTOFWEEKUTC()`
 
 </th>
 </tr>
@@ -10170,7 +10176,7 @@ STARTOFWEEKUTC(DATE('2025-05-05T01:01:01+03:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `STARTOFYEAR()`
+### `STARTOFYEAR()`
 
 </th>
 </tr>
@@ -10235,7 +10241,7 @@ STARTOFYEAR(DATE('2025-01-01T01:01:01'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `STARTOFYEARUTC()`
+### `STARTOFYEARUTC()`
 
 </th>
 </tr>
@@ -10300,7 +10306,7 @@ STARTOFYEARUTC(DATE('2025-01-01T01:01:01+03:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `STARTSWITH()`
+### `STARTSWITH()`
 
 </th>
 </tr>
@@ -10365,7 +10371,7 @@ STARTSWITH("Строка", "Стр")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `SUB()`
+### `SUB()`
 
 </th>
 </tr>
@@ -10438,7 +10444,7 @@ SUB(DATE('2025-01-01T01:01:01'), DURATION('P1DT1H30M0S'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `SUBSTRING()`
+### `SUBSTRING()`
 
 </th>
 </tr>
@@ -10506,7 +10512,7 @@ SUBSTRING("Раньше эта строка начиналась с другог
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `SUBTRACT()`
+### `SUBTRACT()`
 
 </th>
 </tr>
@@ -10575,7 +10581,7 @@ SUBTRACT(17, 10)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `SUBUTC()`
+### `SUBUTC()`
 
 </th>
 </tr>
@@ -10642,7 +10648,7 @@ SUBUTC(DATE('2025-01-01T01:01:01+00:00'), DURATION('P1DT1H30M0S'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `SUM()`
+### `SUM()`
 
 </th>
 </tr>
@@ -10708,7 +10714,7 @@ SUM(1, 2, 3, 4)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `TODURATION()`
+### `TODURATION()`
 
 </th>
 </tr>
@@ -10774,7 +10780,7 @@ TODURATION(12345)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `TOLOWER()`
+### `TOLOWER()`
 
 </th>
 </tr>
@@ -10839,7 +10845,7 @@ TOLOWER("Все Буквы В ЭТОЙ Строке Стали Строчным�
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `TOUPPER()`
+### `TOUPPER()`
 
 </th>
 </tr>
@@ -10904,7 +10910,7 @@ TOUPPER("Все Буквы В Этой Строке Стали прописны�
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `TRIM()`
+### `TRIM()`
 
 </th>
 </tr>
@@ -10969,7 +10975,7 @@ TRIM("   В этой строке были лишние пробелы.   ")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `UNION()`
+### `UNION()`
 
 </th>
 </tr>
@@ -11037,7 +11043,7 @@ UNION(
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `USER()`
+### `USER()`
 
 </th>
 </tr>
@@ -11101,7 +11107,7 @@ USER()
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `VALUE()`
+### `VALUE()`
 
 </th>
 </tr>
@@ -11168,7 +11174,7 @@ VALUE($Amount, "Не заполнено поле Amount")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `WEEKOFYEAR()`
+### `WEEKOFYEAR()`
 
 </th>
 </tr>
@@ -11233,7 +11239,7 @@ WEEKOFYEAR(DATE('2025-05-06T01:01:01'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `WEEKOFYEARUTC()`
+### `WEEKOFYEARUTC()`
 
 </th>
 </tr>
@@ -11299,7 +11305,7 @@ WEEKOFYEARUTC(DATE('2025-05-06T01:01:01+03:00'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `WORKDAYS()`
+### `WORKDAYS()`
 
 </th>
 </tr>
@@ -11384,7 +11390,7 @@ WORKDAYS(
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `WORKDAYSDURATION()`
+### `WORKDAYSDURATION()`
 
 </th>
 </tr>
@@ -11469,7 +11475,7 @@ WORKDAYSDURATION(
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `WORKDAYSDURATIONTZ()`
+### `WORKDAYSDURATIONTZ()`
 
 </th>
 </tr>
@@ -11555,7 +11561,7 @@ WORKDAYSDURATIONTZ(
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `WORKDAYSDURATIONUTC()`
+### `WORKDAYSDURATIONUTC()`
 
 </th>
 </tr>
@@ -11633,7 +11639,7 @@ WORKDAYSDURATIONUTC(
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `WORKDAYSTZ()`
+### `WORKDAYSTZ()`
 
 </th>
 </tr>
@@ -11719,7 +11725,7 @@ WORKDAYSTZ(
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `WORKDAYSUTC()`
+### `WORKDAYSUTC()`
 
 </th>
 </tr>
@@ -11788,7 +11794,7 @@ WORKDAYSUTC(DATE('2025-05-01+03:00'), 3)
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `WORKHOURS()`
+### `WORKHOURS()`
 
 </th>
 </tr>
@@ -11877,7 +11883,7 @@ WORKHOURS(
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `WORKHOURSDURATION()`
+### `WORKHOURSDURATION()`
 
 </th>
 </tr>
@@ -11966,7 +11972,7 @@ WORKHOURSDURATION(
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `WORKHOURSDURATIONTZ()`
+### `WORKHOURSDURATIONTZ()`
 
 </th>
 </tr>
@@ -12056,7 +12062,7 @@ WORKHOURSDURATIONTZ(
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `WORKHOURSTZ()`
+### `WORKHOURSTZ()`
 
 </th>
 </tr>
@@ -12146,7 +12152,7 @@ WORKHOURSTZ(
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `YEAR()`
+### `YEAR()`
 
 </th>
 </tr>
@@ -12215,7 +12221,7 @@ YEAR(DATE('2025-01-01'), "America/Anchorage")
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `YEARS()`
+### `YEARS()`
 
 </th>
 </tr>
@@ -12281,7 +12287,7 @@ YEARS(DURATION('P183D'))
 <tr markdown="block">
 <th colspan="2" markdown="block">
 
-## `YEARUTC()`
+### `YEARUTC()`
 
 </th>
 </tr>
@@ -12347,7 +12353,7 @@ YEARUTC(DATE('2025-01-01+03:00'))
 --8<-- "related_topics_heading.md"
 
 - [Редактор выражений][expression_editor]
-- [Введение в язык формул Comindware][formula_introduction]
+- [Введение в язык формул Comindware][formula_guide]
 - [Форматирование значений в шаблонах экспорта и формулах][export_template_file_formula_format_values]
 - [Глобальная конфигурация][global_configuration]
 

@@ -12,13 +12,9 @@
 
 [api_calls]: {{ kbCategoryURLPrefix }}868
 
-[account_attributes_system_names]: {{ kbArticleURLPrefix }}4994
-
 [attribute_date_time_use]: {{ kbArticleURLPrefix }}4886
 
 [attribute_drawing_file_import]: {{ kbArticleURLPrefix }}4906
-
-[account_attribute_system_names]: {{ kbArticleURLPrefix }}4994
 
 [backup_and_restore]: {{ kbArticleURLPrefix }}4643
 
@@ -62,12 +58,6 @@
 
 [formula_use_examples]: {{ kbCategoryURLPrefix }}881
 
-[formula_function_list]: {{ kbArticleURLPrefix }}4993
-
-[formula_function_list_literals]: {{ kbArticleURLPrefix }}4993#formula_function_list_literals
-
-[formula_introduction]: {{ kbArticleURLPrefix }}4999
-
 [html_supported_tags]: {{ kbArticleURLPrefix }}4912
 
 [integration_examples]: {{ kbCategoryURLPrefix }}875
@@ -93,6 +83,8 @@
 <!-- Экспорт в БЗ любых руководств -->
 
 [account_templates]: {{ kbArticleURLPrefix }}4757
+
+[account_template_attribute_system_names]: {{ kbArticleURLPrefix }}4757#account_template_attribute_system_names
 
 [accounts]: {{ kbArticleURLPrefix }}4653
 
@@ -135,6 +127,14 @@
 [esphere_receive_configure]: {{ kbArticleURLPrefix }}5061
 
 [esphere_send_configure]: {{ kbArticleURLPrefix }}5062
+
+[formula_function_list]: {{ kbArticleURLPrefix }}4993
+
+[formula_reference]: {{ kbArticleURLPrefix }}4993
+
+[formula_reference_literals]: {{ kbArticleURLPrefix }}4993#formula_reference_literals
+
+[formula_introduction]: {{ kbArticleURLPrefix }}4999
 
 [get_connection]: {{ kbArticleURLPrefix }}4701
 
