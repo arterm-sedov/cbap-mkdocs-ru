@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4613" kb-title="Аутентификация через единый вход (SSO). Настройка контроллера домена, экземпляра ПО и компьютера конечного пользователя">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4613" kb-tags="" kb-title="Аутентификация через единый вход (SSO). Настройка контроллера домена, экземпляра ПО и компьютера конечного пользователя">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -23,7 +23,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#конфигурация-машины-linuxhost-с-экземпляром-по-comindware-platform">
+<a class="md-nav__link mkdocs_imported_link" href="#sso_authenticatation_configure_instance">
 <span class="md-ellipsis">
       Конфигурация машины linuxHost с экземпляром ПО Comindware Platform
     </span>
@@ -207,6 +207,13 @@
 </nav>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-клиента">
+<span class="md-ellipsis">
+      Настройка клиента
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
 <span class="md-ellipsis">
       Связанные статьи
@@ -226,7 +233,7 @@
 <p><a class="mkdocs_imported_link" href="https://www.comindware.ru/company/contact-us/#tab_support">https://www.comindware.ru/company/contact-us/#tab_support</a></p>
 </div>
 <h2 id="введение">Введение</h2>
-<p>Здесь представлены инструкции по настройке контроллера домена, экземпляра ПО <strong>Comindware Platform</strong> (далее «экземпляр ПО») и компьютера конечного пользователя для аутентификации пользователей посредством технологии единого входа (SSO). Инструкции приведены для контроллера домена под управлением ОС Windows Server 2016, экземпляра ПО под управлением ОС Linux и компьютера конечного пользователя под управлением ОС Windows 10.</p>
+<p>Здесь представлены инструкции по настройке <a class="mkdocs_imported_link" href="#конфигурация-машины-dcname-с-контроллером-домена">контроллера домена</a>, <a class="mkdocs_imported_link" href="#sso_authenticatation_configure_instance">экземпляра ПО <strong>Comindware Platform</strong></a> и <a class="mkdocs_imported_link" href="#настройка-клиента">компьютера конечного пользователя</a> для аутентификации пользователей посредством технологии единого входа (SSO). Инструкции приведены для контроллера домена под управлением ОС Windows Server 2016, экземпляра ПО под управлением ОС Linux и компьютера конечного пользователя под управлением ОС Windows 10.</p>
 <div class="notice notice-success">
 <p class="admonition-title">Определения</p>
 <ul>
@@ -271,7 +278,7 @@
 <p class="admonition-title">Примечание</p>
 <p>Протокол аутентификации Kerberos учитывает регистр символов — там, где в инструкциях даны примеры параметров в верхнем регистре, следует подставлять фактические значения также в верхнем регистре.</p>
 </div>
-<h2 id="конфигурация-машины-linuxhost-с-экземпляром-по-comindware-platform">Конфигурация машины linuxHost с экземпляром ПО Comindware Platform</h2>
+<h2 id="sso_authenticatation_configure_instance">Конфигурация машины linuxHost с экземпляром ПО Comindware Platform</h2>
 <table style="width: 100%;">
 <thead>
 <tr>
@@ -693,6 +700,11 @@
 <div class="highlight"><code><pre><span></span><code><span class="nv">KRB5_TRACE</span><span class="o">=</span>/dev/stdout<span class="w"> </span>kinit<span class="w"> </span>-k<span class="w"> </span>-t<span class="w"> </span>/etc/nginx/&lt;authuser&gt;.keytab<span class="w"> </span>HTTP/&lt;DCName&gt;.&lt;domain.name&gt;</code> <br/></pre></code></div>
 </li>
 </ol>
+<h2 id="настройка-клиента">Настройка клиента</h2>
+<p>По умолчанию SSO-авторизация работает в браузерах Edge и Google Chrome, но необходимо в параметрах безопасности браузера добавить сайт в зону местной интрасети и включить режим «<strong>Автоматический вход в сеть только в зоне интрасети</strong>». Сведения о настройке других браузеров см. в соответствующей документации.</p>
+<figure class="screenshot_with_caption">
+<p><img alt="Окно настройки параметров безопасности браузера" src="https://kb.comindware.ru/assets/img_63bcecc1b498f.png"/><figcaption class="caption">Окно настройки параметров безопасности браузера</figcaption></p>
+</figure>
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>

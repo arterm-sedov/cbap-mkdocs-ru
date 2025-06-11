@@ -15,7 +15,12 @@ hide:
 
 # Пул {: #process_diagram_elements_pool}
 
+<div class="admonition question" markdown="block">
+## Определения {: .admonition-title #definitions}
+
 **Пул** содержит все остальные элементы диаграммы процесса. Его нельзя удалить.
+
+</div>
 
 *![Пул и его меню элемента](pool.png)*
 

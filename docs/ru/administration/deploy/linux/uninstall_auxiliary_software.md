@@ -32,13 +32,13 @@ kbId: 4625
 
 1. Перейдите в режим суперпользователя:
 
-    ``` shell
+    ``` sh
     sudo -i
     ```
 
 2. Остановите экземпляр ПО (`<instancename>` — имя экземпляра ) и удостоверьтесь, что он остановлен:
 
-    ``` shell
+    ``` sh
     systemctl stop comindware<instancename>
     systemctl status comindware<instancename>
     ```
@@ -49,7 +49,7 @@ kbId: 4625
 
 1. Перед выполнением последующих инструкций перейдите в режим суперпользователя:
 
-    ``` shell
+    ``` sh
     sudo -i
     ```
 
@@ -57,19 +57,19 @@ kbId: 4625
 
 1. Удалите бинарные файлы `bellsoft-java17-runtime`:
 
-    ``` shell
+    ``` sh
     rm -rf /usr/lib/jvm/bellsoft-java17-runtime-amd64/
     ```
 
 2. Удалите ссылку на исполняемые файлы:
 
-    ``` shell
+    ``` sh
     rm /usr/bin/java
     ```
 
 3. Удалите конфигурацию JRE:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/java
     ```
 
@@ -77,7 +77,7 @@ kbId: 4625
 
 1. Удалите службу Kafka:
 
-    ``` shell
+    ``` sh
     systemctl stop kafka.service
     systemctl disable kafka.service
     rm /usr/lib/systemd/system/kafka.service
@@ -87,20 +87,20 @@ kbId: 4625
 
 2. Удалите бинарные файлы Kafka:
 
-    ``` shell
+    ``` sh
     rm -rf /usr/share/kafka
     ```
 
 3. Удалите журналы Kafka:
 {: .pageBreakBefore }
 
-    ``` shell
+    ``` sh
     rm -rf /var/log/comindware/.kafka
     ```
 
 4. Удалите конфигурацию Kafka:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/kafka
     ```
 
@@ -108,13 +108,13 @@ kbId: 4625
 
 1. Удалите пакеты `mono-core` и `mono-devel` вместе с их зависимостями:
 
-    ``` shell
+    ``` sh
     apt-get remove --purge -y mono-devel mono-core
     ```
 
 2. Удалите конфигурацию Mono:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/mono
     ```
 
@@ -122,19 +122,19 @@ kbId: 4625
 
 1. Удалите бинарные файлы .NET:
 
-    ``` shell
+    ``` sh
     rm -rf /usr/share/dotnet/
     ```
 
 2. Удалите ссылку на исполняемые файлы .NET:
 
-    ``` shell
+    ``` sh
     rm /usr/bin/dotnet
     ```
 
 3. Удалите конфигурацию .NET:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/dotnet
     ```
 
@@ -143,13 +143,13 @@ kbId: 4625
 1. При необходимости сохраните резервную копию файла конфигурации NGINX: `/etc/nginx/sites-available`
 2. Удалите пакет `nginx` и его зависимости:
 
-    ``` shell
+    ``` sh
     apt-get remove --purge -y nginx
     ```
 
 3. Удалите конфигурацию NGINX:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/nginx
     ```
 
@@ -157,7 +157,7 @@ kbId: 4625
 
 1. Перед выполнением последующих инструкций перейдите в режим суперпользователя:
 
-    ``` shell
+    ``` sh
     sudo -i
     ```
 
@@ -165,13 +165,13 @@ kbId: 4625
 
 1. Удалите пакет `bellsoft-java17-runtime`:
 
-    ``` shell
+    ``` sh
     apt-get remove --purge -y bellsoft-java17-runtime
     ```
 
 2. Удалите конфигурацию JRE:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/java
     ```
 
@@ -179,7 +179,7 @@ kbId: 4625
 
 1. Удалите службу Kafka:
 
-    ``` shell
+    ``` sh
     systemctl stop kafka.service
     systemctl disable kafka.service
     rm /usr/lib/systemd/system/kafka.service
@@ -189,19 +189,19 @@ kbId: 4625
 
 2. Удалите бинарные файлы Kafka:
 
-    ``` shell
+    ``` sh
     rm -rf /usr/share/kafka
     ```
 
 3. Удалите журналы Kafka:
 
-    ``` shell
+    ``` sh
     rm -rf /var/log/comindware/.kafka
     ```
 
 4. Удалите конфигурацию Kafka:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/kafka
     ```
 
@@ -209,7 +209,7 @@ kbId: 4625
 
 1. Удалите бинарные файлы Mono:
 
-    ``` shell
+    ``` sh
     rm -rf /etc/mono/ \
         /usr/lib/libmono* \
         /usr/lib/libMono* \
@@ -219,7 +219,7 @@ kbId: 4625
 
 2. Удалите ссылки на исполняемые файлы:
 
-    ``` shell
+    ``` sh
     rm -rf /usr/bin/mono \
         /usr/bin/mono-* \
         /usr/bin/monop \
@@ -232,7 +232,7 @@ kbId: 4625
 
 3. Удалите справочные файлы (man-страницы):
 
-    ``` shell
+    ``` sh
     rm -rf /usr/share/man/man1/xsp4.1.gz \
         /usr/share/man/man1/mono.1.gz \
         /usr/share/man/man1/fastcgi-mono-server4.1.gz
@@ -241,7 +241,7 @@ kbId: 4625
 
 4. Удалите конфигурацию Mono:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/mono
     ```
 
@@ -249,19 +249,19 @@ kbId: 4625
 
 1. Удалите бинарные файлы .NET:
 
-    ``` shell
+    ``` sh
     rm -rf /usr/share/dotnet/
     ```
 
 2. Удалите ссылку на исполняемые файлы .NET:
 
-    ``` shell
+    ``` sh
     rm /usr/bin/dotnet
     ```
 
 3. Удалите конфигурацию .NET:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/dotnet
     ```
 
@@ -270,13 +270,13 @@ kbId: 4625
 1. При необходимости сохраните резервную копию файла конфигурации NGINX: `/etc/nginx/sites-available`
 2. Удалите пакеты `nginx`, `nginx-core` и  `nginx-common` вместе с их зависимостями:
 
-    ``` shell
+    ``` sh
     apt-get remove --purge -y nginx nginx-core nginx-common
     ```
 
 3. Удалите конфигурацию NGINX:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/nginx
     ```
 
@@ -284,7 +284,7 @@ kbId: 4625
 
 1. Перед выполнением последующих инструкций перейдите в режим суперпользователя:
 
-    ``` shell
+    ``` sh
     sudo -i
     ```
 
@@ -292,20 +292,20 @@ kbId: 4625
 
 1. Удалите пакет `axiomjdk-java17-runtime-pro`:
 
-    ``` shell
+    ``` sh
     apt-get remove --purge -y axiomjdk-java17-runtime-pro
     ```
 
 2. Удалите ссылку на исполняемые файлы:
 
-    ``` shell
+    ``` sh
     rm /usr/bin/java
     ```
 
 3. Удалите конфигурацию JRE:
 
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/java
     ```
 
@@ -313,7 +313,7 @@ kbId: 4625
 
 1. Удалите службу Kafka:
 
-    ``` shell
+    ``` sh
     systemctl stop kafka.service
     systemctl disable kafka.service
     rm /usr/lib/systemd/system/kafka.service
@@ -323,19 +323,19 @@ kbId: 4625
 
 2. Удалите бинарные файлы Kafka:
 
-    ``` shell
+    ``` sh
     rm -rf /usr/share/kafka
     ```
 
 3. Удалите журналы Kafka:
 
-    ``` shell
+    ``` sh
     rm -rf /var/log/comindware/.kafka
     ```
 
 4. Удалите конфигурацию Kafka:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/kafka
     ```
 
@@ -343,13 +343,13 @@ kbId: 4625
 
 1. Удалите пакет Mono `mono-runtime` и его зависимости:
 
-    ``` shell
+    ``` sh
     apt-get remove --purge -y mono-runtime
     ```
 
 2. Удалите конфигурацию Mono:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/mono
     ```
 
@@ -357,19 +357,19 @@ kbId: 4625
 
 1. Удалите бинарные файлы .NET:
 
-    ``` shell
+    ``` sh
     rm -rf /usr/share/dotnet/
     ```
 
 2. Удалите ссылку на исполняемые файлы .NET:
 
-    ``` shell
+    ``` sh
     rm /usr/bin/dotnet
     ```
 
 3. Удалите конфигурацию .NET:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/dotnet
     ```
 
@@ -378,13 +378,13 @@ kbId: 4625
 1. При необходимости сохраните резервную копию файла конфигурации NGINX: `/etc/nginx/sites-available`
 2. Удалите пакет `nginx-common` и его зависимости:
 
-    ``` shell
+    ``` sh
     apt-get remove --purge -y nginx-common
     ```
 
 3. Удалите конфигурацию NGINX:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/nginx
     ```
 
@@ -394,19 +394,19 @@ kbId: 4625
 
 1. Удалите пакет `bellsoft-java17-runtime`:
 
-    ``` shell
+    ``` sh
     yum autoremove -y bellsoft-java17-runtime
     ```
 
 2. Удалите ссылку на исполняемые файлы:
 
-    ``` shell
+    ``` sh
     rm /usr/bin/java
     ```
 
 3. Удалите конфигурацию JRE:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/java
     ```
 
@@ -414,7 +414,7 @@ kbId: 4625
 
 1. Удалите службу Kafka:
 
-    ``` shell
+    ``` sh
     systemctl stop kafka.service
     systemctl disable kafka.service
     rm /usr/lib/systemd/system/kafka.service
@@ -423,23 +423,23 @@ kbId: 4625
     ```
 
 2. Удалите бинарные файлы Kafka:
-    ``` shell
+    ``` sh
     rm -rf /usr/share/kafka
     ```
 
 3. Удалите журналы Kafka:
-    ``` shell
+    ``` sh
     rm -rf /var/log/comindware/.kafka
     ```
 4. Удалите конфигурацию Kafka:
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/kafka
     ```
 
 ### Удаление Mono {: .pageBreakBefore }
 
 1. Удалите бинарные файлы Mono:
-    ``` shell
+    ``` sh
     rm -rf /etc/mono/ \
         /usr/share/pkgconfig \
         /usr/share/mono-2.0 \
@@ -460,7 +460,7 @@ kbId: 4625
     ```
 
 2. Удалите ссылки на исполняемые файлы:
-    ``` shell
+    ``` sh
     rm -rf /usr/bin/xsp* \
         /usr/bin/xbuild \
         /usr/bin/x86_64-redhat-linux-gnu-pkg-config \
@@ -499,7 +499,7 @@ kbId: 4625
 
 3. Удалите конфигурацию Mono:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/mono
     ```
 
@@ -507,19 +507,19 @@ kbId: 4625
 
 1. Удалите бинарные файлы .NET:
 
-    ``` shell
+    ``` sh
     rm -rf /usr/share/dotnet/
     ```
 
 2. Удалите ссылку на исполняемые файлы .NET:
 
-    ``` shell
+    ``` sh
     rm /usr/bin/dotnet
     ```
 
 3. Удалите конфигурацию .NET:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/dotnet
     ```
 
@@ -528,13 +528,13 @@ kbId: 4625
 1. При необходимости сохраните резервную копию файла конфигурации NGINX: `/etc/nginx/conf.d`
 2. Удалите пакет `nginx` и его зависимости:
 
-    ``` shell
+    ``` sh
     yum autoremove -y nginx
     ```
 
 3. Удалите конфигурацию NGINX:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/nginx
     ```
 
@@ -542,7 +542,7 @@ kbId: 4625
 
 1. Перед выполнением последующих инструкций перейдите в режим суперпользователя:
 
-    ``` shell
+    ``` sh
     sudo -i
     ```
 
@@ -550,19 +550,19 @@ kbId: 4625
 
 1. Удалите пакет `bellsoft-java17-runtime`:
 
-    ``` shell
+    ``` sh
     yum autoremove -y bellsoft-java17-runtime
     ```
 
 2. Удалите ссылку на исполняемые файлы:
 
-    ``` shell
+    ``` sh
     rm /usr/bin/java
     ```
 
 3. Удалите конфигурацию JRE:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/java
     ```
 
@@ -570,7 +570,7 @@ kbId: 4625
 
 1. Удалите службу Kafka:
 
-    ``` shell
+    ``` sh
     systemctl stop kafka.service
     systemctl disable kafka.service
     rm /usr/lib/systemd/system/kafka.service
@@ -580,19 +580,19 @@ kbId: 4625
 
 2. Удалите бинарные файлы Kafka:
 
-    ``` shell
+    ``` sh
     rm -rf /usr/share/kafka
     ```
 
 3. Удалите журналы Kafka:
 
-    ``` shell
+    ``` sh
     rm -rf /var/log/comindware/.kafka
     ```
 
 4. Удалите конфигурацию Kafka:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/kafka
     ```
 
@@ -600,7 +600,7 @@ kbId: 4625
 
 1. Удалите бинарные файлы Mono:
 
-    ``` shell
+    ``` sh
     rm -rf /etc/mono/ \
         /usr/share/pkgconfig \
         /usr/share/mono-2.0 \
@@ -622,7 +622,7 @@ kbId: 4625
 
 2. Удалите ссылки на исполняемые файлы:
 
-    ``` shell
+    ``` sh
     rm -rf /usr/bin/xsp* \
         /usr/bin/xbuild \
         /usr/bin/x86_64-redhat-linux-gnu-pkg-config \
@@ -661,7 +661,7 @@ kbId: 4625
 
 3. Удалите конфигурацию Mono:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/mono
     ```
 
@@ -669,19 +669,19 @@ kbId: 4625
 
 1. Удалите бинарные файлы .NET:
 
-    ``` shell
+    ``` sh
     rm -rf /usr/share/dotnet/Rocky
     ```
 
 2. Удалите ссылку на исполняемые файлы .NET:
 
-    ``` shell
+    ``` sh
     rm /usr/bin/dotnet
     ```
 
 3. Удалите конфигурацию .NET:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/dotnet
     ```
 
@@ -690,13 +690,13 @@ kbId: 4625
 1. При необходимости сохраните резервную копию файла конфигурации NGINX: `/etc/nginx/conf.d`
 2. Удалите пакеты `nginx`, `nginx-core` и  `nginx-filesystem` вместе с их зависимостями:
 
-    ``` shell
+    ``` sh
     yum autoremove -y nginx nginx-core nginx-filesystem
     ```
 
 3. Удалите конфигурацию NGINX:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/nginx
     ```
 
@@ -704,7 +704,7 @@ kbId: 4625
 
 1. Перед выполнением последующих инструкций перейдите в режим суперпользователя:
 
-    ``` shell
+    ``` sh
     sudo -i
     ```
 
@@ -712,19 +712,19 @@ kbId: 4625
 
 1. Удалите пакет `bellsoft-java17-runtime`:
 
-    ``` shell
+    ``` sh
     apt-get remove --purge -y bellsoft-java17-runtime
     ```
 
 2. Удалите ссылку на исполняемые файлы:
 
-    ``` shell
+    ``` sh
     rm /usr/bin/java
     ```
 
 3. Удалите конфигурацию JRE:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/java
     ```
 
@@ -732,7 +732,7 @@ kbId: 4625
 
 1. Удалите службу Kafka:
 
-    ``` shell
+    ``` sh
     systemctl stop kafka.service
     systemctl disable kafka.service
     rm /usr/lib/systemd/system/kafka.service
@@ -742,19 +742,19 @@ kbId: 4625
 
 2. Удалите бинарные файлы Kafka:
 
-    ``` shell
+    ``` sh
     rm -rf /usr/share/kafka
     ```
 
 3. Удалите журналы Kafka:
 
-    ``` shell
+    ``` sh
     rm -rf /var/log/comindware/.kafka
     ```
 
 4. Удалите конфигурацию Kafka:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/kafka
     ```
 
@@ -762,13 +762,13 @@ kbId: 4625
 
 1. Удалите пакеты Mono `mono-devel` и `mono-runtime-common` вместе с их зависимостями:
 
-    ``` shell
+    ``` sh
     apt-get remove --purge -y mono-devel mono-runtime-common
     ```
 
 2. Удалите конфигурацию Mono:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/mono
     ```
 
@@ -776,7 +776,7 @@ kbId: 4625
 
 1. Удалите пакеты .NET:
 
-    ``` shell
+    ``` sh
     apt-get remove --purge -y dotnet-sdk-6.0 \
         dotnet-runtime-6.0 \
         dotnet-targeting-pack-6.0 \
@@ -789,7 +789,7 @@ kbId: 4625
 
 2. Удалите конфигурацию .NET:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/dotnet
     ```
 
@@ -798,13 +798,13 @@ kbId: 4625
 1. При необходимости сохраните резервную копию файла конфигурации NGINX: `/etc/nginx/sites-available`
 2. Удалите пакет `nginx-common` и его зависимости:
 
-    ``` shell
+    ``` sh
     apt-get remove --purge -y nginx-common
     ```
 
 3. Удалите конфигурацию NGINX:
 
-    ``` shell
+    ``` sh
     rm /var/www/.cmw_environment/nginx
     ```
 

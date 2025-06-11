@@ -8,7 +8,7 @@ tags:
     - кластер
 hide: tags
 ---
-
+<!-- ЭТУ СТАТЬЮ НЕ ПУБЛИКОВАТЬ БЕЗ СОГЛАСОВАНИЯ И ПОДРОБНОЙ ПРОВЕРКИ -->
 # Развёртывание {{ productName }} в кластере {: #deploy_cluster_linux }
 
 {% include-markdown ".snippets/experimental_feature.md" %}

@@ -12,13 +12,9 @@
 
 [api_calls]: {{ kbCategoryURLPrefix }}868
 
-[account_attributes_system_names]: {{ kbArticleURLPrefix }}4994
-
 [attribute_date_time_use]: {{ kbArticleURLPrefix }}4886
 
 [attribute_drawing_file_import]: {{ kbArticleURLPrefix }}4906
-
-[account_attribute_system_names]: {{ kbArticleURLPrefix }}4994
 
 [backup_and_restore]: {{ kbArticleURLPrefix }}4643
 
@@ -33,6 +29,8 @@
 [csharp_guide]: {{ kbArticleURLPrefix }}4864
 
 [document_digital_signature]: {{ kbArticleURLPrefix }}4910
+
+[example_attribute_record_get_selected_ids]: {{ kbArticleURLPrefix }}5100
 
 [example_n3_button_local_variable]: {{ kbArticleURLPrefix }}4909
 
@@ -60,10 +58,6 @@
 
 [formula_use_examples]: {{ kbCategoryURLPrefix }}881
 
-[formula_function_list]: {{ kbArticleURLPrefix }}4993
-
-[formula_introduction]: {{ kbArticleURLPrefix }}4999
-
 [html_supported_tags]: {{ kbArticleURLPrefix }}4912
 
 [integration_examples]: {{ kbCategoryURLPrefix }}875
@@ -78,8 +72,6 @@
 
 [periodic_task_notifications]: {{ kbArticleURLPrefix }}4905
 
-[process_end_button_example]: {{ kbArticleURLPrefix }}4911
-
 [apps_kb]: {{ kbCategoryURLPrefix }}832
 
 [telegram_send_notification]: {{ kbArticleURLPrefix }}4926
@@ -89,6 +81,8 @@
 <!-- Экспорт в БЗ любых руководств -->
 
 [account_templates]: {{ kbArticleURLPrefix }}4757
+
+[account_template_attribute_system_names]: {{ kbArticleURLPrefix }}4757#account_template_attribute_system_names
 
 [accounts]: {{ kbArticleURLPrefix }}4653
 
@@ -101,6 +95,8 @@
 [apps]: {{ kbArticleURLPrefix }}4714
 
 [backup_configure]: {{ kbArticleURLPrefix }}4642
+
+[backup_configure_list_view]: {{ kbArticleURLPrefix }}4642#backup_configure_list_view
 
 [backup_recommendations]: {{ kbArticleURLPrefix }}5082
 
@@ -151,8 +147,6 @@
 [logs_odata_inegration]: {{ kbArticleURLPrefix }}4673#logs_odata_inegration
 
 [map_configure]: {{ kbArticleURLPrefix }}4679
-
-[mobile_app_use]: {{ kbArticleURLPrefix }}5090
 
 [notification_types]: {{ kbArticleURLPrefix }}4682
 
@@ -244,6 +238,10 @@
 
 [templates_archive_unarchive]: {{ kbArticleURLPrefix }}4709#templates_archive_unarchive
 
+[templates_view_in_app]: {{ kbArticleURLPrefix }}4709#templates_view_in_app
+
+[templates_view_records]: {{ kbArticleURLPrefix }}4709#templates_view_records
+
 [template_common_properties]: {{ kbArticleURLPrefix }}4756
 
 [themes]: {{ kbArticleURLPrefix }}4708
@@ -277,6 +275,10 @@
 <!-- Руководство для ГосТех, администратора для Linux/Windows, отдельный учебник или экспорт в БЗ -->
 
 [http_send_post]: {{ kbArticleURLPrefix }}5075
+
+[mobile_app_use]: {{ kbArticleURLPrefix }}5090
+
+[password_restore]: {{ kbArticleURLPrefix }}5099
 
 {% endif %}
 
@@ -452,11 +454,15 @@
 
 [discussion_configure]: {{ kbArticleURLPrefix }}4788
 
+[discussion_configure_quick_answers]: {{ kbArticleURLPrefix }}4788#discussion_configure_quick_answers
+
 [discussion_configure_template]: {{ kbArticleURLPrefix }}4788#mcetoc_1h7hu3akn4
 
 [discussion_use]: {{ kbArticleURLPrefix }}4818
 
 [elasticdata_description]: {{ kbArticleURLPrefix }}4584
+
+[example_csharp_table_download_selections]: {{ kbArticleURLPrefix }}5008
 
 [example_document_clone_scenario_n3]: {{ kbArticleURLPrefix }}4883
 
@@ -467,12 +473,6 @@
 [example_document_download_to_server_csharp]: {{ kbArticleURLPrefix }}5002
 
 [example_task_reassign]: {{ kbArticleURLPrefix }}5087
-
-[process_diagram_elements_events_end]: {{ kbArticleURLPrefix }}4744
-
-[process_diagram_elements_events_intermediate]: {{ kbArticleURLPrefix }}4742
-
-[process_diagram_elements_events_start]: {{ kbArticleURLPrefix }}4735
 
 [experimental_feature_support]: {{ kbArticleURLPrefix }}4579#experimental_feature_support
 
@@ -490,7 +490,33 @@
 
 [expression_editor]: {{ kbArticleURLPrefix }}5025
 
+[expression_editor_reference]: {{ kbArticleURLPrefix }}5025#expression_editor_reference
+
+[formula_function_list]: {{ kbArticleURLPrefix }}4993
+
+[formula_reference]: {{ kbArticleURLPrefix }}4993
+
+[formula_reference_literals]: {{ kbArticleURLPrefix }}4993#formula_reference_literals
+
+[formula_introduction]: {{ kbArticleURLPrefix }}4999
+
+[formula_guide_description]: {{ kbArticleURLPrefix }}4999#formula_guide_description
+
+[formula_guide_context]: {{ kbArticleURLPrefix }}4999#formula_guide_context
+
+[formula_guide_rules]: {{ kbArticleURLPrefix }}4999#formula_guide_rules
+
+[formula_guide_relations]: {{ kbArticleURLPrefix }}4999#formula_guide_relations
+
+[formula_guide_queries]: {{ kbArticleURLPrefix }}4999#formula_guide_queries
+
 [n3_editor_autocomplete]: {{ kbArticleURLPrefix }}5039
+
+[n3_editor_autocomplete_block]: {{ kbArticleURLPrefix }}5039
+
+[n3_editor_autocomplete_predicate]: {{ kbArticleURLPrefix }}5039
+
+[n3_editor_autocomplete_prefix]: {{ kbArticleURLPrefix }}5039
 
 [expression_debug]: {{ kbArticleURLPrefix }}4929
 
@@ -550,11 +576,11 @@
 
 [formula_editor_autocomplete]: {{ kbArticleURLPrefix }}5035
 
-[formula_editor_function_autocompete]: {{ kbArticleURLPrefix }}5027
+[formula_autocompete_editor_function]: {{ kbArticleURLPrefix }}5035
 
-[formula_editor_from_where_select_autocomplete]: {{ kbArticleURLPrefix }}5026
+[formula_editor_autocomplete_from_where_select]: {{ kbArticleURLPrefix }}5035
 
-[formula_editor_record_heading_autocomplete]: {{ kbArticleURLPrefix }}5032
+[formula_editor_autocomplete_record_heading]: {{ kbArticleURLPrefix }}5035
 
 [functions]: {{ kbArticleURLPrefix }}4711
 
@@ -586,23 +612,11 @@
 
 [my_tasks_page_configure_add_to_navigation]: {{ kbArticleURLPrefix }}4812#my_tasks_page_configure_add_to_navigation
 
-[n3_editor_block_autocomplete]: {{ kbArticleURLPrefix }}5041
-
-[n3_editor_predicate_autocomplete]: {{ kbArticleURLPrefix }}5046
-
-[n3_editor_prefix_autocomplete]: {{ kbArticleURLPrefix }}5042
-
 [navigation_panel]: {{ kbArticleURLPrefix }}4824
 
 [office_connection_use]: {{ kbArticleURLPrefix }}4819
 
-[process_diagram_elements_none_intermediate_event]: {{ kbArticleURLPrefix }}4741
-
-[process_diagram_elements_none_intermediate_event_milestone_duration]: {{ kbArticleURLPrefix }}4741#process_diagram_elements_none_intermediate_event_milestone_duration
-
-[process_diagram_elements_none_end_event]: {{ kbArticleURLPrefix }}4743
-
-[process_diagram_elements_none_start_event]: {{ kbArticleURLPrefix }}4734
+[process_end_button_example]: {{ kbArticleURLPrefix }}4911
 
 [online_store]: {{ kbArticleURLPrefix }}4805
 
@@ -619,6 +633,22 @@
 [process_diagram_forms]: {{ kbArticleURLPrefix }}4726
 
 [process_diagram_elements]: {{ kbArticleURLPrefix }}4724
+
+[process_diagram_elements_none_intermediate_event]: {{ kbArticleURLPrefix }}4741
+
+[process_diagram_elements_none_intermediate_event_milestone_duration]: {{ kbArticleURLPrefix }}4741#process_diagram_elements_none_intermediate_event_milestone_duration
+
+[process_diagram_elements_none_end_event]: {{ kbArticleURLPrefix }}4743
+
+[process_diagram_elements_none_start_event]: {{ kbArticleURLPrefix }}4734
+
+[process_diagram_elements_events_end]: {{ kbArticleURLPrefix }}4744
+
+[process_diagram_elements_events_intermediate]: {{ kbArticleURLPrefix }}4742
+
+[process_diagram_elements_events_intermediate_usage]: {{ kbArticleURLPrefix }}4742#process_diagram_elements_events_intermediate_usage
+
+[process_diagram_elements_events_start]: {{ kbArticleURLPrefix }}4735
 
 [process_diagram_elements_actions]: {{ kbArticleURLPrefix }}4732
 
@@ -698,6 +728,8 @@
 
 [variables]: {{ kbArticleURLPrefix }}4804
 
+[variables_csharp]: {{ kbArticleURLPrefix }}4804#variables_csharp
+
 [zabbix_deploy]: {{ kbArticleURLPrefix }}4609
 
 [zabbix_agent_deploy]: {{ kbArticleURLPrefix }}4608
@@ -736,7 +768,15 @@
 
 [db_move_manual_windows]: {{ kbArticleURLPrefix }}4646
 
+[deploy_guide_windows]: {{ kbArticleURLPrefix }}5063
+
+[deploy_guide_windows_install_prerequisites]: {{ kbArticleURLPrefix }}5063#deploy_guide_windows_install_prerequisites
+
+[deploy_guide_windows_version_delete]: {{ kbArticleURLPrefix }}5063#deploy_guide_windows_version_delete
+
 [elasticsearch_deploy_windows]: {{ kbArticleURLPrefix }}4617
+
+[kafka_deploy_windows]: {{ kbArticleURLPrefix }}4614
 
 [admin_utility_instance_configure]: {{ kbArticleURLPrefix }}4634
 
@@ -802,6 +842,8 @@
 
 [deploy_cluster_linux]: {{ kbArticleURLPrefix }}5080
 
+[elasticsearch_deploy_Linux]: {{ kbArticleURLPrefix }}4601
+
 [kafka_deploy_linux]: {{ kbArticleURLPrefix }}5074
 
 [paths_linux]: {{ kbArticleURLPrefix }}4620#paths_linux
@@ -819,6 +861,8 @@
 [accounts_dc_sync]: {{ kbArticleURLPrefix }}4655
 
 [admin_utility_instance_configure]: {{ kbArticleURLPrefix }}4634
+
+[architecture_landscape]: {{ kbArticleURLPrefix }}4596
 
 [auxiliary_software_list]: {{ kbArticleURLPrefix }}4582
 

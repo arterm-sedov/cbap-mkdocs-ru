@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4681" kb-title="Общие уведомления. Настройка пути передачи данных, диаграммы процесса и глобальной конфигурации">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4681" kb-tags="" kb-title="Общие уведомления. Настройка">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -23,13 +23,6 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#global_configuration_setting">
-<span class="md-ellipsis">
-      Настройка глобальной конфигурации
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#communication_routes_setting">
 <span class="md-ellipsis">
       Настройка пути передачи данных
@@ -38,36 +31,25 @@
 <nav aria-label="Настройка пути передачи данных" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#communication_routes_properties">
-<span class="md-ellipsis">
-      Свойства пути передачи данных
-    </span>
-</a>
-<nav aria-label="Свойства пути передачи данных" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#основные-свойства">
+<a class="md-nav__link mkdocs_imported_link" href="#communication_route_general_properties">
 <span class="md-ellipsis">
       Основные свойства
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#message_attributes">
+<a class="md-nav__link mkdocs_imported_link" href="#communication_route_message_attributes">
 <span class="md-ellipsis">
       Атрибуты сообщения
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#message_properties">
+<a class="md-nav__link mkdocs_imported_link" href="#communication_route_message_properties">
 <span class="md-ellipsis">
       Свойства сообщения
     </span>
 </a>
-</li>
-</ul>
-</nav>
 </li>
 </ul>
 </nav>
@@ -81,14 +63,14 @@
 <nav aria-label="Пример: вывод общих уведомлений в информационной панели и на странице входа" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#настройка-приложения">
+<a class="md-nav__link mkdocs_imported_link" href="#common_notification_example_app_configure">
 <span class="md-ellipsis">
       Настройка приложения
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#тестирование-уведомлений">
+<a class="md-nav__link mkdocs_imported_link" href="#common_notification_example_testing">
 <span class="md-ellipsis">
       Тестирование уведомлений
     </span>
@@ -111,46 +93,45 @@
 <article class="md-content__inner md-typeset">
 <div class="notice notice-success">
 <h2 class="admonition-title" id="definitions">Определения</h2>
-<p><strong>Общие уведомления</strong> — это сообщения, которые отображаются для всех авторизованных пользователей системы в течение заданного промежутка времени:</p>
+<p><strong>Общие уведомления</strong> — это сообщения, которые отображаются в течение заданного времени для всех пользователей:</p>
 <ul>
 <li>при нажатии значка «<strong>Уведомления</strong>» <i class="fa-light fa-bell">&zwnj;<!--icon--></i> в информационной панели;</li>
-<li>на странице входа (если в <a class="mkdocs_imported_link" href="#message_properties">свойствах сообщения</a> не установлен флажок «<strong>Внутреннее уведомление</strong>»).</li>
+<li>на странице входа в <strong>Comindware Platform</strong> (если в <a class="mkdocs_imported_link" href="#communication_route_message_properties">свойствах сообщения</a> не установлен флажок «<strong>Внутреннее уведомление</strong>»);</li>
+<li>в push-сообщениях.</li>
 </ul>
+<p>Общие уведомления формируются с помощью событий отправки сообщений на диаграмме процесса и путей передачи данных.</p>
 </div>
 <figure class="screenshot_with_caption">
 <p><img alt="Вызов панели «Уведомления»" src="/platform/v5.0/administration/connections_communication_routes/system_connections/notifications/img/common_notifications_board_call.png"/><figcaption class="caption">Вызов панели «Уведомления»</figcaption></p>
 </figure>
 <figure class="screenshot_with_caption">
-<p><img alt="Критически важное уведомление на странице входа" src="/platform/v5.0/administration/connections_communication_routes/system_connections/notifications/img/common_notifications_entry_page_urgent_message_generic.png"/><figcaption class="caption">Критически важное уведомление на странице входа</figcaption></p>
+<p><img alt="Критически важное общее уведомление на странице входа" src="/platform/v5.0/administration/connections_communication_routes/system_connections/notifications/img/common_notifications_entry_page_urgent_message_generic.png"/><figcaption class="caption">Критически важное общее уведомление на странице входа</figcaption></p>
 </figure>
 <h2 class="pageBreakBefore" id="порядок-настройки-общих-уведомлений">Порядок настройки общих уведомлений</h2>
 <ol class="colored_numbers_list">
-<li>Включите получение уведомлений в <a class="mkdocs_imported_link" href="#global_configuration_setting"><strong>Глобальной конфигурации</strong></a>.</li>
 <li>Настройте <a class="mkdocs_imported_link" href="#communication_routes_setting"><strong>путь передачи данных</strong></a> типа «<strong>Общие уведомления</strong>».</li>
 <li>Используйте настроенный путь передачи данных в качестве <strong>места назначения</strong> в <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4740">промежуточном событии-отправке сообщения</a></strong> или <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4745">конечном событии-отправке сообщения</a></strong>.</li>
 </ol>
 <p>См. также <em><a class="autorefs autorefs-internal mkdocs_imported_link" href="#common_notification_example">Пример: вывод общих уведомлений в информационной панели и на странице входа</a>.</em></p>
-<h2 id="global_configuration_setting">Настройка глобальной конфигурации</h2>
-<ol class="colored_numbers_list">
-<li>На странице «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4661"><strong>Администрирование</strong></a> в разделе «<strong>Инфраструктура</strong>» выберите пункт «<strong>Глобальная конфигурация</strong>» <i class="fa-light fa-desktop">&zwnj;<!--icon--></i>.</li>
-<li>Установите флажок «<strong>Включить получение уведомлений (кроме уведомлений о задачах)</strong>».</li>
-<li>Сохраните глобальную конфигурацию.</li>
-<li>Перезапустите экземпляр <strong>Comindware Platform</strong>, чтобы изменения вступили в силу. Для этого может потребоваться обратиться к системному администратору.</li>
-</ol>
-<figure class="screenshot_with_caption">
-<p><img alt="Включение получения общих уведомлений" src="/platform/v5.0/administration/connections_communication_routes/system_connections/notifications/img/common_notifications_switch_on.png"/><figcaption class="caption">Включение получения общих уведомлений</figcaption></p>
-</figure>
 <h2 class="pageBreakBefore" id="communication_routes_setting">Настройка пути передачи данных</h2>
 <ol class="colored_numbers_list">
 <li>Откройте страницу «<strong>Администрирование</strong>» — «<strong>Архитектура</strong>» или страницу «<strong>Администрирование</strong>» приложения.</li>
 <li>Выберите пункт «<strong>Пути передачи данных</strong>» <i class="fa-light fa-route">&zwnj;<!--icon--></i>.</li>
 <li>Отобразится список путей передачи данных.</li>
 <li>Дважды нажмите в списке или создайте путь передачи данных типа «<strong>Системные подключения</strong>» — «<strong>Общие уведомления</strong>».</li>
-<li><a class="mkdocs_imported_link" href="#communication_routes_properties">Настройте свойства</a> пути передачи данных.</li>
-<li>Сохраните путь передачи данных.</li>
+<li>
+<p>Настройте свойства пути передачи данных:</p>
+<ul>
+<li><strong><a class="mkdocs_imported_link" href="#communication_route_general_properties">Основные свойства</a></strong></li>
+<li><strong><a class="mkdocs_imported_link" href="#communication_route_message_attributes">Атрибуты сообщения</a></strong></li>
+<li><strong><a class="mkdocs_imported_link" href="#communication_route_message_properties">Свойства сообщения</a></strong></li>
+</ul>
+</li>
+<li>
+<p>Сохраните путь передачи данных.</p>
+</li>
 </ol>
-<h3 id="communication_routes_properties">Свойства пути передачи данных</h3>
-<h4 id="основные-свойства">Основные свойства</h4>
+<h3 id="communication_route_general_properties">Основные свойства</h3>
 <p>Вкладка «<strong>Основные свойства</strong>» содержит основные параметры пути передачи данных:</p>
 <ul>
 <li><strong>Отключить</strong> — установите этот флажок, чтобы временно деактивировать путь передачи данных.</li>
@@ -161,29 +142,23 @@
 <figure class="screenshot_with_caption">
 <p><img alt="Настройка основных свойств пути передачи данных для общего уведомления" src="/platform/v5.0/administration/connections_communication_routes/system_connections/notifications/img/common_notifications_properties_setting.png"/><figcaption class="caption">Настройка основных свойств пути передачи данных для общего уведомления</figcaption></p>
 </figure>
-<h4 class="pageBreakBefore" id="message_attributes">Атрибуты сообщения</h4>
+<h3 class="pageBreakBefore" id="communication_route_message_attributes">Атрибуты сообщения</h3>
 <p>На вкладке «<strong>Атрибуты сообщения</strong>» заполните таблицу соответствия атрибутов сообщения с атрибутами уведомления.</p>
 <p>Настроенные на этой вкладке атрибуты будут использоваться для передачи данных из процесса в уведомление.</p>
-<p>Эти атрибуты следует использовать на вкладке «<strong><a class="mkdocs_imported_link" href="#message_properties">Свойства сообщения</a></strong> » пути передачи данных,</p>
-<p>Значения этих атрибутов необходимо задать на вкладке «<strong>Данные сообщения</strong> » в свойствах  <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4740">промежуточного события-отправки сообщения</a></strong> и <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4745">конечного события-отправки сообщения</a></strong>.</p>
+<p>Эти атрибуты следует использовать на вкладке «<strong><a class="mkdocs_imported_link" href="#communication_route_message_properties">Свойства сообщения</a></strong>» пути передачи данных.</p>
+<p>Значения этих атрибутов необходимо задать на вкладке «<strong>Данные сообщения</strong>» в свойствах <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4740">промежуточного события-отправки сообщения</a></strong> и <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4745">конечного события-отправки сообщения</a></strong>.</p>
 <p>Чтобы создать атрибут сообщения и сопоставить его с полем уведомления, нажмите кнопку «<strong>Создать</strong>» и заполните строку таблицы сопоставления:</p>
 <ul>
 <li><strong>Название</strong> — введите наглядное название атрибута.</li>
 <li><strong>Системное имя</strong> — введите уникальное имя атрибута, оно будет использоваться в уведомления на вкладке «<strong>Свойства сообщения</strong>».</li>
-<li>
-<p><strong>Тип данных</strong> — выберите тип данных  в соответствии с данными, которые в него будут передаваться из процесса:</p>
-<ul>
+<li><strong>Тип данных</strong> — выберите тип данных  в соответствии с данными, которые в него будут передаваться из процесса:<ul>
 <li><strong>Текст</strong></li>
 <li><strong>Число</strong></li>
 <li><strong>Длительность</strong></li>
 <li><strong>Дата и время</strong></li>
 <li><strong>Логический</strong></li>
-<li>
-<p><strong>Документ</strong></p>
-</li>
-<li>
-<p><strong>Аккаунт</strong></p>
-</li>
+<li><strong>Документ</strong></li>
+<li><strong>Аккаунт</strong></li>
 </ul>
 </li>
 </ul>
@@ -191,11 +166,11 @@
 <figure class="screenshot_with_caption">
 <p><img alt="Настройка атрибутов сообщения в пути передачи данных для общих уведомлений" src="/platform/v5.0/administration/connections_communication_routes/system_connections/notifications/img/common_notifications_attributes_setting.png"/><figcaption class="caption">Настройка атрибутов сообщения в пути передачи данных для общих уведомлений</figcaption></p>
 </figure>
-<h4 class="pageBreakBefore" id="message_properties">Свойства сообщения</h4>
-<p>На вкладке «<strong>Свойства сообщения</strong>» настройте шаблон уведомления с использованием атрибутов с вкладки «<strong>Атрибуты сообщения</strong>».**</p>
+<h3 class="pageBreakBefore" id="communication_route_message_properties">Свойства сообщения</h3>
+<p>На вкладке «<strong>Свойства сообщения</strong>» настройте шаблон уведомления с использованием атрибутов с вкладки «<strong>Атрибуты сообщения</strong>».</p>
 <ul>
 <li>
-<p><strong>Список атрибутов, которые можно использовать при написании эл. письма</strong> содержит настроенные <a class="mkdocs_imported_link" href="#message_attributes"><strong>атрибуты сообщения</strong></a>.</p>
+<p><strong>Список атрибутов, которые можно использовать при написании эл. письма</strong> содержит настроенные <a class="mkdocs_imported_link" href="#communication_route_message_attributes"><strong>атрибуты сообщения</strong></a>.</p>
 <div class="notice notice-tip">
 <p class="admonition-title">Подстановка значений атрибутов сообщения в уведомление</p>
 <ul>
@@ -236,9 +211,9 @@
 <h2 class="pageBreakBefore" id="common_notification_example">Пример: вывод общих уведомлений в информационной панели и на странице входа</h2>
 <p>Рассмотрим пример настройки приложения для вывода общих уведомлений с текстом, содержащим значения атрибутов.</p>
 <p>Уведомления будут отображаться в информационной панели и на странице входа.</p>
-<h3 id="настройка-приложения">Настройка приложения</h3>
+<h3 id="common_notification_example_app_configure">Настройка приложения</h3>
 <ol class="colored_numbers_list">
-<li>Включите получение уведомлений в <a class="mkdocs_imported_link" href="#global_configuration_setting"><strong>Глобальной конфигурации</strong></a>.</li>
+<li>Настройте получение уведомлений в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5067">конфигурационном файле экземпляра ПО</a>. Может потребоваться помощь системного администратора.</li>
 <li>Создайте шаблон процесса <em>«Отправка общих уведомлений»</em>.</li>
 <li>Перейдите к <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4721#process_diagram_designer">конструктору диаграммы процесса</a>.</li>
 <li>Откройте <strong>стартовую форму</strong> начального события с помощью меню элемента.</li>
@@ -324,7 +299,7 @@
 <p>Опубликуйте диаграмму процесса.</p>
 </li>
 </ol>
-<h3 class="pageBreakBefore" id="тестирование-уведомлений">Тестирование уведомлений</h3>
+<h3 class="pageBreakBefore" id="common_notification_example_testing">Тестирование уведомлений</h3>
 <ol class="colored_numbers_list">
 <li>Откройте шаблон процесса <em>«Отправка общих уведомлений»</em>.</li>
 <li>Нажмите кнопку «<strong>Перейти к экземплярам</strong>».</li>
@@ -341,18 +316,16 @@
 </li>
 <li>
 <p>Выйдите из системы, чтобы просмотреть уведомление на странице входа.</p>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Критически важное уведомление на странице входа" src="/platform/v5.0/administration/connections_communication_routes/system_connections/notifications/img/common_notifications_entry_page_urgent_message.png"/><figcaption class="caption">Критически важное уведомление на странице входа</figcaption></figure>
-</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Критически важное уведомление на странице входа" src="/platform/v5.0/administration/connections_communication_routes/system_connections/notifications/img/common_notifications_entry_page_urgent_message.png"/><figcaption class="caption">Критически важное уведомление на странице входа</figcaption></figure></p>
 </li>
 </ol>
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4668">Глобальная конфигурация</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4734">Простое начальное событие</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4745">Конечное событие-отправка сообщения</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4740">Промежуточное событие-отправка сообщения</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4786#form_designer">Редактирование формы. Создание атрибута</a></em></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4734">Простое начальное событие</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4745">Конечное событие-отправка сообщения</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4740">Промежуточное событие-отправка сообщения</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4786#form_designer">Редактирование формы. Создание атрибута</a></li>
 </ul>
 </div>
 </article>

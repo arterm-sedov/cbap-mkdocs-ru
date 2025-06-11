@@ -15,7 +15,12 @@ hide:
 
 # Начальное событие-таймер {: #process_diagram_elements_timer_start_event }
 
+<div class="admonition question" markdown="block">
+## Определения {: .admonition-title #definitions}
+
 **Начальное событие-таймер периодически** запускает процесс при наступлении заданного времени по расписанию.
+
+</div>
 
 *![Начальное событие-таймер и его меню элемента](timer_start_event.png)*
 

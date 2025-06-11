@@ -19,5 +19,6 @@ kbId: 4821
 - [Карты. Использование][map_use]
 - [Обсуждения. Использование][discussion_use]
 - [Мобильное приложение. Использование][mobile_app_use]
+- [Восстановление пароля][password_restore]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

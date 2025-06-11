@@ -17,7 +17,12 @@ hide:
 
 # Конечное событие-остановка процесса {: #process_diagram_elements_stop_process_end_event}
 
+<div class="admonition question" markdown="block">
+## Определения {: .admonition-title #definitions}
+
 Когда токен входит в **конечное событие-остановку процесса**, завершаются все ветви процесса (даже если токены не дошли до их конечных событий).
+
+</div>
 
 *![Конечное событие-остановка процесса и его меню элемента](stop_process_end_event.png)*
 

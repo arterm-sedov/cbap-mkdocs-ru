@@ -101,6 +101,8 @@ kbId: 4916
 
     _![Представление атрибута типа «Список значений» в таблице](https://kb.comindware.ru/assets/img_65b75c467bf5d.png)_
 
+<div class="relatedTopics" markdown="block">
+
 --8<-- "related_topics_heading.md"
 
 - _[Атрибут типа «Список значений»][attribute_enum]_
@@ -109,5 +111,7 @@ kbId: 4916
 - _[Атрибут типа «Список значений». Вычисление значения по справочнику][attribute_enum_calculate_registry]_
 - _[Атрибут типа «Список значений». Фильтрация связанных записей по значению атрибута с помощью N3][attribute_enum_value_filter]_
 - _[Атрибут типа «Список значений». Вычисление значения с помощью N3 и формул][attribute_enum_value_calculation]_
+
+</div>
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

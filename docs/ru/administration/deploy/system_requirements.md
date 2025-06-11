@@ -1,5 +1,6 @@
 ---
 title: Системные требования
+kbTitle: Системные требования Comindware Platform
 kbId: 4659
 ---
 
@@ -81,9 +82,9 @@ kbId: 4659
 <tr>
 <td>СУБД</td>
 {% if adminGuideWindows %}
-<td>Apache Ignite</td>
+<td>{{ apacheIgniteVariants }}</td>
 {% endif %}
-<td>nginxVariants</td>
+<td>{{ apacheIgniteVariants }}</td>
 </tr>
 <tr>
 <td>Веб-сервер</td>
@@ -102,14 +103,14 @@ NGINX 1.24 и выше
 <td markdown="block">
 - NET 6.0
 - .NET Framework 4.8.1
-- {% if gostech %}Platform V Corax{% else %}Apache Kafka 3.6.0 и выше{% endif %}
-- {% if gostech %}Platform V Search{% else %}OpenSearch 2.18.0 или Elasticsearch 8.10 и выше{% endif %}</td>
+- {% if gostech %}{{ apacheKafkaVariants }}{% else %}Apache Kafka 3.6.0 и выше{% endif %}
+- {% if gostech %}{{ openSearchVariants }}{% else %}OpenSearch 2.18.0 или Elasticsearch 8.10 и выше{% endif %}</td>
 {% endif %}
 <td markdown="block">
 - NET 6.0
-- Mono 6.12
-- {% if gostech %}Platform V Corax{% else %}Apache Kafka 3.6.0 и выше{% endif %}
-- {% if gostech %}Platform V Search{% else %}OpenSearch 2.18.0 или Elasticsearch 8.10 и выше{% endif %}</td>
+{% if not gostech %}- Mono 6.12{% endif %}
+- {% if gostech %}{{ apacheKafkaVariants }}{% else %}Apache Kafka 3.6.0 и выше{% endif %}
+- {% if gostech %}{{ openSearchVariants }}{% else %}OpenSearch 2.18.0 или Elasticsearch 8.10 и выше{% endif %}</td>
 </tr>
 </tbody>
 </table>

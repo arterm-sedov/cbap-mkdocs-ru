@@ -129,7 +129,7 @@
   </head>
 
   <!-- Set kbId and kbTitle, if defined -->
-  {% set global = namespace(kbId="", kbTitle="") %}
+  {% set global = namespace(kbId="", kbTitle="", kbTags="") %}
   {% if page and page.meta%}
     {% if page.meta.kbId %}
       {% set global.kbId = page.meta.kbId %}
@@ -140,6 +140,9 @@
       {% set global.kbTitle = (page.title | striptags) %}
     {% elif page.meta.title %}
       {% set global.kbTitle = page.meta.title %}
+    {% endif %}
+    {% if page.meta.tags %}
+      {% set global.kbTags = page.meta.tags | join(',') %}
     {% endif %}
   {% endif %}
   <!-- Set text direction and color palette, if defined -->
@@ -159,6 +162,7 @@
       data-md-color-accent="{{ accent | replace(' ', '-') }}"
       kb-id="{{ global.kbId }}"
       kb-title="{{ global.kbTitle }}"
+      kb-tags="{{ global.kbTags }}"
     >
   {% else %}
     <body dir="{{ direction }}" kb-id="{{ global.kbId }}" kb-title="{{ global.kbTitle }}">

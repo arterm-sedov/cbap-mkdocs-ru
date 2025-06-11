@@ -75,9 +75,13 @@ kbId: 4913
 6. Сохраните запись.
 7. В поле атрибута _«Одобрено»_ будет установлен флажок.
 
+<div class="relatedTopics" markdown="block">
+
 --8<-- "related_topics_heading.md"
 
 - _[Атрибут типа «Список значений»][attribute_enum]_
 - _[Атрибут типа «Список значений». Вычисление значения по справочнику][attribute_enum_calculate_registry]_
+
+</div>
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

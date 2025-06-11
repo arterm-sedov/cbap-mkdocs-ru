@@ -21,7 +21,7 @@ kbId: 4650
 
 Для создания резервной копии соберите перечисленные ниже данные об экземпляре ПО.
 
-1. Имя экземпляра ПО: `<instanceName>`. Можно получить в ответе на запрос localhost:9200/\_cat/indices, например `cmw_cmw-study`, как показано на следующей иллюстрации.
+1. Имя экземпляра ПО: `<instanceName>`. Можно получить в ответе на запрос `<openSearchHost>:<opeSearchPort>/_cat/indices`, например `cmw_cmw-study`, как показано на следующей иллюстрации.
 
     _![Определение имени экземпляра ПО](https://kb.comindware.ru/assets/Pasted%20image%2020221229181253.png)_
 
@@ -168,13 +168,13 @@ kbId: 4650
 3. Зарегистрируйте репозиторий {{ openSearchVariants }}. Вместо `elasticsearch_repo_name` и `/var/www/backups/elasticsearch` подставьте своё имя репозитория и путь к его папке:
 
     ``` sh
-    curl -X PUT "localhost:9200/_snapshot/elasticsearch_repo_name?pretty" -H 'Content-Type: application/json' -d '{"type": "fs", "settings": {"location": "/var/www/backups/elasticsearch"}}'
+    curl -X PUT "<openSearchHost>:<opeSearchPort>/_snapshot/elasticsearch_repo_name?pretty" -H 'Content-Type: application/json' -d '{"type": "fs", "settings": {"location": "/var/www/backups/elasticsearch"}}'
     ```
 
 4. Создайте снимок состояния {{ openSearchVariants }}, заменив ***`elasticsearch_repo_name`**,** `snapshot_name`* и `prefix_name`(префикс индекса, указанный в конфигурации экземпляра ПО) на свои значения:
 
     ``` sh
-    curl -X PUT "localhost:9200/_snapshot/elasticsearch_repo_name/snapshot_name_$now?wait_for_completion=true&pretty" -H 'Content-Type: application/json' -d '{"indices": "cmw_prefix_name*", "ignore_unavailable": true, "include_global_state": false}'
+    curl -X PUT "<openSearchHost>:<opeSearchPort>/_snapshot/elasticsearch_repo_name/snapshot_name_$now?wait_for_completion=true&pretty" -H 'Content-Type: application/json' -d '{"indices": "cmw_prefix_name*", "ignore_unavailable": true, "include_global_state": false}'
     ```
 
 5. Создайте директории для хранения компонентов резервной копии:

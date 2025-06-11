@@ -87,7 +87,7 @@ hide: tags
 - **Резервное копирование данных {{ openSearchVariants }} — не реже раза в день**:
     - Резервное копирование каждого индекса {{ openSearchVariants }} следует выполнять вместе с резервным копированием базы данных.
     - Это обеспечивает актуальность данных в репозитории и позволяет быстро восстановить индексы в случае сбоя.
-    - См. {% if gostech %}_[документацию Platform V Search](https://client.sbertech.ru/docs/public/SRH/1.6.0/index.html)_{% else %}_«[Настройка резервного копирования данных {{ openSearchVariants }}][backup_configure_elasticsearch]»_{% endif %}.
+    {% if not gostech %}- См. _«[Настройка резервного копирования данных {{ openSearchVariants }}][backup_configure_elasticsearch]»_.{% endif %}
 
 ## Хранение резервных копий
 

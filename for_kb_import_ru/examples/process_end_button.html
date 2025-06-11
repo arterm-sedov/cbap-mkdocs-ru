@@ -1,0 +1,209 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4911" kb-tags="" kb-title="Отмена процесса по кнопке. Настройка шаблонов записи, шаблонов процесса и кнопки">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#исходные-данные">
+<span class="md-ellipsis">
+      Исходные данные
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#прикладная-задача">
+<span class="md-ellipsis">
+      Прикладная задача
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-завершения-процесса-по-нажатию-кнопки">
+<span class="md-ellipsis">
+      Настройка завершения процесса по нажатию кнопки
+    </span>
+</a>
+<nav aria-label="Настройка завершения процесса по нажатию кнопки" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-процесса-согласование-договора">
+<span class="md-ellipsis">
+      Настройка процесса «Согласование договора»
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-процесса-отмена-согласования-договора">
+<span class="md-ellipsis">
+      Настройка процесса «Отмена согласования договора»
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-кнопки-отмены-процесса">
+<span class="md-ellipsis">
+      Настройка кнопки отмены процесса
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#тестирование">
+<span class="md-ellipsis">
+      Тестирование
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p><strong>Comindware Platform</strong> позволяет гибко управлять процессами, в том числе завершать их.</p>
+<p>В некоторых бизнес-сценариях пользователь должен иметь возможность отменять процесс. Например, в процессе согласования договора инициатор может отозвать его и остановить процесс.</p>
+<p>Для этого можно создать кнопку отмены процесса на любом этапе.</p>
+<p>Здесь представлен пример настройки приложения с кнопкой быстрой остановки процесса.</p>
+<h2 id="исходные-данные">Исходные данные</h2>
+<p>Имеется шаблон записи <em>«Договоры»</em> с текстовым атрибутом <em>«ID процесса»</em> (системное имя — <code>processID</code>).</p>
+<p>Имеется шаблон процесса <em>«Согласование договора»</em>, который связан с шаблоном <em>«Договоры»</em>.</p>
+<h2 id="прикладная-задача">Прикладная задача</h2>
+<p>Требуется настроить кнопку на форме согласования договора, которая будет останавливать процесс согласования.</p>
+<h2 id="настройка-завершения-процесса-по-нажатию-кнопки">Настройка завершения процесса по нажатию кнопки</h2>
+<h3 id="настройка-процесса-согласование-договора">Настройка процесса «Согласование договора»</h3>
+<ol class="colored_numbers_list">
+<li>Откройте для редактированию диаграмму процесса <em>«Согласование договора»</em>.</li>
+<li>Откройте <strong>сценарий на выходе</strong> из <strong>стартового события</strong>.</li>
+<li>
+<p>Внутрь действия «<strong>Сменить контекст</strong>» добавьте действие «<strong>Изменить значения атрибутов</strong>» со следующими свойствами:</p>
+<ul>
+<li><strong>Атрибут:</strong> <em>ID процесса</em></li>
+<li><strong>Операция со значениями: заменить</strong></li>
+<li>
+<p><strong>Значение: формула</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="n">FORMAT</span><span class="p">(</span><span class="s">"{0}"</span><span class="p">,</span><span class="w"> </span><span class="n">LIST</span><span class="p">(</span><span class="err">$$</span><span class="n">ProcessObject</span><span class="p">))</span></code> <br/></pre></code></div>
+</li>
+</ul>
+</li>
+<li>
+<p>После стартового события добавьте <strong>развилку «и»</strong>.</p>
+</li>
+<li>После <strong>развилки «и»</strong> добавьте пользовательскую задачу <em>«Согласовать договор»</em>, исполнителем назначьте себя.</li>
+<li>Добавьте <strong>промежуточное событие–получение сообщения</strong>.</li>
+<li>В свойствах события-получения сообщения на вкладке «<strong>Дополнительные</strong>» установите <strong>имя сообщения</strong> <em>«ProcessCancelMessage»</em>.</li>
+<li>Соедините событие-получение сообщения с <strong>развилкой «и»</strong>.</li>
+<li>Добавьте <strong>конечное событие-остановку процесса</strong> <em>«Согласование отменено»</em> и соедините его с событием-получением сообщения.</li>
+<li>
+<p>Добавьте <strong>конечное событие-остановку процесса</strong> <em>«Договор согласован»</em> и соедините его с задачей <em>«Согласовать договор»</em>.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Логика процесса</p>
+<p>Все конечные события процесса обязательно должны быть типа <strong>конечное событие-остановка процесса</strong>. Это требуется, чтобы останавливался весь процесс, а не только одна его ветвь.</p>
+<p>Таким образом, при запуске процесса будут активны обе его ветви и процесс завершится либо по завершении основной ветви, либо при получении сообщения об отмене согласования договора.</p>
+</div>
+</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Диаграмма процесса «Согласование договора»" src="/platform/v5.0/examples/img/process_end_button_contract_submit_process.png"/><figcaption class="caption">Диаграмма процесса «Согласование договора»</figcaption></p>
+</figure>
+<h3 id="настройка-процесса-отмена-согласования-договора">Настройка процесса «Отмена согласования договора»</h3>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте шаблон записи <em>«Отменённые договоры»</em> со следующим атрибутом:</p>
+<ul>
+<li><strong>Название:</strong> <em>Договор</em></li>
+<li><strong>Системное имя:</strong> <em>Contract</em></li>
+<li><strong>Тип: запись</strong></li>
+<li><strong>Связанный шаблон:</strong> <em>Договоры</em></li>
+</ul>
+</li>
+<li>
+<p>Создайте шаблон процесса <em>«Отмена согласования договора»</em>, связанный с шаблоном <em>«Отменённые договоры»</em>.</p>
+</li>
+<li>
+<p>Добавьте <strong>промежуточное событие-отправку сообщения</strong> со следующими <strong>дополнительными</strong> свойствами:</p>
+<ul>
+<li><strong>Место назначения: промежуточное событие</strong></li>
+<li><strong>Имя сообщения:</strong> <em>ProcessCancelMessage</em></li>
+<li>
+<p><strong>Экземпляр процесса: формула</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="err">$</span><span class="n">Contract</span><span class="o">-&gt;</span><span class="n">processID</span></code> <br/></pre></code></div>
+</li>
+</ul>
+<div class="notice notice-warning">
+<p class="admonition-title">Логика работы имён сообщений</p>
+<p>Передача данных между событиями отправки и получения сообщений происходит посредством имён сообщений. Имена сообщений служат идентификаторами событий.</p>
+<p>Поэтому имя сообщения в <strong>промежуточном событии-отправке сообщения</strong> должно совпадать с именем сообщения в <strong>промежуточном событии–получении сообщения</strong> другого процесса.</p>
+</div>
+</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Настройка процесса «Отмена согласования договора»" src="/platform/v5.0/examples/img/process_end_button_submit_cancel_process.png"/><figcaption class="caption">Настройка процесса «Отмена согласования договора»</figcaption></p>
+</figure>
+<h3 id="настройка-кнопки-отмены-процесса">Настройка кнопки отмены процесса</h3>
+<ol class="colored_numbers_list">
+<li>
+<p>В шаблоне <em>«Договоры»</em> создайте кнопку <em>«Отменить согласование»</em> со следующими свойствами:</p>
+<ul>
+<li><strong>Контекст операции: запись</strong></li>
+<li><strong>Операция: запустить процесс по связанному шаблону</strong></li>
+<li><strong>Сохранять запись после выполнения:</strong> флажок установлен</li>
+<li><strong>Результат выполнения: обновить данные</strong></li>
+<li><strong>Шаблон:</strong> <em>Отмена согласования договора (атрибут: Contract)</em></li>
+</ul>
+</li>
+<li>
+<p>Поместить кнопку <em>«Отменить согласование»</em> на форму шаблона <em>«Договоры»</em>.</p>
+</li>
+</ol>
+<h2 id="тестирование">Тестирование</h2>
+<ol class="colored_numbers_list">
+<li>Запустите процесс <em>«Согласование договора»</em>.</li>
+<li>Откройте договор, проходящий согласование.</li>
+<li>Нажмите кнопку <em>«Отменить согласование»</em>.</li>
+<li>Перейдите к списку экземпляров процесса <em>«Согласование договора»</em>.</li>
+<li>Экземпляр отменённого должен иметь статус «<strong>Завершён</strong>».</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4721">Диаграмма процесса. Определения, просмотр, редактирование, публикация</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4758">Шаблон процесса</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4739">Промежуточное событие-получение сообщения</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4740">Промежуточное событие-отправка сообщения</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4746">Конечное событие-остановка процесса</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4790">Кнопки. Определение, настройка, удаление</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

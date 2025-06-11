@@ -89,7 +89,7 @@ kbId: 4706
 
     - В ОС Linux путь к этому файлу можно узнать с помощью следующей команды:
 
-        ``` shell
+        ``` sh
         sudo -u postgres psql -c 'SHOW config_file'
         ```
 
@@ -105,13 +105,13 @@ kbId: 4706
 
     - Разрешите подключение со всех IP адресов:
 
-        ``` shell
+        ``` sh
         listen_addresses = '*'
         ```
 
     - Задайте локаль для вывода сообщений об ошибках:
 
-        ``` shell
+        ``` sh
         lc_messages = 'en_EN.utf-8'
         ```
 
@@ -126,7 +126,7 @@ kbId: 4706
 
     **Linux**
 
-    ``` shell
+    ``` sh
     sudo systemctl restart postgresql
     ```
 
@@ -157,25 +157,25 @@ kbId: 4706
 
     **MySQL**
 
-    ``` shell
+    ``` sh
     Server=ServerAddress;Database=DataBaseName;Uid=Username;Pwd=Password;
     ```
 
     **MSSQL**
 
-    ``` shell
+    ``` sh
     Server=ServerAddress;Database=DataBaseName;User Id=Username;Pwd=Password;
     ```
 
     **Oracle**
 
-    ``` shell
+    ``` sh
     Data Source=DataBaseName;User Id=Username;Password=Password;Integrated Security=no;
     ```
 
     **PostgreSQL**
 
-    ``` shell
+    ``` sh
     Host=ServerAddress;Database=DataBaseName;User ID=Username;Password=Password;
     ```
 

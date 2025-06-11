@@ -2801,7 +2801,7 @@ output:result output:warning "Завершена".
 </tr>
 <tr markdown="block">
 <td markdown>**Описание**</td>
-<td markdown>Предикат для получения адреса эл. почты аккаунта.</td>
+<td markdown>Предикат для получения адреса эл.&nbsp;почты аккаунта.</td>
 </tr>
 <tr markdown="block">
 <td markdown>**Синтаксис**</td>

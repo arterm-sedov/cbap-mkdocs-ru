@@ -77,6 +77,11 @@ def on_post_page (output, page, config, **kwargs):
     body = p.body
     body.name = 'div'
     body['class'] = 'md-body'
+    if body['kb-title'] != "":
+        attrListPattern = re.compile(r'^(.*?) +\{\:.*?\}$')
+        kbTitleStripped = attrListPattern.search(str(body['kb-title']))
+        if kbTitleStripped:
+            body['kb-title'] = kbTitleStripped.group(1)
     # Do not use prettify(), it adds redundant spaces in PHPKB
     # Fix &zwnj; after BeautifulSoup's redundant escaping
     kb_html = str(body).replace('&amp;zwnj;', '&zwnj;')

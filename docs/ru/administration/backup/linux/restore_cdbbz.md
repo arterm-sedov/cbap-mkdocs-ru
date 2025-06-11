@@ -8,7 +8,7 @@ tags:
 hide: tags
 ---
 
-# Восстановление базы данных из файла резервной копии в формате .CDBBZ {: #backup_restore_cdbbz}
+# Восстановление базы данных из файла резервной копии в формате .CDBBZ {: #backup_restore_cdbbz }
 
 ## Введение
 
@@ -29,7 +29,7 @@ hide: tags
 <source src="https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/restore_complete_backup_linux.mp4" type="video/mp4" />
 </video>
 
-## Восстановление базы данных и скриптов
+## Восстановление базы данных и скриптов {: .pageBreakBefore }
 
 1. Перейдите в режим суперпользователя:
 
@@ -158,7 +158,7 @@ hide: tags
 
     - Добавьте директиву:
 
-        ``` yml
+        ``` yaml
         nodeName: <instanceName>
         ```
 
@@ -205,13 +205,13 @@ hide: tags
 
 2. Укажите такое же значение `nodeName` (имя узла экземпляра ПО), как в конфигурации исходного экземпляра ПО:
 
-    ``` yml
+    ``` yaml
     nodeName: <instanceName>
     ```
 
 3. Включите директиву `isContainerEnvironment`:
 
-    ``` yml
+    ``` yaml
     isContainerEnvironment: true
     ```
 
@@ -226,6 +226,12 @@ hide: tags
 
 ## Восстановление индексов {{ openSearchVariants }} из файла резервной копии репозитория {: #backup_restore_cdbbz_indexes }
 
+!!! warning "Логика работы репозитория снимков {{ openSearchVariants }}"
+
+    {{ openSearchVariants }} сохраняет и восстанавливает резервные копии своих данных в виде снимков в директорию, заданную директивой `path.repo` в файле конфигурации `/etc/elasticsearch/elasticsearch.yml`.
+
+    Эта директория служит как для сохранения резервных копий, так и для их восстановления.
+
 1. Остановите службу {{ openSearchVariants }} и удостоверьтесь, что она остановлена:
 
     ``` sh
@@ -236,11 +242,11 @@ hide: tags
 2. Создайте папку репозитория {{ openSearchVariants }} (например, `/var/backups/elasticsearch/`) и перенесите в неё файлы из каталога `History` ранее [распакованной резервной копии](#unpack_backup):
 
     ``` sh
-    mkdir /var/www/backups/elasticsearch/
+    mkdir /var/backups/elasticsearch/
     mv /var/lib/comindware/<instanceName>/History/* /var/backups/elasticsearch/
     ```
 
-3. Назначьте папке репозитория и её содержимому полные права:
+3. Назначьте папке репозитория и её содержимому полные права доступа:
 
     ``` sh
     chmod -R 777 /var/backups/elasticsearch/
@@ -254,7 +260,7 @@ hide: tags
 
 5. В файле конфигурации `/etc/elasticsearch/elasticsearch.yml` укажите путь к созданному репозиторию:
 
-    ``` yml
+    ``` yaml
     path.repo: /var/backups/elasticsearch
     ```
 
@@ -266,12 +272,12 @@ hide: tags
 
     {% include-markdown ".snippets/pdfPageBreakHard.md" %}
 
-7. Зарегистрируйте репозиторий (например, `repository_backup`) с резервной копией снимка {{ openSearchVariants }} (`<openSearchHost>` — адрес сервера {{ openSearchVariants }}) :
+7. Зарегистрируйте репозиторий (например, `<repository_backup>`) с резервной копией снимка {{ openSearchVariants }} (`<openSearchHost>` — адрес сервера {{ openSearchVariants }}) :
 
-    - **с авторизацией в {{ openSearchVariants }}:**
+    - **С авторизацией в {{ openSearchVariants }}:**
 
         ``` sh
-        curl -X PUT "https://<openSearchHost>:9200/_snapshot/repository_backup?pretty" \
+        curl -X PUT "https://<openSearchHost>:<opeSearchPort>/_snapshot/<repository_backup>?pretty" \
         -u <username>:<password> \
         -H 'Content-Type: application/json' -d \
         '{
@@ -283,10 +289,10 @@ hide: tags
 
         ```
 
-    - **без авторизации в {{ openSearchVariants }}:**
+    - **Без авторизации в {{ openSearchVariants }}:**
 
         ``` sh
-        curl -X PUT "https://<openSearchHost>:9200/_snapshot/repository_backup?verify=false&pretty" \
+        curl -X PUT "https://<openSearchHost>:<opeSearchPort>/_snapshot/<repository_backup>?verify=false&pretty" \
         -H 'Content-Type: application/json' -d \
         '{
             "type": "fs",
@@ -311,31 +317,22 @@ hide: tags
 8. Проверьте содержимое зарегистрированного репозитория:
 
     ``` sh
-    curl -X GET "https://<openSearchHost>:9200/_snapshot/repository_backup?pretty"
+    curl -X GET "https://<openSearchHost>:<opeSearchPort>/_snapshot/<repository_backup>?pretty"
     ```
 
 9. Восстановите снимок {{ openSearchVariants }}:
 
-    - **с авторизацией в {{ openSearchVariants }}:**
+    ``` sh
+    curl -X POST "https://<openSearchHost>:<opeSearchPort>/_snapshot/<repository_backup>/<backupsessionXX>/_restore?pretty"
+    ```
 
-        ``` sh
-        curl -X POST "https://<openSearchHost>:9200/_snapshot/repository_backup/backupSession123/_restore?pretty" \
-        -u <username>:<password>
-        ```
-
-    - **без авторизации в {{ openSearchVariants }}:**
-
-        ``` sh
-        curl -X POST "https://<openSearchHost>:9200/_snapshot/repository_backup/backupSession123/_restore?verify=false&pretty"
-        ```
-
-    - В качестве репозитория укажите имя репозитория, созданного на шаге 7, или префикс индекса {{ openSearchVariants }} (см. [примечание](#s3_repository) выше).
-    - В качестве имени снимка укажите идентификатор резервной копии **без точки перед номером** (например, `backupSession.123` указывайте как `backupSession123`) со страницы [«Администрирование» – «Инфраструктура» – «Резервное копирование» – «Журнал»][backup_configure].
+    - В качестве репозитория укажите имя репозитория, созданного на шаге 7, или префикс индекса {{ openSearchVariants }} при восстановлении из хранилища S3 (см. [примечание](#s3_repository) выше).
+    - В качестве имени снимка укажите идентификатор резервной копии **без точки перед номером и строчными буквами** (например, `backupSession.123` указывайте как `backupsession123`) со страницы [«Администрирование» – «Инфраструктура» – «Резервное копирование» – «Журнал»][backup_configure_sessions_list].
 
 10. Проверьте наличие индексов в восстановленном каталоге:
 
     ``` sh
-    curl -X GET "https://<openSearchHost>:9200/_cat/indices?pretty"
+    curl -X GET "https://<openSearchHost>:<opeSearchPort>/_cat/indices?pretty"
     ```
 
 <div class="relatedTopics" markdown="block">

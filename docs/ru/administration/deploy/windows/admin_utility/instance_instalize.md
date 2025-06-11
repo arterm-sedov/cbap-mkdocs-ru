@@ -33,7 +33,7 @@ kbId: 4630
     _![Страница активации экземпляра системы](https://kb.comindware.ru/assets/administration_tool7.png)_
 
 8. Откроется страница настройки подключения к службе Elasticsearch. См. параграф *«[Использование службы Elasticsearch, установленной Утилитой администрирования][admin_utility_sw_install]»*.
-9. В поле «**URI**» введите адрес сервера Elasticsearch, например: `http://localhost:9200`.
+9. В поле «**URI**» введите адрес сервера Elasticsearch, например: `http://<openSearchHost>:<opeSearchPort>`.
 10. При необходимости введите учётные данные для сервера Elasticsearch в поля «**Имя пользователя**» и «**Пароль**».
 11. Укажите необходимый **префикс индекса** Elasticsearch.
 12. Нажмите кнопку «**Далее**».

@@ -17,7 +17,12 @@ hide:
 
 # Простое конечное событие {: #process_diagram_elements_none_end_event}
 
+<div class="admonition question" markdown="block">
+## Определения {: .admonition-title #definitions}
+
 Когда токен входит в **простое конечное событие**, завершается соответствующая ветвь процесса (или весь процесс, если он состоит из одной ветви).
+
+</div>
 
 *![Простое конечное событие и его меню элемента](none_end_event.png)*
 

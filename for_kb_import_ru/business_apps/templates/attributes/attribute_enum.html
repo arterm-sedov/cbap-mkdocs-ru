@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4779" kb-title="Атрибут типа «Список значений»">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4779" kb-tags="" kb-title="Атрибут типа «Список значений»">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -98,7 +98,7 @@
 </div>
 <div class="notice notice-tip">
 <p class="admonition-title">Установка значения атрибута с помощью формулы</p>
-<p>Чтобы c помощю <strong>формулы</strong> задать значение атрибута типа «<strong>Список значений</strong>» (например, для вычисляемого атрибута или правила на форме), необходимо:</p>
+<p>Чтобы c помощью <strong>формулы</strong> задать значение атрибута типа «<strong>Список значений</strong>» (например, для вычисляемого атрибута или правила на форме), необходимо:</p>
 <ul>
 <li>
 <p>вернуть ID требуемого значения атрибута, указав системные имена атрибута и требуемого значения:</p>
@@ -201,8 +201,7 @@
 </div>
 <div class="notice notice-tip">
 <p class="admonition-title">Фильтрация значения атрибута с помощью N3</p>
-<p>
-С помощью <strong>N3</strong> для атрибута типа «<strong>Список значений</strong>» можно выполнять фильтрацию по системному имени его значения:</p>
+<p>С помощью <strong>N3</strong> для атрибута типа «<strong>Список значений</strong>» можно выполнять фильтрацию по системному имени его значения:</p>
 <ul>
 <li>
 <p>Фильтрация (в таблице шаблона) записей с требуемым значением атрибута:</p>
@@ -210,8 +209,7 @@
 </li>
 <li>
 <p>Фильтрация добавляемых записей (в таблице на форме или раскрывающемся списке на форме) записей с требуемым значением атрибута:</p>
-<p><div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">convert:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/convertions#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Получаем атрибут типа «Список значений» из шаблона по системному имени.</span></code> <br/><code>    <span class="p">(</span><span class="s">"TemplateSystemName"</span> <span class="s">"EnumAttributeSystemName"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?enumAttribute</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получаем ID значения атрибута по системному имени.</span></code> <br/><code>    <span class="p">(</span><span class="s">"EnumAttributeSystemName"</span> <span class="s">"enumValueSystemName"</span><span class="p">)</span> <span class="nn">convert</span><span class="p">:</span><span class="nt">enumValue</span> <span class="err">?enumValueId</span><span class="p">.</span></code> <br/><code>    <span class="c"># Фильтруем и возвращаем записи, </span></code> <br/><code>    <span class="c"># у которых атрибут имеет значение "enumValueSystemName".</span></code> <br/><code>    <span class="err">?filteredRecordIds</span> <span class="err">?enumAttribute</span> <span class="err">?enumValueId</span><span class="p">.</span></code> <br/><code>    <span class="err">?filteredRecordIds</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
-</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">convert:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/convertions#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Получаем атрибут типа «Список значений» из шаблона по системному имени.</span></code> <br/><code>    <span class="p">(</span><span class="s">"TemplateSystemName"</span> <span class="s">"EnumAttributeSystemName"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?enumAttribute</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получаем ID значения атрибута по системному имени.</span></code> <br/><code>    <span class="p">(</span><span class="s">"EnumAttributeSystemName"</span> <span class="s">"enumValueSystemName"</span><span class="p">)</span> <span class="nn">convert</span><span class="p">:</span><span class="nt">enumValue</span> <span class="err">?enumValueId</span><span class="p">.</span></code> <br/><code>    <span class="c"># Фильтруем и возвращаем записи, </span></code> <br/><code>    <span class="c"># у которых атрибут имеет значение "enumValueSystemName".</span></code> <br/><code>    <span class="err">?filteredRecordIds</span> <span class="err">?enumAttribute</span> <span class="err">?enumValueId</span><span class="p">.</span></code> <br/><code>    <span class="err">?filteredRecordIds</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Фильтрация отображаемых записей (в таблице на форме, раскрывающемся списке на форме, вычисляемом атрибуте или правиле для формы) записей с требуемым значением атрибута:</p>

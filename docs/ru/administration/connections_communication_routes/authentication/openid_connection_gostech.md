@@ -21,19 +21,20 @@ kbId: 4685
         auth_openId_clientSecret: <plarformViAMClientSecret>
     ...
     ```
+
 2. Сохраните файл конфигурации.
 3. Разверните экземпляр ПО. См. _«[Установка и инициализация ПО][deploy_guide_linux]»_.
 
 ## Проверка адреса сервера {{ productName }}
 
 1. Откройте раздел [«**Администрирование**» — «**Глобальная конфигурация**»][administration].
-2. Удостоверьтесь, что **URL-адрес сервера** начинается с `https://`.
+2. Удостоверьтесь, что **URL-адрес сервера** начинается с `https://`.
 
     _![Проверка адреса сервера](openid_connection_check.png)_
 
 ## Вход в {{ productName }} {: .pageBreakBefore }
 
-1. Откройте веб-сайт экземпляра {{ productName }}, например [https://mycompany.ru](https://mycompany.ru/)
+1. Откройте веб-сайт экземпляра {{ productName }}, например [https://mycompany.ru](https://mycompany.ru/)
 2. Нажмите кнопку «**Войти как администратор**».
 
     _![Переход к странице входа администратора](openid_connection_administrator_entry.png)_
@@ -49,7 +50,7 @@ kbId: 4685
 
     _![Кнопка «Войти с помощью Google»](openid_connection_google_entry.png)_
 
-6. На этом настройка входа через OpenID Connect завершена. Теперь пользователи смогут входить в **{{ productName }}** с помощью своих аккаунтов Google.
+6. На этом настройка входа через OpenID Connect завершена. Теперь пользователи смогут входить в **{{ productName }}** с помощью своих аккаунтов Google.
 
 <div class="relatedTopics" markdown="block">
 

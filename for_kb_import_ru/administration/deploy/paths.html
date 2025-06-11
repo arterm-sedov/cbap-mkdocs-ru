@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4620" kb-title="Пути и содержимое директорий экземпляра ПО">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4620" kb-tags="" kb-title="Пути и содержимое директорий экземпляра ПО">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -9,7 +9,7 @@
       </h2>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<a class="md-nav__link mkdocs_imported_link" href="#paths_intro">
 <span class="md-ellipsis">
       Введение
     </span>
@@ -30,6 +30,13 @@
 </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#paths_recommendations">
+<span class="md-ellipsis">
+      Рекомендации по настройке путей
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
 <span class="md-ellipsis">
       Связанные статьи
@@ -41,17 +48,27 @@
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h2 id="введение">Введение</h2>
+<h2 id="paths_intro">Введение</h2>
 <p>Здесь представлена информация о расположении файлов и директорий экземпляра ПО <strong>Comindware Platform</strong>.</p>
+<p>Ознакомьтесь также с <a class="mkdocs_imported_link" href="#paths_recommendations">рекомендациями по настройке путей</a>.</p>
 <h2 id="paths_linux">Содержимое директорий — Linux</h2>
 <p>По умолчанию файлы экземпляра ПО находятся  в директории <code>/var/lib/comindware/&lt;instanceName&gt;</code></p>
-<p>Здесь и далее <code>&lt;instanceName&gt;</code> — имя экземпляра ПО.</p>
+<p>Здесь и далее <code>&lt;instanceName&gt;</code> — имя экземпляра ПО.</p>
+<p>Фактические пути к директориям экземпляра ПО указаны в файле конфигурации:</p>
+<div class="highlight"><code><pre><span></span><code>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code> <br/></pre></code></div>
+<p><strong>Пути по умолчанию</strong></p>
 <ul>
 <li>
 <p><code>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code> — файл конфигурации. В этом файле задаются все остальные пути, перечисленные ниже.</p>
 </li>
 <li>
-<p><code>/var/www/&lt;instanceName&gt;</code> — исполняемые и конфигурационные файлы экземпляра ПО.</p>
+<p><code>/var/www/&lt;instanceName&gt;</code> — исполняемые и конфигурационные файлы экземпляра ПО:</p>
+<ul>
+<li><code>logs.config</code> — конфигурация журналов, см. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4623">Подсистема журналирования</a>»</em>;</li>
+<li><code>adapterhost.yml</code> — конфигурация службы Adapterhost;</li>
+<li><code>apigateway.yml</code> — конфигурация службы Apigateway;</li>
+<li><code>Ignite.config</code> — конфигурация Apache Ignite.</li>
+</ul>
 </li>
 <li>
 <p><code>/var/lib/comindware/&lt;instanceName&gt;/Database/db</code> — файлы базы данных.</p>
@@ -59,60 +76,110 @@
 <li>
 <p><code>/var/lib/comindware/&lt;instanceName&gt;/Database/log</code> — файлы журналов Apache Ignite.</p>
 </li>
-<li><code>/var/log/comindware/&lt;instanceName&gt;/Logs/</code> — файлы журналов.</li>
 <li>
-<p><code>/var/log/comindware/&lt;instanceName&gt;/Logs/Archive</code> — архивы журналов.</p>
+<p><code>/var/log/comindware/&lt;instanceName&gt;/Logs/</code> — файлы журналов.</p>
 </li>
 <li>
 <p><code>/var/lib/comindware/&lt;instanceName&gt;/Database/Scripts</code> — скомпилированные библиотеки для скриптов на языке С#.</p>
 </li>
+<li><code>/var/lib/comindware/&lt;instanceName&gt;/Streams</code> — загруженные пользователями и сформированные системой файлы, которые прикреплены к соответствующим атрибутам.</li>
+<li>Вспомогательные файлы:<ul>
+<li><code>/var/lib/comindware/&lt;instanceName&gt;/Database/git</code> — файлы локального репозитория Git для управления версиями приложений.</li>
+<li><code>/var/lib/comindware/&lt;instanceName&gt;/Database/FullTextSearch</code> — индексы полнотекстового поиска.</li>
 <li><code>/var/lib/comindware/&lt;instanceName&gt;/Database/snapshots</code> — снимки данных Apache Ignite.</li>
 <li><code>/var/lib/comindware/&lt;instanceName&gt;/Database/wal</code> — файлы журнала предварительной записи.</li>
-<li class="pageBreakAfter"><code>/var/lib/comindware/&lt;instanceName&gt;/Streams</code> — загруженные пользователями и сформированные системой файлы, которые прикреплены к соответствующим атрибутам.</li>
-<li>Временные данные, обеспечивающие работу экземпляра ПО. В этих папках нет пользовательских данных и файлов базы данных экземпляра ПО:<ul>
+</ul>
+</li>
+<li>Временные файлы:<ul>
 <li><code>/var/lib/comindware/&lt;instanceName&gt;/Temp</code></li>
-<li><code>/var/lib/comindware/&lt;instanceName&gt;/Database/cache</code></li>
-<li><code>/var/lib/comindware/&lt;instanceName&gt;/Database/diagnostic</code></li>
-<li><code>/var/lib/comindware/&lt;instanceName&gt;/Database/FullTextSearch</code></li>
+<li><code>/var/lib/comindware/&lt;instanceName&gt;/LocalTemp</code></li>
 </ul>
 </li>
 </ul>
 <h2 id="paths_windows">Содержимое директорий — Windows</h2>
-<p>База данных по умолчанию находится в директории с экземпляром ПО: <code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;</code>. Здесь <code>&lt;instanceName&gt;</code> — имя экземпляра ПО.</p>
-<p>Просмотреть фактические пути к директориям экземпляра ПО можно в Утилите администрирования. См. статью <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4634">Настройка конфигурации и просмотр фактических путей к папкам экземпляра продукта</a>»</em>.</p>
+<p>По умолчанию файлы экземпляра ПО находятся в директории с экземпляром ПО: <code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;</code>.</p>
+<p>Здесь и далее <code>&lt;instanceName&gt;</code> — имя экземпляра ПО.</p>
+<p>Фактические пути к директориям экземпляра ПО указаны в файле конфигурации:</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">C</span><span class="p">:\</span><span class="n">ProgramData</span><span class="p">\</span><span class="n">сomindware</span><span class="p">\</span><span class="n">configs</span><span class="p">\</span><span class="n">instance</span><span class="p">\&lt;</span><span class="n">instanceName</span><span class="p">&gt;.</span><span class="n">yml</span></code> <br/></pre></code></div>
+<p><strong>Пути по умолчанию</strong></p>
 <ul>
 <li><code>C:\Program Files\Comindware\CBAP</code> — исполняемые файлы ПО разных версий.</li>
 <li><code>C:\ProgramData\сomindware\configs</code> — общие файлы конфигурации ПО.</li>
-<li><code>C:\ProgramData\сomindware\configs\instance\&lt;instanceName&gt;.yml</code> — файл конфигурации. В этом файле задаются все остальные пути, перечисленные ниже..</li>
+<li><code>C:\ProgramData\сomindware\configs\instance\&lt;instanceName&gt;.yml</code> — файл конфигурации. В этом файле задаются все остальные пути, перечисленные ниже.</li>
 <li><code>C:\ProgramData\сomindware\Instances</code> — папка с экземплярами ПО.</li>
 <li><code>C:\ProgramData\сomindware\Instances\&lt;instanceName&gt;</code> — экземпляр ПО.</li>
-<li><code>C:\ProgramData\сomindware\Instances\&lt;instanceName&gt;\Config</code> — конфигурационные файлы:<ul>
-<li><code>logs.config</code> (конфигурация журналов, см. статью <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4623">Подсистема журналирования</a>»</em>);</li>
-<li><code>Web.config</code> (конфигурация экземпляра системы);</li>
-<li><code>Workers.config</code> (конфигурация системных служб экземпляра системы).</li>
+<li><code>C:\ProgramData\сomindware\Instances\&lt;instanceName&gt;\config</code> — исполняемые и конфигурационные файлы экземпляра ПО.:<ul>
+<li><code>logs.config</code> — конфигурация журналов, см. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4623">Подсистема журналирования</a>»</em>;</li>
+<li><code>adapterhost.yml</code> — конфигурация службы Adapterhost;</li>
+<li><code>apigateway.yml</code> — конфигурация службы Apigateway;</li>
+<li><code>Ignite.config</code> — конфигурация Apache Ignite.</li>
 </ul>
 </li>
-<li><code>C:\ProgramData\сomindware\Instances\&lt;instanceName&gt;\Data</code> — файлы базы данных.</li>
-<li><code>C:\ProgramData\сomindware\Instances\&lt;instanceName&gt;\Data\Scripts</code> — DLL-файлы, скомпилированные из скриптов на языке C#.</li>
-<li><code>C:\ProgramData\сomindware\Instances\&lt;instanceName&gt;\Data\FullTextSearch</code> — индексы полнотекстового поиска.</li>
+<li><code>C:\ProgramData\сomindware\Instances\&lt;instanceName&gt;\Database</code> — файлы базы данных.</li>
+<li><code>C:\ProgramData\сomindware\Instances\&lt;instanceName&gt;\Database\Scripts</code> — DLL-файлы, скомпилированные из скриптов на языке C#.</li>
 <li><code>C:\ProgramData\сomindware\Instances\&lt;instanceName&gt;\Streams</code> — файлы, загруженные пользователями и сформированные ПО.</li>
 <li><code>C:\ProgramData\сomindware\Instances\&lt;instanceName&gt;\Logs</code> — журналы экземпляра ПО.</li>
-<li><code>C:\ProgramData\сomindware\Instances\&lt;instanceName&gt;\Temp</code> — временные файлы.</li>
+<li>Вспомогательные файлы:<ul>
+<li><code>C:\ProgramData\сomindware\Instances\&lt;instanceName&gt;\Database\git</code> — файлы локального репозитория Git для управления версиями приложений.</li>
+<li><code>C:\ProgramData\сomindware\Instances\&lt;instanceName&gt;\Database\FullTextSearch</code> — индексы полнотекстового поиска.</li>
+<li><code>C:\ProgramData\сomindware\Instances\&lt;instanceName&gt;\Database\snapshots</code> — снимки данных Apache Ignite.</li>
+<li><code>C:\ProgramData\сomindware\Instances\&lt;instanceName&gt;\Database\wal</code> — файлы журнала предварительной записи.</li>
 </ul>
+</li>
+<li>Временные файлы:<ul>
+<li><code>C:\ProgramData\сomindware\Instances\&lt;instanceName&gt;\Temp</code></li>
+<li><code>C:\ProgramData\сomindware\Instances\&lt;instanceName&gt;\LocalTemp</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="paths_recommendations">Рекомендации по настройке путей</h2>
+<p>Для более стабильной и надёжной работы платформы, рекомендуем разделить данные по нескольких хранилищам, например, как указано ниже.</p>
+<ul>
+<li><strong>Хранилище исполняемых и конфигурационных файлов</strong><ul>
+<li>ПО <strong>Comindware Platform</strong> и конфигурационные файлы экземпляра ПО.</li>
+<li><code>&lt;instanceName&gt;.yml</code>: файл конфигурации экземпляра ПО.</li>
+</ul>
+</li>
+<li><strong>Хранилище базы данных</strong><ul>
+<li><code>Database</code>: файлы базы данных.</li>
+<li><code>Database/Scripts</code>: скомпилированные C#-скрипты.</li>
+</ul>
+</li>
+<li><strong>Хранилище журналов</strong><ul>
+<li><code>Logs</code>: журналы экземпляра ПО.</li>
+</ul>
+</li>
+<li><strong>Хранилище резервных копий</strong><ul>
+<li><code>Backups</code>: файлы резервных копий.</li>
+</ul>
+</li>
+<li>
+<p><strong>Хранилище загружаемых и временных файлов</strong></p>
+<ul>
+<li><code>LocalTemp</code>: временные файлы резервных копий.</li>
+<li><code>Temp</code>: временные копии загруженных файлов и скомпилированных C#-скриптов.</li>
+<li><code>Streams</code>: файлы, загружаемые пользователями и сформированные ПО.</li>
+</ul>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>Для директорий в этм хранилище с настроить проверку с помощью антивирусного ПО.</p>
+<p>См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4602">Антивирусное ПО. Настройка сканирования и исключений</a>»</em>.</p>
+</div>
+</li>
+</ul>
+<p>Технические требования к хранилищам данных описаны в статье <em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4596">«Архитектура, ландшафт, программное и техническое обеспечение»</a></em>.</p>
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5067">Конфигурация экземпляра, компонентов ПО и служб. Настройка в Linux</a></li>
 <li>
-<p><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4634">Настройка конфигурации и просмотр фактических путей к папкам экземпляра продукта</a></em></p>
+<p><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4596">Развёртывание Comindware Platform. Архитектура, ландшафт, программное и техническое обеспечение</a></p>
 </li>
 <li>
-<p><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5067">Конфигурация экземпляра, компонентов ПО и служб. Настройка в Linux</a></em></p>
+<p><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4602">Антивирусное ПО. Настройка сканирования и исключений</a></p>
 </li>
 <li>
-<p><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4602">Антивирусное ПО. Настройка исключений: пути и файлы Comindware Platform</a></em></p>
-</li>
-<li>
-<p><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4623">Подсистема журналирования</a></em></p>
+<p><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4623">Подсистема журналирования</a></p>
 </li>
 </ul>
 </div>

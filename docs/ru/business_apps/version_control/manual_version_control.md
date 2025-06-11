@@ -105,7 +105,7 @@ _![Настройка импорта приложения из файла CTF](i
 --8<-- "related_topics_heading.md"
 
 - _[Управление версиями приложения][version_control]_
-- _[Управление версиями через Git][version_control_git]_
+- _[Экспорт и импорт версий приложения с помощью Git][version_control_git]_
 - _[Экспорт и импорт версий приложения с помощью Excel][version_control_excel]_
 
 </div>
