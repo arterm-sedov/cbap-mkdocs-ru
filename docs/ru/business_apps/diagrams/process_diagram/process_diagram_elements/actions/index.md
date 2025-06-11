@@ -17,9 +17,12 @@ kbId: 4732
 
 # Действия. Определение и типы  {: #process_diagram_elements_actions}
 
-!!! question "Определение"
+<div class="admonition question" markdown="block">
+## Определения {: .admonition-title #definitions}
 
-    **Действия** — это основные исполняемые элементы диаграммы бизнес-процесса.
+**Действия** — это основные исполняемые элементы диаграммы бизнес-процесса.
+
+</div>
 
 ## Типы действий
 
@@ -34,5 +37,9 @@ kbId: 4732
 
 --8<-- "related_topics_heading.md"
 
-- _[Элементы диаграммы процесса][process_diagram_elements]_
-- _[Редактирование диаграммы процесса][process_diagram_designer]_
+- [Элементы диаграммы процесса][process_diagram_elements]
+- [Редактирование диаграммы процесса][process_diagram_designer]
+
+</div>
+
+{% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

@@ -11,7 +11,7 @@ kbId: 4648
 
 Данные инструкции подходят для восстановления из резервной копии, созданной по инструкциям в статье *«[Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО][complete_running_instance_backup]»*.
 
-В данных инструкциях используются только стандартные средства операционной системы и Elasticsearch.
+В данных инструкциях используются только стандартные средства операционной системы и {{ openSearchVariants }}.
 
 В статье рассмотрены два сценария:
 
@@ -20,7 +20,7 @@ kbId: 4648
 
 Для восстановления базы данных экземпляра ПО из файла резервной копии необходимо распаковать архив резерва в пользовательскую или временную директорию, откуда уже перенести файлы и директории в целевые директории.
 
-Для восстановления журнала операций требуется зарегистрировать репозиторий в Elasticsearch и из зарегистрированного репозитория восстановить данные.
+Для восстановления журнала операций требуется зарегистрировать репозиторий в {{ openSearchVariants }} и из зарегистрированного репозитория восстановить данные.
 
 Исходные данные
 
@@ -78,20 +78,20 @@ kbId: 4648
 
     - `Database` — файлы базы данных.
         - `Scripts` — скомпилированные библиотеки для скриптов на языке C#.
-        - `snapshots` — снимок данных Apache Ignite Ignite.
+        - `snapshots` — снимок данных {{ apacheIgniteVariants }}.
         - `wal` — журнал предварительной записи.
-        - `elastic` — копия репозитория Elasticsearch (OpenSearch).
+        - `elastic` — копия репозитория {{ openSearchVariants }}.
         - `Streams` — загруженные пользователями и сформированные системой файлы, которые прикреплены к соответствующим атрибутам.
 
     _![Структура резервной копии](https://kb.comindware.ru/assets/Pasted image 20230125134843.png)_
 
-4. Перенесите снимок данных Apache Ignite (в примере — содержимое директории `/tmp/backup_2023_01_23_10_17/Database/snapshots/snapshot_2023_01_23_10_17/`) в рабочую директорию Apache Ignite (`/var/www/comindware/data/Database/`):
+4. Перенесите снимок данных {{ apacheIgniteVariants }} (в примере — содержимое директории `/tmp/backup_2023_01_23_10_17/Database/snapshots/snapshot_2023_01_23_10_17/`) в рабочую директорию {{ apacheIgniteVariants }} (`/var/www/comindware/data/Database/`):
 
     ```
     mv Database/snapshots/snapshot_2023_01_23_10_17/* /var/lib/comindware/<instancename>/Database/
     ```
 
-5. Перенесите директорию со скриптами из резервной копии в рабочую директорию Apache Ignite:
+5. Перенесите директорию со скриптами из резервной копии в рабочую директорию {{ apacheIgniteVariants }}:
 
     ```
     mv Database/Scripts /var/lib/comindware/<instancename>/Database/
@@ -117,9 +117,9 @@ kbId: 4648
     chown -R www-data:www-data /var/lib/comindware/<instancename>/Database/
     ```
 
-## Восстановление индексов Elasticsearch из резервной копии репозитория
+## Восстановление индексов {{ openSearchVariants }} из резервной копии репозитория
 
-1. Создайте директорию репозитория Elasticsearch и перенесите в неё файлы из резервной копии:
+1. Создайте директорию репозитория {{ openSearchVariants }} и перенесите в неё файлы из резервной копии:
 
     ```
     mkdir /var/www/backups/elasticsearch/
@@ -144,39 +144,39 @@ kbId: 4648
     nano /etc/elasticsearch/elasticsearch.yml
     ```
 
-    _![Путь к репозиторию в файле конфигурации Elasticsearch](https://kb.comindware.ru/assets/Pasted image 20230125204737.png)_
+    _![Путь к репозиторию в файле конфигурации {{ openSearchVariants }}](https://kb.comindware.ru/assets/Pasted image 20230125204737.png)_
 
-5. Запустите службу Elasticsearch:
+5. Запустите службу {{ openSearchVariants }}:
 
     ```
     systemctl start elasticsearch.service
     ```
 
-6. Зарегистрируйте новый репозиторий снимков Elasticsearch:
+6. Зарегистрируйте новый репозиторий снимков {{ openSearchVariants }}:
 
     ```
-    curl -X PUT "localhost:9200/_snapshot/elastic_snap?pretty" -H 'Content-Type: application/json' -d' {"type": "fs", "settings": {"location": "/var/www/backups/elasticsearch"}}'
+    curl -X PUT "<openSearchHost>:<opeSearchPort>/_snapshot/elastic_snap?pretty" -H 'Content-Type: application/json' -d' {"type": "fs", "settings": {"location": "/var/www/backups/elasticsearch"}}'
     ```
 
 7. Проверьте содержимое зарегистрированного репозитория:
 
     ```
-    curl -X GET "localhost:9200/_cat/snapshots/elastic_snap?pretty"
+    curl -X GET "<openSearchHost>:<opeSearchPort>/_cat/snapshots/elastic_snap?pretty"
     ```
 
-8. Выберите необходимый снимок и восстановите состояние Elasticsearch:
+8. Выберите необходимый снимок и восстановите состояние {{ openSearchVariants }}:
 
     ```
-    curl -X POST "localhost:9200/_snapshot/elastic_snap/snapshot2023_01_23_10_17/_restore?pretty"
+    curl -X POST "<openSearchHost>:<opeSearchPort>/_snapshot/elastic_snap/snapshot2023_01_23_10_17/_restore?pretty"
     ```
 
 9. Проверьте наличие индексов в восстановленном каталоге:
 
     ```
-    curl -X GET "localhost:9200/_cat/indices?pretty"
+    curl -X GET "<openSearchHost>:<opeSearchPort>/_cat/indices?pretty"
     ```
 
-_![Отображение списка индексов Elasticsearch](https://kb.comindware.ru/assets/Pasted image 20230127153756.png)_
+_![Отображение списка индексов {{ openSearchVariants }}](https://kb.comindware.ru/assets/Pasted image 20230127153756.png)_
 
 ## Запуск и проверка конфигурации экземпляра ПО {: .pageBreakBefore }
 

@@ -9,7 +9,7 @@ kbId: 5067
 
 Здесь представлены инструкции по настройке файлов конфигурации после развёртывания и обновления ПО **{{ productName }}**, его компонентов и служб.
 
-## Конфигурация экземпляра ПО
+## Конфигурация экземпляра ПО {{ productName }} {: #configuration_files_linux_instance }
 
 1. Откройте файл конфигурации экземпляра ПО (`<instanceName>` — имя экземпляра ПО) для редактирования:
 
@@ -23,9 +23,9 @@ kbId: 5067
     - `journal.name` — индекс сервера {{ openSearchVariants }}.
     - `db.workDir` — директория для хранения базы данных экземпляра ПО.
     - `db.name` — префикс кэшей в базе данных экземпляра ПО.
-    - `userStorage.localDisk.path` — директория для хранения пользовательских файлов.
-    - `mq.server` — адрес сервера Kafka.
-    - `backup.defaultFolder` — директория для хранения резервных копий экземпляра ПО.
+    - `userStorage.localDisk.path` — директория для хранения загруженных файлов.
+    - `mq.server` — адрес сервера {{ apacheKafkaVariants }}.
+    - `backup.defaultFolder` — директория для хранения резервных копий экземпляра ПО.
     - `backup.defaultFileName` — имя файла резервной копии экземпляра ПО.
 
     --8<-- "instance_config_warning.md"
@@ -37,7 +37,6 @@ kbId: 5067
     mkdir -p <path/to/Database>
     mkdir -p <path/to/Streams>
     mkdir -p <path/to/Backup>
-    chmod -R 766 <path/to/Database> <path/to/Streams> <path/to/Backup>
     chown -R <User>:<Group> <path/to/Database> <path/to/Streams> <path/to/Backup>
     ```
 
@@ -52,56 +51,352 @@ kbId: 5067
 ### Пример YML-файла конфигурации экземпляра ПО {: .pageBreakBefore }
 
 <!--instanceYML-start-->
-``` yml
-#################### Настройка базовых параметров ПО ####################
-# Имя экземпляра ПО
+``` yaml
+
+##### Настройка базовых параметров {{ productName }} #####
+# Имя экземпляра {{ productName }}.
 # Устаревшая директива: instanceName
 clusterName: <instanceName>
-# Имя узла экземпляра ПО
+# Имя узла экземпляра {{ productName }}.
 #nodeName: <instanceName>
-# Путь к экземпляру, по которому ПО находит свою конфигурацию
+# Путь к экземпляру, по которому {{ productName }} находит свою конфигурацию.
 configPath: <configPath>
-# Адрес службы журналирования (Elasticsearch, OpenSearch)
+# Адрес службы журналирования {{ openSearchVariants }}.
 # Устаревшая директива: elasticsearchUri
 journal.server: http://<searchHostIP>:<searchHostPort>
-# Индекс службы журналирования (Elasticsearch, OpenSearch)
-# journal.name: <instanceName>
-# URI-адрес экземпляра ПО
+# Индекс службы журналирования.
+# journal.name: <prefix>-<instanceName>
+# Выключение службы журналирования.
+#journal.enabled: false
+# URI-адрес экземпляра {{ productName }}.
 fqdn: <hostName>
-# Порт экземпляра ПО
+# Порт экземпляра {{ productName }}.
 port: <portNumber>
-# Версия экземпляра ПО
+# Версия экземпляра {{ productName }}.
 version: <versionNumber>
-#################### Настройка базы данных ####################
-# Путь к базе данных
+
+##### Настройка базы данных #####
+# Использование тонкого клиента.
+#db.asThinClient: true
+# Конечные точки для подключения тонкого клиента.
+#db.asThinClientEndpoints: 127.0.0.1:10800
+# Путь к базе данных.
 # Устаревшая директива: databasePath
 db.workDir: /var/lib/comindware/<instanceName>/Database
+# Папка установки {{ apacheIgniteVariants }}.
+#db.homeDir:
+# Путь к файлу конфигурации {{ apacheIgniteVariants }}.
+#db.configPath:
+# Настройки JVM.
+#db.jvmOpts:
+# Настройки Java.
+#db.javaOpts:
+# Включение автоматической настройки узлов {{ apacheIgniteVariants }}.
+#db.baselineAutoAdjustEnabledFlag: false
+# Время ожидания фактического изменения настройки узлов {{ apacheIgniteVariants }}
+# с момента последнего изменения.
+#db.baselineAutoAdjustTimeout: 3000
+# Согласованный глобальный уникальный идентификатор узла {{ apacheIgniteVariants }}.
+#db.consistentId: 
 # Используемый префикс кэшей в базе данных
 # Устаревшая директива: databaseName
 db.name: <instanceName>
-#################### Настройка хранения пользовательских файлов ####################
-# Тип хранилища (LocalDisk | S3)
+# Префикс кэшей в базе данных, используемый при обновлении.
+#db.upgradeName:
+# Путь к онтологии {{ companyName }}
+#db.n3Dir:
+
+{% if pdfOutput %}
+```
+{% include-markdown ".snippets/pdfPageBreakHard.md" %}
+
+``` yaml title="Пример YML-файла конфигурации экземпляра ПО — продолжение"
+{% endif %}
+##### Настройка хранения загруженных файлов #####
+# Тип хранилища (LocalDisk | S3).
 userStorage.type: LocalDisk
-# Путь к пользовательским файлам экземпляра
+# Путь к пользовательским файлам экземпляра.
 userStorage.localDisk.path: /var/lib/comindware/<instanceName>/Streams
-#################### Настройка хранения временных файлов ####################
-# Тип хранилища (LocalDisk | S3)
+# Имя корзины S3 для хранения загруженных файлов.
+#userStorage.s3.bucket:
+# Имя подключения к S3.
+#userStorage.s3.connection: <s3ConnectionName>
+
+##### Настройка хранения временных файлов #####
+# Тип хранилища (LocalDisk | S3).
 tempStorage.type: LocalDisk
-# Путь к временным файлам экземпляра
+# Путь к временным файлам экземпляра.
 tempStorage.localDisk.path: /var/lib/comindware/<instanceName>/Temp
+# Имя корзины S3 для хранения временных файлов.
+#tempStorage.s3.bucket:
+# Имя подключения к S3.
+#tempStorage.s3.connection: <s3ConnectionName>
 # Временная папка
-tempWorkingDir: /var/lib/comindware/fooo/LocalTemp
-#################### Настройки очереди сообщений ####################
-# Адрес и порт сервера очереди сообщений (Kafka)
+tempWorkingDir: /var/lib/comindware/<instanceName>/LocalTemp
+
+##### Настройка очереди сообщений #####
+# Адрес и порт сервера очереди сообщений {{ apacheKafkaVariants }}.
 mq.server: <kafkaBrokerIP>:<kafkaBrokerPort>
-# Идентификатор группы очереди сообщений
-mq.group: <instanceName>
-#################### Конфигурация резервного копирования ####################
-# Папка для резервного копирования по умолчанию
+# Идентификатор группы очереди сообщений.
+mq.group: <prefix>-<instanceName>
+# Префикс имени очередей сообщений.
+mq.name: <instanceName>
+# Идентификатор узла очереди сообщений.
+mq.node: <instanceName>
+# Выключение функции очереди сообщений.
+#mq.enabled: false
+# Протокол безопасности очереди сообщений.
+# (Plaintext | Ssl | SaslPlaintext | SaslSsl)
+#mq.securityProtocol: Plaintext
+
+##### Настройка SSL-подключения очереди сообщений #####
+# Путь к файлу корневого сертификата сервера очереди сообщений.
+#mq.ssl.caLocation:
+# Выключение идентификации адреса сервера очереди сообщений.
+#mq.ssl.endpointIdentificationEnabled: false 
+
+##### Настройка SASL-подключения очереди сообщений #####
+# Имя пользователя, используемое для подключения посредством SASL.
+#mq.sasl.username:
+#Пароль для аутентификации, используемый для подключения посредством SASL.
+#mq.sasl.password:
+# Тип механизма SASL (None | Plain | ScramSha256 | ScramSha512).
+#mq.sasl.mechanism:
+
+{% if pdfOutput %}
+```
+{% include-markdown ".snippets/pdfPageBreakHard.md" %}
+
+``` yaml title="Пример YML-файла конфигурации экземпляра ПО — продолжение"
+{% endif %}
+##### Настройка очереди сообщений для коммуникации с адаптерами #####
+# Выключение функции коммуникации брокера сообщений с адаптером 0.
+#mq.adapter.0.enabled: false
+# Выключение отправителя сообщений.
+#mq.adapter.0.producer.enabled: false
+# Выключение получателя сообщений.
+#mq.adapter.0.consumer.enabled: false
+# Выключение функции коммуникации брокера сообщений с адаптером 1.
+#mq.adapter.1.enabled: false
+# Выключение отправителя сообщений.
+#mq.adapter.1.producer.enabled: false
+# Выключение получателя сообщений.
+#mq.adapter.1.consumer.enabled: false
+# Выключение функции коммуникации брокера сообщений с адаптером 2.
+#mq.adapter.2.enabled: false
+# Выключение отправителя сообщений.
+#mq.adapter.2.producer.enabled: false
+# Выключение получателя сообщений.
+#mq.adapter.2.consumer.enabled: false
+# Выключение функции коммуникации брокера сообщений с адаптером 3.
+#mq.adapter.3.enabled: false
+# Выключение отправителя сообщений.
+#mq.adapter.3.producer.enabled: false
+# Выключение получателя сообщений.
+#mq.adapter.3.consumer.enabled: false
+
+##### Настройка OpenID-аутентификации #####
+# Имя OpenID-сервиса, использующегося для входа.
+#auth.openId.displayName:
+# Включение функции OpenID.
+#auth.openId.enabled: true
+# Адрес сервера OpenID Connect.
+#auth.openId.server:
+# Пространство имен или контекст, в котором происходит аутентификация пользователей.
+# Используется для управления идентификацией и доступом в системе OpenID Connect.
+#auth.openId.realm:
+# Уникальный идентификатор клиентского приложения, используемый
+# для аутентификации и авторизации запросов по протоколу OpenID Connect.
+#auth.openId.clientId:
+# Секретный ключ OpenId Connect
+#auth.openId.clientSecret:
+# Список идентификаторов целевой аудитории, для которой предназначены токены, 
+# используемые в процессе аутентификации и авторизации в OpenID Connect.
+#auth.openId.audience:
+
+{% if pdfOutput %}
+```
+{% include-markdown ".snippets/pdfPageBreakHard.md" %}
+
+``` yaml title="Пример YML-файла конфигурации экземпляра ПО — продолжение"
+{% endif %}
+##### Настройка резервного копирования #####
+# Папка для резервного копирования по умолчанию.
+# Будет использоваться во вновь создаваемых конфигурациях резервного копирования.
 # Устаревшая директива: backup.config.default.repository.localDisk.path
-backup.defaultFolder: /var/lib/comindware/<instanceName>/Backup
-# Имя файла для резервного копирования по умолчанию
-backup.defaultFileName: Backup
+backup.defaultFolder: /var/backups/<instanceName>
+# Имя файла резервных копий по умолчанию.
+# Будет использоваться во вновь создаваемых конфигурациях резервного копирования.
+backup.defaultFileName: <instanceName>
+# Выключение функции резервного копирования.
+#backup.enabled: false
+# Выключение сеансов резервного копирования.
+# Выключает выполнение резервного копирования, но не его настройку.
+#backup.sessionsEnabled: false
+# Выключение запуска сеансов резервного копирования по расписанию.
+#backup.schedulesEnabled: false
+# Максимальное количество сеансов резервного копирования.
+#backup.maxSessions: 5
+
+##### Конфигурация резервного копирования по умолчанию #####
+# <backupName> — имя конфигурации резервного копирования, без пробелов
+# Имя файлов резервных копий.
+# К нему будут добавляться метка времени и расширение cdbbz, например:
+# Backup.202202161625.cdbbz
+#backup.default.<backupName>.name: Backup
+# Тип хранилища (LocalDisk | S3).
+#backup.default.<backupName>.repository.type: LocalDisk
+# Путь к файлам резервных копий.
+#backup.default.<backupName>.repository.localDisk.path: /var/backups/<iname>
+# Имя корзины S3 для хранения файлов резервных копий.
+#backup.default.<backupName>.repository.s3.bucket:
+# Имя подключения к S3.
+#backup.default.<backupName>.repository.s3.connection: <s3ConnectionName>
+# Описание конфигурации
+#backup.default.<backupName>.description:
+# Периодичность запуска резервного копирования.
+#backup.default.<backupName>.period: 23:00
+# Дни запуска резервного копирования.
+#backup.default.<backupName>.days: [Sunday,  Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
+# Время начала запуска резервного копирования.
+#backup.default.<backupName>.timeFrom: 00:01
+# Время окончания запуска резервного копирования.
+#backup.default.<backupName>.timeUpTo: 23:59
+# Количество резервных копий одновременно хранящихся в системе.
+# Старые будут удалены автоматически.
+#backup.default.<backupName>.keepRecent: 10
+# Управление составом резервной копии — загруженные файлы
+#backup.default.<backupName>.withStreams: true
+# Управление составом резервной копии —  файлы скриптов.
+#backup.default.<backupName>.withScripts: true
+# Управление составом резервной копии — файлы истории ({{ openSearchVariants }}).
+#backup.default.<backupName>.withJournal: true
+
+{% if pdfOutput %}
+```
+{% include-markdown ".snippets/pdfPageBreakHard.md" %}
+
+``` yaml title="Пример YML-файла конфигурации экземпляра ПО — продолжение"
+{% endif %}
+##### Настройка дополнительного хранилища для конфигурации резервного копирования по умолчанию #####
+# Тип хранилища (LocalDisk | S3).
+#backup.default.<backupName>.extraRepository.type: LocalDisk
+# Путь к файлам резервных копий.
+#backup.default.<backupName>.extraRepository.localDisk.path: /var/backups/<instanceName>ExtraRepository
+# Имя корзины S3 для хранения файлов резервных копий.
+#backup.default.<backupName>.extraRepository.s3.bucket:
+# Имя подключения к S3.
+#backup.default.<backupName>.extraRepository.s3.connection: <s3ConnectionName>
+
+##### Настройка резервного копирования данных службы журналирования ({{ openSearchVariants }}) #####
+# Тип хранилища (LocalDisk | S3).
+#backup.journalRepository.type: LocalDisk
+# Путь к файлам резервных копий
+#backup.journalRepository.localDisk.path: /var/backups/<instanceName>
+# Имя корзины S3 для хранения файлов резервных копий.
+#backup.journalRepository.s3.bucket:
+# Имя подключения, настроенного в конфигурации службы журналирования.
+#backup.journalRepository.s3.journalConnection: <s3ConnectionName>
+# Имя подключения к S3, настроенного в этом файле конфигурации экземпляра {{ productName }}.
+#backup.journalRepository.s3.platformConnection: <s3ConnectionName>
+
+##### Конфигурация подключения к хранилищу S3 #####
+# Описание конфигурации.
+#s3.<s3ConnectionName>.description:
+# Адрес подключения к S3.
+#s3.<s3ConnectionName>.endpointURL:
+# Информация учётной записи. Ключ подключения к хранилищу S3
+#s3.<s3ConnectionName>.accessKey:
+# Информация учётной записи. Секретный ключ подключения к хранилищу S3.
+#s3.<s3ConnectionName>.secretKey:
+# Установите значение true, если сервер принимает только запросы path-style вида:
+# https://<s3hostname>/bucket-name/key-name
+#s3.<s3ConnectionName>.pathStyleAccess: true
+
+##### Настройка полнотекстового поиска #####
+# Выключение функции полнотекстового поиска.
+#search.enabled: false
+# Выключение обновления индексов полнотекстового поиска.
+#search.rebuildingEnabled: false
+# Выключение индексирования для полнотекстового поиска.
+#search.indexingEnabled: false
+
+##### Настройка сенсоров мониторинга #####
+# Выключение функции сенсоров мониторинга.
+#sensors.enabled: false
+
+##### Настройка синхронизации аккаунтов с LDAP-сервисом #####
+# Выключение функции синхронизации.
+#sync.ldap.enabled: true
+# Выключение запуска сеансов синхронизации.
+# Выключает выполнение сеансов, но не их настройку.
+#sync.ldap.sessionsEnabled: true
+# Выключение запуска сеансов синхронизации по расписанию.
+#sync.ldap.schedulesEnabled: true
+
+{% if pdfOutput %}
+```
+{% include-markdown ".snippets/pdfPageBreakHard.md" %}
+
+``` yaml title="Пример YML-файла конфигурации экземпляра ПО — продолжение"
+{% endif %}
+##### Настройка синхронизации данных с OData-сервисом #####
+# Выключение интеграции по OData.
+#sync.oData.enabled: false
+# Выключение запуска сеансов синхронизации данных по OData.
+# Выключает выполнение сеансов, но не их настройку.
+#sync.oData.sessionsEnabled: false
+# Выключение запуска сеансов синхронизации данных по OData по расписанию.
+#sync.oData.schedulesEnabled: false
+# Интервал экспорта данных по OData (минуты).
+#sync.oData.exportTimeInterval: 60
+
+##### Настройки трассировки производительности #####
+# Выключение функции трассировки производительности.
+#tracing.enabled: false
+
+##### Настройки электронной почты #####
+# Выключение функции проверки наличия и получения новых писем.
+#email.listenerEnabled: false
+# Выключение функции отправки эл. почты
+#email.senderEnabled: false
+
+##### Настройки уведомлений #####
+# Выключение функции отправки уведомлений.
+#notifications.enabled: false
+# Выключение отправки уведомлений по пользовательским задачам.
+#notifications.onUserTaskEnabled: false
+# Выключение отправки уведомлений об обсуждениях.
+#notifications.pushEnabled: false
+# Выключение отправки уведомлений на страницах обслуживания.
+#notifications.onMaintenanceEnabled: false
+
+##### Настройка бизнес-процессов #####
+# Выключение функции бизнес-процессов
+#bpms.enabled: false
+# Количество потоков выполнения бизнес-процессов
+#bpms.threadsCount: 4
+# Выключение процессных таймеров
+#bpms.timersEnabled: false
+
+##### Настройка использования Docker #####
+# Включение использования в среде Docker
+#isContainerEnvironment: true
+
+##### Настройка обработчика сервис-запросов #####
+# Включение функции обработчика сервис-запросов
+#requestProcessor.enabled: true
+# Список обработчиков сервис-запросов. 
+# Если не указан, включает все доступные на узле  запросы
+# (conversation, useractivity, notification, architect)
+#requestProcessor.services:
+#  - apiPrefix: conversation
+#  - enabled: true
+
+##### Настройка отображения количества строк таблицы на одной странице #####
+# Задайте варианты, которые будут отображаться
+# в меню выбора количества строк таблицы.
+#queryPageResultRange: [ 50, 500, 5000, 1000000000 ]
 ```
 <!--instanceYML-end-->
 
@@ -114,7 +409,7 @@ backup.defaultFileName: Backup
     ```
 
 2. Измените необходимые параметры.
-3. Удостоверьтесь, что значение параметра `cluster.name` (имя экземпляра ПО) совпадает с `clusterName` и значение параметров `mq.server` (адрес и порт сервера очереди сообщений), `mq.group` (идентификатор группы очереди сообщений), `mq.node` (идентификатор узла очереди сообщений) — с аналогичными параметрами в [файле конфигурации экземпляра](#конфигурация-экземпляра-по).
+3. Удостоверьтесь, что значение параметра `cluster.name` (имя экземпляра ПО) совпадает с `clusterName` и значение параметров `mq.server` (адрес и порт сервера очереди сообщений), `mq.group` (идентификатор группы очереди сообщений), `mq.node` (идентификатор узла очереди сообщений) — с аналогичными параметрами в [файле конфигурации экземпляра](#configuration_files_linux_instance).
 4. Сохраните файл конфигурации.
 5. Перезапустите службу `apigateway`:
 
@@ -125,7 +420,7 @@ backup.defaultFileName: Backup
 ### Пример конфигурации службы apigateway.yml {: .pageBreakBefore }
 
 <!--apigatewayYML-start-->
-``` yml
+``` yaml
 # Имя экземпляра ПО
 cluster.name: <instanceName>
 # Имя узла экземпляра
@@ -135,7 +430,7 @@ log.enabled: true
 # Путь к файлу конфигурации журналирования экземпляра
 log.configurationFile: /var/www/<instanceName>/logs.config
 kata.enabled: false
-# Адрес сервера очереди сообщений (Kafka) с портом.
+# Адрес сервера очереди сообщений {{ apacheKafkaVariants }} с портом.
 mq.server: <kafkaBrokerIp>:<kafkaBrokerPort>
 # Идентификатор группы очереди сообщений
 mq.group: <instanceName>
@@ -182,20 +477,20 @@ services:
 5. После внесения изменений перезапустите службу `adapterhost`:
 
     ``` sh
-    kill -9 $(ps -eo pid,args | grep $<instanceName> | grep Agent | awk {'print $1'}) && systemctl restart comindware<instanceName>
+    systemctl restart adapterhost<instanceName>
     ```
 
 ### Пример файла конфигурации adapterhost.yml
 
 <!--adapterhostYML-start-->
-``` yml
+``` yaml
 # Имя экземпляра ПО
 clusterName: <instanceName>
 # Имя папки загрузчика экземпляра ПО
 loaderFolder: <instanceName>
 # Язык сервера (en-US | ru-RU )
 serverLanguage: ru-RU
-# Адрес и порт сервера очереди сообщений (Kafka)
+# Адрес и порт сервера очереди сообщений {{ apacheKafkaVariants }}
 mq.server: <kafkaBrokerIp>:<kafkaBrokerPort>
 # Протокол безопасности очереди сообщений. (Plaintext | Ssl | SaslPlaintext | SaslSsl)
 mq.securityProtocol: Plaintext
@@ -212,9 +507,9 @@ log.archiveFolder: /var/log/comindware/<instanceName>/Logs/Archive/
 ```
 <!--adapterhostYML-end-->
 
-## Конфигурация Apache Ignite {: .pageBreakBefore }
+## Конфигурация {{ apacheIgniteVariants }} {: .pageBreakBefore }
 
-1. Откройте файл конфигурации Ignite для редактирования:
+1. Откройте файл конфигурации {{ apacheIgniteVariants }} для редактирования:
 
     ``` sh
     nano /var/www/<instanceName>/Ignite.config
@@ -277,9 +572,9 @@ log.archiveFolder: /var/log/comindware/<instanceName>/Logs/Archive/
     systemctl restart comindware<instanceName>
     ```
 
-## Конфигурация NGINX {: .pageBreakBefore }
+## Конфигурация {{ nginxVariants }} {: .pageBreakBefore }
 
-1. Откройте файл конфигурации NGINX для редактирования:
+1. Откройте файл конфигурации {{ nginxVariants }} для редактирования:
 
     - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
 
@@ -324,7 +619,7 @@ log.archiveFolder: /var/log/comindware/<instanceName>/Logs/Archive/
     nginx -t
     ```
 
-6. При успешном вступлении изменений в силу перезагрузите NGINX:
+6. При успешном вступлении изменений в силу перезагрузите {{ nginxVariants }}:
 
     ``` sh
     nginx -s reload

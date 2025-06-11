@@ -7,17 +7,17 @@ kbId: 4649
 
 ## Введение
 
-Здесь представлена инструкция по переносу копии кэша всего кластера Apache Ignite (далее «Снимки») в новый экземпляр ПО **{{ productName }}** под управлением ОС Linux. Снимки можно создавать онлайн, на активном кластере под пользовательской нагрузкой.
+Здесь представлена инструкция по переносу копии кэша {{ apacheIgniteVariants }} (далее «Снимки») в новый экземпляр ПО **{{ productName }}** под управлением ОС Linux. Снимки можно создавать онлайн, под пользовательской нагрузкой.
 
 Для примера мы рассмотрим перенос базы данных из снимка, созданного на одной машине, в экземпляр ПО, развёрнутый на другой машине.
 
 На обеих машинах ПО установлено по умолчанию в папке `/var/www/comindware/`
 
-Снимок базы данных Apache Ignite будет создан в папке `/var/lib/comindware/<instanceName>/Database/snapshots/`
+Снимок базы данных {{ apacheIgniteVariants }} будет создан в папке `/var/lib/comindware/<instanceName>/Database/snapshots/`
 
 !!! warning "Внимание!"
 
-    Перенос базы данных можно осуществить только посредством создания снимка Apache Ignite! Не пытайтесь создавать копию базы данных на файловом уровне — это приведёт к утрате её работоспособности.
+    Перенос базы данных можно осуществить только посредством создания снимка {{ apacheIgniteVariants }}! Не пытайтесь создавать копию базы данных на файловом уровне — это приведёт к утрате её работоспособности.
 
 !!! note "Примечание"
 
@@ -50,7 +50,7 @@ kbId: 4649
     <workDirectory>/path/to/WorkDir</workDirectory>
     ```
 
-    _![Путь к рабочей папке в файле конфигурации Apache Ignite](https://kb.comindware.ru/assets/img_63567910ececd.png)_
+    _![Путь к рабочей папке в файле конфигурации {{ apacheIgniteVariants }}](https://kb.comindware.ru/assets/img_63567910ececd.png)_
 
     Если директива `<workDirectory>` имеется, она содержит путь к рабочей папке базы данных экземпляра ПО.
 
@@ -104,14 +104,14 @@ kbId: 4649
 
     _![Запуск скрипта создания снимка](https://kb.comindware.ru/assets/img_63567b113131e.png)_
 
-13. Просмотрите содержимое папки со снимками Apache Ignite:
+13. Просмотрите содержимое папки со снимками {{ apacheIgniteVariants }}:
 {: .pageBreakBefore }
 
     ```
     cd /var/lib/comindware/<instanceName>/Database/snapshots/ && ll 
     ```
 
-    _![Содержимое папки со снимками Apache Ignite](https://kb.comindware.ru/assets/img_63567d1f7a888.png)_
+    _![Содержимое папки со снимками {{ apacheIgniteVariants }}](https://kb.comindware.ru/assets/img_63567d1f7a888.png)_
 
 1.  Создайте архив папки снимка, например, /snapshot\_2022\_10\_21/, и перенесите его на внешнее хранилище.
 
@@ -132,7 +132,7 @@ kbId: 4649
     ```
 
     !!! note "Примечание"
-        Любые операции копирования в папку базы данных экземпляра ПО и из неё следует выполнять только после отключения сервисов Elasticsearch, comindware***<instanceName>*** (где  `<instanceName>` — имя экземпляра ПО), NGINX, Kafka и Zookeeper.
+        Любые операции копирования в папку базы данных экземпляра ПО и из неё следует выполнять только после отключения сервисов {{ openSearchVariants }}, comindware***<instanceName>*** (где  `<instanceName>` — имя экземпляра ПО), {{ nginxVariants }}, Kafka и Zookeeper.
 
 4. Остановите сервисы:
 {: .pageBreakBefore }
@@ -148,7 +148,7 @@ kbId: 4649
 
     ```
 
-    _![Проверка остановки сервисов Elasticsearch, comindware<instanceName>, NGINX, Kafka и Zookeeper](https://kb.comindware.ru/assets/img_63567da91a5c6.png)_
+    _![Проверка остановки сервисов {{ openSearchVariants }}, comindware<instanceName>, {{ nginxVariants }}, Kafka и Zookeeper](https://kb.comindware.ru/assets/img_63567da91a5c6.png)_
 
 6. Скопируйте архив со снимком базы данных экземпляра ПО в папку `/tmp/`.
 7. Распакуйте архив в текущую папку.
@@ -174,7 +174,7 @@ kbId: 4649
     <workDirectory>/var/www/cmw-db</workDirectory>
     ```
 
-    _![Путь к новой папке базы данных в файле конфигурации Apache Ignite](https://kb.comindware.ru/assets/img_63567eabb2a14.png)_
+    _![Путь к новой папке базы данных в файле конфигурации {{ apacheIgniteVariants }}](https://kb.comindware.ru/assets/img_63567eabb2a14.png)_
 
 12. Проверьте наличие, а также дату и время создания файлов и папок в папке с базой данных экземпляра ПО:
 

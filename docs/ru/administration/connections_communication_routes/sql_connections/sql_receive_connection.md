@@ -4,7 +4,7 @@ kbTitle: Внешняя СУБД (MySQL, MSSQL, Oracle, PostgreSQL). Получ�
 kbId: 4705
 ---
 
-# Внешняя SQL-СУБД. Получение данных из по таймеру {: #sql_receive_connection}
+# Внешняя SQL-СУБД. Получение данных по таймеру {: #sql_receive_connection}
 
 ## Введение
 
@@ -48,7 +48,7 @@ kbId: 4705
 
     - В ОС Linux путь к этому файлу можно узнать с помощью следующей команды:
 
-        ``` shell
+        ``` sh
         sudo -u postgres psql -c 'SHOW config_file'
         ```
 
@@ -64,13 +64,13 @@ kbId: 4705
 
     - Разрешите подключение со всех IP адресов:
 
-        ``` shell
+        ``` sh
         listen_addresses = '*'
         ```
 
     - Задайте локаль для вывода сообщений об ошибках:
 
-        ``` shell
+        ``` sh
         lc_messages = 'en_EN.utf-8'
         ```
 
@@ -87,16 +87,18 @@ kbId: 4705
 
     **Linux**
 
-    ``` shell
+    ``` sh
     sudo systemctl restart postgresql
     ```
 
+    {% if not gostech %}
     **Windows**
 
     ``` powershell
     net stop postgresql-x64-<номер_версии>
     net start postgresql-x64-<номер_версии>
     ```
+    {% endif %}
 
 ## Создание подключения к СУБД {: .pageBreakBefore }
 
@@ -117,25 +119,25 @@ kbId: 4705
 
     **MySQL**
 
-    ``` shell
+    ``` sh
     Server=ServerAddress;Database=DataBaseName;Uid=Username;Pwd=Password;
     ```
 
     **MSSQL**
 
-    ``` shell
+    ``` sh
     Server=ServerAddress;Database=DataBaseName;User Id=Username;Pwd=Password;
     ```
 
     **Oracle**
 
-    ``` shell
+    ``` sh
     Data Source=DataBaseName;User Id=Username;Password=Password;Integrated Security=no;
     ```
 
     **PostgreSQL**
 
-    ``` shell
+    ``` sh
     Host=ServerAddress;Database=DataBaseName;User ID=Username;Password=Password;
     ```
 

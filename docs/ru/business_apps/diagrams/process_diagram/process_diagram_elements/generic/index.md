@@ -1,5 +1,6 @@
 ---
 title: Общие элементы диаграммы процесса
+kbTitle: Общие элементы диаграммы процесса. Определение и типы
 kbId: 4750
 tags:
   - диаграммы
@@ -20,17 +21,19 @@ hide:
 
 # Общие элементы диаграммы процесса {: #process_diagram_elements_generic}
 
+<div class="admonition question" markdown="block">
+## Определения {: .admonition-title #definitions}
+
 Общие элементы диаграммы процесса служат для соединения и упорядочивания других элементов диаграммы.
+
+</div>
 
 ## Типы общих элементов
 
-**[Пул][process_diagram_elements_pool]**
-
-**[Дорожка][process_diagram_elements_lane]**
-
-**[Поток управления][process_diagram_elements_sequence_flow]**
-
-**[Комментарий][process_diagram_elements_text_annotation]**
+- **[Пул][process_diagram_elements_pool]**
+- **[Дорожка][process_diagram_elements_lane]**
+- **[Поток управления][process_diagram_elements_sequence_flow]**
+- **[Комментарий][process_diagram_elements_text_annotation]**
 
 <div class="relatedTopics" markdown="block">
 

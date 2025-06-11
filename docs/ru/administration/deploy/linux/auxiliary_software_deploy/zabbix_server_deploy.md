@@ -187,7 +187,7 @@ kbId: 4607
 
     ``` sh
     listen 8080;
-    server_name example.com; # change-me.com
+    server_name <hostname>; # замените на своё имя хоста
     ```
 
 3. Запустите службы *Zabbix Server, Zabbix Agent, Zabbix Frontend* и *NGINX*:
@@ -251,7 +251,7 @@ kbId: 4607
     #       If IPv6 support is enabled then '127.0.0.1', '::127.0.0.1', '::ffff:127.0.0.1' are treated eq>
     #       and '::/0' will allow any IPv4 or IPv6 address.
     #       '0.0.0.0/0' can be used to allow any IPv4 address.
-    #       Example: Server=127.0.0.1,192.168.1.0/24,::1,2001:db8::/32,zabbix.example.com
+    #       Example: Server=127.0.0.1,192.168.1.0/24,::1,2001:db8::/32,zabbix.<hostname>
     #
     # Mandatory: yes, if StartAgents is not explicitly set to 0
     # Default:

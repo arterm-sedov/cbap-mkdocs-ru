@@ -1,11 +1,11 @@
 ---
-title: Установка и настройка Apache Ignite. Краткое руководство для Windows
+title: Установка и настройка {{ apacheIgniteVariants }}. Краткое руководство для Windows
 kbId: 4616
 ---
 
 # Установка и настройка Apache Ignite. Краткое руководство для Windows
 
---8<-- "experimental_feature.md"
+{% include-markdown ".snippets/experimental_feature.md" %}
 
 ## Введение
 

@@ -1,0 +1,98 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4619" kb-tags="" kb-title="Максимальный размер загружаемых файлов. Настройка для экземпляра ПО">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#расположение-загруженных-файлов">
+<span class="md-ellipsis">
+      Расположение загруженных файлов
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-лимита-на-объем-загружаемых-файлов">
+<span class="md-ellipsis">
+      Настройка лимита на объем загружаемых файлов
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Здесь представлены инструкции по настройке максимально допустимого размера загружаемых файлов для экземпляра ПО <strong>Comindware Platform</strong>.</p>
+<p>К загружаемым файлам относятся документы и изображения, прикреплённые к атрибутам типов «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4782"><strong>Документ</strong></a>», «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4771"><strong>Изображение</strong></a>» и «<strong>Чертёж</strong>», изображения загруженные на страницах «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4708"><strong>Темы</strong></a>» и «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4707"><strong>Дизайн страниц входа и регистрации</strong></a>», а также  <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4653">изображения <strong>аккаунтов</strong></a>.</p>
+<h2 id="расположение-загруженных-файлов">Расположение загруженных файлов</h2>
+<p>По умолчанию файлы, загружаемые конечными пользователями и формируемые автоматически, хранятся внутри контейнера в следующей директории:
+<code>/var/lib/comindware/&lt;instanceName&gt;/Streams</code></p>
+<p>Здесь и далее <code>&lt;instanceName&gt;</code> — имя экземпляра ПО.</p>
+<p>Подробные сведения о расположении загружаемых файлов см. в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое папок экземпляра ПО</a>».</em></p>
+<h2 class="pageBreakBefore" id="настройка-лимита-на-объем-загружаемых-файлов">Настройка лимита на объем загружаемых файлов</h2>
+<p>При развёртывании экземпляра ПО в конфигурации экземпляра ПО и конфигурации сервера NGINX по умолчанию устанавливается максимальный размер передаваемых данных в форме.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Логика работы лимита</p>
+<ul>
+<li>Лимит на размер файла задаётся в файле конфигурации <code>values.yaml</code> Helm-чарта:</li>
+<li>Если, например, установлен лимит в 300 МБ:<ul>
+<li>На форме имеется три поля типа «<strong>Документ</strong>» и несколько полей любых типов.<ul>
+<li>К каждому полю типа «<strong>Документ</strong>» можно прикрепить файл объёмом 99 МБ (то есть три файла суммарным размером 297 МБ) и ввести в другие поля формы ещё 3 МБ данных.</li>
+<li>Можно прикрепить к одному полю типа «<strong>Документ</strong>» файл объёмом 299 МБ и ввести в другие поля формы ещё 1 МБ данных.</li>
+<li>Можно прикрепить к одному полю типа «<strong>Документ</strong>» файл объёмом 300 МБ.</li>
+<li>Нельзя прикрепить к полям типа «<strong>Документ</strong>» три файла по 110 МБ.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<ol class="colored_numbers_list">
+<li>
+<p>Перед тем как развёртывать <strong>Comindware Platform</strong> измените в конфигурационном файле <code>values.yaml</code> Helm-чарта следующую директиву:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nn">...</span></code> <br/><code><span class="c1"># Максимальный размер загружаемого файла в мегабайтах</span></code> <br/><code><span class="nt">client_max_body_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xxxxx</span></code> <br/><code><span class="nn">...</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Сохраните файл конфигурации.</p>
+</li>
+<li>Разверните экземпляр ПО. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622">Установка и инициализация ПО</a>»</em>.</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое папок экземпляра ПО</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622">Установка и инициализация ПО</a></em></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

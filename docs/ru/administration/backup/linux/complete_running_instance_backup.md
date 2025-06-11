@@ -12,7 +12,7 @@ kbId: 4650
 
 Для создания полной резервной копии базы данных в ОС Linux необходимо с помощью терминала выполнить следующие действия:
 
-- создать снимки состояния памяти Apache Ignite и Elasticsearch;
+- создать снимки состояния памяти {{ apacheIgniteVariants }} и {{ openSearchVariants }};
 - скопировать содержимое папок со скриптами и вложенными файлами.
 
 Сведения о последующем восстановлении данных см. в статье *«[Восстановление базы данных, вложенных файлов и журналов из полной резервной копии][restore_complete_backup]»*.
@@ -21,25 +21,25 @@ kbId: 4650
 
 Для создания резервной копии соберите перечисленные ниже данные об экземпляре ПО.
 
-1. Имя экземпляра ПО: `<instanceName>`. Можно получить в ответе на запрос localhost:9200/\_cat/indices, например `cmw_cmw-study`, как показано на следующей иллюстрации.
+1. Имя экземпляра ПО: `<instanceName>`. Можно получить в ответе на запрос `<openSearchHost>:<opeSearchPort>/_cat/indices`, например `cmw_cmw-study`, как показано на следующей иллюстрации.
 
     _![Определение имени экземпляра ПО](https://kb.comindware.ru/assets/Pasted%20image%2020221229181253.png)_
 
 2. Директория с базой данных экземпляра ПО: `/var/lib/comindware/<instanceName>/Database`. Может быть задана другая директория с помощью директивы `<workDirectory>` в файле конфигурации `/var/www/comindware/Ignite.config`. Если в файле конфигурации директива `<workDirectory>` не содержит директории, используется директория по умолчанию.
-3. Путь для сохранения снимков базы данных Apache Ignite, по умолчанию: `/var/lib/comindware/<instanceName>/Database/snapshots/`
-4. Имя репозитория Elasticsearch, заданное при его регистрации, например: `elastic_search_repo_name`
-5. Путь для сохранения резервных копий Elasticsearch:
+3. Путь для сохранения снимков базы данных {{ apacheIgniteVariants }}, по умолчанию: `/var/lib/comindware/<instanceName>/Database/snapshots/`
+4. Имя репозитория {{ openSearchVariants }}, заданное при его регистрации, например: `elastic_search_repo_name`
+5. Путь для сохранения резервных копий {{ openSearchVariants }}:
 
     - например, `/var/www/backups/elasticsearch`
     - должен быть указан в директиве `path.repo` в файле `/etc/elasticsearch/elasticsearch.yml`
     - должен ссылаться на существующий диск;
     - должен находиться на отдельном диске, отдельно от базы данных.
 
-    _![Определение пути для резервных копий Elasticsearch](https://kb.comindware.ru/assets/Pasted%20image%2020221229181640.png)_
+    _![Определение пути для резервных копий {{ openSearchVariants }}](https://kb.comindware.ru/assets/Pasted%20image%2020221229181640.png)_
 
 6. Имя снимка, заданное администратором, например, в формате `<instanceName><Date><Time>`
 
-## Установка и настройка исполняемых скриптов Apache Ignite {: .pageBreakBefore }
+## Установка и настройка исполняемых скриптов {{ apacheIgniteVariants }} {: .pageBreakBefore }
 
 1. Для установки исполняемых скриптов перейдите в режим суперпользователя `root`:
 
@@ -79,7 +79,7 @@ kbId: 4650
     unzip /tmp/apache-ignite-2.16.0-bin.zip -d /var/www
     ```
 
-6. Переименуйте получившуюся директорию со скриптами `Apache Ignite` в `apache-ignite`:
+6. Переименуйте получившуюся директорию со скриптами `{{ apacheIgniteVariants }}` в `apache-ignite`:
 
     ``` sh
     mv /var/www/apache-ignite-2.16.0-bin /var/www/apache-ignite
@@ -119,7 +119,7 @@ kbId: 4650
     mkdir /var/www/backups/
     ```
 
-11. Создайте директорию репозитория Elasticsearch:
+11. Создайте директорию репозитория {{ openSearchVariants }}:
 
     ``` sh
     mkdir /var/www/backups/elasticsearch
@@ -150,7 +150,7 @@ kbId: 4650
 
 !!! note "Примечание"
 
-    При создании снимка после перезагрузки машины необходимо убедиться в том, что экземпляр ПО запущен и Apache Ignite работает. Для этого достаточно в браузере открыть веб-сайт с экземпляром ПО.
+    При создании снимка после перезагрузки машины необходимо убедиться в том, что экземпляр ПО запущен и {{ apacheIgniteVariants }} работает. Для этого достаточно в браузере открыть веб-сайт с экземпляром ПО.
 
 1. Задайте переменную `now`:
 
@@ -158,23 +158,23 @@ kbId: 4650
     now=$(date  %Y_%m_%d_%H_%M)
     ```
 
-2. Проверьте окружение и создайте снимок состояния Apache Ignite:
+2. Проверьте окружение и создайте снимок состояния {{ apacheIgniteVariants }}:
 
     ``` sh
     bash /var/www/apache-ignite/bin/control.sh --baseline
     bash /var/www/apache-ignite/bin/control.sh --snapshot create snapshot_name_$now --sync
     ```
 
-3. Зарегистрируйте репозиторий Elasticsearch. Вместо `elasticsearch_repo_name` и `/var/www/backups/elasticsearch` подставьте своё имя репозитория и путь к его папке:
+3. Зарегистрируйте репозиторий {{ openSearchVariants }}. Вместо `elasticsearch_repo_name` и `/var/www/backups/elasticsearch` подставьте своё имя репозитория и путь к его папке:
 
     ``` sh
-    curl -X PUT "localhost:9200/_snapshot/elasticsearch_repo_name?pretty" -H ’Content-Type: application/json’ -d’ {"type": "fs", "settings": {"location": "/var/www/backups/elasticsearch"}}’
+    curl -X PUT "<openSearchHost>:<opeSearchPort>/_snapshot/elasticsearch_repo_name?pretty" -H 'Content-Type: application/json' -d '{"type": "fs", "settings": {"location": "/var/www/backups/elasticsearch"}}'
     ```
 
-4. Создайте снимок состояния Elasticsearch, заменив ***`elasticsearch_repo_name`**,** `snapshot_name`* и `prefix_name`(префикс индекса, указанный в конфигурации экземпляра ПО) на свои значения:
+4. Создайте снимок состояния {{ openSearchVariants }}, заменив ***`elasticsearch_repo_name`**,** `snapshot_name`* и `prefix_name`(префикс индекса, указанный в конфигурации экземпляра ПО) на свои значения:
 
     ``` sh
-    curl -X PUT "localhost:9200/_snapshot/elasticsearch_repo_name/snapshot_name_$now?wait_for_completion=true&pretty" -H ’Content-Type: application/json’ -d’ {"indices": "cmw_prefix_name*", "ignore_unavailable": true, "include_global_state": false}’
+    curl -X PUT "<openSearchHost>:<opeSearchPort>/_snapshot/elasticsearch_repo_name/snapshot_name_$now?wait_for_completion=true&pretty" -H 'Content-Type: application/json' -d '{"indices": "cmw_prefix_name*", "ignore_unavailable": true, "include_global_state": false}'
     ```
 
 5. Создайте директории для хранения компонентов резервной копии:

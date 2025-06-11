@@ -1,0 +1,368 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="" kb-tags="" kb-title="Аутентификация через OpenID Connect">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#проверка-адреса-сервера-comindware-platform">
+<span class="md-ellipsis">
+      Проверка адреса сервера Comindware Platform
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-api-и-служб-google-cloud--этап-1">
+<span class="md-ellipsis">
+      Настройка API и служб Google Cloud — этап 1
+    </span>
+</a>
+<nav aria-label="Настройка API и служб Google Cloud — этап 1" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-страницы-согласия-oauth">
+<span class="md-ellipsis">
+      Настройка страницы согласия OAuth
+    </span>
+</a>
+<nav aria-label="Настройка страницы согласия OAuth" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-сведений-о-приложении">
+<span class="md-ellipsis">
+      Настройка сведений о приложении
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-запрашиваемых-разрешений-для-приложения">
+<span class="md-ellipsis">
+      Настройка запрашиваемых разрешений для приложения
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-учётных-данных-клиента-oauth">
+<span class="md-ellipsis">
+      Настройка учётных данных клиента OAuth
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-подключения-в-comindware-platform">
+<span class="md-ellipsis">
+      Настройка подключения в Comindware Platform
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-api-и-служб-google-cloud--этап-2">
+<span class="md-ellipsis">
+      Настройка API и служб Google Cloud — этап 2
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-реестра-windows-для-включения-аутентификации-через-openid-connect-в-comindware-platform">
+<span class="md-ellipsis">
+      Настройка реестра Windows для включения аутентификации через OpenID Connect в Comindware Platform
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-ос-linux-для-включения-аутентификации-через-openid-connect-в-comindware-platform">
+<span class="md-ellipsis">
+      Настройка ОС Linux для включения аутентификации через OpenID Connect в Comindware Platform
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#вход-в-comindware-platform">
+<span class="md-ellipsis">
+      Вход в Comindware Platform
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="проверка-адреса-сервера-comindware-platform">Проверка адреса сервера Comindware Platform</h2>
+<ol class="colored_numbers_list">
+<li>Откройте раздел <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4661">«<strong>Администрирование</strong>» — «<strong>Глобальная конфигурация</strong>»</a>.</li>
+<li>
+<p>Удостоверьтесь, что <strong>URL-адрес сервера</strong> начинается с <code>https://</code>.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Проверка адреса сервера" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_check.png"/><figcaption class="caption">Проверка адреса сервера</figcaption></figure></p>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="настройка-api-и-служб-google-cloud--этап-1">Настройка API и служб Google Cloud — этап 1</h2>
+<ol class="colored_numbers_list">
+<li>Откройте веб-сайт <a class="mkdocs_imported_link" href="https://console.developers.google.com/">https://console.developers.google.com/</a></li>
+<li>Если проекты отсутствуют, нажмите кнопку «<strong>Create project</strong>».</li>
+<li>
+<p>Если имеются проекты, нажмите кнопку «<strong>Select a project</strong>» и в отобразившемся окне нажмите кнопку «<strong>New project</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Создание проекта" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_project_creation.png"/><figcaption class="caption">Создание проекта</figcaption></figure></p>
+</li>
+<li>
+<p>Отобразится страница «<strong>New project</strong>».</p>
+</li>
+<li>Введите «<strong>Project name</strong>», например <em>Client ID</em>.</li>
+<li>
+<p>Нажмите кнопку «<strong>Create</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Страница свойств нового проекта" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_project_properties.png"/><figcaption class="caption">Страница свойств нового проекта</figcaption></figure></p>
+</li>
+<li>
+<p>На отобразившейся странице нажмите кнопку «<strong>Enable APIs and services</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Включение API и служб" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_api_switch_on.png"/><figcaption class="caption">Включение API и служб</figcaption></figure></p>
+</li>
+<li>
+<p>В поле «<strong>Search for APIs &amp; Services</strong>» найдите <strong>Site Verification API</strong>.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Поиск Site Verification API" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_api_search.png"/><figcaption class="caption">Поиск Site Verification API</figcaption></figure></p>
+</li>
+<li>
+<p>Перейдите к разделу «<strong>Site Verification API</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Переход к разделу Site Verification API" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_api_verification.png"/><figcaption class="caption">Переход к разделу Site Verification API</figcaption></figure></p>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Enable</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Включение Site Verification API" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_api_verification_enabled.png"/><figcaption class="caption">Включение Site Verification API</figcaption></figure></p>
+</li>
+</ol>
+<h3 class="pageBreakBefore" id="настройка-страницы-согласия-oauth">Настройка страницы согласия OAuth</h3>
+<ol class="colored_numbers_list">
+<li>В меню слева выберите пункт «<strong>OAuth consent screen</strong>».</li>
+<li>
+<p>В разделе «<strong>User type</strong>» выберите «<strong>External</strong>» и нажмите кнопку «<strong>Create</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка страницы согласия OAuth — тип пользователя" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_oath_user_type.png"/><figcaption class="caption">Настройка страницы согласия OAuth — тип пользователя</figcaption></figure></p>
+</li>
+</ol>
+<h4 class="pageBreakBefore" id="настройка-сведений-о-приложении">Настройка сведений о приложении</h4>
+<ol class="colored_numbers_list">
+<li>
+<p>Заполните обязательные поля разделе «<strong>App information</strong>»:</p>
+<ul>
+<li>в поле «<strong>App name</strong>» укажите, например «<em>Сайт Mycompany.ru»;</em></li>
+<li>в поле «<strong>User support email</strong>» укажите, например, свой адрес эл. почты.</li>
+</ul>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка страницы согласия OAuth — название приложения и адрес службы поддержки" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_oath_new_app.png"/><figcaption class="caption">Настройка страницы согласия OAuth — название приложения и адрес службы поддержки</figcaption></figure></p>
+</li>
+<li>
+<p>В разделе «<strong>App domain</strong>» в поле «<strong>Application home page</strong>» введите <a class="mkdocs_imported_link" href="#проверка-адреса-сервера-comindware-platform">адрес сервера</a>, указанный в глобальной конфигурации Comindware Platform, например <a class="mkdocs_imported_link" href="https://mycompany.ru/">https://mycompany.ru</a></p>
+</li>
+<li>В разделе «<strong>Authorized domains</strong>» нажмите кнопку «<strong>Add domain</strong>» и введите в поле «<strong>Authorized domain 1</strong>» доменное имя сервера без префикса <code>https://</code>, например <em>mycompany.ru</em></li>
+<li class="pageBreakAfter">В разделе «<strong>Developer contact information</strong>» в поле «<strong>Email addresses</strong>» введите, например, свой адрес эл. почты.</li>
+<li>
+<p>Нажмите кнопку «<strong>Save and continue</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка страницы согласия OAuth — главная страница приложения, домен, контактная информация разработчика" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_oath_agreement.png"/><figcaption class="caption">Настройка страницы согласия OAuth — главная страница приложения, домен, контактная информация разработчика</figcaption></figure></p>
+</li>
+</ol>
+<h4 class="pageBreakBefore" id="настройка-запрашиваемых-разрешений-для-приложения">Настройка запрашиваемых разрешений для приложения</h4>
+<ol class="colored_numbers_list">
+<li>На странице «<strong>Scopes</strong>» нажмите кнопку «<strong>Add or remove scopes</strong>».</li>
+<li>
+<p>В открывшейся форме установите три первых флажка и нажмите кнопку «<strong>Update</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка страницы согласия OAuth — добавление разрешений для приложения" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_oath_permission.png"/><figcaption class="caption">Настройка страницы согласия OAuth — добавление разрешений для приложения</figcaption></figure></p>
+</li>
+<li>
+<p>В нижней части страницы «<strong>Scopes</strong>» нажмите кнопку «<strong>Save and continue</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка страницы согласия OAuth — сохранение настроенных разрешений" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_oath_permission_saving.png"/><figcaption class="caption">Настройка страницы согласия OAuth — сохранение настроенных разрешений</figcaption></figure></p>
+</li>
+<li>
+<p>На странице «<strong>Test users</strong>» кнопку «<strong>Save and continue</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка страницы согласия OAuth — пропуск теста пользователей" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_oath_user_test.png"/><figcaption class="caption">Настройка страницы согласия OAuth — пропуск теста пользователей</figcaption></figure></p>
+</li>
+<li>
+<p>На странице «<strong>Summary</strong>» проверьте сведения и нажмите кнопку «<strong>Back to dashboard</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка страницы согласия OAuth — проверка введенных сведений" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_oath_check.png"/><figcaption class="caption">Настройка страницы согласия OAuth — проверка введенных сведений</figcaption></figure></p>
+</li>
+<li>
+<p>На открывшейся странице в разделе «<strong>Publishing status</strong>» нажмите кнопку «<strong>Publish app</strong>».</p>
+</li>
+<li>
+<p class="pageBreakBefore">В окне подтверждения нажмите кнопку «<strong>Confirm</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка страницы согласия OAuth — публикация приложения" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_oath_app_publication.png"/><figcaption class="caption">Настройка страницы согласия OAuth — публикация приложения</figcaption></figure></p>
+</li>
+<li>
+<p>Статус публикации изменится на «<strong>In production</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка страницы согласия OAuth — статус опубликованного приложения" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_oath_app_status.png"/><figcaption class="caption">Настройка страницы согласия OAuth — статус опубликованного приложения</figcaption></figure></p>
+</li>
+</ol>
+<h3 class="pageBreakBefore" id="настройка-учётных-данных-клиента-oauth">Настройка учётных данных клиента OAuth</h3>
+<ol class="colored_numbers_list">
+<li>В левой панели выберите пункт «<strong>Credentials</strong>».</li>
+<li>На странице «<strong>Credentials</strong>» нажмите кнопку «<strong>Create credentials</strong>».</li>
+<li>
+<p>В раскрывающемся меню выберите пункт «<strong>OAuth client ID</strong>»</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Переход к созданию клиента OAuth" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_oath_client_creation.png"/><figcaption class="caption">Переход к созданию клиента OAuth</figcaption></figure></p>
+</li>
+<li>
+<p>В поле «<strong>Application type</strong>» выберите пункт «<strong>Web application</strong>».</p>
+</li>
+<li>В поле «Name» введите имя клиента, например «<em>OAuth client 1</em>».</li>
+<li>В разделе «<strong>Authorized JavaScript origins</strong>» нажмите кнопку «<strong>Add URI</strong>».</li>
+<li>Введите <a class="mkdocs_imported_link" href="#проверка-адреса-сервера-comindware-platform">адрес сервера</a>, указанный в глобальной конфигурации Comindware Platform, например <a class="mkdocs_imported_link" href="https://mycompany.ru/">https://mycompany.ru</a></li>
+<li>
+<p>Нажмите кнопку «<strong>Create</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка и сохранение учётных данных клиента OAuth" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_oath_client_settings.png"/><figcaption class="caption">Настройка и сохранение учётных данных клиента OAuth</figcaption></figure></p>
+</li>
+<li>
+<p>Отобразится окно с учётными данными созданного клиента OAuth.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Созданный клиент OAuth" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_oath_new_client.png"/><figcaption class="caption">Созданный клиент OAuth</figcaption></figure></p>
+</li>
+<li>
+<p>Не закрывайте эту вкладку в браузере, чтобы использовать данные с неё на последующих шагах.</p>
+</li>
+<li>
+<p>Чтобы впоследствии посмотреть «<strong>Client ID</strong>» и «<strong>Client Secret</strong>», нажмите гиперссылку с названием клиента в таблице «<strong>OAuth 2.0 Client IDs</strong>» в разделе «<strong>Credentials</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Таблица учётных данных клиентов OAuth" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_oath_client_table.png"/><figcaption class="caption">Таблица учётных данных клиентов OAuth</figcaption></figure></p>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="настройка-подключения-в-comindware-platform">Настройка подключения в Comindware Platform</h2>
+<ol class="colored_numbers_list">
+<li>Перейдите в раздел «<strong>Администрирование</strong>» — «<strong>Подключения</strong>».</li>
+<li>Нажмите кнопку «<strong>Cоздать</strong>».</li>
+<li>
+<p>В раскрывающемся меню выберите пункт «<strong>Аутентификация через OpenID Connect</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Создание подключения для аутентификации через OpenID Connect" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_creation.png"/><figcaption class="caption">Создание подключения для аутентификации через OpenID Connect</figcaption></figure></p>
+</li>
+<li>
+<p>Откроется окно «<strong>Новое подключение</strong>».</p>
+</li>
+<li>В поле «<strong>Название</strong>» введите название подключения, например «<em>Client ID</em>».</li>
+<li>В поле «<strong>Поставщик удостоверений</strong>» выберите пункт «<strong>Google</strong>».</li>
+<li>В поле «<strong>ID клиента</strong>» вставьте <strong>Client ID</strong>, скопированный из Google Cloud.</li>
+<li>В поле «<strong>Ключ клиента</strong>» вставьте <strong>Client secret</strong>, скопированный из Google Cloud.</li>
+<li>В поле «<strong>Домены электронной почты</strong>» оставьте домен <em>gmail.com</em>.</li>
+<li>В поле «<strong>Группа</strong>» выбирать группу необязательно.</li>
+<li>Поле «<strong>Адрес перенаправления после входа</strong>» будет заполнено автоматически после создания подключения.</li>
+<li>
+<p>Нажмите кнопку «<strong>Создать</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка нового подключения для аутентификации через OpenID Connect" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_settings.png"/><figcaption class="caption">Настройка нового подключения для аутентификации через OpenID Connect</figcaption></figure></p>
+</li>
+<li>
+<p>Откройте созданное подключение.</p>
+</li>
+<li>Скопируйте в буфер обмена <strong>адрес перенаправления после входа</strong>.</li>
+<li>
+<p>Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<p><img alt="Сформированный адрес перенаправления после входа" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_redirect_address.png"/></p>
+</li>
+<li>
+<p>Откройте страницу «<strong>Администрирование</strong>» – «<strong>Регистрация и вход</strong>».</p>
+</li>
+<li>
+<p>Активируйте выключатель «<strong>Разрешить вход</strong>» на плитке «<strong>Google OpenID Connect</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Включение входа через Google OpenID Connect" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_google.png"/><figcaption class="caption">Включение входа через Google OpenID Connect</figcaption></figure></p>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Сохранить</strong>».</p>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="настройка-api-и-служб-google-cloud--этап-2">Настройка API и служб Google Cloud — этап 2</h2>
+<ol class="colored_numbers_list">
+<li>Откройте веб-сайт Google Cloud <a class="mkdocs_imported_link" href="https://console.developers.google.com/">https://console.developers.google.com/</a></li>
+<li>В левой панели выберите пункт «<strong>Credentials</strong>».</li>
+<li>Откройте параметры созданного ранее клиента <em>OAuth Client 1</em>, нажав гиперссылку с его названием в таблице «<strong>OAuth 2.0 Client IDs</strong>».</li>
+<li>В разделе «<strong>Authorized redirect URIs</strong>» нажмите кнопку «<strong>Add URI</strong>».</li>
+<li>В поле «<strong>URIs 1</strong>» введите ранее скопированный <strong>адрес перенаправления после входа</strong> включая префикс <code>https://</code>.</li>
+<li>
+<p>Нажмите кнопку «<strong>Save</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Добавление авторизованного адреса перенаправления после входа в клиент OAuth в Google Cloud" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_google_cloud.png"/><figcaption class="caption">Добавление авторизованного адреса перенаправления после входа в клиент OAuth в Google Cloud</figcaption></figure></p>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="настройка-реестра-windows-для-включения-аутентификации-через-openid-connect-в-comindware-platform">Настройка реестра Windows для включения аутентификации через OpenID Connect в Comindware Platform</h2>
+<ol class="colored_numbers_list">
+<li>Запустите редактор реестра Windows: <code>regedit.exe</code>.</li>
+<li>Откройте раздел реестра <code>Computer -&gt; HKEY_LOCAL_MACHINE -&gt; SOWTWARE-&gt;Сomindware -&gt; Instances -&gt; имя_экземпляра_Comindware_Platform</code>.</li>
+<li>Дважды щёлкните параметр <code>IsFederationAuthEnabled</code>.</li>
+<li>Если значение этого параметра <strong>0</strong>, измените его на <strong>1</strong>.</li>
+<li>
+<p>Нажмите кнопку «<strong>OK</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Включение федеративной аутентификации для экземпляра Comindware Platform с помощью реестра Windows" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_windows.png"/><figcaption class="caption">Включение федеративной аутентификации для экземпляра Comindware Platform с помощью реестра Windows</figcaption></figure></p>
+</li>
+<li>
+<p>В командной строке от администратора выполните команду: <code>iisreset /restart</code></p>
+</li>
+<li>
+<p>Дождитесь перезапуска служб IIS.</p>
+<p><img alt="Перезапуск IIS с помощью командной строки" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_iis_reconnect.png"/></p>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="настройка-ос-linux-для-включения-аутентификации-через-openid-connect-в-comindware-platform">Настройка ОС Linux для включения аутентификации через OpenID Connect в Comindware Platform</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите в режим суперпользователя <code>root</code>:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>-s</code> <br/></pre></code></div>
+<p>или</p>
+<div class="highlight"><code><pre><span></span><code>su<span class="w"> </span>-</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Добавьте в файл <code>/etc/hosts</code> строку:</p>
+<div class="highlight"><code><pre><span></span><code>"xxx.xxx.xxx.xxx" "mycompany.ru"</code> <br/></pre></code></div>
+<p>Здесь <code>xxx.xxx.xxx.xxx</code> — IP-адрес, <code>mycompany.ru</code> адрес сервера <strong>Comindware Platform</strong>, указанный в <a class="mkdocs_imported_link" href="#проверка-адреса-сервера-comindware-platform"><em>глобальной конфигурации Comindware Platform</em></a> (без указания протокола <code>HTTP</code> или <code>HTTPS</code>).</p>
+</li>
+<li>
+<p>Сформируйте SSL-сертификат на сервере NGINX. Например, согласно инструкциям в статье «<a class="mkdocs_imported_link" href="https://webguard.pro/web-services/nginx/generacziya-ssl-sertifikata-dlya-nginx-openssl.html"><em>Генерация SSL сертификата для NGINX (openssl)</em></a>».</p>
+</li>
+<li>
+<p>Откройте для редактирования файл конфигурации NGINX:</p>
+<div class="highlight"><code><pre><span></span><code>vim /etc/nginx/sites-available/comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Настройте конфигурацию SSL-сертификата аналогично следующему примеру:</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">server</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="n">listen</span><span class="w"> </span><span class="mi">80</span><span class="w"> </span><span class="k">default</span><span class="p">;</span></code> <br/><code><span class="w">    </span><span class="n">listen</span><span class="w"> </span><span class="mi">443</span><span class="w"> </span><span class="n">ssl</span><span class="p">;</span></code> <br/><code></code> <br/><code><span class="w">    </span><span class="n">root</span><span class="w"> </span><span class="o">/</span><span class="kt">var</span><span class="o">/</span><span class="n">www</span><span class="o">/&lt;</span><span class="n">instanceName</span><span class="o">&gt;</span><span class="p">;</span></code> <br/><code><span class="w">    </span><span class="n">server_name</span><span class="w"> </span><span class="n">mycompany</span><span class="p">.</span><span class="n">ru</span><span class="p">;</span></code> <br/><code></code> <br/><code><span class="w">    </span><span class="n">ssl_certificate</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">ssl</span><span class="o">/</span><span class="n">nginx</span><span class="p">.</span><span class="n">crt</span><span class="p">;</span></code> <br/><code><span class="w">    </span><span class="n">ssl_certificate_key</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">ssl</span><span class="o">/</span><span class="n">nginx</span><span class="p">.</span><span class="n">key</span><span class="p">;</span></code> <br/><code></code> <br/><code><span class="w">    </span><span class="n">client_max_body_size</span><span class="w"> </span><span class="mf">300m</span><span class="p">;</span></code> <br/><code><span class="w">    </span><span class="n">fastcgi_read_timeout</span><span class="w"> </span><span class="mi">10000</span><span class="p">;</span></code> <br/><code><span class="w">    </span><span class="n">location</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="n">proxy_read_timeout</span><span class="w"> </span><span class="mi">10000</span><span class="p">;</span></code> <br/><code><span class="w">                    </span><span class="n">proxy_connect_timeout</span><span class="w"> </span><span class="mi">10000</span><span class="p">;</span></code> <br/><code><span class="w">                    </span><span class="n">proxy_send_timeout</span><span class="w"> </span><span class="mi">10000</span><span class="p">;</span></code> <br/><code><span class="w">                    </span><span class="n">root</span><span class="w">          </span><span class="o">/</span><span class="kt">var</span><span class="o">/</span><span class="n">www</span><span class="o">/&lt;</span><span class="n">instanceName</span><span class="o">&gt;/</span><span class="p">;</span></code> <br/><code><span class="w">                    </span><span class="n">fastcgi_pass</span><span class="w">  </span><span class="n">unix</span><span class="p">:</span><span class="o">/</span><span class="kt">var</span><span class="o">/</span><span class="n">www</span><span class="o">/&lt;</span><span class="n">instanceName</span><span class="o">&gt;/</span><span class="n">App_Data</span><span class="o">/</span><span class="n">comindware</span><span class="p">.</span><span class="n">socket</span><span class="p">;</span></code> <br/><code><span class="w">                    </span><span class="n">include</span><span class="w">       </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">fastcgi</span><span class="p">.</span><span class="n">conf</span></code> <br/><code><span class="w">                    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Проверьте конфигурацию NGINX:</p>
+<div class="highlight"><code><pre><span></span><code>nginx -t</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Перезапустите <strong>Comindware Platform</strong>:</p>
+<div class="highlight"><code><pre><span></span><code>systemctl restart elasticsearch nginx comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="вход-в-comindware-platform">Вход в Comindware Platform</h2>
+<ol class="colored_numbers_list">
+<li>Откройте веб-сайт экземпляра Comindware Platform, например <a class="mkdocs_imported_link" href="https://mycompany.ru/">https://mycompany.ru</a></li>
+<li>
+<p>Нажмите кнопку «<strong>Войти как администратор</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Переход к странице входа администратора" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_administrator_entry.png"/><figcaption class="caption">Переход к странице входа администратора</figcaption></figure></p>
+</li>
+<li>
+<p>Введите свои учётные данные и нажмите кнопку «<strong>Войти</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Вход с аккаунтом администратора" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_administrator.png"/><figcaption class="caption">Вход с аккаунтом администратора</figcaption></figure></p>
+</li>
+<li>
+<p>Выйдите из системы.</p>
+</li>
+<li>
+<p>Отобразится страница входа с кнопкой «<strong>Войти с помощью Google</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Кнопка «Войти с помощью Google»" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_google_entry.png"/><figcaption class="caption">Кнопка «Войти с помощью Google»</figcaption></figure></p>
+</li>
+<li>
+<p>На этом настройка входа через OpenID Connect завершена. Теперь пользователи смогут входить в <strong>Comindware Platform</strong> с помощью своих аккаунтов Google.</p>
+</li>
+</ol>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

@@ -1,5 +1,6 @@
 ---
-title: Установка Apache Kafka в Windows
+title: 'Установка Apache Kafka в Windows'
+kbTitle: 'Установка Apache Kafka в ОС Windows и подключение к Comindware Platform'
 kbId: 4614
 tags:
     - установка Kafka
@@ -12,7 +13,7 @@ hide:
     - tags
 ---
 
-# Установка Apache Kafka В ОС Windows и подключение к {{ productName }}
+# Установка Apache Kafka в ОС Windows и подключение к {{ productName }} {: #kafka_deploy_windows }
 
 ## Введение
 
@@ -49,7 +50,7 @@ hide:
         Рекомендуется создавать папку для журналов на отдельном диске, а не на диске где установлено ПО Kafka.
 
 4. Откройте файл конфигурации Kafka `C:\kafka\config\kraft\server.properties`.
-5. Отредактируйте файл конфигурации, указав IP-адрес сервера Kafka, папку для журналов и размеры сообщений.
+5. Отредактируйте файл конфигурации, указав IP-адрес сервера {{ apacheKafkaVariants }}, папку для журналов и размеры сообщений.
 
     !!! warning "Внимание!"
 
@@ -135,7 +136,7 @@ hide:
 
 2. Задайте параметры подключения к Kafka в файле `<instanceName>.yml` (`<instanceName>` — имя экземпляра ПО):
 
-    ``` yml
+    ``` yaml
     # IP-адрес сервера Kafka
     mq.server: <KafkaIP>:9092
     # Имя экземпляра ПО
@@ -160,7 +161,7 @@ hide:
 
 4. Задайте параметры подключения к Kafka в файле `apigateway.yml`:
 
-    ``` yml
+    ``` yaml
     # Укажите IP-адрес сервера Kafka
     mq.server: <KafkaIP>:9092
     # Укажите имя экземпляра ПО
@@ -171,7 +172,7 @@ hide:
 
 5. Задайте параметры подключения к Kafka в файле `adapterhost.yml`:
 
-    ``` yml
+    ``` yaml
     # Укажите IP-адрес сервера Kafka
     mq.server: <KafkaIP>:9092
     ```

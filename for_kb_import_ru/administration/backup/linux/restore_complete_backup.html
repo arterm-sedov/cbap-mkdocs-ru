@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4648">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4648" kb-tags="" kb-title="Восстановление базы данных из полной резервной копии">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -30,9 +30,9 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#восстановление-индексов-elasticsearch-из-резервной-копии-репозитория">
+<a class="md-nav__link mkdocs_imported_link" href="#восстановление-индексов-opensearch-elasticsearch-из-резервной-копии-репозитория">
 <span class="md-ellipsis">
-      Восстановление индексов Elasticsearch из резервной копии репозитория
+      Восстановление индексов OpenSearch (Elasticsearch) из резервной копии репозитория
     </span>
 </a>
 </li>
@@ -58,14 +58,14 @@
 <h2 id="введение">Введение</h2>
 <p>Здесь представлены инструкции по восстановлению базы данных экземпляра ПО <strong>Comindware Platform</strong> (далее «экземпляр ПО»), развёрнутого в среде Linux.</p>
 <p>Данные инструкции подходят для восстановления из резервной копии, созданной по инструкциям в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4650">Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО</a>»</em>.</p>
-<p>В данных инструкциях используются только стандартные средства операционной системы и Elasticsearch.</p>
+<p>В данных инструкциях используются только стандартные средства операционной системы и OpenSearch (Elasticsearch).</p>
 <p>В статье рассмотрены два сценария:</p>
 <ul>
 <li>восстановление базы данных при её переносе на новую машину;</li>
 <li>восстановление базы данных на ранее работавшей системе c имеющейся базой данных.</li>
 </ul>
 <p>Для восстановления базы данных экземпляра ПО из файла резервной копии необходимо распаковать архив резерва в пользовательскую или временную директорию, откуда уже перенести файлы и директории в целевые директории.</p>
-<p>Для восстановления журнала операций требуется зарегистрировать репозиторий в Elasticsearch и из зарегистрированного репозитория восстановить данные.</p>
+<p>Для восстановления журнала операций требуется зарегистрировать репозиторий в OpenSearch (Elasticsearch) и из зарегистрированного репозитория восстановить данные.</p>
 <p>Исходные данные</p>
 <p>Для восстановления данных перейдите в директорию с резервной копией базы данных экземпляра ПО, созданной по инструкции в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4650">Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО</a>»</em>.</p>
 <p>Здесь предполагается, что архив резервной копии находится папке <code>/tmp/</code>.</p>
@@ -108,9 +108,9 @@
 <ul>
 <li><code>Database</code> — файлы базы данных.<ul>
 <li><code>Scripts</code> — скомпилированные библиотеки для скриптов на языке C#.</li>
-<li><code>snapshots</code> — снимок данных Apache Ignite Ignite.</li>
+<li><code>snapshots</code> — снимок данных Apache Ignite.</li>
 <li><code>wal</code> — журнал предварительной записи.</li>
-<li><code>elastic</code> — копия репозитория Elasticsearch (OpenSearch).</li>
+<li><code>elastic</code> — копия репозитория OpenSearch (Elasticsearch).</li>
 <li><code>Streams</code> — загруженные пользователями и сформированные системой файлы, которые прикреплены к соответствующим атрибутам.</li>
 </ul>
 </li>
@@ -138,10 +138,10 @@
 <div class="highlight"><code><pre><span></span><code>chown -R www-data:www-data /var/lib/comindware/&lt;instancename&gt;/Database/Streams/</code> <br/><code>chown -R www-data:www-data /var/lib/comindware/&lt;instancename&gt;/Database/</code> <br/></pre></code></div>
 </li>
 </ol>
-<h2 id="восстановление-индексов-elasticsearch-из-резервной-копии-репозитория">Восстановление индексов Elasticsearch из резервной копии репозитория</h2>
+<h2 id="восстановление-индексов-opensearch-elasticsearch-из-резервной-копии-репозитория">Восстановление индексов OpenSearch (Elasticsearch) из резервной копии репозитория</h2>
 <ol class="colored_numbers_list">
 <li>
-<p>Создайте директорию репозитория Elasticsearch и перенесите в неё файлы из резервной копии:</p>
+<p>Создайте директорию репозитория OpenSearch (Elasticsearch) и перенесите в неё файлы из резервной копии:</p>
 <div class="highlight"><code><pre><span></span><code>mkdir /var/www/backups/elasticsearch/</code> <br/><code>mv elastic/* /var/www/backups/elasticsearch/</code> <br/></pre></code></div>
 </li>
 <li>
@@ -155,31 +155,31 @@
 <li>
 <p>В файле конфигурации <code>elasticsearch.yml</code> с помощью директивы <code>path.repo: /var/www/backups/elasticsearch</code> укажите путь к созданному репозиторию (например, с помощью редактора <code>nano</code>):</p>
 <div class="highlight"><code><pre><span></span><code>nano /etc/elasticsearch/elasticsearch.yml</code> <br/></pre></code></div>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Путь к репозиторию в файле конфигурации Elasticsearch" src="https://kb.comindware.ru/assets/Pasted image 20230125204737.png"/><figcaption class="caption">Путь к репозиторию в файле конфигурации Elasticsearch</figcaption></figure></p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Путь к репозиторию в файле конфигурации OpenSearch (Elasticsearch)" src="https://kb.comindware.ru/assets/Pasted image 20230125204737.png"/><figcaption class="caption">Путь к репозиторию в файле конфигурации OpenSearch (Elasticsearch)</figcaption></figure></p>
 </li>
 <li>
-<p>Запустите службу Elasticsearch:</p>
+<p>Запустите службу OpenSearch (Elasticsearch):</p>
 <div class="highlight"><code><pre><span></span><code>systemctl start elasticsearch.service</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Зарегистрируйте новый репозиторий снимков Elasticsearch:</p>
-<div class="highlight"><code><pre><span></span><code>curl -X PUT "localhost:9200/_snapshot/elastic_snap?pretty" -H 'Content-Type: application/json' -d' {"type": "fs", "settings": {"location": "/var/www/backups/elasticsearch"}}'</code> <br/></pre></code></div>
+<p>Зарегистрируйте новый репозиторий снимков OpenSearch (Elasticsearch):</p>
+<div class="highlight"><code><pre><span></span><code>curl -X PUT "&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/elastic_snap?pretty" -H 'Content-Type: application/json' -d' {"type": "fs", "settings": {"location": "/var/www/backups/elasticsearch"}}'</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Проверьте содержимое зарегистрированного репозитория:</p>
-<div class="highlight"><code><pre><span></span><code>curl -X GET "localhost:9200/_cat/snapshots/elastic_snap?pretty"</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl -X GET "&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_cat/snapshots/elastic_snap?pretty"</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Выберите необходимый снимок и восстановите состояние Elasticsearch:</p>
-<div class="highlight"><code><pre><span></span><code>curl -X POST "localhost:9200/_snapshot/elastic_snap/snapshot2023_01_23_10_17/_restore?pretty"</code> <br/></pre></code></div>
+<p>Выберите необходимый снимок и восстановите состояние OpenSearch (Elasticsearch):</p>
+<div class="highlight"><code><pre><span></span><code>curl -X POST "&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/elastic_snap/snapshot2023_01_23_10_17/_restore?pretty"</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Проверьте наличие индексов в восстановленном каталоге:</p>
-<div class="highlight"><code><pre><span></span><code>curl -X GET "localhost:9200/_cat/indices?pretty"</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl -X GET "&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_cat/indices?pretty"</code> <br/></pre></code></div>
 </li>
 </ol>
 <figure class="screenshot_with_caption">
-<p><img alt="Отображение списка индексов Elasticsearch" src="https://kb.comindware.ru/assets/Pasted image 20230127153756.png"/><figcaption class="caption">Отображение списка индексов Elasticsearch</figcaption></p>
+<p><img alt="Отображение списка индексов OpenSearch (Elasticsearch)" src="https://kb.comindware.ru/assets/Pasted image 20230127153756.png"/><figcaption class="caption">Отображение списка индексов OpenSearch (Elasticsearch)</figcaption></p>
 </figure>
 <h2 class="pageBreakBefore" id="запуск-и-проверка-конфигурации-экземпляра-по">Запуск и проверка конфигурации экземпляра ПО</h2>
 <ol class="colored_numbers_list">

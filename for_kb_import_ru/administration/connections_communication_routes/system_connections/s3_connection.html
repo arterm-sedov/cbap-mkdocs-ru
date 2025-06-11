@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4677">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4677" kb-tags="подключение,подключения,AD,Active Directory" kb-title="Хранилище S3. Настройка экземпляра ПО и подключения">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -9,23 +9,55 @@
       </h2>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<a class="md-nav__link mkdocs_imported_link" href="#s3_connection_intro">
 <span class="md-ellipsis">
       Введение
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#настройка-конфигурации-экземпляра-по">
+<a class="md-nav__link mkdocs_imported_link" href="#s3_connection_store_recommendations">
 <span class="md-ellipsis">
-      Настройка конфигурации экземпляра ПО
+      Рекомендации по настройке хранилища S3
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#проверка-подключения-к-хранилищу-s3">
+<a class="md-nav__link mkdocs_imported_link" href="#s3_connection_instance_config">
 <span class="md-ellipsis">
-      Проверка подключения к хранилищу S3
+      Настройка конфигурации экземпляра ПО
+    </span>
+</a>
+<nav aria-label="Настройка конфигурации экземпляра ПО" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#s3_connection_instance_config">
+<span class="md-ellipsis">
+      Настройка дополнительного подключения к S3
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#s3_connection_test">
+<span class="md-ellipsis">
+      Проверка соединения с хранилищем S3
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#s3_connection_validation">
+<span class="md-ellipsis">
+      Проверка общей работоспособности интеграции с S3
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#s3_connection_troubleshooting">
+<span class="md-ellipsis">
+      Устранение неполадок
     </span>
 </a>
 </li>
@@ -41,7 +73,20 @@
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h2 id="введение">Введение</h2>
+<h2 id="s3_connection_intro">Введение</h2>
+<div class="notice notice-error">
+<p class="admonition-title">Внимание!</p>
+<ul>
+<li>Работоспособность подключения <strong>Comindware Platform</strong> к S3 протестирована с со следующими службами:<ul>
+<li>Amazon S3</li>
+<li>Yandex Object Storage</li>
+<li>S3 MinIO</li>
+</ul>
+</li>
+<li>Совместимость с другими S3-подобными хранилищами не тестировалась.</li>
+<li>При подключении к другим S3-подобным хранилищам необходимо учитывать их возможно неполное соответствие спецификации API Amazon S3, что может привести к ограниченной или неработоспособной интеграции.</li>
+</ul>
+</div>
 <p>ПО <strong>Comindware Platform</strong> может хранить загруженные пользователями и сформированные системой файлы в хранилище S3:</p>
 <ul>
 <li>файлы, прикреплённые к атрибутам типа «Документ» и «Изображение»;</li>
@@ -56,41 +101,73 @@
 </ul>
 <p>Здесь представлены инструкции по настройке конфигурации экземпляра ПО под управлением Linux для подключения к хранилищу S3 с целью хранения файлов в контейнерах (корзинах) S3.</p>
 <p>После настройки экземпляра ПО и подключения к хранилищу S3 файлы, загруженные пользователями и сформированные системой будут отправляться в хранилище S3, а в конфигурации резервного копирования можно будет указать контейнер S3 вместо пути на сервере с экземпляром ПО.</p>
-<h2 class="pageBreakBefore" id="настройка-конфигурации-экземпляра-по">Настройка конфигурации экземпляра ПО</h2>
-<ol class="colored_numbers_list">
-<li>
-<p>Перейдите в режим суперпользователя:</p>
-<div class="highlight"><code><pre><span></span><code>sudo -i</code> <br/></pre></code></div>
-</li>
-<li>
-<p>Откройте для редактирования файл конфигурации экземпляра ПО:</p>
-<div class="highlight"><code><pre><span></span><code>vim /usr/share/comindware/configs/instance/instancename.yml</code> <br/></pre></code></div>
-<p>Здесь  <code>instanceName</code> — имя экземпляра ПО.</p>
-<p>См. также статью <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое папок экземпляра ПО</a>».</em></p>
-</li>
-<li>
-<p>Добавьте в файл <code>instanceName.yml</code> следующие директивы:</p>
-<div class="highlight"><code><pre><span></span><code><span class="c1"># Адрес сервера S3 с указанием порта, идентификатор ключа доступа и секретный ключ</span></code> <br/><code><span class="na">s3Connection.default.endpointURL</span><span class="o">:</span><span class="w"> </span><span class="s">http://s3.example.com:9000</span></code> <br/><code><span class="na">s3Connection.default.accessKey</span><span class="o">:</span><span class="w"> </span><span class="s">xxxxx</span></code> <br/><code><span class="na">s3Connection.default.secretKey</span><span class="o">:</span><span class="w"> </span><span class="s">xxxxx</span></code> <br/><code><span class="c1"># Установите значение true, если сервер принимает только запросы path-style вида:</span></code> <br/><code><span class="c1"># https://s3.region-code.amazonaws.com/bucket-name/key-name</span></code> <br/><code><span class="na">s3Connection.default.pathStyle</span><span class="o">:</span><span class="w"> </span><span class="s">true</span></code> <br/><code><span class="na">s3Connection.default.description</span><span class="o">:</span><span class="w"> </span><span class="s">Подключение к S3</span></code> <br/><code></code> <br/><code><span class="c1"># Параметры контейнера загруженных файлов</span></code> <br/><code><span class="na">userStorage.type</span><span class="o">:</span><span class="w"> </span><span class="s">S3</span></code> <br/><code><span class="na">userStorage.s3.bucket</span><span class="o">:</span><span class="w"> </span><span class="s">user-files-bucket</span></code> <br/><code><span class="na">userStorage.s3.connection</span><span class="o">:</span><span class="w"> </span><span class="s">default</span></code> <br/><code></code> <br/><code><span class="c1"># Параметры контейнера временных файлов</span></code> <br/><code><span class="na">tempStorage.type</span><span class="o">:</span><span class="w"> </span><span class="s">S3</span></code> <br/><code><span class="na">tempStorage.s3.bucket</span><span class="o">:</span><span class="w"> </span><span class="s">temp-files-bucket</span></code> <br/><code><span class="na">tempStorage.s3.connection</span><span class="o">:</span><span class="w"> </span><span class="s">default</span></code> <br/></pre></code></div>
+<h2 class="pageBreakBefore" id="s3_connection_store_recommendations">Рекомендации по настройке хранилища S3</h2>
+<p>Перед настройкой <strong>Comindware Platform</strong> настройте само хранилище S3 в соответствии с бизнес-требованиями:</p>
+<ul>
+<li>Настройте квоты хранения данных, чтобы избежать переполнения корзин.</li>
+<li>Настройте минимально необходимые разрешения для корзин S3 в соответствии с их назначением.</li>
+<li>Проверьте и актуализируйте политики доступа к корзинам.</li>
+<li>Настройте разные корзины для разных типов данных (резервные копии, загруженные файлы, временные файлы).</li>
+<li>При необходимости включите версионирование для корзин с критически важными данными.</li>
+</ul>
+<h2 class="pageBreakBefore" id="s3_connection_instance_config">Настройка конфигурации экземпляра ПО</h2>
 <div class="notice notice-warning">
 <p class="admonition-title">Внимание!</p>
 <ul>
-<li>Необходимо указать разные контейнеры (корзины) для загруженных файлов и для временных файлов.</li>
-<li>Имена корзин не должны содержать прописных (заглавных) букв.</li>
+<li>Подключение к S3 с именем <code>default</code> можно использовать для хранения резервных копий, загруженных и временных файлов.</li>
+<li>Для хранения резервных копий будет использоваться только подключение к S3 с именем <code>default</code>. Подключения к S3 с другими именами невозможно использовать для хранения резервных копий.</li>
+<li>Имена корзин (контейнеров) должны состоять из латинских букв, точек (.) и дефисов(-), не должны содержать прописных (заглавных) букв.</li>
+<li>Необходимо указать разные корзины для резервных копий, загруженных и временных файлов.<ul>
+<li>Сведения о назначении имени корзины для резервного копирования см. в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642">Резервное копирование. Настройка, запуск и просмотр журнала сеансов</a>»</em>. </li>
+<li>Имена корзин для загруженных и временных файлов назначаются в файле конфигурации, как указано ниже.</li>
+</ul>
+</li>
 </ul>
 </div>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите в режим суперпользователя:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>-i</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Откройте для редактирования файл конфигурации экземпляра ПО:</p>
+<div class="highlight"><code><pre><span></span><code>vim<span class="w"> </span>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code> <br/></pre></code></div>
+<p>Здесь  <code>&lt;instanceName&gt;</code> — имя экземпляра ПО.</p>
+<p>См. также статью <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое папок экземпляра ПО</a>».</em></p>
+</li>
+<li>
+<p>В файле <code>&lt;instanceName&gt;.yml</code> настройте следующие директивы:</p>
+<div class="highlight"><code><pre><span></span><code><span class="c1">##### Конфигурация подключения к хранилищу S3 #####</span></code> <br/><code><span class="c1"># Описание конфигурации</span></code> <br/><code><span class="c1"># default — имя подключения, не изменять.</span></code> <br/><code><span class="nt">s3.default.description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Подключение к S3 по умолчанию для хранения резервных копий, загруженных и временных файлов</span></code> <br/><code><span class="c1"># Адрес и порт сервера S3.</span></code> <br/><code><span class="nt">s3.default.endpointURL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://&lt;s3hostname&gt;:&lt;s3port&gt;</span></code> <br/><code><span class="c1"># Информация учетной записи. Ключ подключения к хранилищу S3.</span></code> <br/><code><span class="nt">s3.default.accessKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xxxxx</span></code> <br/><code><span class="c1"># Информация учетной записи. Секретный ключ подключения к хранилищу S3.</span></code> <br/><code><span class="nt">s3.default.secretKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xxxxx</span></code> <br/><code><span class="c1"># Установите значение true, если сервер принимает только запросы path-style вида:</span></code> <br/><code><span class="c1"># https://&lt;s3hostname&gt;/bucket-name/key-name</span></code> <br/><code><span class="c1">#s3.default.pathStyleAccess: true</span></code> <br/><code></code> <br/><code><span class="c1">##### Настройка хранения загруженных файлов #####</span></code> <br/><code><span class="c1"># Тип хранилища (LocalDisk | S3).</span></code> <br/><code><span class="nt">userStorage.type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">S3</span></code> <br/><code><span class="c1"># Имя корзины для хранения загруженных файлов</span></code> <br/><code><span class="nt">userStorage.s3.bucket</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;uploaded-files-bucket&gt;</span></code> <br/><code><span class="c1"># Имя подключения к S3</span></code> <br/><code><span class="nt">userStorage.s3.connection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span></code> <br/><code></code> <br/><code><span class="c1">##### Настройка хранения временных файлов #####</span></code> <br/><code><span class="c1"># Тип хранилища (LocalDisk | S3).</span></code> <br/><code><span class="nt">tempStorage.type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">S3</span></code> <br/><code><span class="c1"># Имя корзины для хранения временных файлов.</span></code> <br/><code><span class="nt">tempStorage.s3.bucket</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;temp-files-bucket&gt;</span></code> <br/><code><span class="c1"># Имя подключения к S3</span></code> <br/><code><span class="nt">tempStorage.s3.connection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Перезагрузите экземпляр ПО:</p>
-<div class="highlight"><code><pre><span></span><code>systemctl restart comindwareinstancename</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>systemctl restart comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Проверьте подключение хранилищу S3 в экземпляре ПО.</p>
+<p><a class="mkdocs_imported_link" href="#s3_connection_test">Проверьте соединение</a> с хранилищем S3.</p>
 </li>
+<li><a class="mkdocs_imported_link" href="#s3_connection_validation">Проверьте общую работоспособность</a> интеграции с S3.</li>
 </ol>
-<h2 class="pageBreakBefore" id="проверка-подключения-к-хранилищу-s3">Проверка подключения к хранилищу S3</h2>
+<h3 class="pageBreakBefore" id="s3_connection_instance_config">Настройка дополнительного подключения к S3</h3>
+<p>Чтобы хранить загруженные и временные файлы отдельно от резервных копий, можно подключить дополнительное хранилище S3. Имя такого подключения должно отличаться от имени подключения к S3 для хранения резервных копий.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>В файле конфигурации <code>&lt;instanceName&gt;.yml</code> настройте следующие директивы:</p>
+<div class="highlight"><code><pre><span></span><code><span class="c1">##### Конфигурация дополнительного подключения к хранилищу S3 #####</span></code> <br/><code><span class="c1"># &lt;s3connectionName&gt; — задайте имя подключения.</span></code> <br/><code><span class="nt">s3.&lt;s3connectionName&gt;.description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Подключение к S3 для хранения загруженных и временных файлов</span></code> <br/><code><span class="nt">s3.&lt;s3connectionName&gt;.endpointURL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://&lt;s3hostnameForFiles&gt;:&lt;s3port&gt;</span></code> <br/><code><span class="nt">s3.&lt;s3connectionName&gt;.accessKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xxxx</span></code> <br/><code><span class="nt">s3.&lt;s3connectionName&gt;.secretKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xxxx</span></code> <br/><code><span class="c1">#s3.&lt;s3connectionName&gt;.pathStyleAccess: true</span></code> <br/><code></code> <br/><code><span class="c1">#### Настройка хранения загруженных файлов ####</span></code> <br/><code><span class="nt">userStorage.type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">S3</span></code> <br/><code><span class="nt">userStorage.s3.bucket</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;uploaded-files-bucket&gt;</span></code> <br/><code><span class="nt">userStorage.s3.connection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;s3connectionName&gt;</span></code> <br/><code></code> <br/><code><span class="c1">##### Настройка хранения временных файлов #####</span></code> <br/><code><span class="nt">tempStorage.type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">S3</span></code> <br/><code><span class="nt">tempStorage.s3.bucket</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;temp-files-bucket&gt;</span></code> <br/><code><span class="nt">tempStorage.s3.connection</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;s3connectionName&gt;</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Перезагрузите экземпляр ПО:</p>
+<div class="highlight"><code><pre><span></span><code>systemctl restart comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
+</li>
+<li>
+<p><a class="mkdocs_imported_link" href="#s3_connection_test">Проверьте соединение</a> с хранилищем S3.</p>
+</li>
+<li><a class="mkdocs_imported_link" href="#s3_connection_validation">Проверьте общую работоспособность</a> интеграции с S3.</li>
+</ol>
+<h2 class="pageBreakBefore pageBreakBefore" id="s3_connection_test">Проверка соединения с хранилищем S3</h2>
 <ol class="colored_numbers_list">
 <li>Перейдите в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4675">список подключений</a>.</li>
-<li>Дважды нажмите в списке подключение типа «<strong>S3</strong>» (название подключения задаётся директивой <code>s3Connection.default.description</code> в <a class="mkdocs_imported_link" href="#настройка-конфигурации-экземпляра-по">файле конфигурации</a>).</li>
+<li>Дважды нажмите в списке подключение типа «<strong>S3</strong>» (название подключения задаётся директивой <code>s3.default.description</code> <a class="mkdocs_imported_link" href="#s3_connection_instance_config">в файле конфигурации экземпляра ПО</a>).</li>
 <li>
 <p>Просмотрите свойства подключения:</p>
 <ul>
@@ -114,14 +191,70 @@
 </ol>
 <div class="notice notice-warning">
 <p class="admonition-title">Внимание!</p>
-<p>Не вносите изменения в окне свойств подключения к хранилищу S3, заданному в <a class="mkdocs_imported_link" href="#настройка-конфигурации-экземпляра-по">файле конфигурации</a> экземпляра ПО (<code>/usr/share/comindware/configs/instance/instanceName.yml</code>) с помощью директивы <code>s3Connection.default</code>. Они не будут применены к конфигурации экземпляра ПО и при перезапуске сервера будут заменены на значения из файла конфигурации <code>instanceName.yml</code></p>
-<p>Настраивать подключение к хранилищу S3 следует только в файле <code>/usr/share/comindware/configs/instance/instanceName.yml</code></p>
+<p>Не вносите изменения в окне свойств подключения к хранилищу S3, заданному в <a class="mkdocs_imported_link" href="#s3_connection_instance_config">файле конфигурации</a> экземпляра ПО (<code>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code>) с помощью директивы <code>s3.default</code> или <code>s3.&lt;s3connectioName&gt;</code>. Они не будут применены к конфигурации экземпляра ПО и при перезапуске сервера будут заменены на значения из файла конфигурации <code>&lt;instanceName&gt;.yml</code>.</p>
+<p>Настраивать подключение к хранилищу S3 следует только в файле <code>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code></p>
 </div>
-<p><em><figure class="screenshot_with_caption" markdown=""><img alt="Настройка подключения к хранилищу S3" src="https://kb.comindware.ru/assets/img_65e9b87a6e895.png"/><figcaption class="caption">Настройка подключения к хранилищу S3</figcaption></figure></em></p>
+<h2 class="pageBreakBefore" id="s3_connection_validation">Проверка общей работоспособности интеграции с S3</h2>
+<p>После настройки подключения к хранилищу S3 проверьте следующие пункты:</p>
+<ul>
+<li><strong>Конфигурация экземпляра ПО</strong><ul>
+<li>Если требуется резервное копирование в S3, подключение к S3 с именем <code>default</code> правильно настроено.</li>
+<li>При необходимости указаны разные корзины для резервных копий, загруженных и временных файлов.</li>
+<li>Имена корзин не содержат недопустимых символов.</li>
+<li>Все необходимые директивы добавлены в файл конфигурации.</li>
+</ul>
+</li>
+<li><strong>Подключение и доступ</strong><ul>
+<li><strong>Comindware Platform</strong> успешно устанавливает соединение с хранилищем S3.</li>
+<li>Предоставлен доступ к указанным корзинам с правами на чтение и запись.</li>
+<li>Корректно работают <code>virtual-hosted</code> или <code>path-style</code> запросы.</li>
+</ul>
+</li>
+<li><strong>Хранение данных</strong><ul>
+<li>Файлы и резервные копии успешно сохраняются в S3.</li>
+<li>Корректно настроены квоты в S3.</li>
+<li>При необходимости настроено версионирование и дублирование важных данных в разные хранилища.</li>
+</ul>
+</li>
+</ul>
+<h2 class="pageBreakBefore" id="s3_connection_troubleshooting">Устранение неполадок</h2>
+<ul>
+<li><strong>Не удаётся установить соединение с S3</strong><ul>
+<li>Проверьте правильность адреса в директиве <code>s3.&lt;s3connectionName&gt;.endpointURL</code>.</li>
+<li>Убедитесь, что адрес и порт S3 доступны и не блокируются сетевым экраном или прокси-сервером.</li>
+<li>Проверьте, правильно ли настроена директива <code>s3.&lt;s3connectionName&gt;.pathStyleAccess</code>.</li>
+</ul>
+</li>
+<li><strong>Ошибка аутентификации</strong><ul>
+<li>Убедитесь, что указаны правильные и действующие ключи доступа <code>accessKey</code> и <code>secretKey</code>.</li>
+<li>Убедитесь, что для данных ключей в S3 предоставлены необходимые разрешения.</li>
+</ul>
+</li>
+<li><strong>Ошибки доступа к корзинам</strong><ul>
+<li>Проверьте существование указанных корзин.</li>
+<li>Убедитесь в правильности политик доступа к корзинам.</li>
+<li>Проверьте, не содержат ли имена корзин недопустимых символов.</li>
+</ul>
+</li>
+<li><strong>Ошибки загрузки или скачивания файлов</strong><ul>
+<li>Проверьте права доступа к корзинам.</li>
+<li>Убедитесь, что не превышены квоты хранения.</li>
+</ul>
+</li>
+<li><strong>Проблемы с резервным копированием</strong><ul>
+<li>Проверьте настройки резервного копирования и подключения <code>s3.default</code>.</li>
+<li>Убедитесь, что в корзине достаточно места.</li>
+<li>Проверьте права доступа к корзине для резервного копирования.</li>
+</ul>
+</li>
+</ul>
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое папок экземпляра ПО</a></em></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5067">Конфигурация экземпляра, компонентов ПО и служб. Настройка</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое папок экземпляра ПО</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642">Резервное копирование. Настройка, запуск и просмотр журнала сеансов</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5082">Резервное копирование и восстановление. Рекомендации по организации и оптимизации</a></li>
 </ul>
 </div>
 </article>

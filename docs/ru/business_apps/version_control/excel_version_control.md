@@ -12,7 +12,7 @@ hide: tags
 
 # Экспорт и импорт версий приложения с помощью Excel {: #version_control_excel }
 
---8<-- "experimental_feature.md"
+{% include-markdown ".snippets/experimental_feature.md" %}
 
 ## Введение
 
@@ -166,8 +166,8 @@ end="<!--version-control-warning-end-->"
 --8<-- "related_topics_heading.md"
 
 - _[Управление версиями приложения][version_control]_
-- _[Ручное управление версиями][version_control_manual]_
-- _[Управление версиями через Git][version_control_git]_
+- _[Экспорт и импорт версий приложения вручную][version_control_manual]_
+- _[Экспорт и импорт версий приложения с помощью Git][version_control_git]_
 
 </div>
 

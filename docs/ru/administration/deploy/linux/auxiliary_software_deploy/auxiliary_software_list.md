@@ -10,7 +10,7 @@ kbId: 4582
 
 Некоторые функции **{{ productName }}** реализованы с использованием сторонних библиотек.
 
-Для обеспечения работы **{{ productName }}** используются сторонние сервисы, такие как веб-сервер, СУБД, обратный прокси-сервер и т. п.
+Для обеспечения работы **{{ productName }}** используются сторонние сервисы, такие как веб-сервер, СУБД, обратный прокси-сервер и т.&nbsp;п.
 
 Здесь представлен перечень стороннего программного обеспечения (ПО), которое поставляется вместе с **{{ productName }}** версии 5.0 для операционных систем (ОС) семейства Linux: «Альт Сервер» и Astra Linux.
 
@@ -53,7 +53,7 @@ kbId: 4582
 | [moment-timezone](https://www.npmjs.com/package/moment-timezone) | Библиотека для Moment.js, реализующая поддержку часовых поясов IANA. | 0.5.34 | MIT License |
 | [react](https://react.dev/) | JavaScript-библиотека для создания пользовательских интерфейсов на основе компонентов. | 18.2.0 | MIT License |
 | [react-dom](https://legacy.reactjs.org/docs/react-dom.html) | Библиотека для работы с DOM. | 18.2.0 | MIT License |
-| [react-linkify](https://www.npmjs.com/package/react-linkify) | Компонент React для преобразования в гиперссылки найденных в тексте ссылок (URL-адресов, адресов эл. почты и т. п.). | 1.0.0-alpha | MIT License |
+| [react-linkify](https://www.npmjs.com/package/react-linkify) | Компонент React для преобразования в гиперссылки найденных в тексте ссылок (URL-адресов, адресов эл.&nbsp;почты и т.&nbsp;п.). | 1.0.0-alpha | MIT License |
 | [react-redux](https://github.com/reduxjs/react-redux) | Библиотека для привязки React для Redux . | 8.0.2 | MIT License |
 | [react-transition-group](https://reactcommunity.org/react-transition-group/) | Набор компонентов React для управления анимацией. | 4.4.2 | BSD 3-Clause License |
 | [redux](https://redux.js.org/) | JavaScript-библиотека для управления состоянием приложения и его централизации. | 4.2.0 | MIT License |
@@ -72,24 +72,24 @@ kbId: 4582
 | **Наименование ПО и ссылка** | **Описание** | **Версия** | **Лицензия** |
 | --- | --- | --- | --- |
 | [Antlr3.Runtime](https://github.com/antlr/antlr3) | Среда проектирования графического интерфейса пользователя для построения грамматик ANTLR v 3. | 3.3.1.7705 | BSD license |
-| [Antlr4.Runtime.Standard](https://github.com/antlr/antlr4) | Среда проектирования графического интерфейса пользователя для построения грамматик ANTLR v4. | 4.11.1.0 | BSD 3-Clause License |
+| [Antlr4.Runtime.Standard](https://github.com/antlr/antlr4) | Среда проектирования графического интерфейса пользователя для построения грамматик ANTLR v4. | 4.11.1.0 | BSD 3-Clause License |{% if not gostech %}
 | [Apache.Ignite.Core](https://ignite.apache.org/) | Распределенная база данных для высокопроизводительных вычислений со скоростью операций в памяти. | 2.16.0 | Apache 2.0 License |
 | [Apache.Ignite.Linq](https://ignite.apache.org/) | Компонент библиотеки Apache.Ignite.Core. | 16.10.0.0 | Apache 2.0 License |
-| [Apache.Ignite.NLog](https://ignite.apache.org/) | Компонент библиотеки Apache.Ignite.Core. | 9.0.0.0 | Apache 2.0 License |{% if not gostech %}
+| [Apache.Ignite.NLog](https://ignite.apache.org/) | Компонент библиотеки Apache.Ignite.Core. | 9.0.0.0 | Apache 2.0 License |
 | [Apache.Lucene.NET](https://github.com/apache/lucenenet) | Порт библиотеки Lucene для полнотекстового поиска. | 3.0.3.0 | Apache 2.0 License |
 | [Apache.Lucene.Net.Contrib.Highlighter](https://github.com/apache/lucenenet) | Компонент библиотеки Apache.Lucene.Net. | 2.3.2.1 | Apache 2.0 License |
 | [Apache.Lucene.Net.Contrib.Memory](https://github.com/apache/lucenenet) | Компонент библиотеки Apache.Lucene.Net. | 1.0.0.0 | Apache 2.0 License |{% endif %}
 | [Aspose](https://products.aspose.com/pdf/net/) | Компонент для создания и обработки PDF-документов, который позволяет приложениям .NET считывать, записывать и обрабатывать PDF-документы. | 9.6.0.0 | Aspose Licence |
 | [Autofac](https://github.com/autofac/Autofac) | IoC-контейнер для .NET. | 4.9.4 | MIT License |
 | [BouncyCastle](https://github.com/chrishaly/bc-csharp) | Пакет, реализующий криптографические алгоритмы. | 1.8.10.0 | MIT License |
-| [Castle.Core](https://github.com/castleproject/Core) | Castle Core API для создания прокси-объектов. | 4.0.0.0 | Apache 2.0 License |{% if pdfOutput %}
+| [Castle.Core](https://github.com/castleproject/Core) | Castle Core API для создания прокси-объектов. | 4.0.0.0 | Apache 2.0 License |
+| [CsvHelper](https://www.nuget.org/packages/CsvHelper/) | Библиотека .NET для чтения и записи файлов CSV. | 28.0.0.0 | Apache 2.0 License |
+| [DDay.Collections](https://github.com/rianjs/ical.net) | Компонент iCal.NET — библиотеки классов для .NET, обеспечивает соответствие RFC 5545 и полную совместимость с популярными приложениями и библиотеками календарей. | 1.0.0.0 | MIT License |{% if pdfOutput %}
 
 | **Наименование ПО и ссылка** | **Описание** | **Версия** | **Лицензия** |
 | --- | --- | --- | --- |{% endif %}
-| [CsvHelper](https://www.nuget.org/packages/CsvHelper/) | Библиотека .NET для чтения и записи файлов CSV. | 28.0.0.0 | Microsoft Public License |
-| [DDay.Collections](https://github.com/rianjs/ical.net) | Компонент iCal.NET — библиотеки классов для .NET, обеспечивает соответствие RFC 5545 и полную совместимость с популярными приложениями и библиотеками календарей. | 1.0.0.0 | MIT License |
-| [DDay.iCal](https://github.com/rianjs/ical.net) | Компонент iCal.NET — библиотеки классов для .NET, которая обеспечивает соответствие RFC 5545 и полную совместимость с популярными приложениями и библиотеками календарей. | 1.0.2.0 | MIT License |
-| [Elasticsearch.Net](https://github.com/elastic/elasticsearch-net) | Строго типизированная клиентская библиотека, обеспечивающая работу с Elasticsearch. | 7.0.0.0 | Apache 2.0 License |
+| [DDay.iCal](https://github.com/rianjs/ical.net) | Компонент iCal.NET — библиотеки классов для .NET, которая обеспечивает соответствие RFC 5545 и полную совместимость с популярными приложениями и библиотеками календарей. | 1.0.2.0 | MIT License |{% if not gostech %}
+| [Elasticsearch.Net](https://github.com/elastic/elasticsearch-net) | Строго типизированная клиентская библиотека, обеспечивающая работу с {{ openSearchVariants }}. | 7.0.0.0 | Apache 2.0 License |{% endif %}
 | [Html Agility Pack (HAP)](https://github.com/zzzprojects/html-agility-pack) | Гибкое средство синтаксического анализа HTML, создающее модель чтения-записи DOM, с поддержкой простого XPATH или XSLT. | 1.11.15.0 | MIT License |
 | [Humanizer](https://github.com/Humanizr/Humanizer) | Библиотека CS для обработки и отображения строк, перечислений, дат, времени, промежутков времени, чисел и количества. | 2.2.0.0 | MIT License |
 | [JWT](https://github.com/jwt-dotnet/jwt) | Библиотека, реализующая JWT (JSON Web Token) для .NET. | 9.0.0.0 | CC0-1.0 License |
@@ -104,13 +104,13 @@ kbId: 4582
 | [Microsoft.Data.OData](https://www.nuget.org/packages/Microsoft.Data.OData/) | Компонент OData. | 5.8.5.0 | MIT License |
 | [Microsoft.DiaSymReader](https://github.com/dotnet/symreader) | Управляемые определения интерфейсов COM, предоставляемые API-интерфейсами DiaSymReader. | 1.3.0.0 | MIT License |
 | [Microsoft.Exchange.WebServices](https://github.com/OfficeDev/ews-managed-api) | Управляемый API веб-служб Exchange (EWS). | 15.0.0.0 | MIT License |
-| [Microsoft.IdentityModel](https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet) | Библиотека для работы с OpenIdConnect и WsFederation. **Примечание:** это необязательный компонент для входа в **{{ productName }}** через Google, Azure AD/ и другие службы OpenID. Этот компонент не устанавливается по умолчанию. При необходимости его можно установить при развертывании ПО. | 5.3.0.0 | Microsoft Software License |
+| [Microsoft.IdentityModel](https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet) | Библиотека для работы с OpenIdConnect и WsFederation.{% if not gostech %} **Примечание:** это необязательный компонент для входа в **{{ productName }}** через Google, Azure AD/ и другие службы OpenID. Этот компонент не устанавливается по умолчанию. При необходимости его можно установить при развертывании ПО.  {% endif %}| 5.3.0.0 | MIT License |
 | [Microsoft.OData](https://www.nuget.org/packages/Microsoft.Data.OData/) | Библиотека для работы с OData. | 7.10.0.0 | MIT License |
 | [Microsoft.Owin](https://www.nuget.org/packages/Microsoft.Owin) | Библиотека для работы с OWIN. | 4.1.1.0 | Apache 2.0 License |
 | [Microsoft.Spatial](https://www.nuget.org/packages/Microsoft.Spatial/) | Библиотека для работы с геометрическими фигурами. | 7.10.0.0 | MIT License |{% if not gostech %}
 | [Microsoft.Win32.Registry](https://www.nuget.org/packages/Microsoft.Win32.Registry/) | Библиотека для работы с реестром Windows. | 4.1.3.0 | MIT License |{% endif %}
 | [MimeKit](https://github.com/jstedfast/MimeKit) | Библиотека для создания и обработки сообщений с использованием MIME. | 2.15.0.0 | MIT License |
-| [Nest](https://www.nuget.org/packages/NEST) | Библиотека .NET-клиента для работы с Elasticsearch. | 7.0.0.0 | Apache 2.0 License |
+| [Nest](https://www.nuget.org/packages/NEST) | Библиотека .NET-клиента для работы с {{ openSearchVariants }}. | 7.0.0.0 | Apache 2.0 License |
 | [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/) | Json.NET — это высокопроизводительная платформа JSON для .NET. | 13.0.0.0 | MIT License |
 | [NLog](https://github.com/NLog/NLog) | Платформа журналирования. | 5.0.0.0 | BSD 3-Clause License |
 | [Owin](https://github.com/owin/owin/issues) | Интерфейс OWIN IAppBuilder. | 1.0.0.0 | Apache 2.0 License |
@@ -132,17 +132,17 @@ kbId: 4582
 | [dotnet-2.1](https://dotnet.microsoft.com/en-us/download/dotnet/2.1) | Виртуальный пакет для полной установки .NET 2.1 — платформы разработки с открытым исходным кодом. | 2.1.25 | MIT License |
 | [dotnet-6.0](https://packages.altlinux.org/ru/sisyphus/srpms/dotnet-runtime-6.0/) | Виртуальный пакет для полной установки .NET 6.0 — платформы разработки с открытым исходным кодом. | 6.0.12 | MIT License |
 | [dotnet-aspnetcore-runtime-6.0](https://packages.altlinux.org/ru/sisyphus/binary/dotnet-aspnetcore-runtime-6.0/) | Среда выполнения ASP.NET 6. Содержит все необходимые компоненты для запуска веб-приложений .NET Core. | 6.0.12 | MIT License |
-| [dotnet-sdk-6.0](https://packages.altlinux.org/ru/sisyphus/srpms/dotnet-sdk-6.0/) | SDK для среды выполнения и библиотек .NET. | 6.0.112 | MIT License |
-| [Elasticsearch](https://www.elastic.co/elasticsearch/) | Распределенная облачная поисковая система RESTful. | 8.10.2 | Elastic License |
+| [dotnet-sdk-6.0](https://packages.altlinux.org/ru/sisyphus/srpms/dotnet-sdk-6.0/) | SDK для среды выполнения и библиотек .NET. | 6.0.112 | MIT License |{% if not gostech %}
+| [Elasticsearch](https://www.elastic.co/elasticsearch/) | Распределенная облачная поисковая система RESTful. | 8.10.2 | Elastic License |{% endif %}
 | [glib2](https://packages.altlinux.org/ru/sisyphus/srpms/glib2/) | GLib — это базовая низкоуровневая библиотека, которая обеспечивает обработку структур данных для C, предоставляет классы-оболочки переносимости и интерфейсы для таких функций времени выполнения, как цикл обработки событий, потоки, динамическая загрузка и объектная система. | 2.68.4 | LGPLv2+ |
-| [librdkafka](https://packages.altlinux.org/ru/sisyphus/srpms/librdkafka/) | Реализация протокола Apache Kafka в C-библиотеке, содержащая поддержку как Producer, так и Consumer. | 1.5.3 | BSD-2-CLAUSE |
-| [mono-core](https://packages.altlinux.org/ru/sisyphus/binary/mono-core/) | Этот пакет содержит ядро среды выполнения Mono, включая виртуальную машину, компилятор Just-in-time, компилятор C#, инструменты безопасности и библиотеки (corlib, XML, System.Security, ZipLib, I18N, Cairo и Mono). | 6.12.0.147 | MIT License |{% if pdfOutput %}
+| [librdkafka](https://packages.altlinux.org/ru/sisyphus/srpms/librdkafka/) | Реализация протокола Apache Kafka в C-библиотеке, содержащая поддержку как Producer, так и Consumer. | 1.5.3 | BSD-2-CLAUSE |{% if not gostech %}
+| [mono-core](https://packages.altlinux.org/ru/sisyphus/binary/mono-core/) | Этот пакет содержит ядро среды выполнения Mono, включая виртуальную машину, компилятор Just-in-time, компилятор C#, инструменты безопасности и библиотеки (corlib, XML, System.Security, ZipLib, I18N, Cairo и Mono). | 6.12 | MIT License |{% endif %}{% if pdfOutput and not gostech %}
 
 | **Наименование ПО и ссылка** | **Описание** | **Версия** | **Лицензия** |
-| --- | --- | --- | --- |{% endif %}
-| [mono-data](https://packages.altlinux.org/ru/sisyphus/binary/mono-data/) | Этот пакет содержит сборку Mono для облегчения доступа к данным и работы с базами данных, совместимыми с LDAP серверами каталогов, а также обменом данными XML. Помимо сборок ADO.NET, Novell.LDAP и System.DirectoryServices, он также содержит приложение SQL командной строки и поставщики данных Microsoft SQL Server и ODBC. | 6.12.0.147 | MIT License |
-| [nginx](https://packages.altlinux.org/ru/sisyphus/srpms/nginx/) | HTTP-сервер, обратный прокси-сервер. | 1.22.1 | BSD |
-| [xsp](https://packages.altlinux.org/ru/sisyphus/srpms/xsp/) | XSP-сервер — это компактный веб-сервер, на котором размещаются классы System.Webclasses Mono для запуска ASP.NET. | 4.7.1 | X11/MIT License |
+| --- | --- | --- | --- |{% endif %}{% if not gostech %}
+| [mono-data](https://packages.altlinux.org/ru/sisyphus/binary/mono-data/) | Этот пакет содержит сборку Mono для облегчения доступа к данным и работы с базами данных, совместимыми с LDAP серверами каталогов, а также обменом данными XML. Помимо сборок ADO.NET, Novell.LDAP и System.DirectoryServices, он также содержит приложение SQL командной строки и поставщики данных Microsoft SQL Server и ODBC. | 6.12 | MIT License |
+| [nginx](https://packages.altlinux.org/ru/sisyphus/srpms/nginx/) | HTTP-сервер, обратный прокси-сервер. | 1.22.1 | BSD |{% endif %}
+| [xsp](https://packages.altlinux.org/ru/sisyphus/srpms/xsp/) | XSP-сервер — это компактный веб-сервер, на котором размещаются классы{% if not gostech %} System.Webclasses Mono{% endif %} для запуска ASP.NET. | 4.7.1 | MIT License |
 
 ## Вспомогательное ПО для Astra Linux
 
@@ -150,8 +150,8 @@ kbId: 4582
 
 | **Наименование ПО и ссылка** | **Описание** | **Версия** | **Лицензия** |
 | --- | --- | --- | --- |
-| [bellsoft- jre17](https://bell-sw.com/pages/libericajdk/) | BellSoft Liberica — это сборка JRE 17, соответствие спецификациям Java SE которой подтверждено тестами OpenJDK Technology Compatibility Kit. **Примечание:** компания **{{ companyName }}** может заменить данное ПО на аналог по запросу и согласно ТЗ заказчика. | 17.0.7+7 | GPLv2 |
-| [Elasticsearch](https://www.elastic.co/) | Распределенная облачная поисковая система RESTful. | 8.10.2 | SSPL |
+| [openjdk-17-jre](https://wiki.astralinux.ru/pages/viewpage.action?pageId=147162398) | OpenJRE — это сборка JRE 17, соответствие спецификациям Java SE которой подтверждено тестами OpenJDK Technology Compatibility Kit.{% if not gostech %} **Примечание:** компания **{{ companyName }}** может заменить данное ПО на аналог по запросу и согласно ТЗ заказчика. {% endif %}| 17.0.7+7 | GPLv2 |{% if not gostech %}
+| [Elasticsearch](https://www.elastic.co/) | Распределенная облачная поисковая система RESTful. | 8.10.2 | SSPL |{% endif %}
 | [geoip-bin](http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.0/repository-base/) | Зависимость NGINX — инструменты командной строки для поиска IP-адресов, использующие библиотеку GeoIP. | 1.6.12-1 | Другая |
 | [geoip-database](http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.0/repository-base/) | Зависимость NGINX —бесплатная база данных GeoLiteCountry. | 20181108-1 | LGPLv2 |
 | [libgd3](http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.0/repository-base/) | Зависимость NGIX — графическая библиотека GD. Пакет библиотеки для среды выполнения. | 2.2.5-5.2+ ci202206301705+ astra1 | GPLv2+ |
@@ -167,9 +167,9 @@ kbId: 4582
 | [libnginx-mod-stream](http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.0/repository-base/) | Зависимость NGINX — потоковый модуль для NGINX. Добавляет поддержку потокового прокси. | 1.18.0-6.1 +deb11u2 | BSD 2-Clause License |
 | [libnginx-mod-stream-geoip](http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.0/repository-base/) | Зависимость NGINX —модуль GeoIP Stream для NGINX. | 1.18.0-6.1 +deb11u2 | BSD 2-Clause License |
 | [libxpm4](http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.0/repository-base/) | Зависимость NGINX — библиотека X11 для работы с пиксельными картами (pixmap). Обеспечивает поддержку формата XPM в среде выполнения. | 1:3.5.12-1 | Другая |
-| [libxslt1.1](http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.0/repository-base/) | Зависимость NGINX — библиотека libxslt, используемая приложениями для преобразований XSLT. | 1.1.32-2.2~ deb10u2 | libxslt |
-| [mono](http://www.mono-project.com/) | Mono — это платформа для запуска и разработки приложений. Предоставляемый пакет содержит:- интерфейс командной строки - LLVM - Roslyn - MCS - MSBuild - GAC - GC SGen, GC Boehm - XSP4 Server - FastCGI Mono Server 4 | 6.12.0.182- 0xamarin1+ debian9b1 | MIT License |
-| [.NET SDK 6.0](https://packages.microsoft.com/config/debian/) | Платформа разработки с открытым исходным кодом. Предоставляемый пакет содержит:- .NET SDK 6.0.405 - .NETCore.App.Runtime 6.0.13 - dotnet-runtime-deps-debian 6.0.13 - .NETCore.App.Ref 6.0.13 - .NET Host — 7.0.2 - .NET Host FX Resolver — 6.0.13 - .NETCore.App.Host 6.0.13 - NETStandard.Library.Ref 2.1.0 - aspnetcore-runtime-6.0 - aspnetcore-targeting-pack-6.0  **Примечание:** компания **{{ companyName }}** может заменить данное ПО на аналог по запросу и согласно ТЗ заказчика. | 6.0.405-1 | MIT License |
+| [libxslt1.1](http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.0/repository-base/) | Зависимость NGINX — библиотека libxslt, используемая приложениями для преобразований XSLT. | 1.1.32-2.2~ deb10u2 | libxslt |{% if not gostech %}
+| [mono](http://www.mono-project.com/) | Mono — это платформа для запуска и разработки приложений. Предоставляемый пакет содержит:- интерфейс командной строки - LLVM - Roslyn - MCS - MSBuild - GAC - GC SGen, GC Boehm - XSP4 Server - FastCGI Mono Server 4 | 6.12.0.200- 0xamarin1+ debian9b1 | MIT License |{% endif %}
+| [.NET SDK 6.0](https://packages.microsoft.com/config/debian/) | Платформа разработки с открытым исходным кодом. Предоставляемый пакет содержит:- .NET SDK 6.0.405 - .NETCore.App.Runtime 6.0.13 - dotnet-runtime-deps-debian 6.0.13 - .NETCore.App.Ref 6.0.13 - .NET Host — 7.0.2 - .NET Host FX Resolver — 6.0.13 - .NETCore.App.Host 6.0.13 - NETStandard.Library.Ref 2.1.0 - aspnetcore-runtime-6.0 - aspnetcore-targeting-pack-6.0{% if not gostech %} **Примечание:** компания **{{ companyName }}** может заменить данное ПО на аналог по запросу и согласно ТЗ заказчика. {% endif %}| 6.0.405-1 | MIT License |
 | [nginx](http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.0/repository-base/) | Пакет зависимостей NGINX для установки nginx-core. | 1.18.0-6.1+ deb11u2 | BSD 2-Clause License |
 | [nginx-common](http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.0/repository-base/) | Зависимость NGINX — базовые файлы конфигурации, используемые всеми версиями NGINX. | 1.18.0-6.1+ deb11u2 | BSD 2-Clause License |
 | [nginx-core](http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.0/repository-base/) | Веб/прокси-сервер NGINX. | 1.18.0-6.1+ deb11u2 | BSD 2-Clause License |

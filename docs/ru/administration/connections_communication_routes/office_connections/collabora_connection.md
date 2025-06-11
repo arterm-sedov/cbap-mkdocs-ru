@@ -7,7 +7,7 @@ kbId: 4688
 
 ## Введение
 
---8<-- "experimental_feature.md"
+{% include-markdown ".snippets/experimental_feature.md" %}
 
 **{{ productName }}** позволяет просматривать и редактировать прикреплённые к формам документы, электронные таблицы и презентации с помощью ПО **Collabora Online**.
 

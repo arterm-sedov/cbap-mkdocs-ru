@@ -1,0 +1,24 @@
+# This file is used for to output PDF version of the Russian help system as PDF/CBAP_User_Guide_RU.pdf
+# It requires GTK3. Installer: install\installgtk3.ps1
+# This configuration and PDF build pipeline are a work in progress. Do not build production PDFs yet.
+# Command: 
+# py -m mkdocs build -f mkdocs_ru_pdf.yml
+
+INHERIT: mkdocs_guide_complete_ru.yml
+
+site_dir: pdf/
+
+site_url: ''
+
+extra:
+  pdfOutput: true
+
+plugins:
+  minify:
+    minify_html: false
+  glightbox:
+    manual: true
+  with-pdf:
+    cover_subtitle: Общее руководство
+    output_path: ../Comindware Platform 5.0. Общее руководство.pdf
+    enabled_if_env: ''

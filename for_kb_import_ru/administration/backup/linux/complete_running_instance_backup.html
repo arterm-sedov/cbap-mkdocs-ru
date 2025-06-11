@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4650">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4650" kb-tags="" kb-title="Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -52,7 +52,7 @@
 <p>Здесь представлены инструкции по созданию резервной копии базы данных экземпляра ПО <strong>Comindware Platform</strong> без его остановки.</p>
 <p>Для создания полной резервной копии базы данных в ОС Linux необходимо с помощью терминала выполнить следующие действия:</p>
 <ul>
-<li>создать снимки состояния памяти Apache Ignite и Elasticsearch;</li>
+<li>создать снимки состояния памяти Apache Ignite и OpenSearch (Elasticsearch);</li>
 <li>скопировать содержимое папок со скриптами и вложенными файлами.</li>
 </ul>
 <p>Сведения о последующем восстановлении данных см. в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4648">Восстановление базы данных, вложенных файлов и журналов из полной резервной копии</a>»</em>.</p>
@@ -60,23 +60,23 @@
 <p>Для создания резервной копии соберите перечисленные ниже данные об экземпляре ПО.</p>
 <ol class="colored_numbers_list">
 <li>
-<p>Имя экземпляра ПО: <code>&lt;instanceName&gt;</code>. Можно получить в ответе на запрос localhost:9200/_cat/indices, например <code>cmw_cmw-study</code>, как показано на следующей иллюстрации.</p>
+<p>Имя экземпляра ПО: <code>&lt;instanceName&gt;</code>. Можно получить в ответе на запрос <code>&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_cat/indices</code>, например <code>cmw_cmw-study</code>, как показано на следующей иллюстрации.</p>
 <p><figure class="screenshot_with_caption" markdown=""><img alt="Определение имени экземпляра ПО" src="https://kb.comindware.ru/assets/Pasted%20image%2020221229181253.png"/><figcaption class="caption">Определение имени экземпляра ПО</figcaption></figure></p>
 </li>
 <li>
 <p>Директория с базой данных экземпляра ПО: <code>/var/lib/comindware/&lt;instanceName&gt;/Database</code>. Может быть задана другая директория с помощью директивы <code>&lt;workDirectory&gt;</code> в файле конфигурации <code>/var/www/comindware/Ignite.config</code>. Если в файле конфигурации директива <code>&lt;workDirectory&gt;</code> не содержит директории, используется директория по умолчанию.</p>
 </li>
 <li>Путь для сохранения снимков базы данных Apache Ignite, по умолчанию: <code>/var/lib/comindware/&lt;instanceName&gt;/Database/snapshots/</code></li>
-<li>Имя репозитория Elasticsearch, заданное при его регистрации, например: <code>elastic_search_repo_name</code></li>
+<li>Имя репозитория OpenSearch (Elasticsearch), заданное при его регистрации, например: <code>elastic_search_repo_name</code></li>
 <li>
-<p>Путь для сохранения резервных копий Elasticsearch:</p>
+<p>Путь для сохранения резервных копий OpenSearch (Elasticsearch):</p>
 <ul>
 <li>например, <code>/var/www/backups/elasticsearch</code></li>
 <li>должен быть указан в директиве <code>path.repo</code> в файле <code>/etc/elasticsearch/elasticsearch.yml</code></li>
 <li>должен ссылаться на существующий диск;</li>
 <li>должен находиться на отдельном диске, отдельно от базы данных.</li>
 </ul>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Определение пути для резервных копий Elasticsearch" src="https://kb.comindware.ru/assets/Pasted%20image%2020221229181640.png"/><figcaption class="caption">Определение пути для резервных копий Elasticsearch</figcaption></figure></p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Определение пути для резервных копий OpenSearch (Elasticsearch)" src="https://kb.comindware.ru/assets/Pasted%20image%2020221229181640.png"/><figcaption class="caption">Определение пути для резервных копий OpenSearch (Elasticsearch)</figcaption></figure></p>
 </li>
 <li>
 <p>Имя снимка, заданное администратором, например, в формате <code>&lt;instanceName&gt;&lt;Date&gt;&lt;Time&gt;</code></p>
@@ -131,7 +131,7 @@
 <div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>/var/www/backups/</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Создайте директорию репозитория Elasticsearch:</p>
+<p>Создайте директорию репозитория OpenSearch (Elasticsearch):</p>
 <div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>/var/www/backups/elasticsearch</code> <br/></pre></code></div>
 </li>
 <li>
@@ -161,12 +161,12 @@
 <div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>/var/www/apache-ignite/bin/control.sh<span class="w"> </span>--baseline</code> <br/><code>bash<span class="w"> </span>/var/www/apache-ignite/bin/control.sh<span class="w"> </span>--snapshot<span class="w"> </span>create<span class="w"> </span>snapshot_name_<span class="nv">$now</span><span class="w"> </span>--sync</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Зарегистрируйте репозиторий Elasticsearch. Вместо <code>elasticsearch_repo_name</code> и <code>/var/www/backups/elasticsearch</code> подставьте своё имя репозитория и путь к его папке:</p>
-<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"localhost:9200/_snapshot/elasticsearch_repo_name?pretty"</span><span class="w"> </span>-H<span class="w"> </span>’Content-Type:<span class="w"> </span>application/json’<span class="w"> </span>-d’<span class="w"> </span><span class="o">{</span><span class="s2">"type"</span>:<span class="w"> </span><span class="s2">"fs"</span>,<span class="w"> </span><span class="s2">"settings"</span>:<span class="w"> </span><span class="o">{</span><span class="s2">"location"</span>:<span class="w"> </span><span class="s2">"/var/www/backups/elasticsearch"</span><span class="o">}}</span>’</code> <br/></pre></code></div>
+<p>Зарегистрируйте репозиторий OpenSearch (Elasticsearch). Вместо <code>elasticsearch_repo_name</code> и <code>/var/www/backups/elasticsearch</code> подставьте своё имя репозитория и путь к его папке:</p>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/elasticsearch_repo_name?pretty"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">'{"type": "fs", "settings": {"location": "/var/www/backups/elasticsearch"}}'</span></code> <br/></pre></code></div>
 </li>
 <li>
-<p>Создайте снимок состояния Elasticsearch, заменив <strong><em><code>elasticsearch_repo_name</code></em>*,</strong> <code>snapshot_name</code>* и <code>prefix_name</code>(префикс индекса, указанный в конфигурации экземпляра ПО) на свои значения:</p>
-<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"localhost:9200/_snapshot/elasticsearch_repo_name/snapshot_name_</span><span class="nv">$now</span><span class="s2">?wait_for_completion=true&amp;pretty"</span><span class="w"> </span>-H<span class="w"> </span>’Content-Type:<span class="w"> </span>application/json’<span class="w"> </span>-d’<span class="w"> </span><span class="o">{</span><span class="s2">"indices"</span>:<span class="w"> </span><span class="s2">"cmw_prefix_name*"</span>,<span class="w"> </span><span class="s2">"ignore_unavailable"</span>:<span class="w"> </span>true,<span class="w"> </span><span class="s2">"include_global_state"</span>:<span class="w"> </span>false<span class="o">}</span>’</code> <br/></pre></code></div>
+<p>Создайте снимок состояния OpenSearch (Elasticsearch), заменив <strong><em><code>elasticsearch_repo_name</code></em>*,</strong> <code>snapshot_name</code>* и <code>prefix_name</code>(префикс индекса, указанный в конфигурации экземпляра ПО) на свои значения:</p>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/elasticsearch_repo_name/snapshot_name_</span><span class="nv">$now</span><span class="s2">?wait_for_completion=true&amp;pretty"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">'{"indices": "cmw_prefix_name*", "ignore_unavailable": true, "include_global_state": false}'</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Создайте директории для хранения компонентов резервной копии:</p>

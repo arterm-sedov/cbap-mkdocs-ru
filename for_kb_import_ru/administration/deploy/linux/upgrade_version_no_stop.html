@@ -1,0 +1,456 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5097" kb-tags="" kb-title="Обновление версии экземпляра ПО без его остановки">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#порядок-обновления-версии-экземпляра-по">
+<span class="md-ellipsis">
+      Порядок обновления версии экземпляра ПО
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_no_stop_old_instance_data_prepare">
+<span class="md-ellipsis">
+      Подготовка данных старого экземпляра ПО к обновлению
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#подготовка-нового-сервера">
+<span class="md-ellipsis">
+      Подготовка нового сервера
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#создание-нового-экземпляра">
+<span class="md-ellipsis">
+      Создание нового экземпляра
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#перенос-данных">
+<span class="md-ellipsis">
+      Перенос данных
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#переключение-на-новый-экземпляр">
+<span class="md-ellipsis">
+      Переключение на новый экземпляр
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#действия-при-возникновении-проблем">
+<span class="md-ellipsis">
+      Действия при возникновении проблем
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Здесь представлены инструкции по обновлению версии экземпляра ПО <strong>Comindware Platform</strong> без его остановки путём создания нового экземпляра на отдельном сервере и последующего переключения DNS на него.</p>
+<p>Инструкции даны для обновления с версий 4.7.2 до версий 4.7.3–5.0 в ОС Linux.</p>
+<div class="notice notice-tip">
+<p class="admonition-title">Совет</p>
+<p>Такой способ обновления можно использовать, если ПО <strong>Comindware Platform</strong> возможно развернуть <strong>на нескольких машинах</strong>. </p>
+<p>Тогда каждый экземпляр ПО можно обновить последовательно без его остановки.</p>
+<p><strong>Если вы не можете развернуть дополнительную машину</strong>, следуйте инструкции <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4624">Обновление версии экземпляра ПО с его остановкой</a>»</em>.</p>
+</div>
+<h2 class="pageBreakBefore" id="порядок-обновления-версии-экземпляра-по">Порядок обновления версии экземпляра ПО</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Подготовьте данные старого экземпляра для обновления:</p>
+<ul>
+<li>Создайте резервную копию базы данных старого экземпляра.</li>
+<li>Создайте резервную копию файлов конфигурации старого экземпляра.</li>
+</ul>
+</li>
+<li>
+<p>Создайте новый экземпляр ПО:</p>
+<ul>
+<li>Установите новую версию ПО на отдельном сервере.</li>
+<li>Создайте и настройте новый экземпляр ПО с чистой базой данных.</li>
+<li>Подключите вспомогательные службы.</li>
+</ul>
+</li>
+<li>
+<p>Проверьте работу нового экземпляра:</p>
+<ul>
+<li>Выполните инициализацию и вход в систему.</li>
+<li>Проверьте работу всех компонентов.</li>
+<li>Убедитесь в отсутствии ошибок в журналах.</li>
+</ul>
+</li>
+<li>
+<p>Перенесите данные со старого экземпляра:</p>
+<ul>
+<li>Перенесите значения директив из старых файлов конфигурации в файлы конфигурации нового экземпляра.</li>
+<li>Перенесите базу данных в новый экземпляр.</li>
+<li>При необходимости выполните преобразование структуры данных.</li>
+<li>Проверьте работу экземпляра ПО с перенесёнными данными.</li>
+<li>Создайте резервную копию обновлённого экземпляра.</li>
+</ul>
+</li>
+<li>
+<p>Переключите DNS или вышестоящий прокси-сервер на новый сервер:</p>
+<ul>
+<li>Обновите DNS-записи и (или) конфигурацию вышестоящего прокси-сервера.</li>
+<li>Проверьте работу системы.</li>
+</ul>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="upgrade_version_linux_no_stop_old_instance_data_prepare">Подготовка данных старого экземпляра ПО к обновлению</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>Выполните подготовительные действия отдельно для каждого экземпляра ПО, версию которого требуется обновить.</p>
+</div>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите в режим суперпользователя:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>-s</code> <br/></pre></code></div>
+<p>или</p>
+<div class="highlight"><code><pre><span></span><code>su<span class="w"> </span>-</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Скопируйте базу данных экземпляра ПО во внешнее хранилище:</p>
+<div class="highlight"><code><pre><span></span><code>cp<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/Database<span class="w"> </span>&lt;database_backup_path&gt;</code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><code>&lt;instanceName&gt;</code> — имя экземпляра ПО.</li>
+<li><code>&lt;database_backup_path&gt;</code> — путь к внешнему хранилищу базы данных.</li>
+</ul>
+</li>
+<li>
+<p>Скопируйте файлы конфигурации во внешнее хранилище:</p>
+<ul>
+<li><strong>Astra Linux</strong>, <strong>Ubuntu</strong>, <strong>Debian</strong> (DEB-based)</li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/var/www/&lt;instanceName&gt;/</code> <br/><code>cp<span class="w"> </span>*.config<span class="w"> </span>*.yml<span class="w"> </span>*.json<span class="w"> </span>&lt;config_backup_path&gt;</code> <br/><code>cp<span class="w"> </span>/var/www/&lt;instanceName&gt;/data/Plugins/Agent/Agent.config<span class="w"> </span>&lt;config_backup_path&gt;</code> <br/><code>cp<span class="w"> </span>/etc/nginx/sites-available/comindware&lt;instanceName&gt;<span class="w"> </span>&lt;config_backup_path&gt;</code> <br/><code>cp<span class="w"> </span>/etc/sysconfig/comindware&lt;instanceName&gt;-env<span class="w"> </span>&lt;config_backup_path&gt;</code> <br/></pre></code></div>
+<ul>
+<li><strong>РЕД ОС</strong>, <strong>Rocky</strong> (RPM-based)</li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/var/www/&lt;instanceName&gt;/</code> <br/><code>cp<span class="w"> </span>*.config<span class="w"> </span>*.yml<span class="w"> </span>*.json<span class="w"> </span>&lt;config_backup_path&gt;</code> <br/><code>cp<span class="w"> </span>/var/www/&lt;instanceName&gt;/data/Plugins/Agent/Agent.config<span class="w"> </span>&lt;config_backup_path&gt;</code> <br/><code>cp<span class="w"> </span>/etc/nginx/conf.d/comindware&lt;instanceName&gt;<span class="w"> </span>&lt;config_backup_path&gt;</code> <br/><code>cp<span class="w"> </span>/etc/sysconfig/comindware&lt;instanceName&gt;-env<span class="w"> </span>&lt;config_backup_path&gt;</code> <br/></pre></code></div>
+<ul>
+<li><strong>Альт Сервер</strong></li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/var/www/&lt;instanceName&gt;/</code> <br/><code>cp<span class="w"> </span>*.config<span class="w"> </span>*.yml<span class="w"> </span>*.json<span class="w"> </span>&lt;config_backup_path&gt;</code> <br/><code>cp<span class="w"> </span>/var/www/&lt;instanceName&gt;/data/Plugins/Agent/Agent.config<span class="w"> </span>&lt;config_backup_path&gt;</code> <br/><code>cp<span class="w"> </span>/etc/nginx/sites-available.d/comindware&lt;instanceName&gt;<span class="w"> </span>&lt;config_backup_path&gt;</code> <br/><code>cp<span class="w"> </span>/etc/sysconfig/comindware&lt;instanceName&gt;-env<span class="w"> </span>&lt;config_backup_path&gt;</code> <br/></pre></code></div>
+<p>Здесь <code>&lt;config_backup_path&gt;</code> — путь к внешнему хранилищу файлов конфигурации.</p>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="подготовка-нового-сервера">Подготовка нового сервера</h2>
+<p>Выполните следующие инструкции на новом сервере:</p>
+<ol class="colored_numbers_list">
+<li>
+<p>На новом сервере скачайте и распакуйте дистрибутив с новой версией вспомогательного ПО (<code>X.X</code>, <code>&lt;prerequisitesVersion&gt;</code> — номер версии):</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>&lt;distPath&gt;</code> <br/><code>tar<span class="w"> </span>-xf<span class="w"> </span>X.X-release-ru-&lt;prerequisitesVersion&gt;.prerequisites.&lt;osname&gt;.tar.gz</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Перейдите в распакованную директорию библиотек <code>librdkafka</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>CMW_&lt;osname&gt;/repo/kafka/librd/</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Обновите библиотеки <code>librdkafka</code>:</p>
+<ul>
+<li><strong>Astra Linux</strong>, <strong>Ubuntu</strong>, <strong>Debian</strong> (DEB-based)</li>
+</ul>
+<div class="highlight"><code><pre><span></span><code>dpkg<span class="w"> </span>-i<span class="w"> </span>*.deb</code> <br/></pre></code></div>
+<ul>
+<li><strong>РЕД ОС</strong>, <strong>Rocky</strong> (RPM-based)</li>
+</ul>
+<div class="highlight"><code><pre><span></span><code>rpm<span class="w"> </span>-i<span class="w"> </span>*.rpm</code> <br/></pre></code></div>
+<ul>
+<li><strong>Альт Сервер</strong></li>
+</ul>
+<div class="highlight"><code><pre><span></span><code>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>*.rpm</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Скачайте и распакуйте дистрибутив с новой версией ПО (<code>X.X</code>, <code>&lt;version&gt;</code> — номер версии):</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>&lt;distPath&gt;</code> <br/><code>tar<span class="w"> </span>-xf<span class="w"> </span>X.X-release-ru-&lt;version&gt;.&lt;osname&gt;.tar.gz</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Перейдите в распакованную директорию:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>CMW_&lt;osname&gt;_&lt;version&gt;/scripts/</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Установите новую версию ПО:</p>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>version_install.sh</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Проверьте наличие и имя директории установленной версии ПО:</p>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>version_list.sh</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Отобразится список установленных версий ПО на сервере.</p>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="создание-нового-экземпляра">Создание нового экземпляра</h2>
+<p>Выполните следующие инструкции на новом сервере.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте новый экземпляр ПО:</p>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>instance_create.sh<span class="w"> </span>-n<span class="o">=</span>&lt;instanceName&gt;<span class="w"> </span>-p<span class="o">=</span>&lt;portNumber&gt;<span class="w"> </span>-v<span class="o">=</span>&lt;version&gt;</code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><code>-n=&lt;instanceName&gt;</code> — имя экземпляра ПО;</li>
+<li><code>-p=&lt;portNumber&gt;</code> - порт для экземпляра ПО, по умолчанию: 80 (необязательный ключ);</li>
+<li><code>-v=&lt;version&gt;</code> — установленная версия ПО.</li>
+</ul>
+</li>
+<li>
+<p>По окончании создания скрипт выведет информацию о компонентах экземпляра ПО. Удостоверьтесь, что компоненты успешно установлены.</p>
+<p>Пример результата выполнения скрипта:</p>
+<div class="highlight"><code><pre><span></span><code>...</code> <br/><code><span class="o">[</span>Done<span class="o">]</span><span class="w"> </span>Creating<span class="w"> </span>Log<span class="w"> </span>Directories.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>folder<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>Web<span class="w"> </span>config<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>Ignite<span class="w"> </span>config<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>binaries<span class="w"> </span>linked.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>config<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>Data<span class="w"> </span>folder<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>Database<span class="w"> </span>folder<span class="w"> </span>created:<span class="w"> </span>Yes</code> <br/><code>OK<span class="w">     </span>Streams<span class="w"> </span>folder<span class="w"> </span>created:<span class="w"> </span>No<span class="w"> </span></code> <br/><code>OK<span class="w">     </span>Logs<span class="w"> </span>folder<span class="w"> </span>created:<span class="w"> </span>Yes</code> <br/><code>OK<span class="w">     </span>Used<span class="w"> </span>version:<span class="w"> </span>&lt;version&gt;</code> <br/><code>OK<span class="w">     </span>Logs<span class="w"> </span>configured.</code> <br/><code>OK<span class="w">     </span>Sites<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>Sites<span class="w"> </span>enabled.</code> <br/><code>OK<span class="w">     </span>API<span class="w"> </span>Gateway<span class="w"> </span>configured.</code> <br/><code>OK<span class="w">     </span>Link<span class="w"> </span>to<span class="w"> </span>binaries<span class="w"> </span>is<span class="w"> </span>valid.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>service<span class="w"> </span>started.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>API<span class="w"> </span>gateway<span class="w"> </span>service<span class="w"> </span>started.</code> <br/><code>OK<span class="w">     </span>NGINX<span class="w"> </span>started.</code> <br/><code>OK<span class="w">     </span>Final<span class="w"> </span>status.</code> <br/><code><span class="o">[</span>Done<span class="o">]</span><span class="w"> </span>Upgrade<span class="w"> </span>CBAP<span class="w"> </span>instance.</code> <br/></pre></code></div>
+<p>Если какая-либо из служб имеет статус <code>FAILED</code>, перезапустите её, например:</p>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>restart<span class="w"> </span>comindware&lt;instanceName&gt;.service</code> <br/><code>systemctl<span class="w"> </span>restart<span class="w"> </span>apigateway&lt;instanceName&gt;.service</code> <br/><code>systemctl<span class="w"> </span>restart<span class="w"> </span>adaperhost&lt;instanceName&gt;.service</code> <br/><code>systemctl<span class="w"> </span>restart<span class="w"> </span>kafka.service</code> <br/><code>systemctl<span class="w"> </span>restart<span class="w"> </span>elasticsearch.service<span class="w"> </span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Отредактируйте конфигурацию NGINX для экземпляра ПО в соответствии с резервной копией, <a class="mkdocs_imported_link" href="#upgrade_version_linux_no_stop_old_instance_data_prepare">сохранённой ранее</a>:</p>
+<ul>
+<li>
+<p><strong>Astra Linux</strong>, <strong>Ubuntu</strong>, <strong>Debian</strong> (DEB-based)</p>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/etc/nginx/sites-available/comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
+</li>
+<li>
+<p><strong>РЕД ОС</strong>, <strong>Rocky</strong> (RPM-based)</p>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/etc/nginx/conf.d/comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
+</li>
+<li>
+<p><strong>Альт Сервер</strong></p>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/etc/nginx/sites-available.d/comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
+</li>
+</ul>
+</li>
+<li>
+<p>Перезапустите службу NGINX для применения изменений:</p>
+<div class="highlight"><code><pre><span></span><code>nginx<span class="w"> </span>-s<span class="w"> </span>reload</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Отредактируйте файлы конфигурации в соответствии с резервными копиями, <a class="mkdocs_imported_link" href="#upgrade_version_linux_no_stop_old_instance_data_prepare">сохранёнными ранее</a>:</p>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/etc/sysconfig/comindware&lt;instanceName&gt;-env</code> <br/><code>nano<span class="w"> </span>/var/www/&lt;instanceName&gt;/adapterhost.yml</code> <br/><code>nano<span class="w"> </span>/var/www/&lt;instanceName&gt;/apigateway.yml</code> <br/><code>nano<span class="w"> </span>/var/www/&lt;instanceName&gt;/Ignite.config</code> <br/><code>nano<span class="w"> </span>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code> <br/></pre></code></div>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<ul>
+<li>В новейших версиях <strong>Comindware Platform</strong> отсутствует файл <code>Workers.config</code>.</li>
+<li>Настройка соответствующих служб выполняется в файле конфигурации экземпляра ПО <code>&lt;instanceName&gt;.yml</code>.</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Перезапустите сервисы, настройки которых были изменены, например:</p>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>restart<span class="w"> </span>apigateway&lt;instanceName&gt;<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Откройте сайт экземпляра ПО в браузере, одновременно открыв выдачу журналов экземпляра в терминале:</p>
+<div class="highlight"><code><pre><span></span><code>tail<span class="w"> </span>-f<span class="w"> </span>/var/log/comindware/&lt;instanceName&gt;/Log/heartbeat*</code> <br/></pre></code></div>
+</li>
+<li>
+<p>В браузере выполните инициализацию экземпляра ПО, выполните вход и проверьте работоспособность ПО.</p>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="перенос-данных">Перенос данных</h2>
+<p>Выполните следующие инструкции на новом сервере.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Остановите новый экземпляр ПО:</p>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>stop<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Удалите базу данных нового экземпляра ПО:</p>
+<div class="highlight"><code><pre><span></span><code>rm<span class="w"> </span>-r<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/Database/</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Скопируйте базу данных старого экземпляра ПО в новый экземпляр:</p>
+<div class="highlight"><code><pre><span></span><code>cp<span class="w"> </span>-r<span class="w"> </span>/path/to/backup/Database/*<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/Database/</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Откройте сайт экземпляра ПО в браузере.</p>
+</li>
+<li>
+<p>Дождитесь завершения обновления структуры данных и проверьте его успешное выполнение.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>При обновлении с версии 4.7.2 на версии 4.7.3-5.0 обновляется структура базы данных.</p>
+<p>После этого необходимо вручную удалить некоторые данные кэша в старом формате.</p>
+<p>Поэтому продолжать обновление версии экземпляра ПО можно только после успешного обновления структуры данных. </p>
+<ul>
+<li>Удостоверьтесь, что появились журналы обновления:<ul>
+<li><code>/var/log/comindware/&lt;instanceName&gt;/Log/UpgradeOntology.log</code></li>
+<li><code>/var/log/comindware/&lt;instanceName&gt;/Log/upgrade&lt;ГГГГ-ММ-ДД&gt;.log</code></li>
+</ul>
+</li>
+<li>Удостоверьтесь, что в журнале <code>UpgradeOntology.log</code> последняя запись содержит строку <code>Upgrade of ontology completed successfully</code>.</li>
+<li>Удостоверьтесь, что в журнале <code>upgrade&lt;ГГГГ-ММ-ДД&gt;.log</code> последняя запись содержит строку <code>Upgrade completed</code>.</li>
+<li>Удостоверьтесь, что в журналах отсутствуют ошибки обновления. Найдите их по ключевому слову <code>error</code>.</li>
+<li>Если обновление выполнено успешно, переходите к шагу 6.</li>
+<li>
+<p>Если в журнале обновления имеются ошибки:</p>
+<ol class="colored_numbers_list">
+<li>Не переходите к шагу 6.</li>
+<li>Снова установите для экземпляра старую версию ПО.</li>
+<li>Восстановите базу данных из резервной копии.</li>
+<li>Обратитесь в службу поддержки <strong>Comindware</strong>, предоставив журналы обновления и ошибок для анализа.</li>
+</ol>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Создайте резервную копию экземпляра ПО:</p>
+<ul>
+<li>
+<p>в формате <code>.CDBBZ</code> средствами <strong>Comindware Platform</strong>;</p>
+<p>или</p>
+</li>
+<li>
+<p>c помощью скрипта для создания снимка базы.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Остановите экземпляр ПО.</p>
+</li>
+<li>
+<p>Распакуйте резервную копию и удалите из неё следующие директории кэшей:</p>
+<div class="highlight"><code><pre><span></span><code>rm<span class="w"> </span>-rf<span class="w"> </span>cacheGroup-*-TableIdentity</code> <br/><code>rm<span class="w"> </span>-rf<span class="w"> </span>cacheGroup-*-TableIdentityReplicated</code> <br/><code>rm<span class="w"> </span>-rf<span class="w"> </span>cacheGroup-*Value</code> <br/><code>rm<span class="w"> </span>-rf<span class="w"> </span>cacheGroup-*ValueReplicated</code> <br/><code>rm<span class="w"> </span>-rf<span class="w"> </span>cache-ignite-sys-cache</code> <br/><code>rm<span class="w"> </span>-rf<span class="w"> </span>cp</code> <br/><code>rm<span class="w"> </span>-rf<span class="w"> </span>metastorage</code> <br/><code>rm<span class="w"> </span>-rf<span class="w"> </span>cacheGroup-Keys</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Очистите директорию с базой данных экземпляра ПО:</p>
+<div class="highlight"><code><pre><span></span><code>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/Database/*</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Скопируйте очищенную резервную копию в директорию с базой данных <code>/var/lib/comindware/&lt;instanceName&gt;/Database/</code>.</p>
+</li>
+<li>
+<p>Назначьте владельца директории с базой данных:</p>
+<ul>
+<li><strong>Astra Linux, Ubuntu, Debian</strong> (DEB-based)</li>
+</ul>
+<div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>www-data:www-data<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/Database</code> <br/></pre></code></div>
+<ul>
+<li><strong>РЕД ОС, Rocky</strong> (RPM-based)</li>
+</ul>
+<div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>nginx:nginx<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/Database</code> <br/></pre></code></div>
+<ul>
+<li><strong>Альт Сервер</strong></li>
+</ul>
+<div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>_nginx:_nginx<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/Database</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Запустите экземпляр ПО.</p>
+</li>
+<li>Откройте сайт экземпляра ПО в браузере, дождитесь его инициализации и выполните вход.</li>
+</ol>
+<h2 class="pageBreakBefore" id="переключение-на-новый-экземпляр">Переключение на новый экземпляр</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Подготовьте инфраструктуру к переключению на новый IP-адрес:</p>
+<ul>
+<li>сохраните резервную копию конфигурации DNS и (или) прокси-сервера;</li>
+<li>подготовьте DNS-записи для используемого доменного имени;</li>
+<li>подготовьте вышестоящий прокси-сервер для использования нового IP-адреса;</li>
+<li>проверьте доступность нового IP-адреса, например с помощью утилит <code>ping</code> и <code>telnet</code>;</li>
+<li>настройте сетевой экран на использование нового IP-адреса.</li>
+</ul>
+</li>
+<li>
+<p>Выполните переключение:</p>
+<ul>
+<li><strong>DNS:</strong><ul>
+<li>уменьшите TTL в конфигурации DNS за несколько часов до переключения, чтобы ускорить переключение;</li>
+<li>обновите DNS-записи типа A на новый IP-адрес.</li>
+</ul>
+</li>
+<li><strong>Вышестоящий прокси-сервер:</strong><ul>
+<li>смените IP-адрес старого экземпляра на новый;</li>
+<li>проверьте синтаксис новой конфигурации.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Проверьте доступность системы:</p>
+<ul>
+<li>убедитесь, что система доступна по доменному имени из разных сетей;</li>
+<li>проверьте работу всех основных функций;</li>
+<li>проконтролируйте отсутствие ошибок в журналах;</li>
+<li>проверьте время отклика системы;</li>
+<li>проверьте обновление записей на всех DNS-серверах через <code>nslookup</code>;</li>
+<li>верните исходные значения TTL в конфигурации DNS.</li>
+</ul>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="действия-при-возникновении-проблем">Действия при возникновении проблем</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>При обнаружении ошибок в журналах обновления:</p>
+<ul>
+<li>не продолжайте обновление;</li>
+<li>верните DNS-записи и IP-адреса, указывающие на старый сервер;</li>
+<li>восстановите исходную конфигурацию DNS и прокси-сервера;</li>
+<li>сохраните все журналы ошибок;</li>
+<li>задокументируйте обнаруженные проблемы;</li>
+<li>если устранить проблему самостоятельно не удаётся, обратитесь в службу поддержки <strong>Comindware</strong>.</li>
+</ul>
+</li>
+<li>
+<p>При проблемах после переключения:</p>
+<ul>
+<li>верните DNS-записи и IP-адреса, указывающие на старый сервер;</li>
+<li>восстановите исходную конфигурацию DNS и прокси-сервера;</li>
+<li>при необходимости восстановите экземпляр ПО из резервной копии;</li>
+<li>проанализируйте журналы ошибок и сетевые журналы;</li>
+<li>задокументируйте обнаруженные проблемы;</li>
+<li>если устранить проблему самостоятельно не удаётся, обратитесь в службу поддержки <strong>Comindware</strong>.</li>
+</ul>
+</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4624">Обновление версии экземпляра ПО с его остановкой</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622">Установка, запуск, инициализация и остановка ПО</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642">Резервное копирование. Настройка и запуск, просмотр журнала сеансов</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4623">Подсистема журналирования</a></em></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

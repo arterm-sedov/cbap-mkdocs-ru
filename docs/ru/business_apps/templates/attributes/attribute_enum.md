@@ -3,11 +3,61 @@ title: Атрибут типа «Список значений»
 kbId: 4779
 ---
 
-# Атрибут типа «Список значений» {: #attribute_enum}
+# Атрибут типа «Список значений» {: #attribute_enum }
 
-## Свойства атрибута
+## Описание атрибута {: #attribute_enum_description }
 
-Атрибут типа «**Список значений**» содержит ссылку на текстовое значение, выбранное из предварительно заданного списка.
+!!! question "Структура атрибута типа «Список значений»"
+
+    --8<-- "attribute_enum_logic.md"
+
+!!! tip "Получение данных из атрибута с помощью формулы"
+
+    --8<-- "attribute_enum_get_data_formula.md"
+
+!!! tip "Установка значения атрибута с помощью формулы"
+
+    --8<-- "attribute_enum_set_value_formula.md"
+
+!!! tip "Сравнение значения атрибута с помощью формулы"
+
+    --8<-- "attribute_enum_compare_value_formula.md"
+
+!!! tip "Префиксы N3 для работы с атрибутом"
+
+    Для работы с атрибутом типа «**Список значений**» в выражениях на N3 (например, в сценариях) могут потребоваться следующие префиксы:
+
+    ``` turtle
+    @prefix object: <http://comindware.com/ontology/object#>.
+    @prefix cmw: <http://comindware.com/logics#>.
+    @prefix l10n: <http://comindware.com/ontology/l10n#>.
+    @prefix cmwentity: <http://comindware.com/ontology/entity#>.
+    @prefix string: <http://www.w3.org/2000/10/swap/string#>.
+    @prefix convert: <http://comindware.com/logics/convertions#>.
+
+    ```
+
+!!! tip "Получение данных из атрибута с помощью N3"
+
+    --8<-- "attribute_enum_get_data_n3.md"
+
+!!! tip "Получение значения атрибута на определённом языке с помощью N3"
+
+    --8<-- "attribute_enum_get_data_localized_n3.md"
+
+!!! tip "Установка значения атрибута с помощью N3"
+
+    --8<-- "attribute_enum_set_value_n3.md"
+
+!!! tip "Сравнение значения атрибута с помощью N3"
+
+    --8<-- "attribute_enum_compare_value_n3.md"
+
+!!! tip "Фильтрация значения атрибута с помощью N3"
+
+    {% include-markdown ".snippets/attribute_enum_filter_value_n3.md" %}
+
+## Настройка свойств атрибута {: #attribute_enum_settings .pageBreakBefore }
 
 Помимо **[общих свойств][attribute_common_properties]** для атрибута типа «**Список значений**» предусмотрены перечисленные ниже свойства.
 
@@ -16,7 +66,7 @@ kbId: 4779
     - **Формат отображения:**
         - **Текст** — значения атрибута будут отображаться в виде простого текста;
         - **Индикатор** — перед значением атрибута будет отображаться кружок (если не задан значок) или значок заданного цвета;
-        - **Бейдж** — значение и значок атрибута будут отображаться на подложке заданного цвета. См. [пример](#пример-использования).
+        - **Бейдж** — значение и значок атрибута будут отображаться на подложке заданного цвета. См. [пример](#attribute_enum_examples).
 
     _![Свойства атрибута типа «Список значений»](attribute_enum_properties.png)_
 
@@ -32,7 +82,7 @@ kbId: 4779
 
     _![Список значений](attribute_enum_properties_value_list_tab.png)_
 
-## Создание элементов списка значений {: .pageBreakBefore }
+### Создание элементов списка значений {: .pageBreakBefore #attribute_enum_create_value }
 
 1. На вкладке «**Список значений**» нажмите кнопку «**Создать**».
 2. Нажмите поле «**Системное имя**» и введите системное имя элемента списка.
@@ -45,7 +95,7 @@ kbId: 4779
 
 _![Создание элементов списка значений](attribute_enum_create_value_list.png)_
 
-## Удаление элементов из списка значений
+### Удаление элементов из списка значений {: #attribute_enum_delete_value }
 
 1. На вкладке «**Список значений**» установите флажки выбора для элементов, подлежащих удалению.
 2. Нажмите кнопку «**Удалить**».
@@ -54,26 +104,33 @@ _![Создание элементов списка значений](attribute_
 
 _![Удаление элементов из списка значений](attribute_enum_delete_values.png)_
 
-## Пример использования
+## Примеры использования {: #attribute_enum_examples }
 
-!!! example "Выбор типа транспортного средства из списка значений"
+Ознакомьтесь с перечисленными ниже подробными статьями, а также простейшим примером настройки атрибута типа «**Список значений**».
 
-    См. также статьи *«[Атрибут типа «Список значений». Вычисление значения по справочнику][attribute_enum_calculate_registry]»* и *«[Атрибут типа «Список значений». Вычисление текущего значения][attribute_enum_calculate_current_value]»*.
+- _[Вычисление текущего значения][attribute_enum_calculate_current_value]_
+- _[Вычисление значения по справочнику][attribute_enum_calculate_registry]_
+- _[Фильтрация связанных записей по значению атрибута с помощью N3][attribute_enum_value_filter]_
+- _[Вычисление значения с помощью N3 и формул][attribute_enum_value_calculation]_
 
-    **Конфигурация приложения**
+!!! example "Выбор типа ТС из списка значений на форме"
 
-    - Атрибут _«Тип транспортного средства»_
+    **Исходные данные**
 
-        - **Тип данных**: **Список значений**
-        - **Формат отображения: Бейдж**
+    В приложении настроен и помещён на форму следующий атрибут:
+
+    - _Тип транспортного средства_
+
+        - **Тип данных: список значений**
+        - **Формат отображения: бейдж**
         - **Список значений:**
 
-        | Системное имя | EN      | RU                  | Цвет                                                                    | Значок                                              |
-        | ------------- | ------- | ------------------- | ----------------------------------------------------------------------- | --------------------------------------------------- |
-        | bus           | Bus     | Автобус             | <span style="background-color: #ff0000; color: #ffffff;">#ff0000</span> | <i class="fa-light fa-bus">‌</i> bus                 |
-        | passengerCar  | Car     | Легковой автомобиль | <span style="background-color: #0000ff; color: #ffffff;">#0000ff</span> | <i class="fa-light fa-car">‌</i> car                 |
-        | truck         | Truck   | Пикап               | <span style="background-color: #00ff00;">#00ff00</span>                 | <i class="fa-light fa-truck">‌</i> truck             |
-        | van           | Minivan | Микроавтобус        | <span style="background-color: #ffff00;">#ffff00</span>                 | <i class="fa-light fa-van-shuttle">‌</i> van-shuttle |
+        | Системное имя  | EN        | RU                    | Цвет                                                             | Значок                                              |
+        | -------------- | --------- | --------------------- | ---------------------------------------------------------------- | --------------------------------------------------- |
+        | `bus`          | _Bus_     | _Автобус_             | `#ff0000`{: style="background-color: #ff0000; color: #ffffff;" } | <i class="fa-light fa-bus">‌</i> bus                 |
+        | `passengerCar` | _Car_     | _Легковой автомобиль_ | `#0000ff`{: style="background-color: #0000ff; color: #ffffff;" } | <i class="fa-light fa-car">‌</i> car                 |
+        | `truck`        | _Truck_   | _Грузовик_            | `#00ff00`{: style="background-color: #00ff00;" }                 | <i class="fa-light fa-truck">‌</i> truck             |
+        | `van`          | _Minivan_ | _Микроавтобус_        | `#ffff00`{: style="background-color: #ffff00;" }                 | <i class="fa-light fa-van-shuttle">‌</i> van-shuttle |
 
 
     **Результирующее поведение**
@@ -86,10 +143,13 @@ _![Удаление элементов из списка значений](attri
 
 --8<-- "related_topics_heading.md"
 
+- _[Атрибут типа «Список значений». Вычисление текущего значения][attribute_enum_calculate_current_value]_
 - _[Атрибут типа «Список значений». Вычисление значения по справочнику][attribute_enum_calculate_registry]_
-- _[Атрибут типа «Список значений». Вычисление текущего значения**][attribute_enum_calculate_current_value]_
+- _[Атрибут типа «Список значений». Фильтрация связанных записей по значению атрибута с помощью N3][attribute_enum_value_filter]_
+- _[Атрибут типа «Список значений». Вычисление значения с помощью N3 и формул][attribute_enum_value_calculation]_
 - _[Общие свойства атрибутов][attribute_common_properties]_
 - _[Атрибуты. Определения, типы, настройка, архивирование, удаление][attributes]_
 
 </div>
+
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

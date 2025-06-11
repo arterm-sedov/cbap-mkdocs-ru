@@ -128,10 +128,22 @@
     {% block extrahead %}{% endblock %}
   </head>
 
-  <!-- Set kbId, if defined -->
-  {% set global = namespace(kbId="") %}
-  {% if page and page.meta and page.meta.kbId %}
-    {% set global.kbId = page.meta.kbId %}
+  <!-- Set kbId and kbTitle, if defined -->
+  {% set global = namespace(kbId="", kbTitle="", kbTags="") %}
+  {% if page and page.meta%}
+    {% if page.meta.kbId %}
+      {% set global.kbId = page.meta.kbId %}
+    {% endif %}
+    {% if page.meta.kbTitle %}
+      {% set global.kbTitle = page.meta.kbTitle %}
+    {% elif page.title and (page.title | striptags | list | length) >= (page.meta.title | list | length) %}
+      {% set global.kbTitle = (page.title | striptags) %}
+    {% elif page.meta.title %}
+      {% set global.kbTitle = page.meta.title %}
+    {% endif %}
+    {% if page.meta.tags %}
+      {% set global.kbTags = page.meta.tags | join(',') %}
+    {% endif %}
   {% endif %}
   <!-- Set text direction and color palette, if defined -->
   {% set direction = config.theme.direction or lang.t("direction") %}
@@ -149,9 +161,11 @@
       data-md-color-primary="{{ primary | replace(' ', '-') }}"
       data-md-color-accent="{{ accent | replace(' ', '-') }}"
       kb-id="{{ global.kbId }}"
+      kb-title="{{ global.kbTitle }}"
+      kb-tags="{{ global.kbTags }}"
     >
   {% else %}
-    <body dir="{{ direction }}" kb-id="{{ global.kbId }}">
+    <body dir="{{ direction }}" kb-id="{{ global.kbId }}" kb-title="{{ global.kbTitle }}">
   {% endif %}
     {% set features = config.theme.features or [] %}
 

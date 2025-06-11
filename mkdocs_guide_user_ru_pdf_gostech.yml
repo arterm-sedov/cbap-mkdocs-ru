@@ -8,18 +8,23 @@ INHERIT: mkdocs_guide_user_ru_pdf.yml
 
 extra:
   gostech: true
-  apacheIgniteVariants: Platform V DataGrid (Apache Ignite)
-  apacheKafkaVariants: Platform V Corax (Apache Kafka)
-  nginxVariants: Platform V SynGX (NGINX)
-  notificationServerVariants: Platform V Notification Center (SMTP/IMAP)
-  openSearchVariants:  Platform V Search (OpenSearch, Elasticsearch)
-  zabbixVariants: Platform V Monitor (Zabbix)
+  apacheIgniteVariants: «Сервис key-value  СУБД (in-memory)» (услуга 1.3)
+  apacheKafkaVariants: «Сервис управления очередями сообщений» (услуга 1.10)
+  nginxVariants: «Сервис IAM Proxy» (услуга 1.13)
+  notificationServiceVariants: «Сервис управления процессами» (услуга 1.12)
+  openSearchVariants: «Сервис СУБД полнотекстового индекса» (услуга 1.4)
+  openSearchVariantsUnquotedNominative: Сервис СУБД полнотекстового индекса (услуга 1.4)
+  openSearchVariantsUnquotedDative: Сервису СУБД полнотекстового индекса (услуга 1.4)
+  openSearchVariantsUnquotedGenitive: Сервиса СУБД полнотекстового индекса (услуга 1.4)
+  openSearchVariantsUnquotedAccusative: Сервис СУБД полнотекстового индекса (услуга 1.4)
+  zabbixVariants: «Сервис журналирования» (услуга 1.14)
+  auditVariants: «Сервис аудита» (услуга 1.15)
+  authServiceVariants: «Сервис IAM» (услуга 1.13)
+  gitVariants: «Сервис управления репозиториями дистрибутивов» (услуга 1.25)
 
 plugins:
   with-pdf:
     output_path: ../Comindware Platform 5.0. Руководство пользователя. ГосТех.pdf
-
-
 
 nav:
   - Общие сведения:
@@ -69,6 +74,7 @@ nav:
       - administration/infrastructure/global_configuration.md
       - administration/infrastructure/authentication_keys.md
     - Подключения и пути передачи данных:
+      - administration/connections_communication_routes/integration.md
       - administration/connections_communication_routes/connections.md
       - administration/connections_communication_routes/communication_routes.md
       - Системные подключения:
@@ -79,10 +85,9 @@ nav:
         - administration/connections_communication_routes/system_connections/elasticsearch_connection.md
         - administration/connections_communication_routes/system_connections/map_configure.md
         - administration/connections_communication_routes/system_connections/git_connection.md
-        - administration/connections_communication_routes/system_connections/s3_connection.md
+        - administration/connections_communication_routes/system_connections/s3_connection_gostech.md
       - Аутентификация:
-        - administration/connections_communication_routes/authentication/openid_connection.md
-        - administration/connections_communication_routes/authentication/wsfederation_connection.md
+        - administration/connections_communication_routes/authentication/openid_connection_gostech.md
         - administration/connections_communication_routes/authentication/ad_connection.md
       - Подключения к офисным приложениям:
         - administration/connections_communication_routes/office_connections/collabora_connection.md
@@ -103,8 +108,6 @@ nav:
       - SQL-подключения:
         - administration/connections_communication_routes/sql_connections/sql_send_connection.md
         - administration/connections_communication_routes/sql_connections/sql_receive_connection.md
-      - Подключения к шинам сообщений:
-        - administration/connections_communication_routes/message_queue_connections/kafka_connection.md
       - Пользовательские подключения:
         - administration/connections_communication_routes/custom_connections/esphere_receive_configure.md
         - administration/connections_communication_routes/custom_connections/esphere_send_configure.md
@@ -239,60 +242,22 @@ nav:
       - business_apps/expressions/expression_debug.md
       - Редактор выражений:
         - business_apps/expressions/expression_editor/index.md
-        - Предиктивный ввод в формулах:
-          - business_apps/expressions/expression_editor/formula_editor/index.md
-          - business_apps/expressions/expression_editor/formula_editor/function_autocomplete.md
-          - business_apps/expressions/expression_editor/formula_editor/from_where_select_autocomplete.md
-          - business_apps/expressions/expression_editor/formula_editor/record_heading_autocomplete.md
-          - business_apps/expressions/expression_editor/formula_editor/function_returned_attribute_autocomplete.md
-          - business_apps/expressions/expression_editor/formula_editor/object_function_autocomplete.md
-          - business_apps/expressions/expression_editor/formula_editor/enum_autocomplete_formula.md
-          - business_apps/expressions/expression_editor/formula_editor/template_attribute_autocomplete.md
-          - business_apps/expressions/expression_editor/formula_editor/linked_record_attributes_autocomplete.md
-          - business_apps/expressions/expression_editor/formula_editor/template_for_attribute_autocomplete.md
-          - business_apps/expressions/expression_editor/formula_editor/local_variables.md
-        - Предиктивный ввод в выражениях на языке N3:
-          - business_apps/expressions/expression_editor/n3_editor/index.md
-          - business_apps/expressions/expression_editor/n3_editor/prefix_autocomplete.md
-          - business_apps/expressions/expression_editor/n3_editor/block_autocomplete.md
-          - business_apps/expressions/expression_editor/n3_editor/predicate_autocomplete.md
-          - business_apps/expressions/expression_editor/n3_editor/variable_autocomplete.md
-          - business_apps/expressions/expression_editor/n3_editor/findproperty_autocomplete.md
-          - business_apps/expressions/expression_editor/n3_editor/square_brackets_autocomplete.md
-          - business_apps/expressions/expression_editor/n3_editor/findobject_autocomplete.md
-          - business_apps/expressions/expression_editor/n3_editor/enum_autocomplete_n3.md
-          - business_apps/expressions/expression_editor/n3_editor/literal_autocomplete.md
+        - business_apps/expressions/expression_editor/formula_editor/index.md    
+        - business_apps/expressions/expression_editor/n3_editor/index.md
   - Моделирование корпоративной архитектуры:
     - architect/architect_desktop.md
-    - architect/architect_example.md
-    - architect/version_control.md
+    - architect/process_architecture_modeling/index.md
+    - architect/process_architecture_modeling/edit_diagram.md
+    - architect/process_architecture_modeling/import_export.md
+    - architect/organizational_structure_modeling/index.md
+    - architect/organizational_structure_modeling/organizational_structure_designer.md
     - architect/conversations.md
+    - architect/version_control.md
     - architect/architect_demo.md
-    - Построение процессной архитектуры:
-      - architect/process_architecture_modeling/index.md
-      - architect/process_architecture_modeling/viewing_diagram.md
-      - Конструктор диаграмм: 
-        - architect/process_architecture_modeling/diagram_designer/index.md
-        - architect/process_architecture_modeling/diagram_designer/edit_diagram.md
-        - architect/process_architecture_modeling/diagram_designer/verify_diagram.md
-      - Операции с элементами процессной архитектуры:
-        - Создание элемента: architect/process_architecture_modeling/process_entities_operations/creating_process_entity.md
-        - Изменение свойств элемента: architect/process_architecture_modeling/process_entities_operations/configuring_process_entity_properties.md
-        - Редактирование формы свойств и атрибутов элемента: architect/process_architecture_modeling/process_entities_operations/configuring_process_entity_properties_form_and_attributes.md
-        - Переименование элемента: architect/process_architecture_modeling/process_entities_operations/renaming_process_entity.md
-        - Изменение иерархии процессов: architect/process_architecture_modeling/process_entities_operations/changing_process_hierarchy.md
-        - Дублирование элемента: architect/process_architecture_modeling/process_entities_operations/cloning_process_entity.md
-        - Удаление элементов: architect/process_architecture_modeling/process_entities_operations/deleting_process_entity.md
-      - architect/process_architecture_modeling/importing_process_entity.md
-      - architect/process_architecture_modeling/exporting_process_entity.md
+    - architect/architect_example.md
     - Построение организационной структуры:
       - architect/organizational_structure_modeling/index.md
-      - architect/organizational_structure_modeling/creating_organizational_unit.md
-      - architect/organizational_structure_modeling/configuring_organizational_unit.md
-      - architect/organizational_structure_modeling/configuring_organizational_unit_form_and_attributes.md
-      - architect/organizational_structure_modeling/renaming_organizational_unit.md
-      - architect/organizational_structure_modeling/changing_hierarchy.md
-      - architect/organizational_structure_modeling/deleting_organizational_unit.md
+      - architect/organizational_structure_modeling/organizational_structure_designer.md
   - Практические примеры:
     - examples/autonumerating_records.md
     - examples/document_clone_scenario_n3.md
@@ -300,7 +265,7 @@ nav:
     - examples/document_download_archive_related_record_csharp.md
     - examples/document_download_to_server_csharp.md
     - examples/substring_search.md
-    - examples/enum_attribute_value_calculation.md
+    - examples/attribute_enum_value_calculation.md
     - examples/script_using_local_variable.md
     - examples/scenario_verify_data.md
     - examples/multilingual_app.md
@@ -310,12 +275,21 @@ nav:
     - administration/connections_communication_routes/rest_odata_connections/http_send_file.md
     - administration/connections_communication_routes/rest_odata_connections/jpath_example.md      
     - administration/connections_communication_routes/rest_odata_connections/http_receive_file.md
+    - examples/task_reassign.md
+    - examples/template_reference_data_api.md
+    - examples/get_selected_record_ids.md
   - Обзор версий:
     - general/changelog/changelog.md
     - general/changelog/release_notes_5.0.md
+    - general/changelog/release_notes_5.0.13334.md
 
 exclude_docs: |
-  
+  using_the_system/mobile_app_use.md
+  using_the_system/password_restore.md
+  administration/connections_communication_routes/system_connections/s3_connection.md
+  administration/connections_communication_routes/message_queue_connections/kafka_connection.md
+  administration/connections_communication_routes/authentication/keycloak_connection.md
+  administration/connections_communication_routes/authentication/wsfederation_connection.md
   administration/account_administration/authentication_authorization_sessions.md
   administration/account_administration/accounts_dc_sync/index.md
   administration/backup/linux/**

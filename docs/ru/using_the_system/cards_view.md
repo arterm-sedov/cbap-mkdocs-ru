@@ -63,6 +63,7 @@ hide:
 --8<-- "related_topics_heading.md"
 
 - _[Настройка представления карточек][cards_configure]_
+- _[Мобильное приложение. Использование][mobile_app_use]_
 
 </div>
 

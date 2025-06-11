@@ -1,0 +1,129 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4624" kb-tags="" kb-title="Обновление версии экземпляра ПО">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#порядок-обновления-версии-экземпляра-по">
+<span class="md-ellipsis">
+      Порядок обновления версии экземпляра ПО
+    </span>
+</a>
+<nav aria-label="Порядок обновления версии экземпляра ПО" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#обновление-контейнеров">
+<span class="md-ellipsis">
+      Обновление контейнеров
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#обновление-helm-чарта">
+<span class="md-ellipsis">
+      Обновление Helm-чарта
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Здесь представлены инструкции по обновлению версии экземпляра ПО <strong>Comindware Platform</strong> с 4.7.2 до версий 4.7.3–5.0 для ОС Linux.</p>
+<h2 id="порядок-обновления-версии-экземпляра-по">Порядок обновления версии экземпляра ПО</h2>
+<p>Обновить версию экземпляра ПО можно одним из двух способов:</p>
+<ul>
+<li><a class="mkdocs_imported_link" href="#обновление-контейнеров">обновить контейнеры с ПО</a>;</li>
+<li><a class="mkdocs_imported_link" href="#обновление-helm-чарта">обновить Helm-чарт <strong>Comindware Platform</strong></a>.</li>
+</ul>
+<h3 id="обновление-контейнеров">Обновление контейнеров</h3>
+<ol class="colored_numbers_list">
+<li>Сохраните резервную копию экземпляра ПО. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642">Резервное копирование. Настройка и запуск, просмотр журнала сеансов</a>»</em>.</li>
+<li>
+<p>Выполните команду:</p>
+<div class="highlight"><code><pre><span></span><code>helm<span class="w"> </span>upgrade<span class="w"> </span>--set<span class="w"> </span>image.name<span class="o">=</span>&lt;SET-NAME&gt;<span class="w"> </span>--set<span class="w"> </span>image.tag<span class="o">=</span>&lt;SET-VERSION&gt;<span class="w"> </span>&lt;HELM-RELEASE-NAME&gt;<span class="w"> </span>&lt;HELM-CHART&gt;</code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<ul>
+<li><code>&lt;SET-NAME&gt;</code> — имя контейнера для обновления;</li>
+<li><code>&lt;SET-VERSION&gt;</code> — целевая версия контейнера;</li>
+<li><code>&lt;HELM-RELEASE-NAME&gt;</code> — имя Helm-релиза для <strong>Comindware Platform</strong>;</li>
+<li><code>&lt;HELM-CHART&gt;</code> — путь к директории (<code>./comindware-v.5.W.XYZ.0/</code>), путь к файлу <code>.tgz</code> чарта или FQDN-имя Helm-чарта.</li>
+</ul>
+</li>
+<li>
+<p>Убедитесь, что обновление было выполнено успешно:</p>
+<div class="highlight"><code><pre><span></span><code>helm<span class="w"> </span>list</code> <br/><code>kubectl<span class="w"> </span>get<span class="w"> </span>pods</code> <br/></pre></code></div>
+</li>
+<li>
+<p>В браузере откройте URI Ingress-эндпоинта с <strong>Comindware Platform</strong>.</p>
+</li>
+<li>Если отобразится страница режима обслуживания, инициализируйте экземпляр ПО. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622#deploy_guide_linux_initialize">Инициализация Comindware Platform</a>»</em>.</li>
+</ol>
+<h3 class="pageBreakBefore" id="обновление-helm-чарта">Обновление Helm-чарта</h3>
+<ol class="colored_numbers_list">
+<li>Сохраните резервную копию экземпляра ПО.</li>
+<li>
+<p>Ознакомьтесь с разницей между текущей и новой версией чарта:</p>
+<div class="highlight"><code><pre><span></span><code>helm<span class="w"> </span>diff<span class="w"> </span>upgrade<span class="w"> </span>&lt;HELM-RELEASE-NAME&gt;<span class="w"> </span>&lt;TARGET-HELM-CHART&gt;</code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<ul>
+<li><code>&lt;HELM-RELEASE-NAME&gt;</code> — имя Helm-релиза для <strong>Comindware Platform</strong>;</li>
+<li><code>&lt;TARGET-HELM-CHART&gt;</code> — путь к директории (<code>./comindware-v.5.W.XYZ.0/</code>), путь к файлу <code>.tgz</code> чарта или FQDN-имя Helm-чарта.</li>
+</ul>
+</li>
+<li>
+<p>Выполните обновление с помощью команды:</p>
+<div class="highlight"><code><pre><span></span><code>helm<span class="w"> </span>upgrade<span class="w"> </span>&lt;HELM-RELEASE-NAME&gt;<span class="w"> </span>&lt;TARGET-HELM-CHART&gt;</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Убедитесь, что обновление было выполнено успешно:</p>
+<div class="highlight"><code><pre><span></span><code>helm<span class="w"> </span>list</code> <br/><code>kubectl<span class="w"> </span>get<span class="w"> </span>pods</code> <br/></pre></code></div>
+</li>
+<li>
+<p>В браузере откройте URI Ingress-эндпоинта с <strong>Comindware Platform</strong>.</p>
+</li>
+<li>Если отобразится страница режима обслуживания, инициализируйте экземпляр ПО. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622#deploy_guide_linux_initialize">Инициализация Comindware Platform</a>»</em>.</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642">Резервное копирование. Настройка и запуск, просмотр журнала сеансов</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622#deploy_guide_linux_initialize">Инициализация Comindware Platform</a></em></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

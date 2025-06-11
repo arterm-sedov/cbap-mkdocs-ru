@@ -5,7 +5,7 @@ kbId: 4621
 
 # Перенос базы данных из ПО версии 4.2 для Windows в ПО версии 5 для Linux {: #db_migrate_4.2_to_5}
 
---8<-- "experimental_feature.md"
+{% include-markdown ".snippets/experimental_feature.md" %}
 
 ## Введение
 
@@ -50,7 +50,7 @@ _![Запуск резервного копирования экземпляра
 
 1. Скачайте архив с утилитой миграции `migrationTool.zip` по ссылке, предоставленной службой поддержки Comindware.
 2. Распакуйте архив `migrationTool.zip`, например, в папку `C:\MigrationTool`
-3. Выделите для Apache Ignite достаточно оперативной памяти, как указано ниже
+3. Выделите для {{ apacheIgniteVariants }} достаточно оперативной памяти, как указано ниже
 
     1. Откройте в текстовом редакторе файл `C:\MigrationTool\Ignite.config`
     2. Найдите блок конфигурации выделенной памяти, например:
@@ -174,7 +174,7 @@ _![Запуск резервного копирования экземпляра
 
     Здесь `<instanceName>` — имя экземпляра ПО. Если не указать этот параметр, будет задано стандартное имя экземпляра: `cmwdata`
 
-3. Остановите сервисы Elasticsearch, NGINX, comindwareinstanceName и Kafka и удостоверьтесь, что они остановлены:
+3. Остановите сервисы {{ openSearchVariants }}, {{ nginxVariants }}, comindwareinstanceName и Kafka и удостоверьтесь, что они остановлены:
 
     ``` sh
     systemctl stop elasticsearch

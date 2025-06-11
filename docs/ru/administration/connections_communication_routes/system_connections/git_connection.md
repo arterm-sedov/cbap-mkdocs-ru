@@ -17,7 +17,7 @@ kbId: 4680
 
 # Управление версиями через Git. Настройка подключения {: #git_connection}
 
---8<-- "experimental_feature.md"
+{% include-markdown ".snippets/experimental_feature.md" %}
 
 ## Введение
 

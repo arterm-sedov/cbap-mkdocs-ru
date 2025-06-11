@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5002">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5002" kb-tags="" kb-title="Атрибут типа «Документ». Скачивание файлов в папку на сервере">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -39,49 +39,67 @@
 <div class="notice notice-success">
 <p class="admonition-title">Структура атрибута типа «Документ»</p>
 <ul>
-<li>Атрибут типа «<strong>Документ</strong>» хранит одну или несколько ссылок на записи (<strong>документы</strong>) в системном шаблоне документа, к которым прикрепляются файлы.</li>
-<li>В шаблоне документа имеется атрибут <code>currentRevision</code> (текущая <strong>ревизия</strong>), который хранит ссылку на запись в системном шаблоне ревизии.</li>
-<li>В шаблоне ревизии имеются атрибуты <code>title</code> (имя) и <code>content</code> (содержимое), которые хранят имя файла и ссылку на файл, физически хранящийся в папке <code>Streams</code> на сервере.</li>
+<li>Атрибут типа «<strong>Документ</strong>» хранит одну или несколько ссылок на записи (<strong>документы</strong>) в системном шаблоне документа, к которым прикрепляются файлы (например, загруженные пользователями).</li>
+<li>В шаблоне документа имеется атрибут <code>currentRevision</code> (текущая <strong>версия</strong>), который хранит ссылку на запись в системном шаблоне версии.</li>
+<li>В шаблоне версии имеются атрибуты <code>title</code> (имя) и <code>content</code> (содержимое), которые хранят имя файла и ссылку на файл, физически хранящийся в папке <code>Streams</code> на сервере.</li>
 </ul>
 </div>
 <div class="notice notice-tip">
 <p class="admonition-title">Извлечение файлов из атрибута типа «Документ» с помощью C#</p>
+<p>Чтобы считать файл из атрибута типа «<strong>Документ</strong>» с помощью C#-скрипта, необходимо:</p>
 <ul>
-<li>Чтобы считать файл из атрибута типа «<strong>Документ</strong>» с помощью C#-скрипта, необходимо:<ul>
-<li>из текущей записи получить массив идентификаторов файлов, прикреплённых к атрибуту:
-    <div class="highlight"><code><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">fileIds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">GetPropertyValues</span><span class="p">(</span><span class="n">recordId</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="s">"documentAttributeSystemName"</span><span class="p">})</span><span class="err">`</span><span class="p">;</span></code> <br/></pre></code></div></li>
-<li>получить массив объектов с прикреплёнными файлами:
-    <div class="highlight"><code><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">attachedFileObjects</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fileIds</span><span class="p">[</span><span class="n">docId</span><span class="p">].</span><span class="n">TryGetValue</span><span class="p">(</span><span class="s">"Files"</span><span class="p">,</span><span class="w"> </span><span class="k">out</span><span class="w"> </span><span class="kt">object</span><span class="w"> </span><span class="n">fileObject</span><span class="p">)</span><span class="w"> </span></code> <br/><code><span class="w">                          </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">fileObject</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">fileObject</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">object</span><span class="p">[]</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">null</span><span class="p">;</span></code> <br/></pre></code></div></li>
-<li>получить объект файла (<code>attachedFile</code>):
-    <div class="highlight"><code><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">attachedFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">DocumentService</span><span class="p">.</span><span class="n">GetContent</span><span class="p">(</span><span class="n">attachedFileObject</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">ToString</span><span class="p">());</span></code> <br/></pre></code></div></li>
-<li>получить имя файла с расширением (<code>attachedFile.Name</code>);</li>
+<li>
+<p>из текущей записи получить массив идентификаторов файлов, прикреплённых к атрибуту:</p>
+<div class="highlight"><code><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">fileIds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">GetPropertyValues</span><span class="p">(</span><span class="n">recordId</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="s">"documentAttributeSystemName"</span><span class="p">})</span><span class="err">`</span><span class="p">;</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>получить массив объектов с прикреплёнными файлами:</p>
+<div class="highlight"><code><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">attachedFileObjects</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fileIds</span><span class="p">[</span><span class="n">docId</span><span class="p">].</span><span class="n">TryGetValue</span><span class="p">(</span><span class="s">"Files"</span><span class="p">,</span><span class="w"> </span><span class="k">out</span><span class="w"> </span><span class="kt">object</span><span class="w"> </span><span class="n">fileObject</span><span class="p">)</span><span class="w"> </span></code> <br/><code><span class="w">                            </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">fileObject</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">fileObject</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">object</span><span class="p">[]</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">null</span><span class="p">;</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>получить объект файла (<code>attachedFile</code>):</p>
+<div class="highlight"><code><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">attachedFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">DocumentService</span><span class="p">.</span><span class="n">GetContent</span><span class="p">(</span><span class="n">attachedFileObject</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">ToString</span><span class="p">());</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>получить имя файла с расширением (<code>attachedFile.Name</code>);</p>
+</li>
 <li>получить содержимое файла (<code>attachedFile.Data</code>);</li>
-<li>при необходимости получить объект с метаданными документа:
-    <div class="highlight"><code><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">attachedFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">DocumentService</span><span class="p">.</span><span class="n">GetDocument</span><span class="p">(</span><span class="n">attachedFileObject</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">ToString</span><span class="p">());</span></code> <br/></pre></code></div><ul>
+<li>
+<p>при необходимости получить объект с метаданными документа:</p>
+<div class="highlight"><code><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">attachedFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">DocumentService</span><span class="p">.</span><span class="n">GetDocument</span><span class="p">(</span><span class="n">attachedFileObject</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">ToString</span><span class="p">());</span></code> <br/></pre></code></div>
+<ul>
 <li><code>attachedFile.Title</code> — имя файла с расширением;</li>
 <li><code>attachedFile.Extension</code> — расширение файла.</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="notice notice-tip">
 <p class="admonition-title">Добавление файлов в атрибут типа «Документ» с помощью C#</p>
+<p>Чтобы прикрепить к атрибуту типа «<strong>Документ</strong>» файл с помощью C#-скрипта, необходимо:</p>
 <ul>
-<li>Чтобы прикрепить к атрибуту типа «<strong>Документ</strong>» файл с помощью C#-скрипта, необходимо:<ul>
-<li>сформировать объект типа <code>Document</code>:
-    <div class="highlight"><code><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">document</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Document</span><span class="w"> </span></code> <br/><code><span class="w">    </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="n">Title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"имя файла.расширение"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="n">Extension</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">".расширение"</span></code> <br/><code><span class="w">    </span><span class="p">};</span></code> <br/></pre></code></div></li>
-<li>сформировать массив байтов <code>byte[] fileBytes</code> с содержимым файла;</li>
-<li>из массива байтов создать поток <code>MemoryStream()</code> для прикрепления документа к атрибуту:
-    <div class="highlight"><code><pre><span></span><code><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">fileStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MemoryStream</span><span class="p">();</span></code> <br/><code><span class="w">    </span><span class="n">fileStream</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="n">fileBytes</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">fileBytes</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span></code> <br/><code><span class="w">    </span><span class="n">fileStream</span><span class="p">.</span><span class="n">Seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">SeekOrigin</span><span class="p">.</span><span class="n">Begin</span><span class="p">);</span></code> <br/></pre></code></div></li>
-<li>преобразовать поток в объект документа для прикрепления к атрибуту:
-    <div class="highlight"><code><pre><span></span><code><span class="kt">string</span><span class="w"> </span><span class="n">documentObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">DocumentService</span><span class="p">.</span><span class="n">CreateDocumentWithStream</span><span class="p">(</span><span class="n">document</span><span class="p">,</span><span class="w"> </span><span class="n">fileStream</span><span class="p">,</span><span class="w"> </span><span class="s">""</span><span class="p">);</span></code> <br/></pre></code></div></li>
-<li>сформировать словарь из системного имени атрибута и объекта документа;
-    <div class="highlight"><code><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">documentDict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="kt">object</span><span class="o">&gt;</span></code> <br/><code><span class="w">    </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="s">"DocumentAttributeSystemName"</span><span class="p">,</span><span class="w"> </span><span class="n">documentObject</span><span class="w"> </span><span class="p">}</span></code> <br/><code><span class="w">    </span><span class="p">};</span></code> <br/></pre></code></div></li>
-<li>прикрепить результирующий документ к атрибуту записи <code>reсordId</code>:
-    <div class="highlight"><code><pre><span></span><code><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">EditWithAlias</span><span class="p">(</span><span class="n">reсordId</span><span class="p">,</span><span class="w"> </span><span class="n">documentDict</span><span class="p">)</span></code> <br/></pre></code></div></li>
-</ul>
+<li>
+<p>сформировать объект типа <code>Document</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">document</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Document</span><span class="w"> </span></code> <br/><code><span class="w">    </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="n">Title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"имя файла.расширение"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="n">Extension</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">".расширение"</span></code> <br/><code><span class="w">    </span><span class="p">};</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>сформировать массив байтов <code>byte[] fileBytes</code> с содержимым файла;</p>
+</li>
+<li>
+<p>из массива байтов создать поток <code>MemoryStream()</code> для прикрепления документа к атрибуту:</p>
+<div class="highlight"><code><pre><span></span><code><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">fileStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MemoryStream</span><span class="p">();</span></code> <br/><code><span class="w">    </span><span class="n">fileStream</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="n">fileBytes</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">fileBytes</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span></code> <br/><code><span class="w">    </span><span class="n">fileStream</span><span class="p">.</span><span class="n">Seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">SeekOrigin</span><span class="p">.</span><span class="n">Begin</span><span class="p">);</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>преобразовать поток в объект документа для прикрепления к атрибуту:</p>
+<div class="highlight"><code><pre><span></span><code><span class="kt">string</span><span class="w"> </span><span class="n">documentObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">DocumentService</span><span class="p">.</span><span class="n">CreateDocumentWithStream</span><span class="p">(</span><span class="n">document</span><span class="p">,</span><span class="w"> </span><span class="n">fileStream</span><span class="p">,</span><span class="w"> </span><span class="s">""</span><span class="p">);</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>сформировать словарь из системного имени атрибута и объекта документа:</p>
+<div class="highlight"><code><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">documentDict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="kt">object</span><span class="o">&gt;</span></code> <br/><code><span class="w">    </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="s">"DocumentAttributeSystemName"</span><span class="p">,</span><span class="w"> </span><span class="n">documentObject</span><span class="w"> </span><span class="p">}</span></code> <br/><code><span class="w">    </span><span class="p">};</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>прикрепить результирующий документ к атрибуту записи <code>reсordId</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="w">    </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">EditWithAlias</span><span class="p">(</span><span class="n">reсordId</span><span class="p">,</span><span class="w"> </span><span class="n">documentDict</span><span class="p">)</span></code> <br/></pre></code></div>
 </li>
 </ul>
 </div>

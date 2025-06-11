@@ -16,7 +16,12 @@ hide:
 
 # Промежуточные события {: #process_diagram_elements_events_intermediate}
 
+<div class="admonition question" markdown="block">
+## Определения {: .admonition-title #definitions}
+
 **Промежуточные события** служат для управления ходом процесса и контроля его выполнения в срок, а также для обмена данными между процессами, элементами процесса и с внешними системами.
+
+</div>
 
 ## Типы промежуточных событий
 
@@ -25,7 +30,7 @@ hide:
 - **[Промежуточное событие-получение сообщения][process_diagram_elements_receive_message_intermediate_event]**
 - **[Простое промежуточное событие][process_diagram_elements_none_intermediate_event]**
 
-## Способы использования промежуточного события
+## Способы использования промежуточного события {: #process_diagram_elements_events_intermediate_usage }
 
 1. Любое промежуточное событие можно соединить с потоком управления. В этом случае токен остановится на промежуточном событии до его наступления, а после наступления события перейдёт на следующий элемент.
 2. **[Промежуточное событие-таймер][process_diagram_elements_timer_intermediate_event]** и **[промежуточное событие-получение сообщения][process_diagram_elements_receive_message_intermediate_event]** можно присоединить к [действию][process_diagram_elements_actions]. В этом случае при наступлении данного события на нём будет создан новый токен, который перейдёт на элемент, соединённый с событием.
@@ -34,7 +39,7 @@ hide:
 
 ## Создание промежуточного события на диаграмме
 
-1. Перетащите промежуточное событие с панели элементов на поток управления, границу [process_diagram_elements_actions][process_diagram_elements_actions] или пустое место диаграммы.
+1. Перетащите промежуточное событие с панели элементов на поток управления, границу [действия][process_diagram_elements_actions] или пустое место диаграммы.
 2. Будет создано **[промежуточное событие-таймер][process_diagram_elements_timer_intermediate_event]**.
 3. При необходимости смените [тип события](#process_diagram_elements_events_intermediate) с помощью [меню элемента][process_diagram_call_element_menu].
 

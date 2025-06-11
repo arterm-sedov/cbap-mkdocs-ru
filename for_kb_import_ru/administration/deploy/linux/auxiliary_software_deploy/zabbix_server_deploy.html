@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4607">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4607" kb-tags="" kb-title="Zabbix Server, Zabbix Agent, Zabbix Frontend и MySQL. Установка и настройка">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -166,7 +166,7 @@
 </li>
 <li>
 <p>Раскомментируйте директивы <code>listen</code> и <code>server_name</code> и присвойте им значения:</p>
-<div class="highlight"><code><pre><span></span><code>listen<span class="w"> </span><span class="m">8080</span><span class="p">;</span></code> <br/><code>server_name<span class="w"> </span>example.com<span class="p">;</span><span class="w"> </span><span class="c1"># change-me.com</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>listen<span class="w"> </span><span class="m">8080</span><span class="p">;</span></code> <br/><code>server_name<span class="w"> </span>&lt;hostname&gt;<span class="p">;</span><span class="w"> </span><span class="c1"># замените на своё имя хоста</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Запустите службы <em>Zabbix Server, Zabbix Agent, Zabbix Frontend</em> и <em>NGINX</em>:</p>
@@ -211,7 +211,7 @@
 </li>
 <li>
 <p>В файле конфигурации необходимо указать IP-адрес <em>Zabbix Server</em>. Если сервер развёрнут на наблюдаемой машине укажите IP-адрес 127.0.0.1 (если интерфейс loopback не настроен иначе):</p>
-<div class="highlight"><code><pre><span></span><code><span class="c1">### Option: Server</span></code> <br/><code><span class="c1">#       List of comma delimited IP addresses, optionally in CIDR notation, or DNS names of Zabbix ser&gt;</span></code> <br/><code><span class="c1">#       Incoming connections will be accepted only from the hosts listed here.</span></code> <br/><code><span class="c1">#       If IPv6 support is enabled then '127.0.0.1', '::127.0.0.1', '::ffff:127.0.0.1' are treated eq&gt;</span></code> <br/><code><span class="c1">#       and '::/0' will allow any IPv4 or IPv6 address.</span></code> <br/><code><span class="c1">#       '0.0.0.0/0' can be used to allow any IPv4 address.</span></code> <br/><code><span class="c1">#       Example: Server=127.0.0.1,192.168.1.0/24,::1,2001:db8::/32,zabbix.example.com</span></code> <br/><code><span class="c1">#</span></code> <br/><code><span class="c1"># Mandatory: yes, if StartAgents is not explicitly set to 0</span></code> <br/><code><span class="c1"># Default:</span></code> <br/><code><span class="c1"># Server=your.server.ip.address</span></code> <br/><code><span class="nv">Server</span><span class="o">=</span><span class="m">127</span>.0.0.1</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="c1">### Option: Server</span></code> <br/><code><span class="c1">#       List of comma delimited IP addresses, optionally in CIDR notation, or DNS names of Zabbix ser&gt;</span></code> <br/><code><span class="c1">#       Incoming connections will be accepted only from the hosts listed here.</span></code> <br/><code><span class="c1">#       If IPv6 support is enabled then '127.0.0.1', '::127.0.0.1', '::ffff:127.0.0.1' are treated eq&gt;</span></code> <br/><code><span class="c1">#       and '::/0' will allow any IPv4 or IPv6 address.</span></code> <br/><code><span class="c1">#       '0.0.0.0/0' can be used to allow any IPv4 address.</span></code> <br/><code><span class="c1">#       Example: Server=127.0.0.1,192.168.1.0/24,::1,2001:db8::/32,zabbix.&lt;hostname&gt;</span></code> <br/><code><span class="c1">#</span></code> <br/><code><span class="c1"># Mandatory: yes, if StartAgents is not explicitly set to 0</span></code> <br/><code><span class="c1"># Default:</span></code> <br/><code><span class="c1"># Server=your.server.ip.address</span></code> <br/><code><span class="nv">Server</span><span class="o">=</span><span class="m">127</span>.0.0.1</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Отредактируйте директиву <code>ServerActive</code>:</p>

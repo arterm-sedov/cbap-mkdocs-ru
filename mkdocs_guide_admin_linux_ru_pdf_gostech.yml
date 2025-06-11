@@ -9,16 +9,24 @@ INHERIT: mkdocs_guide_admin_linux_ru_pdf.yml
 
 extra:
   gostech: true
-  apacheIgniteVariants: Platform V DataGrid (Apache Ignite)
-  apacheKafkaVariants: Platform V Corax (Apache Kafka)
-  nginxVariants: Platform V SynGX (NGINX)
-  notificationServerVariants: Platform V Notification Center (SMTP/IMAP)
-  openSearchVariants:  Platform V Search (OpenSearch, Elasticsearch)
-  zabbixVariants: Platform V Monitor (Zabbix)
+  apacheIgniteVariants: «Сервис key-value  СУБД (in-memory)» (услуга 1.3)
+  apacheKafkaVariants: «Сервис управления очередями сообщений» (услуга 1.10)
+  nginxVariants: «Сервис IAM Proxy» (услуга 1.13)
+  notificationServiceVariants: «Сервис управления процессами» (услуга 1.12)
+  openSearchVariants: «Сервис СУБД полнотекстового индекса» (услуга 1.4)
+  openSearchVariantsUnquotedNominative: Сервис СУБД полнотекстового индекса (услуга 1.4)
+  openSearchVariantsUnquotedDative: Сервису СУБД полнотекстового индекса (услуга 1.4)
+  openSearchVariantsUnquotedGenitive: Сервиса СУБД полнотекстового индекса (услуга 1.4)
+  openSearchVariantsUnquotedAccusative: Сервис СУБД полнотекстового индекса (услуга 1.4)
+  zabbixVariants: «Сервис журналирования» (услуга 1.14)
+  auditVariants: «Сервис аудита» (услуга 1.15)
+  authServiceVariants: «Сервис IAM» (услуга 1.13)
+  gitVariants: «Сервис управления репозиториями дистрибутивов» (услуга 1.25)
 
 plugins:
   with-pdf:
     output_path: ../Comindware Platform 5.0. Руководство системного администратора для Linux. ГосТех.pdf
+    # enabled_if_env: PDF_OUTPUT
 
 nav:
 
@@ -29,40 +37,18 @@ nav:
     - administration/deploy/architecture_landscape.md
     - administration/deploy/availability_fault_tolerance.md
     - administration/deploy/security.md
-    - administration/deploy/logging_engine.md
-    - administration/deploy/log_files_event_examples.md
+    - Установка и запуск Comindware Platform: administration/deploy/linux/deploy_guide_gostech.md
     - administration/deploy/paths.md
-    - Установка и запуск Comindware Business Application Platform: administration/deploy/linux/deploy_guide.md
-    - administration/deploy/linux/configuration_files.md
-    - administration/deploy/linux/db_migrate_4.2_to_4.7.md
-    # - administration/deploy/linux/deploy_cluster.md
-    - administration/deploy/linux/uninstall_auxiliary_software.md
-    - administration/deploy/linux/upgrade_version.md
-    - administration/deploy/linux/upload_size_limit_configure.md
+    - administration/deploy/linux/configuration_files_gostech.md
+    - administration/deploy/linux/upgrade_version_gostech.md
+    - administration/deploy/logging_engine_gostech.md
+    - administration/deploy/log_files_event_examples.md
+    - administration/deploy/linux/upload_size_limit_configure_gostech.md
     - administration/deploy/linux/auxiliary_software_deploy/auxiliary_software_list.md
-    - Вспомогательное ПО. Оптимизация:
-      - administration/deploy/linux/auxiliary_software_deploy/auxiliary_software_optimize.md
-      - administration/deploy/linux/auxiliary_software_deploy/antivirus_exceptions_configure.md
-      - administration/deploy/linux/auxiliary_software_deploy/apache_ignite_defragment.md
-    - Вспомогательное ПО. Развёртывание:
-      - administration/deploy/linux/auxiliary_software_deploy/elasticsearch_deploy_linux.md
-      - administration/deploy/linux/auxiliary_software_deploy/elasticsearch_cluster_deploy_no_certificates.md
-      - administration/deploy/linux/auxiliary_software_deploy/elasticsearch_ssl_certificate_configure.md
-      - administration/deploy/linux/auxiliary_software_deploy/kafka_deploy_linux.md
-      - administration/deploy/linux/auxiliary_software_deploy/apache_ignite_deploy.md
-      - administration/deploy/linux/auxiliary_software_deploy/nginx_deploy.md
-      - administration/deploy/linux/auxiliary_software_deploy/nginx_geoip_deploy.md
-      - administration/deploy/linux/auxiliary_software_deploy/zabbix_agent_deploy.md
-      - administration/deploy/linux/auxiliary_software_deploy/zabbix_deploy.md
-      - administration/deploy/linux/auxiliary_software_deploy/zabbix_server_deploy.md
   - Резервное копирование и восстановление:
     - administration/backup/index.md
     - administration/backup/configure.md
-    - administration/backup/linux/complete_running_instance_backup.md
-    - administration/backup/linux/db_move_manually.md
-    - administration/backup/linux/restore_cdbbz.md
-    - administration/backup/linux/restore_complete_backup.md
-    - administration/backup/linux/restore_test_configure.md
+    - administration/backup/linux/restore_cdbbz_gostech.md
   - Администрирование системы:
     - administration/administration_page.md
     - Внешний вид:
@@ -79,8 +65,6 @@ nav:
       - administration/account_administration/two_factor_authentication.md
       - Синхронизация с сервером каталогов:
         - administration/account_administration/accounts_dc_sync/index.md
-        - administration/account_administration/accounts_dc_sync/linux/ad_authentication_configure.md
-        - administration/account_administration/accounts_dc_sync/linux/sso_authenticatation_configure.md
     - Инфраструктура:
       - administration/infrastructure/monitoring.md
       - administration/infrastructure/logs.md
@@ -91,6 +75,7 @@ nav:
       - administration/infrastructure/global_configuration.md
       - administration/infrastructure/authentication_keys.md
     - Интеграции с внешними системами:
+      - administration/connections_communication_routes/integration.md
       - administration/connections_communication_routes/connections.md
       - administration/connections_communication_routes/communication_routes.md
       - Системные подключения:
@@ -101,10 +86,9 @@ nav:
         - administration/connections_communication_routes/system_connections/elasticsearch_connection.md
         - administration/connections_communication_routes/system_connections/map_configure.md
         - administration/connections_communication_routes/system_connections/git_connection.md
-        - administration/connections_communication_routes/system_connections/s3_connection.md
+        - administration/connections_communication_routes/system_connections/s3_connection_gostech.md
       - Аутентификация:
-        - administration/connections_communication_routes/authentication/openid_connection.md
-        - administration/connections_communication_routes/authentication/wsfederation_connection.md
+        - administration/connections_communication_routes/authentication/openid_connection_gostech.md
         - administration/connections_communication_routes/authentication/ad_connection.md
       - Подключения к офисным приложениям:
         - administration/connections_communication_routes/office_connections/collabora_connection.md
@@ -124,8 +108,6 @@ nav:
       - SQL-подключения:
         - administration/connections_communication_routes/sql_connections/sql_send_connection.md
         - administration/connections_communication_routes/sql_connections/sql_receive_connection.md
-      - Подключения к шинам сообщений:
-        - administration/connections_communication_routes/message_queue_connections/kafka_connection.md
       - Пользовательские подключения:
         - administration/connections_communication_routes/custom_connections/esphere_receive_configure.md
         - administration/connections_communication_routes/custom_connections/esphere_send_configure.md
@@ -161,12 +143,45 @@ nav:
   - Обзор версий:
     - general/changelog/changelog.md
     - general/changelog/release_notes_5.0.md
+    - general/changelog/release_notes_5.0.13334.md
 
 
 exclude_docs: |
+  administration/deploy/linux/deploy_guide.md
   administration/deploy/linux/deploy_cluster.md
+  administration/deploy/linux/upgrade_version.md
+  administration/deploy/linux/uninstall_auxiliary_software.md
+  administration/deploy/linux/db_migrate_4.2_to_4.7.md
+  administration/deploy/linux/configuration_files.md
+  administration/deploy/logging_engine.md
+  administration/deploy/linux/upgrade_version_no_stop.md
+  administration/connections_communication_routes/authentication/keycloak_connection.md
+  administration/connections_communication_routes/authentication/wsfederation_connection.md
+  administration/account_administration/accounts_dc_sync/linux/ad_authentication_configure.md
+  administration/account_administration/accounts_dc_sync/linux/sso_authenticatation_configure.md
+  administration/connections_communication_routes/system_connections/s3_connection.md
+  administration/connections_communication_routes/message_queue_connections/kafka_connection.md
+  administration/deploy/linux/upload_size_limit_configure.md
   administration/deploy/windows/**
   administration/deploy/windows/auxiliary_software_deploy/**
+  administration/deploy/linux/auxiliary_software_deploy/elasticsearch_deploy_linux.md
+  administration/deploy/linux/auxiliary_software_deploy/elasticsearch_cluster_deploy_no_certificates.md
+  administration/deploy/linux/auxiliary_software_deploy/elasticsearch_ssl_certificate_configure.md
+  administration/deploy/linux/auxiliary_software_deploy/kafka_deploy_linux.md
+  administration/deploy/linux/auxiliary_software_deploy/apache_ignite_deploy.md
+  administration/deploy/linux/auxiliary_software_deploy/nginx_deploy.md
+  administration/deploy/linux/auxiliary_software_deploy/nginx_geoip_deploy.md
+  administration/deploy/linux/auxiliary_software_deploy/zabbix_agent_deploy.md
+  administration/deploy/linux/auxiliary_software_deploy/zabbix_deploy.md
+  administration/deploy/linux/auxiliary_software_deploy/zabbix_server_deploy.md
+  administration/deploy/linux/auxiliary_software_deploy/auxiliary_software_optimize.md
+  administration/deploy/linux/auxiliary_software_deploy/antivirus_exceptions_configure.md
+  administration/deploy/linux/auxiliary_software_deploy/apache_ignite_defragment.md
+  administration/backup/linux/complete_running_instance_backup.md
+  administration/backup/linux/db_move_manually.md
+  administration/backup/linux/restore_cdbbz.md
+  administration/backup/linux/restore_complete_backup.md
+  administration/backup/linux/restore_test_configure.md
   administration/backup/windows/**
   administration/architecture/functions.md
   administration/account_administration/accounts_dc_sync/windows/sso_authenticatation_configure_windows.md

@@ -1,5 +1,5 @@
 ---
-title: Lane
+title: Дорожка
 kbId: 4751
 tags:
   - диаграммы
@@ -19,7 +19,12 @@ hide:
 
 # Дорожка {: #process_diagram_elements_lane}
 
+<div class="admonition question" markdown="block">
+## Определения {: .admonition-title #definitions}
+
 **Дорожка** — используется для упорядочивания элементов внутри пула в соответствии с бизнес-функциями и ролями их исполнителей.
+
+</div>
 
 *![Дорожка и её меню элемента](lane.png)*
 

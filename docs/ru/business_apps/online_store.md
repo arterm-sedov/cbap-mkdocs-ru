@@ -5,7 +5,7 @@ kbId: 4805
 
 # Интернет-магазин {: #online_store}
 
---8<-- "experimental_feature.md"
+{% include-markdown ".snippets/experimental_feature.md" %}
 
 ## Настройка интернет-магазина
 

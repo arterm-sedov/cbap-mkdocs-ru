@@ -14,13 +14,18 @@ kbId: 4601
 Инструкции по установке Elasticsearch в иных конфигурациях:
 
 - _[Официальный сайт Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/targz.html)_ (английский язык)
-- _[Установка Elasticsearch и настройка кластера Elasticsearch без сертификатов подлинности][elasticsearch_cluster_deploy_no_certificates]_
+- _[Установка и настройка Elasticsearch без сертификатов подлинности][elasticsearch_cluster_deploy_no_certificates]_
 
 С помощью дистрибутива **{{ productName }}** можно развернуть сервер Elasticsearch вместе с экземпляром ПО или на отдельном сервере. Для этого укажите ключ `-e` при запуске скрипта `prerequisites_install.sh`. См. _«[Установка, запуск, инициализация и остановка ПО {{ productName }}][deploy_guide_linux]»_.
 
 Установленная таким образом сервер Elasticsearch имеет базовую конфигурацию: без аутентификации и с одним узлом. Он доступна по адресу `localhost:9200`.
 
 Здесь представлены требования к техническому обеспечению и инструкции по развёртыванию сервера Elasticsearch в ОС Linux, а также приведён пример типового файла конфигурации. Инструкции представлены для версии Elasticsearch 8.10.2, для других версий содержимое файлов конфигурации и порядок установки могут быть иными.
+
+{%
+include-markdown ".snippets/elasticsearch_opensearch_configure.md"
+rewrite-relative-urls=false
+%}
 
 ## Требования к серверу {: .pageBreakBefore }
 
@@ -84,7 +89,7 @@ Elasticsearch создает значительную нагрузку на вы
 - сервер работает в локальной сети;
 - отключена аутентификация;
 - сервер доступна через порт `9200`;
-- адрес сервера `http://localhost:9200`;
+- адрес сервера `http://<opesearchIP>:9200`;
 - путь к файлу конфигурации: `/etc/elasticsearch/elasticsearch.yml`
 
 ``` {: .sh .pageBreakAfter title="Пример типового файла конфигурации Elasticsearch" }
@@ -148,7 +153,7 @@ http.host: 0.0.0.0
 --8<-- "related_topics_heading.md"
 
 - _[Официальный сайт Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/targz.html)_ (английский язык)
-- _[Установка Elasticsearch и настройка кластера Elasticsearch без сертификатов подлинности][elasticsearch_cluster_deploy_no_certificates]_
+- _[Установка и настройка Elasticsearch без сертификатов подлинности][elasticsearch_cluster_deploy_no_certificates]_
 - _[Установка, запуск, инициализация и остановка ПО {{ productName }}][deploy_guide_linux]_
 
 </div>

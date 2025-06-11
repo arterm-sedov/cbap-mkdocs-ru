@@ -85,7 +85,7 @@ kbId: 5074
 
 2. Задайте параметры подключения к Kafka в файле `/usr/share/comindware/configs/instance/<instanceName>.yml` (`<instanceName>` — имя экземпляра ПО {{ productName }}):
 
-    ``` yml
+    ``` yaml
     # Адрес и порт сервера очереди сообщений (Kafka)
     mq.server: <kafkaBrokerIP>:<kafkaBrokerPort>
     # Идентификатор группы очереди сообщений
@@ -104,7 +104,7 @@ kbId: 5074
 
 3. Задайте параметры подключения к Kafka в файле `/var/www/<instanceName>apigateway.yml`:
 
-    ``` yml
+    ``` yaml
     # Адрес и порт сервера очереди сообщений (Kafka)
     mq.server: <kafkaBrokerIp>:<kafkaBrokerPort>
     # Идентификатор группы очереди сообщений
@@ -115,7 +115,7 @@ kbId: 5074
 
 4. Задайте параметры подключения к Kafka в файле `/var/www/<instanceName>/adapterhost.yml`:
 
-    ``` yml
+    ``` yaml
     # Адрес и порт сервера очереди сообщений (Kafka)
     mq.server: <kafkaBrokerIp>:<kafkaBrokerPort>
     ```

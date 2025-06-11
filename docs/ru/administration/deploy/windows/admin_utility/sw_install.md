@@ -63,7 +63,7 @@ kbId: 4640
 
     _![Проверка состояния службы Elasticsearch с помощью Диспетчера служб Windows](https://kb.comindware.ru/assets/img_667ecf85a5961.png)_
 
-2. Проверьте ответ службы Elasticsearch, открыв в браузере адрес http://localhost:9200.
+2. Проверьте ответ службы Elasticsearch, открыв в браузере адрес http://<openSearchHost>:<opeSearchPort>
 3. Если служба запущена, то в браузере вас отобразится ответ в формате JSON.
 
     _![Проверка ответа службы Elasticsearch](https://kb.comindware.ru/assets/img_667edd59853d1.png)_

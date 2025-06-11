@@ -1,0 +1,92 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5067" kb-tags="" kb-title="Конфигурация экземпляра, компонентов ПО и служб. Настройка">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#конфигурация-экземпляра-по">
+<span class="md-ellipsis">
+      Конфигурация экземпляра ПО
+    </span>
+</a>
+<nav aria-label="Конфигурация экземпляра ПО" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#пример-yml-конфигурации-экземпляра-по">
+<span class="md-ellipsis">
+      Пример YML-конфигурации экземпляра ПО
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Здесь представлены инструкции по настройке файлов конфигурации перед развёртыванием <strong>Comindware Platform</strong>.</p>
+<h2 id="конфигурация-экземпляра-по">Конфигурация экземпляра ПО</h2>
+<p>При необходимости тонкой настройки экземпляра ПО, можно изменить файл конфигурации <code>configmap.yaml</code> внутри Helm-чарта.</p>
+<ol class="colored_numbers_list">
+<li>Распакуйте файл Helm-чарта.</li>
+<li>
+<p>Откройте файл конфигурации экземпляра ПО для редактирования:</p>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>templates/configmap.yaml</code> <br/></pre></code></div>
+</li>
+<li>
+<p>При необходимости измените параметры, например:</p>
+<ul>
+<li><code>userStorage.type: LocalDisk</code> — тип хранилища пользовательских файлов (<code>LocalDisk</code> или <code>S3</code>).</li>
+<li><code>backup.defaultFolder</code> — директория для хранения резервных копий экземпляра ПО.</li>
+<li><code>backup.defaultFileName</code> — имя файла резервной копии экземпляра ПО.</li>
+</ul>
+</li>
+<li>
+<p>Сохраните файл конфигурации.</p>
+</li>
+<li>Разверните экземпляр ПО. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622">Установка и инициализация ПО</a>»</em>.</li>
+</ol>
+<h3 class="pageBreakBefore" id="пример-yml-конфигурации-экземпляра-по">Пример YML-конфигурации экземпляра ПО</h3>
+<div class="highlight"><code><pre><span></span><code><span class="c1">#################### Настройка базовых параметров ПО ####################</span></code> <br/><code><span class="c1"># Имя экземпляра Comindware Platform.</span></code> <br/><code><span class="nt">clusterName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/><code><span class="c1"># Имя узла экземпляра Comindware Platform.</span></code> <br/><code><span class="c1">#nodeName: &lt;instanceName&gt;</span></code> <br/><code><span class="c1"># Путь к экземпляру, по которому Comindware Platform находит свою конфигурацию.</span></code> <br/><code><span class="nt">configPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;configPath&gt;</span></code> <br/><code><span class="c1"># Адрес службы журналирования OpenSearch (Elasticsearch).</span></code> <br/><code><span class="nt">journal.server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://&lt;searchHostIP&gt;:&lt;searchHostPort&gt;</span></code> <br/><code><span class="c1"># Индекс службы журналирования OpenSearch (Elasticsearch).</span></code> <br/><code><span class="c1"># journal.name: &lt;instanceName&gt;</span></code> <br/><code><span class="c1"># URI-адрес экземпляра Comindware Platform.</span></code> <br/><code><span class="nt">fqdn</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;hostName&gt;</span></code> <br/><code><span class="c1"># Порт экземпляра Comindware Platform.</span></code> <br/><code><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;portNumber&gt;</span></code> <br/><code><span class="c1"># Версия экземпляра Comindware Platform.</span></code> <br/><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;versionNumber&gt;</span></code> <br/><code><span class="c1">#################### Настройка базы данных ####################</span></code> <br/><code><span class="c1"># Путь к базе данных</span></code> <br/><code><span class="c1"># Устаревшая директива: databasePath</span></code> <br/><code><span class="nt">db.workDir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/comindware/&lt;instanceName&gt;/Database</span></code> <br/><code><span class="c1"># Используемый префикс кэшей в базе данных</span></code> <br/><code><span class="c1"># Устаревшая директива: databaseName</span></code> <br/><code><span class="nt">db.name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/><code><span class="c1">#################### Настройка хранения пользовательских файлов ####################</span></code> <br/><code><span class="c1"># Тип хранилища (LocalDisk | S3)</span></code> <br/><code><span class="nt">userStorage.type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LocalDisk</span></code> <br/><code><span class="c1"># Путь к пользовательским файлам экземпляра</span></code> <br/><code><span class="nt">userStorage.localDisk.path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/comindware/&lt;instanceName&gt;/Streams</span></code> <br/><code><span class="c1">#################### Настройка хранения временных файлов ####################</span></code> <br/><code><span class="c1"># Тип хранилища (LocalDisk | S3)</span></code> <br/><code><span class="nt">tempStorage.type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LocalDisk</span></code> <br/><code><span class="c1"># Путь к временным файлам экземпляра</span></code> <br/><code><span class="nt">tempStorage.localDisk.path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/comindware/&lt;instanceName&gt;/Temp</span></code> <br/><code><span class="c1"># Временная папка</span></code> <br/><code><span class="nt">tempWorkingDir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/comindware/fooo/LocalTemp</span></code> <br/><code><span class="c1">#################### Настройки очереди сообщений ####################</span></code> <br/><code><span class="c1"># Адрес и порт сервера очереди сообщений Apache Kafka</span></code> <br/><code><span class="nt">mq.server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;kafkaBrokerIP&gt;:&lt;kafkaBrokerPort&gt;</span></code> <br/><code><span class="c1"># Идентификатор группы очереди сообщений</span></code> <br/><code><span class="nt">mq.group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/><code><span class="c1">#################### Конфигурация резервного копирования ####################</span></code> <br/><code><span class="c1"># Папка для резервного копирования по умолчанию</span></code> <br/><code><span class="c1"># Устаревшая директива: backup.config.default.repository.localDisk.path</span></code> <br/><code><span class="nt">backup.defaultFolder</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/comindware/&lt;instanceName&gt;/Backup</span></code> <br/><code><span class="c1"># Имя файла для резервного копирования по умолчанию</span></code> <br/><code><span class="nt">backup.defaultFileName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Backup</span></code> <br/></pre></code></div>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4604">Настройка конфигурации вспомогательного ПО для оптимизации работы Comindware Platform</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622">Установка и инициализация ПО</a></em></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

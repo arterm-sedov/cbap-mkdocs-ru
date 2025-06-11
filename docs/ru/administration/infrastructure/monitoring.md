@@ -7,7 +7,7 @@ kbId: 4666
 
 ## Введение
 
---8<-- "experimental_feature.md"
+{% include-markdown ".snippets/experimental_feature.md" %}
 
 В **{{ productName }}** предусмотрена возможность просмотра диаграмм с показателями производительности системы на временной шкале.
 

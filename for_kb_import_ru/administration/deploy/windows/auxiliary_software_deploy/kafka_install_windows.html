@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4614">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4614" kb-tags="установка Kafka,Kafka,подключение Kafka,подключение к шине сообщений,шина сообщений,брокер сообщений" kb-title="Установка Apache Kafka в ОС Windows и подключение к Comindware Platform">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -110,7 +110,7 @@
 <p>Откройте файл конфигурации Kafka <code>C:\kafka\config\kraft\server.properties</code>.</p>
 </li>
 <li>
-<p>Отредактируйте файл конфигурации, указав IP-адрес сервера Kafka, папку для журналов и размеры сообщений.</p>
+<p>Отредактируйте файл конфигурации, указав IP-адрес сервера Apache Kafka, папку для журналов и размеры сообщений.</p>
 <div class="notice notice-warning">
 <p class="admonition-title">Внимание!</p>
 <p>При указании пути к папке журналов используйте косую черту <code>/</code> вместо <code>\</code>:</p>
@@ -183,7 +183,7 @@
 </li>
 <li>
 <p>Задайте параметры подключения к Kafka в файле <code>&lt;instanceName&gt;.yml</code> (<code>&lt;instanceName&gt;</code> — имя экземпляра ПО):</p>
-<div class="highlight"><code><pre><span></span><code># IP-адрес сервера Kafka</code> <br/><code>mq.server: &lt;KafkaIP&gt;:9092</code> <br/><code># Имя экземпляра ПО</code> <br/><code>mq.group: &lt;instanceName&gt;</code> <br/><code># Идентификатор узла очереди сообщений</code> <br/><code>mq.node: &lt;instanceName&gt;</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="c1"># IP-адрес сервера Kafka</span></code> <br/><code><span class="nt">mq.server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;KafkaIP&gt;:9092</span></code> <br/><code><span class="c1"># Имя экземпляра ПО</span></code> <br/><code><span class="nt">mq.group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/><code><span class="c1"># Идентификатор узла очереди сообщений</span></code> <br/><code><span class="nt">mq.node</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Удалите следующую строку из файла <code>&lt;instanceName&gt;.yml</code>:</p>
@@ -192,7 +192,7 @@
 <p class="admonition-title">Внимание!</p>
 <p>Для корректной работы экземпляра ПО необходимо соблюсти следующие условия:</p>
 <ul>
-<li>IP-адрес и порт Kafka должны быть обязательно прописаны цифрами в формате <code>XX.XX.XX.XX:XXXX</code>. То есть недопустимо указывать имя хоста вместо IP-адреса и опускать номер порта.</li>
+<li>IP-адрес и порт {{ apacheKafkaVariants }} должны быть обязательно прописаны цифрами в формате <code>XX.XX.XX.XX:XXXX</code>. То есть недопустимо указывать имя хоста вместо IP-адреса и опускать номер порта.</li>
 <li>
 <p>Значения параметров <code>mq.server</code> (адрес и порт сервера очереди сообщений), <code>mq.group</code> (идентификатор группы очереди сообщений), <code>mq.node</code> (идентификатор узла очереди сообщений) должны совпадать во всех файлах конфигурации:</p>
 <ul>
@@ -206,11 +206,11 @@
 </li>
 <li>
 <p>Задайте параметры подключения к Kafka в файле <code>apigateway.yml</code>:</p>
-<div class="highlight"><code><pre><span></span><code># Укажите IP-адрес сервера Kafka</code> <br/><code>mq.server: &lt;KafkaIP&gt;:9092</code> <br/><code># Укажите имя экземпляра ПО</code> <br/><code>mq.group: &lt;instanceName&gt;</code> <br/><code># Идентификатор узла очереди сообщений</code> <br/><code>mq.node: &lt;instanceName&gt;</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="c1"># Укажите IP-адрес сервера Kafka</span></code> <br/><code><span class="nt">mq.server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;KafkaIP&gt;:9092</span></code> <br/><code><span class="c1"># Укажите имя экземпляра ПО</span></code> <br/><code><span class="nt">mq.group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/><code><span class="c1"># Идентификатор узла очереди сообщений</span></code> <br/><code><span class="nt">mq.node</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Задайте параметры подключения к Kafka в файле <code>adapterhost.yml</code>:</p>
-<div class="highlight"><code><pre><span></span><code># Укажите IP-адрес сервера Kafka</code> <br/><code>mq.server: &lt;KafkaIP&gt;:9092</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="c1"># Укажите IP-адрес сервера Kafka</span></code> <br/><code><span class="nt">mq.server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;KafkaIP&gt;:9092</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Перезапустите экземпляр ПО.</p>

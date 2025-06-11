@@ -15,9 +15,10 @@ kbId: 4821
 - [Таблицы. Использование и персональная настройка ][table_personal_use]
 - [Карточки. Использование в браузере и мобильном приложении][cards_view]
 - [Диаграмма Ганта. Использование][gantt_chart_use]
-- [Обсуждение. Использование][discussion_use]
 - [Р7 Офис и Collabora Online. Использование для работы с документами][office_connection_use]
+- [Карты. Использование][map_use]
+- [Обсуждения. Использование][discussion_use]
+- [Мобильное приложение. Использование][mobile_app_use]
+- [Восстановление пароля][password_restore]
 
-{%
-include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md"
-%}
+{% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

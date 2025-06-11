@@ -141,7 +141,7 @@ _![Настройка баннера](img/pages_setup_banner_setting.png)_
 
 ### Витрина {: .pageBreakBefore }
 
---8<-- "experimental_feature.md"
+{% include-markdown ".snippets/experimental_feature.md" %}
 
 **Витрина** — это представление записей из шаблона в виде настраиваемых плиток со следующими элементами:
 
@@ -177,7 +177,7 @@ _![Настройка витрины](img/pages_setup_showcase_setting.png)_
 
 ### Временная шкала {: .pageBreakBefore }
 
---8<-- "experimental_feature.md"
+{% include-markdown ".snippets/experimental_feature.md" %}
 
 **Временная шкала** отображает данные из выбранного шаблона в графической форме, аналогичной [диаграмме Ганта][gantt_chart_create]. Конечный пользователь может нажимать элементы на временной шкале, чтобы перейти к соответствующим записям.
 

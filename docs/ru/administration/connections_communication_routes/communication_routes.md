@@ -33,11 +33,11 @@ kbId: 4676
 
 ### Подключения к электронной почте
 
-- [Получение эл. почты в процессе][process_receiving_connection]
-- [Отправка эл. почты из процесса][process_sending_connection]
-- [Получение эл. почты через Exchange][scenario_receive_email]
-- [Отправка эл. почты через Exchange][scenario_send_email]
-- [Получение эл. почты через IMAP][scenario_receive_email]
+- [Получение эл.&nbsp;почты в процессе][process_receiving_connection]
+- [Отправка эл.&nbsp;почты из процесса][process_sending_connection]
+- [Получение эл.&nbsp;почты через Exchange][scenario_receive_email]
+- [Отправка эл.&nbsp;почты через Exchange][scenario_send_email]
+- [Получение эл.&nbsp;почты через IMAP][scenario_receive_email]
 - [Отправка почты через SMTP][scenario_send_email]
 
 ### Подключения REST и OData
@@ -47,12 +47,14 @@ kbId: 4676
 
 ### Подключения к шине сообщений {: .pageBreakBefore }
 
-- Отправка сообщений через Kafka
-- [Получение сообщений через Kafka][kafka_connection]
+- Отправка сообщений через {{ apacheKafkaVariants }}
+- [Получение сообщений через {{ apacheKafkaVariants }}][kafka_connection]
+{% if not gostech %}
 - Отправка сообщений через MSMQ
 - Получение сообщений через MSMQ
 - Отправка сообщений через RabbitMQ
 - Получение сообщений через RabbitMQ
+{% endif %}
 
 ### SQL-подключения
 

@@ -1,5 +1,6 @@
 ---
 title: События
+kbTitle: События. Определение и типы
 kbId: 4733
 tags:
   - диаграммы
@@ -20,7 +21,12 @@ hide:
 
 # События {: #process_diagram_elements_events}
 
+<div class="admonition question" markdown="block">
+## Определения {: .admonition-title #definitions}
+
 **Событие** задаёт ожидаемое действие. События классифицируются по положению на диаграмме процесса: начальное, промежуточное, конечное.
+
+</div>
 
 ## Типы событий
 

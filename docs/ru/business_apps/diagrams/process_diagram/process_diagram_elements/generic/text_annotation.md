@@ -1,6 +1,6 @@
 ---
 title: Комментарий
-kbId:
+kbId: 4753
 tags:
   - диаграммы
   - диаграмма процесса
@@ -15,7 +15,12 @@ hide:
 
 # Комментарий {: #process_diagram_elements_text_annotation}
 
+<div class="admonition question" markdown="block">
+## Определения {: .admonition-title #definitions}
+
 **Комментарий** позволяет привязать произвольный текст к элементу диаграммы процесса.
+
+</div>
 
 *![Комментарий и его меню элемента](text_annotation.png)*
 

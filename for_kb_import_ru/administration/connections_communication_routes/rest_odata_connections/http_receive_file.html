@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5083">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5083" kb-tags="получение документов по HTTP,получение файлов по HTTP,составное содержимое,multipart/form-data,файлы,http-запросы,интеграции" kb-title="HTTP-запросы с составным содержимым. Получение файлов. Настройка подключения, пути передачи данных и сценария">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -108,8 +108,8 @@
 <p class="admonition-title">Логика обработки входящих HTTP-запросов</p>
 <ul>
 <li>
-<p>Для получения HTTP-запросов из внешних систем <strong>Comindware Platform</strong> позволяет настроить конечные точки API вида: </p>
-<div class="highlight"><code><pre><span></span><code>https://<span class="p">&lt;</span><span class="nt">instanceUrl</span><span class="p">&gt;</span>/api/public/adapter/<span class="p">&lt;</span><span class="nt">connectionUri</span><span class="p">&gt;</span>/<span class="p">&lt;</span><span class="nt">routeUri</span><span class="p">&gt;</span></code> <br/></pre></code></div>
+<p>Для получения HTTP-запросов из внешних систем <strong>Comindware Platform</strong> позволяет настроить конечные точки API вида: 
+    <div class="highlight"><code><pre><span></span><code>https://<span class="p">&lt;</span><span class="nt">instanceUrl</span><span class="p">&gt;</span>/api/public/adapter/<span class="p">&lt;</span><span class="nt">connectionUri</span><span class="p">&gt;</span>/<span class="p">&lt;</span><span class="nt">routeUri</span><span class="p">&gt;</span></code> <br/></pre></code></div></p>
 <p>Здесь:</p>
 <ul>
 <li><code>&lt;instanceUrl&gt;</code> — адрес экземпляра <strong>Comindware Platform</strong>;</li>
@@ -192,19 +192,34 @@
 <div class="notice notice-success">
 <p class="admonition-title">Структура атрибута типа «Документ»</p>
 <ul>
-<li>Атрибут типа «<strong>Документ</strong>» хранит одну или несколько ссылок на записи (<strong>документы</strong>) в системном шаблоне документа, к которым прикрепляются файлы.</li>
-<li>В шаблоне документа имеется атрибут <code>currentRevision</code> (текущая <strong>ревизия</strong>), который хранит ссылку на запись в системном шаблоне ревизии.</li>
-<li>В шаблоне ревизии имеются атрибуты <code>title</code> (имя) и <code>content</code> (содержимое), которые хранят имя файла и ссылку на файл, физически хранящийся в папке <code>Streams</code> на сервере.</li>
+<li>Атрибут типа «<strong>Документ</strong>» хранит одну или несколько ссылок на записи (<strong>документы</strong>) в системном шаблоне документа, к которым прикрепляются файлы (например, загруженные пользователями).</li>
+<li>В шаблоне документа имеется атрибут <code>currentRevision</code> (текущая <strong>версия</strong>), который хранит ссылку на запись в системном шаблоне версии.</li>
+<li>В шаблоне версии имеются атрибуты <code>title</code> (имя) и <code>content</code> (содержимое), которые хранят имя файла и ссылку на файл, физически хранящийся в папке <code>Streams</code> на сервере.</li>
 </ul>
 </div>
 <div class="notice notice-tip">
 <p class="admonition-title">Извлечение файлов из атрибута типа «Документ» с помощью N3</p>
+<p>Чтобы считать файл из атрибута типа «<strong>Документ</strong>» с помощью выражения N3, необходимо:</p>
 <ul>
-<li>Чтобы считать файл из атрибута типа «<strong>Документ</strong>» с помощью выражения N3, необходимо:<ul>
-<li>получить текущую ревизию документа: <code>?documentAttributeValue document:revision ?revision</code>;</li>
-<li>получить из ревизии содержимое файла в формате <code>base64</code>: <code>?revision document:content ?content</code>;</li>
-<li>получить из ревизии имя файла: <code>?revision document:title ?title</code>.</li>
-</ul>
+<li>
+<p>получить объект с атрибутом:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">(</span><span class="s">"TemplateSystemName"</span> <span class="s">"DocumentAttributeSystemName"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?DocumentAttribute</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>из объекта с атрибутом получить значение атрибута в текущей записи:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?item</span> <span class="err">documentAttribute</span> <span class="err">?documentAttributeValue</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>из значения атрибута получить текущую версию документа:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?documentAttributeValue</span> <span class="nn">document</span><span class="p">:</span><span class="nt">revision</span> <span class="err">?revision</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>из версии получить содержимое файла в формате <code>base64</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?revision</span> <span class="nn">document</span><span class="p">:</span><span class="nt">content</span> <span class="err">?content</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>из версии получить имя файла:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?revision</span> <span class="nn">document</span><span class="p">:</span><span class="nt">title</span> <span class="err">?title</span><span class="p">.</span></code> <br/></pre></code></div>
 </li>
 </ul>
 </div>
@@ -227,7 +242,7 @@
 </li>
 <li>
 <p><strong>Базовый путь получения HTTP-запросов</strong> — добавьте <strong>путь URI</strong>, например <code>httpListener</code>. При необходимости введите дополнительный <strong>путь URI</strong> на <a class="mkdocs_imported_link" href="#интеграция">вкладке «<strong>Интеграция</strong>» в свойствах пути передачи данных</a>. Укажите результирующий путь на внешнем сервере в качестве получателя запроса, например:</p>
-<div class="highlight"><code><pre><span></span><code>https://example.com/api/public/adapter/httpListener</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>https://&lt;hostname&gt;/api/public/adapter/httpListener</code> <br/></pre></code></div>
 </li>
 <li>
 <p><strong>Формат данных</strong> — выберите представление данных:</p>
@@ -310,9 +325,9 @@
 <p>Укажите дополнительный <strong>путь URI</strong>, например <code>uploadFiles</code>.</p>
 <div class="notice notice-warning">
 <p class="admonition-title">Формирование адреса для входящих HTTP-запросов</p>
-<p><strong>Путь URI</strong> с вкладки «<strong>Интеграция</strong>» будет добавлен к <strong>базовому пути получения HTTP-запросов</strong> (например, <code>https://example.com/api/public/adapter/httpListener</code>). Базовый путь настраивается в свойствах <a class="mkdocs_imported_link" href="#настройка-подключения">подключения</a>.</p>
+<p><strong>Путь URI</strong> с вкладки «<strong>Интеграция</strong>» будет добавлен к <strong>базовому пути получения HTTP-запросов</strong> (например, <code>https://&lt;hostname&gt;/api/public/adapter/httpListener</code>). Базовый путь настраивается в свойствах <a class="mkdocs_imported_link" href="#настройка-подключения">подключения</a>.</p>
 <p>Укажите результирующий адрес на внешнем сервере в качестве получателя запросов, например:</p>
-<div class="highlight"><code><pre><span></span><code>https://example.com/api/public/adapter/httpListener/uploadFiles</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>https://&lt;hostname&gt;/api/public/adapter/httpListener/uploadFiles</code> <br/></pre></code></div>
 </div>
 </li>
 <li>
@@ -421,7 +436,7 @@
 <ol class="colored_numbers_list">
 <li>
 <p>С внешнего сервера отправьте в <strong>Comindware Platform</strong> HTTP-запрос с несколькими файлами, например:</p>
-<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\ </span></code> <br/><code><span class="w">    </span>-u<span class="w"> </span>username:password<span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">    </span>-H<span class="w"> </span><span class="s2">"Content-Type: multipart/form-data"</span><span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">    </span>-F<span class="w"> </span><span class="s2">"description=Фото и документ"</span><span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">    </span>-F<span class="w"> </span><span class="s2">"files=@image.jpg"</span><span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">    </span>-F<span class="w"> </span><span class="s2">"files=@document.docx"</span><span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">    </span>https://example.com/api/public/adapter/httpListener/uploadFiles<span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">    </span>-v</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\ </span></code> <br/><code><span class="w">    </span>-u<span class="w"> </span>username:password<span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">    </span>-H<span class="w"> </span><span class="s2">"Content-Type: multipart/form-data"</span><span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">    </span>-F<span class="w"> </span><span class="s2">"description=Фото и документ"</span><span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">    </span>-F<span class="w"> </span><span class="s2">"files=@image.jpg"</span><span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">    </span>-F<span class="w"> </span><span class="s2">"files=@document.docx"</span><span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">    </span>https://&lt;hostname&gt;/api/public/adapter/httpListener/uploadFiles<span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">    </span>-v</code> <br/></pre></code></div>
 <p>Здесь:</p>
 <ul>
 <li><code>-X POST</code> — метод запроса (необязательный ключ);</li>
@@ -429,7 +444,7 @@
 <li><code>-H "Content-Type: multipart/form-data"</code> — передача данных в формате составного содержимого;</li>
 <li><code>-F "description=Фото и документ"</code> — описание файлов;</li>
 <li><code>-F "files=@image.jpg" -F "files=@document.docx"</code> — массив из двух файлов;</li>
-<li><code>https://example.com/api/public/adapter/httpListener/uploadFiles</code> — <strong>базовый путь получения HTTP-запросов</strong> и <strong>путь URI</strong>, настроенные в <a class="mkdocs_imported_link" href="#настройка-пути-передачи-данных">пути передачи данных</a>;</li>
+<li><code>https://&lt;hostname&gt;/api/public/adapter/httpListener/uploadFiles</code> — <strong>базовый путь получения HTTP-запросов</strong> и <strong>путь URI</strong>, настроенные в <a class="mkdocs_imported_link" href="#настройка-пути-передачи-данных">пути передачи данных</a>;</li>
 <li><code>-v</code> — вывод отладочных данных (необязательный ключ).</li>
 </ul>
 </li>

@@ -13,8 +13,9 @@ nav:
     - product_description.md
     - Обзор версий:
       - general/changelog/changelog.md
+      - general/changelog/release_notes_5.0.13334.md
       - general/changelog/release_notes_5.0.md
-  - Использование системы:
+  - Использование ПО:
     - using_the_system/index.md
     - Панель навигации:
       - using_the_system/navigation_panel/index.md
@@ -27,22 +28,25 @@ nav:
     - Обсуждение: using_the_system/discussion_use.md
     - Карты: using_the_system/map_use.md
     - Офисные приложения: using_the_system/office_connectiopn_use.md
-  - Администрирование:
-    - Развёртывание ПО:
+    - using_the_system/mobile_app_use.md
+    - using_the_system/password_restore.md
+  - Администрирование ПО:
+    - Развёртывание системы:
       - administration/deploy/system_requirements.md
       - administration/deploy/architecture_landscape.md
-      - administration/deploy/availability_fault_tolerance.md
+      # - administration/deploy/availability_fault_tolerance.md
       - administration/deploy/security.md
       - administration/deploy/logging_engine.md
       - administration/deploy/log_files_event_examples.md
       - administration/deploy/paths.md
       - Развёртывание в Linux:
-        - Установка и запуск Comindware Business Application Platform: administration/deploy/linux/deploy_guide.md
+        - administration/deploy/linux/deploy_guide.md
         - administration/deploy/linux/configuration_files.md
-        - administration/deploy/linux/db_migrate_4.2_to_4.7.md
+        #- administration/deploy/linux/db_migrate_4.2_to_4.7.md
         # - administration/deploy/linux/deploy_cluster.md
         - administration/deploy/linux/uninstall_auxiliary_software.md
         - administration/deploy/linux/upgrade_version.md
+        - administration/deploy/linux/upgrade_version_no_stop.md
         - administration/deploy/linux/upload_size_limit_configure.md
         - administration/deploy/linux/auxiliary_software_deploy/auxiliary_software_list.md
         - Вспомогательное ПО. Развёртывание:
@@ -58,7 +62,8 @@ nav:
           - administration/deploy/linux/auxiliary_software_deploy/zabbix_server_deploy.md
       - Развёртывание в Windows:
         - administration/deploy/windows/deploy_guide.md
-        - administration/deploy/windows/instance_upgrade_3_2_to_4_2_windows.md
+        - administration/deploy/windows/upgrade_version.md
+        # - administration/deploy/windows/instance_upgrade_3_2_to_4_2_windows.md
         - administration/deploy/windows/instance_stop_IIS.md
         - administration/deploy/windows/instance_start_IIS.md
         - Вспомогательное ПО. Развёртывание:
@@ -122,6 +127,7 @@ nav:
         - administration/infrastructure/adapters.md
         - administration/infrastructure/authentication_keys.md
       - Интеграции с внешними системами:
+        - administration/connections_communication_routes/integration.md
         - administration/connections_communication_routes/connections.md
         - administration/connections_communication_routes/communication_routes.md
         - Системные подключения:
@@ -133,8 +139,9 @@ nav:
           - administration/connections_communication_routes/system_connections/map_configure.md
           - administration/connections_communication_routes/system_connections/git_connection.md
           - administration/connections_communication_routes/system_connections/s3_connection.md
+          #- administration/connections_communication_routes/system_connections/aws_pinpoint_connection.md
         - Аутентификация:
-          - administration/connections_communication_routes/authentication/openid_connection.md
+          - administration/connections_communication_routes/authentication/keycloak_connection.md
           - administration/connections_communication_routes/authentication/wsfederation_connection.md
           - administration/connections_communication_routes/authentication/ad_connection.md
         - Подключения к офисным приложениям:
@@ -161,13 +168,13 @@ nav:
         - Пользовательские подключения:
           - administration/connections_communication_routes/custom_connections/esphere_receive_configure.md
           - administration/connections_communication_routes/custom_connections/esphere_send_configure.md
-    - DevOps Wiki:
-      - devops_wiki/index.md
-      - devops_wiki/kubernetes/index.md
-      - devops_wiki/kubernetes/kubernetes_install/index.md
-      - devops_wiki/kubernetes/openebs_install/index.md
-      - devops_wiki/kubernetes/setup_ssl_for_helm/index.md
-      - devops_wiki/kubernetes/cbap_install/index.md
+    # - DevOps Wiki:
+    #   - devops_wiki/index.md
+    #   - devops_wiki/kubernetes/index.md
+    #   - devops_wiki/kubernetes/kubernetes_install/index.md
+    #   - devops_wiki/kubernetes/openebs_install/index.md
+    #   - devops_wiki/kubernetes/setup_ssl_for_helm/index.md
+    #   - devops_wiki/kubernetes/cbap_install/index.md
   - Разработка приложений:
     - business_apps/application_configure_recommendations.md
     - business_apps/elasticdata_description.md
@@ -281,45 +288,65 @@ nav:
       - business_apps/navigation_sections/pages_setup.md
       - business_apps/navigation_sections/page_access_control.md
       - business_apps/navigation_sections/my_tasks_page_configure.md
-    - business_apps/variables.md
-    - Сценарии:
-      - business_apps/scenarios/index.md
-      - business_apps/scenarios/scenario_elements.md
-      - business_apps/scenarios/scenario_variables.md
     - business_apps/online_store.md
     - Управление версиями:
       - business_apps/version_control/index.md
       - business_apps/version_control/manual_version_control.md
       - business_apps/version_control/git_version_control.md
       - business_apps/version_control/excel_version_control.md
-    - Выражения для вычислений:
+    - Сценарии:
+      - business_apps/scenarios/index.md
+      - business_apps/scenarios/scenario_elements.md
+      - business_apps/scenarios/scenario_variables.md
+    - Вычисления и программирование:
       - business_apps/expressions/expression_intro.md
       - business_apps/expressions/expression_debug.md
-      - Редактор выражений:
-        - business_apps/expressions/expression_editor/index.md
-        - Предиктивный ввод в формулах:
-          - business_apps/expressions/expression_editor/formula_editor/index.md
-          - business_apps/expressions/expression_editor/formula_editor/function_autocomplete.md
-          - business_apps/expressions/expression_editor/formula_editor/from_where_select_autocomplete.md
-          - business_apps/expressions/expression_editor/formula_editor/record_heading_autocomplete.md
-          - business_apps/expressions/expression_editor/formula_editor/function_returned_attribute_autocomplete.md
-          - business_apps/expressions/expression_editor/formula_editor/object_function_autocomplete.md
-          - business_apps/expressions/expression_editor/formula_editor/enum_autocomplete_formula.md
-          - business_apps/expressions/expression_editor/formula_editor/template_attribute_autocomplete.md
-          - business_apps/expressions/expression_editor/formula_editor/linked_record_attributes_autocomplete.md
-          - business_apps/expressions/expression_editor/formula_editor/template_for_attribute_autocomplete.md
-          - business_apps/expressions/expression_editor/formula_editor/local_variables.md
-        - Предиктивный ввод в выражениях на языке N3:
-          - business_apps/expressions/expression_editor/n3_editor/index.md
-          - business_apps/expressions/expression_editor/n3_editor/prefix_autocomplete.md
-          - business_apps/expressions/expression_editor/n3_editor/block_autocomplete.md
-          - business_apps/expressions/expression_editor/n3_editor/predicate_autocomplete.md
-          - business_apps/expressions/expression_editor/n3_editor/variable_autocomplete.md
-          - business_apps/expressions/expression_editor/n3_editor/findproperty_autocomplete.md
-          - business_apps/expressions/expression_editor/n3_editor/square_brackets_autocomplete.md
-          - business_apps/expressions/expression_editor/n3_editor/findobject_autocomplete.md
-          - business_apps/expressions/expression_editor/n3_editor/enum_autocomplete_n3.md
-          - business_apps/expressions/expression_editor/n3_editor/literal_autocomplete.md
+      - Редактор выражений: business_apps/expressions/expression_editor/index.md
+      - business_apps/variables.md
+      - Руководство по формулам: 
+        - developer_guide/formulas/formula_guide.md
+        - business_apps/expressions/expression_editor/formula_editor/index.md    
+        - developer_guide/formulas/formula_reference.md
+      - Руководство по N3: 
+        - developer_guide/n3/n3_guide.md
+        - business_apps/expressions/expression_editor/n3_editor/index.md
+      - Руководство по C#: 
+        - developer_guide/csharp/csharp_guide.md
+    - Руководство по API: 
+      - developer_guide/api/index.md
+      - developer_guide/api/api_system_core.md
+      - developer_guide/api/api_solution.md
+      - developer_guide/api/api_web.md
+    - Практические примеры:
+      - examples/creating_gantt_chart.md
+      - examples/using_gantt_chart.md
+      - examples/process_email_configure.md
+      - examples/autonumerating_records.md
+      - examples/autonumerating_related_records.md
+      - examples/document_clone_scenario_n3.md
+      - examples/document_download_archive_csharp.md
+      - examples/document_download_archive_related_record_csharp.md
+      - examples/document_download_to_server_csharp.md
+      - examples/substring_search.md
+      - examples/attribute_enum_value_calculation.md
+      - examples/attribute_enum_value_filter.md
+      - examples/attribute_enum_calculate_current_value.md
+      - examples/attribute_enum_calculate_registry.md
+      - examples/script_using_local_variable.md
+      - examples/scenario_verify_data.md
+      - examples/multilingual_app.md
+      - administration/connections_communication_routes/rest_odata_connections/1c_integrations.md
+      - administration/connections_communication_routes/rest_odata_connections/send_http_example.md
+      - administration/connections_communication_routes/rest_odata_connections/http_send_post.md
+      - administration/connections_communication_routes/rest_odata_connections/http_send_file.md
+      - administration/connections_communication_routes/rest_odata_connections/jpath_example.md      
+      - administration/connections_communication_routes/rest_odata_connections/http_receive_file.md
+      - examples/task_reassign.md
+      - examples/template_reference_data_api.md
+      - examples/get_selected_record_ids.md
+      - examples/csharp_table_download_selection.md
+      - examples/csharp_tax_service_integrate.md
+      - examples/process_end_button.md  
   - Моделирование корпоративной архитектуры:
     - architect/architect_desktop.md
     - architect/process_architecture_modeling/index.md
@@ -331,39 +358,6 @@ nav:
     - architect/version_control.md
     - architect/architect_demo.md
     - architect/architect_example.md
-  - Практические примеры:
-    - examples/creating_gantt_chart.md
-    - examples/using_gantt_chart.md
-    - examples/process_email_configure.md
-    - examples/autonumerating_records.md
-    - examples/document_clone_scenario_n3.md
-    - examples/document_download_archive_csharp.md
-    - examples/document_download_archive_related_record_csharp.md
-    - examples/document_download_to_server_csharp.md
-    - examples/substring_search.md
-    - examples/text_regular_mask.md
-    - examples/enum_attribute_value_calculation.md
-    - examples/script_using_local_variable.md
-    - examples/scenario_verify_data.md
-    - examples/multilingual_app.md
-    - administration/connections_communication_routes/rest_odata_connections/1c_integrations.md
-    - administration/connections_communication_routes/rest_odata_connections/send_http_example.md
-    - administration/connections_communication_routes/rest_odata_connections/http_send_post.md
-    - administration/connections_communication_routes/rest_odata_connections/http_send_file.md
-    - administration/connections_communication_routes/rest_odata_connections/jpath_example.md      
-    - administration/connections_communication_routes/rest_odata_connections/http_receive_file.md
-    - examples/task_reassign.md
-    - examples/template_reference_data_api.md
-  - Руководство разработчика:
-    - Руководство по N3: 
-      - developer_guide/n3/n3_guide.md
-    - Руководство по C#: 
-      - developer_guide/csharp/csharp_guide.md
-    - Руководство по API: 
-      - developer_guide/api/index.md
-      - developer_guide/api/api_system_core.md
-      - developer_guide/api/api_solution.md
-      - developer_guide/api/api_web.md
   - Обучение:
     - tutorial/intro.md
     - tutorial/lesson_1.md
@@ -378,7 +372,19 @@ nav:
     - tutorial/lesson_10.md
 
 exclude_docs: |
+  devops_wiki/**
   administration/deploy/linux/deploy_cluster.md
+  administration/deploy/linux/db_migrate_4.2_to_4.7.md
   administration/deploy/windows/admin_utility/**
   administration/deploy/windows/architect_install.md
+  administration/deploy/windows/instance_upgrade_3_2_to_4_2_windows.md
   developer_guide/n3/n3_tutorial.md
+  developer_guide/formulas/formula_toc.md
+  administration/backup/linux/restore_cdbbz_gostech.md
+  administration/deploy/linux/deploy_guide_gostech.md
+  administration/deploy/linux/configuration_files_gostech.md
+  administration/deploy/linux/upgrade_version_gostech.md
+  administration/deploy/logging_engine_gostech.md
+  administration/deploy/linux/upload_size_limit_configure_gostech.md
+  administration/connections_communication_routes/authentication/openid_connection_gostech.md
+  administration/connections_communication_routes/system_connections/s3_connection_gostech.md
