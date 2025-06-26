@@ -473,9 +473,9 @@
 <p><strong>Вычисляемое значение: формула</strong></p>
 <div class="highlight"><code><pre><span></span><code><span class="n">SUBSTRING</span><span class="p">(</span></code><br/>
 <code><span class="w">    </span><span class="err">$</span><span class="n">ResponseEmailSubject</span><span class="p">,</span></code><br/>
-<code><span class="w">    </span><span class="n">INDEXOF</span><span class="p">(</span><span class="err">$</span><span class="n">ResponseEmailSubject</span><span class="p">,</span><span class="s">"["</span><span class="p">)</span><span class="o">+</span><span class="m">1</span><span class="p">,</span></code><br/>
+<code><span class="w">    </span><span class="n">INDEXOF</span><span class="p">(</span><span class="err">$</span><span class="n">ResponseEmailSubject</span><span class="p">,</span><span class="s">"["</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span></code><br/>
 <code><span class="w">    </span><span class="n">INDEXOF</span><span class="p">(</span><span class="err">$</span><span class="n">ResponseEmailSubject</span><span class="p">,</span><span class="s">"]"</span><span class="p">)</span><span class="o">-</span></code><br/>
-<code><span class="w">    </span><span class="n">INDEXOF</span><span class="p">(</span><span class="err">$</span><span class="n">ResponseEmailSubject</span><span class="p">,</span><span class="s">"["</span><span class="p">)</span><span class="o">-</span><span class="m">1</span></code><br/>
+<code><span class="w">    </span><span class="n">INDEXOF</span><span class="p">(</span><span class="err">$</span><span class="n">ResponseEmailSubject</span><span class="p">,</span><span class="s">"["</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span></code><br/>
 <code><span class="p">)</span></code><br/>
 </pre></code></div>
 <ul>
@@ -680,49 +680,53 @@
 <li><strong>Имя отправителя:</strong> <em>Отдел кадров</em></li>
 <li><strong>Кому:</strong> аккаунт или адрес эл. почты <em>Руководителя</em></li>
 <li><strong>Тема:</strong> <code class="highlight"><span class="nt">Заявление</span><span class="w"> </span><span class="nt">на</span><span class="w"> </span><span class="nt">отпуск</span><span class="w"> </span><span class="err">№</span><span class="w"> </span><span class="p">{</span><span class="err">ApplicationNumber</span><span class="p">}</span><span class="w"> </span><span class="nt">от</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="err">ApplicantName</span><span class="p">}</span></code></li>
-<li><strong>Формат сообщения: HTML</strong>
+<li>
+<p><strong>Формат сообщения: HTML</strong></p>
+</li>
+<li>
+<p><strong>Сообщение</strong></p>
+<ol class="colored_numbers_list">
+<li>Перейдите в поле «<strong>Сообщение</strong>».</li>
+<li>В панели инструментов нажмите кнопку «<strong>Источник</strong>» <i class="fa-light fa-file-code">&zwnj;<!--icon--></i>.</li>
+<li>
+<p>Введите следующий HTML-код:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Уважаемый коллега!<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code><br/>
+<code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Поступило заявление на отпуск № {ApplicationNumber}.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code><br/>
+<code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Заявитель: {ApplicantName}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code><br/>
+<code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Количество дней: {Duration}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code><br/>
+<code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Даты отпуска: {StartDate}<span class="ni">&amp;ndash;</span>{EndDate}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code><br/>
+<code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Просьба согласовать отпуск или отказать в отпуске:<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code><br/>
+<code><span class="p">&lt;</span><span class="nt">ol</span><span class="p">&gt;</span></code><br/>
+<code><span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Нажмите соответствующую кнопку ниже.<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span></code><br/>
+<code><span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Будет создано новое письмо.<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span></code><br/>
+<code><span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>В теме письма будет указано Ваше решение по заявлению и номер заявления.<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span></code><br/>
+<code><span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">u</span><span class="p">&gt;</span>Не меняйте тему письма и адрес получателя.<span class="p">&lt;/</span><span class="nt">u</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span></code><br/>
+<code><span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>При необходимости укажите причину решения в тексте письма.<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span></code><br/>
+<code><span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Отправьте письмо.<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span></code><br/>
+<code><span class="p">&lt;/</span><span class="nt">ol</span><span class="p">&gt;</span></code><br/>
+<code><span class="p">&lt;</span><span class="nt">table</span> <span class="na">border</span><span class="o">=</span><span class="s">"0"</span> <span class="na">cellpadding</span><span class="o">=</span><span class="s">"6"</span> <span class="na">cellspacing</span><span class="o">=</span><span class="s">"0"</span><span class="p">&gt;</span></code><br/>
+<code><span class="p">&lt;</span><span class="nt">tbody</span> <span class="na">markdown</span><span class="o">=</span><span class="s">"block"</span><span class="p">&gt;</span></code><br/>
+<code><span class="p">&lt;</span><span class="nt">tr</span> <span class="na">markdown</span><span class="o">=</span><span class="s">"block"</span><span class="p">&gt;</span></code><br/>
+<code>    <span class="p">&lt;</span><span class="nt">td</span> <span class="na">markdown</span><span class="o">=</span><span class="s">"block"</span><span class="p">&gt;</span></code><br/>
+<code><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"mailto:leavedecisions@example.com?subject=Отпуск согласован. Заявление № [{ApplicationNumber}]"</span><span class="p">&gt;</span></code><br/>
+<code>Согласовать отпуск<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span></code><br/>
+<code>    <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span></code><br/>
+<code>    <span class="p">&lt;</span><span class="nt">td</span> <span class="na">markdown</span><span class="o">=</span><span class="s">"block"</span><span class="p">&gt;</span></code><br/>
+<code>        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"mailto:leavedecisions@example.com?subject=В отпуске отказано. Заявление № [{ApplicationNumber}]&amp;body=Причина отказа:"</span><span class="p">&gt;</span></code><br/>
+<code>        Отказать в отпуске<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span></code><br/>
+<code>    <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span></code><br/>
+<code><span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span></code><br/>
+<code><span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span></code><br/>
+</pre></code></div>
+</li>
+<li>
+<p>Снова нажмите кнопку «<strong>Источник</strong>» <i class="fa-light fa-file-code">&zwnj;<!--icon--></i>.</p>
+</li>
+<li>Должно отобразиться показанное на следующей иллюстрации письмо:</li>
+</ol>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Тема и текст письма для Руководителя с заполнителями для подстановки значений атрибутов" src="https://kb.comindware.ru/assets/process_email_configure_email_manager_example.png"/><figcaption class="caption">Тема и текст письма для Руководителя с заполнителями для подстановки значений атрибутов</figcaption></figure></p>
 </li>
 </ul>
-<p>
-- <strong>Сообщение</strong>
-    1. Перейдите в поле «<strong>Сообщение</strong>».
-    2. В панели инструментов нажмите кнопку «<strong>Источник</strong>» <i class="fa-light fa-file-code">&zwnj;<!--icon--></i>.
-    3. Введите следующий HTML-код:</p>
-<div class="highlight"><code><pre><span></span><code>    ``` html</code><br/>
-<code>    &lt;p&gt;Уважаемый коллега!&lt;/p&gt;</code><br/>
-<code>    &lt;p&gt;Поступило заявление на отпуск № {ApplicationNumber}.&lt;/p&gt;</code><br/>
-<code>    &lt;p&gt;Заявитель: {ApplicantName}&lt;/p&gt;</code><br/>
-<code>    &lt;p&gt;Количество дней: {Duration}&lt;/p&gt;</code><br/>
-<code>    &lt;p&gt;Даты отпуска: {StartDate}&amp;ndash;{EndDate}&lt;/p&gt;</code><br/>
-<code>    &lt;p&gt;Просьба согласовать отпуск или отказать в отпуске:&lt;/p&gt;</code><br/>
-<code>    &lt;ol&gt;</code><br/>
-<code>    &lt;li&gt;Нажмите соответствующую кнопку ниже.&lt;/li&gt;</code><br/>
-<code>    &lt;li&gt;Будет создано новое письмо.&lt;/li&gt;</code><br/>
-<code>    &lt;li&gt;В теме письма будет указано Ваше решение по заявлению и номер заявления.&lt;/li&gt;</code><br/>
-<code>    &lt;li&gt;&lt;u&gt;Не меняйте тему письма и адрес получателя.&lt;/u&gt;&lt;/li&gt;</code><br/>
-<code>    &lt;li&gt;При необходимости укажите причину решения в тексте письма.&lt;/li&gt;</code><br/>
-<code>    &lt;li&gt;Отправьте письмо.&lt;/li&gt;</code><br/>
-<code>    &lt;/ol&gt;</code><br/>
-<code>    &lt;table border="0" cellpadding="6" cellspacing="0"&gt;</code><br/>
-<code>    &lt;tbody markdown="block"&gt;</code><br/>
-<code>    &lt;tr markdown="block"&gt;</code><br/>
-<code>        &lt;td markdown="block"&gt;</code><br/>
-<code>    &lt;a href="mailto:leavedecisions@example.com?subject=Отпуск согласован. Заявление № [{ApplicationNumber}]"&gt;</code><br/>
-<code>    Согласовать отпуск&lt;/a&gt;</code><br/>
-<code>        &lt;/td&gt;</code><br/>
-<code>        &lt;td markdown="block"&gt;</code><br/>
-<code>            &lt;a href="mailto:leavedecisions@example.com?subject=В отпуске отказано. Заявление № [{ApplicationNumber}]&amp;body=Причина отказа:"&gt;</code><br/>
-<code>            Отказать в отпуске&lt;/a&gt;</code><br/>
-<code>        &lt;/td&gt;</code><br/>
-<code>    &lt;/tr&gt;</code><br/>
-<code>    &lt;/table&gt;</code><br/>
-<code>    ```</code><br/>
-<code></code><br/>
-<code>4. Снова нажмите кнопку «**Источник**» &lt;i class="fa-light fa-file-code"&gt;‌&lt;/i&gt;.</code><br/>
-<code>5. Должно отобразиться показанное на следующей иллюстрации письмо:</code><br/>
-<code></code><br/>
-<code>&lt;figure markdown&gt;![Тема и текст письма для Руководителя с заполнителями для подстановки значений атрибутов](img/process_email_configure_email_manager_example.png)&lt;figcaption&gt;Тема и текст письма для Руководителя с заполнителями для подстановки значений атрибутов&lt;/figcaption&gt;&lt;/figure&gt;</code><br/>
-</pre></code></div>
 </li>
 </ul>
 </li>
@@ -914,10 +918,7 @@
 </ul>
 </li>
 </ul>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Тема и текст письма заявителю с уведомлением «Отпуск согласован» с заполнителями для подстановки значений атрибутов" src="https://kb.comindware.ru/assets/process_email_configure_email_agree_example.png"/><figcaption class="caption">Тема и текст письма заявителю с уведомлением «Отпуск согласован» с заполнителями для подстановки значений атрибутов</figcaption></figure>
-</p>
-<p>
-</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Тема и текст письма заявителю с уведомлением «Отпуск согласован» с заполнителями для подстановки значений атрибутов" src="https://kb.comindware.ru/assets/process_email_configure_email_agree_example.png"/><figcaption class="caption">Тема и текст письма заявителю с уведомлением «Отпуск согласован» с заполнителями для подстановки значений атрибутов</figcaption></figure></p>
 </li>
 </ul>
 </li>
@@ -1679,10 +1680,10 @@
 <p><figure class="screenshot_with_caption" markdown=""><img alt="Письмо Руководителю с заявлением на отпуск и кнопками для согласования и отказа в отпуске" src="https://kb.comindware.ru/assets/process_email_configure_manager_email_with_buttons.png"/><figcaption class="caption">Письмо Руководителю с заявлением на отпуск и кнопками для согласования и отказа в отпуске</figcaption></figure></p>
 </li>
 <li>
-<p>Нажмите кнопку «<em>Согласовать отпуск</em>» в письме.
-    </p>
-<p>
-11. В почтовом клиенте будет создано новое письмо, показанное на следующей иллюстрации.</p>
+<p>Нажмите кнопку «<em>Согласовать отпуск</em>» в письме.</p>
+</li>
+<li>
+<p>В почтовом клиенте будет создано новое письмо, показанное на следующей иллюстрации.</p>
 <p><figure class="screenshot_with_caption" markdown=""><img alt="Письмо в Отдел кадров с положительном решением по заявлению на отпуск" src="https://kb.comindware.ru/assets/process_email_configure_accept.png"/><figcaption class="caption">Письмо в Отдел кадров с положительном решением по заявлению на отпуск</figcaption></figure></p>
 </li>
 <li>

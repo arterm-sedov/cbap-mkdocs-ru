@@ -3,9 +3,9 @@ title: Рекомендации по настройке приложений
 kbId: 2006
 ---
 
-# Рекомендации по настройке приложений {: #application_configure_recommendations}
+# Рекомендации по настройке приложений {: #application_configure_recommendations }
 
-## Введение
+## Введение {: #application_configure_recommendations_intro }
 
 После установки **{{ productName }}** и первого входа в систему администратору предоставляется доступ ко всем разделам.
 
@@ -13,9 +13,18 @@ kbId: 2006
 
 Приложение можно использовать для решения одной или нескольких бизнес-задач.
 
-Прежде чем создавать своё приложение, ознакомьтесь с **[учебными материалами][tutorial]**.
+Прежде чем приступать к разработке приложений, прочтите:
 
-## Общие рекомендации
+- [Рекомендации по циклу разработки бизнес-приложений](#production_deploy)
+- [Сведениями об ответственности за разработку](#optimization_responsibility)
+- [Общие рекомендации по разработке](#application_configure_recommendations_general)
+- [Учебные материалы][tutorial]
+
+{% include-markdown ".snippets/disclaimer_production_deploy.md" %}
+
+{% include-markdown ".snippets/disclaimer_optimization.md" %}
+
+## Общие рекомендации {: #application_configure_recommendations_general }
 
 Рекомендуется создавать отдельные приложения под каждую бизнес-задачу, например «_Согласование договоров», «CRM», «Управление кадрами»_ или _«ТОиР»_.
 
@@ -51,7 +60,5 @@ kbId: 2006
 - Диаграмма бизнес-способностей
 - Диаграмма модели данных
 - Диаграмма модели классов
-
-{% include-markdown ".snippets/disclaimer_optimization.md" %}
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
