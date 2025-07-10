@@ -352,6 +352,24 @@ bash instance_check.sh CMW
 
 Назначение: обновление установленной версии **{{ productName }}** до новой с переносом файлов, остановкой и удалением старых сервисов, обновлением конфигураций и запуском новой версии.
 
+## Служебные скрипты
+
+Служебные скрипты являются вспомогательными и служат для вызова другими скриптами. Они не предназначены для самостоятельного запуска пользователем.
+
+Список служебных скриптов:
+
+| Имя скрипта                | Назначение                                                                                 |
+|---------------------------|----------------------------------------------------------------------------------------------|
+| adapterhost_config    | Генерация конфигурационного файла `adapterhost.yml` для экземпляра.                             |
+| adapterhost_register  | Регистрация `Adapterhost` как службы.              |
+| adapterhost_start     | Запуск службы `Adapterhost`.                                        |
+| adapterhost_stop      | Остановка службы `Adapterhost`.                                      |
+| adapterhost_unregister | Удаление службы `Adapterhost`.                                      |
+| apigateway_register   | Регистрация `Apigateway` как службы.               |
+| apigateway_start      | Запуск службы `Apigateway`.                                         |
+| apigateway_stop       | Остановка службы `Apigateway`.                                     |
+| apigateway_unregister | Удаление службы `Apigateway`.                                       |
+
 <div class="relatedTopics" markdown="block">
 
 --8<-- "related_topics_heading.md"
