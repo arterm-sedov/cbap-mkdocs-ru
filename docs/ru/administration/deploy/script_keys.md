@@ -2,7 +2,7 @@
 title: 'Скрипты и их ключи'
 kbId: 5122
 tags:
-  - bash
+  - sh
   - deployment
   - deploy
   - Windows
@@ -54,7 +54,7 @@ hide: tags
 
 Для ознакомления с ключами и назначением с большинством скриптов можно использовать ключ `-h` или `--help` без каких-либо других ключей, например:
 
-``` sh
+``` bash
 sh prerequisites_install.sh -h
 ```
 
@@ -78,6 +78,12 @@ sh prerequisites_install.sh -h
 - `-path <path/to>` — указать путь до распакованной папки с установочными файлами.
 - `-h`, `--help` — вывести справку по использованию скрипта.
 
+**Пример:**
+
+``` powershell
+.\files_unblock.ps1 -path С:\Downloads\prerequisites
+```
+
 ### prerequisites_install
 
 **Назначение:** установка и настройка вспомогательного ПО и зависимостей **{{ productName }}**.
@@ -94,9 +100,20 @@ sh prerequisites_install.sh -h
     - `-o`, `--opensearch` — установить Opensearch.
     - `-i`, `--ignite` — установить Apache Ignite.
     - `-p`, `--platform` — установить компоненты **{{ productName }}**.
+    - **Пример:**
+
+        ``` bash
+        sh prerequisites_install.sh -p -d -k
+        ```
+
 - **Windows**
     - `-ignite` — установить Apache Ignite.
     - `-h`, `-help` — вывести справку по использованию скрипта.
+    - **Пример:**
+
+        ``` powershell
+        .\prerequisites_install.ps1 -ignite
+        ```
 
 ### prerequisites_list
 
@@ -105,6 +122,16 @@ sh prerequisites_install.sh -h
 **Ключи:**
 
 - `-h`, `--help` — вывести справку по использованию скрипта.
+
+**Пример:**
+
+``` bash
+sh prerequisites_list.sh
+```
+
+``` powershell
+.\prerequisites_list.ps1
+```
 
 ### prerequisites_uninstall
 
@@ -119,21 +146,51 @@ sh prerequisites_install.sh -h
 - `-n`, `--nginx` — удалить Nginx.
 - `-h`, `--help` — вывести справку по использованию скрипта.
 
-### version_check_environment
+**Пример:**
 
-**Назначение:** проверка состояния среды — выводит статус и версию установленных компонентов, необходимых для работы **{{ productName }}**.
+``` bash
+sh prerequisites_uninstall.sh -d -j
+```
 
 ### version_check
 
 **Назначение:** проверка состояния среды и компонентов **{{ productName }}**.
 
+**Пример:**
+
+``` bash
+sh version_check.sh
+```
+
+### version_check_environment
+
+**Назначение:** проверка состояния среды — выводит статус и версию установленных компонентов, необходимых для работы **{{ productName }}**.
+
+**Пример:**
+
+``` bash
+sh version_check_environment.sh
+```
+
 ### version_list
 
 **Назначение:** вывод списка установленных версий **{{ productName }}**.
 
+**Пример:**
+
+``` bash
+sh version_list.sh
+```
+
 ### version_upgrade_onetime
 
 **Назначение:** обновление установленной версии **{{ productName }}** до новой с переносом файлов, остановкой и удалением старых сервисов, обновлением конфигураций и запуском новой версии.
+
+**Пример:**
+
+``` bash
+sh version_upgrade_onetime.sh
+```
 
 ## Скрипты установки {{ productName }}
 
@@ -162,7 +219,7 @@ sh prerequisites_install.sh -h
 **Пример:**
 
 ``` bash
-bash instance_check.sh CMW
+sh instance_check.sh CMW
 ```
 
 ### instance_create
@@ -182,8 +239,8 @@ bash instance_check.sh CMW
     - `-h`, `--help` — вывести справку по использованию скрипта.
     - **Пример:**
 
-        ``` sh
-        bash instance_create.sh -n=CMW -p=8080 -v=5.0.1234.0
+        ``` bash
+        sh instance_create.sh -n=CMW -p=8080 -v=5.0.1234.0
         ```
 
 - **Windows**
@@ -213,8 +270,8 @@ bash instance_check.sh CMW
     - `-h`, `--help` — вывести справку по использованию скрипта.
     - **Пример:**
 
-        ``` sh
-        bash instance_delete.sh -n=CMW
+        ``` bash
+        sh instance_delete.sh -n=CMW
         ```
 
 - **Windows**
@@ -289,7 +346,7 @@ bash instance_check.sh CMW
     - **Пример:**
 
         ``` bash
-        bash instance_upgrade.sh -n=CMW -vp=/comindware/5.0.1234.0
+        sh instance_upgrade.sh -n=CMW -vp=/comindware/5.0.1234.0
         ```
 
 - **Windows**
@@ -320,8 +377,8 @@ bash instance_check.sh CMW
     - `-h`, `--help` — вывести справку по использованию скрипта.
     - **Пример:**
 
-        ``` sh
-        bash version_delete.sh -v=5.0.1234.0
+        ``` bash
+        sh version_delete.sh -v=5.0.1234.0
         ```
 
 - **Windows**
