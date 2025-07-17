@@ -76,7 +76,7 @@ sh prerequisites_install.sh -h
 **Ключи:**
 
 - `-path <path/to>` — указать путь до распакованной папки с установочными файлами.
-- `-h`, `--help` — вывести справку по использованию скрипта.
+- `-h`, `-help` — вывести справку по использованию скрипта.
 
 **Пример:**
 
@@ -164,7 +164,7 @@ sh version_check.sh
 
 ### version_check_environment
 
-**Назначение:** проверка состояния среды — выводит статус и версию установленных компонентов, необходимых для работы **{{ productName }}**.
+**Назначение:** проверка и вывод статуса и версии установленных компонентов, необходимых для работы **{{ productName }}**.
 
 **Пример:**
 
@@ -206,15 +206,21 @@ sh version_upgrade_onetime.sh
 **Ключи:**
 
 - `-path <path/to>` — указать путь до распакованной папки с установочными файлами.
-- `-h`, `--help` — вывести справку по использованию скрипта.
+- `-h`, `-help` — вывести справку по использованию скрипта.
+
+**Пример:**
+
+``` powershell
+.\files_unblock.ps1 -path С:\Downloads\CMW
+```
 
 ### instance_check
 
 **Назначение:** проверка состояния экземпляра ПО.
 
-Параметры:
+**Параметры:**
 
-- <instanceName> — имя экземпляра ПО (обязательный).
+- `<instanceName>` — имя экземпляра ПО (обязательный).
 
 **Пример:**
 
@@ -292,6 +298,16 @@ sh instance_check.sh CMW
 
 - `-h`, `--help` — вывести справку по использованию скрипта.
 
+**Пример:**
+
+``` bash
+sh instance_list.sh
+```
+
+``` powershell
+.\instance_list.ps1
+```
+
 ### instance_restore_from_backup
 
 **Назначение:** восстановление данных экземпляра ПО из архивной резервной копии (файл .cdbbz) в указанные каталоги `Database` и `Streams`.
@@ -303,7 +319,13 @@ sh instance_check.sh CMW
 - `-streamsPath <path/to>` — указать путь к каталогу `Streams` для восстановления (обязательный).
 - `-tempDir <path/to>` — указать временный каталог для распаковки архива.
 - `-deleteOldData` — удалить старые данные перед восстановлением.
-- `-h`, `--help` — вывести справку по использованию скрипта.
+- `-h`, `-help` — вывести справку по использованию скрипта.
+
+**Пример:**
+
+``` powershell
+.\instance_restore_from_backup.ps1 -zipPath C:\Documents\CMW_backup -dataPath C:\Documents\CMW\Database -streamsPath C:\Documents\CMW\Streams
+```
 
 ### instance_start
 
@@ -360,13 +382,25 @@ sh instance_check.sh CMW
         .\instance_upgrade.ps1 -name CMW -version 5.0.1234.0
         ```
 
+### version_check
+
+**Назначение:** проверка состояния среды и компонентов **{{ productName }}**.
+
+**Пример:**
+
+``` bash
+sh version_check.sh
+```
+
 ### version_check_environment
 
 **Назначение:** проверка состояния среды — выводит статус и версию установленных компонентов, необходимых для работы **{{ productName }}**.
 
-### version_check
+**Пример:**
 
-**Назначение:** проверка состояния среды и компонентов **{{ productName }}**.
+``` bash
+sh version_check_environment.sh
+```
 
 ### version_delete
 
@@ -398,6 +432,16 @@ sh instance_check.sh CMW
 
 - `-h`, `--help` — вывести справку по использованию скрипта.
 
+**Пример:**
+
+``` bash
+sh version_install.sh
+```
+
+``` powershell
+.\version_install.ps1
+```
+
 ### version_list
 
 **Назначение:** вывод установленных версий ПО.
@@ -406,9 +450,25 @@ sh instance_check.sh CMW
 
 - `-h`, `--help` — вывести справку по использованию скрипта.
 
+**Пример:**
+
+``` bash
+sh version_list.sh
+```
+
+``` powershell
+.\version_list.ps1
+```
+
 ### version_upgrade_onetime
 
 **Назначение:** обновление установленной версии **{{ productName }}** до новой с переносом файлов, остановкой и удалением старых сервисов, обновлением конфигураций и запуском новой версии.
+
+**Пример:**
+
+``` bash
+sh version_upgrade_onetime.sh
+```
 
 ## Служебные скрипты
 
@@ -433,10 +493,10 @@ sh instance_check.sh CMW
 --8<-- "related_topics_heading.md"
 
 - [Пути и содержимое директорий экземпляра ПО][paths]
-- [Развёртывание ПО в ОС Linux][deploy_guide_Linux]
-- [Резервное копирование и восстановление в ОС Linux][backup_and_restore]
-- [Развёртывание ПО в ОС Windows][deploy_guide_Windows]
-- [Резервное копирование и восстановление в ОС Windows][backup_restore_Windows]
+- [Развёртывание ПО в ОС Linux][deploy_guide_linux]
+- [Резервное копирование и восстановление в ОС Linux][backup_restore_cdbbz]
+- [Развёртывание ПО в ОС Windows][deploy_guide_windows]
+- [Резервное копирование и восстановление в ОС Windows][backup_restore_windows]
 
 </div>
 
