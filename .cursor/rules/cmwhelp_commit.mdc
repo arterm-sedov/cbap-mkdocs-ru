@@ -3,23 +3,33 @@ description: Commit rule
 alwaysApply: true
 ---
 
-This rule applies to commit messages
+This rule applies to commit messages.
 
-# Rule content
+# Commit Message Rule
 
-IMPORTANT: always start commit with the Ticket/Issue number (`#XXXXX`) as follows:
+**Important requirement:**
+- The commit message must always start with the ticket/issue number, which is taken from the current branch name.
+- Format:
+  `[#XXXXX] Concise description of the change`
+  where `XXXXX` is the number at the start of the branch name (up to the first `_` or other separator).
 
-`[#XXXXX] Commit message`
+**Algorithm:**
+1. Determine the current branch name.
+2. Extract the first sequence of digits (usually up to the `_` character).
+3. Use it in square brackets with a `#` at the start of the commit message (no spaces inside the brackets).
+4. After the brackets, provide a concise, to-the-point description of the change.
 
-Extract the ticket number `#XXXXX` from the current branch name, eg:
+**Correct examples:**
+- `[#12345] Add new documentation section`
+- `[#67890] Fix data processing bug`
 
-`XXXXX_branch_name` -> `[#XXXXX] Commit message`
+**Incorrect examples:**
+- `Add new documentation section`
+- `[12345] Fix bug`
+- `[ #12345 ] Fix bug in module X, add tests, update docs` (spaces inside brackets)
+- `[#12345] Fix bug in module X, add tests, update docs` (too long)
 
-Keep commit messages concise and structured.
-
-Keep the meaning strongly to the point of the changes.
-
-Keep the length to the minimum.
-
-As a context read the @.cursor\rules\cmwhelp.mdc rule
+**Requirements:**
+- The message must be concise, structured, and strictly relevant to the change.
+- Keep the length to the minimum necessary.
 
