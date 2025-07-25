@@ -135,6 +135,6 @@ BPM включает в себя следующие понятия:
 
 Вы узнали ключевые понятия BPM, а также также получили представление о назначении, возможностях и архитектуре **{{ productNameEnterprise }}**.
 
-В ходе [второго урока][tutorial_architect_lesson2] вы научитесь работать с интерфейсом, ролями пользователей и навигацией в **{{ productNameEnterprise }}**.
+В ходе [второго урока][tutorial_architect_lesson_2] вы научитесь работать с интерфейсом, ролями пользователей и навигацией в **{{ productNameEnterprise }}**.
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
