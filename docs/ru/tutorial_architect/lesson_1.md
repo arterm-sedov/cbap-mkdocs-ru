@@ -1,5 +1,5 @@
 ---
-title: 'Урок 1. Обзор возможностей Comindware Platform и понятий BPMS'
+title: 'Урок 1. Обзор возможностей Comindware Platform Enterprise и понятий BPMS'
 kbId: 5125
 tags:
   # Common tutorial_architect tags
@@ -31,7 +31,7 @@ hide: tags
 
 ## Введение {: #tutorial_architect_lesson_1_intro }
 
-**Предусловия:** пройден вводный урок, базовые навыки работы с интерфейсом платформы.
+**Предусловия:** имеются базовые навыки работы с **{{ productNameEnterprise }}**.
 
 **Расчётная продолжительность:** 30 мин.
 
