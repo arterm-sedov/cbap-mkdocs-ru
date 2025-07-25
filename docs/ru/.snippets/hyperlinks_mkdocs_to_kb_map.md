@@ -942,6 +942,15 @@
 [tutorial_hr_lesson_8]: {{ kbArticleURLPrefix }}5120
 [tutorial_hr_outro]: {{ kbArticleURLPrefix }}5121
 
+[tutorial_architect]: {{ kbArticleURLPrefix }}5124
+[tutorial_architect_lesson_1]: {{ kbArticleURLPrefix }}5125
+[tutorial_architect_lesson_2]: {{ kbArticleURLPrefix }}5126
+[tutorial_architect_lesson_3]: {{ kbArticleURLPrefix }}5127
+[tutorial_architect_lesson_4]: {{ kbArticleURLPrefix }}5128
+[tutorial_architect_lesson_5]: {{ kbArticleURLPrefix }}5129
+[tutorial_hr_outro]: {{ kbArticleURLPrefix }}5130
+[tutorial_hr_tests]: {{ kbArticleURLPrefix }}5131
+
 {% endif %}
 
 {% if apiGuide or kbExport %}
