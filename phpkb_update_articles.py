@@ -298,7 +298,9 @@ def getArticleContentById(article_id):
                             tag_list = tags.split(',')
                             while len(tags) > 250:
                                 # Split tags and keep only those that fit within 250 chars      
-                                tag_list.pop(len(tag_list)-1)
+                                print(f'MkDocs tags length exceeds 250 chars:  {len(tags)}')
+                                removed_tag = tag_list.pop()
+                                print(f'Popping tag: {removed_tag}')
                                 tags = ','.join(tag_list)
                         print(f'MkDocs tags:  {tags}')
                         return content, title, tags
