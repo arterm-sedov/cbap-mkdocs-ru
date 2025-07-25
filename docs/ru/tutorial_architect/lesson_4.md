@@ -1,6 +1,6 @@
 ---
 title: 'Урок 4. Согласование, аудит, публикация, контроль изменений'
-kbId: 5116
+kbId: 5128
 tags:
   # Common tutorial_architect tags
   - BPMN

@@ -1,6 +1,7 @@
 ---
-title: 'Заключительный урок: подведение итогов и дальнейшее развитие'
-kbId: 5118
+title: 'Заключение'
+kbTitle: 'Заключение. Курс «Корпоративная архитектура. Ознакомительный»'
+kbId: 5130
 tags:
   # Common tutorial_architect tags
   - BPMN
@@ -27,7 +28,7 @@ tags:
 hide: tags
 ---
 
-# Заключение: подведение итогов и дальнейшее развитие {: #tutorial_architect_outro }
+# Заключение. Курс «Корпоративная архитектура. Ознакомительный» {: #tutorial_architect_outro }
 
 ## Введение {: #tutorial_architect_outro_summary }
 

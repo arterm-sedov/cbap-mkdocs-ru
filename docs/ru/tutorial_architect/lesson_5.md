@@ -1,6 +1,6 @@
 ---
 title: 'Урок 5. Документооборот, шаблоны регламентов, экспорт'
-kbId: 5117
+kbId: 5129
 tags:
   # Common tutorial_architect tags
   - BPMN

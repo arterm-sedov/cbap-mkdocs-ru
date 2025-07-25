@@ -1,6 +1,6 @@
 ---
 title: 'Урок 1. Обзор возможностей Comindware Platform и понятий BPMS'
-kbId: 5113
+kbId: 5125
 tags:
   # Common tutorial_architect tags
   - BPMN
