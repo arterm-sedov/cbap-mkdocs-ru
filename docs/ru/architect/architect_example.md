@@ -262,10 +262,10 @@ _![Диаграмма оргструктуры](architect_example_organizational
     ``` turtle
     @prefix object: <http://comindware.com/ontology/object#>.
     {
-        ("systemSolution" "Tipsluzhebnyy") object:findProperty ?foundProperty.
-        ("systemSolution" "superiorUnit") object:findProperty ?superiorUnitProp.
-        ("systemSolution" "Otdel") object:findProperty ?Otdel.
-        ("systemSolution" "unitName") object:findProperty ?name.
+        ("systemSolution_OrganizationalStructure" "Tipsluzhebnyy") object:findProperty ?foundProperty.
+        ("systemSolution_OrganizationalStructure" "superiorUnit") object:findProperty ?superiorUnitProp.
+        ("systemSolution_OrganizationalStructure" "Otdel") object:findProperty ?Otdel.
+        ("systemSolution_OrganizationalStructure" "unitName") object:findProperty ?name.
         if {?item ?foundProperty "Department". }
         then { ?item ?name ?value.}
         else {
