@@ -1,0 +1,705 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5122" kb-tags="Linux,Windows,bash,deploy,deployment,powershell,sh,скрипты,скрипты установки,установка,обновление,удаление,инсталляция,ключи,экземпляр,администрирование" kb-title="Установочные скрипты. Назначение и ключи">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_intro">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_help_call">
+<span class="md-ellipsis">
+      Вызов справки для скриптов
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_conditional_legend">
+<span class="md-ellipsis">
+      Условные обозначения
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_prerequisites">
+<span class="md-ellipsis">
+      Скрипты для установки вспомогательного ПО
+    </span>
+</a>
+<nav aria-label="Скрипты для установки вспомогательного ПО" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_linux_windows">
+<span class="md-ellipsis">
+      Скрипты для Linux и Windows
+    </span>
+</a>
+<nav aria-label="Скрипты для Linux и Windows" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#scripts_keys_prerequisites_install">
+<span class="md-ellipsis">
+      prerequisites_install
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_prerequisites_list">
+<span class="md-ellipsis">
+      prerequisites_list
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_version_check">
+<span class="md-ellipsis">
+      version_check
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_version_check_environment">
+<span class="md-ellipsis">
+      version_check_environment
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_version_list">
+<span class="md-ellipsis">
+      version_list
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_version_upgrade_onetime">
+<span class="md-ellipsis">
+      version_upgrade_onetime
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#скрипты-только-для-windows">
+<span class="md-ellipsis">
+      Скрипты только для Windows
+    </span>
+</a>
+<nav aria-label="Скрипты только для Windows" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#scripts_keys_files_unblock">
+<span class="md-ellipsis">
+      files_unblock
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#скрипты-только-для-linux">
+<span class="md-ellipsis">
+      Скрипты только для Linux
+    </span>
+</a>
+<nav aria-label="Скрипты только для Linux" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_prerequisites_uninstall">
+<span class="md-ellipsis">
+      prerequisites_uninstall
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_platform_scripts">
+<span class="md-ellipsis">
+      Скрипты для установки Comindware Platform
+    </span>
+</a>
+<nav aria-label="Скрипты для установки Comindware Platform" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#кросс-платформенные-скрипты">
+<span class="md-ellipsis">
+      Кросс-платформенные скрипты
+    </span>
+</a>
+<nav aria-label="Кросс-платформенные скрипты" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_instance_check">
+<span class="md-ellipsis">
+      instance_check
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_instance_create">
+<span class="md-ellipsis">
+      instance_create
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_instance_delete">
+<span class="md-ellipsis">
+      instance_delete
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_instance_list">
+<span class="md-ellipsis">
+      instance_list
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_instance_upgrade">
+<span class="md-ellipsis">
+      instance_upgrade
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_version_check_platform">
+<span class="md-ellipsis">
+      version_check
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_version_check_environment_platform">
+<span class="md-ellipsis">
+      version_check_environment
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_version_delete">
+<span class="md-ellipsis">
+      version_delete
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_version_install">
+<span class="md-ellipsis">
+      version_install
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_version_list_platform">
+<span class="md-ellipsis">
+      version_list
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_version_upgrade_onetime_platform">
+<span class="md-ellipsis">
+      version_upgrade_onetime
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#скрипты-только-для-windows_1">
+<span class="md-ellipsis">
+      Скрипты только для Windows
+    </span>
+</a>
+<nav aria-label="Скрипты только для Windows" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_files_unblock_platform">
+<span class="md-ellipsis">
+      files_unblock
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_instance_restore_from_backup">
+<span class="md-ellipsis">
+      instance_restore_from_backup
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_instance_start">
+<span class="md-ellipsis">
+      instance_start
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#script_keys_instance_stop">
+<span class="md-ellipsis">
+      instance_stop
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#служебные-скрипты">
+<span class="md-ellipsis">
+      Служебные скрипты
+    </span>
+</a>
+<nav aria-label="Служебные скрипты" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#service_scripts_windows">
+<span class="md-ellipsis">
+      Для Windows
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#service_scripts_linux">
+<span class="md-ellipsis">
+      Для Linux
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="script_keys_intro">Введение</h2>
+<p>Для быстрого развёртывания, обновления, запуска, остановки и удаления <strong>Comindware Platform</strong> компания <strong>Comindware</strong> предоставляет дистрибутив со скриптами, настраивающими необходимое программное обеспечение.</p>
+<p>Здесь представлены сведения о скриптах настройки конфигурации ПО и их ключах.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Пути к файлам и директориям</p>
+<p>Используемые по умолчанию пути к файлам  <strong>Comindware Platform</strong> см. в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a>»</em>.</p>
+<p>В вашей конфигурации могут использоваться другие пути, поэтому внимательно подставляйте фактические пути в команды при выполнении инструкций.</p>
+</div>
+<div class="notice notice-info">
+<p class="admonition-title">Скрипты для Linux и Windows</p>
+<p>Для большинства операций в Linux и Windows предусмотрены одинаковые скрипты с соответствующим расширением: <code>.sh</code> или <code>.ps1</code>.</p>
+<p>Если скрипты или синтаксис ключей для Linux и Windows отличаются, здесь представлены соответствующие ключи и примеры.</p>
+<p>В зависимости от версии ПО, некоторые скрипты могут отсутствовать для той или иной операционной системы, если они для неё не требуются.</p>
+</div>
+<div class="notice notice-tip">
+<p class="admonition-title">Обязательные ключи для скриптов</p>
+<p>Если не указать обязательный ключ для любого скрипта, он запросит его после запуска.</p>
+<p>Для некоторых скриптов не требуется указывать ключи и примеры их запуска здесь не представлены, так как для запуска достаточно указать имя скрипта в терминале.</p>
+</div>
+<h2 id="script_keys_help_call">Вызов справки для скриптов</h2>
+<p>Для ознакомления с ключами (если таковые имеются) и назначением большинства скриптов можно использовать ключ <code>-h</code> (Linux и Windows), <code>--help</code> (Linux) или <code>-help</code> (Windows) без указания каких-либо других ключей, например:</p>
+<div class="highlight"><code><pre><span></span><code>sh<span class="w"> </span>prerequisites_install.sh<span class="w"> </span>-h</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">instance_upgrade</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-h</span></code> <br/></pre></code></div>
+<p>Далее ключ <code>-h</code> повторно не упоминается, так как он действует одинаково для всех скриптов.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Справка имеется не у всех скриптов</p>
+<p>Для некоторых служебных, не предназначенных для вызова пользователем и не требующих объяснения скриптов ключ <code>-h</code> не предусмотрен.</p>
+</div>
+<h2 id="script_keys_conditional_legend">Условные обозначения</h2>
+<p>Здесь используются следующие обозначения:</p>
+<ul>
+<li><code>&lt;instanceName&gt;</code> — имя экземпляра ПО.</li>
+<li><code>&lt;versionNumber&gt;</code> — номер версии ПО.</li>
+<li><code>&lt;portNumber&gt;</code> — номер порта.</li>
+<li><code>&lt;osname&gt;</code> — название ОС.</li>
+<li><code>&lt;versionPath&gt;</code> — путь к директории с версией ПО.</li>
+<li><code>&lt;hostName&gt;</code> — имя хоста экземпляра ПО.</li>
+<li><code>&lt;value&gt;</code> — значение, подставляемое пользователем.</li>
+<li><code>&lt;path/to&gt;</code> — путь к файлу или директории, подставляемый пользователем.</li>
+</ul>
+<h2 id="script_keys_prerequisites">Скрипты для установки вспомогательного ПО</h2>
+<p>Скрипты для установки вспомогательного ПО расположены в следующей директории распакованного дистрибутива вспомогательного ПО:</p>
+<ul>
+<li><strong>Linux:</strong> <code>X.X-release-ru-&lt;versionNumber&gt;.prerequisites.&lt;osname&gt;/CMW_&lt;osname&gt;/scripts</code></li>
+<li><strong>Windows:</strong> <code>X.X-release-ru-&lt;versionNumber&gt;.prerequisites.Windows\CMW_Windows&lt;versionNumber&gt;\scripts</code></li>
+</ul>
+<h3 id="script_keys_linux_windows">Скрипты для Linux и Windows</h3>
+<h4 id="scripts_keys_prerequisites_install"><code>prerequisites_install</code></h4>
+<p><strong>Назначение:</strong> установка и настройка вспомогательного ПО и зависимостей <strong>Comindware Platform</strong>.</p>
+<p><strong>Ключи:</strong></p>
+<ul>
+<li>
+<p><strong>Linux</strong></p>
+<ul>
+<li><code>-u=&lt;user&gt;</code>, <code>--user=&lt;user&gt;</code> — указать пользователя для установки компонентов.</li>
+<li><code>-g=&lt;group&gt;</code>, <code>--group=&lt;group&gt;</code> — указать группу для установки компонентов.</li>
+<li><code>-k</code>, <code>--kafka</code> — установить Kafka.</li>
+<li><code>-kc</code>, <code>--kafkaClient</code> — установить клиентские библиотеки Kafka.</li>
+<li><code>-d</code>, <code>--dotnet</code> — установить .NET.</li>
+<li><code>-o</code>, <code>--opensearch</code> — установить OpenSearch.
+&lt;!-- НЕ ИСПОЛЬЗОВАТЬ ПОКА НЕ РЕАЛИЗОВАН КЛАСТЕР</li>
+<li><code>-i</code>, <code>--ignite</code> — установить Apache Ignite.
+--&gt;</li>
+<li><code>-p</code>, <code>--platform</code> — установить компоненты <strong>Comindware Platform</strong>.</li>
+</ul>
+<p><strong>Пример:</strong></p>
+<div class="highlight"><code><pre><span></span><code>``` bash</code> <br/><code>sh prerequisites_install.sh -p -d -k</code> <br/><code>```</code> <br/></pre></code></div>
+</li>
+<li>
+<p><strong>Windows</strong></p>
+<ul>
+<li>
+<p>Используйте скрипт без ключей:</p>
+<p><div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">prerequisites_install</span><span class="p">.</span><span class="n">ps1</span></code> <br/></pre></code></div>
+    &lt;!-- НЕ ИСПОЛЬЗОВАТЬ ПОКА НЕ БУДЕТ РЕАЛИЗОВАН КЛАСТЕР
+    - <code>-ignite</code> — установить Apache Ignite.</p>
+</li>
+</ul>
+<p><strong>Пример:</strong></p>
+<div class="highlight"><code><pre><span></span><code>``` powershell</code> <br/><code>.\prerequisites_install.ps1 -ignite</code> <br/><code>```</code> <br/></pre></code></div>
+<p>--&gt;</p>
+</li>
+</ul>
+<h4 id="script_keys_prerequisites_list"><code>prerequisites_list</code></h4>
+<p><strong>Назначение:</strong> вывод списка установленных компонентов вспомогательного ПО.</p>
+<h4 id="script_keys_version_check"><code>version_check</code></h4>
+<p><strong>Назначение:</strong> проверка состояния среды и компонентов вспомогательного ПО.</p>
+<h4 id="script_keys_version_check_environment"><code>version_check_environment</code></h4>
+<p><strong>Назначение:</strong> проверка состояния среды — выводит статус и версию установленных компонентов, необходимых для работы вспомогательного ПО и <strong>Comindware Platform</strong>.</p>
+<h4 id="script_keys_version_list"><code>version_list</code></h4>
+<p><strong>Назначение:</strong> вывод списка установленных версий <strong>Comindware Platform</strong>.</p>
+<h4 id="script_keys_version_upgrade_onetime"><code>version_upgrade_onetime</code></h4>
+<p><strong>Назначение:</strong> обновление установленной версии ПО <strong>Comindware Platform</strong> до новой с переносом файлов, остановкой и удалением старых сервисов, обновлением конфигураций и запуском новой версии.</p>
+<h3 id="скрипты-только-для-windows">Скрипты только для Windows</h3>
+<h4 id="scripts_keys_files_unblock"><code>files_unblock</code></h4>
+<p><strong>Назначение:</strong> разблокировка установочных файлов, скачанных из Интернета (снятие метки безопасности <code>Zone.Identifier</code>).</p>
+<p><strong>Ключ:</strong></p>
+<ul>
+<li><code>-path &lt;path/to/distribution&gt;</code> — путь к распакованной директории с установочными файлами, которые требуется разблокировать. Если не указать этот ключ, скрипт разблокирует файлы в текущей директории.</li>
+</ul>
+<p><strong>Пример:</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">files_unblock</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-path</span> <span class="n">С</span><span class="p">:\</span><span class="n">Downloads</span><span class="p">\</span><span class="n">prerequisites</span></code> <br/></pre></code></div>
+<h3 id="скрипты-только-для-linux">Скрипты только для Linux</h3>
+<h4 id="script_keys_prerequisites_uninstall"><code>prerequisites_uninstall</code></h4>
+<p><strong>Назначение:</strong> удаление выбранных компонентов вспомогательного ПО.</p>
+<p><strong>Ключи:</strong></p>
+<ul>
+<li><code>-d</code>, <code>--dotnet</code> — удалить .NET.</li>
+<li><code>-j</code>, <code>--java</code> — удалить Java.</li>
+<li><code>-k</code>, <code>--kafka</code> — удалить Kafka.</li>
+<li><code>-m</code>, <code>--mono</code> — удалить Mono.</li>
+<li><code>-n</code>, <code>--nginx</code> — удалить Nginx.</li>
+</ul>
+<p><strong>Пример:</strong></p>
+<div class="highlight"><code><pre><span></span><code>sh<span class="w"> </span>prerequisites_uninstall.sh<span class="w"> </span>-d<span class="w"> </span>-j</code> <br/></pre></code></div>
+<h2 id="script_keys_platform_scripts">Скрипты для установки Comindware Platform</h2>
+<p>Скрипты для установки ПО <strong>Comindware Platform</strong> расположены в следующей директории с распакованным дистрибутивом <strong>Comindware Platform</strong>:</p>
+<ul>
+<li><strong>Linux:</strong> <code>X.X-release-ru-&lt;versionNumber&gt;.&lt;osname&gt;/CMW_&lt;osname&gt;_&lt;versionNumber&gt;/scripts</code></li>
+<li><strong>Windows:</strong> <code>X.X-release-ru-&lt;versionNumber&gt;.Windows\CMW_Windows&lt;versionNumber&gt;\scripts</code></li>
+</ul>
+<h3 id="кросс-платформенные-скрипты">Кросс-платформенные скрипты</h3>
+<h4 id="script_keys_instance_check"><code>instance_check</code></h4>
+<p><strong>Назначение:</strong> проверка состояния экземпляра ПО.</p>
+<p><strong>Ключ:</strong></p>
+<ul>
+<li><code>&lt;instanceName&gt;</code> — имя экземпляра ПО (<strong>обязательный</strong>).</li>
+</ul>
+<p><strong>Пример:</strong></p>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>instance_check.sh<span class="w"> </span>my_company_instance</code> <br/></pre></code></div>
+<h4 id="script_keys_instance_create"><code>instance_create</code></h4>
+<p><strong>Назначение:</strong> создание нового экземпляра <strong>Comindware Platform</strong>, генерация конфигурационных файлов, а также развёртывание демонстрационной базы данных.</p>
+<p><strong>Ключи:</strong></p>
+<ul>
+<li>
+<p><strong>Linux</strong></p>
+<ul>
+<li><code>-n=&lt;instanceName&gt;</code>, <code>--name=&lt;instanceName&gt;</code> — указать имя экземпляра ПО (обязательный).</li>
+<li><code>-p=&lt;portNumber&gt;</code>, <code>--port=&lt;portNumber&gt;</code> — назначить порт экземпляру ПО (обязательный). По умолчанию: <code>80</code>.</li>
+<li><code>-v=&lt;versionNumber&gt;</code>, <code>--version=&lt;versionNumber&gt;</code> — развернуть ПО указанной версии (обязательный).</li>
+<li><code>-fqdn=&lt;hostName&gt;</code>, <code>--instance-fqdn=&lt;hostName&gt;</code> — указать имя хоста для экземпляра ПО. По умолчанию: <code>localhost</code>.</li>
+<li><code>-el=&lt;value&gt;</code>, <code>--elasticsearch-url=&lt;value&gt;</code> — указать ссылку или IP-адрес службы Elasticsearch.</li>
+<li><code>-kf=&lt;value&gt;</code>, <code>--kafka-url=&lt;value&gt;</code> — указать ссылку или IP-адрес службы Kafka.</li>
+<li><code>-d</code>, <code>--demoDB</code> — создать экземпляр ПО c демонстрационной базой данных.</li>
+</ul>
+<p><strong>Пример:</strong></p>
+<div class="highlight"><code><pre><span></span><code>``` bash</code> <br/><code>bash instance_create.sh -n=my_company_instance -p=8080 -v=5.0.1234.0</code> <br/><code>    ```</code> <br/></pre></code></div>
+</li>
+<li>
+<p><strong>Windows</strong></p>
+<ul>
+<li><code>-name &lt;instanceName&gt;</code> — указать имя экземпляра ПО (обязательный).</li>
+<li><code>-port &lt;portNumber&gt;</code> — назначить порт экземпляру ПО. По умолчанию: 80.</li>
+<li><code>-version &lt;versionNumber&gt;</code> — развернуть ПО указанной версии вида <code>X.X.XXXX.X</code>.</li>
+<li><code>-versionPath &lt;versionPath&gt;</code> — развернуть ПО из указанной папки <code>&lt;versionPath&gt;</code> с версией ПО.</li>
+<li><code>-fqdn &lt;hostName&gt;</code> — имя хоста для экземпляра ПО (опционально, по умолчанию: localhost).</li>
+<li><code>-demoDB</code> — создать экземпляр ПО c демонстрационной базой данных.</li>
+</ul>
+<p><strong>Пример:</strong></p>
+<div class="highlight"><code><pre><span></span><code>``` powershell</code> <br/><code>.\instance_create.ps1 -name my_company_instance -port 8080 -version 5.0.1234.0</code> <br/><code>```</code> <br/></pre></code></div>
+</li>
+</ul>
+<h4 id="script_keys_instance_delete"><code>instance_delete</code></h4>
+<p><strong>Назначение:</strong> удаление экземпляра <strong>Comindware Platform</strong>, его конфигурационных файлов, а также пользовательских данных и всех связанных файлов.</p>
+<p><strong>Ключи:</strong></p>
+<ul>
+<li>
+<p><strong>Linux</strong></p>
+<ul>
+<li><code>-n=&lt;instanceName&gt;</code>, <code>--name=&lt;instanceName&gt;</code> — указать имя экземпляра ПО (обязательный).</li>
+<li><code>--deleteData</code> — удалить базу данных и пользовательские файлы экземпляра ПО.</li>
+<li><code>--deleteLogs</code> — удалить журналы экземпляра ПО.</li>
+<li><code>--deleteBackups</code> — удалить резервные копии экземпляра ПО.</li>
+</ul>
+<p><strong>Пример:</strong></p>
+<div class="highlight"><code><pre><span></span><code>``` bash</code> <br/><code>bash instance_delete.sh -n=my_company_instance</code> <br/><code>```</code> <br/></pre></code></div>
+</li>
+<li>
+<p><strong>Windows</strong></p>
+<ul>
+<li><code>-name &lt;instanceName&gt;</code> — указать имя экземпляра ПО (обязательный). Если не указать другие ключи, будет удалена только служба <code>comindware&lt;instanceName&gt;</code>.</li>
+<li><code>-deleteData</code> — удалить базу данных из папки вида и пользовательские файлы экземпляра ПО. Без указания этого ключа или ключа <code>-clear</code> база данных экземпляра ПО не будет удалена.</li>
+<li><code>-clear</code> — удалить все файлы, папки, базу данных и пользовательские файлы, а также службы экземпляра ПО, сайт и пул из IIS.</li>
+</ul>
+<p><strong>Пример:</strong></p>
+<div class="highlight"><code><pre><span></span><code>``` powershell</code> <br/><code>.\instance_delete.ps1 -name my_company_instance -clear</code> <br/><code>```</code> <br/></pre></code></div>
+</li>
+</ul>
+<h4 id="script_keys_instance_list"><code>instance_list</code></h4>
+<p><strong>Назначение:</strong> вывод списка установленных экземпляров ПО.</p>
+<p><strong>Ключи не требуются</strong></p>
+<h4 id="script_keys_instance_upgrade"><code>instance_upgrade</code></h4>
+<p><strong>Назначение:</strong> обновление экземпляра ПО.</p>
+<p><strong>Ключи:</strong></p>
+<ul>
+<li>
+<p><strong>Linux</strong></p>
+<ul>
+<li><code>-n=&lt;instanceName&gt;</code>, <code>--name=&lt;instanceName&gt;</code> — указать имя экземпляра ПО (обязательный).</li>
+<li><code>-vp=&lt;path/to&gt;</code>, <code>--versionPath=&lt;path/to&gt;</code> — путь к папке с новой версией ПО (обязательный).</li>
+</ul>
+<p><strong>Пример:</strong></p>
+<div class="highlight"><code><pre><span></span><code>``` sh</code> <br/><code>bash instance_upgrade.sh -n=my_company_instance -vp=/comindware/5.0.1234.0</code> <br/><code>```</code> <br/></pre></code></div>
+</li>
+<li>
+<p><strong>Windows</strong></p>
+<ul>
+<li><code>-name &lt;instanceName&gt;</code> — указать имя экземпляра ПО (обязательный).</li>
+<li><code>-version &lt;versionNumber&gt;</code> — указать номер версии, до которой необходимо обновить экземпляр ПО (обязательный).</li>
+<li><code>-versionPath &lt;path/to&gt;</code> — обновить экземпляр ПО до версии из указанной папки.</li>
+</ul>
+<p><strong>Пример:</strong></p>
+<div class="highlight"><code><pre><span></span><code>``` powershell</code> <br/><code>.\instance_upgrade.ps1 -name my_company_instance -version 5.0.1234.0</code> <br/><code>```</code> <br/></pre></code></div>
+</li>
+</ul>
+<h4 id="script_keys_version_check_platform"><code>version_check</code></h4>
+<p><strong>Назначение:</strong> проверка состояния среды и компонентов <strong>Comindware Platform</strong>.</p>
+<p><strong>Ключи не требуются</strong></p>
+<h4 id="script_keys_version_check_environment_platform"><code>version_check_environment</code></h4>
+<p><strong>Назначение:</strong> проверка состояния среды и компонентов <strong>Comindware Platform</strong> — выводит статус и версию установленных компонентов, необходимых для работы <strong>Comindware Platform</strong>.</p>
+<h4 id="script_keys_version_delete"><code>version_delete</code></h4>
+<p><strong>Назначение:</strong> удаление указанной версии ПО.</p>
+<p><strong>Ключи:</strong></p>
+<ul>
+<li>
+<p><strong>Linux</strong></p>
+<ul>
+<li><code>-v=&lt;versionNumber&gt;</code>, <code>--version=&lt;versionNumber&gt;</code> — указать номер версии ПО (<strong>обязательный</strong>).</li>
+</ul>
+<p><strong>Пример:</strong></p>
+<div class="highlight"><code><pre><span></span><code>``` bash</code> <br/><code>sh version_delete.sh -v=5.0.1234.0</code> <br/><code>```</code> <br/></pre></code></div>
+</li>
+<li>
+<p><strong>Windows</strong></p>
+<ul>
+<li><code>-version &lt;versionNumber&gt;</code> — указать номер версии ПО (обязательный).</li>
+</ul>
+<p><strong>Пример:</strong></p>
+<div class="highlight"><code><pre><span></span><code>``` powershell</code> <br/><code>.\version_delete.ps1 -version 5.0.1234.0</code> <br/><code>```</code> <br/></pre></code></div>
+</li>
+</ul>
+<h4 id="script_keys_version_install"><code>version_install</code></h4>
+<p><strong>Назначение:</strong> установка версии ПО из текущей директории с дистрибутивом.</p>
+<p><strong>Ключи не требуются</strong></p>
+<h4 id="script_keys_version_list_platform"><code>version_list</code></h4>
+<p><strong>Назначение:</strong> вывод списка установленных версий ПО.</p>
+<p><strong>Ключи не требуются</strong></p>
+<h4 id="script_keys_version_upgrade_onetime_platform"><code>version_upgrade_onetime</code></h4>
+<p><strong>Назначение:</strong> обновление установленной версии <strong>Comindware Platform</strong> до новой с переносом файлов, остановкой и удалением старых сервисов, обновлением конфигураций и запуском новой версии.</p>
+<p><strong>Ключи не требуются</strong></p>
+<h3 id="скрипты-только-для-windows_1">Скрипты только для Windows</h3>
+<h4 id="script_keys_files_unblock_platform"><code>files_unblock</code></h4>
+<p><strong>Назначение:</strong> разблокировка установочных файлов, скачанных из Интернета (снятие метки безопасности <code>Zone.Identifier</code>).</p>
+<p><strong>Ключ:</strong></p>
+<ul>
+<li><code>-path &lt;path/to/distribution&gt;</code> — путь к распакованной директории с установочными файлами, которые требуется разблокировать. Если не указать этот ключ, скрипт разблокирует файлы в текущей директории.</li>
+</ul>
+<p><strong>Пример:</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">files_unblock</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-path</span> <span class="n">С</span><span class="p">:\</span><span class="n">Downloads</span><span class="p">\</span><span class="n">CMW</span></code> <br/></pre></code></div>
+<h4 id="script_keys_instance_restore_from_backup"><code>instance_restore_from_backup</code></h4>
+<p><strong>Назначение:</strong> восстановление данных экземпляра ПО из архивной резервной копии (файл <code>.cdbbz</code>) в указанные каталоги <code>Database</code> и <code>Streams</code>.</p>
+<p><strong>Ключи:</strong></p>
+<ul>
+<li><code>-zipPath &lt;path/to&gt;</code> — указать путь к архиву резервной копии <code>.cdbbz</code> (обязательный).</li>
+<li><code>-dataPath &lt;path/to&gt;</code> — указать путь к каталогу <code>Database</code> для восстановления (обязательный).</li>
+<li><code>-streamsPath &lt;path/to&gt;</code> — указать путь к каталогу <code>Streams</code> для восстановления (обязательный).</li>
+<li><code>-tempDir &lt;path/to&gt;</code> — указать временный каталог для распаковки архива.</li>
+<li><code>-deleteOldData</code> — удалить старые данные перед восстановлением.</li>
+</ul>
+<p><strong>Пример:</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">instance_restore_from_backup</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-zipPath</span> <span class="n">C</span><span class="p">:\</span><span class="n">Documents</span><span class="p">\</span><span class="n">CMW_backup</span> <span class="n">-dataPath</span> <span class="n">C</span><span class="p">:\</span><span class="n">Documents</span><span class="p">\</span><span class="n">CMW</span><span class="p">\</span><span class="n">Database</span> <span class="n">-streamsPath</span> <span class="n">C</span><span class="p">:\</span><span class="n">Documents</span><span class="p">\</span><span class="n">CMW</span><span class="p">\</span><span class="n">Streams</span></code> <br/></pre></code></div>
+<h4 id="script_keys_instance_start"><code>instance_start</code></h4>
+<p><strong>Назначение:</strong> запуск экземпляра ПО.</p>
+<p><strong>Ключ:</strong></p>
+<ul>
+<li><code>-name &lt;instanceName&gt;</code> — указать имя экземпляра ПО (обязательный).</li>
+</ul>
+<p><strong>Пример:</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">instance_start</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="n">my_company_instance</span></code> <br/></pre></code></div>
+<h4 id="script_keys_instance_stop"><code>instance_stop</code></h4>
+<p><strong>Назначение:</strong> остановка экземпляра ПО.</p>
+<p><strong>Ключи:</strong></p>
+<ul>
+<li><code>-name &lt;instanceName&gt;</code> — указать имя экземпляра ПО (обязательный).</li>
+</ul>
+<p><strong>Пример:</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">instance_stop</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="n">my_company_instance</span></code> <br/></pre></code></div>
+<h2 id="служебные-скрипты">Служебные скрипты</h2>
+<p>Служебные скрипты являются вспомогательными и служат для вызова другими скриптами. Они не предназначены для самостоятельного запуска пользователем.</p>
+<p>Список служебных скриптов (<strong>может измениться в зависимости от версии ПО</strong>):</p>
+<h3 id="service_scripts_windows">Для Windows</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Имя скрипта</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>adapterhost_config</td>
+<td>Генерация конфигурационного файла <code>adapterhost.yml</code> для экземпляра.</td>
+</tr>
+<tr>
+<td>adapterhost_register</td>
+<td>Регистрация Adapterhost как службы.</td>
+</tr>
+<tr>
+<td>adapterhost_start</td>
+<td>Запуск службы Adapterhost.</td>
+</tr>
+<tr>
+<td>adapterhost_stop</td>
+<td>Остановка службы Adapterhost.</td>
+</tr>
+<tr>
+<td>adapterhost_unregister</td>
+<td>Удаление службы Adapterhost.</td>
+</tr>
+<tr>
+<td>apigateway_register</td>
+<td>Регистрация Apigateway как службы.</td>
+</tr>
+<tr>
+<td>apigateway_start</td>
+<td>Запуск службы Apigateway.</td>
+</tr>
+<tr>
+<td>apigateway_stop</td>
+<td>Остановка службы Apigateway.</td>
+</tr>
+<tr>
+<td>apigateway_unregister</td>
+<td>Удаление службы Apigateway.</td>
+</tr>
+<tr>
+<td>upgrade_config_file</td>
+<td>Обновление конфигурационных файлов при обновлении версии ПО.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="service_scripts_linux">Для Linux</h3>
+<p>Служебные скрипты для Linux организованы по директориям для работы с соответствующими службами.</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Директория</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>components/adapterhost/</code></td>
+<td>Управление службой AdapterHost</td>
+</tr>
+<tr>
+<td><code>components/apigateway/</code></td>
+<td>Управление службой ApiGateway</td>
+</tr>
+<tr>
+<td><code>components/kafka/</code></td>
+<td>Установка и настройки Kafka</td>
+</tr>
+<tr>
+<td><code>components/nginx/</code></td>
+<td>Установка и настройки Nginx</td>
+</tr>
+<tr>
+<td><code>components/opensearch/</code></td>
+<td>Установка и настройки OpenSearch</td>
+</tr>
+<tr>
+<td><code>components/elasticsearch/</code></td>
+<td>Установка и настройки Elasticsearch</td>
+</tr>
+</tbody>
+</table>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622">Развёртывание ПО в ОС Linux</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4647">Резервное копирование и восстановление в ОС Linux</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5063">Развёртывание ПО в ОС Windows</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4644">Резервное копирование и восстановление в ОС Windows</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

@@ -909,6 +909,8 @@
 
 [paths]: {{ kbArticleURLPrefix }}4620
 
+[script_keys]: {{ kbArticleURLPrefix }}5122
+
 [system_requirements]: {{ kbArticleURLPrefix }}4659
 
 [upload_size_limit_configure]: {{ kbArticleURLPrefix }}4619
