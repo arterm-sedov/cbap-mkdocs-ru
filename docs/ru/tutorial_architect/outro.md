@@ -4,21 +4,23 @@ kbTitle: 'Заключение. Курс «Корпоративная архит
 kbId: 5130
 tags:
   # Common tutorial_architect tags
+  - Architect
   - BPMN
+  - аналитика 
+  - архитектор
+  - архитект
   - аудит
   - автоматизация
   - бизнес-процессы
-  - дашборды
   - документооборот
-  - интеграция
   - корпоративная архитектура
-  - лучшие практики
+  - процессная архитектура
   - обучение
   - оргструктура
+  - организационно-функциональная структура
   - платформа
-  - согласование
+  - управление процессами
   - цифровая трансформация
-  - шаблоны
   # Lesson-specific tags:
   - итоги курса
   - развитие
@@ -116,7 +118,7 @@ hide: tags
 - Примеры использования **{{ productNameEnterprise }}**:
   - [Построение ОФС и архитектуры процессов организации][architect_demo_organizational_structure_processes]
   - [Построение корпоративной архитектуры. Работа с демонстрационным стендом][architect_demo_instance]
-- [Руководство по «{{ productName }}»][architect_desktop_operations]
+- [Руководство по «{{ productNameEnterprise }}»][architect_desktop_operations]
 
 ## Финальное напутствие {: #tutorial_architect_outro_final }
 
