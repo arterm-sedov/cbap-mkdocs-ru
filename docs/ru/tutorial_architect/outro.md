@@ -114,7 +114,7 @@ hide: tags
 - [Руководство по модулю «{{ productNameArchitect }}»][architect_desktop_operations]
 - [Тесты для самопроверки][tutorial_architect_tests]
 - Примеры использования **{{ productNameEnterprise }}**:
-  - [Построение ОШС и архитектуры процессов организации][architect_demo_organizational_structure_processes]
+  - [Построение ОФС и архитектуры процессов организации][architect_demo_organizational_structure_processes]
   - [Построение корпоративной архитектуры. Работа с демонстрационным стендом][architect_demo_instance]
 - [Руководство по «{{ productName }}»][architect_desktop_operations]
 
