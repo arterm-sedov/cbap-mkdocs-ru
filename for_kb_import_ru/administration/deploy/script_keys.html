@@ -325,7 +325,7 @@
 </div>
 <h2 id="script_keys_help_call">Вызов справки для скриптов</h2>
 <p>Для ознакомления с ключами (если таковые имеются) и назначением большинства скриптов можно использовать ключ <code>-h</code> (Linux и Windows), <code>--help</code> (Linux) или <code>-help</code> (Windows) без указания каких-либо других ключей, например:</p>
-<div class="highlight"><code><pre><span></span><code>sh<span class="w"> </span>prerequisites_install.sh<span class="w"> </span>-h</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>prerequisites_install.sh<span class="w"> </span>-h</code> <br/></pre></code></div>
 <div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">instance_upgrade</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-h</span></code> <br/></pre></code></div>
 <p>Далее ключ <code>-h</code> повторно не упоминается, так как он действует одинаково для всех скриптов.</p>
 <div class="notice notice-warning">
@@ -364,27 +364,19 @@
 <li><code>-kc</code>, <code>--kafkaClient</code> — установить клиентские библиотеки Kafka.</li>
 <li><code>-d</code>, <code>--dotnet</code> — установить .NET.</li>
 <li><code>-o</code>, <code>--opensearch</code> — установить OpenSearch.
-&lt;!-- НЕ ИСПОЛЬЗОВАТЬ ПОКА НЕ РЕАЛИЗОВАН КЛАСТЕР</li>
-<li><code>-i</code>, <code>--ignite</code> — установить Apache Ignite.
---&gt;</li>
+</li>
 <li><code>-p</code>, <code>--platform</code> — установить компоненты <strong>Comindware Platform</strong>.</li>
 </ul>
 <p><strong>Пример:</strong></p>
-<div class="highlight"><code><pre><span></span><code>``` bash</code> <br/><code>sh prerequisites_install.sh -p -d -k</code> <br/><code>```</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>sh<span class="w"> </span>prerequisites_install.sh<span class="w"> </span>-p<span class="w"> </span>-d<span class="w"> </span>-k</code> <br/></pre></code></div>
 </li>
 <li>
 <p><strong>Windows</strong></p>
 <ul>
-<li>
-<p>Используйте скрипт без ключей:</p>
-<p><div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">prerequisites_install</span><span class="p">.</span><span class="n">ps1</span></code> <br/></pre></code></div>
-    &lt;!-- НЕ ИСПОЛЬЗОВАТЬ ПОКА НЕ БУДЕТ РЕАЛИЗОВАН КЛАСТЕР
-    - <code>-ignite</code> — установить Apache Ignite.</p>
-</li>
+<li>Используйте скрипт без ключей:</li>
 </ul>
-<p><strong>Пример:</strong></p>
-<div class="highlight"><code><pre><span></span><code>``` powershell</code> <br/><code>.\prerequisites_install.ps1 -ignite</code> <br/><code>```</code> <br/></pre></code></div>
-<p>--&gt;</p>
+<p><div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">prerequisites_install</span><span class="p">.</span><span class="n">ps1</span></code> <br/></pre></code></div>
+</p>
 </li>
 </ul>
 <h4 id="script_keys_prerequisites_list"><code>prerequisites_list</code></h4>
@@ -418,7 +410,7 @@
 <li><code>-n</code>, <code>--nginx</code> — удалить Nginx.</li>
 </ul>
 <p><strong>Пример:</strong></p>
-<div class="highlight"><code><pre><span></span><code>sh<span class="w"> </span>prerequisites_uninstall.sh<span class="w"> </span>-d<span class="w"> </span>-j</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>prerequisites_uninstall.sh<span class="w"> </span>-d<span class="w"> </span>-j</code> <br/></pre></code></div>
 <h2 id="script_keys_platform_scripts">Скрипты для установки Comindware Platform</h2>
 <p>Скрипты для установки ПО <strong>Comindware Platform</strong> расположены в следующей директории с распакованным дистрибутивом <strong>Comindware Platform</strong>:</p>
 <ul>
@@ -441,29 +433,29 @@
 <li>
 <p><strong>Linux</strong></p>
 <ul>
-<li><code>-n=&lt;instanceName&gt;</code>, <code>--name=&lt;instanceName&gt;</code> — указать имя экземпляра ПО (обязательный).</li>
-<li><code>-p=&lt;portNumber&gt;</code>, <code>--port=&lt;portNumber&gt;</code> — назначить порт экземпляру ПО (обязательный). По умолчанию: <code>80</code>.</li>
-<li><code>-v=&lt;versionNumber&gt;</code>, <code>--version=&lt;versionNumber&gt;</code> — развернуть ПО указанной версии (обязательный).</li>
+<li><code>-n=&lt;instanceName&gt;</code>, <code>--name=&lt;instanceName&gt;</code> — указать имя экземпляра ПО (<strong>обязательный</strong>).</li>
+<li><code>-p=&lt;portNumber&gt;</code>, <code>--port=&lt;portNumber&gt;</code> — назначить порт экземпляру ПО (<strong>обязательный</strong>). По умолчанию: <code>80</code>.</li>
+<li><code>-v=&lt;versionNumber&gt;</code>, <code>--version=&lt;versionNumber&gt;</code> — развернуть ПО указанной версии (<strong>обязательный</strong>).</li>
 <li><code>-fqdn=&lt;hostName&gt;</code>, <code>--instance-fqdn=&lt;hostName&gt;</code> — указать имя хоста для экземпляра ПО. По умолчанию: <code>localhost</code>.</li>
 <li><code>-el=&lt;value&gt;</code>, <code>--elasticsearch-url=&lt;value&gt;</code> — указать ссылку или IP-адрес службы Elasticsearch.</li>
 <li><code>-kf=&lt;value&gt;</code>, <code>--kafka-url=&lt;value&gt;</code> — указать ссылку или IP-адрес службы Kafka.</li>
 <li><code>-d</code>, <code>--demoDB</code> — создать экземпляр ПО c демонстрационной базой данных.</li>
 </ul>
 <p><strong>Пример:</strong></p>
-<div class="highlight"><code><pre><span></span><code>``` bash</code> <br/><code>bash instance_create.sh -n=my_company_instance -p=8080 -v=5.0.1234.0</code> <br/><code>    ```</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>instance_create.sh<span class="w"> </span>-n<span class="o">=</span>my_company_instance<span class="w"> </span>-p<span class="o">=</span><span class="m">8080</span><span class="w"> </span>-v<span class="o">=</span><span class="m">5</span>.0.1234.0</code> <br/></pre></code></div>
 </li>
 <li>
 <p><strong>Windows</strong></p>
 <ul>
-<li><code>-name &lt;instanceName&gt;</code> — указать имя экземпляра ПО (обязательный).</li>
-<li><code>-port &lt;portNumber&gt;</code> — назначить порт экземпляру ПО. По умолчанию: 80.</li>
+<li><code>-name &lt;instanceName&gt;</code> — указать имя экземпляра ПО (<strong>обязательный</strong>).</li>
+<li><code>-port &lt;portNumber&gt;</code> — назначить порт экземпляру ПО. По умолчанию: <code>80</code>.</li>
 <li><code>-version &lt;versionNumber&gt;</code> — развернуть ПО указанной версии вида <code>X.X.XXXX.X</code>.</li>
 <li><code>-versionPath &lt;versionPath&gt;</code> — развернуть ПО из указанной папки <code>&lt;versionPath&gt;</code> с версией ПО.</li>
-<li><code>-fqdn &lt;hostName&gt;</code> — имя хоста для экземпляра ПО (опционально, по умолчанию: localhost).</li>
+<li><code>-fqdn &lt;hostName&gt;</code> — имя хоста для экземпляра ПО (опционально, по умолчанию: <code>localhost</code>).</li>
 <li><code>-demoDB</code> — создать экземпляр ПО c демонстрационной базой данных.</li>
 </ul>
 <p><strong>Пример:</strong></p>
-<div class="highlight"><code><pre><span></span><code>``` powershell</code> <br/><code>.\instance_create.ps1 -name my_company_instance -port 8080 -version 5.0.1234.0</code> <br/><code>```</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">instance_create</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="n">my_company_instance</span> <span class="n">-port</span> <span class="n">8080</span> <span class="n">-version</span> <span class="n">5</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">1234</span><span class="p">.</span><span class="n">0</span></code> <br/></pre></code></div>
 </li>
 </ul>
 <h4 id="script_keys_instance_delete"><code>instance_delete</code></h4>
@@ -473,23 +465,23 @@
 <li>
 <p><strong>Linux</strong></p>
 <ul>
-<li><code>-n=&lt;instanceName&gt;</code>, <code>--name=&lt;instanceName&gt;</code> — указать имя экземпляра ПО (обязательный).</li>
+<li><code>-n=&lt;instanceName&gt;</code>, <code>--name=&lt;instanceName&gt;</code> — указать имя экземпляра ПО (<strong>обязательный</strong>).</li>
 <li><code>--deleteData</code> — удалить базу данных и пользовательские файлы экземпляра ПО.</li>
 <li><code>--deleteLogs</code> — удалить журналы экземпляра ПО.</li>
 <li><code>--deleteBackups</code> — удалить резервные копии экземпляра ПО.</li>
 </ul>
 <p><strong>Пример:</strong></p>
-<div class="highlight"><code><pre><span></span><code>``` bash</code> <br/><code>bash instance_delete.sh -n=my_company_instance</code> <br/><code>```</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>instance_delete.sh<span class="w"> </span>-n<span class="o">=</span>my_company_instance</code> <br/></pre></code></div>
 </li>
 <li>
 <p><strong>Windows</strong></p>
 <ul>
-<li><code>-name &lt;instanceName&gt;</code> — указать имя экземпляра ПО (обязательный). Если не указать другие ключи, будет удалена только служба <code>comindware&lt;instanceName&gt;</code>.</li>
+<li><code>-name &lt;instanceName&gt;</code> — указать имя экземпляра ПО (<strong>обязательный</strong>). Если не указать другие ключи, будет удалена только служба <code>comindware&lt;instanceName&gt;</code>.</li>
 <li><code>-deleteData</code> — удалить базу данных из папки вида и пользовательские файлы экземпляра ПО. Без указания этого ключа или ключа <code>-clear</code> база данных экземпляра ПО не будет удалена.</li>
 <li><code>-clear</code> — удалить все файлы, папки, базу данных и пользовательские файлы, а также службы экземпляра ПО, сайт и пул из IIS.</li>
 </ul>
 <p><strong>Пример:</strong></p>
-<div class="highlight"><code><pre><span></span><code>``` powershell</code> <br/><code>.\instance_delete.ps1 -name my_company_instance -clear</code> <br/><code>```</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">instance_delete</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="n">my_company_instance</span> <span class="n">-clear</span></code> <br/></pre></code></div>
 </li>
 </ul>
 <h4 id="script_keys_instance_list"><code>instance_list</code></h4>
@@ -502,21 +494,21 @@
 <li>
 <p><strong>Linux</strong></p>
 <ul>
-<li><code>-n=&lt;instanceName&gt;</code>, <code>--name=&lt;instanceName&gt;</code> — указать имя экземпляра ПО (обязательный).</li>
-<li><code>-vp=&lt;path/to&gt;</code>, <code>--versionPath=&lt;path/to&gt;</code> — путь к папке с новой версией ПО (обязательный).</li>
+<li><code>-n=&lt;instanceName&gt;</code>, <code>--name=&lt;instanceName&gt;</code> — указать имя экземпляра ПО (<strong>обязательный</strong>).</li>
+<li><code>-vp=&lt;path/to&gt;</code>, <code>--versionPath=&lt;path/to&gt;</code> — путь к папке с новой версией ПО (<strong>обязательный</strong>).</li>
 </ul>
 <p><strong>Пример:</strong></p>
-<div class="highlight"><code><pre><span></span><code>``` sh</code> <br/><code>bash instance_upgrade.sh -n=my_company_instance -vp=/comindware/5.0.1234.0</code> <br/><code>```</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>instance_upgrade.sh<span class="w"> </span>-n<span class="o">=</span>my_company_instance<span class="w"> </span>-vp<span class="o">=</span>/comindware/5.0.1234.0</code> <br/></pre></code></div>
 </li>
 <li>
 <p><strong>Windows</strong></p>
 <ul>
-<li><code>-name &lt;instanceName&gt;</code> — указать имя экземпляра ПО (обязательный).</li>
-<li><code>-version &lt;versionNumber&gt;</code> — указать номер версии, до которой необходимо обновить экземпляр ПО (обязательный).</li>
+<li><code>-name &lt;instanceName&gt;</code> — указать имя экземпляра ПО (<strong>обязательный</strong>).</li>
+<li><code>-version &lt;versionNumber&gt;</code> — указать номер версии, до которой необходимо обновить экземпляр ПО (<strong>обязательный</strong>).</li>
 <li><code>-versionPath &lt;path/to&gt;</code> — обновить экземпляр ПО до версии из указанной папки.</li>
 </ul>
 <p><strong>Пример:</strong></p>
-<div class="highlight"><code><pre><span></span><code>``` powershell</code> <br/><code>.\instance_upgrade.ps1 -name my_company_instance -version 5.0.1234.0</code> <br/><code>```</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">instance_upgrade</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="n">my_company_instance</span> <span class="n">-version</span> <span class="n">5</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">1234</span><span class="p">.</span><span class="n">0</span></code> <br/></pre></code></div>
 </li>
 </ul>
 <h4 id="script_keys_version_check_platform"><code>version_check</code></h4>
@@ -534,15 +526,15 @@
 <li><code>-v=&lt;versionNumber&gt;</code>, <code>--version=&lt;versionNumber&gt;</code> — указать номер версии ПО (<strong>обязательный</strong>).</li>
 </ul>
 <p><strong>Пример:</strong></p>
-<div class="highlight"><code><pre><span></span><code>``` bash</code> <br/><code>sh version_delete.sh -v=5.0.1234.0</code> <br/><code>```</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>sh<span class="w"> </span>version_delete.sh<span class="w"> </span>-v<span class="o">=</span><span class="m">5</span>.0.1234.0</code> <br/></pre></code></div>
 </li>
 <li>
 <p><strong>Windows</strong></p>
 <ul>
-<li><code>-version &lt;versionNumber&gt;</code> — указать номер версии ПО (обязательный).</li>
+<li><code>-version &lt;versionNumber&gt;</code> — указать номер версии ПО (<strong>обязательный</strong>).</li>
 </ul>
 <p><strong>Пример:</strong></p>
-<div class="highlight"><code><pre><span></span><code>``` powershell</code> <br/><code>.\version_delete.ps1 -version 5.0.1234.0</code> <br/><code>```</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">version_delete</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-version</span> <span class="n">5</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">1234</span><span class="p">.</span><span class="n">0</span></code> <br/></pre></code></div>
 </li>
 </ul>
 <h4 id="script_keys_version_install"><code>version_install</code></h4>
@@ -567,9 +559,9 @@
 <p><strong>Назначение:</strong> восстановление данных экземпляра ПО из архивной резервной копии (файл <code>.cdbbz</code>) в указанные каталоги <code>Database</code> и <code>Streams</code>.</p>
 <p><strong>Ключи:</strong></p>
 <ul>
-<li><code>-zipPath &lt;path/to&gt;</code> — указать путь к архиву резервной копии <code>.cdbbz</code> (обязательный).</li>
-<li><code>-dataPath &lt;path/to&gt;</code> — указать путь к каталогу <code>Database</code> для восстановления (обязательный).</li>
-<li><code>-streamsPath &lt;path/to&gt;</code> — указать путь к каталогу <code>Streams</code> для восстановления (обязательный).</li>
+<li><code>-zipPath &lt;path/to&gt;</code> — указать путь к архиву резервной копии <code>.cdbbz</code> (<strong>обязательный</strong>).</li>
+<li><code>-dataPath &lt;path/to&gt;</code> — указать путь к каталогу <code>Database</code> для восстановления (<strong>обязательный</strong>).</li>
+<li><code>-streamsPath &lt;path/to&gt;</code> — указать путь к каталогу <code>Streams</code> для восстановления (<strong>обязательный</strong>).</li>
 <li><code>-tempDir &lt;path/to&gt;</code> — указать временный каталог для распаковки архива.</li>
 <li><code>-deleteOldData</code> — удалить старые данные перед восстановлением.</li>
 </ul>
@@ -579,7 +571,7 @@
 <p><strong>Назначение:</strong> запуск экземпляра ПО.</p>
 <p><strong>Ключ:</strong></p>
 <ul>
-<li><code>-name &lt;instanceName&gt;</code> — указать имя экземпляра ПО (обязательный).</li>
+<li><code>-name &lt;instanceName&gt;</code> — указать имя экземпляра ПО (<strong>обязательный</strong>).</li>
 </ul>
 <p><strong>Пример:</strong></p>
 <div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">instance_start</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="n">my_company_instance</span></code> <br/></pre></code></div>
@@ -587,7 +579,7 @@
 <p><strong>Назначение:</strong> остановка экземпляра ПО.</p>
 <p><strong>Ключи:</strong></p>
 <ul>
-<li><code>-name &lt;instanceName&gt;</code> — указать имя экземпляра ПО (обязательный).</li>
+<li><code>-name &lt;instanceName&gt;</code> — указать имя экземпляра ПО (<strong>обязательный</strong>).</li>
 </ul>
 <p><strong>Пример:</strong></p>
 <div class="highlight"><code><pre><span></span><code><span class="p">.\</span><span class="n">instance_stop</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="n">my_company_instance</span></code> <br/></pre></code></div>
@@ -604,43 +596,43 @@
 </thead>
 <tbody>
 <tr>
-<td>adapterhost_config</td>
+<td><code>adapterhost_config</code></td>
 <td>Генерация конфигурационного файла <code>adapterhost.yml</code> для экземпляра.</td>
 </tr>
 <tr>
-<td>adapterhost_register</td>
-<td>Регистрация Adapterhost как службы.</td>
+<td><code>adapterhost_register</code></td>
+<td>Регистрация службы Adapterhost.</td>
 </tr>
 <tr>
-<td>adapterhost_start</td>
+<td><code>adapterhost_start</code></td>
 <td>Запуск службы Adapterhost.</td>
 </tr>
 <tr>
-<td>adapterhost_stop</td>
+<td><code>adapterhost_stop</code></td>
 <td>Остановка службы Adapterhost.</td>
 </tr>
 <tr>
-<td>adapterhost_unregister</td>
+<td><code>adapterhost_unregister</code></td>
 <td>Удаление службы Adapterhost.</td>
 </tr>
 <tr>
-<td>apigateway_register</td>
-<td>Регистрация Apigateway как службы.</td>
+<td><code>apigateway_register</code></td>
+<td>Регистрация службы Apigateway .</td>
 </tr>
 <tr>
-<td>apigateway_start</td>
+<td><code>apigateway_start</code></td>
 <td>Запуск службы Apigateway.</td>
 </tr>
 <tr>
-<td>apigateway_stop</td>
+<td><code>apigateway_stop</code></td>
 <td>Остановка службы Apigateway.</td>
 </tr>
 <tr>
-<td>apigateway_unregister</td>
+<td><code>apigateway_unregister</code></td>
 <td>Удаление службы Apigateway.</td>
 </tr>
 <tr>
-<td>upgrade_config_file</td>
+<td><code>upgrade_config_file</code></td>
 <td>Обновление конфигурационных файлов при обновлении версии ПО.</td>
 </tr>
 </tbody>
@@ -665,19 +657,19 @@
 </tr>
 <tr>
 <td><code>components/kafka/</code></td>
-<td>Установка и настройки Kafka</td>
+<td>Установка и настройка Kafka</td>
 </tr>
 <tr>
 <td><code>components/nginx/</code></td>
-<td>Установка и настройки Nginx</td>
+<td>Установка и настройка Nginx</td>
 </tr>
 <tr>
 <td><code>components/opensearch/</code></td>
-<td>Установка и настройки OpenSearch</td>
+<td>Установка и настройка OpenSearch</td>
 </tr>
 <tr>
 <td><code>components/elasticsearch/</code></td>
-<td>Установка и настройки Elasticsearch</td>
+<td>Установка и настройка Elasticsearch</td>
 </tr>
 </tbody>
 </table>
