@@ -283,8 +283,6 @@
 
 [architect_demo_organizational_structure_processes_export]: {{ kbArticleURLPrefix }}4826#architect_demo_organizational_structure_processes_export
 
-[architect_desktop]: {{ kbArticleURLPrefix }}4828
-
 [architect_description]: {{ kbArticleURLPrefix }}4828#architect_description
 
 [architect_intro]: {{ kbArticleURLPrefix }}4828#architect_intro

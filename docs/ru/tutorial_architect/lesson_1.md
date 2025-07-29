@@ -104,7 +104,7 @@ start="<!--architect-features-start-->"
 end="<!--architect-features-end-->"
 %}
 
-См. также _[Руководство по модулю «{{ productNameArchitect}}»][architect_desktop]_.
+См. также _[Руководство по модулю «{{ productNameArchitect}}»][architect_desktop_operations]_.
 
 ## Основные понятия BPM {: #tutorial_architect_lesson_1_definitions }
 

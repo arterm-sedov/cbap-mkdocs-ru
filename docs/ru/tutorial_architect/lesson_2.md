@@ -131,7 +131,7 @@ hide: tags
 
 15. Сохраните раздел навигации.
 
-_![Рабочий стол с быстрыми действиями](img/tutorial_architect_lesson_2_dashboard.png)_
+<!-- _![Рабочий стол с быстрыми действиями](img/tutorial_architect_lesson_2_dashboard.png)_ -->
 
 ## Тестирование навигации {: #tutorial_architect_lesson_2_navigation_testing }
 
@@ -144,7 +144,7 @@ _![Рабочий стол с быстрыми действиями](img/tutoria
 7. Нажмите кнопку «**Управление версиями**».
 8. Откроется страница «**Управление версиями**».
 
-_![Панель навигации](img/tutorial_architect_lesson_2_nav_panel.png)_
+<!-- _![Панель навигации](img/tutorial_architect_lesson_2_nav_panel.png)_ -->
 
 ## Создание оргструктуры {: #tutorial_architect_lesson_2_orgstructure }
 

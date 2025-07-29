@@ -87,7 +87,7 @@ hide: tags
 
     Начинайте с выделения основных групп процессов (например, «Продажи», «HR», «Производство»), чтобы структурировать архитектуру компании.
 
-_![Пример диаграммы бизнес-способностей](img/tutorial_architect_lesson_3_business_capabilities.png)_
+<!-- _![Пример диаграммы бизнес-способностей](img/tutorial_architect_lesson_3_business_capabilities.png)_ -->
 
 1. Перейдите в раздел «**Процессы**» в навигации.
 2. Нажмите кнопку «**Создать**» <i class="fa-light fa-plus"></i>.
@@ -157,7 +157,7 @@ _![Пример диаграммы бизнес-способностей](img/tu
 11. Диаграмма процесса _«Найм кандидата»_ будет импортирована.
 12. Проверьте и при необходимости отредактируйте диаграмму.
 
-_![Импорт BPMN-диаграммы](img/tutorial_architect_lesson_3_import_bpmn.png)_
+<!-- _![Импорт BPMN-диаграммы](img/tutorial_architect_lesson_3_import_bpmn.png)_ -->
 
 !!! example "Факультативное задание"
 
@@ -178,7 +178,7 @@ _![Импорт BPMN-диаграммы](img/tutorial_architect_lesson_3_import_
 
     Настройте процесс _«Найм кандидата»_ аналогичным образом.
 
-_![Публикация модели процесса](img/tutorial_architect_lesson_3_publish_model.png)_
+<!-- _![Публикация модели процесса](img/tutorial_architect_lesson_3_publish_model.png)_ -->
 
 ## Итоги урока {: #tutorial_architect_lesson_3_summary }
 

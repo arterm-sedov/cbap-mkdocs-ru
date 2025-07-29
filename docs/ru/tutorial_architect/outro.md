@@ -111,12 +111,12 @@ hide: tags
 
 ## Ресурсы и советы {: #tutorial_architect_resources }
 
-- [Руководство по модулю «{{ productNameArchitect }}»][architect_desktop]
+- [Руководство по модулю «{{ productNameArchitect }}»][architect_desktop_operations]
 - [Тесты для самопроверки][tutorial_architect_tests]
 - Примеры использования **{{ productNameEnterprise }}**:
   - [Построение ОШС и архитектуры процессов организации][architect_demo_organizational_structure_processes]
   - [Построение корпоративной архитектуры. Работа с демонстрационным стендом][architect_demo_instance]
-- [Руководство по «{{ productName }}»][architect_desktop]
+- [Руководство по «{{ productName }}»][architect_desktop_operations]
 
 ## Финальное напутствие {: #tutorial_architect_outro_final }
 
