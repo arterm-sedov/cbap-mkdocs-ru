@@ -14,7 +14,8 @@ from cryptography.fernet import Fernet
 import os
 import os.path
 import json
-import datetime 
+import datetime
+# import paramiko
 
 TOTAL_PAGES_UPDATED = 0
 CONNECTION = None
@@ -166,6 +167,7 @@ def main():
     ssh_host = serverCredentials['ssh_host'] or input("PHPKB host:\n")
     ssh_username = serverCredentials['ssh_username'] or input('SSH username:\n')
     ssh_password = getpass("SSH password:\n")
+    ssh_port = int(serverCredentials.get('ssh_port', '22'))
     sql_username = serverCredentials['sql_username'] or input("SQL username:\n")
     sql_password = getpass("SQL password:\n")
     sql_database = serverCredentials['sql_database'] or input("Database name:\n")
@@ -174,7 +176,7 @@ def main():
     sql_ip = serverCredentials['sql_ip'] or input("SQL remote IP:\n")  
 
     server = SSHTunnelForwarder(
-        ssh_host,
+        (ssh_host, ssh_port),
         ssh_username=ssh_username,
         ssh_password=ssh_password,
         remote_bind_address=(sql_ip, sql_port),
@@ -285,8 +287,7 @@ def getArticleContentById(article_id):
                     if foundMatch:
                         print(f'Found content for article {foundMatch.group(1)}')
                         titlePattern = re.compile(fr'<div.*kb-title="(.+?)".*?>', flags=re.MULTILINE)
-                        title = titlePattern.search(content).group(1)
-                        print(f'MkDocs title: {title}')
+                        title = titlePattern.search(content).group(1)                        
                         
                         # Extract tags from the HTML content
                         tags = ""
@@ -302,6 +303,7 @@ def getArticleContentById(article_id):
                                 removed_tag = tag_list.pop()
                                 print(f'Popping tag: {removed_tag}')
                                 tags = ','.join(tag_list)
+                        print(f'MkDocs title: {title}')
                         print(f'MkDocs tags:  {tags}')
                         return content, title, tags
                     else: content = None
