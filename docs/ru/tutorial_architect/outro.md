@@ -122,14 +122,18 @@ hide: tags
 - Не стесняйтесь задавать вопросы на форуме поддержки.
 - Ознакомьтесь с документацией к модулю «**[{{ productNameArchitect }}][architect_description]**».
 
+<div class="relatedTopics" markdown="block">
+
 ## Ресурсы и советы {: #tutorial_architect_resources }
 
 - [Тесты для самопроверки][tutorial_architect_tests]
-- [Руководство по модулю «{{ productNameArchitect }}»][architect_desktop_operations]
+- [Руководство по модулю «{{ productNameArchitect }}»][architect_description]
 - Примеры использования **{{ productNameEnterprise }}**:
   - [Построение ОФС и архитектуры процессов организации][architect_demo_organizational_structure_processes]
   - [Построение корпоративной архитектуры. Работа с демонстрационным стендом][architect_demo_instance]
-- [Руководство по «{{ productNameEnterprise }}»][architect_desktop_operations]
+- [Справочник по разработке приложений в «{{ productNameEnterprise }}»][apps]
+
+</div>
 
 ## Финальное напутствие {: #tutorial_architect_outro_final }
 
