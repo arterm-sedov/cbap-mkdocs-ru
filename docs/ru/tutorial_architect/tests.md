@@ -36,7 +36,7 @@ hide: tags
 
 !!! note "Ответы"
   
-    Ответы на вопросы и пояснения [даны ниже](#tutorial_architect_tests_answers).
+    Ответы на вопросы [даны ниже](#tutorial_architect_tests_answers).
     
     Тем не менее, постарайтесь сначала ответить сами, не подглядывая…
 
