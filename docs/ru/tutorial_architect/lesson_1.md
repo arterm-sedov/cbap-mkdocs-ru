@@ -63,7 +63,7 @@ hide: tags
 ### Задания {: #tutorial_architect_lesson_1_tasks }
 
 - Изучить основные понятия BPMS, управления данными и процессами
-- Ознакомиться с преимуществами {{ productNameEnterprise }}
+- Ознакомиться с преимуществами **{{ productNameEnterprise }}**
 - Получить общее представление об архитектуре и возможностях {{ productNameEnterprise }}
 
 ## Назначение и область применения **{{ productNameEnterprise }}** {: #tutorial_architect_lesson_1_purpose }
