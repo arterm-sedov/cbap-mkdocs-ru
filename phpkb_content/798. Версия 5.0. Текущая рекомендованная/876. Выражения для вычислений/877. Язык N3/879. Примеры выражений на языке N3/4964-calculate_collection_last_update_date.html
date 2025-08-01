@@ -3,7 +3,7 @@
 <table class="source_code_container">
 <tbody>
 <tr>
-<td class="source_code"> 
+<td class="source_code"> 
 <p>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.<br/>@prefix math: &lt;http://comindware.com/logics/math#&gt;.<br/>@prefix cmw: &lt;http://comindware.com/logics#&gt;.<br/>{<br/>    ("Workitem" "WorkPlan") object:findProperty ?workPlanProperty.<br/>    ("Workitem" "ParentWorkitem") object:findProperty ?parentProperty.<br/>    ("Workitem" "_lastWriteDate") object:findProperty ?lastWriteDate.</p>
 <p>    from<br/>    {<br/>        ?WorkitemTemplate object:alias "Workitem".<br/>        ?WorkitemItems cmw:container ?WorkitemTemplate.<br/>        (?WorkitemItems ?parentProperty) object:getRootByParentProperty ?rootTask.<br/>        ?rootTask ?workPlanProperty ?item.<br/>        ?WorkitemItems ?lastWriteDate ?lastWriteDateVal.<br/>    } select ?lastWriteDateVal -&gt; ?lastWriteDateList.</p>
 <p>?lastWriteDateList math:max ?m.<br/>    ?m -&gt; ?value.<br/>}</p>

@@ -52,9 +52,7 @@ kbId: 4685
 6. На шаге **General settings**:
 
    - Выберите «**Client type**» (Тип клиента) **OpenID Connect**.
-   - Введите «**Client ID**» (ID клиента), например `<myKeycloakClient>`.
-
-   ![Создание нового клиента Keycloak](/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_client.png)
+   - Введите «**Client ID**» (ID клиента), например `<myKeycloakClient>`.![Создание нового клиента Keycloak](/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_client.png)
 
    Создание нового клиента Keycloak
 7. Нажмите кнопку **Next** (Далее).
@@ -69,18 +67,14 @@ kbId: 4685
     - **Root URL** (Корневой URL), например `https://<yourHost>/`;
     - **Home URL** (URL начальной страницы), например `https://<yourHost>/`;
     - **Valid redirect URIs** (Допустимые URI переадресаций), например `https://<yourHost>/*`;
-    - **Web origins** (Исходные URI), например `https://<yourHost>/`.
-
-    ![Настройка параметров входа для клиента Keycloak](/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_client_3.png)
+    - **Web origins** (Исходные URI), например `https://<yourHost>/`.![Настройка параметров входа для клиента Keycloak](/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_client_3.png)
 
     Настройка параметров входа для клиента Keycloak
 11. Нажмите кнопку «**Save**» (Сохранить).
 12. На отобразившейся странице:
 
     - отключите функцию **Front channel logout** (Выход через фронтенд);
-    - введите **Backchannel logout URL** (URL выхода через бэкенд), например `https://<yourHost>/OpenIdLogoutChallenge`.
-
-    ![Настройка параметров выхода для клиента Keycloak](/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_logout_settings.png)
+    - введите **Backchannel logout URL** (URL выхода через бэкенд), например `https://<yourHost>/OpenIdLogoutChallenge`.![Настройка параметров выхода для клиента Keycloak](/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_logout_settings.png)
 
     Настройка параметров выхода для клиента Keycloak
 13. Откройте вкладку **Credentials** (Учётные данные).
@@ -95,18 +89,14 @@ kbId: 4685
 
     - Включите функцию **Email verified** (Адрес эл. почты подтверждён).
     - Заполните поля **Username** (Логин), **Email** (Адрес эл. почты), **First name** (Имя), **Last name** (Фамилия).
-    - Нажмите кнопку **Create** (Создать) или **Save** (Сохранить).
-
-    ![Создание нового пользователя Keycloak](/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_user.png)
+    - Нажмите кнопку **Create** (Создать) или **Save** (Сохранить).![Создание нового пользователя Keycloak](/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_user.png)
 
     Создание нового пользователя Keycloak
 18. На вкладке **Credentials** (Учётные данные) нажмите кнопку **Set password** (Установить пароль).
 
     - Задайте временный пароль для пользователя.
     - Включите функцию **Temporary** (Временный пароль).
-    - Нажмите кнопку **Save** (Сохранить).
-
-    ![Установка временного пароля для пользователя Keycloak](/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_user_set_password.png)
+    - Нажмите кнопку **Save** (Сохранить).![Установка временного пароля для пользователя Keycloak](/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_user_set_password.png)
 
     Установка временного пароля для пользователя Keycloak
 
@@ -138,7 +128,6 @@ kbId: 4685
    # для которой предназначены токены,
    # используемые в процессе аутентификации и авторизации в OpenID Connect.
    auth.openId.audience: myAudience
-
    ```
 
 ## Настройка ОС Linux с {{ productName }}
@@ -147,20 +136,17 @@ kbId: 4685
 
    ```
    sudo -s
-
    ```
 
    или
 
    ```
    su -
-
    ```
 2. Добавьте в файл `/etc/hosts` строку:
 
    ```
    "xxx.xxx.xxx.xxx" "<yourHost>"
-
    ```
 
    Здесь `xxx.xxx.xxx.xxx` — IP-адрес, `<yourHost>` адрес сервера **{{ productName }}**, указанный в [*глобальной конфигурации {{ productName }}*](#openid_connection_server_address) (без указания протокола `HTTP` или `HTTPS`).
@@ -169,7 +155,6 @@ kbId: 4685
 
    ```
    vim /etc/nginx/sites-available/comindware<instanceName>
-
    ```
 5. Настройте конфигурацию SSL-сертификата аналогично следующему примеру:
 
@@ -195,24 +180,21 @@ kbId: 4685
                        include       /etc/nginx/fastcgi.conf
                        }
    }
-
    ```
 6. Проверьте конфигурацию NGINX:
 
    ```
    nginx -t
-
    ```
 7. Перезапустите **{{ productName }}**:
 
    ```
    systemctl restart elasticsearch nginx comindware<instanceName>
-
    ```
 
 ## Инициализация {{ productName }} для входа через Keycloak
 
-1. Откройте веб-сайт экземпляра **{{ productName }}**, например [https://](https://<yourHost>/)
+1. Откройте веб-сайт экземпляра **{{ productName }}**, например `https://<yourHost>/`
 2. Нажмите кнопку «**Войти как администратор**».
 3. Введите учётные данные администратора и нажмите кнопку «**Войти**».
 4. Выйдите из системы.
@@ -253,7 +235,6 @@ JWT-токен содержит следующие поля для управл�
   "iat": 1610000000, // Время создания токена
   "exp": 1610003600  // Время истечения срока действия (1 час)
 }
-
 ```
 
 ### Рекомендации по оптимизации времени жизни сеансов

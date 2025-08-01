@@ -1,0 +1,129 @@
+<h1>Урок 10. Работа с файлами</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr">
+<div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-загрузки-документов-и-изображений"> <span class="md-ellipsis"> Настройка загрузки документов и изображений </span> </a><nav aria-label="Настройка загрузки документов и изображений" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#создание-атрибута-типа-документ"> <span class="md-ellipsis"> Создание атрибута типа «Документ» </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#добавление-поля-с-документами-на-форму"> <span class="md-ellipsis"> Добавление поля с документами на форму </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#тестирование-загрузки-и-скачивания-документа"> <span class="md-ellipsis"> Тестирование загрузки и скачивания документа </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#результаты"> <span class="md-ellipsis"> Результаты </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<div class="notice notice-warning">
+<p class="admonition-title">Устаревший курс</p>
+<p>Данный курс является устаревшим.</p>
+<p>Рекомендуем вместо него пройти курс «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5112">Аналитик. Ознакомительный</a>».</p>
+</div>
+<h2 id="введение">Введение</h2>
+<p>В ходе этого урока вы узнаете, как с помощью <strong>атрибута типа «Документ»</strong> прикреплять к записям (загружать) и скачивать файлы: документы и изображения.</p>
+<p><strong>Предусловие:</strong> пройден <em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4868">урок 9 «Формирование документов»</a></em>.</p>
+<p><strong>Расчётная продолжительность:</strong> 45 мин.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>В данном уроке представлен продукт <strong>Comindware Platform</strong> версии 5.0, внешний вид страниц и меню в других версиях продукта может отличаться.</p>
+</div>
+<h2 id="настройка-загрузки-документов-и-изображений">Настройка загрузки документов и изображений</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>После выполнения рейса <em>Водитель</em> должен иметь возможность загрузить в систему сканы квитанций и другие документов.</p>
+<p>Для этого добавим на форму его задачи соответствующее поле.</p>
+</div>
+<div class="notice notice-success">
+<p class="admonition-title">Атрибут типа «Документ»</p>
+<p><strong>Атрибут типа «Документ»</strong> хранит файлы, загруженные пользователями.</p>
+<p>При настройке <strong>атрибута типа «Документ»</strong> можно разрешить загрузку файлов только определенных типов или любых файлов.</p>
+<p>Поле документа на форме позволяет загружать, скачивать, удалять и просматривать файлы.</p>
+</div>
+<h3 id="создание-атрибута-типа-документ">Создание атрибута типа «Документ»</h3>
+<p>Добавим <strong>атрибут типа «Документ»</strong> в шаблон <em>«Затраты»</em>…</p>
+<ol class="colored_numbers_list">
+<li>Откройте шаблон записи <em>«Затраты»</em>.</li>
+<li>Перейдите на вкладку «<strong>Атрибуты</strong>».</li>
+<li>
+<p>Создайте атрибут:</p>
+<ul>
+<li><strong>Название:</strong> <em>Вложения</em></li>
+<li><strong>Тип данных: документ</strong></li>
+<li><strong>Хранить несколько значений:</strong> установите флажок</li>
+</ul>
+</li>
+<li>
+<p>Сохраните атрибут.</p>
+<figure class="screenshot_with_caption"><img alt="Настройка атрибута типа «Документ»" src="/platform/v5.0/tutorial/img/lesson_10_document_attribute_configure.png"/>
+<figcaption class="caption">Настройка атрибута типа «Документ»</figcaption>
+</figure>
+</li>
+</ol>
+<h3 id="добавление-поля-с-документами-на-форму">Добавление поля с документами на форму</h3>
+<p>Добавим атрибут <em>«Вложения»</em> в таблицу затрат на форме задачи <em>«Выполнить рейс»</em>.</p>
+<ol class="colored_numbers_list">
+<li>Откройте шаблон процесса <em>«Заказ автотранспорта»</em>.</li>
+<li>Перейдите к вкладке «<strong>Диаграмма</strong>» и нажмите кнопку «<strong>Редактировать</strong>».</li>
+<li>Выберите задачу <em>«Выполнить рейс»</em> и в меню элемента нажмите кнопку «<strong>Форма</strong>» <em class="fa-light fa-newspaper">‌<!--icon--></em>.</li>
+<li>В конструкторе формы задачи на панели элементов разверните шаблон <em>«Заявки на автомобили»</em> и в нём разверните атрибут <em>«Затраты»</em>.</li>
+<li>Перетащите атрибут <em>«Вложения»</em> на форму в таблицу <em>«Затраты»</em>.</li>
+<li>В таблице <em>«Затраты»</em> должен появиться столбец <em>«Вложения»</em>.</li>
+<li>
+<p>Сохраните форму задачи.</p>
+<figure class="screenshot_with_caption"><img alt="Добавление атрибута типа «Документ» в таблицу на форме" src="/platform/v5.0/tutorial/img/lesson_10_document_add_to_table.png"/>
+<figcaption class="caption">Добавление атрибута типа «Документ» в таблицу на форме</figcaption>
+</figure>
+</li>
+<li>
+<p>Вернитесь к диаграмме процесса и опубликуйте её.</p>
+</li>
+</ol>
+<h2 id="тестирование-загрузки-и-скачивания-документа">Тестирование загрузки и скачивания документа</h2>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Если вы прошли <em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4867">Урок 8 <em>«Аккаунты, группы и роли»</em></a></em>, пользовательские задачи назначаются разным аккаунтам.</p>
+<p>Для прохождения процесса вы можете выполнять пользовательские задачи одним из трёх способов:</p>
+<ul>
+<li>Войдите в систему несколько раз с разными аккаунтами: <em>Заказчик, Секретарь, Водитель, Диспетчер гаража</em>.</li>
+<li>Создайте заявку на автомобиль. Откройте диаграмму запущенного экземпляра процесса <em>«Заказ автотранспорта»</em>. Переходите к задачам с помощью кнопки «<strong>Перейти</strong>» <em class="fa-light fa-external-link-square">‌<!--icon--></em> на панели «<strong>Токены</strong>».</li>
+<li>Назначьте свой аккаунт исполнителем всех пользовательских задач.</li>
+</ul>
+</div>
+<ol class="colored_numbers_list">
+<li>Создайте новую заявку на автомобиль и пройдите бизнес-процесс до задачи <em>«Выполнить рейс»</em>.</li>
+<li>На форме задачи <em>«Выполнить рейс»</em> создайте запись в таблице <em>«Затраты»</em>.</li>
+<li>
+<p>Прикрепите текстовый документ (например, в формате PDF) к созданной записи:</p>
+<ul>
+<li>Нажмите в строке затрат поле <em>«Вложение»</em>.</li>
+<li>Нажмите кнопку «<strong>Добавить документ</strong>».</li>
+</ul>
+</li>
+<li>
+<p>Создайте ещё одну запись в таблице <em>«Затраты»</em>.</p>
+</li>
+<li>Прикрепите изображение (например, в формате JPG) ко второй строке затрат.</li>
+<li>Сохраните заявку.</li>
+<li>
+<p>Проверьте возможность скачивания загруженных документов из заявки:</p>
+<ul>
+<li>Нажмите название загруженного документа или изображения в таблице затрат.</li>
+<li>Браузер скачает прикрепленный файл.</li>
+</ul>
+</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Загрузка и скачивание файла с помощью таблицы на форме" src="/platform/v5.0/tutorial/img/lesson_10_file_download_upload.png"/></p>
+<figcaption class="caption">Загрузка и скачивание файла с помощью таблицы на форме</figcaption>
+</figure>
+<h2 id="результаты">Результаты</h2>
+<p>Вы научились работать с файлами: загружать в систему и скачивать документы и изображения.</p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>
+</div>

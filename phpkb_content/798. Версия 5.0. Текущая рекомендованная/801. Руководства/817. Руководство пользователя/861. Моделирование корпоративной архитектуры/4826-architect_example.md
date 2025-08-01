@@ -227,8 +227,8 @@ _![Диаграмма оргструктуры](/platform/v5.0/architect/img/arc
 
    | Название | Системное имя | Свойства |
    | --- | --- | --- |
-   | *Тип служебный* | *Tipsluzhebnyy* | - **Тип данных: текст** - **Вычислять автоматически:** флажок установлен - **Вычисляемое выражение: формула** ```   FORMAT("{0}",LIST($unitType))     ``` |
-   | *Отдел* | *Otdel* | - **Тип данных: текст** - **Вычислять автоматически:** флажок установлен - **Вычисляемое выражение: N3** ```   @prefix object: <http://comindware.com/ontology/object#>.  {      ("systemSolution" "Tipsluzhebnyy") object:findProperty ?foundProperty.      ("systemSolution" "superiorUnit") object:findProperty ?superiorUnitProp.      ("systemSolution" "Otdel") object:findProperty ?Otdel.      ("systemSolution" "unitName") object:findProperty ?name.      if {?item ?foundProperty "Department". }      then { ?item ?name ?value.}      else {      ?item ?superiorUnitProp ?superiorUnit.          ?superiorUnit ?Otdel ?value.      }.  }     ``` |
+   | *Тип служебный* | *Tipsluzhebnyy* | - **Тип данных: текст** - **Вычислять автоматически:** флажок установлен - **Вычисляемое выражение: формула** ```   FORMAT("{0}",LIST($unitType))   ``` |
+   | *Отдел* | *Otdel* | - **Тип данных: текст** - **Вычислять автоматически:** флажок установлен - **Вычисляемое выражение: N3** ```   @prefix object: <http://comindware.com/ontology/object#>.  {      ("systemSolution" "Tipsluzhebnyy") object:findProperty ?foundProperty.      ("systemSolution" "superiorUnit") object:findProperty ?superiorUnitProp.      ("systemSolution" "Otdel") object:findProperty ?Otdel.      ("systemSolution" "unitName") object:findProperty ?name.      if {?item ?foundProperty "Department". }      then { ?item ?name ?value.}      else {      ?item ?superiorUnitProp ?superiorUnit.          ?superiorUnit ?Otdel ?value.      }.  }   ``` |
 2. Вынесите на основную форму **шаблона оргединицы** созданный атрибут *«Отдел»*.
 3. В правилах для формы добавьте действие для элемента *«Отдел»* со следующими свойствами:
 
@@ -238,7 +238,6 @@ _![Диаграмма оргструктуры](/platform/v5.0/architect/img/arc
 
      ```
      $Otdel == $unitName
-
      ```
 4. После этого при выборе оргединицы типа «**Должность**» на диаграмме оргструктуры в панели «**Свойства должности**» будет отображаться название отдела, к которому она относится.
 

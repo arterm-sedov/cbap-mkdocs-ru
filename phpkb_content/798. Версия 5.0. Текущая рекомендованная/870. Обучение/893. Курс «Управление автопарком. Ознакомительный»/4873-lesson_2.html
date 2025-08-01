@@ -1,0 +1,589 @@
+<h1>Урок 2. Мой первый реестр данных</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr">
+<div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#definitions"> <span class="md-ellipsis"> Определения </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#создание-приложения"> <span class="md-ellipsis"> Создание приложения </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#создание-шаблона-записи"> <span class="md-ellipsis"> Создание шаблона записи </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#создание-атрибутов-шаблона-записи"> <span class="md-ellipsis"> Создание атрибутов шаблона записи </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#создание-формы-для-просмотра-и-ввода-данных"> <span class="md-ellipsis"> Создание формы для просмотра и ввода данных </span> </a><nav aria-label="Создание формы для просмотра и ввода данных" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#назначение-обязательных-для-заполнения-полей"> <span class="md-ellipsis"> Назначение обязательных для заполнения полей </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#тестирование-ввод-и-редактирование-заявок"> <span class="md-ellipsis"> Тестирование: ввод и редактирование заявок </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#доработка-формы-добавление-поля-согласования-заявки-секретарем"> <span class="md-ellipsis"> Доработка формы: добавление поля согласования заявки секретарем </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-таблицы-со-списком-записей"> <span class="md-ellipsis"> Настройка таблицы со списком записей </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#поиск-и-фильтрация-записей-в-таблице"> <span class="md-ellipsis"> Поиск и фильтрация записей в таблице </span> </a><nav aria-label="Поиск и фильтрация записей в таблице" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-параметров-фильтрации-сортировки-и-группировки-записей-списка-для-текущего-пользователя"> <span class="md-ellipsis"> Настройка параметров фильтрации, сортировки и группировки записей списка для текущего пользователя </span> </a><nav aria-label="Настройка параметров фильтрации, сортировки и группировки записей списка для текущего пользователя" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#сортировка-записи"> <span class="md-ellipsis"> Сортировка записи </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#фильтр-записей"> <span class="md-ellipsis"> Фильтр записей </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#группировка-записей"> <span class="md-ellipsis"> Группировка записей </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#скрытие-столбца"> <span class="md-ellipsis"> Скрытие столбца </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-параметров-сортировки-группировки-подсчета-итогов-и-фильтрации-данных-в-таблице-для-всех-пользователей"> <span class="md-ellipsis"> Настройка параметров сортировки, группировки, подсчета итогов и фильтрации данных в таблице для всех пользователей </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#результаты"> <span class="md-ellipsis"> Результаты </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<div class="notice notice-warning">
+<p class="admonition-title">Устаревший курс</p>
+<p>Данный курс является устаревшим.</p>
+<p>Рекомендуем вместо него пройти курс «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5112">Аналитик. Ознакомительный</a>».</p>
+</div>
+<h2 id="введение">Введение</h2>
+<p>В рамках обучения мы разработаем корпоративное приложение для заказа корпоративного транспорта.</p>
+<p>В ходе этого урока вы создадите <strong>приложение</strong>, <strong>шаблон записи</strong> (реестр заявок), настроите <strong>атрибуты</strong> для хранения данных заявок, их отображение в виде <strong>таблицы</strong> и <strong>формы</strong>, а затем оформите несколько заявок.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>Мы реализуем следующий процесс бронирования автомобиля:</p>
+<ol class="colored_numbers_list">
+<li><em>Заказчик</em> подает заявку на автомобиль.</li>
+<li><em>Секретарь</em> рассматривает и одобряет либо отклоняет заявку.</li>
+<li>
+<p>Если запрос одобрен:</p>
+<ul>
+<li><em>Диспетчер гаража</em> назначает транспортное средство для поездки.</li>
+<li><em>Заказчик</em> получает уведомление о бронировании автомобиля.</li>
+<li><em>Водитель</em> выполняет поездку.</li>
+</ul>
+</li>
+<li>
+<p>Если запрос отклонен, <em>Заказчик</em> получает уведомление об отказе.</p>
+</li>
+</ol>
+<p>Подробные сведения о приложениях в <strong>Comindware Platform</strong> см. в разделе «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/category.php?id=832">Разработка приложений</a>».</p>
+</div>
+<p><strong>Предусловия:</strong> выполнена авторизация, пройден <em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4871">урок 1 «Первое знакомство»</a></em>.</p>
+<p><strong>Расчётная продолжительность:</strong> 60 мин.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>В данном уроке представлен продукт <strong>Comindware Platform</strong> версии 5.0, внешний вид страниц и меню в других версиях продукта может отличаться.</p>
+</div>
+<div class="notice notice-success">
+<h2 class="admonition-title" id="definitions">Определения</h2>
+<ul>
+<li><strong>Приложение</strong> — настроенная в <strong>Comindware Platform</strong> совокупность бизнес-процессов, диаграмм, моделей данных, экранных форм, механизмов обработки данных и ролевой модели для решения определённых задач.</li>
+<li><strong>Шаблон записи</strong> — модель бизнес-сущности (в виде атрибутов) и хранилище (реестр) данных в <strong>Comindware Platform</strong> (аналог таблицы реляционной базы данных или листа Excel). Записи из шаблона могут быть представлены в виде таблиц, карточек и форм. Подробные сведения о шаблонах представлены в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4759">Шаблоны. Определения и настройка</a>»</em>.</li>
+<li><strong>Запись</strong> — набор данных (значений атрибутов) в шаблоне, описывающий экземпляр бизнес-сущности (элемент справочника, транзакцию и т. п.).</li>
+<li><strong>Атрибут</strong> — простейший элемент данных, описывающий бизнес-сущность (аналог поля в реляционной БД или столбца в Excel), например: место подачи (строка), количество пассажиров (число), время подачи автомобиля (дата/время), автомобиль (ссылка) и т. п.</li>
+<li><strong>Форма</strong> — страница с полями для отображения и ввода данных.</li>
+<li><strong>Таблица</strong> — список, содержащий записи в строках со значениями атрибутов в столбцах. В таблице можно настроить фильтры для для отображения определённых записей.</li>
+</ul>
+</div>
+<h2 id="создание-приложения">Создание приложения</h2>
+<p>Создадим приложение для автоматизации заявок на корпоративный автотранспорт.</p>
+<ol class="colored_numbers_list">
+<li>На панели навигации слева выберите пункт «<strong>Настройки</strong>» — «<strong>Приложения</strong>».</li>
+<li>
+<p>Нажмите кнопку «<strong>Создать</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Переход к созданию приложения" src="/platform/v5.0/tutorial/img/lesson_2_app_create.png"/>
+<figcaption class="caption">Переход к созданию приложения</figcaption>
+</figure>
+</li>
+<li>
+<p>Введите наглядное название приложения, например <em>«Управление автопарком»</em>. После заполнения имени поле «<strong>Системное имя</strong>» заполнится автоматически, при желании вы можете ввести собственное системное имя.</p>
+<div class="notice notice-success">
+<p class="admonition-title">Системное имя и отображаемое название</p>
+<ul>
+<li>У сущностей в <strong>Comindware Platform</strong> предусмотрены <strong>системное имя</strong> и <strong>название</strong>.</li>
+<li><strong>Системное имя</strong> — это идентификатор сущности (атрибута, шаблона, поля и т. п.), используемый в сценариях, скриптах, правилах, формулах и выражениях. Не должно начинаться с цифры. Разрешены английские и русские буквы, цифры и символ «_». Рекомендуется использовать английские буквы. Обычно заполняется автоматически по названию.</li>
+<li><strong>Название</strong> и <strong>отображаемое название</strong> — это наглядная подпись сущности (атрибута, шаблона, формы, поля, кнопки, таблицы и т. п.). Название может содержать любые символы и по возможности должно быть кратким и понятным.</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Настройка свойств нового приложения" src="/platform/v5.0/tutorial/img/lesson_2_app_configure.png"/>
+<figcaption class="caption">Настройка свойств нового приложения</figcaption>
+</figure>
+</li>
+<li>
+<p>Дважды нажмите строку созданного приложения в списке.</p>
+</li>
+<li>
+<p>Отобразится страница «<strong>Администрирование</strong>» приложения.</p>
+<figure class="screenshot_with_caption"><img alt="Переход к странице администрирования приложения" src="/platform/v5.0/tutorial/img/lesson_2_app_list.png"/>
+<figcaption class="caption">Переход к странице администрирования приложения</figcaption>
+</figure>
+</li>
+</ol>
+<h2 id="создание-шаблона-записи">Создание шаблона записи</h2>
+<p>Определим данные заявки на автомобиль, которые необходимо хранить в <strong>шаблоне записи</strong>.</p>
+<p>Создадим шаблон записи для заявки на автомобиль.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>На странице «<strong>Администрирование</strong>» приложения <em>«Управление автопарком»</em>. выберите пункт «<strong>Шаблоны</strong>» <em class="fa-light fa-briefcase">‌<!--icon--></em>.</p>
+<figure class="screenshot_with_caption"><img alt="Переход к списку шаблонов приложения" src="/platform/v5.0/tutorial/img/lesson_2_template_list_open.png"/>
+<figcaption class="caption">Переход к списку шаблонов приложения</figcaption>
+</figure>
+</li>
+<li>
+<p>Отобразится список всех шаблонов приложения.</p>
+</li>
+<li>Выберите вкладку «<strong>Шаблоны записей</strong>».</li>
+<li>
+<p>Нажмите кнопку «<strong>Создать</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Переход к созданию шаблона записи" src="/platform/v5.0/tutorial/img/lesson_2_record_template_create.png"/>
+<figcaption class="caption">Переход к созданию шаблона записи</figcaption>
+</figure>
+</li>
+<li>
+<p>Отобразится окно «<strong>Новый шаблон</strong>».</p>
+</li>
+<li>В поле «<strong>Название</strong>» введите наглядное наименование шаблона — <em>«Заявки на автомобили»</em>.</li>
+<li><strong>Системное имя</strong> будет заполнено автоматически.</li>
+<li>В поле «<strong>Тип шаблона</strong>» должно быть автоматически выбрано значение «<strong>Шаблон записи</strong>».</li>
+<li>Остальные поля оставьте без изменений.</li>
+<li>
+<p>Нажмите кнопку «<strong>Создать</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Создание шаблона записи" src="/platform/v5.0/tutorial/img/lesson_2_record_template_configure.png"/>
+<figcaption class="caption">Создание шаблона записи</figcaption>
+</figure>
+</li>
+</ol>
+<h2 id="создание-атрибутов-шаблона-записи">Создание атрибутов шаблона записи</h2>
+<p>Добавим атрибуты заявки на автомобиль.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Следуя гибкой методологии, на начальном этапе мы не зададим все атрибуты, а ограничимся минимально необходимыми.</p>
+<p>Наша цель — как можно быстрее сделать работоспособное приложение и показать первым пользователям.</p>
+<p>Затем, получив от обратную связь от пользователей, мы будем добавлять в нашу таблицу новые атрибуты и вносить другие доработки по их пожеланиям.</p>
+</div>
+<div class="notice notice-success">
+<p class="admonition-title">Типы атрибутов</p>
+<p>В <strong>Comindware Platform</strong> предусмотрены атрибуты различных типов для хранения бизнес-данных.</p>
+<ul>
+<li><strong>Текст</strong> — строковое значение. Можно выбрать <strong>формат отображения</strong> значения атрибута:
+<ul>
+<li><strong>Обычный текст</strong> — без форматирования;</li>
+<li><strong>Размеченный текст</strong> — базовое форматирование (жирный, курсив, списки).</li>
+<li><strong>HTML-текст</strong> — расширенное форматирование с помощью тегов HTML.</li>
+<li><strong>Телефон (РФ)</strong>, <strong>Адрес эл. почты</strong>, <strong>Паспорт (РФ)</strong>, <strong>Индекс (РФ)</strong>, <strong>ИНН юрлица</strong>, <strong>ИНН физлица</strong>, <strong>ОГРН (РФ)</strong>, <strong>Регистрационный номер ТС (РФ)</strong>, <strong>Особая маска</strong> — значение атрибута форматируется с использованием маски в виде регулярного выражения.</li>
+</ul>
+</li>
+<li><strong>Число</strong> — числовое значение. Можно выбрать <strong>количество знаков после запятой</strong>:
+<ul>
+<li><strong>Не преобразовывать</strong> — значение отображается в том же формате, что его ввёл пользователь;</li>
+<li><strong>0</strong> — значение отображается в виде целого числа;</li>
+<li><strong>1–6</strong> — значение отображается в виде десятичной дроби с указанным количеством знаков после запятой;</li>
+</ul>
+</li>
+<li><strong>Дата и время</strong> — значение даты и времени. Доступно несколько <strong>форматов отображения</strong>, позволяющих выводить либо только дату, либо дату и время.</li>
+<li><strong>Документ</strong> — к атрибуту можно прикрепить любые файлы, например в формате Word, PDF или ZIP.</li>
+<li><strong>Изображение</strong> — к атрибуту можно прикрепить изображения, например сканы документов или фотографии.</li>
+</ul>
+<p>Кроме того, <strong>Comindware Platform</strong> поддерживает атрибуты следующих типов: <strong>Аккаунт</strong>, <strong>Гиперссылка</strong>, <strong>Длительность</strong>, <strong>Запись</strong>, <strong>Логический</strong>, <strong>Организационная единица</strong>, <strong>Роль</strong>, <strong>Список значений</strong>. С некоторыми из них мы познакомимся позже.</p>
+<p>Подробные сведения об атрибутах см. в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4772">Атрибуты. Определения и настройка</a>»</em></p>
+</div>
+<ol class="colored_numbers_list">
+<li>Выберите вкладку «<strong>Атрибуты</strong>».</li>
+<li>
+<p>Нажмите кнопку «<strong>Создать</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Переход к созданию атрибута шаблона записи" src="/platform/v5.0/tutorial/img/lesson_2_attribute_create.png"/>
+<figcaption class="caption">Переход к созданию атрибута шаблона записи</figcaption>
+</figure>
+</li>
+<li>
+<p>Отобразится окно «<strong>Новый шаблон</strong>».</p>
+</li>
+<li>Выберите <strong>тип данных</strong> «<strong>Текст</strong>».</li>
+<li>Введите <strong>название</strong> <em>«Место подачи»</em>.</li>
+<li><strong>Системное имя</strong> будет заполнено автоматически.</li>
+<li>Остальные поля оставьте без изменений.</li>
+<li>
+<p>Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Настройка свойств атрибута" src="/platform/v5.0/tutorial/img/lesson_2_attribute_configure.png"/>
+<figcaption class="caption">Настройка свойств атрибута</figcaption>
+</figure>
+</li>
+<li>
+<p>Аналогично создайте следующие атрибуты:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Тип данных</th>
+<th>Название</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Дата и время</strong></td>
+<td><em>Время подачи</em></td>
+</tr>
+<tr>
+<td><strong>Текст</strong></td>
+<td><em>Маршрут</em></td>
+</tr>
+<tr>
+<td><strong>Число</strong></td>
+<td><em>Пассажиры</em></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<h2 id="создание-формы-для-просмотра-и-ввода-данных">Создание формы для просмотра и ввода данных</h2>
+<p>Теперь настроим экранную форму для просмотра и ввода данных заявки на автомобиль.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>На странице шаблона записи <em>«Заявки на автомобили»</em> выберите вкладку «<strong>Формы</strong>».</p>
+<div class="notice notice-info">
+<p class="admonition-title">Основная форма шаблона</p>
+<p>При создании шаблона записи автоматически создаётся пустая <strong>основная форма</strong>, в которой по умолчанию открываются записи шаблона.</p>
+<p>Для шаблона записи <em>«Заявки на автомобили»</em> была создана форма <em>«Заявки на автомобили — Основная форма»</em>.</p>
+</div>
+</li>
+<li>
+<p>В списке форм дважды нажмите пункт <em>«Заявки на автомобили — Основная форма»</em>.</p>
+<figure class="screenshot_with_caption"><img alt="Переход к редактированию формы из списка" src="/platform/v5.0/tutorial/img/lesson_2_form_edit.png"/>
+<figcaption class="caption">Переход к редактированию формы из списка</figcaption>
+</figure>
+</li>
+<li>
+<p>Отобразится <strong>конструктор формы</strong>:</p>
+<div class="notice notice-success">
+<p class="admonition-title">Конструктор формы</p>
+<p><strong>Конструктор формы</strong> разбит на четыре области:</p>
+<p><strong>(1)</strong> <strong>Панель элементов</strong> — палитра элементов, которые можно перетащить на форму: атрибуты и вспомогательные визуальные элементы (<strong>Область</strong>, <strong>Вкладки</strong>, <strong>Группа кнопок</strong>, <strong>Разделитель кнопок</strong>, <strong>Колонки</strong>, <strong>Статичный текст</strong>).</p>
+<p><strong>(2)</strong> <strong>Макет формы</strong> — эскиз экранной формы.</p>
+<p><strong>(3)</strong> <strong>Панель свойств</strong> — позволяет просмотреть и изменить свойства выбранного элемента.</p>
+<p><strong>(4)</strong> <strong>Кнопки</strong> — <strong>Сохранить</strong>, <strong>Очистить</strong>, <strong>Клонировать</strong>, <strong>Настроить шаблон</strong> <em class="fa-light fa-pen-square">‌<!--icon--></em>, <strong>Связи</strong> <em class="fa-light fa-link-horizontal">‌<!--icon--></em>.</p>
+<p>В <strong>конструкторе форм</strong> предусмотрен богатый набор элементов и функций, но в данном уроке мы рассмотрим только основные из них. Вы можете самостоятельно поэкспериментировать с элементами и настройками формы.</p>
+<p>Подробные сведения о настройке форм см. в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4786">Формы. Определения и настройка</a>»</em>.</p>
+</div>
+</li>
+<li>
+<p>Перетащите на макет формы элемент «<strong>Область</strong>» с панели элементов.</p>
+</li>
+<li>
+<p>Перетащите на макет формы атрибут <em>«Время подачи»</em> с панели элементов.</p>
+<figure class="screenshot_with_caption"><img alt="Перетаскивание атрибута на форму" src="/platform/v5.0/tutorial/img/lesson_2_form_add_field.png"/>
+<figcaption class="caption">Перетаскивание атрибута на форму</figcaption>
+</figure>
+</li>
+<li>
+<p>Аналогичным образом перетащите на макет формы атрибуты <em>«Место подачи», «Маршрут», «Пассажиры»</em>.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>В поле <em>«Время подачи» Заказчик</em> должен вводить дату и время. Но по умолчанию для этого атрибута выбран <strong>формат отображения</strong> только даты. Изменим формат отображения атрибута.</p>
+</div>
+</li>
+<li>
+<p>На панели элементов щелкните значок «<strong>Редактировать</strong>» <em class="fa-light fa-pencil">‌<!--icon--></em> у атрибута <em>«Время подачи»</em>.</p>
+<figure class="screenshot_with_caption"><img alt="Переход к редактированию атрибута из панели элементов" src="/platform/v5.0/tutorial/img/lesson_2_form_edit_attribute.png"/>
+<figcaption class="caption">Переход к редактированию атрибута из панели элементов</figcaption>
+</figure>
+</li>
+<li>
+<p>Отобразится окно свойств атрибута.</p>
+</li>
+<li>Выберите <strong>формат отображения</strong>, включающий время, например «<strong>4 сент. 1986 г. 07:30</strong>».</li>
+<li>
+<p>Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Выбор формата отображения атрибута типа «Дата / время»" src="/platform/v5.0/tutorial/img/lesson_2_attribute_date_time_edit.png"/>
+<figcaption class="caption">Выбор формата отображения атрибута типа «Дата / время»</figcaption>
+</figure>
+</li>
+</ol>
+<h3 id="назначение-обязательных-для-заполнения-полей">Назначение обязательных для заполнения полей</h3>
+<ol class="colored_numbers_list">
+<li>Выберите на форме поле <em>«Время подачи»</em>.</li>
+<li>
+<p>В поле «<strong>Доступ</strong>» на панели свойств поля выберите режим «<strong>Требовать ввод</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Выбор режима доступа к полю в форме" src="/platform/v5.0/tutorial/img/lesson_2_form_field_access_select.png"/>
+<figcaption class="caption">Выбор режима доступа к полю в форме</figcaption>
+</figure>
+</li>
+<li>
+<p>Аналогично сделайте обязательным поле <em>«Место подачи»</em>.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Визуальные элементы формы</p>
+<p>Чтобы сделать форму более удобной для пользователя, используйте следующие элементы:</p>
+<ul>
+<li><strong>Область</strong> — визуально группирует поля, имеет заголовок и может содержать кнопки. На форме должна быть как минимум одна область.</li>
+<li><strong>Статичный текст</strong> — отображает текст, доступный только для чтения.</li>
+<li><strong>Вкладки</strong> — позволяет распределить поля по вкладкам, между которыми пользователь может переходить.</li>
+<li><strong>Колонки</strong> — позволяет расположить поля в несколько столбцов.</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Перетащите на форму элемент «<strong>Колонки</strong>» с панели элементов.</p>
+</li>
+<li>
+<p>Перетащите поля <em>«Время подачи»</em> и <em>«Место подачи»</em> с макета формы соответственно в левый и правый столбцы элемента «<strong>Колонки</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Упорядочивание элементов формы с помощью колонок" src="/platform/v5.0/tutorial/img/lesson_2_form_columns_arrange.png"/>
+<figcaption class="caption">Упорядочивание элементов формы с помощью колонок</figcaption>
+</figure>
+</li>
+<li>
+<p>Выберите заголовок <strong>новой области</strong> и с помощью панели свойств присвойте её наглядное <strong>отображаемое название</strong>: <em>Форма заявки на автомобиль</em>.</p>
+</li>
+<li>
+<p>Сохраните форму, нажав кнопку «<strong>Сохранить</strong>» в конструкторе форм.</p>
+<figure class="screenshot_with_caption"><img alt="Переименование области формы и сохранение формы" src="/platform/v5.0/tutorial/img/lesson_2_form_rename.png"/>
+<figcaption class="caption">Переименование области формы и сохранение формы</figcaption>
+</figure>
+</li>
+</ol>
+<h2 id="тестирование-ввод-и-редактирование-заявок">Тестирование: ввод и редактирование заявок</h2>
+<p>Мы создали форму для заявки на автомобиль. Теперь мы протестируем её от лица <em>Заказчика</em>.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Нажмите кнопку «<strong>Настроить шаблон</strong>» <em class="fa-light fa-pen-square">‌<!--icon--></em>.</p>
+<figure class="screenshot_with_caption"><img alt="Переход из конструктора формы к настройке шаблона записи" src="/platform/v5.0/tutorial/img/lesson_2_form_template_edit.png"/>
+<figcaption class="caption">Переход из конструктора формы к настройке шаблона записи</figcaption>
+</figure>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Перейти к экземплярам</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Переход к списку записей шаблона" src="/platform/v5.0/tutorial/img/lesson_2_template_open_record_list.png"/>
+<figcaption class="caption">Переход к списку записей шаблона</figcaption>
+</figure>
+</li>
+<li>
+<p>Отобразится список записей шаблона.</p>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Создать</strong>», чтобы оформить новую заявку на автомобиль — запись в шаблоне.</p>
+<figure class="screenshot_with_caption"><img alt="Переход к созданию записи из списка записей шаблона" src="/platform/v5.0/tutorial/img/lesson_2_template_record_create.png"/>
+<figcaption class="caption">Переход к созданию записи из списка записей шаблона</figcaption>
+</figure>
+</li>
+<li>
+<p>Откроется <em>форма заявки на автомобиль</em>.</p>
+</li>
+<li>
+<p>Заполните все поля и нажмите кнопку «<strong>Сохранить</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Заполнение заявки на автомобиль" src="/platform/v5.0/tutorial/img/lesson_2_request_create.png"/>
+<figcaption class="caption">Заполнение заявки на автомобиль</figcaption>
+</figure>
+</li>
+<li>
+<p>Нажмите ссылку «<strong>Заявки на автомобили</strong>» над формой, чтобы вернуться к списку заявок.</p>
+<figure class="screenshot_with_caption"><img alt="Переход с формы к списку записей шаблона" src="/platform/v5.0/tutorial/img/lesson_2_request_return_to_list.png"/>
+<figcaption class="caption">Переход с формы к списку записей шаблона</figcaption>
+</figure>
+</li>
+<li>
+<p>Создайте несколько заявок на автомобиль таким же образом.</p>
+</li>
+<li>Созданные записи будут отображаться в списке.</li>
+<li>
+<p>Двойным нажатием в списке записей откройте созданную запись, измените данные заявки и сохраните её.</p>
+<figure class="screenshot_with_caption"><img alt="Открытие записи из списка" src="/platform/v5.0/tutorial/img/lesson_2_template_record_open.png"/>
+<figcaption class="caption">Открытие записи из списка</figcaption>
+</figure>
+</li>
+</ol>
+<h2 id="доработка-формы-добавление-поля-согласования-заявки-секретарем">Доработка формы: добавление поля согласования заявки секретарем</h2>
+<p>Созданную заявку должен рассмотреть <em>Секретарь</em>, но в шаблоне записи <em>«Заявки на автомобили»</em> не хватает атрибута для результата рассмотрения заявки. Добавим этот атрибут.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите к настройке шаблона записи. Для этого нажмите кнопку «<strong>Мои настройки</strong>» <em class="fa-light fa-edit">‌<!--icon--></em> на странице «<strong>Все записи</strong>» и выберите пункт «<strong>Настроить шаблон</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Переход к настройкам шаблона из списка записей" src="/platform/v5.0/tutorial/img/lesson_2_template_edit_from_list.png"/>
+<figcaption class="caption">Переход к настройкам шаблона из списка записей</figcaption>
+</figure>
+</li>
+<li>
+<p>На странице шаблона записи выберите вкладку «<strong>Атрибуты</strong>».</p>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Создать</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Переход к созданию атрибута в шаблоне" src="/platform/v5.0/tutorial/img/lesson_2_template_attribute_create.png"/>
+<figcaption class="caption">Переход к созданию атрибута в шаблоне</figcaption>
+</figure>
+</li>
+<li>
+<p>Отобразится окно «<strong>Новый атрибут</strong>».</p>
+</li>
+<li>Введите <strong>название</strong> <em>«Заявка одобрена»</em> и выберите <strong>тип данных</strong> «<strong>Логический</strong>».</li>
+<li>
+<p>Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Создание атрибута «Заявка одобрена» типа «Логический»" src="/platform/v5.0/tutorial/img/lesson_2_template_attribute_configure.png"/>
+<figcaption class="caption">Создание атрибута «Заявка одобрена» типа «Логический»</figcaption>
+</figure>
+</li>
+</ol>
+<h2 id="настройка-таблицы-со-списком-записей">Настройка таблицы со списком записей</h2>
+<p>В шаблоне записи по умолчанию предусмотрена таблица «<strong>Все записи</strong>», которая показывает список заявок и системные атрибуты: <strong>ID</strong>, <strong>Создатель</strong>, <strong>Дата создания</strong>, <strong>В архиве</strong>, <strong>Дата изменения</strong>.</p>
+<p>Список заявок на автомобили в таблице «<strong>Все записи</strong>» не информативен, так как не содержит необходимых данных о заявке. Доработаем этот список.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите на вкладку «<strong>Таблицы</strong>» шаблона записи и дважды нажмите строку «<strong>Все записи</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Переход к конструктору таблицы" src="/platform/v5.0/tutorial/img/lesson_2_template_table_edit.png"/>
+<figcaption class="caption">Переход к конструктору таблицы</figcaption>
+</figure>
+</li>
+<li>
+<p>Отобразится конструктор таблицы, который позволяет настроить набор и порядок отображения столбцов.</p>
+</li>
+<li>
+<p>Для начала удалим столбцы, которые пользователю не интересны.</p>
+</li>
+<li>Выберите элемент «<strong>ID</strong>» в макете таблицы и перетащите его за пределы макета, например на панель элементов.</li>
+<li>Таким же образом уберите из таблицы столбцы «<strong>Дата создания</strong>», «<strong>В архиве</strong>» и «<strong>Используется в процессе</strong>».</li>
+<li>
+<p>Оставьте в таблице столбцы «<strong>Создатель</strong>» и «<strong>Дата изменения</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Конструктор таблицы — удаление столбцов" src="/platform/v5.0/tutorial/img/lesson_2_table_designer_column_delete.png"/>
+<figcaption class="caption">Конструктор таблицы — удаление столбцов</figcaption>
+</figure>
+</li>
+<li>
+<p>Теперь добавим в таблицу необходимые столбцы.</p>
+</li>
+<li>
+<p>Перетащите следующие атрибуты с панели элементов на макет таблицы: <em>«Время подачи», «Место подачи», «Маршрут», «Пассажиры»</em>.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Последовательность, в которой элементы расположены в конструкторе таблицы, определяет последовательность столбцов при её отображении. То есть элемент, который расположен вверху в конструкторе таблицы, отобразится первым (слева) в таблице.</p>
+</div>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Сохранить</strong>».</p>
+</li>
+<li>Будут сохранены параметры отображения таблицы по умолчанию для всех пользователей.</li>
+<li>
+<p>В меню <em class="fa-light fa-edit">‌<!--icon--></em> выберите пункт «<strong>Настроить шаблон</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Конструктор таблицы — добавление столбцов и возврат к настройке шаблона" src="/platform/v5.0/tutorial/img/lesson_2_table_designer_column_add.png"/>
+<figcaption class="caption">Конструктор таблицы — добавление столбцов и возврат к настройке шаблона</figcaption>
+</figure>
+</li>
+<li>
+<p>Отобразится вкладка «<strong>Свойства</strong>» шаблона.</p>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Перейти к экземплярам</strong>», чтобы открыть список заявок в виде таблицы с настроенными столбцами.</p>
+<figure class="screenshot_with_caption"><img alt="Таблица со список заявок на автомобили с настроенными столбцами" src="/platform/v5.0/tutorial/img/lesson_2_request_list.png"/>
+<figcaption class="caption">Таблица со список заявок на автомобили с настроенными столбцами</figcaption>
+</figure>
+</li>
+</ol>
+<h2 id="поиск-и-фильтрация-записей-в-таблице">Поиск и фильтрация записей в таблице</h2>
+<p>Используем дополнительные настройки отображения записей в таблице — отфильтруем и отсортируем записи в нужном нам порядке, затем настроим группировку и подсчет итогов.</p>
+<h3 id="настройка-параметров-фильтрации-сортировки-и-группировки-записей-списка-для-текущего-пользователя">Настройка параметров фильтрации, сортировки и группировки записей списка для текущего пользователя</h3>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<ul>
+<li>В этом параграфе представлены инструкции по настройке параметров отображения столбцов таблицы для <strong>текущего пользователя</strong>. Эти настройки хранятся в платформе индивидуально для каждого пользователя.</li>
+<li>Помимо этого, в конструкторе таблицы можно настроить параметры отображения столбцов, которые будут использоваться <strong>для всех пользователей по умолчанию</strong>. См. <em>«<a class="mkdocs_imported_link" href="#настройка-параметров-сортировки-группировки-подсчета-итогов-и-фильтрации-данных-в-таблице-для-всех-пользователей">Настройка и сохранение параметров сортировки, группировки, подсчета итогов и фильтрации данных в таблице для всех пользователей</a>»</em>.</li>
+</ul>
+</div>
+<h4 id="сортировка-записи">Сортировка записи</h4>
+<p>Отсортируем заявки на автомобили по времени подачи.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Нажмите заголовок столбца <em>«Время подачи»</em>, чтобы отсортировать данные по этому столбцу:</p>
+<ul>
+<li>по возрастанию;</li>
+<li>по убыванию;</li>
+<li>по умолчанию.</li>
+</ul>
+<p>Порядок сортировки обозначается стрелкой вниз (по убыванию), стрелкой вверх (по возрастанию) или отсутствием стрелки (по умолчанию) в заголовке столбца.</p>
+<figure class="screenshot_with_caption"><img alt="Сортировка таблицы нажатием заголовка столбца" src="/platform/v5.0/tutorial/img/lesson_2_table_sort.png"/>
+<figcaption class="caption">Сортировка таблицы нажатием заголовка столбца</figcaption>
+</figure>
+</li>
+</ol>
+<h4 id="фильтр-записей">Фильтр записей</h4>
+<p>Для отображения записей, содержащих определённое значение, можно использовать фильтр «<strong>Равно</strong>» или «<strong>Содержит строку</strong>».</p>
+<ol class="colored_numbers_list">
+<li>Нажмите значок фильтра <em class="fa-light fa-filter">‌<!--icon--></em> в столбце <em>«Маршрут»</em>.</li>
+<li>В раскрывшемся меню установите флажок «<strong>Фильтровать данные</strong>» и выберите тип фильтра «<strong>Начинается с</strong>» или «<strong>Содержит строку</strong>».</li>
+<li>Введите искомый текст для фильтра в поле «<strong>Введите текст</strong>», например первые буквы названия маршрута любой заявки.</li>
+<li>
+<p>Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Применение фильтра записей по содержимому столбца" src="/platform/v5.0/tutorial/img/lesson_2_table_filter.png"/>
+<figcaption class="caption">Применение фильтра записей по содержимому столбца</figcaption>
+</figure>
+</li>
+<li>
+<p>В списке отобразятся записи, соответствующие указанному фильтру.</p>
+</li>
+<li>
+<p>Чтобы сбросить фильтр записей, нажмите значок фильтра <em class="fa-light fa-filter">‌<!--icon--></em> в столбце <em>«Маршрут»</em>, снимите флажок «<strong>Фильтровать данные</strong>» и нажмите кнопку «<strong>Сохранить</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Отключение фильтрации записей в таблице" src="/platform/v5.0/tutorial/img/lesson_2_table_filter_disable.png"/>
+<figcaption class="caption">Отключение фильтрации записей в таблице</figcaption>
+</figure>
+</li>
+</ol>
+<h4 id="группировка-записей">Группировка записей</h4>
+<p>Сгруппируем заявки на автомобиль с одинаковым маршрутом.</p>
+<ol class="colored_numbers_list">
+<li>Нажмите значок фильтра <em class="fa-light fa-filter">‌<!--icon--></em> в столбце <em>«Маршрут»</em>.</li>
+<li>
+<p>В раскрывшемся меню установите флажок «<strong>Группировать</strong>» и нажмите кнопку «<strong>Сохранить</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Группировка записей в таблице" src="/platform/v5.0/tutorial/img/lesson_2_table_group.png"/>
+<figcaption class="caption">Группировка записей в таблице</figcaption>
+</figure>
+</li>
+</ol>
+<h4 id="скрытие-столбца">Скрытие столбца</h4>
+<p>Скроем столбец «<strong>Дата изменения</strong>».</p>
+<ol class="colored_numbers_list">
+<li>Нажмите кнопку <em class="fa-light fa-edit">‌<!--icon--></em> над таблицей</li>
+<li>
+<p>В раскрывшемся меню выберите пункт «<strong>Настроить внешний вид</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Переход к пользовательской настройке внешнего вида таблицы" src="/platform/v5.0/tutorial/img/lesson_2_table_go_to_personal_config.png"/>
+<figcaption class="caption">Переход к пользовательской настройке внешнего вида таблицы</figcaption>
+</figure>
+</li>
+<li>
+<p>Отобразится страница настройки внешнего вида таблицы.</p>
+</li>
+<li>Снимите флажок «<strong>Дата изменения</strong>», чтобы скрыть из таблицы этот столбец.</li>
+<li>Нажмите кнопку «<strong>Сохранить</strong>».</li>
+<li>
+<p>Чтобы восстановить исходную конфигурацию отображения таблицы, нажмите кнопку «<strong>Сбросить</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Настройка пользовательской конфигурации внешнего вида таблицы" src="/platform/v5.0/tutorial/img/lesson_2_table_personal_config.png"/>
+<figcaption class="caption">Настройка пользовательской конфигурации внешнего вида таблицы</figcaption>
+</figure>
+</li>
+</ol>
+<h3 id="настройка-параметров-сортировки-группировки-подсчета-итогов-и-фильтрации-данных-в-таблице-для-всех-пользователей">Настройка параметров сортировки, группировки, подсчета итогов и фильтрации данных в таблице для всех пользователей</h3>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<ul>
+<li>В этом параграфе представлены инструкции по настройке параметров отображения столбцов таблицы, которые будут использоваться <strong>для всех пользователей по умолчанию</strong>.</li>
+<li>Кроме того, каждый пользователь может настроить отображение столбцов индивидуально в соответствии со своими потребностями. См. параграф <em>«<a class="mkdocs_imported_link" href="#настройка-параметров-фильтрации-сортировки-и-группировки-записей-списка-для-текущего-пользователя">Настройка параметров фильтрации, сортировки и группировки записей списка для текущего пользователя</a>»</em>.</li>
+</ul>
+</div>
+<ol class="colored_numbers_list">
+<li>Нажмите кнопку <em class="fa-light fa-edit">‌<!--icon--></em> и в раскрывшемся меню выберите пункт «<strong>Настроить таблицу</strong>».</li>
+<li>
+<p>Отобразится конструктор таблицы.</p>
+<figure class="screenshot_with_caption"><img alt="Переход к конструктору таблицы" src="/platform/v5.0/tutorial/img/lesson_2_table_go_to_designer.png"/>
+<figcaption class="caption">Переход к конструктору таблицы</figcaption>
+</figure>
+</li>
+<li>
+<p>Выберите вкладку «<strong>Дополнительные</strong>» в панели «<strong>Свойства таблицы</strong>».</p>
+</li>
+<li>Перетащите атрибуты из макета таблицы в области «<strong>Сортировка</strong>», «<strong>Группировка</strong>» и «<strong>Фильтрация</strong>».</li>
+<li>Настройте параметры сортировки, группировки и фильтрации данных в таблице для всех пользователей.</li>
+<li>
+<p>Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Настройка параметров сортировки, группировки и фильтрации списка по умолчанию для всех пользователей" src="/platform/v5.0/tutorial/img/lesson_2_table_designer_advanced_properties.png"/>
+<figcaption class="caption">Настройка параметров сортировки, группировки и фильтрации списка по умолчанию для всех пользователей</figcaption>
+</figure>
+</li>
+</ol>
+<h2 id="результаты">Результаты</h2>
+<p>Вы создали свой первый шаблон записи (реестр данных), настроили форму, научились её заполнять и настроили таблицу со списком записей.</p>
+<p>В <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4874">следующем уроке</a> вы узнаете, как спроектировать и запустить бизнес-процесс.</p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>
+</div>
