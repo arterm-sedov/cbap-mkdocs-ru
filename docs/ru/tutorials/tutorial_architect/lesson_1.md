@@ -64,7 +64,7 @@ hide: tags
 - Ознакомиться с преимуществами **{{ productNameEnterprise }}**
 - Получить общее представление об архитектуре и возможностях {{ productNameEnterprise }}
 
-## Назначение и область применения **{{ productNameEnterprise }}** {: #tutorial_architect_lesson_1_purpose }
+## Назначение и область применения {{ productNameEnterprise }} {: #tutorial_architect_lesson_1_purpose }
 
 **{{ productNameEnterprise }}** — российская low-code-платформа для моделирования корпоративной архитектуры, автоматизации и оптимизации бизнес-процессов и разработки бизнес-приложений.
 
