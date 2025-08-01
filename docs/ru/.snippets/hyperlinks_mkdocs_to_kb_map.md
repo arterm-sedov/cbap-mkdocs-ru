@@ -919,17 +919,19 @@
 
 <!-- Руководства без учебника или экспорт в БЗ  -->
 
-[tutorial]: {{ kbCategoryURLPrefix }}870
-[lesson_1]: {{ kbArticleURLPrefix }}4871
-[lesson_2]: {{ kbArticleURLPrefix }}4873
-[lesson_3]: {{ kbArticleURLPrefix }}4874
-[lesson_4]: {{ kbArticleURLPrefix }}4865
-[lesson_5]: {{ kbArticleURLPrefix }}4869
-[lesson_6]: {{ kbArticleURLPrefix }}4870
-[lesson_7]: {{ kbArticleURLPrefix }}4872
-[lesson_8]: {{ kbArticleURLPrefix }}4867
-[lesson_9]: {{ kbArticleURLPrefix }}4868
-[lesson_10]: {{ kbArticleURLPrefix }}4866
+[tutorials_toc]: {{ kbArticleURLPrefix }}5123
+
+[tutorial_fleet]: {{ kbArticleURLPrefix }}5085
+[tutorial_fleet_lesson_1]: {{ kbArticleURLPrefix }}4871
+[tutorial_fleet_lesson_2]: {{ kbArticleURLPrefix }}4873
+[tutorial_fleet_lesson_3]: {{ kbArticleURLPrefix }}4874
+[tutorial_fleet_lesson_4]: {{ kbArticleURLPrefix }}4865
+[tutorial_fleet_lesson_5]: {{ kbArticleURLPrefix }}4869
+[tutorial_fleet_lesson_6]: {{ kbArticleURLPrefix }}4870
+[tutorial_fleet_lesson_7]: {{ kbArticleURLPrefix }}4872
+[tutorial_fleet_lesson_8]: {{ kbArticleURLPrefix }}4867
+[tutorial_fleet_lesson_9]: {{ kbArticleURLPrefix }}4868
+[tutorial_fleet_lesson_10]: {{ kbArticleURLPrefix }}4866
 
 [tutorial_hr]: {{ kbArticleURLPrefix }}5112
 [tutorial_hr_lesson_1]: {{ kbArticleURLPrefix }}5113
