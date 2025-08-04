@@ -27,7 +27,7 @@ hide:
 Прежде чем приступать к моделированию архитектуры предприятия, ознакомьтесь со следующими практическими примерами использования модуля «**{{ productNameArchitect }}**»:
 
 - _[Моделирование корпоративной архитектуры. Описание демонстрационного стенда][architect_demo_instance]_
-- _[Построение ОФС и архитектуры процессов организации. Практический пример][architect_demo_organizational_structure_processes]_
+- _[Построение оргструктуры и архитектуры процессов организации. Практический пример][architect_demo_organizational_structure_processes]_
 
 ## Возможности моделирования корпоративной архитектуры
 
@@ -93,7 +93,7 @@ _![Рабочий стол модуля «{{ productNameArchitect }}»](architec
 --8<-- "related_topics_heading.md"
 
 - _[Моделирование корпоративной архитектуры. Описание демонстрационного стенда][architect_demo_instance]_
-- _[Построение ОФС и архитектуры процессов организации. Практический пример][architect_demo_organizational_structure_processes]_
+- _[Построение оргструктуры и архитектуры процессов организации. Практический пример][architect_demo_organizational_structure_processes]_
 - _[Построение процессной архитектуры][architect_process_architecture_design]_
 - _[Построение организационной структуры][architect_organizational_structure_design]_
 - _[Рабочий стол. Использование][desktop]_

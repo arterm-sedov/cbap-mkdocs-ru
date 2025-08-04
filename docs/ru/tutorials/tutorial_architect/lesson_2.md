@@ -400,7 +400,7 @@ _![Отображение атрибута «Отдел» в свойствах 
 - [Рабочий стол. Настройка][desktop_setup]
 - [Роли. Настройка][roles]
 - [Построение организационной структуры][architect_organizational_structure_design]
-- [Просмотр и редактирование диаграммы ОФС][architect_organizational_structure_diagram_edit]
+- [Просмотр и редактирование организационно-функциональной диаграммы][architect_organizational_structure_diagram_edit]
 - [Атрибуты. Настройка][attributes]
 - [Формы. Настройка][forms]
 - [Правила для форм. Настройка][form_rules]

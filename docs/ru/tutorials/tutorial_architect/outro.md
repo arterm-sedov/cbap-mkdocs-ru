@@ -85,7 +85,7 @@ hide: tags
 
 - [Использование модуля «{{ productNameArchitect }}»][architect_description] — освойте все возможности моделирования корпоративной архитектуры.
 - Примеры использования **{{ productNameEnterprise }}** — изучите варианты и возможности реализации корпоративной архитектуры:
-  - [Построение ОФС и архитектуры процессов организации][architect_demo_organizational_structure_processes]
+  - [Построение оргструктуры и архитектуры процессов организации][architect_demo_organizational_structure_processes]
   - [Построение корпоративной архитектуры. Работа с демонстрационным стендом][architect_demo_instance]
 - [Использование интерфейса {{ productNameEnterprise }}][interface_use] — освойте все возможности работы с **{{ productNameEnterprise }}**.
 - [Разработка приложений в {{ productNameEnterprise }}][apps] — научитесь создавать бизнес-приложения с помощью **{{ productNameEnterprise }}**.
