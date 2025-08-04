@@ -83,6 +83,12 @@ hide: tags
 
 ## Темы для дальнейшего изучения {: #tutorial_architect_outro_further }
 
+- [Использование модуля «{{ productNameArchitect }}»][architect_description] — освойте все возможности моделирования корпоративной архитектуры.
+- Примеры использования **{{ productNameEnterprise }}** — изучите варианты и возможности реализации корпоративной архитектуры:
+  - [Построение ОФС и архитектуры процессов организации][architect_demo_organizational_structure_processes]
+  - [Построение корпоративной архитектуры. Работа с демонстрационным стендом][architect_demo_instance]
+- [Использование интерфейса {{ productNameEnterprise }}][interface_use] — освойте все возможности работы с **{{ productNameEnterprise }}**.
+- [Разработка приложений в {{ productNameEnterprise }}][apps] — научитесь создавать бизнес-приложения с помощью **{{ productNameEnterprise }}**.
 - [Шаблоны][templates]: расширьте модель данных и добавьте новые бизнес-процессы.
 - [Конструктор форм][form_designer]: усовершенствуйте графический интерфейс приложения.
 - [Диаграмма процесса][process_diagram]: настройте исполняемые BPMN-диаграммы процессов согласно потребностям своего бизнеса.
@@ -121,19 +127,6 @@ hide: tags
 - Используйте дополнительные ресурсы и справочные материалы.
 - Не стесняйтесь задавать вопросы на форуме поддержки.
 - Ознакомьтесь с документацией к модулю «**[{{ productNameArchitect }}][architect_description]**».
-
-<div class="relatedTopics" markdown="block">
-
-## Ресурсы и советы {: #tutorial_architect_resources }
-
-- [Тесты для самопроверки][tutorial_architect_tests]
-- [Руководство по модулю «{{ productNameArchitect }}»][architect_description]
-- Примеры использования **{{ productNameEnterprise }}**:
-  - [Построение ОФС и архитектуры процессов организации][architect_demo_organizational_structure_processes]
-  - [Построение корпоративной архитектуры. Работа с демонстрационным стендом][architect_demo_instance]
-- [Справочник по разработке приложений в «{{ productNameEnterprise }}»][apps]
-
-</div>
 
 ## Финальное напутствие {: #tutorial_architect_outro_final }
 

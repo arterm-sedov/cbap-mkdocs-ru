@@ -261,4 +261,15 @@ hide: tags
 
 Теперь ознакомьтесь с [заключением][tutorial_architect_outro]: подведите итоги курса, проверьте свои знания, рассмотрите возможности дальнейшего развития, ресурсы и рекомендации для самостоятельной работы.
 
+<div class="relatedTopics" markdown="block">
+
+--8<-- "related_topics_heading.md"
+
+Подробные сведения о настройке **{{ productNameEnterprise }}** представлены в руководстве пользователя:
+
+- [Импорт и экспорт диаграмм и регламентов][architect_import_export]
+- [Управление версиями корпоративной архитектуры][architect_version_control]
+
+</div>
+
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
