@@ -16,7 +16,7 @@ hide:
 
 {% include-markdown ".snippets/experimental_feature.md" %}
 
-## Введение
+## Введение {: #architect_desktop_intro }
 
 Модуль «**{{ productNameArchitect }}**» — это no-code-конструктор процессной архитектуры и организационной структуры предприятия.
 
@@ -24,12 +24,13 @@ hide:
 
 ## Знакомство с модулем «{{ productNameArchitect }}» {: #architect_intro }
 
-Прежде чем приступать к моделированию архитектуры предприятия, ознакомьтесь со следующими практическими примерами использования модуля «**{{ productNameArchitect }}**»:
+Прежде чем приступать к моделированию архитектуры предприятия, ознакомьтесь со следующими учебными материалами:
 
+- _[Курс «Корпоративная архитектура. Ознакомительный»][tutorial_architect]_
 - _[Моделирование корпоративной архитектуры. Описание демонстрационного стенда][architect_demo_instance]_
 - _[Построение оргструктуры и архитектуры процессов организации. Практический пример][architect_demo_organizational_structure_processes]_
 
-## Возможности моделирования корпоративной архитектуры
+## Возможности моделирования корпоративной архитектуры {: #architect_desktop_capabilities }
 
 {%
 include-markdown "../product_description.md"
@@ -37,7 +38,7 @@ start="<!--architect-features-start-->"
 end="<!--architect-features-end-->"
 %}
 
-## Включение модуля «{{ productNameArchitect }}»
+## Включение модуля «{{ productNameArchitect }}» {: #architect_desktop_enable }
 
 Для использования модуля «**{{ productNameArchitect }}**» его необходимо активировать с помощью **лицензионного ключа** и добавить на **панель навигации**.
 
