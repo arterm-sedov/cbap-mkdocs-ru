@@ -8,29 +8,35 @@ This rule applies to commit messages.
 # Commit Message Rule
 
 **Important requirement:**
-- The commit message must always start with the ticket/issue number, which is taken from the current branch name.
+
+- Always start the commit message with the ticket/issue number.
+- Take the issue number from the current branch name (eg., `12345_branch_name`) or from the previous commit message if the branch name does not have the issue number.
 - Format:
   `[#XXXXX] Concise description of the change`
   where `XXXXX` is the number at the start of the branch name (up to the first `_` or other separator).
 
 **Algorithm:**
+
 1. Find a previous commit message, it might already contain the [#XXXXX] pattern.
 2. Determine the current branch name.
-3. Extract the first sequence of digits (usually up to the `_` character).
+3. Extract the first sequence of digits (usually up to the `_` character), eg. `12345_branch_name`.
 4. Use it in square brackets with a `#` at the start of the commit message (no spaces inside the brackets).
 5. After the brackets, provide a concise, to-the-point description of the change.
 
 **Correct examples:**
-- `[#12345] Add new documentation section`
-- `[#67890] Fix data processing bug`
+
+Branch name: `12345_branch_name`
+Commit message: `[#12345] Add new documentation section`
+
+Branch name: `67890_branch_name`
+Commit message: `[#67890] Fix data processing bug`
 
 **Incorrect examples:**
-- `Add new documentation section`
-- `[12345] Fix bug`
-- `[ #12345 ] Fix bug in module X, add tests, update docs` (spaces inside brackets)
-- `[#12345] Fix bug in module X, add tests, update docs` (too long)
+- `Add new documentation section` — no issue number
+- `[12345] Fix bug` — no # symbol
+- `[ #12345 ] Fix bug in module X, add tests, update docs` — spaces inside brackets
 
 **Requirements:**
-- The message must be concise, structured, and strictly relevant to the change.
-- Keep the length to the minimum necessary.
 
+- The message must be concise, structured, and strictly relevant to the changes in the commit avoid blabber.
+- Keep the length to the minimum necessary.
