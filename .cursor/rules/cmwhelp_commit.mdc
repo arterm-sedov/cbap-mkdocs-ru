@@ -17,10 +17,10 @@ This rule applies to commit messages.
 
 **Algorithm:**
 
-1. Find a previous commit message, it might already contain the [#XXXXX] pattern.
-2. Determine the current branch name.
-3. Extract the first sequence of digits (usually up to the `_` character), eg. `12345_branch_name`.
-4. Use it in square brackets with a `#` at the start of the commit message (no spaces inside the brackets).
+1. Get current branch name, eg. `12345_branch_name`.
+2. Extract the first sequence of digits (usually up to the `_` character), eg. `12345`.
+3. Find a previous commit message if the branch name has no issue number. Previous commit message might already contain the right [#XXXXX] pattern.
+4. Use the issue number in square brackets with a `#` at the start of the commit message (no spaces inside the brackets).
 5. After the brackets, provide a concise, to-the-point description of the change.
 
 **Correct examples:**
@@ -29,6 +29,10 @@ Branch name: `12345_branch_name`
 Commit message: `[#12345] Add new documentation section`
 
 Branch name: `67890_branch_name`
+Commit message: `[#67890] Fix data processing bug`
+
+Branch name: `branch_name`
+Previous commit message: `[#67890] Previous bug fix`
 Commit message: `[#67890] Fix data processing bug`
 
 **Incorrect examples:**
