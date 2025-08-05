@@ -950,8 +950,8 @@
 [tutorial_architect_lesson_3]: {{ kbArticleURLPrefix }}5127
 [tutorial_architect_lesson_4]: {{ kbArticleURLPrefix }}5128
 [tutorial_architect_lesson_5]: {{ kbArticleURLPrefix }}5129
-[tutorial_hr_outro]: {{ kbArticleURLPrefix }}5130
-[tutorial_hr_tests]: {{ kbArticleURLPrefix }}5131
+[tutorial_architect_outro]: {{ kbArticleURLPrefix }}5130
+[tutorial_architect_tests]: {{ kbArticleURLPrefix }}5131
 
 {% endif %}
 

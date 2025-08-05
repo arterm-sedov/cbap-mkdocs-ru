@@ -14,7 +14,7 @@ This document summarizes how the content and practical recipes from `docs/ru/arc
 
 ## 2. What is Covered?
 
-- **Organizational structure (ОФС), directories, and import**  
+- **Organizational structure, directories, and import**  
   Covered in: **Lesson 2**
 - **Process architecture, business capability diagrams, BPMN**  
   Covered in: **Lesson 3**
