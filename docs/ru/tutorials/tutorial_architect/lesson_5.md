@@ -52,19 +52,13 @@ hide: tags
 
 {% include-markdown ".snippets/tutorial_version_notice.md" %}
 
-## Темы, навыки и задания урока {: #tutorial_architect_lesson_5_taxonomy }
+## Темы и задания урока {: #tutorial_architect_lesson_5_taxonomy }
 
 ### Темы {: #tutorial_architect_lesson_5_topics }
 
-- Экспорт диаграмм в различных форматах
+- Экспорт диаграмм в в форматах BPMN, PNG, SVG
 - Настройка особых шаблонов экспорта архитектурных регламентов
-- Управление версиями корпоративной архитектуры
-
-### Навыки {: #tutorial_architect_lesson_5_skills }
-
-- Экспортировать диаграммы в форматах BPMN, PNG, SVG
-- Настраивать шаблоны экспорта регламентов
-- Управлять версиями корпоративной архитектуры и диаграмм
+- Управление версиями корпоративной архитектуры и диаграмм
 
 ### Задания {: #tutorial_architect_lesson_5_tasks }
 
