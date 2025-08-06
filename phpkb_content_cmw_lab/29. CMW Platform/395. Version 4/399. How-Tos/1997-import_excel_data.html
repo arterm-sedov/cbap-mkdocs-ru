@@ -1,0 +1,105 @@
+<h1>Importing Linked Records From an Excel Spreadsheet</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1gupcs5se0">Use Case</a></li>
+<li><a href="#mcetoc_1gupdb2o92">Prerequisites</a></li>
+<li><a href="#mcetoc_1gupdp2fq3">Instructions</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1gupcs5se0">Use Case</h2>
+<p>In the <strong>CMW Platform, </strong>you can import data to a record template and link the imported records to the records in other templates.</p>
+<p>In this article, we will import an Excel sheet containing several clients' requests and link the imported requests to the corresponding client records.</p>
+<h2 id="mcetoc_1gupdb2o92">Prerequisites</h2>
+<p>To link the records imported from an Excel spreadsheet to the records in another template, you must specify the linked records' key values in the spreadsheet. As the key values, specify the values of the <strong>ID</strong> system attribute or an attribute <strong>used as a record title</strong>.</p>
+<p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; font-size: 15px; font-weight: 300; letter-spacing: 0.2px; line-height: 25px; color: #545764; font-family: 'Open Sans', sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">To proceed with the example, create the templates and attributes as shown in the table below:</p>
+<div class="table-responsive">
+<table border="1" style="width: 100%; border-collapse: collapse; height: 348px;">
+<tbody>
+<tr style="height: 40px;">
+<td style="height: 40px; width: 20%;"><strong>Record template</strong></td>
+<td style="width: 20%; height: 40px;"><strong>Attribute name</strong></td>
+<td style="width: 20%; height: 40px;"><strong>Attribute type</strong></td>
+<td style="height: 40px; width: 70%;"><strong>Description</strong></td>
+</tr>
+<tr style="height: 10px;">
+<td rowspan="2" style="height: 134px; width: 20%;"><em>Clients</em><em><br/></em></td>
+<td style="width: 20%; height: 79px;"><em>Client requests</em></td>
+<td style="width: 20%; height: 79px;"><strong>Record</strong></td>
+<td style="height: 79px; width: 70%;">
+<p>Linked to the <em>Requests</em> template, the <strong>Store multiple values</strong> box is checked.</p>
+<p>This <em>Client requests </em>attribute is placed as a table on the <em>Client</em> form.</p>
+</td>
+</tr>
+<tr style="height: 55px;">
+<td style="width: 20%; height: 55px;"><em>Name</em></td>
+<td style="width: 20%; height: 55px;"><strong>Text</strong></td>
+<td style="width: 70%; height: 55px;">
+<p>The <strong>Use as record title</strong> box is checked for the <em>Name </em>attribute.</p>
+<p>The <em>Clients</em> template contains two records with the following <em>Name</em> attribute values: <em>Client A</em> and <em>Client B</em>.</p>
+<p>The <em>Name</em> attribute values will be used as the key values for Excel data import.</p>
+</td>
+</tr>
+<tr style="height: 64px;">
+<td rowspan="3" style="height: 174px; width: 20%;"><em>Requests</em><em><br/></em></td>
+<td style="width: 20%; height: 64px;"><em>Client</em></td>
+<td style="width: 20%; height: 64px;"><strong>Record</strong></td>
+<td style="height: 64px; width: 70%;">
+<p>Linked to the <em>Clients</em> template.</p>
+</td>
+</tr>
+<tr style="height: 55px;">
+<td style="width: 20%; height: 55px;"><em>Name</em></td>
+<td style="width: 20%; height: 55px;"><strong>Text</strong></td>
+<td style="width: 70%; height: 55px;">
+<p>Stores the request name.</p>
+</td>
+</tr>
+<tr style="height: 55px;">
+<td style="width: 20%; height: 55px;"><em>Sum</em></td>
+<td style="width: 20%; height: 55px;"><strong>Number</strong></td>
+<td style="width: 70%; height: 55px;">
+<p>Stores the request amount.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="mcetoc_1gupdp2fq3">Instructions</h2>
+<ol class="colored_numbers_list">
+<li>Create the Excel spreadsheet to import, as shown below. In the <em style="letter-spacing: 0.2px;">Client</em><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0.2px;"> column, specify the <em>Name</em> attribute values stored in the <em>Clients</em> template: <em>Client A</em> or <em>Client B</em>. </span> </span> These are the key values to link the <em>Clients</em> template records with the <em>Requests</em> template records. 
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="The Excel spreadsheet iwht clients' requests to import" class="img-responsive" height="119" src="https://kb.cmwlab.com/assets/2021-12-30_14h20_56.png" width="458"/></p>
+<p class="caption" style="font-size: 15px !important;">The Excel spreadsheet with clients' requests to import</p>
+</div>
+</li>
+<li>Open the <em style="letter-spacing: 0.2px;">Requests</em><span style="letter-spacing: 0.2px;"> record template.</span></li>
+<li>Go to the <strong>Import</strong><span style="letter-spacing: 0.2px;"> tab.</span></li>
+<li><span style="letter-spacing: 0.2px;">Load the Excel file to import.</span></li>
+<li><span style="letter-spacing: 0.2px;">In the <strong>Data mapping</strong> section, map the spreadsheet columns to the <em>Requests</em> template attributes:</span>
+<ul>
+<li><span style="letter-spacing: 0.2px;">Map the <em>Client</em> column to the Client attribute and specify </span><em style="letter-spacing: 0.2px;"><strong>name </strong></em>as the value <span style="letter-spacing: 0.2px;"><strong>format</strong></span> <span style="letter-spacing: 0.2px;"> . </span></li>
+<li>Map the <em>Name</em> column to the <em>Name</em> attribute.</li>
+<li>Map the <em>Sum</em> column to the <em>Sum</em> attribute and specify <strong style="letter-spacing: 0.2px;"><em>currency</em></strong><span style="letter-spacing: 0.2px;"> as the value <strong>format</strong></span><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0.2px;">.</span> </span></li>
+</ul>
+</li>
+<li><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0.2px;">Click <strong>Upload</strong> to import the data.</span> </span>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Mapping the imported Excel spreadsheet columns to the record template attributes " class="img-responsive" height="782" src="https://kb.cmwlab.com/assets/img_64468c71cc130.png" width="1001"/></p>
+<p class="caption" style="font-size: 15px !important;">Mapping the imported Excel spreadsheet columns to the record template attributes </p>
+</div>
+</li>
+<li>The imported requests will appear in the <em>Requests</em> record template, each linked to its client.
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Imported records in the Requests template" class="img-responsive" height="376" src="https://kb.cmwlab.com/assets/img_64468946eea69.png" width="999"/></p>
+<p class="caption" style="font-size: 15px !important;">Imported records in the Requests template</p>
+</div>
+</li>
+<li>Open the <em>Client A</em> record.</li>
+<li>
+<p style="text-align: left;">In the <em>Client requests</em> table, you should see the imported requests for <em>Client A.</em></p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="The table of requests linked to the client record" class="img-responsive" height="421" src="https://kb.cmwlab.com/assets/img_64468af96d1f6.png" width="997"/></p>
+<p class="caption" style="font-size: 15px !important;">The table of requests linked to the client record</p>
+</div>
+</li>
+</ol>

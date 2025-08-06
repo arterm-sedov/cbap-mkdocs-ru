@@ -459,8 +459,6 @@
 
 [elasticdata_description]: {{ kbArticleURLPrefix }}4584
 
-[example_attribute_record_join_string]: {{ kbArticleURLPrefix }}5107
-
 [example_csharp_table_download_selections]: {{ kbArticleURLPrefix }}5008
 
 [example_document_clone_scenario_n3]: {{ kbArticleURLPrefix }}4883
@@ -476,6 +474,8 @@
 [example_n3_collection_join_filter_hierarchy]: {{ kbArticleURLPrefix }}5108
 
 [example_n3_dataset_join_filter]: {{ kbArticleURLPrefix }}5109
+
+[example_n3_collection_join_string]: {{ kbArticleURLPrefix }}5107
 
 [example_n3_periodic_task_notifications]: {{ kbArticleURLPrefix }}4905
 
@@ -614,6 +614,10 @@
 [http_send_file]: {{ kbArticleURLPrefix }}5066
 
 [http_send_request_connection]: {{ kbArticleURLPrefix }}4696
+
+[integration_recomendations]: {{ kbArticleURLPrefix }}5091
+
+[interface_use]: {{ kbArticleURLPrefix }}5105
 
 [import_data]: {{ kbArticleURLPrefix }}4802
 
@@ -905,6 +909,8 @@
 
 [paths]: {{ kbArticleURLPrefix }}4620
 
+[script_keys]: {{ kbArticleURLPrefix }}5122
+
 [system_requirements]: {{ kbArticleURLPrefix }}4659
 
 [upload_size_limit_configure]: {{ kbArticleURLPrefix }}4619
@@ -926,6 +932,17 @@
 [lesson_8]: {{ kbArticleURLPrefix }}4867
 [lesson_9]: {{ kbArticleURLPrefix }}4868
 [lesson_10]: {{ kbArticleURLPrefix }}4866
+
+[tutorial_hr]: {{ kbArticleURLPrefix }}5112
+[tutorial_hr_lesson_1]: {{ kbArticleURLPrefix }}5113
+[tutorial_hr_lesson_2]: {{ kbArticleURLPrefix }}5114
+[tutorial_hr_lesson_3]: {{ kbArticleURLPrefix }}5115
+[tutorial_hr_lesson_4]: {{ kbArticleURLPrefix }}5116
+[tutorial_hr_lesson_5]: {{ kbArticleURLPrefix }}5117
+[tutorial_hr_lesson_6]: {{ kbArticleURLPrefix }}5118
+[tutorial_hr_lesson_7]: {{ kbArticleURLPrefix }}5119
+[tutorial_hr_lesson_8]: {{ kbArticleURLPrefix }}5120
+[tutorial_hr_outro]: {{ kbArticleURLPrefix }}5121
 
 {% endif %}
 

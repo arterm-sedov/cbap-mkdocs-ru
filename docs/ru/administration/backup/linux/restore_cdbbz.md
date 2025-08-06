@@ -1,35 +1,72 @@
 ---
-title: Восстановление базы данных из файла резервной копии в формате .CDBBZ
+title: 'Восстановление базы данных из файла резервной копии в формате CDBBZ'
+kbTitle: 'Восстановление базы данных из файла резервной копии в формате CDBBZ'
 kbId: 4647
 tags: 
-    - развёртывание
-    - резервное копирование
+    - CDBBZ
+    - DevOps
+    - Linux
+    - sysadmin
+    - администрирование
+    - архив
+    - база данных
     - восстановление
+    - восстановление данных
+    - восстановление индексов
+    - инструкции
+    - лицензирование
+    - миграция
+    - конфигурация
+    - резервная копия
+    - резервное копирование
 hide: tags
 ---
 
-# Восстановление базы данных из файла резервной копии в формате .CDBBZ {: #backup_restore_cdbbz }
+# Восстановление базы данных из файла езервной копии в формате CDBBZ {: #backup_restore_cdbbz }
 
 ## Введение
 
 Здесь представлены инструкции по восстановлению базы данных **{{ productName }}** для следующего сценария:
 
 - используется ранее настроенный экземпляр ПО **{{ productName }}** под управлением ОС Linux;
-- имеется файл резервной копии базы данных с расширением `.CDBBZ`;
-- резервная копия создана с помощью встроенной в ПО функции «**Резервное копирование**» (см. *«[Резервное копирование. Настройка и запуск, просмотр журнала сеансов][backup_configure]»*);
+- имеется файл резервной копии базы данных с расширением `.CDBBZ` (архив резервной копии);
+- резервная копия создана с помощью встроенной в ПО функции «**Резервное копирование**» (см. _«[Резервное копирование. Настройка и запуск, просмотр журнала сеансов][backup_configure]»_);
 - индексы {{ openSearchVariants }} восстанавливаются отдельно от восстановления базы данных экземпляра ПО.
 
 Прежде чем приступать к восстановлению экземпляра ПО **{{ productName }}** из резервной копии, ознакомьтесь с видеороликом и инструкциями, представленными ниже.
 
-### Видеоинструкция
+## Порядок восстановления
+
+1. Восстановите [базу данных и скрипты](#backup_restore_cdbbz_db_scripts).
+2. При необходимости восстановите [лицензионные ключи](#backup_restore_cdbbz_license_keys).
+3. При необходимости восстановите [индексы {{ openSearchVariants }}](#backup_restore_cdbbz_indexes).
+
+!!! warning "Фактические пути и имена файлов"
+
+    При выполнении инструкций будьте внимательны: указывайте фактические имена файлов и пути, которые используются в вашей системе.
+
+    Такие имена указаны в угловых скобках, например:
+
+    - `<backupName>.cdbbz` — имя файла резервной копии в формате CDBBZ;
+    - `<Database>` — директория базы данных экземпляра ПО (например, `/var/lib/comindware/<instanceName>/Database`);
+    - `<instanceName>` — имя экземпляра ПО, для которого выполняется восстановление;
+    - `<instanceName>.yml` — файл конфигурации экземпляра ПО;
+    - `<path/to>` — путь к директории или файлу в вашей системе; замените на фактический путь согласно своей структуре каталогов.
+    - `<Scripts>` — директория, содержащая C#-скрипты экземпляра ПО;
+    - `<serviceName>` — имя службы, которую требуется проверить или остановить (например, `comindware<instanceName>`,`apigateway<instanceName>`, `adapterhost<instanceName>`);
+    - `<user>` — имя пользователя, в домашней директории которого находится файл резервной копии;
+
+    См. _«[Пути и содержимое директорий экземпляра ПО][paths]»_.
+
+<!-- ### Видеоинструкция
 
 Ссылка на видеоролик: <https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/restore_complete_backup_linux.mp4>
 
 <video controls="controls" width="100%" height="100%">
 <source src="https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/restore_complete_backup_linux.mp4" type="video/mp4" />
-</video>
+</video> -->
 
-## Восстановление базы данных и скриптов {: .pageBreakBefore }
+## Восстановление базы данных и скриптов {: #backup_restore_cdbbz_db_scripts .pageBreakBefore }
 
 1. Перейдите в режим суперпользователя:
 
@@ -45,19 +82,11 @@ hide: tags
 3. Остановите службу adapterhost:
 
     ``` sh
-    ps -fax | grep <instanceName> | grep Agent
-    kill -9 $(ps -eo pid,args | grep <instanceName> | grep Agent | awk {'print $1'})
-    ```
-
-    или
-
-    ``` sh
-    
     systemctl stop adapterhost<instanceName>
     ```
 
 4. С помощью команды `systemctl status <serviceName>` удостоверьтесь, что службы остановлены.
-5. Перейдите в директорию с резервной копией, например `/home/<user>`
+5. Перейдите в директорию с CDBBZ-файлом резервной копии, например `/home/<user>`:
 
     ```sh
     cd /home/<user>
@@ -69,7 +98,8 @@ hide: tags
     mkdir tmp
     ```
 
-7. <a id="unpack_backup"></a>Распакуйте архив резервной копии в директорию `tmp`:
+7. Распакуйте архив резервной копии в директорию `tmp`:
+{: #unpack_backup}
 
     ``` sh
     unzip -q <backupName>.cdbbz -d tmp/
@@ -82,42 +112,55 @@ hide: tags
     ls
     ```
 
-9. После распаковки архива в директории быть 3 директории: `Database`, `Scripts`, `Streams`.
+9. Архив будет распакован в несколько директорий.
 
-    !!! note "Примечание"
+    !!! note "Фактический набор директорий"
 
-        Если в распакованной резервной копии имеется директория `Ignite` вместо `Database`, переименуйте её в `Database`:
+        В дальнейших инструкциях используются директории `Database`, `Scripts` и `Streams`.
+        
+        - В архиве всегда имеется директория `Database` с резервной копией базы данных.
+        - Если в резервной копии нет директорий `Scripts` и `Streams`, пропускайте связанные с ними инструкции.
+        - Если в резервной копии имеется директория `History` с данными {{ openSearchVariants }}, их следует восстанавливать средствами {{ openSearchVariants }}. См. _«[Восстановление индексов {{ openSearchVariants }} из файла резервной копии репозитория](#backup_restore_cdbbz_indexes)»_.
 
-        ```
-        mv Ignite Database
-        ```
+10. Для восстановления резервной копии используйте пути, указанные в следующих директивах YML-файла конфигурации экземпляра ПО `/usr/share/comindware/configs/instance/<instanceName>.yml`:
 
-10. Для восстановления резервной копии используйте следующие параметры из YML-файла конфигурации экземпляра ПО `/usr/share/comindware/configs/instance/<instanceName>.yml`:
+    - `db.workDir: <path/to/Database>` — путь к директории базы данных;
+    - `userStorage.localDisk.path: <path/to/Streams>` — путь к директории пользовательских файлов.
 
-    `#!yml databasePath: <path/to/Database>` — путь к директории базы данных;
-    `#!yml userStorage.localDisk.path: <path/to/Streams>` — путь к директории пользовательских файлов;
+    !!! warning "Восстановление резервной копии на другом экземпляре ПО"
 
-    Просмотрите откройте файл конфигурации с помощью следующей команды:
+        При создании экземпляра ПО база данных привязывается к имени, которое указано в директиве `db.name` (имя базы данных) файла конфигурации `<instanceName>.yml`.
+
+        Если вы восстанавливаете резервную копию на новом экземпляре ПО, необходимо убедиться, что в YML-файле конфигурации задано такое же значение `db.name`, как у экземпляра ПО, на котором была создана резервная копия.
+
+    Просмотрите файл конфигурации с помощью следующей команды:
 
     ``` sh
     cat /usr/share/comindware/configs/instance/<instanceName>.yml
     ```
 
-11. Убедитесь в наличии директорий `<path/to/Database>` и `<path/to/Streams>`:
+11. Убедитесь в наличии директорий `<Database>` и `<Streams>`, указанных в YML-файле конфигурации:
 
     ``` sh
     ls -lh <path/to/Database>
     ls -lh <path/to/Streams>
     ```
 
+    - Если папки присутствуют, удалите их содержимое:
+
+        ``` sh
+        rm -rf <path>/Database/*
+        rm -rf <path>/Streams/*
+        ```
+
     - Если папки отсутствуют, создайте их:
 
         ``` sh
-        mkdir -p <path/to/Database>
-        mkdir -p <path/to/Streams>
+        mkdir -p <path>/Database
+        mkdir -p <path>/Streams
         ```
 
-12. Перейдите в директорию распакованной резервной копии (например, `/home/<user>/temp/`).
+12. Перейдите в директорию распакованной резервной копии (например, `/home/<user>/tmp/`).
 13. Переместите директорию `Scripts` в `Database`:
 
     ```
@@ -134,7 +177,7 @@ hide: tags
 15. Назначьте перенесённым директориям права `rwxrw-rw-`:
 
     ``` sh
-    chmod -R 766 <path/to/Database/folder> <path/to/Streams> /var/lib/comindware/<instanceName>
+    chmod -R 766 <path/to/Database> <path/to/Streams> /var/lib/comindware/<instanceName>
 
     ```
 
@@ -143,7 +186,7 @@ hide: tags
 16. Назначьте перенесенным директориям владельца:
 
     ``` sh
-    chown -R <User>:<Group> <path/to/database/folder> <path/to/streams/folder> /var/lib/comindware/<instanceName>
+    chown -R <User>:<Group> <path/to/Database> <path/to/Streams> /var/lib/comindware/<instanceName>
     ```
 
     Здесь `<User>`, `<Group>` — значения соответствующих параметров из файла `/usr/lib/systemd/system/comindware<instanceName>.service`
@@ -172,9 +215,9 @@ hide: tags
 19. Запустите службы экземпляра ПО и проверьте их статус:
 
     ``` sh
+    systemctl start adapterhost<instanceName>
     systemctl start comindware<instanceName> 
     systemctl start apigateway<instanceName>
-    systemctl start adapterhost<instanceName>
     ```
 
     ``` sh
@@ -194,6 +237,14 @@ hide: tags
     ```
 
 ## Восстановление лицензионных ключей {: #backup_restore_cdbbz_license_keys }
+
+!!! warning "Внимание!"
+
+    Лицензионные ключи привязаны к имени экземпляра ПО (`<instanceName>`) и уникальному идентификатору оборудования сервера (Hardware ID).
+    
+    Поэтому восстановление возможно только на том же сервере, на котором была создана резервная копия.
+    
+    При развёртывании на новом оборудовании необходимо заново выполнить активацию лицензионных ключей.
 
 Чтобы использовать на восстановленном экземпляре ПО прежние лицензионные ключи, выполните указанные ниже действия.
 
@@ -339,16 +390,16 @@ hide: tags
 
 --8<-- "related_topics_heading.md"
 
-- _[Резервное копирование. Настройка и запуск, просмотр журнала сеансов][backup_configure]_
-- _[Установка, запуск, инициализация и остановка ПО][deploy_guide_linux]_
-- _[Пути и содержимое директорий экземпляра ПО][paths]_
-- _[Проверка и настройка конфигурации экземпляра ПО {{ productName }} после восстановления из резервной копии][restore_test_configure]_
-- _[Регистрация репозитория {{ openSearchVariants }} (официальное руководство, английский язык)](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-filesystem-repository.html)_
-- _[Восстановление снимка {{ openSearchVariants }} (официальное руководство, английский язык)](https://www.elastic.co/guide/en/elasticsearch/reference/current/restore-snapshot-api.html)_
-- _[{{ openSearchVariants }}. Настройка подключения][elasticsearch_connection]_
-- _[Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО][complete_running_instance_backup]_
-- _[Восстановление базы данных, вложенных файлов и журналов из полной резервной копии][restore_complete_backup]_
-- _[Лицензирование. Активация, назначение, отзыв и продление лицензий][licensing]_
+- [Резервное копирование. Настройка и запуск, просмотр журнала сеансов][backup_configure]
+- [Установка, запуск, инициализация и остановка ПО][deploy_guide_linux]
+- [Пути и содержимое директорий экземпляра ПО][paths]
+- [Проверка и настройка конфигурации экземпляра ПО {{ productName }} после восстановления из резервной копии][restore_test_configure]
+- [Регистрация репозитория {{ openSearchVariants }} (официальное руководство, английский язык)](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-filesystem-repository.html)
+- [Восстановление снимка {{ openSearchVariants }} (официальное руководство, английский язык)](https://www.elastic.co/guide/en/elasticsearch/reference/current/restore-snapshot-api.html)
+- [{{ openSearchVariants }}. Настройка подключения][elasticsearch_connection]
+- [Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО][complete_running_instance_backup]
+- [Восстановление базы данных, вложенных файлов и журналов из полной резервной копии][restore_complete_backup]
+- [Лицензирование. Активация, назначение, отзыв и продление лицензий][licensing]
 
 </div>
 

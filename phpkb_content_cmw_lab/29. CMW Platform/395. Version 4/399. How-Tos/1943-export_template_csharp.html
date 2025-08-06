@@ -1,0 +1,477 @@
+<h1>Configure an Export Template with C# Data Processing</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1gtt39a7f0">Use Case</a></li>
+<li><a href="#mcetoc_1gtqfuuju0">Prerequisites</a></li>
+<li><a href="#mcetoc_1gtt7v1rm0">Instructions</a>
+<ul>
+<li><a href="#mcetoc_1gtt4ll9r3">Create an Excel Export Template</a></li>
+<li><a href="#mcetoc_1gtt42b1t2">Create a Word Export Template</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="mcetoc_1gtt39a7f0">Use Case</h2>
+<p>In addition to the standard export template feature, you can configure a custom data export using a C# script with more flexible data processing. For example, you can apply data filters, replace data, or reformat the values.</p>
+<p>In this article, we will configure the Excel and Word export templates and C# scripts to export the files with each collection element on a separate line (by default, all collection elements are listed on one line separated by a space). The export templates and C# scripts slightly differ for Word and Excel formats.</p>
+<h2 id="mcetoc_1gtqfuuju0">Prerequisites</h2>
+<p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; font-size: 15px; font-weight: 300; letter-spacing: 0.2px; line-height: 25px; color: #545764; font-family: 'Open Sans', sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">To proceed with the example, create the templates and attributes as shown in the table below:</p>
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%; height: 298px;">
+<tbody>
+<tr style="height: 40px;">
+<th style="height: 40px; width: 20%;"><strong>Record template system name</strong></th>
+<th style="height: 40px; width: 20%;"><strong>Attribute system name</strong></th>
+<th style="height: 40px; width: 20%;"><strong>Attribute type</strong></th>
+<th style="width: 25%; height: 40px;"><strong>Description</strong></th>
+</tr>
+<tr style="height: 40px;">
+<td rowspan="2" style="height: 141px; width: 20%;"><em>Clients</em> <br/><em><br/></em></td>
+<td style="height: 102px; width: 20%;"><em>Contracts_collection</em></td>
+<td style="height: 102px; width: 20%;"><strong>Record</strong></td>
+<td style="width: 25%; height: 102px;">
+<p>The <em>Contracts</em> attribute is linked to the <em>Contracts</em> template and stores multiple values (a <em>collection</em>).</p>
+</td>
+</tr>
+<tr style="height: 39px;">
+<td style="width: 20%; height: 39px;"><em>Title, Contact, Phone, Email</em></td>
+<td style="width: 20%; height: 39px;"><strong>Text</strong></td>
+<td style="width: 25%; height: 39px;">The client details.</td>
+</tr>
+<tr style="height: 39px;">
+<td rowspan="2" style="width: 20%; height: 39px;"><em>Contracts</em> <br/><em> </em></td>
+<td style="width: 20%; height: 39px;"><em style="letter-spacing: 0.2px;">Status</em></td>
+<td style="width: 20%; height: 39px;"><span style="letter-spacing: 0.2px; font-weight: 700 !important;">Record</span></td>
+<td style="width: 25%; height: 39px;">The <em>Status </em>attribute is linked to the <em>Contract Statuses</em> template.</td>
+</tr>
+<tr style="height: 39px;">
+<td style="width: 20%; height: 39px;"><em style="letter-spacing: 0.2px;">Title, Date, Total</em></td>
+<td style="width: 20%; height: 39px;"><span style="letter-spacing: 0.2px; font-weight: 700 !important;">Text</span></td>
+<td style="width: 25%; height: 39px;">The contract details.</td>
+</tr>
+<tr style="height: 39px;">
+<td style="width: 20%; height: 39px;"><em>Contract Statuses</em></td>
+<td style="width: 20%; height: 39px;"><em style="letter-spacing: 0.2px;"><em>Title</em> </em></td>
+<td style="width: 20%; height: 39px;"><span style="letter-spacing: 0.2px; font-weight: 700 !important;"><strong>Text</strong></span></td>
+<td style="width: 25%; height: 39px;">The status name.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="mcetoc_1gtt7v1rm0">Instructions</h2>
+<h3 id="mcetoc_1gtt4ll9r3">Create an Excel Export Template</h3>
+<ol class="colored_numbers_list">
+<li>Create an XLSX document as shown below:</li>
+</ol>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Example of an Excel export template" class="img-responsive" height="250" src="https://kb.cmwlab.com/assets/exp1_en.png" width="1168"/></p>
+<p class="caption" style="font-size: 15px !important;">Example of an Excel export template</p>
+</div>
+<p>In the Excel export template the <code>&amp;=data.class_property</code> placeholders are the <code style="background-color: #ffffff; letter-spacing: 0.2px;">MainData</code><span style="letter-spacing: 0.2px;"> class </span>property references filled by the C# script.</p>
+<div class="blue_note"><strong>Note:</strong> You must specify the required cell format in the Excel file. Otherwise, the data will not be exported correctly. For numeric attributes set a numeric format, for date &amp; time attributes set a date format, etc.</div>
+<ol class="colored_numbers_list" style="counter-increment: my-counter 1;">
+<li>Add the XLSX document as an export template to the <em>Clients</em> record template.</li>
+</ol>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="The export template listed on the export templates tab" class="img-responsive" height="270" src="https://kb.cmwlab.com/assets/img_6437fe0b2b90d.png" width="1005"/></p>
+<p class="caption" style="font-size: 15px !important;">The export template listed on the export templates tab</p>
+</div>
+<ol class="colored_numbers_list" style="counter-increment: my-counter 2;">
+<li>A button with the <strong>Export record</strong> operation will be automatically added to the <em>Clients</em> template:</li>
+</ol>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="The button for the Export record operation" class="img-responsive" height="310" src="https://kb.cmwlab.com/assets/img_643800d4628a9.png" width="1005"/></p>
+<p class="caption" style="font-size: 15px !important;">The button for the Export record operation</p>
+</div>
+<ol class="colored_numbers_list" style="counter-increment: my-counter 3;">
+<li>Open the button properties, and on the <strong>Script</strong> tab, enter the following C# code:</li>
+</ol>
+<div style="font-size: x-small  !important; height: 250px; overflow-y: scroll;">
+<pre class="brush: csharp; auto-links: false; toolbar: false" contenteditable="false">using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using Comindware.Data.Entity;
+using Comindware.TeamNetwork.Api.Data.UserCommands;
+using Aspose.Cells;
+using Aspose.Cells.Pivot;
+      
+class Script
+{
+    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+    {
+var objectsData = Api.TeamNetwork.ObjectService.ListWithAlias("Clients"); // system name of the Clients record template
+var dataToExport = new List();
+foreach (var objectDict in objectsData)
+{
+var ContractDataInIds = getterListSTR("Contracts_collection", objectDict); // system name of the Contracts_collection record attribute in the Clients records template
+     
+if(ContractDataInIds.Count == 0) {ContractDataInIds.Add("tempID");}
+var ContractDataInList = new List();
+foreach (var ContractDataInId in ContractDataInIds)
+{
+var ContractDataInData = GetData(ContractDataInId);
+      
+var Status_Id = getterSTR("Status", ContractDataInData); // system name of the Status record attribute in the Contracts record template
+var Status_Data = GetData(Status_Id);
+      
+var ContractDataInT = new ContractData
+{
+Name = getterSTR("Title", ContractDataInData), // system name of the Title attribute in the Contracts record template
+Date = getterDT("Date", ContractDataInData), // system name of the Date attribute in the Contracts record template
+Total = getterDC("Total", ContractDataInData), // system name of the Total attribute in the Contracts record template
+      
+Status = getterSTR("Title", Status_Data) // system name of the Title attribute in the Contract Status record template
+      
+};
+ContractDataInList.Add(ContractDataInT);
+}
+      
+var Data_ = new MainData
+{
+Client = getterSTR("Title", objectDict), // system name of the Title attribute in the Clients record template
+Contact = getterSTR("Contact", objectDict), // system name of the Contact person attribute in the Clients record template
+Phone = getterSTR("Phone", objectDict), // system name of the Phone attribute in the Clients record template
+Email = getterSTR("Email", objectDict), // system name of the Email attribute in the Clients record template
+Contract = ContractDataInList
+};
+dataToExport.Add(Data_);
+}
+      
+var content = Api.TeamNetwork.ObjectAppExportService.ExecuteExcelExportTemplate(userCommandContext.DocumentTemplateId, dataToExport);
+var result = new UserCommandResult
+{
+Success = true,
+Commited = true,
+ResultType = UserCommandResultType.File,
+File = new UserCommandFileResult()
+{
+Name = "Excel_Data.xlsx",
+Type = "Excel",
+Content = content
+      
+},
+Messages = new[]
+{
+new UserCommandMessage
+{
+Severity = SeverityLevel.Normal,
+Text = "Generated the file"
+}
+}
+};
+return result;
+    }
+      
+public static Decimal getterDC(string key, IDictionary&lt;string, object&gt; dictionary = null)
+{
+if (dictionary == null || key == null)
+{
+return 0;
+}
+var stringValue = getterSTR(key, dictionary);
+if (stringValue != null &amp;&amp; Decimal.TryParse(stringValue, out var result))
+{
+return result;
+}
+else
+{
+return 0;
+}
+}
+      
+public static DateTime? getterDT(string key, IDictionary&lt;string, object&gt; dictionary = null)
+{
+if (dictionary == null || key == null)
+{
+return null;
+}
+var stringValue = getterSTR(key, dictionary);
+if (stringValue != null &amp;&amp; DateTime.TryParse(stringValue, out var result))
+{
+return result.AddHours(5);
+}
+else
+{
+return null;
+}
+}
+      
+public static string getterSTR(string key, IDictionary&lt;string, object&gt; dictionary = null)
+{
+if (dictionary == null || key == null)
+{
+return null;
+}
+if (dictionary.TryGetValue(key, out var result))
+{
+if (result == null) return null;
+return result.ToString();
+}
+else
+{
+return null;
+}
+      
+}
+      
+public static IList getterListSTR(string key, IDictionary&lt;string, object&gt; dictionary = null)
+{
+var result = new List();
+if (dictionary != null &amp;&amp; key != null)
+{
+if (dictionary.TryGetValue(key, out var objectData))
+{
+var objectDataArray = objectData as object[];
+foreach (var singlObject in objectDataArray)
+{
+if (singlObject == null) continue;
+result.Add(singlObject.ToString());
+}
+}
+}
+return result;
+}
+      
+public static IDictionary&lt;string, object&gt; GetData(string objectId = null)
+{
+if (objectId == null || objectId.Contains("account") || objectId == "tempID")
+{
+return null;
+}
+var container = Api.TeamNetwork.ObjectAppService.GetByObject(objectId);
+var result = Api.TeamNetwork.ObjectService.GetWithAlias(container.Alias, objectId);
+return result;
+}
+}
+      
+[Serializable]
+public class MainData
+{
+public string Client { get; set; }
+public string Contact { get; set; }
+public string Phone { get; set; }
+public string Email { get; set; }
+public List Contract { get; set; }
+}
+      
+[Serializable]
+public class ContractData
+{
+public string Name { get; set; }
+public decimal Total { get; set; }
+public DateTime? Date { get; set; }
+public string Status { get; set; }
+}</pre>
+</div>
+<p> </p>
+<div class="blue_note"><strong>Note: </strong>In the script above, the lines with the attribute and template system names are marked with comments. In these lines, substitute the actual system names from your application.</div>
+<h3 id="mcetoc_1gtt42b1t2">Create a Word Export Template</h3>
+<ol class="colored_numbers_list">
+<li>Create a DOCX document as shown below:</li>
+</ol>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img class="img-responsive" src="https://kb.cmwlab.com/assets/img_643801f95205b.png" style="letter-spacing: 0.2px;"/></p>
+<p class="caption" style="font-size: 15px !important;">Example of a Word export template</p>
+<p style="text-align: left;">In the Word export template:</p>
+<ul>
+<li style="text-align: left;">The <code>row.class_property</code> placeholders are <code>MainData</code> class property references filled by the C# script.</li>
+<li style="text-align: left;">The <code>row</code> variable is the iterator for <code>MainData_</code> array, that contains <code>MainData</code> class instances.</li>
+</ul>
+<ol class="colored_numbers_list" style="counter-increment: my-counter 1;">
+<li style="text-align: left;">Add the DOCX document as an export template to the <em>Clients</em> record template.</li>
+<li style="text-align: left;">A button with the <strong>Export record</strong> operation will be automatically added to the <em>Clients</em> template.</li>
+<li style="text-align: left;">Open the button properties, and on the <strong>Script</strong> tab, enter the following C# code:</li>
+</ol>
+</div>
+<div style="font-size: x-small  !important; height: 250px; overflow-y: scroll;">
+<pre class="brush: csharp; auto-links: false; toolbar: false" contenteditable="false">using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text.RegularExpressions;
+using Comindware.Data.Entity;
+using Comindware.Platform.Api.Data;
+using Comindware.TeamNetwork.Api.Data.UserCommands;
+using System.IO;
+using System.Data;
+      
+class Script
+{
+    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+    {
+var objectsData = Api.TeamNetwork.ObjectService.ListWithAlias("Clients"); // system name of the Clients record template
+List Data_ = new List();
+foreach (var objectDict in objectsData)
+{
+var ContractDataInIds = getterListSTR("Contracts_collection", objectDict); // system name of the attribute-collection in the Clients record template
+if(ContractDataInIds.Count == 0) {ContractDataInIds.Add("tempID");}
+bool first_element = true;
+foreach (var ContractDataInId in ContractDataInIds)
+{
+var ContractDataInData = GetData(ContractDataInId);
+      
+var Status_Id = getterSTR("Status", ContractDataInData); // system name of the Status record attribute in the Contracts record template
+var Status_Data = GetData(Status_Id);
+      
+if(first_element == true)
+{
+first_element = false;
+var temp = new MainData
+{
+Client = getterSTR("Title", objectDict), // system name of the Title attribute in the Clients record template
+Contact = getterSTR("Contact", objectDict), // system name of the Contact person attribute in the Clients record template
+Phone = getterSTR("Phone", objectDict), // system name of the Phone attribute in the Clients record template
+Email = getterSTR("Email", objectDict), // system name of the Email attribute in the Clients record template
+      
+Name = getterSTR("Title", ContractDataInData), // system name of the Title attribute in the Contracts record template
+Date = getterDT("Date", ContractDataInData), // system name of the Date attribute in the Contracts record template
+Total = getterDC("Total", ContractDataInData), // system name of the Total attribute in the Contracts record template
+Status = getterSTR("Title", Status_Data) // system name of the Title attribute in the Contract statuses record template
+};
+             Data_.Add(temp);
+}
+else
+{
+var temp = new MainData
+{
+Name = getterSTR("Title", ContractDataInData), // system name of the Status attribute in the Contracts record template
+Date = getterDT("Date", ContractDataInData), // system name of the Date attribute in the Contracts record template
+Total = getterDC("Total", ContractDataInData), // system name of the Total attribute in the Contracts record template
+Status = getterSTR("Title", Status_Data) // system name of the Title attribute in the Contract statuses record template
+};
+Data_.Add(temp);
+}
+}
+}
+      
+var dataToExport = new RESULT
+{
+MainData_ = Data_
+};
+      
+        var content = Api.TeamNetwork.ObjectAppExportService.ExecuteWordExportTemplate(userCommandContext.DocumentTemplateId,dataToExport,false);
+      
+var result = new UserCommandResult
+        {
+            Success = true,
+            Commited = true,
+            File=new UserCommandFileResult(){
+                Content = content,
+Name = "Word_Data.doc",
+Type = "Word"
+            },
+            ResultType = UserCommandResultType.Notificate,
+            Messages = new[]
+            {
+                new UserCommandMessage
+                {
+                    Severity = SeverityLevel.Normal,
+                    Text = "Generated the file"
+                }
+            }
+        };
+        return result;
+    }
+      
+public static Decimal getterDC(string key, IDictionary&lt;string, object&gt; dictionary = null)
+{
+if (dictionary == null || key == null)
+{
+return 0;
+}
+var stringValue = getterSTR(key, dictionary);
+if (stringValue != null &amp;&amp; Decimal.TryParse(stringValue, out var result))
+{
+return result;
+}
+else
+{
+return 0;
+}
+}
+      
+public static DateTime? getterDT(string key, IDictionary&lt;string, object&gt; dictionary = null)
+{
+if (dictionary == null || key == null)
+{
+return null;
+}
+var stringValue = getterSTR(key, dictionary);
+if (stringValue != null &amp;&amp; DateTime.TryParse(stringValue, out var result))
+{
+return result.AddHours(5);
+}
+else
+{
+return null;
+}
+}
+      
+public static string getterSTR(string key, IDictionary&lt;string, object&gt; dictionary = null)
+{
+if (dictionary == null || key == null)
+{
+return null;
+}
+if (dictionary.TryGetValue(key, out var result))
+{
+if (result == null) return null;
+return result.ToString();
+}
+else
+{
+return null;
+}
+}
+      
+public static IList getterListSTR(string key, IDictionary&lt;string, object&gt; dictionary = null)
+{
+var result = new List();
+if (dictionary != null &amp;&amp; key != null)
+{
+if (dictionary.TryGetValue(key, out var objectData))
+{
+var objectDataArray = objectData as object[];
+foreach (var singlObject in objectDataArray)
+{
+if (singlObject == null) continue;
+result.Add(singlObject.ToString());
+}
+}
+}
+return result;
+}
+      
+public static IDictionary&lt;string, object&gt; GetData(string objectId = null)
+{
+if (objectId == null || objectId.Contains("account") || objectId == "tempID")
+{
+return null;
+}
+var container = Api.TeamNetwork.ObjectAppService.GetByObject(objectId);
+var result = Api.TeamNetwork.ObjectService.GetWithAlias(container.Alias, objectId);
+return result;
+}
+}
+      
+[Serializable]
+public class MainData
+{
+public string Client { get; set; }
+public string Contact { get; set; }
+public string Phone { get; set; }
+public string Email { get; set; }
+public string Name { get; set; }
+public decimal Total { get; set; }
+public DateTime? Date { get; set; }
+public string Status { get; set; }
+}
+      
+public class RESULT
+{
+    public List MainData_ { get; set; }
+}</pre>
+</div>
+<p> </p>
+<div class="blue_note"><strong>Note: </strong>In the script above, the lines with the attribute and template system names are marked with comments. In these lines substitute the actual system names from your application.</div>

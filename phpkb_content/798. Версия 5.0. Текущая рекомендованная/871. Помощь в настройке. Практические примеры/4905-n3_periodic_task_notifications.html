@@ -1,4 +1,4 @@
-<h1>Периодические напоминания об открытых задачах. Настройка процессов, сценария и HTML-текста письма</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4905" kb-tags="процессы,уведомления,N3,тройки,тройка,HTML,email,эл. почта,письма,таблица в письме" kb-title="Периодические напоминания об открытых задачах. Настройка процессов, сценария и HTML-текста письма">
+<h1>Периодические напоминания об открытых задачах. Настройка процессов, сценария и HTML-текста письма</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4905" kb-tags="HTML,N3,Notation 3,RDF,email,процессы,письма,триплеты,тройка,тройки,уведомления,задачи,таблица в письме,эл. почта,вычисление" kb-title="Периодические напоминания об открытых задачах. Настройка процессов, сценария и HTML-текста письма">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -9,21 +9,21 @@
       </h2>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#n3_periodic_task_notifications_intro">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_periodic_task_notifications_intro">
 <span class="md-ellipsis">
       Введение
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#n3_periodic_task_notifications_use_case">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_periodic_task_notifications_use_case">
 <span class="md-ellipsis">
       Прикладная задача
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#n3_periodic_task_notifications_solution">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_periodic_task_notifications_solution">
 <span class="md-ellipsis">
       Пример решения
     </span>
@@ -31,14 +31,14 @@
 <nav aria-label="Пример решения" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#n3_periodic_task_notifications_configure_send">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_periodic_task_notifications_configure_send">
 <span class="md-ellipsis">
       Настройка процесса «Отправка напоминания»
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#n3_periodic_task_notifications_configure_search">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_periodic_task_notifications_configure_search">
 <span class="md-ellipsis">
       Настройка процесса «Поиск сотрудников с активными задачами»
     </span>
@@ -59,23 +59,23 @@
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h2 id="n3_periodic_task_notifications_intro">Введение</h2>
+<h2 id="example_n3_periodic_task_notifications_intro">Введение</h2>
 <p><strong>Comindware Platform</strong> поддерживает отправку пользователю стандартных уведомлений о назначенных ему задачах или процессных уведомлений с информацией из бизнес-процесса.</p>
 <p>Здесь представлен пример настройки отправки исполнителям эл. писем с процессными уведомлениями о задачах в формате HTML.</p>
 <p>См. также <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4682">Уведомления. Типы, назначение, настройка, использование</a>»</em>.</p>
-<h2 id="n3_periodic_task_notifications_use_case">Прикладная задача</h2>
+<h2 id="example_n3_periodic_task_notifications_use_case">Прикладная задача</h2>
 <p>Требуется отправлять сотрудникам эл. письма с напоминаниями о назначенных им задачах:</p>
 <ul>
 <li>напоминания необходимо отправлять ежедневно в в 7:00;</li>
 <li>письмо должно содержать перечень открытых задач сотрудника в виде таблицы.</li>
 </ul>
-<h2 id="n3_periodic_task_notifications_solution">Пример решения</h2>
+<h2 id="example_n3_periodic_task_notifications_solution">Пример решения</h2>
 <p>Для реализации прикладной задачи настроим два бизнес-процесса:</p>
 <ul>
 <li><em>Поиск сотрудников с активными задачами</em> — запускается по таймеру и находит сотрудников, у которых есть открытые задачи на момент запуска, затем для каждого сотрудника запускает процесс <em>«Отправка напоминания»</em>.</li>
 <li><em>Отправка напоминания</em> — формирует и отправляет эл. письмо каждому сотруднику.</li>
 </ul>
-<h3 class="pageBreakBefore" id="n3_periodic_task_notifications_configure_send">Настройка процесса «Отправка напоминания»</h3>
+<h3 class="pageBreakBefore" id="example_n3_periodic_task_notifications_configure_send">Настройка процесса «Отправка напоминания»</h3>
 <div class="notice notice-warning">
 <p class="admonition-title">Внимание!</p>
 <p>Для корректной работы вычислений и запуска процессов указывайте в выражениях именно те системные имена шаблонов и атрибутов, которые фактически используются в вашем приложении. Они могут отличаться от указанных в примере.</p>
@@ -124,7 +124,7 @@
 </li>
 <li>Опубликуйте процесс.</li>
 </ol>
-<h3 class="pageBreakBefore" id="n3_periodic_task_notifications_configure_search">Настройка процесса «Поиск сотрудников с активными задачами»</h3>
+<h3 class="pageBreakBefore" id="example_n3_periodic_task_notifications_configure_search">Настройка процесса «Поиск сотрудников с активными задачами»</h3>
 <ol class="colored_numbers_list">
 <li>Создайте шаблон записи <em>«Сотрудники для напоминаний»</em>.</li>
 <li>Создайте шаблон процесса <em>«Поиск сотрудников с активными задачами»</em>, связанный с шаблоном <em>«Сотрудники для напоминаний»</em>.</li>
@@ -210,7 +210,7 @@
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li><a class="autorefs autorefs-internal mkdocs_imported_link" href="n3_calculate_active_task_accounts.html#n3_calculate_active_task_accounts" title="Вычисление пользователей с активными задачами">Вычисление пользователей, у которых есть активные задачи</a></li>
+<li><a class="autorefs autorefs-internal mkdocs_imported_link" href="n3_calculate_active_task_accounts.html#example_n3_calculate_active_task_accounts" title="Аккаунты и задачи. Вычисление пользователей с активными задачами с помощью N3">Вычисление пользователей, у которых есть активные задачи</a></li>
 <li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4692">Отправка эл. почты из сценариев</a></li>
 <li><a class="autorefs autorefs-internal mkdocs_imported_link" href="n3_filter_active_tasks.html#n3_filter_active_tasks" title="Фильтрация списка по активным задачам с помощью N3">Фильтр списка по активным задачам текущего пользователя: по всем процессам, по конкретному процессу</a></li>
 <li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4682">Уведомления. Типы, назначение, настройка, использование</a></li>

@@ -1,0 +1,571 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5114" kb-tags="BPMS,BPMN,HR-процессы,автоматизация,бизнес-аналитика,бизнес-процессы,внедрение BPMN,для бизнес-аналитиков,low-code,лоукод,обучение,ознакомительный курс,основы BPMS,платформа,практика,старт для аналитика,управление процессами,уроки,цифровизация,атрибуты,вакансии,кандидаты,модель данных,поля,реестр данных,связи между шаблонами,таблица,форма,шаблон записи" kb-title="Урок 2. Создание реестра данных">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_hr_lesson_2_intro">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_hr_lesson_2_definitions">
+<span class="md-ellipsis">
+      Определения
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_hr_lesson_2_taxonomy">
+<span class="md-ellipsis">
+      Темы, навыки и задания урока
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_hr_lesson_2_login">
+<span class="md-ellipsis">
+      Вход в Comindware Platform
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_hr_lesson_2_account">
+<span class="md-ellipsis">
+      Настройка аккаунта
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_hr_lesson_2_app">
+<span class="md-ellipsis">
+      Создание приложения
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_hr_lesson_2_candidates_template">
+<span class="md-ellipsis">
+      Настройка шаблона записи «Кандидаты» и его атрибутов
+    </span>
+</a>
+<nav aria-label="Настройка шаблона записи «Кандидаты» и его атрибутов" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_hr_lesson_2_candidates_attributes">
+<span class="md-ellipsis">
+      Создание атрибутов шаблона записи «Кандидаты»
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_hr_lesson_2_candidates_form">
+<span class="md-ellipsis">
+      Создание формы для ввода и просмотра данных
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_hr_lesson_2_vacancies_template">
+<span class="md-ellipsis">
+      Настройка шаблона записи «Вакансии» и его атрибутов
+    </span>
+</a>
+<nav aria-label="Настройка шаблона записи «Вакансии» и его атрибутов" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#тестирование-создание-вакансий">
+<span class="md-ellipsis">
+      Тестирование: создание вакансий
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_hr_lesson_2_candidates_link">
+<span class="md-ellipsis">
+      Установление связи между шаблонами «Кандидаты» и «Вакансии»
+    </span>
+</a>
+<nav aria-label="Установление связи между шаблонами «Кандидаты» и «Вакансии»" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#тестирование-создание-записей-о-кандидатах-для-конкретных-вакансий">
+<span class="md-ellipsis">
+      Тестирование: создание записей о кандидатах для конкретных вакансий
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#результаты">
+<span class="md-ellipsis">
+      Результаты
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="tutorial_hr_lesson_2_intro">Введение</h2>
+<p>В рамках обучения мы разработаем корпоративное приложение для управления персоналом.</p>
+<p>В ходе этого урока вы научитесь входить в <strong>Comindware Platform</strong> и ознакомитесь с основными элементами системы.</p>
+<p>Вы создадите <strong>приложение</strong>, <strong>шаблон записи</strong> (реестр кандидатов), настроите <strong>атрибуты</strong> для хранения данных кандидатов, их отображение в виде <strong>таблицы</strong> и <strong>формы</strong>, а затем оформите несколько кандидатов на вакансию.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>Мы реализуем следующий процесс обработки кандидата на вакансию:</p>
+<ol class="colored_numbers_list">
+<li><em>HR-менеджер</em> фиксирует результаты тестирования.</li>
+<li>
+<p>Если кандидат прошёл тестирование:</p>
+<ul>
+<li><em>Нанимающий менеджер</em> назначает проводит собеседование.</li>
+<li><em>Сотрудник службы безопасности</em> проводит проверку кандидата.</li>
+</ul>
+</li>
+<li>
+<p>Если кандидат прошёл собеседование и проверку службы безопасности, <em>HR-менеджер</em> формирует предложение и согласует его с кандидатом.</p>
+</li>
+</ol>
+<p>Подробные сведения о приложениях в <strong>Comindware Platform</strong> см. в разделе «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/category.php?id=832">Разработка приложений</a>».</p>
+</div>
+<p><strong>Расчётная продолжительность:</strong> 90 мин.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>В данном уроке представлен продукт <strong>Comindware Platform</strong> версии 5.0, внешний вид страниц и меню в других версиях продукта может отличаться.</p>
+</div>
+<div class="notice notice-success">
+<h2 id="tutorial_hr_lesson_2_definitions">Определения</h2>
+<ul>
+<li><strong>Приложение</strong> — настроенная в <strong>Comindware Platform</strong> совокупность  бизнес-процессов, диаграмм, моделей данных, экранных форм, механизмов обработки данных и ролевой модели для решения определённых задач.</li>
+<li><strong>Шаблон записи</strong> — модель бизнес-сущности (в виде атрибутов) и хранилище (реестр) данных в <strong>Comindware Platform</strong> (аналог таблицы реляционной базы данных или листа Excel). Записи из шаблона могут быть представлены в виде таблиц, карточек и форм. Подробные сведения о шаблонах представлены в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4759">Шаблоны. Определения и настройка</a>»</em>.</li>
+<li><strong>Запись</strong> — набор данных (значений атрибутов) в шаблоне, описывающий экземпляр бизнес-сущности (элемент справочника, транзакцию и т. п.).</li>
+<li><strong>Атрибут</strong> — простейший элемент данных, описывающий бизнес-сущность (аналог поля в реляционной БД или столбца в Excel), например: место подачи (строка), количество пассажиров (число), время подачи автомобиля (дата/время), автомобиль (ссылка) и т. п.</li>
+<li><strong>Форма</strong> — страница с полями для отображения и ввода данных.</li>
+<li><strong>Таблица</strong> — список, содержащий записи в строках со значениями атрибутов в столбцах. В таблице можно настроить фильтры для для отображения определённых записей.</li>
+</ul>
+</div>
+<h2 id="tutorial_hr_lesson_2_taxonomy">Темы, навыки и задания урока</h2>
+<p><strong>Темы</strong></p>
+<ul>
+<li>Вход в систему и смена пароля</li>
+<li>Приложение</li>
+<li>Шаблон записи</li>
+<li>Запись</li>
+<li>Атрибут</li>
+<li>Типы атрибутов</li>
+<li>Форма</li>
+</ul>
+<p><strong>Навыки</strong></p>
+<ul>
+<li>Создавать приложение, шаблон записи, атрибуты, формы</li>
+<li>Различать типы атрибутов</li>
+<li>Создавать связанные шаблоны</li>
+<li>Создавать и редактировать записи</li>
+</ul>
+<p><strong>Задания</strong></p>
+<ul>
+<li>Получить доступ к системе и научиться настраивать свой аккаунт (например, сменить пароль).</li>
+<li>Инициировать создание приложения для поддержки процесса управления персоналом.</li>
+<li>Спроектировать модель данных для ключевых бизнес-сущностей:<ul>
+<li>определить шаблон записи «Кандидаты»;</li>
+<li>выделить основные атрибуты, отражающие бизнес-требования;</li>
+<li>создать атрибуты: Ф. И. О, результат тестирования, дата собеседования, оценка и др.</li>
+</ul>
+</li>
+<li>Настроить графический интерфейс для обработки данных: организовать формы и таблицы для удобного ввода и просмотра информации о кандидатах.</li>
+<li>Смоделировать связанные бизнес-сущности и их взаимосвязи:<ul>
+<li>создать шаблон записи <em>«Вакансии»</em>;</li>
+<li>определить ключевые атрибуты (например, наименование вакансии);</li>
+<li>установить связь между кандидатами и вакансиями.</li>
+</ul>
+</li>
+<li>Определить связи между объектами: обеспечить возможность назначения кандидатов на открытые вакансии, чтобы поддерживать бизнес-сценарии подбора персонала.</li>
+</ul>
+<h2 id="tutorial_hr_lesson_2_login">Вход в Comindware Platform</h2>
+<ol class="colored_numbers_list">
+<li>Запустите браузер и введите в адресную строку адрес веб-сайта с <strong>Comindware Platform</strong>, развёрнутого в вашей компании или в облаке <strong>Comindware</strong> (если используется демо-доступ).</li>
+<li>Должна отобразиться страница входа.</li>
+<li>Введите имя пользователя и пароль, полученные от администратора или от службы поддержки <strong>Comindware</strong>.</li>
+<li>Нажмите кнопку «<strong>Войти</strong>».</li>
+<li>Отобразится начальная страница <strong>Comindware Platform</strong>. </li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Страница входа в Comindware Platform" src="/platform/v5.0/tutorial_hr/img/lesson_2_login_page.png"/><figcaption class="caption">Страница входа в Comindware Platform</figcaption></p>
+</figure>
+<h2 id="tutorial_hr_lesson_2_account">Настройка аккаунта</h2>
+<p>В разделе «<strong>Мой аккаунт</strong>» вы можете просмотреть персональную информацию и сменить пароль.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Некоторые или все действия в разделе «<strong>Мой аккаунт</strong>» для вас могут быть недоступны в зависимости от разрешений, выданных системным администратором.</p>
+</div>
+<ol class="colored_numbers_list">
+<li>Нажмите значок с вашими инициалами в правом верхнем углу страницы.</li>
+<li>Выберите пункт «<strong>Мой аккаунт</strong>».</li>
+<li>
+<p>Должен отобразиться раздел «<strong>Мой аккаунт</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Переход в «Мой аккаунт»" src="/platform/v5.0/tutorial_hr/img/lesson_2_go_to_my_account.png"/><figcaption class="caption">Переход в «Мой аккаунт»</figcaption></figure></p>
+</li>
+<li>
+<p>Чтобы сменить пароль, нажмите кнопку «<strong>Сменить пароль</strong>».</p>
+</li>
+<li>
+<p>Чтобы изменения вступили в силу, нажмите кнопку «<strong>Сохранить</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Мой аккаунт — просмотр сведений, смена пароля и сохранение изменений" src="/platform/v5.0/tutorial_hr/img/lesson_2_my_account_change_password.png"/><figcaption class="caption">Мой аккаунт — просмотр сведений, смена пароля и сохранение изменений</figcaption></figure></p>
+</li>
+</ol>
+<h2 id="tutorial_hr_lesson_2_app">Создание приложения</h2>
+<p>Создадим приложение для автоматизации управления персоналом.</p>
+<ol class="colored_numbers_list">
+<li>На панели навигации слева выберите пункт «<strong>Настройки</strong>» — «<strong>Приложения</strong>».</li>
+<li>
+<p>Нажмите кнопку «<strong>Создать</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Переход к созданию приложения" src="/platform/v5.0/tutorial_hr/img/lesson_2_app_create.png"/><figcaption class="caption">Переход к созданию приложения</figcaption></figure></p>
+</li>
+<li>
+<p>Введите наглядное название приложения, например <em>«Управление персоналом»</em>. После заполнения имени поле «<strong>Системное имя</strong>» заполнится автоматически, при желании вы можете ввести собственное системное имя.</p>
+<div class="notice notice-success">
+<p class="admonition-title">Системное имя и отображаемое название</p>
+<ul>
+<li>У сущностей в <strong>Comindware Platform</strong> предусмотрены <strong>системное имя</strong> и <strong>название</strong>.</li>
+<li><strong>Системное имя</strong> — это идентификатор сущности (атрибута, шаблона, поля и т. п.), используемый в сценариях, скриптах, правилах, формулах и выражениях.
+    Не должно начинаться с цифры. Разрешены английские и русские буквы, цифры и символ «_». Рекомендуется использовать английские буквы.
+    Обычно заполняется автоматически по названию.</li>
+<li><strong>Название</strong> и <strong>отображаемое название</strong> — это наглядная подпись сущности (атрибута, шаблона, формы, поля, кнопки, таблицы и т. п.). Название может содержать любые символы и по возможности должно быть кратким и понятным. </li>
+</ul>
+</div>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Сохранить</strong>».</p>
+</li>
+<li>
+<p>Будет создано приложение <em>«Управление персоналом»</em>.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка свойств нового приложения" src="/platform/v5.0/tutorial_hr/img/lesson_2_app_configure.png"/><figcaption class="caption">Настройка свойств нового приложения</figcaption></figure></p>
+</li>
+<li>
+<p>Дважды нажмите строку созданного приложения в списке.</p>
+</li>
+<li>
+<p>Отобразится страница «<strong>Администрирование</strong>» приложения.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Переход к странице администрирования приложения" src="/platform/v5.0/tutorial_hr/img/lesson_2_app_list.png"/><figcaption class="caption">Переход к странице администрирования приложения</figcaption></figure></p>
+</li>
+<li>
+<p>Теперь можно приступать к моделированию данных: созданию реестров (шаблонов записей) и атрибутов, описывающих бизнес-сущности.</p>
+</li>
+</ol>
+<h2 id="tutorial_hr_lesson_2_candidates_template">Настройка шаблона записи «Кандидаты» и его атрибутов</h2>
+<p>Настроим реестр для хранения данных кандидатов на вакансию — создадим <strong>шаблон записи</strong>.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>На странице «<strong>Администрирование</strong>» приложения <em>«Управление персоналом»</em> выберите пункт «<strong>Шаблоны</strong>» <i class="fa-light fa-briefcase">&zwnj;<!--icon--></i>.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Переход к списку шаблонов приложения" src="/platform/v5.0/tutorial_hr/img/lesson_2_template_list_open.png"/><figcaption class="caption">Переход к списку шаблонов приложения</figcaption></figure></p>
+</li>
+<li>
+<p>Отобразится список всех шаблонов приложения.</p>
+</li>
+<li>Перейдите на вкладку «<strong>Шаблоны записей</strong>».</li>
+<li>
+<p>Нажмите кнопку «<strong>Создать</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Переход к созданию шаблона записи" src="/platform/v5.0/tutorial_hr/img/lesson_2_record_template_create.png"/><figcaption class="caption">Переход к созданию шаблона записи</figcaption></figure></p>
+</li>
+<li>
+<p>Отобразится окно «<strong>Новый шаблон</strong>».</p>
+</li>
+<li>В поле «<strong>Название</strong>» введите наглядное наименование шаблона — <em>«Кандидаты»</em>.</li>
+<li><strong>Системное имя</strong> будет заполнено автоматически.</li>
+<li>В поле «<strong>Тип шаблона</strong>» должно быть автоматически выбрано значение «<strong>Шаблон записи</strong>».</li>
+<li>Остальные поля оставьте без изменений.</li>
+<li>Нажмите кнопку «<strong>Создать</strong>».</li>
+<li>
+<p>Будет создан шаблон записи <em>«Кандидаты»</em>, и отобразится страница его настройки.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Создание шаблона записи" src="/platform/v5.0/tutorial_hr/img/lesson_2_record_template_configure.png"/><figcaption class="caption">Создание шаблона записи</figcaption></figure></p>
+</li>
+<li>
+<p>Теперь можно создавать атрибуты, описывающие свойства бизнес-сущностей.</p>
+</li>
+</ol>
+<h3 id="tutorial_hr_lesson_2_candidates_attributes">Создание атрибутов шаблона записи «Кандидаты»</h3>
+<p>Определим данные кандидатов на вакансию, которые необходимо хранить в <strong>шаблоне записи</strong> — создадим атрибуты, описывающие и хранящие сведения о кандидате. Эти атрибуты потребуются для обработки кандидата в процессе найма.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Следуя гибкой методологии, на начальном этапе мы не зададим все атрибуты, а ограничимся минимально необходимыми.</p>
+<p>Наша цель — как можно быстрее сделать работоспособное приложение и показать первым пользователям.</p>
+<p>Затем, получив от обратную связь от пользователей, мы будем добавлять в нашу таблицу новые атрибуты и вносить другие доработки по их пожеланиям. </p>
+</div>
+<div class="notice notice-success">
+<p class="admonition-title">Типы атрибутов</p>
+<p>В <strong>Comindware Platform</strong> предусмотрены атрибуты различных типов для хранения бизнес-данных.</p>
+<ul>
+<li><strong>Текст</strong> — строковое значение. Можно выбрать <strong>формат отображения</strong> значения атрибута:<ul>
+<li><strong>Обычный текст</strong> — без форматирования;</li>
+<li><strong>Размеченный текст</strong> — базовое форматирование (жирный, курсив, списки).</li>
+<li><strong>HTML-текст</strong> — расширенное форматирование с помощью тегов HTML.</li>
+<li><strong>Телефон (РФ)</strong>, <strong>Адрес эл. почты</strong>, <strong>Паспорт (РФ)</strong>, <strong>Индекс (РФ)</strong>, <strong>ИНН юрлица</strong>, <strong>ИНН физлица</strong>, <strong>ОГРН (РФ)</strong>, <strong>Регистрационный номер ТС (РФ)</strong>, <strong>Особая маска</strong> — значение атрибута форматируется с использованием маски в виде регулярного выражения.</li>
+</ul>
+</li>
+<li><strong>Число</strong> — числовое значение. Можно выбрать <strong>количество знаков после запятой</strong>:<ul>
+<li><strong>Не преобразовывать</strong> — значение отображается в том же формате, что его ввёл пользователь;</li>
+<li><strong>0</strong> — значение отображается в виде целого числа;</li>
+<li><strong>1–6</strong> — значение отображается в виде десятичной дроби с указанным количеством знаков после запятой;</li>
+</ul>
+</li>
+<li><strong>Дата и время</strong> — значение даты и времени. Доступно несколько <strong>форматов отображения</strong>, позволяющих выводить либо только дату, либо дату и время.</li>
+<li><strong>Документ</strong> — к атрибуту можно прикрепить любые файлы, например в формате Word, PDF или ZIP.</li>
+<li><strong>Изображение</strong> — к атрибуту можно прикрепить изображения, например сканы документов или фотографии.</li>
+</ul>
+<p>Кроме того, <strong>Comindware Platform</strong> поддерживает атрибуты следующих типов: <strong>Аккаунт</strong>, <strong>Гиперссылка</strong>, <strong>Длительность</strong>, <strong>Запись</strong>, <strong>Логический</strong>, <strong>Организационная единица</strong>, <strong>Роль</strong>, <strong>Список значений</strong>. С некоторыми из них мы познакомимся позже.</p>
+<p>Подробные сведения об атрибутах см. в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4772">Атрибуты. Определения и настройка</a>»</em> </p>
+</div>
+<ol class="colored_numbers_list">
+<li>Перейдите на вкладку «<strong>Атрибуты</strong>».</li>
+<li>
+<p>Нажмите кнопку «<strong>Создать</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Переход к созданию атрибута шаблона записи" src="/platform/v5.0/tutorial_hr/img/lesson_2_attribute_create.png"/><figcaption class="caption">Переход к созданию атрибута шаблона записи</figcaption></figure></p>
+</li>
+<li>
+<p>Отобразится окно «<strong>Новый атрибут</strong>».</p>
+</li>
+<li>Введите <strong>название</strong> <em>«Ф. И. О. кандидата»</em>.</li>
+<li><strong>Системное имя</strong> будет заполнено автоматически.</li>
+<li>Выберите <strong>тип данных</strong> «<strong>Текст</strong>».</li>
+<li>Остальные поля оставьте без изменений.</li>
+<li>Нажмите кнопку «<strong>Сохранить</strong>».</li>
+<li>
+<p>Будет создан атрибут <em>«Ф. И. О. кандидата»</em>.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка свойств атрибута" src="/platform/v5.0/tutorial_hr/img/lesson_2_attribute_configure.png"/><figcaption class="caption">Настройка свойств атрибута</figcaption></figure></p>
+</li>
+<li>
+<p>Аналогичным образом создайте следующие атрибуты:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Тип данных</th>
+<th>Название</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Дата и время</strong></td>
+<td><em>Дата и время собеседования</em></td>
+</tr>
+<tr>
+<td><strong>Логический</strong></td>
+<td><em>Результат тестирования</em></td>
+</tr>
+<tr>
+<td><strong>Число</strong></td>
+<td><em>Оценка за собеседование</em></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Теперь можно приступать к настройке формы, с помощью которой пользователи будут вводить и просматривать данные.</p>
+</li>
+</ol>
+<h3 id="tutorial_hr_lesson_2_candidates_form">Создание формы для ввода и просмотра данных</h3>
+<p>Настроим экранную форму для заполнения и просмотра данных кандидата.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>На странице шаблона записи <em>«Кандидаты»</em> выберите вкладку «<strong>Формы</strong>».</p>
+<div class="notice notice-info">
+<p class="admonition-title">Основная форма шаблона</p>
+<p>При создании шаблона записи автоматически создаётся пустая <strong>основная форма</strong>, в которой по умолчанию открываются записи шаблона (как для ввода, так и для просмотра данных).</p>
+<p>Для шаблона записи <em>«Кандидаты»</em> была создана форма <em>«Кандидаты — Основная форма»</em>.</p>
+</div>
+</li>
+<li>
+<p>В списке форм дважды нажмите пункт <em>«Кандидаты — Основная форма»</em>.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Переход к редактированию формы из списка" src="/platform/v5.0/tutorial_hr/img/lesson_2_form_edit.png"/><figcaption class="caption">Переход к редактированию формы из списка</figcaption></figure></p>
+</li>
+<li>
+<p>Отобразится <strong>конструктор формы</strong>:</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Конструктор формы" src="/platform/v5.0/tutorial_hr/img/lesson_2_form_designer.png"/><figcaption class="caption">Конструктор формы</figcaption></figure></p>
+<div class="notice notice-success">
+<p class="admonition-title">Конструктор формы</p>
+<p><strong>Конструктор формы</strong> разбит на четыре области:</p>
+<p><strong>(1)</strong> <strong>Панель элементов</strong> — палитра элементов, которые можно перетащить на форму: атрибуты и вспомогательные визуальные элементы (<strong>Область</strong>, <strong>Вкладки</strong>, <strong>Группа кнопок</strong>, <strong>Разделитель кнопок</strong>, <strong>Колонки</strong>, <strong>Статичный текст</strong>).</p>
+<p><strong>(2)</strong> <strong>Макет формы</strong> — эскиз экранной формы.</p>
+<p><strong>(3)</strong> <strong>Панель свойств</strong> — позволяет просмотреть и изменить свойства выбранного элемента.</p>
+<p><strong>(4)</strong> <strong>Кнопки</strong> — <strong>Сохранить</strong>, <strong>Очистить</strong>, <strong>Клонировать</strong>, <strong>Настроить шаблон</strong> <i class="fa-light fa-pen-square">&zwnj;<!--icon--></i>, <strong>Связи</strong> <i class="fa-light fa-link-horizontal">&zwnj;<!--icon--></i>.</p>
+<p>В <strong>конструкторе форм</strong> предусмотрен богатый набор элементов и функций, но в данном уроке мы рассмотрим только основные из них. Вы можете самостоятельно поэкспериментировать с элементами и настройками формы.</p>
+<p>Подробные сведения о настройке форм см. в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4786">Формы. Определения и настройка</a>»</em>. </p>
+</div>
+</li>
+<li>
+<p>Перетащите на макет формы элемент «<strong>Область</strong>» с панели элементов.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Визуальные элементы формы</p>
+<p>Чтобы сделать форму более удобной для пользователя, используйте следующие элементы:</p>
+<ul>
+<li><strong>Область</strong> — визуально группирует поля, имеет заголовок и может содержать кнопки. На форме должна быть как минимум одна область.</li>
+<li><strong>Статичный текст</strong> — отображает текст, доступный только для чтения.</li>
+<li><strong>Вкладки</strong> — позволяет распределить поля по вкладкам, между которыми пользователь может переходить.</li>
+<li><strong>Колонки</strong> — позволяет расположить поля в несколько столбцов. </li>
+</ul>
+</div>
+</li>
+<li>
+<p>В свойствах области введите название <em>«Данные кандидата»</em>.</p>
+</li>
+<li>
+<p>Перетащите на макет формы атрибут <em>«Ф. И. О. кандидата»</em> с панели элементов.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Перетаскивание атрибута на форму" src="/platform/v5.0/tutorial_hr/img/lesson_2_form_add_field.png"/><figcaption class="caption">Перетаскивание атрибута на форму</figcaption></figure></p>
+</li>
+</ol>
+<h2 id="tutorial_hr_lesson_2_vacancies_template">Настройка шаблона записи «Вакансии» и его атрибутов</h2>
+<p>Внутри одного приложения можно создать несколько шаблонов записи для раздельного хранения данных в соответствии с их типами.</p>
+<ol class="colored_numbers_list">
+<li>На странице «<strong>Администрирование</strong>» приложения <em>«Управление персоналом»</em> выберите пункт «<strong>Шаблоны</strong>» <i class="fa-light fa-briefcase">&zwnj;<!--icon--></i>.</li>
+<li>Отобразится список всех шаблонов приложения.</li>
+<li>Перейдите на вкладку «<strong>Шаблоны записей</strong>».</li>
+<li>Нажмите кнопку «<strong>Создать</strong>».</li>
+<li>Отобразится окно «<strong>Новый шаблон</strong>».</li>
+<li>В поле «<strong>Название</strong>» введите <em>«Вакансии»</em>.</li>
+<li>В поле «<strong>Тип шаблона</strong>» должно быть автоматически выбрано значение «<strong>Шаблон записи</strong>».</li>
+<li>Нажмите кнопку «<strong>Создать</strong>».</li>
+<li>Будет создан шаблон записи <em>«Вакансии»</em>, и отобразится страница его настройки.</li>
+<li>Перейдите на вкладку «<strong>Атрибуты</strong>».</li>
+<li>Нажмите кнопку «<strong>Создать</strong>».</li>
+<li>Отобразится окно «<strong>Новый атрибут</strong>».</li>
+<li>Введите <strong>название</strong> <em>«Название вакансии»</em>.</li>
+<li>Выберите <strong>тип данных</strong> «<strong>Текст</strong>».</li>
+<li>
+<p>Установите флажок «<strong>Использовать как заголовок записей</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка атрибута «Название вакансии»" src="/platform/v5.0/tutorial_hr/img/lesson_2_attribute_title_use.png"/><figcaption class="caption">Настройка атрибута «Название вакансии»</figcaption></figure></p>
+<div class="notice notice-success">
+<p class="admonition-title">Атрибут-заголовок записей</p>
+<p>Шаблон записи имеет заголовок, который отображается на формах и в таблицах. </p>
+<p>По умолчанию в качестве заголовка используется системный атрибут <strong>ID</strong>, содержащий цифровой <strong>идентификатор</strong> записи.</p>
+<p>Чтобы выводить наглядный заголовок записи, используйте подходящий атрибут: установите в его свойствах флажок «<strong>Использовать как заголовок записей</strong>». После этого в заголовках записей будет отображаться значение данного атрибута.</p>
+<p>В качестве заголовка записи можно использовать атрибуты следующих типов: <strong>Аккаунт</strong>, <strong>Дата и время</strong>, <strong>Длительность</strong>, <strong>Текст</strong>, <strong>Число</strong>.</p>
+<p>В качестве заголовка записи можно использовать только один атрибут шаблона. </p>
+</div>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Сохранить</strong>».</p>
+</li>
+<li>Будет создан атрибут <em>«Название вакансии»</em>.</li>
+<li>Перейдите на вкладку «<strong>Формы</strong>».</li>
+<li>В списке форм дважды нажмите пункт <em>«Вакансии — Основная форма»</em>.</li>
+<li>Отобразится <strong>конструктор формы</strong>.</li>
+<li>Перетащите на макет формы элемент «<strong>Область</strong>» с панели элементов.</li>
+<li>Перетащите на макет формы атрибут <em>«Название вакансии»</em> с панели элементов.</li>
+<li>
+<p>Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка формы шаблона «Вакансии»" src="/platform/v5.0/tutorial_hr/img/lesson_2_form_vacancy.png"/><figcaption class="caption">Настройка формы шаблона «Вакансии»</figcaption></figure></p>
+</li>
+<li>
+<p>Теперь можно проверить работу шаблона и формы.</p>
+</li>
+</ol>
+<h3 id="тестирование-создание-вакансий">Тестирование: создание вакансий</h3>
+<p>Мы создали форму для заполнения данных вакансий.</p>
+<p>Теперь протестируем её, создав несколько вакансий и отредактировав одну из них.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>На странице шаблона записи <em>«Вакансии»</em> нажмите кнопку «<strong>Перейти к экземплярам</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Переход к списку записей шаблона" src="/platform/v5.0/tutorial_hr/img/lesson_2_open_record_list.png"/><figcaption class="caption">Переход к списку записей шаблона</figcaption></figure></p>
+</li>
+<li>
+<p>Откроется список всех записей.</p>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Создать</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Переход к созданию записи из списка записей шаблона" src="/platform/v5.0/tutorial_hr/img/lesson_2_template_record_create.png"/><figcaption class="caption">Переход к созданию записи из списка записей шаблона</figcaption></figure></p>
+</li>
+<li>
+<p>В поле <em>«Название»</em> введите <em>«Проектный менеджер»</em>.</p>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Создание новой вакансии" src="/platform/v5.0/tutorial_hr/img/lesson_2_new_record_create.png"/><figcaption class="caption">Создание новой вакансии</figcaption></figure></p>
+</li>
+<li>
+<p>Нажмите ссылку <em>«Вакансии»</em> над формой, чтобы вернуться к списку вакансий.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Переход к списку записей шаблона" src="/platform/v5.0/tutorial_hr/img/lesson_2_back_to_record_list.png"/><figcaption class="caption">Переход к списку записей шаблона</figcaption></figure></p>
+</li>
+<li>
+<p>Аналогичным образом создайте ещё две вакансии:</p>
+<ul>
+<li><em>Менеджер по продажам</em></li>
+<li><em>Операционный менеджер</em></li>
+</ul>
+</li>
+</ol>
+<h2 id="tutorial_hr_lesson_2_candidates_link">Установление связи между шаблонами «Кандидаты» и «Вакансии»</h2>
+<p>Свяжем созданные шаблоны, чтобы для каждого кандидата можно было указать, на какую вакансию он претендует. Для этого используем атрибут типа «<strong>Запись</strong>».</p>
+<ol class="colored_numbers_list">
+<li>Откройте шаблон записи <em>«Кандидаты»</em>.</li>
+<li>Перейдите на вкладку <strong>«Атрибуты»</strong>.</li>
+<li>Нажмите кнопку <strong>«Создать»</strong>.</li>
+<li>Отобразится окно «<strong>Новый атрибут</strong>».</li>
+<li>В поле <strong>«Название»</strong> введите <em>«Вакансия»</em>.</li>
+<li>Выберите <strong>тип данных</strong> <em>«Запись»</em>.</li>
+<li>В поле <strong>«Связанный шаблон»</strong> выберите шаблон <em>«Вакансии»</em>.</li>
+<li>
+<p>Нажмите кнопку <strong>«Сохранить»</strong>.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Создание связи между шаблонами при помощи атрибута" src="/platform/v5.0/tutorial_hr/img/lesson_2_attribute_related_record.png"/><figcaption class="caption">Создание связи между шаблонами при помощи атрибута</figcaption></figure></p>
+</li>
+<li>
+<p>Перейдите на вкладку <strong>«Формы»</strong> шаблона <em>«Кандидаты»</em>.</p>
+</li>
+<li>Дважды нажмите на строку <em>«Кандидаты — Основная форма»</em>.</li>
+<li>Откроется <strong>конструктор формы</strong>.</li>
+<li>Поместите атрибут <em>«Вакансия»</em> на макет формы.</li>
+<li>
+<p>Нажмите кнопку <strong>«Сохранить»</strong>.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Добавление атрибута «Вакансия» на форму" src="/platform/v5.0/tutorial_hr/img/lesson_2_form_attribute_add.png"/><figcaption class="caption">Добавление атрибута «Вакансия» на форму</figcaption></figure></p>
+</li>
+</ol>
+<h3 id="тестирование-создание-записей-о-кандидатах-для-конкретных-вакансий">Тестирование: создание записей о кандидатах для конкретных вакансий</h3>
+<p>Теперь, когда шаблон связаны, протестируем создание записей о кандидатах и выбор вакансии для каждого из них.</p>
+<ol class="colored_numbers_list">
+<li>Откройте шаблон записи <em>«Кандидаты»</em>.</li>
+<li>Нажмите кнопку <strong>«Перейти к экземплярам»</strong>.</li>
+<li>Откроется список всех кандидатов.</li>
+<li>Нажмите кнопку <strong>«Создать»</strong>.</li>
+<li>Откроется форма записи.</li>
+<li>Заполните поля на форме.</li>
+<li>
+<p>Нажмите кнопку <strong>«Сохранить»</strong>.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Пример заполненной записи кандидата" src="/platform/v5.0/tutorial_hr/img/lesson_2_record_example.png"/><figcaption class="caption">Пример заполненной записи кандидата</figcaption></figure></p>
+</li>
+<li>
+<p>Нажмите ссылку <em>«Кандидаты»</em> над формой, чтобы вернуться к списку заявок.</p>
+</li>
+<li>Аналогичным образом создайте ещё несколько кандидатов, выбирая для них разные вакансии.</li>
+<li>После сохранения каждой записи они отобразятся в списке.</li>
+<li>Чтобы отредактировать данные кандидата, откройте запись и внесите в неё изменения.</li>
+</ol>
+<h2 id="результаты">Результаты</h2>
+<p>Вы создали свой первый шаблон записи (реестр данных), настроили форму и научились её заполнять.</p>
+<p>В <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5115">следующем уроке</a> вы узнаете, как спроектировать и запустить бизнес-процесс.</p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

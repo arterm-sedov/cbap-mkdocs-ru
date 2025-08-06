@@ -1,0 +1,153 @@
+<h1>Атрибут «Дата и время». Форматирование значений с помощью формул и N3</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr">
+<div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#прикладная-задача"> <span class="md-ellipsis"> Прикладная задача </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#исходные-данные"> <span class="md-ellipsis"> Исходные данные </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-форматирования"> <span class="md-ellipsis"> Настройка форматирования </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#тестирование"> <span class="md-ellipsis"> Тестирование </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>В свойствах атрибута «<strong>Дата и время</strong>» задаётся <strong>формат отображения</strong> из готового перечня, который нельзя изменить.</p>
+<p>Для реализации бизнес-требований может потребоваться выводить дату и время в особом формате. Например, может быть необходимо отображать только время без даты или передавать дату и время в виде строки в формате ISO 8061. Для этого можно отформатировать значение даты и времени с помощью <strong>формулы</strong> или <strong>N3</strong> и записать его в <strong>текстовый</strong> атрибут.</p>
+<p>Функции форматирования дат и времени позволяют извлечь: год, месяц, число, минуты, секунды и т.п.</p>
+<p>Здесь представлен пример форматирования значения атрибута «<strong>Дата и время</strong>» с помощью формулы и выражения на N3.</p>
+<div class="notice notice-success">
+<p class="admonition-title">Структура атрибута «Дата и время»</p>
+<ul>
+<li>
+<p>Значение даты и времени в базе данных хранится в часовом поясе <code>UTC+0</code>:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>2020-12-10T07:45:00Z</code> </pre>
+</div>
+</li>
+<li>
+<p>Значение даты и времени отображается в соответствии с настройками часового пояса. См.:</p>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5098">Атрибут типа «Часовой пояс»</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4785#form_dynamic_elements_date_time">Настройка поля атрибута типа «<strong>Дата и время</strong>» на форме</a></em></li>
+</ul>
+</li>
+<li>Исходный формат отображения даты и времени задаётся в свойствах атрибута из готового перечня. Этот формат используется при отображении даты и времени на формах, в таблицах и карточках, а также при выгрузке данных с помощью шаблонов экспорта. См.:
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4777#attribute_date_time_properties">Свойства атрибута</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4777#attribute_date_time_import_export">Импорт и экспорт значений даты и времени</a></em></li>
+</ul>
+</li>
+<li>Значение даты и времени можно форматировать при объявлении, вычислении и экспорте. См.:
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4794#export_template_file_formula_format_values_date_time_formatting_symbols">Символы форматирования дат и времени</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4977">Атрибут «Дата и время». Форматирование значений с помощью формул и N3</a></em></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="прикладная-задача">Прикладная задача</h2>
+<p>В HTTP-запросе требуется передавать отдельно дату и время создания записи в формате ISO 8061:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="nt">"creationDate"</span><span class="p">:</span> <span class="nt">"YYYYMMDD"</span></code> <br/><code><span class="nt">"creationTime"</span><span class="p">:</span> <span class="s2">"hhmmss"</span></code> </pre>
+</div>
+<h2 id="исходные-данные">Исходные данные</h2>
+<p>Имеется шаблон записи <em>«Заявки»</em>.</p>
+<p>В заявке имеется системный атрибут «<strong>Дата создания</strong>».</p>
+<p>Данные заявки передаются в стороннюю систему через HTTP с помощью сценария <em>«Отправка заявки»</em>.</p>
+<p>Сценарий запускается по нажатию кнопки <em>«Отправить заявку»</em>.</p>
+<h2 id="настройка-форматирования">Настройка форматирования</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>В шаблоне <em>«Заявки»</em> создайте атрибут:</p>
+<ul>
+<li><strong>Название:</strong> <em>Дата создания ISO</em></li>
+<li><strong>Тип данных: текст</strong></li>
+<li><strong>Формат отображения: обычный</strong></li>
+<li><strong>Вычислять автоматически</strong></li>
+<li>
+<p><strong>Вычисляемое значение:</strong></p>
+<ul>
+<li><strong>Формула</strong></li>
+</ul>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">#</span> <span class="err">Форматируем</span> <span class="err">значение</span> <span class="err">системного</span> <span class="err">атрибута</span> <span class="err">«Дата</span> <span class="err">создания»</span></code> <br/><code><span class="o">#</span> <span class="err">согласно</span> <span class="err">стандарту</span> <span class="n">ISO</span> <span class="mi">8061</span><span class="p">.</span></code> <br/><code><span class="n">FORMAT</span><span class="p">(</span><span class="ss">"{0:YYYYMMDD}"</span><span class="p">,</span> <span class="n">LIST</span><span class="p">(</span><span class="err">$</span><span class="n">_creationDate</span><span class="p">))</span></code> </pre>
+</div>
+<p>или</p>
+<ul>
+<li><strong>N3</strong></li>
+</ul>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="c"># Импортируем функции для работы с объектами и строками.</span></code> <br/><code><span class="k">@prefix</span> <span class="nn">object:</span> <span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span> </code> <br/><code><span class="k">@prefix</span> <span class="nn">string:</span> <span class="nv">&lt;http://www.w3.org/2000/10/swap/string#&gt;</span><span class="p">.</span> </code> <br/><code><span class="p">{</span> </code> <br/><code>    <span class="c"># Находим атрибут «Дата создания» в шаблоне «Заявки».</span></code> <br/><code>    <span class="p">(</span><span class="s">"Заявки"</span> <span class="s">"_creationDate"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?creationDateAttribute</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получаем значение атрибута в текущей записи.</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?creationDateAttribute</span> <span class="err">?creationDateValue</span><span class="p">.</span></code> <br/><code>    <span class="c"># Форматируем дату и время согласно стандарту ISO 8061.</span></code> <br/><code>    <span class="p">(</span><span class="s">"{0:YYYYMMDD}"</span> <span class="err">?creationDateValue</span><span class="p">)</span> <span class="nn">string</span><span class="p">:</span><span class="nt">format</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span> </code> </pre>
+</div>
+</li>
+</ul>
+</li>
+<li>
+<p>В шаблоне <em>«Заявки»</em> создайте атрибут:</p>
+<ul>
+<li><strong>Название:</strong> <em>Время создания ISO</em></li>
+<li><strong>Тип данных: текст</strong></li>
+<li><strong>Формат отображения: обычный</strong></li>
+<li><strong>Вычислять автоматически</strong></li>
+<li>
+<p><strong>Вычисляемое значение:</strong></p>
+<ul>
+<li><strong>Формула</strong></li>
+</ul>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">#</span> <span class="err">Форматируем</span> <span class="err">значение</span> <span class="err">системного</span> <span class="err">атрибута</span> <span class="err">«Дата</span> <span class="err">создания»</span></code> <br/><code><span class="o">#</span> <span class="err">согласно</span> <span class="err">стандарту</span> <span class="n">ISO</span> <span class="mi">8061</span><span class="p">.</span></code> <br/><code><span class="n">FORMAT</span><span class="p">(</span><span class="ss">"{0:hhmmss}"</span><span class="p">,</span> <span class="n">LIST</span><span class="p">(</span><span class="err">$</span><span class="n">_creationDate</span><span class="p">))</span></code> </pre>
+</div>
+<p>или</p>
+<ul>
+<li><strong>N3</strong></li>
+</ul>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="c"># Импортируем функции для работы с объектами и строками.</span></code> <br/><code><span class="k">@prefix</span> <span class="nn">object:</span> <span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span> </code> <br/><code><span class="k">@prefix</span> <span class="nn">string:</span> <span class="nv">&lt;http://www.w3.org/2000/10/swap/string#&gt;</span><span class="p">.</span> </code> <br/><code><span class="p">{</span> </code> <br/><code>    <span class="c"># Находим атрибут «Дата создания» в шаблоне «Заявки».</span></code> <br/><code>    <span class="p">(</span><span class="s">"Заявки"</span> <span class="s">"_creationDate"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?creationDateAttribute</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получаем значение атрибута в текущей записи.</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?creationDateAttribute</span> <span class="err">?creationDateValue</span><span class="p">.</span></code> <br/><code>    <span class="c"># Форматируем дату и время согласно стандарту ISO 8061.</span></code> <br/><code>    <span class="p">(</span><span class="s">"{0:hhmmss}"</span> <span class="err">?creationDateValue</span><span class="p">)</span> <span class="nn">string</span><span class="p">:</span><span class="nt">format</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span> </code> </pre>
+</div>
+</li>
+</ul>
+</li>
+<li>
+<p>Поместите атрибуты <em>Дата создания</em>, <em>«Дата создания ISO»</em> и <em>«Время создания ISO»</em> на форму заявки.</p>
+</li>
+<li>
+<p>В сценарии <em>«Отправка заявки»</em> настройте отправку значений атрибутов <em>«Дата создания ISO»</em> и <em>«Время создания ISO»</em>.</p>
+<p>Подробные примеры передачи данных с помощью HTTP см. в статьях:</p>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4699">HTTP-запросы типа GET. Отправка запроса и обработка ответа в формате JSON</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5075">HTTP-запросы типа POST. Отправка и получение ответа</a></em></li>
+</ul>
+</li>
+</ol>
+<h2 id="тестирование">Тестирование</h2>
+<ol class="colored_numbers_list">
+<li>Создайте запись в шаблоне <em>«Заявки»</em>.</li>
+<li><em>Дата создания</em> отобразится в формате <code>23.06.2025 12:00</code>.</li>
+<li><em>Дата создания ISO</em> должна иметь вид <code>20250623</code>.</li>
+<li><em>Время создания ISO</em> должно иметь вид <code>120030</code>.</li>
+<li>Отправьте заявку по HTTP.</li>
+<li><em>Дата создания ISO</em> должна быть передана в виде строки вида <code>YYYYMMDD</code>.</li>
+<li><em>Дата создания ISO</em> должна быть передана в виде строки вида <code>hhmmss</code>.</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4777">Атрибут типа «Дата и время»</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4785#form_dynamic_elements_date_time">Настройка поля атрибута типа «Дата и время» на форме</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5098">Атрибут типа «Часовой пояс»</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/category.php?id=880">Язык формул</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/category.php?id=877">Язык N3</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4699">HTTP-запросы типа GET. Отправка запроса и обработка ответа в формате JSON</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5075">HTTP-запросы типа POST. Отправка и получение ответа</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>
+</div>

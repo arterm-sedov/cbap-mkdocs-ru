@@ -1,0 +1,479 @@
+<h1>Lesson 5 &amp;mdash; Data Structures</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1hdo8uc441">Introduction</a></li>
+<li><a href="#mcetoc_1hel636o90">Definitions</a>
+<ul>
+<li><a href="#mcetoc_1hen4a4oq0">Entity Relationship Diagram — Application Data Model</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1hel6kvet2">Create an ER Diagram</a></li>
+<li><a href="#mcetoc_1gt86d4600">Configure a Reference Data Registry</a>
+<ul>
+<li><a href="#mcetoc_1hen9c8q91">Create the Record Template — Vehicle Types</a></li>
+<li><a href="#mcetoc_1hen9i3el7">Set a Text Attribute as a Record Title</a></li>
+<li><a href="#mcetoc_1hen9f2ms4">Configure the Vehicle Type Form</a></li>
+<li><a href="#mcetoc_1hen9fg735">Configure the Vehicle Types Table</a></li>
+<li><a href="#mcetoc_1hen9gh7o6">Create an Attribute Linking Two Record Templates</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gt8gtsoh0">Configure a Master Data Registry</a>
+<ul>
+<li><a href="#mcetoc_1hepj8rfg1">Configure the Record Template — Vehicles</a></li>
+<li><a href="#mcetoc_1hennbb5v1">Configure the Vehicle Form</a></li>
+<li><a href="#mcetoc_1henncdht2">Configure the Vehicles Table</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gt8ivdk70">Test the Reference Data and Master Data Registries</a>
+<ul>
+<li><a href="#mcetoc_1henoc3o20">Create the Vehicle Records</a></li>
+<li><a href="#mcetoc_1henogv0l2">Group the Vehicles in the Table</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1henonicp4">Link the Vehicles with Vehicle Requests</a>
+<ul>
+<li><a href="#mcetoc_1heq3aht84">Create a Multivalue Record Attribute — Vehicle Requests</a></li>
+<li><a href="#mcetoc_1heq3ci2n5">Configure the Table on the Vehicle Form to Show the Related Vehicle Requests</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gt8m931m0">Configure a Transactional Data Registry</a>
+<ul>
+<li><a href="#mcetoc_1hepj0q480">Configure the Record Template — Cost Types</a></li>
+<li><a href="#mcetoc_1hepjf46b3">Configure the Record Template — Costs</a></li>
+<li><a href="#mcetoc_1heq2lnnb0">Link the Vehicle Requests with the Costs</a></li>
+<li><a href="#mcetoc_1heq36afg2">Configure the Costs Table</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gt8p70sn0">Results</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1hdo8uc441">Introduction</h2>
+<p>In this lesson, you will learn how to use the entity relationship diagram designer to visually configure your application data model, create record templates (for reference data, master data, and transactional data), and establish relationships between them.</p>
+<p><span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">Estimated time to complete:</span><span style="letter-spacing: 0.2px;"> 30 min</span></p>
+<p><span style="letter-spacing: 0.2px;">Prerequisite: complete <samp data-name="aid" data-title="" data-value="1110"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>{Article-ID:1110}</span> </samp> </span></p>
+<p><strong><span data-preserver-spaces="true">Note:</span></strong><span data-preserver-spaces="true"> This lesson is for the <strong>CMW Platform</strong> version 4.2.571.0. In other versions, the page and menu appearance may differ from the screenshots.</span></p>
+<h2 id="mcetoc_1hel636o90"><span data-preserver-spaces="true">Definitions</span></h2>
+<h3 id="mcetoc_1hen4a4oq0">Entity Relationship Diagram — Application Data Model</h3>
+<p>In the <strong>CMW Platform</strong>, the application <strong>data model </strong>is visualized and designed using the <strong>entity relationship (ER) diagram</strong>. It shows the record templates (data registries), attributes, and their relationships with each other.</p>
+<p>The <strong>data model diagram</strong> designer allows you to create and configure new record templates and attributes. This way, you can customize your business application while viewing its model as a whole.</p>
+<h2 id="mcetoc_1hel6kvet2">Create an ER Diagram</h2>
+<p><strong>1.</strong> In the navigation pane on the left, select <strong>Diagrams</strong>. A list of diagrams of all applications appears.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Note</p>
+<p>By default, the diagram list contains <strong>class diagrams</strong> and business <strong>process diagrams</strong>. A <strong>class diagram</strong> is generated automatically for each application. A <strong>process diagram</strong> is generated for each process template. </p>
+</div>
+<p><strong>2.</strong> Click <strong>Create</strong> to add a new diagram.</p>
+<p><strong>3.</strong> In the <strong>New diagram</strong> window, configure the diagram: </p>
+<ul>
+<li><strong>Name:</strong> <em>Data model - Vehicle management</em></li>
+<li><strong>Type:</strong> <em>Data model diagram</em></li>
+<li><strong>Application:</strong> <em>Vehicle management</em></li>
+</ul>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Creating a new data model diagram" class="img-responsive" height="550" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_1.png" width="1690"/></p>
+<p class="caption" style="font-size: 15px !important;">Creating a new data model diagram</p>
+</div>
+<p><strong>4.</strong> Click <strong>Save</strong>. The data model diagram designer appears.</p>
+<div class="notice notice-success">
+<p class="admonition-title">Data Model Diagram Designer</p>
+<p>The data model diagram designer consists of the following areas:</p>
+<ol>
+<li><strong>Element pane</strong> — contains the templates and elements you can add to the diagram.</li>
+<li><strong>Diagram </strong>— drag and drop the elements to the diagram from the element pane.</li>
+<li><strong>Toolbar</strong>
+<ul>
+<li><strong>Select version </strong>— load an earlier saved version of the diagram.</li>
+<li><strong>Create new version </strong>— save the current diagram as a new version.</li>
+<li><strong>Clone</strong> — create a new diagram by copying the current one.</li>
+<li><strong>Settings</strong> — rename the diagram.</li>
+<li><strong>Refresh data </strong>— pull the up-to-date application data model to the diagram.</li>
+<li><strong>Export </strong>— export the diagram in SVG format.</li>
+<li><strong>Show system names </strong>— show <strong>system names</strong> instead of <strong>display names</strong> for templates and attributes in the diagram.</li>
+<li><strong>Clean </strong>— remove all elements from the diagram.</li>
+</ul>
+</li>
+</ol>
+<p>The diagram changes are saved automatically to the current diagram version.</p>
+</div>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Diagram designer" class="img-responsive" height="550" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_2.png" width="1690"/></p>
+<p class="caption" style="font-size: 15px !important;">Diagram designer</p>
+</div>
+<p><strong>5.</strong> Drag and drop the <em>Vehicle requests</em> record template from the element pane to the diagram.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Adding a record template to the data model diagram" class="img-responsive" height="550" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_3.png" width="1690"/></p>
+<p class="caption" style="font-size: 15px !important;">Adding a record template to the data model diagram</p>
+</div>
+<h2 id="mcetoc_1gt86d4600">Configure a Reference Data Registry</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Business Requirement</p>
+<p>We need a registry of vehicle types so that the <em>Initiator</em> can specify the requested car type. </p>
+<p>First, we will create the <em>Vehicle types</em> record template to store the reference data. Then, we will configure a form and a table for the vehicle type records. Finally, we will fill in the vehicle types.</p>
+<p>We will use the <strong>data model diagram</strong> designer to create and configure the record template.</p>
+</div>
+<h3 id="mcetoc_1hen9c8q91">Create the Record Template — Vehicle Types</h3>
+<p><strong>1.</strong> Drag the <strong>New record type</strong> from the element pane to the diagram.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Adding a new record template using the data model diagram designer" class="img-responsive" height="550" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_4.png" width="1690"/></p>
+<p class="caption" style="font-size: 15px !important;">Adding a new record template using the data model diagram designer</p>
+</div>
+<p><strong>2.</strong> In the <strong>New template</strong> window, enter the template <strong>Name </strong>— <em>Vehicle types</em>, and click <strong>Create</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Configuring a new record template" class="img-responsive" height="550" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_5.png" width="1690"/></p>
+<p class="caption" style="font-size: 15px !important;">Configuring a new record template</p>
+</div>
+<h3 id="mcetoc_1hen9i3el7">Set a Text Attribute as a Record Title</h3>
+<div class="notice notice-warning">
+<p class="admonition-title">Business Requirement</p>
+<p>By default, the record title is an <strong>ID</strong>. So, when selecting a vehicle type, users see its ID, which is not informative. We will allow the users to specify the vehicle type by name. For this, we will create a <strong>text attribute</strong> in the <em>Vehicle types</em> record template and set it as a record title. You should select a record title attribute in each template to improve the end-user experience.</p>
+</div>
+<div class="notice notice-success">
+<p class="admonition-title">Record-Title Attribute</p>
+<p><span data-preserver-spaces="true">A template record has a title displayed in the forms and tables. By default, it shows the record <strong>ID</strong> — a system alphanumeric identifier.</span></p>
+<p><span data-preserver-spaces="true">To show a relevant record title, use an attribute value: select the </span><strong><span data-preserver-spaces="true">Use as a record title</span></strong><span data-preserver-spaces="true"> checkbox in the attribute properties.</span></p>
+<p>You can use the following attribute types as the record title: <strong>Account</strong>, <strong>Date &amp; time</strong>, <strong>Duration</strong>, <strong>Text</strong>, and <strong>Number</strong>.</p>
+<p>You can only use one attribute as the record title for a template.</p>
+</div>
+<p><strong>1.</strong> Select the <em>Vehicle types</em> record template in the diagram.</p>
+<p><strong>2.</strong> In the element menu, click <strong>Add new attribute</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Adding a new attribute using the data model diagram designer" class="img-responsive" height="550" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_6.png" width="1690"/></p>
+<p class="caption" style="font-size: 15px !important;">Adding a new attribute using the data model diagram designer</p>
+</div>
+<p><strong>2.</strong> In the <strong>New attribute</strong> window, specify the attribute <em><strong>Data type</strong></em> — <strong>Text</strong> and  <strong>Name </strong>— <em>Title</em>.</p>
+<p><strong>3.</strong> Select  <strong>Use as a record title</strong>.</p>
+<p><strong>4. </strong>Click <strong>Save</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Configuring a new attribute used as a record title" class="img-responsive" height="658" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_7.png" width="1690"/></p>
+<p class="caption" style="font-size: 15px !important;">Configuring a new attribute used as a record title</p>
+</div>
+<h3 id="mcetoc_1hen9f2ms4">Configure the Vehicle Type Form</h3>
+<p>Let's configure a form to fill out the <em>Vehicle types</em> records.</p>
+<p><strong>1.</strong> Select the <em>Vehicle types</em> record template in the diagram. In the element menu, click <strong>Go to template</strong> —  <strong>Forms</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Navigating to the template form list from the data model diagram" class="img-responsive" height="658" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_8.png" width="1690"/></p>
+<p class="caption" style="font-size: 15px !important;">Navigating to the template form list from the data model diagram</p>
+</div>
+<p><strong>2.</strong> In the displayed form list, double-click <em>Vehicle types - Main Form</em> form to open it.</p>
+<p><strong>3.</strong> Rename the default area to <em>Vehicle type</em>.</p>
+<p><strong>4.</strong> Drag the <em>Title</em> attribute from the element pane to the <em>Vehicle type</em> area.</p>
+<p><strong>5.</strong> Click  <em><strong>Save</strong></em>.</p>
+<p><strong>6.</strong> Click <em><strong>Configure template</strong></em> <em class="fa-light fa-gear">‌</em>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Configuring and saving the form" class="img-responsive" height="870" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_9.png" width="1690"/></p>
+<p class="caption" style="font-size: 15px !important;">Configuring and saving the form</p>
+</div>
+<h3 id="mcetoc_1hen9fg735">Configure the Vehicle Types Table</h3>
+<p>Let's configure a table to list the vehicle types.</p>
+<p><strong>1.</strong> In the <em>Vehicle types</em> template, go to the <strong>Tables</strong> tab.</p>
+<p><strong>2.</strong> Double-click the <em>All records</em> table to open the table designer.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Opening the table designer from the template table list" class="img-responsive" height="439" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_10.png" width="1690"/></p>
+<p class="caption" style="font-size: 15px !important;">Opening the table designer from the template table list</p>
+</div>
+<p><strong>3.</strong> In the table designer, click <strong>Clear</strong> to remove all table columns. Confirm the cleanup.</p>
+<p><strong>4.</strong> Drag the <em>Title</em> attribute to the table layout.</p>
+<p><strong>5.</strong> Click  <strong>Save</strong>.</p>
+<p><strong>6.</strong> Click the <em>Vehicle types</em> link above the table designer to go to the record template properties.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Navigating to the record template properties from the table designer" class="img-responsive" height="439" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_11.png" width="1690"/></p>
+<p class="caption" style="font-size: 15px !important;">Navigating to the record template properties from the table designer</p>
+</div>
+<p><strong>7.</strong> On the <strong>Properties</strong> tab, click <strong>Navigate to instances</strong>.</p>
+<p><strong>8.</strong> Click <strong>Create</strong> to add a new record.</p>
+<p><strong>9.</strong> In the <em>Title</em> field, enter <em>Car</em> and click <strong><em>Save</em></strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Creating a new record" class="img-responsive" height="390" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_12.png" width="1690"/></p>
+<p class="caption" style="font-size: 15px !important;">Creating a new record</p>
+</div>
+<p><strong>10.</strong> Click the <em>Vehicle types</em> link above the form to return to the record list.</p>
+<p><strong>11.</strong> Likewise, create two more vehicle types — <em>Limo</em> and <em>Bus</em>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Vehicle types records" class="img-responsive" height="514" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_13.png" width="1690"/></p>
+<p class="caption" style="font-size: 15px !important;">Vehicle types records</p>
+</div>
+<h3 id="mcetoc_1hen9gh7o6">Create an Attribute Linking Two Record Templates</h3>
+<div class="notice notice-warning">
+<p class="admonition-title">Business Requirement</p>
+<p>We need to add the <em>Vehicle type</em> field to the vehicle request form, where the <em>Initiator</em> will select a record from the <em>Vehicle types</em> record template.</p>
+<p data-block-id="da0baf3d-64af-4cd9-a8ca-436887b3c3e3" data-pm-slice="1 1 []">For this, we will link the <em>Vehicle requests</em> and <em>Vehicle types </em>templates using a <strong>record attribute</strong>.</p>
+</div>
+<div class="notice notice-success">
+<p class="admonition-title">Record Attribute</p>
+<p>A <strong>record</strong> <strong>attribute </strong>links two record templates using a many-to-one, one-to-one, or many-to-many relationship.</p>
+<p>When configuring a <strong>record attribute</strong>, you always specify a <strong>linked template</strong>.</p>
+</div>
+<p><strong>1.</strong> Return to the data model diagram, select the <em>Vehicle requests</em> record template, and click <strong>Add new attribute</strong> in the element menu.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Adding a new attribute using the data model diagram" class="img-responsive" height="600" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_14.png" width="1690"/></p>
+<p class="caption" style="font-size: 15px !important;">Adding a new attribute using the data model diagram</p>
+</div>
+<p><strong>2.</strong> In the <strong>New Attribute</strong> window, specify the attribute <strong>data type </strong>— <strong>Record, </strong>and <strong>name</strong> — <em>Vehicle type</em>.</p>
+<p><strong>3.</strong> Select the <strong>linked template</strong> — <em>Vehicle types</em>.</p>
+<p><strong>4.</strong> Click <strong>Save</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Configuring a new record attribute" class="img-responsive" height="383" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_15.png" width="1161"/></p>
+<p class="caption" style="font-size: 15px !important;">Configuring a new record attribute</p>
+</div>
+<p><strong>5.</strong> The data model diagram shows the relationship between the record templates as a line.</p>
+<div class="notice notice-success">
+<p class="admonition-title">Relationship Lines on the Data Model Diagram</p>
+<p>For the templates we linked, the relationship line shows that a vehicle request can only refer to one vehicle type — the <img alt="One symbol in ER diagram" class="img-responsive" height="13" src="https://kb.cmwlab.com/assets/img_654de3429ba62.png" style="letter-spacing: 0.2px;" width="15"/> symbol, and several requests can refer to a vehicle type — the <img alt="Many symbol in ER diagram" class="img-responsive" height="13" src="https://kb.cmwlab.com/assets/img_654de2e21e931.png" style="letter-spacing: 0.2px;" width="26"/> symbol<span style="letter-spacing: 0.2px;">.</span></p>
+</div>
+<div class="notice notice-info">
+<p class="admonition-title">Note</p>
+<p>If a template relationship line does not appear automatically, select any template and click <strong>Show linked </strong>items in the element menu.</p>
+</div>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Record template relationship in the data model diagram" class="img-responsive" height="678" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_16.png" width="1689"/></p>
+<p class="caption" style="font-size: 15px !important;">Record template relationship in the data model diagram</p>
+</div>
+<h2 id="mcetoc_1gt8gtsoh0">Configure a Master Data Registry</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Business Requirement</p>
+<p><em><span data-preserver-spaces="true">Garage</span></em><span data-preserver-spaces="true"> staff need to keep vehicle records and see the available vehicles. </span></p>
+<p><span data-preserver-spaces="true">To achieve this, we will create a record template to store the master data of each vehicle.</span></p>
+</div>
+<div class="notice notice-success">
+<p class="admonition-title">Master Data</p>
+<p><strong>Master data</strong> refers to data about business entities that provide context for business transactions, such as vehicles, customers, or product models. </p>
+</div>
+<h3 id="mcetoc_1hepj8rfg1">Configure the Record Template — Vehicles</h3>
+<p><strong>1.</strong> Drag the <strong>New record type</strong> to the data model diagram to create the new record template — <em>Vehicles</em>.</p>
+<p><strong>2.</strong> Select the newly added record template and click <strong>Go to template</strong> — <strong>Attributes </strong>in the element menu.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Navigating to the record template attribute list from the data model diagram" class="img-responsive" height="678" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_17.png" width="1689"/></p>
+<p class="caption" style="font-size: 15px !important;">Navigating to the record template attribute list from the data model diagram</p>
+</div>
+<p><strong>3.</strong> Add three <strong>text</strong> attributes: <em>Brand</em>, <em>Model</em>, and <em>Registration number</em>.</p>
+<p><strong>4.</strong> For the <em>Registration number </em>attribute, select the <strong>Custom mask</strong> <strong>display format</strong> and enter the following regular expression: <code>[A-Z0-9]{6,7}</code> (where <code>[A-Z0-9]</code> defines the allowed range of letters and numbers, and <code>{6,7}</code> defines the allowed number of characters). Select the <strong>Use as record title </strong>checkbox.</p>
+<p><strong>5.</strong> Create a <strong>record</strong> attribute — <em>Type</em>. For the <strong>linked template</strong>, select <em>Vehicle types</em>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt='The list of the attributes in the "Vehicles" record template' class="img-responsive" height="502" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_18.png" width="1689"/></p>
+<p class="caption" style="font-size: 15px !important;">The attribute list of the Vehicles record template</p>
+</div>
+<h3 id="mcetoc_1hennbb5v1">Configure the Vehicle Form</h3>
+<p><strong>1.</strong> On the <strong>Forms</strong> tab, open the <em>Vehicles - Main Form</em>.</p>
+<p><strong>2.</strong> Rename the default area to <em>Vehicle</em>.</p>
+<p><strong>3.</strong> Drag the newly created attributes from the element pane to the <em>Vehicle</em> area.</p>
+<p><strong>4.</strong> Click  <strong>Save</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt='Setting up the form for the "Vehicles" record template' class="img-responsive" height="673" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_19.png" width="1689"/></p>
+<p class="caption" style="font-size: 15px !important;">Setting up the form for the "Vehicles" record template</p>
+</div>
+<h3 id="mcetoc_1henncdht2">Configure the Vehicles Table</h3>
+<p>Let's configure the table to show all the relevant vehicle attributes.</p>
+<p><strong>1.</strong> Click <strong>Configure template</strong> <em class="fa-light fa-gear">‌</em> and go to the <strong>Tables</strong> tab.</p>
+<p><strong>2.</strong> Double-click the <em>All records</em> table to open the table designer.</p>
+<p><strong>3.</strong> In the table designer, click <strong>Clear</strong> to remove all table columns. Confirm the cleanup.</p>
+<p><strong>4.</strong> Drag the <em>Brand</em>, <em>Model</em>, <em>Registration number</em>, and <em>Type</em> attributes to the table layout.</p>
+<p><strong>5.</strong> Click <strong>Save</strong>.</p>
+<p><strong>6.</strong> Click the <em>Vehicle</em> link above the designer to go to the record template properties.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Navigating to the record template properties from the table designer" class="img-responsive" height="522" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_20.png" width="1689"/></p>
+<p class="caption" style="font-size: 15px !important;">Navigating to the record template properties from the table designer</p>
+</div>
+<h2 id="mcetoc_1gt8ivdk70">Test the Reference Data and Master Data Registries</h2>
+<h3 id="mcetoc_1henoc3o20">Create the Vehicle Records</h3>
+<p>Let's test the created reference data and master data registries.</p>
+<p><strong>1.</strong> Go to the <strong>Properties</strong> tab of the <em>Vehicles</em> record template and click <strong>Navigate to instances</strong>.</p>
+<p><strong>2.</strong> Click <strong>Create</strong>. </p>
+<p><strong>3. </strong><span data-preserver-spaces="true">Fill out the form. In the </span><em><span data-preserver-spaces="true">Type</span></em><span data-preserver-spaces="true"> field, specify the vehicle type.</span></p>
+<p><strong>4.</strong> Click <strong>Save</strong>.</p>
+<p><strong>5. </strong>click the <em>Vehicles</em> link above the form to return to the record list.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt='Creating a new record in the "Vehicles" record template' class="img-responsive" height="470" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_21.png" width="1689"/></p>
+<p class="caption" style="font-size: 15px !important;">Creating a new record in the Vehicles record template</p>
+</div>
+<p><strong>6.</strong> Create a few more records with different vehicle types.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Records in the Vehicles record template" class="img-responsive" height="614" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_22.png" width="1689"/></p>
+<p class="caption" style="font-size: 15px !important;">Records in the Vehicles record template</p>
+</div>
+<h3 id="mcetoc_1henogv0l2">Group the Vehicles in the Table</h3>
+<p>Let's group the records in the table by vehicle type.</p>
+<p><strong>1.</strong> Click the <em class="fa-light fa-filter">‌</em> icon in the <em>Type</em> column header.</p>
+<p><strong>2.</strong> Select <strong>Group by this column</strong>.</p>
+<p><strong>3.</strong> Click <strong>Save</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Grouping the vehicle records in the table by vehicle type" class="img-responsive" height="614" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_23.png" width="1689"/></p>
+<p class="caption" style="font-size: 15px !important;">Grouping the vehicle records in the table by vehicle type</p>
+</div>
+<h2 id="mcetoc_1henonicp4">Link the Vehicles with Vehicle Requests</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Business Requirement</p>
+<p>Let's add information about completed requests per vehicle.</p>
+<p>To do this, we need an attribute that will link <em>Vehicles</em> and <em>Vehicle requests</em> record templates with a 1:M (one-to-many) relationship — there can be several requests for one vehicle. Configure this type of relationship using a <strong>multivalue</strong> <strong>record attribute</strong> with <strong>attribute interlinking</strong>.</p>
+</div>
+<div class="notice notice-success">
+<p class="admonition-title">Multivalue Record Attribute</p>
+<p>A <strong>record</strong> <strong>attribute</strong> allows you to store, display, and modify a collection of links to records in another template. The records can be <strong>interlinked</strong>.</p>
+<p>When creating a <strong>record attribute</strong>, you can configure <strong>attribute interlinking</strong> by creating a new link or using an existing one. For example, when you create an attribute in the <em>Vehicles</em> template linked to the <em>Vehicle requests</em> template, you can create a new interlinked <strong>record</strong> <strong>attribute</strong> in the <em>Vehicle requests</em> template, and the two templates become interconnected.</p>
+</div>
+<h3 id="mcetoc_1heq3aht84">Create a Multivalue Record Attribute — Vehicle Requests</h3>
+<p><strong>1.</strong> In the <em>Vehicles</em> template, create a <strong>record</strong> <strong>attribute</strong>:</p>
+<ul>
+<li><strong>Name</strong>: <em>Vehicle requests</em></li>
+<li><strong>Store multiple values</strong>: selected</li>
+<li><strong>Linked template</strong>: <em>Vehicle requests</em></li>
+<li><strong>Attribute interlinking</strong>: <strong>With a new one</strong>
+<ul>
+<li><strong>New attribute properties</strong>
+<ul>
+<li><strong>Name</strong>: <em>Vehicle</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>2. Click <strong>Save</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Configuring a new record attribute with interlinking" class="img-responsive" height="790" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_24.png" width="1692"/></p>
+<p class="caption" style="font-size: 15px !important;">Configuring a new record attribute with interlinking</p>
+</div>
+<h3 id="mcetoc_1heq3ci2n5">Configure the Table on the Vehicle Form to Show the Related Vehicle Requests</h3>
+<div class="notice notice-success">
+<p class="admonition-title">Table on the Form</p>
+<p><span data-preserver-spaces="true" style="color: #0e101a; background: transparent; margin-top: 0pt; margin-bottom: 0pt;">You can display a </span><strong style="color: #0e101a; background: transparent; margin-top: 0pt; margin-bottom: 0pt;"><span data-preserver-spaces="true" style="color: #0e101a; background: transparent; margin-top: 0pt; margin-bottom: 0pt;">multivalue record</span></strong><span data-preserver-spaces="true" style="color: #0e101a; background: transparent; margin-top: 0pt; margin-bottom: 0pt;"> </span><strong style="color: #0e101a; background: transparent; margin-top: 0pt; margin-bottom: 0pt;"><span data-preserver-spaces="true" style="color: #0e101a; background: transparent; margin-top: 0pt; margin-bottom: 0pt;">attribute</span></strong><span data-preserver-spaces="true" style="color: #0e101a; background: transparent; margin-top: 0pt; margin-bottom: 0pt;"> as a table on a form.</span> You can configure the columns to show the attributes of the linked template, access mode, child record display, and filter for the table records.</p>
+</div>
+<p><strong>1.</strong> Go to the <strong>Forms</strong> tab of the <em>Vehicles</em> template and double-click the <em>Vehicles - Main Form</em>.</p>
+<p><strong>2.</strong> In the form designer, drag the newly created <em>Vehicle requests</em> attribute from the element pane to the <em>Vehicle</em> area.</p>
+<p><strong>3.</strong> Click the <em>Vehicle requests </em>field on the form, and in the <strong>Properties</strong> panel, select <strong>Table</strong> from the <strong>Appearance </strong>dropdown.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Adding a table to the form" class="img-responsive" height="833" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_25.png" width="1692"/></p>
+<p class="caption" style="font-size: 15px !important;">Adding a table to the form</p>
+</div>
+<p><strong>4.</strong> Expand the <em>Vehicle requests</em> attribute in the element pane and drag the following attributes to the table: <em>Car delivery time, Route,</em> and <em>Creator</em>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Adding columns to a table on the form" class="img-responsive" height="833" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_26.png" width="1692"/></p>
+<p class="caption" style="font-size: 15px !important;">Adding columns to a table on the form</p>
+</div>
+<p><strong>5.</strong> Select the table toolbar.</p>
+<p><strong>6.</strong> From the element pane, drag <strong>Add </strong>and <strong>Navigate </strong>buttons to the table toolbar. These buttons will allow you to link existing requests to the vehicle and go to the related request form.</p>
+<p><strong>7. </strong>Click <strong>Save</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Adding buttons to the table toolbar" class="img-responsive" height="605" src="https://kb.cmwlab.com/assets/img_654bb5bc9f7c9.png" width="1229"/></p>
+<p class="caption" style="font-size: 15px !important;">Adding buttons to the table toolbar</p>
+</div>
+<h2 id="mcetoc_1gt8m931m0">Configure a Transactional Data Registry</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Business Requirement</p>
+<p>We have learned how to work with reference and master data. In addition, we need transactional data for our business process.</p>
+<p>For example, we may store a list of passengers or waypoints in addition to the final destination. Or the driver can report the costs incurred during the trip.</p>
+<p>To do this, we need two new data registries (record templates): travel costs (transactional data) and cost types (reference data). We will link the vehicle requests with the travel costs and the costs with the cost types.</p>
+</div>
+<h3 id="mcetoc_1hepj0q480">Configure the Record Template — Cost Types</h3>
+<p>Let's create a record template to store the cost types. We'll do this using the data model diagram designer.</p>
+<p><strong>1.</strong> In the navigation pane on the left, select <strong>Diagrams</strong>.</p>
+<p><strong>2.</strong> Double-click the <em>Data model - Vehicle management</em> diagram.</p>
+<p><strong>3.</strong> Create a new record template — <em>Cost types</em>.</p>
+<p><strong>4.</strong> Select the <em>Cost types </em>record template and click <strong>Add new attribute</strong> in the element menu.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Adding a new attribute using the data model diagram" class="img-responsive" height="572" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_28.png" width="1161"/></p>
+<p class="caption" style="font-size: 15px !important;">Adding a new attribute using the data model diagram</p>
+</div>
+<p><strong>5.</strong> Create a <strong>text</strong> attribute named <em>Title</em>. Select the <strong>Use as record title </strong>checkbox.</p>
+<p><strong>6.</strong> Go to the <em>Cost types</em> record template's <strong>Forms</strong> tab using the element menu.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Navigating to the template form list from the data model diagram" class="img-responsive" height="833" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_29.png" width="1692"/></p>
+<p class="caption" style="font-size: 15px !important;">Navigating to the template form list from the data model diagram</p>
+</div>
+<p><strong>7.</strong> In the form list, open the <em>Cost types - Main Form</em> by double-clicking it.</p>
+<p><strong>8.</strong> Rename the default area to <em>Cost type</em>.</p>
+<p><strong>9.</strong> From the element pane, drag the <em>Title</em> attribute to the <em>Cost type</em> area.</p>
+<p><strong>10.</strong> Click <strong>Save</strong>.</p>
+<p><strong>11.</strong> Click <strong>Configure template</strong> <em class="fa-light fa-gear">‌</em>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Configuring the Cost type form" class="img-responsive" height="610" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_30.png" width="1692"/></p>
+<p class="caption" style="font-size: 15px !important;">Configuring the Cost type form</p>
+</div>
+<p><strong>12.</strong> Go to the <em>Cost types</em> record template's <strong>Tables</strong> tab.</p>
+<p><strong>13.</strong> Configure the <em>All records</em> table to display only the <em>Title</em> attribute.</p>
+<p><strong>14.</strong> Click <strong>Save</strong>.</p>
+<p><strong>15. </strong>Click the <em>Cost types</em> link to go to the record template properties.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Configuring the Cost types table" class="img-responsive" height="333" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_31.png" width="1161"/></p>
+<p class="caption" style="font-size: 15px !important;">Configuring the Cost types table</p>
+</div>
+<p><strong>16.</strong> Click <strong>Navigate to instances</strong> and create the following cost types: <em>Fuel</em>, <em>Service</em>, and <em>Other</em>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt='Records in the "Cost types" registry' class="img-responsive" height="510" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_32.png" width="1692"/></p>
+<p class="caption" style="font-size: 15px !important;">Records in the Cost types registry</p>
+</div>
+<h3 id="mcetoc_1hepjf46b3">Configure the Record Template — Costs</h3>
+<p>Now, let's create a record template to store the costs.</p>
+<p><strong>1.</strong> Using the data model diagram, create the <em>Costs</em> record template.</p>
+<p><strong>2.</strong> Add the following attributes:</p>
+<ul>
+<li><em>Amount</em> 
+<ul>
+<li><strong>Data type</strong>: <strong>Number</strong></li>
+<li><strong>Number of digits after decimal point</strong>: 2</li>
+</ul>
+</li>
+<li><em>Type</em>
+<ul>
+<li><strong>Data type</strong>: <strong>Record</strong> </li>
+<li><strong>Linked template</strong> — <em>Cost types</em></li>
+</ul>
+</li>
+</ul>
+<p><strong>3. </strong>In the <em>Costs</em> record template's element menu, select <strong>Forms</strong>.</p>
+<p><strong>4.</strong> In the form list, open the <em>Costs - Main Form</em> form by double-clicking it.</p>
+<p><strong>5.</strong> Rename the default area to <em>Cost</em>.</p>
+<p><strong>9.</strong> From the element pane, drag the <em>Amount</em> and <em>Type</em> attributes to the <em>Cost</em> area.</p>
+<p><strong>10.</strong> Click <strong>Save</strong>.</p>
+<p><strong>11.</strong> Click <strong>Configure template</strong> <em class="fa-light fa-gear">‌</em>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Configuring the Costs form" class="img-responsive" height="637" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_33.png" width="1692"/></p>
+<p class="caption" style="font-size: 15px !important;">Configuring the Costs form</p>
+</div>
+<p><strong>12. </strong>Return to the data model diagram. The diagram should show the relationship between the <em>Cost types</em> and <em>Costs</em> record templates. If you don't see the relationship line, click <strong>Show linked items</strong> in any element menu.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Relations between the record templates on the data model diagram" class="img-responsive" height="820" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_34.png" width="1692"/></p>
+<p class="caption" style="font-size: 15px !important;">Relations between the record templates on the data model diagram</p>
+</div>
+<h3 id="mcetoc_1heq2lnnb0">Link the Vehicle Requests with the Costs</h3>
+<p>Now, we will link the <em>Vehicle requests</em> and <em>Costs</em> record template using the <strong>record</strong> attribute <strong>interlinking</strong>.</p>
+<p><strong>1.</strong> In the data model diagram, select the <em>Vehicle requests</em> record template and click <strong>Add new attribute </strong>in the element menu.</p>
+<p><strong>2.</strong> Create an attribute with the following properties:</p>
+<ul>
+<li><strong>Name:</strong> <em>Costs</em></li>
+<li><strong>Data type</strong>: <strong>Record</strong></li>
+<li><strong>Store multiple values</strong>: selected</li>
+<li><strong>Linked template:</strong> <em>Costs</em></li>
+<li><strong>Attribute interlinking:</strong> <strong>With a new one</strong>
+<ul>
+<li><strong>New attribute properties</strong>
+<ul>
+<li><strong>Name:</strong> <em>Vehicle request</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Creating a new record attribute with interlinking" class="img-responsive" height="794" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_35.png" width="1692"/></p>
+<p class="caption" style="font-size: 15px !important;">Creating a new record attribute with interlinking</p>
+</div>
+<p><strong>3.</strong> The diagram should show the relationship between the <em>Vehicle requests</em> and <em>Costs</em> record templates. If you don't see the relationship line, click <strong>Show linked items</strong> in any element menu.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Showing linked items on the data model diagram" class="img-responsive" height="794" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_36.png" width="1692"/></p>
+<p class="caption" style="font-size: 15px !important;">Showing linked items on the data model diagram</p>
+</div>
+<h3 id="mcetoc_1heq36afg2">Configure the Costs Table</h3>
+<p><strong>1.</strong> Go to the <em>Costs</em> record template's <strong>Tables</strong> tab using the element menu.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Navigating to the template table list the data model diagram" class="img-responsive" height="794" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_37.png" width="1692"/></p>
+<p class="caption" style="font-size: 15px !important;">Navigating to the template table list using the data model diagram</p>
+</div>
+<p><strong>2.</strong> Configure the <em>All records</em> table to display the following attributes: <em>Vehicle request</em>, <em>Type</em>, and <em>Amount</em>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt='Setting the "Costs" default table' class="img-responsive" height="475" src="https://kb.cmwlab.com/assets/cmw_platform_lesson5_38.png" width="1692"/></p>
+<p class="caption" style="font-size: 15px !important;">Configuring the Costs table</p>
+</div>
+<h2 id="mcetoc_1gt8p70sn0">Results</h2>
+<p>In this lesson, you learned how to link and interlink the record templates using <strong>record attributes</strong>.</p>
+<p>You have improved your application by adding the <em>Vehicle types</em> and <em>Cost types</em> reference data registries, <em>Vehicles</em> master data registry, and <em>Costs</em> transactional data registry.</p>
+<p>Proceed to <samp data-name="aid" data-title="" data-value="2155"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2155}</span></samp> to improve the vehicle booking process using the reference, master, and transactional data.</p>
+<p><a class="md-top md-icon mkdocs_imported_link" href="#"> <em class="fa-light fa-arrow-up">‌</em> Back to top</a></p>

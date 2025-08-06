@@ -1,0 +1,167 @@
+<h1>Button Designer</h1><div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1gk32u0ai1">Opening the Button Designer</a></li>
+<li><a href="#mcetoc_1gk32u0ai2">Configuring a Button</a>
+<ul>
+<li><a href="#mcetoc_1gk32u0ai3">Properties</a></li>
+<li><a href="#mcetoc_1gk32u0ai4">Script</a></li>
+<li><a href="#mcetoc_1gk32u0ai5">Display Condition</a></li>
+<li><a href="#mcetoc_1gk32u0aj6">Local Variables</a></li>
+<li><a href="#mcetoc_1gk32u0aj7">Relations</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gk32u0aj8">Related Articles</a></li>
+</ul>
+</div>
+<div class="md-content">
+<h2 id="mcetoc_1gk32u0ai1">Opening the Button Designer</h2>
+<p>The button designer allows you to customize the appearance, behavior, and result of clicking the button.</p>
+<ol>
+<li>Open the template <a href="https://kb.cmwlab.com/article.php?id=2118">button list</a>.</li>
+<li>Double-click a button row.</li>
+<li>The button designer will be displayed.</li>
+<li><a href="#mcetoc_1gk32u0ai2">Configure the button</a>.</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+<div class="screenshot_with_caption">
+<p><img alt="Button designer — Properties tab" src="https://kb.cmwlab.com/assets/button_designer.png"/></p>
+<p class="caption">Button designer — Properties tab</p>
+</div>
+<h2 id="mcetoc_1gk32u0ai2">Configuring a Button</h2>
+<p>The button designer has the following tabs to configure display options and the button click operation.</p>
+<p>Configure the button and click <strong>Save</strong>.</p>
+<h3 id="mcetoc_1gk32u0ai3">Properties</h3>
+<p>On the <strong>Properties</strong> tab, configure the general button parameters.</p>
+<ul>
+<li><strong>Display name</strong> — the button label. After placing the button within a button area (on a form or a table), you can change its display name on that button area, this change will not affect the name of the original button in the template.</li>
+<li><strong>System name</strong> - a unique button name for use in scripts, expressions, and scenarios.</li>
+<li><strong>Description</strong> — a relevant description of the button's purpose.</li>
+<li><strong>Operation context</strong> — defines the available operations, the operation execution context, and the ability to use the button on the corresponding forms and tables.
+<ul>
+<li><strong>Record</strong> in a <strong>record</strong>, <strong>account</strong>, <strong>role</strong>, or <strong>organizational unit</strong> <strong>template</strong>.</li>
+<li><strong>User task</strong> — an element of the process diagram.</li>
+<li><strong>Process</strong> — <strong>process template</strong> or process instance.</li>
+<li><strong>Account</strong> — a record in an <strong>account template</strong>.</li>
+<li><strong>Diagram</strong> — a process diagram.</li>
+</ul>
+</li>
+<li><strong>Operation</strong> — available operation set depends on the selected <strong>operation context</strong>. The following operations are provided:
+<ul>
+<li><strong>C# Script</strong> — execute a C# script.</li>
+<li><strong>Start process</strong> — launch a process instance from the current record or a new record.</li>
+<li><strong>Stop process</strong> — stop the current process instance.</li>
+<li><strong>Start process from linked template</strong> — launch the process from a record template linked to the current template.</li>
+<li><strong>Export record</strong> — export the record using an export template.</li>
+<li><strong>Export table</strong> — export a table in XLSX format.</li>
+<li><strong>Archive</strong> — archive a record or process instance.</li>
+<li><strong>Unarchive</strong> — unarchive a record or process instance.</li>
+<li><strong>Create</strong> — create a record.</li>
+<li><strong>Create related record</strong> — create a record in the template linked to the current template.</li>
+<li><strong>Save</strong> — save the current record.</li>
+<li><strong>Delete</strong> — delete a record or process instance.</li>
+<li><strong>Reopen</strong> — assign <strong>In Progress</strong> status to the task.</li>
+<li><strong>Complete task</strong> — complete the current process task.</li>
+<li><strong>Defer</strong> — this operation will be implemented in future versions of the product.</li>
+<li><strong>Accept</strong> — set the current account as the task assignee.</li>
+<li><strong>Migrate</strong> — upgrade the process instance to the latest process diagram version.</li>
+<li><strong>Generate new token</strong> — create a new token on the selected process instance diagram element.</li>
+<li><strong>Link to a template</strong> — link the account to the selected account template.</li>
+<li><strong>Unlink from the template</strong> — unlink the account from the selected account template.</li>
+<li><strong>Trigger the “Button clicked” event</strong> — the button click will trigger the <strong>Button clicked</strong> event, for example, to run a script in the application.</li>
+<li><strong>Edit</strong> — configure the process diagram.</li>
+</ul>
+</li>
+</ul>
+<div class="blue_note">Operations are executed on <strong>records</strong> in the <strong>record</strong>, <strong>account</strong>, <strong>role</strong>, and <strong>organizational unit</strong> <strong>templates</strong>, as well as on the <strong>process instances</strong> in the <strong>process templates</strong>.</div>
+<ul>
+<li><strong>Save the record after execution</strong> — check this checkbox to save the current record upon the button click operation execution.</li>
+<li><strong>Skip validation</strong> — if you check this checkbox, data validation won't be performed when entering and saving record data and validation errors won't be displayed.</li>
+<li><strong>Operation result</strong> — select an action to perform upon the operation execution.
+<ul>
+<li><strong>Refresh data</strong> — reload the record data.</li>
+<li><strong>Navigation</strong> — go to the object specified in the <strong>Navigate to</strong> field:
+<ul>
+<li><strong>Related record</strong> — go to a record linked with the process instance.</li>
+<li><strong>Process instance</strong> — go to the process instance.</li>
+<li><strong>Started process task</strong> — go to the current task of the process instance.</li>
+<li><strong>Next task in list</strong> — go to the next task of the process instance.</li>
+<li><strong>Previous page</strong> — go to the current table previous page.</li>
+<li><strong>Diagram</strong> — go to the process instance diagram.</li>
+<li><strong>Table</strong> — go to a table listing template records or process instances.</li>
+</ul>
+</li>
+<li><strong>Download document</strong> generated using an export template.</li>
+</ul>
+</li>
+<li><strong>Set form access mode</strong>
+<ul>
+<li><strong>Read</strong> — on the button click the form will become read-only.</li>
+<li><strong>Edit</strong> — after clicking the button the user will be able to enter data into the form (subject to the appropriate permissions).</li>
+<li><strong>No change</strong> — use the original form access mode.</li>
+</ul>
+</li>
+<li><strong>Show the button</strong> — use this dropdown together with the <strong>Set form access mode</strong> dropdown.
+<ul>
+<li><strong>In edit mode</strong> — the button will be displayed only in the form data entry mode.</li>
+<li><strong>In read mode</strong> — the button will be displayed only in the form read-only mode.</li>
+<li><strong>Always</strong> — the button will be displayed in data entry and read-only modes.</li>
+</ul>
+</li>
+<li><strong>Show the dialog</strong> — if you check this checkbox, clicking the button will open the operation confirmation dialogue you configure.
+<ul>
+<li><strong>Configure the dialog</strong> — go to the operation confirmation <a class="autorefs autorefs-internal" href="../forms/form_designer.html#form-designer">form designer</a>. The element panel in this designer shows the operation <strong><a href="#local-variables">local variables</a></strong> that you can drag and drop on the dialogue.</li>
+</ul>
+</li>
+</ul>
+<div class="screenshot_with_caption">
+<p><img alt="Operation dialogue designer with a local variable" src="https://kb.cmwlab.com/assets/button_designer_dialogue_designer.png"/></p>
+<p class="caption">Operation dialogue designer with a local variable</p>
+</div>
+<h3 id="mcetoc_1gk32u0ai4">Script</h3>
+<p>On the <strong>Script</strong> tab, you can enter a C# script to execute on the button click.</p>
+<p>To generate a C# script template, click <strong>Generate C# template</strong>.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Button designer — Script tab with a C# script template" src="https://kb.cmwlab.com/assets/button_designer_script.png"/></p>
+<p class="caption">Button designer — Script tab with a C# script template</p>
+</div>
+<h3 id="mcetoc_1gk32u0ai5">Display Condition</h3>
+<p>On the <strong>Display condition</strong> tab, you can configure a formula or N3 expression. The button will be displayed if the formula or N3 expression returns <code>true</code>. Otherwise, the button will be hidden.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Button Designer — Display condition tab with a formula" src="https://kb.cmwlab.com/assets/button_designer_display_condition.png"/></p>
+<p class="caption">Button Designer — Display condition tab with a formula</p>
+</div>
+<h3 id="mcetoc_1gk32u0aj6">Local Variables</h3>
+<p>On the <strong>Local variables</strong> tab, you can create variables to use in a C# script or scenario executed on the button click.</p>
+<p>Local variables are essentially the attributes.</p>
+<p>For each variable, you can set:</p>
+<ul>
+<li><strong>Display name</strong> — a relevant variable name.</li>
+<li><strong>Data type</strong> — variables have the same types as attributes.</li>
+<li><strong>Display format</strong> — variables have the same display formats as attributes.</li>
+<li><strong>System name</strong> — a unique variable name for use in scripts, expressions, and scenarios.</li>
+<li><strong>Description</strong> — a relevant variable's purpose description.</li>
+<li><strong>Template</strong> — can be set for the following variable types: <strong>Record</strong>, <strong>Account</strong>, <strong>Role</strong>, and <strong>Organizational Unitattribute_organizational_unit.md</strong>.</li>
+<li><strong>Store multiple values</strong> — you can check this checkbox for the following variable types: <strong>File</strong> (see attribute types <strong>Document</strong>, <strong>Image</strong>), <strong>Record</strong>, <strong>Account</strong>, <strong>Role</strong>, and <strong>Organizational Unit</strong>.</li>
+</ul>
+<div class="screenshot_with_caption">
+<p><img alt="Button Designer - Local Variables Tab" src="https://kb.cmwlab.com/assets/button_designer_local_variables.png"/></p>
+<p class="caption">Button Designer - Local Variables Tab</p>
+</div>
+<h3 id="mcetoc_1gk32u0aj7">Relations</h3>
+<p>The <strong>Relations</strong> tab displays the list of all application objects and resources associated with the button.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Button designer — Relations tab" src="https://kb.cmwlab.com/assets/button_designer_relations.png"/></p>
+<p class="caption">Button designer — Relations tab</p>
+</div>
+<h2 id="mcetoc_1gk32u0aj8">Related Articles</h2>
+<p><strong><samp data-name="aid" data-title="" data-value="2118"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>Viewing the Template Button List {Article-ID:2118}</span></samp> </strong></p>
+<p><strong><a href="button_creation.html"><samp data-name="aid" data-title="" data-value="2116"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>Creating a Button {Article-ID:2116}</span></samp> </a></strong></p>
+</div>
+</div>
+<a class="md-top md-icon" href="#"> Back to top </a></div>
+<div class="md-dialog">
+<div class="md-dialog__inner md-typeset"> </div>
+</div>

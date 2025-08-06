@@ -1,0 +1,24 @@
+<h1>Setting up and using the holiday calendar</h1><p>To control the due dates of the tasks assigned to users, <strong>CMW Platform</strong> has a built-in functionality in the task settings that allows you to specify the amount of time, up to seconds, within which the user must complete the task. But there are cases when the due dates must be set taking into account working days and hours.</p>
+<p>For this purpose there are <strong><em>WORKDAYS()</em></strong> and <strong><em>WORKHOURS()</em></strong> functions, which return a date based on the number of working days or hours since a particular date. However, these functions have a limitation: they only take into account weekends and do not consider national or other holidays. Therefore, in these functions it is possible to additionally specify a list of dates that are non-working. In order not to register all holidays inside the function, we recommend creating a separate reference record template with a calendar of holidays, and refer to it when writing an expression with <strong><em>WORKDAYS()</em></strong> and <strong><em>WORKHOURS()</em></strong> functions.</p>
+<p><strong>1.</strong> Create a "<em>Holiday Calendar</em>" record template.</p>
+<p><strong>2.</strong> Create an attribute with the "Date and time" data type and name it "<em>Date</em>".</p>
+<p><strong>3.</strong> Customize the form and table by placing the newly created attribute.</p>
+<p><strong>4.</strong> Create records. Go to the table, click the "<strong><em>Create</em></strong>" button and in the "<em>Date</em>" field, select one of the holidays, for example, January 1 of the current year.</p>
+<p><strong>5.</strong> Next, in the same way, create records for all the holidays that are in the current year (for the subsequent years, you will also need to create separate records in this record template).</p>
+<p><strong>6.</strong> Go to the task settings where you want to set the due date with taking into account working days. Click the "<strong><em>Advanced</em></strong>" tab, then select the "<em>Formula</em>" option in the "<strong><em>Execution time</em></strong>" field, then insert the following:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code"><span style="font-size: 10.0pt; line-height: 107%; font-family: 'Courier New'; color: black; letter-spacing: .15pt; background: #FAFAFA;">WORKHOURS(NOW(),18,DURATION("PT9H"),DURATION("PT9H"),LIST((from a in db-&gt;holliday_calendar select a-&gt;Date)))</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>where:</strong></p>
+<p><strong><em>holiday_calendar</em></strong> — system name of the record template created in step 1;</p>
+<p><strong><em>Date</em></strong>— the system name of the attribute created in step 2.</p>
+<p>This formula is deciphered as follows: starting from the current moment (when the process created the task), count 18 working hours (the duration of the task), considering that the working day starts at 9 am and lasts 9 hours, and taking into account all the exceptions indicated in the holiday calendar.</p>
+<div class="blue_note">
+<p><strong>Note:</strong> if you add a weekend (Saturday or Sunday) to the holiday calendar, then when calculating the expression, it will be considered as a working day.</p>
+</div>

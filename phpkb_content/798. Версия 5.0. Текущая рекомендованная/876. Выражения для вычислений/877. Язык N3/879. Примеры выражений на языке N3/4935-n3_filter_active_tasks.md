@@ -168,8 +168,8 @@ kbId: 4935
 
 - [Таблицы. Определения, настройка, клонирование, удаление][table_configure]
 - [Создание таблицы со списком задач][table_configure]
-- [Вычисление пользователей с активными задачами](n3_calculate_active_task_accounts.html#n3_calculate_active_task_accounts)
+- [Вычисление пользователей с активными задачами](n3_calculate_active_task_accounts.html#example_n3_calculate_active_task_accounts "Аккаунты и задачи. Вычисление пользователей с активными задачами с помощью N3")
 - [Вычисление исполнителя активной задачи](n3_calculate_active_task_assignee.html#n3_calculate_active_task_assignee "Вычисление исполнителя активной задачи с помощью N3")
-- [Периодические напоминания об открытых задачах](n3_periodic_task_notifications.html#n3_periodic_task_notifications "Периодические напоминания об открытых задачах. Настройка с помощью N3")
+- [Периодические напоминания об открытых задачах][example_n3_periodic_task_notifications]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

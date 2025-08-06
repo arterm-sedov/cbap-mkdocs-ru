@@ -1,0 +1,66 @@
+<h1>Generate a QR Code Using C# and a Third-Party Service on Button Click</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1h3uhhit10">Use Case</a></li>
+<li><a href="#mcetoc_1gupdb2o92">Prerequisites</a></li>
+<li><a href="#mcetoc_1h3uhi69u1">Instructions</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1h3uhhit10">Use Case</h2>
+<p>Apart from using the built-in <strong>QR code </strong>attribute, you can generate a QR code using C# and a third-party service on a button click. <span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">You might want to do this to generate a special barcode or customize the QR code: change its size, color, image format or correction level, ad a logo overlay, etc.</span></p>
+<p>In this article, we will configure a button to generate a 300x300px QR code pointing to <a href="https://mycompany.com">https://cmwlab.com</a> via the <code>api.qrserver.com</code> service.</p>
+<h2 id="mcetoc_1gupdb2o92">Prerequisites</h2>
+<p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; font-size: 15px; font-weight: 300; letter-spacing: 0.2px; line-height: 25px; color: #545764; font-family: 'Open Sans', sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">To proceed with the example, create the attributes as shown in the table below:</p>
+<div class="table-responsive">
+<table border="1" style="width: 100%; border-collapse: collapse; height: 174px;">
+<tbody>
+<tr style="height: 40px;">
+<td style="height: 40px; width: 20%;"><strong>Record template system name</strong></td>
+<td style="width: 20%; height: 40px;"><strong>Attribute system name</strong></td>
+<td style="width: 20%; height: 40px;"><strong>Attribute type</strong></td>
+<td style="height: 40px; width: 70%;"><strong>Description</strong></td>
+</tr>
+<tr style="height: 10px;">
+<td rowspan="2" style="height: 134px; width: 20%;"><em>QRCodes</em><em><br/></em></td>
+<td style="width: 20%; height: 79px;"><em style="letter-spacing: 0.2px;">QRinBase64</em></td>
+<td style="width: 20%; height: 79px;"><strong>Text</strong></td>
+<td style="height: 79px; width: 70%;">
+<p>Select any <strong>display format</strong>.</p>
+<p>.This attribute stores the generated QR code in the <code>base64</code> format.</p>
+</td>
+</tr>
+<tr style="height: 55px;">
+<td style="width: 20%; height: 55px;"><em>QRcodeImage</em></td>
+<td style="width: 20%; height: 55px;"><strong>Text</strong></td>
+<td style="width: 70%; height: 55px;">
+<p>Select <strong>HTML text</strong> as the <strong>display format</strong>.</p>
+<p>This attribute stores the QR code image and is placed on the form.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="mcetoc_1h3uhi69u1">Instructions</h2>
+<ol class="colored_numbers_list">
+<li>In the <em>QRcodeImage</em> attribute properties, check the <strong>Auto calculate</strong> box and enter the following <strong>Calculated value</strong>:
+<pre><span style="color: #000000;">FORMAT("</span><span style="color: #800000;">&lt;img</span> <span style="color: #cd3131;">align</span><span style="color: #000000;">=</span><span style="color: #0000ff;">'center'</span> <span style="color: #e50000;">src</span><span style="color: #000000;">=</span><span style="color: #0000ff;">'data:image/png;base64,{0}'</span><span style="color: #cd3131;">&lt;/img</span><span style="color: #800000;">&gt;</span><span style="color: #000000;">",LIST($QRinBase64))</span><code></code></pre>
+</li>
+<li><span style="letter-spacing: 0.2px;">In the <em>QRCodes </em>template,<em> c</em>reate a button </span><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0.2px;">with the following properties:</span> </span>
+<ul>
+<li><strong>Display name </strong>— <em>Generate QR code</em></li>
+<li><strong>Operation</strong> — <strong>C# script</strong></li>
+<li><strong>Operation context</strong> — <strong>Record</strong></li>
+<li><strong>Operation result</strong> — <strong>Refresh data</strong></li>
+</ul>
+<p>On the <strong>Script</strong> tab, enter the following script:</p>
+<div style="color: #000000; background-color: #ffffff; font-family: Consolas, 'Courier New', monospace; font-weight: normal; font-size: 14px; line-height: 19px; white-space: pre;">
+<pre><code><span style="color: #0000ff;">using</span><span style="color: #000000;"> System;</span></code><br/><code><span style="color: #0000ff;">using</span><span style="color: #000000;"> System.Collections.Generic;</span></code><br/><code><span style="color: #0000ff;">using</span><span style="color: #000000;"> System.Linq;</span></code><br/><code><span style="color: #0000ff;">using</span><span style="color: #000000;"> Comindware.Data.Entity;</span></code><br/><code><span style="color: #0000ff;">using</span><span style="color: #000000;"> Comindware.TeamNetwork.Api.Data.UserCommands; </span></code><br/><code><span style="color: #0000ff;">using</span><span style="color: #000000;"> Comindware.TeamNetwork.Api.Data;</span></code><br/><code><span style="color: #0000ff;">using</span><span style="color: #000000;"> RestSharp;</span></code><br/><br/><code><span style="color: #0000ff;">class</span><span style="color: #000000;"> Script  </span></code><br/><code><span style="color: #000000;">{  </span></code><br/><code><span style="color: #000000;">      </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span><span style="color: #000000;"> UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)  </span></code><br/><code><span style="color: #000000;">      {  </span></code><br/><code><span style="color: #000000;">          ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;  </span></code><br/><code><span style="color: #000000;">          </span><span style="color: #0000ff;">byte</span><span style="color: #000000;">[] AsBytes = </span><span style="color: #0000ff;">new</span> </code><br/><code><span style="color: #000000;">          System.Net.WebClient().DownloadData </span></code><br/><code><span style="color: #000000;">          ("https://api.qrserver.com/v1/create-qr-code/?size=300x300&amp;data=https://cmwlab.com" + userCommandContext.ObjectIds[0]); </span></code><br/><span style="color: #008000;"><code><span style="color: #008000;">// 300x300 is desired QR code size</span></code></span><br/><code><span style="color: #000000;"><span style="color: #008000;">// https://cmwlab.com is the URL to open upon scanning the QR-code</span> </span></code><br/><code><span style="color: #000000;">          string AsBase64String = Convert.ToBase64String(AsBytes);  </span></code><br/><code><span style="color: #000000;">          var data = new Dictionary&lt;string, object&gt; </span></code><br/><code><span style="color: #000000;">          { </span></code><br/><code><span style="color: #000000;">               { </span><span style="color: #a31515;">"QRinBase64"</span><span style="color: #000000;">, AsBase64String } </span></code><br/><code><span style="color: #008000;">// QRinBase64 is the system name of the attribute to store the QR code in base64 format  </span></code><br/><code><span style="color: #000000;">           };  </span></code><br/><code><span style="color: #000000;">           Api.TeamNetwork.ObjectService.EditWithAlias(</span><span style="color: #a31515;">"QRCodes"</span><span style="color: #000000;">, userCommandContext.ObjectIds[</span><span style="color: #098658;">0</span><span style="color: #000000;">], data); </span></code><br/><code><span style="color: #008000;">// QRCodes is the system name of the record template where the button is located  </span></code><br/><code><span style="color: #000000;">      </span><span style="color: #0000ff;">var</span><span style="color: #000000;"> result = </span><span style="color: #0000ff;">new</span><span style="color: #000000;"> UserCommandResult </span></code><br/><code><span style="color: #000000;">      {  </span></code><br/><code><span style="color: #000000;">        Success = </span><span style="color: #0000ff;">true</span><span style="color: #000000;">,  </span></code><br/><code><span style="color: #000000;">        Commited = </span><span style="color: #0000ff;">true</span><span style="color: #000000;">,  </span></code><br/><code><span style="color: #000000;">        Messages = </span><span style="color: #0000ff;">new</span><span style="color: #000000;">[]  </span></code><br/><code><span style="color: #000000;">        {  </span></code><br/><code><span style="color: #000000;">          </span><span style="color: #0000ff;">new</span><span style="color: #000000;"> UserCommandMessage  </span></code><br/><code><span style="color: #000000;">          {  </span></code><br/><code><span style="color: #000000;">            Severity = SeverityLevel.Normal,  </span></code><br/><code><span style="color: #000000;">            Text = </span><span style="color: #a31515;">"QR code was generated"</span> </code><br/><code><span style="color: #008000;">// "QR code was generated" is the success message displayed upon generating the QR code  </span></code><br/><code><span style="color: #000000;">          }  </span></code><br/><code><span style="color: #000000;">         }  </span></code><br/><code><span style="color: #000000;">      };  </span></code><br/><code><span style="color: #0000ff;">  return</span><span style="color: #000000;"> result;  </span></code><code></code><br/><span style="color: #000000;"><code><span style="color: #000000;">    }<br/>}</span></code></span><code>
+</code></pre>
+</div>
+</li>
+<li><span style="letter-spacing: 0.2px;">In the <em>QRCodes </em>template, place the <em>QRcodeImage </em>attribute on a form.</span></li>
+<li><span style="letter-spacing: 0.2px;">Place the <em>Generate QR code </em>button on the form's toolbar.</span></li>
+<li>Save the form.</li>
+<li>Open or create a record in the <span style="letter-spacing: 0.2px;"><em>QRCodes </em>template.</span></li>
+<li>Click the <span style="letter-spacing: 0.2px;"><em>Generate QR code</em></span> button: you should see the generated QR code on the form.</li>
+</ol>

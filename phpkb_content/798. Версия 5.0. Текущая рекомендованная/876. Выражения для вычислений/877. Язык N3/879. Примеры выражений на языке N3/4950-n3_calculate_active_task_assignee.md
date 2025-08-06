@@ -94,7 +94,7 @@ kbId: 4950
        }.
        # Оставляем только активные аккаунты.
        ?value account:active true.
-       # Исключаем отключенные аккаунты
+       # Исключаем отключенные аккаунты.
        not {?value cmw:isDisabled true.}.
    }
 
@@ -170,8 +170,8 @@ kbId: 4950
 
 --8<-- "related_topics_heading.md"
 
-- [Вычисление пользователей с активными задачами](n3_calculate_active_task_accounts.html#n3_calculate_active_task_accounts)
-- [Периодические напоминания об открытых задачах](n3_periodic_task_notifications.html#n3_periodic_task_notifications "Периодические напоминания об открытых задачах. Настройка с помощью N3")
+- [Вычисление пользователей с активными задачами](n3_calculate_active_task_accounts.html#example_n3_calculate_active_task_accounts "Аккаунты и задачи. Вычисление пользователей с активными задачами с помощью N3")
+- [Периодические напоминания об открытых задачах][example_n3_periodic_task_notifications]
 - [Уведомления. Типы, назначение, настройка, использование][notification_types]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

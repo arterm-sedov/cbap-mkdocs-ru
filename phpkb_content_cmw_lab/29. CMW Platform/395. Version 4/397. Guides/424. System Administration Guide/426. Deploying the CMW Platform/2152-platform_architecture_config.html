@@ -1,0 +1,676 @@
+<h1>CMW Platform Architecture, Landscape, and Software &amp;amp; Hardware Configuration</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1gtc0tjvg0">Introduction</a></li>
+<li><a href="#mcetoc_1gtc0tjvg1">Definitions</a></li>
+<li><a href="#mcetoc_1gtc0tjvg2">System Architecture</a>
+<ul>
+<li><a href="#mcetoc_1gtc0tjvg3">System Security and Resilience</a></li>
+<li><a href="#mcetoc_1gtc0tjvg4">Integration with External Systems</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gtc0tjvg5">System deployment landscape</a>
+<ul>
+<li><a href="#mcetoc_1gtc0tjvg6">Recommended System Deployment Options</a>
+<ul>
+<li><a href="#mcetoc_1gtc0tjvg7">Minimum Configuration</a></li>
+<li><a href="#mcetoc_1gtc0tjvg8">Production Configuration</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gtc0tjvg9">Recommended Set of Application Servers</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gtc0tjvga">The System Hardware Configuration</a>
+<ul>
+<li><a href="#mcetoc_1gtc0tjvgb">Application Server Configuration</a>
+<ul>
+<li><a href="#mcetoc_1gtc0tjvgc">An Example Hardware Resource Calculation for a Fault-Tolerant System</a></li>
+<li><a href="#mcetoc_1gtc0tjvgd">Minimum Primary and Backup Application Server Configuration</a></li>
+<li><a href="#mcetoc_1gtc0tjvge">Minimum Development and Test Server Configuration</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gtc0tjvgf">Storage Configuration</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gtc0tjvgg">Change Log</a></li>
+</ul>
+</div>
+<p>Version: 1.0 </p>
+<p>Published: 07.04.2023</p>
+<h2 id="mcetoc_1gtc0tjvg0">Introduction</h2>
+<p>The CMW Platform is a low-code business process management software powered by a modern technology stack.</p>
+<p>This article contains:</p>
+<ul>
+<li>Brief description of the CMW Platform architecture</li>
+<li>Recommended deployment landscape options</li>
+<li>Recommended software and hardware configurations</li>
+</ul>
+<h2 id="mcetoc_1gtc0tjvg1">Definitions</h2>
+<p><strong>Product</strong> — CMW Platform software.</p>
+<p><strong>Instance</strong> — deployed CMW Platform website.</p>
+<p><strong>System</strong> — complete hardware and software environment powered by the CMW Platform.</p>
+<p><strong>Application server</strong> — deployed instance of the CMW Platform.</p>
+<p><strong>Application</strong> — standalone business solution running on the application server.</p>
+<p><strong>Active users</strong> — users who regularly generate data on the application server.</p>
+<p><strong>DAS</strong> — storage device directly connected to the application server.</p>
+<p><strong>SAN</strong> — storage area network.</p>
+<p><strong>IOPS</strong> — throughput expressed as a number of input/output operations per second.</p>
+<h2 id="mcetoc_1gtc0tjvg2">System Architecture</h2>
+<p style="text-align: left;">The System architecture is client-server, component-multilayer, and service-oriented. It supports extension via plugins and adapters.</p>
+<p style="text-align: left;">The System comprises the following subsystems:</p>
+<ul style="margin-left: 16px;">
+<li><em>Web application</em>: single page application (SPA) based on Marionette, Backbone, React, and Redux.</li>
+<li><em>Mobile app</em>: React Native powered by Expo.</li>
+<li><em>Backend</em>: service components based on .NET 6.0, .NET Framework 4.8 (Windows), Mono 6.12 (Linux), and JDK 17.</li>
+<li><em>Database management system (DBMS)</em>: CMW Elastic Data (proprietary) that stores the data in the file system or the Apache Ignite (depending on the load requirements and deployment configuration).</li>
+<li><em>Full-text search engine</em>: Lucene.NET.</li>
+<li><em>Transaction logging and analysis, and System </em><em>data monitoring</em>: Elasticsearch, Kibana.</li>
+<li><em>File logging</em>: NLog.</li>
+<li><em>Integration modules</em>: see <a data-cke-saved-href="#mcetoc_1g7eann3f2" href="#mcetoc_1g7eann3f2" style="box-sizing: border-box; color: #2d9adf; text-decoration: none; background-color: transparent;">Integration with External Systems</a>.</li>
+</ul>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="CMW Platform architecture diagram" class="img-responsive" data-cke-saved-src="https://kb.comindware.ru/assets/Picture1.png" height="" src="https://kb.cmwlab.com/assets/CMW_Platform_Architecture_EN_v1.6.svg" width="100%"/></p>
+<p class="caption" style="font-size: 15px !important;"><em>CMW Platform architecture diagram</em></p>
+</div>
+<h3 id="mcetoc_1gtc0tjvg3">System Security and Resilience</h3>
+<p style="text-align: left;">The System supports the following security and fault tolerance mechanisms.</p>
+<ul style="margin-left: 16px;">
+<li><em>External security</em>:
+<ul style="margin-left: 16px; list-style-type: circle;">
+<li>Kerberos and OpenID user authentication,</li>
+<li>firewall,</li>
+<li>reverse proxy.</li>
+</ul>
+</li>
+<li><em>Internal security</em>: role-based security model.</li>
+<li><em>Fault tolerance: </em>redundant servers, data storage, and processing nodes.</li>
+<li><em>Scalability</em>: additional request-processing servers.</li>
+</ul>
+<h3 id="mcetoc_1gtc0tjvg4">Integration with External Systems</h3>
+<p style="text-align: left;">The System supports the following external integration types.</p>
+<ul style="margin-left: 16px;">
+<li><em>Git</em> — version control for applications created in the System.</li>
+<li><em>OData</em> — communication with external systems via the REST API.</li>
+<li><em>OpenLDAP (Active Directory)</em> — authentication, account management, and single sign-on.</li>
+<li><em>SMTP/IMAP/Exchange</em> — receiving and sending e-mail.</li>
+<li><em>ESB ( RabbitMQ/MSMQ)</em> — communication with external systems in distributed and federated environments.</li>
+</ul>
+<h2 id="mcetoc_1gtc0tjvg5">System deployment landscape</h2>
+<p style="text-align: left;">To ensure uninterrupted operation, deploy the System in an environment with adequate performance and fault tolerance.</p>
+<p style="text-align: left;">You can deploy the System for internet or intranet access:</p>
+<ul style="margin-left: 16px;">
+<li><em>Minimum configuration</em> — deploy on one virtual or physical machine.</li>
+<li><em>Production configuration —</em> deploy on the customer's premises in a fault-tolerant landscape per the customer's requirements.</li>
+</ul>
+<h3 id="mcetoc_1gtc0tjvg6">Recommended System Deployment Options</h3>
+<h4 id="mcetoc_1gtc0tjvg7">Minimum Configuration</h4>
+<p style="text-align: left;">A minimal System configuration suitable for demonstrations and pilot projects comprises the following components:</p>
+<ol style="margin-left: 16px;">
+<li>CMW Platform instance.</li>
+<li>CMW Elastic Data DBMS.</li>
+<li>Elasticsearch server in a single-node configuration to log transactions and data changes.</li>
+</ol>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Minimal System configuration" class="img-responsive" data-cke-saved-src="https://kb.comindware.ru/assets/Picture2_2.png" height="" src="https://kb.cmwlab.com/assets/CMW_Platform_Minimal_Configuration_EN.svg" width="100%"/></p>
+<p class="caption" style="font-size: 15px !important;">Minimum System configuration</p>
+</div>
+<h4 id="mcetoc_1gtc0tjvg8">Production Configuration</h4>
+<p style="text-align: left;">A production System configuration with resource duplication, redundancy, and fault tolerance includes the following components.</p>
+<ol style="margin-left: 16px;">
+<li>CMW Platform instance.</li>
+<li>CMW Elastic Data DBMS.</li>
+<li>Elasticsearch server to log transactions and data changes.</li>
+<li>NGINX reverse proxy to filter out unwanted requests and relay valid requests to the internal network.</li>
+<li>Zabbix server to monitor service availability and free disk space.</li>
+<li>Mail server (SMTP/IMAP) (optional) to send notifications.</li>
+<li>LDAP server (optional) for centralized management of the network infrastructure.</li>
+<li>Git server (optional) for version control of the applications built with the CMW Platform.</li>
+</ol>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Production System configuration" class="img-responsive" data-cke-saved-src="https://kb.comindware.ru/assets/Picture3_3.png" height="" src="https://kb.cmwlab.com/assets/CMW_Platform_Production_Configuration_EN.svg" width="100%"/></p>
+<p class="caption" style="font-size: 15px !important;">Production System configuration</p>
+</div>
+<p style="text-align: left;">Production use scenarios impose the following System requirements.</p>
+<ul style="margin-left: 16px;">
+<li><em>Security</em> — implemented by setting up a firewall and a reverse proxy server.</li>
+<li><em>Fault tolerance</em> — implemented by setting up the redundant servers and additional data server nodes.</li>
+<li><em>Scalability</em> — implemented by adding more request-processing servers.</li>
+</ul>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Typical landscape of the System services" class="img-responsive" data-cke-saved-src="https://kb.comindware.ru/assets/Picture4_4.png" height="" src="https://kb.cmwlab.com/assets/CMW_Typical_Service_Landscape_EN.svg" width="100%"/></p>
+<p class="caption" style="font-size: 15px !important;">Typical landscape of the System services</p>
+</div>
+<h3 id="mcetoc_1gtc0tjvg9">Recommended Set of Application Servers</h3>
+<p style="text-align: left;">To improve application development and testing efficiency, as well as application fault tolerance and security, deploy several application servers.</p>
+<p style="color: #0e101a; background: transparent; margin-top: 0pt; margin-bottom: 0pt;"><span data-preserver-spaces="true" style="color: #0e101a; background: transparent; margin-top: 0pt; margin-bottom: 0pt;">When defining the technical requirements, determine the need for each of these servers:</span></p>
+<ol style="margin-left: 16px;">
+<li><em>Development server</em> to develop the applications.</li>
+<li><em>Testing server (pre-production)</em> to test the applications.</li>
+<li><em>Primary server (production)</em> to run the applications.</li>
+<li><em>Standby server</em> to use in case of primary server overload or failure.</li>
+</ol>
+<h2 id="mcetoc_1gtc0tjvga">The System Hardware Configuration</h2>
+<p>See below the recommended hardware specifications to deploy the System at the customer's premises under Windows or Linux.</p>
+<h3 id="mcetoc_1gtc0tjvgb">Application Server Configuration</h3>
+<p style="text-align: left;">The application server provides user and third-party system interaction, data input, processing, and storage (database, configuration, uploaded files, logs, and backups).</p>
+<p style="text-align: left;">Host the application server on a physical or virtual machine.</p>
+<p style="text-align: left;">The following guidelines will help you configure the application server hardware.</p>
+<p style="text-align: left;">In a minimum configuration, you can deploy a single application server to develop, test, and run the applications. </p>
+<p style="text-align: left;">The following recommended specifications provide a comfortable experience for the end users, citizen developers, and testers of the CMW Platform applications.</p>
+<p style="text-align: left;">Actual hardware requirements may vary significantly and depend on the following factors:</p>
+<ul style="margin-left: 16px;">
+<li>number of active users,</li>
+<li>number of applications,</li>
+<li>number of running processes,</li>
+<li>number of configured calculations, rules, conditions, and data dependencies,</li>
+<li>size of stored data and documents.</li>
+</ul>
+<p style="text-align: left;">We recommend deploying the subsystems (Apache Ignite, Elasticsearch, NGINX, Zabbix) and the Product instance virtual machines on different physical machines.</p>
+<p style="text-align: left;">Communication channels between the System nodes must provide at least 10 Gbps bandwidth.</p>
+<h4 id="mcetoc_1gtc0tjvgc">An Example Hardware Resource Calculation for a Fault-Tolerant System</h4>
+<p>The table below shows an example of hardware allocation for the following number of users:</p>
+<ul>
+<li>500 registered</li>
+<li>200 active</li>
+<li>25 online</li>
+</ul>
+<table border="1" cellpadding="0" cellspacing="0" style="line-height: normal; width: 97%;">
+<thead>
+<tr>
+<th rowspan="2" style="width: 12%;">
+<p><strong>Server name</strong></p>
+</th>
+<th rowspan="2" style="width: 25%;">
+<p><strong>Description</strong></p>
+</th>
+<th rowspan="2" style="text-align: center; width: 4.5%;">
+<p><span style="font-size: 10pt;"><strong>Logical CPU cores, 3.0 GHz and above</strong></span></p>
+</th>
+<th rowspan="2" style="text-align: center; width: 4.5%;">
+<p><span style="font-size: 10pt;"><strong>RAM, GB </strong> </span></p>
+</th>
+<th colspan="5" style="text-align: center; width: 30%;">
+<p><strong>Data storage, GB</strong></p>
+</th>
+</tr>
+<tr>
+<th style="text-align: center; width: 8%;">
+<p><span style="font-size: 10pt;"><strong>Software partition</strong></span> <br/><span style="font-size: 10pt;"><strong>SSD </strong> </span></p>
+</th>
+<th style="text-align: center; width: 8%;">
+<p><span style="font-size: 10pt;"><strong>Database</strong></span> <br/><span style="font-size: 10pt;"><strong>Highly reliable<br/>high speed</strong></span> <br/><span style="font-size: 10pt;"><strong>SSD </strong> </span></p>
+</th>
+<th style="text-align: center; width: 8%;">
+<p><span style="font-size: 10pt;"><strong>Uploads</strong></span> <br/><span style="font-size: 10pt;"><strong>HDD </strong> </span></p>
+</th>
+<th style="text-align: center; width: 8%;">
+<p><span style="font-size: 10pt;"><strong>Logs</strong></span> <br/><span style="font-size: 10pt;"><strong>HDD</strong></span></p>
+</th>
+<th style="text-align: center; width: 8%;">
+<p><span style="font-size: 10pt;"><strong>Backups</strong></span> <br/><span style="font-size: 10pt;"><strong>HDD </strong> </span></p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="9" style="width: 99.8951%;"><strong>Infrastructure services</strong></td>
+</tr>
+<tr>
+<td style="width: 12%;">NGINX-reverse-proxy1</td>
+<td style="width: 25%;">Reverse proxy (VPS)</td>
+<td style="width: 4.5%; text-align: center;">2</td>
+<td style="width: 4.72193%; text-align: center;">2</td>
+<td style="width: 6.87303%; text-align: center;">24</td>
+<td style="width: 18.9402%; text-align: center;"> </td>
+<td style="width: 10.5456%; text-align: center;"> </td>
+<td style="width: 5.71878%; text-align: center;"> </td>
+<td style="width: 12%;"> </td>
+</tr>
+<tr>
+<td style="width: 12%;">NGINX-reverse-proxy2</td>
+<td style="width: 25%;">Reverse proxy (VPS)</td>
+<td style="width: 4.5%; text-align: center;">2</td>
+<td style="width: 4.72193%; text-align: center;">2</td>
+<td style="width: 6.87303%; text-align: center;">24</td>
+<td style="width: 18.9402%; text-align: center;"> </td>
+<td style="width: 10.5456%; text-align: center;"> </td>
+<td style="width: 5.71878%; text-align: center;"> </td>
+<td style="width: 12%;"> </td>
+</tr>
+<tr>
+<td style="width: 12%;">Zabbix1</td>
+<td style="width: 25%;">Monitoring and tracking system (VPS)</td>
+<td style="width: 4.5%; text-align: center;">2</td>
+<td style="width: 4.72193%; text-align: center;">4</td>
+<td style="width: 6.87303%; text-align: center;">24</td>
+<td style="width: 18.9402%; text-align: center;">128</td>
+<td style="width: 10.5456%; text-align: center;"> </td>
+<td style="width: 5.71878%; text-align: center;"> </td>
+<td style="width: 12%;"> </td>
+</tr>
+<tr>
+<td style="width: 12%;">Zabbix2</td>
+<td style="width: 25%;">Monitoring and tracking system (VPS)</td>
+<td style="width: 4.5%; text-align: center;">2</td>
+<td style="width: 4.72193%; text-align: center;">4</td>
+<td style="width: 6.87303%; text-align: center;">24</td>
+<td style="width: 18.9402%; text-align: center;">128</td>
+<td style="width: 10.5456%; text-align: center;"> </td>
+<td style="width: 5.71878%; text-align: center;"> </td>
+<td style="width: 12%;"> </td>
+</tr>
+<tr>
+<td style="width: 12%;"> </td>
+<td style="width: 25%;"> </td>
+<td style="width: 4.5%; text-align: center;"> </td>
+<td style="width: 4.72193%; text-align: center;"> </td>
+<td style="width: 6.87303%; text-align: center;"> </td>
+<td style="width: 18.9402%; text-align: center;"> </td>
+<td style="width: 10.5456%; text-align: center;"> </td>
+<td style="width: 5.71878%; text-align: center;"> </td>
+<td style="width: 12%;"> </td>
+</tr>
+<tr>
+<td colspan="9" style="width: 99.8951%; text-align: center;"><strong>Production environment</strong></td>
+</tr>
+<tr>
+<td style="width: 12%;">CMWP-node1*</td>
+<td style="width: 25%;">CMW Platform application server (VPS)</td>
+<td style="width: 4.5%; text-align: center;">8</td>
+<td style="width: 4.72193%; text-align: center;">32</td>
+<td style="width: 6.87303%; text-align: center;">64</td>
+<td style="width: 18.9402%; text-align: center;">128</td>
+<td rowspan="3" style="width: 10.5456%; text-align: center;">1024</td>
+<td style="width: 5.71878%; text-align: center;">16</td>
+<td rowspan="3" style="width: 12%; text-align: center;">512</td>
+</tr>
+<tr>
+<td style="width: 12%;">CMWP-node2*</td>
+<td style="width: 25%;">CMW Platform application server (VPS)</td>
+<td style="width: 4.5%; text-align: center;">8</td>
+<td style="width: 4.72193%; text-align: center;">32</td>
+<td style="width: 6.87303%; text-align: center;">64</td>
+<td style="width: 18.9402%; text-align: center;">128</td>
+<td style="width: 5.71878%; text-align: center;">16</td>
+</tr>
+<tr>
+<td style="width: 12%;">CMWP-node3*</td>
+<td style="width: 25%;">CMW Platform application server (VPS)</td>
+<td style="width: 4.5%; text-align: center;">8</td>
+<td style="width: 4.72193%; text-align: center;">32</td>
+<td style="width: 6.87303%; text-align: center;">64</td>
+<td style="width: 18.9402%; text-align: center;">128</td>
+<td style="width: 5.71878%; text-align: center;">16</td>
+</tr>
+<tr>
+<td style="width: 12%;">Elasticsearch-node1*</td>
+<td style="width: 25%;">Elasticsearch logging server (VPS)</td>
+<td style="width: 4.5%; text-align: center;">4</td>
+<td style="width: 4.72193%; text-align: center;">16</td>
+<td style="width: 6.87303%; text-align: center;">24</td>
+<td style="width: 18.9402%; text-align: center;">128</td>
+<td style="width: 10.5456%; text-align: center;"> </td>
+<td style="width: 5.71878%; text-align: center;">16</td>
+<td rowspan="3" style="width: 12%; text-align: center;">512</td>
+</tr>
+<tr>
+<td style="width: 12%;">Elasticsearch-node2*</td>
+<td style="width: 25%;">Elasticsearch logging server (VPS)</td>
+<td style="width: 4.5%; text-align: center;">4</td>
+<td style="width: 4.72193%; text-align: center;">16</td>
+<td style="width: 6.87303%; text-align: center;">24</td>
+<td style="width: 18.9402%; text-align: center;">128</td>
+<td style="width: 10.5456%; text-align: center;"> </td>
+<td style="width: 5.71878%; text-align: center;">16</td>
+</tr>
+<tr>
+<td style="width: 12%;">Elasticsearch-node3*</td>
+<td style="width: 25%;">Elasticsearch logging server (VPS)</td>
+<td style="width: 4.5%; text-align: center;">4</td>
+<td style="width: 4.72193%; text-align: center;">16</td>
+<td style="width: 6.87303%; text-align: center;">24</td>
+<td style="width: 18.9402%; text-align: center;">128</td>
+<td style="width: 10.5456%; text-align: center;"> </td>
+<td style="width: 5.71878%; text-align: center;">16</td>
+</tr>
+<tr>
+<td colspan="9" style="width: 99.8951%;">* Virtual servers of the same service must be hosted on different physical machines.</td>
+</tr>
+<tr>
+<td colspan="9" style="width: 99.8951%;">The connection speed between the servers must be at least 10 Gbps.</td>
+</tr>
+<tr>
+<td colspan="9" style="width: 99.8951%;"> </td>
+</tr>
+<tr>
+<td colspan="9" style="width: 99.8951%;"><strong>Test and development environment</strong></td>
+</tr>
+<tr>
+<td style="width: 12%;">Git-server</td>
+<td style="width: 25%;">GitLab</td>
+<td style="width: 4.5%; text-align: center;">2</td>
+<td style="width: 4.72193%; text-align: center;">4</td>
+<td style="width: 6.87303%; text-align: center;">24</td>
+<td style="width: 18.9402%; text-align: center;">128</td>
+<td style="width: 10.5456%; text-align: center;"> </td>
+<td style="width: 5.71878%; text-align: center;"> </td>
+<td style="width: 12%; text-align: center;"> </td>
+</tr>
+<tr>
+<td style="width: 12%;">CMWP-test</td>
+<td style="width: 25%;">CMW Platform application server (VPS)</td>
+<td style="width: 4.5%; text-align: center;">8</td>
+<td style="width: 4.72193%; text-align: center;">24</td>
+<td style="width: 6.87303%; text-align: center;">64</td>
+<td style="width: 18.9402%; text-align: center;">128</td>
+<td style="width: 10.5456%; text-align: center;">32</td>
+<td style="width: 5.71878%; text-align: center;">16</td>
+<td style="width: 12%; text-align: center;">128</td>
+</tr>
+<tr>
+<td style="width: 12%;">CMWP-dev</td>
+<td style="width: 25%;">CMW Platform application server (VPS)</td>
+<td style="width: 4.5%; text-align: center;">8</td>
+<td style="width: 4.72193%; text-align: center;">24</td>
+<td style="width: 6.87303%; text-align: center;">64</td>
+<td style="width: 18.9402%; text-align: center;">128</td>
+<td style="width: 10.5456%; text-align: center;">32</td>
+<td style="width: 5.71878%; text-align: center;">16</td>
+<td style="width: 12%; text-align: center;">128</td>
+</tr>
+<tr>
+<td style="width: 12%;">Elasticsearch</td>
+<td style="width: 25%;">Elasticsearch logging server (VPS)</td>
+<td style="width: 4.5%; text-align: center;">4</td>
+<td style="width: 4.72193%; text-align: center;">16</td>
+<td style="width: 6.87303%; text-align: center;">24</td>
+<td style="width: 18.9402%; text-align: center;">128</td>
+<td style="width: 10.5456%; text-align: center;"> </td>
+<td style="width: 5.71878%; text-align: center;">16</td>
+<td style="width: 12%; text-align: center;">128</td>
+</tr>
+<tr>
+<td style="width: 12%;"> </td>
+<td style="width: 25%;"> </td>
+<td style="width: 4.5%; text-align: center;"> </td>
+<td style="width: 4.72193%; text-align: center;"> </td>
+<td style="width: 6.87303%; text-align: center;"> </td>
+<td style="width: 18.9402%; text-align: center;"> </td>
+<td style="width: 10.5456%; text-align: center;"> </td>
+<td style="width: 5.71878%; text-align: center;"> </td>
+<td style="width: 12%; text-align: center;"> </td>
+</tr>
+<tr>
+<td colspan="2" style="width: 26.915%;"><strong>Total by resource type</strong></td>
+<td style="width: 4.5%; text-align: center;"><strong>66</strong></td>
+<td style="width: 4.72193%; text-align: center;"><strong>224</strong></td>
+<td style="width: 6.87303%; text-align: center;"><strong>536</strong></td>
+<td style="width: 18.9402%; text-align: center;"><strong>1536</strong></td>
+<td style="width: 10.5456%; text-align: center;"><strong>1088</strong></td>
+<td style="width: 5.71878%; text-align: center;"><strong>144</strong></td>
+<td style="width: 12%; text-align: center;"><strong>1408</strong></td>
+</tr>
+</tbody>
+</table>
+<h4 id="mcetoc_1gtc0tjvgd">Minimum Primary and Backup Application Server Configuration</h4>
+<table border="1" cellpadding="0" cellspacing="0" style="width: 97%;">
+<thead>
+<tr>
+<th>
+<p><strong>Number of users</strong></p>
+</th>
+<th style="text-align: center;">
+<p><strong>CPU cores</strong> <br/>3.7 GHz and above <br/>(Add 1 core <br/>per 100 active users <br/>per application)</p>
+</th>
+<th style="text-align: center;">
+<p><strong>RAM, GB<br/>(Add 4GB </strong> <br/>per 100 active users <br/>per application)</p>
+</th>
+<th style="text-align: center;">
+<p><strong>HDD, GB</strong></p>
+</th>
+<th style="text-align: center;">
+<p><strong>SSD, GB</strong></p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="5" style="vertical-align: top;">
+<p><strong>Primary Application Server</strong></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>1–200 active</p>
+</td>
+<td>
+<p style="text-align: center;">4 + (1 × app qty)</p>
+</td>
+<td>
+<p style="text-align: center;">16 + (4 × app qty)</p>
+</td>
+<td>
+<p style="text-align: center;">16</p>
+</td>
+<td>
+<p style="text-align: center;">16</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>200 active</p>
+</td>
+<td>
+<p style="text-align: center;">4 + (2 × app qty)</p>
+</td>
+<td>
+<p style="text-align: center;">16 + (8 × app qty)</p>
+</td>
+<td>
+<p style="text-align: center;">16 × app qty</p>
+</td>
+<td>
+<p style="text-align: center;">16 × app qty</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>300 active</p>
+</td>
+<td>
+<p style="text-align: center;">4 + (3 × app qty)</p>
+</td>
+<td>
+<p style="text-align: center;">16 + (12 × app qty)</p>
+</td>
+<td>
+<p style="text-align: center;">16 × app qty</p>
+</td>
+<td>
+<p style="text-align: center;">16 × app qty</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>400 active</p>
+</td>
+<td>
+<p style="text-align: center;">4 + (4 × app qty)</p>
+</td>
+<td>
+<p style="text-align: center;">16 + (16 × app qty)</p>
+</td>
+<td>
+<p style="text-align: center;">16 × app qty</p>
+</td>
+<td>
+<p style="text-align: center;">16 × app qty</p>
+</td>
+</tr>
+<tr>
+<td colspan="5">
+<p><strong>Standby Application Server</strong></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>1­–200</p>
+</td>
+<td>
+<p style="text-align: center;">4 + (1 × app qty)</p>
+</td>
+<td>
+<p style="text-align: center;">16 + (4 × app qty)</p>
+</td>
+<td>
+<p style="text-align: center;">16 × app qty</p>
+</td>
+<td>
+<p style="text-align: center;">8 × app qty</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>200</p>
+</td>
+<td>
+<p style="text-align: center;">4 + (2 × app qty)</p>
+</td>
+<td>
+<p style="text-align: center;">16 + (8 × app qty)</p>
+</td>
+<td>
+<p style="text-align: center;">16 × app qty</p>
+</td>
+<td>
+<p style="text-align: center;">8 × app qty</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>300</p>
+</td>
+<td>
+<p style="text-align: center;">4 + (3 × app qty)</p>
+</td>
+<td>
+<p style="text-align: center;">16 + (12 × app qty)</p>
+</td>
+<td>
+<p style="text-align: center;">16 × app qty</p>
+</td>
+<td>
+<p style="text-align: center;">8 × app qty</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>400</p>
+</td>
+<td>
+<p style="text-align: center;">4 + (4 × app qty)</p>
+</td>
+<td>
+<p style="text-align: center;">16 + (16 × app qty)</p>
+</td>
+<td>
+<p style="text-align: center;">16 × app qty</p>
+</td>
+<td>
+<p style="text-align: center;">8 × app qty</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="mcetoc_1gtc0tjvge">Minimum Development and Test Server Configuration</h4>
+<table border="1" cellpadding="0" cellspacing="0" style="width: 97%;">
+<thead>
+<tr>
+<th>
+<p><strong>Number of users</strong></p>
+</th>
+<th style="text-align: center;"><strong>CPU cores</strong> <br/>3.7 GHz <br/>and above</th>
+<th style="text-align: center;">
+<p><strong>RAM,<br/>GB</strong></p>
+</th>
+<th style="text-align: center;">
+<p><strong>HDD,<br/>GB</strong></p>
+</th>
+<th style="text-align: center;">
+<p><strong>SSD,<br/>GB</strong></p>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="5">
+<p><strong>Development server</strong></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>1–100</p>
+</td>
+<td>
+<p style="text-align: center;">4</p>
+</td>
+<td>
+<p style="text-align: center;">16</p>
+</td>
+<td style="text-align: center;">16</td>
+<td>
+<p style="text-align: center;">16</p>
+</td>
+</tr>
+<tr>
+<td colspan="5">
+<p><strong>Test server</strong></p>
+</td>
+</tr>
+<tr>
+<td>
+<p>1–100</p>
+</td>
+<td>
+<p style="text-align: center;">4</p>
+</td>
+<td>
+<p style="text-align: center;">16</p>
+</td>
+<td>
+<p style="text-align: center;">16</p>
+</td>
+<td>
+<p style="text-align: center;">16</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mcetoc_1gtc0tjvgf">Storage Configuration</h3>
+<p style="text-align: left;">In a minimum configuration, all application server data folders can be stored on a single partition on a high-performance SSD.</p>
+<p style="text-align: left;">High-performance storage systems (SSD DAS/SAN) must provide a throughput of at least 100,000 IOPS per application server.</p>
+<p style="text-align: left;">When defining the System specifications, determine the amount of space allocated on the high-performance (SSD DAS/SAN) and low-performance storage systems (HDD DAS/SAN).</p>
+<p style="text-align: left;">To optimize data processing, storage, and backup, configure separate storage for the application server data folders:</p>
+<ul>
+<li><em>Database and configuration files</em> — SSD DAS/SAN. The application server constantly processes this data online, which creates a high load on the storage subsystem.</li>
+<li><em>Files uploaded by users</em> — HDD DAS/SAN. Uploaded files are stored for a long time and outside of the database. They are fetched via links. Hence, a high-performance storage subsystem is optional for them.</li>
+<li><em>System logs</em> — HDD DAS/SAN. Log file writing operations create a minimal load on the storage subsystem.</li>
+<li><em>Backups</em> — HDD DAS/SAN. Backups are created periodically and rarely used. For their storage, the volume is more important than the performance. However, the backup speed may decrease if there are many small uploaded files. In this case, place the backup folder on a high-performance drive.</li>
+<li><em>Temporary folder</em> — SSD DAS/SAN. The temporary file storage and processing load may increase due to various factors, such as many active users and transactions, users uploading many files, etc.</li>
+</ul>
+<h2 id="mcetoc_1gtc0tjvgg">Change Log</h2>
+<table border="1" cellspacing="0" style="border-collapse: collapse; height: 156px; width: 100%;">
+<tbody>
+<tr>
+<th style="height: 39px; width: 33.3333%;">Date</th>
+<th style="height: 39px; width: 33.3333%;">Version</th>
+<th style="height: 39px; width: 33.3333%;">Changes</th>
+</tr>
+<tr>
+<td style="height: 39px; width: 33.3333%;">07.04.2023</td>
+<td style="height: 39px; width: 33.3333%;">1.0</td>
+<td style="height: 39px; width: 33.3333%;">Original version.</td>
+</tr>
+</tbody>
+</table>
+<p> </p>

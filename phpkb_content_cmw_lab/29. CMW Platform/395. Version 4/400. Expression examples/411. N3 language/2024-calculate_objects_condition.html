@@ -1,0 +1,35 @@
+<h1>Calculation of objects that meet the condition</h1><p>Task example: in the table on the project form, it is necessary to display only those employees who have the skills necessary for the project. An employee is displayed only if all the requested skills are present.</p>
+<p>The project "Space tourism", the necessary skills to work in the project: Astronomy, Foreign languages, Logistics.</p>
+<p>Employee #1 has the following skills: Astronomy, Logistics, Programming, Network technologies.</p>
+<p>Employee #2 has the following skills: Web design, Astronomy, Foreign languages, Logistics.</p>
+<p>Employee #1 does not have all the required skills to participate in the project and does not need to be displayed in the table. And employee #2 has all the necessary skills, so he needs to be displayed.</p>
+<p>Data model:</p>
+<ul>
+<li>Record template "Projects" (projects):
+<ul style="list-style-type: circle;">
+<li>Attribute "Required skills" (required_skills), referring to the record template "Skills" (multiple values);</li>
+<li>Attribute "Employees fit for the project", referring to the record template "Employees" (multiple values).</li>
+</ul>
+</li>
+<li>Record template "Employees" (employees):
+<ul style="list-style-type: circle;">
+<li>Attribute "Employee skills" (available_skills), referring to the record template "Skills" (multiple values).</li>
+</ul>
+</li>
+<li>Record template "Skills".</li>
+</ul>
+<p>In order to calculate objects that meet the condition specified in the main object (in this case, employees with the necessary skills), enter the following expression:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">
+<p style="margin-bottom: 0in; line-height: 18.75pt; background: #FAFAFA;"><span style="font-size: 10.0pt; font-family: 'Courier New'; color: #545764; letter-spacing: .15pt;">@prefix object: &lt;http://comindware.com/ontology/object#&gt;.<br/>@prefix assert: &lt;http://comindware.com/logics/assert#&gt;.<br/>@prefix cmw: &lt;http://comindware.com/logics#&gt;.<br/>{<br/>    ("projects" "required_skills") object:findProperty ?PropertyLittle. <br/>    ("employees" "available_skills") object:findProperty ?PropertyBig.</span></p>
+<p style="margin-bottom: 0in; line-height: 18.75pt; background: #FAFAFA;"><span style="font-size: 10.0pt; font-family: 'Courier New'; color: #545764; letter-spacing: .15pt;"><br/>    ?container object:alias "employees". <br/>    ?allObjs cmw:container ?container.</span></p>
+<p style="margin-bottom: 0in; line-height: 18.75pt; background: #FAFAFA;"><span style="font-size: 10.0pt; font-family: 'Courier New'; color: #545764; letter-spacing: .15pt;">    {<br/>        ?item ?PropertyLittle ?resultL.<br/>        ?allObjs ?PropertyBig ?resultL.<br/>    } assert:count ?c.</span></p>
+<p style="margin-bottom: 0in; line-height: 18.75pt; background: #FAFAFA;"><span style="font-size: 10.0pt; font-family: 'Courier New'; color: #545764; letter-spacing: .15pt;">    {<br/>        ?item ?PropertyLittle ?resultA.<br/>    } assert:count ?d.<br/>    <br/>    if {?c == ?d}<br/>    then {?allObjs -&gt; ?value.}<br/>}</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>

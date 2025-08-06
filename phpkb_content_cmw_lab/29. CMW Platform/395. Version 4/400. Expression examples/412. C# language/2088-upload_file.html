@@ -1,0 +1,77 @@
+<h1>Uploading a file from a local folder</h1><p>To add a file from a local folder on your computer to an attribute with the “Document” data type, enter the following expression:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">
+<p>using System;</p>
+<p>using System.Collections.Generic;</p>
+<p>using System.Linq;</p>
+<p>using Comindware.Data.Entity;</p>
+<p>using Comindware.TeamNetwork.Api.Data.UserCommands;</p>
+<p>using Comindware.TeamNetwork.Api.Data;</p>
+<p>using System.IO;</p>
+<p> </p>
+<p>class Script</p>
+<p>{</p>
+<p>    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)</p>
+<p>    {</p>
+<p>        try</p>
+<p>        {</p>
+<p>            var id = userCommandContext.ObjectIds[0];</p>
+<p>            var data = Api.TeamNetwork.ObjectService.GetPropertyValues(new []{id}, new []{"Path"});</p>
+<p>            var path = data[id]["Path"].ToString();</p>
+<p>            var fs = new FileStream(@path, FileMode.OpenOrCreate);</p>
+<p>            var arrayTitle = path.Split('\\','/');</p>
+<p>            var arrayExtension = path.Split('.');</p>
+<p>            var docData = new Document</p>
+<p>            {</p>
+<p>                Title = arrayTitle[arrayTitle.Length-1],</p>
+<p>                Extension = arrayExtension[arrayExtension.Length-1]</p>
+<p>                };</p>
+<p>            string doc = Api.TeamNetwork.DocumentService.CreateDocumentWithStream(docData, fs, "");</p>
+<p>            Api.TeamNetwork.ObjectService.EditWithAlias(id, new Dictionary&lt;string,object&gt;{{"Attachment",doc}});</p>
+<p>        }</p>
+<p>        catch</p>
+<p>        {</p>
+<p>            var result1 = new UserCommandResult</p>
+<p>            {</p>
+<p>                Success = true,</p>
+<p>                Commited = true,</p>
+<p>                ResultType = UserCommandResultType.Notificate,</p>
+<p>                Messages = new[]</p>
+<p>                {</p>
+<p>                    new UserCommandMessage</p>
+<p>                    {</p>
+<p>                        Severity = SeverityLevel.Normal,</p>
+<p>                        Text = "Error"</p>
+<p>                        }</p>
+<p>                }</p>
+<p>            };</p>
+<p>            return result1;</p>
+<p>        }</p>
+<p>        var result = new UserCommandResult</p>
+<p>        {</p>
+<p>            Success = true,</p>
+<p>            Commited = true,</p>
+<p>            ResultType = UserCommandResultType.Notificate,</p>
+<p>            Messages = new[]</p>
+<p>            {</p>
+<p>                new UserCommandMessage</p>
+<p>                {</p>
+<p>                    Severity = SeverityLevel.Normal,</p>
+<p>                    Text = "Success"</p>
+<p>                    }</p>
+<p>            }</p>
+<p>        };</p>
+<p>        return result;</p>
+<p>    }</p>
+<p>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>where:</strong></p>
+<p><strong><em>Path</em></strong><em> </em>— system name of the attribute with the "Text" data type, which stores the path to the file that needs to be uploaded into the system (for example, <em>C:\myfolder\1.cs</em>);</p>
+<p><strong><em>Attachment</em></strong><em> </em>— system name of the attribute with the "Document" data type where you want to upload the file.</p>

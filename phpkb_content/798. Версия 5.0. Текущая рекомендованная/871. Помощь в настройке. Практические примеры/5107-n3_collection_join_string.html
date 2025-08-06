@@ -1,0 +1,116 @@
+<h1>Записи и коллекции. Объединение значений из коллекции в строку</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5107" kb-tags="N3,Notation 3,Notation3,RDF,атрибут типа «Запись»,объединение,вычисление,коллекция,конкатенация,пример,склейка,список,строка,таблица,текст,триплеты,тройка,тройки,форматирование,запись,join" kb-title="Записи и коллекции. Объединение значений из коллекции в строку">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_collection_join_string_intro">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_collection_join_string_use_case">
+<span class="md-ellipsis">
+      Прикладная задача
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_collection_join_string_initial_data">
+<span class="md-ellipsis">
+      Исходные данные
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_collection_join_string_calculation">
+<span class="md-ellipsis">
+      Настройка вычисления
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_collection_join_string_test">
+<span class="md-ellipsis">
+      Тестирование
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="example_n3_collection_join_string_intro">Введение</h2>
+<p>Атрибут типа «<strong>Запись</strong>» может хранить ссылки на несколько записей в связанном шаблоне (то есть коллекцию или список ссылок).</p>
+<p>Для реализации бизнес-требований может потребоваться объединить значения атрибутов связанного шаблона в одну строку. Например, так это позволяет собрать список из гиперссылок, номеров телефонов или артикулов.</p>
+<p>При объединении элементов списка в строку можно задать произвольный текстовый разделитель.</p>
+<p>Здесь представлен пример вывода значений атрибута из нескольких записей в виде списка с разделителем.</p>
+<h2 id="example_n3_collection_join_string_use_case">Прикладная задача</h2>
+<p>Требуется сформировать список артикулов товаров, на которые оформлен заказ.</p>
+<p>Список артикулов необходимо вывести в виде строки, разделённой запятыми.</p>
+<h2 id="example_n3_collection_join_string_initial_data">Исходные данные</h2>
+<p>Имеются шаблон записи <em>«Заказы»</em> и <em>«Товары»</em>.</p>
+<p>Шаблон <em>«Заказы»</em> связан с атрибутом <em>«Товары»</em> посредством атрибута <em>«Позиции заказа»</em> типа <strong>запись</strong>, в котором <strong>хранится несколько записей</strong>.</p>
+<p>В шаблоне <em>«Товары»</em> имеется <strong>текстовый</strong> атрибут <em>«Артикул»</em>.</p>
+<h2 class="pageBreakBefore" id="example_n3_collection_join_string_calculation">Настройка вычисления</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>В шаблоне <em>«Заказы»</em> создайте атрибут:</p>
+<ul>
+<li><strong>Название:</strong> <em>Перечень артикулов</em></li>
+<li><strong>Тип данных: текст</strong></li>
+<li><strong>Формат отображения: обычный</strong></li>
+<li><strong>Вычислять автоматически</strong></li>
+<li><strong>Вычисляемое значение: N3</strong></li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы с объектами и строками</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwstring:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/string#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Находим атрибуты «Позиции заказа» и «Артикул» </span></code> <br/><code>    <span class="c"># в соответствующих шаблонах.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Заказы"</span> <span class="s">"Позициизаказа"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?collectionAttribute</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Товары"</span> <span class="s">"Артикул"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?referencedAttribute</span><span class="p">.</span></code> <br/><code>    <span class="c"># Собираем список товаров, связанных с текущей записью.</span></code> <br/><code>    <span class="err">from</span> <span class="p">{</span></code> <br/><code>        <span class="err">?item</span> <span class="err">?collectionAttribute</span> <span class="err">?collectionAttributeVal</span><span class="p">.</span></code> <br/><code>        <span class="err">?collectionAttributeVal</span> <span class="err">?referencedAttribute</span> <span class="err">?referencedAttributeVal</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span> <span class="err">select</span> <span class="err">?referencedAttributeVal</span> <span class="err">-&gt;</span> <span class="err">?PartNumber</span><span class="p">.</span></code> <br/><code>    <span class="c"># Объединяем значения атрибута «Артикул» в строку,</span></code> <br/><code>    <span class="c"># разделённую запятыми.</span></code> <br/><code>    <span class="p">(</span><span class="s">", "</span> <span class="err">?PartNumber</span><span class="p">)</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">join</span> <span class="err">?concatenatedString</span><span class="p">.</span></code> <br/><code>    <span class="c"># Возвращаем результирующую строку.</span></code> <br/><code>    <span class="err">?concatenatedString</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Поместите атрибут <em>«Позиции заказа»</em> и <em>«Перечень артикулов»</em> на форму заказа.</p>
+</li>
+<li>Для поля <em>«Позиции заказа»</em> выберите представление в виде <strong>таблицы</strong>.</li>
+<li>В таблицу <em>«Позиции заказа»</em> добавьте атрибут <em>«Артикул»</em> и кнопку «<strong>Создать</strong>», чтобы создавать и добавлять товары в заказ.</li>
+</ol>
+<h2 class="pageBreakBefore" id="example_n3_collection_join_string_test">Тестирование</h2>
+<ol class="colored_numbers_list">
+<li>Создайте запись в шаблоне <em>«Заказы»</em>.</li>
+<li>Создайте несколько <em>позиций заказа</em> и заполните <em>артикулы</em>.</li>
+<li>Сохраните заказ.</li>
+<li>В <em>перечне артикулов</em> должен отобразиться список артикулов, разделённых запятыми.</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4785#form_dynamic_elements_table">Таблицы на форме. Настройка</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4780">Атрибут типа «Запись»</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4768">Атрибут типа «Текст»</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/category.php?id=877">Язык N3</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

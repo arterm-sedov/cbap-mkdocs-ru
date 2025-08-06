@@ -63,7 +63,7 @@ _![Просмотр внутренних уведомлений](/platform/v5.0/
 Система позволяет настроить уведомления о задачах различного типа:
 
 - [уведомления о задачах с особым текстом][task_notifications];
-- [периодические напоминания об открытых задачах][periodic_task_notifications];
+- [периодические напоминания об открытых задачах][example_n3_periodic_task_notifications];
 - [уведомления о задачах по электронной почте][task_notifications].
 
 _![Просмотр уведомлений о задачах](/platform/v5.0/administration/connections_communication_routes/system_connections/notifications/img/task_notifications_view.png)_
@@ -90,7 +90,7 @@ _![Просмотр уведомлений о задачах](/platform/v5.0/adm
 
 - [Общие уведомления. Настройка][common_notifications]
 - [Уведомления о задачах. Настройка пути передачи данных][task_notifications]
-- [Настройка периодических напоминаний об открытых задачах][periodic_task_notifications]
+- [Настройка периодических напоминаний об открытых задачах][example_n3_periodic_task_notifications]
 - [Отправка эл. почты из процесса. Настройка подключения, пути передачи данных и события на диаграмме процесса][process_sending_connection]
 - [Промежуточное событие-отправка сообщения][process_diagram_elements_send_message_intermediate_event]
 - [Конечное событие-отправка сообщения][process_diagram_elements_send_message_end_event]

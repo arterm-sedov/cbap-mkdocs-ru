@@ -1,40 +1,130 @@
-<h1>Атрибут типа «Дата и время»</h1><div class="md-container">
-<div class="md-main__inner md-grid">
+<h1>Атрибут типа «Дата и время»</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr">
+<div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
 <div class="mce-toc">
 <h2 class="toc-heading">Содержание</h2>
-<ul>
-<li><a href="#mcetoc_1gk2vsuq10">Свойства атрибута</a></li>
-<li><a href="#mcetoc_1gk2vsuq11">Связанные статьи</a></li>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#attribute_date_time_description"> <span class="md-ellipsis"> Описание атрибута </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#attribute_date_time_import_export"> <span class="md-ellipsis"> Импорт и экспорт значений даты и времени </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#attribute_date_time_properties"> <span class="md-ellipsis"> Свойства атрибута </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#attribute_date_time_example"> <span class="md-ellipsis"> Пример использования </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
 </ul>
 </div>
-<div class="md-content">
-<h2 id="mcetoc_1gk2vsuq10">Свойства атрибута</h2>
-<p>Атрибут типа «<strong>Дата и время</strong>» содержит значение даты и времени.</p>
-<p>Помимо <strong><a href="https://kb.comindware.ru/article.php?id=4765">общих свойств</a></strong> для атрибута типа «<strong>Дата и время</strong>» предусмотрены перечисленные ниже свойства.</p>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="attribute_date_time_description">Описание атрибута</h2>
+<p>Атрибут типа «<strong>Дата и время</strong>» позволяет хранить и обрабатывать значения даты и времени.</p>
+<div class="notice notice-success">
+<p class="admonition-title">Структура атрибута «Дата и время»</p>
+<ul>
+<li>
+<p>Значение даты и времени в базе данных хранится в часовом поясе <code>UTC+0</code>:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>2020-12-10T07:45:00Z</code> </pre>
+</div>
+</li>
+<li>
+<p>Значение даты и времени отображается в соответствии с настройками часового пояса. См.:</p>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5098">Атрибут типа «Часовой пояс»</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4785#form_dynamic_elements_date_time">Настройка поля атрибута типа «<strong>Дата и время</strong>» на форме</a></em></li>
+</ul>
+</li>
+<li>Исходный формат отображения даты и времени задаётся в свойствах атрибута из готового перечня. Этот формат используется при отображении даты и времени на формах, в таблицах и карточках, а также при выгрузке данных с помощью шаблонов экспорта. См.:
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4777#attribute_date_time_properties">Свойства атрибута</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4777#attribute_date_time_import_export">Импорт и экспорт значений даты и времени</a></em></li>
+</ul>
+</li>
+<li>Значение даты и времени можно форматировать при объявлении, вычислении и экспорте. См.:
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4794#export_template_file_formula_format_values_date_time_formatting_symbols">Символы форматирования дат и времени</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4977">Атрибут «Дата и время». Форматирование значений с помощью формул и N3</a></em></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="attribute_date_time_import_export">Импорт и экспорт значений даты и времени</h2>
+<ul>
+<li>
+<p>При <strong>импорте</strong> значения даты и времени, оно записывается в базу данных в часовом поясе <code>UTC+0</code>, но отображается согласно настройкам часового пояса.</p>
+<p>Например:</p>
+<ul>
+<li>В глобальной конфигурации указан часовой пояс «Москва» <code>UTC+3</code>.</li>
+<li>Если загрузить из файла в систему дату и время <code>03.12.2020 17:00</code>, то в системе будет отображаться такое же значение, но в базе данных оно будет храниться как <code>03.12.2020 14:00</code>.</li>
+</ul>
+</li>
+<li>
+<p>При <strong>экспорте</strong> значение даты и времени выгружается в часовом поясе, который указан в глобальной конфигурации.</p>
+<p>Например, если выгрузить значение <code>03.12.2020 17:00</code> в Excel, то оно будет записано в ячейку именно в таком виде.</p>
+</li>
+</ul>
+<h2 id="attribute_date_time_properties">Свойства атрибута</h2>
+<p>Помимо <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4765">общих свойств</a></strong> для атрибута типа «<strong>Дата и время</strong>» предусмотрены перечисленные ниже свойства:</p>
 <ul>
 <li>
 <p>«<strong>Формат отображения</strong>» — выберите способ отображения значений атрибута из раскрывающегося списка с примерами дат и времени.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Последствия смены формата отображения</p>
+<p>При смене формата отображения атрибута типа «<strong>Дата и время</strong>» с временем, например <code>dd.MM.YYYY hh:mm</code>, на формат без времени, например <code>dd.MM.YYYY</code>, часы и минуты сбрасываются к часовому поясу <code>UTC+0</code>. Это позволяет избежать неправильного отображения времени и некорректного экспорта и импорта значения атрибута.</p>
+</div>
 </li>
 <li>
-<p>«<strong>Использовать как заголовок записей</strong>» — установите этот флажок, чтобы значение атрибута отображалось в тексте ссылок на шаблон. См. раздел «<strong><a href="https://kb.comindware.ru/article.php?id=4769">Атрибут-заголовок записей шаблона</a></strong>».</p>
+<p>«<strong>Использовать как заголовок записей</strong>» — установите этот флажок, чтобы значение атрибута отображалось в тексте ссылок на шаблон. См. раздел «<strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4769">Атрибут—заголовок записей шаблона</a></strong>».</p>
 </li>
 <li>
-<p>«<strong>Вычислять по выражению</strong>» — установите этот флажок, чтобы значение атрибута вычислялось во время работы приложения. См. раздел «<strong><a href="https://kb.comindware.ru/article.php?id=4770">Вычисляемые атрибуты</a></strong>».</p>
+<p>«<strong>Вычислять автоматически</strong>» — установите этот флажок, чтобы значение атрибута вычислялось во время работы приложения. См. «<strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4770">Вычисляемые атрибуты</a></strong>».</p>
 </li>
 </ul>
-<div class="screenshot_with_caption">
-<p><img alt="Свойства атрибута типа «Дата и время»" src="https://kb.comindware.ru/assets/attribute_date_time_properties.png"/></p>
-<p class="caption">Свойства атрибута типа «Дата и время»</p>
+<figure class="screenshot_with_caption">
+<p><img alt="Свойства атрибута типа «Дата и время»" src="/platform/v5.0/business_apps/templates/attributes/img/attribute_date_time_properties.png"/></p>
+<figcaption class="caption">Свойства атрибута типа «Дата и время»</figcaption>
+</figure>
+<h2 id="attribute_date_time_example">Пример использования</h2>
+<div class="notice notice-example">
+<p class="admonition-title">Увеличение даты на семь дней</p>
+<p><strong>Настройка атрибута</strong></p>
+<ol class="colored_numbers_list">
+<li>Создайте шаблон записи <em>«Заявки»</em>.</li>
+<li>
+<p>Создайте атрибут:</p>
+<ul>
+<li><strong>Название:</strong> <em>Дата окончания</em></li>
+<li><strong>Тип данных: дата и время</strong></li>
+<li>
+<p><strong>Вычислять автоматически: формула</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="err">#</span> <span class="n">Прибавляем</span> <span class="n">к</span> <span class="n">дате</span> <span class="n">создания</span> <span class="mi">7</span> <span class="n">дней</span><span class="p">.</span></code> <br/><code><span class="n">ADD</span><span class="p">(</span><span class="err">$</span><span class="n">_creationDate</span><span class="p">,</span> <span class="n">DURATION</span><span class="p">(</span><span class="s">"P7D"</span><span class="p">))</span></code> </pre>
 </div>
-<h2 id="mcetoc_1gk2vsuq11">Связанные статьи</h2>
-<p><strong><a href="https://kb.comindware.ru/article.php?id=4886" title="Работа с атрибутом «Дата и время»">Работа с атрибутом типа «Дата и время»</a></strong></p>
-<p><a href="https://kb.comindware.ru/article.php?id=4785#formset12"><strong>Настройка поля атрибута типа «Дата и время» на форме</strong></a></p>
-<p><strong><a href="https://kb.comindware.ru/article.php?id=4765">Общие свойства атрибутов</a></strong></p>
-<p><strong><samp data-name="aid" data-title="" data-value="4772"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Атрибуты. Определения, типы, настройка, архивирование, удаление {Article-ID:4772}</span></samp> </strong></p>
+</li>
+</ul>
+</li>
+<li>
+<p>На форму заявки поместите атрибуты <em>«Дата создания»</em> и <em>«Дата окончания»</em>.</p>
+</li>
+</ol>
+<p><strong>Результирующее поведение</strong></p>
+<ol class="colored_numbers_list">
+<li>Создайте запись в шаблоне <em>«Заявки»</em>.</li>
+<li><em>Дата окончания</em> должна быть на 7 дней больше <em>даты создания</em>.</li>
+</ol>
+</div>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5098">Атрибут типа «Часовой пояс»</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4653#accounts_timezone_configure">Аккаунты. Настройка часового пояса</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4785">Настройка поля атрибута типа «Дата и время» на форме</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4977">Атрибут «Дата и время». Форматирование значений с помощью формул</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4794">Форматирование значений в файле шаблона экспорта и формулах</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4765">Общие свойства атрибутов</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4772">Атрибуты. Определения, типы, настройка, архивирование, удаление</a></li>
+</ul>
+</div>
+</article>
 </div>
 </div>
-<p><a class="md-top md-icon mkdocs_imported_link" href="#"> <em class="fa-light fa-arrow-up">‌</em> К началу </a></p>
-</div>
-<div class="md-dialog">
-<div class="md-dialog__inner md-typeset"> </div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>
 </div>

@@ -1,0 +1,483 @@
+<h1>Lesson 3 &amp;mdash; My First Business Process</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1he0j9ijq1">Introduction</a></li>
+<li><a href="#mcetoc_1he0k75kq2">Definitions</a>
+<ul>
+<li><a href="#mcetoc_1hel5svkr0">Executable Business Process</a></li>
+<li><a href="#mcetoc_1hel5vg8j1">Process Template</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gt2v32bh0">Create Process Template</a></li>
+<li><a href="#mcetoc_1he2564mi0">Draw Process Diagram</a></li>
+<li><a href="#mcetoc_1gt3fmhhr0">Configure User Task Forms</a>
+<ul>
+<li><a href="#mcetoc_1he2ubk4v0">Initiator Start Form</a></li>
+<li><a href="#mcetoc_1he2ucnvu1">Secretary Task Form — Approve Request</a></li>
+<li><a href="#mcetoc_1he2udu642">Garage Manager Task Form — Accept request</a></li>
+<li><a href="#mcetoc_1he2vhr930">Initiator Task Form — Request Rejected</a></li>
+<li><a href="#mcetoc_1he5efkco0">Initiator Task Form — Car Assigned</a></li>
+<li><a href="#mcetoc_1he7cej552">Driver Task Form — Complete the Trip</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gt5hpfe20">Configure Exclusive Gateway Outgoing Flows</a>
+<ul>
+<li><a href="#mcetoc_1he5e1ro60">“Approved?” Gateway</a></li>
+<li><a href="#mcetoc_1he5e3k0k2">“Is there an available car?” Gateway</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gt5k0mqr0">Configure the User Task Performers</a>
+<ul>
+<li><a href="#mcetoc_1he5m9rd60">Approve Request, Accept Request, and Complete the Trip Tasks</a></li>
+<li><a href="#mcetoc_1he5ma3im1">Rejected and Car Assigned Tasks</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gt5npe980">Validate and Publish the Process Diagram</a></li>
+<li><a href="#mcetoc_1gt5nhqf50">Test the Business Process and Use My Tasks</a></li>
+<li><a href="#mcetoc_1gt5mk1g40">Results</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1he0j9ijq1">Introduction</h2>
+<p>In this lesson, we'll improve the application from <a href="https://kb.cmwlab.com/article.php?id=1110">Lesson 2</a> to implement the following business logic:</p>
+<ul>
+<li><span style="&gt;you will learn how to create an automated process to book corporate vehicles: &lt;/span&gt;&lt;/p&gt;&lt;ol&gt;    &lt;li&gt;        &lt;span style=;">The <em>Initiator</em> submits a vehicle request.</span></li>
+<li>The request goes to the <em>Secretary</em> for review.</li>
+<li>The <em>Secretary</em> either approves or rejects the request.</li>
+<li>The approved request goes to the <em>Garage manager</em> for review.</li>
+<li>The <em>Garage manager </em>either accepts or rejects the request depending on the vehicle availability in the <em>Garage</em>.</li>
+<li>If the <em>Garage manager </em>accepts the request, the <em>Initiator</em> is notified, and the <em>Driver </em>completes the trip.</li>
+<li>If the <em>Secretary </em>or <em>Garage manager </em>rejects the request<em>, </em>the <em>Initiator</em> is notified, and the process terminates.</li>
+</ul>
+<p>Estimated time to complete: 20 min</p>
+<p>Prerequisite: complete <samp data-name="aid" data-title="" data-value="1110"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>{Article-ID:1110}</span></samp></p>
+<p><strong><span data-preserver-spaces="true">Note:</span></strong><span data-preserver-spaces="true"> This lesson is for the <strong>CMW Platform</strong> version 4.2.571.0. In other versions, the page and menu appearance may differ from the screenshots.</span></p>
+<h2 id="mcetoc_1he0k75kq2">Definitions</h2>
+<h3 id="mcetoc_1hel5svkr0">Executable Business Process</h3>
+<p>An <strong>executable business process</strong> is a process that is automated using a process engine or a business process management system (BPMS), such as the <strong>CMW Platform</strong>.</p>
+<p>The executable business process determines who should do what and in what order. It automates task transfer between employees and departments. Thus, the system controls the entire process from the request submission to closing. In the <strong>CMW Platform</strong>, processes can communicate with each other and external systems such as email servers and web services. The executable business process replaces workflows based on e-mail and Excel, streamlining and automating them. On top of that, the <strong>CMP Platform</strong> automatically generates documents from templates.</p>
+<p>You can regard the executable business process as an “interactive regulation.” A traditional regulatory document is an instruction for employees to refer to and follow at each process step. With an executable business process, the system orchestrates the employees and systems. A BPMN diagram is loaded into the BPMS that executes it, dispatching tasks to employees and calling the information system functions.</p>
+<p>The executable business process allows you to increase work efficiency:</p>
+<ul>
+<li>The tasks are assigned to employees instantly, without errors, together with all the relevant data.</li>
+<li>The process is guaranteed to be carried out according to the approved diagram, and no additional control is needed.</li>
+<li>The process metrics are automatically measured and displayed on the manager's screen.</li>
+</ul>
+<p>The executable business process has some similarities with a document flow, yet it gives business advantages:</p>
+<ul>
+<li>The data is stored in a structured, semantic, and searchable form rather than in Excel, Word, or PDF documents.</li>
+<li>The process route can be designed granularly.</li>
+</ul>
+<h3 id="mcetoc_1hel5vg8j1">Process Template</h3>
+<p>In the <strong>CMW Platform</strong>, you can set up an <strong>executable business process </strong>using a <strong>process template</strong>. </p>
+<p>A <strong>process template</strong> stores a process diagram, the process instances, and properties that define how each process instance is executed. Each process template is linked to a record template that stores records for process instances.</p>
+<h2 id="mcetoc_1gt2v32bh0">Create Process Template</h2>
+<p>Let's create a vehicle booking process template.</p>
+<p><strong>1. </strong>In the left navigation pane, select <strong>System navigation section</strong> — <strong>Templates</strong>.</p>
+<p><strong>2.</strong> Go to the <strong>Process templates</strong> tab.</p>
+<p><strong>3.</strong> Click  <strong>Create</strong>.</p>
+<p><strong>4.</strong> Enter the template <strong>Name</strong> — <em>Ordering a corporate vehicle</em>.</p>
+<p><strong>5.</strong> Select the <strong>Application</strong> — <em>Vehicle management</em>.</p>
+<p><strong>6. </strong>Select <strong>Associate with an existing template</strong>.</p>
+<p><strong>7. </strong>Select <strong>Linked record</strong> — <em>Vehicle requests</em>.</p>
+<p><strong>8.</strong> Click <strong>Create</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Creating a new process template" class="img-responsive" height="435" src="https://kb.cmwlab.com/assets/img_6540d2d16f3da.png" width="1048"/></p>
+<p class="caption" style="font-size: 15px !important;">Creating a new process template</p>
+</div>
+<h2 id="mcetoc_1he2564mi0">Draw Process Diagram</h2>
+<p>Using the business process diagram designer, you can draw a BPMN diagram simply by dragging and dropping the elements.</p>
+<div class="notice notice-success">
+<p class="admonition-title">BPMN 2.0 Notation</p>
+<p>In the <strong>CMW Platform</strong>, you draw the process diagrams using BPMN 2.0 notation.</p>
+<p>BPMN notation is simple and widely adopted by businesses. Thanks to straightforward BPMN interpretation, the business stakeholders, analysts, and IT specialists get a common understanding of the diagram.</p>
+</div>
+<p><strong>1.</strong> On the process template page, go to the <strong>Diagram</strong> tab.</p>
+<p><strong>2.</strong> The business process diagram designer appears.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Business process diagram designer" class="img-responsive" height="715" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_2.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Business process diagram designer</p>
+</div>
+<div class="notice notice-success">
+<p class="admonition-title">Business Process Diagram Designer</p>
+<p>The business process diagram designer consists of three areas:</p>
+<ol>
+<li><strong>Elements pane</strong> — contains the elements to drag and drop on the diagram:</li>
+<ul>
+<li><strong>Actions:</strong>
+<ul style="list-style-type: circle;">
+<li><strong>User task</strong></li>
+<li><strong>Script task</strong></li>
+<li><strong>Service task</strong></li>
+<li><strong>Process call </strong></li>
+<li><strong>Embedded subprocess</strong></li>
+</ul>
+</li>
+<li><strong>Events:</strong>
+<ul>
+<li><strong>Start event</strong></li>
+<li><strong>Intermediate event</strong></li>
+<li><strong>End event</strong></li>
+</ul>
+</li>
+<li><strong>Operators:</strong>
+<ul>
+<li><strong>Exclusive gateway</strong></li>
+<li><strong>Parallel gateway</strong></li>
+</ul>
+</li>
+<li><strong>Common:</strong>
+<ul>
+<li><strong>Swimlane</strong></li>
+<li><strong>Sequence flow</strong></li>
+<li><strong>Text annotation</strong></li>
+</ul>
+</li>
+</ul>
+<li><strong>Business process diagram</strong>.</li>
+<li><strong>Buttons </strong>— <strong>Select version</strong>, <strong>Clear</strong>, <strong>Publish</strong>, <strong>Validate</strong>, <strong>Export</strong>.</li>
+</ol>
+</div>
+<p><strong>3.</strong> Drag three <strong>swimlanes</strong> to the process diagram from the element pane.</p>
+<div class="notice notice-success">
+<p class="admonition-title">Swimlane</p>
+<p>A <strong>swimlane </strong>or <strong>lane</strong> in BPMN is a box that represents the business process participants. The lanes can be configured arbitrarily at the discretion of the process designer. Typically, they represent a customer, department, position, role, or team. For example, in our process, the <em>Initiator</em> is a role (the <em>Initiator</em> can belong to any department), the <em>Garage</em> is a department, and the <em>Secretary</em> is a position.</p>
+</div>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Dragging the swimlanes to the diagram" class="img-responsive" height="715" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_3.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Dragging the swimlanes to the diagram</p>
+</div>
+<p><strong>4.</strong> Rename the <strong>swimlanes</strong> as follows: <em>Initiator</em>, <em>Secretary</em>, <em>Garage</em>. To do this, select each <strong>swimlane</strong> by clicking its name and then click <strong>Properties</strong> <em class="fa-light fa-gear">‌</em> in the element menu.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Navigating to swimlane properties" class="img-responsive" height="670" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_4.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Navigating to swimlane properties</p>
+</div>
+<p><strong>5.</strong> In the <strong>Lane properties</strong> window, enter a new <strong>Name</strong> and click <strong>Save</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Renaming a swimlane" class="img-responsive" height="364" src="https://kb.cmwlab.com/assets/img_6540a34665f00.png" width="1229"/></p>
+<p class="caption" style="font-size: 15px !important;">Renaming a swimlane</p>
+</div>
+<p><strong>6.</strong> Remove the <strong>end event</strong>. To do this, select it and click <strong>Delete</strong> <em class="fa-light fa-trash-can">‌</em> in the element menu.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Deleting an element from the process diagram" class="img-responsive" height="680" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_6.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Deleting an element from the process diagram</p>
+</div>
+<p><strong>7.</strong> Drag the <strong>user task</strong> to the <em>Secretary</em> lane from the element pane. </p>
+<div class="notice notice-success">
+<p class="admonition-title">User Task</p>
+<p>The <strong>user task</strong> is executed by a person. When the process moves to this element, the task is automatically assigned to one or several <a href="#mcetoc_1gt5k0mqr0"><strong>performers</strong></a>.</p>
+</div>
+<p><strong>8.</strong> Rename the user task to <em>Approve request</em>. To do this, double-click the task name and enter the new name.</p>
+<p><strong>9.</strong> Attach the <strong>sequence flow</strong> from the start event to the <em>Approve request </em>task.</p>
+<p><strong>10.</strong> Drag the <strong>exclusive gateway</strong> to the diagram and connect it with the sequence flow to the <em>Approve request </em>task.</p>
+<div class="notice notice-success">
+<p class="admonition-title">Exclusive Gateway</p>
+<p>The <strong>exclusive gateway</strong> defines alternative sequence flows, of which the process can follow only one.</p>
+<p>For each outgoing flow from the gateway, a Boolean condition is specified. The process follows the first flow for which the condition returns <code>true</code>. Additionally, you can select the <strong>default flow</strong>, which the process follows if none of the other conditions are met.</p>
+</div>
+<p><strong>11.</strong> Attach two <strong>sequence flows</strong> to the <strong>exclusive gateway</strong> exit. </p>
+<p><strong>12.</strong> Rename the <strong>exclusive gateway</strong> to  <em>“</em><em>Approved?”</em> To do this, double-click the gateway name and enter the new name, or select the gateway, click <strong>Properties</strong> <em class="fa-light fa-gear">‌</em> in the element menu, and enter the new name in the <strong>Exclusive gateway properties</strong> window.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Navigating to gateway properties" class="img-responsive" height="680" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_7.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Navigating to gateway properties</p>
+</div>
+<div class="notice notice-warning">
+<p class="admonition-title">Business Requirement</p>
+<p>If the <em>Secretary</em> rejects the request, the <em>Initiator</em> receives a notification about this, and the process ends. If the <em>Secretary</em> approves the request, the <em>Garage manager</em> processes it further. Let's draw this on the process diagram.</p>
+</div>
+<p><strong>13.</strong> Add two <strong>user tasks</strong> after the <em>“Approved?”</em> gateway: <em>Rejected</em> on the <em>Initiator</em> lane and <em>Accept request</em> on the <em>Garage</em> lane.</p>
+<p><strong>14.</strong> Select the gateway and click <strong>Properties</strong> <em class="fa-light fa-gear">‌</em> in the element menu. The <em><strong>Exclusive gateway properties </strong>window appears.  </em></p>
+<p><strong>15.</strong> In the <strong>Advanced</strong> tab, enter the <strong>Name </strong>for each outgoing flow: <em>Yes</em> and <em>No</em>, by double-clicking the appropriate fields. Click <strong>Save</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Renaming the sequence flows in the exclusive gateway properties" class="img-responsive" height="393" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_8.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Renaming the sequence flows in the exclusive gateway properties</p>
+</div>
+<p><strong>16.</strong> Add the <strong>end event</strong> after the <em>Rejected</em> task.</p>
+<p><strong>17.</strong> Rename the <strong>end event</strong> to <em>Rejected</em>.</p>
+<div class="notice notice-success">
+<p class="admonition-title">Events</p>
+<p>You can interpret <strong>Events</strong> in BPMN as process stages — start, milestones, and completion. The process can have only one start event. Yet, it can have several end events for different process outcomes. </p>
+</div>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Intermediate process diagram" class="img-responsive" height="743" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_9.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Intermediate process diagram</p>
+</div>
+<div class="notice notice-warning">
+<p class="admonition-title">Business Requirement</p>
+<p>When the request is accepted, the <em>Garage manager</em> checks if a car is available. If there is no car, the request is returned to the <em>Secretary</em>.</p>
+</div>
+<p><strong>18.</strong> Add the <strong>exclusive gateway</strong> after the <em>Accept request </em>task.</p>
+<p><strong>19</strong>. Add the <strong>sequence flow</strong> from the gateway to the <em>Approve request</em> task.</p>
+<p><strong>20.</strong> Rename the gateway to <em>“Is there an available car?”</em></p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p> </p>
+<p><img alt="The “Is there an available car?” gateway" class="img-responsive" height="707" src="https://kb.cmwlab.com/assets/img_65576c5f8e780.png" width="1350"/></p>
+<p> </p>
+<p class="caption" style="font-size: 15px !important;">The <em>“Is there an available car?” </em>gateway</p>
+</div>
+<div class="notice notice-warning">
+<p class="admonition-title">Business Requirement</p>
+<p>If a car is available, the <em>Initiator</em> receives the <em>Car assigned </em>notification, and the <em>Garage</em> commences the trip.</p>
+</div>
+<p><strong>21.</strong> Add the <strong>parallel gateway</strong> after the <em>“Is there an available car?”</em> gateway.</p>
+<div class="notice notice-success">
+<p class="admonition-title">Parallel Gateway</p>
+<p>The <strong>parallel gateway</strong> can split the process into multiple flows that run simultaneously. </p>
+</div>
+<p><strong>22.</strong> Add two <strong>user tasks</strong> after the parallel gateway: <em>Car assigned</em> for the <em>Initiator </em>and <em>Complete the trip </em>for the <em>Garage</em>.</p>
+<p><strong>23.</strong> Name the outgoing flows from the <em>“Is there an available car?” gateway as Yes</em> and <em>No</em>.</p>
+<p><strong>24</strong> Add another <strong>parallel gateway </strong>and connect it to the <em>Car assigned</em> and <em>Complete the trip</em> tasks.</p>
+<p><strong>25.</strong> Add the <strong>end event</strong> and rename it to <em>Success</em>. </p>
+<p>The resulting diagram should look as shown below:</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="The vehicle booking process diagram" class="img-responsive" height="680" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_11.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">The vehicle booking process diagram</p>
+</div>
+<div class="notice notice-warning">
+<p class="admonition-title">Vehicle Booking Process Diagram</p>
+<p style="margin: 0in;">Let's summarize the flow of the vehicle booking process diagram.</p>
+<ol>
+<li>The <em>Initiator</em> submits a request.</li>
+<li>The <em>Secretary</em> reviews it:
+<ol style="list-style-type: lower-alpha;">
+<li>If the <em>Secretary</em> approves the request, Step 4 is executed.</li>
+<li>If the <em>Secretary</em> rejects the request, Step 3 is executed.</li>
+</ol>
+</li>
+<li>The <em>Initiator</em> receives notification that their request has been rejected. The vehicle booking process ends as rejected.</li>
+<li>The <em>Garage manager</em> accepts the request:
+<ol style="list-style-type: lower-alpha;">
+<li>If a car is available, the <em>Garage manager</em> sends the request for execution to the <em>Driver</em> — Step 5 is executed.</li>
+<li>If no car is available, the request is returned to the <em>Secretary</em> — Step 2 is executed.</li>
+</ol>
+</li>
+<li>The <em>Initiator</em> receives notification that the car has been allocated, and the <em>Driver</em> starts the trip.</li>
+<li>The process ends successfully. </li>
+</ol>
+</div>
+<h2 id="mcetoc_1gt3fmhhr0">Configure User Task Forms</h2>
+<h3 id="mcetoc_1he2ubk4v0">Initiator Start Form</h3>
+<p>Let's create the <strong>start form</strong>, which will be shown to the <em>Initiator</em> when the process starts.</p>
+<p><strong>1.</strong> Select <strong>Start event</strong> on the diagram and click <strong>Start form</strong> <em class="fa-light fa-window-maximize">‌</em> in the element menu.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Navigating to the start form settings" class="img-responsive" height="680" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_12.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Navigating to the start form settings</p>
+</div>
+<p><strong>2.</strong> The form designer will appear.</p>
+<p><strong>3.</strong> To reuse the existing <em>Vehicle requests - Main Form</em>, drag it to the form layout from the element pane. Click <strong>Save</strong>. Return to the process diagram by clicking <strong>Back </strong>in the browser. </p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img class="img-responsive" src="https://kb.cmwlab.com/assets/img_6540fc40d0695.png"/></p>
+<p> </p>
+<p class="caption" style="font-size: 15px !important;">Configuring the start form</p>
+</div>
+<h3 id="mcetoc_1he2ucnvu1">Secretary Task Form — Approve Request</h3>
+<p>Let's configure the form for the <em>Secretary</em> task. </p>
+<p><strong>1.</strong> Select the <em>Approve request </em>task and click <strong>Form </strong><em class="fa-light fa-newspaper">‌</em> in the element menu.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Navigating to the task form settings" class="img-responsive" height="680" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_14.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Navigating to the task form settings</p>
+</div>
+<p><strong>2.</strong> In the form designer, expand the <em>Vehicle requests</em> item in the element pane, and drag the <em>Vehicle requests - Main Form</em> to the form layout.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Business Requirement</p>
+<p>The Secretary should not edit the <em>Initiator's</em> vehicle request form fields, so let's change the access to the subform.</p>
+</div>
+<p><strong>3.</strong> Select the <em>Vehicle requests - Main Form </em>subform and set <strong>Access </strong>to <strong>Read only</strong> in the <strong>Subform properties</strong> panel.</p>
+<p><strong>4.</strong> Drag a new <strong>area</strong> to the form layout under the <em>Vehicle requests - Main Form</em> and set its <strong>display name</strong> to <em>Approval</em> using the <strong>Area properties</strong> panel.</p>
+<p><strong>5.</strong> Drag the <em>Approved</em> attribute to the <em>Approval</em> area from the element pane.</p>
+<p><strong>6.</strong> Save the form and return to the process diagram by clicking <strong>Back </strong>in the browser.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Editing and saving the task form" class="img-responsive" height="798" src="https://kb.cmwlab.com/assets/img_6540ff3406c82.png" width="1229"/></p>
+<p class="caption" style="font-size: 15px !important;">Editing and saving the task form</p>
+</div>
+<h3 id="mcetoc_1he2udu642">Garage Manager Task Form — Accept request</h3>
+<p>Let's configure the form for the <em>Garage manager</em> task. </p>
+<p><strong>1.</strong> Select the <em>Accept request</em> task and click <strong>Form</strong> <em class="fa-light fa-newspaper">‌</em> in the element menu. The form designer appears.</p>
+<p><strong>2.</strong> Expand the <em>Vehicle requests</em> item in the element pane, and drag the <em>Vehicle requests - Main Form</em> to the form layout.</p>
+<p><strong>3.</strong> In the <strong>Subform properties</strong> panel, set <strong>Access</strong> to <strong>Read only</strong><em> </em>to prevent the <em>Garage manager</em> from editing the request<em>.</em></p>
+<div class="notice notice-warning">
+<p class="admonition-title">Business Requirement</p>
+<p>The <em>Garage manager</em> should accept or decline the request depending on the car availability in the garage. We will add an attribute for this.</p>
+<p>The <strong>CMW Platform</strong> allows you to add attributes without leaving the form or table designer.</p>
+</div>
+<p><strong>4.</strong> Click the <strong>Add attribute</strong> <em class="fal fa-plus">‌</em> icon on the <em>Vehicle request</em> item to add an attribute to this record template.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Adding an attribute using the form designer" class="img-responsive" height="680" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_16.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Adding an attribute using the form designer</p>
+</div>
+<p><strong>5.</strong> In the <strong>New attribute</strong> window, set <strong>Boolean</strong> as the <strong>data type</strong> and enter the <strong>name</strong> — <em>Accepted</em>.</p>
+<p><strong>6.</strong> Click <strong>Save</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Creating and saving a new attribute on the fly" class="img-responsive" height="551" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_17.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Creating and saving a new attribute on the fly</p>
+</div>
+<p><strong>7.</strong> Drag a new <strong>area</strong> to the form layout and rename it to <em>Acceptance</em> using the <strong>Area properties</strong> panel.</p>
+<p><strong>8.</strong> Drag the created <em>Accepted</em> attribute to the <em>Acceptance</em> area.</p>
+<p><strong>9.</strong> Select the <em>Accepted</em> field, and in the <strong>Field properties</strong> panel, select <strong>Display as</strong> <strong>Radio button</strong>.</p>
+<p><strong>10.</strong> Click <strong>Save </strong>and return to the process diagram using the browser's <strong>Back </strong>button.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Changing the display mode of the boolean attribute on the form" class="img-responsive" height="943" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_18.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Changing the display mode of the Boolean attribute on the form</p>
+</div>
+<h3 id="mcetoc_1he2vhr930">Initiator Task Form — Request Rejected</h3>
+<div class="notice notice-warning">
+<p class="admonition-title">Business Requirement</p>
+<p>The <em>Initiator</em> should be informed about the rejected request. The user task form will contain only the text “Your request was rejected” and the read-only request data.</p>
+</div>
+<p><strong>1.</strong> On the process diagram, select the <em>Rejected</em> task and click <strong>Form</strong> <em class="fa-light fa-newspaper">‌</em> in the element menu. The form designer appears.</p>
+<p><strong>2.</strong> Drag a new <strong>area</strong> to the form layout and rename it to <em>Your request was rejected </em>using the <strong>Area properties</strong> panel.</p>
+<p><strong>3.</strong> Expand the <em>Vehicle requests</em> item in the element pane, and drag the <em>Vehicle requests - Main Form</em> to the form layout below the <em>Your request was rejected</em> area.</p>
+<p><strong>4.</strong> In the <strong>Subform properties</strong> panel, set the <strong>Access</strong> to <strong>Read only</strong><em>. </em></p>
+<p><strong>5.</strong> Save the form and return to the process diagram.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img class="img-responsive" src="https://kb.cmwlab.com/assets/img_65423013ca0a1.png"/></p>
+<p class="caption" style="font-size: 15px !important;">Changing the subform access mode</p>
+</div>
+<h3 id="mcetoc_1he5efkco0">Initiator Task Form — Car Assigned</h3>
+<p><strong>1.</strong> On the process diagram, select the <em>Car assigned</em> task and click <strong>Form</strong> <em class="fa-light fa-newspaper">‌</em> in the element menu.</p>
+<p><strong>2.</strong> Configure the <em>Car assigned</em> task form — add a new <strong>area</strong> and the <em>Vehicle requests - Main Form</em> with <strong>Read only</strong> <strong>access</strong>. Save the form and return to the process diagram.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt='Setting up "Car assigned" task form' class="img-responsive" height="763" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_20.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Configuring the Car assigned task form</p>
+</div>
+<h3 id="mcetoc_1he7cej552">Driver Task Form — Complete the Trip</h3>
+<p><strong>1. </strong>On the process diagram, select the <em>Car assigned</em> task and click <strong>Form</strong> <em class="fa-light fa-newspaper">‌</em> in the element menu.</p>
+<p><strong>2. </strong>Configure the <em>Complete the trip </em>task form — add the <em>Complete the trip</em> <strong>area </strong>and the <em>Vehicle requests - Main Form</em> subform below it. Set the subform <strong>access </strong>mode to <strong>Read only</strong>. Save the form and return to the process diagram.</p>
+<h2 id="mcetoc_1gt5hpfe20">Configure Exclusive Gateway Outgoing Flows</h2>
+<p>Let's configure the outgoing sequence flows from the gateways: “<em>Approved?”</em> and <em>“Is there an available car?”</em></p>
+<h3 id="mcetoc_1he5e1ro60">“Approved?” Gateway</h3>
+<div class="notice notice-warning">
+<p class="admonition-title">Business Requirement</p>
+<p>The flow that the process follows after the <em>“Approved?”</em> gateway to the <em>Accept request </em>task is defined by the <em>Approved </em>attribute value set by the <em>Secretary </em>while reviewing the request.</p>
+<p>To control the process flow, we'll define the condition for the <em>Accept request</em> flow based on the <em>Approved</em> attribute value.</p>
+</div>
+<p><strong>1.</strong> Select the <em>“Approved?”</em> gateway and click <strong>Properties</strong> <em class="fa-light fa-gear">‌</em> in the element menu. </p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Navigating to the gateway properties" class="img-responsive" height="680" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_21.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Navigating to the gateway properties</p>
+</div>
+<p><strong>2.</strong> In the <strong>Exclusive gateway properties</strong> window, go to the <strong>Advanced</strong> tab and check the <strong>Default flow</strong> box next to the <em>Rejected</em> task flow.</p>
+<div class="notice notice-success">
+<p class="admonition-title">Exclusive Gateway Default Flow</p>
+<p>From an <strong>exclusive gateway</strong> the process follows the <strong>default flow</strong> if none of the conditions for the other flows are met (the condition returns <code>false</code>). </p>
+</div>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Setting up the default flow" class="img-responsive" height="404" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_22.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Setting up the default flow</p>
+</div>
+<p><strong>3.</strong> On the <strong>Advanced</strong> tab, click the <strong>Condition</strong> column next to the <em>Accept request</em> flow. The compact expression editor appears.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Compact expression editor" class="img-responsive" height="409" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_23.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Compact expression editor</p>
+</div>
+<p><strong>4.</strong> Enter <code>$</code> and double-click the <em>Approved</em> attribute system name in the dropdown to enter it in the formula.</p>
+<div class="notice notice-success">
+<p class="admonition-title">Referencing the Attributes in Formulas</p>
+<p>In the formulas, the <code>$</code> symbol followed by an attribute system name denotes a reference to attributes of the current object.</p>
+<p>So the formula <code>$Approved</code> returns the <em>Approved</em> attribute value: <code>false</code> or <code>true</code>. </p>
+</div>
+<p><strong>5.</strong> Click the green <span style="color: #339966;"><em class="fal fa-check">‌</em></span> button.</p>
+<p><strong>6.</strong> Click <strong>Save</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Entering the condition for a sequence flow" class="img-responsive" height="403" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_24.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Entering the condition for a sequence flow</p>
+</div>
+<h3 id="mcetoc_1he5e3k0k2">“Is there an available car?” Gateway</h3>
+<div class="notice notice-warning">
+<p class="admonition-title">Business Requirement</p>
+<p>The process should go from the <em>“Is there an available car?”</em> gateway to the parallel gateway if the <em>Garage manager</em> sets the Boolean attribute <em>Accepted</em> to <code>true</code>. </p>
+</div>
+<p><strong>1.</strong> Select the gateway <em>“Is there an available car?” and</em> click <strong>Properties</strong> <em class="fa-light fa-gear">‌</em> in the element menu.</p>
+<p><strong>2.</strong> Go to the <strong>Advanced</strong> tab.</p>
+<p><strong>3.</strong> Enter an expression for the "Yes" flow (<code>$Accepted</code>). Click the green check button.</p>
+<p><strong>4.</strong> Set the default flow next to the flow that goes to the task "Approve request". </p>
+<p><strong>5.</strong> Click <strong>Save</strong>.  </p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt='Setting up and saving the "Is there an available car?" gateway properties' class="img-responsive" height="379" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_25.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Setting up and saving the “Is there an available car?” gateway properties</p>
+</div>
+<h2 id="mcetoc_1gt5k0mqr0">Configure User Task Performers</h2>
+<p>Let’s specify performers for the user tasks.</p>
+<h3 id="mcetoc_1he5m9rd60">Approve Request, Accept Request, and Complete the Trip Tasks</h3>
+<p><strong>1.</strong> Select the <em>Approve request</em> user task and click <strong>Properties</strong> <em class="fa-light fa-gear">‌</em> in the element menu.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Navigating to the task's properties" class="img-responsive" height="680" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_26.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Navigating to the task's properties</p>
+</div>
+<p><strong>2.</strong> On the <strong>Advanced</strong> tab, select an employee from the <strong>Performers</strong> dropdown.</p>
+<p><strong>3.</strong> Enter the <strong>task title</strong> — <em>Ordering a corporate vehicle - Approve request</em>.</p>
+<p><strong>4.</strong> Click  <strong>Save</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Changing the task title and performer" class="img-responsive" height="527" src="https://kb.cmwlab.com/assets/img_65576eaf9f89a.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Configuring the Approve request task title and performer</p>
+</div>
+<p><strong>5.</strong> Similarly, specify the performers and <strong>task titles</strong> for the tasks: <em>Accept request</em> and <em>Complete the trip</em>. At this point, you may use the same performer for all these tasks.</p>
+<h3 id="mcetoc_1he5ma3im1">Rejected and Car Assigned Tasks</h3>
+<p>For the <em>Rejected</em> and <em>Car assigned </em>tasks, the performer should be the <em>Initiator</em>, the person who created the request. Let's calculate the <em>Initiator</em>.</p>
+<p><strong>1.</strong> Select the <em>Rejected</em> user task and click <strong>Properties</strong> <em class="fa-light fa-gear">‌</em> in the element menu.</p>
+<p><strong>2.</strong> On the <strong>Advanced</strong> tab, select <strong>Attribute </strong>in the right dropdown of the <strong>Performers</strong> field.</p>
+<p><strong>3.</strong> In the <strong>Performers</strong> field, select the <em>Creator </em>attribute.</p>
+<div class="notice notice-success">
+<p class="admonition-title">Creator System Attribute</p>
+<p>The system attribute <strong>Creator</strong> points to the user who initiated the business process instance.</p>
+</div>
+<p><strong>4.</strong> Enter the <strong>task title</strong> — <em>Ordering a corporate vehicle - Rejected</em>. </p>
+<p><strong>5.</strong> Click  <strong>Save</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Configuring the Rejected task title and selecting the record creator as the task performer" class="img-responsive" height="514" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_28.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Configuring the Rejected task title and selecting the record creator as the task performer</p>
+</div>
+<p><strong>6.</strong> Similarly to the above, set the <em>Car assigned </em><strong>task title</strong> and <strong>performer</strong>.</p>
+<h2 id="mcetoc_1gt5npe980">Validate and Publish the Process Diagram</h2>
+<p>You have configured the business process template. To execute the process, you need to publish the process diagram. You should publish the business process diagram whenever you change it.</p>
+<p>Before publishing, validate the diagram to make sure the expressions are correct and the diagram follows the BPMN notation.</p>
+<p><strong>1.</strong> Click <strong>Validate </strong>in the process diagram designer.</p>
+<ul>
+<li>If any errors are found, the elements with the errors are highlighted in red. Click the exclamation mark next to a highlighted element to see the error messages.</li>
+<li>If the diagram has no errors, the “OK” message appears, and you can publish the diagram. </li>
+</ul>
+<p><strong>2.</strong> Click <strong>Publish</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Validating and publishing the process diagram" class="img-responsive" height="680" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_29.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Validating and publishing the process diagram</p>
+</div>
+<h2 id="mcetoc_1gt5nhqf50">Test the Business Process and My Tasks</h2>
+<p>You have configured and published the business process. Now, test it as an end-user.</p>
+<p><strong>1.</strong> Go to the <strong>Properties</strong> tab of the process template.</p>
+<p><strong>2.</strong> Click <strong>Navigate to instances</strong>. </p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Navigating to the process instances" class="img-responsive" height="492" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_30.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Navigating to the process instances</p>
+</div>
+<p><strong>3.</strong> In the <strong>All records</strong> list, click <strong>Create</strong>. The configured <strong>start form</strong> should appear in the <strong>New record</strong> window.</p>
+<p><strong>4.</strong> Fill out the form and click <strong>Create</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Creating a new vehicle request" class="img-responsive" height="462" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_31.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Creating a new vehicle request</p>
+</div>
+<p><strong>5.</strong> A new business process instance appears in the list.</p>
+<p><strong>6.</strong> To perform the <em>Approve request</em> task (where the performer is the current user), go to <strong>My tasks</strong> page using the left navigation pane.</p>
+<p><strong>7.</strong> A list of active tasks assigned to you appears. </p>
+<p><strong>8.</strong> To open the task form, click the link with the task title.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="The active task list for the current user" class="img-responsive" height="370" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_32.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">The active task list for the current user</p>
+</div>
+<p><strong>9. </strong>In the vehicle request approval form that appears, check <em>Approved </em>and click <strong>Complete task</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Approving the request and completing the task" class="img-responsive" height="501" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_33.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Approving the request and completing the task</p>
+</div>
+<p><strong>10.</strong> Go to <strong>My tasks</strong>. You should see the <em>Ordering a corporate vehicle - Accept request</em> task in the list.</p>
+<p><strong>11.</strong> Set the <em>Accepted</em> field to <em>No</em> and click <strong>Complete task</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Rejecting the request and returning it to the Secretary" class="img-responsive" height="561" src="https://kb.cmwlab.com/assets/cmw_platform_lesson3_34.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Rejecting the request and returning it to the Secretary</p>
+</div>
+<p><strong>12.</strong> Return to <strong>My tasks</strong>. You should see the <em>Ordering a corporate vehicle - Approve request </em>in the list.</p>
+<p><strong>14.</strong> Open the task and uncheck the <em>Approved</em> box. </p>
+<p><strong>15.</strong> Click <strong>Complete task</strong>.</p>
+<p><strong>16.</strong> Go to <strong>My tasks</strong>. You should see the <em>Ordering a corporate vehicle - Rejected</em> task in the list. Open it, and click <strong>Complete task</strong>.</p>
+<h2 id="mcetoc_1gt5mk1g40">Results</h2>
+<p>Congrats! You have created your first business process, configured its task forms, and tested the process tasks initiation and execution.</p>
+<p>Proceed to <samp data-name="aid" data-title="" data-value="2153"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2153}</span></samp> to learn how to track the history of a running process and create dashboards with statistical charts for a certain period.</p>
+<p><a class="md-top md-icon mkdocs_imported_link" href="#"> <em class="fa-light fa-arrow-up">‌</em> Back to top </a></p>

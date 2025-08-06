@@ -1,4 +1,4 @@
-<h1>Обновление версии экземпляра ПО с его остановкой</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4624" kb-tags="установка,развертывание,обновление,апгрейд,сервисы,кафка" kb-title="Обновление версии экземпляра ПО с его остановкой">
+<h1>Обновление версии экземпляра ПО с его остановкой</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4624" kb-tags="установка,развертывание,обновление,апгрейд,сервисы,кафка,linux,nginx,администрирование,инициализация,конфигурация,скрипты,база данных,резервное копирование,экземпляр" kb-title="Обновление версии экземпляра ПО с его остановкой">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -9,30 +9,58 @@
       </h2>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_introduction">
 <span class="md-ellipsis">
       Введение
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#порядок-обновления-версии-экземпляра-по">
+<a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_update_procedure">
 <span class="md-ellipsis">
       Порядок обновления версии экземпляра ПО
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#подготовка-экземпляра-по-к-обновлению">
+<a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_preparation">
 <span class="md-ellipsis">
       Подготовка экземпляра ПО к обновлению
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#обновление-версии-по-для-экземпляра">
+<a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_instance_software_update">
 <span class="md-ellipsis">
       Обновление версии ПО для экземпляра
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_config_edit">
+<span class="md-ellipsis">
+      Обновление конфигурации ПО и служб
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_initialize">
+<span class="md-ellipsis">
+      Инициализация экземпляра ПО
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_data_structure_update_and_verification">
+<span class="md-ellipsis">
+      Обновление и проверка структуры данных
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_prepare">
+<span class="md-ellipsis">
+      Подготовка восстановленного ПО к работе
     </span>
 </a>
 </li>
@@ -48,14 +76,14 @@
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h2 id="введение">Введение</h2>
+<h2 id="upgrade_version_linux_introduction">Введение</h2>
 <p>Здесь представлены инструкции по обновлению версии экземпляра ПО <strong>Comindware Platform</strong> на одном и том же сервере с остановкой экземпляра.</p>
-<p>Инструкции даны для обновления с версий 4.7.2 до версий 4.7.3–5.0 в ОС Linux.</p>
+<p>Инструкции даны для обновления с версии 4.7.2 и выше на версию 5.0 в ОС Linux.</p>
 <div class="notice notice-tip">
 <p class="admonition-title">Совет</p>
 <p>Этот способ можно использовать, если ПО <strong>Comindware Platform</strong> развёрнуто на одной машине и нет возможности развернуть новую машину для экземпляра ПО новой версии. Если вы можете развернуть новую машину, то рекомендуется следовать инструкции <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5097">Обновление версии экземпляра ПО без его остановки</a>»</em>.</p>
 </div>
-<h2 id="порядок-обновления-версии-экземпляра-по">Порядок обновления версии экземпляра ПО</h2>
+<h2 id="upgrade_version_linux_update_procedure">Порядок обновления версии экземпляра ПО</h2>
 <ol class="colored_numbers_list">
 <li>
 <p>Подготовьте экземпляр ПО к обновлению:</p>
@@ -68,25 +96,37 @@
 </ul>
 </li>
 <li>
-<p>Обновите версию экземпляра ПО:</p>
+<p>Обновите версию ПО для экземпляра:</p>
 <ul>
 <li>Скачайте и распакуйте два дистрибутива: вспомогательного ПО и новой версии ПО.</li>
-<li>Обновите версию библиотек <code>librdkafka</code>.</li>
+<li>Удостоверьтесь, что все компоненты вспомогательного ПО установлены корректно.</li>
+<li>При необходимости обновите или установите вспомогательное ПО.</li>
 <li>Установите новую версию ПО.</li>
-<li>Удалите экземпляр ПО старой версии</li>
+<li>Удалите экземпляр ПО старой версии.</li>
 <li>Создайте экземпляр ПО новой версии.</li>
-<li>Обновите конфигурацию экземпляра ПО и вспомогательных служб.</li>
+</ul>
+</li>
+<li>Обновите конфигурацию ПО и служб:<ul>
+<li>Отредактируйте конфигурационные файлы в соответствии с ранее сохранёнными резервными копиями.</li>
 <li>Перезапустите экземпляр ПО и вспомогательные службы.</li>
-<li>Инициализируйте экземпляр ПО.</li>
+</ul>
+</li>
+<li>Инициализируйте экземпляр ПО:<ul>
+<li>Выполните вход и проверьте работоспособность ПО.</li>
 <li>Остановите экземпляр ПО.</li>
 <li>Скопируйте в экземпляр ПО ранее перемещённую директорию с базой данных.</li>
+</ul>
+</li>
+<li>Обновите и проверьте структуру данных:<ul>
 <li>Запустите экземпляр ПО.</li>
 <li>Обновите структуру данных до новой версии.</li>
+<li>Очистите кэши.</li>
 <li>Снова перезапустите экземпляр ПО.</li>
 </ul>
 </li>
+<li>Подготовьте восстановленный экземпляр ПО к работе.</li>
 </ol>
-<h2 class="pageBreakBefore" id="подготовка-экземпляра-по-к-обновлению">Подготовка экземпляра ПО к обновлению</h2>
+<h2 class="pageBreakBefore" id="upgrade_version_linux_preparation">Подготовка экземпляра ПО к обновлению</h2>
 <div class="notice notice-warning">
 <p class="admonition-title">Внимание!</p>
 <p>Выполните подготовительные действия отдельно для каждого экземпляра ПО, версию которого требуется обновить.</p>
@@ -128,14 +168,15 @@
 <div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>/home/&lt;username&gt;/&lt;instanceName&gt;</code> <br/><code>mv<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;<span class="w"> </span>/home/&lt;username&gt;/</code> <br/></pre></code></div>
 </li>
 </ol>
-<h2 class="pageBreakBefore" id="обновление-версии-по-для-экземпляра">Обновление версии ПО для экземпляра</h2>
+<h2 class="pageBreakBefore" id="upgrade_version_linux_instance_software_update">Обновление версии ПО для экземпляра</h2>
 <div class="notice notice-warning">
 <p class="admonition-title">Внимание!</p>
-<p>Если при обновлении <a class="mkdocs_imported_link" href="#dataUpgrade">на шаге 22</a> будут обнаружены ошибки, не продолжайте обновление, установите старую версию, восстановите экземпляр ПО из резервной копии и обратитесь в службу поддержки <strong>Comindware</strong>.</p>
+<p>Если при обновлении <a class="mkdocs_imported_link" href="#dataUpgrade">на шаге 23</a> будут обнаружены ошибки, не продолжайте обновление, установите старую версию, восстановите экземпляр ПО из резервной копии и обратитесь в службу поддержки <strong>Comindware</strong>.</p>
 </div>
 <div class="notice notice-info">
 <p class="admonition-title">Обновление нескольких экземпляров ПО</p>
-<p>Выполните приведённые ниже шаги 6–18 для каждого экземпляра ПО, версию которого требуется обновить, так как скрипт обновления выполняется отдельно для указанного экземпляра ПО.</p>
+<p>Выполните приведённые ниже шаги для каждого экземпляра ПО, версию которого требуется обновить, так как скрипт обновления выполняется отдельно для указанного экземпляра ПО.</p>
+<p>Установка вспомогательного ПО и дистрибутива с новой версией ПО осуществляется только при обновлении первого экземпляра ПО. При обновлении последующих экземплятов ПО на эту версию, повторять шаги 1-5 не требуется.</p>
 <p>После обновления всех экземпляров ПО для экономии места старую версию ПО можно удалить согласно инструкции <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622#deploy_guide_linux_delete_version">Удаление версии ПО</a>»</em>.</p>
 </div>
 <ol class="colored_numbers_list">
@@ -144,23 +185,17 @@
 <div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>&lt;distPath&gt;</code> <br/><code>tar<span class="w"> </span>-xf<span class="w"> </span>X.X-release-ru-&lt;prerequisitesVersion&gt;.prerequisites.&lt;osname&gt;.tar.gz</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Перейдите в распакованную директорию библиотек <code>librdkafka</code>:</p>
-<div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>CMW_&lt;osname&gt;/repo/kafka/librd/</code> <br/></pre></code></div>
+<p>Перейдите в директорию со скриптами для развёртывания вспомогательного ПО:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>&lt;prerequisitesDistPath&gt;/CMW_&lt;osname&gt;/scripts</code> <br/></pre></code></div>
+<p>Здесь:  <code>&lt;prerequisitesDistPath&gt;/CMW_&lt;osname&gt;/</code> — путь к распакованному дистрибутиву со вспомогательным ПО.</p>
 </li>
 <li>
-<p>Обновите библиотеки <code>librdkafka</code>:</p>
-<ul>
-<li><strong>Astra Linux</strong>, <strong>Ubuntu</strong>, <strong>Debian</strong> (DEB-based)</li>
-</ul>
-<div class="highlight"><code><pre><span></span><code>dpkg<span class="w"> </span>-i<span class="w"> </span>*.deb</code> <br/></pre></code></div>
-<ul>
-<li><strong>РЕД ОС</strong>, <strong>Rocky</strong> (RPM-based)</li>
-</ul>
-<div class="highlight"><code><pre><span></span><code>rpm<span class="w"> </span>-i<span class="w"> </span>*.rpm</code> <br/></pre></code></div>
-<ul>
-<li><strong>Альт Сервер</strong></li>
-</ul>
-<div class="highlight"><code><pre><span></span><code>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>*.rpm</code> <br/></pre></code></div>
+<p>Убедитесь, что все компоненты установлены:</p>
+<div class="highlight"><code><pre><span></span><code>sh<span class="w"> </span>prerequisites_list.sh</code> <br/></pre></code></div>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>Если какой-то из компонентов не установлен или установлена старая версия, то установите вспомогательное ПО заново. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622#deploy_guide_linux_prerequisites_install">Установка вспомогательного ПО</a>»</em>.</p>
+</div>
 </li>
 <li>
 <p>Скачайте и распакуйте дистрибутив с новой версией ПО (<code>X.X</code>, <code>&lt;version&gt;</code> — номер версии):</p>
@@ -199,8 +234,14 @@
 <p>По окончании создания скрипт выведет информацию о компонентах экземпляра ПО. Удостоверьтесь, что компоненты успешно установлены.</p>
 <p>Пример результата выполнения скрипта:</p>
 <div class="highlight"><code><pre><span></span><code>...</code> <br/><code><span class="o">[</span>Done<span class="o">]</span><span class="w"> </span>Creating<span class="w"> </span>Log<span class="w"> </span>Directories.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>folder<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>Web<span class="w"> </span>config<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>Ignite<span class="w"> </span>config<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>binaries<span class="w"> </span>linked.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>config<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>Data<span class="w"> </span>folder<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>Database<span class="w"> </span>folder<span class="w"> </span>created:<span class="w"> </span>Yes</code> <br/><code>OK<span class="w">     </span>Streams<span class="w"> </span>folder<span class="w"> </span>created:<span class="w"> </span>No<span class="w"> </span></code> <br/><code>OK<span class="w">     </span>Logs<span class="w"> </span>folder<span class="w"> </span>created:<span class="w"> </span>Yes</code> <br/><code>OK<span class="w">     </span>Used<span class="w"> </span>version:<span class="w"> </span>&lt;version&gt;</code> <br/><code>OK<span class="w">     </span>Logs<span class="w"> </span>configured.</code> <br/><code>OK<span class="w">     </span>Sites<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>Sites<span class="w"> </span>enabled.</code> <br/><code>OK<span class="w">     </span>API<span class="w"> </span>Gateway<span class="w"> </span>configured.</code> <br/><code>OK<span class="w">     </span>Link<span class="w"> </span>to<span class="w"> </span>binaries<span class="w"> </span>is<span class="w"> </span>valid.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>service<span class="w"> </span>started.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>API<span class="w"> </span>gateway<span class="w"> </span>service<span class="w"> </span>started.</code> <br/><code>OK<span class="w">     </span>NGINX<span class="w"> </span>started.</code> <br/><code>OK<span class="w">     </span>Final<span class="w"> </span>status.</code> <br/><code><span class="o">[</span>Done<span class="o">]</span><span class="w"> </span>Upgrade<span class="w"> </span>CBAP<span class="w"> </span>instance.</code> <br/></pre></code></div>
-<p>Если какая-либо из служб имеет статус <code>FAILED</code>, исправьте конфигурацию, как указано ниже, и перезапустите службу.</p>
+<p>Если какая-либо из служб имеет статус <code>FAILED</code>, игнорируйте это и продолжайте выполнение следующих шагов согласно инструкции, так как устранять эти неполадки следует позже.</p>
 </li>
+<li>
+<p>Обновите конфигурацию ПО и служб.</p>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="upgrade_version_linux_config_edit">Обновление конфигурации ПО и служб</h2>
+<ol class="colored_numbers_list">
 <li>
 <p>Отредактируйте конфигурацию NGINX для экземпляра ПО в соответствии с резервной копией, <a class="mkdocs_imported_link" href="#NginxBackup">сохранённой ранее</a>:</p>
 <ul>
@@ -234,9 +275,15 @@
 </div>
 </li>
 <li>
-<p>Перезапустите сервисы <strong>Comindware Platform</strong>:</p>
+<p>Перезапустите службы <strong>Comindware Platform</strong>:</p>
 <div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>restart<span class="w"> </span>adapterhost&lt;instanceName&gt;.service</code> <br/><code>systemctl<span class="w"> </span>restart<span class="w"> </span>comindware&lt;instanceName&gt;.service</code> <br/><code>systemctl<span class="w"> </span>restart<span class="w"> </span>apigateway&lt;instanceName&gt;.service</code> <br/></pre></code></div>
 </li>
+<li>
+<p>Инициализируйте экземпляра ПО.</p>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="upgrade_version_linux_initialize">Инициализация экземпляра ПО</h2>
+<ol class="colored_numbers_list">
 <li>
 <p>Откройте сайт экземпляра ПО в браузере, одновременно открыв выдачу журналов экземпляра в терминале:</p>
 <div class="highlight"><code><pre><span></span><code>tail<span class="w"> </span>-f<span class="w"> </span>/var/log/comindware/&lt;instanceName&gt;/Logs/heartbeat*</code> <br/></pre></code></div>
@@ -257,8 +304,20 @@
 <div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/</code> <br/><code>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">777</span><span class="w"> </span>Database/<span class="w"> </span></code> <br/><code>sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span>www-data:www-data<span class="w"> </span>Database/</code> <br/></pre></code></div>
 </li>
 <li>
+<p>Обновите структуру данных.</p>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="upgrade_version_linux_data_structure_update_and_verification">Обновление и проверка структуры данных</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Обновление с версии 4.7 на версию 5.0</p>
+<p>При обновлении с версии 4.7 на версию 5.0 обновляется структура базы данных.</p>
+<p>После этого необходимо вручную удалить некоторые данные кэша в старом формате.</p>
+<p>Поэтому продолжать обновление версии экземпляра ПО можно только после успешного обновления структуры данных. </p>
+</div>
+<ol class="colored_numbers_list">
+<li>
 <p>Запустите экземпляр ПО:</p>
-<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>restart<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>start<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Откройте сайт экземпляра ПО в браузере, дождитесь окончания загрузки, одновременно открыв выдачу журналов экземпляра в терминале:</p>
@@ -266,13 +325,7 @@
 <p>См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4623">Подсистема журналирования</a>»</em>.</p>
 </li>
 <li>
-<p id="dataUpgrade">Дождитесь завершения обновления структуры данных и проверьте его успешное выполнение.</p>
-<div class="notice notice-warning">
-<p class="admonition-title">Внимание!</p>
-<p>При обновлении с версии 4.7.2 на версии 4.7.3-5.0 обновляется структура базы данных.</p>
-<p>После этого необходимо вручную удалить некоторые данные кэша в старом формате.</p>
-<p>Поэтому продолжать обновление версии экземпляра ПО можно только после успешного обновления структуры данных. </p>
-</div>
+<p id="dataUpgrade">Дождитесь завершения обновления структуры данных:</p>
 <ul>
 <li>Удостоверьтесь, что появились журналы обновления:<ul>
 <li><code>/var/log/comindware/&lt;instanceName&gt;/Logs/UpgradeOntology.log</code></li>
@@ -282,20 +335,35 @@
 <li>Удостоверьтесь, что в журнале <code>UpgradeOntology.log</code> последняя запись содержит строку <code>Upgrade of ontology completed successfully</code>.</li>
 <li>Удостоверьтесь, что в журнале <code>upgrade&lt;ГГГГ-ММ-ДД&gt;.log</code> последняя запись содержит строку <code>Upgrade completed</code>.</li>
 <li>Удостоверьтесь, что в журналах отсутствуют ошибки обновления. Найдите их по ключевому слову <code>error</code>.</li>
-<li>Если обновление выполнено успешно, переходите к шагу 24.</li>
+</ul>
+</li>
 <li>
-<p>Если в журнале обновления имеются ошибки:</p>
-<ol class="colored_numbers_list">
-<li>Не переходите к шагу 24.</li>
+<p>Проверьте результат обновления структуры данных.</p>
+<ul>
+<li>
+<p><strong>Если обновление структуры данных выполнено успешно:</strong></p>
+<ul>
+<li>При обновлении с версии 5.0:<ul>
+<li>Обновление структуры данных завершено.</li>
+<li>Переходите к <a class="mkdocs_imported_link" href="#upgrade_version_linux_prepare">Подготовке восстановленного экземпляра ПО к работе</a>.</li>
+</ul>
+</li>
+<li>При обновлении с версии 4.7 на версию 5.0 переходите к <a class="mkdocs_imported_link" href="#upgrade_version_linux_data_structure_update_and_verification_step5">шагу 5</a>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Если в журнале обновления имеются ошибки:</strong></p>
+<ul>
+<li>Не переходите к шагу 5.</li>
 <li>Снова установите для экземпляра старую версию ПО.</li>
 <li>Восстановите базу данных из резервной копии.</li>
 <li>Обратитесь в службу поддержки <strong>Comindware</strong>, предоставив журналы обновления и ошибок для анализа.</li>
-</ol>
+</ul>
 </li>
 </ul>
 </li>
 <li>
-<p>Создайте резервную копию экземпляра ПО:</p>
+<p id="upgrade_version_linux_data_structure_update_and_verification_step5">Создайте резервную копию экземпляра ПО:</p>
 <ul>
 <li>
 <p>в формате <code>.CDBBZ</code> средствами <strong>Comindware Platform</strong>;</p>
@@ -318,7 +386,8 @@
 <div class="highlight"><code><pre><span></span><code>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/Database/*</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Скопируйте очищенную резервную копию в директорию с базой данных <code>/var/lib/comindware/&lt;instanceName&gt;/Database/</code>.</p>
+<p>Скопируйте очищенную резервную копию в директорию с базой данных:</p>
+<div class="highlight"><code><pre><span></span><code>/var/lib/comindware/&lt;instanceName&gt;/Database/</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Назначьте владельца директории с базой данных:</p>
@@ -336,8 +405,13 @@
 <div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>_nginx:_nginx<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/Database</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Проверьте и при необходимости исправьте конфигурацию экземпляра ПО. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4651">Проверка и настройка конфигурации экземпляра ПО Comindware Platform после восстановления из резервной копии</a>»</em>.</p>
+<p>Подготовьте восстановленный экземпляр ПО к работе.</p>
 </li>
+</ol>
+<h2 class="pageBreakBefore" id="upgrade_version_linux_prepare">Подготовка восстановленного ПО к работе</h2>
+<ol class="colored_numbers_list">
+<li>Запустите экземпляр ПО.</li>
+<li>Проверьте и при необходимости исправьте конфигурацию экземпляра ПО. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4651">Проверка и настройка конфигурации экземпляра ПО Comindware Platform после восстановления из резервной копии</a>»</em>.</li>
 <li>Проверьте и работоспособность экземпляра ПО.</li>
 <li>Создайте резервную копию работоспособного экземпляра <strong>Comindware Platform</strong>.</li>
 </ol>

@@ -1,4 +1,4 @@
-<h1>Установка Apache Kafka в ОС Windows и подключение к Comindware Platform</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4614">
+<h1>Установка Apache Kafka в ОС Windows и подключение к Comindware Platform</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4614" kb-tags="установка Kafka,Kafka,подключение Kafka,подключение к шине сообщений,шина сообщений,брокер сообщений,Windows,установка,развертывание,развёртывание,брокер сообщений,шина сообщений" kb-title="Установка Apache Kafka в ОС Windows и подключение к Comindware Platform">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -9,35 +9,35 @@
       </h2>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<a class="md-nav__link mkdocs_imported_link" href="#kafka_deploy_windows_intro">
 <span class="md-ellipsis">
       Введение
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#предварительные-условия">
+<a class="md-nav__link mkdocs_imported_link" href="#kafka_deploy_windows_prerequisites">
 <span class="md-ellipsis">
       Предварительные условия
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#процесс-установки">
+<a class="md-nav__link mkdocs_imported_link" href="#kafka_deploy_windows_install">
 <span class="md-ellipsis">
       Процесс установки
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#подключение-экземпляра-comindware-platform-к-kafka">
+<a class="md-nav__link mkdocs_imported_link" href="#kafka_deploy_windows_instance_connect">
 <span class="md-ellipsis">
       Подключение экземпляра Comindware Platform к Kafka
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#дополнительные-рекомендации">
+<a class="md-nav__link mkdocs_imported_link" href="#kafka_deploy_recommendations">
 <span class="md-ellipsis">
       Дополнительные рекомендации
     </span>
@@ -45,14 +45,14 @@
 <nav aria-label="Дополнительные рекомендации" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#настройка-безопасности">
+<a class="md-nav__link mkdocs_imported_link" href="#kafka_deploy_recommendations_security">
 <span class="md-ellipsis">
       Настройка безопасности
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#мониторинг-и-управление">
+<a class="md-nav__link mkdocs_imported_link" href="#kafka_deploy_recommendations_monitoring">
 <span class="md-ellipsis">
       Мониторинг и управление
     </span>
@@ -73,49 +73,38 @@
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h2 id="введение">Введение</h2>
+<h2 id="kafka_deploy_windows_intro">Введение</h2>
 <p>Для обмена данными между <strong>Comindware Platform</strong> и внешними системами (а также для работы обсуждений) необходимо настроить подключение к брокеру сообщений Kafka.</p>
 <p>Здесь представлена инструкция по установке Kafka в ОС Windows с использованием KRaft (без использования Zookeeper) и подключению Kafka к <strong>Comindware Platform</strong>.</p>
-<h2 id="предварительные-условия">Предварительные условия</h2>
+<h2 id="kafka_deploy_windows_prerequisites">Предварительные условия</h2>
 <p>Должно быть установлено ПО Java и заданы следующие системные переменные:</p>
 <ul>
 <li><code>JAVA_HOME</code> — путь к исполняемым файлам Open JDK, например <code>C:\\Program Files\\jdk\\jdk-&lt;version&gt;\\bin</code></li>
 <li><code>JAVA_HOME_DLL</code> — путь к DLL-файлу Open JDK, например <code>C:\\Program Files\\jdk\\jdk-&lt;version&gt;\\bin\\server\\jvm.dll</code></li>
 <li><code>Path</code> — короткий путь к файлам Java: <code>%JAVA_HOME%\\bin</code></li>
 </ul>
-<h2 id="процесс-установки">Процесс установки</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<ul>
+<li>При указании путей используйте фактические имена дисков вместо используемых здесь дисков <code>C</code> и <code>X</code>.</li>
+<li>Для корректной работы Kafka рекомендуется скачивать архив с бинарными файлами.</li>
+<li>Рекомендуется использовать путь минимальной длины и названия папок без пробелов, иначе некоторые команды могут не сработать.</li>
+<li>Рекомендуется создавать папку для журналов на отдельном диске, а не на диске где установлено ПО Kafka.</li>
+</ul>
+</div>
+<h2 id="kafka_deploy_windows_install">Процесс установки</h2>
 <ol class="colored_numbers_list">
+<li>Скачайте последнюю версию Kafka с <strong><a class="mkdocs_imported_link" href="https://kafka.apache.org/downloads">официального сайта</a></strong>.</li>
+<li>Распакуйте файлы архива, например в папку <code>C:\\kafka</code></li>
+<li>Создайте папку для журналов, например <code>X:\\kafka\\logs</code>.</li>
+<li>Откройте файл конфигурации Kafka <code>C:\\kafka\\config\\kraft\\server.properties</code>.</li>
 <li>
-<p>Скачайте последнюю версию Kafka с <strong><a class="mkdocs_imported_link" href="https://kafka.apache.org/downloads">официального сайта</a></strong>.</p>
+<p>Отредактируйте файл конфигурации, указав IP-адрес сервера Apache Kafka, папку для журналов и размеры сообщений.</p>
 <div class="notice notice-warning">
 <p class="admonition-title">Внимание!</p>
-<p>Для корректной работы Kafka рекомендуется скачивать архив с бинарными файлами.</p>
+<p>В директиве <code>log.dirs</code> для указания пути к папке журналов используйте прямую косую черту <code>/</code>, а не обратную <code>\\</code>:</p>
 </div>
-</li>
-<li>
-<p>Распакуйте файлы архива, например в папку <code>C:\\kafka</code></p>
-<div class="notice notice-warning">
-<p class="admonition-title">Внимание!</p>
-<p>Рекомендуется использовать путь минимальной длины и названия папок без пробелов, иначе некоторые команды могут не сработать.</p>
-</div>
-</li>
-<li>
-<p>Создайте папку для журналов, например <code>X:\\kafka\\logs</code>.</p>
-<div class="notice notice-warning">
-<p class="admonition-title">Внимание!</p>
-<p>Рекомендуется создавать папку для журналов на отдельном диске, а не на диске где установлено ПО Kafka.</p>
-</div>
-</li>
-<li>
-<p>Откройте файл конфигурации Kafka <code>C:\\kafka\\config\\kraft\\server.properties</code>.</p>
-</li>
-<li>
-<p>Отредактируйте файл конфигурации, указав IP-адрес сервера Kafka, папку для журналов и размеры сообщений.</p>
-<div class="notice notice-warning">
-<p class="admonition-title">Внимание!</p>
-<p>При указании пути к папке журналов используйте косую черту <code>/</code> вместо <code>\\</code>:</p>
-</div>
-<div class="highlight"><code><pre><span></span><code><span class="c1"># Роли, в которых должен выступать сервер Kafka</span></code> <br/><code><span class="na">process.roles</span><span class="o">=</span><span class="s">broker,controller</span></code> <br/><code><span class="c1"># Идентификатор узла</span></code> <br/><code><span class="na">node.id</span><span class="o">=</span><span class="s">1</span></code> <br/><code><span class="c1"># IP-адрес сервера Kafka</span></code> <br/><code><span class="na">controller.quorum.voters</span><span class="o">=</span><span class="s">1@&lt;KafkaIP&gt;:9093</span></code> <br/><code><span class="c1"># IP-адрес сервера Kafka</span></code> <br/><code><span class="na">listeners</span><span class="o">=</span><span class="s">PLAINTEXT://&lt;KafkaIP&gt;:9092,CONTROLLER://&lt;KafkaIP&gt;:9093</span></code> <br/><code><span class="c1"># Имя слушателя для связи между брокерами</span></code> <br/><code><span class="na">inter.broker.listener.name</span><span class="o">=</span><span class="s">PLAINTEXT</span></code> <br/><code><span class="c1"># Имена слушателей контроллера</span></code> <br/><code><span class="na">controller.listener.names</span><span class="o">=</span><span class="s">CONTROLLER</span></code> <br/><code><span class="c1"># Карта протоколов безопасности для слушателей</span></code> <br/><code><span class="na">listener.security.protocol.map</span><span class="o">=</span><span class="s">CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL</span></code> <br/><code><span class="c1"># Количество сетевых потоков</span></code> <br/><code><span class="na">num.network.threads</span><span class="o">=</span><span class="s">3</span></code> <br/><code><span class="c1"># Количество потоков ввода-вывода</span></code> <br/><code><span class="na">num.io.threads</span><span class="o">=</span><span class="s">8</span></code> <br/><code><span class="c1"># Размер буфера отправки сокета</span></code> <br/><code><span class="na">socket.send.buffer.bytes</span><span class="o">=</span><span class="s">102400</span></code> <br/><code><span class="c1"># Размер буфера приёма сокета</span></code> <br/><code><span class="na">socket.receive.buffer.bytes</span><span class="o">=</span><span class="s">102400</span></code> <br/><code><span class="c1"># Максимальный размер запроса</span></code> <br/><code><span class="na">socket.request.max.bytes</span><span class="o">=</span><span class="s">104857600</span></code> <br/><code><span class="c1"># Путь к файлам журналов</span></code> <br/><code><span class="na">log.dirs</span><span class="o">=</span><span class="s">X:/kafka/logs</span></code> <br/><code><span class="c1"># Количество разделов (партиций) по умолчанию</span></code> <br/><code><span class="na">num.partitions</span><span class="o">=</span><span class="s">4</span></code> <br/><code><span class="c1"># Количество потоков восстановления на каталог данных</span></code> <br/><code><span class="na">num.recovery.threads.per.data.dir</span><span class="o">=</span><span class="s">1</span></code> <br/><code><span class="c1"># Фактор репликации темы смещений</span></code> <br/><code><span class="na">offsets.topic.replication.factor</span><span class="o">=</span><span class="s">1</span></code> <br/><code><span class="c1"># Фактор репликации журнала состояния транзакций</span></code> <br/><code><span class="na">transaction.state.log.replication.factor</span><span class="o">=</span><span class="s">1</span></code> <br/><code><span class="c1"># Минимальное количество ISR для журнала состояния транзакций</span></code> <br/><code><span class="na">transaction.state.log.min.isr</span><span class="o">=</span><span class="s">1</span></code> <br/><code><span class="c1"># Время хранения журналов (в часах)</span></code> <br/><code><span class="na">log.retention.hours</span><span class="o">=</span><span class="s">168</span></code> <br/><code><span class="c1"># Размер сегмента журнала</span></code> <br/><code><span class="na">log.segment.bytes</span><span class="o">=</span><span class="s">1073741824</span></code> <br/><code><span class="c1"># Интервал проверки хранения журналов (в миллисекундах)</span></code> <br/><code><span class="na">log.retention.check.interval.ms</span><span class="o">=</span><span class="s">300000</span></code> <br/><code><span class="c1"># Максимальный размер запроса</span></code> <br/><code><span class="na">max.request.size</span><span class="o">=</span><span class="s">104857600</span></code> <br/><code><span class="c1"># Максимальный размер сообщения</span></code> <br/><code><span class="na">max.message.bytes</span><span class="o">=</span><span class="s">104857600</span></code> <br/><code><span class="c1"># Максимальный размер сообщения</span></code> <br/><code><span class="na">message.max.bytes</span><span class="o">=</span><span class="s">104857600</span></code> <br/><code><span class="c1"># Максимальный размер сообщения для выборки</span></code> <br/><code><span class="na">fetch.message.max.bytes</span><span class="o">=</span><span class="s">104857600</span></code> <br/><code><span class="c1"># Максимальный размер сообщения для выборки реплики</span></code> <br/><code><span class="na">replica.fetch.max.bytes</span><span class="o">=</span><span class="s">104857600</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="c1"># Роли, в которых должен выступать сервер Kafka</span></code> <br/><code><span class="na">process.roles</span><span class="o">=</span><span class="s">broker,controller</span></code> <br/><code><span class="c1"># Идентификатор узла</span></code> <br/><code><span class="na">node.id</span><span class="o">=</span><span class="s">1</span></code> <br/><code><span class="c1"># IP-адрес сервера Kafka</span></code> <br/><code><span class="na">controller.quorum.voters</span><span class="o">=</span><span class="s">1@&lt;KafkaIP&gt;:9093</span></code> <br/><code><span class="c1"># IP-адрес сервера Kafka</span></code> <br/><code><span class="na">listeners</span><span class="o">=</span><span class="s">PLAINTEXT://&lt;KafkaIP&gt;:9092,CONTROLLER://&lt;KafkaIP&gt;:9093</span></code> <br/><code><span class="c1"># Имя слушателя для связи между брокерами</span></code> <br/><code><span class="na">inter.broker.listener.name</span><span class="o">=</span><span class="s">PLAINTEXT</span></code> <br/><code><span class="c1"># Имена слушателей контроллера</span></code> <br/><code><span class="na">controller.listener.names</span><span class="o">=</span><span class="s">CONTROLLER</span></code> <br/><code><span class="c1"># Карта протоколов безопасности для слушателей</span></code> <br/><code><span class="na">listener.security.protocol.map</span><span class="o">=</span><span class="s">CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL</span></code> <br/><code><span class="c1"># Количество сетевых потоков</span></code> <br/><code><span class="na">num.network.threads</span><span class="o">=</span><span class="s">3</span></code> <br/><code><span class="c1"># Количество потоков ввода-вывода</span></code> <br/><code><span class="na">num.io.threads</span><span class="o">=</span><span class="s">8</span></code> <br/><code><span class="c1"># Размер буфера отправки сокета</span></code> <br/><code><span class="na">socket.send.buffer.bytes</span><span class="o">=</span><span class="s">102400</span></code> <br/><code><span class="c1"># Размер буфера приёма сокета</span></code> <br/><code><span class="na">socket.receive.buffer.bytes</span><span class="o">=</span><span class="s">102400</span></code> <br/><code><span class="c1"># Максимальный размер запроса</span></code> <br/><code><span class="na">socket.request.max.bytes</span><span class="o">=</span><span class="s">104857600</span></code> <br/><code><span class="c1"># Путь к файлам журналов</span></code> <br/><code><span class="c1"># Bспользуйте прямую косую черту `/`, а не обратную `\\`</span></code> <br/><code><span class="na">log.dirs</span><span class="o">=</span><span class="s">X:/kafka/logs</span></code> <br/><code><span class="c1"># Количество разделов (партиций) по умолчанию</span></code> <br/><code><span class="na">num.partitions</span><span class="o">=</span><span class="s">4</span></code> <br/><code><span class="c1"># Количество потоков восстановления на каталог данных</span></code> <br/><code><span class="na">num.recovery.threads.per.data.dir</span><span class="o">=</span><span class="s">1</span></code> <br/><code><span class="c1"># Фактор репликации темы смещений</span></code> <br/><code><span class="na">offsets.topic.replication.factor</span><span class="o">=</span><span class="s">1</span></code> <br/><code><span class="c1"># Фактор репликации журнала состояния транзакций</span></code> <br/><code><span class="na">transaction.state.log.replication.factor</span><span class="o">=</span><span class="s">1</span></code> <br/><code><span class="c1"># Минимальное количество ISR для журнала состояния транзакций</span></code> <br/><code><span class="na">transaction.state.log.min.isr</span><span class="o">=</span><span class="s">1</span></code> <br/><code><span class="c1"># Время хранения журналов (в часах)</span></code> <br/><code><span class="na">log.retention.hours</span><span class="o">=</span><span class="s">168</span></code> <br/><code><span class="c1"># Размер сегмента журнала</span></code> <br/><code><span class="na">log.segment.bytes</span><span class="o">=</span><span class="s">1073741824</span></code> <br/><code><span class="c1"># Интервал проверки хранения журналов (в миллисекундах)</span></code> <br/><code><span class="na">log.retention.check.interval.ms</span><span class="o">=</span><span class="s">300000</span></code> <br/><code><span class="c1"># Максимальный размер запроса</span></code> <br/><code><span class="na">max.request.size</span><span class="o">=</span><span class="s">104857600</span></code> <br/><code><span class="c1"># Максимальный размер сообщения</span></code> <br/><code><span class="na">max.message.bytes</span><span class="o">=</span><span class="s">104857600</span></code> <br/><code><span class="c1"># Максимальный размер сообщения</span></code> <br/><code><span class="na">message.max.bytes</span><span class="o">=</span><span class="s">104857600</span></code> <br/><code><span class="c1"># Максимальный размер сообщения для выборки</span></code> <br/><code><span class="na">fetch.message.max.bytes</span><span class="o">=</span><span class="s">104857600</span></code> <br/><code><span class="c1"># Максимальный размер сообщения для выборки реплики</span></code> <br/><code><span class="na">replica.fetch.max.bytes</span><span class="o">=</span><span class="s">104857600</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Откройте <em>PowerShell</em> от имени администратора и выполните команды:</p>
@@ -164,7 +153,7 @@
 <p><figure class="screenshot_with_caption" markdown=""><img alt="Kafka в списке служб" src="/platform/v5.0/administration/deploy/windows/auxiliary_software_deploy/img/kafka_install_services.png"/><figcaption class="caption">Kafka в списке служб</figcaption></figure></p>
 </li>
 <li>
-<p>С помощью свойств службы включите и настройте автоматический перезапуск Kafka.</p>
+<p>В окне свойств службы на вкладке «<strong>Восстановление</strong>» включите и настройте перезапуск Kafka в случае сбоев.</p>
 <p><figure class="screenshot_with_caption" markdown=""><img alt="Окно настройки службы Kafka" src="/platform/v5.0/administration/deploy/windows/auxiliary_software_deploy/img/kafka_install_kafka_service.png"/><figcaption class="caption">Окно настройки службы Kafka</figcaption></figure></p>
 </li>
 <li>
@@ -176,14 +165,12 @@
 <p><figure class="screenshot_with_caption" markdown=""><img alt="Создание ветки сообщений Kafka в powershell.exe" src="/platform/v5.0/administration/deploy/windows/auxiliary_software_deploy/img/kafka_install_powershell.png"/><figcaption class="caption">Создание ветки сообщений Kafka в powershell.exe</figcaption></figure></p>
 </li>
 </ol>
-<h2 id="подключение-экземпляра-comindware-platform-к-kafka">Подключение экземпляра Comindware Platform к Kafka</h2>
+<h2 id="kafka_deploy_windows_instance_connect">Подключение экземпляра Comindware Platform к Kafka</h2>
 <ol class="colored_numbers_list">
-<li>
-<p>Откройте папку <code>C:\\ProgramData\\comindware\\configs\\instance</code></p>
-</li>
+<li>Откройте папку <code>C:\\ProgramData\\comindware\\configs\\instance</code></li>
 <li>
 <p>Задайте параметры подключения к Kafka в файле <code>&lt;instanceName&gt;.yml</code> (<code>&lt;instanceName&gt;</code> — имя экземпляра ПО):</p>
-<div class="highlight"><code><pre><span></span><code># IP-адрес сервера Kafka</code> <br/><code>mq.server: &lt;KafkaIP&gt;:9092</code> <br/><code># Имя экземпляра ПО</code> <br/><code>mq.group: &lt;instanceName&gt;</code> <br/><code># Идентификатор узла очереди сообщений</code> <br/><code>mq.node: &lt;instanceName&gt;</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="c1"># IP-адрес сервера Kafka</span></code> <br/><code><span class="nt">mq.server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;KafkaIP&gt;:9092</span></code> <br/><code><span class="c1"># Имя экземпляра ПО</span></code> <br/><code><span class="nt">mq.group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/><code><span class="c1"># Идентификатор узла очереди сообщений</span></code> <br/><code><span class="nt">mq.node</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Удалите следующую строку из файла <code>&lt;instanceName&gt;.yml</code>:</p>
@@ -192,25 +179,24 @@
 <p class="admonition-title">Внимание!</p>
 <p>Для корректной работы экземпляра ПО необходимо соблюсти следующие условия:</p>
 <ul>
-<li>IP-адрес и порт Kafka должны быть обязательно прописаны цифрами в формате <code>XX.XX.XX.XX:XXXX</code>. То есть недопустимо указывать имя хоста вместо IP-адреса и опускать номер порта.</li>
+<li>IP-адрес и порт {{ apacheKafkaVariants }} должны быть обязательно прописаны цифрами в формате <code>XXX.XXX.XXX.XXX:XXXXX</code>. То есть недопустимо указывать имя хоста вместо IP-адреса и опускать номер порта.</li>
 <li>
-<p>Значения параметров <code>mq.server</code> (адрес и порт сервера очереди сообщений), <code>mq.group</code> (идентификатор группы очереди сообщений), <code>mq.node</code> (идентификатор узла очереди сообщений) должны совпадать во всех файлах конфигурации:</p>
-<ul>
-<li><code>C:\\ProgramData\\comindware\\configs\\instance\\&lt;instanceName&gt;.yml</code></li>
-<li><code>C:\\ProgramData\\comindware\\configs\\instance\\apigateway.yml</code></li>
-<li><code>C:\\ProgramData\\comindware\\configs\\instance\\adapterhost.yml</code></li>
-</ul>
+<p>Установите соответствующие вашей конфигурации значения параметров <code>mq.server</code> (адрес и порт сервера очереди сообщений), <code>mq.group</code> (идентификатор группы очереди сообщений), <code>mq.node</code> (идентификатор узла очереди сообщений). Они должны совпадать во всех файлах конфигурации:</p>
+<div class="highlight"><code><pre><span></span><code>C:\\ProgramData\\comindware\\configs\\instance\\&lt;instanceName&gt;.yml</code> <br/><code>C:\\ProgramData\\comindware\\Instances\\&lt;InstanceName&gt;\\config\\apigateway.yml</code> <br/><code>C:\\ProgramData\\comindware\\Instances\\&lt;InstanceName&gt;\\config\\adapterhost.yml</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Удостоверьтесь, что в <code>YML</code>-файлах конфигурации все пути указаны с обратной косой чертой <code>\\</code> в стиле Windows, а не в стиле Linux <code>/</code>.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
 <p>Задайте параметры подключения к Kafka в файле <code>apigateway.yml</code>:</p>
-<div class="highlight"><code><pre><span></span><code># Укажите IP-адрес сервера Kafka</code> <br/><code>mq.server: &lt;KafkaIP&gt;:9092</code> <br/><code># Укажите имя экземпляра ПО</code> <br/><code>mq.group: &lt;instanceName&gt;</code> <br/><code># Идентификатор узла очереди сообщений</code> <br/><code>mq.node: &lt;instanceName&gt;</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="c1"># Укажите IP-адрес сервера Kafka</span></code> <br/><code><span class="c1"># без префикса http/https</span></code> <br/><code><span class="nt">mq.server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;KafkaIP&gt;:9092</span></code> <br/><code><span class="c1"># Укажите имя экземпляра ПО</span></code> <br/><code><span class="nt">mq.group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/><code><span class="c1"># Идентификатор узла очереди сообщений</span></code> <br/><code><span class="nt">mq.node</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Задайте параметры подключения к Kafka в файле <code>adapterhost.yml</code>:</p>
-<div class="highlight"><code><pre><span></span><code># Укажите IP-адрес сервера Kafka</code> <br/><code>mq.server: &lt;KafkaIP&gt;:9092</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="c1"># Укажите IP-адрес сервера Kafka</span></code> <br/><code><span class="nt">mq.server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;KafkaIP&gt;:9092</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Перезапустите экземпляр ПО.</p>
@@ -220,16 +206,16 @@
 <div class="highlight"><code><pre><span></span><code><span class="p">&lt;</span><span class="n">instanceAddress</span><span class="p">&gt;/</span><span class="n">async</span></code> <br/></pre></code></div>
 </li>
 </ol>
-<h2 id="дополнительные-рекомендации">Дополнительные рекомендации</h2>
-<h3 id="настройка-безопасности">Настройка безопасности</h3>
+<h2 id="kafka_deploy_recommendations">Дополнительные рекомендации</h2>
+<h3 id="kafka_deploy_recommendations_security">Настройка безопасности</h3>
 <p>Для повышения безопасности рекомендуется настроить SSL/TLS для шифрования данных и аутентификацию с использованием SASL. Подробные инструкции см. в официальной документации Apache Kafka (на английском языке): <a class="mkdocs_imported_link" href="https://kafka.apache.org/documentation/#security">https://kafka.apache.org/documentation/#security</a>.</p>
-<h3 id="мониторинг-и-управление">Мониторинг и управление</h3>
+<h3 id="kafka_deploy_recommendations_monitoring">Мониторинг и управление</h3>
 <p>Для мониторинга и управления сервером Kafka рекомендуется использовать инструменты, такие как Prometheus и Grafana. Подробные инструкции по настройке мониторинга см. в официальной документации Apache Kafka (на английском языке): <a class="mkdocs_imported_link" href="https://kafka.apache.org/documentation/#monitoring">https://kafka.apache.org/documentation/#monitoring</a>.</p>
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4604">Настройка конфигурации вспомогательного ПО для оптимизации работы Comindware Platform</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620#paths_windows">Пути и содержимое директорий экземпляра ПО</a></em></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4604">Настройка конфигурации вспомогательного ПО для оптимизации работы Comindware Platform</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620#paths_windows">Пути и содержимое директорий экземпляра ПО</a></li>
 </ul>
 </div>
 </article>

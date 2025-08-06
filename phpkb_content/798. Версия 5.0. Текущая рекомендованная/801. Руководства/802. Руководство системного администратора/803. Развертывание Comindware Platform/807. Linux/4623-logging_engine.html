@@ -1,4 +1,4 @@
-<h1>Подсистема журналирования</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4623" kb-tags="linux,windows,журнал,журналы,журналирование,логи,логирование" kb-title="Подсистема журналирования">
+<h1>Подсистема журналирования</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4623" kb-tags="linux,windows,журнал,журналы,журналирование,логи,логирование,системные события,события" kb-title="Подсистема журналирования">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -16,7 +16,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#файловые-журналы">
+<a class="md-nav__link mkdocs_imported_link" href="#logging_engine_file_logs">
 <span class="md-ellipsis">
       Файловые журналы
     </span>
@@ -31,7 +31,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#типы-событий-в-журналах">
+<a class="md-nav__link mkdocs_imported_link" href="#logging_engine_event_types">
 <span class="md-ellipsis">
       Типы событий в журналах
     </span>
@@ -45,42 +45,42 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#журнал-интеграции">
+<a class="md-nav__link mkdocs_imported_link" href="#logging_engine_integration_log">
 <span class="md-ellipsis">
       Журнал интеграции
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#журнал-интеграции-с-сырыми-данными">
+<a class="md-nav__link mkdocs_imported_link" href="#logging_engine_integration_raw_log">
 <span class="md-ellipsis">
       Журнал интеграции с сырыми данными
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#журнал-исправности">
+<a class="md-nav__link mkdocs_imported_link" href="#logging_engine_heartbeat_log">
 <span class="md-ellipsis">
       Журнал исправности
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#журнал-обновления">
+<a class="md-nav__link mkdocs_imported_link" href="#logging_engine_update_log">
 <span class="md-ellipsis">
       Журнал обновления
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#журнал-ошибок">
+<a class="md-nav__link mkdocs_imported_link" href="#logging_engine_error_log">
 <span class="md-ellipsis">
       Журнал ошибок
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#журнал-процессов">
+<a class="md-nav__link mkdocs_imported_link" href="#logging_engine_process_log">
 <span class="md-ellipsis">
       Журнал процессов
     </span>
@@ -88,7 +88,7 @@
 <nav aria-label="Журнал процессов" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#рекомендации-по-чтению-журнала-процессов">
+<a class="md-nav__link mkdocs_imported_link" href="#logging_engine_process_log_recommendations">
 <span class="md-ellipsis">
       Рекомендации по чтению журнала процессов
     </span>
@@ -98,21 +98,21 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#журнал-резервного-копирования">
+<a class="md-nav__link mkdocs_imported_link" href="#logging_engine_backup_log">
 <span class="md-ellipsis">
       Журнал резервного копирования
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#журнал-сценариев">
+<a class="md-nav__link mkdocs_imported_link" href="#logging_engine_trigger_log">
 <span class="md-ellipsis">
       Журнал сценариев
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#системный-журнал">
+<a class="md-nav__link mkdocs_imported_link" href="#logging_engine_system_log">
 <span class="md-ellipsis">
       Системный журнал
     </span>
@@ -129,7 +129,7 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#перенаправление-сообщений-из-файлов-журналов-в-журнал-событий-windows">
+<a class="md-nav__link mkdocs_imported_link" href="#logging_engine_windows_eventlog">
 <span class="md-ellipsis">
       Перенаправление сообщений из файлов журналов в журнал событий Windows
     </span>
@@ -177,28 +177,28 @@
 </li>
 </ul>
 <p>Сведения о фактическом расположении файлов см. в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое папок экземпляра ПО</a>»</em>.</p>
-<h2 class="pageBreakBefore" id="файловые-журналы">Файловые журналы</h2>
+<h2 class="pageBreakBefore" id="logging_engine_file_logs">Файловые журналы</h2>
 <p>ПО поддерживает следующие файловые журналы:</p>
 <ul>
 <li><a class="mkdocs_imported_link" href="#logging_engine_adapter_logs">Адаптеры</a></li>
 <li><a class="mkdocs_imported_link" href="#logging_engine_audit_log">Аудит</a></li>
-<li><a class="mkdocs_imported_link" href="#журнал-интеграции">Интеграция</a></li>
-<li><a class="mkdocs_imported_link" href="#журнал-интеграции-с-сырыми-данными">Интеграция — сырые данные</a></li>
-<li><a class="mkdocs_imported_link" href="#журнал-исправности">Исправность ПО</a></li>
-<li><a class="mkdocs_imported_link" href="#журнал-обновления">Обновление</a></li>
-<li><a class="mkdocs_imported_link" href="#журнал-ошибок">Ошибки</a></li>
-<li><a class="mkdocs_imported_link" href="#журнал-процессов">Процессы</a></li>
-<li><a class="mkdocs_imported_link" href="#системный-журнал">Системный журнал</a></li>
-<li><a class="mkdocs_imported_link" href="#журнал-резервного-копирования">Резервное копирование</a></li>
-<li>Трансфер — в составе журнала <a class="mkdocs_imported_link" href="#журнал-ошибок">ошибок</a></li>
+<li><a class="mkdocs_imported_link" href="#logging_engine_integration_log">Интеграция</a></li>
+<li><a class="mkdocs_imported_link" href="#logging_engine_integration_raw_log">Интеграция — сырые данные</a></li>
+<li><a class="mkdocs_imported_link" href="#logging_engine_heartbeat_log">Исправность ПО</a></li>
+<li><a class="mkdocs_imported_link" href="#logging_engine_update_log">Обновление</a></li>
+<li><a class="mkdocs_imported_link" href="#logging_engine_error_log">Ошибки</a></li>
+<li><a class="mkdocs_imported_link" href="#logging_engine_process_log">Процессы</a></li>
+<li><a class="mkdocs_imported_link" href="#logging_engine_system_log">Системный журнал</a></li>
+<li><a class="mkdocs_imported_link" href="#logging_engine_backup_log">Резервное копирование</a></li>
+<li>Трансфер — в составе журнала <a class="mkdocs_imported_link" href="#logging_engine_error_log">ошибок</a></li>
 </ul>
 <p>Каждый из перечисленных журналов представляет собой структурированный текстовый файл с пробелами в качестве разделителей.</p>
 <p>В качестве инструментов чтения и анализа файлов журналов можно использовать любой инструмент, представленный на рынке. Например, есть мощный инструмент Kibana <em><a class="mkdocs_imported_link" href="https://www.elastic.co/products/kibana">https://www.elastic.co/products/kibana</a></em>, который обладает широким спектром функций по сбору журналов с различных ресурсов и их глубокому анализу с различными визуальными представлениями, в том числе в виде графиков.</p>
-<h4 id="logging_engine_rules">Правила формирования файлов журналов</h4>
+<h4 class="pageBreakBefore" id="logging_engine_rules">Правила формирования файлов журналов</h4>
 <p>Для каждого журнала ежедневно формируется один файл.</p>
 <p>По умолчанию ПО сохраняет в директории <code>Logs</code> все файлы журналов за последние 100 дней. Файлы журналов старше 100 дней удаляются.</p>
 <p>Лимит файлов журналов каждого типа задаётся директивой <code>archiveFilesCount</code> в файле <code>logs.config</code>. См. <em>«<a class="mkdocs_imported_link" href="#logging_engine_description">Описание подсистемы журналирования</a>»</em>.</p>
-<h4 class="pageBreakBefore" id="типы-событий-в-журналах">Типы событий в журналах</h4>
+<h4 class="pageBreakBefore" id="logging_engine_event_types">Типы событий в журналах</h4>
 <p>В журналах предусмотрены следующие типы событий:</p>
 <ul>
 <li><code>Fatal</code> — критическая ошибка в работе ПО;</li>
@@ -285,7 +285,7 @@
 <figure class="screenshot_with_caption">
 <p><img alt="Пример журнала аудита" src="/platform/v5.0/administration/deploy/img/logging_engine_audit_log.png"/><figcaption class="caption">Пример журнала аудита</figcaption></p>
 </figure>
-<h4 class="pageBreakBefore" id="журнал-интеграции">Журнал интеграции</h4>
+<h4 class="pageBreakBefore" id="logging_engine_integration_log">Журнал интеграции</h4>
 <p>Журнал интеграции содержит информационные сообщения по событиям, возникающим в ходе работы интеграционных сервисов ПО (таких, как подключения и адаптеры).</p>
 <p>Стандартное имя файла журнала ошибок: <code>integration_ГГГГ-ММ-ДД.log</code></p>
 <p>Журнал интеграции содержит следующие сведения:</p>
@@ -305,7 +305,7 @@
 <figure class="screenshot_with_caption">
 <p><img alt="Пример журнала интеграции" src="/platform/v5.0/administration/deploy/img/logging_engine_integration_log.png"/><figcaption class="caption">Пример журнала интеграции</figcaption></p>
 </figure>
-<h4 class="pageBreakBefore" id="журнал-интеграции-с-сырыми-данными">Журнал интеграции с сырыми данными</h4>
+<h4 class="pageBreakBefore" id="logging_engine_integration_raw_log">Журнал интеграции с сырыми данными</h4>
 <p>Журнал интеграции с сырыми данными содержит те же сведения, что журнал интеграции, но с полным содержимым сообщений от внешних систем.</p>
 <p>Стандартное имя файла журнала с сырыми данными: <code>integration_raw_ГГГГ-ММ-ДД.log</code></p>
 <p>По умолчанию для файла журнала интеграции с сырыми данными установлено ограничение на размер в 100 МБ. В случае превышения заданного размера, имя файла меняется на <code>имяжурнала_ГГГГ-ММ-ДД.&lt;порядковый номер файла&gt;.log</code>, а в каталоге журналов создаётся новый файл журнала со стандартным именем.</p>
@@ -324,7 +324,7 @@
 <figure class="screenshot_with_caption">
 <p><img alt="Пример журнала интеграции с сырыми данными" src="/platform/v5.0/administration/deploy/img/logging_engine_integration_raw.png"/><figcaption class="caption">Пример журнала интеграции с сырыми данными</figcaption></p>
 </figure>
-<h4 class="pageBreakBefore" id="журнал-исправности">Журнал исправности</h4>
+<h4 class="pageBreakBefore" id="logging_engine_heartbeat_log">Журнал исправности</h4>
 <p>Журнал исправности содержит сведения о состоянии экземпляра ПО: дисковом пространстве, использовании подключений, работе сервиса OpenSearch (Elasticsearch), работе подсистем, выполнении экземпляров процессов.</p>
 <p>Стандартное имя файла журнала исправности: <code>heartbeat_ГГГГ-ММ-ДД.log</code></p>
 <p>Журнал исправности ПО содержит следующие сведения:</p>
@@ -342,7 +342,7 @@
 <figure class="screenshot_with_caption">
 <p><img alt="Пример журнала исправности" src="/platform/v5.0/administration/deploy/img/logging_engine_heartbeat_log.png"/><figcaption class="caption">Пример журнала исправности</figcaption></p>
 </figure>
-<h4 class="pageBreakBefore" id="журнал-обновления">Журнал обновления</h4>
+<h4 class="pageBreakBefore" id="logging_engine_update_log">Журнал обновления</h4>
 <p>Журнал обновления содержит сведения о результатах обновления версий ПО.</p>
 <p>Журнал обновления разделён на два файла:</p>
 <ul>
@@ -364,7 +364,7 @@
 <figure class="screenshot_with_caption">
 <p><img alt="Пример журнала обновления" src="/platform/v5.0/administration/deploy/img/logging_engine_update_log.png"/><figcaption class="caption">Пример журнала обновления</figcaption></p>
 </figure>
-<h4 class="pageBreakBefore" id="журнал-ошибок">Журнал ошибок</h4>
+<h4 class="pageBreakBefore" id="logging_engine_error_log">Журнал ошибок</h4>
 <p>Журнал ошибок содержит данные обо всех ошибках, возникающих в ходе работы экземпляра ПО, а также об <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4808">импорте и экспорте версий приложений</a>.</p>
 <p>Стандартное имя файла журнала ошибок: <code>error_ГГГГ-ММ-ДД.log</code></p>
 <p>Журнал ошибок содержит следующие сведения:</p>
@@ -388,7 +388,7 @@
 <figure class="screenshot_with_caption">
 <p><img alt="Пример журнала ошибок" src="/platform/v5.0/administration/deploy/img/logging_engine_errror_log.png"/><figcaption class="caption">Пример журнала ошибок</figcaption></p>
 </figure>
-<h4 class="pageBreakBefore" id="журнал-процессов">Журнал процессов</h4>
+<h4 class="pageBreakBefore" id="logging_engine_process_log">Журнал процессов</h4>
 <p>Журнал процессов содержит сведения о движении токенов по элементам экземпляров процессов.</p>
 <p>Стандартное имя файла журнала процессов: <code>process_ГГГГ-ММ-ДД.log</code></p>
 <p>Журнал процессов содержит следующие сведения:</p>
@@ -405,7 +405,7 @@
 <figure class="screenshot_with_caption">
 <p><img alt="Пример журнала процессов" src="/platform/v5.0/administration/deploy/img/logging_engine_process_log.png"/><figcaption class="caption">Пример журнала процессов</figcaption></p>
 </figure>
-<h5 class="pageBreakBefore" id="рекомендации-по-чтению-журнала-процессов">Рекомендации по чтению журнала процессов</h5>
+<h5 class="pageBreakBefore" id="logging_engine_process_log_recommendations">Рекомендации по чтению журнала процессов</h5>
 <ul>
 <li>В журнале процессов отражается факт создания экземпляра процесса с указанием его идентификатора.</li>
 <li>Чтобы журнал процессов содержал более наглядные сведения, при настройке диаграммы процесса давайте элементам понятные системные имена.</li>
@@ -425,7 +425,7 @@
 </ul>
 </li>
 </ul>
-<h4 class="pageBreakBefore" id="журнал-резервного-копирования">Журнал резервного копирования</h4>
+<h4 class="pageBreakBefore" id="logging_engine_backup_log">Журнал резервного копирования</h4>
 <p>Журнал резервного копирования содержит информационные сообщения по результатам резервного копирования экземпляра ПО.</p>
 <p>Стандартное имя файла журнала резервного копирования: <code>backup_ГГГГ-ММ-ДД.log</code></p>
 <p>Журнал резервного копирования содержит следующие сведения:</p>
@@ -443,7 +443,7 @@
 <figure class="screenshot_with_caption">
 <p><img alt="Пример журнала резервного копирования" src="/platform/v5.0/administration/deploy/img/logging_engine_backup_log.png"/><figcaption class="caption">Пример журнала резервного копирования</figcaption></p>
 </figure>
-<h4 class="pageBreakBefore" id="журнал-сценариев">Журнал сценариев</h4>
+<h4 class="pageBreakBefore" id="logging_engine_trigger_log">Журнал сценариев</h4>
 <p>Журнал сценариев содержит сведения о ходе выполнения сценариев.</p>
 <p>Стандартное имя файла журнала сценариев: <code>trigger_ГГГГ-ММ-ДД.log</code></p>
 <p>Журнал сценариев содержит следующие сведения:</p>
@@ -469,7 +469,7 @@
 <figure class="screenshot_with_caption">
 <p><img alt="Пример журнала сценариев" src="/platform/v5.0/administration/deploy/img/logging_engine_trigger_log.png"/><figcaption class="caption">Пример журнала сценариев</figcaption></p>
 </figure>
-<h4 class="pageBreakBefore" id="системный-журнал">Системный журнал</h4>
+<h4 class="pageBreakBefore" id="logging_engine_system_log">Системный журнал</h4>
 <p>Системный журнал содержит данные о событиях системного уровня в экземпляре ПО.</p>
 <p>Стандартное имя файла системного журнала: <code>system_ГГГГ-ММ-ДД.log</code></p>
 <p>Системный журнал содержит следующие сведения:</p>
@@ -511,7 +511,7 @@
 <figure class="screenshot_with_caption">
 <p><img alt="Пример журнала аудита" src="/platform/v5.0/administration/deploy/img/logging_engine_adapter_log.png"/><figcaption class="caption">Пример журнала аудита</figcaption></p>
 </figure>
-<h2 class="pageBreakBefore" id="перенаправление-сообщений-из-файлов-журналов-в-журнал-событий-windows">Перенаправление сообщений из файлов журналов в журнал событий Windows</h2>
+<h2 class="pageBreakBefore" id="logging_engine_windows_eventlog">Перенаправление сообщений из файлов журналов в журнал событий Windows</h2>
 <p>Библиотека NLog позволяет записывать журналы помимо файлов в другие хранилища, например в службу «Журнал событий Windows» (EventLog), который можно просмотреть с помощью приложения <strong>Просмотр событий</strong>.</p>
 <p>Полная документация по настройке журналирования в журнал событий Windows представлена по адресу:</p>
 <p><em><a class="mkdocs_imported_link" href="https://github.com/NLog/NLog/wiki/EventLog-target">https://github.com/NLog/NLog/wiki/EventLog-target</a></em></p>

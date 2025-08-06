@@ -296,7 +296,7 @@ kbId: 4905
 
 --8<-- "related_topics_heading.md"
 
-- [Вычисление пользователей, у которых есть активные задачи](n3_calculate_active_task_accounts.html#n3_calculate_active_task_accounts "Вычисление пользователей с активными задачами")
+- [Вычисление пользователей, у которых есть активные задачи](n3_calculate_active_task_accounts.html#example_n3_calculate_active_task_accounts "Аккаунты и задачи. Вычисление пользователей с активными задачами с помощью N3")
 - [Отправка эл. почты из сценариев][scenario_send_email]
 - [Фильтр списка по активным задачам текущего пользователя: по всем процессам, по конкретному процессу](n3_filter_active_tasks.html#n3_filter_active_tasks "Фильтрация списка по активным задачам с помощью N3")
 - [Уведомления. Типы, назначение, настройка, использование][notification_types]

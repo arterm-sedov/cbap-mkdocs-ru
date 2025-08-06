@@ -1,4 +1,4 @@
-<h1>Kafka. Установка в базовой конфигурации</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5074">
+<h1>Apache Kafka. Установка в базовой конфигурации</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5074" kb-tags="Kafka,Linux,установка,развертывание,развёртывание,брокер сообщений,шина сообщений" kb-title="Apache Kafka. Установка в базовой конфигурации">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -9,35 +9,35 @@
       </h2>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<a class="md-nav__link mkdocs_imported_link" href="#kafka_deploy_linux_intro">
 <span class="md-ellipsis">
       Введение
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#требования-к-серверу">
+<a class="md-nav__link mkdocs_imported_link" href="#kafka_deploy_linux_server_requirements">
 <span class="md-ellipsis">
       Требования к серверу
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#установка-kafka">
+<a class="md-nav__link mkdocs_imported_link" href="#kafka_deploy_linux_install">
 <span class="md-ellipsis">
       Установка Kafka
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#подключение-экземпляра-comindware-platform-к-kafka">
+<a class="md-nav__link mkdocs_imported_link" href="#kafka_deploy_linux_instance_connect">
 <span class="md-ellipsis">
       Подключение экземпляра Comindware Platform к Kafka
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#дополнительные-рекомендации">
+<a class="md-nav__link mkdocs_imported_link" href="#kafka_deploy_recommendations">
 <span class="md-ellipsis">
       Дополнительные рекомендации
     </span>
@@ -45,14 +45,14 @@
 <nav aria-label="Дополнительные рекомендации" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#настройка-безопасности">
+<a class="md-nav__link mkdocs_imported_link" href="#kafka_deploy_recommendations_security">
 <span class="md-ellipsis">
       Настройка безопасности
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#мониторинг-и-управление">
+<a class="md-nav__link mkdocs_imported_link" href="#kafka_deploy_recommendations_monitoring">
 <span class="md-ellipsis">
       Мониторинг и управление
     </span>
@@ -73,19 +73,19 @@
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h2 id="введение">Введение</h2>
+<h2 id="kafka_deploy_linux_intro">Введение</h2>
 <p>Для работы <strong>Comindware Platform</strong> требуется сервер Apache Kafka. См. <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4659">системные требования</a>.</p>
 <p>Здесь представлены инструкции по установке Kafka в простейшей базовой конфигурации с помощью дистрибутива <strong>Comindware Platform</strong> для ОС Linux.</p>
 <p>Инструкции по установке Kafka в иных конфигурациях представлены на <em><a class="mkdocs_imported_link" href="https://kafka.apache.org/quickstart">официальном сайте Apache Kafka</a></em>.</p>
 <p>С помощью дистрибутива <strong>Comindware Platform</strong> можно развернуть сервер Kafka вместе с экземпляром ПО или на отдельном сервере. Для этого укажите ключ <code>-k</code> при запуске скрипта <code>prerequisites_install.sh</code>. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622">Установка, запуск, инициализация и остановка ПО Comindware Platform</a>»</em>.</p>
 <p>Здесь представлены требования к техническому обеспечению и инструкции по развёртыванию сервера Kafka в ОС Linux, а также приведён пример типового файла конфигурации. Инструкции представлены для версии Kafka 3.2.0, для других версий содержимое файлов конфигурации и порядок установки могут быть иными.</p>
-<h2 id="требования-к-серверу">Требования к серверу</h2>
+<h2 id="kafka_deploy_linux_server_requirements">Требования к серверу</h2>
 <p>Сервер Kafka создает значительную нагрузку на вычислительные ресурсы компьютера, поэтому рекомендуется:</p>
 <ul>
 <li>использовать отдельный SSD-диск для хранения журналов и данных сервера Kafka;</li>
 <li>использовать высокопроизводительный компьютер с достаточным объемом ОЗУ и количеством ядер ЦП.</li>
 </ul>
-<h2 id="установка-kafka">Установка Kafka</h2>
+<h2 id="kafka_deploy_linux_install">Установка Kafka</h2>
 <ol class="colored_numbers_list">
 <li>
 <p>Перейдите в режим суперпользователя:</p>
@@ -94,7 +94,7 @@
 <div class="highlight"><code><pre><span></span><code>su<span class="w"> </span>-</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Скачайте и распакуйте дистрибутив с вспомогательным ПО <strong>Comindware Platform</strong>, полученный по ссылке от компании <strong>Comindware</strong> (<code>X.X</code>, <code>&lt;versionNumber&gt;</code> — номер версии ПО, <code>&lt;osname&gt;</code> — название операционной системы):</p>
+<p>Скачайте и распакуйте дистрибутив с вспомогательным ПО <strong>Comindware Platform</strong>, полученный по ссылке от компании <strong>Comindware</strong> (<code>X.X</code>, <code>&lt;versionNumber&gt;</code> — номер версии ПО, <code>&lt;osname&gt;</code> — название операционной системы):</p>
 <div class="highlight"><code><pre><span></span><code>tar<span class="w"> </span>-xf<span class="w"> </span>X.X-release-ru-&lt;versionNumber&gt;.prerequisites.&lt;osname&gt;.tar.gz</code> <br/></pre></code></div>
 <div class="notice notice-tip">
 <p class="admonition-title">Совет</p>
@@ -124,7 +124,7 @@
 <div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>start<span class="w"> </span>kafka</code> <br/></pre></code></div>
 </li>
 </ol>
-<h2 id="подключение-экземпляра-comindware-platform-к-kafka">Подключение экземпляра Comindware Platform к Kafka</h2>
+<h2 id="kafka_deploy_linux_instance_connect">Подключение экземпляра Comindware Platform к Kafka</h2>
 <ol class="colored_numbers_list">
 <li>
 <p>Перейдите в режим суперпользователя:</p>
@@ -134,14 +134,14 @@
 </li>
 <li>
 <p>Задайте параметры подключения к Kafka в файле <code>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code> (<code>&lt;instanceName&gt;</code> — имя экземпляра ПО Comindware Platform):</p>
-<div class="highlight"><code><pre><span></span><code># Адрес и порт сервера очереди сообщений (Kafka)</code> <br/><code>mq.server: &lt;kafkaBrokerIP&gt;:&lt;kafkaBrokerPort&gt;</code> <br/><code># Идентификатор группы очереди сообщений</code> <br/><code>mq.group: &lt;instanceName&gt;</code> <br/><code># Идентификатор узла очереди сообщений</code> <br/><code>#mq.node: &lt;instanceName&gt;</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="c1"># Адрес и порт сервера очереди сообщений (Kafka)</span></code> <br/><code><span class="nt">mq.server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;kafkaBrokerIP&gt;:&lt;kafkaBrokerPort&gt;</span></code> <br/><code><span class="c1"># Идентификатор группы очереди сообщений</span></code> <br/><code><span class="nt">mq.group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/><code><span class="c1"># Идентификатор узла очереди сообщений</span></code> <br/><code><span class="c1">#mq.node: &lt;instanceName&gt;</span></code> <br/></pre></code></div>
 <div class="notice notice-warning">
 <p class="admonition-title">Внимание!</p>
 <p>Для корректной работы экземпляра ПО необходимо соблюсти следующие условия:</p>
 <ul>
-<li>IP-адрес и порт Kafka должны быть обязательно прописаны цифрами в формате <code>XX.XX.XX.XX:XXXX</code>. То есть недопустимо указывать имя хоста вместо IP-адреса и опускать номер порта.</li>
+<li>IP-адрес и порт {{ apacheKafkaVariants }} должны быть обязательно прописаны цифрами в формате <code>XXX.XXX.XXX.XXX:XXXXX</code>. То есть недопустимо указывать имя хоста вместо IP-адреса и опускать номер порта.</li>
 <li>
-<p>Значения параметров <code>mq.server</code> (адрес и порт сервера очереди сообщений), <code>mq.group</code> (идентификатор группы очереди сообщений), <code>mq.node</code> (идентификатор узла очереди сообщений) должны совпадать во всех файлах конфигурации:</p>
+<p>Установите соответствующие вашей конфигурации значения параметров <code>mq.server</code> (адрес и порт сервера очереди сообщений), <code>mq.group</code> (идентификатор группы очереди сообщений), <code>mq.node</code> (идентификатор узла очереди сообщений). Они должны совпадать во всех файлах конфигурации:</p>
 <ul>
 <li><code>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code></li>
 <li><code>/var/www/&lt;instanceName&gt;/apigateway.yml</code></li>
@@ -153,11 +153,11 @@
 </li>
 <li>
 <p>Задайте параметры подключения к Kafka в файле <code>/var/www/&lt;instanceName&gt;apigateway.yml</code>:</p>
-<div class="highlight"><code><pre><span></span><code># Адрес и порт сервера очереди сообщений (Kafka)</code> <br/><code>mq.server: &lt;kafkaBrokerIp&gt;:&lt;kafkaBrokerPort&gt;</code> <br/><code># Идентификатор группы очереди сообщений</code> <br/><code>mq.group: &lt;instanceName&gt;</code> <br/><code># Идентификатор узла очереди сообщений</code> <br/><code>mq.node: &lt;instanceName&gt;</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="c1"># Адрес и порт сервера очереди сообщений (Kafka)</span></code> <br/><code><span class="nt">mq.server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;kafkaBrokerIp&gt;:&lt;kafkaBrokerPort&gt;</span></code> <br/><code><span class="c1"># Идентификатор группы очереди сообщений</span></code> <br/><code><span class="nt">mq.group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/><code><span class="c1"># Идентификатор узла очереди сообщений</span></code> <br/><code><span class="nt">mq.node</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Задайте параметры подключения к Kafka в файле <code>/var/www/&lt;instanceName&gt;/adapterhost.yml</code>:</p>
-<div class="highlight"><code><pre><span></span><code># Адрес и порт сервера очереди сообщений (Kafka)</code> <br/><code>mq.server: &lt;kafkaBrokerIp&gt;:&lt;kafkaBrokerPort&gt;</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="c1"># Адрес и порт сервера очереди сообщений (Kafka)</span></code> <br/><code><span class="nt">mq.server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;kafkaBrokerIp&gt;:&lt;kafkaBrokerPort&gt;</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Перезапустите экземпляр ПО:</p>
@@ -168,17 +168,17 @@
 <div class="highlight"><code><pre><span></span><code><span class="p">&lt;</span><span class="n">instanceAddress</span><span class="p">&gt;/</span><span class="n">async</span></code> <br/></pre></code></div>
 </li>
 </ol>
-<h2 id="дополнительные-рекомендации">Дополнительные рекомендации</h2>
-<h3 id="настройка-безопасности">Настройка безопасности</h3>
+<h2 id="kafka_deploy_recommendations">Дополнительные рекомендации</h2>
+<h3 id="kafka_deploy_recommendations_security">Настройка безопасности</h3>
 <p>Для повышения безопасности рекомендуется настроить SSL/TLS для шифрования данных и аутентификацию с использованием SASL. Подробные инструкции см. в официальной документации Apache Kafka (на английском языке): <a class="mkdocs_imported_link" href="https://kafka.apache.org/documentation/#security">https://kafka.apache.org/documentation/#security</a>.</p>
-<h3 id="мониторинг-и-управление">Мониторинг и управление</h3>
+<h3 id="kafka_deploy_recommendations_monitoring">Мониторинг и управление</h3>
 <p>Для мониторинга и управления сервером Kafka рекомендуется использовать инструменты, такие как Prometheus и Grafana. Подробные инструкции по настройке мониторинга см. в официальной документации Apache Kafka (на английском языке): <a class="mkdocs_imported_link" href="https://kafka.apache.org/documentation/#monitoring">https://kafka.apache.org/documentation/#monitoring</a>.</p>
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4604">Настройка конфигурации вспомогательного ПО для оптимизации работы Comindware Platform</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5067">Конфигурация экземпляра, компонентов ПО и служб. Настройка</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620#paths_windows">Пути и содержимое директорий экземпляра ПО</a></em></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4604">Настройка конфигурации вспомогательного ПО для оптимизации работы Comindware Platform</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5067">Конфигурация экземпляра, компонентов ПО и служб. Настройка</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620#paths_windows">Пути и содержимое директорий экземпляра ПО</a></li>
 </ul>
 </div>
 </article>
