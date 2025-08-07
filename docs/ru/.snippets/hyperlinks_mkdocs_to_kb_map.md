@@ -67,6 +67,66 @@
 
 <!-- Экспорт в БЗ любых руководств -->
 
+<!-- Страницы оглавлений в БЗ. Начало -->
+
+[guides_toc]: {{ kbArticleURLPrefix }}4593
+
+[admin_guide_toc]: {{ kbArticleURLPrefix }}4594
+
+[developer_guide_toc]: {{ kbArticleURLPrefix }}4851
+
+[root_toc]: {{ kbArticleURLPrefix }}4594
+
+<!-- Страниц оглавлений в БЗ. Конец -->
+
+<!-- Категории в БЗ. Начало -->
+
+[account_management_cat]: {{ kbCategoryURLPrefix }}813
+
+[account_management_linux_cat]: {{ kbCategoryURLPrefix }}814
+
+[account_management_windows_cat]: {{ kbCategoryURLPrefix }}815
+
+[deploy_cat]: {{ kbCategoryURLPrefix }}803
+
+[deploy_linux_cat]: {{ kbCategoryURLPrefix }}807
+
+[deploy_windows_cat]: {{ kbCategoryURLPrefix }}808
+
+[deploy_auxiliary_cat]: {{ kbCategoryURLPrefix }}804
+
+[deploy_auxiliary_linux_cat]: {{ kbCategoryURLPrefix }}805
+
+[deploy_auxiliary_windows_cat]: {{ kbCategoryURLPrefix }}806
+
+[backup_cat]: {{ kbCategoryURLPrefix }}810
+
+[backup_linux_cat]: {{ kbCategoryURLPrefix }}812
+
+[backup_windows_cat]: {{ kbCategoryURLPrefix }}811
+
+[architect_cat]: {{ kbCategoryURLPrefix }}861
+
+[troubleshooting_cat]: {{ kbCategoryURLPrefix }}887
+
+[examples_cat]: {{ kbCategoryURLPrefix }}871
+
+[expressioons_cat]: {{ kbCategoryURLPrefix }}876
+
+[api_developer_guide_cat]: {{ kbCategoryURLPrefix }}868
+
+[n3_developer_guide_cat]: {{ kbCategoryURLPrefix }}867
+
+[general_cat]: {{ kbCategoryURLPrefix }}799
+
+[integrations_cat]: {{ kbCategoryURLPrefix }}872
+
+[user_guide_cat]: {{ kbCategoryURLPrefix }}817
+
+[admin_guide_cat]: {{ kbCategoryURLPrefix }}802
+
+<!-- Категории в БЗ. Конец -->
+
 [account_templates]: {{ kbArticleURLPrefix }}4757
 
 [account_template_attribute_system_names]: {{ kbArticleURLPrefix }}4757#account_template_attribute_system_names
