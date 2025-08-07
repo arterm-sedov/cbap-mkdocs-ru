@@ -86,7 +86,7 @@
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#tutorial_architect_lesson_3_black_box_pool">
 <span class="md-ellipsis">
-      Настройка пользовательских задач, промежуточного события и развилок
+      Настройка скрытого пула
     </span>
 </a>
 </li>
@@ -251,6 +251,7 @@
 <li>Откроется конструктор процесса.</li>
 <li>Поместите на диаграмму «<strong>Основной пул</strong>» и переименуйте его в <em>«Поиск кандидата»</em>.</li>
 <li>Поместите в пул дорожку и переименуйте её в <em>«Рекрутёр»</em>.</li>
+<li>Переходите к настройке остальных элементов процесса.</li>
 </ol>
 <h3 id="tutorial_architect_lesson_3_start_event">Настройка начального события-получения сообщения</h3>
 <ol class="colored_numbers_list">
@@ -308,8 +309,9 @@
 <li>От задачи <em>«Договориться с кандидатом о собеседовании»</em> добавьте <strong>развилку «или/или»</strong> и переименуйте её в <em>«Кандидат согласен пройти собеседование?»</em>.</li>
 <li>От развилки <em>«Кандидат согласен пройти собеседование?»</em> добавьте <strong>поток управления</strong> <em>«Нет»</em> и соедините его с <strong>развилкой «или/или»</strong> перед задачей  <em>«Искать кандидата в базах данных»</em>.</li>
 <li>От развилки <em>«Кандидат согласен пройти собеседование?»</em> добавьте <strong>поток управления</strong> <em>«Да»</em> и соедините его с простым <strong>конечным событием</strong>.</li>
+<li>Теперь переходите к настройке скрытого пула, который свяжет между собой процессы <em>«Поиск кандидата»</em> и  <em>«Найм кандидата»</em>.</li>
 </ol>
-<h3 id="tutorial_architect_lesson_3_black_box_pool">Настройка пользовательских задач, промежуточного события и развилок</h3>
+<h3 id="tutorial_architect_lesson_3_black_box_pool">Настройка скрытого пула</h3>
 <div class="notice notice-warning">
 <p class="admonition-title">Логика работы скрытого пула</p>
 <p>С помощью <strong>скрытого пула</strong> мы покажем на диаграмме процесса следующий связанный процесс <em>«Найм кандидата»</em>, не демонстрируя его внутреннее устройство.</p>
@@ -328,10 +330,11 @@
 <li>
 <p>Соедините <strong>конечное событие</strong> <strong>потоком сообщений</strong> со скрытым пулом <em>«Найм кандидата»</em>.</p>
 </li>
+<li>
+<p>Должна получиться показанная ниже диаграмма:</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Результирующая диаграмма «Поиск кандидата»" src="/platform/v5.0/tutorials/tutorial_architect/img/lesson_3_find_head_diagram.png"/><figcaption class="caption">Результирующая диаграмма «Поиск кандидата»</figcaption></figure></p>
+</li>
 </ol>
-<figure class="screenshot_with_caption">
-<p><img alt="Диаграмма «Поиск кандидата»" src="/platform/v5.0/tutorials/tutorial_architect/img/lesson_3_find_head_diagram.png"/><figcaption class="caption">Диаграмма «Поиск кандидата»</figcaption></p>
-</figure>
 <h2 id="tutorial_architect_lesson_3_import">Импорт процесса «Найм кандидата»</h2>
 <p>Импортируем готовую BPMN-диаграмму процесса <em>«Найм кандидата»</em> для ускорения моделирования и свяжем её с элементами оргструктуры.</p>
 <div class="notice notice-warning">
@@ -371,10 +374,14 @@
 </li>
 <li>Проверьте и при необходимости отредактируйте диаграмму.</li>
 <li>Нажмите скрытый пул <em>«Поиск кандидата»</em> и выберите связываемый процесс <em>«Поиск кандидата»</em>.</li>
+<li>
+<p>Должна получиться показанная ниже диаграмма:</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Результирующая диаграмма «Найм кандидата»" src="/platform/v5.0/tutorials/tutorial_architect/img/lesson_3_head_recruite_diagram.png"/><figcaption class="caption">Результирующая диаграмма «Найм кандидата»</figcaption></figure></p>
+</li>
+<li>
+<p>Теперь можно переходить к настройке участников и формированию регламента процесса.</p>
+</li>
 </ol>
-<figure class="screenshot_with_caption">
-<p><img alt="Результирующая диаграмма «Найм кандидата»" src="/platform/v5.0/tutorials/tutorial_architect/img/lesson_3_head_recruite_diagram.png"/><figcaption class="caption">Результирующая диаграмма «Найм кандидата»</figcaption></p>
-</figure>
 <div class="notice notice-example">
 <p class="admonition-title">Факультативное задание</p>
 <p>Усовершенствуйте архитектуру процессов и оргструктуры, чтобы она соответствовала следующему сценарию: Вакансия -&gt; От вакансии до прохождения испытательного срока -&gt; Сотрудник -&gt; Группа процессов работы с сотрудником (перемещение, увольнение, начисление зарплаты, премирование, оформление отпуска и т. д.).</p>
