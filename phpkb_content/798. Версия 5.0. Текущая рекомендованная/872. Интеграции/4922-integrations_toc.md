@@ -5,7 +5,7 @@ kbId: 4922
 
 # Интеграции. Содержание раздела
 
-- **[Интеграция Comindware Platform с внешними системами. Общие рекомендации](https://kb.comindware.ru/article.php?id=5091)**
+- **[Интеграция Comindware Platform с внешними системами. Общие рекомендации][integration_recomendations]**
 - **[Подключения. Определения, типы, создание, настройка, удаление][connections]**
 - **[Пути передачи данных. Определения, типы, создание, настройка, удаление][communication_routes]**
 - [**OData. Синхронизация данных шаблонов**](https://kb.comindware.ru/category.php?id=874)

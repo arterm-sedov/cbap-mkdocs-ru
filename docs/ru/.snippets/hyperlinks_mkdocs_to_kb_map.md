@@ -1,5 +1,53 @@
 <!-- Любые руководства -->
 
+<!-- Категории в БЗ. Начало -->
+
+[account_management_cat]: {{ kbCategoryURLPrefix }}813
+
+[account_management_linux_cat]: {{ kbCategoryURLPrefix }}814
+
+[account_management_windows_cat]: {{ kbCategoryURLPrefix }}815
+
+[deploy_cat]: {{ kbCategoryURLPrefix }}803
+
+[deploy_linux_cat]: {{ kbCategoryURLPrefix }}807
+
+[deploy_windows_cat]: {{ kbCategoryURLPrefix }}808
+
+[deploy_auxiliary_cat]: {{ kbCategoryURLPrefix }}804
+
+[deploy_auxiliary_linux_cat]: {{ kbCategoryURLPrefix }}805
+
+[deploy_auxiliary_windows_cat]: {{ kbCategoryURLPrefix }}806
+
+[backup_cat]: {{ kbCategoryURLPrefix }}810
+
+[backup_linux_cat]: {{ kbCategoryURLPrefix }}812
+
+[backup_windows_cat]: {{ kbCategoryURLPrefix }}811
+
+[architect_cat]: {{ kbCategoryURLPrefix }}861
+
+[troubleshooting_cat]: {{ kbCategoryURLPrefix }}887
+
+[examples_cat]: {{ kbCategoryURLPrefix }}871
+
+[expressioons_cat]: {{ kbCategoryURLPrefix }}876
+
+[api_developer_guide_cat]: {{ kbCategoryURLPrefix }}868
+
+[n3_developer_guide_cat]: {{ kbCategoryURLPrefix }}867
+
+[general_cat]: {{ kbCategoryURLPrefix }}799
+
+[integrations_cat]: {{ kbCategoryURLPrefix }}872
+
+[user_guide_cat]: {{ kbCategoryURLPrefix }}817
+
+[admin_guide_cat]: {{ kbCategoryURLPrefix }}802
+
+<!-- Категории в БЗ. Конец -->
+
 [apache_ignite_clustering]: https://ignite.apache.org/docs/latest/clustering/clustering
 
 [apache_ignite_partition_loss_policy]: https://ignite.apache.org/docs/latest/configuring-caches/partition-loss-policy
@@ -66,6 +114,18 @@
 {% if kbExport %}
 
 <!-- Экспорт в БЗ любых руководств -->
+
+<!-- Страницы оглавлений в БЗ. Начало -->
+
+[guides_toc]: {{ kbArticleURLPrefix }}4593
+
+[admin_guide_toc]: {{ kbArticleURLPrefix }}4594
+
+[developer_guide_toc]: {{ kbArticleURLPrefix }}4851
+
+[root_toc]: {{ kbArticleURLPrefix }}4594
+
+<!-- Страниц оглавлений в БЗ. Конец -->
 
 [account_templates]: {{ kbArticleURLPrefix }}4757
 
@@ -282,8 +342,6 @@
 [architect_demo_organizational_structure_processes]: {{ kbArticleURLPrefix }}4826
 
 [architect_demo_organizational_structure_processes_export]: {{ kbArticleURLPrefix }}4826#architect_demo_organizational_structure_processes_export
-
-[architect_desktop]: {{ kbArticleURLPrefix }}4828
 
 [architect_description]: {{ kbArticleURLPrefix }}4828#architect_description
 
@@ -921,17 +979,19 @@
 
 <!-- Руководства без учебника или экспорт в БЗ  -->
 
-[tutorial]: {{ kbCategoryURLPrefix }}870
-[lesson_1]: {{ kbArticleURLPrefix }}4871
-[lesson_2]: {{ kbArticleURLPrefix }}4873
-[lesson_3]: {{ kbArticleURLPrefix }}4874
-[lesson_4]: {{ kbArticleURLPrefix }}4865
-[lesson_5]: {{ kbArticleURLPrefix }}4869
-[lesson_6]: {{ kbArticleURLPrefix }}4870
-[lesson_7]: {{ kbArticleURLPrefix }}4872
-[lesson_8]: {{ kbArticleURLPrefix }}4867
-[lesson_9]: {{ kbArticleURLPrefix }}4868
-[lesson_10]: {{ kbArticleURLPrefix }}4866
+[tutorials_toc]: {{ kbArticleURLPrefix }}5123
+
+[tutorial_fleet]: {{ kbArticleURLPrefix }}5085
+[tutorial_fleet_lesson_1]: {{ kbArticleURLPrefix }}4871
+[tutorial_fleet_lesson_2]: {{ kbArticleURLPrefix }}4873
+[tutorial_fleet_lesson_3]: {{ kbArticleURLPrefix }}4874
+[tutorial_fleet_lesson_4]: {{ kbArticleURLPrefix }}4865
+[tutorial_fleet_lesson_5]: {{ kbArticleURLPrefix }}4869
+[tutorial_fleet_lesson_6]: {{ kbArticleURLPrefix }}4870
+[tutorial_fleet_lesson_7]: {{ kbArticleURLPrefix }}4872
+[tutorial_fleet_lesson_8]: {{ kbArticleURLPrefix }}4867
+[tutorial_fleet_lesson_9]: {{ kbArticleURLPrefix }}4868
+[tutorial_fleet_lesson_10]: {{ kbArticleURLPrefix }}4866
 
 [tutorial_hr]: {{ kbArticleURLPrefix }}5112
 [tutorial_hr_lesson_1]: {{ kbArticleURLPrefix }}5113
@@ -943,6 +1003,15 @@
 [tutorial_hr_lesson_7]: {{ kbArticleURLPrefix }}5119
 [tutorial_hr_lesson_8]: {{ kbArticleURLPrefix }}5120
 [tutorial_hr_outro]: {{ kbArticleURLPrefix }}5121
+
+[tutorial_architect]: {{ kbArticleURLPrefix }}5124
+[tutorial_architect_lesson_1]: {{ kbArticleURLPrefix }}5125
+[tutorial_architect_lesson_2]: {{ kbArticleURLPrefix }}5126
+[tutorial_architect_lesson_3]: {{ kbArticleURLPrefix }}5127
+[tutorial_architect_lesson_4]: {{ kbArticleURLPrefix }}5128
+[tutorial_architect_lesson_5]: {{ kbArticleURLPrefix }}5129
+[tutorial_architect_outro]: {{ kbArticleURLPrefix }}5130
+[tutorial_architect_tests]: {{ kbArticleURLPrefix }}5131
 
 {% endif %}
 

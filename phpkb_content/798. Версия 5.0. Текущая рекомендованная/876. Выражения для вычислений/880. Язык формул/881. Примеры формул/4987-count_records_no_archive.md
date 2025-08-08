@@ -8,10 +8,10 @@ kbId: 4987
 Для того, чтобы подсчитать количество записей с определённым статусом (например, согласованных заявок, оплаченных счетов),  введите следующее выражение:
 
 ```
-COUNT(
+COUNT(
 (from a in db->requests
 where AND(EQUALS(a->status, “Согласована”), EQUALS(a-> _isDisabled,false))
-select a->id)
+select a->id)
       )
 ```
 

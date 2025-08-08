@@ -328,6 +328,7 @@ def main():
     ssh_host = serverCredentials['ssh_host'] or input("PHPKB host:\n")
     ssh_username = serverCredentials['ssh_username'] or input('SSH username:\n')
     ssh_password = getpass("SSH password:\n")
+    ssh_port = int(serverCredentials.get('ssh_port', '22'))
     sql_username = serverCredentials['sql_username'] or input("SQL username:\n")
     sql_password = getpass("SQL password:\n")
     sql_database = serverCredentials['sql_database'] or input("Database name:\n")
@@ -341,7 +342,7 @@ def main():
     #         serverCredentialsFile.write(credentialsJson)
 
     server = SSHTunnelForwarder(
-        ssh_host,
+        (ssh_host, ssh_port),
         ssh_username=ssh_username,
         ssh_password=ssh_password,
         remote_bind_address=(sql_ip, sql_port),

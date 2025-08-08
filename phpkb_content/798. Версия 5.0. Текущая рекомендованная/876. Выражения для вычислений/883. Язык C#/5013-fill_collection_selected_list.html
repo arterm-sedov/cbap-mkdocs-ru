@@ -3,7 +3,7 @@
 <table class="source_code_container">
 <tbody>
 <tr>
-<td class="source_code"> 
+<td class="source_code"> 
 <p>using System;<br/>using System.Collections.Generic;<br/>using System.Linq;<br/>using Comindware.Data.Entity;<br/>using Comindware.TeamNetwork.Api.Data.UserCommands;<br/>using Comindware.TeamNetwork.Api.Data;</p>
 <p>class Script<br/>{<br/>    public static void Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities)<br/>    {     <br/>        var query = new Comindware.TeamNetwork.Api.Data.DatasetQuery<br/>        {<br/>            DatasetId = "lst.53"<br/>        };<br/>        var sessionsData = Api.TeamNetwork.DatasetService.QueryData(query).Rows;<br/>        if (sessionsData == null) { return; } //проверяем, что в списке есть записи<br/>        <br/>        var objectId = context.BusinessObjectId; //текущая запись<br/>        List&lt;string&gt; ApplicationIds = new List&lt;string&gt;();<br/>        foreach (var row in sessionsData) <br/>        {<br/>            ApplicationIds.Add(row.Id);<br/>        }<br/>        var data = new Dictionary&lt;string, object&gt;<br/>        {<br/>            { "Applications", ApplicationIds} //вторым аргументом пишем лист idшников<br/>        };<br/>        <br/>        Api.TeamNetwork.ObjectService.EditWithAlias("Register", objectId, data); //записываем коллекцию в текущем объекте.<br/>    }<br/>}</p>
 </td>

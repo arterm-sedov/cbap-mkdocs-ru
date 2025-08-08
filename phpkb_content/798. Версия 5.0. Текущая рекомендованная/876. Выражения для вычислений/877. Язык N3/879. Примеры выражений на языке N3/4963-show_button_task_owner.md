@@ -10,7 +10,7 @@ kbId: 4963
 - Для системной кнопки «Завершить задачу» в Шаблоне процесса:
 
 ```
- 
+ 
 @prefix taskStatus: <http://comindware.com/ontology/taskStatus#>.
 @prefix task: <http://comindware.com/ontology/task#>.
 @prefix cmw: <http://comindware.com/logics#>.
@@ -31,7 +31,7 @@ else {false -> ?value.}.
 - Для кнопки в связанном Шаблоне записи
 
 ```
- 
+ 
 @prefix taskStatus: <http://comindware.com/ontology/taskStatus#>.
 @prefix task: <http://comindware.com/ontology/task#>.
 @prefix cmw: <http://comindware.com/logics#>.

@@ -3,7 +3,7 @@
 <table class="source_code_container">
 <tbody>
 <tr>
-<td class="source_code"> 
+<td class="source_code"> 
 <p>using System;<br/>using System.Collections.Generic;<br/>using System.Linq;<br/>using Comindware.Data.Entity;<br/>using Comindware.TeamNetwork.Api.Data.UserCommands;</p>
 <p>public class Script<br/>{</p>
 <p>    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)<br/>    {<br/>        var user = Api.TeamNetwork.ObjectService.GetWithAlias("Kontaktyklientov", userCommandContext.CurrentUserId);<br/>        var error = user == null ? "У пользователя нет компании" : null;<br/>        var companyId = error == null ? user["company"] as string : null;<br/>        var result = new UserCommandResult()<br/>        {<br/>            Success = error == null,<br/>            Messages = error == null ? null : new[]<br/>            {<br/>                new UserCommandMessage<br/>                {<br/>                    Severity = SeverityLevel.Normal,<br/>                    Text = error<br/>                }<br/>            },<br/>            ResultType = error == null ? UserCommandResultType.Navigate : UserCommandResultType.Notificate,<br/>            NavigationResult = new UserCommandNavigationResult<br/>            {<br/>                ContainerId = "oa.4",<br/>                ObjectId = companyId,<br/>                Context = ContextType.Record<br/>            }<br/>        };<br/>        return result;<br/>    }<br/>}</p>

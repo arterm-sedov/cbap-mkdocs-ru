@@ -12,7 +12,7 @@ kbId: 4888
 **2.** В поле «Вычисляемое выражение» вставьте следующую формулу, которую мы разберем ниже:
 
 ```
-IF(GREATEREQ($Fakticheskayadata , $Planovayadata),
+IF(GREATEREQ($Fakticheskayadata , $Planovayadata),
 "<span style='color:#B22222; font-size: 200%; text-shadow: 0 0 1px black; position: absolute; top:0px;'> ● </span>",
 "<span style='color:#45A521; font-size: 200%; text-shadow: 0 0 1px black; position: absolute; top:0px;'> ● </span>"               
 )

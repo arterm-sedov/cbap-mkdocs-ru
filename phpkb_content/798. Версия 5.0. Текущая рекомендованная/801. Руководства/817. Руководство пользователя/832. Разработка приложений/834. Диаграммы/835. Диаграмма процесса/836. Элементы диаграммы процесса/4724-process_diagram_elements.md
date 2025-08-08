@@ -32,7 +32,7 @@ kbId: 4724
   - [Развилка «или/или»][process_diagram_elements_gateway_exclusive]
   - [Развилка «и»][process_diagram_elements_gateway_parallel]
 - [Общие элементы][process_diagram_elements_generic]
-  - [process\_diagram\_elements\_pool][process_diagram_elements_pool]
+  - [Пул][process_diagram_elements_pool]
   - [Дорожка][process_diagram_elements_lane]
   - [Поток управления][process_diagram_elements_sequence_flow]
   - [Комментарий][process_diagram_elements_text_annotation]

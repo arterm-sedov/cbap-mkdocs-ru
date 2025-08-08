@@ -8,7 +8,7 @@ kbId: 4932
 Для сравнения двух пользователей (например, менеджер проекта и руководитель сотрудника), введите следующее выражение:
 
 ```
- 
+ 
 #EQUALS($WorkPlanOriginalRef->Curator, $Manager)
 
 @prefix sort: <http://comindware.com/ontology/dataset/sort#>.

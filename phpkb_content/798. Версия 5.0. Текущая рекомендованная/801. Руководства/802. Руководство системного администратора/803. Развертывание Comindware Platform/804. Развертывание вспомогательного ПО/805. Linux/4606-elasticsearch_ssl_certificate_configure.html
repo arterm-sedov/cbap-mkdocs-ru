@@ -68,31 +68,31 @@
 <p>1.3.2. Аналогично <a href="#P1_3_1">шагу 1.3.1</a> создайте сертификат для каждого узла, подставляя вместо <code>es1.csr</code> и <code>es1.key</code> соответствующие значения.</p>
 <p>1.3.3. Для каждого из узлов создайте <code>ext</code>-файл, описывающий узел. Подставьте свои значения напротив <code>DNS.1</code>, <code>DNS.2</code> и <code>IP.1</code>.</p>
 <div class="highlight">
-<pre><code>sudo cat &gt; es1.ext &lt;&lt; EOF
-authorityKeyIdentifier=keyid
-basicConstraints=CA:FALSE
-keyUsage = critical, digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
-extendedKeyUsage = critical, serverAuth, clientAuth
-subjectAltName = @alt_names
-[alt_names]
-DNS.1 = yourClusterName
-DNS.2 = elasticsearch1
-IP.1 = 192.168.XXX.1
+<pre><code>sudo cat &gt; es1.ext &lt;&lt; EOF
+authorityKeyIdentifier=keyid
+basicConstraints=CA:FALSE
+keyUsage = critical, digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+extendedKeyUsage = critical, serverAuth, clientAuth
+subjectAltName = @alt_names
+[alt_names]
+DNS.1 = yourClusterName
+DNS.2 = elasticsearch1
+IP.1 = 192.168.XXX.1
 EOF</code></pre>
 </div>
 <p>1.3.4. <a id="P1_3_4"></a>Для узла <code>es1</code> создайте подписанный СА сертификат и сохраните его в файл <code>es1.crt</code>:</p>
 <div class="highlight">
-<pre><code>sudo openssl x509 -req -in es1.csr -CA ExampleRootCA.crt -CAkey ExampleRootCA.key -CAcreateserial -out es1.crt -days 10000 -sha256 -extfile es1.ext
+<pre><code>sudo openssl x509 -req -in es1.csr -CA ExampleRootCA.crt -CAkey ExampleRootCA.key -CAcreateserial -out es1.crt -days 10000 -sha256 -extfile es1.ext
 Enter pass phrase for ExampleRootCA.key: <strong>ВВЕДИТЕ ПАРОЛЬ</strong></code></pre>
 </div>
 <p>1.3.5. Используйте придуманный на <a href="#P1_2_3">шаге 1.2.3</a> пароль.</p>
 <p>1.3.6. Аналогично <a href="#P1_3_4">шагу 1.3.4</a> создайте подписанные сертификаты для остальных узлов.</p>
 <p>1.3.7. <a id="P1_3_7"></a>Для узла <code>es1</code> создайте p12-пакет с ключом, сертификатом и сертификатом СА:</p>
 <div class="highlight">
-<pre><code>sudo openssl pkcs12 -export -certfile ExampleRootCA.crt -in es1.crt -inkey es1.key -out es1.p12
-Enter Export Password: <strong>ВВЕДИТЕ ПАРОЛЬ</strong>
-Verifying - Enter Export Password: <strong>ВВЕДИТЕ ПАРОЛЬ
-
+<pre><code>sudo openssl pkcs12 -export -certfile ExampleRootCA.crt -in es1.crt -inkey es1.key -out es1.p12
+Enter Export Password: <strong>ВВЕДИТЕ ПАРОЛЬ</strong>
+Verifying - Enter Export Password: <strong>ВВЕДИТЕ ПАРОЛЬ
+
 </strong></code></pre>
 </div>
 <p>1.3.8. Используйте придуманный на <a href="#P1_2_3">шаге 1.2.3</a> пароль.</p>
@@ -100,9 +100,9 @@ Verifying - Enter Export Password: <strong>ВВЕДИТЕ ПАРОЛЬ
 <h3 id="mcetoc_1grild3p56">1.4. Отправка созданных сертификатов на узлы кластера.</h3>
 <p>1.4.1. Отправьте созданные сертификаты с помощью <code>SSH</code> (подставьте свои имена файлов, имя пользователя и IP-адрес):</p>
 <div class="highlight">
-<pre><code>sudo scp es2.crt username@192.168.0.1:/home/username/
-sudo scp es2.key username@192.168.0.1:/home/username/
-sudo scp es2.p12 username@192.168.0.1:/home/username/
+<pre><code>sudo scp es2.crt username@192.168.0.1:/home/username/
+sudo scp es2.key username@192.168.0.1:/home/username/
+sudo scp es2.p12 username@192.168.0.1:/home/username/
 </code></pre>
 </div>
 <p>1.4.2. В каждом из узлов перенесите сгенерированные файлы (подставьте фактическое имя файла вместо <code>esX</code>)  в папку <code>/etc/elasticsearch/certs</code>:</p>
@@ -111,28 +111,28 @@ sudo scp es2.p12 username@192.168.0.1:/home/username/
 </div>
 <p>1.4.3. Измените пользователя для директории и настройте права доступа:</p>
 <div class="highlight">
-<pre><code>sudo chown elasticsearch:elasticsearch --recursive /etc/elasticsearch/certs/
-sudo chmod 764 --recursive /etc/elasticsearch/certs/
+<pre><code>sudo chown elasticsearch:elasticsearch --recursive /etc/elasticsearch/certs/
+sudo chmod 764 --recursive /etc/elasticsearch/certs/
 </code></pre>
 </div>
 <h2 id="mcetoc_1grild3p57">2. Настройка кластера Elasticsearch</h2>
 <h3 id="mcetoc_1grild3p58">2.1. Добавление пароля SSL-сертификата в хранилище ключей Elasticsearch</h3>
 <p>2.1.1. Вызовите инструмент <code>elasticsearch-keystore</code> и добавьте в него пароль от сформированных сертификатов (см. <a href="#P1_2_3">параграф 1.2.3</a>):</p>
 <div class="highlight">
-<pre><code>sudo /usr/share/elasticsearch/bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
-Setting xpack.security.http.ssl.keystore.secure_password already exists. Overwrite? [y/N]y 
-Enter value for xpack.security.http.ssl.keystore.secure_password: <strong>ВВЕДИТЕ ПАРОЛЬ</strong>
-
-sudo /usr/share/elasticsearch/bin/elasticsearch-keystore add xpack.security.http.ssl.truststore.secure_password
-Enter value for xpack.security.http.ssl.truststore.secure_password: <strong>ВВЕДИТЕ ПАРОЛЬ</strong>
-
-sudo /usr/share/elasticsearch/bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
-Setting xpack.security.transport.ssl.keystore.secure_password already exists. Overwrite? [y/N]y
-Enter value for xpack.security.transport.ssl.keystore.secure_password: <strong>ВВЕДИТЕ ПАРОЛЬ</strong>
-
-sudo /usr/share/elasticsearch/bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
-Setting xpack.security.transport.ssl.truststore.secure_password already exists. Overwrite? [y/N]y
-Enter value for xpack.security.transport.ssl.truststore.secure_password: <strong>ВВЕДИТЕ ПАРОЛЬ
+<pre><code>sudo /usr/share/elasticsearch/bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
+Setting xpack.security.http.ssl.keystore.secure_password already exists. Overwrite? [y/N]y 
+Enter value for xpack.security.http.ssl.keystore.secure_password: <strong>ВВЕДИТЕ ПАРОЛЬ</strong>
+
+sudo /usr/share/elasticsearch/bin/elasticsearch-keystore add xpack.security.http.ssl.truststore.secure_password
+Enter value for xpack.security.http.ssl.truststore.secure_password: <strong>ВВЕДИТЕ ПАРОЛЬ</strong>
+
+sudo /usr/share/elasticsearch/bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
+Setting xpack.security.transport.ssl.keystore.secure_password already exists. Overwrite? [y/N]y
+Enter value for xpack.security.transport.ssl.keystore.secure_password: <strong>ВВЕДИТЕ ПАРОЛЬ</strong>
+
+sudo /usr/share/elasticsearch/bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
+Setting xpack.security.transport.ssl.truststore.secure_password already exists. Overwrite? [y/N]y
+Enter value for xpack.security.transport.ssl.truststore.secure_password: <strong>ВВЕДИТЕ ПАРОЛЬ
 </strong></code></pre>
 </div>
 <h3 id="mcetoc_1grild3p59">2.2. Настройка узла кластера для работы с SSL-сертификатами</h3>
@@ -142,41 +142,41 @@ Enter value for xpack.security.transport.ssl.truststore.secure_password: <strong
 </div>
 <p>Исходный файл конфигурации Elasticsearch:</p>
 <div class="highlight">
-<pre><code>xpack.security.enabled: false
-xpack.security.http.ssl:
-    enabled: false
-#   keystore.path: certs/es1.p12    # [&lt;-] specify path to signedNodeCert.p12 here
-xpack.security.transport.ssl:
-    enabled: false
-#   key: certs/es1.key    # [&lt;-] specify path to nodecert.key here
-#   certificate: certs/es1.crt    # [&lt;-] specify path to nodeCert.crt here
-#   certificate_authorities: [ "certs/ExampleRootCA.crt" ]    # [&lt;-] specify path to CACert.crt here
+<pre><code>xpack.security.enabled: false
+xpack.security.http.ssl:
+    enabled: false
+#   keystore.path: certs/es1.p12    # [&lt;-] specify path to signedNodeCert.p12 here
+xpack.security.transport.ssl:
+    enabled: false
+#   key: certs/es1.key    # [&lt;-] specify path to nodecert.key here
+#   certificate: certs/es1.crt    # [&lt;-] specify path to nodeCert.crt here
+#   certificate_authorities: [ "certs/ExampleRootCA.crt" ]    # [&lt;-] specify path to CACert.crt here
 </code></pre>
 </div>
 <p>Пример изменённого файла конфигурации, где сертификат узла — <code>es1.crt</code>, ключ — <code>es1.key</code>, <code>pem</code>-пакет с сертификатом и ключом — <code>es1.p12</code>:</p>
 <div class="highlight">
-<pre><code>xpack.security.enabled: true
-xpack.security.http.ssl:
-    enabled: true
-    keystore.path: certs/<strong>es1.p12</strong>    # [&lt;-] specify path to signedNodeCert.p12 here
-xpack.security.transport.ssl:
-    enabled: true
-    key: certs/<strong>es1.key</strong>    # [&lt;-] specify path to nodecert.key here
-    certificate: certs/<strong>es1.crt</strong>    # [&lt;-] specify path to nodeCert.crt here
-    certificate_authorities: [ "certs/<strong>ExampleRootCA.crt</strong>" ]    # [&lt;-] specify path to CACert.crt here
+<pre><code>xpack.security.enabled: true
+xpack.security.http.ssl:
+    enabled: true
+    keystore.path: certs/<strong>es1.p12</strong>    # [&lt;-] specify path to signedNodeCert.p12 here
+xpack.security.transport.ssl:
+    enabled: true
+    key: certs/<strong>es1.key</strong>    # [&lt;-] specify path to nodecert.key here
+    certificate: certs/<strong>es1.crt</strong>    # [&lt;-] specify path to nodeCert.crt here
+    certificate_authorities: [ "certs/<strong>ExampleRootCA.crt</strong>" ]    # [&lt;-] specify path to CACert.crt here
 </code></pre>
 </div>
 <p>Пример изменённого файла конфигурации, где сертификат узла — <code>es2.crt</code>, ключ — <code>es2.key</code>, <code>pem</code>-пакет с сертификатом и ключом — <code>es2.p12</code>:</p>
 <div class="highlight">
-<pre><code>xpack.security.enabled: true
-xpack.security.http.ssl:
-    enabled: true
-    keystore.path: certs/<strong>es2.p12</strong>    # [&lt;-] specify path to signedNodeCert.p12 here
-xpack.security.transport.ssl:
-    enabled: true
-    key: certs/<strong>es2.key</strong>    # [&lt;-] specify path to nodecert.key here
-    certificate: certs/<strong>es2.crt</strong>    # [&lt;-] specify path to nodeCert.crt here
-    certificate_authorities: [ "certs/<strong>ExampleRootCA.crt</strong>" ]    # [&lt;-] specify path to CACert.crt here
+<pre><code>xpack.security.enabled: true
+xpack.security.http.ssl:
+    enabled: true
+    keystore.path: certs/<strong>es2.p12</strong>    # [&lt;-] specify path to signedNodeCert.p12 here
+xpack.security.transport.ssl:
+    enabled: true
+    key: certs/<strong>es2.key</strong>    # [&lt;-] specify path to nodecert.key here
+    certificate: certs/<strong>es2.crt</strong>    # [&lt;-] specify path to nodeCert.crt here
+    certificate_authorities: [ "certs/<strong>ExampleRootCA.crt</strong>" ]    # [&lt;-] specify path to CACert.crt here
 </code></pre>
 </div>
 <p>2.2.2. Сохраните изменения и закройте текстовый редактор Nano, нажав клавиши: <code>Ctrl O, Ввод, Ctrl X</code>.</p>
@@ -196,21 +196,21 @@ xpack.security.transport.ssl:
 <pre><code>sudo systemctl status elasticsearch.service </code></pre>
 </div>
 <div class="highlight">
-<pre><code>elasticsearch.service - Elasticsearch
-    Loaded: loaded (/lib/systemd/system/elasticsearch.service; enabled; vendor preset: enabled)
-    Active: active (running) since Thu 2022-12-01 10:12:27 UTC; 6s ago
-        Docs: &lt;https://www.elastic.co&gt;
-    Main PID: 3597 (java)
-        Tasks: 63 (limit: 4575)
-        Memory: 629.9M
-        CPU: 44.422s
-        CGroup: /system.slice/elasticsearch.service
-            ├─3597 /usr/share/elasticsearch/jdk/bin/java -Xms4m -Xmx64m -XX:+UseSerialGC -Dcli.name=server -Dcli.scri&gt;
-            ├─3656 /usr/share/elasticsearch/jdk/bin/java -Des.networkaddress.cache.ttl=60 -Des.networkaddress.cache.n&gt;
-            └─3676 /usr/share/elasticsearch/modules/x-pack-ml/platform/linux-x86_64/bin/controller
-Dec 01 10:11:12 penguin-02 systemd[1]: Starting Elasticsearch...
-Dec 01 10:12:27 penguin-02 systemd[1]: Started Elasticsearch.
-
+<pre><code>elasticsearch.service - Elasticsearch
+    Loaded: loaded (/lib/systemd/system/elasticsearch.service; enabled; vendor preset: enabled)
+    Active: active (running) since Thu 2022-12-01 10:12:27 UTC; 6s ago
+        Docs: &lt;https://www.elastic.co&gt;
+    Main PID: 3597 (java)
+        Tasks: 63 (limit: 4575)
+        Memory: 629.9M
+        CPU: 44.422s
+        CGroup: /system.slice/elasticsearch.service
+            ├─3597 /usr/share/elasticsearch/jdk/bin/java -Xms4m -Xmx64m -XX:+UseSerialGC -Dcli.name=server -Dcli.scri&gt;
+            ├─3656 /usr/share/elasticsearch/jdk/bin/java -Des.networkaddress.cache.ttl=60 -Des.networkaddress.cache.n&gt;
+            └─3676 /usr/share/elasticsearch/modules/x-pack-ml/platform/linux-x86_64/bin/controller
+Dec 01 10:11:12 penguin-02 systemd[1]: Starting Elasticsearch...
+Dec 01 10:12:27 penguin-02 systemd[1]: Started Elasticsearch.
+
 </code></pre>
 </div>
 <div class="blue_note">

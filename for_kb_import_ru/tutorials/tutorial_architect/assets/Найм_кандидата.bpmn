@@ -1,0 +1,339 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" targetNamespace="https://www.comindware.com/" id="definitions_7db00a62-3d6f-4e57-9e51-d83613d228ba" name="Найм кандидата">
+  <bpmn:process id="process_d5e4fb5b-94dc-4c02-925f-f6a94d7bb318" isExecutable="false">
+    <bpmn:laneSet id="laneSet_24904a66-eb48-4c9c-a9d5-d20328ca1c0d">
+      <bpmn:lane id="Lane_e0a6ac16-5301-4814-a8e3-79b8cc6a1c17" name="Нанимающий менеджер">
+        <bpmn:flowNodeRef>Gateway_7b361554-e95a-437b-8dfd-f1d7ccb70712</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_1c2c92ad-79c7-4b3d-8ff2-c328aafb6f31</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_0fc80289-bf53-4211-92c3-ff0bcd8593cf</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_9e53b81f-082c-4b2f-b145-4a267ea51e0c" name="Служба безопасности">
+        <bpmn:flowNodeRef>Task_044f8d66-a715-466b-9e8d-1991a0e935a8</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_e0c45f10-8b8a-481b-885e-9fdcaa4cc765" name="HR-менеджер">
+        <bpmn:flowNodeRef>EndEvent_9b875f0f-c72c-44de-8d15-dcac34d12199</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_631ebe29-b7b6-440a-8ac7-7f16bf3dee48</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_dce70434-06a7-4951-bbaf-71a4f3a84c92</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_0e3966bb-d808-4474-8db9-268d2b9b3a8c</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_dcc396a4-5c3e-4f37-8d0d-cc957ed2f5bf</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_188b8fb4-1a6a-496e-a0b3-4b0b217ae93f</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_a5ac72e6-fc4c-44cd-b1ce-207a8e7c5053</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>StartEvent_856b0cc7-e94d-46dd-b620-692047d7df2b</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:endEvent id="EndEvent_9b875f0f-c72c-44de-8d15-dcac34d12199" name="Кандидат принят на работу">
+      <bpmn:incoming>Flow_ec61ce5d-fb89-410c-bc5f-25d6412d440c</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="Task_631ebe29-b7b6-440a-8ac7-7f16bf3dee48" name="Сформировать и согласовать предложение с кандидатом">
+      <bpmn:outgoing>Flow_ec61ce5d-fb89-410c-bc5f-25d6412d440c</bpmn:outgoing>
+      <bpmn:incoming>Flow_1d381ab1-a959-4b85-b58a-ef9f9bbe2cba</bpmn:incoming>
+    </bpmn:userTask>
+    <bpmn:endEvent id="EndEvent_dce70434-06a7-4951-bbaf-71a4f3a84c92" name="Кандидат не прошёл проверку">
+      <bpmn:incoming>Flow_bd079df4-711e-4b05-95ed-8e2158c46eee</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:exclusiveGateway id="Gateway_0e3966bb-d808-4474-8db9-268d2b9b3a8c" name="Кандидат прошёл собеседование и проверку?">
+      <bpmn:outgoing>Flow_1d381ab1-a959-4b85-b58a-ef9f9bbe2cba</bpmn:outgoing>
+      <bpmn:outgoing>Flow_bd079df4-711e-4b05-95ed-8e2158c46eee</bpmn:outgoing>
+      <bpmn:incoming>Flow_a4365875-4b9d-4b3b-961f-2dcaf1317d51</bpmn:incoming>
+    </bpmn:exclusiveGateway>
+    <bpmn:parallelGateway id="Gateway_7b361554-e95a-437b-8dfd-f1d7ccb70712" name="">
+      <bpmn:outgoing>Flow_a4365875-4b9d-4b3b-961f-2dcaf1317d51</bpmn:outgoing>
+      <bpmn:incoming>Flow_e1298af4-1022-4edd-b4d7-a68d96ad940a</bpmn:incoming>
+      <bpmn:incoming>Flow_f289ef03-021e-4262-9e72-5877ce9dbe0b</bpmn:incoming>
+    </bpmn:parallelGateway>
+    <bpmn:userTask id="Task_044f8d66-a715-466b-9e8d-1991a0e935a8" name="Провести проверку кандидата">
+      <bpmn:outgoing>Flow_f289ef03-021e-4262-9e72-5877ce9dbe0b</bpmn:outgoing>
+      <bpmn:incoming>Flow_7825953f-6c8e-42da-8f57-77751ae11f6f</bpmn:incoming>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_1c2c92ad-79c7-4b3d-8ff2-c328aafb6f31" name="Провести собеседование">
+      <bpmn:outgoing>Flow_e1298af4-1022-4edd-b4d7-a68d96ad940a</bpmn:outgoing>
+      <bpmn:incoming>Flow_91ff2635-538c-43b7-9b42-bc6e173d36d8</bpmn:incoming>
+    </bpmn:userTask>
+    <bpmn:parallelGateway id="Gateway_0fc80289-bf53-4211-92c3-ff0bcd8593cf" name="">
+      <bpmn:outgoing>Flow_7825953f-6c8e-42da-8f57-77751ae11f6f</bpmn:outgoing>
+      <bpmn:outgoing>Flow_91ff2635-538c-43b7-9b42-bc6e173d36d8</bpmn:outgoing>
+      <bpmn:incoming>Flow_f7ffd5a6-16c9-4a69-ad4f-de0dfef3d82f</bpmn:incoming>
+    </bpmn:parallelGateway>
+    <bpmn:endEvent id="EndEvent_dcc396a4-5c3e-4f37-8d0d-cc957ed2f5bf" name="Кандидат не прошёл тестирование">
+      <bpmn:incoming>Flow_647754e6-019a-4ba2-8486-49c86aef13b4</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:exclusiveGateway id="Gateway_188b8fb4-1a6a-496e-a0b3-4b0b217ae93f" name="Кандидат прошёл тестирование?">
+      <bpmn:outgoing>Flow_647754e6-019a-4ba2-8486-49c86aef13b4</bpmn:outgoing>
+      <bpmn:outgoing>Flow_f7ffd5a6-16c9-4a69-ad4f-de0dfef3d82f</bpmn:outgoing>
+      <bpmn:incoming>Flow_ecdb2f2f-3a27-4e56-8a6d-8d223bc3c76d</bpmn:incoming>
+    </bpmn:exclusiveGateway>
+    <bpmn:dataStoreReference id="Data_37e863bc-ad95-446e-9c4f-64af2f8d88dd" name="Варианты тестов" />
+    <bpmn:userTask id="Task_a5ac72e6-fc4c-44cd-b1ce-207a8e7c5053" name="Провести тестирование кандидата">
+      <bpmn:outgoing>Flow_ecdb2f2f-3a27-4e56-8a6d-8d223bc3c76d</bpmn:outgoing>
+      <bpmn:dataInputAssociation id="Flow_e31fa6d1-28e8-42fc-be0e-9af38ff38387" name="">
+        <bpmn:sourceRef>Data_37e863bc-ad95-446e-9c4f-64af2f8d88dd</bpmn:sourceRef>
+        <bpmn:targetRef>property_f0c88d5d-3cee-4e79-b1aa-d2f09e51a3b8</bpmn:targetRef>
+        <bpmn:TargetConnectorIndex>9</bpmn:TargetConnectorIndex>
+      </bpmn:dataInputAssociation>
+      <bpmn:property id="property_f0c88d5d-3cee-4e79-b1aa-d2f09e51a3b8" name="property" />
+      <bpmn:incoming>Flow_ecb0cb86-a0f5-41d2-a3bc-2ad9a9395a61</bpmn:incoming>
+    </bpmn:userTask>
+    <bpmn:startEvent id="StartEvent_856b0cc7-e94d-46dd-b620-692047d7df2b" name="Кандидат согласен пройти собеседование">
+      <bpmn:outgoing>Flow_ecb0cb86-a0f5-41d2-a3bc-2ad9a9395a61</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_647754e6-019a-4ba2-8486-49c86aef13b4" name="Нет" sourceRef="Gateway_188b8fb4-1a6a-496e-a0b3-4b0b217ae93f" sourceConnectorIndex="3" targetRef="EndEvent_dcc396a4-5c3e-4f37-8d0d-cc957ed2f5bf" targetConnectorIndex="8" />
+    <bpmn:sequenceFlow id="Flow_ec61ce5d-fb89-410c-bc5f-25d6412d440c" name="" sourceRef="Task_631ebe29-b7b6-440a-8ac7-7f16bf3dee48" targetRef="EndEvent_9b875f0f-c72c-44de-8d15-dcac34d12199" targetConnectorIndex="8" />
+    <bpmn:sequenceFlow id="Flow_1d381ab1-a959-4b85-b58a-ef9f9bbe2cba" name="Да" sourceRef="Gateway_0e3966bb-d808-4474-8db9-268d2b9b3a8c" targetRef="Task_631ebe29-b7b6-440a-8ac7-7f16bf3dee48" targetConnectorIndex="22" />
+    <bpmn:sequenceFlow id="Flow_bd079df4-711e-4b05-95ed-8e2158c46eee" name="Нет" sourceRef="Gateway_0e3966bb-d808-4474-8db9-268d2b9b3a8c" sourceConnectorIndex="3" targetRef="EndEvent_dce70434-06a7-4951-bbaf-71a4f3a84c92" targetConnectorIndex="7" />
+    <bpmn:sequenceFlow id="Flow_a4365875-4b9d-4b3b-961f-2dcaf1317d51" name="" sourceRef="Gateway_7b361554-e95a-437b-8dfd-f1d7ccb70712" targetRef="Gateway_0e3966bb-d808-4474-8db9-268d2b9b3a8c" targetConnectorIndex="9" />
+    <bpmn:sequenceFlow id="Flow_e1298af4-1022-4edd-b4d7-a68d96ad940a" name="" sourceRef="Task_1c2c92ad-79c7-4b3d-8ff2-c328aafb6f31" targetRef="Gateway_7b361554-e95a-437b-8dfd-f1d7ccb70712" targetConnectorIndex="0" />
+    <bpmn:sequenceFlow id="Flow_f289ef03-021e-4262-9e72-5877ce9dbe0b" name="" sourceRef="Task_044f8d66-a715-466b-9e8d-1991a0e935a8" sourceConnectorIndex="23" targetRef="Gateway_7b361554-e95a-437b-8dfd-f1d7ccb70712" targetConnectorIndex="9" />
+    <bpmn:sequenceFlow id="Flow_7825953f-6c8e-42da-8f57-77751ae11f6f" name="" sourceRef="Gateway_0fc80289-bf53-4211-92c3-ff0bcd8593cf" sourceConnectorIndex="9" targetRef="Task_044f8d66-a715-466b-9e8d-1991a0e935a8" targetConnectorIndex="22" />
+    <bpmn:sequenceFlow id="Flow_91ff2635-538c-43b7-9b42-bc6e173d36d8" name="" sourceRef="Gateway_0fc80289-bf53-4211-92c3-ff0bcd8593cf" targetRef="Task_1c2c92ad-79c7-4b3d-8ff2-c328aafb6f31" targetConnectorIndex="22" />
+    <bpmn:sequenceFlow id="Flow_f7ffd5a6-16c9-4a69-ad4f-de0dfef3d82f" name="Да" sourceRef="Gateway_188b8fb4-1a6a-496e-a0b3-4b0b217ae93f" targetRef="Gateway_0fc80289-bf53-4211-92c3-ff0bcd8593cf" targetConnectorIndex="3" />
+    <bpmn:sequenceFlow id="Flow_ecdb2f2f-3a27-4e56-8a6d-8d223bc3c76d" name="" sourceRef="Task_a5ac72e6-fc4c-44cd-b1ce-207a8e7c5053" targetRef="Gateway_188b8fb4-1a6a-496e-a0b3-4b0b217ae93f" targetConnectorIndex="0" />
+    <bpmn:sequenceFlow id="Flow_ecb0cb86-a0f5-41d2-a3bc-2ad9a9395a61" name="" sourceRef="StartEvent_856b0cc7-e94d-46dd-b620-692047d7df2b" targetRef="Task_a5ac72e6-fc4c-44cd-b1ce-207a8e7c5053" targetConnectorIndex="22" />
+  </bpmn:process>
+  <bpmn:collaboration id="collaboration_db28c639-43f2-482a-b996-47d8d233238a">
+    <bpmn:participant id="Pool_8e04f002-4e6c-4366-8e73-2c86285ed985" name="Поиск кандидата" />
+    <bpmn:participant id="Pool_75b5353a-8f85-46db-b2cb-f1ef76ff1635" name="Обработка кандидата" processRef="process_d5e4fb5b-94dc-4c02-925f-f6a94d7bb318" />
+    <bpmn:messageFlow id="Flow_43f32525-5a55-4a10-a11c-8b8d73186972" name="" sourceRef="Pool_8e04f002-4e6c-4366-8e73-2c86285ed985" sourceConnectorIndex="11" targetRef="Task_a5ac72e6-fc4c-44cd-b1ce-207a8e7c5053" targetConnectorIndex="2" />
+  </bpmn:collaboration>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_25fecf74-0324-4c95-b710-8f787f0b95a3">
+    <bpmndi:BPMNPlane id="BPMNPlane_804db91a-3d0b-4f9f-a6b1-afe7724dc743" bpmnElement="collaboration_db28c639-43f2-482a-b996-47d8d233238a">
+      <bpmndi:BPMNShape id="BPMNShape_bd16cdbe-d583-487c-927d-814abd208d3d" bpmnElement="Pool_8e04f002-4e6c-4366-8e73-2c86285ed985" bioc:stroke="#5d5d5d" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#5d5d5d" isHorizontal="true">
+        <dc:Bounds x="-420" y="-285" width="400" height="55" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="0" y="0" width="40" height="100" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_c5e85474-1489-4638-b8f4-0a77052a6c66" bpmnElement="Pool_75b5353a-8f85-46db-b2cb-f1ef76ff1635" bioc:stroke="#5d5d5d" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#5d5d5d" isHorizontal="true">
+        <dc:Bounds x="-485" y="-160" width="1430" height="990" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="0" y="0" width="40" height="250" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_164707cf-4414-494a-a118-32677ecad459" bpmnElement="Lane_e0a6ac16-5301-4814-a8e3-79b8cc6a1c17" bioc:stroke="#5d5d5d" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#5d5d5d" isHorizontal="true">
+        <dc:Bounds x="-445" y="330" width="1390" height="250" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="0" y="0" width="40" height="250" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_f5ec5bf7-b9cf-4bd6-a650-d7677940a4e1" bpmnElement="Lane_9e53b81f-082c-4b2f-b145-4a267ea51e0c" bioc:stroke="#5d5d5d" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#5d5d5d" isHorizontal="true">
+        <dc:Bounds x="-445" y="580" width="1390" height="250" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="0" y="0" width="40" height="250" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0f661069-bdaf-40d1-9734-3de4b523483d" bpmnElement="Lane_e0c45f10-8b8a-481b-885e-9fdcaa4cc765" bioc:stroke="#5d5d5d" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#5d5d5d" isHorizontal="true">
+        <dc:Bounds x="-445" y="-160" width="1390" height="490" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="0" y="0" width="40" height="250" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_f4d4d831-c8dc-4e93-b328-5b530ffe8d90" bpmnElement="EndEvent_9b875f0f-c72c-44de-8d15-dcac34d12199" bioc:stroke="#5d5d5d" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#5d5d5d">
+        <dc:Bounds x="845" y="170" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="0" y="0" width="50" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_b7433b1b-bcf8-4010-a9d8-7c73b6379f1c" bpmnElement="Task_631ebe29-b7b6-440a-8ac7-7f16bf3dee48" bioc:stroke="#5d5d5d" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#5d5d5d">
+        <dc:Bounds x="530" y="160" width="150" height="70" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="0" y="0" width="110" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0df46615-18fd-4319-9845-a6f963a03a1e" bpmnElement="EndEvent_dce70434-06a7-4951-bbaf-71a4f3a84c92" bioc:stroke="#5d5d5d" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#5d5d5d">
+        <dc:Bounds x="845" y="50" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="0" y="0" width="50" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_a6e5a9a7-6660-413e-a20d-368741278bfc" bpmnElement="Gateway_0e3966bb-d808-4474-8db9-268d2b9b3a8c" bioc:stroke="#5d5d5d" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#5d5d5d" isMarkerVisible="true">
+        <dc:Bounds x="375" y="175" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="0" y="0" width="40" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_06c2c222-d113-4207-ae3b-be27e3d6a36a" bpmnElement="Gateway_7b361554-e95a-437b-8dfd-f1d7ccb70712" bioc:stroke="#5d5d5d" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#5d5d5d">
+        <dc:Bounds x="375" y="420" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="0" y="0" width="40" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_b29c233b-a7a5-422a-af36-e59bec80e929" bpmnElement="Task_044f8d66-a715-466b-9e8d-1991a0e935a8" bioc:stroke="#5d5d5d" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#5d5d5d">
+        <dc:Bounds x="185" y="680" width="120" height="70" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="0" y="0" width="110" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_71f0148c-9873-4098-bbd3-735ee68bc2a9" bpmnElement="Task_1c2c92ad-79c7-4b3d-8ff2-c328aafb6f31" bioc:stroke="#5d5d5d" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#5d5d5d">
+        <dc:Bounds x="180" y="405" width="120" height="70" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="0" y="0" width="110" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_db9684d5-7c1c-4167-82d0-cb8de2eb48ef" bpmnElement="Gateway_0fc80289-bf53-4211-92c3-ff0bcd8593cf" bioc:stroke="#5d5d5d" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#5d5d5d">
+        <dc:Bounds x="60" y="420" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="0" y="0" width="40" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0cd345ff-d181-42f2-914d-3850ae02da71" bpmnElement="EndEvent_dcc396a4-5c3e-4f37-8d0d-cc957ed2f5bf" bioc:stroke="#5d5d5d" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#5d5d5d">
+        <dc:Bounds x="845" y="-95" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="0" y="0" width="50" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_b658028e-5498-4583-a274-fc9d7ac8e863" bpmnElement="Gateway_188b8fb4-1a6a-496e-a0b3-4b0b217ae93f" bioc:stroke="#5d5d5d" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#5d5d5d" isMarkerVisible="true">
+        <dc:Bounds x="60" y="10" width="40" height="40" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="0" y="0" width="40" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_c2370b57-9d36-4462-9666-e7d6ac066c3d" bpmnElement="Data_37e863bc-ad95-446e-9c4f-64af2f8d88dd" bioc:stroke="#5d5d5d" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#5d5d5d">
+        <dc:Bounds x="-150" y="150" width="60" height="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="0" y="0" width="60" height="80" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_6edd6bf6-70e0-4d9b-92be-98492f728aac" bpmnElement="Task_a5ac72e6-fc4c-44cd-b1ce-207a8e7c5053" bioc:stroke="#5d5d5d" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#5d5d5d">
+        <dc:Bounds x="-220" y="-5" width="200" height="70" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="0" y="0" width="110" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_10639936-5740-44f6-8ba3-6dfeaa30811d" bpmnElement="StartEvent_856b0cc7-e94d-46dd-b620-692047d7df2b" bioc:stroke="#5d5d5d" bioc:fill="#ffffff" color:background-color="#ffffff" color:border-color="#5d5d5d">
+        <dc:Bounds x="-345" y="5" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="0" y="0" width="50" height="28" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_748c2f7b-fb39-4cc9-af60-7f6373c81753" bpmnElement="Flow_647754e6-019a-4ba2-8486-49c86aef13b4">
+        <di:waypoint x="80" y="10" />
+        <di:waypoint x="80" y="-10" />
+        <di:waypoint x="80" y="-70" />
+        <di:waypoint x="825" y="-70" />
+        <di:waypoint x="845" y="-70" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="422.5" y="-70" width="0" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_d3879c58-5956-4b7f-a627-448a32cc90cb" bpmnElement="Flow_ec61ce5d-fb89-410c-bc5f-25d6412d440c">
+        <di:waypoint x="680" y="195" />
+        <di:waypoint x="700" y="195" />
+        <di:waypoint x="825" y="195" />
+        <di:waypoint x="845" y="195" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="762.5" y="195" width="0" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_e3fa9d5f-8c80-44a6-96c1-622ee7a9a74a" bpmnElement="Flow_1d381ab1-a959-4b85-b58a-ef9f9bbe2cba">
+        <di:waypoint x="415" y="195" />
+        <di:waypoint x="435" y="195" />
+        <di:waypoint x="510" y="195" />
+        <di:waypoint x="530" y="195" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="472.5" y="195" width="0" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_775bf941-5acd-4fa6-b8b4-c4565afcddbc" bpmnElement="Flow_bd079df4-711e-4b05-95ed-8e2158c46eee">
+        <di:waypoint x="395" y="175" />
+        <di:waypoint x="395" y="155" />
+        <di:waypoint x="395" y="85" />
+        <di:waypoint x="825" y="85" />
+        <di:waypoint x="847" y="85" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="576" y="85" width="0" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_b517d70b-1f7c-4178-886b-2a52cbc0ff3c" bpmnElement="Flow_a4365875-4b9d-4b3b-961f-2dcaf1317d51">
+        <di:waypoint x="395" y="420" />
+        <di:waypoint x="395" y="400" />
+        <di:waypoint x="395" y="235" />
+        <di:waypoint x="395" y="215" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="395" y="317.5" width="0" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_ae847665-e5f9-423b-bec7-2180cd0bd6db" bpmnElement="Flow_e1298af4-1022-4edd-b4d7-a68d96ad940a">
+        <di:waypoint x="300" y="440" />
+        <di:waypoint x="320" y="440" />
+        <di:waypoint x="355" y="440" />
+        <di:waypoint x="375" y="440" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="337.5" y="440" width="0" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_4f19dfba-c684-4e01-8b43-802c29e2ba36" bpmnElement="Flow_f289ef03-021e-4262-9e72-5877ce9dbe0b">
+        <di:waypoint x="305" y="715" />
+        <di:waypoint x="325" y="715" />
+        <di:waypoint x="395" y="715" />
+        <di:waypoint x="395" y="480" />
+        <di:waypoint x="395" y="460" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="395" y="632.5" width="0" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_7dc679d5-1bf9-4cff-9e88-2a1c890809ec" bpmnElement="Flow_7825953f-6c8e-42da-8f57-77751ae11f6f">
+        <di:waypoint x="80" y="460" />
+        <di:waypoint x="80" y="480" />
+        <di:waypoint x="80" y="715" />
+        <di:waypoint x="165" y="715" />
+        <di:waypoint x="185" y="715" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="80" y="640" width="0" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_8d124843-d7af-4155-9070-1e72cc3f1d5b" bpmnElement="Flow_91ff2635-538c-43b7-9b42-bc6e173d36d8">
+        <di:waypoint x="100" y="440" />
+        <di:waypoint x="120" y="440" />
+        <di:waypoint x="160" y="440" />
+        <di:waypoint x="180" y="440" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="140" y="440" width="0" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_3d611649-2df2-44ae-b7ae-e827e26fdd86" bpmnElement="Flow_f7ffd5a6-16c9-4a69-ad4f-de0dfef3d82f">
+        <di:waypoint x="80" y="50" />
+        <di:waypoint x="80" y="70" />
+        <di:waypoint x="80" y="400" />
+        <di:waypoint x="80" y="420" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="50" y="240" width="0" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_ebd6076d-6f87-4395-adfa-3e29aef9f14f" bpmnElement="Flow_ecdb2f2f-3a27-4e56-8a6d-8d223bc3c76d">
+        <di:waypoint x="-20" y="30" />
+        <di:waypoint x="0" y="30" />
+        <di:waypoint x="40" y="30" />
+        <di:waypoint x="60" y="30" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="20" y="30" width="0" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_37a57ed1-1c81-4fdc-9378-07e811a42f3a" bpmnElement="Flow_e31fa6d1-28e8-42fc-be0e-9af38ff38387">
+        <di:waypoint x="-120" y="147.5" />
+        <di:waypoint x="-120" y="130" />
+        <di:waypoint x="-120" y="85" />
+        <di:waypoint x="-120" y="65" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="-120" y="106.25" width="0" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_f2fe2bbc-79ff-4369-98b1-3ff7c192f1f1" bpmnElement="Flow_ecb0cb86-a0f5-41d2-a3bc-2ad9a9395a61">
+        <di:waypoint x="-295" y="30" />
+        <di:waypoint x="-275" y="30" />
+        <di:waypoint x="-240" y="30" />
+        <di:waypoint x="-220" y="30" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="-257.5" y="30" width="0" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_8695cf4e-eec1-41c8-8a14-7e2459393c99" bpmnElement="Flow_43f32525-5a55-4a10-a11c-8b8d73186972">
+        <di:waypoint x="-180" y="-230" />
+        <di:waypoint x="-180" y="-210" />
+        <di:waypoint x="-180" y="-25" />
+        <di:waypoint x="-180" y="-5" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="-180" y="-117.5" width="0" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -46,7 +46,7 @@ kbId: 4675
 
 ### Аутентификация
 
-- [Аутентификация через WS-Federation][wsfederation_connection]
+<!-- - [Аутентификация через WS-Federation][wsfederation_connection] -->
 - [Аутентификация через OpenID Connect][openid_connection]
 - [Active Directory][ad_connection]
 
