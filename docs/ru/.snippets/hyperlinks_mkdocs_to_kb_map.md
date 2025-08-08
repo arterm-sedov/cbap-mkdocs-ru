@@ -195,7 +195,7 @@
 
 [logs_event_chain_view]: {{ kbArticleURLPrefix }}4673#logs_event_chain_view
 
-[logs_odata_inegration]: {{ kbArticleURLPrefix }}4673#logs_odata_inegration
+[logs_odata_integration]: {{ kbArticleURLPrefix }}4673#logs_odata_integration
 
 [map_configure]: {{ kbArticleURLPrefix }}4679
 
@@ -466,6 +466,8 @@
 [attribute_searchable]: {{ kbArticleURLPrefix }}4776
 
 [attribute_text]: {{ kbArticleURLPrefix }}4768
+
+[attribute_text_masks]: {{ kbArticleURLPrefix }}5089
 
 [attribute_text_substring_search_n3]: {{ kbArticleURLPrefix }}4917
 
