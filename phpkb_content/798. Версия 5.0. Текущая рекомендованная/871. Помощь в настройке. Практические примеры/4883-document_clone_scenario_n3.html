@@ -74,20 +74,52 @@
 <div class="notice notice-success">
 <p class="admonition-title">Структура атрибута типа «Документ»</p>
 <ul>
-<li>Атрибут типа «<strong>Документ</strong>» хранит одну или несколько ссылок на записи (<strong>документы</strong>) в системном шаблоне документа, к которым прикрепляются файлы.</li>
-<li>В шаблоне документа имеется атрибут <code>currentRevision</code> (текущая <strong>ревизия</strong>), который хранит ссылку на запись в системном шаблоне ревизии.</li>
-<li>В шаблоне ревизии имеются атрибуты <code>title</code> (имя) и <code>content</code> (содержимое), которые хранят имя файла и ссылку на файл, физически хранящийся в папке <code>Streams</code> на сервере.</li>
-<li>Чтобы считать файл из атрибута типа «<strong>Документ</strong>» с помощью выражения N3, необходимо:<ul>
-<li>получить текущую ревизию документа: <code>?documentAttributeValue document:revision ?revision</code>;</li>
-<li>получить из ревизии содержимое файла в формате <code>base64</code>: <code>?revision document:content ?content</code>;</li>
-<li>получить из ревизии имя файла: <code>?revision document:title ?title</code>.</li>
+<li>Атрибут типа «<strong>Документ</strong>» хранит одну или несколько ссылок на записи (<strong>документы</strong>) в системном шаблоне документа, к которым прикрепляются файлы (например, загруженные пользователями).</li>
+<li>В шаблоне документа имеется атрибут <code>currentRevision</code> (текущая <strong>версия</strong>), который хранит ссылку на запись в системном шаблоне версии.</li>
+<li>В шаблоне версии имеются атрибуты <code>title</code> (имя) и <code>content</code> (содержимое), которые хранят имя файла и ссылку на файл, физически хранящийся в папке <code>Streams</code> на сервере.</li>
 </ul>
+</div>
+<div class="notice notice-tip">
+<p class="admonition-title">Извлечение файлов из атрибута типа «Документ» с помощью N3</p>
+<p>Чтобы считать файл из атрибута типа «<strong>Документ</strong>» с помощью выражения N3, необходимо:</p>
+<ul>
+<li>
+<p>получить объект с атрибутом:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">(</span><span class="s">"TemplateSystemName"</span> <span class="s">"DocumentAttributeSystemName"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?DocumentAttribute</span><span class="p">.</span></code> <br/></pre></code></div>
 </li>
-<li>Чтобы прикрепить к атрибуту типа «<strong>Документ</strong>» файл с помощью выражения N3, необходимо:<ul>
-<li>сформировать содержимое файла в формате <code>base64</code>: <code>?documentContentSource document:content ?content</code>;</li>
-<li>сформировать имя файла: <code>?documentTitleSource document:title ?title</code>;</li>
-<li>прикрепить полученный файл к атрибуту типа «<strong>Документ</strong>», т. е. поместить на него ссылку в ревизию: <code>(?content ?title) document:attach ?documentAttributeValue</code>.</li>
+<li>
+<p>из объекта с атрибутом получить значение атрибута в текущей записи:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?item</span> <span class="err">documentAttribute</span> <span class="err">?documentAttributeValue</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>из значения атрибута получить текущую версию документа:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?documentAttributeValue</span> <span class="nn">document</span><span class="p">:</span><span class="nt">revision</span> <span class="err">?revision</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>из версии получить содержимое файла в формате <code>base64</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?revision</span> <span class="nn">document</span><span class="p">:</span><span class="nt">content</span> <span class="err">?content</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>из версии получить имя файла:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?revision</span> <span class="nn">document</span><span class="p">:</span><span class="nt">title</span> <span class="err">?title</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
 </ul>
+</div>
+<div class="notice notice-tip">
+<p class="admonition-title">Добавление файлов в атрибут типа «Документ» с помощью N3</p>
+<p>Чтобы прикрепить к атрибуту типа «<strong>Документ</strong>» файл с помощью выражения N3, необходимо:</p>
+<ul>
+<li>
+<p>сформировать содержимое файла в формате <code>base64</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?documentContentSource</span> <span class="nn">document</span><span class="p">:</span><span class="nt">content</span> <span class="err">?content</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>сформировать имя файла:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?documentTitleSource</span> <span class="nn">document</span><span class="p">:</span><span class="nt">title</span> <span class="err">?title</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>прикрепить полученный файл к атрибуту типа «<strong>Документ</strong>», т. е. поместить на него ссылку в версию:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">(</span><span class="err">?content</span> <span class="err">?title</span><span class="p">)</span> <span class="nn">document</span><span class="p">:</span><span class="nt">attach</span> <span class="err">?documentAttributeValue</span><span class="p">.</span></code> <br/></pre></code></div>
 </li>
 </ul>
 </div>

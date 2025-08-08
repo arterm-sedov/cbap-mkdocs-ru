@@ -27,27 +27,27 @@ kbId: 4914
 
 1. Создайте шаблон записи *«Номенклатура продукции»* со следующими **атрибутами**:
 
-| Название | Тип | Свойства |
-| --- | --- | --- |
-| *Наименование* | **Текст** | **Использовать как заголовок записей:** флажок установлен |
-| *Единица измерения* | **Текст** |  |
-| *Цена* | **Число** | **Количество знаков после запятой: 2** |
+   | Название | Тип | Свойства |
+   | --- | --- | --- |
+   | *Наименование* | **Текст** | **Использовать как заголовок записей:** флажок установлен |
+   | *Единица измерения* | **Текст** |  |
+   | *Цена* | **Число** | **Количество знаков после запятой: 2** |
 2. Добавьте созданные атрибуты на **форму** и в таблицу *«Все записи»*.
 3. Создайте шаблон записи *«Позиции в конкурсе»* с **атрибутами**:
 
-| Название | Тип | Свойства |
-| --- | --- | --- |
-| *Наименование* | **Текст** | **Использовать как заголовок записей:** флажок установлен |
-| *Единица измерения* | **Текст** |  |
-| *Цена* | **Число** | **Количество знаков после запятой: 2** |
-| *Количество* | **Число** | **Количество знаков после запятой: 0** |
-| *Сумма* | **Число** | **Количество знаков после запятой: 2** **Вычислять автоматически:** флажок установлен **Вычисляемое значение: формула**  ``` PRODUCT($Tsena, $Kolichestvo) ```  **Здесь:** `PRODUCT()` — вычисляет произведение двух чисел. `Tsena` — системное имя атрибута *«Цена»*. `Kolichestvo` — системное имя атрибута *«Количество»*. |
+   | Название | Тип | Свойства |
+   | --- | --- | --- |
+   | *Наименование* | **Текст** | **Использовать как заголовок записей:** флажок установлен |
+   | *Единица измерения* | **Текст** |  |
+   | *Цена* | **Число** | **Количество знаков после запятой: 2** |
+   | *Количество* | **Число** | **Количество знаков после запятой: 0** |
+   | *Сумма* | **Число** | **Количество знаков после запятой: 2**  **Вычислять автоматически:** флажок установлен  **Вычисляемое значение: формула**   ``` PRODUCT($Tsena, $Kolichestvo) ```   **Здесь:**  `PRODUCT()` — вычисляет произведение двух чисел.  `Tsena` — системное имя атрибута *«Цена»*.  `Kolichestvo` — системное имя атрибута *«Количество»*. |
 4. Создайте шаблон записи *«Конкурсы»* с **атрибутами**:
 
-| Название | Тип | Свойства |
-| --- | --- | --- |
-| *Название* | **Текст** | **Использовать как заголовок записей:** флажок установлен |
-| *Позиции конкурса* | **Запись** | **Связанный шаблон:** *Позиции в конкурсе* **Хранить несколько значений:** флажок установлен **Взаимная связь с атрибутом:** **с новым** **Название:** *Конкурс* |
+   | Название | Тип | Свойства |
+   | --- | --- | --- |
+   | *Название* | **Текст** | **Использовать как заголовок записей:** флажок установлен |
+   | *Позиции конкурса* | **Запись** | **Связанный шаблон:** *Позиции в конкурсе*  **Хранить несколько значений:** флажок установлен  **Взаимная связь с атрибутом:** **с новым**  **Название:** *Конкурс* |
 5. Добавьте атрибуты *«Название»* и *«Позиции конкурса»* на **форму**.
 6. Выберите для атрибута *«Позиции конкурса»* отображение в виде таблицы и добавьте в неё созданные атрибуты.
 
@@ -58,113 +58,113 @@ kbId: 4914
 1. Создайте кнопку *«Добавить позиции в конкурс»* в шаблоне *«Номенклатура продукции»*.
 2. На вкладке «**Локальные переменные**» создайте переменную со следующими свойствами:
 
-    - **Отображаемое название:** *Конкурс*
-    - **Тип данных: запись**
-    - **Системное имя:** *konkurs*
-    - **Шаблон:** *Конкурсы*
+   - **Отображаемое название:** *Конкурс*
+   - **Тип данных: запись**
+   - **Системное имя:** *konkurs*
+   - **Шаблон:** *Конкурсы*
 3. На вкладке «**Основные**» настройте свойства кнопки:
 
-    - **Отображаемое название:** *Добавить позиции в конкурс*
-    - **Контекст операции: запись**
-    - **Операция: C# скрипт**
-    - **Результат выполнения: обновить данные**
-    - **Отображать диалоговое окно:** флажок установлен
+   - **Отображаемое название:** *Добавить позиции в конкурс*
+   - **Контекст операции: запись**
+   - **Операция: C# скрипт**
+   - **Результат выполнения: обновить данные**
+   - **Отображать диалоговое окно:** флажок установлен
 4. Сохраните кнопку.
 5. Нажмите гиперссылку «**Настроить диалоговое окно**».
 6. Вынесите локальную переменную *«Конкурс»* на форму диалогового окна и сохраните её.
 7. На вкладке «**Скрипт**» вставьте следующий код:
 
-```
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Comindware.Data.Entity;
-using Comindware.TeamNetwork.Api.Data.UserCommands;
-using Comindware.TeamNetwork.Api.Data;
+   ```
+   using System;
+   using System.Collections.Generic;
+   using System.Linq;
+   using Comindware.Data.Entity;
+   using Comindware.TeamNetwork.Api.Data.UserCommands;
+   using Comindware.TeamNetwork.Api.Data;
 
-class Script
-{
-    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
-    {
-        var data = userCommandContext.LocalVariables;
-        string konkursId = "";
-        string notify = "Позиции добавлены в выбранный конкурс";
-        // Получаем ID конкурса из локальной переменной с системным именем konkurs
-        data.TryGetValue("konkurs", out object obj_);
-        if (obj_ != null)
-        {
-            konkursId = (obj_ as object[]).FirstOrDefault().ToString();
-        }
-        // Проверяем, что в таблице выбрана хотя бы одна строка
-        if (userCommandContext.ObjectIds.Count() == 0)
-        {
-            var resultBad0 = new UserCommandResult
-            {
-        Success = false,
-        Commited = false,
-        ResultType = UserCommandResultType.Notificate,
-        Messages = new[]
-        {
-        new UserCommandMessage
-        {
-            Severity = SeverityLevel.Normal,
-            Text = "Ни одной позиции не выбрано"
-        }
-        }
-    };
-    return resultBad0;
-        }
+   class Script
+   {
+       public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+       {
+           var data = userCommandContext.LocalVariables;
+           string konkursId = "";
+           string notify = "Позиции добавлены в выбранный конкурс";
+           // Получаем ID конкурса из локальной переменной с системным именем konkurs
+           data.TryGetValue("konkurs", out object obj_);
+           if (obj_ != null)
+           {
+               konkursId = (obj_ as object[]).FirstOrDefault().ToString();
+           }
+           // Проверяем, что в таблице выбрана хотя бы одна строка
+           if (userCommandContext.ObjectIds.Count() == 0)
+           {
+               var resultBad0 = new UserCommandResult
+               {
+           Success = false,
+           Commited = false,
+           ResultType = UserCommandResultType.Notificate,
+           Messages = new[]
+           {
+           new UserCommandMessage
+           {
+               Severity = SeverityLevel.Normal,
+               Text = "Ни одной позиции не выбрано"
+           }
+           }
+       };
+       return resultBad0;
+           }
 
-        Decimal posNum = 0;
-        foreach (string selectId in userCommandContext.ObjectIds)
-        {
-            Dictionary<string,object> data_new = new Dictionary<string,object>();
+           Decimal posNum = 0;
+           foreach (string selectId in userCommandContext.ObjectIds)
+           {
+               Dictionary<string,object> data_new = new Dictionary<string,object>();
 
-            // Собираем данные из шаблона записи «Номенклатура продукции»
-            var data_selectId = Api.TeamNetwork.ObjectService.GetPropertyValues(new String[]{selectId}, new String[]{"Naimenovanie", "Edinitsaizmereniya", "Tsena"});
-            // Копируем значения атрибутов шаблона «Номенклатура продукции» в атрибуты позиции в конкурсе
-            if (data_selectId[selectId].ContainsKey("Naimenovanie"))
-                data_new.Add("Naimenovanie", data_selectId[selectId]["Naimenovanie"]);
-            if (data_selectId[selectId].ContainsKey("Edinitsaizmereniya"))
-                data_new.Add("Edinitsaizmereniya", data_selectId[selectId]["Edinitsaizmereniya"]);
-            if (data_selectId[selectId].ContainsKey("Tsena"))
-                            data_new.Add("Tsena", data_selectId[selectId]["Tsena"]);
-            data_new.Add("Produktsiyanazakupku", data_selectId[selectId]["id"]);
-            // Если конкурс выбран, проставляем ссылку на него в текущую позицию
-            if (konkursId != "")
-            {
-                // Konkurs — системное имя атрибута «Конкурс» шаблона записи «Позиции в конкурсе»
-                data_new.Add("Konkurs", konkursId);
-            }
-            posNum++;
+               // Собираем данные из шаблона записи «Номенклатура продукции»
+               var data_selectId = Api.TeamNetwork.ObjectService.GetPropertyValues(new String[]{selectId}, new String[]{"Naimenovanie", "Edinitsaizmereniya", "Tsena"});
+               // Копируем значения атрибутов шаблона «Номенклатура продукции» в атрибуты позиции в конкурсе
+               if (data_selectId[selectId].ContainsKey("Naimenovanie"))
+                   data_new.Add("Naimenovanie", data_selectId[selectId]["Naimenovanie"]);
+               if (data_selectId[selectId].ContainsKey("Edinitsaizmereniya"))
+                   data_new.Add("Edinitsaizmereniya", data_selectId[selectId]["Edinitsaizmereniya"]);
+               if (data_selectId[selectId].ContainsKey("Tsena"))
+                               data_new.Add("Tsena", data_selectId[selectId]["Tsena"]);
+               data_new.Add("Produktsiyanazakupku", data_selectId[selectId]["id"]);
+               // Если конкурс выбран, проставляем ссылку на него в текущую позицию
+               if (konkursId != "")
+               {
+                   // Konkurs — системное имя атрибута «Конкурс» шаблона записи «Позиции в конкурсе»
+                   data_new.Add("Konkurs", konkursId);
+               }
+               posNum++;
 
-            // Создаём запись в шаблоне Pozitsiivkonkurse (Позиции в конкурсе) со скопированными данными
-            Api.TeamNetwork.ObjectService.CreateWithAlias("Pozitsiivkonkurse", data_new);
-        }
+               // Создаём запись в шаблоне Pozitsiivkonkurse (Позиции в конкурсе) со скопированными данными
+               Api.TeamNetwork.ObjectService.CreateWithAlias("Pozitsiivkonkurse", data_new);
+           }
 
-    // Завершаем работу скрипта
-    var result = new UserCommandResult
-    {
-            Success = true,
-            Commited = true,
-            ResultType = UserCommandResultType.Navigate,
-            NavigationResult = new UserCommandNavigationResult
-            {
-                Context = ContextType.Task,
-            },
-            Messages = new[]
-    {
-        new UserCommandMessage
-        {
-            Severity = SeverityLevel.Normal,
-            Text = notify
-        }
-    }
-    };
-    return result;
-    }
-}
-```
+       // Завершаем работу скрипта
+       var result = new UserCommandResult
+       {
+               Success = true,
+               Commited = true,
+               ResultType = UserCommandResultType.Navigate,
+               NavigationResult = new UserCommandNavigationResult
+               {
+                   Context = ContextType.Task,
+               },
+               Messages = new[]
+       {
+           new UserCommandMessage
+           {
+               Severity = SeverityLevel.Normal,
+               Text = notify
+           }
+       }
+       };
+       return result;
+       }
+   }
+   ```
 8. Сохраните С#-скрипт.
 9. Сохраните кнопку.
 10. Вынесите кнопку *«Добавить позиции в конкурс»* на область кнопок таблицы *«Все записи»* шаблона *«Номенклатура продукции»*.
@@ -175,17 +175,17 @@ class Script
 2. Создайте кнопку *«Добавить позиции в конкурс»* в шаблоне *«Номенклатура продукции»*.
 3. На вкладке «**Локальные переменные**» создайте переменную со следующими свойствами:
 
-    - **Отображаемое название:** *Конкурс*
-    - **Тип данных: запись**
-    - **Системное имя:** *konkurs*
-    - **Шаблон:** *Конкурсы*
+   - **Отображаемое название:** *Конкурс*
+   - **Тип данных: запись**
+   - **Системное имя:** *konkurs*
+   - **Шаблон:** *Конкурсы*
 4. На вкладке «**Основные**» настройте свойства кнопки:
 
-    - **Отображаемое название:** *Добавить позиции в конкурс*
-    - **Контекст операции: запись**
-    - **Операция: вызвать событие «Нажата кнопка»**
-    - **Результат выполнения: обновить данные**
-    - **Отображать диалоговое окно:** флажок установлен
+   - **Отображаемое название:** *Добавить позиции в конкурс*
+   - **Контекст операции: запись**
+   - **Операция: вызвать событие «Нажата кнопка»**
+   - **Результат выполнения: обновить данные**
+   - **Отображать диалоговое окно:** флажок установлен
 5. Сохраните кнопку.
 6. Нажмите гиперссылку «**Настроить диалоговое окно**».
 7. Вынесите локальную переменную *«Конкурс»* на форму диалогового окна и сохраните её.
@@ -196,33 +196,41 @@ class Script
 12. Внутри события «**Создать запись**» добавьте событие «**Изменить значения атрибутов**».
 13. Добавьте следующие атрибуты для изменения:
 
-| Атрибут | Операция со значениями | Значение |
-| --- | --- | --- |
-| *Конкурс* | **Заменить** | **Формула:** `$$dialogVariables->konkurs` **Здесь:** `dialogVariables` — объект с локальными переменными кнопки, которая вызвала сценарий по событию «**Нажатие кнопки**» `konkurs` — системное имя локальной переменной *«Конкурс»*. |
-| *Исходная позиция* | **Заменить** | **Формула:** `$$origin` **Здесь:** `origin` — системная переменная, хранящая ID записи, для которой была нажата кнопка. |
-| *Наименование* | **Заменить** | **Атрибут:** *Исходная позиция→Наименование* |
-| *Единица измерения* | **Заменить** | **Атрибут:** *Исходная позиция→Единица измерения* |
-| *Цена* | **Заменить** | **Атрибут:** *Исходная позиция→Цена* |
+    | Атрибут | Операция со значениями | Значение |
+    | --- | --- | --- |
+    | *Конкурс* | **Заменить** | **Формула:** `$$dialogVariables->konkurs`  **Здесь:**  `dialogVariables` — объект с локальными переменными кнопки, которая вызвала сценарий по событию «**Нажатие кнопки**»  `konkurs` — системное имя локальной переменной *«Конкурс»*. |
+    | *Исходная позиция* | **Заменить** | **Формула:** `$$origin`  **Здесь:**  `origin` — системная переменная, хранящая ID записи, для которой была нажата кнопка. |
+    | *Наименование* | **Заменить** | **Атрибут:** *Исходная позиция→Наименование* |
+    | *Единица измерения* | **Заменить** | **Атрибут:** *Исходная позиция→Единица измерения* |
+    | *Цена* | **Заменить** | **Атрибут:** *Исходная позиция→Цена* |
 
-_![Сценарий с использованием локальной переменной](https://kb.comindware.ru/assets/script_using_local_variable_scenario.png)_
+    ![Сценарий с использованием локальной переменной](https://kb.comindware.ru/assets/script_using_local_variable_scenario.png)
+
+    Сценарий с использованием локальной переменной
 
 ## Тестирование
 
 1. Создайте и заполните несколько записей в шаблоне *«Номенклатура продукции»*.
 
-_![Добавление позиций из справочника продукции в конкурс](https://kb.comindware.ru/assets/script_using_local_variable_add_items_from_registry.png)_
+   ![Добавление позиций из справочника продукции в конкурс](https://kb.comindware.ru/assets/script_using_local_variable_add_items_from_registry.png)
+
+   Добавление позиций из справочника продукции в конкурс
 2. Создайте запись в шаблоне *«Конкурсы»*, например *«Конкурс №1»*.
 3. Выберите одну или несколько позиций в таблице *«Номенклатура продукции»* и нажмите кнопку *«Добавить позиции в конкурс»*.
 4. Выберите *«Конкурс №1»* в раскрывающемся в списке и нажмите кнопку *«Добавить позиции в конкурс»*.
 
-_![Выбор конкурса для добавления позиций](https://kb.comindware.ru/assets/script_using_local_variable_select_tender.png)_
+   ![Выбор конкурса для добавления позиций](https://kb.comindware.ru/assets/script_using_local_variable_select_tender.png)
+
+   Выбор конкурса для добавления позиций
 5. Откройте запись *«Конкурс №1»*.
 6. В таблице *«Позиции в конкурсе»* должны отобразиться выбранные товары с единицей измерения и ценой из справочника.
 7. Отредактируйте цену продукции в любых позициях.
 8. Сохраните запись.
 9. Удостоверьтесь, что исходные цены в справочнике остались неизменными.
 
-_![Отображение добавленных позиций в конкурсе](https://kb.comindware.ru/assets/script_using_local_variable_tender_positions.png)_
+   ![Отображение добавленных позиций в конкурсе](https://kb.comindware.ru/assets/script_using_local_variable_tender_positions.png)
+
+   Отображение добавленных позиций в конкурсе
 
 --8<-- "related_topics_heading.md"
 

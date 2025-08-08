@@ -7,8 +7,9 @@ kbId: 4990
 
 Для того чтобы коллекция отображала записи с определенным параметром (например, с какой-либо категорией), но при этом можно было добавлять в коллекцию новые записи, введите следующее выражение:
 
-| from a in db->KPI where OR(EMPTY(a->Kategoriya),a->Kategoriya == "Обучение") select a->id |
-| --- |
+```
+from a in db->KPI where OR(EMPTY(a->Kategoriya),a->Kategoriya == "Обучение") select a->id
+```
 
 **где:**
 

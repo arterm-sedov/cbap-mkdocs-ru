@@ -21,8 +21,9 @@ kbId: 4908
 
 **6.** Перейдите в настройки задачи, на которой необходимо установить срок выполнения с учетом рабочих дней. Перейдите на вкладку «***Дополнительные***», затем выберите в поле «***Продолжительность выполнения***» вариант «*Формула*», затем вставьте следующее:
 
-| WORKHOURS(NOW(),18,DURATION("PT9H"),DURATION("PT9H"),LIST((from a in db->holliday\_calendar select a->Data))) |
-| --- |
+```
+WORKHOURS(NOW(),18,DURATION("PT9H"),DURATION("PT9H"),LIST((from a in db->holliday_calendar select a->Data)))
+```
 
 **где:**
 

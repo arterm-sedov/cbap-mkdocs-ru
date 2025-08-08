@@ -22,56 +22,56 @@ kbId: 4917
 3. Создайте **текстовый** атрибут *«Комментарий»*.
 4. Создайте **логический** атрибут *«Важная заявка»*:
 
-    - **Вычислять автоматически:** флажок установлен
-    - **Вычисляемое выражение: N3**
+   - **Вычислять автоматически:** флажок установлен
+   - **Вычисляемое выражение: N3**
 
-```
-# Импортируем функции для работы с записями и строками
-@prefix object: <http://comindware.com/ontology/object#>.
-@prefix cmwstring: <http://comindware.com/logics/string#>.
-{
-    # Находим атрибут Kommentariy (Комментарий) в шаблоне Zayavki (Заявки)
-    # и помещаем его в переменную KommentariyAttribute
-    ("Zayavki" "Kommentariy") object:findProperty ?KommentariyAttribute.
-    # Помещаем строку из атрибута «Комментарий»
-    # текущей заявки ?item в переменную ?text
-    ?item ?KommentariyAttribute ?text.
-    # Преобразуем комментарий в нижний регистр и помещаем в ?textLowerCase
-    ?text cmwstring:toLower ?textLowerCase.
-    # Помещаем значение атрибута Kod (Код) в переменную ?KodAttribute
-    ("Reestrslov" "Kod") object:findProperty ?KodAttribute.
-    # Находим все записи в реестре слов с кодом urgent
-    ?urgentKeywords ?KodAttribute "urgent".
-    ("Reestrslov" "Slovo") object:findProperty ?SlovoAttribute.
-    # Присваиваем переменной ?keywords массив объектов
-    # с заполненными значениями атрибута «Слово»
-    ?urgentKeywords ?SlovoAttribute ?keywords.
-    # Начинаем цикл по ?keywords
-        # Преобразуем ключевое слово в нижний регистр
-        ?keywords cmwstring:toLower ?keywordLowerCase.
-        # Проверяем, содержит ли ?textLowerCase ключевое слово
-        # из ?urgentKeywords
-        ?textLowerCase cmwstring:contains ?keywordLowerCase.
-        # Если строка была найдена в переменной ?textLowerCase,
-        # то значение вычисляемого атрибута сменится на true
-        true -> ?value.
-}
+   ```
+   # Импортируем функции для работы с записями и строками
+   @prefix object: <http://comindware.com/ontology/object#>.
+   @prefix cmwstring: <http://comindware.com/logics/string#>.
+   {
+       # Находим атрибут Kommentariy (Комментарий) в шаблоне Zayavki (Заявки)
+       # и помещаем его в переменную KommentariyAttribute
+       ("Zayavki" "Kommentariy") object:findProperty ?KommentariyAttribute.
+       # Помещаем строку из атрибута «Комментарий»
+       # текущей заявки ?item в переменную ?text
+       ?item ?KommentariyAttribute ?text.
+       # Преобразуем комментарий в нижний регистр и помещаем в ?textLowerCase
+       ?text cmwstring:toLower ?textLowerCase.
+       # Помещаем значение атрибута Kod (Код) в переменную ?KodAttribute
+       ("Reestrslov" "Kod") object:findProperty ?KodAttribute.
+       # Находим все записи в реестре слов с кодом urgent
+       ?urgentKeywords ?KodAttribute "urgent".
+       ("Reestrslov" "Slovo") object:findProperty ?SlovoAttribute.
+       # Присваиваем переменной ?keywords массив объектов
+       # с заполненными значениями атрибута «Слово»
+       ?urgentKeywords ?SlovoAttribute ?keywords.
+       # Начинаем цикл по ?keywords
+           # Преобразуем ключевое слово в нижний регистр
+           ?keywords cmwstring:toLower ?keywordLowerCase.
+           # Проверяем, содержит ли ?textLowerCase ключевое слово
+           # из ?urgentKeywords
+           ?textLowerCase cmwstring:contains ?keywordLowerCase.
+           # Если строка была найдена в переменной ?textLowerCase,
+           # то значение вычисляемого атрибута сменится на true
+           true -> ?value.
+   }
 
-```
+   ```
 5. Поместите атрибуты на форму и сохраните. У атрибута *«Важная заявка»* установите **представление** в виде **флажка**.
 
 ## Тестирование
 
 1. В реестре слов создайте записи с ключевыми словами, обозначающими важную заявку, например:
 
-| Код | Слово |
-| --- | --- |
-| *urgent* | *срочн* |
-| *urgent* | *важн* |
-| *urgent* | *скор* |
-| *urgent* | *АСАП* |
-| *urgent* | *ASAP* |
-| *urgent* | *important* |
+   | Код | Слово |
+   | --- | --- |
+   | *urgent* | *срочн* |
+   | *urgent* | *важн* |
+   | *urgent* | *скор* |
+   | *urgent* | *АСАП* |
+   | *urgent* | *ASAP* |
+   | *urgent* | *important* |
 2. Создайте новую заявку.
 3. В комментарии укажите любой текст и напишите слово *«Срочно!»*, *«ВАЖНО»*, *«скорее»* или любое слово с кодом *urgent* из реестра слов.
 4. Сохраните запись.

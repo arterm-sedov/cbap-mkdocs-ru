@@ -177,7 +177,7 @@ FORMAT("{0}", LIST($$ProcessObject))
         }
         ```
 
-_![Пример сценария с использованием переменных](scenario_with_variables.png)_
+_![Результирующий сценарий](scenario_with_variables.png)_
 
 ### Тестирование
 

@@ -10,15 +10,28 @@ kbId: 4943
 Для начала рассмотрим модель данных:
 
 - Шаблон записи (в нашем примере «Organizatsii»), хранящий мастер-данные, со следующими атрибутами:
-    1. Атрибут (в нашем примере «Filtrpooblasti» с типом данных «Текст»), в котором будет определен параметр для поиска записей в коллекции;
-    2. Атрибут с типом данных «Коллекция» (в нашем примере «Adresaofisov\_col»), коллекция, записи в которой будут фильтроваться.
+  1. Атрибут (в нашем примере «Filtrpooblasti» с типом данных «Текст»), в котором будет определен параметр для поиска записей в коллекции;
+  2. Атрибут с типом данных «Коллекция» (в нашем примере «Adresaofisov\_col»), коллекция, записи в которой будут фильтроваться.
 - Шаблон записи (в нашем примере «Adresa»), хранящий записи в коллекции, со следующими атрибутами:
-    1. Атрибут (в нашем примере «Oblast» с типом данных «Текст»), по которому будет осуществляться фильтрация.
+  1. Атрибут (в нашем примере «Oblast» с типом данных «Текст»), по которому будет осуществляться фильтрация.
 
 Далее, на конструкторе формы кликните на коллекцию и вставьте следующее выражение в «Фильтры записей: Для отображения»:
 
-| @prefix object: <http://comindware.com/ontology/object#>. {    ("Adresa" "Oblast") object:findProperty ?PropertyOblast.    ("Organizatsii" "Adresaofisov\_col") object:findProperty ?PropertyAdresaofisov\_col.    ("Organizatsii" "Filtrpooblasti") object:findProperty ?PropertyOblastFilter.      ?item ?PropertyOblastFilter ?filter.    ?item ?PropertyAdresaofisov\_col ?result\_A.    ?result\_A ?PropertyOblast ?filter.    ?result\_A -> ?value. } |
-| --- |
+```
+
+@prefix object: <http://comindware.com/ontology/object#>.
+{
+   ("Adresa" "Oblast") object:findProperty ?PropertyOblast.
+   ("Organizatsii" "Adresaofisov_col") object:findProperty ?PropertyAdresaofisov_col.
+   ("Organizatsii" "Filtrpooblasti") object:findProperty ?PropertyOblastFilter.
+ 
+   ?item ?PropertyOblastFilter ?filter.
+   ?item ?PropertyAdresaofisov_col ?result_A.
+   ?result_A ?PropertyOblast ?filter.
+   ?result_A -> ?value.
+}
+
+```
 
 Теперь разберём выражение на N3 построчно:
 

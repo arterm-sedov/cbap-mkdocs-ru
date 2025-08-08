@@ -7,8 +7,86 @@ kbId: 5020
 
 Для того, чтобы по кнопке можно было менять статус записей в коллекции в зависимости от определенного условия и завершать связанную с основной записью пользовательскую задачу, введите следующее выражение:
 
-| using System;using System.Collections.Generic;using System.Linq;using Comindware.Data.Entity;using Comindware.TeamNetwork.Api.Data.UserCommands;using Comindware.TeamNetwork.Api.Data;public class Script{    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)    {        var objectId = userCommandContext.ObjectIds.FirstOrDefault();        var data = Api.TeamNetwork.ObjectService.GetWithAlias("Register", objectId);        object[] Applications = data["Applications"] as object[];        var allApplications = new List<string>();         foreach (var app in Applications)        {            var apps = app as string;            allApplications.Add(apps);        }         var LevelRef = data["RegisterLevel"];        var Level = Api.TeamNetwork.ObjectService.GetWithAlias("RegisterLevels", LevelRef as string);        var LevelNum = (decimal)Level["Level"];         if (LevelNum == 1)        {            var approvedStatus = entities.ApplicationStatus.Where(x => x.Name == "Согласована в первом реестре").Select(x => x.id).FirstOrDefault();            foreach(var a in allApplications)             {                var data1 = new Dictionary<string, object>                {                    { "Status", approvedStatus}                };                Api.TeamNetwork.ObjectService.EditWithAlias("Application", a, data1);            }        }        else        {            var approvedStatus = entities.ApplicationStatus.Where(x => x.Name == "Согласована во втором реестре").Select(x => x.id).FirstOrDefault();            foreach(var a in allApplications)             {                var data1 = new Dictionary<string, object>                {                    { "Status", approvedStatus}                };                Api.TeamNetwork.ObjectService.EditWithAlias("Application", a, data1);            }        }                var result = new UserCommandResult        {            Success = true,            Commited = true,            ResultType = UserCommandResultType.Navigate,            NavigationResult = new UserCommandNavigationResult            {                Title = "Register",                ObjectId = objectId,                ContainerId = "oa.13",                Context = ContextType.Record             },            Messages = new[]            {                new UserCommandMessage                {                    Severity = SeverityLevel.Normal,                    Text = "Register approved"                    }            }        };        var activeTask = Api.Process.ProcessObjectService.GetReferencedTasks(objectId).Where(x => x.Status == UserTaskStatus.InProgress).FirstOrDefault().Id;        Api.TeamNetwork.UserTaskService.Complete(activeTask, true);        return result;    }} |
-| --- |
+```
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Comindware.Data.Entity;
+using Comindware.TeamNetwork.Api.Data.UserCommands;
+using Comindware.TeamNetwork.Api.Data;
+public class Script
+{
+    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+    {
+        var objectId = userCommandContext.ObjectIds.FirstOrDefault();
+        var data = Api.TeamNetwork.ObjectService.GetWithAlias("Register", objectId);
+        object[] Applications = data["Applications"] as object[];
+        var allApplications = new List<string>();
+
+        foreach (var app in Applications)
+        {
+            var apps = app as string;
+            allApplications.Add(apps);
+        }
+
+        var LevelRef = data["RegisterLevel"];
+        var Level = Api.TeamNetwork.ObjectService.GetWithAlias("RegisterLevels", LevelRef as string);
+        var LevelNum = (decimal)Level["Level"];
+
+        if (LevelNum == 1)
+        {
+            var approvedStatus = entities.ApplicationStatus.Where(x => x.Name == "Согласована в первом реестре").Select(x => x.id).FirstOrDefault();
+            foreach(var a in allApplications) 
+            {
+                var data1 = new Dictionary<string, object>
+                {
+                    { "Status", approvedStatus}
+                };
+                Api.TeamNetwork.ObjectService.EditWithAlias("Application", a, data1);
+            }
+        }
+        else
+        {
+            var approvedStatus = entities.ApplicationStatus.Where(x => x.Name == "Согласована во втором реестре").Select(x => x.id).FirstOrDefault();
+            foreach(var a in allApplications) 
+            {
+                var data1 = new Dictionary<string, object>
+                {
+                    { "Status", approvedStatus}
+                };
+                Api.TeamNetwork.ObjectService.EditWithAlias("Application", a, data1);
+            }
+        }
+        
+        var result = new UserCommandResult
+        {
+            Success = true,
+            Commited = true,
+            ResultType = UserCommandResultType.Navigate,
+            NavigationResult = new UserCommandNavigationResult
+            {
+                Title = "Register",
+                ObjectId = objectId,
+                ContainerId = "oa.13",
+                Context = ContextType.Record 
+            },
+            Messages = new[]
+            {
+                new UserCommandMessage
+                {
+                    Severity = SeverityLevel.Normal,
+                    Text = "Register approved"
+                    }
+            }
+        };
+        var activeTask = Api.Process.ProcessObjectService.GetReferencedTasks(objectId).Where(x => x.Status == UserTaskStatus.InProgress).FirstOrDefault().Id;
+        Api.TeamNetwork.UserTaskService.Complete(activeTask, true);
+        return result;
+    }
+}
+
+```
 
 **где:**
 
@@ -32,4 +110,6 @@ kbId: 5020
 
 **Register approved** - текст сообщения при успешном выполнении операции.
 
-**Примечание :** скрипт работает только с одной записью (выбирает первую запись, если на списке было выбрано несколько элементов). Для обработки нескольких записей скрипт нужно дописать.{% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
+**Примечание :** скрипт работает только с одной записью (выбирает первую запись, если на списке было выбрано несколько элементов). Для обработки нескольких записей скрипт нужно дописать.
+
+{% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

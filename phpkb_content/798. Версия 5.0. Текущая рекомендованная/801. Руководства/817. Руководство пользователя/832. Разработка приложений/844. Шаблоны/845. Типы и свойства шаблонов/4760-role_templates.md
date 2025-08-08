@@ -31,7 +31,4 @@ _![Свойства шаблона роли](https://kb.comindware.ru/assets/rol
 
 **[Шаблоны. Определения, создание, настройка, перенос между приложениями, архивирование, очистка, удаление][templates]**
 
-
-
- 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

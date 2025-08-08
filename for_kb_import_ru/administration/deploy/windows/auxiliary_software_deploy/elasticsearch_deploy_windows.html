@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4617" kb-tags="" kb-title="Elasticsearch. Установка в базовой конфигурации для Windows">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4617" kb-tags="elasticsearch,установка,windows,подключение" kb-title="Elasticsearch. Установка в базовой конфигурации для Windows">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -9,37 +9,44 @@
       </h2>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<a class="md-nav__link mkdocs_imported_link" href="#elasticsearch_deploy_windows_intro">
 <span class="md-ellipsis">
       Введение
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#требования-к-компьютеру">
+<a class="md-nav__link mkdocs_imported_link" href="#elasticsearch_deploy_windows_requirements">
 <span class="md-ellipsis">
       Требования к компьютеру
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#установка-elasticsearch">
+<a class="md-nav__link mkdocs_imported_link" href="#elasticsearch_deploy_windows_installation">
 <span class="md-ellipsis">
       Установка Elasticsearch
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#подключение-к-elasticsearch-при-развертывании-экземпляра-продукта">
+<a class="md-nav__link mkdocs_imported_link" href="#elasticsearch_deploy_windows_connection">
 <span class="md-ellipsis">
-      Подключение к Elasticsearch при развертывании экземпляра продукта
+      Подключение к Elasticsearch при развертывании экземпляра ПО
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#пример-типового-файла-конфигурации-elasticsearch">
+<a class="md-nav__link mkdocs_imported_link" href="#elasticsearch_deploy_windows_config_example">
 <span class="md-ellipsis">
       Пример типового файла конфигурации Elasticsearch
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
     </span>
 </a>
 </li>
@@ -48,10 +55,10 @@
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h2 id="введение">Введение</h2>
+<h2 id="elasticsearch_deploy_windows_intro">Введение</h2>
 <p>Для работы <strong>Comindware Platform</strong> требуется сервер Elasticsearch. См. <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4659">системные требования</a>.</p>
-<p>В случае установки <strong>Comindware Platform</strong> версии 5.0 в Windows <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4632">Утилита администрирования</a> устанавливает службу Elasticsearch в папку <code>C:\Program Files\Elasticsearch\elasticsearch-8.1.0\</code>.</p>
-<p>Установленная таким образом служба Elasticsearch имеет базовую конфигурацию: без аутентификации и с одним узлом. Она доступна по адресу <code>localhost:9200</code>.</p>
+<p>Установщик <strong>Comindware Platform</strong> в Windows можно установить службу Elasticsearch в базовой конфигурацию: без аутентификации и с одним узлом. Она доступна по адресу <code>localhost:9200</code>.</p>
+<p>См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5063">Установка, запуск, инициализация и остановка ПО в Windows</a>»</em>.</p>
 <p>Вы можете использовать имеющуюся службу Elasticsearch или развернуть её на отдельном сервере.</p>
 <p>Здесь представлены требования к техническому обеспечению и инструкции по развёртыванию службы Elasticsearch в ОС Windows, а также приведён пример типового файла конфигурации. Инструкции представлены для версии Elasticsearch 8.10.2, для других версий содержимое файлов конфигурации и порядок установки могут быть иными.</p>
 <div class="notice notice-info">
@@ -63,14 +70,14 @@
 <li>Экземпляр ПО будет взаимодействовать с сервером журналирования транзакций под указанным пользователем и создавать, наполнять и читать индексы с заданным префиксом.</li>
 </ul>
 </div>
-<h2 id="требования-к-компьютеру">Требования к компьютеру</h2>
+<h2 id="elasticsearch_deploy_windows_requirements">Требования к компьютеру</h2>
 <p>Сервер Elasticsearch создает значительную нагрузку на вычислительные ресурсы компьютера, поэтому рекомендуется:</p>
 <ul>
 <li>использовать отдельный SSD-диск для хранения журналов и данных сервера Elasticsearch;</li>
 <li>осуществлять мониторинг свободного места на диске, так как сервер перестает записывать данные, если на диске мало свободного места;</li>
 <li>использовать высокопроизводительный компьютер с достаточным объемом ОЗУ и количеством ядер ЦП, так как для обработки каждого индекса создается отдельный поток, а индексов может быть много.</li>
 </ul>
-<h2 id="установка-elasticsearch">Установка Elasticsearch</h2>
+<h2 id="elasticsearch_deploy_windows_installation">Установка Elasticsearch</h2>
 <p>Для установки Elasticsearch необходимо распаковать исполняемые файлы из ZIP-архива, а затем настроить переменные среды, службу Elasticsearch и конфигурацию сервера.</p>
 <p>В процессе установки и настройки Elasticsearch все команды следует выполнять от имени администратора.</p>
 <ol class="colored_numbers_list">
@@ -91,7 +98,7 @@
 </li>
 <li>
 <p>Настройте службу Elasticsearch с помощью файла конфигурации <code>elasticsearch.yml</code></p>
-<p>Можно скопировать его содержимое из раздела «<a class="mkdocs_imported_link" href="#пример-типового-файла-конфигурации-elasticsearch">Пример типового файла конфигурации Elasticsearch</a>».</p>
+<p>Можно скопировать его содержимое из раздела «<a class="mkdocs_imported_link" href="#elasticsearch_deploy_windows_config_example">Пример типового файла конфигурации Elasticsearch</a>».</p>
 </li>
 <li>
 <p>Зарегистрируйте службу Elasticsearch, выполнив следующую команду:</p>
@@ -124,22 +131,15 @@
 </ul>
 </li>
 </ol>
-<h2 id="подключение-к-elasticsearch-при-развертывании-экземпляра-продукта">Подключение к Elasticsearch при развертывании экземпляра продукта</h2>
+<h2 id="elasticsearch_deploy_windows_connection">Подключение к Elasticsearch при развертывании экземпляра ПО</h2>
 <ol class="colored_numbers_list">
 <li>
-<p>Перед созданием экземпляра продукта укажите адрес сервера Elasticsearch, который будет использоваться по умолчанию для новых экземпляров продукта, в конфигурации Утилиты администрирования Comindware. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4632">Утилита администрирования Comindware. Установка и использование</a>»</em>.</p>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка стандартного адреса сервера Elasticsearch" src="https://kb.comindware.ru/assets/Picture6.png"/><figcaption class="caption">Настройка стандартного адреса сервера Elasticsearch</figcaption></figure></p>
+<p>При необходимости при запуске экземпляра ПО <strong>Comindware Platform</strong> укажите адрес сервера и префикс индекса Elasticsearch для данного экземпляра.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка адреса сервера Elasticsearch для экземпляра ПО" src="https://kb.comindware.ru/assets/Picture7.png"/><figcaption class="caption">Настройка адреса сервера Elasticsearch для экземпляра ПО</figcaption></figure></p>
 </li>
 <li>
-<p>Если не был указан адрес сервера Elasticsearch в конфигурации Утилиты администрирования, то его потребуется указать при развертывании экземпляра продукта.</p>
-</li>
-<li>
-<p>Укажите адрес сервера и префикс индекса Elasticsearch для данного экземпляра <strong>Comindware Platform</strong>.</p>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка адреса сервера Elasticsearch для экземпляра продукта" src="https://kb.comindware.ru/assets/Picture7.png"/><figcaption class="caption">Настройка адреса сервера Elasticsearch для экземпляра продукта</figcaption></figure></p>
-</li>
-<li>
-<p>После развертывания экземпляра продукта в разделе «<strong>Администрирование системы</strong>» — «<strong>Подключения</strong>» будет отображаться настроенное подключение к Elasticsearch.</p>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Подключение к Elasticsearch в новом экземпляре продукта" src="https://kb.comindware.ru/assets/Picture8.png"/><figcaption class="caption">Подключение к Elasticsearch в новом экземпляре продукта</figcaption></figure></p>
+<p>После развертывания экземпляра ПО в разделе «<strong>Администрирование системы</strong>» — «<strong>Подключения</strong>» будет отображаться настроенное подключение к Elasticsearch.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Подключение к Elasticsearch в новом экземпляре ПО" src="/platform/v5.0/administration/deploy/windows/auxiliary_software_deploy/img/elasticsearch_deploy_windows_connection.png"/><figcaption class="caption">Подключение к Elasticsearch в новом экземпляре ПО</figcaption></figure></p>
 </li>
 <li>
 <p>Чтобы изменить свойства подключения к Elasticsearch, дважды нажмите его строку в списке подключений.</p>
@@ -147,13 +147,13 @@
 <li>Отобразится окно «<strong>Свойства подключения: Elasticsearch</strong>».</li>
 <li>
 <p>При необходимости измените свойства подключения, <strong>проверьте соединение</strong> и нажмите кнопку «<strong>Сохранить</strong>».</p>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка свойств подключения к Elasticsearch" src="https://kb.comindware.ru/assets/Picture9.png"/><figcaption class="caption">Настройка свойств подключения к Elasticsearch</figcaption></figure></p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка свойств подключения к Elasticsearch" src="/platform/v5.0/administration/deploy/windows/auxiliary_software_deploy/img/elasticsearch_deploy_windows_connection_configure.png"/><figcaption class="caption">Настройка свойств подключения к Elasticsearch</figcaption></figure></p>
 </li>
 <li>
-<p>После изменения свойств сервера Elasticsearch перезапустите экземпляр продукта с помощью Утилиты администрирования Comindware. См.  <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4632">Утилита администрирования Comindware. Установка и использование</a>»</em>.</p>
+<p>После изменения свойств сервера Elasticsearch перезапустите экземпляр ПО.</p>
 </li>
 </ol>
-<h2 id="пример-типового-файла-конфигурации-elasticsearch">Пример типового файла конфигурации Elasticsearch</h2>
+<h2 id="elasticsearch_deploy_windows_config_example">Пример типового файла конфигурации Elasticsearch</h2>
 <p>Ниже приведен пример файла <code>elasticsearch.yml</code> для следующей конфигурации сервера:</p>
 <ul>
 <li>сервер Elasticsearch состоит из единственного узла;</li>
@@ -164,6 +164,13 @@
 <li>путь к файлу конфигурации: <code>C:\Program Files\Elastic\Elasticsearch\&lt;8.XX.X&gt;\config\elasticsearch.yml</code></li>
 </ul>
 <div class="highlight"><code><pre><span></span><code><span class="c1"># Начало файла конфигурации</span></code> <br/><code><span class="c1">#Разрешить свопинг памяти</span></code> <br/><code>bootstrap.memory_lock:<span class="w"> </span><span class="nb">false</span></code> <br/><code></code> <br/><code><span class="c1"># Название кластера</span></code> <br/><code>cluster.name:<span class="w"> </span>cmw</code> <br/><code></code> <br/><code><span class="c1"># Максимальное возможное количество шардов в кластере</span></code> <br/><code><span class="c1"># Система создает отдельный индекс для каждого объекта мониторинга, поэтому</span></code> <br/><code><span class="c1"># рекомендуется увеличить количество шардов до 3000</span></code> <br/><code>cluster.max_shards_per_node:<span class="w"> </span><span class="m">3000</span></code> <br/><code></code> <br/><code><span class="c1"># Стандартный номер порта 9200 изменен по соображениям безопасности</span></code> <br/><code>http.port:<span class="w"> </span><span class="m">9201</span></code> <br/><code></code> <br/><code><span class="c1"># Сетевые параметры</span></code> <br/><code><span class="c1"># Если доступ по сети не требуется,</span></code> <br/><code><span class="c1"># то уберите строки #network.host и discovery.seed_hosts</span></code> <br/><code><span class="c1"># Замените имя компьютера `testhost` на реальное имя</span></code> <br/><code>network.host:<span class="w"> </span>testhost</code> <br/><code>discovery.seed_hosts:</code> <br/><code><span class="w">  </span>-<span class="w"> </span>testhost</code> <br/><code></code> <br/><code><span class="c1"># Простейшая конфигурация с одним узлом</span></code> <br/><code>discovery.type:<span class="w"> </span>single-node</code> <br/><code></code> <br/><code><span class="c1"># Название узла</span></code> <br/><code>node.name:<span class="w"> </span>cmw</code> <br/><code></code> <br/><code><span class="c1"># Путь к папке с данными</span></code> <br/><code>path.data:<span class="w"> </span>d:<span class="se">\P</span>rogramData<span class="se">\E</span>lasticsearch<span class="se">\e</span>lasticsearch-&lt;<span class="m">8</span>.XX.X&gt;<span class="se">\d</span>ata</code> <br/><code></code> <br/><code><span class="c1"># Путь к папке с журналами</span></code> <br/><code>path.logs:<span class="w"> </span>d:<span class="se">\P</span>rogramData<span class="se">\E</span>lasticsearch<span class="se">\e</span>lasticsearch-&lt;<span class="m">8</span>.XX.X&gt;<span class="se">\l</span>ogs</code> <br/><code></code> <br/><code><span class="c1"># Путь к папке с резервными копиями</span></code> <br/><code><span class="c1"># Путь должен указывать на существующий диск</span></code> <br/><code><span class="c1"># Резервные копии должны храниться на отдельном диске отдельно от основных данных</span></code> <br/><code><span class="c1"># Включите в конфигурацию директиву path.repo, если требуется создавать резервные копии</span></code> <br/><code><span class="c1"># path.repo: d:elastic_backup</span></code> <br/><code></code> <br/><code><span class="c1"># Обычная лицензия</span></code> <br/><code>xpack.license.self_generated.type:<span class="w"> </span>basic</code> <br/><code></code> <br/><code><span class="c1"># Аутентификация включена</span></code> <br/><code>xpack.security.enabled:<span class="w"> </span><span class="nb">true</span></code> <br/><code></code> <br/><code><span class="c1"># Запись данных в индексы включена</span></code> <br/><code>indices.id_field_data.enabled:<span class="w"> </span><span class="nb">true</span></code> <br/><code></code> <br/><code><span class="c1"># Геолокация отключена</span></code> <br/><code>ingest.geoip.downloader.enabled:<span class="w"> </span><span class="nb">false</span></code> <br/></pre></code></div>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5063">Установка, запуск, инициализация и остановка ПО в Windows</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620#paths_windows">Пути и содержимое директорий экземпляра ПО</a></li>
+</ul>
+</div>
 </article>
 </div>
 </div>

@@ -7,8 +7,9 @@ kbId: 4979
 
 Для того, чтобы скрыть кнопку в Шаблоне процесса, если пустой исполнитель (например, для кнопки ***"Завершить задачу"***), введите следующее выражение в условии:
 
-| AND(NOT(EMPTY($assignee)),$cmw.taskStatus == "cmw.taskStatus.inProgress") |
-| --- |
+```
+ AND(NOT(EMPTY($assignee)),$cmw.taskStatus == "cmw.taskStatus.inProgress")
+```
 
 **где:**
 

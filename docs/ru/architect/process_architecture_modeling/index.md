@@ -2,6 +2,9 @@
 title: Построение процессной архитектуры
 kbId: 4833
 tags:
+    - Architect
+    - архитект
+    - корпоративная архитектура
     - процессная архитектура
     - группы процессов
     - реестр процессов
@@ -68,7 +71,7 @@ hide:
     - [изменение типа или модификатора](#architect_process_architecture_design_entity_type_modifier_change);
     - [изменение свойств](#architect_process_architecture_design_entity_properties_configure);
     - [редактирование формы и атрибутов](#architect_process_architecture_design_entity_form_attributes_configure);
-    - [изменение цвета и размера на диаграмме ОШС](#architect_process_architecture_design_color_change_resize);
+    - [изменение цвета и размера на организационно-функциональной диаграмме](#architect_process_architecture_design_color_change_resize);
     - [перемещение в иерархии](#architect_process_architecture_design_hierarchy_change);
     - [дублирование](#architect_process_architecture_design_entity_clone);
     - [удаление](#architect_process_architecture_design_entity_delete).
@@ -157,7 +160,7 @@ _![Создание элемента на диаграмме](img/edit_diagram_c
 
 ## Переименование элемента процессной архитектуры {: #architect_process_architecture_design_entity_rename  .pageBreakBefore }
 
-## Переименование элемента на диаграмме с помощью его подписи
+### Переименование c помощью подписи элемента на диаграмме
 
 1. Дважды нажмите элемент в [конструкторе диаграммы][architect_process_architecture_diagram_designer].
 2. Введите новое название элемента в отобразившееся текстовое поле.
@@ -165,7 +168,7 @@ _![Создание элемента на диаграмме](img/edit_diagram_c
 
 _![Переименование элемента на диаграмме](img/process_element_rename.gif)_
 
-## Переименование элемента на диаграмме с помощью панели свойств
+### Переименование с помощью панели свойств на диаграмме
 
 1. Выберите элемент в [конструкторе диаграммы][architect_process_architecture_diagram_designer].
 2. Откройте панель свойств, нажав кнопку «**Свойства**» <i class="fa-light fa-sidebar-flip"></i>.
@@ -259,7 +262,7 @@ _![Изменение размера элемента](img/process_element_resiz
 
     _![Перемещение процесса на верхний уровень иерархии в реестре](img/process_architecture_modeling_moving_entity_in_registry_top_level.png)_
 
-## Перемещение элемента с помощью панели навигации
+### Перемещение элемента с помощью панели навигации
 
 В [панели навигации][navigation_panel] нажмите и перетащите процесс или группу процессов в новую родительскую группу.
 
@@ -293,7 +296,7 @@ _![Дублирование элемента процессной архитек
 !!! Warning "Внимание!"
     Элементы процессной архитектуры удаляются вместе со всеми дочерними элементами и всеми ссылками на них, в том числе с диаграмм.
 
-## Удаление с помощью диаграммы
+### Удаление с помощью диаграммы
 
 !!! warning "Внимание!"
 

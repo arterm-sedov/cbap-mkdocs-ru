@@ -7,8 +7,30 @@ kbId: 4965
 
 Для того, чтобы вычислить руководителя подразделения из Шаблона пользователя ( в случае, если руководитель определяется именно там, а не в Шаблоне записи), например, для использования при назначении задач, введите следующее выражение:
 
-| @prefix cmw: <http://comindware.com/logics#>.@prefix object: <http://comindware.com/ontology/object#>.@prefix account: <http://comindware.com/ontology/account#>.{     ("Sotrudniki" "Rukovoditelbool") object:findProperty ?rukovoditel.    ("Sotrudniki" "Podrazdelenie") object:findProperty ?userDiv.    ("Naryady" "NaryadPodrazdelenie") object:findProperty ?divNar.    ("Divisions" "Title") object:findProperty ?divID.                                                                                                                             ?item ?divNar ?div.        ?div ?divID ?divtext.        ?user a account:Account.        ?user ?userDiv ?userDivValue.        ?userDivValue == ?divtext.        ?user ?userDiv ?divtext.        ?user ?rukovoditel true.        ?user account:active true.        ?value == ?user.} |
-| --- |
+```
+
+@prefix cmw: <http://comindware.com/logics#>.
+@prefix object: <http://comindware.com/ontology/object#>.
+@prefix account: <http://comindware.com/ontology/account#>.
+{
+
+    ("Sotrudniki" "Rukovoditelbool") object:findProperty ?rukovoditel.
+    ("Sotrudniki" "Podrazdelenie") object:findProperty ?userDiv.
+    ("Naryady" "NaryadPodrazdelenie") object:findProperty ?divNar.
+    ("Divisions" "Title") object:findProperty ?divID.                                                                                                             
+        
+        ?item ?divNar ?div.
+        ?div ?divID ?divtext.
+        ?user a account:Account.
+        ?user ?userDiv ?userDivValue.
+        ?userDivValue == ?divtext.
+        ?user ?userDiv ?divtext.
+        ?user ?rukovoditel true.
+        ?user account:active true.
+        ?value == ?user.
+}
+
+```
 
 **где:**
 

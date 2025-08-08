@@ -1,0 +1,102 @@
+<h1>Configuring Form Rule Using Formula</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1gtqfv5lb1">Use Case</a></li>
+<li><a href="#mcetoc_1gtqfuuju0">Prerequisites</a></li>
+<li><a href="#mcetoc_1gtqg5ppp3">Instructions</a>
+<ul>
+<li><a href="#mcetoc_1gtqijebq0">Formula Syntax</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gu0168d40">See Also</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1gtqfv5lb1">Use Case</h2>
+<p>In the <strong>CMW Platform</strong>, you can define a set of rules for any form to control its element behavior.</p>
+<p>Each rule can include several conditional actions:</p>
+<ul>
+<li>Set field values</li>
+<li>Show field validation warnings and error messages</li>
+<li>Change element access mode: require entry, allow entry, read-only</li>
+<li>Hide elements</li>
+</ul>
+<p>In this article, we will create a form rule to hide the <em>Recipient</em> field from the form when this field is empty and the <em>Enter new customer details</em> box is checked.</p>
+<h2 id="mcetoc_1gtqfuuju0">Prerequisites</h2>
+<p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; font-size: 15px; font-weight: 300; letter-spacing: 0.2px; line-height: 25px; color: #545764; font-family: 'Open Sans', sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">To proceed with the example, create the templates and attributes as shown in the table below:</p>
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%; height: 261px;">
+<tbody>
+<tr style="height: 40px;">
+<th style="height: 40px; width: 20%;"><strong>Record template system name</strong></th>
+<th style="height: 40px; width: 20%;"><strong>Attribute and field display name (system name)</strong></th>
+<th style="width: 20%; height: 40px;"><strong>Attribute type</strong></th>
+<th style="width: 25%; height: 40px;"><strong>Description</strong></th>
+</tr>
+<tr style="height: 40px;">
+<td rowspan="2" style="width: 20%; height: 102px;"><em>Request</em></td>
+<td style="width: 20%; height: 102px;"><em>Recipient (recipient)</em></td>
+<td style="width: 20%; height: 102px;"><strong>Record</strong></td>
+<td style="width: 25%; height: 102px;">
+<p>Place this attribute on the form as the <em style="font-size: 14px; letter-spacing: 0.2px;">Recipient</em><span style="font-size: 14px; letter-spacing: 0.2px;"> field.</span></p>
+</td>
+</tr>
+<tr>
+<td style="width: 20%;"><em><span style="letter-spacing: 0.2px;">Enter new customer details (create_flag)</span></em></td>
+<td style="width: 20%;"><strong>Boolean</strong></td>
+<td style="width: 25%;">
+<p>Place this attribute on the form as the <em style="font-size: 14px; letter-spacing: 0.2px;">Enter new customer details </em>check<span style="font-size: 14px; letter-spacing: 0.2px;">box.</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-responsive"> </div>
+<h2 id="mcetoc_1gtqg5ppp3">Instructions</h2>
+<ol class="colored_numbers_list">
+<li>In the <em>Request</em> template, open the default form.</li>
+<li>Open the <strong><em>Form rules</em></strong> designer using the dropdown next to the form heading.</li>
+<li>Add a rule and an action to the rule.</li>
+<li>Select the action to display the <strong>Action properties</strong> pane.</li>
+<li>From the <strong>Form element</strong> dropdown, select the <em>Recipient </em>field<strong>.</strong></li>
+<li>From the <strong>Action </strong>dropdown, select <strong>Change access</strong><strong>.</strong></li>
+<li>From the <strong>New value </strong>dropdown, select <strong>Hide</strong><strong>.</strong></li>
+<li>In the <strong>Execution condition</strong> field, enter the <a href="#mcetoc_1gtqijebq0"><strong>formula</strong></a>:
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code"><code>AND(EMPTY($recipient),$create_flag == true)</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>Click <em><strong>Save</strong></em>.</li>
+</ol>
+<h3 id="mcetoc_1gtqijebq0">Formula Syntax</h3>
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%; height: 176px;">
+<tbody>
+<tr style="height: 40px;">
+<th style="width: 50%; height: 40px;">Element</th>
+<th style="width: 50%; height: 40px;">Description</th>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;"><code>AND()</code></td>
+<td style="width: 50%; height: 40px;">
+<p>This function takes two arguments and returns <code>true</code> if both arguments resolve to <code>true</code>, i.e., when the <em>Recipient</em> field is empty and the <em>Enter new customer details</em> box is checked.</p>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td style="height: 40px;"><code>$</code></td>
+<td style="height: 40px;">This prefix refers to an attribute in the current record context.</td>
+</tr>
+<tr style="height: 56px;">
+<td style="height: 56px;">
+<p><code>EMPTY()</code></p>
+</td>
+<td style="height: 56px;"><span style="font-size: 15px; letter-spacing: 0.2px;">This function returns <code>true</code> if its argument has an empty value</span><span style="letter-spacing: 0.2px;"><span style="font-size: 15px;">, i.e., when the <em>Recipient</em> attribute value is null.</span></span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="mcetoc_1gu0168d40">See Also</h2>
+<p><samp data-name="aid" data-title="" data-value="2070"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2070}</span></samp> </p>

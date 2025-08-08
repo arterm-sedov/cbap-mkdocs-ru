@@ -1,20 +1,126 @@
-<h1>Атрибут типа «Список значений». Вычисление значения по справочнику</h1><div class="md-container">
+<h1>Атрибут типа «Список значений». Вычисление значения по справочнику</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4916" kb-title="Атрибут типа «Список значений». Вычисление значения по справочнику">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
 <div class="mce-toc">
-<h2 class="toc-heading">Содержание</h2>
-<ul>
-<li><a href="#mcetoc_1hl3ofm5k0">Прикладная задача</a></li>
-<li><a href="#mcetoc_1hl3pdij72">Исходные данные</a></li>
-<li><a href="#mcetoc_1hkgc9ofi2">Практический пример</a></li>
-<li><a href="#mcetoc_1gk2vv81k5">Связанные статьи</a></li>
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#прикладная-задача">
+<span class="md-ellipsis">
+      Прикладная задача
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#исходные-данные">
+<span class="md-ellipsis">
+      Исходные данные
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-приложения">
+<span class="md-ellipsis">
+      Настройка приложения
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#тестирование">
+<span class="md-ellipsis">
+      Тестирование
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
 </ul>
 </div>
-<div class="md-content">
-<h2 id="mcetoc_1hl3ofm5k0">Прикладная задача</h2>
-<p>В этой статье представлен способ вычисления значения атрибута типа «<strong>Список значений</strong>» по справочнику из связанного шаблона.</p>
-<p>Для примера настроим простейшую форму заказа пассажирской перевозки следующим образом:</p>
-<ol>
-<li>Заказчик создаёт заявку на перевозку и выбирает её тип:
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Здесь представлен способ вычисления значения атрибута типа «<strong>Список значений</strong>» по справочнику из связанного шаблона.</p>
+<p>См. также <em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4779">подробное описание и другие примеры использования атрибута типа «Список значений»</a></em>.</p>
+<div class="notice notice-success">
+<p class="admonition-title">Структура атрибута типа «Список значений»</p>
+<ul>
+<li>Атрибут типа «<strong>Список значений</strong>» хранит ID значения, выбранного из предварительно заданного списка.</li>
+<li>Список возможных значений настраивается в свойствах атрибута и не может быть изменён при выполнении приложения.</li>
+<li>Каждое возможное значение содержит:<ul>
+<li><strong>Системное имя</strong> значения.</li>
+<li>Отображаемые названия на <strong>русском</strong>, <strong>английском</strong> и <strong>немецком</strong> языках (достаточно указать название на одном языке).</li>
+<li><strong>Цвет</strong> — числовой код <strong>в десятичном формате</strong>. Для поиска кодов цветов и их преобразования из шестнадцатеричной в десятичную форму можно воспользоваться, например, сайтом <a class="mkdocs_imported_link" href="https://convertingcolors.com/">https://convertingcolors.com/</a>.</li>
+<li><strong>Значок</strong> — строка с кодом FontAwesome. Для поиска кодов значков можно воспользоваться встроенной <strong>галереей значков</strong> или сайтом <a class="mkdocs_imported_link" href="https://fontawesome.com/">https://fontawesome.com/</a>.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="notice notice-tip">
+<p class="admonition-title">Получение данных из атрибута типа «Список значений» с помощью формулы</p>
+<p>С помощью <strong>формулы</strong> для атрибута типа «<strong>Список значений</strong>» можно получить:</p>
+<ul>
+<li>
+<p>ID текущего значения атрибута:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">$</span><span class="n">EnumAttributeSystemName</span><span class="err">—</span><span class="o">&gt;</span><span class="n">cmw</span><span class="p">.</span><span class="n">variantName</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>системное имя значения атрибута:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">$</span><span class="n">EnumAttributeSystemName</span><span class="err">—</span><span class="o">&gt;</span><span class="n">cmw</span><span class="p">.</span><span class="n">variantAlias</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>код значка значения атрибута:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">$</span><span class="n">EnumAttributeSystemName</span><span class="err">—</span><span class="o">&gt;</span><span class="n">cmw</span><span class="p">.</span><span class="n">variantIcon</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>цвет значения атрибута в десятичном формате:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">$</span><span class="n">EnumAttributeSystemName</span><span class="err">—</span><span class="o">&gt;</span><span class="n">cmw</span><span class="p">.</span><span class="n">color</span></code> <br/></pre></code></div>
+</li>
+</ul>
+</div>
+<div class="notice notice-tip">
+<p class="admonition-title">Сравнение и фильтрация значения атрибута с помощью формулы</p>
+<p>С помощью <strong>формулы</strong> сравнить значение атрибута типа «<strong>Список значений</strong>» с требуемым можно по системному имени значения следующими способами:</p>
+<ul>
+<li>
+<p>равенство</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">$</span><span class="n">EnumAttributeSystemName</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">EnumValueSystemName</span></code> <br/></pre></code></div>
+<p>или</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">EQUALS</span><span class="p">(</span><span class="err">$</span><span class="n">EnumAttributeSystemName</span><span class="o">-&gt;</span><span class="n">cmw</span><span class="p">.</span><span class="n">variantAlias</span><span class="p">,</span><span class="w"> </span><span class="s">"EnumValueSystemName"</span><span class="p">)</span></code> <br/></pre></code></div>
+<p>или</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">EQUALS</span><span class="p">(</span><span class="err">$</span><span class="n">EnumAttributeSystemName</span><span class="p">,</span><span class="w"> </span><span class="n">ENUMVALUE</span><span class="p">(</span><span class="s">"EnumAttributeSystemName"</span><span class="p">,</span><span class="w"> </span><span class="s">"EnumValueSystemName"</span><span class="p">))</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>неравенство</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">$</span><span class="n">EnumAttributeSystemName</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="n">EnumValueSystemName</span></code> <br/></pre></code></div>
+<p>или</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">NOT</span><span class="p">(</span><span class="n">EQUALS</span><span class="p">(</span><span class="err">$</span><span class="n">EnumAttributeSystemName</span><span class="o">-&gt;</span><span class="n">cmw</span><span class="p">.</span><span class="n">variantAlias</span><span class="p">,</span><span class="w"> </span><span class="s">"EnumValueSystemName"</span><span class="p">))</span></code> <br/></pre></code></div>
+<p>или</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">NOT</span><span class="p">(</span><span class="n">EQUALS</span><span class="p">(</span><span class="err">$</span><span class="n">EnumAttributeSystemName</span><span class="p">,</span><span class="w"> </span><span class="n">ENUMVALUE</span><span class="p">(</span><span class="s">"EnumAttributeSystemName"</span><span class="p">,</span><span class="w"> </span><span class="s">"EnumValueSystemName"</span><span class="p">)))</span></code> <br/></pre></code></div>
+</li>
+</ul>
+</div>
+<h2 class="pageBreakBefore" id="прикладная-задача">Прикладная задача</h2>
+<p>Требуется настроить простейшую форму заказа транспортных услуг со следующей бизнес-логикой:</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Заказчик создаёт заявку на перевозку и выбирает её тип:</p>
 <ul>
 <li>автобусная перевозка;</li>
 <li>грузоперевозка;</li>
@@ -22,164 +128,172 @@
 <li>перевозка на микроавтобусе.</li>
 </ul>
 </li>
-<li>На форме заявке автоматически отображается подходящий для выполнения заявки тип транспортного средства.</li>
+<li>
+<p>На форме заявки и в списке заявок должен автоматически отображаться подходящий для выполнения заявки тип транспортного средства с цветовой маркировкой и соответствующим значком.</p>
+</li>
 </ol>
-<h2 id="mcetoc_1hl3pdij72">Исходные данные</h2>
+<h2 id="исходные-данные">Исходные данные</h2>
 <p>Для выполнения примера создайте указанные в следующей таблице шаблоны и атрибуты.</p>
-</div>
-</div>
-</div>
-<table border="1" style="height: 181px;">
+<table style="width: 100%;">
+<thead>
+<tr>
+<th><strong>Шаблон записи</strong></th>
+<th><strong>Название / системное имя атрибута</strong></th>
+<th><strong>Тип атрибута</strong></th>
+<th><strong>Описание</strong></th>
+</tr>
+</thead>
 <tbody>
-<tr style="height: 64px;">
-<td style="height: 64px; width: 326.285px;"><strong>Название / системное имя шаблона записи</strong></td>
-<td style="height: 64px; width: 276.892px;"><strong>Название / системное имя атрибута</strong></td>
-<td style="height: 64px; width: 121.337px;"><strong>Тип атрибута</strong></td>
-<td style="height: 64px; width: 1035.47px;"><strong>Описание</strong></td>
+<tr>
+<td><em>Типы заявок</em></td>
+<td><em>Наименование типа заявки</em> / <code>Наименованиетипазаявки</code></td>
+<td><strong>Текст</strong></td>
+<td>Атрибут <em>«Наименование типа заявки»</em> содержит наглядное название типа заявки.</td>
 </tr>
-<tr style="height: 39px;">
-<td rowspan="2" style="height: 78px; width: 326.285px;">
-<p><em>Типы заявок / </em><em>RequestTypes</em> <br/><em><br/></em></p>
-</td>
-<td style="height: 39px; width: 276.892px;"><em>Наименование типа заявки / Name</em></td>
-<td style="height: 39px; width: 121.337px;"><strong>Текст</strong></td>
-<td rowspan="2" style="vertical-align: middle; height: 78px; width: 1035.47px;">
-<p>Атрибут <em>«Наименование типа заявки»</em> содержит наглядное название типа заявки.</p>
-<p>Атрибут <em>«Код типа заявки»</em> содержит условное обозначение типа заявки.</p>
-</td>
+<tr>
+<td></td>
+<td><em>Код типа заявки</em> / <code>Кодтипазаявки</code></td>
+<td><strong>Текст</strong></td>
+<td>Атрибут <em>«Код типа заявки»</em> содержит условное обозначение типа заявки.</td>
 </tr>
-<tr style="height: 39px;">
-<td style="height: 39px; width: 276.892px;"><em>Код типа заявки / Code</em></td>
-<td style="height: 39px; width: 121.337px;"><strong>Текст</strong></td>
-</tr>
-<tr style="height: 39px;">
-<td style="height: 39px; width: 326.285px; vertical-align: middle;"><em>Заявки / Requests</em></td>
-<td style="height: 39px; width: 276.892px; vertical-align: middle;"><em>Тип заявки / RequestType</em></td>
-<td style="height: 39px; width: 121.337px; vertical-align: middle;"><strong>Запись</strong></td>
-<td style="vertical-align: middle; height: 39px; width: 1035.47px;">
-<p>Атрибут <em>«Тип заявки»</em> связан с шаблоном <em>«Типы заявок»</em>.</p>
-</td>
+<tr>
+<td><em>Заявки</em></td>
+<td><em>Тип заявки</em> / <code>Типзаявки</code></td>
+<td><strong>Запись</strong></td>
+<td>Атрибут <em>«Тип заявки»</em> связан с шаблоном <em>«Типы заявок»</em>.</td>
 </tr>
 </tbody>
 </table>
-<div class="md-container">
-<div class="md-main__inner md-grid">
-<div class="md-content">
-<h2 id="mcetoc_1hkgc9ofi2">Практический пример</h2>
+<h2 class="pageBreakBefore" id="настройка-приложения">Настройка приложения</h2>
 <ol class="colored_numbers_list">
 <li>
-<p>В шаблоне <em>«Типы заявок» </em>создайте четыре записи:</p>
-<div class="table-responsive">
-<table border="1" style="width: 100%; border-collapse: collapse;">
+<p>В шаблоне <em>«Типы заявок»</em> создайте четыре записи:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Наименование типа заявки</th>
+<th>Код типа заявки</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<th style="width: 33.3333%;">Наименование типа заявки</th>
-<th style="width: 33.3333%;">Код типа заявки</th>
+<td>Автобусная перевозка</td>
+<td>bus</td>
 </tr>
 <tr>
-<td style="width: 33.3333%;">Автобусная перевозка</td>
-<td style="width: 33.3333%;">bus</td>
+<td>Грузоперевозка</td>
+<td>truck</td>
 </tr>
 <tr>
-<td style="width: 33.3333%;">Грузоперевозка</td>
-<td style="width: 33.3333%;">truck</td>
+<td>Перевозка на микроавтобусе</td>
+<td>van</td>
 </tr>
 <tr>
-<td style="width: 33.3333%;">Перевозка на микроавтобусе</td>
-<td style="width: 33.3333%;">van</td>
-</tr>
-<tr>
-<td style="width: 33.3333%;">Перевозка на легковом автомобиле</td>
-<td style="width: 33.3333%;">passengerCar</td>
+<td>Перевозка на легковом автомобиле</td>
+<td>passengerCar</td>
 </tr>
 </tbody>
 </table>
-</div>
 </li>
-<li>Поместите на форму и в таблицу шаблона <em>«Заявки»</em> атрибут <em>«Тип заявки».</em></li>
-<li>Создайте и поместите на форму и в таблицу шаблона <em>«Заявки»</em> атрибут <em>«Тип транспортного средства»</em>:
+<li>
+<p>Поместите на форму и в таблицу шаблона <em>«Заявки»</em> атрибут <em>«Тип заявки».</em></p>
+</li>
+<li>
+<p>Создайте и поместите на форму и в таблицу шаблона <em>«Заявки»</em> атрибут <em>«Тип транспортного средства»</em>:</p>
 <ul>
-<li><strong> Тип данных:</strong> <strong>Список значений</strong></li>
-<li><strong>Формат отображения: </strong><strong>Бейдж</strong></li>
-<li><strong>Вычислять автоматически: </strong>флажок установлен</li>
-<li><strong>Вычисляемое значение:</strong> <strong><strong>формула</strong> </strong>
-<pre class="source_code_container"><code> ENUMVALUE("VehicleType",$RequestType-&gt;Code)</code></pre>
+<li><strong>Тип данных:</strong> <strong>Список значений</strong></li>
+<li><strong>Формат отображения:</strong><strong>Бейдж</strong></li>
+<li><strong>Вычислять автоматически:</strong> флажок установлен</li>
+<li><strong>Вычисляемое значение:</strong> <strong>формула</strong></li>
+</ul>
+<div class="highlight"><code><pre><span></span><code> ENUMVALUE("VehicleType",$Типзаявки-&gt;Кодтипазаявки)</code> <br/></pre></code></div>
 <div class="notice notice-success">
 <p class="admonition-title">Синтаксис формулы</p>
 <ul>
 <li><code>ENUMVALUE(enumAttributeSystemName, enumValueSystemName)</code> — эта функция принимает два аргумента: системное имя атрибута типа «<strong>Список значений</strong>» и системное имя одного из значений этого атрибута, и возвращает ID указанного значения.</li>
-<li><code>ENUMVALUE("VehicleType",$RequestType-&gt;Code)</code> — возвращает строку с ID значения атрибута <code>VehicleType</code>, соответствующего значению атрибута <code>Code</code> из записи шаблона <em>«Типы заявок»</em>, на которую ссылается атрибут <code>RequestType</code>.</li>
-<li>Данная формула присваивает атрибуту <em>«Тип транспортного средства» </em>значение, соответствующее  из справочника типов заявок</li>
+<li><code>ENUMVALUE("VehicleType",$Типзаявки-&gt;Кодтипазаявки)</code> — возвращает строку с ID значения атрибута <code>VehicleType</code>, соответствующего значению атрибута <code>Кодтипазаявки</code> из записи шаблона <em>«Типы заявок»</em>, на которую ссылается атрибут <code>Типзаявки</code>.</li>
+<li>Данная формула присваивает атрибуту <em>«Тип транспортного средства»</em> значение, соответствующее  из справочника типов заявок</li>
 </ul>
 </div>
-</li>
-<li><strong>Список значений:</strong>
-<table style="width: 99.8794%; height: 200px;">
+<ul>
+<li><strong>Список значений:</strong></li>
+</ul>
+<table style="width: 100%;">
 <thead>
-<tr style="height: 40px;">
-<th style="width: 30.03%; height: 0px;">Системное имя</th>
-<th style="width: 30.9309%; height: 0px;">RU</th>
-<th style="width: 19.2793%; height: 0px;">Цвет</th>
-<th style="width: 19.6997%; height: 0px;">Значок</th>
+<tr>
+<th>Системное имя</th>
+<th>RU</th>
+<th>Цвет</th>
+<th>Значок</th>
 </tr>
 </thead>
 <tbody>
-<tr style="height: 40px;">
-<td style="width: 30.03%; height: 0px;">bus</td>
-<td style="width: 30.9309%; height: 0px;">Автобус</td>
-<td style="width: 19.2793%; height: 0px;"><span style="background-color: #ff0000; color: #ffffff;">#ff0000</span></td>
-<td style="width: 19.6997%; height: 0px;"><em class="fa-light fa-bus">‌</em> bus</td>
+<tr>
+<td><code>bus</code></td>
+<td><em>Автобус</em></td>
+<td><code style="background-color: #ff0000; color: #ffffff;">#ff0000</code></td>
+<td><i class="fa-light fa-bus">‌<!--icon--></i> bus</td>
 </tr>
-<tr style="height: 40px;">
-<td style="width: 30.03%; height: 0px;">passengerCar</td>
-<td style="width: 30.9309%; height: 0px;">Легковой автомобиль</td>
-<td style="width: 19.2793%; height: 0px;"><span style="background-color: #0000ff; color: #ffffff;">#0000ff</span></td>
-<td style="width: 19.6997%; height: 0px;"> <em class="fa-light fa-car">‌</em> car</td>
+<tr>
+<td><code>passengerCar</code></td>
+<td><em>Легковой автомобиль</em></td>
+<td><code style="background-color: #0000ff; color: #ffffff;">#0000ff</code></td>
+<td><i class="fa-light fa-car">‌<!--icon--></i> car</td>
 </tr>
-<tr style="height: 40px;">
-<td style="width: 30.03%; height: 0px;">truck</td>
-<td style="width: 30.9309%; height: 0px;">Грузовик</td>
-<td style="width: 19.2793%; height: 0px;"><span style="background-color: #00ff00;">#00ff00</span></td>
-<td style="width: 19.6997%; height: 0px;"> <em class="fa-light fa-truck">‌</em> truck</td>
+<tr>
+<td><code>truck</code></td>
+<td><em>Грузовик</em></td>
+<td><code style="background-color: #00ff00;">#00ff00</code></td>
+<td><i class="fa-light fa-truck">‌<!--icon--></i> truck</td>
 </tr>
-<tr style="height: 40px;">
-<td style="width: 30.03%; height: 0px;">van</td>
-<td style="width: 30.9309%; height: 0px;">Микроавтобус</td>
-<td style="width: 19.2793%; height: 0px;"><span style="background-color: #ffff00;">#ffff00</span></td>
-<td style="width: 19.6997%; height: 0px;"> <em class="fa-light fa-van-shuttle">‌</em> van-shuttle</td>
+<tr>
+<td><code>van</code></td>
+<td><em>Микроавтобус</em></td>
+<td><code style="background-color: #ffff00;">#ffff00</code></td>
+<td><i class="fa-light fa-van-shuttle">‌<!--icon--></i> van-shuttle</td>
 </tr>
 </tbody>
 </table>
-<div class="notice notice-info">
-<p class="admonition-title">Примечание</p>
-<p>Системные имена значений атрибута должны совпадать со значениями атрибута <em>«Код типа заявки» ранее </em>созданных записях шаблона <em>«Типы заявок»: </em><code>bus</code>, <code>passengerCar</code>, <code>truck</code>, <code>van</code></p>
+<div class="notice notice-warning">
+<p class="admonition-title">Важно!</p>
+<p>Системные имена значений атрибута должны совпадать со значениями атрибута <em>«Код типа заявки»</em> в ранее созданных записях шаблона <em>«Типы заявок»</em>: <code>bus</code>, <code>passengerCar</code>, <code>truck</code>, <code>van</code></p>
 </div>
-</li>
-</ul>
-</li>
-<li>Откройте форму и в поле <em>«Тип заявки»</em> выберите любое значение.</li>
-<li>В поле <em>«Тип транспортного средства» </em>должны автоматически отображаться соответствующие значения.
-<figure class="screenshot_with_caption" style="font-size: 15px !important;">
-<p><img class="img-responsive" src="https://kb.comindware.ru/assets/enum_field_calculate_by_reference.gif"/></p>
-<figcaption class="caption" style="font-size: 15px !important;">Автоматическое вычисление значения атрибута типа «Список значений» по значению атрибута из справочника</figcaption>
-</figure>
-</li>
-<li>Откройте таблицу с записями шаблона <em>«Заявки»</em>.</li>
-<li>Столбец <em>«Тип транспортного средства»</em> должен выглядеть как показано на иллюстрации.
-<figure class="screenshot_with_caption" style="font-size: 15px !important;">
-<p><img alt="Представление атрибута типа «Список значений» в таблице" class="img-responsive" src="https://kb.comindware.ru/assets/img_65b75c467bf5d.png"/></p>
-<figcaption class="caption" style="font-size: 15px !important;">Представление атрибута типа «Список значений» в таблице</figcaption>
-</figure>
 </li>
 </ol>
-<h2 id="mcetoc_1gk2vv81k5">Связанные статьи</h2>
-<p><strong><a href="https://kb.comindware.ru/article.php?id=4779">Атрибут типа «Список значений»</a></strong></p>
-<p><strong><a href="https://kb.comindware.ru/article.php?id=4780">Атрибут типа «Запись»</a></strong></p>
-<p><a href="https://kb.comindware.ru/article.php?id=4913"><strong>Атрибут типа «Список значений». Вычисление текущего значения</strong></a></p>
+<h2 class="pageBreakBefore" id="тестирование">Тестирование</h2>
+<ol class="colored_numbers_list">
+<li>Создайте запись в шаблоне <em>«Заявки»</em>.</li>
+<li>На форме заявки выберите любой <em>тип заявки</em>.</li>
+<li>
+<p>В поле <em>«Тип транспортного средства»</em> должны автоматически отображаться соответствующие значения.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Автоматическое вычисление значения атрибута типа «Список значений» по значению атрибута из справочника" src="https://kb.comindware.ru/assets/enum_field_calculate_by_reference.gif"/><figcaption class="caption">Автоматическое вычисление значения атрибута типа «Список значений» по значению атрибута из справочника</figcaption></figure></p>
+</li>
+<li>
+<p>Откройте таблицу с записями шаблона <em>«Заявки»</em>.</p>
+</li>
+<li>
+<p>Столбец <em>«Тип транспортного средства»</em> должен выглядеть как показано на иллюстрации.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Представление атрибута типа «Список значений» в таблице" src="https://kb.comindware.ru/assets/img_65b75c467bf5d.png"/><figcaption class="caption">Представление атрибута типа «Список значений» в таблице</figcaption></figure></p>
+</li>
+</ol>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4779">Атрибут типа «Список значений»</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4780">Атрибут типа «Запись»</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4913">Атрибут типа «Список значений». Вычисление текущего значения</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4916">Атрибут типа «Список значений». Вычисление значения по справочнику</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5077">Атрибут типа «Список значений». Фильтрация связанных записей по значению атрибута с помощью N3</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4920">Атрибут типа «Список значений». Вычисление значения с помощью N3 и формул</a></em></li>
+</ul>
+</article>
 </div>
 </div>
-<p><a class="md-top md-icon mkdocs_imported_link" href="#"> <em class="fa-light fa-arrow-up">‌</em> К началу </a></p>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
 </div>
-<div class="md-dialog">
-<div class="md-dialog__inner md-typeset"> </div>
-</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

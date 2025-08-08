@@ -9,12 +9,18 @@ kbId: 4951
 
 - на языке выражений:
 
-| EMPTY($assignee) |
-| --- |
+```
+ EMPTY($assignee)
+```
 
 - на языке N3
 
-| @prefix cmw: <http://comindware.com/logics#>.{not{?item cmw:assignee ?.}.true -> ?value.} |
-| --- |
+```
+@prefix cmw: <http://comindware.com/logics#>.
+{
+not{?item cmw:assignee ?.}.
+true -> ?value.
+}
+```
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

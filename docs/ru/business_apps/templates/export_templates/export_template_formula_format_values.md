@@ -15,7 +15,7 @@ kbId: 4794
 
 Аналогичным образом можно форматировать значения при использовании функций `FORMAT()` и `FORMATLOC()`.
 
-## Форматирование чисел
+## Форматирование чисел {: #export_template_file_formula_format_values_number_formatting }
 
 Значение атрибута типа «**Число**» экспортируется в документ Word как текст.
 
@@ -35,7 +35,7 @@ kbId: 4794
     FORMAT("{0:N2}",LIST($numberAttributeSystemName))
     ```
 
-## Форматирование дат и времени {: .pageBreakBefore }
+## Форматирование дат и времени {: #export_template_file_formula_format_values_date_time_formatting .pageBreakBefore }
 
 Значение атрибута типа «**Дата и время**» экспортируется в документ Word как текст.
 
@@ -53,7 +53,7 @@ kbId: 4794
     FORMAT("{0:dddd, dd MMMM yyyy 'г.'}",LIST($dateAttributeSystemName))
     ```
 
-### Примеры форматирования дат и времени
+### Примеры форматирования дат и времени {: #export_template_file_formula_format_values_date_time_formatting_examples }
 
 | **Формат** | **Результат** |
 | --- | --- |
@@ -76,7 +76,7 @@ kbId: 4794
 | `HH:mm:ss` | 05:50:06 |
 | `MMMM yyyy 'г.'` | май 2024 г. |
 
-### Символы форматирования дат и времени
+### Символы форматирования дат и времени {: #export_template_file_formula_format_values_date_time_formatting_symbols }
 
 | **Символ** | **Описание** |
 | --- | --- |
@@ -120,7 +120,7 @@ kbId: 4794
 | `ffffff` | Миллионные доли секунды. |
 | `fffffff` | Десятимиллионные доли секунды. |
 
-## Форматирование значений длительности {: .pageBreakBefore }
+## Форматирование значений длительности {: #export_template_file_formula_format_values_duration_formatting .pageBreakBefore }
 
 Значение атрибута типа «**Длительность**» экспортируется в документ Word как текст.
 
@@ -138,7 +138,7 @@ kbId: 4794
     FORMAT("{0:dd' д. 'hh':'mm':'ss}",LIST($durationAttributeSystemName))
     ```
 
-### Примеры форматирования значений длительности
+### Примеры форматирования значений длительности {: #export_template_file_formula_format_values_duration_formatting_examples }
 
 | **Формат** | **Результат** |
 | --- | --- |
@@ -149,7 +149,7 @@ kbId: 4794
 | `d' д 'hh' ч 'mm' м 'ss 'c'` | 1 д 03 ч 01 м 01 с |
 | `d' д 'h' ч '` | 1 д 3 ч |
 
-### Символы форматирования длительности
+### Символы форматирования длительности  {: #export_template_file_formula_format_values_duration_formatting_symbols }
 
 | **Элемент** | **Описание** |
 | --- | --- |
@@ -169,7 +169,7 @@ kbId: 4794
 | `fffffff` | Доли секунды в диапазоне 0000001–9999999. |
 | `FFFFFFF` | Доли секунды в диапазоне 0000001–9999999, выводится минимально возможное количество цифр. |
 
-## Форматирование логических значений {: .pageBreakBefore }
+## Форматирование логических значений {: #export_template_file_formula_format_values_boolean_formatting .pageBreakBefore }
 
 Значение атрибута типа «**Логический**» экспортируется как строка «*Истина»* или *«Ложь*».
 
@@ -179,7 +179,7 @@ kbId: 4794
 FORMAT("{0}",LIST(IF($attributeSystemName == true,"Согласовано","Не согласовано")))
 ```
 
-## Форматирование данных аккаунта
+## Форматирование данных аккаунта {: #export_template_file_formula_format_values_account_data_formatting }
 
 Посредством атрибута типа «**Аккаунт**» можно экспортировать данные пользователя (значения атрибутов аккаунта), например, адрес эл.&nbsp;почты и должность.
 
@@ -190,7 +190,7 @@ FORMAT("{0}",LIST(IF($attributeSystemName == true,"Согласовано","Не
 
 См. также [список стандартных атрибутов аккаунта][account_template_attribute_system_names].
 
-## Форматирование атрибутов связанных записей
+## Форматирование атрибутов связанных записей {: #export_template_file_formula_format_values_related_record_attributes_formatting }
 
 Атрибут типа «**Запись**» можно экспортировать атрибуты связанных записей, указывая атрибут связанного шаблона через точку после системного имени атрибута типа «**Запись**».
 
@@ -203,19 +203,19 @@ FORMAT("{0}",LIST(IF($attributeSystemName == true,"Согласовано","Не
 
     Для формирования гиперссылки на запись перед системным атрибута типа «**Запись**» символ `#`, например, {% raw %}`{#recordAttributeSystemName}`{% endraw %}.
 
-## Форматирование значений при экспорте коллекции записей {: .pageBreakBefore }
+## Форматирование значений при экспорте коллекции записей {: #export_template_file_formula_format_values_related_record_export_formatting .pageBreakBefore }
 
 Для атрибута типа «**Запись**» с несколькими значениями (коллекции) можно экспортировать как столбцы коллекции, так и значения атрибутов связанных шаблонов.
 
 При этом можно форматировать значения атрибутов.
 
-### Пример таблицы для экспорта коллекции
+### Пример таблицы для экспорта коллекции {: #export_template_file_formula_format_values_related_record_export_table_example }
 
 | Дата | Название | Количество | Сумма |
 | --- | --- | --- | --- |
 | `{foreach:Collection}{Date:dd.MM.yyyy}` | `{Type.Name}` | `{Quantity:N1}` | `{Sum:N2}{end:Collection}` |
 
-### Синтаксис экспорта атрибутов коллекции
+### Синтаксис экспорта атрибутов коллекции {: #export_template_file_formula_format_values_related_record_export_syntax }
 
 - `{foreach:Collection}`
     - `foreach` — объявление начала цикла по коллекции записей в первом столбце строки.

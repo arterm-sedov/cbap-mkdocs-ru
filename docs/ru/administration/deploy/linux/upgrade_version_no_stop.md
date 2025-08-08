@@ -72,6 +72,8 @@ kbId: 5097
     - `<instanceName>` — имя экземпляра ПО.
     - `<database_backup_path>` — путь к внешнему хранилищу базы данных.
 
+{% include-markdown ".snippets/pdfPageBreakHard.md" %}
+
 3. Скопируйте файлы конфигурации во внешнее хранилище:
 
     - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)

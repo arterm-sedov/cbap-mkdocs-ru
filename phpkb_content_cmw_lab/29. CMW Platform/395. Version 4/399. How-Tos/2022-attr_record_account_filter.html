@@ -1,0 +1,140 @@
+<h1>Configuring Context-Dependent Filter for Record Attribute</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1gtochncc0">Use Case</a></li>
+<li><a href="#mcetoc_1gtoco9i62">Prerequisites</a></li>
+<li><a href="#mcetoc_1gtocn1t11">Instructions</a></li>
+<li><a href="#mcetoc_1gu02obf00">See Also</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1gtochncc0">Use Case</h2>
+<p>In the <strong>CMW Platform</strong>, a <strong>Record</strong> attribute is used to select values from another record template.</p>
+<p>By default, a <strong>Record</strong> field lists all records linked to the attribute. But in some scenarios, you might want to show only certain records. </p>
+<p>To limit the record set displayed in the <strong>Record</strong> field, use the <strong>Filter</strong> field in the <strong>Field properties</strong> pane of the form designer.</p>
+<p>In this article, we will configure a city selector dropdown to display the cities from the country where an employee plans to travel.</p>
+<h2 id="mcetoc_1gtoco9i62">Prerequisites</h2>
+<p>In our example, we have a database of countries, cities, and travel requests. When creating a travel request, an employee selects a destination city. Instead of displaying all the cities from all the countries, we will filter the cities list by the selected country of the business trip.</p>
+<p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; font-size: 15px; font-weight: 300; letter-spacing: 0.2px; line-height: 25px; color: #545764; font-family: 'Open Sans', sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">To proceed with the example, create the templates and attributes as shown in the table below:</p>
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%; height: 339px;">
+<tbody>
+<tr style="height: 40px;">
+<th style="height: 40px; width: 20%;"><strong>Record template display name (system name)</strong></th>
+<th style="height: 40px; width: 20%;"><strong>Attribute display name (system name)</strong></th>
+<th style="width: 20%; height: 40px;"><strong>Attribute type</strong></th>
+<th style="width: 25%; height: 40px;"><strong>Description</strong></th>
+</tr>
+<tr style="height: 40px;">
+<td rowspan="2" style="height: 104px; width: 20%;"><em>Countries (countries)</em></td>
+<td style="height: 40px; width: 20%;"><em>Title (title)</em></td>
+<td style="width: 20%; height: 40px;"><strong>Text</strong></td>
+<td style="width: 25%; height: 40px;">Stores the country name.</td>
+</tr>
+<tr style="height: 64px;">
+<td style="width: 20%; height: 64px;"><em>Cities of the country (cities_of_the_country)</em></td>
+<td style="width: 20%; height: 64px;"><strong>Record</strong></td>
+<td style="width: 25%; height: 64px;">
+<p>The  <em>cities_of_the_country </em>attribute is linked to the <em>Cities</em> template.</p>
+<p>The  <strong>Store multiple values </strong>box is checked.</p>
+</td>
+</tr>
+<tr style="height: 39px;">
+<td rowspan="2" style="width: 20%; height: 78px;"><em>Cities (cities)</em></td>
+<td style="width: 20%; height: 39px;"><em>Title (title) </em></td>
+<td style="width: 20%; height: 39px;"><strong>Text</strong></td>
+<td style="width: 25%; height: 39px;">Stores the city name.</td>
+</tr>
+<tr style="height: 39px;">
+<td style="width: 20%; height: 39px;"><em>Country (country)</em></td>
+<td style="width: 20%; height: 39px;"><strong>Record</strong></td>
+<td style="width: 25%; height: 39px;">The <em>country</em> attribute is linked to the <em>Countries</em> template.</td>
+</tr>
+<tr style="height: 39px;">
+<td rowspan="3" style="width: 20%; height: 117px;"><em>Travel requests (travel_requests)</em></td>
+<td style="width: 20%; height: 39px;"><em>Title (title) </em></td>
+<td style="width: 20%; height: 39px;"><strong>Text</strong></td>
+<td style="width: 25%; height: 39px;">Stores the request name.</td>
+</tr>
+<tr style="height: 39px;">
+<td style="width: 20%; height: 39px;"><em>Country (request_country)</em></td>
+<td style="width: 20%; height: 39px;"><strong>Record</strong></td>
+<td style="width: 25%; height: 39px;">The <em>request_country</em> attribute is linked to the <em>Countries</em> template.</td>
+</tr>
+<tr style="height: 39px;">
+<td style="width: 20%; height: 39px;"><em>City (request_city)</em></td>
+<td style="width: 20%; height: 39px;"><strong>Record</strong></td>
+<td style="width: 25%; height: 39px;">The <em>request_citiy </em>attribute is linked to the <em>Cities</em> template.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="mcetoc_1gtocn1t11">Instructions</h2>
+<ol class="colored_numbers_list">
+<li>Open the default form for the <em>Travel requests</em> template for editing.</li>
+<li>Place the following attributes on the form: <em>Title, Country</em>, and<em> City </em>from the <em>Travel requests</em> template.</li>
+<li>Select the <em>Cities</em> field on the form to display its <strong>Field properties</strong> pane.</li>
+<li>In the <strong>Appearance</strong> property, select <strong>Dropdown</strong>.</li>
+<li>In the <strong>Filter</strong> property, define the filter using one of the following options:
+<ul>
+<li><strong>Attribute</strong> — select the <em>Countries → Cities of the country </em>attribute from the dropdown<em><strong>.</strong></em></li>
+<li><strong>Formula</strong> — write the following expression in CMW formula language:
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">
+<p><code>from a in db-&gt;cities where a-&gt; country == $request_country select a-&gt;id</code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li><strong>N3</strong> — write the following expression in N3 language:
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">
+<p><code>@prefix container: &lt;http://comindware.com/ontology/container#&gt;.</code></p>
+<p><code>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.</code></p>
+<p><code>@prefix math: &lt;http://www.w3.org/2000/10/swap/math#&gt;.</code></p>
+<p> </p>
+<p><code>{</code></p>
+<p><code>    ("cities" "country") object:findProperty ?citiescountryProp.</code></p>
+<p><code>    ("travel_requests" "request_country") object:findProperty ?tr_countryProp.</code></p>
+<p> </p>
+<p><code>    ?item ?tr_countryProp ?tr_country.</code></p>
+<p><code>    ?value a [object:alias "cities"].</code></p>
+<p><code>    ?value ?citiescountryProp ?tr_country.</code></p>
+<p><code>}</code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li><strong>DMN</strong> — select the <em>Cities</em> template as the <strong>Data source</strong> and configure the DMN table as shown below:
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="DMN filter example" class="img-responsive" height="411" src="https://kb.cmwlab.com/assets/img_64358119dbc92.png" width="941"/></p>
+<p><em>DMN filter example</em></p>
+</div>
+</li>
+</ul>
+</li>
+<li>Save the form.</li>
+<li>Create or open a <em>Travel requests</em> record.</li>
+<li>Test the filter:
+<ul>
+<li>Select the <em>Country</em>.</li>
+<li>Select the <em>City</em>.</li>
+<li>The <em>City</em> dropdown should list the cities of the selected country.</li>
+</ul>
+</li>
+</ol>
+<div class="blue_note"><strong>Note: </strong>The user needs sufficient access rights to view the country and city records. If a dropdown does not show any entries, check the access rights in the user's role.</div>
+<div class="alert-message-tpl">
+<p><strong>Tip: </strong>Use the form rules to configure a dynamic field behavior for more convenient data entry. See <samp data-name="aid" data-title="" data-value="1987"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>{Article-ID:1987}</span></samp>.</p>
+</div>
+<h2 id="mcetoc_1gu02obf00">See Also</h2>
+<p><samp data-name="aid" data-title="" data-value="2020"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2020}</span></samp> </p>

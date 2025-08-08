@@ -17,7 +17,7 @@ kbId: 4611
 - <https://ruvds.com/ru/helpcenter/kak-nastroit-nginx-na-ubuntu-20-04/>
 - <https://webdevblog.ru/bezopasnost-nginx-kak-uluchshit-konfiguraciju-vashego-servera/>
 
-## Установка NGINX
+## Установка NGINX  {: .pageBreakBefore }
 
 Войдите в систему под учётной записью, имеющей разрешение на запуск команды `sudo`, и выполните следующие команды:
 
@@ -44,8 +44,13 @@ server {
     server_name  domain.com;
     reset_timedout_connection  on;
     listen 80;
-    location /robots.txt { root /var/www/html; }
-    return 301 https://$host$request_uri;
+    location /robots.txt {
+        root /var/www/html;
+    }
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
 }
 
 server {

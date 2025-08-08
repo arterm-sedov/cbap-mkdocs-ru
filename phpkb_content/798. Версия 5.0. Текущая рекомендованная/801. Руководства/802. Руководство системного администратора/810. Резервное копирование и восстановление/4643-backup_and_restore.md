@@ -10,6 +10,4 @@ kbId: 4643
 - **[Инструкции для Linux](https://kb.comindware.ru/category.php?id=812)**
 - **[Инструкции для Windows](https://kb.comindware.ru/category.php?id=811)**
 
- 
-
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

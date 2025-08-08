@@ -17,10 +17,35 @@ _![Пример настроенного шаблона экспорта C#](htt
 
 **2.** Настройте модель данных в скрипте по примеру:
 
-| public class IMG {     public byte[] Image\_data { get; set; } } public class TBL\_1 {     public string Faktor { get; set; }     public string Parametr { get; set; }     public string Value { get; set; } } public class TBL\_2 {     public string Destination { get; set; }     public string Order { get; set; }     public string Date { get; set; }     public string Responsible { get; set; } } public class RESULT {     public List<IMG> Photo\_1 { get; set; }     public List<TBL\_1> Table\_1 { get; set; }     public List<TBL\_2> Table\_2 { get; set; } } |
-| --- |
+```
 
-Обратите внимание, что под каждую таблицу должен быть определён свой уникальный класс. 
+public class IMG
+{
+    public byte[] Image_data { get; set; }
+}
+public class TBL_1
+{
+    public string Faktor { get; set; }
+    public string Parametr { get; set; }
+    public string Value { get; set; }
+}
+public class TBL_2
+{
+    public string Destination { get; set; }
+    public string Order { get; set; }
+    public string Date { get; set; }
+    public string Responsible { get; set; }
+}
+public class RESULT
+{
+    public List<IMG> Photo_1 { get; set; }
+    public List<TBL_1> Table_1 { get; set; }
+    public List<TBL_2> Table_2 { get; set; }
+}
+
+```
+
+Обратите внимание, что под каждую таблицу должен быть определён свой уникальный класс.
 
 **3.** Напишите весь скрипт (пример скрипта во вложении).
 
@@ -30,4 +55,5 @@ _![Пример настроенного шаблона экспорта C#](htt
 - В строках 38-39 приведены примеры получения данных из ссылочных атрибутов.
 - В строках 54, 65 приведён пример получения ФИО из атрибута с типом данных «Аккаунт».
 - В строках 172, 184 реализована проверка на формат изображения (можете задать свои параметры).
+
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

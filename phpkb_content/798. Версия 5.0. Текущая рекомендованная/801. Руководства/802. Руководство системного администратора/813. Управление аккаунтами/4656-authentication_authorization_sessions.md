@@ -28,4 +28,5 @@ _![](https://kb.comindware.ru/assets/img_63bc194ca9eb4.png)_Диаграмма �
 - Microsoft Exchange;
 - веб сервисы, реализующие протокол OData.
 - ADFS.
+
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

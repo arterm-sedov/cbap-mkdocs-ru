@@ -105,19 +105,66 @@ if { }
 
 7. Дважды нажмите имя функции, например `objectId`, чтобы вставить его в выражение.
 
-``` turtle title="Пример: выражение, возвращающее ID исполнителей выполняющихся задач для текущей записи"
+``` turtle title="Пример: выражение, возвращающее ID исполнителей активных задач для текущей записи"
+# Это выражение подходит для использования в вычисляемом атрибуте
+# Импортируем функции для работы с логикой, задачами,
+# статусами задач, аккаунтами и ролями.
 @prefix cmw: <http://comindware.com/logics#>.
 @prefix task: <http://comindware.com/ontology/task#>.
 @prefix taskStatus: <http://comindware.com/ontology/taskStatus#>.
+@prefix account: <http://comindware.com/ontology/account#>.
+@prefix role: <http://comindware.com/ontology/role#>.
 {
-  # Получаем список ID задач, связанных с текущей записью
-  ?task task:objectId ?item.
-  # Получаем ID задач со статусом inProgress (Выполняется)
-  ?task cmw:taskStatus taskStatus:inProgress.
+    # Получаем задачи, связанные с текущей записью.
+    # Если выражение используется в таблице задач процесса, 
+    # то эта строка не требуется, т. к. контекст уже будет задачами.
+    ?tasks task:objectId ?item.
+    # Получаем активные задачи.
+    ?tasks cmw:taskStatus taskStatus:inProgress.
+    # Получаем фактических и возможных исполнителей задач.
+    # Проверяем различные варианты назначения задач.
+    or{
+        # Возвращаем фактического исполнителя,
+        # если он назначен через группы и роли.
+        ?tasks cmw:assignee ?assigneeRoles.
+        ?assigneeRoles role:roleMembers ?groupMembers.
+        ?groupMembers account:groupUsers ?value.
+    }
+    or {
 
-  # Возвращаем ID назначенных исполнителей задач
-  or {?task cmw:assignee ?value.}
-  or {?task cmw:possibleAssignee ?value.}.
+        # Возвращаем фактического исполнителя,
+        # если он назначен через роли.
+        ?tasks cmw:assignee ?assigneeRoles.
+        ?assigneeRoles role:roleMembers ?value.
+    }
+    or {
+        # Возвращаем фактического исполнителя,
+        # если он назначен через аккаунт.
+        ?tasks cmw:assignee ?value.
+    }
+    or{
+        # Возвращаем список возможных исполнителей,
+        # если они назначены через группы и роли.
+        ?tasks cmw:possibleAssignee ?possibleRoles.
+        ?assigneeRoles role:roleMembers ?groupMembers.
+        ?groupMembers account:groupUsers ?value.
+    }
+    or {
+
+        # Возвращаем список возможных исполнителей,
+        # если они назначены через роли.
+        ?tasks cmw:possibleAssignee ?possibleRoles.
+        ?assigneeRoles role:roleMembers ?value.
+    }
+    or {
+        # Возвращаем список возможных исполнителей,
+        # если они назначены через аккаунты.
+        ?tasks cmw:possibleAssignee ?value.
+    }.
+    # Оставляем только активные аккаунты.
+    ?value account:active true.
+    # Исключаем отключенные аккаунты
+    not {?value cmw:isDisabled true.}.
 }
 ```
 
@@ -317,11 +364,11 @@ _![Список доступных типов литералов](n3_editor_lite
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 @prefix cmwdur: <http://comindware.com/logics/time/duration#>.
 {
-  # Текущее время в UTC
+  # Текущее время в UTC
   session:context session:requestTime ?nowUTC.
   # Время начала текущего дня
-  ?nowUTC cmwutc:startOfDay ?startOfTodayUTC.
-  # Начало следующих суток = время начала текущего дня + 1 сутки
+  ?nowUTC cmwutc:startOfDay ?startOfTodayUTC.
+  # Начало следующих суток = время начала текущего дня + 1 сутки
   (?startOfTodayUTC "P1D"^^xsd:duration) cmwdur:add ?value.
 }
 ```

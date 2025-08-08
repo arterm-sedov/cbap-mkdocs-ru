@@ -9,26 +9,22 @@ kbId: 4901
 
 Для ограничения отображения и выбора записей необходимо использовать функционал «**Фильтр**» в настройках конструктора конкретной формы, на которую вынесен данный атрибут.
 
- 
-
 **Сценарий:** при создании заявки на командировку сотруднику нужно выбрать город, в который ему необходимо прибыть. Выбирать из всех городов не совсем удобно, желательно отфильтровать города по выбранной стране командировки.
-
- 
 
 **Настройка:**
 
 **1.** Создайте:
 
 - Шаблон записи «Страны» (countries) с атрибутами:
-    - Название (title) — текст;
-    - Города страны — запись с несколькими значениями.
+  - Название (title) — текст;
+  - Города страны — запись с несколькими значениями.
 - Шаблон записи «Города» (cities) с атрибутами:
-    - Название (title) — текст;
-    - Страна (country) — запись из шаблона «Страны».
+  - Название (title) — текст;
+  - Страна (country) — запись из шаблона «Страны».
 - Шаблон записи «Заявки на командировки» (Zayavkinakomandirovku) с атрибутами:
-    - Название — текст;
-    - Страна (request\_country) — запись из шаблона «Страны»;
-    - Город (request\_city) — запись из шаблона «Города»;
+  - Название — текст;
+  - Страна (request\_country) — запись из шаблона «Страны»;
+  - Город (request\_city) — запись из шаблона «Города»;
 
 **2.** В конструкторе формы шаблона «Заявка на командировку» для поля «Города» (request\_city) в свойстве «Фильтр» предусмотрено несколько вариантов фильтрации:
 
@@ -36,8 +32,22 @@ kbId: 4901
 - Формула — напишите выражение на языке Comindware Expression Language: ***(from a in db->cities where a-> country == $request\_country select a->id)***;
 - N3 — напишите выражение на языке N3:
 
-| @prefix container: <http://comindware.com/ontology/container#>. @prefix object: <http://comindware.com/ontology/object#>. @prefix math: <http://www.w3.org/2000/10/swap/math#>. {     ("cities" "country") object:findProperty ?citiescountryProp.     ("Zayavkinakomandirovku" "request\_country") object:findProperty ?Zayavkinakomandirovkurequest\_countryProp.       ?item ?Zayavkinakomandirovkurequest\_countryProp ?Zayavkinakomandirovkurequest\_countryProperty.     ?value a [object:alias "cities"].     ?value ?citiescountryProp? Zayavkinakomandirovkurequest\_countryProperty.      } |
-| --- |
+```
+
+@prefix container: <http://comindware.com/ontology/container#>.
+@prefix object: <http://comindware.com/ontology/object#>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#>.
+{
+    ("cities" "country") object:findProperty ?citiescountryProp.
+    ("Zayavkinakomandirovku" "request_country") object:findProperty ?Zayavkinakomandirovkurequest_countryProp.
+ 
+    ?item ?Zayavkinakomandirovkurequest_countryProp ?Zayavkinakomandirovkurequest_countryProperty.
+    ?value a [object:alias "cities"].
+    ?value ?citiescountryProp ?Zayavkinakomandirovkurequest_countryProperty.
+    
+}
+
+```
 
 - DMN — выберите источник данных Города и настройте в соответствии с информацией ниже:
 
@@ -45,4 +55,6 @@ _![Пример DMN запроса](https://kb.comindware.ru/assets/dmn1.png)_
 
 **3.** Проверьте работу фильтра, выбрав сначала страну, потом город. В раскрывающемся списке показываются записи с учетом прав доступа согласно роли пользователя. При отсутствии записей для выбора проверьте права доступа.
 
-**Примечание :** используя правила для формы можно настроить динамическое отображение полей для более удобного заполнения.{% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
+**Примечание :** используя правила для формы можно настроить динамическое отображение полей для более удобного заполнения.
+
+{% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

@@ -1,0 +1,116 @@
+<h1>Записи и коллекции. Выборка элементов из списка по условию с помощью N3</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5106" kb-tags="N3,Notation 3,Notation3,RDF,атрибут тип «Запись»,вычисление,вычисляемый атрибут,выборка,выборка по критериям,выборка по условию,исключение элементов,коллекция,коллекции,список,триплеты,тройка,тройки,фильтрация,фильтрация коллекции,процессы,запись" kb-title="Записи и коллекции. Выборка элементов из списка по условию с помощью N3">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#n3_collection_select_conditional_intro">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#n3_collection_select_conditional_use_case">
+<span class="md-ellipsis">
+      Прикладная задача
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#n3_collection_select_conditional_initial_data">
+<span class="md-ellipsis">
+      Исходные данные
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#n3_collection_select_conditional_configure">
+<span class="md-ellipsis">
+      Настройка вычислений
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#n3_collection_select_conditional_test">
+<span class="md-ellipsis">
+      Тестирование
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="n3_collection_select_conditional_intro">Введение</h2>
+<p><strong>Comindware Platform</strong> позволяет осуществлять выборку из данных списков (коллекций) по определённым условиям.</p>
+<p>Это может быть полезно, когда требуется выбрать из набора данных элементы, соответствующие заданным критериям.</p>
+<p>Здесь приведён пример вычисления списка позиций заказа, которые ещё не поступили на склад.</p>
+<h2 id="n3_collection_select_conditional_use_case">Прикладная задача</h2>
+<p>В бизнес-процессе обработки заказов необходимо реализовать следующий сценарий:</p>
+<ul>
+<li>Пользователь видит список всех доступных позиций (например, товары и услуги).</li>
+<li>Пользователь добавляет требуемые позиции в заказ.</li>
+<li>В списке для выбора требуется показывать пользователю только позиции, которые ещё не добавлены в заказ.</li>
+</ul>
+<h2 id="n3_collection_select_conditional_initial_data">Исходные данные</h2>
+<p>Имеется два шаблона записей: <em>«Заказы»</em> и <em>«Позиции»</em>.</p>
+<p>В шаблоне <em>«Заказы»</em> имеются атрибуты <em>«Все позиции»</em>, <em>«Позиции заказа»</em> и <em>«Доступные позиции»</em> со следующими свойствами:</p>
+<ul>
+<li><strong>Тип данных: запись</strong></li>
+<li><strong>Связанный шаблон:</strong> <em>Позиции</em></li>
+<li><strong>Хранить несколько значений:</strong> флажок установлен</li>
+</ul>
+<h2 id="n3_collection_select_conditional_configure">Настройка вычислений</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>В свойствах атрибута <em>«Все позиции»</em> установите флажок «<strong>Вычислять автоматически</strong>» и введите <strong>вычисляемое значение</strong> в виде <strong>формулы</strong>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">db</span><span class="o">-&gt;</span><span class="err">Позиции</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">id</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>В свойствах атрибута  <em>«Доступные позиции»</em> установите флажок «<strong>Вычислять автоматически</strong>» и введите <strong>вычисляемое значение</strong> на <strong>N3</strong>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы</span></code> <br/><code><span class="c"># с атрибутами, списками и системные функции</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">list:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/2000/10/swap/list#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">assert:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/assert#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Получаем атрибут «Все позиции».</span></code> <br/><code>    <span class="p">(</span><span class="s">"Заказ"</span> <span class="s">"Всепозиции"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?allArticlesAttribute</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получаем атрибут «Позиции заказа».</span></code> <br/><code>    <span class="p">(</span><span class="s">"Заказ"</span> <span class="s">"Позициизаказа"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?orderArticlesAttribute</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Для каждой позиции проверяем,</span></code> <br/><code>    <span class="c"># добавлена ли она уже на склад.</span></code> <br/><code>    <span class="err">from</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Получаем список всех имеющихся позиций.</span></code> <br/><code>        <span class="err">?item</span> <span class="err">?allArticlesAttribute</span> <span class="err">?article</span><span class="p">.</span></code> <br/><code>        <span class="p">{</span></code> <br/><code>            <span class="c"># Проверяем, заказана ли позиция.</span></code> <br/><code>            <span class="err">?item</span> <span class="err">?orderArticlesAttribute</span> <span class="err">?orderArticle</span><span class="p">.</span></code> <br/><code>            <span class="err">?orderArticle</span> <span class="err">==</span> <span class="err">?article</span><span class="p">.</span></code> <br/><code>        <span class="p">}</span></code> <br/><code>        <span class="nn">assert</span><span class="p">:</span><span class="nt">count</span> <span class="err">?orderedQuantity</span><span class="p">.</span></code> <br/><code>        <span class="c"># Если позиция не заказана (?orderedQuantity == 0),</span></code> <br/><code>        <span class="c"># она считается доступной.</span></code> <br/><code>        <span class="err">?orderedQuantity</span> <span class="err">==</span> <span class="mi">0</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span> <span class="err">select</span> <span class="err">?article</span> <span class="err">-&gt;</span> <span class="err">?availableArticlesList</span><span class="p">.</span></code> <br/><code>    <span class="c"># Возвращаем список доступных позиций.</span></code> <br/><code>    <span class="err">?availableArticlesList</span> <span class="nn">list</span><span class="p">:</span><span class="nt">member</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Поместите атрибуты <em>«Все позиции»</em>, <em>«Позиции заказа»</em> и <em>«Доступные позиции»</em> на форму шаблона <em>«Заказы»</em> и выберите для них <strong>представление</strong> «<strong>Таблица</strong>».</p>
+</li>
+<li>Для таблицы <em>«Позиции заказа»</em> добавьте кнопку «<strong>Добавить</strong>» и в раскрывающемся списке «<strong>Добавляемые записи</strong>» укажите атрибут <em>«Доступные позиции»</em>.</li>
+</ol>
+<h2 id="n3_collection_select_conditional_test">Тестирование</h2>
+<ol class="colored_numbers_list">
+<li>Создайте несколько <em>позиций</em>.</li>
+<li>Создайте <em>заказ</em> и добавьте в него любую позицию.</li>
+<li>Добавленная позиция должна пропасть из таблицы <em>«Доступные позиции»</em>.</li>
+<li>Добавьте в заказ ещё одну позицию, в списке должны отображаться только <em>доступные позиции</em>.</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4800">Таблицы. Определения и настройка</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

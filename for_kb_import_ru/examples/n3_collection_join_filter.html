@@ -1,0 +1,182 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5109" kb-tags="N3,Notation 3,Notation3,RDF,атрибут типа «Запись»,доступ,вычисление,объединение,права,список,триплеты,тройка,тройки,фильтрация,запись,join,коллекция" kb-title="Записи и коллекции. Объединение и фильтрация коллекций с помощью N3">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_dataset_join_filter_intro">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_dataset_join_filter_use_case">
+<span class="md-ellipsis">
+      Прикладная задача
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_dataset_join_filter_initial_data">
+<span class="md-ellipsis">
+      Исходные данные
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_dataset_join_filter_calculation">
+<span class="md-ellipsis">
+      Настройка вычислений
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_dataset_join_filter_test">
+<span class="md-ellipsis">
+      Тестирование
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="example_n3_dataset_join_filter_intro">Введение</h2>
+<p>Атрибут типа «<strong>Запись</strong>» хранит ID записей в связанном шаблоне (ссылки на них).</p>
+<p>Бизнесу может потребоваться собрать коллекцию записей из нескольких шаблонов и фильтровать их по определённым условиям.</p>
+<p>Например, пользователю необходимо предоставить для выбора в раскрывающемся списке только организации, с которыми он работает, когда перечень организаций формируется из нескольких источников.</p>
+<p>Здесь представлен пример объединения и фильтрации списков записей по данным, связанным с текущим пользователем.</p>
+<h2 id="example_n3_dataset_join_filter_use_case">Прикладная задача</h2>
+<p>При оформлении грузового отправления сотрудник (текущий пользователь) должен выбрать грузополучателя из раскрывающегося списка.</p>
+<p>Список возможных грузополучателей должен формироваться из двух справочников: <em>Клиенты</em> и <em>Партнёры</em>.</p>
+<p>Список должен содержать только тех контрагентов, для которых сотрудник указан как ответственный менеджер.</p>
+<h2 id="example_n3_dataset_join_filter_initial_data">Исходные данные</h2>
+<p>Имеются шаблоны: <em>Контрагенты</em>, <em>Контакты</em>, <em>Сотрудники</em>, <em>Отправления</em>.</p>
+<p>В шаблоне записи <em>«Контрагенты»</em> хранятся сведения о компаниях и ссылки на контактные лица.</p>
+<p>Атрибут в шаблоне:</p>
+<ul>
+<li><em>Контакты</em>
+<strong>Описание:</strong> <em>Коллекция записей контактных лиц контрагента</em><ul>
+<li><strong>Тип данных: запись</strong></li>
+<li><strong>Связанный шаблон:</strong> <em>Контакты</em></li>
+<li><strong>Хранить несколько значений:</strong> флажок установлен</li>
+</ul>
+</li>
+</ul>
+<p>В шаблоне записи <em>«Контакты»</em> хранятся сведения о связях сотрудников с организациями.</p>
+<p>Атрибуты в шаблоне:</p>
+<ul>
+<li><em>Сотрудник</em><ul>
+<li><strong>Описание:</strong> <em>Ссылка на аккаунт сотрудника</em></li>
+<li><strong>Тип данных: аккаунт</strong></li>
+<li><strong>Связанный шаблон:</strong> <em>Сотрудники</em></li>
+<li><strong>Хранить несколько значений:</strong> флажок снят</li>
+</ul>
+</li>
+<li><em>Ответственный</em><ul>
+<li><strong>Описание:</strong> <em><code>True</code>, если сотрудник является ответственным менеджером для контрагента</em></li>
+<li><strong>Тип данных: логический</strong></li>
+</ul>
+</li>
+</ul>
+<p>В шаблоне <em>«Отправления»</em> хранятся сведения о возможных и фактических получателях грузов.</p>
+<p>Атрибуты в шаблоне:</p>
+<ul>
+<li><em>Клиенты</em> и <em>Партнёры</em><ul>
+<li><strong>Описание:</strong> <em>Отдельные коллекции организаций партнёров и клиентов</em></li>
+<li><strong>Тип данных: запись</strong></li>
+<li><strong>Связанный шаблон:</strong> <em>Контрагенты</em></li>
+<li><strong>Хранить несколько значений:</strong> флажок установлен</li>
+</ul>
+</li>
+<li><em>Грузополучатель</em><ul>
+<li><strong>Описание:</strong> <em>Организация, которой предназначено отправление</em></li>
+<li><strong>Тип данных: запись</strong></li>
+<li><strong>Связанный шаблон:</strong> <em>Контрагенты</em></li>
+<li><strong>Хранить несколько значений:</strong> флажок снят</li>
+</ul>
+</li>
+</ul>
+<h2 class="pageBreakBefore" id="example_n3_dataset_join_filter_calculation">Настройка вычислений</h2>
+<ol class="colored_numbers_list">
+<li>Откройте для редактирования форму шаблона <em>«Отправления»</em>.</li>
+<li>Поместите на форму атрибут <em>«Грузополучатель»</em>.</li>
+<li>
+<p>Настройте свойства поля <em>«Грузополучатель»</em>:</p>
+<ul>
+<li><strong>Представление: раскрывающийся список</strong></li>
+<li><strong>Доступ: разрешить ввод</strong></li>
+<li><strong>Фильтр: N3</strong></li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем префиксы для работы</span></code> <br/><code><span class="c"># со списками, объектами и системными данными.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">list:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/2000/10/swap/list#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmw:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Получаем идентификатор текущего пользователя.</span></code> <br/><code>    <span class="nn">cmw</span><span class="p">:</span><span class="nt">securityContext</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">currentUser</span> <span class="err">?user</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Получаем атрибуты, по которым будем определять связи сущностей.</span></code> <br/><code>    <span class="c"># Убедитесь, что системные имена соответствуют именам в вашем приложении.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Отправления"</span> <span class="s">"Клиенты"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?clientsAttribute</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Отправления"</span> <span class="s">"Партнёры"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?partnersAttribute</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Контрагенты"</span> <span class="s">"Контакты"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?contactsAttribute</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Контакты"</span> <span class="s">"Ответственный"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?responsibleAttribute</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Контакты"</span> <span class="s">"Сотрудник"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?employeeAttribute</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Получаем списки клиентов и партнёров из текущей записи.</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?clientsAttribute</span> <span class="err">?clientsList</span><span class="p">.</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?partnersAttribute</span> <span class="err">?partnersList</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Объединяем два списка организаций в один.</span></code> <br/><code>    <span class="p">(</span><span class="err">?clientsList</span> <span class="err">?partnersList</span><span class="p">)</span> <span class="nn">list</span><span class="p">:</span><span class="nt">append</span> <span class="err">?organizations</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Отбираем из объединенного списка только организации,</span></code> <br/><code>    <span class="c"># где текущий пользователь является активным контактным лицом.</span></code> <br/><code>    <span class="err">?organizations</span> <span class="nn">list</span><span class="p">:</span><span class="nt">member</span> <span class="err">?userOrgs</span><span class="p">.</span></code> <br/><code>    <span class="err">?userOrgs</span> <span class="err">?contactsAttribute</span> <span class="err">?orgContacts</span><span class="p">.</span></code> <br/><code>    <span class="err">?orgContacts</span> <span class="err">?responsibleAttribute</span> <span class="l">true</span><span class="p">.</span></code> <br/><code>    <span class="err">?orgContacts</span> <span class="err">?employeeAttribute</span> <span class="err">?user</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Возвращаем итоговый список</span></code> <br/><code>    <span class="err">?userOrgs</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span> </code> <br/></pre></code></div>
+</li>
+<li>
+<p>Поместите на форму атрибуты <em>«Клиенты»</em> и <em>«Партнёры»</em> и настройте их:</p>
+<ul>
+<li>выберите <strong>представление</strong> «<strong>Таблица</strong>»;</li>
+<li>добавьте кнопки «<strong>Создать</strong>», «<strong>Добавить</strong>», «<strong>Исключить</strong>», «<strong>Удалить</strong>».</li>
+</ul>
+</li>
+<li>
+<p>На форму шаблона <em>«Контрагенты»</em> поместите атрибут <em>«Контакты»</em> и настройте его:</p>
+<ul>
+<li>выберите <strong>представление</strong> «<strong>Таблица</strong>»;</li>
+<li>добавьте столбцы <em>«Ответственный»</em> и <em>«Сотрудник»</em>;</li>
+<li>добавьте кнопки «<strong>Создать</strong>», «<strong>Добавить</strong>», «<strong>Исключить</strong>», «<strong>Удалить</strong>».</li>
+</ul>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="example_n3_dataset_join_filter_test">Тестирование</h2>
+<ol class="colored_numbers_list">
+<li>Создайте несколько тестовых аккаунтов.</li>
+<li>
+<p>Создайте записи в шаблоне <em>«Контрагенты»</em>:</p>
+<ul>
+<li>заполните таблицу <em>«Контакты»</em>:<ul>
+<li>укажите различные аккаунты, в том числе свой аккаунт;</li>
+<li>для части контактов установите флажок <em>«Ответственный»</em>;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Создайте запись в шаблоне <em>«Отправления»</em>.</p>
+</li>
+<li>Добавьте в таблицы <em>«Клиенты»</em> и <em>«Партнёры»</em> разных контрагентов.</li>
+<li>Откройте раскрывающийся список <em>«Грузополучатель»</em>. В нём должны отображаться только клиенты и партнёры, в которых вы (текущий пользователь) указаны как <em>ответственный</em> менеджер.</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4780">Атрибут типа «Запись»</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4774">Атрибут типа «Аккаунт»</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4778">Атрибут типа «Логический»</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/category.php?id=877">Язык N3</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

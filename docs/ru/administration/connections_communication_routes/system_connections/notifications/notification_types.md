@@ -72,7 +72,7 @@ _![Просмотр внутренних уведомлений](common_notifica
 Система позволяет настроить уведомления о задачах различного типа:
 
 - [уведомления о задачах с особым текстом][task_notifications];
-- [периодические напоминания об открытых задачах][periodic_task_notifications];
+- [периодические напоминания об открытых задачах][example_n3_periodic_task_notifications];
 - [уведомления о задачах по электронной почте][task_notifications_email].
 
 _![Просмотр уведомлений о задачах](task_notifications_view.png)_
@@ -101,7 +101,7 @@ _![Просмотр уведомлений о задачах](task_notifications
 
 - [Общие уведомления. Настройка][common_notifications]
 - [Уведомления о задачах. Настройка пути передачи данных][task_notifications]
-- [Настройка периодических напоминаний об открытых задачах][periodic_task_notifications]
+- [Настройка периодических напоминаний об открытых задачах][example_n3_periodic_task_notifications]
 - [Отправка эл.&nbsp;почты из процесса. Настройка подключения, пути передачи данных и события на диаграмме процесса][process_sending_connection]
 - [Промежуточное событие-отправка сообщения][process_diagram_elements_send_message_intermediate_event]
 - [Конечное событие-отправка сообщения][process_diagram_elements_send_message_end_event]

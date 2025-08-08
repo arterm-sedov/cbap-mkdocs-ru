@@ -13,20 +13,44 @@ kbId: 4949
 
 Сотрудник №2 обладает навыками: Веб-дизайн, "Астрономия, Иностранные языки, Логистика.
 
-У сотрудника №1 нет всех необходимых навыков для участия в проекте, его не нужно отображать в коллекции. А сотрудник №2 подходит, его нужно отобразить.  
+У сотрудника №1 нет всех необходимых навыков для участия в проекте, его не нужно отображать в коллекции. А сотрудник №2 подходит, его нужно отобразить.
 
 **Модель данных:**
 
 - Шаблон записи «Проекты» (projects):
-    - Атрибут «Необходимые навыки» (required\_skills), ссылающийся на справочник «Навыки» (несколько значений);
-    - Атрибут «Сотрудники, подходящие для проекта», ссылающийся на справочник «Сотрудники» (несколько значений).
+  - Атрибут «Необходимые навыки» (required\_skills), ссылающийся на справочник «Навыки» (несколько значений);
+  - Атрибут «Сотрудники, подходящие для проекта», ссылающийся на справочник «Сотрудники» (несколько значений).
 - Шаблон записи «Сотрудники» (employees):
-    - Атрибут «Навыки сотрудника» (available\_skills), ссылающийся на справочник «Навыки» (несколько значений).
+  - Атрибут «Навыки сотрудника» (available\_skills), ссылающийся на справочник «Навыки» (несколько значений).
 - Шаблон записи «Навыки».
 
 Для того, чтобы вычислить объекты, удовлетворяющие условию, заданному в основном объекте (в данном случае, сотрудников с необходимыми навыками), введите следующее выражение:
 
-| @prefix object: <http://comindware.com/ontology/object#>.@prefix assert: <http://comindware.com/logics/assert#>.@prefix cmw: <http://comindware.com/logics#>.{    ("projects" "required\_skills") object:findProperty ?PropertyLittle.     ("employees" "available\_skills") object:findProperty ?PropertyBig.     ?container object:alias "employees".     ?allObjs cmw:container ?container.     {        ?item ?PropertyLittle ?resultL.        ?allObjs ?PropertyBig ?resultL.    } assert:count ?c.     {        ?item ?PropertyLittle ?resultA.    } assert:count ?d.        if {?c == ?d}    then {?allObjs -> ?value.}} |
-| --- |
+```
+
+@prefix object: <http://comindware.com/ontology/object#>.
+@prefix assert: <http://comindware.com/logics/assert#>.
+@prefix cmw: <http://comindware.com/logics#>.
+{
+    ("projects" "required_skills") object:findProperty ?PropertyLittle. 
+    ("employees" "available_skills") object:findProperty ?PropertyBig.
+
+    ?container object:alias "employees". 
+    ?allObjs cmw:container ?container.
+
+    {
+        ?item ?PropertyLittle ?resultL.
+        ?allObjs ?PropertyBig ?resultL.
+    } assert:count ?c.
+
+    {
+        ?item ?PropertyLittle ?resultA.
+    } assert:count ?d.
+    
+    if {?c == ?d}
+    then {?allObjs -> ?value.}
+}
+
+```
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

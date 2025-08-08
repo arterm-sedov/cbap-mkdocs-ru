@@ -62,10 +62,11 @@ kbId: 4655
 Инструкции по настройке подключения к серверу каталогов см. в следующих статьях:
 
 - **{{ productName }}**
-    - **[Сервер каталогов. Настройка подключения][ad_connection]**
+  - **[Сервер каталогов. Настройка подключения][ad_connection]**
 - **Linux**
-    - **[Аутентификация через Active Directory. Настройка контроллера домена и экземпляра ПО][ad_authentication_configure_dc_instance]**
-    - **[Аутентификация через единый вход (SSO). Настройка контроллера домена, экземпляра ПО и компьютера конечного пользователя][sso_authenticatation_configure]**
+  - **[Аутентификация через Active Directory. Настройка контроллера домена и экземпляра ПО][ad_authentication_configure_dc_instance]**
+  - **[Аутентификация через единый вход (SSO). Настройка контроллера домена, экземпляра ПО и компьютера конечного пользователя][sso_authentication_configure]**
 - **Windows**
-    - **[Настройка единого входа (SSO-аутентификации) в ОС Windows][sso_authentication_configure_windows]**
+  - **[Настройка единого входа (SSO-аутентификации) в ОС Windows][sso_authentication_configure_windows]**
+
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

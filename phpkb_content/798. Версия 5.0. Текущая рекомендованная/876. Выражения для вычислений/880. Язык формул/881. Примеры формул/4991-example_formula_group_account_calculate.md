@@ -7,8 +7,9 @@ kbId: 4991
 
 Для вычисления аккаунтов, входящих в определённую группу без учёта подгрупп и их участников (в случае, если в группе нет вложенности), введите следующее выражение:
 
-| (from ag in db->\_AccountGroup where OR (ag->groupName == "users",ag->groupName == "admins") select ag->groupUsers->id) |
-| --- |
+```
+(from ag in db->_AccountGroup where OR (ag->groupName == "users",ag->groupName == "admins") select ag->groupUsers->id)
+```
 
 **где:**
 

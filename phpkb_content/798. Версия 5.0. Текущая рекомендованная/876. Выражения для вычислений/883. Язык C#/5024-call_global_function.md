@@ -7,8 +7,46 @@ kbId: 5024
 
 Для того, чтобы запустить глобальную функцию по кнопке, введите следующее выражение:
 
-| using System; using System.Collections.Generic;using System.Linq;using Comindware.Data.Entity;using Comindware.TeamNetwork.Api.Data.UserCommands;using Comindware.TeamNetwork.Api.Data; class Script{    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)    {               var CurrentObjectid = userCommandContext.ObjectIds[0];        var CurrentObjectData = Api.TeamNetwork.ObjectService.Get(CurrentObjectid);        var Gosnomer = CurrentObjectData["op.11"].ToString();    var bo = Api.TeamNetwork.GlobalFunctionService.ExecuteByAlias("Systemsolution", "Poisk", new Dictionary<string, object>(){{"Nomer", Gosnomer}});    Api.TeamNetwork.ObjectService.EditWithAlias("Kartochkivyzovov", userCommandContext.ObjectIds[0], bo);     var result = new UserCommandResult    {      Success = true,      Commited = true,      ResultType = UserCommandResultType.DataChange,      Messages = new[]      {        new UserCommandMessage        {          Severity = SeverityLevel.Normal,          Text = "VIN найден успешно"        }       }    };    return result;        }} |
-| --- |
+```
+
+using System; 
+using System.Collections.Generic;
+using System.Linq;
+using Comindware.Data.Entity;
+using Comindware.TeamNetwork.Api.Data.UserCommands;
+using Comindware.TeamNetwork.Api.Data;
+
+class Script
+{
+    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+    {     
+          var CurrentObjectid = userCommandContext.ObjectIds[0];
+        var CurrentObjectData = Api.TeamNetwork.ObjectService.Get(CurrentObjectid);
+        var Gosnomer = CurrentObjectData["op.11"].ToString();
+    var bo = Api.TeamNetwork.GlobalFunctionService.ExecuteByAlias("Systemsolution", "Poisk", new Dictionary<string, object>(){{"Nomer", Gosnomer}});
+    Api.TeamNetwork.ObjectService.EditWithAlias("Kartochkivyzovov", userCommandContext.ObjectIds[0], bo);
+
+    var result = new UserCommandResult
+    {
+      Success = true,
+      Commited = true,
+      ResultType = UserCommandResultType.DataChange,
+      Messages = new[]
+      {
+        new UserCommandMessage
+        {
+          Severity = SeverityLevel.Normal,
+          Text = "VIN найден успешно"
+        }
+
+      }
+    };
+    return result;
+    
+    }
+}
+
+```
 
 **где:**
 

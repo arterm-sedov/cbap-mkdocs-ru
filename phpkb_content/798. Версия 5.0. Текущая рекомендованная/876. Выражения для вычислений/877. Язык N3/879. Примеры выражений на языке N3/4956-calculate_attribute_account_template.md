@@ -7,8 +7,22 @@ kbId: 4956
 
 Для того чтобы получить значение какого-либо атрибута из Шаблона пользователя (через атрибут типа "Пользователь", ссылающийся на данный Шаблон пользователя), введите следующее выражение:
 
-| @prefix account: <http://comindware.com/ontology/account#>.@prefix object: <http://comindware.com/ontology/object#>.@prefix container: <http://comindware.com/ontology/container#>. {    ("RecordTemplate" "assignee") object:findProperty ?assigneeProp.    ("Sotrudniki" "LaborCosts") object:findProperty ?LaborCostsProp.?item ?assigneeProp ?assignee.  ?polz container:alias "Sotrudniki".  ?assignee account:extendedBy ?polz.?assignee ?LaborCostsProp ?value.} |
-| --- |
+```
+
+@prefix account: <http://comindware.com/ontology/account#>.
+@prefix object: <http://comindware.com/ontology/object#>.
+@prefix container: <http://comindware.com/ontology/container#>.
+
+{
+    ("RecordTemplate" "assignee") object:findProperty ?assigneeProp.
+    ("Sotrudniki" "LaborCosts") object:findProperty ?LaborCostsProp.
+?item ?assigneeProp ?assignee.
+  ?polz container:alias "Sotrudniki".
+  ?assignee account:extendedBy ?polz.
+?assignee ?LaborCostsProp ?value.
+}
+
+```
 
 **где:**
 

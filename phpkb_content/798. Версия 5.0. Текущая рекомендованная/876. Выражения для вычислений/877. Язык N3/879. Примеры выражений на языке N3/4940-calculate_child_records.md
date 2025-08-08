@@ -7,8 +7,23 @@ kbId: 4940
 
 В **{{ productName }}** существует возможность построения взаимных связей как между шаблонами записи, так и внутри одного шаблона записи, например, для выстраивания древовидной структуры (работы, подразделения и т. д.). Данная статья применима как раз в случае реализации древовидной структуры связей и предоставляет пример выражения для получения всех дочерних записей какой-либо записи с учетом всех уровней вложенности.
 
-| @prefix object: <http://comindware.com/ontology/object#>. @prefix assert: <http://comindware.com/logics/assert#>. {     ("Rabotypoproektu" "Dochernieraboty") object:findProperty ?dochprop.     ("Rabotypoproektu" "Vsedochernie") object:findProperty ?vsedochprop.         (                {?item ?dochprop ?value.}         {             ?item ?dochprop ?docki.             ?docki ?vsedochprop ?value.         }     )assert:union true } |
-| --- |
+```
+
+@prefix object: <http://comindware.com/ontology/object#>.
+@prefix assert: <http://comindware.com/logics/assert#>.
+{
+    ("Rabotypoproektu" "Dochernieraboty") object:findProperty ?dochprop.
+    ("Rabotypoproektu" "Vsedochernie") object:findProperty ?vsedochprop.
+   
+    (
+               {?item ?dochprop ?value.}
+        {
+            ?item ?dochprop ?docki.
+            ?docki ?vsedochprop ?value.
+        }
+    )assert:union true
+}
+```
 
 **где:**
 

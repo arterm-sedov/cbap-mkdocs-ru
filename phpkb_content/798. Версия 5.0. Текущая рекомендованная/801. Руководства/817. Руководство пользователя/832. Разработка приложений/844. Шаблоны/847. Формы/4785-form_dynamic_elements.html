@@ -1,4 +1,4 @@
-<h1>Динамические элементы формы: поля атрибутов и вложенные формы. Настройка представления</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4785">
+<h1>Динамические элементы формы: поля атрибутов и вложенные формы. Настройка представления</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4785" kb-tags="поля на форме,атрибуты на форме,вложенная форма" kb-title="Динамические элементы формы: поля атрибутов и вложенные формы. Настройка представления">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -81,7 +81,7 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#дата-и-время">
+<a class="md-nav__link mkdocs_imported_link" href="#form_dynamic_elements_date_time">
 <span class="md-ellipsis">
       Дата и время
     </span>
@@ -433,7 +433,7 @@
 <li>Настройте <a class="mkdocs_imported_link" href="#общие-свойства-полей">общие свойства</a> и представление поля в соответствии с его типом:<ul>
 <li><a class="mkdocs_imported_link" href="#form_dynamic_elements_account">Аккаунт</a></li>
 <li><a class="mkdocs_imported_link" href="#form_dynamic_elements_hyperlink">Гиперссылка</a></li>
-<li><a class="mkdocs_imported_link" href="#дата-и-время">Дата и время</a></li>
+<li><a class="mkdocs_imported_link" href="#form_dynamic_elements_date_time">Дата и время</a></li>
 <li><a class="mkdocs_imported_link" href="#длительность">Длительность</a></li>
 <li><a class="mkdocs_imported_link" href="#документ">Документ</a></li>
 <li><a class="mkdocs_imported_link" href="#запись">Запись</a><ul>
@@ -474,13 +474,18 @@
 </div>
 </li>
 <li>
-<p><strong>Системное имя</strong> — уникальное имя поля в рамках текущей формы, используемое для настройки <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4784">правил для формы</a>.</p>
-</li>
-</ul>
-<p>Не должно начинаться с цифры. Рекомендуется использовать буквы латинского алфавита, цифры и символ «_».</p>
-<p>Заполняется автоматически по названию.</p>
-<div class="highlight"><code><pre><span></span><code>!!! note "Примечание"</code> <br/><code></code> <br/><code>    - Системное имя поля на форме изначально совпадает с системным именем атрибута, связанного с полем.</code> <br/><code>    - Если вынести на поле один и тот же атрибут несколько раз, системные имена его полей будут автоматически пронумерованы по порядку добавления на форму.</code> <br/><code>    - Системное имя поля может не совпадать с системным именем атрибута, связанного с полем.</code> <br/></pre></code></div>
+<p><strong>Системное имя</strong> — уникальное имя поля в рамках текущей формы, используемое для настройки <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4784">правил для формы</a>.
+    Не должно начинаться с цифры. Разрешены английские и русские буквы, цифры и символ «_». Рекомендуется использовать английские буквы.
+    Обычно заполняется автоматически по названию.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
 <ul>
+<li>Системное имя поля на форме изначально совпадает с системным именем атрибута, связанного с полем.</li>
+<li>Если вынести на поле один и тот же атрибут несколько раз, системные имена его полей будут автоматически пронумерованы по порядку добавления на форму.</li>
+<li>Системное имя поля может не совпадать с системным именем атрибута, связанного с полем.</li>
+</ul>
+</div>
+</li>
 <li>
 <p><strong>Путь к атрибуту</strong> — полный путь к атрибуту, с которым связано поле:</p>
 <ul>
@@ -586,10 +591,17 @@
 <p><figure class="screenshot_with_caption" markdown=""><img alt="Проверка формата гиперссылки" src="/platform/v5.0/business_apps/templates/forms/../attributes/img/attribute_hyperlink_example_invalid.png"/><figcaption class="caption">Проверка формата гиперссылки</figcaption></figure></p>
 </li>
 </ol>
-<h3 class="pageBreakBefore" id="дата-и-время">Дата и время</h3>
-<p>Представление поля атрибута типа «<strong>Дата и время</strong>» на форме определяется свойствами поля и <strong>форматом отображения</strong>, заданным в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4777">свойствах атрибута</a>.</p>
-<p>У этого поля предусмотрены только <a class="mkdocs_imported_link" href="#общие-свойства-полей">общие свойства</a>.</p>
-<p>См. также статью <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4886"><em>«Работа с атрибутом типа «Дата и время»</em></a>.</p>
+<h3 class="pageBreakBefore" id="form_dynamic_elements_date_time">Дата и время</h3>
+<p>Представление поля атрибута типа «<strong>Дата и время</strong>» на форме определяется свойствами поля, <strong>форматом отображения</strong>, заданным в свойствах атрибута, и настройкам часового пояса.</p>
+<p>Помимо <a class="mkdocs_imported_link" href="#общие-свойства-полей">общих свойств</a> у этого поля предусмотрено следующее свойство:</p>
+<ul>
+<li><strong>Часовой пояс</strong> — выберите атрибут типа «<strong>Часовой пояс</strong>», который будет применяться при отображении значения в данном поле.</li>
+</ul>
+<p>См. также:</p>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4777">«Атрибут типа «Дата и время»</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5098">Атрибут типа «Часовой пояс»</a></em></li>
+</ul>
 <h3 class="pageBreakBefore" id="длительность">Длительность</h3>
 <p>Представление поля атрибута типа «<strong>Длительность</strong>» на форме определяется свойствами поля и <strong>форматом отображения</strong>, заданным в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4775">свойствах атрибута</a>.</p>
 <p>Помимо <a class="mkdocs_imported_link" href="#общие-свойства-полей">общих свойств</a> у этого поля предусмотрены следующие свойства:</p>
@@ -708,8 +720,7 @@
 <p>При загрузке каждого изображения будет отображаться окно «<strong>Кадрирование изображения</strong>»:</p>
 <ul>
 <li>если кадрировать изображение не требуется, нажмите кнопку «<strong>Отменить обрезку</strong>»;</li>
-<li>чтобы кадрировать изображение, выберите его фрагмент и нажмите кнопку «<strong>Обрезать</strong>».
-</li>
+<li>чтобы кадрировать изображение, выберите его фрагмент и нажмите кнопку «<strong>Обрезать</strong>».</li>
 </ul>
 </li>
 <li>
@@ -937,10 +948,10 @@
 <p>Вынесите на основную форму шаблона <em>«Работы»</em> атрибут <em>«Дочерние работы»</em>.</p>
 </li>
 <li>
-<p>В свойствах поля <em>«Дочерние работы»</em> на форме выберите <strong>представление</strong> «<strong>Таблица</strong>».
-    </p>
-<p>
-5. Настройте <strong>свойства таблицы</strong> <em>«Дочерние работы»</em>:</p>
+<p>В свойствах поля <em>«Дочерние работы»</em> на форме выберите <strong>представление</strong> «<strong>Таблица</strong>».</p>
+</li>
+<li>
+<p>Настройте <strong>свойства таблицы</strong> <em>«Дочерние работы»</em>:</p>
 <ul>
 <li><strong>Дочерние записи:</strong> <em>Дочерние работы</em></li>
 <li><strong>Упорядочивание:</strong> <em>Порядковый номер</em></li>
@@ -1061,6 +1072,7 @@
 <p>Подробные сведения см. в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4818">Использование обсуждения</a>»</em>.</p>
 <ol class="colored_numbers_list">
 <li>Поместите на неё поле «<strong>Обсуждение</strong>».</li>
+<li>При необходимости настройте быстрые ответы, см. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4788#discussion_configure_quick_answers">Настройка быстрых ответов</a>»</em>.</li>
 <li>Откройте форму, отправляйте и отвечайте на сообщения в чате, архивируйте их и прикрепляйте к ним файлы.</li>
 </ol>
 <figure class="screenshot_with_caption">
@@ -1218,8 +1230,7 @@
 </li>
 <li>
 <p>Отобразится раскрывающийся список с названиями и значками автомобилей, пункты списка будут окрашены указанными цветами.</p>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Раскрывающийся список значений на форме" src="/platform/v5.0/business_apps/templates/forms/img/form_dynamic_elements_form_enum_dropdown_list.png"/><figcaption class="caption">Раскрывающийся список значений на форме</figcaption></figure>
-</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Раскрывающийся список значений на форме" src="/platform/v5.0/business_apps/templates/forms/img/form_dynamic_elements_form_enum_dropdown_list.png"/><figcaption class="caption">Раскрывающийся список значений на форме</figcaption></figure></p>
 </li>
 <li>
 <p>Откройте таблицу с записями шаблона.</p>
@@ -1504,29 +1515,34 @@
 <p>Для вложенной формы предусмотрены следующие свойства:</p>
 <ul>
 <li><strong>Отображаемое название</strong> — наглядное название вложенной формы, не отображается для пользователя;</li>
-<li><strong>Системное имя</strong> — уникальное имя вложенной формы в рамках текущей формы, используемое для настройки <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4784">правил для формы</a>.</li>
+<li><strong>Системное имя</strong> — уникальное имя вложенной формы в рамках текущей формы, используемое для настройки <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4784">правил для формы</a>.
+    Не должно начинаться с цифры. Разрешены английские и русские буквы, цифры и символ «_». Рекомендуется использовать английские буквы.
+    Обычно заполняется автоматически по названию.</li>
+<li><strong>Путь к атрибуту</strong> — показывает полный путь к форме:<ul>
+<li>для формы текущего шаблона отображается системное имя исходной формы;</li>
+<li pagebreakafter="pageBreakAfter">для формы из связанного шаблона отображается цепочка системных имён атрибутов и системное имя исходной формы.</li>
 </ul>
-<p>Не должно начинаться с цифры. Рекомендуется использовать буквы латинского алфавита, цифры и символ «_».</p>
-<p>Заполняется автоматически по названию.
-- <strong>Путь к атрибуту</strong> — показывает полный путь к форме:
-    - для формы текущего шаблона отображается системное имя исходной формы;
-    - для формы из связанного шаблона отображается цепочка системных имён атрибутов и системное имя исходной формы.
-    {: pageBreakAfter }
-- <strong>Доступ</strong> — режим доступа к данным на вложенной форме и её отображения:
-    - <strong>Разрешить ввод</strong> — пользователь сможет вводить данные в поля вложенной формы.
-    - <strong>Только чтение</strong> — данные на вложенной можно будет только просматривать.
-    - <strong>Скрыть</strong> — вложенная форма не будет отображаться на текущей форме. Показать скрытую вложенную форму можно с помощью <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4784">правил для формы</a>.
-- <strong>Редактировать форму</strong> — нажмите эту кнопку, чтобы перейти к конструктору исходной формы.</p>
+</li>
+<li><strong>Доступ</strong> — режим доступа к данным на вложенной форме и её отображения:<ul>
+<li><strong>Разрешить ввод</strong> — пользователь сможет вводить данные в поля вложенной формы.</li>
+<li><strong>Только чтение</strong> — данные на вложенной можно будет только просматривать.</li>
+<li><strong>Скрыть</strong> — вложенная форма не будет отображаться на текущей форме. Показать скрытую вложенную форму можно с помощью <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4784">правил для формы</a>.</li>
+</ul>
+</li>
+<li><strong>Редактировать форму</strong> — нажмите эту кнопку, чтобы перейти к конструктору исходной формы.</li>
+</ul>
 <figure class="screenshot_with_caption">
 <p><img alt="Добавление вложенной формы и настройка её свойств" src="/platform/v5.0/business_apps/templates/forms/img/form_dynamic_elements_embedded_form_configure.png"/><figcaption class="caption">Добавление вложенной формы и настройка её свойств</figcaption></p>
 </figure>
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4786">Формы. Определения, редактирование, удаление, использование списка форм</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5069">Расширенная фильтрация. Настройка форм поиска</a></em></li>
 <li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4787">Статические элементы формы: области, вкладки, колонки, статичный текст. Настройка представления</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4786">Формы. Определения, редактирование, удаление, использование списка форм</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4784">Правила для формы. Определения, логика работы и настройка</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5069">Расширенная фильтрация. Настройка форм поиска</a></em></li>
 <li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4772">Атрибуты. Определения, типы, настройка, архивирование, удаление</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4816">Формы. Использование</a></em></li>
 </ul>
 </div>
 </article>

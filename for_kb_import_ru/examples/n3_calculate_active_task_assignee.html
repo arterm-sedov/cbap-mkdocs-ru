@@ -1,0 +1,127 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4950" kb-tags="N3,Notation 3,RDF,аккаунты,вычисление,задачи,исполнитель,процессы,триплеты,тройка,тройки" kb-title="Вычисление исполнителя текущей активной задачи">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#n3_calculate_active_task_assignee_intro">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#n3_calculate_active_task_assignee_use_case">
+<span class="md-ellipsis">
+      Прикладная задача
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#n3_calculate_active_task_assignee_initial_data">
+<span class="md-ellipsis">
+      Исходные данные
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#n3_calculate_active_task_assignee_configure">
+<span class="md-ellipsis">
+      Настройка вычислений
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#n3_calculate_active_task_assignee_test">
+<span class="md-ellipsis">
+      Тестирование
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="n3_calculate_active_task_assignee_intro">Введение</h2>
+<p>В <strong>Comindware Platform</strong> можно вычислить исполнителя активной задачи по записи, связанной с экземпляром бизнес-процесса. Это может быть полезно для отображения информации об ответственном за задачу или в иных вычислениях.</p>
+<h2 id="n3_calculate_active_task_assignee_use_case">Прикладная задача</h2>
+<p>Имеется бизнес-процесс с пользовательскими задачами.</p>
+<p>Задаче может быть назначен как один исполнитель, так список возможных исполнителей.</p>
+<p>С бизнес-процессом связана запись.</p>
+<p>Для этой записи требуется:</p>
+<ul>
+<li>получить список исполнителей активных задач и поместить его в атрибут типа «<strong>Аккаунт</strong>»;</li>
+<li>определить, имеются ли задачи у текущего пользователя, и записать соответственно значение <code>True</code> или <code>False</code> в <strong>логический</strong> атрибут.</li>
+</ul>
+<h2 id="n3_calculate_active_task_assignee_initial_data">Исходные данные</h2>
+<p>Имеется шаблон процесса <em>«Оформление заявок»</em>, связанный с шаблоном записи <em>«Заявки»</em>.</p>
+<p>В шаблоне <em>«Оформление заявок»</em> имеются пользовательские задачи, которым назначены различные исполнители.</p>
+<h2 id="n3_calculate_active_task_assignee_configure">Настройка вычислений</h2>
+<ol class="colored_numbers_list">
+<li>На диаграмме процесса <em>«Оформление заявок»</em> назначьте себя исполнителем любой из задач.</li>
+<li>
+<p>В шаблоне <em>«Заявки»</em> создайте атрибут со следующими свойствами:</p>
+<ul>
+<li><strong>Название:</strong> <em>Ответственные</em></li>
+<li><strong>Тип данных: аккаунт</strong></li>
+<li><strong>Хранить несколько значений</strong>: флажок установлен</li>
+<li><strong>Вычислять автоматически</strong>: флажок установлен</li>
+<li><strong>Вычисляемое значение: N3</strong></li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы </span></code> <br/><code><span class="c"># с логикой, задачами и статусами задач.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmw:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">task:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/task#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">taskStatus:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/taskStatus#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">account:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/account#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">role:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/role#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Получаем задачи, связанные с текущей записью.</span></code> <br/><code>    <span class="err">?tasks</span> <span class="nn">task</span><span class="p">:</span><span class="nt">objectId</span> <span class="err">?item</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получаем активные задачи.</span></code> <br/><code>    <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">taskStatus</span> <span class="nn">taskStatus</span><span class="p">:</span><span class="nt">inProgress</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получаем фактических и возможных исполнителей задач.</span></code> <br/><code>    <span class="c"># Проверяем различные варианты назначения задач.</span></code> <br/><code>    <span class="err">or</span><span class="p">{</span></code> <br/><code>        <span class="c"># Возвращаем фактического исполнителя,</span></code> <br/><code>        <span class="c"># если он назначен через группы и роли.</span></code> <br/><code>        <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">assignee</span> <span class="err">?assigneeRoles</span><span class="p">.</span></code> <br/><code>        <span class="err">?assigneeRoles</span> <span class="nn">role</span><span class="p">:</span><span class="nt">roleMembers</span> <span class="err">?groupMembers</span><span class="p">.</span></code> <br/><code>        <span class="err">?groupMembers</span> <span class="nn">account</span><span class="p">:</span><span class="nt">groupUsers</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">or</span> <span class="p">{</span></code> <br/><code></code> <br/><code>        <span class="c"># Возвращаем фактического исполнителя,</span></code> <br/><code>        <span class="c"># если он назначен через роли.</span></code> <br/><code>        <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">assignee</span> <span class="err">?assigneeRoles</span><span class="p">.</span></code> <br/><code>        <span class="err">?assigneeRoles</span> <span class="nn">role</span><span class="p">:</span><span class="nt">roleMembers</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">or</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Возвращаем фактического исполнителя,</span></code> <br/><code>        <span class="c"># если он назначен через аккаунт.</span></code> <br/><code>        <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">assignee</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">or</span><span class="p">{</span></code> <br/><code>        <span class="c"># Возвращаем список возможных исполнителей,</span></code> <br/><code>        <span class="c"># если они назначены через группы и роли.</span></code> <br/><code>        <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">possibleAssignee</span> <span class="err">?possibleRoles</span><span class="p">.</span></code> <br/><code>        <span class="err">?assigneeRoles</span> <span class="nn">role</span><span class="p">:</span><span class="nt">roleMembers</span> <span class="err">?groupMembers</span><span class="p">.</span></code> <br/><code>        <span class="err">?groupMembers</span> <span class="nn">account</span><span class="p">:</span><span class="nt">groupUsers</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">or</span> <span class="p">{</span></code> <br/><code></code> <br/><code>        <span class="c"># Возвращаем список возможных исполнителей,</span></code> <br/><code>        <span class="c"># если они назначены через роли.</span></code> <br/><code>        <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">possibleAssignee</span> <span class="err">?possibleRoles</span><span class="p">.</span></code> <br/><code>        <span class="err">?assigneeRoles</span> <span class="nn">role</span><span class="p">:</span><span class="nt">roleMembers</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">or</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Возвращаем список возможных исполнителей,</span></code> <br/><code>        <span class="c"># если они назначены через аккаунты.</span></code> <br/><code>        <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">possibleAssignee</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code>    <span class="p">}.</span></code> <br/><code>    <span class="c"># Оставляем только активные аккаунты.</span></code> <br/><code>    <span class="err">?value</span> <span class="nn">account</span><span class="p">:</span><span class="nt">active</span> <span class="l">true</span><span class="p">.</span></code> <br/><code>    <span class="c"># Исключаем отключенные аккаунты.</span></code> <br/><code>    <span class="err">not</span> <span class="p">{</span><span class="err">?value</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">isDisabled</span> <span class="l">true</span><span class="p">.}.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Создайте атрибут со следующими свойствами:</p>
+<ul>
+<li><strong>Название:</strong> <em>У вас имеются задачи</em></li>
+<li><strong>Тип данных: логический</strong></li>
+<li><strong>Вычислять автоматически</strong>: флажок установлен</li>
+<li><strong>Вычисляемое значение: N3</strong></li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы </span></code> <br/><code><span class="c"># с логикой, задачами и статусами задач.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmw:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">task:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/task#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">taskStatus:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/taskStatus#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">account:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/account#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">role:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/role#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Получаем аккаунт текущего пользователя из контекста безопасности.</span></code> <br/><code>    <span class="nn">cmw</span><span class="p">:</span><span class="nt">securityContext</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">currentUser</span> <span class="err">?currentUser</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получаем роли текущего пользователя.</span></code> <br/><code>    <span class="err">?roles</span> <span class="nn">role</span><span class="p">:</span><span class="nt">roleMembers</span> <span class="err">?currentUser</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получаем группы, в которые входит пользователь.</span></code> <br/><code>    <span class="err">?userGroups</span> <span class="nn">account</span><span class="p">:</span><span class="nt">groupUsers</span> <span class="err">?currentUser</span><span class="p">.</span></code> <br/><code>    <span class="err">?groupRoles</span> <span class="nn">role</span><span class="p">:</span><span class="nt">roleMembers</span> <span class="err">?userGroups</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получаем задачи, связанные с текущей записью.</span></code> <br/><code>    <span class="err">?tasks</span> <span class="nn">task</span><span class="p">:</span><span class="nt">objectId</span> <span class="err">?item</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получаем активные задачи.</span></code> <br/><code>    <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">taskStatus</span> <span class="nn">taskStatus</span><span class="p">:</span><span class="nt">inProgress</span><span class="p">.</span></code> <br/><code>    <span class="c"># Проверяем различные варианты назначения задачи.</span></code> <br/><code>    <span class="err">once</span> <span class="p">{</span></code> <br/><code>        <span class="err">or</span> <span class="p">{</span></code> <br/><code>            <span class="c"># Проверяем, назначена ли задача на текущего пользователя.</span></code> <br/><code>            <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">assignee</span> <span class="err">?currentUser</span><span class="p">.</span></code> <br/><code>        <span class="p">}</span></code> <br/><code>        <span class="err">or</span> <span class="p">{</span></code> <br/><code>            <span class="c"># Проверяем, является ли пользователь возможным исполнителем.</span></code> <br/><code>            <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">possibleAssignee</span> <span class="err">?currentUser</span><span class="p">.</span></code> <br/><code>        <span class="p">}</span></code> <br/><code>        <span class="err">or</span> <span class="p">{</span></code> <br/><code>            <span class="c"># Проверяем, назначена ли задача на роль пользователя.</span></code> <br/><code>            <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">assignee</span> <span class="err">?roles</span><span class="p">.</span></code> <br/><code>        <span class="p">}</span></code> <br/><code>        <span class="err">or</span> <span class="p">{</span></code> <br/><code>            <span class="c"># Проверяем, является ли роль пользователя возможным исполнителем.</span></code> <br/><code>            <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">possibleAssignee</span> <span class="err">?roles</span><span class="p">.</span></code> <br/><code>        <span class="p">}</span></code> <br/><code>        <span class="err">or</span> <span class="p">{</span></code> <br/><code>            <span class="c"># Проверяем, назначена ли задача на группу пользователя.</span></code> <br/><code>            <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">assignee</span> <span class="err">?groupRoles</span><span class="p">.</span></code> <br/><code>        <span class="p">}</span></code> <br/><code>        <span class="err">or</span> <span class="p">{</span></code> <br/><code>            <span class="c"># Проверяем, является ли группа пользователя возможным исполнителем.</span></code> <br/><code>            <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">possibleAssignee</span> <span class="err">?groupRoles</span><span class="p">.</span></code> <br/><code>        <span class="p">}.</span></code> <br/><code>    <span class="p">}.</span></code> <br/><code>    <span class="c"># Возвращаем True, если у текущего пользователя есть задачи.</span></code> <br/><code>    <span class="err">?</span><span class="l">true</span> <span class="err">-&gt;</span> <span class="err">?value</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Поместите атрибуты <em>«Ответственные»</em> и <em>«У вас имеются задачи»</em> на форму шаблона <em>«Заявки»</em>.</p>
+</li>
+<li>Установите для поля <em>«У вас имеются задачи»</em> на форме отображение в качестве <strong>переключателя</strong>.</li>
+</ol>
+<h2 id="n3_calculate_active_task_assignee_test">Тестирование</h2>
+<ol class="colored_numbers_list">
+<li>Запустите процесс <em>«Оформление заявок»</em>.</li>
+<li>Откройте <em>заявку</em>, созданную при запуске процесса.</li>
+<li>В поле <em>«Ответственные»</em> должен отображаться список исполнителей текущей задачи по <em>заявке</em>.</li>
+<li>В поле <em>«У вас имеются задачи»</em> должно отобразиться значение «<strong>Да</strong>»</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="autorefs autorefs-internal mkdocs_imported_link" href="n3_calculate_active_task_accounts.html#example_n3_calculate_active_task_accounts" title="Аккаунты и задачи. Вычисление пользователей с активными задачами с помощью N3">Вычисление пользователей с активными задачами</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4905">Периодические напоминания об открытых задачах</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4682">Уведомления. Типы, назначение, настройка, использование</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

@@ -1,203 +1,253 @@
-<h1>Zabbix Server, Zabbix Agent, Zabbix Frontend и MySQL. Инструкции по установке</h1><div style="color: #000000; font-family: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">
-<div style="color: #000000; font-family: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">
-<h2 data-heading="Введение" id="mcetoc_1glhqs6so0">Введение</h2>
-<p>В настоящей статье представлены инструкции по установке сервера и агентов Zabbix, используемых для мониторинга работы <strong>Comindware Platform</strong>, развёрнутой на одной или нескольких виртуальных или физических машинах.</p>
-<p><em>Zabbix Server</em> можно развернуть только на Linux-машине, в настоящей статье приведён пример установки и конфигурирования на Ubuntu 22.04 LTS. В работе <em>Zabbix Server</em> использует СУБД MySQL, либо PostgreSQL. В настоящей статье представлены настройки для MySQL.</p>
-<p><em>Zabbix Agent</em> можно установить на машину под управлением ОС Windows или Linux. В настоящей статье представлены краткие инструкции по установке и настройке агента на машине с Ubuntu 22.04 LTS и установленным сервером Zabbix. Инструкции по установке Zabbix Agent на отдельной машине см. в статье «<samp data-name="aid" data-title="" data-value="4608"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Zabbix Agent. Инструкции по установке для Ubuntu 22.04 {Article-ID:4608}</span></samp>».</p>
-<h2 data-heading="1. Установка  Zabbix Server" id="mcetoc_1glhqs6so1">1. Установка  Zabbix Server</h2>
-<p>1.1. Для работы <em>Zabbix Server</em> необходимо установить NGINX:</p>
-<pre class="html-script: true;" tabindex="0"><code><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> -y nginx
-</code></pre>
-<p>1.2. Загрузите deb-пакет из репозитория:</p>
-<pre class="" tabindex="0"><code><span class="token function">sudo</span> <span class="token function">wget</span> <span class="">&lt;</span>https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.0-4%2Bubuntu22.04_all.deb<span class="">&gt;</span>
-</code></pre>
-<pre class="" tabindex="0"><code><span class="token function">sudo</span> dpkg -i zabbix-release_6.0-4+ubuntu22.04_all.deb
-</code></pre>
-<pre class="" tabindex="0"><code><span class="token function">sudo</span> <span class="token function">apt</span> update
-</code></pre>
-<p>1.3. Установите <em>Zabbix Server</em>, <em>Zabbix Frontend</em> и <em>Zabbix Agent</em>:</p>
-<pre class="" tabindex="0"><code><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> -y zabbix-server-mysql zabbix-frontend-php zabbix-nginx-conf zabbix-sql-scripts zabbix-agent
-</code></pre>
-<h2 data-heading="2. Установка и конфигурация MySQL" id="mcetoc_1glhqs6so2">2. Установка и конфигурация MySQL</h2>
-<p>2.1. Установите и активируйте MySQL:</p>
-<pre class="" tabindex="0"><code><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> -y mysql-server
-</code></pre>
-<pre class="" tabindex="0"><code><span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> --now mysql
-</code></pre>
-<p>2.2. Запустите MySQL от имени скперпользователя root:</p>
-<pre class="" tabindex="0"><code><span class="token function">sudo</span> mysql
-</code></pre>
-<p>2.3. После входа в консоль MySQL выполните запрос, подставив свои значения в поля <code>'root'</code>,<code style="font-family: 'Roboto Mono', 'Courier New', Courier, monospace; background-color: #f5f5f5;">'localhost'</code> и <code>'password'</code>:</p>
-<pre class="language-mysql" tabindex="0"><code class="language-mysql is-loaded">ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
-</code></pre>
-<p>2.4. Ожидаемый ответ консоли MySQL с подтверждением внесённых изменений:</p>
-<pre class="" tabindex="0"><code>Query OK, <span class="">0</span> rows affected <span class="">(</span><span class="">0.01</span> sec<span class="">)</span>
-</code></pre>
-<p>2.5. Выйдите из сеанса для пользователя root :</p>
-<pre class="language-mysql" tabindex="0"><code class="language-mysql is-loaded">quit;
-</code></pre>
-<p>2.6. Запустите скрипт <code>mysql_secure_installation</code> и в интерактивном режиме согласитесь удалить тестовую базу данных и аккаунт анонимного пользователя:</p>
-<pre class="" tabindex="0"><code>/usr/bin/mysql_secure_installation
-</code></pre>
-<pre class="" tabindex="0"><code class="">Securing the MySQL server deployment<span class="">.</span>
-<span class="">Enter password for user root:</span> <span class="">&lt;</span>password<span class="">-</span>here<span class="">&gt;</span>
-</code></pre>
-<pre class="" tabindex="0"><code class="">VALIDATE PASSWORD COMPONENT can be used to test passwords
-and improve security<span class="">.</span> It checks the strength of password
-and allows the users to set only those passwords which are
-secure enough<span class="">.</span> Would you like to setup VALIDATE PASSWORD component<span class="">?</span>
-Press y<span class="">|</span>Y for Yes<span class="">,</span> any other key for No<span class="">:</span> n
-</code></pre>
-<pre class="" tabindex="0"><code class="">Using existing password for root<span class="">.</span>
-Change the password for root <span class="">?</span> <span class="">(</span><span class="">(</span>Press y<span class="">|</span>Y for Yes<span class="">,</span> any other key for No<span class="">)</span> <span class="">:</span> n
-</code></pre>
-<pre class="" tabindex="0"><code class="">By default<span class="">,</span> a MySQL installation has an anonymous user<span class="">,</span>
-allowing anyone to log into MySQL without having to have
-a user account created for them<span class="">.</span> This is intended only for
-testing<span class="">,</span> and to make the installation go a bit smoother<span class="">.</span>
-You should remove them before moving into a production
-environment<span class="">.</span>
-Remove anonymous users<span class="">?</span> <span class="">(</span>Press y<span class="">|</span>Y for Yes<span class="">,</span> any other key for No<span class="">)</span> <span class="">:</span> y
-</code></pre>
-<pre class="" tabindex="0"><code class="">Normally<span class="">,</span> root should only be allowed to connect from
-<span class="">'localhost'</span><span class="">.</span> This ensures that someone cannot guess at
-the root password from the network<span class="">.</span>
-Disallow root login remotely<span class="">?</span> <span class="">(</span>Press y<span class="">|</span>Y for Yes<span class="">,</span> any other key for No<span class="">)</span> <span class="">:</span> n
-</code></pre>
-<pre class="" tabindex="0"><code class="">By default<span class="">,</span> MySQL comes with a database named <span class="">'test'</span> that
-anyone can access<span class="">.</span> This is also intended only for testing<span class="">,</span>
-and should be removed before moving into a production
-environment<span class="">.</span>
-Remove test database and access to it<span class="">?</span> <span class="">(</span>Press y<span class="">|</span>Y for Yes<span class="">,</span> any other key for No<span class="">)</span> <span class="">:</span> y
-</code></pre>
-<pre class="" tabindex="0"><code class="">Reloading the privilege tables will ensure that all changes
-made so far will take effect immediately<span class="">.</span>
-Reload privilege tables now<span class="">?</span> <span class="">(</span>Press y<span class="">|</span>Y for Yes<span class="">,</span> any other key for No<span class="">)</span> <span class="">:</span> y
-</code></pre>
-<pre class="" tabindex="0"><code class="">Success<span class="">.</span>
-All done<span class="">!</span>
-</code></pre>
-<h2 data-heading="3. Создание базы данных для Zabbix в MySQL" id="mcetoc_1glhqs6so3">3. Создание базы данных для Zabbix в MySQL</h2>
-<p>3.1. Начните сеанс пользователя <code>root</code> в MySQL:</p>
-<pre class="" tabindex="0"><code class="">mysql -uroot -p
-</code></pre>
-<p>3.2. Создайте базу данных <code>zabbix</code>:</p>
-<pre class="language-mysql" tabindex="0"><code class="language-mysql is-loaded"> create database zabbix character set utf8mb4 collate utf8mb4_bin;
-</code></pre>
-<p>3.3. Создайте пользователя <code>zabbix</code>. Не забудьте задать пароль:</p>
-<pre class="language-mysql" tabindex="0"><code class="language-mysql is-loaded"> create user zabbix@localhost identified by 'password'; 
-grant all privileges on zabbix.* to zabbix@localhost;
-SET GLOBAL log_bin_trust_function_creators = 1;
-quit;
-</code></pre>
-<p>3.4. Создайте схему данных для Zabbix:</p>
-<pre class="" tabindex="0"><code class="">zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz <span class="">|</span> mysql --default-character-set<span class="">=</span>utf8mb4 -uzabbix -p zabbix
-</code></pre>
-<p>3.5. Введите пароль пользователя zabbix для доступа к MySQL, заданный на шаге 3.3., и дождитесь завершения выполнения скрипта.</p>
-<h2 data-heading="4. Настройка Zabbix Server" id="mcetoc_1glhqs6so4">4. Настройка Zabbix Server</h2>
-<p>4.1. Откройте файл конфигурации <code>zabbix_server.conf</code> с помощью текстового редактора, например:</p>
-<pre class="" tabindex="0"><code class=""><span class="token function">sudo</span> <span class="token function">nano</span> /etc/zabbix/zabbix_server.conf
-</code></pre>
-<p>4.2 Укажите пароль пользователя zabbix (заданный на шаге 3.3) для доступа к MySQL:</p>
-<pre class="language-sh" tabindex="0"><code class="language-sh is-loaded"> ### Option: DBPassword
-#       Database password.
-#       Comment this line if no password is used.
-#
-# Mandatory: no
-# Default:
-# DBPassword=
-DBPassword=password
-</code></pre>
-<p>4.3. Сохраните изменения и выйдите.</p>
-<h2 data-heading="5. Настройка Zabbix Frontend" id="mcetoc_1glhqs6so5">5. Настройка Zabbix Frontend</h2>
-<p>5.1. Отредактируйте <code>/etc/zabbix/nginx.conf</code> :</p>
-<pre class="" tabindex="0"><code class=""><span class="token function">sudo</span> <span class="token function">nano</span> /etc/zabbix/nginx.conf
-</code></pre>
-<p>5.2. Раскомментируйте директивы <code>listen</code> и <code>server_name</code> и присвойте им значения:</p>
-<pre class="" tabindex="0"><code class="">listen <span class="">8080</span><span class="">;</span>
-server_name example.com<span class="">;</span> <span class=""># change-me.com</span>
-</code></pre>
-<p>5.3. Запустите службы <em>Zabbix Server, Zabbix Agent, Zabbix Frontend</em> и <em>NGINX</em>:</p>
-<pre class="" tabindex="0"><code class=""><span class="token function">sudo</span> systemctl daemon-reload
-<span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> --now zabbix-server zabbix-agent nginx php8.1-fpm
-</code></pre>
-<h2 data-heading="6. Использование Zabbix Frontend" id="mcetoc_1glhqs6so6">6. Использование Zabbix Frontend</h2>
-<p>6.1. Для доступа к <em>Zabbix Frontend</em> перейдите по адресу <code>http://machine-ip-address:8080</code>:</p>
-<p><code></code></p>
-<div class="screenshot_with_caption" style="font-size: 15px !important;">
-<p><img class="img-responsive" src="https://kb.comindware.ru/assets/img_63af06de4faf0.png"/></p>
-<p class="caption" style="font-size: 15px !important;"><em>Начальная страница Zabbix Frontend</em></p>
+<h1>Zabbix Server, Zabbix Agent, Zabbix Frontend и MySQL. Инструкции по установке</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4607">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#установка-zabbix-server">
+<span class="md-ellipsis">
+      Установка Zabbix Server
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#установка-и-конфигурация-mysql">
+<span class="md-ellipsis">
+      Установка и конфигурация MySQL
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#создание-базы-данных-для-zabbix-в-mysql">
+<span class="md-ellipsis">
+      Создание базы данных для Zabbix в MySQL
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-zabbix-server">
+<span class="md-ellipsis">
+      Настройка Zabbix Server
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-zabbix-frontend">
+<span class="md-ellipsis">
+      Настройка Zabbix Frontend
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#использование-zabbix-frontend">
+<span class="md-ellipsis">
+      Использование Zabbix Frontend
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-службы-zabbix-agent">
+<span class="md-ellipsis">
+      Настройка службы Zabbix Agent
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#добавление-linux-хоста-в-сеть-мониторинга">
+<span class="md-ellipsis">
+      Добавление Linux-хоста в сеть мониторинга
+    </span>
+</a>
+</li>
+</ul>
 </div>
-<p>6.2. Удостоверьтесь, что конфигурация сервера была применена успешно:</p>
-<p><code></code></p>
-<div class="screenshot_with_caption" style="font-size: 15px !important;">
-<p><img class="img-responsive" src="https://kb.comindware.ru/assets/img_63af06ef8c0a2.png"/></p>
-<p class="caption" style="font-size: 15px !important;"><em>Проверка конфигурации Zabbix Server</em></p>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Здесь представлены инструкции по установке сервера и агентов Zabbix, используемых для мониторинга работы <strong>Comindware Platform</strong>, развёрнутой на одной или нескольких виртуальных или физических машинах.</p>
+<p><em>Zabbix Server</em> можно развернуть только на Linux-машине, здесь приведён пример установки и конфигурирования на Ubuntu 22.04 LTS. В работе <em>Zabbix Server</em> использует СУБД MySQL, либо PostgreSQL. Здесь представлены настройки для MySQL.</p>
+<p><em>Zabbix Agent</em> можно установить на машину под управлением ОС Windows или Linux. Здесь представлены краткие инструкции по установке и настройке агента на машине с Ubuntu 22.04 LTS и установленным сервером Zabbix. Инструкции по установке Zabbix Agent на отдельной машине см. в статье «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4608">Zabbix Agent. Инструкции по установке</a>».</p>
+<h2 id="установка-zabbix-server">Установка  Zabbix Server</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Для работы <em>Zabbix Server</em> необходимо установить NGINX:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>nginx</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Загрузите deb-пакет из репозитория:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>wget<span class="w"> </span>&lt;https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.0-4%2Bubuntu22.04_all.deb&gt;</code> <br/><code>sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>zabbix-release_6.0-4+ubuntu22.04_all.deb</code> <br/><code>sudo<span class="w"> </span>apt<span class="w"> </span>update</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Установите <em>Zabbix Server</em>, <em>Zabbix Frontend</em> и <em>Zabbix Agent</em>:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>zabbix-server-mysql<span class="w"> </span>zabbix-frontend-php<span class="w"> </span>zabbix-nginx-conf<span class="w"> </span>zabbix-sql-scripts<span class="w"> </span>zabbix-agent</code> <br/></pre></code></div>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="установка-и-конфигурация-mysql">Установка и конфигурация MySQL</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Установите и активируйте MySQL:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>mysql-server</code> <br/><code>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>mysql</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Запустите MySQL от имени суперпользователя root:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>mysql</code> <br/></pre></code></div>
+</li>
+<li>
+<p>После входа в консоль MySQL выполните запрос, подставив свои значения в поля <code>'root'</code>,<code>'localhost'</code> и <code>'password'</code>:</p>
+<div class="highlight"><code><pre><span></span><code>ALTER<span class="w"> </span>USER<span class="w"> </span><span class="s1">'root'</span>@<span class="s1">'localhost'</span><span class="w"> </span>IDENTIFIED<span class="w"> </span>WITH<span class="w"> </span>mysql_native_password<span class="w"> </span>BY<span class="w"> </span><span class="s1">'password'</span><span class="p">;</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Ожидаемый ответ консоли MySQL с подтверждением внесённых изменений:</p>
+<div class="highlight"><code><pre><span></span><code>Query<span class="w"> </span>OK,<span class="w"> </span><span class="m">0</span><span class="w"> </span>rows<span class="w"> </span>affected<span class="w"> </span><span class="o">(</span><span class="m">0</span>.01<span class="w"> </span>sec<span class="o">)</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Выйдите из сеанса для пользователя root :</p>
+<div class="highlight"><code><pre><span></span><code>quit<span class="p">;</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Запустите скрипт <code>mysql_secure_installation</code> и в интерактивном режиме согласитесь удалить тестовую базу данных и аккаунт анонимного пользователя:</p>
+<div class="pageBreakAfter highlight"><span class="filename">Удаление анонимного пользователя MySQL</span><code><pre><span></span><code>/usr/bin/mysql_secure_installation</code> <br/><code></code> <br/><code>Securing<span class="w"> </span>the<span class="w"> </span>MySQL<span class="w"> </span>server<span class="w"> </span>deployment.</code> <br/><code></code> <br/><code>Enter<span class="w"> </span>password<span class="w"> </span><span class="k">for</span><span class="w"> </span>user<span class="w"> </span>root:<span class="w"> </span>&lt;password-here&gt;</code> <br/><code></code> <br/><code>VALIDATE<span class="w"> </span>PASSWORD<span class="w"> </span>COMPONENT<span class="w"> </span>can<span class="w"> </span>be<span class="w"> </span>used<span class="w"> </span>to<span class="w"> </span><span class="nb">test</span><span class="w"> </span>passwords</code> <br/><code>and<span class="w"> </span>improve<span class="w"> </span>security.<span class="w"> </span>It<span class="w"> </span>checks<span class="w"> </span>the<span class="w"> </span>strength<span class="w"> </span>of<span class="w"> </span>password</code> <br/><code>and<span class="w"> </span>allows<span class="w"> </span>the<span class="w"> </span>users<span class="w"> </span>to<span class="w"> </span><span class="nb">set</span><span class="w"> </span>only<span class="w"> </span>those<span class="w"> </span>passwords<span class="w"> </span>which<span class="w"> </span>are</code> <br/><code>secure<span class="w"> </span>enough.<span class="w"> </span>Would<span class="w"> </span>you<span class="w"> </span>like<span class="w"> </span>to<span class="w"> </span>setup<span class="w"> </span>VALIDATE<span class="w"> </span>PASSWORD<span class="w"> </span>component?</code> <br/><code></code> <br/><code>Press<span class="w"> </span>y<span class="p">|</span>Y<span class="w"> </span><span class="k">for</span><span class="w"> </span>Yes,<span class="w"> </span>any<span class="w"> </span>other<span class="w"> </span>key<span class="w"> </span><span class="k">for</span><span class="w"> </span>No:<span class="w"> </span>n</code> <br/><code></code> <br/><code>Using<span class="w"> </span>existing<span class="w"> </span>password<span class="w"> </span><span class="k">for</span><span class="w"> </span>root.</code> <br/><code></code> <br/><code>Change<span class="w"> </span>the<span class="w"> </span>password<span class="w"> </span><span class="k">for</span><span class="w"> </span>root<span class="w"> </span>?<span class="w"> </span><span class="o">(</span>Press<span class="w"> </span>y<span class="p">|</span>Y<span class="w"> </span><span class="k">for</span><span class="w"> </span>Yes,<span class="w"> </span>any<span class="w"> </span>other<span class="w"> </span>key<span class="w"> </span><span class="k">for</span><span class="w"> </span>No<span class="o">)</span><span class="w"> </span>:<span class="w"> </span>n</code> <br/><code></code> <br/><code>By<span class="w"> </span>default,<span class="w"> </span>a<span class="w"> </span>MySQL<span class="w"> </span>installation<span class="w"> </span>has<span class="w"> </span>an<span class="w"> </span>anonymous<span class="w"> </span>user,</code> <br/><code>allowing<span class="w"> </span>anyone<span class="w"> </span>to<span class="w"> </span>log<span class="w"> </span>into<span class="w"> </span>MySQL<span class="w"> </span>without<span class="w"> </span>having<span class="w"> </span>to<span class="w"> </span>have</code> <br/><code>a<span class="w"> </span>user<span class="w"> </span>account<span class="w"> </span>created<span class="w"> </span><span class="k">for</span><span class="w"> </span>them.<span class="w"> </span>This<span class="w"> </span>is<span class="w"> </span>intended<span class="w"> </span>only<span class="w"> </span><span class="k">for</span></code> <br/><code>testing,<span class="w"> </span>and<span class="w"> </span>to<span class="w"> </span>make<span class="w"> </span>the<span class="w"> </span>installation<span class="w"> </span>go<span class="w"> </span>a<span class="w"> </span>bit<span class="w"> </span>smoother.</code> <br/><code>You<span class="w"> </span>should<span class="w"> </span>remove<span class="w"> </span>them<span class="w"> </span>before<span class="w"> </span>moving<span class="w"> </span>into<span class="w"> </span>a<span class="w"> </span>production</code> <br/><code>environment.</code> <br/><code></code> <br/><code>Remove<span class="w"> </span>anonymous<span class="w"> </span>users?<span class="w"> </span><span class="o">(</span>Press<span class="w"> </span>y<span class="p">|</span>Y<span class="w"> </span><span class="k">for</span><span class="w"> </span>Yes,<span class="w"> </span>any<span class="w"> </span>other<span class="w"> </span>key<span class="w"> </span><span class="k">for</span><span class="w"> </span>No<span class="o">)</span><span class="w"> </span>:<span class="w"> </span>y</code> <br/><code></code> <br/><code>Normally,<span class="w"> </span>root<span class="w"> </span>should<span class="w"> </span>only<span class="w"> </span>be<span class="w"> </span>allowed<span class="w"> </span>to<span class="w"> </span>connect<span class="w"> </span>from</code> <br/><code><span class="s1">'localhost'</span>.<span class="w"> </span>This<span class="w"> </span>ensures<span class="w"> </span>that<span class="w"> </span>someone<span class="w"> </span>cannot<span class="w"> </span>guess<span class="w"> </span>at</code> <br/><code>the<span class="w"> </span>root<span class="w"> </span>password<span class="w"> </span>from<span class="w"> </span>the<span class="w"> </span>network.</code> <br/><code>Disallow<span class="w"> </span>root<span class="w"> </span>login<span class="w"> </span>remotely?<span class="w"> </span><span class="o">(</span>Press<span class="w"> </span>y<span class="p">|</span>Y<span class="w"> </span><span class="k">for</span><span class="w"> </span>Yes,<span class="w"> </span>any<span class="w"> </span>other<span class="w"> </span>key<span class="w"> </span><span class="k">for</span><span class="w"> </span>No<span class="o">)</span><span class="w"> </span>:<span class="w"> </span>n</code> <br/><code>By<span class="w"> </span>default,<span class="w"> </span>MySQL<span class="w"> </span>comes<span class="w"> </span>with<span class="w"> </span>a<span class="w"> </span>database<span class="w"> </span>named<span class="w"> </span><span class="s1">'test'</span><span class="w"> </span>that</code> <br/><code>anyone<span class="w"> </span>can<span class="w"> </span>access.<span class="w"> </span>This<span class="w"> </span>is<span class="w"> </span>also<span class="w"> </span>intended<span class="w"> </span>only<span class="w"> </span><span class="k">for</span><span class="w"> </span>testing,</code> <br/><code>and<span class="w"> </span>should<span class="w"> </span>be<span class="w"> </span>removed<span class="w"> </span>before<span class="w"> </span>moving<span class="w"> </span>into<span class="w"> </span>a<span class="w"> </span>production</code> <br/><code>environment.</code> <br/><code></code> <br/><code>Remove<span class="w"> </span><span class="nb">test</span><span class="w"> </span>database<span class="w"> </span>and<span class="w"> </span>access<span class="w"> </span>to<span class="w"> </span>it?<span class="w"> </span><span class="o">(</span>Press<span class="w"> </span>y<span class="p">|</span>Y<span class="w"> </span><span class="k">for</span><span class="w"> </span>Yes,<span class="w"> </span>any<span class="w"> </span>other<span class="w"> </span>key<span class="w"> </span><span class="k">for</span><span class="w"> </span>No<span class="o">)</span><span class="w"> </span>:<span class="w"> </span>y</code> <br/><code></code> <br/><code>Reloading<span class="w"> </span>the<span class="w"> </span>privilege<span class="w"> </span>tables<span class="w"> </span>will<span class="w"> </span>ensure<span class="w"> </span>that<span class="w"> </span>all<span class="w"> </span>changes</code> <br/><code>made<span class="w"> </span>so<span class="w"> </span>far<span class="w"> </span>will<span class="w"> </span>take<span class="w"> </span>effect<span class="w"> </span>immediately.</code> <br/><code></code> <br/><code>Reload<span class="w"> </span>privilege<span class="w"> </span>tables<span class="w"> </span>now?<span class="w"> </span><span class="o">(</span>Press<span class="w"> </span>y<span class="p">|</span>Y<span class="w"> </span><span class="k">for</span><span class="w"> </span>Yes,<span class="w"> </span>any<span class="w"> </span>other<span class="w"> </span>key<span class="w"> </span><span class="k">for</span><span class="w"> </span>No<span class="o">)</span><span class="w"> </span>:<span class="w"> </span>y</code> <br/><code></code> <br/><code>Success.</code> <br/><code>All<span class="w"> </span><span class="k">done</span>!</code> <br/></pre></code></div>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="создание-базы-данных-для-zabbix-в-mysql">Создание базы данных для Zabbix в MySQL</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Начните сеанс пользователя <code>root</code> в MySQL:</p>
+<div class="highlight"><code><pre><span></span><code>mysql<span class="w"> </span>-uroot<span class="w"> </span>-p</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Создайте базу данных <code>zabbix</code>:</p>
+<div class="highlight"><code><pre><span></span><code>create<span class="w"> </span>database<span class="w"> </span>zabbix<span class="w"> </span>character<span class="w"> </span><span class="nb">set</span><span class="w"> </span>utf8mb4<span class="w"> </span>collate<span class="w"> </span>utf8mb4_bin<span class="p">;</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Создайте пользователя <code>zabbix</code>. Не забудьте задать пароль:</p>
+<div class="highlight"><code><pre><span></span><code>create<span class="w"> </span>user<span class="w"> </span>zabbix@localhost<span class="w"> </span>identified<span class="w"> </span>by<span class="w"> </span><span class="s1">'password'</span><span class="p">;</span></code> <br/><code>grant<span class="w"> </span>all<span class="w"> </span>privileges<span class="w"> </span>on<span class="w"> </span>zabbix.*<span class="w"> </span>to<span class="w"> </span>zabbix@localhost<span class="p">;</span></code> <br/><code>SET<span class="w"> </span>GLOBAL<span class="w"> </span><span class="nv">log_bin_trust_function_creators</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span></code> <br/><code>quit<span class="p">;</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Создайте схему данных для Zabbix:</p>
+<div class="highlight"><code><pre><span></span><code>zcat<span class="w"> </span>/usr/share/zabbix-sql-scripts/mysql/server.sql.gz<span class="w"> </span><span class="p">|</span><span class="w"> </span>mysql<span class="w"> </span>--default-character-set<span class="o">=</span>utf8mb4<span class="w"> </span>-uzabbix<span class="w"> </span>-p<span class="w"> </span>zabbix</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Введите пароль пользователя zabbix для доступа к MySQL, заданный на шаге 3.3., и дождитесь завершения выполнения скрипта.</p>
+</li>
+</ol>
+<h2 id="настройка-zabbix-server">Настройка Zabbix Server</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Откройте файл конфигурации <code>zabbix_server.conf</code> с помощью текстового редактора, например:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/zabbix/zabbix_server.conf</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Укажите пароль пользователя zabbix (заданный на шаге 3.3) для доступа к MySQL:</p>
+<div class="highlight"><code><pre><span></span><code><span class="c1">### Option: DBPassword</span></code> <br/><code><span class="c1">#       Database password.</span></code> <br/><code><span class="c1">#       Comment this line if no password is used.</span></code> <br/><code><span class="c1">#</span></code> <br/><code><span class="c1"># Mandatory: no</span></code> <br/><code><span class="c1"># Default:</span></code> <br/><code><span class="c1"># DBPassword=</span></code> <br/><code><span class="nv">DBPassword</span><span class="o">=</span>password</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Сохраните изменения и выйдите.</p>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="настройка-zabbix-frontend">Настройка Zabbix Frontend</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Отредактируйте <code>/etc/zabbix/nginx.conf</code> :</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/zabbix/nginx.conf</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Раскомментируйте директивы <code>listen</code> и <code>server_name</code> и присвойте им значения:</p>
+<div class="highlight"><code><pre><span></span><code>listen<span class="w"> </span><span class="m">8080</span><span class="p">;</span></code> <br/><code>server_name<span class="w"> </span>&lt;hostname&gt;<span class="p">;</span><span class="w"> </span><span class="c1"># замените на своё имя хоста</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Запустите службы <em>Zabbix Server, Zabbix Agent, Zabbix Frontend</em> и <em>NGINX</em>:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload</code> <br/><code>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>zabbix-server<span class="w"> </span>zabbix-agent<span class="w"> </span>nginx<span class="w"> </span>php8.1-fpm</code> <br/></pre></code></div>
+</li>
+</ol>
+<h2 id="использование-zabbix-frontend">Использование Zabbix Frontend</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Для доступа к <em>Zabbix Frontend</em> перейдите по адресу <code>http://machine-ip-address:8080</code>:</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Начальная страница Zabbix Frontend" src="https://kb.comindware.ru/assets/img_63af06de4faf0.png"/><figcaption class="caption">Начальная страница Zabbix Frontend</figcaption></figure></p>
+</li>
+<li>
+<p>Удостоверьтесь, что конфигурация сервера была применена успешно:</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Проверка конфигурации Zabbix Server" src="https://kb.comindware.ru/assets/img_63af06ef8c0a2.png"/><figcaption class="caption">Проверка конфигурации Zabbix Server</figcaption></figure></p>
+</li>
+<li>
+<p>Настройте строки подключения к базе данных MySQL:</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка подключения Zabbix к БД MySQL" src="https://kb.comindware.ru/assets/img_63af06fa36a3e.png"/><figcaption class="caption">Настройка подключения Zabbix к БД MySQL</figcaption></figure></p>
+</li>
+<li>
+<p>Задайте имя Zabbix Server, настройте часовой пояс и тему Zabbix Frontend:</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка имени и часового пояса Zabbix Server" src="https://kb.comindware.ru/assets/img_63af0705eb46f.png"/><figcaption class="caption">Настройка имени и часового пояса Zabbix Server</figcaption></figure></p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Завершение установки Zabbix Frontend" src="https://kb.comindware.ru/assets/img_63af071cc182b.png"/><figcaption class="caption">Завершение установки Zabbix Frontend</figcaption></figure></p>
+</li>
+<li>
+<p>В открывшейся форме ведите учётные данные встроенного суперпользователя:</p>
+<div class="highlight"><code><pre><span></span><code>Admin</code> <br/><code>zabbix</code> <br/></pre></code></div>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Вход в Zabbix Frontend" src="https://kb.comindware.ru/assets/img_63af07227b847.png"/><figcaption class="caption">Вход в Zabbix Frontend</figcaption></figure></p>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="настройка-службы-zabbix-agent">Настройка службы Zabbix Agent</h2>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Следующие шаги предназначены исключительно для настройки мониторинга ресурсов машины с установленным Zabbix Server.</p>
+<p>Для установки и настройки Zabbix Agent на сторонние машины используйте соответствующие инструкции. См. статью «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4608">Zabbix Agent. Инструкции по установке</a>».</p>
 </div>
-<p>6.3. Настройте строки подключения к базе данных MySQL:</p>
-<p><code></code></p>
-<div class="screenshot_with_caption" style="font-size: 15px !important;">
-<p><img class="img-responsive" src="https://kb.comindware.ru/assets/img_63af06fa36a3e.png"/></p>
-<p class="caption" style="font-size: 15px !important;"><em>Настройка подключения Zabbix к БД MySQL</em></p>
-</div>
-<p>6.4. Задайте имя Zabbix Server, настройте часовой пояс и тему Zabbix Frontend:</p>
-<p><code></code></p>
-<div class="screenshot_with_caption" style="font-size: 15px !important;">
-<p><img class="img-responsive" src="https://kb.comindware.ru/assets/img_63af0705eb46f.png"/></p>
-<p class="caption" style="font-size: 15px !important;"><em>Настройка имени и часового пояса Zabbix Server</em></p>
-</div>
-<p> </p>
-<div class="screenshot_with_caption" style="font-size: 15px !important;">
-<p><img class="img-responsive" src="https://kb.comindware.ru/assets/img_63af071cc182b.png"/></p>
-<p class="caption" style="font-size: 15px !important;"><em>Завершение установки Zabbix Frontend</em></p>
-</div>
-<p>6.5. В открывшейся форме ведите учётные данные встроенного суперпользователя:</p>
-<p><code>Admin</code></p>
-<p><code>zabbix</code></p>
-<div class="screenshot_with_caption" style="font-size: 15px !important;">
-<p><img class="img-responsive" src="https://kb.comindware.ru/assets/img_63af07227b847.png"/></p>
-<p class="caption" style="font-size: 15px !important;"><em style="color: #000000; letter-spacing: 0.2px; text-align: start;">Вход в Zabbix Frontend</em></p>
-</div>
-<h2 data-heading="7. Настройка сервиса Zabbix Agent" id="mcetoc_1glhqs6so7">7. Настройка службы Zabbix Agent</h2>
-<div class="blue_note"><strong>Примечание<br/></strong>Следующие шаги предназначены исключительно для настройки мониторинга ресурсов машины с установленным Zabbix Server. <br/><br/>Для установки и настройки Zabbix Agent на сторонние машины используйте соответствующие инструкции. См. статью «<samp data-name="aid" data-title="" data-value="4608"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Zabbix Agent. Инструкции по установке для Ubuntu 22.04 {Article-ID:4608}</span></samp>».</div>
-<p>7.1 . Отредактируйте файл конфигурации <code>/etc/zabbix/zabbix_agentd.conf</code>:</p>
-<pre class="" tabindex="0"><code class=""><span class="token function">sudo</span> <span class="token function">nano</span> /etc/zabbix/zabbix_agentd.conf
-</code></pre>
-<p>7.2. В файле конфигурации необходимо указать IP-адрес <em>Zabbix Server</em>. Если сервер развёрнут на наблюдаемой машине укажите IP-адрес 127.0.0.1 (если интерфейс loopback не настроен иначе):</p>
-<pre><code>### Option: Server
-#       List of comma delimited IP addresses, optionally in CIDR notation, or DNS names of Zabbix ser&gt;
-#       Incoming connections will be accepted only from the hosts listed here.
-#       If IPv6 support is enabled then '127.0.0.1', '::127.0.0.1', '::ffff:127.0.0.1' are treated eq&gt;
-#       and '::/0' will allow any IPv4 or IPv6 address.
-#       '0.0.0.0/0' can be used to allow any IPv4 address.
-#       Example: Server=127.0.0.1,192.168.1.0/24,::1,2001:db8::/32,zabbix.example.com
-#
-# Mandatory: yes, if StartAgents is not explicitly set to 0
-# Default:
-# Server=your.server.ip.address
-Server=127.0.0.1 
-</code></pre>
-<p>7.3. Отредактируйте директиву <code>ServerActive</code>:</p>
-<pre class="language-actionscript" tabindex="0"><code class="language-actionscript is-loaded">ServerActive<span class="">=</span><span class="">127.0</span><span class="">.0</span><span class="">.1</span>
-</code></pre>
-<p>7.4. Разрешите в сетевом экране использование порта 10050:</p>
-<pre class="" tabindex="0"><code class=""><span class="token function">sudo</span> ufw allow <span class="">10050</span>/tcp
-</code></pre>
-<p>7.5. Примените изменения:</p>
-<pre class="" tabindex="0"><code class=""><span class="token function">sudo</span> systemctl daemon-reload
-<span class="token function">sudo</span> ufw reload
-</code></pre>
-<p>7.6. Запустите <em>Zabbix Agent</em> и добавьте его в список автозагрузки:</p>
-<pre class="" tabindex="0"><code class=""><span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span>  --now zabbix-agent
-</code></pre>
-<p>7.7. Удостоверьтесь, что служба работает:</p>
-<pre class="" tabindex="0"><code class="">systemctl status zabbix.agent
-</code></pre>
-<div class="screenshot_with_caption" style="font-size: 15px !important;">
-<p><img class="img-responsive" src="https://kb.comindware.ru/assets/img_63af05a8d77f5.png"/></p>
-<p class="caption" style="font-size: 15px !important;"><em>Ожидаемый статус сервиса Zabbix Agent</em></p>
-</div>
-<h2 data-heading="8. Добавление Linux-хоста в сеть мониторинга" id="mcetoc_1glhqs6so8">8. Добавление Linux-хоста в сеть мониторинга</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Отредактируйте файл конфигурации <code>/etc/zabbix/zabbix_agentd.conf</code>:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/zabbix/zabbix_agentd.conf</code> <br/></pre></code></div>
+</li>
+<li>
+<p>В файле конфигурации необходимо указать IP-адрес <em>Zabbix Server</em>. Если сервер развёрнут на наблюдаемой машине укажите IP-адрес 127.0.0.1 (если интерфейс loopback не настроен иначе):</p>
+<div class="highlight"><code><pre><span></span><code><span class="c1">### Option: Server</span></code> <br/><code><span class="c1">#       List of comma delimited IP addresses, optionally in CIDR notation, or DNS names of Zabbix ser&gt;</span></code> <br/><code><span class="c1">#       Incoming connections will be accepted only from the hosts listed here.</span></code> <br/><code><span class="c1">#       If IPv6 support is enabled then '127.0.0.1', '::127.0.0.1', '::ffff:127.0.0.1' are treated eq&gt;</span></code> <br/><code><span class="c1">#       and '::/0' will allow any IPv4 or IPv6 address.</span></code> <br/><code><span class="c1">#       '0.0.0.0/0' can be used to allow any IPv4 address.</span></code> <br/><code><span class="c1">#       Example: Server=127.0.0.1,192.168.1.0/24,::1,2001:db8::/32,zabbix.&lt;hostname&gt;</span></code> <br/><code><span class="c1">#</span></code> <br/><code><span class="c1"># Mandatory: yes, if StartAgents is not explicitly set to 0</span></code> <br/><code><span class="c1"># Default:</span></code> <br/><code><span class="c1"># Server=your.server.ip.address</span></code> <br/><code><span class="nv">Server</span><span class="o">=</span><span class="m">127</span>.0.0.1</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Отредактируйте директиву <code>ServerActive</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nv">ServerActive</span><span class="o">=</span><span class="m">127</span>.0.0.1</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Разрешите в сетевом экране использование порта 10050:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span><span class="m">10050</span>/tcp</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Примените изменения:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload</code> <br/><code>sudo<span class="w"> </span>ufw<span class="w"> </span>reload</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Запустите <em>Zabbix Agent</em> и добавьте его в список автозагрузки:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w">  </span>--now<span class="w"> </span>zabbix-agent</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Удостоверьтесь, что служба работает:</p>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>status<span class="w"> </span>zabbix.agent</code> <br/></pre></code></div>
+</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Ожидаемый статус сервиса Zabbix Agent" src="https://kb.comindware.ru/assets/img_63af05a8d77f5.png"/><figcaption class="caption">Ожидаемый статус сервиса Zabbix Agent</figcaption></p>
+</figure>
+<h2 id="добавление-linux-хоста-в-сеть-мониторинга">Добавление Linux-хоста в сеть мониторинга</h2>
 <p>Добавление агента в сеть мониторинга выполняется аналогично разделу 4. «Добавление Linux-хоста в сеть мониторинга» инструкции «Zabbix Agent. Инструкции по установке для Ubuntu 22.04». При настройке используйте IP-адрес интерфейса loopback (127.0.0.1).</p>
+</article>
 </div>
 </div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

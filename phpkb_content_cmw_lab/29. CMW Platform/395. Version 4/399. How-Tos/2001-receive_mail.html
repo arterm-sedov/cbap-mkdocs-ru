@@ -1,0 +1,74 @@
+<h1>Configuring E-mail Receiving</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1gu054juu1">Use Case</a></li>
+<li><a href="#mcetoc_1gu7copqa0">Instructions</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1gu054juu1">Use Case</h2>
+<p>The <strong>CMW Platform</strong> can send and receive e-mail messages with any data: requests, inquiries, etc.</p>
+<p>In this article, we will set up the e-mail connection and communication route to receive and parse requests in a business process.</p>
+<h2 id="mcetoc_1gu7copqa0">Instructions</h2>
+<ol class="colored_numbers_list">
+<li>Create a new <strong>E-mail receiving</strong> connection. Specify the e-mail server and account to receive the requests.
+<div class="blue_note"><strong>Note:</strong> Each unread message in this e-mail account will be processed and marked as read.</div>
+</li>
+<li><a id="STEP2" style="color: #545764; letter-spacing: 0.2px;"></a>Create a new <strong>Incoming messages</strong> communication route.
+<ul>
+<li>On the <strong>Main properties</strong> tab:
+<ul style="list-style-type: square;">
+<li><span style="letter-spacing: 0.2px;">Select the <strong>Connection</strong>, created in Step 1.</span></li>
+<li><span style="letter-spacing: 0.2px;">Select a <strong>Process</strong> to execute upon receiving an e-mail message.</span>
+<ul style="list-style-type: circle;">
+<li>To use one e-mail account for one request type (e.g., new requests only), specify the corresponding business process.</li>
+<li>To use one e-mail account for different request types or subsequent responses, create an intermediate process that will handle them.</li>
+</ul>
+</li>
+<li>Based on your use case select the <strong>Route target</strong>: 
+<ul style="list-style-type: circle;">
+<li>To process all messages as new requests, select <strong style="letter-spacing: 0.2px;">New process instance</strong><span style="letter-spacing: 0.2px;">. </span></li>
+<li><span style="letter-spacing: 0.2px;">To parse subsequent responses for existing requests and send the data further to a pending process, select </span><strong style="letter-spacing: 0.2px;">Existing process instance</strong><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0.2px;">.</span> </span> </span>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Example of an intermediate process to handle new requests and subsequent responses" class="img-responsive" height="557" src="https://kb.cmwlab.com/assets/img_643d277cf0e5f.png" style="letter-spacing: 0.2px;" width="1182"/></p>
+<p class="caption" style="font-size: 15px !important;"><span style="letter-spacing: 0.2px; text-align: left; color: #545764;">Example of an intermediate process to handle different new requests and subsequent responses</span></p>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>On the <strong>Message attributes</strong> tab, specify the attributes to store the incoming e-mail message elements:
+<ul style="list-style-type: square;">
+<li><strong>From address</strong></li>
+<li><strong>From name</strong></li>
+<li><strong>To address</strong></li>
+<li><strong>To name</strong></li>
+<li><strong>Subject</strong></li>
+<li><strong>Body</strong></li>
+<li><strong>CC address</strong></li>
+<li><strong>CC name</strong></li>
+<li><strong>BCC address</strong></li>
+<li><strong>BCC name</strong></li>
+<li><strong><strong><strong>Attachments</strong> </strong> </strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Mapping e-mail elements to the CMW Platform attributes" class="img-responsive" height="438" src="https://kb.cmwlab.com/assets/img_643d28bfee1f7.png" style="letter-spacing: 0.2px;" width="795"/></p>
+<p class="caption" style="font-size: 15px !important;">Mapping e-mail elements to the CMW Platform attributes</p>
+</div>
+<ol class="colored_numbers_list" style="counter-increment: my-counter 2;">
+<li>On the process diagram, create or select a <strong>Receive message start event</strong>.
+<ul>
+<li>On the <strong>Advanced</strong> tab, select the communication route created in <a href="#STEP2">Step 2</a>.</li>
+<li>On the <strong style="letter-spacing: 0.2px;">Input mapping</strong><span style="letter-spacing: 0.2px;"> tab, map the record template attributes to the e-mail message attributes.</span></li>
+</ul>
+</li>
+</ol>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Mapping the record template attributes to the e-mail message attributes" class="img-responsive" height="451" src="https://kb.cmwlab.com/assets/img_643d2ac91896f.png" width="975"/></p>
+<p class="caption" style="font-size: 15px !important;">Mapping the record template attributes to the e-mail message attributes</p>
+</div>
+<div class="blue_note"><strong>Note:</strong> Using the CMW formula or N3 language expressions and scenarios, you might need to parse the e-mail subject line, body, or other elements (e.g., to determine the request type or decide if the message is a new request or a response regarding an existing one).</div>

@@ -1,0 +1,15 @@
+<h1>Calculating the Display Value of an Object Associated with a Task</h1><p>In <strong>CMW Platform</strong> one can calculate the system task table in a separate record template in order to display more task parameters and set up more convenient grouping (for example, by related object). At the same time, each of the attribute/parameters must be created in such a record template, and in each of them a calculated expression in the N3 language must be configured. This article provides an example of an expression to calculate the display name of the record that the task is associated with.</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">
+<p>@prefix task: &lt;http://comindware.com/ontology/task#&gt;.<br/>@prefix cmwui: &lt;http://comindware.com/ontology/ui#&gt;.<br/>@prefix cmw: &lt;http://comindware.com/logics#&gt;.</p>
+<p><br/>{</p>
+<p><br/>?item task:objectId ?objectId. <br/>?objectId cmw:container ?cmwcontainer.<br/>?cmwcontainer cmwui:displayNamePredicate ?cmwuidisplayNamePredicate.<br/>?objectId ?cmwuidisplayNamePredicate ?value.</p>
+<p><br/>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>

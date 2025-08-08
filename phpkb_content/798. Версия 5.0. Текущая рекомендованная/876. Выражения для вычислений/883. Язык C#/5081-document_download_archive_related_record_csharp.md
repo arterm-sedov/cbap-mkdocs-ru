@@ -25,71 +25,89 @@ kbId: 5081
 
 Структура атрибута типа «Документ»
 
-- Атрибут типа «**Документ**» хранит одну или несколько ссылок на записи (**документы**) в системном шаблоне документа, к которым прикрепляются файлы.
-- В шаблоне документа имеется атрибут `currentRevision` (текущая **ревизия**), который хранит ссылку на запись в системном шаблоне ревизии.
-- В шаблоне ревизии имеются атрибуты `title` (имя) и `content` (содержимое), которые хранят имя файла и ссылку на файл, физически хранящийся в папке `Streams` на сервере.
-- Чтобы считать файл из атрибута типа «**Документ**» с помощью C#-скрипта, необходимо:
-    - из текущей записи получить массив идентификаторов файлов, прикреплённых к атрибуту:
-     ````
-    var fileIds = Api.TeamNetwork.ObjectService.GetPropertyValues(recordId, new [] {"documentAttributeSystemName"})`;
-    
-    ````
-    - получить массив объектов с прикреплёнными файлами:
-     ````
-    var attachedFileObjects = fileIds[docId].TryGetValue("Files", out object fileObject)
+- Атрибут типа «**Документ**» хранит одну или несколько ссылок на записи (**документы**) в системном шаблоне документа, к которым прикрепляются файлы (например, загруженные пользователями).
+- В шаблоне документа имеется атрибут `currentRevision` (текущая **версия**), который хранит ссылку на запись в системном шаблоне версии.
+- В шаблоне версии имеются атрибуты `title` (имя) и `content` (содержимое), которые хранят имя файла и ссылку на файл, физически хранящийся в папке `Streams` на сервере.
+
+Извлечение файлов из атрибута типа «Документ» с помощью C#
+
+Чтобы считать файл из атрибута типа «**Документ**» с помощью C#-скрипта, необходимо:
+
+- из текущей записи получить массив идентификаторов файлов, прикреплённых к атрибуту:
+
+  ```
+  var fileIds = Api.TeamNetwork.ObjectService.GetPropertyValues(recordId, new [] {"documentAttributeSystemName"})`;
+
+  ```
+- получить массив объектов с прикреплёнными файлами:
+
+  ```
+  var attachedFileObjects = fileIds[docId].TryGetValue("Files", out object fileObject)
                               && fileObject != null ? fileObject as object[] : null;
-    
-    ````
-    - получить объект файла (`attachedFile`):
-     ````
-    var attachedFile = Api.TeamNetwork.DocumentService.GetContent(attachedFileObject[0].ToString());
-    
-    ````
-    - получить имя файла с расширением (`attachedFile.Name`);
-    - получить содержимое файла (`attachedFile.Data`);
-    - при необходимости получить объект с метаданными документа:
-     ````
-    var attachedFile = Api.TeamNetwork.DocumentService.GetDocument(attachedFileObject[0].ToString());
-    
-    ````
-        - `attachedFile.Title` — имя файла с расширением;
-        - `attachedFile.Extension` — расширение файла.
-- Чтобы прикрепить к атрибуту типа «**Документ**» файл с помощью C#-скрипта, необходимо:
-    - сформировать объект типа `Document`:
-     ````
-    var document = new Document
-        {
-            Title = "имя файла.расширение",
-            Extension = ".расширение"
-        };
-    
-    ````
-    - сформировать массив байтов `byte[] fileBytes` с содержимым файла;
-    - из массива байтов создать поток `MemoryStream()` для прикрепления документа к атрибуту:
-     ````
-        var fileStream = new MemoryStream();
-        fileStream.Write(fileBytes, 0, fileBytes.Length);
-        fileStream.Seek(0, SeekOrigin.Begin);
-    
-    ````
-    - преобразовать поток в объект документа для прикрепления к атрибуту:
-     ````
-    string documentObject = Api.TeamNetwork.DocumentService.CreateDocumentWithStream(document, fileStream, "");
-    
-    ````
-    - сформировать словарь из системного имени атрибута и объекта документа;
-     ````
-    var documentDict = new Dictionary<string,object>
-        {
-            { "DocumentAttributeSystemName", documentObject }
-        };
-    
-    ````
-    - прикрепить результирующий документ к атрибуту записи `reсordId`:
-     ````
-     Api.TeamNetwork.ObjectService.EditWithAlias(reсordId, documentDict)
-    
-    ````
+
+  ```
+- получить объект файла (`attachedFile`):
+
+  ```
+  var attachedFile = Api.TeamNetwork.DocumentService.GetContent(attachedFileObject[0].ToString());
+
+  ```
+- получить имя файла с расширением (`attachedFile.Name`);
+- получить содержимое файла (`attachedFile.Data`);
+- при необходимости получить объект с метаданными документа:
+
+  ```
+  var attachedFile = Api.TeamNetwork.DocumentService.GetDocument(attachedFileObject[0].ToString());
+
+  ```
+
+  - `attachedFile.Title` — имя файла с расширением;
+  - `attachedFile.Extension` — расширение файла.
+
+Добавление файлов в атрибут типа «Документ» с помощью C#
+
+Чтобы прикрепить к атрибуту типа «**Документ**» файл с помощью C#-скрипта, необходимо:
+
+- сформировать объект типа `Document`:
+
+  ```
+  var document = new Document
+      {
+          Title = "имя файла.расширение",
+          Extension = ".расширение"
+      };
+
+  ```
+- сформировать массив байтов `byte[] fileBytes` с содержимым файла;
+- из массива байтов создать поток `MemoryStream()` для прикрепления документа к атрибуту:
+
+  ```
+      var fileStream = new MemoryStream();
+      fileStream.Write(fileBytes, 0, fileBytes.Length);
+      fileStream.Seek(0, SeekOrigin.Begin);
+
+  ```
+- преобразовать поток в объект документа для прикрепления к атрибуту:
+
+  ```
+  string documentObject = Api.TeamNetwork.DocumentService.CreateDocumentWithStream(document, fileStream, "");
+
+  ```
+- сформировать словарь из системного имени атрибута и объекта документа:
+
+  ```
+  var documentDict = new Dictionary<string,object>
+      {
+          { "DocumentAttributeSystemName", documentObject }
+      };
+
+  ```
+- прикрепить результирующий документ к атрибуту записи `reсordId`:
+
+  ```
+      Api.TeamNetwork.ObjectService.EditWithAlias(reсordId, documentDict)
+
+  ```
 
 ## Прикладная задача
 
@@ -103,134 +121,138 @@ kbId: 5081
 
 1. Создайте **шаблон записи** *«Реестр документов»* со следующим **атрибутом**:
 
-    - **Название:** *Файлы*
-    - **Системное имя:** *Files*
-    - **Тип данных: документ**
-    - **Использовать для поиска записей:** флажок установлен
-    - **Хранить несколько значений:** флажок установлен
-Внимание!
+   - **Название:** *Файлы*
+   - **Системное имя:** *Files*
+   - **Тип данных: документ**
+   - **Использовать для поиска записей:** флажок установлен
+   - **Хранить несколько значений:** флажок установлен
 
-Для корректного скачивания файлов с помощью C#-скрипта у атрибута типа «**Документ**» рекомендуется установить флажок «**Использовать для поиска записей**». В противном случае скрипт может не сработать.
+   Внимание!
+
+   Для корректного скачивания файлов с помощью C#-скрипта у атрибута типа «**Документ**» рекомендуется установить флажок «**Использовать для поиска записей**». В противном случае скрипт может не сработать.
 2. Создайте **шаблон записи** *«Заявки»* со следующими **атрибутами**:
 
-| Название | Системное имя | Тип данных | Свойства |
-| --- | --- | --- | --- |
-| *Документы* | *Documents* | **Запись** | - **Связанный шаблон:** *Реестр документов*     - **Хранить несколько значений:** флажок установлен |
-| *Архив документов* | *DocumentArchive* | **Документ** |  |
+   | Название | Системное имя | Тип данных | Свойства |
+   | --- | --- | --- | --- |
+   | *Документы* | *Documents* | **Запись** | - **Связанный шаблон:** *Реестр документов* - **Хранить несколько значений:** флажок установлен |
+   | *Архив документов* | *DocumentArchive* | **Документ** |  |
 3. Создайте кнопку *«Скачать архив документов»* со следующими свойствами:
 
-    - **Контекст операции: запись**;
-    - **Операция: С#-скрипт**;
-    - **Результат выполнения: скачать документ**.
+   - **Контекст операции: запись**;
+   - **Операция: С#-скрипт**;
+   - **Результат выполнения: скачать документ**.
+
+   Контекст C#-скрипта
+
+   C#-скрипты можно использовать в следующих контекстах:
+
+   - на кнопках;
+   - в задачах-выполнении сценария;
+   - в сценариях.
+
+   В зависимости от контекста в C#-скрипте будут отличаться метод `Main()` и возвращаемое значение.
+
+   Чтобы применить описанный выше C#-скрипт в других контекстах, также понадобится изменить значение переменной `reсordId`, содержащей ID текущей записи:
+
+   - `var reсordId = context.BusinessObjectId;` — для задачи-выполнения сценария;
+   - `var reсordId = userCommandContext.ObjectIds[0];` — для кнопки;
+   - `var reсordId = ObjectId.ToString().Replace("user.", "");` — для действия сценария «**Проверить результат скрипта**».
+
+   См. *«[Написание скриптов на языке C#][csharp_guide]»*.
 4. На вкладке «**Скрипт**» добавьте C#-скрипт по следующему образцу:
 
-Контекст C#-скрипта
+   Скрипт для скачивания файлов из связанных записей```
+   using System; 
+   using System.Collections.Generic;
+   using System.IO; 
+   using Comindware.Data.Entity;
+   using Comindware.TeamNetwork.Api.Data.UserCommands;
+   using Comindware.TeamNetwork.Api.Data;
+   using System.Collections.Generic;
+   using System.Linq;
 
-C#-скрипты можно использовать в следующих контекстах:
+   class Script
+   {
+       // Определяем конструктор скрипта, выполняющегося в контексте кнопки
+       public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+       { 
+           // Получаем ID текущей записи шаблона «Заявки» из контекста операции кнопки.
+           var reсordId = userCommandContext.ObjectIds[0];
+           // Помещаем в массив documentIds идентификаторы записей шаблона «Реестр документов»
+           // из атрибута «Документы» текущей записи.
+           // Documents — системное имя атрибута «Документы» шаблона «Заявки».
+           var documentIds = Api.TeamNetwork.ObjectService.GetPropertyValues(new string[] {reсordId}, new [] {"Documents"});
+           // По идентификаторам получаем массив записей шаблона «Реестр документов», связанных с текущей записью.
+           var DocumentRecords = documentIds[reсordId].TryGetValue("Documents", out object OutputRecordArray) && OutputRecordArray != null ? OutputRecordArray as object[] : null;
+           // Инициализируем словарь файлов для архива в виде пар «имя:содержимое».
+           var files = new Dictionary<string, byte[]>();
+           // Добавляем файлы в поток для дальнейшего архивирования
+           // из каждой записи шаблона «Реестр документов».
+           foreach (var DocumentRecord in DocumentRecords)
+           {
+               // Получаем идентификатор записи шаблона «Реестр документов».
+               var docId = DocumentRecord.ToString();
+               // Помещаем в массив fileIds идентификаторы файлов, прикреплённых к атрибуту «Файлы».
+               // Files — системное имя атрибута «Файлы» шаблона «Реестр документов».
+               var fileIds = Api.TeamNetwork.ObjectService.GetPropertyValues(new []{docId}, new [] {"Files"});
+               // По идентификаторам получаем массив объектов с прикреплёнными файлами.
+               var attachedFileObjects = fileIds[docId].TryGetValue("Files", out object fileObject)
+                                         && fileObject != null ? fileObject as object[] : null;
+               if(attachedFileObjects.Length > 0)
+               {
+                   // Добавляем в словарь все файлы, прикреплённые к атрибуту «Файлы».
+                   foreach(var attachedFileObject in attachedFileObjects)
+                   {
+                   // Получаем прикреплённый файл.
+                   var attachedFile = Api.TeamNetwork.DocumentService.GetContent(attachedFileObject.ToString());
+                   // Помещаем содержимое файла в словарь файлов для архива по имени.
+                   files[attachedFile.Name] = attachedFile.Data;
+                   }
+               }
+           }
 
-    - на кнопках;
-    - в задачах-выполнении сценария;
-    - в сценариях.
-В зависимости от контекста в C#-скрипте будут отличаться метод `Main()` и возвращаемое значение.
+           // Формируем архив файлов для скачивания из словаря files.
+           var resultingArchive = Api.TeamNetwork.DocumentService.GetZippedStreams(files);
+           // Инициализируем документ для файла архива,
+           // чтобы прикрепить его к атрибуту «Архив документов».
+           var archiveDocument = new Document
+           {
+               Title = "Data.zip",
+               Extension = ".zip"
+           };
+           // Помещаем архив файлов в массив байтов
+           // для преобразования в документ и прикрепления к атрибуту.
+           byte[] compressedBytes = resultingArchive.ToArray();
+           // Создаём поток для прикрепления документа с архивом к атрибуту.
+           var archiveFileStream = new MemoryStream();
+           archiveFileStream.Write(compressedBytes, 0, compressedBytes.Length);
+           archiveFileStream.Seek(0, SeekOrigin.Begin);
+           // Преобразуем поток в объект документа с архивом для прикрепления к атрибуту.
+           string documentObject = Api.TeamNetwork.DocumentService.CreateDocumentWithStream(archiveDocument, archiveFileStream, "");
+           // Формируем словарь для прикрепления документа с архивом к атрибуту.
+           var documentDict = new Dictionary<string,object>
+           {
+               // DocumentArchive — системное имя атрибута «Архив документов».
+               { "DocumentArchive", documentObject }
+           };
+           // Прикрепляем архив к атрибуту «Архив документов».
+           Api.TeamNetwork.ObjectService.EditWithAlias(reсordId, documentDict);
+           // Возвращаем архив для скачивания в качестве результата нажатия кнопки.
+           return new UserCommandResult
+           {
+               Success = true,
+               Commited = true,
+               File = new UserCommandFileResult
+               {
+                   Content = resultingArchive,
+                   // Укажите имя архива
+                   Name = archiveDocument.Title
+               }
+           };
+       }
+   }
 
-Чтобы применить описанный выше C#-скрипт в других контекстах, также понадобится изменить значение переменной `reсordId`, содержащей ID текущей записи:
-
-    - `var reсordId = context.BusinessObjectId;` — для задачи-выполнения сценария;
-    - `var reсordId = userCommandContext.ObjectIds[0];` — для кнопки;
-    - `var reсordId = ObjectId.ToString().Replace("user.", "");` — для действия сценария «**Проверить результат скрипта**».
-См. *«[Написание скриптов на языке C#][csharp_guide]»*.
-
-````
-using System; 
-using System.Collections.Generic;
-using System.IO; 
-using Comindware.Data.Entity;
-using Comindware.TeamNetwork.Api.Data.UserCommands;
-using Comindware.TeamNetwork.Api.Data;
-using System.Collections.Generic;
-using System.Linq;
-
-class Script
-{
-    // Определяем конструктор скрипта, выполняющегося в контексте кнопки
-    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
-    { 
-        // Получаем ID текущей записи шаблона «Заявки» из контекста операции кнопки.
-        var reсordId = userCommandContext.ObjectIds[0];
-        // Помещаем в массив documentIds идентификаторы записей шаблона «Реестр документов»
-        // из атрибута «Документы» текущей записи.
-        // Documents — системное имя атрибута «Документы» шаблона «Заявки».
-        var documentIds = Api.TeamNetwork.ObjectService.GetPropertyValues(new string[] {reсordId}, new [] {"Documents"});
-        // По идентификаторам получаем массив записей шаблона «Реестр документов», связанных с текущей записью.
-        var DocumentRecords = documentIds[reсordId].TryGetValue("Documents", out object OutputRecordArray) && OutputRecordArray != null ? OutputRecordArray as object[] : null;
-        // Инициализируем словарь файлов для архива в виде пар «имя:содержимое».
-        var files = new Dictionary<string, byte[]>();
-        // Добавляем файлы в поток для дальнейшего архивирования
-        // из каждой записи шаблона «Реестр документов».
-        foreach (var DocumentRecord in DocumentRecords)
-        {
-            // Получаем идентификатор записи шаблона «Реестр документов».
-            var docId = DocumentRecord.ToString();
-            // Помещаем в массив fileIds идентификаторы файлов, прикреплённых к атрибуту «Файлы».
-            // Files — системное имя атрибута «Файлы» шаблона «Реестр документов».
-            var fileIds = Api.TeamNetwork.ObjectService.GetPropertyValues(new []{docId}, new [] {"Files"});
-            // По идентификаторам получаем массив объектов с прикреплёнными файлами.
-            var attachedFileObjects = fileIds[docId].TryGetValue("Files", out object fileObject)
-                                      && fileObject != null ? fileObject as object[] : null;
-            if(attachedFileObjects.Length > 0)
-            {
-                // Добавляем в словарь все файлы, прикреплённые к атрибуту «Файлы».
-                foreach(var attachedFileObject in attachedFileObjects)
-                {
-                // Получаем прикреплённый файл.
-                var attachedFile = Api.TeamNetwork.DocumentService.GetContent(attachedFileObject.ToString());
-                // Помещаем содержимое файла в словарь файлов для архива по имени.
-                files[attachedFile.Name] = attachedFile.Data;
-                }
-            }
-        }
-        // Формируем архив файлов для скачивания из словаря files.
-        var resultingArchive = Api.TeamNetwork.DocumentService.GetZippedStreams(files);
-        // Инициализируем документ для файла архива,
-        // чтобы прикрепить его к атрибуту «Архив документов».
-        var archiveDocument = new Document
-        {
-            Title = "Data.zip",
-            Extension = ".zip"
-        };
-        // Помещаем архив файлов в массив байтов
-        // для преобразования в документ и прикрепления к атрибуту.
-        byte[] compressedBytes = resultingArchive.ToArray();
-        // Создаём поток для прикрепления документа с архивом к атрибуту.
-        var archiveFileStream = new MemoryStream();
-        archiveFileStream.Write(compressedBytes, 0, compressedBytes.Length);
-        archiveFileStream.Seek(0, SeekOrigin.Begin);
-        // Преобразуем поток в объект документа с архивом для прикрепления к атрибуту.
-        string documentObject = Api.TeamNetwork.DocumentService.CreateDocumentWithStream(archiveDocument, archiveFileStream, "");
-        // Формируем словарь для прикрепления документа с архивом к атрибуту.
-        var documentDict = new Dictionary<string,object>
-        {
-            // DocumentArchive — системное имя атрибута «Архив документов».
-            { "DocumentArchive", documentObject }
-        };
-        // Прикрепляем архив к атрибуту «Архив документов».
-        Api.TeamNetwork.ObjectService.EditWithAlias(reсordId, documentDict);
-        // Возвращаем архив для скачивания в качестве результата нажатия кнопки.
-        return new UserCommandResult
-        {
-            Success = true,
-            Commited = true,
-            File = new UserCommandFileResult
-            {
-                Content = resultingArchive,
-                // Укажите имя архива
-                Name = archiveDocument.Title
-            }
-        };
-    }
-}
-
-````
+   ```
 5. Поместите на форму шаблона *«Заявки»* **атрибут** *«Архив документов»* и **кнопку** *«Скачать архив документов»*.
 6. Поместите на форму **атрибут** *«Документы»* и настройте его **представление** в виде **таблицы**.
 7. Поместите в таблицу *«Документы»* на форме **атрибут** *«Файлы»* шаблона записи *«Реестр документов»*.
@@ -245,9 +267,9 @@ class Script
 5. Нажмите кнопку *«Скачать архив документов»*.
 6. Браузер скачает архив со всеми файлами из документов, прикреплённых к заявке.
 
-Примечание
+   Примечание
 
-Если в браузере отобразится сообщение «**Незащищенное скачивание заблокировано**», нажмите кнопку «**Сохранить**», чтобы продолжить скачивание.
+   Если в браузере отобразится сообщение «**Незащищенное скачивание заблокировано**», нажмите кнопку «**Сохранить**», чтобы продолжить скачивание.
 7. В поле *«Архив документов»* должен появиться архив со всеми файлами из документов, прикреплённых к заявке.
 
 --8<-- "related_topics_heading.md"
@@ -259,8 +281,5 @@ class Script
 - *[Атрибут типа «Документ». Скачивание архива с файлами из выбранных строк таблицы и записи][example_document_download_archive_csharp]*
 - *[Атрибут типа «Документ». Скачивание файлов в папку на сервере][example_document_download_to_server_csharp]*
 - *[Атрибут типа «Документ». Клонирование записи вместе с прикреплёнными файлами][example_document_clone_scenario_n3]*
-
-[*‌*
- К началу](#)
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

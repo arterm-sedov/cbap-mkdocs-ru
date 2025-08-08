@@ -1,0 +1,1599 @@
+<h1>Web API Methods</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1h54l7bd2d">Introduction</a></li>
+<li><a href="#mcetoc_1h7f6q5tp0">Accessing Web API</a></li>
+<li><a href="#mcetoc_1h7f5ue1h0">Using Swagger</a></li>
+<li><a href="#mcetoc_1h54l494dc">Definitions</a></li>
+<li><a href="#mcetoc_1h54laoq1f">Web API Method Descriptions</a>
+<ul>
+<li><a href="#mcetoc_1h54l3rkla">Account — individual accounts</a></li>
+<li><a href="#mcetoc_1h54ldgkcg">AccountTemplate — account templates and accounts linked to them</a></li>
+<li><a href="#mcetoc_1h54ldnd5h">Attribute — template attributes</a></li>
+<li><a href="#mcetoc_1h54lds1ti">Backup — backup configurations and sessions</a></li>
+<li><a href="#mcetoc_1h54le1p5j">BehaviourState — scenarios and process elements</a></li>
+<li><a href="#mcetoc_1h54lgbuak">CaseTemplate — case templates (legacy)</a></li>
+<li><a href="#mcetoc_1h54lgjq3l">Dataset — tables</a></li>
+<li><a href="#mcetoc_1h54lgpoim">Document — files attached to Document attributes</a></li>
+<li><a href="#mcetoc_1h54lhtjan">DocumentExportTemplate — export templates</a></li>
+<li><a href="#mcetoc_1h54li2kio">Form — forms and form rules (except process start forms and user task forms)</a></li>
+<li><a href="#mcetoc_1h55460kt2">SolutionGitIntegration — application version control via Git </a></li>
+<li><a href="#mcetoc_1h54lrgtts">Heartbeat — server, process, scripts, and service status monitoring</a></li>
+<li><a href="#mcetoc_1h54ltpvb12">ProcessObjects — process diagram version migration</a></li>
+<li><a href="#mcetoc_1h54lrpmcu">ProcessTemplate — process templates</a></li>
+<li><a href="#mcetoc_1h54ls04av">Record — single record (except process templates)</a></li>
+<li><a href="#mcetoc_1h54m2jnr14">Records — multiple records and record export/import (except process templates)</a></li>
+<li><a href="#mcetoc_1h54m2poi15">RecordTemplate — record templates</a></li>
+<li><a href="#mcetoc_1h54m6c3816">ReferenceData — records with specified attribute values</a></li>
+<li><a href="#mcetoc_1h54m6ufe17">Solution — applications</a></li>
+<li><a href="#mcetoc_1h54m746n18">Toolbar — toolbars and buttons on them</a></li>
+<li><a href="#mcetoc_1h54m79j019">Transfer — application model export/import</a></li>
+<li><a href="#mcetoc_1h54ma4o01b">UserCommand — buttons</a></li>
+<li><a href="#mcetoc_1h54m86ku1a">WorkerEngine — system services</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="mcetoc_1h54l7bd2d">Introduction</h2>
+<p>The <strong>CMW Platform</strong> RESTful Web API provides generic REST API methods. These methods are the same for all <strong>CMW Platform </strong>versions.</p>
+<p>This article contains the Web API methods overview. See complete API details in the Swagger UI.</p>
+<h2 id="mcetoc_1h7f6q5tp0">Accessing Web API</h2>
+<ul>
+<li>Base URL for the Web API requests: <br/><code>https://your-host/webapi/</code></li>
+<li><span style="vertical-align: inherit;">Web API supports </span><code>GET</code><span style="vertical-align: inherit;">, </span><code>PUT</code><span style="vertical-align: inherit;">, </span><code>POST</code> <span style="vertical-align: inherit;"> , and  </span> <code>DELETE</code><span style="vertical-align: inherit;"> queries.</span></li>
+<li>Web API supports JSON or XML content types.</li>
+<li>Web API supports basic authentication.</li>
+</ul>
+<h2 id="mcetoc_1h7f5ue1h0">Using Swagger</h2>
+<p>The Swagger UI provides detailed API method references, including request and response descriptions and data models with example values.</p>
+<p>With the Swagger UI, you can execute the requests and view the responses.</p>
+<p>Access the Swagger UI for Web API at:</p>
+<p><code></code><code>https://your-host/Docs/WebApi/</code></p>
+<p><span style="vertical-align: inherit;">Here </span><code>your-host</code> <span style="vertical-align: inherit;">is the domain name of the <strong>CMW Platform</strong> instance.</span></p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Swagger UI for the method that creates an account template" class="img-responsive" height="886" src="https://kb.cmwlab.com/assets/img_661e5d5fbf8ed.png" width="980"/></p>
+<p class="caption" style="font-size: 15px !important;">Swagger UI for the method that creates an account template</p>
+</div>
+<div class="notice notice-success">
+<h3 class="admonition-title" id="mcetoc_1h54l494dc">Definitions</h3>
+<p>The Web API methods and Swagger documentation use the following names for the <span style="font-weight: 700 !important;">CMW Platform</span> entities:</p>
+<ul style="letter-spacing: 0.2px;">
+<li><span style="font-weight: 700 !important;"><em>activity </em></span>— process diagram element</li>
+<li><span style="font-weight: 700 !important;"><em>alias </em></span>— system name</li>
+<li><span style="font-weight: 700 !important;"><em>behaviour </em></span>— scenario, process diagram element</li>
+<li><span style="font-weight: 700 !important;"><em>container </em></span>— template, application</li>
+<li><span style="font-weight: 700 !important;"><em>dataset </em></span>— table in a template</li>
+<li><span style="font-weight: 700 !important;"><em>global alias </em></span>— object path, consisting of its type, parent system name, and object system name</li>
+<li><span style="font-weight: 700 !important;"><em>id </em></span>— object identifier</li>
+<li><span style="font-weight: 700 !important;"><em>list </em></span>— array</li>
+<li><span style="font-weight: 700 !important;"><em>property </em></span>— attribute</li>
+<li><span style="font-weight: 700 !important;"><em>solution </em></span>— application</li>
+<li><span style="font-weight: 700 !important;"><em>scheme </em></span>— process diagram</li>
+<li><span style="font-weight: 700 !important;"><em>stream </em></span>— file stored in the system</li>
+<li><span style="font-weight: 700 !important;"><em>transfer </em></span>— application version management</li>
+<li><span style="font-weight: 700 !important;"><em>trigger </em></span>— scenario</li>
+<li><span style="font-weight: 700 !important;"><em>user command </em></span>— button</li>
+<li><span style="font-weight: 700 !important;"><em>worker </em></span>— system service</li>
+<li><strong><em>object</em></strong> — a collection of property/value pairs</li>
+</ul>
+</div>
+<h2 id="mcetoc_1h54laoq1f">Web API Method Descriptions</h2>
+<div class="table-responsive">
+<table border="1" style="width: 98%; max-width: 98%; height: 14586px;">
+<tbody>
+<tr style="height: 40px;">
+<th colspan="5" style="height: 40px; width: 100%;">
+<h3 id="mcetoc_1h54l3rkla">Account — individual accounts</h3>
+</th>
+</tr>
+<tr style="height: 40px;">
+<th style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; height: 40px;">Method</th>
+<th style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;">Query</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Description</th>
+<th style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Input</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Output</th>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 40px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;"><span style="color: #c7254e; background-color: #ffffff; font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt;">/webapi/Account</span></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Gets all accounts.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;"> </td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Array of objects with account properties</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 40px;">POST</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;"><span style="color: #c7254e; font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt;">/webapi/Account</span></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Creates account.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Account properties object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Account ID</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 40px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;"><span style="color: #c7254e; font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt;">/webapi/Account</span></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Edits account properties.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Account properties object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Status object</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #a41e22; color: #ffffff; height: 79px;">DELETE</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="color: #c7254e; font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt;">/webapi/Account/<wbr/>{accountId}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Deletes account.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Account ID</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 79px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="color: #c7254e; font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt;">/webapi/Account/<wbr/>{accountId}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Gets account properties.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Account ID</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">
+<p>Account properties object</p>
+</td>
+</tr>
+<tr style="height: 40px;">
+<th colspan="5" style="height: 40px; width: 100%;">
+<h3 id="mcetoc_1h54ldgkcg">AccountTemplate — account templates and accounts linked to them</h3>
+</th>
+</tr>
+<tr style="height: 40px;">
+<th style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; height: 40px;">Method</th>
+<th style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;">Query</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Description</th>
+<th style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Input</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Output</th>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 79px;">POST</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/AccountTemplate/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Creates account template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Application system name, account template properties object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Object with account template system name</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 79px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/AccountTemplate/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Edits account template properties.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Application system name, account template properties object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #a41e22; color: #ffffff; height: 103px;">DELETE</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 103px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/AccountTemplate/<wbr/>{solutionAlias}/<wbr/>{accountTemplateAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Deletes account template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Application system name, account template system name</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Status object</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 103px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 103px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/AccountTemplate/<wbr/>{solutionAlias}/<wbr/>{accountTemplateAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Gets account template properties.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Application system name, account template system name</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Account template properties object</td>
+</tr>
+<tr style="height: 127px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 127px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 127px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/AccountTemplate/<wbr/>{solutionAlias}/<wbr/>{accountTemplateAlias}/<wbr/>Disable</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Archives account template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 127px;">Application system name, account template system name.</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Status object</td>
+</tr>
+<tr style="height: 127px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 127px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 127px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/AccountTemplate/<wbr/>{solutionAlias}/<wbr/>{accountTemplateAlias}/<wbr/>Enable</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Unarchives account template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 127px;">Application system name, account template system name</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Status object</td>
+</tr>
+<tr style="height: 127px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 127px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 127px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/AccountTemplate/<wbr/>{solutionAlias}/<wbr/>{accountTemplateAlias}/<wbr/>Exclude</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Unlinks accounts from the specified account template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 127px;">Application system name, account template system name, array of account IDs</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Status object</td>
+</tr>
+<tr style="height: 127px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 127px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 127px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/AccountTemplate/<wbr/>{solutionAlias}/<wbr/>{accountTemplateAlias}/<wbr/>Include</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Links specified accounts to the specified account template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 127px;">Application system name, account template system name, array of account IDs</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Status object</td>
+</tr>
+<tr style="height: 127px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 127px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 127px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/AccountTemplate/<wbr/>{solutionAlias}/<wbr/>{accountTemplateAlias}/<wbr/>ListIncluded</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Gets accounts linked to the specified account template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 127px;">Application system name, account template system name</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Array of objects with account properties</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 79px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/AccountTemplate/<wbr/>List/{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Gets all account templates in the specified application.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Application system name</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Array of objects with account template properties</td>
+</tr>
+<tr style="height: 40px;">
+<th colspan="5" style="height: 40px; width: 100%;">
+<h3 id="mcetoc_1h54ldnd5h">Attribute — template attributes</h3>
+</th>
+</tr>
+<tr style="height: 40px;">
+<th style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; height: 40px;">Method</th>
+<th style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;">Query</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Description</th>
+<th style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Input</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Output</th>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 79px;">POST</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="color: #c7254e; font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif;">/webapi/Attribute/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Creates attribute.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Application system name, attribute properties object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Object with attribute system name</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; background-color: #c5862b; color: #ffffff; height: 79px;">PUT</td>
+<td style="width: 27.5772%; height: 79px;">
+<p><span style="color: #c7254e; font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif;">/webapi/Attribute/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Edits attribute properties.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Application system name, attribute properties object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+<tr style="height: 115px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; background-color: #a41e22; color: #ffffff; height: 115px;">DELETE</td>
+<td style="width: 27.5772%; height: 115px;">
+<p><span style="color: #c7254e; font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif;">/webapi/Attribute/<wbr/>{solutionAlias}/<wbr/>{attributeGlobalAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 115px;">Deletes attribute.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 115px;">Application system name, attribute global alias: <code>Attribute@<wbr/>template<wbr/>SystemName.<wbr/><wbr/>attribute<wbr/>SystemName</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 115px;">Status object</td>
+</tr>
+<tr style="height: 115px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; background-color: #0f6ab4; color: #ffffff; height: 115px;">GET</td>
+<td style="width: 27.5772%; height: 115px;">
+<p><span style="color: #c7254e; font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif;">/webapi/Attribute/<wbr/>{solutionAlias}/<wbr/>{attributeGlobalAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 115px;">Gets attribute properties.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 115px;">Application system name, attribute global alias: <code>Attribute@<wbr/>template<wbr/>SystemName.<wbr/><wbr/>attribute<wbr/>SystemName</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 115px;">Attribute properties object</td>
+</tr>
+<tr style="height: 127px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 127px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 127px;">
+<p><span style="color: #c7254e; font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif;">/webapi/Attribute/<wbr/>{solutionAlias}/<wbr/>{attributeGlobalAlias}/<wbr/>Disable</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Archives attribute.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 127px;">Application system name, attribute global alias: <code>Attribute@<wbr/>template<wbr/>SystemName.<wbr/><wbr/>attribute<wbr/>SystemName</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Status object</td>
+</tr>
+<tr style="height: 127px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 127px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 127px;">
+<p><span style="color: #c7254e; font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif;">/webapi/Attribute/<wbr/>{solutionAlias}/<wbr/>{attributeGlobalAlias}/<wbr/>Enable</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Unarchives attribute.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 127px;">Application system name, attribute global alias: <code>Attribute@<wbr/>template<wbr/>SystemName.<wbr/><wbr/>attribute<wbr/>SystemName</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Status object</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 103px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 103px;">
+<p><span style="color: #c7254e; font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif;">/webapi/Attribute/<wbr/>List/<wbr/>{templateGlobalAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Gets all attributes for the specified template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Template global alias: <code>Template@<wbr/>application<wbr/>SystemName.<wbr/><wbr/>template<wbr/>SystemName</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Array of objects with attribute properties</td>
+</tr>
+<tr style="height: 40px;">
+<th colspan="5" style="height: 40px; width: 100%;">
+<h3 id="mcetoc_1h54lds1ti">Backup — backup configurations and sessions</h3>
+</th>
+</tr>
+<tr style="height: 40px;">
+<th style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; height: 40px;">Method</th>
+<th style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;">Query</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Description</th>
+<th style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Input</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Output</th>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #a41e22; color: #ffffff; height: 79px;">DELETE</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Backup/<wbr/>Configuration</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Deletes specified backup configurations.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Array of backup configuration IDs</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; background-color: #0f6ab4; color: #ffffff; height: 79px;">GET</td>
+<td style="width: 27.5772%; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Backup/<wbr/>Configuration</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Gets all backup configurations.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;"> </td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Array of backup configuration objects</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; background-color: #10a54a; color: #ffffff; height: 79px;">POST</td>
+<td style="width: 27.5772%; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Backup/<wbr/>Configuration</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Creates backup configuration.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Backup configuration object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Backup configuration ID</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 79px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Backup/<wbr/>Configuration</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Edits backup configuration.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Backup configuration object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 103px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 103px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Backup/<wbr/>Configuration/<wbr/>{configurationId}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Gets backup configuration.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Backup configuration ID</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Backup configuration object</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #a41e22; color: #ffffff; height: 79px;">DELETE</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Backup/<wbr/>Session</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Deletes specified backup sessions.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Array of backup session IDs</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 79px;">POST</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Backup/<wbr/>Session</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Returns backup sessions matching the specified filter.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Backup session filter object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Array of objects with backup session details</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 103px;">POST</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 103px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Backup/<wbr/>Session/<wbr/>{configurationId} </span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Initiates backup session using the specified configuration.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Backup configuration ID</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Object with backup session details</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; background-color: #0f6ab4; color: #ffffff; height: 103px;">GET</td>
+<td style="width: 27.5772%; height: 103px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Backup/<wbr/>Session/<wbr/>{sessionId}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Gets backup session.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Backup session ID</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Object with backup session details</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; background-color: #c5862b; color: #ffffff; height: 103px;">PUT</td>
+<td style="width: 27.5772%; height: 103px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Backup/<wbr/>Session/<wbr/>{sessionId}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Aborts backup session.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Backup session ID</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Object with backup session details</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; background-color: #10a54a; color: #ffffff; height: 103px;">POST</td>
+<td style="width: 27.5772%; height: 103px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Backup/<wbr/>SetElasticsearchRepository/<wbr/>{name}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Sets Elasticsearch snapshots repository.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Name of existing Elasticsearch snapshots repository</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Status object</td>
+</tr>
+<tr style="height: 40px;">
+<th colspan="5" style="height: 40px; width: 100%;">
+<h3 id="mcetoc_1h54le1p5j">BehaviourState — scenarios and process elements</h3>
+</th>
+</tr>
+<tr style="height: 40px;">
+<th style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; height: 40px;">Method</th>
+<th style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;">Query</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Description</th>
+<th style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Input</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Output</th>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 79px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/BehaviourState/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Gets scenario and process element states in the specified application.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Application system name</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Object with scenario and process element states</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 79px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/BehaviourState/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Updates scenario and process element states in the specified application.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Object with scenario and process element states</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+<tr style="height: 40px;">
+<th colspan="5" style="height: 40px; width: 100%;">
+<h3 id="mcetoc_1h54lgbuak">CaseTemplate — case templates (legacy)</h3>
+</th>
+</tr>
+<tr style="height: 40px;">
+<th style="width: 10.5056%; vertical-align: middle; text-align: center; height: 40px;">Method</th>
+<th style="width: 27.5772%; height: 40px;">Query</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Description</th>
+<th style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Input</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Output</th>
+</tr>
+<tr style="height: 90px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 90px;">POST</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 90px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/CaseTemplate/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 90px;">Creates case template with/without related record template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 90px;">Application system name, case template properties object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 90px;">Object with case template system name</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 79px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/CaseTemplate/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Edits case template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Application system name, case template properties object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; background-color: #a41e22; color: #ffffff; height: 103px;">DELETE</td>
+<td style="width: 27.5772%; height: 103px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/CaseTemplate/<wbr/>{solutionAlias}/<wbr/>{caseTemplateAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Deletes case template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Application system name, case template system name</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Status object</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 103px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 103px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/CaseTemplate/<wbr/>{solutionAlias}/<wbr/>{caseTemplateAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Gets case template properties.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Application system name, case template system name</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Case template properties object</td>
+</tr>
+<tr style="height: 127px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 127px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 127px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/CaseTemplate/<wbr/>{solutionAlias}/<wbr/>{caseTemplateAlias}/<wbr/>Disable</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Archives case template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 127px;">Application system name, case template system name</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Status object</td>
+</tr>
+<tr style="height: 127px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 127px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 127px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/CaseTemplate/<wbr/>{solutionAlias}/<wbr/>{caseTemplateAlias}/<wbr/>Enable</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Unarchives case template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 127px;">Application system name, case template system name</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Status object</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 79px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/CaseTemplate/<wbr/>List/{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Gets all case templates in the specified application.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Application system name</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Array of objects with case template properties</td>
+</tr>
+<tr style="height: 40px;">
+<th colspan="5" style="height: 40px; width: 100%;">
+<h3 id="mcetoc_1h54lgjq3l">Dataset — tables</h3>
+</th>
+</tr>
+<tr style="height: 40px;">
+<th style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; height: 40px;">Method</th>
+<th style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;">Query</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Description</th>
+<th style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Input</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Output</th>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 79px;">POST</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Dataset/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Creates table.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Application system name, table configuration object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Table configuration object</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 79px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Dataset/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Edits table configuration.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Application system name, table configuration object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #a41e22; color: #ffffff; height: 103px;">DELETE</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 103px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Dataset/<wbr/>{solutionAlias}/<wbr/>{datasetGlobalAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Deletes table.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Application system name, table global alias: <code>Dataset@<wbr/>template<wbr/>SystemName.<wbr/><wbr/>tablesystemName</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Status object</td>
+</tr>
+<tr style="height: 115px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 115px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 115px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Dataset/<wbr/>{solutionAlias}/<wbr/>{datasetGlobalAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 115px;">Gets table configuration.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 115px;">Application system name, table global alias: <code>Dataset@<wbr/>template<wbr/>SystemName.<wbr/><wbr/>tablesystemName</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 115px;">Table configuration object</td>
+</tr>
+<tr style="height: 90px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 90px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 90px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Dataset/<wbr/>List/{templateGlobalAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 90px;">Gets all tables of the specified template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 90px;">Application system name, template global alias: <code>Template@<wbr/>application<wbr/>SystemName.<wbr/>template<wbr/>SystemName</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 90px;">Array of table configuration objects</td>
+</tr>
+<tr style="height: 40px;">
+<th colspan="5" style="height: 40px; width: 100%;">
+<h3 id="mcetoc_1h54lgpoim">Document — files attached to Document attributes</h3>
+</th>
+</tr>
+<tr style="height: 40px;">
+<th style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; height: 40px;">Method</th>
+<th style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;">Query</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Description</th>
+<th style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Input</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Output</th>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 40px;">POST</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;"><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Document</span></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Creates document.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Document properties object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Object with document ID</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 40px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;"><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Document</span></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Edits document properties.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Document properties object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Status object</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #a41e22; color: #ffffff; height: 79px;">DELETE</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Document/<wbr/>{documentId}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Deletes document.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Document ID</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 79px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Document/<wbr/>{documentId}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Gets document properties.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Document ID</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Document properties object</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 103px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 103px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Document/<wbr/>{documentId}/<wbr/>Content</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Gets document content.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Document ID</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Document content (<code>application/octet-stream</code>)</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 79px;">POST</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Document/<wbr/>Content</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Creates document by uploading a file.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Object with filename and content (<code>byte array</code>)</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Object with document ID</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 103px;">POST</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 103px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Document/<wbr/>Revision/{documentId}/<wbr/>Content</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Creates revision by uploading a file.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Document ID, object with filename and content (<code>byte array</code>)</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Object with revision ID</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 79px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Document/<wbr/>Revision/{revisionId}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Gets revision properties.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Revision ID</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Revision properties object</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 103px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 103px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Document/<wbr/>Revision/{revisionId}/<wbr/>Content</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Gets revision content.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Revision ID</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Revision content (<code>application/octet-stream</code>).</td>
+</tr>
+<tr style="height: 40px;">
+<th colspan="5" style="height: 40px; width: 100%;">
+<h3 id="mcetoc_1h54lhtjan">DocumentExportTemplate — export templates</h3>
+</th>
+</tr>
+<tr style="height: 40px;">
+<th style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; height: 40px;">Method</th>
+<th style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;">Query</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Description</th>
+<th style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Input</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Output</th>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 103px;">POST</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 103px;">
+<p><span style="font-size: 10pt; color: #c7254e; font-family: SFMono-Regular, sans-serif, serif;">/webapi/<wbr/>DocumentExportTemplate/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Creates export template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Application system name, object with export template properties</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Export template system name</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 103px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 103px;">
+<p><span style="font-size: 10pt; color: #c7254e; font-family: SFMono-Regular, sans-serif, serif;">/webapi/<wbr/>DocumentExportTemplate/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Edits export template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Application system name, object with export template properties</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Status object</td>
+</tr>
+<tr style="height: 140px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; background-color: #a41e22; color: #ffffff; height: 140px;">DELETE</td>
+<td style="width: 27.5772%; height: 140px;">
+<p><span style="font-size: 10pt; color: #c7254e; font-family: SFMono-Regular, sans-serif, serif;">/webapi/<wbr/>DocumentExportTemplate/<wbr/>{solutionAlias}/<wbr/>{exportTemplateGlobalAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 140px;">Deletes export template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 140px;">Application system name, export template global alias: <code>ExportTemplate@<wbr/>template<wbr/>SystemName.<wbr/>exportTemplateSystem<wbr/>Name</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 140px;">Status object</td>
+</tr>
+<tr style="height: 140px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 140px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 140px;">
+<p><span style="font-size: 10pt; color: #c7254e; font-family: SFMono-Regular, sans-serif, serif;">/webapi/<wbr/>DocumentExportTemplate/<wbr/>{solutionAlias}/<wbr/>{exportTemplateGlobalAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 140px;">Gets export template properties.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 140px;">Application system name, export template global alias: <code>ExportTemplate@<wbr/><wbr/> template<wbr/>SystemName.<wbr/>exportTemplateSystem<wbr/>Name</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 140px;">Object with export template properties</td>
+</tr>
+<tr style="height: 127px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 127px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 127px;">
+<p><span style="font-size: 10pt; color: #c7254e; font-family: SFMono-Regular, sans-serif, serif;">/webapi/<wbr/>DocumentExportTemplate/<wbr/>List/<wbr/>{templateGlobalAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Gets all export templates for the specified template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 127px;">Application system name, template global alias: <code>Template@<wbr/>application<wbr/>SystemName.<wbr/>template<wbr/>SystemName</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Array of objects with export template properties</td>
+</tr>
+<tr style="height: 40px;">
+<th colspan="5" style="height: 40px; width: 100%;">
+<h3 id="mcetoc_1h54li2kio">Form — forms and form rules (except process start forms and user task forms)</h3>
+</th>
+</tr>
+<tr style="height: 40px;">
+<th style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; height: 40px;">Method</th>
+<th style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;">Query</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Description</th>
+<th style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Input</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Output</th>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 79px;">POST</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="color: #c7254e; font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif;">/webapi/Form/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Creates form.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Application system name, form configuration object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Form system name</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 79px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="color: #c7254e; font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif;">/webapi/Form/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Edits form.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Application system name, form configuration object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #a41e22; color: #ffffff; height: 103px;">DELETE</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 103px;">
+<p><span style="color: #c7254e; font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif;">/webapi/Form/<wbr/>{solutionAlias}/<wbr/>{formGlobalAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Deletes form.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Application system name, form global alias: <br/><code>Form@template<wbr/>SystemName.<wbr/>formSystemName</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Status object</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 103px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 103px;">
+<p><span style="color: #c7254e; font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif;">/webapi/Form/<wbr/>{solutionAlias}/<wbr/>{formGlobalAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Gets form configuration.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Application system name, form global alias: <code>Form@template<wbr/>SystemName.<wbr/>formSystemName</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Form configuration object</td>
+</tr>
+<tr style="height: 127px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; background-color: #0f6ab4; color: #ffffff; height: 127px;">GET</td>
+<td style="width: 27.5772%; height: 127px;">
+<p><span style="color: #c7254e; font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif;">/webapi/Form/<wbr/>FormRules/<wbr/>{solutionAlias}/<wbr/>{formGlobalAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Gets form rules.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 127px;">Application system name, form global alias: <code>Form@template<wbr/>SystemName.<wbr/>formSystemName</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Form rules object</td>
+</tr>
+<tr style="height: 127px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; background-color: #c5862b; color: #ffffff; height: 127px;">PUT</td>
+<td style="width: 27.5772%; height: 127px;">
+<p><span style="color: #c7254e; font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif;">/webapi/Form/<wbr/>FormRules/<wbr/>{solutionAlias}/<wbr/>{formGlobalAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Sets form rules.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 127px;">Application system name, form global alias (<code>Form@template<wbr/>SystemName.<wbr/>formSystemName</code>), form rules object.</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Status object</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 103px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 103px;">
+<p><span style="color: #c7254e; font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif;">/webapi/Form/<wbr/>List/<wbr/>{templateGlobalAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Gets all forms of the specified template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Application system name, template global alias: <code>Template@solutionSystemName.<wbr/>template<wbr/>SystemName</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Array of form configuration objects</td>
+</tr>
+<tr style="height: 40px;">
+<th colspan="5" style="height: 40px; width: 100%;">
+<h3 id="mcetoc_1h55460kt2">SolutionGitIntegration — application version control via Git </h3>
+</th>
+</tr>
+<tr style="height: 40px;">
+<th style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; height: 40px;">Method</th>
+<th style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;">Query</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Description</th>
+<th style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Input</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Output</th>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 79px;">POST</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt; color: #c7254e;">/webapi/Git/<wbr/>AddRemoteBranch</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Creates branch in the remote repository.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Repository and branch configuration object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 79px;">POST</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt; color: #c7254e;">/webapi/Git/<wbr/>Connect</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Initializes connection with the specified repository.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Repository configuration object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 79px;">POST</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt; color: #c7254e;">/webapi/Git/<wbr/>GetRepositoryDetails</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Gets repository commits.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Repository configuration object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Array of objects with commit properties</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 79px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt; color: #c7254e;">/webapi/Git/<wbr/>GetUserConfiguration</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Gets repository user credentials.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;"> </td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Object with repository user credentials</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 79px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt; color: #c7254e;">/webapi/Git/<wbr/>GetUserSolutionConfig</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Gets repository configuration and user details.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;"> </td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Object with repository configuration and user credentials</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 79px;">POST</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt; color: #c7254e;">/webapi/Git/<wbr/>ListBranches</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Gets all repository branches.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Repository configuration object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">
+<p>Array of objects with branch properties</p>
+</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 79px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt; color: #c7254e;">/webapi/Git/<wbr/>ListRepositories</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Gets all repositories of Git connections.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;"> </td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Array of repository configuration objects</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 79px;">POST</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt; color: #c7254e;">/webapi/Git/<wbr/>SaveUserCredentials</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Saves user credentials.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Repository configuration and user credentials object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+<tr style="height: 40px;">
+<th colspan="5" style="height: 40px; width: 100%;">
+<h3 id="mcetoc_1h54lrgtts">Heartbeat — server, process, scripts, and service status monitoring</h3>
+</th>
+</tr>
+<tr style="height: 40px;">
+<th style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; height: 40px;">Method</th>
+<th style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;">Query</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Description</th>
+<th style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Input</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Output</th>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; background-color: #0f6ab4; color: #ffffff; height: 79px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Heartbeat/<wbr/>Details</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Gets service usage statistics.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;"> </td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Heartbeat details object</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; background-color: #0f6ab4; color: #ffffff; height: 79px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Heartbeat/<wbr/>IsAlive</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Gets service availability status.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;"> </td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; background-color: #0f6ab4; color: #ffffff; height: 79px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Heartbeat/<wbr/>ServerDetails</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Gets server details.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;"> </td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Server information object</td>
+</tr>
+<tr style="height: 40px;">
+<th colspan="5" style="height: 40px; width: 100%;">
+<h3 id="mcetoc_1h54ltpvb12">ProcessObjects — process diagram version migration</h3>
+</th>
+</tr>
+<tr style="height: 55px;">
+<th style="width: 10.5056%; vertical-align: middle; text-align: center; height: 55px;">Method</th>
+<th style="width: 27.5772%; height: 55px;">
+<p><strong>Query</strong></p>
+</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 55px;">Description</th>
+<th style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 55px;">Input</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 55px;">Output</th>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 79px;">POST</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="color: #c7254e; font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif;">/webapi/<wbr/>ProcessObjects/Migrate</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Changes process instances diagram version and moves tokens.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Process template global alias (<code>ProcessTemplate@application<wbr/>SystemName.<wbr/>template<wbr/>SystemName</code>), target diagram ID, process instance IDs</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+<tr style="height: 40px;">
+<th colspan="5" style="height: 40px; width: 100%;">
+<h3 id="mcetoc_1h54lrpmcu">ProcessTemplate — process templates</h3>
+</th>
+</tr>
+<tr style="height: 40px;">
+<th style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; height: 40px;">Method</th>
+<th style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;">Query</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Description</th>
+<th style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Input</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Output</th>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 79px;">POST</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="color: #c7254e; font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt;">/webapi/ProcessTemplate/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Creates process template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Application system name, process template properties object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Process template system name</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 79px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="color: #c7254e; font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt;">/webapi/ProcessTemplate/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Edits process template properties.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Application system name, process template properties object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #a41e22; color: #ffffff; height: 103px;">DELETE</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 103px;">
+<p><span style="color: #c7254e; font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt;">/webapi/ProcessTemplate/<wbr/>{solutionAlias}/<wbr/>{processTemplateAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Deletes process template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Application system name, process template system name</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Status object</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 103px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 103px;">
+<p><span style="color: #c7254e; font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt;">/webapi/ProcessTemplate/<wbr/>{solutionAlias}/<wbr/>{processTemplateAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Gets process template properties.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Application system name, process template system name</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Process template properties object</td>
+</tr>
+<tr style="height: 127px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 127px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 127px;">
+<p><span style="color: #c7254e; font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt;">/webapi/ProcessTemplate/<wbr/>{solutionAlias}/<wbr/>{processTemplateAlias}/<wbr/>Disable</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Archives process template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 127px;">Application system name, process template system name</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Status object</td>
+</tr>
+<tr style="height: 127px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 127px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 127px;">
+<p><span style="color: #c7254e; font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt;">/webapi/ProcessTemplate/<wbr/>{solutionAlias}/<wbr/>{processTemplateAlias}/<wbr/>Enable</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Unarchives process template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 127px;">Application system name, process template system name</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Status object</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 103px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 103px;">
+<p><span style="color: #c7254e; font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt;">/webapi/ProcessTemplate/<wbr/>List/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Gets all process templates in the specified application.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Application system name</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Array of objects with process template properties</td>
+</tr>
+<tr style="height: 40px;">
+<th colspan="5" style="height: 40px; width: 100%;">
+<h3 id="mcetoc_1h54ls04av">Record — single record (except process templates)</h3>
+</th>
+</tr>
+<tr style="height: 40px;">
+<th style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; height: 40px;">Method</th>
+<th style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;">Query</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Description</th>
+<th style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Input</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Output</th>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #a41e22; color: #ffffff; height: 79px;">DELETE</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Record/<wbr/>{recordId}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Deletes record.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Record ID</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 79px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Record/<wbr/>{recordId}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Gets record.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Record ID</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Object with attribute values:  <br/><code>{"attribute<wbr/>SystemName": "value"}</code></td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 79px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Record/<wbr/>{recordId}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Edits record.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Record ID, object with record attribute values:<code>[{"attribute<wbr/>SystemName": "value"}]</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 103px;">POST</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 103px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Record/<wbr/>{recordId}/<wbr/>{deepClone}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Clones record.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Record ID, deep cloning flag (<code>true</code> — clone linked records)</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Cloned record ID</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 103px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 103px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Record/<wbr/>{recordId}/<wbr/>Disable</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Archives record.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Record ID</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Status object</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 103px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 103px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Record/<wbr/>{recordId}/<wbr/>Enable</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Unarchives record.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Record ID</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Status object</td>
+</tr>
+<tr style="height: 115px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 115px;">POST</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 115px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Record/<wbr/>{templateGlobalAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 115px;">Creates record.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 115px;">Application system name, template global alias (<code>Template@<wbr/>application<wbr/>SystemName.<wbr/>template<wbr/>SystemName</code>), object with record attribute values: <br/><code>[{"attribute<wbr/>SystemName": "value"}]</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 115px;">Record ID</td>
+</tr>
+<tr style="height: 40px;">
+<th colspan="5" style="height: 40px; width: 100%;">
+<h3 id="mcetoc_1h54m2jnr14">Records — multiple records and record export/import (except process templates)</h3>
+</th>
+</tr>
+<tr style="height: 40px;">
+<th style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; height: 40px;">Method</th>
+<th style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;">Query</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Description</th>
+<th style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Input</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Output</th>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #a41e22; color: #ffffff; height: 40px;">DELETE</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;"><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Records</span></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Deletes specified records.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Array of record IDs</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Status object</td>
+</tr>
+<tr style="height: 65px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 65px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 65px;"><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Records</span></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 65px;">Edits specified records.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 65px;">Array of record IDs and objects with record attribute values: <code>[{"attribute<wbr/>SystemName": "value"}]</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 65px;">Status object</td>
+</tr>
+<tr style="height: 90px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #a41e22; color: #ffffff; height: 90px;">DELETE</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 90px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Records/<wbr/>{templateGlobalAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 90px;">Deletes all records from the specified template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 90px;">Application system name, template global alias: <code>Template@<wbr/>application<wbr/>SystemName.<wbr/>template<wbr/>SystemName</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 90px;">Status object</td>
+</tr>
+<tr style="height: 90px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 90px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 90px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Records/<wbr/>{templateGlobalAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 90px;">Gets all records of the specified template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 90px;">Application system name, template global alias :<code>Template@<wbr/>application<wbr/>SystemName.<wbr/>template<wbr/>SystemName</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 90px;">
+<p>Array of objects with record attribute values: <code>[{"attribute<wbr/>SystemName": "value"}]</code></p>
+</td>
+</tr>
+<tr style="height: 115px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 115px;">POST</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 115px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Records/<wbr/>{templateGlobalAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 115px;">Creates records.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 115px;">
+<p>Template global alias (<code>Template@<wbr/>application<wbr/>SystemName.<wbr/>template<wbr/>SystemName</code>), array of objects with record attribute values: <code>[{"attribute<wbr/>SystemName": "value"}]</code></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 115px;">Array of record IDs</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 103px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 103px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Records/<wbr/>{templateGlobalAlias}/<wbr/>Export</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Exports all records of the specified template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Application system name, template global alias: <code>Template@<wbr/>application<wbr/>SystemName.<wbr/>template<wbr/>SystemName</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Serialized records data</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 79px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Records/<wbr/>BulkEdit</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Updates specified records with the same data.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Record properties and values to update</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 79px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Records/<wbr/>Disable</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Archives specified records.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Array of record IDs</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 79px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Records/<wbr/>Enable</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Unarchives specified records.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Array of record IDs</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 79px;">POST</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Records/<wbr/>Export</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Exports specified records.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Record template global alias object, array of record IDs</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Serialized records data</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 79px;">POST</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Records/<wbr/>Import</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Imports records from a file.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">ID of an uploaded file with serialized records data</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">The number of imported records</td>
+</tr>
+<tr style="height: 40px;">
+<th colspan="5" style="height: 40px; width: 100%;">
+<h3 id="mcetoc_1h54m2poi15">RecordTemplate — record templates</h3>
+</th>
+</tr>
+<tr style="height: 40px;">
+<th style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; height: 40px;">Method</th>
+<th style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;">Query</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Description</th>
+<th style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Input</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Output</th>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 79px;">POST</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/RecordTemplate/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Creates record template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Application system name, record template properties object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Record template system name</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 79px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/RecordTemplate/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Edits record template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Application system name, record template properties object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; background-color: #a41e22; color: #ffffff; height: 103px;">DELETE</td>
+<td style="width: 27.5772%; height: 103px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/RecordTemplate/<wbr/>{solutionAlias}/<wbr/>{recordTemplateAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Deletes record template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Application system name, record template system name</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Status object</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 103px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 103px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/RecordTemplate/<wbr/>{solutionAlias}/<wbr/>{recordTemplateAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Gets template by system name.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Application system name, record template system name</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Record template properties object</td>
+</tr>
+<tr style="height: 127px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 127px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 127px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/RecordTemplate/<wbr/>{solutionAlias}/<wbr/>{recordTemplateAlias}/<wbr/>Disable</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Archives record template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 127px;">Application system name, record template system name</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Status object</td>
+</tr>
+<tr style="height: 127px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 127px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 127px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/RecordTemplate/<wbr/>{solutionAlias}/<wbr/>{recordTemplateAlias}/<wbr/>Enable</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Unarchives record template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 127px;">Application system name, record template system name</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Status object</td>
+</tr>
+<tr style="height: 127px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 127px;">GET</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 127px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/<wbr/>RecordTemplate/<wbr/>List/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Gets all record templates in the specified application.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 127px;">Application system name</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Array of objects with record template properties</td>
+</tr>
+<tr style="height: 40px;">
+<th colspan="5" style="height: 40px; width: 100%;">
+<h3 id="mcetoc_1h54m6c3816">ReferenceData — records with specified attribute values</h3>
+</th>
+</tr>
+<tr style="height: 40px;">
+<th style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; height: 40px;">Method</th>
+<th style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;">Query</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Description</th>
+<th style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Input</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Output</th>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; background-color: #a41e22; color: #ffffff; height: 79px;">DELETE</td>
+<td style="width: 27.5772%; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/ReferenceData/<wbr/>Delete</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Deletes a record with specified key attribute values. </td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Template global alias object, object with key attribute system names and values</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Deleted record ID. If several records are matched, returns null and no records are deleted</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; background-color: #10a54a; color: #ffffff; height: 79px;">POST</td>
+<td style="width: 27.5772%; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/ReferenceData/<wbr/>Get</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Gets attribute values of a record with specified key attribute values.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Template global alias object, object with key attribute system names and values, array of attribute system names to get</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Object with record attribute values. If several records are matched, returns null and no records are returned</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 79px;">PUT</td>
+<td style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/ReferenceData/<wbr/>Put</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Edits record with specified key attribute values. </td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Template global alias object, array of key attribute system names, object with key attribute system names and values, object with attribute system names and their new values</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Edited record ID. If several records are matched, returns null and no records are edited</td>
+</tr>
+<tr style="height: 40px;">
+<th colspan="5" style="height: 40px; width: 100%;">
+<h3 id="mcetoc_1h54m6ufe17">Solution — applications</h3>
+</th>
+</tr>
+<tr style="height: 40px;">
+<th style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; height: 40px;">Method</th>
+<th style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;">Query</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Description</th>
+<th style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Input</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Output</th>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 40px;">GET</td>
+<td style="width: 27.5772%; height: 40px;"><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Solution</span></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Gets all applications.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;"> </td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Array of objects with application properties</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 40px;">POST</td>
+<td style="width: 27.5772%; height: 40px;"><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Solution</span></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Creates application.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">An object with application properties</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Application system name</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 40px;">PUT</td>
+<td style="width: 27.5772%; height: 40px;"><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Solution </span></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Edits application properties.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">An object with application properties</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Status object</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #a41e22; color: #ffffff; height: 79px;">DELETE</td>
+<td style="width: 27.5772%; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Solution/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Deletes application.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Application system name</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 79px;">GET</td>
+<td style="width: 27.5772%; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/Solution/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Gets application properties.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Application system name</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Object with application properties</td>
+</tr>
+<tr style="height: 40px;">
+<th colspan="5" style="height: 40px; width: 100%;">
+<h3 id="mcetoc_1h54m746n18">Toolbar — toolbars and buttons on them</h3>
+</th>
+</tr>
+<tr style="height: 40px;">
+<th style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; height: 40px;">Method</th>
+<th style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;">Query</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Description</th>
+<th style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Input</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Output</th>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 79px;">POST</td>
+<td style="width: 27.5772%; height: 79px;">
+<p><span style="font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt; color: #c7254e;">/webapi/Toolbar/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Creates toolbar.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Application system name, toolbar configuration object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Toolbar system name</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; background-color: #c5862b; color: #ffffff; height: 79px;">PUT</td>
+<td style="width: 27.5772%; height: 79px;">
+<p><span style="font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt; color: #c7254e;">/webapi/Toolbar/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Edits toolbar.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Application system name, toolbar configuration object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #a41e22; color: #ffffff; height: 103px;">DELETE</td>
+<td style="width: 27.5772%; height: 103px;">
+<p><span style="font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt; color: #c7254e;">/webapi/Toolbar/<wbr/>{solutionAlias}/<wbr/>{toolbarGlobalAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Deletes toolbar.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Application system name, toolbar global alias: <code>Toolbar@<wbr/>template<wbr/>SystemName.<wbr/>toolbarAlias</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Status object</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 103px;">GET</td>
+<td style="width: 27.5772%; height: 103px;">
+<p><span style="font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt; color: #c7254e;">/webapi/Toolbar/<wbr/>{solutionAlias}/<wbr/>{toolbarGlobalAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Gets toolbar by system name.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Application system name, toolbar global alias: <code>Toolbar@<wbr/>template<wbr/>SystemName.<wbr/>toolbarAlias</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Toolbar configuration object</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 103px;">GET</td>
+<td style="width: 27.5772%; height: 103px;">
+<p><span style="font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt; color: #c7254e;">/webapi/Toolbar/<wbr/>List/<wbr/>{templateGlobalAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Gets all toolbars for the specified template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Application system name, template global alias: <code>Template@<wbr/>application<wbr/>SystemName.<wbr/>template<wbr/>SystemName</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Array of toolbar configuration objects</td>
+</tr>
+<tr style="height: 40px;">
+<th colspan="5" style="height: 40px; width: 100%;">
+<h3 id="mcetoc_1h54m79j019">Transfer — application model export/import</h3>
+</th>
+</tr>
+<tr style="height: 40px;">
+<th style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; height: 40px;">Method</th>
+<th style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;">Query</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Description</th>
+<th style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Input</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Output</th>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 103px;">GET</td>
+<td style="width: 27.5772%; height: 103px;">
+<p><span style="font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt; color: #c7254e;">/webapi/Transfer/<wbr/>{fileId}/<wbr/>Validate</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Validates application model.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Application model file ID</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Validation summary object</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 79px;">GET</td>
+<td style="width: 27.5772%; height: 79px;">
+<p><span style="font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt; color: #c7254e;">/webapi/Transfer/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Exports application model.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Application system name</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">An object with application model ZIP file in Base64 format and export summary</td>
+</tr>
+<tr style="height: 151px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 151px;">POST</td>
+<td style="width: 27.5772%; height: 151px;">
+<p><span style="font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt; color: #c7254e;">/webapi/Transfer/<wbr/>{solutionAlias}/<wbr/>{fileId}/<wbr/>{publishAfterImport}/<wbr/>{policy}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 151px;">Imports application model.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 151px;">Application system name, application model ZIP/CTF file ID, imported process diagrams publishing flag (<code>true</code> — publish), behaviour state policy (<code>ApplyNew</code>, <code>ApplyOld</code>, <code>DisableAll</code>, or <code>EnableAll</code>).</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 151px;">Application import summary object</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 79px;">POST</td>
+<td style="width: 27.5772%; height: 79px;">
+<p><span style="font-family: SFMono-Regular, sans-serif, serif; font-size: 10pt; color: #c7254e;">/webapi/Transfer/<wbr/>Upload</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Uploads application model file.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Application model ZIP file in Base64 format</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">An object with the uploaded file ID</td>
+</tr>
+<tr style="height: 40px;">
+<th colspan="5" style="height: 40px; width: 100%;">
+<h3 id="mcetoc_1h54ma4o01b">UserCommand — buttons</h3>
+</th>
+</tr>
+<tr style="height: 40px;">
+<th style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; height: 40px;">Method</th>
+<th style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;">Query</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Description</th>
+<th style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Input</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Output</th>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #10a54a; color: #ffffff; height: 79px;">POST</td>
+<td style="width: 27.5772%; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/UserCommand/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Creates button.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Application system name, button configuration object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">
+<div>
+<p>Button system name</p>
+</div>
+</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 79px;">PUT</td>
+<td style="width: 27.5772%; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/UserCommand/<wbr/>{solutionAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Edits button.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Application system name, button configuration object</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+<tr style="height: 115px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #a41e22; color: #ffffff; height: 115px;">DELETE</td>
+<td style="width: 27.5772%; height: 115px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/UserCommand/<wbr/>{solutionAlias}/<wbr/>{userCommand<wbr/>GlobalAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 115px;">Deletes button.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 115px;">Application system name, button global alias: <code>UserCommand@<wbr/>template<wbr/>SystemName.<wbr/>userCommandAlias</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 115px;">Status object</td>
+</tr>
+<tr style="height: 115px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 115px;">GET</td>
+<td style="width: 27.5772%; height: 115px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/UserCommand/<wbr/>{solutionAlias}/<wbr/>{userCommand<wbr/>GlobalAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 115px;">Gets button configuration.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 115px;">Application system name, button global alias: <code>UserCommand@<wbr/>template<wbr/>SystemName.<wbr/>userCommandAlias</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 115px;">Button configuration object</td>
+</tr>
+<tr style="height: 127px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; background-color: #c5862b; color: #ffffff; height: 127px;">PUT</td>
+<td style="width: 27.5772%; height: 127px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/UserCommand/<wbr/>{solutionAlias}/<wbr/>{userCommand<wbr/>GlobalAlias}/<wbr/>Disable</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Archives button.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 127px;">Application system name, button global alias: <code>UserCommand@<wbr/>template<wbr/>SystemName.<wbr/>userCommandAlias</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Status object</td>
+</tr>
+<tr style="height: 127px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; background-color: #c5862b; color: #ffffff; height: 127px;">PUT</td>
+<td style="width: 27.5772%; height: 127px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/UserCommand/<wbr/>{solutionAlias}/<wbr/>{userCommand<wbr/>GlobalAlias}/<wbr/>Enable</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Unarchives button.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 127px;">Application system name, button global alias: <code>UserCommand@<wbr/>template<wbr/>SystemName.<wbr/>userCommandAlias</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 127px;">Status object</td>
+</tr>
+<tr style="height: 103px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; background-color: #0f6ab4; color: #ffffff; height: 103px;">GET</td>
+<td style="width: 27.5772%; height: 103px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/UserCommand/<wbr/>List/<wbr/>{templateGlobalAlias}</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Gets all buttons of the specified template.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 103px;">Application system name, template global alias: <code>Template@<wbr/>application<wbr/>SystemName.<wbr/>template<wbr/>SystemName</code></td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 103px;">Array of button configuration objects</td>
+</tr>
+<tr style="height: 40px;">
+<th colspan="5" style="height: 40px; width: 100%;">
+<h3 id="mcetoc_1h54m86ku1a">WorkerEngine — system services</h3>
+</th>
+</tr>
+<tr style="height: 40px;">
+<th style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; height: 40px;">Method</th>
+<th style="width: 27.5772%; min-width: 190px; max-width: 190px; overflow-wrap: break-word; height: 40px;">Query</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Description</th>
+<th style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 40px;">Input</th>
+<th style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 40px;">Output</th>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #0f6ab4; color: #ffffff; height: 79px;">GET</td>
+<td style="width: 27.5772%; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/WorkerEngine/<wbr/>GetConfiguration</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Gets system service statuses (<code>true</code> — enabled).</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;"> </td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Object with system service statuses</td>
+</tr>
+<tr style="height: 79px;">
+<td style="width: 10.5056%; vertical-align: middle; text-align: center; max-width: 80px; background-color: #c5862b; color: #ffffff; height: 79px;">PUT</td>
+<td style="width: 27.5772%; height: 79px;">
+<p><span style="font-size: 10pt; font-family: SFMono-Regular, sans-serif, serif; color: #c7254e;">/webapi/WorkerEngine/<wbr/>SetConfiguration</span></p>
+</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Sets system service statuses.</td>
+<td style="min-width: 140px; max-width: 200px; width: 24.7538%; overflow-wrap: break-word; height: 79px;">Object with system service statuses (<code>true</code> — enabled)</td>
+<td style="min-width: 140px; max-width: 150px; width: 18.5817%; overflow-wrap: break-word; height: 79px;">Status object</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+</div>

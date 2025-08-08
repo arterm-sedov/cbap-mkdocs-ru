@@ -64,40 +64,40 @@ kbId: 4605
 
 1. Установите пакеты `krb5-user`, `krb5-config` и зависимости для них:
 
-```
-apt install krb5-user krb5-config
-```
+   ```
+   apt install krb5-user krb5-config
+   ```
 2. Откройте файл конфигурации Kerberos для редактирования:
 
-```
-vim /etc/krb5.conf
-```
+   ```
+   vim /etc/krb5.conf
+   ```
 3. Отредактируйте файл `krb5.conf` согласно следующему примеру:
 
-```
-#astra-winbind
-[libdefaults]
-    default_realm = <DOMAIN.NAME>
-    kdc_timesync = 1
-    ccache_type = 2
-    forwardable = true
-    proxiable = true
-    fcc-mit-ticketflags = true
-    dns_lookup_realm = false
-    default_ccache_name = DIR:/tmp
-[realms]
-    <DOMAIN.NAME> = {
-        kdc = <DCName>.<domain.name>
-        admin_server = <DCName>.<domain.name>
-        default_domain = <domain.name>
-    }
-[domain_realm]
-    .<domain.name> = <DOMAIN.NAME>
-    <domain.name> = <DOMAIN.NAME>
-[login]
-    krb4_convert = false
-    krb4_get_tickets = false
-```
+   ```
+   #astra-winbind
+   [libdefaults]
+       default_realm = <DOMAIN.NAME>
+       kdc_timesync = 1
+       ccache_type = 2
+       forwardable = true
+       proxiable = true
+       fcc-mit-ticketflags = true
+       dns_lookup_realm = false
+       default_ccache_name = DIR:/tmp
+   [realms]
+       <DOMAIN.NAME> = {
+           kdc = <DCName>.<domain.name>
+           admin_server = <DCName>.<domain.name>
+           default_domain = <domain.name>
+       }
+   [domain_realm]
+       .<domain.name> = <DOMAIN.NAME>
+       <domain.name> = <DOMAIN.NAME>
+   [login]
+       krb4_convert = false
+       krb4_get_tickets = false
+   ```
 
 ### Настройка конфигурации экземпляра ПО
 
@@ -105,27 +105,27 @@ vim /etc/krb5.conf
 2. Настройте [подключение к серверу каталогов][ad_connection], которое будет использоваться для синхронизации аккаунтов.
 3. На вкладке «**Основные**»:
 
-    - установите флажок «**Использовать по умолчанию**»;
-    - в поле «**Аутентификация пользователей**» — выберите протокол проверки подлинности **Kerberos**.
+   - установите флажок «**Использовать по умолчанию**»;
+   - в поле «**Аутентификация пользователей**» — выберите протокол проверки подлинности **Kerberos**.
 4. Остальные параметры настройте согласно конфигурации сервера каталогов.
 5. Сохраните свойства подключения.
 6. Перезапустите экземпляр ПО:
 
-```
-systemctl restart comindware<instance_name>
-```
+   ```
+   systemctl restart comindware<instance_name>
+   ```
 
-Здесь `<instance_name>` — имя экземпляра ПО.
+   Здесь `<instance_name>` — имя экземпляра ПО.
 
 ### Проверка вывода трассировщика ошибок в Shell
 
 1. Выполните команду, чтобы проверить работоспособность Kerberos:
 
-```
-KRB5_TRACE=/dev/stdout kinit <username>
-```
+   ```
+   KRB5_TRACE=/dev/stdout kinit <username>
+   ```
 
-Здесь `<username>` — любой пользователь домена, для которого известен пароль.
+   Здесь `<username>` — любой пользователь домена, для которого известен пароль.
 
 ## Настройка машины linuxHost с экземпляром ПО для Rocky Linux
 
@@ -133,49 +133,49 @@ KRB5_TRACE=/dev/stdout kinit <username>
 
 1. Установите пакеты `krb5-user`, `krb5-config` и зависимости для них:
 
-```
-yum install krb5-workstation
-```
+   ```
+   yum install krb5-workstation
+   ```
 2. Откройте файла конфигурации Kerberos для редактирования:
 
-```
-vim /etc/krb5.conf
-```
+   ```
+   vim /etc/krb5.conf
+   ```
 3. Отредактируйте файл `krb5.conf` согласно следующему примеру:
 
-```
-[libdefaults]
-    default_realm = <DOMAIN.NAME>
-    kdc_timesync = 1
-    ccache_type = 2
-    forwardable = true
-    proxiable = true
-    fcc-mit-ticketflags = true
-    dns_lookup_realm = false
-[realms]
-    <DOMAIN.NAME> = {
-        kdc = <DCName>.<domain.name>
-        admin_server = <DCName>.<domain.name>
-        default_domain = <domain.name>
-    }
-[domain_realm]
-    .<domain.name> = <DOMAIN.NAME>
-    <domain.name> = <DOMAIN.NAME>
-[login]
-    krb4_convert = false
-    krb4_get_tickets = false
-```
+   ```
+   [libdefaults]
+       default_realm = <DOMAIN.NAME>
+       kdc_timesync = 1
+       ccache_type = 2
+       forwardable = true
+       proxiable = true
+       fcc-mit-ticketflags = true
+       dns_lookup_realm = false
+   [realms]
+       <DOMAIN.NAME> = {
+           kdc = <DCName>.<domain.name>
+           admin_server = <DCName>.<domain.name>
+           default_domain = <domain.name>
+       }
+   [domain_realm]
+       .<domain.name> = <DOMAIN.NAME>
+       <domain.name> = <DOMAIN.NAME>
+   [login]
+       krb4_convert = false
+       krb4_get_tickets = false
+   ```
 4. Откройте файл конфигурации `kcm_default_ccache` для редактирования:
 
-```
-vim /etc/krb5.conf.d/kcm_default_ccache
-```
+   ```
+   vim /etc/krb5.conf.d/kcm_default_ccache
+   ```
 5. Отредактируйте файл `kcm_default_ccache` согласно следующему примеру:
 
-```
-[libdefaults]
-default_ccache_name = DIR:/tmp
-```
+   ```
+   [libdefaults]
+   default_ccache_name = DIR:/tmp
+   ```
 
 ### Настройка конфигурации экземпляра ПО
 
@@ -183,25 +183,25 @@ default_ccache_name = DIR:/tmp
 2. Настройте [подключение к серверу каталогов][ad_connection], которое будет использоваться для синхронизации аккаунтов.
 3. На вкладке «**Основные**»:
 
-    - установите флажок «**Использовать по умолчанию**»;
-    - в поле «**Аутентификация пользователей**» — выберите протокол проверки подлинности **Kerberos**.
+   - установите флажок «**Использовать по умолчанию**»;
+   - в поле «**Аутентификация пользователей**» — выберите протокол проверки подлинности **Kerberos**.
 4. Остальные параметры настройте согласно конфигурации сервера каталогов.
 5. Сохраните свойства подключения.
 6. Перезапустите экземпляр ПО:
 
-```
-systemctl restart comindware<instance_name>
-```
+   ```
+   systemctl restart comindware<instance_name>
+   ```
 
 ### Проверка вывода трассировщика ошибок в Shell
 
 1. Выполните команду, чтобы проверить работоспособность Kerberos:
 
-```
-KRB5_TRACE=/dev/stdout kinit <username>
-```
+   ```
+   KRB5_TRACE=/dev/stdout kinit <username>
+   ```
 
-Здесь `<username>` — имя любого пользователя домена, для которого известен пароль.
+   Здесь `<username>` — имя любого пользователя домена, для которого известен пароль.
 
 --8<-- "related_topics_heading.md"
 
@@ -209,6 +209,6 @@ KRB5_TRACE=/dev/stdout kinit <username>
 
 **[Синхронизация с сервером каталогов (Active Directory)][accounts_dc_sync]**
 
-**[Аутентификация через единый вход (SSO). Настройка контроллера домена, экземпляра ПО и компьютера конечного пользователя][sso_authenticatation_configure]**
+**[Аутентификация через единый вход (SSO). Настройка контроллера домена, экземпляра ПО и компьютера конечного пользователя][sso_authentication_configure]**
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

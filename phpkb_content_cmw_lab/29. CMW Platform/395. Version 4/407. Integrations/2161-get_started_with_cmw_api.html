@@ -1,0 +1,154 @@
+<h1>Get Started With CMW API</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1h7csek432">Introduction </a>
+<ul>
+<li><a href="#mcetoc_1hrgqoepi4">Definitions </a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1h7csd8su1">Access the API</a>
+<ul>
+<li><a href="#mcetoc_1hrh1s2k61">API Methods </a></li>
+<li><a href="#mcetoc_1ho6umt4r1">Initiate a Request From an External System</a></li>
+<li><a href="#mcetoc_1hrj7rng60">Authenticate External System to Access CMW API</a></li>
+<li><a href="#mcetoc_1ho6umbsb0">Initiate External API Request</a></li>
+<li><a href="#mcetoc_1hrj7sd8e2">Authenticate CMW Platform to Access External API</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1h7csahj80">Use Swagger </a></li>
+<li><a href="#mcetoc_1hrh3hhb12">Example: Call a System Core API Method</a></li>
+<li><a href="#mcetoc_1hrgord0u3">Related Articles </a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1h7csek432"><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Introduction</span> </span></h2>
+<p><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">The </span></span><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">CMW Platform</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> can communicate with external system APIs via <strong>connections </strong></span></span><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">and </span> </span> <strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">communication routes</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> and can also process requests from external systems via the </span><span style="vertical-align: inherit;">three </span></span><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">REST APIs</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">:</span></span></p>
+<ul>
+<li><a href="https://kb.comindware.ru/article.php?id=2074"><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Solution API</span></span></strong></a></li>
+<li><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">System Core API</span></span></strong></li>
+<li><a href="https://kb.comindware.ru/article.php?id=1941"><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Web API</span></span></strong></a></li>
+</ul>
+<div class="notice notice-success">
+<h3 class="admonition-title" id="mcetoc_1hrgqoepi4"><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Definitions</span> </span></h3>
+<ul>
+<li><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">API</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> (Application Programming Interface) is a set of methods, classes, libraries, and functions that enable communication between different systems.</span> </span></li>
+<li><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">REST API</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> is an API that conforms to the Representational State Transfer architecture. The REST API allows you to efficiently utilize HTTP, scale services, and develop applications using almost any programming language in compliance with the REST design principles:</span> </span>
+<ul>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Stateless — the server does not store the request state. Each incoming request contains all the data necessary to process it and is processed independently of other requests.</span></span></li>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Uniform interface — the server transmits data in a well-defined format.</span></span></li>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Client and server independence — the client can interact with the server only through the resource URI. The server can only transfer the requested data to the client via HTTP.</span></span></li>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Resource cacheability — responses indicate their cacheability. Resources can be cached at the server or client.</span></span></li>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Layered architecture — the client can connect to authorized intermediaries between the client and the server to receive responses from the server, and the server can forward requests to other servers.</span></span></li>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Code on demand (optional) — the server can extend the client capabilities by transferring executable logic, for example, to validate user-entered data.</span> </span></li>
+</ul>
+</li>
+<li><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">RESTful</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> is a web service that implements the </span></span><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">REST</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> architecture.</span> </span></li>
+<li><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Resource</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> is an object or information in an application, such as a template, account, or document, that an API provides access to.</span> </span></li>
+<li><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Resource URI</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> is a Uniform Resource Identifier in an API.</span> </span></li>
+<li><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Client</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> is a person or system that accesses resources via an API.</span> </span></li>
+</ul>
+</div>
+<h2 id="mcetoc_1h7csd8su1"><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Access the API</span></span></h2>
+<p><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">In its simplest case, </span></span><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">RESTful</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> services send and receive HTTP requests in a URL string to retrieve or send data, execute a command, or perform another action.</span> </span></p>
+<p><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">To configure integrations using </span></span><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">REST API</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">,</span></span><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> you can follow this general principle:</span> </span></p>
+<ul>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Develop an integration scenario — which system initiates the API call, how often, what methods it uses to transfer what data, what happens next, etc.</span></span></li>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Use the API documentation to test requests, configure connections, and generate final production requests.</span> </span></li>
+</ul>
+<h3 id="mcetoc_1hrh1s2k61"><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">API Methods</span> </span></h3>
+<p><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">The </span></span><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">CMW Platform</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> supports the following API methods:</span></span></p>
+<ul>
+<li><code>GET</code> <span style="vertical-align: inherit;"><span style="vertical-align: inherit;">— get a list of all records.</span> </span></li>
+<li><code>GET {id}</code> <span style="vertical-align: inherit;"><span style="vertical-align: inherit;">— get a record with identifier </span> </span> <code>{id}</code><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">.</span> </span></li>
+<li><code>DELETE {id}</code><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> — delete a record with identifier </span> </span> <code>{id}</code><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">.</span> </span></li>
+<li><code>POST</code><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> — create a new record</span></span><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">.</span></span></li>
+<li><code>PUT {id}</code> <span style="vertical-align: inherit;"><span style="vertical-align: inherit;">— change a record with identifier </span> </span> <code>{id}</code><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">.</span> </span></li>
+</ul>
+<h3 id="mcetoc_1ho6umt4r1">Initiate a Request From an External System</h3>
+<p><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">The </span></span><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">CMW Platform</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> can receive HTTP API requests in</span></span><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> two ways:</span> </span></p>
+<ul>
+<li><code>GET</code> <span style="vertical-align: inherit;"><span style="vertical-align: inherit;">or </span> </span> <code>DELETE</code><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> request as a URL string containing all request parameters.</span> </span>
+<ul>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">The external system sends the request in a URL string</span></span><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">. </span></span><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">You can generate a query template for an external system using </span></span><a href="#mcetoc_1h7csahj80"><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Swagger</span></span></a><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">. </span></span></li>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">You can test this request in a browser: copy the received </span> </span> <strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Request URL</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> into the address bar and press </span></span><kbd>Enter</kbd><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">. If you are logged in </span></span><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">to the </span></span><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">CMW Platform</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">, no authentication is needed.</span> </span></li>
+</ul>
+</li>
+<li><code>POST</code> <span style="vertical-align: inherit;"><span style="vertical-align: inherit;">or </span> </span> <code>PUT</code> <span style="vertical-align: inherit;">request </span><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">with a body containing all the parameters (e.g., username and password, data to send or receive, etc.).</span> </span>
+<ul>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">The external system sends a request in JSON or XML format</span></span><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">. You can generate a query template for an external system using </span></span><a href="#mcetoc_1h7csahj80"><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Swagger</span></span></a><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">. </span> </span></li>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">This option is more flexible, allowing you to transfer more data in a structured form. But you can't test this type of request in a browser. You can test it using the built-in </span><span style="letter-spacing: 0.2px;"><span style="vertical-align: inherit;">Swagger or external services like Postman, SoapUI, Insomnia, etc.</span></span></span></li>
+</ul>
+</li>
+<li><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">CMW Platform</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> returns a response in JSON or XML format.</span> </span></li>
+</ul>
+<h3 id="mcetoc_1hrj7rng60"><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Authenticate </span></span><span style="vertical-align: inherit;">External System </span><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">to Access CMW API</span></span></h3>
+<p><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">The </span> </span> <strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">CMW Platform</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> API supports two methods to authenticate external systems:</span> </span></p>
+<ul>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Basic authentication — specify the username and password of the account used to execute the request.</span></span></li>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">HMAC — specify the token and secret key generated for the account on the </span></span><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Administration</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> – </span> </span> <strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Authentication Keys</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> page.</span> </span></li>
+</ul>
+<div class="notice notice-info">
+<p class="admonition-title"><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Notes</span></span></p>
+<ul>
+<li>To use <span style="vertical-align: inherit;"><span style="vertical-align: inherit;">API and </span></span><a href="#mcetoc_1h7csahj80"><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Swagger</span></span></a><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">, </span><span style="vertical-align: inherit;">you should create a special account and grant it the </span></span><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">API calls</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> permission in a system role. </span></span><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Also, the API and Swagger are available to users in the </span> </span> <strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">System Administrators</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> system role.</span> </span></li>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">When calling API methods in the </span> </span> <a href="#mcetoc_1h7csahj80"><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Swagger</span></span></a> using <span style="vertical-align: inherit;"><span style="vertical-align: inherit;">the </span></span><code>https://your-host/docs</code> page, <span style="vertical-align: inherit;"><span style="vertical-align: inherit;">you're logged in to the </span></span><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">CMW Platform</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">,</span></span><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> and no authentication is required.</span> </span></li>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">When calling API methods from an external system, you must add request headers to authenticate using the account with API access. </span> </span></li>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Most external systems provide means to configure the authentication method. Otherwise, add the </span></span><code>Authorization</code> <span style="vertical-align: inherit;"><span style="vertical-align: inherit;">parameter to the request </span></span><code>Header</code> <code></code><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">containing </span></span><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">the username and password encrypted in </span></span><code>Base64</code> <span style="vertical-align: inherit;"><span style="vertical-align: inherit;">format.</span> </span></li>
+</ul>
+</div>
+<h3 id="mcetoc_1ho6umbsb0">Initiate External API Request</h3>
+<p><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">The </span></span><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">REST API </span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">is adopted widely, and you can often find </span></span><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">API </span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">documentation for </span></span><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">a specific system by googling: </span></span><em><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">&lt;system name&gt; REST API</span></span></em><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">.</span></span></p>
+<p><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">The </span> </span> <strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">CMW Platform </span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">can access external APIs using the following methods:</span></span></p>
+<ul>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">A C# script (triggered by a button </span></span><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">or a process script task</span></span><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">) establishes a connection to an external system, generates a request, sends it, and receives a response.</span> </span></li>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">A scenario generates and sends the request </span></span><span style="letter-spacing: 0.2px;"><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">through a configured external system connection. </span></span></span><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">The script generates the request body, analyze the response, and place the response data into post attributes. </span> </span></li>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">A send message intermediate or end event </span></span><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">in a process </span></span><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">generates and sends the request</span></span><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">. </span> </span></li>
+</ul>
+<div class="notice notice-info">
+<p class="admonition-title">Note</p>
+<p>To send requests using scripts or process events, you need to configure an external service connection and communication route.</p>
+</div>
+<h3 id="mcetoc_1hrj7sd8e2">Authenticate CMW Platform to Access External API</h3>
+<p><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">When accessing an external API, use the authentication method supported by the external system. Refer to the external API documentation and see if you must include the username and password in the request URL or body or generate and use a security token instead of sending the password in plain text.</span></span></p>
+<h2 id="mcetoc_1h7csahj80"><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Use Swagger</span> </span></h2>
+<p><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">The </span></span><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">CMW Platform</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> provides a built-in API sandbox powered by Swagger.</span> </span></p>
+<ul>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Swagger provides a detailed reference on API methods, including request and response descriptions, and data models with example values.</span> </span></li>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Swagger allows you to execute requests and view responses.</span> </span></li>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">When executing a request, Swagger generates an API resource URI to use in external systems, including the request body syntax template.</span> </span></li>
+</ul>
+<ol class="colored_numbers_list">
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">To open the Swagger page, enter </span> </span> <code>https://your-host/docs</code><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">, where </span> </span> <code>your-host</code> <span style="vertical-align: inherit;"><span style="vertical-align: inherit;">is the domain name of your server, in your browser address bar.</span> </span></li>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">The </span></span><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">CMW Platform API</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> page appears </span><span style="vertical-align: inherit;">with the following sections:</span> </span>
+<ul>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"><strong>RESTful Web API</strong> —immutable methods common for all software versions (see</span> <samp data-name="aid" data-title="" data-value="1941"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>Web API Methods {Article-ID:1941}</span></samp></span><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">);</span> </span></li>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"><strong>System Core API</strong> — system methods that may differ for different software versions</span></span><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">;</span> </span></li>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"><strong>Solution API</strong> — methods for business application templates (see</span> <samp data-name="aid" data-title="" data-value="2074"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/></span></samp><samp data-name="aid" data-title="" data-value="2074"><span style="color: #0066bc; font-family: Tahoma;">Solution API Methods {Article-ID:2074}</span></samp></span><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">).</span> </span></li>
+</ul>
+</li>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Go to the required API page.</span> </span></li>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Expand an API method in the list.</span> </span></li>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Select the request and response format in the </span></span><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Response Content Type</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> field.</span> </span></li>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Run a method by clicking </span></span><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Try it out</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">.</span> </span></li>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">The request template will be generated: </span> </span>
+<ul>
+<li><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Request URL</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> — copy this string to an external system as the request URI. For </span></span><code>GET</code> <span style="vertical-align: inherit;"><span style="vertical-align: inherit;">and </span> </span> <code>DELETE</code> <span style="vertical-align: inherit;">requests, </span><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">it contains the entire request.</span></span></li>
+<li><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Example Value</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> — copy this string to an external system as the request body.</span> </span></li>
+</ul>
+</li>
+</ol>
+<figure class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Swagger page with the CMW Platform API sections" class="img-responsive" height="485" src="https://kb.cmwlab.com/assets/img_661e5cf63fc5a.png" width="1001"/></p>
+<figcaption class="caption" style="font-size: 15px !important;"><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Swagger page with the CMW Platform API sections</span> </span></figcaption>
+</figure>
+<h2 id="mcetoc_1hrh3hhb12">Example: Call a System Core API Method</h2>
+<p><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">To create a record template using the System Core API, send the following <code>POST</code> request to the <strong>Request URL </strong>obtained in Swagger:</span> </span></p>
+<pre><code>http://your-host/api/public/system/TeamNetwork/ObjectAppService/Create</code></pre>
+<ul>
+<li><code><span style="color: #545764; font-family: Open Sans, sans-serif;"><span style="font-size: 15px; background-color: #ffffff;">Substitute </span></span>your-host</code><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> with your </span></span><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">CMW Platform</span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> instance URL.</span> </span></li>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">In the request </span></span><code>body</code>,<span style="vertical-align: inherit;"><span style="vertical-align: inherit;"> specify the system name of the record template (for example, </span> </span> <code>"Car"</code><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">).</span> </span></li>
+<li><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">In the response, the </span></span><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">CMW Platform </span></span></strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">will return the ID of the created record template (for example, </span> </span> <code>"oa.1"</code><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">).</span> </span></li>
+</ul>
+<h2 id="mcetoc_1hrgord0u3"><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Related Articles</span> </span></h2>
+<p><strong><samp data-name="aid" data-title="" data-value="2074"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>Solution API Methods {Article-ID:2074}</span></samp> </strong></p>
+<p><strong><samp data-name="aid" data-title="" data-value="1941"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>Web API Methods {Article-ID:1941}</span></samp> </strong></p>
+<p><a class="md-top md-icon mkdocs_imported_link" href="#"> <em class="fa-light fa-arrow-up"><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">‌</span></span></em><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">Back to top</span></span></a></p>

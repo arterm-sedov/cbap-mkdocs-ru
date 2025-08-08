@@ -1,9 +1,9 @@
 ---
-title: Kafka. Установка в базовой конфигурации
+title: Apache Kafka. Установка в базовой конфигурации
 kbId: 5074
 ---
 
-# Kafka. Установка в базовой конфигурации
+# Apache Kafka. Установка в базовой конфигурации
 
 ## Введение
 
@@ -28,183 +28,185 @@ kbId: 5074
 
 1. Перейдите в режим суперпользователя:
 
-````
-sudo -s
+   ```
+   sudo -s
 
-````
-или
+   ```
 
-````
-su -
+   или
 
-````
-2. Скачайте и распакуйте дистрибутив с вспомогательным ПО **{{ productName }}**, полученный по ссылке от компании **Comindware** (`X.X`, `<versionNumber>` — номер версии ПО, `<osname>` — название операционной системы):
+   ```
+   su -
 
-````
-tar -xf X.X-release-ru-<versionNumber>.prerequisites.<osname>.tar.gz
+   ```
+2. Скачайте и распакуйте дистрибутив с вспомогательным ПО **{{ productName }}**, полученный по ссылке от компании **Comindware** (`X.X`, `<versionNumber>` — номер версии ПО, `<osname>` — название операционной системы):
 
-````
+   ```
+   tar -xf X.X-release-ru-<versionNumber>.prerequisites.<osname>.tar.gz
 
-Совет
+   ```
 
-После распаковки архив можно удалить для экономии места:
+   Совет
 
-````
-rm -f X.X-release-ru-<versionNumber>.prerequisites.<osname>.tar.gz
+   После распаковки архив можно удалить для экономии места:
 
-````
+   ```
+   rm -f X.X-release-ru-<versionNumber>.prerequisites.<osname>.tar.gz
+
+   ```
 3. Перейдите в директорию со скриптами для развёртывания вспомогательного ПО:
 
-````
-cd <prerequisitesDistPath>/CMW_<osname>/scripts
+   ```
+   cd <prerequisitesDistPath>/CMW_<osname>/scripts
 
-````
-Здесь: `<prerequisitesDistPath>/CMW_<osname>/` — путь к распакованному дистрибутиву со вспомогательным ПО.
+   ```
+
+   Здесь: `<prerequisitesDistPath>/CMW_<osname>/` — путь к распакованному дистрибутиву со вспомогательным ПО.
 4. Установите Kafka из дистрибутива с помощью ключа `-k`:
 
-````
-sh prerequisites_install.sh -k
+   ```
+   sh prerequisites_install.sh -k
 
-````
+   ```
 5. Отредактируйте файл `/usr/share/kafka/config/kraft/server.properties` по следующему образцу:
 
-````
-# Роли, в которых должен выступать сервер Kafka
-process.roles=broker,controller
-# Идентификатор узла
-node.id=1
-# IP-адрес сервера Kafka
-controller.quorum.voters=1@<KafkaIP>:9093
-# IP-адрес сервера Kafka
-listeners=PLAINTEXT://<KafkaIP>:9092,CONTROLLER://<KafkaIP>:9093
-# Имя слушателя для связи между брокерами
-inter.broker.listener.name=PLAINTEXT
-# Имена слушателей контроллера
-controller.listener.names=CONTROLLER
-# Карта протоколов безопасности для слушателей
-listener.security.protocol.map=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
-# Количество сетевых потоков
-num.network.threads=3
-# Количество потоков ввода-вывода
-num.io.threads=8
-# Размер буфера отправки сокета
-socket.send.buffer.bytes=102400
-# Размер буфера приёма сокета
-socket.receive.buffer.bytes=102400
-# Максимальный размер запроса
-socket.request.max.bytes=104857600
-# Путь к файлам журналов
-log.dirs=/var/log/comindware/.kafka
-# Количество разделов (партиций) по умолчанию
-num.partitions=4
-# Количество потоков восстановления на каталог данных
-num.recovery.threads.per.data.dir=1
-# Фактор репликации темы смещений
-offsets.topic.replication.factor=1
-# Фактор репликации журнала состояния транзакций
-transaction.state.log.replication.factor=1
-# Минимальное количество ISR для журнала состояния транзакций
-transaction.state.log.min.isr=1
-# Время хранения журналов (в часах)
-log.retention.hours=168
-# Размер сегмента журнала
-log.segment.bytes=1073741824
-# Интервал проверки хранения журналов (в миллисекундах)
-log.retention.check.interval.ms=300000
-# Максимальный размер запроса
-max.request.size=104857600
-# Максимальный размер сообщения
-max.message.bytes=104857600
-# Максимальный размер сообщения
-message.max.bytes=104857600
-# Максимальный размер сообщения для выборки
-fetch.message.max.bytes=104857600
-# Максимальный размер сообщения для выборки реплики
-replica.fetch.max.bytes=104857600
+   ```
+   # Роли, в которых должен выступать сервер Kafka
+   process.roles=broker,controller
+   # Идентификатор узла
+   node.id=1
+   # IP-адрес сервера Kafka
+   controller.quorum.voters=1@<KafkaIP>:9093
+   # IP-адрес сервера Kafka
+   listeners=PLAINTEXT://<KafkaIP>:9092,CONTROLLER://<KafkaIP>:9093
+   # Имя слушателя для связи между брокерами
+   inter.broker.listener.name=PLAINTEXT
+   # Имена слушателей контроллера
+   controller.listener.names=CONTROLLER
+   # Карта протоколов безопасности для слушателей
+   listener.security.protocol.map=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
+   # Количество сетевых потоков
+   num.network.threads=3
+   # Количество потоков ввода-вывода
+   num.io.threads=8
+   # Размер буфера отправки сокета
+   socket.send.buffer.bytes=102400
+   # Размер буфера приёма сокета
+   socket.receive.buffer.bytes=102400
+   # Максимальный размер запроса
+   socket.request.max.bytes=104857600
+   # Путь к файлам журналов
+   log.dirs=/var/log/comindware/.kafka
+   # Количество разделов (партиций) по умолчанию
+   num.partitions=4
+   # Количество потоков восстановления на каталог данных
+   num.recovery.threads.per.data.dir=1
+   # Фактор репликации темы смещений
+   offsets.topic.replication.factor=1
+   # Фактор репликации журнала состояния транзакций
+   transaction.state.log.replication.factor=1
+   # Минимальное количество ISR для журнала состояния транзакций
+   transaction.state.log.min.isr=1
+   # Время хранения журналов (в часах)
+   log.retention.hours=168
+   # Размер сегмента журнала
+   log.segment.bytes=1073741824
+   # Интервал проверки хранения журналов (в миллисекундах)
+   log.retention.check.interval.ms=300000
+   # Максимальный размер запроса
+   max.request.size=104857600
+   # Максимальный размер сообщения
+   max.message.bytes=104857600
+   # Максимальный размер сообщения
+   message.max.bytes=104857600
+   # Максимальный размер сообщения для выборки
+   fetch.message.max.bytes=104857600
+   # Максимальный размер сообщения для выборки реплики
+   replica.fetch.max.bytes=104857600
 
-````
+   ```
 6. После установки удостоверьтесь, что служба Kafka запущена и имеет статус `Active (running)`:
 
-````
-systemctl status kafka
+   ```
+   systemctl status kafka
 
-````
+   ```
 7. Если сервер Kafka не работает, запустите его:
 
-````
-systemctl start kafka
+   ```
+   systemctl start kafka
 
-````
+   ```
 
 ## Подключение экземпляра {{ productName }} к Kafka
 
 1. Перейдите в режим суперпользователя:
 
-````
-sudo -s
+   ```
+   sudo -s
 
-````
-или
+   ```
 
-````
-su -
+   или
 
-````
+   ```
+   su -
+
+   ```
 2. Задайте параметры подключения к Kafka в файле `/usr/share/comindware/configs/instance/<instanceName>.yml` (`<instanceName>` — имя экземпляра ПО {{ productName }}):
 
-````
-# Адрес и порт сервера очереди сообщений (Kafka)
-mq.server: <kafkaBrokerIP>:<kafkaBrokerPort>
-# Идентификатор группы очереди сообщений
-mq.group: <instanceName>
-# Идентификатор узла очереди сообщений
-#mq.node: <instanceName>
+   ```
+   # Адрес и порт сервера очереди сообщений (Kafka)
+   mq.server: <kafkaBrokerIP>:<kafkaBrokerPort>
+   # Идентификатор группы очереди сообщений
+   mq.group: <instanceName>
+   # Идентификатор узла очереди сообщений
+   #mq.node: <instanceName>
 
-````
+   ```
 
-Внимание!
+   Внимание!
 
-Для корректной работы экземпляра ПО необходимо соблюсти следующие условия:
+   Для корректной работы экземпляра ПО необходимо соблюсти следующие условия:
 
-    - IP-адрес и порт Kafka должны быть обязательно прописаны цифрами в формате `XX.XX.XX.XX:XXXX`. То есть недопустимо указывать имя хоста вместо IP-адреса и опускать номер порта.
-    - Значения параметров `mq.server` (адрес и порт сервера очереди сообщений), `mq.group` (идентификатор группы очереди сообщений), `mq.node` (идентификатор узла очереди сообщений) должны совпадать во всех файлах конфигурации:
-    
-    
-        - `/usr/share/comindware/configs/instance/<instanceName>.yml`
-        - `/var/www/<instanceName>/apigateway.yml`
-        - `/var/www/<instanceName>/adapterhost.yml`
+   - IP-адрес и порт {{ apacheKafkaVariants }} должны быть обязательно прописаны цифрами в формате `XXX.XXX.XXX.XXX:XXXXX`. То есть недопустимо указывать имя хоста вместо IP-адреса и опускать номер порта.
+   - Установите соответствующие вашей конфигурации значения параметров `mq.server` (адрес и порт сервера очереди сообщений), `mq.group` (идентификатор группы очереди сообщений), `mq.node` (идентификатор узла очереди сообщений). Они должны совпадать во всех файлах конфигурации:
+
+     - `/usr/share/comindware/configs/instance/<instanceName>.yml`
+     - `/var/www/<instanceName>/apigateway.yml`
+     - `/var/www/<instanceName>/adapterhost.yml`
 3. Задайте параметры подключения к Kafka в файле `/var/www/<instanceName>apigateway.yml`:
 
-````
-# Адрес и порт сервера очереди сообщений (Kafka)
-mq.server: <kafkaBrokerIp>:<kafkaBrokerPort>
-# Идентификатор группы очереди сообщений
-mq.group: <instanceName>
-# Идентификатор узла очереди сообщений
-mq.node: <instanceName>
+   ```
+   # Адрес и порт сервера очереди сообщений (Kafka)
+   mq.server: <kafkaBrokerIp>:<kafkaBrokerPort>
+   # Идентификатор группы очереди сообщений
+   mq.group: <instanceName>
+   # Идентификатор узла очереди сообщений
+   mq.node: <instanceName>
 
-````
+   ```
 4. Задайте параметры подключения к Kafka в файле `/var/www/<instanceName>/adapterhost.yml`:
 
-````
-# Адрес и порт сервера очереди сообщений (Kafka)
-mq.server: <kafkaBrokerIp>:<kafkaBrokerPort>
+   ```
+   # Адрес и порт сервера очереди сообщений (Kafka)
+   mq.server: <kafkaBrokerIp>:<kafkaBrokerPort>
 
-````
+   ```
 5. Перезапустите экземпляр ПО:
 
-````
-systemctl restart comindware<instanceName>
-systemctl restart apigateway<instanceName>
-systemctl restart adapterhost<instanceName>
+   ```
+   systemctl restart comindware<instanceName>
+   systemctl restart apigateway<instanceName>
+   systemctl restart adapterhost<instanceName>
 
-````
+   ```
 6. Проверьте соединение с Kafka в браузере по ссылке (`<instanceAddress>` — URL экземпляра ПО):
 
-````
-<instanceAddress>/async
+   ```
+   <instanceAddress>/async
 
-````
+   ```
 
 ## Дополнительные рекомендации
 
@@ -218,11 +220,8 @@ systemctl restart adapterhost<instanceName>
 
 --8<-- "related_topics_heading.md"
 
-- *[Настройка конфигурации вспомогательного ПО для оптимизации работы {{ productName }}][auxiliary_software_optimize]*
-- *[Конфигурация экземпляра, компонентов ПО и служб. Настройка][configuration_files_linux]*
-- *[Пути и содержимое директорий экземпляра ПО](../../paths.html#paths_windows)*
-
-[*‌*
- К началу](#)
+- [Настройка конфигурации вспомогательного ПО для оптимизации работы {{ productName }}][auxiliary_software_optimize]
+- [Конфигурация экземпляра, компонентов ПО и служб. Настройка][configuration_files_linux]
+- [Пути и содержимое директорий экземпляра ПО][paths_windows]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

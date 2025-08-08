@@ -7,8 +7,9 @@ kbId: 4982
 
 Для того чтобы назначить исполнителем менеджера проекта (руководителя, ответственного и т.п.), введите следующее выражение:
 
-| from a in db->Project where a->Work == $id  select a->Manager |
-| --- |
+```
+ from a in db->Project where a->Work == $id  select a->Manager
+```
 
 **где:**
 

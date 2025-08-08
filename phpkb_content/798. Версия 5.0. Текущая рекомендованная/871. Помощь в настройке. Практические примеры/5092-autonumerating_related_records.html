@@ -1,0 +1,127 @@
+<h1>Автонумерация записей с пересчётом при удалении</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr">
+<div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#прикладная-задача"> <span class="md-ellipsis"> Прикладная задача </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#исходные-данные"> <span class="md-ellipsis"> Исходные данные </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-автонумерации-связанных-записей"> <span class="md-ellipsis"> Настройка автонумерации связанных записей </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#тестирование"> <span class="md-ellipsis"> Тестирование </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>В <strong>Comindware Platform</strong> каждой записи, пользовательской задаче, форме, экземпляру процесса и любому объекту присваиваются уникальный ID. В рамках одного экземпляра <strong>Comindware Platform</strong> ID не повторяются. После удаления объекта его ID не используется повторно. Кроме того, ID записей имеют сквозную нумерацию для всех шаблонов и приложений, не являются наглядными и малоинформативны для бизнеса.</p>
+<p>При этом в приложениях зачастую требуется присваивать записям наглядные номера или коды и пересчитывать их при создании и удалении записей.</p>
+<p>Здесь представлен пример настройки сценария для автонумерации записей из связанного шаблона с пересчётом номеров при их удалении.</p>
+<p>Примеры настройки автонумерации записей при их создании см. в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4895">Автонумерация записей с помощью формулы, C#-скрипта или выражения N3</a>»</em>.</p>
+<h2 id="прикладная-задача">Прикладная задача</h2>
+<p>Имеется шаблоны <em>«Заявки»</em> и <em>«Реестр документов»</em>.</p>
+<p>Каждая заявка связана с записями о расходах из <em>реестра документов</em>.</p>
+<p>Требуется настроить автонумерацию записей в <em>Реестре документов</em> с использованием кодов вида: <code>Док. &lt;N&gt; по заявке &lt;requestNumber&gt;.</code>, где <code>&lt;N&gt;</code> — порядковый номер документа, а <code>&lt;requestNumber&gt;</code> — номер заявки.</p>
+<p>При этом для каждой <em>Заявки</em> нумерация записей из <em>Реестра документов</em> должна начинаться заново.</p>
+<p>При удалении записи из <em>Реестра документов</em>, нумерация должна пересчитываться.</p>
+<h2 id="исходные-данные">Исходные данные</h2>
+<p>Имеются шаблон <em>«Заявки»</em> и <em>«Реестр документов»</em>.</p>
+<p>В шаблоне <em>«Заявки»</em> имеются атрибуты:</p>
+<ul>
+<li>
+<p><em>Номер заявки</em>:</p>
+<ul>
+<li><strong>Тип данных: текст</strong></li>
+<li><strong>Системное имя:</strong> <code>Номерзаявки</code></li>
+</ul>
+<div class="notice notice-tip">
+<p class="admonition-title">Совет</p>
+<p>В этом примере не рассматривается формирование <em>Номера заявки</em>.</p>
+<p>Для этого можно воспользоваться приёмами из статьи <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4895">Автонумерация записей с помощью формулы, C#-скрипта или выражения N3</a>»</em></p>
+</div>
+</li>
+<li>
+<p><em>Документы о расходах</em>:</p>
+<ul>
+<li><strong>Тип данных: запись</strong></li>
+<li><strong>Связанный шаблон:</strong> <em>Реестр документов</em></li>
+<li><strong>Системное имя:</strong> <em>Documents</em></li>
+<li><strong>Хранить несколько значений:</strong> флажок установлен</li>
+</ul>
+</li>
+</ul>
+<p>В шаблоне <em>«Реестр документов»</em> имеется атрибут <em>«Код документа»</em> типа «<strong>Текст</strong>»;</p>
+<p>На форму шаблона <em>«Заявки»</em> вынесен атрибут <em>«Документы»</em> с представлением в виде <strong>таблицы</strong>.</p>
+<p>В таблицу <em>«Документы»</em> добавлены столбцы <em>«ID»</em> и <em>«Код документа»</em>.</p>
+<p>На область кнопок таблицы <em>«Документы»</em> помещены кнопки «<strong>Создать</strong>» и «<strong>Удалить</strong>».</p>
+<h2 id="настройка-автонумерации-связанных-записей">Настройка автонумерации связанных записей</h2>
+<ol class="colored_numbers_list">
+<li>Создайте новый сценарий <em>«Автонумерация»</em>.</li>
+<li>
+<p>Настройте начальное событие «<strong>Нажата кнопка</strong>»:</p>
+<ul>
+<li><strong>Контекстный шаблон:</strong> <em>Заявки</em></li>
+<li><strong>Кнопка: Сохранить</strong></li>
+</ul>
+</li>
+<li>
+<p>Добавьте действие «<strong>Проверить результат выражения</strong>» со следующими свойствами:</p>
+<ul>
+<li>
+<p><strong>Выражение: N3</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="c"># Импортируем функции для работы</span></code> <br/><code><span class="c"># с записями, строками, базой данных и переменными</span></code> <br/><code><span class="k">@prefix</span> <span class="nn">object:</span> <span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span> <span class="nn">variable:</span> <span class="nv">&lt;http://comindware.com/ontology/session/variable#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span> <span class="nn">operator:</span> <span class="nv">&lt;http://comindware.com/ontology/session/operator#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Создаём переменную-индекс и</span></code> <br/><code>    <span class="c"># задаём ей значение 0</span></code> <br/><code>    <span class="nn">variable</span><span class="p">:</span><span class="nt">index</span> <span class="nn">operator</span><span class="p">:</span><span class="nt">replace</span> <span class="mi">0</span><span class="p">.</span></code> <br/><code>    <span class="c"># Создаём переменную requestNumber </span></code> <br/><code>    <span class="c"># и присваиваем ей номер заявки</span></code> <br/><code>    <span class="p">(</span><span class="s">"Заявки"</span> <span class="s">"Номерзаявки"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?requestNumberAttribute</span><span class="p">.</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?requestNumberAttribute</span> <span class="err">?requestNumberAttributeValue</span><span class="p">.</span></code> <br/><code>    <span class="nn">variable</span><span class="p">:</span><span class="nt">requestNumber</span> <span class="nn">operator</span><span class="p">:</span><span class="nt">replace</span> <span class="err">?requestNumberAttributeValue</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Возвращаем true, чтобы сценарий выполнялся далее</span></code> <br/><code>    <span class="l">true</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> </pre>
+</div>
+</li>
+</ul>
+</li>
+<li>
+<p>Добавьте действие «<strong>Сменить контекст</strong>» со следующими свойствами:</p>
+<ul>
+<li><strong>Целевой шаблон записи:</strong> <em>Реестр документов</em></li>
+<li>
+<p><strong>Атрибут или выражения для поиска объектов: формула</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="err">#</span> <span class="n">Собираем</span> <span class="n">ID</span> <span class="n">всех</span> <span class="n">записей</span><span class="p">,</span> </code> <br/><code><span class="err">#</span> <span class="n">связанных</span> <span class="n">с</span> <span class="n">атрибутом</span> <span class="n">Documents</span> <span class="p">(</span><span class="n">Документы</span> <span class="n">о</span> <span class="n">расходах</span><span class="p">)</span></code> <br/><code><span class="k">from</span> <span class="n">a</span> <span class="k">in</span> <span class="err">$</span><span class="n">Documents</span> <span class="k">select</span> <span class="n">a</span><span class="o">-&gt;</span><span class="n">id</span></code> </pre>
+</div>
+</li>
+</ul>
+</li>
+<li>
+<p>Добавьте действие «<strong>Изменить значения атрибутов</strong>» внутрь действия «<strong>Сменить контекст</strong>» со следующими свойствами:</p>
+<ul>
+<li><strong>Атрибут:</strong> <em>Код документа</em></li>
+<li><strong>Действие: заменить</strong></li>
+<li>
+<p><strong>Значение: N3</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="c"># Импортируем функции для работы с переменными, строками и числами</span></code> <br/><code><span class="k">@prefix</span> <span class="nn">variable:</span> <span class="nv">&lt;http://comindware.com/ontology/session/variable#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span> <span class="nn">operator:</span> <span class="nv">&lt;http://comindware.com/ontology/session/operator#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span> <span class="nn">session:</span> <span class="nv">&lt;http://comindware.com/ontology/session#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span> <span class="nn">string:</span> <span class="nv">&lt;http://www.w3.org/2000/10/swap/string#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span> <span class="nn">math:</span> <span class="nv">&lt;http://www.w3.org/2000/10/swap/math#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Находим переменную index и помещаем</span></code> <br/><code>    <span class="c"># её в ?startValue</span></code> <br/><code>    <span class="nn">session</span><span class="p">:</span><span class="nt">context</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">index</span> <span class="err">?startValue</span><span class="p">.</span></code> <br/><code>    <span class="c"># Увеличиваем значение ?startValue на 1</span></code> <br/><code>    <span class="c"># и помещаем результат в ?newIndex</span></code> <br/><code>    <span class="p">(</span><span class="err">?startValue</span> <span class="mi">1</span><span class="p">)</span> <span class="nn">math</span><span class="p">:</span><span class="nt">sum</span> <span class="err">?newIndex</span><span class="p">.</span></code> <br/><code>    <span class="c"># Находим переменную requestNumber и помещаем</span></code> <br/><code>    <span class="c"># её в ?requestNumberValue</span></code> <br/><code>    <span class="nn">session</span><span class="p">:</span><span class="nt">context</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">requestNumber</span> <span class="err">?requestNumberValue</span><span class="p">.</span></code> <br/><code>    <span class="c"># Приводим значение ?newIndex к типу данных «Текст»</span></code> <br/><code>    <span class="c"># и помещаем в ?codeFormatted вместе с ?requestNumberValue</span></code> <br/><code>    <span class="p">(</span><span class="s">"Док. {0} по заявке {1}"</span> <span class="err">?newIndex</span> <span class="err">?requestNumberValue</span><span class="p">)</span> <span class="nn">string</span><span class="p">:</span><span class="nt">format</span> <span class="err">?codeFormatted</span><span class="p">.</span></code> <br/><code>    <span class="c"># Заменяем значение переменной индекс</span></code> <br/><code>    <span class="c"># на значение ?newIndex</span></code> <br/><code>    <span class="nn">variable</span><span class="p">:</span><span class="nt">index</span> <span class="nn">operator</span><span class="p">:</span><span class="nt">replace</span> <span class="err">?newIndex</span><span class="p">.</span></code> <br/><code>    <span class="c"># Возвращаем в значение атрибута ?codeFormatted</span></code> <br/><code>    <span class="err">?codeFormatted</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> </pre>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="тестирование">Тестирование</h2>
+<ol class="colored_numbers_list">
+<li>Создайте запись в шаблоне <em>«Заявки»</em>.</li>
+<li>В форме заявки создайте несколько записей в таблице <em>«Документы о расходах»</em>.</li>
+<li>Сохраните заявку.</li>
+<li>В столбце <em>«Код документа»</em> отобразятся нумерация записей, а в столбце <em>«ID»</em> — их системные номера.</li>
+<li>Удалите одну или несколько записей в таблице <em>«Документы о расходах»</em>.</li>
+<li>Сохраните заявку.</li>
+<li>Номера в столбце <em>«Код документа»</em> обновятся, а их ID останутся неизменными.</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4895">Автонумерация записей с помощью формулы, C#-скрипта или выражения N3</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4804">Переменные приложения. Просмотр списка, настройка и использование</a></em></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>
+</div>

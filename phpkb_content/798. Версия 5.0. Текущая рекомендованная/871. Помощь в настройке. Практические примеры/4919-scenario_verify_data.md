@@ -50,28 +50,26 @@ kbId: 4919
 2. В начальном событии «**Нажата кнопка**» выберите контекстный шаблон *«Заявки»* и кнопку «**Сохранить**».
 3. Добавьте действие «**Проверить результат выражения**» со следующими свойствами:
 
-    - **Сообщение об ошибке:** *Прикрепите документ*
-    - **Выражение: формула**
-    
-    
-    ````
-    // Если документы не прикреплены,
-    // возвращаем false,
-    // и выполнение сценария прерывается.
-    NOT(EMPTY($Documents))
-    
-    ````
+   - **Сообщение об ошибке:** *Прикрепите документ*
+   - **Выражение: формула**
+
+     ```
+     // Если документы не прикреплены,
+     // возвращаем false,
+     // и выполнение сценария прерывается.
+     NOT(EMPTY($Documents))
+
+     ```
 4. Добавьте действие «**Изменить значения атрибутов**» со следующими свойствами:
 
-    - **Атрибут:** *Заявка заполнена*
-    - **Операция со значениями: заменить**
-    - **Значение: формула**
-    
-    
-    ````
-    true
-    
-    ````
+   - **Атрибут:** *Заявка заполнена*
+   - **Операция со значениями: заменить**
+   - **Значение: формула**
+
+     ```
+     true
+
+     ```
 
 ## Настройка сценария с действием «Проверить результат выражения» и выражением N3
 
@@ -79,54 +77,52 @@ kbId: 4919
 2. В начальном событии «**Нажата кнопка**» выберите контекстный шаблон *«Заявки»* и кнопку «**Сохранить**».
 3. Добавьте действие «**Проверить результат выражения**» со следующими свойствами:
 
-    - **Сообщение об ошибке:** *Прикрепите документ*
-    - **Выражение: N3**
-    
-    
-    ````
-    # Импортируем функции для работы
-    # с данными текущей записи и переменными.
-    @prefix object: <http://comindware.com/ontology/object#>.
-    @prefix variable: <http://comindware.com/ontology/session/variable#>.
-    @prefix operator: <http://comindware.com/ontology/session/operator#>.
-    
-    {
-        # Находим атрибут Documents (Документы)
-        # в шаблоне Requests (Заявки).
-        ("Requests" "Documents") object:findProperty ?DocumentsAttribute.
-        # Проверяем, прикреплены ли документы
-        # к текущей записи ?item.
-        if {
-            ?item ?DocumentsAttribute ?.
-        }
-        # Если документы прикреплены:
-        then {
-            # Создаём переменную CheckResult в сценарии
-            # и присваиваем ей значение true.
-            variable:CheckResult operator:add true.
-            # Возвращаем true.
-            true -> ?value.
-        }
-        # Если документы не прикреплены,
-        # возвращаем false,
-        # и выполнение сценария прерывается.
-        else {
-            false -> ?value.
-        }
-    }
-    
-    ````
+   - **Сообщение об ошибке:** *Прикрепите документ*
+   - **Выражение: N3**
+
+     ```
+     # Импортируем функции для работы
+     # с данными текущей записи и переменными.
+     @prefix object: <http://comindware.com/ontology/object#>.
+     @prefix variable: <http://comindware.com/ontology/session/variable#>.
+     @prefix operator: <http://comindware.com/ontology/session/operator#>.
+
+     {
+         # Находим атрибут Documents (Документы)
+         # в шаблоне Requests (Заявки).
+         ("Requests" "Documents") object:findProperty ?DocumentsAttribute.
+         # Проверяем, прикреплены ли документы
+         # к текущей записи ?item.
+         if {
+             ?item ?DocumentsAttribute ?.
+         }
+         # Если документы прикреплены:
+         then {
+             # Создаём переменную CheckResult в сценарии
+             # и присваиваем ей значение true.
+             variable:CheckResult operator:add true.
+             # Возвращаем true.
+             true -> ?value.
+         }
+         # Если документы не прикреплены,
+         # возвращаем false,
+         # и выполнение сценария прерывается.
+         else {
+             false -> ?value.
+         }
+     }
+
+     ```
 4. Добавьте действие «**Изменить значения атрибутов**» со следующими свойствами:
 
-    - **Атрибут:** *Заявка заполнена*
-    - **Операция со значениями: заменить**
-    - **Значение: формула**
-    
-    
-    ````
-    $$CheckResult
-    
-    ````
+   - **Атрибут:** *Заявка заполнена*
+   - **Операция со значениями: заменить**
+   - **Значение: формула**
+
+     ```
+     $$CheckResult
+
+     ```
 
 ## Настройка сценария с действием «Проверить результат скрипта»
 
@@ -134,51 +130,50 @@ kbId: 4919
 2. В начальном событии «**Нажата кнопка**» выберите контекстный шаблон *«Заявки»* и кнопку «**Сохранить**».
 3. Добавьте действие «**Проверить результат скрипта**» со следующими свойствами:
 
-    - **Сообщение об ошибке:** *Прикрепите документ*
-    - **Выражение:**
-    
-    
-    ````
-    using System; 
-    using System.Collections.Generic;
-    using System.Linq;
-    using Comindware.Data.Entity;
-    using Comindware.TeamNetwork.Api.Data.UserCommands;
-    using Comindware.TeamNetwork.Api.Data;
-    
-    class Script
-    {
-        public static bool Main(Object FullObjectId)
-        { 
-            // Получаем ID текущей записи шаблона «Заявки» из контекста выполнения сценария.
-            var ObjectId = FullObjectId.ToString().Replace("user.", "");
-            // Помещаем в DocumentsData информацию об атрибуте Documents (Документы) текущей записи.
-            var DocumentsData = Api.TeamNetwork.ObjectService.GetPropertyValues(new []{ObjectId}, new []{"Documents"});
-            // Получаем значение атрибута Documents (Документы) в текущей записи.
-            var Documents = DocumentsData[ObjectId].TryGetValue("Documents", out object OutputRecordArray) && OutputRecordArray != null ? OutputRecordArray as object[] : null;
-            // Если документы прикреплены:
-            if(Documents.Length > 0)
-            {
-                // Создаём словарь со значением атрибута RequestComplete (Заявка заполнена).
-                var AttributeDict = new Dictionary<string,object>
-                {
-                    { "RequestComplete", true }
-                };
-                // Меняем значение атрибута RequestComplete в текущей записи.
-                Api.TeamNetwork.ObjectService.EditWithAlias(ObjectId, AttributeDict);
-                // Возвращаем true.
-                return true;
-            }
-            // Если документы не прикреплены, возвращаем false,
-            // и выполнение сценария прерывается.
-            else
-            {
-                return false;
-            }
-        }
-    }
-    
-    ````
+   - **Сообщение об ошибке:** *Прикрепите документ*
+   - **Выражение:**
+
+     ```
+     using System; 
+     using System.Collections.Generic;
+     using System.Linq;
+     using Comindware.Data.Entity;
+     using Comindware.TeamNetwork.Api.Data.UserCommands;
+     using Comindware.TeamNetwork.Api.Data;
+
+     class Script
+     {
+         public static bool Main(Object FullObjectId)
+         { 
+             // Получаем ID текущей записи шаблона «Заявки» из контекста выполнения сценария.
+             var ObjectId = FullObjectId.ToString().Replace("user.", "");
+             // Помещаем в DocumentsData информацию об атрибуте Documents (Документы) текущей записи.
+             var DocumentsData = Api.TeamNetwork.ObjectService.GetPropertyValues(new []{ObjectId}, new []{"Documents"});
+             // Получаем значение атрибута Documents (Документы) в текущей записи.
+             var Documents = DocumentsData[ObjectId].TryGetValue("Documents", out object OutputRecordArray) && OutputRecordArray != null ? OutputRecordArray as object[] : null;
+             // Если документы прикреплены:
+             if(Documents.Length > 0)
+             {
+                 // Создаём словарь со значением атрибута RequestComplete (Заявка заполнена).
+                 var AttributeDict = new Dictionary<string,object>
+                 {
+                     { "RequestComplete", true }
+                 };
+                 // Меняем значение атрибута RequestComplete в текущей записи.
+                 Api.TeamNetwork.ObjectService.EditWithAlias(ObjectId, AttributeDict);
+                 // Возвращаем true.
+                 return true;
+             }
+             // Если документы не прикреплены, возвращаем false,
+             // и выполнение сценария прерывается.
+             else
+             {
+                 return false;
+             }
+         }
+     }
+
+     ```
 
 ## Тестирование сценария
 
@@ -193,8 +188,5 @@ kbId: 4919
 
 - *[Событие и действия сценария. Определения, типы, свойства, настройка][scenario_elements]*
 - *[Отладка формул, выражений N3, сценариев и C#-скриптов][expression_debug]*
-
-[*‌*
- К началу](#)
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

@@ -23,41 +23,44 @@ kbId: 4921
 
 Структура атрибута типа «Документ»
 
-- Атрибут типа «**Документ**» хранит одну или несколько ссылок на записи (**документы**) в системном шаблоне документа, к которым прикрепляются файлы.
-- В шаблоне документа имеется атрибут `currentRevision` (текущая **ревизия**), который хранит ссылку на запись в системном шаблоне ревизии.
-- В шаблоне ревизии имеются атрибуты `title` (имя) и `content` (содержимое), которые хранят имя файла и ссылку на файл, физически хранящийся в папке `Streams` на сервере.
-- Чтобы считать файл из атрибута типа «**Документ**» с помощью C#-скрипта, необходимо:
-    - из текущей записи получить массив идентификаторов файлов, прикреплённых к атрибуту:
-    
-    
-    ```
-    var fileIds = Api.TeamNetwork.ObjectService.GetPropertyValues(recordId, new [] {"documentAttributeSystemName"})`;
-    ```
-    - получить массив объектов с прикреплёнными файлами:
-    
-    
-    ```
-    var attachedFileObjects = fileIds[docId].TryGetValue("Files", out object fileObject)
+- Атрибут типа «**Документ**» хранит одну или несколько ссылок на записи (**документы**) в системном шаблоне документа, к которым прикрепляются файлы (например, загруженные пользователями).
+- В шаблоне документа имеется атрибут `currentRevision` (текущая **версия**), который хранит ссылку на запись в системном шаблоне версии.
+- В шаблоне версии имеются атрибуты `title` (имя) и `content` (содержимое), которые хранят имя файла и ссылку на файл, физически хранящийся в папке `Streams` на сервере.
+
+Извлечение файлов из атрибута типа «Документ» с помощью C#
+
+Чтобы считать файл из атрибута типа «**Документ**» с помощью C#-скрипта, необходимо:
+
+- из текущей записи получить массив идентификаторов файлов, прикреплённых к атрибуту:
+
+  ```
+  var fileIds = Api.TeamNetwork.ObjectService.GetPropertyValues(recordId, new [] {"documentAttributeSystemName"})`;
+
+  ```
+- получить массив объектов с прикреплёнными файлами:
+
+  ```
+  var attachedFileObjects = fileIds[docId].TryGetValue("Files", out object fileObject)
                               && fileObject != null ? fileObject as object[] : null;
-    ```
-    - получить объект файла (`attachedFile`):
-    
-    
-    ```
-    var attachedFile = Api.TeamNetwork.DocumentService.GetContent(attachedFileObject[0].ToString());
-    ```
-    - получить имя файла с расширением (`attachedFile.Name`);
-    - получить содержимое файла (`attachedFile.Data`);
-    - при необходимости получить объект с метаданными документа:
-    
-    
-    ```
-    var attachedFile = Api.TeamNetwork.DocumentService.GetDocument(attachedFileObject[0].ToString());
-    ```
-    
-    
-        - `attachedFile.Title` — имя файла с расширением;
-        - `attachedFile.Extension` — расширение файла.
+
+  ```
+- получить объект файла (`attachedFile`):
+
+  ```
+  var attachedFile = Api.TeamNetwork.DocumentService.GetContent(attachedFileObject[0].ToString());
+
+  ```
+- получить имя файла с расширением (`attachedFile.Name`);
+- получить содержимое файла (`attachedFile.Data`);
+- при необходимости получить объект с метаданными документа:
+
+  ```
+  var attachedFile = Api.TeamNetwork.DocumentService.GetDocument(attachedFileObject[0].ToString());
+
+  ```
+
+  - `attachedFile.Title` — имя файла с расширением;
+  - `attachedFile.Extension` — расширение файла.
 
 ## Прикладная задача
 
@@ -74,141 +77,141 @@ kbId: 4921
 1. Создайте **шаблон записи** *«Реестр документов»*.
 2. Создайте следующие **атрибуты**:
 
-| Название | Тип данных | Свойства |
-| --- | --- | --- |
-| *Наименование* | **Текст** |  |
-| *Вложения* | **Документ** | - **Хранить несколько значений:** флажок установлен     - **Использовать для поиска записей:** флажок установлен |
+   | Название | Тип данных | Свойства |
+   | --- | --- | --- |
+   | *Наименование* | **Текст** |  |
+   | *Вложения* | **Документ** | - **Хранить несколько значений:** флажок установлен - **Использовать для поиска записей:** флажок установлен |
 
-Внимание!
+   Внимание!
 
-Для корректного скачивания файлов с помощью C#-скрипта у атрибута типа «**Документ**» рекомендуется установить флажок «**Использовать для поиска записей**». В противном случае скрипт может не сработать.
+   Для корректного скачивания файлов с помощью C#-скрипта у атрибута типа «**Документ**» рекомендуется установить флажок «**Использовать для поиска записей**». В противном случае скрипт может не сработать.
 3. Создайте [**кнопку**][buttons] *«Скачать вложения»* со следующими свойствами:
 
-    - **Контекст операции:** **запись**
-    - **Операция:** **С# скрипт**
-    - **Результат выполнения:** **скачать документ**
+   - **Контекст операции:** **запись**
+   - **Операция:** **С# скрипт**
+   - **Результат выполнения:** **скачать документ**
 4. На вкладке «**Скрипт**» добавьте следующий C#-скрипт:
 
-Скрипт для скачивания архива с файлами
+   Скрипт для скачивания архива с файлами```
+   using System;
+   using System.Collections.Generic;
+   using System.Linq;
+   using Comindware.Data.Entity;
+   using Comindware.TeamNetwork.Api.Data.UserCommands;
+   using Comindware.TeamNetwork.Api.Data;
+   using System.IO;
+   using System.IO.Compression;
 
-```
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Comindware.Data.Entity;
-using Comindware.TeamNetwork.Api.Data.UserCommands;
-using Comindware.TeamNetwork.Api.Data;
-using System.IO;
-using System.IO.Compression;
+   class Script
+   {
+       public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+       {
+           // ObjectIds — массив выбранных записей, полученный из контекста операции кнопки.
+           var selected_Ids = userCommandContext.ObjectIds;
+           // Создаем массив compressedBytes для хранения архива с файлами.
+           byte[] compressedBytes;
 
+           try
+           {
+               // Vlozheniya — системное имя атрибута «Вложения» шаблона записи «Реестр документов».
+               // Помещаем в массив data значения атрибутов «Вложения» из выбранных записей.
+               // Создаём поток resultStream для архива
+               var data = Api.TeamNetwork.ObjectService.GetPropertyValues(selected_Ids, new[] { "Vlozheniya" });
+               using (var resultStream = new MemoryStream())
+               {
+                   using (var zip = new ZipArchive(resultStream, ZipArchiveMode.Update))
+                   {
+                       foreach (var id in selected_Ids)
+                       {
+                           // Присваиваем переменной doc_Obj значение атрибута «Вложения».
+                           if (data[id].TryGetValue("Vlozheniya", out object doc_Obj) && doc_Obj != null)
+                           {
+                               // Файлы из атрибута «Вложения» помещаем в массив doc_Array.
+                               // Проверяем, что количество файлов больше 0.
+                               var doc_Array = doc_Obj as object[];
+                               if(doc_Array.Length > 0)
+                               {
+                                   // Каждый файл в массиве doc_Array преобразуем в строку Base64
+                                   // и помещаем в архив fileInArchive.
+                                   foreach(var doc in doc_Array)
+                                   {
+                                       var documentData = Api.TeamNetwork.DocumentService.GetContent(doc.ToString());
 
-class Script
-{
-    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
-    {
-    // ObjectIds — массив выбранных записей, полученный из контекста операции кнопки.
-        var selected_Ids = userCommandContext.ObjectIds;
-    // Создаем массив compressedBytes для хранения архива с файлами.
-        byte[] compressedBytes;
+                                       var startStream = new MemoryStream();
+                                       startStream.Write(documentData.Data, 0, documentData.Data.Length);
+                                       startStream.Seek(0, SeekOrigin.Begin);
+                                       var fileInArchive = zip.CreateEntry(documentData.Name, CompressionLevel.Optimal);
+                                       using (var entryStream = fileInArchive.Open())
+                                       {
+                                           startStream.CopyTo(entryStream);
+                                       }
+                                   }
+                               }
+                           }
+                       }
+                   }
+                   // Помещаем поток с результирующим архивом в массив compressedBytes.
+                   compressedBytes = resultStream.ToArray();
+               }
 
-        try
-        {
-            // Vlozheniya — системное имя атрибута «Вложения» шаблона записи «Реестр документов».
-            // Помещаем в массив data значения атрибутов «Вложения» из выбранных записей.
-            // Создаём поток resultStream для архива
-            var data = Api.TeamNetwork.ObjectService.GetPropertyValues(selected_Ids, new[] { "Vlozheniya" });
-            using (var resultStream = new MemoryStream())
-            {
-                using (var zip = new ZipArchive(resultStream, ZipArchiveMode.Update))
-                {
-                    foreach (var id in selected_Ids)
-                    {
-                        // Присваиваем переменной doc_Obj значение атрибута «Вложения».
-                        if (data[id].TryGetValue("Vlozheniya", out object doc_Obj) && doc_Obj != null)
-                        {
-                            // Файлы из атрибута «Вложения» помещаем в массив doc_Array.
-                            // Проверяем, что количество файлов больше 0.
-                            var doc_Array = doc_Obj as object[];
-                            if(doc_Array.Length > 0)
-                            {
-                                // Каждый файл в массиве doc_Array преобразуем в строку Base64
-                                // и помещаем в архив fileInArchive.
-                                foreach(var doc in doc_Array)
-                                {
-                                    var documentData = Api.TeamNetwork.DocumentService.GetContent(doc.ToString());
+               // Создаём поток с результирующим архивом
+               var memStream = new MemoryStream(compressedBytes);
+               // Помещаем поток с архивом в массив content.
+               var content = memStream.ToArray();
+               // Заполняем объект resulterr, который возвращает операция кнопки.
+               var resulterr = new UserCommandResult
+               {
+                   Success = true,
+                   Commited = true,
+                   // Собираем файл архива с именем ZipedFiles.zip и содержимым из массива content.
+                   // Этот файл скачает браузер после нажатия кнопки.
+                   File = new UserCommandFileResult()
+                   {
+                       Content = content,
+                       Name = "ZipedFiles.zip"
+                       },
+                   // Формируем сообщение об успешном выполнении операции кнопки.
+                   Messages = new[]
+                   {
+                       new UserCommandMessage
+                       {
+                           Severity = SeverityLevel.Normal,
+                           Text = "Успешно"
+                           }
+                   }
+               };
+               return resulterr;
+           }
+           // Обрабатываем любые ошибки
+           catch
+           {
+               var resulterr = new UserCommandResult
+               {
+                   Success = false,
+                   Commited = true,
+                   ResultType = UserCommandResultType.Notificate,
+                   Messages = new[]
+                   {
+                       new UserCommandMessage
+                       {
+                           Severity = SeverityLevel.Normal,
+                           Text = "Ошибка"
+                           }
+                   }
+               };
+               return resulterr;
+           }
+       }
+   }
 
-                                    var startStream = new MemoryStream();
-                                    startStream.Write(documentData.Data, 0, documentData.Data.Length);
-                                    startStream.Seek(0, SeekOrigin.Begin);
-                                    var fileInArchive = zip.CreateEntry(documentData.Name, CompressionLevel.Optimal);
-                                    using (var entryStream = fileInArchive.Open())
-                                    {
-                                        startStream.CopyTo(entryStream);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                // Помещаем поток с результирующим архивом в массив content.
-                compressedBytes = resultStream.ToArray();
-            }
-            var memStream = new MemoryStream(compressedBytes);
-            var content = memStream.ToArray();
-
-            // Заполняем объект resulterr, который возвращает операция кнопки.
-            var resulterr = new UserCommandResult
-            {
-                Success = true,
-                Commited = true,
-                // Собираем файл архива с именем ZipedFiles.zip и содержимым из массива content.
-                // Этот файл скачает браузер после нажатия кнопки.
-                File = new UserCommandFileResult()
-                {
-                    Content = content,
-                    Name = "ZipedFiles.zip"
-                    },
-                // Формируем сообщение об успешном выполнении операции кнопки.
-                Messages = new[]
-                {
-                    new UserCommandMessage
-                    {
-                        Severity = SeverityLevel.Normal,
-                        Text = "Успешно"
-                        }
-                }
-            };
-            return resulterr;
-        }
-        // Обрабатываем любые ошибки
-        catch
-        {
-            var resulterr = new UserCommandResult
-            {
-                Success = false,
-                Commited = true,
-                ResultType = UserCommandResultType.Notificate,
-                Messages = new[]
-                {
-                    new UserCommandMessage
-                    {
-                        Severity = SeverityLevel.Normal,
-                        Text = "Ошибка"
-                        }
-                }
-            };
-            return resulterr;
-        }
-    }
-}
-```
+   ```
 5. Поместите атрибуты *«Наименование»* и *«Вложения»* в таблицу *«Все записи»* и на форму шаблона *«Реестр документов»*.
 6. Поместите кнопку *«Скачать вложения»* в **таблицу** *«Все записи»* шаблона *«Реестр документов»*.
 7. В **шаблоне записи** *«Заявка»* создайте **атрибут**:
 
-| Название | Тип данных | Свойства |
-| --- | --- | --- |
-| *Документы* | **Запись** | - **Связанный шаблон:** *Реестр документов*     - **Хранить несколько значений:** флажок установлен |
+   | Название | Тип данных | Свойства |
+   | --- | --- | --- |
+   | *Документы* | **Запись** | - **Связанный шаблон:** *Реестр документов* - **Хранить несколько значений:** флажок установлен |
 8. Поместите на форму шаблона *«Заявка»* **атрибут** *«Документы»* и настройте его **представление** в виде **таблицы**.
 9. Поместите в таблицу *«Документы»* на форме **атрибуты** *«Наименование»* и *«Вложения»* шаблона записи *«Реестр документов»*.
 10. В область кнопок таблицы *«Документы»* поместите кнопки «**Создать**» и *«Скачать вложения»*.
@@ -219,16 +222,18 @@ class Script
 2. Выберите строки для скачивания документов и нажмите кнопку *«Скачать вложения»*.
 3. Браузер скачает архив с файлами, прикреплёнными к выбранным записям.
 
-Примечание
+   Примечание
 
-Если в браузере отобразится сообщение «**Незащищенное скачивание заблокировано**», нажмите кнопку «**Сохранить**», чтобы продолжить скачивание.
+   Если в браузере отобразится сообщение «**Незащищенное скачивание заблокировано**», нажмите кнопку «**Сохранить**», чтобы продолжить скачивание.
 4. Перейдите к таблице *«Все записи»* шаблона *«Реестр документов»*.
 5. Выберите записи, из которых следует скачать вложения, и нажмите кнопку *«Скачать вложения»*.
 6. Браузер скачает архив с файлами из выбранных записей.
 7. Откройте любую запись шаблона *«Реестр документов»* и нажмите кнопку *«Скачать вложения»*.
 8. Браузер скачает архив с файлами, прикреплёнными к записи.
 
-_![Отображение кнопки «Скачать вложения» в таблице записей шаблона «Реестр документов»](/platform/v5.0/examples/img/download_archive_csharp_button.png)_
+   ![Отображение кнопки «Скачать вложения» в таблице записей шаблона «Реестр документов»](/platform/v5.0/examples/img/download_archive_csharp_button.png)
+
+   Отображение кнопки «Скачать вложения» в таблице записей шаблона «Реестр документов»
 
 --8<-- "related_topics_heading.md"
 
@@ -238,6 +243,5 @@ _![Отображение кнопки «Скачать вложения» в т
 - *[Атрибут типа «Документ». Скачивание архива с файлами из всех строк таблицы с прикреплением архива к атрибуту][example_document_download_archive_related_records_csharp]*
 - *[Атрибут типа «Документ». Скачивание файлов в папку на сервере][example_document_download_to_server_csharp]*
 - *[Атрибут типа «Документ». Клонирование записи вместе с прикреплёнными файлами][example_document_clone_scenario_n3]*
-
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

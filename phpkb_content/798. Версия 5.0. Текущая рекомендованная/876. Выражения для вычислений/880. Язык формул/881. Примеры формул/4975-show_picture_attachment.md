@@ -7,8 +7,9 @@ kbId: 4975
 
 Для отображения картинки, загруженной во вложении, на форме, создайте атрибут типа Текст и введите следующее выражение:
 
-| FORMAT("<p><img src='/DocumentContent?id=document.{0}'/></p>",LIST($Fotokarty)) |
-| --- |
+```
+FORMAT("<p><img src='/DocumentContent?id=document.{0}'/></p>",LIST($Fotokarty))
+```
 
 **где:**
 

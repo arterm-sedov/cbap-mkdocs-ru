@@ -7,8 +7,21 @@ kbId: 4967
 
 Для того, чтобы получить всех пользователей из определенного шаблона пользователя, введите следующее выражение:
 
-| @prefix object: <http://comindware.com/ontology/object#>. @prefix account: <http://comindware.com/ontology/account#>. @prefix cmw: <http://comindware.com/logics#>. @prefix account: <http://comindware.com/ontology/account#>. @prefix container: <http://comindware.com/ontology/container#>. {   ?polz container:alias "Polzovateli".   ?value account:extendedBy ?polz.     } |
-| --- |
+```
+
+@prefix object: <http://comindware.com/ontology/object#>.
+@prefix account: <http://comindware.com/ontology/account#>.
+@prefix cmw: <http://comindware.com/logics#>.
+@prefix account: <http://comindware.com/ontology/account#>.
+@prefix container: <http://comindware.com/ontology/container#>.
+
+{
+
+  ?polz container:alias "Polzovateli".
+  ?value account:extendedBy ?polz.
+    }
+
+```
 
 **где:**
 

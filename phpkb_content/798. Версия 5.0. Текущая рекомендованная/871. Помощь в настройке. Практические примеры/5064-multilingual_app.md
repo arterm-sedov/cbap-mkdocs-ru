@@ -11,6 +11,8 @@ kbId: 5064
 
 Здесь представлена инструкция по настройке шаблонов записи для отображения интерфейса на русском и английском языках, а также кнопки для смены языка интерфейса.
 
+См. также [пример вычисления значения атрибут типа «Список значений» на определённом языке][attribute_enum_value_calculation].
+
 ## Прикладная задача
 
 Имеется приложение *«Управление автопарком»*.
@@ -24,11 +26,11 @@ kbId: 5064
 Логика работы многоязычного интерфейса
 
 - Для переключения языка отображения форм и навигации мы используем:
-    - отдельные формы и разделы навигации на английском и русском языках;
-    - правила для форм, скрывающие и показывающие формы в соответствии с языком пользователя;
-    - специальные группы и роли для пользователей, использующих приложение на английском и русском языках;
-    - шаблон аккаунта, служащий для смены языка в аккаунтах пользователей;
-    - две кнопки, которые будут менять язык отображения приложения.
+  - отдельные формы и разделы навигации на английском и русском языках;
+  - правила для форм, скрывающие и показывающие формы в соответствии с языком пользователя;
+  - специальные группы и роли для пользователей, использующих приложение на английском и русском языках;
+  - шаблон аккаунта, служащий для смены языка в аккаунтах пользователей;
+  - две кнопки, которые будут менять язык отображения приложения.
 - Формы и разделы навигации на английском языке будут скрыты для пользователей, у которых в аккаунте задан русский язык. И наоборот, для пользователей с английским языком будут отображаться английские формы и разделы навигации.
 - При входе пользователя приложение будет отображаться на языке, указанном в его аккаунте, и для него будет отображаться раздел навигации, назначенный роли с соответствующим языком.
 - Для пользователя будет отображаться одна из кнопок смены языка — на английский в русском интерфейсе и на русский — в английском.
@@ -40,28 +42,29 @@ kbId: 5064
 1. Создайте шаблон записи *«Тип автомобиля»*.
 2. Создайте атрибуты:
 
-| Название | Системное имя | Тип данных |
-| --- | --- | --- |
-| *Название RU* | `NameRU` | **Текст** |
-| *Название EN* | `NameEN` | **Текст** |
+   | Название | Системное имя | Тип данных |
+   | --- | --- | --- |
+   | *Название RU* | `NameRU` | **Текст** |
+   | *Название EN* | `NameEN` | **Текст** |
 3. Добавьте атрибут *«Отображаемое название»*:
 
-    - **Тип данных: текст**
-    - **Использовать как заголовок записей:** флажок установлен
-    - **Вычислять автоматически:** флажок установлен
-    - **Вычисляемое выражение: формула**
+   - **Тип данных: текст**
+   - **Использовать как заголовок записей:** флажок установлен
+   - **Вычислять автоматически:** флажок установлен
+   - **Вычисляемое выражение: формула**
 
-```
-IF (USER()->language=='ru', VALUE($NameRU, $NameEN), VALUE($NameEN, $NameRU))
-```
+   ```
+   IF (USER()->language=='ru', VALUE($NameRU, $NameEN), VALUE($NameEN, $NameRU))
+
+   ```
 4. Поместите созданные атрибуты на форму шаблона *«Тип автомобиля»*.
 5. Создайте записи со следующими значениями:
 
-| *Название RU* | *Название EN* |
-| --- | --- |
-| *легковой* | *car* |
-| *автобус* | *bus* |
-| *грузовой* | *truck* |
+   | *Название RU* | *Название EN* |
+   | --- | --- |
+   | *легковой* | *car* |
+   | *автобус* | *bus* |
+   | *грузовой* | *truck* |
 
 ## Настройка шаблона записи «Заявки на автомобили»
 
@@ -92,11 +95,12 @@ IF (USER()->language=='ru', VALUE($NameRU, $NameEN), VALUE($NameEN, $NameRU))
     - **Новое значение: скрыть**
     - **Условие выполнения: формула**
 
-```
-EQUALS(USER()->language,"en")
-```
+    ```
+    EQUALS(USER()->language,"en")
 
-Это действие будет скрывать *форму на русском* для пользователей, у которых в аккаунте задан английский язык.
+    ```
+
+    Это действие будет скрывать *форму на русском* для пользователей, у которых в аккаунте задан английский язык.
 14. Добавьте в правило для формы следующее **действие**:
 
     - **Элемент формы:** *Форма на английском*
@@ -104,11 +108,12 @@ EQUALS(USER()->language,"en")
     - **Новое значение: скрыть**
     - **Условие выполнения: формула**
 
-```
-OR(EQUALS(USER()->language,"ru"),EMPTY(USER()->language))
-```
+    ```
+    OR(EQUALS(USER()->language,"ru"),EMPTY(USER()->language))
 
-Это действие будет скрывать *форму на английском* для пользователей, у которых в аккаунте задан русский язык или язык не задан.
+    ```
+
+    Это действие будет скрывать *форму на английском* для пользователей, у которых в аккаунте задан русский язык или язык не задан.
 15. Сохраните форму.
 
 ## Настройка групп, ролей и раздела навигации
@@ -130,117 +135,121 @@ OR(EQUALS(USER()->language,"ru"),EMPTY(USER()->language))
 2. Перейдите на вкладку «**Кнопки**».
 3. Создайте кнопку *«Switch to English»* со следующими свойствами:
 
-    - **Контекст операции: аккаунт**
-    - **Операция: C#-скрипт**
-    - **Результат выполнения: обновить данные**
+   - **Контекст операции: аккаунт**
+   - **Операция: C#-скрипт**
+   - **Результат выполнения: обновить данные**
 4. На вкладке «**Скрипт**» введите C#-скрипт по следующему образцу:
 
-```
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Comindware.Data.Entity;
-using Comindware.TeamNetwork.Api.Data.UserCommands;
-using Comindware.TeamNetwork.Api.Data;
-using Comindware.Data;
-class Script
-{
-    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
-    {
-        // Получаем ID аккаунта текущего пользователя.
-        var id = userCommandContext.ObjectIds[0];
-        // Исключаем аккаунт из группы «Пользователи RU» с ID group.1.
-        Api.Base.AccountGroupService.ExcludeMembers( "group.1", new List<string>(){id});
-        // Включаем аккаунт в группу «Пользователи EN» с ID group.2.
-        Api.Base.AccountGroupService.IncludeMembers( "group.2", new List<string>(){id});
-        var account =  Api.Base.AccountService.Get(id);
-        // Задаём код языка en в аккаунте пользователя.
-        account.Language = "en";
-        Api.Base.AccountService.Edit(account);
-        // Возвращаем объект с результатом нажатия кнопки
-        var result = new UserCommandResult
-        {
-            Success = true,
-            Commited = true,
-            ResultType = UserCommandResultType.Notificate,
-            Messages = new[]
-            {
-                new UserCommandMessage
-                {
-                    Severity = SeverityLevel.Normal,
-                    // Выводим всплывающее уведомление о смене языка на английский.
-                    Text = "Language changed to English."
-                    }
-            }
-        };
-        return result;
-    }
-}
-```
+   ```
+   using System;
+   using System.Collections.Generic;
+   using System.Linq;
+   using Comindware.Data.Entity;
+   using Comindware.TeamNetwork.Api.Data.UserCommands;
+   using Comindware.TeamNetwork.Api.Data;
+   using Comindware.Data;
+   class Script
+   {
+       public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+       {
+           // Получаем ID аккаунта текущего пользователя.
+           var id = userCommandContext.ObjectIds[0];
+           // Исключаем аккаунт из группы «Пользователи RU» с ID group.1.
+           Api.Base.AccountGroupService.ExcludeMembers( "group.1", new List<string>(){id});
+           // Включаем аккаунт в группу «Пользователи EN» с ID group.2.
+           Api.Base.AccountGroupService.IncludeMembers( "group.2", new List<string>(){id});
+           var account =  Api.Base.AccountService.Get(id);
+           // Задаём код языка en в аккаунте пользователя.
+           account.Language = "en";
+           Api.Base.AccountService.Edit(account);
+           // Возвращаем объект с результатом нажатия кнопки
+           var result = new UserCommandResult
+           {
+               Success = true,
+               Commited = true,
+               ResultType = UserCommandResultType.Notificate,
+               Messages = new[]
+               {
+                   new UserCommandMessage
+                   {
+                       Severity = SeverityLevel.Normal,
+                       // Выводим всплывающее уведомление о смене языка на английский.
+                       Text = "Language changed to English."
+                       }
+               }
+           };
+           return result;
+       }
+   }
+
+   ```
 5. На вкладке «**Условия отображения**» добавьте формулу:
 
-```
-OR(EQUALS(USER()->language,"ru"),EMPTY(USER()->language))
-```
+   ```
+   OR(EQUALS(USER()->language,"ru"),EMPTY(USER()->language))
 
-Кнопка *«Switch to English»* будет отображаться для пользователей, у которых в аккаунте задан русский язык или язык не задан.
+   ```
+
+   Кнопка *«Switch to English»* будет отображаться для пользователей, у которых в аккаунте задан русский язык или язык не задан.
 6. Сохраните кнопку.
 7. Создайте кнопку *«Переключить на русский»* со следующими свойствами:
 
-    - **Контекст операции: аккаунт**
-    - **Операция: C#-скрипт**
-    - **Результат выполнения: обновить данные**
+   - **Контекст операции: аккаунт**
+   - **Операция: C#-скрипт**
+   - **Результат выполнения: обновить данные**
 8. На вкладке «**Скрипт**» добавьте C#-скрипт по следующему образцу:
 
-```
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Comindware.Data.Entity;
-using Comindware.TeamNetwork.Api.Data.UserCommands;
-using Comindware.TeamNetwork.Api.Data;
-using Comindware.Data;
-class Script
-{
-    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
-    {
-        // Получаем ID аккаунта текущего пользователя.
-        var id = userCommandContext.ObjectIds[0];
-        // Исключаем аккаунт из группы «Пользователи EN» с ID group.2.
-        Api.Base.AccountGroupService.ExcludeMembers( "group.2", new List<string>(){id});
-        // Включаем аккаунт в группу «Пользователи RU» с ID group.1.
-        Api.Base.AccountGroupService.IncludeMembers( "group.1", new List<string>(){id});
-        var account =  Api.Base.AccountService.Get(id);
-        // Устанавливаем код языка ru в аккаунте пользователя.
-        account.Language = "ru";
-        Api.Base.AccountService.Edit(account);
-        // Возвращаем объект с результатом нажатия кнопки
-        var result = new UserCommandResult
-        {
-            Success = true,
-            Commited = true,
-            ResultType = UserCommandResultType.Notificate,
-            Messages = new[]
-            {
-                new UserCommandMessage
-                {
-                    Severity = SeverityLevel.Normal,
-                    // Выводим всплывающее уведомление о смене языка на русский.
-                    Text = "Язык изменён на русский."
-                    }
-            }
-        };
-        return result;
-    }
-}
-```
+   ```
+   using System;
+   using System.Collections.Generic;
+   using System.Linq;
+   using Comindware.Data.Entity;
+   using Comindware.TeamNetwork.Api.Data.UserCommands;
+   using Comindware.TeamNetwork.Api.Data;
+   using Comindware.Data;
+   class Script
+   {
+       public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+       {
+           // Получаем ID аккаунта текущего пользователя.
+           var id = userCommandContext.ObjectIds[0];
+           // Исключаем аккаунт из группы «Пользователи EN» с ID group.2.
+           Api.Base.AccountGroupService.ExcludeMembers( "group.2", new List<string>(){id});
+           // Включаем аккаунт в группу «Пользователи RU» с ID group.1.
+           Api.Base.AccountGroupService.IncludeMembers( "group.1", new List<string>(){id});
+           var account =  Api.Base.AccountService.Get(id);
+           // Устанавливаем код языка ru в аккаунте пользователя.
+           account.Language = "ru";
+           Api.Base.AccountService.Edit(account);
+           // Возвращаем объект с результатом нажатия кнопки
+           var result = new UserCommandResult
+           {
+               Success = true,
+               Commited = true,
+               ResultType = UserCommandResultType.Notificate,
+               Messages = new[]
+               {
+                   new UserCommandMessage
+                   {
+                       Severity = SeverityLevel.Normal,
+                       // Выводим всплывающее уведомление о смене языка на русский.
+                       Text = "Язык изменён на русский."
+                       }
+               }
+           };
+           return result;
+       }
+   }
+
+   ```
 9. На вкладке «**Условия отображения**» добавьте формулу:
 
-```
-EQUALS(USER()->language,"en")
-```
+   ```
+   EQUALS(USER()->language,"en")
 
-Кнопка *«Переключить на русский»* будет отображаться для пользователей, у которых в аккаунте задан английский язык.
+   ```
+
+   Кнопка *«Переключить на русский»* будет отображаться для пользователей, у которых в аккаунте задан английский язык.
 10. Сохраните кнопку.
 11. Поместите обе кнопки на форму шаблона *«Пользователи»*.
 12. Привяжите к шаблону *«Пользователи»* аккаунты, ранее добавленные в группы *«Пользователи RU»* и *«Пользователи EN»*.
@@ -263,6 +272,5 @@ EQUALS(USER()->language,"en")
 
 - *[Список функций языка формул Comindware][formula_function_list]*
 - *[Написание скриптов на языке C#][csharp_guide]*
-
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

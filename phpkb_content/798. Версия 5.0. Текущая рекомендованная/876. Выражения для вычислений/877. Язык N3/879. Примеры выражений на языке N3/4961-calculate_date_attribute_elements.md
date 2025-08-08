@@ -14,8 +14,18 @@ kbId: 4961
 
 В процессе настройки может оказаться, что данного набора форматов отображения недостаточно, или для написания выражений нужно из атрибута с типом данных «Дата и время» получить только год, месяц, час и т.п. Для подобных целей подойдет выражение ниже, которое вычисляет из указанного атрибута с типом данных «Дата и время» год:
 
-| @prefix object: <http://comindware.com/ontology/object#>. @prefix cmwtime: <http://comindware.com/logics/time#>.{    ("Works" "Date") object:findProperty ?dtProperty.        ?item ?dtProperty ?dtone.    ?dtone cmwtime:Year ?value.      } |
-| --- |
+```
+
+@prefix object: <http://comindware.com/ontology/object#>. 
+@prefix cmwtime: <http://comindware.com/logics/time#>.
+{
+    ("Works" "Date") object:findProperty ?dtProperty.
+    
+    ?item ?dtProperty ?dtone.
+    ?dtone cmwtime:Year ?value.      
+}
+
+```
 
 **где:**
 

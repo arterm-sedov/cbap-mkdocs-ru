@@ -1,64 +1,156 @@
-<h1>Синхронизация с веб-сервисом. Интеграция по OData</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr">
+<h1>Синхронизация с веб-сервисом. Интеграция по OData</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4697" kb-title="Синхронизация с веб-сервисом. Интеграция по OData">
 <div class="md-container" data-md-component="container">
-<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
 <div class="mce-toc">
-<h2 class="toc-heading">Содержание</h2>
+<h2 class="toc-heading">
+      Содержание
+      </h2>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-интеграции-с-внешним-сервисом-посредством-odata"> <span class="md-ellipsis"> Настройка интеграции с внешним сервисом посредством OData </span> </a><nav aria-label="Настройка интеграции с внешним сервисом посредством OData" class="md-nav">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#порядок-настройки-и-использования-интеграции-с-внешним-сервисом-посредством-odata">
+<span class="md-ellipsis">
+      Порядок настройки и использования интеграции с внешним сервисом посредством OData
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-конфигурации-интеграции-по-odata">
+<span class="md-ellipsis">
+      Настройка конфигурации интеграции по OData
+    </span>
+</a>
+<nav aria-label="Настройка конфигурации интеграции по OData" class="md-nav">
 <ul class="md-nav__list">
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-синхронизации"> <span class="md-ellipsis"> Настройка синхронизации </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-импорта-данных"> <span class="md-ellipsis"> Настройка импорта данных </span> </a><nav aria-label="Настройка импорта данных" class="md-nav">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-синхронизации">
+<span class="md-ellipsis">
+      Настройка синхронизации
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-импорта-данных">
+<span class="md-ellipsis">
+      Настройка импорта данных
+    </span>
+</a>
+<nav aria-label="Настройка импорта данных" class="md-nav">
 <ul class="md-nav__list">
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-постпроцессинга"> <span class="md-ellipsis"> Настройка постпроцессинга </span> </a></li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-постпроцессинга">
+<span class="md-ellipsis">
+      Настройка постпроцессинга
+    </span>
+</a>
+</li>
 </ul>
-</nav></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-экспорта-данных"> <span class="md-ellipsis"> Настройка экспорта данных </span> </a></li>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-экспорта-данных">
+<span class="md-ellipsis">
+      Настройка экспорта данных
+    </span>
+</a>
+</li>
 </ul>
-</nav></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#запуск-синхронизации-посредством-интеграции"> <span class="md-ellipsis"> Запуск синхронизации посредством интеграции </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#журналирование-интеграции"> <span class="md-ellipsis"> Журналирование интеграции </span> </a><nav aria-label="Журналирование интеграции" class="md-nav">
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#запуск-синхронизации-посредством-интеграции">
+<span class="md-ellipsis">
+      Запуск синхронизации посредством интеграции
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#журналирование-интеграции">
+<span class="md-ellipsis">
+      Журналирование интеграции
+    </span>
+</a>
+<nav aria-label="Журналирование интеграции" class="md-nav">
 <ul class="md-nav__list">
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#журнал-событий"> <span class="md-ellipsis"> Журнал событий </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#сведения-в-журнале-интеграция-по-odata"> <span class="md-ellipsis"> Сведения в журнале «Интеграция по OData» </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#файловый-журнал"> <span class="md-ellipsis"> Файловый журнал </span> </a></li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#журнал-событий">
+<span class="md-ellipsis">
+      Журнал событий
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#сведения-в-журнале-интеграция-по-odata">
+<span class="md-ellipsis">
+      Сведения в журнале «Интеграция по OData»
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#файловый-журнал">
+<span class="md-ellipsis">
+      Файловый журнал
+    </span>
+</a>
+</li>
 </ul>
-</nav></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
 </ul>
 </div>
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h2 id="настройка-интеграции-с-внешним-сервисом-посредством-odata">Настройка интеграции с внешним сервисом посредством OData</h2>
+<h2 id="введение">Введение</h2>
 <p><strong>Comindware Platform</strong> поддерживает автоматический и ручной импорт и экспорт данных посредством подключения к внешнему OData-сервису.</p>
 <p>Подробные сведения о формате данных OData см. в статье «<a class="mkdocs_imported_link" href="https://www.odata.org/documentation/odata-version-2-0/uri-conventions/"><strong>URI Conventions (OData Version 2.0)</strong></a>» (официальное руководство по OData, английский язык).</p>
-<ol class="colored_numbers_list">
-<li>
-<p>Настройте <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4702">подключение к OData-сервису</a>.</p>
 <div class="notice notice-tip">
 <p class="admonition-title">Совет</p>
-<p>Для экспериментов с синхронизацией по OData при настройке подключения можно указать общедоступный сервер, предоставляемый OData.org.</p>
-<p>Например, для тестирования импорта данных можно использовать следующий сервер:</p>
+<p>Для экспериментов с синхронизацией по OData при настройке подключения в поле «<strong>Адрес веб-сервиса</strong>» можно указать подходящий общедоступный сервер.</p>
+<p>Например, для тестирования импорта данных можно использовать следующий сервер, предоставляемый OData.org:</p>
 <p><a class="mkdocs_imported_link" href="https://services.odata.org/V3/OData/OData.svc/">https://services.odata.org/V3/OData/OData.svc/</a></p>
+<p>Адреса остальных тестовых серверов OData.org представлены на следующих сайтах:</p>
+<p><a class="mkdocs_imported_link" href="https://services.odata.org/">https://services.odata.org/</a> </p>
+<p><a class="mkdocs_imported_link" href="https://www.odata.org/odata-services/">https://www.odata.org/odata-services/</a> </p>
 </div>
-</li>
+<h2 id="порядок-настройки-и-использования-интеграции-с-внешним-сервисом-посредством-odata">Порядок настройки и использования интеграции с внешним сервисом посредством OData</h2>
+<ol class="colored_numbers_list">
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4702">Настройте подключение</a> типа «<strong>Подключения REST и OData</strong>» — «<strong>Синхронизация с веб-сервисом</strong>».</li>
+<li><a class="mkdocs_imported_link" href="#настройка-конфигурации-интеграции-по-odata">Настройте конфигурацию</a> интеграции для импорта или экспорта данных по OData.</li>
+<li><a class="mkdocs_imported_link" href="#запуск-синхронизации-посредством-интеграции">Запустите синхронизацию</a> с OData-сервисом.</li>
+<li>Проверьте результат синхронизации и <a class="mkdocs_imported_link" href="#журналирование-интеграции">журналы интеграции</a>.</li>
+</ol>
+<h2 id="настройка-конфигурации-интеграции-по-odata">Настройка конфигурации интеграции по OData</h2>
+<ol class="colored_numbers_list">
+<li>Настройте <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4702">подключение к OData-сервису</a>.</li>
+<li>Откройте приложение из списка <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4714">приложений</a>.</li>
+<li>На странице «<strong>Администрирование</strong>» приложения нажмите пункт «<strong>Интеграции</strong>» <i class="fa-light fa-sync-alt">‌<!--icon--></i>.</li>
+<li>В списке интеграций создайте или откройте имеющуюся интеграцию.</li>
 <li>
-<p>Откройте приложение из списка приложений.</p>
+<p>Настройте конфигурацию интеграции:</p>
+<ul>
+<li><a class="mkdocs_imported_link" href="#настройка-синхронизации">Параметры синхронизации</a></li>
+<li><a class="mkdocs_imported_link" href="#настройка-импорта-данных">Параметры импорта данных</a><ul>
+<li><a class="mkdocs_imported_link" href="#настройка-постпроцессинга">Постпроцессинг</a></li>
+</ul>
 </li>
-<li>
-<p>На странице «<strong>Администрирование</strong>» приложения выберите пункт «<strong>Интеграции</strong>».</p>
-<figure class="screenshot_with_caption"><img alt="Переход к разделу «Интеграции» приложения" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/integrations_list.png"/>
-<figcaption class="caption">Переход к разделу «Интеграции» приложения</figcaption>
-</figure>
-</li>
-<li>
-<p>В списке интеграций нажмите кнопку «<strong>Создать</strong>».</p>
-<figure class="screenshot_with_caption"><img alt="Создание конфигурации интеграции" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/integrations_configuration_create.png"/>
-<figcaption class="caption">Создание конфигурации интеграции</figcaption>
-</figure>
-</li>
-<li>
-<p>Настройте новую конфигурацию интеграции.</p>
+<li><a class="mkdocs_imported_link" href="#настройка-экспорта-данных">Параметры экспорта данных</a></li>
+</ul>
 </li>
 </ol>
 <h3 class="pageBreakBefore" id="настройка-синхронизации">Настройка синхронизации</h3>
@@ -67,16 +159,14 @@
 <li><strong>Включить</strong> — установите этот флажок, чтобы задействовать данную конфигурацию интеграции.</li>
 <li><strong>Название</strong> — введите наглядное название конфигурации интеграции.</li>
 <li><strong>Подключение по OData</strong> — выберите ранее созданное подключение к OData-сервису.</li>
-<li><strong>Тип</strong> — выберите направление синхронизации данных:
-<ul>
+<li><strong>Тип</strong> — выберите направление синхронизации данных:<ul>
 <li><strong>Импорт</strong> — передача данных из OData-сервиса в приложение;</li>
 <li><strong>Экспорт</strong> — передача данных из приложения в OData-сервис.</li>
 </ul>
 </li>
 <li><strong>Шаблон записи</strong> — выберите шаблон, с которым будут синхронизироваться данные.</li>
 <li><strong>Внешняя сущность</strong> — укажите таблицу (набор данных) в OData-сервисе, с которой будут синхронизироваться данные.</li>
-<li><strong>Синхронизируемые объекты</strong> — выберите, следует ли импортировать все данные или только изменённые:
-<ul>
+<li><strong>Синхронизируемые объекты</strong> — выберите, следует ли импортировать все данные или только изменённые:<ul>
 <li><strong>Все</strong>;</li>
 <li><strong>По изменению полей объекта</strong>.</li>
 </ul>
@@ -85,17 +175,17 @@
 <p><strong>Режим запуска</strong> — выберите способ запуска синхронизации:</p>
 <ul>
 <li><strong>Вручную</strong> — для <a class="mkdocs_imported_link" href="#запуск-синхронизации-посредством-интеграции">запуска синхронизации</a> потребуется выбрать интеграцию в списке и нажать кнопку «<strong>Запустить синхронизацию</strong>».</li>
-<li>
-<p><strong>По расписанию</strong> — настройте расписание автоматической синхронизации:</p>
-<ul>
+<li><strong>По расписанию</strong> — настройте расписание автоматической синхронизации:<ul>
 <li><strong>Первый запуск</strong>;</li>
 <li><strong>Периодичность</strong>;</li>
 <li><strong>Дни запуска</strong>;</li>
 <li><strong>Интервал запуска</strong>.</li>
 </ul>
-<p>- <strong>Сопоставление данных</strong> — задайте соответствие атрибутов <strong>внешней сущности</strong> и атрибутов <strong>шаблона записи</strong> и укажите <strong>ключевой атрибут</strong>.</p>
 </li>
 </ul>
+</li>
+<li>
+<p><strong>Сопоставление данных</strong> — задайте соответствие атрибутов <strong>внешней сущности</strong> и атрибутов <strong>шаблона записи</strong> и  укажите <strong>ключевой атрибут</strong>.</p>
 <div class="notice notice-warning">
 <p class="admonition-title">Принцип сопоставления записей по ключевым атрибутам</p>
 <p>Для синхронизации необходимо выбрать пару ключевых атрибутов, содержащих уникальные значения, по которым будут сопоставляться синхронизируемые записи.</p>
@@ -111,8 +201,7 @@
 </ul>
 </div>
 <ul>
-<li>В столбце «<strong>Внешний атрибут</strong>» квадратных скобках указаны свойства атрибутов:
-<ul>
+<li>В столбце «<strong>Внешний атрибут</strong>» квадратных скобках указаны свойства атрибутов:<ul>
 <li><strong>[Primary key]</strong> — первичный ключ, по умолчанию выбран в качестве <strong>ключевого атрибута</strong>;</li>
 <li><strong>[Not null]</strong> — атрибуты, которые не могут быть пустыми (при экспорте данных необходимо установить соответствие всех внешних и внутренних атрибутов с данным свойством).</li>
 </ul>
@@ -121,31 +210,47 @@
 </li>
 </ul>
 <figure class="screenshot_with_caption">
-<p><img alt="Настройка свойств интеграции" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/integrations_configuration_properties.png"/></p>
-<figcaption class="caption">Настройка свойств интеграции</figcaption>
+<p><img alt="Настройка свойств интеграции" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/integrations_configuration_properties.png"/><figcaption class="caption">Настройка свойств интеграции</figcaption></p>
 </figure>
 <h3 class="pageBreakBefore" id="настройка-импорта-данных">Настройка импорта данных</h3>
 <p>Если на вкладке «<strong>Основные свойства</strong>» выбран импорт данных, настройте параметры на вкладке «<strong>Настройки импорта</strong>»:</p>
 <ul>
 <li><strong>Зависит от</strong> — укажите интеграцию, синхронизацию по которой необходимо запускать перед запуском синхронизации по данной интеграции. Это может быть необходимо, например, для того, чтобы предварительно обновить данные в связанных шаблонах, к которым требуется привязать синхронизируемые записи.</li>
 <li>
-<p><strong>Фильтр</strong> — задайте фильтр данных посредством выражений OData. Синтаксис фильтров см. в статье «<strong><a class="mkdocs_imported_link" href="https://msdn.microsoft.com/ru-ru/library/hh169248(v=nav.90).aspx">Using Filter Expressions in OData URIs</a></strong> » (учебник Microsoft, английский язык). Например, следующий фильтр выбирает записи с порядковым номером (<code>SequenceNumber</code>) от 11 до 14:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code>SequenceNumber gt 10 and SequenceNumber lt 15</code> </pre>
-</div>
+<p><strong>Фильтр</strong> — задайте фильтр данных посредством выражений OData. Синтаксис фильтров см. в статье <em>«<a class="mkdocs_imported_link" href="https://msdn.microsoft.com/ru-ru/library/hh169248(v=nav.90).aspx">Использование выражений фильтров в URI для OData</a>» (учебник Microsoft, английский язык)</em>.</p>
+<p>Например, следующий фильтр выбирает записи с порядковым номером (<code>SequenceNumber</code>) от <code>11</code> до <code>14</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">SequenceNumber</span><span class="w"> </span><span class="n">gt</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">SequenceNumber</span><span class="w"> </span><span class="n">lt</span><span class="w"> </span><span class="mi">15</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p><strong>Количество объектов в одном запросе</strong> — укажите максимальное количество данных, передаваемых в одном запросе. При превышении этого количества будет формироваться новый запрос к внешнему сервису.</p>
 </li>
-<li><strong>Сортировка</strong> — укажите атрибуты и порядок сортировки записей по ним. Выборка импортируемых записей будет выполняться</li>
-<li><strong>Динамический фильтр</strong> — настройте фильтрацию данных по времени, указав атрибут типа «Дата и время», значение которого будет проверяться на соответствие указанному интервалу фильтра.</li>
-<li><strong>Интервал фильтра</strong> — интервал времени, который будет отсчитываться от даты запуска синхронизации.</li>
-<li><strong>Удалить несуществующие записи</strong> — установите этот флажок, чтобы при синхронизации удалять записи, которые отсутствуют на внешнем сервере.</li>
+<li><strong>Сортировка</strong> — укажите атрибуты и порядок сортировки записей по ним. Выборка импортируемых записей будет выполняться в указанном порядке.</li>
+<li>
+<p><strong>Динамический фильтр</strong> — настройте фильтрацию данных по дате и времени. Для этого укажите атрибут типа «<strong>Дата и время</strong>». Значение этого атрибута в импортируемых записях будет сравниваться с датой и временем отправки запроса на синхронизацию за вычетом <strong>интервала фильтра</strong>.</p>
+<ul>
+<li><strong>Интервал фильтра</strong> — интервал времени для динамической фильтрации. При выборке записей значение <strong>интервала фильтра</strong> вычитается из даты и времени отправки запроса на синхронизацию (в часовом поясе <code>UTC+0</code>).</li>
+</ul>
+<div class="notice notice-warning">
+<p class="admonition-title">Логика работы динамического фильтра</p>
+<ul>
+<li><strong>Динамический фильтр</strong> позволяет импортировать только записи, относящиеся ко времени после определённой даты.</li>
+<li><strong>Пример</strong><ul>
+<li>Для <strong>динамического фильтра</strong> выбран атрибут <em>«Дата создания»</em>.</li>
+<li><strong>Интервал фильтра</strong> равен <code>1 д</code>.</li>
+<li>Синхронизация началась <code>05.01.2025</code> (в часовом поясе <code>UTC+0</code>).</li>
+<li>Импортированы будут записи, у которых <em>Дата создания</em> больше или равна <code>04.01.2025</code>.</li>
+</ul>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Удалить несуществующие записи</strong> — установите этот флажок, чтобы при синхронизации удалять записи, которые отсутствуют на внешнем сервере.</p>
+</li>
 <li><strong>Удалить по условию</strong> — укажите атрибуты и значения, чтобы при синхронизации удалять записи, соответствующие заданным условиям.</li>
 </ul>
 <figure class="screenshot_with_caption">
-<p><img alt="Настройки импорта данных из OData-сервиса" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/integrations_configuration_import.png"/></p>
-<figcaption class="caption">Настройки импорта данных из OData-сервиса</figcaption>
+<p><img alt="Настройки импорта данных из OData-сервиса" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/integrations_configuration_import.png"/><figcaption class="caption">Настройки импорта данных из OData-сервиса</figcaption></p>
 </figure>
 <h4 class="pageBreakBefore" id="настройка-постпроцессинга">Настройка постпроцессинга</h4>
 <div class="notice notice-warning">
@@ -166,8 +271,7 @@
 </li>
 </ol>
 <figure class="screenshot_with_caption">
-<p><img alt="Настройка постпроцессинга" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/integrations_configuration_postprocessing.png"/></p>
-<figcaption class="caption">Настройка постпроцессинга</figcaption>
+<p><img alt="Настройка постпроцессинга" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/integrations_configuration_postprocessing.png"/><figcaption class="caption">Настройка постпроцессинга</figcaption></p>
 </figure>
 <h3 class="pageBreakBefore" id="настройка-экспорта-данных">Настройка экспорта данных</h3>
 <p>Если на вкладке «<strong>Основные свойства</strong>» выбран экспорт данных, настройте параметры на вкладке «<strong>Настройки экспорта</strong>»:</p>
@@ -177,8 +281,7 @@
 <li><strong>Фильтр</strong> — укажите атрибуты и значения, чтобы при синхронизации экспортировать только записи, соответствующие заданному фильтру.</li>
 </ul>
 <figure class="screenshot_with_caption">
-<p><img alt="Настройка экспорта" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/integrations_configuration_export.png"/></p>
-<figcaption class="caption">Настройка экспорта</figcaption>
+<p><img alt="Настройка экспорта" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/integrations_configuration_export.png"/><figcaption class="caption">Настройка экспорта</figcaption></p>
 </figure>
 <h2 id="запуск-синхронизации-посредством-интеграции">Запуск синхронизации посредством интеграции</h2>
 <ol class="colored_numbers_list">
@@ -188,15 +291,13 @@
 <li>Результаты синхронизации можно просмотреть в журналах интеграции.</li>
 </ol>
 <figure class="screenshot_with_caption">
-<p><img alt="Запуск синхронизации" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/integrations_synchronization_start.png"/></p>
-<figcaption class="caption">Запуск синхронизации</figcaption>
+<p><img alt="Запуск синхронизации" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/integrations_synchronization_start.png"/><figcaption class="caption">Запуск синхронизации</figcaption></p>
 </figure>
 <h2 class="pageBreakBefore" id="журналирование-интеграции">Журналирование интеграции</h2>
 <h3 id="журнал-событий">Журнал событий</h3>
 <p>Журнал сеансов синхронизации посредством интеграций отображается на вкладке «<strong>Интеграция по OData</strong>» в разделе «<strong>Администрирование</strong>» — «<strong>Инфраструктура</strong>» — «<strong>Журналы событий</strong>».</p>
 <figure class="screenshot_with_caption">
-<p><img alt="Журнал сеансов синхронизации данных по OData" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/integrations_log.png"/></p>
-<figcaption class="caption">Журнал сеансов синхронизации данных по OData</figcaption>
+<p><img alt="Журнал сеансов синхронизации данных по OData" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/integrations_log.png"/><figcaption class="caption">Журнал сеансов синхронизации данных по OData</figcaption></p>
 </figure>
 <h3 id="сведения-в-журнале-интеграция-по-odata">Сведения в журнале «Интеграция по OData»</h3>
 <ul>
@@ -211,13 +312,11 @@
 <h3 class="pageBreakBefore" id="файловый-журнал">Файловый журнал</h3>
 <p>При синхронизации посредством интеграции соответствующие события записываются в файл журнала с именем вида: <code>integration_raw_ГГГГ-ММ-ЧЧ.log</code>.</p>
 <figure class="screenshot_with_caption">
-<p><img alt="Файл integration_raw_ГГГГ-ММ-ЧЧ.log в папке журналов" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/integrations_log_file.png"/></p>
-<figcaption class="caption">Файл integration_raw_ГГГГ-ММ-ЧЧ.log в папке журналов</figcaption>
+<p><img alt="Файл integration_raw_ГГГГ-ММ-ЧЧ.log в папке журналов" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/integrations_log_file.png"/><figcaption class="caption">Файл integration_raw_ГГГГ-ММ-ЧЧ.log в папке журналов</figcaption></p>
 </figure>
 <p>При успешной синхронизации в этом файле будут указаны все синхронизированные объекты. При сбое синхронизации в файл записывается ИД записи, на которой была обнаружена ошибка, и описание ошибки.</p>
 <figure class="screenshot_with_caption">
-<p><img alt="Содержимое файла integration_raw.log" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/integrations_log_content.png"/></p>
-<figcaption class="caption">Содержимое файла integration_raw.log</figcaption>
+<p><img alt="Содержимое файла integration_raw.log" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/integrations_log_content.png"/><figcaption class="caption">Содержимое файла integration_raw.log</figcaption></p>
 </figure>
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
@@ -225,10 +324,18 @@
 <li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4702">Синхронизация с веб-сервисом. Настройка подключения</a></em></li>
 <li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4673#logs_odata_inegration">Журнал сеансов синхронизации по OData</a></em></li>
 <li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4698">Интеграция с 1С по OData. Настройка для импорта данных</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://msdn.microsoft.com/ru-ru/library/hh169248(v=nav.90).aspx">Использование выражений фильтров в URI для OData</a> (учебник Microsoft, английский язык)</em></li>
 </ul>
 </div>
 </article>
 </div>
 </div>
-<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
 </div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

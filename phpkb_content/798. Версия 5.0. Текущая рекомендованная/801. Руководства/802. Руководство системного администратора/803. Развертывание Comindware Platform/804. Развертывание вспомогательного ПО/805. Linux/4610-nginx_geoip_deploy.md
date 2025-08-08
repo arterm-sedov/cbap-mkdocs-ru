@@ -20,50 +20,50 @@ kbId: 4610
 
 1. Для установки необходимых пакетов в операционной системе выполните указанные ниже команды.
 
-    - **Astra/Debian/Ubuntu**: `sudo apt-get install nginx-module-geoip`
-    - **Alt**: `sudo apt-get install nginx-geoip`
-    - **CentOS**: `yum install nginx-module-geoip`
+   - **Astra/Debian/Ubuntu**: `sudo apt-get install nginx-module-geoip`
+   - **Alt**: `sudo apt-get install nginx-geoip`
+   - **CentOS**: `yum install nginx-module-geoip`
 2. Обновите базы GeoIP до актуальной версии с помощью команд:
 
-```
-mv /usr/share/GeoIP/GeoIP.dat /usr/share/GeoIP/GeoIP.dat_bak
-cd /usr/share/GeoIP/
-wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz
-gunzip GeoIP.dat.gz
-```
+   ```
+   mv /usr/share/GeoIP/GeoIP.dat /usr/share/GeoIP/GeoIP.dat_bak
+   cd /usr/share/GeoIP/
+   wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz
+   gunzip GeoIP.dat.gz
+   ```
 3. С помощью команды `nginx -V` убедитесь, что веб-сервер собран с параметром `--with-http_geoip_module`. В противном случае необходимо самостоятельно собрать модуль NGINX. Исходные коды GeoIP находятся в открытом доступе.
 
 ## Ограничение доступа для пользователей из определенных стран
 
 1. Чтобы запретить доступ к сайту пользователям из Украины и США, в папке с файлами конфигурации веб-сервера NGINX создайте файл `block.map.include` со следующими директивами:
 
-```
-geoip_country /usr/share/GeoIP/GeoIP.dat; 
-    map $geoip_country_code $allowed_country { 
-            default yes;
-            UA no;
-            US no;
-    }
-```
+   ```
+   geoip_country /usr/share/GeoIP/GeoIP.dat; 
+       map $geoip_country_code $allowed_country { 
+               default yes;
+               UA no;
+               US no;
+       }
+   ```
 2. Чтобы разрешить использование сайта только пользователям из России, Китая и Тайваня, используйте в файле конфигурации следующие директивы:
 
-```
-geoip_country /usr/share/GeoIP/GeoIP.dat; 
-    map $geoip_country_code $allowed_country {
-        default no;
-        RU yes;
-        CN yes;
-        TW yes;
-    }
-```
+   ```
+   geoip_country /usr/share/GeoIP/GeoIP.dat; 
+       map $geoip_country_code $allowed_country {
+           default no;
+           RU yes;
+           CN yes;
+           TW yes;
+       }
+   ```
 3. В файле конфигурации `/etc/nginx/nginx.conf` в разделе `http` добавьте следующую директиву: `include include/block.map.include;`
 4. В настройках хоста (раздел `server`) добавьте следующую директиву:
 
-```
-if ($allowed_country = no) {
-    return 404;
-}
-```
+   ```
+   if ($allowed_country = no) {
+       return 404;
+   }
+   ```
 5. Примените изменения: `# nginx -s reload`
 
 ## Пример скрипта автоматического обновления

@@ -94,6 +94,4 @@ _![Показатели производительности сеансов вы
 
 **[Подсистема журналирования][logging_engine]**
 
-
-
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

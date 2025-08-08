@@ -7,8 +7,21 @@ kbId: 4960
 
 Для того, чтобы установить условие на отображение поля / вкладки / столбца и т.д., если в ссылочном поле стоит определенное значение, введите следующее выражение:
 
-| @prefix object: <http://comindware.com/ontology/object#>.@prefix math: <http://www.w3.org/2000/10/swap/math#>.{("Issue" "IssueTypeLink") object:findProperty ?IssueTypeProperty.("IssueType" "Title") object:findProperty ?TitleProperty.    ?item ?IssueTypeProperty ?IssueType. ?IssueType ?TitleProperty ?Title.                                                                    if{?Title math:equalTo "Task".}then{true -> ?value.}else{false -> ?value.}       } |
-| --- |
+```
+@prefix object: <http://comindware.com/ontology/object#>.
+@prefix math: <http://www.w3.org/2000/10/swap/math#>.
+{
+("Issue" "IssueTypeLink") object:findProperty ?IssueTypeProperty.
+("IssueType" "Title") object:findProperty ?TitleProperty.
+   
+ ?item ?IssueTypeProperty ?IssueType.
+ ?IssueType ?TitleProperty ?Title.
+                                                                    
+if{?Title math:equalTo "Task".}
+then{true -> ?value.}
+else{false -> ?value.}
+       }
+```
 
 **где:**
 

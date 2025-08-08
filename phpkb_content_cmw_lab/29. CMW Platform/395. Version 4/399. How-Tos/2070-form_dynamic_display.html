@@ -1,0 +1,127 @@
+<h1>Configuring Dynamic Field Display Using a Form Rule</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1gtvs0k4n0">Use Case</a></li>
+<li><a href="#mcetoc_1gtoco9i62">Prerequisites</a></li>
+<li><a href="#mcetoc_1gtqg5ppp3">Instructions</a>
+<ul>
+<li><a href="#mcetoc_1gtqijebq0">Formula Syntax</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gu00p0ar1">See Also</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1gtvs0k4n0">Use Case</h2>
+<p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; font-size: 15px; font-weight: 300; letter-spacing: 0.2px; line-height: 25px; color: #545764; font-family: 'Open Sans', sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">In the <strong style="box-sizing: border-box; font-weight: 700 !important;">CMW Platform</strong>, you can define a set of rules for any form to control its element behavior.</p>
+<p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; font-size: 15px; font-weight: 300; letter-spacing: 0.2px; line-height: 25px; color: #545764; font-family: 'Open Sans', sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">Each rule can include several conditional actions:</p>
+<ul style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; padding: 8px 16px; margin-left: 16px; list-style: disc; text-indent: 0px; color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">
+<li style="box-sizing: border-box; font-weight: 300; list-style: disc; text-indent: 0px !important;">Set field values</li>
+<li style="box-sizing: border-box; font-weight: 300; list-style: disc; text-indent: 0px !important;">Show field validation warnings and error messages</li>
+<li>Change element access mode: require entry, allow entry, read-only</li>
+<li style="box-sizing: border-box; font-weight: 300; list-style: disc; text-indent: 0px !important;">Hide elements</li>
+</ul>
+<p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; font-size: 15px; font-weight: 300; letter-spacing: 0.2px; line-height: 25px; color: #545764; font-family: 'Open Sans', sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">In this article, we will define a form rule to show the hidden fields only when the preceding fields are filled.</p>
+<h2 id="mcetoc_1gtoco9i62">Prerequisites</h2>
+<p>In the example scenario, when creating a business trip request, an employee selects the destination country, city, and airport.</p>
+<p>To streamline the user experience, we initially show the <em>Country</em> hide field and hide the <em>City</em> and <em>Airport</em> fields. When the user selects the country, the <em>City</em> field appears. When the user selects the city, the <em>Airport</em> field appears.</p>
+<p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; font-size: 15px; font-weight: 300; letter-spacing: 0.2px; line-height: 25px; color: #545764; font-family: 'Open Sans', sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">To proceed with the example, set up the template, attributes, and form fields as shown in the table below:</p>
+<div class="table-responsive">
+<table border="1" style="height: 50px; width: 100%; border-collapse: collapse;">
+<tbody>
+<tr style="height: 40px;">
+<td style="height: 40px; width: 33.3%;"><strong>Record template name</strong></td>
+<td style="height: 40px; width: 33.3%;"><strong>Attribute and field display name (system name)</strong></td>
+<td style="width: 33.3%; height: 40px;"><strong>Field Access setting on the form</strong></td>
+</tr>
+<tr style="height: 40px;">
+<td rowspan="3" style="height: 10px; width: 33.3%;"><em style="font-size: 15px; letter-spacing: 0.2px;">Travel requests</em><em style="font-size: 15px; letter-spacing: 0.2px;"><br/></em></td>
+<td style="height: 0px; width: 33.3%;">
+<p><em>Country (request_country)</em></p>
+</td>
+<td style="height: 0px; width: 33.3%;"><strong><span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;">Require entry</span></strong></td>
+</tr>
+<tr style="height: 10px;">
+<td style="height: 10px; width: 33.3%;">
+<p><em>City (request_city)</em></p>
+</td>
+<td style="height: 10px; width: 33.3%;"><strong><span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;">Hide</span></strong></td>
+</tr>
+<tr style="height: 0px;">
+<td style="height: 0px; width: 33.3%;">
+<p><em style="letter-spacing: 0.2px;">Airport (request_airport).</em><em><br/></em></p>
+</td>
+<td style="height: 0px; width: 33.3%;"><strong><span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;">Hide</span></strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="mcetoc_1gtqg5ppp3">Instructions</h2>
+<ol class="colored_numbers_list">
+<li>In the <em style="font-size: 15px; letter-spacing: 0.2px;">Travel requests </em>template, open the default form.</li>
+<li>Open the <strong><em>Form rules</em></strong> designer using the dropdown next to the form heading.</li>
+<li>Add a rule and an action to the rule.</li>
+<li>Configure the <strong>Action properties</strong>.
+<ul>
+<li>From the <strong>Form element</strong> dropdown, select the <span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;"><em>City (request_city)</em> </span>field<strong>.</strong></li>
+<li>From the <strong>Action </strong>dropdown, select <strong>Change access</strong><strong>.</strong></li>
+<li>From the <strong>New value </strong>dropdown, select <strong>Require entry</strong>.</li>
+<li>In the <strong>Execution condition</strong> field, enter the <a href="#mcetoc_1gtqijebq0"><strong>formula</strong></a>:
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code"><code>NOT(EMPTY($request_country))</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>Add a second action to the rule.</li>
+<li>Configure the <strong>Action properties</strong>.
+<ul>
+<li>From the <strong>Form element</strong> dropdown, select the <em><span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;">Airport </span></em><span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;"><em>(request_airport)</em> </span>field<strong>.</strong></li>
+<li>From the <strong>Action </strong>dropdown, select <strong>Change access</strong><strong>.</strong></li>
+<li>From the <strong>New value </strong>dropdown, select <strong>Require entry</strong>.</li>
+<li>In the <strong>Execution condition</strong> field, enter the <a href="#mcetoc_1gtqijebq0"><strong>formula</strong></a>:
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code"><code>NOT(EMPTY($request_city))</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>Click <em><strong>Save</strong></em>.</li>
+</ol>
+<h3 id="mcetoc_1gtqijebq0">Formula Syntax</h3>
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%; height: 176px;">
+<tbody>
+<tr style="height: 40px;">
+<th style="width: 50%; height: 40px;">Element</th>
+<th style="width: 50%; height: 40px;">Description</th>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;"><code><em>NOT</em>()</code></td>
+<td style="width: 50%; height: 40px;">
+<p>This function returns <code>true</code> if its argument resolves to <code>false</code>.</p>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td style="height: 40px;"><code>$</code></td>
+<td style="height: 40px;">This prefix refers to an attribute in the current record context.</td>
+</tr>
+<tr style="height: 56px;">
+<td style="height: 56px;">
+<p><code>EMPTY()</code></p>
+</td>
+<td style="height: 56px;"><span style="font-size: 15px; letter-spacing: 0.2px;">This function returns <code>true</code> if its argument has an empty value</span><span style="letter-spacing: 0.2px;"><span style="font-size: 15px;">.</span> </span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="mcetoc_1gu00p0ar1">See Also</h2>
+<p><samp data-name="aid" data-title="" data-value="2022"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2022}</span></samp></p>
+<p><samp data-name="aid" data-title="" data-value="2022"><span style="color: #0066bc; font-family: Tahoma;"><samp data-name="aid" data-title="" data-value="1987"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>{Article-ID:1987}</span></samp> </span></samp></p>

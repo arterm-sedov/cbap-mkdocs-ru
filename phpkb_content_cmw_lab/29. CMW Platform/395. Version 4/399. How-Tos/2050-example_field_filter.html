@@ -1,0 +1,69 @@
+<h1>Reference Attribute Filter Example</h1><p>This article describes an example of a client contracts filter on the request form.</p>
+<p>The system names of the record templates and attributes used in the example are given in the table:</p>
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%; height: 120px;">
+<tbody>
+<tr style="height: 40px;">
+<th style="width: 50%; height: 40px;">Record template</th>
+<th style="width: 50%; height: 40px;">Attributes</th>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;">Requests</td>
+<td>contract<br/>client_requestor</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;">Contracts</td>
+<td>client</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The following functions and operators will be used in the expression:</p>
+<ul>
+<li>"<strong><em>EQUALS()</em></strong>" function to select a record that corresponds to the client in the request;</li>
+<li>"<strong><em>from</em></strong>" operator for listing all records from the "Contracts" record template;</li>
+<li>"<strong><em>where</em></strong>" operator to select records that match the condition;</li>
+<li>"<strong><em>select</em></strong>" operator for selecting attribute values.</li>
+</ul>
+<p> </p>
+<p><strong>Step-by-step instruction:</strong></p>
+<p><strong>1.</strong> Create and customize record templates and attributes.</p>
+<p><strong>2.</strong> In the "<em>Requests</em>" record template, open "<em>Forms</em>".</p>
+<p><strong>3.</strong> Add the "<em>contract</em>" attribute to the form.</p>
+<p><strong>4.</strong> Enter an expression in the filter box.</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">from a in db-&gt;Contracts where EQUALS($client_requestor,a-&gt;client) select a-&gt;id</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p> </p>
+<p><strong>Syntax</strong></p>
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%; height: 162px;">
+<tbody>
+<tr style="height: 40px;">
+<th style="width: 50%; height: 40px;">Element</th>
+<th style="width: 50%; height: 40px;">Definition</th>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;">from a in db-&gt;Contracts</td>
+<td style="height: 40px;">
+<p>Declaring a local variable <em>a</em>.</p>
+<p>Declaring the "<em>Contracts</em>" record template as a data source: <em>db-&gt;Contracts</em>.</p>
+Enumerate all entries from the "<em>Contracts</em>" record template.</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;">where EQUALS($client_requestor,a-&gt;client)</td>
+<td style="height: 40px;">Selecting a record in which the value in "<em>client_requestor</em>" of the current request matches the value of the "<em>client</em>" attribute in the “<em>Contracts</em>” record template.</td>
+</tr>
+<tr style="height: 42px;">
+<td style="width: 50%; height: 42px;">select a-&gt;id</td>
+<td style="width: 50%; height: 42px;">Select the required record IDs.</td>
+</tr>
+</tbody>
+</table>
+</div>

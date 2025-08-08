@@ -7,8 +7,9 @@ kbId: 4970
 
 Для того, чтобы получить фото из профиля определенного пользователя (например, для составления карточки сотрудника), введите следующее выражение:
 
-| FORMAT("<img height='150' src = 'https://instance.net/api/GetProfilePhoto?id={0}&size=large'> </img>",LIST($Polzovatel)) |
-| --- |
+```
+FORMAT("<img height='150' src = 'https://instance.net/api/GetProfilePhoto?id={0}&size=large'> </img>",LIST($Polzovatel))
+```
 
 **где:**
 

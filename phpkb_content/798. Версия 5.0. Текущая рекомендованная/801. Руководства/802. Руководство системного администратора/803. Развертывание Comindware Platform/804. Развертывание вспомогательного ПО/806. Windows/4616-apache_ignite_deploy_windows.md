@@ -19,8 +19,6 @@ Apache Ignite — это распределенная высокопроизво
 
 Полная инструкция по установке и настройке Apache Ignite представлена на следующем сайте: <https://ignite.apache.org/docs/latest/>
 
- 
-
 ## 1. Установка Apache Ignite
 
 **1.1.** Скачайте ZIP файл `apache-ignite-2.16.0-bin.zip` по ссылке: <https://ignite.apache.org/download.cgi#binaries>
@@ -31,8 +29,6 @@ Apache Ignite — это распределенная высокопроизво
 
 **1.4.** Настройте конфигурацию Ignite, изменив файл `Apache.Ignite.exe.config`: `%IGNITE_HOME%\platforms\dotnet\bin\Apache.Ignite.exe.config`
 
- 
-
 ## 2. Запуск Apache Ignite
 
 **2.1.** Запустите службу Ignite с помощью команды: `%IGNITE_HOME%\bin\ignite.bat -v`
@@ -40,8 +36,6 @@ Apache Ignite — это распределенная высокопроизво
 параметр `-v` включает вывод подробных данных в журнал (по умолчанию в журнал Ignite выводятся только краткие сведения).
 
 **2.2.** Если запустить Ignite не удалось, проверьте информацию в журнале, по умолчанию он хранится в папке `%IGNITE_HOME%\work\log`.
-
- 
 
 ## 3. Пример файла конфигурации Ignite
 
@@ -131,7 +125,5 @@ Apache Ignite — это распределенная высокопроизво
 </igniteConfiguration>
 </configuration>
 ```
-
-
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

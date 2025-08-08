@@ -55,7 +55,7 @@ _![](https://kb.comindware.ru/assets/img_63bbff44016eb.png)_*Проверка с
 
 ## 3. Добавление Windows-хоста в сеть мониторинга
 
-3.1. Откройте *Zabbix Frontend* (см. статью «[Zabbix Server, Zabbix Agent, Zabbix Frontend и MySQL. Инструкции по установке](app://obsidian.md/Zabbix%20Server,%20Zabbix%20Agent,%20Zabbix%20Frontend%20%D0%B8%20MySQL.%20%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D0%B8%20%D0%BF%D0%BE%20%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B5)».). Для э того в адресной строке браузера наберите: `<http://zabbix-server-ip-address:8080>`
+3.1. Откройте *Zabbix Frontend* (см. статью «[Zabbix Server, Zabbix Agent, Zabbix Frontend и MySQL. Инструкции по установке](app://obsidian.md/Zabbix%20Server,%20Zabbix%20Agent,%20Zabbix%20Frontend%20%D0%B8%20MySQL.%20%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D0%B8%20%D0%BF%D0%BE%20%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B5)».). Для э того в адресной строке браузера наберите: `http://zabbix-server-ip-address:8080`
 3.2. Откройте раздел «**Monitoring**» > «**Hosts**» и нажмите кнопку «**Create host**».
 
 ![Создание хоста](https://kb.comindware.ru/assets/img_63bc000e92138.png)
@@ -94,12 +94,12 @@ _![Статус хоста Zabbix Agent](https://kb.comindware.ru/assets/img_63b
 - значения `Server` и `ServerActive` в файле конфигурации *Zabbix Agent* `/etc/zabbix/zabbix_agentd.conf` соответствуют IP-адресу *Zabbix Server*:
 
 ```
-Server=192.168.0.1 # ip-адрес приведён как пример
+Server=192.168.0.1 # ip-адрес приведён как пример
 
 ```
 
 ```
-ServerActive=192.168.0.1 # ip-адрес приведён как пример
+ServerActive=192.168.0.1 # ip-адрес приведён как пример
 
 ```
 

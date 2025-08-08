@@ -7,8 +7,9 @@ kbId: 4986
 
 Для того, чтобы установить правило с условием на пустое поле и наличием определённого статуса, введите следующее выражение:
 
-| AND(EMPTY($Fakticheskietrudozatraty), ($StatusRef->Title == "Ready for build" || $StatusRef->Title == "Acceptance" || $StatusRef->Title == "Closed" || $StatusRef->Title == "In Review")) |
-| --- |
+```
+AND(EMPTY($Fakticheskietrudozatraty), ($StatusRef->Title == "Ready for build" || $StatusRef->Title == "Acceptance" || $StatusRef->Title == "Closed" || $StatusRef->Title == "In Review"))
+```
 
 **где:**
 

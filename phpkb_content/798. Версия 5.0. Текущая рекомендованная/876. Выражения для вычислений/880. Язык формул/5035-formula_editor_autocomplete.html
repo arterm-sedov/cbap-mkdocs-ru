@@ -1,0 +1,578 @@
+<h1>Предиктивный ввод в формулах</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5035" kb-title="Предиктивный ввод в формулах">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ввод-имён-объектов">
+<span class="md-ellipsis">
+      Ввод имён объектов
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#formula_autocompete_editor_function">
+<span class="md-ellipsis">
+      Ввод имени функции и просмотр подсказки по функции
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#formula_editor_autocomplete_from_where_select">
+<span class="md-ellipsis">
+      Ввод запроса from where select
+    </span>
+</a>
+<nav aria-label="Ввод запроса from where select" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ввод-заготовки-конструкции-from-where-select">
+<span class="md-ellipsis">
+      Ввод заготовки конструкции from where select
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ввод-запроса-из-атрибута-текущего-шаблона">
+<span class="md-ellipsis">
+      Ввод запроса из атрибута текущего шаблона
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ввод-запроса-из-шаблона-текущего-приложения">
+<span class="md-ellipsis">
+      Ввод запроса из шаблона текущего приложения
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ввод-системного-имени-атрибута-после-переменной-селектора">
+<span class="md-ellipsis">
+      Ввод системного имени атрибута после переменной-селектора
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ввод-системного-имени-атрибута-из-цепочки-связанных-шаблонов">
+<span class="md-ellipsis">
+      Ввод системного имени атрибута из цепочки связанных шаблонов
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#практический-пример-подсчёт-количества-автомобилей-марки-лада-в-заявке">
+<span class="md-ellipsis">
+      Практический пример: Подсчёт количества автомобилей марки «Лада» в заявке
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#formula_editor_autocomplete_record_heading">
+<span class="md-ellipsis">
+      Ввод заголовка записи связанного шаблона
+    </span>
+</a>
+<nav aria-label="Ввод заголовка записи связанного шаблона" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#практический-пример-подсчёт-количества-выполняющихся-заявок">
+<span class="md-ellipsis">
+      Практический пример: подсчёт количества выполняющихся заявок
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ввод-системного-имени-атрибута-записи-возвращаемой-функцией">
+<span class="md-ellipsis">
+      Ввод системного имени атрибута записи, возвращаемой функцией
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ввод-аргументов-функции-object">
+<span class="md-ellipsis">
+      Ввод аргументов функции OBJECT()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ввод-системного-имени-значения-атрибута-типа-список-значений">
+<span class="md-ellipsis">
+      Ввод системного имени значения атрибута типа «Список значений»
+    </span>
+</a>
+<nav aria-label="Ввод системного имени значения атрибута типа «Список значений»" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ввод-системного-имени-значения-после-оператора-сравнения">
+<span class="md-ellipsis">
+      Ввод системного имени значения после оператора сравнения
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ввод-системного-имени-значения-в-качестве-аргумента-функции">
+<span class="md-ellipsis">
+      Ввод системного имени значения в качестве аргумента функции
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ввод-системного-имени-атрибута-текущего-шаблона">
+<span class="md-ellipsis">
+      Ввод системного имени атрибута текущего шаблона
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ввод-системного-имени-атрибута-связанного-шаблона">
+<span class="md-ellipsis">
+      Ввод системного имени атрибута связанного шаблона
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ввод-запроса-записей-с-совпадающими-значениями-атрибутов">
+<span class="md-ellipsis">
+      Ввод запроса записей с совпадающими значениями атрибутов
+    </span>
+</a>
+<nav aria-label="Ввод запроса записей с совпадающими значениями атрибутов" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#практические-примеры">
+<span class="md-ellipsis">
+      Практические примеры
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#запрос-списка-автомобилей-такого-же-типа-как-указан-в-текущей-заявке">
+<span class="md-ellipsis">
+      Запрос списка автомобилей такого же типа, как указан в текущей заявке
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#запрос-количества-заявок-на-такой-же-автомобиль-как-в-текущей-заявке">
+<span class="md-ellipsis">
+      Запрос количества заявок на такой же автомобиль, как в текущей заявке
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ввод-имён-переменных-в-сценарии">
+<span class="md-ellipsis">
+      Ввод имён переменных в сценарии
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="ввод-имён-объектов">Ввод имён объектов</h2>
+<p>Для ввода формул в редакторе выражений предусмотрены предиктивный ввод и подсказки:</p>
+<ul>
+<li>При вводе символов <code>$</code>, <code>$$</code>, <code>-&gt;</code>, <code>&lt;-</code>, <code>==</code>, <code>!=</code>, имён объектов, функций и аргументов, а также при нажатии клавиш <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-space">Пробел</kbd></span> отображается список подходящих по контексту сущностей.</li>
+<li>При вводе имён функций отображаются подсказки с их описанием.</li>
+</ul>
+<h2 class="pageBreakBefore" id="formula_autocompete_editor_function">Ввод имени функции и просмотр подсказки по функции</h2>
+<ol class="colored_numbers_list">
+<li>Введите любые буквы имени функции.</li>
+<li>Отобразится список подходящих функций, введённые буквы будут выделены в именах функций.</li>
+<li>Выберите функцию в списке.</li>
+<li>Для выбранной функции отобразится подсказка с описанием функции, её параметров и возвращаемого значения.</li>
+<li>Чтобы просмотреть подробное описание функции <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5025#expression_editor_reference">в справочнике</a> нажмите пункт «<strong>Показать в справочнике</strong>» в подсказке.</li>
+<li>Чтобы вставить выбранную функцию в формулу, дважды нажмите её имя в списке.</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Подсказка при предиктивном вводе имени функции" src="/platform/v5.0/business_apps/expressions/expression_editor/formula_editor/img/formula_editor_function_autocomplete.png"/><figcaption class="caption">Подсказка при предиктивном вводе имени функции</figcaption></p>
+</figure>
+<h2 class="pageBreakBefore" id="formula_editor_autocomplete_from_where_select">Ввод запроса from where select</h2>
+<p>Запрос <code class="highlight"><span class="k">from</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="k">select</span></code> возвращает список значений из указанного источника данных, соответствующих заданному условию.</p>
+<h3 id="ввод-заготовки-конструкции-from-where-select">Ввод заготовки конструкции from where select</h3>
+<p>С помощью предиктивного ввода можно вставить заготовку запроса <code class="highlight"><span class="k">from</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="k">select</span></code>.</p>
+<ol class="colored_numbers_list">
+<li>Нажмите клавиши <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-space">Пробел</kbd></span>.</li>
+<li>
+<p>Отобразится список источников данных для запроса — атрибутов типа «<strong>Запись</strong>» в текущем шаблоне и шаблонов в текущем приложении.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Список источников данных для запроса from where select" src="/platform/v5.0/business_apps/expressions/expression_editor/formula_editor/img/formula_editor_from_where_select_autocomplete_data_source.png"/><figcaption class="caption">Список источников данных для запроса from where select</figcaption></figure></p>
+</li>
+<li>
+<p>Дважды нажмите системное имя атрибута или шаблона в списке, чтобы вставить в формулу заготовку конструкции <code class="highlight"><span class="k">from</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="k">select</span></code> для него:</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Заготовка конструкции from where select" src="/platform/v5.0/business_apps/expressions/expression_editor/formula_editor/img/formula_editor_from_where_select_autocomplete_entered_source_attribute.png"/><figcaption class="caption">Заготовка конструкции from where select</figcaption></figure></p>
+</li>
+<li>
+<p>Замените строку <code>Ваше условие</code> после оператора <code class="highlight"><span class="k">where</span></code> на условие выборки записей из источника данных.</p>
+</li>
+</ol>
+<h3 class="pageBreakBefore" id="ввод-запроса-из-атрибута-текущего-шаблона">Ввод запроса из атрибута текущего шаблона</h3>
+<ol class="colored_numbers_list">
+<li>
+<p>Введите строку:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>После ввода оператора <code>in</code> отобразится список доступных источников данных. Этот список также можно вызвать, нажав клавиши <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-space">Пробел</kbd></span> в позиции после оператора <code>in</code>.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Список источников данных" src="/platform/v5.0/business_apps/expressions/expression_editor/formula_editor/img/formula_editor_application_templates_autocomplete_attribute_source.png"/><figcaption class="caption">Список источников данных</figcaption></figure></p>
+</li>
+<li>
+<p>Дважды нажмите системное имя атрибута типа «<strong>Запись</strong>», отображающегося в списке с префиксом <code>$</code> и <strong><em>без суффикса</em></strong> <code>(запрос)</code>, чтобы вставить его в формулу.</p>
+</li>
+<li>Введите условие выборки записей и атрибут для выборки с помощью операторов <code>where</code> и <code>select</code>.</li>
+</ol>
+<div class="highlight"><span class="filename">Пример: формула, возвращающая список записей в шаблоне, связанном с атрибутом Costs, в которых значение атрибута TotalAmount больше значения атрибута PlannedCosts в текущей записи</span><code><pre><span></span><code><span class="k">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="err">$</span><span class="n">Costs</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">TotalAmount</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="err">$</span><span class="n">PlannedCosts</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">id</span></code> <br/></pre></code></div>
+<h3 class="pageBreakBefore" id="ввод-запроса-из-шаблона-текущего-приложения">Ввод запроса из шаблона текущего приложения</h3>
+<ol class="colored_numbers_list">
+<li>
+<p>Введите строку:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">db</span><span class="o">-&gt;</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>После ввода символов <code>db-&gt;</code> отобразится список шаблонов текущего приложения. Этот список также можно вызвать, нажав клавиши <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-space">Пробел</kbd></span> в позиции после <code>db-&gt;</code>.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Список шаблонов в текущем приложении" src="/platform/v5.0/business_apps/expressions/expression_editor/formula_editor/img/formula_editor_application_templates_autocomplete.png"/><figcaption class="caption">Список шаблонов в текущем приложении</figcaption></figure></p>
+</li>
+<li>
+<p>Дважды нажмите системное имя шаблона, чтобы вставить его в формулу.</p>
+</li>
+<li>
+<p>Введите условие выборки записей и атрибут для выборки с помощью операторов <code>where</code> и <code>select</code>.</p>
+<div class="highlight"><span class="filename">Пример: формула, возвращающая количество записей в шаблоне Cars, с таким же значением атрибута Make, как в текущей записи</span><code><pre><span></span><code><span class="k">COUNT</span><span class="p">(</span><span class="k">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">db</span><span class="o">-&gt;</span><span class="n">Cars</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">Make</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="err">$</span><span class="n">Make</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">)</span></code> <br/></pre></code></div>
+</li>
+</ol>
+<h3 class="pageBreakBefore" id="ввод-системного-имени-атрибута-после-переменной-селектора">Ввод системного имени атрибута после переменной-селектора</h3>
+<p>Здесь используется приведённый ниже <a class="mkdocs_imported_link" href="#app_configuration_lada_count">пример конфигурации приложения</a>.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Введите строку:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="err">$</span><span class="n">RequestedCars</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>После ввода символов <code>a-&gt;</code> отобразится список атрибутов шаблона, связанного с атрибутом <code>RequestedCars</code>, на который ссылается локальная переменная-селектор <code>a</code>. Этот список также можно вызвать, нажав клавиши <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-space">Пробел</kbd></span> в позиции после <code>a-&gt;</code>.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Список атрибутов, вызванный посредством переменной-селектора" src="/platform/v5.0/business_apps/expressions/expression_editor/formula_editor/img/formula_editor_linked_record_attributes_selector_autocomplete.png"/><figcaption class="caption">Список атрибутов, вызванный посредством переменной-селектора</figcaption></figure></p>
+</li>
+<li>
+<p>Дважды нажмите системное имя атрибута <code>_creator</code>, чтобы вставить его в формулу. <code>_creator</code> — это <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4781">системный атрибут</a></strong>, в котором хранится ID аккаунта, создавшего запись.</p>
+</li>
+<li>
+<p>Введите строку:</p>
+<div class="highlight"><code><pre><span></span><code><span class="o">==</span><span class="w"> </span><span class="k">USER</span><span class="p">()</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">id</span></code> <br/></pre></code></div>
+</li>
+</ol>
+<div class="highlight"><span class="filename">Пример: формула, возвращающая количество записей в шаблоне, связанном с атрибутом RequestedCars, созданных под текущим аккаунтом</span><code><pre><span></span><code><span class="k">COUNT</span><span class="p">(</span><span class="k">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="err">$</span><span class="n">RequestedCars</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">_creator</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">USER</span><span class="p">()</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">)</span></code> <br/></pre></code></div>
+<h3 class="pageBreakBefore" id="ввод-системного-имени-атрибута-из-цепочки-связанных-шаблонов">Ввод системного имени атрибута из цепочки связанных шаблонов</h3>
+<p>Здесь используется приведённый ниже <a class="mkdocs_imported_link" href="#app_configuration_lada_count">пример конфигурации приложения</a>.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Введите строку:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="err">$$</span><span class="n">RequestedCars</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">_creator</span><span class="o">-&gt;</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>После ввода символов <code>_creator-&gt;</code> отобразится список атрибутов системного <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4774">шаблона аккаунта</a></strong>, с которым связан системный атрибут <code>_creator</code>. Этот список также можно вызвать, нажав клавиши <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-space">Пробел</kbd></span> в позиции после оператора <code>-&gt;</code>.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Список атрибутов, вызванный по цепочке связанных шаблонов" src="/platform/v5.0/business_apps/expressions/expression_editor/formula_editor/img/formula_editor_linked_record_attributes_selector_nested_autocomplete.png"/><figcaption class="caption">Список атрибутов, вызванный по цепочке связанных шаблонов</figcaption></figure>
+3. Дважды нажмите системное имя атрибута username, чтобы вставить его в формулу.
+4. Введите строку:</p>
+<div class="highlight"><code><pre><span></span><code><span class="o">==</span><span class="w"> </span><span class="ss">"admin"</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">id</span></code> <br/></pre></code></div>
+</li>
+</ol>
+<div class="highlight"><span class="filename">Пример: формула, возвращающая список записей в шаблоне, связанном с атрибутом $RequestedCars, созданных под аккаунтом admin</span><code><pre><span></span><code><span class="k">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="err">$</span><span class="n">RequestedCars</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">_creator</span><span class="o">-&gt;</span><span class="n">username</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">"admin"</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">id</span></code> <br/></pre></code></div>
+<div class="notice notice-example">
+<h3 class="admonition-title" id="практический-пример-подсчёт-количества-автомобилей-марки-лада-в-заявке">Практический пример: Подсчёт количества автомобилей марки «Лада» в заявке</h3>
+<p id="app_configuration_lada_count"><strong>Конфигурация приложения</strong></p>
+<ul>
+<li>Шаблон записи <em>«Заявка на автомобили»</em><ul>
+<li>Атрибут <em>«Запрошенные автомобили»</em><ul>
+<li><strong>Системное имя</strong>: <em>RequestedCars</em></li>
+<li><strong>Тип данных</strong>: <strong>запись</strong></li>
+<li><strong>Связанный шаблон</strong>: <em>Автомобили</em></li>
+<li><strong>Хранить несколько значений</strong>: флажок установлен</li>
+</ul>
+</li>
+<li>Запись: заявка на несколько автомобилей разных марок</li>
+</ul>
+</li>
+<li>Шаблон записи <em>«Автомобили»</em><ul>
+<li>Атрибут <em>«Марка»</em><ul>
+<li><strong>Системное имя</strong>: <em>Make</em></li>
+<li><strong>Тип данных</strong>: <strong>текст</strong></li>
+<li><strong>Использовать как заголовок записей</strong>: флажок установлен</li>
+</ul>
+</li>
+<li>Записи: <code>УАЗ</code>, <code>Москвич</code>, <code>Лада</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>Составление формулы</strong></p>
+<ol class="colored_numbers_list">
+<li>Введите функцию <code class="highlight"><span class="k">COUNT</span><span class="p">()</span></code>. См. «<strong><a class="mkdocs_imported_link" href="#formula_autocompete_editor_function">Ввод имени функции и просмотр подсказки по функции</a></strong>».</li>
+<li>В позиции аргумента функции нажмите клавиши <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-space">Пробел</kbd></span>.</li>
+<li>
+<p>Отобразится список источников данных.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Список источников данных для запроса" src="/platform/v5.0/business_apps/expressions/expression_editor/formula_editor/img/formula_editor_from_where_select_autocomplete.png"/><figcaption class="caption">Список источников данных для запроса</figcaption></figure></p>
+</li>
+<li>
+<p>Дважды нажмите в списке пункт <em>$RequestedCars (запрос)</em>, чтобы вставить в формулу заготовку конструкции <code class="highlight"><span class="k">from</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="k">select</span></code> для него:</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Заготовка запроса" src="/platform/v5.0/business_apps/expressions/expression_editor/formula_editor/img/formula_editor_from_where_select_autocomplete_entered.png"/><figcaption class="caption">Заготовка запроса</figcaption></figure>
+5. Выделите строку <code>Ваше условие</code> после оператора <code class="highlight"><span class="k">where</span></code>, чтобы заменить её на условие выборки записей из шаблона <em>«Автомобили»</em>.</p>
+</li>
+<li>
+<p>Введите строку <code class="highlight"><span class="k">where</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span></code>.</p>
+</li>
+<li>
+<p>В отобразившемся списке атрибутов шаблона <em>«Автомобили»</em> дважды нажмите системное имя атрибута <em>Make</em>, чтобы вставить его в формулу. См. «<strong><a class="mkdocs_imported_link" href="#ввод-системного-имени-атрибута-после-переменной-селектора">Ввод системного имени атрибута после переменной-селектора</a></strong>»</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Список атрибутов шаблона _«Автомобили»_" src="/platform/v5.0/business_apps/expressions/expression_editor/formula_editor/img/formula_editor_from_where_select_autocomplete_condition_record_attribute_list.png"/><figcaption class="caption">Список атрибутов шаблона <em>«Автомобили»</em></figcaption></figure></p>
+</li>
+<li>
+<p>Введите оператор <code>==</code> и нажмите клавиши <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-space">Пробел</kbd></span>.</p>
+</li>
+<li>
+<p>Отобразится список записей шаблона <em>«Автомобили»</em> в виде марок автомобилей. См. «<strong><a class="mkdocs_imported_link" href="#formula_editor_autocomplete_record_heading">Ввод заголовка записи связанного шаблона</a></strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Список записей в шаблоне _«Автомобили»_" src="/platform/v5.0/business_apps/expressions/expression_editor/formula_editor/img/formula_editor_from_where_select_autocomplete_condition_record_heading_list.png"/><figcaption class="caption">Список записей в шаблоне <em>«Автомобили»</em></figcaption></figure></p>
+</li>
+<li>
+<p>Дважды нажмите пункт <em>«Лада»</em>, чтобы вставить в формулу строковый литерал <code class="highlight"><span class="ss">"Лада"</span></code>.</p>
+</li>
+</ol>
+<div class="highlight"><span class="filename">Формула, подсчитывающая автомобили «Лада» в заявке</span><code><pre><span></span><code><span class="k">COUNT</span><span class="p">(</span><span class="k">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="err">$</span><span class="n">RequestedCars</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">Make</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">"Лада"</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">)</span></code> <br/></pre></code></div>
+<p><strong>Синтаксис формулы</strong></p>
+<ul>
+<li><code>COUNT()</code> — возвращает количество элементов в списке, переданном в качестве аргумента.</li>
+<li><code class="highlight"><span class="k">from</span><span class="w"> </span><span class="n">a</span></code> — объявление локальной переменной <code>a</code>.</li>
+<li><code class="highlight"><span class="k">in</span><span class="w"> </span><span class="err">$</span><span class="n">RequestedCars</span></code> — объявление атрибута <code>RequestedCars</code> в качестве источника данных.</li>
+<li><code class="highlight"><span class="k">where</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">Make</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">"Лада"</span></code> — выборка в переменную <code>a</code> записей, связанных с атрибутом <code>RequestedCars</code>, у которых атрибут <code>Make</code> имеет значение <code>"Лада"</code>.</li>
+<li><code class="highlight"><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">id</span></code> — выборка значений атрибута <code>id</code> полученных записей и передача списка этих значений в функцию <code>COUNT()</code>.</li>
+</ul>
+</div>
+<h2 class="pageBreakBefore" id="formula_editor_autocomplete_record_heading">Ввод заголовка записи связанного шаблона</h2>
+<p>Если в шаблоне указан <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4769">атрибут-заголовок записей</a>, то при нажатии клавиш <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-space">Пробел</kbd></span> в позиции после системного имени <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4780">атрибута типа «<strong>Запись</strong>»</a>, связанного с этим шаблоном, отобразится список записей связанного шаблона с соответствующими заголовками.</p>
+<div class="notice notice-example">
+<h3 class="admonition-title" id="практический-пример-подсчёт-количества-выполняющихся-заявок">Практический пример: подсчёт количества выполняющихся заявок</h3>
+<p><strong>Конфигурация приложения</strong></p>
+<ul>
+<li>
+<p>Шаблон записи <em>«Заявка на автомобиль»</em></p>
+<ul>
+<li><strong>Системное имя</strong>: <em>Zayavkanaavtomobil</em>.</li>
+<li>Атрибут <em>«Статус»</em><ul>
+<li><strong>Системное имя</strong>: <em>Status</em>.</li>
+<li><strong>Тип данных</strong>: <strong>Запись</strong>.</li>
+<li><strong>Связанный шаблон</strong>: <em>Статус заявки</em>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Шаблон записи <em>«Статус заявки»</em></p>
+<ul>
+<li><strong>Системное имя</strong>: <em>Statuszayavki</em>.</li>
+<li><strong>Тип данных</strong>: <strong>Запись</strong>.</li>
+<li>Атрибут <em>«Название»</em><ul>
+<li><strong>Системное имя</strong>: <em>Nazvanie</em>.</li>
+<li><strong>Тип данных</strong>: <strong>Текст</strong>.</li>
+<li><strong>Использовать как заголовок записей</strong>: флажок установлен.</li>
+<li>Записи: <code>Выполняется</code>, <code>Отклонена</code>, <code>Завершена</code>, <code>На рассмотрении</code>, <code>Создана</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Составление формулы</strong></p>
+<ol class="colored_numbers_list">
+<li>Введите функцию <code class="highlight"><span class="k">COUNT</span><span class="p">()</span></code>, которая возвращает количество элементов в списке, переданном в качестве аргумента. См. также раздел «<strong><a class="mkdocs_imported_link" href="#formula_autocompete_editor_function">Ввод имени функции и просмотр подсказки по функции</a></strong>».</li>
+<li>В позиции аргумента функции нажмите клавиши <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-space">Пробел</kbd></span> и выберите шаблон <em>Zayavkanaavtomobil</em>.</li>
+<li>В формулу будет вставлена заготовка конструкции from-where-select для шаблона <em>Zayavkanaavtomobil</em>.</li>
+<li>Строку <code>Ваше условие замените</code> в заготовке замените на <code>b-&gt;Status-&gt;Nazvanie ==</code>, чтобы привести формулу к виду:
+    <div class="highlight"><code><pre><span></span><code><span class="k">COUNT</span><span class="p">(</span><span class="k">from</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">db</span><span class="o">-&gt;</span><span class="n">Zayavkanaavtomobil</span></code> <br/><code><span class="k">where</span><span class="w"> </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">Status</span><span class="o">-&gt;</span><span class="n">Nazvanie</span><span class="w"> </span><span class="o">==</span></code> <br/><code><span class="k">select</span><span class="w"> </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">)</span></code> <br/></pre></code></div></li>
+<li>Нажмите клавиши <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-space">Пробел</kbd></span> в позиции после оператора <code>==</code>.</li>
+<li>Отобразится список записей шаблона <em>«Статус заявки»</em>.
+    <figure class="screenshot_with_caption" markdown=""><img alt="Список записей шаблона" src="/platform/v5.0/business_apps/expressions/expression_editor/formula_editor/img/formula_editor_record_heading_autocomplete.png"/><figcaption class="caption">Список записей шаблона</figcaption></figure></li>
+<li>Дважды нажмите пункт <em>«Выполняется»</em>, чтобы вставить в формулу литерал <code>"Выполняется"</code>.</li>
+</ol>
+<div class="highlight"><span class="filename">Пример: формула, возвращающая количество записей в шаблоне Zayavkanaavtomobil, связанных с записью «Выполняется» в шаблоне Status</span><code><pre><span></span><code><span class="k">COUNT</span><span class="p">(</span><span class="k">from</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">db</span><span class="o">-&gt;</span><span class="n">Zayavkanaavtomobil</span></code> <br/><code><span class="k">where</span><span class="w"> </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">Status</span><span class="o">-&gt;</span><span class="n">Nazvanie</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">"Выполняется"</span></code> <br/><code><span class="k">select</span><span class="w"> </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">)</span></code> <br/></pre></code></div>
+</div>
+<h2 class="pageBreakBefore" id="ввод-системного-имени-атрибута-записи-возвращаемой-функцией">Ввод системного имени атрибута записи, возвращаемой функцией</h2>
+<p>Для функций, которые возвращают записи, при предиктивном вводе отображается список атрибутов соответствующего шаблона.</p>
+<ol class="colored_numbers_list">
+<li>Введите функцию <code class="highlight"><span class="k">USER</span><span class="p">()</span></code>, возвращающую текущий аккаунт.</li>
+<li>Введите оператор <code>-&gt;</code>.</li>
+<li>Отобразится список системных атрибутов аккаунта. Этот список также можно вызвать, нажав клавиши <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-space">Пробел</kbd></span> в позиции после оператора <code>-&gt;</code>.
+    <figure class="screenshot_with_caption" markdown=""><img alt="Список атрибутов аккаунта, возвращаемого функцией USER()" src="/platform/v5.0/business_apps/expressions/expression_editor/formula_editor/img/formula_editor_function_returned_attribute_autocomplete.png"/><figcaption class="caption">Список атрибутов аккаунта, возвращаемого функцией USER()</figcaption></figure></li>
+<li>Дважды нажмите системное имя атрибута, чтобы вставить его в формулу.</li>
+</ol>
+<div class="highlight"><span class="filename">Пример: формула, возвращающая имя пользователя текущего аккаунта</span><code><pre><span></span><code><span class="k">USER</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">username</span></code> <br/></pre></code></div>
+<h2 class="pageBreakBefore" id="ввод-аргументов-функции-object">Ввод аргументов функции OBJECT()</h2>
+<p>Функция <code class="highlight"><span class="k">OBJECT</span><span class="p">()</span></code> возвращает список записей шаблона по заданным системным именам приложения, шаблона и атрибута и значению атрибута.
+При предиктивном вводе её аргументов отображаются списки подходящих приложений, шаблонов и атрибутов.</p>
+<ol class="colored_numbers_list">
+<li>Введите функцию <code class="highlight"><span class="k">OBJECT</span><span class="p">()</span></code>.</li>
+<li>Нажмите клавиши <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-space">Пробел</kbd></span> в позиции внутри скобок.</li>
+<li>Отобразится список приложений.</li>
+<li>Дважды нажмите системное имя приложения в списке, чтобы вставить его в формулу.</li>
+<li>Введите запятую и нажмите клавиши <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-space">Пробел</kbd></span>.</li>
+<li>Отобразится список шаблонов в приложении, выбранном на шаге 4.</li>
+<li>Дважды нажмите системное имя шаблона в списке, чтобы вставить его в формулу.</li>
+<li>Введите запятую и нажмите клавиши <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-space">Пробел</kbd></span>.</li>
+<li>Отобразится список атрибутов шаблона, выбранного на шаге 7.
+    <figure class="screenshot_with_caption" markdown=""><img alt="Список атрибутов шаблона при предиктивном вводе аргументов функции OBJECT()" src="/platform/v5.0/business_apps/expressions/expression_editor/formula_editor/img/formula_editor_object_function_autocomplete.png"/><figcaption class="caption">Список атрибутов шаблона при предиктивном вводе аргументов функции OBJECT()</figcaption></figure></li>
+<li>Дважды нажмите системное имя атрибута, чтобы вставить его в формулу.</li>
+<li>Введите запятую, пробел и искомое значение атрибута в кавычках.</li>
+</ol>
+<div class="highlight"><span class="filename">Пример: формула, возвращающая список записей шаблона Avtomobil из приложения Upravlenieavtoparkom, в которых атрибут Marka имеет значение «Лада»</span><code><pre><span></span><code><span class="k">OBJECT</span><span class="p">(</span><span class="ss">"Upravlenieavtoparkom"</span><span class="p">,</span><span class="w"> </span><span class="ss">"Avtomobil"</span><span class="p">,</span><span class="w"> </span><span class="ss">"Marka"</span><span class="p">,</span><span class="w"> </span><span class="ss">"Лада"</span><span class="p">)</span></code> <br/></pre></code></div>
+<h2 class="pageBreakBefore" id="ввод-системного-имени-значения-атрибута-типа-список-значений">Ввод системного имени значения атрибута типа «Список значений»</h2>
+<p>Редактор выражений может подсказывать системное имя <strong>значения</strong> <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4779">атрибута типа «<strong>Список значений</strong>»</a>.</p>
+<h3 id="ввод-системного-имени-значения-после-оператора-сравнения">Ввод системного имени значения после оператора сравнения</h3>
+<ol class="colored_numbers_list">
+<li>Введите символ <code>$</code>, системное имя атрибута типа «<strong>Список значений</strong>» и оператор <code>==</code> или <code>!=</code>.</li>
+<li>Нажмите клавиши <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-space">Пробел</kbd></span>.</li>
+<li>Отобразится список системных имён значений атрибута.
+    <figure class="screenshot_with_caption" markdown=""><img alt="Список значений атрибута после оператора" src="/platform/v5.0/business_apps/expressions/expression_editor/formula_editor/img/formula_editor_enum_autocomplete.png"/><figcaption class="caption">Список значений атрибута после оператора</figcaption></figure></li>
+<li>Дважды нажмите системное имя значения атрибута, чтобы вставить его в формулу.
+  <div class="highlight"><span class="filename">Пример: формула, возвращающая количество записей в шаблоне Zayavkanaotpusk со значением атрибута Statuszayavki, равным Odobrena</span><code><pre><span></span><code><span class="k">COUNT</span><span class="p">(</span><span class="k">from</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">db</span><span class="o">-&gt;</span><span class="n">Zayavkanaotpusk</span></code> <br/><code><span class="k">where</span><span class="w"> </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">Statuszayavki</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">"Odobrena"</span></code> <br/><code><span class="k">select</span><span class="w"> </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">)</span></code> <br/></pre></code></div></li>
+</ol>
+<h3 class="pageBreakBefore" id="ввод-системного-имени-значения-в-качестве-аргумента-функции">Ввод системного имени значения в качестве аргумента функции</h3>
+<ol class="colored_numbers_list">
+<li>Введите функцию <code class="highlight"><span class="k">EQUALS</span><span class="p">()</span></code> (возвращает <code>true</code>, если её аргументы равны).</li>
+<li>В позицию первого аргумента введите символ <code>$</code> и системное имя <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4779">атрибута типа «Список значений»</a></strong>.</li>
+<li>В позиции второго аргумента нажмите клавиши <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-space">Пробел</kbd></span>.</li>
+<li>Отобразится список значений атрибута.
+    <figure class="screenshot_with_caption" markdown=""><img alt="Список значений атрибута при вводе аргумента функции" src="/platform/v5.0/business_apps/expressions/expression_editor/formula_editor/img/formula_editor_enum_function_autocomplete.png"/><figcaption class="caption">Список значений атрибута при вводе аргумента функции</figcaption></figure></li>
+<li>Дважды нажмите системное имя значения атрибута, чтобы вставить его в формулу.</li>
+</ol>
+<div class="highlight"><span class="filename">Пример: формула возвращающая true, если в текущей записи атрибут Statuszayavki имеет значение Odobrena</span><code><pre><span></span><code><span class="k">EQUALS</span><span class="p">(</span><span class="err">$</span><span class="n">Statuszayavki</span><span class="p">,</span><span class="w"> </span><span class="ss">"Odobrena"</span><span class="p">)</span></code> <br/></pre></code></div>
+<h2 class="pageBreakBefore" id="ввод-системного-имени-атрибута-текущего-шаблона">Ввод системного имени атрибута текущего шаблона</h2>
+<ol class="colored_numbers_list">
+<li>Введите символ <code>$</code>.</li>
+<li>Отобразится список атрибутов текущего шаблона.
+    <figure class="screenshot_with_caption" markdown=""><img alt="Список атрибутов текущего шаблона" src="/platform/v5.0/business_apps/expressions/expression_editor/formula_editor/img/formula_editor_template_attribute_autocomplete.png"/><figcaption class="caption">Список атрибутов текущего шаблона</figcaption></figure></li>
+<li>Дважды нажмите системное имя атрибута, чтобы вставить его в формулу.</li>
+</ol>
+<div class="highlight"><span class="filename">Пример: формула, возвращающая целочисленное значение атрибута Passazhiry в текущей записи</span><code><pre><span></span><code><span class="nb">INT</span><span class="p">(</span><span class="err">$</span><span class="n">Passazhiry</span><span class="p">)</span></code> <br/></pre></code></div>
+<h2 id="ввод-системного-имени-атрибута-связанного-шаблона">Ввод системного имени атрибута связанного шаблона</h2>
+<ol class="colored_numbers_list">
+<li>Введите символ <code>$</code> и системное имя <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4780">атрибута типа «<strong>Запись</strong>»</a> текущего шаблона.</li>
+<li>Введите оператор <code>-&gt;</code>.</li>
+<li>Отобразится список атрибутов шаблона, связанного с указанным на шаге 1 атрибутом. Этот список также можно вызвать, нажав клавиши <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-space">Пробел</kbd></span> в позиции после оператора <code>-&gt;</code>.
+    <figure class="screenshot_with_caption" markdown=""><img alt="Список атрибутов связанного шаблона" src="/platform/v5.0/business_apps/expressions/expression_editor/formula_editor/img/formula_editor_linked_record_attributes_autocomplete.png"/><figcaption class="caption">Список атрибутов связанного шаблона</figcaption></figure></li>
+<li>Дважды нажмите системное имя атрибута, чтобы вставить его в формулу.</li>
+</ol>
+<div class="highlight"><span class="filename">Пример: формула, возвращающая сумму значений атрибута Summa из шаблона, связанного с атрибутом Zatraty, и атрибута Nalog в текущей записи</span><code><pre><span></span><code><span class="k">ADD</span><span class="p">(</span><span class="err">$</span><span class="n">Zatraty</span><span class="o">-&gt;</span><span class="n">Summa</span><span class="p">,</span><span class="w"> </span><span class="err">$</span><span class="n">Nalog</span><span class="p">)</span></code> <br/></pre></code></div>
+<h2 class="pageBreakBefore" id="ввод-запроса-записей-с-совпадающими-значениями-атрибутов">Ввод запроса записей с совпадающими значениями атрибутов</h2>
+<p>Оператор <code>&lt;-</code> (обратная стрелка) возвращает список записей из связанного шаблона, у которых значение атрибута типа «<strong>Запись</strong>», указанного после стрелки, совпадает со значением указанного перед стрелкой атрибута типа «<strong>Запись</strong>» текущего шаблона.</p>
+<ol class="colored_numbers_list">
+<li>Введите символ <code>$</code> и системное имя атрибута типа «<strong>Запись</strong>» текущего шаблона.</li>
+<li>Введите оператор <code>&lt;-</code>. Этот список также можно вызвать, нажав клавиши <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-space">Пробел</kbd></span> в позиции после оператора <code>&lt;-</code>.</li>
+<li>Отобразится список системных имён шаблонов, связанных с указанным атрибутом.
+    <figure class="screenshot_with_caption" markdown=""><img alt="Подсказка системных имён шаблонов, связанных с атрибутом" src="/platform/v5.0/business_apps/expressions/expression_editor/formula_editor/img/formula_editor_templates_linked_with_attribute_autocomplete.png"/><figcaption class="caption">Подсказка системных имён шаблонов, связанных с атрибутом</figcaption></figure></li>
+<li>Дважды нажмите системное имя шаблона, чтобы вставить его в формулу.</li>
+<li>После двоеточия введите системное имя атрибута типа «<strong>Запись</strong>», связанного с текущим шаблоном.</li>
+</ol>
+<h3 class="pageBreakBefore" id="практические-примеры">Практические примеры</h3>
+<div class="notice notice-example">
+<h3 class="admonition-title" id="запрос-списка-автомобилей-такого-же-типа-как-указан-в-текущей-заявке">Запрос списка автомобилей такого же типа, как указан в текущей заявке</h3>
+<p><strong>Конфигурация приложения</strong></p>
+<ul>
+<li>Шаблон <em>«Типы автомобилей»</em> — содержит записи с типами автомобилей.</li>
+<li>Шаблон <em>«Заявки на автомобили»</em> — содержит заявки с указанием типа автомобиля.<ul>
+<li>Атрибут <em>«Тип автомобиля»</em><ul>
+<li><strong>Системное имя</strong>: <em>CarType</em></li>
+<li><strong>Тип данных</strong>: <strong>запись</strong></li>
+<li><strong>Связанный шаблон</strong>: <em>Типы автомобилей</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Шаблон <em>«Автомобили»</em> — содержит записи об автомобилях различных типов.<ul>
+<li><strong>Системное имя</strong>: <em>Cars</em></li>
+<li>Атрибут «Тип»<ul>
+<li><strong>Системное имя</strong>: <em>Type</em></li>
+<li><strong>Тип данных</strong>: <strong>запись</strong></li>
+<li><strong>Связанный шаблон</strong>: <em>Типы автомобилей</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><span class="filename">Формула в шаблоне «Заявки на автомобили», возвращающая список записей в шаблоне Cars с таким же значением атрибута Type, как у атрибута CarType в текущей записи</span><code><pre><span></span><code><span class="err">$</span><span class="n">CarType</span><span class="o">&lt;-</span><span class="n">Cars</span><span class="p">:</span><span class="k">Type</span></code> <br/></pre></code></div>
+</div>
+<div class="notice notice-example">
+<h3 class="admonition-title" id="запрос-количества-заявок-на-такой-же-автомобиль-как-в-текущей-заявке">Запрос количества заявок на такой же автомобиль, как в текущей заявке</h3>
+<p><strong>Конфигурация приложения</strong></p>
+<ul>
+<li>Шаблон <em>«Автомобили»</em> — содержит записи о различных автомобилях.<ul>
+<li><strong>Системное имя</strong>: <em>Cars</em></li>
+</ul>
+</li>
+<li>Шаблон <em>«Заявки на автомобили»</em><ul>
+<li><strong>Системное имя</strong>: <em>Requests</em></li>
+<li>Атрибут <em>«Автомобиль»</em><ul>
+<li><strong>Системное имя</strong>: <em>Car</em></li>
+<li><strong>Тип данных</strong>: <strong>запись</strong></li>
+<li><strong>Связанный шаблон</strong>: <em>Автомобили</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><span class="filename">Формула в шаблоне Requests, возвращающая количество записей с таким же значением атрибута Car, как в текущей записи.</span><code><pre><span></span><code><span class="k">COUNT</span><span class="p">(</span><span class="err">$</span><span class="n">Car</span><span class="o">&lt;-</span><span class="n">Requests</span><span class="p">:</span><span class="n">Car</span><span class="p">)</span></code> <br/></pre></code></div>
+</div>
+<h2 class="pageBreakBefore" id="ввод-имён-переменных-в-сценарии">Ввод имён переменных в сценарии</h2>
+<p>При редактировании формул в сценариях предиктивный ввод подсказывает имена локальных переменных в текущем сценарии.</p>
+<ol class="colored_numbers_list">
+<li>Введите символы <code>$$</code>.</li>
+<li>Отобразится список системных и локальных переменных, доступных в текущем сценарии. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4719">Использование переменных в сценарии</a>»</em>.</li>
+<li>Дважды нажмите имя переменной, чтобы вставить его в формулу.</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Список локальных переменных в сценарии" src="/platform/v5.0/business_apps/expressions/expression_editor/formula_editor/img/formula_editor_local_variables.png"/><figcaption class="caption">Список локальных переменных в сценарии</figcaption></p>
+</figure>
+<div class="highlight"><span class="filename">Пример: формула, прибавляющая 1 день к текущей дате</span><code><pre><span></span><code><span class="n">ADDDAYS</span><span class="p">(</span><span class="err">$$</span><span class="n">requestTime</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span></code> <br/></pre></code></div>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5025">Редактор выражений</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/category.php?id=881">Примеры использования формул</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5025#expression_editor_reference">Справочник по функциям</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4780">Атрибут типа «Запись»</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4779">Атрибут типа «Список значений»</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4719">Использование переменных в сценарии</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

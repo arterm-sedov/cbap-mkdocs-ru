@@ -96,6 +96,8 @@ hide:
 
 </div>
 
+{% include-markdown ".snippets/disclaimer_production_deploy.md" %}
+
 {% include-markdown ".snippets/disclaimer_optimization.md" %}
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

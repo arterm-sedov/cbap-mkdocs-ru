@@ -1,0 +1,136 @@
+<h1>Фильтрация списка по активным задачам текущего пользователя с помощью N3: по всем процессам, по конкретному процессу</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4935" kb-tags="N3,Notation 3,RDF,аккаунты,вычисление,задачи,мои задачи,процессы,список задач,таблицы,триплеты,тройка,тройки,фильтры,фильтрация" kb-title="Фильтрация списка по активным задачам текущего пользователя с помощью N3: по всем процессам, по конкретному процессу">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#n3_filter_active_tasks_intro">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#n3_filter_active_tasks_use_case">
+<span class="md-ellipsis">
+      Прикладная задача
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#n3_filter_active_tasks_configure">
+<span class="md-ellipsis">
+      Настройка таблиц
+    </span>
+</a>
+<nav aria-label="Настройка таблиц" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#n3_filter_active_tasks_all">
+<span class="md-ellipsis">
+      Таблица со списком всех активных задач пользователя
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#n3_filter_active_tasks_process">
+<span class="md-ellipsis">
+      Фильтр по задачам конкретного процесса
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#n3_filter_active_tasks_test">
+<span class="md-ellipsis">
+      Тестирование
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="n3_filter_active_tasks_intro">Введение</h2>
+<p>В <strong>Comindware Platform</strong> можно настроить фильтрацию списка задач, чтобы отображать только активные задачи текущего пользователя. Это может быть полезно для создания персональных представлений задач или для мониторинга текущих задач пользователя. Например, можно создать список задач с особыми столбцами на странице «<strong>Мои задачи</strong>» в дополнение к системным спискам задач, которые нельзя настроить.</p>
+<p>Здесь представлены примеры настройки системного фильтра для таблицы со списком задач текущего пользователя по всем процессам и по определённому процессу.</p>
+<p>См. также <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4800#table_configure_tasks_view">Создание таблицы со списком задач</a>»</em>.</p>
+<h2 class="pageBreakBefore" id="n3_filter_active_tasks_use_case">Прикладная задача</h2>
+<p>Имеется два бизнес-процесса: <em>«Оформление заявок»</em> и <em>«Ведение проектов»</em>.</p>
+<p>В обоих процессах имеются пользовательские задачи, назначенные разным исполнителям.</p>
+<p>Требуется добавить на страницу «<strong>Мои задачи</strong>» две таблицы для отображения:</p>
+<ul>
+<li><a class="mkdocs_imported_link" href="#n3_filter_active_tasks_all">всех активных задач</a> текущего пользователя по всем процессам;</li>
+<li>активных задач текущего пользователя <a class="mkdocs_imported_link" href="#n3_filter_active_tasks_process">в рамках конкретного процесса</a>.</li>
+</ul>
+<p>В таблицах должны быть столбцы с данными заявок и проектов, связанных с задачами, а также не требуется отображать стандартный столбец <em>«Исполнитель»</em>, так как он всегда указывает текущего пользователя. Этого нельзя достичь с помощью системных списков активных и завершённых задач.</p>
+<h2 class="pageBreakBefore" id="n3_filter_active_tasks_configure">Настройка таблиц</h2>
+<h3 id="n3_filter_active_tasks_all">Таблица со списком всех активных задач пользователя</h3>
+<ol class="colored_numbers_list">
+<li>В любом из шаблонов процессов создайте <strong>таблицу задач</strong> <em>«Задачи по всем процессам»</em>.</li>
+<li>Добавьте в таблицу необходимые столбцы.</li>
+<li>
+<p>В свойствах таблицы установите следующий <strong>системный фильтр</strong> на языке <strong>N3</strong>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы</span></code> <br/><code><span class="c"># с логикой, статусами задач, аккаунтами и ролями</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmw:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">taskStatus:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/taskStatus#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">account:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/account#&gt;</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">role:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/role#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Получаем аккаунт текущего пользователя из контекста безопасности.</span></code> <br/><code>    <span class="nn">cmw</span><span class="p">:</span><span class="nt">securityContext</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">currentUser</span> <span class="err">?currentUser</span><span class="p">.</span></code> <br/><code>    <span class="c"># Помещаем массив всех задач в переменную ?item</span></code> <br/><code>    <span class="c"># Если выражение используется в таблице задач процесса, </span></code> <br/><code>    <span class="c"># то эта строка не требуется, т. к. контекст уже будет задачами.</span></code> <br/><code>    <span class="err">?item</span> <span class="kt">a</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">UserTask</span><span class="p">.</span></code> <br/><code>    <span class="c"># Начинаем цикл по массиву задач.</span></code> <br/><code>    <span class="c"># Получаем активные задачи.</span></code> <br/><code>    <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">taskStatus</span> <span class="nn">taskStatus</span><span class="p">:</span><span class="nt">inProgress</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получаем роли текущего пользователя.</span></code> <br/><code>    <span class="err">?roles</span> <span class="nn">role</span><span class="p">:</span><span class="nt">roleMembers</span> <span class="err">?currentUser</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получаем группы, в которые входит пользователь.</span></code> <br/><code>    <span class="err">?currentUser</span> <span class="nn">account</span><span class="p">:</span><span class="nt">userGroupMembership</span> <span class="err">?groups</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получаем роли, в которые входят группы пользователя.</span></code> <br/><code>    <span class="err">?roleGroups</span> <span class="nn">role</span><span class="p">:</span><span class="nt">roleMembers</span> <span class="err">?groups</span><span class="p">.</span></code> <br/><code>    <span class="c"># Проверяем, является ли текущий пользователь</span></code> <br/><code>    <span class="c"># фактическим или возможным исполнителем задачи.</span></code> <br/><code>    <span class="c"># Проверяем различные варианты назначения задачи.</span></code> <br/><code>    <span class="err">or</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Проверяем, назначена ли задача на текущего пользователя.</span></code> <br/><code>        <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">assignee</span> <span class="err">?currentUser</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">or</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Проверяем, является ли пользователь возможным исполнителем.</span></code> <br/><code>        <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">possibleAssignee</span> <span class="err">?currentUser</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">or</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Проверяем, назначена ли задача на роль пользователя.</span></code> <br/><code>        <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">assignee</span> <span class="err">?roles</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">or</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Проверяем, является ли роль возможным исполнителем.</span></code> <br/><code>        <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">possibleAssignee</span> <span class="err">?roles</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">or</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Проверяем, назначена ли задача на группу пользователя.</span></code> <br/><code>        <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">assignee</span> <span class="err">?roleGroups</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">or</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Проверяем, является ли группа возможным исполнителем.</span></code> <br/><code>        <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">possibleAssignee</span> <span class="err">?roleGroups</span><span class="p">.</span></code> <br/><code>    <span class="p">}.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Добавьте таблицу <em>«Задачи по всем процессам»</em> на страницу «<strong>Мои задачи</strong>». См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4800#table_configure_tasks_view">Создание таблицы со списком задач</a>»</em>.</p>
+</li>
+</ol>
+<h3 class="pageBreakBefore" id="n3_filter_active_tasks_process">Фильтр по задачам конкретного процесса</h3>
+<p>Чтобы получить в таблице список всех активных задач, где текущий пользователь является исполнителем (а также возможным исполнителем, если задача назначена на нескольких пользователей) по конкретному процессу, используйте следующее выражение в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4800#table_configure_template"><strong>системном фильтре таблицы</strong></a>:</p>
+<ol class="colored_numbers_list">
+<li>В шаблоне процесса <em>«Ведение проектов»</em> создайте <strong>таблицу задач</strong> <em>«Задачи по проектам»</em>.</li>
+<li>Добавьте в таблицу необходимые столбцы.</li>
+<li>
+<p>В свойствах таблицы установите следующий <strong>системный фильтр</strong> на языке <strong>N3</strong>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы с логикой, задачами,</span></code> <br/><code><span class="c"># статусами задач, объектами, аккаунтами и ролями</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmw:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">taskStatus:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/taskStatus#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">account:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/account#&gt;</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">role:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/role#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Получаем шаблон процесса по его системному имени</span></code> <br/><code>    <span class="err">?process</span> <span class="nn">object</span><span class="p">:</span><span class="nt">alias</span> <span class="s">"СистемноеИмяШаблонаПроцесса"</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получаем аккаунт текущего пользователя из контекста безопасности.</span></code> <br/><code>    <span class="nn">cmw</span><span class="p">:</span><span class="nt">securityContext</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">currentUser</span> <span class="err">?currentUser</span><span class="p">.</span></code> <br/><code>    <span class="c"># Помещаем массив всех задач в переменную ?item</span></code> <br/><code>    <span class="c"># Если выражение используется в таблице задач процесса, </span></code> <br/><code>    <span class="c"># то эта строка не требуется, т. к. контекст уже будет задачей.</span></code> <br/><code>    <span class="err">?item</span> <span class="kt">a</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">UserTask</span><span class="p">.</span></code> <br/><code>    <span class="c"># Начинаем цикл по массиву задач</span></code> <br/><code>    <span class="c"># Фильтруем задачи по конкретному процессу.</span></code> <br/><code>    <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">container</span> <span class="err">?process</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получаем активные задачи.</span></code> <br/><code>    <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">taskStatus</span> <span class="nn">taskStatus</span><span class="p">:</span><span class="nt">inProgress</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получаем роли текущего пользователя.</span></code> <br/><code>    <span class="err">?roles</span> <span class="nn">role</span><span class="p">:</span><span class="nt">roleMembers</span> <span class="err">?currentUser</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получаем группы, в которые входит пользователь.</span></code> <br/><code>    <span class="err">?currentUser</span> <span class="nn">account</span><span class="p">:</span><span class="nt">userGroupMembership</span> <span class="err">?groups</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получаем роли, в которые входят группы пользователя.</span></code> <br/><code>    <span class="err">?roleGroups</span> <span class="nn">role</span><span class="p">:</span><span class="nt">roleMembers</span> <span class="err">?groups</span><span class="p">.</span></code> <br/><code>    <span class="c"># Проверяем, является ли текущий пользователь</span></code> <br/><code>    <span class="c"># фактическим или возможным исполнителем задачи.</span></code> <br/><code>    <span class="c"># Проверяем различные варианты назначения задачи.</span></code> <br/><code>    <span class="err">or</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Проверяем, назначена ли задача на текущего пользователя.</span></code> <br/><code>        <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">assignee</span> <span class="err">?currentUser</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">or</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Проверяем, является ли пользователь возможным исполнителем.</span></code> <br/><code>        <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">possibleAssignee</span> <span class="err">?currentUser</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">or</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Проверяем, назначена ли задача на роль пользователя.</span></code> <br/><code>        <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">assignee</span> <span class="err">?roles</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">or</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Проверяем, является ли роль возможным исполнителем.</span></code> <br/><code>        <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">possibleAssignee</span> <span class="err">?roles</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">or</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Проверяем, назначена ли задача на группу пользователя.</span></code> <br/><code>        <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">assignee</span> <span class="err">?roleGroups</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">or</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Проверяем, является ли группа возможным исполнителем.</span></code> <br/><code>        <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">possibleAssignee</span> <span class="err">?roleGroups</span><span class="p">.</span></code> <br/><code>    <span class="p">}.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Добавьте таблицу <em>«Задачи по проектам»</em> на страницу «<strong>Мои задачи</strong>».</p>
+</li>
+</ol>
+<h2 id="n3_filter_active_tasks_test">Тестирование</h2>
+<ol class="colored_numbers_list">
+<li>Запустите процессы <em>«Оформление заявок»</em> и <em>«Ведение проектов»</em>.</li>
+<li>Откройте страницу «<strong>Мои задачи</strong>».</li>
+<li>Рядом со вкладками <em>«Активные»</em> и <em>«Завершённые»</em> должны отображаться вкладки <em>«Задачи по всем процессам»</em> и <em>«Задачи по проектам»</em>.</li>
+<li>Проверьте, что в таблицах отображаются соответствующие задачи.</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4800">Таблицы. Определения, настройка, клонирование, удаление</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4800#table_configure_tasks_view">Создание таблицы со списком задач</a></li>
+<li><a class="autorefs autorefs-internal mkdocs_imported_link" href="n3_calculate_active_task_accounts.html#example_n3_calculate_active_task_accounts" title="Аккаунты и задачи. Вычисление пользователей с активными задачами с помощью N3">Вычисление пользователей с активными задачами</a></li>
+<li><a class="autorefs autorefs-internal mkdocs_imported_link" href="n3_calculate_active_task_assignee.html#n3_calculate_active_task_assignee" title="Вычисление исполнителя активной задачи с помощью N3">Вычисление исполнителя активной задачи</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4905">Периодические напоминания об открытых задачах</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

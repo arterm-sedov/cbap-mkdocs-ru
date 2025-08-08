@@ -1,0 +1,75 @@
+<h1>Combine Several Values Into a Record Title</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1gtllkjns0">Use Case</a></li>
+<li><a href="#mcetoc_1gto5b2fh1">Instructions</a>
+<ul>
+<li><a href="#mcetoc_1gtntho192">Formula Syntax</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="mcetoc_1gtllkjns0">Use Case</h2>
+<p>You can calculate an attribute value ​​from several values and use it as the record title. This can be useful for more convenient searching, composing user-friendly titles for records, tasks and reference fields, and other purposes.</p>
+<p>In this article, we will create the <em>Case name </em>attribute to combine three other attribute values and use it as a title for the records and record links.</p>
+<h2 id="mcetoc_1gto5b2fh1">Instructions</h2>
+<ol class="colored_numbers_list">
+<li>Create a <strong>Text</strong> attribute <em>Case name</em>.</li>
+<li>Check <strong><em>Use as record title</em></strong> and <strong><em>Calculate using an expression</em></strong><strong>.</strong></li>
+<li>In the <strong><em>Calculated value</em></strong>, enter the <a href="#mcetoc_1gtntho192"><strong>formula</strong></a>:
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code"><code>FORMAT("{0} / {1} / {2}",LIST($CityRef-&gt;Name,$Applicant,$StatusRef-&gt;Name))</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li>Save the attribute.</li>
+<li>Create or open a record and fill in the fields for the attributes passed to the <code>LIST()</code> function in Step 3.</li>
+<li>The calculated composite value of the <em>Case name</em> attribute should appear in the form header.</li>
+</ol>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="A form heading showing the calculated attribute value" class="img-responsive" height="198" src="https://kb.cmwlab.com/assets/img_64341fdbbdd83.png" width="1005"/></p>
+<p class="caption" style="font-size: 15px !important;">A form heading showing the calculated attribute value</p>
+<h3 id="mcetoc_1gtntho192" style="text-align: left;">Formula Syntax</h3>
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%; height: 256px;">
+<tbody>
+<tr style="height: 40px; text-align: left;">
+<th style="height: 40px; width: 20%;">Element</th>
+<th style="width: 50%; height: 40px;">Description</th>
+</tr>
+<tr style="height: 40px; text-align: left;">
+<td style="height: 40px; width: 20%;"><code>FORMAT(originalString, placeholderArray)</code></td>
+<td style="height: 40px;">This function takes a string and array as arguments, replaces the placeholders in the string with the array values, and returns the resulting string. </td>
+</tr>
+<tr style="text-align: left;">
+<td style="height: 79px; width: 20%;"><code>LIST(argument1, argument2, ... argumentN)</code></td>
+<td style="height: 79px;">
+<p>This function takes several values (e.g., <em>City name, Applicant's name</em>, and <em>Case status</em>) and returns them as an array.</p>
+</td>
+</tr>
+<tr style="height: 41px;">
+<td style="text-align: left; height: 41px; width: 20%;"><code>"{0} / {1} / {2}"</code></td>
+<td style="text-align: left; height: 41px;">The string to parse. In addition to placeholders, it may contain arbitrary text, numbers, symbols, etc.</td>
+</tr>
+<tr style="height: 56px;">
+<td style="text-align: left; height: 56px; width: 20%;"><code>{0}, {1}, ... {N}</code></td>
+<td style="text-align: left; height: 56px;">
+<p>These placeholders are replaced with the array values returned by the <code>LIST()</code> function. The placeholders are numbered from 0.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="notice notice-info">
+<p class="admonition-title">Note</p>
+<ul style="letter-spacing: 0.2px;">
+<li style="text-align: left;">When you pass a <span style="font-weight: 700 !important;">Date &amp; time</span> or <span style="font-weight: 700 !important;">Duration </span>attribute value to the <code style="font-size: 13.125px;">FORMAT()</code> function, it ignores the configured attribute display format. For example, any <span style="font-weight: 700 !important;">Date &amp; time</span> attribute value is output as <em>MM/DD/YY HH:MM:SS</em>.</li>
+<li style="text-align: left;">You can pass any values to the <code style="font-size: 13.125px;">LIST()</code> function, not necessarily attribute references. For example, you could pass the current user's full name as a second argument:<br/><code style="font-size: 13.125px;">LIST($CityName,<span style="font-weight: 700 !important;">USER()-&gt;fullName</span>,$StatusName)</code>.</li>
+</ul>
+</div>

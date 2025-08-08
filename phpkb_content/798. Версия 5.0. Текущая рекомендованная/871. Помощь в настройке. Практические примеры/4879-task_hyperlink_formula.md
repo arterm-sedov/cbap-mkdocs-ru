@@ -11,19 +11,42 @@ kbId: 4879
 
 - Создайте текстовый атрибут «Номер задачи», сделайте его вычисляемым. В поле «Вычисляемое выражение» вставьте следующее выражение на языке N3:
 
-| @prefix cmw: <http://comindware.com/logics#>. @prefix process: <http://comindware.com/ontology/process#>. @prefix string: <http://www.w3.org/2000/10/swap/string#>. @prefix configuration: <http://comindware.com/ontology/configuration#>. {     once           {         ?processObject process:businessObject ?item.         ?taskId cmw:parent ?processObject.         ?taskId a cmw:UserTask.         ("#task/{0}" ?taskId) string:format ?tempLink2.           ?configObject a configuration:Configuration.         ?configObject configuration:baseUri ?addressLink.         ("{0}" ?addressLink) string:format ?tempLink1.            (?tempLink1 "" ?tempLink2) string:concatenation ?resultLink.         ?resultLink == ?value.     } } |
-| --- |
+```
+
+@prefix cmw: <http://comindware.com/logics#>.
+@prefix process: <http://comindware.com/ontology/process#>.
+@prefix string: <http://www.w3.org/2000/10/swap/string#>.
+@prefix configuration: <http://comindware.com/ontology/configuration#>.
+{
+    once
+          {
+        ?processObject process:businessObject ?item.
+        ?taskId cmw:parent ?processObject.
+        ?taskId a cmw:UserTask.
+        ("#task/{0}" ?taskId) string:format ?tempLink2.  
+        ?configObject a configuration:Configuration.
+        ?configObject configuration:baseUri ?addressLink.
+        ("{0}" ?addressLink) string:format ?tempLink1.   
+        (?tempLink1 "" ?tempLink2) string:concatenation ?resultLink.
+        ?resultLink == ?value.
+    }
+}
+
+```
 
 - Создайте второй текстовый атрибут «ИД задачи», сделайте его вычисляемым. В поле «Вычисляемое выражение» вставьте следующую формулу:
 
-| SUBSTRING($Nomerzadachi, 28) |
-| --- |
+```
+SUBSTRING($Nomerzadachi, 28)
+```
 
 **Примечание :** позиция (число) зависит от длины вашего доменного имени.
+
 **2.** В настройках передачи ссылки на задачу введите следующее выражение:
 
-| FORMAT("<p><a href='https://comindware.com/#task/{0}'>Ссылка на задачу</a></p>",LIST($IDzadachi)) |
-| --- |
+```
+FORMAT("<p><a href='https://comindware.com/#task/{0}'>Ссылка на задачу</a></p>",LIST($IDzadachi))
+```
 
 **где:**
 

@@ -1,0 +1,135 @@
+<h1>Максимальный размер загружаемых файлов. Настройка для экземпляра ПО</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr">
+<div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#расположение-загруженных-файлов"> <span class="md-ellipsis"> Расположение загруженных файлов </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-лимита-на-объем-загружаемых-файлов"> <span class="md-ellipsis"> Настройка лимита на объем загружаемых файлов </span> </a><nav aria-label="Настройка лимита на объем загружаемых файлов" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#изменение-лимита-в-linux"> <span class="md-ellipsis"> Изменение лимита в Linux </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#изменение-лимита-в-windows"> <span class="md-ellipsis"> Изменение лимита в Windows </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Здесь представлены инструкции по настройке максимально допустимого размера загружаемых файлов для экземпляра ПО <strong>Comindware Platform</strong>.</p>
+<p>К загружаемым файлам относятся документы и изображения, прикреплённые к атрибутам типов «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4782"><strong>Документ</strong></a>», «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4771"><strong>Изображение</strong></a>» и «<strong>Чертёж</strong>», изображения загруженные на страницах «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4708"><strong>Темы</strong></a>» и «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4707"><strong>Дизайн страниц входа и регистрации</strong></a>», а также <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4653">изображения <strong>аккаунтов</strong></a>.</p>
+<h2 id="расположение-загруженных-файлов">Расположение загруженных файлов</h2>
+<p>По умолчанию файлы, загружаемые конечными пользователями и формируемые автоматически, хранятся в следующем каталоге:</p>
+<ul>
+<li><code>/var/lib/comindware/&lt;instanceName&gt;/Streams</code> — Linux</li>
+<li><code>C:\ProgramData\Comindware\</code> <code>Instances\&lt;instanceName&gt;\Streams</code> — Windows</li>
+</ul>
+<p><code>/var/lib/comindware/&lt;instanceName&gt;/Streams</code></p>
+<p><code>C:\ProgramData\Comindware\</code> <code>Instances\&lt;instanceName&gt;\Streams</code></p>
+<p>Здесь и далее <code>&lt;instanceName&gt;</code> — имя экземпляра ПО.</p>
+<p>Подробные сведения о расположении загружаемых файлов см. в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое папок экземпляра ПО</a>».</em></p>
+<h2 class="pageBreakBefore" id="настройка-лимита-на-объем-загружаемых-файлов">Настройка лимита на объем загружаемых файлов</h2>
+<p>При развёртывании экземпляра ПО в конфигурации экземпляра ПО и конфигурации сервера NGINX по умолчанию устанавливается максимальный размер передаваемых данных в форме.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Логика работы лимита</p>
+<ul>
+<li>В файле конфигурации <code>Web.config</code> (в Linux и Windows) задаются два лимита:
+<ul>
+<li><code>httpRuntime maxRequestLength</code> — максимальный размер запроса для .NET;</li>
+<li><code>requestLimits maxAllowedContentLength</code> — максимальный размер запроса для сервера IIS.</li>
+</ul>
+</li>
+<li>В файле конфигурации NGINX (в Linux) задаётся лимит <code>client_max_body_size</code> — максимальный размер запроса.</li>
+<li>Применяется меньший из трёх лимитов.</li>
+<li>Если, например, установлен лимит в 300 МБ:
+<ul>
+<li>На форме имеется три поля типа «<strong>Документ</strong>» и несколько полей любых типов.
+<ul>
+<li>К каждому полю типа «<strong>Документ</strong>» можно прикрепить файл объёмом 99 МБ (то есть три файла суммарным размером 297 МБ) и ввести в другие поля формы ещё 3 МБ данных.</li>
+<li>Можно прикрепить к одному полю типа «<strong>Документ</strong>» файл объёмом 299 МБ и ввести в другие поля формы ещё 1 МБ данных.</li>
+<li>Можно прикрепить к одному полю типа «<strong>Документ</strong>» файл объёмом 300 МБ.</li>
+<li>Нельзя прикрепить к полям типа «<strong>Документ</strong>» три файла по 110 МБ.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h3 class="pageBreakBefore" id="изменение-лимита-в-linux">Изменение лимита в Linux</h3>
+<p>Для изменения лимита на размер загружаемых файлов в ОС Linux необходимо отредактировать конфигурацию экземпляра ПО, а также конфигурацию NGINX.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите в режим суперпользователя <code>root</code>:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>sudo -s</code></pre>
+</div>
+<p>или</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>su<span class="w"> </span>-</code></pre>
+</div>
+</li>
+<li>
+<p class="pageBreakBefore">Откройте для редактирования файл <code>/var/www/comindware&lt;instanceName&gt;/Web.config</code>:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>sudo nano /var/www/comindware&lt;instanceName&gt;/Web.config</code></pre>
+</div>
+</li>
+<li>
+<p>Установите лимит (например, 1 ГБ) с помощью директив <code>httpRuntime maxRequestLength</code> (в килобайтах) и <code>requestLimits maxAllowedContentLength</code> (в байтах):</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>&lt;httpRuntime maxRequestLength="1048576" maxUrlLength="4096" requestValidationMode="2.0" shutdownTimeout="300" executionTimeout="3000" targetFramework="4.8" enableVersionHeader="false" /&gt;</code> <br/><code></code> <br/><code>...</code> <br/><code></code> <br/><code>&lt;requestLimits maxAllowedContentLength="1073741824" /&gt;</code></pre>
+</div>
+</li>
+<li>
+<p>Откройте для редактирования файл <code>/etc/nginx/sites-available/comindware&lt;instanceName&gt;</code>:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>sudo nano /etc/nginx/sites-available/comindware&lt;instanceName&gt;</code></pre>
+</div>
+</li>
+<li>
+<p>Откройте для редактирования файл <code>/etc/nginx/sites-available/comindware&lt;instanceName&gt;</code>:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>sudo nano /etc/nginx/sites-available/comindware&lt;instanceName&gt;</code></pre>
+</div>
+</li>
+<li>
+<p>Установите лимит в мегабайтах с помощью директивы <code>client_max_body_size</code>:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>client_max_body_size 1024m;</code></pre>
+</div>
+</li>
+<li>
+<p>Перезагрузите экземпляр ПО и NGINX:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>systemctl restart nginx</code> <br/><code>systemctl restart comindware&lt;instanceName&gt;</code></pre>
+</div>
+</li>
+</ol>
+<h3 id="изменение-лимита-в-windows">Изменение лимита в Windows</h3>
+<p>Для изменения лимита на размер загружаемых файлов в ОС Windows необходимо отредактировать конфигурацию экземпляра ПО.</p>
+<ol class="colored_numbers_list">
+<li>Откройте для редактирования файл <code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Config\Web.config</code>.</li>
+<li>
+<p>Установите лимит (например, 1 ГБ) с помощью директив <code>httpRuntime maxRequestLength</code> (в килобайтах) и <code>requestLimits maxAllowedContentLength</code> (в байтах):</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>&lt;httpRuntime maxRequestLength="1048576" maxUrlLength="4096" requestValidationMode="2.0" <br/>shutdownTimeout="300" executionTimeout="3000" targetFramework="4.8" enableVersionHeader="false" /&gt;</code> <br/><code>...</code> <br/><code>&lt;requestLimits maxAllowedContentLength="1073741824" /&gt;</code></pre>
+</div>
+</li>
+<li>
+<p>Перезагрузите экземпляр ПО с помощью Утилиты администрирования (либо с помощью <em>Диспетчера служб IIS</em> перезагрузите сервер приложений и сайт экземпляра ПО).</p>
+</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое папок экземпляра ПО</a></em></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>
+</div>

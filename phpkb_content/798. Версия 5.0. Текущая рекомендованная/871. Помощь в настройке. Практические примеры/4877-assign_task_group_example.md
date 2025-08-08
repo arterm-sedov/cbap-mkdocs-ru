@@ -40,54 +40,56 @@ kbId: 4877
 2. Создайте **шаблон записи** *«Справочник групп»*.
 3. Создайте атрибут *«Название группы»* типа «**Текст**» и установите у него флажок **«Использовать как заголовок записей»**.
 4. Создайте несколько записей и в поле *«Название группы»* введите названия групп, указанные на странице «**Группы**», с точностью до прописных и строчных букв.
-5. В шаблоне записи *«Заявка»* создайте следующие атрибуты:
+5. В шаблоне записи *«Заявка»* создайте следующие атрибуты:
 
-| Название | Тип данных | Свойства |
-| --- | --- | --- |
-| *Группа исполнителей* | **Запись** | **Связанный шаблон:** *Справочник групп* |
-| *Исполнители задачи* | **Аккаунт** | **Хранить несколько значений:** флажок установлен **Вычислять автоматически:** флажок установлен **Вычисляемое выражение: N3** |
-6. В поле **«Вычисляемое выражение»** атрибута *«Исполнители задачи»* вставьте следующее выражение на **N3**:
+   | Название | Тип данных | Свойства |
+   | --- | --- | --- |
+   | *Группа исполнителей* | **Запись** | **Связанный шаблон:** *Справочник групп* |
+   | *Исполнители задачи* | **Аккаунт** | **Хранить несколько значений:** флажок установлен  **Вычислять автоматически:** флажок установлен  **Вычисляемое выражение: N3** |
+6. В поле **«Вычисляемое выражение»** атрибута *«Исполнители задачи»* вставьте следующее выражение на **N3**:
 
-```
-# Импортируем функции для работы с записями, аккаунтами и базой данных
-@prefix object: <http://comindware.com/ontology/object#>.
-@prefix account: <http://comindware.com/ontology/account#>.
-@prefix cmw: <http://comindware.com/logics#>.
-{
-# Находим атрибут Nazvaniegruppy (Название группы) в шаблоне Spravochnikgrupp (Справочник групп)
-# и помещаем его в переменную nazvaniegruppyAttribute
-("Spravochnikgrupp" "Nazvaniegruppy") object:findProperty ?nazvaniegruppyAttribute.
+   ```
+   # Импортируем функции для работы с записями, аккаунтами и базой данных
+   @prefix object: <http://comindware.com/ontology/object#>.
+   @prefix account: <http://comindware.com/ontology/account#>.
+   @prefix cmw: <http://comindware.com/logics#>.
+   {
+   # Находим атрибут Nazvaniegruppy (Название группы) в шаблоне Spravochnikgrupp (Справочник групп)
+   # и помещаем его в переменную nazvaniegruppyAttribute
+   ("Spravochnikgrupp" "Nazvaniegruppy") object:findProperty ?nazvaniegruppyAttribute.
 
-# Находим атрибут Zayavka (Заявка) в шаблоне Gruppaispolniteley (Группа исполнителей)
-# и помещаем его в переменную gruppaispolniteleyAttribute
-("Zayavka" "Gruppaispolniteley") object:findProperty ?gruppaispolniteleyAttribute.
+   # Находим атрибут Zayavka (Заявка) в шаблоне Gruppaispolniteley (Группа исполнителей)
+   # и помещаем его в переменную gruppaispolniteleyAttribute
+   ("Gruppaispolniteley" "Zayavka") object:findProperty ?gruppaispolniteleyAttribute.
 
-# Помещаем значение атрибута Gruppaispolniteley, то есть группу,
-# выбранную в текущей заявке item,
-# в переменную gruppaispolniteleyValue,
-?item ?gruppaispolniteleyAttribute ?gruppaispolniteleyValue.
+   # Помещаем значение атрибута Gruppaispolniteley, то есть группу,
+   # выбранную в текущей заявке item,
+   # в переменную gruppaispolniteleyValue,
+   ?item ?gruppaispolniteleyAttribute ?gruppaispolniteleyValue.
 
-# Находим название выбранной группы шаблоне Spravochnikgrupp,
-# то есть значение атрибута Nazvaniegruppy,
-# и помещаем его в переменную nazvaniegruppy
-?gruppaispolniteleyValue ?nazvaniegruppyAttribute ?nazvaniegruppy.
+   # Находим название выбранной группы шаблоне Spravochnikgrupp,
+   # то есть значение атрибута Nazvaniegruppy,
+   # и помещаем его в переменную nazvaniegruppy
+   ?gruppaispolniteleyValue ?nazvaniegruppyAttribute ?nazvaniegruppy.
 
-# Находим группу по названию из переменной nazvaniegruppy
-# и помещаем группу в переменную gruppaispolniteley
-?gruppaispolniteley account:groupName ?nazvaniegruppy.
+   # Находим группу по названию из переменной nazvaniegruppy
+   # и помещаем группу в переменную gruppaispolniteley
+   ?gruppaispolniteley account:groupName ?nazvaniegruppy.
 
-# Находим все аккаунты в группе из переменной gruppaispolniteley
-# и помещаем их в переменную value,
-# то есть заполняем значение атрибута «Исполнители задачи»
-?gruppaispolniteley account:groupUsers ?value.
-}
-```
+   # Находим все аккаунты в группе из переменной gruppaispolniteley
+   # и помещаем их в переменную value,
+   # то есть заполняем значение атрибута «Исполнители задачи»
+   ?gruppaispolniteley account:groupUsers ?value.
+   }
+   ```
 7. Создайте процесс *«Оформление заявок»* и добавьте на диаграмму **пользовательскую задачу** *«Обработать заявку»*.
 8. На **стартовую форму** процесса добавьте атрибуты *«Группа исполнителей»* и *«Исполнители задачи»* шаблона записи *«Заявка»*.
 9. В свойствах пользовательской задачи *«Обработать заявку»* выберите в поле «**Исполнители**» **атрибут** *«Исполнители задачи»*.
-10. Опубликуйте диаграмму процесса *«Оформление заявок»*.
+10. Опубликуйте диаграмму процесса *«Оформление заявок»*.
 
-_![Диаграмма процесса «Оформление заявок»](https://kb.comindware.ru/assets/img_66867a9324c0c.png)_
+    ![Диаграмма процесса «Оформление заявок»](https://kb.comindware.ru/assets/img_66867a9324c0c.png)
+
+    Диаграмма процесса «Оформление заявок»
 
 ## Тестирование
 

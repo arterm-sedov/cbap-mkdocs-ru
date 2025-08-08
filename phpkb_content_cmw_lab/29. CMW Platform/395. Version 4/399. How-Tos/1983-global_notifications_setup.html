@@ -1,0 +1,63 @@
+<h1>Setting up global notifications</h1><p>Global notifications are global messages, or alerts for all users of the system (for example, a notification about maintenance works). Global notifications are displayed for all logged users in the «Notifications» tab, as well as on the login page, for a specified period of time.</p>
+<p>To configure global system notifications, follow these steps:</p>
+<p><strong>1.</strong> Go to the «<strong>Administration</strong>» area, then — to «<em><strong>Global configuration</strong></em>». Tick the «<em><strong>Enable global notifications listening</strong></em>» checkbox.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="" class="img-responsive" height="832" src="https://kb.cmwlab.com/assets/2021-12-27_12h49_25.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">«Global configuration» section</p>
+</div>
+<p><strong>2.</strong> Create a process for sending global notifications.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="" class="img-responsive" height="676" src="https://kb.cmwlab.com/assets/2021-12-27_12h51_07.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Process diagram</p>
+</div>
+<p><strong>3.</strong> Go to the settings for the send message event, then — to «<em><strong>Advanced properties</strong></em>» tab. Select «<em><strong>Base notification</strong></em>» in «<em><strong>Destination</strong></em>» and specify the communication route. If you don’t have a preconfigured base notification communication route, click the «<strong><em>Add</em></strong>» button and create a new route.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="" class="img-responsive" height="557" src="https://kb.cmwlab.com/assets/2021-12-27_12h53_01.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Configuring communication route for send message event</p>
+</div>
+<p><strong>4.</strong> After saving the send message event settings, publish the process diagram.</p>
+<p><strong>5.</strong> To trigger the global notification, create a process instance for sending notifications:</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="" class="img-responsive" height="676" src="https://kb.cmwlab.com/assets/2021-12-27_12h57_08.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;"> Global notification on the user interface</p>
+</div>
+<p>Global notification will be also displayed on the login page.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="" class="img-responsive" height="676" src="https://kb.cmwlab.com/assets/2021-12-27_13h00_47.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Global notification on the login page</p>
+</div>
+<p> </p>
+<p><strong>Entering text when triggering a notification</strong></p>
+<p>For convenience, you can add the possibility to enter a notification text when the process starts.</p>
+<p><strong>1.</strong> To do this, add a form for the start event of the notification sending process.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="" class="img-responsive" height="676" src="https://kb.cmwlab.com/assets/2021-12-27_13h04_46.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Adding a start form</p>
+</div>
+<p><strong>2.</strong> Create an attribute with the notification text and add it to the form.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="" class="img-responsive" height="676" src="https://kb.cmwlab.com/assets/2021-12-27_13h06_48.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Configuring the start form</p>
+</div>
+<p><strong>3.</strong> Now edit the communication route to be able to send the message text.</p>
+<p>Go to the settings of the communication route for base notification. In the «<em><strong>Message Attributes</strong></em>» tab, add a text attribute:</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="" class="img-responsive" height="427" src="https://kb.cmwlab.com/assets/2021-12-27_13h11_09.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Adding attributes to the communication route</p>
+</div>
+<p><strong>4.</strong> Then go to the «<em><strong>Message Properties</strong></em>» tab and in the «<em><strong>Message text</strong></em>» field add the system name of the created attribute in curly braces. For convenience, you can copy the attribute name from the left pane:</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="" class="img-responsive" height="676" src="https://kb.cmwlab.com/assets/2021-12-27_13h14_07.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Message properties configuration</p>
+</div>
+<p><strong>5.</strong> Then go back to the process diagram and open the settings for the send message event, go to the «<em><strong>Message Data</strong></em>» tab and configure the correspondence between the communication route attribute and the attribute that we created earlier:</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="" class="img-responsive" height="366" src="https://kb.cmwlab.com/assets/2021-12-27_13h17_03.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Data mapping</p>
+</div>
+<p><strong>6.</strong> Save the settings and publish the process diagram.</p>
+<p>Now, when starting the process, you will need to enter the notification message.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="" class="img-responsive" height="394" src="https://kb.cmwlab.com/assets/2021-12-27_13h18_31.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Entering notification message</p>
+</div>

@@ -1,0 +1,394 @@
+<h1>Lesson 2 &amp;mdash; My First Data Registry</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1hdo8uc441">Introduction</a></li>
+<li><a href="#mcetoc_1hdo9oon13">Definitions</a></li>
+<li><a href="#mcetoc_1hdo96emi2">Create Application</a></li>
+<li><a href="#mcetoc_1gsomt0j90">Create Record Template</a></li>
+<li><a href="#mcetoc_1gsonrnd80">Add Record Template Attributes</a></li>
+<li><a href="#mcetoc_1gsooucfs1">Create a Form</a></li>
+<li><a href="#mcetoc_1gsor0p0t2">Test: Enter and Edit the Data</a></li>
+<li><a href="#mcetoc_1gsos8kkk0">Finalize the Form: Add the Secretary's Approval Status</a></li>
+<li><a href="#mcetoc_1gsostvek1">Configure a Table</a></li>
+<li><a href="#mcetoc_1gsotop9o0">Search and Filter Records in the Table</a>
+<ul>
+<li><a href="#mcetoc_1he08u4l11">Configure Sorting, Filtering, and Grouping for the Current User</a>
+<ul>
+<li><a href="#mcetoc_1hfeg4kot4">Sort Records</a></li>
+<li><a href="#mcetoc_1hfeg5ajs5">Filter Records</a></li>
+<li><a href="#mcetoc_1hfefuf2n2">Group Records</a></li>
+<li><a href="#mcetoc_1hfeg0n793">Hide Column</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1he08sd700">Configure Sorting, Grouping, Summarizing, and Filtering for All Users</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gsovah7e1">Results</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1hdo8uc441">Introduction</h2>
+<p>In this lesson, you will create and configure an application, a record template and its attributes, a table with data filters, and a form. Then, you will create and fill the records with some data.</p>
+<p><span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">Estimated time to complete</span>: 15 min</p>
+<p>Prerequisite: complete <samp data-name="aid" data-title="" data-value="1109"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>{Article-ID:1109}</span></samp></p>
+<p><strong><span data-preserver-spaces="true">Note:</span></strong><span data-preserver-spaces="true"> This lesson is for the <strong>CMW Platform</strong> version 4.2.571.0. In other versions, the page and menu appearance may differ from the screenshots.</span></p>
+<h2 id="mcetoc_1hdo9oon13">Definitions</h2>
+<ul>
+<li><strong>Application</strong> — a standalone business solution within the <strong style="letter-spacing: 0.2px;">CMW Platform</strong>.</li>
+<li><strong>Record template </strong>— a data registry in the <strong>CMW Platform </strong>(similar to a relational database table or an Excel sheet).</li>
+<li><strong>Record</strong> — a data entry (consisting of <strong>attributes</strong>) related to a business object.</li>
+<li><strong>Attribute</strong> — the simplest data element related to a business object (similar to a column in a relational DB or Excel): pick-up point (string), count of passengers (number), сar delivery time (date/time), car (link), etc.</li>
+<li><strong>Table </strong>— a list displaying records in rows with attribute values in columns. You can configure table filters to display a subset of records. </li>
+<li><strong>Form </strong>— a page with fields to display and enter the record data.</li>
+</ul>
+<h2 id="mcetoc_1hdo96emi2">Create Application</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Business Requirement</p>
+<p>Throughout the tutorial lessons, we will develop a corporate vehicle booking application.</p>
+<p>We will implement the following vehicle booking process:</p>
+<ol>
+<li>The <em>Initiator</em> submits a vehicle request.</li>
+<li>The <em>Secretary</em> reviews and approves or rejects it.</li>
+<li>If the request is approved:
+<ol style="list-style-type: upper-roman;">
+<li>The <em>Garage manager </em>assigns a vehicle for the trip.</li>
+<li>The <em>Driver </em>completes the trip.</li>
+</ol>
+</li>
+<li>If the request is rejected, the <em>Initiator </em>receives the rejection notification.</li>
+</ol>
+</div>
+<p>Let's create an application to automate corporate vehicle booking. </p>
+<p><strong>1.</strong> Select <strong>System navigation section</strong> – <strong>Applications </strong>in the left navigation pane.</p>
+<p><strong>2.</strong> Click <strong>Create</strong>.</p>
+<figure class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Creating an application" class="img-responsive" height="379" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_1.png" style="letter-spacing: 0.2px; text-align: center;" width="1274"/></p>
+<figcaption class="caption" style="font-size: 15px !important;">Creating an application</figcaption>
+</figure>
+<p><span style="letter-spacing: 0.2px;"><strong>3.</strong> In the <strong>New application</strong> window, enter the application <strong>Name </strong>— </span><em><span style="letter-spacing: 0.2px;">Vehicle </span></em><span style="letter-spacing: 0.2px;"><em>management</em>. The </span><span style="letter-spacing: 0.2px;"><strong>System name</strong> </span><span style="letter-spacing: 0.2px;">is generated automatically from the application <strong>Name</strong>. Change the system name if needed.</span></p>
+<div class="notice notice-success">
+<p class="admonition-title">System Name and Display Name</p>
+<ul>
+<li>The <span style="font-weight: 700 !important;">System name</span> is an entity identifier used in scripts, rules, formulas, and expressions. The system name can include English letters (A–Z, a–z), numbers (0–9), and underscores (_). The system name must not start with a number.</li>
+<li><span style="letter-spacing: 0.2px;">The</span><span style="letter-spacing: 0.2px;"> </span><span style="letter-spacing: 0.2px; font-weight: 700 !important;">Name </span> <span style="letter-spacing: 0.2px;"> or </span><span style="letter-spacing: 0.2px; font-weight: 700 !important;">Display name</span><span style="letter-spacing: 0.2px;"> is used as a human-readable entity descriptor, can include any characters, and should be concise and self-explanatory.</span></li>
+</ul>
+</div>
+<p><strong>4.</strong> Click <strong>Save</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Configuring a new application" class="img-responsive" height="307" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_2.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Configuring a new application</p>
+</div>
+<p><strong>5.</strong> In the application list, double-click your application to open its <strong>Administration </strong>page.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="List of applications" class="img-responsive" height="314" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_3.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">List of applications</p>
+</div>
+<h2 id="mcetoc_1gsomt0j90">Create Record Template</h2>
+<p>Let's define the vehicle request data to store in a record template — the data registry.</p>
+<p><strong>1.</strong> Open the <em>Vehicle management</em> application <strong>Administration</strong> page and select <strong>Templates</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Navigating to the application Templates page" class="img-responsive" height="620" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_4.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Navigating to the application Templates page</p>
+</div>
+<p><strong>2.</strong> Go to the <strong>Record templates</strong> tab.</p>
+<p><strong>3.</strong> Click <strong>Create</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Creating a record template " class="img-responsive" height="386" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_5.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Creating a record template </p>
+</div>
+<p><strong>4.</strong> In the <strong>New template</strong> window, enter the template <strong>Name</strong> — <em>Vehicle requests</em>.</p>
+<p><strong>5.</strong> Make sure the <strong>Template type</strong> is set to <strong>Record template</strong>.</p>
+<p><strong>6.</strong> Click <strong>Create</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Configuring and saving a new record template" class="img-responsive" height="369" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_6.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Configuring a new record template</p>
+</div>
+<h2 id="mcetoc_1gsonrnd80">Add Record Template Attributes</h2>
+<p>Let's add the vehicle request attributes.</p>
+<p><strong>1.</strong> Open the <em>Vehicle Requests </em>template page and go to the <strong>Attributes</strong> tab.</p>
+<p><strong>2.</strong> Click <strong>Create</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Adding an attribute" class="img-responsive" height="461" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_7.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Adding an attribute</p>
+</div>
+<p><strong>3.</strong> In the <strong>New attribute</strong> window, select <strong>Text </strong>as the <strong>data type</strong> and enter the attribute <strong>Name</strong> — <em>Pick-up point</em>. The <strong>System name</strong> is filled in automatically.</p>
+<p><strong>4.</strong> Click <strong>Save</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Configuring a new attribute" class="img-responsive" height="680" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_8.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Configuring a new attribute</p>
+</div>
+<p><span style="letter-spacing: 0.2px;"><strong>5.</strong> The same way as above, create the following attributes:</span></p>
+<ul>
+<li><em>Car delivery time</em>
+<ul>
+<li><strong>Data type</strong>: <strong>Date &amp; time</strong></li>
+</ul>
+</li>
+<li><em>Route </em>
+<ul>
+<li><strong>Data type</strong>: <strong>Text</strong></li>
+</ul>
+</li>
+<li><em>Passengers</em>
+<ul>
+<li><strong>Data type: Number</strong></li>
+</ul>
+</li>
+</ul>
+<div class="notice notice-success">
+<p class="admonition-title">Attribute Types</p>
+<ul style="letter-spacing: 0.2px;">
+<li><strong>Text </strong>— string value. Supported display formats:
+<ul style="list-style-type: circle;">
+<li><span style="font-weight: 700 !important;">Plain text</span> — no formatting.</li>
+<li><strong>Marked text</strong> — basic formatting (bold, italic, lists).</li>
+<li><strong>HTML text</strong> — advanced HTML formatting.</li>
+<li><strong>Email address</strong>, <strong>Custom mask</strong> — the attribute value is formatted using a regular expression mask.</li>
+</ul>
+</li>
+<li><span style="font-weight: 700 !important;">Number<strong> </strong></span>— numeric value. You can select the number of digits to display after the decimal point:
+<ul style="list-style-type: circle;">
+<li><strong>Do not parse</strong> — display the value as entered.</li>
+<li><strong>0</strong> — display the value as an integer.</li>
+<li><strong>1</strong>–<strong>6</strong> — display the value with the specified number of decimal places.</li>
+</ul>
+</li>
+<li><span style="font-weight: 700 !important;">Date &amp; time</span> — date and time value. Several display formats are supported to show the date only or the date and time.</li>
+<li><span style="font-weight: 700 !important;">Document </span>— uploaded data files (DOCX, PDF, ZIP, etc.) Supported display formats: <strong>Without preview</strong>, <strong>With preview</strong>, <strong>Digitally signed document</strong>.</li>
+<li><span style="font-weight: 700 !important;">Image </span>— uploaded image files (PNG, JPG, etc.) Supported display formats: <strong>Original</strong>, <strong>Greyscale</strong>, <strong>1-bit (black &amp; white)</strong>.</li>
+</ul>
+<p>The <span style="font-weight: 700 !important;">CMW Platform</span> also supports the following attribute types: <strong>Account</strong>, <strong>Hyperlink</strong>, <strong>Barcode</strong>, <strong>Duration</strong>, <strong>Record</strong>, <strong>Boolean</strong>, <strong>Organizational Unit</strong>, <strong>Role</strong>, and <strong>List of Values</strong>. We will learn to use some of them later.</p>
+</div>
+<p>You have created the minimum attribute set required to submit and process a vehicle request.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Note</p>
+<p>Following the agile methodology, initially, we don't define all the attributes and create only the necessary minimum.</p>
+<p>We aim to develop a functioning application and demonstrate it to the first users as soon as possible.</p>
+<p>Then, based on the user feedback, we will add more attributes and improve the app.</p>
+</div>
+<h2 id="mcetoc_1gsooucfs1">Create a Form</h2>
+<p>Let's create a form with the fields to enter and edit the vehicle request data.</p>
+<p><strong>1.</strong> On the <em>Vehicle requests </em>template page, go to the <em><strong>Forms</strong></em> tab.</p>
+<p>Each record template contains a default form, and we'll customize it.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Opening the default form for editing" class="img-responsive" height="347" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_9.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Opening the default form for editing</p>
+</div>
+<p><strong>2.</strong> In the form list, double-click the <em>Vehicle requests - Main Form.</em> The form designer appears.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Form designer" class="img-responsive" height="562" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_10.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Form designer</p>
+</div>
+<div class="notice notice-success">
+<p class="admonition-title">Form Designer</p>
+<p><span style="letter-spacing: 0.2px;">There are four </span><span style="letter-spacing: 0.2px;">areas in the <span style="letter-spacing: 0.2px; font-weight: 700 !important;">form designer</span>: </span></p>
+<ol>
+<li><span style="font-weight: 700 !important;">Element pane</span> — a list of elements that you can place on the form: attributes, forms, buttons, and <a href="VisualElements">visual elements</a>.</li>
+<li><span style="font-weight: 700 !important;">Form layout</span> — the form editing and preview area. To place elements on the form, drag them to the layout from the element pane. To delete elements from the form, drag them outside of the layout.</li>
+<li><span style="font-weight: 700 !important;">Properties pane</span> — allows you to view and configure the properties of the selected form element.</li>
+<li><span style="font-weight: 700 !important;">Buttons</span> — <span style="font-weight: 700 !important;">Save</span>,  <span style="font-weight: 700 !important;"> Clear</span>, <span style="font-weight: 700 !important;">Clone</span>, <span style="font-weight: 700 !important;">Configure template </span> <em class="fa-light fa-gear"> ‌</em>,  <span style="font-weight: 700 !important;">Relations</span> <em class="fab fa-connectdevelop">‌</em>.</li>
+</ol>
+</div>
+<p><strong>3.</strong> The form has a default <strong>New area</strong> element.</p>
+<p><strong>4.</strong> Drag the <em>Car delivery time</em> attribute to the <strong>New area </strong>from the element pane.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Dragging an attribute onto the form" class="img-responsive" height="680" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_11.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Dragging an attribute to the form</p>
+</div>
+<p><strong>5.</strong> Drag the attributes <em>Pick-up point</em>, <em>Route</em>, and <em>Passengers</em> to the <strong>New area</strong>. </p>
+<div class="notice notice-warning">
+<p class="admonition-title">Business Requirement</p>
+<p>In the <em>Car delivery time</em> field, the Initiator should enter the date and time. The default display format for this attribute shows only the date. We will change the display format to include the time.</p>
+</div>
+<p><strong>6.</strong> In the element pane, click the <strong>Edit </strong><em class="fa-light fa-pencil">‌</em> icon next to the <em>Car delivery time</em> attribute.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Editing an attribute using the form designer" class="img-responsive" height="561" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_12.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Editing an attribute using the form designer</p>
+</div>
+<p><strong>7.</strong> In the attribute properties window, choose a <strong>display format </strong>that includes time, e. g. <strong>Sep 4. 1986 07:30</strong><em>,</em> and click <strong>Save</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Editing the attribute properties" class="img-responsive" height="449" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_13.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Editing the attribute properties</p>
+</div>
+<p><strong>8.</strong> Select the <em>Car delivery time</em> field on the form. In the <em><strong>Access</strong></em> dropdown on the <em>Field properties</em> panel, select <em><strong>Require entry</strong></em>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Changing the form field access mode" class="img-responsive" height="680" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_14.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Changing the form field access mode</p>
+</div>
+<p><strong>9.</strong> Set the <em><strong>Require entry</strong> </em>access mode for the <em>Pick-up point</em> field.</p>
+<div class="notice notice-success">
+<p class="admonition-title"><a id="VisualElements"></a>Visual Elements on the Form</p>
+<p>Use the following elements to make the form more user-friendly:</p>
+<ul>
+<li><strong><em>Area</em> </strong>— visually groups the fields, has a title, and can contain buttons. The form must have at least one area.</li>
+<li><em><strong>Static text</strong></em> — displays a read-only text.</li>
+<li><em><strong>Tabs</strong> </em>— distribute the fields into user-selectable tabs.</li>
+<li><em><strong>Columns</strong> </em>— arranges fields in several columns.</li>
+</ul>
+</div>
+<p><strong>10.</strong> Drag the <em><strong>Columns</strong></em> element to the form <span style="letter-spacing: 0.2px;">from the element pane</span><span style="letter-spacing: 0.2px;">.</span></p>
+<p><strong>11.</strong> Drag the <em>Car delivery time</em> and <em>Pick-up point</em> attributes into the left and right columns.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Placing attributes into the columns" class="img-responsive" height="612" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_15.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Placing fields into the columns</p>
+</div>
+<p><strong>12.</strong> Rename the default <strong>New area</strong>: select it, and in the <strong>Area properties</strong> panel, enter the new <strong>Display name</strong> — <em>Vehicle request form</em>.</p>
+<p><strong>13.</strong> To save the form, click <strong>Save</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Renaming an area and saving the form" class="img-responsive" height="680" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_16.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Renaming an area and saving the form</p>
+</div>
+<p>The form designer provides many functions. Try to experiment with the elements and settings in the form designer.</p>
+<h2 id="mcetoc_1gsor0p0t2">Test: Enter and Edit the Data</h2>
+<p>We have created the vehicle request form. Let’s test it as an <em>Initiator</em>.</p>
+<p><strong>1.</strong> Click <em><strong>Configure template</strong></em> <em class="fa-light fa-gear">‌</em>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Navigating to the record template settings" class="img-responsive" height="320" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_17.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Navigating to the record template settings</p>
+</div>
+<p><strong>2. </strong>Click <em><strong>Navigate to instances</strong></em> to open the record list.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Navigating to the record template instances" class="img-responsive" height="431" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_18.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Navigating to the record template instances</p>
+</div>
+<p><strong>3.</strong> Click <em><strong>Create</strong> </em>to fill in a new vehicle request.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Creating a new record" class="img-responsive" height="449" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_19.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Creating a new record</p>
+</div>
+<p><strong>4.</strong> The vehicle request form appears. Fill in all fields and click <em><strong>Save</strong></em>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Filling out and saving the vehicle request form" class="img-responsive" height="389" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_20.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Filling out and saving the vehicle request form</p>
+</div>
+<p><strong>5.</strong> Click the <em>Vehicle requests</em> link above the form to return to the request list.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Navigating to the record list from the record template form" class="img-responsive" height="384" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_21.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Navigating to the record list from the record form</p>
+</div>
+<p><strong>6.</strong> Create several vehicle requests as you did above. The records will appear in the list.</p>
+<p><strong>7.</strong> Go to the vehicle request list and double-click a request to open and edit it.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Opening an entry by double-clicking on it" class="img-responsive" height="413" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_22.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Opening an entry by double-clicking on it</p>
+</div>
+<h2 id="mcetoc_1gsos8kkk0">Finalize the Form: Add the Secretary's Approval Status</h2>
+<p>The Secretary must review the created request, but our record template lacks an attribute for the approval result. Let's add this attribute.</p>
+<p><strong>1. </strong>To open the record template settings, click the <strong>My settings</strong> <em class="fal fa-edit">‌</em> icon above the <strong>All records</strong> table and select <strong>Configure template</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Navigating to the record template settings from the table" class="img-responsive" height="422" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_23.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Navigating to the record template settings from the table</p>
+</div>
+<p><strong>2.</strong> Go to the <strong>Attributes</strong> tab and click <strong>Create</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Adding an attribute" class="img-responsive" height="461" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_7.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Adding an attribute</p>
+</div>
+<p><strong>3.</strong> In the <strong>New attribute</strong> window, enter the attribute <strong>Name</strong> —  <em>Approved</em>, set <strong>Boolean</strong> <strong>data type</strong>, and click <strong>Save</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Configuring a new boolean attribute" class="img-responsive" height="299" src="https://kb.cmwlab.com/assets/img_653f7f7a4173a.png" width="1048"/></p>
+<p class="caption" style="font-size: 15px !important;">Configuring a new boolean attribute</p>
+</div>
+<h2 id="mcetoc_1gsostvek1">Configure a Table</h2>
+<p>Each template has the default <strong>All records</strong> table that shows system attributes: <strong>ID</strong>, <strong>Creator</strong>, <strong>Creation date</strong>, <strong>In archive</strong>, <strong>Modified date</strong>. The default table is not informative for the end-user. Let's customize the list of vehicle requests displayed in the default table.</p>
+<p><strong>1.</strong> Go to the <strong>Tables</strong> tab of the <em>Vehicle requests</em> template and double-click the <strong>All records</strong> table.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Navigating to the table designer" class="img-responsive" height="352" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_25.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Navigating to the table designer</p>
+</div>
+<p><strong>2.</strong> The table designer appears with a list of attributes. Drag and drop the attributes to and from the table layout to configure and reorder the table columns.</p>
+<p><strong>3.</strong> Remove the columns that the end-user does not need. <span style="letter-spacing: 0.2px;">Select the </span><strong style="letter-spacing: 0.2px;">ID</strong><span style="letter-spacing: 0.2px;"> attribute in the table layout and drag it outside of the layout. In the same way, remove the </span><strong style="letter-spacing: 0.2px;">Creation Date</strong><span style="letter-spacing: 0.2px;"> and </span><strong style="letter-spacing: 0.2px;">In archive</strong><span style="letter-spacing: 0.2px;"> columns from the table. Leave the </span><strong style="letter-spacing: 0.2px;">Creator</strong><span style="letter-spacing: 0.2px;"> and </span><strong style="letter-spacing: 0.2px;">Modified date</strong><span style="letter-spacing: 0.2px;"> columns in the table.</span></p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Removing the unnecessary attributes from the table" class="img-responsive" height="346" src="https://kb.cmwlab.com/assets/img_653f8c6de0345.png" width="1264"/></p>
+<p class="caption" style="font-size: 15px !important;">Removing the unnecessary attributes from the table</p>
+</div>
+<p><strong>4.</strong> Add the relevant columns to the table. The attribute order in the table designer defines the column order: the top item appears as the leftmost column in the table.</p>
+<p><strong>5.</strong> Drag the following attributes from the element pane to the table layout: <em>Car delivery time</em>, <em>Pick-up point</em>, <em>Route</em>, and <em>Passengers</em>.</p>
+<p><strong>6.</strong> Click <strong>Save</strong> to save the default table configuration.</p>
+<p><strong>7.</strong> Click <strong>Configure template</strong> to return to the template <strong>Properties</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Adding new attributes and saving the table" class="img-responsive" height="473" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_27.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Adding new attributes and saving the table</p>
+</div>
+<p><strong>8.</strong> On the template <strong>Properties</strong> tab, click <strong>Navigate to instances</strong> to open the vehicle requests list that you configured.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="The customized table of records" class="img-responsive" height="415" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_28.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">The customized table of records</p>
+</div>
+<h2 id="mcetoc_1gsotop9o0">Search and Filter Records in the Table</h2>
+<p>Let’s configure the table to filter and reorder the records and then configure grouping and summarization.</p>
+<h3 id="mcetoc_1he08u4l11">Configure Sorting, Filtering, and Grouping for the Current User</h3>
+<div class="notice notice-info">
+<p class="admonition-title">Note</p>
+<p>This section provides instructions on configuring the table display settings <strong>for the current user</strong>. These settings are stored individually for each user.<br/>In addition, using the table designer, you can configure the column display options that will be used <strong>for all users by default</strong>. See <a href="#mcetoc_1he08sd700">Configure Sorting, Grouping, Summarizing, and Filtering for All Users</a>.</p>
+</div>
+<h4 id="mcetoc_1hfeg4kot4">Sort Records</h4>
+<p>Let's sort the vehicle requests by car delivery time.</p>
+<p><strong>1.</strong> Click the <em>Car delivery time</em> column heading to sort the data by this column: ascending, descending, or default. The sorting order is indicated by a down arrow (descending), up arrow (ascending), or no arrow (default) in the column heading. </p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Changing the record sorting order in the table" class="img-responsive" height="417" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_29.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Changing the record sorting order in the table</p>
+</div>
+<h4 id="mcetoc_1hfeg5ajs5">Filter Records</h4>
+<p>To display records that contain a specific value, you can use a filter: <em><strong>Equal to</strong></em> or <em><strong>Substring of</strong></em>.</p>
+<p>Let's filter the vehicle requests by the route.</p>
+<p><strong style="letter-spacing: 0.2px;">1.</strong><span style="letter-spacing: 0.2px;"> Click the filter </span><em class="fal fa-filter" style="letter-spacing: 0.2px;">‌</em><span style="letter-spacing: 0.2px;"> icon in the </span><em style="letter-spacing: 0.2px;">Route</em><span style="letter-spacing: 0.2px;"> column. </span></p>
+<p><span style="letter-spacing: 0.2px;"><strong style="letter-spacing: 0.2px;">2.</strong> In the dropdown, check </span><strong style="letter-spacing: 0.2px;">Filter data </strong>and<span style="letter-spacing: 0.2px;"> select </span><strong style="letter-spacing: 0.2px;">Substring of</strong><span style="letter-spacing: 0.2px;">.</span></p>
+<p><span style="letter-spacing: 0.2px;"><strong style="letter-spacing: 0.2px;">3.</strong> Enter the desired value in the </span><strong style="letter-spacing: 0.2px;">Enter text here</strong><span style="letter-spacing: 0.2px;"> field.</span></p>
+<p><strong>4.</strong> Click <strong>Apply</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Applying a filter to a table column" class="img-responsive" height="490" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_30.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Applying a filter to a table column</p>
+</div>
+<p><strong>5.</strong> The records matching your filter will appear in the table.</p>
+<p><strong>6.</strong> To reset the record filter, click the filter <em class="fal fa-filter">‌</em> icon in the <em>Route</em> column, uncheck <strong>Filter data</strong> in the dropdown, and click <strong>Apply</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Resetting a table column filter" class="img-responsive" height="444" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_31.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Resetting a table column filter</p>
+</div>
+<h4 id="mcetoc_1hfefuf2n2">Group Records</h4>
+<p>Let's group vehicle requests with the same route.</p>
+<p><strong>1.</strong> Click the filter <em class="fal fa-filter">‌</em> icon in the <em>Route</em> column.</p>
+<p><strong>2.</strong> Select the <strong>Group by this column</strong> checkbox in the dropdown.</p>
+<p><strong>2.</strong> click <strong>Apply</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Grouping records by a column value" class="img-responsive" height="442" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_32.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Grouping records by a column value</p>
+</div>
+<h4 id="mcetoc_1hfeg0n793">Hide Column</h4>
+<p>Let's hide the <strong>Modified date </strong>column.</p>
+<p><strong>1.</strong> Click the <em class="fal fa-edit">‌</em> icon above the table</p>
+<p><strong>2.</strong> Select <strong>Customize display</strong> in the dropdown.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Navigating to the table display customization page" class="img-responsive" height="497" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_33.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Navigating to the table display customization page</p>
+</div>
+<p><strong>3.</strong> The table customization page appears.</p>
+<p><strong>4.</strong> Clear the <em style="letter-spacing: 0.2px;">Modified date</em><span style="letter-spacing: 0.2px;"> checkbox </span><span style="letter-spacing: 0.2px;">to hide this column from the table. If needed, click <strong>Reset </strong>to restore the original table display configuration.</span></p>
+<p><span style="letter-spacing: 0.2px;"><strong>5.</strong> Click </span><strong style="letter-spacing: 0.2px;">Save</strong><span style="letter-spacing: 0.2px;">.</span></p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Table display configuration page" class="img-responsive" height="534" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_34.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Table display configuration page</p>
+</div>
+<h3 id="mcetoc_1he08sd700">Configure Sorting, Grouping, Summarizing, and Filtering for All Users</h3>
+<div class="notice notice-info">
+<p class="admonition-title">Note</p>
+<p>This section provides instructions on configuring the <strong>default</strong> <strong>table display settings for all users</strong>.</p>
+<p>In addition, each user can individually customize the table display. See <a href="#mcetoc_1he08u4l11">Configure Sorting, Filtering, and Grouping for the Current User</a>.</p>
+</div>
+<p><strong>1.</strong> Click the <em class="fal fa-edit">‌</em> icon and select <strong>Edit table</strong> from the dropdown. The table designer appears.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Navigating to the table designer" class="img-responsive" height="500" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_35.png" width="1350"/></p>
+<p class="caption" style="font-size: 15px !important;">Navigating to the table designer</p>
+</div>
+<p><strong>2.</strong> Go to the <strong>Advanced</strong> tab in the <strong>Table properties</strong> panel.</p>
+<p><strong>3.</strong> Drag and drop attributes from the table layout into the <strong>Sorting</strong>, <strong>Grouping</strong>, and <strong>Filter</strong> areas.</p>
+<p><strong>4.</strong> Configure the table data sorting, grouping, and filtering for all users.</p>
+<p><strong>5.</strong> Click <strong>Save</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Configuring the default sorting, grouping, and filtering for a table using the table designer" class="img-responsive" height="629" src="https://kb.cmwlab.com/assets/cmw_platform_lesson2_36.png" width="1343"/></p>
+<p class="caption" style="font-size: 15px !important;">Configuring the default table sorting, grouping, and filtering using the table designer</p>
+</div>
+<h2 id="mcetoc_1gsovah7e1">Results</h2>
+<p>Congrats! You have created your first data registry (record template), designed a form, learned how to fill it out, and configured a table with records.</p>
+<p>Proceed to <samp data-name="aid" data-title="" data-value="2147"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2147}</span></samp>) to learn how to design and run a business process.</p>
+<p><a class="md-top md-icon mkdocs_imported_link" href="#"> <em class="fa-light fa-arrow-up">‌</em> Back to top </a></p>

@@ -1,0 +1,111 @@
+<h1>Configuring Color Indicator</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1gtvipt510">Use Case</a></li>
+<li><a href="#mcetoc_1gtviqia32">Prerequisites</a></li>
+<li><a href="#mcetoc_1gtvo4lfb5">Instructions</a>
+<ul>
+<li><a href="#mcetoc_1gtntho192">Formula Syntax</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gua59v2e0">See Also</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1gtvipt510">Use Case</h2>
+<p>In some cases, you might want to display a color indicator in a field to quickly understand whether a date has passed, a status has changed, a deadline is overdue, etc. To achieve this, use an HTML text attribute that changes its formatting conditionally.</p>
+<p>In this article, we will create an indicator that will be red when the actual project completion date is past the planned completion date, or green otherwise<span style="letter-spacing: 0.2px;">.</span></p>
+<h2 id="mcetoc_1gtviqia32">Prerequisites</h2>
+<p>To proceed with the example, create the attributes as shown in the table below:</p>
+<div class="table-responsive">
+<table border="1" style="height: 120px; width: 100%; border-collapse: collapse;">
+<tbody>
+<tr style="height: 40px;">
+<td style="height: 40px; width: 30%;"><strong>Attribute system name</strong></td>
+<td style="height: 40px; width: 30%;"><strong>Attribute type</strong></td>
+<td style="width: 40%;"><strong>Description</strong></td>
+</tr>
+<tr style="height: 40px;">
+<td style="height: 40px; width: 30%;"><em>Actual_date</em></td>
+<td style="height: 40px; width: 30%;"><strong>Date &amp; time</strong></td>
+<td style="height: 40px; width: 40%;">The actual project completion date.</td>
+</tr>
+<tr style="height: 40px;">
+<td style="height: 40px; width: 30%;"><em>Planned_date</em></td>
+<td style="height: 40px; width: 30%;"><strong>Date &amp; time</strong></td>
+<td style="height: 40px; width: 40%;">
+<p>The planned project completion date.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="mcetoc_1gtvo4lfb5">Instructions</h2>
+<ol class="colored_numbers_list">
+<li>Create a new <strong>Text</strong> attribute <em>Overdue indicator</em>:
+<ul>
+<li><strong>Display format</strong> — <strong>HTML text</strong></li>
+<li><strong>Calculate using an expression</strong> — checked.</li>
+</ul>
+</li>
+<li>In the <strong>Calculated value</strong>, enter the <strong>formula</strong>:<br/><br/>
+<div style="letter-spacing: 0.2px;">
+<table style="width: 100%;">
+<tbody>
+<tr>
+<td class="source_code">
+<p><code>IF(GREATEREQ($Actual_date, $Planned_date),</code></p>
+<p><code>"&lt;span style='color:#B22222; font-size: 200%; text-shadow: 0 0 1px black;</code></p>
+<p><code>position: absolute; top:0px;'&gt; ● &lt;/span&gt;",</code></p>
+<p><code>"&lt;span style='color:#45A521; font-size: 200%; text-shadow: 0 0 1px black;</code></p>
+<p><code>position: absolute; top:0px;'&gt; ● &lt;/span&gt;"               </code></p>
+<p><code>)</code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="blue_note" style="letter-spacing: 0.2px;"><span style="font-weight: 700 !important;">Note:</span> If you export this value to an Excel file, it will be displayed as unformatted HTML code. To export an HTML-formatted value to Excel, you need to reformat it using C#.</div>
+</li>
+<li>Place the <em>Overdue indicator </em>attribute on a form or in a table.</li>
+</ol>
+<h3 id="mcetoc_1gtntho192" style="text-align: left;">Formula Syntax</h3>
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%; height: 281px;">
+<tbody>
+<tr style="height: 40px; text-align: left;">
+<th style="height: 40px; width: 50%;">Element</th>
+<th style="width: 50%; height: 40px;">Description</th>
+</tr>
+<tr style="height: 40px; text-align: left;">
+<td style="height: 40px; width: 50%;"><code>IF(Argument1, Argument2, Argument3)</code></td>
+<td style="height: 40px;">
+<p><code>IF()</code> function takes three arguments. If <code>Argument1</code> resolves to <code>true</code>, it returns <code>Argument2</code>. Otherwise, it returns <code>Argument3</code>.</p>
+</td>
+</tr>
+<tr style="height: 81px;">
+<td style="width: 50%; height: 81px;"><code>GREATEREQ($Actual_date, $Planned_date)</code></td>
+<td style="height: 81px;">
+<p><code>Argument1</code> — condition. The <code>GREATEREQ()</code> function returns <code>true </code>if <code>Actual_date</code> is greater than or equal to the <code>Planned_date</code>.</p>
+</td>
+</tr>
+<tr>
+<td style="width: 50%;"><code>$</code></td>
+<td>The <code>$</code> prefix refers to an attribute in the current record context.</td>
+</tr>
+<tr style="text-align: left;">
+<td style="height: 79px; width: 50%;"><code>"&lt;span style = 'color: #B22222; font-size: 200%; text-shadow: 0 0 1px black; position: absolute; top: 0px;'&gt; ● &lt;/span&gt;"</code></td>
+<td style="height: 79px;">
+<p><code>Argument2</code> — red indicator HTML code: <span style="color: #b22222; font-size: 150%; text-shadow: 0 0 1px black;"> ●</span>. The <code>color: #B22222</code> CSS statement sets red color. Other CSS statements define the indicator size and position.</p>
+</td>
+</tr>
+<tr style="height: 41px;">
+<td style="text-align: left; height: 41px; width: 50%;"><code>"&lt;span style = 'color: #45A521; font-size: 200%; text-shadow: 0 0 1px black; position: absolute; top: 0px;'&gt; ● &lt;/span&gt;"</code></td>
+<td style="text-align: left; height: 41px;">
+<p><code>Argument3</code> — green indicator HTML code: <span style="color: #45a521; font-size: 150%; text-shadow: 0 0 1px black;"> ●</span>. The <code>color: #45A521 </code>CSS statement sets green color. Other CSS statements define the indicator size and position.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mcetoc_1gua59v2e0">See Also</h2>
+<p><samp data-name="aid" data-title="" data-value="2009"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2009}</span></samp> </p>
+</div>

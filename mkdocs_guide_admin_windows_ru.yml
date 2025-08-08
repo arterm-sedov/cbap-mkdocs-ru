@@ -18,35 +18,35 @@ extra:
 
 nav:
 
-  - Введение:
+  - Общие сведения:
     - index.md
+    - product_description.md
+    - Обзор версий:
+      - general/changelog/changelog.md
+      - general/changelog/release_notes_5.0.13334.md
+      - general/changelog/release_notes_5.0.md
   - Развёртывание ПО:
     - administration/deploy/system_requirements.md
     - administration/deploy/architecture_landscape.md
-    # - administration/deploy/availability_fault_tolerance.md
     - administration/deploy/security.md
-    - administration/deploy/windows/deploy_guide.md
-    - administration/deploy/paths.md
     - administration/deploy/logging_engine.md
     - administration/deploy/log_files_event_examples.md
-    - administration/deploy/windows/instance_upgrade_3_2_to_4_2_windows.md
-    - administration/deploy/windows/instance_stop_IIS.md
-    - administration/deploy/windows/instance_start_IIS.md
-    - Вспомогательное ПО. Оптимизация:
-      - administration/deploy/linux/auxiliary_software_deploy/auxiliary_software_optimize.md
-      - administration/deploy/linux/auxiliary_software_deploy/antivirus_exceptions_configure.md
-      - administration/deploy/linux/auxiliary_software_deploy/apache_ignite_defragment.md
+    - administration/deploy/paths.md
+    - administration/deploy/script_keys.md
+    - administration/deploy/windows/deploy_guide.md
+    - administration/deploy/windows/upgrade_version.md
     - Вспомогательное ПО. Развёртывание:
       - administration/deploy/windows/auxiliary_software_deploy/zabbix_agent_deploy_windows.md
       - administration/deploy/windows/auxiliary_software_deploy/apache_ignite_deploy_windows.md
       - administration/deploy/windows/auxiliary_software_deploy/elasticsearch_deploy_windows.md
       - administration/deploy/windows/auxiliary_software_deploy/kafka_install_windows.md
+    - administration/deploy/linux/auxiliary_software_deploy/auxiliary_software_list.md
+    - Вспомогательное ПО. Оптимизация:
+      - administration/deploy/linux/auxiliary_software_deploy/antivirus_exceptions_configure.md
   - Резервное копирование и восстановление:
     - administration/backup/index.md
     - administration/backup/configure.md
-    - administration/backup/windows/restore_windows.md
     - administration/backup/windows/backup_restore_windows.md
-    - administration/backup/windows/db_move_manual_windows.md
     - administration/backup/windows/backup_windows_external.md
   - Администрирование системы:
     - administration/administration_page.md
@@ -60,12 +60,12 @@ nav:
       - administration/account_administration/system_roles.md
       - administration/account_administration/account_permission_audit.md
       - administration/account_administration/substitution.md
-      
       - administration/account_administration/registration_and_login.md
       - administration/account_administration/two_factor_authentication.md
-      - Синхронизация с сервером каталогов: 
-        - administration/account_administration/accounts_dc_sync/index.md 
-        - administration/account_administration/accounts_dc_sync/windows/sso_authenticatation_configure_windows.md
+      - Синхронизация с сервером каталогов:
+        - administration/account_administration/accounts_dc_sync/index.md
+        - administration/account_administration/accounts_dc_sync/windows/sso_authentication_configure_windows.md
+
     - Инфраструктура:
       - administration/infrastructure/monitoring.md
       - administration/infrastructure/logs.md
@@ -77,9 +77,10 @@ nav:
       - administration/infrastructure/adapters.md
       - administration/infrastructure/authentication_keys.md
     - Интеграции с внешними системами:
+      - administration/connections_communication_routes/integration.md
       - administration/connections_communication_routes/connections.md
       - administration/connections_communication_routes/communication_routes.md
-    - Системные подключения:
+      - Системные подключения:
         - Уведомления:
           - administration/connections_communication_routes/system_connections/notifications/notification_types.md
           - administration/connections_communication_routes/system_connections/notifications/common_notifications.md
@@ -89,44 +90,43 @@ nav:
         - administration/connections_communication_routes/system_connections/git_connection.md
         - administration/connections_communication_routes/system_connections/s3_connection.md
         #- administration/connections_communication_routes/system_connections/aws_pinpoint_connection.md
-        - Аутентификация:
-          - administration/connections_communication_routes/authentication/keycloak_connection.md
-          - administration/connections_communication_routes/authentication/wsfederation_connection.md
-          - administration/connections_communication_routes/authentication/ad_connection.md
-        - Подключения к офисным приложениям:
-          - administration/connections_communication_routes/office_connections/collabora_connection.md
-          - administration/connections_communication_routes/office_connections/r7_connection.md
-        - Подключения к электронной почте:
-          - administration/connections_communication_routes/email_connections/process_sending_connection.md
-          - administration/connections_communication_routes/email_connections/scenario_send_email.md
-          - administration/connections_communication_routes/email_connections/process_receiving_connection.md
-          - administration/connections_communication_routes/email_connections/scenario_receive_email.md
-        - Подключения REST и OData:
+      - Аутентификация:
+        - administration/connections_communication_routes/authentication/keycloak_connection.md
+        - administration/connections_communication_routes/authentication/ad_connection.md
+      - Подключения к офисным приложениям:
+        - administration/connections_communication_routes/office_connections/collabora_connection.md
+        - administration/connections_communication_routes/office_connections/r7_connection.md
+      - Подключения к электронной почте:
+        - administration/connections_communication_routes/email_connections/process_sending_connection.md
+        - administration/connections_communication_routes/email_connections/scenario_send_email.md
+        - administration/connections_communication_routes/email_connections/process_receiving_connection.md
+        - administration/connections_communication_routes/email_connections/scenario_receive_email.md
+      - Подключения REST и OData:
         - administration/connections_communication_routes/rest_odata_connections/odata_connection.md
         - administration/connections_communication_routes/rest_odata_connections/odata_integration.md
         - administration/connections_communication_routes/rest_odata_connections/send_http_connection.md
         - administration/connections_communication_routes/rest_odata_connections/send_http_request_connection.md
         - administration/connections_communication_routes/rest_odata_connections/get_connection.md
         - administration/connections_communication_routes/rest_odata_connections/receive_http_example.md
-        - SQL-подключения:
-          - administration/connections_communication_routes/sql_connections/sql_send_connection.md
-          - administration/connections_communication_routes/sql_connections/sql_receive_connection.md
-        - Подключения к шинам сообщений:
-          - administration/connections_communication_routes/message_queue_connections/kafka_connection.md
-        - Пользовательские подключения:
-          - administration/connections_communication_routes/custom_connections/esphere_receive_configure.md
-          - administration/connections_communication_routes/custom_connections/esphere_send_configure.md
+      - SQL-подключения:
+        - administration/connections_communication_routes/sql_connections/sql_send_connection.md
+        - administration/connections_communication_routes/sql_connections/sql_receive_connection.md
+      - Подключения к шинам сообщений:
+        - administration/connections_communication_routes/message_queue_connections/kafka_connection.md
+      - Пользовательские подключения:
+        - administration/connections_communication_routes/custom_connections/esphere_receive_configure.md
+        - administration/connections_communication_routes/custom_connections/esphere_send_configure.md
   - Администрирование приложений:
     - business_apps/index.md
     - Диаграммы:
       - business_apps/diagrams/index.md
-      - Диаграмма процесса: 
-        - business_apps/diagrams/process_diagram/index.md 
-        - business_apps/diagrams/process_diagram/process_diagram_version_control.md 
+      - Диаграмма процесса:
+        - business_apps/diagrams/process_diagram/index.md
+        - business_apps/diagrams/process_diagram/process_diagram_version_control.md
         - business_apps/diagrams/process_diagram/process_diagram_view_instance.md
     - Шаблоны:
       - business_apps/templates/index.md
-      - Типы и свойства шаблонов: 
+      - Типы и свойства шаблонов:
         - business_apps/templates/template_types/template_common_properties.md
         - business_apps/templates/template_types/record_templates.md
         - business_apps/templates/template_types/process_templates.md
@@ -145,19 +145,28 @@ nav:
       - business_apps/version_control/manual_version_control.md
       - business_apps/version_control/git_version_control.md
       - business_apps/version_control/excel_version_control.md
-  - Обзор версий:
-    - general/changelog/changelog.md
-    - general/changelog/release_notes_5.0.13334.md
-    - general/changelog/release_notes_5.0.md
-
 
 exclude_docs: |
+  administration/connections_communication_routes/authentication/wsfederation_connection.md
+  administration/deploy/windows/instance_stop_IIS.md
+  administration/deploy/windows/instance_start_IIS.md
+  administration/account_administration/accounts_dc_sync/linux/ad_authentication_configure.md
+  administration/account_administration/accounts_dc_sync/linux/sso_authentication_configure.md
+  administration/backup/linux/**
+  administration/connections_communication_routes/authentication/openid_connection_gostech.md
+  administration/connections_communication_routes/system_connections/s3_connection_gostech.md
+  administration/deploy/logging_engine_gostech.md
   administration/deploy/linux/**
   administration/deploy/linux/auxiliary_software_deploy/**
+  !administration/deploy/linux/auxiliary_software_deploy/auxiliary_software_list.md
   !administration/deploy/linux/auxiliary_software_deploy/antivirus_exceptions_configure.md
+  !administration/deploy/linux/img/deploy_guide_admin_account_create.png
+  !administration/deploy/linux/img/deploy_guide_elasticsearch_initialize.png
   administration/architecture/functions.md
   administration/account_administration/accounts_dc_sync/linux/ad_authentication_configure.md
-  administration/account_administration/accounts_dc_sync/linux/sso_authenticatation_configure.md
+  administration/account_administration/accounts_dc_sync/linux/sso_authentication_configure.md
+  administration/connections_communication_routes/system_connections/aws_pinpoint_connection.md
+  administration/connections_communication_routes/authentication/google_connection.md 
   administration/connections_communication_routes/email_connections/process_email_configure_include.md
   administration/connections_communication_routes/rest_odata_connections/1c_integrations.md
   administration/connections_communication_routes/rest_odata_connections/send_http_example.md
@@ -165,10 +174,12 @@ exclude_docs: |
   administration/connections_communication_routes/rest_odata_connections/http_send_file.md
   administration/connections_communication_routes/rest_odata_connections/jpath_example.md      
   administration/connections_communication_routes/rest_odata_connections/http_receive_file.md
-  administration/backup/linux/**
+  administration/deploy/availability_fault_tolerance.md
   administration/deploy/windows/admin_utility/**
+  administration/backup/windows/db_move_manual_windows.md
+  administration/backup/windows/restore_windows.md
   administration/deploy/windows/architect_install.md
-  product_description.md
+  administration/deploy/windows/instance_upgrade_3_2_to_4_2_windows.md
   architect/**
   business_apps/application_configure_recommendations.md
   business_apps/data_model.md
@@ -178,6 +189,7 @@ exclude_docs: |
   business_apps/variables.md
   business_apps/diagrams/process_diagram/process_diagram_build_advice.md
   business_apps/diagrams/process_diagram/process_diagram_elements/**
+  business_apps/diagrams/process_diagram/process_error_monitor.md
   business_apps/expressions/**
   business_apps/scenarios/**
   business_apps/templates/button_area.md
@@ -188,8 +200,12 @@ exclude_docs: |
   business_apps/templates/export_templates/**
   business_apps/templates/forms/**
   business_apps/templates/tables/table_configure.md
-  business_apps/templates/template_types/article-2110-Шаблон аккаунта. Использование.md
+  business_apps/navigation_sections/desktop_setup.md
+  business_apps/navigation_sections/pages_setup.md
+  business_apps/navigation_sections/my_tasks_page_configure.md
+  developer_guide/**
   devops_wiki/**
   examples/**
+  tutorials/**
   using_the_system/**
   !examples/img/*

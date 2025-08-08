@@ -7,8 +7,9 @@ kbId: 4972
 
 Для того чтобы вычислить срок выполнения задачи, учитывая выходные и праздничные дни (для этого в платформе должен быть создан справочник праздничных дней), введите следующее выражение:
 
-| WORKHOURS(NOW(),18,DURATION("PT9H"),DURATION("PT9H"),LIST((from a in db->holliday\_calendar select a->Data))) |
-| --- |
+```
+WORKHOURS(NOW(),18,DURATION("PT9H"),DURATION("PT9H"),LIST((from a in db->holliday_calendar select a->Data)))
+```
 
 **где:**
 

@@ -11,30 +11,30 @@ kbId: 4930
 
 - **Формулы** — встроенный в платформу язык программирования, по синтаксису схожий с формулами Excel.
 
-Узнайте больше о языке формул Comindware в *[Руководстве по языку формул](https://kb.comindware.ru/category.php?id=882)*.
+  Узнайте больше о языке формул Comindware в *[Руководстве по языку формул](https://kb.comindware.ru/category.php?id=880)*.
 
-Примеры:
+  Примеры:
 
-    - *[Установка значения атрибута по условию][example_formula_condition_set_value]*;
-    - *[Вычисление всех аккаунтов группы][example_formula_group_account_calculate]*;
-    - больше примеров: *[Примеры формул](https://kb.comindware.ru/category.php?id=881)*.
+  - *[Установка значения атрибута по условию][example_formula_condition_set_value]*;
+  - *[Вычисление всех аккаунтов группы][example_formula_group_account_calculate]*;
+  - больше примеров: *[Примеры формул](https://kb.comindware.ru/category.php?id=881)*.
 - **C#** — объектно-ориентированный язык программирования, который используется для обращения к API **{{ productName }}**, API внешних систем и типовым библиотекам C#.
 
-Узнайте больше о написании C#-скриптов в *[Руководстве по написанию скриптов на языке C#][csharp_guide]*.
+  Узнайте больше о написании C#-скриптов в *[Руководстве по написанию скриптов на языке C#][csharp_guide]*.
 
-Примеры:
+  Примеры:
 
-    - *[Копирование объекта][example_csharp_object_copy]*;
-    - *[Кнопка «Мой профиль»][example_csharp_my_profile_button]*;
-    - больше примеров: *[Примеры на C#](https://kb.comindware.ru/category.php?id=883)*.
+  - *[Копирование объекта][example_csharp_object_copy]*;
+  - *[Кнопка «Мой профиль»][example_csharp_my_profile_button]*;
+  - больше примеров: *[Примеры на C#](https://kb.comindware.ru/category.php?id=883)*.
 - **N3** — это язык описания, базирующийся на триплетах вида «субъект-предикат-объект». В отличие от формул язык N3 позволяет производить более сложные вычисления.
 
-Узнайте больше о языке N3 Comindware в *[Руководстве по языку N3](https://kb.comindware.ru/category.php?id=878)*.
+  Узнайте больше о языке N3 Comindware в *[Руководстве по языку N3](https://kb.comindware.ru/category.php?id=877)*.
 
-Примеры:
+  Примеры:
 
-    - *[Фильтр списка по создателю][example_n3_list_by_creator_filter]*;
-    - *[Сравнение двух атрибутов типа «Аккаунт»][example_n3_account_attributes_compare]*;
-    - больше примеров: *[Примеры на N3](https://kb.comindware.ru/category.php?id=879)*.
+  - *[Фильтр списка по создателю][example_n3_list_by_creator_filter]*;
+  - *[Сравнение двух атрибутов типа «Аккаунт»][example_n3_account_attributes_compare]*;
+  - больше примеров: *[Примеры на N3](https://kb.comindware.ru/category.php?id=879)*.
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

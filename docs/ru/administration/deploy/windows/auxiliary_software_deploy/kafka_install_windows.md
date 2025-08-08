@@ -9,19 +9,25 @@ tags:
     - подключение к шине сообщений
     - шина сообщений
     - брокер сообщений
+    - Windows
+    - установка
+    - развертывание
+    - развёртывание
+    - брокер сообщений
+    - шина сообщений
 hide:
     - tags
 ---
 
 # Установка Apache Kafka в ОС Windows и подключение к {{ productName }} {: #kafka_deploy_windows }
 
-## Введение
+## Введение {: #kafka_deploy_windows_intro }
 
 Для обмена данными между **{{ productName }}** и внешними системами (а также для работы обсуждений) необходимо настроить подключение к брокеру сообщений Kafka.
 
 Здесь представлена инструкция по установке Kafka в ОС Windows с использованием KRaft (без использования Zookeeper) и подключению Kafka к **{{ productName }}**.
 
-## Предварительные условия
+## Предварительные условия {: #kafka_deploy_windows_prerequisites }
 
 Должно быть установлено ПО Java и заданы следующие системные переменные:
 
@@ -29,35 +35,28 @@ hide:
 - `JAVA_HOME_DLL` — путь к DLL-файлу Open JDK, например `C:\Program Files\jdk\jdk-<version>\bin\server\jvm.dll`
 - `Path` — короткий путь к файлам Java: `%JAVA_HOME%\bin`
 
-## Процесс установки
+!!! warning "Внимание!"
+
+    - При указании путей используйте фактические имена дисков вместо используемых здесь дисков `C` и `X`.
+    - Для корректной работы Kafka рекомендуется скачивать архив с бинарными файлами.
+    - Рекомендуется использовать путь минимальной длины и названия папок без пробелов, иначе некоторые команды могут не сработать.
+    - Рекомендуется создавать папку для журналов на отдельном диске, а не на диске где установлено ПО Kafka.
+
+## Процесс установки {: #kafka_deploy_windows_install }
 
 1. Скачайте последнюю версию Kafka с **[официального сайта](https://kafka.apache.org/downloads)**.
-
-    !!! warning "Внимание!"
-
-        Для корректной работы Kafka рекомендуется скачивать архив с бинарными файлами.
-
 2. Распакуйте файлы архива, например в папку `C:\kafka`
-
-    !!! warning "Внимание!"
-
-        Рекомендуется использовать путь минимальной длины и названия папок без пробелов, иначе некоторые команды могут не сработать.
-
 3. Создайте папку для журналов, например `X:\kafka\logs`.
-
-    !!! warning "Внимание!"
-
-        Рекомендуется создавать папку для журналов на отдельном диске, а не на диске где установлено ПО Kafka.
-
 4. Откройте файл конфигурации Kafka `C:\kafka\config\kraft\server.properties`.
 5. Отредактируйте файл конфигурации, указав IP-адрес сервера {{ apacheKafkaVariants }}, папку для журналов и размеры сообщений.
 
     !!! warning "Внимание!"
 
-        При указании пути к папке журналов используйте косую черту `/` вместо `\`:
+        В директиве `log.dirs` для указания пути к папке журналов используйте прямую косую черту `/`, а не обратную `\`:
 
     --8<-- "kafka_deploy_config_start.md"
     # Путь к файлам журналов
+    # Bспользуйте прямую косую черту `/`, а не обратную `\`
     log.dirs=X:/kafka/logs
     --8<-- "kafka_deploy_config_end.md"
 
@@ -113,7 +112,7 @@ hide:
 
     _![Kafka в списке служб](img/kafka_install_services.png)_
 
-17. С помощью свойств службы включите и настройте автоматический перезапуск Kafka.
+17. В окне свойств службы на вкладке «**Восстановление**» включите и настройте перезапуск Kafka в случае сбоев.
 
     _![Окно настройки службы Kafka](img/kafka_install_kafka_service.png)_
 
@@ -130,10 +129,9 @@ hide:
 
     _![Создание ветки сообщений Kafka в powershell.exe](img/kafka_install_powershell.png)_
 
-## Подключение экземпляра {{ productName }} к Kafka
+## Подключение экземпляра {{ productName }} к Kafka {: #kafka_deploy_windows_instance_connect }
 
 1. Откройте папку `C:\ProgramData\comindware\configs\instance`
-
 2. Задайте параметры подключения к Kafka в файле `<instanceName>.yml` (`<instanceName>` — имя экземпляра ПО):
 
     ``` yaml
@@ -155,14 +153,18 @@ hide:
 
         --8<-- "kafka_deploy_config_warning.md"
         
-            - `C:\ProgramData\comindware\configs\instance\<instanceName>.yml`
-            - `C:\ProgramData\comindware\configs\instance\apigateway.yml`
-            - `C:\ProgramData\comindware\configs\instance\adapterhost.yml`
+            ```
+            C:\ProgramData\comindware\configs\instance\<instanceName>.yml
+            C:\ProgramData\comindware\Instances\<InstanceName>\config\apigateway.yml
+            C:\ProgramData\comindware\Instances\<InstanceName>\config\adapterhost.yml
+            ```
+        - Удостоверьтесь, что в `YML`-файлах конфигурации все пути указаны с обратной косой чертой `\` в стиле Windows, а не в стиле Linux `/`.
 
-4. Задайте параметры подключения к Kafka в файле `apigateway.yml`:
+1. Задайте параметры подключения к Kafka в файле `apigateway.yml`:
 
     ``` yaml
     # Укажите IP-адрес сервера Kafka
+    # без префикса http/https
     mq.server: <KafkaIP>:9092
     # Укажите имя экземпляра ПО
     mq.group: <instanceName>
@@ -170,15 +172,15 @@ hide:
     mq.node: <instanceName>
     ```
 
-5. Задайте параметры подключения к Kafka в файле `adapterhost.yml`:
+2. Задайте параметры подключения к Kafka в файле `adapterhost.yml`:
 
     ``` yaml
     # Укажите IP-адрес сервера Kafka
     mq.server: <KafkaIP>:9092
     ```
 
-6. Перезапустите экземпляр ПО.
-7. Проверьте соединение с Kafka в браузере по ссылке (`<instanceAddress>` — URL экземпляра ПО):
+3. Перезапустите экземпляр ПО.
+4. Проверьте соединение с Kafka в браузере по ссылке (`<instanceAddress>` — URL экземпляра ПО):
 
     ``` powershell
     <instanceAddress>/async
@@ -194,8 +196,8 @@ end="<!--additional-recommendations-end-->"
 
 --8<-- "related_topics_heading.md"
 
-- _[Настройка конфигурации вспомогательного ПО для оптимизации работы {{ productName }}][auxiliary_software_optimize]_
-- _[Пути и содержимое директорий экземпляра ПО][paths_windows]_
+- [Настройка конфигурации вспомогательного ПО для оптимизации работы {{ productName }}][auxiliary_software_optimize]
+- [Пути и содержимое директорий экземпляра ПО][paths_windows]
 
 </div>
 

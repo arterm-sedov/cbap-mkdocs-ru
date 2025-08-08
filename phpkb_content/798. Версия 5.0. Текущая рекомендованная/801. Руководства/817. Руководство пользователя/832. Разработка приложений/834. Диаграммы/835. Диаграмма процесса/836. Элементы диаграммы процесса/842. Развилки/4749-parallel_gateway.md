@@ -5,7 +5,7 @@ kbId: 4749
 
 # Развилка «и»
 
-### Определения
+## Определения
 
 **Развилка «и»** используется двумя способами:
 
@@ -16,16 +16,16 @@ kbId: 4749
 
 Количество входящих и исходящих потоков у развилки «и» может быть любым. Но *не рекомендуется одновременно использовать несколько входящих и исходящих потоков*. Рекомендуется соединять развилку либо с одним входящим потоком, либо с одним исходящим.
 
-_![Развилка «и» и её меню элемента](https://kb.comindware.ru/assets/parallel_gateway.png)_
+_![Развилка «и» и её меню элемента](/platform/v5.0/business_apps/diagrams/process_diagram/process_diagram_elements/gateways/img/parallel_gateway.png)_
 
-_![Пример использования развилок «и»](https://kb.comindware.ru/assets/parallel_gateway_example.png)_
+_![Пример использования развилок «и»](/platform/v5.0/business_apps/diagrams/process_diagram/process_diagram_elements/gateways/img/parallel_gateway_example.png)_
 
 ## Операции в меню элемента «Развилка «и»
 
 - **Действия**
-    - **Свойства** *‌* — переход к окну [свойств развилки «и»](#mcetoc_1h2ammo9d1).
-    - **Сценарий на выходе** *‌* — переход к конструктору сценария на выходе из данного элемента.
-    - **Удалить** *‌* — удаление данного элемента из диаграммы процесса.
+  - **Свойства** *‌* — переход к окну [свойств развилки «и»](#свойства-развилки-и).
+  - **Сценарий на выходе** *‌* — переход к конструктору сценария на выходе из данного элемента.
+  - **Удалить** *‌* — удаление данного элемента из диаграммы процесса.
 - **Изменить тип** — смена типа развилки.
 - **Быстрое создание** — добавление связанного элемента на диаграмму процесса.
 
@@ -33,18 +33,13 @@ _![Пример использования развилок «и»](https://kb.c
 
 В окне свойств **развилки «и»** можно настроить только [общие свойства элемента диаграммы процесса][process_diagram_element_common_properties].
 
-_![Свойства развилки «и»](https://kb.comindware.ru/assets/parallel_gateway_general_properties.png)_
+_![Свойства развилки «и»](/platform/v5.0/business_apps/diagrams/process_diagram/process_diagram_elements/gateways/img/parallel_gateway_general_properties.png)_
 
 --8<-- "related_topics_heading.md"
 
-**[Поток управления][process_diagram_elements_sequence_flow]**
-
-**[Развилка «или/или»][process_diagram_elements_gateway_exclusive]**
-
-**[Общие свойства элементов диаграммы процесса][process_diagram_element_common_properties]**
-
-**[Элементы диаграммы процесса][process_diagram_elements]**
-
-**[Редактирование диаграммы процесса][process_diagram]**
+- *[Развилка «или/или»][process_diagram_elements_gateway_exclusive]*
+- *[Общие свойства элементов диаграммы процесса][process_diagram_element_common_properties]*
+- *[Элементы диаграммы процесса][process_diagram_elements]*
+- *[Редактирование диаграммы процесса][process_diagram]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

@@ -16,35 +16,35 @@ kbId: 4608
 1.1. Перейдите в папку пользователя `username`:
 
 ```
-cd /home/username
+cd /home/username
 
 ```
 
 1.2. Для добавления репозитория Zabbix загрузите его deb-пакет:
 
 ```
-wget https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.0-4%2Bubuntu22.04_all.deb
+wget https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.0-4%2Bubuntu22.04_all.deb
 
 ```
 
 1.3. Распакуйте deb-пакет:
 
 ```
-sudo dpkg -i zabbix-release_6.0-4+ubuntu22.04_all.deb
+sudo dpkg -i zabbix-release_6.0-4+ubuntu22.04_all.deb
 
 ```
 
 1.4. Обновите базу данных пакетов в операционной системе:
 
 ```
-sudo apt update
+sudo apt update
 
 ```
 
 1.5. Установите *Zabbix Agent*:
 
 ```
-sudo apt install --yes zabbix-agent
+sudo apt install --yes zabbix-agent
 
 ```
 
@@ -53,21 +53,21 @@ sudo apt install --yes zabbix-agent
 2.1. На каждой из машин с *Zabbix Agent* отредактируйте файл конфигурации: `/etc/zabbix/zabbix_agentd.conf`:
 
 ```
-sudo nano /etc/zabbix/zabbix_agentd.conf
+sudo nano /etc/zabbix/zabbix_agentd.conf
 
 ```
 
 2.2. В файле конфигурации укажите IP-адрес *Zabbix Server* — в подключениях с неизвестных IP-адресов будет отказано:
 
 ```
-Server=your.server.ip.address
+Server=your.server.ip.address
 
 ```
 
 2.3. Отредактируйте директиву `ServerActive`:
 
 ```
-ServerActive=your.server.ip.address
+ServerActive=your.server.ip.address
 
 ```
 
@@ -76,22 +76,22 @@ ServerActive=your.server.ip.address
 3.1. Разрешите в сетевом экране обращения через порт `10050`:
 
 ```
-sudo ufw allow 10050/tcp
+sudo ufw allow 10050/tcp
 
 ```
 
 3.2. Примените изменения:
 
 ```
-sudo systemctl daemon-reload
-sudo ufw reload
+sudo systemctl daemon-reload
+sudo ufw reload
 
 ```
 
 3.3. Запустите службу *Zabbix Agent* и добавьте его в список автозагрузки:
 
 ```
-sudo systemctl enable --now zabbix-agent
+sudo systemctl enable --now zabbix-agent
 
 ```
 
@@ -144,17 +144,18 @@ _![](https://kb.comindware.ru/assets/img_63ad999c17b2e.png)_Статус хос�
 - значения `Server` и `ServerActive` в файле конфигурации *Zabbix Agent* `/etc/zabbix/zabbix_agentd.conf` соответствуют IP-адресу *Zabbix Server*:
 
 ```
-Server=192.168.0.1 # ip-адрес приведён как пример
+Server=192.168.0.1 # ip-адрес приведён как пример
 
 ```
 
 ```
-ServerActive=192.168.0.1 # ip-адрес приведён как пример
+ServerActive=192.168.0.1 # ip-адрес приведён как пример
 
 ```
 
 **Примечание**
 При любых изменениях в файле конфигурации необходимо остановить и снова запустить (при перезапуске используется конфигурация из памяти) сервис Zabbix Agent или перезагрузить компьютер.
+
 ## Использованные ресурсы
 
 [Официальная инструкция по установке Zabbix (на английском языке)](https://www.zabbix.com/documentation/current/en/manual/installation/install#installing-zabbix-daemons)

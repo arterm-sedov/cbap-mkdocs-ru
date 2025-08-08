@@ -1,154 +1,151 @@
 ---
-title: Резервное копирование и восстановление Comindware Platform. Краткое руководство для ОС Windows
+title: Резервное копирование и восстановление в Windows
 kbId: 4644
 ---
 
-# Резервное копирование и восстановление {{ productName }}. Краткое руководство для ОС Windows
+# Резервное копирование и восстановление в Windows
 
 ## Введение
 
 Здесь представлены инструкции по резервному копированию и восстановлению данных **{{ productName }}** в ОС Windows.
 
-Определения
-
-**Elasticsearch (OpenSearch)** — система журналирования в составе **{{ productName }}**.
-
-**Снимок** — набор данных, сохранённый на определённый момент времени.
+См. также «*[Резервное копирование. Настройка и запуск, просмотр журнала сеансов][backup_configure]»*.
 
 ## Подготовка к резервному копированию и восстановлению данных
 
-Для создания резервных копий и восстановления из них данных {{ productName }} необходимо подготовить конфигурацию резервного копирования, как указано ниже.
+Для создания резервных копий и восстановления из них данных **{{ productName }}** необходимо подготовить перечисленные ниже сведения.
 
-1. Подготовьте следующие данные о конфигурации экземпляра продукта:
+1. Подготовьте данные о конфигурации экземпляра ПО:
 
-    - Название экземпляра продукта — `<InstanceName>`(например, `CBAP4.2`).
-    - Путь к папке с базой данных экземпляра продукта, например `DatabasePath` (по умолчанию: `C:\\ProgramData\\Comindware\\Instances\\<InstanceName>\\Data`).
-    - Путь к папке резервных копий базы данных — `DatabaseBackupPath` (например, `С:\\DatabaseBackups`).
-    - Имя репозитория снимков Elasticsearch — *`repository_name`* (например, `elastic_backup`).
-    - Путь к репозиторию снимков Elasticsearch — `elastic_backup_path`(например, `e:\\elastic_backup`).
-    - Имя снимка Elasticsearch — `snapshot_name` (например, `<InstanceName>01022022080800` — в формате `<<InstanceName>><Date><Time>`). См. инструкции Elasticsearch по формированию имён снимков с использованием текущей даты (на английском языке): <https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html#api-date-math-index-names>.
-2. Настройте конфигурацию репозитория снимков сервера Elasticseach.
+   - Имя экземпляра ПО — `<instanceName>`.
+   - Путь к папке резервных копий базы данных — `<DatabaseBackupPath>` (например, `X:\\DatabaseBackups`). См. *«[Настройка конфигураций и запуск резервного копирования][backup_configure]»*.
+   - `<distPath>` — путь к распакованному дистрибутиву ПО **{{ productName }}**.
+2. Подготовьте данные о конфигурации OpenSearch (Elasticsearch):
 
-    1. Откройте файл `elasticsearch.yml` в папке с данными конфигурации Elasticseach (например: `C:\\ElasticsearchData`)
-    2. В файле `elasticsearch.yml` и добавьте директиву `path.repo` и через двоеточие укажите путь к репозиторию снимков (папке с резервными копиями), например:````
-path.repo: elastic_backup_path
+   - Путь к файлу конфигурации OpenSearch (Elasticsearch) `elasticsearch.yml` (например: `C:\\ElasticsearchData\\elasticsearch.yml`)
+   - Имя репозитория снимков OpenSearch (Elasticsearch) — `<repository_name>` (например, `elastic_backup`).
+   - Путь к репозиторию снимков OpenSearch (Elasticsearch) — `<elastic_backup_path>`(например, `e:\\elastic_backup`).
+   - Имя снимка OpenSearch (Elasticsearch) — `<snapshot_name>` (например, `<instanceName>01022022080800` — в формате `<instanceName><Date><Time>`).
 
-````
+   См. [документацию OpenSearch (Elasticsearch) по формированию имён снимков](https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html#api-date-math-index-names).
 
-## Порядок резервного копирования данных экземпляра продукта
+## Порядок резервного копирования данных экземпляра ПО
 
-Данные экземпляра продукта хранятся в двух независимых друг от друга хранилищах: на сервере Elasticsearch и в папке с базой данных экземпляра продукта — `DatabasePath`. Cм. *«[Подготовка к резервному копированию и восстановлению данных](#подготовка-к-резервному-копированию-и-восстановлению-данных)»*.
+Данные экземпляра ПО находятся в двух хранилищах: базе данных экземпляра ПО и на сервере OpenSearch (Elasticsearch). Cм. *«[Подготовка к резервному копированию и восстановлению данных](#backup_restore_windows_prepare)»*.
 
-Так как осуществить одновременное резервное копирование двух хранилищ не представляется возможным, резервное копирование данных из каждого хранилища выполняется отдельно в два этапа и в отдельные папки:
+Здесь представлен следующий порядок резервного копирования:
 
-1. [Создание снимка сервера Elasticsearch](#регистрация-репозитория-и-создание-снимка-elasticsearch) — данные истории и мониторинга копируются в отдельную папку.
-2. [Сохранение резервной копии базы данных экземпляра продукта](#сохранение-резервной-копии-базы-данных-экземпляра-продукта) в папку `DatabaseBackupPath`.
+1. [Сохраните резервную копию базы данных экземпляра продукта][backup_configure].
+2. [Создайте снимок сервера OpenSearch (Elasticsearch)](#backup_restore_windows_registry_snapshot). Этот шаг может не потребоваться в зависимости от вашей конфигурации OpenSearch (Elasticsearch).
 
-## Выполнение резервного копирования
+### Регистрация репозитория и создание снимка OpenSearch (Elasticsearch)
 
-### Регистрация репозитория и создание снимка Elasticsearch
+Определения
 
-1. Чтобы зарегистрировать репозиторий, выполните следующую команду, указав в URL имя репозитория `repository_name` (см. *«[Подготовка к резервному копированию и восстановлению данных](#подготовка-к-резервному-копированию-и-восстановлению-данных)»*), а в параметре `location` — путь к репозиторию из директивы `path.repo` в файле конфигурации сервера Elasticsearch:
+**OpenSearch (Elasticsearch)** — служба журналирования транзакций в составе **{{ productName }}**.
 
-````
-curl -X PUT "localhost:9200/_snapshot/repository_name?pretty" -H 'Content-Type: application/json' -d' {"type": "fs", "settings": {"location": "elastic_backup_path"}}'
+**Снимок** — набор данных, сохранённый на определённый момент времени.
 
-````
-Подробные сведения о регистрации репозитория Elasticsearch см. в официальной документации (на английском языке): <https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html>
-2. Чтобы создать снимок Elasticsearch, выполните следующую команду, указав имя снимка `snapshot_name`, а в параметре `indices` — индексы, которые требуется включить в снимок (индексы {{ productName }} имеют префикс, например, `cmw_<<InstanceName>>_`):
+1. Настройте конфигурацию репозитория снимков сервера OpenSearch (Elasticsearch) в файле `elasticsearch.yml`:
 
-````
-curl -X PUT "localhost:9200/_snapshot/repository_name/snapshot_name?wait_for_completion=true&pretty" -H 'Content-Type: application/json' -d' {"indices": "cmw_<<InstanceName>>_*", "ignore_unavailable": true, "include_global_state": false}'
+   ```
+   path.repo: <elastic_backup_path>
 
-````
-Подробные сведения о создании снимка Elasticsearch см. в официальной документации (на английском языке): <https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-take-snapshot.html>
+   ```
+2. Чтобы зарегистрировать репозиторий, выполните следующую команду, указав в URL имя репозитория `<repository_name>` (см. *«[Подготовка к резервному копированию и восстановлению данных](#backup_restore_windows_prepare)»*), а в параметре `location` — путь к репозиторию из директивы `path.repo` в файле конфигурации сервера OpenSearch (Elasticsearch):
 
-### Сохранение резервной копии базы данных экземпляра продукта
+   ```
+   curl -X PUT "<openSearchHost>:<opeSearchPort>/_snapshot/<repository_name>?pretty" -H 'Content-Type: application/json' -d' {"type": "fs", "settings": {"location": "<elastic_backup_path>"}}'
 
-1. В экземпляре продукта откройте раздел «**Администрирование**» — «**Инфраструктура**» — «**Резервное копирование**».
-2. Нажмите кнопку «**Создать**» в списке конфигураций резервного копирования.
+   ```
 
-_![Создание новой конфигурации резервного копирования](https://kb.comindware.ru/assets/img_6321d80a2b32d.png)_
-3. В окне «**Новая конфигурация резервного копирования**»:
+   См. [документацию OpenSearch (Elasticsearch) по регистрации репозитория](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html).
+3. Чтобы создать снимок OpenSearch (Elasticsearch), выполните следующую команду, указав имя снимка `<snapshot_name>`, а в параметре `indices` — индексы, которые требуется включить в снимок (индексы {{ productName }} имеют префикс, например, `cmw_<instanceName>_`):
 
-    1. В поле «**Название**» укажите наглядное название конфигурации (например, «`Резервная копия <InstanceName>`»).
-    2. В поле «**Путь к файлу**» укажите путь к файлу резервной копии в папке `DatabaseBackupPath` на сервере. См. *«[Подготовка к резервному копированию и восстановлению данных](#подготовка-к-резервному-копированию-и-восстановлению-данных)»*.
-    3. В поле «**Имя файла**» укажите имя файла резервной копии (например, `Backup`).
-    4. Установите флажки «**С файлами**» и «**Со скриптами**».
-    5. Нажмите кнопку «**Сохранить**»._![Настройка новой конфигурации резервного копирования](https://kb.comindware.ru/assets/img_6321d7573245a.png)_
-4. Запустите резервное копирование:
+   ```
+   curl -X PUT "<openSearchHost>:<opeSearchPort>/_snapshot/<repository_name>/<snapshot_name>?wait_for_completion=true&pretty" -H 'Content-Type: application/json' -d' {"indices": "cmw_<instanceName>_*", "ignore_unavailable": true, "include_global_state": false}'
 
-    1. В списке конфигураций резервного копирования с помощью флажка выбора выберите созданную на [шаге 3](#P3.2.3) конфигурацию.
-    2. Нажмите кнопку «**Запустить копирование**»._![Запуск резервного копирования](https://kb.comindware.ru/assets/img_6321d902288c2.png)_
-5. В фоновом режиме начнется процесс резервного копирования.
-6. Прогресс и результат резервного копирования можно просмотреть в журнале резервного копирования, выбрав вкладку «**Журнал**» над списком конфигураций резервного копирования.
-7. В процессе резервного копирования к имени файла, указанному [на шаге 3](#P3.2.3) будут добавлена метка времени в формате `ГГГГММДДЧЧММ` и расширение `CDBBZ`, например для имени файла `Backup`: `Backup``.202202161625.cdbbz`
+   ```
 
-_![Переход к журналу резервного копирования](https://kb.comindware.ru/assets/img_6321dbd1da164.png)_
+   См. [документацию OpenSearch (Elasticsearch) по созданию снимков](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-take-snapshot.html).
 
-## Порядок восстановления данных экземпляра продукта
-
-Данные экземпляра продукта хранятся в трех независимых друг от друга хранилищах: сервере Apache Ignite, сервере Elasticsearch и папке `DatabaseBackupPath` (см. *«[Подготовка к резервному копированию и восстановлению данных](#подготовка-к-резервному-копированию-и-восстановлению-данных)»*). Поэтому восстановление осуществляется последовательно для каждого хранилища.
+## Порядок восстановления данных экземпляра ПО
 
 Внимание!
 
-Восстановление следует выполнять при остановленном экземпляре продукта.
+Перед восстановлением данных остановите экземпляр ПО.
 
-Восстановление данных из резервных копий выполняется в два этапа:
+См. *«[Установка, запуск, инициализация и остановка {{ productName }} в Windows][deploy_guide_windows]»*.
 
-1. [Восстановление снимка сервера Elasticsearch](#восстановление-снимка-elasticsearch).
-2. [Восстановление базы данных экземпляра продукта](#восстановление-базы-данных-экземпляра-продукта) из папки `DatabaseBackupPath`.
-
-## Выполнение восстановления
-
-### Восстановление снимка Elasticsearch
-
-1. Выполните следующую команду, указав имя репозитораия `repository_name` и имя снимка `snapshot_name` (см. *«[Подготовка к резервному копированию и восстановлению данных](#подготовка-к-резервному-копированию-и-восстановлению-данных)»*):
-
-````
-curl -X POST "localhost:9200/_snapshot/repository_name/snapshot_name/_restore?pretty"
-
-````
-Подробные сведения о восстановлении снимков Elasticsearch см. в официальной документации (на английском языке): <https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-restore-snapshot.html>
+1. [Восстановите базу данных экземпляра ПО](#backup_restore_windows_instance).
+2. [Восстановите снимок данных OpenSearch (Elasticsearch)](#backup_restore_windows_opensearch). Этот шаг может не потребоваться в зависимости от вашей конфигурации OpenSearch (Elasticsearch).
 
 ### Восстановление базы данных экземпляра продукта
 
-1. Восстановите базу данных экземпляра продукта согласно инструкциям в статье «[Восстановление экземпляра продукта из резервной копии][admin_utility_instance_backup_restore]».
+1. Запустите *PowerShell* от имени администратора.
+2. Перейдите в директорию со скриптами для развёртывания ПО **{{ productName }}**:
 
-## Проверка конфигурации экземпляра ПО
+   ```
+   cd "<distPath>\\CMW_Windows<versionNumber>\\scripts"
 
-1. Запустите экземпляр ПО.
-2. При необходимости откроется страница настройки подключения к службе Elasticsearch.
-3. В поле «URI» введите адрес автоматически своего сервера Elasticsearch.
-4. Введите **префикс индекса**, **имя пользователя** и **пароль сервера Elasticsearch**. .
-5. Нажмите кнопку «**Далее**».
+   ```
+3. Остановите экземпляр ПО:
 
-_![Настройка подключения к Elasticsearch](https://kb.comindware.ru/assets/Picture16.png)_
-6. При необходимости откроется страница инициализации данных в Elasticsearch.
-7. Нажмите кнопку «**Обновить**».
+   ```
+   .\\instance_stop.ps1 -name <instanceName>
 
-_![Страница инициализации данных в Elasticsearch](https://kb.comindware.ru/assets/Picture17.png)_
-8. Дождитесь открытия начальной страницы **{{ productName }}**.
-9. Откройте страницу «**Администрирование**» — «**Подключения**».
+   ```
+4. Удалите или переместите директорию `Database` из директории экземпляра ПО:
 
-_![Переход к свойства подключения к Elasticsearch](https://kb.comindware.ru/assets/img_64d09fd6ec3ba.png)_
-10. Откройте подключение к серверу Elasticsearch.
-11. Удостоверьтесь, что корректно указаны **префикс индекса** и **URL подключения** к серверу Elasticsearch.
+   ```
+   Remove-Item -Path "C:\\ProgramData\\comindware\\Instances\\<instanceName>\\Database" -Recurse
 
-_![Свойства подключения к серверу Elasticsearch](https://kb.comindware.ru/assets/img_64d0a41fc5e0b.png)_
-12. Откройте страницу «**Администрирование**» — «**Глобальная конфигурация**».
-13. Удостоверьтесь, что указан корректный **URL-адрес сервера**.
+   ```
+5. Распакуйте zip-архив резервной копии экземпляра ПО с расширением `CDBBZ` из папки `<DatabaseBackupPath>`.
+6. Скопируйте в экземпляр ПО распакованную резервную копию базы данных:
 
-_![URL-адрес сервера в глобальной конфигурации](https://kb.comindware.ru/assets/img_64d0a4feebc80.png)_
-14. Откройте страницу «**Администрирование**» — «**Резервное копирование**».
-15. Удостоверьтесь, что в конфигурациях резервного копирования правильно указаны пути для сохранения резервных копий.
+   ```
+   Copy-Item -Path "<config_backup_path>\\Database" -Destination "C:\\ProgramData\\сomindware\\Instances\\<instanceName>" -Recurse -Force
 
-_![Путь к папке резервных копий в конфигурации резервного копирования](https://kb.comindware.ru/assets/img_64d0a5817d06a.png)_
-16. При необходимости измените конфигурации резервного копирования, указав корректные пути к файлам.
+   ```
 
-_![Настройка пути к файлам резервной копии](https://kb.comindware.ru/assets/img_64d0a5f075838.png)_
+   Здесь: `<config_backup_path>` — директория с распакованной резервной копией.
+7. Запустите экземпляр ПО:
 
-[*‌*
- К началу](#)
+   ```
+   .\\instance_start.ps1 -name <instanceName>
+
+   ```
+8. Откройте сайт экземпляра ПО в браузере, одновременно открыв выдачу журналов экземпляра в *PowerShell*:
+
+   ```
+   Get-Content "C:\\ProgramData\\comindware\\Instances\\<instanceName>\\Logs\\heartbeat_<ГГГГ-ММ-ДД>.log" -Wait
+
+   ```
+9. Проверьте и при необходимости исправьте конфигурацию экземпляра ПО. См. *«[Проверка и настройка конфигурации экземпляра ПО {{ productName }} после восстановления из резервной копии][restore_test_configure]»*.
+10. Проверьте и работоспособность экземпляра ПО.
+11. Создайте резервную копию работоспособного экземпляра **{{ productName }}**.
+
+### Восстановление снимка OpenSearch (Elasticsearch)
+
+1. Выполните следующую команду, указав имя репозитория `<repository_name>` и имя снимка `<snapshot_name>` (см. *«[Подготовка к резервному копированию и восстановлению данных](#backup_restore_windows_prepare)»*):
+
+```
+curl -X POST "<openSearchHost>:<opeSearchPort>/_snapshot/<repository_name>/<snapshot_name>/_restore?pretty"
+
+```
+
+Подробные сведения о восстановлении снимков OpenSearch (Elasticsearch) см. в официальной документации (на английском языке): <https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-restore-snapshot.html>
+
+--8<-- "related_topics_heading.md"
+
+- [Резервное копирование. Настройка и запуск, просмотр журнала сеансов][backup_configure]
+- [Пути и содержимое директорий экземпляра ПО][paths]
+- [Установка, запуск, инициализация и остановка {{ productName }} в Windows][deploy_guide_windows]
+- [Проверка и настройка конфигурации экземпляра ПО {{ productName }} после восстановления из резервной копии][restore_test_configure]
+- [Документация OpenSearch (Elasticsearch) по формированию снимков (на английском языке)](https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html#api-date-math-index-names)
+- [Документация OpenSearch (Elasticsearch) по регистрации репозитория (на английском языке)](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html)
+- [Документация OpenSearch (Elasticsearch) по созданию снимков (на английском языке)](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-take-snapshot.html)
+- [Документация OpenSearch (Elasticsearch) по о восстановлению снимков (на английском языке)](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-restore-snapshot.html)
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

@@ -1,0 +1,84 @@
+<h1>Stopping the Process on a Button Click</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1gtl04fvp0">Use Case</a></li>
+<li><a href="#mcetoc_1gtdv3j1r0">Setting up the Processes and Templates </a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1gtl04fvp0">Use Case</h2>
+<p>When setting up a process, you often get several options for its completion logic. For example, you stop the process when an inquiry may be approved or rejected. Or you might need to end the process from the outside, for instance, if the initiator wants to withdraw a contract already sent for approval. For such a case, you can create a button that will stop the whole process at any step.</p>
+<p><strong>Scenario:</strong> In the <em>Contract Approval</em> process, the initiator decides that a contract is no longer valid and wants to cancel its approval.</p>
+<p><strong>Solution:</strong> We will use inter-process communication and create a button to cancel the contract approval.</p>
+<h2 id="mcetoc_1gtdv3j1r0">Setting up the Processes and Templates </h2>
+<ol class="colored_numbers_list">
+<li>In the <strong>record</strong> <strong>template</strong> (for instance, <em>Contract Approvals</em>) linked to the main <em>Contract Approval</em> <strong>process template</strong>, create a <strong>Text</strong> attribute:  <em><strong>ProcessID</strong></em>.</li>
+<li>On the <em>Contract Approval</em> process diagram:
+<ul>
+<li>Open the exit scenario of the start event.</li>
+<li>Add <strong>Change attribute values</strong> action.</li>
+<li>In the action properties, specify the <em><strong>ProcessID </strong></em>attribute value using the following <strong>formula</strong>: <code>FORMAT("{0}", LIST($$ProcessObject))</code><span style="font-size: 11.5pt; line-height: 107%; font-family: 'Open Sans',sans-serif; color: #545764; letter-spacing: .15pt;">. This formula returns the active process ID. </span></li>
+</ul>
+</li>
+<li>On the same process diagram:</li>
+<ul>
+<li>Add a parallel gateway between the <strong>Start event </strong>and <em>User Task 1</em>.</li>
+<li>To the parallel gateway, add <strong>Receive message intermediate event</strong> and <strong>End event</strong>. One token will go to the <em>User Task 1</em>, and the other will go to the <strong>Receive message intermediate event</strong>.</li>
+<li><a id="Receive-Message-Properties"></a>In the <strong>Receive message event properties</strong>:
+<ul style="list-style-type: circle;">
+<li>Specify a unique <strong>Message name</strong> (you will later use it in the <strong>Send message event</strong>) on the <strong>Advanced</strong> tab.</li>
+<li>Configure the attribute mapping on the <strong>Message data</strong> tab if needed.</li>
+</ul>
+</li>
+</ul>
+</ol>
+<p>Thus, when the process starts, two tokens are active. The process will end according to the configured logic (for example, upon the contract approval) or when a cancellation message is sent to the <strong>Receive message intermediate event</strong>.</p>
+<div class="screenshot_with_caption">
+<p><img align="" alt="Main process diagram" class="img-responsive" height="571" src="https://kb.cmwlab.com/assets/canceleng1.png" width="1209"/></p>
+<p class="caption">Main <em>Contract Approval </em>process diagram</p>
+</div>
+<div class="blue_note"><strong>Note: </strong>For this scenario, all end events in the process must be terminators so that they stop the whole process, not just one of its tokens.</div>
+<ol class="colored_numbers_list" style="counter-increment: my-counter 3;">
+<li>Create an auxiliary <strong>process</strong> <strong>template</strong> <em>Contract Withdrawal</em> with a new linked <strong>record template</strong> (for example, <em>Contract Withdrawals</em>).</li>
+<li>In this new <strong>record template, </strong>c<span style="letter-spacing: 0.2px;">reate the attributes:</span>
+<ul>
+<li><strong><a id="Contract-Record-Attribute"></a>Record</strong> attribute <em>Contract </em>linked to the <em>Contact Approvals </em><strong>record template</strong> (with <strong>attribute interlinking</strong>)</li>
+<li><strong>Text</strong> attribute <em>Comment </em>(place it on the <em>Contract Withdrawal</em> process <strong>Start form</strong>).</li>
+</ul>
+</li>
+</ol>
+<div class="screenshot_with_caption">
+<p><img alt="Auxiliary process diagram" class="img-responsive" height="389" src="https://kb.cmwlab.com/assets/img_6430203a82d6d.png" width="933"/></p>
+<p class="caption">Auxiliary <em>Contract Withdrawal </em>process diagram</p>
+</div>
+<ol class="colored_numbers_list" style="counter-increment: my-counter 5;">
+<li>On the <em>Contract Withdrawal</em> diagram <em>:</em>
+<ul>
+<li>Add a <strong>Send message intermediate event</strong> between the <strong>Start event</strong> and <strong>End event.</strong></li>
+<li>In the <strong>Send message event properties:</strong>
+<ul style="list-style-type: circle;">
+<li>Specify the same <strong>Message name</strong> as in the <a href="#Receive-Message-Properties"><strong>Receive message event</strong> <strong>properties</strong></a> on the <em>Contract Approval</em> process diagram,</li>
+<li>Specify the <strong>Process instance</strong> using the following <strong>formula</strong>: <em><strong>$Contract-&gt;ProcessID</strong>, </em>where:
+<ul style="list-style-type: square;">
+<li><a href="#Contract-Record-Attribute"><em><strong>$Contract</strong></em> is the attribute</a> linked to the <em>Contract Approvals</em> record template.</li>
+<li><strong><em>ProcessID</em> </strong>is the attribute created in <a href="#ProcessID-Attribute">step 1</a>. It stores the active process ID.</li>
+<li>Configure the attribute mapping on the <strong>Message data</strong> tab, if necessary.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Configure the <strong>Start form</strong> if needed.</li>
+</ul>
+</li>
+<li>In the <em>Contract Approvals</em> <strong>record template</strong> (linked to the <em>Contract Approvals </em>process), create a new button: <em>Withdraw contract</em><em>.</em></li>
+<li>Configure the <em>Withdraw contract</em> button properties:
+<ul>
+<li><strong>Operation context</strong> — <strong>Record</strong></li>
+<li><strong>Operation</strong> — <strong>Start process from linked template</strong></li>
+<li><strong>Operation result</strong> — <strong>Refresh data</strong></li>
+<li><strong>Template</strong> — <em>Contract Withdrawal</em> (<strong>attribute</strong>: <em>Contract Approval</em>)</li>
+<li><strong style="letter-spacing: 0.2px;">Display condition</strong> — specify when to show the button if needed<span style="letter-spacing: 0.2px;">.</span></li>
+</ul>
+</li>
+<li>Place the <em>Withdraw contract</em> button on any form or table toolbar.</li>
+<li>Test the process.</li>
+</ol>

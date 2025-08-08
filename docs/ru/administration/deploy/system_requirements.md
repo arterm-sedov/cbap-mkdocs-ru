@@ -1,18 +1,24 @@
 ---
-title: Системные требования
-kbTitle: Системные требования Comindware Platform
+title: 'Системные требования'
+kbTitle: 'Системные требования Comindware Platform'
 kbId: 4659
+tags:
+  - системные требования
+  - оборудование
+  - программное обеспечение
+  - производительность
+hide: tags
 ---
 
-# Системные требования {{ productName }} {: #system_requirements}
+# Системные требования {{ productName }} {: #system_requirements }
 
-## Введение
+## Введение {: #system_requirements_intro }
 
 Ниже представлены минимальные требования к техническому и программному обеспечению для успешного запуска и использования **{{ productName }}**.
 
-## Требования к техническому обеспечению
+## Требования к техническому обеспечению {: #system_requirements_hardware }
 
-### Сервер базы данных и приложений
+### Сервер базы данных и приложений {: #system_requirements_hardware_server }
 
 {% if gostech %}
 
@@ -26,7 +32,7 @@ kbId: 4659
 
 {% else %}
 
-| Характеристика | До 500 пользователей и до 10 000 процессов в месяц | До 5000 пользователей и до 50 000 процессов в месяц | Расширение на каждые 4000 пользователей и 30 000 процессов в месяц |
+| Характеристика | До 500 пользователей и до 10&nbsp;000 процессов в месяц | До 5000 пользователей и до 50&nbsp;000 процессов в месяц | Расширение на каждые 4000 пользователей и 30&nbsp;000 процессов в месяц |
 | --- | --- | --- | --- |
 | Процессор | 8 ядер от 3,7 ГГц | 8 ядер от 3,7 ГГц | + 4 ядра от 3,7 ГГц |
 | Память | 32 ГБ | 64 ГБ | + 32 ГБ |
@@ -39,7 +45,7 @@ kbId: 4659
 
     Для обеспечения оптимальной производительности следует использовать SSD-накопители с интерфейсом NVMe.
 
-### Клиентское рабочее место
+### Клиентское рабочее место {: #system_requirements_hardware_client }
 
 | Характеристика | Значение                          |
 | ------------------ | --------------------------------- |
@@ -48,16 +54,18 @@ kbId: 4659
 | Монитор            | 1024x768 и выше                   |
 | Сетевое соединение | 10 Мбит/с                         |
 
-## Требования к программному обеспечению
+## Требования к программному обеспечению {: #system_requirements_software }
 
-### Сервер баз данных и приложений
+### Сервер баз данных и приложений {: #system_requirements_software_server }
 
 <table markdown="block">
 <thead>
 <tr>
-<th>Характеристика</th>
+<th style="width:{% if completeGuide %}25%{% else %}35%{% endif %}">
+Характеристика
+</th>
 {% if adminGuideWindows %}<th>Windows</th>{% endif %}
-<th>Linux</th>
+{% if adminGuideLinux %}<th>Linux</th>{% endif %}
 </tr>
 </thead>
 <tbody markdown="block">
@@ -69,26 +77,29 @@ kbId: 4659
 ОС
 {% endif %}
 </td>
-{% if adminGuideWindows %}<td>Windows Server Standard 2022</td>{% endif %}
-<td markdown="block">
-- Astra Linux Special Edition 1.7.5
-- Альт Сервер 11, Альт СП 11
+{% if adminGuideWindows %}<td>Windows Server Standard 2022</td>{% endif %}
+{% if adminGuideLinux %}<td markdown="block">
+- Astra Linux Special Edition 1.7.5
+- Альт Сервер 11, Альт&nbsp;СПАльт&nbsp;11
 {% if not gostech %}
-- РЕД ОС 8
+- РЕД ОС 8
 - Debian 12
 {% endif %}
-</td>
+</td>{% endif %}
 </tr>
 <tr>
 <td>СУБД</td>
 {% if adminGuideWindows %}
 <td>{{ apacheIgniteVariants }}</td>
 {% endif %}
+{% if adminGuideLinux %}
 <td>{{ apacheIgniteVariants }}</td>
+{% endif %}
 </tr>
 <tr>
 <td>Веб-сервер</td>
-{% if adminGuideWindows %}<td>Internet Information Services (IIS) 10 и выше</td>{% endif %}
+{% if adminGuideWindows %}<td>Internet Information Services (IIS) 10 и выше</td>{% endif %}
+{% if adminGuideLinux %}
 <td>
 {% if gostech %}
 {{ nginxVariants }}
@@ -96,26 +107,29 @@ kbId: 4659
 NGINX 1.24 и выше
 {% endif %}
 </td>
+{% endif %}
 </tr>
 <tr markdown="block">
 <td>Дополнительное ПО{% if not gostech %} (поставляется и устанавливается вместе с основным пакетом){% endif %}</td>
 {% if adminGuideWindows %}
 <td markdown="block">
 - NET 6.0
-- .NET Framework 4.8.1
-- {% if gostech %}{{ apacheKafkaVariants }}{% else %}Apache Kafka 3.6.0 и выше{% endif %}
+- .NET Framework 4.8.1
+- {% if gostech %}{{ apacheKafkaVariants }}{% else %}Apache Kafka 3.6.0 и выше{% endif %}
 - {% if gostech %}{{ openSearchVariants }}{% else %}OpenSearch 2.18.0 или Elasticsearch 8.10 и выше{% endif %}</td>
 {% endif %}
+{% if adminGuideLinux %}
 <td markdown="block">
-- NET 6.0
-{% if not gostech %}- Mono 6.12{% endif %}
-- {% if gostech %}{{ apacheKafkaVariants }}{% else %}Apache Kafka 3.6.0 и выше{% endif %}
+- NET 6.0
+{% if not gostech %}- Mono 6.12{% endif %}
+- {% if gostech %}{{ apacheKafkaVariants }}{% else %}Apache Kafka 3.6.0 и выше{% endif %}
 - {% if gostech %}{{ openSearchVariants }}{% else %}OpenSearch 2.18.0 или Elasticsearch 8.10 и выше{% endif %}</td>
+{% endif %}
 </tr>
 </tbody>
 </table>
 
-### Клиентское рабочее место
+### Клиентское рабочее место {: #system_requirements_software_client }
 
 | Характеристика | Значение                                                                   |
 | ------------------ | -------------------------------------------------------------------------- |

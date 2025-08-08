@@ -1,0 +1,59 @@
+<h1>Шаблон. Переключение флажка «Является справочником» с помощью API</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr">
+<div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#прикладная-задача"> <span class="md-ellipsis"> Прикладная задача </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#снятие-флажка-является-справочником-с-помощью-api"> <span class="md-ellipsis"> Снятие флажка «Является справочником» с помощью API </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#установка-флажка-является-справочником-с-помощью-api"> <span class="md-ellipsis"> Установка флажка «Является справочником» с помощью API </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>У шаблонов в <strong>Comindware Platform</strong> предусмотрен флажок «<strong>Является справочником</strong>».</p>
+<p>Если установлен этот флажок, атрибуты в шаблоне могут ссылаться только на шаблоны-справочники.</p>
+<h2 id="прикладная-задача">Прикладная задача</h2>
+<p>Требуется снять флажок «<strong>Является справочником</strong>», чтобы шаблон мог ссылаться на шаблоны, не являющиеся справочниками.</p>
+<p>В некоторых конфигурациях переключить этот флажок вручную не представляется возможным, например для шаблонов оргединиц и ролей.</p>
+<p>В таком случае его можно переключить с помощью следующих методов <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4862">System Core API</a>:</p>
+<ul>
+<li><code>/Base/OntologyService/RemoveStatement</code> — снять флажок;</li>
+<li><code>/Base/OntologyService/AddStatement</code> — установить флажок.</li>
+</ul>
+<h2 id="снятие-флажка-является-справочником-с-помощью-api">Снятие флажка «Является справочником» с помощью API</h2>
+<p>Выполните следующий запрос:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>curl -X POST <span class="s2">"https://your-host/api/public/system/Base/OntologyService/AddStatement"</span> <span class="se">\</span></code> <br/><code>-H <span class="s2">"Content-Type: application/json"</span> -d <span class="se">\</span></code> <br/><code><span class="s1">'{</span></code> <br/><code><span class="s1">  "subject": "template.id",</span></code> <br/><code><span class="s1">  "predicate": "cmw.object.specialization",</span></code> <br/><code><span class="s1">  "value": "cmw.object.specializationType.ReferenceData"</span></code> <br/><code><span class="s1">}'</span></code></pre>
+</div>
+<p>Здесь:</p>
+<ul>
+<li><code>template.id</code> — идентификатор шаблона;</li>
+<li><code>https://your-host/</code> — адрес сервера <strong>Comindware Platform</strong>.</li>
+</ul>
+<h2 id="установка-флажка-является-справочником-с-помощью-api">Установка флажка «Является справочником» с помощью API</h2>
+<p>Выполните следующий запрос:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>curl -X POST <span class="s2">"https://your-host/api/public/system/Base/OntologyService/AddStatement"</span> <span class="se">\</span></code> <br/><code>-H <span class="s2">"Content-Type: application/json"</span> -d <span class="se">\</span></code> <br/><code><span class="s1">'{</span></code> <br/><code><span class="s1">  "subject": "template.id",</span></code> <br/><code><span class="s1">  "predicate": "cmw.object.specialization",</span></code> <br/><code><span class="s1">  "value": "cmw.object.specializationType.ReferenceData"</span></code> <br/><code><span class="s1">}'</span></code></pre>
+</div>
+<p>Здесь:</p>
+<ul>
+<li><code>template.id</code> — идентификатор шаблона;</li>
+<li><code>https://your-host/</code> — адрес сервера <strong>Comindware Platform</strong>.</li>
+</ul>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4862">Методы System Core API</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4709">Шаблоны. Определения, настройка, перенос, архивирование, очистка</a></em></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>
+</div>

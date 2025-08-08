@@ -14,16 +14,16 @@ kbId: 4766
 - **Формат отображения** — предусмотрен только формат «**Гиперссылка**».
 - **Допустимые схемы URI** — выберите в этом раскрывающемся списке типы гиперссылок, которые можно будет вводить и хранить в атрибуте:
 
-| Схема URI | Допустимый формат значения |
-| --- | --- |
-| - **HTTP** | `http://site.ru` |
-| - **HTTPS** | `https://site.ru` |
-| - **FTP** | `ftp://company.ru` |
-| - **FTPS** | `ftps://company.ru` |
-| - **mailto** | `address@site.ru` |
-| - **SSH** | `ssh://user@server.ru` |
-| - **Telegram** | `https://t.me/username` |
-| - **Git** | `git://server.ru/repository` |
+  | Схема URI | Допустимый формат значения |
+  | --- | --- |
+  | - **HTTP** | `http://site.ru` |
+  | - **HTTPS** | `https://site.ru` |
+  | - **FTP** | `ftp://company.ru` |
+  | - **FTPS** | `ftps://company.ru` |
+  | - **mailto** | `address@site.ru` |
+  | - **SSH** | `ssh://user@server.ru` |
+  | - **Telegram** | `https://t.me/username` |
+  | - **Git** | `git://server.ru/repository` |
 - «**Вычислять автоматически**» — установите этот флажок, чтобы значение атрибута вычислялось во время работы приложения. См. «**[Вычисляемые атрибуты][attribute_calculated]**».
 
 _![Свойства атрибута типа «Гиперссылка»](/platform/v5.0/business_apps/templates/attributes/img/attribute_hyperlink_properties.png)_
@@ -37,17 +37,19 @@ _![Свойства атрибута типа «Гиперссылка»](/platf
 1. Создайте шаблон записи «*Контактная информация*».
 2. Создайте и вынесите на основную форму следующие **атрибуты**:
 
-| Название | Тип данных | Свойства |
-| --- | --- | --- |
-| *Ф. И. О.* | **Текст** |  |
-| *Номер телефона* | **Текст** | **Формат отображения: Телефон (РФ)** |
-| *Телеграм* | **Гиперссылка** | **Допустимые схемы URI: Telegram** |
-| *Эл. почта* | **Гиперссылка** | **Допустимые схемы URI: mailto** |
+   | Название | Тип данных | Свойства |
+   | --- | --- | --- |
+   | *Ф. И. О.* | **Текст** |  |
+   | *Номер телефона* | **Текст** | **Формат отображения: Телефон (РФ)** |
+   | *Телеграм* | **Гиперссылка** | **Допустимые схемы URI: Telegram** |
+   | *Эл. почта* | **Гиперссылка** | **Допустимые схемы URI: mailto** |
 3. Создайте новую запись.
 4. В поле *«Эл. почта»* введите адрес электронной почты в формате `address@site.ru`
 5. В поле *«Телеграм»* введите ссылку на Telegram в формате `https://t.me/username`.
 
-_![Корректно заполненные гиперссылки](/platform/v5.0/business_apps/templates/attributes/img/attribute_hyperlink_example_telegram_valid.png)_
+   ![Корректно заполненные гиперссылки](/platform/v5.0/business_apps/templates/attributes/img/attribute_hyperlink_example_telegram_valid.png)
+
+   Корректно заполненные гиперссылки
 
 **Результирующее поведение**
 
@@ -56,15 +58,14 @@ _![Корректно заполненные гиперссылки](/platform/v
 3. Если вы щёлкните гиперссылку на Telegram, то откроется чат с указанным пользователем.
 4. При попытке ввода в поле *«Телеграм»* ссылки `t.me/username` без префикса `https://` отобразится сообщение об ошибке «**Не соответствует формату ссылки на Telegram**».
 
-_![Проверка формата гиперссылки](/platform/v5.0/business_apps/templates/attributes/img/attribute_hyperlink_example_telegram_invalid.png)_
+   ![Проверка формата гиперссылки](/platform/v5.0/business_apps/templates/attributes/img/attribute_hyperlink_example_telegram_invalid.png)
+
+   Проверка формата гиперссылки
 
 --8<-- "related_topics_heading.md"
 
 - *[Общие свойства атрибутов][attribute_common_properties]*
 - *[Атрибуты. Определения, типы, настройка, архивирование, удаление][attributes]*
-- *[Динамические элементы формы. Настройка представления гиперссылки][form_dynamic_elements_hyperlink]*
-
-[*‌*
- К началу](#)
+- *[Динамические элементы формы. Настройка представления гиперссылки][form_dynamic_elements]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

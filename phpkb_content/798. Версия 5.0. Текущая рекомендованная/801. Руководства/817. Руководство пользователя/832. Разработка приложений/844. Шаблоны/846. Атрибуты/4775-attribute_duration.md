@@ -35,6 +35,4 @@ _![Свойства атрибута типа «Длительность»](http
 
 **[Атрибуты. Определения, типы, настройка, архивирование, удаление][attributes]**
 
-
-
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

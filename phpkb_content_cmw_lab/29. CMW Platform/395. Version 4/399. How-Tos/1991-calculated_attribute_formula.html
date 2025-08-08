@@ -1,0 +1,118 @@
+<h1>Configuring a Calculated Attribute with a Formula</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1gto45cak0">Use Case</a></li>
+<li><a href="#mcetoc_1gto5lnnp3">Prerequisites</a></li>
+<li><a href="#mcetoc_1gto5h2ci1">Instructions</a>
+<ul>
+<li><a href="#mcetoc_1gto5h8ao2">Formula Syntax</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="mcetoc_1gto45cak0">Use Case</h2>
+<p>The <strong>CMW Platform</strong> can calculate an attribute value on the fly (without storing it in the database) using a <strong>formula</strong>, <strong>N3</strong> expression, <strong>DMN</strong> table, or another <strong>attribute</strong>.</p>
+<p>In this article, we will configure the automatic client assignment for the currently logged-in user.</p>
+<h2 id="mcetoc_1gto5lnnp3">Prerequisites</h2>
+<p>In our example, we have a database of clients, company managers, and requests. A client is attached to each manager. So, we can automatically assign a client when the manager creates a request.</p>
+<p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; font-size: 15px; font-weight: 300; letter-spacing: 0.2px; line-height: 25px; color: #545764; font-family: 'Open Sans', sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">To proceed with the example, create the templates and attributes as shown in the table below:</p>
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%; height: 261px;">
+<tbody>
+<tr style="height: 40px;">
+<th style="height: 40px; width: 20%;"><strong>Record template system name</strong></th>
+<th style="height: 40px; width: 20%;"><strong>Attribute system name</strong></th>
+<th style="width: 20%; height: 40px;"><strong>Attribute type</strong></th>
+<th style="width: 25%; height: 40px;"><strong>Description</strong></th>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 20%; height: 102px;"><em>Request</em></td>
+<td style="width: 20%; height: 102px;"><em>ClientForCurrentUser</em></td>
+<td style="width: 20%; height: 102px;"><strong>Record</strong></td>
+<td style="width: 25%; height: 102px;">
+<p><span style="letter-spacing: 0.2px;">The <em>ClientForCurrentUser</em> attribute is linked to the </span><em style="letter-spacing: 0.2px;">Clients </em>template and calculated based on the data stored in the <em>Contact_persons </em>template. </p>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td rowspan="2" style="height: 40px; width: 20%;"><em>Contact_persons</em></td>
+<td style="height: 40px; width: 20%;"><em>Client</em></td>
+<td style="width: 20%; height: 40px;"><strong>Record</strong></td>
+<td style="width: 25%; height: 40px;"><span style="letter-spacing: 0.2px;">The <em>Client</em> attribute is linked to the </span><em style="letter-spacing: 0.2px;">Clients </em>template.</td>
+</tr>
+<tr style="height: 39px;">
+<td style="width: 20%; height: 39px;"><em>Manager</em></td>
+<td style="width: 20%; height: 39px;"><strong>Account</strong></td>
+<td style="width: 25%; height: 39px;"><span style="letter-spacing: 0.2px;">The <em>Manager</em> attribute stores the manager account ID.</span></td>
+</tr>
+<tr style="height: 40px;">
+<td style="height: 40px; width: 20%;"><em>Clients</em></td>
+<td style="height: 40px; width: 20%;"><em>Name</em></td>
+<td style="width: 20%; height: 40px;"><strong>Text</strong></td>
+<td style="width: 25%; height: 40px;">The <em>Clients</em> template contains the client records. The <em>Name </em>attribute stores the client name.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="mcetoc_1gto5h2ci1">Instructions</h2>
+<ol class="colored_numbers_list">
+<li>In the <em>Request</em> template, open the <em>ClientForCurrentUser</em> attribute.</li>
+<li>Check the <strong>Calculate using an expression</strong> box</li>
+<li>In the <strong>Calculated value</strong> field, enter the <a href="#mcetoc_1gto5h8ao2"><strong>formula</strong></a>:
+<div>
+<table class="source_code_container" style="height: 58px;">
+<tbody>
+<tr style="height: 58px;">
+<td class="source_code" style="height: 58px; width: 1553px;"><code>from a in db-&gt;Contact_persons where EQUALS(a-&gt;<span style="letter-spacing: 0.2px;">Manager</span>,USER()) select a-&gt;Client-&gt;name</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li>Click <strong>Save</strong> to save the attribute. </li>
+</ol>
+<h3 id="mcetoc_1gto5h8ao2">Formula Syntax</h3>
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%; height: 335px;">
+<tbody>
+<tr style="height: 40px;">
+<th style="width: 50%; height: 40px;">Element</th>
+<th style="width: 50%; height: 40px;">Description</th>
+</tr>
+<tr style="height: 40px;">
+<td style="height: 120px;"><code>from a in db-&gt;Contact_persons </code></td>
+<td style="height: 120px;">
+<p><code>from</code> operator defines the data source:</p>
+<ul>
+<li>Declares a local variable: <strong><code><em>a</em></code></strong></li>
+<li>
+<p>Declares the <em>Contact_persons</em> template as the data source: <code>in db-&gt;Contact_persons</code></p>
+</li>
+<li>
+<p>Collects all records from the <em>Contact_persons</em> template to the variable <strong><code><em>a</em></code></strong></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td style="height: 135px;"><code>where EQUALS(a&gt;Manager,USER()) </code></td>
+<td style="height: 135px;">
+<p><code>where </code>operator defines the data selection condition:</p>
+<ul>
+<li><code style="letter-spacing: 0.2px; background-color: #ffffff;">USER()</code> function returns the current user ID.</li>
+<li><code>EQUALS()</code> function returns <code>true</code> if the <em>Manager </em>attribute value in a <em>Contact_persons</em> record equals the current user ID.</li>
+</ul>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td><code>select a-&gt;Client-&gt;Name </code></td>
+<td>
+<p><code>select </code>operator collects the entities matching the selection condition:</p>
+<ul>
+<li>Returns an array of the <em>Name</em> attribute values from the <em>Clients</em> records that correspond to the current user.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+</div>

@@ -1,94 +1,879 @@
-<h1>Адаптеры. Определения, настройка, удаление</h1><div class="md-container">
-<div class="md-main__inner md-grid">
+<h1>Адаптеры. Определения, настройка, удаление</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr">
+<div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
 <div class="mce-toc">
 <h2 class="toc-heading">Содержание</h2>
-<ul>
-<li><a href="#mcetoc_1hrjoag3a0">Определения</a></li>
-<li><a href="#mcetoc_1gjrhsm392">Просмотр списка адаптеров и настройка адаптера</a></li>
-<li><a href="#mcetoc_1gjrhsm394">Удаление адаптера</a></li>
-<li><a href="#mcetoc_1gjrhsm395">Связанные статьи</a></li>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#definitions"> <span class="md-ellipsis"> Определения </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#adapters_benefits"> <span class="md-ellipsis"> Преимущества использования адаптеров </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#adapters_prerequisites"> <span class="md-ellipsis"> Предварительные требования </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#adapters_configure"> <span class="md-ellipsis"> Порядок настройки адаптера </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#adapters_data_model"> <span class="md-ellipsis"> Построение модели данных </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#adapters_structure"> <span class="md-ellipsis"> Устройство адаптера </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#adapters_source_code_structure"> <span class="md-ellipsis"> Структура исходного кода адаптера </span> </a><nav aria-label="Структура исходного кода адаптера" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#adapters_naming"> <span class="md-ellipsis"> Обозначения </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#adapters_projects"> <span class="md-ellipsis"> Проекты в составе адаптера </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#adapters_incoming_classes"> <span class="md-ellipsis"> Классы и методы адаптера для получения сообщений </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#adapters_outgoing_classes"> <span class="md-ellipsis"> Классы и методы адаптера для отправки сообщений </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#adapters_server_configure"> <span class="md-ellipsis"> Настройка сервера Comindware Platform для работы адаптера </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#adapters_list_configure"> <span class="md-ellipsis"> Просмотр списка адаптеров и настройка адаптера </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#adapters_monitor"> <span class="md-ellipsis"> Мониторинг работы адаптера </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#adapters_delete"> <span class="md-ellipsis"> Удаление адаптера </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
 </ul>
 </div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
 <div class="notice notice-success">
-<h3 class="admonition-title" id="mcetoc_1hrjoag3a0">Определения</h3>
+<h2 class="admonition-title" id="definitions">Определения</h2>
 <ul>
-<li><strong>Адаптеры </strong>— это заказные модули для подключения <strong>Comindware Platform</strong> к внешним системам.</li>
-<li>Для использования адаптера необходимо загрузить и скомпилировать его исходный код на стороне сервера. </li>
-<li>После компиляции адаптера для него можно будет создать соответствующие подключения и пути передачи данных.</li>
+<li><strong>Адаптер</strong> — это заказной модуль для подключения <strong>Comindware Platform</strong> к внешним системам.</li>
+<li>Адаптер включает в себя модель данных и методы отправки или получения запросов.</li>
+<li>Для использования адаптера необходимо загрузить и скомпилировать его исходный код на стороне <strong>Comindware Platform</strong>.</li>
+<li>После компиляции адаптера необходимо настроить соответствующие подключение, путь передачи данных и сценарий для взаимодействия с внешней системой. См. <a class="mkdocs_imported_link" href="#adapters_configure">Порядок настройки адаптера</a>.</li>
 </ul>
 </div>
-<h2 id="mcetoc_1gjrhsm392">Просмотр списка адаптеров и настройка адаптера</h2>
+<h2 id="adapters_benefits">Преимущества использования адаптеров</h2>
+<p>Заказные адаптеры дают следующие преимущества:</p>
+<ul>
+<li>быстрота и гибкость реализации необходимых бизнесу способов обмена данными;</li>
+<li>возможность обработки и преобразования данных на уровне специализированных протоколов;</li>
+<li>обработка различных моделей данных с помощью одного адаптера;</li>
+<li>повышенная отказоустойчивость благодаря обмену данными с <strong>Comindware Platform</strong> через брокер сообщений.</li>
+</ul>
+<h2 id="adapters_prerequisites">Предварительные требования</h2>
+<p>Для работы с адаптером необходимо выполнить следующие условия:</p>
 <ol class="colored_numbers_list">
-<li>На странице <a href="https://kb.comindware.ru/article.php?id=4661.html">«<strong>Администрирование</strong>» — «<strong>Инфраструктура</strong>»</a> выберите пункт «<strong>Адаптеры</strong>» <em class="fa-light fa-puzzle-piece-simple">‌</em>.</li>
-<li>Отобразится список адаптеров.
-<div class="screenshot_with_caption">
-<p><img alt="Список адаптеров" src="https://kb.comindware.ru/assets/adapter_list.png"/></p>
-<p class="caption">Список адаптеров</p>
-</div>
-</li>
-<li>Нажмите кнопку «<strong>Создать</strong>» или дважды нажмите строку имеющегося адаптера.</li>
-<li>Отобразится страница свойств адаптера.
-<div class="screenshot_with_caption">
-<p><img alt="Страница свойств адаптера" src="https://kb.comindware.ru/assets/adapter_properties.png"/></p>
-<p class="caption">Страница свойств адаптера</p>
-</div>
-</li>
-<li>В поле «<strong>Исходный код адаптера</strong>» загрузите ZIP-архив с исходным кодом адаптера. Архив должен содержать решение Visual Studio:
+<li>
+<p><strong>Для корректной работы сервера Comindware Platform</strong></p>
 <ul>
-<li>проект с исходным кодом адаптера;</li>
-<li>проекты, содержащие интерфейсы для разработки и последующей компиляции адаптера;</li>
-<li>необходимые дополнительные проекты для адаптера, например проект локализации;</li>
-<li>папку с подключаемыми библиотеками;</li>
-<li>файл решения (.sln) в одном экземпляре в корневой папке архива.
-<div class="screenshot_with_caption">
-<p><img alt="Пример содержимого архива с исходным кодом адаптера" src="https://kb.comindware.ru/assets/adapter_archive_content.png"/></p>
-<p class="caption">Пример содержимого архива с исходным кодом адаптера</p>
+<li>Установлены библиотеки .NET SDK и Runtime версии 6.0.</li>
+<li>В конфигурации NGINX разрешён доступ к URI путей передачи данных адаптера.</li>
+<li>Достаточно свободного места на диске для компиляции и работы адаптера.</li>
+</ul>
+</li>
+<li>
+<p><strong>Для разработки адаптера</strong></p>
+<ul>
+<li>Visual Studio 2022 или новее.</li>
+<li>.NET SDK 6.0.</li>
+<li>Образец исходного кода адаптера, полученный от <strong>Comindware</strong>.</li>
+<li>Доступ к документации по API внешней системы.</li>
+<li>Описание структуры данных для обмена.</li>
+</ul>
+</li>
+<li>
+<p><strong>Для компиляции, настройки и использования адаптера в Comindware Platform</strong></p>
+<ul>
+<li>Доступ к странице <a class="autorefs autorefs-internal mkdocs_imported_link" href="#adapters_list_configure">«<strong>Администрирование</strong>» — «<strong>Инфраструктура</strong>» — «<strong>Адаптеры</strong>»</a>.</li>
+<li>Доступ к страницам «<strong>Администрирование</strong>» — <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4675">«<strong>Подключения</strong>»</a> и <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4676">«<strong>Пути передачи данных</strong>»</a>.</li>
+<li>Сведения для настройки подключений и путей передачи данных с использованием адаптера.</li>
+<li>Доступ к средствам мониторинга адаптеров для диагностики возможных проблем. См. <em>«<a class="mkdocs_imported_link" href="#adapters_monitor">Мониторинг работы адаптера</a>»</em>.</li>
+</ul>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="adapters_configure">Порядок настройки адаптера</h2>
+<ol class="colored_numbers_list">
+<li><a class="mkdocs_imported_link" href="#adapters_data_model">Определите модель данных</a>, передаваемых через адаптер.</li>
+<li><a class="mkdocs_imported_link" href="#adapters_structure">Определите логику работы</a> адаптера для отправки и получения данных.</li>
+<li><a class="mkdocs_imported_link" href="#adapters_source_code_structure">Подготовьте решение</a> Visual Studio с исходным кодом адаптера на C#.</li>
+<li><a class="mkdocs_imported_link" href="#adapters_server_configure">Настройте сервер</a> для работы адаптера.</li>
+<li>
+<p><a class="mkdocs_imported_link" href="#adapters_list_configure">Загрузите и скомпилируйте адаптер</a> на сервере <strong>Comindware Platform</strong>.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>Чтобы скомпилировать адаптер, на сервере <strong>Comindware Platform</strong> должны быть установлены библиотеки .NET SDK и Runtime версии 6.0.</p>
+</div>
+</li>
+<li>
+<p>Настройте подключение с использованием адаптера согласно протоколу соединения с внешней системой.</p>
+</li>
+<li>Настройте путь передачи данных с использованием адаптера согласно модели данных и логике взаимодействия с внешней системой.</li>
+<li>Настройте шаблоны и сценарий для обработки запросов с помощью адаптера.</li>
+<li>Отслеживайте работу адаптера, см. <em>«<a class="mkdocs_imported_link" href="#adapters_monitor">Мониторинг работы адаптера</a>»</em>.</li>
+</ol>
+<h2 class="pageBreakBefore" id="adapters_data_model">Построение модели данных</h2>
+<p>Для разработки адаптера сформируйте его модель данных:</p>
+<ol class="colored_numbers_list">
+<li>Подготовьте описание структуры данных в стандартизированном формате (например, XML, JSON) или в виде таблицы.</li>
+<li>Преобразуйте описание структуры данных в модель классов C# для адаптера, например с помощью автогенератора <a class="mkdocs_imported_link" href="https://json2csharp.com/code-converters/xml-to-csharp">https://json2csharp.com/code-converters/xml-to-csharp</a>.</li>
+<li>Модифицируйте полученную модель в соответствии с необходимой бизнес-логикой.</li>
+</ol>
+<h2 class="pageBreakBefore" id="adapters_structure">Устройство адаптера</h2>
+<p>Адаптер должен включать следующие блоки:</p>
+<ul>
+<li>сериализация или десериализация данных;</li>
+<li>модели данных и методы для их преобразования во внутренние модели адаптера;</li>
+<li>конечные точки адаптера (эндпоинты), распределяющие запросы между методами согласно модели данных адаптера;</li>
+<li>службы, обеспечивающие взаимодеиствие с Kestrel, отправку сообщений, таймауты, проверку данных и т. д.</li>
+</ul>
+<h2 class="pageBreakBefore" id="adapters_source_code_structure">Структура исходного кода адаптера</h2>
+<p>Образец исходного кода адаптера запросите у представителя <strong>Comindware</strong>. На его основе можно разработать адаптер под свои нужды.</p>
+<p>Адаптер для включения в состав <strong>Comindware Platform</strong> должен представлять собой решение Visual Studio из перечисленных ниже компонентов:</p>
+<ul>
+<li>проект с исходным кодом адаптера, включая один файл решения (<code>.sln</code>) в корневой папке;</li>
+<li>подпроекты, содержащие интерфейсы для разработки и последующей компиляции адаптера;</li>
+<li>подпроект, содержащий основной функционал адаптера;</li>
+<li>дополнительные подпроекты, например для локализации;</li>
+<li>папка с подключаемыми библиотеками.</li>
+</ul>
+<p>Готовое решение упакуйте в ZIP-архив для компиляции в <strong>Comindware Platform</strong>.</p>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример содержимого архива с исходным кодом адаптера" src="/platform/v5.0/administration/infrastructure/img/adapter_archive_content.png"/></p>
+<figcaption class="caption">Пример содержимого архива с исходным кодом адаптера</figcaption>
+</figure>
+<h3 id="adapters_naming">Обозначения</h3>
+<p>Далее используются следующие обозначения:</p>
+<ul>
+<li><code>{AdapterName}</code> — имя адаптера, которое используется в названии решения Visual Studio, а также в системном имени адаптера в <strong>Comindware Platform</strong>. Например:
+<ul>
+<li><code>IncomingAdapter</code> — адаптер для получения данных;</li>
+<li><code>OutgoingAdapter</code> — адаптер для отправки данных.</li>
+</ul>
+</li>
+<li><code>{communicationRouteName}</code> — имя пути передачи данных, который реализуется в адаптере.</li>
+<li>
+<p><code>{CommunicationRoutePath}</code> — URI эндпоинта адаптера, например: <code>MyIncomingAdapter/GetRequests</code>.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Доступ к этому URI необходимо разрешить в конфигурации NGINX.</p>
+<p>См. <em>«<a class="mkdocs_imported_link" href="#adapters_server_configure">Настройка сервера Comindware Platform для работы адаптера</a>»</em>.</p>
 </div>
 </li>
 </ul>
+<h3 class="pageBreakBefore" id="adapters_projects">Проекты в составе адаптера</h3>
+<p>Решение Visual Studio с исходным кодом адаптера должно включать перечисленные ниже проекты.</p>
+<p>Скопируйте эти проекты проекты из образца исходного кода адаптера.</p>
+<p>В общем случае изменять следует только проекты <code>{AdapterName}</code>, <code>CustomLocalization</code> и <code>ExternalServiceContracts</code>.</p>
+<ul>
+<li><code>{AdapterName}</code> — проект с бизнес-логикой адаптера для <a class="mkdocs_imported_link" href="#adapters_incoming_classes">получения</a> или <a class="mkdocs_imported_link" href="#adapters_outgoing_classes">отправки</a> сообщений.</li>
+<li><code>IncomingService</code> либо <code>OutgoingService</code> — проект для обработки входящих или исходящих сообщений в <strong>Comindware Platform</strong>.</li>
+<li><code>Adapter</code> — общая логика адаптеров.</li>
+<li><code>ConnectionManager</code> — диспетчер подключений к внешним службам.</li>
+<li><code>Heartbeat</code> — мониторинг состояния адаптера.</li>
+<li><code>Localization.Adapter</code> — стандартные локализованные сообщения и графический интерфейс адаптера.</li>
+<li><code>MessageBroker.Api</code> — интерфейсы взаимодействия со службой брокера сообщений.</li>
+<li><code>Platform.FormDefinition</code> — графический интерфейс адаптера.</li>
+<li>Необязательные библиотеки:
+<ul>
+<li><code>CustomLocalization</code> — локализация полей сообщений и прочие текстовые константы.</li>
+<li><code>ExternalServiceContracts</code> — модели сообщений внешних сервисов.</li>
+</ul>
+</li>
+</ul>
+<h3 class="pageBreakBefore" id="adapters_incoming_classes">Классы и методы адаптера для получения сообщений</h3>
+<p>В проекте <code>{AdapterName}</code> должен быть реализован интерфейс <code>IIncomingConnectionService</code> при помощи перечисленных ниже классов и методов для взаимодействия с <strong>Comindware Platform</strong>:</p>
+<ul>
+<li>
+<p>Класс <code>Adapter</code></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Метод</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GetName()</code></td>
+<td>Возвращает название адаптера</td>
+</tr>
+<tr>
+<td><code>GetDescription()</code></td>
+<td>Возвращает описание адаптера</td>
+</tr>
+<tr>
+<td><code>GetVersion()</code></td>
+<td>Возвращает версию адаптера</td>
+</tr>
+<tr>
+<td><code>GetSignatures()</code></td>
+<td>Возвращает модели всех реализованных путей передачи данных</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Папка <code>Behaviour</code></p>
+<ul>
+<li>
+<p>Папка <code>{communicationRouteName}</code></p>
+<ul>
+<li>
+<p>Класс <code>{communicationRouteName}Performer</code></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Метод</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{communicationRouteName}Performer()</code></td>
+<td>Получает входящее сообщение и формирует ответ на него</td>
+</tr>
+<tr>
+<td><code>RecognizeRawRequest()</code></td>
+<td>Сопоставляет данные во входящем сообщении с внутренними данными (маппинг)</td>
+</tr>
+<tr>
+<td><code>SendRawResponse()</code></td>
+<td>Вызывает интерфейс <code>IIncomingConnectionService.OnReplyReceive(object message)</code> для успешного ответа или <code>IIncomingConnectionService.OnErrorReceive(object message)</code> для отправки сообщения с ошибкой. Это обязательный метод, если включено ожидание синхронного ответа от <strong>Comindware Platform</strong></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Класс <code>{communicationRouteName}IncomingService</code> (наследуется от <code>GenericIncomingConnectionService</code>)</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Свойство</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>IsWaitResponse</code></td>
+<td>Необходимость ожидания синхронного ответа от <strong>Comindware Platform</strong></td>
+</tr>
+<tr>
+<td><code>Integration</code></td>
+<td>Тип интеграции</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<p>Класс <code>Service</code></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Метод / свойство</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CreatePerformer()</code></td>
+<td>Инициализирует получение входящего сообщения</td>
+</tr>
+<tr>
+<td><code>OnStart()</code></td>
+<td>Вызывает интерфейс <code>IIncomingConnectionService.Subscribe</code> при создании или включении пути передачи данных на сервере <strong>Comindware Platform</strong></td>
+</tr>
+<tr>
+<td><code>OnStop()</code></td>
+<td>Вызывает интерфейс <code>IIncomingConnectionService.Unsubscribe</code> при удалении или выключении пути передачи данных на сервере <strong>Comindware Platform</strong></td>
+</tr>
+<tr>
+<td><code>PerformTest()</code></td>
+<td>Проверяет соединение с адаптером с помощью интерфейса <code>IIncomingConnectionService.PerformTest</code></td>
+</tr>
+<tr>
+<td><code>GetEndpointConfigs()</code></td>
+<td>Возвращает список подключений. В свойстве <code>Route</code> необходимо указать <code>{CommunicationRoutePath}</code></td>
+</tr>
+<tr>
+<td><code>KestrelConfig</code></td>
+<td>Инициализирует список подключений к <code>Kestrel</code>, включая <code>EndpointConfig</code></td>
+</tr>
+<tr>
+<td><code>GetIncomingService()</code></td>
+<td>Инициализирует путь передачи данных</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<p>Папка <code>Configuration</code></p>
+<ul>
+<li>
+<p>Класс <code>Endpoint</code></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Свойство</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Endpoint</code></td>
+<td>Модель подключения к внешнему сервису</td>
+</tr>
+<tr>
+<td><code>EndpointForm</code></td>
+<td>Модель формы для настройки подключения</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Класс <code>Procedure</code></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Свойство</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Procedure</code></td>
+<td>Модели путей передачи данных</td>
+</tr>
+<tr>
+<td><code>SignatureForm</code></td>
+<td>Модель формы для настройки пути передачи данных</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<p>Папка <code>Signature</code></p>
+<ul>
+<li>
+<p>Класс <code>{communicationRouteName}ExternalMessage</code></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Свойство</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{communicationRouteName}ExternalMessage</code></td>
+<td>Модель сообщений внешнего сервиса</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Класс <code>{communicationRouteName}IncomingMessage</code></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Свойство</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{communicationRouteName}IncomingMessage</code></td>
+<td>Модель входящих сообщений, обязательно унаследованная от <code>Comindware.Adapter.Message</code>. Обязательно должно быть задано свойство <code>Display</code> для локализации названия каждого атрибута посредством <code>CustomLocalization</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Класс <code>ErrorMessage</code></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Свойство</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ErrorMessage</code></td>
+<td>Модель сообщения об ошибке, унаследованная от <code>Comindware.Adapter.Message</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Класс <code>ResponseMessage</code></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Свойство</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ResponseMessage</code></td>
+<td>Модель ответного сообщения, унаследованная от <code>Comindware.Adapter.Message</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Класс <code>{communicationRouteName}Signature</code></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Метод</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GetIncomingMessageType()</code></td>
+<td>Возвращает тип входящего сообщения после его преобразования к внутренним данным</td>
+</tr>
+<tr>
+<td><code>GetOutgoingMessageType()</code></td>
+<td>Возвращает тип сообщения об ответе без ошибок</td>
+</tr>
+<tr>
+<td><code>GetErrorMessageType()</code></td>
+<td>Возвращает тип сообщения об ошибке</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+</ul>
+<h3 class="pageBreakBefore" id="adapters_outgoing_classes">Классы и методы адаптера для отправки сообщений</h3>
+<p>В проекте <code>{adapterName}</code> должен быть реализован интерфейс <code>IOutgoingConnectionService</code> при помощи перечисленных ниже классов и методов для взаимодействия с <strong>Comindware Platform</strong>:</p>
+<ul>
+<li>
+<p>Класс <code>Adapter</code></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Метод</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GetName()</code></td>
+<td>Возвращает название адаптера</td>
+</tr>
+<tr>
+<td><code>GetDescription()</code></td>
+<td>Возвращает описание адаптера</td>
+</tr>
+<tr>
+<td><code>GetVersion()</code></td>
+<td>Возвращает версию адаптера</td>
+</tr>
+<tr>
+<td><code>GetSignatures()</code></td>
+<td>Возвращает модели всех реализованных путей передачи данных</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Папка <code>Behaviour</code></p>
+<ul>
+<li>
+<p>Папка <code>{communicationRouteName}</code></p>
+<ul>
+<li>
+<p>Класс <code>{communicationRouteName}Performer</code></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Метод</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TranslateIncomingMessage()</code></td>
+<td>Сопоставляет данные во входящем сообщении с внутренними данными (маппинг)</td>
+</tr>
+<tr>
+<td><code>SendRawRequest()</code></td>
+<td>Отправляет сообщение во внешний сервис</td>
+</tr>
+<tr>
+<td><code>RecognizeRawResponse()</code></td>
+<td>Обрабатывает ответ внешнего сервиса</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Класс <code>{communicationRouteName}OutgoingService</code> (наследуется от <code>GenericOutgoingConnectionService</code>)</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Метод / свойство</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Execute()</code></td>
+<td>Выполняет исходящие запросы</td>
+</tr>
+<tr>
+<td><code>ConnectionConfigData</code></td>
+<td>Модель конфигурации подключений к внешнему серверу</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<p>Класс <code>Service</code></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Метод / свойство</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CreatePerformer()</code></td>
+<td>Инициализирует отправку исходящего сообщения</td>
+</tr>
+<tr>
+<td><code>PerformTest()</code></td>
+<td>Проверяет соединение с внешним сервисом с помощью интерфейса <code>IOutgoingConnectionService.PerformTest</code></td>
+</tr>
+<tr>
+<td><code>GetEndpointConfigs()</code></td>
+<td>Возвращает список подключений. В свойстве <code>Route</code> необходимо указать <code>{CommunicationRoutePath}</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<p>Папка <code>Configuration</code></p>
+<ul>
+<li>
+<p>Класс <code>Endpoint</code></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Свойство</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Endpoint</code></td>
+<td>Модель подключения к внешнему сервису</td>
+</tr>
+<tr>
+<td><code>EndpointForm</code></td>
+<td>Модель формы для настройки подключения</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Класс <code>Procedure</code></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Свойство</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Procedure</code></td>
+<td>Модели путей передачи данных</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<p>Папка <code>Signature</code></p>
+<ul>
+<li>
+<p>Класс <code>{communicationRouteName}ExternalMessage</code></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Свойство</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{communicationRouteName}ExternalMessage</code></td>
+<td>Модель сообщений внешнего сервиса</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Класс <code>{communicationRouteName}Request</code></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Свойство</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{communicationRouteName}Request</code></td>
+<td>Модель сообщения запроса, унаследованная от <code>Comindware.Adapter.Message</code>. Обязательно должно быть задано свойство <code>Display</code> для локализации названия каждого атрибута посредством <code>CustomLocalization</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Класс <code>ErrorMessage</code></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Свойство</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ErrorMessage</code></td>
+<td>Модель сообщения об ошибке, унаследованная от <code>Comindware.Adapter.Message</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Класс <code>ResponseMessage</code></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Свойство</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ResponseMessage</code></td>
+<td>Модель ответного сообщения, унаследованная от <code>Comindware.Adapter.Message</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Класс <code>{communicationRouteName}Signature</code></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Метод</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GetIncomingMessageType()</code></td>
+<td>Возвращает тип входящего сообщения после его преобразования к внутренним данным</td>
+</tr>
+<tr>
+<td><code>GetOutgoingMessageType()</code></td>
+<td>Возвращает тип сообщения об ответе без ошибок</td>
+</tr>
+<tr>
+<td><code>GetErrorMessageType()</code></td>
+<td>Возвращает тип сообщения об ошибке</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+</ul>
+<h2 class="pageBreakBefore" id="adapters_server_configure">Настройка сервера Comindware Platform для работы адаптера</h2>
+<p>Чтобы скомпилировать адаптер, на сервере <strong>Comindware Platform</strong> должны быть установлены библиотеки .NET SDK и Runtime версии не ниже 6.0.</p>
+<p>Чтобы адаптер работал корректно, доступ ко всем URI путей передачи данных адаптера необходимо разрешить в конфигурации NGINX.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите в режим суперпользователя:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>sudo -s</code></pre>
+</div>
+<p>или</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>su<span class="w"> </span>-</code></pre>
+</div>
+</li>
+<li>
+<p>Установите пакеты .NET:</p>
+<ul>
+<li>
+<p><strong>Astra Linux</strong>, <strong>Ubuntu</strong>, <strong>Debian</strong> (DEB-based)</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>apt-get update</code> <br/><code>apt-get install -y dotnet-sdk-6.0</code></pre>
+</div>
+</li>
+<li>
+<p><strong>РЕД ОС</strong>, <strong>Rocky</strong> (RPM-based)</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>dnf install dotnet-sdk-6.0</code></pre>
+</div>
+</li>
+<li>
+<p><strong>Альт Сервер</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code>apt-get update</code> <br/><code>apt-get install dotnet-sdk</code></pre>
+</div>
+</li>
+</ul>
+</li>
+<li>
+<p>Откройте файл конфигурации NGINX для редактирования (<code>instanceName</code> — имя экземпляра ПО):</p>
+<ul>
+<li>
+<p><strong>Astra Linux</strong>, <strong>Ubuntu</strong>, <strong>Debian</strong> (DEB-based)</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>nano /etc/nginx/sites-available/comindware&lt;instanceName&gt;</code></pre>
+</div>
+</li>
+<li>
+<p><strong>РЕД ОС</strong>, <strong>Rocky</strong> (RPM-based)</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>nano /etc/nginx/conf.d/comindware&lt;instanceName&gt;</code></pre>
+</div>
+</li>
+<li>
+<p><strong>Альт Сервер</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code>nano /etc/nginx/sites-available.d/comindware&lt;instanceName&gt;</code></pre>
+</div>
+</li>
+</ul>
+</li>
+<li>
+<p>Добавьте следующие директивы <strong>для каждого пути передачи данных</strong> (<code>CommunicationRoutePath</code> — URI пути передачи данных, <code>hostName</code> — адрес сервера <strong>Comindware Platform</strong>, <code>portNumber</code> — порт, по которому доступен адаптер):</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Порт для адаптера</p>
+<p>Порт, по которому доступен адаптер, должен отличаться от номера порта сервера <strong>Comindware Platform</strong>.</p>
+</div>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="n">location</span> <span class="o">&lt;</span><span class="n">CommunicationRoutePath</span><span class="o">&gt;</span> <span class="p">{</span></code> <br/><code>    <span class="n">proxy_pass</span> <span class="n">https</span><span class="p">:</span><span class="c1">//&lt;hostName&gt;:&lt;portNumber&gt;;</span></code> <br/><code><span class="p">}</span></code></pre>
+</div>
+</li>
+<li>
+<p>При необходимости перезапустите NGINX.</p>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="adapters_list_configure">Просмотр списка адаптеров и настройка адаптера</h2>
+<ol class="colored_numbers_list">
+<li>На странице <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4661">«<strong>Администрирование</strong>» — «<strong>Инфраструктура</strong>»</a> выберите пункт «<strong>Адаптеры</strong>» <em class="fa-light fa-puzzle-piece-simple">‌<!--icon--></em>.</li>
+<li>
+<p>Отобразится список адаптеров.</p>
+<figure class="screenshot_with_caption"><img alt="Список адаптеров" src="/platform/v5.0/administration/infrastructure/img/adapter_list.png"/>
+<figcaption class="caption">Список адаптеров</figcaption>
+</figure>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Создать</strong>» или дважды нажмите строку имеющегося адаптера.</p>
+</li>
+<li>
+<p>Отобразится страница свойств адаптера.</p>
+<figure class="screenshot_with_caption"><img alt="Страница свойств адаптера" src="/platform/v5.0/administration/infrastructure/img/adapter_properties.png"/>
+<figcaption class="caption">Страница свойств адаптера</figcaption>
+</figure>
+</li>
+<li>
+<p>В поле «<strong>Исходный код адаптера</strong>» загрузите ZIP-архив с исходным кодом адаптера. Архив должен содержать подготовленное решение Visual Studio. См. <a class="mkdocs_imported_link" href="#adapters_source_code_structure">Устройство адаптера</a>.</p>
 </li>
 <li>Нажмите кнопку «<strong>Сохранить</strong>».</li>
 <li>Нажмите кнопку «<strong>Опубликовать</strong>», чтобы скомпилировать адаптер.</li>
-<li>В случае успешной компиляции адаптера его название отобразится в списке адаптеров и свойствах адаптера.</li>
-<li>После компиляции просмотрите <strong>журнал компиляции</strong>.
-<div class="screenshot_with_caption">
-<p><img alt="Пример журнала компиляции" src="https://kb.comindware.ru/assets/adapter_compilation_log.png"/></p>
-<p class="caption">Пример журнала компиляции</p>
-</div>
+<li>В случае успешной компиляции адаптера его название отобразится в списке адаптеров и свойствах адаптера. Название берётся из файлов решения Visual Studio.</li>
+<li>
+<p>После компиляции просмотрите <strong>журнал компиляции</strong>.</p>
+<figure class="screenshot_with_caption"><img alt="Пример журнала компиляции" src="/platform/v5.0/administration/infrastructure/img/adapter_compilation_log.png"/>
+<figcaption class="caption">Пример журнала компиляции</figcaption>
+</figure>
 </li>
-<li>При необходимости скачайте архив с журналами работы адаптера (вида <code><em>CBAP.adapters.20221026.logs.zip</em></code>), нажав кнопку «<strong>Скачать журнал работы</strong>».
-<div class="screenshot_with_caption">
-<p><img alt="Пример журнала работы адаптера" src="https://kb.comindware.ru/assets/adapter_execution_log.png"/></p>
-<p class="caption">Пример журнала работы адаптера</p>
-</div>
+<li>
+<p>При необходимости скачайте архив с журналами работы адаптера (вида <code>_CBAP.adapters.20221026.logs.zip_</code>), нажав кнопку «<strong>Скачать журнал работы</strong>». См. <em>«<a class="mkdocs_imported_link" href="#adapters_monitor">Мониторинг работы адаптера</a>»</em>.</p>
+<figure class="screenshot_with_caption"><img alt="Пример журнала работы адаптера" src="/platform/v5.0/administration/infrastructure/img/adapter_execution_log.png"/>
+<figcaption class="caption">Пример журнала работы адаптера</figcaption>
+</figure>
 </li>
-<li>Пункт с названием подключения для скомпилированного адаптера будет отображаться в подменю «<strong>Пользовательские подключения</strong>» при создании подключения и пути передачи данных.</li>
+<li>
+<p>Пункт с названием подключения для скомпилированного адаптера появится в меню «<strong>Создать</strong>» — «<strong>Пользовательские подключения</strong>» на страницах «<strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4675">Подключения</a></strong>» и «<strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4676">Пути передачи данных</a></strong>». При этом для каждой модели данных в пути передачи данных будет предусмотрен соответствующий <strong>тип сообщения</strong>.</p>
+</li>
 </ol>
-<div class="screenshot_with_caption">
-<p><img alt="Создание подключения с использованием адаптера" src="https://kb.comindware.ru/assets/adapter_custom_connection_create_menu.png"/></p>
-<p class="caption">Создание подключения с использованием адаптера</p>
-</div>
-<div class="screenshot_with_caption">
-<p><img alt="Создание пути передачи данных с использованием адаптера" src="https://kb.comindware.ru/assets/adapters_custom_communication_route_create_menu.png"/></p>
-<p class="caption">Создание пути передачи данных с использованием адаптера</p>
-</div>
-<h2 id="mcetoc_1gjrhsm394">Удаление адаптера</h2>
+<figure class="screenshot_with_caption">
+<p><img alt="Создание подключения с использованием адаптера" src="/platform/v5.0/administration/infrastructure/img/adapter_custom_connection_create_menu.png"/></p>
+<figcaption class="caption">Создание подключения с использованием адаптера</figcaption>
+</figure>
+<figure class="screenshot_with_caption">
+<p><img alt="Создание пути передачи данных с использованием адаптера" src="/platform/v5.0/administration/infrastructure/img/adapters_custom_communication_route_create_menu.png"/></p>
+<figcaption class="caption">Создание пути передачи данных с использованием адаптера</figcaption>
+</figure>
+<h2 class="pageBreakBefore" id="adapters_monitor">Мониторинг работы адаптера</h2>
+<p>Для проверки работы адаптера можно воспользоваться встроенными в <strong>Comindware Platform</strong> средствами мониторинга.</p>
+<ul>
+<li>
+<p>На <a class="mkdocs_imported_link" href="#adapters_list_configure">странице свойств адаптера</a> скачайте архив с журналами адаптера, нажав кнопку «<strong>Скачать журнал работы</strong>». Этот журнал содержит следующие сведения:</p>
+<ul>
+<li>статус служб адаптера;</li>
+<li>статус подключения адаптера;</li>
+<li>доступность методов;</li>
+<li>объём выделенной памяти;</li>
+<li>информация о созданных путях передачи данных;</li>
+<li>взаимодействие адаптера со службой Kafka.</li>
+</ul>
+<p>См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4623#logging_engine_adapter_logs">Журналы адаптеров</a>»</em> и <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4618#log_files_event_examples_adapter_even">Событие в адаптере</a>»</em>.</p>
+</li>
+<li>
+<p>В свойствах <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4675">подключения</a></strong> адаптера нажмите кнопку «<strong>Скачать журнал</strong>». Этот журнал содержит следующие события:</p>
+<ul>
+<li>статус подключения;</li>
+<li>получение и отправка сообщений;</li>
+<li>запуск сценария обработки сообщения;</li>
+<li>использование методов адаптера.</li>
+</ul>
+<p>См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4618#log_files_event_examples_connection_status">Статус подключения</a>»</em></p>
+</li>
+<li>
+<p>Просмотрите события получения или отправки запросов и связанные с ними цепочки событий:</p>
+<ul>
+<li>Откройте страницу «<strong>Администрирование</strong>» — «<strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4673">Журналы событий</a></strong>».</li>
+<li>Перейдите на вкладку «<strong>Трассировка событий</strong>».</li>
+<li>Просмотрите события типа «<strong>Получен запрос</strong>» и «<strong>Запрос отправлен</strong>», связанные с работой адаптера, дважды нажав строку события.</li>
+</ul>
+<p>См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4673#logs_event_chain_view">Просмотр цепочки событий</a>»</em>.</p>
+</li>
+</ul>
+<h2 class="pageBreakBefore" id="adapters_delete">Удаление адаптера</h2>
 <div class="notice notice-warning">
 <p class="admonition-title">Внимание!</p>
-<p>Пути передачи данных и подключения, сгенерированные для удаленного адаптера, станут неактивны и перестанут работать.</p>
+<p>Пути передачи данных и подключения, сгенерированные для удалённого адаптера, станут неактивны и перестанут работать.</p>
 </div>
 <ol class="colored_numbers_list">
-<li>Откройте <a href="https://kb.comindware.ru/secure/%d0%90%d0%b4%d0%b0%d0%bf%d1%82%d0%b5%d1%80%d1%8b-2181.html#mcetoc_1gjrhsm391">список адаптеров</a>.</li>
-<li>Установите флажок в первом столбце для адаптера, подлежащего удалению.</li>
+<li>На странице <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4661">«<strong>Администрирование</strong>» — «<strong>Инфраструктура</strong>»</a> выберите пункт «<strong>Адаптеры</strong>» <em class="fa-light fa-puzzle-piece-simple">‌<!--icon--></em>.</li>
+<li>Установите флажок в первом столбце списка для адаптера, подлежащего удалению.</li>
 <li>Нажмите кнопку «<strong>Удалить</strong>».</li>
 <li>Подтвердите удаление адаптера.</li>
 </ol>
-<h2 id="mcetoc_1gjrhsm395">Связанные статьи</h2>
-<p><strong><a class="autorefs autorefs-internal" href="https://kb.comindware.ru/article.php?id=4675">Подключения</a></strong></p>
-<p><strong><a class="autorefs autorefs-internal" href="https://kb.comindware.ru/article.php?id=4675#mcetoc_1gjrlqi4l4">Настройка подключения</a></strong></p>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4675">Подключения. Определения, типы, создание, настройка, удаление</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4673">Журналы событий. Типы, просмотр, цепочки событий</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4618">Примеры событий в файловых журналах</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4623">Подсистема журналирования</a></em></li>
+</ul>
 </div>
-<p><a class="md-top md-icon mkdocs_imported_link" href="#"> <em class="fa-light fa-arrow-up">‌</em> К началу </a></p>
+</article>
 </div>
-<div class="md-dialog">
-<div class="md-dialog__inner md-typeset"> </div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>
 </div>

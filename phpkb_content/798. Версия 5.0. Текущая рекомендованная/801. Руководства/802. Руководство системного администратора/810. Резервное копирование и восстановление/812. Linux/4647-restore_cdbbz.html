@@ -1,4 +1,4 @@
-<h1>Восстановление базы данных из файла резервной копии в формате .CDBBZ</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4647">
+<h1>Восстановление базы данных из файла резервной копии в формате CDBBZ</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4647" kb-tags="CDBBZ,DevOps,Linux,sysadmin,администрирование,архив,база данных,восстановление,восстановление данных,восстановление индексов,инструкции,лицензирование,миграция,конфигурация,резервная копия,резервное копирование" kb-title="Восстановление базы данных из файла резервной копии в формате CDBBZ">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -14,29 +14,32 @@
       Введение
     </span>
 </a>
-<nav aria-label="Введение" class="md-nav">
-<ul class="md-nav__list">
+</li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#видеоинструкция">
+<a class="md-nav__link mkdocs_imported_link" href="#порядок-восстановления">
 <span class="md-ellipsis">
-      Видеоинструкция
+      Порядок восстановления
     </span>
 </a>
 </li>
-</ul>
-</nav>
-</li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#восстановление-базы-данных-и-скриптов">
+<a class="md-nav__link mkdocs_imported_link" href="#backup_restore_cdbbz_db_scripts">
 <span class="md-ellipsis">
       Восстановление базы данных и скриптов
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#восстановление-индексов-elasticsearch-из-файла-резервной-копии-репозитория">
+<a class="md-nav__link mkdocs_imported_link" href="#backup_restore_cdbbz_license_keys">
 <span class="md-ellipsis">
-      Восстановление индексов Elasticsearch из файла резервной копии репозитория
+      Восстановление лицензионных ключей
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#backup_restore_cdbbz_indexes">
+<span class="md-ellipsis">
+      Восстановление индексов OpenSearch (Elasticsearch) из файла резервной копии репозитория
     </span>
 </a>
 </li>
@@ -56,16 +59,34 @@
 <p>Здесь представлены инструкции по восстановлению базы данных <strong>Comindware Platform</strong> для следующего сценария:</p>
 <ul>
 <li>используется ранее настроенный экземпляр ПО <strong>Comindware Platform</strong> под управлением ОС Linux;</li>
-<li>имеется файл резервной копии базы данных с расширением <code>.CDBBZ</code>;</li>
+<li>имеется файл резервной копии базы данных с расширением <code>.CDBBZ</code> (архив резервной копии);</li>
 <li>резервная копия создана с помощью встроенной в ПО функции «<strong>Резервное копирование</strong>» (см. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642">Резервное копирование. Настройка и запуск, просмотр журнала сеансов</a>»</em>);</li>
-<li>индексы Elasticsearch (OpenSearch) восстанавливаются отдельно от восстановления базы данных экземпляра ПО.</li>
+<li>индексы OpenSearch (Elasticsearch) восстанавливаются отдельно от восстановления базы данных экземпляра ПО.</li>
 </ul>
 <p>Прежде чем приступать к восстановлению экземпляра ПО <strong>Comindware Platform</strong> из резервной копии, ознакомьтесь с видеороликом и инструкциями, представленными ниже.</p>
-<h3 id="видеоинструкция">Видеоинструкция</h3>
-<video controls="controls" height="100%" width="100%">
-<source src="https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/restore_complete_backup_linux.mp4" type="video/mp4"/>
-</video>
-<h2 id="восстановление-базы-данных-и-скриптов">Восстановление базы данных и скриптов</h2>
+<h2 id="порядок-восстановления">Порядок восстановления</h2>
+<ol class="colored_numbers_list">
+<li>Восстановите <a class="mkdocs_imported_link" href="#backup_restore_cdbbz_db_scripts">базу данных и скрипты</a>.</li>
+<li>При необходимости восстановите <a class="mkdocs_imported_link" href="#backup_restore_cdbbz_license_keys">лицензионные ключи</a>.</li>
+<li>При необходимости восстановите <a class="mkdocs_imported_link" href="#backup_restore_cdbbz_indexes">индексы OpenSearch (Elasticsearch)</a>.</li>
+</ol>
+<div class="notice notice-warning">
+<p class="admonition-title">Фактические пути и имена файлов</p>
+<p>При выполнении инструкций будьте внимательны: указывайте фактические имена файлов и пути, которые используются в вашей системе.</p>
+<p>Такие имена указаны в угловых скобках, например:</p>
+<ul>
+<li><code>&lt;backupName&gt;.cdbbz</code> — имя файла резервной копии в формате CDBBZ;</li>
+<li><code>&lt;Database&gt;</code> — директория базы данных экземпляра ПО (например, <code>/var/lib/comindware/&lt;instanceName&gt;/Database</code>);</li>
+<li><code>&lt;instanceName&gt;</code> — имя экземпляра ПО, для которого выполняется восстановление;</li>
+<li><code>&lt;instanceName&gt;.yml</code> — файл конфигурации экземпляра ПО;</li>
+<li><code>&lt;path/to&gt;</code> — путь к директории или файлу в вашей системе; замените на фактический путь согласно своей структуре каталогов.</li>
+<li><code>&lt;Scripts&gt;</code> — директория, содержащая C#-скрипты экземпляра ПО;</li>
+<li><code>&lt;serviceName&gt;</code> — имя службы, которую требуется проверить или остановить (например, <code>comindware&lt;instanceName&gt;</code>,<code>apigateway&lt;instanceName&gt;</code>, <code>adapterhost&lt;instanceName&gt;</code>);</li>
+<li><code>&lt;user&gt;</code> — имя пользователя, в домашней директории которого находится файл резервной копии;</li>
+</ul>
+<p>См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a>»</em>.</p>
+</div>
+<h2 class="pageBreakBefore" id="backup_restore_cdbbz_db_scripts">Восстановление базы данных и скриптов</h2>
 <ol class="colored_numbers_list">
 <li>
 <p>Перейдите в режим суперпользователя:</p>
@@ -76,13 +97,16 @@
 <li>
 <p>Остановите службы экземпляра ПО (где <code>&lt;instanceName&gt;</code> — имя экземпляра ПО):</p>
 <div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>stop<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>stop<span class="w"> </span>apigateway&lt;instanceName&gt;</code> <br/></pre></code></div>
-<div class="highlight"><code><pre><span></span><code>ps<span class="w"> </span>-fax<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>&lt;instanceName&gt;<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Agent</code> <br/><code><span class="nb">kill</span><span class="w"> </span>-9<span class="w"> </span><span class="k">$(</span>ps<span class="w"> </span>-eo<span class="w"> </span>pid,args<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>&lt;instanceName&gt;<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Agent<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="o">{</span><span class="s1">'print $1'</span><span class="o">}</span><span class="k">)</span><span class="w"> </span></code> <br/><code><span class="c1">#или </span></code> <br/><code>systemctl<span class="w"> </span>stop<span class="w"> </span>adapterhost&lt;instanceName&gt;</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Остановите службу adapterhost:</p>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>stop<span class="w"> </span>adapterhost&lt;instanceName&gt;</code> <br/></pre></code></div>
 </li>
 <li>
 <p>С помощью команды <code>systemctl status &lt;serviceName&gt;</code> удостоверьтесь, что службы остановлены.</p>
 </li>
 <li>
-<p>Перейдите в директорию с резервной копией, например <code>/home/&lt;user&gt;</code></p>
+<p>Перейдите в директорию с CDBBZ-файлом резервной копии, например <code>/home/&lt;user&gt;</code>:</p>
 <div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/home/&lt;user&gt;</code> <br/></pre></code></div>
 </li>
 <li>
@@ -90,7 +114,7 @@
 <div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>tmp</code> <br/></pre></code></div>
 </li>
 <li>
-<p><a class="mkdocs_imported_link" id="unpack_backup"></a>Распакуйте архив резервной копии в директорию <code>tmp</code>:</p>
+<p id="unpack_backup">Распакуйте архив резервной копии в директорию <code>tmp</code>:</p>
 <div class="highlight"><code><pre><span></span><code>unzip<span class="w"> </span>-q<span class="w"> </span>&lt;backupName&gt;.cdbbz<span class="w"> </span>-d<span class="w"> </span>tmp/</code> <br/></pre></code></div>
 </li>
 <li>
@@ -98,32 +122,47 @@
 <div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>tmp</code> <br/><code>ls</code> <br/></pre></code></div>
 </li>
 <li>
-<p>После распаковки архива в директории быть 3 директории: <code>Database</code>, <code>Scripts</code>, <code>Streams</code>.</p>
+<p>Архив будет распакован в несколько директорий.</p>
 <div class="notice notice-info">
-<p class="admonition-title">Примечание</p>
-<p>Если в распакованной резервной копии имеется директория <code>Ignite</code> вместо <code>Database</code>, переименуйте её в <code>Database</code>:</p>
-<div class="highlight"><code><pre><span></span><code>mv Ignite Database</code> <br/></pre></code></div>
+<p class="admonition-title">Фактический набор директорий</p>
+<p>В дальнейших инструкциях используются директории <code>Database</code>, <code>Scripts</code> и <code>Streams</code>.</p>
+<ul>
+<li>В архиве всегда имеется директория <code>Database</code> с резервной копией базы данных.</li>
+<li>Если в резервной копии нет директорий <code>Scripts</code> и <code>Streams</code>, пропускайте связанные с ними инструкции.</li>
+<li>Если в резервной копии имеется директория <code>History</code> с данными OpenSearch (Elasticsearch), их следует восстанавливать средствами OpenSearch (Elasticsearch). См. <em>«<a class="mkdocs_imported_link" href="#backup_restore_cdbbz_indexes">Восстановление индексов OpenSearch (Elasticsearch) из файла резервной копии репозитория</a>»</em>.</li>
+</ul>
 </div>
 </li>
 <li>
-<p>Для восстановления резервной копии используйте следующие параметры из YML-файла конфигурации экземпляра ПО <code>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code>:</p>
-<p><code class="highlight">databasePath: &lt;path/to/Database&gt;</code> — путь к директории базы данных;
-<code class="highlight">userStorage.localDisk.path: &lt;path/to/Streams&gt;</code> — путь к директории пользовательских файлов;</p>
-<p>Просмотрите откройте файл конфигурации с помощью следующей команды:</p>
+<p>Для восстановления резервной копии используйте пути, указанные в следующих директивах YML-файла конфигурации экземпляра ПО <code>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code>:</p>
+<ul>
+<li><code>db.workDir: &lt;path/to/Database&gt;</code> — путь к директории базы данных;</li>
+<li><code>userStorage.localDisk.path: &lt;path/to/Streams&gt;</code> — путь к директории пользовательских файлов.</li>
+</ul>
+<div class="notice notice-warning">
+<p class="admonition-title">Восстановление резервной копии на другом экземпляре ПО</p>
+<p>При создании экземпляра ПО база данных привязывается к имени, которое указано в директиве <code>db.name</code> (имя базы данных) файла конфигурации <code>&lt;instanceName&gt;.yml</code>.</p>
+<p>Если вы восстанавливаете резервную копию на новом экземпляре ПО, необходимо убедиться, что в YML-файле конфигурации задано такое же значение <code>db.name</code>, как у экземпляра ПО, на котором была создана резервная копия.</p>
+</div>
+<p>Просмотрите файл конфигурации с помощью следующей команды:</p>
 <div class="highlight"><code><pre><span></span><code>cat<span class="w"> </span>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Убедитесь в наличии директорий <code>&lt;path/to/Database&gt;</code> и <code>&lt;path/to/Streams&gt;</code>:</p>
-<div class="highlight"><code><pre><span></span><code>ls<span class="w"> </span>-lh<span class="w"> </span><span class="sb">`</span>&lt;path/to/Database&gt;<span class="sb">`</span></code> <br/><code>ls<span class="w"> </span>-lh<span class="w"> </span><span class="sb">`</span>&lt;path/to/Streams&gt;<span class="sb">`</span></code> <br/></pre></code></div>
+<p>Убедитесь в наличии директорий <code>&lt;Database&gt;</code> и <code>&lt;Streams&gt;</code>, указанных в YML-файле конфигурации:</p>
+<div class="highlight"><code><pre><span></span><code>ls<span class="w"> </span>-lh<span class="w"> </span>&lt;path/to/Database&gt;</code> <br/><code>ls<span class="w"> </span>-lh<span class="w"> </span>&lt;path/to/Streams&gt;</code> <br/></pre></code></div>
 <ul>
 <li>
+<p>Если папки присутствуют, удалите их содержимое:</p>
+<div class="highlight"><code><pre><span></span><code>rm<span class="w"> </span>-rf<span class="w"> </span>&lt;path&gt;/Database/*</code> <br/><code>rm<span class="w"> </span>-rf<span class="w"> </span>&lt;path&gt;/Streams/*</code> <br/></pre></code></div>
+</li>
+<li>
 <p>Если папки отсутствуют, создайте их:</p>
-<div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="sb">`</span>&lt;path/to/Database&gt;<span class="sb">`</span></code> <br/><code>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="sb">`</span>&lt;path/to/Streams&gt;<span class="sb">`</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>&lt;path&gt;/Database</code> <br/><code>mkdir<span class="w"> </span>-p<span class="w"> </span>&lt;path&gt;/Streams</code> <br/></pre></code></div>
 </li>
 </ul>
 </li>
 <li>
-<p>Перейдите в директорию распакованной резервной копии (например, <code>/home/&lt;user&gt;/temp/</code>).</p>
+<p>Перейдите в директорию распакованной резервной копии (например, <code>/home/&lt;user&gt;/tmp/</code>).</p>
 </li>
 <li>
 <p>Переместите директорию <code>Scripts</code> в <code>Database</code>:</p>
@@ -135,32 +174,37 @@
 </li>
 <li>
 <p>Назначьте перенесённым директориям права <code>rwxrw-rw-</code>:</p>
-<div class="highlight"><code><pre><span></span><code>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">766</span><span class="w"> </span>&lt;path/to/Database/folder&gt;<span class="w"> </span>&lt;path/to/Streams&gt;<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">766</span><span class="w"> </span>&lt;path/to/Database&gt;<span class="w"> </span>&lt;path/to/Streams&gt;<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Назначьте перенесенным директориям владельца:</p>
-<div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>&lt;User&gt;:&lt;Group&gt;<span class="w"> </span>&lt;path/to/database/folder&gt;<span class="w"> </span>&lt;path/to/streams/folder&gt;<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>&lt;User&gt;:&lt;Group&gt;<span class="w"> </span>&lt;path/to/Database&gt;<span class="w"> </span>&lt;path/to/Streams&gt;<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;</code> <br/></pre></code></div>
 <p>Здесь <code>&lt;User&gt;</code>, <code>&lt;Group&gt;</code> — значения соответствующих параметров из файла <code>/usr/lib/systemd/system/comindware&lt;instanceName&gt;.service</code></p>
 </li>
 <li>
 <p>Если в файле конфигурации экземпляра ПО отсутствует параметр <code>nodeName</code> (имя узла экземпляра ПО), добавьте его:</p>
 <ul>
 <li>
-<p>Откройте файл конфигурации для редактирования:
-    <div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code> <br/></pre></code></div></p>
+<p>Откройте файл конфигурации для редактирования:</p>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Добавьте директиву:</p>
-<div class="highlight"><code><pre><span></span><code>nodeName: &lt;instanceName&gt;</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="nt">nodeName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/></pre></code></div>
 </li>
 </ul>
+<div class="notice notice-warning">
+<p class="admonition-title">Имя узла и лицензионные ключи</p>
+<p>Чтобы использовать на восстановленном экземпляре ПО прежние лицензионные ключи, скопируйте имя узла из конфигурации исходного экземпляра ПО.</p>
+<p>См. <em>«<a class="mkdocs_imported_link" href="#backup_restore_cdbbz_license_keys">Восстановление лицензионных ключей</a>»</em>.</p>
+</div>
 </li>
 <li>
-<p>При необходимости <a class="mkdocs_imported_link" href="#восстановление-индексов-elasticsearch-из-файла-резервной-копии-репозитория">восстановите индексы Elasticsearch</a> из резервной копии.</p>
+<p>При необходимости <a class="mkdocs_imported_link" href="#backup_restore_cdbbz_indexes">восстановите индексы OpenSearch (Elasticsearch)</a> из резервной копии.</p>
 </li>
 <li>
 <p>Запустите службы экземпляра ПО и проверьте их статус:</p>
-<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>start<span class="w"> </span>comindware&lt;instanceName&gt;<span class="w"> </span></code> <br/><code>systemctl<span class="w"> </span>start<span class="w"> </span>apigateway&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>start<span class="w"> </span>adapterhost&lt;instanceName&gt;</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>start<span class="w"> </span>adapterhost&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>start<span class="w"> </span>comindware&lt;instanceName&gt;<span class="w"> </span></code> <br/><code>systemctl<span class="w"> </span>start<span class="w"> </span>apigateway&lt;instanceName&gt;</code> <br/></pre></code></div>
 <div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>status<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>status<span class="w"> </span>apigateway&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>status<span class="w"> </span>adapterhost&lt;instanceName&gt;</code> <br/></pre></code></div>
 </li>
 <li>
@@ -174,73 +218,118 @@
 <div class="highlight"><code><pre><span></span><code>rm<span class="w"> </span>-r<span class="w"> </span>/home/&lt;user&gt;/tmp</code> <br/></pre></code></div>
 </li>
 </ol>
-<h2 id="восстановление-индексов-elasticsearch-из-файла-резервной-копии-репозитория">Восстановление индексов Elasticsearch из файла резервной копии репозитория</h2>
+<h2 id="backup_restore_cdbbz_license_keys">Восстановление лицензионных ключей</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>Лицензионные ключи привязаны к имени экземпляра ПО (<code>&lt;instanceName&gt;</code>) и уникальному идентификатору оборудования сервера (Hardware ID).</p>
+<p>Поэтому восстановление возможно только на том же сервере, на котором была создана резервная копия.</p>
+<p>При развёртывании на новом оборудовании необходимо заново выполнить активацию лицензионных ключей.</p>
+</div>
+<p>Чтобы использовать на восстановленном экземпляре ПО прежние лицензионные ключи, выполните указанные ниже действия.</p>
 <ol class="colored_numbers_list">
 <li>
-<p>Остановите службу Elasticsearch и удостоверьтесь, что она остановлена:</p>
-<div class="highlight"><code><pre><span></span><code>systemctl stop elasticsearch</code> <br/><code>systemctl status elasticsearch</code> <br/></pre></code></div>
+<p>Откройте файл конфигурации для редактирования:</p>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Создайте папку репозитория Elasticsearch (например, <code>/var/www/backups/elasticsearch/</code>) и перенесите в неё файлы из каталога <code>History</code> ранее <a class="mkdocs_imported_link" href="#unpack_backup">распакованной резервной копии</a>:</p>
-<div class="highlight"><code><pre><span></span><code>mkdir /var/www/backups/elasticsearch/</code> <br/><code>mv /var/lib/comindware/&lt;instanceName&gt;/History/* /var/www/backups/elasticsearch/</code> <br/></pre></code></div>
+<p>Укажите такое же значение <code>nodeName</code> (имя узла экземпляра ПО), как в конфигурации исходного экземпляра ПО:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nt">nodeName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/></pre></code></div>
 </li>
 <li>
-<p>Назначьте папке репозитория и её содержимому права <code>rwxr-xr-x</code>:</p>
-<div class="highlight"><code><pre><span></span><code>chmod -R 755 /var/www/backups/</code> <br/></pre></code></div>
+<p>Включите директиву <code>isContainerEnvironment</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nt">isContainerEnvironment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Перезапустите экземпляр ПО:</p>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>restart<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Удостоверьтесь, что лицензионные ключи присутствуют на странице «<strong>Администрирование</strong>» — «<strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4670">Лицензирование</a></strong>».</p>
+</li>
+<li>Назначьте лицензионные ключи аккаунтам и группам.</li>
+</ol>
+<h2 id="backup_restore_cdbbz_indexes">Восстановление индексов OpenSearch (Elasticsearch) из файла резервной копии репозитория</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Логика работы репозитория снимков OpenSearch (Elasticsearch)</p>
+<p>OpenSearch (Elasticsearch) сохраняет и восстанавливает резервные копии своих данных в виде снимков в директорию, заданную директивой <code>path.repo</code> в файле конфигурации <code>/etc/elasticsearch/elasticsearch.yml</code>.</p>
+<p>Эта директория служит как для сохранения резервных копий, так и для их восстановления.</p>
+</div>
+<ol class="colored_numbers_list">
+<li>
+<p>Остановите службу OpenSearch (Elasticsearch) и удостоверьтесь, что она остановлена:</p>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>stop<span class="w"> </span>elasticsearch</code> <br/><code>systemctl<span class="w"> </span>status<span class="w"> </span>elasticsearch</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Создайте папку репозитория OpenSearch (Elasticsearch) (например, <code>/var/backups/elasticsearch/</code>) и перенесите в неё файлы из каталога <code>History</code> ранее <a class="mkdocs_imported_link" href="#unpack_backup">распакованной резервной копии</a>:</p>
+<div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>/var/backups/elasticsearch/</code> <br/><code>mv<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/History/*<span class="w"> </span>/var/backups/elasticsearch/</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Назначьте папке репозитория и её содержимому полные права доступа:</p>
+<div class="highlight"><code><pre><span></span><code>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">777</span><span class="w"> </span>/var/backups/elasticsearch/</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Назначьте владельца <code>elasticsearch</code> папке репозитория и её содержимому:</p>
-<div class="highlight"><code><pre><span></span><code>chown -R elasticsearch:elasticsearch /var/www/backups/</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>elasticsearch:elasticsearch<span class="w"> </span>/var/backups/elasticsearch/</code> <br/></pre></code></div>
 </li>
 <li>
 <p>В файле конфигурации <code>/etc/elasticsearch/elasticsearch.yml</code> укажите путь к созданному репозиторию:</p>
-<div class="highlight"><code><pre><span></span><code>path.repo: /var/www/backups/elasticsearch</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="nt">path.repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/backups/elasticsearch</span></code> <br/></pre></code></div>
 </li>
 <li>
-<p>Запустите службу Elasticsearch:</p>
-<div class="highlight"><code><pre><span></span><code>systemctl start elasticsearch.service</code> <br/></pre></code></div>
+<p>Запустите службу OpenSearch (Elasticsearch):</p>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>start<span class="w"> </span>elasticsearch</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Зарегистрируйте репозиторий (например, <code>repostory_backup</code>) с резервной копией снимка Elasticsearch:</p>
-<div class="highlight"><code><pre><span></span><code>curl -X PUT "localhost:9200/_snapshot/repostory_backup?pretty" -H ’Content-Type: application/json’ -d’</code> <br/><code>{</code> <br/><code>"type": "fs",</code> <br/><code>"settings": {</code> <br/><code>            "location": "/var/www/backups/elasticsearch"</code> <br/><code>            }</code> <br/><code>}</code> <br/></pre></code></div>
+<p>Зарегистрируйте репозиторий (например, <code>&lt;repository_backup&gt;</code>) с резервной копией снимка OpenSearch (Elasticsearch) (<code>&lt;openSearchHost&gt;</code> — адрес сервера OpenSearch (Elasticsearch)) :</p>
+<ul>
+<li>
+<p><strong>С авторизацией в OpenSearch (Elasticsearch):</strong></p>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"https://&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/&lt;repository_backup&gt;?pretty"</span><span class="w"> </span><span class="se">\\</span></code> <br/><code>-u<span class="w"> </span>&lt;username&gt;:&lt;password&gt;<span class="w"> </span><span class="se">\\</span></code> <br/><code>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span><span class="se">\\</span></code> <br/><code><span class="s1">'{</span></code> <br/><code><span class="s1">    "type": "fs",</span></code> <br/><code><span class="s1">    "settings": {</span></code> <br/><code><span class="s1">        "location": "/var/backups/elasticsearch"</span></code> <br/><code><span class="s1">    }</span></code> <br/><code><span class="s1">}'</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p><strong>Без авторизации в OpenSearch (Elasticsearch):</strong></p>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"https://&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/&lt;repository_backup&gt;?verify=false&amp;pretty"</span><span class="w"> </span><span class="se">\\</span></code> <br/><code>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span><span class="se">\\</span></code> <br/><code><span class="s1">'{</span></code> <br/><code><span class="s1">    "type": "fs",</span></code> <br/><code><span class="s1">    "settings": {</span></code> <br/><code><span class="s1">        "location": "/var/backups/elasticsearch"</span></code> <br/><code><span class="s1">    }</span></code> <br/><code><span class="s1">}'</span></code> <br/></pre></code></div>
+</li>
+</ul>
 <p><a class="mkdocs_imported_link" id="s3_repository"></a></p>
 <div class="notice notice-info">
 <p class="admonition-title">Примечание</p>
 <p>Шаги 7 и 8 не требуются при восстановлении снимка из хранилища S3.</p>
-<p>Для восстановления снимка из хранилища S3 используйте репозиторий с именем, совпадающим с префиксом индекса Elasticsearch.</p>
+<p>Для восстановления снимка из хранилища S3 используйте репозиторий с именем, совпадающим с префиксом индекса OpenSearch (Elasticsearch).</p>
 <p>Этот репозиторий создаётся автоматически при запуске резервного копирования</p>
-<p>Префикс индекса задаётся в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4678">свойствах подключения к Elasticsearch</a>, используемого по умолчанию.</p>
+<p>Префикс индекса задаётся в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4678">свойствах подключения к OpenSearch (Elasticsearch)</a>, используемого по умолчанию.</p>
 </div>
 </li>
 <li>
 <p>Проверьте содержимое зарегистрированного репозитория:</p>
-<div class="highlight"><code><pre><span></span><code>curl -X GET "localhost:9200/_cat/snapshots/repostory_backup?pretty"</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">"https://&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/&lt;repository_backup&gt;?pretty"</span></code> <br/></pre></code></div>
 </li>
 <li>
-<p>Восстановите снимок Elasticsearch:</p>
-<div class="highlight"><code><pre><span></span><code>curl -X POST "localhost:9200/_snapshot/repostory_backup/backupSession123/_restore?pretty"</code> <br/></pre></code></div>
+<p>Восстановите снимок OpenSearch (Elasticsearch):</p>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"https://&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/&lt;repository_backup&gt;/&lt;backupsessionXX&gt;/_restore?pretty"</span></code> <br/></pre></code></div>
 <ul>
-<li>В качестве репозитория укажите имя репозитория, созданного на шаге 7, или префикс индекса Elasticsearch (см. <a class="mkdocs_imported_link" href="#s3_repository">примечание</a> выше).</li>
-<li>В качестве имени снимка укажите идентификатор резервной копии <strong>без точки перед номером</strong> (например, <code>backupSession.123</code> указывайте как <code>backupSession123</code>) со страницы <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642">«Администрирование» – «Инфраструктура» – «Резервное копирование» – «Журнал»</a>.</li>
+<li>В качестве репозитория укажите имя репозитория, созданного на шаге 7, или префикс индекса OpenSearch (Elasticsearch) при восстановлении из хранилища S3 (см. <a class="mkdocs_imported_link" href="#s3_repository">примечание</a> выше).</li>
+<li>В качестве имени снимка укажите идентификатор резервной копии <strong>без точки перед номером и строчными буквами</strong> (например, <code>backupSession.123</code> указывайте как <code>backupsession123</code>) со страницы <a class="autorefs autorefs-internal mkdocs_imported_link" href="../configure.html#backup_configure_sessions_list" title="Просмотр списка сеансов резервного копирования">«Администрирование» – «Инфраструктура» – «Резервное копирование» – «Журнал»</a>.</li>
 </ul>
 </li>
 <li>
 <p>Проверьте наличие индексов в восстановленном каталоге:</p>
-<div class="highlight"><code><pre><span></span><code>curl -X GET "localhost:9200/_cat/indices?pretty"</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">"https://&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_cat/indices?pretty"</span></code> <br/></pre></code></div>
 </li>
 </ol>
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642">Резервное копирование. Настройка и запуск, просмотр журнала сеансов</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622">Установка, запуск, инициализация и остановка ПО</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4651">Проверка и настройка конфигурации экземпляра ПО Comindware Platform после восстановления из резервной копии</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-filesystem-repository.html">Регистрация репозитория Elasticsearch (официальное руководство, английский язык)</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/restore-snapshot-api.html">Восстановление снимка Elasticsearch (официальное руководство, английский язык)</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4678">Elasticsearch. Настройка подключения</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4650">Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4648">Восстановление базы данных, вложенных файлов и журналов из полной резервной копии</a></em></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642">Резервное копирование. Настройка и запуск, просмотр журнала сеансов</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622">Установка, запуск, инициализация и остановка ПО</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4651">Проверка и настройка конфигурации экземпляра ПО Comindware Platform после восстановления из резервной копии</a></li>
+<li><a class="mkdocs_imported_link" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-filesystem-repository.html">Регистрация репозитория OpenSearch (Elasticsearch) (официальное руководство, английский язык)</a></li>
+<li><a class="mkdocs_imported_link" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/restore-snapshot-api.html">Восстановление снимка OpenSearch (Elasticsearch) (официальное руководство, английский язык)</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4678">OpenSearch (Elasticsearch). Настройка подключения</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4650">Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4648">Восстановление базы данных, вложенных файлов и журналов из полной резервной копии</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4670">Лицензирование. Активация, назначение, отзыв и продление лицензий</a></li>
 </ul>
 </div>
 </article>

@@ -1,132 +1,303 @@
-<h1>Отправка, получение и обработка эл. почты в процессе. Пример: настройка подключений, путей передачи данных, диаграммы процесса и сценария</h1><div class="md-container" data-md-component="container">
-<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<h1>Отправка, получение и обработка эл. почты в процессе. Пример: настройка подключений, путей передачи данных, диаграммы процесса и сценария</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4691" kb-title="Отправка, получение и обработка эл. почты в процессе. Пример: настройка подключений, путей передачи данных, диаграммы процесса и сценария">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
 <div class="mce-toc">
-<h2 class="toc-heading">Содержание</h2>
+<h2 class="toc-heading">
+      Содержание
+      </h2>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#прикладная-задача"> <span class="md-ellipsis"> Прикладная задача </span> </a><nav aria-label="Прикладная задача" class="md-nav">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#прикладная-задача">
+<span class="md-ellipsis">
+      Прикладная задача
+    </span>
+</a>
+<nav aria-label="Прикладная задача" class="md-nav">
 <ul class="md-nav__list">
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#исходные-данные"> <span class="md-ellipsis"> Исходные данные </span> </a><nav aria-label="Исходные данные" class="md-nav">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#исходные-данные">
+<span class="md-ellipsis">
+      Исходные данные
+    </span>
+</a>
+<nav aria-label="Исходные данные" class="md-nav">
 <ul class="md-nav__list">
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#шаблон-процесса-согласование-отпуска"> <span class="md-ellipsis"> Шаблон процесса «Согласование отпуска» </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#шаблон-процесса-обработка-ответа-руководителя"> <span class="md-ellipsis"> Шаблон процесса «Обработка ответа руководителя» </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#attributes_record_template_vacation_application"> <span class="md-ellipsis"> Атрибуты шаблона записи «Заявления на отпуск» </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#attributes_record_template_manager_decision"> <span class="md-ellipsis"> Атрибуты шаблона записи «Решения руководителя» </span> </a></li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#шаблон-процесса-согласование-отпуска">
+<span class="md-ellipsis">
+      Шаблон процесса «Согласование отпуска»
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#шаблон-процесса-обработка-ответа-руководителя">
+<span class="md-ellipsis">
+      Шаблон процесса «Обработка ответа руководителя»
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#attributes_record_template_vacation_application">
+<span class="md-ellipsis">
+      Атрибуты шаблона записи «Заявления на отпуск»
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#attributes_record_template_manager_decision">
+<span class="md-ellipsis">
+      Атрибуты шаблона записи «Решения руководителя»
+    </span>
+</a>
+</li>
 </ul>
-</nav></li>
+</nav>
+</li>
 </ul>
-</nav></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-подключений"> <span class="md-ellipsis"> Настройка подключений </span> </a><nav aria-label="Настройка подключений" class="md-nav">
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-подключений">
+<span class="md-ellipsis">
+      Настройка подключений
+    </span>
+</a>
+<nav aria-label="Настройка подключений" class="md-nav">
 <ul class="md-nav__list">
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#email_receive_process"> <span class="md-ellipsis"> Отправка эл. почты из процесса </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#получение-эл-почты-в-процессе"> <span class="md-ellipsis"> Получение эл. почты в процессе </span> </a></li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#email_receive_process">
+<span class="md-ellipsis">
+      Отправка эл. почты из процесса
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#получение-эл-почты-в-процессе">
+<span class="md-ellipsis">
+      Получение эл. почты в процессе
+    </span>
+</a>
+</li>
 </ul>
-</nav></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-путей-передачи-данных"> <span class="md-ellipsis"> Настройка путей передачи данных </span> </a><nav aria-label="Настройка путей передачи данных" class="md-nav">
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-путей-передачи-данных">
+<span class="md-ellipsis">
+      Настройка путей передачи данных
+    </span>
+</a>
+<nav aria-label="Настройка путей передачи данных" class="md-nav">
 <ul class="md-nav__list">
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#notification_to_manager"> <span class="md-ellipsis"> Отправка уведомления Руководителю </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#manager_answer_receive"> <span class="md-ellipsis"> Получение ответа Руководителя </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#notification_vacation_accept"> <span class="md-ellipsis"> Отправка уведомления «Отпуск согласован» </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#notification_vacation_decline"> <span class="md-ellipsis"> Отправка уведомления «В отпуске отказано» </span> </a></li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#notification_to_manager">
+<span class="md-ellipsis">
+      Отправка уведомления Руководителю
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#manager_answer_receive">
+<span class="md-ellipsis">
+      Получение ответа Руководителя
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#notification_vacation_accept">
+<span class="md-ellipsis">
+      Отправка уведомления «Отпуск согласован»
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#notification_vacation_decline">
+<span class="md-ellipsis">
+      Отправка уведомления «В отпуске отказано»
+    </span>
+</a>
+</li>
 </ul>
-</nav></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#elements_vacation_agreement_setup"> <span class="md-ellipsis"> Настройка элементов диаграммы процесса «Согласование отпуска» </span> </a><nav aria-label="Настройка элементов диаграммы процесса «Согласование отпуска»" class="md-nav">
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#elements_vacation_agreement_setup">
+<span class="md-ellipsis">
+      Настройка элементов диаграммы процесса «Согласование отпуска»
+    </span>
+</a>
+<nav aria-label="Настройка элементов диаграммы процесса «Согласование отпуска»" class="md-nav">
 <ul class="md-nav__list">
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#start_event_application_registered"> <span class="md-ellipsis"> Начальное событие «Оформлено заявление на отпуск» </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#intermediate_event_notification_to_manager"> <span class="md-ellipsis"> Промежуточное событие «Отправка уведомления для руководителя» </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#intermediate_event_manager_answer"> <span class="md-ellipsis"> Промежуточное событие «Обработан ответ руководителя» </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#gateway_manager_decision"> <span class="md-ellipsis"> Развилка «Решение руководителя» </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#end_event_vacation_accept"> <span class="md-ellipsis"> Конечное событие «Отпуск согласован» </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#end_event_vacation_decline"> <span class="md-ellipsis"> Конечное событие «В отпуске отказано» </span> </a></li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#start_event_application_registered">
+<span class="md-ellipsis">
+      Начальное событие «Оформлено заявление на отпуск»
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#intermediate_event_notification_to_manager">
+<span class="md-ellipsis">
+      Промежуточное событие «Отправка уведомления для руководителя»
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#intermediate_event_manager_answer">
+<span class="md-ellipsis">
+      Промежуточное событие «Обработан ответ руководителя»
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#gateway_manager_decision">
+<span class="md-ellipsis">
+      Развилка «Решение руководителя»
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#end_event_vacation_accept">
+<span class="md-ellipsis">
+      Конечное событие «Отпуск согласован»
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#end_event_vacation_decline">
+<span class="md-ellipsis">
+      Конечное событие «В отпуске отказано»
+    </span>
+</a>
+</li>
 </ul>
-</nav></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#elements_manager_answer_processing_setup"> <span class="md-ellipsis"> Настройка элементов диаграммы процесса «Обработка ответа руководителя» </span> </a><nav aria-label="Настройка элементов диаграммы процесса «Обработка ответа руководителя»" class="md-nav">
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#elements_manager_answer_processing_setup">
+<span class="md-ellipsis">
+      Настройка элементов диаграммы процесса «Обработка ответа руководителя»
+    </span>
+</a>
+<nav aria-label="Настройка элементов диаграммы процесса «Обработка ответа руководителя»" class="md-nav">
 <ul class="md-nav__list">
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#start_event_manager_answer_receive"> <span class="md-ellipsis"> Начальное событие «Поступил ответ руководителя» </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#end_event_decision_transfer"> <span class="md-ellipsis"> Конечное событие «Передача решения в процесс «Согласование отпуска» </span> </a></li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#start_event_manager_answer_receive">
+<span class="md-ellipsis">
+      Начальное событие «Поступил ответ руководителя»
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#end_event_decision_transfer">
+<span class="md-ellipsis">
+      Конечное событие «Передача решения в процесс «Согласование отпуска»
+    </span>
+</a>
+</li>
 </ul>
-</nav></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#тестирование-процесса-согласование-отпуска"> <span class="md-ellipsis"> Тестирование процесса «Согласование отпуска» </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#тестирование-процесса-согласование-отпуска">
+<span class="md-ellipsis">
+      Тестирование процесса «Согласование отпуска»
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
 </ul>
 </div>
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h2 id="введение">Введение</h2>
-<p><strong>Comindware Platform</strong> может отправлять и принимать электронные письма, а также передавать сообщения между процессами.</p>
+<p><strong>Comindware Platform</strong> может отправлять и принимать электронные письма, а также передавать сообщения между процессами.</p>
 <p>Здесь представлены инструкции по настройке обмена данными посредством электронных писем и межпроцессного взаимодействия на примере процесса согласования отпуска:</p>
 <ul>
 <li>настройка подключений и путей передачи данных;</li>
 <li>настройка процессов согласования отпуска и обработки эл. писем;</li>
 <li>настройка событий отправки и получения сообщений на диаграммах процессов.</li>
 </ul>
-<h2 id="прикладная-задача">Прикладная задача</h2>
-<p>Требуется настроить процесс согласования <em>Руководителем</em> заявлений на отпуск так, чтобы <em>Руководитель</em> мог согласовать отпуск или отказать в отпуске с помощью кнопки в эл. письме с заявлением, не покидая почтового ящика и не выполняя вход в <strong>Comindware Platform</strong>.</p>
-<p>Настроим процесс <em>«Согласование отпуска»</em> из следующих шагов:</p>
+<h2 class="pageBreakBefore" id="прикладная-задача">Прикладная задача</h2>
+<p>Требуется настроить процесс согласования <em>Руководителем</em> заявлений на отпуск так, чтобы <em>Руководитель</em> мог согласовать отпуск или отказать в отпуске с помощью кнопки в эл. письме с заявлением, не покидая почтового ящика и не выполняя вход в <strong>Comindware Platform</strong>.</p>
+<p>Настроим процесс <em>«Согласование отпуска»</em> из следующих шагов:</p>
 <ol class="colored_numbers_list">
-<li><em>Заявитель</em> подаёт заявление на отпуск.</li>
+<li><em>Заявитель</em> подаёт заявление на отпуск.</li>
 <li>
-<p>Процесс <em>«Согласование отпуска»</em> отправляет <em>Руководителю</em> эл. письмо от имени <em>Отдела кадров</em> со следующим содержимым:</p>
+<p>Процесс <em>«Согласование отпуска»</em> отправляет <em>Руководителю</em> эл. письмо от имени <em>Отдела кадров</em> со следующим содержимым:</p>
 <ul>
 <li>Номер заявления</li>
-<li>Ф. И. О. заявителя</li>
+<li>Ф. И. О. заявителя</li>
 <li>Даты начала и окончания отпуска</li>
 <li>Количество дней отпуска</li>
-<li>Кнопки <em>«Согласовать отпуск»</em> и <em>«Отказать в отпуске»</em></li>
+<li>Кнопки <em>«Согласовать отпуск»</em> и <em>«Отказать в отпуске»</em></li>
 <li>Инструкции по подаче решения по заявлению</li>
 </ul>
 </li>
 <li>
-<p><em>Руководитель</em> рассматривает заявление и нажимает в письме кнопку <em>«Согласовать отпуск»</em> или <em>«Отказать в отпуске»</em>.</p>
+<p><em>Руководитель</em> рассматривает заявление и нажимает в письме кнопку <em>«Согласовать отпуск»</em> или <em>«Отказать в отпуске»</em>.</p>
 </li>
 <li>
-<p>При нажатии <em>Руководителем</em> кнопки автоматически создаётся новое письмо со следующим содержимым:</p>
+<p>При нажатии <em>Руководителем</em> кнопки автоматически создаётся новое письмо со следующим содержимым:</p>
 <ul>
-<li>Получатель — адрес почтового ящика, письма в котором обрабатывает процесс <em>«Обработка ответа руководителя»</em>;</li>
+<li>Получатель — адрес почтового ящика, письма в котором обрабатывает процесс <em>«Обработка ответа руководителя»</em>;</li>
 <li>Тема — решение по заявлению и номер заявления.</li>
 </ul>
 <div class="notice notice-info">
 <p class="admonition-title">Примечание</p>
-<p><em>Руководитель</em> <strong>не должен изменять адрес получателя и тему</strong> автоматически созданного письма.</p>
-<p>В тексте письма <em>Руководитель</em> может указать в произвольной форме причину решения по заявлению.</p>
+<p><em>Руководитель</em> <strong>не должен изменять адрес получателя и тему</strong> автоматически созданного письма.</p>
+<p>В тексте письма <em>Руководитель</em> может указать в произвольной форме причину решения по заявлению.</p>
 </div>
 </li>
 <li>
-<p><em>Руководитель</em> отправляет заполненное письмо с решением по заявлению.</p>
+<p><em>Руководитель</em> отправляет заполненное письмо с решением по заявлению.</p>
 </li>
-<li>Процесс <em>«Обработка ответа руководителя»</em> получает письмо от <em>Руководителя</em>, извлекает из него данные и передаёт решение <em>Руководителя</em> в процесс <em>«Согласование отпуска».</em></li>
-<li>В зависимости от решения <em>Руководителя</em> процесс <em>«Согласование отпуска»</em> отправляет <em>Заявителю</em> уведомление <em>«Отпуск согласован»</em> или <em>«В отпуске отказано»</em> от имени <em>Отдела кадров</em>.</li>
+<li>Процесс <em>«Обработка ответа руководителя»</em> получает письмо от <em>Руководителя</em>, извлекает из него данные и передаёт решение <em>Руководителя</em> в процесс <em>«Согласование отпуска».</em></li>
+<li>В зависимости от решения <em>Руководителя</em> процесс <em>«Согласование отпуска»</em> отправляет <em>Заявителю</em> уведомление <em>«Отпуск согласован»</em> или <em>«В отпуске отказано»</em> от имени <em>Отдела кадров</em>.</li>
 </ol>
-<h3 id="исходные-данные">Исходные данные</h3>
-<p>В приложении <em>«Отпуска»</em> создайте перечисленные ниже шаблоны.</p>
-<h4 id="шаблон-процесса-согласование-отпуска">Шаблон процесса «Согласование отпуска»</h4>
-<p>Шаблон процесса <em>«Согласование отпуска»</em> свяжите с шаблоном записи <a class="mkdocs_imported_link" href="#attributes_record_template_vacation_application"><em>«Заявления на отпуск»</em></a>.</p>
-<p>См. также <a class="mkdocs_imported_link" href="#elements_vacation_agreement_setup">«Настройка элементов диаграммы процесса <em>«Согласование отпуска»</em></a>.</p>
+<h3 class="pageBreakBefore" id="исходные-данные">Исходные данные</h3>
+<p>В приложении <em>«Отпуска»</em> создайте перечисленные ниже шаблоны.</p>
+<h4 id="шаблон-процесса-согласование-отпуска">Шаблон процесса «Согласование отпуска»</h4>
+<p>Шаблон процесса <em>«Согласование отпуска»</em> свяжите с шаблоном записи <a class="mkdocs_imported_link" href="#attributes_record_template_vacation_application"><em>«Заявления на отпуск»</em></a>.</p>
+<p>См. также <a class="mkdocs_imported_link" href="#elements_vacation_agreement_setup">«Настройка элементов диаграммы процесса <em>«Согласование отпуска»</em></a>.</p>
 <ul>
-<li><em><a class="mkdocs_imported_link" href="#start_event_application_registered">Оформлено заявление на отпуск</a></em> — <strong>простое начальное событие</strong>; соединено с событием <em>«Отправка уведомления для руководителя»</em>.</li>
-<li><em><a class="mkdocs_imported_link" href="#intermediate_event_notification_to_manager">Отправка уведомления для руководителя</a></em> — <strong>промежуточное событие-отправка сообщения</strong>; соединено с событием <em>«Обработан ответ руководителя»</em>.</li>
-<li><em><a class="mkdocs_imported_link" href="#intermediate_event_manager_answer">Обработан ответ руководителя</a></em> — <strong>промежуточное событие-получение сообщения</strong>; соединено с развилкой <em>«Решение руководителя»</em>.</li>
-<li><em><a class="mkdocs_imported_link" href="#gateway_manager_decision">Решение руководителя</a></em> — <strong>развилка «или/или»</strong>; соединена с событиями <em>«Отпуск согласован»</em> и <em>«В отпуске отказано»</em>.</li>
-<li><em><a class="mkdocs_imported_link" href="#end_event_vacation_accept">Отпуск согласован</a></em> — <strong>конечное событие-отправка сообщения</strong>.</li>
-<li><em><a class="mkdocs_imported_link" href="#end_event_vacation_decline">В отпуске отказано</a></em> — <strong>конечное событие-отправка сообщения</strong>.</li>
+<li><em><a class="mkdocs_imported_link" href="#start_event_application_registered">Оформлено заявление на отпуск</a></em> — <strong>простое начальное событие</strong>; соединено с событием <em>«Отправка уведомления для руководителя»</em>.</li>
+<li><em><a class="mkdocs_imported_link" href="#intermediate_event_notification_to_manager">Отправка уведомления для руководителя</a></em> — <strong>промежуточное событие-отправка сообщения</strong>; соединено с событием <em>«Обработан ответ руководителя»</em>.</li>
+<li><em><a class="mkdocs_imported_link" href="#intermediate_event_manager_answer">Обработан ответ руководителя</a></em> — <strong>промежуточное событие-получение сообщения</strong>; соединено с развилкой <em>«Решение руководителя»</em>.</li>
+<li><em><a class="mkdocs_imported_link" href="#gateway_manager_decision">Решение руководителя</a></em> — <strong>развилка «или/или»</strong>; соединена с событиями <em>«Отпуск согласован»</em> и <em>«В отпуске отказано»</em>.</li>
+<li><em><a class="mkdocs_imported_link" href="#end_event_vacation_accept">Отпуск согласован</a></em> — <strong>конечное событие-отправка сообщения</strong>.</li>
+<li><em><a class="mkdocs_imported_link" href="#end_event_vacation_decline">В отпуске отказано</a></em> — <strong>конечное событие-отправка сообщения</strong>.</li>
 </ul>
 <figure class="screenshot_with_caption">
-<p><img alt="Диаграмма процесса «Согласование отпуска»" src="https://kb.comindware.ru/assets/process_email_configure_vacation_agreement_diagram.png"/></p>
-<figcaption class="caption">Диаграмма процесса «Согласование отпуска»</figcaption>
+<p><img alt="Диаграмма процесса «Согласование отпуска»" src="/platform/v5.0/examples/img/process_email_configure_vacation_agreement_diagram.png"/><figcaption class="caption">Диаграмма процесса «Согласование отпуска»</figcaption></p>
 </figure>
-<h4 id="шаблон-процесса-обработка-ответа-руководителя">Шаблон процесса «Обработка ответа руководителя»</h4>
-<p><em>Шаблон процесса «Обработка ответа руководителя»</em> свяжите с шаблоном записи <em><a class="mkdocs_imported_link" href="#attributes_record_template_manager_decision">«Решения руководителя»</a>.</em></p>
-<p>См. также <a class="mkdocs_imported_link" href="#elements_manager_answer_processing_setup">«Настройка элементов диаграммы процесса <em>«Обработка ответа руководителя»</em></a>.</p>
+<h4 class="pageBreakBefore" id="шаблон-процесса-обработка-ответа-руководителя">Шаблон процесса «Обработка ответа руководителя»</h4>
+<p><em>Шаблон процесса «Обработка ответа руководителя»</em> свяжите с шаблоном записи <em><a class="mkdocs_imported_link" href="#attributes_record_template_manager_decision">«Решения руководителя»</a>.</em></p>
+<p>См. также <a class="mkdocs_imported_link" href="#elements_manager_answer_processing_setup">«Настройка элементов диаграммы процесса <em>«Обработка ответа руководителя»</em></a>.</p>
 <ul>
-<li><em><a class="mkdocs_imported_link" href="#start_event_manager_answer_receive">Поступил ответ руководителя</a></em> — <strong>начальное событие-получение сообщения</strong>; соединено с конечным событием.</li>
-<li><em><a class="mkdocs_imported_link" href="#end_event_decision_transfer">Передача решения в процесс «Согласование отпуска»</a></em> — <strong>конечное событие-отправка сообщения</strong>.</li>
+<li><em><a class="mkdocs_imported_link" href="#start_event_manager_answer_receive">Поступил ответ руководителя</a></em> — <strong>начальное событие-получение сообщения</strong>; соединено с конечным событием.</li>
+<li><em><a class="mkdocs_imported_link" href="#end_event_decision_transfer">Передача решения в процесс «Согласование отпуска»</a></em> — <strong>конечное событие-отправка сообщения</strong>.</li>
 </ul>
 <figure class="screenshot_with_caption">
-<p><img alt="Диаграмма процесса «Обработка ответа руководителя»" src="https://kb.comindware.ru/assets/process_email_configure_manager_answer_processing_diagram.png"/></p>
-<figcaption class="caption">Диаграмма процесса «Обработка ответа руководителя»</figcaption>
+<p><img alt="Диаграмма процесса «Обработка ответа руководителя»" src="/platform/v5.0/examples/img/process_email_configure_manager_answer_processing_diagram.png"/><figcaption class="caption">Диаграмма процесса «Обработка ответа руководителя»</figcaption></p>
 </figure>
-<h4 id="attributes_record_template_vacation_application">Атрибуты шаблона записи «Заявления на отпуск»</h4>
+<h4 class="pageBreakBefore" id="attributes_record_template_vacation_application">Атрибуты шаблона записи «Заявления на отпуск»</h4>
 <table style="width: 100%;">
 <thead>
 <tr>
@@ -164,9 +335,7 @@
 <p><strong>Тип данных: текст</strong></p>
 <p><strong>Вычислять автоматически</strong>: флажок установлен</p>
 <p><strong>Вычисляемое значение: формула</strong></p>
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="err">$</span><span class="n">_creator</span><span class="o">-&gt;</span><span class="n">fullName</span></code></pre>
-</div>
+<div class="highlight"><code><pre><span></span><code><span class="err">$</span><span class="n">_creator</span><span class="o">-&gt;</span><span class="n">fullName</span></code> <br/></pre></code></div>
 <ul>
 <li><code>$</code> — ссылка на текущую запись в <a class="mkdocs_imported_link" href="#attributes_record_template_vacation_application">шаблоне <em>«Заявления на отпуск»</em></a>.</li>
 <li><code>_creator</code> — системный атрибут, содержащий ID аккаунта, который создал запись.</li>
@@ -185,9 +354,7 @@
 <p><strong>Тип данных: текст</strong></p>
 <p><strong>Вычислять автоматически</strong>: флажок установлен</p>
 <p><strong>Вычисляемое значение: формула</strong></p>
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="err">$</span><span class="n">_creator</span><span class="o">-&gt;</span><span class="n">mbox</span></code></pre>
-</div>
+<div class="highlight"><code><pre><span></span><code><span class="err">$</span><span class="n">_creator</span><span class="o">-&gt;</span><span class="n">mbox</span></code> <br/></pre></code></div>
 <ul>
 <li><code>$</code> — ссылка на текущую запись в <a class="mkdocs_imported_link" href="#attributes_record_template_vacation_application">шаблоне <em>«Заявления на отпуск»</em></a>.</li>
 <li><code>_creator</code> — системный атрибут, содержащий ID аккаунта, который создал запись.</li>
@@ -228,13 +395,13 @@
 <p><strong>Тип данных: дата и время</strong></p>
 <p><strong>Вычислять автоматически</strong>: флажок установлен</p>
 <p><strong>Вычисляемое значение: формула</strong></p>
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="n">ADDDAYS</span><span class="p">(</span><span class="err">$</span><span class="n">StartDate</span><span class="p">,</span> <span class="err">$</span><span class="n">Duration</span><span class="p">)</span></code></pre>
-</div>
+<div class="highlight"><code><pre><span></span><code><span class="n">ADDDAYS</span><span class="p">(</span><span class="err">$</span><span class="n">StartDate</span><span class="p">,</span><span class="w"> </span><span class="err">$</span><span class="n">Duration</span><span class="p">)</span></code> <br/></pre></code></div>
 <ul>
-<li><code>ADDDAYS()</code> — эта функция принимает дату и число, прибавляет к дате указанное число дней и возвращает новую дату.</li>
+<li><code>ADDDAYS()</code> — эта функция принимает дату и число, прибавляет к дате указанное число
+дней и возвращает новую дату.</li>
 <li><code>$</code> — ссылка на текущую запись в <a class="mkdocs_imported_link" href="#attributes_record_template_vacation_application">шаблоне <em>«Заявления на отпуск»</em></a>.</li>
-<li><code>StartDate, Duration</code> — атрибуты <em>«Дата начала»</em> и <em>«Количество дней».</em></li>
+<li><code>StartDate, Duration</code> — атрибуты <em>«Дата
+начала»</em> и <em>«Количество дней».</em></li>
 </ul>
 </td>
 </tr>
@@ -252,7 +419,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="attributes_record_template_manager_decision">Атрибуты шаблона записи «Решения руководителя»</h4>
+<h4 id="attributes_record_template_manager_decision" pagebreakbefore="pageBreakBefore">Атрибуты шаблона записи «Решения руководителя»</h4>
 <table style="width: 100%;">
 <thead>
 <tr>
@@ -301,15 +468,13 @@
 <p><strong>Тип данных: текст</strong></p>
 <p><strong>Вычислять автоматически</strong>: флажок установлен</p>
 <p><strong>Вычисляемое значение: формула</strong></p>
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="n">SUBSTRING</span><span class="p">(</span></code><br/><code>    <span class="err">$</span><span class="n">ResponseEmailSubject</span><span class="p">,</span></code><br/><code>    <span class="n">INDEXOF</span><span class="p">(</span><span class="err">$</span><span class="n">ResponseEmailSubject</span><span class="p">,</span><span class="s">"["</span><span class="p">)</span><span class="o">+</span><span class="m">1</span><span class="p">,</span></code><br/><code>    <span class="n">INDEXOF</span><span class="p">(</span><span class="err">$</span><span class="n">ResponseEmailSubject</span><span class="p">,</span><span class="s">"]"</span><span class="p">)</span><span class="o">-</span></code><br/><code>    <span class="n">INDEXOF</span><span class="p">(</span><span class="err">$</span><span class="n">ResponseEmailSubject</span><span class="p">,</span><span class="s">"["</span><span class="p">)</span><span class="o">-</span><span class="m">1</span></code><br/><code><span class="p">)</span></code></pre>
-</div>
+<div class="highlight"><code><pre><span></span><code><span class="n">SUBSTRING</span><span class="p">(</span></code> <br/><code><span class="w">    </span><span class="err">$</span><span class="n">ResponseEmailSubject</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="n">INDEXOF</span><span class="p">(</span><span class="err">$</span><span class="n">ResponseEmailSubject</span><span class="p">,</span><span class="s">"["</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="n">INDEXOF</span><span class="p">(</span><span class="err">$</span><span class="n">ResponseEmailSubject</span><span class="p">,</span><span class="s">"]"</span><span class="p">)</span><span class="o">-</span></code> <br/><code><span class="w">    </span><span class="n">INDEXOF</span><span class="p">(</span><span class="err">$</span><span class="n">ResponseEmailSubject</span><span class="p">,</span><span class="s">"["</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span></code> <br/><code><span class="p">)</span></code> <br/></pre></code></div>
 <ul>
-<li><code>SUBSTRING()</code> — эта функция принимает строку, позиции начала и конца подстроки и возвращает фрагмент исходной строки между указанными позициями.</li>
-<li><code>INDEXOF()</code> — эта функция принимает две строки, ищет в первой строке вторую строку и возвращает число — позицию искомой строки в исходной строке. В противном случае функция возвращает <code>null</code>.</li>
-<li><code>$</code> — ссылка на текущую запись в шаблоне <em>«Решения руководителя»</em>.</li>
-<li><code>ResponseEmailSubject</code> — атрибут <em>«Тема письма с ответом»</em>.</li>
-<li>Данная формула возвращает <code>true</code>, если тема письма содержит строку «<code>Отпуск согласован. Заявление № [X]</code>», где <code>X</code> — номер заявления, состоящий из произвольного количества цифр. В противном случае формула возвращает <code>false</code>.</li>
+<li><code>SUBSTRING()</code> — эта функция принимает строку, позиции начала и конца подстроки и возвращает фрагмент исходной строки между указанными позициями.</li>
+<li><code>INDEXOF()</code> — эта функция принимает две строки, ищет в первой строке вторую строку и возвращает число — позицию искомой строки в исходной строке. В противном случае функция возвращает <code>null</code>.</li>
+<li><code>$</code> — ссылка на текущую запись в шаблоне <em>«Решения руководителя»</em>.</li>
+<li><code>ResponseEmailSubject</code> — атрибут <em>«Тема письма с ответом»</em>.</li>
+<li>Данная формула возвращает <code>true</code>, если тема письма содержит строку «<code>Отпуск согласован. Заявление № [X]</code>», где <code>X</code> — номер заявления, состоящий из произвольного количества цифр. В противном случае формула возвращает <code>false</code>.</li>
 </ul>
 </td>
 </tr>
@@ -324,15 +489,13 @@
 <p><strong>Тип данных: логический</strong></p>
 <p><strong>Вычислять автоматически</strong>: флажок установлен</p>
 <p><strong>Вычисляемое значение: формула</strong>:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="n">IF</span><span class="p">(</span></code><br/><code>   <span class="n">MATCHES</span><span class="p">(</span><span class="err">$</span><span class="n">ResponseEmailSubject</span><span class="p">,</span></code><br/><code>   <span class="s">".*Отпуск согласован\. Заявление № \[[0-9]+\].*"</span><span class="p">),</span></code><br/><code>   <span class="k">true</span><span class="p">,</span></code><br/><code>   <span class="k">false</span></code><br/><code><span class="p">)</span></code></pre>
-</div>
+<div class="highlight"><code><pre><span></span><code><span class="n">IF</span><span class="p">(</span></code> <br/><code><span class="w">   </span><span class="n">MATCHES</span><span class="p">(</span><span class="err">$</span><span class="n">ResponseEmailSubject</span><span class="p">,</span></code> <br/><code><span class="w">   </span><span class="s">".*Отпуск согласован\\. Заявление № \\[[0-9]+\\].*"</span><span class="p">),</span></code> <br/><code><span class="w">   </span><span class="k">true</span><span class="p">,</span></code> <br/><code><span class="w">   </span><span class="k">false</span></code> <br/><code><span class="p">)</span></code> <br/></pre></code></div>
 <ul>
-<li><code>IF()</code> — эта функция принимает логическое выражение и два аргумента любого типа. Функция возвращает второй аргумент, если выражение возвращает <code>true</code>. В противном случае функция возвращает третий аргумент.</li>
-<li><code>MATCHES()</code> — эта функция принимает строку с темой письма в атрибуте <code>$ResponseEmailSubject</code> и регулярное выражение <code>.*Отпуск согласован\. Заявление № \[[0-9]+\].*</code>, ищет в строке регулярное выражение и возвращает <code>true</code>, если выражение найдено. В противном случае функция возвращает <code>false</code>.</li>
-<li><code>$</code> — ссылка на текущую запись в шаблоне <em>«Решения руководителя»</em>.</li>
-<li><code>ResponseEmailSubject</code> — атрибут <em>«Тема письма с ответом»</em>.</li>
-<li>Данная формула возвращает <code>true</code>, если тема письма содержит строку «<code>Отпуск согласован. Заявление № [X]</code>», где <code>X</code> — номер заявления, состоящий из произвольного количества цифр. В противном случае формула возвращает <code>false</code>.</li>
+<li><code>IF()</code> — эта функция принимает логическое выражение и два аргумента любого типа. Функция возвращает второй аргумент, если выражение возвращает <code>true</code>. В противном случае функция возвращает третий аргумент.</li>
+<li><code>MATCHES()</code> — эта функция принимает строку с темой письма в атрибуте <code>$ResponseEmailSubject</code> и регулярное выражение <code>.*Отпуск согласован\\. Заявление № \\[[0-9]+\\].*</code>, ищет в строке регулярное выражение и возвращает <code>true</code>, если выражение найдено. В противном случае функция возвращает <code>false</code>.</li>
+<li><code>$</code> — ссылка на текущую запись в шаблоне <em>«Решения руководителя»</em>.</li>
+<li><code>ResponseEmailSubject</code> — атрибут <em>«Тема письма с ответом»</em>.</li>
+<li>Данная формула возвращает <code>true</code>, если тема письма содержит строку «<code>Отпуск согласован. Заявление № [X]</code>», где <code>X</code> — номер заявления, состоящий из произвольного количества цифр. В противном случае формула возвращает <code>false</code>.</li>
 </ul>
 </td>
 </tr>
@@ -341,50 +504,48 @@
 <div class="notice notice-success">
 <p class="admonition-title">Синтаксис регулярного выражения</p>
 <ul>
-<li><code>.*</code> — ноль или более любых символов. Точка <code>.</code> обозначает любой одиночный символ, а звездочка <code>*</code> обозначает, что таких символов может быть ноль или больше. Этот фрагмент позволяет игнорировать любые символы, которые могут предшествовать искомой строке.</li>
-<li><code>Отпуск согласован\. Заявление №</code> — фиксированная часть искомой строки. Регулярное выражение ищет именно этот текст в указанной последовательности <strong>с точным совпадением прописных и строчных букв</strong>.
-<ul>
-<li><code>\.</code> — экранированная точка. Точка в регулярном выражении означает любой одиночный символ, поэтому для поиска самой точки её необходимо экранировать с помощью косой черты <code>\</code>.</li>
+<li><code>.*</code> — ноль или более любых символов. Точка <code>.</code> обозначает любой одиночный символ, а звездочка <code>*</code> обозначает, что таких символов может быть ноль или больше. Этот фрагмент позволяет игнорировать любые символы, которые могут предшествовать искомой строке.</li>
+<li><code>Отпуск согласован\\. Заявление №</code> — фиксированная часть искомой строки. Регулярное выражение ищет именно этот текст в указанной последовательности <strong>с точным совпадением прописных и строчных букв</strong>.<ul>
+<li><code>\\.</code> — экранированная точка. Точка в регулярном выражении означает любой одиночный символ, поэтому для поиска самой точки её необходимо экранировать с помощью косой черты <code>\\</code>.</li>
 </ul>
 </li>
-<li><code>\[</code> — экранированная квадратная скобка. Квадратные скобки в регулярных выражениях используются для обозначения диапазона символов, поэтому для поиска самой скобки необходимо её экранировать с помощью обратной косой черты <code>\</code>. Таким образом, <code>\[</code> означает «открывающая квадратная скобка».</li>
-<li><code>[0-9]+</code> — набор из одной или более цифр. Диапазон <code>[0-9]</code> обозначает любую цифру от 0 до 9, а плюс <code>+</code> обозначает, что таких цифр может быть одна или более.</li>
-<li><code>\]</code> — экранированная закрывающая квадратная скобка, аналогичная открывающей.</li>
-<li><code>.*</code> — ноль или более любых символов. Этот фрагмент позволяет игнорировать любые символы, которые могут следовать за искомой строкой.</li>
-<li>Ознакомиться с принципами составления регулярных выражений и поэкспериментировать с ними можно на следующем сайте: <a class="mkdocs_imported_link" href="https://regex101.com/">https://regex101.com/</a></li>
+<li><code>\\[</code> — экранированная квадратная скобка. Квадратные скобки в регулярных выражениях используются для обозначения диапазона символов, поэтому для поиска самой скобки необходимо её экранировать с помощью обратной косой черты <code>\\</code>. Таким образом, <code>\\[</code> означает «открывающая квадратная скобка».</li>
+<li><code>[0-9]+</code> — набор из одной или более цифр. Диапазон <code>[0-9]</code> обозначает любую цифру от 0 до 9, а плюс <code>+</code> обозначает, что таких цифр может быть одна или более.</li>
+<li><code>\\]</code> — экранированная закрывающая квадратная скобка, аналогичная открывающей.</li>
+<li><code>.*</code> — ноль или более любых символов. Этот фрагмент позволяет игнорировать любые символы, которые могут следовать за искомой строкой.</li>
+<li>Ознакомиться с принципами составления регулярных выражений и поэкспериментировать с ними можно на следующем сайте: <a class="mkdocs_imported_link" href="https://regex101.com/">https://regex101.com/</a></li>
 </ul>
 <div class="notice notice-example">
 <p class="admonition-title">Пример</p>
 <ul>
 <li>Дано регулярное выражение:</li>
 </ul>
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="o">.*</span><span class="nt">Отпуск</span> <span class="nt">согласован</span><span class="err">\</span><span class="o">.</span> <span class="nt">Заявление</span> <span class="err">№</span> <span class="err">\</span><span class="o">[[</span><span class="nt">0-9</span><span class="o">]+</span><span class="err">\</span><span class="o">].*</span></code></pre>
-</div>
+<div class="highlight"><code><pre><span></span><code><span class="o">.*</span><span class="nt">Отпуск</span><span class="w"> </span><span class="nt">согласован</span><span class="err">\\</span><span class="o">.</span><span class="w"> </span><span class="nt">Заявление</span><span class="w"> </span><span class="err">№</span><span class="w"> </span><span class="err">\\</span><span class="o">[[</span><span class="nt">0-9</span><span class="o">]+</span><span class="err">\\</span><span class="o">].*</span></code> <br/></pre></code></div>
 <ul>
-<li><code>"Здравствуйте! Отпуск согласован. Заявление № [12345] одобрено."</code> — <strong>удовлетворяет</strong> регулярному выражению.</li>
-<li><code>"Ваш отпуск согласован. Заявление № [12345]."</code> — <strong>не удовлетворяет</strong> регулярному выражению, так как слово «<code>отпуск</code>» должно начинаться с прописной буквы.</li>
+<li><code>"Здравствуйте! Отпуск согласован. Заявление № [12345] одобрено."</code> —
+<strong>удовлетворяет</strong> регулярному выражению.</li>
+<li><code>"Ваш отпуск согласован. Заявление № [12345]."</code> — <strong>не удовлетворяет</strong> регулярному выражению, так как слово «<code>отпуск</code>» должно начинаться с прописной буквы.</li>
 </ul>
 </div>
 </div>
-<h2 id="настройка-подключений">Настройка подключений</h2>
+<h2 class="pageBreakBefore" id="настройка-подключений">Настройка подключений</h2>
 <h3 id="email_receive_process">Отправка эл. почты из процесса</h3>
-<p>Настроим подключение к SMTP-серверу для отправки эл. писем от имени <em>Отдела кадров</em>.</p>
+<p>Настроим подключение к SMTP-серверу для отправки эл. писем от имени <em>Отдела кадров</em>.</p>
 <ol class="colored_numbers_list">
-<li>Откройте страницу <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4661">«Администрирование» – «Подключения»</a></strong>.</li>
-<li>Выберите пункт <strong>«Создать» – «Подключения к электронной почте» – «Отправка эл. почты из процесса».</strong></li>
+<li>Откройте страницу <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4661">«Администрирование» – «Подключения»</a></strong>.</li>
+<li>Выберите пункт <strong>«Создать» – «Подключения к электронной почте» – «Отправка эл. почты из процесса».</strong></li>
 <li>
 <p>Настройте подключение к SMTP-серверу:</p>
 <ul>
-<li><strong>Название:</strong> <em>Письма от отдела кадров</em>;</li>
-<li><strong>Адрес почтового сервера, Порт, Защита данных, Имя пользователя, Пароль:</strong> укажите параметры для доступа к SMTP-серверу;</li>
-<li><strong>Адрес отправителя:</strong> укажите адрес эл. почты отдела кадров;</li>
-<li><strong>Имя отправителя:</strong> <em>Отдел кадров</em>.</li>
+<li><strong>Название:</strong> <em>Письма от отдела кадров</em>;</li>
+<li><strong>Адрес почтового сервера, Порт, Защита данных, Имя пользователя, Пароль:</strong> укажите параметры для доступа к SMTP-серверу;</li>
+<li><strong>Адрес отправителя:</strong> укажите адрес эл. почты отдела кадров;</li>
+<li><strong>Имя отправителя:</strong> <em>Отдел кадров</em>.</li>
 </ul>
 </li>
 </ol>
 <h3 id="получение-эл-почты-в-процессе">Получение эл. почты в процессе</h3>
-<p>Настроим подключение к IMAP-серверу для приёма писем с решением по заявлениям от <em>Руководителя</em>.</p>
+<p>Настроим подключение к IMAP-серверу для приёма писем с решением по заявлениям от <em>Руководителя</em>.</p>
 <div class="notice notice-warning">
 <p class="admonition-title">Логика чтения писем на почтовом сервере</p>
 <p>При подключении к почтовому серверу для получения эл. почты <strong>Comindware Platform</strong> выступает как почтовый клиент, который регулярно проверяет наличие новых писем.</p>
@@ -397,33 +558,33 @@
 <p>Если использовать ящик, на который поступают прочие письма, они тоже будут отмечены как прочитанные.</p>
 </div>
 <ol class="colored_numbers_list">
-<li>Откройте страницу <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4661">«Администрирование» – «Подключения»</a></strong>.</li>
-<li>Выберите пункт <strong>«Создать» – «Подключения к электронной почте» – «Получение эл. почты в процессе»</strong>.</li>
+<li>Откройте страницу <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4661">«Администрирование» – «Подключения»</a></strong>.</li>
+<li>Выберите пункт <strong>«Создать» – «Подключения к электронной почте» – «Получение эл. почты в процессе»</strong>.</li>
 <li>
 <p>Настройте подключение к IMAP-серверу:</p>
 <ul>
-<li><strong>Название:</strong> <em>Ответы от руководителя</em>.</li>
+<li><strong>Название:</strong> <em>Ответы от руководителя</em>.</li>
 <li>
-<p><strong>Протокол, Адрес почтового сервера, Порт, Имя пользователя, Пароль, Защита данных:</strong> укажите параметры для доступа к IMAP-серверу.</p>
+<p><strong>Протокол, Адрес почтового сервера, Порт, Имя пользователя, Пароль, Защита данных:</strong> укажите параметры для доступа к IMAP-серверу.</p>
 <div class="notice notice-info">
 <p class="admonition-title">Примечание</p>
-<p>Для обработки писем с решениями <em>Руководителя</em> рекомендуется использовать отдельный ящик эл. почты, например: <em>leavedecisions@example.com</em>.</p>
+<p>Для обработки писем с решениями <em>Руководителя</em> рекомендуется использовать отдельный ящик эл. почты, например: <code>leavedecisions@&lt;hostname&gt;</code>.</p>
 </div>
 </li>
 <li>
-<p><strong>Интервал опроса:</strong> укажите интервал, с которым <strong>Comindware Platform</strong> будет проверять наличие новых писем.</p>
+<p><strong>Интервал опроса:</strong> укажите интервал, с которым <strong>Comindware Platform</strong> будет проверять наличие новых писем.</p>
 </li>
 </ul>
 </li>
 </ol>
-<h2 id="настройка-путей-передачи-данных">Настройка путей передачи данных</h2>
+<h2 class="pageBreakBefore" id="настройка-путей-передачи-данных">Настройка путей передачи данных</h2>
 <h3 id="notification_to_manager">Отправка уведомления Руководителю</h3>
-<p>Настроим путь передачи данных для отправки заявлений на рассмотрение <em>Руководителю</em>.</p>
+<p>Настроим путь передачи данных для отправки заявлений на рассмотрение <em>Руководителю</em>.</p>
 <div class="notice notice-warning">
 <p class="admonition-title">Бизнес-логика</p>
-<p>Отправителем писем с заявлениями на отпуск будет указан <em>Отдел кадров</em>.</p>
-<p>В письме <em>Руководителю</em> мы будем передавать значения следующих атрибутов <a class="mkdocs_imported_link" href="#attributes_record_template_vacation_application">заявления на отпуск</a>: <em>Номер заявления, Имя заявителя, Дата начала, Количество дней, Дата окончания</em>.</p>
-<p>В качестве <em>Номера заявления</em> мы будем использовать ID экземпляра процесса <em>«Согласование отпуска»</em>.</p>
+<p>Отправителем писем с заявлениями на отпуск будет указан <em>Отдел кадров</em>.</p>
+<p>В письме <em>Руководителю</em> мы будем передавать значения следующих атрибутов <a class="mkdocs_imported_link" href="#attributes_record_template_vacation_application">заявления на отпуск</a>: <em>Номер заявления, Имя заявителя, Дата начала, Количество дней, Дата окончания</em>.</p>
+<p>В качестве <em>Номера заявления</em> мы будем использовать ID экземпляра процесса <em>«Согласование отпуска»</em>.</p>
 </div>
 <div class="notice notice-tip">
 <p class="admonition-title">Подстановка значений атрибутов сообщения в эл. письмо</p>
@@ -431,34 +592,30 @@
 <ol class="colored_numbers_list">
 <li>На вкладке «<strong>Атрибуты сообщения</strong>» пути передачи данных задайте набор атрибутов, значения которых требуется передать в путь передачи данных и подставить в сообщение.</li>
 <li>
-<p>На вкладке «<strong>Свойства сообщения</strong>» подставьте значения атрибутов сообщения в любое поле, указав их системные имена в фигурных скобках <code>{}</code>.</p>
+<p>На вкладке «<strong>Свойства сообщения</strong>» подставьте значения атрибутов сообщения в любое поле, указав их системные имена в фигурных скобках <code>{}</code>.</p>
 <ul>
-<li>
-<p>Например, подставьте в тему письма номер заявления и имя заявителя:</p>
-<ul>
-<li><strong>Тема:</strong> <em>Заявление на отпуск № <code>{ApplicationNumber}</code> от: <code>{ApplicantName}</code></em></li>
+<li>Например, подставьте в тему письма номер заявления и имя заявителя:<ul>
+<li><strong>Тема:</strong> <em>Заявление на отпуск № <code>{ApplicationNumber}</code> от: <code>{ApplicantName}</code></em></li>
 </ul>
 </li>
 </ul>
 </li>
 <li>
-<p>Задайте значения атрибутов сообщения с помощью вкладки «<strong>Данные сообщения</strong>» в свойствах <strong>события отправки сообщения</strong>, использующего этот путь передачи данных.</p>
+<p>Задайте значения атрибутов сообщения с помощью вкладки «<strong>Данные сообщения</strong>» в свойствах <strong>события отправки сообщения</strong>, использующего этот путь передачи данных.</p>
 </li>
 </ol>
 </div>
 <ol class="colored_numbers_list">
-<li>В приложении <em>«Отпуска»</em> откройте страницу <strong>«Пути передачи данных»</strong>.</li>
-<li>Выберите пункт <strong>«Создать» – «Подключения к электронной почте» – «Отправка эл. почты из процесса».</strong></li>
+<li>В приложении <em>«Отпуска»</em> откройте страницу <strong>«Пути передачи данных»</strong>.</li>
+<li>Выберите пункт <strong>«Создать» – «Подключения к электронной почте» – «Отправка эл. почты из процесса».</strong></li>
 <li>
 <p>Настройте путь передачи данных:</p>
 <ul>
-<li>
-<p><strong>Основные свойства</strong></p>
-<ul>
-<li><strong>Название:</strong> <em>Уведомление для руководителя</em></li>
-<li><strong>Подключение:</strong> <em>Письма от отдела кадров</em></li>
-<li><strong>Имя сообщения:</strong> <em>MessageToApprover</em></li>
-<li><strong>Приложение:</strong> <em>Отпуска</em></li>
+<li><strong>Основные свойства</strong><ul>
+<li><strong>Название:</strong> <em>Уведомление для руководителя</em></li>
+<li><strong>Подключение:</strong> <em>Письма от отдела кадров</em></li>
+<li><strong>Имя сообщения:</strong> <em>MessageToApprover</em></li>
+<li><strong>Приложение:</strong> <em>Отпуска</em></li>
 </ul>
 </li>
 <li>
@@ -503,46 +660,44 @@
 <li>
 <p><strong>Свойства сообщения</strong></p>
 <ul>
-<li><strong>Адрес отправителя:</strong> адрес эл. почты <em>Отдела кадров</em></li>
-<li><strong>Имя отправителя:</strong> <em>Отдел кадров</em></li>
-<li><strong>Кому:</strong> аккаунт или адрес эл. почты <em>Руководителя</em></li>
-<li><strong>Тема:</strong> <code class="highlight"><span class="nt">Заявление</span> <span class="nt">на</span> <span class="nt">отпуск</span> <span class="err">№</span> <span class="p">{</span><span class="err">ApplicationNumber</span><span class="p">}</span> <span class="nt">от</span><span class="o">:</span> <span class="p">{</span><span class="err">ApplicantName</span><span class="p">}</span></code></li>
-<li><strong>Формат сообщения: HTML</strong></li>
+<li><strong>Адрес отправителя:</strong> адрес эл. почты <em>Отдела кадров</em></li>
+<li><strong>Имя отправителя:</strong> <em>Отдел кадров</em></li>
+<li><strong>Кому:</strong> аккаунт или адрес эл. почты <em>Руководителя</em></li>
+<li><strong>Тема:</strong> <code class="highlight"><span class="nt">Заявление</span><span class="w"> </span><span class="nt">на</span><span class="w"> </span><span class="nt">отпуск</span><span class="w"> </span><span class="err">№</span><span class="w"> </span><span class="p">{</span><span class="err">ApplicationNumber</span><span class="p">}</span><span class="w"> </span><span class="nt">от</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="err">ApplicantName</span><span class="p">}</span></code></li>
+<li>
+<p><strong>Формат сообщения: HTML</strong></p>
+</li>
 <li>
 <p><strong>Сообщение</strong></p>
-<ul>
+<ol class="colored_numbers_list">
 <li>Перейдите в поле «<strong>Сообщение</strong>».</li>
-<li>В панели инструментов нажмите кнопку «<strong>Источник</strong>» <em class="fa-light fa-file-code">‌<!--icon--></em>.</li>
+<li>В панели инструментов нажмите кнопку «<strong>Источник</strong>» <i class="fa-light fa-file-code">‌<!--icon--></i>.</li>
 <li>
 <p>Введите следующий HTML-код:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Уважаемый коллега!<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Поступило заявление на отпуск № {ApplicationNumber}.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Заявитель: {ApplicantName}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Количество дней: {Duration}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Даты отпуска: {StartDate}<span class="ni">&amp;ndash;</span>{EndDate}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Просьба согласовать отпуск или отказать в отпуске:<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">ol</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Нажмите соответствующую кнопку ниже.<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Будет создано новое письмо.<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>В теме письма будет указано Ваше решение по заявлению и номер заявления.<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">u</span><span class="p">&gt;</span>Не меняйте тему письма и адрес получателя.<span class="p">&lt;/</span><span class="nt">u</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>При необходимости укажите причину решения в тексте письма.<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Отправьте письмо.<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;/</span><span class="nt">ol</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">table</span> <span class="na">border</span><span class="o">=</span><span class="s">"0"</span> <span class="na">cellpadding</span><span class="o">=</span><span class="s">"6"</span> <span class="na">cellspacing</span><span class="o">=</span><span class="s">"0"</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">tbody</span> <span class="na">markdown</span><span class="o">=</span><span class="s">"block"</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">tr</span> <span class="na">markdown</span><span class="o">=</span><span class="s">"block"</span><span class="p">&gt;</span></code><br/><code>    <span class="p">&lt;</span><span class="nt">td</span> <span class="na">markdown</span><span class="o">=</span><span class="s">"block"</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"mailto:leavedecisions@example.com?subject=Отпуск согласован. Заявление № [{ApplicationNumber}]"</span><span class="p">&gt;</span></code><br/><code>Согласовать отпуск<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span></code><br/><code>    <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span></code><br/><code>    <span class="p">&lt;</span><span class="nt">td</span> <span class="na">markdown</span><span class="o">=</span><span class="s">"block"</span><span class="p">&gt;</span></code><br/><code>        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"mailto:leavedecisions@example.com?subject=В отпуске отказано. Заявление № [{ApplicationNumber}]&amp;body=Причина отказа:"</span><span class="p">&gt;</span></code><br/><code>        Отказать в отпуске<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span></code><br/><code>    <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span></code></pre>
-</div>
+<div class="highlight"><code><pre><span></span><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Уважаемый коллега!<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Поступило заявление на отпуск № {ApplicationNumber}.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Заявитель: {ApplicantName}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Количество дней: {Duration}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Даты отпуска: {StartDate}<span class="ni">&amp;ndash;</span>{EndDate}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Просьба согласовать отпуск или отказать в отпуске:<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">ol</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Нажмите соответствующую кнопку ниже.<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Будет создано новое письмо.<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>В теме письма будет указано Ваше решение по заявлению и номер заявления.<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">u</span><span class="p">&gt;</span>Не меняйте тему письма и адрес получателя.<span class="p">&lt;/</span><span class="nt">u</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>При необходимости укажите причину решения в тексте письма.<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Отправьте письмо.<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;/</span><span class="nt">ol</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">table</span> <span class="na">border</span><span class="o">=</span><span class="s">"0"</span> <span class="na">cellpadding</span><span class="o">=</span><span class="s">"6"</span> <span class="na">cellspacing</span><span class="o">=</span><span class="s">"0"</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">tbody</span> <span class="na">markdown</span><span class="o">=</span><span class="s">"block"</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">tr</span> <span class="na">markdown</span><span class="o">=</span><span class="s">"block"</span><span class="p">&gt;</span></code> <br/><code>    <span class="p">&lt;</span><span class="nt">td</span> <span class="na">markdown</span><span class="o">=</span><span class="s">"block"</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"mailto:leavedecisions@&lt;hostname&gt;?subject=Отпуск согласован. Заявление № [{ApplicationNumber}]"</span><span class="p">&gt;</span></code> <br/><code>Согласовать отпуск<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span></code> <br/><code>    <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span></code> <br/><code>    <span class="p">&lt;</span><span class="nt">td</span> <span class="na">markdown</span><span class="o">=</span><span class="s">"block"</span><span class="p">&gt;</span></code> <br/><code>        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"mailto:leavedecisions@&lt;hostname&gt;?subject=В отпуске отказано. Заявление № [{ApplicationNumber}]&amp;body=Причина отказа:"</span><span class="p">&gt;</span></code> <br/><code>        Отказать в отпуске<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span></code> <br/><code>    <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span></code> <br/></pre></code></div>
 </li>
 <li>
-<p>Снова нажмите кнопку «<strong>Источник</strong>» <em class="fa-light fa-file-code">‌<!--icon--></em>.</p>
+<p>Снова нажмите кнопку «<strong>Источник</strong>» <i class="fa-light fa-file-code">‌<!--icon--></i>.</p>
 </li>
 <li>Должно отобразиться показанное на следующей иллюстрации письмо:</li>
-</ul>
-<figure class="screenshot_with_caption"><img alt="Тема и текст письма для Руководителя с заполнителями для подстановки значений атрибутов" src="https://kb.comindware.ru/assets/process_email_configure_email_manager_example.png"/>
-<figcaption class="caption">Тема и текст письма для Руководителя с заполнителями для подстановки значений атрибутов</figcaption>
-</figure>
+</ol>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Тема и текст письма для Руководителя с заполнителями для подстановки значений атрибутов" src="/platform/v5.0/examples/img/process_email_configure_email_manager_example.png"/><figcaption class="caption">Тема и текст письма для Руководителя с заполнителями для подстановки значений атрибутов</figcaption></figure></p>
 </li>
 </ul>
 </li>
 </ul>
 </li>
 </ol>
-<h3 id="manager_answer_receive">Получение ответа Руководителя</h3>
-<p>Настроим путь передачи данных для приёма писем от <em>Руководителя</em>.</p>
+<h3 class="pageBreakBefore" id="manager_answer_receive">Получение ответа Руководителя</h3>
+<p>Настроим путь передачи данных для приёма писем от <em>Руководителя</em>.</p>
 <div class="notice notice-warning">
 <p class="admonition-title">Бизнес-логика</p>
 <p>Из ответного письма руководителя путь передачи данных будет извлекать тему и текст письма.</p>
-<p>Затем <a class="mkdocs_imported_link" href="#elements_manager_answer_processing_setup">процесс <em>«Обработка ответов руководителя»</em></a> будет извлекать из письма данные в шаблон <em><a class="mkdocs_imported_link" href="#attributes_record_template_manager_decision">«Решения руководителя»</a>:</em></p>
+<p>Затем <a class="mkdocs_imported_link" href="#elements_manager_answer_processing_setup">процесс <em>«Обработка ответов руководителя»</em></a> будет извлекать из письма данные в шаблон <em><a class="mkdocs_imported_link" href="#attributes_record_template_manager_decision">«Решения руководителя»</a>:</em></p>
 <ul>
-<li>номер заявления из темы письма — в атрибут <em>«№ заявления»</em></li>
-<li>решение по заявлению из темы письма — в атрибут <em>«Отпуск согласован»</em>;</li>
-<li>текст письма — в атрибут <em>«Комментарий руководителя».</em></li>
+<li>номер заявления из темы письма — в атрибут <em>«№ заявления»</em></li>
+<li>решение по заявлению из темы письма — в атрибут <em>«Отпуск согласован»</em>;</li>
+<li>текст письма — в атрибут <em>«Комментарий руководителя».</em></li>
 </ul>
 </div>
 <div class="notice notice-tip">
@@ -553,36 +708,36 @@
 <p>На вкладке «<strong>Атрибуты сообщения</strong>» пути передачи данных задайте набор атрибутов, значения которых требуется извлечь из полученного письма. Для этого создайте атрибуты и сопоставьте их с полями эл. письма.</p>
 <ul>
 <li>
-<p>Например, поместите текст эл. письма в атрибут <em>EmailBody</em>:</p>
+<p>Например, поместите текст эл. письма в атрибут <em>EmailBody</em>:</p>
 <ul>
-<li><strong>Название:</strong> <em>Текст письма</em></li>
-<li><strong>Системное имя:</strong> <em>EmailBody</em></li>
+<li><strong>Название:</strong> <em>Текст письма</em></li>
+<li><strong>Системное имя:</strong> <em>EmailBody</em></li>
 <li><strong>Тип данных: текст</strong></li>
-<li><strong>Поместить тело атрибута в этот атрибут:</strong> <em>Сообщение</em></li>
+<li><strong>Поместить тело атрибута в этот атрибут:</strong> <em>Сообщение</em></li>
 </ul>
 </li>
 </ul>
 </li>
 <li>
-<p>Передайте значения атрибутов сообщения в атрибуты записи с помощью вкладки «<strong>Данные сообщения</strong>» в свойствах <strong>события получения сообщения</strong>, использующего этот путь передачи данных.</p>
+<p>Передайте значения атрибутов сообщения в атрибуты записи с помощью вкладки «<strong>Данные сообщения</strong>» в свойствах <strong>события получения сообщения</strong>, использующего этот путь передачи данных.</p>
 </li>
 </ul>
 </div>
 <ol class="colored_numbers_list">
-<li>В приложении <em>«Отпуска»</em> откройте страницу <strong>«Пути передачи данных»</strong>.</li>
-<li>Выберите пункт <strong>«Создать» – «Подключения к электронной почте» – «Получение эл. почты в процессе».</strong></li>
+<li>В приложении <em>«Отпуска»</em> откройте страницу <strong>«Пути передачи данных»</strong>.</li>
+<li>Выберите пункт <strong>«Создать» – «Подключения к электронной почте» – «Получение эл. почты в процессе».</strong></li>
 <li>
 <p>Настройте путь передачи данных:</p>
 <ul>
 <li>
 <p><strong>Основные свойства</strong></p>
 <ul>
-<li><strong>Название:</strong> <em>Ответ руководителя</em></li>
-<li><strong>Подключение:</strong> <em>Ответы от руководителя</em></li>
-<li><strong>Имя сообщения:</strong> <em>ReceiveManagerEmail</em> (это имя сообщения в данном примере не используется, поэтому можно ввести произвольное уникальное имя)</li>
-<li><strong>Приложение:</strong> <em>Управление командировками</em></li>
-<li><strong>Процесс:</strong> <em>Обработка ответа</em></li>
-<li><strong>Назначение:</strong> <em>Новый экземпляр процесса</em></li>
+<li><strong>Название:</strong> <em>Ответ руководителя</em></li>
+<li><strong>Подключение:</strong> <em>Ответы от руководителя</em></li>
+<li><strong>Имя сообщения:</strong> <em>ReceiveManagerEmail</em> (это имя сообщения в данном примере не используется, поэтому можно ввести произвольное уникальное имя)</li>
+<li><strong>Приложение:</strong> <em>Управление командировками</em></li>
+<li><strong>Процесс:</strong> <em>Обработка ответа</em></li>
+<li><strong>Назначение:</strong> <em>Новый экземпляр процесса</em></li>
 </ul>
 </li>
 <li>
@@ -615,21 +770,21 @@
 </ul>
 </li>
 </ol>
-<h3 id="notification_vacation_accept">Отправка уведомления «Отпуск согласован»</h3>
-<p>Настроим путь передачи данных для отправки уведомлений о согласовании заявления от имени <em>Отдела кадров</em>.</p>
+<h3 class="pageBreakBefore" id="notification_vacation_accept">Отправка уведомления «Отпуск согласован»</h3>
+<p>Настроим путь передачи данных для отправки уведомлений о согласовании заявления от имени <em>Отдела кадров</em>.</p>
 <ol class="colored_numbers_list">
-<li>В приложении <em>«Отпуска»</em> откройте страницу <strong>«Пути передачи данных»</strong>.</li>
-<li>Выберите пункт <strong>«Создать» – «Подключения к электронной почте» – «Отправка эл. почты из процесса»</strong>.</li>
+<li>В приложении <em>«Отпуска»</em> откройте страницу <strong>«Пути передачи данных»</strong>.</li>
+<li>Выберите пункт <strong>«Создать» – «Подключения к электронной почте» – «Отправка эл. почты из процесса»</strong>.</li>
 <li>
 <p>Настройте путь передачи данных:</p>
 <ul>
 <li>
 <p><strong>Основные свойства</strong></p>
 <ul>
-<li><strong>Название:</strong> <em>Уведомление «Отпуск согласован»</em></li>
-<li><strong>Подключение:</strong> <em>Письма от отдела кадров</em></li>
-<li><strong>Имя сообщения:</strong> <em>MessageFromHrApproved</em></li>
-<li><strong>Приложение:</strong> <em>Отпуска</em></li>
+<li><strong>Название:</strong> <em>Уведомление «Отпуск согласован»</em></li>
+<li><strong>Подключение:</strong> <em>Письма от отдела кадров</em></li>
+<li><strong>Имя сообщения:</strong> <em>MessageFromHrApproved</em></li>
+<li><strong>Приложение:</strong> <em>Отпуска</em></li>
 </ul>
 </li>
 <li>
@@ -684,59 +839,55 @@
 <li>
 <p><strong>Свойства сообщения</strong></p>
 <ul>
-<li><strong>Адрес отправителя:</strong> адрес эл. почты <em>Отдела кадров</em></li>
-<li><strong>Имя отправителя:</strong> <em>Отдел кадров</em></li>
+<li><strong>Адрес отправителя:</strong> адрес эл. почты <em>Отдела кадров</em></li>
+<li><strong>Имя отправителя:</strong> <em>Отдел кадров</em></li>
 <li>
 <p><strong>Кому:</strong></p>
 <ul>
-<li><strong>Адрес получателя</strong>: <em><code>{ApplicantEmail}</code></em></li>
-<li><strong>Имя получателя</strong>: <em><code>{ApplicantName}</code></em></li>
+<li><strong>Адрес получателя</strong>: <em><code>{ApplicantEmail}</code></em></li>
+<li><strong>Имя получателя</strong>: <em><code>{ApplicantName}</code></em></li>
 </ul>
 </li>
 <li>
-<p><strong>Тема:</strong> <em>Отпуск согласован. Заявление № <code>{ApplicationNumber}</code></em></p>
+<p><strong>Тема:</strong> <em>Отпуск согласован. Заявление № <code>{ApplicationNumber}</code></em></p>
 </li>
 <li><strong>Формат сообщения: HTML</strong></li>
 <li>
 <p><strong>Сообщение</strong></p>
 <ul>
 <li>Перейдите в поле «<strong>Сообщение</strong>».</li>
-<li>В панели инструментов нажмите кнопку «<strong>Источник</strong>» <em class="fa-light fa-file-code">‌<!--icon--></em>.</li>
+<li>В панели инструментов нажмите кнопку «<strong>Источник</strong>» <i class="fa-light fa-file-code">‌<!--icon--></i>.</li>
 <li>
 <p>В поле введите следующий HTML-код «<strong>Сообщение</strong>»:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Здравствуйте, {ApplicantName}!<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Ваш отпуск согласован.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Заявление №: {ApplicationNumber}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Количество дней: {Duration}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Даты отпуска: {StartDate}<span class="ni">&amp;ndash;</span>{EndDate}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Комментарий руководителя:<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{ManagerComment}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code></pre>
-</div>
+<div class="highlight"><code><pre><span></span><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Здравствуйте, {ApplicantName}!<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Ваш отпуск согласован.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Заявление №: {ApplicationNumber}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Количество дней: {Duration}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Даты отпуска: {StartDate}<span class="ni">&amp;ndash;</span>{EndDate}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Комментарий руководителя:<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{ManagerComment}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code> <br/></pre></code></div>
 </li>
 <li>
-<p>Снова нажмите кнопку «<strong>Источник</strong>» <em class="fa-light fa-file-code">‌<!--icon--></em>.</p>
+<p>Снова нажмите кнопку «<strong>Источник</strong>» <i class="fa-light fa-file-code">‌<!--icon--></i>.</p>
 </li>
 <li>Должно отобразиться показанное на следующей иллюстрации письмо:</li>
 </ul>
 </li>
 </ul>
-<figure class="screenshot_with_caption"><img alt="Тема и текст письма заявителю с уведомлением «Отпуск согласован» с заполнителями для подстановки значений атрибутов" src="https://kb.comindware.ru/assets/process_email_configure_email_agree_example.png"/>
-<figcaption class="caption">Тема и текст письма заявителю с уведомлением «Отпуск согласован» с заполнителями для подстановки значений атрибутов</figcaption>
-</figure>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Тема и текст письма заявителю с уведомлением «Отпуск согласован» с заполнителями для подстановки значений атрибутов" src="/platform/v5.0/examples/img/process_email_configure_email_agree_example.png"/><figcaption class="caption">Тема и текст письма заявителю с уведомлением «Отпуск согласован» с заполнителями для подстановки значений атрибутов</figcaption></figure></p>
 </li>
 </ul>
 </li>
 </ol>
-<h3 id="notification_vacation_decline">Отправка уведомления «В отпуске отказано»</h3>
-<p>Настроим путь передачи данных для отправки уведомлений об отклонении заявления от имени <em>Отдела кадров</em>.</p>
+<h3 class="pageBreakBefore" id="notification_vacation_decline">Отправка уведомления «В отпуске отказано»</h3>
+<p>Настроим путь передачи данных для отправки уведомлений об отклонении заявления от имени <em>Отдела кадров</em>.</p>
 <ol class="colored_numbers_list">
-<li>В приложении <em>«Отпуска»</em> откройте страницу <strong>«Пути передачи данных»</strong>.</li>
-<li>Выберите пункт <strong>«Создать» – «Подключения к электронной почте» – «Отправка эл. почты из процесса».</strong></li>
+<li>В приложении <em>«Отпуска»</em> откройте страницу <strong>«Пути передачи данных»</strong>.</li>
+<li>Выберите пункт <strong>«Создать» – «Подключения к электронной почте» – «Отправка эл. почты из процесса».</strong></li>
 <li>
 <p>Настройте путь передачи данных:</p>
 <ul>
 <li>
 <p><strong>Основные свойства</strong></p>
 <ul>
-<li><strong>Название:</strong> <em>Уведомление «В отпуске отказано»</em></li>
-<li><strong>Подключение:</strong> <em>Письма от отдела кадров</em></li>
-<li><strong>Имя сообщения:</strong> <em>MessageFromHrRejected</em></li>
-<li><strong>Приложение:</strong> <em>Отпуска</em></li>
+<li><strong>Название:</strong> <em>Уведомление «В отпуске отказано»</em></li>
+<li><strong>Подключение:</strong> <em>Письма от отдела кадров</em></li>
+<li><strong>Имя сообщения:</strong> <em>MessageFromHrRejected</em></li>
+<li><strong>Приложение:</strong> <em>Отпуска</em></li>
 </ul>
 </li>
 <li>
@@ -791,79 +942,74 @@
 <li>
 <p><strong>Свойства сообщения</strong></p>
 <ul>
-<li><strong>Адрес отправителя:</strong> адрес эл. почты <em>Отдела кадров</em></li>
-<li><strong>Имя отправителя:</strong> <em>Отдел кадров</em></li>
+<li><strong>Адрес отправителя:</strong> адрес эл. почты <em>Отдела кадров</em></li>
+<li><strong>Имя отправителя:</strong> <em>Отдел кадров</em></li>
 <li>
 <p><strong>Кому:</strong></p>
 <ul>
-<li><strong>Адрес получателя</strong>: <em><code>{ApplicantEmail}</code></em></li>
-<li><strong>Имя получателя</strong>: <em><code>{ApplicantName}</code></em></li>
+<li><strong>Адрес получателя</strong>: <em><code>{ApplicantEmail}</code></em></li>
+<li><strong>Имя получателя</strong>: <em><code>{ApplicantName}</code></em></li>
 </ul>
 </li>
 <li>
-<p><strong>Тема:</strong> <em>В отпуске отказано. Заявление № <code>{ApplicationNumber}</code></em></p>
+<p><strong>Тема:</strong> <em>В отпуске отказано. Заявление № <code>{ApplicationNumber}</code></em></p>
 </li>
 <li><strong>Формат сообщения: HTML</strong></li>
 <li>
 <p><strong>Сообщение</strong></p>
 <ul>
 <li>Перейдите в поле «<strong>Сообщение</strong>».</li>
-<li>В панели инструментов нажмите кнопку «<strong>Источник</strong>» <em class="fa-light fa-file-code">‌<!--icon--></em>.</li>
+<li>В панели инструментов нажмите кнопку «<strong>Источник</strong>» <i class="fa-light fa-file-code">‌<!--icon--></i>.</li>
 <li>
 <p>В поле введите следующий HTML-код «<strong>Сообщение</strong>»:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Здравствуйте, {ApplicantName}!<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>По Вашему заявлению на отпуск получен отказ.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Заявление №: {ApplicationNumber}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Количество дней: {Duration}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Даты отпуска: {StartDate}<span class="ni">&amp;ndash;</span>{EndDate}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Комментарий руководителя:<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code><br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{ManagerComment}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code></pre>
-</div>
+<div class="highlight"><code><pre><span></span><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Здравствуйте, {ApplicantName}!<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>По Вашему заявлению на отпуск получен отказ.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Заявление №: {ApplicationNumber}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Количество дней: {Duration}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Даты отпуска: {StartDate}<span class="ni">&amp;ndash;</span>{EndDate}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Комментарий руководителя:<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code> <br/><code><span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{ManagerComment}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span></code> <br/></pre></code></div>
 </li>
 <li>
-<p>Снова нажмите кнопку «<strong>Источник</strong>» <em class="fa-light fa-file-code">‌<!--icon--></em>.</p>
+<p>Снова нажмите кнопку «<strong>Источник</strong>» <i class="fa-light fa-file-code">‌<!--icon--></i>.</p>
 </li>
 <li>Должно отобразиться показанное на следующей иллюстрации письмо:</li>
 </ul>
-<figure class="screenshot_with_caption"><img alt="Тема и текст письма заявителю с уведомлением «В отпуске отказано» с заполнителями для подстановки значений атрибутов" src="https://kb.comindware.ru/assets/process_email_configure_email_restrict_example.png"/>
-<figcaption class="caption">Тема и текст письма заявителю с уведомлением «В отпуске отказано» с заполнителями для подстановки значений атрибутов</figcaption>
-</figure>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Тема и текст письма заявителю с уведомлением «В отпуске отказано» с заполнителями для подстановки значений атрибутов" src="/platform/v5.0/examples/img/process_email_configure_email_restrict_example.png"/><figcaption class="caption">Тема и текст письма заявителю с уведомлением «В отпуске отказано» с заполнителями для подстановки значений атрибутов</figcaption></figure></p>
 </li>
 </ul>
 </li>
 </ul>
 </li>
 </ol>
-<h2 id="elements_vacation_agreement_setup">Настройка элементов диаграммы процесса «Согласование отпуска»</h2>
+<h2 class="pageBreakBefore" id="elements_vacation_agreement_setup">Настройка элементов диаграммы процесса «Согласование отпуска»</h2>
 <div class="notice notice-warning">
 <p class="admonition-title">Бизнес-логика</p>
 <ol class="colored_numbers_list">
-<li>Процесс <em>«Согласование отпуска»</em> запускается вручную путём создания его экземпляра.</li>
-<li>При запуске процесса создаётся запись в шаблоне <em><a class="mkdocs_imported_link" href="#attributes_record_template_vacation_application">«Оформлено заявление на отпуск»</a></em>, связанная с экземпляром процесса.</li>
-<li>Пользователь, запустивший процесс, заполняет стартовую форму события <em><a class="mkdocs_imported_link" href="#start_event_application_registered">«Оформлено заявление на отпуск»</a></em>, указав <em>дату начала и количество дней</em> отпуска.</li>
-<li>Событие <em><a class="mkdocs_imported_link" href="#intermediate_event_notification_to_manager">«Отправка уведомления для руководителя»</a></em> отправляет <a class="mkdocs_imported_link" href="#notification_to_manager">письмо с заявлением</a> <em>Руководителю</em>.</li>
-<li>Событие <em><a class="mkdocs_imported_link" href="#intermediate_event_manager_answer">«Обработан ответ руководителя»</a></em> ожидает решения <em>Руководителя</em> из процесса <em><a class="mkdocs_imported_link" href="#elements_manager_answer_processing_setup">«Обработка ответа руководителя»</a></em>.</li>
-<li><em>Руководитель</em> нажимает в полученном письме кнопку <em>«Согласовать отпуск»</em> или <em>«Отказать в отпуске»</em> и отправляет автоматически сформированное письмо с решением по заявлению.</li>
-<li>Процесс <em>«Обработка ответа руководителя»</em> получает письмо, извлекает из него данные и передаёт решение по заявлению в событие <em><a class="mkdocs_imported_link" href="#intermediate_event_manager_answer">«Обработан ответ руководителя»</a></em> процесса <em>«Согласование отпуска».</em></li>
-<li>В зависимости от решения <em>Руководителя</em> в процессе <em>«Согласование отпуска»</em> срабатывает конечное событие <em><a class="mkdocs_imported_link" href="#end_event_vacation_accept">«Отпуск согласован»</a></em> или <em><a class="mkdocs_imported_link" href="#end_event_vacation_decline">«В отпуске отказано»</a>.</em></li>
-<li>Сработавшее конечное событие отправляет <em>Заявителю</em> письмо с решением по заявлению.</li>
+<li>Процесс <em>«Согласование отпуска»</em> запускается вручную путём создания его экземпляра.</li>
+<li>При запуске процесса создаётся запись в шаблоне <em><a class="mkdocs_imported_link" href="#attributes_record_template_vacation_application">«Оформлено заявление на отпуск»</a></em>, связанная с экземпляром процесса.</li>
+<li>Пользователь, запустивший процесс, заполняет стартовую форму события <em><a class="mkdocs_imported_link" href="#start_event_application_registered">«Оформлено заявление на отпуск»</a></em>, указав <em>дату начала и количество дней</em> отпуска.</li>
+<li>Событие <em><a class="mkdocs_imported_link" href="#intermediate_event_notification_to_manager">«Отправка уведомления для руководителя»</a></em> отправляет <a class="mkdocs_imported_link" href="#notification_to_manager">письмо с заявлением</a> <em>Руководителю</em>.</li>
+<li>Событие <em><a class="mkdocs_imported_link" href="#intermediate_event_manager_answer">«Обработан ответ руководителя»</a></em> ожидает решения <em>Руководителя</em> из процесса <em><a class="mkdocs_imported_link" href="#elements_manager_answer_processing_setup">«Обработка ответа руководителя»</a></em>.</li>
+<li><em>Руководитель</em> нажимает в полученном письме кнопку <em>«Согласовать отпуск»</em> или <em>«Отказать в отпуске»</em> и отправляет автоматически сформированное письмо с решением по заявлению.</li>
+<li>Процесс <em>«Обработка ответа руководителя»</em> получает письмо, извлекает из него данные и передаёт решение по заявлению в событие <em><a class="mkdocs_imported_link" href="#intermediate_event_manager_answer">«Обработан ответ руководителя»</a></em> процесса <em>«Согласование отпуска».</em></li>
+<li>В зависимости от решения <em>Руководителя</em> в процессе <em>«Согласование отпуска»</em> срабатывает конечное событие <em><a class="mkdocs_imported_link" href="#end_event_vacation_accept">«Отпуск согласован»</a></em> или <em><a class="mkdocs_imported_link" href="#end_event_vacation_decline">«В отпуске отказано»</a>.</em></li>
+<li>Сработавшее конечное событие отправляет <em>Заявителю</em> письмо с решением по заявлению.</li>
 </ol>
 </div>
 <ol class="colored_numbers_list">
-<li>В приложении <em>«Отпуска»</em> откройте шаблон процесса <em>«Согласование отпуска»</em>.</li>
+<li>В приложении <em>«Отпуска»</em> откройте шаблон процесса <em>«Согласование отпуска»</em>.</li>
 <li>Откройте вкладку «<strong>Диаграмма</strong>».</li>
 <li>Составьте диаграмму процесса, показанную на иллюстрации.</li>
 <li>Настройте элементы процесса, как указано ниже.</li>
 </ol>
 <figure class="screenshot_with_caption">
-<p><img alt="Диаграмма процесса «Согласование отпуска»" src="https://kb.comindware.ru/assets/process_email_configure_vacation_agreement_diagram.png"/></p>
-<figcaption class="caption">Диаграмма процесса «Согласование отпуска»</figcaption>
+<p><img alt="Диаграмма процесса «Согласование отпуска»" src="/platform/v5.0/examples/img/process_email_configure_vacation_agreement_diagram.png"/><figcaption class="caption">Диаграмма процесса «Согласование отпуска»</figcaption></p>
 </figure>
-<h3 id="start_event_application_registered">Начальное событие «Оформлено заявление на отпуск»</h3>
+<h3 class="pageBreakBefore" id="start_event_application_registered">Начальное событие «Оформлено заявление на отпуск»</h3>
 <ol class="colored_numbers_list">
-<li>Выберите начальное событие сообщения <em>«Оформлено заявление на отпуск».</em></li>
-<li>В <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4721#process_diagram_call_element_menu">меню элемента</a> выберите пункт «<strong>Стартовая форма</strong>» <em class="fa-light fa-window-maximize">‌<!--icon--></em>.</li>
+<li>Выберите начальное событие сообщения <em>«Оформлено заявление на отпуск».</em></li>
+<li>В <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4721#process_diagram_call_element_menu">меню элемента</a> выберите пункт «<strong>Стартовая форма</strong>» <i class="fa-light fa-window-maximize">‌<!--icon--></i>.</li>
 <li>
 <p>Настройте стартовую форму:</p>
 <ul>
-<li>В свойствах созданной по умолчанию <em>Новой области</em> введите <strong>отображаемое название</strong> <em>«Оформлено заявление на отпуск»</em>.</li>
+<li>В свойствах созданной по умолчанию <em>Новой области</em> введите <strong>отображаемое название</strong> <em>«Оформлено заявление на отпуск»</em>.</li>
 <li>
-<p>Перетащите на область <em>«Оформлено заявление на отпуск»</em> атрибуты:</p>
+<p>Перетащите на область <em>«Оформлено заявление на отпуск»</em> атрибуты:</p>
 <ul>
 <li><em>Имя заявителя</em></li>
 <li><em>Адрес заявителя</em></li>
@@ -880,10 +1026,10 @@
 <li>
 <p>Вернитесь к диаграмме процесса.</p>
 </li>
-<li>Выберите начальное событие <em>«Оформлено заявление на отпуск».</em></li>
-<li>В меню элемента выберите пункт «<strong>Сценарий на выходе</strong>» <em class="fa-light fa-arrow-right-from-bracket">‌<!--icon--></em>.</li>
+<li>Выберите начальное событие <em>«Оформлено заявление на отпуск».</em></li>
+<li>В меню элемента выберите пункт «<strong>Сценарий на выходе</strong>» <i class="fa-light fa-arrow-right-from-bracket">‌<!--icon--></i>.</li>
 <li>
-<p>Настройте <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4717">сценарий</a>:</p>
+<p>Настройте <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4717">сценарий</a>:</p>
 <ul>
 <li>Внутрь имеющегося действия «<strong>Сменить контекст</strong>» добавьте действие «<strong>Изменить значения атрибутов</strong>».</li>
 <li>Настройте действие «<strong>Изменить значения атрибутов</strong>»:</li>
@@ -914,14 +1060,17 @@
 </td>
 <td>
 <p><strong>Формула:</strong></p>
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="n">FORMAT</span><span class="p">(</span><span class="s">"{0}"</span><span class="p">,</span> <span class="n">LIST</span><span class="p">(</span><span class="err">$$</span><span class="n">ProcessObject</span><span class="p">))</span></code></pre>
-</div>
+<div class="highlight"><code><pre><span></span><code><span class="n">FORMAT</span><span class="p">(</span><span class="s">"{0}"</span><span class="p">,</span><span class="w"> </span><span class="n">LIST</span><span class="p">(</span><span class="err">$$</span><span class="n">ProcessObject</span><span class="p">))</span></code> <br/></pre></code></div>
 <ul>
-<li><code>FORMAT()</code> — эта функция принимает строку заполнителями вида <code>{0}</code>…<code>{N}</code> и список значений. Функция подставляет значения из списка в соответствующие заполнители и возвращает результирующую строку.</li>
-<li><code>LIST()</code> — эта функция принимает перечень значений и возвращает список, состоящий из этих значений.</li>
+<li><code>FORMAT()</code> — эта функция принимает строку заполнителями
+    вида <code>{0}</code>…<code>{N}</code> и список значений. Функция подставляет значения из
+    списка в соответствующие заполнители и возвращает результирующую строку.</li>
+<li><code>LIST()</code> — эта функция принимает перечень значений и возвращает список, состоящий
+    из этих значений.</li>
 <li><code>$$ProcessObject</code> — системная переменная, хранящая ID экземпляра процесса.</li>
-<li>Данная формула преобразует ID экземпляра процесса в строку. Это позволяет присвоить текстовому атрибуту <em>«Номер заявления»</em> значение ID экземпляра. Это текстовое значение далее используется для привязки ответов <em>Руководителя</em> к заявлениям на отпуск.</li>
+<li>Данная формула преобразует ID экземпляра процесса в строку. Это позволяет присвоить текстовому
+    атрибуту <em>«Номер заявления»</em> значение ID экземпляра. Это текстовое значение далее
+    используется для привязки ответов <em>Руководителя</em> к заявлениям на отпуск.</li>
 </ul>
 </td>
 </tr>
@@ -929,31 +1078,30 @@
 </table>
 <div class="notice notice-success">
 <p class="admonition-title">Системная переменная ProcessObject</p>
-<p>В переменной <code>ProcessObject</code> хранится ID экземпляра процесса в сценариях по событиям «<strong>Запуск процесса</strong>», «<strong>Вход токена</strong>», «<strong>Выход токена</strong>».</p>
+<p>В переменной <code>ProcessObject</code> хранится ID экземпляра процесса в сценариях по событиям «<strong>Запуск процесса</strong>», «<strong>Вход токена</strong>», «<strong>Выход токена</strong>».</p>
 <p>См. «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4719">Использование переменных в сценарии</a>».</p>
 </div>
 <figure class="screenshot_with_caption">
-<p><img alt="Сценарий на выходе из начального события «Оформлено заявление на отпуск»" src="https://kb.comindware.ru/assets/process_email_configure_scenario_start_event_vacation_application.png"/></p>
-<figcaption class="caption">Сценарий на выходе из начального события «Оформлено заявление на отпуск»</figcaption>
+<p><img alt="Сценарий на выходе из начального события «Оформлено заявление на отпуск»" src="/platform/v5.0/examples/img/process_email_configure_scenario_start_event_vacation_application.png"/><figcaption class="caption">Сценарий на выходе из начального события «Оформлено заявление на отпуск»</figcaption></p>
 </figure>
-<h3 id="intermediate_event_notification_to_manager">Промежуточное событие «Отправка уведомления для руководителя»</h3>
+<h3 class="pageBreakBefore" id="intermediate_event_notification_to_manager">Промежуточное событие «Отправка уведомления для руководителя»</h3>
 <ol class="colored_numbers_list">
-<li>Выберите промежуточное событие отправки сообщения <em>«Отправка уведомления для руководителя».</em></li>
-<li>В меню элемента выберите пункт «<strong>Свойства</strong>» <em class="fa-light fa-gear">‌<!--icon--></em>.</li>
+<li>Выберите промежуточное событие отправки сообщения <em>«Отправка уведомления для руководителя».</em></li>
+<li>В меню элемента выберите пункт «<strong>Свойства</strong>» <i class="fa-light fa-gear">‌<!--icon--></i>.</li>
 <li>
 <p>Настройте свойства события:</p>
 <ul>
 <li>
 <p><strong>Основные</strong></p>
 <ul>
-<li><strong>Название:</strong> <em>Отпуск согласован</em></li>
+<li><strong>Название:</strong> <em>Отпуск согласован</em></li>
 </ul>
 </li>
 <li>
 <p><strong>Дополнительные</strong></p>
 <ul>
 <li><strong>Место назначения: внешний сокет</strong></li>
-<li><strong>Использовать путь передачи данных:</strong> <a class="mkdocs_imported_link" href="#notification_to_manager"><em>Уведомление для руководителя</em></a></li>
+<li><strong>Использовать путь передачи данных:</strong> <a class="mkdocs_imported_link" href="#notification_to_manager"><em>Уведомление для руководителя</em></a></li>
 </ul>
 </li>
 <li>
@@ -972,31 +1120,31 @@
 <td><em>№ заявления</em></td>
 <td><em>ApplicationNumber</em></td>
 <td><strong>Текст</strong></td>
-<td><strong>Атрибут:</strong> <em>Номер заявления</em></td>
+<td><strong>Атрибут:</strong> <em>Номер заявления</em></td>
 </tr>
 <tr>
 <td><em>Имя заявителя</em></td>
 <td><em>ApplicantName</em></td>
 <td><strong>Текст</strong></td>
-<td><strong>Атрибут:</strong> <em>Имя заявителя</em></td>
+<td><strong>Атрибут:</strong> <em>Имя заявителя</em></td>
 </tr>
 <tr>
 <td><em>Дата начала</em></td>
 <td><em>StartDate</em></td>
 <td><strong>Дата и время</strong></td>
-<td><strong>Атрибут:</strong> <em>Дата начала</em></td>
+<td><strong>Атрибут:</strong> <em>Дата начала</em></td>
 </tr>
 <tr>
 <td><em>Количество дней</em></td>
 <td><em>Duration</em></td>
 <td><strong>Число</strong></td>
-<td><strong>Атрибут:</strong> <em>Количество дней</em></td>
+<td><strong>Атрибут:</strong> <em>Количество дней</em></td>
 </tr>
 <tr>
 <td><em>Дата окончания</em></td>
 <td><em>EndDate</em></td>
 <td><strong>Дата и время</strong></td>
-<td><strong>Атрибут:</strong> <em>Дата окончания</em></td>
+<td><strong>Атрибут:</strong> <em>Дата окончания</em></td>
 </tr>
 </tbody>
 </table>
@@ -1004,33 +1152,33 @@
 </ul>
 </li>
 </ol>
-<h3 id="intermediate_event_manager_answer">Промежуточное событие «Обработан ответ руководителя»</h3>
+<h3 class="pageBreakBefore" id="intermediate_event_manager_answer">Промежуточное событие «Обработан ответ руководителя»</h3>
 <div class="notice notice-success">
 <p class="admonition-title">Имя сообщения для процессной коммуникации</p>
-<p>Для обмена данными между экземплярами процессов (и внутри экземпляров) используются события отправки и получения сообщений (события-инициаторы и события-обработчики).</p>
+<p>Для обмена данными между экземплярами процессов (и внутри экземпляров)  используются события отправки и получения сообщений (события-инициаторы и события-обработчики).</p>
 <p>Каждому такому событию присваивается <strong>имя сообщения</strong>.</p>
 <p>Когда событие-инициатор отправляет сообщение, это сообщение принимают все события-обработчики с таким же <strong>именем сообщения</strong>, как у события-инициатора.</p>
 </div>
 <ol class="colored_numbers_list">
-<li>Выберите промежуточное событие отправки сообщения <em>«Обработан ответ руководителя».</em></li>
-<li>В меню элемента выберите пункт «<strong>Свойства</strong>» <em class="fa-light fa-gear">‌<!--icon--></em>.</li>
+<li>Выберите промежуточное событие отправки сообщения <em>«Обработан ответ руководителя».</em></li>
+<li>В меню элемента выберите пункт «<strong>Свойства</strong>» <i class="fa-light fa-gear">‌<!--icon--></i>.</li>
 <li>
 <p>Настройте свойства события:</p>
 <ul>
 <li>
 <p><strong>Основные</strong></p>
 <ul>
-<li><strong>Название:</strong> <em>Ответ руководителя</em></li>
+<li><strong>Название:</strong> <em>Ответ руководителя</em></li>
 </ul>
 </li>
 <li>
 <p><strong>Дополнительные</strong></p>
 <ul>
-<li><strong>Использовать путь передачи данных:</strong> флажок снят</li>
+<li><strong>Использовать путь передачи данных:</strong> флажок снят</li>
 <li>
-<p><strong>Имя сообщения:</strong> <em>ApproverResponse</em></p>
+<p><strong>Имя сообщения:</strong> <em>ApproverResponse</em></p>
 <ul>
-<li>Это имя должно совпадать с <strong>именем сообщения</strong> в <a class="mkdocs_imported_link" href="#end_event_decision_transfer">конечном событии «Передача решения в процесс «Согласование отпуска»</a>.</li>
+<li>Это имя должно совпадать с <strong>именем сообщения</strong> в <a class="mkdocs_imported_link" href="#end_event_decision_transfer">конечном событии «Передача решения в процесс «Согласование отпуска»</a>.</li>
 </ul>
 </li>
 </ul>
@@ -1042,7 +1190,7 @@
 <tr>
 <th><strong>Название</strong></th>
 <th><strong>Системное имя</strong></th>
-<th><strong>Тип данных</strong></th>
+<th><strong>Тип данных</strong></th>
 <th><strong>Значение</strong></th>
 </tr>
 </thead>
@@ -1051,7 +1199,7 @@
 <td><em>Решение руководителя</em></td>
 <td><em>ManagerDecision</em></td>
 <td><strong>Текст</strong></td>
-<td><strong>Атрибут:</strong> <em>Решение руководителя</em></td>
+<td><strong>Атрибут:</strong> <em>Решение руководителя</em></td>
 </tr>
 </tbody>
 </table>
@@ -1059,26 +1207,26 @@
 </ul>
 </li>
 </ol>
-<h3 id="gateway_manager_decision">Развилка «Решение руководителя»</h3>
+<h3 class="pageBreakBefore" id="gateway_manager_decision">Развилка «Решение руководителя»</h3>
 <div class="notice notice-warning">
 <p class="admonition-title">Бизнес-логика</p>
-<p>Развилка <em>«Решение руководителя»</em> определяет, какое уведомление отправить <em>Заявителю</em>:</p>
+<p>Развилка <em>«Решение руководителя»</em> определяет, какое уведомление отправить <em>Заявителю</em>:</p>
 <ul>
-<li>если атрибут <em>«Отпуск согласован»</em> в записи шаблона <em><a class="mkdocs_imported_link" href="#attributes_record_template_manager_decision">«Решения руководителя»</a>,</em> связанной с заявлением на отпуск, имеет значение <code>true</code>, срабатывает конечное событие <em><a class="mkdocs_imported_link" href="#end_event_vacation_accept">«Отпуск согласован»</a>;</em></li>
-<li>в противном случае срабатывает конечное событие <em><a class="mkdocs_imported_link" href="#end_event_vacation_decline">«В отпуске отказано»</a>;</em></li>
-<li>сработавшее конечное событие отправляет <em>Заявителю</em> письмо с решением по заявлению на отпуск.</li>
+<li>если атрибут <em>«Отпуск согласован»</em> в записи шаблона <em><a class="mkdocs_imported_link" href="#attributes_record_template_manager_decision">«Решения руководителя»</a>,</em> связанной с заявлением на отпуск, имеет значение <code>true</code>, срабатывает конечное событие <em><a class="mkdocs_imported_link" href="#end_event_vacation_accept">«Отпуск согласован»</a>;</em></li>
+<li>в противном случае срабатывает конечное событие <em><a class="mkdocs_imported_link" href="#end_event_vacation_decline">«В отпуске отказано»</a>;</em></li>
+<li>сработавшее конечное событие отправляет <em>Заявителю</em> письмо с решением по заявлению на отпуск.</li>
 </ul>
 </div>
 <ol class="colored_numbers_list">
-<li>Выберите развилку «или/или» <em>«Решение руководителя»</em>.</li>
-<li>В меню элемента выберите пункт «<strong>Свойства</strong>» <em class="fa-light fa-gear">‌<!--icon--></em>.</li>
+<li>Выберите развилку «или/или» <em>«Решение руководителя»</em>.</li>
+<li>В меню элемента выберите пункт «<strong>Свойства</strong>» <i class="fa-light fa-gear">‌<!--icon--></i>.</li>
 <li>
 <p>Настройте свойства события:</p>
 <ul>
 <li>
 <p><strong>Основные</strong></p>
 <ul>
-<li><strong>Название:</strong> <em>Решение руководителя</em></li>
+<li><strong>Название:</strong> <em>Решение руководителя</em></li>
 </ul>
 </li>
 <li>
@@ -1103,17 +1251,15 @@
 </thead>
 <tbody>
 <tr>
-<td> </td>
+<td></td>
 <td>
 <p><em>Отпуск согласован</em></p>
 </td>
 <td>
 <p><strong>Формула:</strong></p>
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="err">$</span><span class="n">ManagerDecision</span><span class="o">-&gt;</span><span class="n">LeaveApproved</span></code></pre>
-</div>
+<div class="highlight"><code><pre><span></span><code><span class="err">$</span><span class="n">ManagerDecision</span><span class="o">-&gt;</span><span class="n">LeaveApproved</span></code> <br/></pre></code></div>
 <ul>
-<li><code>$</code> — ссылка на текущую запись в <a class="mkdocs_imported_link" href="#attributes_record_template_vacation_application">шаблоне <em>«Заявления на отпуск»</em></a>.</li>
+<li><code>$</code> — ссылка на текущую запись в  <a class="mkdocs_imported_link" href="#attributes_record_template_vacation_application">шаблоне <em>«Заявления на отпуск»</em></a>.</li>
 <li><code>ManagerDecision</code> — атрибут <em>«Решение руководителя»</em>, ссылающийся на запись в <a class="mkdocs_imported_link" href="#attributes_record_template_manager_decision">шаблоне <em>«Решения руководителя»</em></a>.</li>
 <li><code>LeaveApproved</code> — логический атрибут <em>«Отпуск одобрен»</em> в шаблоне <em>«Решения руководителя»</em>.</li>
 </ul>
@@ -1126,28 +1272,28 @@
 <td>
 <p><em>В отпуске отказано</em></p>
 </td>
-<td> </td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<h3 id="end_event_vacation_accept">Конечное событие «Отпуск согласован»</h3>
+<h3 class="pageBreakBefore" id="end_event_vacation_accept">Конечное событие «Отпуск согласован»</h3>
 <ol class="colored_numbers_list">
-<li>Выберите конечное событие-отправки сообщения <em>«Отпуск согласован».</em></li>
-<li>В меню элемента выберите пункт «<strong>Свойства</strong>» <em class="fa-light fa-gear">‌<!--icon--></em>‌.</li>
+<li>Выберите конечное событие-отправки сообщения <em>«Отпуск согласован».</em></li>
+<li>В меню элемента выберите пункт «<strong>Свойства</strong>» <i class="fa-light fa-gear">‌<!--icon--></i>‌.</li>
 <li>
 <p>Настройте свойства события:</p>
 <ul>
 <li>
 <p><strong>Основные</strong></p>
 <ul>
-<li><strong>Название:</strong> <em>Отпуск согласован</em></li>
+<li><strong>Название:</strong> <em>Отпуск согласован</em></li>
 </ul>
 </li>
 <li>
 <p><strong>Дополнительные</strong></p>
 <ul>
 <li><strong>Место назначения: внешний сокет</strong></li>
-<li><strong>Использовать путь передачи данных:</strong> <em><a class="mkdocs_imported_link" href="#notification_vacation_accept">Уведомление «Отпуск согласован»</a></em></li>
+<li><strong>Использовать путь передачи данных:</strong> <em><a class="mkdocs_imported_link" href="#notification_vacation_accept">Уведомление «Отпуск согласован»</a></em></li>
 </ul>
 </li>
 <li>
@@ -1166,66 +1312,66 @@
 <td><em>Решение руководителя</em></td>
 <td><em>ManagerDecision</em></td>
 <td><strong>Текст</strong></td>
-<td><strong>Атрибут:</strong> <em>ID</em></td>
+<td><strong>Атрибут:</strong> <em>ID</em></td>
 </tr>
 <tr>
 <td><em>Имя заявителя</em></td>
 <td><em>ApplicantName</em></td>
 <td><strong>Текст</strong></td>
-<td><strong>Атрибут:</strong> <em>Имя заявителя</em></td>
+<td><strong>Атрибут:</strong> <em>Имя заявителя</em></td>
 </tr>
 <tr>
 <td><em>Дата начала</em></td>
 <td><em>StartDate</em></td>
 <td><strong>Дата и время</strong></td>
-<td><strong>Атрибут:</strong> <em>Дата начала</em></td>
+<td><strong>Атрибут:</strong> <em>Дата начала</em></td>
 </tr>
 <tr>
 <td><em>Количество дней</em></td>
 <td><em>Duration</em></td>
 <td><strong>Число</strong></td>
-<td><strong>Атрибут:</strong> <em>Количество дней</em></td>
+<td><strong>Атрибут:</strong> <em>Количество дней</em></td>
 </tr>
 <tr>
 <td><em>Дата окончания&gt;</em></td>
 <td><em>EndDate</em></td>
 <td><strong>Дата и время</strong></td>
-<td><strong>Атрибут:</strong> <em>Дата окончания</em></td>
+<td><strong>Атрибут:</strong> <em>Дата окончания</em></td>
 </tr>
 <tr>
 <td><em>Комментарий руководителя</em></td>
 <td><em>ManagerComment</em></td>
 <td><strong>Текст</strong></td>
-<td><strong>Атрибут: <em>Решение руководителя→Комментарий руководителя</em></strong></td>
+<td><strong>Атрибут: <em>Решение руководителя→Комментарий руководителя</em></strong></td>
 </tr>
 </tbody>
 </table>
 <div class="notice notice-info">
 <p class="admonition-title">Примечание</p>
-<p>Из значений этих атрибутов формируется эл. письмо <em>Заявителю</em> посредством пути передачи данных <em><a class="mkdocs_imported_link" href="#notification_vacation_accept">«Уведомление «Отпуск согласован»</a></em>.</p>
+<p>Из значений этих атрибутов формируется эл. письмо <em>Заявителю</em> посредством пути передачи данных <em><a class="mkdocs_imported_link" href="#notification_vacation_accept">«Уведомление «Отпуск согласован»</a></em>.</p>
 </div>
 </li>
 </ul>
 </li>
 </ol>
-<h3 id="end_event_vacation_decline">Конечное событие «В отпуске отказано»</h3>
+<h3 class="pageBreakBefore" id="end_event_vacation_decline">Конечное событие «В отпуске отказано»</h3>
 <ol class="colored_numbers_list">
-<li>Выберите конечное событие-отправки сообщения <em>«В отпуске отказано»</em>.</li>
-<li>В меню элемента выберите пункт «<strong>Свойства</strong>» <em class="fa-light fa-gear">‌<!--icon--></em>.</li>
+<li>Выберите конечное событие-отправки сообщения <em>«В отпуске отказано»</em>.</li>
+<li>В меню элемента выберите пункт «<strong>Свойства</strong>» <i class="fa-light fa-gear">‌<!--icon--></i>.</li>
 <li>
 <p>Настройте свойства события:</p>
 <ul>
 <li>
 <p><strong>Основные</strong></p>
 <ul>
-<li><strong>Название:</strong> <em>В отпуске отказано</em></li>
+<li><strong>Название:</strong> <em>В отпуске отказано</em></li>
 </ul>
 </li>
 <li>
 <p><strong>Дополнительные</strong></p>
 <ul>
 <li><strong>Место назначения: внешний сокет</strong></li>
-<li><strong>Использовать путь передачи данных:</strong> <em><a class="mkdocs_imported_link" href="#notification_vacation_decline">Уведомление «В отпуске отказано»</a></em></li>
+<li><strong>Использовать путь передачи данных:</strong> <em><a class="mkdocs_imported_link" href="#notification_vacation_decline">Уведомление «В отпуске отказано»</a></em></li>
 </ul>
 </li>
 <li>
@@ -1244,68 +1390,67 @@
 <td><em>№ заявления</em></td>
 <td><em>ApplicationNumber</em></td>
 <td><strong>Текст</strong></td>
-<td><strong>Атрибут:</strong> <em>Номер заявления</em></td>
+<td><strong>Атрибут:</strong> <em>Номер заявления</em></td>
 </tr>
 <tr>
 <td><em>Имя заявителя</em></td>
 <td><em>ApplicantName</em></td>
 <td><strong>Текст</strong></td>
-<td><strong>Атрибут:</strong> <em>Имя заявителя</em></td>
+<td><strong>Атрибут:</strong> <em>Имя заявителя</em></td>
 </tr>
 <tr>
 <td><em>Дата начала</em></td>
 <td><em>StartDate</em></td>
 <td><strong>Дата и время</strong></td>
-<td><strong>Атрибут:</strong> <em>Дата начала</em></td>
+<td><strong>Атрибут:</strong> <em>Дата начала</em></td>
 </tr>
 <tr>
 <td><em>Количество дней</em></td>
 <td><em>Duration</em></td>
 <td><strong>Число</strong></td>
-<td><strong>Атрибут:</strong> <em>Количество дней</em></td>
+<td><strong>Атрибут:</strong> <em>Количество дней</em></td>
 </tr>
 <tr>
 <td><em>Дата окончания</em></td>
 <td><em>EndDate</em></td>
 <td><strong>Дата и время</strong></td>
-<td><strong>Атрибут:</strong> <em>Дата окончания</em></td>
+<td><strong>Атрибут:</strong> <em>Дата окончания</em></td>
 </tr>
 <tr>
 <td><em>Комментарий руководителя</em></td>
 <td><em>ManagerComment</em></td>
 <td><strong>Текст</strong></td>
-<td><strong>Атрибут: <em>Решение руководителя→Комментарий руководителя</em></strong></td>
+<td><strong>Атрибут: <em>Решение руководителя→Комментарий руководителя</em></strong></td>
 </tr>
 </tbody>
 </table>
 <div class="notice notice-info">
 <p class="admonition-title">Примечание</p>
-<p>Из значений этих атрибутов формируется эл. письмо <em>Заявителю</em> посредством пути передачи данных <em><a class="mkdocs_imported_link" href="#notification_vacation_decline">«Уведомление «В отпуске отказано»</a></em>.</p>
+<p>Из значений этих атрибутов формируется эл. письмо <em>Заявителю</em> посредством пути передачи данных <em><a class="mkdocs_imported_link" href="#notification_vacation_decline">«Уведомление «В отпуске отказано»</a></em>.</p>
 </div>
 </li>
 </ul>
 </li>
 </ol>
-<h2 id="elements_manager_answer_processing_setup">Настройка элементов диаграммы процесса «Обработка ответа руководителя»</h2>
+<h2 class="pageBreakBefore" id="elements_manager_answer_processing_setup">Настройка элементов диаграммы процесса «Обработка ответа руководителя»</h2>
 <ol class="colored_numbers_list">
-<li>В приложении <em>«Отпуска»</em> откройте шаблон процесса <em>«Обработка ответа руководителя»</em>.</li>
+<li>В приложении <em>«Отпуска»</em> откройте шаблон процесса <em>«Обработка ответа руководителя»</em>.</li>
 <li>Откройте вкладку «<strong>Диаграмма</strong>».</li>
 <li>Составьте диаграмму процесса, показанную на иллюстрации.</li>
 <li>Настройте элементы процесса, как указано ниже.</li>
 </ol>
 <figure class="screenshot_with_caption">
-<p><img alt="Диаграмма процесса «Обработка ответа руководителя»" src="https://kb.comindware.ru/assets/process_email_configure_manager_answer_processing_diagram.png"/></p>
-<figcaption class="caption">Диаграмма процесса «Обработка ответа руководителя»</figcaption>
+<p><img alt="Диаграмма процесса «Обработка ответа руководителя»" src="/platform/v5.0/examples/img/process_email_configure_manager_answer_processing_diagram.png"/><figcaption class="caption">Диаграмма процесса «Обработка ответа руководителя»</figcaption></p>
 </figure>
-<h3 id="start_event_manager_answer_receive">Начальное событие «Поступил ответ руководителя»</h3>
+<h3 class="pageBreakBefore" id="start_event_manager_answer_receive">Начальное событие «Поступил ответ руководителя»</h3>
 <div class="notice notice-warning">
 <p class="admonition-title">Бизнес-логика</p>
 <ol class="colored_numbers_list">
-<li>Процесс <em>«Обработка ответов руководителя»</em> запускается при поступлении нового письма в почтовый ящик, указанный в подключении «<strong><a class="mkdocs_imported_link" href="#email_receive_process">Получение эл. почты в процессе</a></strong>».</li>
-<li>При запуске процесса создаётся запись в <a class="mkdocs_imported_link" href="#attributes_record_template_manager_decision">шаблоне <em>«Решения руководителя»</em></a>, связанная с экземпляром процесса.</li>
-<li>Процесс <em>«Обработка ответа руководителя»</em> обрабатывает поступившие письма и передаёт данные в процесс <em>«Согласование отпуска»</em>.</li>
+<li>Процесс <em>«Обработка ответов руководителя»</em> запускается при поступлении нового письма в почтовый ящик, указанный в подключении «<strong><a class="mkdocs_imported_link" href="#email_receive_process">Получение эл. почты в процессе</a></strong>».</li>
+<li>При запуске процесса создаётся запись в <a class="mkdocs_imported_link" href="#attributes_record_template_manager_decision">шаблоне <em>«Решения руководителя»</em></a>, связанная с экземпляром процесса.</li>
+<li>Процесс <em>«Обработка ответа руководителя»</em> обрабатывает поступившие письма и передаёт данные в процесс <em>«Согласование отпуска»</em>.</li>
 <li>
-<p>В теме письма от <em>Руководителя</em> содержатся номер заявления на отпуск и решение по нему в следующем формате:</p>
+<p>В теме письма от <em>Руководителя</em> содержатся номер заявления на отпуск и решение по нему в следующем формате:</p>
 <ul>
 <li>
 <p><code>Отпуск согласован. Заявление № [X]</code></p>
@@ -1318,49 +1463,49 @@
 <p>Здесь <code>X</code> — номер заявления, состоящий из произвольного количества цифр.</p>
 </li>
 <li>
-<p>В теле письма может содержаться произвольное сообщение от <em>Руководителя</em>.</p>
+<p>В теле письма может содержаться произвольное сообщение от <em>Руководителя</em>.</p>
 </li>
 <li>
-<p>В свойствах начального события-получения сообщения <em>«Поступил ответ руководителя»</em> мы настраиваем передачу данных из полученного письма от <em>Руководителя</em>.</p>
+<p>В свойствах начального события-получения сообщения <em>«Поступил ответ руководителя»</em> мы настраиваем передачу данных из полученного письма от <em>Руководителя</em>.</p>
 <ul>
 <li>Указываем путь передачи данных для получения писем.</li>
 <li>
-<p>Передаём значения атрибутов сообщения <a class="mkdocs_imported_link" href="#manager_answer_receive">пути передачи данных <em>«Ответ руководителя»</em></a> в атрибуты <a class="mkdocs_imported_link" href="#attributes_record_template_manager_decision">шаблона записи <em>«Решения руководителя»</em></a>:</p>
+<p>Передаём значения атрибутов сообщения <a class="mkdocs_imported_link" href="#manager_answer_receive">пути передачи данных <em>«Ответ руководителя»</em></a> в атрибуты <a class="mkdocs_imported_link" href="#attributes_record_template_manager_decision">шаблона записи <em>«Решения руководителя»</em></a>:</p>
 <ul>
-<li><em>Тема письма</em> — <em>Тема письма с ответом</em>;</li>
+<li><em>Тема письма</em> — <em>Тема письма с ответом</em>;</li>
 <li><em>Текст письма</em> — <em>Комментарий руководителя</em>.</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>
-<p>По значению атрибута <em>«Тема письма с ответом»</em> автоматически вычисляются значения атрибутов записи в <a class="mkdocs_imported_link" href="#attributes_record_template_manager_decision">шаблоне <em>«Решения руководителя»</em></a>:</p>
+<p>По значению атрибута <em>«Тема письма с ответом»</em> автоматически вычисляются значения атрибутов записи в <a class="mkdocs_imported_link" href="#attributes_record_template_manager_decision">шаблоне <em>«Решения руководителя»</em></a>:</p>
 <ul>
-<li>значение атрибута <em>«№ заявления»</em> совпадает с ID экземпляра процесса <em>«Согласование отпуска»</em>, связанного с заявлением на отпуск;</li>
-<li>атрибут <em>«Отпуск согласован»</em> принимает значение <code>true</code>, если отпуск согласован, и значение <code>false</code>, если в отпуске отказано.</li>
+<li>значение атрибута <em>«№ заявления»</em> совпадает с ID экземпляра процесса <em>«Согласование отпуска»</em>, связанного с заявлением на отпуск;</li>
+<li>атрибут <em>«Отпуск согласован»</em> принимает значение <code>true</code>, если отпуск согласован, и значение <code>false</code>, если в отпуске отказано.</li>
 </ul>
 </li>
 <li>
-<p>После обработки письма <a class="mkdocs_imported_link" href="#end_event_decision_transfer">конечное событие передаёт <em>Решение руководителя</em> в процесс <em>«Согласование отпуска»</em></a>.</p>
+<p>После обработки письма <a class="mkdocs_imported_link" href="#end_event_decision_transfer">конечное событие передаёт <em>Решение руководителя</em> в процесс <em>«Согласование отпуска»</em></a>.</p>
 </li>
 </ol>
 </div>
 <ol class="colored_numbers_list">
-<li>Выберите начальное событие-отправки сообщения <em>«Поступил ответ руководителя».</em></li>
-<li>В меню элемента выберите пункт «<strong>Свойства</strong>» <em class="fa-light fa-gear">‌<!--icon--></em>.</li>
+<li>Выберите начальное событие-отправки сообщения <em>«Поступил ответ руководителя».</em></li>
+<li>В меню элемента выберите пункт «<strong>Свойства</strong>» <i class="fa-light fa-gear">‌<!--icon--></i>.</li>
 <li>
 <p>Настройте свойства события:</p>
 <ul>
 <li>
 <p><strong>Основные</strong></p>
 <ul>
-<li><strong>Название:</strong> <em>Получение и разбор ответа от руководителя</em></li>
+<li><strong>Название:</strong> <em>Получение и разбор ответа от руководителя</em></li>
 </ul>
 </li>
 <li>
 <p><strong>Дополнительные</strong></p>
 <ul>
-<li><strong>Использовать путь передачи данных:</strong> <em><a class="mkdocs_imported_link" href="#manager_answer_receive">Ответ руководителя</a></em></li>
+<li><strong>Использовать путь передачи данных:</strong> <em><a class="mkdocs_imported_link" href="#manager_answer_receive">Ответ руководителя</a></em></li>
 </ul>
 </li>
 <li>
@@ -1379,13 +1524,13 @@
 <td><em>Тема письма</em></td>
 <td><em>EmailSubject</em></td>
 <td><strong>Текст</strong></td>
-<td><strong>Атрибут:</strong> <em>Тема письма с ответом</em></td>
+<td><strong>Атрибут:</strong> <em>Тема письма с ответом</em></td>
 </tr>
 <tr>
 <td><em>Текст письма</em></td>
 <td><em>EmailBody</em></td>
 <td><strong>Текст</strong></td>
-<td><strong>Атрибут:</strong> <em>Комментарий руководителя</em></td>
+<td><strong>Атрибут:</strong> <em>Комментарий руководителя</em></td>
 </tr>
 </tbody>
 </table>
@@ -1393,33 +1538,33 @@
 </ul>
 </li>
 </ol>
-<h3 id="end_event_decision_transfer">Конечное событие «Передача решения в процесс «Согласование отпуска»</h3>
+<h3 class="pageBreakBefore" id="end_event_decision_transfer">Конечное событие «Передача решения в процесс «Согласование отпуска»</h3>
 <div class="notice notice-warning">
 <p class="admonition-title">Бизнес-логика</p>
 <ol class="colored_numbers_list">
-<li>Конечное событие процесса <em>«Обработка ответов руководителя»</em> передаёт решение <em>Руководителя</em> в экземпляр процесса <em>«Согласование отпуска»</em>, связанный с заявлением на отпуск.</li>
+<li>Конечное событие процесса <em>«Обработка ответов руководителя»</em> передаёт решение <em>Руководителя</em> в экземпляр процесса <em>«Согласование отпуска»</em>, связанный с заявлением на отпуск.</li>
 <li>
-<p>В свойствах конечного события-отправки сообщения мы настраиваем передачу ID записи из <a class="mkdocs_imported_link" href="#attributes_record_template_manager_decision">шаблона <em>«Решения руководителя»</em></a> в атрибут <em>«Решение руководителя»</em> записи в <a class="mkdocs_imported_link" href="#attributes_record_template_vacation_application">шаблоне <em>«Заявления на отпуск»</em></a>.</p>
+<p>В свойствах конечного события-отправки сообщения мы настраиваем передачу ID записи из <a class="mkdocs_imported_link" href="#attributes_record_template_manager_decision">шаблона <em>«Решения руководителя»</em></a> в атрибут <em>«Решение руководителя»</em> записи в <a class="mkdocs_imported_link" href="#attributes_record_template_vacation_application">шаблоне <em>«Заявления на отпуск»</em></a>.</p>
 <ul>
-<li>Посредством <strong>имени сообщения</strong> указываем <a class="mkdocs_imported_link" href="#intermediate_event_manager_answer">промежуточное событие <em>«Обработан ответ руководителя»</em></a>.</li>
-<li>Передаём в атрибут сообщения <em>«Решение руководителя»</em> значение системного атрибута «<strong>ID</strong>» шаблона записи <em>«Решения руководителя»</em>.</li>
+<li>Посредством <strong>имени сообщения</strong> указываем <a class="mkdocs_imported_link" href="#intermediate_event_manager_answer">промежуточное событие <em>«Обработан ответ руководителя»</em></a>.</li>
+<li>Передаём в атрибут сообщения <em>«Решение руководителя»</em> значение системного атрибута «<strong>ID</strong>» шаблона записи <em>«Решения руководителя»</em>.</li>
 </ul>
 </li>
 <li>
-<p>Значение этого атрибута передаётся в <a class="mkdocs_imported_link" href="#intermediate_event_manager_answer">промежуточное событие <em>«Обработан ответ руководителя»</em></a> процесса <em>«Согласование отпуска»</em>.</p>
+<p>Значение этого атрибута передаётся в <a class="mkdocs_imported_link" href="#intermediate_event_manager_answer">промежуточное событие <em>«Обработан ответ руководителя»</em></a> процесса <em>«Согласование отпуска»</em>.</p>
 </li>
 </ol>
 </div>
 <ol class="colored_numbers_list">
-<li>Выберите конечное событие-отправки сообщения <em>«Передача решения в процесс «Согласование отпуска»</em>.</li>
-<li>В меню элемента выберите пункт «<strong>Свойства</strong>» <em class="fa-light fa-gear">‌<!--icon--></em>.</li>
+<li>Выберите конечное событие-отправки сообщения <em>«Передача решения в процесс «Согласование отпуска»</em>.</li>
+<li>В меню элемента выберите пункт «<strong>Свойства</strong>» <i class="fa-light fa-gear">‌<!--icon--></i>.</li>
 <li>
 <p>Настройте свойства события:</p>
 <ul>
 <li>
 <p><strong>Основные</strong></p>
 <ul>
-<li><strong>Название:</strong> <em>Передача решения в процесс «Согласование отпуска»</em></li>
+<li><strong>Название:</strong> <em>Передача решения в процесс «Согласование отпуска»</em></li>
 </ul>
 </li>
 <li>
@@ -1427,13 +1572,13 @@
 <ul>
 <li><strong>Место назначения: промежуточное событие</strong></li>
 <li>
-<p><strong>Имя сообщения:</strong> <em>ApproverResponse</em></p>
+<p><strong>Имя сообщения:</strong> <em>ApproverResponse</em></p>
 <ul>
-<li>Это имя должно совпадать с <strong>именем сообщения</strong> в <a class="mkdocs_imported_link" href="#intermediate_event_manager_answer">промежуточном событии <em>«Обработан ответ руководителя»</em></a>.</li>
+<li>Это имя должно совпадать с <strong>именем сообщения</strong> в <a class="mkdocs_imported_link" href="#intermediate_event_manager_answer">промежуточном событии <em>«Обработан ответ руководителя»</em></a>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Экземпляр процесса: формула</strong> <code>$ApplicationNumber</code></p>
+<p><strong>Экземпляр процесса: формула</strong> <code>$ApplicationNumber</code></p>
 </li>
 </ul>
 </li>
@@ -1453,7 +1598,7 @@
 <td><em>Решение руководителя</em></td>
 <td><em>ManagerDecision</em></td>
 <td><strong>Текст</strong></td>
-<td><strong>Атрибут:</strong> <em>ID</em></td>
+<td><strong>Атрибут:</strong> <em>ID</em></td>
 </tr>
 </tbody>
 </table>
@@ -1461,58 +1606,64 @@
 </ul>
 </li>
 </ol>
-<h2 id="тестирование-процесса-согласование-отпуска">Тестирование процесса «Согласование отпуска»</h2>
+<h2 class="pageBreakBefore" id="тестирование-процесса-согласование-отпуска">Тестирование процесса «Согласование отпуска»</h2>
 <ol class="colored_numbers_list">
-<li>Откройте шаблон записи <em>«Согласование отпуска»</em>.</li>
+<li>Откройте шаблон записи <em>«Согласование отпуска»</em>.</li>
 <li>На вкладке «<strong>Свойства</strong>» нажмите кнопку «<strong>Перейти к экземплярам</strong>».</li>
 <li>В списке экземпляров процесса, нажмите кнопку «<strong>Создать</strong>».</li>
 <li>Отобразится всплывающее окно со стартовой формой</li>
 <li>Заполните поля «<strong>Дата начала</strong>» и «<strong>Количество дней</strong>».</li>
 <li>Поля «<strong>Имя заявителя</strong>», «<strong>Адрес заявителя</strong>» и «<strong>Дата окончания</strong>» должны заполниться автоматически.</li>
 <li>Нажмите кнопку «<strong>Создать</strong>».</li>
-<li>Откройте почтовый ящик <em>Руководителя.</em></li>
+<li>Откройте почтовый ящик <em>Руководителя.</em></li>
 <li>
-<p><em>Руководителю</em> должно прийти письмо от <em>Отдела кадров</em>, показанное на следующей иллюстрации.</p>
-<figure class="screenshot_with_caption"><img alt="Письмо Руководителю с заявлением на отпуск и кнопками для согласования и отказа в отпуске" src="https://kb.comindware.ru/assets/process_email_configure_manager_email_with_buttons.png"/>
-<figcaption class="caption">Письмо Руководителю с заявлением на отпуск и кнопками для согласования и отказа в отпуске</figcaption>
-</figure>
+<p><em>Руководителю</em> должно прийти письмо от <em>Отдела кадров</em>, показанное на следующей иллюстрации.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Письмо Руководителю с заявлением на отпуск и кнопками для согласования и отказа в отпуске" src="/platform/v5.0/examples/img/process_email_configure_manager_email_with_buttons.png"/><figcaption class="caption">Письмо Руководителю с заявлением на отпуск и кнопками для согласования и отказа в отпуске</figcaption></figure></p>
 </li>
 <li>
 <p>Нажмите кнопку «<em>Согласовать отпуск</em>» в письме.</p>
 </li>
 <li>
 <p>В почтовом клиенте будет создано новое письмо, показанное на следующей иллюстрации.</p>
-<figure class="screenshot_with_caption"><img alt="Письмо в Отдел кадров с положительном решением по заявлению на отпуск" src="https://kb.comindware.ru/assets/process_email_configure_accept.png"/>
-<figcaption class="caption">Письмо в Отдел кадров с положительном решением по заявлению на отпуск</figcaption>
-</figure>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Письмо в Отдел кадров с положительном решением по заявлению на отпуск" src="/platform/v5.0/examples/img/process_email_configure_accept.png"/><figcaption class="caption">Письмо в Отдел кадров с положительном решением по заявлению на отпуск</figcaption></figure></p>
 </li>
 <li>
 <p>Не меняйте адресата и тему письма. Введите произвольный текст письма.</p>
 </li>
 <li>Нажмите кнопку «<strong>Отправить</strong>».</li>
-<li>Откройте почтовый ящик <em>Заявителя.</em></li>
+<li>Откройте почтовый ящик <em>Заявителя.</em></li>
 <li>
-<p><em>Заявителю</em> должно прийти письмо от <em>Отдела кадров</em>, показанное на следующей иллюстрации.</p>
-<figure class="screenshot_with_caption"><img alt="Письмо Заявителю с положительным решением по Заявлению об отпуске" src="https://kb.comindware.ru/assets/process_email_configure_email_decline.png"/>
-<figcaption class="caption">Письмо Заявителю с положительным решением по Заявлению об отпуске</figcaption>
-</figure>
+<p><em>Заявителю</em> должно прийти письмо от <em>Отдела кадров</em>, показанное на следующей иллюстрации.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Письмо Заявителю с положительным решением по Заявлению об отпуске" src="/platform/v5.0/examples/img/process_email_configure_email_decline.png"/><figcaption class="caption">Письмо Заявителю с положительным решением по Заявлению об отпуске</figcaption></figure></p>
 </li>
 <li>
 <p>Аналогичным образом протестируйте работу процесса в случае отказа в отпуске.</p>
 </li>
 </ol>
+<div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
-<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4721">Диаграмма процесса</a></strong></p>
-<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4721#process_diagram_designer">Конструктор диаграммы процесса</a></strong></p>
-<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4734">Простое начальное событие</a></strong></p>
-<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4736">Начальное событие-получение сообщения</a></strong></p>
-<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4726">Стартовая форма</a></strong></p>
-<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4739">Промежуточное событие-получение сообщения</a></strong></p>
-<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4745">Конечное событие-отправка сообщения</a></strong></p>
-<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4717">Сценарии</a></strong></p>
-<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4719">Использование переменных в сценарии</a></strong></p>
-<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4993">Список функций языка формул Comindware</a></strong></p>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4721">Диаграмма процесса</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4721#process_diagram_designer">Конструктор диаграммы процесса</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4734">Простое начальное событие</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4736">Начальное событие-получение сообщения</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4726">Стартовая форма</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4739">Промежуточное событие-получение сообщения</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4745">Конечное событие-отправка сообщения</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4717">Сценарии</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4719">Использование переменных в сценарии</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4993">Список функций языка формул Comindware</a></em></li>
+</ul>
+</div>
 </article>
 </div>
 </div>
-<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

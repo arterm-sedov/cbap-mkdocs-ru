@@ -1,9 +1,19 @@
 ---
 title: 'Установка, запуск, инициализация и остановка ПО в Windows'
 kbId: 5063
+tags:
+  - windows
+  - установка
+  - развертывание
+  - развёртывание
+  - iis
+  - internet information services
+  - powershell
+  - экземпляр ПО
+  - запуск ПО
 ---
 
-# Установка, запуск, инициализация и остановка ПО в Windows {: #deploy_guide_windows}
+# Установка, запуск, инициализация и остановка ПО в Windows {: #deploy_guide_windows }
 
 ## Введение {: #deploy_guide_windows_intro }
 

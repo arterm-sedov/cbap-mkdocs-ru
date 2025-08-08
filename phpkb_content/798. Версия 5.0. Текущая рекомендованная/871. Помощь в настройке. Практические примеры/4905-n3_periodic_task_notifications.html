@@ -1,0 +1,231 @@
+<h1>Периодические напоминания об открытых задачах. Настройка процессов, сценария и HTML-текста письма</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4905" kb-tags="HTML,N3,Notation 3,RDF,email,процессы,письма,триплеты,тройка,тройки,уведомления,задачи,таблица в письме,эл. почта,вычисление" kb-title="Периодические напоминания об открытых задачах. Настройка процессов, сценария и HTML-текста письма">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_periodic_task_notifications_intro">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_periodic_task_notifications_use_case">
+<span class="md-ellipsis">
+      Прикладная задача
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_periodic_task_notifications_solution">
+<span class="md-ellipsis">
+      Пример решения
+    </span>
+</a>
+<nav aria-label="Пример решения" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_periodic_task_notifications_configure_send">
+<span class="md-ellipsis">
+      Настройка процесса «Отправка напоминания»
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_periodic_task_notifications_configure_search">
+<span class="md-ellipsis">
+      Настройка процесса «Поиск сотрудников с активными задачами»
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="example_n3_periodic_task_notifications_intro">Введение</h2>
+<p><strong>Comindware Platform</strong> поддерживает отправку пользователю стандартных уведомлений о назначенных ему задачах или процессных уведомлений с информацией из бизнес-процесса.</p>
+<p>Здесь представлен пример настройки отправки исполнителям эл. писем с процессными уведомлениями о задачах в формате HTML.</p>
+<p>См. также <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4682">Уведомления. Типы, назначение, настройка, использование</a>»</em>.</p>
+<h2 id="example_n3_periodic_task_notifications_use_case">Прикладная задача</h2>
+<p>Требуется отправлять сотрудникам эл. письма с напоминаниями о назначенных им задачах:</p>
+<ul>
+<li>напоминания необходимо отправлять ежедневно в в 7:00;</li>
+<li>письмо должно содержать перечень открытых задач сотрудника в виде таблицы.</li>
+</ul>
+<h2 id="example_n3_periodic_task_notifications_solution">Пример решения</h2>
+<p>Для реализации прикладной задачи настроим два бизнес-процесса:</p>
+<ul>
+<li><em>Поиск сотрудников с активными задачами</em> — запускается по таймеру и находит сотрудников, у которых есть открытые задачи на момент запуска, затем для каждого сотрудника запускает процесс <em>«Отправка напоминания»</em>.</li>
+<li><em>Отправка напоминания</em> — формирует и отправляет эл. письмо каждому сотруднику.</li>
+</ul>
+<h3 class="pageBreakBefore" id="example_n3_periodic_task_notifications_configure_send">Настройка процесса «Отправка напоминания»</h3>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>Для корректной работы вычислений и запуска процессов указывайте в выражениях именно те системные имена шаблонов и атрибутов, которые фактически используются в вашем приложении. Они могут отличаться от указанных в примере.</p>
+</div>
+<ol class="colored_numbers_list">
+<li>Создайте шаблон записи <em>«Напоминания»</em>.</li>
+<li>Создайте шаблон процесса <em>«Отправка напоминания»</em>, связанный с шаблоном <em>«Напоминания»</em>.</li>
+<li>
+<p>В шаблоне <em>«Напоминания»</em> создайте следующие атрибуты:</p>
+<ul>
+<li><em>Сотрудник</em><ul>
+<li><strong>Системное имя:</strong> <code>Сотрудник</code></li>
+<li><strong>Тип данных: аккаунт</strong></li>
+<li><strong>Описание:</strong> <em>Пользователь, которому будет отправляться напоминание</em></li>
+</ul>
+</li>
+<li><em>Кому</em><ul>
+<li><strong>Системное имя:</strong> <code>Кому</code></li>
+<li><strong>Тип данных: текст</strong></li>
+<li><strong>Описание:</strong> <em>Адрес эл. почты сотрудника</em></li>
+<li><strong>Вычислять автоматически:</strong> флажок установлен</li>
+<li><strong>Вычисляемое значение: формула</strong></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="err">$Сотрудник</span><span class="o">-&gt;</span><span class="n">cmw</span><span class="p">.</span><span class="n">account</span><span class="p">.</span><span class="n">mbox</span></code> <br/></pre></code></div>
+<ul>
+<li><em>Текст письма</em><ul>
+<li><strong>Системное имя:</strong> <code>Текстписьма</code></li>
+<li><strong>Тип данных: текст</strong></li>
+<li><strong>Формат отображения: HTML-текст</strong></li>
+<li><strong>Описание</strong>: <em>Текст письма с таблицей задач в формате HTML</em></li>
+<li><strong>Вычислять автоматически:</strong> флажок установлен</li>
+<li><strong>Вычисляемое значение: N3</strong></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы с логикой, строками, объектами, </span></code> <br/><code><span class="c"># конфигурацией, статусами задач, аккаунтами и ролями.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmw:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">string:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/2000/10/swap/string#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwstring:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/string#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">configuration:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/configuration#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">taskStatus:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/taskStatus#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">account:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/account#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">role:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/role#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>        <span class="c"># Получаем базовый URL системы для формирования ссылок на задачи.</span></code> <br/><code>        <span class="c"># Вместо &lt;yourhost&gt; подставьте адрес вашего сайта Comindware Platform</span></code> <br/><code>        <span class="c"># либо используйте конструкцию:</span></code> <br/><code>        <span class="c">#?confid configuration:baseUri ?baseUri.</span></code> <br/><code>        <span class="err">?baseUri</span> <span class="kt">a</span> <span class="s">"https://&lt;yourhost&gt;/"</span><span class="p">.</span></code> <br/><code>        <span class="c"># Находим атрибут «Сотрудник» в шаблоне «Напоминания»</span></code> <br/><code>        <span class="c"># для получения данных об пользователе,</span></code> <br/><code>        <span class="c"># которому будет отправлено напоминание.</span></code> <br/><code>        <span class="p">(</span><span class="s">"Напоминания"</span> <span class="s">"Сотрудник"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?Employee</span><span class="p">.</span></code> <br/><code>        <span class="err">?item</span> <span class="err">?Employee</span> <span class="err">?EmployeeVal</span><span class="p">.</span></code> <br/><code>        <span class="c"># Формируем заголовок таблицы с задачами</span></code> <br/><code>        <span class="c"># Создаем HTML-заголовок и начало таблицы со столбцами "Задача" и "Срок"</span></code> <br/><code>        <span class="p">(</span><span class="s">"&lt;p style='font-size: 100%' &gt;Перечень Ваших задач&lt;/p&gt;"</span> <span class="s">"&lt;table border='1' style='width: 60%; border-collapse: collapse; border: 1px solid black' &gt;&lt;tBody&gt; &lt;tr&gt;&lt;td style='padding: 2px; width: 200px; border: 1px solid black'&gt;Задача&lt;/td&gt; &lt;td style='width: 200px; padding: 2px; border: 1px solid black'&gt;Срок&lt;/td&gt;&lt;/tr&gt;"</span><span class="p">)</span> <span class="nn">string</span><span class="p">:</span><span class="nt">concatenation</span> <span class="err">?firstHeaderRow</span><span class="p">.</span></code> <br/><code>        <span class="c"># Собираем задачи пользователя</span></code> <br/><code>        <span class="err">from</span> <span class="p">{</span></code> <br/><code>            <span class="c"># Получаем все задачи.</span></code> <br/><code>            <span class="err">?tasks</span> <span class="kt">a</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">UserTask</span><span class="p">.</span></code> <br/><code>            <span class="c"># Получаем активные задачи.</span></code> <br/><code>            <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">taskStatus</span> <span class="nn">taskStatus</span><span class="p">:</span><span class="nt">inProgress</span><span class="p">.</span></code> <br/><code>            <span class="c"># Получаем роли пользователя.</span></code> <br/><code>            <span class="err">?roles</span> <span class="nn">role</span><span class="p">:</span><span class="nt">roleMembers</span> <span class="err">?EmployeeVal</span><span class="p">.</span></code> <br/><code>            <span class="c"># Получаем группы, в которые входит пользователь.</span></code> <br/><code>            <span class="err">?EmployeeVal</span> <span class="nn">account</span><span class="p">:</span><span class="nt">userGroupMembership</span> <span class="err">?groups</span><span class="p">.</span></code> <br/><code>            <span class="c"># Получаем роли, в которые входят группы пользователя.</span></code> <br/><code>            <span class="err">?roleGroups</span> <span class="nn">role</span><span class="p">:</span><span class="nt">roleMembers</span> <span class="err">?groups</span><span class="p">.</span></code> <br/><code>            <span class="c"># Проверяем, является ли пользователь</span></code> <br/><code>            <span class="c"># фактическим или возможным исполнителем задачи.</span></code> <br/><code>            <span class="c"># Проверяем различные варианты назначения задачи.</span></code> <br/><code>            <span class="err">or</span> <span class="p">{</span></code> <br/><code>                <span class="c"># Проверяем, назначена ли задача на пользователя.</span></code> <br/><code>                <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">assignee</span> <span class="err">?EmployeeVal</span><span class="p">.</span></code> <br/><code>            <span class="p">}</span></code> <br/><code>            <span class="err">or</span> <span class="p">{</span></code> <br/><code>                <span class="c"># Проверяем, является ли пользователь возможным исполнителем.</span></code> <br/><code>                <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">possibleAssignee</span> <span class="err">?EmployeeVal</span><span class="p">.</span></code> <br/><code>            <span class="p">}</span></code> <br/><code>            <span class="err">or</span> <span class="p">{</span></code> <br/><code>                <span class="c"># Проверяем, назначена ли задача на роль пользователя.</span></code> <br/><code>                <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">assignee</span> <span class="err">?roles</span><span class="p">.</span></code> <br/><code>            <span class="p">}</span></code> <br/><code>            <span class="err">or</span> <span class="p">{</span></code> <br/><code>                <span class="c"># Проверяем, является ли роль возможным исполнителем.</span></code> <br/><code>                <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">possibleAssignee</span> <span class="err">?roles</span><span class="p">.</span></code> <br/><code>            <span class="p">}</span></code> <br/><code>            <span class="err">or</span> <span class="p">{</span></code> <br/><code>                <span class="c"># Проверяем, назначена ли задача на группу пользователя.</span></code> <br/><code>                <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">assignee</span> <span class="err">?roleGroups</span><span class="p">.</span></code> <br/><code>            <span class="p">}</span></code> <br/><code>            <span class="err">or</span> <span class="p">{</span></code> <br/><code>                <span class="c"># Проверяем, является ли группа возможным исполнителем.</span></code> <br/><code>                <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">possibleAssignee</span> <span class="err">?roleGroups</span><span class="p">.</span></code> <br/><code>            <span class="p">}.</span></code> <br/><code>            <span class="c"># Получаем название и ID задачи.</span></code> <br/><code>            <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">title</span> <span class="err">?title</span><span class="p">.</span></code> <br/><code>            <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">id</span> <span class="err">?id</span><span class="p">.</span></code> <br/><code>            <span class="c"># Форматируем название и ID задачи для вставки в HTML.</span></code> <br/><code>            <span class="p">(</span><span class="s">"{0}"</span> <span class="err">?title</span><span class="p">)</span> <span class="nn">string</span><span class="p">:</span><span class="nt">format</span> <span class="err">?titleVal</span><span class="p">.</span></code> <br/><code>            <span class="p">(</span><span class="s">"{0}"</span> <span class="err">?id</span><span class="p">)</span> <span class="nn">string</span><span class="p">:</span><span class="nt">format</span> <span class="err">?idVal</span><span class="p">.</span></code> <br/><code>            <span class="c"># Получаем срок выполнения задачи (если есть).</span></code> <br/><code>            <span class="err">or</span> <span class="p">{</span><span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">dueDate</span> <span class="err">?dueDate</span><span class="p">.}</span></code> <br/><code>            <span class="err">or</span> <span class="p">{</span><span class="s">""</span> <span class="err">-&gt;</span> <span class="err">?dueDate</span><span class="p">.}.</span></code> <br/><code>            <span class="c"># Форматируем дату для отображения.</span></code> <br/><code>            <span class="p">(</span><span class="s">"{0}"</span> <span class="err">?dueDate</span><span class="p">)</span> <span class="nn">string</span><span class="p">:</span><span class="nt">format</span> <span class="err">?dueDateVal</span><span class="p">.</span></code> <br/><code>            <span class="c"># Формируем строку таблицы с ссылкой на задачу и сроком.</span></code> <br/><code>            <span class="p">(</span><span class="s">"&lt;tr&gt;&lt;td class='A' style='padding: 2px; border: 1px solid black; '&gt;&lt;a href='"</span><span class="err">?baseUri</span><span class="s">"#task/"</span> <span class="err">?idVal</span> <span class="s">"'&gt;"</span> <span class="err">?titleVal</span> <span class="s">"&lt;/a&gt;&lt;/td&gt;&lt;td align='right' style='padding: 2px; border: 1px solid black; text-align: right'&gt;"</span> <span class="err">?dueDateVal</span> <span class="s">"&lt;/td&gt;&lt;/tr&gt;"</span><span class="p">)</span> <span class="nn">string</span><span class="p">:</span><span class="nt">concatenation</span> <span class="err">?firstRow</span><span class="p">.</span></code> <br/><code>        <span class="p">}</span> <span class="err">select</span> <span class="err">?firstRow</span> <span class="err">-&gt;</span> <span class="err">?firstFactRow</span><span class="p">.</span></code> <br/><code>        <span class="c"># Объединяем все строки таблицы.</span></code> <br/><code>        <span class="p">(</span><span class="s">" "</span> <span class="err">?firstFactRow</span><span class="p">)</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">join</span> <span class="err">?firstFact</span><span class="p">.</span></code> <br/><code>        <span class="c"># Формируем финальный HTML с заголовком, таблицей и закрывающими тегами.</span></code> <br/><code>        <span class="p">(</span><span class="err">?firstHeaderRow</span> <span class="err">?firstFact</span> <span class="s">"&lt;/tBody&gt;&lt;/table&gt; &lt;br/&gt;"</span><span class="p">)</span> <span class="nn">string</span><span class="p">:</span><span class="nt">concatenation</span> <span class="err">?first</span><span class="p">.</span></code> <br/><code>        <span class="c"># Возвращаем результат.</span></code> <br/><code>        <span class="err">?first</span>  <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Постройте диаграмму процесса по показанному на следующей иллюстрации образцу:</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Диаграмма процесса «Отправка напоминания»" src="https://kb.comindware.ru/assets/timenotif7.jpg"/><figcaption class="caption">Диаграмма процесса «Отправка напоминания»</figcaption></figure></p>
+</li>
+<li>
+<p>Настройте событие-отправку сообщения. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4692">Отправка эл. почты из сценариев</a>»</em>.</p>
+</li>
+<li>Опубликуйте процесс.</li>
+</ol>
+<h3 class="pageBreakBefore" id="example_n3_periodic_task_notifications_configure_search">Настройка процесса «Поиск сотрудников с активными задачами»</h3>
+<ol class="colored_numbers_list">
+<li>Создайте шаблон записи <em>«Сотрудники для напоминаний»</em>.</li>
+<li>Создайте шаблон процесса <em>«Поиск сотрудников с активными задачами»</em>, связанный с шаблоном <em>«Сотрудники для напоминаний»</em>.</li>
+<li>
+<p>В шаблоне <em>«Сотрудники для напоминаний»</em> создайте атрибут:</p>
+<ul>
+<li><em>Сотрудники</em><ul>
+<li><strong>Системное имя:</strong> <code>Сотрудники</code></li>
+<li><strong>Тип данных: аккаунт</strong></li>
+<li><strong>Хранить несколько значений:</strong> флажок установлен</li>
+<li><strong>Вычислять автоматически:</strong> флажок установлен</li>
+<li><strong>Вычисляемое значение: N3</strong></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем основные функции для работы </span></code> <br/><code><span class="c"># с логикой, контейнерами, аккаунтами и статусами задач</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmw:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">container:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/container#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">account:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/account#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">taskStatus:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/taskStatus#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Получаем все задачи.</span></code> <br/><code>    <span class="err">?tasks</span> <span class="kt">a</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">UserTask</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получаем активные задачи.</span></code> <br/><code>    <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">taskStatus</span> <span class="nn">taskStatus</span><span class="p">:</span><span class="nt">inProgress</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получаем фактических и возможных исполнителей задач.</span></code> <br/><code>    <span class="c"># Проверяем различные варианты назначения задач.</span></code> <br/><code>    <span class="err">or</span><span class="p">{</span></code> <br/><code>        <span class="c"># Возвращаем фактического исполнителя,</span></code> <br/><code>        <span class="c"># если он назначен через группы и роли.</span></code> <br/><code>        <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">assignee</span> <span class="err">?assigneeRoles</span><span class="p">.</span></code> <br/><code>        <span class="err">?assigneeRoles</span> <span class="nn">role</span><span class="p">:</span><span class="nt">roleMembers</span> <span class="err">?groupMembers</span><span class="p">.</span></code> <br/><code>        <span class="err">?groupMembers</span> <span class="nn">account</span><span class="p">:</span><span class="nt">groupUsers</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">or</span> <span class="p">{</span></code> <br/><code></code> <br/><code>        <span class="c"># Возвращаем фактического исполнителя,</span></code> <br/><code>        <span class="c"># если он назначен через роли.</span></code> <br/><code>        <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">assignee</span> <span class="err">?assigneeRoles</span><span class="p">.</span></code> <br/><code>        <span class="err">?assigneeRoles</span> <span class="nn">role</span><span class="p">:</span><span class="nt">roleMembers</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">or</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Возвращаем фактического исполнителя,</span></code> <br/><code>        <span class="c"># если он назначен через аккаунт.</span></code> <br/><code>        <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">assignee</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">or</span><span class="p">{</span></code> <br/><code>        <span class="c"># Возвращаем список возможных исполнителей,</span></code> <br/><code>        <span class="c"># если они назначены через группы и роли.</span></code> <br/><code>        <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">possibleAssignee</span> <span class="err">?possibleRoles</span><span class="p">.</span></code> <br/><code>        <span class="err">?assigneeRoles</span> <span class="nn">role</span><span class="p">:</span><span class="nt">roleMembers</span> <span class="err">?groupMembers</span><span class="p">.</span></code> <br/><code>        <span class="err">?groupMembers</span> <span class="nn">account</span><span class="p">:</span><span class="nt">groupUsers</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">or</span> <span class="p">{</span></code> <br/><code></code> <br/><code>        <span class="c"># Возвращаем список возможных исполнителей,</span></code> <br/><code>        <span class="c"># если они назначены через роли.</span></code> <br/><code>        <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">possibleAssignee</span> <span class="err">?possibleRoles</span><span class="p">.</span></code> <br/><code>        <span class="err">?assigneeRoles</span> <span class="nn">role</span><span class="p">:</span><span class="nt">roleMembers</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">or</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Возвращаем список возможных исполнителей,</span></code> <br/><code>        <span class="c"># если они назначены через аккаунты.</span></code> <br/><code>        <span class="err">?tasks</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">possibleAssignee</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code>    <span class="p">}.</span></code> <br/><code>    <span class="c"># Оставляем только активные аккаунты.</span></code> <br/><code>    <span class="err">?value</span> <span class="nn">account</span><span class="p">:</span><span class="nt">active</span> <span class="l">true</span><span class="p">.</span></code> <br/><code>    <span class="c"># Исключаем отключенные аккаунты</span></code> <br/><code>    <span class="err">not</span> <span class="p">{</span><span class="err">?value</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">isDisabled</span> <span class="l">true</span><span class="p">.}.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<ul>
+<li><em>Сотрудникам на отправку</em><ul>
+<li><strong>Системное имя:</strong> <code>Сотрудникамнаотправку</code></li>
+<li><strong>Тип данных: запись</strong></li>
+<li><strong>Связанный шаблон:</strong> <em>Напоминания</em></li>
+<li><strong>Взаимная связь с новым атрибутом:</strong> <em>Найденные сотрудники</em> (<code>Найденныесотрудники</code>)</li>
+<li><strong>Хранить несколько значений:</strong> флажок установлен</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Постройте диаграмму процесса по показанному на следующей иллюстрации образцу:</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Диаграмма процесса «Отправка напоминания»" src="https://kb.comindware.ru/assets/timenotif2.jpg"/><figcaption class="caption">Диаграмма процесса «Отправка напоминания»</figcaption></figure></p>
+</li>
+<li>
+<p>Настройте начальное событие-таймер на запуск ежедневно в 7:00.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка таймера" src="https://kb.comindware.ru/assets/timenotif3.jpg"/><figcaption class="caption">Настройка таймера</figcaption></figure></p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>При необходимости предусмотрите также простое начальное событие для запуска процесса вручную без необходимости ожидания нового рабочего дня.</p>
+</div>
+</li>
+<li>
+<p>Настройте сценарий на входе в действие «<strong>Вызов процесса</strong>» для создания записей, по которым будет запускаться подпроцесс.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Действия сценария на входе" src="https://kb.comindware.ru/assets/trigger1.jpg"/><figcaption class="caption">Действия сценария на входе</figcaption></figure></p>
+<ol class="colored_numbers_list">
+<li>
+<p>Внутрь действия «<strong>Сменить контекст</strong>» добавьте действие «<strong>Цикл по объектам</strong>» и настройте его, как показано ниже.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Добавление действия «Цикл по объектам»" src="https://kb.comindware.ru/assets/trigger2.jpg"/><figcaption class="caption">Добавление действия «Цикл по объектам»</figcaption></figure></p>
+<p>Переменная <code>local</code> хранит поочередно по одному экземпляру из указанной выборки.</p>
+<p>Внизу укажите атрибут <em>«Сотрудники»</em>, в котором вычисляются сотрудники с активными задачами.</p>
+</li>
+<li>
+<p>Добавьте действие «<strong>Создать запись</strong>» и настройте его.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Добавление действия «Создать запись»" src="https://kb.comindware.ru/assets/trigger3.jpg"/><figcaption class="caption">Добавление действия «Создать запись»</figcaption></figure></p>
+<ul>
+<li><strong>Целевой шаблон записи</strong> — укажите шаблон записи <em>«Напоминания»</em>.</li>
+<li><strong>Ссылка на новую запись</strong> — укажите атрибут <em>«Сотрудникам на отправку»</em>, созданный на шаге 3.</li>
+<li><strong>Операция со значениями</strong> — укажите «<strong>Добавить</strong>».</li>
+</ul>
+</li>
+<li>
+<p>Добавьте действие «<strong>Изменить значения атрибутов</strong>» и настройте таблицу атрибутов следующим образом:</p>
+<ul>
+<li><strong>Атрибут:</strong> <em>Сотрудник</em></li>
+<li><strong>Операция со значениями: заменить</strong></li>
+<li><strong>Значение:</strong> <code>$$local</code></li>
+</ul>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка действия «Изменить значения атрибутов»" src="https://kb.comindware.ru/assets/trigger4.jpg"/><figcaption class="caption">Настройка действия «Изменить значения атрибутов»</figcaption></figure></p>
+</li>
+</ol>
+</li>
+<li>
+<p>Настройте вызов процесса:</p>
+<ul>
+<li><strong>Записи для запуска процесса</strong>: атрибут <em>«Сотрудникам на отправку»</em></li>
+<li><strong>Шаблон вызываемого процесса</strong>: атрибут <em>«Отправка напоминания»</em></li>
+</ul>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка подпроцесса" src="https://kb.comindware.ru/assets/trigger5.jpg"/><figcaption class="caption">Настройка подпроцесса</figcaption></figure></p>
+</li>
+<li>
+<p>Опубликуйте и протестируйте процесс.</p>
+<p>Перед началом тестирования проверьте работоспособность подключения для отправки почты и правильность настройки исходящего пути передачи данных.</p>
+</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="autorefs autorefs-internal mkdocs_imported_link" href="n3_calculate_active_task_accounts.html#example_n3_calculate_active_task_accounts" title="Аккаунты и задачи. Вычисление пользователей с активными задачами с помощью N3">Вычисление пользователей, у которых есть активные задачи</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4692">Отправка эл. почты из сценариев</a></li>
+<li><a class="autorefs autorefs-internal mkdocs_imported_link" href="n3_filter_active_tasks.html#n3_filter_active_tasks" title="Фильтрация списка по активным задачам с помощью N3">Фильтр списка по активным задачам текущего пользователя: по всем процессам, по конкретному процессу</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4682">Уведомления. Типы, назначение, настройка, использование</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4684">Уведомления о задачах. Настройка особого текста</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

@@ -41,8 +41,9 @@ Apache Ignite — это распределенная высокопроизво
 - `<dataRegionConfigurations type="DataRegionConfiguration"> <dataRegionConfiguration><name>Persistent</name><persistenceEnabled>true</persistenceEnabled>` — в директиве `dataRegionConfiguration` укажите `<persistenceEnabled>true</persistenceEnabled>`.
 - `<workDirectory>C:\apache-ignite-2.16.0-bin\</workDirectory>>` — укажите рабочую папку Ignite.
 - `<igniteInstanceName>Comindware_Instance2</igniteInstanceName>` — укажите имя экземпляра Ignite.
+{% include-markdown ".snippets/pdfPageBreakHard.md" %}
 
-``` {: .xml title="Пример файла конфигурации Ignite" .pageBreakAfter }
+``` {: .xml title="Пример файла конфигурации Ignite" .pageBreakBefore }
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
     <configSections>
@@ -55,11 +56,6 @@ Apache Ignite — это распределенная высокопроизво
         <localhost></localhost>
         <networkTimeout>1000</networkTimeout>
         <networkSendRetryDelay>1000</networkSendRetryDelay>
-{% if pdfOutput %}
-```
-
-``` { .xml title="Пример файла конфигурации Ignite — продолжение" .pageBreakBefore }
-{% endif %}
         <jvmOptions>
             <string>-Xms512m</string>
             <string>-Xmx3g</string>
@@ -72,6 +68,11 @@ Apache Ignite — это распределенная высокопроизво
             <string>-Djava.net.preferIPv4Stack=true</string>
             <string>--illegal-access=warn</string>
         </jvmOptions>
+{% if pdfOutput %}
+```
+{% include-markdown ".snippets/pdfPageBreakHard.md" %}
+``` { .xml title="Пример файла конфигурации Ignite — продолжение" .pageBreakBefore }
+{% endif %}
         <discoverySpi type="TcpDiscoverySpi">
             <ipFinder type="TcpDiscoveryStaticIpFinder">
                 <endpoints>

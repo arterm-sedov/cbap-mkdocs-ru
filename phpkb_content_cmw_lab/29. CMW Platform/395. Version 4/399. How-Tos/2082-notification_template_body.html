@@ -1,0 +1,126 @@
+<h1>Generate Notification Body Using a Template with Placeholders</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1h40uk0ta0">Use Case</a></li>
+<li><a href="#mcetoc_1gupdb2o92">Prerequisites</a></li>
+<li><a href="#mcetoc_1h3uhi69u1">Instructions</a>
+<ul>
+<li><a href="#mcetoc_1gtqijebq0">Formula Syntax</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="mcetoc_1h40uk0ta0">Use Case</h2>
+<p>You might want to generate the e-mail body using a template with placeholders for variable data, for example, to notify the users about work results or deadline changes.</p>
+<p>In this article, we will generate the notification text sent to employees during the vacation request approval process.</p>
+<h2 id="mcetoc_1gupdb2o92">Prerequisites</h2>
+<p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; font-size: 15px; font-weight: 300; letter-spacing: 0.2px; line-height: 25px; color: #545764; font-family: 'Open Sans', sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">To proceed with the example, create the attributes as shown in the table below:</p>
+<div class="table-responsive">
+<table border="1" style="width: 100    %; border-collapse: collapse; height: 413px;">
+<tbody>
+<tr style="height: 40px;">
+<td style="height: 40px; width: 10%;"><strong>Record template name</strong></td>
+<td style="width: 10%; height: 40px;"><strong>Attribute name</strong></td>
+<td style="width: 10%; height: 40px;"><strong> Attribute system name</strong></td>
+<td style="width: 10%; height: 40px;"><strong>Attribute type</strong></td>
+</tr>
+<tr style="height: 10px;">
+<td rowspan="5" style="height: 244px; width: 10%;"><em><span style="letter-spacing: 0.2px;">Vacation Requests</span></em> <br/><em><span style="letter-spacing: 0.2px;"><br/></span></em><em><span style="letter-spacing: 0.2px;"><br/></span></em><em><span style="letter-spacing: 0.2px;"> </span></em></td>
+<td style="width: 10%; height: 79px;"><em><span style="letter-spacing: 0.2px;">Notification template </span></em></td>
+<td style="width: 10%; height: 79px;"><em><span style="letter-spacing: 0.2px;"> message</span></em><em style="letter-spacing: 0.2px;"><span style="letter-spacing: 0.2px;">Template</span></em></td>
+<td style="width: 10%; height: 79px;"><strong>Text</strong></td>
+</tr>
+<tr style="height: 55px;">
+<td style="width: 10%; height: 55px;"><em>Employee's full name </em></td>
+<td style="width: 10%; height: 55px;"><em> </em><em style="letter-spacing: 0.2px;"><span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;">employeefullname</span></em></td>
+<td style="width: 10%; height: 55px;"><strong>Text</strong></td>
+</tr>
+<tr style="height: 55px;">
+<td style="width: 10%; height: 55px;"><em>Signing date </em></td>
+<td style="width: 10%; height: 55px;"><em>signingD</em><em style="letter-spacing: 0.2px;">ate</em></td>
+<td style="width: 10%; height: 55px;"><strong><span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;">Date &amp; time</span></strong></td>
+</tr>
+<tr style="height: 55px;">
+<td style="width: 10%; height: 55px;"><em>HR's full name</em></td>
+<td style="width: 10%; height: 55px;"><em> </em><em style="letter-spacing: 0.2px;">HRfullname</em></td>
+<td style="width: 10%; height: 55px;"><strong> Text</strong></td>
+</tr>
+<tr style="height: 129px;">
+<td style="width: 10%; height: 129px;"><em><span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;">Notification body</span></em></td>
+<td style="width: 10%; height: 129px;"><em>notificationbody</em></td>
+<td style="width: 10%; height: 129px;"><strong>Text</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="mcetoc_1h3uhi69u1">Instructions</h2>
+<ol class="colored_numbers_list">
+<li><span style="letter-spacing: 0.2px;">In the <em>Vacation Requests</em> template, place the <em>Notification template, Employee's full name, Signing date, HR's full name, </em>and <em><span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;">Notification body </span></em>attributes on the form. </span></li>
+<li>In the <em>Notification body</em> attribute properties, check the <strong>Auto calculate</strong> box.</li>
+<li>In the <strong>Calculated value</strong>, enter the following <a href="#mcetoc_1gtqijebq0"><strong>formula</strong></a>:
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code"><code>FORMAT($messageTemplate, LIST($employeefullname, $<em>signingD</em><em style="letter-spacing: 0.2px;">ate</em>, $HRfullname)) </code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="notice notice-info">
+<p class="admonition-title">Note</p>
+<p>Instead of calculating the attribute value, you can populate the message template using form rules or scenarios.</p>
+</div>
+</li>
+<li><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0.2px;">Create a record in the <em>Vacation Requests</em> template and fill in the <em>Notification template </em>field with the following text</span> </span> </span> </span>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">
+<p>Good day, <code>{0}</code>! <br/>Please come to the HR Director's office on <code>{1}</code> to sign the vacation leave paperwork. <br/>Sincerely, Human Resources Specialist <code>{2}</code><code></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Here the numbers in curly brackets <code>{0}</code> denote the placeholders to substitute with the <span style="letter-spacing: 0.2px;"><em>Employee's full name, Signing date, </em>and<em> HR's full name</em></span>.</p>
+</div>
+</li>
+<li>Fill in the <span style="letter-spacing: 0.2px;"><em>Employee's full name, Signing date, </em>and<em> HR's full name </em>on the form.</span></li>
+<li><span style="letter-spacing: 0.2px;">The <em><span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;">Notification body </span></em>field should now contain the message body filled with the data you filled in. </span></li>
+<li><span style="letter-spacing: 0.2px;">Use the resulting <em><span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;">Notification body</span></em> attribute value in the notification messages. </span></li>
+</ol>
+<h3 id="mcetoc_1gtqijebq0">Formula Syntax</h3>
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%; height: 176px;">
+<tbody>
+<tr style="height: 40px;">
+<th style="width: 50%; height: 40px;">Element</th>
+<th style="width: 50%; height: 40px;">Description</th>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;"><code>FORMAT(originalText, replacerTextList)</code></td>
+<td style="width: 50%; height: 40px;">
+<p>The <code>FORMAT()</code> function takes two arguments:</p>
+<ul>
+<li><code>originalText </code>— a string with numbered placeholders in curly braces: <code>{0}...{N}</code>. The placeholders are numbered from 0.<code></code></li>
+<li><code>replacerTextList</code> — an array of strings to replace the placeholders in the <code>originalText</code>.</li>
+</ul>
+<p>The <code>FORMAT()</code> function looks up the placeholders in the <code>originalText</code>, replaces them with the corresponding <code>replacerTextList</code> elements and returns the resulting string.</p>
+</td>
+</tr>
+<tr>
+<td style="width: 50%;"><code>LIST(argument1, ..., argumentN)</code></td>
+<td style="width: 50%;">
+<p>The <code>LIST()</code> function takes several arguments and returns an array of the argument values.</p>
+</td>
+</tr>
+<tr>
+<td style="width: 50%;"><code>$</code></td>
+<td style="width: 50%;">
+<p>The <code>$</code> prefix refers to an attribute system name in the current record context.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>

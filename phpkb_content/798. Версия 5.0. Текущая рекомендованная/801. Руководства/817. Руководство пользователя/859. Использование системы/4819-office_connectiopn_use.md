@@ -50,7 +50,4 @@ _![Переименование документа Р7-Офис в {{ productNam
 
 ***[Collabora Online. Настройка подключения][collabora_connection]***
 
-
-
- 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

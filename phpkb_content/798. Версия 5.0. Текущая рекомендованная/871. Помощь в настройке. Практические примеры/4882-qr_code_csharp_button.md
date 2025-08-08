@@ -11,8 +11,11 @@ kbId: 4882
 
 **2.** В том же шаблоне записи создайте ещё один атрибут с типом данных «Текст» (***QRcode***) и форматом отображения «HTML-текст». Установите флаг «Вычисляемый» и в поле «Вычисляемое выражение» вставьте следующую строку:
 
-| FORMAT("<img align='center'src='data:image/png;base64,{0}'width='60' height='60' frameborder='0'</img>",LIST($QRinbase)) |
-| --- |
+```
+
+FORMAT("<img align='center'src='data:image/png;base64,{0}'width='60' height='60' frameborder='0'</img>",LIST($QRinbase))
+
+```
 
 **где:**
 
@@ -21,6 +24,7 @@ kbId: 4882
 ***QRinbase*** — системное имя атрибута, созданного в п.1.
 
 Нам необходимо именно два атрибута, так как в первом будет храниться созданный QR-код в формате base64, а во втором — он же, но в формате изображения.
+
 **3.** В том же шаблоне записи создайте новую кнопку (***Сформировать QR-код***) со следующими параметрами:
 
 - Операция — C# скрипт;
@@ -29,8 +33,50 @@ kbId: 4882
 
 Во вкладке «Скрипт» вставьте следующее:
 
-| using System; using System.Collections.Generic; using System.Linq; using Comindware.Data.Entity; using Comindware.TeamNetwork.Api.Data.UserCommands; using Comindware.TeamNetwork.Api.Data; using RestSharp;   class Script {     public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)     {         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;         var link = Uri.EscapeDataString("https://yourinstance.comindware.net/#form/oa.1/form.2/" + userCommandContext.ObjectIds[0]);         byte[] AsBytes = new System.Net.WebClient().DownloadData             ("https://qrcode.tec-it.com/API/QRCode?size=small&data="+link);       string AsBase64String = Convert.ToBase64String(AsBytes);                 var data = new Dictionary<string, object>         {             { "QRinbase", AsBase64String }         };         Api.TeamNetwork.ObjectService.EditWithAlias("RecordTemplate", userCommandContext.ObjectIds[0], data);             var result = new UserCommandResult     {       Success = true,       Commited = true,       Messages = new[]       {         new UserCommandMessage         {           Severity = SeverityLevel.Normal,           Text = "QR-код сформирован"         }       }     };     return result;     } } |
-| --- |
+```
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Comindware.Data.Entity;
+using Comindware.TeamNetwork.Api.Data.UserCommands;
+using Comindware.TeamNetwork.Api.Data;
+using RestSharp;
+ 
+class Script
+{
+    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+    {
+        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+        var link = Uri.EscapeDataString("https://yourinstance.comindware.net/#form/oa.1/form.2/" + userCommandContext.ObjectIds[0]);
+        byte[] AsBytes = new System.Net.WebClient().DownloadData
+            ("https://qrcode.tec-it.com/API/QRCode?size=small&data="+link);
+      string AsBase64String = Convert.ToBase64String(AsBytes);
+       
+        var data = new Dictionary<string, object>
+        {
+            { "QRinbase", AsBase64String }
+        };
+        Api.TeamNetwork.ObjectService.EditWithAlias("RecordTemplate", userCommandContext.ObjectIds[0], data);
+       
+    var result = new UserCommandResult
+    {
+      Success = true,
+      Commited = true,
+      Messages = new[]
+      {
+        new UserCommandMessage
+        {
+          Severity = SeverityLevel.Normal,
+          Text = "QR-код сформирован"
+        }
+      }
+    };
+    return result;
+    }
+}
+
+```
 
 **где:**
 
@@ -42,7 +88,7 @@ kbId: 4882
 
 ***QR-код сформирован*** — текст сообщения для пользователя при успешном выполнении операции.
 
-**4.** В том же шаблоне записи вынесите атрибут, созданный в п.2, на нужную форму(ы). 
+**4.** В том же шаблоне записи вынесите атрибут, созданный в п.2, на нужную форму(ы).
 
 **5.** Вынесите кнопку, созданную в п.3, в нужное место: на форму(ы) или на область кнопок для форм.
 

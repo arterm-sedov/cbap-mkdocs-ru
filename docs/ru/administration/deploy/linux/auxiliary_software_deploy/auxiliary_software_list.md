@@ -123,6 +123,7 @@ kbId: 4582
 | [YamlDotNet](https://github.com/aaubry/YamlDotNet) | Библиотека .NET для YAML. | 11.0.0.0 | MIT License |
 | [zxing](https://github.com/zxing/zxing) | Библиотека для сканирования штрихкодов ZXing для Java в Android. | 0.16.8.0 | Apache 2.0 License |
 
+{% if adminGuideLinux %}
 ## Вспомогательное ПО для «Альт Сервер»
 
 Перечисленное ниже вспомогательное ПО используется для работы **{{ productName }}** под управлением ОС «Альт Сервер».
@@ -173,5 +174,6 @@ kbId: 4582
 | [nginx](http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.0/repository-base/) | Пакет зависимостей NGINX для установки nginx-core. | 1.18.0-6.1+ deb11u2 | BSD 2-Clause License |
 | [nginx-common](http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.0/repository-base/) | Зависимость NGINX — базовые файлы конфигурации, используемые всеми версиями NGINX. | 1.18.0-6.1+ deb11u2 | BSD 2-Clause License |
 | [nginx-core](http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.0/repository-base/) | Веб/прокси-сервер NGINX. | 1.18.0-6.1+ deb11u2 | BSD 2-Clause License |
+{% endif %}
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

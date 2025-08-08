@@ -7,8 +7,9 @@ kbId: 4988
 
 Для того, чтобы установить условие на отображение поля, если текущий пользователь входит в определенную группу (например, для возможности редактирования определенных полей записи только некоторым группам пользователей), введите следующее выражение:
 
-| EQUALS(USER(),(from a in db->\_AccountGroup where a->groupName == "Admins" select a->groupUsers->id)) |
-| --- |
+```
+ EQUALS(USER(),(from a in db->_AccountGroup where a->groupName == "Admins" select a->groupUsers->id))
+```
 
 **где:**
 

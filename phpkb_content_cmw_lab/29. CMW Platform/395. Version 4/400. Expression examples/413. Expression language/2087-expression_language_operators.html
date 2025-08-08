@@ -1,0 +1,66 @@
+<h1>List of Comindware Expression Language Operators</h1><p>This article provides the syntax and usage of operators in the CMW Platform Expression Language.</p>
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%; height: 400px;">
+<tbody>
+<tr style="height: 40px;">
+<th style="width: 50%; height: 40px;">from</th>
+<th style="width: 50%; height: 40px;"> </th>
+</tr>
+<tr style="height: 40px;">
+<td>Description</td>
+<td>
+<p>The query expression must begin with the <em><strong>from</strong> </em>operator. The query expression can also contain subqueries also starting with <strong><em>from</em></strong>. The <strong><em>from</em> </strong>operator consists of the following components:</p>
+<p>The data source which the request is made for (for example, record template, user database, etc.).<br/>A local variable that represents each element of the data source (for example, an entry in a template or a user account).</p>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;">Syntax</td>
+<td style="width: 50%; height: 40px;">from <em>variable</em> in <em>datasource</em></td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;">Arguments</td>
+<td style="width: 50%; height: 40px;">variable: local variable<br/>datasource: record template or user database</td>
+</tr>
+<tr style="height: 40px;">
+<th style="width: 50%; height: 40px;">where</th>
+<th style="width: 50%; height: 40px;"> </th>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;">Description</td>
+<td style="width: 50%; height: 40px;">The <em><strong>where</strong> </em>operator is used in a query expression and determines which elements from the data source will be returned. It applies a boolean condition (predicate) to each element of the source (represented by a local variable) and returns those elements for which the condition is true. A single query expression can contain multiple <em><strong>where</strong> </em>statements, and a single <em><strong>where</strong> </em>statement can contain multiple predicates.</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;">Syntax</td>
+<td style="width: 50%; height: 40px;">where <em>predicate</em></td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;">Arguments</td>
+<td style="width: 50%; height: 40px;">Predicate: A Boolean value or an expression that evaluates to a Boolean value.</td>
+</tr>
+<tr style="height: 40px;">
+<th style="width: 50%; height: 40px;">select</th>
+<th style="width: 50%; height: 40px;"> </th>
+</tr>
+<tr>
+<td style="width: 50%;">Description</td>
+<td style="width: 50%;">In a query expression, the <em><strong>select</strong> </em>operator determines which property of the object will be the result of the query. The final result takes into account both the work of previous operators and any expressions in the <em><strong>select</strong> </em>operator itself.</td>
+</tr>
+<tr>
+<td style="width: 50%;">Syntax</td>
+<td style="width: 50%;">Select <em>object_property</em></td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;">Arguments</td>
+<td style="width: 50%; height: 40px;">Object_property: record template attribute, database field, etc.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The following words cannot be used as local variables:</p>
+<ul>
+<li>item;</li>
+<li>source;</li>
+<li>db;</li>
+<li>group;</li>
+<li>any word that starts with an underscore (_).</li>
+</ul>

@@ -1,0 +1,172 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5108" kb-tags="N3,Notation 3,Notation3,RDF,атрибут типа «Запись»,доступ,иерархия,вычисление,коллекция,объединение,права,роли,список,таксономия,триплеты,тройка,тройки,фильтрация,запись,join" kb-title="Записи и коллекции. Объединение и фильтрация иерархических коллекций с помощью N3">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_collection_join_filter_hierarchy_intro">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_collection_join_filter_hierarchy_use_case">
+<span class="md-ellipsis">
+      Прикладная задача
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_collection_join_filter_hierarchy_initial_data">
+<span class="md-ellipsis">
+      Исходные данные
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_collection_join_filter_hierarchy_calculation">
+<span class="md-ellipsis">
+      Настройка вычислений
+    </span>
+</a>
+<nav aria-label="Настройка вычислений" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#1-вычисление-списка-поставщиков">
+<span class="md-ellipsis">
+      1. Вычисление списка поставщиков
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#2-фильтрация-для-роли">
+<span class="md-ellipsis">
+      2. Фильтрация для роли
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="example_n3_collection_join_filter_hierarchy_intro">Введение</h2>
+<p>Атрибут типа «<strong>Запись</strong>» хранит ID записей в связанном шаблоне (ссылки на них).</p>
+<p>Зачастую требуется предоставлять пользователю для выбора списки записей, объединённые из нескольких шаблонов и отфильтрованные по сложным правилам. Например, когда данные находятся в иерархически связанных справочниках.</p>
+<p>Здесь представлен пример формирования с помощью N3 списка поставщиков на основе трехуровневой иерархии товарных категорий и его фильтрации по данным текущего пользователя.</p>
+<h2 id="example_n3_collection_join_filter_hierarchy_use_case">Прикладная задача</h2>
+<p>Менеджер по закупкам подбирает поставщиков товаров. Для этого он создаёт запрос с указанием необходимой товарной категории.</p>
+<p>Система должна предложить менеджеру для выбора только тех поставщиков, которые работают с продукцией из указанной категории.</p>
+<p>Предусмотрено два типа категорий: общие — регламентированные для поставщика, внутренние — регламентированные для менеджера по закупкам.</p>
+<p>Для каждой внутренней категории указывается общая категория. Несколько внутренних категорий могут ссылаться на одну общую категорию.</p>
+<p>Внутренние категории классифицируются по трём иерархическим уровням. Если для третьего уровня не нашлось поставщиков, поиск должен идти по второму уровню, а затем — по первому.</p>
+<p>Кроме того, к запроса от менеджера должны иметь доступ только сотрудники поставщиков, указанных в запросе.</p>
+<h2 id="example_n3_collection_join_filter_hierarchy_initial_data">Исходные данные</h2>
+<p>Имеются шаблоны: <em>Категории</em>, <em>Поставщики</em>, <em>Контакты</em>, <em>Запросы</em>.</p>
+<p>В шаблоне записи <em>«Категории»</em> хранится справочник всех категорий.</p>
+<p>Атрибуты в шаблоне:</p>
+<ul>
+<li><em>Общая категория</em><ul>
+<li><strong>Описание:</strong> <em>Ссылка на запись общей категории</em></li>
+<li><strong>Тип данных: запись</strong></li>
+<li><strong>Связанный шаблон:</strong> <em>Категории</em></li>
+<li><strong>Хранить несколько значений:</strong> флажок снят</li>
+</ul>
+</li>
+</ul>
+<p>В шаблоне записи <em>«Поставщики»</em> хранится карточка клиента или партнера.</p>
+<p>Атрибуты в шаблоне:</p>
+<ul>
+<li><em>Товарные категории</em><ul>
+<li><strong>Описание:</strong> <em>Коллекция общих категорий, с которыми работает поставщик</em></li>
+<li><strong>Тип данных: запись</strong></li>
+<li><strong>Связанный шаблон:</strong> <em>Категории</em></li>
+<li><strong>Хранить несколько значений:</strong> флажок установлен</li>
+</ul>
+</li>
+<li><em>Контакты</em><ul>
+<li><strong>Описание:</strong> <em>Коллекция контактных лиц поставщика</em></li>
+<li><strong>Тип данных: запись</strong></li>
+<li><strong>Связанный шаблон:</strong> <em>Контакты</em></li>
+<li><strong>Хранить несколько значений:</strong> флажок установлен</li>
+</ul>
+</li>
+</ul>
+<p>В шаблоне записи <em>«Контакты»</em> хранится контактное лицо в организации.</p>
+<p>Атрибуты в шаблоне:</p>
+<ul>
+<li><em>Сотрудник</em><ul>
+<li><strong>Описание:</strong> <em>Ссылка на аккаунт сотрудника</em></li>
+<li><strong>Тип данных: аккаунт</strong></li>
+<li><strong>Связанный шаблон:</strong> <em>Сотрудники</em></li>
+<li><strong>Хранить несколько значений:</strong> флажок снят</li>
+</ul>
+</li>
+<li><em>Ответственный</em><ul>
+<li><strong>Описание:</strong> <em><code>True</code>, если сотрудник является ответственным менеджером для поставщика</em></li>
+<li><strong>Тип данных: логический</strong></li>
+</ul>
+</li>
+</ul>
+<p>В шаблоне записи <em>«Запросы»</em> выполняются основные вычисления.</p>
+<p>Атрибуты в шаблоне:</p>
+<ul>
+<li><em>Категория ур. 1</em>, <em>Категория ур. 2</em>, <em>Категория ур. 3</em><ul>
+<li><strong>Описание:</strong> <em>Ссылка на категорию уровня 1, 2 или 3 для потребности</em></li>
+<li><strong>Тип данных: запись</strong></li>
+<li><strong>Связанный шаблон:</strong> <em>Категории</em></li>
+<li><strong>Хранить несколько значений:</strong> флажок снят</li>
+</ul>
+</li>
+<li><em>Доступные поставщики</em><ul>
+<li><strong>Описание:</strong> <em>Список доступных поставщиков</em></li>
+<li><strong>Тип данных: запись</strong></li>
+<li><strong>Связанный шаблон:</strong> <em>Поставщик</em></li>
+<li><strong>Хранить несколько значений:</strong> флажок установлен</li>
+</ul>
+</li>
+</ul>
+<h2 class="pageBreakBefore" id="example_n3_collection_join_filter_hierarchy_calculation">Настройка вычислений</h2>
+<p>Логику можно разделить на две части:</p>
+<ol class="colored_numbers_list">
+<li>Сбор всех поставщиков по трём уровням категорий.</li>
+<li>Фильтрация полученного списка по текущему пользователю для настройки прав доступа.</li>
+</ol>
+<h3 id="1-вычисление-списка-поставщиков">1. Вычисление списка поставщиков</h3>
+<ol class="colored_numbers_list">
+<li>Откройте для редактирования форму шаблона <em>«Запросы»</em>.</li>
+<li>Поместите на форму атрибут <em>«Доступные поставщики»</em>.</li>
+<li>
+<p>Настройте свойства поля <em>«Доступные поставщики»</em>:</p>
+<ul>
+<li><strong>Представление: раскрывающийся список</strong></li>
+<li><strong>Доступ: разрешить ввод</strong></li>
+<li><strong>Фильтр: N3</strong></li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем префиксы для работы со списками и объектами</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">list:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/2000/10/swap/list#&gt;</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Убедитесь, что системные имена соответствуют именам в вашем приложении.</span></code> <br/><code>    <span class="c"># Получаем атрибуты для дальнейших вычислений</span></code> <br/><code>    <span class="p">(</span><span class="s">"Поставщики"</span> <span class="s">"Товарныекатегории"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findAttribute</span> <span class="err">?CounterpartyCategoriesAttribute</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Запросы"</span> <span class="s">"Категорияур3"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findAttribute</span> <span class="err">?RequestCategoryLevel</span><span class="mi">3</span><span class="err">Attribute</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Запросы"</span> <span class="s">"Категорияур2"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findAttribute</span> <span class="err">?RequestCategoryLevel</span><span class="mi">2</span><span class="err">Attribute</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Запросы"</span> <span class="s">"Категорияур1"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findAttribute</span> <span class="err">?RequestCategoryLevel</span><span class="mi">1</span><span class="err">Attribute</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Категории"</span> <span class="s">"Общаякатегория"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findAttribute</span> <span class="err">?CommonCategoryAttribute</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Собираем коллекцию поставщиков, работающих с требуемой категорией третьего уровня</span></code> <br/><code>    <span class="c"># для текущей потребности (?item).</span></code> <br/><code>    <span class="err">from</span> <span class="p">{</span></code> <br/><code>        <span class="err">?item</span> <span class="err">?RequestCategoryLevel</span><span class="mi">3</span><span class="err">Attribute</span> <span class="err">?RequestCategoryLevel</span><span class="mi">3</span><span class="p">.</span></code> <br/><code>        <span class="c"># Получаем общую категорию для выбранной категории уровня 3.</span></code> <br/><code>        <span class="err">?RequestCategoryLevel</span><span class="mi">3</span> <span class="err">?CommonCategoryAttribute</span> <span class="err">?CommonCategory</span><span class="mi">3</span><span class="p">.</span></code> <br/><code>        <span class="c"># Ищем всех поставщиков (?Counterparties3), у которых товарная категория</span></code> <br/><code>        <span class="c"># совпадает с общей категорией (?CommonCategory3).</span></code> <br/><code>        <span class="err">?Counterparties</span><span class="mi">3</span> <span class="err">?CounterpartyCategoriesAttribute</span> <span class="err">?CommonCategory</span><span class="mi">3</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">select</span> <span class="err">?Counterparties</span><span class="mi">3</span> <span class="err">-&gt;</span> <span class="err">?Counterparties</span><span class="mi">3</span><span class="err">List</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Собираем коллекцию поставщиков, работающих с требуемой категорией второго уровня.</span></code> <br/><code>    <span class="err">from</span> <span class="p">{</span></code> <br/><code>        <span class="err">?item</span> <span class="err">?RequestCategoryLevel</span><span class="mi">2</span><span class="err">Attribute</span> <span class="err">?RequestCategoryLevel</span><span class="mi">2</span><span class="p">.</span></code> <br/><code>        <span class="err">?RequestCategoryLevel</span><span class="mi">2</span> <span class="err">?CommonCategoryAttribute</span> <span class="err">?CommonCategory</span><span class="mi">2</span><span class="p">.</span></code> <br/><code>        <span class="err">?Counterparties</span><span class="mi">2</span> <span class="err">?CounterpartyCategoriesAttribute</span> <span class="err">?CommonCategory</span><span class="mi">2</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">select</span> <span class="err">?Counterparties</span><span class="mi">2</span> <span class="err">-&gt;</span> <span class="err">?Counterparties</span><span class="mi">2</span><span class="err">List</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Собираем коллекцию поставщиков, работающих с требуемой категорией первого уровня.</span></code> <br/><code>    <span class="err">from</span> <span class="p">{</span></code> <br/><code>        <span class="err">?item</span> <span class="err">?RequestCategoryLevel</span><span class="mi">1</span><span class="err">Attribute</span> <span class="err">?RequestCategoryLevel</span><span class="mi">1</span><span class="p">.</span></code> <br/><code>        <span class="err">?RequestCategoryLevel</span><span class="mi">1</span> <span class="err">?CommonCategoryAttribute</span> <span class="err">?CommonCategory</span><span class="mi">1</span><span class="p">.</span></code> <br/><code>        <span class="err">?Counterparties</span><span class="mi">1</span> <span class="err">?CounterpartyCategoriesAttribute</span> <span class="err">?CommonCategory</span><span class="mi">1</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">select</span> <span class="err">?Counterparties</span><span class="mi">1</span> <span class="err">-&gt;</span> <span class="err">?Counterparties</span><span class="mi">1</span><span class="err">List</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Объединяем коллекции поставщиков категорий второго и третьего уровней.</span></code> <br/><code>    <span class="p">(</span><span class="err">?Counterparties</span><span class="mi">3</span><span class="err">List</span> <span class="err">?Counterparties</span><span class="mi">2</span><span class="err">List</span><span class="p">)</span> <span class="nn">list</span><span class="p">:</span><span class="nt">append</span> <span class="err">?Counterparties</span><span class="mi">32</span><span class="err">List</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Объединяем коллекции поставщиков категорий первого, второго и третьего уровней.</span></code> <br/><code>    <span class="p">(</span><span class="err">?Counterparties</span><span class="mi">32</span><span class="err">List</span> <span class="err">?Counterparties</span><span class="mi">1</span><span class="err">List</span><span class="p">)</span> <span class="nn">list</span><span class="p">:</span><span class="nt">append</span> <span class="err">?RequestCounterpartiesList</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Возвращаем итоговую коллекцию категорий</span></code> <br/><code>    <span class="err">?RequestCounterpartiesList</span> <span class="nn">list</span><span class="p">:</span><span class="nt">member</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+</ol>
+<h3 id="2-фильтрация-для-роли">2. Фильтрация для роли</h3>
+<p>Чтобы предоставить доступ к запросам только ответственным сотрудникам указанных в запросе поставщиков в роль добавить тройку в фильтр аккаунтов для шаблона Запросы.</p>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем префиксы для работы со списками и объектами</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">list:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/2000/10/swap/list#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Убедитесь, что системные имена соответствуют именам в вашем приложении.</span></code> <br/><code>    <span class="c"># Получаем атрибут «Доступные поставщики» из предыдущего вычисления</span></code> <br/><code>    <span class="p">(</span><span class="s">"Запросы"</span> <span class="s">"Доступныепоставщики"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findAttribute</span> <span class="err">?RequestCounterpartiesList</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Получаем атрибуты для проверки связи поставщиков с текущим пользователем.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Поставщики"</span> <span class="s">"Контакты"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findAttribute</span> <span class="err">?ContactsAttribute</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Контакт"</span> <span class="s">"Ответственный"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findAttribute</span> <span class="err">?IsResponsibleAttribute</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Контакт"</span> <span class="s">"Сотрудник"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findAttribute</span> <span class="err">?EmployeeAttribute</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Получаем аккаунт текущего пользователя</span></code> <br/><code>    <span class="nn">cmw</span><span class="p">:</span><span class="nt">securityContext</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">currentUser</span> <span class="err">?user</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Отбираем поставщиков,</span></code> <br/><code>    <span class="c"># у которых текущий пользователь является ответственным</span></code> <br/><code>    <span class="c"># по текущему запросу.</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?RequestCounterpartiesList</span> <span class="err">?RequestCounterparties</span><span class="p">.</span></code> <br/><code>    <span class="err">?RequestCounterparties</span> <span class="err">?ContactsAttribute</span> <span class="err">?Contacts</span><span class="p">.</span></code> <br/><code>    <span class="err">?Contacts</span> <span class="err">?IsResponsibleAttribute</span> <span class="l">true</span><span class="p">.</span></code> <br/><code>    <span class="err">?Contacts</span> <span class="err">?EmployeeAttribute</span> <span class="err">?user</span><span class="p">.</span></code> <br/><code>    <span class="c"># Возвращаем текущего пользователя, </span></code> <br/><code>    <span class="c"># если ему разрешено работать с текущим запросом.</span></code> <br/><code>    <span class="err">?user</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>
