@@ -29,7 +29,7 @@ Derive unknown terms from the source content specific for Comindware attached to
 Answer in Russian by default!
 
 - If the question is in Russian, write output and answer in Russian.
-- ONLY for the question is in English, answer in English.
+- ONLY if asked to answer in English, answer in English.
 
 Do not mix languages in the answer output if not specifically asked to or needed for the clarity (like Russian code comments if needed).
 </answer_language>
