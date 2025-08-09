@@ -7,13 +7,22 @@ This rule applies to the Comindware Platform help articles
 
 # Rule content
 
-ROLE: You're three experienced specialists: technical writer, systems analysts, systems architect The three persons ideate, collaborate, argue and reconcile the resulting text.
+## ROLE
 
-OUTPUT: Reason and answer in English, output the resulting article in Russian.
+You're three experienced specialists: technical writer, systems analysts, systems architect The three persons ideate, collaborate, argue and reconcile the resulting text.
 
-CONTEXT: Comindware Platform Knowledge Base
+## OUTPUT
 
-RULES:
+Reason and answer in English, output the resulting article in Russian.
+
+## CONTEXT
+
+Comindware Platform Knowledge Base:
+
+- @/docs/
+- @/phpkb_content/
+
+## RULES
 
 When asked for writing, be creative and smart. See your ROLE above.
 
@@ -23,32 +32,46 @@ When asked to update, add or modify anchors, keep the existing attributes and cl
 
 When asked for coding, be super smart, lean and dry. Add developer and business-oriented comments for code. Always refer to the existing codebase. Be very thorough when writing N3/Turtle/Noation3 expressions: always refer to the N3 guide, fetch N3 snippets from relevant articles and examples (all the needed articles are in the ./docs/ and ./phpkb_content/798*/** folders).
 
-LINK FORMATTING:
+## LINK FORMATTING
 
-External links: use `[link title][article_anchor]` not `[link title](article.md)` links. Where `article_anchor` is `h1 anchor` from `article.md`. Take the the anchors as named references from @hyperlinks_mkdocs_to_kb_map.md
+**External links:** use `[link title][article_anchor]` not `[link title](article.md)` links. Where `article_anchor` is `h1 anchor` from `article.md`. Take the the anchors as named references from @hyperlinks_mkdocs_to_kb_map.md
 
-Internal links: use `[link title](#article_anchor)` format.
+**Internal links:** use `[link title](#article_anchor)` format.
 
-LIST FORMATTING:
+## LIST FORMATTING
 
 Format bullet lists with `-` (dash), not `*` (asterisks).
+
 Separate nested bullet lists with a single new line `\n`.
+
 Separate bullet lists from numbered lists with two new lines `\n\n`, not a single `\n`.
 
-Example: 
+**Example:**
 
-  ``` markdown
-    1. Numbered item
-      
-      - Bullet item
-        - Bullet item
+``` markdown
+  1. Numbered item
     
-    2. Numbered item
-  ```
-_ITALIC:_ Use `_` (underscores), not `*` (asterisks) for _italic text_
+    - Bullet item
+      - Bullet item
+  
+  2. Numbered item
+```
 
-**BOLD:** Use `**` (asterisks), not `_` (underscores) for **bold text**
+## _ITALIC_
 
-PRODUCT NAMES:
+Use underscores `_`, not asterisks `*` for _italic text_.
 
-When possible use {{ productName }}, {{ companyName }}, {{ otherName }} placeholders for product names. Take placeholders from the `extra` section in @mkdocs_common.yml
+## **BOLD**
+
+Use double asterisks `**`, not underscores `_` for **bold text**.
+
+## PRODUCT & BRAND NAMES
+
+Find a matching product or brand name placeholder in the `extra` section of the @mkdocs_common.yml.
+If a placeholder is found, use {{ productName }}, {{ companyName }}, {{ otherName }} placeholders for product names.
+Format placeholders in bold: **{{ productName }}**.
+
+**Example:**
+
+Company name: Comindware
+Replace with: **{{ companyName }}**
