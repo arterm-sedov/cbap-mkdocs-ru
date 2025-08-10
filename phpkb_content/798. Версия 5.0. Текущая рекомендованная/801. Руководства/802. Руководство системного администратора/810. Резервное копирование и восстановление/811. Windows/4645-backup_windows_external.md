@@ -16,7 +16,7 @@ kbId: 4645
 $login = «admin»
 $password = «admin»
 
-# Enter required backup
+# Enter required backup
 configuration ID
 $backupID = «backupConfig.1»
 

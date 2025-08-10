@@ -1,28 +1,43 @@
 ---
-title: Восстановление базы данных из файла резервной копии в формате .CDBBZ
+title: Восстановление базы данных из файла резервной копии в формате CDBBZ
 kbId: 4647
 ---
 
-# Восстановление базы данных из файла резервной копии в формате .CDBBZ
+# Восстановление базы данных из файла резервной копии в формате CDBBZ
 
 ## Введение
 
 Здесь представлены инструкции по восстановлению базы данных **{{ productName }}** для следующего сценария:
 
 - используется ранее настроенный экземпляр ПО **{{ productName }}** под управлением ОС Linux;
-- имеется файл резервной копии базы данных с расширением `.CDBBZ`;
+- имеется файл резервной копии базы данных с расширением `.CDBBZ` (архив резервной копии);
 - резервная копия создана с помощью встроенной в ПО функции «**Резервное копирование**» (см. *«[Резервное копирование. Настройка и запуск, просмотр журнала сеансов][backup_configure]»*);
 - индексы OpenSearch (Elasticsearch) восстанавливаются отдельно от восстановления базы данных экземпляра ПО.
 
 Прежде чем приступать к восстановлению экземпляра ПО **{{ productName }}** из резервной копии, ознакомьтесь с видеороликом и инструкциями, представленными ниже.
 
-### Видеоинструкция
+## Порядок восстановления
 
-Ссылка на видеоролик: <https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/restore_complete_backup_linux.mp4>
+1. Восстановите [базу данных и скрипты](#backup_restore_cdbbz_db_scripts).
+2. При необходимости восстановите [лицензионные ключи](#backup_restore_cdbbz_license_keys).
+3. При необходимости восстановите [индексы OpenSearch (Elasticsearch)](#backup_restore_cdbbz_indexes).
 
-[
+Фактические пути и имена файлов
 
-](https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/restore_complete_backup_linux.mp4)
+При выполнении инструкций будьте внимательны: указывайте фактические имена файлов и пути, которые используются в вашей системе.
+
+Такие имена указаны в угловых скобках, например:
+
+- `<backupName>.cdbbz` — имя файла резервной копии в формате CDBBZ;
+- `<Database>` — директория базы данных экземпляра ПО (например, `/var/lib/comindware/<instanceName>/Database`);
+- `<instanceName>` — имя экземпляра ПО, для которого выполняется восстановление;
+- `<instanceName>.yml` — файл конфигурации экземпляра ПО;
+- `<path/to>` — путь к директории или файлу в вашей системе; замените на фактический путь согласно своей структуре каталогов.
+- `<Scripts>` — директория, содержащая C#-скрипты экземпляра ПО;
+- `<serviceName>` — имя службы, которую требуется проверить или остановить (например, `comindware<instanceName>`,`apigateway<instanceName>`, `adapterhost<instanceName>`);
+- `<user>` — имя пользователя, в домашней директории которого находится файл резервной копии;
+
+См. *«[Пути и содержимое директорий экземпляра ПО][paths]»*.
 
 ## Восстановление базы данных и скриптов
 
@@ -49,19 +64,11 @@ kbId: 4647
 3. Остановите службу adapterhost:
 
    ```
-   ps -fax | grep <instanceName> | grep Agent
-   kill -9 $(ps -eo pid,args | grep <instanceName> | grep Agent | awk {'print $1'})
-
-   ```
-
-   или
-
-   ```
    systemctl stop adapterhost<instanceName>
 
    ```
 4. С помощью команды `systemctl status <serviceName>` удостоверьтесь, что службы остановлены.
-5. Перейдите в директорию с резервной копией, например `/home/<user>`
+5. Перейдите в директорию с CDBBZ-файлом резервной копии, например `/home/<user>`:
 
    ```
    cd /home/<user>
@@ -86,28 +93,33 @@ kbId: 4647
    ls
 
    ```
-9. После распаковки архива в директории быть 3 директории: `Database`, `Scripts`, `Streams`.
+9. Архив будет распакован в несколько директорий.
 
-   Примечание
+   Фактический набор директорий
 
-   Если в распакованной резервной копии имеется директория `Ignite` вместо `Database`, переименуйте её в `Database`:
+   В дальнейших инструкциях используются директории `Database`, `Scripts` и `Streams`.
 
-   ```
-   mv Ignite Database
+   - В архиве всегда имеется директория `Database` с резервной копией базы данных.
+   - Если в резервной копии нет директорий `Scripts` и `Streams`, пропускайте связанные с ними инструкции.
+   - Если в резервной копии имеется директория `History` с данными OpenSearch (Elasticsearch), их следует восстанавливать средствами OpenSearch (Elasticsearch). См. *«[Восстановление индексов OpenSearch (Elasticsearch) из файла резервной копии репозитория](#backup_restore_cdbbz_indexes)»*.
+10. Для восстановления резервной копии используйте пути, указанные в следующих директивах YML-файла конфигурации экземпляра ПО `/usr/share/comindware/configs/instance/<instanceName>.yml`:
 
-   ```
-10. Для восстановления резервной копии используйте следующие параметры из YML-файла конфигурации экземпляра ПО `/usr/share/comindware/configs/instance/<instanceName>.yml`:
+    - `db.workDir: <path/to/Database>` — путь к директории базы данных;
+    - `userStorage.localDisk.path: <path/to/Streams>` — путь к директории пользовательских файлов.
 
-    `databasePath: <path/to/Database>` — путь к директории базы данных;
-    `userStorage.localDisk.path: <path/to/Streams>` — путь к директории пользовательских файлов;
+    Восстановление резервной копии на другом экземпляре ПО
 
-    Просмотрите откройте файл конфигурации с помощью следующей команды:
+    При создании экземпляра ПО база данных привязывается к имени, которое указано в директиве `db.name` (имя базы данных) файла конфигурации `<instanceName>.yml`.
+
+    Если вы восстанавливаете резервную копию на новом экземпляре ПО, необходимо убедиться, что в YML-файле конфигурации задано такое же значение `db.name`, как у экземпляра ПО, на котором была создана резервная копия.
+
+    Просмотрите файл конфигурации с помощью следующей команды:
 
     ```
     cat /usr/share/comindware/configs/instance/<instanceName>.yml
 
     ```
-11. Убедитесь в наличии директорий `<path/to/Database>` и `<path/to/Streams>`:
+11. Убедитесь в наличии директорий `<Database>` и `<Streams>`, указанных в YML-файле конфигурации:
 
     ```
     ls -lh <path/to/Database>
@@ -115,14 +127,21 @@ kbId: 4647
 
     ```
 
+    - Если папки присутствуют, удалите их содержимое:
+
+      ```
+      rm -rf <path>/Database/*
+      rm -rf <path>/Streams/*
+
+      ```
     - Если папки отсутствуют, создайте их:
 
       ```
-      mkdir -p <path/to/Database>
-      mkdir -p <path/to/Streams>
+      mkdir -p <path>/Database
+      mkdir -p <path>/Streams
 
       ```
-12. Перейдите в директорию распакованной резервной копии (например, `/home/<user>/temp/`).
+12. Перейдите в директорию распакованной резервной копии (например, `/home/<user>/tmp/`).
 13. Переместите директорию `Scripts` в `Database`:
 
     ```
@@ -139,13 +158,13 @@ kbId: 4647
 15. Назначьте перенесённым директориям права `rwxrw-rw-`:
 
     ```
-    chmod -R 766 <path/to/Database/folder> <path/to/Streams> /var/lib/comindware/<instanceName>
+    chmod -R 766 <path/to/Database> <path/to/Streams> /var/lib/comindware/<instanceName>
 
     ```
 16. Назначьте перенесенным директориям владельца:
 
     ```
-    chown -R <User>:<Group> <path/to/database/folder> <path/to/streams/folder> /var/lib/comindware/<instanceName>
+    chown -R <User>:<Group> <path/to/Database> <path/to/Streams> /var/lib/comindware/<instanceName>
 
     ```
 
@@ -174,9 +193,9 @@ kbId: 4647
 19. Запустите службы экземпляра ПО и проверьте их статус:
 
     ```
+    systemctl start adapterhost<instanceName>
     systemctl start comindware<instanceName>
     systemctl start apigateway<instanceName>
-    systemctl start adapterhost<instanceName>
 
     ```
 
@@ -198,6 +217,14 @@ kbId: 4647
     ```
 
 ## Восстановление лицензионных ключей
+
+Внимание!
+
+Лицензионные ключи привязаны к имени экземпляра ПО (`<instanceName>`) и уникальному идентификатору оборудования сервера (Hardware ID).
+
+Поэтому восстановление возможно только на том же сервере, на котором была создана резервная копия.
+
+При развёртывании на новом оборудовании необходимо заново выполнить активацию лицензионных ключей.
 
 Чтобы использовать на восстановленном экземпляре ПО прежние лицензионные ключи, выполните указанные ниже действия.
 
@@ -279,7 +306,7 @@ OpenSearch (Elasticsearch) сохраняет и восстанавливает 
    - **С авторизацией в OpenSearch (Elasticsearch):**
 
      ```
-     curl -X PUT "https://<openSearchHost>:9200/_snapshot/<repository_backup>?pretty" \\
+     curl -X PUT "https://<openSearchHost>:<opeSearchPort>/_snapshot/<repository_backup>?pretty" \\
      -u <username>:<password> \\
      -H 'Content-Type: application/json' -d \\
      '{
@@ -293,7 +320,7 @@ OpenSearch (Elasticsearch) сохраняет и восстанавливает 
    - **Без авторизации в OpenSearch (Elasticsearch):**
 
      ```
-     curl -X PUT "https://<openSearchHost>:9200/_snapshot/<repository_backup>?verify=false&pretty" \\
+     curl -X PUT "https://<openSearchHost>:<opeSearchPort>/_snapshot/<repository_backup>?verify=false&pretty" \\
      -H 'Content-Type: application/json' -d \\
      '{
          "type": "fs",
@@ -316,36 +343,36 @@ OpenSearch (Elasticsearch) сохраняет и восстанавливает 
 8. Проверьте содержимое зарегистрированного репозитория:
 
    ```
-   curl -X GET "https://<openSearchHost>:9200/_snapshot/<repository_backup>?pretty"
+   curl -X GET "https://<openSearchHost>:<opeSearchPort>/_snapshot/<repository_backup>?pretty"
 
    ```
 9. Восстановите снимок OpenSearch (Elasticsearch):
 
    ```
-   curl -X POST "https://<openSearchHost>:9200/_snapshot/<repository_backup>/<backupsessionXX>/_restore?pretty"
+   curl -X POST "https://<openSearchHost>:<opeSearchPort>/_snapshot/<repository_backup>/<backupsessionXX>/_restore?pretty"
 
    ```
 
    - В качестве репозитория укажите имя репозитория, созданного на шаге 7, или префикс индекса OpenSearch (Elasticsearch) при восстановлении из хранилища S3 (см. [примечание](#s3_repository) выше).
-   - В качестве имени снимка укажите идентификатор резервной копии **без точки перед номером и строчными буквами** (например, `backupSession.123` указывайте как `backupsession123`) со страницы [«Администрирование» – «Инфраструктура» – «Резервное копирование» – «Журнал»](../configure.html#backup_configure_sessions_list).
+   - В качестве имени снимка укажите идентификатор резервной копии **без точки перед номером и строчными буквами** (например, `backupSession.123` указывайте как `backupsession123`) со страницы [«Администрирование» – «Инфраструктура» – «Резервное копирование» – «Журнал»](../configure.html#backup_configure_sessions_list "Просмотр списка сеансов резервного копирования").
 10. Проверьте наличие индексов в восстановленном каталоге:
 
     ```
-    curl -X GET "https://<openSearchHost>:9200/_cat/indices?pretty"
+    curl -X GET "https://<openSearchHost>:<opeSearchPort>/_cat/indices?pretty"
 
     ```
 
 --8<-- "related_topics_heading.md"
 
-- *[Резервное копирование. Настройка и запуск, просмотр журнала сеансов][backup_configure]*
-- *[Установка, запуск, инициализация и остановка ПО][deploy_guide_linux]*
-- *[Пути и содержимое директорий экземпляра ПО][paths]*
-- *[Проверка и настройка конфигурации экземпляра ПО {{ productName }} после восстановления из резервной копии][restore_test_configure]*
-- *[Регистрация репозитория OpenSearch (Elasticsearch) (официальное руководство, английский язык)](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-filesystem-repository.html)*
-- *[Восстановление снимка OpenSearch (Elasticsearch) (официальное руководство, английский язык)](https://www.elastic.co/guide/en/elasticsearch/reference/current/restore-snapshot-api.html)*
-- *[OpenSearch (Elasticsearch). Настройка подключения][elasticsearch_connection]*
-- *[Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО][complete_running_instance_backup]*
-- *[Восстановление базы данных, вложенных файлов и журналов из полной резервной копии][restore_complete_backup]*
-- *[Лицензирование. Активация, назначение, отзыв и продление лицензий][licensing]*
+- [Резервное копирование. Настройка и запуск, просмотр журнала сеансов][backup_configure]
+- [Установка, запуск, инициализация и остановка ПО][deploy_guide_linux]
+- [Пути и содержимое директорий экземпляра ПО][paths]
+- [Проверка и настройка конфигурации экземпляра ПО {{ productName }} после восстановления из резервной копии][restore_test_configure]
+- [Регистрация репозитория OpenSearch (Elasticsearch) (официальное руководство, английский язык)](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-filesystem-repository.html)
+- [Восстановление снимка OpenSearch (Elasticsearch) (официальное руководство, английский язык)](https://www.elastic.co/guide/en/elasticsearch/reference/current/restore-snapshot-api.html)
+- [OpenSearch (Elasticsearch). Настройка подключения][elasticsearch_connection]
+- [Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО][complete_running_instance_backup]
+- [Восстановление базы данных, вложенных файлов и журналов из полной резервной копии][restore_complete_backup]
+- [Лицензирование. Активация, назначение, отзыв и продление лицензий][licensing]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

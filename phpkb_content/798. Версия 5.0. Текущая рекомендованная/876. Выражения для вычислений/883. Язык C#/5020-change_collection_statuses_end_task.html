@@ -3,7 +3,7 @@
 <table class="source_code_container">
 <tbody>
 <tr>
-<td class="source_code"> 
+<td class="source_code"> 
 <p>using System;<br/>using System.Collections.Generic;<br/>using System.Linq;<br/>using Comindware.Data.Entity;<br/>using Comindware.TeamNetwork.Api.Data.UserCommands;<br/>using Comindware.TeamNetwork.Api.Data;<br/>public class Script<br/>{<br/>    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)<br/>    {<br/>        var objectId = userCommandContext.ObjectIds.FirstOrDefault();<br/>        var data = Api.TeamNetwork.ObjectService.GetWithAlias("Register", objectId);<br/>        object[] Applications = data["Applications"] as object[];<br/>        var allApplications = new List&lt;string&gt;();</p>
 <p>        foreach (var app in Applications)<br/>        {<br/>            var apps = app as string;<br/>            allApplications.Add(apps);<br/>        }</p>
 <p>        var LevelRef = data["RegisterLevel"];<br/>        var Level = Api.TeamNetwork.ObjectService.GetWithAlias("RegisterLevels", LevelRef as string);<br/>        var LevelNum = (decimal)Level["Level"];</p>

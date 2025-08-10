@@ -190,7 +190,7 @@ _![Содержимое файла integration_raw.log](integrations_log_content
 --8<-- "related_topics_heading.md"
 
 - _[Синхронизация с веб-сервисом. Настройка подключения][odata_connection]_
-- _[Журнал сеансов синхронизации по OData][logs_odata_inegration]_
+- _[Журнал сеансов синхронизации по OData][logs_odata_integration]_
 - _[Интеграция с 1С по OData. Настройка для импорта данных][1c_integrations]_
 - _[Использование выражений фильтров в URI для OData][odata-filter-syntax] (учебник Microsoft, английский язык)_
 

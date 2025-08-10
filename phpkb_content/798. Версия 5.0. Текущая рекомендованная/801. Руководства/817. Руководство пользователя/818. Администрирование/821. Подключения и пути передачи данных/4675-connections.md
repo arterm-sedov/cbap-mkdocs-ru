@@ -10,23 +10,25 @@ kbId: 4675
 - **Подключения** используются для интеграции и обмена данными между **{{ productName }}** и внешними системами.
 - **Подключение** обеспечивает физическую передачу данных между системами.
 - Для обмена данными требуется настроить **подключение** и **путь передачи данных**, который обеспечивает преобразование данных между системами. См. *«[Пути передачи данных. Определения, типы, создание, настройка, удаление][communication_routes]».*
-- Одно **подключение** можно использовать для нескольких **путей передачи данных**, чтобы не настраивать общие параметры, такие как URL-адрес, учетные данные, ключ API и т. п.
+- Одно **подключение** можно использовать для нескольких **путей передачи данных**, чтобы не настраивать общие параметры, такие как URL-адрес, учетные данные, ключ API и т. п.
 
-См. также *[Примеры интеграций](https://kb.comindware.ru/category.php?id=875)*.
+См. также:
+
+- *[Примеры интеграций](https://kb.comindware.ru/category.php?id=875)*
+- *[Интеграция с внешними системами. Общие рекомендации][integration_recomendations]*
 
 ## Типы подключений
 
 ### Системные подключения
 
 - [Управление версиями через Git][git_connection]
-- [Elasticsearch][elasticsearch_connection]
+- [OpenSearch (Elasticsearch)][elasticsearch_connection]
 - Абстрактное подключение
 - [Карты][map_configure]
 - [Хранилище S3][s3_connection]
 
 ### Аутентификация
 
-- [Аутентификация через WS-Federation][wsfederation_connection]
 - [Аутентификация через OpenID Connect][openid_connection]
 - [Active Directory][ad_connection]
 
@@ -37,11 +39,11 @@ kbId: 4675
 
 ### Подключения к электронной почте
 
-- [Получение эл. почты в процессе][process_receiving_connection]
-- [Отправка эл. почты из процесса][process_sending_connection]
-- [Получение эл. почты через Exchange][scenario_receive_email]
-- [Отправка эл. почты через Exchange][scenario_send_email]
-- [Получение эл. почты через IMAP][scenario_receive_email]
+- [Получение эл. почты в процессе][process_receiving_connection]
+- [Отправка эл. почты из процесса][process_sending_connection]
+- [Получение эл. почты через Exchange][scenario_receive_email]
+- [Отправка эл. почты через Exchange][scenario_send_email]
+- [Получение эл. почты через IMAP][scenario_receive_email]
 - [Отправка почты через SMTP][scenario_send_email]
 
 ### Подключения REST и OData
@@ -54,8 +56,8 @@ kbId: 4675
 
 ### Подключения к шине сообщений
 
-- Отправка сообщений через Kafka
-- [Получение сообщений через Kafka][kafka_connection]
+- Отправка сообщений через Apache Kafka
+- [Получение сообщений через Apache Kafka][kafka_connection]
 - Отправка сообщений через MSMQ
 - Получение сообщений через MSMQ
 - Отправка сообщений через RabbitMQ
@@ -99,7 +101,8 @@ _![Список подключений](/platform/v5.0/administration/connection
 
 --8<-- "related_topics_heading.md"
 
-- *[Пути передачи данных. Определения, типы, создание, настройка, удаление][communication_routes]*
-- *[Примеры интеграций](https://kb.comindware.ru/category.php?id=875)*
+- [Пути передачи данных. Определения, типы, создание, настройка, удаление][communication_routes]
+- [Примеры интеграций](https://kb.comindware.ru/category.php?id=875)
+- [Интеграция с внешними системами. Общие рекомендации][integration_recomendations]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

@@ -1,9 +1,10 @@
 ---
-description: Commit rule
-alwaysApply: true
+description: Apply this rule to git commit messages.
 ---
 
-This rule applies to commit messages.
+This rule applies to git commit messages in the version control pane and in the terminal.
+
+Generate the commit message text, but do no add files, stage or push the commit.
 
 # Commit Message Rule
 
@@ -17,7 +18,12 @@ This rule applies to commit messages.
 
 **Algorithm:**
 
-1. Get current branch name, eg. `12345_branch_name`.
+1. Get current branch name, eg. `12345_branch_name`:
+
+``` sh
+git rev-parse --abbrev-ref HEAD
+```
+
 2. Extract the first sequence of digits (usually up to the `_` character), eg. `12345`.
 3. Find a previous commit message if the branch name has no issue number. Previous commit message might already contain the right [#XXXXX] pattern.
 4. Use the issue number in square brackets with a `#` at the start of the commit message (no spaces inside the brackets).

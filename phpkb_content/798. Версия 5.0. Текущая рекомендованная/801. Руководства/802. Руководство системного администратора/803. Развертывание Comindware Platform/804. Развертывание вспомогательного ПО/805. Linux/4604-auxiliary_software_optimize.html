@@ -35,7 +35,7 @@
 <li>Откройте файл <code>/var/www/instancename/Ignite.config</code>, где <code>instancename</code> — имя экземпляра ПО.</li>
 <li>Найдите раздел <code>&lt;bean class="org.apache.ignite.configuration.DataRegionConfiguration"&gt;</code> в разделе <code>dataRegionConfigurations</code>, содержащий директиву <code>&lt;property name="persistenceEnabled" value="true" /&gt;</code>.</li>
 <li>Внутри этого раздела найдите директиву <code>property name="maxSize"</code>.</li>
-<li>Установите требуемый размер области памяти, например 8 ГБ:
+<li>Установите требуемый размер области памяти, например 8 ГБ:
 <pre tabindex="0"><code>&lt;property name="maxSize" value="#{8L * 1024 * 1024 * 1024}" /&gt;        </code></pre>
 </li>
 <li>Перезапустите экземпляр ПО, чтобы изменения вступили в силу.</li>
@@ -50,7 +50,7 @@
 </ul>
 </div>
 <ol>
-<li>Установите переменную среды <code>JVM_OPTS</code>, указав в ней требуемый начальный и максимальный размер кучи, например <code>-Xms10m</code> (начальный. 10 МБ) и <code>-Xmx16g</code> (макс. 16 ГБ):
+<li>Установите переменную среды <code>JVM_OPTS</code>, указав в ней требуемый начальный и максимальный размер кучи, например <code>-Xms10m</code> (начальный. 10 МБ) и <code>-Xmx16g</code> (макс. 16 ГБ):
 <pre tabindex="0"><code>export JVM_OPTS="-Xms10m -Xmx16g <br/>-XX:MaxDirectMemorySize=1g <br/>-Djava.net.preferIPv4Stack=true <br/>-XX:+AlwaysPreTouch -XX:+UseG1GC <br/>-XX:+ScavengeBeforeFullGC -XX:+DisableExplicitGC<br/>--add-opens=java.base/sun.nio.ch=ALL-UNNAMED <br/>--add-opens=java.base/java.io=ALL-UNNAMED<br/>--add-opens=java.base/java.nio=ALL-UNNAMED <br/>--add-opens=java.base/java.util=ALL-UNNAMED<br/>--add-opens=java.base/java.lang=ALL-UNNAMED <br/>--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED<br/>--add-exports=java.base/sun.nio.ch=ALL-UNNAMED <br/>--add-exports=java.management/com.sun.jmx.mbeanserver=ALL-UNNAMED<br/>--add-exports=jdk.internal.jvmstat/sun.jvmstat.monitor=ALL-UNNAMED <br/>--add-exports=java.base/sun.reflect.generics.reflectiveObjects=ALL-UNNAMED<br/>--add-opens=jdk.management/com.sun.management.internal=ALL-UNNAMED<br/>-DIGNITE_QUIET=false <br/>-DIGNITE_NO_ASCII=true"       </code></pre>
 </li>
 <li>Перезапустите экземпляр ПО, чтобы изменения вступили в силу.</li>
@@ -69,7 +69,7 @@
 </ul>
 <ol>
 <li>Откройте файл конфигурации Elasticsearch: <code>elasticsearch.yml</code></li>
-<li>Установите требуемое количество шардов с помощью директивы <code>cluster.max_shards_per_node</code>:
+<li>Установите требуемое количество шардов с помощью директивы <code>cluster.max_shards_per_node</code>:
 <pre class="source_code_container"><code>сluster.max_shards_per_node: 3000<br/></code><code></code><code></code></pre>
 </li>
 <li>Перезапустите службу Elasticsearch, чтобы изменения вступили в силу.</li>
@@ -88,7 +88,7 @@
 </div>
 <ol>
 <li>Откройте файл конфигурации JVM Elasticsearch: <code>/etc/elasticsearch/jvm.options</code></li>
-<li>Установите размер кучи начальный и максимальный размер кучи, например <code>-Xms4g</code> (начальный. 4 ГБ) и <code>-Xmx32g</code> (макс. 32 ГБ):
+<li>Установите размер кучи начальный и максимальный размер кучи, например <code>-Xms4g</code> (начальный. 4 ГБ) и <code>-Xmx32g</code> (макс. 32 ГБ):
 <pre class="source_code_container"><code>-Xms4g</code> <br/><code>-Xmx32g</code></pre>
 </li>
 <li>Перезапустите службу Elasticsearch, чтобы изменения вступили в силу.</li>
@@ -108,7 +108,7 @@
 <p>В конфигурации NGINX для экономии трафика и уменьшения времени загрузки страниц можно включить сжатие, а также увеличить количество подключений.</p>
 <ol>
 <li>Откройте для редактирования файл <code>/etc/nginx/nginx.conf</code> </li>
-<li>В разделе <code>events</code> задайте количество подключений с помощью директивы <code>worker_connections</code>:
+<li>В разделе <code>events</code> задайте количество подключений с помощью директивы <code>worker_connections</code>:
 <pre><code>events {</code> <br/><code>...</code><br/><code>worker_connections 768; </code><br/><code>...</code><br/><code>}</code></pre>
 </li>
 <li>В разделе <span style="color: #36464e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;"><span style="font-size: 13.125px; background-color: #f5f5f5;">http</span></span> включите и настройте сжатие:<br/>

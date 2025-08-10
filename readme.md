@@ -1,6 +1,8 @@
-## AI-enabled Repo
+## AI-Enabled Repo
 
 Chat with DeepWiki to get answers about the Comindware Plafrom from this repo:
+
+[Ask DeepWiki](https://deepwiki.com/arterm-sedov/cbap-mkdocs-ru)
 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/arterm-sedov/cbap-mkdocs-ru)
 

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+MSG_FILE="$1"
+
+# Enforce format: [#XXXXX] Message
+first_line="$(head -n1 "$MSG_FILE" || true)"
+
+if ! printf '%s' "$first_line" | grep -qE '^\[\#[0-9]+\] '; then
+  echo "Commit message should start with [#XXXXX] per repo policy (see .cursor/rules/cmwhelp_commit.mdc)" 1>&2
+  exit 1
+fi
+
+exit 0
+
+

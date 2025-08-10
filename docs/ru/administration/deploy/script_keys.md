@@ -55,7 +55,7 @@ hide: tags
 Для ознакомления с ключами (если таковые имеются) и назначением большинства скриптов можно использовать ключ `-h` (Linux и Windows), `--help` (Linux) или `-help` (Windows) без указания каких-либо других ключей, например:
 
 ``` bash
-sh prerequisites_install.sh -h
+bash prerequisites_install.sh -h
 ```
 
 ``` powershell
@@ -103,32 +103,30 @@ sh prerequisites_install.sh -h
     - `-kc`, `--kafkaClient` — установить клиентские библиотеки Kafka.
     - `-d`, `--dotnet` — установить .NET.
     - `-o`, `--opensearch` — установить OpenSearch.
-    <!-- НЕ ИСПОЛЬЗОВАТЬ ПОКА НЕ РЕАЛИЗОВАН КЛАСТЕР
-    - `-i`, `--ignite` — установить Apache Ignite.
-    -->
+    <!-- НЕ ИСПОЛЬЗОВАТЬ ПОКА НЕ РЕАЛИЗОВАН КЛАСТЕР  -->
+    <!-- - `-i`, `--ignite` — установить Apache Ignite. -->
     - `-p`, `--platform` — установить компоненты **{{ productName }}**.
 
     **Пример:**
 
-        ``` bash
-        sh prerequisites_install.sh -p -d -k
-        ```
+    ``` bash
+    sh prerequisites_install.sh -p -d -k
+    ```
 
 - **Windows**
     - Используйте скрипт без ключей:
 
-        ``` powershell
-        .\prerequisites_install.ps1
-        ```
-    <!-- НЕ ИСПОЛЬЗОВАТЬ ПОКА НЕ БУДЕТ РЕАЛИЗОВАН КЛАСТЕР
-    - `-ignite` — установить Apache Ignite.
+    ``` powershell
+    .\prerequisites_install.ps1
+    ```
+    <!-- НЕ ИСПОЛЬЗОВАТЬ ПОКА НЕ БУДЕТ РЕАЛИЗОВАН КЛАСТЕР  -->
+    <!-- - `-ignite` — установить Apache Ignite. -->
 
-    **Пример:**
+    <!-- **Пример:** -->
 
-        ``` powershell
-        .\prerequisites_install.ps1 -ignite
-        ```
-    -->
+    <!-- ``` powershell -->
+    <!-- .\prerequisites_install.ps1 -ignite -->
+    <!-- ``` -->
 
 #### `prerequisites_list` {: #script_keys_prerequisites_list }
 
@@ -183,7 +181,7 @@ sh prerequisites_install.sh -h
 **Пример:**
 
 ``` bash
-sh prerequisites_uninstall.sh -d -j
+bash prerequisites_uninstall.sh -d -j
 ```
 
 ## Скрипты для установки {{ productName }} {: #script_keys_platform_scripts }
@@ -205,7 +203,7 @@ sh prerequisites_uninstall.sh -d -j
 
 **Пример:**
 
-``` sh
+``` bash
 bash instance_check.sh my_company_instance
 ```
 
@@ -216,9 +214,9 @@ bash instance_check.sh my_company_instance
 **Ключи:**
 
 - **Linux**
-    - `-n=<instanceName>`, `--name=<instanceName>` — указать имя экземпляра ПО (обязательный).
-    - `-p=<portNumber>`, `--port=<portNumber>` — назначить порт экземпляру ПО (обязательный). По умолчанию: `80`.
-    - `-v=<versionNumber>`, `--version=<versionNumber>` — развернуть ПО указанной версии (обязательный).
+    - `-n=<instanceName>`, `--name=<instanceName>` — указать имя экземпляра ПО (**обязательный**).
+    - `-p=<portNumber>`, `--port=<portNumber>` — назначить порт экземпляру ПО (**обязательный**). По умолчанию: `80`.
+    - `-v=<versionNumber>`, `--version=<versionNumber>` — развернуть ПО указанной версии (**обязательный**).
     - `-fqdn=<hostName>`, `--instance-fqdn=<hostName>` — указать имя хоста для экземпляра ПО. По умолчанию: `localhost`.
     - `-el=<value>`, `--elasticsearch-url=<value>` — указать ссылку или IP-адрес службы Elasticsearch.
     - `-kf=<value>`, `--kafka-url=<value>` — указать ссылку или IP-адрес службы Kafka.
@@ -226,23 +224,23 @@ bash instance_check.sh my_company_instance
 
     **Пример:**
 
-        ``` bash
-        bash instance_create.sh -n=my_company_instance -p=8080 -v=5.0.1234.0
-            ```
+    ``` bash
+    bash instance_create.sh -n=my_company_instance -p=8080 -v=5.0.1234.0
+    ```
 
 - **Windows**
-    - `-name <instanceName>` — указать имя экземпляра ПО (обязательный).
-    - `-port <portNumber>` — назначить порт экземпляру ПО. По умолчанию: 80.
+    - `-name <instanceName>` — указать имя экземпляра ПО (**обязательный**).
+    - `-port <portNumber>` — назначить порт экземпляру ПО. По умолчанию: `80`.
     - `-version <versionNumber>` — развернуть ПО указанной версии вида `X.X.XXXX.X`.
     - `-versionPath <versionPath>` — развернуть ПО из указанной папки `<versionPath>` с версией ПО.
-    - `-fqdn <hostName>` — имя хоста для экземпляра ПО (опционально, по умолчанию: localhost).
+    - `-fqdn <hostName>` — имя хоста для экземпляра ПО (опционально, по умолчанию: `localhost`).
     - `-demoDB` — создать экземпляр ПО c демонстрационной базой данных.
 
     **Пример:**
 
-        ``` powershell
-        .\instance_create.ps1 -name my_company_instance -port 8080 -version 5.0.1234.0
-        ```
+    ``` powershell
+    .\instance_create.ps1 -name my_company_instance -port 8080 -version 5.0.1234.0
+    ```
 
 #### `instance_delete` {: #script_keys_instance_delete }
 
@@ -251,27 +249,27 @@ bash instance_check.sh my_company_instance
 **Ключи:**
 
 - **Linux**
-    - `-n=<instanceName>`, `--name=<instanceName>` — указать имя экземпляра ПО (обязательный).
+    - `-n=<instanceName>`, `--name=<instanceName>` — указать имя экземпляра ПО (**обязательный**).
     - `--deleteData` — удалить базу данных и пользовательские файлы экземпляра ПО.
     - `--deleteLogs` — удалить журналы экземпляра ПО.
     - `--deleteBackups` — удалить резервные копии экземпляра ПО.
 
     **Пример:**
 
-        ``` bash
-        bash instance_delete.sh -n=my_company_instance
-        ```
+    ``` bash
+    bash instance_delete.sh -n=my_company_instance
+    ```
 
 - **Windows**
-    - `-name <instanceName>` — указать имя экземпляра ПО (обязательный). Если не указать другие ключи, будет удалена только служба `comindware<instanceName>`.
+    - `-name <instanceName>` — указать имя экземпляра ПО (**обязательный**). Если не указать другие ключи, будет удалена только служба `comindware<instanceName>`.
     - `-deleteData` — удалить базу данных из папки вида и пользовательские файлы экземпляра ПО. Без указания этого ключа или ключа `-clear` база данных экземпляра ПО не будет удалена.
     - `-clear` — удалить все файлы, папки, базу данных и пользовательские файлы, а также службы экземпляра ПО, сайт и пул из IIS.
 
     **Пример:**
 
-        ``` powershell
-        .\instance_delete.ps1 -name my_company_instance -clear
-        ```
+    ``` powershell
+    .\instance_delete.ps1 -name my_company_instance -clear
+    ```
 
 #### `instance_list` {: #script_keys_instance_list }
 
@@ -286,25 +284,25 @@ bash instance_check.sh my_company_instance
 **Ключи:**
 
 - **Linux**
-    - `-n=<instanceName>`, `--name=<instanceName>` — указать имя экземпляра ПО (обязательный).
-    - `-vp=<path/to>`, `--versionPath=<path/to>` — путь к папке с новой версией ПО (обязательный).
+    - `-n=<instanceName>`, `--name=<instanceName>` — указать имя экземпляра ПО (**обязательный**).
+    - `-vp=<path/to>`, `--versionPath=<path/to>` — путь к папке с новой версией ПО (**обязательный**).
 
     **Пример:**
 
-        ``` sh
-        bash instance_upgrade.sh -n=my_company_instance -vp=/comindware/5.0.1234.0
-        ```
+    ``` bash
+    bash instance_upgrade.sh -n=my_company_instance -vp=/comindware/5.0.1234.0
+    ```
 
 - **Windows**
-    - `-name <instanceName>` — указать имя экземпляра ПО (обязательный).
-    - `-version <versionNumber>` — указать номер версии, до которой необходимо обновить экземпляр ПО (обязательный).
+    - `-name <instanceName>` — указать имя экземпляра ПО (**обязательный**).
+    - `-version <versionNumber>` — указать номер версии, до которой необходимо обновить экземпляр ПО (**обязательный**).
     - `-versionPath <path/to>` — обновить экземпляр ПО до версии из указанной папки.
 
     **Пример:**
 
-        ``` powershell
-        .\instance_upgrade.ps1 -name my_company_instance -version 5.0.1234.0
-        ```
+    ``` powershell
+    .\instance_upgrade.ps1 -name my_company_instance -version 5.0.1234.0
+    ```
 
 #### `version_check` {: #script_keys_version_check_platform }
 
@@ -327,18 +325,18 @@ bash instance_check.sh my_company_instance
 
     **Пример:**
 
-        ``` bash
-        sh version_delete.sh -v=5.0.1234.0
-        ```
+    ``` bash
+    sh version_delete.sh -v=5.0.1234.0
+    ```
 
 - **Windows**
-    - `-version <versionNumber>` — указать номер версии ПО (обязательный).
+    - `-version <versionNumber>` — указать номер версии ПО (**обязательный**).
 
     **Пример:**
 
-        ``` powershell
-        .\version_delete.ps1 -version 5.0.1234.0
-        ```
+    ``` powershell
+    .\version_delete.ps1 -version 5.0.1234.0
+    ```
 
 #### `version_install` {: #script_keys_version_install }
 
@@ -380,9 +378,9 @@ bash instance_check.sh my_company_instance
 
 **Ключи:**
 
-- `-zipPath <path/to>` — указать путь к архиву резервной копии `.cdbbz` (обязательный).
-- `-dataPath <path/to>` — указать путь к каталогу `Database` для восстановления (обязательный).
-- `-streamsPath <path/to>` — указать путь к каталогу `Streams` для восстановления (обязательный).
+- `-zipPath <path/to>` — указать путь к архиву резервной копии `.cdbbz` (**обязательный**).
+- `-dataPath <path/to>` — указать путь к каталогу `Database` для восстановления (**обязательный**).
+- `-streamsPath <path/to>` — указать путь к каталогу `Streams` для восстановления (**обязательный**).
 - `-tempDir <path/to>` — указать временный каталог для распаковки архива.
 - `-deleteOldData` — удалить старые данные перед восстановлением.
 
@@ -398,7 +396,7 @@ bash instance_check.sh my_company_instance
 
 **Ключ:**
 
-- `-name <instanceName>` — указать имя экземпляра ПО (обязательный).
+- `-name <instanceName>` — указать имя экземпляра ПО (**обязательный**).
 
 **Пример:**
 
@@ -412,7 +410,7 @@ bash instance_check.sh my_company_instance
 
 **Ключи:**
 
-- `-name <instanceName>` — указать имя экземпляра ПО (обязательный).
+- `-name <instanceName>` — указать имя экземпляра ПО (**обязательный**).
 
 **Пример:**
 
@@ -430,16 +428,16 @@ bash instance_check.sh my_company_instance
 
 | Имя скрипта            | Назначение                                                          |
 | ---------------------- | ------------------------------------------------------------------- |
-| adapterhost_config     | Генерация конфигурационного файла `adapterhost.yml` для экземпляра. |
-| adapterhost_register   | Регистрация Adapterhost как службы.                                 |
-| adapterhost_start      | Запуск службы Adapterhost.                                          |
-| adapterhost_stop       | Остановка службы Adapterhost.                                       |
-| adapterhost_unregister | Удаление службы Adapterhost.                                        |
-| apigateway_register    | Регистрация Apigateway как службы.                                  |
-| apigateway_start       | Запуск службы Apigateway.                                           |
-| apigateway_stop        | Остановка службы Apigateway.                                        |
-| apigateway_unregister  | Удаление службы Apigateway.                                         |
-| upgrade_config_file    | Обновление конфигурационных файлов при обновлении версии ПО.        |
+| `adapterhost_config`     | Генерация конфигурационного файла `adapterhost.yml` для экземпляра. |
+| `adapterhost_register`   | Регистрация службы Adapterhost.                                     |
+| `adapterhost_start`      | Запуск службы Adapterhost.                                          |
+| `adapterhost_stop`       | Остановка службы Adapterhost.                                       |
+| `adapterhost_unregister` | Удаление службы Adapterhost.                                        |
+| `apigateway_register`    | Регистрация службы Apigateway .                                     |
+| `apigateway_start`       | Запуск службы Apigateway.                                           |
+| `apigateway_stop`        | Остановка службы Apigateway.                                        |
+| `apigateway_unregister`  | Удаление службы Apigateway.                                         |
+| `upgrade_config_file`    | Обновление конфигурационных файлов при обновлении версии ПО.        |
 
 ### Для Linux {: #service_scripts_linux }
 
@@ -449,10 +447,10 @@ bash instance_check.sh my_company_instance
 | --------------------------- | ----------------------------------- |
 | `components/adapterhost/`   | Управление службой AdapterHost      |
 | `components/apigateway/`    | Управление службой ApiGateway       |
-| `components/kafka/`         | Установка и настройки Kafka         |
-| `components/nginx/`         | Установка и настройки Nginx         |
-| `components/opensearch/`    | Установка и настройки OpenSearch    |
-| `components/elasticsearch/` | Установка и настройки Elasticsearch |
+| `components/kafka/`         | Установка и настройка Kafka         |
+| `components/nginx/`         | Установка и настройка Nginx         |
+| `components/opensearch/`    | Установка и настройка OpenSearch    |
+| `components/elasticsearch/` | Установка и настройка Elasticsearch |
 
 <div class="relatedTopics" markdown="block">
 

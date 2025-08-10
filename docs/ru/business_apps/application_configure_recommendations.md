@@ -18,7 +18,7 @@ kbId: 4716
 - [Рекомендации по циклу разработки бизнес-приложений](#production_deploy)
 - [Сведениями об ответственности за разработку](#optimization_responsibility)
 - [Общие рекомендации по разработке](#application_configure_recommendations_general)
-- [Учебные материалы][tutorial]
+- [Учебные материалы][tutorials_toc]
 
 {% include-markdown ".snippets/disclaimer_production_deploy.md" %}
 

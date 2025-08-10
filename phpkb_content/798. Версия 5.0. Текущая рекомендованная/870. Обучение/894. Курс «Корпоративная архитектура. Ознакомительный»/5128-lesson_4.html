@@ -1,0 +1,370 @@
+<h1>Урок 4. Согласование, аудит, публикация, контроль изменений</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5128" kb-tags="Architect,BPMN,аналитика,архитектор,архитект,автоматизация,бизнес-процессы,документооборот,корпоративная архитектура,процессная архитектура,обучение,оргструктура,организационно-функциональная структура,платформа,управление процессами,цифровая трансформация,согласование,контроль изменений,формы и атрибуты,исполняемые процессы,сценарии,шаблоны моделей" kb-title="Урок 4. Согласование, аудит, публикация, контроль изменений">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_architect_lesson_4_intro">
+<span class="md-ellipsis">
+      Введение и бизнес-логика
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_architect_lesson_4_definitions">
+<span class="md-ellipsis">
+      Определения
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_architect_lesson_4_taxonomy">
+<span class="md-ellipsis">
+      Темы, навыки и задания урока
+    </span>
+</a>
+<nav aria-label="Темы, навыки и задания урока" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_architect_lesson_4_topics">
+<span class="md-ellipsis">
+      Темы
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_architect_lesson_4_skills">
+<span class="md-ellipsis">
+      Навыки
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_architect_lesson_4_tasks">
+<span class="md-ellipsis">
+      Задания
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-согласования-неисполняемых-процессов">
+<span class="md-ellipsis">
+      Настройка согласования неисполняемых процессов
+    </span>
+</a>
+<nav aria-label="Настройка согласования неисполняемых процессов" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_architect_lesson_4_executable_process">
+<span class="md-ellipsis">
+      Настройка исполняемого процесса «Согласование процесса»
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_architect_lesson_4_model_template">
+<span class="md-ellipsis">
+      Настройка шаблона моделей «Процессы»
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_architect_lesson_4_process_diagram_change_tracking">
+<span class="md-ellipsis">
+      Настройка сценария для отслеживания изменений диаграмм процессов
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_architect_lesson_4_approval">
+<span class="md-ellipsis">
+      Тестирование процесса согласования архитектурной модели
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_architect_lesson_4_summary">
+<span class="md-ellipsis">
+      Итоги урока
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="tutorial_architect_lesson_4_intro">Введение и бизнес-логика</h2>
+<p>В ходе этого урока вы научитесь настраивать и использовать исполняемые процессы и интегрировать их с архитектурными моделями с помощью <strong>Comindware Platform Enterprise</strong>:</p>
+<ul>
+<li>создавать исполняемые процессы и интегрировать их с архитектурными моделями;</li>
+<li>настраивать шаблоны архитектурных моделей, их атрибуты и формы;</li>
+<li>настраивать кнопки и сценарии для автоматизации операций;</li>
+<li>реализовывать процессы согласования архитектурных изменений.</li>
+</ul>
+<p>Освоив этот урок, вы сможете обеспечить качественный контроль изменений корпоративной архитектуры через формализованные и автоматизированные процессы согласования, что снижает риски ошибок, обеспечивает вовлечённость всех заинтересованных сторон и контроль внедрения новых архитектурных моделей.</p>
+<p><strong>Предусловия:</strong> пройден <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5127">урок 3 «Моделирование процессной архитектуры»</a>.</p>
+<p><strong>Расчётная продолжительность:</strong> 70 мин.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>Компания внедряет новые процессы и совершенствует корпоративную архитектуру согласно требованиям бизнеса и регуляторов.</p>
+<p>Для обеспечения качества и прозрачности новых решений требуется не только моделировать процессы, но и управлять их изменениями: согласовывать процессы силами лиц, принимающих решения относительно корпоративной архитектуры.</p>
+<p>Это позволит быстро адаптироваться к изменениям бизнеса и законодательства.</p>
+</div>
+<div class="notice notice-success">
+<h2 id="tutorial_architect_lesson_4_definitions">Определения</h2>
+<ul>
+<li><strong>Согласование</strong> — процесс утверждения изменений с фиксацией решений и комментариев.</li>
+<li><strong>Модель</strong> — формализованное представление архитектурного объекта (например, процесса, элемента BPMN, бизнес-способности и т. п.), включающее его структуру, атрибуты, взаимосвязи и поведение. Модели используются для описания, анализа и автоматизации архитектурных решений.</li>
+<li><strong>Шаблон модели</strong> — структура для настройки и хранения архитектурных моделей, содержит атрибуты, формы и другие данные модели. Используется аналогично шаблону записи. Шаблон модели можно связать с исполняемым шаблоном процесса.</li>
+<li><strong>Исполняемый процесс</strong> — процесс, моделируемый с помощью диаграммы процесса (BPMN 2.0), который может быть запущен и выполнен в автоматизированной системой. Такой процесс управляет последовательностью задач, действий, назначением исполнителей, выполнением сценариев, отправкой сообщений и позволяет автоматизировать бизнес-логику и контроль изменений.</li>
+</ul>
+</div>
+<h2 id="tutorial_architect_lesson_4_taxonomy">Темы, навыки и задания урока</h2>
+<h3 id="tutorial_architect_lesson_4_topics">Темы</h3>
+<ul>
+<li>Использование исполняемых процессов в сочетании с архитектурными моделями предприятия</li>
+<li>Настройка шаблонов, атрибутов и форм архитектурных моделей</li>
+<li>Настройка кнопок и сценариев для автоматизации операций</li>
+<li>Выполнение процессов согласования корпоративной архитектуры</li>
+</ul>
+<h3 id="tutorial_architect_lesson_4_skills">Навыки</h3>
+<ul>
+<li>Настраивать и выполнять исполняемые процессы</li>
+<li>Интегрировать исполняемые процессы с архитектурными моделями</li>
+<li>Настраивать атрибуты и формы архитектурных моделей</li>
+<li>Настраивать исполняемые пользовательские задачи</li>
+<li>Настраивать исполнителей задач через атрибуты и оргструктуру</li>
+<li>Настраивать кнопки для запуска процессов</li>
+<li>Настраивать сценарии для автоматической обработки данных</li>
+</ul>
+<h3 id="tutorial_architect_lesson_4_tasks">Задания</h3>
+<ul>
+<li>Создать исполняемый процесс согласования архитектурной модели</li>
+<li>Настроить форму пользовательской задачи процесса</li>
+<li>Настроить атрибуты и форму шаблона архитектурной модели</li>
+<li>Настроить кнопку для запуска исполняемого процесса</li>
+<li>Настроить сценарий для изменения данных архитектурной модели</li>
+<li>Выполнить процесс согласования архитектурной модели</li>
+</ul>
+<h2 id="настройка-согласования-неисполняемых-процессов">Настройка согласования неисполняемых процессов</h2>
+<p>!!! "Бизнес-логика"</p>
+<div class="highlight"><code><pre><span></span><code>**Comindware Platform Enterprise** позволяет моделировать и интегрировать исполняемые и неисполняемые процессы для автоматизации управления корпоративной архитектурой.</code> <br/><code></code> <br/><code>Настроим исполняемый процесс согласования неисполняемых процессов — архитектурных моделей.</code> <br/></pre></code></div>
+<h3 id="tutorial_architect_lesson_4_executable_process">Настройка исполняемого процесса «Согласование процесса»</h3>
+<p>Настроим исполняемый процесс, который позволит согласовывать изменения в процессной модели предприятия.</p>
+<ol class="colored_numbers_list">
+<li>Перейдите к приложению <em>«Архитектура компании»</em>.</li>
+<li>Откройте страницу «<strong>Шаблоны</strong>».</li>
+<li>Откройте вкладку «<strong>Шаблоны процессов</strong>».</li>
+<li>
+<p>Создайте шаблон процесса со следующими свойствами:</p>
+<ul>
+<li><strong>Название:</strong> <em>Согласование процесса</em></li>
+<li><strong>Связь с шаблоном записи: связать с существующим шаблоном</strong></li>
+<li><strong>Связанный шаблон: Процессы</strong></li>
+</ul>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Создание шаблона процесса «Согласование процесса»" src="/platform/v5.0/tutorial_architect/img/lesson_4_process_create.png"/><figcaption class="caption">Создание шаблона процесса «Согласование процесса»</figcaption></figure></p>
+</li>
+<li>
+<p>Перейдите на вкладку «<strong>Диаграмма</strong>».</p>
+</li>
+<li>Откроется диаграмма исполняемого процесса для редактирования.</li>
+<li>Переименуйте <strong>начальное событие</strong> в <em>«Нажата кнопка «Согласовать»</em>.</li>
+<li>После начального события добавьте пользовательскую задачу <em>«Согласовать процесс»</em>.</li>
+<li>Откройте <strong>свойства</strong> задачи.</li>
+<li>
+<p>На вкладке «<strong>Дополнительные</strong>» в поле «<strong>Исполнители</strong>» укажите <strong>атрибут</strong> «<strong>Владелец процесса</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка свойств пользовательской задачи «Согласовать процессю" src="/platform/v5.0/tutorial_architect/img/lesson_4_USERTASK_SETTINGS.png"/><figcaption class="caption">Настройка свойств пользовательской задачи «Согласовать процессю</figcaption></figure></p>
+</li>
+<li>
+<p>Откройте форму задачи.</p>
+</li>
+<li>Поместите область на макет и переименуйте её в <em>«Решение по согласованию процесса»</em>.</li>
+<li>
+<p>В панели слева нажмите кнопку «<strong>Добавить атрибут</strong>» <i class="fa-light fa-plus">‌<!--icon--></i> у атрибута «<strong>Процессы</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Добавление нового атрибута" src="/platform/v5.0/tutorial_architect/img/lesson_4_attribute_add.png"/><figcaption class="caption">Добавление нового атрибута</figcaption></figure></p>
+</li>
+<li>
+<p>Создайте <strong>логический</strong> атрибут <em>«Согласован»</em>.</p>
+</li>
+<li>
+<p>Раскройте атрибут «<strong>Процессы</strong>» в панели слева.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Кнопка раскрытия атрибута" src="/platform/v5.0/tutorial_architect/img/lesson_4_attribute_full.png"/><figcaption class="caption">Кнопка раскрытия атрибута</figcaption></figure></p>
+</li>
+<li>
+<p>Поместите атрибут <em>«Согласован»</em> на область <em>«Решение по согласованию процесса»</em>.</p>
+</li>
+<li>В свойствах поля <em>«Согласован»</em> установите параметр «<strong>Отображать как: переключатель</strong>».</li>
+<li>Поместите на макет <strong>форму «Процессы»</strong>.</li>
+<li>
+<p>Сохраните форму.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка формы задачи «Согласовать процесс»" src="/platform/v5.0/tutorial_architect/img/lesson_4_form_settings.png"/><figcaption class="caption">Настройка формы задачи «Согласовать процесс»</figcaption></figure></p>
+</li>
+<li>
+<p>Вернитесь к редактированию диаграммы процесса.</p>
+</li>
+<li>После пользовательской задачи <em>«Согласовать процесс»</em> добавьте <strong>развилку «или/или»</strong> и переименуйте её в <em>«Процесс согласован?»</em>.</li>
+<li>Соедините развилку <em>«Процесс согласован?»</em> с простыми конечными событиями <em>«Процесс согласован»</em> и <em>«Процесс не согласован»</em>.</li>
+<li>Откройте свойства развилки <em>«Процесс согласован?»</em>.</li>
+<li>
+<p>На вкладке «<strong>Дополнительные</strong>» установите следующие значения:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Поток «иначе»</th>
+<th>Конечная точка</th>
+<th>Условие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><em>Процесс согласован</em></td>
+<td><strong>Формула:</strong> <code>$Согласован</code></td>
+</tr>
+<tr>
+<td>Флажок установлен</td>
+<td><em>Процесс не согласован</em></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройки развилки «Процесс согласован?»" src="/platform/v5.0/tutorial_architect/img/lesson_4_gateway_properties.png"/><figcaption class="caption">Настройки развилки «Процесс согласован?»</figcaption></figure></p>
+</li>
+<li>
+<p>Опубликуйте диаграмму.</p>
+</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Диаграмма процесса «Согласование процесса»" src="/platform/v5.0/tutorial_architect/img/lesson_4_changess_accept_process_diagram.png"/><figcaption class="caption">Диаграмма процесса «Согласование процесса»</figcaption></p>
+</figure>
+<h3 id="tutorial_architect_lesson_4_model_template">Настройка шаблона моделей «Процессы»</h3>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>В процессе согласования модели процесса необходимо указывать, хранить и отслеживать статус согласования.</p>
+<p>Для этого дополним шаблон архитектурной модели логическим атрибутом. 
+Данный атрибут поместим на форму модели процесса в виде переключателя.</p>
+</div>
+<div class="notice notice-success">
+<p class="admonition-title">Определения</p>
+<p><strong>Шаблон модели</strong> «<strong>Процессы</strong>» содержит данные всех моделей процессов, настроенных в корпоративной архитектуре.</p>
+</div>
+<p><strong>Форма шаблона модели</strong> отображается на панели свойств в редакторе диаграмм <strong>Comindware Platform Enterprise</strong>.</p>
+<ol class="colored_numbers_list">
+<li>Откройте процесс <em>«Поиск кандидата»</em>.</li>
+<li>Откройте «<strong>Свойства</strong>» <i class="fa-light fa-sidebar-flip">‌<!--icon--></i>.</li>
+<li>Нажмите кнопку «<strong>Изменить</strong>» <i class="fa-light fa-arrow-up-right-from-square">‌<!--icon--></i>.</li>
+<li>Перейдите к шаблону модели «<strong>Процессы</strong>».</li>
+<li>Перейдите на вкладку «<strong>Кнопки</strong>».</li>
+<li>
+<p>Создайте кнопку со следующими свойствами:</p>
+<ul>
+<li><strong>Отображаемое название:</strong> <em>Согласовать</em></li>
+<li><strong>Контекст операции: модель</strong></li>
+<li><strong>Операция: запустить процесс</strong></li>
+<li><strong>Результат выполнения: обновить данные</strong></li>
+<li><strong>Шаблон:</strong> <em>Согласование процесса</em></li>
+</ul>
+</li>
+<li>
+<p>Сохраните кнопку.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройки кнопки «Согласовать»" src="/platform/v5.0/tutorial_architect/img/lesson_4_accept_button.png"/><figcaption class="caption">Настройки кнопки «Согласовать»</figcaption></figure></p>
+</li>
+<li>
+<p>Перейдите на вкладку «<strong>Формы</strong>».</p>
+</li>
+<li>Откройте форму «<strong>Процессы</strong>».</li>
+<li>Добавьте на область «<strong>Атрибуты по умолчанию</strong>» атрибут <em>«Согласован»</em>.</li>
+<li>
+<p>Добавьте в область кнопок области «<strong>Атрибуты по умолчанию</strong>» кнопку <em>«Согласовать»</em>.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройки формы «Процессы»" src="/platform/v5.0/tutorial_architect/img/lesson_4_process_form_change.png"/><figcaption class="caption">Настройки формы «Процессы»</figcaption></figure></p>
+</li>
+<li>
+<p>Сохраните форму.</p>
+</li>
+</ol>
+<h3 id="tutorial_architect_lesson_4_process_diagram_change_tracking">Настройка сценария для отслеживания изменений диаграмм процессов</h3>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>При изменении диаграммы процесса в рамках корпоративной архитектуры её статус согласования должен сбрасываться. После чего потребуется согласовать диаграмму заново.</p>
+<p>Для этого настроим сценарий, который будет срабатывать при внесении любых изменений в модели процессов.</p>
+</div>
+<ol class="colored_numbers_list">
+<li>Откройте приложение <em>«Архитектура компании»</em>.</li>
+<li>Перейдите на страницу «<strong>Сценарии</strong>».</li>
+<li>Создайте сценарий <em>«Редактирование процесса»</em>.</li>
+<li>
+<p>Задайте для <strong>начального события</strong> следующие свойства:</p>
+<ul>
+<li><strong>Тип: изменение записи</strong></li>
+<li><strong>Контекстный шаблон: Процессы</strong></li>
+</ul>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Свойства начального события сценария" src="/platform/v5.0/tutorial_architect/img/lesson_4_trigger_properties.png"/><figcaption class="caption">Свойства начального события сценария</figcaption></figure></p>
+</li>
+<li>
+<p>После начального события добавьте действие «<strong>Изменить значение атрибутов</strong>» со следующими свойствами:</p>
+<ul>
+<li><strong>Атрибут:</strong> <em>Согласован</em></li>
+<li><strong>Операция со значениями: заменить</strong></li>
+<li>
+<p><strong>Значение: формула</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="k">False</span></code> <br/></pre></code></div>
+</li>
+</ul>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Свойства действия «Изменить значение атрибутов»" src="/platform/v5.0/tutorial_architect/img/lesson_4_change_attributes_action_properties.png"/><figcaption class="caption">Свойства действия «Изменить значение атрибутов»</figcaption></figure></p>
+</li>
+<li>
+<p>Сохраните действие.</p>
+</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Сценарий «Редактирование процесса»" src="/platform/v5.0/tutorial_architect/img/lesson_4_change_process_scenario.png"/><figcaption class="caption">Сценарий «Редактирование процесса»</figcaption></p>
+</figure>
+<h2 id="tutorial_architect_lesson_4_approval">Тестирование процесса согласования архитектурной модели</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>При внесении изменений в неисполняемую диаграмму процесса всегда запускается процесс согласования: это снижает риски ошибок и обеспечивает вовлечённость участников процесса.</p>
+</div>
+<ol class="colored_numbers_list">
+<li>Выберите пункт <strong>«Архитектура»</strong> — <strong>«Процессы»</strong> в панели навигации.</li>
+<li>Откройте процесс <em>«Поиск кандидата»</em> для редактирования.</li>
+<li>Внесите в диаграмму или свойства процесса любые изменения.</li>
+<li>Нажмите кнопку «<strong>Свойства</strong>» <i class="fa-light fa-sidebar-flip">‌<!--icon--></i>.</li>
+<li>Отобразится панель свойств процесса.</li>
+<li>Нажмите кнопку <em>«Согласовать»</em>.</li>
+<li>При необходимости войдите в аккаунт владельца процесса.</li>
+<li>Откройте «<strong>Мои задачи</strong>».</li>
+<li>Перейдите к задаче согласования процесса.</li>
+<li>Установите значение «<strong>Да</strong>» для атрибута <em>«Согласован»</em>.</li>
+<li>Завершите задачу.</li>
+<li>Вернитесь к диаграмме процесса <em>«Поиск кандидата»</em>.</li>
+<li>Откройте свойства диаграммы.</li>
+<li>Флажок <em>«Согласован»</em> должен быть автоматически установлен.</li>
+<li>Снова внесите изменения в диаграмму процесса. В результате флажок <em>«Согласован»</em> должен быть автоматически снят.</li>
+</ol>
+<h2 id="tutorial_architect_lesson_4_summary">Итоги урока</h2>
+<p>В ходе этого урока вы научились создавать исполняемые процессы, настраивать шаблоны моделей с атрибутами и формами, интегрировать исполняемые процессы с архитектурными моделями, настраивать кнопки и сценарии для автоматизации операций, а также выполнять процессы согласования архитектурных изменений.</p>
+<p>В ходе <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5129">следующего урока</a> вы научитесь формировать собственные шаблоны экспорта регламентов корпоративной архитектуры, управлять версиями корпоративной архитектуры, а также экспортировать диаграммы в различных форматах для интеграции с внешними системами.</p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>
