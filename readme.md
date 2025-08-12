@@ -1,4 +1,4 @@
-## AI-enabled Repo
+## AI-Enabled Repo
 
 Chat with DeepWiki to get answers about the Comindware Plafrom from this repo:
 
