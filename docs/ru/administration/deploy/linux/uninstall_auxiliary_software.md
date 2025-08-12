@@ -12,7 +12,7 @@ kbId: 4625
 - среды исполнения Java Runtime Environment (JRE);
 - брокера сообщений Kafka;
 - платформы Mono;
-- платформы .NET 6.0;
+- платформы .NET 8.0;
 - обратного прокси-сервера NGINX.
 
 Удаление вспомогательных компонентов ПО может потребоваться, например, в следующих случаях:
@@ -118,7 +118,7 @@ kbId: 4625
     rm /var/www/.cmw_environment/mono
     ```
 
-### Удаление .NET 6.0
+### Удаление .NET 8.0
 
 1. Удалите бинарные файлы .NET:
 
@@ -245,7 +245,7 @@ kbId: 4625
     rm /var/www/.cmw_environment/mono
     ```
 
-### Удаление .NET 6.0
+### Удаление .NET 8.0
 
 1. Удалите бинарные файлы .NET:
 
@@ -353,7 +353,7 @@ kbId: 4625
     rm /var/www/.cmw_environment/mono
     ```
 
-### Удаление .NET 6.0
+### Удаление .NET 8.0
 
 1. Удалите бинарные файлы .NET:
 
@@ -503,7 +503,7 @@ kbId: 4625
     rm /var/www/.cmw_environment/mono
     ```
 
-### Удаление .NET 6.0
+### Удаление .NET 8.0
 
 1. Удалите бинарные файлы .NET:
 
@@ -665,7 +665,7 @@ kbId: 4625
     rm /var/www/.cmw_environment/mono
     ```
 
-### Удаление .NET 6.0
+### Удаление .NET 8.0
 
 1. Удалите бинарные файлы .NET:
 
@@ -772,19 +772,19 @@ kbId: 4625
     rm /var/www/.cmw_environment/mono
     ```
 
-### Удаление .NET 6.0
+### Удаление .NET 8.0
 
 1. Удалите пакеты .NET:
 
     ``` sh
-    apt-get remove --purge -y dotnet-sdk-6.0 \
-        dotnet-runtime-6.0 \
-        dotnet-targeting-pack-6.0 \
-        aspnetcore-targeting-pack-6.0 \
+    apt-get remove --purge -y dotnet-sdk-8.0 \
+        dotnet-runtime-8.0 \
+        dotnet-targeting-pack-8.0 \
+        aspnetcore-targeting-pack-8.0 \
         netstandard-targeting-pack-2.1 \
-        dotnet-templates-6.0 \
+        dotnet-templates-8.0 \
         dotnet-host \
-        dotnet-apphost-pack-6.0
+        dotnet-apphost-pack-8.0
     ```
 
 2. Удалите конфигурацию .NET:

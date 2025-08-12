@@ -28,7 +28,7 @@ kbId: 4596
 
 - _Веб-приложение_: одностраничное приложение (SPA) на основе Marionette, Backbone, React, Redux.
 - _Мобильное приложение_: React Native on Expo.
-- _Бэкенд_: компоненты-сервисы на основе .NET 6.0,  JRE 17{% if not gostech %}, Mono 6.12 (Linux), .NET Framework 4.8 (Windows){% endif %}.
+- _Бэкенд_: компоненты-сервисы на основе .NET 8.0,  JRE 17{% if not gostech %}, Mono 6.12 (Linux), .NET Framework 4.8 (Windows){% endif %}.
 - _СУБД_: фирменная патентованная СУБД Comindware ElasticData
 - _Хранилище данных_: распределённая высокопроизводительная СУБД {{ apacheIgniteVariants }}.
 - _Сервис журналирования транзакций_: {{ openSearchVariants }}.

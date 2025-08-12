@@ -127,11 +127,11 @@ tags:
     [Done] Creating CBAP Data Dir.
     -----------------------------------------
     Environment details
-    Status     | Software   | Version   
+    Status     | Software   | Version
     -----------------------------------------
-    OK         | mono       | 6.12.0.200     
-    OK         | dotnet     | 6.0.417        
-    OK         | java       | 17.0.7            
+    OK         | mono       | 6.12.0.200
+    OK         | dotnet     | 8.0.
+    OK         | java       | 17.0.7
     OK     NGINX installed.
     OK     NGINX started.
     OK     CBAP version folder created.
