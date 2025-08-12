@@ -118,7 +118,7 @@ kbId: 4625
     rm /var/www/.cmw_environment/mono
     ```
 
-### Удаление .NET 8.0
+### Удаление .NET
 
 1. Удалите бинарные файлы .NET:
 
@@ -245,7 +245,7 @@ kbId: 4625
     rm /var/www/.cmw_environment/mono
     ```
 
-### Удаление .NET 8.0
+### Удаление .NET
 
 1. Удалите бинарные файлы .NET:
 
@@ -353,7 +353,7 @@ kbId: 4625
     rm /var/www/.cmw_environment/mono
     ```
 
-### Удаление .NET 8.0
+### Удаление .NET
 
 1. Удалите бинарные файлы .NET:
 
@@ -503,7 +503,7 @@ kbId: 4625
     rm /var/www/.cmw_environment/mono
     ```
 
-### Удаление .NET 8.0
+### Удаление .NET
 
 1. Удалите бинарные файлы .NET:
 
@@ -665,7 +665,7 @@ kbId: 4625
     rm /var/www/.cmw_environment/mono
     ```
 
-### Удаление .NET 8.0
+### Удаление .NET
 
 1. Удалите бинарные файлы .NET:
 
@@ -772,7 +772,7 @@ kbId: 4625
     rm /var/www/.cmw_environment/mono
     ```
 
-### Удаление .NET 8.0
+### Удаление .NET
 
 1. Удалите пакеты .NET:
 
