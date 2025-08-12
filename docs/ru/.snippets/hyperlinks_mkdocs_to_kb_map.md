@@ -42,6 +42,8 @@
 
 [integrations_cat]: {{ kbCategoryURLPrefix }}872
 
+[n3_guide_cat]: {{ kbCategoryURLPrefix }}877
+
 [user_guide_cat]: {{ kbCategoryURLPrefix }}817
 
 [admin_guide_cat]: {{ kbCategoryURLPrefix }}802
@@ -101,7 +103,19 @@
 
 [integration_examples]: {{ kbCategoryURLPrefix }}875
 
-[manual_n3]: {{ kbArticleURLPrefix }}4852
+[n3_guide_graphs]: {{ kbArticleURLPrefix }}4853
+
+[n3_guide_knowledge_graphs]: {{ kbArticleURLPrefix }}4857
+
+[n3_guide_model_n3]: {{ kbArticleURLPrefix }}4854
+
+[n3_guide_notation_n3]: {{ kbArticleURLPrefix }}4858
+
+[n3_guide_ontology]: {{ kbArticleURLPrefix }}4856
+
+[n3_guide_terms_reference]: {{ kbArticleURLPrefix }}4855
+
+[n3_guide_ontology_structure]: {{ kbArticleURLPrefix }}4859
 
 [n3_use_examples]: {{ kbCategoryURLPrefix }}879
 
@@ -122,6 +136,8 @@
 [admin_guide_toc]: {{ kbArticleURLPrefix }}4594
 
 [developer_guide_toc]: {{ kbArticleURLPrefix }}4851
+
+[n3_guide_toc]: {{ kbArticleURLPrefix }}4931
 
 [root_toc]: {{ kbArticleURLPrefix }}4594
 
@@ -198,6 +214,8 @@
 [logs_odata_integration]: {{ kbArticleURLPrefix }}4673#logs_odata_integration
 
 [map_configure]: {{ kbArticleURLPrefix }}4679
+
+[n3_filter_active_tasks]: {{ kbArticleURLPrefix }}4935
 
 [notification_types]: {{ kbArticleURLPrefix }}4682
 
@@ -581,7 +599,7 @@
 
 [formula_guide_queries]: {{ kbArticleURLPrefix }}4999#formula_guide_queries
 
-[n3_guide]: {{ kbCategoryURLPrefix }}877
+[n3_guide_reference]: {{ kbArticleURLPrefix }}4852
 
 [n3_editor_autocomplete]: {{ kbArticleURLPrefix }}5039
 

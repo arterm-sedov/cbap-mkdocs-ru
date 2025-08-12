@@ -143,7 +143,7 @@ hide: tags
 - [Настройка поля атрибута типа «Дата и время» на форме][form_dynamic_elements_date_time]
 - [Атрибут типа «Часовой пояс»][attribute_timezone]
 - [Язык формул][formula_guide]
-- [Язык N3][n3_guide]
+- [Язык N3][n3_guide_cat]
 - [HTTP-запросы типа GET. Отправка запроса и обработка ответа в формате JSON][http_send_example]
 - [HTTP-запросы типа POST. Отправка и получение ответа][http_send_post]
 

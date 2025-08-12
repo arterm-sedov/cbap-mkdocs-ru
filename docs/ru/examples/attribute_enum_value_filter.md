@@ -107,7 +107,7 @@ hide:
 --8<-- "related_topics_heading.md"
 
 - _[Атрибут типа «Список значений»][attribute_enum]_
-- _[Написание выражений на языке N3][manual_n3]_
+- _[Написание выражений на языке N3][n3_guide_reference]_
 - _[Атрибут типа «Список значений». Вычисление значения с помощью N3 и формул][attribute_enum_value_calculation]_
 - _[Атрибут типа «Список значений». Вычисление текущего значения][attribute_enum_calculate_current_value]_
 - _[Атрибут типа «Список значений». Вычисление значения по справочнику][attribute_enum_calculate_registry]_

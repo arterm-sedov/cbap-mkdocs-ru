@@ -39,7 +39,9 @@ kbId: 4873
 
 ## Определения {: .admonition-title #definitions}
 
-{% include-markdown ".snippets/tutorial_definitions_basic_entities.md" %}
+{% include-markdown ".snippets/tutorial_definitions_basic_entities_1.md" %}
+- **Атрибут** — простейший элемент данных, описывающий бизнес-сущность (аналог поля в реляционной БД или столбца в Excel), например: _место подачи_ (строка), _количество пассажиров_ (число), _время подачи автомобиля_ (дата/время), _автомобиль_ (ссылка) и т.&nbsp;п.
+{% include-markdown ".snippets/tutorial_definitions_basic_entities_2.md" %}
 
 </div>
 
