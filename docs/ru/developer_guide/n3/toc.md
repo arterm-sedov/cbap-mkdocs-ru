@@ -3,7 +3,7 @@ title: Язык N3. Содержание раздела
 kbId: 4931
 ---
 
-# Язык N3. Содержание раздела
+# Язык N3. Содержание раздела {: #n3_guide_toc }
 
 <div class="relatedTopics" markdown="block">
 
