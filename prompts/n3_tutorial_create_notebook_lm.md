@@ -124,7 +124,7 @@ Use the **HR candidate selection and recruitment process** as the business scena
   - Triples, variables, ?item/?value, basic syntax rules
   
 - **Lesson 2**: Joins, filtering, basic relationships  
-  - object:findAttribute, basic joins, simple filtering
+  - object:findProperty, basic joins, simple filtering
   
 - **Lesson 3**: Conditional logic and iteration
   - if/then/else, or, once, basic iteration patterns

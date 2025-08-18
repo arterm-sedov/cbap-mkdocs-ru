@@ -107,9 +107,9 @@
 
 [n3_guide_knowledge_graphs]: {{ kbArticleURLPrefix }}4857
 
-[n3_guide_model_n3]: {{ kbArticleURLPrefix }}4854
+[n3_guide_modelling]: {{ kbArticleURLPrefix }}4854
 
-[n3_guide_notation_n3]: {{ kbArticleURLPrefix }}4858
+[n3_guide_notation]: {{ kbArticleURLPrefix }}4858
 
 [n3_guide_ontology]: {{ kbArticleURLPrefix }}4856
 
