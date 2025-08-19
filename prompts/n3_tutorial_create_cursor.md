@@ -6,166 +6,281 @@ Generate a complete, standalone N3 (Notation 3/Turtle/RDF) tutorial for Comindwa
 
 ## Lesson Plan Structure
 
-### Lesson 1: N3 Foundation & Platform Context (1.5 hours)
+### Lesson 1: Introduction to N3 (1.5 hours)
 
 **Learning Objectives:**
 
-- Understand RDF and graph database concepts
-- Master triple structure and basic N3 syntax
-- Grasp five types of queries and interpreter behavior
-- Learn platform N3 editor usage
+- Understand RDF, knowledge graphs, and ElasticData
+- Master triple structure, core N3 syntax and shorthands
+- Learn five types of queries and interpreter behavior
+- Know `?item`/`?value` I/O and execution context across entities
+- See N‑Triples vs N3 mapping and Formula → N3 refactor
 
 **Content:**
 
-- RDF and ElasticData technology overview
-- Triple structure with visual examples
-- Basic syntax, variables, and `?item`/`?value` parameters
- - Execution context and I/O per entity table from `docs/ru/developer_guide/n3/n3_guide.md`; include a subsection "Контекст и I/O по сущностям" with anchor `{: #tutorial_n3_lesson_1_io_context }` and reference it from later lessons
-- RDF shorthand: `a` (rdf:type), blank nodes `[]`; note equality `=`; explicitly state whether `=>` (implication) is supported in this context
- - N‑Triples vs N3: clarify N‑Triples is a simple RDF serialization emphasized in the presentations, while the Platform uses N3; include a one-line mapping example; sources: ``docs/ru/developer_guide/n3/n3_guide`, `docs/ru/developer_guide/n3/sources/presentation_converted_from_pdf.md`, `presentation_converted.md`
-- Formula → N3 refactor: show a short formula and its equivalent N3 to build intuition
-- Simple HR queries (candidate → department)
-- Common mistakes mini-box: missing dot, braces, wrong variable reuse
-- Platform N3 editor introduction — very brief
+- RDF model, graphs, ontologies, ontology structure, and data model
+- ElasticData overview and mapping to RDF/N3 ([ElasticData][elasticdata_description])
+- Triples with visuals; syntax: variables, `{}`, `.`, `a`, `[]`, `()`, `=`; note if `=>` is used in platform context
+- Five query types and order of evaluation; reasoner overview
+- Execution context and I/O per entity; add subsection "Контекст и ввод-вывод по сущностям" with anchor `{: #tutorial_n3_lesson_1_io_context }`
+- N‑Triples vs N3; one‑line mapping example; Formula → N3 mini‑refactor
+- Platform N3 editor brief intro; glossary of terms
+- Simple HR data query walk‑through (candidate → department)
+- Common mistakes mini‑box: missing dot, braces, variable reuse
 - Sources:
-  - `docs/ru/developer_guide/n3/n3_tutorial.md`
-  - `docs/ru/developer_guide/n3/n3_guide.md`
-  - `docs/ru/developer_guide/n3/n3_notation.md`
-  - `docs/ru/developer_guide/n3/n3_graphs.md`
-  - `docs/ru/developer_guide/n3/n3_knowledge_graphs.md`
-  - `docs/ru/developer_guide/n3/n3_model.md`
-  - `docs/ru/developer_guide/n3/n3_ontology.md`
-  - `docs/ru/developer_guide/n3/n3_ontology_structure.md`
-  - `docs/ru/developer_guide/n3/n3_glossary.md`
-  - `docs/ru/developer_guide/n3/sources/presentation_converted_from_pdf.md`
+  - `docs/ru/developer_guide/n3/n3_tutorial.md` — baseline tutorial narrative
+  - `docs/ru/developer_guide/n3/n3_guide.md` — syntax, five query types, built‑ins, I/O matrix
+  - `docs/ru/developer_guide/n3/n3_notation.md` — N3 notation fundamentals
+  - `docs/ru/developer_guide/n3/n3_graphs.md` — graph concepts and visuals
+  - `docs/ru/developer_guide/n3/n3_knowledge_graphs.md` — knowledge graph context
+  - `docs/ru/developer_guide/n3/n3_model.md` — data model mapping to N3
+  - `docs/ru/developer_guide/n3/n3_ontology.md` — ontology principles
+  - `docs/ru/developer_guide/n3/n3_ontology_structure.md` — ontology structure details
+  - `docs/ru/developer_guide/n3/n3_glossary.md` — terminology
+  - `docs/ru/developer_guide/n3/sources/presentation_converted_from_pdf.md` — slides → text with N‑Triples emphasis
+  - `docs/ru/developer_guide/n3/sources/n3_tutorial_intro.md` — course intro framing
+  - `docs/ru/developer_guide/n3/sources/n3_tutorial_summary.md` — high‑level summary
+  - `docs/ru/developer_guide/n3/sources/n3_video_transcript_complete_notebook_lm.md` — consolidated instructor insights
+  - `docs/ru/developer_guide/n3/sources/n3_video_part_1_transcript_gemini.md` — basics and context
+  - `docs/ru/developer_guide/n3/sources/n3_video_part_2_transcript_gemini.md` — syntax and queries
+  - `docs/ru/developer_guide/n3/sources/n3_video_part_3_transcript_gemini.md` — logic and performance
+  - `docs/ru/developer_guide/n3/sources/n3_video_part_4_transcript_gemini.md` — collections and functions
+  - `docs/ru/developer_guide/n3/sources/n3_notebook_lm_audio_summary_transcript_2.md` — condensed recap (audio)
+  - `docs/ru/developer_guide/n3/sources/n3_notebook_lm_audio_summary_transcript.md` — condensed recap (audio)
+  - `docs/ru/developer_guide/n3/sources/n3_notebook_lm_notes_2.md` — study notes 2
+  - `docs/ru/developer_guide/n3/sources/n3_notebook_lm_notes.md` — study notes 1
+  - `docs/ru/developer_guide/n3/sources/n3_notebook_lm_video_summary_transcript.md` — video summary transcript
+  - `docs/ru/developer_guide/n3/sources/n3_notebook_lm_video_summary.md` — video summary
+  - `docs/ru/developer_guide/n3/sources/n3_presentation_summary_notebook_lm.md` — presentation summary
 
-**Assessment in tests.md:** 2-3 questions on triple structure and basic syntax
+**Assessment in tests.md:** 2–3 questions on triples,  basic syntax, and I/O
 
-### Lesson 2: Data Navigation & Discovery (2 hours)
+### Lesson 2: Core Syntax, Variables, Query Types (1 hour)
 
 **Learning Objectives:**
 
-- Master `object:findProperty` for attribute discovery
-- Navigate complex data relationships
-- Understand system vs. application attributes
-- Learn variable assignment patterns and iterator mechanics
+- Use variables and core syntax correctly (`{}`, `.`, `?variable`)
+- Apply `?item`/`?value` across contexts
+- Practice five query types with minimal examples
 
 **Content:**
 
-- Multi-step navigation (candidate → manager → department)
-- Formula → N3 refactor: show a short formula and its equivalent N3 to build intuition
-- URI and namespace concepts
-- Variable assignment patterns (3 types from tutorial)
-- Variable naming guidance: use explicit names for hops (e.g., `?candidateManager`, `?candidateDept`)
-- Iterator mechanics and collection processing; iterator hygiene: most selective triple first; use `once {}` only when there are no multivalued links. Iterator causes exit/break from the N3 expression when it hits `false` result at any string. The only way to avoid this is to use `if-then-else`, which will revert to `else` block when `false` triggers.
+- Triples anatomy; variable naming guidance
+- `?item`/`?value` usage patterns and type discipline
+- Five query types with tiny runnable snippets
+- Error hygiene: dots, braces, case sensitivity
+- Formula → N3 refactor (simple)
+- Sources:
+  - `docs/ru/developer_guide/n3/n3_guide.md` — five forms, I/O matrix, syntax
+  - `docs/ru/developer_guide/n3/n3_tutorial.md` — beginner examples
+  - `docs/ru/developer_guide/n3/sources/n3_video_part_1_transcript_gemini.md` — basics
+  - `docs/ru/developer_guide/n3/sources/presentation_converted_from_pdf.md` — mapping examples
+
+**Assessment in tests.md:** 2–3 questions on syntax and `?item`/`?value`
+
+### Lesson 3: Prefixes, URIs, Property Discovery (1 hour)
+
+**Learning Objectives:**
+
+- Understand URIs, QNames, and prefixes
+- Use `object:findProperty` to resolve attribute URIs
+- Distinguish application vs system attributes
+
+**Content:**
+
+- Prefix declarations and URI/QName rationale
+- `object:findProperty` patterns; mapping to predicates
+- Variable assignment variants (subject/object/predicate known)
+- Sources:
+  - `docs/ru/developer_guide/n3/n3_guide.md` — prefixes, `object:findProperty`
+  - `docs/ru/developer_guide/n3/n3_tutorial.md` — property discovery walkthroughs
+  - `docs/ru/developer_guide/n3/sources/n3_video_part_2_transcript_gemini.md` — discovery details
+
+**Assessment in tests.md:** 2 questions on prefixes and property lookup
+
+### Lesson 4: Data Navigation & Variable Assignment (1 hour)
+
+**Learning Objectives:**
+
+- Navigate multi‑hop relations safely
+- Apply three variable assignment patterns
+- Name intermediates clearly for readability
+
+**Content:**
+
+- Multi‑step navigation (candidate → manager → department)
+- Three assignment variants; exact‑match checks
+- Formula → N3 refactor (link traversal)
 - Practical exercise: Build candidate filtering system
 - Sources:
-  - `docs/ru/developer_guide/n3/n3_tutorial.md`
-  - `docs/ru/developer_guide/n3/n3_guide.md`
-  - `docs/ru/developer_guide/n3/n3_notation.md`
-  - `docs/ru/examples/n3_collection_join_filter.md`
-  - `docs/ru/examples/n3_collection_join_filter_hierarchy.md`
-  - `docs/ru/examples/n3_collection_join_string.md`
+  - `docs/ru/developer_guide/n3/n3_tutorial.md` — three assignment patterns
+  - `docs/ru/examples/n3_collection_join_filter.md` — join & filter pattern
+  - `docs/ru/examples/n3_collection_join_filter_hierarchy.md` — hierarchical joins
+  - `docs/ru/examples/n3_collection_join_string.md` — joins to strings
+  - `docs/ru/tutorials/tutorial_architect/lesson_2.md` — UI task context tie‑ins
 
-**Assessment in tests.md:** 2-3 questions on attribute discovery and navigation
+**Assessment in tests.md:** 2 questions on navigation patterns
 
-### Lesson 3: Advanced Logic & Performance (2 hours)
-
-**Learning Objectives:**
-
-- Implement `or` with 2–3 branches for object filtering and selection; understand conjunction-by-default
-- Use conditional logic and performance optimization
-- Master logical assertions and control flow
-- Apply debugging techniques and error handling
-
-**Content:**
-
-- Formula → N3 refactor: show a short formula and its equivalent N3 to build intuition
-- Conditional filtering patterns: `or` and default AND between triples
-- Ultra-simple OR examples (2–3 branches):
-  - Attribute A OR B is present
-  - Assignee OR Creator equals current user
-  - Department is IT OR Sales
- - Guidance: keep OR chains short; for many alternatives prefer set unions + `assert:union` + `w3list:in`
-- Conditional logic (`if-then-else`)
-- Performance optimization (`once`, selective joins), set operations (`assert:union`)
-- Logical assertions (`assert:count`, `assert:distinct`, `assert:sort`)
- - Negation patterns: `not { ... }` for empty checks; see recipe and examples in `docs/ru/developer_guide/n3/n3_tutorial.md` and `docs/ru/developer_guide/n3/n3_guide.md`
-- Debugging techniques and common pitfalls
-- Sources:
-  - `docs/ru/developer_guide/n3/n3_tutorial.md`
-  - `docs/ru/developer_guide/n3/sources/n3_video_transcript_complete_notebook_lm.md`
-  - `docs/ru/examples/n3_filter_active_tasks.md`
-  - `docs/ru/examples/n3_calculate_active_task_accounts.md`
-  - `docs/ru/examples/n3_calculate_active_task_assignee.md`
-  - `docs/ru/examples/n3_collection_select_conditional.md`
-
-**Assessment in tests.md:** 2-3 questions on logical operators and performance
-
-### Lesson 4: Collection Processing & Functions (1.5 hours)
+### Lesson 5: Iterator & Performance Basics (1 hour)
 
 **Learning Objectives:**
 
-- Master collection manipulation and aggregation
-- Apply mathematical and string functions
-- Use date/time operations and list processing
-- Implement complex data transformations
+- Explain iterator behavior and fan‑out
+- Use `once {}` safely; order triples by selectivity
+- Use negation `not { ... }` for emptiness checks
 
 **Content:**
 
-- Formula → N3 refactor: show a short formula and its equivalent N3 to build intuition
-- `from-select` construction for data aggregation
-- Collection manipulation (`list:append`, `assert:union`)
-- Last item of collection: (1) build list via `from-select` and use `w3list:last` (or platform-specific last); (2) sort with `assert:sort` and take the last
-- Mathematical functions (`w3math`, `cmwmath`)
-- String operations (`w3string`, `cmwstring`)
-- Date/time functions (`w3time`, `cmwtime`)
-- List operations (`w3list`, `cmwlist`)
+- Iterator semantics and selection rules; break on `false`
+- Performance hygiene; safe `once {}` cases
+- Negation and default conjunction between triples
 - Sources:
-  - `docs/ru/examples/n3_collection_get_selected_ids.md`
-  - `docs/ru/examples/n3_collection_join_filter.md`
-  - `docs/ru/examples/n3_collection_join_string.md`
-  - `docs/ru/examples/attribute_enum_value_filter.md`
-  - `docs/ru/examples/n3_periodic_task_notifications.md`
+  - `docs/ru/developer_guide/n3/n3_tutorial.md` — iterator deep dive
+  - `docs/ru/developer_guide/n3/n3_guide.md` — `once`, `not`, conjunction
+  - `docs/ru/developer_guide/n3/sources/n3_video_part_3_transcript_gemini.md` — performance tips
 
-**Assessment in tests.md:** 2-3 questions on collection processing and functions
+**Assessment in tests.md:** 2 questions on iterator and negation
 
-### Lesson 5: Real-World Integration & Best Practices (1 hour)
+### Lesson 6: Conditional Logic and Small OR (1 hour)
 
 **Learning Objectives:**
 
-- Integrate all N3 concepts in complete business solution
-- Apply performance monitoring and optimization
-- Implement role-based access control patterns
-- Master common patterns and best practices
+- Use `or {}` (2–3 branches) and `if … then … else` correctly
+- Combine results with `assert:union`; count and distinct
 
 **Content:**
 
-- Formula → N3 refactor: show a short formula and its equivalent N3 to build intuition
-- Complete HR candidate management system
-- Performance monitoring and optimization
-- Common patterns and anti-patterns
-- Platform-specific features and capabilities
-- Final project: End-to-end candidate selection workflow
- - Self‑study (optional):
-   - Deep schema exploration (e.g., `cmw:UserTask` class declarations from presentations)
-   - Null checks and nullable helpers: `== null` usage and overview of `cmwnullable:*` functions; sources: `docs/ru/developer_guide/n3/n3_guide.md`
+- Small OR patterns; avoid long chains (prefer sets + `w3list:in`)
+  
+  - Ultra-simple OR examples (2–3 branches):
+    - Attribute A OR B is present
+    - Assignee OR Creator equals current user
+    - Department is IT OR Sales
+- `if/then/else` control flow; triaging logic early
+- `assert:union`, `assert:count`, `assert:distinct`, `assert:sort`
 - Sources:
-  - `docs/ru/examples/document_clone_scenario_n3.md`
-  - `docs/ru/examples/autonumerating_related_records.md`
-  - `docs/ru/examples/n3_periodic_task_notifications.md`
+  - `docs/ru/developer_guide/n3/n3_guide.md` — operators and asserts
+  - `docs/ru/examples/n3_collection_select_conditional.md` — conditional selection
+  - `docs/ru/examples/n3_filter_active_tasks.md` — OR filter example
+  - `docs/ru/examples/n3_calculate_active_task_accounts.md` — union pattern
 
-**Assessment in tests.md:** 2-3 questions on integration and best practices
+**Assessment in tests.md:** 2 questions on `or` and `if`
+
+### Lesson 7: Collections, from/select, Last Item (1 hour)
+
+**Learning Objectives:**
+
+- Build lists with `from { } select` and aggregate
+- Get last item via `w3list:last` or `assert:sort`
+
+**Content:**
+
+- `from/select` construction and list types
+- Aggregations and list utilities
+- Sources:
+  - `docs/ru/examples/n3_collection_get_selected_ids.md` — building lists
+  - `docs/ru/examples/n3_collection_join_filter.md` — list from joins
+  - `docs/ru/examples/n3_periodic_task_notifications.md` — sorting/last
+  - `docs/ru/developer_guide/n3/n3_guide.md` — `w3list:*`, `assert:sort`
+
+**Assessment in tests.md:** 2 questions on `from/select` and last item
+
+### Lesson 8: Math, String, Time, List, Nullable (1.5 hours)
+
+**Learning Objectives:**
+
+- Apply `w3math`/`cmwmath`, `w3string`/`cmwstring`, `w3time`/`cmwtime`
+- Use `w3list`/`cmwlist` and `cmwnullable:*` safely
+
+**Content:**
+
+- Practical function recipes and data types
+- Nullable‑safe comparisons and arithmetic
+- Sources:
+  - `docs/ru/developer_guide/n3/n3_guide.md` — function catalogs
+  - `docs/ru/examples/attribute_date_time_value_format.md` — date/time formatting
+  - `docs/ru/examples/n3_collection_join_string.md` — strings & joins
+  - `docs/ru/examples/attribute_enum_value_filter.md` — list filters
+  - `docs/ru/developer_guide/n3/sources/n3_video_part_4_transcript_gemini.md` — function usage
+  - `docs/ru/tutorials/tutorial_architect/lesson_8.md` — UI tasks (cross‑domain)
+
+**Assessment in tests.md:** 2–3 questions on functions and nullable
+
+### Lesson 9: Patterns, Security Context, Debugging (1 hour)
+
+**Learning Objectives:**
+
+- Implement role‑based filters and security context patterns
+- Apply reusable N3 patterns and troubleshooting steps
+
+**Content:**
+
+- Security context and current user; role filters
+- Pattern cards: small OR, set unions, collection pipelines
+- Debug checklist; reduce to minimal triple; error handling patterns
+- Sources:
+  - `docs/ru/developer_guide/n3/n3_guide.md` — security context, asserts
+  - `docs/ru/examples/n3_filter_active_tasks.md` — role/user filters
+  - `docs/ru/examples/autonumerating_related_records.md` — pattern reuse
+  - `docs/ru/developer_guide/n3/sources/n3_presentation_summary_notebook_lm.md` — pattern highlights
+
+**Assessment in tests.md:** 2 questions on security and debugging
+
+### Lesson 10: Integration & Best Practices (1 hour)
+
+**Learning Objectives:**
+
+- Integrate N3 into end‑to‑end solutions (HR example)
+- Use messaging and data I/O patterns in expressions
+
+**Content:**
+
+- Complete candidate selection workflow; performance monitoring
+- Email/HTTP/SQL integration touchpoints where expressions apply
+- Capstone exercise scaffolding
+- Self‑study (optional): deep schema exploration (e.g., `cmw:UserTask`); nullable helpers overview (`cmwnullable:*`)
+- Sources:
+  - `docs/ru/examples/document_clone_scenario_n3.md` — end‑to‑end cloning flow
+  - `docs/ru/examples/autonumerating_records.md` — numbering pattern
+  - `docs/ru/examples/n3_periodic_task_notifications.md` — notification logic
+  - `docs/ru/examples/n3_calculate_active_task_assignee.md` — assignee logic
+  - `docs/ru/examples/attribute_document_add_file_n3.md` — file add via N3
+  - `docs/ru/examples/attribute_document_get_file_n3.md` — file get via N3
+  - `docs/ru/examples/attribute_enum_compare_value_n3.md` — enum compare
+  - `docs/ru/examples/attribute_enum_filter_value_n3.md` — enum filter
+  - `docs/ru/examples/attribute_enum_get_data_localized_n3.md` — localized enums
+  - `docs/ru/examples/attribute_enum_get_data_n3.md` — enum data
+  - `docs/ru/examples/attribute_enum_set_value_n3.md` — enum set value
+  - `docs/ru/examples/scenario_verify_data.md` — data verification scenario
+  - `docs/ru/examples/scenario_receive_email.md` — receive email
+  - `docs/ru/examples/scenario_send_email.md` — send email
+  - `docs/ru/examples/http_receive_file.md` — HTTP receive file
+  - `docs/ru/examples/http_send_file.md` — HTTP send file
+  - `docs/ru/examples/receive_http_example.md` — HTTP receive example
+  - `docs/ru/examples/sql_receive_connection.md` — SQL receive
+  - `docs/ru/examples/sql_send_connection.md` — SQL send
+  - `docs/ru/examples/architect_example.md` — architect example
+  - `docs/ru/examples/variables.md` — variables overview
+  - `docs/ru/examples/scenario_variables.md` — scenario variables
+  - `docs/ru/examples/process_error_monitor.md` — process error checks
+  - `docs/ru/examples/index.md` — examples index for cross‑links
+
+**Assessment in tests.md:** 2–3 questions on integration patterns and best practices
 
 ## File Structure to Generate
 
 tutorial_n3/
 ├── intro.md (Course overview and setup)
-├── lesson_1.md (N3 Foundation & Platform Context)
-├── lesson_2.md (Data Navigation & Discovery)
-├── lesson_3.md (Advanced Logic & Performance)
-├── lesson_4.md (Collection Processing & Functions)
-├── lesson_5.md (Real-World Integration & Best Practices)
+├── lesson_1.md (Introduction to N3 — All‑in overview)
+├── lesson_2.md (Core Syntax, Variables, Query Types)
+├── lesson_3.md (Prefixes, URIs, Property Discovery)
+├── lesson_4.md (Data Navigation & Variable Assignment)
+├── lesson_5.md (Iterator & Performance Basics)
+├── lesson_6.md (Conditional Logic and Small OR)
+├── lesson_7.md (Collections, from/select, Last Item)
+├── lesson_8.md (Math, String, Time, List, Nullable)
+├── lesson_9.md (Patterns, Security Context, Debugging)
+├── lesson_10.md (Integration & Best Practices)
 ├── outro.md (Summary and next steps)
 └── tests.md (Assessment with answers)
 
@@ -205,7 +320,7 @@ tutorial_n3/
 
 - **Audience**: Beginner level, standalone completion
 - **Platform**: Comindware Platform 5.0
-- **Duration**: 8 hours total (5 lessons + intro + outro + tests)
+- **Duration**: 12 hours total (10 lessons + intro + outro + tests)
 - **Integration**: HR business logic, loose connection to @/tutorial_hr for context
 
 ### Business Context
@@ -300,8 +415,8 @@ tutorial_n3/
 
 ``` yaml
 ---
-title: '[Lesson Title]'
-kbTitle: '[Full KB Title]'
+title: '[Lesson Title in single quotes]'
+kbTitle: '[Full KB Title  in single quotes]'
 kbId: [Empty]
 tags:
   # Common tutorial_n3 tags
@@ -317,7 +432,7 @@ tags:
   - уроки
   - платформа
   # Lesson-specific tags
-  - [specific lesson, relevant N3 and business-oriented]
+  - [specific for lesson, relevant N3 and business-oriented]
 hide: tags
 ---
 ```
@@ -447,19 +562,24 @@ Each lesson must end with a transition section following this pattern:
 
 [Lesson summary content...]
 
-В [следующем уроке][tutorial_n3_lesson_X_plus_1] вы {brief description of next lesson content}.
+В ходе [следующего урока][tutorial_n3_lesson_X_plus_1] вы {brief description of next lesson content}.
 ```
 
 **Examples:**
-- **Lesson 1**: `В [следующем уроке][tutorial_n3_lesson_2] вы научитесь навигации по данным и обнаружению атрибутов.`
-- **Lesson 2**: `В [следующем уроке][tutorial_n3_lesson_3] вы освоите продвинутую логику и оптимизацию производительности.`
-- **Lesson 3**: `В [следующем уроке][tutorial_n3_lesson_4] вы изучите обработку коллекций и функции.`
-- **Lesson 4**: `В [следующем уроке][tutorial_n3_lesson_5] вы интегрируете все концепции N3 в реальное бизнес-решение.`
-- **Lesson 5**: `В [итоговом тестировании][tutorial_n3_tests] вы проверите свои знания по всему курсу.`
+- **Lesson 1**: `В ходе [следующего урока][tutorial_n3_lesson_2] вы закрепите синтаксис и формы запросов.`
+- **Lesson 2**: `В ходе [следующего урока][tutorial_n3_lesson_3] вы изучите префиксы, URI и поиск атрибутов.`
+- **Lesson 3**: `В ходе [следующего урока][tutorial_n3_lesson_4] вы освоите навигацию по данным и присвоение переменных.`
+- **Lesson 4**: `В ходе [следующего урока][tutorial_n3_lesson_5] вы разберётесь с итератором и производительностью.`
+- **Lesson 5**: `В ходе [следующего урока][tutorial_n3_lesson_6] вы проработаете условную логику и короткие OR.`
+- **Lesson 6**: `В ходе [следующего урока][tutorial_n3_lesson_7] вы научитесь работать со списками и from/select.`
+- **Lesson 7**: `В ходе [следующего урока][tutorial_n3_lesson_8] вы примените функции для чисел, строк и дат, а также nullable.`
+- **Lesson 8**: `В ходе [следующего урока][tutorial_n3_lesson_9] вы отработаете паттерны, безопасность и отладку.`
+- **Lesson 9**: `В ходе [следующего урока][tutorial_n3_lesson_10] вы интегрируете N3 в полноценное решение.`
+- **Lesson 10**: `В [итоговом тестировании][tutorial_n3_tests] вы проверите свои знания по всему курсу.`
 
 ### Assessment Strategy
 
-- **2-3 questions per lesson** (total: 10-15 questions)
+- **2-3 questions per lesson** (total: 20-30 questions)
 - **Answers provided at bottom** of `tests.md`
 - **Mix of theoretical and practical**
 - **Progressive difficulty** matching lesson complexity
@@ -557,5 +677,5 @@ Each lesson must end with a transition section following this pattern:
 - **Practical applicability** in HR business context
 - **Progressive skill development** from beginner to intermediate
 - **Consistent quality** matching existing tutorial standards
-- **8-hour completion time** maintained
+- **12-hour completion time** maintained
 - **All assessment questions** properly structured with answers
