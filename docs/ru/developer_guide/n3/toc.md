@@ -7,7 +7,7 @@ kbId: 4931
 
 <div class="relatedTopics" markdown="block">
 
-- [Технология Comindware ElasticData][elasticdata_description]
+- [Технология {{ productNameElasticData }}][elasticdata_description]
 - [Справочник по выражениям на языке N3][n3_guide_reference]
 - [Предиктивный ввод в выражениях на языке N3][n3_editor_autocomplete]
 - [Описание модели Notation N3][n3_guide_notation]
