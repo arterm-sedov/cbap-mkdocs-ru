@@ -128,8 +128,8 @@ hide: tags
 
 - [Онтология][n3_guide_ontology]
 - [Технология {{ productNameElasticData }}][elasticdata_description]
-- [Графы][n3_graphs]
-- [Графы знаний][n3_knowledge_graphs]
+- [Графы][n3_guide_graphs]
+- [Графы знаний][n3_guide_knowledge_graphs]
 - [Моделирование на N3][n3_guide_modelling]
 
 </div>
@@ -308,7 +308,7 @@ employee:Филимонова relation:worksIn department:Бухгалтерия
 - `?item` — входные данные;
 - `?value` — выходные данные.
 
-Полная матрица содержимого `?item` и `?value` в зависимости от контекста представлена в _[Справочнике по языку N3][n3_guide]_.
+Полная матрица содержимого `?item` и `?value` в зависимости от контекста представлена в _[Справочнике по языку N3][n3_guide_reference]_.
 
 ## Практическое задание. Вычисление значения атрибута с помощью N3 {: #tutorial_n3_lesson_1_calculate_attribute }
 
@@ -416,11 +416,11 @@ employee:Филимонова relation:worksIn department:Бухгалтерия
 --8<-- "related_topics_heading.md"
 
 - [Технология {{ productNameElasticData}}][elasticdata_description]
-- [Справочник по N3][n3_guide]
+- [Справочник по N3][n3_guide_reference]
 - [Онтология][n3_guide_ontology]
-- [Графы][n3_graphs]
-- [Графы знаний][n3_knowledge_graphs]
-- [Нотация N3][n3_notation]
+- [Графы][n3_guide_graphs]
+- [Графы знаний][n3_guide_knowledge_graphs]
+- [Нотация N3][n3_guide_notation]
 - [Моделирование на N3][n3_guide_modelling]
 - [Редактор выражений. Использование][expression_editor]
 - [Предиктивный ввод в выражениях на языке N3][n3_editor_autocomplete]
