@@ -1,0 +1,46 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4943" kb-tags="" kb-title="Фильтр записей в коллекции по заданному параметру">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>В этой статье будет описано как с помощью языка запросов N3 можно фильтровать данные в коллекции по какому-либо параметру, определённому в текущей записи.</p>
+<p>Для начала рассмотрим модель данных:</p>
+<ul>
+<li>Шаблон записи (в нашем примере «Organizatsii»), хранящий мастер-данные, со следующими атрибутами:
+  1. Атрибут (в нашем примере «Filtrpooblasti» с типом данных «Текст»), в котором будет определен параметр для поиска записей в коллекции;
+  2. Атрибут с типом данных «Коллекция» (в нашем примере «Adresaofisov_col»), коллекция, записи в которой будут фильтроваться.</li>
+<li>Шаблон записи (в нашем примере «Adresa»), хранящий записи в коллекции, со следующими атрибутами:
+  1. Атрибут (в нашем примере «Oblast» с типом данных «Текст»), по которому будет осуществляться фильтрация.</li>
+</ul>
+<p>Далее, на конструкторе формы кликните на коллекцию и вставьте следующее выражение в «Фильтры записей: Для отображения»:</p>
+<div class="highlight"><code><pre><span></span><code>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.</code> <br/><code>{</code> <br/><code>   ("Adresa" "Oblast") object:findProperty ?PropertyOblast.</code> <br/><code>   ("Organizatsii" "Adresaofisov_col") object:findProperty ?PropertyAdresaofisov_col.</code> <br/><code>   ("Organizatsii" "Filtrpooblasti") object:findProperty ?PropertyOblastFilter.</code> <br/><code> </code> <br/><code>   ?item ?PropertyOblastFilter ?filter.</code> <br/><code>   ?item ?PropertyAdresaofisov_col ?result_A.</code> <br/><code>   ?result_A ?PropertyOblast ?filter.</code> <br/><code>   ?result_A -&gt; ?value.</code> <br/><code>}</code> <br/></pre></code></div>
+<p>Теперь разберём выражение на N3 построчно:</p>
+<ul>
+<li><strong><em>@prefix object: <a class="mkdocs_imported_link" href="http://comindware.com/ontology/object#">http://comindware.com/ontology/object#</a></em></strong> — в первой строке подключаем библиотеку «object» для того, чтобы в последующем можно было использовать её свойство «findProperty».</li>
+<li><strong><em>("Adresa" "Oblast") object:findProperty ?PropertyOblast.</em></strong> — в строках 3-5 определяем переменные-предикаты, через которые будем получать значения атрибутов. Сначала указываем системное имя шаблона записи, затем системное имя атрибута, значение которого хотим получить: (<strong><em>"Adresa" "Oblast"</em></strong>). Затем используем свойство библиотеки «object:findProperty», чтобы получить ID атрибута в какую-либо переменную, например, «PropertyOblast» (названия переменных задаются произвольно).</li>
+<li><strong><em>?item ?PropertyOblastFilter ?filter.</em></strong> — в 7-ой строке происходит следующее: из текущей записи («item») по свойству «PropertyOblastFilter» получаем значение в переменную «filter» (название переменной также задаём произвольно).</li>
+</ul>
+<p><strong>Примечание :</strong> в языке запросов N3 присутствуют зарезервированные переменные: «item» и «value». «item» — содержит в себе ID записи, в рамках которой отрабатывает выражение (изначальный контекст). «value» — используется для вывода результата тройки.</p>
+<ul>
+<li><strong><em>?item ?PropertyAdresaofisov_col ?result_A.</em></strong> — аналогичное действие происходит и в 8-ой строке: из текущей записи получаем значение атрибута «Adresaofisov_col» в переменную «result_A». Так как этот атрибут является коллекцией, то в «result_A» у нас будет содержаться список записей в коллекции.</li>
+<li><strong><em>?result_A ?PropertyOblast ?filter.</em></strong> — в 9-ой строке для всего списка записей «result_A» мы получаем значения по свойству «PropertyOblast». Справа у нас уже определено значение («filter»), поэтому в списке останутся только те записи, у которых значение атрибута «Oblast» совпадает со значением в атрибуте «Filtrpooblasti».</li>
+<li><strong><em>?result_A -&gt; ?value.</em></strong> — в 10-ой строке выводим результат в «value», после чего можем наблюдать отфильтрованную коллекцию.</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример фильтрации записей в коллекции" src="https://kb.comindware.ru/assets/N3_11.PNG"/><figcaption class="caption">Пример фильтрации записей в коллекции</figcaption></p>
+</figure>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

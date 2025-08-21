@@ -1,0 +1,50 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4889" kb-tags="" kb-title="Правила для формы. Настройка динамического отображения полей атрибутов">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>В <strong>Comindware Platform</strong> есть возможность реализации динамических форм для заполнения. Данный функционал настраивается в разделе «<em>Правила для формы</em>» в настройках дизайнера конкретной формы.</p>
+<p><strong>Сценарий</strong></p>
+<p>При создании заявки на командировку сотруднику нужно выбрать страну, город и аэропорт, в который ему необходимо прибыть. Отображать сразу все атрибуты не совсем удобно, желательно показывать их последовательно при заполнении предыдущего.</p>
+<p><strong>Описание</strong></p>
+<p>В системе создан шаблон записи «<em>Заявки на командировки</em>» с атрибутами:</p>
+<ul>
+<li>Страна (request_country);</li>
+<li>Город (request_city);</li>
+<li>Аэропорт (request_airport).</li>
+</ul>
+<p>На форму вынесены атрибуты и настроены следующие доступы:</p>
+<ul>
+<li>Страна (request_country) — Требовать ввод;</li>
+<li>Город (request_city) — Скрыть;</li>
+<li>Аэропорт (request_airport) — Скрыть.</li>
+</ul>
+<p><strong>Настройка:</strong></p>
+<p>В правилах для формы вынесите элемент «<em>Правило</em>» и затем вынесите внутри него «<em>Действия</em>»:</p>
+<ul>
+<li>Для атрибута «Город» (request_city):</li>
+<li>Действие — Изменить доступ;</li>
+<li>Новое значение — Требовать ввод;</li>
+<li>Условие применения — <em>NOT(EMPTY($request_country))</em>.</li>
+<li>Для атрибута «Аэропорт» (request_airport):</li>
+<li>Действие — Изменить доступ;</li>
+<li>Новое значение — Требовать ввод;</li>
+<li>Условие применения — <em>NOT(EMPTY($request_city))</em>.</li>
+</ul>
+<p><strong>Примечание :</strong> в разных формах шаблона записи можно настроить разные правила для отображения атрибутов.</p>
+<p>См. также: <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4901">Атрибут типа «Запись». Настройка фильтра записей для раскрывающегося списка на форме</a>.</p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

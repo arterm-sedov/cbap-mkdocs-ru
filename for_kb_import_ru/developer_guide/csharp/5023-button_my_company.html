@@ -1,0 +1,26 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5023" kb-tags="" kb-title="Кнопка «Моя компания»">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для того, чтобы разместить на боковую панель навигации ссылку на компанию пользователя, создайте операцию типа Скрипт в текущем Шаблоне записи и введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code>using System;</code> <br/><code>using System.Collections.Generic;</code> <br/><code>using System.Linq;</code> <br/><code>using Comindware.Data.Entity;</code> <br/><code>using Comindware.TeamNetwork.Api.Data.UserCommands;</code> <br/><code></code> <br/><code>public class Script</code> <br/><code>{</code> <br/><code></code> <br/><code>    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)</code> <br/><code>    {</code> <br/><code>        var user = Api.TeamNetwork.ObjectService.GetWithAlias("Kontaktyklientov", userCommandContext.CurrentUserId);</code> <br/><code>        var error = user == null ? "У пользователя нет компании" : null;</code> <br/><code>        var companyId = error == null ? user["company"] as string : null;</code> <br/><code>        var result = new UserCommandResult()</code> <br/><code>        {</code> <br/><code>            Success = error == null,</code> <br/><code>            Messages = error == null ? null : new[]</code> <br/><code>            {</code> <br/><code>                new UserCommandMessage</code> <br/><code>                {</code> <br/><code>                    Severity = SeverityLevel.Normal,</code> <br/><code>                    Text = error</code> <br/><code>                }</code> <br/><code>            },</code> <br/><code>            ResultType = error == null ? UserCommandResultType.Navigate : UserCommandResultType.Notificate,</code> <br/><code>            NavigationResult = new UserCommandNavigationResult</code> <br/><code>            {</code> <br/><code>                ContainerId = "oa.4",</code> <br/><code>                ObjectId = companyId,</code> <br/><code>                Context = ContextType.Record</code> <br/><code>            }</code> <br/><code>        };</code> <br/><code>        return result;</code> <br/><code>    }</code> <br/><code>}</code> <br/></pre></code></div>
+<p><strong>где:</strong></p>
+<p><strong>Kontaktyklientov</strong> - системное имя Шаблона пользователя, где хранятся все контактные лица клиентов в системе;</p>
+<p><strong>company</strong> - системное имя атрибута типа Ссылка в Шаблоне пользователя, ссылающийся на текущий Шаблон записи;</p>
+<p><strong>oa.4</strong> - ИД текущего Шаблона записи.</p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

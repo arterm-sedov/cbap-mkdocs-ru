@@ -1,0 +1,52 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4901" kb-tags="" kb-title="Атрибут типа «Запись». Настройка фильтра записей для раскрывающегося списка на форме">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>В <strong>Comindware Platform</strong> для выбора значения из другого шаблона записи необходимо использовать атрибут с типом данных «<strong>Запись</strong>». По умолчанию в раскрывающемся списке отображаются все записи, но в некоторых сценариях необходимо показывать только определенные записи.</p>
+<p>Для ограничения отображения и выбора записей необходимо использовать функционал «<strong>Фильтр</strong>» в настройках конструктора конкретной формы, на которую вынесен данный атрибут.</p>
+<p><strong>Сценарий:</strong> при создании заявки на командировку сотруднику нужно выбрать город, в который ему необходимо прибыть. Выбирать из всех городов не совсем удобно, желательно отфильтровать города по выбранной стране командировки.</p>
+<p><strong>Настройка:</strong></p>
+<p><strong>1.</strong> Создайте:</p>
+<ul>
+<li>Шаблон записи «Страны» (countries) с атрибутами:</li>
+<li>Название (title) — текст;</li>
+<li>Города страны — запись с несколькими значениями.</li>
+<li>Шаблон записи «Города» (cities) с атрибутами:</li>
+<li>Название (title) — текст;</li>
+<li>Страна (country) — запись из шаблона «Страны».</li>
+<li>Шаблон записи «Заявки на командировки» (Zayavkinakomandirovku) с атрибутами:</li>
+<li>Название — текст;</li>
+<li>Страна (request_country) — запись из шаблона «Страны»;</li>
+<li>Город (request_city) — запись из шаблона «Города»;</li>
+</ul>
+<p><strong>2.</strong> В конструкторе формы шаблона «Заявка на командировку» для поля «Города» (request_city) в свойстве «Фильтр» предусмотрено несколько вариантов фильтрации:</p>
+<ul>
+<li>Атрибут — выберите из раскрывающего списка атрибут: <strong><em>«Страны» -&gt; «Города страны»</em></strong>;</li>
+<li>Формула — напишите выражение на языке Comindware Expression Language: <strong><em>(from a in db-&gt;cities where a-&gt; country == $request_country select a-&gt;id)</em></strong>;</li>
+<li>N3 — напишите выражение на языке N3:</li>
+</ul>
+<div class="highlight"><code><pre><span></span><code>@prefix container: &lt;http://comindware.com/ontology/container#&gt;.</code> <br/><code>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.</code> <br/><code>@prefix math: &lt;http://www.w3.org/2000/10/swap/math#&gt;.</code> <br/><code>{</code> <br/><code>    ("cities" "country") object:findProperty ?citiescountryProp.</code> <br/><code>    ("Zayavkinakomandirovku" "request_country") object:findProperty ?Zayavkinakomandirovkurequest_countryProp.</code> <br/><code> </code> <br/><code>    ?item ?Zayavkinakomandirovkurequest_countryProp ?Zayavkinakomandirovkurequest_countryProperty.</code> <br/><code>    ?value a [object:alias "cities"].</code> <br/><code>    ?value ?citiescountryProp ?Zayavkinakomandirovkurequest_countryProperty.</code> <br/><code>    </code> <br/><code>}</code> <br/></pre></code></div>
+<ul>
+<li>DMN — выберите источник данных Города и настройте в соответствии с информацией ниже:</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример DMN запроса" src="https://kb.comindware.ru/assets/dmn1.png"/><figcaption class="caption">Пример DMN запроса</figcaption></p>
+</figure>
+<p><strong>3.</strong> Проверьте работу фильтра, выбрав сначала страну, потом город. В раскрывающемся списке показываются записи с учетом прав доступа согласно роли пользователя. При отсутствии записей для выбора проверьте права доступа.</p>
+<p><strong>Примечание :</strong> используя правила для формы можно настроить динамическое отображение полей для более удобного заполнения.</p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

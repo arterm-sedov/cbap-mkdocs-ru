@@ -1,0 +1,558 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="" kb-tags="" kb-title="">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="обзорный-курс">Обзорный курс</h1>
+<h1 id="содержание">Содержание</h1>
+<p>Урок 1. Онтологии в реальном мире</p>
+<p>Урок 2. Введение в графы</p>
+<p>Урок 3. N-Triples — что это такое?</p>
+<p>Урок 4. Comindware Elastic Data</p>
+<p>Урок 5. Запросы N-Triples и как они работают</p>
+<p>Урок 6. Использование N-Triples в платформе</p>
+<h1 id="онтологии-в-реальном-мире">Онтологии в реальном мире</h1>
+<p><img alt="" src="/platform/v5.0/developer_guide/n3/sources/img/presentation_0.png"/></p>
+<p><img alt="" src="/platform/v5.0/developer_guide/n3/sources/img/presentation_1.png"/></p>
+<p>Окружающий мир состоит из объектов</p>
+<p>Объекты имеют различные характеристики</p>
+<p>Объекты связаны между собой и/или взаимодействуют</p>
+<p>Объекты представляются классами</p>
+<p>Классы имеют свойства</p>
+<p>Классы взаимодействуют между собой</p>
+<p>Классы имеют экземпляры</p>
+<p><img alt="" src="/platform/v5.0/developer_guide/n3/sources/img/presentation_2.png"/></p>
+<p><strong>Яблоко 1</strong></p>
+<p><strong>Яблоко 2</strong></p>
+<p>ЗАДАНИЕ 1</p>
+<p>Разложите на классы и их свойства предметы реального мира:</p>
+<p><strong>карандаши в пенале</strong></p>
+<h1 id="введение-в-графы">Введение в графы</h1>
+<p>Граф — это абстрактная фигура\, состоящая из вершин и ребер\, связывающих вершины</p>
+<p><img alt="" src="/platform/v5.0/developer_guide/n3/sources/img/presentation_3.png"/></p>
+<p><img alt="" src="/platform/v5.0/developer_guide/n3/sources/img/presentation_4.png"/></p>
+<p>ЗАДАНИЕ 2</p>
+<p>Создайте граф по предметам реального мира из предыдущего задания:</p>
+<p><strong>карандаши в пенале</strong></p>
+<h1 id="n-triples_1">N-Triples</h1>
+<p>N-Triples является упрощенным текстовым представлением графов в модели RDF (resource definition framework)\, рекомендованной консорциумом всемирной паутины для описания данных и метаданных</p>
+<p>Является частью концепции семантической паутины (предназначенной для обработки машинами)</p>
+<p>Является упрощенным подмножеством нотаций Turtle и Notation3\, представляющих модели RDF в компактном и удобном для чтения виде</p>
+<p><img alt="" src="/platform/v5.0/developer_guide/n3/sources/img/presentation_5.png"/></p>
+<p><img alt="" src="/platform/v5.0/developer_guide/n3/sources/img/presentation_6.png"/></p>
+<p>\<http: \#человек="" uri=""> \<http: \#владеет="" uri=""> \<http: \#автомобиль="" uri=""></http:></http:></http:></p>
+<p>\&lt;Иван Иваныч&gt; \<http: \#является="" uri=""> \<http: \#человек="" uri=""></http:></http:></p>
+<p>\&lt;Вольво&gt; \<http: \#является="" uri=""> \<http: \#автомобиль="" uri=""></http:></http:></p>
+<p>\&lt;Иван Иваныч&gt; \<http: \#владеет="" uri=""> \&lt;Вольво&gt;</http:></p>
+<p>ЗАДАНИЕ 3</p>
+<p>Преобразуйте граф из предыдущего задания в набор триплетов:</p>
+<p><strong>карандаши в пенале</strong></p>
+<h1 id="comindware-elastic-data">Comindware Elastic Data</h1>
+<p>База данных представляет собой RDF граф в нотации N-Triple</p>
+<p>Данные Comindware Elastic Data хранятся в виде набора триплетов</p>
+<p>Системные метаданные хранятся в виде набора файлов с расширением *.n3</p>
+<p>Прикладные метаданные и данные хранятся в единой базе данных в виде набора файлов</p>
+<p>Все ссылочные данные проиндексированы для выполнения быстрого поиска</p>
+<p># User:Task class.</p>
+<p>#</p>
+<p>cmw:UserTask a cmw:Class\, container:ItemClass\, object:App;</p>
+<p>cmw:parentClass s:Serializable;</p>
+<p>cmw:isSystem true;</p>
+<p>cmw:counterId true;</p>
+<p>cmw:counterPrefix "";</p>
+<p>container:alias "_UserTask";</p>
+<p>cmw:classSystemType cmw:UserTask;</p>
+<p>object:property</p>
+<p>cmw:title\,</p>
+<p>cmw:assignee\,</p>
+<p>cmw:taskStatus\,</p>
+<p>cmw:endDate\,</p>
+<p>cmw:dueDate\,</p>
+<p>task:objectId\,</p>
+<p>cmw:possibleAssignee\,</p>
+<p>cmw:isReassignProhibited\,</p>
+<p>cmw:startDate;</p>
+<p>cmw:property</p>
+<p>cmw:estimatedWork\,</p>
+<p>cmw:percentComplete\,</p>
+<p>cmw:isFollowed\,</p>
+<p>cmw:isRecurrent\,</p>
+<p>cmw:completionDate\,</p>
+<p>cmw:completedBy.</p>
+<p>cmw:assignee a object:Property.</p>
+<p>cmw:assignee cmw:propertyName \<a class="mkdocs_imported_link" href="http://comindware.com/text/cmw/platform/task#assignee">http://comindware.com/text/cmw/platform/task#assignee</a>.</p>
+<p>cmw:assignee cmw:propertyDescription \<a class="mkdocs_imported_link" href="http://comindware.com/text/cmw/platform/task/assignee#description">http://comindware.com/text/cmw/platform/task/assignee#description</a>.</p>
+<p>cmw:assignee cmw:propertyType cmw:accountProperty.</p>
+<p>cmw:assignee s:serializer s:asQName.</p>
+<p>cmw:assignee object:alias "assignee".</p>
+<p>@in ?task.</p>
+<p>{</p>
+<p>@from</p>
+<p>{</p>
+<p>?task cmw:allChildren ?child.</p>
+<p>not { ? cmw:parent ?child }.</p>
+<p>not { ?child cmw:taskStatus taskStatus:completed }.</p>
+<p>if-not { ?child cmw:remainingWork ?work  }</p>
+<p>then { "P0D"^^xsd:duration -&gt; ?work. }.</p>
+<p>}</p>
+<p>@select ?work -&gt; ?works.</p>
+<p>?works cmwmath:sum ?estimatedWork.</p>
+<p>if { ?estimatedWork == null }</p>
+<p>then { "P0D"^^xsd:duration -&gt; ?result. }</p>
+<p>else { ?estimatedWork -&gt; ?result. }.</p>
+<p>} =&gt; { ?task cmw:estimatedWork ?result }.</p>
+<p>#</p>
+<p># account:Account class.</p>
+<p>#</p>
+<p>account:Account a cmw:Class\, cmw:Prototype\, object:App;</p>
+<p>cmw:isSystem true;</p>
+<p>cmw:className "Account";</p>
+<p>container:alias "_Account";</p>
+<p>cmw:counterId true;</p>
+<p>cmw:counterPrefix "account";</p>
+<p>cmw:prototypeName \<a class="mkdocs_imported_link" href="http://comindware.com/text/cmw/platform/account#prototypeName">http://comindware.com/text/cmw/platform/account#prototypeName</a>;</p>
+<p>cmw:prototypeClass account:Account;</p>
+<p>cmw:classSystemType account:Account;</p>
+<p>object:property</p>
+<p>account:username\,</p>
+<p>account:active\,</p>
+<p>account:fullName\,</p>
+<p>account:manager\,</p>
+<p>account:mbox\,</p>
+<p>account:phone\,</p>
+<p>account:skype\,</p>
+<p>account:title\,</p>
+<p>account:department\,</p>
+<p>account:language\,</p>
+<p>account:office.</p>
+<p>account:username a object:Property\, cmw:Property;</p>
+<p>cmw:propertyType xsd:string;</p>
+<p>cmw:propertyName \<a class="mkdocs_imported_link" href="http://comindware.com/text/cmw/platform/account#username">http://comindware.com/text/cmw/platform/account#username</a>;</p>
+<p>cmw:propertyDescription \<a class="mkdocs_imported_link" href="http://comindware.com/text/cmw/platform/account/username#description">http://comindware.com/text/cmw/platform/account/username#description</a>;</p>
+<p>cmw:propertyAttributes cmw:unique;</p>
+<p>object:alias "username".</p>
+<p>account:displayName a cmw:Property;</p>
+<p>cmw:propertyType xsd:string.</p>
+<p>in ?account.</p>
+<p>{</p>
+<p>once</p>
+<p>{</p>
+<p>?account a account:Account.</p>
+<p>or { ?account account:fullName ?name1. ?name1 -&gt; ?name}</p>
+<p>or { ?account account:username ?name2. ?name2 -&gt; ?name}</p>
+<p>}</p>
+<p>} =&gt; { ?account account:displayName ?name. }.</p>
+<p>account:Account ui:displayNamePredicate account:displayName.</p>
+<h1 id="запросы-n-triples">Запросы N-Triples</h1>
+<p>_# _ — комментарий</p>
+<p>_a _ — принадлежность субъекта к объекту</p>
+<p><em>-&gt;</em>  — присваивание значения</p>
+<p>_@prefix _ — объявление префиксов built-in пакетов</p>
+<p>_? _ — объявление переменных</p>
+<p>. — терминатор триплета</p>
+<p><em>{</em>  _ _  <em>}</em>  — объявление формулы</p>
+<p><em>(</em>  _ _  <em>)</em>  — объявление списка</p>
+<p><em>[</em>  _ _  <em>]</em>  – неявное использование субъекта</p>
+<p>Запросы пишутся аналогично фактам в виде набора триплетов</p>
+<p>У запроса есть входные (в некоторых случаях) и выходные данные</p>
+<p>Запрос выполняется последовательно сверху вниз по каждому триплету</p>
+<p>Если запрос ничего не вернул\, то это считается пустым результатом</p>
+<p>Ризонер (Reasoner) - специальный механизм\, выполняющий запросы</p>
+<p><strong>in ?item.</strong></p>
+<p><strong>{</strong></p>
+<p>__  #наш код__</p>
+<p><strong>} =&gt; { ?item attribute:value ?value. }.</strong></p>
+<p><strong>Существует 4 вида запросов</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th style="text-align: center;"><em>субъект</em></th>
+<th style="text-align: center;"><em>предикат</em></th>
+<th style="text-align: center;"><em>?</em></th>
+<th style="text-align: center;">Поиск объекта по заданному предикату и субъекту</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">_? _</td>
+<td style="text-align: center;">_предикат _</td>
+<td style="text-align: center;"><em>объект</em></td>
+<td style="text-align: center;">Поиск субъекта по заданному предикату и объекту</td>
+</tr>
+<tr>
+<td style="text-align: center;"><em>субъект</em></td>
+<td style="text-align: center;"><em>предикат</em></td>
+<td style="text-align: center;"><em>объект</em></td>
+<td style="text-align: center;">Проверка наличия факта по заданным аргументам</td>
+</tr>
+<tr>
+<td style="text-align: center;"><em>?</em></td>
+<td style="text-align: center;"><em>предикат</em></td>
+<td style="text-align: center;"><em>?</em></td>
+<td style="text-align: center;">Поиск субъекта и объекта по заданному предикату</td>
+</tr>
+</tbody>
+</table>
+<p>Создается нумератор по всем пользователям</p>
+<p><strong>?accounts a account:Account.</strong></p>
+<p><strong>?accounts account:username __  </strong>"<strong>  __ivanov_ii</strong> <strong>"</strong> <strong>.</strong></p>
+<p><strong>?accounts -&gt; ?value.</strong></p>
+<p>Следующий пользователь</p>
+<p><strong>Следующий триплет</strong></p>
+<p><strong>account:username</strong></p>
+<p>Выходной параметр</p>
+<p><strong>Следующий триплет</strong></p>
+<p><strong>?tasks a cmw:UserTask.</strong></p>
+<p><strong>(</strong></p>
+<p><strong>{?tasks cmw:possibleAssignee ?accounts.}</strong></p>
+<p><strong>{?tasks cmw:assignee ?accounts.}</strong></p>
+<p><strong>) assert:union true.</strong></p>
+<p><strong>?accounts account:username __  </strong>"<strong>  __ivanov_ii</strong> <strong>"</strong> <strong>.</strong></p>
+<p><strong>?tasks -&gt; ?value.</strong></p>
+<p><em>Получим все задачи на исполнение</em></p>
+<p><em>Получим всех исполнителей задачи\,</em></p>
+<p><em>включая назначенных</em></p>
+<p><em>Сравним с искомым литералом</em></p>
+<p><em>Id задачи в выходной параметр</em></p>
+<p><strong>Полезные конструкции и __  __встроенные __  __функции</strong></p>
+<p><em>(</em> <em>"</em> <em>tempAlias</em> <em>"</em>  _ _  <em>"</em> <em>attrAlias</em> <em>"</em> <em>) object:findProperty ?p</em>  -  <strong>возвращает ID атрибута</strong></p>
+<p><em>once {}.</em>  -  <strong>выходит после первой успешной итерации</strong></p>
+<p><em>or {} or {} … or {}.</em>  -  <strong>оператор логическое ИЛИ</strong></p>
+<p><em>if {} then {} else {}.</em>  -  <strong>условный оператор</strong></p>
+<p><em>from {} select ?v -&gt; ?vList.</em>  -  <strong>получение типа Список</strong></p>
+<p><em>?list math:sum ?sum.</em>  -  <strong>получение суммы</strong></p>
+<p><em>{} assert:count ?c.</em>  -  <strong>выводит количество записей</strong></p>
+<p><em>({} … {}) assert:union true.</em>  -  <strong>объединение итераторов в один</strong></p>
+<p><strong>@prefix object: \<a class="mkdocs_imported_link" href="http://comindware.com/ontology/object#">http://comindware.com/ontology/object#</a>.</strong></p>
+<p><strong>{</strong></p>
+<p><strong>("currentTemplate" "Region") object:findProperty ?Region.</strong></p>
+<p><strong>("Biznesstruktura" "Region") object:findProperty ?Region2.</strong></p>
+<p>__  once {__</p>
+<p><strong>?item ?Region ?RegionVal.</strong></p>
+<p>__      ?check ?Region2 ?RegionVal.__</p>
+<p><strong>}.</strong></p>
+<p><strong>true -&gt; ?value.</strong></p>
+<p><strong>}</strong></p>
+<p><strong>@prefix cmw: \<a class="mkdocs_imported_link" href="http://comindware.com/logics#">http://comindware.com/logics#</a>.</strong></p>
+<p><strong>{</strong></p>
+<p><strong>cmw:securityContext cmw:currentUser ?user. #получим текущего пользователя</strong></p>
+<p><strong>?tasks a cmw:UserTask.</strong></p>
+<p><strong>or {?tasks cmw:possibleAssignee ?user.}</strong></p>
+<p><strong>or {?tasks cmw:assignee ?user.}.</strong></p>
+<p><strong>?tasks -&gt; ?value.</strong></p>
+<p><strong>}</strong></p>
+<p><strong>@prefix cmw: \<a class="mkdocs_imported_link" href="http://comindware.com/logics#">http://comindware.com/logics#</a>.</strong></p>
+<p>__@prefix session: \<a class="mkdocs_imported_link" href="http://comindware.com/ontology/session#">http://comindware.com/ontology/session#</a>. __</p>
+<p><strong>@prefix math: \<a class="mkdocs_imported_link" href="http://www.w3.org/2000/10/swap/math#">http://www.w3.org/2000/10/swap/math#</a>.</strong></p>
+<p><strong>{</strong></p>
+<p><strong>session:context session:requestTime ?now. #получим текущую дату</strong></p>
+<p><strong>?tasks a cmw:UserTask.</strong></p>
+<p>__  if {?tasks cmw:dueDate ?.}__</p>
+<p>__  then {__</p>
+<p><strong>?tasks cmw:dueDate ?dueDateVal.</strong></p>
+<p><strong>?dueDateVal math:greaterThan ?now.</strong></p>
+<p><strong>?tasks -&gt; ?value.</strong></p>
+<p><strong>}</strong></p>
+<p><strong>else {?tasks -&gt; ?value.}.</strong></p>
+<p><strong>}</strong></p>
+<p><strong>Примеры (from\, sum)</strong></p>
+<p><strong>@prefix math: \<a class="mkdocs_imported_link" href="http://www.w3.org/2000/10/swap/math#">http://www.w3.org/2000/10/swap/math#</a>.</strong></p>
+<p><strong>@prefix object: \<a class="mkdocs_imported_link" href="http://comindware.com/ontology/object#">http://comindware.com/ontology/object#</a>.</strong></p>
+<p><strong>{</strong></p>
+<p><strong>("Nakladnaya" "PoziciiNakladnoy") object:findProperty ?Positions.</strong></p>
+<p><strong>("PoziciiNakladnoy" "Summa") object:findProperty ?Summa.</strong></p>
+<p><strong>from  {</strong></p>
+<p><strong>?item ?Positions ?PositionsVal.</strong></p>
+<p><strong>??PositionsVal ?Summa ?SummaVal.</strong></p>
+<p><strong>} select ?SummaVal -&gt; ?SummaList.</strong></p>
+<p><strong>?SummaList math:sum ?value.</strong></p>
+<p><strong>}</strong></p>
+<p><strong>@prefix object: \<a class="mkdocs_imported_link" href="http://comindware.com/ontology/object#">http://comindware.com/ontology/object#</a>.</strong></p>
+<p><strong>@prefix assert: \<a class="mkdocs_imported_link" href="http://comindware.com/logics/assert#">http://comindware.com/logics/assert#</a>.</strong></p>
+<p><strong>{</strong></p>
+<p><strong>("Nakladnaya" "PoziciiNakladnoy") object:findProperty ?Positions.</strong></p>
+<p><strong>{</strong></p>
+<p><strong>?item ?Positions ?PositionsVal.</strong></p>
+<p><strong>} assert:count ?value.</strong></p>
+<p><strong>}</strong></p>
+<p><strong>Примеры (distinct)</strong></p>
+<p><strong>@prefix object: \<a class="mkdocs_imported_link" href="http://comindware.com/ontology/object#">http://comindware.com/ontology/object#</a>.</strong></p>
+<p><strong>@prefix assert: \<a class="mkdocs_imported_link" href="http://comindware.com/logics/assert#">http://comindware.com/logics/assert#</a>.</strong></p>
+<p><strong>{</strong></p>
+<p><strong>("Nakladnaya" "PoziciiNakladnoy") object:findProperty ?Positions.</strong></p>
+<p><strong>("PoziciiNakladnoy" "Nomenklatura") object:findProperty ?Items.</strong></p>
+<p><strong>{</strong></p>
+<p><strong>{</strong></p>
+<p><strong>?item ?Positions ?PositionsVal.</strong></p>
+<p><strong>?PositionsVal ?Items ?ItemsVal.</strong></p>
+<p><strong>} assert:distinct ?ItemsVal.</strong></p>
+<p><strong>} assert:count ?value.</strong></p>
+<p><strong>}</strong></p>
+<p><strong>@prefix assert: \<a class="mkdocs_imported_link" href="http://comindware.com/logics/assert#">http://comindware.com/logics/assert#</a>.</strong></p>
+<p><strong>@prefix object: \<a class="mkdocs_imported_link" href="http://comindware.com/ontology/object#">http://comindware.com/ontology/object#</a>.</strong></p>
+<p><strong>{</strong></p>
+<p><strong>("Nakladnaya" "Gruzootpravitel") object:findProperty ?ShippedBy.</strong></p>
+<p><strong>("Nakladnaya" "Poluchatel") object:findProperty ?Receiver.</strong></p>
+<p><strong>(</strong></p>
+<p><strong>{?item ?ShippedBy ?Contractor.}</strong></p>
+<p><strong>{?item ?Receiver ?Contractor.}</strong></p>
+<p><strong>) assert:union true.</strong></p>
+<p><strong>?Contractor -&gt; ?value.</strong></p>
+<p><strong>}</strong></p>
+<p>ЗАДАНИЕ 4</p>
+<p>Напишите запрос по сравнению двух атрибутов с множественными данными\, который возвращает true\, если все значения одного атрибута полностью совпадают со всеми значениями второго атрибута</p>
+<p>Исходные данные:</p>
+<p>Шаблон записи:  <strong>test</strong></p>
+<p>Атрибут 1:  <strong>attr1</strong></p>
+<p>Атрибут 2:  <strong>attr2</strong></p>
+<p>Выходной параметр:  <strong>?value</strong></p>
+<p>ЗАДАНИЕ 4 Решение</p>
+<p>@prefix object: \<a class="mkdocs_imported_link" href="http://comindware.com/ontology/object#">http://comindware.com/ontology/object#</a>.</p>
+<p>{</p>
+<p>("test" "attr1") object:findProperty ?attr1.</p>
+<p>("test" "attr2") object:findProperty ?attr2.</p>
+<p>?item ?attr1 ?attr1Val.</p>
+<p>?item ?attr2 ?attr2Val.</p>
+<p>if {?attr1Val == ?attr2Val.}</p>
+<p>then {true -&gt; ?value.}</p>
+<p>else {false -&gt; ?value.}</p>
+<p>}</p>
+<p><em>1 итерация attr1 = 1 и attr2 = 1</em></p>
+<p>ЗАДАНИЕ 4 Решение</p>
+<p>@prefix object: \<a class="mkdocs_imported_link" href="http://comindware.com/ontology/object#">http://comindware.com/ontology/object#</a>.</p>
+<p>{</p>
+<p>("test" "attr1") object:findProperty ?attr1.</p>
+<p>("test" "attr2") object:findProperty ?attr2.</p>
+<p>?item ?attr1 ?attr1Val.</p>
+<p>?item ?attr2 ?attr2Val.</p>
+<p>if {?attr1Val == ?attr2Val.}</p>
+<p>then {true -&gt; ?value.}</p>
+<p>else {false -&gt; ?value.}</p>
+<p>}</p>
+<p><em>последняя итерация attr1 = 3 и attr2 = 3</em></p>
+<p>ЗАДАНИЕ 4 Решение</p>
+<p>@prefix assert: \<a class="mkdocs_imported_link" href="http://comindware.com/logics/assert#">http://comindware.com/logics/assert#</a>.</p>
+<p>@prefix object: \<a class="mkdocs_imported_link" href="http://comindware.com/ontology/object#">http://comindware.com/ontology/object#</a>.</p>
+<p>@prefix cmwstring: \<a class="mkdocs_imported_link" href="http://comindware.com/logics/string#">http://comindware.com/logics/string#</a>.</p>
+<p>{</p>
+<p>("test" "attr1") object:findProperty ?attr1.</p>
+<p>("test" "attr2") object:findProperty ?attr2.</p>
+<p>from {</p>
+<p>?item ?attr1 ?attr1Val.</p>
+<p>} select ?attr1Val -&gt; ?attr1ValList.</p>
+<p>(?attr1ValList sort:stringComparer) assert:sort ?attr1ValListSort.</p>
+<p>(" " ?attr1ValListSort) cmwstring:join ?attr1ValListSortStr.</p>
+<p>…</p>
+<p>if {?attr1ValListSortStr == ?attr2ValListSortStr}</p>
+<p>} ?value -&gt; fhsjhd</p>
+<p><em>Отсортировать список</em></p>
+<p><em>Сформировать строку</em></p>
+<p><em>Выполнить аналогичное действие для attr2</em></p>
+<p><em>Сравнить полученные строки</em></p>
+<p>ЗАДАНИЕ 5</p>
+<p>Написать запрос\, который показывает количество уникальных контрагентов\, указанных в накладной.</p>
+<p>Исходные данные:</p>
+<p>Шаблон записи:  <strong>Nakladnaya</strong></p>
+<p>Атрибуты-контрагенты:  <strong>Platelschik</strong> \,  <strong>Gruzopoluchatel</strong> \,  <strong>Zakazchik</strong></p>
+<p>Выходной параметр:  <strong>?value</strong></p>
+<p>ЗАДАНИЕ 5 Решение</p>
+<p>@prefix assert: \<a class="mkdocs_imported_link" href="http://comindware.com/logics/assert#">http://comindware.com/logics/assert#</a>.</p>
+<p>@prefix object: \<a class="mkdocs_imported_link" href="http://comindware.com/ontology/object#">http://comindware.com/ontology/object#</a>.</p>
+<p>{</p>
+<p>("Nakladnaya" "Platelschik") object:findProperty ?Platelschik.</p>
+<p>("Nakladnaya" "Gruzopoluchatel") object:findProperty ?Gruzopoluchatel.</p>
+<p>("Nakladnaya" "Zakazchik") object:findProperty ?Zakazchik.</p>
+<p>{</p>
+<p>{</p>
+<p>(</p>
+<p>{?item ?Platelschik ?Contractors.}</p>
+<p>{?item ?Gruzopoluchatel ?Contractors.}</p>
+<p>{?item ?Zakazchik ?Contractors.}</p>
+<p>) assert:union true.</p>
+<p>} assert:distinct ?Contractors.</p>
+<p>} assert:count ?value.</p>
+<p>}</p>
+<h1 id="использование-n-triples-в-платформе">Использование N-Triples в платформе</h1>
+<p><strong>Параметры на входе и выходе</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th style="text-align: center;"><strong>Раздел</strong></th>
+<th style="text-align: center;"><strong>Вход</strong></th>
+<th style="text-align: center;"><strong>Выход</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Атрибут → Вычисляемое значение</td>
+<td style="text-align: center;"><em>?item</em>  - текущая запись (id)</td>
+<td style="text-align: center;"><em>?value</em>  — значение атрибута</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span style="color:#000000">Таблица → Системный фильтр</span></td>
+<td style="text-align: center;">-</td>
+<td style="text-align: center;"><em>?item</em>  — записи для вывода в таблице (id)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span style="color:#000000">Кнопка → Условие отображения</span></td>
+<td style="text-align: center;">?item - текущая запись (id)</td>
+<td style="text-align: center;"><em>?value</em>  - true или false</td>
+</tr>
+<tr>
+<td style="text-align: center;">Форма → Фильтр на поле</td>
+<td style="text-align: center;">?item - текущая запись (id)</td>
+<td style="text-align: center;"><em>?value</em>  – искомые записи (id)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Параметры на входе и выходе</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th style="text-align: center;"><strong>Раздел</strong></th>
+<th style="text-align: center;"><strong>Вход</strong></th>
+<th style="text-align: center;"><strong>Выход</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span style="color:#000000">Роль → Разрешения → Шаблон записи\, аккаунта\, процесса → Условие применения</span></td>
+<td style="text-align: center;">?item - текущая запись (id)</td>
+<td style="text-align: center;"><span style="color:#000000"> <em>?</em> </span> <span style="color:#000000"> <em>value</em> </span> <span style="color:#000000"> _ – _ </span> <span style="color:#000000"> <em>true</em> </span> <span style="color:#000000"> _ _ </span> <span style="color:#000000">(строка разрешений применяется) или </span> <span style="color:#000000"> <em>false</em> </span> <span style="color:#000000"> _ _ </span> <span style="color:#000000">(не применяется)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span style="color:#000000">Роль → Разрешения → Шаблон записи\, аккаунта\, процесса → Фильтр аккаунтов (Переназначение)</span></td>
+<td style="text-align: center;"><em>?value</em>  - текущий аккаунт (id)</td>
+<td style="text-align: center;"><em>?item</em>  – список аккаунтов (id)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Параметры на входе и выходе</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th style="text-align: center;"><strong>Раздел</strong></th>
+<th style="text-align: center;"><strong>Вход</strong></th>
+<th style="text-align: center;"><strong>Выход</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Правила для формы → Вычисляемое значение для действия</td>
+<td style="text-align: center;"><em>?item</em>  - текущая запись (id)</td>
+<td style="text-align: center;"><em>?value</em>  — значение атрибута</td>
+</tr>
+<tr>
+<td style="text-align: center;">Правила для формы → Правило → Условие выполнения</td>
+<td style="text-align: center;"><em>?item</em>  - текущая запись (id)</td>
+<td style="text-align: center;"><em>?value</em>  —  _true _ (правило сработает)\,  _false _ или пусто (не сработает)</td>
+</tr>
+<tr>
+<td style="text-align: center;">Правила для формы → Действие → Условие выполнения</td>
+<td style="text-align: center;"><em>?item</em>  - текущая запись (id)</td>
+<td style="text-align: center;"><em>?value</em>  - true (действие сработает)\, false или пусто (не сработает)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Параметры на входе и выходе</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th style="text-align: center;"><strong>Раздел</strong></th>
+<th style="text-align: center;"><strong>Вход</strong></th>
+<th style="text-align: center;"><strong>Выход</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Сценарий → Смена контекста → Вычисление набора объектов</td>
+<td style="text-align: center;"><em>?item</em>  - текущая запись (id)</td>
+<td style="text-align: center;"><em>?value</em>  — запись для перехода</td>
+</tr>
+<tr>
+<td style="text-align: center;">Сценарий → Дублирование записи → Вычисление набора объектов</td>
+<td style="text-align: center;"><em>?item</em>  - текущая запись (id)</td>
+<td style="text-align: center;"><em>?value</em>  — записи для дублирования</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Параметры на входе и выходе</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th style="text-align: center;"><strong>Раздел</strong></th>
+<th style="text-align: center;"><strong>Вход</strong></th>
+<th style="text-align: center;"><strong>Выход</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Сценарий → Проверка результата выражения → Выражение для проверки</td>
+<td style="text-align: center;"><em>?item</em>  - текущая запись (id)</td>
+<td style="text-align: center;"><em>?value</em>  -  _true _ (проверка пройдена)\,  _false _ или пусто (проверка не пройдена)</td>
+</tr>
+<tr>
+<td style="text-align: center;">Сценарий → Изменение значений атрибутов → Вычисление значения</td>
+<td style="text-align: center;"><em>?item</em>  - текущая запись (id)</td>
+<td style="text-align: center;"><em>?value</em>  — значение атрибута</td>
+</tr>
+<tr>
+<td style="text-align: center;">Сценарий → Изменение значений переменных → Вычисление значения</td>
+<td style="text-align: center;"><em>?item</em>  - текущая запись (id)</td>
+<td style="text-align: center;"><em>?value</em>  — значение переменной</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Параметры на входе и выходе</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th style="text-align: center;"><strong>Раздел</strong></th>
+<th style="text-align: center;"><strong>Вход</strong></th>
+<th style="text-align: center;"><strong>Выход</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Сценарий → Повтор по числовому счётчику → Количество итераций</td>
+<td style="text-align: center;"><em>?item</em>  - текущая запись (id)</td>
+<td style="text-align: center;"><em>?value</em>  — количество итераций</td>
+</tr>
+<tr>
+<td style="text-align: center;">Сценарий → Повтор по количеству объектов → Вычисление набора объектов</td>
+<td style="text-align: center;"><em>?item</em>  - текущая запись (id)</td>
+<td style="text-align: center;"><em>?value</em>  — список объектов</td>
+</tr>
+<tr>
+<td style="text-align: center;">Сценарий → Выполнение по условиям → Условие выполнения действий</td>
+<td style="text-align: center;"><em>?item</em>  - текущая запись (id)</td>
+<td style="text-align: center;"><em>?value</em>  - true (проверка пройдена)\, false или пусто (проверка не пройдена)</td>
+</tr>
+</tbody>
+</table>
+<p>ЗАДАНИЕ 6</p>
+<p>Написать запрос в вычисляемом атрибуте и вывести на форму\, который показывает количество уникальных контрагентов\, указанных в накладной.</p>
+<p>Исходные данные:</p>
+<p>Шаблон записи:  <strong>Nakladnaya</strong></p>
+<p>Атрибуты-контрагенты:  <strong>Platelschik</strong> \,  <strong>Gruzopoluchatel</strong> \,  <strong>Zakazchik</strong></p>
+<p>ЗАДАНИЕ 7</p>
+<p>Написать запрос на вывод списка просроченных работ\, где текущий пользователь является исполнителем</p>
+<p>Исходные данные:</p>
+<p>Шаблон записи:  <strong>Rabota</strong></p>
+<p>Атрибут Срок выполнения:  <strong>Srok</strong></p>
+<p>Атрибут Исполнитель:  <strong>Ispolnitel</strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

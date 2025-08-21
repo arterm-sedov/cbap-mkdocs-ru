@@ -1,0 +1,36 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4879" kb-tags="" kb-title="Гиперссылка на задачу. Вычисление с помощью N3 и формулы">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>В ходе настройки вашего бизнес-решения может понадобиться передавать в сообщение ссылку на задачу. Или же, например, вы хотите изменить формат системных уведомлений о задачах (см. также: <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4683">Уведомления о задачах. Изменение стандартного текста</a>) и вам нужно вычислить ссылку на задачу. В данной статье мы рассмотрим настройку динамичной гиперссылки на задачу.</p>
+<p><strong>1.</strong> В текущем шаблоне записи создайте два атрибута: один будет отвечать за вычисление ссылки на языке N3,  а другой будет отвечать за вычленение из этой ссылки ИД задачи. Сам первый атрибут использовать в ссылке на задачу мы не можем, так как он вычисляет не конечную ссылку на задачу, но помогает нам получить ссылку для определения ИД задачи.</p>
+<ul>
+<li>Создайте текстовый атрибут «Номер задачи», сделайте его вычисляемым. В поле «Вычисляемое выражение» вставьте следующее выражение на языке N3:</li>
+</ul>
+<div class="highlight"><code><pre><span></span><code>@prefix cmw: &lt;http://comindware.com/logics#&gt;.</code> <br/><code>@prefix process: &lt;http://comindware.com/ontology/process#&gt;.</code> <br/><code>@prefix string: &lt;http://www.w3.org/2000/10/swap/string#&gt;.</code> <br/><code>@prefix configuration: &lt;http://comindware.com/ontology/configuration#&gt;.</code> <br/><code>{</code> <br/><code>    once</code> <br/><code>          {</code> <br/><code>        ?processObject process:businessObject ?item.</code> <br/><code>        ?taskId cmw:parent ?processObject.</code> <br/><code>        ?taskId a cmw:UserTask.</code> <br/><code>        ("#task/{0}" ?taskId) string:format ?tempLink2.  </code> <br/><code>        ?configObject a configuration:Configuration.</code> <br/><code>        ?configObject configuration:baseUri ?addressLink.</code> <br/><code>        ("{0}" ?addressLink) string:format ?tempLink1.   </code> <br/><code>        (?tempLink1 "" ?tempLink2) string:concatenation ?resultLink.</code> <br/><code>        ?resultLink == ?value.</code> <br/><code>    }</code> <br/><code>}</code> <br/></pre></code></div>
+<ul>
+<li>Создайте второй текстовый атрибут «ИД задачи», сделайте его вычисляемым. В поле «Вычисляемое выражение» вставьте следующую формулу:</li>
+</ul>
+<div class="highlight"><code><pre><span></span><code>SUBSTRING($Nomerzadachi, 28)</code> <br/></pre></code></div>
+<p><strong>Примечание :</strong> позиция (число) зависит от длины вашего доменного имени.</p>
+<p><strong>2.</strong> В настройках передачи ссылки на задачу введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code>FORMAT("&lt;p&gt;&lt;a href='https://comindware.com/#task/{0}'&gt;Ссылка на задачу&lt;/a&gt;&lt;/p&gt;",LIST($IDzadachi))</code> <br/></pre></code></div>
+<p><strong>где:</strong></p>
+<p><strong>https://comindware.com</strong> — ссылка на текущий инстанс;</p>
+<p><strong>IDzadachi</strong> — системное имя атрибута, где хранится/вычисляется ИД задачи.</p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

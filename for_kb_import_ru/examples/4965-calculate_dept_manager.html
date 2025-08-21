@@ -1,0 +1,30 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4965" kb-tags="" kb-title="Вычисление руководителя подразделения из шаблона пользователя">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для того, чтобы вычислить руководителя подразделения из Шаблона пользователя ( в случае, если руководитель определяется именно там, а не в Шаблоне записи), например, для использования при назначении задач, введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code>@prefix cmw: &lt;http://comindware.com/logics#&gt;.</code> <br/><code>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.</code> <br/><code>@prefix account: &lt;http://comindware.com/ontology/account#&gt;.</code> <br/><code>{</code> <br/><code></code> <br/><code>    ("Sotrudniki" "Rukovoditelbool") object:findProperty ?rukovoditel.</code> <br/><code>    ("Sotrudniki" "Podrazdelenie") object:findProperty ?userDiv.</code> <br/><code>    ("Naryady" "NaryadPodrazdelenie") object:findProperty ?divNar.</code> <br/><code>    ("Divisions" "Title") object:findProperty ?divID.                                                                                                             </code> <br/><code>        </code> <br/><code>        ?item ?divNar ?div.</code> <br/><code>        ?div ?divID ?divtext.</code> <br/><code>        ?user a account:Account.</code> <br/><code>        ?user ?userDiv ?userDivValue.</code> <br/><code>        ?userDivValue == ?divtext.</code> <br/><code>        ?user ?userDiv ?divtext.</code> <br/><code>        ?user ?rukovoditel true.</code> <br/><code>        ?user account:active true.</code> <br/><code>        ?value == ?user.</code> <br/><code>}</code> <br/></pre></code></div>
+<p><strong>где:</strong></p>
+<p><strong>Sotrudniki</strong> – системное имя Шаблона пользователя;</p>
+<p><strong>Rukovoditelbool</strong> – системное атрибута типа "Логический" в <strong>Sotrudniki</strong>, определяющий, является ли пользователь руководителем;</p>
+<p><strong>Podrazdelenie</strong> – системное атрибута типа "Ссылка" в <strong>Sotrudniki</strong>, определяющий подразделение пользователя;</p>
+<p><strong>Naryady</strong> – системное имя текущего Шаблона записи;</p>
+<p><strong>NaryadPodrazdelenie</strong> – системное имя атрибута типа "Ссылка" в <strong>Naryady</strong>;</p>
+<p><strong>Divisions</strong>– системное имя Шаблона записи, на который ссылаются <strong>Podrazdelenie</strong>и <strong>NaryadPodrazdelenie</strong>;</p>
+<p><strong>Title</strong>– системное имя атрибута для поиска в <strong>Divisions</strong>.</p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

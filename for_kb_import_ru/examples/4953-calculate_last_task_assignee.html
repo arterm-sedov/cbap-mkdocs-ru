@@ -1,0 +1,22 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4953" kb-tags="" kb-title="Вычисление фактического исполнителя у последней завершенной задачи">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для того, чтобы вычислить пользователя, который завершил последнюю задачу из списка задач связанного с текущим объектом экземпляра процесса, введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code>@prefix cmw: &lt;http://comindware.com/logics#&gt;.</code> <br/><code>@prefix task: &lt;http://comindware.com/ontology/task#&gt;.</code> <br/><code>@prefix account: &lt;http://comindware.com/ontology/account#&gt;.</code> <br/><code>@prefix taskStatus: &lt;http://comindware.com/ontology/taskStatus#&gt;.</code> <br/><code>@prefix cmwmath: &lt;http://comindware.com/logics/math#&gt;.</code> <br/><code>@prefix ui: &lt;http://comindware.com/ontology/ui#&gt;.</code> <br/><code>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.</code> <br/><code>@prefix cmwstring: &lt;http://comindware.com/logics/string#&gt;.</code> <br/><code></code> <br/><code>{</code> <br/><code>     from {</code> <br/><code>    ?task task:objectId ?item.</code> <br/><code>    ?task cmw:taskStatus taskStatus:completed.</code> <br/><code>    ?task cmw:scheduledEndDate ?taskDate.                </code> <br/><code>     } select ?taskDate -&gt; ?taskList.</code> <br/><code>    ?taskList cmwmath:max ?max.    </code> <br/><code>    ?taskmax cmw:scheduledEndDate ?max.          </code> <br/><code>    ?taskmax cmw:completedBy ?value.</code> <br/><code>    }</code> <br/></pre></code></div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

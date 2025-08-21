@@ -1,0 +1,161 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="" kb-tags="" kb-title="">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#прикладная-задача">
+<span class="md-ellipsis">
+      Прикладная задача
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#алгоритм-авторизации">
+<span class="md-ellipsis">
+      Алгоритм авторизации
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#предварительная-настройка-со-стороны-comindware-platform">
+<span class="md-ellipsis">
+      Предварительная настройка со стороны Comindware Platform
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-интеграции">
+<span class="md-ellipsis">
+      Настройка интеграции
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>В этой статье разберём пример того, как настроить интеграцию <strong>Comindware Platform</strong> и Telegram-бота.</p>
+<p>Telegram-бот будет представлять собой проект в Visual Studio на языке C# (Windows Forms Application).</p>
+<p>Скачайте готовый проект Visual Studio с исходным кодом бота по ссылке: <a class="mkdocs_imported_link" href="https://kb.comindware.ru/file.php?id=191">TelegramBotComindwareIntegration.zip</a></p>
+<p>Также можно воспользоваться аналогичным кодом на языке Python в файле <code>TelegramBotComplete.py</code> по ссылке: <a class="mkdocs_imported_link" href="https://kb.comindware.ru/file.php?id=193">TelegramBotComindwareIntegrationPython.zip</a></p>
+<h2 id="прикладная-задача">Прикладная задача</h2>
+<p>Требуется создать Telegram-бот, в котором пользователь мог бы взаимодействовать с <strong>Comindware Platform</strong>.</p>
+<p>Перед использованием бота пользователь должен пройти авторизацию следующим образом:</p>
+<ul>
+<li>При первом обращении бот запрашивает в адрес эл. почты пользователя.</li>
+<li>Бот ищет аккаунт с указанным адресом в <strong>Comindware Platform</strong>.</li>
+<li>Если аккаунт найден:</li>
+<li>бот высылает 4-значный код авторизации на эл. почту пользователя с помощью процесса в <strong>Comindware Platform</strong>;</li>
+<li>бот запрашивает код  авторизации у пользователя в чате</li>
+<li>Если пользователь указывает верный код авторизации, авторизация считается пройденной.</li>
+</ul>
+<h2 id="алгоритм-авторизации">Алгоритм авторизации</h2>
+<ul>
+<li>На сервере выполняется бот, передающий данные между API Telegram и API <strong>Comindware Platform</strong>.</li>
+<li>Пользователь пишет боту сообщение в Telegram.</li>
+<li>Бот предлагает пользователю авторизоваться, указав адрес эл. почты, с которым пользователь зарегистрирован в <strong>Comindware Platform</strong>.</li>
+<li>Пользователь сообщает боту свой адрес эл. почты.</li>
+<li>Бот отправляет <strong><em>GET</em></strong>-запрос в <strong>Comindware Platform</strong> для получения данных аккаунтов в Системе.</li>
+<li>Бот получает <strong><em>JSON</em></strong>-ответ с данными аккаунтов и ищет среди них аккаунт с указанным адресом эл. почты.</li>
+<li>Если аккаунт найден, выполняется следующая процедура:</li>
+<li>Бот генерирует 4-значный код авторизации.</li>
+<li>Бот записывает код авторизации в атрибут аккаунта с помощью <strong><em>POST</em></strong>-запроса.</li>
+<li>С помощью <strong><em>POST</em></strong>-запроса бот отправляет эл. письмо пользователю с кодом авторизации.</li>
+<li>Пользователь указывает Telegram-боту код авторизации, полученный из эл. письма</li>
+<li>Если код, записанный в <strong>Comindware Platform</strong> и полученный ботом в последнем сообщении совпадают, авторизация считается пройденной.</li>
+<li>После прохождения авторизации пользователь может посредством бота инициировать действия в  <strong>Comindware Platform</strong>.</li>
+</ul>
+<p>Примечание</p>
+<p>На основе созданного промежуточного ПО и примера настройки взаимодействия бота с <strong>Comindware Platform</strong> можно в дальнейшем реализовать различные сценарии: подача заявок, заявлений на отпуск, запрос какой-либо информации из системы и т.д.</p>
+<h2 id="предварительная-настройка-со-стороны-comindware-platform">Предварительная настройка со стороны Comindware Platform</h2>
+<ol class="colored_numbers_list">
+<li>Создайте шаблон аккаунта <em>«Sotrudniki»</em> (с таким же системным именем). В этом шаблоне уже есть системные атрибуты, такие как имя, почта и т.д.</li>
+<li>Добавьте атрибут <em>«ChatID»</em> типа «<strong>Текст</strong>» (в нашем примере ID атрибута — <em>op.13</em>).</li>
+<li>Добавьте атрибут <em>«Proverochnyykod»</em> типа «<strong>Текст</strong>» (в нашем примере ID атрибута — <em>op.14</em>).</li>
+<li>Создайте и настройте шаблон процесса для отправки эл. почты пользователю (в нашем примере ID шаблона — <em>pa.3</em>).</li>
+</ol>
+<ul>
+<li>
+<p>В связанном с шаблоном процесса шаблоне записи создайте два атрибута типа «<strong>Текст</strong>»:</p>
+<ul>
+<li><em>Код</em> (в нашем примере ID атрибута — <em>op.23</em>) — значение этого атрибута процесс должен отправлять пользователю;</li>
+<li><em>Кому</em> (в нашем примере ID атрибута — <em>op.24</em>) — адрес, на который процесс должен отправлять код.</li>
+</ul>
+</li>
+</ul>
+<p>Примечание</p>
+<p>В исходном коде промежуточного ПО замените ID и системные имена атрибутов и шаблонов на фактически используемые.</p>
+<h2 id="настройка-интеграции">Настройка интеграции</h2>
+<ol class="colored_numbers_list">
+<li>В Telegram найдите BotFather (<a class="mkdocs_imported_link" href="https://t.me/BotFather">https://t.me/BotFather</a>) и запросите у него создание бота. Подробные инструкции см. в <a class="mkdocs_imported_link" href="https://core.telegram.org/api">официальной документации Telegram</a>.</li>
+<li>Скачайте и распакуйте проект для Visual Studio с промежуточным ПО по ссылке: <a class="mkdocs_imported_link" href="https://kb.comindware.ru/file.php?id=191">TelegramBotComindwareIntegration.zip</a></li>
+<li>Восстановите библиотеки с помощью команды Restore NuGet Packages: Newtonsoft.Json, RestSharp, Telegram.Bot и Telegram.bot.Extensions.Polling.</li>
+<li>При необходимости установите пакет .Net SDK 3.1.</li>
+<li>Откройте файл <code>MainWindow.xaml</code> с формой приложения.</li>
+<li>Замените в разделе <code>Grid</code> значения атрибутов <code>Text</code> на фактические значения:</li>
+</ol>
+<p><div class="highlight"><code><pre><span></span><code>&lt;Grid&gt;</code> <br/><code>    &lt;Grid.RowDefinitions&gt;</code> <br/><code>        &lt;RowDefinition Height="0.5*"/&gt;</code> <br/><code>        &lt;RowDefinition/&gt;</code> <br/><code>        &lt;RowDefinition/&gt;</code> <br/><code>        &lt;RowDefinition/&gt;</code> <br/><code>        &lt;RowDefinition/&gt;</code> <br/><code>    &lt;/Grid.RowDefinitions&gt;</code> <br/><code>    &lt;Button  Width="150" Height="30"  Click="Button_Click" Grid.Row="0"&gt;Старт&lt;/Button&gt;</code> <br/><code>    &lt;StackPanel Grid.Row="1"&gt;</code> <br/><code>        &lt;Label Height="25" Margin="10,5,0,5"&gt;Токен API Telegram-бота&lt;/Label&gt;</code> <br/><code>        &lt;TextBox x:Name="apitoken" Text="введите токен API своего Telegram-бота" Width="240" Height="25"/&gt;</code> <br/><code>    &lt;/StackPanel&gt;</code> <br/><code>    &lt;StackPanel Grid.Row="2"&gt;</code> <br/><code>        &lt;Label Height="25" Margin="10,5,0,5"&gt;Путь к API Comindware Platform&lt;/Label&gt;</code> <br/><code>        &lt;TextBox x:Name="Apipath" Text="http://yourinstance/api/public/" Width="240" Height="25" /&gt;</code> <br/><code>    &lt;/StackPanel&gt;</code> <br/><code>    &lt;StackPanel Grid.Row="3"&gt;</code> <br/><code>        &lt;Label Height="25" Margin="10,5,0,5"&gt;Имя пользователя&lt;/Label&gt;</code> <br/><code>        &lt;TextBox x:Name="login" Text="введите имя пользователя, у которого есть доступ к API  Comindware Platform" Width="240" Height="25" /&gt;</code> <br/><code>    &lt;/StackPanel&gt;</code> <br/><code>    &lt;StackPanel Grid.Row="4"&gt;</code> <br/><code>        &lt;Label Height="25" Margin="10,5,0,5"&gt;Пароль&lt;/Label&gt;</code> <br/><code>        &lt;PasswordBox x:Name="password" Password="введите пароль пользователя API  Comindware Platform" Width="240" Height="25" /&gt;</code> <br/><code>    &lt;/StackPanel&gt;</code> <br/><code>&lt;/Grid&gt;</code> <br/></pre></code></div>
+7. Откройте файл <code>MainWindow.xaml.cs</code> с исходным кодом проекта и вставьте в него приведённый ниже код.</p>
+<p><div class="highlight"><code><pre><span></span><code>using System.Windows;</code> <br/><code>using System;</code> <br/><code>using System.Threading;</code> <br/><code>using System.Threading.Tasks;</code> <br/><code>using Telegram.Bot;</code> <br/><code>using Telegram.Bot.Extensions.Polling;</code> <br/><code>using Telegram.Bot.Types;</code> <br/><code></code> <br/><code>namespace Telegram</code> <br/><code>{</code> <br/><code>    public partial class MainWindow : Window</code> <br/><code>    {</code> <br/><code>        static ITelegramBotClient bot;</code> <br/><code></code> <br/><code>        public MainWindow()</code> <br/><code>        {</code> <br/><code>            InitializeComponent();</code> <br/><code>        }</code> <br/><code></code> <br/><code>        private void Button_Click(object  sender, RoutedEventArgs e)</code> <br/><code>        {</code> <br/><code>            bot = new TelegramBotClient(apitoken.Text);</code> <br/><code>            var cts =   new   CancellationTokenSource();</code> <br/><code>            var cancellationToken = cts.Token;</code> <br/><code>            var receiverOptions =   new   ReceiverOptions</code> <br/><code>            {</code> <br/><code>                AllowedUpdates = { }, // receive all update types</code> <br/><code>            };</code> <br/><code>            bot.StartReceiving(</code> <br/><code>                HandleUpdateAsync,</code> <br/><code>                HandleErrorAsync,</code> <br/><code>                receiverOptions,</code> <br/><code>                cancellationToken</code> <br/><code>            );</code> <br/><code>            MessageBox.Show("Бот запущен");</code> <br/><code>        }</code> <br/><code></code> <br/><code>        public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)</code> <br/><code>        {</code> <br/><code>            try</code> <br/><code>            {</code> <br/><code>                if (update.Type == Telegram.Bot.Types.Enums.UpdateType.Message)</code> <br/><code>                {</code> <br/><code>                    var message = update.Message;</code> <br/><code>                    await bot.SendTextMessageAsync(message.Chat.Id,   "Вы написали мне: "   + message.Text, Telegram.Bot.Types.Enums.ParseMode.Markdown);</code> <br/><code>                }</code> <br/><code>            }catch { }</code> <br/><code>        }</code> <br/><code></code> <br/><code>        public async Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)</code> <br/><code>        {</code> <br/><code>            MessageBox.Show("Ошибка " + exception.Message);</code> <br/><code>        }</code> <br/><code>    }}</code> <br/></pre></code></div>
+8. Сохраните файл.
+9. Скомпилируйте и запустите приложение.
+10. В окне приложения нажмите кнопку <em>«Старт»</em> и подтвердите запуск ПО.
+11. Напишите в Telegram-бот сообщение, например: «<em>Привет».</em>
+12. Бот должен ответить: «<em>Вы написали мне:</em> <em>Привет»</em>.</p>
+<div class="highlight"><code><pre><span></span><code>Примечание</code> <br/><code></code> <br/><code>Вы можете воспользоваться аналогичным кодом простейшей реализации бота на языке Python из файла `TelegramBotPrimer.py` по ссылке: [TelegramBotComindwareIntegrationPython.zip](https://kb.comindware.ru/file.php?id=193)</code> <br/><code></code> <br/><code>![Запуск бота](https://kb.comindware.ru/assets/img_664f1796168fe.png)</code> <br/><code></code> <br/><code>Запуск бота</code> <br/></pre></code></div>
+<ol class="colored_numbers_list" start="13">
+<li>Для взаимодействия с <strong>Comindware Platform</strong> воспользуемся <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4863">Solution API</a></strong>.</li>
+<li>Допишите <code>/Docs/SolutionApi/</code> в адресной строке браузера после адреса экземпляра <strong>Comindware Platform</strong>.</li>
+<li>
+<p>Отобразится страница Swagger с перечнем доступных методов <strong>Solution API</strong>.</p>
+<p><img alt="Переход в область SolutionApi" src="https://kb.comindware.ru/assets/telegram_bot1.png"/></p>
+<p>Переход в область SolutionApi</p>
+<p>Примечание</p>
+<p>На последующих шагах используйте готовый исходный код (<a class="mkdocs_imported_link" href="https://kb.comindware.ru/file.php?id=191">TelegramBotComindwareIntegration.zip</a>) или копируйте приведённые ниже фрагменты кода.
+16. Добавьте в файл <code>MainWindow.xaml.cs</code> две функции:</p>
+<ul>
+<li><code>Get()</code> будет делать <strong><em>GET</em></strong>-запрос для получения данных из шаблона аккаунта <em>«Sotrudniki»</em>. Результатом будет <strong><em>JSON</em></strong>-ответ.</li>
+<li><code>ValueFromJSON()</code> будет извлекать из этого ответа нужный атрибут. </li>
+</ul>
+<p><div class="highlight"><code><pre><span></span><code>private string Get(string  OA_system_name)</code> <br/><code>{</code> <br/><code>    var client =   new   RestClient(Domain);</code> <br/><code>    client.Authenticator = new HttpBasicAuthenticator(Login, Password);</code> <br/><code>    var request =   new   RestRequest("solution/" + OA_system_name, Method.Get);</code> <br/><code>    request.AddHeader("Accept",   "application/json"  );</code> <br/><code>    var response = client.Execute(request);</code> <br/><code>    return response.Content;</code> <br/><code>}</code> <br/><code></code> <br/><code>private string ValueFromJSON(string  data,  string attribute_name, string  chat_id)</code> <br/><code>{</code> <br/><code>    var doc = JsonDocument.Parse(data);</code> <br/><code>    JsonElement root = doc.RootElement;</code> <br/><code>    var users = root.EnumerateArray();</code> <br/><code>    while (users.MoveNext())</code> <br/><code>    {</code> <br/><code>        var user = users.Current;</code> <br/><code>        var props = user.EnumerateObject();</code> <br/><code>        string value_ =   ""  , chat_id_ = "";</code> <br/><code>        while (props.MoveNext())</code> <br/><code>        {</code> <br/><code>            var prop = props.Current;</code> <br/><code>            if (prop.Name.ToLower() == attribute_name.ToLower())</code> <br/><code>            {</code> <br/><code>                value_ = prop.Value.ToString();</code> <br/><code>            }</code> <br/><code>            if (prop.Name.ToLower() ==   "chatid"  )</code> <br/><code>            {</code> <br/><code>                chat_id_ = prop.Value.ToString();</code> <br/><code>            }</code> <br/><code>        }</code> <br/><code>        if (chat_id_ == chat_id)</code> <br/><code>        {</code> <br/><code>            return value_;</code> <br/><code>        }</code> <br/><code>    }</code> <br/><code>    return "";</code> <br/><code>}</code> <br/></pre></code></div>
+17. Теперь при запуске промежуточного ПО Telegram-бот запросит авторизацию.
+18. Реализуем процесс авторизации следующим образом: если пользователь по ChatID не найден, то будем рассматривать 3 варианта:</p>
+<ul>
+<li>сообщение содержит символ '@', следовательно в сообщении указат адрес эл. почты — запускаем процесс отправки 4-значного кода;</li>
+<li>длина сообщения — 4 символа — проверка отправленного кода на соответствие;</li>
+<li>во всех остальных случаях бот отвечает: <em>«Укажите адрес эл. почты для авторизации»</em>.
+19. Добавьте в файл <code>MainWindow.xaml.cs</code> следующую функцию для обработки сообщений от пользователя.</li>
+</ul>
+<p><div class="highlight"><code><pre><span></span><code>public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)</code> <br/><code>        {</code> <br/><code>            try</code> <br/><code>            {</code> <br/><code>                if (update.Type == Telegram.Bot.Types.Enums.UpdateType.Message)</code> <br/><code>                {</code> <br/><code>                    var message = update.Message;</code> <br/><code></code> <br/><code>                    string data = Get("Sotrudniki");</code> <br/><code>                    if (ValueFromJSON(data, "ChatID", message.Chat.Id.ToString()) == "")</code> <br/><code>                    {</code> <br/><code>                        if (message.Text.Contains("@"))</code> <br/><code>                        {</code> <br/><code>                            var doc = JsonDocument.Parse(data);</code> <br/><code>                            JsonElement root = doc.RootElement;</code> <br/><code>                            var users = root.EnumerateArray();</code> <br/><code>                            while (users.MoveNext())</code> <br/><code>                            {</code> <br/><code>                                var user = users.Current;</code> <br/><code>                                var props = user.EnumerateObject();</code> <br/><code>                                string account_id = "", current_email = "";</code> <br/><code>                                while (props.MoveNext())</code> <br/><code>                                {</code> <br/><code>                                    var prop = props.Current;</code> <br/><code>                                    if (prop.Name.ToLower() == "mbox")</code> <br/><code>                                    {</code> <br/><code>                                        current_email = prop.Value.ToString();</code> <br/><code>                                    }</code> <br/><code>                                    if (prop.Name.ToLower() == "id")</code> <br/><code>                                    {</code> <br/><code>                                        account_id = prop.Value.ToString();</code> <br/><code>                                    }</code> <br/><code>                                }</code> <br/><code>                                if (current_email.ToLower() == message.Text.ToLower())</code> <br/><code>                                {</code> <br/><code>                                    var symbols = "0123456789";</code> <br/><code>                                    string code = "";</code> <br/><code>                                    var random =   new   Random();</code> <br/><code>                                    for (  int   i = 0; i &lt; 4; i++)</code> <br/><code>                                    {</code> <br/><code>                                        code += symbols[random.Next(symbols.Length)].ToString();</code> <br/><code>                                    }</code> <br/><code>                                    // найденному пользователю в системе проставим ChatID с пометкой _NA (т.е. не авторизован)</code> <br/><code>                                    // и сгенерированный 4-х значный код</code> <br/><code>                                    var data_ =   new   Dictionary&lt;string,   object  &gt;</code> <br/><code>                                        {</code> <br/><code>                                            {"op.13", message.Chat.Id.ToString() + "_NA"},//ChatId</code> <br/><code>                                            {"op.14", code}//Proverochnyykod</code> <br/><code>                                        };</code> <br/><code>                                    var client =   new   RestClient(Domain);</code> <br/><code>                                    client.Authenticator = new HttpBasicAuthenticator(Login, Password);</code> <br/><code>                                    var request =   new   RestSharp.RestRequest("system/TeamNetwork/ObjectService/Edit", Method.Post); // POST-запрос к найденному пользователю для обновления данных</code> <br/><code>                                    request.AddHeader("content-type", "application/json");</code> <br/><code>                                    var sendData =   new   Dictionary&lt;string,   object  &gt;</code> <br/><code>                                    {</code> <br/><code>                                        {"objectId", account_id},</code> <br/><code>                                        {"objectData", data_ }</code> <br/><code>                                    };</code> <br/><code>                                    request.AddParameter("application/json", JsonSerializer.Serialize(sendData), ParameterType.RequestBody);</code> <br/><code>                                    client.Execute(request);</code> <br/><code></code> <br/><code>                                    // запустим процесс отправки сгенерированного кода на email</code> <br/><code>                                    var data_for_proccess =   new   Dictionary&lt;string,   object  &gt;</code> <br/><code>                                        {</code> <br/><code>                                            {"op.23", code}, // Код</code> <br/><code>                                            {"op.24", current_email} // Кому</code> <br/><code>                                        };</code> <br/><code>                                    request = new RestSharp.RestRequest("system/Process/ProcessObjectService/Create1", Method.Post);</code> <br/><code>                                    request.AddHeader("content-type", "application/json");</code> <br/><code>                                    data_ = new Dictionary&lt;string, object&gt;</code> <br/><code>                                        {</code> <br/><code>                                            {"processAppId", "pa.3"}, // process_id</code> <br/><code>                                            {"objectName", null},</code> <br/><code>                                            {"syncActivityQuantity", 2},</code> <br/><code>                                            {"objectData", data_for_proccess}</code> <br/><code>                                        };</code> <br/><code>                                    request.AddParameter("application/json", JsonSerializer.Serialize(data_), ParameterType.RequestBody);</code> <br/><code>                                    client.Execute(request);</code> <br/><code></code> <br/><code>                                    await bot.SendTextMessageAsync(message.Chat.Id, "На указанную почту отправлено письмо с 4-значным кодом, введите его ниже для авторизации");</code> <br/><code>                                }</code> <br/><code>                            }</code> <br/><code>                        }</code> <br/><code>                        else if (message.Text.Length == 4)</code> <br/><code>                        {</code> <br/><code>                            string value = ValueFromJSON(data, "Proverochnyykod", message.Chat.Id.ToString() + "_NA");</code> <br/><code>                            if (message.Text ==   value  )</code> <br/><code>                            {</code> <br/><code>                                // у ChatID убираем пометку "_NA" и очищаем поле "Проверочный код"</code> <br/><code>                                var data_ =   new   Dictionary&lt;string,   object  &gt;</code> <br/><code>                                    {</code> <br/><code>                                        {"op.13", message.Chat.Id.ToString()},//ChatId</code> <br/><code>                                        {"op.14", null}//Proverochnyykod</code> <br/><code>                                    };</code> <br/><code>                                var client = new RestClient(Domain);</code> <br/><code>                                client.Authenticator = new HttpBasicAuthenticator(Login, Password);</code> <br/><code>                                value = ValueFromJSON(data, "id", message.Chat.Id.ToString() + "_NA");</code> <br/><code>                                var request =   new   RestSharp.RestRequest("system/TeamNetwork/ObjectService/Edit", Method.Post);</code> <br/><code>                                request.AddHeader("content-type", "application/json");</code> <br/><code>                                var sendData =   new   Dictionary&lt;string, object&gt;</code> <br/><code>                                {</code> <br/><code>                                    {"objectId", value},</code> <br/><code>                                    {"objectData", data_}</code> <br/><code>                                };</code> <br/><code>                                request.AddParameter("application/json", JsonSerializer.Serialize(sendData), ParameterType.RequestBody);</code> <br/><code>                                client.Execute(request);</code> <br/><code>                                await bot.SendTextMessageAsync(message.Chat.Id, "Вы успешно авторизованы");</code> <br/><code>                            }</code> <br/><code>                        }</code> <br/><code>                        else</code> <br/><code>                        {</code> <br/><code>                            await bot.SendTextMessageAsync(message.Chat.Id, "Укажите адрес эл. почты для авторизации");</code> <br/><code>                        }</code> <br/><code>                    }</code> <br/><code>                    else</code> <br/><code>                    {</code> <br/><code>                        string name = ValueFromJSON(data, "fullName", message.Chat.Id.ToString());</code> <br/><code>                        await bot.SendTextMessageAsync(message.Chat.Id, "Добрый день, " + name + "! Вы успешно авторизованы");</code> <br/><code>                    }</code> <br/><code>                }</code> <br/><code>            }</code> <br/><code>            catch { }</code> <br/><code>        }</code> <br/><code></code> <br/><code>        public async Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)</code> <br/><code>        {</code> <br/><code>            MessageBox.Show("Ошибка " + exception.Message);</code> <br/><code>        }</code> <br/></pre></code></div>
+20. Протестируйте работу промежуточного ПО и Telegram-бота.</p>
+<p><img alt="Авторизация через бот" src="https://kb.comindware.ru/assets/img_664f17cea8721.png"/></p>
+<p>Авторизация через бот</p>
+</li>
+</ol>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

@@ -1,0 +1,41 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4881" kb-tags="" kb-title="Импорт связанных данных из таблицы Excel">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Импорт данных — это стандартная операция в рамках <strong>Comindware Platform</strong>. Можно импортировать данные в любой из существующих шаблонов записи и даже устанавливать связи между записями из разных шаблонов. В данной статье мы рассмотрим как раз импорт связанных данных, а именно, заполнение таблицы в записи из excel файла.</p>
+<p>Таблица на форме записи — это, по сути, отфильтрованная таблица из связанного шаблона записи. Каждая строка таблицы, то есть, запись в шаблоне записи, ссылается на основной объект, где отображается таблица. Поэтому, для того чтобы данные из таблицы Excel перенеслись в таблицу на форме, нужно импортировать таблицу Excel в шаблон записи, на который ссылается таблица, и в отдельном столбце указать значение ссылки на главный объект (либо в виде ИД, либо значения в отображаемом атрибуте, который указан в системе). Таким образом, импортированные записи будут сразу привязаны к основному объекту, и таблица в нём заполнится автоматически, без лишних настроек.</p>
+<p><strong>Пример</strong></p>
+<p>В качестве примера, импортируем Excel таблицу заявок к каждому клиенту. Для этого в системе созданы шаблон записи «<em>Клиенты</em>» и шаблон записи «<em>Заказы</em>». В «<em>Заказах</em>» есть ссылка на «<em>Клиенты</em>», а в «<em>Клиентах</em>» — связанная ссылка с отмеченным флагом «<strong><em>Несколько значений</em></strong>» — «<em>Заказы клиента</em>».</p>
+<p>Excel таблица для импорта выглядит примерно так:</p>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример Excel таблицы" src="https://kb.comindware.ru/assets/excel_table_import.png"/><figcaption class="caption">Пример Excel таблицы</figcaption></p>
+</figure>
+<p>В столбце «<em>Клиент</em>» в данном случае указаны названия клиентов, заведенных в системе.</p>
+<p>В разделе <strong><em>«Импорт»</em></strong> шаблона записи «<em>Заказы</em>» загружаем данную таблицу Excel и настраиваем соответствие столбцов таблицы с атрибутами шаблона записи. Указываем формат <strong><em>name</em></strong> напротив «<em>Клиента</em>», соответствующий отображаемому атрибуту в данном шаблоне записи. Указываем напротив поля «<em>Сумма</em>» формат «<strong><em>Валюта</em></strong>».</p>
+<figure class="screenshot_with_caption">
+<p><img alt="Настройка импорта таблицы Excel" src="https://kb.comindware.ru/assets/2021-12-30_13h46_19.png"/><figcaption class="caption">Настройка импорта таблицы Excel</figcaption></p>
+</figure>
+<p>В шаблоне записи «<em>Заказы</em>» появились новые записи, с проставленной связью к определенному клиенту.</p>
+<figure class="screenshot_with_caption">
+<p><img alt='Таблица в шаблоне записи "Заявки"' src="https://kb.comindware.ru/assets/2021-12-30_13h48_11.png"/><figcaption class="caption">Таблица в шаблоне записи "Заявки"</figcaption></p>
+</figure>
+<p>В свою очередь, таблица «<em>Заявки клиента</em>» в «<em>Клиентах</em>» выглядит следующим образом:</p>
+<figure class="screenshot_with_caption">
+<p><img alt="Таблица заказов клиента" src="https://kb.comindware.ru/assets/2021-12-30_13h49_38.png"/><figcaption class="caption">Таблица заказов клиента</figcaption></p>
+</figure>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

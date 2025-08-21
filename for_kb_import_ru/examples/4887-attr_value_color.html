@@ -1,0 +1,28 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4887" kb-tags="" kb-title="Атрибут типа «Текст». Настройка цвета отображения значения">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Все атрибуты в системе отображаются в определённом формате. Настроить определённый шрифт или размер шрифта для значений конкретного атрибута нельзя. Если же вы хотите, чтобы какой-либо атрибут в таблице окрашивался определенным цветом по заданному условию (например, если задача просрочена, выделить значение красным цветом, в противном случае — зеленым), то это возможно через атрибут с типом данных «Текст» с форматом отображения «HTML-текст».</p>
+<p><strong>1.</strong> Создайте атрибут с типом данных «Текст», выберите формат его отображения «HTML текст». Отметьте флаг «Вычисляемый».</p>
+<p><strong>2.</strong> В поле «Вычисляемое выражение» выберите «Формула» и вставьте формулу по типу:</p>
+<div class="highlight"><code><pre><span></span><code>FORMAT(</code> <br/><code>IF(EQUALS($StatusRef-&gt;name,"Выполнено"),</code> <br/><code>"&lt;p&gt;&lt;span style='color:#000000'&gt;&lt;span style='background-color:#3ee028'&gt;{0}&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;",</code> <br/><code>"&lt;p&gt;&lt;span style='color:#000000'&gt;&lt;span style='background-color:#f02626'&gt;{0}&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;"),</code> <br/><code>LIST($StatusRef-&gt;name))</code> <br/></pre></code></div>
+<p>Для решения нашей задачи используется функция <strong><em>FORMAT</em></strong><strong><em>()</em></strong>, которая форматирует значение из нужного атрибута (в данном примере, «<em>Статус</em>»). Далее прописывается условие, используя функцию <strong><em>IF</em></strong><strong><em>()</em></strong>. В нашем случае это «<em>Статус</em>» равен «<em>Выполнено</em>». После этого, если условие выполняется, то задний фон окрашивается в зеленый цвет, а текст — в белый. Если условие не выполняется, то задний фон окрашивается в красный цвет, а текст — в белый.</p>
+<p>Для окрашивания заднего фона и текста используется <em>HTML</em> — язык гипертекстовой разметки. Цвет заднего фона можно поменять здесь, после двоеточия «<em>'</em><em>background</em><em>-</em><em>color</em><em>:#</em><em>f</em><em>02626'</em>». Цвет текста можно поменять здесь, после двоеточия «<em>'</em><em>color</em><em>:#000000'</em>».</p>
+<p>В конце выражения, в <strong><em>LIST</em></strong><strong><em>()</em></strong>, прописывается атрибут, значение которого хотим окрасить. В нашем случае это «<em>Статус</em>». Нужно заметить, что окрасится не сам атрибут «<em>Статус</em>», а отдельный вычисляемый атрибут, который мы создали.</p>
+<p><strong>Примечание :</strong> ограничений в настройке нет, можно окрашивать только текст, только фон, можно добавлять дополнительные html значки, и т.д.</p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>
