@@ -11,6 +11,12 @@ Generate a complete, standalone N3 (Notation 3/Turtle/RDF) tutorial for Comindwa
 
 ## Lesson Plan Structure
 
+### Global sourcing and constraints
+
+- Always curate sources via `@n3_references.mdc`. When adding examples or definitions, pick from the referenced files there (e.g., `n3_examples_collection.md`, `n3_lecture_transcript_2025.08.21.md`, developer guide articles, and examples under `docs/ru/examples/`).
+- Formulas are a separate language and are not a kind of triples. When formulas are mentioned, link to `docs/ru/developer_guide/formulas/formula_guide.md` and keep N3 content distinct.
+- Platform specifics: use `->` for result assignment; implication `=>` is not used for standard expressions.
+
 ### Lesson 1: Introduction to N3 (1.5 hours)
 
 **Learning Objectives:**
@@ -25,14 +31,14 @@ Generate a complete, standalone N3 (Notation 3/Turtle/RDF) tutorial for Comindwa
 
 - RDF model, graphs, ontologies, ontology structure, and data model
 - ElasticData overview and mapping to RDF/N3 ([ElasticData][elasticdata_description])
-- Triples with visuals; syntax: variables, `{}`, `.`, `a`, `[]`, `()`, `=`; note if `=>` is used in platform context
-- Five query types and order of evaluation; reasoner overview
+- Triples with visuals; core syntax preview: variables, `{}`, `.`, prefixes; brief mention of shorthands `a`, `[]`, `=`, platform `->` (full details in Lesson 2)
+- Interpreter behavior preview: sequential AND and evaluation order; brief reasoner note (details in Lesson 5)
 - Execution context and I/O per entity; add subsection "Контекст и ввод-вывод по сущностям" with anchor `{: #tutorial_n3_lesson_1_io_context }`
-- N‑Triples vs N3; one‑line mapping example; Formula → N3 mini‑refactor
+- N‑Triples vs N3; one‑line mapping example; optional Formula → N3 mini‑refactor preview (full in Lesson 2)
 - Platform N3 editor brief intro; glossary of terms
-- Simple HR data query walk‑through (candidate → department)
+- Simple HR data query walk‑through (candidate → department or employee → department)
 - Common mistakes mini‑box: missing dot, braces, variable reuse
-- Sources:
+- Sources (curated via `@n3_references.mdc`):
   - `docs/ru/developer_guide/n3/n3_tutorial.md` — baseline tutorial narrative
   - `docs/ru/developer_guide/n3/n3_guide.md` — syntax, five query types, built‑ins, I/O matrix
   - `docs/ru/developer_guide/n3/n3_notation.md` — N3 notation fundamentals
@@ -72,9 +78,11 @@ Generate a complete, standalone N3 (Notation 3/Turtle/RDF) tutorial for Comindwa
 
 - Triples anatomy; variable naming guidance
 - `?item`/`?value` usage patterns and type discipline
-- Five query types with tiny runnable snippets
-- Error hygiene: dots, braces, case sensitivity
-- Formula → N3 refactor (simple)
+- Five forms/query patterns with tiny runnable snippets
+- Shorthand constructs: `a` (rdf:type), `[]` (blank node pattern), `=` (binding/equality), platform `->` result; note `=>` not used
+- Interpreter behavior: default conjunction (AND), sequential evaluation; emptiness checks preview (`not { … ?. }`, `?.`)
+- Error hygiene: dots, braces, case sensitivity; variable reuse pitfall
+- Formula → N3 refactor (simple) with a tiny before/after
 - Sources:
   - `docs/ru/developer_guide/n3/n3_guide.md` — five forms, I/O matrix, syntax
   - `docs/ru/developer_guide/n3/n3_tutorial.md` — beginner examples
@@ -96,6 +104,7 @@ Generate a complete, standalone N3 (Notation 3/Turtle/RDF) tutorial for Comindwa
 - Prefix declarations and URI/QName rationale
 - `object:findProperty` patterns; mapping to predicates
 - Variable assignment variants (subject/object/predicate known)
+- Example patterns: current user filter for responsibility; linked status → code check (e.g., Q0) via referenced entity
 - Sources:
   - `docs/ru/developer_guide/n3/n3_guide.md` — prefixes, `object:findProperty`
   - `docs/ru/developer_guide/n3/n3_tutorial.md` — property discovery walkthroughs
@@ -114,7 +123,8 @@ Generate a complete, standalone N3 (Notation 3/Turtle/RDF) tutorial for Comindwa
 **Content:**
 
 - Multi‑step navigation (candidate → manager → department)
-- Three assignment variants; exact‑match checks
+- Three equivalent assignment variants; exact‑match checks; when variants differ in performance
+- Order matters (teaser); full performance details in Lesson 5
 - Formula → N3 refactor (link traversal)
 - Practical exercise: Build candidate filtering system
 - Sources:
@@ -137,7 +147,9 @@ Generate a complete, standalone N3 (Notation 3/Turtle/RDF) tutorial for Comindwa
 **Content:**
 
 - Iterator semantics and selection rules; break on `false`
-- Performance hygiene; safe `once {}` cases
+- Performance hygiene; "срез данных" (order by selectivity) with a compact example; safe `once {}` cases
+- Counting: prefer `assert:count` for record counts vs `cmwnullable:count`
+- Note: historical "container" caching approach is discouraged in recent builds
 - Negation and default conjunction between triples
 - Sources:
   - `docs/ru/developer_guide/n3/n3_tutorial.md` — iterator deep dive
@@ -162,6 +174,7 @@ Generate a complete, standalone N3 (Notation 3/Turtle/RDF) tutorial for Comindwa
     - Assignee OR Creator equals current user
     - Department is IT OR Sales
 - `if/then/else` control flow; triaging logic early
+- Refactor pattern: rewrite simple IF/ELSE to two small OR branches for performance
 - `assert:union`, `assert:count`, `assert:distinct`, `assert:sort`
 - Sources:
   - `docs/ru/developer_guide/n3/n3_guide.md` — operators and asserts
@@ -181,7 +194,7 @@ Generate a complete, standalone N3 (Notation 3/Turtle/RDF) tutorial for Comindwa
 **Content:**
 
 - `from/select` construction and list types
-- Aggregations and list utilities
+- Aggregations and list utilities: `cmwlist:ascending`, `cmwlist:at`; last item via `w3list:last` or `assert:sort`
 - Sources:
   - `docs/ru/examples/n3_collection_get_selected_ids.md` — building lists
   - `docs/ru/examples/n3_collection_join_filter.md` — list from joins
@@ -199,8 +212,10 @@ Generate a complete, standalone N3 (Notation 3/Turtle/RDF) tutorial for Comindwa
 
 **Content:**
 
-- Practical function recipes and data types
+- Practical function recipes and data types (numbers vs strings: `1` vs `"1"`)
 - Nullable‑safe comparisons and arithmetic
+- String functions: `string:*` vs `cmwstring:*` (e.g., format vs join/contains); `string:regexReplace`
+- Time/duration: `cmwlocal:*`, `cmwdur:*`, range checks (`between`)
 - Sources:
   - `docs/ru/developer_guide/n3/n3_guide.md` — function catalogs
   - `docs/ru/examples/attribute_date_time_value_format.md` — date/time formatting
@@ -221,6 +236,8 @@ Generate a complete, standalone N3 (Notation 3/Turtle/RDF) tutorial for Comindwa
 **Content:**
 
 - Security context and current user; role filters
+- Group membership pattern (e.g., `account:groupName`, `userGroupMembership`)
+- Processes and tasks: counting active processes; in‑progress tasks filter
 - Pattern cards: small OR, set unions, collection pipelines
 - Debug checklist; reduce to minimal triple; error handling patterns
 - Sources:
@@ -244,6 +261,8 @@ Generate a complete, standalone N3 (Notation 3/Turtle/RDF) tutorial for Comindwa
 - Email/HTTP/SQL integration touchpoints where expressions apply
 - Capstone exercise scaffolding
 - Self‑study (optional): deep schema exploration (e.g., `cmw:UserTask`); nullable helpers overview (`cmwnullable:*`)
+- Session variables and local state: `session:context`, `variable`/`operator` usage; result building patterns; "empty" fallback idiom
+- Attachments → hyperlink recipe (e.g., `document:title`, `document:content` + formatted link)
 - Sources:
   - `docs/ru/examples/document_clone_scenario_n3.md` — end‑to‑end cloning flow
   - `docs/ru/examples/autonumerating_records.md` — numbering pattern
@@ -608,7 +627,7 @@ Each lesson must end with a transition section following this pattern:
 - **Troubleshooting guidance** for common issues
 
 ### Integration Points
-- **Reference existing N3 docs** when available
+- **Reference existing N3 docs** when available (always via `@n3_references.mdc`)
 - **Link to HR tutorial concepts** (optional, not required)
 - **Include downloadable examples** and templates
 - **Provide resource links** for further learning
@@ -642,6 +661,10 @@ Each lesson must end with a transition section following this pattern:
 - Check iterator fan-out; move selective triples up
 - Use `once {}` only when safe (no multivalued links)
 - Verify dots and braces; confirm variable reuse is intentional
+
+### Notes on formulas vs N3
+
+- Formulas are a separate syntax scope covered in `docs/ru/developer_guide/formulas/`. Do not conflate formulas with triples; when refactoring examples are shown, keep formula snippets minimal and point to the formulas reference for details.
 
 ## Quality Assurance Checklist
 
