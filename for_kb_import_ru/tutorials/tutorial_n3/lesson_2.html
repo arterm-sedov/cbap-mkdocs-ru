@@ -57,28 +57,49 @@
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#tutorial_n3_lesson_2_core">
 <span class="md-ellipsis">
-      Переменные, правила записи и ?item/?value
+      Именование переменных и типизация данных
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_n3_lesson_2_formula_to_n3">
+<span class="md-ellipsis">
+      Сравнение формул и языка N3
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#tutorial_n3_lesson_2_query_forms">
 <span class="md-ellipsis">
-      Пять форм работы с триплетами и присвоением
+      Типы запросов и присвоения в N3
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#tutorial_n3_lesson_2_shorthands">
+<a class="md-nav__link mkdocs_imported_link" href="#получение-значения-атрибута-из-связанного-шаблона">
 <span class="md-ellipsis">
-      Шорткаты и платформенные особенности
+      Получение значения атрибута из связанного шаблона
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#tutorial_n3_lesson_2_hygiene">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_n3_lesson_2_interpreter">
 <span class="md-ellipsis">
-      Ошибки и гигиена синтаксиса
+      Порядок обработки триплетов и конъюнкция
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_n3_lesson_2_interpreter">
+<span class="md-ellipsis">
+      Изменение хода обработки триплетов
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_n3_lesson_1_typical_errors">
+<span class="md-ellipsis">
+      Типичные ошибки в выражениях на N3
     </span>
 </a>
 </li>
@@ -109,12 +130,56 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h2 id="tutorial_n3_lesson_2_intro">Введение</h2>
-<p>В этом уроке вы закрепите базовый синтаксис N3, разберёте использование переменных, системные параметры <code>?item</code> и <code>?value</code>, шорткаты <code>a</code>, <code>[]</code>, <code>=</code>, платформенный оператор результата <code>-&gt;</code>, а также пять типов запросов/форм работы с триплетами. Потренируемся на минимальных примерах и закрепим практикой.</p>
+<p>В этом уроке мы расширим понимание N3 на основе навыков из <em><a class="autorefs autorefs-internal mkdocs_imported_link" href="lesson_1.html#tutorial_n3_lesson_1" title="Урок 1. Введение в графовую СУБД и язык N3">урока 1</a>:</em> разберём правила именования переменных, типизацию входных и выходных данных, способы присвоения значений, поведение интерпретатора N3 (последовательность и конъюнкция), проверки пустоты и преобразование <strong>формул</strong> в <strong>N3</strong>.</p>
 <p><strong>Предусловия:</strong> пройден <a class="autorefs autorefs-internal mkdocs_imported_link" href="lesson_1.html#tutorial_n3_lesson_1" title="Урок 1. Введение в графовую СУБД и язык N3">урок 1 «Введение в графовую СУБД и язык N3»</a>.</p>
-<p><strong>Расчётная продолжительность:</strong> 1 час.</p>
+<p><strong>Расчётная продолжительность:</strong> 1,5 часа.</p>
 <div class="notice notice-warning">
 <p class="admonition-title">Бизнес-логика</p>
-<p>Контекст примеров — HR (кандидаты, отделы, статусы). Синтаксис и паттерны универсальны и применимы в любых приложениях на <strong>Comindware Platform</strong>.</p>
+<p>В этом уроке мы будем использовать контекст HR-процесса подбора кандидатов со следующей моделью данных:</p>
+<ul>
+<li>Связи между сущностями:<ul>
+<li>Подразделение → Вакансии</li>
+<li>Вакансия → Кандидаты</li>
+<li>Кандидат → Подразделение</li>
+<li>Кандидат → Вакансия</li>
+<li>Кандидат → Руководитель</li>
+<li>Кандидат → Статус</li>
+<li>Сотрудник → Подразделение</li>
+</ul>
+</li>
+<li>Атрибуты:<ul>
+<li>Шаблон <em>«Подразделения»</em><ul>
+<li><em>Вакансии</em> — <strong>записи</strong>, <strong>связанный шаблон</strong> <em>«Вакансии»</em></li>
+<li><em>Название</em>, <em>Код</em> — <strong>текст</strong></li>
+</ul>
+</li>
+<li>Шаблон <em>«Вакансии»</em><ul>
+<li><em>Кандидаты</em> — <strong>записи</strong>, <strong>связанный шаблон</strong> <em>«Кандидаты»</em></li>
+</ul>
+</li>
+<li>Шаблон <em>«Кандидаты»</em><ul>
+<li><em>Подразделение — <strong>запись</strong>, <strong>связанный шаблон</strong> </em>«Подразделения»_</li>
+<li><em>Руководитель</em> — <strong>запись</strong>, <strong>связанный шаблон</strong> <em>«Сотрудники»</em></li>
+<li><em>Статус</em> — <strong>запись</strong>, <strong>связанный шаблон</strong> <em>«Статусы кандидата»</em></li>
+<li><em>Стаж</em> — <strong>число</strong></li>
+<li><em>Телефон</em>, <em>Сопроводительное письмо</em>, <em>Код вакансии</em>, _Название и код подразделения — <strong>текст</strong></li>
+<li>Новый кандидат — <strong>логический</strong></li>
+</ul>
+</li>
+<li>Шаблон <em>«Статусы кандидата»</em><ul>
+<li><em>Название</em>, <em>Код</em> — <strong>текст</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Мы решим следующие бизнес-задачи:</p>
+<ul>
+<li>получим название и код подразделения кандидата по вакансии и руководителю;</li>
+<li>проверим статус кандидата;</li>
+<li>проверим, указан ли номер телефона кандидата;</li>
+<li>сформируем строку визитки кандидата из его данных.</li>
+</ul>
 </div>
 <div class="notice notice-info">
 <p class="admonition-title">Примечание</p>
@@ -123,95 +188,238 @@
 <h2 id="tutorial_n3_lesson_2_taxonomy">Темы, навыки и задания урока</h2>
 <h3 id="tutorial_n3_lesson_2_topics">Темы</h3>
 <ul>
-<li>Переменные и правила записи триплетов</li>
+<li>Переменные</li>
+<li>Правила записи триплетов</li>
 <li><code>?item</code> и <code>?value</code> в разных контекстах</li>
-<li>Пять форм/типов запросов и минимальные примеры</li>
-<li>Шорткаты: <code>a</code>, <code>[]</code>, <code>=</code>, оператор результата <code>-&gt;</code></li>
-<li>Проверки пустоты и точного совпадения</li>
+<li>Типы запросов</li>
+<li>Логика работы итератора</li>
+<li>Конструкция `if {...} then {...} else  {...}</li>
+</ul>
+<ul>
+<li>Запросы к связанным шаблонам</li>
 </ul>
 <h3 id="tutorial_n3_lesson_2_skills">Навыки</h3>
 <ul>
 <li>Корректно объявлять префиксы и переменные</li>
-<li>Составлять минимальные выражения для извлечения значений</li>
-<li>Применять пять форм присвоения и проверки совпадений</li>
-<li>Возвращать результат корректного типа через <code>-&gt; ?value</code></li>
+<li>Составлять запросы для извлечения данных из связанных шаблонов</li>
+<li>Применять различные формы присвоения и проверки совпадений</li>
 </ul>
 <h3 id="tutorial_n3_lesson_2_tasks">Задания</h3>
 <ul>
-<li>Написать короткие выражения для навигации и получения значения</li>
-<li>Применить проверку на пустоту и точное совпадение</li>
-<li>Использовать платформенный <code>-&gt;</code> для возврата результата</li>
+<li>Написать запросы для извлечения данных из связанных шаблонов</li>
+<li>Применить проверку на пустоту</li>
 </ul>
 <div class="notice notice-success">
 <h2 class="admonition-title" id="tutorial_n3_lesson_2_definitions">Определения</h2>
 <ul>
-<li><strong><code>?item</code></strong> — входной параметр (контекст исполнения), см. [Справочник по N3][n3_guide].</li>
-<li><strong><code>?value</code></strong> — выходной параметр (результат выражения), тип должен соответствовать целевому атрибуту.</li>
-<li><strong>Точное совпадение</strong> — триплет, где заданы субъект, предикат и объект; используется для проверки «есть ли ровно такой факт».</li>
-<li><strong>Шорткаты</strong> — синтаксические сокращения: <code>a</code> (rdf:type), <code>[]</code> (шаблон пустого узла), <code>=</code> (связывание/равенство).</li>
+<li><strong>Проверка точного совпадения</strong> — триплет, где заданы субъект, предикат и объект; используется для проверки утверждения <em>«Есть ли именно такой факт?»</em>.</li>
+<li><strong>Операторы</strong> — встроенные предикаты, записанные сокращённо, например <code>-&gt;</code> — присваивание.</li>
 </ul>
 </div>
-<h2 id="tutorial_n3_lesson_2_core">Переменные, правила записи и <code>?item</code>/<code>?value</code></h2>
+<h2 id="tutorial_n3_lesson_2_core">Именование переменных и типизация данных</h2>
 <ul>
-<li>Каждый триплет — в одной строке и заканчивается точкой.</li>
-<li>Всё тело выражения — в <code>{ }</code> после объявлений <code>@prefix</code>.</li>
-<li>Переменные начинаются с <code>?</code> и чувствительны к регистру.</li>
-<li><code>?item</code> — вход, <code>?value</code> — выход; матрица значений зависит от контекста, см. [Справочник по N3][n3_guide].</li>
+<li>Имена переменных должны обозначать соответствующую бизнес-сущность, например: <code>?candidate</code>, <code>?departmentCode</code>, а не <code>?c</code>, <code>?d</code>.</li>
+<li>К именам переменных, хранящих атрибуты, рекомендуется добавлять суффикс <code>Attr</code> или <code>Attribute</code>,например: <code>?candidateAttr</code>.</li>
+<li>К именам переменных, хранящих значения атрибутов, рекомендуется добавлять суффикс <code>Val</code> или <code>Value</code>, например: <code>?candidateValue</code>.</li>
+<li>Типы данных в переменных <code>?item</code> и <code>?value</code> зависят от контекста вычисления см. <a class="autorefs autorefs-internal mkdocs_imported_link" href="lesson_1.html#tutorial_n3_lesson_1" title="Урок 1. Введение в графовую СУБД и язык N3">урок 1</a> и <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4852">Справочник по N3</a>.</li>
+<li>Тип данных в <code>?value</code> должен совпадать с типом вычисляемого атрибута (текст, число, логический, запись).</li>
 </ul>
-<p>Минимальный пример получения значения текстового атрибута у связаной записи:</p>
-<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="p">(</span><span class="s">"Кандидаты"</span> <span class="s">"Должность"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?positionAttr</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Должности"</span> <span class="s">"Название"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?titleAttr</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="err">?item</span> <span class="err">?positionAttr</span> <span class="err">?position</span><span class="p">.</span></code> <br/><code>    <span class="err">?position</span> <span class="err">?titleAttr</span> <span class="err">?title</span><span class="p">.</span></code> <br/><code>    <span class="err">?title</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
-<h2 id="tutorial_n3_lesson_2_query_forms">Пять форм работы с триплетами и присвоением</h2>
-<p>Ниже — практические варианты присвоения и проверки, основанные на материалах <a class="autorefs autorefs-internal mkdocs_imported_link" href="../../developer_guide/n3/n3_tutorial.html#n3_tutorial_original" title="Учебник по N3">Учебника по N3</a> и [Справочника по N3][n3_guide].</p>
-<ol class="colored_numbers_list">
-<li>Известны субъект и предикат — находим объект</li>
-</ol>
-<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="p">(</span><span class="s">"Кандидаты"</span> <span class="s">"Отдел"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?deptAttr</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Отделы"</span> <span class="s">"Код"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?deptCodeAttr</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="err">?item</span> <span class="err">?deptAttr</span> <span class="err">?dept</span><span class="p">.</span></code> <br/><code>    <span class="err">?dept</span> <span class="err">?deptCodeAttr</span> <span class="err">?code</span><span class="p">.</span></code> <br/><code>    <span class="err">?code</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
-<ol class="colored_numbers_list" start="2">
-<li>Известны предикат и объект — находим субъект</li>
-</ol>
-<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="p">(</span><span class="s">"Отделы"</span> <span class="s">"Код"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?deptCodeAttr</span><span class="p">.</span></code> <br/><code>    <span class="err">?dept</span> <span class="err">?deptCodeAttr</span> <span class="s">"IT"</span><span class="p">.</span></code> <br/><code>    <span class="err">?dept</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
-<ol class="colored_numbers_list" start="3">
-<li>Точное совпадение: заданы все три части</li>
-</ol>
-<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="p">(</span><span class="s">"Кандидаты"</span> <span class="s">"Статус"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?statusAttr</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Статусы кандидата"</span> <span class="s">"Код"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?statusCodeAttr</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="err">?item</span> <span class="err">?statusAttr</span> <span class="err">?st</span><span class="p">.</span></code> <br/><code>    <span class="err">?st</span> <span class="err">?statusCodeAttr</span> <span class="s">"new"</span><span class="p">.</span></code> <br/><code>    <span class="l">true</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
-<ol class="colored_numbers_list" start="4">
-<li>Проверка на пустоту значения</li>
-</ol>
-<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="p">(</span><span class="s">"Кандидаты"</span> <span class="s">"Телефон"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?phoneAttr</span><span class="p">.</span></code> <br/><code>    <span class="err">not</span> <span class="p">{</span> <span class="err">?item</span> <span class="err">?phoneAttr</span> <span class="err">?</span><span class="p">.</span> <span class="p">}.</span></code> <br/><code>    <span class="l">true</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
-<ol class="colored_numbers_list" start="5">
-<li>Навигация по ссылке и возврат результата</li>
-</ol>
-<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="p">(</span><span class="s">"Кандидаты"</span> <span class="s">"Менеджер"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?managerAttr</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Сотрудники"</span> <span class="s">"ФИО"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?fioAttr</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="err">?item</span> <span class="err">?managerAttr</span> <span class="err">?m</span><span class="p">.</span></code> <br/><code>    <span class="err">?m</span> <span class="err">?fioAttr</span> <span class="err">?fio</span><span class="p">.</span></code> <br/><code>    <span class="err">?fio</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
-<h2 id="tutorial_n3_lesson_2_shorthands">Шорткаты и платформенные особенности</h2>
+<div class="notice notice-example">
+<p class="admonition-title">Вычисление значения текстового атрибута</p>
+<p>В записи <em>кандидата</em> вычислим значение <strong>текстового</strong> атрибута <em>«Код вакансии»</em>, получив его из связанного шаблона <em>«Вакансии»</em>.</p>
+<p>Этот пример иллюстрирует правила именования типизации переменных:</p>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем предикаты для работы с записями.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Получаем атрибуты "Вакансия" и "Код"</span></code> <br/><code>    <span class="c"># по их системным именам в соответствующих шаблонов.</span></code> <br/><code>    <span class="c"># Помещаем атрибуты в переменные ?positionAttr и ?codeAttr.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Кандидаты"</span> <span class="s">"Вакансия"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?positionAttr</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Вакансии"</span> <span class="s">"Код"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?codeAttr</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># В текущей записи ?item </span></code> <br/><code>    <span class="c"># получаем ID связанной записи в шаблоне "Вакансии"</span></code> <br/><code>    <span class="c"># и помещаем его в переменную ?positionValue.</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?positionAttr</span> <span class="err">?positionValue</span><span class="p">.</span></code> <br/><code>    <span class="c"># Из записи вакансии получаем её код</span></code> <br/><code>    <span class="c"># в переменную ?codeValue.</span></code> <br/><code>    <span class="err">?positionValue</span> <span class="err">?codeAttr</span> <span class="err">?codeValue</span><span class="p">.</span></code> <br/><code>    <span class="c"># Возвращаем текстовый код вакансии</span></code> <br/><code>    <span class="c"># в выходную переменную ?value.</span></code> <br/><code>    <span class="err">?codeValue</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</div>
+<h2 id="tutorial_n3_lesson_2_formula_to_n3">Сравнение формул и языка N3</h2>
+<p>Чтобы лучше понять логику и применимость выражений на N3, преобразуем приведённое выше выражение для вычисления значения <strong>текстового</strong> атрибута <em>«Код вакансии»</em> в записи <em>кандидата</em> в <strong>формулу</strong>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">$Вакансия—</span><span class="o">&gt;</span><span class="err">Код</span></code> <br/></pre></code></div>
+<div class="notice notice-tip">
+<p class="admonition-title">Вывод</p>
+<p>Формула получилась гораздо компактнее выражения на N3.</p>
+<p>Это подчёркивает, что необходимо понимать назначение языка N3 в <strong>Comindware Platform</strong>: запросы на N3 следует использовать в случаях, когда возможностей <strong>формул</strong> недостаточно.</p>
+<p>То есть сложность синтаксиса языка N3 компенсируется его расширенными возможностями.</p>
+<p>Области применения и преимущества формул и языка N3 мы рассмотрели в <em><a class="autorefs autorefs-internal mkdocs_imported_link" href="lesson_1.html#tutorial_n3_lesson_1_languages" title="Языки запросов в Comindware Platform и их назначение">уроке 1</a></em>.</p>
+</div>
+<h2 id="tutorial_n3_lesson_2_query_forms">Типы запросов и присвоения в N3</h2>
+<p>Мы уже знаем, что любые выражения на N3 состоят из триплетов.</p>
+<p>При этом в триплете могут быть определены (известны) не все элементы:</p>
 <ul>
-<li><code>a</code> эквивалентно <code>rdf:type</code> и используется для указания типа ресурса.</li>
-<li><code>[]</code> позволяет сопоставлять «пустой узел» (анонимный ресурс) по шаблону.</li>
-<li><code>=</code> — связывание/равенство для сопоставления значений.</li>
-<li><code>-&gt;</code> — платформенный оператор возврата результата в <code>?value</code>.</li>
-<li>Импликация <code>=&gt;</code> в стандартных выражениях платформы не используется.</li>
+<li>субъект и объект могут быть не определены (то есть их значения неизвестны);</li>
+<li>предикат должен быть определён всегда.</li>
 </ul>
-<p>Пример использования <code>a</code> для фильтрации задач пользователя см. в примерах в разделе [Примеры N3][n3_examples].</p>
-<h2 id="tutorial_n3_lesson_2_hygiene">Ошибки и гигиена синтаксиса</h2>
+<p>Результат обработки триплета зависит от того, какие элементы определены.</p>
+<p>Возможны следующие комбинации:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Субъект</th>
+<th>Объект</th>
+<th>Операция</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Определён</td>
+<td>Определён</td>
+<td>Проверка субъекта и объекта на полное совпадение</td>
+</tr>
+<tr>
+<td>Субъект</td>
+<td>Не определён</td>
+<td>Поиск объекта по предикату и субъекту</td>
+</tr>
+<tr>
+<td>Не определён</td>
+<td>Определён</td>
+<td>Поиск субъекта по предикату и объекту</td>
+</tr>
+<tr>
+<td>Не определён</td>
+<td>Не определён</td>
+<td>Поиск субъекта и объекта по предикату</td>
+</tr>
+<tr>
+<td>Не определён</td>
+<td><code>?.</code></td>
+<td>Проверка наличия непустого значения (факта) по субъекту и предикату</td>
+</tr>
+</tbody>
+</table>
+<p>Рассмотрим примеры обработки этих форм триплетов.</p>
 <ul>
-<li>Следите за точками в конце строк и фигурными скобками вокруг тела.</li>
-<li>Проверяйте регистр имён переменных.</li>
-<li>Возвращайте значение совместимого типа: строка в текстовый атрибут, число в числовой и т.д.</li>
-<li>Повторное использование переменных должно быть осознанным.</li>
+<li>
+<p><strong>Проверка субъекта и объекта на полное совпадение:</strong> определены субъект и объект</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>Вычислим значение <strong>логического</strong> атрибута <em>«Новый кандидат»</em> в записи <em>кандидата</em>: он должен принимать значение <code>True</code>, если <em>код статуса кандидата</em> равен <code>new</code>.</p>
+</div>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем предикаты для работы с записями.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Получаем атрибут "Статус" из шаблона "Кандидаты"</span></code> <br/><code>    <span class="c"># и помещаем его в переменную ?statusAttr</span></code> <br/><code>    <span class="p">(</span><span class="s">"Кандидаты"</span> <span class="s">"Статус"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?statusAttr</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получаем атрибут "Код" из шаблона "Статусы кандидатов"</span></code> <br/><code>    <span class="c"># и помещаем его в переменную ?statusCodeAttr</span></code> <br/><code>    <span class="p">(</span><span class="s">"Статусы кандидатов"</span> <span class="s">"Код"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?statusCodeAttr</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># В текущей записи ?item</span></code> <br/><code>    <span class="c"># получаем ID связанной записи в шаблоне "Статус"</span></code> <br/><code>    <span class="c"># и помещаем его в переменную ?statusValue</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?statusAttr</span> <span class="err">?statusValue</span><span class="p">.</span></code> <br/><code>    <span class="c"># Проверяем, что код статуса равен "new",</span></code> <br/><code>    <span class="c"># точное совпадение: субъект и объект определены.</span></code> <br/><code>    <span class="err">?statusValue</span> <span class="err">?statusCodeAttr</span> <span class="s">"new"</span><span class="p">.</span></code> <br/><code>    <span class="c"># Если все условия выполнены, возвращаем true</span></code> <br/><code>    <span class="l">true</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<div class="notice notice-example">
+<p class="admonition-title">Эквивалентная формула</p>
+<p>Чтобы лучше понять логику <strong>N3</strong>, составим <strong>формулу</strong> для такого же вычисления.</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">$Статус</span><span class="o">-&gt;</span><span class="err">Код</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">"new"</span></code> <br/></pre></code></div>
+</div>
+</li>
+<li>
+<p><strong>Поиск объекта по предикату и субъекту:</strong> определён субъект, объект не определён</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>Вычислим значение <strong>текстового</strong> атрибута <em>«Название и код подразделения»</em> в записи <em>кандидата</em>.</p>
+<p>Значение <em>«Название и код подразделения»</em> должно иметь следующий вид: <code>Название подразделения (код подразделения)</code>, например <code>Бухгалтерия (Accounting)</code>.</p>
+</div>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем предикаты для работы с записями.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="c"># Импортируем предикаты для обработки строк.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwstring:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/string#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Получаем атрибут "Подразделение" из шаблона "Кандидаты"</span></code> <br/><code>    <span class="c"># (определённый субъект)</span></code> <br/><code>    <span class="c"># и помещаем его в переменную </span></code> <br/><code>    <span class="c"># ?deptAttr — неопределённый объект.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Кандидаты"</span> <span class="s">"Подразделение"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?deptAttr</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получаем атрибуты "Код" и "Название" из шаблона "Подразделения"</span></code> <br/><code>    <span class="c"># (определённые субъекты) </span></code> <br/><code>    <span class="c"># и помещаем их в переменные</span></code> <br/><code>    <span class="c"># ?deptCodeAttr и ?deptNameAttr — неопределённые объекты.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Подразделения"</span> <span class="s">"Код"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?deptCodeAttr</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Подразделения"</span> <span class="s">"Название"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?deptNameAttr</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># В текущей записи ?item (определённый субъект)</span></code> <br/><code>    <span class="c"># получаем ID связанной записи в шаблоне "Подразделение"</span></code> <br/><code>    <span class="c"># и помещаем его в переменную </span></code> <br/><code>    <span class="c"># ?deptVal — неопределённый объект.</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?deptAttr</span> <span class="err">?deptVal</span><span class="p">.</span></code> <br/><code>    <span class="c"># Из записи подразделения (определённый субъект)</span></code> <br/><code>    <span class="c"># получаем его код и название и помещаем их в переменные </span></code> <br/><code>    <span class="c"># ?deptCodeVal и ?deptNameVal — неопределённые объекты.</span></code> <br/><code>    <span class="err">?deptVal</span> <span class="err">?deptCodeAttr</span> <span class="err">?deptCodeVal</span><span class="p">.</span></code> <br/><code>    <span class="err">?deptVal</span> <span class="err">?deptCodeAttr</span> <span class="err">?deptNameVal</span><span class="p">.</span></code> <br/><code>    <span class="c"># С помощью предиката cmwstring:format соединяем</span></code> <br/><code>    <span class="c"># код и название подразделения (определённые субъекты) в единую строку</span></code> <br/><code>    <span class="c"># и помещаем её в переменную </span></code> <br/><code>    <span class="c"># ?deptQualifiedName — неопределённый объект.</span></code> <br/><code>    <span class="p">(</span><span class="s">"{0} ({1})"</span> <span class="err">?deptNameVal</span> <span class="err">?deptCodeVal</span><span class="p">)</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">format</span> <span class="err">?deptQualifiedName</span><span class="p">.</span></code> <br/><code>    <span class="c"># Возвращаем название и код подразделения в выходную переменную </span></code> <br/><code>    <span class="c"># ?value — неопределённый объект.</span></code> <br/><code>    <span class="err">?deptQualifiedName</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>!!! example "Эквивалентная формула"</code> <br/><code></code> <br/><code>    ``` sql</code> <br/><code>    FORMAT("{0} ({1})", LIST($Подразделение-&gt;Название, $Подразделение-&gt;Код))</code> <br/><code>    ```</code> <br/></pre></code></div>
+</li>
+<li>
+<p><strong>Поиск субъекта по предикату и объекту:</strong> определён объект, субъект не определён</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>Получим ID всех <em>подразделений</em> c кодом <em>«IT»</em>.</p>
+</div>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем предикаты для работы с записями.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Получаем атрибут "Код" из шаблона "Подразделения"</span></code> <br/><code>    <span class="c"># и помещаем его в переменную ?deptCodeAttr</span></code> <br/><code>    <span class="p">(</span><span class="s">"Подразделения"</span> <span class="s">"Код"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?deptCodeAttr</span><span class="p">.</span></code> <br/><code>    <span class="c"># Находим ID всех подразделений с кодом "IT" (определённый объект)</span></code> <br/><code>    <span class="c"># и помещаем его в переменную</span></code> <br/><code>    <span class="c"># ?deptId — неопределённый субъект.</span></code> <br/><code>    <span class="err">?deptId</span> <span class="err">?deptCodeAttr</span> <span class="s">"IT"</span><span class="p">.</span></code> <br/><code>    <span class="c"># Возвращаем коллекцию ID в выходную переменную ?value.</span></code> <br/><code>    <span class="err">?deptId</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<div class="notice notice-example">
+<p class="admonition-title">Эквивалентная формула</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">db</span><span class="o">-&gt;</span><span class="err">Подразделения</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="err">Код</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">"IT"</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">id</span></code> <br/></pre></code></div>
+</div>
+</li>
+<li>
+<p><strong>Поиск субъекта и объекта по предикату:</strong> субъект и объект не определены</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>Найдём подразделение, на вакансии в которых есть кандидаты, — составим выражение <strong>N3 для системного фильтра таблицы</strong>.</p>
+</div>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем предикаты для работы с записями и строками.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Получаем атрибут "Подразделение" из шаблона "Кандидаты"</span></code> <br/><code>    <span class="c"># и помещаем его в переменную ?deptAttr</span></code> <br/><code>    <span class="p">(</span><span class="s">"Подразделения"</span> <span class="s">"Вакансии"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?departmentPositionsAttr</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Вакансии"</span> <span class="s">"Кандидаты"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?positionCandidatesAttr</span><span class="p">.</span></code> <br/><code>    <span class="c"># Находим все связанные через атрибут "Вакансии"</span></code> <br/><code>    <span class="c"># пары записей "подразделение-вакансия"</span></code> <br/><code>    <span class="c"># (неопределённые субъект и объект)</span></code> <br/><code>    <span class="c"># и помещаем записи ?departmentsValue и ?positionsValue</span></code> <br/><code>    <span class="err">?departmentsValue</span> <span class="err">?departmentPositionsAttr</span><span class="p">.</span> <span class="err">?positionsValue</span><span class="p">.</span></code> <br/><code>    <span class="c"># Оставляем только те вакансии, на которые есть кандидаты.</span></code> <br/><code>    <span class="err">?positionsValue</span> <span class="err">?positionCandidatesAttr</span> <span class="err">?</span><span class="p">.</span></code> <br/><code>    <span class="c"># Возвращаем отфильтрованный список подразделений в переменную ?item.</span></code> <br/><code>    <span class="err">?departmentsValue</span> <span class="err">-&gt;?item</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<div class="notice notice-example">
+<p class="admonition-title">Эквивалентная формула</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">FIRST</span><span class="p">(</span><span class="k">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">db</span><span class="o">-&gt;</span><span class="err">Подразделения</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">NOT</span><span class="p">(</span><span class="n">EMPTY</span><span class="p">(</span><span class="n">a</span><span class="o">-&gt;</span><span class="err">Подразделения</span><span class="o">-&gt;</span><span class="err">Вакансии</span><span class="o">-&gt;</span><span class="err">Кандидаты</span><span class="p">))</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">)</span></code> <br/></pre></code></div>
+</div>
+</li>
+<li>
+<p><strong>Проверка на пустоту значения:</strong> субъект определён, объект задан оператором <code>?</code></p>
+<p>В предыдущем примере мы использовали функцию проверки пустоты <code>?</code>. Рассмотрим её работу отдельно.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>Вычислим значение <strong>логического</strong> атрибута <em>«Имеется сопроводительное»</em> в записи кандидата: <code>True</code>, если кандидат предоставил сопроводительное письмо.</p>
+</div>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем предикаты для работы с записями.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Получаем атрибут "Сопроводительное письмо" из шаблона "Кандидаты"</span></code> <br/><code>    <span class="c"># и помещаем его в переменную ?coverLetterAttr</span></code> <br/><code>    <span class="p">(</span><span class="s">"Кандидаты"</span> <span class="s">"Сопроводительноеписьмо"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?coverLetterAttr</span><span class="p">.</span></code> <br/><code>    <span class="c"># Проверяем, что в текущей записи ?item</span></code> <br/><code>    <span class="c"># сопроводительное письмо не пустое.</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?coverLetterAttr</span> <span class="err">?</span><span class="p">.</span></code> <br/><code>    <span class="c"># Если имеется сопроводительное, возвращаем true</span></code> <br/><code>    <span class="l">true</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>!!! example "Эквивалентная формула"</code> <br/><code></code> <br/><code>``` sql</code> <br/><code>NOT(EMPTY($Сопроводительноеписьмо))</code> <br/><code>```</code> <br/></pre></code></div>
+</li>
+</ul>
+<h2 id="получение-значения-атрибута-из-связанного-шаблона">Получение значения атрибута из связанного шаблона</h2>
+<div class="highlight"><code><pre><span></span><code>!!! warning "Бизнес-логика"</code> <br/><code></code> <br/><code>    Получим ФИО нанимающего менеджера кандидата в вычисляемый атрибут.</code> <br/><code></code> <br/><code>``` turtle</code> <br/><code># Импортируем предикаты для работы с записями.</code> <br/><code>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.</code> <br/><code>{</code> <br/><code>    # Получаем атрибут "Менеджер" из шаблона "Кандидаты"</code> <br/><code>    # и помещаем его в переменную ?managerAttr</code> <br/><code>    ("Кандидаты" "Менеджер") object:findProperty ?managerAttr.</code> <br/><code>    # Получаем атрибут "ФИО" из шаблона "Сотрудники"</code> <br/><code>    # и помещаем его в переменную ?fioAttr</code> <br/><code>    ("Сотрудники" "ФИО") object:findProperty ?fullNameAttr.</code> <br/><code></code> <br/><code>    # В текущей записи ?item получаем ID менеджера</code> <br/><code>    # и помещаем его в переменную ?managerValue</code> <br/><code>    ?item ?managerAttr ?managerValue.</code> <br/><code>    # Из записи менеджера в шаблоне «Сотрудники»</code> <br/><code>    # получаем ФИО и помещаем его в переменную ?value</code> <br/><code>    ?managerValue ?fullNameAttr ?value.</code> <br/><code>}</code> <br/><code>```</code> <br/><code></code> <br/><code>    !!! example "Эквивалентная формула"</code> <br/><code></code> <br/><code>    ``` sql</code> <br/><code>    $Менеджер-&gt;ФИО</code> <br/><code>    ```</code> <br/></pre></code></div>
+<h2 id="tutorial_n3_lesson_2_interpreter">Порядок обработки триплетов и конъюнкция</h2>
+<p>При составлении запросов на N3 следует учитывать следующее поведение интерпретатора:</p>
+<ul>
+<li>Триплеты вычисляются сверху вниз.</li>
+<li>Если один из триплетов вернёт <code>false</code>, обработка запроса полностью прерывается и выражение возвращает <strong>пустой результат</strong>.</li>
+<li>Между триплетами по умолчанию используется конъюнкция (логическое <code>И</code>). В строке после триплета имеется значение <code>True</code>, если все предыдущие триплеты внутри вернули <code>True</code>.</li>
+</ul>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>Проиллюстрируем конъюнкцию триплетов: проверим, что в записи кандидата заполнены имя, фамилия и отчество. Для этого вычислим значение логического атрибута: <code>True</code>, если все данные кандидата указаны.</p>
+</div>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем предикаты для работы с записями.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Получаем атрибуты "Фамилия", "Имя", "Отчество"</span></code> <br/><code>    <span class="c"># и помещаем их в переменные </span></code> <br/><code>    <span class="c"># ?patronymicAttribute, ?firstNameAttribute, ?lastNameAttribute.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Сотрудники"</span> <span class="s">"Отчество"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?patronymicAttribute</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Сотрудники"</span> <span class="s">"Имя"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?firstNameAttribute</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Сотрудники"</span> <span class="s">"Фамилия"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?lastNameAttribute</span><span class="p">.</span>  </code> <br/><code></code> <br/><code>    <span class="c"># Проверяем, что указана "Фамилия".</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?lastNameAttribute</span>  <span class="err">?</span><span class="p">.</span></code> <br/><code>    <span class="c"># Проверяем, что указано "Имя".</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?firstNameAttribute</span>  <span class="err">?</span><span class="p">.</span></code> <br/><code>    <span class="c"># Проверяем, что указано "Отчество".</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?patronymicAttribute</span> <span class="err">?</span><span class="p">.</span></code> <br/><code>    <span class="c"># Если для всех трёх атрибутов заданы значения,</span></code> <br/><code>    <span class="c"># возвращаем true.</span></code> <br/><code>    <span class="l">true</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<div class="notice notice-example">
+<p class="admonition-title">Эквивалентная формула</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">AND</span><span class="p">(</span><span class="k">NOT</span><span class="p">(</span><span class="n">EMPTY</span><span class="p">(</span><span class="err">$Фамилия</span><span class="p">)),</span><span class="w"> </span><span class="k">NOT</span><span class="p">(</span><span class="n">EMPTY</span><span class="p">(</span><span class="err">$Имя</span><span class="p">)),</span><span class="w"> </span><span class="k">NOT</span><span class="p">(</span><span class="n">EMPTY</span><span class="p">(</span><span class="err">$Отчество</span><span class="p">)))</span></code> <br/></pre></code></div>
+</div>
+<h2 id="tutorial_n3_lesson_2_interpreter">Изменение хода обработки триплетов</h2>
+<p>Изменить ход обработки триплетов и предотвратить прерывание обработки запроса при пустом или ложном результате можно с помощью двух конструкций:</p>
+<ul>
+<li><code>if {...} then {...} else {...}</code></li>
+<li><code>or {...} or {...}</code></li>
+</ul>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>Предыдущий пример возвращал пустой результат, если не были указаны фамилия, имя или отчество кандидата.</p>
+<p>Изменим его так, чтобы он не возвращал пустое значение, и разрешим оставлять отчество пустым. </p>
+<p>Для этого вычислим значение логического атрибута: <code>True</code>, если указаны имя и фамилия, <code>False</code> во всех остальных случаях.</p>
+</div>
+<ul>
+<li>
+<p>Решение с использованием <code>if {...} then {...} else {...}</code></p>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем предикаты для работы с записями.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Получаем атрибуты "Фамилия", "Имя", "Отчество"</span></code> <br/><code>    <span class="c"># и помещаем их в переменные </span></code> <br/><code>    <span class="c"># ?patronymicAttribute, ?firstNameAttribute, ?lastNameAttribute.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Сотрудники"</span> <span class="s">"Отчество"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?patronymicAttribute</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Сотрудники"</span> <span class="s">"Имя"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?firstNameAttribute</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Сотрудники"</span> <span class="s">"Фамилия"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?lastNameAttribute</span><span class="p">.</span>  </code> <br/><code></code> <br/><code>    <span class="err">if</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Проверяем, что указана "Фамилия".</span></code> <br/><code>        <span class="err">?item</span> <span class="err">?lastNameAttribute</span>  <span class="err">?</span><span class="p">.</span></code> <br/><code>        <span class="c"># Проверяем, что указано "Имя".</span></code> <br/><code>        <span class="err">?item</span> <span class="err">?firstNameAttribute</span>  <span class="err">?</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">then</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Если для заданы имя и фамилия,</span></code> <br/><code>        <span class="c"># возвращаем true.</span></code> <br/><code>        <span class="l">true</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">else</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Не прерываем обработку запроса, а возвращаем false, </span></code> <br/><code>        <span class="c"># если какой-либо из предыдущих триплетов не вернул true.</span></code> <br/><code>        <span class="l">false</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Решение с использованием <code>or {...} or {...}</code></p>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем предикаты для работы с записями.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Получаем атрибуты "Фамилия", "Имя", "Отчество"</span></code> <br/><code>    <span class="c"># и помещаем их в переменные </span></code> <br/><code>    <span class="c"># ?patronymicAttribute, ?firstNameAttribute, ?lastNameAttribute.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Сотрудники"</span> <span class="s">"Отчество"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?patronymicAttribute</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Сотрудники"</span> <span class="s">"Имя"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?firstNameAttribute</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Сотрудники"</span> <span class="s">"Фамилия"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?lastNameAttribute</span><span class="p">.</span>  </code> <br/><code></code> <br/><code>    <span class="err">or</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Оба атрибута заданы — возвращаем true.</span></code> <br/><code>        <span class="err">?item</span> <span class="err">?lastNameAttribute</span>  <span class="err">?</span><span class="p">.</span></code> <br/><code>        <span class="err">?item</span> <span class="err">?firstNameAttribute</span>  <span class="err">?</span><span class="p">.</span></code> <br/><code>        <span class="l">true</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">or</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Не задан один из атрибутов заданы — возвращаем false.</span></code> <br/><code>        <span class="l">false</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+</ul>
+<div class="notice notice-example">
+<p class="admonition-title">Эквивалентная формула</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">IF</span><span class="p">(</span><span class="k">AND</span><span class="p">(</span><span class="k">NOT</span><span class="p">(</span><span class="n">EMPTY</span><span class="p">(</span><span class="err">$Фамилия</span><span class="p">)),</span><span class="w"> </span><span class="k">NOT</span><span class="p">(</span><span class="n">EMPTY</span><span class="p">(</span><span class="err">$Имя</span><span class="p">))),</span><span class="w"> </span><span class="k">True</span><span class="p">,</span><span class="w"> </span><span class="k">False</span><span class="p">)</span></code> <br/></pre></code></div>
+</div>
+<h2 id="tutorial_n3_lesson_1_typical_errors">Типичные ошибки в выражениях на N3</h2>
+<ul>
+<li>Проверяйте регистр всех имён: <code>?variable</code> и <code>?Variable</code> — это разные переменные.</li>
+<li>Проверяйте, что условные блоки кода заключены в фигурные скобки: <code>or {...} or {...}</code>, <code>if {...} then {...} else  {...}</code>.</li>
+<li>Не забывайте при ставить точки после фигурных скобок: <code>not {...}.</code>, <code>or {...}.</code>, когда блок кода представляет собой целостный факт. Все факты должны завершаться точкой.</li>
+<li>Выражение должно возвращать значение совместимого типа: строка в текстовый атрибут, число в числовой, список в таблицу и т. д.</li>
 </ul>
 <h2 id="tutorial_n3_lesson_2_practical_task">Практическое задание</h2>
-<p>Задача: в шаблоне <em>«Кандидаты»</em> вычислить текстовый атрибут <em>«Строка визитки»</em> в формате «ФИО — Отдел».</p>
-<p>Подсказка: используйте <code>object:findProperty</code> для поиска атрибутов «ФИО» в <em>«Сотрудники»</em> и «Название» у <em>«Отделы»</em>, перейдите по ссылкам от кандидата к менеджеру и его отделу, затем соберите строку формата через <code>cmwstring:format</code>.</p>
-<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwstring:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/string#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="p">(</span><span class="s">"Кандидаты"</span> <span class="s">"Менеджер"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?managerAttr</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Сотрудники"</span> <span class="s">"ФИО"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?fioAttr</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Сотрудники"</span> <span class="s">"Отдел"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?deptAttr</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Отделы"</span> <span class="s">"Название"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?deptNameAttr</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="err">?item</span> <span class="err">?managerAttr</span> <span class="err">?m</span><span class="p">.</span></code> <br/><code>    <span class="err">?m</span> <span class="err">?fioAttr</span> <span class="err">?fio</span><span class="p">.</span></code> <br/><code>    <span class="err">?m</span> <span class="err">?deptAttr</span> <span class="err">?d</span><span class="p">.</span></code> <br/><code>    <span class="err">?d</span> <span class="err">?deptNameAttr</span> <span class="err">?deptName</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="p">(</span><span class="s">"{0} — {1}"</span> <span class="err">?fio</span> <span class="err">?deptName</span><span class="p">)</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">format</span> <span class="err">?result</span><span class="p">.</span></code> <br/><code>    <span class="err">?result</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p>Применим полученные в этом уроке знания, чтобы составить сложный запрос с использованием всех рассмотренных элементов синтаксиса N3.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>В шаблоне <em>«Кандидаты»</em> требуется вычислить составить текстовую сводку по кандидату в следующем формате: <em>«ФИО: Бобров Б.Б. Стаж: 15 лет. Вакансия: монтажник. Подразделение: строительство (код подразделения). Нанимающий менеджер: Медведев М.М.»</em>.
+- Пустые поля сводки (кроме ФИО) необходимо заполнить заменителями <em>«Н.П.»</em>.
+- Если для кандидата не указаны имя, фамилия или отчество, то сводка должна должна заполняться имеющимися данными.</p>
+</div>
+<p>Для вывода строки воспользуйтесь <code>cmwstring:format</code>.</p>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем предикаты для работы с записями.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="c"># Импортируем предикаты для работы со строками</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwstring:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/string#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Атрибуты из шаблона "Кандидаты"</span></code> <br/><code>    <span class="p">(</span><span class="s">"Кандидаты"</span> <span class="s">"Фамилия"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?lastNameAttr</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Кандидаты"</span> <span class="s">"Имя"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?firstNameAttr</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Кандидаты"</span> <span class="s">"Отчество"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?patronymicAttr</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Кандидаты"</span> <span class="s">"Стаж"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?experienceAttr</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Кандидаты"</span> <span class="s">"Вакансия"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?positionAttr</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Кандидаты"</span> <span class="s">"Менеджер"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?managerAttr</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Атрибуты из связанных шаблонов</span></code> <br/><code>    <span class="p">(</span><span class="s">"Вакансии"</span> <span class="s">"Название"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?positionNameAttr</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Вакансии"</span> <span class="s">"Подразделение"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?positionDeptAttr</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Подразделения"</span> <span class="s">"Название"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?deptNameAttr</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Подразделения"</span> <span class="s">"Код"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?deptCodeAttr</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Сотрудники"</span> <span class="s">"ФИО"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?fioAttr</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># --- ФИО кандидата: собираем из имеющихся частей ---</span></code> <br/><code>    <span class="err">or</span> <span class="p">{</span></code> <br/><code>        <span class="err">?item</span> <span class="err">?lastNameAttr</span> <span class="err">?ln</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span> <span class="err">or</span> <span class="p">{</span></code> <br/><code>        <span class="s">""</span> <span class="err">-&gt;</span> <span class="err">?ln</span><span class="p">.</span></code> <br/><code>    <span class="p">}.</span></code> <br/><code></code> <br/><code>    <span class="err">or</span> <span class="p">{</span></code> <br/><code>        <span class="err">?item</span> <span class="err">?firstNameAttr</span> <span class="err">?fn</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span> <span class="err">or</span> <span class="p">{</span></code> <br/><code>        <span class="s">""</span> <span class="err">-&gt;</span> <span class="err">?fn</span><span class="p">.</span></code> <br/><code>    <span class="p">}.</span></code> <br/><code></code> <br/><code>    <span class="err">or</span> <span class="p">{</span></code> <br/><code>        <span class="err">?item</span> <span class="err">?patronymicAttr</span> <span class="err">?pn</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span> <span class="err">or</span> <span class="p">{</span></code> <br/><code>        <span class="s">""</span> <span class="err">-&gt;</span> <span class="err">?pn</span><span class="p">.</span></code> <br/><code>    <span class="p">}.</span></code> <br/><code></code> <br/><code>    <span class="c"># Объединяем части ФИО через пробел, исключая пустые строки</span></code> <br/><code>    <span class="p">(</span><span class="s">" "</span> <span class="err">?ln</span> <span class="err">?fn</span> <span class="err">?pn</span><span class="p">)</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">join</span> <span class="err">?fio</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># --- Стаж ---</span></code> <br/><code>    <span class="err">if</span> <span class="p">{</span></code> <br/><code>        <span class="err">?item</span> <span class="err">?experienceAttr</span> <span class="err">?exp</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">then</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Стаж указан - используем его</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">else</span> <span class="p">{</span></code> <br/><code>        <span class="s">"Н.П."</span> <span class="err">-&gt;</span> <span class="err">?exp</span><span class="p">.</span></code> <br/><code>    <span class="p">}.</span></code> <br/><code></code> <br/><code>    <span class="c"># --- Вакансия (название) ---</span></code> <br/><code>    <span class="err">if</span> <span class="p">{</span></code> <br/><code>        <span class="err">?item</span> <span class="err">?positionAttr</span> <span class="err">?pos</span><span class="p">.</span></code> <br/><code>        <span class="err">?pos</span> <span class="err">?positionNameAttr</span> <span class="err">?posName</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">then</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Вакансия и её название есть - используем их</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">else</span> <span class="p">{</span></code> <br/><code>        <span class="s">"Н.П."</span> <span class="err">-&gt;</span> <span class="err">?posName</span><span class="p">.</span></code> <br/><code>    <span class="p">}.</span></code> <br/><code></code> <br/><code>    <span class="c"># --- Подразделение вакансии (Название и Код) ---</span></code> <br/><code>    <span class="err">if</span> <span class="p">{</span></code> <br/><code>        <span class="err">?pos</span> <span class="err">?positionDeptAttr</span> <span class="err">?dept</span><span class="p">.</span></code> <br/><code>        <span class="err">?dept</span> <span class="err">?deptNameAttr</span> <span class="err">?deptName</span><span class="p">.</span></code> <br/><code>        <span class="err">?dept</span> <span class="err">?deptCodeAttr</span> <span class="err">?deptCode</span><span class="p">.</span></code> <br/><code>        <span class="p">(</span><span class="s">"{0} ({1})"</span> <span class="err">?deptName</span> <span class="err">?deptCode</span><span class="p">)</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">format</span> <span class="err">?deptQualified</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">then</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Подразделение и его данные есть - используем их</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">else</span> <span class="p">{</span></code> <br/><code>        <span class="s">"Н.П."</span> <span class="err">-&gt;</span> <span class="err">?deptQualified</span><span class="p">.</span></code> <br/><code>    <span class="p">}.</span></code> <br/><code></code> <br/><code>    <span class="c"># --- Нанимающий менеджер (ФИО) ---</span></code> <br/><code>    <span class="err">if</span> <span class="p">{</span></code> <br/><code>        <span class="err">?item</span> <span class="err">?managerAttr</span> <span class="err">?m</span><span class="p">.</span></code> <br/><code>        <span class="err">?m</span> <span class="err">?fioAttr</span> <span class="err">?managerFio</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">then</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Менеджер и его ФИО есть - используем их</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="err">else</span> <span class="p">{</span></code> <br/><code>        <span class="s">"Н.П."</span> <span class="err">-&gt;</span> <span class="err">?managerFio</span><span class="p">.</span></code> <br/><code>    <span class="p">}.</span></code> <br/><code></code> <br/><code>    <span class="c"># Итоговая строка сводки</span></code> <br/><code>    <span class="p">(</span><span class="s">"ФИО: {0}. Стаж: {1}. Вакансия: {2}. Подразделение: {3}. Нанимающий менеджер: {4}."</span> <span class="err">?fio</span> <span class="err">?exp</span> <span class="err">?posName</span> <span class="err">?deptQualified</span> <span class="err">?managerFio</span><span class="p">)</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">format</span> <span class="err">?result</span><span class="p">.</span></code> <br/><code>    <span class="err">?result</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<div class="notice notice-example">
+<p class="admonition-title">Эквивалентная формула</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">FORMAT</span><span class="p">(</span><span class="ss">"{0} — {1}"</span><span class="p">,</span><span class="w"> </span><span class="n">LIST</span><span class="p">(</span><span class="err">$Менеджер</span><span class="o">-&gt;</span><span class="err">ФИО</span><span class="p">,</span><span class="w"> </span><span class="err">$Менеджер</span><span class="o">-&gt;</span><span class="err">Подразделение</span><span class="o">-&gt;</span><span class="err">Название</span><span class="p">))</span></code> <br/></pre></code></div>
+</div>
 <p>Проверьте работу выражения на нескольких записях.</p>
 <h2 id="tutorial_n3_lesson_2_summary">Итоги урока</h2>
-<p>Вы закрепили базовый синтаксис N3, проработали <code>?item</code>/<code>?value</code>, разобрали пять форм работы с триплетами, шорткаты и правила «гигиены» выражений. На практике вы построили несколько минимальных запросов и собрали результирующую строку для HR‑сценария.</p>
+<p>Вы закрепили базовый синтаксис N3, проработали <code>?item</code>/<code>?value</code>, разобрали пять форм работы с триплетами, сокращения и правила «гигиены» выражений. На практике вы построили несколько минимальных запросов и собрали результирующую строку для HR‑сценария.</p>
 <p>В ходе [следующего урока][tutorial_n3_lesson_3] вы изучите префиксы, URI и поиск атрибутов, в том числе <code>object:findProperty</code> в глубину.</p>
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li>[Справочник по N3][n3_guide]</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4852">Справочник по N3</a></li>
 <li><a class="autorefs autorefs-internal mkdocs_imported_link" href="../../developer_guide/n3/n3_tutorial.html#n3_tutorial_original">Учебник по N3</a></li>
-<li>[Примеры выражений N3][n3_examples]</li>
+<li><a class="autorefs autorefs-internal mkdocs_imported_link" href="../../developer_guide/n3/n3_examples.html#n3_examples_digest" title="Дайджест статей и примеров по языку N3">Дайджест примеров N3</a></li>
 </ul>
 </div>
 </article>

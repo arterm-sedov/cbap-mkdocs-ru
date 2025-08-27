@@ -55,9 +55,9 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#tutorial_n3_lesson_1_syntax">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_n3_lesson_1_languages">
 <span class="md-ellipsis">
-      Языки запросов в Comindware Platform
+      Языки запросов в Comindware Platform и их назначение
     </span>
 </a>
 </li>
@@ -144,11 +144,35 @@
 <li>Имеется доступ к веб-сайту с <strong>Comindware Platform</strong>.</li>
 <li><strong>Рекомендуется</strong> пройти <em>курс «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5112">Аналитик. Ознакомительный</a>»</em>, чтобы получить базовые навыки работы с <strong>Comindware Platform</strong>.</li>
 </ul>
-<p><strong>Расчётная продолжительность:</strong> 1 час 30 минут.</p>
+<p><strong>Расчётная продолжительность:</strong> 1,5 часа.</p>
 <div class="notice notice-warning">
 <p class="admonition-title">Бизнес-логика</p>
-<p>В курсе используется контекст HR‑процесса подбора кандидатов с соответствующими сущностями: кандидаты, анкеты, отделы и т. п.</p>
-<p>Примеры ориентированы на практику работы с данными в <strong>Comindware Platform</strong>.</p>
+<p>В этом курсе используется контекст HR‑процесса подбора кандидатов с соответствующими сущностями.</p>
+<p>В примерах этого урока используется следующая модель данных:</p>
+<ul>
+<li>Связи между сущностями:<ul>
+<li>Сотрудник → Отдел</li>
+<li>Сотрудник → Компания</li>
+</ul>
+</li>
+<li>Атрибуты:<ul>
+<li>Шаблон <em>«Сотрудники»</em><ul>
+<li><em>ID</em> — <strong>запись</strong>, <strong>связанный шаблон</strong> <em>«Сотрудники»</em></li>
+<li><em>Фамилия</em>, <em>Имя</em>, <em>Отчество</em>, <em>Ф.И.О.</em> — <strong>текст</strong></li>
+<li><em>Отдел</em> — <strong>запись</strong>, <strong>связанный шаблон</strong> <em>«Отделы»</em></li>
+</ul>
+</li>
+<li>Шаблон <em>«Отделы»</em><ul>
+<li><em>Название</em> — <strong>текст</strong></li>
+</ul>
+</li>
+<li>Шаблон <em>«Компании»</em><ul>
+<li><em>Название</em> — <strong>текст</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </div>
 <div class="notice notice-info">
 <p class="admonition-title">Примечание</p>
@@ -189,9 +213,10 @@
 <li><strong>N3</strong> — текстовая нотация для записи триплетов и графов.</li>
 <li><strong>URI</strong> — идентификатор ресурса вида <code>https://www.w3.org/1999/02/22-rdf-syntax-ns#type</code>.</li>
 <li><strong>Comindware ElasticData</strong> — фирменная СУБД в основе <strong>Comindware Platform</strong>, построенная на графовой модели RDF.</li>
+<li><strong>Литерал</strong> — неименованная константа, то есть фиксированное значение, не изменяющееся во время вычисления, например строка <code>"Бобров Б.Б."</code>.</li>
 </ul>
 </div>
-<h2 id="tutorial_n3_lesson_1_syntax">Языки запросов в Comindware Platform</h2>
+<h2 id="tutorial_n3_lesson_1_languages">Языки запросов в Comindware Platform и их назначение</h2>
 <p>В <strong>Comindware Platform</strong> предусмотрено два языка запросов:</p>
 <ol class="colored_numbers_list">
 <li>
@@ -210,7 +235,8 @@
 <ul>
 <li>продвинутое использование <strong>Comindware Platform</strong> — составление сложных запросов;</li>
 <li>доступ ко всем сущностям — в формулах доступны не все системные атрибуты, а только те, которые используются чаще всего в типовых сценариях. N3 предоставляет доступ к большему количеству атрибутов и сущностей, чем формулы, например к системным атрибутам, атрибутам и экземплярам процессов и задач.</li>
-<li>расширенные возможности обработки данных — дополнительные математические функции, функции для работы со списками, приведения данных к одному типу, расчётов времени и т. д.</li>
+<li>расширенные возможности обработки данных — дополнительные математические функции, функции для работы со списками, приведения данных к одному типу, расчётов времени и т. д.;</li>
+<li>повышение скорости обработки данных — в случае обработки больших наборов данных запросы на языке N3 работают быстрее, чем формулы.</li>
 </ul>
 </li>
 </ol>
@@ -271,7 +297,7 @@
 <li>шаблоны, идентификаторы, атрибуты, значения атрибутов и любые другие сущности — это узлы (вершины) графа, то есть субъекты и объекты;</li>
 <li>связи между сущностями — это рёбра графа, то есть предикаты.</li>
 </ul>
-<p>Например, структуру данных в шаблоне записи можно упрощённо представить следующим видом:</p>
+<p>Например, структуру графа, описывающего запись в шаблоне, можно упрощённо представить следующим образом:</p>
 <ul>
 <li><strong>Субъект</strong> — ID записи в шаблоне.</li>
 <li><strong>Предикат</strong> — атрибут записи.</li>
@@ -280,7 +306,7 @@
 <p>Например, имеется шаблон записи <em>«Сотрудники»</em> с атрибутами <em>«ID»</em>, <em>«Фамилия»</em> и <em>«Отдел»</em>.</p>
 <p>Данные записей в шаблоне хранятся в триплетах, которые в упрощённом виде можно представить следующим образом:</p>
 <div class="highlight"><code><pre><span></span><code><span class="s">"id_1234"</span> <span class="err">Фамилия</span> <span class="s">"Бобров"</span><span class="p">.</span></code> <br/><code><span class="s">"id_1234"</span> <span class="err">Отдел</span> <span class="s">"Техдокументация"</span><span class="p">.</span></code> <br/><code><span class="s">"id_1235"</span> <span class="err">Фамилия</span> <span class="s">"Филимонова"</span><span class="p">.</span></code> <br/><code><span class="s">"id_1235"</span> <span class="err">Отдел</span> <span class="s">"Бухгалтерия"</span><span class="p">.</span></code> <br/></pre></code></div>
-<p>Соответствующие записи в шаблоне <em>«Сотрудники»</em>:</p>
+<p>Табличное представление этих записей в шаблоне <em>«Сотрудники»</em>:</p>
 <table style="width: 100%;">
 <thead>
 <tr>
@@ -316,21 +342,25 @@
 <li><code>Сотрудник Бобров работает в отделе «Техдокументация»</code></li>
 <li><code>Сотрудник Филимонова работает в отделе «Бухгалтерия»</code></li>
 </ul>
+<div class="notice notice-success">
+<p class="admonition-title">Базовый синтаксис N3</p>
+<ul>
+<li>Каждый триплет должен завершаться <strong>точкой</strong> <code>.</code> — точка означает конец утверждения, как и в естественном языке.</li>
+<li>Каждый триплет должен находиться <strong>на одной строке</strong> и не может содержать переносов строк.</li>
+<li><code>@prefix</code> — директива, объявляющая сокращённое имя (псевдоним) ресурса по его URI. Такие имена позволяют сделать выражения на N3 более удобочитаемыми и наглядными.
+        - Директива <code>@prefix</code> аналогична объявлению пространства имён позволяет импортировать в выражение на N3 предикаты из соответствующего ресурса.
+        - Директивы <code>@prefix</code> должны располагаться в начале выражения. </li>
+<li>После директив <code>@prefix</code> должно следовать тело выражения, заключённое в фигурные скобки <code>{}</code>.</li>
+<li>Регистр символов имеет значение — <code>entity</code> и <code>Entity</code> — это две разные сущности.</li>
+<li><code>#</code> — символ комментария. Каждая строка комментария должна начинаться с <code>#</code> и может содержать произвольный текст.</li>
+</ul>
+<div class="highlight"><span class="filename">Базовая структура выражения на N3</span><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Тело выражения на N3</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</div>
 <div class="highlight"><code><pre><span></span><code><span class="c"># Для удобочитаемости объявляем сокращённые имена ресурсов</span></code> <br/><code><span class="c"># с помощью директивы @prefix</span></code> <br/><code><span class="c"># Сущность «Сотрудник»: employee</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">employee:</span><span class="w"> </span><span class="nv">&lt;http://example.com/hr/employee#&gt;</span><span class="p">.</span></code> <br/><code><span class="c"># Тип отношения сущностей: relation</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">relation:</span><span class="w"> </span><span class="nv">&lt;http://example.com/hr/relation#&gt;</span><span class="p">.</span></code> <br/><code><span class="c"># Сущность «Отдел»: department</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">department:</span><span class="w"> </span><span class="nv">&lt;http://example.com/hr/department#&gt;</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Записываем два факта о сотрудниках в виде триплетов</span></code> <br/><code>    <span class="c"># с короткими именами ресурсов</span></code> <br/><code>    <span class="nn">employee</span><span class="p">:</span><span class="nt">Бобров</span> <span class="nn">relation</span><span class="p">:</span><span class="nt">worksIn</span> <span class="nn">department</span><span class="p">:</span><span class="nt">Техдокументация</span><span class="p">.</span></code> <br/><code>    <span class="nn">employee</span><span class="p">:</span><span class="nt">Филимонова</span> <span class="nn">relation</span><span class="p">:</span><span class="nt">worksIn</span> <span class="nn">department</span><span class="p">:</span><span class="nt">Бухгалтерия</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
 <p>При сравнении записи одинаковых фактов в нотациях RDF и N3 очевидно, что запись N3 гораздо компактней:</p>
 <div class="highlight"><span class="filename">Факты в нотации RDF</span><code><pre><span></span><code><span class="nv">&lt;http://example.com/hr/employee/Бобров&gt;</span> <span class="nv">&lt;http://example.com/hr/relation/worksIn&gt;</span> <span class="nv">&lt;http://example.com/hr/department/Техдокументация&gt;</span><span class="p">.</span></code> <br/><code><span class="nv">&lt;http://example.com/hr/employee/Филимонова&gt;</span> <span class="nv">&lt;http://example.com/hr/relation/worksIn&gt;</span> <span class="nv">&lt;http://example.com/hr/department/Бухгалтерия&gt;</span><span class="p">.</span></code> <br/></pre></code></div>
 <div class="highlight"><span class="filename">Факты в нотации N3</span><code><pre><span></span><code><span class="nn">employee</span><span class="p">:</span><span class="nt">Бобров</span> <span class="nn">relation</span><span class="p">:</span><span class="nt">worksIn</span> <span class="nn">department</span><span class="p">:</span><span class="nt">Техдокументация</span><span class="p">.</span></code> <br/><code><span class="nn">employee</span><span class="p">:</span><span class="nt">Филимонова</span> <span class="nn">relation</span><span class="p">:</span><span class="nt">worksIn</span> <span class="nn">department</span><span class="p">:</span><span class="nt">Бухгалтерия</span><span class="p">.</span></code> <br/></pre></code></div>
 <p>Таким образом, язык N3 позволяет повысить удобочитаемость триплетов за счёт использования коротких псевдонимов ресурсов RDF.</p>
-<div class="notice notice-success">
-<p class="admonition-title">Базовый синтаксис N3</p>
-<ul>
-<li>Каждый триплет должен завершаться <strong>точкой</strong>.</li>
-<li>Каждый триплет должен находиться <strong>на одной строке</strong> и не может содержать переносов строк.</li>
-<li><code>@prefix</code> — директива, объявляющая сокращённое имя (псевдоним) ресурса по его URI. Такие имена позволяют сделать выражения на N3 более удобочитаемыми и наглядными.</li>
-<li>Директивы <code>@prefix</code> должны располагаться в начале выражения.</li>
-<li>После директив <code>@prefix</code> должно следовать тело выражения, заключённое в фигурные скобки <code>{}</code>.</li>
-</ul>
-</div>
 <div class="notice notice-example">
 <p class="admonition-title">Факультативное задание</p>
 <p>Запишите в нотации RDF и на языке N3 следующие факты (утверждения):</p>
@@ -356,6 +386,8 @@
 <ul>
 <li><code>?item</code> — обращение к системной переменной;</li>
 <li><code>?myVariable</code> — объявление локальной переменной.</li>
+<li>Регистр имён переменных имеет значение — <code>?variable</code> и <code>?Variable</code> — это две разные переменные.
+```</li>
 </ul>
 </div>
 <p>Типы и семантика переменных <code>?item</code> и <code>?value</code> зависят от контекста обработки выражения на N3 (вычисляемый атрибут, фильтр таблицы или раскрывающегося списка, правило на форме, сценарий и т. п.).</p>
@@ -366,20 +398,29 @@
 </ul>
 <p>Полная матрица содержимого <code>?item</code> и <code>?value</code> в зависимости от контекста представлена в <em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4852">Справочнике по языку N3</a></em>.</p>
 <h2 id="tutorial_n3_lesson_1_calculate_attribute">Практическое задание. Вычисление значения атрибута с помощью N3</h2>
-<p>Теперь, когда вы ознакомились с базовым синтаксисом языка N3 и принципами работы с графовыми данными, научимся вычислять значение атрибута шаблона записи с помощью N3 и встроенных в <strong>Comindware Platform</strong> предикатов для обработки данных.</p>
+<p>Теперь, когда вы ознакомились с базовым синтаксисом языка N3 и принципами работы с графовыми данными, научимся вычислять значение атрибута шаблона записи с помощью N3 и встроенных в <strong>Comindware Platform</strong> предикатов (функций).</p>
 <div class="notice notice-warning">
 <p class="admonition-title">Бизнес-логика</p>
 <p>Рассмотрим вычисление в N3 на следующем примере:</p>
-<p>В шаблоне записи <em>«Сотрудники»</em> имеются атрибут <em>«Имя»</em>, <em>«Фамилия»</em> и <em>«Отчество»</em> с соответствующими системными именами.</p>
-<p>Требуется автоматически заполнять атрибут <em>«Ф.И.О.»</em> составной строкой из имени, фамилии и отчества сотрудника.</p>
+<p>В шаблоне записи <em>«Сотрудники»</em> требуется автоматически заполнять атрибут <em>«Ф.И.О.»</em> составной строкой из имени, фамилии и отчества сотрудника.</p>
 </div>
 <div class="notice notice-success">
 <p class="admonition-title">Расширенный синтаксис N3</p>
 <p>В этом примере мы применим следующие элементы N3:</p>
 <ul>
-<li>Предикаты для обработки данных — это встроенные в <strong>Comindware Platform</strong> функции, которые можно импортировать в выражение посредством директивы <code>@prefix</code> с URI соответствующего ресурса. Например, ресурс <a class="mkdocs_imported_link" href="http://comindware.com/ontology/object#">http://comindware.com/ontology/object#</a> содержит предикаты для работы с записями и другими объектами.</li>
-<li>Списки — элементы списка перечисляются через пробел и заключаются в круглые скобки: (element1 element2 element3).</li>
+<li>
+<p>Предикаты для обработки данных — это встроенные в <strong>Comindware Platform</strong> функции, которые можно импортировать в выражение посредством директивы <code>@prefix</code> с URI соответствующего ресурса. </p>
+<p>Например, ресурс <a class="mkdocs_imported_link" href="http://comindware.com/ontology/object#">http://comindware.com/ontology/object#</a> содержит предикаты для работы с записями и другими объектами.</p>
+</li>
+<li>
+<p>Списки — элементы списка перечисляются через пробел и заключаются в круглые скобки: <code>(element1 element2 element3)</code>.</p>
+</li>
 <li>Строковые литералы — строка объявляется в кавычках: <code>"произвольный текст"</code>.</li>
+<li>Присвоение значений выполняется с помощью оператора <code>-&gt;</code>:<ul>
+<li><code>?исходная_переменная -&gt; ?целевая_переменная</code>;</li>
+<li><code>"строковый литерал" -&gt; ?переменная</code>.</li>
+</ul>
+</li>
 </ul>
 </div>
 <p>!!! tip "Предикаты <code>object:findProperty</code> и <code>cmwstring:format</code>"</p>
@@ -389,7 +430,14 @@
 <li>Установите флажок «<strong>Вычислять автоматически</strong>».</li>
 <li>
 <p>В поле «<strong>Вычисляемое значение</strong>» введите следующее выражение на <strong>N3</strong>:</p>
-<div class="highlight"><code><pre><span></span><code><span class="c"># Объявляем префиксы для использования </span></code> <br/><code><span class="c"># встроенных в Comindware Platform предикатов,</span></code> <br/><code><span class="c"># представляющих собой функции для обработки данных.</span></code> <br/><code><span class="c"># Ресурс http://comindware.com/ontology/object#</span></code> <br/><code><span class="c"># содержит предикаты для работы с записями.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="c"># Ресурс http://comindware.com/logics/string#</span></code> <br/><code><span class="c"># содержит предикаты для обработки строк.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwstring:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/string#&gt;</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># С помощью предиката object:findProperty получаем атрибуты</span></code> <br/><code>    <span class="c"># "Имя", "Фамилия", "Отчество".</span></code> <br/><code>    <span class="c"># Полученные атрибуты помещаем в переменные </span></code> <br/><code>    <span class="c"># FirstNameAttribute, LastNameAttribute, PatronymicAttribute</span></code> <br/><code>    <span class="c"># для дальнейшей обработки.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Сотрудники"</span> <span class="s">"Имя"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?FirstNameAttribute</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Сотрудники"</span> <span class="s">"Фамилия"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?LastNameAttribute</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Сотрудники"</span> <span class="s">"Отчество"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?PatronymicAttribute</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Получаем значения атрибутов "Имя", "Фамилия", "Отчество"</span></code> <br/><code>    <span class="c"># из текущей записи ?item.</span></code> <br/><code>    <span class="c"># Полученные значения атрибутов помещаем в переменные</span></code> <br/><code>    <span class="c"># FirstName, LastName, Patronymic для дальнейшей обработки.</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?FirstNameAttribute</span> <span class="err">?FirstName</span><span class="p">.</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?LastNameAttribute</span> <span class="err">?LastName</span><span class="p">.</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?PatronymicAttribute</span> <span class="err">?Patronymic</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># С помощью предиката cmwstring:format соединяем</span></code> <br/><code>    <span class="c"># фамилию, имя и отчество в единую строку и помещаем</span></code> <br/><code>    <span class="c"># её в переменную FullName.</span></code> <br/><code>    <span class="p">(</span><span class="s">"{0} {1} {2}"</span> <span class="err">?LastName</span> <span class="err">?FirstName</span> <span class="err">?Patronymic</span><span class="p">)</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">format</span> <span class="err">?FullName</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Возвращаем результирующую строку с Ф.И.О</span></code> <br/><code>    <span class="c"># системную переменную value.</span></code> <br/><code>    <span class="err">?FullName</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Объявляем префиксы для использования </span></code> <br/><code><span class="c"># встроенных в Comindware Platform предикатов,</span></code> <br/><code><span class="c"># представляющих собой функции для обработки данных.</span></code> <br/><code><span class="c"># Ресурс http://comindware.com/ontology/object#</span></code> <br/><code><span class="c"># содержит предикаты для работы с записями.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="c"># Ресурс http://comindware.com/logics/string#</span></code> <br/><code><span class="c"># содержит предикаты для обработки строк.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwstring:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/string#&gt;</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># С помощью предиката object:findProperty получаем атрибуты</span></code> <br/><code>    <span class="c"># "Имя", "Фамилия", "Отчество".</span></code> <br/><code>    <span class="c"># Полученные атрибуты помещаем в переменные </span></code> <br/><code>    <span class="c"># ?firstNameAttribute, ?lastNameAttribute, ?patronymicAttribute</span></code> <br/><code>    <span class="c"># для дальнейшей обработки.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Сотрудники"</span> <span class="s">"Имя"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?firstNameAttribute</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Сотрудники"</span> <span class="s">"Фамилия"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?lastNameAttribute</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Сотрудники"</span> <span class="s">"Отчество"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?patronymicAttribute</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Получаем значения атрибутов "Имя", "Фамилия", "Отчество"</span></code> <br/><code>    <span class="c"># из текущей записи ?item.</span></code> <br/><code>    <span class="c"># Полученные значения атрибутов помещаем в переменные</span></code> <br/><code>    <span class="c"># ?firstNameValue, ?lastNameValue, ?patronymicValue</span></code> <br/><code>    <span class="c"># для дальнейшей обработки.</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?firstNameAttribute</span> <span class="err">?firstNameValue</span><span class="p">.</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?lastNameAttribute</span> <span class="err">?lastNameValue</span><span class="p">.</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?patronymicAttribute</span> <span class="err">?patronymicValue</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># С помощью предиката cmwstring:format соединяем</span></code> <br/><code>    <span class="c"># фамилию, имя и отчество в единую строку</span></code> <br/><code>    <span class="c"># и помещаем её в переменную ?fullName.</span></code> <br/><code>    <span class="p">(</span><span class="s">"{0} {1} {2}"</span> <span class="err">?lastNameValue</span> <span class="err">?firstNameValue</span> <span class="err">?patronymicValue</span><span class="p">)</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">format</span> <span class="err">?fullName</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Возвращаем результирующую строку с Ф.И.О</span></code> <br/><code>    <span class="c"># системную переменную value.</span></code> <br/><code>    <span class="err">?fullName</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<div class="notice notice-example">
+<p class="admonition-title">Сравнение формулы и выражения на N3</p>
+<p>Чтобы лучше понять логику <strong>N3</strong>, запишем тоже самое выражение в виде <strong>формулы</strong>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">FORMAT</span><span class="p">((</span><span class="ss">"{0} {1} {2}"</span><span class="p">),</span><span class="w"> </span><span class="n">LIST</span><span class="p">(</span><span class="err">$Фамилия</span><span class="p">,</span><span class="w"> </span><span class="err">$Имя</span><span class="p">,</span><span class="w"> </span><span class="err">$Отчество</span><span class="p">))</span></code> <br/></pre></code></div>
+<p>Видно, что для простых вычислений более уместно использовать формулы, а язык N3 следует применять для действительно сложных запросов, которые нецелесообразно составлять в виде формул.</p>
+<p>См. параграф <em>«<a class="mkdocs_imported_link" href="tutorial_n3_lesson_1_languages">Языки запросов в Comindware Platform и их назначение</a>»</em> выше.</p>
+</div>
 </li>
 <li>
 <p>Сохраните атрибут <em>«Ф.И.О.»</em> с настроенным вычислением.</p>
@@ -398,6 +446,23 @@
 <li>Создайте запись в шаблоне <em>«Сотрудники»</em> и введите любые имя, фамилию и отчество.</li>
 <li>Удостоверьтесь, что поле <em>«Ф.И.О.»</em> заполняется автоматически ожидаемым образом.</li>
 </ol>
+<div class="notice notice-example">
+<p class="admonition-title">Факультативное задание</p>
+<p>Перепишите в выражении выше строку <code>("{0} {1} {2}" ?lastNameValue ?firstNameValue ?patronymicValue) cmwstring:format ?fullName.</code></p>
+<p>Вместо предиката cmwstring:format используйте предикат cmwstring:join</p>
+<div class="notice notice-tip">
+<p class="admonition-title">Предикат cmwstring:join</p>
+<p>Предикат <code>cmwstring:join</code> позволяет объединить значения нескольких переменных в одну строку, используя указанный разделитель. </p>
+<p>Синтаксис:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">(</span><span class="s">"separator"</span> <span class="err">?list</span><span class="p">)</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">join</span> <span class="err">?result</span><span class="p">.</span></code> <br/></pre></code></div>
+</div>
+<p>Здесь:</p>
+<ul>
+<li><code>?list</code> — список значений, которые нужно объединить, разделённых пробелами (также можно указать переменную, содержащую список);</li>
+<li><code>"separator"</code> — строка-разделитель (любой символ),</li>
+<li><code>?result</code> — переменная, в которую будет записана результирующая строка.</li>
+</ul>
+</div>
 <h2 id="tutorial_n3_lesson_1_editor">Редактор N3 и справочник функций</h2>
 <p>В <strong>Comindware Platform</strong> предусмотрен удобный редактор выражений на N3 с подсветкой синтаксиса, проверкой корректности выражений и встроенным справочником функций.</p>
 <p>Подробные сведения об использовании редактора N3 см. в статьях:</p>
