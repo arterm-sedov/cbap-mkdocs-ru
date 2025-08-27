@@ -1,5 +1,19 @@
 <!-- Любые руководства -->
 
+<!-- Страницы оглавлений в БЗ. Начало -->
+
+[guides_toc]: {{ kbArticleURLPrefix }}4593
+
+[admin_guide_toc]: {{ kbArticleURLPrefix }}4594
+
+[developer_guide_toc]: {{ kbArticleURLPrefix }}4851
+
+[n3_guide_toc]: {{ kbArticleURLPrefix }}4931
+
+[root_toc]: {{ kbArticleURLPrefix }}4594
+
+<!-- Страниц оглавлений в БЗ. Конец -->
+
 <!-- Категории в БЗ. Начало -->
 
 [account_management_cat]: {{ kbCategoryURLPrefix }}813
@@ -59,6 +73,24 @@
 [apache_ignite_partition_baseline_topology]: https://ignite.apache.org/docs/latest/clustering/baseline-topology
 
 [apache_ignite_partition_partition_loss_policy]: https://ignite.apache.org/docs/latest/configuring-caches/partition-loss-policy
+
+[browser_push_permissions_chrome_official]: https://support.google.com/chrome/answer/3220216?hl=ru-RU&co=GENIE.Platform%3DDesktop
+
+[browser_push_permissions_edge_official]: https://support.microsoft.com/ru-ru/microsoft-edge/управление-уведомлениями-сайтов-в-microsoft-edge-0c555609-5bf2-479d-a59d-fb30a0b80b2b
+
+[browser_push_permissions_firefox_official]: https://support.mozilla.org/ru/kb/veb-push-uvedomleniya-v-firefox
+
+[browser_push_permissions_safari_official]: https://support.apple.com/ru-ru/guide/safari/sfri40734/mac
+
+[browser_push_permissions_yandex_official]: https://yandex.ru/support/common/ru/browsers-settings/notifications
+
+[browser_push_permissions_chrome_official_mobile]: https://support.google.com/chrome/answer/3220216?co=GENIE.Platform%3DAndroid&hl=ru&oco=0
+
+[browser_push_permissions_firefox_official_mobile]: https://support.mozilla.org/ru/kb/upravlenie-opovesheniyami-v-firefox-dlya-android
+
+[browser_push_permissions_opera_official_mobile]: https://help.opera.com/ru/mobile/android/#notifications
+
+[browser_push_permissions_yandex_official_mobile]: https://yandex.ru/support/browser-mobile-android-phone/ru/personal-settings/notifications.html#sites
 
 [iana_timezone_db]: https://www.iana.org/time-zones
 
@@ -129,20 +161,6 @@
 
 <!-- Экспорт в БЗ любых руководств -->
 
-<!-- Страницы оглавлений в БЗ. Начало -->
-
-[guides_toc]: {{ kbArticleURLPrefix }}4593
-
-[admin_guide_toc]: {{ kbArticleURLPrefix }}4594
-
-[developer_guide_toc]: {{ kbArticleURLPrefix }}4851
-
-[n3_guide_toc]: {{ kbArticleURLPrefix }}4931
-
-[root_toc]: {{ kbArticleURLPrefix }}4594
-
-<!-- Страниц оглавлений в БЗ. Конец -->
-
 [account_templates]: {{ kbArticleURLPrefix }}4757
 
 [account_template_attribute_system_names]: {{ kbArticleURLPrefix }}4757#account_template_attribute_system_names
@@ -166,6 +184,8 @@
 [backup_configure_list_view]: {{ kbArticleURLPrefix }}4642#backup_configure_list_view
 
 [backup_recommendations]: {{ kbArticleURLPrefix }}5082
+
+[browser_push_permissions]: {{ kbArticleURLPrefix }}5133
 
 [changelog]: {{ kbArticleURLPrefix }}4589
 
