@@ -3,6 +3,47 @@ import subprocess
 import yaml
 from datetime import datetime
 import re
+import os
+import shutil
+
+OUTPUT_FILENAME = "kb.comindware.ru.platform_v5_for_llm_ingestion.md"
+KB_TARGET_DIR = os.path.join("kb.comindware.ru", "platform", "v5.0")
+# Markdown block with bilingual prompts for LLM output
+PROMPTS_FOR_LLM_MD = """
+## Prompts for LLM
+
+### Русский промпт - использовать, если вопрос задан на русском языке
+
+- Ответь на следующий вопрос: `<ВОПРОС_ПОЛЬЗОВАТЕЛЯ>`
+- В ответе приведи ссылки на использованные статьи в формате:
+    `https://kb.comindware.ru/article.php?id={kbId}`
+    - URL статьи возьми из поля `url` во frontmatter исходного текста каждой статьи в формате Markdown.
+    - Если поля `url` нет, возьми `{kbId}` из frontmatter исходного текста каждой статьи в формате Markdown.
+    - Пример frontmatter:
+    ```
+    ---
+    title: 'Comindware Platform. Версия 5.0. Содержание раздела'
+    kbId: 4578
+    url: 'https://kb.comindware.ru/article.php?id=4578'
+    ---
+    ```
+
+### English prompt - use if the question is in English
+
+- Answer the following question: `<USER_QUESTION>`
+- In your answer, provide links to the referenced articles in the following format:
+    `https://kb.comindware.ru/article.php?id={kbId}`
+    - Take article URL from the `url` field in the frontmatter of the original Markdown article.
+    - If the `url` field is not present, take `{kbId}` from the frontmatter of the original Markdown article.
+    - Example frontmatter:
+    ```
+    ---
+    title: 'Comindware Platform. Версия 5.0. Содержание раздела'
+    kbId: 4578
+    url: 'https://kb.comindware.ru/article.php?id=4578'
+    ---
+    ```
+"""
 
 # def get_git_info():
 #     try:
@@ -66,7 +107,7 @@ if __name__ == "__main__":
     # Extract only the 'Files analyzed' and 'Estimated tokens' lines from the summary using regex
     matches = re.findall(r'^(Files analyzed:.*|Estimated tokens:.*)$', summary, re.MULTILINE)
     summary_short = "\n".join([m.strip() for m in matches])# if len(matches) == 2 else summary
-    with open("kb.comindware.ru.platform_v5_for_llm_ingestion.md", "w", encoding="utf-8") as f:
+    with open(OUTPUT_FILENAME, "w", encoding="utf-8") as f:
         f.write(
             f"\n----------------------\n\n"
             f"Ingestion date: {ingestion_date}\n"
@@ -74,26 +115,24 @@ if __name__ == "__main__":
             f"Description: Provide this file to your AI agent. For better results, add the prompt below\n"
             f"{source_line}\n"
             f"{summary_short}\n\n"
-            f"----------------------\n\n"
+            f"----------------------\n"
         )
         # Insert the bilingual instruction after the summary frontmatter
+        f.write(PROMPTS_FOR_LLM_MD)
         f.write(
-            "## Prompting instructions\n\n"
-            "### RU Пример промпта\n\n"
-            "- Ответь на следующий вопрос: <ВАШ_ВОПРОС>\n"
-            "- В ответе приведи ссылки на использованные статьи в формате:\n"
-            "  `https://kb.comindware.ru/article.php?id={kbId}`\n"
-            "  `{kbId}` возьми из frontmatter исходного текста статей в формате Markdown.\n\n"
-            "### EN Prompt example\n\n"
-            "- Answer the following question: <YOUR_QUESTION>\n"
-            "- In your answer, provide links to the referenced articles in the format:\n"
-            "  `https://kb.comindware.ru/article.php?id={kbId}`\n"
-            "  Take `{kbId}` from the frontmatter of the original Markdown articles.\n\n"
-        )
-        f.write(
-            "## Sections\n\n"
+            "\n## Sections\n\n"
             f"{tree}\n"
             "## Articles\n\n"
             f"{content}"
         )
         f.write("## HYPERLINKS MAP\n" + snippet_content)
+
+    # Copy the resulting file into kb.comindware.ru/platform/v5.0/, overwriting existing file
+    try:
+        os.makedirs(KB_TARGET_DIR, exist_ok=True)
+        target_path = os.path.join(KB_TARGET_DIR, OUTPUT_FILENAME)
+        print(f"Copying {OUTPUT_FILENAME} to: {KB_TARGET_DIR}")
+        shutil.copyfile(OUTPUT_FILENAME, target_path)
+        print(f"File copied to: {target_path}")
+    except Exception as copy_error:
+        print(f"Failed to copy {OUTPUT_FILENAME} to {KB_TARGET_DIR}: {copy_error}")
