@@ -25,7 +25,7 @@ def copy_image_files(source_dir, dest_dir, overwrite=False):
 
 if __name__ == "__main__":
     copy_image_files(
-        source_dir="docs/ru",
-        dest_dir="platform/v5.0",
+        source_dir="for_kb_import_ru/",
+        dest_dir="kb.comindware.ru/platform/v5.0",
         overwrite=True
     )

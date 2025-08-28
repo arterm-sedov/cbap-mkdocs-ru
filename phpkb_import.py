@@ -1,6 +1,4 @@
-import mysql.connector
-from sshtunnel import SSHTunnelForwarder
-from getpass import getpass
+from tools.ssh_kb_ru import establish_connection_interactive, close_connection
 import html
 from html.parser import HTMLParser
 import bs4
@@ -14,7 +12,6 @@ from cryptography.fernet import Fernet
 import os
 import os.path
 import json
-from sshtunnel import SSHTunnelForwarder
 
 KB_ID_TO_FILENAME_MAP = None
 KB_ID_TO_TITLE_MAP = None
@@ -103,8 +100,14 @@ def importArtciclesInCategory (categoryId, categoryDir):
         else: 
             updateMappingJson(id, sanitizedTitle, KB_ID_TO_TITLE_MAP, KB_ID_TO_TITLE_MAP_FILE)
             print(f"Using new filename: {sanitizedTitle}")
-        filename = os.path.join(categoryDir, f"{id}-{sanitizedTitle}.md")
-        filename_html = os.path.join(categoryDir, f"{id}-{sanitizedTitle}.html")
+        # Avoid duplicate kbId prefix in the target filename
+        if str(sanitizedTitle).startswith(f"{id}-"):
+            base_name = sanitizedTitle
+        else:
+            base_name = f"{id}-{sanitizedTitle}"
+
+        filename = os.path.join(categoryDir, f"{base_name}.md")
+        filename_html = os.path.join(categoryDir, f"{base_name}.html")
         print ('    Importing article: ' + filename)
         
         with open(filename, "w+") as b:
@@ -146,18 +149,19 @@ def importArtciclesInCategory (categoryId, categoryDir):
                         header.decompose()
                         next_sibling.decompose()
             
-            # Convert tables with class 'source_code_container' to <pre><code> blocks
+            # Convert tables with class 'source_code_container' into a single <pre> with plain text
+            # and avoid nested <code> that leads to duplicate Markdown fences
             # These tables were used as a workaround for code blocks.
             for table in p.find_all('table', class_='source_code_container'):
                 print(f"  Converting source code table to <pre> block for article {id}...")
                 pre = p.new_tag("pre")
-                # Convert <td> with 'source_code' class to <code>.
+                code_text_parts = []
                 for td in table.find_all('td', class_='source_code'):
-                    td.name = "code"
-                    for par in table.find_all('p'):
-                        if par.string:
-                            par.replace_with(par.string)
-                    pre.append(td)
+                    # Extract text preserving line breaks within the cell
+                    td_text = td.get_text(separator='\n', strip=False)
+                    code_text_parts.append(td_text)
+                # Join parts with newlines; assign as text content of <pre>
+                pre.string = "\n".join(code_text_parts).strip("\n")
                 table.replace_with(pre)
                 pre.insert_before(p.new_tag("p"))
                 
@@ -212,6 +216,8 @@ def importArtciclesInCategory (categoryId, categoryDir):
                 # Sanitize fenced code blocks to use 3 backticks instead of 4 or more, preserving indentation.
                 print(f"    Sanitizing fenced code blocks for article {id}...")
                 markdown = re.sub(r'`{4,}', r'```', markdown, flags=re.MULTILINE)
+                # Collapse duplicated triple fences produced on a single line: "``` ```" -> "```"
+                markdown = markdown.replace('``` ```', '```')
                 print(f"    Fenced code blocks sanitized for article {id}")
                 
                 # Final cleanup of excessive newlines.
@@ -229,8 +235,9 @@ def importArtciclesInCategory (categoryId, categoryDir):
             # Compile and add frontmatter
             frontmatter = '\n'.join([
                 '---',
-                f'title: {title}',
+                f'title: \'{title}\'',
                 f'kbId: {id}',
+                f'url: \'https://kb.comindware.ru/article.php?id={id}\'',
                 '---',
                 '\n'
                 ])
@@ -319,47 +326,8 @@ def main():
     if len(KB_ID_TO_TITLE_MAP) == 0:
         KB_ID_TO_TITLE_MAP = dict()
     
-    with open(".serverCredentials.json", "r") as serverCredentialsFile: 
-        
-        serverCredentialsFileContent = serverCredentialsFile.read()
-        serverCredentials = json.loads(serverCredentialsFileContent) if serverCredentialsFileContent else dict()
-    
-    sql_hostname = serverCredentials['sql_hostname'] or input("SQL_hostname:\n")
-    ssh_host = serverCredentials['ssh_host'] or input("PHPKB host:\n")
-    ssh_username = serverCredentials['ssh_username'] or input('SSH username:\n')
-    ssh_password = getpass("SSH password:\n")
-    ssh_port = int(serverCredentials.get('ssh_port', '22'))
-    sql_username = serverCredentials['sql_username'] or input("SQL username:\n")
-    sql_password = getpass("SQL password:\n")
-    sql_database = serverCredentials['sql_database'] or input("Database name:\n")
-    sql_port = serverCredentials['sql_port'] or input("SQL remote port:\n")
-    sql_port_local = serverCredentials['sql_port_local'] or input("SQL local port:\n")
-    sql_ip = serverCredentials['sql_ip'] or input("SQL remote IP:\n")  
-        
-    # if input('Save credentials? Y / N').lower() == 'y':
-    #     with open(".serverCredentials.json", "w") as serverCredentialsFile: 
-    #         credentialsJson = json.dumps(serverCredentials, indent = 4)
-    #         serverCredentialsFile.write(credentialsJson)
-
-    server = SSHTunnelForwarder(
-        (ssh_host, ssh_port),
-        ssh_username=ssh_username,
-        ssh_password=ssh_password,
-        remote_bind_address=(sql_ip, sql_port),
-        local_bind_address=(sql_ip, sql_port_local)
-    )
-
-    server.start()
-    # print(server.local_bind_port)
     global CONNECTION
-    # with server as tunnel:
-    CONNECTION = mysql.connector.MySQLConnection(
-        user = sql_username,
-        password = sql_password,
-        host = sql_ip,
-        port = server.local_bind_port,
-        database = sql_database
-    )
+    CONNECTION, server = establish_connection_interactive()
     
     importChildren = ''
     categoryId = ''
@@ -441,9 +409,7 @@ def main():
             importCategoryChildren(categories[0], KB_DIR)
         
     
-    CONNECTION.close()
-    server.close()
-    server.stop()
+    close_connection(CONNECTION, server)
     
 def findFilenameByArticleId(article_id, docs_dir):
     """

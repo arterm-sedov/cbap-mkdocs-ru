@@ -1,6 +1,4 @@
-import mysql.connector
-from sshtunnel import SSHTunnelForwarder
-from getpass import getpass
+from tools.ssh_kb_ru import establish_connection_interactive, close_connection
 import html
 from html.parser import HTMLParser
 import bs4
@@ -13,7 +11,6 @@ import shutil
 from cryptography.fernet import Fernet
 import os
 import os.path
-import json
 import datetime
 # import paramiko
 
@@ -158,42 +155,8 @@ def listCategories(categories):
 def main():
     
     
-    with open(".serverCredentials.json", "r") as serverCredentialsFile: 
-        
-        serverCredentialsFileContent = serverCredentialsFile.read()
-        serverCredentials = json.loads(serverCredentialsFileContent) if serverCredentialsFileContent else dict()
-    
-    sql_hostname = serverCredentials['sql_hostname'] or input("SQL_hostname:\n")
-    ssh_host = serverCredentials['ssh_host'] or input("PHPKB host:\n")
-    ssh_username = serverCredentials['ssh_username'] or input('SSH username:\n')
-    ssh_password = getpass("SSH password:\n")
-    ssh_port = int(serverCredentials.get('ssh_port', '22'))
-    sql_username = serverCredentials['sql_username'] or input("SQL username:\n")
-    sql_password = getpass("SQL password:\n")
-    sql_database = serverCredentials['sql_database'] or input("Database name:\n")
-    sql_port = serverCredentials['sql_port'] or input("SQL remote port:\n")
-    sql_port_local = serverCredentials['sql_port_local'] or input("SQL local port:\n")
-    sql_ip = serverCredentials['sql_ip'] or input("SQL remote IP:\n")  
-
-    server = SSHTunnelForwarder(
-        (ssh_host, ssh_port),
-        ssh_username=ssh_username,
-        ssh_password=ssh_password,
-        remote_bind_address=(sql_ip, sql_port),
-        local_bind_address=(sql_ip, sql_port_local)
-    )
-
-    server.start()
-    # print(server.local_bind_port)
     global CONNECTION
-    # with server as tunnel:
-    CONNECTION = mysql.connector.MySQLConnection(
-        user = sql_username,
-        password = sql_password,
-        host = sql_ip,
-        port = server.local_bind_port,
-        database = sql_database
-    )
+    CONNECTION, server = establish_connection_interactive()
     
 
     if input('Update specific articles? Y/N\n').lower() == 'y':
@@ -263,9 +226,7 @@ def main():
                 updateCategoryChildren(categories[categoryChoice])
         
     
-    CONNECTION.close()
-    server.close()
-    server.stop()
+    close_connection(CONNECTION, server)
        
 
 def getArticleContentById(article_id):
