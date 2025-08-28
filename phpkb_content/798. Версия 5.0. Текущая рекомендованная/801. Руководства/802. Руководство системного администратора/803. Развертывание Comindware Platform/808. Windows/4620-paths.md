@@ -1,6 +1,7 @@
 ---
-title: Пути и содержимое директорий экземпляра ПО
+title: 'Пути и содержимое директорий экземпляра ПО'
 kbId: 4620
+url: 'https://kb.comindware.ru/article.php?id=4620'
 ---
 
 # Пути и содержимое директорий экземпляра ПО
@@ -21,7 +22,6 @@ kbId: 4620
 
 ```
 /usr/share/comindware/configs/instance/<instanceName>.yml
-
 ```
 
 **Пути по умолчанию**
@@ -57,7 +57,6 @@ kbId: 4620
 
 ```
 C:\\ProgramData\\сomindware\\configs\\instance\\<instanceName>.yml
-
 ```
 
 **Пути по умолчанию**

@@ -1,6 +1,7 @@
 ---
-title: Выгрузка всех документов стенда
+title: 'Выгрузка всех документов стенда'
 kbId: 4968
+url: 'https://kb.comindware.ru/article.php?id=4968'
 ---
 
 # Выгрузка всех документов стенда
@@ -8,6 +9,7 @@ kbId: 4968
 Для выгрузки всех документов стенда в один атрибут, введите следующее выражение:
 
 ```
+ 
 
 @prefix cmwassert: <http://comindware.com/logics/assert#>.
 @prefix cmwtimeL: <http://comindware.com/logics/time/utc#>.
@@ -18,7 +20,6 @@ kbId: 4968
 {
     ?value a document:Document.
 }
-
 ```
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

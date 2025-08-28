@@ -1,6 +1,7 @@
 ---
-title: Переход в объект с витрины
+title: 'Переход в объект с витрины'
 kbId: 5009
+url: 'https://kb.comindware.ru/article.php?id=5009'
 ---
 
 # Переход в объект с витрины
@@ -8,7 +9,6 @@ kbId: 5009
 Для того, чтобы по кнопке можно было перейти из карточки товара на витрине на форму объекта, введите следующее выражение:
 
 ```
-
 using System; 
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +25,7 @@ class Script
         {
 
             Success = true,
-            Messages =  null,
+            Messages =  null,            
 
             ResultType = UserCommandResultType.Navigate ,
             NavigationResult = new UserCommandNavigationResult
@@ -38,7 +38,6 @@ class Script
         return result;
     }
 }
-
 ```
 
 где:

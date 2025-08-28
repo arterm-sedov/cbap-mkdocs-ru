@@ -1,6 +1,7 @@
 ---
-title: Вызов API Comindware Platform при помощи Postman
+title: 'Вызов API Comindware Platform при помощи Postman'
 kbId: 4928
+url: 'https://kb.comindware.ru/article.php?id=4928'
 ---
 
 # Вызов API {{ productName }} при помощи Postman

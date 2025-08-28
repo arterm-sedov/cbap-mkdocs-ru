@@ -1,6 +1,7 @@
 ---
-title: Локальная переменная. Использование для массовой обработки записей
+title: 'Локальная переменная. Использование для массовой обработки записей'
 kbId: 4909
+url: 'https://kb.comindware.ru/article.php?id=4909'
 ---
 
 # Локальная переменная. Использование для массовой обработки записей
@@ -38,7 +39,6 @@ kbId: 4909
 **3.** Настройте триггер на нажатие созданной в п. 1 кнопки, добавьте действие по изменению значения. Выберите атрибут «Ответственный», укажите операцию со значениями — Заменить и в поле «Значение», выберите N3 и вставьте следующее выражение:
 
 ```
-
 @prefix cmwsession: <http://comindware.com/ontology/session#>.
 @prefix user: <http://comindware.com/ontology/user#>.
 @prefix variable: <http://comindware.com/ontology/session/variable#>.
@@ -48,7 +48,6 @@ kbId: 4909
     cmwsession:context variable:dialogVariables ?v1.
     ?v1 variable:Ispolnitel ?value.
 }
-
 ```
 
 Важно указать системное имя, прописанное в локальной переменной после «***variable:***».

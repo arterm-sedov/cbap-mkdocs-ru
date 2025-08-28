@@ -1,6 +1,7 @@
 ---
-title: Вычисление объектов, удовлетворяющих условию
+title: 'Вычисление объектов, удовлетворяющих условию'
 kbId: 4949
+url: 'https://kb.comindware.ru/article.php?id=4949'
 ---
 
 # Вычисление объектов, удовлетворяющих условию
@@ -27,7 +28,6 @@ kbId: 4949
 Для того, чтобы вычислить объекты, удовлетворяющие условию, заданному в основном объекте (в данном случае, сотрудников с необходимыми навыками), введите следующее выражение:
 
 ```
-
 @prefix object: <http://comindware.com/ontology/object#>.
 @prefix assert: <http://comindware.com/logics/assert#>.
 @prefix cmw: <http://comindware.com/logics#>.
@@ -50,7 +50,6 @@ kbId: 4949
     if {?c == ?d}
     then {?allObjs -> ?value.}
 }
-
 ```
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

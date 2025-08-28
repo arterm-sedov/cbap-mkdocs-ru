@@ -1,6 +1,7 @@
 ---
-title: Вызов процесса
+title: 'Вызов процесса'
 kbId: 4727
+url: 'https://kb.comindware.ru/article.php?id=4727'
 ---
 
 # Вызов процесса

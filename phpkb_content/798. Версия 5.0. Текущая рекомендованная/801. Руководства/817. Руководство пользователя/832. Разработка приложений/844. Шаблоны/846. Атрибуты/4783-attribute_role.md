@@ -1,6 +1,7 @@
 ---
-title: Атрибут типа «Роль»
+title: 'Атрибут типа «Роль»'
 kbId: 4783
+url: 'https://kb.comindware.ru/article.php?id=4783'
 ---
 
 # Атрибут типа «Роль»

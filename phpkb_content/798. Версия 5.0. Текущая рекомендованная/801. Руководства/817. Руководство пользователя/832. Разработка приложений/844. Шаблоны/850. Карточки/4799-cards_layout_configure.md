@@ -1,6 +1,7 @@
 ---
-title: Карточки. Настройка
+title: 'Карточки. Настройка'
 kbId: 4799
+url: 'https://kb.comindware.ru/article.php?id=4799'
 ---
 
 # Карточки. Настройка

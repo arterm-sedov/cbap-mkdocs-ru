@@ -1,6 +1,7 @@
 ---
-title: Форматирование значений в шаблонах экспорта и формулах
+title: 'Форматирование значений в шаблонах экспорта и формулах'
 kbId: 4794
+url: 'https://kb.comindware.ru/article.php?id=4794'
 ---
 
 # Форматирование значений в шаблонах экспорта и формулах
@@ -33,7 +34,6 @@ kbId: 4794
 
 ```
 FORMAT("{0:N2}",LIST($numberAttributeSystemName))
-
 ```
 
 ## Форматирование дат и времени
@@ -52,7 +52,6 @@ FORMAT("{0:N2}",LIST($numberAttributeSystemName))
 
 ```
 FORMAT("{0:dddd, dd MMMM yyyy 'г.'}",LIST($dateAttributeSystemName))
-
 ```
 
 ### Примеры форматирования дат и времени
@@ -134,7 +133,6 @@ FORMAT("{0:dddd, dd MMMM yyyy 'г.'}",LIST($dateAttributeSystemName))
 
 ```
 FORMAT("{0:dd' д. 'hh':'mm':'ss}",LIST($durationAttributeSystemName))
-
 ```
 
 ### Примеры форматирования значений длительности
@@ -176,7 +174,6 @@ FORMAT("{0:dd' д. 'hh':'mm':'ss}",LIST($durationAttributeSystemName))
 
 ```
 FORMAT("{0}",LIST(IF($attributeSystemName == true,"Согласовано","Не согласовано")))
-
 ```
 
 ## Форматирование данных аккаунта

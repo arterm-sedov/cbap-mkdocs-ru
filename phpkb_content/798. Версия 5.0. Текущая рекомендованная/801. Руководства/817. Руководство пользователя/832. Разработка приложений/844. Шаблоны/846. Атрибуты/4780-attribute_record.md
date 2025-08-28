@@ -1,6 +1,7 @@
 ---
-title: Атрибут типа «Запись»
+title: 'Атрибут типа «Запись»'
 kbId: 4780
+url: 'https://kb.comindware.ru/article.php?id=4780'
 ---
 
 # Атрибут типа «Запись»

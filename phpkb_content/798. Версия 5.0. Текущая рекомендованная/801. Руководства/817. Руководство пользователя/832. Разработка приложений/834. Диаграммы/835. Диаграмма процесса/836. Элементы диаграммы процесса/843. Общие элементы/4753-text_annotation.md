@@ -1,6 +1,7 @@
 ---
-title: Комментарий
+title: 'Комментарий'
 kbId: 4753
+url: 'https://kb.comindware.ru/article.php?id=4753'
 ---
 
 # Комментарий

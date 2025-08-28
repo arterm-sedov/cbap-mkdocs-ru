@@ -1,6 +1,7 @@
 ---
-title: Атрибут типа «Штрихкод»
+title: 'Атрибут типа «Штрихкод»'
 kbId: 4764
+url: 'https://kb.comindware.ru/article.php?id=4764'
 ---
 
 # Атрибут типа «Штрихкод»

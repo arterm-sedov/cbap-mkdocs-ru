@@ -1,6 +1,7 @@
 ---
-title: Формирование SSL-сертификатов и настройка Elasticsearch для их использования
+title: 'Формирование SSL-сертификатов и настройка Elasticsearch для их использования'
 kbId: 4606
+url: 'https://kb.comindware.ru/article.php?id=4606'
 ---
 
 # Формирование SSL-сертификатов и настройка Elasticsearch для их использования
@@ -110,7 +111,6 @@ sudo openssl pkcs12 -export -certfile ExampleRootCA.crt -in es1.crt -inkey es1.k
 Enter Export Password: ВВЕДИТЕ ПАРОЛЬ
 Verifying - Enter Export Password: ВВЕДИТЕ ПАРОЛЬ
 
-
 ```
 
 1.3.8. Используйте придуманный на [шаге 1.2.3](#P1_2_3) пароль.
@@ -125,7 +125,6 @@ Verifying - Enter Export Password: ВВЕДИТЕ ПАРОЛЬ
 sudo scp es2.crt username@192.168.0.1:/home/username/
 sudo scp es2.key username@192.168.0.1:/home/username/
 sudo scp es2.p12 username@192.168.0.1:/home/username/
-
 ```
 
 1.4.2. В каждом из узлов перенесите сгенерированные файлы (подставьте фактическое имя файла вместо `esX`)  в папку `/etc/elasticsearch/certs`:
@@ -139,7 +138,6 @@ sudo mv /home/username/esX.* /etc/elasticsearch/certs
 ```
 sudo chown elasticsearch:elasticsearch --recursive /etc/elasticsearch/certs/
 sudo chmod 764 --recursive /etc/elasticsearch/certs/
-
 ```
 
 ## 2. Настройка кластера Elasticsearch
@@ -163,7 +161,6 @@ Enter value for xpack.security.transport.ssl.keystore.secure_password: ВВЕД�
 sudo /usr/share/elasticsearch/bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
 Setting xpack.security.transport.ssl.truststore.secure_password already exists. Overwrite? [y/N]y
 Enter value for xpack.security.transport.ssl.truststore.secure_password: ВВЕДИТЕ ПАРОЛЬ
-
 ```
 
 ### 2.2. Настройка узла кластера для работы с SSL-сертификатами
@@ -186,7 +183,6 @@ xpack.security.transport.ssl:
 #   key: certs/es1.key    # [<-] specify path to nodecert.key here
 #   certificate: certs/es1.crt    # [<-] specify path to nodeCert.crt here
 #   certificate_authorities: [ "certs/ExampleRootCA.crt" ]    # [<-] specify path to CACert.crt here
-
 ```
 
 Пример изменённого файла конфигурации, где сертификат узла — `es1.crt`, ключ — `es1.key`, `pem`-пакет с сертификатом и ключом — `es1.p12`:
@@ -201,7 +197,6 @@ xpack.security.transport.ssl:
     key: certs/es1.key    # [<-] specify path to nodecert.key here
     certificate: certs/es1.crt    # [<-] specify path to nodeCert.crt here
     certificate_authorities: [ "certs/ExampleRootCA.crt" ]    # [<-] specify path to CACert.crt here
-
 ```
 
 Пример изменённого файла конфигурации, где сертификат узла — `es2.crt`, ключ — `es2.key`, `pem`-пакет с сертификатом и ключом — `es2.p12`:
@@ -216,7 +211,6 @@ xpack.security.transport.ssl:
     key: certs/es2.key    # [<-] specify path to nodecert.key here
     certificate: certs/es2.crt    # [<-] specify path to nodeCert.crt here
     certificate_authorities: [ "certs/ExampleRootCA.crt" ]    # [<-] specify path to CACert.crt here
-
 ```
 
 2.2.2. Сохраните изменения и закройте текстовый редактор Nano, нажав клавиши: `Ctrl O, Ввод, Ctrl X`.
@@ -260,7 +254,6 @@ elasticsearch.service - Elasticsearch
             └─3676 /usr/share/elasticsearch/modules/x-pack-ml/platform/linux-x86_64/bin/controller
 Dec 01 10:11:12 penguin-02 systemd[1]: Starting Elasticsearch...
 Dec 01 10:12:27 penguin-02 systemd[1]: Started Elasticsearch.
-
 
 ```
 

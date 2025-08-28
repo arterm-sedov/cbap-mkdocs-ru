@@ -1,6 +1,7 @@
 ---
-title: Задача-вызов сервиса
+title: 'Задача-вызов сервиса'
 kbId: 4729
+url: 'https://kb.comindware.ru/article.php?id=4729'
 ---
 
 # Задача-вызов сервиса

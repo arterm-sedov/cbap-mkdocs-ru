@@ -1,6 +1,7 @@
 ---
-title: Атрибут типа «Документ». Скачивание архива с файлами из таблицы и записи
+title: 'Атрибут типа «Документ». Скачивание архива с файлами из таблицы и записи'
 kbId: 4921
+url: 'https://kb.comindware.ru/article.php?id=4921'
 ---
 
 # Атрибут типа «Документ». Скачивание архива с файлами из таблицы и записи
@@ -35,20 +36,17 @@ kbId: 4921
 
   ```
   var fileIds = Api.TeamNetwork.ObjectService.GetPropertyValues(recordId, new [] {"documentAttributeSystemName"})`;
-
   ```
 - получить массив объектов с прикреплёнными файлами:
 
   ```
   var attachedFileObjects = fileIds[docId].TryGetValue("Files", out object fileObject)
                               && fileObject != null ? fileObject as object[] : null;
-
   ```
 - получить объект файла (`attachedFile`):
 
   ```
   var attachedFile = Api.TeamNetwork.DocumentService.GetContent(attachedFileObject[0].ToString());
-
   ```
 - получить имя файла с расширением (`attachedFile.Name`);
 - получить содержимое файла (`attachedFile.Data`);
@@ -56,7 +54,6 @@ kbId: 4921
 
   ```
   var attachedFile = Api.TeamNetwork.DocumentService.GetDocument(attachedFileObject[0].ToString());
-
   ```
 
   - `attachedFile.Title` — имя файла с расширением;
@@ -203,7 +200,6 @@ kbId: 4921
            }
        }
    }
-
    ```
 5. Поместите атрибуты *«Наименование»* и *«Вложения»* в таблицу *«Все записи»* и на форму шаблона *«Реестр документов»*.
 6. Поместите кнопку *«Скачать вложения»* в **таблицу** *«Все записи»* шаблона *«Реестр документов»*.

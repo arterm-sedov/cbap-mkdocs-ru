@@ -1,6 +1,7 @@
 ---
-title: Фильтр записей в коллекции по заданному параметру
+title: 'Фильтр записей в коллекции по заданному параметру'
 kbId: 4943
+url: 'https://kb.comindware.ru/article.php?id=4943'
 ---
 
 # Фильтр записей в коллекции по заданному параметру
@@ -18,19 +19,27 @@ kbId: 4943
 Далее, на конструкторе формы кликните на коллекцию и вставьте следующее выражение в «Фильтры записей: Для отображения»:
 
 ```
-
 @prefix object: <http://comindware.com/ontology/object#>.
-{
-   ("Adresa" "Oblast") object:findProperty ?PropertyOblast.
-   ("Organizatsii" "Adresaofisov_col") object:findProperty ?PropertyAdresaofisov_col.
-   ("Organizatsii" "Filtrpooblasti") object:findProperty ?PropertyOblastFilter.
- 
-   ?item ?PropertyOblastFilter ?filter.
-   ?item ?PropertyAdresaofisov_col ?result_A.
-   ?result_A ?PropertyOblast ?filter.
-   ?result_A -> ?value.
-}
 
+{
+
+   ("Adresa" "Oblast") object:findProperty ?PropertyOblast.
+
+   ("Organizatsii" "Adresaofisov_col") object:findProperty ?PropertyAdresaofisov_col.
+
+   ("Organizatsii" "Filtrpooblasti") object:findProperty ?PropertyOblastFilter.
+
+ 
+
+   ?item ?PropertyOblastFilter ?filter.
+
+   ?item ?PropertyAdresaofisov_col ?result_A.
+
+   ?result_A ?PropertyOblast ?filter.
+
+   ?result_A -> ?value.
+
+}
 ```
 
 Теперь разберём выражение на N3 построчно:

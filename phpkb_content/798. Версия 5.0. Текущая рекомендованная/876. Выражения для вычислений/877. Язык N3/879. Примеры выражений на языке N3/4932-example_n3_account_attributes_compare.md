@@ -1,6 +1,7 @@
 ---
-title: Сравнение двух атрибутов типа «Аккаунт»
+title: 'Сравнение двух атрибутов типа «Аккаунт»'
 kbId: 4932
+url: 'https://kb.comindware.ru/article.php?id=4932'
 ---
 
 # Сравнение двух атрибутов типа «Аккаунт»
@@ -9,6 +10,7 @@ kbId: 4932
 
 ```
  
+
 #EQUALS($WorkPlanOriginalRef->Curator, $Manager)
 
 @prefix sort: <http://comindware.com/ontology/dataset/sort#>.
@@ -26,7 +28,7 @@ kbId: 4932
     } select ?manager -> ?managerList.
     
     (?managerList sort:stringComparer) assert:sort ?managerSort.
-    ("," ?managerSort) cmwstring:join ?managerStr.
+    ("," ?managerSort) cmwstring:join ?managerStr.    
 
     from {
     ?item ?workPlanOriginalProperty ?workPlan.
@@ -41,7 +43,6 @@ kbId: 4932
     then {true -> ?value}
     else {false -> ?value}.
 }
-
 ```
 
 **где:**

@@ -1,6 +1,7 @@
 ---
-title: Elasticsearch. Установка в базовой конфигурации
+title: 'Elasticsearch. Установка в базовой конфигурации'
 kbId: 4601
+url: 'https://kb.comindware.ru/article.php?id=4601'
 ---
 
 # Elasticsearch. Установка в базовой конфигурации
@@ -43,20 +44,17 @@ Elasticsearch создает значительную нагрузку на вы
 
    ```
    sudo -s
-
    ```
 
    или
 
    ```
    su -
-
    ```
 2. Скачайте и распакуйте дистрибутив с вспомогательным ПО **{{ productName }}**, полученный по ссылке от компании **Comindware** (`X.X`, `<versionNumber>` — номер версии ПО, `<osname>` — название операционной системы):
 
    ```
    tar -xf X.X-release-ru-<versionNumber>.prerequisites.<osname>.tar.gz
-
    ```
 
    Совет
@@ -65,13 +63,11 @@ Elasticsearch создает значительную нагрузку на вы
 
    ```
    rm -f X.X-release-ru-<versionNumber>.prerequisites.<osname>.tar.gz
-
    ```
 3. Перейдите в директорию со скриптами для развёртывания вспомогательного ПО:
 
    ```
    cd <prerequisitesDistPath>/CMW_<osname>/scripts
-
    ```
 
    Здесь: `<prerequisitesDistPath>/CMW_<osname>/` — путь к распакованному дистрибутиву со вспомогательным ПО.
@@ -79,19 +75,16 @@ Elasticsearch создает значительную нагрузку на вы
 
    ```
    sh prerequisites_install.sh -e
-
    ```
 5. После установки удостоверьтесь, что сервер Elasticsearch запущен и имеет статус `Active (running)`:
 
    ```
    systemctl status elasticsearch
-
    ```
 6. Если сервер Elasticsearch не работает, запустите его:
 
    ```
    systemctl start elasticsearch
-
    ```
 
 ## Пример типового файла конфигурации Elasticsearch
@@ -155,7 +148,6 @@ xpack.security.transport.ssl:
   #  truststore.path: certs/transport.p12
 # IP - слушать внешний интерфейс, 127.0.0.1 - localhost, 0.0.0.0 - все
 http.host: 0.0.0.0
-
 ```
 
 --8<-- "related_topics_heading.md"

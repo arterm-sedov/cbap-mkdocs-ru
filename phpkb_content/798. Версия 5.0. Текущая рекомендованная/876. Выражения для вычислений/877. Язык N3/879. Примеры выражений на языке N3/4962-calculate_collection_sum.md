@@ -1,6 +1,7 @@
 ---
-title: Вычисление суммы значений столбца коллекции
+title: 'Вычисление суммы значений столбца коллекции'
 kbId: 4962
+url: 'https://kb.comindware.ru/article.php?id=4962'
 ---
 
 # Вычисление суммы значений столбца коллекции
@@ -8,7 +9,6 @@ kbId: 4962
 Для того, чтобы рассчитать сумму значений определенного столбца коллекции, за исключением заархивированных записей, введите следующее выражение:
 
 ```
-
 @prefix object: <http://comindware.com/ontology/object#>.
 @prefix math: <http://www.w3.org/2000/10/swap/math#>.
 @prefix w3math: <http://www.w3.org/2000/10/swap/math#>.
@@ -19,6 +19,7 @@ kbId: 4962
     ("Plans" "Prodolzhitelnost") object:findProperty ?ProdolzhitelnostProperty.
     ("Plans" "_isDisabled") object:findProperty ?_isDisabled.
 
+   
                 from {
                 ?item ?ProjectPlansProperty ?ProjectPlansVal.
                 ?ProjectPlansVal ?ProdolzhitelnostProperty ?ProdolzhitelnostVal.
@@ -26,7 +27,6 @@ kbId: 4962
                                          }select ?ProdolzhitelnostVal -> ?durationList.
                 ?durationList cmwmath:sum  ?value.           
                 }
-
 ```
 
 **где:**

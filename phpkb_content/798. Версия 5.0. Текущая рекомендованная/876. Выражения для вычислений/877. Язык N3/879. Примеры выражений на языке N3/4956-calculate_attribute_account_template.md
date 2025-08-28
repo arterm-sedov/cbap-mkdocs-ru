@@ -1,6 +1,7 @@
 ---
-title: Вычисление значения атрибута из шаблона пользователя
+title: 'Вычисление значения атрибута из шаблона пользователя'
 kbId: 4956
+url: 'https://kb.comindware.ru/article.php?id=4956'
 ---
 
 # Вычисление значения атрибута из шаблона пользователя
@@ -8,7 +9,6 @@ kbId: 4956
 Для того чтобы получить значение какого-либо атрибута из Шаблона пользователя (через атрибут типа "Пользователь", ссылающийся на данный Шаблон пользователя), введите следующее выражение:
 
 ```
-
 @prefix account: <http://comindware.com/ontology/account#>.
 @prefix object: <http://comindware.com/ontology/object#>.
 @prefix container: <http://comindware.com/ontology/container#>.
@@ -21,7 +21,6 @@ kbId: 4956
   ?assignee account:extendedBy ?polz.
 ?assignee ?LaborCostsProp ?value.
 }
-
 ```
 
 **где:**

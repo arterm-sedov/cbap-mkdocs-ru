@@ -1,6 +1,7 @@
 ---
-title: Дефрагментация данных Apache Ignite
+title: 'Дефрагментация данных Apache Ignite'
 kbId: 4603
+url: 'https://kb.comindware.ru/article.php?id=4603'
 ---
 
 # Дефрагментация данных Apache Ignite

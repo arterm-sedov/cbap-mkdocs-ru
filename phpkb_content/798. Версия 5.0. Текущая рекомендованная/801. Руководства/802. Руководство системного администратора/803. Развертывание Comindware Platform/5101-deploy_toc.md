@@ -1,6 +1,7 @@
 ---
-title: Развёртывание Comindware Platform. Содержание раздела
+title: 'Развёртывание Comindware Platform. Содержание раздела'
 kbId: 5101
+url: 'https://kb.comindware.ru/article.php?id=5101'
 ---
 
 # Развёртывание {{ productName }}. Содержание раздела

@@ -1,6 +1,7 @@
 ---
-title: Начальные события
+title: 'Начальные события'
 kbId: 4735
+url: 'https://kb.comindware.ru/article.php?id=4735'
 ---
 
 # Начальные события

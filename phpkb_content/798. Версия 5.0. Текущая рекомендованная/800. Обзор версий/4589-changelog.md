@@ -1,6 +1,7 @@
 ---
-title: Обзор версий
+title: 'Обзор версий'
 kbId: 4589
+url: 'https://kb.comindware.ru/article.php?id=4589'
 ---
 
 # Обзор версий

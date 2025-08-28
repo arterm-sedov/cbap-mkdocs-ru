@@ -1,6 +1,7 @@
 ---
-title: Интеграция с Telegram-ботом. Пример: настройка приложения, Telegram и кода бота
+title: 'Интеграция с Telegram-ботом. Пример: настройка приложения, Telegram и кода бота'
 kbId: 4923
+url: 'https://kb.comindware.ru/article.php?id=4923'
 ---
 
 # Интеграция с Telegram-ботом. Пример: настройка приложения, Telegram и кода бота

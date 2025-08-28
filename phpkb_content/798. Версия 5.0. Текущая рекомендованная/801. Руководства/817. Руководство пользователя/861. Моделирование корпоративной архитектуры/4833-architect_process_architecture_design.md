@@ -1,6 +1,7 @@
 ---
-title: Построение процессной архитектуры
+title: 'Построение процессной архитектуры'
 kbId: 4833
+url: 'https://kb.comindware.ru/article.php?id=4833'
 ---
 
 # Построение процессной архитектуры
@@ -40,7 +41,7 @@ kbId: 4833
   - [изменение типа или модификатора](#architect_process_architecture_design_entity_type_modifier_change);
   - [изменение свойств](#architect_process_architecture_design_entity_properties_configure);
   - [редактирование формы и атрибутов](#architect_process_architecture_design_entity_form_attributes_configure);
-  - [изменение цвета и размера на диаграмме ОШС](#architect_process_architecture_design_color_change_resize);
+  - [изменение цвета и размера на диаграмме ОФС](#architect_process_architecture_design_color_change_resize);
   - [перемещение в иерархии](#architect_process_architecture_design_hierarchy_change);
   - [дублирование](#architect_process_architecture_design_entity_clone);
   - [удаление](#architect_process_architecture_design_entity_delete).

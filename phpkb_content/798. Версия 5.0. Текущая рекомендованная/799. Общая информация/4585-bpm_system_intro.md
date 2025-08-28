@@ -1,6 +1,7 @@
 ---
-title: Как работает BPM-система
+title: 'Как работает BPM-система'
 kbId: 4585
+url: 'https://kb.comindware.ru/article.php?id=4585'
 ---
 
 # Как работает BPM-система

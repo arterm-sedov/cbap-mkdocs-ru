@@ -1,6 +1,7 @@
 ---
-title: Моделирование на N3
+title: 'Моделирование на N3'
 kbId: 4854
+url: 'https://kb.comindware.ru/article.php?id=4854'
 ---
 
 # Моделирование на N3
@@ -12,29 +13,27 @@ kbId: 4854
 Например, в словаре ( <http://purl.oclc.org/dc/> ) определено понятие “title”, идентификатор которого ( <http://purl.oclc.org/dc/elements/1.1./title> ) мы можем заменить с помощью префикса следующим образом:
 
 ```
-
 @prefix dc: <http://purl.oclc.org/dc/elements/1.1./>.
-< > dc:title “N3 Manual”. 
 
+< > dc:title “N3 Manual”. 
 ```
 
 Обратите внимание на отсутствие угловых скобочек на месте идентификатора для “title”, что тоже упрощает запись выражения. Таким же образом мы можем задать префикс для обозначения текущего документа:
 
 ```
-
 @prefix : <#>.
-:Sam :age “26”.
 
+:Sam :age “26”.
 ```
 
 Существует огромное количество словарей, содержащих самые различные префиксы, среди них выделим три, в которых описаны базовые понятия Семантической паутины:
 
 ```
-
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
 
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 ```
 
 **Стандартные предикаты**
@@ -58,12 +57,13 @@ kbId: 4854
 В rdfs словаре определены два важных свойства свойств: domain и range. Domain определяет класс, которому должны принадлежать субъекты, используемые с данным свойством. Range определяет класс, к которому должны принадлежать объекты, используемые с данным свойством. Таким образом, для domain и для range верны следующие утверждения:
 
 ```
-
  rdfs:domain rdfs:domain rdf:Property;
-          rdfs:range rdfs:Class.
-rdfs:range rdfs:domain rdf:Property;
-          rdfs:range rdfs:Class. 
 
+          rdfs:range rdfs:Class.
+
+rdfs:range rdfs:domain rdf:Property;
+
+          rdfs:range rdfs:Class. 
 ```
 
 - *rdf:type*
@@ -111,15 +111,22 @@ _![Диаграмма моделей классов (бизнес-процесс
 Следующим этапом информатизации компании является автоматизация бизнеспроцессов, для этого наша модель данных должна стать машиночитаемой. Так как подобные модели классов, по сути, являются онтологиями соответствующих предметных областей, машиночитаемость которых обуславливается описанием специальными языками, например, с использование RDF N3, то задача сводится к описанию модели классов с помощью RDF N3.
 
 ```
-
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+
 @prefix : <#>.
+
 :Zayavka a rdfs:Class;
+
 rdfs:label "Класс заявок на командировку".
+
  
+
 :Komandiryemii a rdfs:Class;
+
 rdfs:label "Класс командируемых".
 
 :Komandirovka a rdfs:Class;
@@ -133,80 +140,112 @@ rdfs:label "Класс руководителей".
 :Name a rdfs:Property;
 
 rdfs:label "Имя";
+
 rdf:value [rdf:Datatype "string"];
+
 rdfs:domain :Komandiryemii;
+
 rdfs:range rdfs:Resource.
 
 :NameRuk a rdfs:Property;
 
 rdfs:label "Имя";
+
 rdf:value [rdf:Datatype "string"];
+
 rdfs:domain :Rukovoditel;
+
 rdfs:range rdfs:Resource.
 
 :Surname a rdfs:Property;
 
 rdfs:label "Фамилия";
+
 rdf:value [rdf:Datatype "string"];
+
 rdfs:domain :Komandiryemii;
+
 rdfs:range rdfs:Resource.
 
 :SurnameRuk a rdfs:Property;
 
 rdfs:label "Фамилия";
+
 rdf:value [rdf:Datatype "string"];
+
 rdfs:domain :Rukovoditel;
+
 rdfs:range rdfs:Resource.
 
 :SpisokZayavok a rdfs:Property;
 
 rdfs:label "Список заявок";
+
 rdf:value [rdf:Datatype "instance"];
+
 rdfs:domain :Komandiryemii;
+
 rdfs:range :Zayavka.
 
 :KomandirovkaRef a rdfs:Property;
 
 rdfs:label "Командировка";
+
 rdf:value [rdf:Datatype "instance"];
+
 rdfs:domain :Zayavka;
+
 rdfs:range :Komandirovka.
 
 :KomandiryemiiRef a rdfs:Property;
 
 rdfs:label "Командируемый";
+
 rdf:value [rdf:Datatype "instance"];
+
 rdfs:domain :Zayavka;
+
 rdfs:range :Komandiryemii.
 
 :Status a rdfs:Property;
 
 rdfs:label "Статус";
+
 rdf:value [rdf:Datatype "enumerated"];
+
 rdfs:domain :Zayavka;
+
 rdfs:range ("В работе" "Согласована руководителем" "Отклонена").
 
 :City a rdfs:Property;
 
 rdfs:label "Город командирования";
+
 rdf:value [rdf:Datatype "string"];
+
 rdfs:domain :Komandirovka;
+
 rdfs:range rdfs:Resource.
 
 :Resp a rdfs:Property;
 
 rdfs:label "Начальник отдела, согласующий командировку";
+
 rdf:value [rdf:Datatype "instance"];
+
 rdfs:domain :Komandirovka;
+
 rdfs:range :Rukovoditel.
 
 :Zayavki a rdfs:Property;
 
 rdfs:label "Поданные заявки на командировку";
-rdf:value [rdf:Datatype "instance"];
-rdfs:domain :Komandirovka;
-rdfs:range :Zayavka. 
 
+rdf:value [rdf:Datatype "instance"];
+
+rdfs:domain :Komandirovka;
+
+rdfs:range :Zayavka. 
 ```
 
 Отображение данной модели с помощью RDF графа выглядит следующим образом:
@@ -262,10 +301,9 @@ this log:forSome :x.
 Попробуем описать более сложное правило:
 
 ```
-
 @prefix log:<http://www.w3.org/2000/10/swap/log#>.
-{?pers1 :father [:brother :pers2]}=>{:pers1 :uncle :pers2}.
 
+{?pers1 :father [:brother :pers2]}=>{:pers1 :uncle :pers2}.
 ```
 
 Описать данное правило можно следующим образом: для любого человека, у отца которого есть брат, он – дядя.

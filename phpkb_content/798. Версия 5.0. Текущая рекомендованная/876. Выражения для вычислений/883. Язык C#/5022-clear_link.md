@@ -1,6 +1,7 @@
 ---
-title: Очистка ссылки
+title: 'Очистка ссылки'
 kbId: 5022
+url: 'https://kb.comindware.ru/article.php?id=5022'
 ---
 
 # Очистка ссылки
@@ -8,7 +9,6 @@ kbId: 5022
 Для того, чтобы на входе на задачу очистить ссылку, введите следующее выражение:
 
 ```
-
  
 
 using System;
@@ -28,7 +28,6 @@ class Script
     Api.TeamNetwork.ObjectService.EditWithAlias("StoreOpeningLocation", context.BusinessObjectId, d);
   }
 }
-
 ```
 
 **где:**

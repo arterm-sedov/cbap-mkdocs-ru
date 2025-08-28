@@ -1,6 +1,7 @@
 ---
-title: Заполнение коллекции выбранным списком
+title: 'Заполнение коллекции выбранным списком'
 kbId: 5013
+url: 'https://kb.comindware.ru/article.php?id=5013'
 ---
 
 # Заполнение коллекции выбранным списком
@@ -8,6 +9,7 @@ kbId: 5013
 Для того, чтобы в рамках процесса заполнить коллекцию в текущем объекте каким-либо списком, введите следующее выражение:
 
 ```
+ 
 
 using System;
 using System.Collections.Generic;
@@ -41,7 +43,6 @@ class Script
         Api.TeamNetwork.ObjectService.EditWithAlias("Register", objectId, data); //записываем коллекцию в текущем объекте.
     }
 }
-
 ```
 
 **где:**

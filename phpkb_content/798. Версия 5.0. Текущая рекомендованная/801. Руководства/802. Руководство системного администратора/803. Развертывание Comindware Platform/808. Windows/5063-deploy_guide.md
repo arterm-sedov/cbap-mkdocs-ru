@@ -1,6 +1,7 @@
 ---
-title: Установка, запуск, инициализация и остановка ПО в Windows
+title: 'Установка, запуск, инициализация и остановка ПО в Windows'
 kbId: 5063
+url: 'https://kb.comindware.ru/article.php?id=5063'
 ---
 
 # Установка, запуск, инициализация и остановка ПО в Windows
@@ -81,7 +82,6 @@ kbId: 5063
 
 ```
 .\\version_install.ps1 -h
-
 ```
 
 Обязательные ключи для скриптов
@@ -107,13 +107,11 @@ kbId: 5063
 
    ```
    Get-ExecutionPolicy
-
    ```
 3. Если политика отличается от `Unrestricted`, установите неограниченную политику выполнения *PowerShell*:
 
    ```
    Set-ExecutionPolicy Unrestricted
-
    ```
 4. В запросе на изменение политики выберите вариант «**Да для всех**», введя букву `A`.
 
@@ -188,7 +186,6 @@ kbId: 5063
 
    ```
    cd "<prerequisitesDistPath>\\CMW_Windows<versionNumber>\\scripts"
-
    ```
 
    Здесь `<prerequisitesDistPath>` — путь к распакованному дистрибутиву вспомогательного ПО (например, `X:\\<distPath>\\X.X-release-ru-<versionNumber>.prerequisites.windows`).
@@ -196,13 +193,11 @@ kbId: 5063
 
    ```
    .\\files_unblock.ps1
-
    ```
 6. Установите необходимое вспомогательное ПО:
 
    ```
    .\\prerequisites_install.ps1
-
    ```
 7. Перезагрузите машину.
 8. Запустите *PowerShell* от имени администратора.
@@ -210,13 +205,11 @@ kbId: 5063
 
    ```
    cd "<prerequisitesDistPath>\\CMW_Windows<versionNumber>\\scripts"
-
    ```
 10. Проверьте, что вспомогательное ПО установлено:
 
     ```
     .\\prerequisites_list.ps1
-
     ```
 
     Если какое-либо вспомогательное ПО не было установлено, повторите шаги 6–10.
@@ -230,7 +223,6 @@ kbId: 5063
 
    ```
    cd "<distPath>\\CMW_Windows<versionNumber>\\scripts"
-
    ```
 
    Здесь `<distPath>` — путь к распакованному дистрибутиву ПО **{{ productName }}** (например, `X:\\<distPath>\\X.X-release-ru-<versionNumber>.windows`).
@@ -238,13 +230,11 @@ kbId: 5063
 
    ```
    .\\files_unblock.ps1
-
    ```
 6. Установите версию ПО:
 
    ```
    .\\version_install.ps1
-
    ```
 
    Пример результата выполнения скрипта:
@@ -262,13 +252,11 @@ kbId: 5063
    Complete script version_install.ps1.
    ###############################################
    Status: Completed
-
    ```
 7. Удостоверьтесь, что ПО установлено, вызывав список установленных версий ПО:
 
    ```
    .\\version_list.ps1
-
    ```
 
    Пример списка установленных версий ПО:
@@ -288,7 +276,6 @@ kbId: 5063
    Complete script version_list.ps1.
    ####################################################################
    Status: Completed
-
    ```
 
 ## Создание экземпляра ПО
@@ -297,13 +284,11 @@ kbId: 5063
 
    ```
    cd "<distPath>\\CMW_Windows<versionNumber>\\scripts"
-
    ```
 2. Разверните экземпляр ПО:
 
    ```
    .\\instance_create.ps1 -name <instanceName> -version <versionNumber>
-
    ```
 
    Ключи:
@@ -318,13 +303,11 @@ kbId: 5063
 
    ```
    cd "<distPath>\\CMW_Windows<versionNumber>\\scripts"
-
    ```
 2. Запустите экземпляр ПО:
 
    ```
    .\\instance_start.ps1 -name <instanceName>
-
    ```
 
    Ключ:
@@ -337,13 +320,11 @@ kbId: 5063
 
    ```
    cd "X:\\<distPath>\\X.X-release-ru-<versionNumber>.windows\\CMW_Windows<versionNumber>\\scripts"
-
    ```
 2. Остановите экземпляр ПО:
 
    ```
    .\\instance_stop.ps1 -name <instanceName>
-
    ```
 
    Ключ:
@@ -356,7 +337,6 @@ kbId: 5063
 
    ```
    http://<instanceHost>:<portNumber>
-
    ```
 2. Дождитесь запуска и отображения веб-сайта **{{ productName }}**, что может занять примерно 5 минут.
 3. Откроется страница создания аккаунта администратора **{{ productName }}**.
@@ -415,13 +395,11 @@ kbId: 5063
 
    ```
    cd "<distPath>\\CMW_Windows<versionNumber>\\scripts"
-
    ```
 2. Удалите экземпляр ПО:
 
    ```
    .\\instance_delete.ps1 -name <instanceName>
-
    ```
 
    Ключи:
@@ -448,13 +426,11 @@ kbId: 5063
 
    ```
    cd "<distPath>\\CMW_Windows<versionNumber>\\scripts"
-
    ```
 2. Просмотрите список установленных экземпляров ПО:
 
    ```
    .\\instance_list.ps1
-
    ```
 3. Удалите все экземпляры с версией ПО, которую требуется удалить, или обновите их до другой версии.
 
@@ -467,7 +443,6 @@ kbId: 5063
 
    ```
    .\\version_delete.ps1 -version <versionNumber>
-
    ```
 
    Ключ:

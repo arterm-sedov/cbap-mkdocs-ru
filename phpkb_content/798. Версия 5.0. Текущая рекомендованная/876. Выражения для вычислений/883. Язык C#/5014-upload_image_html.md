@@ -1,6 +1,7 @@
 ---
-title: Загрузка картинки из атрибута типа документ в HTML поле
+title: 'Загрузка картинки из атрибута типа документ в HTML поле'
 kbId: 5014
+url: 'https://kb.comindware.ru/article.php?id=5014'
 ---
 
 # Загрузка картинки из атрибута типа документ в HTML поле
@@ -8,6 +9,7 @@ kbId: 5014
 Для того, чтобы выгрузить картинку в HTML поле, введите следующее выражение:
 
 ```
+ 
 
 using System;
 using System.Collections.Generic;
@@ -57,7 +59,6 @@ class Script
         return result;
     }
 }
-
 ```
 
 **где:**

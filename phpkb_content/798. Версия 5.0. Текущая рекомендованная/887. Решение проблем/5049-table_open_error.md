@@ -1,6 +1,7 @@
 ---
-title: Перестала открываться таблица (ошибка «Object reference not set to an instance of an object»)
+title: 'Перестала открываться таблица (ошибка «Object reference not set to an instance of an object»)'
 kbId: 5049
+url: 'https://kb.comindware.ru/article.php?id=5049'
 ---
 
 # Перестала открываться таблица (ошибка «Object reference not set to an instance of an object»)

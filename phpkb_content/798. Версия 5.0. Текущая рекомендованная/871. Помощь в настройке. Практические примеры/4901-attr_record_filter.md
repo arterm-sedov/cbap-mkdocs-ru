@@ -1,6 +1,7 @@
 ---
-title: Атрибут типа «Запись». Настройка фильтра записей для раскрывающегося списка на форме
+title: 'Атрибут типа «Запись». Настройка фильтра записей для раскрывающегося списка на форме'
 kbId: 4901
+url: 'https://kb.comindware.ru/article.php?id=4901'
 ---
 
 # Атрибут типа «Запись». Настройка фильтра записей для раскрывающегося списка на форме
@@ -33,20 +34,29 @@ kbId: 4901
 - N3 — напишите выражение на языке N3:
 
 ```
-
 @prefix container: <http://comindware.com/ontology/container#>.
-@prefix object: <http://comindware.com/ontology/object#>.
-@prefix math: <http://www.w3.org/2000/10/swap/math#>.
-{
-    ("cities" "country") object:findProperty ?citiescountryProp.
-    ("Zayavkinakomandirovku" "request_country") object:findProperty ?Zayavkinakomandirovkurequest_countryProp.
- 
-    ?item ?Zayavkinakomandirovkurequest_countryProp ?Zayavkinakomandirovkurequest_countryProperty.
-    ?value a [object:alias "cities"].
-    ?value ?citiescountryProp ?Zayavkinakomandirovkurequest_countryProperty.
-    
-}
 
+@prefix object: <http://comindware.com/ontology/object#>.
+
+@prefix math: <http://www.w3.org/2000/10/swap/math#>.
+
+{
+
+    ("cities" "country") object:findProperty ?citiescountryProp.
+
+    ("Zayavkinakomandirovku" "request_country") object:findProperty ?Zayavkinakomandirovkurequest_countryProp.
+
+ 
+
+    ?item ?Zayavkinakomandirovkurequest_countryProp ?Zayavkinakomandirovkurequest_countryProperty.
+
+    ?value a [object:alias "cities"].
+
+    ?value ?citiescountryProp ?Zayavkinakomandirovkurequest_countryProperty.
+
+    
+
+}
 ```
 
 - DMN — выберите источник данных Города и настройте в соответствии с информацией ниже:

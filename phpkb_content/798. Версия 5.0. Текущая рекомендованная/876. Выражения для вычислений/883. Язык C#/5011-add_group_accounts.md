@@ -1,6 +1,7 @@
 ---
-title: Добавление пользователей в группу
+title: 'Добавление пользователей в группу'
 kbId: 5011
+url: 'https://kb.comindware.ru/article.php?id=5011'
 ---
 
 # Добавление пользователей в группу
@@ -8,7 +9,6 @@ kbId: 5011
 Для того, чтобы в рамках процесса можно было добавить пользователя или пользователей в определенную системную группу (например, для управления ролевой моделью), введите следующее выражение:
 
 ```
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,13 +29,11 @@ string[] OP = new string[] {
 string[] GROUP = new string[] {
 "group.28"
 };
-
 for(int j = 0; j < GROUP.Length; j++)
 {
 var group = GROUP[j];
 var old_users = Api.Base.AccountGroupService.Get(group);
 Api.Base.AccountGroupService.ExcludeMembers(group, old_users.Users);
-
 var my_list = Api.TeamNetwork.ObjectService.ListWithAlias(OA[j]);
 foreach (var i in my_list)
 {
@@ -60,7 +58,6 @@ Api.Base.AccountGroupService.IncludeMembers(group, accountsIds);
 }
 }
 }
-
 ```
 
 **где:**

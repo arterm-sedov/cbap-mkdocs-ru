@@ -1,6 +1,7 @@
 ---
-title: Старт процесса по записям списка (кнопка)
+title: 'Старт процесса по записям списка (кнопка)'
 kbId: 5018
+url: 'https://kb.comindware.ru/article.php?id=5018'
 ---
 
 # Старт процесса по записям списка (кнопка)
@@ -8,6 +9,7 @@ kbId: 5018
 Для того, чтобы на запустить процесс по каждой из записей определенного списка, введите следующее выражение:
 
 ```
+ 
 
 using System;
 using System.Collections.Generic;
@@ -64,7 +66,6 @@ Api.Process.ProcessObjectService.CreateWithObjectId("pa.2", null, row.Id); 
 return result;
 }
 }
-
 ```
 
 **где:**

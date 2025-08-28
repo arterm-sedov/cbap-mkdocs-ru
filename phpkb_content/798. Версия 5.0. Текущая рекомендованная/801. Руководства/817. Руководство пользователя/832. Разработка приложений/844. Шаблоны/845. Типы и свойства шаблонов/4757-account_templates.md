@@ -1,6 +1,7 @@
 ---
-title: Шаблон аккаунта
+title: 'Шаблон аккаунта'
 kbId: 4757
+url: 'https://kb.comindware.ru/article.php?id=4757'
 ---
 
 # Шаблон аккаунта

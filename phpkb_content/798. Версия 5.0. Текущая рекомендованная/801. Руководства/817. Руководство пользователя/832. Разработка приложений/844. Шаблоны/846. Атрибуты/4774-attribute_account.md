@@ -1,6 +1,7 @@
 ---
-title: Атрибут типа «Аккаунт»
+title: 'Атрибут типа «Аккаунт»'
 kbId: 4774
+url: 'https://kb.comindware.ru/article.php?id=4774'
 ---
 
 # Атрибут типа «Аккаунт»

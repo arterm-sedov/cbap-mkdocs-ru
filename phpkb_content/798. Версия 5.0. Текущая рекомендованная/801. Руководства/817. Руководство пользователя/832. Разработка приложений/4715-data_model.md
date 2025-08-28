@@ -1,6 +1,7 @@
 ---
-title: Описание модели данных
+title: 'Описание модели данных'
 kbId: 4715
+url: 'https://kb.comindware.ru/article.php?id=4715'
 ---
 
 # Описание модели данных

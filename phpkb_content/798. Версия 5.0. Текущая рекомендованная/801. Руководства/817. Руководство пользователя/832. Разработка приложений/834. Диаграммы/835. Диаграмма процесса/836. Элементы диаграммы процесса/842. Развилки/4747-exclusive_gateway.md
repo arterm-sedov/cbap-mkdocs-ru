@@ -1,6 +1,7 @@
 ---
-title: Развилка «или/или»
+title: 'Развилка «или/или»'
 kbId: 4747
+url: 'https://kb.comindware.ru/article.php?id=4747'
 ---
 
 # Развилка «или/или»

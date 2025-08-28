@@ -1,6 +1,7 @@
 ---
-title: Методы System Core API
+title: 'Методы System Core API'
 kbId: 4862
+url: 'https://kb.comindware.ru/article.php?id=4862'
 ---
 
 # Методы System Core API
@@ -21,7 +22,6 @@ System Core API предоставляет системные RESTful-метод
 
   ```
   https://your-host/api/public/system/
-
   ```
 - System Core API поддерживает запросы `POST`.
 - Методы System Core API передают данные в формате JSON.
@@ -36,7 +36,6 @@ System Core API предоставляет системные RESTful-метод
 
   ```
   http://your-host/api/public/system/TeamNetwork/ObjectAppService/Create
-
   ```
 
   - В теле запроса (`body`) укажите системное имя шаблона записи (например, `"Car"`).
@@ -52,7 +51,6 @@ Swagger позволяет выполнять запросы и просматр
 
 ```
 https://your-host/docs/SystemApi
-
 ```
 
 Здесь `your-host` — доменное имя вашего сервера.

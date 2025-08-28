@@ -1,6 +1,7 @@
 ---
-title: Elasticsearch. Настройка подключения
+title: 'Elasticsearch. Настройка подключения'
 kbId: 4678
+url: 'https://kb.comindware.ru/article.php?id=4678'
 ---
 
 # Elasticsearch. Настройка подключения

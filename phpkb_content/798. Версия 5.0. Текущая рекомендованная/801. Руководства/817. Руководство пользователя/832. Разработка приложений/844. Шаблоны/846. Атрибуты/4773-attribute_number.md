@@ -1,6 +1,7 @@
 ---
-title: Атрибут типа «Число»
+title: 'Атрибут типа «Число»'
 kbId: 4773
+url: 'https://kb.comindware.ru/article.php?id=4773'
 ---
 
 # Атрибут типа «Число»

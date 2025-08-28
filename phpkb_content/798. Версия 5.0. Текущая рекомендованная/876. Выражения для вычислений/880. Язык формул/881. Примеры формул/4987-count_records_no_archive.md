@@ -1,6 +1,7 @@
 ---
-title: Подсчет количества записей без учета архивированных
+title: 'Подсчет количества записей без учета архивированных'
 kbId: 4987
+url: 'https://kb.comindware.ru/article.php?id=4987'
 ---
 
 # Подсчет количества записей без учета архивированных
@@ -9,9 +10,13 @@ kbId: 4987
 
 ```
 COUNT(
+
 (from a in db->requests
+
 where AND(EQUALS(a->status, “Согласована”), EQUALS(a-> _isDisabled,false))
+
 select a->id)
+
       )
 ```
 

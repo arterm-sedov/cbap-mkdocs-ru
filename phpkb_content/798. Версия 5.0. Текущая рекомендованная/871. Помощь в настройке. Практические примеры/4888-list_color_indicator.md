@@ -1,6 +1,7 @@
 ---
-title: Цветовой индикатор в списке. Настройка отображения
+title: 'Цветовой индикатор в списке. Настройка отображения'
 kbId: 4888
+url: 'https://kb.comindware.ru/article.php?id=4888'
 ---
 
 # Цветовой индикатор в списке. Настройка отображения
@@ -12,11 +13,14 @@ kbId: 4888
 **2.** В поле «Вычисляемое выражение» вставьте следующую формулу, которую мы разберем ниже:
 
 ```
-IF(GREATEREQ($Fakticheskayadata , $Planovayadata),
-"<span style='color:#B22222; font-size: 200%; text-shadow: 0 0 1px black; position: absolute; top:0px;'> ● </span>",
-"<span style='color:#45A521; font-size: 200%; text-shadow: 0 0 1px black; position: absolute; top:0px;'> ● </span>"               
-)
+IF(GREATEREQ($
+Fakticheskayadata , $Planovayadata),
 
+"<span style='color:#B22222; font-size: 200%; text-shadow: 0 0 1px black; position: absolute; top:0px;'> ● </span>",
+
+"<span style='color:#45A521; font-size: 200%; text-shadow: 0 0 1px black; position: absolute; top:0px;'> ● </span>"               
+
+)
 ```
 
 **где:**

@@ -1,6 +1,7 @@
 ---
-title: Вычисление всех пользователей шаблона пользователя
+title: 'Вычисление всех пользователей шаблона пользователя'
 kbId: 4967
+url: 'https://kb.comindware.ru/article.php?id=4967'
 ---
 
 # Вычисление всех пользователей шаблона пользователя
@@ -8,7 +9,6 @@ kbId: 4967
 Для того, чтобы получить всех пользователей из определенного шаблона пользователя, введите следующее выражение:
 
 ```
-
 @prefix object: <http://comindware.com/ontology/object#>.
 @prefix account: <http://comindware.com/ontology/account#>.
 @prefix cmw: <http://comindware.com/logics#>.
@@ -20,7 +20,6 @@ kbId: 4967
   ?polz container:alias "Polzovateli".
   ?value account:extendedBy ?polz.
     }
-
 ```
 
 **где:**

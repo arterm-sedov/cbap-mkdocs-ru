@@ -1,6 +1,7 @@
 ---
-title: Промежуточные события
+title: 'Промежуточные события'
 kbId: 4742
+url: 'https://kb.comindware.ru/article.php?id=4742'
 ---
 
 # Промежуточные события

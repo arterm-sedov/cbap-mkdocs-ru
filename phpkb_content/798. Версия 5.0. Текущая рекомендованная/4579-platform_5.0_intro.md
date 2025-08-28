@@ -1,6 +1,7 @@
 ---
-title: Введение
+title: 'Введение'
 kbId: 4579
+url: 'https://kb.comindware.ru/article.php?id=4579'
 ---
 
 # Введение

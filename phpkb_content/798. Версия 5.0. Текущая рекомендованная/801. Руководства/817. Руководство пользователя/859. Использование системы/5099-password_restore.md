@@ -1,6 +1,7 @@
 ---
-title: Восстановление пароля
+title: 'Восстановление пароля'
 kbId: 5099
+url: 'https://kb.comindware.ru/article.php?id=5099'
 ---
 
 # Восстановление пароля
