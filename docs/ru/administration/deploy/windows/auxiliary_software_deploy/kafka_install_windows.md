@@ -120,7 +120,7 @@ hide:
 
     ``` powershell
     cd "C:\kafka\bin\windows\"
-    .\kafka-console-producer.bat --bootstrap-server <KafkaIP>:9092 --topic TEST
+    .\kafka-console-producer.bat --bootstrap-server <KafkaIP>:<kafkaBrokerPort> --topic TEST
     # Отправьте любое сообщение, например:
     hello
     ```
@@ -136,7 +136,7 @@ hide:
 
     ``` yaml
     # IP-адрес сервера Kafka
-    mq.server: <KafkaIP>:9092
+    mq.server: <KafkaIP>:<kafkaBrokerPort>
     # Имя экземпляра ПО
     mq.group: <instanceName>
     # Идентификатор узла очереди сообщений
@@ -165,18 +165,19 @@ hide:
     ``` yaml
     # Укажите IP-адрес сервера Kafka
     # без префикса http/https
-    mq.server: <KafkaIP>:9092
+    mq.server: <KafkaIP>:<kafkaBrokerPort>
     # Укажите имя экземпляра ПО
     mq.group: <instanceName>
     # Идентификатор узла очереди сообщений
-    mq.node: <instanceName>
+    # Должен отличаться от mq.group.
+    mq.node: <instanceName>_Exclusive
     ```
 
 2. Задайте параметры подключения к Kafka в файле `adapterhost.yml`:
 
     ``` yaml
     # Укажите IP-адрес сервера Kafka
-    mq.server: <KafkaIP>:9092
+    mq.server: <KafkaIP>:<kafkaBrokerPort>
     ```
 
 3. Перезапустите экземпляр ПО.

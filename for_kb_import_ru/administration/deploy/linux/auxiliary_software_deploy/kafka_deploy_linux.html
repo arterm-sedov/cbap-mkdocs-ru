@@ -141,7 +141,7 @@
 <ul>
 <li>IP-адрес и порт {{ apacheKafkaVariants }} должны быть обязательно прописаны цифрами в формате <code>XXX.XXX.XXX.XXX:XXXXX</code>. То есть недопустимо указывать имя хоста вместо IP-адреса и опускать номер порта.</li>
 <li>
-<p>Установите соответствующие вашей конфигурации значения параметров <code>mq.server</code> (адрес и порт сервера очереди сообщений), <code>mq.group</code> (идентификатор группы очереди сообщений), <code>mq.node</code> (идентификатор узла очереди сообщений). Они должны совпадать во всех файлах конфигурации:</p>
+<p>Установите соответствующие вашей конфигурации значения параметров <code>mq.server</code> (адрес и порт сервера очереди сообщений), <code>mq.group</code> (идентификатор группы очереди сообщений), <code>mq.node</code> (идентификатор узла очереди сообщений; не должен совпадать с <code>mq.group</code>; если узлов несколько, на разных узлах должен быть разным). Они должны совпадать во всех файлах конфигурации:</p>
 <ul>
 <li><code>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code></li>
 <li><code>/var/www/&lt;instanceName&gt;/apigateway.yml</code></li>
@@ -153,7 +153,7 @@
 </li>
 <li>
 <p>Задайте параметры подключения к Kafka в файле <code>/var/www/&lt;instanceName&gt;apigateway.yml</code>:</p>
-<div class="highlight"><code><pre><span></span><code><span class="c1"># Адрес и порт сервера очереди сообщений (Kafka)</span></code> <br/><code><span class="nt">mq.server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;kafkaBrokerIp&gt;:&lt;kafkaBrokerPort&gt;</span></code> <br/><code><span class="c1"># Идентификатор группы очереди сообщений</span></code> <br/><code><span class="nt">mq.group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/><code><span class="c1"># Идентификатор узла очереди сообщений</span></code> <br/><code><span class="nt">mq.node</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="c1"># Адрес и порт сервера очереди сообщений (Kafka)</span></code> <br/><code><span class="nt">mq.server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;kafkaBrokerIp&gt;:&lt;kafkaBrokerPort&gt;</span></code> <br/><code><span class="c1"># Идентификатор группы очереди сообщений</span></code> <br/><code><span class="nt">mq.group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/><code><span class="c1"># Идентификатор узла очереди сообщений</span></code> <br/><code><span class="c1"># Должен отличаться от mq.group.</span></code> <br/><code><span class="nt">mq.node</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;_Exclusive</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Задайте параметры подключения к Kafka в файле <code>/var/www/&lt;instanceName&gt;/adapterhost.yml</code>:</p>

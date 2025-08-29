@@ -119,7 +119,8 @@ hide: tags
     # Идентификатор группы очереди сообщений
     mq.group: <instanceName>
     # Идентификатор узла очереди сообщений
-    mq.node: <instanceName>
+    # Должен отличаться от mq.group.
+    mq.node: <instanceName>_Exclusive
     ```
 
 4. Задайте параметры подключения к Kafka в файле `/var/www/<instanceName>/adapterhost.yml`:
