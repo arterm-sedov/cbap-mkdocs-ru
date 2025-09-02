@@ -217,8 +217,6 @@ bash reindex_local_prefix.sh -p <platformPrefix> -ip 10.0.0.5:9200 -m m1.json
 - Если кластер использует аутентификацию/HTTPS, потребуется доработать вызовы `curl` (добавить `-u user:pass`, `--cacert`/`-k` и т. п.).
 - Перед запуском сравните актуальный маппинг индексов с эталонным `m1.json`. Если маппинги совпадают, реиндексация может не потребоваться.
 
-
-
 <div class="relatedTopics" markdown="block">
 
 --8<-- "related_topics_heading.md"
