@@ -107,10 +107,6 @@ hide:
 
 Рассмотрим пример настройки ссылки на внешнюю форму _«Клиент»_ из _[предыдущего примера](#form_access_control_configure)_, чтобы любой клиент мог оставлять заявку, не выполняя вход в **{{ productName }}**.
 
-Для формирования ссылки на внешнюю форму используется метод System Core API `/Base/EncryptedNavigationReferenceService/Generate`, поэтому **вам потребуется доступ к API**.
-
-См. _«[Аутентификация для доступа к API][api_intro_authentication]»_ и _«[Методы System Core API][api_system_core_encrypted_navigation_reference]»_.
-
 !!! warning "Логика работы внешних форм"
 
     Если для создана ссылка на внешнюю форму, она действует следующим образом:
@@ -148,6 +144,14 @@ hide:
             "attributeNSystemName": "value"
         }
         ```
+
+### Настройка ссылки {: #form_access_control_external_form }
+
+!!! warning "Необходим доступ к API"
+
+    Для формирования ссылки на внешнюю форму используется метод System Core API `/Base/EncryptedNavigationReferenceService/Generate`, поэтому **вам потребуется доступ к API {{ productName }}**.
+
+    См. _«[Аутентификация для доступа к API][api_intro_authentication]»_ и _«[Методы System Core API][api_system_core_encrypted_navigation_reference]»_.
 
 1. Соберите следующие данные для формирования ссылки:
 
@@ -223,9 +227,11 @@ hide:
 
 --8<-- "related_topics_heading.md"
 
-- _[Формы. Определения, редактирование, удаление, использование списка форм][forms]_
-- _[Стартовая форма и форма пользовательской задачи][process_diagram_forms]_
-- _[Роли в приложении. Определения, настройка, объединение, удаление][roles]_
+- [Формы. Определения, редактирование, удаление, использование списка форм][forms]
+- [Стартовая форма и форма пользовательской задачи][process_diagram_forms]
+- [Роли в приложении. Определения, настройка, объединение, удаление][roles]
+- [Аутентификация для доступа к API][api_intro_authentication]
+- [Методы System Core API][api_system_core_encrypted_navigation_reference]
 
 </div>
 
