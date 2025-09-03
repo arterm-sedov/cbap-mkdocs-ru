@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4862" kb-tags="" kb-title="Методы System Core API">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4862" kb-tags="API,REST,Swagger,System,АПИ,анонимные формы,анонимные страницы,внешние формы,внешние страницы,интеграции,интеграция" kb-title="Методы System Core API">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -87,9 +87,9 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#encryptednavigation-reference--внешние-ссылки-на-формы">
+<a class="md-nav__link mkdocs_imported_link" href="#api_system_core_encrypted_navigation_reference">
 <span class="md-ellipsis">
-      EncryptedNavigation Reference — внешние ссылки на формы
+      EncryptedNavigationReference — внешние ссылки на формы
     </span>
 </a>
 </li>
@@ -271,6 +271,8 @@
 <p>Swagger позволяет выполнять запросы и просматривать ответы.</p>
 <p>Интерфейс Swagger для System Core API доступен по адресу:</p>
 <div class="highlight"><code><pre><span></span><code>https://your-host/docs/SystemApi</code> <br/></pre></code></div>
+<p>URL-адрес JSON-спецификации System Core API:</p>
+<div class="highlight"><code><pre><span></span><code>https://your-host/api/public/system/swagger</code> <br/></pre></code></div>
 <p>Здесь <code>your-host</code> — доменное имя вашего сервера.</p>
 <figure class="screenshot_with_caption">
 <p><img alt="Интерфейс Swagger для System Core API" src="https://kb.comindware.ru/assets/SystemCoreAPI1.jpg"/><figcaption class="caption">Интерфейс Swagger для System Core API</figcaption></p>
@@ -967,21 +969,21 @@
 <thead>
 <tr>
 <th class="api-method post">POST</th>
-<th>/Base/OntologyService/GetCurrentConnections</th>
+<th>/Base/OntologyService/GetCurrentTransactions</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>Описание</strong></td>
-<td>Получает текущие подключения.</td>
+<td>Получает текущие транзакции.</td>
 </tr>
 <tr>
 <td><strong>Параметры</strong></td>
-<td>Не требуются.</td>
+<td>-</td>
 </tr>
 <tr>
 <td><strong>Ответ</strong></td>
-<td>-</td>
+<td>Список текущих транзакций.</td>
 </tr>
 </tbody>
 </table>
@@ -989,17 +991,39 @@
 <thead>
 <tr>
 <th class="api-method post">POST</th>
-<th>/Base/OntologyService/ResetConnections</th>
+<th>/Base/OntologyService/TryAbortTransaction</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>Описание</strong></td>
-<td>Отключает все текущие подключения.</td>
+<td>Пытается прервать указанную транзакцию.</td>
 </tr>
 <tr>
 <td><strong>Параметры</strong></td>
-<td>Не требуются.</td>
+<td>Идентификатор транзакции.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Логическое значение <code>true</code>/<code>false</code>.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/OntologyService/CleanupRules</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Очищает устаревшие правила.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>-</td>
 </tr>
 <tr>
 <td><strong>Ответ</strong></td>
@@ -1011,17 +1035,149 @@
 <thead>
 <tr>
 <th class="api-method post">POST</th>
-<th>/Base/OntologyService/ResetConnection</th>
+<th>/Base/OntologyService/RemoveStatement</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>Описание</strong></td>
-<td>Отключает подключения по идентификатору аккаунта.</td>
+<td>Удаляет утверждение (триплет).</td>
 </tr>
 <tr>
 <td><strong>Параметры</strong></td>
-<td>Идентификатор аккаунта.</td>
+<td>Параметры утверждения.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Статус.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/OntologyService/AddStatement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Добавляет утверждение (триплет).</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Параметры утверждения.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Статус.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/OntologyService/Clone</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Клонирует объект онтологии.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор объекта и параметры.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Идентификатор созданного объекта.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/OntologyService/GetIntersection</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает пересечение множеств значений по предикатам.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Параметры запроса.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Результат пересечения.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/OntologyService/GetWithMultipleValues</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает атрибуты с множественными значениями.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор объекта и предикаты.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Значения.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/OntologyService/SynchronizePredicate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Синхронизирует предикат.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Параметры синхронизации.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Статус.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/OntologyService/RemoveAsync</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Асинхронно удаляет объект по идентификатору.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор объекта.</td>
 </tr>
 <tr>
 <td><strong>Ответ</strong></td>
@@ -1431,72 +1587,6 @@
 <thead>
 <tr>
 <th class="api-method post">POST</th>
-<th>/Base/GlobalConfigurationService/get_ExternalNotificationEnabled</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Описание</strong></td>
-<td>Проверяет, включены ли внешние уведомления.</td>
-</tr>
-<tr>
-<td><strong>Параметры</strong></td>
-<td>-</td>
-</tr>
-<tr>
-<td><strong>Ответ</strong></td>
-<td>Логическое значение <code>true</code>/<code>false</code>.</td>
-</tr>
-</tbody>
-</table>
-<table style="width: 100%;">
-<thead>
-<tr>
-<th class="api-method post">POST</th>
-<th>/Base/GlobalConfigurationService/get_GlobalNotificationListening</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Описание</strong></td>
-<td>Проверяет, включены ли системные уведомления.</td>
-</tr>
-<tr>
-<td><strong>Параметры</strong></td>
-<td>-</td>
-</tr>
-<tr>
-<td><strong>Ответ</strong></td>
-<td>Логическое значение <code>true</code>/<code>false</code>.</td>
-</tr>
-</tbody>
-</table>
-<table style="width: 100%;">
-<thead>
-<tr>
-<th class="api-method post">POST</th>
-<th>/Base/GlobalConfigurationService/get_TracingEnabled</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Описание</strong></td>
-<td>Проверяет, включён ли мониторинг производительности.</td>
-</tr>
-<tr>
-<td><strong>Параметры</strong></td>
-<td>-</td>
-</tr>
-<tr>
-<td><strong>Ответ</strong></td>
-<td>Логическое значение <code>true</code>/<code>false</code>.</td>
-</tr>
-</tbody>
-</table>
-<table style="width: 100%;">
-<thead>
-<tr>
-<th class="api-method post">POST</th>
 <th>/Base/GlobalConfigurationService/get_ServerAddress</th>
 </tr>
 </thead>
@@ -1519,6 +1609,50 @@
 <thead>
 <tr>
 <th class="api-method post">POST</th>
+<th>/Base/GlobalConfigurationService/get_ServerLanguage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает текущий язык интерфейса ПО.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Язык интерфейса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/GlobalConfigurationService/get_AllServerLanguages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает список доступных языков интерфейса ПО.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Список языков.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
 <th>/Base/GlobalConfigurationService/get_CompilationOnSaveDisabled</th>
 </tr>
 </thead>
@@ -1534,50 +1668,6 @@
 <tr>
 <td><strong>Ответ</strong></td>
 <td>Логическое значение <code>true</code>/<code>false</code>.</td>
-</tr>
-</tbody>
-</table>
-<table style="width: 100%;">
-<thead>
-<tr>
-<th class="api-method post">POST</th>
-<th>/Base/GlobalConfigurationService/get_LastTimestamp</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Описание</strong></td>
-<td>Получает последние временные отметки.</td>
-</tr>
-<tr>
-<td><strong>Параметры</strong></td>
-<td>-</td>
-</tr>
-<tr>
-<td><strong>Ответ</strong></td>
-<td>Список временных отметок.</td>
-</tr>
-</tbody>
-</table>
-<table style="width: 100%;">
-<thead>
-<tr>
-<th class="api-method post">POST</th>
-<th>/Base/GlobalConfigurationService/get_PasswordValidationPolicy</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Описание</strong></td>
-<td>Получает установленную политику проверки пароля.</td>
-</tr>
-<tr>
-<td><strong>Параметры</strong></td>
-<td>-</td>
-</tr>
-<tr>
-<td><strong>Ответ</strong></td>
-<td>Политика проверки пароля.</td>
 </tr>
 </tbody>
 </table>
@@ -1732,6 +1822,28 @@
 <tr>
 <td><strong>Ответ</strong></td>
 <td>Статус.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/GlobalConfigurationService/GetPlatformLanguageFromUserPreferredLanguages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Определяет язык интерфейса ПО из предпочтительных языков пользователя.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Список предпочтительных языков.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Выбранный язык интерфейса.</td>
 </tr>
 </tbody>
 </table>
@@ -2066,12 +2178,12 @@
 </tr>
 </tbody>
 </table>
-<h3 id="encryptednavigation-reference--внешние-ссылки-на-формы">EncryptedNavigation Reference — внешние ссылки на формы</h3>
+<h3 id="api_system_core_encrypted_navigation_reference">EncryptedNavigationReference — внешние ссылки на формы</h3>
 <table style="width: 100%;">
 <thead>
 <tr>
 <th class="api-method post">POST</th>
-<th>/Base/EncryptedNavigationReference/Encrypt</th>
+<th>/Base/EncryptedNavigationReferenceService/Generate</th>
 </tr>
 </thead>
 <tbody>
@@ -2093,7 +2205,7 @@
 <thead>
 <tr>
 <th class="api-method post">POST</th>
-<th>/Base/EncryptedNavigationReference/Decrypt</th>
+<th>/Base/EncryptedNavigationReferenceService/Decrypt</th>
 </tr>
 </thead>
 <tbody>
@@ -4780,7 +4892,7 @@
 <thead>
 <tr>
 <th class="api-method post">POST</th>
-<th>/TeamNetwork/ObjectAppExportService/CreateexportTemplate1</th>
+<th>/TeamNetwork/ObjectAppExportService/CreateExportTemplate1</th>
 </tr>
 </thead>
 <tbody>
@@ -5926,7 +6038,7 @@
 <thead>
 <tr>
 <th class="api-method post">POST</th>
-<th>/TeamNetwork/DocumentService/SaveSignature1</th>
+<th>/TeamNetwork/DocumentService/CreateSignature</th>
 </tr>
 </thead>
 <tbody>
@@ -5941,6 +6053,50 @@
 <tr>
 <td><strong>Ответ</strong></td>
 <td>Идентификатор созданной подписи.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/TeamNetwork/DocumentService/RevokeSignature</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Отзывает подпись.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор подписи.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Статус.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/TeamNetwork/DocumentService/AttachSignature</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Присоединяет подпись к документу/версии.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор подписи и версии документа.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Статус.</td>
 </tr>
 </tbody>
 </table>
@@ -6125,7 +6281,7 @@
 <thead>
 <tr>
 <th class="api-method post">POST</th>
-<th>/TeamNetwork/DatasetService/GetCollectionFilteredSorteredValues</th>
+<th>/TeamNetwork/DatasetService/GetCollectionFilteredSortedValues</th>
 </tr>
 </thead>
 <tbody>
@@ -7098,13 +7254,35 @@
 <thead>
 <tr>
 <th class="api-method post">POST</th>
-<th>/Solution/TemplateService/GetNamePropertyId</th>
+<th>/Solution/TemplateService/SetNameProperty</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>Описание</strong></td>
-<td>Получает идентификатор атрибута, который является именем записей шаблона.</td>
+<td>Назначает атрибут, который является именем записей шаблона.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор шаблона и идентификатор атрибута.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Статус.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Solution/TemplateService/GetContainerInfo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает основную информацию о шаблоне.</td>
 </tr>
 <tr>
 <td><strong>Параметры</strong></td>
@@ -7112,7 +7290,51 @@
 </tr>
 <tr>
 <td><strong>Ответ</strong></td>
-<td>Идентификатор атрибута.</td>
+<td>Основная информация о шаблоне.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Solution/TemplateService/GetAppAlias</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает системное имя шаблона по идентификатору.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор шаблона.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Системное имя шаблона.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Solution/TemplateService/GetClass</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает класс шаблона.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор шаблона.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Класс шаблона.</td>
 </tr>
 </tbody>
 </table>
@@ -7734,28 +7956,12 @@
 </tr>
 </tbody>
 </table>
-<table style="width: 100%;">
-<thead>
-<tr>
-<th class="api-method post">POST</th>
-<th>/Process/ProcessAppService/GetRouteStatistics</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Описание</strong></td>
-<td>В текущей версии продукта данный метод не используется.</td>
-</tr>
-<tr>
-<td><strong>Параметры</strong></td>
-<td>-</td>
-</tr>
-<tr>
-<td><strong>Ответ</strong></td>
-<td>-</td>
-</tr>
-</tbody>
-</table>
+<p>| POST {: .api-method .post } | /Process/ProcessAppService/GetRouteStatistics |
+| POST {: .api-method .post } | /Process/ProcessAppService/GetRoutStatistics |
+| --- | --- |
+| <strong>Описание</strong> | В текущей версии продукта данный метод не используется. |
+| <strong>Параметры</strong> | - |
+| <strong>Ответ</strong> | - |</p>
 <table style="width: 100%;">
 <thead>
 <tr>
@@ -7848,7 +8054,7 @@
 <thead>
 <tr>
 <th class="api-method post">POST</th>
-<th>/Process/ProcessAppService/GetActiveSchemeId</th>
+<th>/Process/ProcessAppService/GetActiveScheme</th>
 </tr>
 </thead>
 <tbody>
@@ -8046,7 +8252,7 @@
 <thead>
 <tr>
 <th class="api-method post">POST</th>
-<th>/Process/ProcessAppService/RebuildProcessRules</th>
+<th>/Process/ProcessAppService/RebuildScripts</th>
 </tr>
 </thead>
 <tbody>
@@ -9612,7 +9818,7 @@
 <thead>
 <tr>
 <th class="api-method post">POST</th>
-<th>/Process/ProcessReportService/CreateReceivedMailReport</th>
+<th>/Process/ProcessReportService/CreateReсievedMailReport</th>
 </tr>
 </thead>
 <tbody>
@@ -9744,7 +9950,7 @@
 <thead>
 <tr>
 <th class="api-method post">POST</th>
-<th>/Process/ProcessReportService/ResetReceivedMailCounter</th>
+<th>/Process/ProcessReportService/ResetRecievedMailCounter</th>
 </tr>
 </thead>
 <tbody>

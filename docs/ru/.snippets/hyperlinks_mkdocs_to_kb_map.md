@@ -1091,9 +1091,13 @@
 
 [api_intro]: {{ kbArticleURLPrefix }}4860
 
+[api_intro_authentication]: {{ kbArticleURLPrefix }}4860#api_intro_authentication
+
 [api_solution]: {{ kbArticleURLPrefix }}4863
 
 [api_system_core]: {{ kbArticleURLPrefix }}4862
+
+[api_system_core_encrypted_navigation_reference]: {{ kbArticleURLPrefix }}4862#api_system_core_encrypted_navigation_reference
 
 [api_system_core_user_task]: {{ kbArticleURLPrefix }}4862#api_system_core_user_task
 

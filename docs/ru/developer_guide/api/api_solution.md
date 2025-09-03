@@ -1,6 +1,16 @@
 ---
 title: Методы Solution API
 kbId: 4863
+tags:
+    - API
+    - REST
+    - Swagger
+    - Solution 
+    - АПИ
+    - интеграции
+    - интеграция
+    - приложение
+hide: tags
 ---
 
 # Методы Solution API {: #api_solution }

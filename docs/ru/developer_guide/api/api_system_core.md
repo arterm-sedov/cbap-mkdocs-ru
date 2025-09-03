@@ -1,6 +1,19 @@
 ---
 title: Методы System Core API
 kbId: 4862
+tags:
+    - API
+    - REST
+    - Swagger
+    - System
+    - АПИ
+    - анонимные формы
+    - анонимные страницы
+    - внешние формы
+    - внешние страницы
+    - интеграции
+    - интеграция
+hide: tags
 ---
 
 # Методы System Core API {: #api_system_core }
@@ -614,7 +627,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | - |
 | **Ответ** | Набор атрибутов для группы аккаунтов. |
 
-### EncryptedNavigationReference — внешние ссылки на формы {: #api_system_core_encryptednavigation_reference }
+### EncryptedNavigationReference — внешние ссылки на формы {: #api_system_core_encrypted_navigation_reference }
 
 | POST {: .api-method .post } | /Base/EncryptedNavigationReferenceService/Generate |
 | --- | --- |

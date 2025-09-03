@@ -1,6 +1,15 @@
 ---
 title: Методы Web API
 kbId: 4861
+tags:
+    - API
+    - REST
+    - Swagger
+    - Web
+    - АПИ
+    - интеграции
+    - интеграция
+hide: tags
 ---
 
 # Методы Web API {: #api_web }
