@@ -633,6 +633,8 @@
 
 [form_access_control]: {{ kbArticleURLPrefix }}4789
 
+[form_access_control_external_form]: {{ kbArticleURLPrefix }}4789#form_access_control_external_form
+
 [forms]: {{ kbArticleURLPrefix }}4786
 
 [forms_embedded]: {{ kbArticleURLPrefix }}4786#forms_embedded
