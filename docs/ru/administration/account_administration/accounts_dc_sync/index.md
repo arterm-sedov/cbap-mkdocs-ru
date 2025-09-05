@@ -68,7 +68,7 @@ hide: tags
 <th>Системное имя</th>
 </tr>
 </thead>
-<tbody>
+<tbody markdown>
 <tr markdown>
 <td markdown>**Имя пользователя**</td>
 <td markdown>**sAMAccountName**</td>
@@ -146,27 +146,36 @@ hide: tags
 
 Инструкции по настройке подключения к серверу каталогов см. в следующих статьях:
 
+<div class="relatedTopics" markdown="block">
+
 {% if completeGuide or userGuide or kbExport %}
 
-- **{{ productName }}**
-    - **[Сервер каталогов. Настройка подключения][ad_connection]**
-- **Linux**
-    - **[Аутентификация через Active Directory. Настройка контроллера домена и экземпляра ПО][ad_authentication_configure_dc_instance]**
-    - **[Аутентификация через единый вход (SSO). Настройка контроллера домена, экземпляра ПО и компьютера конечного пользователя][sso_authentication_configure]**
-- **Windows**
-    - **[Настройка единого входа (SSO-аутентификации) в ОС Windows][sso_authentication_configure_windows]**
+**{{ productName }}**
+
+- [Сервер каталогов. Настройка подключения][ad_connection]
+
+**Linux**
+
+- [Аутентификация через Active Directory. Настройка контроллера домена и экземпляра ПО][ad_authentication_configure_dc_instance]
+- [Аутентификация через единый вход (SSO). Настройка контроллера домена, экземпляра ПО и компьютера конечного пользователя][sso_authentication_configure]
+
+**Windows**
+
+- [Настройка единого входа (SSO-аутентификации) в ОС Windows][sso_authentication_configure_windows]
 
 {% elif adminGuideLinux %}
 
-- **[Сервер каталогов. Настройка подключения][ad_connection]**
-- **[Аутентификация через Active Directory. Настройка контроллера домена и экземпляра ПО][ad_authentication_configure]**
-- **[Аутентификация через единый вход (SSO). Настройка контроллера домена, экземпляра ПО и компьютера конечного пользователя][sso_authentication_configure]**
+- [Сервер каталогов. Настройка подключения][ad_connection]
+- [Аутентификация через Active Directory. Настройка контроллера домена и экземпляра ПО][ad_authentication_configure]
+- [Аутентификация через единый вход (SSO). Настройка контроллера домена, экземпляра ПО и компьютера конечного пользователя][sso_authentication_configure]
 
 {% elif adminGuideWindows %}
 
-- **[Сервер каталогов. Настройка подключения][ad_connection]**
-- **[Настройка единого входа (SSO-аутентификации) в ОС Windows][sso_authentication_configure_windows]**
+- [Сервер каталогов. Настройка подключения][ad_connection]
+- [Настройка единого входа (SSO-аутентификации) в ОС Windows][sso_authentication_configure_windows]
 
 {% endif %}
+
+</div>
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
