@@ -16,6 +16,13 @@
 </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#сопоставление-атрибутов-comindware-platform-и-сервера-каталогов">
+<span class="md-ellipsis">
+      Сопоставление атрибутов Comindware Platform и Сервера каталогов
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#механизм-авторизации-через-сервер-каталогов-active-directory">
 <span class="md-ellipsis">
       Механизм авторизации через сервер каталогов (Active Directory)
@@ -59,99 +66,94 @@
 <li>синхронизация всех пользователей — в Системе создаются все пользователи, которые состоят в RDN;</li>
 <li>выбор групп для синхронизации — можно выбрать группы, которые состоят в RDN; в Системе создаются группы, подгруппы и аккаунты, состоящие в выбранных группах; в Системе не отображается, что подгруппа состоит в группе.</li>
 </ul>
-<p class="pageBreakAfterAvoid">Определение соответствия данных группы производится следующим образом:</p>
+<h2 class="pageBreakbefore" id="сопоставление-атрибутов-comindware-platform-и-сервера-каталогов">Сопоставление атрибутов Comindware Platform и Сервера каталогов</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Обязательные атрибуты</p>
+<p>Для корректной синхронизации аккаунтов с <strong>Comindware Platform</strong> на стороне сервера каталогов должны быть обязательно заданы значения следующих атрибутов (они не должны быть пустыми и не должны иметь значение <code>Null</code>):</p>
+<ul>
+<li><code>sAMAccountName</code> (Имя пользователя)</li>
+<li><code>userAccountControl</code> (Включён)</li>
+<li><code>mail</code> (Адрес эл. почты)</li>
+<li><code>objectSid</code> (SID)</li>
+<li><code>uSNChanged</code> (Версия объекта)</li>
+<li><code>distinguishedName</code> (Уникальное имя)</li>
+</ul>
+</div>
 <table style="width: 100%;">
 <thead>
 <tr>
-<th colspan="2" markdown="">Comindware Platform</th>
+<th>Comindware Platform</th>
 <th>Active Directory</th>
 </tr>
 <tr>
-<th>Системное имя</th>
-<th>Отображаемое название</th>
+<th>Название</th>
 <th>Системное имя</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Name</td>
-<td>Название</td>
-<td>CN</td>
+<td>**Имя пользователя**</td>
+<td>**sAMAccountName**</td>
 </tr>
 <tr>
-<td>Description</td>
-<td>Описание</td>
-<td>Description</td>
+<td>**Включён**</td>
+<td>**userAccountControl**</td>
 </tr>
 <tr>
-<td>members</td>
-<td>Участники группы</td>
-<td>Member</td>
+<td>**Адрес эл. почты**</td>
+<td>**mail**</td>
 </tr>
 <tr>
-<td>parentGroups</td>
-<td>Входит в группы</td>
-<td>MemberOf</td>
+<td>**SID**</td>
+<td>**objectSid**</td>
 </tr>
 <tr>
-<td>Username</td>
-<td>Имя пользователя</td>
-<td>SamAccountName</td>
+<td>**Версия объекта**</td>
+<td>**uSNChanged**</td>
 </tr>
 <tr>
-<td>IsActive</td>
-<td>Активен (логический атрибут)</td>
-<td>IsEnabled</td>
+<td>**Уникальное имя**</td>
+<td>**distinguishedName**</td>
 </tr>
 <tr>
-<td>Mbox</td>
-<td>Адрес эл.почты</td>
-<td>Mail</td>
+<td>Ф. И. О.</td>
+<td>displayName</td>
 </tr>
 <tr>
-<td>FullName</td>
 <td>Имя</td>
-<td>FullName</td>
+<td>givenName</td>
 </tr>
 <tr>
-<td>Title</td>
 <td>Должность</td>
-<td>Title</td>
+<td>title</td>
 </tr>
 <tr>
-<td>Department</td>
 <td>Отдел</td>
-<td>Department</td>
+<td>department</td>
 </tr>
 <tr>
-<td>Office</td>
 <td>Офис</td>
-<td>PhysucakDeliveryOfficeName</td>
+<td>physicalDeliveryOfficeName</td>
 </tr>
 <tr>
 <td>Skype</td>
-<td>Skype</td>
-<td>Pager</td>
+<td>pager</td>
 </tr>
 <tr>
-<td>Manager</td>
 <td>Руководитель</td>
-<td>ManagerID</td>
+<td>manager</td>
 </tr>
 <tr>
-<td>Phone</td>
 <td>Телефон</td>
-<td>TelephoneNumber, Mobile</td>
+<td>telephoneNumber</td>
 </tr>
 <tr>
-<td>Authentification=LDAP</td>
-<td>Метод проверки подлинности</td>
-<td></td>
+<td>Фото профиля</td>
+<td>thumbnailPhoto</td>
 </tr>
 <tr>
-<td>Picture</td>
-<td>Аватар</td>
-<td></td>
+<td>Язык</td>
+<td>preferredLanguage</td>
 </tr>
 </tbody>
 </table>
