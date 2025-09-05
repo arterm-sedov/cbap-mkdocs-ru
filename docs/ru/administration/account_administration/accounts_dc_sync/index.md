@@ -35,101 +35,94 @@ kbId: 4655
 - синхронизация всех пользователей — в Системе создаются все пользователи, которые состоят в RDN;
 - выбор групп для синхронизации — можно выбрать группы, которые состоят в RDN; в Системе создаются группы, подгруппы и аккаунты, состоящие в выбранных группах; в Системе не отображается, что подгруппа состоит в группе.
 
-Определение соответствия данных группы производится следующим образом:
-{: .pageBreakAfterAvoid}
+## Сопоставление атрибутов {{ productName }} и Сервера каталогов {: .pageBreakbefore }
 
-<table>
+!!! warning "Обязательные атрибуты"
+
+    Для корректной синхронизации аккаунтов с **{{ productName }}** на стороне сервера каталогов должны быть обязательно заданы значения следующих атрибутов (они не должны быть пустыми и не должны иметь значение `Null`):
+    
+    - `sAMAccountName` (Имя пользователя)
+    - `userAccountControl` (Включён)
+    - `mail` (Адрес эл. почты)
+    - `objectSid` (SID)
+    - `uSNChanged` (Версия объекта)
+    - `distinguishedName` (Уникальное имя)
+
+<table markdown>
 <thead>
-<tr>
-<th markdown colspan=2>{{ productName }}</th>
+<tr markdown>
+<th>{{ productName }}</th>
 <th>Active Directory</th>
 </tr>
-<tr>
-<th>Системное имя</th>
-<th>Отображаемое название</th>
+<tr markdown>
+<th>Название</th>
 <th>Системное имя</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>Name</td>
-<td>Название</td>
-<td>CN</td>
+<tr markdown>
+<td markdown>**Имя пользователя**</td>
+<td markdown>**sAMAccountName**</td>
 </tr>
-<tr>
-<td>Description</td>
-<td>Описание</td>
-<td>Description</td>
+<tr markdown>
+<td markdown>**Включён**</td>
+<td markdown>**userAccountControl**</td>
 </tr>
-<tr>
-<td>members</td>
-<td>Участники группы</td>
-<td>Member</td>
+<tr markdown>
+<td markdown>**Адрес эл.&nbsp;почты**</td>
+<td markdown>**mail**</td>
 </tr>
-<tr>
-<td>parentGroups</td>
-<td>Входит в группы</td>
-<td>MemberOf</td>
+<tr markdown>
+<td markdown>**SID**</td>
+<td markdown>**objectSid**</td>
 </tr>
-<tr>
-<td>Username</td>
-<td>Имя пользователя</td>
-<td>SamAccountName</td>
+<tr markdown>
+<td markdown>**Версия объекта**</td>
+<td markdown>**uSNChanged**</td>
 </tr>
-<tr>
-<td>IsActive</td>
-<td>Активен (логический атрибут)</td>
-<td>IsEnabled</td>
+<tr markdown>
+<td markdown>**Уникальное имя**</td>
+<td markdown>**distinguishedName**</td>
 </tr>
-<tr>
-<td>Mbox</td>
-<td>Адрес эл.почты</td>
-<td>Mail</td>
+<tr markdown>
+<td markdown>Ф.&nbsp;И.&nbsp;О.</td>
+<td markdown>displayName</td>
 </tr>
-<tr>
-<td>FullName</td>
-<td>Имя</td>
-<td>FullName</td>
+<tr markdown>
+<td markdown>Имя</td>
+<td markdown>givenName</td>
 </tr>
-<tr>
-<td>Title</td>
-<td>Должность</td>
-<td>Title</td>
+<tr markdown>
+<td markdown>Должность</td>
+<td markdown>title</td>
 </tr>
-<tr>
-<td>Department</td>
-<td>Отдел</td>
-<td>Department</td>
+<tr markdown>
+<td markdown>Отдел</td>
+<td markdown>department</td>
 </tr>
-<tr>
-<td>Office</td>
-<td>Офис</td>
-<td>PhysucakDeliveryOfficeName</td>
+<tr markdown>
+<td markdown>Офис</td>
+<td markdown>physicalDeliveryOfficeName</td>
 </tr>
-<tr>
-<td>Skype</td>
-<td>Skype</td>
-<td>Pager</td>
+<tr markdown>
+<td markdown>Skype</td>
+<td markdown>pager</td>
 </tr>
-<tr>
-<td>Manager</td>
-<td>Руководитель</td>
-<td>ManagerID</td>
+<tr markdown>
+<td markdown>Руководитель</td>
+<td markdown>manager</td>
 </tr>
-<tr>
-<td>Phone</td>
-<td>Телефон</td>
-<td>TelephoneNumber, Mobile</td>
+<tr markdown>
+<td markdown>Телефон</td>
+<td markdown>telephoneNumber</td>
 </tr>
-<tr>
-<td>Authentification=LDAP</td>
-<td>Метод проверки подлинности</td>
-<td></td>
+<tr markdown>
+<td markdown>Фото профиля</td>
+<td markdown>thumbnailPhoto</td>
 </tr>
-<tr>
-<td>Picture</td>
-<td>Аватар</td>
-<td></td>
+<tr markdown>
+<td markdown>Язык</td>
+<td markdown>preferredLanguage</td>
 </tr>
 </tbody>
 </table>
