@@ -18,7 +18,7 @@ hide: tags
 
 # Методы System Core API {: #api_system_core }
 
-## Введение
+## Введение {: #api_system_core_intro }
 
 System Core API предоставляет системные RESTful-методы для работы со всеми сущностями в экземпляре **{{ productName }}**. Эти методы могут различаться в разных версиях **{{ productName }}**.
 
@@ -28,7 +28,7 @@ System Core API предоставляет системные RESTful-метод
 
     Вызывать методы System Core API следует, только если вы точно понимаете, что и зачем делаете, иначе вы можете потерять важные данные или настройки.
 
-## Доступ к System Core API
+## Доступ к System Core API {: #api_system_core_access }
 
 - Базовый URL-адрес для запросов к System Core API:
 
@@ -41,7 +41,7 @@ System Core API предоставляет системные RESTful-метод
 - System Core API поддерживает базовую проверку подлинности.
 - Методы System Core API можно вызывать в C#-скриптах (в отличие от методов Web API и Solution API).
 
-## Пример вызова метода System Core API
+## Пример вызова метода System Core API {: #api_system_core_example }
 
 Чтобы вызвать метод System Core API, отправьте HTTP-запрос на адрес метода (указанный в Swagger), например:
 
@@ -54,7 +54,7 @@ System Core API предоставляет системные RESTful-метод
     - В теле запроса (`body`) укажите системное имя шаблона записи (например, `"Car"`).
     - В ответ на запрос ПО отправит ID созданного шаблона записи (например, `"oa.1"`).
 
-## Использование Swagger
+## Использование Swagger {: #api_system_core_swagger }
 
 Swagger предоставляет подробную справку по методам API, включая описания запросов и ответов, а также модели данных с примерами значений.
 
@@ -104,9 +104,9 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 
 </div>
 
-## Описание методов System Core API
+## Описание методов System Core API {: #api_system_core_methods }
 
-### Account – аккаунты
+### Account – аккаунты {: #api_system_core_account_service }
 
 | POST {: .api-method .post } | /Base/AccountService/get_DefaultAccountLanguage |
 | --------------------------- | ---------------------------------------------- |
@@ -252,7 +252,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры**               | Не требуются. |
 | **Ответ**                   | Требования к паролю. |
 
-### Ontology – объект
+### Ontology – объект {: #api_system_core_ontology }
 
 | POST {: .api-method .post } | /Base/OntologyService/GetAxioms |
 | --------------------------- | ------------------------------- |
@@ -350,7 +350,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Идентификатор объекта. |
 | **Ответ** | Статус. |
 
-### AccountGroup – группы аккаунтов
+### AccountGroup – группы аккаунтов {: #api_system_core_account_group }
 
 | POST {: .api-method .post } | /Base/AccountGroupService/ListReferences |
 | --------------------------- | --------------------------------------- |
@@ -430,7 +430,6 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры**               | Идентификатор группы аккаунтов. |
 | **Ответ**                   | Список идентификаторов аккаунтов. |
 
-
 | POST {: .api-method .post } | /Base/AccountGroupService/GetGroups |
 | --- | --- |
 | **Описание** | Получает список идентификаторов групп аккаунтов, которые входят в группу аккаунтов. |
@@ -461,7 +460,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Идентификатор группы. |
 | **Ответ** | Статус. |
 
-### GlobalConfiguration – глобальная конфигурация
+### GlobalConfiguration – глобальная конфигурация {: #api_system_core_global_configuration }
 
 | POST {: .api-method .post } | /Base/GlobalConfigurationService/get_ServerAddress |
 | --- | --- |
@@ -535,7 +534,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Список предпочтительных языков. |
 | **Ответ** | Выбранный язык интерфейса. |
 
-### CommunicationChannel – подключения
+### CommunicationChannel – подключения {: #api_system_core_connections }
 
 | POST {: .api-method .post } | /Base/CommunicationChannelService/Get |
 | --- | --- |
@@ -643,7 +642,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Закодированная часть ссылки на внешнюю форму: <encryptedData> без части `https://<your-host>/Resolve?data=` |
 | **Ответ** | Объект со свойствами внешнюю  формы. |
 
-### Object — записи
+### Object — записи {: #api_system_core_object }
 
 | POST {: .api-method .post } | /TeamNetwork/ObjectService/Create |
 | --- | --- |
@@ -867,9 +866,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Системное имя шаблона записи и идентификатор записи. |
 | **Ответ** | Информация о записи. |
 
-
-
-### ObjectApp — шаблоны записей
+### ObjectApp — шаблоны записей {: #api_system_core_object_app }
 
 | POST {: .api-method .post } | /TeamNetwork/ObjectAppService/List |
 | --- | --- |
@@ -1589,9 +1586,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Идентификатор задачи. |
 | **Ответ** | Идентификатор формы, записи и шаблона записи для задачи. |
 
-
-
-### Document — документы
+### Document — документы {: #api_system_core_document }
 
 | POST {: .api-method .post } | /TeamNetwork/DocumentService/GetDocument |
 | --- | --- |
@@ -1743,7 +1738,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | URI ресурса, логин, пароль. |
 | **Ответ** | Данные. |
 
-### Dataset — таблицы
+### Dataset — таблицы {: #api_system_core_dataset }
 
 | POST {: .api-method .post } | /TeamNetwork/DatasetService/QueryData |
 | --- | --- |
@@ -1775,7 +1770,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | - |
 | **Ответ** | - |
 
-### DatasetExport - Экспорт данных
+### DatasetExport - Экспорт данных {: #api_system_core_dataset_export }
 
 | POST {: .api-method .post } | /TeamNetwork/DatasetExportService/ExportToExcel |
 | --- | --- |
@@ -1783,7 +1778,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Параметры для экспорта. |
 | **Ответ** | Имя и тип. |
 
-### DatasetConfiguration — пользовательская конфигурация таблиц
+### DatasetConfiguration — пользовательская конфигурация таблиц {: #api_system_core_dataset_configuration }
 
 | POST {: .api-method .post } | /TeamNetwork/DatasetConfigurationService/Create |
 | --- | --- |
@@ -1863,7 +1858,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Идентификатор таблицы. |
 | **Ответ** | Логическое значение `true`/`false`. |
 
-### GlobalFunction — скрипты
+### GlobalFunction — скрипты {: #api_system_core_global_function }
 
 | POST {: .api-method .post } | /TeamNetwork/GlobalFunctionService/Create |
 | --- | --- |
@@ -1937,7 +1932,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Идентификатор скрипта. |
 | **Ответ** | Информация о скрипте. |
 
-### ScriptDetails — свойства скриптов
+### ScriptDetails — свойства скриптов {: #api_system_core_script_details }
 
 | POST {: .api-method .post } | /TeamNetwork/ScriptDetailsService/GetSolutionId |
 | --- | --- |
@@ -1975,7 +1970,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | - |
 | **Ответ** | - |
 
-### Template — шаблоны
+### Template — шаблоны {: #api_system_core_template }
 
 | POST {: .api-method .post } | /Solution/TemplateService/List |
 | --- | --- |
@@ -2073,7 +2068,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Фильтр для поиска ссылок. |
 | **Ответ** | Список ссылок на шаблон. |
 
-### SolutionVariable — переменные приложений
+### SolutionVariable — переменные приложений {: #api_system_core_solution_variable }
 
 | POST {: .api-method .post } | /Solution/SolutionVariableService/Create |
 | --- | --- |
@@ -2147,7 +2142,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Системное имя переменной, системное имя приложения и новое значение. |
 | **Ответ** | Новое значение переменной. |
 
-### ProcessApp — шаблоны процессов
+### ProcessApp — шаблоны процессов {: #api_system_core_process_app }
 
 | POST {: .api-method .post } | /Process/ProcessAppService/Get |
 | --- | --- |
@@ -2325,7 +2320,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Идентификатор шаблона процесса. |
 | **Ответ** | Количество собранных заново правил. |
 
-### ProcessObject — экземпляры процессов
+### ProcessObject — экземпляры процессов {: #api_system_core_process_object }
 
 | POST {: .api-method .post } | /Process/ProcessObjectService/CreateToken |
 | --- | --- |
@@ -2507,7 +2502,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Параметры миграции. |
 | **Ответ** | Результаты миграции. |
 
-### Diagram — диаграммы процессов
+### Diagram — диаграммы процессов {: #api_system_core_diagram }
 
 | POST {: .api-method .post } | /Process/DiagramService/Get |
 | --- | --- |
@@ -2719,7 +2714,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Версия диаграммы. |
 | **Ответ** | Статус. |
 
-### DiagramPublishing — публикация диаграмм
+### DiagramPublishing — публикация диаграмм {: #api_system_core_diagram_publishing }
 
 | POST {: .api-method .post } | /Process/DiagramPublishingService/Validate |
 | --- | --- |
@@ -2733,7 +2728,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Идентификаторы шаблона процесса и диаграммы, возможность опубликовать диаграмму как новую версию. |
 | **Ответ** | Список ошибок. |
 
-### ProcessReport — сообщения об ошибках
+### ProcessReport — сообщения об ошибках {: #api_system_core_process_report }
 
 | POST {: .api-method .post } | /Process/ProcessReportService/CreateScriptsReport |
 | --- | --- |
@@ -2807,7 +2802,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | - |
 | **Ответ** | - |
 
-### ConversationConfiguration — конфигурации обсуждений
+### ConversationConfiguration — конфигурации обсуждений {: #api_system_core_conversation_configuration }
 
 | POST {: .api-method .post } | /Conversation/ConversationConfigurationService/Create |
 | --- | --- |

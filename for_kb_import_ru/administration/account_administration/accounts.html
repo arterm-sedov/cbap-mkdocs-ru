@@ -23,9 +23,27 @@
 </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#accounts_required_unique">
+<span class="md-ellipsis">
+      Обязательные атрибуты и уникальность аккаунтов
+    </span>
+</a>
+<nav aria-label="Обязательные атрибуты и уникальность аккаунтов" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#accounts_required_unique_extra">
+<span class="md-ellipsis">
+      Дополнительные требования к атрибутам
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#accounts_view_and_configure">
 <span class="md-ellipsis">
-      Просмотр списка аккаунтов и настройка аккаунта
+      Просмотр списка, создание и настройка аккаунтов
     </span>
 </a>
 </li>
@@ -145,7 +163,58 @@
 <p>Аккаунты подразделяются на 2 типа: обычные пользователи и администраторы.</p>
 <p>Администраторы, в свою очередь, имеют различные <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4662"><strong>системные роли</strong></a>. Максимальным доступом обладают системные администраторы: им доступны все действия в Системе, поскольку для них не выполняются проверки прав доступа.</p>
 <p>Обычные пользователи нетипизированы и равноправны. Доступные им возможности при работе с Системой определяются правами в соответствии с назначенными <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4803"><strong>ролями</strong></a>.</p>
-<h2 class="pageBreakBefore" id="accounts_view_and_configure">Просмотр списка аккаунтов и настройка аккаунта</h2>
+<h2 class="pageBreakBefore" id="accounts_required_unique">Обязательные атрибуты и уникальность аккаунтов</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Обязательные и уникальные атрибуты аккаунта</p>
+<ul>
+<li>Для каждого аккаунта в <strong>Comindware Platform</strong> необходимо задать следующие атрибуты:<ul>
+<li><strong>имя пользователя</strong>;</li>
+<li><strong>адрес эл. почты</strong>.</li>
+</ul>
+</li>
+<li>Значения этих атрибутов <strong>должны быть уникальны</strong> в рамках экземпляра <strong>Comindware Platform</strong>.</li>
+<li>Значения этих атрибутов не должны быть пустыми и не должны иметь значение <code>Null</code>.</li>
+</ul>
+</div>
+<h3 id="accounts_required_unique_extra">Дополнительные требования к атрибутам</h3>
+<p>При создании и настройке аккаунтов различными способами налагаются следующие требования к атрибутам аккаунтов:</p>
+<ul>
+<li>
+<p><strong>Настройка с помощью Comindware Platform</strong> — необходимо задать:</p>
+<ul>
+<li><strong>имя пользователя</strong>;</li>
+<li><strong>адрес эл. почты</strong>;</li>
+<li><strong>пароль</strong>;</li>
+<li><strong>Ф.И. О.</strong>.</li>
+</ul>
+<p>См. «<em><a class="mkdocs_imported_link" href="#accounts_view_and_configure">Просмотр списка, создание и настройка аккаунта</a>»</em>.</p>
+</li>
+<li>
+<p><strong>Настройка через API</strong></p>
+<ul>
+<li>При использовании метода <code>api/public/system/Base/AccountService/Create</code> необходимо задать имя пользователя и адрес эл. почты, при этом ряд атрибутов аккаунта устанавливается автоматически:</li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="nt">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">"Mbox"</span><span class="p">:</span><span class="w"> </span><span class="s2">"address@example.ru"</span><span class="p">,</span></code> <br/><code><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">"Username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example_login"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="c1">// Значение следующих атрибутов</span></code> <br/><code><span class="w">    </span><span class="c1">// устанавливаются по умолчанию</span></code> <br/><code><span class="w">    </span><span class="nt">"isSystemAdministrator"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"isActive"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"isAnonymous"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"authenticationMethod"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Builtin"</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<ul>
+<li>При использовании метода <code>/Base/AccountService/Edit</code> необходимо задать ID аккаунта, имя пользователя и адрес эл. почты:</li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="nt">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">"Id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"account.30"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"Mbox"</span><span class="p">:</span><span class="w"> </span><span class="s2">"address@example.ru"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="err"> </span><span class="w"> </span><span class="err"> </span><span class="w"> </span><span class="nt">"Username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example_login"</span><span class="p">,</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p>См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4862#api_system_core_account">Методы System Core API</a>»</em>.</p>
+</li>
+<li>
+<p><strong>Синхронизация с сервером каталогов</strong> — <strong>на стороне сервера каталогов</strong> необходимо задать значения следующих атрибутов (они не должны быть пустыми и не должны иметь значение <code>Null</code>):</p>
+<ul>
+<li><code>sAMAccountName</code> (Имя пользователя);</li>
+<li><code>mail</code> (Адрес эл. почты);</li>
+<li><code>userAccountControl</code> (Включён);</li>
+<li><code>objectSid</code> (SID);</li>
+<li><code>uSNChanged</code> (Версия объекта);</li>
+<li><code>distinguishedName</code> (Уникальное имя).</li>
+</ul>
+<p>См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4655">Синхронизация с сервером каталогов (Active Directory)</a>»</em>.</p>
+</li>
+</ul>
+<h2 class="pageBreakBefore" id="accounts_view_and_configure">Просмотр списка, создание и настройка аккаунтов</h2>
 <ol class="colored_numbers_list">
 <li>На странице «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4661"><strong>Администрирование</strong></a>» в разделе — «<strong>Администрирование аккаунтов</strong>» выберите пункт «<strong>Аккаунты</strong>» <i class="fa-light fa-address-card">&zwnj;<!--icon--></i>.</li>
 <li>Откроется список аккаунтов.</li>
@@ -265,6 +334,8 @@
 <li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5098">Атрибут типа «Часовой пояс»</a></li>
 <li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4785">Настройка поля атрибута типа «Дата и время» на форме</a></li>
 <li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4668">Глобальная конфигурация</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4862#api_system_core_account">Методы System Core API</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4655">Синхронизация с сервером каталогов (Active Directory)</a></li>
 </ul>
 </div>
 </article>
