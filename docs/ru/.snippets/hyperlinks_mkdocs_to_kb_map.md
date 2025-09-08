@@ -167,9 +167,11 @@
 
 [accounts]: {{ kbArticleURLPrefix }}4653
 
-[accounts_timezone_configure]: {{ kbArticleURLPrefix }}4653#accounts_timezone_configure
+[accounts_required_unique]: {{ kbArticleURLPrefix }}4653#accounts_required_unique
 
 [accounts_link_to_template]: {{ kbArticleURLPrefix }}4653#accounts_link_to_template
+
+[accounts_timezone_configure]: {{ kbArticleURLPrefix }}4653#accounts_timezone_configure
 
 [account_permission_audit]: {{ kbArticleURLPrefix }}4664
 
@@ -178,6 +180,8 @@
 [administration]: {{ kbArticleURLPrefix }}4661
 
 [apps]: {{ kbArticleURLPrefix }}4714
+
+[authentication_authorization_sessions]: {{ kbArticleURLPrefix }}4656
 
 [backup_configure]: {{ kbArticleURLPrefix }}4642
 
@@ -1098,6 +1102,8 @@
 [api_solution]: {{ kbArticleURLPrefix }}4863
 
 [api_system_core]: {{ kbArticleURLPrefix }}4862
+
+[api_system_core_account_service]: {{ kbArticleURLPrefix }}4862#api_system_core_account
 
 [api_system_core_encrypted_navigation_reference]: {{ kbArticleURLPrefix }}4862#api_system_core_encrypted_navigation_reference
 
