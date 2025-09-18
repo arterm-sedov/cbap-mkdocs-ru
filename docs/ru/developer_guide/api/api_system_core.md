@@ -1252,12 +1252,6 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Параметры для редактирования. |
 | **Ответ** | Статус. |
 
-| POST {: .api-method .post } | /TeamNetwork/ObjectAppService/DeleteForm |
-| --- | --- |
-| **Описание** | Удаляет конкретную форму шаблона записи. |
-| **Параметры** | Идентификатор шаблона записи и формы. |
-| **Ответ** | Статус. |
-
 | POST {: .api-method .post } | /TeamNetwork/ObjectAppService/SetDefaultForm |
 | --- | --- |
 | **Описание** | Устанавливает форму по умолчанию. |
