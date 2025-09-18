@@ -8,7 +8,10 @@ tags:
 hide: tags
 ---
 <!-- СТАТЬЯ СКРЫТА ИЗ БЗ И PDF, НО НЕ ИЗ ДОКУМЕНТАЦИИ ДЛЯ ГОСТЕХА, ПРОВЕРИТЬ У КОНСТАНТИНА ЕЙ СОДЕРЖАНИЕ -->
+
 # Обеспечение высокой доступности и отказоустойчивости {{ productName }} {: #availability_fault_tolerance }
+
+{% include-markdown ".snippets/experimental_feature.md" %}
 
 ## Введение
 
