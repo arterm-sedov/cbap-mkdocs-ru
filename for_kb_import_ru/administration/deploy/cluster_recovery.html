@@ -1,0 +1,545 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5135" kb-tags="Ignite,Grafana,Kafka,Loki,OpenSearch,Prometheus,администрирование,архитектура,балансировка нагрузки,восстановление,кластер,кластеризация,мониторинг,отказоустойчивость,развёртывание,резервное копирование,управление кластером" kb-title="Восстановление кластера Comindware Platform">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_recovery_introduction">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+<nav aria-label="Введение" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_recovery_principles">
+<span class="md-ellipsis">
+      Принципы восстановления кластера
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_recovery_complete_cluster_procedure">
+<span class="md-ellipsis">
+      Восстановление всего кластера
+    </span>
+</a>
+<nav aria-label="Восстановление всего кластера" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#1-подготовка-к-восстановлению">
+<span class="md-ellipsis">
+      1. Подготовка к восстановлению
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#2-восстановление-данных">
+<span class="md-ellipsis">
+      2. Восстановление данных
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#3-восстановление-узлов-приложений">
+<span class="md-ellipsis">
+      3. Восстановление узлов приложений
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#4-проверка-восстановления-кластера">
+<span class="md-ellipsis">
+      4. Проверка восстановления кластера
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_recovery_procedures">
+<span class="md-ellipsis">
+      Процедуры восстановления
+    </span>
+</a>
+<nav aria-label="Процедуры восстановления" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_recovery_single_node_procedure">
+<span class="md-ellipsis">
+      Восстановление одного узла
+    </span>
+</a>
+<nav aria-label="Восстановление одного узла" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#1-диагностика-отказа-узла">
+<span class="md-ellipsis">
+      1. Диагностика отказа узла
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#2-восстановление-узла">
+<span class="md-ellipsis">
+      2. Восстановление узла
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#3-синхронизация-с-кластером">
+<span class="md-ellipsis">
+      3. Синхронизация с кластером
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#4-проверка-восстановления">
+<span class="md-ellipsis">
+      4. Проверка восстановления
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_recovery_monitoring">
+<span class="md-ellipsis">
+      Мониторинг и диагностика
+    </span>
+</a>
+<nav aria-label="Мониторинг и диагностика" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_recovery_health_indicators">
+<span class="md-ellipsis">
+      Ключевые индикаторы состояния
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_recovery_diagnosis">
+<span class="md-ellipsis">
+      Диагностика проблем
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_recovery_troubleshooting">
+<span class="md-ellipsis">
+      Устранение неполадок
+    </span>
+</a>
+<nav aria-label="Устранение неполадок" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_recovery_common_issues">
+<span class="md-ellipsis">
+      Частые проблемы при восстановлении
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_recovery_logs">
+<span class="md-ellipsis">
+      Логи для диагностики
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_recovery_diagnostic_tools">
+<span class="md-ellipsis">
+      Инструменты диагностики
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_recovery_recommendations">
+<span class="md-ellipsis">
+      Рекомендации по восстановлению
+    </span>
+</a>
+<nav aria-label="Рекомендации по восстановлению" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_recovery_preparation">
+<span class="md-ellipsis">
+      Подготовка к авариям
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_recovery_architectures">
+<span class="md-ellipsis">
+      Специфика восстановления различных архитектур
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_recovery_anti_patterns">
+<span class="md-ellipsis">
+      Практики, которых следует избегать
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<div class="notice notice-error">
+<p class="admonition-title">Экспериментальная функция</p>
+<p>Представленная здесь функция находится на стадии разработки. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4579#experimental_feature_support">Поддержка экспериментальных функций</a>»</em>.</p>
+</div>
+<h2 id="cluster_recovery_introduction">Введение</h2>
+<p><strong>Comindware Platform</strong> поддерживает кластерные конфигурации, которые обеспечивают высокую доступность, отказоустойчивость и горизонтальное масштабирование.</p>
+<p>Данная статья описывает процедуры восстановления кластера <strong>Comindware Platform</strong> после аварийных ситуаций. Рассматриваются два основных сценария:</p>
+<ol class="colored_numbers_list">
+<li><strong>Отказ одного узла</strong> — восстановление узла путём синхронизации с работоспособными узлами</li>
+<li><strong>Отказ всего кластера</strong> — восстановление кластера из резервной копии</li>
+</ol>
+<h3 id="cluster_recovery_principles">Принципы восстановления кластера</h3>
+<p>Кластерная архитектура <strong>Comindware Platform</strong> обеспечивает восстановление после сбоев благодаря:</p>
+<ul>
+<li><strong>Распределённому хранилищу данных Apache Ignite</strong>: обеспечивает репликацию данных между узлами, высокую доступность и производительность обработки данных</li>
+<li><strong>Распределённой файловой системе (DFS)</strong>: общее хранилище файлов (NFS или S3) обеспечивает синхронизацию данных между всеми узлами</li>
+<li><strong>Шине сообщений Apache Kafka</strong>: обеспечивает межсервисное взаимодействие и обработку событий</li>
+<li><strong>Хранилищу журналов событий OpenSearch (Elasticsearch)</strong>: обеспечивает сбор, индексирование и обработку журналов распределённых событий</li>
+<li><strong>Резервному копированию</strong>: регулярные снимки состояния системы и данных</li>
+<li><strong>Мониторингу состояния</strong>: эндпоинт <code>api/health</code> для контроля работоспособности узлов</li>
+<li><strong>Управлению рабочими процессами</strong>: только один узел выполняет критические фоновые задачи (резервное копирование, обработка процессов)</li>
+</ul>
+<h3 id="cluster_recovery_complete_cluster_procedure">Восстановление всего кластера</h3>
+<p>При полном отказе кластера восстановление выполняется из резервной копии.</p>
+<h4 id="1-подготовка-к-восстановлению">1. Подготовка к восстановлению</h4>
+<p><strong>Проверьте доступность резервных копий:</strong></p>
+<ul>
+<li>Убедитесь в наличии актуальной резервной копии данных</li>
+<li>Проверьте целостность резервных копий</li>
+<li>Подготовьте план восстановления с указанием последовательности действий</li>
+</ul>
+<p><strong>Подготовьте инфраструктуру:</strong></p>
+<ul>
+<li>Убедитесь в работоспособности Apache Ignite, OpenSearch (Elasticsearch) и Apache Kafka</li>
+<li>Проверьте доступность распределённой файловой системы (DFS)</li>
+<li>Подготовьте чистые узлы для восстановления</li>
+</ul>
+<h4 id="2-восстановление-данных">2. Восстановление данных</h4>
+<p><strong>Восстановите данные Apache Ignite:</strong></p>
+<ul>
+<li>Остановите все узлы кластера</li>
+<li>Восстановите данные из резервной копии Apache Ignite</li>
+<li>Запустите узлы Apache Ignite в порядке приоритета</li>
+</ul>
+<p><strong>Восстановите файлы из общего хранилища:</strong></p>
+<ul>
+<li>Восстановите файлы из резервной копии NFS-сервера</li>
+<li>Проверьте целостность восстановленных файлов</li>
+<li>Убедитесь в доступности файлов для всех узлов через NFS-монтирование</li>
+</ul>
+<p><strong>Восстановите индексы OpenSearch (Elasticsearch):</strong></p>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">"localhost:9200/_cluster/health?pretty"</span></code> <br/></pre></code></div>
+<ul>
+<li>Восстановите индексы из резервной копии</li>
+<li>Проверьте целостность индексов</li>
+<li>Протестируйте поисковые запросы</li>
+</ul>
+<h4 id="3-восстановление-узлов-приложений">3. Восстановление узлов приложений</h4>
+<p><strong>Восстановите конфигурацию узлов:</strong></p>
+<ul>
+<li>Восстановите конфигурационные файлы из резервной копии</li>
+<li>Проверьте настройки подключения к кластерам</li>
+<li>Обновите параметры подключения при необходимости</li>
+</ul>
+<p><strong>Запустите узлы поочерёдно:</strong></p>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>start<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
+<ul>
+<li>Запустите узлы в порядке приоритета (сначала серверные, затем клиентские)</li>
+<li>Проверьте подключение каждого узла к кластерам</li>
+<li>Мониторьте процесс синхронизации данных</li>
+<li>Дождитесь сообщения об окончании ребалансировки: <code>INFO Skipping rebalancing (nothing scheduled)</code></li>
+</ul>
+<h4 id="4-проверка-восстановления-кластера">4. Проверка восстановления кластера</h4>
+<p><strong>Проверьте все эндпоинты <code>api/health</code>:</strong></p>
+<ul>
+<li>Убедитесь, что все узлы возвращают статус <code>200</code></li>
+<li>Проверьте время отклика всех узлов</li>
+<li>Протестируйте балансировку нагрузки</li>
+</ul>
+<p><strong>Протестируйте функциональность:</strong></p>
+<ul>
+<li>Протестируйте все основные функции системы</li>
+<li>Проверьте работу интеграций</li>
+<li>Мониторьте производительность всех компонентов</li>
+</ul>
+<p><strong>Проверьте синхронизацию данных:</strong></p>
+<ul>
+<li>Убедитесь в синхронизации данных между узлами</li>
+<li>Проверьте репликацию в Apache Ignite</li>
+<li>Протестируйте операции чтения/записи</li>
+</ul>
+<p><strong>Проверьте конфигурацию рабочих процессов:</strong></p>
+<ul>
+<li>Убедитесь, что только один узел имеет включённые службы <code>BackupSessionsQueue</code> и <code>ProcessEngineQueueProcessing</code></li>
+<li>Проверьте файл <code>Workers.config</code> на всех узлах</li>
+<li>Убедитесь в правильности <code>ConfigurationId</code> на всех узлах</li>
+</ul>
+<h2 class="pageBreakBefore" id="cluster_recovery_procedures">Процедуры восстановления</h2>
+<h3 id="cluster_recovery_single_node_procedure">Восстановление одного узла</h3>
+<p>При отказе одного узла кластера выполните следующие действия:</p>
+<div class="notice notice-info">
+<p class="admonition-title">Типы узлов</p>
+<p><strong>Серверные узлы</strong> — выполняют полную функциональность приложения и участвуют в кластере Apache Ignite</p>
+<p><strong>Клиентские узлы</strong> — работают в режиме тонкого клиента и подключаются к серверным узлам</p>
+<p><strong>Узлы с рабочими процессами</strong> — только один узел должен выполнять критические фоновые задачи</p>
+</div>
+<h4 id="1-диагностика-отказа-узла">1. Диагностика отказа узла</h4>
+<p><strong>Проверьте состояние узла:</strong></p>
+<ul>
+<li>Используйте эндпоинт <code>api/health</code> для проверки состояния узла</li>
+<li>Анализируйте логи состояния экземпляра (<code>heartbeat_*.log</code>)</li>
+<li>Мониторьте логи Apache Ignite (<code>igniteClient_*.log</code>)</li>
+</ul>
+<p><strong>Определите причину отказа:</strong></p>
+<ul>
+<li>Проверьте состояние файловой системы</li>
+<li>Проверьте доступность сетевых ресурсов</li>
+<li>Анализируйте системные логи на предмет ошибок</li>
+</ul>
+<h4 id="2-восстановление-узла">2. Восстановление узла</h4>
+<p><strong>Остановите проблемный узел:</strong></p>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>stop<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
+<p><strong>Восстановите узел:</strong></p>
+<ul>
+<li>Исправьте выявленные проблемы</li>
+<li>При необходимости восстановите из резервной копии</li>
+<li>Проверьте конфигурацию узла</li>
+</ul>
+<p><strong>Запустите узел:</strong></p>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>start<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
+<h4 id="3-синхронизация-с-кластером">3. Синхронизация с кластером</h4>
+<p><strong>Проверьте подключение к Apache Ignite:</strong></p>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>/usr/share/ignite/bin/control.sh<span class="w"> </span>--baseline</code> <br/></pre></code></div>
+<p><strong>Дождитесь синхронизации данных:</strong></p>
+<ul>
+<li>Дождитесь сообщения: <code>INFO Skipping rebalancing (nothing scheduled)</code></li>
+<li>Проверьте топологию кластера</li>
+<li>Протестируйте операции чтения/записи</li>
+</ul>
+<p><strong>Управление активацией кластера:</strong></p>
+<ul>
+<li>При восстановлении полного кластера создайте файл <code>hold.lock</code> в директории базы данных</li>
+<li>Дождитесь завершения ребалансировки кластера</li>
+<li>Удалите файл <code>hold.lock</code> для активации кластера</li>
+</ul>
+<h4 id="4-проверка-восстановления">4. Проверка восстановления</h4>
+<p><strong>Мониторьте эндпоинт <code>api/health</code>:</strong></p>
+<ul>
+<li>Убедитесь, что эндпоинт возвращает статус <code>200</code></li>
+<li>Проверьте время отклика (не должно превышать 5 секунд)</li>
+</ul>
+<p><strong>Проверьте синхронизацию данных:</strong></p>
+<ul>
+<li>Анализируйте логи на предмет ошибок</li>
+<li>Проверьте синхронизацию данных с другими узлами</li>
+<li>Протестируйте основные функции системы</li>
+</ul>
+<p><strong>Проверьте конфигурацию рабочих процессов:</strong></p>
+<ul>
+<li>Убедитесь, что конфигурация рабочих процессов соответствует роли узла</li>
+<li>Проверьте, что критически важные службы активны только на одном узле</li>
+<li>Убедитесь в правильности <code>ConfigurationId</code></li>
+</ul>
+<h2 class="pageBreakBefore" id="cluster_recovery_monitoring">Мониторинг и диагностика</h2>
+<h3 id="cluster_recovery_health_indicators">Ключевые индикаторы состояния</h3>
+<p><strong>Эндпоинт <code>api/health</code>:</strong></p>
+<ul>
+<li>Статус <code>200 OK</code> — узел работает корректно</li>
+<li>Время отклика не должно превышать 5 секунд</li>
+<li>Проверяйте регулярно, например каждые 30 секунд</li>
+</ul>
+<p><strong>Apache Ignite:</strong></p>
+<ul>
+<li>Проверяйте топологию кластера</li>
+<li>Отслеживайте состояние репликации данных</li>
+<li>Контролируйте производительность операций чтения и записи</li>
+</ul>
+<p><strong>OpenSearch (Elasticsearch):</strong></p>
+<ul>
+<li>Используйте эндпоинт <code>/_cluster/health</code> для проверки состояния</li>
+<li>Проверяйте состояние индексов и их репликации</li>
+<li>Отслеживайте производительность поисковых запросов</li>
+</ul>
+<p><strong>Apache Kafka:</strong></p>
+<ul>
+<li>Контролируйте состояние топиков и партиций</li>
+<li>Отслеживайте задержки обработки сообщений</li>
+<li>Проверяйте размер очередей сообщений</li>
+</ul>
+<h3 id="cluster_recovery_diagnosis">Диагностика проблем</h3>
+<p><strong>Проверьте состояние узлов:</strong></p>
+<ul>
+<li>Используйте эндпоинт <code>api/health</code> для проверки состояния узлов приложений</li>
+<li>Анализируйте логи состояния экземпляра (<code>heartbeat_*.log</code>)</li>
+<li>Мониторьте логи Apache Ignite (<code>igniteClient_*.log</code>)</li>
+</ul>
+<p><strong>Проверьте кластерные компоненты:</strong></p>
+<ul>
+<li>Проверьте топологию кластера Apache Ignite через инструменты управления</li>
+<li>Используйте эндпоинт <code>/_cluster/health</code> для проверки состояния OpenSearch (Elasticsearch)</li>
+<li>Контролируйте состояние топиков и партиций Apache Kafka</li>
+</ul>
+<p><strong>Анализируйте логи:</strong></p>
+<ul>
+<li>Ищите критические ошибки и предупреждения</li>
+<li>Проверьте сообщения о ребалансировке кластера</li>
+<li>Мониторьте производительность операций</li>
+</ul>
+<h2 class="pageBreakBefore" id="cluster_recovery_troubleshooting">Устранение неполадок</h2>
+<h3 id="cluster_recovery_common_issues">Частые проблемы при восстановлении</h3>
+<p><strong>Узел не подключается к кластеру Apache Ignite:</strong></p>
+<ul>
+<li>Проверьте сетевое подключение между узлами</li>
+<li>Убедитесь в правильности конфигурации Apache Ignite</li>
+<li>Проверьте файрвол и сетевые настройки</li>
+</ul>
+<p><strong>Ошибки синхронизации данных:</strong></p>
+<ul>
+<li>Проверьте доступность NFS-сервера и монтирование общих директорий</li>
+<li>Убедитесь в правильности прав доступа к файлам на NFS-сервере</li>
+<li>Проверьте состояние дискового пространства на NFS-сервере</li>
+<li>Проверьте конфигурацию монтирования в <code>/etc/fstab</code></li>
+</ul>
+<p><strong>Проблемы с балансировщиком нагрузки:</strong></p>
+<ul>
+<li>Проверьте конфигурацию балансировщика</li>
+<li>Убедитесь в доступности эндпоинта <code>api/health</code></li>
+<li>Проверьте настройки проверки состояния узлов</li>
+</ul>
+<p><strong>Проблемы с NFS-монтированием:</strong></p>
+<ul>
+<li>Проверьте доступность NFS-сервера</li>
+<li>Убедитесь в правильности настроек в <code>/etc/fstab</code></li>
+<li>Проверьте права доступа к общим директориям</li>
+<li>Убедитесь в корректности монтирования директорий приложения</li>
+</ul>
+<h3 id="cluster_recovery_logs">Логи для диагностики</h3>
+<p><strong>Основные логи Comindware Platform:</strong></p>
+<ul>
+<li><code>heartbeat_*.log</code> — состояние экземпляра и процесс запуска</li>
+<li><code>igniteClient_*.log</code> — подключение к Apache Ignite и ребалансировка кластера</li>
+<li><code>application.log</code> — общие ошибки приложения</li>
+<li><code>Workers.config</code> — конфигурация рабочих процессов узла</li>
+</ul>
+<p><strong>Логи инфраструктуры:</strong></p>
+<ul>
+<li>Логи Apache Ignite — состояние кластера данных</li>
+<li>Логи OpenSearch (Elasticsearch) — состояние поискового кластера</li>
+<li>Логи Apache Kafka — состояние очередей сообщений</li>
+</ul>
+<h3 id="cluster_recovery_diagnostic_tools">Инструменты диагностики</h3>
+<p><strong>Проверка состояния узлов:</strong></p>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">"http://&lt;node-ip&gt;/api/health"</span></code> <br/></pre></code></div>
+<p><strong>Проверка Apache Ignite:</strong></p>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>/usr/share/ignite/bin/control.sh<span class="w"> </span>--baseline</code> <br/></pre></code></div>
+<p><strong>Проверка OpenSearch (Elasticsearch):</strong></p>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">"localhost:9200/_cluster/health?pretty"</span></code> <br/></pre></code></div>
+<p><strong>Проверка Apache Kafka:</strong></p>
+<div class="highlight"><code><pre><span></span><code>kafka-topics.sh<span class="w"> </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span>--list</code> <br/></pre></code></div>
+<h2 class="pageBreakBefore" id="cluster_recovery_recommendations">Рекомендации по восстановлению</h2>
+<h3 id="cluster_recovery_preparation">Подготовка к авариям</h3>
+<p><strong>Создайте план восстановления:</strong></p>
+<ul>
+<li>Документируйте процедуры восстановления для каждого сценария</li>
+<li>Определите роли и ответственность команды</li>
+<li>Подготовьте контактную информацию и процедуры эскалации</li>
+</ul>
+<p><strong>Регулярно тестируйте восстановление:</strong></p>
+<ul>
+<li>Протестируйте восстановление одного узла в тестовой среде</li>
+<li>Протестируйте полное восстановление кластера из резервной копии</li>
+<li>Проверяйте актуальность резервных копий</li>
+</ul>
+<p><strong>Настройте мониторинг:</strong></p>
+<ul>
+<li>Настройте автоматические уведомления о критических событиях</li>
+<li>Регулярно проверяйте состояние всех компонентов</li>
+<li>Ведите журнал инцидентов и их разрешения</li>
+</ul>
+<h3 id="cluster_recovery_architectures">Специфика восстановления различных архитектур</h3>
+<p><strong>Кластер из толстых узлов:</strong></p>
+<ul>
+<li>Все узлы имеют полную функциональность</li>
+<li>Восстановление может выполняться в любом порядке</li>
+<li>Убедитесь в правильности конфигурации рабочих процессов</li>
+</ul>
+<p><strong>Кластер с разноролевыми узлами:</strong></p>
+<ul>
+<li>Восстанавливайте серверные узлы перед клиентскими</li>
+<li>Проверьте конфигурацию тонких клиентов</li>
+<li>Убедитесь в доступности серверных узлов для клиентских</li>
+</ul>
+<p><strong>Кластер с дополнительными узлами Apache Ignite:</strong></p>
+<ul>
+<li>Восстанавливайте узлы Apache Ignite перед узлами приложений</li>
+<li>Проверьте топологию кластера Apache Ignite</li>
+<li>Убедитесь в правильности конфигурации портов</li>
+</ul>
+<h3 id="cluster_recovery_anti_patterns">Практики, которых следует избегать</h3>
+<ul>
+<li><strong>Не игнорируйте резервное копирование</strong>: нерегулярное или неправильное резервное копирование данных может осложнить восстановление системы после сбоя.</li>
+<li><strong>Не пропускайте тестирование восстановления</strong>: невыполнение регулярного тестирования процедур восстановления может привести к неготовности к авариям.</li>
+<li><strong>Не восстанавливайте несколько узлов одновременно</strong>: одновременное восстановление нескольких узлов может привести к конфликтам данных.</li>
+<li><strong>Не игнорируйте проверки целостности</strong>: всегда проверяйте целостность данных после восстановления.</li>
+<li><strong>Не нарушайте конфигурацию рабочих процессов</strong>: только один узел должен выполнять критические фоновые задачи.</li>
+</ul>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622">Установка, запуск, инициализация и остановка ПО</a></li>
+<li><a class="autorefs autorefs-internal mkdocs_imported_link" href="cluster_upgrade.html#cluster_upgrade">Обновление кластера Comindware Platform</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4659">Системные требования Comindware Platform</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642">Резервное копирование. Настройка и запуск, просмотр журнала сеансов</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

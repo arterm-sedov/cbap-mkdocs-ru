@@ -1,0 +1,79 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="" kb-tags="" kb-title="">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Кластер развёрнут на трёх узлах со следующими ролями:
+<code>10.0.0.10</code> - основной веб сервер
+<code>10.0.0.11</code> - основной сервер интеграций
+<code>10.0.0.12</code> - резервный сервер/сервер резервного копирования</p>
+<p>Основная балансировка выполняется на прокси-сервере, установленном выше по сети, либо на DNS, в процессе обновления изменения в конфигурации балансировщика не производятся.</p>
+<p>Последовательность обновления серверов:
+- обновление резервного сервера <code>10.0.0.12</code>
+- перенаправление интеграционного трафика на резервный сервер
+- обновление сервера интеграций <code>10.0.0.11</code>
+- восстановление трафика интеграций на <code>10.0.0.11</code>
+- перенаправление пользовательского трафика на </p>
+<ol class="colored_numbers_list" start="0">
+<li>СОЗДАТЬ РЕЗЕРВНУЮ КОПИЮ! Или средствами Приложения, или системными.</li>
+<li>
+<p>Загрузить в директорию для дистрибутивов на общем СХД дистрибутив версии Приложения
+<div class="highlight"><code><pre><span></span><code>wget<span class="w"> </span>--user<span class="w"> </span>&lt;cmw-devops&gt;<span class="w"> </span>--ask-password<span class="w"> </span>-P<span class="w"> </span>/&lt;path/to/shared/folder&gt;/<span class="w"> </span>https://teamcity.comindware.com/repository/download/&lt;path/to/distr&gt;/5.0-&lt;distr&gt;-&lt;version&gt;.&lt;os&gt;.tar.gz</code> <br/></pre></code></div></p>
+</li>
+<li>
+<p>Перейти в директорию для дистрибутивов и распаковать загруженный архив с версией:
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/&lt;path/to/shared/folder&gt;/</code> <br/><code>tar<span class="w"> </span>-xf<span class="w"> </span><span class="m">5</span>.0-&lt;distr&gt;-&lt;version&gt;.&lt;os&gt;.tar.gz</code> <br/></pre></code></div></p>
+</li>
+<li>
+<p>На каждом узле перейти в директорию со скриптами версии, запустить установку версии:
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/&lt;path/to/shared/folder&gt;/CMW_&lt;os&gt;_&lt;version&gt;/scripts</code> <br/><code>bash<span class="w"> </span>version_install.sh</code> <br/><code>bash<span class="w"> </span>version_list.sh</code> <br/><code>bash<span class="w"> </span>instance_list.sh</code> <br/></pre></code></div></p>
+</li>
+<li>
+<p>На каждом узле проверить, и, при необходимости отредактировать конфигурационный файл Приложения:
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code> <br/></pre></code></div></p>
+</li>
+</ol>
+<p>с версии 5.0.23654.0 упразднены директивы
+<div class="highlight"><code><pre><span></span><code>isContainerEnvironment:</code> <br/><code>clusterNodes:</code> <br/></pre></code></div>
+и добавлены директивы
+<div class="highlight"><code><pre><span></span><code># Ожидает активации кластера перед запуском</code> <br/><code>db.waitForClusterActivation: true</code> <br/><code># Ожидает наличие файла перед запуском</code> <br/><code>db.waitForFileActivation: /var/www/.cmw_environment/&lt;instanceName&gt;</code> <br/></pre></code></div>
+позже они тоже упразднены и добавлены
+<div class="highlight"><code><pre><span></span><code># Не загружает платформу пока существует файл db.workDir/hold.lock</code> <br/><code>db.holdLock: true</code> <br/></pre></code></div>
+5. На резервном узле остановить экземпляр и сервисы, запустить скрипт обновления версии экземпляра
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>stop<span class="w"> </span>apigateway&lt;instanceName&gt;<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>comindware&lt;instanceName&gt;<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>adapterhost&lt;instanceName&gt;</code> <br/><code></code> <br/><code>bash<span class="w"> </span>instance_upgrade.sh<span class="w"> </span>-n<span class="o">=</span>&lt;instanceName&gt;<span class="w"> </span>-vp<span class="o">=</span>/var/www/.cmw_version/&lt;version&gt;</code> <br/></pre></code></div></p>
+<p>После обновления запустится экземпляр Приложения
+Проверить статус сервисов
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>status<span class="w"> </span>apigateway&lt;instanceName&gt;<span class="w"> </span>comindware&lt;instanceName&gt;<span class="w"> </span>adapterhost&lt;instanceName&gt;</code> <br/></pre></code></div>
+Открыть вывод журнала состояния экземпляра
+<div class="highlight"><code><pre><span></span><code>tail<span class="w"> </span>-f<span class="w"> </span>-n<span class="w"> </span><span class="m">50</span><span class="w"> </span>/var/log/comindware/&lt;instanceName&gt;/heartbeat_&lt;today&gt;.log</code> <br/></pre></code></div></p>
+<p>Выполнить запрос в узел Приложения через веб-браузер</p>
+<p>дождаться  в выводе лога сообщения об ожидании удаления файла <code>db.workDir/hold.lock</code></p>
+<p>переключиться на вывод лога <code>igniteClient</code>
+<div class="highlight"><code><pre><span></span><code>tail<span class="w"> </span>-f<span class="w"> </span>-n<span class="w"> </span><span class="m">50</span><span class="w"> </span>/var/log/comindware/&lt;instanceName&gt;/igniteClient_&lt;today&gt;.log</code> <br/></pre></code></div></p>
+<p>Дождаться сообщения об окончании ребалансировки кластера 
+<div class="highlight"><code><pre><span></span><code>... INFO      Skipping rebalancing (nothing scheduled) ...</code> <br/></pre></code></div></p>
+<p>После чего удалить из директории базы данных файл <code>hold.lock</code> и снова открыть на вывод журнал состояния экземпляра
+<div class="highlight"><code><pre><span></span><code>rm<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/Database/hold.lock</code> <br/><code></code> <br/><code>tail<span class="w"> </span>-f<span class="w"> </span>-n<span class="w"> </span><span class="m">50</span><span class="w"> </span>/var/log/comindware/&lt;instanceName&gt;/heartbeat_&lt;today&gt;.log</code> <br/></pre></code></div></p>
+<p>Дождаться загрузки страницы входа в веб-браузере, выполнить вход в систему</p>
+<p>Убедиться в работоспособности узла</p>
+<ol class="colored_numbers_list" start="6">
+<li>На интеграционном и пользовательском узлах перед выполнением обновления следует изменить конфигурацию подключения Nginx.
+<div class="highlight"><code><pre><span></span><code><span class="c1">## Deb</span></code> <br/><code>nano<span class="w"> </span>/etc/nginx/sites-enabled/comindware&lt;instanceName&gt;</code> <br/><code><span class="c1">## RH</span></code> <br/><code>nano<span class="w"> </span>/etc/nginx/conf.d/comindware&lt;instanceName&gt;.conf</code> <br/></pre></code></div></li>
+</ol>
+<p>В блоке  <code>location /async</code> и <code>location /</code>
+изменить правило проксирования - передавать поступающие запросы на соседний работающий узел (желательно необновлённый)
+7. выполнить последоватьельность из П.5 
+По окончании обновления узла - восстановить конфигурацию подключения</p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

@@ -87,13 +87,6 @@
     </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#cluster_upgrade_data_infrastructure">
-<span class="md-ellipsis">
-      Инфраструктура данных
-    </span>
-</a>
-</li>
 </ul>
 </nav>
 </li>
@@ -226,16 +219,16 @@
 <h3 id="cluster_upgrade_verification">Проверка после обновления</h3>
 <ul>
 <li>Дождитесь сообщения об окончании ребалансировки кластера.</li>
-<li>Найдите в журналах балансировщика сообщение <code>INFO Skipping rebalancing (nothing scheduled)</code>.</li>
+<li>Найдите в журнале <code>igniteClent*.log</code> сообщение <code>INFO Skipping rebalancing (nothing scheduled)</code>.</li>
 <li>Проверьте результирующую топологию Apache Ignite.</li>
 </ul>
 <h2 class="pageBreakBefore" id="cluster_upgrade_architecture">Архитектура кластера</h2>
 <p>Рассмотрим состав и конфигурацию кластера <strong>Comindware Platform</strong> из четырёх узлов, который обслуживает пользователей и интеграцию с внешними системами:</p>
 <ul>
-<li><strong>PLATFORM-node0</strong> (<code>XX.XX.101.10</code>) — основной узел пользовательского трафика. 40% — пользовательский трафик, 10% — интеграционный.</li>
-<li><strong>PLATFORM-node1</strong> (<code>XX.XX.101.11</code>) — узел мониторинга и поиска. 30% — пользовательский трафик, 20% — интеграционный.</li>
-<li><strong>PLATFORM-node2</strong> (<code>XX.XX.101.12</code>) — узел поиска и обработки данных. 20% — пользовательский трафик, 30% — интеграционный.</li>
-<li><strong>PLATFORM-node3</strong> (<code>XX.XX.101.13</code>) — основной узел трафика интеграций. 10% — пользовательский трафик, 40% — интеграционный.</li>
+<li><strong>cmw-node0</strong> (<code>XX.XX.101.10</code>) — основной узел пользовательского трафика. 40% — пользовательский трафик, 10% — интеграционный.</li>
+<li><strong>cmw-node1</strong> (<code>XX.XX.101.11</code>) — узел мониторинга и поиска. 30% — пользовательский трафик, 20% — интеграционный.</li>
+<li><strong>cmw-node2</strong> (<code>XX.XX.101.12</code>) — узел поиска и обработки данных. 20% — пользовательский трафик, 30% — интеграционный.</li>
+<li><strong>cmw-node3</strong> (<code>XX.XX.101.13</code>) — основной узел трафика интеграций. 10% — пользовательский трафик, 40% — интеграционный.</li>
 </ul>
 <figure class="screenshot_with_caption">
 <p><img alt="Пример конфигурации кластера" src="/platform/v5.0/administration/deploy/img/cluster_upgrade_deploy_configuration.svg"/><figcaption class="caption">Пример конфигурации кластера</figcaption></p>
@@ -304,64 +297,67 @@
 </tr>
 </tbody>
 </table>
-<h3 id="cluster_upgrade_data_infrastructure">Инфраструктура данных</h3>
-<ul>
-<li><strong>Распределённое хранилище данных Apache Ignite</strong><ul>
-<li>Обеспечивает репликацию данных между узлами, высокую доступность и производительность обработки данных.</li>
-</ul>
-</li>
-<li><strong>Шина сообщений Apache Kafka</strong>
-    Обеспечивает межсервисное взаимодействие и обработку событий.</li>
-<li><strong>Хранилище журналов событий OpenSearch (Elasticsearch)</strong><ul>
-<li>Обеспечивает сбор, индексирование и обработку журналов распределённых событий</li>
-</ul>
-</li>
-<li><strong>Распределённая файловая система (DFS)</strong><ul>
-<li>Общее хранилище файлов может быть реализовано на NFS  или S3.</li>
-<li>Обеспечивает хранение загружаемых пользовательских файлов и других бинарных данных.</li>
-</ul>
-</li>
-</ul>
 <h2 class="pageBreakBefore" id="cluster_upgrade_zero_downtime_strategy">Пример обновления кластера из четырёх узлов без простоя</h2>
 <p>Рассмотрим пример обновления кластера Comindware Platform из четырёх узлов без прерывания работы пользователей и интеграций.</p>
 <h3 id="cluster_upgrade_step1">Этап 1. Снятие трафика с обновляемого узла</h3>
-<p>Перенаправим трафик с узла <code>PLATFORM-node0</code> на другие узлы.</p>
+<p>Перенаправим трафик с узла <code>cmw-node0</code> на другие узлы.</p>
 <p><strong>Цель</strong>: вывести трафик с узла, который будет обновляться.</p>
 <ol class="colored_numbers_list">
 <li>Удостоверьтесь, что балансировщик верно настроен и при отключении узла трафик будет распределен на остальные узлы.</li>
-<li>Уберите узел <code>PLATFORM-node0</code> из списка узлов для балансировки нагрузки.</li>
+<li>Уберите узел <code>cmw-node0</code> из списка узлов для балансировки нагрузки.</li>
 <li>
 <p>Проверьте корректность ребалансировки нагрузки посредством инструментов мониторинга:</p>
 <ul>
 <li>Убедитесь, что все запросы обрабатывают оставшиеся узлы.</li>
-<li>Проверьте, что <code>PLATFORM-node0</code> не получает новый трафик.</li>
+<li>Проверьте, что <code>cmw-node0</code> не получает новый трафик.</li>
 <li>Проконтролируйте производительность остальных узлов под увеличенной нагрузкой.</li>
 </ul>
 </li>
 </ol>
 <h3 id="cluster_upgrade_step2">Этап 2. Обновление одного узла</h3>
-<p>Обновим ПО на узле <code>PLATFORM-node0</code>.</p>
+<p>Обновим ПО на узле <code>cmw-node0</code>.</p>
 <p><strong>Цель</strong>: обновить выведенный из эксплуатации узел без влияния на работу системы.</p>
 <ol class="colored_numbers_list">
-<li>Остановите на узле <code>PLATFORM-node0</code> сервисы, затрагиваемые обновлением.</li>
-<li>Выполните обновление ПО.</li>
-<li>Настройте конфигурацию обновлённого ПО.</li>
-<li>Запустите сервисы после обновления.</li>
 <li>
-<p>Проверьте работоспособность после обновления посредством инструментов мониторинга:</p>
+<p>Скопируйте и распакуйте дистрибутив на общее хранилище и выдайте права на исполнение скриптов. Эту же общую директорию используйте для обновления последующих узлов.</p>
+<div class="highlight"><code><pre><span></span><code><span class="c1"># Пример: общая директория /mnt/cmw_dist на всех узлах</span></code> <br/><code>cp<span class="w"> </span>/path/to/X.X-release-ru-&lt;versionNumber&gt;.&lt;osname&gt;.tar.gz<span class="w"> </span>/mnt/cmw_dist/</code> <br/><code><span class="nb">cd</span><span class="w"> </span>/mnt/cmw_dist</code> <br/><code>tar<span class="w"> </span>-xf<span class="w"> </span>X.X-release-ru-&lt;versionNumber&gt;.&lt;osname&gt;.tar.gz</code> <br/><code>chmod<span class="w"> </span>+x<span class="w"> </span>/mnt/cmw_dist/version_install.sh<span class="w"> </span>/mnt/cmw_dist/instance_upgrade.sh</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Установите версию (подготовка версии на узле):</p>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>/mnt/cmw_dist/version_install.sh</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Остановите на узле <code>cmw-node0</code> сервисы, затрагиваемые обновлением:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span><span class="s2">"cmw*"</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Выполните обновление экземпляра ПО (укажите имя экземпляра и путь к установленной версии):</p>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>/mnt/cmw_dist/instance_upgrade.sh<span class="w"> </span>-n<span class="o">=</span>instancename<span class="w"> </span>-vp<span class="o">=</span>/var/www/.cmw_version/5.0.XXXXX.0</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Настройте конфигурацию обновлённого ПО (при необходимости) и запустите сервисы:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span><span class="s2">"cmw*"</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Проверьте работоспособность после обновления посредством инструментов мониторинга и прикладных проверок:</p>
 <ul>
-<li>Убедитесь, что эндпоинт <code>api/health</code> на <code>PLATFORM-node0</code> выдаёт статус <code>200</code>.</li>
+<li>Убедитесь, что эндпоинт <code>api/health</code> на <code>cmw-node0</code> выдаёт статус <code>200</code>.</li>
 <li>Проверьте подключение к кластеру Apache Ignite.</li>
+<li>Проверьте корректное завершение ребалансировки.</li>
+<li>Войдите в систему, откройте несколько списков и карточек объектов.</li>
+<li>Проверьте работоспособность Apache Kafka: открытие диаграмм процессов, чатов/обсуждений, списка адаптеров и каналов связей.</li>
+<li>Проверьте OpenSearch (Elasticsearch): историю изменений объектов и процессов.</li>
+<li>Проверьте работу с файлами: загрузку и скачивание.</li>
 <li>Проконтролируйте синхронизацию данных с другими узлами.</li>
 <li>Проанализируйте журналы на предмет наличия ошибок.</li>
 </ul>
 </li>
 <li>
-<p>Балансировщик автоматически включит обновлённый узел в кластер, когда обнаружит статус <code>200</code> на эндпоинте <code>api/health</code> на <code>PLATFORM-node0</code>.</p>
+<p>Балансировщик автоматически включит обновлённый узел в кластер, когда обнаружит статус <code>200</code> на эндпоинте <code>api/health</code> на <code>cmw-node0</code>.</p>
 </li>
 </ol>
 <h3 id="cluster_upgrade_step3">Этап 3. Обновление остальных узлов</h3>
-<p>Аналогично обновлению <code>PLATFORM-node0</code> обновим ПО на узлах <code>PLATFORM-node1</code>, <code>PLATFORM-node2</code> и <code>PLATFORM-node3</code>.</p>
+<p>Аналогично обновлению <code>cmw-node0</code> обновим ПО на узлах <code>cmw-node1</code>, <code>cmw-node2</code> и <code>cmw-node3</code>.</p>
 <p><strong>Цель</strong>: обновить оставшиеся узлы кластера без влияния на работу системы.</p>
 <ol class="colored_numbers_list">
 <li>Выведите обновляемый узел из состава кластера.</li>
@@ -381,22 +377,31 @@
 <li>Проверяйте регулярно, например каждые 30 секунд.</li>
 </ul>
 </li>
-<li><strong>Apache Ignite</strong><ul>
+<li><strong>Распределённое хранилище данных Apache Ignite</strong><ul>
+<li>Обеспечивает репликацию данных между узлами, высокую доступность и производительность обработки данных.</li>
 <li>Проверяйте топологию кластера.</li>
 <li>Отслеживайте состояние репликации данных.</li>
 <li>Контролируйте производительность операций чтения и записи.</li>
 </ul>
 </li>
-<li><strong>{{ openSearchVariatns }}</strong><ul>
+<li><strong>Шина сообщений Apache Kafka</strong>
+    Обеспечивает межсервисное взаимодействие.<ul>
+<li>Контролируйте состояние топиков и партиций.</li>
+<li>Отслеживайте задержки обработки сообщений.</li>
+<li>Проверяйте размер очередей сообщений.</li>
+</ul>
+</li>
+<li><strong>Хранилище журналов событий OpenSearch (Elasticsearch)</strong><ul>
+<li>Обеспечивает сбор, индексирование и обработку журналов распределённых событий</li>
 <li>Контролируйте состояние с помощью эндпоинта <code>/_cluster/health</code>.</li>
 <li>Проверяйте состояние индексов и их репликации.</li>
 <li>Отслеживайте производительность обработки поисковых запросов.</li>
 </ul>
 </li>
-<li><strong>Apache Kafka</strong><ul>
-<li>Контролируйте состояние топиков и партиций.</li>
-<li>Отслеживайте задержки обработки сообщений.</li>
-<li>Проверяйте размер очередей сообщений.</li>
+<li><strong>Распределённая файловая система (DFS)</strong><ul>
+<li>Общее хранилище файлов может быть реализовано на NFS  или S3.</li>
+<li>Обеспечивает хранение загружаемых пользовательских файлов и других бинарных данных.</li>
+<li>Контролируйте доступность ресурсов, задержки, пропускную способность, свободное место и квоты.</li>
 </ul>
 </li>
 </ul>
