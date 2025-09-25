@@ -74,16 +74,16 @@
 <nav aria-label="Архитектура кластера" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#cluster_upgrade_platform_components">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_upgrade_load_balancing">
 <span class="md-ellipsis">
-      Компоненты узлов Comindware Platform
+      Распределение нагрузки
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#cluster_upgrade_load_balancing">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_upgrade_platform_components">
 <span class="md-ellipsis">
-      Распределение нагрузки
+      Компоненты узлов Comindware Platform
     </span>
 </a>
 </li>
@@ -225,26 +225,13 @@
 <h2 class="pageBreakBefore" id="cluster_upgrade_architecture">Архитектура кластера</h2>
 <p>Рассмотрим состав и конфигурацию кластера <strong>Comindware Platform</strong> из четырёх узлов, который обслуживает пользователей и интеграцию с внешними системами:</p>
 <ul>
-<li><strong>cmw-node0</strong> (<code>XX.XX.101.10</code>) — основной узел пользовательского трафика. 40% — пользовательский трафик, 10% — интеграционный.</li>
-<li><strong>cmw-node1</strong> (<code>XX.XX.101.11</code>) — узел мониторинга и поиска. 30% — пользовательский трафик, 20% — интеграционный.</li>
-<li><strong>cmw-node2</strong> (<code>XX.XX.101.12</code>) — узел поиска и обработки данных. 20% — пользовательский трафик, 30% — интеграционный.</li>
-<li><strong>cmw-node3</strong> (<code>XX.XX.101.13</code>) — основной узел трафика интеграций. 10% — пользовательский трафик, 40% — интеграционный.</li>
+<li><strong>cmw-node0</strong> — основной узел пользовательского трафика.</li>
+<li><strong>cmw-node1</strong> — узел мониторинга и поиска.</li>
+<li><strong>cmw-node2</strong> — узел поиска и обработки данных.</li>
+<li><strong>cmw-node3</strong> — основной узел трафика интеграций.</li>
 </ul>
 <figure class="screenshot_with_caption">
 <p><img alt="Пример конфигурации кластера" src="/platform/v5.0/administration/deploy/img/cluster_upgrade_deploy_configuration.svg"/><figcaption class="caption">Пример конфигурации кластера</figcaption></p>
-</figure>
-<h3 id="cluster_upgrade_platform_components">Компоненты узлов Comindware Platform</h3>
-<p>Каждый узел <strong>Comindware Platform</strong> содержит следующие компоненты:</p>
-<ul>
-<li><strong>Core</strong> — экземпляр ПО <strong>Comindware Platform</strong>.</li>
-<li><strong>Adapters</strong> — адаптеры для интеграции с внешними системами.</li>
-<li><strong>Async</strong> — асинхронные обработчики, которые выполняют фоновые задачи.</li>
-<li><strong>Apache Ignite</strong> — распределённое хранилище данных. Отдельный кластер, см. <em>«<a class="mkdocs_imported_link" href="#cluster_upgrade_data_infrastructure">Инфраструктура данных</a>»</em>.</li>
-<li><strong>NGINX</strong> — обратный прокси-сервер, который обрабатывает HTTP-запросы.</li>
-<li><strong>Apache Kafka</strong> — брокер сообщений, который обеспечивает межсервисное взаимодействие. Отдельный кластер или облачный сервис.</li>
-</ul>
-<figure class="screenshot_with_caption">
-<p><img alt="Состав кластера" src="/platform/v5.0/administration/deploy/img/cluster_upgrade_landscape.svg"/><figcaption class="caption">Состав кластера</figcaption></p>
 </figure>
 <h3 id="cluster_upgrade_load_balancing">Распределение нагрузки</h3>
 <p>Нагрузки, исходя из опыта, можно классифицировать на следующие виды:</p>
@@ -259,7 +246,7 @@
 <table style="width: 100%;">
 <thead>
 <tr>
-<th></th>
+<th>Трафик / % нагрузки</th>
 <th>У1</th>
 <th>У2</th>
 <th>У3</th>
@@ -297,11 +284,23 @@
 </tr>
 </tbody>
 </table>
+<h3 id="cluster_upgrade_platform_components">Компоненты узлов Comindware Platform</h3>
+<p>Каждый узел <strong>Comindware Platform</strong> содержит следующие компоненты:</p>
+<ul>
+<li><strong>Core</strong> — экземпляр ПО <strong>Comindware Platform</strong>.</li>
+<li><strong>Adapters</strong> — адаптеры для интеграции с внешними системами.</li>
+<li><strong>Async</strong> — асинхронные обработчики, которые выполняют фоновые задачи.</li>
+<li><strong>Apache Ignite</strong> — распределённое хранилище данных. Отдельный кластер, см. <em>«<a class="mkdocs_imported_link" href="#cluster_upgrade_data_infrastructure">Инфраструктура данных</a>»</em>.</li>
+<li><strong>NGINX</strong> — обратный прокси-сервер, который обрабатывает HTTP-запросы.</li>
+<li><strong>Apache Kafka</strong> — брокер сообщений, который обеспечивает межсервисное взаимодействие. Отдельный кластер или облачный сервис.</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Состав кластера" src="/platform/v5.0/administration/deploy/img/cluster_upgrade_landscape.svg"/><figcaption class="caption">Состав кластера</figcaption></p>
+</figure>
 <h2 class="pageBreakBefore" id="cluster_upgrade_zero_downtime_strategy">Пример обновления кластера из четырёх узлов без простоя</h2>
 <p>Рассмотрим пример обновления кластера Comindware Platform из четырёх узлов без прерывания работы пользователей и интеграций.</p>
 <h3 id="cluster_upgrade_step1">Этап 1. Снятие трафика с обновляемого узла</h3>
-<p>Перенаправим трафик с узла <code>cmw-node0</code> на другие узлы.</p>
-<p><strong>Цель</strong>: вывести трафик с узла, который будет обновляться.</p>
+<p>Перенаправим трафик с обновляемого узла <code>cmw-node0</code> на другие узлы.</p>
 <ol class="colored_numbers_list">
 <li>Удостоверьтесь, что балансировщик верно настроен и при отключении узла трафик будет распределен на остальные узлы.</li>
 <li>Уберите узел <code>cmw-node0</code> из списка узлов для балансировки нагрузки.</li>
@@ -315,28 +314,49 @@
 </li>
 </ol>
 <h3 id="cluster_upgrade_step2">Этап 2. Обновление одного узла</h3>
-<p>Обновим ПО на узле <code>cmw-node0</code>.</p>
-<p><strong>Цель</strong>: обновить выведенный из эксплуатации узел без влияния на работу системы.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Фактические пути и имена файлов</p>
+<p>При выполнении инструкций будьте внимательны: указывайте фактические имена файлов и пути, которые используются в вашей системе.</p>
+<p>Такие имена указаны в угловых скобках, например:</p>
+<ul>
+<li><code>&lt;instanceName&gt;</code> — имя экземпляра ПО, для которого выполняется восстановление;</li>
+<li><code>&lt;osName&gt;</code> — название операционной системы, для которой предназначен дистрибутив (например, <code>Astra</code>);</li>
+<li><code>&lt;versionNumber&gt;</code> — номер версии ПО.</li>
+<li><code>&lt;path/to&gt;</code> — путь к директории или файлу в вашей системе; замените на фактический путь согласно своей структуре каталогов.</li>
+<li><code>&lt;serviceName&gt;</code> — имя службы, которую требуется проверить или остановить (например, <code>comindware&lt;instanceName&gt;</code>,<code>apigateway&lt;instanceName&gt;</code>, <code>adapterhost&lt;instanceName&gt;</code>);</li>
+</ul>
+<p>См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a>»</em>.</p>
+</div>
+<p>Обновим ПО на выведенном из эксплуатации узле <code>cmw-node0</code> без влияния на работу системы.</p>
 <ol class="colored_numbers_list">
 <li>
+<p>Все последующие команды следует выполнять от имени суперпользователя <code>root</code>. Для этого введите команду:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>-s</code> <br/></pre></code></div>
+<p>или</p>
+<div class="highlight"><code><pre><span></span><code>su<span class="w"> </span>-</code> <br/></pre></code></div>
+</li>
+<li>
 <p>Скопируйте и распакуйте дистрибутив на общее хранилище и выдайте права на исполнение скриптов. Эту же общую директорию используйте для обновления последующих узлов.</p>
-<div class="highlight"><code><pre><span></span><code><span class="c1"># Пример: общая директория /mnt/cmw_dist на всех узлах</span></code> <br/><code>cp<span class="w"> </span>/path/to/X.X-release-ru-&lt;versionNumber&gt;.&lt;osname&gt;.tar.gz<span class="w"> </span>/mnt/cmw_dist/</code> <br/><code><span class="nb">cd</span><span class="w"> </span>/mnt/cmw_dist</code> <br/><code>tar<span class="w"> </span>-xf<span class="w"> </span>X.X-release-ru-&lt;versionNumber&gt;.&lt;osname&gt;.tar.gz</code> <br/><code>chmod<span class="w"> </span>+x<span class="w"> </span>/mnt/cmw_dist/version_install.sh<span class="w"> </span>/mnt/cmw_dist/instance_upgrade.sh</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="c1"># Пример: общая директория /mnt/cmw_dist на всех узлах</span></code> <br/><code>cp<span class="w"> </span>&lt;/path/to/&gt;X.X-release-ru-&lt;versionNumber&gt;.&lt;osName&gt;.tar.gz<span class="w"> </span>/mnt/cmw_dist/</code> <br/><code><span class="nb">cd</span><span class="w"> </span>/mnt/cmw_dist</code> <br/><code>tar<span class="w"> </span>-xf<span class="w"> </span>X.X-release-ru-&lt;versionNumber&gt;.&lt;osName&gt;.tar.gz</code> <br/><code><span class="nb">cd</span><span class="w"> </span>/mnt/cmw_dist/CMW*&lt;versionNumber&gt;/scripts/</code> <br/><code>chmod<span class="w"> </span>+x<span class="w"> </span>*.sh</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Установите версию (подготовка версии на узле):</p>
-<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>/mnt/cmw_dist/version_install.sh</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>./version_install.sh</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Остановите на узле <code>cmw-node0</code> сервисы, затрагиваемые обновлением:</p>
-<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span><span class="s2">"cmw*"</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>stop<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>stop<span class="w"> </span>apigateway&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>stop<span class="w"> </span>adapterhost&lt;instanceName&gt;</code> <br/></pre></code></div>
+</li>
+<li>
+<p>С помощью команды <code>systemctl status &lt;serviceName&gt;</code> удостоверьтесь, что службы остановлены.</p>
 </li>
 <li>
 <p>Выполните обновление экземпляра ПО (укажите имя экземпляра и путь к установленной версии):</p>
-<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>/mnt/cmw_dist/instance_upgrade.sh<span class="w"> </span>-n<span class="o">=</span>instancename<span class="w"> </span>-vp<span class="o">=</span>/var/www/.cmw_version/5.0.XXXXX.0</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>./instance_upgrade.sh<span class="w"> </span>-n<span class="o">=</span>&lt;instanceName&gt;<span class="w"> </span>-vp<span class="o">=</span>/var/www/.cmw_version/&lt;versionNumber&gt;</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Настройте конфигурацию обновлённого ПО (при необходимости) и запустите сервисы:</p>
-<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span><span class="s2">"cmw*"</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>start<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>start<span class="w"> </span>apigateway&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>start<span class="w"> </span>adapterhost&lt;instanceName&gt;</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Проверьте работоспособность после обновления посредством инструментов мониторинга и прикладных проверок:</p>
@@ -357,8 +377,7 @@
 </li>
 </ol>
 <h3 id="cluster_upgrade_step3">Этап 3. Обновление остальных узлов</h3>
-<p>Аналогично обновлению <code>cmw-node0</code> обновим ПО на узлах <code>cmw-node1</code>, <code>cmw-node2</code> и <code>cmw-node3</code>.</p>
-<p><strong>Цель</strong>: обновить оставшиеся узлы кластера без влияния на работу системы.</p>
+<p>Аналогично обновлению <code>cmw-node0</code> обновим оставшиеся узлы <code>cmw-node1</code>, <code>cmw-node2</code> и <code>cmw-node3</code> без влияния на работу системы.</p>
 <ol class="colored_numbers_list">
 <li>Выведите обновляемый узел из состава кластера.</li>
 <li>Выполните обновление ПО.</li>
@@ -435,6 +454,7 @@
 <li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622">Установка, запуск, инициализация и остановка ПО</a></li>
 <li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4659">Системные требования Comindware Platform</a></li>
 <li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642">Резервное копирование. Настройка и запуск, просмотр журнала сеансов</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a></li>
 </ul>
 </div>
 </article>
