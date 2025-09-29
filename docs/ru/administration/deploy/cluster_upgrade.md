@@ -1,6 +1,6 @@
 ---
 kbId: 5134
-title: Обновление кластера {{ productName }}
+title: Кластер Comindware Platform. Обновление.
 tags:
     - Ignite
     - Grafana
@@ -20,7 +20,7 @@ tags:
 hide: tags
 ---
 
-# Обновление кластера {{ productName }} {: #cluster_upgrade }
+# Кластер {{ productName }}. Обновление {: #cluster_upgrade }
 
 {% include-markdown ".snippets/experimental_feature.md" %}
 
@@ -177,7 +177,7 @@ _![Состав кластера](img/cluster_upgrade_landscape.svg)_
 3. Установите версию (подготовка версии на узле):
 
     ```bash
-    bash ./version_install.sh
+    ./version_install.sh
     ```
 
 4. Остановите на узле `cmw-node0` сервисы, затрагиваемые обновлением:
@@ -192,7 +192,7 @@ _![Состав кластера](img/cluster_upgrade_landscape.svg)_
 6. Выполните обновление экземпляра ПО (укажите имя экземпляра и путь к установленной версии):
 
     ```bash
-    bash ./instance_upgrade.sh -n=<instanceName> -vp=/var/www/.cmw_version/<versionNumber>
+    ./instance_upgrade.sh -n=<instanceName> -vp=/var/www/.cmw_version/<versionNumber>
     ```
 
 7. Настройте конфигурацию обновлённого ПО (при необходимости) и запустите сервисы:
