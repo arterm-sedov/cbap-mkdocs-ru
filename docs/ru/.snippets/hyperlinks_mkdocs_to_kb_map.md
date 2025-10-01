@@ -113,6 +113,8 @@
 
 [example_formula_condition_set_value]: {{ kbArticleURLPrefix }}4992
 
+[example_task_hyperlink_n3_formula]: {{ kbArticleURLPrefix }}4879
+
 [example_formula_group_account_calculate]: {{ kbArticleURLPrefix }}4991
 
 [example_n3_account_attributes_compare]: {{ kbArticleURLPrefix }}4932
