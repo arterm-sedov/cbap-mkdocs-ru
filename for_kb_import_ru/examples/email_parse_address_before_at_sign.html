@@ -1,0 +1,75 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4983" kb-tags="адрес почты,INDEXOF,SUBSTRING,формулы,обработка писем,парсинг,эл. почта,имя пользователя,генерация логина" kb-title="Эл. почта. Парсинг адреса. Извлечение имени пользователя">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_email_parse_address_before_at_sign_formula">
+<span class="md-ellipsis">
+      Синтаксис формулы
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Здесь приведён пример извлечения имени пользователя из адреса эл. почты (часть до знака <code>@</code>) с помощью <strong>формулы</strong>.</p>
+<p>Это позволяет определить пользователя в таких сценариях, как:</p>
+<ul>
+<li><strong>генерация логинов</strong> — создание имен пользователей на основе адресов эл. почты;</li>
+<li><strong>идентификация пользователей</strong> — определение пользователя по части адреса эл. почты.</li>
+</ul>
+<h2 id="example_email_parse_address_before_at_sign_formula">Синтаксис формулы</h2>
+<p>Для извлечения имени пользователя из адреса эл. почты используйте следующую формулу:</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">SUBSTRING</span><span class="p">(</span><span class="err">$</span><span class="n">Адрес</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">INDEXOF</span><span class="p">(</span><span class="err">$</span><span class="n">Адрес</span><span class="p">,</span><span class="w"> </span><span class="s">"@"</span><span class="p">))</span></code> <br/></pre></code></div>
+<p>Формула извлекает текст от начала строки (позиция <code>0</code>) до позиции знака <code>@</code>.</p>
+<p>Если адрес эл. почты содержит <code>"user@company.com"</code>, формула вернёт <code>user</code>.</p>
+<div class="notice notice-tip">
+<p class="admonition-title">Совет</p>
+<p>Дополнительно убедитесь, что адрес содержит знак <code>@</code>, например с помощью функции <code>IF()</code>. При его отсутствии обработайте ситуацию безопасно (например, верните пустое значение).</p>
+</div>
+<p>Здесь:</p>
+<ul>
+<li><code>$"Адрес"</code> — атрибут, который хранит адрес эл. почты;</li>
+<li><code>SUBSTRING()</code> — функция, извлекающая из строки подстроку с найденной позиции и указанной длины;</li>
+<li><code>INDEXOF()</code> — функция, возвращающая позицию символа в строке:<ul>
+<li><code>INDEXOF($Адрес, "@")</code> — находит позицию знака <code>@</code> в адресе эл. почты.</li>
+</ul>
+</li>
+</ul>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4978">Парсинг ИД процесса из темы письма</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4691">Эл. почта в процессе. Отправка, получение и обработка</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4695">Получение эл. почты и веб-запросов в процессе</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4993">Список функций языка формул Comindware</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4717">Сценарии</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

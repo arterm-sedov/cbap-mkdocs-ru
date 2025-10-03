@@ -115,6 +115,10 @@
 
 [example_task_hyperlink_n3_formula]: {{ kbArticleURLPrefix }}4879
 
+[example_email_parse_process_id_from_subject]: {{ kbArticleURLPrefix }}4978
+
+[example_email_parse_address_before_at_sign]: {{ kbArticleURLPrefix }}4983
+
 [example_formula_group_account_calculate]: {{ kbArticleURLPrefix }}4991
 
 [example_n3_account_attributes_compare]: {{ kbArticleURLPrefix }}4932

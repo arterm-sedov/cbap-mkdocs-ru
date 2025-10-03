@@ -25,9 +25,7 @@ hide: tags
 
 Здесь представлены инструкции по настройке подключения и пути передачи передачи данных из эл. писем и веб-запросов в бизнес-процессе.
 
-Кроме того, потребуется настроить **[начальное][
-    
-]** или **[промежуточное][process_diagram_elements_receive_message_intermediate_event] событие-получение сообщения** на диаграмме процесса.
+Кроме того, потребуется настроить **[начальное][process_diagram_elements_receive_message_start_event]** или **[промежуточное][process_diagram_elements_receive_message_intermediate_event] событие-получение сообщения** на диаграмме процесса.
 
 Подробный пример настройки приложения для обмена данными посредством эл.&nbsp;почты см. в статье _«[Пример: согласование заявлений по эл.&nbsp;почте. Настройка подключений, путей передачи данных и диаграммы процесса][process_email_configure]»_.
 
@@ -94,12 +92,12 @@ include-markdown ".snippets/email_receive_logics.md"
 3. Откройте или создайте путь передачи данных типа «**Подключения к электронной почте**» – «**Получение эл.&nbsp;почты в процессе**».
 4. Настройте свойства пути передачи данных на следующих вкладках:
 
-    - [**Основные свойства**](#process_receiving_connection_properties_general)
-    - [**Атрибуты сообщения**](#process_receiving_connection_properties_message_attributes)
+    - [**Основные свойства**](#process_receiving_communication_route_properties_general)
+    - [**Атрибуты сообщения**](#process_receiving_communication_route_properties_message_attributes)
 
 5. Сохраните путь передачи данных.
 
-### Основные свойства {: #process_receiving_connection_properties_general .pageBreakBefore }
+### Основные свойства {: #process_receiving_communication_route_properties_general .pageBreakBefore }
 
 На вкладке «**Основные свойства**» настройте базовые параметры пути передачи данных:
 
@@ -122,7 +120,7 @@ include-markdown ".snippets/email_receive_logics.md"
 
 _![Настройка основных свойств пути передачи данных для получения эл.&nbsp;почты в процессе](img/process_receiving_connection_settings_properties.png)_
 
-### Атрибуты сообщения {: #process_receiving_connection_properties_message_attributes .pageBreakBefore }
+### Атрибуты сообщения {: #process_receiving_communication_route_properties_message_attributes .pageBreakBefore }
 
 Чтобы извлечь данные из эл. письма или HTTP-запроса и передать их в **{{ productName }}**, сопоставьте набор **атрибутов сообщения** с полями письма или HTTP-запроса:
 
@@ -180,11 +178,12 @@ _![Настройка основных свойств пути передачи 
     - **Выражение JPath:** `$.Date`
 
     Подробные сведения об использовании JSONPath см. в статье _«[HTTP-запросы. Получение и обработка данных с помощью JSONPath][http_receive_jpath]»_.
-        
 
 _![Настройка атрибутов сообщения в пути передачи данных для получения эл.&nbsp;почты в процессе](process_receiving_connection_attributes_settings.png)_
 
 ## Настройка события-получения сообщения {: #process_receiving_connection_message_event_configure }
+
+--8<-- ".snippets/email_parse_logics.md"
 
 1. Поместите на диаграмму процесса [начальное][process_diagram_elements_receive_message_start_event] или [промежуточное][process_diagram_elements_receive_message_intermediate_event] событие-получение сообщения.
 
@@ -193,9 +192,9 @@ _![Настройка атрибутов сообщения в пути пере
 2. В меню элемента события нажмите кнопку «**Свойства**» <i class="fa-light fa-gear">‌</i>.
 3. На вкладке «**Основные**» настройте [общие свойства элемента][process_diagram_element_common_properties].
 4. На вкладке «**Дополнительные**» выберите ранее созданный [путь передачи данных](#process_receiving_connection_route_configure).
-5. На вкладке «**Данные сообщения**» сопоставьте **[атрибуты сообщения](#process_receiving_connection_properties_message_attributes)** с атрибутами **[шаблона записи][record_templates]**, связанного с шаблоном процесса:
+5. На вкладке «**Данные сообщения**» сопоставьте **[атрибуты сообщения](#process_receiving_communication_route_properties_message_attributes)** с атрибутами **[шаблона записи][record_templates]**, связанного с шаблоном процесса:
 
-    - Укажите название, системное имя и тип данных **атрибутов сообщения** так же, как они указаны в таблице «**Атрибуты для передачи данных сообщения**» в [свойствах пути передачи данных](#process_receiving_connection_properties_message_attributes).
+    - Укажите название, системное имя и тип данных **атрибутов сообщения** так же, как они указаны в таблице «**Атрибуты для передачи данных сообщения**» в [свойствах пути передачи данных](#process_receiving_communication_route_properties_message_attributes).
     - В столбце «**Значение**» укажите атрибут **шаблона записи** такого же типа, как **атрибут сообщения**.
     - Значения указанных **атрибутов сообщения**  будут присвоены атрибутам **шаблона записи**.
 

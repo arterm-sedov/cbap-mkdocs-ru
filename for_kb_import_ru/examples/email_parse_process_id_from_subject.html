@@ -1,0 +1,75 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4978" kb-tags="ID процесса,INDEXOF,SUBSTRING,формулы,обработка писем,парсинг,тема письма,эл. почта,ИД процесса" kb-title="Эл. почта. Парсинг темы. Извлечение идентификатора процесса">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_email_parse_process_id_from_subject_formula">
+<span class="md-ellipsis">
+      Синтаксис формулы
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Здесь приведён пример извлечения идентификатора процесса из темы эл. письма с помощью <strong>формулы</strong>.</p>
+<p>Это позволяет определить, какой процесс должен обработать письмо в таких сценариях, как:</p>
+<ul>
+<li><strong>маршрутизация</strong> — направление писем в соответствующие экземпляры процессов;</li>
+<li><strong>обработка заявок</strong> — привязка ответов к заявлениям по их номерам.</li>
+</ul>
+<h2 id="example_email_parse_process_id_from_subject_formula">Синтаксис формулы</h2>
+<p>Для извлечения ID процесса из темы письма используйте следующую формулу:</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">SUBSTRING</span><span class="p">(</span></code> <br/><code><span class="w">    </span><span class="err">$</span><span class="n">Тема</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="n">INDEXOF</span><span class="p">(</span><span class="err">$</span><span class="n">Тема</span><span class="p">,</span><span class="s">"["</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="n">INDEXOF</span><span class="p">(</span><span class="err">$</span><span class="n">Тема</span><span class="p">,</span><span class="s">"]"</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">INDEXOF</span><span class="p">(</span><span class="err">$</span><span class="n">Тема</span><span class="p">,</span><span class="s">"["</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span></code> <br/></pre></code></div>
+<p>Формула извлекает текст между квадратными скобками.</p>
+<p>Если тема письма содержит <code>"Ответ по заявлению [12345] - одобрено"</code>, формула вернёт <code>12345</code>.</p>
+<p>Важно: перед применением формулы убедитесь, что тема содержит символы <code>[</code> и <code>]</code>; при их отсутствии обработайте ситуацию безопасно (например, верните пустое значение).</p>
+<p>Здесь:</p>
+<ul>
+<li><code>$Тема</code> — атрибут, который хранит тему полученного письма;</li>
+<li><code>SUBSTRING()</code> — функция, извлекающая из строки подстроку с найденной позиции и указанной длины;</li>
+<li><code>INDEXOF()</code> — функция, возвращающая позицию символа в строке:<ul>
+<li><code>INDEXOF($Tema,"[")</code> — находит позицию открывающей квадратной скобки <code>[</code>;</li>
+<li><code>INDEXOF($Tema,"]")</code> — находит позицию закрывающей квадратной скобки <code>]</code>;</li>
+<li><code>INDEXOF($Tema,"[") + 1</code> — позиция начала ID (сразу после <code>[</code>);</li>
+<li><code>INDEXOF($Tema,"]") - INDEXOF($Tema,"[") - 1</code> — длина ID (между скобками).</li>
+</ul>
+</li>
+</ul>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4983">Парсинг Email до знака @</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4691">Эл. почта в процессе. Отправка, получение и обработка</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4695">Получение эл. почты и веб-запросов в процессе</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4993">Список функций языка формул Comindware</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4717">Сценарии</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>
