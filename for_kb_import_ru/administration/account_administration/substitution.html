@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4665" kb-tags="" kb-title="Замещения">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4665" kb-tags="замещение,замещения,аккаунты,передача ролей,права,роли,системные роли" kb-title="Замещения. Создание, настройка, удаление">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -16,14 +16,28 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#просмотр-списка-замещений-и-настройка-замещений">
+<a class="md-nav__link mkdocs_imported_link" href="#substitution_configuration">
+<span class="md-ellipsis">
+      Настройка конфигурации Comindware Platform
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#substitution_roles_and_scenarios">
+<span class="md-ellipsis">
+      Права и сценарии использования
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#substitution_list_and_setup">
 <span class="md-ellipsis">
       Просмотр списка замещений и настройка замещений
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#удаление-замещений">
+<a class="md-nav__link mkdocs_imported_link" href="#substitution_delete">
 <span class="md-ellipsis">
       Удаление замещений
     </span>
@@ -45,10 +59,61 @@
 <h2 class="admonition-title" id="definitions">Определения</h2>
 <ul>
 <li>С помощью <strong>замещения</strong> вместо аккаунта можно на заданный период времени назначить другие аккаунты в качестве <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4730">исполнителей пользовательских задач</a> и передать им определённые <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4662">системные роли</a> и <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4803">роли в приложении</a>.</li>
-<li>Замещения можно настроить с помощью <a class="mkdocs_imported_link" href="#просмотр-списка-замещений-и-настройка-замещений">страницы «<strong>Замещения</strong>»</a>, а также в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4653">свойствах аккаунта</a>.</li>
+<li>Замещения можно просматривать и создавать как на <a class="mkdocs_imported_link" href="#просмотр-списка-замещений-и-настройка-замещений">странице «<strong>Замещения</strong>»</a>, так и в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4653#accounts_substitution">свойствах аккаунта</a>.</li>
 </ul>
 </div>
-<h2 id="просмотр-списка-замещений-и-настройка-замещений">Просмотр списка замещений и настройка замещений</h2>
+<h2 id="substitution_configuration">Настройка конфигурации Comindware Platform</h2>
+<p>По умолчанию замещения в <strong>Comindware Platform</strong> отключены.</p>
+<p>Чтобы включить функцию замещений, в файле конфигурации <strong>Comindware Platform</strong> <code>&lt;instanceName&gt;.yml</code> установите значение <code>true</code> в следующей директиве:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nt">account.selfSubstitutionsEnabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span></code> <br/></pre></code></div>
+<p>Если замещения включены (<code>true</code>), пользователи могут создавать для себя замещения в свойствах своих аккаунтов, передавая свои роли другим аккаунтам. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4653#accounts_substitution">Аккаунты. Настройка замещений</a>»</em>.</p>
+<p>Если замещения отключены (<code>false</code>), настраивать замещения для любых аккаунтов могут только <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4662">системные администраторы</a>.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Необходим доступ к просмотру аккаунтов</p>
+<p>Даже при включённой директиве <code>account.selfSubstitutionsEnabled</code> пользователь не сможет создать замещение, если у него нет прав на просмотр аккаунтов.</p>
+<p>Поэтому для работы с замещениями, пользователю необходимо назначить системную роль с разрешением на <strong>просмотр аккаунтов</strong>.</p>
+<p>См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4662">Системные роли</a>»</em>.</p>
+</div>
+<h2 id="substitution_roles_and_scenarios">Права и сценарии использования</h2>
+<ul>
+<li>
+<p><strong>Администратор</strong></p>
+</li>
+<li>
+<p>Может создавать, изменять и удалять замещения в разделе «<strong>Замещения</strong>» и на странице аккаунта — независимо от значения <code>account.selfSubstitutionsEnabled</code>.</p>
+</li>
+<li>
+<p>Может создавать замещение из собственного аккаунта.</p>
+</li>
+<li>
+<p><strong>Пользователь</strong></p>
+</li>
+<li>
+<p>При <code>account.selfSubstitutionsEnabled = true</code> на странице собственного аккаунта отображается кнопка «Создать».</p>
+</li>
+<li>
+<p>Может создавать замещение только «на себя» и передавать лишь свои роли другим аккаунтам.</p>
+</li>
+<li>
+<p>Для корректной работы требуется доступ на просмотр аккаунтов (системная роль с правом «read accounts»).</p>
+</li>
+<li>
+<p><strong>Если запрещено (account.selfSubstitutionsEnabled = false)</strong></p>
+</li>
+<li>
+<p>Только администраторы могут создавать/изменять/удалять замещения.</p>
+</li>
+<li>
+<p>Пользователь не может создать или удалить замещение; форма замещения доступна в режиме «только чтение».</p>
+</li>
+<li>
+<p><strong>Если разрешено (account.selfSubstitutionsEnabled = true)</strong></p>
+</li>
+<li>
+<p>Пользователь всё равно не сможет создать замещение без права просмотра аккаунтов (read-доступ к аккаунтам через системную роль).</p>
+</li>
+</ul>
+<h2 class="pageBreakBefore" id="substitution_list_and_setup">Просмотр списка замещений и настройка замещений</h2>
 <p>Страница «<strong>Замещения</strong>» позволяет просматривать, создавать, настраивать и удалять замещения для аккаунтов.</p>
 <ol class="colored_numbers_list">
 <li>На странице «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4661"><strong>Администрирование</strong></a>» в разделе — «<strong>Администрирование аккаунтов</strong>» выберите пункт «<strong>Замещения</strong>» <i class="fa-light fa-user-clock">&zwnj;<!--icon--></i>.</li>
@@ -92,7 +157,7 @@
 <figure class="screenshot_with_caption">
 <p><img alt="Настройка замещения" src="/platform/v5.0/administration/account_administration/img/substitution_properties.png"/><figcaption class="caption">Настройка замещения</figcaption></p>
 </figure>
-<h2 class="pageBreakBefore" id="удаление-замещений">Удаление замещений</h2>
+<h2 class="pageBreakBefore" id="substitution_delete">Удаление замещений</h2>
 <ol class="colored_numbers_list">
 <li>Выберите замещения, подлежащие удалению, с помощью флажков в списке.</li>
 <li>Нажмите кнопку «<strong>Удалить</strong>».</li>
@@ -101,7 +166,9 @@
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4653">Аккаунты. Создание, настройка, замещение, привязка к шаблону аккаунта, назначение лицензий, удаление</a></em></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4653#accounts_substitution">Аккаунты. Настройка замещений</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4662">Системные роли</a></li>
 </ul>
 </div>
 </article>

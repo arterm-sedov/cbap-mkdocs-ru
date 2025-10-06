@@ -175,6 +175,8 @@
 
 [accounts_required_unique]: {{ kbArticleURLPrefix }}4653#accounts_required_unique
 
+[accounts_substitution]: {{ kbArticleURLPrefix }}4653#accounts_substitution
+
 [accounts_link_to_template]: {{ kbArticleURLPrefix }}4653#accounts_link_to_template
 
 [accounts_timezone_configure]: {{ kbArticleURLPrefix }}4653#accounts_timezone_configure
