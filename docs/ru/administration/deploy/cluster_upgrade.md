@@ -1,6 +1,7 @@
 ---
 kbId: 5134
-title: Кластер Comindware Platform. Обновление.
+title: 'Кластер. Обновление'
+kbTitle: 'Кластер Comindware Platform. Обновление ПО'
 tags:
     - Ignite
     - Grafana
@@ -20,7 +21,7 @@ tags:
 hide: tags
 ---
 
-# Кластер {{ productName }}. Обновление {: #cluster_upgrade }
+# Кластер {{ productName }}. Обновление ПО {: #cluster_upgrade }
 
 {% include-markdown ".snippets/experimental_feature.md" %}
 
@@ -292,7 +293,7 @@ _![Состав кластера](img/cluster_upgrade_landscape.svg)_
 - [Системные требования {{ productName }}][system_requirements]
 - [Резервное копирование. Настройка и запуск, просмотр журнала сеансов][backup_configure]
 - [Пути и содержимое директорий экземпляра ПО][paths]
-- [Восстановление кластера {{ productName }}][cluster_recovery]
+- [Кластер {{ productName }}. Восстановление после аварий][cluster_recovery]
 - [Обеспечение высокой доступности и отказоустойчивости {{ productName }}][availability_fault_tolerance]
 
 </div>

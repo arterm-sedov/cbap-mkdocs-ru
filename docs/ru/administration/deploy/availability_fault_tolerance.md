@@ -127,8 +127,8 @@ hide: tags
 - [Резервное копирование и восстановление. Рекомендации по организации и оптимизации][backup_configure]
 - [Резервное копирование. Настройка и запуск, просмотр журнала сеансов][backup_configure]
 {% if not gostech %}
-- [Обновление кластера {{ productName }}][cluster_upgrade]
-- [Восстановление кластера {{ productName }}][cluster_recovery]
+- [Кластер {{ productName }}. Обновление ПО][cluster_upgrade]
+- [Кластер {{ productName }}. Восстановление после аварий][cluster_recovery]
 - [Настройка кластеризации. Документация Apache Ignite (на английском языке)][apache_ignite_clustering]
 {% endif %}
 

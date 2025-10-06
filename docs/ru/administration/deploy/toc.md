@@ -23,6 +23,8 @@ tags:
 
 - [Развёртывание Comindware Platform. Архитектура, ландшафт, программное и техническое обеспечение][architecture_landscape]
 - [Системные требования Comindware Platform][system_requirements]
+- [Обеспечение высокой доступности и отказоустойчивости {{ productName }}][availability_fault_tolerance]
+- [Кластер {{ productName }}. Обновление ПО][cluster_upgrade]
 - [Безопасность][security]
 - [Инструкции для Linux][deploy_linux_cat]
 - [Инструкции для Windows][deploy_windows_cat]

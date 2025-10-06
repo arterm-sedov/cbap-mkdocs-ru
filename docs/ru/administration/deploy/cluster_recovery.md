@@ -379,7 +379,7 @@ hide: tags
 --8<-- "related_topics_heading.md"
 
 - [Установка, запуск, инициализация и остановка ПО][deploy_guide_linux]
-- [Обновление кластера {{ productName }}][cluster_upgrade]
+- [Кластер {{ productName }}. Обновление ПО][cluster_upgrade]
 - [Системные требования {{ productName }}][system_requirements]
 - [Резервное копирование. Настройка и запуск, просмотр журнала сеансов][backup_configure]
 - [Пути и содержимое директорий экземпляра ПО][paths]
