@@ -299,6 +299,8 @@
 
 [release_notes_5.0.13334]: {{ kbArticleURLPrefix }}5094
 
+[release_notes_5.0.20251010]: {{ kbArticleURLPrefix }}5137
+
 [roles]: {{ kbArticleURLPrefix }}4803
 
 [role_templates]: {{ kbArticleURLPrefix }}4760
