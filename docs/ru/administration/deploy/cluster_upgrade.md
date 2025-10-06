@@ -292,7 +292,8 @@ _![Состав кластера](img/cluster_upgrade_landscape.svg)_
 - [Системные требования {{ productName }}][system_requirements]
 - [Резервное копирование. Настройка и запуск, просмотр журнала сеансов][backup_configure]
 - [Пути и содержимое директорий экземпляра ПО][paths]
-<!-- - [Восстановление кластера {{ productName }}][cluster_recovery] -->
+- [Восстановление кластера {{ productName }}][cluster_recovery]
+- [Обеспечение высокой доступности и отказоустойчивости {{ productName }}][availability_fault_tolerance]
 
 </div>
 

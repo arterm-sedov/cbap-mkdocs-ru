@@ -969,6 +969,10 @@
 
 [configuration_files_linux]: {{ kbArticleURLPrefix }}5067
 
+[cluster_recovery]: {{ kbArticleURLPrefix }}5135
+
+[cluster_upgrade]: {{ kbArticleURLPrefix }}5134
+
 [deploy_guide_linux]: {{ kbArticleURLPrefix }}4622
 
 [deploy_guide_linux_delete_version]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_delete_version
