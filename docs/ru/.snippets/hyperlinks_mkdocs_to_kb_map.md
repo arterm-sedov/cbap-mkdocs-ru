@@ -319,6 +319,8 @@
 
 [substitution]: {{ kbArticleURLPrefix }}4665
 
+[substitution_configuration]: {{ kbArticleURLPrefix }}4665#substitution_configuration
+
 [system_service_management]: {{ kbArticleURLPrefix }}4671
 
 [table_personal_use]: {{ kbArticleURLPrefix }}4815
