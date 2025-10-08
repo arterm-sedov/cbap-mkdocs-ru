@@ -91,7 +91,7 @@ hide: tags
 - **cmw-node2** — узел поиска и обработки данных.
 - **cmw-node3** — основной узел трафика интеграций.
 
-_![Пример конфигурации кластера](img/cluster_upgrade_deploy_configuration.svg)_
+_![Пример конфигурации кластера](img/cluster_upgrade_deploy_configuration.png)_
 
 ### Распределение нагрузки {: #cluster_upgrade_load_balancing }
 
@@ -124,7 +124,7 @@ _![Пример конфигурации кластера](img/cluster_upgrade_d
 - **{{ nginxVariants }}** — обратный прокси-сервер, который обрабатывает HTTP-запросы.
 - **{{ apacheKafkaVariants }}** — брокер сообщений, который обеспечивает межсервисное взаимодействие. Отдельный кластер или облачный сервис.
 
-_![Состав кластера](img/cluster_upgrade_landscape.svg)_
+_![Состав кластера](img/cluster_upgrade_landscape.png)_
 
 ## Пример обновления кластера из четырёх узлов без простоя {: #cluster_upgrade_zero_downtime_strategy .pageBreakBefore }
 
