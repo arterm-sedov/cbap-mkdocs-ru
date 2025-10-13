@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5137" kb-tags="" kb-title="Сведения о выпуске 5.0 от 10.10.2025">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5137" kb-tags="release notes,информация о выпуске,релизноутс" kb-title="Сведения о выпуске 5.0 от 10.10.2025">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -70,7 +70,24 @@
 <p><strong>Comindware Platform</strong> версии 5.0 от 10.10.2025 включает ряд новых возможностей, улучшений и исправлений по сравнению с <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5094">версией 5.0 от 24.03.2025</a>.</p>
 <h2 id="release_notes_5.0.20251010_key_changes">Ключевые изменения</h2>
 <ul>
-<li><strong>Корпоративная архитектура:</strong> реализованы значительные улучшения и улучшено взаимодействие с <strong>Comindware Platform Enterprise</strong>.</li>
+<li>
+<p><strong>Подключение к OpenSearch (Elasticsearch)</strong> — изменена настройка подключения: теперь все параметры задаются в файле конфигурации <strong>Comindware Platform</strong>.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание! Сохраните префикс индекса перед обновлением</p>
+<p>Перед обновлением <strong>Comindware Platform</strong> на версию от 10.10.2025 необходимо сохранить префикс индекса OpenSearch (Elasticsearch), указанное в <strong>Comindware Platform</strong>.</p>
+<p>После обновления префикс индекса необходимо внести в файл конфигурации <strong>Comindware Platform</strong>.</p>
+<p>Если этого не сделать, то после обновления будет создан новый индекс OpenSearch (Elasticsearch), в который будет вестись запись журналов транзакций.</p>
+<p>Подключение к OpenSearch (Elasticsearch) исключено из <strong>Comindware Platform</strong> версии 5.0 от 10.10.2025, поэтому вы не сможете просмотреть префикс индекса после обновления.</p>
+<p>См.: </p>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5067">Конфигурация экземпляра, компонентов ПО и служб. Настройка</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a></em> </li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Корпоративная архитектура:</strong> реализованы значительные улучшения и улучшено взаимодействие с <strong>Comindware Platform Enterprise</strong>.</p>
+</li>
 <li><strong>Интерфейс:</strong> усовершенствованы дашборды, улучшен поиск в списках.</li>
 <li><strong>Администрирование:</strong> расширены возможности синхронизации групп с сервером каталогов; улучшена настройка замещений для аккаунтов.</li>
 <li><strong>Интеграции и пути передачи данных:</strong> усовершенствованы средства интеграции с внешними системами.</li>
@@ -113,13 +130,9 @@
 <ul>
 <li><strong>Интеграции и пути передачи данных:</strong><ul>
 <li>добавлена возможность вернуть ответ без обработки сценария;</li>
-<li>добавлена возможность настройки времени ожидания ответа на уровне пути передачи данных (1 с — 10 мин);</li>
-<li>в подключении для получения HTTP-запросов добавлена настройка порта.</li>
 </ul>
 </li>
 <li><strong>Маршруты передачи данных:</strong> добавлена настройка «вернуть ответ без обработки триггера».</li>
-<li><strong>Маршруты передачи данных — таймаут:</strong> настраиваемое время ожидания ответа на уровне маршрута (от 1 секунды до 10 минут); это время также используется Kafka.
--- <strong>HTTP-адаптер (получение):</strong> добавлена новая настройка портов.</li>
 <li><strong>Администрирование:</strong> добавлена возможность синхронизации с сервером каталогов пользователей из системной группы Domain Users (аналог группы «Все»); вынесен фильтр OpenLDAP в настройках подключения; отключены запросы об активности при выключенной политике одновременного редактирования. </li>
 <li><strong>Система журналирования:</strong> улучшена запись событий в журналы. Журналы стали более информативными. </li>
 <li><strong>Сообщения об ошибках:</strong> повышена информативность сообщений об ошибках, которые могут выводиться во время 

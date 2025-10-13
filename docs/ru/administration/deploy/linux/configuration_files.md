@@ -31,8 +31,10 @@ hide: tags
 
 2. При необходимости измените параметры, например:
 
-    - `journal.server` — адрес сервера {{ openSearchVariants }}.
-    - `journal.name` — индекс сервера {{ openSearchVariants }}.
+    - `journal.server` — адрес сервера {{ openSearchVariants }} (**обязательно**).
+    - `journal.name` — префикс индекса сервера {{ openSearchVariants }} (необязательно, по умолчанию назначается префикс `cmw<instanceName>`).
+    - `journal.username` — имя пользователя сервера {{ openSearchVariants }} (необязательно).
+    - `journal.password` — пароль сервера {{ openSearchVariants }} (необязательно).
     - `db.workDir` — директория для хранения базы данных экземпляра ПО.
     - `db.name` — префикс кэшей в базе данных экземпляра ПО.
     - `userStorage.localDisk.path` — директория для хранения загруженных файлов.
@@ -78,6 +80,10 @@ configPath: <configPath>
 journal.server: http://<searchHostIP>:<searchHostPort>
 # Индекс службы журналирования.
 # journal.name: <prefix>-<instanceName>
+# Имя пользователя службы журналирования
+# journal.username: xxxx
+# Пароль службы журналирования
+# journal.password: xxxx
 # Выключение службы журналирования.
 #journal.enabled: false
 # URI-адрес экземпляра {{ productName }}.
