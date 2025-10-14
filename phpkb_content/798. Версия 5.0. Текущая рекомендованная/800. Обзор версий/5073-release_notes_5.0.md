@@ -1,6 +1,7 @@
 ---
-title: Сведения о выпуске 5.0
+title: 'Сведения о выпуске 5.0'
 kbId: 5073
+url: 'https://kb.comindware.ru/article.php?id=5073'
 ---
 
 # Сведения о выпуске 5.0

@@ -1,0 +1,36 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4885" kb-tags="" kb-title="Объединение нескольких значений в одно">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Данная настройка позволяет создать составное значение в атрибуте, используя значения из двух, трех или больше атрибутов, для более удобного поиска, для составления понятных пользователям названий задач, для более удобного отображения значений в выпадающих списках и т.д.</p>
+<p>Рассмотрим пример выражения для вычисления составного отображаемого атрибута «<em>Название обращения</em>», который будет показываться в заголовке записи или в ссылке на данную запись.</p>
+<p><strong>1.</strong> Создайте атрибут с типом данных «Текст» — «<em>Название обращения</em>», отметьте флаги «<strong><em>Отображаемый</em></strong>» («<strong><em>Использовать как заголовок записей</em></strong>») и «<strong><em>Вычисляемый</em></strong>» («<strong><em>Вычислять по выражению</em></strong>»).</p>
+<p><strong>2.</strong> В поле «<strong><em>Вычисляемое выражение</em></strong>» («<strong><em>Вычисляемое значение</em></strong>») выберите пункт «<em>Формула</em>» и вставьте следующую формулу:</p>
+<div class="highlight"><code><pre><span></span><code>FORMAT("{0}/{1}/{2}",LIST($Gorod-&gt;nazvanie,$Imyazayavitelya,$Status-&gt;Nazvanie))</code> <br/></pre></code></div>
+<p><strong>где:</strong></p>
+<p><strong><em>FORMAT</em></strong>— функция, которая форматирует значения атрибутов в необходимый формат;</p>
+<p><strong><em>LIST</em></strong>— здесь мы пишем по порядку атрибуты, из которых берем значения (в данном случае город, имя заявителя и статус);</p>
+<p><strong><em>""</em></strong>— в кавычках мы составляем форму отображения составного значения, можем прописать любой текст, вставлять числа, символы, форма будет статичной;</p>
+<p><strong><em>{0}</em></strong> — в фигурных скобках мы прописываем порядковый номер атрибута, который указали в «<em>LIST</em>» (начинаем всегда с 0).</p>
+<p>Необходимо понимать, что значения атрибутов, которые указаны в «<strong><em>LIST</em></strong>», для каждой записи будут подставляться соответствующими значениями вместо фигурных скобок с цифрами, а все остальное, что присутствует в кавычках, будет статичным.</p>
+<p><strong>3.</strong> Сохраните атрибут, после чего создайте запись или зайдите в существующую запись и заполните поля, перечисленные в «<strong><em>LIST</em></strong>», после этого в заголовке вы увидите результат.</p>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример составного значения атрибута" src="https://kb.comindware.ru/assets/formatexample.png"/><figcaption class="caption">Пример составного значения атрибута</figcaption></p>
+</figure>
+<p><strong>Примечание :</strong> если необходимо записать в составной атрибут значение из атрибута с типом данных «Дата и время» или «Длительность», то важно иметь в виду, что система выводит их в свободных от настроенного формата отображения значениях, т.е. в случае с атрибутом с типом данных «Дата и время» выводимое значение будет выглядеть как «29.06.2021 14:33:21». См. также: <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4977">Атрибут «Дата и время». Форматирование значений с помощью формул и N3</a>.</p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

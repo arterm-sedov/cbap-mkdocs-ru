@@ -1,6 +1,7 @@
 ---
-title: Конечные события
+title: 'Конечные события'
 kbId: 4744
+url: 'https://kb.comindware.ru/article.php?id=4744'
 ---
 
 # Конечные события

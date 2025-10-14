@@ -1,6 +1,7 @@
 ---
-title: Записи и коллекции. Объединение и фильтрация иерархических коллекций с помощью N3
+title: 'Записи и коллекции. Объединение и фильтрация иерархических коллекций с помощью N3'
 kbId: 5108
+url: 'https://kb.comindware.ru/article.php?id=5108'
 ---
 
 # Записи и коллекции. Объединение и фильтрация иерархических коллекций с помощью N3
@@ -109,11 +110,11 @@ kbId: 5108
    {
        # Убедитесь, что системные имена соответствуют именам в вашем приложении.
        # Получаем атрибуты для дальнейших вычислений
-       ("Поставщики" "Товарныекатегории") object:findAttribute ?CounterpartyCategoriesAttribute.
-       ("Запросы" "Категорияур3") object:findAttribute ?RequestCategoryLevel3Attribute.
-       ("Запросы" "Категорияур2") object:findAttribute ?RequestCategoryLevel2Attribute.
-       ("Запросы" "Категорияур1") object:findAttribute ?RequestCategoryLevel1Attribute.
-       ("Категории" "Общаякатегория") object:findAttribute ?CommonCategoryAttribute.
+       ("Поставщики" "Товарныекатегории") object:findProperty ?CounterpartyCategoriesAttribute.
+       ("Запросы" "Категорияур3") object:findProperty ?RequestCategoryLevel3Attribute.
+       ("Запросы" "Категорияур2") object:findProperty ?RequestCategoryLevel2Attribute.
+       ("Запросы" "Категорияур1") object:findProperty ?RequestCategoryLevel1Attribute.
+       ("Категории" "Общаякатегория") object:findProperty ?CommonCategoryAttribute.
 
        # Собираем коллекцию поставщиков, работающих с требуемой категорией третьего уровня
        # для текущей потребности (?item).
@@ -152,7 +153,6 @@ kbId: 5108
        # Возвращаем итоговую коллекцию категорий
        ?RequestCounterpartiesList list:member ?value.
    }
-
    ```
 
 ### 2. Фильтрация для роли
@@ -166,12 +166,12 @@ kbId: 5108
 {
     # Убедитесь, что системные имена соответствуют именам в вашем приложении.
     # Получаем атрибут «Доступные поставщики» из предыдущего вычисления
-    ("Запросы" "Доступныепоставщики") object:findAttribute ?RequestCounterpartiesList.
+    ("Запросы" "Доступныепоставщики") object:findProperty ?RequestCounterpartiesList.
 
     # Получаем атрибуты для проверки связи поставщиков с текущим пользователем.
-    ("Поставщики" "Контакты") object:findAttribute ?ContactsAttribute.
-    ("Контакт" "Ответственный") object:findAttribute ?IsResponsibleAttribute.
-    ("Контакт" "Сотрудник") object:findAttribute ?EmployeeAttribute.
+    ("Поставщики" "Контакты") object:findProperty ?ContactsAttribute.
+    ("Контакт" "Ответственный") object:findProperty ?IsResponsibleAttribute.
+    ("Контакт" "Сотрудник") object:findProperty ?EmployeeAttribute.
 
     # Получаем аккаунт текущего пользователя
     cmw:securityContext cmw:currentUser ?user.
@@ -187,7 +187,6 @@ kbId: 5108
     # если ему разрешено работать с текущим запросом.
     ?user -> ?value.
 }
-
 ```
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

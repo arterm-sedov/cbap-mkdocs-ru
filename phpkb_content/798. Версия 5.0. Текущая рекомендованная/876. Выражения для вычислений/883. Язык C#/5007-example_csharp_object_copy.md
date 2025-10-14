@@ -1,6 +1,7 @@
 ---
-title: Копирование объекта
+title: 'Копирование объекта'
 kbId: 5007
+url: 'https://kb.comindware.ru/article.php?id=5007'
 ---
 
 # Копирование объекта
@@ -8,6 +9,7 @@ kbId: 5007
 Для того чтобы скопировать запись, создайте в текущем шаблоне записи кнопку с операцией C#-скрипт и введите следующее выражение:
 
 ```
+ 
 
 using System; 
 using System.Collections.Generic;
@@ -43,7 +45,6 @@ var result = new UserCommandResult
         return result;
     }
 }
-
 ```
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

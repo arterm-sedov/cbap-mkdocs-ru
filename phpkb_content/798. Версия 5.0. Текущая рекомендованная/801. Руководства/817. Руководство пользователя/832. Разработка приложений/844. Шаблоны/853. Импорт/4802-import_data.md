@@ -1,6 +1,7 @@
 ---
-title: Импорт данных в шаблон
+title: 'Импорт данных в шаблон'
 kbId: 4802
+url: 'https://kb.comindware.ru/article.php?id=4802'
 ---
 
 # Импорт данных в шаблон

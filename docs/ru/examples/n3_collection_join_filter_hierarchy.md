@@ -132,11 +132,11 @@ hide: tags
     {
         # Убедитесь, что системные имена соответствуют именам в вашем приложении.
         # Получаем атрибуты для дальнейших вычислений
-        ("Поставщики" "Товарныекатегории") object:findAttribute ?CounterpartyCategoriesAttribute.
-        ("Запросы" "Категорияур3") object:findAttribute ?RequestCategoryLevel3Attribute.
-        ("Запросы" "Категорияур2") object:findAttribute ?RequestCategoryLevel2Attribute.
-        ("Запросы" "Категорияур1") object:findAttribute ?RequestCategoryLevel1Attribute.
-        ("Категории" "Общаякатегория") object:findAttribute ?CommonCategoryAttribute.
+        ("Поставщики" "Товарныекатегории") object:findProperty ?CounterpartyCategoriesAttribute.
+        ("Запросы" "Категорияур3") object:findProperty ?RequestCategoryLevel3Attribute.
+        ("Запросы" "Категорияур2") object:findProperty ?RequestCategoryLevel2Attribute.
+        ("Запросы" "Категорияур1") object:findProperty ?RequestCategoryLevel1Attribute.
+        ("Категории" "Общаякатегория") object:findProperty ?CommonCategoryAttribute.
 
         # Собираем коллекцию поставщиков, работающих с требуемой категорией третьего уровня
         # для текущей потребности (?item).
@@ -188,12 +188,12 @@ hide: tags
 {
     # Убедитесь, что системные имена соответствуют именам в вашем приложении.
     # Получаем атрибут «Доступные поставщики» из предыдущего вычисления
-    ("Запросы" "Доступныепоставщики") object:findAttribute ?RequestCounterpartiesList.
+    ("Запросы" "Доступныепоставщики") object:findProperty ?RequestCounterpartiesList.
 
     # Получаем атрибуты для проверки связи поставщиков с текущим пользователем.
-    ("Поставщики" "Контакты") object:findAttribute ?ContactsAttribute.
-    ("Контакт" "Ответственный") object:findAttribute ?IsResponsibleAttribute.
-    ("Контакт" "Сотрудник") object:findAttribute ?EmployeeAttribute.
+    ("Поставщики" "Контакты") object:findProperty ?ContactsAttribute.
+    ("Контакт" "Ответственный") object:findProperty ?IsResponsibleAttribute.
+    ("Контакт" "Сотрудник") object:findProperty ?EmployeeAttribute.
     
     # Получаем аккаунт текущего пользователя
     cmw:securityContext cmw:currentUser ?user.

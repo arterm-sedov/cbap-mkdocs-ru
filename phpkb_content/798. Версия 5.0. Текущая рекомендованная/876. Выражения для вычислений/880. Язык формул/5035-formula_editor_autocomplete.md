@@ -1,6 +1,7 @@
 ---
-title: Предиктивный ввод в формулах
+title: 'Предиктивный ввод в формулах'
 kbId: 5035
+url: 'https://kb.comindware.ru/article.php?id=5035'
 ---
 
 # Предиктивный ввод в формулах
@@ -50,7 +51,6 @@ _![Подсказка при предиктивном вводе имени фу
 
    ```
    from a in
-
    ```
 2. После ввода оператора `in` отобразится список доступных источников данных. Этот список также можно вызвать, нажав клавиши `Ctrl`+`Пробел` в позиции после оператора `in`.
 
@@ -62,7 +62,6 @@ _![Подсказка при предиктивном вводе имени фу
 
 Пример: формула, возвращающая список записей в шаблоне, связанном с атрибутом Costs, в которых значение атрибута TotalAmount больше значения атрибута PlannedCosts в текущей записи```
 from a in $Costs where a->TotalAmount > $PlannedCosts select a->id
-
 ```
 
 ### Ввод запроса из шаблона текущего приложения
@@ -71,7 +70,6 @@ from a in $Costs where a->TotalAmount > $PlannedCosts select a->id
 
    ```
    from a in db->
-
    ```
 2. После ввода символов `db->` отобразится список шаблонов текущего приложения. Этот список также можно вызвать, нажав клавиши `Ctrl`+`Пробел` в позиции после `db->`.
 
@@ -83,7 +81,6 @@ from a in $Costs where a->TotalAmount > $PlannedCosts select a->id
 
    Пример: формула, возвращающая количество записей в шаблоне Cars, с таким же значением атрибута Make, как в текущей записи```
    COUNT(from a in db->Cars where a->Make == $Make select a->id)
-
    ```
 
 ### Ввод системного имени атрибута после переменной-селектора
@@ -94,7 +91,6 @@ from a in $Costs where a->TotalAmount > $PlannedCosts select a->id
 
    ```
    from a in $RequestedCars where a->
-
    ```
 2. После ввода символов `a->` отобразится список атрибутов шаблона, связанного с атрибутом `RequestedCars`, на который ссылается локальная переменная-селектор `a`. Этот список также можно вызвать, нажав клавиши `Ctrl`+`Пробел` в позиции после `a->`.
 
@@ -106,12 +102,10 @@ from a in $Costs where a->TotalAmount > $PlannedCosts select a->id
 
    ```
    == USER() select a->id
-
    ```
 
 Пример: формула, возвращающая количество записей в шаблоне, связанном с атрибутом RequestedCars, созданных под текущим аккаунтом```
 COUNT(from a in $RequestedCars where a->_creator == USER() select a->id)
-
 ```
 
 ### Ввод системного имени атрибута из цепочки связанных шаблонов
@@ -122,7 +116,6 @@ COUNT(from a in $RequestedCars where a->_creator == USER() select a->id)
 
    ```
    from a in $$RequestedCars where b->_creator->
-
    ```
 2. После ввода символов `_creator->` отобразится список атрибутов системного **[шаблона аккаунта][attribute_account]**, с которым связан системный атрибут `_creator`. Этот список также можно вызвать, нажав клавиши `Ctrl`+`Пробел` в позиции после оператора `->`.
 
@@ -135,12 +128,10 @@ COUNT(from a in $RequestedCars where a->_creator == USER() select a->id)
 
    ```
    == "admin" select a->id
-
    ```
 
 Пример: формула, возвращающая список записей в шаблоне, связанном с атрибутом $RequestedCars, созданных под аккаунтом admin```
 from a in $RequestedCars where a->_creator->username == "admin" select a->id
-
 ```
 
 ### Практический пример: Подсчёт количества автомобилей марки «Лада» в заявке
@@ -193,7 +184,6 @@ from a in $RequestedCars where a->_creator->username == "admin" select a->id
 
 Формула, подсчитывающая автомобили «Лада» в заявке```
 COUNT(from a in $RequestedCars where a->Make == "Лада" select a->id)
-
 ```
 
 **Синтаксис формулы**
@@ -240,7 +230,6 @@ COUNT(from a in $RequestedCars where a->Make == "Лада" select a->id)
    COUNT(from b in db->Zayavkanaavtomobil
    where b->Status->Nazvanie ==
    select b->id)
-
    ```
 5. Нажмите клавиши `Ctrl`+`Пробел` в позиции после оператора `==`.
 6. Отобразится список записей шаблона *«Статус заявки»*.
@@ -253,7 +242,6 @@ COUNT(from a in $RequestedCars where a->Make == "Лада" select a->id)
 COUNT(from b in db->Zayavkanaavtomobil
 where b->Status->Nazvanie == "Выполняется"
 select b->id)
-
 ```
 
 ## Ввод системного имени атрибута записи, возвращаемой функцией
@@ -270,7 +258,6 @@ select b->id)
 
 Пример: формула, возвращающая имя пользователя текущего аккаунта```
 USER()->username
-
 ```
 
 ## Ввод аргументов функции OBJECT()
@@ -295,7 +282,6 @@ USER()->username
 
 Пример: формула, возвращающая список записей шаблона Avtomobil из приложения Upravlenieavtoparkom, в которых атрибут Marka имеет значение «Лада»```
 OBJECT("Upravlenieavtoparkom", "Avtomobil", "Marka", "Лада")
-
 ```
 
 ## Ввод системного имени значения атрибута типа «Список значений»
@@ -316,7 +302,6 @@ OBJECT("Upravlenieavtoparkom", "Avtomobil", "Marka", "Лада")
    COUNT(from b in db->Zayavkanaotpusk
    where b->Statuszayavki == "Odobrena"
    select b->id)
-
    ```
 
 ### Ввод системного имени значения в качестве аргумента функции
@@ -332,7 +317,6 @@ OBJECT("Upravlenieavtoparkom", "Avtomobil", "Marka", "Лада")
 
 Пример: формула возвращающая true, если в текущей записи атрибут Statuszayavki имеет значение Odobrena```
 EQUALS($Statuszayavki, "Odobrena")
-
 ```
 
 ## Ввод системного имени атрибута текущего шаблона
@@ -346,7 +330,6 @@ EQUALS($Statuszayavki, "Odobrena")
 
 Пример: формула, возвращающая целочисленное значение атрибута Passazhiry в текущей записи```
 INT($Passazhiry)
-
 ```
 
 ## Ввод системного имени атрибута связанного шаблона
@@ -361,7 +344,6 @@ INT($Passazhiry)
 
 Пример: формула, возвращающая сумму значений атрибута Summa из шаблона, связанного с атрибутом Zatraty, и атрибута Nalog в текущей записи```
 ADD($Zatraty->Summa, $Nalog)
-
 ```
 
 ## Ввод запроса записей с совпадающими значениями атрибутов
@@ -398,7 +380,6 @@ ADD($Zatraty->Summa, $Nalog)
 
 Формула в шаблоне «Заявки на автомобили», возвращающая список записей в шаблоне Cars с таким же значением атрибута Type, как у атрибута CarType в текущей записи```
 $CarType<-Cars:Type
-
 ```
 
 ### Запрос количества заявок на такой же автомобиль, как в текущей заявке
@@ -416,7 +397,6 @@ $CarType<-Cars:Type
 
 Формула в шаблоне Requests, возвращающая количество записей с таким же значением атрибута Car, как в текущей записи.```
 COUNT($Car<-Requests:Car)
-
 ```
 
 ## Ввод имён переменных в сценарии
@@ -431,7 +411,6 @@ _![Список локальных переменных в сценарии](/pl
 
 Пример: формула, прибавляющая 1 день к текущей дате```
 ADDDAYS($$requestTime, 1)
-
 ```
 
 --8<-- "related_topics_heading.md"

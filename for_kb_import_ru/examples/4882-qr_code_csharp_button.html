@@ -1,0 +1,44 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4882" kb-tags="" kb-title="QR-код. Формирование с помощью C#-скрипта по нажатию кнопки">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>В процессе настройки решения может понадобиться генерация QR-кода по нажатию кнопки (например, для формирования внутреннего кода для сотрудников). В данной статье мы рассмотрим пошаговую настройку генерации QR-кода по кнопке на форме.</p>
+<p><strong>1.</strong> В шаблоне записи, где вы планируете генерировать QR-код, создайте новый атрибут с типом данных «Текст» (<strong><em>QRinbase</em></strong>). Формат отображения не важен.</p>
+<p><strong>2.</strong> В том же шаблоне записи создайте ещё один атрибут с типом данных «Текст» (<strong><em>QRcode</em></strong>) и форматом отображения «HTML-текст». Установите флаг «Вычисляемый» и в поле «Вычисляемое выражение» вставьте следующую строку:</p>
+<div class="highlight"><code><pre><span></span><code>FORMAT("&lt;img align='center'src='data:image/png;base64,{0}'width='60' height='60' frameborder='0'&lt;/img&gt;",LIST($QRinbase))</code> <br/></pre></code></div>
+<p><strong>где:</strong></p>
+<p><strong><em>width='60' / height='60'</em></strong> — значения ширины и высоты QR-кода на форме;</p>
+<p><strong><em>QRinbase</em></strong> — системное имя атрибута, созданного в п.1.</p>
+<p>Нам необходимо именно два атрибута, так как в первом будет храниться созданный QR-код в формате base64, а во втором — он же, но в формате изображения.</p>
+<p><strong>3.</strong> В том же шаблоне записи создайте новую кнопку (<strong><em>Сформировать QR-код</em></strong>) со следующими параметрами:</p>
+<ul>
+<li>Операция — C# скрипт;</li>
+<li>Контекст операции — Запись;</li>
+<li>Результат выполнения — Обновить данные.</li>
+</ul>
+<p>Во вкладке «Скрипт» вставьте следующее:</p>
+<div class="highlight"><code><pre><span></span><code>using System;</code> <br/><code>using System.Collections.Generic;</code> <br/><code>using System.Linq;</code> <br/><code>using Comindware.Data.Entity;</code> <br/><code>using Comindware.TeamNetwork.Api.Data.UserCommands;</code> <br/><code>using Comindware.TeamNetwork.Api.Data;</code> <br/><code>using RestSharp;</code> <br/><code> </code> <br/><code>class Script</code> <br/><code>{</code> <br/><code>    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)</code> <br/><code>    {</code> <br/><code>        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;</code> <br/><code>        var link = Uri.EscapeDataString("https://yourinstance.comindware.net/#form/oa.1/form.2/" + userCommandContext.ObjectIds[0]);</code> <br/><code>        byte[] AsBytes = new System.Net.WebClient().DownloadData</code> <br/><code>            ("https://qrcode.tec-it.com/API/QRCode?size=small&amp;data="+link);</code> <br/><code>      string AsBase64String = Convert.ToBase64String(AsBytes);</code> <br/><code>       </code> <br/><code>        var data = new Dictionary&lt;string, object&gt;</code> <br/><code>        {</code> <br/><code>            { "QRinbase", AsBase64String }</code> <br/><code>        };</code> <br/><code>        Api.TeamNetwork.ObjectService.EditWithAlias("RecordTemplate", userCommandContext.ObjectIds[0], data);</code> <br/><code>       </code> <br/><code>    var result = new UserCommandResult</code> <br/><code>    {</code> <br/><code>      Success = true,</code> <br/><code>      Commited = true,</code> <br/><code>      Messages = new[]</code> <br/><code>      {</code> <br/><code>        new UserCommandMessage</code> <br/><code>        {</code> <br/><code>          Severity = SeverityLevel.Normal,</code> <br/><code>          Text = "QR-код сформирован"</code> <br/><code>        }</code> <br/><code>      }</code> <br/><code>    };</code> <br/><code>    return result;</code> <br/><code>    }</code> <br/><code>}</code> <br/></pre></code></div>
+<p><strong>где:</strong></p>
+<p><strong><em>https://yourinstance.comindware.net/#form/oa.1/form.2/</em></strong> — ссылка на форму в шаблоне записи, на которую пользователь должен попадать после сканирования QR-кода;</p>
+<p><strong><em>QRinbase</em></strong> — системное имя атрибута в текущем шаблоне записи, созданного в п.1, куда записывается QR-код в формате base64;</p>
+<p><strong><em>RecordTemplate</em></strong> — системное имя текущего шаблона записи;</p>
+<p><strong><em>QR-код сформирован</em></strong> — текст сообщения для пользователя при успешном выполнении операции.</p>
+<p><strong>4.</strong> В том же шаблоне записи вынесите атрибут, созданный в п.2, на нужную форму(ы).</p>
+<p><strong>5.</strong> Вынесите кнопку, созданную в п.3, в нужное место: на форму(ы) или на область кнопок для форм.</p>
+<p><strong>6.</strong> Протестируйте.</p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

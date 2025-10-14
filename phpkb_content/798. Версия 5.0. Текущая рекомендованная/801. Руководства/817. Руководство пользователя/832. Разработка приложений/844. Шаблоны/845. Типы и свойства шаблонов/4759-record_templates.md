@@ -1,6 +1,7 @@
 ---
-title: Шаблон записи
+title: 'Шаблон записи'
 kbId: 4759
+url: 'https://kb.comindware.ru/article.php?id=4759'
 ---
 
 # Шаблон записи

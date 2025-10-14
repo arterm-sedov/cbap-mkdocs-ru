@@ -1,6 +1,7 @@
 ---
-title: Урок 1. Вход в систему и настройка аккаунта
+title: 'Урок 1. Вход в систему и настройка аккаунта'
 kbId: 4871
+url: 'https://kb.comindware.ru/article.php?id=4871'
 ---
 
 # Урок 1. Вход в систему и настройка аккаунта
@@ -35,7 +36,7 @@ kbId: 4871
 4. Нажмите кнопку «**Войти**».
 5. Отобразится начальная страница **{{ productName }}**.
 
-_![Страница входа в {{ productName }}](/platform/v5.0/tutorial/img/lesson_1_login_page.png)_
+_![Страница входа в {{ productName }}](/platform/v5.0/tutorials/tutorial_fleet/img/lesson_1_login_page.png)_
 
 ## Настройка аккаунта
 
@@ -49,13 +50,13 @@ _![Страница входа в {{ productName }}](/platform/v5.0/tutorial/img
 2. Выберите пункт «**Мой аккаунт**».
 3. Должен отобразиться раздел «**Мой аккаунт**».
 
-   ![Переход в «Мой аккаунт»](/platform/v5.0/tutorial/img/lesson_1_go_to_my_account.png)
+   ![Переход в «Мой аккаунт»](/platform/v5.0/tutorials/tutorial_fleet/img/lesson_1_go_to_my_account.png)
 
    Переход в «Мой аккаунт»
 4. Чтобы сменить пароль, нажмите кнопку «**Сменить пароль**».
 5. Чтобы изменения вступили в силу, нажмите кнопку «**Сохранить**».
 
-   ![Мой аккаунт — просмотр сведений, смена пароля и сохранение изменений](/platform/v5.0/tutorial/img/lesson_1_my_account_change_password.png)
+   ![Мой аккаунт — просмотр сведений, смена пароля и сохранение изменений](/platform/v5.0/tutorials/tutorial_fleet/img/lesson_1_my_account_change_password.png)
 
    Мой аккаунт — просмотр сведений, смена пароля и сохранение изменений
 
@@ -63,6 +64,6 @@ _![Страница входа в {{ productName }}](/platform/v5.0/tutorial/img
 
 Вы научились входить в систему и настраивать свой аккаунт.
 
-В [следующем уроке][lesson_2] вы создадите своё первое бизнес-приложение и реестр данных.
+В [следующем уроке][tutorial_fleet_lesson_2] вы создадите своё первое бизнес-приложение и реестр данных.
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

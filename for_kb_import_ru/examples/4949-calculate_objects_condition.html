@@ -1,0 +1,36 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4949" kb-tags="" kb-title="Вычисление объектов, удовлетворяющих условию">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p><strong>Пример задачи:</strong> на форме проекта отобразить в коллекции только тех сотрудников, которые обладают необходимыми для проекта навыками. Сотрудник отображается только в том случае, если все запрашиваемые навыки присутствуют.</p>
+<p>Проект «Космический туризм», необходимые навыки для работы в проекте: Астрономия, Иностранные языки, Логистика.</p>
+<p>Сотрудник №1 обладает навыками: Астрономия, Логистика, Программирование, Сетевые технологии.</p>
+<p>Сотрудник №2 обладает навыками: Веб-дизайн, "Астрономия, Иностранные языки, Логистика.</p>
+<p>У сотрудника №1 нет всех необходимых навыков для участия в проекте, его не нужно отображать в коллекции. А сотрудник №2 подходит, его нужно отобразить.</p>
+<p><strong>Модель данных:</strong></p>
+<ul>
+<li>Шаблон записи «Проекты» (projects):</li>
+<li>Атрибут «Необходимые навыки» (required_skills), ссылающийся на справочник «Навыки» (несколько значений);</li>
+<li>Атрибут «Сотрудники, подходящие для проекта», ссылающийся на справочник «Сотрудники» (несколько значений).</li>
+<li>Шаблон записи «Сотрудники» (employees):</li>
+<li>Атрибут «Навыки сотрудника» (available_skills), ссылающийся на справочник «Навыки» (несколько значений).</li>
+<li>Шаблон записи «Навыки».</li>
+</ul>
+<p>Для того, чтобы вычислить объекты, удовлетворяющие условию, заданному в основном объекте (в данном случае, сотрудников с необходимыми навыками), введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.</code> <br/><code>@prefix assert: &lt;http://comindware.com/logics/assert#&gt;.</code> <br/><code>@prefix cmw: &lt;http://comindware.com/logics#&gt;.</code> <br/><code>{</code> <br/><code>    ("projects" "required_skills") object:findProperty ?PropertyLittle. </code> <br/><code>    ("employees" "available_skills") object:findProperty ?PropertyBig.</code> <br/><code></code> <br/><code>    ?container object:alias "employees". </code> <br/><code>    ?allObjs cmw:container ?container.</code> <br/><code></code> <br/><code>    {</code> <br/><code>        ?item ?PropertyLittle ?resultL.</code> <br/><code>        ?allObjs ?PropertyBig ?resultL.</code> <br/><code>    } assert:count ?c.</code> <br/><code></code> <br/><code>    {</code> <br/><code>        ?item ?PropertyLittle ?resultA.</code> <br/><code>    } assert:count ?d.</code> <br/><code>    </code> <br/><code>    if {?c == ?d}</code> <br/><code>    then {?allObjs -&gt; ?value.}</code> <br/><code>}</code> <br/></pre></code></div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

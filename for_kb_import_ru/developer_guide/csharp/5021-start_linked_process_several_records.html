@@ -1,0 +1,28 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5021" kb-tags="" kb-title="Старт связанного процесса по нескольким записям">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для того, чтобы запустить связанный процесс по нескольким записям (которые будут добавлены в коллекцию), введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code> </code> <br/><code>using System;</code> <br/><code>using System.Collections.Generic;</code> <br/><code>using System.Linq;</code> <br/><code>using Comindware.Data.Entity;</code> <br/><code>using Comindware.TeamNetwork.Api.Data;</code> <br/><code>using Comindware.TeamNetwork.Api.Data.UserCommands;</code> <br/><code> </code> <br/><code>public class Script</code> <br/><code>{</code> <br/><code>public static UserCommandResult Main(UserCommandContext ucContext, Comindware.Entities entities)</code> <br/><code>{</code> <br/><code>var ids = ucContext.ObjectIds;</code> <br/><code>if (ids == null || ids.Count() == 0)</code> <br/><code>{</code> <br/><code>return new UserCommandResult</code> <br/><code>{</code> <br/><code>Success = false,</code> <br/><code>Commited = false,</code> <br/><code>ResultType = UserCommandResultType.DataChange,</code> <br/><code>Messages = new[]</code> <br/><code>{</code> <br/><code>new UserCommandMessage</code> <br/><code>{</code> <br/><code>Severity = SeverityLevel.Major,</code> <br/><code>Text = "Протоколы не выбраны для отправки!"</code> <br/><code>}</code> <br/><code>}</code> <br/><code>};</code> <br/><code>}</code> <br/><code>var protocolDataIds = new List&lt;string&gt;();</code> <br/><code>foreach (var id in ids)</code> <br/><code>{</code> <br/><code>// if id подходит</code> <br/><code>var dataFromProtocol = new Dictionary&lt;string, object&gt;{ { "Protokolispytaniy", id } };</code> <br/><code>protocolDataIds.Add(Api.TeamNetwork.ObjectService.CreateWithAlias("OtpravkiprotokolavFGIS", dataFromProtocol));</code> <br/><code>}</code> <br/><code>var protocolDataCollection = new Dictionary&lt;string, object&gt; { { "syncDataForProtocols", protocolDataIds } };</code> <br/><code>var packageId = Api.TeamNetwork.ObjectService.CreateWithAlias("SinkhronizatsiisFGIS", protocolDataCollection); // Создаем пакет по выбранным объектам</code> <br/><code>var processAppId = Api.Process.ProcessAppService.GetProcessAppIdByAlias("SinkhronizatsiyasFGIS");</code> <br/><code>var processInstanceId = Api.Process.ProcessObjectService.CreateWithObjectId(processAppId, null, packageId);</code> <br/><code>var result = new UserCommandResult</code> <br/><code>{</code> <br/><code>Success = true,</code> <br/><code>Commited = true,</code> <br/><code>ResultType = UserCommandResultType.DataChange,</code> <br/><code>Messages = new[]</code> <br/><code>{</code> <br/><code>new UserCommandMessage</code> <br/><code>{</code> <br/><code>Severity = SeverityLevel.Normal,</code> <br/><code>Text = "По выбранным протоколам начата отправка"</code> <br/><code>}</code> <br/><code>}</code> <br/><code>};</code> <br/><code>return result;</code> <br/><code>}</code> <br/><code>}</code> <br/></pre></code></div>
+<p><strong>где:</strong></p>
+<p><strong>Protokolispytaniy</strong> – системное имя текущего Шаблона записи;</p>
+<p><strong>OtpravkiprotokolavFGIS</strong> – системное имя Шаблона записи (технического), связанного с текущим Шаблоном записи;</p>
+<p><strong>syncDataForProtocols</strong> – системное имя атрибута Шаблона записи SinkhronizatsiisFGIS;</p>
+<p><strong>SinkhronizatsiisFGIS</strong> – системное имя Шаблона записи, где хранится коллекция записей из Шаблона записи Protokolispytaniy;</p>
+<p><strong>SinkhronizatsiyasFGIS</strong> – системное имя Шаблона процесса по Шаблону записи SinkhronizatsiisFGIS.</p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

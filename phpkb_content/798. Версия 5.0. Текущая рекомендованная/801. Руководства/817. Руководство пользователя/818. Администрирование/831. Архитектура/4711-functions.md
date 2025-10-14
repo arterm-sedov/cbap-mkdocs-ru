@@ -1,6 +1,7 @@
 ---
-title: Функции
+title: 'Функции'
 kbId: 4711
+url: 'https://kb.comindware.ru/article.php?id=4711'
 ---
 
 # Функции

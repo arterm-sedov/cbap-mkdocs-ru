@@ -234,6 +234,7 @@ _![Страница входа в {{ productNameEnterprise }}](img/lesson_2_logi
 8. Откроется страница «**Управление версиями**».
 
     _![Страница «Управление версиями»](img/lesson_2_version_control.png)_
+    {% include-markdown ".snippets/pdfPageBreakHard.md" %}
 
 ## Создание оргструктуры {: #tutorial_architect_lesson_2_orgstructure }
 
@@ -421,7 +422,7 @@ _![Отображение атрибута «Отдел» в свойствах 
 - [Формы. Настройка][forms]
 - [Правила для форм. Настройка][form_rules]
 - [Язык формул. Использование][formula_guide]
-- [Язык N3. Использование][n3_guide]
+- [Язык N3. Использование][n3_guide_toc]
 
 </div>
 

@@ -1,6 +1,7 @@
 ---
-title: Конфигурация экземпляра, компонентов ПО и служб. Настройка
+title: 'Конфигурация экземпляра, компонентов ПО и служб. Настройка'
 kbId: 5067
+url: 'https://kb.comindware.ru/article.php?id=5067'
 ---
 
 # Конфигурация экземпляра, компонентов ПО и служб. Настройка
@@ -15,7 +16,6 @@ kbId: 5067
 
    ```
    nano /usr/share/comindware/configs/instance/<instanceName>.yml
-
    ```
 2. При необходимости измените параметры, например:
 
@@ -45,7 +45,6 @@ kbId: 5067
    mkdir -p <path/to/Streams>
    mkdir -p <path/to/Backup>
    chown -R <User>:<Group> <path/to/Database> <path/to/Streams> <path/to/Backup>
-
    ```
 
    Здесь значения `<User>` и `<Group>` должны совпадать с такими же параметрами в файле `/usr/lib/systemd/system/comindware<instanceName>.service`
@@ -53,7 +52,6 @@ kbId: 5067
 
    ```
    systemctl restart comindware<instanceName>
-
    ```
 
 ### Пример YML-файла конфигурации экземпляра ПО
@@ -373,7 +371,6 @@ backup.defaultFileName: <instanceName>
 # Задайте варианты, которые будут отображаться
 # в меню выбора количества строк таблицы.
 #queryPageResultRange: [ 50, 500, 5000, 1000000000 ]
-
 ```
 
 ## Конфигурация службы apigateway
@@ -382,7 +379,6 @@ backup.defaultFileName: <instanceName>
 
    ```
    nano /var/www/<instanceName>/apigateway.yml
-
    ```
 2. Измените необходимые параметры.
 3. Удостоверьтесь, что значение параметра `cluster.name` (имя экземпляра ПО) совпадает с `clusterName` и значение параметров `mq.server` (адрес и порт сервера очереди сообщений), `mq.group` (идентификатор группы очереди сообщений), `mq.node` (идентификатор узла очереди сообщений) — с аналогичными параметрами в [файле конфигурации экземпляра](#конфигурация-экземпляра-по).
@@ -391,7 +387,6 @@ backup.defaultFileName: <instanceName>
 
    ```
    systemctl restart apigateway<instanceName>
-
    ```
 
 ### Пример конфигурации службы apigateway.yml
@@ -436,7 +431,6 @@ services:
 - apiPrefix: useractivity
 - apiPrefix: notification
 - apiPrefix: architect
-
 ```
 
 ## Конфигурация службы adapterhost
@@ -445,7 +439,6 @@ services:
 
    ```
    nano /var/www/<instanceName>/adapterhost.yml
-
    ```
 2. Измените необходимые параметры.
 3. Удостоверьтесь, что значения параметров `mq.server` (адрес и порт сервера очереди сообщений), `mq.group` (идентификатор группы очереди сообщений), `mq.node` (идентификатор узла очереди сообщений) и `clusterName` (имя экземпляра ПО) совпадают с аналогичными параметрами в [файле конфигурации экземпляра ПО](#пример-yml-файла-конфигурации-экземпляра-по).
@@ -454,7 +447,6 @@ services:
 
    ```
    systemctl restart adapterhost<instanceName>
-
    ```
 
 ### Пример файла конфигурации adapterhost.yml
@@ -480,7 +472,6 @@ log.maxArchiveFiles: 100
 log.archiveAboveSize: 1048576000
 # Путь к архивам журналов
 log.archiveFolder: /var/log/comindware/<instanceName>/Logs/Archive/
-
 ```
 
 ## Конфигурация Apache Ignite
@@ -489,7 +480,6 @@ log.archiveFolder: /var/log/comindware/<instanceName>/Logs/Archive/
 
    ```
    nano /var/www/<instanceName>/Ignite.config
-
    ```
 2. В блоке `<bean class="org.apache.ignite.configuration.DataRegionConfiguration">` задайте максимальный объём выделяемой памяти:
 
@@ -497,13 +487,11 @@ log.archiveFolder: /var/log/comindware/<instanceName>/Logs/Archive/
 
      ```
      <property name="maxSize" value="#{3L * 1024 * 1024 * 1024}" />
-
      ```
    - 8 ГБ:
 
      ```
      <property name="maxSize" value="#{8L * 1024 * 1024 * 1024}" />
-
      ```
 3. В случае изменения максимального объёма выделяемой памяти отредактируйте параметр `checkpointPageBufferSize`. Чтобы рассчитать размер значения, разделите размер `maxSize` на четыре, при этом значение должно быть в диапазоне 256 МБ — 2 ГБ.
 
@@ -511,13 +499,11 @@ log.archiveFolder: /var/log/comindware/<instanceName>/Logs/Archive/
 
      ```
      <property name="checkpointPageBufferSize" value="#{2L * 1024 * 1024 * 1024}" />
-
      ```
 4. Перезапустите службу экземпляра ПО:
 
    ```
    systemctl restart comindware<instanceName>
-
    ```
 
 ## Конфигурация кучи Java
@@ -528,13 +514,11 @@ log.archiveFolder: /var/log/comindware/<instanceName>/Logs/Archive/
 
    ```
    nano /etc/sysconfig/comindware<instanceName>-env
-
    ```
 2. Задайте объём памяти, который выделяется для кучи Java:
 
    ```
    JVM_OPTS=-Xms512m -Xmx16g -XX:MaxDirectMemorySize=1g ...
-
    ```
 
    Здесь:
@@ -547,7 +531,6 @@ log.archiveFolder: /var/log/comindware/<instanceName>/Logs/Archive/
    ```
    systemctl daemon-reload
    systemctl restart comindware<instanceName>
-
    ```
 
 ## Конфигурация NGINX
@@ -558,19 +541,16 @@ log.archiveFolder: /var/log/comindware/<instanceName>/Logs/Archive/
 
      ```
      nano /etc/nginx/sites-available/comindware<instanceName>
-
      ```
    - **РЕД ОС**, **Rocky** (RPM-based)
 
      ```
      nano /etc/nginx/conf.d/comindware<instanceName>
-
      ```
    - **Альт Сервер**
 
      ```
      nano /etc/nginx/sites-available.d/comindware<instanceName>
-
      ```
 2. В директиве `server` задайте номер порта и адрес сервера, по которым будет доступен экземпляр ПО:
 
@@ -581,27 +561,23 @@ log.archiveFolder: /var/log/comindware/<instanceName>/Logs/Archive/
        # Номер порта для доступа к экземпляру ПО.
        listen <portNumber>
    }
-
    ```
 3. Для записи событий в отдельные журналы укажите их:
 
    ```
        error_log /var/log/nginx/<instanceName>-error.log;
        access_log /var/log/nginx/<instanceName>-access.log;
-
    ```
 4. Сохраните файл конфигурации.
 5. Проверьте, что изменения работают корректно:
 
    ```
    nginx -t
-
    ```
 6. При успешном вступлении изменений в силу перезагрузите NGINX:
 
    ```
    nginx -s reload
-
    ```
 
 --8<-- "related_topics_heading.md"

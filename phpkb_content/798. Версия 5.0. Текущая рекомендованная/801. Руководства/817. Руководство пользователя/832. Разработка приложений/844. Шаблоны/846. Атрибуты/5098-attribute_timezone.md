@@ -1,6 +1,7 @@
 ---
-title: Атрибут типа «Часовой пояс»
+title: 'Атрибут типа «Часовой пояс»'
 kbId: 5098
+url: 'https://kb.comindware.ru/article.php?id=5098'
 ---
 
 # Атрибут типа «Часовой пояс»
@@ -43,7 +44,6 @@ kbId: 5098
 
   ```
   "Europe/Moscow"
-
   ```
 
   Список идентификаторов см. на [сайте IANA](https://www.iana.org/time-zones).

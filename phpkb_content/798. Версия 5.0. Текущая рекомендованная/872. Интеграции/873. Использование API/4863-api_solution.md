@@ -1,6 +1,7 @@
 ---
-title: Методы Solution API
+title: 'Методы Solution API'
 kbId: 4863
+url: 'https://kb.comindware.ru/article.php?id=4863'
 ---
 
 # Методы Solution API

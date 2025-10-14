@@ -1,6 +1,7 @@
 ---
-title: Встроенный подпроцесс
+title: 'Встроенный подпроцесс'
 kbId: 4731
+url: 'https://kb.comindware.ru/article.php?id=4731'
 ---
 
 # Встроенный подпроцесс

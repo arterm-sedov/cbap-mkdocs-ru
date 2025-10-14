@@ -1,6 +1,7 @@
 ---
-title: Резервное копирование и восстановление в Windows
+title: 'Резервное копирование и восстановление в Windows'
 kbId: 4644
+url: 'https://kb.comindware.ru/article.php?id=4644'
 ---
 
 # Резервное копирование и восстановление в Windows
@@ -50,13 +51,11 @@ kbId: 4644
 
    ```
    path.repo: <elastic_backup_path>
-
    ```
 2. Чтобы зарегистрировать репозиторий, выполните следующую команду, указав в URL имя репозитория `<repository_name>` (см. *«[Подготовка к резервному копированию и восстановлению данных](#backup_restore_windows_prepare)»*), а в параметре `location` — путь к репозиторию из директивы `path.repo` в файле конфигурации сервера OpenSearch (Elasticsearch):
 
    ```
    curl -X PUT "<openSearchHost>:<opeSearchPort>/_snapshot/<repository_name>?pretty" -H 'Content-Type: application/json' -d' {"type": "fs", "settings": {"location": "<elastic_backup_path>"}}'
-
    ```
 
    См. [документацию OpenSearch (Elasticsearch) по регистрации репозитория](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html).
@@ -64,7 +63,6 @@ kbId: 4644
 
    ```
    curl -X PUT "<openSearchHost>:<opeSearchPort>/_snapshot/<repository_name>/<snapshot_name>?wait_for_completion=true&pretty" -H 'Content-Type: application/json' -d' {"indices": "cmw_<instanceName>_*", "ignore_unavailable": true, "include_global_state": false}'
-
    ```
 
    См. [документацию OpenSearch (Elasticsearch) по созданию снимков](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-take-snapshot.html).
@@ -87,26 +85,22 @@ kbId: 4644
 
    ```
    cd "<distPath>\\CMW_Windows<versionNumber>\\scripts"
-
    ```
 3. Остановите экземпляр ПО:
 
    ```
    .\\instance_stop.ps1 -name <instanceName>
-
    ```
 4. Удалите или переместите директорию `Database` из директории экземпляра ПО:
 
    ```
    Remove-Item -Path "C:\\ProgramData\\comindware\\Instances\\<instanceName>\\Database" -Recurse
-
    ```
 5. Распакуйте zip-архив резервной копии экземпляра ПО с расширением `CDBBZ` из папки `<DatabaseBackupPath>`.
 6. Скопируйте в экземпляр ПО распакованную резервную копию базы данных:
 
    ```
    Copy-Item -Path "<config_backup_path>\\Database" -Destination "C:\\ProgramData\\сomindware\\Instances\\<instanceName>" -Recurse -Force
-
    ```
 
    Здесь: `<config_backup_path>` — директория с распакованной резервной копией.
@@ -114,13 +108,11 @@ kbId: 4644
 
    ```
    .\\instance_start.ps1 -name <instanceName>
-
    ```
 8. Откройте сайт экземпляра ПО в браузере, одновременно открыв выдачу журналов экземпляра в *PowerShell*:
 
    ```
    Get-Content "C:\\ProgramData\\comindware\\Instances\\<instanceName>\\Logs\\heartbeat_<ГГГГ-ММ-ДД>.log" -Wait
-
    ```
 9. Проверьте и при необходимости исправьте конфигурацию экземпляра ПО. См. *«[Проверка и настройка конфигурации экземпляра ПО {{ productName }} после восстановления из резервной копии][restore_test_configure]»*.
 10. Проверьте и работоспособность экземпляра ПО.
@@ -132,7 +124,6 @@ kbId: 4644
 
 ```
 curl -X POST "<openSearchHost>:<opeSearchPort>/_snapshot/<repository_name>/<snapshot_name>/_restore?pretty"
-
 ```
 
 Подробные сведения о восстановлении снимков OpenSearch (Elasticsearch) см. в официальной документации (на английском языке): <https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-restore-snapshot.html>

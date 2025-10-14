@@ -1,6 +1,7 @@
 ---
-title: Общие сведения об API Comindware Platform
+title: 'Общие сведения об API Comindware Platform'
 kbId: 4860
+url: 'https://kb.comindware.ru/article.php?id=4860'
 ---
 
 # Общие сведения об API {{ productName }}
@@ -154,7 +155,6 @@ _![Страница Swagger UI с разделами API {{ productName }}](htt
 
 ```
 http://your-host/api/public/system/TeamNetwork/ObjectAppService/Create
-
 ```
 
 - Вместо `your-host` укажите адрес экземпляра **{{ productName }}**.

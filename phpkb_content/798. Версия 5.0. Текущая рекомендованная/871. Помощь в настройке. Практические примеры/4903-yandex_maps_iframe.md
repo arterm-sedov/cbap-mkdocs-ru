@@ -1,6 +1,7 @@
 ---
-title: Яндекс карты. Настройка отображения в iframe
+title: 'Яндекс карты. Настройка отображения в iframe'
 kbId: 4903
+url: 'https://kb.comindware.ru/article.php?id=4903'
 ---
 
 # Яндекс карты. Настройка отображения в iframe

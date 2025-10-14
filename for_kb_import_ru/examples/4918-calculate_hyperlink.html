@@ -1,0 +1,473 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4918" kb-tags="" kb-title="Вычисление гиперссылки на запись, задачу или экземпляр процесса с помощью формул">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#универсальная-гиперссылка-на-запись-задачу-или-экземпляр-процесса">
+<span class="md-ellipsis">
+      Универсальная гиперссылка на запись, задачу или экземпляр процесса
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#гиперссылка-на-определённую-форму-конкретной-записи">
+<span class="md-ellipsis">
+      Гиперссылка на определённую форму конкретной записи
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#гиперссылка-на-экземпляр-процесса">
+<span class="md-ellipsis">
+      Гиперссылка на экземпляр процесса
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#гиперссылка-на-пользовательскую-задачу">
+<span class="md-ellipsis">
+      Гиперссылка на пользовательскую задачу
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#пример-формирование-гиперссылок-на-записи-и-экземпляры-процесса">
+<span class="md-ellipsis">
+      Пример: формирование гиперссылок на записи и экземпляры процесса
+    </span>
+</a>
+<nav aria-label="Пример: формирование гиперссылок на записи и экземпляры процесса" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#тестирование-приложения">
+<span class="md-ellipsis">
+      Тестирование приложения
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Каждой записи, пользовательской задаче, форме и каждому экземпляру процесса присваивается уникальный ID. ID не повторяются в рамках сервера <strong>Comindware Platform</strong>.</p>
+<p>По ID можно формировать гиперссылки на соответствующие объекты. Такие гиперссылки можно использовать на формах, в таблицах, уведомлениях и эл. письмах.</p>
+<p>В этой статье представлены инструкции по вычислению (с помощью языка формул) гиперссылок для быстрого перехода к ресурсам приложения:</p>
+<ul>
+<li>к основной форме любой записи (см. <em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4786">Настройка свойств формы</a></em>);</li>
+<li>к определённой форме конкретной записи;</li>
+<li>к форме пользовательской задачи (см. <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4730">Пользовательская задача</a>, <em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4726">Редактирование формы пользовательской задачи</a></em><em>)</em>;</li>
+<li>к диаграмме экземпляра бизнес-процесса (см.<em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4723">Использование диаграммы экземпляра процесса</a>).</em></li>
+</ul>
+<p>Абсолютные и относительные ссылки</p>
+<p>При формировании ссылок на ресурсы в рамках сервера <strong>Comindware Platform</strong>можно использовать ссылки двух видов:</p>
+<ul>
+<li><code>/resource</code> — относительная ссылка на ресурс.</li>
+<li>Относительная ссылка будет работать только в рамках сервера <strong>Comindware Platform</strong> и не будет работать, например, если её отправить в эл. письме или сообщении.</li>
+<li>Относительная ссылка будет работать при любом доменном имени сервера, что позволит перенести приложение на другой домен без перенастройки выражений и скриптов, вычисляющих гиперссылки.</li>
+<li><code>http://your-host/resource</code> — абсолютная ссылка на ресурс.</li>
+<li>Абсолютная ссылка будет работать не только в рамках сервера <strong>Comindware Platform</strong>, но и в любых других внешних системах, например, в эл. письмах и на сторонних веб-сайтах.</li>
+<li>Абсолютная ссылка будет работать только на конкретном доменном имени, что потребует перенастройки выражений и скриптов, вычисляющих гиперссылки при переносе приложения на другой домен.</li>
+</ul>
+<h2 id="универсальная-гиперссылка-на-запись-задачу-или-экземпляр-процесса">Универсальная гиперссылка на запись, задачу или экземпляр процесса</h2>
+<p>Для перехода к любой записи, задаче или экземпляру процесса используйте универсальную ссылку следующего формата:</p>
+<div class="highlight"><code><pre><span></span><code>http://your-host/#Resolver/&lt;ID&gt;</code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<ul>
+<li><code>http://your-host/</code> — адрес сервера <strong>Comindware Platform</strong>.</li>
+<li><code>&lt;ID&gt;</code> — ID записи, пользовательской задачи или экземпляра процесса.</li>
+</ul>
+<p>Примечание</p>
+<p>Для записи универсальная ссылка всегда ведёт на основную форму шаблона, то есть форму, в свойствах которой установлен флажок «<strong>По умолчанию</strong>». См. <em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4786">Настройка свойств формы</a>.</em></p>
+<p>Для пользовательской задачи универсальная ссылка ведёт на форму задачи.</p>
+<p>Для экземпляра процесса универсальная ссылка ведёт на диаграмму экземпляра процесса.</p>
+<h2 id="гиперссылка-на-определённую-форму-конкретной-записи">Гиперссылка на определённую форму конкретной записи</h2>
+<p>Для перехода к определённой форме конкретной записи используйте ссылку следующего формата:</p>
+<div class="highlight"><code><pre><span></span><code>http://your-host/#form/&lt;oa.XX&gt;/&lt;form.XX&gt;/&lt;RecordID&gt;</code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<ul>
+<li><code>http://your-host/</code> — адрес сервера <strong>Comindware Platform</strong>;</li>
+<li><code>&lt;oa.XX&gt;</code> — ID шаблона;</li>
+<li><code>&lt;form.XX&gt;</code> — ID формы;</li>
+<li><code>&lt;RecordID&gt;</code> — ID записи.</li>
+</ul>
+<h2 id="гиперссылка-на-экземпляр-процесса">Гиперссылка на экземпляр процесса</h2>
+<p>Для перехода к <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4723">диаграмме экземпляра процесса</a> используется ссылка следующего вида:</p>
+<div class="highlight"><code><pre><span></span><code>http://your-host/#process/&lt;ProcessID&gt;/map</code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<ul>
+<li><code>http://your-host/</code> — адрес сервера <strong>Comindware Platform</strong>;</li>
+<li><code>&lt;ProcessID&gt;</code> — ID экземпляра процесса.</li>
+</ul>
+<h2 id="гиперссылка-на-пользовательскую-задачу">Гиперссылка на пользовательскую задачу</h2>
+<p>Для перехода к <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4730">пользовательской задаче</a> используется ссылка следующего вида:</p>
+<div class="highlight"><code><pre><span></span><code>http://your-host/#task/&lt;TaskID&gt;</code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<ul>
+<li><code>http://your-host/</code> — адрес сервера <strong>Comindware Platform</strong>;</li>
+<li><code>&lt;TaskID&gt;</code> — ID пользовательской задачи.</li>
+</ul>
+<h2 id="пример-формирование-гиперссылок-на-записи-и-экземпляры-процесса">Пример: формирование гиперссылок на записи и экземпляры процесса</h2>
+<p>В данном примере показано, как можно применять ссылки на формы записи внутри приложения и как можно отправить ссылку на экземпляр процесса электронной почтой.</p>
+<ol class="colored_numbers_list">
+<li>Создайте <strong>шаблон записи</strong> «<em>Карточка товара</em>».</li>
+<li>Создайте следующие атрибуты:</li>
+</ol>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th><strong>Название атрибута</strong></th>
+<th><strong>Тип данных</strong></th>
+<th><strong>Свойства</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Наименование</em></td>
+<td><strong>Текст</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><em>Артикул</em></td>
+<td><strong>Текст</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><em>Год выпуска</em></td>
+<td><strong>Дата и время</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><em>Количество экземпляров</em></td>
+<td><strong>Число</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><em>Изображение</em></td>
+<td><strong>Изображение</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><em>ProcessID</em></td>
+<td><strong>Текст</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><em>Перейти к готовой карточке</em></td>
+<td><strong>Текст</strong></td>
+<td><strong>Формат отображения: HTML-текст</strong> <strong>Вычислять автоматически:</strong> флажок установлен  <strong>Вычисляемое выражение: формула</strong> <code>FORMAT("&lt;a href=/#Resolver/{0}&gt; Перейти к готовой карточке &lt;/a&gt;", LIST($id))</code> <strong>Здесь:</strong>  - <code>FORMAT()</code> — эта функция принимает строку заменителями вида <code>{0}</code>…<code>{N}</code> и список значений. Функция подставляет значения из списка в соответствующие заменители и возвращает результирующую строку. - <code>LIST()</code> — эта функция принимает перечень значений и возвращает список, состоящий из этих значений. - <code>/#Resolver/</code> — префикс относительной универсальной ссылки на любую запись. - <code>{0}</code> — заменитель, в который будет подставлен ID записи. - <code>Перейти к готовой карточке</code> — текст, который будет отображаться в виде гиперссылки. - <code>$id</code> — системное имя системного атрибута <strong>ID</strong> шаблона записи <em>«Карточка товара»</em>.</td>
+</tr>
+<tr>
+<td><em>Перейти к экземпляру процесса</em></td>
+<td><strong>Текст</strong></td>
+<td><strong>Формат отображения: HTML-текст</strong> <strong>Вычислять автоматически:</strong>флажок установлен  <strong>Вычисляемое выражение: формула</strong> <code>FORMAT("&lt;a href=https://your-host/#process/{0}/map&gt; Перейти к процессу &lt;/a&gt;", LIST($ProcessID))</code> <strong>Здесь:</strong>  - <code>http://your-host/</code> — адрес сервера <strong>Comindware Platform</strong>. - <code>$ProcessID</code> — системное имя атрибута <em>«ProcessID»</em>.</td>
+</tr>
+<tr>
+<td>3. Создайте новую форму <em>«Редактирование карточки товара»</em> и поместите на неё атрибуты:</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <em>Наименование</em></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <em>Артикул</em></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <em>Год выпуска</em></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <em>Изображение</em></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <em>Количество экземпляров</em></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <em>Перейти к готовой карточке</em></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>4. Создайте атрибут <strong>«Перейти к форме редактирования»:</strong></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th><strong>Название атрибута</strong></th>
+<th><strong>Тип данных</strong></th>
+<th><strong>Свойства</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Перейти к форме редактирования</em></td>
+<td><strong>Текст</strong></td>
+<td><strong>Формат отображения: HTML-текст</strong> <strong>Вычислять автоматически:</strong> флажок установлен  <strong>Вычисляемое выражение: формула</strong> <code>FORMAT("&lt;a href=http://your-host/#form/oa.6/form.333/{0}&gt; Перейти к форме редактирования &lt;/a&gt;", LIST($id))</code> <strong>Здесь:</strong>  - <code>http://your-host/</code> — адрес сервера <strong>Comindware Platform</strong>. - <code>oa.6</code> — ID шаблона записи «<em>Карточка товара</em>» (подставьте фактическое значение). - <code>form.333</code> — ID формы <em>«Редактирование карточки товара»</em> (подставьте фактическое значение). - <code>Перейти к форме редактирования</code> — текст, который будет отображаться в виде гиперссылки. - <code>$id</code> — системное имя системного атрибута <strong>ID</strong> шаблона записи <em>«Карточка товара»</em>.</td>
+</tr>
+<tr>
+<td>5. Настройте основную форму:</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- Установите для неё <strong>доступ</strong> <strong>только для чтения</strong>.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- Поместите на ней атрибуты:</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <em>Наименование</em></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <em>Артикул</em></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <em>Год выпуска</em></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <em>Изображение</em></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <em>Количество экземпляров</em></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <em>Перейти к форме редактирования</em></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6. Создайте бизнес-процесс <em>«Добавление нового товара со склада»</em>, связанный с шаблоном записи «<em>Карточка товара</em>»:</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Простое начальное событие</strong> — соединено с промежуточным событием-отправкой сообщения <em>«Уведомление о создании карточки»</em>.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Промежуточное событие-отправка сообщения</strong> <em>«Уведомление о создании карточки»</em> — соединено с пользовательской задачей <em>«Отредактировать карточку»</em>.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Пользовательская задача</strong> <em>«Отредактировать карточку»</em> — соединена с конечным событием.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Конечное событие</strong> — завершает бизнес-процесс.</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><code><pre><span></span><code> ![Добавление нового товара со склада](https://kb.comindware.ru/assets/img_6682d359298b9.png)</code> <br/><code></code> <br/><code> Диаграмма бизнес-процесса «*Добавление нового товара со склада*»</code> <br/></pre></code></div>
+<ol class="colored_numbers_list" start="7">
+<li>В начальном событии создайте и настройте сценарий «<strong>Изменить значения атрибутов</strong>»:</li>
+</ol>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Атрибут</th>
+<th>Операция со значениями</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>ProcessID</em></td>
+<td><strong>Заменить</strong></td>
+<td><strong>Формула</strong>:   <code>FORMAT("{0}", LIST($$ProcessObject))</code> <strong>Здесь:</strong> <code>$$ProcessObject</code> — системная переменная, хранящая ID экземпляра процесса. См. <em><code>Использование переменных в сценарии {Article-ID:4719}</code></em> <em>.</em>  Данная формула преобразует ID экземпляра процесса в строку.</td>
+</tr>
+<tr>
+<td>8. На <strong>стартовую форму</strong> начального события поместите (как вложенную) форму <em>«Редактирование карточки товара»</em>.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>9. На форму задачи <em>«Отредактировать карточку»</em> поместите (как вложенную) основную форму шаблона записи «<em>Карточка товара</em>».</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>10. Назначьте себя исполнителем задачи <em>«Отредактировать карточку»</em>.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>11. Настройте <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4692">подключение к SMTP-серверу</a> с названием <em>«Системное уведомление»</em>.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>12. Настройте <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4690">путь передачи данных для отправки эл. почты из процесса</a>:</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Основные свойства</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Название:</strong> <em>Уведомление «Создана карточка товара»</em></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Подключение:</strong> <em>Системное уведомление</em></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Имя сообщения:</strong> <em>MessageNewCard</em></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Атрибуты сообщения</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Название:</strong> <em>Ссылка на экземпляр процесса</em></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Системное имя:</strong> <em>ProcessLink</em></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Тип данных:</strong> <strong>Текст</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Свойства сообщения</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Кому:</strong> укажите свой адрес эл. почты</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Формат сообщения: Размеченный</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Сообщение</strong>:</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><code><pre><span></span><code>    ```</code> <br/><code>    Добрый день!</code> <br/><code>    Добавлен новый товар со склада. {ProcessLink}</code> <br/><code>    ```</code> <br/></pre></code></div>
+<ol class="colored_numbers_list" start="13">
+<li>Вернитесь к диаграмме бизнес-процесса и настройте <strong>промежуточное событие-отправку сообщения</strong><em>«Уведомление о создании карточки»</em>:<ul>
+<li><strong>Дополнительные</strong></li>
+<li><strong>Место назначения:</strong> <strong>внешний сокет</strong></li>
+<li><strong>Использовать путь передачи данных:</strong> <em>Уведомление «Создана карточка товара»</em></li>
+<li><strong>Данные сообщения</strong></li>
+<li><strong>Название:</strong> <em>Ссылка на экземпляр процесса</em></li>
+<li><strong>Системное имя:</strong> <em>ProcessLink</em></li>
+<li><strong>Тип данных:</strong> <strong>текст</strong></li>
+<li><strong>Значение:</strong> <strong>атрибут</strong> «<em>Перейти к экземпляру процесса»</em></li>
+</ul>
+</li>
+<li>Опубликуйте диаграмму.</li>
+</ol>
+<h3 id="тестирование-приложения">Тестирование приложения</h3>
+<ol class="colored_numbers_list">
+<li>Создайте экземпляр процесса <em>«Добавление нового товара со склада»</em>.</li>
+<li>Заполните карточку товара.</li>
+<li>На вашу почту придёт письмо со ссылкой на экземпляр процесса.</li>
+<li>Перейдите по ссылке, просмотрите диаграмму, попробуйте остановить процесс или перезапустить его. См. <em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4723">Использование диаграммы экземпляра процесса</a></em><strong>.</strong></li>
+</ol>
+<p><img alt="Письмо со гиперссылкой на экземпляр процесса" src="https://kb.comindware.ru/assets/img_6682d880afdef.png"/></p>
+<p>Письмо со гиперссылкой на экземпляр процесса
+5. Откройте задачу <em>«Отредактировать карточку»</em>.</p>
+<p><img alt="Основная форма с гиперссылкой на форму редактирования карточки товара" src="https://kb.comindware.ru/assets/img_6682d6567b303.png"/></p>
+<p>Основная форма просмотра карточки товара с гиперссылкой на форму редактирования карточки
+6. Просмотрите карточку товара и переключитесь между формами просмотра и редактирования по гиперссылкам <em>«Перейти к форме редактирования»</em> и <em>«Перейти к готовой карточке»</em>.</p>
+<figure class="screenshot_with_caption" markdown="block">![](https://kb.comindware.ru/assets/img_6682d69263666.png)&lt;figcaption&gt;&lt;/figcaption&gt;</figure>
+<p>Форма редактирования карточки товара с гиперссылкой на форму просмотра карточки</p>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4723">Использование диаграммы экземпляра процесса</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4786">Формы. Определения, редактирование, удаление</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4730">Пользовательская задача</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4766">Атрибут типа  «Гиперссылка»</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4692">Отправка эл. почты из сценариев через SMTP и Exchange. Настройка подключения, пути передачи данных и сценария</a></strong></p>
+<p><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4690"><strong>Настройка пути передачи данных типа «Отправка эл. почты из процесса»</strong></a></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4719">Переменные в сценарии</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4726">Редактирование формы пользовательской задачи</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4786">Настройка свойств формы</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

@@ -1,6 +1,7 @@
 ---
-title: Аутентификация через Keycloak и OpenID Connect. Настройка подключения и служб
+title: 'Аутентификация через Keycloak и OpenID Connect. Настройка подключения и служб'
 kbId: 4685
+url: 'https://kb.comindware.ru/article.php?id=4685'
 ---
 
 # Аутентификация через Keycloak и OpenID Connect. Настройка подключения и служб
@@ -52,7 +53,9 @@ kbId: 4685
 6. На шаге **General settings**:
 
    - Выберите «**Client type**» (Тип клиента) **OpenID Connect**.
-   - Введите «**Client ID**» (ID клиента), например `<myKeycloakClient>`.![Создание нового клиента Keycloak](/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_client.png)
+   - Введите «**Client ID**» (ID клиента), например `<myKeycloakClient>`.
+
+   ![Создание нового клиента Keycloak](/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_client.png)
 
    Создание нового клиента Keycloak
 7. Нажмите кнопку **Next** (Далее).
@@ -67,18 +70,22 @@ kbId: 4685
     - **Root URL** (Корневой URL), например `https://<yourHost>/`;
     - **Home URL** (URL начальной страницы), например `https://<yourHost>/`;
     - **Valid redirect URIs** (Допустимые URI переадресаций), например `https://<yourHost>/*`;
-    - **Web origins** (Исходные URI), например `https://<yourHost>/`.![Настройка параметров входа для клиента Keycloak](/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_client_3.png)
+    - **Web origins** (Исходные URI), например `https://<yourHost>/`.
+
+    ![Настройка параметров входа для клиента Keycloak](/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_client_3.png)
 
     Настройка параметров входа для клиента Keycloak
 11. Нажмите кнопку «**Save**» (Сохранить).
 12. На отобразившейся странице:
 
     - отключите функцию **Front channel logout** (Выход через фронтенд);
-    - введите **Backchannel logout URL** (URL выхода через бэкенд), например `https://<yourHost>/OpenIdLogoutChallenge`.![Настройка параметров выхода для клиента Keycloak](/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_logout_settings.png)
+    - введите **Backchannel logout URL** (URL выхода через бэкенд), например `https://<yourHost>/OpenIdLogoutChallenge`.
+
+    ![Настройка параметров выхода для клиента Keycloak](/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_logout_settings.png)
 
     Настройка параметров выхода для клиента Keycloak
 13. Откройте вкладку **Credentials** (Учётные данные).
-14. Сохраните **Client Secret** (Секрет клиента). Его потребуется указать в директиве `auth.openId.clientSecret` в [файле конфигурации {{ productnName }}](#openid_connection_instance_configure).
+14. Сохраните **Client Secret** (Секрет клиента). Его потребуется указать в директиве `auth.openId.clientSecret` в [файле конфигурации {{ productName }}](#openid_connection_instance_configure).
 
     ![Настройка учётных данных для клиента Keycloak](/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_copy_client_secret.png)
 
@@ -89,14 +96,18 @@ kbId: 4685
 
     - Включите функцию **Email verified** (Адрес эл. почты подтверждён).
     - Заполните поля **Username** (Логин), **Email** (Адрес эл. почты), **First name** (Имя), **Last name** (Фамилия).
-    - Нажмите кнопку **Create** (Создать) или **Save** (Сохранить).![Создание нового пользователя Keycloak](/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_user.png)
+    - Нажмите кнопку **Create** (Создать) или **Save** (Сохранить).
+
+    ![Создание нового пользователя Keycloak](/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_user.png)
 
     Создание нового пользователя Keycloak
 18. На вкладке **Credentials** (Учётные данные) нажмите кнопку **Set password** (Установить пароль).
 
     - Задайте временный пароль для пользователя.
     - Включите функцию **Temporary** (Временный пароль).
-    - Нажмите кнопку **Save** (Сохранить).![Установка временного пароля для пользователя Keycloak](/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_user_set_password.png)
+    - Нажмите кнопку **Save** (Сохранить).
+
+    ![Установка временного пароля для пользователя Keycloak](/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_user_set_password.png)
 
     Установка временного пароля для пользователя Keycloak
 

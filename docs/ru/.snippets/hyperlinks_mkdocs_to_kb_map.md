@@ -1,5 +1,19 @@
 <!-- Любые руководства -->
 
+<!-- Страницы оглавлений в БЗ. Начало -->
+
+[guides_toc]: {{ kbArticleURLPrefix }}4593
+
+[admin_guide_toc]: {{ kbArticleURLPrefix }}4594
+
+[developer_guide_toc]: {{ kbArticleURLPrefix }}4851
+
+[n3_guide_toc]: {{ kbArticleURLPrefix }}4931
+
+[root_toc]: {{ kbArticleURLPrefix }}4594
+
+<!-- Страниц оглавлений в БЗ. Конец -->
+
 <!-- Категории в БЗ. Начало -->
 
 [account_management_cat]: {{ kbCategoryURLPrefix }}813
@@ -42,6 +56,8 @@
 
 [integrations_cat]: {{ kbCategoryURLPrefix }}872
 
+[n3_guide_cat]: {{ kbCategoryURLPrefix }}877
+
 [user_guide_cat]: {{ kbCategoryURLPrefix }}817
 
 [admin_guide_cat]: {{ kbCategoryURLPrefix }}802
@@ -57,6 +73,24 @@
 [apache_ignite_partition_baseline_topology]: https://ignite.apache.org/docs/latest/clustering/baseline-topology
 
 [apache_ignite_partition_partition_loss_policy]: https://ignite.apache.org/docs/latest/configuring-caches/partition-loss-policy
+
+[browser_push_permissions_chrome_official]: https://support.google.com/chrome/answer/3220216?hl=ru-RU&co=GENIE.Platform%3DDesktop
+
+[browser_push_permissions_edge_official]: https://support.microsoft.com/ru-ru/microsoft-edge/управление-уведомлениями-сайтов-в-microsoft-edge-0c555609-5bf2-479d-a59d-fb30a0b80b2b
+
+[browser_push_permissions_firefox_official]: https://support.mozilla.org/ru/kb/veb-push-uvedomleniya-v-firefox
+
+[browser_push_permissions_safari_official]: https://support.apple.com/ru-ru/guide/safari/sfri40734/mac
+
+[browser_push_permissions_yandex_official]: https://yandex.ru/support/common/ru/browsers-settings/notifications
+
+[browser_push_permissions_chrome_official_mobile]: https://support.google.com/chrome/answer/3220216?co=GENIE.Platform%3DAndroid&hl=ru&oco=0
+
+[browser_push_permissions_firefox_official_mobile]: https://support.mozilla.org/ru/kb/upravlenie-opovesheniyami-v-firefox-dlya-android
+
+[browser_push_permissions_opera_official_mobile]: https://help.opera.com/ru/mobile/android/#notifications
+
+[browser_push_permissions_yandex_official_mobile]: https://yandex.ru/support/browser-mobile-android-phone/ru/personal-settings/notifications.html#sites
 
 [iana_timezone_db]: https://www.iana.org/time-zones
 
@@ -78,6 +112,12 @@
 [example_csharp_object_copy]: {{ kbArticleURLPrefix }}5007
 
 [example_formula_condition_set_value]: {{ kbArticleURLPrefix }}4992
+
+[example_task_hyperlink_n3_formula]: {{ kbArticleURLPrefix }}4879
+
+[example_email_parse_process_id_from_subject]: {{ kbArticleURLPrefix }}4978
+
+[example_email_parse_address_before_at_sign]: {{ kbArticleURLPrefix }}4983
 
 [example_formula_group_account_calculate]: {{ kbArticleURLPrefix }}4991
 
@@ -101,7 +141,19 @@
 
 [integration_examples]: {{ kbCategoryURLPrefix }}875
 
-[manual_n3]: {{ kbArticleURLPrefix }}4852
+[n3_guide_graphs]: {{ kbArticleURLPrefix }}4853
+
+[n3_guide_knowledge_graphs]: {{ kbArticleURLPrefix }}4857
+
+[n3_guide_modelling]: {{ kbArticleURLPrefix }}4854
+
+[n3_guide_notation]: {{ kbArticleURLPrefix }}4858
+
+[n3_guide_ontology]: {{ kbArticleURLPrefix }}4856
+
+[n3_guide_terms_reference]: {{ kbArticleURLPrefix }}4855
+
+[n3_guide_ontology_structure]: {{ kbArticleURLPrefix }}4859
 
 [n3_use_examples]: {{ kbCategoryURLPrefix }}879
 
@@ -115,27 +167,19 @@
 
 <!-- Экспорт в БЗ любых руководств -->
 
-<!-- Страницы оглавлений в БЗ. Начало -->
-
-[guides_toc]: {{ kbArticleURLPrefix }}4593
-
-[admin_guide_toc]: {{ kbArticleURLPrefix }}4594
-
-[developer_guide_toc]: {{ kbArticleURLPrefix }}4851
-
-[root_toc]: {{ kbArticleURLPrefix }}4594
-
-<!-- Страниц оглавлений в БЗ. Конец -->
-
 [account_templates]: {{ kbArticleURLPrefix }}4757
 
 [account_template_attribute_system_names]: {{ kbArticleURLPrefix }}4757#account_template_attribute_system_names
 
 [accounts]: {{ kbArticleURLPrefix }}4653
 
-[accounts_timezone_configure]: {{ kbArticleURLPrefix }}4653#accounts_timezone_configure
+[accounts_required_unique]: {{ kbArticleURLPrefix }}4653#accounts_required_unique
+
+[accounts_substitution]: {{ kbArticleURLPrefix }}4653#accounts_substitution
 
 [accounts_link_to_template]: {{ kbArticleURLPrefix }}4653#accounts_link_to_template
+
+[accounts_timezone_configure]: {{ kbArticleURLPrefix }}4653#accounts_timezone_configure
 
 [account_permission_audit]: {{ kbArticleURLPrefix }}4664
 
@@ -145,11 +189,15 @@
 
 [apps]: {{ kbArticleURLPrefix }}4714
 
+[authentication_authorization_sessions]: {{ kbArticleURLPrefix }}4656
+
 [backup_configure]: {{ kbArticleURLPrefix }}4642
 
 [backup_configure_list_view]: {{ kbArticleURLPrefix }}4642#backup_configure_list_view
 
 [backup_recommendations]: {{ kbArticleURLPrefix }}5082
+
+[browser_push_permissions]: {{ kbArticleURLPrefix }}5133
 
 [changelog]: {{ kbArticleURLPrefix }}4589
 
@@ -198,6 +246,8 @@
 [logs_odata_integration]: {{ kbArticleURLPrefix }}4673#logs_odata_integration
 
 [map_configure]: {{ kbArticleURLPrefix }}4679
+
+[n3_filter_active_tasks]: {{ kbArticleURLPrefix }}4935
 
 [notification_types]: {{ kbArticleURLPrefix }}4682
 
@@ -249,6 +299,8 @@
 
 [release_notes_5.0.13334]: {{ kbArticleURLPrefix }}5094
 
+[release_notes_5.0.20251010]: {{ kbArticleURLPrefix }}5137
+
 [roles]: {{ kbArticleURLPrefix }}4803
 
 [role_templates]: {{ kbArticleURLPrefix }}4760
@@ -266,6 +318,8 @@
 [sql_send_connection]: {{ kbArticleURLPrefix }}4706
 
 [substitution]: {{ kbArticleURLPrefix }}4665
+
+[substitution_configuration]: {{ kbArticleURLPrefix }}4665#substitution_configuration
 
 [system_service_management]: {{ kbArticleURLPrefix }}4671
 
@@ -581,7 +635,7 @@
 
 [formula_guide_queries]: {{ kbArticleURLPrefix }}4999#formula_guide_queries
 
-[n3_guide]: {{ kbCategoryURLPrefix }}877
+[n3_guide_reference]: {{ kbArticleURLPrefix }}4852
 
 [n3_editor_autocomplete]: {{ kbArticleURLPrefix }}5039
 
@@ -594,6 +648,8 @@
 [expression_debug]: {{ kbArticleURLPrefix }}4929
 
 [form_access_control]: {{ kbArticleURLPrefix }}4789
+
+[form_access_control_external_form]: {{ kbArticleURLPrefix }}4789#form_access_control_external_form
 
 [forms]: {{ kbArticleURLPrefix }}4786
 
@@ -919,6 +975,10 @@
 
 [configuration_files_linux]: {{ kbArticleURLPrefix }}5067
 
+[cluster_recovery]: {{ kbArticleURLPrefix }}5135
+
+[cluster_upgrade]: {{ kbArticleURLPrefix }}5134
+
 [deploy_guide_linux]: {{ kbArticleURLPrefix }}4622
 
 [deploy_guide_linux_delete_version]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_delete_version
@@ -1053,9 +1113,15 @@
 
 [api_intro]: {{ kbArticleURLPrefix }}4860
 
+[api_intro_authentication]: {{ kbArticleURLPrefix }}4860#api_intro_authentication
+
 [api_solution]: {{ kbArticleURLPrefix }}4863
 
 [api_system_core]: {{ kbArticleURLPrefix }}4862
+
+[api_system_core_account_service]: {{ kbArticleURLPrefix }}4862#api_system_core_account
+
+[api_system_core_encrypted_navigation_reference]: {{ kbArticleURLPrefix }}4862#api_system_core_encrypted_navigation_reference
 
 [api_system_core_user_task]: {{ kbArticleURLPrefix }}4862#api_system_core_user_task
 

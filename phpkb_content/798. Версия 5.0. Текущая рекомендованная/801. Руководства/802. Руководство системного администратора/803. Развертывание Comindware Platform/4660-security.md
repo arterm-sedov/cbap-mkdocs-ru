@@ -1,6 +1,7 @@
 ---
-title: Безопасность
+title: 'Безопасность'
 kbId: 4660
+url: 'https://kb.comindware.ru/article.php?id=4660'
 ---
 
 # Безопасность

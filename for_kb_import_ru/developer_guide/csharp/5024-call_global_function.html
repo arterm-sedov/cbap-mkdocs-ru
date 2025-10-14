@@ -1,0 +1,29 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5024" kb-tags="" kb-title="Запуск глобальной функции из операции">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для того, чтобы запустить глобальную функцию по кнопке, введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code>using System; </code> <br/><code>using System.Collections.Generic;</code> <br/><code>using System.Linq;</code> <br/><code>using Comindware.Data.Entity;</code> <br/><code>using Comindware.TeamNetwork.Api.Data.UserCommands;</code> <br/><code>using Comindware.TeamNetwork.Api.Data;</code> <br/><code></code> <br/><code>class Script</code> <br/><code>{</code> <br/><code>    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)</code> <br/><code>    {     </code> <br/><code>          var CurrentObjectid = userCommandContext.ObjectIds[0];</code> <br/><code>        var CurrentObjectData = Api.TeamNetwork.ObjectService.Get(CurrentObjectid);</code> <br/><code>        var Gosnomer = CurrentObjectData["op.11"].ToString();</code> <br/><code>    var bo = Api.TeamNetwork.GlobalFunctionService.ExecuteByAlias("Systemsolution", "Poisk", new Dictionary&lt;string, object&gt;()('Nomer', Undefined));</code> <br/><code>    Api.TeamNetwork.ObjectService.EditWithAlias("Kartochkivyzovov", userCommandContext.ObjectIds[0], bo);</code> <br/><code></code> <br/><code>    var result = new UserCommandResult</code> <br/><code>    {</code> <br/><code>      Success = true,</code> <br/><code>      Commited = true,</code> <br/><code>      ResultType = UserCommandResultType.DataChange,</code> <br/><code>      Messages = new[]</code> <br/><code>      {</code> <br/><code>        new UserCommandMessage</code> <br/><code>        {</code> <br/><code>          Severity = SeverityLevel.Normal,</code> <br/><code>          Text = "VIN найден успешно"</code> <br/><code>        }</code> <br/><code></code> <br/><code>      }</code> <br/><code>    };</code> <br/><code>    return result;</code> <br/><code>    </code> <br/><code>    }</code> <br/><code>}</code> <br/></pre></code></div>
+<p><strong>где:</strong></p>
+<p><strong>op.11 -</strong> ИД атрибута в текущем Шаблоне записи, которое передается на вход ГФ;</p>
+<p><strong>Systemsolution</strong> – системное имя текущего Бизнес-приложения;</p>
+<p><strong>Poisk</strong> – системное имя Глобальной функции;</p>
+<p><strong>Nomer</strong> - переменная в шаблоне сообщения на входе;</p>
+<p><strong>Kartochkivyzovov</strong> - имя текущего шаблона записи, откуда вызывается операция;</p>
+<p><strong>VIN найден успешно</strong> - текст сообщения, которое высветится пользователю в случае успешного исполнения скрипта.</p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

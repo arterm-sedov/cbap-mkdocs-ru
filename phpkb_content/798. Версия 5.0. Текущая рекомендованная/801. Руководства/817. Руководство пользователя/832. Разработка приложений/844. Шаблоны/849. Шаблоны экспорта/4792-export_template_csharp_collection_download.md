@@ -1,6 +1,7 @@
 ---
-title: Шаблон экспорта. Выгрузка нескольких коллекций и изображений с помощью C#
+title: 'Шаблон экспорта. Выгрузка нескольких коллекций и изображений с помощью C#'
 kbId: 4792
+url: 'https://kb.comindware.ru/article.php?id=4792'
 ---
 
 # Шаблон экспорта. Выгрузка нескольких коллекций и изображений с помощью C#
@@ -18,31 +19,51 @@ _![Пример настроенного шаблона экспорта C#](htt
 **2.** Настройте модель данных в скрипте по примеру:
 
 ```
-
 public class IMG
+
 {
+
     public byte[] Image_data { get; set; }
-}
-public class TBL_1
-{
-    public string Faktor { get; set; }
-    public string Parametr { get; set; }
-    public string Value { get; set; }
-}
-public class TBL_2
-{
-    public string Destination { get; set; }
-    public string Order { get; set; }
-    public string Date { get; set; }
-    public string Responsible { get; set; }
-}
-public class RESULT
-{
-    public List<IMG> Photo_1 { get; set; }
-    public List<TBL_1> Table_1 { get; set; }
-    public List<TBL_2> Table_2 { get; set; }
+
 }
 
+public class TBL_1
+
+{
+
+    public string Faktor { get; set; }
+
+    public string Parametr { get; set; }
+
+    public string Value { get; set; }
+
+}
+
+public class TBL_2
+
+{
+
+    public string Destination { get; set; }
+
+    public string Order { get; set; }
+
+    public string Date { get; set; }
+
+    public string Responsible { get; set; }
+
+}
+
+public class RESULT
+
+{
+
+    public List<IMG> Photo_1 { get; set; }
+
+    public List<TBL_1> Table_1 { get; set; }
+
+    public List<TBL_2> Table_2 { get; set; }
+
+}
 ```
 
 Обратите внимание, что под каждую таблицу должен быть определён свой уникальный класс.

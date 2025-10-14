@@ -1,6 +1,7 @@
 ---
-title: Zabbix Agent. Инструкции по установке для Windows
+title: 'Zabbix Agent. Инструкции по установке для Windows'
 kbId: 4615
+url: 'https://kb.comindware.ru/article.php?id=4615'
 ---
 
 # Zabbix Agent. Инструкции по установке для Windows
@@ -95,12 +96,10 @@ _![Статус хоста Zabbix Agent](https://kb.comindware.ru/assets/img_63b
 
 ```
 Server=192.168.0.1 # ip-адрес приведён как пример
-
 ```
 
 ```
 ServerActive=192.168.0.1 # ip-адрес приведён как пример
-
 ```
 
 **Примечание**

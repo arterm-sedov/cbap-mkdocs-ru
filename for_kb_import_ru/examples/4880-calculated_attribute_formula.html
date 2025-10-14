@@ -1,0 +1,82 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="" kb-tags="" kb-title="">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>В данной статье описан пример автоматического назначения клиента для текущего пользователя. Существует база данных клиентов и менеджеров компании. Каждому менеджеру привязывается клиент.</p>
+<p>Системные имена шаблонов записи и атрибутов, задействованных в примере, приведены в таблице:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Шаблон записи</th>
+<th>Атрибуты</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Request (Заявка)</td>
+<td>ClientForCurrentUser — клиент</td>
+</tr>
+<tr>
+<td>Cp (Контактные лица)</td>
+<td>Cp — деловой партнер  User — пользователь</td>
+</tr>
+<tr>
+<td>Clients (Деловые партнеры)</td>
+<td>Name — наименование делового партнера (ФИО)</td>
+</tr>
+</tbody>
+</table>
+<p>Атрибут «<em>ClientForCurrentUser</em>» шаблона записи «<em>Request</em>» вычисляется на основании данных, хранящихся в шаблоне записи «<em>Cp</em>».</p>
+<p>В вычисляемом выражении будут использованы следующие функции и операторы:</p>
+<ul>
+<li>функция «<strong><em>EQUALS()</em></strong>» для выбора записи, которая соответствует текущему пользователю;</li>
+<li>функция «<strong><em>USER()</em></strong>» для определения текущего пользователя;</li>
+<li>оператор «<strong><em>from</em></strong>» для перечисления всех записей из шаблона записи «<em>Cp</em>»;</li>
+<li>оператор «<strong><em>where</em></strong>» для выбора записей, которые соответствуют текущему пользователю;</li>
+<li>оператор «<strong><em>select</em></strong>» для выбора значений атрибута «<em>Name</em>».</li>
+</ul>
+<p><strong>Пошаговая инструкция:</strong></p>
+<p><strong>1.</strong> Создайте и настройте шаблоны записей и атрибуты.</p>
+<p><strong>2.</strong> В шаблоне записи «<em>Request</em>» откройте созданный атрибут «<em>ClientForCurrentUser</em>».</p>
+<p><strong>3.</strong> Отметьте флаг «<strong><em>Вычисляемый</em></strong>» и в поле «<em><strong>Вычисляемое выражение</strong>»</em> введите следующее:</p>
+<div class="highlight"><code><pre><span></span><code>from a in db-&gt;cp where EQUALS(a-&gt;user,USER()) select a-&gt;cp-&gt;name</code> <br/></pre></code></div>
+<p><strong>4.</strong>Нажмите кнопку «<strong><em>Сохранить</em></strong>».</p>
+<p><strong>Синтаксис</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Элемент</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>from a in db-&gt;cp</td>
+<td>Объявление локальной переменной а.  Объявление шаблона записи «<em>Cp</em>» в качестве источника данных: db-&gt;cp.  Перечисление всех записей из шаблона записи «<em>Cp</em>».</td>
+</tr>
+<tr>
+<td>where EQUALS(a&gt;user,USER())</td>
+<td>Выбор записи, значение «<em>User</em>» в которой соответствует текущему пользователю.  Функция «<strong><em>User()</em></strong>» возвращает текущего пользователя, если вычисляемый атрибут принадлежит типу данных «Пользователь».</td>
+</tr>
+<tr>
+<td>select a-&gt;cp-&gt;Name</td>
+<td>Выбор значений атрибута «<em>Name</em>» в соответствующих записях и передача этих значений в качестве аргумента.  Постфикс «<strong><em>-&gt;</em></strong>» в атрибуте «<em>Cp</em>» используется для того, чтобы вызвать данные связанного шаблона записи «<em>Name</em>».</td>
+</tr>
+</tbody>
+</table>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

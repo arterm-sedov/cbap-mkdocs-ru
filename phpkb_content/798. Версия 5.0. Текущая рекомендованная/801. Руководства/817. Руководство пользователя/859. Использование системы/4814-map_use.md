@@ -1,6 +1,7 @@
 ---
-title: Карты. Использование
+title: 'Карты. Использование'
 kbId: 4814
+url: 'https://kb.comindware.ru/article.php?id=4814'
 ---
 
 # Карты. Использование

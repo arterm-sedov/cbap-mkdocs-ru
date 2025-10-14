@@ -103,7 +103,7 @@ hide: tags
 - [Таблицы на форме. Настройка][form_dynamic_elements_table]
 - [Атрибут типа «Запись»][attribute_record]
 - [Атрибут типа «Текст»][attribute_text]
-- [Язык N3][n3_guide]
+- [Язык N3][n3_guide_cat]
 
 </div>
 

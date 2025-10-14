@@ -1,6 +1,7 @@
 ---
-title: Интернет-магазин
+title: 'Интернет-магазин'
 kbId: 4805
+url: 'https://kb.comindware.ru/article.php?id=4805'
 ---
 
 # Интернет-магазин

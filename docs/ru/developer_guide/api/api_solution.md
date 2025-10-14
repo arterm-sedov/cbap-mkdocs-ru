@@ -1,6 +1,16 @@
 ---
 title: Методы Solution API
 kbId: 4863
+tags:
+    - API
+    - REST
+    - Swagger
+    - Solution 
+    - АПИ
+    - интеграции
+    - интеграция
+    - приложение
+hide: tags
 ---
 
 # Методы Solution API {: #api_solution }
@@ -38,6 +48,12 @@ Swagger позволяет выполнять запросы и просматр
 
 ```
 http://your-host/Docs/SolutionApi
+```
+
+URL-адрес JSON-спецификации Solution API:
+
+```
+https://your-host/api/public/solution/swagger
 ```
 
 Здесь `your-host` — доменное имя вашего сервера.

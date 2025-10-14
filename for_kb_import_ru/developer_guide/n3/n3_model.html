@@ -1,0 +1,152 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4854" kb-tags="" kb-title="Моделирование на N3">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p><strong>Использование префиксов</strong></p>
+<p>Определение каждого понятия в документе или указание на каждом элементе полного идентификатора ресурса сделало бы использование RDF N3 очень сложным, поэтому для упрощения используются префиксы и словари для определения префиксов.</p>
+<p>Например, в словаре ( <a class="mkdocs_imported_link" href="http://purl.oclc.org/dc/">http://purl.oclc.org/dc/</a> ) определено понятие “title”, идентификатор которого ( <a class="mkdocs_imported_link" href="http://purl.oclc.org/dc/elements/1.1./title">http://purl.oclc.org/dc/elements/1.1./title</a> ) мы можем заменить с помощью префикса следующим образом:</p>
+<div class="highlight"><code><pre><span></span><code>@prefix dc: &lt;http://purl.oclc.org/dc/elements/1.1./&gt;.</code> <br/><code>&lt; &gt; dc:title “N3 Manual”. </code> <br/></pre></code></div>
+<p>Обратите внимание на отсутствие угловых скобочек на месте идентификатора для “title”, что тоже упрощает запись выражения. Таким же образом мы можем задать префикс для обозначения текущего документа:</p>
+<div class="highlight"><code><pre><span></span><code>@prefix : &lt;#&gt;.</code> <br/><code>:Sam :age “26”.</code> <br/></pre></code></div>
+<p>Существует огромное количество словарей, содержащих самые различные префиксы, среди них выделим три, в которых описаны базовые понятия Семантической паутины:</p>
+<div class="highlight"><code><pre><span></span><code>@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .</code> <br/><code>@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .</code> <br/><code>@prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt; .</code> <br/></pre></code></div>
+<p><strong>Стандартные предикаты</strong></p>
+<p>Ниже описаны основные предикаты пространств имён rdf, rdfs и owl.</p>
+<ul>
+<li><em>rdfs:Resource</em></li>
+</ul>
+<p>Класс для любых ресурсов.</p>
+<ul>
+<li><em>rdf:Property</em></li>
+</ul>
+<p>Класс для свойств, является подклассом rdfs:Resource.</p>
+<ul>
+<li><em>rdfs:Class</em></li>
+</ul>
+<p>Класс классов, подкласс класса rdfs:Resource.</p>
+<ul>
+<li><em>rdfs:domain, rdfs:range</em></li>
+</ul>
+<p>В rdfs словаре определены два важных свойства свойств: domain и range. Domain определяет класс, которому должны принадлежать субъекты, используемые с данным свойством. Range определяет класс, к которому должны принадлежать объекты, используемые с данным свойством. Таким образом, для domain и для range верны следующие утверждения:</p>
+<div class="highlight"><code><pre><span></span><code> rdfs:domain rdfs:domain rdf:Property;</code> <br/><code>          rdfs:range rdfs:Class.</code> <br/><code>rdfs:range rdfs:domain rdf:Property;</code> <br/><code>          rdfs:range rdfs:Class. </code> <br/></pre></code></div>
+<ul>
+<li><em>rdf:type</em></li>
+</ul>
+<p>Подкласс rdf:Property, отображает принадлежность объекта в выражении к классусубъекту. («… является экземпляром класса …»</p>
+<ul>
+<li><em>owl:AnnotationProperty</em></li>
+</ul>
+<p>Класс «семантически слабых» свойств, то есть их формальное определение может незначительно расширять RDF спецификацию.</p>
+<ul>
+<li><em>owl:FunctionalProperty</em></li>
+</ul>
+<p>Если свойство относится к классу owl:FunctionalProperty, то оно устанавливает взаимооднозначное отношение между объектом и субъектом,</p>
+<ul>
+<li><em>owl:TransitiveProperty</em></li>
+</ul>
+<p>Если А связан с Б, а Б связа н с В с помощью транзитивного свойства (owl:TransitiveProperty), то А связан с В этим же свойством.</p>
+<ul>
+<li><em>owl:SymmetricProperty</em></li>
+</ul>
+<p>Если для какого-то свойства :MyProperty a owl:SymmetricPropert.. Мы запишем следующее выражение: :MySybject :MyProperty :MyObject. То верно следущее: :MyObject :MyProperty :MySubject.</p>
+<ul>
+<li><em>owl:ObjectProperty</em></li>
+</ul>
+<p>Является обобщённым классом для всех свойств объектов – подкласс rdf:Property</p>
+<ul>
+<li><em>owl:DatatypeProperty</em></li>
+</ul>
+<p>Класс свойств, определяющих дату.</p>
+<ul>
+<li><em>owl:Class</em></li>
+</ul>
+<p>Подкласс rdfs:Class. Класс классов owl.</p>
+<ul>
+<li><em>owl:Restriction</em></li>
+</ul>
+<p>Класс ограничений для функций.</p>
+<p><strong>Дизайн классов и атрибутов</strong></p>
+<p>Для большинства компаний рано или поздно встают проблемы оптимизации использования внутренних и внешних ресурсов, анализа и дизайна бизнес-процессов. Существует множество подходов для решения соответсвующих задач, но большинство из них включают в себя построение модели предметной области. Например, мы хотим описать процесс оформления командировок в нашей компании. Этому процессу соответствует следующая модель.</p>
+<figure class="screenshot_with_caption">
+<p><img alt="Диаграмма моделей классов (бизнес-процесс оформления командировки в компании)" src="https://kb.comindware.ru/assets/n3_4.png"/><figcaption class="caption">Диаграмма моделей классов (бизнес-процесс оформления командировки в компании)</figcaption></p>
+</figure>
+<p>Следующим этапом информатизации компании является автоматизация бизнеспроцессов, для этого наша модель данных должна стать машиночитаемой. Так как подобные модели классов, по сути, являются онтологиями соответствующих предметных областей, машиночитаемость которых обуславливается описанием специальными языками, например, с использование RDF N3, то задача сводится к описанию модели классов с помощью RDF N3.</p>
+<div class="highlight"><code><pre><span></span><code>@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .</code> <br/><code>@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .</code> <br/><code>@prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt; .</code> <br/><code>@prefix : &lt;#&gt;.</code> <br/><code>:Zayavka a rdfs:Class;</code> <br/><code>rdfs:label "Класс заявок на командировку".</code> <br/><code> </code> <br/><code>:Komandiryemii a rdfs:Class;</code> <br/><code>rdfs:label "Класс командируемых".</code> <br/><code></code> <br/><code>:Komandirovka a rdfs:Class;</code> <br/><code></code> <br/><code>rdfs:label "Класс командировок".</code> <br/><code></code> <br/><code>:Rukovoditel a rdfs:Class;</code> <br/><code></code> <br/><code>rdfs:label "Класс руководителей".</code> <br/><code></code> <br/><code>:Name a rdfs:Property;</code> <br/><code></code> <br/><code>rdfs:label "Имя";</code> <br/><code>rdf:value [rdf:Datatype "string"];</code> <br/><code>rdfs:domain :Komandiryemii;</code> <br/><code>rdfs:range rdfs:Resource.</code> <br/><code></code> <br/><code>:NameRuk a rdfs:Property;</code> <br/><code></code> <br/><code>rdfs:label "Имя";</code> <br/><code>rdf:value [rdf:Datatype "string"];</code> <br/><code>rdfs:domain :Rukovoditel;</code> <br/><code>rdfs:range rdfs:Resource.</code> <br/><code></code> <br/><code>:Surname a rdfs:Property;</code> <br/><code></code> <br/><code>rdfs:label "Фамилия";</code> <br/><code>rdf:value [rdf:Datatype "string"];</code> <br/><code>rdfs:domain :Komandiryemii;</code> <br/><code>rdfs:range rdfs:Resource.</code> <br/><code></code> <br/><code>:SurnameRuk a rdfs:Property;</code> <br/><code></code> <br/><code>rdfs:label "Фамилия";</code> <br/><code>rdf:value [rdf:Datatype "string"];</code> <br/><code>rdfs:domain :Rukovoditel;</code> <br/><code>rdfs:range rdfs:Resource.</code> <br/><code></code> <br/><code>:SpisokZayavok a rdfs:Property;</code> <br/><code></code> <br/><code>rdfs:label "Список заявок";</code> <br/><code>rdf:value [rdf:Datatype "instance"];</code> <br/><code>rdfs:domain :Komandiryemii;</code> <br/><code>rdfs:range :Zayavka.</code> <br/><code></code> <br/><code>:KomandirovkaRef a rdfs:Property;</code> <br/><code></code> <br/><code>rdfs:label "Командировка";</code> <br/><code>rdf:value [rdf:Datatype "instance"];</code> <br/><code>rdfs:domain :Zayavka;</code> <br/><code>rdfs:range :Komandirovka.</code> <br/><code></code> <br/><code>:KomandiryemiiRef a rdfs:Property;</code> <br/><code></code> <br/><code>rdfs:label "Командируемый";</code> <br/><code>rdf:value [rdf:Datatype "instance"];</code> <br/><code>rdfs:domain :Zayavka;</code> <br/><code>rdfs:range :Komandiryemii.</code> <br/><code></code> <br/><code>:Status a rdfs:Property;</code> <br/><code></code> <br/><code>rdfs:label "Статус";</code> <br/><code>rdf:value [rdf:Datatype "enumerated"];</code> <br/><code>rdfs:domain :Zayavka;</code> <br/><code>rdfs:range ("В работе" "Согласована руководителем" "Отклонена").</code> <br/><code></code> <br/><code>:City a rdfs:Property;</code> <br/><code></code> <br/><code>rdfs:label "Город командирования";</code> <br/><code>rdf:value [rdf:Datatype "string"];</code> <br/><code>rdfs:domain :Komandirovka;</code> <br/><code>rdfs:range rdfs:Resource.</code> <br/><code></code> <br/><code>:Resp a rdfs:Property;</code> <br/><code></code> <br/><code>rdfs:label "Начальник отдела, согласующий командировку";</code> <br/><code>rdf:value [rdf:Datatype "instance"];</code> <br/><code>rdfs:domain :Komandirovka;</code> <br/><code>rdfs:range :Rukovoditel.</code> <br/><code></code> <br/><code>:Zayavki a rdfs:Property;</code> <br/><code></code> <br/><code>rdfs:label "Поданные заявки на командировку";</code> <br/><code>rdf:value [rdf:Datatype "instance"];</code> <br/><code>rdfs:domain :Komandirovka;</code> <br/><code>rdfs:range :Zayavka. </code> <br/></pre></code></div>
+<p>Отображение данной модели с помощью RDF графа выглядит следующим образом:</p>
+<figure class="screenshot_with_caption">
+<p><img alt="Фрагмент RDF графа модели классов текущей предметной области" src="https://kb.comindware.ru/assets/n3_5.png"/><figcaption class="caption">Фрагмент RDF графа модели классов текущей предметной области</figcaption></p>
+</figure>
+<p><strong>Переменные</strong></p>
+<p>Язык RDF N3 позволяет не только описывать факты выражениями, но и задавать переменные, что необходимо при описании правил.</p>
+<p>Существует два типа переменных : @forAll и @forSome:</p>
+<ul>
+<li><strong><em>@forAll</em></strong>  – универсальная переменная, то есть выражение, которое написано с использованием данной переменной, будет верным для любого значения указанной переменной .</li>
+</ul>
+<p>this log:forAll :x.</p>
+<p>:x :name “Jack”.</p>
+<p>В данном случае мы определили переменную :x, потом записали, что для любого :x верно, что :name – “Jack”.</p>
+<ul>
+<li><strong><em>@forSome</em></strong>  – при таком объявлении переменной мы говорим только, о существовании удовлетворяющего условия значения.</li>
+</ul>
+<p>this log:forSome :x.</p>
+<p>:x :color “red”.</p>
+<p>Существует такая сущность :x со значением для :color – “red”.</p>
+<p>Для объявления переменных существуют упрощения: объявление универсальной переменной реализуется с использованием “?”, а переменная log:forSome объявляется с использованием “_”, таким образом, примеры выше можно переписать в следующем виде:</p>
+<ul>
+<li>@forAll</li>
+</ul>
+<p>?x :name “Jack”.</p>
+<ul>
+<li>@forSome</li>
+</ul>
+<p>_x :color “red”.</p>
+<p><strong>Правила вывода</strong></p>
+<p>Описание правил в RDF N3 реализовано с использованием фигурных скобок. В фигурные скобки заключаются обособленные утверждения, например, в любом документе .n3 есть фигурные скобки, заключающие все выражения, содержащиеся в нём.</p>
+<p>{:outside :temperature :low} log:implies {:battery :temp :high}.</p>
+<p>Структура данного правила такова:</p>
+<p>{формула 1} подразумевает {формулу 2}.</p>
+<p>С использованием упрощений, получаем такую запись:</p>
+<p>{формула 1} =&gt;{формула 2}.</p>
+<p>Попробуем описать более сложное правило:</p>
+<div class="highlight"><code><pre><span></span><code>@prefix log:&lt;http://www.w3.org/2000/10/swap/log#&gt;.</code> <br/><code>{?pers1 :father [:brother :pers2]}=&gt;{:pers1 :uncle :pers2}.</code> <br/></pre></code></div>
+<p>Описать данное правило можно следующим образом: для любого человека, у отца которого есть брат, он – дядя.</p>
+<p><strong>Кортежи</strong></p>
+<p>Отображение коллекции в RDF N3 реализовано с помощью списка, который задаётся перечислением в скобках, например:</p>
+<p>(“John” “Sam” “Anna”).</p>
+<p>Тот же самый список можно описать с использование пространства имён rdf с помощью свойств first и rest, с помощью которых определяются первый и остальные элементы списка соответсвтенно. Таким образом, указанный выше список эквивалентен следующему:</p>
+<p>[ rdf:first “John”;</p>
+<p>rdf:rest [ rdf:first “Sam”;</p>
+<p>rdf:rest [ rdf:first “Anna”;</p>
+<p>rdf:rest rdf:nil ]]]</p>
+<p>nil - список, в котором нет элементов (пустой список), если rest – nil, то больше элементов в списке нет.</p>
+<p>Такое представление списка наглядно представлено на RDF графе нашей онтологии:</p>
+<figure class="screenshot_with_caption">
+<p><img alt='Список ("В работе", "Согласована руководителем", "Отклонена") реализован с помощью свойства "first" и "rest"' src="https://kb.comindware.ru/assets/n3_6.png"/><figcaption class="caption">Список ("В работе", "Согласована руководителем", "Отклонена") реализован с помощью свойства "first" и "rest"</figcaption></p>
+</figure>
+<p>Обратите внимание, что, неявный при записи узел, соответствующий остальной части списка, на графе отображён в явном виде.</p>
+<p><strong>Вывод структур</strong></p>
+<p>В выражении так же может использоваться сущность без явного указания идентификатора, например, если мы хотим сказать, что у Анны есть две дочери 6 и 5 лет, то записать с помощью нотации 3 можем следующим образом:</p>
+<p>&lt;#Ann&gt; &lt;#daughter&gt; [&lt;#age&gt; “6”], [&lt;#age&gt; “5”].</p>
+<ul>
+<li>в последнем выражении не сказано, как зовут мать детей – просто использован идентификатор &lt;#Ann&gt;, чтобы присвоить имя, нужно в явном виде указать:</li>
+</ul>
+<p>&lt;#Ann&gt; &lt;#name&gt; “Ann”.</p>
+<ul>
+<li>выражения в квадратных скобках не определяют новый субъект, то есть мы не сможем сослаться на этих дочек 5 и 6 лет в другом месте. Эти выражение отображают только структуру упоминаемого объекта.</li>
+</ul>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

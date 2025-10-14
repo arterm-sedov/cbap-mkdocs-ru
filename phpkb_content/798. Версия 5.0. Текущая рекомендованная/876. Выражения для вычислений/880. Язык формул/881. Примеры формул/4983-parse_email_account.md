@@ -1,6 +1,7 @@
 ---
-title: Парсинг Email до знака @
+title: 'Парсинг Email до знака @'
 kbId: 4983
+url: 'https://kb.comindware.ru/article.php?id=4983'
 ---
 
 # Парсинг Email до знака @

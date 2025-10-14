@@ -1,0 +1,28 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4989" kb-tags="" kb-title="Пример подзапроса from">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Запрос типа <strong><em>from</em></strong> позволяет обращаться к любому Шаблону записи, связанному или несвязанному с текущим, и получать оттуда данные, или настраивать фильтр на основании определенных параметров <strong><em>where</em></strong>. Comindware Platform позволяет также писать подзапросы <strong><em>from</em></strong>, если, например, необходимо дополнительно сравнить определенный параметр с каким-то другим.</p>
+<p>Для того чтобы применить сразу несколько запросов типа <strong><em>from</em></strong> (в данном примере выражение находит самый последний план (с самым большим номером), ссылающийся на текущий регламент), введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code>from a in db-&gt;Plan where a-&gt;Reglament == $id &amp;&amp; EQUALS(MAX((from b in db-&gt;Plan  where b-&gt;Reglament == $id select b-&gt;Nomer)),a-&gt;Nomer) select a-&gt;id</code> <br/></pre></code></div>
+<p><strong>где:</strong></p>
+<p><strong>Plan</strong> – системное имя Шаблона записи;</p>
+<p><strong>Reglament</strong> – системное имя атрибута типа «Ссылка» в Plan, ведущего на текущий Шаблон записи;</p>
+<p><strong>Nomer</strong> – системное имя атрибута типа «Число» в Plan.</p>
+<p>Вложенных <strong><em>from</em></strong> может быть сколько угодно. Главное не путать параметры между собой.</p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

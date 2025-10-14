@@ -1,0 +1,33 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4961" kb-tags="" kb-title="Вычисление элементов из атрибута с типом данных Дата и время">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p><strong>Comindware Platform</strong> позволяет хранить данные в формате разных типов атрибутов: «Текст», «Число», «Дата и время», «Аккаунт» и т.д. У каждого атрибута есть свой формат отображения на экранной форме. В частности, атрибут с типом данных «Дата и время» может быть представлен как:</p>
+<ul>
+<li>04.09.1986;</li>
+<li>4 сентября 1986 г.;</li>
+<li>4 сентября;</li>
+<li>04.09.1986 07:30 и т.д.</li>
+</ul>
+<p>В процессе настройки может оказаться, что данного набора форматов отображения недостаточно, или для написания выражений нужно из атрибута с типом данных «Дата и время» получить только год, месяц, час и т.п. Для подобных целей подойдет выражение ниже, которое вычисляет из указанного атрибута с типом данных «Дата и время» год:</p>
+<div class="highlight"><code><pre><span></span><code>@prefix object: &lt;http://comindware.com/ontology/object#&gt;. </code> <br/><code>@prefix cmwtime: &lt;http://comindware.com/logics/time#&gt;.</code> <br/><code>{</code> <br/><code>    ("Works" "Date") object:findProperty ?dtProperty.</code> <br/><code>    </code> <br/><code>    ?item ?dtProperty ?dtone.</code> <br/><code>    ?dtone cmwtime:Year ?value.      </code> <br/><code>}</code> <br/></pre></code></div>
+<p><strong>где:</strong></p>
+<p><strong><em>Works</em></strong> – системное имя текущего шаблона записи;</p>
+<p><strong><em>Date</em></strong> – системное имя атрибута с типом данных «Дата и время» в текущем шаблоне записи.</p>
+<p><strong>Примечание :</strong> чтобы вычислить из атрибута с типом данных «Дата и время» день / неделю / месяц / час / минуту введите вместо <strong><em>Year</em></strong> после "<em>cmwtime:</em>" <strong><em>Day / Week / Month / Hour / Minute</em></strong> соответственно.</p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

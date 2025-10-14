@@ -1,6 +1,7 @@
 ---
-title: Атрибут типа «Список значений». Вычисление текстового значения и фильтрация с помощью N3 и формул
+title: 'Атрибут типа «Список значений». Вычисление текстового значения и фильтрация с помощью N3 и формул'
 kbId: 4920
+url: 'https://kb.comindware.ru/article.php?id=4920'
 ---
 
 # Атрибут типа «Список значений». Вычисление текстового значения и фильтрация с помощью N3 и формул
@@ -55,7 +56,6 @@ kbId: 4920
         # записываем значение на русском языке в вычисляемый атрибут.
         ?names l10n:data ?value.
 # переходим к следующей итерации по ?enumValueLanguageVersions.
-
 ```
 
 Сравнение и фильтрация значения атрибута с помощью формулы
@@ -66,41 +66,35 @@ kbId: 4920
 
   ```
   $EnumAttributeSystemName == EnumValueSystemName
-
   ```
 
   или
 
   ```
   EQUALS($EnumAttributeSystemName->cmw.variantAlias, "EnumValueSystemName")
-
   ```
 
   или
 
   ```
   EQUALS($EnumAttributeSystemName, ENUMVALUE("EnumAttributeSystemName", "EnumValueSystemName"))
-
   ```
 - неравенство
 
   ```
   $EnumAttributeSystemName !== EnumValueSystemName
-
   ```
 
   или
 
   ```
   NOT(EQUALS($EnumAttributeSystemName->cmw.variantAlias, "EnumValueSystemName"))
-
   ```
 
   или
 
   ```
   NOT(EQUALS($EnumAttributeSystemName, ENUMVALUE("EnumAttributeSystemName", "EnumValueSystemName")))
-
   ```
 
 Фильтрация значения атрибута с помощью N3
@@ -120,7 +114,6 @@ kbId: 4920
       # Возвращаем записи, у которых атрибут имеет значение "enumValueSystemName".
       ?item ?enumAttribute ?enumValueId.
   }
-
   ```
 - Фильтрация добавляемых записей (в таблице на форме или раскрывающемся списке на форме) записей с требуемым значением атрибута:
 
@@ -137,7 +130,6 @@ kbId: 4920
       ?filteredRecordIds ?enumAttribute ?enumValueId.
       ?filteredRecordIds -> ?value.
   }
-
   ```
 - Фильтрация отображаемых записей (в таблице на форме, раскрывающемся списке на форме, вычисляемом атрибуте или правиле для формы) записей с требуемым значением атрибута:
 
@@ -158,7 +150,6 @@ kbId: 4920
       ?filteredRecordIds ?enumAttribute ?enumValueId.
       ?filteredRecordIds -> ?value.
   }
-
   ```
 
 ## Прикладная задача
@@ -224,7 +215,6 @@ kbId: 4920
                ?names l10n:data ?value.
        # переходим к следующей итерации по ?names.
    }
-
    ```
 2. Поместите атрибуты *«Тип ТС»* и *«Наименование типа ТС»* на форму начального события диаграммы процесса *«Обработка заявок»*.
 
@@ -236,7 +226,6 @@ kbId: 4920
 
    ```
    FORMAT("Обработайте заявку на перевозку: {0}", LIST($НаименованиетипаТС))
-
    ```
 4. После каждой пользовательской задачи добавьте **конечное событие**.
 5. Настройте **исходящие потоки** в **дополнительных** свойствах **развилки «или/или»** следующим образом:
@@ -275,7 +264,6 @@ _![Диаграмма процесса «Обработка заявок»](/pla
        # равно Car (легковой автомобиль).
        ?item ?TipTSAttribute ?enumIdCar.
    }
-
    ```
 6. Сохраните таблицу.
 
@@ -297,7 +285,7 @@ _![Диаграмма процесса «Обработка заявок»](/pla
 - *[Атрибут типа «Список значений». Фильтрация связанных записей по значению атрибута с помощью N3][attribute_enum_value_filter]*
 - *[Атрибут типа «Список значений». Вычисление текущего значения][attribute_enum_calculate_current_value]*
 - *[Атрибут типа «Список значений». Вычисление значения по справочнику][attribute_enum_calculate_registry]*
-- *[Написание выражений на языке N3][manual_n3]*
+- *[Написание выражений на языке N3][n3_guide_reference]*
 - *[Список функций языка формул Comindware][formula_function_list]*
 - *[Таблицы. Определения, настройка, клонирование, удаление][table_configure]*
 - *[Интерфейс на нескольких языках. Настройка приложения][multilingual_app]*

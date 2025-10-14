@@ -70,7 +70,9 @@ hide: tags
 
 ## Определения {: #tutorial_hr_lesson_2_definitions }
 
-{% include-markdown ".snippets/tutorial_definitions_basic_entities.md" %}
+{% include-markdown ".snippets/tutorial_definitions_basic_entities_1.md" %}
+- **Атрибут** — простейший элемент данных, описывающий бизнес-сущность (аналог поля в реляционной БД или столбца в Excel), например: _Ф.&nbsp;И.&nbsp;О. кандидата_ (строка), _оценка за собеседование_ (число), _вакансия_ (ссылка) и т.&nbsp;п.
+{% include-markdown ".snippets/tutorial_definitions_basic_entities_2.md" %}
 
 </div>
 

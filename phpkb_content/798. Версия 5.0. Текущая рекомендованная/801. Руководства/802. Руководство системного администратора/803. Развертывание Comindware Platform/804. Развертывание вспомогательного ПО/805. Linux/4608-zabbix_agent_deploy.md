@@ -1,6 +1,7 @@
 ---
-title: Zabbix Agent. Инструкции по установке
+title: 'Zabbix Agent. Инструкции по установке'
 kbId: 4608
+url: 'https://kb.comindware.ru/article.php?id=4608'
 ---
 
 # Zabbix Agent. Инструкции по установке
@@ -17,35 +18,30 @@ kbId: 4608
 
 ```
 cd /home/username
-
 ```
 
 1.2. Для добавления репозитория Zabbix загрузите его deb-пакет:
 
 ```
 wget https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.0-4%2Bubuntu22.04_all.deb
-
 ```
 
 1.3. Распакуйте deb-пакет:
 
 ```
 sudo dpkg -i zabbix-release_6.0-4+ubuntu22.04_all.deb
-
 ```
 
 1.4. Обновите базу данных пакетов в операционной системе:
 
 ```
 sudo apt update
-
 ```
 
 1.5. Установите *Zabbix Agent*:
 
 ```
 sudo apt install --yes zabbix-agent
-
 ```
 
 ## 2. Настройка сервиса Zabbix Agent
@@ -54,21 +50,18 @@ sudo apt install --yes zabbix-agent
 
 ```
 sudo nano /etc/zabbix/zabbix_agentd.conf
-
 ```
 
 2.2. В файле конфигурации укажите IP-адрес *Zabbix Server* — в подключениях с неизвестных IP-адресов будет отказано:
 
 ```
 Server=your.server.ip.address
-
 ```
 
 2.3. Отредактируйте директиву `ServerActive`:
 
 ```
 ServerActive=your.server.ip.address
-
 ```
 
 ## 3. Запуск сервиса Zabbix Agent
@@ -77,7 +70,6 @@ ServerActive=your.server.ip.address
 
 ```
 sudo ufw allow 10050/tcp
-
 ```
 
 3.2. Примените изменения:
@@ -85,14 +77,12 @@ sudo ufw allow 10050/tcp
 ```
 sudo systemctl daemon-reload
 sudo ufw reload
-
 ```
 
 3.3. Запустите службу *Zabbix Agent* и добавьте его в список автозагрузки:
 
 ```
 sudo systemctl enable --now zabbix-agent
-
 ```
 
 3.4. Удостоверьтесь, что служба работает:
@@ -145,12 +135,10 @@ _![](https://kb.comindware.ru/assets/img_63ad999c17b2e.png)_Статус хос�
 
 ```
 Server=192.168.0.1 # ip-адрес приведён как пример
-
 ```
 
 ```
 ServerActive=192.168.0.1 # ip-адрес приведён как пример
-
 ```
 
 **Примечание**

@@ -1,6 +1,7 @@
 ---
-title: Apache Kafka. Установка в базовой конфигурации
+title: 'Apache Kafka. Установка в базовой конфигурации'
 kbId: 5074
+url: 'https://kb.comindware.ru/article.php?id=5074'
 ---
 
 # Apache Kafka. Установка в базовой конфигурации
@@ -30,20 +31,17 @@ kbId: 5074
 
    ```
    sudo -s
-
    ```
 
    или
 
    ```
    su -
-
    ```
 2. Скачайте и распакуйте дистрибутив с вспомогательным ПО **{{ productName }}**, полученный по ссылке от компании **Comindware** (`X.X`, `<versionNumber>` — номер версии ПО, `<osname>` — название операционной системы):
 
    ```
    tar -xf X.X-release-ru-<versionNumber>.prerequisites.<osname>.tar.gz
-
    ```
 
    Совет
@@ -52,13 +50,11 @@ kbId: 5074
 
    ```
    rm -f X.X-release-ru-<versionNumber>.prerequisites.<osname>.tar.gz
-
    ```
 3. Перейдите в директорию со скриптами для развёртывания вспомогательного ПО:
 
    ```
    cd <prerequisitesDistPath>/CMW_<osname>/scripts
-
    ```
 
    Здесь: `<prerequisitesDistPath>/CMW_<osname>/` — путь к распакованному дистрибутиву со вспомогательным ПО.
@@ -66,7 +62,6 @@ kbId: 5074
 
    ```
    sh prerequisites_install.sh -k
-
    ```
 5. Отредактируйте файл `/usr/share/kafka/config/kraft/server.properties` по следующему образцу:
 
@@ -123,19 +118,16 @@ kbId: 5074
    fetch.message.max.bytes=104857600
    # Максимальный размер сообщения для выборки реплики
    replica.fetch.max.bytes=104857600
-
    ```
 6. После установки удостоверьтесь, что служба Kafka запущена и имеет статус `Active (running)`:
 
    ```
    systemctl status kafka
-
    ```
 7. Если сервер Kafka не работает, запустите его:
 
    ```
    systemctl start kafka
-
    ```
 
 ## Подключение экземпляра {{ productName }} к Kafka
@@ -144,14 +136,12 @@ kbId: 5074
 
    ```
    sudo -s
-
    ```
 
    или
 
    ```
    su -
-
    ```
 2. Задайте параметры подключения к Kafka в файле `/usr/share/comindware/configs/instance/<instanceName>.yml` (`<instanceName>` — имя экземпляра ПО {{ productName }}):
 
@@ -162,7 +152,6 @@ kbId: 5074
    mq.group: <instanceName>
    # Идентификатор узла очереди сообщений
    #mq.node: <instanceName>
-
    ```
 
    Внимание!
@@ -184,14 +173,12 @@ kbId: 5074
    mq.group: <instanceName>
    # Идентификатор узла очереди сообщений
    mq.node: <instanceName>
-
    ```
 4. Задайте параметры подключения к Kafka в файле `/var/www/<instanceName>/adapterhost.yml`:
 
    ```
    # Адрес и порт сервера очереди сообщений (Kafka)
    mq.server: <kafkaBrokerIp>:<kafkaBrokerPort>
-
    ```
 5. Перезапустите экземпляр ПО:
 
@@ -199,13 +186,11 @@ kbId: 5074
    systemctl restart comindware<instanceName>
    systemctl restart apigateway<instanceName>
    systemctl restart adapterhost<instanceName>
-
    ```
 6. Проверьте соединение с Kafka в браузере по ссылке (`<instanceAddress>` — URL экземпляра ПО):
 
    ```
    <instanceAddress>/async
-
    ```
 
 ## Дополнительные рекомендации

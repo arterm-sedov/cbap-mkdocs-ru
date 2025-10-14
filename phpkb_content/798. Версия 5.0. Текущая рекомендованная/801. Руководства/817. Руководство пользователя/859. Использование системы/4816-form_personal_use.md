@@ -1,6 +1,7 @@
 ---
-title: Формы. Использование
+title: 'Формы. Использование'
 kbId: 4816
+url: 'https://kb.comindware.ru/article.php?id=4816'
 ---
 
 # Формы. Использование

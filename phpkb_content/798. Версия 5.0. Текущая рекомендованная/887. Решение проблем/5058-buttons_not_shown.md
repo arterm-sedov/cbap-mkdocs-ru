@@ -1,6 +1,7 @@
 ---
-title: Не отображаются кнопки
+title: 'Не отображаются кнопки'
 kbId: 5058
+url: 'https://kb.comindware.ru/article.php?id=5058'
 ---
 
 # Не отображаются кнопки

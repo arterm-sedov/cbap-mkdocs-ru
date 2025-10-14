@@ -96,7 +96,7 @@ kbId: 4917
 --8<-- "related_topics_heading.md"
 
 - _[Атрибут типа «Текст»][attribute_text]_
-- _[Написание выражений на языке N3][manual_n3]_
+- _[Написание выражений на языке N3][n3_guide_reference]_
 
 </div>
 

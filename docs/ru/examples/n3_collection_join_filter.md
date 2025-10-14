@@ -163,7 +163,7 @@ hide: tags
 - [Атрибут типа «Запись»][attribute_record]
 - [Атрибут типа «Аккаунт»][attribute_account]
 - [Атрибут типа «Логический»][attribute_boolean]
-- [Язык N3][n3_guide]
+- [Язык N3][n3_guide_cat]
 
 </div>
 

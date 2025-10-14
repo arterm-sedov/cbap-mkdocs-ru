@@ -1,6 +1,7 @@
 ---
-title: Пример подзапроса from
+title: 'Пример подзапроса from'
 kbId: 4989
+url: 'https://kb.comindware.ru/article.php?id=4989'
 ---
 
 # Пример подзапроса from

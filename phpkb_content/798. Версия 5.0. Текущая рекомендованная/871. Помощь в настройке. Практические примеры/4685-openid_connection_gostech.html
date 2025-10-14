@@ -1,25 +1,108 @@
-<h1>Аутентификация через Keycloak и OpenID Connect. Настройка подключения и служб</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr">
+<h1>Аутентификация через Keycloak и OpenID Connect. Настройка подключения и служб</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4685" kb-tags="OpenID,Keycloak,аутентификация,интеграции,SSO" kb-title="Аутентификация через Keycloak и OpenID Connect. Настройка подключения и служб">
 <div class="md-container" data-md-component="container">
-<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
 <div class="mce-toc">
-<h2 class="toc-heading">Содержание</h2>
+<h2 class="toc-heading">
+      Содержание
+      </h2>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#openid_connection_intro"> <span class="md-ellipsis"> Введение </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#openid_connection_sequence"> <span class="md-ellipsis"> Порядок настройки </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#openid_connection_server_address"> <span class="md-ellipsis"> Проверка подключения сервера Comindware Platform по протоколу HTTPS </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#openid_connection_keycloak_configure"> <span class="md-ellipsis"> Настройка Keycloak </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#openid_connection_instance_configure"> <span class="md-ellipsis"> Настройка конфигурации Comindware Platform </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#openid_connection_linux_configure"> <span class="md-ellipsis"> Настройка ОС Linux с Comindware Platform </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#openid_connection_initialize"> <span class="md-ellipsis"> Инициализация Comindware Platform для входа через Keycloak </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#openid_connection_session_lifetime"> <span class="md-ellipsis"> Настройка времени жизни сеансов посредством JWT-токенов для SSO </span> </a><nav aria-label="Настройка времени жизни сеансов посредством JWT-токенов для SSO" class="md-nav">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#openid_connection_intro">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#openid_connection_sequence">
+<span class="md-ellipsis">
+      Порядок настройки
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#openid_connection_server_address">
+<span class="md-ellipsis">
+      Проверка подключения сервера Comindware Platform по протоколу HTTPS
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#openid_connection_keycloak_configure">
+<span class="md-ellipsis">
+      Настройка Keycloak
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#openid_connection_instance_configure">
+<span class="md-ellipsis">
+      Настройка конфигурации Comindware Platform
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#openid_connection_linux_configure">
+<span class="md-ellipsis">
+      Настройка ОС Linux с Comindware Platform
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#openid_connection_initialize">
+<span class="md-ellipsis">
+      Инициализация Comindware Platform для входа через Keycloak
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#openid_connection_session_lifetime">
+<span class="md-ellipsis">
+      Настройка времени жизни сеансов посредством JWT-токенов для SSO
+    </span>
+</a>
+<nav aria-label="Настройка времени жизни сеансов посредством JWT-токенов для SSO" class="md-nav">
 <ul class="md-nav__list">
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#openid_connection_access_token"> <span class="md-ellipsis"> Токен доступа </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#openid_connection_refresh_token"> <span class="md-ellipsis"> Токен обновления </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#openid_connection_jwt_structure"> <span class="md-ellipsis"> Структура JWT-токена </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#openid_connection_recommendations"> <span class="md-ellipsis"> Рекомендации по оптимизации времени жизни сеансов </span> </a></li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#openid_connection_access_token">
+<span class="md-ellipsis">
+      Токен доступа
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#openid_connection_refresh_token">
+<span class="md-ellipsis">
+      Токен обновления
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#openid_connection_jwt_structure">
+<span class="md-ellipsis">
+      Структура JWT-токена
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#openid_connection_recommendations">
+<span class="md-ellipsis">
+      Рекомендации по оптимизации времени жизни сеансов
+    </span>
+</a>
+</li>
 </ul>
-</nav></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
 </ul>
 </div>
 </nav>
@@ -53,9 +136,7 @@
 <li>Откройте страницу <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4668">«<strong>Администрирование</strong>» — «<strong>Глобальная конфигурация</strong>»</a>.</li>
 <li>
 <p>Удостоверьтесь, что <strong>URL-адрес сервера</strong> начинается с <code>https://</code>.</p>
-<figure class="screenshot_with_caption"><img alt="Проверка адреса сервера" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_check.png"/>
-<figcaption class="caption">Проверка адреса сервера</figcaption>
-</figure>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Проверка адреса сервера" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_connection_check.png"/><figcaption class="caption">Проверка адреса сервера</figcaption></figure></p>
 </li>
 </ol>
 <h2 class="pageBreakBefore" id="openid_connection_keycloak_configure">Настройка Keycloak</h2>
@@ -63,15 +144,11 @@
 <li>Откройте консоль администратора Keycloak.</li>
 <li>
 <p>В левом меню выберите область (realm) <strong>master</strong> или другую существующую область.</p>
-<figure class="screenshot_with_caption"><img alt="Переход к управлению областью master в Keycloak" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_manage_realms.png"/>
-<figcaption class="caption">Переход к управлению областью master в Keycloak</figcaption>
-</figure>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Переход к управлению областью master в Keycloak" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_manage_realms.png"/><figcaption class="caption">Переход к управлению областью master в Keycloak</figcaption></figure></p>
 </li>
 <li>
 <p>Если требуемая область (realm) отсутствует, нажмите кнопку <strong>Create realm</strong> (Создать область), введите имя области, например <code>&lt;myKeycloakRealm&gt;</code>, и нажмите кнопку <strong>Create</strong> (Создать).</p>
-<figure class="screenshot_with_caption"><img alt="Создание области (realm) в Keycloak" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_realm.png"/>
-<figcaption class="caption">Создание области (realm) в Keycloak</figcaption>
-</figure>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Создание области (realm) в Keycloak" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_realm.png"/><figcaption class="caption">Создание области (realm) в Keycloak</figcaption></figure></p>
 </li>
 <li>
 <p>В левом меню выберите пункт <strong>Clients</strong> (Клиенты).</p>
@@ -83,18 +160,14 @@
 <li>Выберите «<strong>Client type</strong>» (Тип клиента) <strong>OpenID Connect</strong>.</li>
 <li>Введите «<strong>Client ID</strong>» (ID клиента), например <code>&lt;myKeycloakClient&gt;</code>.</li>
 </ul>
-<figure class="screenshot_with_caption"><img alt="Создание нового клиента Keycloak" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_client.png"/>
-<figcaption class="caption">Создание нового клиента Keycloak</figcaption>
-</figure>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Создание нового клиента Keycloak" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_client.png"/><figcaption class="caption">Создание нового клиента Keycloak</figcaption></figure></p>
 </li>
 <li>
 <p>Нажмите кнопку <strong>Next</strong> (Далее).</p>
 </li>
 <li>
 <p>На шаге <strong>Capability config</strong> (Конфигурация функций) включите функции <strong>Client authentication</strong> (Аутентификация клиента) и <strong>Direct access grants</strong> (Прямое предоставление прав).</p>
-<figure class="screenshot_with_caption"><img alt="Настройка конфигурации функций клиента Keycloak" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_client_2.png"/>
-<figcaption class="caption">Настройка конфигурации функций клиента Keycloak</figcaption>
-</figure>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка конфигурации функций клиента Keycloak" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_client_2.png"/><figcaption class="caption">Настройка конфигурации функций клиента Keycloak</figcaption></figure></p>
 </li>
 <li>
 <p>Нажмите кнопку <strong>Next</strong> (Далее).</p>
@@ -103,13 +176,11 @@
 <p>На шаге <strong>Login settings</strong> (Параметры входа) укажите:</p>
 <ul>
 <li><strong>Root URL</strong> (Корневой URL), например <code>https://&lt;yourHost&gt;/</code>;</li>
-<li><strong>Home URL</strong> (URL начальной страницы), например <code>https://&lt;yourHost&gt;/</code>;</li>
+<li><strong>Home URL</strong>  (URL начальной страницы), например <code>https://&lt;yourHost&gt;/</code>;</li>
 <li><strong>Valid redirect URIs</strong> (Допустимые URI переадресаций), например <code>https://&lt;yourHost&gt;/*</code>;</li>
 <li><strong>Web origins</strong> (Исходные URI), например <code>https://&lt;yourHost&gt;/</code>.</li>
 </ul>
-<figure class="screenshot_with_caption"><img alt="Настройка параметров входа для клиента Keycloak" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_client_3.png"/>
-<figcaption class="caption">Настройка параметров входа для клиента Keycloak</figcaption>
-</figure>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка параметров входа для клиента Keycloak" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_client_3.png"/><figcaption class="caption">Настройка параметров входа для клиента Keycloak</figcaption></figure></p>
 </li>
 <li>
 <p>Нажмите кнопку «<strong>Save</strong>» (Сохранить).</p>
@@ -120,18 +191,14 @@
 <li>отключите функцию <strong>Front channel logout</strong> (Выход через фронтенд);</li>
 <li>введите <strong>Backchannel logout URL</strong> (URL выхода через бэкенд), например <code>https://&lt;yourHost&gt;/OpenIdLogoutChallenge</code>.</li>
 </ul>
-<figure class="screenshot_with_caption"><img alt="Настройка параметров выхода для клиента Keycloak" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_logout_settings.png"/>
-<figcaption class="caption">Настройка параметров выхода для клиента Keycloak</figcaption>
-</figure>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка параметров выхода для клиента Keycloak" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_logout_settings.png"/><figcaption class="caption">Настройка параметров выхода для клиента Keycloak</figcaption></figure></p>
 </li>
 <li>
 <p>Откройте вкладку <strong>Credentials</strong> (Учётные данные).</p>
 </li>
 <li>
-<p>Сохраните <strong>Client Secret</strong> (Секрет клиента). Его потребуется указать в директиве <code>auth.openId.clientSecret</code> в <a class="mkdocs_imported_link" href="#openid_connection_instance_configure">файле конфигурации {{ productnName }}</a>.</p>
-<figure class="screenshot_with_caption"><img alt="Настройка учётных данных для клиента Keycloak" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_copy_client_secret.png"/>
-<figcaption class="caption">Настройка учётных данных для клиента Keycloak</figcaption>
-</figure>
+<p>Сохраните <strong>Client Secret</strong> (Секрет клиента). Его потребуется указать в директиве <code>auth.openId.clientSecret</code> в <a class="mkdocs_imported_link" href="#openid_connection_instance_configure">файле конфигурации Comindware Platform</a>.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка учётных данных для клиента Keycloak" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_copy_client_secret.png"/><figcaption class="caption">Настройка учётных данных для клиента Keycloak</figcaption></figure></p>
 </li>
 <li>
 <p>В левом меню выберите пункт <strong>*Users</strong> (Пользователи).</p>
@@ -144,9 +211,7 @@
 <li>Заполните поля <strong>Username</strong> (Логин), <strong>Email</strong> (Адрес эл. почты), <strong>First name</strong> (Имя), <strong>Last name</strong> (Фамилия).</li>
 <li>Нажмите кнопку <strong>Create</strong> (Создать) или <strong>Save</strong> (Сохранить).</li>
 </ul>
-<figure class="screenshot_with_caption"><img alt="Создание нового пользователя Keycloak" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_user.png"/>
-<figcaption class="caption">Создание нового пользователя Keycloak</figcaption>
-</figure>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Создание нового пользователя Keycloak" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_user.png"/><figcaption class="caption">Создание нового пользователя Keycloak</figcaption></figure></p>
 </li>
 <li>
 <p>На вкладке <strong>Credentials</strong> (Учётные данные) нажмите кнопку <strong>Set password</strong> (Установить пароль).</p>
@@ -155,37 +220,27 @@
 <li>Включите функцию <strong>Temporary</strong> (Временный пароль).</li>
 <li>Нажмите кнопку <strong>Save</strong> (Сохранить).</li>
 </ul>
-<figure class="screenshot_with_caption"><img alt="Установка временного пароля для пользователя Keycloak" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_user_set_password.png"/>
-<figcaption class="caption">Установка временного пароля для пользователя Keycloak</figcaption>
-</figure>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Установка временного пароля для пользователя Keycloak" src="/platform/v5.0/administration/connections_communication_routes/authentication/img/openid_create_new_user_set_password.png"/><figcaption class="caption">Установка временного пароля для пользователя Keycloak</figcaption></figure></p>
 </li>
 </ol>
 <h2 class="pageBreakBefore" id="openid_connection_instance_configure">Настройка конфигурации Comindware Platform</h2>
 <ol class="colored_numbers_list">
 <li>
 <p>В файле конфигурации экземпляра <strong>Comindware Platform</strong> (<code>&lt;instanceName&gt;.yml</code>) настройте директивы по следующему образцу:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="c1">#### Настройки OpenID-аутентификации #####</span></code> <br/><code><span class="c1"># Имя сервиса OpenID, используемого для входа</span></code> <br/><code><span class="nt">auth.openId.displayName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;myKeycloak&gt;</span></code> <br/><code><span class="c1"># Вкл./выкл. функции</span></code> <br/><code><span class="nt">auth.openId.enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span></code> <br/><code><span class="c1"># Адрес сервера OpenId Connect</span></code> <br/><code><span class="nt">auth.openId.server</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://&lt;myKeycloakHost&gt;</span></code> <br/><code><span class="c1"># Пространство имен или контекст, </span></code> <br/><code><span class="c1"># в котором происходит аутентификация пользователей.</span></code> <br/><code><span class="c1"># Используется для управления идентификацией</span></code> <br/><code><span class="c1"># и доступом в системе OpenID Connect</span></code> <br/><code><span class="nt">auth.openId.realm</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;myKeycloakRealm&gt;</span></code> <br/><code><span class="c1"># Уникальный идентификатор клиентского приложения,</span></code> <br/><code><span class="c1"># используемый для аутентификации и авторизации запросов</span></code> <br/><code><span class="c1"># в рамках протокола OpenID Connect</span></code> <br/><code><span class="nt">auth.openId.clientId</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;myKeycloakClient&gt;</span></code> <br/><code><span class="c1"># Секретный ключ OpenId Connect</span></code> <br/><code><span class="c1"># Это сохранённый ранее секрет клиента</span></code> <br/><code><span class="nt">auth.openId.clientSecret</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;keyCloakClientSecret&gt;</span></code> <br/><code><span class="c1"># Список идентификаторов целевой аудитории,</span></code> <br/><code><span class="c1"># для которой предназначены токены, </span></code> <br/><code><span class="c1"># используемые в процессе аутентификации и авторизации в OpenID Connect.</span></code> <br/><code><span class="nt">auth.openId.audience</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">myAudience</span></code> </pre>
-</div>
+<div class="highlight"><code><pre><span></span><code><span class="c1">#### Настройки OpenID-аутентификации #####</span></code> <br/><code><span class="c1"># Имя сервиса OpenID, используемого для входа</span></code> <br/><code><span class="nt">auth.openId.displayName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;myKeycloak&gt;</span></code> <br/><code><span class="c1"># Вкл./выкл. функции</span></code> <br/><code><span class="nt">auth.openId.enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span></code> <br/><code><span class="c1"># Адрес сервера OpenId Connect</span></code> <br/><code><span class="nt">auth.openId.server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://&lt;myKeycloakHost&gt;</span></code> <br/><code><span class="c1"># Пространство имен или контекст, </span></code> <br/><code><span class="c1"># в котором происходит аутентификация пользователей.</span></code> <br/><code><span class="c1"># Используется для управления идентификацией</span></code> <br/><code><span class="c1"># и доступом в системе OpenID Connect</span></code> <br/><code><span class="nt">auth.openId.realm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;myKeycloakRealm&gt;</span></code> <br/><code><span class="c1"># Уникальный идентификатор клиентского приложения,</span></code> <br/><code><span class="c1"># используемый для аутентификации и авторизации запросов</span></code> <br/><code><span class="c1"># в рамках протокола OpenID Connect</span></code> <br/><code><span class="nt">auth.openId.clientId</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;myKeycloakClient&gt;</span></code> <br/><code><span class="c1"># Секретный ключ OpenId Connect</span></code> <br/><code><span class="c1"># Это сохранённый ранее секрет клиента</span></code> <br/><code><span class="nt">auth.openId.clientSecret</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;keyCloakClientSecret&gt;</span></code> <br/><code><span class="c1"># Список идентификаторов целевой аудитории,</span></code> <br/><code><span class="c1"># для которой предназначены токены, </span></code> <br/><code><span class="c1"># используемые в процессе аутентификации и авторизации в OpenID Connect.</span></code> <br/><code><span class="nt">auth.openId.audience</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">myAudience</span></code> <br/></pre></code></div>
 </li>
 </ol>
 <h2 class="pageBreakBefore" id="openid_connection_linux_configure">Настройка ОС Linux с Comindware Platform</h2>
 <ol class="colored_numbers_list">
 <li>
 <p>Перейдите в режим суперпользователя <code>root</code>:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code>sudo -s</code> </pre>
-</div>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>-s</code> <br/></pre></code></div>
 <p>или</p>
-<div class="highlight"><code><code></code></code>
-<pre><code>su<span class="w"> </span>-</code> </pre>
-</div>
+<div class="highlight"><code><pre><span></span><code>su<span class="w"> </span>-</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Добавьте в файл <code>/etc/hosts</code> строку:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code>"xxx.xxx.xxx.xxx" "&lt;yourHost&gt;"</code> </pre>
-</div>
+<div class="highlight"><code><pre><span></span><code>"xxx.xxx.xxx.xxx" "&lt;yourHost&gt;"</code> <br/></pre></code></div>
 <p>Здесь <code>xxx.xxx.xxx.xxx</code> — IP-адрес, <code>&lt;yourHost&gt;</code> адрес сервера <strong>Comindware Platform</strong>, указанный в <a class="mkdocs_imported_link" href="#openid_connection_server_address"><em>глобальной конфигурации Comindware Platform</em></a> (без указания протокола <code>HTTP</code> или <code>HTTPS</code>).</p>
 </li>
 <li>
@@ -193,27 +248,19 @@
 </li>
 <li>
 <p>Откройте для редактирования файл конфигурации NGINX:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code>vim /etc/nginx/sites-available/comindware&lt;instanceName&gt;</code> </pre>
-</div>
+<div class="highlight"><code><pre><span></span><code>vim /etc/nginx/sites-available/comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Настройте конфигурацию SSL-сертификата аналогично следующему примеру:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="n">server</span> <span class="p">{</span></code> <br/><code>    <span class="n">listen</span> <span class="mi">80</span> <span class="k">default</span><span class="p">;</span></code> <br/><code>    <span class="n">listen</span> <span class="mi">443</span> <span class="n">ssl</span><span class="p">;</span></code> <br/><code></code> <br/><code>    <span class="n">root</span> <span class="o">/</span><span class="kt">var</span><span class="o">/</span><span class="n">www</span><span class="o">/&lt;</span><span class="n">instanceName</span><span class="o">&gt;</span><span class="p">;</span></code> <br/><code>    <span class="n">server_name</span> <span class="o">&lt;</span><span class="n">yourHost</span><span class="o">&gt;</span><span class="p">;</span></code> <br/><code></code> <br/><code>    <span class="n">ssl_certificate</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">ssl</span><span class="o">/</span><span class="n">nginx</span><span class="p">.</span><span class="n">crt</span><span class="p">;</span></code> <br/><code>    <span class="n">ssl_certificate_key</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">ssl</span><span class="o">/</span><span class="n">nginx</span><span class="p">.</span><span class="n">key</span><span class="p">;</span></code> <br/><code></code> <br/><code>    <span class="n">client_max_body_size</span> <span class="mf">300m</span><span class="p">;</span></code> <br/><code>    <span class="n">fastcgi_read_timeout</span> <span class="mi">10000</span><span class="p">;</span></code> <br/><code>    <span class="n">location</span> <span class="o">/</span> <span class="p">{</span></code> <br/><code>        <span class="n">proxy_read_timeout</span> <span class="mi">10000</span><span class="p">;</span></code> <br/><code>                    <span class="n">proxy_connect_timeout</span> <span class="mi">10000</span><span class="p">;</span></code> <br/><code>                    <span class="n">proxy_send_timeout</span> <span class="mi">10000</span><span class="p">;</span></code> <br/><code>                    <span class="n">root</span>          <span class="o">/</span><span class="kt">var</span><span class="o">/</span><span class="n">www</span><span class="o">/&lt;</span><span class="n">instanceName</span><span class="o">&gt;/</span><span class="p">;</span></code> <br/><code>                    <span class="n">fastcgi_pass</span>  <span class="n">unix</span><span class="p">:</span><span class="o">/</span><span class="kt">var</span><span class="o">/</span><span class="n">www</span><span class="o">/&lt;</span><span class="n">instanceName</span><span class="o">&gt;/</span><span class="n">App_Data</span><span class="o">/</span><span class="n">comindware</span><span class="p">.</span><span class="n">socket</span><span class="p">;</span></code> <br/><code>                    <span class="n">include</span>       <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">fastcgi</span><span class="p">.</span><span class="n">conf</span></code> <br/><code>                    <span class="p">}</span></code> <br/><code><span class="p">}</span></code> </pre>
-</div>
+<div class="highlight"><code><pre><span></span><code><span class="n">server</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="n">listen</span><span class="w"> </span><span class="mi">80</span><span class="w"> </span><span class="k">default</span><span class="p">;</span></code> <br/><code><span class="w">    </span><span class="n">listen</span><span class="w"> </span><span class="mi">443</span><span class="w"> </span><span class="n">ssl</span><span class="p">;</span></code> <br/><code></code> <br/><code><span class="w">    </span><span class="n">root</span><span class="w"> </span><span class="o">/</span><span class="kt">var</span><span class="o">/</span><span class="n">www</span><span class="o">/&lt;</span><span class="n">instanceName</span><span class="o">&gt;</span><span class="p">;</span></code> <br/><code><span class="w">    </span><span class="n">server_name</span><span class="w"> </span><span class="o">&lt;</span><span class="n">yourHost</span><span class="o">&gt;</span><span class="p">;</span></code> <br/><code></code> <br/><code><span class="w">    </span><span class="n">ssl_certificate</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">ssl</span><span class="o">/</span><span class="n">nginx</span><span class="p">.</span><span class="n">crt</span><span class="p">;</span></code> <br/><code><span class="w">    </span><span class="n">ssl_certificate_key</span><span class="w"> </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">ssl</span><span class="o">/</span><span class="n">nginx</span><span class="p">.</span><span class="n">key</span><span class="p">;</span></code> <br/><code></code> <br/><code><span class="w">    </span><span class="n">client_max_body_size</span><span class="w"> </span><span class="mf">300m</span><span class="p">;</span></code> <br/><code><span class="w">    </span><span class="n">fastcgi_read_timeout</span><span class="w"> </span><span class="mi">10000</span><span class="p">;</span></code> <br/><code><span class="w">    </span><span class="n">location</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="n">proxy_read_timeout</span><span class="w"> </span><span class="mi">10000</span><span class="p">;</span></code> <br/><code><span class="w">                    </span><span class="n">proxy_connect_timeout</span><span class="w"> </span><span class="mi">10000</span><span class="p">;</span></code> <br/><code><span class="w">                    </span><span class="n">proxy_send_timeout</span><span class="w"> </span><span class="mi">10000</span><span class="p">;</span></code> <br/><code><span class="w">                    </span><span class="n">root</span><span class="w">          </span><span class="o">/</span><span class="kt">var</span><span class="o">/</span><span class="n">www</span><span class="o">/&lt;</span><span class="n">instanceName</span><span class="o">&gt;/</span><span class="p">;</span></code> <br/><code><span class="w">                    </span><span class="n">fastcgi_pass</span><span class="w">  </span><span class="n">unix</span><span class="p">:</span><span class="o">/</span><span class="kt">var</span><span class="o">/</span><span class="n">www</span><span class="o">/&lt;</span><span class="n">instanceName</span><span class="o">&gt;/</span><span class="n">App_Data</span><span class="o">/</span><span class="n">comindware</span><span class="p">.</span><span class="n">socket</span><span class="p">;</span></code> <br/><code><span class="w">                    </span><span class="n">include</span><span class="w">       </span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">fastcgi</span><span class="p">.</span><span class="n">conf</span></code> <br/><code><span class="w">                    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Проверьте конфигурацию NGINX:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code>nginx -t</code> </pre>
-</div>
+<div class="highlight"><code><pre><span></span><code>nginx -t</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Перезапустите <strong>Comindware Platform</strong>:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code>systemctl restart elasticsearch nginx comindware&lt;instanceName&gt;</code> </pre>
-</div>
+<div class="highlight"><code><pre><span></span><code>systemctl restart elasticsearch nginx comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
 </li>
 </ol>
 <h2 class="pageBreakBefore" id="openid_connection_initialize">Инициализация Comindware Platform для входа через Keycloak</h2>
@@ -246,9 +293,7 @@
 </ul>
 <h3 class="pageBreakBefore" id="openid_connection_jwt_structure">Структура JWT-токена</h3>
 <p>JWT-токен содержит следующие поля для управления его временем жизни:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="p">{</span></code> <br/><code>  <span class="nt">"sub"</span><span class="p">:</span> <span class="s2">"user123"</span><span class="p">,</span>  <span class="c1">// Идентификатор пользователя</span></code> <br/><code>  <span class="nt">"iat"</span><span class="p">:</span> <span class="mi">1610000000</span><span class="p">,</span> <span class="c1">// Время создания токена</span></code> <br/><code>  <span class="nt">"exp"</span><span class="p">:</span> <span class="mi">1610003600</span>  <span class="c1">// Время истечения срока действия (1 час)</span></code> <br/><code><span class="p">}</span></code> </pre>
-</div>
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="nt">"sub"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user123"</span><span class="p">,</span><span class="w">  </span><span class="c1">// Идентификатор пользователя</span></code> <br/><code><span class="w">  </span><span class="nt">"iat"</span><span class="p">:</span><span class="w"> </span><span class="mi">1610000000</span><span class="p">,</span><span class="w"> </span><span class="c1">// Время создания токена</span></code> <br/><code><span class="w">  </span><span class="nt">"exp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1610003600</span><span class="w">  </span><span class="c1">// Время истечения срока действия (1 час)</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
 <h3 id="openid_connection_recommendations">Рекомендации по оптимизации времени жизни сеансов</h3>
 <p>Чтобы сбалансировать удобство использования и безопасность системы, воспользуйтесь приведёнными ниже рекомендациями.</p>
 <ul>
@@ -259,8 +304,7 @@
 <li>Для стандартных приложений:</li>
 <li>Установите время жизни токена доступа 30—60 минут.</li>
 <li>Установите время жизни токена обновления 7—30 дней.</li>
-<li>Общие рекомендации:
-<ul>
+<li>Общие рекомендации:<ul>
 <li>Настройте уведомления о скором завершении сеанса с возможностью его продления.</li>
 </ul>
 </li>
@@ -280,5 +324,12 @@
 </article>
 </div>
 </div>
-<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
 </div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

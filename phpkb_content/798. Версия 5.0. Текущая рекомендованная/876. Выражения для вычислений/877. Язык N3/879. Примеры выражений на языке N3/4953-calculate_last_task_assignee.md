@@ -1,6 +1,7 @@
 ---
-title: Вычисление фактического исполнителя у последней завершенной задачи
+title: 'Вычисление фактического исполнителя у последней завершенной задачи'
 kbId: 4953
+url: 'https://kb.comindware.ru/article.php?id=4953'
 ---
 
 # Вычисление фактического исполнителя у последней завершенной задачи
@@ -8,7 +9,6 @@ kbId: 4953
 Для того, чтобы вычислить пользователя, который завершил последнюю задачу из списка задач связанного с текущим объектом экземпляра процесса, введите следующее выражение:
 
 ```
-
 @prefix cmw: <http://comindware.com/logics#>.
 @prefix task: <http://comindware.com/ontology/task#>.
 @prefix account: <http://comindware.com/ontology/account#>.
@@ -28,7 +28,6 @@ kbId: 4953
     ?taskmax cmw:scheduledEndDate ?max.          
     ?taskmax cmw:completedBy ?value.
     }
-
 ```
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

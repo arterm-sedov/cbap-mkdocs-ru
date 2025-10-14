@@ -1,6 +1,7 @@
 ---
-title: Установка и настройка Elasticsearch без сертификатов подлинности
+title: 'Установка и настройка Elasticsearch без сертификатов подлинности'
 kbId: 4612
+url: 'https://kb.comindware.ru/article.php?id=4612'
 ---
 
 # Установка и настройка Elasticsearch без сертификатов подлинности

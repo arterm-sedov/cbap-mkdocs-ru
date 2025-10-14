@@ -1,0 +1,226 @@
+<h1>Атрибут типа «Текст». Контроль и форматирование значений с помощью масок и регулярных выражений</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5089" kb-tags="текст,атрибут типа «Текст»,регулярное выражение,маска,проверка маски,проверка значения" kb-title="Атрибут типа «Текст». Контроль и форматирование значений с помощью масок и регулярных выражений">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#attribute_text_masks_introduction">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#attribute_text_masks_use_case">
+<span class="md-ellipsis">
+      Прикладная задача
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#attribute_text_masks_initial_data">
+<span class="md-ellipsis">
+      Исходные данные
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#attribute_text_masks_mask_configuration">
+<span class="md-ellipsis">
+      Настройка масок и проверок значений атрибутов типа «Текст»
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#attribute_text_masks_testing">
+<span class="md-ellipsis">
+      Тестирование
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="attribute_text_masks_introduction">Введение</h2>
+<p>Атрибут типа «<strong>Текст</strong>» может содержать неограниченное количество любых символов.</p>
+<p><strong>Comindware Platform</strong> позволяет контролировать допустимые набор, последовательность и количество символов для текстового атрибута следующими способами:</p>
+<ul>
+<li>при вводе с помощью <strong>маски</strong>;</li>
+<li>при сохранении записи с помощью <strong>проверки значения</strong>.</li>
+</ul>
+<p>Здесь представлен пример настройки текстовых атрибутов для контроля, форматирования и проверки значений с использованием регулярных выражений.</p>
+<div class="notice notice-success">
+<p class="admonition-title">Форматирование значения атрибута с помощью маски ввода</p>
+<p>Для контроля и форматирования значения текстового атрибута при вводе в качестве его <strong>формата отображения</strong> можно задать готовую или особую <strong>маску</strong>.</p>
+<p>Маска ввода представляет собой строку символов (регулярное выражение), задающую допустимый формат значения текстового атрибута. </p>
+<p>Когда пользователь вводит текст в поле атрибута с заданной маской, система автоматически форматирует текст так, чтобы он соответствовал маске.</p>
+<p>Предусмотрены следующие готовые маски:</p>
+<ul>
+<li><strong>Телефон РФ</strong>: <code>7 (123) 456-78-90</code> — 7, пробел, 3 цифры в скобках, пробел, 3 цифры, дефис, 2 цифры, дефис, 2 цифры.</li>
+<li><strong>Адрес эл. почты</strong>: <code>my_e-mail.2022@компания.рф</code> — буквы (строчные: английские и русские), цифры, знак @, символы подчёркивания, дефисы, точки.</li>
+<li><strong>Паспорт (РФ)</strong>: <code>1234 567890</code> — 4 цифры, пробел, 6 цифр.</li>
+<li><strong>Индекс (РФ)</strong>: <code>100000</code> — 6 цифр.</li>
+<li><strong>ИНН</strong> <code>1234567890</code> или <code>123456789012</code> — 10 или 12 цифр.</li>
+<li><strong>ОГРН</strong> <code>1234567890123</code> — 13 цифр.</li>
+<li><strong>Регистрационный номер ТС (РФ)</strong>»: <code>А123БВ 456</code> — 1 буква (прописные, строчные: русские), 3 цифры, 2 буквы, пробел 3 цифры.</li>
+</ul>
+<p>Также можно задать <strong>особую маску</strong> с помощью регулярного выражения.</p>
+</div>
+<div class="notice notice-tip">
+<p class="admonition-title">Синтаксис регулярного выражения маски</p>
+<p>Регулярное выражение представляет собой набор символов, с которым сравнивается строковое значение.</p>
+<p>Вот несколько базовых примеров и элементов регулярных выражений:</p>
+<ul>
+<li><code>[а-яА-ЯёЁ]</code> — все буквы русского алфавита.</li>
+<li><code>[0-9]+</code> или <code>\\d+</code> — набор из одной или более цифр. Диапазон <code>[0-9]</code> и выражение <code>\\d</code> обозначают любую цифру от 0 до 9, а плюс + обозначает, что таких цифр может быть одна или более.</li>
+<li><code>{5}</code> — последовательность из 5 символов определённого типа.</li>
+<li><code>[А-ЯЁ]{3}</code> — последовательность из 3 заглавных букв русского алфавита.</li>
+<li><code>^</code> — символ начала строки.</li>
+<li><code>$</code> — символ конца строки.</li>
+</ul>
+<p>Ознакомиться с полным синтаксисом регулярных выражений, поэкспериментировать и отладить их можно на следующем сайте: <a class="mkdocs_imported_link" href="https://regex101.com/">https://regex101.com/</a></p>
+<div class="notice notice-example">
+<p class="admonition-title">Пример</p>
+<ul>
+<li>
+<p>Дано регулярное выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="ss">"^\\d{5}$"</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Строка <code>12345</code> — <strong>соответствует</strong> регулярному выражению.</p>
+</li>
+<li>Строки <code>12345</code> и <code>1абв2</code> — <strong>не соответствуют</strong> регулярному выражению.</li>
+</ul>
+</div>
+</div>
+<div class="notice notice-success">
+<p class="admonition-title">Проверка значения атрибута при сохранении записи</p>
+<p>Для контроля значения текстового атрибута при сохранении записи в его свойствах можно задать выражение с помощью <strong>формулы</strong>, выражения на <strong>N3</strong> или другого <strong>атрибута</strong>.</p>
+<p>Это выражение должно возвращать <code>True</code> для допустимых значений атрибута и <code>False</code> — для недопустимых.</p>
+<p>Также следует задать <strong>сообщение при отрицательном результате проверки</strong>.</p>
+<p>Если атрибут имеет недопустимое значение, при попытке сохранения записи отобразится заданное сообщение и запись не будет сохранена. Для сохранения записи пользователь должен будет изменить значение атрибута на допустимое.</p>
+</div>
+<h2 id="attribute_text_masks_use_case">Прикладная задача</h2>
+<p>Требуется настроить текстовые атрибуты <em>«ИНН»</em> и <em>«КПП»</em> для юридического лица и контролировать их заполнение.</p>
+<p>При вводе недопустимых значений необходимо выводить наглядные сообщения об ошибках.</p>
+<h2 id="attribute_text_masks_initial_data">Исходные данные</h2>
+<p>Имеется шаблон «<strong>Юридические лица</strong>», в котором хранятся реквизиты контрагентов.</p>
+<h2 id="attribute_text_masks_mask_configuration">Настройка масок и проверок значений атрибутов типа «Текст»</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте <strong>и сохраните</strong> атрибут <em>«ИНН»</em> со следующими свойствами:</p>
+<ul>
+<li><strong>Тип данных: текст</strong></li>
+<li><strong>Системное имя:</strong> <em>ИНН</em></li>
+<li><strong>Формат отображения: ИНН юрлица</strong></li>
+<li><strong>Регулярное выражение маски:</strong> <code>([0-9]{10})</code> (заполняется автоматически)</li>
+</ul>
+</li>
+<li>
+<p>Откройте созданный атрибут <em>«ИНН»</em>.</p>
+</li>
+<li>
+<p>В окне настройки атрибута на вкладке «<strong>Проверка значения</strong>» настройте проверку:</p>
+<ul>
+<li>
+<p><strong>Проверка значения по выражению: формула</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="c1"># Возвращаем True, если значение атрибута "ИНН"</span></code> <br/><code><span class="c1"># соответствует готовой маске "ИНН юрлица"</span></code> <br/><code><span class="n">MATCHES</span><span class="p">(</span><span class="err">$</span><span class="n">ИНН</span><span class="p">,</span> <span class="s2">"^[0-9]</span><span class="si">{10}</span><span class="s2">$"</span><span class="p">)</span></code> <br/></pre></code></div>
+<div class="notice notice-success">
+<p class="admonition-title">Синтаксис формулы</p>
+<p><code>[0-9]{10}</code> — последовательность из 10 цифр от 0-9. Это <strong>регулярное выражение маски</strong>, скопированное со вкладки «<strong>Свойства</strong>».
+- <code>^</code> — символ начала строки.
+- <code>$</code> — символ конца строки.</p>
+</div>
+</li>
+<li>
+<p><strong>Сообщение при отрицательном результате проверки: формула</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="s2">"Неверно указан ИНН"</span></code> <br/></pre></code></div>
+</li>
+</ul>
+</li>
+<li>
+<p>Создайте <strong>и сохраните</strong> атрибут <em>«КПП»</em> со следующими свойствами:</p>
+<ul>
+<li><strong>Тип данных: текст</strong></li>
+<li><strong>Системное имя:</strong> <em>КПП</em></li>
+<li><strong>Формат отображения: особая маска</strong></li>
+<li><strong>Регулярное выражение маски:</strong> <code>^\\d{9}$</code></li>
+</ul>
+</li>
+<li>
+<p>Откройте созданный атрибут <em>«КПП»</em>.</p>
+</li>
+<li>
+<p>В окне настройки атрибута на вкладке «<strong>Проверка значения</strong>» и настройте проверку:</p>
+<ul>
+<li>
+<p><strong>Проверка значения по выражению: формула</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="c1"># Возвращаем True, если значение атрибута "КПП"</span></code> <br/><code><span class="c1"># соответствует заданной особой маске</span></code> <br/><code><span class="n">MATCHES</span><span class="p">(</span><span class="err">$</span><span class="n">КПП</span><span class="p">,</span> <span class="s2">"^\\d</span><span class="si">{9}</span><span class="s2">$"</span><span class="p">)</span></code> <br/></pre></code></div>
+<div class="notice notice-success">
+<p class="admonition-title">Синтаксис формулы</p>
+<p><code>\\d{9}</code> — последовательность из 9 цифр. Это <strong>регулярное выражение маски</strong>, скопированное со вкладки «<strong>Свойства</strong>».
+- <code>^</code> — символ начала строки.
+- <code>$</code> — символ конца строки.</p>
+</div>
+</li>
+<li>
+<p><strong>Сообщение при отрицательном результате проверки: формула</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="s2">"Неверно указан КПП"</span></code> <br/></pre></code></div>
+</li>
+</ul>
+</li>
+<li>
+<p>Поместите атрибуты <em>«ИНН»</em> и <em>«КПП»</em> на форму шаблона <em>«Юридические лица»</em>.</p>
+</li>
+<li>Сохраните форму.</li>
+</ol>
+<h2 id="attribute_text_masks_testing">Тестирование</h2>
+<ol class="colored_numbers_list">
+<li>Создайте новую запись в шаблоне <em>«Юридические лица»</em>.</li>
+<li>Не заполняйте поля <em>«ИНН»</em> и <em>«КПП»</em>.</li>
+<li>Нажмите кнопку «<strong>Сохранить</strong>».</li>
+<li>Должно отобразиться сообщение «<strong>Имеются ошибки</strong>».</li>
+<li>Нажмите кнопку «<strong>Показать детали</strong>» в сообщении об ошибке, кнопку <i class="fa-light fa-exclamation-triangle">‌<!--icon--></i> над формой или значок <i class="fa-light fa-exclamation-circle">‌<!--icon--></i> у подписи поля с ошибкой.</li>
+<li>Отобразится список ошибок, возникших при заполнении полей.</li>
+<li>Введите корректные значения <em>ИНН</em> и <em>КПП</em>.</li>
+<li>Нажмите кнопку «<strong>Сохранить</strong>».</li>
+<li>Запись должна быть сохранена без ошибок.</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Результат проверки значений атрибутов при вводе" src="/platform/v5.0/examples/img/attribute_text_masks_errors.png"/><figcaption class="caption">Результат проверки значений атрибутов при вводе</figcaption></p>
+</figure>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4768">Атрибут типа «Текст»</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4765">Общие свойства атрибутов </a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4993">Список функций языка формул Comindware</a></li>
+<li><a class="mkdocs_imported_link" href="https://regex101.com/">Regex101 — сайт для отладки регулярных выражений</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

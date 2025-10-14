@@ -1,6 +1,7 @@
 ---
-title: Хранилище S3. Настройка экземпляра ПО и подключения
+title: 'Хранилище S3. Настройка экземпляра ПО и подключения'
 kbId: 4677
+url: 'https://kb.comindware.ru/article.php?id=4677'
 ---
 
 # Хранилище S3. Настройка экземпляра ПО и подключения
@@ -57,13 +58,11 @@ kbId: 4677
 
    ```
    sudo -i
-
    ```
 2. Откройте для редактирования файл конфигурации экземпляра ПО:
 
    ```
    vim /usr/share/comindware/configs/instance/<instanceName>.yml
-
    ```
 
    Здесь  `<instanceName>` — имя экземпляра ПО.
@@ -101,13 +100,11 @@ kbId: 4677
    tempStorage.s3.bucket: <temp-files-bucket>
    # Имя подключения к S3
    tempStorage.s3.connection: default
-
    ```
 4. Перезагрузите экземпляр ПО:
 
    ```
    systemctl restart comindware<instanceName>
-
    ```
 5. [Проверьте соединение](#s3_connection_test) с хранилищем S3.
 6. [Проверьте общую работоспособность](#s3_connection_validation) интеграции с S3.
@@ -136,13 +133,11 @@ kbId: 4677
    tempStorage.type: S3
    tempStorage.s3.bucket: <temp-files-bucket>
    tempStorage.s3.connection: <s3connectionName>
-
    ```
 2. Перезагрузите экземпляр ПО:
 
    ```
    systemctl restart comindware<instanceName>
-
    ```
 3. [Проверьте соединение](#s3_connection_test) с хранилищем S3.
 4. [Проверьте общую работоспособность](#s3_connection_validation) интеграции с S3.
@@ -162,7 +157,6 @@ kbId: 4677
 
      ```
      https://s3.region-code.amazonaws.com/bucket-name/key-name
-
      ```
 4. Нажмите кнопку «**Проверить соединение**».
 

@@ -1,6 +1,7 @@
 ---
-title: Экспорт и импорт версий приложения с помощью Excel
+title: 'Экспорт и импорт версий приложения с помощью Excel'
 kbId: 5071
+url: 'https://kb.comindware.ru/article.php?id=5071'
 ---
 
 # Экспорт и импорт версий приложения с помощью Excel
@@ -117,7 +118,6 @@ kbId: 5071
 
   ```
   ObjectType@[ContainerSystemName].ObjectSystemName
-
   ```
 - **Instance** — экземпляр **{{ productName }}**.
 - **Property** — свойство объекта.

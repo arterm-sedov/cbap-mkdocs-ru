@@ -1,6 +1,7 @@
 ---
-title: Фильтр списка по задачам из нескольких шаблонов процесса
+title: 'Фильтр списка по задачам из нескольких шаблонов процесса'
 kbId: 4955
+url: 'https://kb.comindware.ru/article.php?id=4955'
 ---
 
 # Фильтр списка по задачам из нескольких шаблонов процесса
@@ -8,7 +9,6 @@ kbId: 4955
 Для того, чтобы получить список всех задач из определенных Шаблонов процесса в настроенном Шаблоне записи, введите следующее выражение:
 
 ```
-
 @prefix cmw: <http://comindware.com/logics#>.
 @prefix container: <http://comindware.com/ontology/container#>.
 @prefix assert: <http://comindware.com/logics/assert#>.
@@ -29,9 +29,9 @@ kbId: 4955
     }
 )    
     assert:union true.
+    
 
 }
-
 ```
 
 **где:**

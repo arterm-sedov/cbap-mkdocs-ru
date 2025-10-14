@@ -1,6 +1,7 @@
 ---
-title: Интеграция Comindware Platform с внешними системами. Общие рекомендации
+title: 'Интеграция Comindware Platform с внешними системами. Общие рекомендации'
 kbId: 5091
+url: 'https://kb.comindware.ru/article.php?id=5091'
 ---
 
 # Интеграция {{ productName }} с внешними системами. Общие рекомендации
@@ -235,7 +236,6 @@ kbId: 5091
 
 ```
 http://your-host/docs
-
 ```
 
 Здесь `your-host` — адрес сервера **{{ productName }}**.

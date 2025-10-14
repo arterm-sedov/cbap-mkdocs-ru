@@ -1,6 +1,7 @@
 ---
-title: Глобальная функция для обращения в Active Directory
+title: 'Глобальная функция для обращения в Active Directory'
 kbId: 5016
+url: 'https://kb.comindware.ru/article.php?id=5016'
 ---
 
 # Глобальная функция для обращения в Active Directory
@@ -8,6 +9,7 @@ kbId: 5016
 Для того чтобы обратиться в Active Directory и получить оттуда какую-либо информацию, введите следующее выражение:
 
 ```
+ 
 
 using System;
 using System.Collections.Generic;
@@ -17,7 +19,7 @@ public static partial class Script {
 
     // method name should remain "Main"
     public static Dictionary<string, object> begaemvAD(string tekst)
-    {
+    { 
 
  
 
@@ -41,7 +43,6 @@ public static partial class Script {
             return result;
     }
 }
-
 ```
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

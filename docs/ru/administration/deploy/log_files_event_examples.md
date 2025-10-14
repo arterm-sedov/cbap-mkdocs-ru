@@ -1,6 +1,13 @@
 ---
 title: Примеры событий в файловых журналах
 kbId: 4618
+tags: 
+    - linux
+    - windows
+    - журналирование
+    - логирование
+    - логи
+    - файловые журналы
 ---
 
 {% if gostech %}
@@ -1234,16 +1241,16 @@ IIS authentication: Anonymous
 **Пример события**
 
 ``` log
-[yyy-MM-dd HH:mm:ss,SSS][INFO][Getting meta for plugin XxxSenderAdapter.] Platform key: XXX_AdapterAgent5b28ad88a4cb4d4f8078c4deef1ee08b; Service name: ServiceName; Runtime: .NET 6.0.21
+[yyy-MM-dd HH:mm:ss,SSS][INFO][Getting meta for plugin XxxSenderAdapter.] Platform key: XXX_AdapterAgent5b28ad88a4cb4d4f8078c4deef1ee08b; Service name: ServiceName; Runtime: .NET 8.0
 
-[2023-12-08 00:10:20,667][INFO][Meta is ready for XxxSenderAdapter.] Platform key: XXX_AdapterAgent5b28ad88a4cb4d4f8078c4deef1ee08b; Service name: ServiceName; Runtime: .NET 6.0.21
+[2023-12-08 00:10:20,667][INFO][Meta is ready for XxxSenderAdapter.] Platform key: XXX_AdapterAgent5b28ad88a4cb4d4f8078c4deef1ee08b; Service name: ServiceName; Runtime: .NET 8.0
 data: {"Name":"XxxSenderAdapter","Description":"Адаптер для связи с системой «XXX»","Direction":"Outgoing","EndpointDefinitionJson":{}}
 ```
 
 - `yyyy-MM-dd HH:mm:ss,SSS` — дата и время события.
 - `INFO` — тип события: информационное.
 - `Getting meta for plugin XxxSenderAdapter` — описание события.
-- `Platform key: XXX_AdapterAgent5b28ad88a4cb4d4f8078c4deef1ee08b; Service name: ServiceName; Runtime: .NET 6.0.21` — контекст события.
+- `Platform key: XXX_AdapterAgent5b28ad88a4cb4d4f8078c4deef1ee08b; Service name: ServiceName; Runtime: .NET 8.0` — контекст события.
 - `data: {}` — содержимое сообщения.
 
 #### Статус работы адаптера

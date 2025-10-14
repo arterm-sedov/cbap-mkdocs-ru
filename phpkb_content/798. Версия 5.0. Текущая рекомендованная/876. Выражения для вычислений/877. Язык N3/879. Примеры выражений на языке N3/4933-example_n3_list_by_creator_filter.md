@@ -1,6 +1,7 @@
 ---
-title: Фильтр списка по создателю
+title: 'Фильтр списка по создателю'
 kbId: 4933
+url: 'https://kb.comindware.ru/article.php?id=4933'
 ---
 
 # Фильтр списка по создателю
@@ -8,7 +9,6 @@ kbId: 4933
 Для того, чтобы настроить фильтр отображения записей в списке, где текущий пользователь - создатель записи, введите следующее выражение:
 
 ```
-
 @prefix cmw: <http://comindware.com/logics#>.
 @prefix object: <http://comindware.com/ontology/object#>.
 @prefix user: <http://comindware.com/ontology/user#>.
@@ -22,7 +22,6 @@ kbId: 4933
  ?item ?propertyCreator ?user.
 
 }
-
 ```
 
 **где:**

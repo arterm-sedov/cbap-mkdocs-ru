@@ -1,6 +1,7 @@
 ---
-title: Атрибут типа «Документ»
+title: 'Атрибут типа «Документ»'
 kbId: 4782
+url: 'https://kb.comindware.ru/article.php?id=4782'
 ---
 
 # Атрибут типа «Документ»
@@ -21,20 +22,17 @@ kbId: 4782
 
   ```
   var fileIds = Api.TeamNetwork.ObjectService.GetPropertyValues(recordId, new [] {"documentAttributeSystemName"})`;
-
   ```
 - получить массив объектов с прикреплёнными файлами:
 
   ```
   var attachedFileObjects = fileIds[docId].TryGetValue("Files", out object fileObject)
                               && fileObject != null ? fileObject as object[] : null;
-
   ```
 - получить объект файла (`attachedFile`):
 
   ```
   var attachedFile = Api.TeamNetwork.DocumentService.GetContent(attachedFileObject[0].ToString());
-
   ```
 - получить имя файла с расширением (`attachedFile.Name`);
 - получить содержимое файла (`attachedFile.Data`);
@@ -42,7 +40,6 @@ kbId: 4782
 
   ```
   var attachedFile = Api.TeamNetwork.DocumentService.GetDocument(attachedFileObject[0].ToString());
-
   ```
 
   - `attachedFile.Title` — имя файла с расширением;
@@ -60,7 +57,6 @@ kbId: 4782
           Title = "имя файла.расширение",
           Extension = ".расширение"
       };
-
   ```
 - сформировать массив байтов `byte[] fileBytes` с содержимым файла;
 - из массива байтов создать поток `MemoryStream()` для прикрепления документа к атрибуту:
@@ -69,13 +65,11 @@ kbId: 4782
       var fileStream = new MemoryStream();
       fileStream.Write(fileBytes, 0, fileBytes.Length);
       fileStream.Seek(0, SeekOrigin.Begin);
-
   ```
 - преобразовать поток в объект документа для прикрепления к атрибуту:
 
   ```
   string documentObject = Api.TeamNetwork.DocumentService.CreateDocumentWithStream(document, fileStream, "");
-
   ```
 - сформировать словарь из системного имени атрибута и объекта документа:
 
@@ -84,13 +78,11 @@ kbId: 4782
       {
           { "DocumentAttributeSystemName", documentObject }
       };
-
   ```
 - прикрепить результирующий документ к атрибуту записи `reсordId`:
 
   ```
       Api.TeamNetwork.ObjectService.EditWithAlias(reсordId, documentDict)
-
   ```
 
 Префиксы N3 для работы с атрибутом
@@ -100,7 +92,6 @@ kbId: 4782
 ```
 @prefix object: <http://comindware.com/ontology/object#>.
 @prefix document: <http://comindware.com/ontology/document#>.
-
 ```
 
 Извлечение файлов из атрибута с помощью N3
@@ -111,31 +102,26 @@ kbId: 4782
 
   ```
   ("TemplateSystemName" "DocumentAttributeSystemName") object:findProperty ?DocumentAttribute.
-
   ```
 - из объекта с атрибутом получить значение атрибута в текущей записи:
 
   ```
   ?item documentAttribute ?documentAttributeValue.
-
   ```
 - из значения атрибута получить текущую версию документа:
 
   ```
   ?documentAttributeValue document:revision ?revision.
-
   ```
 - из версии получить содержимое файла в формате `base64`:
 
   ```
   ?revision document:content ?content.
-
   ```
 - из версии получить имя файла:
 
   ```
   ?revision document:title ?title.
-
   ```
 
 Добавление файлов в атрибут с помощью N3
@@ -146,19 +132,16 @@ kbId: 4782
 
   ```
   ?documentContentSource document:content ?content.
-
   ```
 - сформировать имя файла:
 
   ```
   ?documentTitleSource document:title ?title.
-
   ```
 - прикрепить полученный файл к атрибуту типа «**Документ**», т. е. поместить на него ссылку в версию:
 
   ```
   (?content ?title) document:attach ?documentAttributeValue.
-
   ```
 
 ## Настройка свойств атрибута

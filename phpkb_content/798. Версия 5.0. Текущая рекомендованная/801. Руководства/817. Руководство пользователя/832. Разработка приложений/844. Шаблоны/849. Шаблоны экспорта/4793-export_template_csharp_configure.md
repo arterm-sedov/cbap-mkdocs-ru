@@ -1,6 +1,7 @@
 ---
-title: Шаблон экспорта, Настройка с использованием C#
+title: 'Шаблон экспорта, Настройка с использованием C#'
 kbId: 4793
+url: 'https://kb.comindware.ru/article.php?id=4793'
 ---
 
 # Шаблон экспорта, Настройка с использованием C#
@@ -32,6 +33,7 @@ _![Автоматически созданная кнопка](https://kb.comind
 Перейдите на вкладку «***Скрипт***» в свойствах этой кнопки и добавьте следующий код:
 
 ```
+ 
 
 using System;
 using System.Collections.Generic;
@@ -56,10 +58,8 @@ var ContractDataInList = new List<ContractData>();
 foreach (var ContractDataInId in ContractDataInIds)
 {
 var ContractDataInData = GetData(ContractDataInId);
-
 var Status_Id = getterSTR("Status", ContractDataInData); // Атрибут-ссылка в ШЗ "Договоры"
 var Status_Data = GetData(Status_Id);
-
 var ContractDataInT = new ContractData
 {
 Name = getterSTR("Title", ContractDataInData), // Атрибут "Статус" в ШЗ "Договоры"
@@ -70,7 +70,6 @@ Status = getterSTR("Title", Status_Data) // Атрибут "Название" в
 };
 ContractDataInList.Add(ContractDataInT);
 }
-
 var Data_ = new MainData
 {
 Client = getterSTR("Title", objectDict), // Атрибут "Название" в ШЗ "Клиенты"
@@ -81,7 +80,6 @@ Contract = ContractDataInList
 };
 dataToExport.Add(Data_);
 }
-
 var content = Api.TeamNetwork.ObjectAppExportService.ExecuteExcelExportTemplate(userCommandContext.DocumentTemplateId, dataToExport);
 var result = new UserCommandResult
 {
@@ -106,7 +104,6 @@ Text = "Файл сформирован"
 };
 return result;
     }
-
 public static Decimal getterDC(string key, IDictionary<string, object> dictionary = null)
 {
 if (dictionary == null || key == null)
@@ -207,7 +204,6 @@ public decimal Total { get; set; }
 public DateTime? Date { get; set; }
 public string Status { get; set; }
 }
-
 ```
 
 В коде скрипта комментариями помечены 11 мест, где при необходимости можно заменить системные имена своими.
@@ -231,6 +227,7 @@ _![Пример word шаблона экспорта](https://kb.comindware.ru/a
 C# скрипт:
 
 ```
+ 
 
 using System;
 using System.Collections.Generic;
@@ -257,7 +254,6 @@ bool first_element = true;
 foreach (var ContractDataInId in ContractDataInIds)
 {
 var ContractDataInData = GetData(ContractDataInId);
-
 var Status_Id = getterSTR("Status", ContractDataInData); // Атрибут-ссылка в ШЗ "Договоры"
 var Status_Data = GetData(Status_Id);
 
@@ -270,7 +266,6 @@ Client = getterSTR("Title", objectDict), // Атрибут "Название" в
 Contact = getterSTR("Contact", objectDict), // Атрибут "Контактное лицо" в ШЗ "Клиенты"
 Phone = getterSTR("Phone", objectDict), // Атрибут "Телефон" в ШЗ "Клиенты"
 Email = getterSTR("Email", objectDict), // Атрибут "Email" в ШЗ "Клиенты"
-
 Name = getterSTR("Title", ContractDataInData), // Атрибут "Статус" в ШЗ "Договоры"
 Date = getterDT("Date", ContractDataInData), // Атрибут "Дата" в ШЗ "Договоры"
 Total = getterDC("Total", ContractDataInData), // Атрибут "Сумма" в ШЗ "Договоры"
@@ -296,7 +291,6 @@ var dataToExport = new RESULT
 {
 MainData_ = Data_
 };
-
         var content = Api.TeamNetwork.ObjectAppExportService.ExecuteWordExportTemplate(userCommandContext.DocumentTemplateId,dataToExport,false);
 
 var result = new UserCommandResult
@@ -320,7 +314,6 @@ Type = "Word"
         };
         return result;
     }
-
 public static Decimal getterDC(string key, IDictionary<string, object> dictionary = null)
 {
 if (dictionary == null || key == null)
@@ -419,7 +412,6 @@ public class RESULT
 {
     public List<MainData> MainData_ { get; set; }
 }
-
 ```
 
 Результат выгрузки:

@@ -1,6 +1,7 @@
 ---
-title: Использование системы
+title: 'Использование системы'
 kbId: 4821
+url: 'https://kb.comindware.ru/article.php?id=4821'
 ---
 
 # Использование системы

@@ -1,6 +1,7 @@
 ---
-title: Поток управления
+title: 'Поток управления'
 kbId: 4752
+url: 'https://kb.comindware.ru/article.php?id=4752'
 ---
 
 # Поток управления

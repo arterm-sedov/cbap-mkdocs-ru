@@ -1,6 +1,7 @@
 ---
-title: Настройка единого входа (SSO-аутентификации) в ОС Windows
+title: 'Настройка единого входа (SSO-аутентификации) в ОС Windows'
 kbId: 4657
+url: 'https://kb.comindware.ru/article.php?id=4657'
 ---
 
 # Настройка единого входа (SSO-аутентификации) в ОС Windows

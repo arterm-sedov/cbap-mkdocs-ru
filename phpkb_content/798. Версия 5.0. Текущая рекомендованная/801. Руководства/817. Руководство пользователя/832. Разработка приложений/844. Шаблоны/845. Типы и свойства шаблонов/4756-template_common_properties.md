@@ -1,6 +1,7 @@
 ---
-title: Общие свойства шаблонов
+title: 'Общие свойства шаблонов'
 kbId: 4756
+url: 'https://kb.comindware.ru/article.php?id=4756'
 ---
 
 # Общие свойства шаблонов

@@ -1,6 +1,7 @@
 ---
-title: Импорт данных в Excel
+title: 'Импорт данных в Excel'
 kbId: 4925
+url: 'https://kb.comindware.ru/article.php?id=4925'
 ---
 
 # Импорт данных в Excel

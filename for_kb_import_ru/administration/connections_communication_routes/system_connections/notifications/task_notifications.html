@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4684" kb-tags="" kb-title="Уведомления о задачах. Настройка особого текста">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4684" kb-tags="N3,Notation 3,email,push-уведомления,задачи,настройка уведомлений,пользовательские задачи,путь передачи данных,уведомления,эл. почта" kb-title="Уведомления о задачах. Настройка текста и отправки эл. почтой">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -12,6 +12,38 @@
 <a class="md-nav__link mkdocs_imported_link" href="#task_notifications_intro">
 <span class="md-ellipsis">
       Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#task_notifications_standard">
+<span class="md-ellipsis">
+      Стандартное уведомление о задачах
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#task_notifications_display_methods">
+<span class="md-ellipsis">
+      Способы вывода уведомлений о задачах
+    </span>
+</a>
+<nav aria-label="Способы вывода уведомлений о задачах" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#task_notifications_email">
+<span class="md-ellipsis">
+      Отправка уведомлений на эл. почту
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#task_notifications_configure_sequence">
+<span class="md-ellipsis">
+      Порядок настройки нестандартных уведомлений о задачах
     </span>
 </a>
 </li>
@@ -61,30 +93,56 @@
 <article class="md-content__inner md-typeset">
 <h2 id="task_notifications_intro">Введение</h2>
 <p><strong>Comindware Platform</strong> выводит стандартные уведомления о пользовательских задачах, если не настроены <strong>путь передачи данных</strong> типа «<strong>Уведомления о задачах</strong>» и <strong>данные сообщения пользовательской задачи</strong>.</p>
+<p>Если стандартное содержимое системного уведомления о задаче вас не устраивает, <strong>Comindware Platform</strong> позволяет настроить тему и текст уведомления для отправки пользователям дополнительной информации о задачах.</p>
+<p>Чтобы использовать особые уведомления, необходимо настроить <strong>путь передачи данных</strong> с выводом в уведомление бизнес-данных.</p>
 <p>Здесь представлены инструкции по настройке <strong>пути передачи данных</strong> для отправки нестандартных уведомлений о пользовательской задаче.</p>
-<p>Чтобы формировать нестандартные уведомления о пользовательской задаче, содержащие особый текст и данные из процессов, необходимо:</p>
+<h2 id="task_notifications_standard">Стандартное уведомление о задачах</h2>
+<p>Если не настроены подключение к эл. почте по умолчанию и путь передачи данных с особым уведомлением, стандартные уведомления о задачах отображаются в информационной панели и push-сообщениях.</p>
+<p>Если настроено подключение к эл. почте по умолчанию, но не настроен путь передачи данных с особым уведомлением, письма с уведомлениями о задачах приходят от <em>Системы оповещения Comindware</em> с адреса <code>robot@comindware.ru</code>.</p>
+<p>По умолчанию система формирует уведомления о задачах со следующими сведениями:</p>
 <ul>
-<li>настроить <strong>путь передачи данных</strong> типа «<strong>Уведомления о задачах</strong>»;</li>
-<li>настроить сопоставление атрибутов с атрибутами <strong>пути передачи данных</strong> с <strong>данными сообщения</strong> в свойствах <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4730">пользовательской задачи</a></strong>.</li>
+<li><strong>название объекта</strong> — значение атрибута-заголовка записи, по которой запущен процесс;</li>
+<li><strong>заголовок задачи</strong> — задаётся в свойствах задачи на вкладке «<strong>Дополнительные</strong>»;</li>
+<li><strong>ссылка на задачу</strong> — формируется автоматически;</li>
+<li><strong>продолжительность выполнения</strong> — задаётся в свойствах задачи на вкладке «<strong>Дополнительные</strong>»;</li>
+<li><strong>название процесса</strong> — задаётся в свойствах шаблона процесса.</li>
 </ul>
-<p>Уведомления о задачах отображаются при нажатии значка «<strong>Уведомления</strong>» <i class="fal fa-bell">&zwnj;<!--icon--></i> в информационной панели.</p>
-<p>Уведомления о задачах отправляются в push-сообщениях при использовании <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5090">Comindware Mobile</a></strong> и веб-версии <strong>Comindware Platform</strong>.</p>
-<p><a class="mkdocs_imported_link" href="" id="task_notifications_email"></a>
-Уведомления о задачах также можно отправлять на эл. почту исполнителям:</p>
+<p>Стандартная тема письма содержит заголовок задачи. По нажатию на название задачи или кнопку «<strong>Перейти к задаче</strong>» пользователь перенаправляется в систему на форму назначенной задачи.</p>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример системного уведомления о новой задаче" src="/platform/v5.0/administration/connections_communication_routes/system_connections/notifications/img/task_notifications_example_default.png"/><figcaption class="caption">Пример системного уведомления о новой задаче</figcaption></p>
+</figure>
+<h2 id="task_notifications_display_methods">Способы вывода уведомлений о задачах</h2>
+<p>Уведомления о задачах можно выдавать следующими способами:</p>
 <ul>
-<li>чтобы отправлять уведомления о задачах на эл. почту исполнителям, настройте подключение типа «<strong>Отправка эл. почты из процесса</strong>» и установите в его свойствах флажок «<strong>Использовать по умолчанию</strong>» (см. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4690">Отправка эл. почты из процесса. Настройка подключения, пути передачи данных и события на диаграмме процесса</a>»</em> );</li>
-<li class="pageBreakAfter">если не настроен путь передачи данных, исполнителям приходит письмо со стандартным уведомлением от <em>Системы оповещения Comindware</em> с адреса <em>robot@comindware.ru.</em></li>
+<li>в информационной панели при нажатии значка «<strong>Уведомления</strong>» <i class="fa-light fa-bell">&zwnj;<!--icon--></i>;</li>
+<li>в push-сообщениях при использовании <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5090">Comindware Mobile</a></strong> и веб-версии <strong>Comindware Platform</strong>;</li>
+<li>на эл. почту исполнителям, если настроено подключение к эл. почте.</li>
 </ul>
+<h3 id="task_notifications_email">Отправка уведомлений на эл. почту</h3>
+<p>Чтобы отправлять уведомления о задачах на эл. почту исполнителям, необходимо:</p>
+<ul>
+<li>настроить подключение типа «<strong>Отправка эл. почты из процесса</strong>» и установить в его свойствах флажок «<strong>Использовать по умолчанию</strong>» (см. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4690">Отправка эл. почты из процесса. Настройка подключения, пути передачи данных и события на диаграмме процесса</a>»</em>);</li>
+<li>при необходимости настроить путь передачи данных с особым уведомлением.</li>
+</ul>
+<p>Если не настроен путь передачи данных с особым уведомлением, исполнителям будет приходить письмо со стандартным уведомлением от <em>Системы оповещения Comindware</em> с адреса <code>robot@comindware.ru</code>.</p>
 <figure class="screenshot_with_caption">
 <p><img alt="Просмотр уведомлений о задачах" src="/platform/v5.0/administration/connections_communication_routes/system_connections/notifications/img/task_notifications_view.png"/><figcaption class="caption">Просмотр уведомлений о задачах</figcaption></p>
 </figure>
+<h2 class="pageBreakBefore" id="task_notifications_configure_sequence">Порядок настройки нестандартных уведомлений о задачах</h2>
+<p>Чтобы формировать нестандартные уведомления о пользовательской задаче, содержащие особый текст и данные из процесса, необходимо:</p>
+<ol class="colored_numbers_list">
+<li><a class="mkdocs_imported_link" href="#task_notifications_communication_route">Настройте <strong>путь передачи данных</strong></a> типа «<strong>Уведомления о задачах</strong>».</li>
+<li>В свойствах <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4730">пользовательской задачи</a></strong> настройте сопоставление атрибутов <strong>пути передачи данных</strong> с <strong>данными сообщения</strong>.</li>
+<li>Опубликуйте диаграмму процесса.</li>
+<li>Протестируйте работу уведомления.</li>
+</ol>
 <h2 class="pageBreakBefore" id="task_notifications_communication_route">Настройка пути передачи данных</h2>
 <p>Для создания пути передачи данных для уведомления о задачах требуются следующие действия:</p>
 <ol class="colored_numbers_list">
 <li>Откройте страницу «<strong>Администрирование</strong>» — «<strong>Архитектура</strong>» или страницу «<strong>Администрирование</strong>» приложения.</li>
-<li>Выберите пункт «<strong>Пути передачи данных</strong>» <i class="fal fa-route">&zwnj;<!--icon--></i>.</li>
+<li>Выберите пункт «<strong>Пути передачи данных</strong>» <i class="fa-light fa-route">&zwnj;<!--icon--></i>.</li>
 <li>Отобразится список путей передачи данных.</li>
-<li>Создайте или откройте путь передачи данных типа «<strong>Уведомления о задачах</strong>».</li>
+<li>Создайте или откройте путь передачи данных типа «<strong>Системные подключения</strong>» — «<strong>Уведомления о задачах</strong>».</li>
 <li>
 <p>Настройте свойства пути передачи данных:</p>
 <ul>
@@ -113,9 +171,9 @@
 <p class="admonition-title">Подстановка значений атрибутов сообщения в уведомление</p>
 <p>Путь передачи данных для отправки уведомлений о задачах позволяет передавать данные из записей в эл. письмо с уведомлением.</p>
 <ol class="colored_numbers_list">
-<li>На вкладке «<strong>Атрибуты сообщения</strong>» пути передачи данных задайте набор атрибутов, значения которых требуется передать в путь передачи данных и подставить в сообщение.</li>
+<li>На вкладке «<strong>Атрибуты сообщения</strong>» пути передачи данных задайте набор атрибутов, значения которых требуется получить из пользовательской задачи и подставить в сообщение.</li>
 <li>
-<p>На вкладке «<strong>Свойства сообщения</strong>» подставьте значения атрибутов сообщения в любое поле, указав их системные имена в фигурных скобках <code>{}</code>.</p>
+<p>На вкладке «<strong><a class="mkdocs_imported_link" href="#task_notifications_communication_route_message_properties">Свойства сообщения</a></strong>» подставьте значения атрибутов сообщения в любое поле, указав их системные имена в фигурных скобках <code>{}</code>.</p>
 <ul>
 <li>Например, подставьте в тему письма номер заявления и имя заявителя:<ul>
 <li><strong>Тема:</strong> <em>Заявление на отпуск № <code>{ApplicationNumber}</code> от: <code>{ApplicantName}</code></em></li>
@@ -128,27 +186,18 @@
 </li>
 </ol>
 </div>
-<p>На вкладке «<strong>Атрибуты сообщения</strong>» заполните таблицу соответствия атрибутов сообщения с атрибутами уведомления о задаче.</p>
-<p>Эти атрибуты следует использовать на вкладке «<strong><a class="mkdocs_imported_link" href="#task_notifications_communication_route_message_properties">Свойства сообщения</a></strong>» пути передачи данных.</p>
-<p>Значения этих атрибутов необходимо задать на вкладке «<strong>Данные сообщения</strong>» в свойствах <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4730"><strong>пользовательской задачи</strong></a>.</p>
-<p class="pageBreakBefore">Чтобы создать атрибут сообщения и сопоставить его с полем письма, нажмите кнопку «<strong>Создать</strong>» и заполните строку таблицы сопоставления:</p>
+<p class="pageBreakBefore">Чтобы создать атрибут сообщения и сопоставить его с полем уведомления, нажмите кнопку «<strong>Создать</strong>» и заполните свойства атрибута в таблице «<strong>Атрибуты для передачи данных сообщения</strong>»:</p>
 <ul>
 <li><strong>Название</strong> — введите наглядное название атрибута.</li>
 <li><strong>Системное имя</strong> — введите уникальное имя атрибута.</li>
-<li>
-<p><strong>Тип данных</strong> — выберите тип данных:</p>
-<ul>
+<li><strong>Тип данных</strong> — выберите тип данных:<ul>
 <li><strong>Текст</strong></li>
 <li><strong>Число</strong></li>
 <li><strong>Длительность</strong></li>
 <li><strong>Дата и время</strong></li>
 <li><strong>Логический</strong></li>
-<li>
-<p><strong>Документ</strong></p>
-</li>
-<li>
-<p><strong>Аккаунт</strong></p>
-</li>
+<li><strong>Документ</strong></li>
+<li><strong>Аккаунт</strong></li>
 </ul>
 </li>
 </ul>
@@ -156,10 +205,11 @@
 <p><img alt="Настройка атрибутов сообщения пути передачи данных для уведомлений о задачах" src="/platform/v5.0/administration/connections_communication_routes/system_connections/notifications/img/task_notifications_attributes_setting.png"/><figcaption class="caption">Настройка атрибутов сообщения пути передачи данных для уведомлений о задачах</figcaption></p>
 </figure>
 <h3 class="pageBreakBefore" id="task_notifications_communication_route_message_properties">Свойства сообщения</h3>
-<p>На вкладке «<strong>Свойства сообщения</strong>» настройте соответствие между атрибутами шаблона сообщения и полями электронного письма:</p>
+<p>На вкладке «<strong>Свойства сообщения</strong>» настройте шаблон системного уведомления с использованием атрибутов с вкладки «<strong>Атрибуты сообщения</strong>»:</p>
 <ul>
-<li><strong>Список атрибутов, которые можно использовать при написании эл. письма</strong>: содержит настроенные <strong>атрибуты сообщения</strong>; копируйте их (вместе с фигурными скобками) и вставляйте в поля электронного письма.</li>
-<li><strong>Электронное письмо</strong> содержит шаблон письма с полями для заполнения. В поля эл. письма вводите произвольный текст и имена атрибутов в фигурных скобках для подстановки их значений.</li>
+<li><strong>Список атрибутов, которые можно использовать при написании эл. письма</strong> — содержит настроенные <strong>атрибуты сообщения</strong>. Копируйте их (вместе с фигурными скобками) и вставляйте в поля электронного письма.</li>
+<li><strong>Тема</strong> — введите произвольный текст темы уведомления и имена атрибутов в фигурных скобках для подстановки их значений.</li>
+<li><strong>Сообщение</strong> — введите произвольный текст уведомления и имена атрибутов в фигурных скобках для подстановки их значений.</li>
 </ul>
 <figure class="screenshot_with_caption">
 <p><img alt="Настройка свойств сообщения пути передачи данных для уведомлений о задачах" src="/platform/v5.0/administration/connections_communication_routes/system_connections/notifications/img/task_notifications_message_setting.png"/><figcaption class="caption">Настройка свойств сообщения пути передачи данных для уведомлений о задачах</figcaption></p>
@@ -167,9 +217,11 @@
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4730">Пользовательская задача</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4676">Пути передачи данных</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4690">Отправка эл. почты из процесса. Настройка подключения, пути передачи данных и события на диаграмме процесса</a></em></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4730">Пользовательская задача</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4676">Пути передачи данных</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4690">Отправка эл. почты из процесса. Настройка подключения, пути передачи данных и события на диаграмме процесса</a></li>
+<li>[Гиперссылка на задачу. Вычисление с помощью N3 и формулы][task_hyperlink_n3_formula]</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5090">Мобильное приложение. Использование</a></li>
 </ul>
 </div>
 </article>

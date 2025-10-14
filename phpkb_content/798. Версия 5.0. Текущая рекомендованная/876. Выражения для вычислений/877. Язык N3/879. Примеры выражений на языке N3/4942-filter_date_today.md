@@ -1,6 +1,7 @@
 ---
-title: Фильтр списка по дате, равной сегодняшней
+title: 'Фильтр списка по дате, равной сегодняшней'
 kbId: 4942
+url: 'https://kb.comindware.ru/article.php?id=4942'
 ---
 
 # Фильтр списка по дате, равной сегодняшней
@@ -8,6 +9,7 @@ kbId: 4942
 Для того, чтобы настроить фильтр отображения записей в списке, где какая-либо дата равна сегодняшней (например, для списка сегодняшних заявок) с учетом часового пояса (в данном примере - московского), введите следующее выражение:
 
 ```
+ 
 
 @prefix object: <http://comindware.com/ontology/object#>.
 @prefix session: <http://comindware.com/ontology/session#>.
@@ -17,16 +19,15 @@ kbId: 4942
   session:context session:requestTime ?nowUTC.
 
   (?nowUTC "Etc/GMT" "Europe/Moscow") cmwtime:fromTzToTz ?nowMoscow.
-  ?nowMoscow cmwtime:startOfDay ?startOfToday.
+  ?nowMoscow cmwtime:startOfDay ?startOfToday.   
 
   ?result ?DateProperty ?Dates.
 
   (?Dates "Etc/GMT" "Europe/Moscow") cmwtime:fromTzToTz ?Moscow.
-  ?Moscow cmwtime:startOfDay ?startOfToday.
+  ?Moscow cmwtime:startOfDay ?startOfToday.  
 
   ?result -> ?item.
 }
-
 ```
 
 **где:**

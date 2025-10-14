@@ -1,6 +1,7 @@
 ---
-title: Развилка «и»
+title: 'Развилка «и»'
 kbId: 4749
+url: 'https://kb.comindware.ru/article.php?id=4749'
 ---
 
 # Развилка «и»
