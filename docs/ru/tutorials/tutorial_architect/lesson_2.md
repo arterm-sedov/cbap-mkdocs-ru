@@ -234,6 +234,7 @@ _![Страница входа в {{ productNameEnterprise }}](img/lesson_2_logi
 8. Откроется страница «**Управление версиями**».
 
     _![Страница «Управление версиями»](img/lesson_2_version_control.png)_
+    {% include-markdown ".snippets/pdfPageBreakHard.md" %}
 
 ## Создание оргструктуры {: #tutorial_architect_lesson_2_orgstructure }
 
