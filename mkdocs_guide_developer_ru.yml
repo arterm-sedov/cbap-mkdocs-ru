@@ -1,0 +1,137 @@
+# This file is used for local authoring and testing the Russian help system without actually building the help.
+# To actually build the help with all the dependencies run `buildhelp.ps1`.
+# To test and author the Russian help run:
+# py -m mkdocs serve (`mkdocs serve` might also work depending on the environment PATH variable)
+# To test and author the English help run: py -m mkdocs serve -f mkdocs_en_local.yml
+
+INHERIT: mkdocs_ru.yml
+
+site_name: Comindware Platform. Руководство программиста
+
+extra:
+  apiGuide: true
+  developerGuide: true
+  adminGuideWindows: False
+  adminGuideLinux: False
+  userGuide: False
+  tutorial: False
+  completeGuide: False
+
+nav:
+
+  - Общие сведения:
+    - index.md
+    - product_description.md
+    - Обзор версий:
+      - general/changelog/changelog.md
+      - general/changelog/release_notes_5.0.13334.md
+      - general/changelog/release_notes_5.0.md
+    - Сценарии:
+      - business_apps/scenarios/index.md
+      - business_apps/scenarios/scenario_elements.md
+      - business_apps/scenarios/scenario_variables.md
+    - Вычисления и программирование:
+      - business_apps/expressions/expression_intro.md
+      - business_apps/expressions/expression_debug.md
+      - Редактор выражений: business_apps/expressions/expression_editor/index.md
+      - business_apps/variables.md
+    - Справочник по формулам: 
+      - developer_guide/formulas/formula_guide.md
+      - business_apps/expressions/expression_editor/formula_editor/index.md    
+      - developer_guide/formulas/formula_reference.md
+    - Справочник по N3: 
+      - developer_guide/n3/n3_guide.md
+      - business_apps/expressions/expression_editor/n3_editor/index.md
+    - Справочник по C#: 
+      - developer_guide/csharp/csharp_guide.md
+    - Справочник по API: 
+      - developer_guide/api/index.md
+      - developer_guide/api/api_system_core.md
+      - developer_guide/api/api_solution.md
+      - developer_guide/api/api_web.md
+    - Практические примеры:
+      - examples/process_email_configure.md
+      - examples/email_parse_process_id_from_subject.md
+      - examples/email_parse_address_before_at_sign.md
+      - examples/autonumerating_records.md
+      - examples/autonumerating_related_records.md
+      - examples/document_clone_scenario_n3.md
+      - examples/document_download_archive_csharp.md
+      - examples/document_download_archive_related_record_csharp.md
+      - examples/document_download_to_server_csharp.md
+      - examples/attribute_text_masks.md
+      - examples/attribute_text_substring_search.md
+      - examples/attribute_enum_value_calculation.md
+      - examples/attribute_enum_value_filter.md
+      - examples/attribute_enum_calculate_current_value.md
+      - examples/attribute_enum_calculate_registry.md
+      - examples/attribute_date_time_value_format.md
+      - examples/script_using_local_variable.md
+      - examples/scenario_verify_data.md
+      - examples/multilingual_app.md
+      - examples/n3_calculate_active_task_accounts.md
+      - examples/n3_calculate_active_task_assignee.md
+      - examples/n3_collection_join_filter.md
+      - examples/n3_filter_active_tasks.md
+      - examples/n3_periodic_task_notifications.md
+      - examples/n3_collection_select_conditional.md
+      - examples/n3_collection_join_string.md
+      - examples/n3_collection_join_filter.md
+      - examples/n3_collection_join_filter_hierarchy.md
+      - administration/connections_communication_routes/rest_odata_connections/1c_integrations.md
+      - administration/connections_communication_routes/rest_odata_connections/send_http_example.md
+      - administration/connections_communication_routes/rest_odata_connections/http_send_post.md
+      - administration/connections_communication_routes/rest_odata_connections/http_send_file.md
+      - administration/connections_communication_routes/rest_odata_connections/jpath_example.md      
+      - administration/connections_communication_routes/rest_odata_connections/http_receive_file.md
+      - examples/task_reassign.md
+      - examples/template_reference_data_api.md
+      - examples/n3_collection_get_selected_ids.md
+      - examples/csharp_table_download_selection.md
+      - examples/csharp_tax_service_integrate.md
+      - examples/process_end_button.md  
+
+exclude_docs: |
+
+  administration/**
+  !administration/connections_communication_routes/rest_odata_connections/**
+  devops_wiki/**
+  developer_guide/csharp/**
+  developer_guide/n3/tutorial/**
+  business_apps/**
+  !business_apps/scenarios/**
+  !business_apps/expressions/**
+  !business_apps/variables.md
+  architect/**
+  tutorials/**
+  general/**
+  using_the_system/**
+  product_description.md
+
+  administration/connections_communication_routes/authentication/wsfederation_connection.md
+  administration/deploy/windows/instance_stop_IIS.md
+  administration/deploy/windows/instance_start_IIS.md
+  devops_wiki/**
+  administration/connections_communication_routes/authentication/google_connection.md
+  administration/connections_communication_routes/system_connections/aws_pinpoint_connection.md
+  administration/deploy/linux/deploy_cluster.md
+  administration/deploy/linux/db_migrate_4.2_to_4.7.md
+  administration/deploy/windows/admin_utility/**
+  administration/deploy/windows/architect_install.md
+  administration/deploy/windows/instance_upgrade_3_2_to_4_2_windows.md
+  developer_guide/n3/n3_tutorial.md
+  developer_guide/formulas/formula_toc.md
+  administration/backup/linux/restore_cdbbz_gostech.md
+  administration/backup/windows/db_move_manual_windows.md
+  administration/backup/windows/restore_windows.md
+  administration/deploy/linux/deploy_guide_gostech.md
+  administration/deploy/linux/configuration_files_gostech.md
+  administration/deploy/linux/upgrade_version_gostech.md
+  administration/deploy/logging_engine_gostech.md
+  administration/deploy/linux/upload_size_limit_configure_gostech.md
+  administration/connections_communication_routes/authentication/openid_connection_gostech.md
+  administration/connections_communication_routes/system_connections/s3_connection_gostech.md
+  tutorials/tutorial_hr/taxonomies/**
+  tutorials/tutorial_architect/taxonomies/**
+  **/toc.md
+  guides_toc.md
