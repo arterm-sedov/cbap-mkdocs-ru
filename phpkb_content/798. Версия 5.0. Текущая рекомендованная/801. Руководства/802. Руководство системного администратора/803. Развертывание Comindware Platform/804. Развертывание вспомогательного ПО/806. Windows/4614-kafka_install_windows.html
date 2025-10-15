@@ -158,7 +158,7 @@
 </li>
 <li>
 <p>Протестируйте работу Kafka, выполнив в <em>PowerShell</em> следующие команды:</p>
-<div class="highlight"><code><pre><span></span><code><span class="nb">cd </span><span class="s2">"C:\\kafka\\bin\\windows\\"</span></code> <br/><code><span class="p">.\\</span><span class="n">kafka-console-producer</span><span class="p">.</span><span class="n">bat</span> <span class="p">-</span><span class="n">-bootstrap-server</span> <span class="p">&lt;</span><span class="n">KafkaIP</span><span class="p">&gt;:</span><span class="n">9092</span> <span class="p">-</span><span class="n">-topic</span> <span class="n">TEST</span></code> <br/><code><span class="c"># Отправьте любое сообщение, например:</span></code> <br/><code><span class="n">hello</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd </span><span class="s2">"C:\\kafka\\bin\\windows\\"</span></code> <br/><code><span class="p">.\\</span><span class="n">kafka-console-producer</span><span class="p">.</span><span class="n">bat</span> <span class="p">-</span><span class="n">-bootstrap-server</span> <span class="p">&lt;</span><span class="n">KafkaIP</span><span class="p">&gt;:&lt;</span><span class="n">kafkaBrokerPort</span><span class="p">&gt;</span> <span class="p">-</span><span class="n">-topic</span> <span class="n">TEST</span></code> <br/><code><span class="c"># Отправьте любое сообщение, например:</span></code> <br/><code><span class="n">hello</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>При правильной работе Kafka выдаст предупреждение, что раннее такой ветки сообщений не было, и создаст её.</p>
@@ -170,7 +170,7 @@
 <li>Откройте папку <code>C:\\ProgramData\\comindware\\configs\\instance</code></li>
 <li>
 <p>Задайте параметры подключения к Kafka в файле <code>&lt;instanceName&gt;.yml</code> (<code>&lt;instanceName&gt;</code> — имя экземпляра ПО):</p>
-<div class="highlight"><code><pre><span></span><code><span class="c1"># IP-адрес сервера Kafka</span></code> <br/><code><span class="nt">mq.server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;KafkaIP&gt;:9092</span></code> <br/><code><span class="c1"># Имя экземпляра ПО</span></code> <br/><code><span class="nt">mq.group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/><code><span class="c1"># Идентификатор узла очереди сообщений</span></code> <br/><code><span class="nt">mq.node</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="c1"># IP-адрес сервера Kafka</span></code> <br/><code><span class="nt">mq.server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;KafkaIP&gt;:&lt;kafkaBrokerPort&gt;</span></code> <br/><code><span class="c1"># Имя экземпляра ПО</span></code> <br/><code><span class="nt">mq.group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/><code><span class="c1"># Идентификатор узла очереди сообщений</span></code> <br/><code><span class="nt">mq.node</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Удалите следующую строку из файла <code>&lt;instanceName&gt;.yml</code>:</p>
@@ -181,7 +181,7 @@
 <ul>
 <li>IP-адрес и порт {{ apacheKafkaVariants }} должны быть обязательно прописаны цифрами в формате <code>XXX.XXX.XXX.XXX:XXXXX</code>. То есть недопустимо указывать имя хоста вместо IP-адреса и опускать номер порта.</li>
 <li>
-<p>Установите соответствующие вашей конфигурации значения параметров <code>mq.server</code> (адрес и порт сервера очереди сообщений), <code>mq.group</code> (идентификатор группы очереди сообщений), <code>mq.node</code> (идентификатор узла очереди сообщений). Они должны совпадать во всех файлах конфигурации:</p>
+<p>Установите соответствующие вашей конфигурации значения параметров <code>mq.server</code> (адрес и порт сервера очереди сообщений), <code>mq.group</code> (идентификатор группы очереди сообщений), <code>mq.node</code> (идентификатор узла очереди сообщений; не должен совпадать с <code>mq.group</code>; если узлов несколько, на разных узлах должен быть разным). Они должны совпадать во всех файлах конфигурации:</p>
 <div class="highlight"><code><pre><span></span><code>C:\\ProgramData\\comindware\\configs\\instance\\&lt;instanceName&gt;.yml</code> <br/><code>C:\\ProgramData\\comindware\\Instances\\&lt;InstanceName&gt;\\config\\apigateway.yml</code> <br/><code>C:\\ProgramData\\comindware\\Instances\\&lt;InstanceName&gt;\\config\\adapterhost.yml</code> <br/></pre></code></div>
 </li>
 <li>
@@ -192,11 +192,11 @@
 </li>
 <li>
 <p>Задайте параметры подключения к Kafka в файле <code>apigateway.yml</code>:</p>
-<div class="highlight"><code><pre><span></span><code><span class="c1"># Укажите IP-адрес сервера Kafka</span></code> <br/><code><span class="c1"># без префикса http/https</span></code> <br/><code><span class="nt">mq.server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;KafkaIP&gt;:9092</span></code> <br/><code><span class="c1"># Укажите имя экземпляра ПО</span></code> <br/><code><span class="nt">mq.group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/><code><span class="c1"># Идентификатор узла очереди сообщений</span></code> <br/><code><span class="nt">mq.node</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="c1"># Укажите IP-адрес сервера Kafka</span></code> <br/><code><span class="c1"># без префикса http/https</span></code> <br/><code><span class="nt">mq.server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;KafkaIP&gt;:&lt;kafkaBrokerPort&gt;</span></code> <br/><code><span class="c1"># Укажите имя экземпляра ПО</span></code> <br/><code><span class="nt">mq.group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/><code><span class="c1"># Идентификатор узла очереди сообщений</span></code> <br/><code><span class="c1"># Должен отличаться от mq.group.</span></code> <br/><code><span class="nt">mq.node</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;_Exclusive</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Задайте параметры подключения к Kafka в файле <code>adapterhost.yml</code>:</p>
-<div class="highlight"><code><pre><span></span><code><span class="c1"># Укажите IP-адрес сервера Kafka</span></code> <br/><code><span class="nt">mq.server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;KafkaIP&gt;:9092</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="c1"># Укажите IP-адрес сервера Kafka</span></code> <br/><code><span class="nt">mq.server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;KafkaIP&gt;:&lt;kafkaBrokerPort&gt;</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Перезапустите экземпляр ПО.</p>

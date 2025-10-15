@@ -10,7 +10,7 @@ url: 'https://kb.comindware.ru/article.php?id=5067'
 
 Здесь представлены инструкции по настройке файлов конфигурации после развёртывания и обновления ПО **{{ productName }}**, его компонентов и служб.
 
-## Конфигурация экземпляра ПО
+## Конфигурация экземпляра ПО {{ productName }}
 
 1. Откройте файл конфигурации экземпляра ПО (`<instanceName>` — имя экземпляра ПО) для редактирования:
 
@@ -19,24 +19,49 @@ url: 'https://kb.comindware.ru/article.php?id=5067'
    ```
 2. При необходимости измените параметры, например:
 
-   - `journal.server` — адрес сервера OpenSearch (Elasticsearch).
-   - `journal.name` — индекс сервера OpenSearch (Elasticsearch).
+   - `journal.server` — адрес сервера OpenSearch (Elasticsearch) (**обязательно**).
+   - `journal.name` — префикс индекса сервера OpenSearch (Elasticsearch) (необязательно, по умолчанию назначается префикс `cmw<instanceName>`).
+   - `journal.username` — имя пользователя сервера OpenSearch (Elasticsearch) (необязательно).
+   - `journal.password` — пароль сервера OpenSearch (Elasticsearch) (необязательно).
    - `db.workDir` — директория для хранения базы данных экземпляра ПО.
    - `db.name` — префикс кэшей в базе данных экземпляра ПО.
    - `userStorage.localDisk.path` — директория для хранения загруженных файлов.
    - `mq.server` — адрес сервера Apache Kafka.
-   - `backup.defaultFolder` — директория для хранения резервных копий экземпляра ПО.
+   - `backup.defaultFolder` — директория для хранения резервных копий экземпляра ПО.
    - `backup.defaultFileName` — имя файла резервной копии экземпляра ПО.
 
    Внимание!
 
    Директивы `isFederationAuthEnabled` и `manageAdapterHost` требуется удалить, если они присутствуют.
 
-   Директивы `mq.server` (адрес и порт сервера очереди сообщений), `mq.group` (идентификатор группы очереди сообщений), `mq.node` (идентификатор узла очереди сообщений) и `cluster.name` / `clusterName` (имя экземпляра ПО) должны совпадать в трёх файлах конфигурации:
+   Значения параметров `mq.server` (адрес и порт сервера очереди сообщений), `mq.group` (идентификатор группы очереди сообщений), `mq.node` (идентификатор узла очереди сообщений,) и `cluster.name` / `clusterName` (имя экземпляра ПО) должны совпадать в трёх файлах конфигурации:
 
    - `/usr/share/comindware/configs/instance/<instanceName>.yml`
    - `/var/www/<instanceName>/adapterhost.yml`
    - `/var/www/<instanceName>/apigateway.yml`
+
+   При этом:
+
+   - `mq.group` и `mq.node` не должны совпадать между собой;
+   - **если узлов несколько**, значения параметра `mq.node` должны быть разными на разных узлах.
+
+   Пример конфигурации **с одним узлом**:
+
+   ```
+   # Имя экземпляра ПО
+   clusterName: <instanceName>
+   ##### Настройка очереди сообщений #####
+   # Адрес и порт сервера очереди сообщений {{ apacheKafkaVariants }}.
+   mq.server: <kafkaBrokerIP>:<kafkaBrokerPort>
+   # Идентификатор группы очереди сообщений.
+   mq.group: <instanceName>
+   # Префикс имени очередей сообщений.во
+   mq.name: <instanceName>
+   # Идентификатор узла очереди сообщений.
+   # Должен быть разным на разных узлах.
+   # Не должен совпадать с mq.group.
+   mq.node: <instanceName>_Exclusive
+   ```
 3. Сохраните файл конфигурации.
 4. Убедитесь, что директории, указанные в файле конфигурации, существуют. При необходимости создайте их и задайте права доступа:
 
@@ -57,26 +82,30 @@ url: 'https://kb.comindware.ru/article.php?id=5067'
 ### Пример YML-файла конфигурации экземпляра ПО
 
 ```
-##### Настройка базовых параметров ПО #####
-# Имя экземпляра ПО.
+##### Настройка базовых параметров {{ productName }} #####
+# Имя экземпляра {{ productName }}.
 # Устаревшая директива: instanceName
 clusterName: <instanceName>
-# Имя узла экземпляра ПО.
+# Имя узла экземпляра {{ productName }}.
 #nodeName: <instanceName>
-# Путь к экземпляру, по которому ПО находит свою конфигурацию.
+# Путь к экземпляру, по которому {{ productName }} находит свою конфигурацию.
 configPath: <configPath>
-# Адрес службы журналирования (OpenSearch (Elasticsearch)).
+# Адрес службы журналирования OpenSearch (Elasticsearch).
 # Устаревшая директива: elasticsearchUri
 journal.server: http://<searchHostIP>:<searchHostPort>
 # Индекс службы журналирования.
 # journal.name: <prefix>-<instanceName>
+# Имя пользователя службы журналирования
+# journal.username: xxxx
+# Пароль службы журналирования
+# journal.password: xxxx
 # Выключение службы журналирования.
 #journal.enabled: false
-# URI-адрес экземпляра ПО
+# URI-адрес экземпляра {{ productName }}.
 fqdn: <hostName>
-# Порт экземпляра ПО
+# Порт экземпляра {{ productName }}.
 port: <portNumber>
-# Версия экземпляра ПО
+# Версия экземпляра {{ productName }}.
 version: <versionNumber>
 
 ##### Настройка базы данных #####
@@ -277,7 +306,7 @@ backup.defaultFileName: <instanceName>
 #backup.journalRepository.s3.bucket:
 # Имя подключения, настроенного в конфигурации службы журналирования.
 #backup.journalRepository.s3.journalConnection: <s3ConnectionName>
-# Имя подключения к S3, настроенного в этом файле конфигурации экземпляра ПО.
+# Имя подключения к S3, настроенного в этом файле конфигурации экземпляра {{ productName }}.
 #backup.journalRepository.s3.platformConnection: <s3ConnectionName>
 
 ##### Конфигурация подключения к хранилищу S3 #####
@@ -330,7 +359,7 @@ backup.defaultFileName: <instanceName>
 #tracing.enabled: false
 
 ##### Настройки электронной почты #####
-# Выключение функции проверки наличия и получения новых писем.
+# Выключение функции проверки наличия и получения новых писем.
 #email.listenerEnabled: false
 # Выключение функции отправки эл. почты
 #email.senderEnabled: false
@@ -381,7 +410,7 @@ backup.defaultFileName: <instanceName>
    nano /var/www/<instanceName>/apigateway.yml
    ```
 2. Измените необходимые параметры.
-3. Удостоверьтесь, что значение параметра `cluster.name` (имя экземпляра ПО) совпадает с `clusterName` и значение параметров `mq.server` (адрес и порт сервера очереди сообщений), `mq.group` (идентификатор группы очереди сообщений), `mq.node` (идентификатор узла очереди сообщений) — с аналогичными параметрами в [файле конфигурации экземпляра](#конфигурация-экземпляра-по).
+3. Удостоверьтесь, что значение параметра `cluster.name` (имя экземпляра ПО) совпадает с `clusterName` и значение параметров `mq.server` (адрес и порт сервера очереди сообщений), `mq.group` (идентификатор группы очереди сообщений), `mq.node` (идентификатор узла очереди сообщений) — с аналогичными параметрами в [файле конфигурации экземпляра](#configuration_files_linux_instance).
 4. Сохраните файл конфигурации.
 5. Перезапустите службу `apigateway`:
 

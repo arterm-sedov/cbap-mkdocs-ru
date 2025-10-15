@@ -11,7 +11,7 @@ url: 'https://kb.comindware.ru/article.php?id=4922'
 - **[Пути передачи данных. Определения, типы, создание, настройка, удаление][communication_routes]**
 - [**OData. Синхронизация данных шаблонов**](https://kb.comindware.ru/category.php?id=874)
 - **[Использование API](https://kb.comindware.ru/category.php?id=873)**
-  - **[Общие сведения об API Comindware Platform][api_intro]**
+  - **[Введение в API][api_intro]**
   - **[Методы System Core API][api_system_core]**
   - **[Методы Solution API][api_solution]**
   - **[Методы Web API][api_web]**

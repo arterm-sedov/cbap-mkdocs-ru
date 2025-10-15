@@ -40,7 +40,7 @@ url: 'https://kb.comindware.ru/article.php?id=4935'
    # с логикой, статусами задач, аккаунтами и ролями
    @prefix cmw: <http://comindware.com/logics#>.
    @prefix taskStatus: <http://comindware.com/ontology/taskStatus#>.
-   @prefix account: <http://comindware.com/ontology/account#>
+   @prefix account: <http://comindware.com/ontology/account#>.
    @prefix role: <http://comindware.com/ontology/role#>.
    {
        # Получаем аккаунт текущего пользователя из контекста безопасности.
@@ -103,7 +103,7 @@ url: 'https://kb.comindware.ru/article.php?id=4935'
    @prefix cmw: <http://comindware.com/logics#>.
    @prefix taskStatus: <http://comindware.com/ontology/taskStatus#>.
    @prefix object: <http://comindware.com/ontology/object#>.
-   @prefix account: <http://comindware.com/ontology/account#>
+   @prefix account: <http://comindware.com/ontology/account#>.
    @prefix role: <http://comindware.com/ontology/role#>.
    {
        # Получаем шаблон процесса по его системному имени

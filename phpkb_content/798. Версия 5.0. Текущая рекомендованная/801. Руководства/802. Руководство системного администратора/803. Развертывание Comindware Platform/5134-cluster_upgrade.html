@@ -1,0 +1,473 @@
+<h1>Кластер Comindware Platform. Обновление ПО</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5134" kb-tags="Ignite,Grafana,Kafka,Loki,OpenSearch,Prometheus,администрирование,архитектура,балансировка нагрузки,кластер,кластеризация,мониторинг,обновление,развёртывание,управление кластером" kb-title="Кластер Comindware Platform. Обновление ПО">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_upgrade_introduction">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+<nav aria-label="Введение" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_upgrade_principles">
+<span class="md-ellipsis">
+      Основные принципы обновления кластера
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_upgrade_operations">
+<span class="md-ellipsis">
+      Рекомендации по обновлению кластера
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_upgrade_key_principles">
+<span class="md-ellipsis">
+      Ключевые этапы обновления
+    </span>
+</a>
+<nav aria-label="Ключевые этапы обновления" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_upgrade_preparation">
+<span class="md-ellipsis">
+      Подготовка к обновлению
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_upgrade_monitoring">
+<span class="md-ellipsis">
+      Мониторинг во время обновления
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_upgrade_verification">
+<span class="md-ellipsis">
+      Проверка после обновления
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_upgrade_architecture">
+<span class="md-ellipsis">
+      Архитектура кластера
+    </span>
+</a>
+<nav aria-label="Архитектура кластера" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_upgrade_load_balancing">
+<span class="md-ellipsis">
+      Распределение нагрузки
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_upgrade_platform_components">
+<span class="md-ellipsis">
+      Компоненты узлов Comindware Platform
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_upgrade_zero_downtime_strategy">
+<span class="md-ellipsis">
+      Пример обновления кластера из четырёх узлов без простоя
+    </span>
+</a>
+<nav aria-label="Пример обновления кластера из четырёх узлов без простоя" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_upgrade_step1">
+<span class="md-ellipsis">
+      Этап 1. Снятие трафика с обновляемого узла
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_upgrade_step2">
+<span class="md-ellipsis">
+      Этап 2. Обновление одного узла
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_upgrade_step3">
+<span class="md-ellipsis">
+      Этап 3. Обновление остальных узлов
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_upgrade_monitoring_control">
+<span class="md-ellipsis">
+      Мониторинг и контроль кластера
+    </span>
+</a>
+<nav aria-label="Мониторинг и контроль кластера" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_upgrade_monitoring_alerts">
+<span class="md-ellipsis">
+      Оповещения
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_upgrade_alerting_systems">
+<span class="md-ellipsis">
+      Инструменты мониторинга
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#cluster_upgrade_anti_patterns">
+<span class="md-ellipsis">
+      Практики, которых следует избегать
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<div class="notice notice-error">
+<p class="admonition-title">Экспериментальная функция</p>
+<p>Представленная здесь функция находится на стадии разработки. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4579#experimental_feature_support">Поддержка экспериментальных функций</a>»</em>.</p>
+</div>
+<h2 id="cluster_upgrade_introduction">Введение</h2>
+<p><strong>Comindware Platform</strong> поддерживает кластерные конфигурации, которые обеспечивают высокую доступность, отказоустойчивость и горизонтальное масштабирование.</p>
+<p>Здесь представлены рекомендации и процедуры обновления ПО <strong>Comindware Platform</strong> в кластерных конфигурациях без простоя.</p>
+<h3 id="cluster_upgrade_principles">Основные принципы обновления кластера</h3>
+<p>Кластерная архитектура <strong>Comindware Platform</strong> позволяет обновлять ПО без простоя благодаря следующим возможностям:</p>
+<ul>
+<li><strong>Проверка здоровья узлов</strong>: все узлы предоставляют эндпоинт <code>api/health</code> для мониторинга состояния.</li>
+<li><strong>Автоматическое перераспределение трафика</strong>: балансировщик нагрузки должен автоматически исключать неисправные узлы.</li>
+<li><strong>Резервные узлы</strong>: Apache Ignite, OpenSearch (Elasticsearch) и Apache Kafka обеспечивают избыточность во время обновлений.</li>
+<li><strong>Распределённое хранилище</strong>: DFS обеспечивает синхронизацию данных для всех узлов.</li>
+</ul>
+<p>При обновлении ПО кластера <strong>Comindware Platform</strong> соблюдайте рекомендованный порядок:</p>
+<ol class="colored_numbers_list">
+<li><strong>Технологическое окно</strong>: для обновления выберите время, когда кластер наименее нагружен.</li>
+<li><strong>Перенаправьте нагрузку</strong>: перед началом обновления перенаправьте весь трафик с обновляемого узла.</li>
+<li><strong>Обновляйте узлы поочерёдно по одному</strong>: обновляйте один узел, пока остальные продолжают работать.</li>
+</ol>
+<h2 class="pageBreakBefore" id="cluster_upgrade_operations">Рекомендации по обновлению кластера</h2>
+<ul>
+<li><strong>Запланируйте обновление</strong>:</li>
+<li>Выберите для обновления период минимальной нагрузки на систему.</li>
+<li>Заблаговременно уведомьте пользователей о предстоящих работах.</li>
+<li>Подготовьте план отката на случай проблем.</li>
+<li><strong>Протестируйте обновление в изолированной среде</strong>:</li>
+<li>Создайте тестовую копию кластера.</li>
+<li>Протестируйте обновления.</li>
+<li>Проверьте совместимость обновлённого кластера с существующими данными.</li>
+<li><strong>Контролируйте работоспособность кластера в процессе обновления</strong>:</li>
+<li>Отслеживайте состояние всех компонентов и сервисов.</li>
+<li>Замеряйте производительность системы.</li>
+<li>Будьте готовы к немедленному откату при необходимости.</li>
+</ul>
+<h2 class="pageBreakBefore" id="cluster_upgrade_key_principles">Ключевые этапы обновления</h2>
+<h3 id="cluster_upgrade_preparation">Подготовка к обновлению</h3>
+<ul>
+<li>Создайте резервную копию данных <strong>Comindware Platform</strong>, чтобы упростить восстановление кластера в случае проблем при обновлении.</li>
+<li>Проверьте доступность и работоспособность Apache Ignite, OpenSearch (Elasticsearch) и Apache Kafka, чтобы кластер сохранял работоспособность во время обновления.</li>
+<li>Проанализируйте журналы на предмет наличия ошибок и предупреждений, которые могут помешать обновлению.</li>
+</ul>
+<h3 id="cluster_upgrade_monitoring">Мониторинг во время обновления</h3>
+<ul>
+<li>Постоянно контролируйте эндпоинт <code>api/health</code> на всех узлах, он должен возвращать статус <code>200</code>.</li>
+<li>Анализируйте журналы состояния <strong>Comindware Platform</strong> (<code>heartbeat_*.log</code>).</li>
+<li>Контролируйте журнал Apache Ignite (<code>igniteClient_*.log</code>).</li>
+<li>Контролируйте синхронизацию данных между узлами.</li>
+</ul>
+<h3 id="cluster_upgrade_verification">Проверка после обновления</h3>
+<ul>
+<li>Дождитесь сообщения об окончании ребалансировки кластера.</li>
+<li>Найдите в журнале <code>igniteClent*.log</code> сообщение <code>INFO Skipping rebalancing (nothing scheduled)</code>.</li>
+<li>Проверьте результирующую топологию Apache Ignite.</li>
+</ul>
+<h2 class="pageBreakBefore" id="cluster_upgrade_architecture">Архитектура кластера</h2>
+<p>Рассмотрим состав и конфигурацию кластера <strong>Comindware Platform</strong> из четырёх узлов, который обслуживает пользователей и интеграцию с внешними системами:</p>
+<ul>
+<li><strong>cmw-node0</strong> — основной узел пользовательского трафика.</li>
+<li><strong>cmw-node1</strong> — узел мониторинга и поиска.</li>
+<li><strong>cmw-node2</strong> — узел поиска и обработки данных.</li>
+<li><strong>cmw-node3</strong> — основной узел трафика интеграций.</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример конфигурации кластера" src="/platform/v5.0/administration/deploy/img/cluster_upgrade_deploy_configuration.png"/><figcaption class="caption">Пример конфигурации кластера</figcaption></p>
+</figure>
+<h3 id="cluster_upgrade_load_balancing">Распределение нагрузки</h3>
+<p>Нагрузки, исходя из опыта, можно классифицировать на следующие виды:</p>
+<ul>
+<li>пользовательские действия;</li>
+<li>интеграционные сценарии;</li>
+<li>внутренние автоматические операции, процессы и скрипты;</li>
+<li>формирование отчётов.</li>
+</ul>
+<p>Для равномерного распределения нагрузки и минимизации времени отклика рекомендуется настраивать балансировщик таким образом, чтобы «разводить» нагрузки различных видов с соблюдением требований высокой доступности, отказоустойчивости и горизонтального масштабирования.</p>
+<p>Например:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Трафик / % нагрузки</th>
+<th>У1</th>
+<th>У2</th>
+<th>У3</th>
+<th>У4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Пользователи</td>
+<td>40</td>
+<td>30</td>
+<td>20</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Интеграции</td>
+<td>10</td>
+<td>20</td>
+<td>30</td>
+<td>40</td>
+</tr>
+<tr>
+<td>Скрипты</td>
+<td>20</td>
+<td>10</td>
+<td>40</td>
+<td>30</td>
+</tr>
+<tr>
+<td>Отчёты</td>
+<td>30</td>
+<td>40</td>
+<td>10</td>
+<td>20</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cluster_upgrade_platform_components">Компоненты узлов Comindware Platform</h3>
+<p>Каждый узел <strong>Comindware Platform</strong> содержит следующие компоненты:</p>
+<ul>
+<li><strong>Core</strong> — экземпляр ПО <strong>Comindware Platform</strong>.</li>
+<li><strong>Adapters</strong> — адаптеры для интеграции с внешними системами.</li>
+<li><strong>Async</strong> — асинхронные обработчики, которые выполняют фоновые задачи.</li>
+<li><strong>Apache Ignite</strong> — распределённое хранилище данных. Отдельный кластер, см. <em>«<a class="mkdocs_imported_link" href="#cluster_upgrade_data_infrastructure">Инфраструктура данных</a>»</em>.</li>
+<li><strong>NGINX</strong> — обратный прокси-сервер, который обрабатывает HTTP-запросы.</li>
+<li><strong>Apache Kafka</strong> — брокер сообщений, который обеспечивает межсервисное взаимодействие. Отдельный кластер или облачный сервис.</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Состав кластера" src="/platform/v5.0/administration/deploy/img/cluster_upgrade_landscape.png"/><figcaption class="caption">Состав кластера</figcaption></p>
+</figure>
+<h2 class="pageBreakBefore" id="cluster_upgrade_zero_downtime_strategy">Пример обновления кластера из четырёх узлов без простоя</h2>
+<p>Рассмотрим пример обновления кластера Comindware Platform из четырёх узлов без прерывания работы пользователей и интеграций.</p>
+<h3 id="cluster_upgrade_step1">Этап 1. Снятие трафика с обновляемого узла</h3>
+<p>Перенаправим трафик с обновляемого узла <code>cmw-node0</code> на другие узлы.</p>
+<ol class="colored_numbers_list">
+<li>Удостоверьтесь, что балансировщик верно настроен и при отключении узла трафик будет распределен на остальные узлы.</li>
+<li>Уберите узел <code>cmw-node0</code> из списка узлов для балансировки нагрузки.</li>
+<li>
+<p>Проверьте корректность ребалансировки нагрузки посредством инструментов мониторинга:</p>
+<ul>
+<li>Убедитесь, что все запросы обрабатывают оставшиеся узлы.</li>
+<li>Проверьте, что <code>cmw-node0</code> не получает новый трафик.</li>
+<li>Проконтролируйте производительность остальных узлов под увеличенной нагрузкой.</li>
+</ul>
+</li>
+</ol>
+<h3 id="cluster_upgrade_step2">Этап 2. Обновление одного узла</h3>
+<div class="notice notice-warning">
+<p class="admonition-title">Фактические пути и имена файлов</p>
+<p>При выполнении инструкций будьте внимательны: указывайте фактические имена файлов и пути, которые используются в вашей системе.</p>
+<p>Такие имена указаны в угловых скобках, например:</p>
+<ul>
+<li><code>&lt;instanceName&gt;</code> — имя экземпляра ПО, для которого выполняется восстановление;</li>
+<li><code>&lt;osName&gt;</code> — название операционной системы, для которой предназначен дистрибутив (например, <code>Astra</code>);</li>
+<li><code>&lt;versionNumber&gt;</code> — номер версии ПО.</li>
+<li><code>&lt;path/to&gt;</code> — путь к директории или файлу в вашей системе; замените на фактический путь согласно своей структуре каталогов.</li>
+<li><code>&lt;serviceName&gt;</code> — имя службы, которую требуется проверить или остановить (например, <code>comindware&lt;instanceName&gt;</code>,<code>apigateway&lt;instanceName&gt;</code>, <code>adapterhost&lt;instanceName&gt;</code>);</li>
+</ul>
+<p>См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a>»</em>.</p>
+</div>
+<p>Обновим ПО на выведенном из эксплуатации узле <code>cmw-node0</code> без влияния на работу системы.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Все последующие команды следует выполнять от имени суперпользователя <code>root</code>. Для этого введите команду:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>-s</code> <br/></pre></code></div>
+<p>или</p>
+<div class="highlight"><code><pre><span></span><code>su<span class="w"> </span>-</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Скопируйте и распакуйте дистрибутив на общее хранилище и выдайте права на исполнение скриптов. Эту же общую директорию используйте для обновления последующих узлов.</p>
+<div class="highlight"><code><pre><span></span><code><span class="c1"># Пример: общая директория /mnt/cmw_dist на всех узлах</span></code> <br/><code>cp<span class="w"> </span>&lt;/path/to/&gt;X.X-release-ru-&lt;versionNumber&gt;.&lt;osName&gt;.tar.gz<span class="w"> </span>/mnt/cmw_dist/</code> <br/><code><span class="nb">cd</span><span class="w"> </span>/mnt/cmw_dist</code> <br/><code>tar<span class="w"> </span>-xf<span class="w"> </span>X.X-release-ru-&lt;versionNumber&gt;.&lt;osName&gt;.tar.gz</code> <br/><code><span class="nb">cd</span><span class="w"> </span>/mnt/cmw_dist/CMW*&lt;versionNumber&gt;/scripts/</code> <br/><code>chmod<span class="w"> </span>+x<span class="w"> </span>*.sh</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Установите версию (подготовка версии на узле):</p>
+<div class="highlight"><code><pre><span></span><code>./version_install.sh</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Остановите на узле <code>cmw-node0</code> сервисы, затрагиваемые обновлением:</p>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>stop<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>stop<span class="w"> </span>apigateway&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>stop<span class="w"> </span>adapterhost&lt;instanceName&gt;</code> <br/></pre></code></div>
+</li>
+<li>
+<p>С помощью команды <code>systemctl status &lt;serviceName&gt;</code> удостоверьтесь, что службы остановлены.</p>
+</li>
+<li>
+<p>Выполните обновление экземпляра ПО (укажите имя экземпляра и путь к установленной версии):</p>
+<div class="highlight"><code><pre><span></span><code>./instance_upgrade.sh<span class="w"> </span>-n<span class="o">=</span>&lt;instanceName&gt;<span class="w"> </span>-vp<span class="o">=</span>/var/www/.cmw_version/&lt;versionNumber&gt;</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Настройте конфигурацию обновлённого ПО (при необходимости) и запустите сервисы:</p>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>start<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>start<span class="w"> </span>apigateway&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>start<span class="w"> </span>adapterhost&lt;instanceName&gt;</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Проверьте работоспособность после обновления посредством инструментов мониторинга и прикладных проверок:</p>
+<ul>
+<li>Убедитесь, что эндпоинт <code>api/health</code> на <code>cmw-node0</code> выдаёт статус <code>200</code>.</li>
+<li>Проверьте подключение к кластеру Apache Ignite.</li>
+<li>Проверьте корректное завершение ребалансировки.</li>
+<li>Войдите в систему, откройте несколько списков и карточек объектов.</li>
+<li>Проверьте работоспособность Apache Kafka: открытие диаграмм процессов, чатов/обсуждений, списка адаптеров и каналов связей.</li>
+<li>Проверьте OpenSearch (Elasticsearch): историю изменений объектов и процессов.</li>
+<li>Проверьте работу с файлами: загрузку и скачивание.</li>
+<li>Проконтролируйте синхронизацию данных с другими узлами.</li>
+<li>Проанализируйте журналы на предмет наличия ошибок.</li>
+</ul>
+</li>
+<li>
+<p>Балансировщик автоматически включит обновлённый узел в кластер, когда обнаружит статус <code>200</code> на эндпоинте <code>api/health</code> на <code>cmw-node0</code>.</p>
+</li>
+</ol>
+<h3 id="cluster_upgrade_step3">Этап 3. Обновление остальных узлов</h3>
+<p>Аналогично обновлению <code>cmw-node0</code> обновим оставшиеся узлы <code>cmw-node1</code>, <code>cmw-node2</code> и <code>cmw-node3</code> без влияния на работу системы.</p>
+<ol class="colored_numbers_list">
+<li>Выведите обновляемый узел из состава кластера.</li>
+<li>Выполните обновление ПО.</li>
+<li>Настройте конфигурацию обновлённого ПО.</li>
+<li>Запустите сервисы после обновления.</li>
+<li>Проверьте работоспособность после обновления посредством инструментов мониторинга.</li>
+<li>Введите обновлённый узел в состав кластера.</li>
+</ol>
+<h2 class="pageBreakBefore" id="cluster_upgrade_monitoring_control">Мониторинг и контроль кластера</h2>
+<p>В процессе и после обновления узлов кластера контролируйте состояние его компонентов:</p>
+<ul>
+<li><strong>Эндпоинт  <code>api/health</code></strong></li>
+<li>Контролируйте состояние узлов <strong>Comindware Platform</strong>:<ul>
+<li>Статус <code>200 OK</code> — узел работает корректно.</li>
+<li>Время отклика не должно превышать 5 секунд.</li>
+<li>Проверяйте регулярно, например каждые 30 секунд.</li>
+</ul>
+</li>
+<li><strong>Распределённое хранилище данных Apache Ignite</strong><ul>
+<li>Обеспечивает репликацию данных между узлами, высокую доступность и производительность обработки данных.</li>
+<li>Проверяйте топологию кластера.</li>
+<li>Отслеживайте состояние репликации данных.</li>
+<li>Контролируйте производительность операций чтения и записи.</li>
+</ul>
+</li>
+<li><strong>Шина сообщений Apache Kafka</strong>
+    Обеспечивает межсервисное взаимодействие.<ul>
+<li>Контролируйте состояние топиков и партиций.</li>
+<li>Отслеживайте задержки обработки сообщений.</li>
+<li>Проверяйте размер очередей сообщений.</li>
+</ul>
+</li>
+<li><strong>Хранилище журналов событий OpenSearch (Elasticsearch)</strong><ul>
+<li>Обеспечивает сбор, индексирование и обработку журналов распределённых событий</li>
+<li>Контролируйте состояние с помощью эндпоинта <code>/_cluster/health</code>.</li>
+<li>Проверяйте состояние индексов и их репликации.</li>
+<li>Отслеживайте производительность обработки поисковых запросов.</li>
+</ul>
+</li>
+<li><strong>Распределённая файловая система (DFS)</strong><ul>
+<li>Общее хранилище файлов может быть реализовано на NFS  или S3.</li>
+<li>Обеспечивает хранение загружаемых пользовательских файлов и других бинарных данных.</li>
+<li>Контролируйте доступность ресурсов, задержки, пропускную способность, свободное место и квоты.</li>
+</ul>
+</li>
+</ul>
+<h3 id="cluster_upgrade_monitoring_alerts">Оповещения</h3>
+<p>Настройте оповещения о следующих критических событиях:</p>
+<ul>
+<li>Отказ узла приложения — статус <code>api/health</code> отличается от <code>200</code>.</li>
+<li>Превышение пороговых значений производительности.</li>
+<li>Ошибки Apache Ignite, Apache Kafka или OpenSearch (Elasticsearch).</li>
+<li>Проблемы с балансировкой нагрузки.</li>
+<li>Критические ошибки в системных журналах.</li>
+</ul>
+<h3 id="cluster_upgrade_alerting_systems">Инструменты мониторинга</h3>
+<p>Используйте следующие инструменты для контроля состояния и производительности кластера:</p>
+<ul>
+<li><strong>Prometheus + Grafana</strong>: мониторинг показателей и визуализация данных.</li>
+<li><strong>Loki</strong>: агрегация и анализ журналов.</li>
+<li><strong>Zabbix</strong>: комплексный мониторинг инфраструктуры.</li>
+</ul>
+<h2 class="pageBreakBefore" id="cluster_upgrade_anti_patterns">Практики, которых следует избегать</h2>
+<p>Для обеспечения оптимальной производительности, минимизации рисков простоев и повышения надёжности, доступности и отказоустойчивости <strong>Comindware Platform</strong> соблюдайте следующие рекомендации:</p>
+<ul>
+<li><strong>Не обновляйте несколько узлов одновременно</strong>: одновременное обновление нескольких узлов кластера может привести к полной неработоспособности системы.</li>
+<li><strong>Не игнорируйте проверки состояния</strong>: отключение или неправильная настройка проверки эндпоинта <code>api/health</code> может привести к нарушению работы балансировщика нагрузки.</li>
+<li><strong>Не пропускайте тестирование восстановления</strong>: невыполнение регулярного тестирования процедур восстановления может привести к неготовности к авариям после обновления.</li>
+<li><strong>Не игнорируйте мониторинг и оповещения</strong>: отсутствие постоянного мониторинга состояния системы может привести к пропуску критических инцидентов и увеличению времени простоя.</li>
+</ul>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622">Установка, запуск, инициализация и остановка ПО</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4659">Системные требования Comindware Platform</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642">Резервное копирование. Настройка и запуск, просмотр журнала сеансов</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5135">Кластер Comindware Platform. Восстановление после аварий</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5079">Обеспечение высокой доступности и отказоустойчивости Comindware Platform</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>
