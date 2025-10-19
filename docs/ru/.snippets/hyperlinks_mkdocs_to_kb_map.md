@@ -383,7 +383,7 @@
 
 {% endif %}
 
-{% if (not userGuide and (adminGuideLinux or adminGuideWindows)) or (tutorial and not userGuide) or kbExport %}
+{% if (not userGuide and (adminGuideLinux or adminGuideWindows)) or developerGuide or (tutorial and not userGuide) or kbExport %}
 
 <!-- Руководство администратора для Linux/Windows, отдельный учебник или экспорт в БЗ -->
 
@@ -1091,7 +1091,7 @@
 
 {% endif %}
 
-{% if (not completeGuide and (apiGuide or adminGuideLinux or adminGuideWindows)) or kbExport %}
+{% if (not completeGuide and (apiGuide or developerGuide or adminGuideLinux or adminGuideWindows)) or kbExport %}
 
 <!-- Руководство по API, руководство администратора для Linux/Windows или экспорт в БЗ  -->
 

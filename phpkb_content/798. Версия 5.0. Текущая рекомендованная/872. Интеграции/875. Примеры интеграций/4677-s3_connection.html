@@ -1,4 +1,4 @@
-<h1>Хранилище S3. Настройка экземпляра ПО и подключения</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4677" kb-title="Хранилище S3. Настройка экземпляра ПО и подключения">
+<h1>Хранилище S3. Настройка экземпляра ПО и подключения</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4677" kb-tags="S3,подключение S3,подключение,подключения,облачное хранилище,объектное хранилище,резервное копирование,хранилище" kb-title="Хранилище S3. Настройка экземпляра ПО и подключения">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -110,6 +110,12 @@
 <li>Настройте разные корзины для разных типов данных (резервные копии, загруженные файлы, временные файлы).</li>
 <li>При необходимости включите версионирование для корзин с критически важными данными.</li>
 </ul>
+<div class="notice notice-warning">
+<p class="admonition-title">Ограничения некоторых S3‑совместимых сервисов</p>
+<p>Некоторые S3‑совместимых сервисов (например, Yandex Object Storage, Amazon S3, MinIO) могут ограничивать размер одиночного запроса <code>PUT</code>, как правило, до 5 ГБ. Если объём передаваемых данных превышает лимит и выгрузка выполняется как один <code>PUT</code>‑запрос, соединение будет прервано сервисом по причине превышения лимита.</p>
+<p>Учитывайте ограничения конкретного провайдера при выборе хранилища для резервных копий и пользовательских файлов.</p>
+<p>Если вам необходимо отправлять в S3 файлы больше лимита, установленного вашим поставщиком S3, обратитесь в службу поддержки <strong>Comindware</strong> для настройки конфигурации <strong>Comindware Platform</strong>.</p>
+</div>
 <h2 class="pageBreakBefore" id="s3_connection_instance_config">Настройка конфигурации экземпляра ПО</h2>
 <div class="notice notice-warning">
 <p class="admonition-title">Внимание!</p>
@@ -194,7 +200,7 @@
 <p>Не вносите изменения в окне свойств подключения к хранилищу S3, заданному в <a class="mkdocs_imported_link" href="#s3_connection_instance_config">файле конфигурации</a> экземпляра ПО (<code>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code>) с помощью директивы <code>s3.default</code> или <code>s3.&lt;s3connectioName&gt;</code>. Они не будут применены к конфигурации экземпляра ПО и при перезапуске сервера будут заменены на значения из файла конфигурации <code>&lt;instanceName&gt;.yml</code>.</p>
 <p>Настраивать подключение к хранилищу S3 следует только в файле <code>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code></p>
 </div>
-<h2 id="s3_connection_validation">Проверка общей работоспособности интеграции с S3</h2>
+<h2 class="pageBreakBefore" id="s3_connection_validation">Проверка общей работоспособности интеграции с S3</h2>
 <p>После настройки подключения к хранилищу S3 проверьте следующие пункты:</p>
 <ul>
 <li><strong>Конфигурация экземпляра ПО</strong><ul>
@@ -217,12 +223,14 @@
 </ul>
 </li>
 </ul>
-<h2 id="s3_connection_troubleshooting">Устранение неполадок</h2>
+<h2 class="pageBreakBefore" id="s3_connection_troubleshooting">Устранение неполадок</h2>
 <ul>
 <li><strong>Не удаётся установить соединение с S3</strong><ul>
-<li>Проверьте правильность адреса в директиве <code>s3.&lt;s3connectionName&gt;.endpointURL</code>.</li>
+<li>Проверьте правильность адреса в директиве:
+    <div class="highlight"><code><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">s3.&lt;s3connectionName&gt;.endpointURL</span></code> <br/></pre></code></div></li>
 <li>Убедитесь, что адрес и порт S3 доступны и не блокируются сетевым экраном или прокси-сервером.</li>
-<li>Проверьте, правильно ли настроена директива <code>s3.&lt;s3connectionName&gt;.pathStyleAccess</code>.</li>
+<li>Проверьте, правильно ли настроена директива:
+    <div class="highlight"><code><pre><span></span><code><span class="l l-Scalar l-Scalar-Plain">s3.&lt;s3connectionName&gt;.pathStyleAccess</span></code> <br/></pre></code></div></li>
 </ul>
 </li>
 <li><strong>Ошибка аутентификации</strong><ul>

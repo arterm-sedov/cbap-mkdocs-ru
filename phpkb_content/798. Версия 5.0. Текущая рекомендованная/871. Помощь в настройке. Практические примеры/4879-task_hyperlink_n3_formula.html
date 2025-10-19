@@ -1,0 +1,83 @@
+<h1>Гиперссылка на задачу. Вычисление с помощью N3 и формулы</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4879" kb-tags="N3,Notation 3,гиперссылка,вычисление,задачи,пользовательские задачи" kb-title="Гиперссылка на задачу. Вычисление с помощью N3 и формулы">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_task_hyperlink_n3_formula_intro">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_task_hyperlink_n3_formula_setup">
+<span class="md-ellipsis">
+      Настройка
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="example_task_hyperlink_n3_formula_intro">Введение</h2>
+<p>При создании приложений может потребоваться передавать в сообщении или уведомлении о задаче ссылку на задачу.</p>
+<p>Здесь представлен пример формирования гиперссылки на задачу, связанную с записью, к которой относится пользовательская задача.</p>
+<p>См. также <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4684">Уведомления о задачах. Настройка особого текста</a></em>».</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Важно!</p>
+<p>Если в процессе две задачи одновременно назначены на текущего пользователя, представленное здесь решение вернёт последнюю созданную задачу.</p>
+</div>
+<h2 id="example_task_hyperlink_n3_formula_setup">Настройка</h2>
+<ol class="colored_numbers_list">
+<li>В шаблоне записи, связанном с процессом, создайте <strong>вычисляемый текстовый</strong> атрибут <em>«ID задачи»</em>. Этот атрибут требуется для вычисления ID задачи.</li>
+<li>
+<p>Введите следующее <strong>вычисляемое значение</strong> на языке <strong>N3</strong>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем предикаты для работы с логикой и процессами.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmw:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">process:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/process#&gt;</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Используем конструкцию once, чтобы</span></code> <br/><code>    <span class="c"># получить единственный результат.</span></code> <br/><code>    <span class="err">once</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Помещаем в ?processObject ID объекта процесса,</span></code> <br/><code>        <span class="c"># связанного с текущей записью ?item.</span></code> <br/><code>        <span class="err">?processObject</span> <span class="nn">process</span><span class="p">:</span><span class="nt">businessObject</span> <span class="err">?item</span><span class="p">.</span></code> <br/><code>        <span class="c"># Помещаем в ?value ID задачи процесса.</span></code> <br/><code>        <span class="err">?value</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">parent</span> <span class="err">?processObject</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Создайте <strong>вычисляемый текстовый</strong> атрибут <em>«Ссылка на задачу»</em> и введите следующую <strong>формулу</strong> в качестве <strong>вычисляемого значения</strong>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">FORMAT</span><span class="p">(</span></code> <br/><code><span class="ss">"&lt;p&gt;&lt;a href='https://&lt;your-host&gt;/#task/{0}'&gt;</span></code> <br/><code><span class="ss">Ссылка на задачу</span></code> <br/><code><span class="ss">&lt;/a&gt;&lt;/p&gt;"</span><span class="p">,</span></code> <br/><code><span class="n">LIST</span><span class="p">(</span><span class="err">$</span><span class="n">IDзадачи</span><span class="p">)</span></code> <br/><code><span class="p">)</span></code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><code>https://&lt;your-host&gt;</code> — адрес экземпляра <strong>Comindware Platform</strong>;</li>
+<li><code>IDзадачи</code> — системное имя атрибута, в котором вычисляется идентификатор задачи.</li>
+</ul>
+<p>Эта формула вернёт HTML-текст с гиперссылкой на задачу.</p>
+</li>
+<li>
+<p>Используйте значение атрибута <em>«Ссылка на задачу»</em> для передачи ссылки на задачу, например в сценариях или уведомлениях.</p>
+</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4684">Уведомления о задачах. Настройка особого текста</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

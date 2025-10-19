@@ -53,6 +53,12 @@ Swagger позволяет выполнять запросы и просматр
 https://your-host/docs/SystemApi
 ```
 
+URL-адрес JSON-спецификации System Core API:
+
+```
+https://your-host/api/public/system/swagger
+```
+
 Здесь `your-host` — доменное имя вашего сервера.
 
 _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/assets/SystemCoreAPI1.jpg)_
@@ -195,8 +201,8 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 
 | POST | /Base/AccountService/ListAccountsByEmailDomain |
 | --- | --- |
-| **Описание** | Получает аккаунты с определёнными доменами в адресах эл. почты. |
-| **Параметры** | Домен адреса эл. почты. |
+| **Описание** | Получает аккаунты с определёнными доменами в адресах эл. почты. |
+| **Параметры** | Домен адреса эл. почты. |
 | **Ответ** | Основная информация об аккаунте. |
 
 | POST | /Base/AccountService/Disable |
@@ -267,22 +273,64 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Идентификатор объекта, предикат. |
 | **Ответ** | Статус. |
 
-| POST | /Base/OntologyService/GetCurrentConnections |
+| POST | /Base/OntologyService/GetCurrentTransactions |
 | --- | --- |
-| **Описание** | Получает текущие подключения. |
-| **Параметры** | Не требуются. |
-| **Ответ** | - |
+| **Описание** | Получает текущие транзакции. |
+| **Параметры** | - |
+| **Ответ** | Список текущих транзакций. |
 
-| POST | /Base/OntologyService/ResetConnections |
+| POST | /Base/OntologyService/TryAbortTransaction |
 | --- | --- |
-| **Описание** | Отключает все текущие подключения. |
-| **Параметры** | Не требуются. |
+| **Описание** | Пытается прервать указанную транзакцию. |
+| **Параметры** | Идентификатор транзакции. |
+| **Ответ** | Логическое значение `true`/`false`. |
+
+| POST | /Base/OntologyService/CleanupRules |
+| --- | --- |
+| **Описание** | Очищает устаревшие правила. |
+| **Параметры** | - |
 | **Ответ** | Статус. |
 
-| POST | /Base/OntologyService/ResetConnection |
+| POST | /Base/OntologyService/RemoveStatement |
 | --- | --- |
-| **Описание** | Отключает подключения по идентификатору аккаунта. |
-| **Параметры** | Идентификатор аккаунта. |
+| **Описание** | Удаляет утверждение (триплет). |
+| **Параметры** | Параметры утверждения. |
+| **Ответ** | Статус. |
+
+| POST | /Base/OntologyService/AddStatement |
+| --- | --- |
+| **Описание** | Добавляет утверждение (триплет). |
+| **Параметры** | Параметры утверждения. |
+| **Ответ** | Статус. |
+
+| POST | /Base/OntologyService/Clone |
+| --- | --- |
+| **Описание** | Клонирует объект онтологии. |
+| **Параметры** | Идентификатор объекта и параметры. |
+| **Ответ** | Идентификатор созданного объекта. |
+
+| POST | /Base/OntologyService/GetIntersection |
+| --- | --- |
+| **Описание** | Получает пересечение множеств значений по предикатам. |
+| **Параметры** | Параметры запроса. |
+| **Ответ** | Результат пересечения. |
+
+| POST | /Base/OntologyService/GetWithMultipleValues |
+| --- | --- |
+| **Описание** | Получает атрибуты с множественными значениями. |
+| **Параметры** | Идентификатор объекта и предикаты. |
+| **Ответ** | Значения. |
+
+| POST | /Base/OntologyService/SynchronizePredicate |
+| --- | --- |
+| **Описание** | Синхронизирует предикат. |
+| **Параметры** | Параметры синхронизации. |
+| **Ответ** | Статус. |
+
+| POST | /Base/OntologyService/RemoveAsync |
+| --- | --- |
+| **Описание** | Асинхронно удаляет объект по идентификатору. |
+| **Параметры** | Идентификатор объекта. |
 | **Ответ** | Статус. |
 
 ### AccountGroup – группы аккаунтов
@@ -397,47 +445,29 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 
 ### GlobalConfiguration – глобальная конфигурация
 
-| POST | /Base/GlobalConfigurationService/get\_ExternalNotificationEnabled |
-| --- | --- |
-| **Описание** | Проверяет, включены ли внешние уведомления. |
-| **Параметры** | - |
-| **Ответ** | Логическое значение `true`/`false`. |
-
-| POST | /Base/GlobalConfigurationService/get\_GlobalNotificationListening |
-| --- | --- |
-| **Описание** | Проверяет, включены ли системные уведомления. |
-| **Параметры** | - |
-| **Ответ** | Логическое значение `true`/`false`. |
-
-| POST | /Base/GlobalConfigurationService/get\_TracingEnabled |
-| --- | --- |
-| **Описание** | Проверяет, включён ли мониторинг производительности. |
-| **Параметры** | - |
-| **Ответ** | Логическое значение `true`/`false`. |
-
 | POST | /Base/GlobalConfigurationService/get\_ServerAddress |
 | --- | --- |
 | **Описание** | Получает адрес сервера. |
 | **Параметры** | - |
 | **Ответ** | Адрес сервера. |
 
+| POST | /Base/GlobalConfigurationService/get\_ServerLanguage |
+| --- | --- |
+| **Описание** | Получает текущий язык интерфейса ПО. |
+| **Параметры** | - |
+| **Ответ** | Язык интерфейса. |
+
+| POST | /Base/GlobalConfigurationService/get\_AllServerLanguages |
+| --- | --- |
+| **Описание** | Получает список доступных языков интерфейса ПО. |
+| **Параметры** | - |
+| **Ответ** | Список языков. |
+
 | POST | /Base/GlobalConfigurationService/get\_CompilationOnSaveDisabled |
 | --- | --- |
 | **Описание** | Отключает компиляцию при сохранении. |
 | **Параметры** | - |
 | **Ответ** | Логическое значение `true`/`false`. |
-
-| POST | /Base/GlobalConfigurationService/get\_LastTimestamp |
-| --- | --- |
-| **Описание** | Получает последние временные отметки. |
-| **Параметры** | - |
-| **Ответ** | Список временных отметок. |
-
-| POST | /Base/GlobalConfigurationService/get\_PasswordValidationPolicy |
-| --- | --- |
-| **Описание** | Получает установленную политику проверки пароля. |
-| **Параметры** | - |
-| **Ответ** | Политика проверки пароля. |
 
 | POST | /Base/GlobalConfigurationService/get\_RegisteredAuthChannels |
 | --- | --- |
@@ -480,6 +510,12 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Описание** | Снимает регистрацию канала аутентификации. |
 | **Параметры** | Канал. |
 | **Ответ** | Статус. |
+
+| POST | /Base/GlobalConfigurationService/GetPlatformLanguageFromUserPreferredLanguages |
+| --- | --- |
+| **Описание** | Определяет язык интерфейса ПО из предпочтительных языков пользователя. |
+| **Параметры** | Список предпочтительных языков. |
+| **Ответ** | Выбранный язык интерфейса. |
 
 ### CommunicationChannel – подключения
 
@@ -573,19 +609,21 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | - |
 | **Ответ** | Набор атрибутов для группы аккаунтов. |
 
-### EncryptedNavigation Reference — внешние ссылки на формы
+### EncryptedNavigationReference — ссылки на внешние формы
 
-| POST | /Base/EncryptedNavigationReference/Encrypt |
-| --- | --- |
-| **Описание** | Формирует внешнюю ссылку на указанную форму. Если до перехода по ссылке пользователь не вошёл в систему, будет создан аккаунт в группе «Анонимные пользователи». Внешние ссылки работают только в мобильном приложении и в мобильном браузере. |
-| **Параметры** | Объект со свойствами целевой формы: `"SolutionId": "string"` – ID приложения; `"ObjectTypeId": "string"` – ID шаблона; `"TargetId": "string"` – ID формы; `"TargetType": "Form"` – тип целевого объекта — форма; `"PredefinedData": {"attributeSystemName":"attributeValue"}` – объект с парами системных имён и значений атрибутов для передачи в целевую форму. |
-| **Ответ** | Внешняя ссылка на форму. |
+См. *[Пример создания ссылки на внешнюю форму][form_access_control]*.
 
-| POST | /Base/EncryptedNavigationReference/Decrypt |
+| POST | /Base/EncryptedNavigationReferenceService/Generate |
 | --- | --- |
-| **Описание** | Преобразует внешнюю ссылку в объект со свойствами целевой формы. |
-| **Параметры** | Внешняя ссылка. |
-| **Ответ** | Объект со свойствами целевой формы. |
+| **Описание** | Формирует ссылку на указанную внешнюю форму. Если до перехода по ссылке пользователь не вошёл в систему, будет создан аккаунт в группе «Анонимные пользователи». Внешние ссылки работают только в мобильном приложении и в мобильном браузере. |
+| **Параметры** | Объект со свойствами внешнюю формы: `"SolutionId": "string"` – ID приложения; `"ObjectTypeId": "string"` – ID шаблона; `"TargetId": "string"` – ID формы; `"TargetType": "Form"` – тип целевого объекта — форма; `"PredefinedData": {"attributeSystemName":"attributeValue"}` – объект с парами системных имён и значений атрибутов для передачи в целевую форму. |
+| **Ответ** | Ссылка на внешнюю форму вида `https://<your-host>/Resolve?data=<encryptedData>` |
+
+| POST | /Base/EncryptedNavigationReferenceService/Decrypt |
+| --- | --- |
+| **Описание** | Преобразует ссылку в объект со свойствами внешнюю формы. |
+| **Параметры** | Закодированная часть ссылки на внешнюю форму:  без части `https://<your-host>/Resolve?data=` |
+| **Ответ** | Объект со свойствами внешнюю формы. |
 
 ### Object — записи
 
@@ -1197,12 +1235,6 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Параметры для редактирования. |
 | **Ответ** | Статус. |
 
-| POST | /TeamNetwork/ObjectAppService/DeleteForm |
-| --- | --- |
-| **Описание** | Удаляет конкретную форму шаблона записи. |
-| **Параметры** | Идентификатор шаблона записи и формы. |
-| **Ответ** | Статус. |
-
 | POST | /TeamNetwork/ObjectAppService/SetDefaultForm |
 | --- | --- |
 | **Описание** | Устанавливает форму по умолчанию. |
@@ -1319,7 +1351,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Параметры для создания шаблона экспорта. |
 | **Ответ** | Идентификатор шаблона экспорта. |
 
-| POST | /TeamNetwork/ObjectAppExportService/CreateexportTemplate1 |
+| POST | /TeamNetwork/ObjectAppExportService/CreateExportTemplate1 |
 | --- | --- |
 | **Описание** | Создаёт шаблон экспорта по расширенному набору заданных параметров. |
 | **Параметры** | Параметры для создания шаблона экспорта. |
@@ -1635,11 +1667,23 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Идентификатор документа и имя файла. |
 | **Ответ** | Идентификатор созданного документа. |
 
-| POST | /TeamNetwork/DocumentService/SaveSignature1 |
+| POST | /TeamNetwork/DocumentService/CreateSignature |
 | --- | --- |
 | **Описание** | Создаёт подпись по заданным параметрам. |
 | **Параметры** | Подписывающий, название подписи, содержание подписи. |
 | **Ответ** | Идентификатор созданной подписи. |
+
+| POST | /TeamNetwork/DocumentService/RevokeSignature |
+| --- | --- |
+| **Описание** | Отзывает подпись. |
+| **Параметры** | Идентификатор подписи. |
+| **Ответ** | Статус. |
+
+| POST | /TeamNetwork/DocumentService/AttachSignature |
+| --- | --- |
+| **Описание** | Присоединяет подпись к документу/версии. |
+| **Параметры** | Идентификатор подписи и версии документа. |
+| **Ответ** | Статус. |
 
 | POST | /TeamNetwork/DocumentService/GetContent |
 | --- | --- |
@@ -1691,7 +1735,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | - |
 | **Ответ** | - |
 
-| POST | /TeamNetwork/DatasetService/GetCollectionFilteredSorteredValues |
+| POST | /TeamNetwork/DatasetService/GetCollectionFilteredSortedValues |
 | --- | --- |
 | **Описание** | В текущей версии продукта данный метод не используется. |
 | **Параметры** | - |
@@ -1965,11 +2009,29 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Идентификатор шаблона. |
 | **Ответ** | Список использований шаблона. |
 
-| POST | /Solution/TemplateService/GetNamePropertyId |
+| POST | /Solution/TemplateService/SetNameProperty |
 | --- | --- |
-| **Описание** | Получает идентификатор атрибута, который является именем записей шаблона. |
+| **Описание** | Назначает атрибут, который является именем записей шаблона. |
+| **Параметры** | Идентификатор шаблона и идентификатор атрибута. |
+| **Ответ** | Статус. |
+
+| POST | /Solution/TemplateService/GetContainerInfo |
+| --- | --- |
+| **Описание** | Получает основную информацию о шаблоне. |
 | **Параметры** | Идентификатор шаблона. |
-| **Ответ** | Идентификатор атрибута. |
+| **Ответ** | Основная информация о шаблоне. |
+
+| POST | /Solution/TemplateService/GetAppAlias |
+| --- | --- |
+| **Описание** | Получает системное имя шаблона по идентификатору. |
+| **Параметры** | Идентификатор шаблона. |
+| **Ответ** | Системное имя шаблона. |
+
+| POST | /Solution/TemplateService/GetClass |
+| --- | --- |
+| **Описание** | Получает класс шаблона. |
+| **Параметры** | Идентификатор шаблона. |
+| **Ответ** | Класс шаблона. |
 
 | POST | /Solution/TemplateService/ListSolutionProperties |
 | --- | --- |
@@ -2143,7 +2205,8 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | - |
 | **Ответ** | - |
 
-| POST | /Process/ProcessAppService/GetRouteStatistics |
+| POST {: .api-method .post } | /Process/ProcessAppService/GetRouteStatistics |
+| POST {: .api-method .post } | /Process/ProcessAppService/GetRoutStatistics |
 | --- | --- |
 | **Описание** | В текущей версии продукта данный метод не используется. |
 | **Параметры** | - |
@@ -2173,7 +2236,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | - |
 | **Ответ** | - |
 
-| POST | /Process/ProcessAppService/GetActiveSchemeId |
+| POST | /Process/ProcessAppService/GetActiveScheme |
 | --- | --- |
 | **Описание** | Получает идентификатор активной диаграммы по идентификатору шаблона процесса. |
 | **Параметры** | Идентификатор шаблона процесса. |
@@ -2227,7 +2290,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | - |
 | **Ответ** | Статус. |
 
-| POST | /Process/ProcessAppService/RebuildProcessRules |
+| POST | /Process/ProcessAppService/RebuildScripts |
 | --- | --- |
 | **Описание** | Собрать заново правила для данных на неактуальных версиях. |
 | **Параметры** | Идентификатор шаблона процесса. |
@@ -2661,7 +2724,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | - |
 | **Ответ** | - |
 
-| POST | /Process/ProcessReportService/CreateReceivedMailReport |
+| POST | /Process/ProcessReportService/CreateReсievedMailReport |
 | --- | --- |
 | **Описание** | В текущей версии продукта данный метод не используется. |
 | **Параметры** | - |
@@ -2697,7 +2760,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | - |
 | **Ответ** | - |
 
-| POST | /Process/ProcessReportService/ResetReceivedMailCounter |
+| POST | /Process/ProcessReportService/ResetRecievedMailCounter |
 | --- | --- |
 | **Описание** | В текущей версии продукта данный метод не используется. |
 | **Параметры** | - |

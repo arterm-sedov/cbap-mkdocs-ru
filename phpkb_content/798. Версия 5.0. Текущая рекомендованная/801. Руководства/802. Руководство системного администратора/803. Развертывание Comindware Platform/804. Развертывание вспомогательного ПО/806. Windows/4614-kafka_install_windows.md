@@ -153,7 +153,7 @@ url: 'https://kb.comindware.ru/article.php?id=4614'
 
     ```
     cd "C:\\kafka\\bin\\windows\\"
-    .\\kafka-console-producer.bat --bootstrap-server <KafkaIP>:9092 --topic TEST
+    .\\kafka-console-producer.bat --bootstrap-server <KafkaIP>:<kafkaBrokerPort> --topic TEST
     # Отправьте любое сообщение, например:
     hello
     ```
@@ -170,7 +170,7 @@ url: 'https://kb.comindware.ru/article.php?id=4614'
 
    ```
    # IP-адрес сервера Kafka
-   mq.server: <KafkaIP>:9092
+   mq.server: <KafkaIP>:<kafkaBrokerPort>
    # Имя экземпляра ПО
    mq.group: <instanceName>
    # Идентификатор узла очереди сообщений
@@ -187,7 +187,7 @@ url: 'https://kb.comindware.ru/article.php?id=4614'
    Для корректной работы экземпляра ПО необходимо соблюсти следующие условия:
 
    - IP-адрес и порт {{ apacheKafkaVariants }} должны быть обязательно прописаны цифрами в формате `XXX.XXX.XXX.XXX:XXXXX`. То есть недопустимо указывать имя хоста вместо IP-адреса и опускать номер порта.
-   - Установите соответствующие вашей конфигурации значения параметров `mq.server` (адрес и порт сервера очереди сообщений), `mq.group` (идентификатор группы очереди сообщений), `mq.node` (идентификатор узла очереди сообщений). Они должны совпадать во всех файлах конфигурации:
+   - Установите соответствующие вашей конфигурации значения параметров `mq.server` (адрес и порт сервера очереди сообщений), `mq.group` (идентификатор группы очереди сообщений), `mq.node` (идентификатор узла очереди сообщений; не должен совпадать с `mq.group`; если узлов несколько, на разных узлах должен быть разным). Они должны совпадать во всех файлах конфигурации:
 
      ```
      C:\\ProgramData\\comindware\\configs\\instance\\<instanceName>.yml
@@ -200,17 +200,18 @@ url: 'https://kb.comindware.ru/article.php?id=4614'
    ```
    # Укажите IP-адрес сервера Kafka
    # без префикса http/https
-   mq.server: <KafkaIP>:9092
+   mq.server: <KafkaIP>:<kafkaBrokerPort>
    # Укажите имя экземпляра ПО
    mq.group: <instanceName>
    # Идентификатор узла очереди сообщений
-   mq.node: <instanceName>
+   # Должен отличаться от mq.group.
+   mq.node: <instanceName>_Exclusive
    ```
 5. Задайте параметры подключения к Kafka в файле `adapterhost.yml`:
 
    ```
    # Укажите IP-адрес сервера Kafka
-   mq.server: <KafkaIP>:9092
+   mq.server: <KafkaIP>:<kafkaBrokerPort>
    ```
 6. Перезапустите экземпляр ПО.
 7. Проверьте соединение с Kafka в браузере по ссылке (`<instanceAddress>` — URL экземпляра ПО):

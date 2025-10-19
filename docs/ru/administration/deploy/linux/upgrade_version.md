@@ -324,21 +324,27 @@ hide: tags
     systemctl stop comindware<instanceName>
     ```
 
-4. Скопируйте в экземпляр ПО директорию с базой данных экземпляра ПО, сохранённую ранее (`<username>` — имя пользователя Linux):
+4. Удалите базу данных, созданную при инициализации экземпляра:
 
-    ```sh
+    ``` sh
+    rm -rf /var/lib/comindware/<instanceName>/*
+    ```
+
+5. Скопируйте в экземпляр ПО директорию с базой данных экземпляра ПО, сохранённую ранее (`<username>` — имя пользователя Linux):
+
+    ``` sh
     cp  -R /home/<username>/<instanceName>/Database /var/lib/comindware/<instanceName>/
     ```
 
-5. Перейдите в папку с экземпляром ПО и поменяйте права для скопированной директории с базой данных:
+6. Перейдите в папку с экземпляром ПО и поменяйте права для скопированной директории с базой данных:
 
-    ```sh
+    ``` sh
     cd /var/lib/comindware/<instanceName>/
     chmod -R 777 Database/ 
     sudo chown -R www-data:www-data Database/
     ```
 
-6. Обновите структуру данных.
+7. Обновите структуру данных.
 
 ## Обновление и проверка структуры данных {: #upgrade_version_linux_data_structure_update_and_verification .pageBreakBefore }
 

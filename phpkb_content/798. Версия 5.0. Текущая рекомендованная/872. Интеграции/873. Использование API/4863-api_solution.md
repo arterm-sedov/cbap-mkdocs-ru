@@ -41,6 +41,12 @@ Swagger позволяет выполнять запросы и просматр
 http://your-host/Docs/SolutionApi
 ```
 
+URL-адрес JSON-спецификации Solution API:
+
+```
+https://your-host/api/public/solution/swagger
+```
+
 Здесь `your-host` — доменное имя вашего сервера.
 
 _![Интерфейс Swagger для метода Solution API, создающего запись в шаблоне](https://kb.comindware.ru/assets/img_64d362ff9cd63.png)_

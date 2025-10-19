@@ -38,14 +38,14 @@
 <nav aria-label="Настройка пути передачи данных" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#process_receiving_connection_properties_general">
+<a class="md-nav__link mkdocs_imported_link" href="#process_receiving_communication_route_properties_general">
 <span class="md-ellipsis">
       Основные свойства
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#process_receiving_connection_properties_message_attributes">
+<a class="md-nav__link mkdocs_imported_link" href="#process_receiving_communication_route_properties_message_attributes">
 <span class="md-ellipsis">
       Атрибуты сообщения
     </span>
@@ -75,8 +75,7 @@
 <article class="md-content__inner md-typeset">
 <h2 id="process_receiving_connection_intro">Введение</h2>
 <p>Здесь представлены инструкции по настройке подключения и пути передачи передачи данных из эл. писем и веб-запросов в бизнес-процессе.</p>
-<p>Кроме того, потребуется настроить **[начальное][</p>
-<p>]<strong> или </strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4739">промежуточное</a> событие-получение сообщения** на диаграмме процесса.</p>
+<p>Кроме того, потребуется настроить <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4736">начальное</a></strong> или <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4739">промежуточное</a> событие-получение сообщения</strong> на диаграмме процесса.</p>
 <p>Подробный пример настройки приложения для обмена данными посредством эл. почты см. в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4691">Пример: согласование заявлений по эл. почте. Настройка подключений, путей передачи данных и диаграммы процесса</a>»</em>.</p>
 <h2 id="process_receiving_connection_sequence">Порядок настройки получения эл. писем и HTTP-запросов</h2>
 <ol class="colored_numbers_list">
@@ -99,8 +98,13 @@
 <li>обрабатывает новые письма;</li>
 <li>отмечает новые письма как прочтённые.</li>
 </ul>
-<p>Поэтому для автоматической обработки входящих писем рекомендуется использовать отдельный ящик эл. почты.</p>
-<p>Если использовать ящик, на который поступают прочие письма, они тоже будут отмечены как прочитанные.</p>
+<p>Таким образом, каждое непрочитанное письмо в указанном почтовом ящике будет обработано и отмечено как прочитанное.</p>
+<p>Рекомендации по настройке:</p>
+<ul>
+<li><strong>Используйте отдельный ящик эл. почты</strong> для автоматической обработки писем, чтобы избежать случайной обработки личной корреспонденции.</li>
+<li><strong>Создайте технический процесс</strong> для приема входящих писем с последующей маршрутизацией по типу письма.</li>
+<li><strong>Анализируйте содержимое писем</strong> (тему, отправителя, текст) для определения дальнейших действий при использовании одного адреса для обработки писем разных типов.</li>
+</ul>
 </div>
 <ol class="colored_numbers_list">
 <li>На странице <strong>Администрирование</strong>» выберите пункт «<strong>Инфраструктура</strong>» — «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4675"><strong>Подключения</strong></a>» <i class="fal fa-exchange-alt">‌<!--icon--></i>.</li>
@@ -177,15 +181,15 @@
 <li>
 <p>Настройте свойства пути передачи данных на следующих вкладках:</p>
 <ul>
-<li><a class="mkdocs_imported_link" href="#process_receiving_connection_properties_general"><strong>Основные свойства</strong></a></li>
-<li><a class="mkdocs_imported_link" href="#process_receiving_connection_properties_message_attributes"><strong>Атрибуты сообщения</strong></a></li>
+<li><a class="mkdocs_imported_link" href="#process_receiving_communication_route_properties_general"><strong>Основные свойства</strong></a></li>
+<li><a class="mkdocs_imported_link" href="#process_receiving_communication_route_properties_message_attributes"><strong>Атрибуты сообщения</strong></a></li>
 </ul>
 </li>
 <li>
 <p>Сохраните путь передачи данных.</p>
 </li>
 </ol>
-<h3 class="pageBreakBefore" id="process_receiving_connection_properties_general">Основные свойства</h3>
+<h3 class="pageBreakBefore" id="process_receiving_communication_route_properties_general">Основные свойства</h3>
 <p>На вкладке «<strong>Основные свойства</strong>» настройте базовые параметры пути передачи данных:</p>
 <ul>
 <li><strong>Отключить</strong> — установите этот флажок, чтобы временно деактивировать путь передачи данных.</li>
@@ -214,7 +218,7 @@
 <figure class="screenshot_with_caption">
 <p><img alt="Настройка основных свойств пути передачи данных для получения эл. почты в процессе" src="/platform/v5.0/administration/connections_communication_routes/email_connections/img/process_receiving_connection_settings_properties.png"/><figcaption class="caption">Настройка основных свойств пути передачи данных для получения эл. почты в процессе</figcaption></p>
 </figure>
-<h3 class="pageBreakBefore" id="process_receiving_connection_properties_message_attributes">Атрибуты сообщения</h3>
+<h3 class="pageBreakBefore" id="process_receiving_communication_route_properties_message_attributes">Атрибуты сообщения</h3>
 <p>Чтобы извлечь данные из эл. письма или HTTP-запроса и передать их в <strong>Comindware Platform</strong>, сопоставьте набор <strong>атрибутов сообщения</strong> с полями письма или HTTP-запроса:</p>
 <ol class="colored_numbers_list">
 <li>Добавьте атрибут сообщения, нажав кнопку «<strong>Создать</strong>».</li>
@@ -298,9 +302,9 @@
 <li>На вкладке «<strong>Основные</strong>» настройте <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4725">общие свойства элемента</a>.</li>
 <li>На вкладке «<strong>Дополнительные</strong>» выберите ранее созданный <a class="mkdocs_imported_link" href="#process_receiving_connection_route_configure">путь передачи данных</a>.</li>
 <li>
-<p>На вкладке «<strong>Данные сообщения</strong>» сопоставьте <strong><a class="mkdocs_imported_link" href="#process_receiving_connection_properties_message_attributes">атрибуты сообщения</a></strong> с атрибутами <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4759">шаблона записи</a></strong>, связанного с шаблоном процесса:</p>
+<p>На вкладке «<strong>Данные сообщения</strong>» сопоставьте <strong><a class="mkdocs_imported_link" href="#process_receiving_communication_route_properties_message_attributes">атрибуты сообщения</a></strong> с атрибутами <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4759">шаблона записи</a></strong>, связанного с шаблоном процесса:</p>
 <ul>
-<li>Укажите название, системное имя и тип данных <strong>атрибутов сообщения</strong> так же, как они указаны в таблице «<strong>Атрибуты для передачи данных сообщения</strong>» в <a class="mkdocs_imported_link" href="#process_receiving_connection_properties_message_attributes">свойствах пути передачи данных</a>.</li>
+<li>Укажите название, системное имя и тип данных <strong>атрибутов сообщения</strong> так же, как они указаны в таблице «<strong>Атрибуты для передачи данных сообщения</strong>» в <a class="mkdocs_imported_link" href="#process_receiving_communication_route_properties_message_attributes">свойствах пути передачи данных</a>.</li>
 <li>В столбце «<strong>Значение</strong>» укажите атрибут <strong>шаблона записи</strong> такого же типа, как <strong>атрибут сообщения</strong>.</li>
 <li>Значения указанных <strong>атрибутов сообщения</strong>  будут присвоены атрибутам <strong>шаблона записи</strong>.</li>
 </ul>

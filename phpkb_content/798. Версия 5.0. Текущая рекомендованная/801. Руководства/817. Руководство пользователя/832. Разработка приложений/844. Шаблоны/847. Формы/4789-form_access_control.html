@@ -1,4 +1,4 @@
-<h1>Публичные и внутренние формы. Контроль доступа</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4789" kb-title="Публичные и внутренние формы. Контроль доступа">
+<h1>Публичные и внутренние формы. Контроль доступа</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4789" kb-tags="анонимная ссылка,внутренняя форма,внешние страницы,внешняя форма,внешняя ссылка,внешняя страница,форма,формы для внешних пользователей,доступ к форме,контроль доступа,ограничение доступа к форме,публичная форма,разграничение доступа" kb-title="Публичные и внутренние формы. Контроль доступа">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -9,14 +9,14 @@
       </h2>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<a class="md-nav__link mkdocs_imported_link" href="#form_access_control_intro">
 <span class="md-ellipsis">
       Введение
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#пример-настройки-внутренней-формы-для-ограничения-доступа-к-ней">
+<a class="md-nav__link mkdocs_imported_link" href="#form_access_control_internal_example">
 <span class="md-ellipsis">
       Пример настройки внутренней формы для ограничения доступа к ней
     </span>
@@ -24,16 +24,41 @@
 <nav aria-label="Пример настройки внутренней формы для ограничения доступа к ней" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#настройка-форм">
+<a class="md-nav__link mkdocs_imported_link" href="#form_access_control_configure">
 <span class="md-ellipsis">
       Настройка форм
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#тестирование">
+<a class="md-nav__link mkdocs_imported_link" href="#form_access_control_test">
 <span class="md-ellipsis">
-      Тестирование
+      Тестирование внешней формы
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#form_access_control_external_form">
+<span class="md-ellipsis">
+      Пример создания ссылки на внешнюю форму
+    </span>
+</a>
+<nav aria-label="Пример создания ссылки на внешнюю форму" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#form_access_control_external_form">
+<span class="md-ellipsis">
+      Настройка ссылки
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#form_access_control_external_form_test">
+<span class="md-ellipsis">
+      Тестирование внешней формы
     </span>
 </a>
 </li>
@@ -52,13 +77,15 @@
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h2 id="введение">Введение</h2>
+<h2 id="form_access_control_intro">Введение</h2>
 <p>Для любого шаблона (кроме шаблона процесса) можно создать неограниченное число форм. На них можно поместить разные атрибуты, и каждая форма может предназначаться для отдельной категории пользователей.</p>
 <p>Доступ пользователей к форме определяется с помощью <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4803">ролей</a></strong> и <strong>типа формы</strong>.</p>
-<p>Здесь рассматривается контроль доступа к формам посредством <strong>типа формы</strong>.</p>
+<p>Здесь представлены инструкции по контролю доступа к формам посредством <strong>типа формы</strong>, а также по созданию ссылок на формы для внешних пользователей.</p>
 <div class="notice notice-success">
 <p class="admonition-title">Определения</p>
-<p>Предусмотрено два <strong>типа форм</strong>: <strong>публичная</strong> и <strong>внутренняя</strong>.</p>
+<p>Предусмотрено три <strong>типа форм</strong>: <strong>публичная</strong>, <strong>внутренняя</strong>, <strong>внешняя</strong>.</p>
+<ul>
+<li>
 <ul>
 <li>К <strong>публичной</strong> форме можно перейти с помощью селектора форм <i class="fa-light fa-angle-down anchor">‌<!--icon--></i> рядом с заголовком записи.</li>
 <li><strong>Внутренняя</strong> форма не отображается в селекторе форм.<ul>
@@ -70,20 +97,33 @@
 <li>Ни <strong>внутренняя</strong>, ни <strong>публичная</strong> форма не отображается, если роль пользователя не разрешает просмотр данной формы.</li>
 <li>По умолчанию формы являются <strong>публичными</strong>. Чтобы ограничить доступ к форме через селектор форм, необходимо сменить тип формы на <strong>внутреннюю</strong>.</li>
 </ul>
+<p><strong>Публичные</strong> и <strong>внутренние</strong> формы предназначены для пользователей, выполнивших вход в <strong>Comindware Platform</strong>.</p>
+<p>См. <em><a class="mkdocs_imported_link" href="#form_access_control_internal_example">Пример настройки внутренней формы для ограничения доступа к ней</a></em>.</p>
+</li>
+<li>
+<p><strong>Внешние формы</strong> предназначены для пользователей мобильного приложения и мобильных браузеров, у которых нет аккаунта в <strong>Comindware Platform</strong>.</p>
+<ul>
+<li>К <strong>внешней форме</strong> можно перейти по специальной ссылке без входа в <strong>Comindware Platform</strong>.</li>
+</ul>
+<p>См. <em><a class="mkdocs_imported_link" href="#form_access_control_external_link">Пример создания ссылки на внешнюю форму</a></em>.</p>
+</li>
+</ul>
 </div>
 <div class="notice notice-info">
-<p class="admonition-title">Примечание</p>
-<p>В <strong>начальном событии</strong> и <strong>пользовательской задаче</strong> отображается только определённая форма связанного шаблона записи и селектор форм недоступен.</p>
+<p class="admonition-title">Доступ к стартовым формам и формам пользовательских задач процессов</p>
+<p>В <strong>начальном событии</strong> и <strong>пользовательской задаче</strong> отображается только определённая форма связанного шаблона записи и <strong>селектор форм недоступен</strong>.</p>
 <p><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4726"><strong>Стартовая форма</strong> и <strong>форма пользовательской задачи</strong></a> всегда являются <strong>публичными</strong>.</p>
+<p>Стартовые формы и формы пользовательских задач <strong>не могут быть внешними</strong>.</p>
 </div>
-<h2 id="пример-настройки-внутренней-формы-для-ограничения-доступа-к-ней">Пример настройки внутренней формы для ограничения доступа к ней</h2>
+<h2 id="form_access_control_internal_example">Пример настройки внутренней формы для ограничения доступа к ней</h2>
 <p>В качестве примера создадим в шаблоне записи две формы и разграничим доступ к ним:</p>
 <ul>
 <li><em>Клиент</em> — <strong>публичная</strong> форма, будет доступна через селектор форм <i class="fa-light fa-angle-down anchor">‌<!--icon--></i> наряду с <strong>основной формой</strong> шаблона.</li>
 <li><em>Диспетчер</em> — <strong>внутренняя</strong> форма, не будет доступна через селектор форм. Пользователь сможет перейти к этой форме только по прямой ссылке, например, отправленной в эл. письме.</li>
 </ul>
-<h3 id="настройка-форм">Настройка форм</h3>
+<h3 id="form_access_control_configure">Настройка форм</h3>
 <ol class="colored_numbers_list">
+<li>Создайте приложение <em>«Оформление заявок»</em>.</li>
 <li>
 <p>Создайте шаблон записи <em>«Заявки»</em> со следующими атрибутами:</p>
 <table style="width: 100%;">
@@ -120,7 +160,7 @@
 <li>Создайте форму <em>«Диспетчер»</em> и поместите на неё атрибуты <em>«Тип ТС»</em>, <em>«Количество пассажиров»</em>, <em>«Водитель»</em>.</li>
 <li>В свойствах формы <em>«Диспетчер»</em> выберите <strong>тип</strong> «<strong>Внутренняя</strong>».</li>
 </ol>
-<h3 class="pageBreakBefore" id="тестирование">Тестирование</h3>
+<h3 class="pageBreakBefore" id="form_access_control_test">Тестирование внешней формы</h3>
 <ol class="colored_numbers_list">
 <li>Создайте новую запись в шаблоне <em>«Заявки»</em>.</li>
 <li>Откроется основная форма шаблона.</li>
@@ -146,12 +186,106 @@
 </ul>
 </li>
 </ol>
+<h2 id="form_access_control_external_form">Пример создания ссылки на внешнюю форму</h2>
+<p>Рассмотрим пример настройки ссылки на внешнюю форму <em>«Клиент»</em> из <em><a class="mkdocs_imported_link" href="#form_access_control_configure">предыдущего примера</a></em>, чтобы любой клиент мог оставлять заявку, не выполняя вход в <strong>Comindware Platform</strong>.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Логика работы внешних форм</p>
+<p>Если для создана ссылка на внешнюю форму, она действует следующим образом:</p>
+<ul>
+<li>Пользователь переходит по ссылке на внешнюю форму:<ul>
+<li>если пользователь не вошёл в <strong>Comindware Platform</strong>, для него будет создан аккаунт в группе «<strong>Анонимные пользователи</strong>» с соответствующими разрешениями;</li>
+<li>если пользователь перед открытием ссылки вошёл в <strong>Comindware Platform</strong>, он будет работать обычным образом с учётом разрешений своего аккаунта.</li>
+</ul>
+</li>
+<li>Если в ссылке закодированы значения атрибутов, форма будет заполнена этими данными.</li>
+<li>Форма откроется для пользователя.</li>
+<li>Пользователь заполнит и сохранит форму.</li>
+<li>При сохранении формы будет создана запись в шаблоне, к которому относится форма.</li>
+</ul>
+</div>
+<div class="notice notice-info">
+<p class="admonition-title">Особенности внешних форм</p>
+<ul>
+<li>Внешние ссылки работают только в мобильном приложении и мобильном браузере.</li>
+<li>Для обработки данных формы применяются разрешения, настроенные в роли, которая назначена группе «<strong>Анонимные пользователи</strong>».</li>
+</ul>
+</div>
+<div class="notice notice-success">
+<p class="admonition-title">Данные для формирования ссылки на внешнюю форму</p>
+<p>Для формирования ссылки на внешнюю форму соберите следующие данные:</p>
+<ul>
+<li><code>&lt;your-host&gt;</code> — URL экземпляра <strong>Comindware Platform</strong>;</li>
+<li><code>SolutionId</code> — <code>строка</code> вида <code>sol.XXX</code>, ID приложения, к которому относится форма;</li>
+<li><code>ObjectId</code> — <code>строка</code> вида <code>oa.XXX</code>, ID шаблона записи, к которому относится форма;</li>
+<li><code>TargetId</code> — <code>строка</code> вида <code>form.XXX</code>, ID формы, которую должны открывать внешние пользователи;</li>
+<li><code>UserCommandId</code> — <code>строка</code> вида <code>event.XXX</code>, ID кнопки, которую требуется добавить на форму (<strong>необязательный параметр</strong>). Эта кнопка будет добавлена к кнопкам, настроенным с помощью конструктора формы.</li>
+<li>
+<p>Объект со значениями атрибутов для предварительного заполнения формы (<strong>необязательный аргумент</strong>):</p>
+<div class="highlight"><code><pre><span></span><code><span class="nt">"PredefinedData"</span><span class="p">:</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"attribute1SystemName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"attribute2SystemName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="err">...</span></code> <br/><code><span class="w">    </span><span class="nt">"attributeNSystemName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value"</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+</ul>
+</div>
+<h3 id="form_access_control_external_form">Настройка ссылки</h3>
+<div class="notice notice-warning">
+<p class="admonition-title">Необходим доступ к API</p>
+<p>Для формирования ссылки на внешнюю форму используется метод System Core API <code>/Base/EncryptedNavigationReferenceService/Generate</code>, поэтому <strong>вам потребуется доступ к API Comindware Platform</strong>.</p>
+<p>См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4860#api_intro_authentication">Аутентификация для доступа к API</a>»</em> и <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4862#api_system_core_encrypted_navigation_reference">Методы System Core API</a>»</em>.</p>
+</div>
+<ol class="colored_numbers_list">
+<li>
+<p>Соберите следующие данные для формирования ссылки:</p>
+<ul>
+<li>ID приложения <em>«Оформление заявок»</em>, например <code>sol.1</code>;</li>
+<li>ID шаблона <em>«Заявки»</em>, например <code>oa.1</code>;</li>
+<li>ID формы <em>«Клиент»</em>, например <code>form.1</code>;</li>
+<li>Значение атрибута <em>«Количество пассажиров»</em> для заполнения формы, например <code>2</code>.</li>
+</ul>
+</li>
+<li>
+<p>Выполните <code>POST</code>‑запрос к методу <code>Base/EncryptedNavigationReferenceService/Generate</code>:</p>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\\</span></code> <br/><code><span class="s2">"https://&lt;your-host&gt;/api/public/system/Base/EncryptedNavigationReferenceService/Generate"</span><span class="w"> </span><span class="se">\\</span></code> <br/><code>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\\</span></code> <br/><code>-u<span class="w"> </span>&lt;username&gt;:&lt;password&gt;<span class="w"> </span><span class="se">\\</span></code> <br/><code>-d<span class="w"> </span><span class="s1">'{</span></code> <br/><code><span class="s1">    "SolutionId": "sol.1",</span></code> <br/><code><span class="s1">    "ObjectId": "oa.1",</span></code> <br/><code><span class="s1">    "TargetId": "form.1",</span></code> <br/><code><span class="s1">    "TargetType": "Form"</span></code> <br/><code><span class="s1">    }'</span></code> <br/></pre></code></div>
+<p>Здесь: <code>"TargetType": "Form"</code> — <strong>обязательный</strong> фиксированный параметр, который <strong>не следует изменять</strong>.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Подставьте фактические ID</p>
+<p>Не забудьте указать в запросе фактические идентификаторы сущностей из своего экземпляра <strong>Comindware Platform</strong>.</p>
+</div>
+</li>
+<li>
+<p>В ответ придёт сгенерированная ссылка на форму вида:</p>
+<div class="highlight"><code><pre><span></span><code>"https://&lt;your-host&gt;/Resolve?data=&lt;encryptedData&gt;"</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Проверьте, что ссылка сформирована корректно, с помощью метода <code>Base/EncryptedNavigationReferenceService/Decrypt</code>, указав в теле запроса закодированную строку <code>&lt;encryptedData&gt;</code> (<strong>без части <code>https://&lt;your-host&gt;/Resolve?data=</code></strong>):</p>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\\</span></code> <br/><code><span class="s2">"https://&lt;your-host&gt;/api/public/system/Base/EncryptedNavigationReferenceService/Decrypt"</span><span class="w"> </span><span class="se">\\</span></code> <br/><code>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\\</span></code> <br/><code>-u<span class="w"> </span>&lt;username&gt;:&lt;password&gt;<span class="w"> </span><span class="se">\\</span></code> <br/><code>-d<span class="w"> </span><span class="s2">"&lt;encrypted&gt;"</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>В ответ должен прийти объект со свойствами целевой формы:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"SolutionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sol.1"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"ObjectId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oa.1"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"TargetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"form.1"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"TargetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Form"</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+</ol>
+<h3 class="pageBreakBefore" id="form_access_control_external_form_test">Тестирование внешней формы</h3>
+<ol class="colored_numbers_list">
+<li>Откройте браузер <strong>на мобильном устройстве</strong> в режиме «<strong>Инкогнито</strong>», чтобы протестировать форму от лица внешнего пользователя.</li>
+<li>
+<p>Вставьте в адресную строку ссылку на внешнюю форму вида:</p>
+<div class="highlight"><code><pre><span></span><code>https://<span class="p">&lt;</span><span class="nt">your-host</span><span class="p">&gt;</span>/Resolve?data=<span class="p">&lt;</span><span class="nt">encryptedData</span><span class="p">&gt;</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Должна открыться форма <em>«Клиент»</em>.</p>
+</li>
+<li>Заполните и сохраните форму.</li>
+<li>Откройте браузер на компьютере.</li>
+<li>Войдите в <strong>Comindware Platform</strong>.</li>
+<li>Удостоверьтесь, что в шаблоне <em>«Заявки»</em> появилась запись, заполненная с помощью внешней формы на мобильном устройстве.</li>
+</ol>
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4786">Формы. Определения, редактирование, удаление, использование списка форм</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4726">Стартовая форма и форма пользовательской задачи</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4803">Роли в приложении. Определения, настройка, объединение, удаление</a></em></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4786">Формы. Определения, редактирование, удаление, использование списка форм</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4726">Стартовая форма и форма пользовательской задачи</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4803">Роли в приложении. Определения, настройка, объединение, удаление</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4860#api_intro_authentication">Аутентификация для доступа к API</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4862#api_system_core_encrypted_navigation_reference">Методы System Core API</a></li>
 </ul>
 </div>
 </article>
