@@ -219,6 +219,27 @@
     </span>
 </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#api_system_core_tracing">
+<span class="md-ellipsis">
+      Tracing – трассировка
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#api_system_core_mutex">
+<span class="md-ellipsis">
+      Mutex – мьютексы
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#api_system_core_local_variables">
+<span class="md-ellipsis">
+      LocalVariables – локальные переменные
+    </span>
+</a>
+</li>
 </ul>
 </nav>
 </li>
@@ -832,6 +853,116 @@
 </tr>
 </tbody>
 </table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/AccountService/Disable1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Отключает несколько аккаунтов.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификаторы аккаунтов.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Статус.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/AccountService/Enable1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Включает несколько аккаунтов.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификаторы аккаунтов.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Статус.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/AccountService/Activate1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Активирует несколько аккаунтов.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификаторы аккаунтов.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Статус.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/AccountService/Deactivate1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Деактивирует несколько аккаунтов.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификаторы аккаунтов.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Статус.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/AccountService/UpdateCache</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Обновляет кэш данных аккаунтов.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Параметры обновления кэша.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Статус.</td>
+</tr>
+</tbody>
+</table>
 <h3 id="api_system_core_ontology">Ontology – объект</h3>
 <table style="width: 100%;">
 <thead>
@@ -969,39 +1100,17 @@
 <thead>
 <tr>
 <th class="api-method post">POST</th>
-<th>/Base/OntologyService/GetCurrentTransactions</th>
+<th>/Base/OntologyService/CreateIgniteCache</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>Описание</strong></td>
-<td>Получает текущие транзакции.</td>
+<td>Создаёт кэш Ignite для предиката.</td>
 </tr>
 <tr>
 <td><strong>Параметры</strong></td>
-<td>-</td>
-</tr>
-<tr>
-<td><strong>Ответ</strong></td>
-<td>Список текущих транзакций.</td>
-</tr>
-</tbody>
-</table>
-<table style="width: 100%;">
-<thead>
-<tr>
-<th class="api-method post">POST</th>
-<th>/Base/OntologyService/TryAbortTransaction</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Описание</strong></td>
-<td>Пытается прервать указанную транзакцию.</td>
-</tr>
-<tr>
-<td><strong>Параметры</strong></td>
-<td>Идентификатор транзакции.</td>
+<td>Предикат.</td>
 </tr>
 <tr>
 <td><strong>Ответ</strong></td>
@@ -1035,10 +1144,96 @@
 <thead>
 <tr>
 <th class="api-method post">POST</th>
-<th>/Base/OntologyService/RemoveStatement</th>
+<th>/Base/OntologyService/RemoveUnusedRules</th>
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Удаляет неиспользуемые правила.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Список удалённых правил.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/OntologyService/GetPredicatesStatistic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает статистику по предикатам.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Список статистических сведений.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/OntologyService/GetPredicateInfo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает информацию о предикате.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Предикат.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Информация о предикате.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/OntologyService/GetTableInfo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает информацию о таблице хранения предиката.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Имя таблицы.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Информация о таблице.</td>
+</tr>
+<tr>
+<td class="api-method post">POST</td>
+<td>/Base/OntologyService/RemoveStatement</td>
+</tr>
+<tr>
+<td>---</td>
+<td>---</td>
+</tr>
 <tr>
 <td><strong>Описание</strong></td>
 <td>Удаляет утверждение (триплет).</td>
@@ -1167,17 +1362,39 @@
 <thead>
 <tr>
 <th class="api-method post">POST</th>
-<th>/Base/OntologyService/RemoveAsync</th>
+<th>/Base/OntologyService/ScheduleCleaningOldSchemeCaches</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>Описание</strong></td>
-<td>Асинхронно удаляет объект по идентификатору.</td>
+<td>Планирует очистку устаревших кэшей схем.</td>
 </tr>
 <tr>
 <td><strong>Параметры</strong></td>
-<td>Идентификатор объекта.</td>
+<td>Количество элементов к очистке.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Логическое значение <code>true</code>/<code>false</code>.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/OntologyService/ClearAllPersonalData</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Удаляет все персональные данные из онтологии.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>-</td>
 </tr>
 <tr>
 <td><strong>Ответ</strong></td>
@@ -2855,7 +3072,7 @@
 </tr>
 <tr>
 <td><strong>Параметры</strong></td>
-<td>Параметры для создания записей.</td>
+<td><code>data</code> — массив объектов <code>Dictionary&lt;string,object&gt;</code> для создания записей.</td>
 </tr>
 <tr>
 <td><strong>Ответ</strong></td>
@@ -2863,6 +3080,16 @@
 </tr>
 </tbody>
 </table>
+<p><strong>Пример запроса:</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="nt">"containerId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oa.XXX"</span><span class="p">,</span></code> <br/><code><span class="w">  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span></code> <br/><code><span class="w">    </span><span class="p">{</span><span class="nt">"op.XXX"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">},</span></code> <br/><code><span class="w">    </span><span class="p">{</span><span class="nt">"op.XXX"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">}</span></code> <br/><code><span class="w">  </span><span class="p">]</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><code>containerId</code> — идентификатор шаблона записи;</li>
+<li><code>data</code> — массив со словарями создаваемых записей;</li>
+<li><code>{"op.XXX": 30}</code>, <code>{"op.XXX": 40}</code> — словари записей:</li>
+<li><code>op.XXX</code> — идентификатор атрибута, значение которого требуется задать в новой записи;</li>
+<li><code>30</code>, <code>40</code> — значения атрибута в новых записях.</li>
+</ul>
 <table style="width: 100%;">
 <thead>
 <tr>
@@ -2877,7 +3104,7 @@
 </tr>
 <tr>
 <td><strong>Параметры</strong></td>
-<td>Параметры для редактирования записей.</td>
+<td><code>data</code> — словарь <code>Dictionary&lt;string,Dictionary&lt;string,object&gt;&gt;</code> для редактирования записей.</td>
 </tr>
 <tr>
 <td><strong>Ответ</strong></td>
@@ -2885,6 +3112,17 @@
 </tr>
 </tbody>
 </table>
+<p><strong>Пример запроса:</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="nt">"containerId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oa.XXX"</span><span class="p">,</span></code> <br/><code><span class="w">  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"op.XXX"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">},</span></code> <br/><code><span class="w">    </span><span class="nt">"2"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"op.XXX"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">}</span></code> <br/><code><span class="w">  </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><code>containerId</code> — идентификатор шаблона записи;</li>
+<li><code>data</code> — словарь изменяемых записей;</li>
+<li><code>1</code>, <code>2</code> — идентификаторы изменяемых записей;</li>
+<li><code>{"op.XXX": 30}</code>, <code>{"op.XXX": 100}</code> — словари изменений для записей;</li>
+<li><code>op.XXX</code> — идентификатор атрибута, значения которого требуется изменить;</li>
+<li><code>30</code>, <code>100</code> — новые значение атрибута, которые требуется установить.</li>
+</ul>
 <table style="width: 100%;">
 <thead>
 <tr>
@@ -2899,7 +3137,7 @@
 </tr>
 <tr>
 <td><strong>Параметры</strong></td>
-<td>Параметры для редактирования записей.</td>
+<td><code>data</code> — словарь <code>Dictionary&lt;string,Dictionary&lt;string,object&gt;&gt;</code> для редактирования записей.</td>
 </tr>
 <tr>
 <td><strong>Ответ</strong></td>
@@ -2907,6 +3145,16 @@
 </tr>
 </tbody>
 </table>
+<p><strong>Пример запроса:</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"op.XXX"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">},</span></code> <br/><code><span class="w">    </span><span class="nt">"2"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"op.XXX"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">}</span></code> <br/><code><span class="w">  </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><code>data</code> — словарь изменяемых записей;</li>
+<li><code>1</code>, <code>2</code> — идентификаторы изменяемых записей;</li>
+<li><code>{"op.XXX": 30}</code>, <code>{"op.XXX": 400}</code> — словари изменений для записей;</li>
+<li><code>op.XXX</code> — идентификатор атрибута, значения которого требуется изменить;</li>
+<li><code>30</code>, <code>400</code>  — новые значение атрибута, которые требуется установить.</li>
+</ul>
 <table style="width: 100%;">
 <thead>
 <tr>
@@ -10143,6 +10391,383 @@
 <tr>
 <td><strong>Ответ</strong></td>
 <td>-</td>
+</tr>
+</tbody>
+</table>
+<h3 id="api_system_core_tracing">Tracing – трассировка</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/TracingService/ConfigureTracing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Настраивает параметры трассировки.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Параметры конфигурации.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Логическое значение <code>true</code>/<code>false</code>.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/TracingService/GetConfiguration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает текущую конфигурацию трассировки.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект конфигурации.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/TracingService/GetCurrentEvents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает текущие события трассировки.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Список событий.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/TracingService/TryAbortEvent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Пытается прервать событие трассировки.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор события.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Логическое значение <code>true</code>/<code>false</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="api_system_core_mutex">Mutex – мьютексы</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/MutexService/GetAll</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает список всех активных мьютексов.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>-</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Список мьютексов.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/MutexService/GetAllByNode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает мьютексы по идентификатору узла.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор узла.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Список мьютексов.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/MutexService/Release</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Освобождает мьютекс.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Имя мьютекса.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Логическое значение <code>true</code>/<code>false</code>.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/MutexService/TryEntrer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Пытается захватить мьютекс с параметрами.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Параметры входа.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Логическое значение <code>true</code>/<code>false</code>.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/MutexService/TryEntrer1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Пытается захватить мьютекс (альтернативный метод).</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Параметры входа.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Логическое значение <code>true</code>/<code>false</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="api_system_core_local_variables">LocalVariables – локальные переменные</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/LocalVariablesService/GetAll</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает все локальные переменные по предикату.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Предикат.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Список значений.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/LocalVariablesService/Get</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает значение локальной переменной по предикату.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Предикат.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Значение.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/LocalVariablesService/Clear</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Очищает локальную переменную по предикату.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Предикат.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Статус.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/LocalVariablesService/Add</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Добавляет значение локальной переменной.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Параметры добавления.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Статус.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/LocalVariablesService/Replace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Заменяет значение локальной переменной.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Параметры замены.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Статус.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/LocalVariablesService/Remove</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Удаляет локальную переменную.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Параметры удаления.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Статус.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/LocalVariablesService/Get1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает локальную переменную типизированного значения.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Предикат.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Значение.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/Base/LocalVariablesService/Set</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Устанавливает значение локальной переменной.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Параметры установки.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Статус.</td>
 </tr>
 </tbody>
 </table>
