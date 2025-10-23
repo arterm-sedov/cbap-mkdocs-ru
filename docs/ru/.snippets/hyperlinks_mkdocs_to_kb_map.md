@@ -1029,6 +1029,8 @@
 
 [paths]: {{ kbArticleURLPrefix }}4620
 
+[service_mode]: {{ kbArticleURLPrefix }}5138
+
 [script_keys]: {{ kbArticleURLPrefix }}5122
 
 [system_requirements]: {{ kbArticleURLPrefix }}4659
