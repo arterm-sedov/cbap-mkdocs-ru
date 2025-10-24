@@ -169,10 +169,6 @@
 
 [account_templates]: {{ kbArticleURLPrefix }}4757
 
-[account_template_attribute_system_names]: {{ kbArticleURLPrefix }}4757#account_template_attribute_system_names
-
-[accounts]: {{ kbArticleURLPrefix }}4653
-
 [accounts_required_unique]: {{ kbArticleURLPrefix }}4653#accounts_required_unique
 
 [accounts_substitution]: {{ kbArticleURLPrefix }}4653#accounts_substitution
@@ -184,10 +180,6 @@
 [account_permission_audit]: {{ kbArticleURLPrefix }}4664
 
 [ad_connection]: {{ kbArticleURLPrefix }}4687
-
-[administration]: {{ kbArticleURLPrefix }}4661
-
-[apps]: {{ kbArticleURLPrefix }}4714
 
 [authentication_authorization_sessions]: {{ kbArticleURLPrefix }}4656
 
@@ -202,8 +194,6 @@
 [changelog]: {{ kbArticleURLPrefix }}4589
 
 [collabora_connection]: {{ kbArticleURLPrefix }}4688
-
-[common_notifications]: {{ kbArticleURLPrefix }}4681
 
 [connections_delete]: {{ kbArticleURLPrefix }}4675#connections_delete
 
@@ -229,8 +219,6 @@
 
 [git_connection]: {{ kbArticleURLPrefix }}4680
 
-[global_configuration]: {{ kbArticleURLPrefix }}4668
-
 [groups]: {{ kbArticleURLPrefix }}4654
 
 [licensing]: {{ kbArticleURLPrefix }}4670
@@ -238,8 +226,6 @@
 [login_and_registration_page_design]: {{ kbArticleURLPrefix }}4707
 
 [logging_configuration]: {{ kbArticleURLPrefix }}4667
-
-[logs]: {{ kbArticleURLPrefix }}4673
 
 [logs_event_chain_view]: {{ kbArticleURLPrefix }}4673#logs_event_chain_view
 
@@ -249,23 +235,13 @@
 
 [n3_filter_active_tasks]: {{ kbArticleURLPrefix }}4935
 
-[notification_types]: {{ kbArticleURLPrefix }}4682
-
-[monitoring]: {{ kbArticleURLPrefix }}4666
-
 [navigation_sections_setup]: {{ kbArticleURLPrefix }}4809
-
-[odata_connection]: {{ kbArticleURLPrefix }}4702
-
-[odata_integration]: {{ kbArticleURLPrefix }}4697
 
 [openid_connection]: {{ kbArticleURLPrefix }}4685
 
 [organizational_unit_templates]: {{ kbArticleURLPrefix }}4755
 
 [r7_connection]: {{ kbArticleURLPrefix }}4689
-
-[performance]: {{ kbArticleURLPrefix }}4669
 
 [performance_optimize]: {{ kbArticleURLPrefix }}4712
 
@@ -281,11 +257,7 @@
 
 [optimize_calculate_attribute]: {{ kbArticleURLPrefix }}5055
 
-[process_diagram]: {{ kbArticleURLPrefix }}4721
-
 [process_diagram_version_control]: {{ kbArticleURLPrefix }}4722
-
-[process_diagram_view_instance]: {{ kbArticleURLPrefix }}4723
 
 [process_fails_several_records]: {{ kbArticleURLPrefix }}5059
 
@@ -295,15 +267,7 @@
 
 [process_stuck]: {{ kbArticleURLPrefix }}5056
 
-[process_receiving_connection]: {{ kbArticleURLPrefix }}4695
-
-[process_sending_connection]: {{ kbArticleURLPrefix }}4690
-
-[process_templates]: {{ kbArticleURLPrefix }}4758
-
 [record_field_values_not_shown]: {{ kbArticleURLPrefix }}5060
-
-[record_templates]: {{ kbArticleURLPrefix }}4759
 
 [record_template_properties]: {{ kbArticleURLPrefix }}4759#record_template_properties
 
@@ -331,23 +295,11 @@
 
 [release_notes_5.0.20251010]: {{ kbArticleURLPrefix }}5137
 
-[roles]: {{ kbArticleURLPrefix }}4803
-
 [role_templates]: {{ kbArticleURLPrefix }}4760
 
 [s3_connection]: {{ kbArticleURLPrefix }}4677
 
-[scenario_receive_email]: {{ kbArticleURLPrefix }}4693
-
-[scenario_send_email]: {{ kbArticleURLPrefix }}4692
-
 [security]: {{ kbArticleURLPrefix }}4660
-
-[sql_receive_connection]: {{ kbArticleURLPrefix }}4705
-
-[sql_send_connection]: {{ kbArticleURLPrefix }}4706
-
-[substitution]: {{ kbArticleURLPrefix }}4665
 
 [substitution_configuration]: {{ kbArticleURLPrefix }}4665#substitution_configuration
 
@@ -359,13 +311,9 @@
 
 [table_personal_use_filter_extended]: {{ kbArticleURLPrefix }}4815#table_personal_use_filter_extended
 
-[task_notifications]: {{ kbArticleURLPrefix }}4684
-
 [task_notifications_email]: {{ kbArticleURLPrefix }}4684#task_notifications_email
 
 [example_task_hyperlink_n3_formula]: {{ kbArticleURLPrefix }}4879
-
-[templates]: {{ kbArticleURLPrefix }}4709
 
 [template_permissions]: {{ kbArticleURLPrefix }}4801
 
@@ -997,9 +945,9 @@
 
 {% endif %}
 
-{% if (userGuide and not adminGuideLinux) or (not adminGuideLinux and adminGuideWindows) or kbExport %}
+{% if (userGuide and not adminGuideLinux) or (not adminGuideLinux and adminGuideWindows) or apiGuide or kbExport %}
 
-<!-- Руководство пользователя, администратора для Windows или экспорт в БЗ  -->
+<!-- Руководство пользователя, администратора для Windows, API или экспорт в БЗ  -->
 
 [availability_fault_tolerance]: {{ kbArticleURLPrefix }}5079
 
@@ -1035,9 +983,9 @@
 
 {% endif %}
 
-{% if (userGuide and not (adminGuideLinux or adminGuideWindows)) or kbExport %}
+{% if (userGuide and not (adminGuideLinux or adminGuideWindows)) or apiGuide or kbExport %}
 
-<!-- Руководство пользователя или экспорт в БЗ  -->
+<!-- Руководство пользователя, или API, или экспорт в БЗ  -->
 
 [accounts_dc_sync]: {{ kbArticleURLPrefix }}4655
 
@@ -1141,6 +1089,10 @@
 
 [scenarios]: {{ kbArticleURLPrefix }}4717
 
+[common_notifications]: {{ kbArticleURLPrefix }}4681
+
+[account_template_attribute_system_names]: {{ kbArticleURLPrefix }}4757#account_template_attribute_system_names
+
 {% endif %}
 
 {% if (not apiGuide) or kbExport %}
@@ -1165,7 +1117,61 @@
 
 {% endif %}
 
-{% if gostech or kbExport %}
+{% if developerGuide or kbExport %}
+
+<!-- Руководство программиста или экспорт в БЗ  -->
+
+[accounts]: {{ kbArticleURLPrefix }}4653
+
+[administration]: {{ kbArticleURLPrefix }}4661
+
+[apps]: {{ kbArticleURLPrefix }}4714
+
+[global_configuration]: {{ kbArticleURLPrefix }}4668
+
+[logs]: {{ kbArticleURLPrefix }}4673
+
+[monitoring]: {{ kbArticleURLPrefix }}4666
+
+[notification_types]: {{ kbArticleURLPrefix }}4682
+
+[odata_connection]: {{ kbArticleURLPrefix }}4702
+
+[odata_integration]: {{ kbArticleURLPrefix }}4697
+
+[performance]: {{ kbArticleURLPrefix }}4669
+
+[process_diagram]: {{ kbArticleURLPrefix }}4721
+
+[process_diagram_view_instance]: {{ kbArticleURLPrefix }}4723
+
+[process_receiving_connection]: {{ kbArticleURLPrefix }}4695
+
+[process_sending_connection]: {{ kbArticleURLPrefix }}4690
+
+[process_templates]: {{ kbArticleURLPrefix }}4758
+
+[record_templates]: {{ kbArticleURLPrefix }}4759
+
+[roles]: {{ kbArticleURLPrefix }}4803
+
+[scenario_receive_email]: {{ kbArticleURLPrefix }}4693
+
+[scenario_send_email]: {{ kbArticleURLPrefix }}4692
+
+[sql_receive_connection]: {{ kbArticleURLPrefix }}4705
+
+[sql_send_connection]: {{ kbArticleURLPrefix }}4706
+
+[substitution]: {{ kbArticleURLPrefix }}4665
+
+[task_notifications]: {{ kbArticleURLPrefix }}4684
+
+[templates]: {{ kbArticleURLPrefix }}4709
+
+{% endif %}
+
+{% if gostech or developerGuide or kbExport %}
 
 <!-- Руководства для ГосТех или экспорт в БЗ  -->
 
