@@ -113,7 +113,7 @@
 
 [example_formula_condition_set_value]: {{ kbArticleURLPrefix }}4992
 
-[example_task_hyperlink_n3_formula]: {{ kbArticleURLPrefix }}4879
+[example_formula_count_records_no_archive]: {{ kbArticleURLPrefix }}4987
 
 [example_email_parse_process_id_from_subject]: {{ kbArticleURLPrefix }}4978
 
@@ -267,11 +267,33 @@
 
 [performance]: {{ kbArticleURLPrefix }}4669
 
+[performance_optimize]: {{ kbArticleURLPrefix }}4712
+
+[buttons_not_shown]: {{ kbArticleURLPrefix }}5058
+
+[calculate_archive_records]: {{ kbArticleURLPrefix }}5048
+
+[extract_form_elements]: {{ kbArticleURLPrefix }}5047
+
+[hard_read_text_table]: {{ kbArticleURLPrefix }}5050
+
+[invalid_instance_reference]: {{ kbArticleURLPrefix }}5054
+
+[optimize_calculate_attribute]: {{ kbArticleURLPrefix }}5055
+
 [process_diagram]: {{ kbArticleURLPrefix }}4721
 
 [process_diagram_version_control]: {{ kbArticleURLPrefix }}4722
 
 [process_diagram_view_instance]: {{ kbArticleURLPrefix }}4723
+
+[process_fails_several_records]: {{ kbArticleURLPrefix }}5059
+
+[process_id_not_found]: {{ kbArticleURLPrefix }}5052
+
+[process_notify_no_info]: {{ kbArticleURLPrefix }}5051
+
+[process_stuck]: {{ kbArticleURLPrefix }}5056
 
 [process_receiving_connection]: {{ kbArticleURLPrefix }}4695
 
@@ -279,11 +301,19 @@
 
 [process_templates]: {{ kbArticleURLPrefix }}4758
 
+[record_field_values_not_shown]: {{ kbArticleURLPrefix }}5060
+
 [record_templates]: {{ kbArticleURLPrefix }}4759
 
 [record_template_properties]: {{ kbArticleURLPrefix }}4759#record_template_properties
 
 [registration_and_login]: {{ kbArticleURLPrefix }}4663
+
+[script_operation_error]: {{ kbArticleURLPrefix }}5057
+
+[table_open_error]: {{ kbArticleURLPrefix }}5049
+
+[view_calculate_attribute_history]: {{ kbArticleURLPrefix }}5053
 
 [release_notes_4.7.4822]: {{ kbArticleURLPrefix }}2611
 
@@ -333,7 +363,11 @@
 
 [task_notifications_email]: {{ kbArticleURLPrefix }}4684#task_notifications_email
 
+[example_task_hyperlink_n3_formula]: {{ kbArticleURLPrefix }}4879
+
 [templates]: {{ kbArticleURLPrefix }}4709
+
+[template_permissions]: {{ kbArticleURLPrefix }}4801
 
 [templates_move]: {{ kbArticleURLPrefix }}4709#templates_move
 
