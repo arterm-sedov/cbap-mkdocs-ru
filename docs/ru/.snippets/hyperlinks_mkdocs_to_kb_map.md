@@ -313,8 +313,6 @@
 
 [task_notifications_email]: {{ kbArticleURLPrefix }}4684#task_notifications_email
 
-[example_task_hyperlink_n3_formula]: {{ kbArticleURLPrefix }}4879
-
 [template_permissions]: {{ kbArticleURLPrefix }}4801
 
 [templates_move]: {{ kbArticleURLPrefix }}4709#templates_move
@@ -574,6 +572,8 @@
 [example_n3_collection_join_string]: {{ kbArticleURLPrefix }}5107
 
 [example_n3_periodic_task_notifications]: {{ kbArticleURLPrefix }}4905
+
+[example_task_hyperlink_n3_formula]: {{ kbArticleURLPrefix }}4879
 
 [example_task_reassign]: {{ kbArticleURLPrefix }}5087
 

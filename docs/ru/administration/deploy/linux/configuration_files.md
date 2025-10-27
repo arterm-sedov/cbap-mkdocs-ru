@@ -85,12 +85,12 @@ hide: tags
 
     Здесь значения `<User>` и `<Group>` должны совпадать с такими же параметрами в файле `/usr/lib/systemd/system/comindware<instanceName>.service`
 
-5. Перезапустите службу экземпляра ПО:
+5. Перезапустите службу экземпляра ПО:{% if pdfOutput %} `systemctl restart comindware<instanceName>`{% else %}
 
     ``` sh
     systemctl restart comindware<instanceName>
     ```
-
+{% endif %}
 ### Пример YML-файла конфигурации экземпляра ПО {: #configuration_files_linux_instance_example .pageBreakBefore }
 
 <!--instanceYML-start-->
@@ -153,6 +153,7 @@ db.name: <instanceName>
 #db.upgradeName:
 # Путь к онтологии {{ companyName }}
 #db.n3Dir:
+
 {% if pdfOutput %}
 ```
 {% include-markdown ".snippets/pdfPageBreakHard.md" %}
@@ -181,7 +182,7 @@ tempStorage.localDisk.path: /var/lib/comindware/<instanceName>/Temp
 tempWorkingDir: /var/lib/comindware/<instanceName>/LocalTemp
 
 ##### Настройка очереди сообщений #####
-# Адрес и порт сервера очереди сообщений {{ apacheKafkaVariants }}.
+# Адрес и порт брокера сообщений {{ apacheKafkaVariants }}.
 mq.server: <kafkaBrokerIP>:<kafkaBrokerPort>
 # Идентификатор группы очереди сообщений.
 mq.group: <prefix>-<instanceName>
@@ -196,9 +197,9 @@ mq.node: <instanceName>
 #mq.securityProtocol: Plaintext
 
 ##### Настройка SSL-подключения очереди сообщений #####
-# Путь к файлу корневого сертификата сервера очереди сообщений.
+# Путь к файлу корневого сертификата брокера сообщений.
 #mq.ssl.caLocation:
-# Выключение идентификации адреса сервера очереди сообщений.
+# Выключение идентификации адреса брокера сообщений.
 #mq.ssl.endpointIdentificationEnabled: false 
 
 ##### Настройка SASL-подключения очереди сообщений #####
@@ -208,6 +209,7 @@ mq.node: <instanceName>
 #mq.sasl.password:
 # Тип механизма SASL (None | Plain | ScramSha256 | ScramSha512).
 #mq.sasl.mechanism:
+
 {% if pdfOutput %}
 ```
 {% include-markdown ".snippets/pdfPageBreakHard.md" %}
@@ -263,6 +265,7 @@ mq.node: <instanceName>
 #auth.minimalPasswordLength: 14
 # Время истечения сессии пользователя в формате дд.чч:мм:сс  
 #auth.sessionExpirationTime: 00.12:00:00
+
 {% if pdfOutput %}
 ```
 {% include-markdown ".snippets/pdfPageBreakHard.md" %}
@@ -319,6 +322,7 @@ backup.defaultFileName: <instanceName>
 #backup.default.<backupName>.withScripts: true
 # Управление составом резервной копии — файлы истории ({{ openSearchVariants }}).
 #backup.default.<backupName>.withJournal: true
+
 {% if pdfOutput %}
 ```
 {% include-markdown ".snippets/pdfPageBreakHard.md" %}
@@ -415,6 +419,11 @@ backup.defaultFileName: <instanceName>
 # Выключение отправки уведомлений на страницах обслуживания.
 #notifications.onMaintenanceEnabled: false
 
+{% if pdfOutput %}
+```
+{% include-markdown ".snippets/pdfPageBreakHard.md" %}
+``` yaml title="Пример YML-файла конфигурации экземпляра ПО — продолжение"
+{% endif %}
 ##### Настройка бизнес-процессов #####
 # Выключение функции бизнес-процессов
 #bpms.enabled: false
@@ -457,7 +466,7 @@ backup.defaultFileName: <instanceName>
     ```
 
 2. Измените необходимые параметры.
-3. Удостоверьтесь, что значение параметра `cluster.name` (имя экземпляра ПО) совпадает с `clusterName` и значение параметров `mq.server` (адрес и порт сервера очереди сообщений), `mq.group` (идентификатор группы очереди сообщений), `mq.node` (идентификатор узла очереди сообщений) — с аналогичными параметрами в [файле конфигурации экземпляра](#configuration_files_linux_instance).
+3. Удостоверьтесь, что значение параметра `cluster.name` (имя экземпляра ПО) совпадает с `clusterName` и значение параметров `mq.server` (адрес и порт брокера сообщений), `mq.group` (идентификатор группы очереди сообщений), `mq.node` (идентификатор узла очереди сообщений) — с аналогичными параметрами в [файле конфигурации экземпляра](#configuration_files_linux_instance).
 4. Сохраните файл конфигурации.
 5. Перезапустите службу `apigateway`:
 
@@ -477,17 +486,30 @@ cluster.name: <instanceName>
 log.enabled: true
 # Путь к файлу конфигурации журналирования экземпляра
 log.configurationFile: /var/www/<instanceName>/logs.config
-kata.enabled: false
-# Адрес сервера очереди сообщений {{ apacheKafkaVariants }} с портом.
+# Адрес и порт брокера сообщений {{ apacheKafkaVariants }}.
 mq.server: <kafkaBrokerIp>:<kafkaBrokerPort>
 # Идентификатор группы очереди сообщений
 mq.group: <instanceName>
+# Префикс имени очередей сообщений
+mq.name: <instanceName>
 # Идентификатор узла очереди сообщений
 mq.node: <instanceName>
 # Тип механизма SASL. (None | Plain | ScramSha256 | ScramSha512)
 mq.sasl.mechanism: None
+# Имя пользователя, используемое для подключения посредством SASL
+#mq.sasl.username:
+# Пароль для аутентификации, используемый для подключения посредством SASL
+#mq.sasl.password:
 # Протокол безопасности очереди сообщений. (Plaintext | Ssl | SaslPlaintext | SaslSsl)
 mq.securityProtocol: Plaintext
+# Путь к файлу корневого сертификата брокера сообщений
+#mq.ssl.caLocation:
+# Выключение идентификации адреса брокера сообщений
+#mq.ssl.endpointIdentificationEnabled: false
+# Порт для входящих соединений
+#listen.port:
+# Протокол входящих соединений (None, Http1, Http2, Http1AndHttp2)
+listen.protocol: Http1AndHttp2
 # Путь к сокету apigateway
 listen.socketPath: /var/www/<instanceName>/App_Data/apigateway.socket
 # Включение/выключение файлового хранилища  (true | false)
@@ -502,6 +524,14 @@ fileStorage.uploadAttachment.path: /api/Attachment/Upload
 fileStorage.downloadAttachment.path: /api/Attachment/GetReferenceContent/{0}
 # Путь к удалённым файлам
 fileStorage.removeAttachment.path: /api/Attachment/Remove/{0}
+# HTTP-метод отправки файлов в хранилище. (GET | POST | PUT | DELETE)
+#fileStorage.uploadAttachment.method: POST
+# HTTP-метод загрузки файлов из хранилища. (GET | POST | PUT | DELETE)
+#fileStorage.downloadAttachment.method: GET
+# HTTP-метод удаления файлов из хранилища. (GET | POST | PUT | DELETE)
+#fileStorage.removeAttachment.method: DELETE
+# Вкл./выкл. страницы для мониторинга подключений (true | false)
+statusPage.enabled: true
 # Префиксы служб API
 services:
 - apiPrefix: conversation
@@ -520,7 +550,7 @@ services:
     ```
 
 2. Измените необходимые параметры.
-3. Удостоверьтесь, что значения параметров `mq.server` (адрес и порт сервера очереди сообщений), `mq.group` (идентификатор группы очереди сообщений), `mq.node` (идентификатор узла очереди сообщений) и `clusterName` (имя экземпляра ПО) совпадают с аналогичными параметрами в [файле конфигурации экземпляра ПО](#пример-yml-файла-конфигурации-экземпляра-по).
+3. Удостоверьтесь, что значения параметров `mq.server` (адрес и порт брокера сообщений), `mq.group` (идентификатор группы очереди сообщений), `mq.node` (идентификатор узла очереди сообщений) и `clusterName` (имя экземпляра ПО) совпадают с аналогичными параметрами в [файле конфигурации экземпляра ПО](#configuration_files_linux_instance_example).
 4. Сохраните файл конфигурации.
 5. После внесения изменений перезапустите службу `adapterhost`:
 
@@ -538,20 +568,28 @@ clusterName: <instanceName>
 loaderFolder: <instanceName>
 # Язык сервера (en-US | ru-RU )
 serverLanguage: ru-RU
-# Адрес и порт сервера очереди сообщений {{ apacheKafkaVariants }}
+# Адрес и порт брокера сообщений {{ apacheKafkaVariants }}
 mq.server: <kafkaBrokerIp>:<kafkaBrokerPort>
-# Протокол безопасности очереди сообщений. (Plaintext | Ssl | SaslPlaintext | SaslSsl)
-mq.securityProtocol: Plaintext
+# Префикс имени очередей сообщений
+mq.name: <instanceName>
+# Идентификатор группы очереди сообщений
+mq.group: <instanceName>
+# Идентификатор узла очереди сообщений
+mq.node: <instanceName>
+# Имя пользователя, используемое для подключения посредством SASL
+mq.sasl.username:
+# Пароль для аутентификации, используемый для подключения посредством SASL
+mq.sasl.password:
 # Тип механизма SASL (None | Plain | ScramSha256 | ScramSha512)
 mq.sasl.mechanism: None
+# Путь к файлу корневого сертификата брокера сообщений
+mq.ssl.caLocation:
+# Выключение/включение идентификации адреса брокера сообщений
+mq.ssl.endpointIdentificationEnabled: true
+# Протокол безопасности очереди сообщений. (Plaintext | Ssl | SaslPlaintext | SaslSsl)
+mq.securityProtocol: Plaintext
 # Путь к файлам журналирования экземпляра ПО
 log.folder: /var/log/comindware/<instanceName>/Logs/
-# Максимальное кол-во файлов журналов
-log.maxArchiveFiles: 100
-# Максимальный размер файлов журналов (байты)
-log.archiveAboveSize: 1048576000
-# Путь к архивам журналов
-log.archiveFolder: /var/log/comindware/<instanceName>/Logs/Archive/
 ```
 <!--adapterhostYML-end-->
 
