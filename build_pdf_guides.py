@@ -39,8 +39,8 @@ class MkDocsBatchBuilder:
         """Initialize the batch builder with configuration files and logging setup."""
         # Configuration files to build in order
         self.configs = [
-            "mkdocs_guide_complete_ru.yml",
-            "mkdocs_guide_user_ru.yml",
+            "mkdocs_guide_complete_ru_pdf.yml",
+            "mkdocs_guide_user_ru_pdf.yml",
             "mkdocs_guide_developer_ru_pdf.yml",
             "mkdocs_guide_admin_linux_ru_pdf.yml",
             "mkdocs_guide_admin_windows_ru_pdf.yml",
