@@ -1,109 +1,241 @@
-<!-- cef902af-b944-421b-b9d0-9c1ef7737ea1 73ae2715-1323-4847-a179-189d9c6ba51a -->
-#  MkDocs RAG Engine Implementation Plan
+<!-- cef902af-b944-421b-b9d0-9c1ef7737ea1 24f7a203-e358-4d7e-bd48-ec302c2dcaaf -->
+# MkDocs RAG Engine Implementation Plan
 
-## Architecture Overview
+## Overview
 
-The RAG engine follows a modern retrieval-augmented generation architecture with these key components:
+Build a production-ready RAG (Retrieval-Augmented Generation) engine for the MkDocs documentation repository that handles Jinja2-rich source files through MkDocs build pipeline integration. Uses FRIDA (best Russian embedder), ChromaDB vector store, cross-encoder reranking, and multi-LLM support with streaming responses.
+
+## Architecture
 
 ```
-MkDocs Source Files (*.md)
-    ↓
-[1] Document Processor (frontmatter + markdown parsing)
-    ↓
-[2] Smart Text Splitter (semantic chunking with overlap)
-    ↓
-[3] Metadata Enricher (kbId, URL, tags, section anchors)
-    ↓
-[4] Embedding Generator (multilingual Russian-English models)
-    ↓
-[5] ChromaDB Vector Store (persistent, with rich metadata)
-    ↓
-[6] Query Pipeline:
-    → Embed user query
-    → Vector search (top-k=20)
-    → Cross-encoder reranking (top-k=5)
-    → Article reconstruction from chunks
-    → Feed to multi-LLM manager
-    → Stream response with citations
+Input Sources (3 modes):
+ 1. MkDocs Pipeline → Build Hook → Compiled MD
+ 2. Compiled KB File → kb.comindware.ru.platform_v5_for_llm_ingestion.md
+ 3. Compiled MD Folder → phpkb_content/798.../ 
+                    ↓
+         Document Processor (handles all 3 modes)
+                    ↓
+         Smart Chunker (700 tokens, 300 overlap)
+                    ↓
+         Metadata Enricher (rich metadata + optional LLM enhancement)
+                    ↓
+         FRIDA Embedder (4 prefix modes: search_query, search_document, 
+                         categorize_topic, paraphrase)
+                    ↓
+         ChromaDB Vector Store (persistent, metadata-rich)
+                    ↓
+         Query Pipeline:
+           → Embed query with FRIDA (search_query prefix)
+           → Vector search (top-20)
+           → Cross-encoder reranking (top-5)
+           → Article reconstruction
+           → Multi-LLM generation
+           → Stream response + citations
 ```
 
-## Implementation Steps
+## Phase 1: MkDocs Integration & Project Setup
 
-### Phase 1: Project Structure and Core Components
+### 1.0 MkDocs Build Pipeline Integration (NEW)
 
-#### 1.1 Create Project Structure
+**Problem:** Raw MkDocs files contain Jinja2 syntax (`{{ productName }}`, `{% if %}`, etc.) that cannot be indexed directly.
 
-Create a new standalone RAG service under `rag_engine/`:
+**Solution:** Create custom MkDocs config + hook to export Jinja2-compiled markdown before indexing.
+
+#### File 1: `mkdocs_for_rag_indexing.yml`
+
+```yaml
+# Inherit from complete guide config to resolve all Jinja2 variables
+INHERIT: mkdocs_guide_complete_ru.yml
+
+# Override output directory for RAG-compiled markdown
+site_dir: compiled_md_for_rag
+
+# Add custom hook for RAG export
+hooks:
+ - rag_indexing_hook.py
+
+# Disable unnecessary plugins (we only need compiled MD)
+plugins:
+ - search: false
+ - with-pdf: !ENV [DISABLE_PDF, true]
+
+# Keep all other settings from parent config
+```
+
+#### File 2: `rag_indexing_hook.py`
+
+```python
+"""
+MkDocs hook to export Jinja2-compiled markdown for RAG indexing.
+Inspired by kb_html_cleanup_hook.py but outputs clean compiled MD files.
+
+This hook captures markdown AFTER Jinja2 processing but BEFORE HTML conversion,
+giving us clean, variable-resolved content ready for RAG indexing.
+"""
+
+import json
+import os
+from datetime import datetime
+from pathlib import Path
+import yaml
+
+
+def on_page_markdown(markdown, page, config, files):
+    """
+    Called AFTER Jinja2 template processing but BEFORE markdown→HTML conversion.
+    At this point, all {{ variables }} and {% blocks %} are fully resolved.
+    """
+    # Store the compiled markdown for later use
+    page._compiled_md_for_rag = markdown
+    return markdown
+
+
+def on_post_page(output, page, config):
+    """
+    After page HTML is built, save the compiled markdown to RAG folder.
+    """
+    # Get the Jinja2-resolved markdown
+    compiled_md = getattr(page, '_compiled_md_for_rag', page.markdown)
+    
+    # Prepare output path (mirrors source structure)
+    output_dir = Path(config['site_dir'])
+    rel_path = Path(page.file.src_path)
+    output_file = output_dir / rel_path
+    output_file.parent.mkdir(parents=True, exist_ok=True)
+    
+    # Save compiled markdown with frontmatter preserved
+    with open(output_file, 'w', encoding='utf-8') as f:
+        # Write frontmatter (includes kbId, title, tags, url, etc.)
+        if page.meta:
+            f.write('---\n')
+            yaml.dump(page.meta, f, allow_unicode=True, default_flow_style=False)
+            f.write('---\n\n')
+        
+        # Write Jinja2-resolved markdown content
+        f.write(compiled_md)
+    
+    return output
+
+
+def on_post_build(config):
+    """
+    After build completes, create manifest file for RAG indexer.
+    """
+    output_dir = Path(config['site_dir'])
+    manifest_file = output_dir / 'rag_manifest.json'
+    
+    # Collect all compiled .md files
+    md_files = sorted(output_dir.rglob('*.md'))
+    
+    manifest = {
+        'total_files': len(md_files),
+        'files': [str(f.relative_to(output_dir)) for f in md_files],
+        'build_date': datetime.now().isoformat(),
+        'config_name': config.get('site_name'),
+        'docs_dir': config['docs_dir'],
+        'source_type': 'mkdocs_pipeline'
+    }
+    
+    with open(manifest_file, 'w', encoding='utf-8') as f:
+        json.dump(manifest, f, indent=2, ensure_ascii=False)
+    
+    print(f"✅ RAG Export: {len(md_files)} compiled MD files → {output_dir}")
+    print(f"   Manifest: {manifest_file}")
+```
+
+**Usage:**
+
+```bash
+# Build compiled markdown for RAG indexing
+mkdocs build -f mkdocs_for_rag_indexing.yml
+
+# Output: compiled_md_for_rag/ folder with:
+#   - Jinja2-resolved .md files (all {{ variables }} replaced)
+#   - rag_manifest.json (metadata about exported files)
+```
+
+### 1.1 Project Structure
+
+Create standalone RAG service under `rag_engine/`:
 
 ```
 rag_engine/
 ├── config/
 │   ├── __init__.py
-│   ├── settings.py          # Configuration management
-│   └── embeddings.yaml      # Embedding model configs
+│   ├── settings.py          # Configuration with 3 input modes
+│   └── input_modes.py       # Input mode handlers
 ├── core/
 │   ├── __init__.py
-│   ├── document_processor.py   # Frontmatter + markdown parsing
+│   ├── document_processor.py   # Supports 3 input modes
 │   ├── chunker.py              # Smart text splitting
-│   ├── metadata_enricher.py    # Metadata extraction & enrichment
+│   ├── metadata_enricher.py    # Metadata extraction
 │   └── vector_store.py         # ChromaDB operations
 ├── llm/
 │   ├── __init__.py
-│   ├── llm_manager.py       # Borrowed from cmw-platform-agent
-│   ├── provider_adapters.py # Borrowed from cmw-platform-agent
-│   ├── langsmith_config.py  # Borrowed from cmw-platform-agent
-│   └── langfuse_config.py   # Borrowed from cmw-platform-agent
+│   ├── llm_manager.py       # From cmw-platform-agent
+│   ├── provider_adapters.py # From cmw-platform-agent
+│   ├── langsmith_config.py  # From cmw-platform-agent
+│   └── langfuse_config.py   # From cmw-platform-agent
 ├── retrieval/
 │   ├── __init__.py
-│   ├── embedder.py          # Embedding generation
-│   ├── retriever.py         # Vector search operations
-│   └── reranker.py          # Cross-encoder reranking
+│   ├── embedder.py          # FRIDA with 4 prefixes
+│   ├── retriever.py         # Vector search
+│   └── reranker.py          # Cross-encoder
 ├── tools/
 │   ├── __init__.py
-│   ├── pdf_utils.py         # Borrowed from cmw-platform-agent
-│   └── file_utils.py        # Borrowed from cmw-platform-agent
+│   ├── pdf_utils.py         # From cmw-platform-agent
+│   └── file_utils.py        # From cmw-platform-agent
 ├── api/
 │   ├── __init__.py
-│   ├── app.py               # FastAPI or Gradio interface
+│   ├── app.py               # Gradio interface
 │   └── models.py            # Request/response models
 ├── utils/
 │   ├── __init__.py
 │   ├── logger.py
 │   └── helpers.py
 ├── scripts/
-│   ├── build_index.py       # Index building script
-│   └── test_queries.py      # Testing script
+│   ├── build_mkdocs_for_rag.sh  # Complete build pipeline
+│   ├── build_index.py           # Index builder (3 modes)
+│   └── test_queries.py          # Testing
 ├── requirements.txt
 ├── .env.example
 └── README.md
 ```
 
-**Reference repos**:
+**Copy from existing repos:**
 
-https://github.com/AsyncFuncAI/deepwiki-open
+- `llm/` modules from `cmw-platform-agent/agent_ng/`
+- `tools/` from `cmw-platform-agent/tools/`
+- Patterns from `agent-course-final-assignment/setup_vector_store.py`
+- Architecture wisdom from `deepwiki-open`
 
-https://github.com/arterm-sedov/cmw-platform-agent
+### 1.2 Configuration Management
 
-https://github.com/arterm-sedov/agent-course-final-assignment
-
-**Reuse from existing repos:**
-
-- `llm/` - Copy entire LLM manager module from `cmw-platform-agent/agent_ng/llm_manager.py` and dependencies
-- `tools/pdf_utils.py` & `file_utils.py` - Copy from `cmw-platform-agent/tools/`
-
-#### 1.2 Configuration Management
-
-Create `config/settings.py` with these configurable parameters:
+**File:** `config/settings.py`
 
 ```python
 INDEXING_CONFIG = {
-    "source_options": [
-        "docs/ru/**/*.md",  # Full MkDocs repo
-        "phpkb_content/798. Версия 5.0. Текущая рекомендованная/**/*.md",
-        "kb.comindware.ru.platform_v5_for_llm_ingestion.md"  # Pre-compiled KB
-    ],
-    # USE ONE OF THESE, not all at once, they are mostly duplicate.
-    # But support the MD files and the combined KB comipled file 
+    # Three input modes to handle different source formats
+    "input_modes": {
+        "mkdocs_pipeline": {
+            "enabled": True,
+            "mkdocs_config": "mkdocs_for_rag_indexing.yml",
+            "output_dir": "compiled_md_for_rag/",
+            "hook_file": "rag_indexing_hook.py",
+            "manifest_file": "rag_manifest.json",
+            "description": "Build via MkDocs to resolve Jinja2 variables"
+        },
+        "compiled_kb_file": {
+            "enabled": True,
+            "source_file": "kb.comindware.ru.platform_v5_for_llm_ingestion.md",
+            "description": "Single pre-compiled KB file (all articles merged)"
+        },
+        "compiled_md_folder": {
+            "enabled": True,
+            "source_folder": "phpkb_content/798. Версия 5.0. Текущая рекомендованная/",
+            "description": "Folder of compiled MD files (phpkb or MkDocs output)"
+        }
+    },
     "chunk_size": 700,           # tokens
     "chunk_overlap": 300,        # tokens
     "min_chunk_size": 100,
@@ -111,14 +243,20 @@ INDEXING_CONFIG = {
 
 EMBEDDING_CONFIG = {
     "model_name": "ai-forever/FRIDA",  # State-of-the-art Russian embedder
-    "device": "cpu",  # or "cuda" if GPU available. Autodetect if possible
-    "batch_size": 8,   # Optimized for CPU (use 32 for GPU). Autodetect if possible
+    "device": "auto",  # Auto-detect CPU/GPU
+    "batch_size": "auto",  # 8 for CPU, 32 for GPU (auto-detected)
     "embedding_dim": 768,
     "max_seq_length": 512,
+    "prefixes": {
+        "documents": "search_document:",     # For indexing
+        "queries": "search_query:",          # For user queries
+        "categorization": "categorize_topic:",  # For article grouping
+        "paraphrase": "paraphrase:"          # For finding similar sections
+    }
 }
 
 RERANKER_CONFIG = {
-    "model_name": "cross-encoder/ms-marco-MiniLM-L-12-v2",
+    "model_name": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",  # Multilingual
     "top_k_retrieve": 20,    # From vector search
     "top_k_rerank": 5,       # After reranking
     "batch_size": 16,
@@ -131,24 +269,62 @@ CHROMADB_CONFIG = {
 }
 ```
 
-### Phase 2: Document Processing Pipeline
+## Phase 2: Document Processing Pipeline
 
-#### 2.1 Document Processor (Inspired by deepwiki-open)
+### 2.1 Document Processor (3 Input Modes)
 
 **File:** `core/document_processor.py`
 
-Key features:
+**Supports three input modes:**
 
-- Parse YAML frontmatter (kbId, title, tags, url)
-- Extract markdown structure (headings, code blocks, lists)
-- Preserve anchors from headings (e.g., `{: #section_anchor }`)
-- Handle MkDocs-specific syntax (admonitions, snippets)
-- Support multiple input formats (individual .md files, folders, pre-compiled KB)
+1. **MkDocs Pipeline Mode**: Read from `compiled_md_for_rag/` after MkDocs build with hook
+2. **Compiled KB File Mode**: Parse single `kb.comindware.ru.platform_v5_for_llm_ingestion.md`
+3. **Compiled MD Folder Mode**: Process `phpkb_content/798...` or any MD folder
 
-**Reuse from existing code:**
+**Key features:**
 
-- Document scanning pattern from `rag_agent/search-assistant.py` (recursive .md file finding)
-- File reading utilities from `cmw-platform-agent/tools/file_utils.py`
+- Parse YAML frontmatter (kbId, title, tags, url) from compiled files
+- Extract markdown structure (headings with anchors, code blocks, lists)
+- Handle MkDocs syntax (admonitions, etc.) - already resolved by build
+- Detect content features (code presence, languages, entities)
+
+**Implementation:**
+
+```python
+class DocumentProcessor:
+    def __init__(self, input_mode: str, config: dict):
+        self.input_mode = input_mode
+        self.config = config
+        
+    def process_all(self) -> List[Document]:
+        """Process documents based on input mode"""
+        if self.input_mode == "mkdocs_pipeline":
+            return self._process_mkdocs_output()
+        elif self.input_mode == "compiled_kb_file":
+            return self._process_kb_file()
+        elif self.input_mode == "compiled_md_folder":
+            return self._process_md_folder()
+    
+    def _process_mkdocs_output(self) -> List[Document]:
+        """Process MkDocs build output using manifest"""
+        output_dir = Path(self.config["output_dir"])
+        manifest_path = output_dir / self.config["manifest_file"]
+        manifest = json.load(open(manifest_path))
+        
+        documents = []
+        for file_path in manifest["files"]:
+            doc = self._parse_md_file(output_dir / file_path)
+            documents.append(doc)
+        
+        return documents
+    
+    def _parse_md_file(self, file_path: Path) -> Document:
+        """Parse single markdown file with frontmatter and structure"""
+        # Parse frontmatter + markdown
+        # Extract headings, anchors, code blocks
+        # Return structured Document object
+        pass
+```
 
 **Example output structure:**
 
@@ -182,30 +358,30 @@ Key features:
 }
 ```
 
-#### 2.2 Smart Text Chunker (Based on deepwiki-open strategy)
+### 2.2 Smart Text Chunker
 
 **File:** `core/chunker.py`
 
 Implement semantic chunking with these strategies:
 
-1. **Section-based chunking:** Respect markdown heading boundaries
-2. **Token-aware splitting:** Use LangChain's `RecursiveCharacterTextSplitter` with token counting
-3. **Overlap with context preservation:** 300-token overlap that includes heading context
-4. **Code block preservation:** Never split code blocks across chunks
-5. **Metadata inheritance:** Each chunk inherits parent section metadata
+1. **Section-based chunking**: Respect markdown heading boundaries
+2. **Token-aware splitting**: Use LangChain's `RecursiveCharacterTextSplitter` with token counting
+3. **Overlap with context preservation**: 300-token overlap including heading context
+4. **Code block preservation**: Never split code blocks across chunks
+5. **Metadata inheritance**: Each chunk inherits parent section metadata
 
 **Key decisions:**
 
-- Primary chunk size: 700 tokens (as tested in existing `rag_agent/search-assistant.py`)
-- Overlap: 300 tokens (proven effective)
-- Use `tiktoken` for OpenAI-compatible token counting
+- Chunk size: 700 tokens (proven effective in `rag_agent/search-assistant.py`)
+- Overlap: 300 tokens (maintains context)
+- Token counter: `tiktoken` (OpenAI-compatible)
 
 **Example chunk structure:**
 
 ```python
 {
     "chunk_id": "4966_chunk_002",
-    "content": "...",  # Actual text with ~700 tokens
+    "content": "...",  # ~700 tokens
     "metadata": {
         "kbId": "4966",
         "url": "https://kb.comindware.ru/article.php?id=4966",
@@ -222,40 +398,42 @@ Implement semantic chunking with these strategies:
 }
 ```
 
-#### 2.3 Metadata Enricher
+### 2.3 Metadata Enricher
 
 **File:** `core/metadata_enricher.py`
 
-Enhance chunks with computed metadata for better retrieval and reranking:
+**Important Design Note:** Use lean parsing without LLM for basic metadata extraction. Use an LLM and cmw-platform-agent mechanics if needed to fetch or synthesize more sophisticated metadata to avoid if-then-else hardcode.
+
+Also consider a utility to go through the MkDocs files and enrich them with the RAG metadata. This might save compute and tokens during subsequent RAG indexing runs, as most metadata will already be present in the MkDocs files.
+
+Reference: https://github.com/arterm-sedov/cmw-platform-agent/tree/main/agent_ng
+
+**Enhance chunks with computed metadata for better retrieval and reranking:**
 
 1. **Content-based metadata:**
 
-   - `has_code`: Boolean indicating code presence
-   - `code_languages`: List of programming languages in chunk
-   - `entity_types`: Detected entities (attribute names, template names, etc.)
-   - `complexity_score`: Heuristic based on content (0-1)
+                        - `has_code`: Boolean indicating code presence
+                        - `code_languages`: List of programming languages in chunk
+                        - `entity_types`: Detected entities (attribute names, template names, etc.)
+                        - `complexity_score`: Heuristic based on content (0-1)
 
 2. **Structural metadata:**
 
-   - `section_depth`: Heading level (H1=1, H2=2, etc.)
-   - `position_in_article`: Relative position (intro/body/conclusion)
-   - `related_sections`: Adjacent section anchors
+                        - `section_depth`: Heading level (H1=1, H2=2, etc.)
+                        - `position_in_article`: Relative position (intro/body/conclusion)
+                        - `related_sections`: Adjacent section anchors. Take from the article's footer and hyperlinks in the article where possible, deduplicate.
 
 3. **Search optimization metadata:**
 
-   - `keywords`: Extracted key terms (from tags + content)
-   - `summary`: First 2-3 sentences of chunk
-   - `char_count`: Length for filtering
+                        - `keywords`: Extracted key terms (from tags + content)
+                        - `summary`: LLM-generated summary of the chunk (optional, for better retrieval)
+                        - `char_count`: Length for filtering
 
-### Phase 3: Embedding and Vector Store
+## Phase 3: FRIDA Embeddings & ChromaDB
 
-#### 3.1 Embedding Generator
+### 3.1 FRIDA Embedding Generator
 
 **File:** `retrieval/embedder.py`
-
-Implement multilingual embedding with fallback options:
-
-**Primary model:** `ai-forever/FRIDA` (state-of-the-art Russian embedder)
 
 **Why FRIDA is the best choice:**
 
@@ -268,52 +446,46 @@ Implement multilingual embedding with fallback options:
 
 **FRIDA's Advanced Prefix System:**
 
-1. `search_query:` + `search_document:` - For retrieval tasks (standard)
-2. `paraphrase:` - For finding similar documentation sections (better than generic "classification")
+1. `search_query:` + `search_document:` - For retrieval tasks
+2. `paraphrase:` - For finding similar documentation sections
 3. `categorize_topic:` - Perfect for grouping articles by technical domain (N3, deployment, API, etc.)
 4. `categorize:` - General categorization tasks
 
-**Key features:**
-
-- Task-optimized embeddings via prefix selection
-- Batch processing optimized for CPU/GPU
-- Normalized embeddings by default
-- Memory efficient: ~3-4GB RAM on CPU
-- Full compatibility with ChromaDB and OpenAI-like vector databases
-
-**Implementation with FRIDA's prefix support:**
+**Implementation:**
 
 ```python
 from sentence_transformers import SentenceTransformer
+import torch
 
 class EmbeddingGenerator:
-    def __init__(self, model_name: str = "ai-forever/FRIDA", device: str = "cpu"):
-        """
-        Initialize FRIDA embedder with optional CPU/GPU device selection.
-        FRIDA works efficiently on CPU-only systems (100-200ms per query).
-        """
-        self.model = SentenceTransformer(model_name, device=device)
+    def __init__(self, config: dict):
+        # Auto-detect device
+        device = config.get("device", "auto")
+        if device == "auto":
+            device = "cuda" if torch.cuda.is_available() else "cpu"
+        
+        self.model = SentenceTransformer("ai-forever/FRIDA", device=device)
         self.model.max_seq_length = 512  # FRIDA's max length
         
+        # Auto-detect batch size
+        batch_size = config.get("batch_size", "auto")
+        if batch_size == "auto":
+            self.batch_size = 32 if device == "cuda" else 8
+        else:
+            self.batch_size = batch_size
+    
     def embed_documents(self, texts: List[str]) -> List[List[float]]:
-        """
-        Batch embed documents using search_document prefix.
-        This prefix optimizes embeddings for retrieval tasks.
-        Batch size: 32 for GPU, 8 for CPU.
-        """
+        """Embed documents with search_document prefix"""
         return self.model.encode(
             texts,
             prompt_name="search_document",
-            batch_size=8,  # Adjust based on CPU/GPU
+            batch_size=self.batch_size,
             show_progress_bar=True,
-            normalize_embeddings=True  # Already default in FRIDA
+            normalize_embeddings=True
         )
     
     def embed_query(self, query: str) -> List[float]:
-        """
-        Embed single query using search_query prefix.
-        This prefix optimizes embeddings for query matching.
-        """
+        """Embed query with search_query prefix"""
         return self.model.encode(
             query,
             prompt_name="search_query",
@@ -321,66 +493,41 @@ class EmbeddingGenerator:
         )
     
     def embed_for_categorization(self, texts: List[str]) -> List[List[float]]:
-        """
-        Embed texts for topic categorization using FRIDA's specialized prefix.
-        Use this for grouping articles by technical domain (N3, deployment, API).
-        This helps with metadata enrichment and article clustering.
-        """
+        """Use categorize_topic prefix for article grouping"""
         return self.model.encode(
             texts,
             prompt_name="categorize_topic",
-            batch_size=8,
-            show_progress_bar=True,
+            batch_size=self.batch_size,
             normalize_embeddings=True
         )
     
     def embed_for_paraphrase(self, texts: List[str]) -> List[List[float]]:
-        """
-        Embed texts for finding similar sections using FRIDA's paraphrase prefix.
-        Better than generic similarity for documentation deduplication.
-        Use this to find semantically equivalent but differently worded sections.
-        """
+        """Use paraphrase prefix for finding similar sections"""
         return self.model.encode(
             texts,
             prompt_name="paraphrase",
-            batch_size=8,
-            show_progress_bar=True,
+            batch_size=self.batch_size,
             normalize_embeddings=True
         )
 ```
 
-**CPU Performance Optimization:**
+**CPU Performance:**
 
-```python
-# For CPU-only deployment, use these optimized settings
-EMBEDDING_CONFIG = {
-    "model_name": "ai-forever/FRIDA",
-    "device": "cpu",  # or "cuda" if GPU available
-    "batch_size": 8,   # Optimized for CPU (use 32 for GPU)
-    "max_seq_length": 512,
-    "embedding_dim": 768,
-}
+- Single query: 100-200ms
+- Full indexing (500 docs, ~2000 chunks): 15-20 minutes
+- Acceptable for production use
 
-# Expected performance on CPU:
-# - Single query: 100-200ms
-# - Full indexing (500 docs, ~2000 chunks): 15-20 minutes
-# - This is acceptable for production use
-```
-
-#### 3.2 ChromaDB Vector Store
+### 3.2 ChromaDB Vector Store
 
 **File:** `core/vector_store.py`
 
-Implement ChromaDB operations with rich metadata support:
-
 **Inspiration from:**
 
-- `agent-course-final-assignment/setup_vector_store.py` - Vector store initialization patterns
-- `deepwiki-open` - Collection management and query strategies
+- `agent-course-final-assignment/setup_vector_store.py` - Initialization patterns
+- `deepwiki-open` - Collection management and query strategies (very robust repo)
 
-**Key operations:**
+**Implementation:**
 
-1. **Initialization:**
 ```python
 import chromadb
 from chromadb.config import Settings
@@ -393,52 +540,45 @@ client = chromadb.Client(Settings(
 collection = client.get_or_create_collection(
     name="mkdocs_kb",
     metadata={"description": "Comindware Platform documentation"},
-    embedding_function=None  # We'll provide embeddings directly
+    embedding_function=None  # We provide embeddings directly
 )
-```
 
-2. **Indexing with metadata:**
-```python
+# Index with rich metadata
 collection.add(
-    ids=chunk_ids,           # ["4966_chunk_001", "4966_chunk_002", ...]
-    embeddings=embeddings,    # List[List[float]]
+    ids=chunk_ids,           # ["4966_chunk_001", ...]
+    embeddings=embeddings,    # List[List[float]] from FRIDA
     documents=chunk_texts,    # List[str]
     metadatas=chunk_metadata  # List[Dict] - ALL our rich metadata
 )
-```
 
-3. **Querying with metadata filters:**
-```python
+# Query with metadata filtering
 results = collection.query(
     query_embeddings=[query_embedding],
     n_results=20,
-    where={"language": "ru"},  # Metadata filtering
+    where={"language": "ru"},  # Optional filtering
     include=["documents", "metadatas", "distances"]
 )
 ```
 
-
 **Advanced features:**
 
-- Incremental updates (add new documents without rebuilding)
+- Incremental updates (add without rebuilding)
 - Metadata filtering during search
 - Distance threshold filtering
 - Deduplication by kbId
 
-### Phase 4: Retrieval and Reranking
+## Phase 4: Retrieval & Cross-Encoder Reranking
 
-#### 4.1 Vector Retriever
+### 4.1 Vector Retriever
 
 **File:** `retrieval/retriever.py`
 
-Implement retrieval with metadata-aware post-processing:
-
 **Query pipeline:**
 
-1. Embed user query
-2. Search ChromaDB (top-k=20)
+1. Embed query with FRIDA (`search_query` prefix)
+2. Search ChromaDB (top-20)
 3. Group chunks by article (kbId)
-4. Retrieve full articles for top matches
+4. Reconstruct full articles
 5. Prepare context for reranking
 
 **Article reconstruction:**
@@ -466,11 +606,9 @@ def reconstruct_articles(chunks: List[Dict]) -> List[Dict]:
     return list(articles.values())
 ```
 
-#### 4.2 Cross-Encoder Reranker
+### 4.2 Cross-Encoder Reranker
 
 **File:** `retrieval/reranker.py`
-
-Implement cross-encoder reranking for improved relevance:
 
 **What is Cross-Encoder Reranking?**
 
@@ -482,34 +620,22 @@ Unlike bi-encoders (which encode query and documents separately), cross-encoders
 Query + Document → Cross-Encoder → Relevance Score (0-1)
 ```
 
-**Why it's better than vector similarity alone:**
+**Why it's better:**
 
 - Captures semantic relationships between query and document
 - Understands negation, nuance, and context
 - Produces calibrated relevance scores
 - Significantly improves top-k accuracy
 
-**Implementation approach:**
-
-1. **Initial retrieval:** Vector search returns top-20 candidates (fast but approximate)
-2. **Reranking:** Cross-encoder scores each query-document pair (slow but accurate)
-3. **Final selection:** Return top-5 reranked results to LLM
-
-**Model selection:**
+**Implementation:**
 
 ```python
 from sentence_transformers import CrossEncoder
+import numpy as np
 
-# Option 1: Multilingual cross-encoder (recommended)
+# Use multilingual cross-encoder
 reranker = CrossEncoder('cross-encoder/mmarco-mMiniLMv2-L12-H384-v1')
 
-# Option 2: English-optimized (faster)
-# reranker = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-12-v2')
-```
-
-**Reranking with metadata boost:**
-
-```python
 def rerank_with_metadata(
     query: str,
     articles: List[Dict],
@@ -521,7 +647,6 @@ def rerank_with_metadata(
     # Prepare query-document pairs
     pairs = []
     for article in articles:
-        # Concatenate best chunks for reranking
         article_text = " ".join([c["content"] for c in article["chunks"][:3]])
         pairs.append([query, article_text])
     
@@ -531,65 +656,52 @@ def rerank_with_metadata(
     # Apply metadata boosting
     for i, article in enumerate(articles):
         base_score = scores[i]
-        
-        # Boost based on metadata
         boost = 1.0
         
-        # 1. Title/tag match boost
+        # Title/tag match boost
         if query_matches_tags(query, article["metadata"]["tags"]):
             boost *= 1.2
         
-        # 2. Code presence boost (if query mentions code/N3/скрипт)
+        # Code presence boost
         if query_is_about_code(query) and article["metadata"].get("has_code"):
             boost *= 1.15
         
-        # 3. Section relevance boost
+        # Section relevance boost
         if article["metadata"]["section_heading"]:
             if query_matches_heading(query, article["metadata"]["section_heading"]):
                 boost *= 1.1
         
         scores[i] = base_score * boost
     
-    # Sort and return top-k
+    # Return top-k
     ranked_indices = np.argsort(scores)[::-1][:top_k]
     return [articles[i] for i in ranked_indices]
 ```
 
-### Phase 5: LLM Integration
+## Phase 5: Multi-LLM Integration
 
-#### 5.1 Multi-LLM Manager Integration
+### 5.1 LLM Manager
 
 **Files to copy from `cmw-platform-agent/agent_ng/`:**
 
 - `llm_manager.py` (complete)
 - `provider_adapters.py` (complete)
 - `langsmith_config.py` (complete)
-- `utils.py` (only the functions used by llm_manager)
+- `langfuse_config.py` (complete)
+- `utils.py` (functions used by llm_manager)
 
-**Integration approach:**
+**Configure in `.env`:**
 
-1. Copy the LLM manager as a module under `rag_engine/llm/`
-2. Update import paths to work in the new project structure
-3. Configure supported providers in `.env`:
 ```env
-# Multi-LLM Configuration
-GOOGLE_API_KEY=your_gemini_key
-GROQ_API_KEY=your_groq_key
-OPENROUTER_API_KEY=your_openrouter_key
-MISTRAL_API_KEY=your_mistral_key
-
-# Default LLM selection
+GOOGLE_API_KEY=...
+GROQ_API_KEY=...
+OPENROUTER_API_KEY=...
+MISTRAL_API_KEY=...
 DEFAULT_LLM_PROVIDER=gemini
 DEFAULT_MODEL=gemini-1.5-flash
-
-# LangSmith observability (optional)
-LANGSMITH_TRACING=false
-LANGSMITH_API_KEY=your_langsmith_key
-LANGSMITH_PROJECT=mkdocs-rag
 ```
 
-
-**Usage in RAG pipeline:**
+**Usage:**
 
 ```python
 from llm.llm_manager import LLMManager
@@ -602,9 +714,9 @@ for chunk in llm.stream(messages):
     yield chunk.content
 ```
 
-#### 5.2 Prompt Engineering for RAG
+### 5.2 Prompt Engineering
 
-**System prompt template:**
+**System prompt:**
 
 ```python
 SYSTEM_PROMPT = """You are a technical documentation assistant for Comindware Platform.
@@ -625,52 +737,26 @@ Instructions:
 - Format code blocks with proper syntax highlighting
 - Be concise but comprehensive
 """
-
-USER_PROMPT = """Question: {question}
-
-Based on the documentation context above, provide a detailed answer with citations."""
 ```
 
 **Response formatting:**
 
 ```python
-def format_response_with_citations(
-    answer: str,
-    articles: List[Dict]
-) -> str:
-    """Format response with proper citations"""
-    
+def format_response_with_citations(answer: str, articles: List[Dict]) -> str:
     citations = "\n\n## Sources:\n\n"
     for i, article in enumerate(articles, 1):
         citations += f"{i}. [{article['title']}]({article['url']})\n"
-        
-        # Add specific sections if available
         for chunk in article["chunks"]:
             section = chunk["metadata"].get("section_heading")
             anchor = chunk["metadata"].get("section_anchor")
             if section and anchor:
                 citations += f"   - Section: [{section}]({article['url']}{anchor})\n"
-    
     return answer + citations
 ```
 
-### Phase 6: Web Interface
-
-#### 6.1 Gradio Interface (Simple deployment)
+## Phase 6: Gradio Web Interface
 
 **File:** `api/app.py`
-
-Create a Gradio web interface with streaming support:
-
-**Features:**
-
-- Real-time streaming responses
-- Source citations display
-- Query history
-- Configuration options (embedding model, LLM provider, top-k)
-- Example queries
-
-**Implementation:**
 
 ```python
 import gradio as gr
@@ -681,8 +767,6 @@ def query_rag_system(
     top_k: int = 5,
     progress=gr.Progress()
 ):
-    """Query the RAG system with streaming response"""
-    
     progress(0, desc="Embedding query...")
     query_embedding = embedder.embed_query(question)
     
@@ -706,7 +790,6 @@ def query_rag_system(
     final_response = format_response_with_citations(answer, reranked_articles)
     yield final_response
 
-# Create Gradio interface
 demo = gr.Interface(
     fn=query_rag_system,
     inputs=[
@@ -728,124 +811,95 @@ demo = gr.Interface(
 demo.queue().launch(server_name="0.0.0.0", server_port=7860, share=False)
 ```
 
-#### 6.2 Alternative: FastAPI + React (Production-ready)
+## Phase 7: Build Scripts
 
-For more advanced deployment, create a FastAPI backend with REST endpoints:
+### 7.1 Complete Build Script
 
-**Endpoints:**
+**File:** `scripts/build_mkdocs_for_rag.sh`
 
-- `POST /api/query` - Submit question, get streaming response
-- `POST /api/index` - Trigger reindexing
-- `GET /api/health` - Health check
-- `GET /api/stats` - Index statistics
+```bash
+#!/bin/bash
+# Complete RAG indexing from MkDocs sources
 
-### Phase 7: Build and Deployment Scripts
+echo "📚 Building RAG index from MkDocs sources..."
 
-#### 7.1 Index Building Script
+# Step 1: Build MkDocs with RAG hook
+echo "1️⃣  Building MkDocs (resolving Jinja2)..."
+mkdocs build -f mkdocs_for_rag_indexing.yml
+
+# Step 2: Index compiled markdown
+echo "2️⃣  Indexing compiled markdown..."
+python scripts/build_index.py \
+  --source compiled_md_for_rag/ \
+  --mode mkdocs_pipeline
+
+echo "✅ RAG indexing complete!"
+```
+
+### 7.2 Index Builder
 
 **File:** `scripts/build_index.py`
-
-Command-line tool for building/updating the vector index:
 
 ```python
 import argparse
 
-def build_index(
-    source_path: str,
-    collection_name: str = "mkdocs_kb",
-    rebuild: bool = False
-):
-    """Build or update the vector index"""
+def build_index(source: str, mode: str, rebuild: bool = False):
+    """
+    Build vector index from source.
     
-    print(f"📚 Processing documents from: {source_path}")
+    Modes:
+  - mkdocs_pipeline: Read from compiled_md_for_rag/
+  - compiled_kb_file: Read single KB file
+  - compiled_md_folder: Read folder of MD files
+    """
+    processor = DocumentProcessor(mode, config)
+    documents = processor.process_all()
     
-    # 1. Scan documents
-    documents = document_processor.scan_directory(source_path)
-    print(f"   Found {len(documents)} documents")
+    chunker = Chunker(config)
+    chunks = chunker.create_chunks(documents)
     
-    # 2. Parse and chunk
-    all_chunks = []
-    for doc in documents:
-        parsed_doc = document_processor.parse_document(doc)
-        chunks = chunker.create_chunks(parsed_doc)
-        enriched_chunks = metadata_enricher.enrich(chunks)
-        all_chunks.extend(enriched_chunks)
+    enricher = MetadataEnricher(config)
+    enriched = enricher.enrich(chunks)
     
-    print(f"   Created {len(all_chunks)} chunks")
+    embedder = EmbeddingGenerator(config)
+    embeddings = embedder.embed_documents([c["content"] for c in enriched])
     
-    # 3. Generate embeddings
-    print("   Generating embeddings...")
-    embeddings = embedder.embed_documents([c["content"] for c in all_chunks])
-    
-    # 4. Store in ChromaDB
-    print("   Storing in ChromaDB...")
-    vector_store.add_documents(all_chunks, embeddings, rebuild=rebuild)
-    
-    print("✅ Index built successfully!")
+    vector_store = VectorStore(config)
+    vector_store.add_documents(enriched, embeddings, rebuild=rebuild)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--source", required=True, help="Source directory or file")
-    parser.add_argument("--rebuild", action="store_true", help="Rebuild index from scratch")
+    parser.add_argument("--source", required=True)
+    parser.add_argument("--mode", choices=["mkdocs_pipeline", "compiled_kb_file", "compiled_md_folder"])
+    parser.add_argument("--rebuild", action="store_true")
     args = parser.parse_args()
     
-    build_index(args.source, rebuild=args.rebuild)
+    build_index(args.source, args.mode, args.rebuild)
 ```
 
 **Usage examples:**
 
 ```bash
-# Index full docs/ru/ directory
-python scripts/build_index.py --source docs/ru/
+# Option 1: MkDocs pipeline (recommended)
+./scripts/build_mkdocs_for_rag.sh
 
-# Index specific phpkb content
-python scripts/build_index.py --source "phpkb_content/798. Версия 5.0. Текущая рекомендованная/"
+# Option 2: Pre-compiled KB file
+python scripts/build_index.py \
+  --source kb.comindware.ru.platform_v5_for_llm_ingestion.md \
+  --mode compiled_kb_file
 
-# Index pre-compiled KB file
-python scripts/build_index.py --source kb.comindware.ru.platform_v5_for_llm_ingestion.md
+# Option 3: Compiled MD folder
+python scripts/build_index.py \
+  --source "phpkb_content/798. Версия 5.0. Текущая рекомендованная/" \
+  --mode compiled_md_folder
 
-# Rebuild index from scratch
-python scripts/build_index.py --source docs/ru/ --rebuild
+# Rebuild from scratch
+python scripts/build_index.py --source docs/ru/ --mode mkdocs_pipeline --rebuild
 ```
 
-#### 7.2 Testing Script
+## Phase 8: Deployment
 
-**File:** `scripts/test_queries.py`
-
-Test the RAG system with predefined queries:
-
-```python
-TEST_QUERIES = [
-    "Как создать вычисляемый атрибут с помощью N3?",
-    "What are the system requirements for Comindware Platform?",
-    "Как настроить подключение к электронной почте?",
-    "How do if-else statements work in N3 expressions?"
-]
-
-def test_rag_system():
-    for query in TEST_QUERIES:
-        print(f"\n{'='*60}")
-        print(f"Query: {query}")
-        print('='*60)
-        
-        response = rag_system.query(query)
-        print(response)
-```
-
-### Phase 8: Documentation and Deployment
-
-#### 8.1 README Documentation
-
-Create comprehensive README.md with:
-
-- Architecture overview
-- Installation instructions
-- Configuration guide
-- Usage examples
-- API documentation (if using FastAPI)
-- Troubleshooting
-
-#### 8.2 Requirements File
+### 8.1 Requirements
 
 **File:** `requirements.txt`
 
@@ -872,12 +926,6 @@ pandas>=2.0.0
 
 # Web interface
 gradio>=4.0.0
-# OR for FastAPI:
-# fastapi>=0.104.0
-# uvicorn>=0.24.0
-
-# Reranking
-# Note: Uses same sentence-transformers library
 
 # Utilities
 python-dotenv>=1.0.0
@@ -891,16 +939,14 @@ langsmith>=0.0.70
 langfuse>=2.0.0
 ```
 
-#### 8.3 Environment Configuration
+### 8.2 Environment Configuration
 
 **File:** `.env.example`
 
 ```env
 # === Embedding Configuration ===
-EMBEDDING_MODEL=ai-forever/ru-en-RoSBERTa
-# Alternatives: 
-# - sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
-# - intfloat/multilingual-e5-large
+EMBEDDING_MODEL=ai-forever/FRIDA
+# Best-in-class Russian embedder with advanced prefix system
 
 # === LLM Provider Keys ===
 GOOGLE_API_KEY=your_gemini_api_key_here
@@ -938,32 +984,30 @@ GRADIO_SERVER_PORT=7860
 GRADIO_SHARE=false
 ```
 
-#### 8.4 Deployment Configuration
+### 8.3 Docker Deployment
 
-For self-hosted deployment under your existing domain:
+**File:** `Dockerfile`
 
-1. **Docker deployment:**
 ```dockerfile
 FROM python:3.11-slim
 
 WORKDIR /app
 
 COPY requirements.txt .
-RUN pip install --no-ca
-che-dir -r requirements.txt
-
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# Download embedding models
-RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('ai-forever/ru-en-RoSBERTa')"
+# Download FRIDA embedding model
+RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('ai-forever/FRIDA')"
 
 EXPOSE 7860
 
 CMD ["python", "api/app.py"]
 ```
 
-2. **Nginx reverse proxy configuration:**
+**Nginx reverse proxy:**
+
 ```nginx
 location /rag/ {
     proxy_pass http://localhost:7860/;
@@ -975,18 +1019,21 @@ location /rag/ {
 }
 ```
 
+## Key Technical Decisions
 
-## Key Technical Decisions Summary
+### Embedding Model: ai-forever/FRIDA
 
-### Embedding Model: ai-forever/ru-en-RoSBERTa
+**Rationale:** State-of-the-art Russian embedder (62.18 ruMTEB score vs 58.42 for RoSBERTa), advanced 4-prefix system (search_query, search_document, categorize_topic, paraphrase), 0.8B parameters for richer semantics, OpenAI-compatible 768-dim vectors, CPU-friendly (100-200ms per query)
 
-**Rationale:** Optimized for Russian-English bilingual content, good balance of quality and performance, OpenAI-compatible vector dimensions
+### Input Strategy: 3 Modes with MkDocs Integration
+
+**Rationale:** MkDocs files contain Jinja2 syntax that must be resolved before indexing. Custom hook exports compiled markdown. Alternative modes (compiled KB file, compiled MD folder) provide flexibility.
 
 ### Vector Database: ChromaDB
 
 **Rationale:** Purpose-built for RAG, excellent metadata support, easy self-hosting, persistent storage, no external dependencies
 
-### Chunking Strategy: 700 tokens / 300 overlap
+### Chunking: 700 tokens / 300 overlap
 
 **Rationale:** Proven effective in existing `rag_agent/search-assistant.py`, balances context size with retrieval precision
 
@@ -1004,7 +1051,7 @@ location /rag/ {
 
 ## Success Metrics
 
-- **Indexing speed:** < 5 minutes for full docs/ru/ (~500 documents)
+- **Indexing speed:** < 20 min for full docs/ru/ (~500 documents) on CPU
 - **Query latency:** < 3 seconds end-to-end (including LLM generation)
 - **Retrieval accuracy:** Top-5 results include correct answer > 90% of time
 - **Citation accuracy:** All citations link to correct articles and sections
@@ -1019,19 +1066,20 @@ location /rag/ {
 
 ### To-dos
 
-- [ ] Create project structure under rag_engine/ with all subdirectories and copy LLM manager from cmw-platform-agent
-- [ ] Implement configuration management system with settings.py and .env support
-- [ ] Implement document processor with frontmatter parsing, markdown structure extraction, and anchor preservation
-- [ ] Implement semantic text chunker with section-based splitting, token counting, and overlap management
-- [ ] Implement metadata enricher to add computed metadata (has_code, keywords, complexity_score, etc.)
-- [ ] Implement embedding generator using ai-forever/ru-en-RoSBERTa with batch processing and GPU support
-- [ ] Implement ChromaDB vector store operations with rich metadata support and persistence
-- [ ] Implement vector retriever with metadata filtering and article reconstruction
-- [ ] Implement cross-encoder reranker with metadata boosting for improved relevance
-- [ ] Integrate multi-LLM manager from cmw-platform-agent and implement RAG-specific prompts
-- [ ] Implement response formatting with citations, source links, and section anchors
-- [ ] Create build_index.py script for indexing documents from various sources
-- [ ] Implement Gradio web interface with streaming responses, source display, and configuration options
-- [ ] Create test_queries.py script with predefined test cases
-- [ ] Write comprehensive README with architecture overview, installation guide, and usage examples
-- [ ] Create Docker configuration and nginx reverse proxy setup for production deployment
+- [ ] Create mkdocs_for_rag_indexing.yml config inheriting from complete guide config
+- [ ] Create rag_indexing_hook.py to export Jinja2-compiled markdown (similar to kb_html_cleanup_hook.py)
+- [ ] Create rag_engine/ project structure and copy LLM manager from cmw-platform-agent
+- [ ] Implement config/settings.py with 3 input modes (mkdocs_pipeline, compiled_kb_file, compiled_md_folder)
+- [ ] Implement document processor supporting 3 input modes with frontmatter parsing and markdown extraction
+- [ ] Implement semantic chunker (700 tokens, 300 overlap) with section-based splitting and code preservation
+- [ ] Implement metadata enricher for content-based, structural, and search optimization metadata
+- [ ] Implement FRIDA embedding generator with prefix support (search_query, search_document, categorize_topic, paraphrase)
+- [ ] Implement ChromaDB vector store with rich metadata support and persistence
+- [ ] Implement vector retriever with article reconstruction and metadata filtering
+- [ ] Implement cross-encoder reranker with metadata boosting (mmarco-mMiniLMv2)
+- [ ] Integrate multi-LLM manager from cmw-platform-agent with streaming support
+- [ ] Implement response formatter with citations (URLs + section anchors)
+- [ ] Create build_mkdocs_for_rag.sh and build_index.py for all 3 input modes
+- [ ] Implement Gradio interface with streaming, source display, and LLM selection
+- [ ] Create test_queries.py with Russian/English test cases
+- [ ] Write comprehensive README with all 3 input modes, usage examples, and deployment guide
