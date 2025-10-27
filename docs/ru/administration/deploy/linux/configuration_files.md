@@ -2,24 +2,53 @@
 title: Конфигурация экземпляра, компонентов ПО и служб. Настройка
 kbId: 5067
 tags:
-  - Linux
-  - администрирование
-  - компоненты
-  - конфигурация
-  - настройка
-  - развёртывание
-  - службы
-  - установка
-  - экземпляр
-  - файлы конфигурации
+    - Linux
+    - администрирование
+    - компоненты
+    - конфигурация
+    - настройка
+    - развёртывание
+    - службы
+    - системные службы
+    - установка
+    - файлы конфигурации
+    - экземпляр
 hide: tags
 ---
 
 # Конфигурация экземпляра, компонентов ПО и служб. Настройка {: #configuration_files_linux }
 
-## Введение
+## Введение {: #configuration_files_linux_intro }
 
 Здесь представлены инструкции по настройке файлов конфигурации после развёртывания и обновления ПО **{{ productName }}**, его компонентов и служб.
+
+## Управление системными службами {: #configuration_files_linux_system_services }
+
+В **{{ productName }} {{ productVersion }}** системные службы настраиваются с помощью [файла конфигурации экземпляра ПО](#configuration_files_linux_instance).
+
+!!! warning "Важно!"
+
+    - Для применения изменений параметров системных служб необходимо перезапустить экземпляр ПО.
+    - По умолчанию все системные службы включены.
+
+!!! note "Обновление конфигурации системных служб с версии 4.7"
+
+    Инструкции по обновлению конфигурации с версий 4.7.x на версию {{ productVersion }} см. в статье _«[Обновление версии экземпляра ПО с его остановкой][upgrade_version_linux]»_.
+
+Ниже перечислены системные службы и соответствующие параметры конфигурации. См. _[Пример файла конфигурации экземпляра ПО](#configuration_files_linux_instance_example)_.
+
+| Системная служба | Назначение | Параметр, значение по умолчанию {: width=320px}|
+| ------------------ | ------------ | ---------------------- |
+| **Резервное копирование** | Управление созданием резервных копий экземпляра ПО | `backup.enabled`<br>`backup.sessionsEnabled: true`<br>`backup.schedulesEnabled: true` |
+| **Получение эл. почты** | Получение новых электронных писем | `email.listenerEnabled: true` |
+| **Отправка эл. почты** | Отправка электронных писем | `email.senderEnabled: true` |
+| **Полнотекстовый поиск** | Индексирование значений атрибутов и обновление поисковых индексов | `search.enabled: true`<br>`search.rebuildingEnabled: true`<br>`search.indexingEnabled: true` |
+| **Уведомления** | Формирование и отправка системных уведомлений | `notifications.enabled: true`<br>`notifications.onUserTaskEnabled: true`<br>`notifications.pushEnabled: true`<br>`notifications.onMaintenanceEnabled: true` |
+| **Бизнес-процессы** | Выполнение бизнес-процессов; обработка таймеров (включая запуск по расписанию и таймерам резервного копирования, интеграция, процессов, синхронизации с сервером каталогов) | `bpms.enabled: true`<br>`bpms.timersEnabled: true` |
+| **Синхронизация с OData** | Синхронизация данных с внешними системами по протоколу OData | `sync.oData.enabled: true`<br>`sync.oData.sessionsEnabled`<br>`sync.oData.schedulesEnabled: true` |
+| **Синхронизация с LDAP** | Синхронизация пользователей и групп с LDAP-сервером | `sync.ldap.enabled: true`<br>`sync.ldap.sessionsEnabled: true`<br>`sync.ldap.schedulesEnabled: true` |
+| **Монитор производительности** | Сбор показателей производительности системы | `sensors.enabled: true` |
+| **Трассировка производительности** | Сбор данных трассировки для анализа производительности | `tracing.enabled: true` |
 
 ## Конфигурация экземпляра ПО {{ productName }} {: #configuration_files_linux_instance }
 
@@ -31,7 +60,7 @@ hide: tags
 
 2. При необходимости измените параметры, например:
 
-    - `journal.server` — адрес сервера {{ openSearchVariants }} (**обязательно**).
+    - `journal.server` — адрес сервера {{ openSearchVariants }}.
     - `journal.name` — префикс индекса сервера {{ openSearchVariants }} (необязательно, по умолчанию назначается префикс `cmw<instanceName>`).
     - `journal.username` — имя пользователя сервера {{ openSearchVariants }} (необязательно).
     - `journal.password` — пароль сервера {{ openSearchVariants }} (необязательно).
@@ -62,11 +91,10 @@ hide: tags
     systemctl restart comindware<instanceName>
     ```
 
-### Пример YML-файла конфигурации экземпляра ПО {: .pageBreakBefore }
+### Пример YML-файла конфигурации экземпляра ПО {: #configuration_files_linux_instance_example .pageBreakBefore }
 
 <!--instanceYML-start-->
 ``` yaml
-
 ##### Настройка базовых параметров {{ productName }} #####
 # Имя экземпляра {{ productName }}.
 # Устаревшая директива: instanceName
@@ -86,6 +114,8 @@ journal.server: http://<searchHostIP>:<searchHostPort>
 # journal.password: xxxx
 # Выключение службы журналирования.
 #journal.enabled: false
+# Выключение проверки валидации сертификатов
+#journal.certificateSkipValidation: false
 # URI-адрес экземпляра {{ productName }}.
 fqdn: <hostName>
 # Порт экземпляра {{ productName }}.
@@ -123,11 +153,9 @@ db.name: <instanceName>
 #db.upgradeName:
 # Путь к онтологии {{ companyName }}
 #db.n3Dir:
-
 {% if pdfOutput %}
 ```
 {% include-markdown ".snippets/pdfPageBreakHard.md" %}
-
 ``` yaml title="Пример YML-файла конфигурации экземпляра ПО — продолжение"
 {% endif %}
 ##### Настройка хранения загруженных файлов #####
@@ -180,11 +208,9 @@ mq.node: <instanceName>
 #mq.sasl.password:
 # Тип механизма SASL (None | Plain | ScramSha256 | ScramSha512).
 #mq.sasl.mechanism:
-
 {% if pdfOutput %}
 ```
 {% include-markdown ".snippets/pdfPageBreakHard.md" %}
-
 ``` yaml title="Пример YML-файла конфигурации экземпляра ПО — продолжение"
 {% endif %}
 ##### Настройка очереди сообщений для коммуникации с адаптерами #####
@@ -232,10 +258,14 @@ mq.node: <instanceName>
 # используемые в процессе аутентификации и авторизации в OpenID Connect.
 #auth.openId.audience:
 
+##### Настройки аутентификации #####
+# Минимальная длина пароля пользователя
+#auth.minimalPasswordLength: 14
+# Время истечения сессии пользователя в формате дд.чч:мм:сс  
+#auth.sessionExpirationTime: 00.12:00:00
 {% if pdfOutput %}
 ```
 {% include-markdown ".snippets/pdfPageBreakHard.md" %}
-
 ``` yaml title="Пример YML-файла конфигурации экземпляра ПО — продолжение"
 {% endif %}
 ##### Настройка резервного копирования #####
@@ -289,11 +319,9 @@ backup.defaultFileName: <instanceName>
 #backup.default.<backupName>.withScripts: true
 # Управление составом резервной копии — файлы истории ({{ openSearchVariants }}).
 #backup.default.<backupName>.withJournal: true
-
 {% if pdfOutput %}
 ```
 {% include-markdown ".snippets/pdfPageBreakHard.md" %}
-
 ``` yaml title="Пример YML-файла конфигурации экземпляра ПО — продолжение"
 {% endif %}
 ##### Настройка дополнительного хранилища для конфигурации резервного копирования по умолчанию #####
@@ -351,11 +379,9 @@ backup.defaultFileName: <instanceName>
 #sync.ldap.sessionsEnabled: true
 # Выключение запуска сеансов синхронизации по расписанию.
 #sync.ldap.schedulesEnabled: true
-
 {% if pdfOutput %}
 ```
 {% include-markdown ".snippets/pdfPageBreakHard.md" %}
-
 ``` yaml title="Пример YML-файла конфигурации экземпляра ПО — продолжение"
 {% endif %}
 ##### Настройка синхронизации данных с OData-сервисом #####
@@ -415,10 +441,14 @@ backup.defaultFileName: <instanceName>
 # Задайте варианты, которые будут отображаться
 # в меню выбора количества строк таблицы.
 #queryPageResultRange: [ 50, 500, 5000, 1000000000 ]
+
+#################### Настройка аккаунтов ####################
+# Вкл./выкл. для всех пользователей возможность добавления замещений для собственного аккаунта 
+#account.selfSubstitutionsEnabled: true
 ```
 <!--instanceYML-end-->
 
-## Конфигурация службы apigateway {: .pageBreakBefore }
+## Конфигурация службы apigateway {: #configuration_files_linux_apigateway .pageBreakBefore }
 
 1. Откройте файл конфигурации `apigateway.yml` экземпляра ПО для редактирования:
 
@@ -435,7 +465,7 @@ backup.defaultFileName: <instanceName>
     systemctl restart apigateway<instanceName>
     ```
 
-### Пример конфигурации службы apigateway.yml {: .pageBreakBefore }
+### Пример конфигурации службы apigateway.yml {: #configuration_files_linux_apigateway_example .pageBreakBefore }
 
 <!--apigatewayYML-start-->
 ``` yaml
@@ -481,7 +511,7 @@ services:
 ```
 <!--apigatewayYML-end-->
 
-## Конфигурация службы adapterhost {: .pageBreakBefore }
+## Конфигурация службы adapterhost {: #configuration_files_linux_adapterhost .pageBreakBefore }
 
 1. Откройте файл конфигурации `adapterhost.yml` экземпляра ПО для редактирования:
 
@@ -498,7 +528,7 @@ services:
     systemctl restart adapterhost<instanceName>
     ```
 
-### Пример файла конфигурации adapterhost.yml
+### Пример файла конфигурации adapterhost.yml {: #configuration_files_linux_adapterhost_example }
 
 <!--adapterhostYML-start-->
 ``` yaml
@@ -525,7 +555,7 @@ log.archiveFolder: /var/log/comindware/<instanceName>/Logs/Archive/
 ```
 <!--adapterhostYML-end-->
 
-## Конфигурация {{ apacheIgniteVariants }} {: .pageBreakBefore }
+## Конфигурация {{ apacheIgniteVariants }} {: #configuration_files_linux_ignite .pageBreakBefore }
 
 1. Откройте файл конфигурации {{ apacheIgniteVariants }} для редактирования:
 
@@ -561,7 +591,7 @@ log.archiveFolder: /var/log/comindware/<instanceName>/Logs/Archive/
     systemctl restart comindware<instanceName>
     ```
 
-## Конфигурация кучи Java {: .pageBreakBefore }
+## Конфигурация кучи Java {: #configuration_files_linux_jvm .pageBreakBefore }
 
 В зависимости от объёма оперативной памяти на сервере следует отредактировать конфигурацию области памяти для кучи Java.
 
@@ -590,7 +620,7 @@ log.archiveFolder: /var/log/comindware/<instanceName>/Logs/Archive/
     systemctl restart comindware<instanceName>
     ```
 
-## Конфигурация {{ nginxVariants }} {: .pageBreakBefore }
+## Конфигурация {{ nginxVariants }} {: #configuration_files_linux_nginx .pageBreakBefore }
 
 1. Откройте файл конфигурации {{ nginxVariants }} для редактирования:
 
