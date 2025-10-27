@@ -70,8 +70,12 @@ tempStorage.localDisk.path: /var/lib/comindware/<instanceName>/Temp
 # Временная папка
 tempWorkingDir: /var/lib/comindware/fooo/LocalTemp
 #################### Настройки очереди сообщений ####################
-# Адрес и порт сервера очереди сообщений {{ apacheKafkaVariants }}
+# Адрес и порт брокера сообщений {{ apacheKafkaVariants }}
 mq.server: <kafkaBrokerIP>:<kafkaBrokerPort>
+# Префикс имени очередей сообщений
+mq.name: <instanceName>
+# Идентификатор узла очереди сообщений
+mq.node: <instanceName>
 # Идентификатор группы очереди сообщений
 mq.group: <instanceName>
 #################### Конфигурация резервного копирования ####################

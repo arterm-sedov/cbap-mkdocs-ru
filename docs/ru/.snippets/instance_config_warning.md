@@ -2,7 +2,7 @@
 
     Директивы `isFederationAuthEnabled` и `manageAdapterHost` требуется удалить, если они присутствуют.
     
-    Значения параметров `mq.server` (адрес и порт сервера очереди сообщений), `mq.group` (идентификатор группы очереди сообщений), `mq.node` (идентификатор узла очереди сообщений,) и `cluster.name` / `clusterName` (имя экземпляра ПО) должны совпадать в трёх файлах конфигурации:
+    Значения параметров `mq.server` (адрес и порт брокера сообщений), `mq.group` (идентификатор группы очереди сообщений), `mq.node` (идентификатор узла очереди сообщений,) и `cluster.name` / `clusterName` (имя экземпляра ПО) должны совпадать в трёх файлах конфигурации:
 
     - `/usr/share/comindware/configs/instance/<instanceName>.yml`
     - `/var/www/<instanceName>/adapterhost.yml`
@@ -19,14 +19,12 @@
     # Имя экземпляра ПО
     clusterName: <instanceName>
     ##### Настройка очереди сообщений #####
-    # Адрес и порт сервера очереди сообщений {{ apacheKafkaVariants }}.
+    # Адрес и порт брокера сообщений {{ apacheKafkaVariants }}.
     mq.server: <kafkaBrokerIP>:<kafkaBrokerPort>
     # Идентификатор группы очереди сообщений.
     mq.group: <instanceName>
-    # Префикс имени очередей сообщений.во
+    # Префикс имени очередей сообщений.
     mq.name: <instanceName>
     # Идентификатор узла очереди сообщений.
-    # Должен быть разным на разных узлах.
-    # Не должен совпадать с mq.group.
-    mq.node: <instanceName>_Exclusive
+    mq.node: <instanceName>
     ```
