@@ -5,6 +5,20 @@
 
 Build a production-ready RAG (Retrieval-Augmented Generation) engine for the MkDocs documentation repository that handles Jinja2-rich source files through MkDocs build pipeline integration. Uses FRIDA (best Russian embedder), ChromaDB vector store, cross-encoder reranking, and multi-LLM support with streaming responses.
 
+## Reference repos & docs
+
+https://github.com/arterm-sedov/cmw-platform-agent
+
+https://github.com/arterm-sedov/agent-course-final-assignment
+
+https://github.com/AsyncFuncAI/deepwiki-open
+
+https://habr.com/ru/articles/955798/
+
+https://github.com/CodeCutTech/Data-science/blob/master/machine_learning/open_source_rag_pipeline_intelligent_qa_system.ipynb
+
+https://huggingface.co/ai-forever/FRIDA
+
 ## Architecture
 
 ```
