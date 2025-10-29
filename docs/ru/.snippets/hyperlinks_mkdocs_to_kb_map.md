@@ -951,6 +951,8 @@
 
 [availability_fault_tolerance]: {{ kbArticleURLPrefix }}5079
 
+[backup_linux_script]: {{ kbArticleURLPrefix }}5140
+
 [backup_restore_cdbbz]: {{ kbArticleURLPrefix }}4647
 
 [backup_restore_cdbbz_license_keys]: {{ kbArticleURLPrefix }}4647#backup_restore_cdbbz_license_keys
