@@ -1,0 +1,239 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5140" kb-tags="Apache Ignite,cron,Linux,OpenSearch,администрирование,журналы,крон,бэкапы,бекапы,резервное копирование,скрипты" kb-title="Резервное копирование с помощью скриптов (Linux)">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#backup_linux_script_intro">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#backup_linux_script_prerequisites">
+<span class="md-ellipsis">
+      Подготовка
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#backup_linux_script_ignite">
+<span class="md-ellipsis">
+      Настройка Apache Ignite
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#backup_linux_script_api">
+<span class="md-ellipsis">
+      Настройка доступа к API Comindware Platform
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-переменных-в-скрипте-cmw_backups_createsh">
+<span class="md-ellipsis">
+      Настройка переменных в скрипте cmw_backups_create.sh
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#backup_linux_script_run">
+<span class="md-ellipsis">
+      Ключи скрипта cmw_backups_create.sh
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#backup_linux_script_verify">
+<span class="md-ellipsis">
+      Проверка выполнения скрипта cmw_backups_create.sh
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#backup_linux_script_cron">
+<span class="md-ellipsis">
+      Запуск скрипта с помощью планировщика (cron)
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#backup_linux_script_logs">
+<span class="md-ellipsis">
+      Журналы и очистка
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#backup_linux_script_limits">
+<span class="md-ellipsis">
+      Ограничения и примечания
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>Представленные здесь скрипты и инструкции следует использовать <strong>только с одним узлом</strong>.</p>
+</div>
+<h2 id="backup_linux_script_intro">Введение</h2>
+<p>Здесь представлены инструкции по резервному копированию данных <strong>Comindware Platform</strong> с помощью скриптов на стороне сервера вместо использования веб-интерфейса.</p>
+<h2 id="backup_linux_script_prerequisites">Подготовка</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Проверьте наличие в директории <code>/usr/share/ignite</code> распакованных скриптов Apache Ignite актуальной версии.</p>
+<p>Если скрипты отсутствуют, скачайте и распакуйте их в указанную директорию либо переустановите Apache Ignite из дистрибутива вспомогательного ПО <strong>Comindware Platform</strong>. См. </p>
+</li>
+<li>
+<p>Установите пакеты <code>xxd</code> и <code>jq</code>, если они не были установлены ранее:</p>
+<div class="highlight"><span class="filename">Дистрибутивы на основе Debian</span><code><pre><span></span><code>apt<span class="w"> </span>install<span class="w"> </span>xxd<span class="w"> </span>jq<span class="w"> </span>rsync</code> <br/></pre></code></div>
+<div class="highlight"><span class="filename">Дистрибутивы на основе RPM</span><code><pre><span></span><code>dnf<span class="w"> </span>install<span class="w"> </span>xxd<span class="w"> </span>jq<span class="w"> </span>rsync</code> <br/></pre></code></div>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="backup_linux_script_ignite">Настройка Apache Ignite</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Настройте скрипт <code>control.sh</code>. Добавьте в начало скрипта <code>/usr/share/ignite/bin/control.sh</code> следующие строки:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">DEFAULT_CONFIG</span><span class="o">=</span>/var/www/&lt;instanceName&gt;/Ignite.config</code> <br/><code><span class="nb">export</span><span class="w"> </span><span class="nv">IGNITE_HOME</span><span class="o">=</span>/usr/share/ignite</code> <br/></pre></code></div>
+<p>Здесь и далее <code>&lt;instanceName&gt;</code> — имя экземпляра <strong>Comindware Platform</strong>.</p>
+</li>
+<li>
+<p>В файле конфигурации  <code>Ignite.config</code> экземпляра <strong>Comindware Platform</strong> разрешите использование клиентского подключения. Для этого найдите соответствующий блок в файле и скорректируйте его согласно следующему примеру:</p>
+<div class="highlight"><code><pre><span></span><code>...</code> <br/><code><span class="w">    </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"clientConnectorConfiguration"</span><span class="nt">&gt;</span></code> <br/><code><span class="w">    </span><span class="nt">&lt;bean</span><span class="w"> </span><span class="na">class=</span><span class="s">"org.apache.ignite.configuration.ClientConnectorConfiguration"</span><span class="nt">&gt;</span></code> <br/><code><span class="w">        </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"thinClientEnabled"</span><span class="w"> </span><span class="na">value=</span><span class="s">"true"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code><span class="w">        </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"host"</span><span class="w"> </span><span class="na">value=</span><span class="s">"10.1.2.3"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code><span class="w">        </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"port"</span><span class="w"> </span><span class="na">value=</span><span class="s">"10800"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code>...</code> <br/><code><span class="w">    </span><span class="nt">&lt;/bean&gt;</span></code> <br/><code><span class="w">    </span><span class="nt">&lt;/property&gt;</span></code> <br/><code>...</code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><code>host</code> - укажите IP или FQDN для подключения клиентом;</li>
+<li><code>port</code> - укажите порт для подключения клиентом.</li>
+</ul>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="backup_linux_script_api">Настройка доступа к API Comindware Platform</h2>
+<ol class="colored_numbers_list">
+<li>В <strong>Comindware Platform</strong> создайте аккаунт с ролью системного администратора, от имени которого будут запускаться сеансы резервного копирования, например <code>backupuser</code>.</li>
+<li>В <strong>Comindware Platform</strong> перейдите на страницу «<strong>Администрирование</strong>» — «<strong>Инфраструктура</strong>» — «<strong>Ключи аутентификации</strong>».</li>
+<li>Создайте ключ аутентификации для аккаунта <code>backupuser</code>.</li>
+<li>Сохраните в безопасном месте значения токена и ключа (<code>token</code> и <code>key</code>).</li>
+<li>
+<p>Создайте директорию <code>/usr/share/comindware/bin/creds</code> и в ней два файла:</p>
+<ul>
+<li><code>cred</code> — сохранить в файл токен подключения к API</li>
+<li><code>secret</code> — сохранить в файл ключ подключения к API</li>
+</ul>
+</li>
+</ol>
+<h2 id="настройка-переменных-в-скрипте-cmw_backups_createsh">Настройка переменных в скрипте cmw_backups_create.sh</h2>
+<p>{: #backup_linux_script_variables .pageBreakBefore }</p>
+<div class="notice notice-info">
+<p class="admonition-title">Расположение скриптов</p>
+<p>Файлы скриптов по умолчанию расположены в директории <code>/usr/share/comindware/bin</code>.</p>
+</div>
+<p>Скорректируйте пути и имена в переменных скрипта в соответствии с вашей конфигурацией.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Откройте скрипт резервного копирования для редактирования</p>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/usr/share/comindware/bin/cmw_backups_create.sh</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Настройте переменные переменные:</p>
+<ul>
+<li><code>instanceName</code> — имя экземпляра <strong>Comindware Platform</strong> на узле кластера;</li>
+<li><code>lockfile</code> — путь к файлу блокировки выполнения резервного копирования, например <code>/var/lib/comindware/backup.lock</code>;</li>
+<li><code>logFile</code> — путь к файла журнала резервного копирования, например <code>/var/log/comindware/${instanceName}/Logs/cmw_backup.log</code>;</li>
+<li><code>snapshotPath</code> — директория для снимков узла Apache Ignite, например <code>/var/lib/comindware/${instanceName}/Database/snapshots</code>;</li>
+<li><code>backupsPath</code> — директория с резервными копиями, например <code>/mnt/share/${instanceName}/Backups/Snapshots</code>;</li>
+<li><code>backupDepth</code> — срок хранения резервных копий в днях, например <code>14</code>;</li>
+<li><code>igniteHome</code> — директория скриптов Apache Ignite, например <code>/usr/share/ignite</code>.</li>
+</ul>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="backup_linux_script_run">Ключи скрипта cmw_backups_create.sh</h2>
+<p>Скрипт <code>cmw_backups_create.sh</code> поддерживает следующие ключи:</p>
+<ul>
+<li><code>-v</code> — подробный вывод (verbose), выводит сообщения в терминал помимо записи в журнал;</li>
+<li><code>-c</code> — только очистка (clean-only), выполняет только операции очистки старых снимков без создания нового.</li>
+</ul>
+<h2 id="backup_linux_script_verify">Проверка выполнения скрипта cmw_backups_create.sh</h2>
+<p>Для проверки выполнения скрипта выполните команду:</p>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>/usr/share/comindware/bin/cmw_backups_create.sh<span class="w"> </span>-v</code> <br/></pre></code></div>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>Обратите внимание на время создания снимка и время сохранения архива.</p>
+</div>
+<h2 id="backup_linux_script_cron">Запуск скрипта с помощью планировщика (cron)</h2>
+<p>Здесь представлен пример настройки резервного копирования по расписанию: раз в час с 6:00 до 22:00.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Откройте очередь задач <code>crontab</code>:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>crontab<span class="w"> </span>-e</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Добавьте строку запуска скрипта <code>cmw_backups_create.sh</code>:</p>
+<ul>
+<li>
+<p><strong>Вариант 1: системный путь (рекомендуется)</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="m">0</span><span class="w"> </span><span class="m">6</span>-22<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>sudo<span class="w"> </span>bash<span class="w"> </span>/usr/share/comindware/bin/cmw_backups_create.sh</code> <br/></pre></code></div>
+<p><strong>Преимущества:</strong> единообразие, проще обслуживать.</p>
+</li>
+<li>
+<p><strong>Вариант 2: пользовательский путь</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="m">0</span><span class="w"> </span><span class="m">6</span>-22<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>sudo<span class="w"> </span>bash<span class="w"> </span>/home/&lt;user&gt;/cmw_snapshot_create.sh</code> <br/></pre></code></div>
+<p><strong>Преимущества:</strong> удобно для отладки/пользовательских окружений; требуется корректная среда и права.</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="backup_linux_script_logs">Журналы и очистка</h2>
+<p>Скрипт <code>cmw_backups_create.sh</code> автоматически:</p>
+<ul>
+<li>ведёт журнал в файле, указанном в переменной <code>logFile</code>;</li>
+<li>использует файл блокировки <code>lockfile</code> для предотвращения одновременного запуска;</li>
+<li>сокращает журнал до последних 1000 строк при каждом запуске;</li>
+<li>очищает старые архивы резервных копий согласно параметру <code>backupDepth</code>.</li>
+</ul>
+<h2 id="backup_linux_script_limits">Ограничения и примечания</h2>
+<ul>
+<li>Скрипт в текущем состоянии поддерживает работу только с одним узлом.</li>
+<li>Создания снимка и сохранение архива может занимать значительное время в зависимости от размера данных.</li>
+<li>Требуется достаточное место на диске для временного хранения снимков и архивов.</li>
+</ul>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4674">Ключи аутентификации API. Определения, настройка, удаление</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5067">Настройка конфигурации экземпляра ПО</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5082">Рекомендации по резервному копированию</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620#paths_linux">Пути и содержимое директорий (Linux)</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4653">Аккаунты. Администрирование, назначение лицензий</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4662">Системные роли. Определения, настройка, объединение, удаление</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

@@ -36,14 +36,14 @@ hide: tags
 2. Установите пакеты `xxd` и `jq`, если они не были установлены ранее:
 
     ```sh title="Дистрибутивы на основе Debian"
-    apt install xxd jq
+    apt install xxd jq rsync
     ```
 
     ```sh title="Дистрибутивы на основе RPM"
-    dnf install xxd jq
+    dnf install xxd jq rsync
     ```
 
-## Настройка {{ apacheIgniteVariants }} {: #backup_linux_script_ignite }
+## Настройка {{ apacheIgniteVariants }} {: #backup_linux_script_ignite .pageBreakBefore }
 
 1. Настройте скрипт `control.sh`. Добавьте в начало скрипта `/usr/share/ignite/bin/control.sh` следующие строки:
 
@@ -66,11 +66,15 @@ hide: tags
     ...
         </bean>
         </property>
-
     ...
     ```
 
-## Настройка доступа к API {{ productName }} {: #backup_linux_script_api }
+    Здесь:
+
+    - `host` - укажите IP или FQDN для подключения клиентом;
+    - `port` - укажите порт для подключения клиентом.
+
+## Настройка доступа к API {{ productName }} {: #backup_linux_script_api .pageBreakBefore }
 
 1. В **{{ productName }}** создайте аккаунт с ролью системного администратора, от имени которого будут запускаться сеансы резервного копирования, например `backupuser`.
 2. В **{{ productName }}** перейдите на страницу «**Администрирование**» — «**Инфраструктура**» — «**Ключи аутентификации**».
@@ -81,7 +85,7 @@ hide: tags
     - `cred` — сохранить в файл токен подключения к API
     - `secret` — сохранить в файл ключ подключения к API
 
-## Настройка переменных в скрипте {: #backup_linux_script_variables }
+## Настройка переменных в скрипте cmw_backups_create.sh {: #backup_linux_script_variables .pageBreakBefore }
 
 !!! note "Расположение скриптов"
 
@@ -105,11 +109,11 @@ hide: tags
     - `backupDepth` — срок хранения резервных копий в днях, например `14`;
     - `igniteHome` — директория скриптов {{ apacheIgniteVariants }}, например `/usr/share/ignite`.
 
-## Ключи скрипта cmw_backups_create.sh {: #backup_linux_script_run }
+## Ключи скрипта cmw_backups_create.sh {: #backup_linux_script_run .pageBreakBefore }
 
 Скрипт `cmw_backups_create.sh` поддерживает следующие ключи:
 
-- `-v` — подробный вывод (verbose), выводит сообщения в терминал помимо записи в лог
+- `-v` — подробный вывод (verbose), выводит сообщения в терминал помимо записи в журнал;
 - `-c` — только очистка (clean-only), выполняет только операции очистки старых снимков без создания нового.
 
 ## Проверка выполнения скрипта cmw_backups_create.sh {: #backup_linux_script_verify }
@@ -124,7 +128,7 @@ bash /usr/share/comindware/bin/cmw_backups_create.sh -v
 
     Обратите внимание на время создания снимка и время сохранения архива.
 
-## Запуск скрипта с помощью планировщика (cron) {: #backup_linux_script_cron }
+## Запуск скрипта с помощью планировщика (cron) {: #backup_linux_script_cron .pageBreakBefore }
 
 Здесь представлен пример настройки резервного копирования по расписанию: раз в час с 6:00 до 22:00.
 
@@ -152,7 +156,7 @@ bash /usr/share/comindware/bin/cmw_backups_create.sh -v
 
         **Преимущества:** удобно для отладки/пользовательских окружений; требуется корректная среда и права.
 
-## Журналы и очистка {: #backup_linux_script_logs }
+## Журналы и очистка {: #backup_linux_script_logs .pageBreakBefore }
 
 Скрипт `cmw_backups_create.sh` автоматически:
 
