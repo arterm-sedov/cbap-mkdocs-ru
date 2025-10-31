@@ -2,6 +2,7 @@
 title: 'Диаграмма Ганта. Настройка'
 kbId: 4891
 url: 'https://kb.comindware.ru/article.php?id=4891'
+updated: '2025-08-21 12:28:25'
 ---
 
 # Диаграмма Ганта. Настройка

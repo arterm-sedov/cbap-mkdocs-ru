@@ -2,6 +2,7 @@
 title: 'Р7 Офис и Collabora Online. Использование для работы с документами'
 kbId: 4819
 url: 'https://kb.comindware.ru/article.php?id=4819'
+updated: '2024-05-23 10:58:08'
 ---
 
 # Р7 Офис и Collabora Online. Использование для работы с документами

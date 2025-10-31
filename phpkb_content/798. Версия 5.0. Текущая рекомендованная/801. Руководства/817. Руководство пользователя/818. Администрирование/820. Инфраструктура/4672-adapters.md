@@ -2,6 +2,7 @@
 title: 'Адаптеры'
 kbId: 4672
 url: 'https://kb.comindware.ru/article.php?id=4672'
+updated: '2025-08-12 14:16:41'
 ---
 
 # Адаптеры

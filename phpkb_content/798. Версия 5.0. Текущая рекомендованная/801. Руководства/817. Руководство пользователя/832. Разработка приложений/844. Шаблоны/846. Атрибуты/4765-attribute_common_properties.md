@@ -2,6 +2,7 @@
 title: 'Общие свойства атрибутов'
 kbId: 4765
 url: 'https://kb.comindware.ru/article.php?id=4765'
+updated: '2025-08-08 17:16:59'
 ---
 
 # Общие свойства атрибутов

@@ -2,6 +2,7 @@
 title: 'Очистка ссылки'
 kbId: 5022
 url: 'https://kb.comindware.ru/article.php?id=5022'
+updated: '2022-02-18 06:30:20'
 ---
 
 # Очистка ссылки

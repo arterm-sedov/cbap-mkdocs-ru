@@ -2,6 +2,7 @@
 title: 'Атрибут типа «Изображение»'
 kbId: 4771
 url: 'https://kb.comindware.ru/article.php?id=4771'
+updated: '2024-07-01 14:29:57'
 ---
 
 # Атрибут типа «Изображение»

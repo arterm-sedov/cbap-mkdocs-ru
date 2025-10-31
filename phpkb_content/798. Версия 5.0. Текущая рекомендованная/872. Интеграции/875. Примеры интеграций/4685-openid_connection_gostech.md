@@ -2,6 +2,7 @@
 title: 'Аутентификация через Keycloak и OpenID Connect. Настройка подключения и служб'
 kbId: 4685
 url: 'https://kb.comindware.ru/article.php?id=4685'
+updated: '2025-08-01 15:21:22'
 ---
 
 # Аутентификация через Keycloak и OpenID Connect. Настройка подключения и служб

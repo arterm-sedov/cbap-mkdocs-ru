@@ -2,6 +2,7 @@
 title: 'Comindware Platform 5.0. Перечень стороннего программного обеспечения для Linux'
 kbId: 4582
 url: 'https://kb.comindware.ru/article.php?id=4582'
+updated: '2025-08-12 13:56:06'
 ---
 
 # {{ productName }} 5.0. Перечень стороннего программного обеспечения для Linux

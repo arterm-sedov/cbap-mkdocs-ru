@@ -2,6 +2,7 @@
 title: 'Формирование SSL-сертификатов и настройка Elasticsearch для их использования'
 kbId: 4606
 url: 'https://kb.comindware.ru/article.php?id=4606'
+updated: '2025-04-16 13:39:22'
 ---
 
 # Формирование SSL-сертификатов и настройка Elasticsearch для их использования

@@ -2,6 +2,7 @@
 title: 'Урок 5. Структуры данных'
 kbId: 4869
 url: 'https://kb.comindware.ru/article.php?id=4869'
+updated: '2025-08-08 17:16:12'
 ---
 
 # Урок 5. Структуры данных

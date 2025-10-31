@@ -2,6 +2,7 @@
 title: 'Восстановление пароля'
 kbId: 5099
 url: 'https://kb.comindware.ru/article.php?id=5099'
+updated: '2025-04-18 12:25:00'
 ---
 
 # Восстановление пароля

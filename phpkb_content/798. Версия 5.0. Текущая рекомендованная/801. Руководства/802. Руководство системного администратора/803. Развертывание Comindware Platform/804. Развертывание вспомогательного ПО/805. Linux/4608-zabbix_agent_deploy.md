@@ -2,6 +2,7 @@
 title: 'Zabbix Agent. Инструкции по установке'
 kbId: 4608
 url: 'https://kb.comindware.ru/article.php?id=4608'
+updated: '2024-10-29 16:42:04'
 ---
 
 # Zabbix Agent. Инструкции по установке

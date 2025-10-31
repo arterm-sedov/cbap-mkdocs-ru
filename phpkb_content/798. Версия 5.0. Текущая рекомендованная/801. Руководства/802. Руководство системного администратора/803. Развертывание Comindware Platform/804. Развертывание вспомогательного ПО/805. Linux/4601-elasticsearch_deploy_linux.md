@@ -2,6 +2,7 @@
 title: 'Elasticsearch. Установка в базовой конфигурации'
 kbId: 4601
 url: 'https://kb.comindware.ru/article.php?id=4601'
+updated: '2025-10-23 16:30:57'
 ---
 
 # Elasticsearch. Установка в базовой конфигурации

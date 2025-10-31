@@ -2,6 +2,7 @@
 title: 'Установка Apache Kafka в ОС Windows и подключение к Comindware Platform'
 kbId: 4614
 url: 'https://kb.comindware.ru/article.php?id=4614'
+updated: '2025-10-27 17:56:15'
 ---
 
 # Установка Apache Kafka в ОС Windows и подключение к {{ productName }}

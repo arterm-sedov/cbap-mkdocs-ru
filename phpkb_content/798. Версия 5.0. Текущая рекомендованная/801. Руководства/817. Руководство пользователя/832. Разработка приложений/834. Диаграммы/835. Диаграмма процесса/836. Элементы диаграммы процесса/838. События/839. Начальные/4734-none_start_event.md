@@ -2,6 +2,7 @@
 title: 'Простое начальное событие'
 kbId: 4734
 url: 'https://kb.comindware.ru/article.php?id=4734'
+updated: '2025-04-10 17:02:29'
 ---
 
 # Простое начальное событие

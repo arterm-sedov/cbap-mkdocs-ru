@@ -2,6 +2,7 @@
 title: 'Резервное копирование и восстановление в Windows'
 kbId: 4644
 url: 'https://kb.comindware.ru/article.php?id=4644'
+updated: '2025-05-22 13:02:37'
 ---
 
 # Резервное копирование и восстановление в Windows

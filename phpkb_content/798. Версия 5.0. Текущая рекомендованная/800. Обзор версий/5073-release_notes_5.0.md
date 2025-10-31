@@ -2,6 +2,7 @@
 title: 'Сведения о выпуске 5.0'
 kbId: 5073
 url: 'https://kb.comindware.ru/article.php?id=5073'
+updated: '2024-12-26 14:10:00'
 ---
 
 # Сведения о выпуске 5.0

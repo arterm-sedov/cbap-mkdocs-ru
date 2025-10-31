@@ -2,6 +2,7 @@
 title: 'Пользовательская задача'
 kbId: 4730
 url: 'https://kb.comindware.ru/article.php?id=4730'
+updated: '2025-04-10 16:32:57'
 ---
 
 # Пользовательская задача

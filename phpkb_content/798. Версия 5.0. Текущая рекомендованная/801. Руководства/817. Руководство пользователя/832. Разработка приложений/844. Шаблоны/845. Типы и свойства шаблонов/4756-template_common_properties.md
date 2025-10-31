@@ -2,6 +2,7 @@
 title: 'Общие свойства шаблонов'
 kbId: 4756
 url: 'https://kb.comindware.ru/article.php?id=4756'
+updated: '2024-10-21 16:02:04'
 ---
 
 # Общие свойства шаблонов

@@ -2,6 +2,7 @@
 title: 'Модуль GeoIP для NGINX. Установка и настройка. Краткое руководство'
 kbId: 4610
 url: 'https://kb.comindware.ru/article.php?id=4610'
+updated: '2024-11-01 19:00:43'
 ---
 
 # Модуль GeoIP для NGINX. Установка и настройка. Краткое руководство

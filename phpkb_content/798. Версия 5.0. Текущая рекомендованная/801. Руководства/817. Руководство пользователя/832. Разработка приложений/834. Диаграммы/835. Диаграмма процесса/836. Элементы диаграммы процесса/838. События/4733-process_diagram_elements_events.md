@@ -2,6 +2,7 @@
 title: 'События. Определение и типы'
 kbId: 4733
 url: 'https://kb.comindware.ru/article.php?id=4733'
+updated: '2025-04-10 16:48:51'
 ---
 
 # События. Определение и типы

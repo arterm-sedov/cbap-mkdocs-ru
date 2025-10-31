@@ -2,6 +2,7 @@
 title: 'Предиктивный ввод в формулах'
 kbId: 5035
 url: 'https://kb.comindware.ru/article.php?id=5035'
+updated: '2025-05-30 18:02:03'
 ---
 
 # Предиктивный ввод в формулах

@@ -2,6 +2,7 @@
 title: 'Развилки. Определение и типы'
 kbId: 4748
 url: 'https://kb.comindware.ru/article.php?id=4748'
+updated: '2025-04-10 16:59:44'
 ---
 
 # Развилки. Определение и типы

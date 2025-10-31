@@ -2,6 +2,7 @@
 title: 'Внешняя СУБД (MySQL, MSSQL, Oracle, PostgreSQL). Отправка SQL-запроса. Настройка подключения, пути передачи данных и сценария'
 kbId: 4706
 url: 'https://kb.comindware.ru/article.php?id=4706'
+updated: '2024-12-02 18:13:09'
 ---
 
 # Внешняя СУБД (MySQL, MSSQL, Oracle, PostgreSQL). Отправка SQL-запроса. Настройка подключения, пути передачи данных и сценария

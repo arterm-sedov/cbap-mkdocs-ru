@@ -2,6 +2,7 @@
 title: 'Язык формул. Общие сведения'
 kbId: 4999
 url: 'https://kb.comindware.ru/article.php?id=4999'
+updated: '2025-05-30 18:00:46'
 ---
 
 # Язык формул. Общие сведения

@@ -2,6 +2,7 @@
 title: 'Подсистема журналирования'
 kbId: 4623
 url: 'https://kb.comindware.ru/article.php?id=4623'
+updated: '2025-06-23 19:20:24'
 ---
 
 # Подсистема журналирования

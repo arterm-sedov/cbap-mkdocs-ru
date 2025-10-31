@@ -2,6 +2,7 @@
 title: 'HTTP-запросы. Получение и обработка данных с помощью JSONPath'
 kbId: 5084
 url: 'https://kb.comindware.ru/article.php?id=5084'
+updated: '2025-03-31 17:41:27'
 ---
 
 # HTTP-запросы. Получение и обработка данных с помощью JSONPath

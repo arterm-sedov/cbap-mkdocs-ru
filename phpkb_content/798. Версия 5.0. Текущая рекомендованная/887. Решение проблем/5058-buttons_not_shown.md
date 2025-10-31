@@ -2,6 +2,7 @@
 title: 'Не отображаются кнопки'
 kbId: 5058
 url: 'https://kb.comindware.ru/article.php?id=5058'
+updated: '2025-10-24 17:17:33'
 ---
 
 # Не отображаются кнопки

@@ -2,6 +2,7 @@
 title: 'Задача-выполнение сценария'
 kbId: 4728
 url: 'https://kb.comindware.ru/article.php?id=4728'
+updated: '2025-04-10 16:35:16'
 ---
 
 # Задача-выполнение сценария

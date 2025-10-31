@@ -2,6 +2,7 @@
 title: 'Урок 1. Обзор возможностей Comindware Platform и понятий BPMS'
 kbId: 5113
 url: 'https://kb.comindware.ru/article.php?id=5113'
+updated: '2025-08-12 18:24:09'
 ---
 
 # Урок 1. Обзор возможностей {{ productName }} и понятий BPMS

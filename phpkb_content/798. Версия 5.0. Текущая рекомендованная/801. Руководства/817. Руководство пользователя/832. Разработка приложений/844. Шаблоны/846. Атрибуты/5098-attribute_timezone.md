@@ -2,6 +2,7 @@
 title: 'Атрибут типа «Часовой пояс»'
 kbId: 5098
 url: 'https://kb.comindware.ru/article.php?id=5098'
+updated: '2025-06-24 12:39:45'
 ---
 
 # Атрибут типа «Часовой пояс»

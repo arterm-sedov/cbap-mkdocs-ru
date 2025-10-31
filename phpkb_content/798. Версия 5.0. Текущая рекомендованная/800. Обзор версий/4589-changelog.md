@@ -2,6 +2,7 @@
 title: 'Обзор версий'
 kbId: 4589
 url: 'https://kb.comindware.ru/article.php?id=4589'
+updated: '2025-10-22 12:46:00'
 ---
 
 # Обзор версий

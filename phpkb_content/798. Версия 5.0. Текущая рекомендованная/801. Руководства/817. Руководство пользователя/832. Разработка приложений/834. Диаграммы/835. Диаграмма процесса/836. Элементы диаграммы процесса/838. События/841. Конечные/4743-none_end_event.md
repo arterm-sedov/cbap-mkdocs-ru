@@ -2,6 +2,7 @@
 title: 'Простое конечное событие'
 kbId: 4743
 url: 'https://kb.comindware.ru/article.php?id=4743'
+updated: '2025-04-10 16:30:53'
 ---
 
 # Простое конечное событие

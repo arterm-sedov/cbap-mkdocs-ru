@@ -2,6 +2,7 @@
 title: 'Урок 4. Мониторинг и аналитика'
 kbId: 4865
 url: 'https://kb.comindware.ru/article.php?id=4865'
+updated: '2025-08-01 16:07:25'
 ---
 
 # Урок 4. Мониторинг и аналитика

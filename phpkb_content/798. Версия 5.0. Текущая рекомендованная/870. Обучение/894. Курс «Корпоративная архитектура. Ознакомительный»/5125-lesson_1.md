@@ -2,6 +2,7 @@
 title: 'Урок 1. Обзор возможностей Comindware Platform Enterprise'
 kbId: 5125
 url: 'https://kb.comindware.ru/article.php?id=5125'
+updated: '2025-08-06 19:24:54'
 ---
 
 # Урок 1. Обзор возможностей {{ productName }} Enterprise

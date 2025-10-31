@@ -2,6 +2,7 @@
 title: 'Системные атрибуты'
 kbId: 4781
 url: 'https://kb.comindware.ru/article.php?id=4781'
+updated: '2025-05-30 18:01:24'
 ---
 
 # Системные атрибуты

@@ -2,6 +2,7 @@
 title: 'Описание модели данных'
 kbId: 4715
 url: 'https://kb.comindware.ru/article.php?id=4715'
+updated: '2024-10-22 14:46:59'
 ---
 
 # Описание модели данных

@@ -2,6 +2,7 @@
 title: 'Корпоративная архитектура. Описание модуля'
 kbId: 4828
 url: 'https://kb.comindware.ru/article.php?id=4828'
+updated: '2025-08-04 17:08:32'
 ---
 
 # {{ productNameArchitect }}. Описание модуля

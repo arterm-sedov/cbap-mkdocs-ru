@@ -2,6 +2,7 @@
 title: 'Урок 8. Аккаунты, группы и роли'
 kbId: 4867
 url: 'https://kb.comindware.ru/article.php?id=4867'
+updated: '2025-08-12 18:24:53'
 ---
 
 # Урок 8. Аккаунты, группы и роли

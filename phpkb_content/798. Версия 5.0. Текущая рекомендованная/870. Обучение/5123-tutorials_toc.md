@@ -2,6 +2,7 @@
 title: 'Обучение. Содержание раздела'
 kbId: 5123
 url: 'https://kb.comindware.ru/article.php?id=5123'
+updated: '2025-08-07 17:59:17'
 ---
 
 # Обучение. Содержание раздела

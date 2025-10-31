@@ -2,6 +2,7 @@
 title: 'Переменные в сценарии'
 kbId: 4719
 url: 'https://kb.comindware.ru/article.php?id=4719'
+updated: '2025-06-19 19:39:00'
 ---
 
 # Переменные в сценарии

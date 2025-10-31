@@ -2,6 +2,7 @@
 title: 'Урок 8. Экспорт данных'
 kbId: 5120
 url: 'https://kb.comindware.ru/article.php?id=5120'
+updated: '2025-08-12 18:19:25'
 ---
 
 # Урок 8. Экспорт данных

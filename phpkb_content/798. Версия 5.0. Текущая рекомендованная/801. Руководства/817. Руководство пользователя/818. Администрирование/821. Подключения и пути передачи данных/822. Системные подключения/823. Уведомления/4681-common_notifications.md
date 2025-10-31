@@ -2,6 +2,7 @@
 title: 'Общие уведомления. Настройка'
 kbId: 4681
 url: 'https://kb.comindware.ru/article.php?id=4681'
+updated: '2025-04-21 12:16:13'
 ---
 
 # Общие уведомления. Настройка

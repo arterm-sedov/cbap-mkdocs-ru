@@ -2,6 +2,7 @@
 title: 'Безопасность'
 kbId: 4660
 url: 'https://kb.comindware.ru/article.php?id=4660'
+updated: '2025-01-27 13:31:01'
 ---
 
 # Безопасность

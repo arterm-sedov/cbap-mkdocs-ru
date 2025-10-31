@@ -2,6 +2,7 @@
 title: 'Установка, запуск, инициализация и остановка ПО в Windows'
 kbId: 5063
 url: 'https://kb.comindware.ru/article.php?id=5063'
+updated: '2025-10-13 17:05:49'
 ---
 
 # Установка, запуск, инициализация и остановка ПО в Windows

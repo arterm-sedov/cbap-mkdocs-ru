@@ -2,6 +2,7 @@
 title: 'Notation N3'
 kbId: 4858
 url: 'https://kb.comindware.ru/article.php?id=4858'
+updated: '2024-11-28 15:26:41'
 ---
 
 # Notation N3

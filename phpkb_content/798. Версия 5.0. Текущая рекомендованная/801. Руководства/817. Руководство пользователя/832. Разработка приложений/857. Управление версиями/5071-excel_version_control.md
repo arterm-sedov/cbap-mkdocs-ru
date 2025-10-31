@@ -2,6 +2,7 @@
 title: 'Экспорт и импорт версий приложения с помощью Excel'
 kbId: 5071
 url: 'https://kb.comindware.ru/article.php?id=5071'
+updated: '2025-02-11 14:42:03'
 ---
 
 # Экспорт и импорт версий приложения с помощью Excel

@@ -2,6 +2,7 @@
 title: 'Комментарий'
 kbId: 4753
 url: 'https://kb.comindware.ru/article.php?id=4753'
+updated: '2025-04-10 16:21:27'
 ---
 
 # Комментарий

@@ -2,6 +2,7 @@
 title: 'Импорт данных в Excel'
 kbId: 4925
 url: 'https://kb.comindware.ru/article.php?id=4925'
+updated: '2024-05-23 10:37:58'
 ---
 
 # Импорт данных в Excel

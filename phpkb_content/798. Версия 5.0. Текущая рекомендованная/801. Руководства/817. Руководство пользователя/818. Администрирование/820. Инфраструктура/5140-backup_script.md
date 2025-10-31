@@ -2,6 +2,7 @@
 title: 'Настройка и использование скрипта для резервного копирования данных Comindware Platform (Linux)'
 kbId: 5140
 url: 'https://kb.comindware.ru/article.php?id=5140'
+updated: '2025-10-30 14:01:11'
 ---
 
 # Настройка и использование скрипта для резервного копирования данных {{ productName }} (Linux)

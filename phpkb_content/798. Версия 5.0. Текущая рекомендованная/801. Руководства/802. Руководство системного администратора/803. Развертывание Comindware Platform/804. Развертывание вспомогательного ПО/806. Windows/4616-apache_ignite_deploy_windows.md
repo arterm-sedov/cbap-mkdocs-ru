@@ -2,6 +2,7 @@
 title: 'Установка и настройка Apache Ignite. Краткое руководство для Windows'
 kbId: 4616
 url: 'https://kb.comindware.ru/article.php?id=4616'
+updated: '2024-06-14 12:30:52'
 ---
 
 # Установка и настройка Apache Ignite. Краткое руководство для Windows

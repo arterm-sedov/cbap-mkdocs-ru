@@ -2,6 +2,7 @@
 title: 'Apache Kafka. Установка в базовой конфигурации'
 kbId: 5074
 url: 'https://kb.comindware.ru/article.php?id=5074'
+updated: '2025-10-27 17:56:56'
 ---
 
 # Apache Kafka. Установка в базовой конфигурации

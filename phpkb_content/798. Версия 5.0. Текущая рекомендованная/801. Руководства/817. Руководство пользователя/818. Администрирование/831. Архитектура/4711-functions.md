@@ -2,6 +2,7 @@
 title: 'Функции'
 kbId: 4711
 url: 'https://kb.comindware.ru/article.php?id=4711'
+updated: '2025-10-01 19:26:00'
 ---
 
 # Функции

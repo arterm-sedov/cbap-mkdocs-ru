@@ -2,6 +2,7 @@
 title: 'Начальное событие-таймер'
 kbId: 4737
 url: 'https://kb.comindware.ru/article.php?id=4737'
+updated: '2025-04-10 16:50:19'
 ---
 
 # Начальное событие-таймер

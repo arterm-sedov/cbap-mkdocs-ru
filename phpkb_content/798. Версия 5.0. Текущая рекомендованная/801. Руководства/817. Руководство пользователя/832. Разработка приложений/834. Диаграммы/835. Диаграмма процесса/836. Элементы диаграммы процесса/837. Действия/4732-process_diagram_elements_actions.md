@@ -2,6 +2,7 @@
 title: 'Действия. Определение и типы'
 kbId: 4732
 url: 'https://kb.comindware.ru/article.php?id=4732'
+updated: '2025-06-02 13:30:49'
 ---
 
 # Действия. Определение и типы

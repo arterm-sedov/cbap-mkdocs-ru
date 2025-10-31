@@ -2,6 +2,7 @@
 title: 'Обсуждения. Настройка'
 kbId: 4788
 url: 'https://kb.comindware.ru/article.php?id=4788'
+updated: '2025-04-18 17:59:03'
 ---
 
 # Обсуждения. Настройка

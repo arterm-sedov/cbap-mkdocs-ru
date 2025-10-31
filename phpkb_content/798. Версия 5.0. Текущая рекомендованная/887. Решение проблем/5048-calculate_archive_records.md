@@ -2,6 +2,7 @@
 title: 'Вычисляются архивные записи'
 kbId: 5048
 url: 'https://kb.comindware.ru/article.php?id=5048'
+updated: '2025-10-24 17:34:16'
 ---
 
 # Вычисляются архивные записи

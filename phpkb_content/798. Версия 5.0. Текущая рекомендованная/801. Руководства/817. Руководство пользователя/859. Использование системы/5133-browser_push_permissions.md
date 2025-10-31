@@ -2,6 +2,7 @@
 title: 'Push-уведомления в браузере. Включение в Яндекс, Chrome, Edge, Firefox, Safari'
 kbId: 5133
 url: 'https://kb.comindware.ru/article.php?id=5133'
+updated: '2025-08-28 10:07:57'
 ---
 
 # Push-уведомления в браузере. Включение в Яндекс, Chrome, Edge, Firefox, Safari

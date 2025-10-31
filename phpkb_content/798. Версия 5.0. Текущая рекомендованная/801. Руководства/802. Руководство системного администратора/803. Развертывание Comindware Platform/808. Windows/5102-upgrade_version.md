@@ -2,6 +2,7 @@
 title: 'Обновление версии экземпляра ПО в Windows'
 kbId: 5102
 url: 'https://kb.comindware.ru/article.php?id=5102'
+updated: '2025-05-23 13:00:29'
 ---
 
 # Обновление версии экземпляра ПО в Windows

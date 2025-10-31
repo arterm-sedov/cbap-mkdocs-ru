@@ -2,6 +2,7 @@
 title: 'Настройка вызова API'
 kbId: 4927
 url: 'https://kb.comindware.ru/article.php?id=4927'
+updated: '2024-05-23 10:43:22'
 ---
 
 # Настройка вызова API

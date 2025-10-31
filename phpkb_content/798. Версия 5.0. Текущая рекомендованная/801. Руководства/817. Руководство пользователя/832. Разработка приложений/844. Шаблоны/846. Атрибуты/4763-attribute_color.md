@@ -2,6 +2,7 @@
 title: 'Атрибут типа «Цвет»'
 kbId: 4763
 url: 'https://kb.comindware.ru/article.php?id=4763'
+updated: '2025-06-16 18:57:11'
 ---
 
 # Атрибут типа «Цвет»

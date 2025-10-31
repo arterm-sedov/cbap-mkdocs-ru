@@ -2,6 +2,7 @@
 title: 'Введение в API'
 kbId: 4860
 url: 'https://kb.comindware.ru/article.php?id=4860'
+updated: '2025-09-03 16:32:17'
 ---
 
 # Введение в API

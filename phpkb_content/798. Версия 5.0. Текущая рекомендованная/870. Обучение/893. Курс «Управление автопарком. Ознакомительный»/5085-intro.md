@@ -2,6 +2,7 @@
 title: 'Описание учебного курса'
 kbId: 5085
 url: 'https://kb.comindware.ru/article.php?id=5085'
+updated: '2025-08-06 18:41:42'
 ---
 
 # Описание учебного курса
