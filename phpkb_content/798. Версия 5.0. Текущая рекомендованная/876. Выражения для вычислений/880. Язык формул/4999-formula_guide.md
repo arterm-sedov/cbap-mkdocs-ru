@@ -48,6 +48,7 @@ url: 'https://kb.comindware.ru/article.php?id=4999'
 
   ```
   $link->atributSystemName
+
   ```
 
   Здесь:
@@ -62,6 +63,7 @@ url: 'https://kb.comindware.ru/article.php?id=4999'
   from a in db->recordTemplateSystemName
   where EQUALS(a->attirbute1, $attribute2)
   select a->id
+
   ```
 
   Здесь:
@@ -76,6 +78,7 @@ url: 'https://kb.comindware.ru/article.php?id=4999'
 
   ```
   $cmw.task.objectId->op.11
+
   ```
 
   Здесь `op.11` — ID атрибута в связанном шаблоне записи.
@@ -83,6 +86,7 @@ url: 'https://kb.comindware.ru/article.php?id=4999'
 
   ```
   $$BusinessObject->attributeSystemName
+
   ```
 
   Здесь `attributeSystemName` — системное имя атрибута в связанном шаблоне записи.
@@ -121,6 +125,7 @@ url: 'https://kb.comindware.ru/article.php?id=4999'
 
 ```
 $Driver->Name
+
 ```
 
 Переходить по ссылкам можно неограниченное количество раз, но будьте внимательны, чтобы не образовалось зацикливание.
@@ -166,6 +171,7 @@ $Driver->Name
   where a->CityName == "Москва"
   orderby a->Districts->DistrictName descending
   select a->Districts
+
   ```
 - Запрос названий и авторов книг, у которых указан автор, с сортировкой по возрастанию имени автора и выводом в формате *«Название: название книги. Автор: имя автора»*.
 
@@ -178,6 +184,7 @@ $Driver->Name
           'Название: ', book->Name, '. Автор: ', book->Author->Name
       )
   )
+
   ```
 - Запрос просроченных отправлений (основной запрос) со склада в Сибири (вложенный запрос).
 
@@ -188,6 +195,7 @@ $Driver->Name
   select warehouse->shipments
   )
   where shipment->DeliveryDate < NOW() select shipment->id
+
   ```
 
 --8<-- "related_topics_heading.md"

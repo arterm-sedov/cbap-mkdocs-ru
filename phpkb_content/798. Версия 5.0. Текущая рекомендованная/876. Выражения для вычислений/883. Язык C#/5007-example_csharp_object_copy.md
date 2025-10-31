@@ -9,7 +9,7 @@ url: 'https://kb.comindware.ru/article.php?id=5007'
 Для того чтобы скопировать запись, создайте в текущем шаблоне записи кнопку с операцией C#-скрипт и введите следующее выражение:
 
 ```
- 
+ 
 
 using System; 
 using System.Collections.Generic;

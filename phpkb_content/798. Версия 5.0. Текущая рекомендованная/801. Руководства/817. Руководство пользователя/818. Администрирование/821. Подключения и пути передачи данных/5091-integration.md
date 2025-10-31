@@ -236,6 +236,7 @@ url: 'https://kb.comindware.ru/article.php?id=5091'
 
 ```
 http://your-host/docs
+
 ```
 
 Здесь `your-host` — адрес сервера **{{ productName }}**.

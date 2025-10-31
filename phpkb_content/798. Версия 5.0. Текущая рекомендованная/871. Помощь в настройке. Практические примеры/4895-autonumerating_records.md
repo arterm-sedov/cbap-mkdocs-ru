@@ -114,6 +114,7 @@ url: 'https://kb.comindware.ru/article.php?id=4895'
            Api.Solution.SolutionVariableService.SetValue("svar.1", sequenceNumber+1);
        }
    }
+
    ```
 6. Опубликуйте диаграмму.
 
@@ -163,6 +164,7 @@ C#-скрипт также можно применять для автонуме
              return sequenceNumber;
          }
      }
+
      ```
 
 ### Тестирование
@@ -212,6 +214,7 @@ C#-скрипт также можно применять для автонуме
          # Передаем в атрибут значение ?globalVar (переменной до её увеличения).
          ?globalVar -> ?value.
      }
+
      ```
 
 ### Тестирование

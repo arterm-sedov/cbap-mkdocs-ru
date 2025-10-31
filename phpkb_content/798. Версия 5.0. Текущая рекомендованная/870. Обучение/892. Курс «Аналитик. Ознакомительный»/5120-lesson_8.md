@@ -84,6 +84,7 @@ url: 'https://kb.comindware.ru/article.php?id=5120'
 
      ```
      FORMAT("https://your-host/#Resolver/{0}", LIST($id))
+
      ```
 
    Внимание!
@@ -115,6 +116,7 @@ url: 'https://kb.comindware.ru/article.php?id=5120'
          # Считываем имя файла из значения атрибута «Файл» и возвращаем его.
          ?DocumentAttributeValue document:title ?value.
      }
+
      ```
 
      Язык N3

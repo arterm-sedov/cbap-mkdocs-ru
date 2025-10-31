@@ -56,17 +56,20 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
 
    ```
    sudo -s
+
    ```
 
    или
 
    ```
    su -
+
    ```
 2. Скачайте и распакуйте дистрибутив с вспомогательным ПО **{{ productName }}**, полученный по ссылке от компании **Comindware** (`X.X`, `<versionNumber>` — номер версии ПО, `<osname>` — название операционной системы):
 
    ```
    tar -xf X.X-release-ru-<versionNumber>.prerequisites.<osname>.tar.gz
+
    ```
 
    Совет
@@ -75,11 +78,13 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
 
    ```
    rm -f X.X-release-ru-<versionNumber>.prerequisites.<osname>.tar.gz
+
    ```
 3. Перейдите в директорию со скриптами для развёртывания вспомогательного ПО:
 
    ```
    cd <prerequisitesDistPath>/CMW_<osname>/scripts
+
    ```
 
    Здесь: `<prerequisitesDistPath>/CMW_<osname>/` — путь к распакованному дистрибутиву со вспомогательным ПО.
@@ -87,6 +92,7 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
 
    ```
    sh prerequisites_install.sh -p
+
    ```
 
    Ключи скрипта `prerequisites_install.sh`:
@@ -111,6 +117,7 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
 
    ```
    sh prerequisites_install.sh -h
+
    ```
 5. По окончании установки скрипт выведет информацию об установленных компонентах. Удостоверьтесь, что компоненты успешно установлены (имеют статус `OK`).
 
@@ -137,12 +144,15 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
    OK     Local kafka server installed: No
    OK     Local kafka server started: No
    OK     Final status.
+
    ```
 6. Удостоверьтесь, что компоненты установлены:
 
    ```
    sh prerequisites_list.sh
+
    ```
+7. При необходимости установите недостающие необходимые компоненты, запустив скрипт с соответствующими флагами.
 
 ## Установка ПО {{ productName }}
 
@@ -162,17 +172,20 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
 
    ```
    sudo -s
+
    ```
 
    или
 
    ```
    su -
+
    ```
 2. Скачайте и распакуйте дистрибутив ПО **{{ productName }}**, полученный по ссылке от компании **Comindware**:
 
    ```
    tar -xf X.X-release-ru-<versionNumber>.<osname>.tar.gz
+
    ```
 
    Совет
@@ -181,11 +194,13 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
 
    ```
    rm -f X.X-release-ru-<versionNumber>.<osname>.tar.gz
+
    ```
 3. Перейдите в директорию со скриптами для развёртывания ПО:
 
    ```
    cd <distPath>/CMW_<osname>_<versionNumber>/scripts
+
    ```
 
    Здесь: `<distPath>/CMW_<osname>_<versionNumber>/` — путь к распакованному дистрибутиву со ПО **{{ productName }}**.
@@ -193,6 +208,7 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
 
    ```
    sh version_install.sh
+
    ```
 
    Если отобразится запрос на перезагрузку ОС
@@ -201,6 +217,7 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
 
      ```
      reboot
+
      ```
    - После перезагрузки:
 
@@ -211,6 +228,7 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
 
    ```
    sh version_list.sh
+
    ```
 
 ## Создание экземпляра ПО
@@ -233,17 +251,20 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
 
    ```
    sudo -s
+
    ```
 
    или
 
    ```
    su -
+
    ```
 2. Откройте для редактирования файл `limits.conf`:
 
    ```
    nano /etc/security/limits.conf
+
    ```
 3. Установите следующие директивы:
 
@@ -254,6 +275,7 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
    www-data hard nproc 200000
    www-data soft nofile 200000
    www-data hard nofile 200000
+
    ```
 
    - **РЕД ОС**, **Rocky** (RPM-based)
@@ -263,6 +285,7 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
    nginx hard nproc 200000
    nginx soft nofile 200000
    nginx hard nofile 200000
+
    ```
 
    - **Альт Сервер**
@@ -272,21 +295,25 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
    _nginx hard nproc 200000
    _nginx soft nofile 200000
    _nginx hard nofile 200000
+
    ```
 4. Откройте файл `common-session` для редактирования:
 
    ```
    nano /etc/pam.d/common-session
+
    ```
 5. Установите следующую директиву:
 
    ```
    session required pam_limits.so
+
    ```
 6. Откройте файл `sysctl.conf` для редактирования:
 
    ```
    nano /etc/sysctl.conf
+
    ```
 7. Установите следующие директивы:
 
@@ -294,6 +321,7 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
    fs.file-max=2097152
    vm.max_map_count=262144
    fs.inotify.max_user_instances=524288
+
    ```
 
    Оптимальное значение vm.max\_map\_count
@@ -305,27 +333,32 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
 
    ```
    nano /etc/systemd/user.conf
+
    ```
 9. Установите следующую директиву:
 
    ```
    DefaultLimitNOFILE=200000
+
    ```
 10. Откройте файл `system.conf` для редактирования:
 
     ```
     nano /etc/systemd/system.conf
+
     ```
 11. Установите следующую директиву:
 
     ```
     DefaultLimitNOFILE=200000
+
     ```
 12. После внесения изменений перезапустите демоны:
 
     ```
     sysctl -p
     systemctl daemon-reexec
+
     ```
 
 ### Создание единственного экземпляра ПО
@@ -334,17 +367,20 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
 
    ```
    sudo -s
+
    ```
 
    или
 
    ```
    su -
+
    ```
 2. Перейдите в директорию со скриптами для развёртывания ПО **{{ productName }}**:
 
    ```
    cd <distPath>/CMW_<osname>_<versionNumber>/scripts
+
    ```
 
    Здесь: `<distPath>/CMW_<osname>_<versionNumber>/` — путь к распакованному дистрибутиву ПО.
@@ -352,6 +388,7 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
 
    ```
    sh instance_create.sh -n=<instanceName> -v=<versionNumber> [-p=<portNumber>]
+
    ```
 
    Ключи скрипта `instance_create.sh`:
@@ -389,11 +426,13 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
    OK     NGINX started.
    OK     Final status.
    [Done] Creating a new CBAP instance.
+
    ```
 5. Удостоверьтесь, что была создана директория с файлами конфигурации экземпляра ПО.
 
    ```
    ls -lhF /var/www/<instanceName>/
+
    ```
 6. По выводу команды `ls` удостоверьтесь, что в путях указана корректная версия ПО, например `5.0.0000.0`:
 
@@ -408,6 +447,7 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
    lrwxrwxrwx. 1 nginx nginx   42 Oct 11 17:54 resources -> /var/www/.cmw_version/5.0.0000.0/resources/
    lrwxrwxrwx. 1 nginx nginx   43 Oct 11 17:54 robots.txt -> /var/www/.cmw_version/5.0.0000.0/robots.txt
    lrwxrwxrwx. 1 nginx nginx   45 Oct 11 17:54 unauthorized -> /var/www/.cmw_version/5.0.0000.0/unauthorized/
+
    ```
 
 ### Создание дополнительного экземпляра ПО
@@ -418,33 +458,39 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
 
    ```
    sudo -s
+
    ```
 
    или
 
    ```
    su -
+
    ```
 2. Просмотрите список имеющихся экземпляров ПО **{{ productName }}**:
 
    ```
    cat /usr/share/comindware/configs/instance/* | grep -E '(configPath:)'
+
    ```
 3. Просмотрите список используемых портов:
 
    ```
    ss -tunlp
+
    ```
 
    Также можно узнать, используется ли определённый порт (`<portNumber>`):
 
    ```
    ss -tunlp | grep :<portNumber>
+
    ```
 4. Просмотрите список установленных версий ПО:
 
    ```
    ls /var/www/.cmw_version/
+
    ```
 5. Создайте новый экземпляр ПО согласно приведённым выше [инструкциям](#deploy_guide_linux_instance_create_single), указав для него **уникальные имя и порт**.
 6. Откройте для редактирования три службы **каждого** из установленных экземпляров ПО (`<instanceName>`):
@@ -453,12 +499,14 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
    nano /usr/lib/systemd/system/comindware<instanceName>.service
    nano /usr/lib/systemd/system/apigateway<instanceName>.service
    nano /usr/lib/systemd/system/adapterhost<instanceName>.service
+
    ```
 7. Если используются локальные службы Kafka и OpenSearch (Elasticsearch), откройте их для редактирования:
 
    ```
    nano /usr/lib/systemd/system/kafka.service
    nano /usr/lib/systemd/system/elasticsearch.service
+
    ```
 8. В каждом файле службы установите следующие директивы:
 
@@ -467,6 +515,7 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
    LimitNOFILE=200000
    # Макс. количество процессов
    LimitNPROC=8192
+
    ```
 
 ## Запуск экземпляра ПО
@@ -475,12 +524,14 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
 
    ```
    sudo -s
+
    ```
 
    или
 
    ```
    su -
+
    ```
 2. Удостоверьтесь, что основные службы установлены, запущены и имеют статус `Active (running)`:
 
@@ -488,6 +539,7 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
    systemctl status apigateway<instanceName>
    systemctl status adapterhost<instanceName>
    systemctl status comindware<instanceName>
+
    ```
 3. Если какая-либо служба не работает, запустите её:
 
@@ -495,6 +547,7 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
    systemctl start apigateway<instanceName>
    systemctl start adapterhost<instanceName>
    systemctl start comindware<instanceName>
+
    ```
 4. Выполните инициализацию ПО.
 
@@ -508,6 +561,7 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
 
    ```
    http://<instanceHost>:<portNumber>
+
    ```
 3. Дождитесь запуска и отображения веб-сайта **{{ productName }}**, что может занять примерно 5 минут.
 4. Откроется страница создания аккаунта администратора **{{ productName }}**.
@@ -559,17 +613,20 @@ url: 'https://kb.comindware.ru/article.php?id=4622'
 
 ```
 mmap(PROT_NONE) failed
+
 ```
 
 1. Определите текущее значение `vm.max_map_count`:
 
    ```
    sudo sysctl vm.max_map_count
+
    ```
 2. Определите выделенный объём оперативной памяти:
 
    ```
    free
+
    ```
 
    Обратите внимание на общий объём оперативной памяти.
@@ -578,6 +635,7 @@ mmap(PROT_NONE) failed
    ```
    declare -i NEW_max_map_count=$(vmstat -s | grep -i 'total memory' | awk ' {print $1}')*1024/$(getconf PAGE_SIZE)
    echo $NEW_max_map_count
+
    ```
 4. Полученное значение `NEW_max_map_count` временно присвойте параметру `vm.max_map_count` и проверьте работу экземпляра ПО:
 
@@ -585,6 +643,7 @@ mmap(PROT_NONE) failed
 
    ```
    sudo sysctl -w vm.max_map_count=$NEW_max_map_count
+
    ```
 5. Удостоверившись в работоспособности экземпляра ПО, задайте постоянное значение `vm.max_map_count`:
 
@@ -592,11 +651,13 @@ mmap(PROT_NONE) failed
 
      ```
      sudo nano /etc/sysctl.conf
+
      ```
    - Установите значение `vm.max_map_count`:
 
      ```
      vm.max_map_count=<NEW_max_map_count>
+
      ```
 
      `<NEW_max_map_count>` замените на полученное на шаге 3 цифровое значение.
@@ -604,6 +665,7 @@ mmap(PROT_NONE) failed
 
      ```
      sysctl -p
+
      ```
 
 ## Остановка экземпляра ПО
@@ -612,12 +674,14 @@ mmap(PROT_NONE) failed
 
    ```
    sudo -s
+
    ```
 
    или
 
    ```
    su -
+
    ```
 2. Перед тем как выполнять любые действия с файлами ПО и базы данных, остановите службы, поддерживающие работу ПО:
 
@@ -625,6 +689,7 @@ mmap(PROT_NONE) failed
    systemctl stop comindware<instanceName>
    systemctl stop apigateway<instanceName>
    systemctl stop adapterhost<instanceName>
+
    ```
 3. Удостоверьтесь, что службы остановлены:
 
@@ -632,6 +697,7 @@ mmap(PROT_NONE) failed
    systemctl status comindware<instanceName>
    systemctl status apigateway<instanceName>
    systemctl status adapterhost<instanceName>
+
    ```
 
 ## Удаление версии и экземпляра ПО
@@ -652,23 +718,27 @@ mmap(PROT_NONE) failed
 
    ```
    sudo -s
+
    ```
 
    или
 
    ```
    su -
+
    ```
 2. Остановите экземпляр ПО согласно [инструкции](#остановка-экземпляра-по).
 3. Перейдите в директорию со скриптами для развёртывания ПО **{{ productName }}**:
 
    ```
    cd <distPath>/CMW_<osname>_<versionNumber>/scripts
+
    ```
 4. Запустите удаление экземпляра ПО:
 
    ```
    sh instance_delete.sh -n=<instanceName>
+
    ```
 
    Скрипт `delete.sh` поддерживает следующие ключи:
@@ -682,6 +752,7 @@ mmap(PROT_NONE) failed
 
    ```
    sh instance_list.sh
+
    ```
 
 ### Удаление версии ПО
@@ -690,33 +761,39 @@ mmap(PROT_NONE) failed
 
    ```
    sudo -s
+
    ```
 
    или
 
    ```
    su -
+
    ```
 2. Просмотрите список экземпляров ПО с указанием версий:
 
    ```
    sh instance_list.sh
+
    ```
 3. Удалите все экземпляры с версией ПО, которую требуется удалить, или обновите их до другой версии. Удалить версию ПО, которая используется в каких-либо экземплярах, не удастся. См. *«[Удаление экземпляра ПО](#удаление-экземпляра-по)»*.
 4. Перейдите в директорию со скриптами для развёртывания ПО **{{ productName }}**:
 
    ```
    cd <distPath>/CMW_<osname>_<versionNumber>/scripts
+
    ```
 5. Просмотрите список установленных версий ПО:
 
    ```
    sh version_list.sh
+
    ```
 6. Удалите версию ПО:
 
    ```
    sh version_delete.sh -v=<versionNumber>
+
    ```
 
    Здесь: `-v=<versionNumber>` — укажите номер версии ПО вида `X.X.XXXX.X` (например: `5.0.0000.0`).
@@ -724,12 +801,14 @@ mmap(PROT_NONE) failed
 
    ```
    sh version_list.sh
+
    ```
 
    или
 
    ```
    ls /var/www/.cmw_version
+
    ```
 
 --8<-- "related_topics_heading.md"

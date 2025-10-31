@@ -130,6 +130,6 @@ _![Настройка передачи данных в текущий проце
 - *[Встроенный подпроцесс][process_diagram_elements_embedded_subprocess]*
 - *[Общие свойства элементов диаграммы процесса][process_diagram_element_common_properties]*
 - *[Элементы диаграммы процесса][process_diagram_elements]*
-- *[Редактирование диаграммы процесса][process_diagram]*
+- *[Редактирование диаграммы процесса][process_diagram_designer]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

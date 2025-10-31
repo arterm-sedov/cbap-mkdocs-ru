@@ -118,6 +118,7 @@ url: 'https://kb.comindware.ru/article.php?id=5071'
 
   ```
   ObjectType@[ContainerSystemName].ObjectSystemName
+
   ```
 - **Instance** — экземпляр **{{ productName }}**.
 - **Property** — свойство объекта.

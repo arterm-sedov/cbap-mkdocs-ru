@@ -39,6 +39,7 @@ url: 'https://kb.comindware.ru/article.php?id=4879'
            ?value cmw:parent ?processObject.
        }
    }
+
    ```
 3. Создайте **вычисляемый текстовый** атрибут *«Ссылка на задачу»* и введите следующую **формулу** в качестве **вычисляемого значения**:
 
@@ -49,6 +50,7 @@ url: 'https://kb.comindware.ru/article.php?id=4879'
    </a></p>",
    LIST($IDзадачи)
    )
+
    ```
 
    Здесь:

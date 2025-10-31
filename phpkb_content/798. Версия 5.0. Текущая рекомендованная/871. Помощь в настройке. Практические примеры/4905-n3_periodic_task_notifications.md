@@ -51,6 +51,7 @@ url: 'https://kb.comindware.ru/article.php?id=4905'
 
    ```
    $Сотрудник->cmw.account.mbox
+
    ```
 
    - *Текст письма*
@@ -146,6 +147,7 @@ url: 'https://kb.comindware.ru/article.php?id=4905'
            # Возвращаем результат.
            ?first  -> ?value.
    }
+
    ```
 4. Постройте диаграмму процесса по показанному на следующей иллюстрации образцу:
 
@@ -225,6 +227,7 @@ url: 'https://kb.comindware.ru/article.php?id=4905'
        # Исключаем отключенные аккаунты
        not {?value cmw:isDisabled true.}.
    }
+
    ```
 
    - *Сотрудникам на отправку*

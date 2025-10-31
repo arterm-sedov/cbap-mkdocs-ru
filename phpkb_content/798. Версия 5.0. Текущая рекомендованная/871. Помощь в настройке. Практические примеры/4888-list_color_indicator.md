@@ -14,7 +14,7 @@ url: 'https://kb.comindware.ru/article.php?id=4888'
 
 ```
 IF(GREATEREQ($
-Fakticheskayadata , $Planovayadata),
+Fakticheskayadata , $Planovayadata),
 
 "<span style='color:#B22222; font-size: 200%; text-shadow: 0 0 1px black; position: absolute; top:0px;'> ● </span>",
 

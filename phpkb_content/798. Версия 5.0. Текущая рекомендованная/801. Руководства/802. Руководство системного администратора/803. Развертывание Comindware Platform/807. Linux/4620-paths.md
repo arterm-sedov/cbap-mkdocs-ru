@@ -22,6 +22,7 @@ url: 'https://kb.comindware.ru/article.php?id=4620'
 
 ```
 /usr/share/comindware/configs/instance/<instanceName>.yml
+
 ```
 
 **Пути по умолчанию**
@@ -57,6 +58,7 @@ url: 'https://kb.comindware.ru/article.php?id=4620'
 
 ```
 C:\\ProgramData\\сomindware\\configs\\instance\\<instanceName>.yml
+
 ```
 
 **Пути по умолчанию**

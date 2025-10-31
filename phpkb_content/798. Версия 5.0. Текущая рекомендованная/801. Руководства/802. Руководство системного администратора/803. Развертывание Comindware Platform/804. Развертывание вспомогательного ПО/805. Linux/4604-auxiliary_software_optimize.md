@@ -85,6 +85,7 @@ url: 'https://kb.comindware.ru/article.php?id=4604'
 
    ```
    сluster.max_shards_per_node: 3000
+
    ```
 3. Перезапустите службу Elasticsearch, чтобы изменения вступили в силу.
 
@@ -148,6 +149,7 @@ url: 'https://kb.comindware.ru/article.php?id=4604'
    gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
    ...
    }
+
    ```
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

@@ -136,6 +136,7 @@ url: 'https://kb.comindware.ru/article.php?id=5066'
             }
         }
     }
+
     ```
 
   На каждой итерации цикла формируется и отправляется отдельный HTTP-запрос, содержащий данные файла в формате JSON:
@@ -151,6 +152,7 @@ url: 'https://kb.comindware.ru/article.php?id=5066'
             "content": "STRING"
         }
     }
+
     ```
   - Содержимое переменной `$$Message` очищается для использования в следующей итерации цикла.
 
@@ -193,6 +195,7 @@ url: 'https://kb.comindware.ru/article.php?id=5066'
            variable:name operator:replace ?name.
            true -> ?value.
        }
+
        ```
    - На вкладке «**Дополнительно**»:
 
@@ -224,12 +227,14 @@ url: 'https://kb.comindware.ru/article.php?id=5066'
 
      ```
      $$content
+
      ```
 
      - *name* — **значение: формула**
 
      ```
      $$name
+
      ```
 
      Здесь `$$content` и `$$name` — переменные, которые были созданы на шаге 4.
@@ -258,6 +263,7 @@ url: 'https://kb.comindware.ru/article.php?id=5066'
            # Возвращаем значение true
            true -> ?value.
        }
+
        ```
    - На вкладке «**Дополнительно**»:
 

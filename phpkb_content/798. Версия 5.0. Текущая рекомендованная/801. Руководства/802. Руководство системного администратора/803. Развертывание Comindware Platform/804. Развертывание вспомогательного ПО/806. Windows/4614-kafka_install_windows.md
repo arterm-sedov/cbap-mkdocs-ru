@@ -93,18 +93,21 @@ url: 'https://kb.comindware.ru/article.php?id=4614'
    fetch.message.max.bytes=104857600
    # Максимальный размер сообщения для выборки реплики
    replica.fetch.max.bytes=104857600
+
    ```
 6. Откройте *PowerShell* от имени администратора и выполните команды:
 
    ```
    cd "C:\\kafka\\bin\\windows\\"
    .\\kafka-storage.bat random-uuid
+
    ```
 7. Kafka выдаст UID, например, `kNZtrWDsRvW0udJeaEahsg`
 8. Используйте полученный UID в следующей команде:
 
    ```
    .\\kafka-storage.bat format -t kNZtrWDsRvW0udJeaEahsg -c C:\\kafka\\config\\kraft\\server.properties
+
    ```
 9. Загрузите с **[официального сайта](https://nssm.cc/download)** архив *NSSM* и распакуйте его.
 10. В папке `\\win64` найдите файл `nssm.exe` и скопируйте его в папку `C:\\kafka\\bin\\windows\\`.
@@ -112,6 +115,7 @@ url: 'https://kb.comindware.ru/article.php?id=4614'
 
     ```
     .\\nssm install kafka
+
     ```
 12. Запустится программа `NSSM service installer`.
 
@@ -124,18 +128,21 @@ url: 'https://kb.comindware.ru/article.php?id=4614'
 
     ```
     C:\\kafka\\bin\\windows\\kafka-server-start.bat
+
     ```
 
     - **Startup directory**
 
     ```
     C:\\kafka\\bin\\windows\\
+
     ```
 
     - **Arguments**
 
     ```
     C:\\kafka\\config\\kraft\\server.properties
+
     ```
 14. Нажмите кнопку «**Install service**».
 15. Произойдёт установка сервиса.
@@ -156,6 +163,7 @@ url: 'https://kb.comindware.ru/article.php?id=4614'
     .\\kafka-console-producer.bat --bootstrap-server <KafkaIP>:<kafkaBrokerPort> --topic TEST
     # Отправьте любое сообщение, например:
     hello
+
     ```
 19. При правильной работе Kafka выдаст предупреждение, что раннее такой ветки сообщений не было, и создаст её.
 
@@ -175,11 +183,13 @@ url: 'https://kb.comindware.ru/article.php?id=4614'
    mq.group: <instanceName>
    # Идентификатор узла очереди сообщений
    mq.node: <instanceName>
+
    ```
 3. Удалите следующую строку из файла `<instanceName>.yml`:
 
    ```
    kafkaBootstrapServer:
+
    ```
 
    Внимание!
@@ -187,37 +197,49 @@ url: 'https://kb.comindware.ru/article.php?id=4614'
    Для корректной работы экземпляра ПО необходимо соблюсти следующие условия:
 
    - IP-адрес и порт {{ apacheKafkaVariants }} должны быть обязательно прописаны цифрами в формате `XXX.XXX.XXX.XXX:XXXXX`. То есть недопустимо указывать имя хоста вместо IP-адреса и опускать номер порта.
-   - Установите соответствующие вашей конфигурации значения параметров `mq.server` (адрес и порт сервера очереди сообщений), `mq.group` (идентификатор группы очереди сообщений), `mq.node` (идентификатор узла очереди сообщений; не должен совпадать с `mq.group`; если узлов несколько, на разных узлах должен быть разным). Они должны совпадать во всех файлах конфигурации:
+   - Установите соответствующие вашей конфигурации значения параметров `mq.server` (адрес и порт брокера сообщений), `mq.group`. Они должны совпадать во всех файлах конфигурации:
 
      ```
      C:\\ProgramData\\comindware\\configs\\instance\\<instanceName>.yml
      C:\\ProgramData\\comindware\\Instances\\<InstanceName>\\config\\apigateway.yml
      C:\\ProgramData\\comindware\\Instances\\<InstanceName>\\config\\adapterhost.yml
+
      ```
    - Удостоверьтесь, что в `YML`-файлах конфигурации все пути указаны с обратной косой чертой `\\` в стиле Windows, а не в стиле Linux `/`.
 4. Задайте параметры подключения к Kafka в файле `apigateway.yml`:
 
    ```
-   # Укажите IP-адрес сервера Kafka
+   # IP-адрес сервера Kafka
    # без префикса http/https
    mq.server: <KafkaIP>:<kafkaBrokerPort>
-   # Укажите имя экземпляра ПО
+   # Префикс имени очередей сообщений
+   mq.name: <instanceName>
+   # Идентификатор группы очереди сообщений
    mq.group: <instanceName>
    # Идентификатор узла очереди сообщений
-   # Должен отличаться от mq.group.
-   mq.node: <instanceName>_Exclusive
+   mq.node: <instanceName>
+
    ```
 5. Задайте параметры подключения к Kafka в файле `adapterhost.yml`:
 
    ```
-   # Укажите IP-адрес сервера Kafka
+   # IP-адрес сервера Kafka
+   # без префикса http/https
    mq.server: <KafkaIP>:<kafkaBrokerPort>
+   # Префикс имени очередей сообщений
+   mq.name: <instanceName>
+   # Идентификатор группы очереди сообщений
+   mq.group: <instanceName>
+   # Идентификатор узла очереди сообщений
+   mq.node: <instanceName>
+
    ```
 6. Перезапустите экземпляр ПО.
 7. Проверьте соединение с Kafka в браузере по ссылке (`<instanceAddress>` — URL экземпляра ПО):
 
    ```
    <instanceAddress>/async
+
    ```
 
 ## Дополнительные рекомендации

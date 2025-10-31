@@ -41,6 +41,7 @@ url: 'https://kb.comindware.ru/article.php?id=5077'
       # Возвращаем записи, у которых атрибут имеет значение "enumValueSystemName".
       ?item ?enumAttribute ?enumValueId.
   }
+
   ```
 - Фильтрация добавляемых записей (в таблице на форме или раскрывающемся списке на форме) записей с требуемым значением атрибута:
 
@@ -57,6 +58,7 @@ url: 'https://kb.comindware.ru/article.php?id=5077'
       ?filteredRecordIds ?enumAttribute ?enumValueId.
       ?filteredRecordIds -> ?value.
   }
+
   ```
 - Фильтрация отображаемых записей (в таблице на форме, раскрывающемся списке на форме, вычисляемом атрибуте или правиле для формы) записей с требуемым значением атрибута:
 
@@ -77,6 +79,7 @@ url: 'https://kb.comindware.ru/article.php?id=5077'
       ?filteredRecordIds ?enumAttribute ?enumValueId.
       ?filteredRecordIds -> ?value.
   }
+
   ```
 
 ## Прикладная задача
@@ -140,6 +143,7 @@ url: 'https://kb.comindware.ru/article.php?id=5077'
        # Возвращаем отфильтрованные значения из ?TransportRequestsValue.
        ?TransportRequestsValue -> ?value.
    }
+
    ```
 8. Сохраните форму.
 

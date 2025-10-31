@@ -57,16 +57,19 @@ url: 'https://kb.comindware.ru/article.php?id=4617'
 
    ```
    "C:\\Program Files\\Elasticsearch\\elasticsearch-<8.XX.X>\\bin\\elasticsearch-service.bat" install
+
    ```
 6. Запустите службу Elasticsearch, выполнив следующую команду:
 
    ```
    "C:\\Program Files\\Elasticsearch\\elasticsearch-<8.XX.X>\\bin\\elasticsearch-service.bat" start
+
    ```
 7. Сформируйте пароль для пользователя Elasticsearch с помощью следующей команды:
 
    ```
    "C:\\Program Files\\Elasticsearch\\elasticsearch-<8.XX.X>\\bin\\elasticsearch-reset-password.bat" –u elastic
+
    ```
 8. Сохраните пароль, который отобразится на экране.
 
@@ -168,6 +171,7 @@ indices.id_field_data.enabled: true
 
 # Геолокация отключена
 ingest.geoip.downloader.enabled: false
+
 ```
 
 --8<-- "related_topics_heading.md"

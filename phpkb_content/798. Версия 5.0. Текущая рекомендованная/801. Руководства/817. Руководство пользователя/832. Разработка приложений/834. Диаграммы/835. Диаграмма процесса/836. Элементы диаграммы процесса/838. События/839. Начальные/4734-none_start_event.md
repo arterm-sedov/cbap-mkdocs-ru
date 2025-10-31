@@ -40,6 +40,6 @@ _![Свойства простого начального события](/platf
 - *[Стартовая форма и форма пользовательской задачи][process_diagram_forms]*
 - *[Общие свойства элементов диаграммы процесса][process_diagram_element_common_properties]*
 - *[Элементы диаграммы процесса][process_diagram_elements]*
-- *[Редактирование диаграммы процесса][process_diagram]*
+- *[Редактирование диаграммы процесса][process_diagram_designer]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

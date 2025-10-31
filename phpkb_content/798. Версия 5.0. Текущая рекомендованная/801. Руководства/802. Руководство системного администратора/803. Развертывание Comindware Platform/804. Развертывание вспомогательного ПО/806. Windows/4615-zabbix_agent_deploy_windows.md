@@ -95,11 +95,13 @@ _![Статус хоста Zabbix Agent](https://kb.comindware.ru/assets/img_63b
 - значения `Server` и `ServerActive` в файле конфигурации *Zabbix Agent* `/etc/zabbix/zabbix_agentd.conf` соответствуют IP-адресу *Zabbix Server*:
 
 ```
-Server=192.168.0.1 # ip-адрес приведён как пример
+Server=192.168.0.1 # ip-адрес приведён как пример
+
 ```
 
 ```
-ServerActive=192.168.0.1 # ip-адрес приведён как пример
+ServerActive=192.168.0.1 # ip-адрес приведён как пример
+
 ```
 
 **Примечание**

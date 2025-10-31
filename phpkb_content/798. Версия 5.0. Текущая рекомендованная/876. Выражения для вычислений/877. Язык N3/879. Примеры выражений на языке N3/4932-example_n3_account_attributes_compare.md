@@ -9,7 +9,7 @@ url: 'https://kb.comindware.ru/article.php?id=4932'
 Для сравнения двух пользователей (например, менеджер проекта и руководитель сотрудника), введите следующее выражение:
 
 ```
- 
+ 
 
 #EQUALS($WorkPlanOriginalRef->Curator, $Manager)
 

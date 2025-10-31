@@ -86,6 +86,7 @@ url: 'https://kb.comindware.ru/article.php?id=4935'
            ?item cmw:possibleAssignee ?roleGroups.
        }.
    }
+
    ```
 4. Добавьте таблицу *«Задачи по всем процессам»* на страницу «**Мои задачи**». См. *«[Создание таблицы со списком задач][table_configure]»*.
 
@@ -153,6 +154,7 @@ url: 'https://kb.comindware.ru/article.php?id=4935'
            ?item cmw:possibleAssignee ?roleGroups.
        }.
    }
+
    ```
 4. Добавьте таблицу *«Задачи по проектам»* на страницу «**Мои задачи**».
 

@@ -11,7 +11,7 @@ url: 'https://kb.comindware.ru/article.php?id=4963'
 - Для системной кнопки «Завершить задачу» в Шаблоне процесса:
 
 ```
- 
+ 
 
 @prefix taskStatus: <http://comindware.com/ontology/taskStatus#>.
 
@@ -45,7 +45,7 @@ else {false -> ?value.}.
 - Для кнопки в связанном Шаблоне записи
 
 ```
- 
+ 
 
 @prefix taskStatus: <http://comindware.com/ontology/taskStatus#>.
 

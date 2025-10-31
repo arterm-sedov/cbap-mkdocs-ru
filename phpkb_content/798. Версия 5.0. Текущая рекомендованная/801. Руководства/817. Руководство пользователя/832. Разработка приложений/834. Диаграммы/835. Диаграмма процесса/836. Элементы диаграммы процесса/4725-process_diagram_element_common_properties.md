@@ -20,7 +20,7 @@ url: 'https://kb.comindware.ru/article.php?id=4725'
   - **Пропуск** — токен проходит через элемент без выполнения элемента.
 - **Описание** — необязательный комментарий относительно назначения элемента.
 
-Общие свойства элемента (кроме статуса активности) отображаются в панели свойств элемента при его выборе в [конструкторе диаграммы процесса][process_diagram], а также в [окне свойств элемента](#process_diagram_element_properties_setting).
+Общие свойства элемента (кроме статуса активности) отображаются в панели свойств элемента при его выборе в [конструкторе диаграммы процесса][process_diagram_designer], а также в [окне свойств элемента](#process_diagram_element_properties_setting).
 
 _![Свойства выбранного элемента в панели свойств элемента](/platform/v5.0/business_apps/diagrams/process_diagram/process_diagram_elements/img/process_diagram_element_common_properties_in_properties_panel.png)_
 
@@ -43,6 +43,6 @@ _![Свойства выбранного элемента в панели сво
 
 - *[Элементы диаграммы процесса][process_diagram_elements]*
 - *[Диаграмма процесса][process_diagram]*
-- *[Конструктор диаграммы процесса][process_diagram]*
+- *[Конструктор диаграммы процесса][process_diagram_designer]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

@@ -33,7 +33,7 @@ _![Автоматически созданная кнопка](https://kb.comind
 Перейдите на вкладку «***Скрипт***» в свойствах этой кнопки и добавьте следующий код:
 
 ```
- 
+ 
 
 using System;
 using System.Collections.Generic;
@@ -227,7 +227,7 @@ _![Пример word шаблона экспорта](https://kb.comindware.ru/a
 C# скрипт:
 
 ```
- 
+ 
 
 using System;
 using System.Collections.Generic;

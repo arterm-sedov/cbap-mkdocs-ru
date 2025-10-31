@@ -62,6 +62,7 @@ url: 'https://kb.comindware.ru/article.php?id=4642'
    mkdir /var/backups/comindware/<instanceName>
    chmod 777 /var/backups/comindware/<instanceName>
    chown -R www-data:www-data /var/backups/comindware/<instanceName>
+
    ```
 
    **Альт Сервер, РЕД ОС**
@@ -70,6 +71,7 @@ url: 'https://kb.comindware.ru/article.php?id=4642'
    mkdir /var/backups/comindware/<instanceName>
    chmod 777 /var/backups/comindware/<instanceName>
    chown -R _nginx:_nginx /var/backups/comindware/<instanceName>
+
    ```
 
    **Здесь** `<instanceName>` — имя экземпляра ПО.
@@ -91,6 +93,7 @@ url: 'https://kb.comindware.ru/article.php?id=4642'
    # К нему будут добавляться метка времени и расширение cdbbz, например:
    # Backup.202202161625.cdbbz
    backup.defaultFileName: Backup
+
    ```
 4. Перезапустите **{{ productName }}**.
 5. При необходимости настройте [резервное копирование данных OpenSearch (Elasticsearch) на диск](#backup_configure_elasticsearch_s3).
@@ -124,6 +127,7 @@ url: 'https://kb.comindware.ru/article.php?id=4642'
    # Установите значение true, если сервер принимает только запросы path-style вида:
    # https://<s3hostname>/bucket-name/key-name
    #s3.default.pathStyleAccess: true
+
    ```
 3. Перезапустите **{{ productName }}**.
 4. При необходимости настройте [резервное копирование данных OpenSearch (Elasticsearch) в S3](#backup_configure_elasticsearch_s3).
@@ -152,6 +156,7 @@ url: 'https://kb.comindware.ru/article.php?id=4642'
    s3.<s3connectionName>.accessKey: xxxx
    s3.<s3connectionName>.secretKey: xxxx
    #s3.<s3connectionName>.pathStyleAccess: true
+
    ```
 3. Настройте конфигурацию резервного копирования по умолчанию. Эта конфигурация не будет отображаться в списке конфигураций. Она будет запускаться автоматически по заданному расписанию.
 
@@ -187,6 +192,7 @@ url: 'https://kb.comindware.ru/article.php?id=4642'
    backup.default.<backupName>.withScripts: true
    # Управление составом резервной копии — файлы истории (OpenSearch (Elasticsearch)).
    backup.default.<backupName>.withJournal: true
+
    ```
 4. Перезапустите **{{ productName }}**.
 
@@ -221,17 +227,20 @@ url: 'https://kb.comindware.ru/article.php?id=4642'
    # Внутри этой директории будет создана директория,
    # имя которой будет совпадать с префиксом индекса OpenSearch (Elasticsearch).
    path.repo: /var/backups/elasticsearch
+
    ```
 4. Предоставьте доступ OpenSearch (Elasticsearch) к репозиторию резервных копий:
 
    ```
    chmod -R 777 /var/backups/elasticsearch
    chown -R elasticsearch:elasticsearch /var/backups/elasticsearch
+
    ```
 5. Перезапустите службу OpenSearch (Elasticsearch):
 
    ```
    systemctl restart elasticsearch
+
    ```
 6. Перейдите к настройке машины с экземпляром ПО **{{ productName }}**.
 7. Откройте для редактирования файл конфигурации `<instanceName>.yml`. См. *«[Пути и содержимое директорий экземпляра ПО][paths]»*.
@@ -246,6 +255,7 @@ url: 'https://kb.comindware.ru/article.php?id=4642'
    # будет скопирован в директорию History
    # внутри файла .CDBBZ резервной копии {{ productName }}
    backup.journalRepository.localDisk.path: /var/backups/elasticsearch
+
    ```
 
    Внимание!
@@ -259,6 +269,7 @@ url: 'https://kb.comindware.ru/article.php?id=4642'
 
    ```
    systemctl restart comindware<instanceName>
+
    ```
 10. Настройте конфигурацию резервного копирования на диск c помощью *«[списка конфигураций резервного копирования](#backup_configure_list_view)»*.
 
@@ -298,11 +309,13 @@ url: 'https://kb.comindware.ru/article.php?id=4642'
    # Установите значение true, если сервер принимает только запросы path-style вида:
    # https://<s3hostname>/bucket-name/key-name
    s3.client.default.path_style_access: true
+
    ```
 4. Перезапустите службу OpenSearch (Elasticsearch):
 
    ```
    systemctl restart elasticsearch
+
    ```
 5. Перейдите к настройке машины с экземпляром ПО **{{ productName }}**.
 6. Откройте для редактирования файл конфигурации `<instanceName>.yml`.
@@ -322,6 +335,7 @@ url: 'https://kb.comindware.ru/article.php?id=4642'
    # Установите значение true, если сервер принимает только запросы path-style вида:
    # https://<s3hostname>/bucket-name/key-name
    #s3.default.pathStyleAccess: true
+
    ```
 8. Укажите тип репозитория резервных копий OpenSearch (Elasticsearch): `S3`, и корзину для репозитория, например:
 
@@ -335,11 +349,13 @@ url: 'https://kb.comindware.ru/article.php?id=4642'
    backup.journalRepository.s3.platformConnection: default
    # Имя подключения к хранилищу S3, используемому по умолчанию на стороне OpenSearch (Elasticsearch)
    backup.journalRepository.s3.journalConnection: default
+
    ```
 9. Перезапустите экземпляр **{{ productName }}**:
 
    ```
    systemctl restart comindware<instanceName>
+
    ```
 10. Настройте конфигурацию резервного копирования в S3 c помощью *«[списка конфигураций резервного копирования](#backup_configure_list_view)»*.
 

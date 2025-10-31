@@ -65,22 +65,22 @@ sudo dpkg --install elasticsearch-8.5.1-amd64.deb
 По окончании установки машина выдаст отчёт:
 
 ```
-Setting up elasticsearch (8.10.2) ...
+Setting up elasticsearch (8.10.2) ...
 ---------------------------
-Security autoconfiguration information
-Authentication and authorization are enabled.
-TLS for the transport and HTTP layers is enabled and configured.
-The generated password for the elastic built-in superuser is : wfcEcSTqfyttNCNdpQgv
-If this node should join an existing cluster, you can reconfigure this with
-'/usr/share/elasticsearch/bin/elasticsearch-reconfigure-node --enrollment-token <token-here>'
-after creating an enrollment token on your existing cluster.
-You can complete the following actions at any time:
-Reset the password of the elastic built-in superuser with
-'/usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic'.
-Generate an enrollment token for Kibana instances with
-'/usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s kibana'.
-Generate an enrollment token for Elasticsearch nodes with
-'/usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s node'.
+Security autoconfiguration information
+Authentication and authorization are enabled.
+TLS for the transport and HTTP layers is enabled and configured.
+The generated password for the elastic built-in superuser is : wfcEcSTqfyttNCNdpQgv
+If this node should join an existing cluster, you can reconfigure this with
+'/usr/share/elasticsearch/bin/elasticsearch-reconfigure-node --enrollment-token <token-here>'
+after creating an enrollment token on your existing cluster.
+You can complete the following actions at any time:
+Reset the password of the elastic built-in superuser with
+'/usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic'.
+Generate an enrollment token for Kibana instances with
+'/usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s kibana'.
+Generate an enrollment token for Elasticsearch nodes with
+'/usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s node'.
 ---------------------------------------------------------------------
 ```
 
@@ -95,16 +95,16 @@ Generate an enrollment token for Elasticsearch nodes with
 3.1. Создайте папки, в которые Elasticsearch будет сохранять данные журналов, индексов и резервных копий:
 
 ```
-sudo mkdir /var/elasticsearch
-sudo mkdir /var/elasticsearch/data
-sudo mkdir /var/elasticsearch/logs
+sudo mkdir /var/elasticsearch
+sudo mkdir /var/elasticsearch/data
+sudo mkdir /var/elasticsearch/logs
 sudo mkdir /var/elasticsearch/backups
 ```
 
 3.2. Измените владельца папки и права доступа к ней:
 
 ```
-sudo chown elasticsearch:elasticsearch --recursive /var/elasticsearch/
+sudo chown elasticsearch:elasticsearch --recursive /var/elasticsearch/
 sudo chmod  764 --recursive /var/elasticsearch/
 ```
 
@@ -129,29 +129,29 @@ sudo nano /etc/elasticsearch/elasticsearch.yml
 3.6. Скопируйте в созданный файл конфигурации следующее содержимое:
 
 ```
-bootstrap.memory_lock: false
-cluster.name: elasticsearch.example.cbap
-cluster.max_shards_per_node: 10000
-http.port: 9200
-node.roles: [ master, data, ingest, remote_cluster_client ]
-node.name: elasticsearch1
-path.data: /var/elasticsearch/data
-path.logs: /var/elasticsearch/logs
-path.repo: /var/elasticsearch/backups
-xpack.security.enabled: false
-xpack.security.http.ssl:
-  enabled: false
-#  keystore.path: certs/es1.p12    # [<-] specify path to signedNodeCert.p12 here
-xpack.security.transport.ssl:
-  enabled: false
-#  key: certs/es1.key    # [<-] specify path to nodecert.key here
-#  certificate: certs/es1.crt    # [<-] specify path to nodeCert.crt here
-#  certificate_authorities: [ "certs/CMW-RootCA.crt" ]    # [<-] specify path to CACert.crt here
-network.host: 192.168.1.43
-discovery.seed_hosts : ["192.168.1.43", "192.168.1.42","1.1.1.3"]
-cluster.initial_master_nodes:
-  - elasticsearch1
-  - elasticsearch2
+bootstrap.memory_lock: false
+cluster.name: elasticsearch.example.cbap
+cluster.max_shards_per_node: 10000
+http.port: 9200
+node.roles: [ master, data, ingest, remote_cluster_client ]
+node.name: elasticsearch1
+path.data: /var/elasticsearch/data
+path.logs: /var/elasticsearch/logs
+path.repo: /var/elasticsearch/backups
+xpack.security.enabled: false
+xpack.security.http.ssl:
+  enabled: false
+#  keystore.path: certs/es1.p12    # [<-] specify path to signedNodeCert.p12 here
+xpack.security.transport.ssl:
+  enabled: false
+#  key: certs/es1.key    # [<-] specify path to nodecert.key here
+#  certificate: certs/es1.crt    # [<-] specify path to nodeCert.crt here
+#  certificate_authorities: [ "certs/CMW-RootCA.crt" ]    # [<-] specify path to CACert.crt here
+network.host: 192.168.1.43
+discovery.seed_hosts : ["192.168.1.43", "192.168.1.42","1.1.1.3"]
+cluster.initial_master_nodes:
+  - elasticsearch1
+  - elasticsearch2
   - elasticsearch3
 
 #Этот флаг требуется для записи данных в индексы
@@ -163,7 +163,7 @@ indices.id_field_data.enabled: true
 3.7. Измените для `yml`-файла конфигурации Elasticsearch владельца и права доступа:
 
 ```
-sudo chown elasticsearch:elasticsearch --recursive /etc/elasticsearch/elasticsearch.yml
+sudo chown elasticsearch:elasticsearch --recursive /etc/elasticsearch/elasticsearch.yml
 sudo chmod 764 --recursive /etc/elasticsearch/elasticsearch.yml
 ```
 
@@ -248,19 +248,19 @@ sudo systemctl status elasticsearch.service
 Пример результата проверки статуса процесса `elasticsearch.service`:
 
 ```
-elasticsearch.service - Elasticsearch
-  Loaded: loaded (/lib/systemd/system/elasticsearch.service; enabled; vendor preset: enabled)
-  Active: active (running) since Thu 2022-12-01 10:12:27 UTC; 6s ago
-    Docs: <https://www.elastic.co>
-Main PID: 3597 (java)
-   Tasks: 63 (limit: 4575)
-  Memory: 629.9M
-     CPU: 44.422s
-  CGroup: /system.slice/elasticsearch.service
-          ├─3597 /usr/share/elasticsearch/jdk/bin/java -Xms4m -Xmx64m -XX:+UseSerialGC -Dcli.name=server -Dcli.scri>
-          ├─3656 /usr/share/elasticsearch/jdk/bin/java -Des.networkaddress.cache.ttl=60 -Des.networkaddress.cache.n>
-          └─3676 /usr/share/elasticsearch/modules/x-pack-ml/platform/linux-x86_64/bin/controller
-Dec 01 10:11:12 penguin-02 systemd[1]: Starting Elasticsearch...
+elasticsearch.service - Elasticsearch
+  Loaded: loaded (/lib/systemd/system/elasticsearch.service; enabled; vendor preset: enabled)
+  Active: active (running) since Thu 2022-12-01 10:12:27 UTC; 6s ago
+    Docs: <https://www.elastic.co>
+Main PID: 3597 (java)
+   Tasks: 63 (limit: 4575)
+  Memory: 629.9M
+     CPU: 44.422s
+  CGroup: /system.slice/elasticsearch.service
+          ├─3597 /usr/share/elasticsearch/jdk/bin/java -Xms4m -Xmx64m -XX:+UseSerialGC -Dcli.name=server -Dcli.scri>
+          ├─3656 /usr/share/elasticsearch/jdk/bin/java -Des.networkaddress.cache.ttl=60 -Des.networkaddress.cache.n>
+          └─3676 /usr/share/elasticsearch/modules/x-pack-ml/platform/linux-x86_64/bin/controller
+Dec 01 10:11:12 penguin-02 systemd[1]: Starting Elasticsearch...
 Dec 01 10:12:27 penguin-02 systemd[1]: Started Elasticsearch.
 ```
 
@@ -280,22 +280,22 @@ sudo curl http://192.168.XXX.XXХ:9200
 Пример ответа на запрос:
 
 ```
-{
-"name" : "elasticsearch1",
-"cluster_name" : "yourClusterName",
-"cluster_uuid" : "Xfj14lWBRf2c6GAuwtV5lg",
-"version" : {
-    "number" : "8.5.1",
-    "build_flavor" : "default",
-    "build_type" : "deb",
-    "build_hash" : "c1310c45fc534583afe2c1c03046491efba2bba2",
-    "build_date" : "2022-11-09T21:02:20.169855900Z",
-    "build_snapshot" : false,
-    "lucene_version" : "9.4.1",
-    "minimum_wire_compatibility_version" : "7.17.0",
-    "minimum_index_compatibility_version" : "7.0.0"
-    },
-"tagline" : "You Know, for Search"
+{
+"name" : "elasticsearch1",
+"cluster_name" : "yourClusterName",
+"cluster_uuid" : "Xfj14lWBRf2c6GAuwtV5lg",
+"version" : {
+    "number" : "8.5.1",
+    "build_flavor" : "default",
+    "build_type" : "deb",
+    "build_hash" : "c1310c45fc534583afe2c1c03046491efba2bba2",
+    "build_date" : "2022-11-09T21:02:20.169855900Z",
+    "build_snapshot" : false,
+    "lucene_version" : "9.4.1",
+    "minimum_wire_compatibility_version" : "7.17.0",
+    "minimum_index_compatibility_version" : "7.0.0"
+    },
+"tagline" : "You Know, for Search"
 }
 ```
 
@@ -312,51 +312,51 @@ sudo curl http://192.168.XXX.XX1:9200/_cluster/health?pretty>
 5.2. Убедитесь, что в ответе на запрос значение параметра `number_of_nodes` равно количеству узлов кластера:
 
 ```
-{
-"cluster_name" : "yourClusterName",
-"status" : "green",
-"timed_out" : false,
-"number_of_nodes" : 2,
-"number_of_data_nodes" : 2,
-"active_primary_shards" : 1,
-"active_shards" : 2,
-"relocating_shards" : 0,
-"initializing_shards" : 0,
-"unassigned_shards" : 0,
-"delayed_unassigned_shards" : 0,
-"number_of_pending_tasks" : 0,
-"number_of_in_flight_fetch" : 0,
-"task_max_waiting_in_queue_millis" : 0,
-"active_shards_percent_as_number" : 100.0
+{
+"cluster_name" : "yourClusterName",
+"status" : "green",
+"timed_out" : false,
+"number_of_nodes" : 2,
+"number_of_data_nodes" : 2,
+"active_primary_shards" : 1,
+"active_shards" : 2,
+"relocating_shards" : 0,
+"initializing_shards" : 0,
+"unassigned_shards" : 0,
+"delayed_unassigned_shards" : 0,
+"number_of_pending_tasks" : 0,
+"number_of_in_flight_fetch" : 0,
+"task_max_waiting_in_queue_millis" : 0,
+"active_shards_percent_as_number" : 100.0
 }
 ```
 
 ## Пример yml-файла конфигурации узла Elasticsearch
 
 ```
-bootstrap.memory_lock: false
-cluster.name: elasticsearch.example.cbap
-cluster.max_shards_per_node: 10000
-http.port: 9200
-node.roles: [ master, data, ingest, remote_cluster_client ]
-node.name: elasticsearch1
-path.data: /var/elasticsearch/data
-path.logs: /var/elasticsearch/logs
-path.repo: /var/elasticsearch/backups
-xpack.security.enabled: false
-xpack.security.http.ssl:
-  enabled: false
-#  keystore.path: certs/es1.p12    # [<-] specify path to signedNodeCert.p12 here
-xpack.security.transport.ssl:
-  enabled: false
-#  key: certs/es1.key    # [<-] specify path to nodecert.key here
-#  certificate: certs/es1.crt    # [<-] specify path to nodeCert.crt here
-#  certificate_authorities: [ "certs/CMW-RootCA.crt" ]    # [<-] specify path to CACert.crt here
-network.host: 192.168.1.43
-discovery.seed_hosts : ["192.168.1.43", "192.168.1.42","1.1.1.3"]
-cluster.initial_master_nodes:
-  - elasticsearch1
-  - elasticsearch2
+bootstrap.memory_lock: false
+cluster.name: elasticsearch.example.cbap
+cluster.max_shards_per_node: 10000
+http.port: 9200
+node.roles: [ master, data, ingest, remote_cluster_client ]
+node.name: elasticsearch1
+path.data: /var/elasticsearch/data
+path.logs: /var/elasticsearch/logs
+path.repo: /var/elasticsearch/backups
+xpack.security.enabled: false
+xpack.security.http.ssl:
+  enabled: false
+#  keystore.path: certs/es1.p12    # [<-] specify path to signedNodeCert.p12 here
+xpack.security.transport.ssl:
+  enabled: false
+#  key: certs/es1.key    # [<-] specify path to nodecert.key here
+#  certificate: certs/es1.crt    # [<-] specify path to nodeCert.crt here
+#  certificate_authorities: [ "certs/CMW-RootCA.crt" ]    # [<-] specify path to CACert.crt here
+network.host: 192.168.1.43
+discovery.seed_hosts : ["192.168.1.43", "192.168.1.42","1.1.1.3"]
+cluster.initial_master_nodes:
+  - elasticsearch1
+  - elasticsearch2
   - elasticsearch3
 ```
 

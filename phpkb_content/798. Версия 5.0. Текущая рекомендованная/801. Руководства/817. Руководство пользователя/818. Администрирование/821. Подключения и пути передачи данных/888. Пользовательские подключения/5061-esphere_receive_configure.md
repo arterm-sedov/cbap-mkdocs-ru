@@ -217,6 +217,7 @@ url: 'https://kb.comindware.ru/article.php?id=5061'
        # Из ?message получаем ID документа и возвращаем его
        ?message variable:Id ?value.
    }
+
    ```
 4. Добавьте действие «**Отправить сообщение**» со следующими свойствами:
 
@@ -246,6 +247,7 @@ url: 'https://kb.comindware.ru/article.php?id=5061'
            # Из ?document получаем содержимое документа и возвращаем его
            ?document variable:Content ?value.
        }
+
        ```
      - *Name* со **значением** на **N3**:
 
@@ -262,6 +264,7 @@ url: 'https://kb.comindware.ru/article.php?id=5061'
            # Из ?document получаем имя файла документа и возвращаем его
            ?document var:Filename ?value.
        }
+
        ```
 6. Добавьте действие «**Выполнить по условиям**» со следующими свойствами:
 
@@ -294,6 +297,7 @@ url: 'https://kb.comindware.ru/article.php?id=5061'
        # возвращаем значение true
        then {true -> ?value.}.
    }
+
    ```
 7. Внутрь действия «**Выполнить по условиям**» поместите действие «**Создать запись**» и выберите **целевой шаблон** *«Реестр документов из СФЕРА Курьер»*.
 8. Внутрь действия «**Создать запись**» поместите действие «**Прикрепить документ к атрибуту**» со следующими свойствами:
@@ -304,12 +308,13 @@ url: 'https://kb.comindware.ru/article.php?id=5061'
 
    ```
    $$Document
+
    ```
 9. Внутрь действия «**Создать запись**» поместите действие «**Изменить значения атрибутов**» со следующими свойствами:
 
 | Атрибут  Операция со значениями  Значение | | |
 | --- | --- | --- |
-| *Идентификатор документа «СФЕРА Курьер»* | **Заменить** | **N3:**  ``` # Импортируем функции для работы с переменными  @prefix variable: <http://comindware.com/ontology/session/variable#>.  @prefix session: <http://comindware.com/ontology/session#>.  @prefix ui: <http://comindware.com/ontology/ui#>.  {      # Получаем значение локальной переменной Response      # и помещаем в ?response      session:context variable:Response ?response.      # Получаем из ?response ID документа и помещаем его в ?docId      ?response variable:Id ?docId.      # Приводим ?docId к строковому типу и возвращаем значение ID      ?docId ui:toClientString ?value.  } ``` |
+| *Идентификатор документа «СФЕРА Курьер»* | **Заменить** | **N3:**  ``` # Импортируем функции для работы с переменными  @prefix variable: <http://comindware.com/ontology/session/variable#>.  @prefix session: <http://comindware.com/ontology/session#>.  @prefix ui: <http://comindware.com/ontology/ui#>.  {      # Получаем значение локальной переменной Response      # и помещаем в ?response      session:context variable:Response ?response.      # Получаем из ?response ID документа и помещаем его в ?docId      ?response variable:Id ?docId.      # Приводим ?docId к строковому типу и возвращаем значение ID      ?docId ui:toClientString ?value.  }   ``` |
 | *Электронный договор* | **Заменить** | **Формула:** `true` |
 | *Сумма документа* | **Заменить** | **Формула:** `$$Response->TotalSum` |
 | *Сумма НДС* | **Заменить** | **Формула:** `$$Response->VatSum` |

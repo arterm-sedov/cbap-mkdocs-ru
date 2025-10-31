@@ -9,7 +9,7 @@ url: 'https://kb.comindware.ru/article.php?id=5024'
 Для того, чтобы запустить глобальную функцию по кнопке, введите следующее выражение:
 
 ```
- 
+ 
 
 using System; 
 using System.Collections.Generic;

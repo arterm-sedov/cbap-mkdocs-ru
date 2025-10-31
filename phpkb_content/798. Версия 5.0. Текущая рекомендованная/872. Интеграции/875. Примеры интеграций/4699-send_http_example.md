@@ -44,6 +44,7 @@ url: 'https://kb.comindware.ru/article.php?id=4699'
         },
      ]
 }
+
 ```
 
 ## Настройка подключения

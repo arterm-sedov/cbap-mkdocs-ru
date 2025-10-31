@@ -9,7 +9,7 @@ url: 'https://kb.comindware.ru/article.php?id=5004'
 Для того, чтобы по кнопке можно было менять статус записи и завершать связанную с ней пользовательскую задачу, введите следующее выражение:
 
 ```
- 
+ 
 
 using System;
 using System.Collections.Generic;

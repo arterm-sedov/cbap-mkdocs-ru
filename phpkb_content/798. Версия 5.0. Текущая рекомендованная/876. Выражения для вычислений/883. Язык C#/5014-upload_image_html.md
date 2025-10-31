@@ -9,7 +9,7 @@ url: 'https://kb.comindware.ru/article.php?id=5014'
 Для того, чтобы выгрузить картинку в HTML поле, введите следующее выражение:
 
 ```
- 
+ 
 
 using System;
 using System.Collections.Generic;

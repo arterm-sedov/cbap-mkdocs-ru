@@ -303,12 +303,14 @@ _![Пример содержимого архива с исходным кодо
 
    ```
    sudo -s
+
    ```
 
    или
 
    ```
    su -
+
    ```
 2. Установите пакеты .NET:
 
@@ -317,17 +319,20 @@ _![Пример содержимого архива с исходным кодо
      ```
      apt-get update
      apt-get install -y dotnet-sdk-8.0
+
      ```
    - **РЕД ОС**, **Rocky** (RPM-based)
 
      ```
      dnf install dotnet-sdk-8.0
+
      ```
    - **Альт Сервер**
 
      ```
      apt-get update
      apt-get install dotnet-sdk
+
      ```
 3. Откройте файл конфигурации NGINX для редактирования (`instanceName` — имя экземпляра ПО):
 
@@ -335,16 +340,19 @@ _![Пример содержимого архива с исходным кодо
 
      ```
      nano /etc/nginx/sites-available/comindware<instanceName>
+
      ```
    - **РЕД ОС**, **Rocky** (RPM-based)
 
      ```
      nano /etc/nginx/conf.d/comindware<instanceName>
+
      ```
    - **Альт Сервер**
 
      ```
      nano /etc/nginx/sites-available.d/comindware<instanceName>
+
      ```
 4. Добавьте следующие директивы **для каждого пути передачи данных** (`CommunicationRoutePath` — URI пути передачи данных, `hostName` — адрес сервера **{{ productName }}**, `portNumber` — порт, по которому доступен адаптер):
 
@@ -356,6 +364,7 @@ _![Пример содержимого архива с исходным кодо
    location <CommunicationRoutePath> {
        proxy_pass https://<hostName>:<portNumber>;
    }
+
    ```
 5. При необходимости перезапустите NGINX.
 
@@ -421,7 +430,7 @@ _![Создание пути передачи данных с использов
   - Перейдите на вкладку «**Трассировка событий**».
   - Просмотрите события типа «**Получен запрос**» и «**Запрос отправлен**», связанные с работой адаптера, дважды нажав строку события.
 
-  См. *«[Просмотр цепочки событий][logs]»*.
+  См. *«[Просмотр цепочки событий][logs_event_chain_view]»*.
 
 ## Удаление адаптера
 

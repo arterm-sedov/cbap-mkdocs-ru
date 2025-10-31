@@ -20,12 +20,12 @@ url: 'https://kb.comindware.ru/article.php?id=4735'
 
 1. Перетащите начальное событие с панели элементов на поток управления или пустое место диаграммы.
 2. Будет создано **простое начальное событие**.
-3. При необходимости смените [тип события](#типы-начальных-событий) с помощью [меню элемента][process_diagram].
+3. При необходимости смените [тип события](#типы-начальных-событий) с помощью [меню элемента][process_diagram_call_element_menu].
 
 --8<-- "related_topics_heading.md"
 
 - *[События][process_diagram_elements_events]*
 - *[Элементы диаграммы процесса][process_diagram_elements]*
-- *[Редактирование диаграммы процесса][process_diagram]*
+- *[Редактирование диаграммы процесса][process_diagram_designer]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

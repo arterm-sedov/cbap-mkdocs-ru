@@ -9,7 +9,7 @@ url: 'https://kb.comindware.ru/article.php?id=5019'
 Для того, чтобы поменять e-mail у всех пользователей в системе, введите следующее выражение:
 
 ```
- 
+ 
 
 using System; 
 using System.Collections.Generic; 

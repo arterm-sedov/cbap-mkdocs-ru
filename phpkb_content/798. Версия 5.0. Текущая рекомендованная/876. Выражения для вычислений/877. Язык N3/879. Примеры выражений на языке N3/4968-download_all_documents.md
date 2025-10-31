@@ -9,7 +9,7 @@ url: 'https://kb.comindware.ru/article.php?id=4968'
 Для выгрузки всех документов стенда в один атрибут, введите следующее выражение:
 
 ```
- 
+ 
 
 @prefix cmwassert: <http://comindware.com/logics/assert#>.
 @prefix cmwtimeL: <http://comindware.com/logics/time/utc#>.

@@ -9,7 +9,7 @@ url: 'https://kb.comindware.ru/article.php?id=5015'
 Для того, чтобы в рамках процесса можно было очистить атрибут типа Пользователь (например, очистить ответственного), введите следующее выражение:
 
 ```
- 
+ 
 
 using System;
 using System.Collections.Generic;

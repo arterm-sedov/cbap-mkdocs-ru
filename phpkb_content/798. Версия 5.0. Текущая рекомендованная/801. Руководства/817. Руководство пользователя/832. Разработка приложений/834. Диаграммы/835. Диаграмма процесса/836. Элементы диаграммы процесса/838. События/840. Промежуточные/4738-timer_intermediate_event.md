@@ -47,6 +47,6 @@ _![Дополнительные свойства промежуточного с
 - *[Типы промежуточных событий][process_diagram_elements_events_intermediate]*
 - *[Общие свойства элементов диаграммы процесса][process_diagram_element_common_properties]*
 - *[Элементы диаграммы процесса][process_diagram_elements]*
-- *[Редактирование диаграммы процесса][process_diagram]*
+- *[Редактирование диаграммы процесса][process_diagram_designer]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

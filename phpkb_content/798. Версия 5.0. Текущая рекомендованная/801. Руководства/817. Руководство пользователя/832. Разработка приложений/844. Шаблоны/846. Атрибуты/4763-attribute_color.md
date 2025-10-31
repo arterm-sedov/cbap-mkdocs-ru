@@ -67,6 +67,7 @@ url: 'https://kb.comindware.ru/article.php?id=4763'
       IF($Protsentvypolneniya < 30, "16711680",
           IF($Protsentvypolneniya < 50, "16776960",
               "65280"))
+
       ```
 
 **Тестирование**
@@ -168,6 +169,7 @@ _![Окрашивание строк таблицы по справочнику]
 
     ```
     FORMAT("{0}", LIST($Статус->cmw.color))
+
     ```
   - Столбцы в таблице *«Все записи»*:
 

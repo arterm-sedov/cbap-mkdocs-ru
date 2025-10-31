@@ -9,7 +9,7 @@ url: 'https://kb.comindware.ru/article.php?id=5016'
 Для того чтобы обратиться в Active Directory и получить оттуда какую-либо информацию, введите следующее выражение:
 
 ```
- 
+ 
 
 using System;
 using System.Collections.Generic;

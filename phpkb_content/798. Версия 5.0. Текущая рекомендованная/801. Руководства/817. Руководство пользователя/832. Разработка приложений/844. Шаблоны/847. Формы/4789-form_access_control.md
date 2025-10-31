@@ -78,12 +78,13 @@ url: 'https://kb.comindware.ru/article.php?id=4789'
 
    ```
    http://<hostname>/#form/<oa.XX>/<form.XX>/<RecordID>
+
    ```
 
    Здесь:
 
    - `http://<hostname>/` — адрес сервера **{{ productName }}**;
-   - `<oa.XX>` — ID шаблона записи *«Заявки»* (его видно в [списке шаблонов][templates]);
+   - `<oa.XX>` — ID шаблона записи *«Заявки»* (его видно в [списке шаблонов][templates_view_in_app]);
    - `<form.XX>` — ID формы *«Диспетчер»* (его видно в адресной строке браузера в [конструкторе формы][forms]);
    - `<RecordID>` — ID записи *«Заявки»*.
 
@@ -127,6 +128,7 @@ url: 'https://kb.comindware.ru/article.php?id=4789'
       ...
       "attributeNSystemName": "value"
   }
+
   ```
 
 ### Настройка ссылки
@@ -156,6 +158,7 @@ url: 'https://kb.comindware.ru/article.php?id=4789'
        "TargetId": "form.1",
        "TargetType": "Form"
        }'
+
    ```
 
    Здесь: `"TargetType": "Form"` — **обязательный** фиксированный параметр, который **не следует изменять**.
@@ -167,6 +170,7 @@ url: 'https://kb.comindware.ru/article.php?id=4789'
 
    ```
    "https://<your-host>/Resolve?data=<encryptedData>"
+
    ```
 4. Проверьте, что ссылка сформирована корректно, с помощью метода `Base/EncryptedNavigationReferenceService/Decrypt`, указав в теле запроса закодированную строку `<encryptedData>` (**без части `https://<your-host>/Resolve?data=`**):
 
@@ -176,6 +180,7 @@ url: 'https://kb.comindware.ru/article.php?id=4789'
    -H "Content-Type: application/json" \\
    -u <username>:<password> \\
    -d "<encrypted>"
+
    ```
 5. В ответ должен прийти объект со свойствами целевой формы:
 
@@ -186,6 +191,7 @@ url: 'https://kb.comindware.ru/article.php?id=4789'
        "TargetId": "form.1",
        "TargetType": "Form"
    }
+
    ```
 
 ### Тестирование внешней формы
@@ -195,6 +201,7 @@ url: 'https://kb.comindware.ru/article.php?id=4789'
 
    ```
    https://<your-host>/Resolve?data=<encryptedData>
+
    ```
 3. Должна открыться форма *«Клиент»*.
 4. Заполните и сохраните форму.

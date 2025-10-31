@@ -56,6 +56,7 @@ url: 'https://kb.comindware.ru/article.php?id=4920'
         # записываем значение на русском языке в вычисляемый атрибут.
         ?names l10n:data ?value.
 # переходим к следующей итерации по ?enumValueLanguageVersions.
+
 ```
 
 Сравнение и фильтрация значения атрибута с помощью формулы
@@ -66,35 +67,41 @@ url: 'https://kb.comindware.ru/article.php?id=4920'
 
   ```
   $EnumAttributeSystemName == EnumValueSystemName
+
   ```
 
   или
 
   ```
   EQUALS($EnumAttributeSystemName->cmw.variantAlias, "EnumValueSystemName")
+
   ```
 
   или
 
   ```
   EQUALS($EnumAttributeSystemName, ENUMVALUE("EnumAttributeSystemName", "EnumValueSystemName"))
+
   ```
 - неравенство
 
   ```
   $EnumAttributeSystemName !== EnumValueSystemName
+
   ```
 
   или
 
   ```
   NOT(EQUALS($EnumAttributeSystemName->cmw.variantAlias, "EnumValueSystemName"))
+
   ```
 
   или
 
   ```
   NOT(EQUALS($EnumAttributeSystemName, ENUMVALUE("EnumAttributeSystemName", "EnumValueSystemName")))
+
   ```
 
 Фильтрация значения атрибута с помощью N3
@@ -114,6 +121,7 @@ url: 'https://kb.comindware.ru/article.php?id=4920'
       # Возвращаем записи, у которых атрибут имеет значение "enumValueSystemName".
       ?item ?enumAttribute ?enumValueId.
   }
+
   ```
 - Фильтрация добавляемых записей (в таблице на форме или раскрывающемся списке на форме) записей с требуемым значением атрибута:
 
@@ -130,6 +138,7 @@ url: 'https://kb.comindware.ru/article.php?id=4920'
       ?filteredRecordIds ?enumAttribute ?enumValueId.
       ?filteredRecordIds -> ?value.
   }
+
   ```
 - Фильтрация отображаемых записей (в таблице на форме, раскрывающемся списке на форме, вычисляемом атрибуте или правиле для формы) записей с требуемым значением атрибута:
 
@@ -150,6 +159,7 @@ url: 'https://kb.comindware.ru/article.php?id=4920'
       ?filteredRecordIds ?enumAttribute ?enumValueId.
       ?filteredRecordIds -> ?value.
   }
+
   ```
 
 ## Прикладная задача
@@ -215,6 +225,7 @@ url: 'https://kb.comindware.ru/article.php?id=4920'
                ?names l10n:data ?value.
        # переходим к следующей итерации по ?names.
    }
+
    ```
 2. Поместите атрибуты *«Тип ТС»* и *«Наименование типа ТС»* на форму начального события диаграммы процесса *«Обработка заявок»*.
 
@@ -226,6 +237,7 @@ url: 'https://kb.comindware.ru/article.php?id=4920'
 
    ```
    FORMAT("Обработайте заявку на перевозку: {0}", LIST($НаименованиетипаТС))
+
    ```
 4. После каждой пользовательской задачи добавьте **конечное событие**.
 5. Настройте **исходящие потоки** в **дополнительных** свойствах **развилки «или/или»** следующим образом:
@@ -264,6 +276,7 @@ _![Диаграмма процесса «Обработка заявок»](/pla
        # равно Car (легковой автомобиль).
        ?item ?TipTSAttribute ?enumIdCar.
    }
+
    ```
 6. Сохраните таблицу.
 

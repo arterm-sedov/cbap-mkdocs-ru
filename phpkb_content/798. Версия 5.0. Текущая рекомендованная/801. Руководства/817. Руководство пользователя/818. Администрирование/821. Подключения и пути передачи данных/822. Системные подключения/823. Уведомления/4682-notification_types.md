@@ -66,7 +66,7 @@ _![Просмотр внутренних уведомлений](/platform/v5.0/
 
 - [уведомления о задачах с особым текстом][task_notifications];
 - [периодические напоминания об открытых задачах][example_n3_periodic_task_notifications];
-- [уведомления о задачах по электронной почте][task_notifications].
+- [уведомления о задачах по электронной почте][task_notifications_email].
 
 _![Просмотр уведомлений о задачах](/platform/v5.0/administration/connections_communication_routes/system_connections/notifications/img/task_notifications_view.png)_
 

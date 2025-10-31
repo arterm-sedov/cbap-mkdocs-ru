@@ -9,7 +9,7 @@ url: 'https://kb.comindware.ru/article.php?id=4964'
 Для того, чтобы вывести последнюю дату изменения в рамках записей во вложенной коллекции (например, чтобы показать последнюю дату изменения работы или подработы, входящей в общий план), введите следующее выражение:
 
 ```
- 
+ 
 
 @prefix object: <http://comindware.com/ontology/object#>.
 @prefix math: <http://comindware.com/logics/math#>.

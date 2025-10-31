@@ -3,7 +3,7 @@
 <table class="source_code_container">
 <tbody>
 <tr>
-<td class="source_code"> 
+<td class="source_code"> 
 <p>#EQUALS($WorkPlanOriginalRef-&gt;Curator, $Manager)</p>
 <p><br/>@prefix sort: &lt;http://comindware.com/ontology/dataset/sort#&gt;. <br/>@prefix assert: &lt;http://comindware.com/logics/assert#&gt;. <br/>@prefix cmwstring: &lt;http://comindware.com/logics/string#&gt;. <br/>@prefix ui: &lt;http://comindware.com/ontology/ui#&gt;. <br/>@prefix object: &lt;http://comindware.com/ontology/object#&gt;. <br/>{ <br/>    ("WorkPlan" "Curator") object:findProperty ?curatorProperty.    <br/>    ("WorkPlanDuplicate" "WorkPlanOriginal") object:findProperty ?workPlanOriginalProperty. <br/>    ("WorkPlanDuplicate" "Manager") object:findProperty ?managerProperty. <br/>    from { <br/>        ?item ?managerProperty ?manager1. <br/>          ?manager1 ui:toClientString ?manager. <br/>    } select ?manager -&gt; ?managerList. <br/>     <br/>    (?managerList sort:stringComparer) assert:sort ?managerSort. <br/>    ("," ?managerSort) cmwstring:join ?managerStr.    </p>
 <p>    from { <br/>    ?item ?workPlanOriginalProperty ?workPlan. <br/>        ?workPlan ?curatorProperty ?curator1. <br/>          ?curator1 ui:toClientString ?curatorStrg. <br/>    } select ?curatorStrg -&gt; ?curatorList. <br/>     <br/>    (?curatorList sort:stringComparer) assert:sort ?curatorSort. <br/>    ("," ?curatorSort) cmwstring:join ?curatorStr.</p>

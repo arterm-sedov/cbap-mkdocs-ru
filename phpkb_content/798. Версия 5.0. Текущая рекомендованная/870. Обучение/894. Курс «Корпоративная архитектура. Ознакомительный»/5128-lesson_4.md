@@ -232,6 +232,7 @@ url: 'https://kb.comindware.ru/article.php?id=5128'
 
      ```
      False
+
      ```
 
    Изменение статуса согласования с помощью формулы

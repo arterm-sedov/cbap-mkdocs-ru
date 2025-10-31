@@ -9,7 +9,7 @@ url: 'https://kb.comindware.ru/article.php?id=5018'
 Для того, чтобы на запустить процесс по каждой из записей определенного списка, введите следующее выражение:
 
 ```
- 
+ 
 
 using System;
 using System.Collections.Generic;

@@ -38,17 +38,20 @@ url: 'https://kb.comindware.ru/article.php?id=5081'
 
   ```
   var fileIds = Api.TeamNetwork.ObjectService.GetPropertyValues(recordId, new [] {"documentAttributeSystemName"})`;
+
   ```
 - получить массив объектов с прикреплёнными файлами:
 
   ```
   var attachedFileObjects = fileIds[docId].TryGetValue("Files", out object fileObject)
                               && fileObject != null ? fileObject as object[] : null;
+
   ```
 - получить объект файла (`attachedFile`):
 
   ```
   var attachedFile = Api.TeamNetwork.DocumentService.GetContent(attachedFileObject[0].ToString());
+
   ```
 - получить имя файла с расширением (`attachedFile.Name`);
 - получить содержимое файла (`attachedFile.Data`);
@@ -56,6 +59,7 @@ url: 'https://kb.comindware.ru/article.php?id=5081'
 
   ```
   var attachedFile = Api.TeamNetwork.DocumentService.GetDocument(attachedFileObject[0].ToString());
+
   ```
 
   - `attachedFile.Title` — имя файла с расширением;
@@ -73,6 +77,7 @@ url: 'https://kb.comindware.ru/article.php?id=5081'
           Title = "имя файла.расширение",
           Extension = ".расширение"
       };
+
   ```
 - сформировать массив байтов `byte[] fileBytes` с содержимым файла;
 - из массива байтов создать поток `MemoryStream()` для прикрепления документа к атрибуту:
@@ -81,11 +86,13 @@ url: 'https://kb.comindware.ru/article.php?id=5081'
       var fileStream = new MemoryStream();
       fileStream.Write(fileBytes, 0, fileBytes.Length);
       fileStream.Seek(0, SeekOrigin.Begin);
+
   ```
 - преобразовать поток в объект документа для прикрепления к атрибуту:
 
   ```
   string documentObject = Api.TeamNetwork.DocumentService.CreateDocumentWithStream(document, fileStream, "");
+
   ```
 - сформировать словарь из системного имени атрибута и объекта документа:
 
@@ -94,11 +101,13 @@ url: 'https://kb.comindware.ru/article.php?id=5081'
       {
           { "DocumentAttributeSystemName", documentObject }
       };
+
   ```
 - прикрепить результирующий документ к атрибуту записи `reсordId`:
 
   ```
       Api.TeamNetwork.ObjectService.EditWithAlias(reсordId, documentDict)
+
   ```
 
 ## Прикладная задача
@@ -243,6 +252,7 @@ url: 'https://kb.comindware.ru/article.php?id=5081'
            };
        }
    }
+
    ```
 5. Поместите на форму шаблона *«Заявки»* **атрибут** *«Архив документов»* и **кнопку** *«Скачать архив документов»*.
 6. Поместите на форму **атрибут** *«Документы»* и настройте его **представление** в виде **таблицы**.
