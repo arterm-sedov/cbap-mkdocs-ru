@@ -141,6 +141,27 @@
 <nav aria-label="Пользовательские стили" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#themes_custom_css">
+<span class="md-ellipsis">
+      Синтаксис CSS
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#themes_custom_css_rules">
+<span class="md-ellipsis">
+      Правила применения пользовательских стилей
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#themes_custom_css_recommendations">
+<span class="md-ellipsis">
+      Рекомендации по использованию CSS в Comindware Platform
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#примеры-стилизации-интерфейса">
 <span class="md-ellipsis">
       Примеры стилизации интерфейса
@@ -418,6 +439,13 @@
 </figure>
 <h3 id="themes_custom_css">Пользовательские стили</h3>
 <p>Здесь можно указать дополнительные стили CSS для тонкой настройки внешнего вида графического интерфейса.</p>
+<div class="notice notice-success">
+<p class="admonition-title">Определения</p>
+<p><strong>CSS</strong> (Cascading Style Sheets) — это язык описания внешнего вида веб-страниц.</p>
+<p>Правила CSS определяют, как именно элементы интерфейса будут отображаться: цвета, шрифты, размеры, отступы, рамки и прочие визуальные параметры.</p>
+<p>В <strong>Comindware Platform</strong> пользовательские стили темы задаются с помощью CSS.</p>
+<p>Добавляя собственные стили, вы можете изменить внешний вид интерфейса <strong>Comindware Platform</strong> в случае, если вам не хватает возможностей раздела настройки тем.</p>
+</div>
 <div class="notice notice-warning">
 <p class="admonition-title">Внимание!</p>
 <p>Используйте собственные стили CSS с осторожностью и тщательно тестируйте их поведение, так как они могут непредсказуемо влиять на отображение графического интерфейса и могут оказаться несовместимы с будущими версиями <strong>Comindware Platform</strong>.</p>
@@ -425,6 +453,56 @@
 <figure class="screenshot_with_caption">
 <p><img alt="Цветовая палитра — Пользовательские стили" src="/platform/v5.0/administration/appearance/themes/img/palette_custom_css.png"/><figcaption class="caption">Цветовая палитра — Пользовательские стили</figcaption></p>
 </figure>
+<h4 class="pageBreakBefore" id="themes_custom_css">Синтаксис CSS</h4>
+<p>Здесь представлен краткий обзор синтаксиса CSS Для работы с Comindware Platform.</p>
+<p>С подробными сведениями о работе с CSS можно ознакомиться на следующих сайтах:</p>
+<p><a class="mkdocs_imported_link" href="https://www.w3schools.com/css/">W3 Schools: учебник ао CSS (оригинал, англ. язык)</a>
+<a class="mkdocs_imported_link" href="https://w3schoolsrus.github.io/css/">W3 Schools: учебник ао CSS (перевод на русский)</a></p>
+<ul>
+<li>Каждое правило CSS состоит из селектора и блока деклараций.</li>
+<li>Селектор выбирает элементы, свойства которых требуется изменить, а декларации задают пары <code>свойство: значение</code>.</li>
+<li>Блок декларация заключается в парные фигурные скобки <code>{ }</code> и может содержать любое количество деклараций для данного правила.</li>
+<li>Комментарии  заключаются в парные символы <code>/* */</code>.</li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="c">/* Каждую пару свойство: значение необходимо завершать точкой с запятой */</span></code> <br/><code><span class="nt">селектор</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="err">свойство:</span><span class="w"> </span><span class="err">значение</span><span class="p">;</span></code> <br/><code><span class="w">  </span><span class="err">другое-свойство:</span><span class="w"> </span><span class="err">другое</span><span class="w"> </span><span class="err">значение</span><span class="p">;</span></code> <br/><code><span class="p">}</span></code> <br/><code></code> <br/><code><span class="c">/* Пример с классом и переменными темы */</span></code> <br/><code><span class="p">.</span><span class="nc">toolbar-btn_primary</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--theme-colors__btn-txt</span><span class="p">);</span></code> <br/><code><span class="w">  </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--theme-colors__btn</span><span class="p">);</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<div class="notice notice-warning">
+<p class="admonition-title">Важно!</p>
+<ul>
+<li>
+<p><strong>Комментарии</strong> пишите только в виде <code>/* текст комментария */</code>.</p>
+<p><strong>Недопустимо</strong> использовать комментарии вида:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nt">__________________________</span><span class="w">  </span><span class="c">/* неверно */</span></code> <br/><code><span class="o">&lt;!</span><span class="nt">--</span><span class="w"> </span><span class="nt">комментарий</span><span class="w"> </span><span class="nt">--</span><span class="o">&gt;</span><span class="w">        </span><span class="c">/* неверно */</span></code> <br/></pre></code></div>
+<p>Такие символы нарушают синтаксис CSS, и тема может перестать применяться или будет применяться некорректно.</p>
+</li>
+<li>
+<p>После каждой декларации ставьте точку с запятой <code>;</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nt">color</span><span class="o">:</span><span class="w"> </span><span class="nt">var</span><span class="o">(</span><span class="nt">--theme-colors__btn-txt</span><span class="o">);</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Фигурные скобки <code>{ }</code> вокруг блоков должны быть сбалансированы — для каждой открывающей скобки, должна иметься закрывающая.</p>
+</li>
+</ul>
+</div>
+<h4 class="pageBreakBefore" id="themes_custom_css_rules">Правила применения пользовательских стилей</h4>
+<ul>
+<li>Пользовательские стили применяются поверх базовых системных стилей, переопределяя заданные свойства.</li>
+<li>Не копируйте системный код CSS целиком — переопределяйте только необходимые свойства (например, цвета, шрифты, кнопки).</li>
+<li>Соблюдайте корректный синтаксис CSS‑правил; не используйте произвольные символы и визуальные разделители.</li>
+</ul>
+<h4 class="pageBreakBefore" id="themes_custom_css_recommendations">Рекомендации по использованию CSS в Comindware Platform</h4>
+<ul>
+<li><strong>Переопределение классов</strong> — старайтесь переопределять существующие классы из темы, не затрагивая базовые теги (например, <code>button</code>, <code>input</code>), чтобы не нарушать отображение системных компонентов.</li>
+<li><strong>Переменные темы</strong> — опирайтесь на переменные темы <code>var(--theme-colors__…)</code> вместо жёстко заданных цветов.</li>
+<li><strong>Группировка стилей</strong> — логически группируйте стили: <em>цвета, типографику, кнопки, формы, таблицы</em>.</li>
+<li><strong>Комментарии</strong> — добавляйте краткие комментарии к блокам стилей: <code>/* описание блока */</code>. Это поможет быстро сориентироваться в стилях при обновлении темы.</li>
+<li><strong>Контрастность цветов</strong> — проверяйте контраст текста и фона для кнопок, уведомлений, ссылок и других элементов. Текст должен быть хорошо виден и легко читаться на фоне.</li>
+<li><strong>Единицы измерения</strong> — соблюдайте единообразие единиц измерения: используйте <code>rem</code>, <code>em</code> для масштабируемых размеров, <code>px</code> — для фиксированных элементов.</li>
+<li><strong>Адаптивность</strong> — просматривайте интерфейс на разных экранах: монитор, планшет, мобильный.</li>
+<li><strong>Тестирование</strong> — тестируйте изменения в <a class="mkdocs_imported_link" href="#themes_preview">предварительном просмотре</a> и в основных браузерах (Chrome, Edge, Firefox).</li>
+<li><strong>Цвета и прозрачность</strong> — используйте переменные темы <code>var(--theme-…)</code> для согласованности и лёгкой смены палитры; для прозрачности применяйте значения в формате <code>rgba()</code>.</li>
+<li><strong>Перезапись правил</strong> — оператор <code>!important</code> форсирует применение декларации — используйте его только при крайней необходимости.</li>
+<li><strong>Тестирование</strong> — тестируйте стили в разных браузерах, таких как Chrome, Edge, Firefox. Это поможет выявить различия в отображении.</li>
+</ul>
 <h4 id="примеры-стилизации-интерфейса">Примеры стилизации интерфейса</h4>
 <p>С помощью пользовательских стилей CSS можно значительно изменить внешний вид <strong>Comindware Platform</strong>:</p>
 <ul>
@@ -492,7 +570,9 @@
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4707">Дизайн страниц входа и регистрации</a></em></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4707">Дизайн страниц входа и регистрации</a></li>
+<li><a class="mkdocs_imported_link" href="https://www.w3schools.com/css/">W3 Schools: учебник ао CSS (оригинал, англ. язык)</a></li>
+<li><a class="mkdocs_imported_link" href="https://w3schoolsrus.github.io/css/">W3 Schools: учебник ао CSS (перевод на русский)</a></li>
 </ul>
 </div>
 </article>
