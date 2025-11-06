@@ -123,6 +123,11 @@ port: <portNumber>
 # Версия экземпляра {{ productName }}.
 version: <versionNumber>
 
+{% if pdfOutput %}
+```
+{% include-markdown ".snippets/pdfPageBreakHard.md" %}
+``` yaml title="Пример YML-файла конфигурации экземпляра ПО — продолжение"
+{% endif %}
 ##### Настройка базы данных #####
 # Использование тонкого клиента.
 #db.asThinClient: true
@@ -139,7 +144,11 @@ db.workDir: /var/lib/comindware/<instanceName>/Database
 #db.jvmOpts:
 # Настройки Java.
 #db.javaOpts:
+# Включение автоматической активации кластера {{ apacheIgniteVariants }} при запуске.
+# При использовании нескольких узлов рекомендуется отключить на всех узлах.
+#db.baselineAutoActivationEnabledFlag: false
 # Включение автоматической настройки узлов {{ apacheIgniteVariants }}.
+# На всех узлах должно быть одинаковое значение.
 #db.baselineAutoAdjustEnabledFlag: false
 # Время ожидания фактического изменения настройки узлов {{ apacheIgniteVariants }}
 # с момента последнего изменения.
@@ -149,10 +158,28 @@ db.workDir: /var/lib/comindware/<instanceName>/Database
 # Используемый префикс кэшей в базе данных
 # Устаревшая директива: databaseName
 db.name: <instanceName>
+# Вес узла (целочисленное значение) с точки зрения кластера {{ apacheIgniteVariants }}.
+# Суммарный вес всех узлов должен превышать 100.
+# Значение по умолчанию: 100/кол-во узлов.
+#db.weight:
 # Префикс кэшей в базе данных, используемый при обновлении.
 #db.upgradeName:
 # Путь к онтологии {{ companyName }}
 #db.n3Dir:
+# Директива применяется во время апгрейда кэшей. Если флаг не установлен, старые кэши необходимо удалять вручную.
+#db.autoRemoveCachesOnUpgrade: false
+# Директива применяется во время запуска системы. Если флаг установлен, на существующие кэши будет применена новая конфигурация (если она отличается).
+#db.applyCachesConfigsOnStart: false
+# Количество резервных копий для каждого кэша. При db.systemCacheConfig.cacheMode = Replicated не оказывает влияния.
+#db.cacheConfig.backups: 2
+# Тип кэша. Доступные значения: Partitioned | Replicated
+#db.cacheConfig.cacheMode: Replicated
+# Задержка ребалансировки (в секундах) при изменении топологии кластера {{ apacheIgniteVariants }}.
+#db.cacheConfig.rebalanceDelay: 0
+# Тип ребалансировки. Доступные значения: Sync | Async | None
+#db.cacheConfig.rebalanceMode: Async
+# Тип синхронизации данных кэша. Доступные значения: FullSync | FullAsync | PrimarySync
+db.cacheConfig.writeSynchronizationMode: FullAsync
 
 {% if pdfOutput %}
 ```
@@ -181,6 +208,11 @@ tempStorage.localDisk.path: /var/lib/comindware/<instanceName>/Temp
 # Временная папка
 tempWorkingDir: /var/lib/comindware/<instanceName>/LocalTemp
 
+{% if pdfOutput %}
+```
+{% include-markdown ".snippets/pdfPageBreakHard.md" %}
+``` yaml title="Пример YML-файла конфигурации экземпляра ПО — продолжение"
+{% endif %}
 ##### Настройка очереди сообщений #####
 # Адрес и порт брокера сообщений {{ apacheKafkaVariants }}.
 mq.server: <kafkaBrokerIP>:<kafkaBrokerPort>
@@ -298,7 +330,7 @@ backup.defaultFileName: <instanceName>
 # Тип хранилища (LocalDisk | S3).
 #backup.default.<backupName>.repository.type: LocalDisk
 # Путь к файлам резервных копий.
-#backup.default.<backupName>.repository.localDisk.path: /var/backups/<iname>
+#backup.default.<backupName>.repository.localDisk.path: /var/backups/<instanceName>
 # Имя корзины S3 для хранения файлов резервных копий.
 #backup.default.<backupName>.repository.s3.bucket:
 # Имя подключения к S3.
@@ -363,6 +395,11 @@ backup.defaultFileName: <instanceName>
 # https://<s3hostname>/bucket-name/key-name
 #s3.<s3ConnectionName>.pathStyleAccess: true
 
+{% if pdfOutput %}
+```
+{% include-markdown ".snippets/pdfPageBreakHard.md" %}
+``` yaml title="Пример YML-файла конфигурации экземпляра ПО — продолжение"
+{% endif %}
 ##### Настройка полнотекстового поиска #####
 # Выключение функции полнотекстового поиска.
 #search.enabled: false
@@ -374,7 +411,6 @@ backup.defaultFileName: <instanceName>
 ##### Настройка сенсоров мониторинга #####
 # Выключение функции сенсоров мониторинга.
 #sensors.enabled: false
-
 ##### Настройка синхронизации аккаунтов с LDAP-сервисом #####
 # Выключение функции синхронизации.
 #sync.ldap.enabled: true
@@ -383,11 +419,7 @@ backup.defaultFileName: <instanceName>
 #sync.ldap.sessionsEnabled: true
 # Выключение запуска сеансов синхронизации по расписанию.
 #sync.ldap.schedulesEnabled: true
-{% if pdfOutput %}
-```
-{% include-markdown ".snippets/pdfPageBreakHard.md" %}
-``` yaml title="Пример YML-файла конфигурации экземпляра ПО — продолжение"
-{% endif %}
+
 ##### Настройка синхронизации данных с OData-сервисом #####
 # Выключение интеграции по OData.
 #sync.oData.enabled: false
