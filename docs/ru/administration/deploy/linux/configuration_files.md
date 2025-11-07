@@ -179,7 +179,7 @@ db.name: <instanceName>
 # Тип ребалансировки. Доступные значения: Sync | Async | None
 #db.cacheConfig.rebalanceMode: Async
 # Тип синхронизации данных кэша. Доступные значения: FullSync | FullAsync | PrimarySync
-db.cacheConfig.writeSynchronizationMode: FullAsync
+db.cacheConfig.writeSynchronizationMode: FullSync
 
 {% if pdfOutput %}
 ```
