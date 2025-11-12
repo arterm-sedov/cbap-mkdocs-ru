@@ -707,6 +707,8 @@
 
 [http_send_example]: {{ kbArticleURLPrefix }}4699
 
+[http_send_example_csharp]: {{ kbArticleURLPrefix }}5141
+
 [http_send_file]: {{ kbArticleURLPrefix }}5066
 
 [http_send_request_connection]: {{ kbArticleURLPrefix }}4696
