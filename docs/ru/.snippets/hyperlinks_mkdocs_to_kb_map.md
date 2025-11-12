@@ -257,8 +257,6 @@
 
 [optimize_calculate_attribute]: {{ kbArticleURLPrefix }}5055
 
-[process_diagram_version_control]: {{ kbArticleURLPrefix }}4722
-
 [process_fails_several_records]: {{ kbArticleURLPrefix }}5059
 
 [process_id_not_found]: {{ kbArticleURLPrefix }}5052
@@ -363,7 +361,7 @@
 
 {% endif %}
 
-{% if (not userGuide and (adminGuideLinux or adminGuideWindows)) or developerGuide or (tutorial and not userGuide) or kbExport %}
+{% if (not (userGuide or completeGuide) and (adminGuideLinux or adminGuideWindows or developerGuide or tutorial)) or kbExport %}
 
 <!-- Руководство администратора для Linux/Windows, отдельный учебник или экспорт в БЗ -->
 
@@ -741,9 +739,15 @@
 
 [pages_setup]: {{ kbArticleURLPrefix }}4810
 
+[process_diagram]: {{ kbArticleURLPrefix }}4721
+
 [process_diagram_call_element_menu]: {{ kbArticleURLPrefix }}4721#process_diagram_call_element_menu
 
 [process_diagram_designer]: {{ kbArticleURLPrefix }}4721#process_diagram_designer
+
+[process_diagram_view_instance]: {{ kbArticleURLPrefix }}4723
+
+[process_diagram_version_control]: {{ kbArticleURLPrefix }}4722
 
 [process_diagram_element_common_properties]: {{ kbArticleURLPrefix }}4725
 
@@ -806,6 +810,8 @@
 [process_diagram_view]: {{ kbArticleURLPrefix }}4721#process_diagram_view
 
 [process_email_configure]: {{ kbArticleURLPrefix }}4691
+
+[process_templates]: {{ kbArticleURLPrefix }}4758
 
 [scenario_elements]: {{ kbArticleURLPrefix }}4718
 
@@ -1143,15 +1149,9 @@
 
 [performance]: {{ kbArticleURLPrefix }}4669
 
-[process_diagram]: {{ kbArticleURLPrefix }}4721
-
-[process_diagram_view_instance]: {{ kbArticleURLPrefix }}4723
-
 [process_receiving_connection]: {{ kbArticleURLPrefix }}4695
 
 [process_sending_connection]: {{ kbArticleURLPrefix }}4690
-
-[process_templates]: {{ kbArticleURLPrefix }}4758
 
 [record_templates]: {{ kbArticleURLPrefix }}4759
 
