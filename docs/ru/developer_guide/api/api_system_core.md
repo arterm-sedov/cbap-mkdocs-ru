@@ -681,7 +681,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 
 ### EncryptedNavigationReference — ссылки на внешние формы {: #api_system_core_encrypted_navigation_reference }
 
-См. _[Пример создания ссылки на внешнюю форму][form_access_control_external_form]_.
+См. _[Пример создания ссылки на внешнюю форму][form_access_control_external_link]_.
 
 | POST {: .api-method .post } | /Base/EncryptedNavigationReferenceService/Generate |
 | --- | --- |

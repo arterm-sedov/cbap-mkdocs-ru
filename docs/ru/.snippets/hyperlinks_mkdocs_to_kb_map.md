@@ -629,7 +629,7 @@
 
 [form_access_control]: {{ kbArticleURLPrefix }}4789
 
-[form_access_control_external_form]: {{ kbArticleURLPrefix }}4789#form_access_control_external_form
+[form_access_control_external_link]: {{ kbArticleURLPrefix }}4789#form_access_control_external_link
 
 [forms]: {{ kbArticleURLPrefix }}4786
 

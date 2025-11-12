@@ -76,8 +76,12 @@ hide:
 
       --8<-- "process_diagram_scale_buttons.md"
 
-4. **Позиции токенов** — элементы, на которых находятся токены, выделяются жёлтой или зелёной рамкой.
-{% include-markdown ".snippets/pdfEndOfBlockHack.md" %}
+4. **Позиции токенов** — элементы, на которых находятся токены, выделяются цветной рамкой:
+
+    - зелёная — нет проблем;
+    - жёлтая — превышен срок выполнения элемента;
+    - красная — ошибка.
+    {% include-markdown ".snippets/pdfEndOfBlockHack.md" %}
 
 _![Диаграмма экземпляра процесса](img/process_diagram_view_instance.png)_
 

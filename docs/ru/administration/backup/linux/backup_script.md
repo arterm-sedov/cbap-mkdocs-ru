@@ -17,7 +17,7 @@ tags:
 hide: tags
 ---
 
-# Настройка и использование скрипта для резервного копирования данных {{ productName }} (Linux) {: #backup_linux_script }
+# Настройка и использование скрипта для резервного копирования данных (Linux) {: #backup_linux_script }
 
 {% include-markdown ".snippets/experimental_feature.md" %}
 
@@ -118,6 +118,7 @@ hide: tags
         - `-o` — включает снятие и архивирование снимков данных {{ openSearchVariants }}.
         - `-v` — подробный вывод (verbose), выводит сообщения в терминал помимо записи в лог
         - `-c` — только очистка (clean-only), выполняет только операции очистки старых снимков без создания нового.
+    {% include-markdown ".snippets/pdfPageBreakHard.md" %}
 
 ## Запуск скрипта с помощью планировщика (cron) {: #backup_linux_script_cron .pageBreakBefore }
 
