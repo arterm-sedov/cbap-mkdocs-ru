@@ -196,7 +196,7 @@ _![Пример отображения шевронов](https://kb.comindware.r
     | --- | --- |
     | <span style="background-color: #31ff00; color: #000000;">Зелёный #31ff00</span> | `AND($Этапначат, $Этаппройденвовремя)` |
     | <span style="background-color: #ff0000; color: #ffffff;">Красный #ff0000</span> | `NOT($Этаппройденвовремя)` |
-    | <span style="background-color: #c0c0c0; color: #000000;">Серый #c0c0c0</span> | `NOT($Этапначат)AND($Этапначат, $Этаппройденвовремя)` |
+    | <span style="background-color: #c0c0c0; color: #000000;">Серый #c0c0c0</span> | `NOT($Этапначат)` |
     | <span style="background-color: #ff9800; color: #ffffff;">Оранжевый #ff9800</span> | `AND($Этапначат, NOT($Этаппройден))` |
 
     !!! note "Примечание"
