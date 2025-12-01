@@ -127,6 +127,8 @@
 
 [example_n3_list_by_creator_filter]: {{ kbArticleURLPrefix }}4933
 
+[example_n3_process_hyperlink_calculate]: {{ kbArticleURLPrefix }}4959
+
 [experessions_intro]: {{ kbArticleURLPrefix }}4930
 
 [export_template_csharp_configure]: {{ kbArticleURLPrefix }}4793

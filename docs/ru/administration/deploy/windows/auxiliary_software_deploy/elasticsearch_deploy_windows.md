@@ -14,11 +14,11 @@ tags:
 
 Для работы **{{ productName }}** требуется сервер Elasticsearch. См. [системные требования][system_requirements].
 
-Установщик **{{ productName }}** в Windows можно установить службу Elasticsearch в базовой конфигурацию: без аутентификации и с одним узлом. Она доступна по адресу `localhost:9200`.
+Установщик **{{ productName }}** в Windows позволяет установить службу Elasticsearch в базовой конфигурации: без аутентификации и с одним узлом по адресу `localhost:9200`.
 
 См. _«[Установка, запуск, инициализация и остановка ПО в Windows][deploy_guide_windows]»_.
 
-Вы можете использовать имеющуюся службу Elasticsearch или развернуть её на отдельном сервере.
+Кроме того, вы можете использовать уже имеющуюся у вас службу Elasticsearch или развернуть её на отдельном сервере.
 
 Здесь представлены требования к техническому обеспечению и инструкции по развёртыванию службы Elasticsearch в ОС Windows, а также приведён пример типового файла конфигурации. Инструкции представлены для версии Elasticsearch 8.10.2, для других версий содержимое файлов конфигурации и порядок установки могут быть иными.
 
@@ -93,21 +93,29 @@ rewrite-relative-urls=false
 
 ## Подключение к Elasticsearch при развертывании экземпляра ПО {: #elasticsearch_deploy_windows_connection }
 
-1. При необходимости при запуске экземпляра ПО **{{ productName }}** укажите адрес сервера и префикс индекса Elasticsearch для данного экземпляра.
+1. Перед запуском экземпляра ПО **{{ productName }}** укажите адрес сервера и префикс индекса Elasticsearch для данного экземпляра в файле конфигурации экземпляра по `<instanceName>.yml` с помощью следующих директив:
 
-    _![Настройка адреса сервера Elasticsearch для экземпляра ПО](https://kb.comindware.ru/assets/Picture7.png)_
+    - `journal.server` — адрес сервера {{ openSearchVariants }}.
+    - `journal.name` — префикс индекса сервера {{ openSearchVariants }} (необязательно, по умолчанию назначается префикс `cmw<instanceName>`).
+    - `journal.username` — имя пользователя сервера {{ openSearchVariants }} (необязательно).
+    - `journal.password` — пароль сервера {{ openSearchVariants }} (необязательно).
 
-2. После развертывания экземпляра ПО в разделе «**Администрирование системы**» — «**Подключения**» будет отображаться настроенное подключение к Elasticsearch.
+    ``` yaml title="Пример конфигурации подключения к Elasticsearch"
+    # Адрес службы журналирования {{ openSearchVariants }}.
+    journal.server: http://<searchHostIP>:<searchHostPort>
+    # Индекс службы журналирования.
+    # journal.name: <prefix>-<instanceName>
+    # Имя пользователя службы журналирования
+    # journal.username: xxxx
+    # Пароль службы журналирования
+    # journal.password: xxxx
+    # Выключение службы журналирования.
+    #journal.enabled: false
+    # Выключение проверки валидации сертификатов
+    #journal.certificateSkipValidation: false
+    ```
 
-    _![Подключение к Elasticsearch в новом экземпляре ПО](img/elasticsearch_deploy_windows_connection.png)_
-
-3. Чтобы изменить свойства подключения к Elasticsearch, дважды нажмите его строку в списке подключений.
-4. Отобразится окно «**Свойства подключения: Elasticsearch**».
-5. При необходимости измените свойства подключения, **проверьте соединение** и нажмите кнопку «**Сохранить**».
-
-    _![Настройка свойств подключения к Elasticsearch](img/elasticsearch_deploy_windows_connection_configure.png)_
-
-6. После изменения свойств сервера Elasticsearch перезапустите экземпляр ПО.
+2. После изменения конфигурации подключения к Elasticsearch перезапустите экземпляр ПО.
 
 ## Пример типового файла конфигурации Elasticsearch {: #elasticsearch_deploy_windows_config_example }
 

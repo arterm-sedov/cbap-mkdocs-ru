@@ -255,7 +255,7 @@ _![Настройка основных свойств пути для получ
             // Создаём заказ в системе
             // Заказы — системное имя шаблона записи
             // НомерЗаказа, Позиции — системные имена атрибутов шаблона «Заказы»
-            Api.TeamNetwork.ObjectService.CreateWithAlias("Заказы", new Dictionary<string,object>{{"НомерЗаказа", input.name},{"Позиции", newItems}});
+            Api.TeamNetwork.ObjectService.CreateWithAlias("Заказы", new Dictionary<string,object>{{"НомерЗаказа", input.orderNumber},{"Позиции", newItems}});
             
             // Формируем корневой объект ответа
             // OutgoingRootMessage – класс сообщения (структура данных)
