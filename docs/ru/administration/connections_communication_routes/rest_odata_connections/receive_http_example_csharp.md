@@ -278,7 +278,7 @@ _![Настройка основных свойств пути для получ
 
     public class IncomingRootMessage
     {
-        public string name {get; set;}
+        public string orderNumber {get; set;}
         public List<Item> items {get; set;}
     }
 

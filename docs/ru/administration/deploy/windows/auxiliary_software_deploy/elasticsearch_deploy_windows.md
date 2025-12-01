@@ -93,7 +93,9 @@ rewrite-relative-urls=false
 
 ## Подключение к Elasticsearch при развертывании экземпляра ПО {: #elasticsearch_deploy_windows_connection }
 
-1. Перед запуском экземпляра ПО **{{ productName }}** укажите адрес сервера и префикс индекса Elasticsearch для данного экземпляра в файле конфигурации экземпляра по `<instanceName>.yml` с помощью следующих директив:
+После настройки Elasticsearch необходимо подключить к ней экземпляр ПО **{{ productName }}**.
+
+1. Укажите адрес сервера и префикс индекса Elasticsearch данного экземпляра в файле конфигурации экземпляра по `<instanceName>.yml` с помощью следующих директив:
 
     - `journal.server` — адрес сервера {{ openSearchVariants }}.
     - `journal.name` — префикс индекса сервера {{ openSearchVariants }} (необязательно, по умолчанию назначается префикс `cmw<instanceName>`).
