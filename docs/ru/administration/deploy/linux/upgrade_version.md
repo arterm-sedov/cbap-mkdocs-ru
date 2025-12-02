@@ -340,10 +340,10 @@ hide: tags
     systemctl restart apigateway<instanceName>.service
     ```
 
-8. Проверьте конфигурацию ОС и служб.
-9. [Инициализируйте экземпляра ПО](#upgrade_version_linux_initialize .pageBreakBefore).
+8. [Проверьте конфигурацию ОС и служб](#upgrade_version_linux_check_service_statuses).
+9. [Инициализируйте экземпляр ПО](#upgrade_version_linux_initialize).
 
-## Проверка конфигурации ОС и служб {: #upgrade_version_linux_check_service_statuses }
+## Проверка конфигурации ОС и служб {: #upgrade_version_linux_check_service_statuses .pageBreakBefore }
 
 {%
 include-markdown "administration/deploy/linux/deploy_guide.md"
