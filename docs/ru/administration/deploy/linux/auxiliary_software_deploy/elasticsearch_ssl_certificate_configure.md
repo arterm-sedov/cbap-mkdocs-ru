@@ -1,25 +1,39 @@
 ---
-title: Настройка SSL-сертификатов на кластере Elasticsearch
+title: Настройка SSL-сертификатов на кластере OpenSearch (Elasticsearch)
 kbId: 4606
+tags:
+tags:
+    - Elasticsearch
+    - OpenSearch
+    - Linux
+    - сертификаты
+    - администрирование
+    - безопасность
+    - кластер
+    - настройка
+    - развёртывание
+    - сервер
+    - установка
+hide: tags
 ---
 
-# Настройка SSL-сертификатов для Elasticsearch {: #elasticsearch_ssl_certificate_configure}
+# Настройка SSL-сертификатов для {{ openSearchVariants }} {: #elasticsearch_ssl_certificate_configure }
 
-## Введение
+## Введение {: #elasticsearch_ssl_certificate_configure_introduction }
 
-Для работы ПО **{{ productName }}** требуется сервер Elasticsearch версии не ниже 8.1.0.
+Для работы ПО **{{ productName }}** требуется сервер {{ openSearchVariants }}.
 
-Здесь представлены инструкции по формированию SSL-сертификатов подлинности узлов и настройке Elasticsearch с проверкой сертификатов подлинности для Elasticsearch.
+Здесь представлены инструкции по формированию SSL-сертификатов подлинности узлов и настройке {{ openSearchVariants }} с проверкой сертификатов подлинности для {{ openSearchVariants }}.
 
-Перед выполнением нижеприведённых инструкций необходимо развернуть Elasticsearch без сертификатов подлинности.
+Перед выполнением нижеприведённых инструкций необходимо развернуть {{ openSearchVariants }} без сертификатов подлинности.
 
-Дальнейшие инструкции предполагают, что кластер и служба Elasticsearch развёрнуты согласно инструкциям в статье «**[Установка Elasticsearch и настройка кластера Elasticsearch без сертификатов подлинности][elasticsearch_cluster_deploy_no_certificates]**» на виртуальных машинах с Linux.
+Дальнейшие инструкции предполагают, что кластер и служба {{ openSearchVariants }} развёрнуты согласно инструкциям в статье «**[Установка {{ openSearchVariants }} и настройка кластера {{ openSearchVariants }} без сертификатов подлинности][elasticsearch_cluster_deploy_no_certificates]**» на виртуальных машинах с Linux.
 
-## Формирование SSL-сертификатов
+## Формирование SSL-сертификатов {: #elasticsearch_ssl_certificate_configure_ssl_certificates .pageBreakBefore }
 
-### Установка Open SSL
+### Установка Open SSL {: #elasticsearch_ssl_certificate_configure_openssl_install }
 
-1. Убедитесь, что пакет `openssl` установлен в операционной системе:
+1. Проверьте, установлен ли пакет `openssl` в операционной системе:
 
     - Для дистрибутивов на базе Debian:
 
@@ -46,15 +60,15 @@ kbId: 4606
     sudo apt install openssl
     ```
 
-### Формирование сертификата СА {: .pageBreakBefore }
+### Формирование сертификата СА {: #elasticsearch_ssl_certificate_configure_ca_certificate .pageBreakBefore }
 
-1. В домашней папке пользователя `username` создайте папку, в которой предстоит работать:
+1. В домашней директории пользователя `<username>` создайте директорию для выполнения дальнейших операций (например, `certsGen`):
 
     ``` sh
     mkdir certsGen
     ```
 
-2. Перейдите в папку `certsGen`:
+2. Перейдите в директорию `certsGen`:
 
     ``` sh
     cd certsGen/
@@ -73,12 +87,13 @@ kbId: 4606
     ```
 
 5. В результате вы получите:
+
     - файл `ca-key.pem` — закрытый ключ центра сертификации;
-    - файл `ca.pem` — сертификат центра сертификации (CA Certificate).
+    - файл `ca.pem` — сертификат центра сертификации.
 
-### Формирование ключей и сертификатов для узлов кластера Elasticsearch {: .pageBreakBefore }
+### Формирование ключей и сертификатов для узлов кластера {{ openSearchVariants }} {: #elasticsearch_ssl_certificate_configure_node_certificates .pageBreakBefore }
 
-Для примера далее используется один узел Elasticsearch. Для дополнительных узлов повторите шаги, подставив фактические IP‑адреса.
+Для примера далее используется один узел {{ openSearchVariants }}. Для дополнительных узлов повторите шаги, подставив фактические IP‑адреса вместо `<XXX.XXX.XXX.XXX>`.
 
 1. <a id="P1_3_1"></a>Создайте закрытый ключ узла `elastic-key.pem`:
 
@@ -86,7 +101,7 @@ kbId: 4606
     openssl genpkey -out elastic-key.pem -algorithm RSA -pkeyopt rsa_keygen_bits:2048
     ```
 
-2. Создайте файл описания узла `openssl.cnf` со следующим содержимым (подставьте фактический IP‑адрес узла Elasticsearch вместо `<XXX.XXX.XXX.XXX>`):
+2. Создайте файл описания узла `openssl.cnf` со следующим содержимым (подставьте фактический IP‑адрес узла {{ openSearchVariants }} вместо `<XXX.XXX.XXX.XXX>`):
 
     ``` ini
     [ req ]
@@ -110,42 +125,42 @@ kbId: 4606
     openssl req -new -key elastic-key.pem -out elastic.csr -config openssl.cnf
     ```
 
-4. <a id="P1_3_4"></a>Используя CSR, сертификат CA и закрытый ключ CA, создайте подписанный CA сертификат узла Elasticsearch `elastic-cert.pem`:
+4. <a id="P1_3_4"></a>Используя CSR, сертификат CA и закрытый ключ CA, создайте подписанный CA сертификат узла {{ openSearchVariants }} `elastic-cert.pem`:
 
     ``` sh
     openssl x509 -req -in elastic.csr -CA ca.pem -CAkey ca-key.pem -CAcreateserial -out elastic-cert.pem -days 365 -sha256 -extfile openssl.cnf -extensions req_ext
     ```
 
-5. Аналогично [шагу 1.3.1](#P1_3_1)–[шагу 1.3.4](#P1_3_4) создайте ключи и сертификаты для остальных узлов Elasticsearch, указывая их IP‑адреса в `openssl.cnf`.
+5. Аналогично [шагам 1–4](#P1_3_1) создайте ключи и сертификаты для остальных узлов {{ openSearchVariants }}, указывая их IP‑адреса в `openssl.cnf`.
 
-### Отправка созданных сертификатов на узлы кластера {: .pageBreakBefore }
+### Отправка созданных сертификатов на узлы кластера {: #elasticsearch_ssl_certificate_configure_send_certs_to_nodes .pageBreakBefore }
 
-1. Отправьте созданные сертификаты с помощью `SSH` (подставьте свои имена файлов, имя пользователя и IP‑адрес):
-
-    ``` sh
-    sudo scp ca.pem username@<XXX.XXX.XXX.XXX>:/home/username/
-    sudo scp elastic-cert.pem username@<XXX.XXX.XXX.XXX>:/home/username/
-    sudo scp elastic-key.pem username@<XXX.XXX.XXX.XXX>:/home/username/
-    ```
-
-2. В каждом из узлов перенесите сгенерированные файлы в папку, из которой Elasticsearch будет считывать сертификаты (например, `/etc/elasticsearch/`):
+1. Отправьте созданные сертификаты с помощью `SSH` (подставьте свои имена файлов, имя пользователя вместо `<username>` и IP‑адрес вместо `<XXX.XXX.XXX.XXX>`):
 
     ``` sh
-    sudo mv /home/username/ca.pem /etc/elasticsearch/
-    sudo mv /home/username/elastic-cert.pem /etc/elasticsearch/
-    sudo mv /home/username/elastic-key.pem /etc/elasticsearch/
+    sudo scp ca.pem <username>@<XXX.XXX.XXX.XXX>:/home/<username>/
+    sudo scp elastic-cert.pem <username>@<XXX.XXX.XXX.XXX>:/home/<username>/
+    sudo scp elastic-key.pem <username>@<XXX.XXX.XXX.XXX>:/home/<username>/
     ```
 
-3. Измените пользователя для директории и настройте права доступа:
+2. На каждом из узлов перенесите сгенерированные файлы в директорию, из которой {{ openSearchVariants }} будет считывать сертификаты (например, `/etc/elasticsearch/`):
+
+    ``` sh
+    sudo mv /home/<username>/ca.pem /etc/elasticsearch/
+    sudo mv /home/<username>/elastic-cert.pem /etc/elasticsearch/
+    sudo mv /home/<username>/elastic-key.pem /etc/elasticsearch/
+    ```
+
+3. Задайте владельца и права доступа к директории:
 
     ``` sh
     sudo chown elasticsearch:elasticsearch --recursive /etc/elasticsearch/
     sudo chmod 764 --recursive /etc/elasticsearch/
     ```
 
-## Настройка кластера Elasticsearch {: .pageBreakBefore }
+## Настройка кластера {{ openSearchVariants }} {: #elasticsearch_ssl_certificate_configure_cluster_configuration .pageBreakBefore }
 
-### Добавление сертификата CA в хранилище сертификатов ОС и Mono
+### Добавление сертификата CA в хранилище сертификатов ОС и Mono Framework {: #elasticsearch_ssl_certificate_configure_add_ca_to_stores}
 
 1. Добавьте сертификат CA в хранилище сертификатов операционной системы (пример для дистрибутивов на базе Debian):
 
@@ -154,21 +169,21 @@ kbId: 4606
     sudo update-ca-certificates
     ```
 
-2. Добавьте сертификат CA в хранилище сертификатов платформы Mono Framework:
+2. Добавьте сертификат CA в хранилище сертификатов Mono Framework:
 
     ``` sh
     sudo mono /usr/lib/mono/4.5/cert-sync.exe /etc/elasticsearch/ca.pem
     ```
 
-### Настройка узла кластера для работы с SSL-сертификатами {: .pageBreakBefore }
+### Настройка узла кластера для работы с SSL-сертификатами {: #elasticsearch_ssl_certificate_configure_node_ssl_settings .pageBreakBefore }
 
-1. Для каждого узла кластера Elasticsearch отредактируйте `yml`-файл конфигурации Elasticsearch, как показано в примерах ниже. Внимательно следите за сохранением отступов. Воспользуйтесь текстовым редактором Nano:
+1. Для каждого узла кластера {{ openSearchVariants }} отредактируйте `yml`-файл конфигурации {{ openSearchVariants }}, как показано в примерах ниже. Внимательно следите за сохранением отступов:
 
     ``` sh
     sudo nano /etc/elasticsearch/elasticsearch.yml
     ```
 
-2. Добавьте настройки SSL для узла Elasticsearch, указав фактические пути к созданным файлам `elastic-key.pem`, `elastic-cert.pem` и `ca.pem`:
+2. Добавьте настройки SSL для узла {{ openSearchVariants }}, указав фактические пути к созданным файлам `elastic-key.pem`, `elastic-cert.pem` и `ca.pem`:
 
     ``` yaml
     xpack.security.enabled: true
@@ -185,10 +200,10 @@ kbId: 4606
     xpack.security.http.ssl.certificate_authorities: [ "/etc/elasticsearch/ca.pem" ]
     ```
 
-3. Ниже приведён пример файла `elasticsearch.yml` для одиночного узла (single-node). При необходимости адаптируйте параметры `cluster.name`, `node.name`, `http.host` и другие настройки под вашу инфраструктуру:
+3. Ниже приведён пример файла `elasticsearch.yml` для конфигурации с одним узлом. При необходимости адаптируйте параметры `cluster.name`, `node.name`, `http.host` и другие настройки в соответствии с вашей конфигурацией:
 
     ``` yaml
-    #======================== Elasticsearch Configuration =========================
+    #======================== {{ openSearchVariants }} Configuration =========================
 
     cluster.name: my-application
 
@@ -198,9 +213,9 @@ kbId: 4606
 
     # ----------------------------------- Paths ------------------------------------
 
-    path.data: /var/lib/elasticsearch # database path Elasticsearch
-    path.logs: /var/log/elasticsearch # путь к файлам журнала Elasticsearch
-    #path.repo: /var/backups/elasticsearch # путь к репозиторию резервных копий Elasticsearch
+    path.data: /var/lib/elasticsearch # database path {{ openSearchVariants }}
+    path.logs: /var/log/elasticsearch # путь к файлам журнала {{ openSearchVariants }}
+    #path.repo: /var/backups/elasticsearch # путь к репозиторию резервных копий {{ openSearchVariants }}
 
     # ----------------------------------- Memory -----------------------------------
 
@@ -208,7 +223,7 @@ kbId: 4606
 
     # ---------------------------------- Network -----------------------------------
 
-    # ниже указать IP сервера Elasticsearch или 127.0.0.1, если Elasticsearch и 
+    # ниже указать IP сервера {{ openSearchVariants }} или 127.0.0.1, если {{ openSearchVariants }} и 
     # Comindware Business Application Platform развёрнуты на одной машине
     #network.host: 127.0.0.1  
     http.host: <XXX.XXX.XXX.XXX> # IP - слушать внешний интерфейс, 127.0.0.1 - localhost, 0.0.0.0 - все
@@ -217,8 +232,8 @@ kbId: 4606
     # --------------------------------- Discovery ----------------------------------
 
     discovery.type: single-node # директива для работы в режиме одного узла
-    #discovery.seed_hosts: ["192.168.12.1"] # директива для работы кластера
-    #cluster.initial_master_nodes: ["192.168.12.1"] # директива для работы кластера
+    #discovery.seed_hosts: ["<XXX.XXX.XX.XXX>"] # директива для работы кластера
+    #cluster.initial_master_nodes: ["<XXX.XXX.XX.XXX>"] # директива для работы кластера
 
     # ---------------------------------- Various -----------------------------------
 
@@ -243,9 +258,9 @@ kbId: 4606
     ```
 
 4. Сохраните изменения и закройте текстовый редактор Nano, нажав клавиши: ++ctrl+O++, ++enter++, ++ctrl+x++.
-5. Повторите шаги 1–4 для каждого из узлов Elasticsearch.
+5. Повторите шаги 1–4 для каждого из узлов {{ openSearchVariants }}.
 
-### Настройка параметров JVM для Elasticsearch
+### Настройка параметров JVM для {{ openSearchVariants }} {: #elasticsearch_ssl_certificate_configure_jvm_settings .pageBreakBefore }
 
 1. Откройте файл настроек JVM:
 
@@ -262,18 +277,18 @@ kbId: 4606
 
 3. Сохраните изменения и закройте файл.
 
-### Обновление хранилища сертификатов Linux и Mono для сертификатов Elasticsearch
+### Обновление хранилища сертификатов Linux и Mono Framework для сертификатов {{ openSearchVariants }} {: #elasticsearch_ssl_certificate_configure_update_linux_mono_stores}
 
-1. Добавьте сертификат CA и сертификат узла в хранилище сертификатов Mono (команды выполняются после копирования файлов в `/etc/elasticsearch/`):
+1. Добавьте сертификат CA и сертификат узла в хранилище сертификатов Mono Framework (команды выполняются после копирования файлов в `/etc/elasticsearch/`):
 
     ``` sh
     sudo mono /usr/lib/mono/4.5/cert-sync.exe /etc/elasticsearch/ca.pem
     sudo mono /usr/lib/mono/4.5/cert-sync.exe /etc/elasticsearch/elastic-cert.pem
     ```
 
-## Запуск Elasticsearch {: .pageBreakBefore }
+## Запуск {{ openSearchVariants }} {: #elasticsearch_ssl_certificate_configure_start_elasticsearch .pageBreakBefore .pageBreakBefore }
 
-Выполните нижеприведённые шаги для каждого узла Elasticsearch.
+Выполните следующие шаги для каждого узла {{ openSearchVariants }}.
 
 1. Перезагрузите конфигурацию `systemd`:
 
@@ -294,7 +309,7 @@ kbId: 4606
     ```
 
     ``` sh title="Пример результата проверки статуса процесса elasticsearch.service"
-    elasticsearch.service - Elasticsearch
+    elasticsearch.service - {{ openSearchVariants }}
 
         Loaded: loaded (/lib/systemd/system/elasticsearch.service; enabled; vendor preset: enabled)
 
@@ -308,8 +323,8 @@ kbId: 4606
                 ├─3597 /usr/share/elasticsearch/jdk/bin/java -Xms4m -Xmx64m -XX:+UseSerialGC -Dcli.name=server -Dcli.scri>
                 ├─3656 /usr/share/elasticsearch/jdk/bin/java -Des.networkaddress.cache.ttl=60 -Des.networkaddress.cache.n>
                 └─3676 /usr/share/elasticsearch/modules/x-pack-ml/platform/linux-x86_64/bin/controller
-    Dec 01 10:11:12 penguin-02 systemd[1]: Starting Elasticsearch...
-    Dec 01 10:12:27 penguin-02 systemd[1]: Started Elasticsearch.
+    Dec 01 10:11:12 penguin-02 systemd[1]: Starting {{ openSearchVariants }}...
+    Dec 01 10:12:27 penguin-02 systemd[1]: Started {{ openSearchVariants }}.
     ```
 
     !!! note "Примечание"
@@ -319,9 +334,9 @@ kbId: 4606
         sudo less /var/elasticsearch/logs/yourClusterName.log
         ```
 
-4. Повторите шаги, описанные в этом разделе, для каждого из узлов Elasticsearch.
+4. Повторите шаги 1–3 для каждого из узлов {{ openSearchVariants }}.
 
-### Сброс пароля пользователя `elastic`
+### Сброс пароля пользователя `elastic` {: #elasticsearch_ssl_certificate_configure_reset_elastic_password .pageBreakBefore }
 
 1. При необходимости сбросьте пароль для встроенного пользователя `elastic`:
 
@@ -331,11 +346,11 @@ kbId: 4606
 
 2. Следуйте интерактивным подсказкам утилиты и сохраните новый пароль.
 
-## Присвоение сертификату статуса доверенного {: .pageBreakBefore }
+## Присвоение сертификату статуса доверенного {: #elasticsearch_ssl_certificate_configure_trust_certificate .pageBreakBefore }
 
 Перед проверкой состояния кластера необходимо присвоить новому источнику сертификата статус доверенного. Инструкции в данном разделе приведены для среды Windows 10.
 
-1. Откройте в файловом менеджере папку с сертификатом.
+1. Откройте в файловом менеджере директорию с сертификатом.
 2. Откройте файл сертификата (например, `ca.pem` или предварительно переименованный в `CA.crt`).
 3. В отобразившемся окне нажмите кнопку «**Установить сертификат**».
 4. Выберите, следует ли хранить сертификат на уровне пользователя или на уровне машины.
@@ -348,25 +363,25 @@ kbId: 4606
 11. Нажмите кнопку «**Завершить**».
 12. Если отобразится запрос, нажмите кнопку «**Да**».
 
-## Проверка состояния кластера {: .pageBreakBefore }
+## Проверка состояния кластера {: #elasticsearch_ssl_certificate_configure_cluster_health_check .pageBreakBefore }
 
-1. После того как для каждого из узлов кластера Elasticsearch были выполнены шаги, описанные в предыдущих разделах, с любого из узлов выполните `GET`-запрос в веб-браузере:
+1. После того как для каждого из узлов кластера {{ openSearchVariants }} были выполнены шаги, описанные в предыдущих разделах, с любого из узлов выполните `GET`-запрос в веб-браузере:
 
     ``` sh
     https://192.168.XXX.XX1:9200/_cluster/health?pretty
     ```
 
 2. Браузер отобразит форму для ввода учётных данных.
-3. Введите имя встроенного суперпользователя `elastic` и один из автоматически сгенерированных паролей, которые были созданы при развёртывании Elasticsearch.
+3. Введите имя встроенного суперпользователя `elastic` и один из автоматически сгенерированных паролей, которые были созданы при развёртывании {{ openSearchVariants }}.
 
-    _![Ввод учётных данных для доступа к кластеру Elasticsearch](https://kb.comindware.ru/assets/image2.png)_
+    _![Ввод учётных данных для доступа к кластеру {{ openSearchVariants }}](https://kb.comindware.ru/assets/image2.png)_
 
-4. Браузер отобразит данные `REST API` кластера Elasticsearch.
+4. Браузер отобразит данные `REST API` кластера {{ openSearchVariants }}.
 5. Убедитесь, что значение параметра `number_of_nodes` равно количеству узлов кластера.
 
-    _![Данные REST API кластера Elasticsearch](https://kb.comindware.ru/assets/image1.png)_
+    _![Данные REST API кластера {{ openSearchVariants }}](https://kb.comindware.ru/assets/image1.png)_
 
-## Права доступа и диагностика неполадок {: .pageBreakBefore }
+## Настройка прав доступа и диагностика неполадок {: #elasticsearch_ssl_certificate_configure_permissions_troubleshooting .pageBreakBefore }
 
 1. Убедитесь, что на необходимые каталоги выданы корректные права:
 
@@ -382,7 +397,7 @@ kbId: 4606
         sudo chmod -R 766 /var/lib/comindware/
         ```
 
-2. В случае проблем с библиотекой `jna-5.10.0.jar` или других ошибок работы Elasticsearch изучите журналы:
+2. В случае возникновения проблем с библиотекой `jna-5.10.0.jar` или других ошибок в работе {{ openSearchVariants }} изучите журналы:
 
     ``` sh
     journalctl -xe
@@ -390,5 +405,18 @@ kbId: 4606
     nano /var/log/comindware/instanceName/Logs/audit_0000-00-00.log
     cat /var/elasticsearch/logs/elasticsearch.example.cbap.log
     ```
+
+<div class="relatedTopics" markdown="block">
+
+--8<-- "related_topics_heading.md"
+
+- [Официальная документация Elasticsearch (английский язык)](https://www.elastic.co/docs/deploy-manage)
+- [Официальная документация OpenSearch (английский язык)](https://docs.opensearch.org/latest/)
+- [Установка и настройка Elasticsearch без сертификатов подлинности][elasticsearch_cluster_deploy_no_certificates]
+- [Elasticsearch. Установка в базовой конфигурации][elasticsearch_deploy_Linux]
+- [Установка, запуск, инициализация и остановка ПО {{ productName }}][deploy_guide_linux]
+- [Конфигурация экземпляра, компонентов ПО и служб. Настройка][configuration_files_linux]
+
+</div>
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
