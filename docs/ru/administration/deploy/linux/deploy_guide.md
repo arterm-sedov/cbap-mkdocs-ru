@@ -235,6 +235,7 @@ hide: tags
 
 ### Подготовка к созданию экземпляра ПО {: #deploy_guide_linux_instance_create_prepare }
 
+<!-- instance-create-prepare-start -->
 Перед созданием экземпляра ПО проверьте конфигурацию Linux и при необходимости внесите в неё перечисленные ниже изменения.
 
 1. Перейдите в режим суперпользователя:
@@ -338,6 +339,7 @@ hide: tags
     sysctl -p
     systemctl daemon-reexec
     ```
+<!-- instance-create-prepare-end -->
 
 ### Создание единственного экземпляра ПО {: #deploy_guide_linux_instance_create_single .pageBreakBefore }
 

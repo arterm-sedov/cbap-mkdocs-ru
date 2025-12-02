@@ -308,7 +308,31 @@ hide: tags
         - В новейших версиях **{{ productName }}** отсутствует файл `Workers.config`.
         - Настройка соответствующих служб выполняется в файле конфигурации экземпляра ПО `<instanceName>.yml`.
 
-4. Перезапустите службы **{{ productName }}**:
+4. Откройте для редактирования три службы **каждого** из установленных экземпляров ПО (`<instanceName>`):
+
+    ``` sh
+    nano /usr/lib/systemd/system/comindware<instanceName>.service
+    nano /usr/lib/systemd/system/apigateway<instanceName>.service
+    nano /usr/lib/systemd/system/adapterhost<instanceName>.service
+    ```
+
+5. Если используются локальные службы Kafka и {{ openSearchVariants }}, откройте их для редактирования:
+
+    ``` sh
+    nano /usr/lib/systemd/system/kafka.service
+    nano /usr/lib/systemd/system/elasticsearch.service
+    ```
+
+6. В каждом файле службы установите следующие директивы:
+
+    ``` cs
+    # Макс. количество открытых файлов
+    LimitNOFILE=200000
+    # Макс. количество процессов
+    LimitNPROC=8192
+    ```
+
+7. Перезапустите службы **{{ productName }}**:
 
     ``` sh
     systemctl restart adapterhost<instanceName>.service
@@ -316,7 +340,16 @@ hide: tags
     systemctl restart apigateway<instanceName>.service
     ```
 
-5. Инициализируйте экземпляра ПО.
+8. Проверьте конфигурацию ОС и служб.
+9. [Инициализируйте экземпляра ПО](#upgrade_version_linux_initialize .pageBreakBefore).
+
+## Проверка конфигурации ОС и служб {: #upgrade_version_linux_check_service_statuses }
+
+{%
+include-markdown "administration/deploy/linux/deploy_guide.md"
+start="<!-- instance-create-prepare-start -->"
+end="<!-- instance-create-prepare-end -->"
+%}
 
 ## Инициализация экземпляра ПО {: #upgrade_version_linux_initialize .pageBreakBefore }
 
