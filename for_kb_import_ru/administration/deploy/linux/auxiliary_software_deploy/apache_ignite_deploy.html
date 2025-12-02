@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4600" kb-tags="" kb-title="Apache Ignite. Установка и настройка">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4600" kb-tags="Apache Ignite,Linux,кластер,развёртывание,установка" kb-title="Apache Ignite. Установка и настройка">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -9,28 +9,35 @@
       </h2>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<a class="md-nav__link mkdocs_imported_link" href="#apache_ignite_deploy_introduction">
 <span class="md-ellipsis">
       Введение
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#установка-apache-ignite">
+<a class="md-nav__link mkdocs_imported_link" href="#apache_ignite_deploy_use_case">
+<span class="md-ellipsis">
+      Прикладная задача
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#apache_ignite_deploy_installation">
 <span class="md-ellipsis">
       Установка Apache Ignite
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#запуск-apache-ignite">
+<a class="md-nav__link mkdocs_imported_link" href="#apache_ignite_deploy_startup">
 <span class="md-ellipsis">
       Запуск Apache Ignite
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#пример-файла-конфигурации-ignite">
+<a class="md-nav__link mkdocs_imported_link" href="#apache_ignite_deploy_configuration_example">
 <span class="md-ellipsis">
       Пример файла конфигурации Ignite
     </span>
@@ -41,21 +48,34 @@
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h2 id="введение">Введение</h2>
-<p>Для работы <strong>Comindware Platform</strong> требуется программное обеспечение Apache Ignite.</p>
-<p>Apache Ignite в минимально необходимой конфигурации устанавливается автоматически при установке <strong>Comindware Platform</strong> с ключом <code>-e</code>.</p>
-<p>Для продвинутых конфигураций требуется развернуть Apache Ignite самостоятельно.</p>
-<p>Здесь представлены краткие инструкции по установке и настройке Apache Ignite 2.16.0 в ОС Linux для работы с <strong>Comindware Platform</strong>.</p>
-<p>Полное руководство по Apache Ignite 2.16.0 (на английском языке) представлено на веб-сайте: <a class="mkdocs_imported_link" href="https://ignite.apache.org/docs/2.16.0/">https://ignite.apache.org/docs/2.16.0/</a></p>
-<p>Краткое руководство на русском языке представлено на веб-сайте: <a class="mkdocs_imported_link" href="https://platform.digital.gov.ru/docs/data-management/platform-v-ignite-se/quick-start">https://platform.digital.gov.ru/docs/data-management/platform-v-ignite-se/quick-start</a></p>
-<h2 id="установка-apache-ignite">Установка Apache Ignite</h2>
+<div class="notice notice-error">
+<p class="admonition-title">Экспериментальная функция</p>
+<p>Представленная здесь функция находится на стадии разработки. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4579#experimental_feature_support">Поддержка экспериментальных функций</a>»</em>.</p>
+</div>
+<h2 id="apache_ignite_deploy_introduction">Введение</h2>
+<p>Apache Ignite — это распределенная высокопроизводительная система управления базами данных.</p>
+<p><strong>Comindware Platform</strong> использует Apache Ignite для хранения данных.</p>
+<p>Apache Ignite в минимально необходимой конфигурации устанавливается автоматически при установке <strong>Comindware Platform</strong>.</p>
+<h2 id="apache_ignite_deploy_use_case">Прикладная задача</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>Данная инструкция не требуется для базовых сценариев развёртывания <strong>Comindware Platform</strong>.</p>
+<p>Используйте эту инструкцию, только если вам необходимо развернуть Apache Ignite в особой нетипичной конфигурации.</p>
+</div>
+<p>Для продвинутых конфигураций можно развернуть собственный экземпляр Apache Ignite или использовать имеющуюся в вашей организации службу.</p>
+<p>Например, можно развернуть кластер Apache Ignite из нескольких узлов, если это необходимо для вашего бизнеса.</p>
+<p>Здесь представлены краткие инструкции по установке и настройке Apache Ignite 2.16.0 в ОС Linux для работы с <strong>Comindware Platform</strong> в простейшей конфигурации.</p>
+<p>Вам может потребоваться адаптировать конфигурацию Apache Ignite в соответствии со своими бизнес-потребностями.</p>
+<p>Полное официальное руководство по Apache Ignite 2 (на английском языке) представлено на сайте: <a class="mkdocs_imported_link" href="https://ignite.apache.org/docs/ignite2/latest/">https://ignite.apache.org/docs/ignite2/latest/</a></p>
+<p>Краткое руководство на русском языке представлено на сайте: <a class="mkdocs_imported_link" href="https://platformv.sbertech.ru/docs/public/IGN/17.6.0/index.html">https://platformv.sbertech.ru/docs/public/IGN/17.6.0/index.html</a></p>
+<h2 class="pageBreakBefore" id="apache_ignite_deploy_installation">Установка Apache Ignite</h2>
 <ol class="colored_numbers_list">
 <li>Скачайте, распакуйте и установите Apache Ignite и задайте права:
     <div class="highlight"><code><pre><span></span><code>wget<span class="w"> </span>https://downloads.apache.org/ignite/2.16.0/apache-ignite-2.16.0-bin.zip</code> <br/><code>unzip<span class="w"> </span>-q<span class="w"> </span>apache-ignite-2.16.0-bin.zip</code> <br/><code>mv<span class="w"> </span>apache-ignite-2.16.0-bin<span class="w"> </span>/usr/share/ignite</code> <br/><code>chown<span class="w"> </span>-R<span class="w"> </span>www-data:www-data<span class="w"> </span>/usr/share/ignite</code> <br/></pre></code></div></li>
 <li>Установите переменную среды <code>IGNITE_HOME</code>, указав путь к папке Ignite без завершающего символа <code>/</code>: <code>export IGNITE_HOME=/usr/share/ignite</code></li>
 <li>Дополнительные модули для использования Ignite в сочетании с Comindware Platform не требуются.</li>
 <li>Скопируйте в папку <code>/usr/share/ignite</code> файл <code>Ignite.config</code> из папки <code>/var/www/&lt;instanceName&gt;</code> (где <code>&lt;instanceName&gt;</code> — имя экземпляра ПО).</li>
-<li>Пример файла <code>Ignite.config</code> представлен в параграфе <a class="mkdocs_imported_link" href="#пример-файла-конфигурации-ignite">«Пример файла конфигурации Ignite»</a>.</li>
+<li>Пример файла <code>Ignite.config</code> представлен в параграфе <a class="mkdocs_imported_link" href="#apache_ignite_deploy_configuration_example">«Пример файла конфигурации Ignite»</a>.</li>
 <li>Откройте для редактирования скрипт запуска Ignite <code>ignite.sh</code>:
     <div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/usr/share/ignite/bin/</code> <br/><code>nano<span class="w"> </span>ignite.sh</code> <br/></pre></code></div></li>
 <li>Добавьте в начало скрипта <code>ignite.sh</code> следующие строки:
@@ -73,14 +93,14 @@
 <div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>ignite_service_create.sh</code> <br/></pre></code></div></p>
 </li>
 </ol>
-<h2 class="pageBreakBefore" id="запуск-apache-ignite">Запуск Apache Ignite</h2>
+<h2 class="pageBreakBefore" id="apache_ignite_deploy_startup">Запуск Apache Ignite</h2>
 <ol class="colored_numbers_list">
 <li>Запустите службу Apache Ignite:
     <div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>start<span class="w"> </span>ignite</code> <br/></pre></code></div></li>
 <li>Проверьте статус узла Apache Ignite:
     <div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/usr/share/ignite/bin/</code> <br/><code>bash<span class="w"> </span>control.sh<span class="w"> </span>--baseline</code> <br/></pre></code></div></li>
 </ol>
-<h2 class="pageBreakBefore" id="пример-файла-конфигурации-ignite">Пример файла конфигурации Ignite</h2>
+<h2 class="pageBreakBefore" id="apache_ignite_deploy_configuration_example">Пример файла конфигурации Ignite</h2>
 <p>Для стабильной работы Ignite вместе с <strong>Comindware Platform</strong> важны следующие директивы в данном примере:</p>
 <ul>
 <li><code>&lt;igniteConfiguration xmlns="http://ignite.apache.org/schema/dotnet/IgniteConfigurationSection" gridName="myGrid1"&gt;</code> — в параметре <code>gridName</code> укажите имя сервера узла Ignite. У узлов кластера должно быть одинаковое имя сервера.</li>

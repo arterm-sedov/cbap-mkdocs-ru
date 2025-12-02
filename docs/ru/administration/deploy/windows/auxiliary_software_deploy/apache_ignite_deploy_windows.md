@@ -1,30 +1,43 @@
 ---
-title: Установка и настройка {{ apacheIgniteVariants }}. Краткое руководство для Windows
+title: Apache Ignite. Установка и настройка в Windows
 kbId: 4616
+tags:
+  - Apache Ignite
+  - Windows
+  - кластер
+  - развёртывание
+  - установка
+hide: tags
 ---
 
-# Установка и настройка Apache Ignite. Краткое руководство для Windows
+# {{ apacheIgniteVariants }}. Установка и настройка в Windows {: #apache_ignite_deploy_windows }
 
 {% include-markdown ".snippets/experimental_feature.md" %}
 
-## Введение
+## Введение {: #apache_ignite_deploy_windows_introduction }
 
-Apache Ignite — это распределенная высокопроизводительная система управления базами данных.
+{{ apacheIgniteVariants }} — это распределенная высокопроизводительная система управления базами данных.
 
-{{ productName }} использует Apache Ignite для хранения данных.
+{{ productName }} использует {{ apacheIgniteVariants }} для хранения данных.
 
-Здесь представлена краткая инструкция по установке Apache Ignite в ОС Windows из ZIP-файла на примере версии 2.16.0.
+{{ apacheIgniteVariants }} в минимально необходимой конфигурации устанавливается автоматически при установке **{{ productName }}**.
 
-Полная инструкция по установке и настройке Apache Ignite представлена на следующем сайте: <https://ignite.apache.org/docs/latest/>
+## Прикладная задача {: #apache_ignite_deploy_windows_use_case }
 
-## Установка Apache Ignite
+{%
+include-markdown "administration/deploy/linux/auxiliary_software_deploy/apache_ignite_deploy.md"
+start="<!-- apache-ignite-deploy-use-case-start -->"
+end="<!-- apache-ignite-deploy-use-case-end -->"
+%}
+
+## Установка {{ apacheIgniteVariants }} {: #apache_ignite_deploy_windows_installation .pageBreakBefore }
 
 1. Скачайте ZIP файл `apache-ignite-2.16.0-bin.zip` по ссылке: <https://ignite.apache.org/download.cgi#binaries>
 2. Распакуйте ZIP-файл в папку, например: `C:\apache-ignite-2.16.0-bin`
 3. Установите переменную среды Windows: `set IGNITE_HOME=C:\apache-ignite-2.16.0-bin`
 4. Настройте конфигурацию Ignite, изменив файл `Apache.Ignite.exe.config`: `%IGNITE_HOME%\platforms\dotnet\bin\Apache.Ignite.exe.config`
 
-## Запуск Apache Ignite
+## Запуск {{ apacheIgniteVariants }} {: #apache_ignite_deploy_windows_startup }
 
 1. Запустите службу Ignite с помощью команды: `%IGNITE_HOME%\bin\ignite.bat -v`
 
@@ -32,7 +45,7 @@ Apache Ignite — это распределенная высокопроизво
 
 2. Если запустить Ignite не удалось, проверьте информацию в журнале, по умолчанию он хранится в папке `%IGNITE_HOME%\work\log`.
 
-## Пример файла конфигурации Ignite {: .pageBreakBefore }
+## Пример файла конфигурации Ignite {: #apache_ignite_deploy_windows_configuration_example .pageBreakBefore }
 
 Для стабильной работы Ignite вместе с {{ productName }} важны следующие директивы в данном примере:
 
