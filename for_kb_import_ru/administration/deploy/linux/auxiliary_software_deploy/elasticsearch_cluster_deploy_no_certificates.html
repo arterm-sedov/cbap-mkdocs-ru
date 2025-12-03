@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4612" kb-tags="" kb-title="Развёртывание Elasticsearch без сертификатов подлинности">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4612" kb-tags="Elasticsearch,Linux,OpenSearch,администрирование,настройка,развёртывание,установка" kb-title="Elasticsearch. Развёртывание без сертификатов подлинности">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -9,14 +9,14 @@
       </h2>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<a class="md-nav__link mkdocs_imported_link" href="#elasticsearch_cluster_deploy_no_certificates_intro">
 <span class="md-ellipsis">
       Введение
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#подготовка-физических-и-виртуальных-машин-пакетов-программ">
+<a class="md-nav__link mkdocs_imported_link" href="#elasticsearch_cluster_deploy_no_certificates_machines_software">
 <span class="md-ellipsis">
       Подготовка физических и виртуальных машин, пакетов программ
     </span>
@@ -24,7 +24,7 @@
 <nav aria-label="Подготовка физических и виртуальных машин, пакетов программ" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#пример-конфигурации-серверов">
+<a class="md-nav__link mkdocs_imported_link" href="#elasticsearch_cluster_deploy_no_certificates_server_config_example">
 <span class="md-ellipsis">
       Пример конфигурации серверов
     </span>
@@ -34,37 +34,44 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#установка-elasticsearch-из-deb-пакета">
+<a class="md-nav__link mkdocs_imported_link" href="#elasticsearch_cluster_deploy_no_certificates_install_deb">
 <span class="md-ellipsis">
       Установка Elasticsearch из deb-пакета
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#конфигурация-elasticsearch">
+<a class="md-nav__link mkdocs_imported_link" href="#elasticsearch_cluster_deploy_no_certificates_configuration">
 <span class="md-ellipsis">
       Конфигурация Elasticsearch
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#запуск-elasticsearch">
+<a class="md-nav__link mkdocs_imported_link" href="#elasticsearch_cluster_deploy_no_certificates_startup">
 <span class="md-ellipsis">
       Запуск Elasticsearch
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#проверка-состояния-кластера">
+<a class="md-nav__link mkdocs_imported_link" href="#elasticsearch_cluster_deploy_no_certificates_cluster_health">
 <span class="md-ellipsis">
       Проверка состояния кластера
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#пример-yml-файла-конфигурации-узла-elasticsearch">
+<a class="md-nav__link mkdocs_imported_link" href="#elasticsearch_cluster_deploy_no_certificates_config_example">
 <span class="md-ellipsis">
       Пример yml-файла конфигурации узла Elasticsearch
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
     </span>
 </a>
 </li>
@@ -73,14 +80,19 @@
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h2 id="введение">Введение</h2>
+<h2 id="elasticsearch_cluster_deploy_no_certificates_intro">Введение</h2>
 <p>Для работы ПО <strong>Comindware Platform</strong> требуется сервер Elasticsearch версии не ниже 8.10.2.</p>
 <p>Здесь представлены требования к конфигурации компьютеров, инструкции по установке Elasticsearch, и настройке узлов кластера Elasticsearch без проверки сертификатов подлинности на виртуальных машинах с ОС Linux на базе Debian.</p>
 <p>Только после запуска службы Elasticsearch можно приступать к развертыванию <strong>Comindware Platform</strong>, указав путь к серверу Elasticsearch.</p>
-<h2 id="подготовка-физических-и-виртуальных-машин-пакетов-программ">Подготовка физических и виртуальных машин, пакетов программ</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Настройка OpenSearch</p>
+<p>Настроить сертификаты подлинности для OpenSearch можно аналогичным образом, при необходимости скорректировав шаги в соответствии с особенностями OpenSearch и вашей конкретной конфигурации.</p>
+<p>См. <a class="mkdocs_imported_link" href="https://docs.opensearch.org/latest/">официальную документацию OpenSearch (английский язык)</a>.</p>
+</div>
+<h2 class="pageBreakBefore" id="elasticsearch_cluster_deploy_no_certificates_machines_software">Подготовка физических и виртуальных машин, пакетов программ</h2>
 <p>Установка в минимальной конфигурации выполняется на 3 разделённых виртуальных машинах.</p>
 <p>Для полнофункциональной отказоустойчивой системы требуется установка на 4 виртуальных машинах, расположенных на как минимум 3 физических машинах (IP-адреса приведены ниже исключительно для примера).</p>
-<h3 id="пример-конфигурации-серверов">Пример конфигурации серверов</h3>
+<h3 class="pageBreakBefore" id="elasticsearch_cluster_deploy_no_certificates_server_config_example">Пример конфигурации серверов</h3>
 <ul>
 <li><code>masterdatanode1</code> c IP-адресом <code>1.1.1.1</code> и ролями <code>data</code>, <code>master</code>, <code>ingest</code>.</li>
 <li>ОЗУ не менее 8 ГБ, 4 ядра, SSD не менее 30 ГБ.</li>
@@ -97,7 +109,7 @@
 <li><code>deb</code>-пакет <code>elasticsearch-8.5.1-amd64.deb</code></li>
 <li><code>yml</code>-файл конфигурации для Elasticsearch <code>customElasticConfig.yml</code></li>
 </ul>
-<h2 id="установка-elasticsearch-из-deb-пакета">Установка Elasticsearch из deb-пакета</h2>
+<h2 class="pageBreakBefore" id="elasticsearch_cluster_deploy_no_certificates_install_deb">Установка Elasticsearch из deb-пакета</h2>
 <p>Повторите шаги, описанные в этом разделе, для каждого из узлов Elasticsearch.</p>
 <ol class="colored_numbers_list">
 <li>
@@ -119,7 +131,7 @@
 <p>Обратите внимание на строку <code>The generated password for the elastic built-in superuser is</code> — напротив неё будет выведен автоматически сформированный пароль для встроенного суперпользователя elastic. <strong>Сохраните этот пароль.</strong></p>
 </li>
 </ol>
-<h2 class="pageBreakBefore" id="конфигурация-elasticsearch">Конфигурация Elasticsearch</h2>
+<h2 class="pageBreakBefore" id="elasticsearch_cluster_deploy_no_certificates_configuration">Конфигурация Elasticsearch</h2>
 <p>Повторите шаги, описанные в этом разделе, для каждого из узлов Elasticsearch.</p>
 <p>Помните, что имя кластера <code>cluster.name</code> для каждого из узлов должно совпадать, а имя узла <code>node.name</code> должно быть уникальным.</p>
 <ol class="colored_numbers_list">
@@ -198,7 +210,7 @@
 <p>Сохраните изменения <code>yml</code>-файла конфигурации и закройте текстовый редактор Nano, нажав клавиши: ++ctrl+O++, <span class="keys"><kbd class="key-enter">Ввод</kbd></span>, <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-x">X</kbd></span>.</p>
 </li>
 </ol>
-<h2 class="pageBreakBefore" id="запуск-elasticsearch">Запуск Elasticsearch</h2>
+<h2 class="pageBreakBefore" id="elasticsearch_cluster_deploy_no_certificates_startup">Запуск Elasticsearch</h2>
 <p>Повторите шаги, описанные в этом разделе, для каждого из узлов Elasticsearch.</p>
 <ol class="colored_numbers_list">
 <li>
@@ -226,7 +238,7 @@
 <div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"elasticsearch1"</span><span class="p">,</span></code> <br/><code><span class="nt">"cluster_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"yourClusterName"</span><span class="p">,</span></code> <br/><code><span class="nt">"cluster_uuid"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Xfj14lWBRf2c6GAuwtV5lg"</span><span class="p">,</span></code> <br/><code><span class="nt">"version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"number"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"8.5.1"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"build_flavor"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"default"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"build_type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"deb"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"build_hash"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"c1310c45fc534583afe2c1c03046491efba2bba2"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"build_date"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"2022-11-09T21:02:20.169855900Z"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"build_snapshot"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"lucene_version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"9.4.1"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"minimum_wire_compatibility_version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"7.17.0"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"minimum_index_compatibility_version"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"7.0.0"</span></code> <br/><code><span class="w">    </span><span class="p">},</span></code> <br/><code><span class="nt">"tagline"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"You Know, for Search"</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
 </li>
 </ol>
-<h2 id="проверка-состояния-кластера">Проверка состояния кластера</h2>
+<h2 class="pageBreakBefore" id="elasticsearch_cluster_deploy_no_certificates_cluster_health">Проверка состояния кластера</h2>
 <ol class="colored_numbers_list">
 <li>
 <p>Выполнив для каждого из узлов кластера Elasticsearch шаги, описанные в предыдущих разделах, от любого из узлов выполните GET-запрос проверки состояния кластера:</p>
@@ -237,8 +249,19 @@
 <div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="nt">"cluster_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"yourClusterName"</span><span class="p">,</span></code> <br/><code><span class="nt">"status"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"green"</span><span class="p">,</span></code> <br/><code><span class="nt">"timed_out"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span></code> <br/><code><span class="nt">"number_of_nodes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span></code> <br/><code><span class="nt">"number_of_data_nodes"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span></code> <br/><code><span class="nt">"active_primary_shards"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span></code> <br/><code><span class="nt">"active_shards"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span></code> <br/><code><span class="nt">"relocating_shards"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></code> <br/><code><span class="nt">"initializing_shards"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></code> <br/><code><span class="nt">"unassigned_shards"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></code> <br/><code><span class="nt">"delayed_unassigned_shards"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></code> <br/><code><span class="nt">"number_of_pending_tasks"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></code> <br/><code><span class="nt">"number_of_in_flight_fetch"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></code> <br/><code><span class="nt">"task_max_waiting_in_queue_millis"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></code> <br/><code><span class="nt">"active_shards_percent_as_number"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
 </li>
 </ol>
-<h2 class="pageBreakBefore" id="пример-yml-файла-конфигурации-узла-elasticsearch">Пример yml-файла конфигурации узла Elasticsearch</h2>
+<h2 class="pageBreakBefore" id="elasticsearch_cluster_deploy_no_certificates_config_example">Пример yml-файла конфигурации узла Elasticsearch</h2>
 <div class="highlight"><code><pre><span></span><code><span class="nt">bootstrap.memory_lock</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span></code> <br/><code><span class="nt">cluster.name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elasticsearch.example.cbap</span></code> <br/><code><span class="nt">cluster.max_shards_per_node</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10000</span></code> <br/><code><span class="nt">http.port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9200</span></code> <br/><code><span class="nt">node.roles</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">master</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">data</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">ingest</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">remote_cluster_client</span><span class="w"> </span><span class="p p-Indicator">]</span></code> <br/><code><span class="nt">node.name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elasticsearch1</span></code> <br/><code><span class="nt">path.data</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/elasticsearch/data</span></code> <br/><code><span class="nt">path.logs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/elasticsearch/logs</span></code> <br/><code><span class="nt">path.repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/elasticsearch/backups</span></code> <br/><code><span class="nt">xpack.security.enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span></code> <br/><code><span class="nt">xpack.security.http.ssl</span><span class="p">:</span></code> <br/><code><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span></code> <br/><code><span class="c1">#  keystore.path: certs/es1.p12    # [&lt;-] specify path to signedNodeCert.p12 here</span></code> <br/><code><span class="nt">xpack.security.transport.ssl</span><span class="p">:</span></code> <br/><code><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span></code> <br/><code><span class="c1">#  key: certs/es1.key    # [&lt;-] specify path to nodecert.key here</span></code> <br/><code><span class="c1">#  certificate: certs/es1.crt    # [&lt;-] specify path to nodeCert.crt here</span></code> <br/><code><span class="c1">#  certificate_authorities: [ "certs/CMW-RootCA.crt" ]    # [&lt;-] specify path to CACert.crt here</span></code> <br/><code><span class="nt">network.host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.1.43</span></code> <br/><code><span class="nt">discovery.seed_hosts </span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"192.168.1.43"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"192.168.1.42"</span><span class="p p-Indicator">,</span><span class="s">"1.1.1.3"</span><span class="p p-Indicator">]</span></code> <br/><code><span class="nt">cluster.initial_master_nodes</span><span class="p">:</span></code> <br/><code><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elasticsearch1</span></code> <br/><code><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elasticsearch2</span></code> <br/><code><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elasticsearch3</span></code> <br/></pre></code></div>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://www.elastic.co/docs/deploy-manage">Официальная документация Elasticsearch (английский язык)</a></li>
+<li><a class="mkdocs_imported_link" href="https://docs.opensearch.org/latest/">Официальная документация OpenSearch (английский язык)</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4606">Elasticsearch. Настройка SSL-сертификатов</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4601">Elasticsearch. Установка в базовой конфигурации</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622">Установка, запуск, инициализация и остановка ПО Comindware Platform</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5067">Конфигурация экземпляра, компонентов ПО и служб. Настройка</a></li>
+</ul>
+</div>
 </article>
 </div>
 </div>
