@@ -1,9 +1,9 @@
 ---
-title: Дефрагментация данных Apache Ignite
+title: Apache Ignite. Дефрагментация данных
 kbId: 4603
 ---
 
-# Дефрагментация данных Apache Ignite {: #apache_ignite_defragment}
+# Apache Ignite. Дефрагментация данных {: #apache_ignite_defragment}
 
 ## Введение
 
@@ -16,7 +16,7 @@ kbId: 4603
 ## Порядок дефрагментации
 
 1. Создайте резервную копию базы данных экземпляра ПО.
-2. Скачайте бинарный дистрибутив Apache Ignite, например [apache-ignite-2.16.0-bin.zip](https://downloads.apache.org/ignite/2.16.0/apache-ignite-2.16.0-bin.zip) или более новую версию.
+2. Скачайте бинарный дистрибутив Apache Ignite, например [apache-ignite-2.17.0-bin.zip](https://downloads.apache.org/ignite/2.17.0/apache-ignite-2.17.0-bin.zip) или более новую версию.
 3. Перейдите в режим суперпользователя:
 
 
@@ -25,7 +25,7 @@ kbId: 4603
 4. Распакуйте дистрибутив Apache Ignite в домашнюю папку (здесь и далее `username` — имя текущего пользователя):
 
     ``` sh
-    unzip apache-ignite-2.16.0-bin.zip -d /usr/share/ignite
+    unzip apache-ignite-2.17.0-bin.zip -d /usr/share/ignite
     ```
 
 5. Задайте переменную среды `IGNITE_HOME`:

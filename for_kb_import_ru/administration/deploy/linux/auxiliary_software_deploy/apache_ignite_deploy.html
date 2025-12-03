@@ -48,30 +48,17 @@
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<div class="notice notice-error">
-<p class="admonition-title">Экспериментальная функция</p>
-<p>Представленная здесь функция находится на стадии разработки. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4579#experimental_feature_support">Поддержка экспериментальных функций</a>»</em>.</p>
-</div>
-<h2 id="apache_ignite_deploy_introduction">Введение</h2>
-<p>Apache Ignite — это распределенная высокопроизводительная система управления базами данных.</p>
-<p><strong>Comindware Platform</strong> использует Apache Ignite для хранения данных.</p>
-<p>Apache Ignite в минимально необходимой конфигурации устанавливается автоматически при установке <strong>Comindware Platform</strong>.</p>
-<h2 id="apache_ignite_deploy_use_case">Прикладная задача</h2>
-<div class="notice notice-warning">
-<p class="admonition-title">Внимание!</p>
-<p>Данная инструкция не требуется для базовых сценариев развёртывания <strong>Comindware Platform</strong>.</p>
-<p>Используйте эту инструкцию, только если вам необходимо развернуть Apache Ignite в особой нетипичной конфигурации.</p>
-</div>
-<p>Для продвинутых конфигураций можно развернуть собственный экземпляр Apache Ignite или использовать имеющуюся в вашей организации службу.</p>
-<p>Например, можно развернуть кластер Apache Ignite из нескольких узлов, если это необходимо для вашего бизнеса.</p>
-<p>Здесь представлены краткие инструкции по установке и настройке Apache Ignite 2.16.0 в ОС Linux для работы с <strong>Comindware Platform</strong> в простейшей конфигурации.</p>
-<p>Вам может потребоваться адаптировать конфигурацию Apache Ignite в соответствии со своими бизнес-потребностями.</p>
-<p>Полное официальное руководство по Apache Ignite 2 (на английском языке) представлено на сайте: <a class="mkdocs_imported_link" href="https://ignite.apache.org/docs/ignite2/latest/">https://ignite.apache.org/docs/ignite2/latest/</a></p>
-<p>Краткое руководство на русском языке представлено на сайте: <a class="mkdocs_imported_link" href="https://platformv.sbertech.ru/docs/public/IGN/17.6.0/index.html">https://platformv.sbertech.ru/docs/public/IGN/17.6.0/index.html</a></p>
-<h2 class="pageBreakBefore" id="apache_ignite_deploy_installation">Установка Apache Ignite</h2>
+<h2 id="введение">Введение</h2>
+<p>Для работы <strong>Comindware Platform</strong> требуется программное обеспечение Apache Ignite.</p>
+<p>Apache Ignite в минимально необходимой конфигурации устанавливается автоматически при установке <strong>Comindware Platform</strong> с ключом <code>-e</code>.</p>
+<p>Для продвинутых конфигураций требуется развернуть Apache Ignite самостоятельно.</p>
+<p>Здесь представлены краткие инструкции по установке и настройке Apache Ignite 2.17.0 в ОС Linux для работы с <strong>Comindware Platform</strong>.</p>
+<p>Полное руководство по Apache Ignite 2.17.0 (на английском языке) представлено на веб-сайте: <a class="mkdocs_imported_link" href="https://ignite.apache.org/docs/2.17.0/">https://ignite.apache.org/docs/2.17.0/</a></p>
+<p>Краткое руководство на русском языке представлено на веб-сайте: <a class="mkdocs_imported_link" href="https://platform.digital.gov.ru/docs/data-management/platform-v-ignite-se/quick-start">https://platform.digital.gov.ru/docs/data-management/platform-v-ignite-se/quick-start</a></p>
+<h2 id="установка-apache-ignite">Установка Apache Ignite</h2>
 <ol class="colored_numbers_list">
 <li>Скачайте, распакуйте и установите Apache Ignite и задайте права:
-    <div class="highlight"><code><pre><span></span><code>wget<span class="w"> </span>https://downloads.apache.org/ignite/2.16.0/apache-ignite-2.16.0-bin.zip</code> <br/><code>unzip<span class="w"> </span>-q<span class="w"> </span>apache-ignite-2.16.0-bin.zip</code> <br/><code>mv<span class="w"> </span>apache-ignite-2.16.0-bin<span class="w"> </span>/usr/share/ignite</code> <br/><code>chown<span class="w"> </span>-R<span class="w"> </span>www-data:www-data<span class="w"> </span>/usr/share/ignite</code> <br/></pre></code></div></li>
+    <div class="highlight"><code><pre><span></span><code>wget<span class="w"> </span>https://downloads.apache.org/ignite/2.17.0/apache-ignite-2.17.0-bin.zip</code> <br/><code>unzip<span class="w"> </span>-q<span class="w"> </span>apache-ignite-2.17.0-bin.zip</code> <br/><code>mv<span class="w"> </span>apache-ignite-2.17.0-bin<span class="w"> </span>/usr/share/ignite</code> <br/><code>chown<span class="w"> </span>-R<span class="w"> </span>www-data:www-data<span class="w"> </span>/usr/share/ignite</code> <br/></pre></code></div></li>
 <li>Установите переменную среды <code>IGNITE_HOME</code>, указав путь к папке Ignite без завершающего символа <code>/</code>: <code>export IGNITE_HOME=/usr/share/ignite</code></li>
 <li>Дополнительные модули для использования Ignite в сочетании с Comindware Platform не требуются.</li>
 <li>Скопируйте в папку <code>/usr/share/ignite</code> файл <code>Ignite.config</code> из папки <code>/var/www/&lt;instanceName&gt;</code> (где <code>&lt;instanceName&gt;</code> — имя экземпляра ПО).</li>

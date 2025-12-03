@@ -72,7 +72,7 @@ hide: tags
 3. Если пакета нет, загрузите zip-архив со скриптами:
 
     ``` sh
-    wget -P /tmp/ https://archive.apache.org/dist/ignite/2.16.0/apache-ignite-2.16.0-bin.zip
+    wget -P /tmp/ https://archive.apache.org/dist/ignite/2.17.0/apache-ignite-2.17.0-bin.zip
     ```
 
 4. Если на машине ранее не был установлен пакет `zip`, установите его:
@@ -84,13 +84,13 @@ hide: tags
 5. Разархивируйте пакет в директорию `/var/www/`:
 
     ``` sh
-    unzip /tmp/apache-ignite-2.16.0-bin.zip -d /var/www
+    unzip /tmp/apache-ignite-2.17.0-bin.zip -d /var/www
     ```
 
 6. Переименуйте получившуюся директорию со скриптами `{{ apacheIgniteVariants }}` в `apache-ignite`:
 
     ``` sh
-    mv /var/www/apache-ignite-2.16.0-bin /var/www/apache-ignite
+    mv /var/www/apache-ignite-2.17.0-bin /var/www/apache-ignite
     ```
 
 7. Перейдите в директорию `/var/www/`:

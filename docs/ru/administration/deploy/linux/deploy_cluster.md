@@ -174,11 +174,11 @@ hide: tags
     --8<-- "linux_sudo.md"
 
 2. Установите ПО и разверните экземпляр **{{ productName }}** одинаковой версии. См. _«[Установка, запуск, инициализация и остановка ПО][deploy_guide_linux]»_.
-3. Скачайте дистрибутив [Apache Ignite](https://downloads.apache.org/ignite/2.16.0/apache-ignite-2.16.0-bin.zip).
+3. Скачайте дистрибутив [Apache Ignite](https://downloads.apache.org/ignite/2.17.0/apache-ignite-2.17.0-bin.zip).
 4. Распакуйте дистрибутив (например, в директорию `/usr/share/ignite`):
 
     ``` sh
-    unzip apache-ignite-2.16.0-bin.zip -d /usr/share/
+    unzip apache-ignite-2.17.0-bin.zip -d /usr/share/
     mv /usr/share/apache-ignite* /usr/share/ignite
     ```
 
