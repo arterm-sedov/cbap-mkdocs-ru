@@ -43,7 +43,10 @@ configPath: <configPath>
 # Адрес службы журналирования {{ openSearchVariants }}.
 journal.server: http://<searchHostIP>:<searchHostPort>
 # Индекс службы журналирования {{ openSearchVariants }}.
-# journal.name: <instanceName>
+# Допускается использовать только строчные буквы и цифры.
+# Если в имени индекса будут прописные буквы или спецсимволы (например, дефис),
+# служба журналирования автоматически преобразует их в строчные буквы и символы подчёркивания.
+# journal.name: <prefix><instanceName>
 # URI-адрес экземпляра {{ productName }}.
 fqdn: <hostName>
 # Порт экземпляра {{ productName }}.
