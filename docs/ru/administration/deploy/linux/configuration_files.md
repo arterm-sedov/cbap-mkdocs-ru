@@ -106,8 +106,11 @@ configPath: <configPath>
 # Адрес службы журналирования {{ openSearchVariants }}.
 # Устаревшая директива: elasticsearchUri
 journal.server: http://<searchHostIP>:<searchHostPort>
-# Индекс службы журналирования.
-# journal.name: <prefix>-<instanceName>
+# Индекс службы журналирования {{ openSearchVariants }}.
+# Допускается использовать только строчные буквы и цифры.
+# Если в имени индекса будут прописные буквы или спецсимволы (например, дефис),
+# служба журналирования автоматически преобразует их в строчные буквы и символы подчёркивания.
+# journal.name: <prefix><instanceName>
 # Имя пользователя службы журналирования
 # journal.username: xxxx
 # Пароль службы журналирования
