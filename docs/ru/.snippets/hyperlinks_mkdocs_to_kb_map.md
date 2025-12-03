@@ -943,6 +943,8 @@
 
 [nginx_deploy]: {{ kbArticleURLPrefix }}4611
 
+[nginx_configure]: {{ kbArticleURLPrefix }}5143
+
 [nginx_geoid_deploy]: {{ kbArticleURLPrefix }}4610
 
 [restore_complete_backup]: {{ kbArticleURLPrefix }}4648

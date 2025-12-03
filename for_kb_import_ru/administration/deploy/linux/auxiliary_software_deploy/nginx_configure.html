@@ -1,0 +1,307 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5143" kb-tags="HTTP-запросы,Linux,NGINX,получение запросов,прокси-сервер,развёртывание" kb-title="NGINX. Настройка конфигурации для получения HTTP-запросов в Comindware Platform">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#nginx_configure_intro">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#nginx_configure_task">
+<span class="md-ellipsis">
+      Прикладная задача
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#nginx_configure_create_config">
+<span class="md-ellipsis">
+      Создание конфигурации прокси-сервера NGINX
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#nginx_configure_enable">
+<span class="md-ellipsis">
+      Включение конфигурации
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#nginx_configure_connection">
+<span class="md-ellipsis">
+      Настройка подключения в Comindware Platform
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#nginx_configure_route">
+<span class="md-ellipsis">
+      Настройка пути передачи данных
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#nginx_configure_scenario">
+<span class="md-ellipsis">
+      Настройка сценария для обработки входящих сценариев
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#nginx_configure_testing">
+<span class="md-ellipsis">
+      Тестирование
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="nginx_configure_intro">Введение</h2>
+<p>Здесь представлены инструкции по настройке конфигурации прокси-сервера NGINX для перенаправления HTTP-запросов в <strong>Comindware Platform</strong> при использовании подключения типа «<strong>Получение HTTP-запросов</strong>».</p>
+<p>Подробные сведения по установке и настройке NGINX представлены на следующих сайтах:</p>
+<ul>
+<li><a class="mkdocs_imported_link" href="http://nginx.org/ru/docs/beginners_guide.html">http://nginx.org/ru/docs/beginners_guide.html</a></li>
+<li><a class="mkdocs_imported_link" href="https://ruvds.com/ru/helpcenter/kak-nastroit-nginx-na-ubuntu-20-04/">https://ruvds.com/ru/helpcenter/kak-nastroit-nginx-na-ubuntu-20-04/</a></li>
+<li><a class="mkdocs_imported_link" href="https://webdevblog.ru/bezopasnost-nginx-kak-uluchshit-konfiguraciju-vashego-servera/">https://webdevblog.ru/bezopasnost-nginx-kak-uluchshit-konfiguraciju-vashego-servera/</a></li>
+</ul>
+<p>См. также:
+- <em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4611">NGINX. Установка и настройка</a></em>
+- <em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622">Установка, запуск, инициализация и остановка ПО</a></em></p>
+<h2 id="nginx_configure_task">Прикладная задача</h2>
+<p>В данном примере рассматривается настройка NGINX в качестве прокси-сервера для перенаправления HTTP-запросов из внешних систем в <strong>Comindware Platform</strong>:</p>
+<ul>
+<li>имеется шаблон записи <em>«Заказы»</em> с атрибутами <em>«Артикул товара»</em> типа «<strong>Текст</strong>» и  <em>«Количество»</em> типа «<strong>Число</strong>».</li>
+<li>внешний сервер отправляет HTTP-запросы с искомым артикулом товара (<code>squ</code>) на порт <code>8123</code> NGINX;</li>
+<li>NGINX должен перенаправлять запросы на порт <code>39135</code> <strong>Comindware Platform</strong>, где настроено подключение типа «<strong>Получение HTTP-запросов</strong>»;</li>
+<li>
+<p><strong>Comindware Platform</strong> должна обрабатывать запросы и возвращать массив с данными заказов, содержащих указанный артикул товара, вида:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nt">"orders"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span></code> <br/><code><span class="w">    </span><span class="nt">"orderNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span></code> <br/><code><span class="p">}]</span></code> <br/></pre></code></div>
+</li>
+</ul>
+<h2 id="nginx_configure_create_config">Создание конфигурации прокси-сервера NGINX</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>Для выполнения представленных здесь инструкций потребуется доступ к команде <code>sudo</code>.</p>
+</div>
+<ol class="colored_numbers_list">
+<li>
+<p>Откройте для редактирования файл конфигурации NGINX:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/nginx/sites-available/proxy-service</code> <br/></pre></code></div>
+<p>Здесь <code>proxy-service</code> — имя файла конфигурации NGINX. Вы можете использовать собственное наглядное имя.</p>
+</li>
+<li>
+<p>Добавьте в файл следующие директивы:</p>
+<div class="highlight"><code><pre><span></span><code>server<span class="w"> </span><span class="o">{</span></code> <br/><code><span class="w">    </span>listen<span class="w"> </span><span class="m">8123</span><span class="p">;</span></code> <br/><code><span class="w">    </span>server_name<span class="w"> </span>_<span class="p">;</span></code> <br/><code></code> <br/><code><span class="w">    </span>location<span class="w"> </span>/api/public/<span class="w"> </span><span class="o">{</span></code> <br/><code><span class="w">        </span>proxy_pass<span class="w"> </span>http://127.0.0.1:39135/<span class="p">;</span></code> <br/><code><span class="w">        </span>proxy_http_version<span class="w"> </span><span class="m">1</span>.1<span class="p">;</span></code> <br/><code><span class="w">        </span>proxy_set_header<span class="w"> </span>Host<span class="w"> </span><span class="nv">$host</span><span class="p">;</span></code> <br/><code><span class="w">        </span>proxy_set_header<span class="w"> </span>X-Real-IP<span class="w"> </span><span class="nv">$remote_addr</span><span class="p">;</span></code> <br/><code><span class="w">        </span>proxy_set_header<span class="w"> </span>X-Forwarded-For<span class="w"> </span><span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span></code> <br/><code><span class="w">        </span>proxy_set_header<span class="w"> </span>X-Forwarded-Proto<span class="w"> </span><span class="nv">$scheme</span><span class="p">;</span></code> <br/><code></code> <br/><code><span class="w">        </span><span class="c1"># При необходимости снимите ограничение на размер тела запроса,</span></code> <br/><code><span class="w">        </span><span class="c1"># закомментировав эту директиву</span></code> <br/><code><span class="w">        </span>client_max_body_size<span class="w"> </span>10M<span class="p">;</span></code> <br/><code><span class="w">    </span><span class="o">}</span></code> <br/><code><span class="o">}</span></code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><code>listen 8123</code> — порт, на котором NGINX будет принимать HTTP-запросы. Этот порт указывается при отправке запросов из внешних систем, например: <code>http://&lt;your_host&gt;:8123/api/public/get/request</code> (<code>&lt;your_host&gt;</code> — URL-адрес вашего экземпляра <strong>Comindware Platform</strong>).</li>
+<li><code>server_name _</code> — имя виртуального хоста. Значение <code>_</code> используется как «хост по умолчанию» для запросов, имя сервера которых не совпадает ни с одним другим блоком <code>server</code>.</li>
+<li><code>proxy_pass http://127.0.0.1:39135/</code> — адрес и порт <strong>Comindware Platform</strong>, на который NGINX будет перенаправлять запросы. Порт <code>39135</code> должен совпадать с портом, указанным при создании подключения типа «<strong>Получение HTTP-запросов</strong>» в <strong>Comindware Platform</strong>.</li>
+</ul>
+</li>
+<li>
+<p>Сохраните файл.</p>
+</li>
+</ol>
+<h2 id="nginx_configure_enable">Включение конфигурации</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте символическую ссылку на файл конфигурации в директории <code>sites-enabled</code>:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>ln<span class="w"> </span>-s<span class="w"> </span>/etc/nginx/sites-available/proxy-service<span class="w"> </span>/etc/nginx/sites-enabled/</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Проверьте корректность конфигурации NGINX:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>nginx<span class="w"> </span>-t</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Если проверка прошла успешно, перезапустите NGINX:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>nginx</code> <br/></pre></code></div>
+</li>
+</ol>
+<h2 id="nginx_configure_connection">Настройка подключения в Comindware Platform</h2>
+<ol class="colored_numbers_list">
+<li>На странице «<strong>Администрирование</strong>» выберите пункт «<strong>Инфраструктура</strong>» — «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4675"><strong>Подключения</strong></a>» <i fa-exchange-alt="" fal=""></i>.</li>
+<li>Создайте или откройте подключение типа «<strong>Подключения REST и OData</strong>» — «<strong>Получение HTTP-запросов</strong>».</li>
+<li>
+<p>Настройте подключение:</p>
+<ul>
+<li><strong>Системное имя</strong> — введите уникальное имя подключения, например <code>receiveHttpConnection</code>.</li>
+<li><strong>Описание</strong> — введите наглядное описание подключения.</li>
+<li><strong>Запись в файловые журналы</strong> — выберите уровень журналирования событий получения запросов.</li>
+<li><strong>Путь URI</strong> — укажите путь, например <code>orders</code>, на который внешняя система будет отправлять запросы.</li>
+<li><strong>Порт</strong> — укажите порт <code>39135</code> (должен совпадать с внутренним портом, указанным <a class="mkdocs_imported_link" href="#nginx_configure_create_config">в конфигурации NGINX</a>).</li>
+<li><strong>Формат данных</strong> — выберите формат данных, например <strong>JSON</strong>.</li>
+</ul>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Проверить соединение</strong>» для проверки корректности настроек.</p>
+</li>
+<li>Сохраните подключение.</li>
+</ol>
+<h2 id="nginx_configure_route">Настройка пути передачи данных</h2>
+<ol class="colored_numbers_list">
+<li>На странице «<strong>Администрирование</strong>» выберите пункт «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4676"><strong>Пути передачи данных</strong></a>» <i aria-hidden="true" class="fa-light fa-route">&zwnj;<!--icon--></i>.</li>
+<li>Создайте или откройте путь передачи данных типа «<strong>Подключения REST и OData</strong>» — «<strong>Получение HTTP-запросов</strong>».</li>
+<li>
+<p>На вкладке «<strong>Основные свойства</strong>» настройте:</p>
+<ul>
+<li><strong>Подключение</strong> — выберите созданное ранее <a class="mkdocs_imported_link" href="#nginx_configure_connection">подключение для получения HTTP-запросов</a>.</li>
+<li><strong>Системное имя</strong> — введите уникальное имя пути передачи данных, например <code>receiveHttpRoute</code>.</li>
+<li><strong>Описание</strong> — введите наглядное описание пути передачи данных.</li>
+</ul>
+</li>
+<li>
+<p>На вкладке «<strong>Атрибуты сообщений</strong>» настройте структуру данных запроса и ответа:</p>
+<ul>
+<li>Выберите <strong>тип сообщения</strong> «<strong>Обработка HTTP-запросов</strong>».</li>
+<li>В таблице «<strong>Запрос</strong>» добавьте атрибуты, соответствующие структуре входящих HTTP-запросов. Например, для запроса с полем номера заказа <code>orderNumber</code> добавьте атрибут:<ul>
+<li><strong>Системное имя:</strong> <code>orderNumber</code></li>
+<li><strong>Тип:</strong> <code>Строка</code></li>
+</ul>
+</li>
+<li>В таблице «<strong>Ответ</strong>» добавьте атрибуты для структуры ответа. Например, для ответа с массивом данных заказов:<ul>
+<li>атрибут <code>orders</code> типа «<strong>Объект</strong>» с установленным флажком «<strong>Массив</strong>».<ul>
+<li>внутри атрибут <code>orders</code> дочерние атрибуты:<ul>
+<li><code>id</code> и <code>product</code> типа «<strong>Строка</strong>»;</li>
+<li><code>quantity</code> типа «<strong>Число</strong>».</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>На вкладке «<strong>Интеграция</strong>» настройте:</p>
+<ul>
+<li>
+<p><strong>Путь URI</strong> — укажите дополнительный путь, например <code>request</code>.</p>
+<p>Полный путь для отправки запросов будет составлен из компонентов, настроенных в подключении и пути передачи данных, например: <code>http://&lt;your_host&gt;:8123/api/public/orders/request</code> (<code>&lt;your_host&gt;</code> — URL-адрес вашего экземпляра <strong>Comindware Platform</strong>).</p>
+</li>
+<li>
+<p><strong>Атрибуты для десериализации данных</strong> — укажите <code>$</code> в обоих столбцах для получения всей структуры JSON из запроса.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Сохраните путь передачи данных.</p>
+</li>
+</ol>
+<h2 id="nginx_configure_scenario">Настройка сценария для обработки входящих сценариев</h2>
+<ol class="colored_numbers_list">
+<li>Создайте новый сценарий.</li>
+<li>
+<p>Настройте созданное по умолчанию событие «<strong>Нажатие кнопки</strong>»:</p>
+<ul>
+<li><strong>Тип: получение сообщения</strong></li>
+<li><strong>Контекстный шаблон:</strong> <em>Заказы</em></li>
+<li><strong>Подключение:</strong> выберите созданное <a class="mkdocs_imported_link" href="#nginx_configure_connection">подключение для получения HTTP-запросов</a></li>
+<li><strong>Путь передачи данных:</strong> выберите созданный <a class="mkdocs_imported_link" href="#nginx_configure_route">путь передачи данных</a></li>
+<li><strong>Имя переменной:</strong> укажите имя переменной для хранения входящего запроса, например <code>orderRequest</code></li>
+</ul>
+</li>
+<li>
+<p>Добавьте действие «<strong>Сменить контекст</strong>»:</p>
+<ul>
+<li><strong>Целевой шаблон записи:</strong> <em>Заказы</em></li>
+<li>
+<p><strong>Атрибут или выражение для поиска объектов:</strong> укажите выражение для выборки заказов по номеру:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">db</span><span class="o">-&gt;</span><span class="n">Заказы</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">НомерЗаказа</span><span class="o">==</span><span class="err">$$</span><span class="n">orderRequest</span><span class="o">-&gt;</span><span class="n">orderNumber</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">id</span></code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><code>$$orderRequest</code> — переменная из события «<strong>Получение сообщения</strong>»</li>
+<li><code>orderNumber</code> — атрибут сообщения, настроенный в <a class="mkdocs_imported_link" href="#nginx_configure_route">пути передачи данных входящего HTTP-запроса</a>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Добавьте действие «<strong>Изменить значения переменных</strong>»:</p>
+<ul>
+<li><strong>Операция со значениями переменных: заменить</strong></li>
+<li>
+<p>Настройте переменные для передачи данных в запись:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Имя переменной</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>orderNumber</code></td>
+<td>Атрибут <em>«ID»</em></td>
+</tr>
+<tr>
+<td><code>quantity</code></td>
+<td>Атрибут <em>«Количество»</em></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="nginx_configure_testing">Тестирование</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Отправьте HTTP-запрос из внешней системы на настроенный адрес NGINX, например:</p>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">    </span>-u<span class="w"> </span>username:password<span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">    </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">    </span>-d<span class="w"> </span><span class="s1">'{</span></code> <br/><code><span class="s1">        "sku": "12345"</span></code> <br/><code><span class="s1">    }'</span><span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">    </span>http://&lt;your_host&gt;:8123/api/public/orders/request<span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">    </span>-v<span class="sb">`</span></code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><code>-X POST</code> — метод запроса (необязательный ключ);</li>
+<li><code>-u username:password</code> — базовая аутентификация c учётными данными аккаунта с разрешением на <strong>вызовы API</strong> <strong>Comindware Platform</strong>;</li>
+<li><code>-H "Content-Type: application/json"</code> — заголовок, указывающий на формат данных JSON;</li>
+<li><code>-d '...'</code> — тело запроса с JSON-структурой, содержащей номер заказа;</li>
+<li><code>http://&lt;your_host&gt;:8123/api/public/orders/request</code> — адрес NGINX с путём, настроенным в <a class="mkdocs_imported_link" href="#nginx_configure_connection">подключении</a> и <a class="mkdocs_imported_link" href="#nginx_configure_route">пути передачи данных</a> (<code>&lt;your_host&gt;</code> — URL-адрес вашего экземпляра <strong>Comindware Platform</strong>);</li>
+<li><code>-v</code> — вывод отладочных данных (необязательный ключ).`</li>
+</ul>
+</li>
+<li>
+<p>Проверьте обработку запроса. <strong>Comindware Platform</strong> должна вернуть данные заказов с запрошенным товаром, например:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="nt">"orders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span></code> <br/><code><span class="w">    </span><span class="p">{</span></code> <br/><code><span class="w">      </span><span class="nt">"orderNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2235"</span><span class="p">,</span></code> <br/><code><span class="w">      </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span></code> <br/><code><span class="w">    </span><span class="p">},</span></code> <br/><code><span class="w">    </span><span class="p">{</span></code> <br/><code><span class="w">      </span><span class="nt">"orderNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2236"</span><span class="p">,</span></code> <br/><code><span class="w">      </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="w">  </span><span class="p">]</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4700">HTTP-запросы. Получение JSON-данных в сценарии</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4611">NGINX. Установка и настройка</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622">Установка, запуск, инициализация и остановка ПО</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4717">Сценарии. Настройка</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>
