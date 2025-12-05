@@ -191,13 +191,13 @@ hide: tags
 4. Раскомментируйте строку и задайте значение в файле `/etc/systemd/user.conf`:
 
     ```  sh
-    DefaultLimitNOFILE=65536
+    DefaultLimitNOFILE=200000
     ```
 
 5. Раскомментируйте строку и задайте значение в файле `/etc/systemd/system.conf`:
 
-    ```
-    DefaultLimitNOFILE=65536
+    ``` sh
+    DefaultLimitNOFILE=200000
     ```
 
 6. Откройте для редактирования конфигурацию сервиса экземпляра ПО:
@@ -210,8 +210,8 @@ hide: tags
 
     ```  sh
     [Service]
-    LimitNOFILE=65536
-    LimitNOFILESoft=65536
+    LimitNOFILE=200000
+    LimitNOFILESoft=200000
     ```
 
 8. Перезагрузите машину и экземпляр ПО.
