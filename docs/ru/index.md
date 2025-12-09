@@ -1,6 +1,6 @@
 ---
+title: 'Введение'
 kbId: 4579
-title: Введение
 tags:
     - содержание руководства
     - определения
@@ -111,5 +111,13 @@ hide:
 {% include-markdown ".snippets/disclaimer_production_deploy.md" %}
 
 {% include-markdown ".snippets/disclaimer_optimization.md" %}
+
+<div class="admonition warning" markdown="block">
+
+## Ответственность за использование сервисов третьих сторон {: .admonition-title #third_party_services_disclaimer_responsibility }
+
+{% include-markdown ".snippets/disclaimer_third_party_services.md" %}
+
+</div>
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
