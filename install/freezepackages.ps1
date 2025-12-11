@@ -18,16 +18,16 @@ $curDir = Get-Location
 echo "Changed directory to: $curDir"
 
 if ([System.Environment]::OSVersion.Platform -eq 'Unix') {
-    echo "`nActivating venv: ./venv/bin/Activate.ps1"
-    ./venv/bin/Activate.ps1
+    echo "`nActivating venv: ./.venv/bin/Activate.ps1"
+    ./.venv/bin/Activate.ps1
 
     echo "`nCreating  frozen.txt: py -m pip freeze > frozen.txt"
     & python3 -m pip freeze > frozen.txt
 }
 else {
 
-    echo "`nActivating venv: ./venv/Scripts/Activate.ps1"
-    & ../venv/Scripts/Activate.ps1
+    echo "`nActivating venv: ./.venv/Scripts/Activate.ps1"
+    & ../.venv/Scripts/Activate.ps1
     
     echo "`nCreating  frozen.txt: py -m pip freeze > frozen.txt"
     & py -m pip freeze > frozen.txt

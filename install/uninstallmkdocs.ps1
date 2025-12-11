@@ -10,8 +10,8 @@ $curDir = Get-Location
 
 echo "Changed directory to: $curDir"
 
-echo "`nActivating venv: .\venv\Scripts\Activate.ps1"
-& .\venv\Scripts\Activate.ps1
+echo "`nActivating venv: .\.venv\Scripts\Activate.ps1"
+& .\.venv\Scripts\Activate.ps1
 
 echo "`nUninstalling the packages: python3 -m pip uninstall -y -r $PSScriptRoot\requirements.txt"
 & python3 -m pip uninstall -y -r $PSScriptRoot\requirements.txt

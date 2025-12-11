@@ -160,13 +160,14 @@ def main():
     
     # Get virtual environment name from user
     while True:
-        venv_name = input("\nEnter virtual environment directory name (default: venv): ").strip()
+        venv_name = input("\nEnter virtual environment directory name (default: .venv): ").strip()
         if not venv_name:
-            venv_name = "venv"
+            venv_name = ".venv"
         
-        # Validate directory name
-        if not venv_name.replace("_", "").replace("-", "").isalnum():
-            print("Invalid directory name. Use only letters, numbers, hyphens, and underscores.")
+        # Validate directory name (allow dots, hyphens, underscores, and alphanumeric)
+        # Remove dots, hyphens, and underscores for validation
+        if not venv_name.replace("_", "").replace("-", "").replace(".", "").isalnum():
+            print("Invalid directory name. Use only letters, numbers, dots, hyphens, and underscores.")
             continue
         
         break
