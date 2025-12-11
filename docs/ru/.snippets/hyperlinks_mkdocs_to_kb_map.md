@@ -569,6 +569,8 @@
 
 [example_n3_collection_join_filter_hierarchy]: {{ kbArticleURLPrefix }}5108
 
+[n3_collection_hierarchy_recursive_select]: {{ kbArticleURLPrefix }}5144
+
 [example_n3_dataset_join_filter]: {{ kbArticleURLPrefix }}5109
 
 [example_n3_collection_join_string]: {{ kbArticleURLPrefix }}5107
