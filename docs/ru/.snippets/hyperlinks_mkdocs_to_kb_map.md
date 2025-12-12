@@ -297,6 +297,8 @@
 
 [release_notes_5.0.20251010]: {{ kbArticleURLPrefix }}5137
 
+[release_notes_5.0.20251231]: {{ kbArticleURLPrefix }}5145
+
 [role_templates]: {{ kbArticleURLPrefix }}4760
 
 [s3_connection]: {{ kbArticleURLPrefix }}4677
