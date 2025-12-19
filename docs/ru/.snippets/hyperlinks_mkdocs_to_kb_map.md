@@ -579,6 +579,8 @@
 
 [example_task_hyperlink_n3_formula]: {{ kbArticleURLPrefix }}4879
 
+[example_task_accept_button_csharp]: {{ kbArticleURLPrefix }}5146
+
 [example_task_reassign]: {{ kbArticleURLPrefix }}5087
 
 [experimental_feature_support]: {{ kbArticleURLPrefix }}4579#experimental_feature_support
