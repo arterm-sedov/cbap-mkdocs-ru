@@ -581,6 +581,8 @@
 
 [example_task_accept_button_csharp]: {{ kbArticleURLPrefix }}5146
 
+[example_task_open_related_button_csharp]: {{ kbArticleURLPrefix }}5147
+
 [example_task_reassign]: {{ kbArticleURLPrefix }}5087
 
 [experimental_feature_support]: {{ kbArticleURLPrefix }}4579#experimental_feature_support
