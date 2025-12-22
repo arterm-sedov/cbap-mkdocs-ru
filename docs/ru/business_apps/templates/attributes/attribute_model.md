@@ -86,9 +86,10 @@ hide:
 
 --8<-- "related_topics_heading.md"
 
-- [Общие свойства атрибутов][attribute_common_properties]
-- [Атрибуты. Определения, типы, настройка, архивирование, удаление][attributes]
 - [Шаблоны моделей][model_templates]_
+- [Общие свойства атрибутов][attribute_common_properties]
+- [Атрибут типа «Запись»][attribute_record]
+- [Атрибуты. Определения, типы, настройка, архивирование, удаление][attributes]
 - [Вычисляемые атрибуты][attribute_calculated]
 
 </div>
