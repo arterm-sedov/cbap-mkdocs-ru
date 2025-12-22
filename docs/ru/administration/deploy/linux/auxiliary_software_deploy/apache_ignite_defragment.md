@@ -1,5 +1,5 @@
 ---
-title: Apache Ignite. Дефрагментация данных
+title: 'Apache Ignite. Дефрагментация данных'
 kbId: 4603
 tags:
     - Apache Ignite
@@ -146,7 +146,7 @@ hide: tags
         watch -cd bash control.sh --defragmentation status
         ```
 
-        - В процессе дефрагментации {{ apacheIgniteVariants }} будет вносить сведения в файл журнала вида `/var/lib/comindware/<instanceName>/Database/log/ignite-xxxxxxxx.0.log`. 
+        - В процессе дефрагментации {{ apacheIgniteVariants }} будет вносить сведения в файл журнала вида `/var/log/comindware/<instanceName>/Logs/igniteClient_xxxxxxxx.log`. 
         - По завершении дефрагментации:
             - в журнале {{ apacheIgniteVariants }} должно появиться событие: `Defragmentation process complete`;
             - команда  `watch -cd bash control.sh --defragmentation status` должна вывести сообщение `Defragmentation process complete`.
