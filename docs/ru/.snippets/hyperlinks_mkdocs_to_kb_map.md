@@ -237,6 +237,8 @@
 
 [map_configure]: {{ kbArticleURLPrefix }}4679
 
+[model_templates]: {{ kbArticleURLPrefix }}5149
+
 [n3_filter_active_tasks]: {{ kbArticleURLPrefix }}4935
 
 [navigation_sections_setup]: {{ kbArticleURLPrefix }}4809
@@ -488,6 +490,8 @@
 [attribute_hyperlink]: {{ kbArticleURLPrefix }}4766
 
 [attribute_image]: {{ kbArticleURLPrefix }}4771
+
+[attribute_model]: {{ kbArticleURLPrefix }}5148
 
 [attribute_number]: {{ kbArticleURLPrefix }}4773
 
@@ -822,6 +826,8 @@
 [process_diagram_view]: {{ kbArticleURLPrefix }}4721#process_diagram_view
 
 [process_email_configure]: {{ kbArticleURLPrefix }}4691
+
+[model_templates]: {{ kbArticleURLPrefix }}5149
 
 [process_templates]: {{ kbArticleURLPrefix }}4758
 
@@ -1166,6 +1172,8 @@
 [process_receiving_connection]: {{ kbArticleURLPrefix }}4695
 
 [process_sending_connection]: {{ kbArticleURLPrefix }}4690
+
+[model_templates]: {{ kbArticleURLPrefix }}5149
 
 [record_templates]: {{ kbArticleURLPrefix }}4759
 
