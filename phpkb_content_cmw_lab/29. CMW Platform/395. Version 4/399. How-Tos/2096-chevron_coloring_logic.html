@@ -1,0 +1,16 @@
+<h1>Setting up coloring logic for chevrons</h1><p>Comindware Business Application Platform has a tool for visually displaying stages — chevrons. A distinctive feature of chevrons is the ability to paint each stage with a different color according to a specified rule.</p>
+<p>To correctly set the color representation of the chevron, it is important to set the correct conditions. The coloring logic is the same for all chevrons, it is recommended not to use the attributes of the main record template where the collection is planned to be displayed.</p>
+<p>Let's analyze an example of visualization of the stages of an application for a car.</p>
+<p><strong>1.</strong> In the record template referenced by the chevron attribute, create two attributes:</p>
+<ul>
+<li>Stage start date (data type — Date and time, display format — any);</li>
+<li>Stage completion date (data type - Date and time, display format — any).</li>
+</ul>
+<p><strong>2.</strong> On the diagram of the main process for approving an application for a car, configure the filling of the attributes created in step 1 for each stage (at the entrance and exit of the corresponding tasks).</p>
+<p><strong>3.</strong> On the form where the chevron is located, in the attribute properties, add the rules for coloring entries:</p>
+<ul>
+<li>Color #efbb3a — Condition <em><strong>AND(NOT(EMPTY($StartDate)),EMPTY($EndDate))</strong></em> (the chevron will be colored orange if the stage has started);</li>
+<li>Color #338320 — Condition <em><strong>AND(NOT(EMPTY($EndDate)),NOT(EMPTY($StartDate)))</strong></em> (the chevron will be colored green if the stage is completed);</li>
+<li>Color #a8a8a8 - Condition <strong>AND(EMPTY($StartDate),EMPTY($EndDate))</strong> (the chevron will be gray if the stage has not started).</li>
+</ul>
+<div class="blue_note">These conditions set the order of coloring individual chevron windows, that is, for each stage, a check for these conditions will be carried out, the chevron element will change color in accordance with the dates filled in.</div>

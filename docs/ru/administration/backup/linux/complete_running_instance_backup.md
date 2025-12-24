@@ -2,6 +2,14 @@
 title: Создание полной резервной копии без остановки экземпляра ПО
 kbTitle: Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО
 kbId: 4650
+tags:
+    - Linux
+    - резервное копирование
+    - бэкап
+    - бекап
+    - backup
+    - резервная копия
+hide: tags
 ---
 
 # Cоздание полной резервной копии без остановки экземпляра ПО {: #complete_running_instance_backup}
@@ -64,7 +72,7 @@ kbId: 4650
 3. Если пакета нет, загрузите zip-архив со скриптами:
 
     ``` sh
-    wget -P /tmp/ https://archive.apache.org/dist/ignite/2.16.0/apache-ignite-2.16.0-bin.zip
+    wget -P /tmp/ https://archive.apache.org/dist/ignite/2.17.0/apache-ignite-2.17.0-bin.zip
     ```
 
 4. Если на машине ранее не был установлен пакет `zip`, установите его:
@@ -76,16 +84,16 @@ kbId: 4650
 5. Разархивируйте пакет в директорию `/var/www/`:
 
     ``` sh
-    unzip /tmp/apache-ignite-2.16.0-bin.zip -d /var/www
+    unzip /tmp/apache-ignite-2.17.0-bin.zip -d /var/www
     ```
 
 6. Переименуйте получившуюся директорию со скриптами `{{ apacheIgniteVariants }}` в `apache-ignite`:
 
     ``` sh
-    mv /var/www/apache-ignite-2.16.0-bin /var/www/apache-ignite
+    mv /var/www/apache-ignite-2.17.0-bin /var/www/apache-ignite
     ```
 
-7. Прейдите в директорию `/var/www/`:
+7. Перейдите в директорию `/var/www/`:
 
     ``` sh
     cd /var/www/

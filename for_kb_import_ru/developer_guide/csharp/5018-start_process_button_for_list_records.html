@@ -1,0 +1,26 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5018" kb-tags="" kb-title="Старт процесса по записям списка (кнопка)">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для того, чтобы на запустить процесс по каждой из записей определенного списка, введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code>using System;</code> <br/><code>using System.Collections.Generic;</code> <br/><code>using System.Linq;</code> <br/><code>using Comindware.Data.Entity;</code> <br/><code>using Comindware.TeamNetwork.Api.Data.UserCommands;</code> <br/><code>using Comindware.TeamNetwork.Api.Data;</code> <br/><code></code> <br/><code>class Script</code> <br/><code>{</code> <br/><code>public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)</code> <br/><code>{</code> <br/><code>string result_ = "Операция выполнена";</code> <br/><code>var result = new UserCommandResult</code> <br/><code>{</code> <br/><code>Success = true,</code> <br/><code>Commited = true,</code> <br/><code>ResultType = UserCommandResultType.Navigate,</code> <br/><code>NavigationResult = new UserCommandNavigationResult</code> <br/><code>{</code> <br/><code>Context = ContextType.Task,</code> <br/><code>ObjectId = null</code> <br/><code>},</code> <br/><code>Messages = new[]</code> <br/><code>{</code> <br/><code>new UserCommandMessage</code> <br/><code>{</code> <br/><code>Severity = SeverityLevel.Normal,</code> <br/><code>Text = result_</code> <br/><code>}</code> <br/><code>}</code> <br/><code>};</code> <br/><code></code> <br/><code>var sessionsObjectAppId = Api.TeamNetwork.ObjectAppService.List().First(oa =&gt; oa.Alias == "TEMP_VAR").Id; </code> <br/><code>var containerLists = Api.TeamNetwork.DatasetConfigurationService.List(sessionsObjectAppId);</code> <br/><code>var receptionList = containerLists.FirstOrDefault(list =&gt; list.Alias == "newList1"); </code> <br/><code>var query = new Comindware.TeamNetwork.Api.Data.DatasetQuery</code> <br/><code>{</code> <br/><code>DatasetId = receptionList.Id,</code> <br/><code>Filter = receptionList.Filter</code> <br/><code>};</code> <br/><code>var sessionsData = Api.TeamNetwork.DatasetService.QueryData(query).Rows;</code> <br/><code></code> <br/><code>if (sessionsData == null)</code> <br/><code>{</code> <br/><code>result_ = "Список пуст";</code> <br/><code>result.Success = false;</code> <br/><code>return result;</code> <br/><code>}</code> <br/><code>foreach (var row in sessionsData)</code> <br/><code>{</code> <br/><code>Api.Process.ProcessObjectService.CreateWithObjectId("pa.2", null, row.Id); </code> <br/><code>}</code> <br/><code>return result;</code> <br/><code>}</code> <br/><code>}</code> <br/></pre></code></div>
+<p><strong>где:</strong></p>
+<p><strong>"TEMP_VAR"</strong> - системное имя Шаблона записи, где хранится нужный список;</p>
+<p><strong>"newList1"</strong> - системное имя необходимого списка;</p>
+<p><strong>"pa.2"</strong> - ИД Шаблона процесса, который нужно запустить для каждой записи из выбранного списка.</p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

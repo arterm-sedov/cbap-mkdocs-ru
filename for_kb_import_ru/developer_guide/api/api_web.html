@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4861" kb-tags="" kb-title="Методы Web API">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4861" kb-tags="API,REST,Swagger,Web,АПИ,интеграции,интеграция" kb-title="Методы Web API">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -129,6 +129,20 @@
 </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#api_web_image">
+<span class="md-ellipsis">
+      Image — изображения
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#api_web_license">
+<span class="md-ellipsis">
+      License — лицензии
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#processobjects--миграция-версии-диаграммы-процесса">
 <span class="md-ellipsis">
       ProcessObjects — миграция версии диаграммы процесса
@@ -150,9 +164,9 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#record--несколько-записей-и-экспортимпорт-записей-кроме-шаблонов-процессов">
+<a class="md-nav__link mkdocs_imported_link" href="#records--несколько-записей-и-экспортимпорт-записей-кроме-шаблонов-процессов">
 <span class="md-ellipsis">
-      Record — несколько записей и экспорт/импорт записей (кроме шаблонов процессов)
+      Records — несколько записей и экспорт/импорт записей (кроме шаблонов процессов)
     </span>
 </a>
 </li>
@@ -198,13 +212,6 @@
     </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#workerengine--системные-службы">
-<span class="md-ellipsis">
-      WorkerEngine — системные службы
-    </span>
-</a>
-</li>
 </ul>
 </nav>
 </li>
@@ -239,6 +246,8 @@
 <p>Swagger позволяет выполнять запросы и просматривать ответы.</p>
 <p>Интерфейс Swagger для Web API доступен по адресу:</p>
 <div class="highlight"><code><pre><span></span><code>https://your-host/docs/webapi</code> <br/></pre></code></div>
+<p>URL-адрес JSON-спецификации Web API:</p>
+<div class="highlight"><code><pre><span></span><code>https://your-host/swagger/WebApi/v1</code> <br/></pre></code></div>
 <p>Здесь <code>your-host</code> — доменное имя сервера <strong>Comindware Platform</strong>.</p>
 <figure class="screenshot_with_caption">
 <p><img alt="Интерфейс Swagger для метода Web API, создающего шаблон аккаунта" src="https://kb.comindware.ru/assets/img_64d3708401e22.png"/><figcaption class="caption">Интерфейс Swagger для метода Web API, создающего шаблон аккаунта</figcaption></p>
@@ -983,17 +992,39 @@
 <thead>
 <tr>
 <th class="api-method post">POST</th>
-<th>/webapi/Backup/SetElasticsearchRepository/{name}</th>
+<th>/webapi/Backup/Session/CreateRecord</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>Описание</strong></td>
-<td>Задает репозиторий моментальных снимков OpenSearch (Elasticsearch).</td>
+<td>Создает запись сеанса резервного копирования.</td>
 </tr>
 <tr>
 <td><strong>Параметры</strong></td>
-<td>Имя существующего репозитория моментальных снимков OpenSearch (Elasticsearch).</td>
+<td>Объект сеанса резервного копирования.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/Backup/Session/UpdateRecord</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Обновляет запись сеанса резервного копирования.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Объект сеанса резервного копирования.</td>
 </tr>
 <tr>
 <td><strong>Ответ</strong></td>
@@ -2021,6 +2052,162 @@
 </tr>
 </tbody>
 </table>
+<h3 id="api_web_image">Image — изображения</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Image</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает изображение по указанному идентификатору файла.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор изображения.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект изображения.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/Image</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Изменяет изображение на основе файла.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор изображения, объект изображения.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Image/Create</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Создает изображение из содержимого.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Файл изображения.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект изображения.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="api_web_license">License — лицензии</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/License/DeleteSession</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Удаляет указанный сеанс пользователя или все сеансы пользователя.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор аккаунта, идентификатор сеанса.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/License/GetLicenseStatus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает статус лицензирования.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Не требуются.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса лицензирования.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/License/GetSessions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает сеансы.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Массив объектов сеансов.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/License/GetUserLicense</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает статус лицензирования аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса лицензирования аккаунта.</td>
+</tr>
+</tbody>
+</table>
 <h3 id="processobjects--миграция-версии-диаграммы-процесса">ProcessObjects — миграция версии диаграммы процесса</h3>
 <table style="width: 100%;">
 <thead>
@@ -2354,7 +2541,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="record--несколько-записей-и-экспортимпорт-записей-кроме-шаблонов-процессов">Record — несколько записей и экспорт/импорт записей (кроме шаблонов процессов)</h3>
+<h3 id="records--несколько-записей-и-экспортимпорт-записей-кроме-шаблонов-процессов">Records — несколько записей и экспорт/импорт записей (кроме шаблонов процессов)</h3>
 <table style="width: 100%;">
 <thead>
 <tr>
@@ -2794,6 +2981,28 @@
 <tr>
 <td><strong>Ответ</strong></td>
 <td>Объект со значениями атрибутов записи. Если несколько записей совпадают, возвращает <code>null</code>.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/ReferenceData/List</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает список записей с указанными значениями ключевых атрибутов.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Объект глобального псевдонима шаблона, объект с ключевыми системными именами атрибутов и значениями, массив системных имён атрибутов, которые необходимо получить.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Массив объектов со значениями атрибутов записей.</td>
 </tr>
 </tbody>
 </table>
@@ -3282,51 +3491,6 @@
 <tr>
 <td><strong>Ответ</strong></td>
 <td>Массив объектов конфигурации кнопок.</td>
-</tr>
-</tbody>
-</table>
-<h3 id="workerengine--системные-службы">WorkerEngine — системные службы</h3>
-<table style="width: 100%;">
-<thead>
-<tr>
-<th class="api-method get">GET</th>
-<th>/webapi/WorkerEngine/GetConfiguration</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Описание</strong></td>
-<td>Получает статусы системных служб (<code>true</code> — включена).</td>
-</tr>
-<tr>
-<td><strong>Параметры</strong></td>
-<td>Не требуются.</td>
-</tr>
-<tr>
-<td><strong>Ответ</strong></td>
-<td>Объект со статусами системных служб.</td>
-</tr>
-</tbody>
-</table>
-<table style="width: 100%;">
-<thead>
-<tr>
-<th class="api-method put">PUT</th>
-<th>/webapi/WorkerEngine/SetConfiguration</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Описание</strong></td>
-<td>Устанавливает статусы системных служб.</td>
-</tr>
-<tr>
-<td><strong>Параметры</strong></td>
-<td>Объект со статусами системных служб (<code>true</code> — включена).</td>
-</tr>
-<tr>
-<td><strong>Ответ</strong></td>
-<td>Объект статуса.</td>
 </tr>
 </tbody>
 </table>

@@ -1,0 +1,91 @@
+<h1>Uploading attachments to a local folder</h1><p>To save the attached file(s) from an attribute with the "Document" data type to a local folder, enter the following expression:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">
+<p style="margin-bottom: 0in; line-height: 12.0pt;">using System;</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">using System.Collections.Generic;</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">using System.Linq;</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">using Comindware.Data.Entity;</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">using Comindware.TeamNetwork.Api.Data.UserCommands;</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">using Comindware.TeamNetwork.Api.Data;</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">using System.IO;</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;"> </p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">class Script</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">{</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">    {</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                              try</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                              {</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                             var path = @"C:\document\";</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                             var data = Api.TeamNetwork.ObjectService.GetPropertyValues(new string[] {userCommandContext.ObjectIds[0]}, new string[] {"Document"});</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                             var documentIdsObj = data[userCommandContext.ObjectIds[0]]["Document"];</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">               var documentIds = documentIdsObj as IEnumerable&lt;object&gt;;</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                             if (documentIds == null)</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                             {</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                            documentIds = new string[] {documentIdsObj as string};</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                             }</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                             foreach (var documentIdObj in documentIds)</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                             {</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                            var documentId = documentIdObj as string;</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                            var documentData = Api.TeamNetwork.DocumentService.GetContent(documentId);</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                            var documentInfo = Api.TeamNetwork.DocumentService.GetDocument(documentId);</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                            var docData = new Document</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                            {</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                                           Title = documentData.Name,</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                                           Extension = documentInfo.Extension</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                            };</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                            var stream = new MemoryStream();</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                            stream.Write(documentData.Data, 0, documentData.Data.Length);</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                            stream.Seek(0, SeekOrigin.Begin);</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                            var filepath = path + documentData.Name;</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                            using(FileStream outstr = new FileStream(filepath, FileMode.Create))</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                            {</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                                           stream.CopyTo(outstr);</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                            }</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                             }</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                              }</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                              catch</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                              {</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                             var badresult = new UserCommandResult</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                             {</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                            Success = true,</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                            Commited = true,</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                            ResultType = UserCommandResultType.DataChange,</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                            Messages = new[]</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                            {</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                                           new UserCommandMessage</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                                           {</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                                              Severity = SeverityLevel.Normal,</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                                              Text = "Failed to upload"</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                               }</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                            }</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                 };</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                 return badresult;</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                              }</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                              var result = new UserCommandResult</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                              {</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                             Success = true,</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                             Commited = true,</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                             ResultType = UserCommandResultType.DataChange,</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                             Messages = new[]</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                             {</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                            new UserCommandMessage</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                            {</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                               Severity = SeverityLevel.Normal,</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                               Text = "Success"</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                                }</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                                             }</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                  };</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">                  return result;</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">    }</p>
+<p style="margin-bottom: 0in; line-height: 12.0pt;">}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>where:</strong></p>
+<p><strong><em>C:\document\</em></strong> — path for uploading file/s;</p>
+<p><strong><em>Document</em></strong> – system name of the attribute with the "Document" data type.</p>

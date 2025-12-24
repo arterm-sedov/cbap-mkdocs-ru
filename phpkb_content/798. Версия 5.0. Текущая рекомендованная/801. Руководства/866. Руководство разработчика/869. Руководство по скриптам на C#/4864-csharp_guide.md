@@ -1,6 +1,8 @@
 ---
-title: Написание скриптов на языке C#
+title: 'Написание скриптов на языке C#'
 kbId: 4864
+url: 'https://kb.comindware.ru/article.php?id=4864'
+updated: '2025-03-21 14:13:04'
 ---
 
 # Написание скриптов на языке C#
@@ -419,4 +421,5 @@ string, number, dateTime, TimeSpan, bool
 - Aspose.BarCode — обработка штрихкодов
 - Aspose.Cells — обработка файлов в формате Excel
 - Aspose.Words — обработка файлов в формате Word
+
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

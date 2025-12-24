@@ -1,108 +1,164 @@
-<h1>Атрибут типа «Документ»</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr">
+<h1>Атрибут типа «Документ»</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4782">
 <div class="md-container" data-md-component="container">
-<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
 <div class="mce-toc">
-<h2 class="toc-heading">Содержание</h2>
+<h2 class="toc-heading">
+      Содержание
+      </h2>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#свойства-атрибута"> <span class="md-ellipsis"> Свойства атрибута </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#пример-использования"> <span class="md-ellipsis"> Пример использования </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#свойства-атрибута">
+<span class="md-ellipsis">
+      Свойства атрибута
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-свойств-атрибута">
+<span class="md-ellipsis">
+      Настройка свойств атрибута
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#примеры-использования">
+<span class="md-ellipsis">
+      Примеры использования
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
 </ul>
 </div>
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h2 id="свойства-атрибута">Свойства атрибута</h2>
-<p>Атрибут типа «<strong>Документ</strong>» содержит один или несколько загруженных конечным пользователем файлов.</p>
 <div class="notice notice-success">
 <p class="admonition-title">Структура атрибута типа «Документ»</p>
 <ul>
-<li>Атрибут типа «<strong>Документ</strong>» хранит одну или несколько ссылок на записи (<strong>документы</strong>) в системном шаблоне документа, к которым прикрепляются файлы.</li>
-<li>В шаблоне документа имеется атрибут <code>currentRevision</code> (текущая <strong>ревизия</strong>), который хранит ссылку на запись в системном шаблоне ревизии.</li>
-<li>В шаблоне ревизии имеются атрибуты <code>title</code> (имя) и <code>content</code> (содержимое), которые хранят имя файла и ссылку на файл, физически хранящийся в папке <code>Streams</code> на сервере.</li>
-<li>Чтобы считать файл из атрибута типа «<strong>Документ</strong>» с помощью C#-скрипта, необходимо:
+<li>Атрибут типа «<strong>Документ</strong>» хранит одну или несколько ссылок на записи (<strong>документы</strong>) в системном шаблоне документа, к которым прикрепляются файлы (например, загруженные пользователями).</li>
+<li>В шаблоне документа имеется атрибут <code>currentRevision</code> (текущая <strong>версия</strong>), который хранит ссылку на запись в системном шаблоне версии.</li>
+<li>В шаблоне версии имеются атрибуты <code>title</code> (имя) и <code>content</code> (содержимое), которые хранят имя файла и ссылку на файл, физически хранящийся в папке <code>Streams</code> на сервере.</li>
+</ul>
+</div>
+<div class="notice notice-tip">
+<p class="admonition-title">Извлечение файлов из атрибута помощью C#</p>
+<p>Чтобы считать файл из атрибута типа «<strong>Документ</strong>» с помощью C#-скрипта, необходимо:</p>
 <ul>
-<li>из текущей записи получить массив идентификаторов файлов, прикреплённых к атрибуту:
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="kt">var</span> <span class="n">fileIds</span> <span class="o">=</span> <span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">GetPropertyValues</span><span class="p">(</span><span class="n">recordId</span><span class="p">,</span> <span class="k">new</span> <span class="p">[]</span> <span class="p">{</span><span class="s">"documentAttributeSystemName"</span><span class="p">})</span><span class="err">`</span><span class="p">;</span></code> </pre>
-</div>
+<li>
+<p>из текущей записи получить массив идентификаторов файлов, прикреплённых к атрибуту:</p>
+<div class="highlight"><code><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">fileIds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">GetPropertyValues</span><span class="p">(</span><span class="n">recordId</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="s">"documentAttributeSystemName"</span><span class="p">})</span><span class="err">`</span><span class="p">;</span></code> <br/></pre></code></div>
 </li>
-<li>получить массив объектов с прикреплёнными файлами:
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="kt">var</span> <span class="n">attachedFileObjects</span> <span class="o">=</span> <span class="n">fileIds</span><span class="p">[</span><span class="n">docId</span><span class="p">].</span><span class="n">TryGetValue</span><span class="p">(</span><span class="s">"Files"</span><span class="p">,</span> <span class="k">out</span> <span class="kt">object</span> <span class="n">fileObject</span><span class="p">)</span> </code> <br/><code>                          <span class="o">&amp;&amp;</span> <span class="n">fileObject</span> <span class="o">!=</span> <span class="k">null</span> <span class="o">?</span> <span class="n">fileObject</span> <span class="k">as</span> <span class="kt">object</span><span class="p">[]</span> <span class="p">:</span> <span class="k">null</span><span class="p">;</span></code> </pre>
-</div>
+<li>
+<p>получить массив объектов с прикреплёнными файлами:</p>
+<div class="highlight"><code><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">attachedFileObjects</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fileIds</span><span class="p">[</span><span class="n">docId</span><span class="p">].</span><span class="n">TryGetValue</span><span class="p">(</span><span class="s">"Files"</span><span class="p">,</span><span class="w"> </span><span class="k">out</span><span class="w"> </span><span class="kt">object</span><span class="w"> </span><span class="n">fileObject</span><span class="p">)</span><span class="w"> </span></code> <br/><code><span class="w">                            </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">fileObject</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">fileObject</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">object</span><span class="p">[]</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">null</span><span class="p">;</span></code> <br/></pre></code></div>
 </li>
-<li>получить объект файла (<code>attachedFile</code>):
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="kt">var</span> <span class="n">attachedFile</span> <span class="o">=</span> <span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">DocumentService</span><span class="p">.</span><span class="n">GetContent</span><span class="p">(</span><span class="n">attachedFileObject</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">ToString</span><span class="p">());</span></code> </pre>
-</div>
+<li>
+<p>получить объект файла (<code>attachedFile</code>):</p>
+<div class="highlight"><code><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">attachedFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">DocumentService</span><span class="p">.</span><span class="n">GetContent</span><span class="p">(</span><span class="n">attachedFileObject</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">ToString</span><span class="p">());</span></code> <br/></pre></code></div>
 </li>
-<li>получить имя файла с расширением (<code>attachedFile.Name</code>);</li>
+<li>
+<p>получить имя файла с расширением (<code>attachedFile.Name</code>);</p>
+</li>
 <li>получить содержимое файла (<code>attachedFile.Data</code>);</li>
-<li>при необходимости получить объект с метаданными документа:
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="kt">var</span> <span class="n">attachedFile</span> <span class="o">=</span> <span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">DocumentService</span><span class="p">.</span><span class="n">GetDocument</span><span class="p">(</span><span class="n">attachedFileObject</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">ToString</span><span class="p">());</span></code> </pre>
-</div>
+<li>
+<p>при необходимости получить объект с метаданными документа:</p>
+<div class="highlight"><code><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">attachedFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">DocumentService</span><span class="p">.</span><span class="n">GetDocument</span><span class="p">(</span><span class="n">attachedFileObject</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">ToString</span><span class="p">());</span></code> <br/></pre></code></div>
 <ul>
 <li><code>attachedFile.Title</code> — имя файла с расширением;</li>
 <li><code>attachedFile.Extension</code> — расширение файла.</li>
 </ul>
 </li>
 </ul>
-</li>
-<li>Чтобы прикрепить к атрибуту типа «<strong>Документ</strong>» файл с помощью C#-скрипта, необходимо:
+</div>
+<div class="notice notice-tip">
+<p class="admonition-title">Добавление файлов в атрибут с помощью C#</p>
+<p>Чтобы прикрепить к атрибуту типа «<strong>Документ</strong>» файл с помощью C#-скрипта, необходимо:</p>
 <ul>
-<li>сформировать объект типа <code>Document</code>:
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="kt">var</span> <span class="n">document</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Document</span> </code> <br/><code>    <span class="p">{</span></code> <br/><code>        <span class="n">Title</span> <span class="o">=</span> <span class="s">"имя файла.расширение"</span><span class="p">,</span></code> <br/><code>        <span class="n">Extension</span> <span class="o">=</span> <span class="s">".расширение"</span></code> <br/><code>    <span class="p">};</span></code> </pre>
-</div>
+<li>
+<p>сформировать объект типа <code>Document</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">document</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Document</span><span class="w"> </span></code> <br/><code><span class="w">    </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="n">Title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"имя файла.расширение"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="n">Extension</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">".расширение"</span></code> <br/><code><span class="w">    </span><span class="p">};</span></code> <br/></pre></code></div>
 </li>
-<li>сформировать массив байтов <code>byte[] fileBytes</code> с содержимым файла;</li>
-<li>из массива байтов создать поток <code>MemoryStream()</code> для прикрепления документа к атрибуту:
-<div class="highlight"><code><code></code></code>
-<pre><code>    <span class="kt">var</span> <span class="n">fileStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MemoryStream</span><span class="p">();</span></code> <br/><code>    <span class="n">fileStream</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="n">fileBytes</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">fileBytes</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span></code> <br/><code>    <span class="n">fileStream</span><span class="p">.</span><span class="n">Seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">SeekOrigin</span><span class="p">.</span><span class="n">Begin</span><span class="p">);</span></code> </pre>
-</div>
+<li>
+<p>сформировать массив байтов <code>byte[] fileBytes</code> с содержимым файла;</p>
 </li>
-<li>преобразовать поток в объект документа для прикрепления к атрибуту:
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="kt">string</span> <span class="n">documentObject</span> <span class="o">=</span> <span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">DocumentService</span><span class="p">.</span><span class="n">CreateDocumentWithStream</span><span class="p">(</span><span class="n">document</span><span class="p">,</span> <span class="n">fileStream</span><span class="p">,</span> <span class="s">""</span><span class="p">);</span></code> </pre>
-</div>
+<li>
+<p>из массива байтов создать поток <code>MemoryStream()</code> для прикрепления документа к атрибуту:</p>
+<div class="highlight"><code><pre><span></span><code><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">fileStream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MemoryStream</span><span class="p">();</span></code> <br/><code><span class="w">    </span><span class="n">fileStream</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="n">fileBytes</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">fileBytes</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span></code> <br/><code><span class="w">    </span><span class="n">fileStream</span><span class="p">.</span><span class="n">Seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">SeekOrigin</span><span class="p">.</span><span class="n">Begin</span><span class="p">);</span></code> <br/></pre></code></div>
 </li>
-<li>сформировать словарь из системного имени атрибута и объекта документа;
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="kt">var</span> <span class="n">documentDict</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="kt">object</span><span class="o">&gt;</span></code> <br/><code>    <span class="p">{</span></code> <br/><code>        <span class="p">{</span> <span class="s">"DocumentAttributeSystemName"</span><span class="p">,</span> <span class="n">documentObject</span> <span class="p">}</span></code> <br/><code>    <span class="p">};</span></code> </pre>
-</div>
+<li>
+<p>преобразовать поток в объект документа для прикрепления к атрибуту:</p>
+<div class="highlight"><code><pre><span></span><code><span class="kt">string</span><span class="w"> </span><span class="n">documentObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">DocumentService</span><span class="p">.</span><span class="n">CreateDocumentWithStream</span><span class="p">(</span><span class="n">document</span><span class="p">,</span><span class="w"> </span><span class="n">fileStream</span><span class="p">,</span><span class="w"> </span><span class="s">""</span><span class="p">);</span></code> <br/></pre></code></div>
 </li>
-<li>прикрепить результирующий документ к атрибуту записи <code>reсordId</code>:
-<div class="highlight"><code><code></code></code>
-<pre><code> <span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">EditWithAlias</span><span class="p">(</span><span class="n">reсordId</span><span class="p">,</span> <span class="n">documentDict</span><span class="p">)</span></code> </pre>
-</div>
+<li>
+<p>сформировать словарь из системного имени атрибута и объекта документа:</p>
+<div class="highlight"><code><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">documentDict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="kt">object</span><span class="o">&gt;</span></code> <br/><code><span class="w">    </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="s">"DocumentAttributeSystemName"</span><span class="p">,</span><span class="w"> </span><span class="n">documentObject</span><span class="w"> </span><span class="p">}</span></code> <br/><code><span class="w">    </span><span class="p">};</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>прикрепить результирующий документ к атрибуту записи <code>reсordId</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="w">    </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">EditWithAlias</span><span class="p">(</span><span class="n">reсordId</span><span class="p">,</span><span class="w"> </span><span class="n">documentDict</span><span class="p">)</span></code> <br/></pre></code></div>
 </li>
 </ul>
-</li>
-<li>Чтобы считать файл из атрибута типа «<strong>Документ</strong>» с помощью выражения N3, необходимо:
+</div>
+<div class="notice notice-tip">
+<p class="admonition-title">Префиксы N3 для работы с атрибутом</p>
+<p>Для работы с атрибутом типа «<strong>Документ</strong>» в выражениях на N3 могут потребоваться следующие префиксы:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">document:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/document#&gt;</span><span class="p">.</span></code> <br/></pre></code></div>
+</div>
+<div class="notice notice-tip">
+<p class="admonition-title">Извлечение файлов из атрибута с помощью N3</p>
+<p>Чтобы считать файл из атрибута типа «<strong>Документ</strong>» с помощью выражения N3, необходимо:</p>
 <ul>
-<li>получить текущую ревизию документа: <code>?documentAttributeValue document:revision ?revision</code>;</li>
-<li>получить из ревизии содержимое файла в формате <code>base64</code>: <code>?revision document:content ?content</code>;</li>
-<li>получить из ревизии имя файла: <code>?revision document:title ?title</code>.</li>
-</ul>
+<li>
+<p>получить объект с атрибутом:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">(</span><span class="s">"TemplateSystemName"</span> <span class="s">"DocumentAttributeSystemName"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?DocumentAttribute</span><span class="p">.</span></code> <br/></pre></code></div>
 </li>
-<li>Чтобы прикрепить к атрибуту типа «<strong>Документ</strong>» файл с помощью выражения N3, необходимо:
-<ul>
-<li>сформировать содержимое файла в формате <code>base64</code>: <code>?documentContentSource document:content ?content</code>;</li>
-<li>сформировать имя файла: <code>?documentTitleSource document:title ?title</code>;</li>
-<li>прикрепить полученный файл к атрибуту типа «<strong>Документ</strong>», т. е. поместить на него ссылку в ревизию: <code>(?content ?title) document:attach ?documentAttributeValue</code>.</li>
-</ul>
+<li>
+<p>из объекта с атрибутом получить значение атрибута в текущей записи:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?item</span> <span class="err">documentAttribute</span> <span class="err">?documentAttributeValue</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>из значения атрибута получить текущую версию документа:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?documentAttributeValue</span> <span class="nn">document</span><span class="p">:</span><span class="nt">revision</span> <span class="err">?revision</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>из версии получить содержимое файла в формате <code>base64</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?revision</span> <span class="nn">document</span><span class="p">:</span><span class="nt">content</span> <span class="err">?content</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>из версии получить имя файла:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?revision</span> <span class="nn">document</span><span class="p">:</span><span class="nt">title</span> <span class="err">?title</span><span class="p">.</span></code> <br/></pre></code></div>
 </li>
 </ul>
 </div>
-<p>См. примеры работы с атрибутом типа «<strong>Документ</strong>»:</p>
+<div class="notice notice-tip">
+<p class="admonition-title">Добавление файлов в атрибут с помощью N3</p>
+<p>Чтобы прикрепить к атрибуту типа «<strong>Документ</strong>» файл с помощью выражения N3, необходимо:</p>
 <ul>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4883">Клонирование записи вместе с прикреплёнными файлами</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5081">Скачивание архива с файлами из всех строк таблицы с прикреплением архива к атрибуту</a></em>;</li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4921">Скачивание архива с файлами из выбранных строк таблицы и записи</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5002">Скачивание файлов в папку на сервере</a></em></li>
+<li>
+<p>сформировать содержимое файла в формате <code>base64</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?documentContentSource</span> <span class="nn">document</span><span class="p">:</span><span class="nt">content</span> <span class="err">?content</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>сформировать имя файла:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?documentTitleSource</span> <span class="nn">document</span><span class="p">:</span><span class="nt">title</span> <span class="err">?title</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>прикрепить полученный файл к атрибуту типа «<strong>Документ</strong>», т. е. поместить на него ссылку в версию:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">(</span><span class="err">?content</span> <span class="err">?title</span><span class="p">)</span> <span class="nn">document</span><span class="p">:</span><span class="nt">attach</span> <span class="err">?documentAttributeValue</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
 </ul>
+</div>
+<h2 id="настройка-свойств-атрибута">Настройка свойств атрибута</h2>
 <p>Помимо <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4765">общих свойств</a></strong> для атрибута типа «<strong>Документ</strong>» предусмотрены перечисленные ниже свойства.</p>
 <ul>
 <li>
@@ -119,10 +175,16 @@
 </li>
 </ul>
 <figure class="screenshot_with_caption">
-<p><img alt="Свойства атрибута типа «Документ»" src="/platform/v5.0/business_apps/templates/attributes/img/attribute_document_properties.png"/></p>
-<figcaption class="caption">Свойства атрибута типа «Документ»</figcaption>
+<p><img alt="Свойства атрибута типа «Документ»" src="/platform/v5.0/business_apps/templates/attributes/img/attribute_document_properties.png"/><figcaption class="caption">Свойства атрибута типа «Документ»</figcaption></p>
 </figure>
-<h2 id="пример-использования">Пример использования</h2>
+<h2 id="примеры-использования">Примеры использования</h2>
+<p>Ознакомьтесь с перечисленными ниже подробными статьями, а также простейшим примером настройки атрибутов типа «<strong>Документ</strong>».</p>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4883">Клонирование записи вместе с прикреплёнными файлами</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5081">Скачивание архива с файлами из всех строк таблицы с прикреплением архива к атрибуту</a></em>;</li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4921">Скачивание архива с файлами из выбранных строк таблицы и записи</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5002">Скачивание файлов в папку на сервере</a></em></li>
+</ul>
 <div class="notice notice-tip">
 <p class="admonition-title">Прикрепление к записи актов, приложений и документов на подпись</p>
 <p><strong>Конфигурация приложения</strong></p>
@@ -136,32 +198,26 @@
 </thead>
 <tbody>
 <tr>
-<td>Акты</td>
-<td>Без предпросмотра</td>
+<td><em>Акты</em></td>
+<td><strong>Без предпросмотра</strong></td>
 <td>Флажок установлен</td>
 </tr>
 <tr>
-<td>Приложение</td>
-<td>С предпросмотром</td>
+<td><em>Приложение</em></td>
+<td><strong>С предпросмотром</strong></td>
 <td>Флажок снят</td>
 </tr>
 <tr>
-<td>Документы на подпись</td>
-<td>Документ с цифровой подписью</td>
+<td><em>Документы на подпись</em></td>
+<td><strong>Документ с цифровой подписью</strong></td>
 <td>Флажок установлен</td>
 </tr>
 </tbody>
 </table>
 <p><strong>Результирующее поведение</strong></p>
-<figure class="screenshot_with_caption"><img alt="Поле «Акты»: документы без предпросмотра" src="/platform/v5.0/business_apps/templates/attributes/img/attribute_document_example_no_preview.png"/>
-<figcaption class="caption">Поле «Акты»: документы без предпросмотра</figcaption>
-</figure>
-<figure class="screenshot_with_caption"><img alt="Поле «Приложение»: документ с предпросмотром" src="/platform/v5.0/business_apps/templates/attributes/img/attribute_document_example_preview.png"/>
-<figcaption class="caption">Поле «Приложение»: документ с предпросмотром</figcaption>
-</figure>
-<figure class="screenshot_with_caption"><img alt="Поле «Документы на подпись»: документы с цифровой подписью" src="/platform/v5.0/business_apps/templates/attributes/img/attribute_document_example_digital_signature.png"/>
-<figcaption class="caption">Поле «Документы на подпись»: документы с цифровой подписью</figcaption>
-</figure>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Поле «Акты»: документы без предпросмотра" src="/platform/v5.0/business_apps/templates/attributes/img/attribute_document_example_no_preview.png"/><figcaption class="caption">Поле «Акты»: документы без предпросмотра</figcaption></figure></p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Поле «Приложение»: документ с предпросмотром" src="/platform/v5.0/business_apps/templates/attributes/img/attribute_document_example_preview.png"/><figcaption class="caption">Поле «Приложение»: документ с предпросмотром</figcaption></figure></p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Поле «Документы на подпись»: документы с цифровой подписью" src="/platform/v5.0/business_apps/templates/attributes/img/attribute_document_example_digital_signature.png"/><figcaption class="caption">Поле «Документы на подпись»: документы с цифровой подписью</figcaption></figure></p>
 </div>
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
@@ -178,5 +234,12 @@
 </article>
 </div>
 </div>
-<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
 </div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

@@ -1,11 +1,20 @@
 ---
 title: Apache Kafka. Установка в базовой конфигурации
 kbId: 5074
+tags:
+    - Kafka
+    - Linux
+    - установка
+    - развертывание
+    - развёртывание
+    - брокер сообщений
+    - шина сообщений
+hide: tags
 ---
 
 # Apache Kafka. Установка в базовой конфигурации {: #kafka_deploy_linux}
 
-## Введение
+## Введение {: #kafka_deploy_linux_intro }
 
 Для работы **{{ productName }}** требуется сервер Apache Kafka. См. [системные требования][system_requirements].
 
@@ -17,20 +26,20 @@ kbId: 5074
 
 Здесь представлены требования к техническому обеспечению и инструкции по развёртыванию сервера Kafka в ОС Linux, а также приведён пример типового файла конфигурации. Инструкции представлены для версии Kafka 3.2.0, для других версий содержимое файлов конфигурации и порядок установки могут быть иными.
 
-## Требования к серверу
+## Требования к серверу {: #kafka_deploy_linux_server_requirements }
 
 Сервер Kafka создает значительную нагрузку на вычислительные ресурсы компьютера, поэтому рекомендуется:
 
 - использовать отдельный SSD-диск для хранения журналов и данных сервера Kafka;
 - использовать высокопроизводительный компьютер с достаточным объемом ОЗУ и количеством ядер ЦП.
 
-## Установка Kafka
+## Установка Kafka {: #kafka_deploy_linux_install }
 
 1. Перейдите в режим суперпользователя:
 
     --8<-- "linux_sudo.md"
 
-2. Скачайте и распакуйте дистрибутив с вспомогательным ПО **{{ productName }}**, полученный по ссылке от компании **{{ companyName }}** (`X.X`, `<versionNumber>` — номер версии ПО, `<osname>` — название операционной системы):
+2. Скачайте и распакуйте дистрибутив с вспомогательным ПО **{{ productName }}**, полученный по ссылке от компании **{{ companyName }}** (`X.X`, `<versionNumber>` — номер версии ПО, `<osname>` — название операционной системы):
 
     ``` sh
     tar -xf X.X-release-ru-<versionNumber>.prerequisites.<osname>.tar.gz
@@ -77,7 +86,7 @@ kbId: 5074
     systemctl start kafka
     ```
 
-## Подключение экземпляра {{ productName }} к Kafka
+## Подключение экземпляра {{ productName }} к Kafka {: #kafka_deploy_linux_instance_connect }
 
 1. Перейдите в режим суперпользователя:
 
@@ -86,12 +95,14 @@ kbId: 5074
 2. Задайте параметры подключения к Kafka в файле `/usr/share/comindware/configs/instance/<instanceName>.yml` (`<instanceName>` — имя экземпляра ПО {{ productName }}):
 
     ``` yaml
-    # Адрес и порт сервера очереди сообщений (Kafka)
+    # Адрес и порт брокера сообщений (Kafka)
     mq.server: <kafkaBrokerIP>:<kafkaBrokerPort>
+    # Префикс имени очередей сообщений
+    mq.name: <instanceName>
     # Идентификатор группы очереди сообщений
     mq.group: <instanceName>
     # Идентификатор узла очереди сообщений
-    #mq.node: <instanceName>
+    mq.node: <instanceName>
     ```
 
     !!! warning "Внимание!"
@@ -105,8 +116,10 @@ kbId: 5074
 3. Задайте параметры подключения к Kafka в файле `/var/www/<instanceName>apigateway.yml`:
 
     ``` yaml
-    # Адрес и порт сервера очереди сообщений (Kafka)
+    # Адрес и порт брокера сообщений (Kafka)
     mq.server: <kafkaBrokerIp>:<kafkaBrokerPort>
+    # Префикс имени очередей сообщений
+    mq.name: <instanceName>
     # Идентификатор группы очереди сообщений
     mq.group: <instanceName>
     # Идентификатор узла очереди сообщений
@@ -116,8 +129,14 @@ kbId: 5074
 4. Задайте параметры подключения к Kafka в файле `/var/www/<instanceName>/adapterhost.yml`:
 
     ``` yaml
-    # Адрес и порт сервера очереди сообщений (Kafka)
+    # Адрес и порт брокера сообщений (Kafka)
     mq.server: <kafkaBrokerIp>:<kafkaBrokerPort>
+    # Префикс имени очередей сообщений
+    mq.name: <instanceName>
+    # Идентификатор группы очереди сообщений
+    mq.group: <instanceName>
+    # Идентификатор узла очереди сообщений
+    mq.node: <instanceName>
     ```
 
 5. Перезапустите экземпляр ПО:
@@ -135,13 +154,13 @@ kbId: 5074
     ```
 
 <!--additional-recommendations-start-->
-## Дополнительные рекомендации
+## Дополнительные рекомендации {: #kafka_deploy_recommendations }
 
-### Настройка безопасности
+### Настройка безопасности {: #kafka_deploy_recommendations_security }
 
 Для повышения безопасности рекомендуется настроить SSL/TLS для шифрования данных и аутентификацию с использованием SASL. Подробные инструкции см. в официальной документации Apache Kafka (на английском языке): <https://kafka.apache.org/documentation/#security>.
 
-### Мониторинг и управление
+### Мониторинг и управление {: #kafka_deploy_recommendations_monitoring }
 
 Для мониторинга и управления сервером Kafka рекомендуется использовать инструменты, такие как Prometheus и Grafana. Подробные инструкции по настройке мониторинга см. в официальной документации Apache Kafka (на английском языке): <https://kafka.apache.org/documentation/#monitoring>.
 <!--additional-recommendations-end-->
@@ -150,9 +169,9 @@ kbId: 5074
 
 --8<-- "related_topics_heading.md"
 
-- _[Настройка конфигурации вспомогательного ПО для оптимизации работы {{ productName }}][auxiliary_software_optimize]_
-- _[Конфигурация экземпляра, компонентов ПО и служб. Настройка][configuration_files_linux]_
-- _[Пути и содержимое директорий экземпляра ПО][paths_windows]_
+- [Настройка конфигурации вспомогательного ПО для оптимизации работы {{ productName }}][auxiliary_software_optimize]
+- [Конфигурация экземпляра, компонентов ПО и служб. Настройка][configuration_files_linux]
+- [Пути и содержимое директорий экземпляра ПО][paths_windows]
 
 </div>
 

@@ -1,0 +1,41 @@
+<h1>Using a Local Variable to Mass Process Records</h1><p>In Comindware Business Application Platform you can configure the ability to mass process multiple records in a table, for example, if you need to change the status of several requests at the same time, confirm the payment of several invoices, etc. This article considers an example of the mass assignment of responsible persons for requests and the subsequent launch of the process for each of the request.</p>
+<p>Since it is impossible to open any form when selecting several records (the form shows only the attributes of one record), it is proposed to use the mechanism of local variables. You can put a certain value in a local variable, which can then be applied or duplicated for all the selected records.</p>
+<p><strong>Initial data:</strong></p>
+<ul>
+<li>Record template "Requests".</li>
+<li>Attribute of the "Accounts" data type — "Responsible".</li>
+<li>Process template "Request processing".</li>
+</ul>
+<p><strong>Set-up:</strong></p>
+<p><strong>1.</strong> In the "Requests" record template, create a button with the following parameters:</p>
+<ul>
+<li>Display name — Assign responsible;</li>
+<li>Operation context — Record;</li>
+<li>Operation — Save;</li>
+<li>Operation result — Update data;</li>
+<li>Show the dialog— check this checkbox.</li>
+</ul>
+<p>Save the button settings and go to the "Local variables" tab. Create a variable "Responsible" (data type — Account).</p>
+<p>Go to the "Properties" tab and click on "Configure the dialog". Move the created local variable to the central area. Save the settings and move the button to the toolbar for tables.</p>
+<p><strong>2.</strong> Go to the application settings and click "Scenarios". Create a new scenario with the following parameters:</p>
+<ul>
+<li>Name — Assign responsible for requests</li>
+<li>Execution context — By initiator;</li>
+<li>Status — Active.</li>
+</ul>
+<p><strong>3.</strong> Set up the beginning of the scenario upon the button click that was created in step 1, add an action to change attribute values. Select the "Responsible" attribute, specify the operation on the values — Replace and in the "Value" field, select N3 and insert the following expression:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">
+<p style="margin-left: .5in;">@prefix cmwsession: &lt;http://comindware.com/ontology/session#&gt;.<br/>@prefix user: &lt;http://comindware.com/ontology/user#&gt;.<br/>@prefix variable: &lt;http://comindware.com/ontology/session/variable#&gt;.<br/>@prefix debug: &lt;http://comindware.com/ontology/debug#&gt;.</p>
+<p style="margin-left: .5in;">{<br/>    cmwsession:context variable:dialogVariables ?v1.<br/>    ?v1 variable:responsible ?value.<br/>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>It is important to specify the system name written in the local variable after "<strong><em>variable:</em></strong>".</p>
+<p>Then add the "Start a Process" action, select the "Request processing" process. Go to the "Additional" tab and check the boxes "Execute separately from the scenario" and "Ignore all errors", if this is not done, the process will not start on each of the entries, but only one of them.</p>
+<p><strong>4.</strong> Test. Select several requests, click on the "Assign responsible" button. A dialog box will open with the local variable "Responsible". Select a user, confirm the operation.</p>

@@ -1,6 +1,8 @@
 ---
-title: Zabbix. Установка и настройка. Краткое руководство
+title: 'Zabbix. Установка и настройка. Краткое руководство'
 kbId: 4609
+url: 'https://kb.comindware.ru/article.php?id=4609'
+updated: '2024-06-14 12:26:59'
 ---
 
 # Zabbix. Установка и настройка. Краткое руководство
@@ -39,7 +41,5 @@ Zabbix состоит из сервера и агентов:
 - [Мониторинг web сайта в Zabbix (на русском языке, serveradmin.ru)](https://serveradmin.ru/monitoring-web-sayta-v-zabbix/)
 - [Мониторинг времени отклика сайта в Zabbix (на русском языке, serveradmin.ru)](https://serveradmin.ru/monitoring-vremeni-otklika-sayta-v-zabbix/)
 - [Мониторинг лог файла в Zabbix (на русском языке, serveradmin.ru)](https://serveradmin.ru/monitoring-log-fayla-v-zabbix/)
-
-
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

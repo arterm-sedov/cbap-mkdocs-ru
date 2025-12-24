@@ -1,37 +1,64 @@
 ---
 title: Apache Ignite. Установка и настройка
 kbId: 4600
+tags:
+    - Apache Ignite
+    - Linux
+    - кластер
+    - развёртывание
+    - установка
+hide: tags
 ---
 
-# Apache Ignite. Установка и настройка {: #apache_ignite_deploy }
+# {{ apacheIgniteVariants }}. Установка и настройка {: #apache_ignite_deploy }
 
-## Введение
+{% include-markdown ".snippets/experimental_feature.md" %}
 
-Для работы **{{ productName }}** требуется программное обеспечение Apache Ignite.
+## Введение {: #apache_ignite_deploy_introduction }
 
-Apache Ignite в минимально необходимой конфигурации устанавливается автоматически при установке **{{ productName }}** с ключом `-e`.
+{{ apacheIgniteVariants }} — это распределенная высокопроизводительная система управления базами данных.
 
-Для продвинутых конфигураций требуется развернуть Apache Ignite самостоятельно.
+**{{ productName }}** использует {{ apacheIgniteVariants }} для хранения данных.
 
-Здесь представлены краткие инструкции по установке и настройке Apache Ignite 2.16.0 в ОС Linux для работы с **{{ productName }}**.
+{{ apacheIgniteVariants }} в минимально необходимой конфигурации устанавливается автоматически при установке **{{ productName }}**.
 
-Полное руководство по Apache Ignite 2.16.0 (на английском языке) представлено на веб-сайте: <https://ignite.apache.org/docs/2.16.0/>
+## Прикладная задача {: #apache_ignite_deploy_use_case }
 
-Краткое руководство на русском языке представлено на веб-сайте: <https://platform.digital.gov.ru/docs/data-management/platform-v-ignite-se/quick-start>
+<!-- apache-ignite-deploy-use-case-start -->
 
-## Установка Apache Ignite
+!!! warning "Внимание!"
 
-1. Скачайте, распакуйте и установите Apache Ignite и задайте права:
+    Данная инструкция не требуется для базовых сценариев развёртывания **{{ productName }}**.
+
+    Используйте эту инструкцию, только если вам необходимо развернуть {{ apacheIgniteVariants }} в особой нетипичной конфигурации.
+
+Для продвинутых конфигураций можно развернуть собственный экземпляр {{ apacheIgniteVariants }} или использовать имеющуюся в вашей организации службу.
+
+Например, можно развернуть кластер {{ apacheIgniteVariants }} из нескольких узлов, если это необходимо для вашего бизнеса.
+
+Здесь представлены краткие инструкции по установке и настройке {{ apacheIgniteVariants }} 2.17.0 в ОС Linux для работы с **{{ productName }}** в простейшей конфигурации.
+
+Вам может потребоваться адаптировать конфигурацию {{ apacheIgniteVariants }} в соответствии со своими бизнес-потребностями.
+
+Полное официальное руководство по {{ apacheIgniteVariants }} 2 (на английском языке) представлено на сайте: <https://ignite.apache.org/docs/ignite2/latest/>
+
+Краткое руководство на русском языке представлено на сайте: <https://platformv.sbertech.ru/docs/public/IGN/17.6.0/index.html>
+
+<!-- apache-ignite-deploy-use-case-end -->
+
+## Установка {{ apacheIgniteVariants }} {: #apache_ignite_deploy_installation .pageBreakBefore }
+
+1. Скачайте, распакуйте и установите {{ apacheIgniteVariants }} и задайте права:
     ```sh
-    wget https://downloads.apache.org/ignite/2.16.0/apache-ignite-2.16.0-bin.zip
-    unzip -q apache-ignite-2.16.0-bin.zip
-    mv apache-ignite-2.16.0-bin /usr/share/ignite
+    wget https://downloads.apache.org/ignite/2.17.0/apache-ignite-2.17.0-bin.zip
+    unzip -q apache-ignite-2.17.0-bin.zip
+    mv apache-ignite-2.17.0-bin /usr/share/ignite
     chown -R www-data:www-data /usr/share/ignite
     ```
 2. Установите переменную среды `IGNITE_HOME`, указав путь к папке Ignite без завершающего символа `/`: `export IGNITE_HOME=/usr/share/ignite`
 3. Дополнительные модули для использования Ignite в сочетании с {{ productName }} не требуются.
 4. Скопируйте в папку `/usr/share/ignite` файл `Ignite.config` из папки `/var/www/<instanceName>` (где `<instanceName>` — имя экземпляра ПО).
-5. Пример файла `Ignite.config` представлен в параграфе [«Пример файла конфигурации Ignite»](#пример-файла-конфигурации-ignite).
+5. Пример файла `Ignite.config` представлен в параграфе [«Пример файла конфигурации Ignite»](#apache_ignite_deploy_configuration_example).
 6. Откройте для редактирования скрипт запуска Ignite `ignite.sh`:
     ``` sh
     cd /usr/share/ignite/bin/
@@ -52,7 +79,7 @@ Apache Ignite в минимально необходимой конфигура�
     ``` sh
     DEFAULT_CONFIG=config/Ignite.config
     ```
-10. Создайте и откройте для редактирования скрипт `ignite_service_create.sh`. Этот скрипт будет создавать и запускать службу Apache Ignite:
+10. Создайте и откройте для редактирования скрипт `ignite_service_create.sh`. Этот скрипт будет создавать и запускать службу {{ apacheIgniteVariants }}:
     ``` sh
     nano ignite_service_create.sh
     ```
@@ -64,7 +91,7 @@ Apache Ignite в минимально необходимой конфигура�
     #
     sudo cat <<EOF >/lib/systemd/system/ignite.service
     [Unit]
-    Description=Apache Ignite Service
+    Description={{ apacheIgniteVariants }} Service
     After=network.target
     [Service]
     WorkingDirectory=/usr/share/ignite
@@ -88,24 +115,24 @@ Apache Ignite в минимально необходимой конфигура�
     systemctl daemon-reload
     systemctl enable ignite.service
     ```
-12. Инициализируйте и запустите службу Apache Ignite с помощью скрипта `ignite_service_create.sh`:
+12. Инициализируйте и запустите службу {{ apacheIgniteVariants }} с помощью скрипта `ignite_service_create.sh`:
     ``` sh
     bash ignite_service_create.sh
     ```
 
-## Запуск Apache Ignite {: .pageBreakBefore }
+## Запуск {{ apacheIgniteVariants }} {: #apache_ignite_deploy_startup .pageBreakBefore }
 
-1. Запустите службу Apache Ignite:
+1. Запустите службу {{ apacheIgniteVariants }}:
     ``` sh
     systemctl start ignite
     ```
-2. Проверьте статус узла Apache Ignite:
+2. Проверьте статус узла {{ apacheIgniteVariants }}:
     ``` sh
     cd /usr/share/ignite/bin/
     bash control.sh --baseline
     ```
 
-## Пример файла конфигурации Ignite {: .pageBreakBefore }
+## Пример файла конфигурации Ignite {: #apache_ignite_deploy_configuration_example .pageBreakBefore }
 
 Для стабильной работы Ignite вместе с **{{ productName }}** важны следующие директивы в данном примере:
 
@@ -114,8 +141,9 @@ Apache Ignite в минимально необходимой конфигура�
 - `<dataRegionConfigurations type="DataRegionConfiguration"> <dataRegionConfiguration><name>Persistent</name><persistenceEnabled>true</persistenceEnabled>` — в директиве `dataRegionConfiguration` укажите `<persistenceEnabled>true</persistenceEnabled>`.
 - `<workDirectory>/var/lib/ignite/</workDirectory>>` — укажите рабочую папку Ignite.
 - `<igniteinstanceName>Comindware_Instance2</igniteinstanceName>` — укажите имя экземпляра Ignite.
+{% include-markdown ".snippets/pdfPageBreakHard.md" %}
 
-``` {: .xml title="Пример файла конфигурации Ignite" .pageBreakAfter }
+``` {: .xml title="Пример файла конфигурации Ignite" .pageBreakBefore }
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
   <configSections>
@@ -128,11 +156,6 @@ Apache Ignite в минимально необходимой конфигура�
       <localhost></localhost>
       <networkTimeout>1000</networkTimeout>
       <networkSendRetryDelay>1000</networkSendRetryDelay>
-{% if pdfOutput %}
-```
-
-``` {: .xml title="Пример файла конфигурации Ignite — продолжение" .pageBreakBefore }
-{% endif %}
       <jvmOptions>
           <string>-Xms512m</string>
           <string>-Xmx3g</string>
@@ -145,6 +168,11 @@ Apache Ignite в минимально необходимой конфигура�
           <string>-Djava.net.preferIPv4Stack=true</string>
           <string>--illegal-access=warn</string>
       </jvmOptions>
+{% if pdfOutput %}
+```
+{% include-markdown ".snippets/pdfPageBreakHard.md" %}
+``` {: .xml title="Пример файла конфигурации Ignite — продолжение" .pageBreakBefore }
+{% endif %}
       <discoverySpi type="TcpDiscoverySpi">
           <ipFinder type="TcpDiscoveryStaticIpFinder">
               <endpoints>

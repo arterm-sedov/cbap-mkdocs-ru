@@ -1,19 +1,34 @@
 ---
-title: Фильтр списка по создателю
+title: 'Фильтр списка по создателю'
 kbId: 4933
+url: 'https://kb.comindware.ru/article.php?id=4933'
+updated: '2024-11-06 15:57:50'
 ---
 
 # Фильтр списка по создателю
 
 Для того, чтобы настроить фильтр отображения записей в списке, где текущий пользователь - создатель записи, введите следующее выражение:
 
-| @prefix cmw: <http://comindware.com/logics#>. @prefix object: <http://comindware.com/ontology/object#>. @prefix user: <http://comindware.com/ontology/user#>. {  ("eventorder" "\_creator") object:findProperty ?propertyCreator.  cmw:securityContext cmw:currentUser ?user.  ?eventorderTemplate object:alias "eventorder".  ?item cmw:container ?eventorderTemplate.  ?item ?propertyCreator ?user. } |
-| --- |
+```
+@prefix cmw: <http://comindware.com/logics#>.
+@prefix object: <http://comindware.com/ontology/object#>.
+@prefix user: <http://comindware.com/ontology/user#>.
 
- **где:**
+{
 
- **eventorder** – системное имя текущего шаблона записи;
+ ("eventorder" "_creator") object:findProperty ?propertyCreator.
+ cmw:securityContext cmw:currentUser ?user.
+ ?eventorderTemplate object:alias "eventorder".
+ ?item cmw:container ?eventorderTemplate.
+ ?item ?propertyCreator ?user.
 
- **\_creator** – системное имя системного атрибута типа «Аккаунт», вычисляющий создателя записи.
+}
+```
+
+**где:**
+
+**eventorder** – системное имя текущего шаблона записи;
+
+**\_creator** – системное имя системного атрибута типа «Аккаунт», вычисляющий создателя записи.
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

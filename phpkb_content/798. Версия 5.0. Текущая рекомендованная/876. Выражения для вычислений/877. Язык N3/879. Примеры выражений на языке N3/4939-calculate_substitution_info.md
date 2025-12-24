@@ -1,6 +1,8 @@
 ---
-title: Вычисление информации о замещении
+title: 'Вычисление информации о замещении'
 kbId: 4939
+url: 'https://kb.comindware.ru/article.php?id=4939'
+updated: '2023-12-21 14:21:44'
 ---
 
 # Вычисление информации о замещении
@@ -22,6 +24,6 @@ kbId: 4939
 
 Для того, чтобы получить значение определенного параметра, нужно использовать следующую конструкцию предиката: *substitution:параметр*.
 
-См. также: [Руководство по N3](https://kb.comindware.ru/category/comindware-business-application-platform/%d0%92%d0%b5%d1%80%d1%81%d0%b8%d1%8f-3-5/%d0%a0%d1%83%d0%ba%d0%be%d0%b2%d0%be%d0%b4%d1%81%d1%82%d0%b2%d0%b0/%d0%a0%d1%83%d0%ba%d0%be%d0%b2%d0%be%d0%b4%d1%81%d1%82%d0%b2%d0%be-%d0%bf%d0%be-n3/331/), [Вычисление пользователей, у которых есть активные задачи (с учетом замещений)](https://kb.comindware.ru/article.php?id=4966).
+См. также: [Руководство по N3](https://kb.comindware.ru/category/comindware-business-application-platform/%d0%92%d0%b5%d1%80%d1%81%d0%b8%d1%8f-3-5/%d0%a0%d1%83%d0%ba%d0%be%d0%b2%d0%be%d0%b4%d1%81%d1%82%d0%b2%d0%b0/%d0%a0%d1%83%d0%ba%d0%be%d0%b2%d0%be%d0%b4%d1%81%d1%82%d0%b2%d0%be-%d0%bf%d0%be-n3/331/), [Аккаунты и задачи. Вычисление пользователей с активными задачами с помощью N3 (с учетом замещений)](https://kb.comindware.ru/article.php?id=4966).
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

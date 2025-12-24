@@ -1,0 +1,60 @@
+<h1>Customizing Notification E-mail Message</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1gtl0b4s70">Use Case</a></li>
+<li><a href="#mcetoc_1gtl1944f1">Enabling Task Notification Sending</a></li>
+<li><a href="#mcetoc_1gtl1ap9e2">Default Task Notification E-mail</a></li>
+<li><a href="#mcetoc_1gtl9cege4">Customizing the Task Notification E-mail</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1gtl0b4s70">Use Case</h2>
+<p>The <strong>CMW Platform</strong> can send users notifications about the tasks assigned to them.</p>
+<p>You can use the <a href="#mcetoc_1gtl1ap9e2">default task notification e-mail</a> or create a <a href="#mcetoc_1gtl9cege4">custom task notification e-mail</a>.</p>
+<h2 id="mcetoc_1gtl1944f1">Enabling Task Notification Sending</h2>
+<ol class="colored_numbers_list">
+<li>Set up <strong>E-mail sending</strong> connection under <strong>E-mail connections</strong> in <strong>Administration – Connections</strong>. </li>
+<li>Check the <strong>Use by default box</strong> in the <strong>E-mail sending</strong> connection properties to use it for task notification sending.</li>
+<li>Check the <strong>Enable task notifications</strong> box in <strong>Administration – </strong><strong>Global configuration</strong>.</li>
+</ol>
+<h2 id="mcetoc_1gtl1ap9e2">Default Task Notification E-mail</h2>
+<p><span style="letter-spacing: 0.2px;">The default new task notification e-mail is shown below and contains the following details:</span></p>
+<ul>
+<li><em>Subject</em> <em>line</em> — the <span style="letter-spacing: 0.2px;">task type and title.</span></li>
+<li><em>Task title </em>(e.g., <em>Approve Capex Request</em>) — set on the <strong>Advanced </strong>tab of the <strong>user task</strong> properties on the process diagram. The task title is a hyperlink to the <strong>user task form</strong>. </li>
+<li><em>Record title </em>(e.g., <em>item 9794</em>) — the value of the attribute <strong>used as a record title</strong> of the record linked to the process instance. The record title is a hyperlink to the record template <strong>default form</strong>.</li>
+<li><em>Task link</em> — generated automatically. It leads to the <strong>user task form</strong>, defined on the process diagram.</li>
+<li><em>Deadline </em>(e.g., <em>Dec 17</em>) — calculated from the <strong>Duration</strong> value on the <strong>Advanced </strong>tab of the <strong>user task</strong> properties on the process diagram. </li>
+<li><em>Process name </em>(e.g., <em>Capex Approval process</em>) — set in the <strong>process template </strong>properties.</li>
+</ul>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Default new task e-mail notification" class="img-responsive" height="465" src="https://kb.cmwlab.com/assets/img_6433b85fce381.png" width="1040"/></p>
+<p class="caption" style="font-size: 15px !important;">Default new task e-mail notification</p>
+</div>
+<p style="text-align: left;"><span style="letter-spacing: 0.2px;">To open the task form, click <em style="letter-spacing: 0.2px;"><strong>Go to the task </strong></em>or the task title (<em>Approve Capex Request</em> in the illustration).</span></p>
+<p style="text-align: left;"><span style="letter-spacing: 0.2px;">To open the record form linked to the task, click the record title (<em>item 9794</em> in the illustration).</span></p>
+<h2 id="mcetoc_1gtl9cege4" style="text-align: left;"><span style="letter-spacing: 0.2px;">Customizing the Task Notification E-mail</span></h2>
+<p style="text-align: left;"><span style="letter-spacing: 0.2px;">To customize the subject or body of the task notification e-mail (e.g., to include specific information):</span></p>
+</div>
+<ol class="colored_numbers_list">
+<li>Go to <strong>Administration — Communication routes</strong>.</li>
+<li><span style="letter-spacing: 0.2px;">Create a </span><span style="letter-spacing: 0.2px;">new <strong>Task notification</strong> communication route </span><span style="letter-spacing: 0.2px;">under <strong>System connections</strong></span>.</li>
+<li>In properties of the <span style="letter-spacing: 0.2px;"><strong>Task notification</strong> communication route:</span>
+<ul>
+<li><span style="letter-spacing: 0.2px;">On the <strong>Message attributes </strong>tab, configure the attributes to use in the e-mail.</span></li>
+<li><span style="letter-spacing: 0.2px;">On the <strong>Message properties </strong>tab, configure the e-mail <strong>Subject </strong>and <strong>Body</strong> using the attributes from the <strong>Message attributes </strong>tab.</span></li>
+</ul>
+</li>
+<li>Open the <strong>user task</strong> properties on the process diagram.
+<ul>
+<li>On the <strong>Message data</strong> tab:
+<ul style="list-style-type: circle;">
+<li>Specify the communication route created in Step 2.</li>
+<li>Configure the attribute values to substitute in the task notification e-mail (configured in Step 3).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Publish the process diagram.</li>
+<li>Test the process task notifications.</li>
+</ol>

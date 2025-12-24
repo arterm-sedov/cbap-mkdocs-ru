@@ -1,0 +1,22 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5016" kb-tags="" kb-title="Глобальная функция для обращения в Active Directory">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для того чтобы обратиться в Active Directory и получить оттуда какую-либо информацию, введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code>using System;</code> <br/><code>using System.Collections.Generic;</code> <br/><code></code> <br/><code>// class name should remain "Script"</code> <br/><code>public static partial class Script {</code> <br/><code></code> <br/><code>    // method name should remain "Main"</code> <br/><code>    public static Dictionary&lt;string, object&gt; begaemvAD(string tekst)</code> <br/><code>    {</code> <br/><code></code> <br/><code> </code> <br/><code></code> <br/><code>//создаём подключение к ад</code> <br/><code>        System.DirectoryServices.DirectoryEntry entry = new System.DirectoryServices.DirectoryEntry("LDAP://сервер ад", "логин", "пароль");</code> <br/><code></code> <br/><code>//создаём серчер</code> <br/><code>            System.DirectoryServices.DirectorySearcher mySearcher = new System.DirectoryServices.DirectorySearcher(entry);</code> <br/><code></code> <br/><code>//фильтруем по нужному параметру</code> <br/><code>            mySearcher.Filter = ($"(MAIL={tekst})");</code> <br/><code>            var result = new Dictionary&lt;string, object&gt;();</code> <br/><code></code> <br/><code>//выбираем проперти, которые хотим вернуть</code> <br/><code>            mySearcher.PropertiesToLoad.Add("mail");</code> <br/><code>            mySearcher.PropertiesToLoad.Add("cn");</code> <br/><code>            var temp = mySearcher.FindOne();</code> <br/><code></code> <br/><code>//добавляем в словарь результата</code> <br/><code>            result.Add("name", temp.GetDirectoryEntry().InvokeGet("cn"));</code> <br/><code>            return result;</code> <br/><code>    }</code> <br/><code>}</code> <br/></pre></code></div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

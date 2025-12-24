@@ -1,0 +1,285 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="" kb-tags="" kb-title="">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#прикладная-задача">
+<span class="md-ellipsis">
+      Прикладная задача
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-приложения">
+<span class="md-ellipsis">
+      Настройка приложения
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#инициализация-бота-в-telegram">
+<span class="md-ellipsis">
+      Инициализация бота в Telegram
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-подключения-к-telegram-и-пути-передачи-данных">
+<span class="md-ellipsis">
+      Настройка подключения к Telegram и пути передачи данных
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-сценария">
+<span class="md-ellipsis">
+      Настройка сценария
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#тестирование-бота">
+<span class="md-ellipsis">
+      Тестирование бота
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>В этой статье представлен пример настройки <strong>Comindware Platform</strong> для отправки пользователю сообщений в Telegram.</p>
+<h2 id="прикладная-задача">Прикладная задача</h2>
+<p>Требуется отправлять пользователю сообщение в Telegram с текстом из поля <em>«Сообщение»</em> на форме по нажатию кнопки <em>«Отправить в Telegram»</em>.</p>
+<h2 id="настройка-приложения">Настройка приложения</h2>
+<ol class="colored_numbers_list">
+<li>Создайте приложение <em>«Интеграция с Telegram».</em></li>
+<li>Создайте шаблон записи <em>«Уведомления»</em>в приложении <em>«Интеграция с Telegram»</em><em>.</em></li>
+<li>Создайте атрибуты <em>«ID чата»</em> и <em>«Сообщение»</em> типа «<strong>Текст</strong>» в шаблоне <em>«Уведомления»</em>.</li>
+<li>Создайте в шаблоне <em>«Уведомления»</em> кнопку <em>«Отправить в Telegram»</em> со следующими свойствами:
+   - <strong>Контекст операции: запись</strong>
+   - <strong>Операция: вызвать событие «Нажата кнопка»</strong>
+   - <strong>Результат выполнения: обновить данные</strong></li>
+<li>Поместите на основную форму шаблона <em>«Уведомления»</em> атрибуты <em>«ID чата»</em> и <em>«Сообщение»</em> и кнопку <em>«Отправить в Telegram».</em></li>
+</ol>
+<h2 id="инициализация-бота-в-telegram">Инициализация бота в Telegram</h2>
+<ol class="colored_numbers_list">
+<li>В мессенджере Telegram откройте чат <strong><a class="mkdocs_imported_link" href="https://t.me/BotFather" title="Открыть чат @BotFather">@BotFather</a></strong></li>
+<li>В чате введите команду <code>/start</code></li>
+<li>Введите команду <code>/new bot</code></li>
+<li>Введите имя нового бота. Имя бота должно заканчиваться на слово <code>bot</code>, например: <code>example_bot</code></li>
+<li>В чате отобразится сообщение со ссылкой на чат с ботом (например, <code>t.me/example_bot</code>) и токеном бота вида <code>XXXX:XXXXX</code></li>
+<li>Запишите токен бота.</li>
+<li>Перейдите в чат созданного бота, введите команду <code>/start</code> и любое сообщение, чтобы активировать его.</li>
+<li>В адресную строку браузера введите строку <code>https://api.telegram.org/bot&lt;Токен:бота&gt;/getUpdates</code>, заменив <code>&lt;Токен:бота&gt;</code> на фактический токен вашего бота.</li>
+<li>В браузере отобразится сообщение вида:</li>
+</ol>
+<p><div class="highlight"><code><pre><span></span><code>{"ok":true,"result":[{"update_id":XXXXXXXX, "message":{"message_id":4,"from":{"id":1234567890,"is_bot":false,"first_name":"User Name","username":"username","language_code":"en"},"chat":{"id":1234567890,"first_name":"User Name","username":"username","type":"private"},"date":1717687196,"text":"chatid"}}]}</code> <br/></pre></code></div>
+10. Найдите в этом сообщении идентификатор чата вида <code>"from":{"id":1234567890</code> или <code>"chat":{"id":1234567890</code>, где цифры — это идентификатор чата вашего бота.
+11. Настройте подключение к Telegram с использованием полученных ключа и ID чата.</p>
+<h2 id="настройка-подключения-к-telegram-и-пути-передачи-данных">Настройка подключения к Telegram и пути передачи данных</h2>
+<ol class="colored_numbers_list">
+<li>Откройте страницу «<strong>Администрирование</strong>» – «<strong>Инфраструктура</strong>» – «<strong>Подключения</strong>».</li>
+<li>В меню «<strong>Создать</strong>» выберите пункт «<strong>Подключения REST и OData</strong>» – «<strong>Отправка HTTP-запросов</strong>».</li>
+<li>Настройте подключение следующим образом:
+   - <strong>Системное имя:</strong> <em>telegram_send_connection</em>
+   - <strong>Описание:</strong><em>Подключение к Telegram</em>
+   - <strong>URI</strong>: <code>https://api.telegram.org/bot&lt;Токен:бота&gt;</code><ul>
+<li>Замените <code>&lt;Токен:бота&gt;</code> на токен своего Telegram-бота</li>
+<li><strong>Формат данных</strong>: <strong>JSON</strong></li>
+<li><strong>Кодировка данных:</strong> <strong>UTF-8</strong></li>
+<li><strong>Тип аутентификации: отсутствует</strong></li>
+<li>Остальные свойства оставьте без изменений.</li>
+</ul>
+</li>
+<li>Откройте приложение <em>«Интеграция с Telegram».</em></li>
+<li>На странице администрирования приложения выберите пункт «<strong>Пути передачи данных</strong>».</li>
+<li>В списке путей передачи данных в меню «<strong>Создать</strong>» выберите пункт «<strong>Подключения REST и OData</strong>» – «<strong>Отправка HTTP-запросов</strong>».</li>
+<li>
+<p>Настройте путь передачи данных следующим образом:
+   - <strong>Основные свойства</strong></p>
+<ul>
+<li><strong>Подключение:</strong><em>Подключение к Telegram</em></li>
+<li><strong>Системное имя:</strong> <em>telegram_send_route</em></li>
+<li><strong>Описание:</strong> <em>Передача данных в Telegram</em></li>
+<li><strong>Атрибуты сообщений</strong></li>
+<li><strong>Тип сообщения: отправка HTTP-запросов</strong></li>
+<li><strong><em>*Запрос</em></strong>*</li>
+</ul>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Системное имя</th>
+<th>Тип</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>chat_id</em></td>
+<td><strong>Строка</strong></td>
+</tr>
+<tr>
+<td><em>text</em></td>
+<td><strong>Строка</strong></td>
+</tr>
+<tr>
+<td>- <strong>Ответ:</strong> оставьте таблицу пустой</td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Ответ с ошибкой:</strong>оставьте таблицу пустой</td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Интеграция</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Метод запроса: POST</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Шаблон пути запроса:</strong> `sendMessage</td>
+<td></td>
+</tr>
+<tr>
+<td>sendMessage` — это метод API Telegram для отправки сообщений боту.</td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Атрибуты для сериализации в тело запроса:</strong> <code>chat_id,message</code>В этом поле перечислите через запятую атрибуты из таблицы «<strong>Запрос</strong>» с вкладки «<strong>Атрибуты сообщений</strong>».</td>
+<td></td>
+</tr>
+<tr>
+<td>Имена этих атрибутов предопределены спецификацией API Telegram.</td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Укажите атрибуты для сериализации ответа без ошибки</strong> и <strong><em>*ответа с ошибкой</em></strong>*</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Путь к атрибуту</th>
+<th>Выражение на языке запросов</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$</code></td>
+<td><code>$</code></td>
+</tr>
+</tbody>
+</table>
+<p>Примечание</p>
+<p>Символ доллара <code>$</code> атрибутах для сериализации ответов означает передачу всех данных ответа в переменные для успешного ответа и ответа с ошибкой, указанные в <a class="mkdocs_imported_link" href="#send_message_action">действии «<strong>Отправить сообщение</strong>» в сценарии</a>.
+   - Остальные свойства оставьте без изменений.</p>
+</li>
+</ol>
+<h2 id="настройка-сценария">Настройка сценария</h2>
+<ol class="colored_numbers_list">
+<li>В приложении <em>«Интеграция с Telegram»</em>создайте сценарий <em>«Отправка уведомления»</em>, выбрав <strong>контекст выполнения</strong> « <strong>От имени системы</strong>»<em>.</em></li>
+<li>В конструкторе сценария настройте событие <em>«Нажатие кнопки»</em> следующим образом:
+   - <strong>Контекстный шаблон:</strong> <em>Уведомления</em>
+   - <strong>Кнопка:</strong><em>Отправить в Telegram</em></li>
+<li>
+<p>Добавьте и настройте действие «<strong>Изменить значения переменных</strong>»:
+   - <strong>Операция со значениями переменных:</strong> заменить
+   - <strong>Набор переменных:</strong> body
+   - <strong>Таблица переменных</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Имя переменной</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>text</em></td>
+<td><strong>Атрибут:</strong> <em>Сообщение</em></td>
+</tr>
+<tr>
+<td><em>chat_id</em></td>
+<td><strong>Атрибут:</strong> <em>ID чата</em></td>
+</tr>
+<tr>
+<td>4. Добавьте и настройте действие «<strong>Отправить сообщение</strong>»:</td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Подключение:</strong> <em>telegram_send_connection</em></td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Путь передачи данных:</strong> <em>telegram_send_route</em></td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Переменная с сообщением:</strong> <em>body</em></td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Переменная для успешного ответа:</strong> <em>response</em></td>
+<td></td>
+</tr>
+<tr>
+<td>- <strong>Переменная для ответа с ошибкой:</strong> <em>error_response</em></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<h2 id="тестирование-бота">Тестирование бота</h2>
+<ol class="colored_numbers_list">
+<li>Создайте запись в шаблоне <em>«Уведомления».</em></li>
+<li>В поле <em>«ID чата»</em> введите <a class="mkdocs_imported_link" href="#chat_id">ID чата своего бота</a>.</li>
+<li>В поле <em>«Сообщение»</em> введите любой текст.</li>
+<li>Сохраните запись.</li>
+<li>Нажмите кнопку <em>«Отправить в Telegram».</em></li>
+<li>В чате вашего бота должно прийти сообщение, отправленное с формы.</li>
+</ol>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4709">Шаблоны. Определения, создание, настройка, перенос между приложениями, архивирование, очистка, удаление</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4790">Кнопки. Определение, настройка, удаление</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4675">Подключения. Определения, типы, создание, настройка, удаление</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4676">Пути передачи данных. Определения, типы, создание, настройка, удаление</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4717">Сценарии. Определения, создание, настройка, использование</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

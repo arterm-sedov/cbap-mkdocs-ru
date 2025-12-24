@@ -1,6 +1,8 @@
 ---
-title: Фильтр списка по процессам с ошибками
+title: 'Фильтр списка по процессам с ошибками'
 kbId: 4934
+url: 'https://kb.comindware.ru/article.php?id=4934'
+updated: '2024-10-25 11:33:32'
 ---
 
 # Фильтр списка по процессам с ошибками
@@ -16,4 +18,4 @@ kbId: 4934
 }
 ```
 
- {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
+{% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

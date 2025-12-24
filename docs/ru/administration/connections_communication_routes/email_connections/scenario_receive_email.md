@@ -238,7 +238,7 @@ include-markdown ".snippets/email_receive_logics.md"
     - **Значение: формула**
 
     ``` cs
-    FORMAT ("{0} <1>" LIST($$message->From->Name, $$message->From->Address))
+    FORMAT ("{0} <1>", LIST($$message->From->Name, $$message->From->Address))
     ```
 
     Эта формула берёт данные отправителя из переменной `message` и возвращает имя и адрес отправителя письма в следующем формате: `Имя <address@example.com>`

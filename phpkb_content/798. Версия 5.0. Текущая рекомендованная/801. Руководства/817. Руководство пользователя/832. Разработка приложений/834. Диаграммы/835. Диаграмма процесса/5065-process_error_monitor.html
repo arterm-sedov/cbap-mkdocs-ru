@@ -1,24 +1,59 @@
-<h1>Ошибки в процессе. Отслеживание с помощью списка экземпляров и уведомлений</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr">
+<h1>Ошибки в процессе. Отслеживание с помощью списка экземпляров и уведомлений</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5065" kb-tags="процесс,ошибка процесса,ошибка задачи-выполнении сценария,ошибка C#-скрипта" kb-title="Ошибки в процессе. Отслеживание с помощью списка экземпляров и уведомлений">
 <div class="md-container" data-md-component="container">
-<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
 <div class="mce-toc">
-<h2 class="toc-heading">Содержание</h2>
+<h2 class="toc-heading">
+      Содержание
+      </h2>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-таблицы-для-отслеживания-ошибок-в-экземплярах-процесса"> <span class="md-ellipsis"> Настройка таблицы для отслеживания ошибок в экземплярах процесса </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#отслеживание-ошибок-в-задаче-выполнении-сценария-с-отправкой-уведомлений"> <span class="md-ellipsis"> Отслеживание ошибок в задаче-выполнении сценария с отправкой уведомлений </span> </a><nav aria-label="Отслеживание ошибок в задаче-выполнении сценария с отправкой уведомлений" class="md-nav">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-таблицы-для-отслеживания-ошибок-в-экземплярах-процесса">
+<span class="md-ellipsis">
+      Настройка таблицы для отслеживания ошибок в экземплярах процесса
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#отслеживание-ошибок-в-задаче-выполнении-сценария-с-отправкой-уведомлений">
+<span class="md-ellipsis">
+      Отслеживание ошибок в задаче-выполнении сценария с отправкой уведомлений
+    </span>
+</a>
+<nav aria-label="Отслеживание ошибок в задаче-выполнении сценария с отправкой уведомлений" class="md-nav">
 <ul class="md-nav__list">
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#тестирование"> <span class="md-ellipsis"> Тестирование </span> </a></li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#тестирование">
+<span class="md-ellipsis">
+      Тестирование
+    </span>
+</a>
+</li>
 </ul>
-</nav></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
 </ul>
 </div>
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h2 id="введение">Введение</h2>
-<p><strong>Comindware Platform</strong> позволяет моделировать и реализовывать исполняемые бизнес-процессы с назначением задач исполнителям, выполнением сценариев, отправкой внутренних и внешних сообщений, просмотром журнала действий.</p>
+<p><strong>Comindware Platform</strong> позволяет моделировать и реализовывать автоматизированные бизнес-процессы с назначением задач исполнителям, выполнением сценариев, отправкой внутренних и внешних сообщений, просмотром журнала действий.</p>
 <p>В ходе выполнения процесса могут возникнуть различные ошибки, например в задачах, сценариях, C#-скриптах.</p>
 <p><strong>Comindware Platform</strong> предлагает различные встроенные механизмы по отслеживанию ошибок, а также даёт возможность настроить свои собственные.</p>
 <p>Здесь представлены инструкции по настройке отслеживания ошибок в процессах с помощью следующих инструментов:</p>
@@ -34,9 +69,7 @@
 <li>Создайте таблицу <em>«Процессы с ошибками»</em>.</li>
 <li>
 <p>На панели «<strong>Свойства таблицы</strong>» в поле «<strong>Системный фильтр</strong>» введите следующее выражение на <strong>N3</strong>:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="c"># Импортируем функции для работы с процессами</span></code><br/><code><span class="k">@prefix</span> <span class="nn">process:</span> <span class="nv">&lt;http://comindware.com/ontology/process#&gt;</span><span class="p">.</span></code><br/><code><span class="k">@prefix</span> <span class="nn">cmw:</span> <span class="nv">&lt;http://comindware.com/logics#&gt;</span><span class="p">.</span></code><br/><code><span class="p">{</span></code><br/><code><span class="c"># Собираем все экземпляры процесса</span></code><br/><code><span class="err">?item</span> <span class="nn">process</span><span class="p">:</span><span class="nt">businessObject</span> <span class="err">?</span><span class="p">.</span></code><br/><code><span class="c"># Возвращаем экземпляры процесса, в которых есть ошибки</span></code><br/><code><span class="err">?item</span> <span class="nn">process</span><span class="p">:</span><span class="nt">hasTokenError</span> <span class="l">true</span><span class="p">.</span></code><br/><code><span class="p">}</span></code></pre>
-</div>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы с процессами</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">process:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/process#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmw:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="c"># Собираем все экземпляры процесса</span></code> <br/><code><span class="err">?item</span> <span class="nn">process</span><span class="p">:</span><span class="nt">businessObject</span> <span class="err">?</span><span class="p">.</span></code> <br/><code><span class="c"># Возвращаем экземпляры процесса, в которых есть ошибки</span></code> <br/><code><span class="err">?item</span> <span class="nn">process</span><span class="p">:</span><span class="nt">hasTokenError</span> <span class="l">true</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Сохраните таблицу.</p>
@@ -45,15 +78,13 @@
 <li>Откройте вкладку с таблицей <em>«Процессы с ошибками»</em>.</li>
 <li>Должен отобразиться список процессов, при выполнении которых произошли ошибки.</li>
 </ol>
-<h2 id="отслеживание-ошибок-в-задаче-выполнении-сценария-с-отправкой-уведомлений">Отслеживание ошибок в задаче-выполнении сценария с отправкой уведомлений</h2>
+<h2 class="pageBreakBefore" id="отслеживание-ошибок-в-задаче-выполнении-сценария-с-отправкой-уведомлений">Отслеживание ошибок в задаче-выполнении сценария с отправкой уведомлений</h2>
 <p>Для использования C#-скриптов в процессах предусмотрена задача-выполнение сценария. Если при её выполнении произойдёт ошибка, процесс будет остановлен. Чтобы отследить ошибки в C#-скрипте задачи-выполнении сценария, но не останавливать процесс, можно воспользоваться конструкцией <code>try..catch</code>. С помощью этого приёма можно отследить проблемы выполнении C#-скрипта, поместив сообщение об ошибке в текстовый атрибут и вывести уведомление об ошибке в пользовательской задаче.</p>
 <ol class="colored_numbers_list">
 <li>Создайте атрибут <em>«Отслеживание ошибок»</em> с системным именем <code>ErrorMonitoring</code> в шаблоне записи, связанном с процессом.</li>
 <li>
 <p>Добавьте в диаграмму процесса задачу-выполнение сценария с C#-скриптом по следующему образцу:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="k">using</span> <span class="nn">System</span><span class="p">;</span></code><br/><code><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span></code><br/><code><span class="k">using</span> <span class="nn">System.Linq</span><span class="p">;</span></code><br/><code><span class="k">using</span> <span class="nn">Comindware.Data.Entity</span><span class="p">;</span></code><br/><code><span class="k">using</span> <span class="nn">Comindware.TeamNetwork.Api.Data.UserCommands</span><span class="p">;</span></code><br/><code><span class="k">using</span> <span class="nn">Comindware.TeamNetwork.Api.Data</span><span class="p">;</span></code><br/><code></code><br/><code><span class="k">class</span> <span class="nc">Script</span></code><br/><code><span class="p">{</span></code><br/><code>    <span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="nf">Main</span><span class="p">(</span><span class="n">Comindware</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">ScriptContext</span> <span class="n">context</span><span class="p">,</span> <span class="n">Comindware</span><span class="p">.</span><span class="n">Entities</span> <span class="n">entities</span><span class="p">)</span></code><br/><code>    <span class="p">{</span></code><br/><code>        <span class="c1">// Добавьте входные данные.</span></code><br/><code>        <span class="kt">int</span> <span class="n">Result</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span></code><br/><code>        <span class="k">try</span></code><br/><code>        <span class="p">{</span></code><br/><code>            <span class="c1">// Добавьте код, который должен отработать в штатном режиме.</span></code><br/><code>            <span class="c1">// Result = 1 — код успешного выполнения скрипта</span></code><br/><code>            <span class="n">Result</span> <span class="o">=</span> <span class="m">1</span><span class="p">;</span></code><br/><code>            <span class="c1">// ErrorMonitoring — системное имя атрибута «Отслеживание ошибок».</span></code><br/><code>            <span class="c1">// Присваиваем атрибуту «Отслеживание ошибок» значение "Нет ошибок выполнения скрипта".</span></code><br/><code>            <span class="kt">var</span> <span class="n">data</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">object</span><span class="o">&gt;</span><span class="p">(</span><span class="err">'</span><span class="n">ErrorMonitoring</span><span class="err">'</span><span class="p">,</span> <span class="err">'</span><span class="n">Нет</span> <span class="n">ошибок</span> <span class="n">выполнения</span> <span class="n">скрипта</span><span class="err">'</span><span class="p">);</span></code><br/><code>            <span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">EditWithAlias</span><span class="p">(</span><span class="n">context</span><span class="p">.</span><span class="n">BusinessObjectId</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span></code><br/><code>        <span class="p">}</span></code><br/><code>        <span class="k">catch</span></code><br/><code>        <span class="p">{</span></code><br/><code>            <span class="c1">// Добавьте код, который должен отработать в случае ошибки.</span></code><br/><code>            <span class="c1">// Result = -1 — код ошибки при выполнении скрипта</span></code><br/><code>            <span class="n">Result</span> <span class="o">=</span> <span class="o">-</span><span class="m">1</span><span class="p">;</span></code><br/><code>            <span class="c1">// ErrorMonitoring — системное имя атрибута «Отслеживание ошибок».</span></code><br/><code>            <span class="c1">// Присваиваем атрибуту «Отслеживание ошибок» значение "Ошибка выполнения скрипта".</span></code><br/><code>            <span class="kt">var</span> <span class="n">data</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">object</span><span class="o">&gt;</span><span class="p">(</span><span class="err">'</span><span class="n">ErrorMonitoring</span><span class="err">'</span><span class="p">,</span> <span class="err">'</span><span class="n">Ошибка</span> <span class="n">выполнения</span> <span class="n">скрипта</span><span class="err">'</span><span class="p">);</span></code><br/><code>            <span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">EditWithAlias</span><span class="p">(</span><span class="n">context</span><span class="p">.</span><span class="n">BusinessObjectId</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span></code><br/><code>        <span class="p">}</span></code><br/><code>        <span class="c1">// Возвращаем результат выполнения скрипта.</span></code><br/><code>        <span class="c1">// Эта строка отобразится в поле «Выходные данные» </span></code><br/><code>        <span class="c1">// в событии «Скрипт выполнен» в цепочке событий для задачи-выполнения сценария.</span></code><br/><code>        <span class="k">return</span> <span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">"Результат: {0}"</span><span class="p">,</span> <span class="n">Result</span><span class="p">);</span></code><br/><code>    <span class="p">}</span></code><br/><code><span class="p">}</span></code></pre>
-</div>
+<div class="highlight"><code><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Collections.Generic</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Linq</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.Data.Entity</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.TeamNetwork.Api.Data.UserCommands</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.TeamNetwork.Api.Data</span><span class="p">;</span></code> <br/><code></code> <br/><code><span class="k">class</span><span class="w"> </span><span class="nc">Script</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">Main</span><span class="p">(</span><span class="n">Comindware</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">ScriptContext</span><span class="w"> </span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">Comindware</span><span class="p">.</span><span class="n">Entities</span><span class="w"> </span><span class="n">entities</span><span class="p">)</span></code> <br/><code><span class="w">    </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="c1">// Добавьте входные данные.</span></code> <br/><code><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">Result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span></code> <br/><code><span class="w">        </span><span class="k">try</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="c1">// Добавьте код, который должен отработать в штатном режиме.</span></code> <br/><code><span class="w">            </span><span class="c1">// Result = 1 — код успешного выполнения скрипта</span></code> <br/><code><span class="w">            </span><span class="n">Result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span></code> <br/><code><span class="w">            </span><span class="c1">// ErrorMonitoring — системное имя атрибута «Отслеживание ошибок».</span></code> <br/><code><span class="w">            </span><span class="c1">// Присваиваем атрибуту «Отслеживание ошибок» значение "Нет ошибок выполнения скрипта".</span></code> <br/><code><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">object</span><span class="o">&gt;</span><span class="p">(</span><span class="err">'</span><span class="n">ErrorMonitoring</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="n">Нет</span><span class="w"> </span><span class="n">ошибок</span><span class="w"> </span><span class="n">выполнения</span><span class="w"> </span><span class="n">скрипта</span><span class="err">'</span><span class="p">);</span></code> <br/><code><span class="w">            </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">EditWithAlias</span><span class="p">(</span><span class="n">context</span><span class="p">.</span><span class="n">BusinessObjectId</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">);</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code><span class="w">        </span><span class="k">catch</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="c1">// Добавьте код, который должен отработать в случае ошибки.</span></code> <br/><code><span class="w">            </span><span class="c1">// Result = -1 — код ошибки при выполнении скрипта</span></code> <br/><code><span class="w">            </span><span class="n">Result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span></code> <br/><code><span class="w">            </span><span class="c1">// ErrorMonitoring — системное имя атрибута «Отслеживание ошибок».</span></code> <br/><code><span class="w">            </span><span class="c1">// Присваиваем атрибуту «Отслеживание ошибок» значение "Ошибка выполнения скрипта".</span></code> <br/><code><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">object</span><span class="o">&gt;</span><span class="p">(</span><span class="err">'</span><span class="n">ErrorMonitoring</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="err">'</span><span class="n">Ошибка</span><span class="w"> </span><span class="n">выполнения</span><span class="w"> </span><span class="n">скрипта</span><span class="err">'</span><span class="p">);</span></code> <br/><code><span class="w">            </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">EditWithAlias</span><span class="p">(</span><span class="n">context</span><span class="p">.</span><span class="n">BusinessObjectId</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">);</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code><span class="w">        </span><span class="c1">// Возвращаем результат выполнения скрипта.</span></code> <br/><code><span class="w">        </span><span class="c1">// Эта строка отобразится в поле «Выходные данные» </span></code> <br/><code><span class="w">        </span><span class="c1">// в событии «Скрипт выполнен» в цепочке событий для задачи-выполнения сценария.</span></code> <br/><code><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">"Результат: {0}"</span><span class="p">,</span><span class="w"> </span><span class="n">Result</span><span class="p">);</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Создайте на диаграмме процесса пользовательскую задачу <em>«Ошибка выполнения скрипта»</em>.</p>
@@ -63,45 +94,55 @@
 <li>Соедините <strong>развилку «или/или»</strong> с задачей <em>«Ошибка выполнения скрипта»</em> и следующим элементом процесса.</li>
 <li>
 <p>Настройте исходящие потоки <strong>развилки «или/или»</strong>:</p>
-<table style="width: 100%;">
-<tbody>
-<tr>
-<th>Поток «иначе»</th>
-<th>Конечная точка</th>
-<th>Условие</th>
+<p><table markdown="block" style="width: 100%;">
+<tbody markdown="block">
+<tr markdown="block">
+<th markdown="block">
+Поток «иначе»
+</th>
+<th markdown="block">
+Конечная точка
+</th>
+<th markdown="block">
+Условие
+</th>
 </tr>
-<tr>
-<td>Флажок установлен</td>
-<td>Пользовательская задача <em>«Ошибка выполнения скрипта»</em></td>
-<td> </td>
+<tr markdown="block">
+<td markdown="block">
+Флажок установлен
+</td>
+<td markdown="block">
+Пользовательская задача <em>«Ошибка выполнения скрипта»</em>
+</td>
+<td markdown="block">
+</td>
 </tr>
-<tr>
-<td> </td>
-<td>Следующий этап процесса</td>
-<td><strong>Формула:</strong></td>
-</tr>
-</tbody>
-</table>
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="err">$</span><span class="n">ErrorMonitoring</span> <span class="o">==</span> <span class="s">"Нет ошибок выполнения скрипта"</span></code></pre>
-</div>
-<p> </p>
+<tr markdown="block">
+<td markdown="block">
+</td>
+<td markdown="block">
+Следующий этап процесса
+</td>
+<td markdown="block">
+<strong>Формула:</strong></td></tr></tbody></table></p>
+<div class="highlight"><code><pre><span></span><code><span class="err">$</span><span class="n">ErrorMonitoring</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">"Нет ошибок выполнения скрипта"</span></code> <br/></pre></code></div>
+<p>
+</p>
 </li>
 <li>
 <p>Настройте остальные действия процесса согласно бизнес-логике.</p>
 </li>
 </ol>
 <figure class="screenshot_with_caption">
-<p><img alt="Диаграмма процесса с использованием задачи «Ошибка выполнения скрипта»" src="/platform/v5.0/business_apps/diagrams/process_diagram/img/process_debug_process_diagram.png"/></p>
-<figcaption class="caption">Диаграмма процесса с использованием задачи «Ошибка выполнения скрипта»</figcaption>
+<p><img alt="Диаграмма процесса с использованием задачи «Ошибка выполнения скрипта»" src="/platform/v5.0/business_apps/diagrams/process_diagram/img/process_debug_process_diagram.png"/><figcaption class="caption">Диаграмма процесса с использованием задачи «Ошибка выполнения скрипта»</figcaption></p>
 </figure>
-<h3 id="тестирование">Тестирование</h3>
+<h3 class="pageBreakBefore" id="тестирование">Тестирование</h3>
 <ol class="colored_numbers_list">
 <li>Запустите экземпляр процесса.</li>
 <li>Дождитесь завершения выполнения C#-скрипта.</li>
 <li>Если в C#-скрипте произойдут ошибки, на странице «<strong>Мои задачи</strong>» появится задача <em>«Ошибка выполнения скрипта»</em>.</li>
 <li>Откройте задачу <em>«Ошибка выполнения скрипта»</em> и просмотрите сообщение в поле <em>«Отслеживание ошибок»</em>.</li>
-<li>В задаче нажмите кнопку <em class="fa-light fa-edit">‌<!--icon--></em> и выберите пункт «<strong>Перейти к диаграмме процесса</strong>».</li>
+<li>В задаче нажмите кнопку <i class="fa-light fa-edit">‌<!--icon--></i> и выберите пункт «<strong>Перейти к диаграмме процесса</strong>».</li>
 <li>Откроется диаграмма экземпляра процесса.</li>
 <li>Откройте <strong>журнал изменений</strong> и нажмите значок <img alt="Кнопка перехода к цепочке событий скрипта" src="/platform/v5.0/business_apps/diagrams/process_diagram/../../expressions/img/expression_debug_script_button.png" width="20px"/> рядом с названием задачи-выполнения сценария.</li>
 <li>Откроется <strong>цепочка событий</strong> с информацией о ходе выполнения C#-скрипта на панели «<strong>Выполнение элемента процесса</strong>».</li>
@@ -109,13 +150,20 @@
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4723">Использование диаграммы экземпляра процесса</a></li>
-<li><a class="autorefs autorefs-internal mkdocs_imported_link" href="process_diagram_view_instance.html#events_chain_view">Просмотр цепочки событий</a></li>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4929">Отладка формул, выражений N3, сценариев и C#-скриптов</a></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4723">Использование диаграммы экземпляра процесса</a></em></li>
+<li><em><a class="autorefs autorefs-internal mkdocs_imported_link" href="process_diagram_view_instance.html#events_chain_view">Просмотр цепочки событий</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4929">Отладка формул, выражений N3, сценариев и C#-скриптов</a></em></li>
 </ul>
 </div>
 </article>
 </div>
 </div>
-<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
 </div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

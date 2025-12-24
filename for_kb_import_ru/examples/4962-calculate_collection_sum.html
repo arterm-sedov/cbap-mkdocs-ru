@@ -1,0 +1,28 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4962" kb-tags="" kb-title="Вычисление суммы значений столбца коллекции">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для того, чтобы рассчитать сумму значений определенного столбца коллекции, за исключением заархивированных записей, введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.</code> <br/><code>@prefix math: &lt;http://www.w3.org/2000/10/swap/math#&gt;.</code> <br/><code>@prefix w3math: &lt;http://www.w3.org/2000/10/swap/math#&gt;.</code> <br/><code>@prefix cmwmath: &lt;http://comindware.com/logics/math#&gt;.</code> <br/><code></code> <br/><code>{</code> <br/><code>    ("Project" "ProjectPlans") object:findProperty ?ProjectPlansProperty.</code> <br/><code>    ("Plans" "Prodolzhitelnost") object:findProperty ?ProdolzhitelnostProperty.</code> <br/><code>    ("Plans" "_isDisabled") object:findProperty ?_isDisabled.</code> <br/><code></code> <br/><code>                from {</code> <br/><code>                ?item ?ProjectPlansProperty ?ProjectPlansVal.</code> <br/><code>                ?ProjectPlansVal ?ProdolzhitelnostProperty ?ProdolzhitelnostVal.</code> <br/><code>                not{?ProdolzhitelnostVal ?_isDisabled true.}.</code> <br/><code>                                         }select ?ProdolzhitelnostVal -&gt; ?durationList.</code> <br/><code>                ?durationList cmwmath:sum  ?value.           </code> <br/><code>                }</code> <br/></pre></code></div>
+<p><strong>где:</strong></p>
+<p><strong>Project</strong> — системное имя текущего шаблона записи;</p>
+<p><strong>ProjectPlans</strong>— системное имя атрибута типа «Коллекция» в текущем шаблоне записи;</p>
+<p><strong>Plans</strong>— системное имя шаблона записи, на который ссылается <strong>ProjectPlans</strong>;</p>
+<p><strong>Prodolzhitelnost</strong>— системное имя атрибута для сложения в <strong>Plans</strong>;</p>
+<p><strong>_isDisabled</strong> — системное имя системного атрибута «В архиве» (для скрытия архивных записей).</p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

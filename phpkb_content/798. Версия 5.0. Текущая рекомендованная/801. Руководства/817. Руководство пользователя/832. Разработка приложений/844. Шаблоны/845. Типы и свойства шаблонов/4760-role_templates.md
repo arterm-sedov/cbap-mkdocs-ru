@@ -1,6 +1,8 @@
 ---
-title: Шаблон роли
+title: 'Шаблон роли'
 kbId: 4760
+url: 'https://kb.comindware.ru/article.php?id=4760'
+updated: '2024-07-18 15:59:21'
 ---
 
 # Шаблон роли
@@ -31,7 +33,4 @@ _![Свойства шаблона роли](https://kb.comindware.ru/assets/rol
 
 **[Шаблоны. Определения, создание, настройка, перенос между приложениями, архивирование, очистка, удаление][templates]**
 
-
-
- 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

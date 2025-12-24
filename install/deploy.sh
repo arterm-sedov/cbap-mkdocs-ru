@@ -17,11 +17,11 @@ CUR_DIR=$(pwd)
 
 echo "Changed directory to: $CUR_DIR"
 
-echo "Creating venv: python3 -m venv venv --upgrade-deps"
-python3 -m venv venv --upgrade-deps
+echo "Creating venv: python3 -m venv .venv --upgrade-deps"
+python3 -m venv .venv --upgrade-deps
 
-echo "Activating venv: source venv/bin/activate"
-source venv/bin/activate
+echo "Activating venv: source .venv/bin/activate"
+source .venv/bin/activate
 
 echo "Updating pip: python3 -m pip install --upgrade pip"
 python3 -m pip install --upgrade pip

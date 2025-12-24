@@ -1,0 +1,25 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5014" kb-tags="" kb-title="Загрузка картинки из атрибута типа документ в HTML поле">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для того, чтобы выгрузить картинку в HTML поле, введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code>using System;</code> <br/><code>using System.Collections.Generic;</code> <br/><code>using System.Linq;</code> <br/><code>using System.Text.RegularExpressions;</code> <br/><code>using Comindware.Data.Entity;</code> <br/><code>using Comindware.TeamNetwork.Api.Data.UserCommands;</code> <br/><code>using Comindware.TeamNetwork.Api.Data;</code> <br/><code></code> <br/><code>class Script</code> <br/><code>{</code> <br/><code>    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)</code> <br/><code>    {</code> <br/><code>        var imagePropertyAlias = "Document";</code> <br/><code>        var currentObjectid = userCommandContext.ObjectIds[0];</code> <br/><code>        var response = Api.TeamNetwork.ObjectService.GetPropertyValues(new List&lt;string&gt; { currentObjectid }, new List&lt;string&gt; { imagePropertyAlias });</code> <br/><code>        Dictionary&lt;string, object&gt; currentObjectPropertyValues;</code> <br/><code>        response.TryGetValue(currentObjectid, out currentObjectPropertyValues);</code> <br/><code>        object multivalueDocument;</code> <br/><code>        currentObjectPropertyValues.TryGetValue(imagePropertyAlias, out multivalueDocument);</code> <br/><code>        var documentsList = (object[])multivalueDocument;</code> <br/><code>        var documentId = documentsList.First();</code> <br/><code>        var content = (Api.TeamNetwork.DocumentService.GetContent((string)documentId)).Data;</code> <br/><code></code> <br/><code>        var docHTML = $"&lt;p&gt;&lt;span style=\"font-size:11pt;\"&gt;&lt;span&gt;&lt;span style=\"font-family:Calibri,sans-serif;\"&gt;&lt;img src=\"data:image/png;base64,{Convert.ToBase64String(content)}\" style=\"height:500px; width:1000px\" /&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;";</code> <br/><code></code> <br/><code>        var data = new Dictionary&lt;string, object&gt;</code> <br/><code>        {</code> <br/><code>          { "HTML", docHTML}</code> <br/><code>        };</code> <br/><code>        Api.TeamNetwork.ObjectService.EditWithAlias("ExportImport", currentObjectid, data);</code> <br/><code></code> <br/><code>        var result = new UserCommandResult</code> <br/><code>        {</code> <br/><code>            Success = true,</code> <br/><code>            Commited = true,</code> <br/><code>            ResultType = UserCommandResultType.DataChange,</code> <br/><code>            Messages = new[]</code> <br/><code>            {</code> <br/><code>                new UserCommandMessage</code> <br/><code>                {</code> <br/><code>                    Severity = SeverityLevel.Normal,</code> <br/><code>                    Text = "Картинка загружена!"</code> <br/><code>                }</code> <br/><code>            }</code> <br/><code>        };</code> <br/><code>        return result;</code> <br/><code>    }</code> <br/><code>}</code> <br/></pre></code></div>
+<p><strong>где:</strong></p>
+<p><strong>Document</strong>   = Атрибут типа документ, куда загружается картинка</p>
+<p><strong>HTML</strong>  = Атрибут типа текст в HTML формате</p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

@@ -1,0 +1,29 @@
+<h1>Calculating child records of all levels of the tree structure</h1><p>In <strong>CMW Platform</strong> it is possible to create mutual links both between record templates and within a single record template, for example, to build a tree structure (works, departments, etc.). This article is applicable in the case of implementing a tree structure of relationships and provides an example of an expression for obtaining all child records of a record, taking into account all levels the tree structure.</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">
+<p style="margin-bottom: 0in;">@prefix object: &lt;http://comindware.com/ontology/object#&gt;.</p>
+<p style="margin-bottom: 0in;">@prefix assert: &lt;http://comindware.com/logics/assert#&gt;.</p>
+<p style="margin-bottom: 0in;">{</p>
+<p style="margin-bottom: 0in;">    ("Projectworks" "Childrenworks") object:findProperty ?CWprop.</p>
+<p style="margin-bottom: 0in;">    ("Projectworks " "Allchildrenworks") object:findProperty ?ACWprop.</p>
+<p style="margin-bottom: 0in;">   </p>
+<p style="margin-bottom: 0in;">    (</p>
+<p style="margin-bottom: 0in;">               {?item ?CWprop ?value.}</p>
+<p style="margin-bottom: 0in;">        {</p>
+<p style="margin-bottom: 0in;">            ?item ?CWprop ?CW.</p>
+<p style="margin-bottom: 0in;">            ?CW ?ACWprop ?value.</p>
+<p style="margin-bottom: 0in;">        }</p>
+<p style="margin-bottom: 0in;">    )assert:union true</p>
+<p style="margin-bottom: 0in;">}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>where</strong><strong>:</strong></p>
+<p><strong><em>Projectworks</em></strong> — the system name of the record template, where the tree structure of the relationships is implemented (in this example, it is “Project Works”);</p>
+<p><strong><em>Childrenworks</em></strong> — the system name of an attribute with the "Record" data type, which is located in the specified record template, refers to it, and which stores the relationship for child records;</p>
+<p><strong><em>Allchildrenworks</em></strong> — the system name of an attribute with the "Record" data type, which is located in the specified record template, and in which this calculation occurs (i.e., we reuse the calculated attribute in which this calculation occurs).</p>

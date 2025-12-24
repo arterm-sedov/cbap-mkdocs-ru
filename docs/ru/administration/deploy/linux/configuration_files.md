@@ -1,13 +1,54 @@
 ---
 title: Конфигурация экземпляра, компонентов ПО и служб. Настройка
 kbId: 5067
+tags:
+    - Linux
+    - администрирование
+    - компоненты
+    - конфигурация
+    - настройка
+    - развёртывание
+    - службы
+    - системные службы
+    - установка
+    - файлы конфигурации
+    - экземпляр
+hide: tags
 ---
 
 # Конфигурация экземпляра, компонентов ПО и служб. Настройка {: #configuration_files_linux }
 
-## Введение
+## Введение {: #configuration_files_linux_intro }
 
 Здесь представлены инструкции по настройке файлов конфигурации после развёртывания и обновления ПО **{{ productName }}**, его компонентов и служб.
+
+## Управление системными службами {: #configuration_files_linux_system_services }
+
+В **{{ productName }} {{ productVersion }}** системные службы настраиваются с помощью [файла конфигурации экземпляра ПО](#configuration_files_linux_instance).
+
+!!! warning "Важно!"
+
+    - Для применения изменений параметров системных служб необходимо перезапустить экземпляр ПО.
+    - По умолчанию все системные службы включены.
+
+!!! note "Обновление конфигурации системных служб с версии 4.7"
+
+    Инструкции по обновлению конфигурации с версий 4.7.x на версию {{ productVersion }} см. в статье _«[Обновление версии экземпляра ПО с его остановкой][upgrade_version_linux]»_.
+
+Ниже перечислены системные службы и соответствующие параметры конфигурации. См. _[Пример файла конфигурации экземпляра ПО](#configuration_files_linux_instance_example)_.
+
+| Системная служба | Назначение | Параметр, значение по умолчанию {: width=320px}|
+| ------------------ | ------------ | ---------------------- |
+| **Резервное копирование** | Управление созданием резервных копий экземпляра ПО | `backup.enabled`<br>`backup.sessionsEnabled: true`<br>`backup.schedulesEnabled: true` |
+| **Получение эл. почты** | Получение новых электронных писем | `email.listenerEnabled: true` |
+| **Отправка эл. почты** | Отправка электронных писем | `email.senderEnabled: true` |
+| **Полнотекстовый поиск** | Индексирование значений атрибутов и обновление поисковых индексов | `search.enabled: true`<br>`search.rebuildingEnabled: true`<br>`search.indexingEnabled: true` |
+| **Уведомления** | Формирование и отправка системных уведомлений | `notifications.enabled: true`<br>`notifications.onUserTaskEnabled: true`<br>`notifications.pushEnabled: true`<br>`notifications.onMaintenanceEnabled: true` |
+| **Бизнес-процессы** | Выполнение бизнес-процессов; обработка таймеров (включая запуск по расписанию и таймерам резервного копирования, интеграция, процессов, синхронизации с сервером каталогов) | `bpms.enabled: true`<br>`bpms.timersEnabled: true` |
+| **Синхронизация с OData** | Синхронизация данных с внешними системами по протоколу OData | `sync.oData.enabled: true`<br>`sync.oData.sessionsEnabled`<br>`sync.oData.schedulesEnabled: true` |
+| **Синхронизация с LDAP** | Синхронизация пользователей и групп с LDAP-сервером | `sync.ldap.enabled: true`<br>`sync.ldap.sessionsEnabled: true`<br>`sync.ldap.schedulesEnabled: true` |
+| **Монитор производительности** | Сбор показателей производительности системы | `sensors.enabled: true` |
+| **Трассировка производительности** | Сбор данных трассировки для анализа производительности | `tracing.enabled: true` |
 
 ## Конфигурация экземпляра ПО {{ productName }} {: #configuration_files_linux_instance }
 
@@ -20,7 +61,9 @@ kbId: 5067
 2. При необходимости измените параметры, например:
 
     - `journal.server` — адрес сервера {{ openSearchVariants }}.
-    - `journal.name` — индекс сервера {{ openSearchVariants }}.
+    - `journal.name` — префикс индекса сервера {{ openSearchVariants }} (необязательно, по умолчанию назначается префикс `cmw<instanceName>`).
+    - `journal.username` — имя пользователя сервера {{ openSearchVariants }} (необязательно).
+    - `journal.password` — пароль сервера {{ openSearchVariants }} (необязательно).
     - `db.workDir` — директория для хранения базы данных экземпляра ПО.
     - `db.name` — префикс кэшей в базе данных экземпляра ПО.
     - `userStorage.localDisk.path` — директория для хранения загруженных файлов.
@@ -42,17 +85,16 @@ kbId: 5067
 
     Здесь значения `<User>` и `<Group>` должны совпадать с такими же параметрами в файле `/usr/lib/systemd/system/comindware<instanceName>.service`
 
-5. Перезапустите службу экземпляра ПО:
+5. Перезапустите службу экземпляра ПО:{% if pdfOutput %} `systemctl restart comindware<instanceName>`{% else %}
 
     ``` sh
     systemctl restart comindware<instanceName>
     ```
-
-### Пример YML-файла конфигурации экземпляра ПО {: .pageBreakBefore }
+{% endif %}
+### Пример YML-файла конфигурации экземпляра ПО {: #configuration_files_linux_instance_example .pageBreakBefore }
 
 <!--instanceYML-start-->
 ``` yaml
-
 ##### Настройка базовых параметров {{ productName }} #####
 # Имя экземпляра {{ productName }}.
 # Устаревшая директива: instanceName
@@ -64,10 +106,19 @@ configPath: <configPath>
 # Адрес службы журналирования {{ openSearchVariants }}.
 # Устаревшая директива: elasticsearchUri
 journal.server: http://<searchHostIP>:<searchHostPort>
-# Индекс службы журналирования.
-# journal.name: <prefix>-<instanceName>
+# Индекс службы журналирования {{ openSearchVariants }}.
+# Допускается использовать только строчные буквы и цифры.
+# Если в имени индекса будут прописные буквы или спецсимволы (например, дефис),
+# служба журналирования автоматически преобразует их в строчные буквы и символы подчёркивания.
+# journal.name: <prefix><instanceName>
+# Имя пользователя службы журналирования
+# journal.username: xxxx
+# Пароль службы журналирования
+# journal.password: xxxx
 # Выключение службы журналирования.
 #journal.enabled: false
+# Выключение проверки валидации сертификатов
+#journal.certificateSkipValidation: false
 # URI-адрес экземпляра {{ productName }}.
 fqdn: <hostName>
 # Порт экземпляра {{ productName }}.
@@ -75,6 +126,11 @@ port: <portNumber>
 # Версия экземпляра {{ productName }}.
 version: <versionNumber>
 
+{% if pdfOutput %}
+```
+{% include-markdown ".snippets/pdfPageBreakHard.md" %}
+``` yaml title="Пример YML-файла конфигурации экземпляра ПО — продолжение"
+{% endif %}
 ##### Настройка базы данных #####
 # Использование тонкого клиента.
 #db.asThinClient: true
@@ -91,7 +147,11 @@ db.workDir: /var/lib/comindware/<instanceName>/Database
 #db.jvmOpts:
 # Настройки Java.
 #db.javaOpts:
+# Включение автоматической активации кластера {{ apacheIgniteVariants }} при запуске.
+# При использовании нескольких узлов рекомендуется отключить на всех узлах.
+#db.baselineAutoActivationEnabledFlag: false
 # Включение автоматической настройки узлов {{ apacheIgniteVariants }}.
+# На всех узлах должно быть одинаковое значение.
 #db.baselineAutoAdjustEnabledFlag: false
 # Время ожидания фактического изменения настройки узлов {{ apacheIgniteVariants }}
 # с момента последнего изменения.
@@ -101,15 +161,32 @@ db.workDir: /var/lib/comindware/<instanceName>/Database
 # Используемый префикс кэшей в базе данных
 # Устаревшая директива: databaseName
 db.name: <instanceName>
+# Вес узла (целочисленное значение) с точки зрения кластера {{ apacheIgniteVariants }}.
+# Суммарный вес всех узлов должен превышать 100.
+# Значение по умолчанию: 100/кол-во узлов.
+#db.weight:
 # Префикс кэшей в базе данных, используемый при обновлении.
 #db.upgradeName:
 # Путь к онтологии {{ companyName }}
 #db.n3Dir:
+# Директива применяется во время апгрейда кэшей. Если флаг не установлен, старые кэши необходимо удалять вручную.
+#db.autoRemoveCachesOnUpgrade: false
+# Директива применяется во время запуска системы. Если флаг установлен, на существующие кэши будет применена новая конфигурация (если она отличается).
+#db.applyCachesConfigsOnStart: false
+# Количество резервных копий для каждого кэша. При db.systemCacheConfig.cacheMode = Replicated не оказывает влияния.
+#db.cacheConfig.backups: 2
+# Тип кэша. Доступные значения: Partitioned | Replicated
+#db.cacheConfig.cacheMode: Replicated
+# Задержка ребалансировки (в секундах) при изменении топологии кластера {{ apacheIgniteVariants }}.
+#db.cacheConfig.rebalanceDelay: 0
+# Тип ребалансировки. Доступные значения: Sync | Async | None
+#db.cacheConfig.rebalanceMode: Async
+# Тип синхронизации данных кэша. Доступные значения: FullSync | FullAsync | PrimarySync
+db.cacheConfig.writeSynchronizationMode: FullSync
 
 {% if pdfOutput %}
 ```
 {% include-markdown ".snippets/pdfPageBreakHard.md" %}
-
 ``` yaml title="Пример YML-файла конфигурации экземпляра ПО — продолжение"
 {% endif %}
 ##### Настройка хранения загруженных файлов #####
@@ -134,8 +211,13 @@ tempStorage.localDisk.path: /var/lib/comindware/<instanceName>/Temp
 # Временная папка
 tempWorkingDir: /var/lib/comindware/<instanceName>/LocalTemp
 
+{% if pdfOutput %}
+```
+{% include-markdown ".snippets/pdfPageBreakHard.md" %}
+``` yaml title="Пример YML-файла конфигурации экземпляра ПО — продолжение"
+{% endif %}
 ##### Настройка очереди сообщений #####
-# Адрес и порт сервера очереди сообщений {{ apacheKafkaVariants }}.
+# Адрес и порт брокера сообщений {{ apacheKafkaVariants }}.
 mq.server: <kafkaBrokerIP>:<kafkaBrokerPort>
 # Идентификатор группы очереди сообщений.
 mq.group: <prefix>-<instanceName>
@@ -150,9 +232,9 @@ mq.node: <instanceName>
 #mq.securityProtocol: Plaintext
 
 ##### Настройка SSL-подключения очереди сообщений #####
-# Путь к файлу корневого сертификата сервера очереди сообщений.
+# Путь к файлу корневого сертификата брокера сообщений.
 #mq.ssl.caLocation:
-# Выключение идентификации адреса сервера очереди сообщений.
+# Выключение идентификации адреса брокера сообщений.
 #mq.ssl.endpointIdentificationEnabled: false 
 
 ##### Настройка SASL-подключения очереди сообщений #####
@@ -166,7 +248,6 @@ mq.node: <instanceName>
 {% if pdfOutput %}
 ```
 {% include-markdown ".snippets/pdfPageBreakHard.md" %}
-
 ``` yaml title="Пример YML-файла конфигурации экземпляра ПО — продолжение"
 {% endif %}
 ##### Настройка очереди сообщений для коммуникации с адаптерами #####
@@ -214,10 +295,15 @@ mq.node: <instanceName>
 # используемые в процессе аутентификации и авторизации в OpenID Connect.
 #auth.openId.audience:
 
+##### Настройки аутентификации #####
+# Минимальная длина пароля пользователя
+#auth.minimalPasswordLength: 14
+# Время истечения сессии пользователя в формате дд.чч:мм:сс  
+#auth.sessionExpirationTime: 00.12:00:00
+
 {% if pdfOutput %}
 ```
 {% include-markdown ".snippets/pdfPageBreakHard.md" %}
-
 ``` yaml title="Пример YML-файла конфигурации экземпляра ПО — продолжение"
 {% endif %}
 ##### Настройка резервного копирования #####
@@ -247,7 +333,7 @@ backup.defaultFileName: <instanceName>
 # Тип хранилища (LocalDisk | S3).
 #backup.default.<backupName>.repository.type: LocalDisk
 # Путь к файлам резервных копий.
-#backup.default.<backupName>.repository.localDisk.path: /var/backups/<iname>
+#backup.default.<backupName>.repository.localDisk.path: /var/backups/<instanceName>
 # Имя корзины S3 для хранения файлов резервных копий.
 #backup.default.<backupName>.repository.s3.bucket:
 # Имя подключения к S3.
@@ -275,7 +361,6 @@ backup.defaultFileName: <instanceName>
 {% if pdfOutput %}
 ```
 {% include-markdown ".snippets/pdfPageBreakHard.md" %}
-
 ``` yaml title="Пример YML-файла конфигурации экземпляра ПО — продолжение"
 {% endif %}
 ##### Настройка дополнительного хранилища для конфигурации резервного копирования по умолчанию #####
@@ -313,6 +398,11 @@ backup.defaultFileName: <instanceName>
 # https://<s3hostname>/bucket-name/key-name
 #s3.<s3ConnectionName>.pathStyleAccess: true
 
+{% if pdfOutput %}
+```
+{% include-markdown ".snippets/pdfPageBreakHard.md" %}
+``` yaml title="Пример YML-файла конфигурации экземпляра ПО — продолжение"
+{% endif %}
 ##### Настройка полнотекстового поиска #####
 # Выключение функции полнотекстового поиска.
 #search.enabled: false
@@ -324,7 +414,6 @@ backup.defaultFileName: <instanceName>
 ##### Настройка сенсоров мониторинга #####
 # Выключение функции сенсоров мониторинга.
 #sensors.enabled: false
-
 ##### Настройка синхронизации аккаунтов с LDAP-сервисом #####
 # Выключение функции синхронизации.
 #sync.ldap.enabled: true
@@ -334,12 +423,6 @@ backup.defaultFileName: <instanceName>
 # Выключение запуска сеансов синхронизации по расписанию.
 #sync.ldap.schedulesEnabled: true
 
-{% if pdfOutput %}
-```
-{% include-markdown ".snippets/pdfPageBreakHard.md" %}
-
-``` yaml title="Пример YML-файла конфигурации экземпляра ПО — продолжение"
-{% endif %}
 ##### Настройка синхронизации данных с OData-сервисом #####
 # Выключение интеграции по OData.
 #sync.oData.enabled: false
@@ -371,6 +454,11 @@ backup.defaultFileName: <instanceName>
 # Выключение отправки уведомлений на страницах обслуживания.
 #notifications.onMaintenanceEnabled: false
 
+{% if pdfOutput %}
+```
+{% include-markdown ".snippets/pdfPageBreakHard.md" %}
+``` yaml title="Пример YML-файла конфигурации экземпляра ПО — продолжение"
+{% endif %}
 ##### Настройка бизнес-процессов #####
 # Выключение функции бизнес-процессов
 #bpms.enabled: false
@@ -397,10 +485,14 @@ backup.defaultFileName: <instanceName>
 # Задайте варианты, которые будут отображаться
 # в меню выбора количества строк таблицы.
 #queryPageResultRange: [ 50, 500, 5000, 1000000000 ]
+
+#################### Настройка аккаунтов ####################
+# Вкл./выкл. для всех пользователей возможность добавления замещений для собственного аккаунта 
+#account.selfSubstitutionsEnabled: true
 ```
 <!--instanceYML-end-->
 
-## Конфигурация службы apigateway {: .pageBreakBefore }
+## Конфигурация службы apigateway {: #configuration_files_linux_apigateway .pageBreakBefore }
 
 1. Откройте файл конфигурации `apigateway.yml` экземпляра ПО для редактирования:
 
@@ -409,7 +501,7 @@ backup.defaultFileName: <instanceName>
     ```
 
 2. Измените необходимые параметры.
-3. Удостоверьтесь, что значение параметра `cluster.name` (имя экземпляра ПО) совпадает с `clusterName` и значение параметров `mq.server` (адрес и порт сервера очереди сообщений), `mq.group` (идентификатор группы очереди сообщений), `mq.node` (идентификатор узла очереди сообщений) — с аналогичными параметрами в [файле конфигурации экземпляра](#configuration_files_linux_instance).
+3. Удостоверьтесь, что значение параметра `cluster.name` (имя экземпляра ПО) совпадает с `clusterName` и значение параметров `mq.server` (адрес и порт брокера сообщений), `mq.group` (идентификатор группы очереди сообщений), `mq.node` (идентификатор узла очереди сообщений) — с аналогичными параметрами в [файле конфигурации экземпляра](#configuration_files_linux_instance).
 4. Сохраните файл конфигурации.
 5. Перезапустите службу `apigateway`:
 
@@ -417,7 +509,7 @@ backup.defaultFileName: <instanceName>
     systemctl restart apigateway<instanceName>
     ```
 
-### Пример конфигурации службы apigateway.yml {: .pageBreakBefore }
+### Пример конфигурации службы apigateway.yml {: #configuration_files_linux_apigateway_example .pageBreakBefore }
 
 <!--apigatewayYML-start-->
 ``` yaml
@@ -429,17 +521,30 @@ cluster.name: <instanceName>
 log.enabled: true
 # Путь к файлу конфигурации журналирования экземпляра
 log.configurationFile: /var/www/<instanceName>/logs.config
-kata.enabled: false
-# Адрес сервера очереди сообщений {{ apacheKafkaVariants }} с портом.
+# Адрес и порт брокера сообщений {{ apacheKafkaVariants }}.
 mq.server: <kafkaBrokerIp>:<kafkaBrokerPort>
 # Идентификатор группы очереди сообщений
 mq.group: <instanceName>
+# Префикс имени очередей сообщений
+mq.name: <instanceName>
 # Идентификатор узла очереди сообщений
 mq.node: <instanceName>
 # Тип механизма SASL. (None | Plain | ScramSha256 | ScramSha512)
 mq.sasl.mechanism: None
+# Имя пользователя, используемое для подключения посредством SASL
+#mq.sasl.username:
+# Пароль для аутентификации, используемый для подключения посредством SASL
+#mq.sasl.password:
 # Протокол безопасности очереди сообщений. (Plaintext | Ssl | SaslPlaintext | SaslSsl)
 mq.securityProtocol: Plaintext
+# Путь к файлу корневого сертификата брокера сообщений
+#mq.ssl.caLocation:
+# Выключение идентификации адреса брокера сообщений
+#mq.ssl.endpointIdentificationEnabled: false
+# Порт для входящих соединений
+#listen.port:
+# Протокол входящих соединений (None, Http1, Http2, Http1AndHttp2)
+listen.protocol: Http1AndHttp2
 # Путь к сокету apigateway
 listen.socketPath: /var/www/<instanceName>/App_Data/apigateway.socket
 # Включение/выключение файлового хранилища  (true | false)
@@ -454,6 +559,14 @@ fileStorage.uploadAttachment.path: /api/Attachment/Upload
 fileStorage.downloadAttachment.path: /api/Attachment/GetReferenceContent/{0}
 # Путь к удалённым файлам
 fileStorage.removeAttachment.path: /api/Attachment/Remove/{0}
+# HTTP-метод отправки файлов в хранилище. (GET | POST | PUT | DELETE)
+#fileStorage.uploadAttachment.method: POST
+# HTTP-метод загрузки файлов из хранилища. (GET | POST | PUT | DELETE)
+#fileStorage.downloadAttachment.method: GET
+# HTTP-метод удаления файлов из хранилища. (GET | POST | PUT | DELETE)
+#fileStorage.removeAttachment.method: DELETE
+# Вкл./выкл. страницы для мониторинга подключений (true | false)
+statusPage.enabled: true
 # Префиксы служб API
 services:
 - apiPrefix: conversation
@@ -463,7 +576,7 @@ services:
 ```
 <!--apigatewayYML-end-->
 
-## Конфигурация службы adapterhost {: .pageBreakBefore }
+## Конфигурация службы adapterhost {: #configuration_files_linux_adapterhost .pageBreakBefore }
 
 1. Откройте файл конфигурации `adapterhost.yml` экземпляра ПО для редактирования:
 
@@ -472,7 +585,7 @@ services:
     ```
 
 2. Измените необходимые параметры.
-3. Удостоверьтесь, что значения параметров `mq.server` (адрес и порт сервера очереди сообщений), `mq.group` (идентификатор группы очереди сообщений), `mq.node` (идентификатор узла очереди сообщений) и `clusterName` (имя экземпляра ПО) совпадают с аналогичными параметрами в [файле конфигурации экземпляра ПО](#пример-yml-файла-конфигурации-экземпляра-по).
+3. Удостоверьтесь, что значения параметров `mq.server` (адрес и порт брокера сообщений), `mq.group` (идентификатор группы очереди сообщений), `mq.node` (идентификатор узла очереди сообщений) и `clusterName` (имя экземпляра ПО) совпадают с аналогичными параметрами в [файле конфигурации экземпляра ПО](#configuration_files_linux_instance_example).
 4. Сохраните файл конфигурации.
 5. После внесения изменений перезапустите службу `adapterhost`:
 
@@ -480,7 +593,7 @@ services:
     systemctl restart adapterhost<instanceName>
     ```
 
-### Пример файла конфигурации adapterhost.yml
+### Пример файла конфигурации adapterhost.yml {: #configuration_files_linux_adapterhost_example }
 
 <!--adapterhostYML-start-->
 ``` yaml
@@ -490,24 +603,32 @@ clusterName: <instanceName>
 loaderFolder: <instanceName>
 # Язык сервера (en-US | ru-RU )
 serverLanguage: ru-RU
-# Адрес и порт сервера очереди сообщений {{ apacheKafkaVariants }}
+# Адрес и порт брокера сообщений {{ apacheKafkaVariants }}
 mq.server: <kafkaBrokerIp>:<kafkaBrokerPort>
-# Протокол безопасности очереди сообщений. (Plaintext | Ssl | SaslPlaintext | SaslSsl)
-mq.securityProtocol: Plaintext
+# Префикс имени очередей сообщений
+mq.name: <instanceName>
+# Идентификатор группы очереди сообщений
+mq.group: <instanceName>
+# Идентификатор узла очереди сообщений
+mq.node: <instanceName>
+# Имя пользователя, используемое для подключения посредством SASL
+mq.sasl.username:
+# Пароль для аутентификации, используемый для подключения посредством SASL
+mq.sasl.password:
 # Тип механизма SASL (None | Plain | ScramSha256 | ScramSha512)
 mq.sasl.mechanism: None
+# Путь к файлу корневого сертификата брокера сообщений
+mq.ssl.caLocation:
+# Выключение/включение идентификации адреса брокера сообщений
+mq.ssl.endpointIdentificationEnabled: true
+# Протокол безопасности очереди сообщений. (Plaintext | Ssl | SaslPlaintext | SaslSsl)
+mq.securityProtocol: Plaintext
 # Путь к файлам журналирования экземпляра ПО
 log.folder: /var/log/comindware/<instanceName>/Logs/
-# Максимальное кол-во файлов журналов
-log.maxArchiveFiles: 100
-# Максимальный размер файлов журналов (байты)
-log.archiveAboveSize: 1048576000
-# Путь к архивам журналов
-log.archiveFolder: /var/log/comindware/<instanceName>/Logs/Archive/
 ```
 <!--adapterhostYML-end-->
 
-## Конфигурация {{ apacheIgniteVariants }} {: .pageBreakBefore }
+## Конфигурация {{ apacheIgniteVariants }} {: #configuration_files_linux_ignite .pageBreakBefore }
 
 1. Откройте файл конфигурации {{ apacheIgniteVariants }} для редактирования:
 
@@ -543,7 +664,7 @@ log.archiveFolder: /var/log/comindware/<instanceName>/Logs/Archive/
     systemctl restart comindware<instanceName>
     ```
 
-## Конфигурация кучи Java {: .pageBreakBefore }
+## Конфигурация кучи Java {: #configuration_files_linux_jvm .pageBreakBefore }
 
 В зависимости от объёма оперативной памяти на сервере следует отредактировать конфигурацию области памяти для кучи Java.
 
@@ -572,7 +693,7 @@ log.archiveFolder: /var/log/comindware/<instanceName>/Logs/Archive/
     systemctl restart comindware<instanceName>
     ```
 
-## Конфигурация {{ nginxVariants }} {: .pageBreakBefore }
+## Конфигурация {{ nginxVariants }} {: #configuration_files_linux_nginx .pageBreakBefore }
 
 1. Откройте файл конфигурации {{ nginxVariants }} для редактирования:
 

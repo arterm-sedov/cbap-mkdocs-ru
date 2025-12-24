@@ -1,14 +1,17 @@
 ---
-title: Отображение картинки  во вложении
+title: 'Отображение картинки  во вложении'
 kbId: 4975
+url: 'https://kb.comindware.ru/article.php?id=4975'
+updated: '2023-08-24 09:08:26'
 ---
 
 # Отображение картинки во вложении
 
 Для отображения картинки, загруженной во вложении, на форме, создайте атрибут типа Текст и введите следующее выражение:
 
-| FORMAT("<p><img src='/DocumentContent?id=document.{0}'/></p>",LIST($Fotokarty)) |
-| --- |
+```
+FORMAT("<p><img src='/DocumentContent?id=document.{0}'/></p>",LIST($Fotokarty))
+```
 
 **где:**
 

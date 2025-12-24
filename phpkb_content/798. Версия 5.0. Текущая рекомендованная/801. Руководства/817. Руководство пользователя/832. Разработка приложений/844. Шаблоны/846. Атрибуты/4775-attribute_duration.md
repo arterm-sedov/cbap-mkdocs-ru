@@ -1,6 +1,8 @@
 ---
-title: Атрибут типа «Длительность»
+title: 'Атрибут типа «Длительность»'
 kbId: 4775
+url: 'https://kb.comindware.ru/article.php?id=4775'
+updated: '2024-07-01 13:44:48'
 ---
 
 # Атрибут типа «Длительность»
@@ -34,7 +36,5 @@ _![Свойства атрибута типа «Длительность»](http
 --8<-- "related_topics_heading.md"
 
 **[Атрибуты. Определения, типы, настройка, архивирование, удаление][attributes]**
-
-
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

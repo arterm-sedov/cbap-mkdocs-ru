@@ -1,0 +1,322 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5139" kb-tags="Elasticsearch,OpenSearch,индексы,журнал изменений,журнал транзакций,журналирование,логирование,реиндексация,решение проблем,устранение неполадок" kb-title="Журнал изменений не записывается. Диагностика и исправление">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#troubleshooting_history_not_written_intro">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#troubleshooting_history_not_written_view_history">
+<span class="md-ellipsis">
+      Где увидеть историю в Comindware Platform
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#troubleshooting_history_not_written_common_causes">
+<span class="md-ellipsis">
+      Частые причины и решения
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#troubleshooting_history_not_written_diagnostic_checklist">
+<span class="md-ellipsis">
+      Быстрый чек-лист диагностики
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#troubleshooting_history_not_written_reindexing">
+<span class="md-ellipsis">
+      Реиндексация индексов по префиксу (локальный OpenSearch (Elasticsearch))
+    </span>
+</a>
+<nav aria-label="Реиндексация индексов по префиксу (локальный OpenSearch (Elasticsearch))" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#troubleshooting_history_not_written_reindexing_script_purpose">
+<span class="md-ellipsis">
+      Назначение скрипта
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#troubleshooting_history_not_written_reindexing_script_keys">
+<span class="md-ellipsis">
+      Ключи скрипта
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#troubleshooting_history_not_written_reindexing_examples">
+<span class="md-ellipsis">
+      Примеры запуска
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#troubleshooting_history_not_written_reindexing_notes">
+<span class="md-ellipsis">
+      Важные примечания
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="troubleshooting_history_not_written_intro">Введение</h2>
+<p><strong>Comindware Platform</strong> использует службу OpenSearch (Elasticsearch) для журналирования транзакций (истории изменений записей и экземпляров процессов).</p>
+<p>Если история транзакций не записывается, например не отображается в <strong>журнале изменений</strong>, причины могут быть связаны с доступностью и состоянием OpenSearch (Elasticsearch), настройками подключения, задержками индексации или некорректным маппингом индексов.</p>
+<p>Здесь представлены инструкции по восстановлению индексов OpenSearch (Elasticsearch) путём реиндексации, если нарушена целостность маппинга индексов.</p>
+<p>Также даны рекомендации по выявлению других возможных причин нарушения записи истории транзакций в OpenSearch (Elasticsearch).</p>
+<p>См. также прикреплённый архив с файлами: <a class="mkdocs_imported_link" href="https://kb.comindware.ru/file.php?id=211">https://kb.comindware.ru/file.php?id=211</a></p>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>Перед любыми изменениями состояния кластера и особенно перед реиндексацией создайте snapshot/резервную копию данных OpenSearch (Elasticsearch).</p>
+</div>
+<div class="notice notice-success">
+<p class="admonition-title">Маппинг индексов</p>
+<ul>
+<li><strong>Маппинг</strong> определяет структуру данных в индексе OpenSearch (Elasticsearch), типы полей и правила индексации.</li>
+<li>Некорректно определённый маппинг ограничивает функциональность OpenSearch (Elasticsearch). Например, конфликты типов (<code>text</code> вместо <code>keyword</code>, неверный <code>date</code> и т. п.) приводят к отказам записи и «пропаже» истории.</li>
+</ul>
+</div>
+<h2 id="troubleshooting_history_not_written_view_history">Где увидеть историю в Comindware Platform</h2>
+<ul>
+<li>Откройте <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4673">Журналы событий</a>»</em> и выберите нужный журнал.</li>
+<li>Для процесса: на <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4723">Диаграмме экземпляра процесса</a>»</em> откройте вкладку <em>«Журнал изменений»</em> и перейдите к цепочке событий.</li>
+</ul>
+<h2 id="troubleshooting_history_not_written_common_causes">Частые причины и решения</h2>
+<ul>
+<li>
+<p><strong>Нет свободного места на диске</strong>: освободите место/расширьте хранилище, затем повторите запись.</p>
+</li>
+<li>
+<p><strong>Превышен лимит шардов</strong>: увеличьте <code>cluster.max_shards_per_node</code> (см. рекомендации по развертыванию) и/или уменьшите число индексов/шардов.</p>
+</li>
+<li>
+<p><strong>Подключение из Comindware Platform настроено неверно</strong>: исправьте URL/учётные данные/префикс и нажмите «Проверить соединение». См. и <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4675">Подключения</a>»</em>.</p>
+</li>
+<li>
+<p><strong>TLS/сертификаты</strong>: при необходимости настройте сертификаты. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4606">Настройка SSL-сертификатов для Elasticsearch</a>»</em>.</p>
+</li>
+<li>
+<p><strong>Маппинг не совпадает/повреждён</strong>: выполните реиндексацию согласно инструкции выше.</p>
+</li>
+</ul>
+<h2 id="troubleshooting_history_not_written_diagnostic_checklist">Быстрый чек-лист диагностики</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Комплексная проверка OpenSearch (Elasticsearch) и Comindware Platform</p>
+<ul>
+<li>
+<p>Журналы OpenSearch (Elasticsearch) на ошибки:</p>
+<ul>
+<li>Типовые признаки: недостаточно места на диске, превышен лимит шардов, ошибки 4xx/5xx при записи.</li>
+<li>Где искать журналы и конфигурацию: см. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a>»</em>.</li>
+</ul>
+</li>
+<li>
+<p>Состояние кластера OpenSearch (Elasticsearch):</p>
+<ul>
+<li>Примеры запросов здоровья кластера (выполните на хосте с доступом к OpenSearch (Elasticsearch)):</li>
+</ul>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-s<span class="w"> </span>http://&lt;host&gt;:9200<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>.</code> <br/><code>curl<span class="w"> </span>-s<span class="w"> </span>http://&lt;host&gt;:9200/_cluster/health?pretty</code> <br/></pre></code></div>
+<ul>
+<li>Оцените статус (green/yellow/red), pending tasks, доступность узлов.</li>
+<li>Дополнительно, проверка здоровья/узлов/очереди задач:</li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="c1"># Хорошо, если "status" : "yellow" или "green"</span></code> <br/><code>curl<span class="w"> </span>-s<span class="w"> </span>http://&lt;host&gt;:9200/_cluster/health?pretty</code> <br/><code><span class="c1"># Хорошо, если отображается ожидаемое количество узлов</span></code> <br/><code>curl<span class="w"> </span>-s<span class="w"> </span>http://&lt;host&gt;:9200/_cat/nodes?v</code> <br/><code></code> <br/><code>curl<span class="w"> </span>-s<span class="w"> </span>http://&lt;host&gt;:9200/_cat/pending_tasks?v</code> <br/></pre></code></div>
+<ul>
+<li>Пояснение по <code>/_cat/pending_tasks</code>:</li>
+<li><strong>Хорошее состояние</strong>: пустой вывод либо 0–2 задачи в очереди; <code>time_in_queue</code> не более 1–2 секунд; <code>priority</code> — <code>low</code> или <code>normal</code>.</li>
+<li><strong>Допустимо временно</strong> (при запуске/ребалансировке): несколько задач <code>shard-started</code>, <code>cluster_reroute</code> и т. п., ожидание до пары минут, при повторном запросе количество задач убывает.</li>
+<li><strong>Плохое состояние</strong>: десятки/сотни задач, очередь растёт, <code>time_in_queue</code> — десятки секунд/минут, приоритет <code>high/urgent</code>, типы <code>reindex</code>/<code>put-mapping</code>/<code>update-settings</code> «висят» долго. Это указывает на перегрузку master-узла, проблемы аллокации шардов, нехватку диска/нод или ошибки конфигурации/плагинов.</li>
+<li><strong>Действия</strong>: проверить <code>/_cluster/health</code>, <code>/_cat/allocation?v</code>, журналы master-узла; убедиться в наличии свободного места и доступных нод; что аллокация не отключена; устранить ошибки и дождаться опустошения очереди.</li>
+</ul>
+</li>
+<li>
+<p>Корректность параметров подключения в Comindware Platform:</p>
+<ul>
+<li>Откройте раздел <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4675">Подключения</a>»</em> и дважды нажмите подключение <em>OpenSearch (Elasticsearch)</em>.</li>
+<li>Проверьте URL, учётные данные (если используются), префикс индексов.</li>
+<li>Нажмите «Проверить соединение» — должно отобразиться «Соединение установлено».</li>
+</ul>
+</li>
+<li>
+<p>Учесть задержку появления событий:</p>
+<ul>
+<li>Внесите тестовое изменение в запись/процесс и подождите 5–10 минут: события истории появляются не мгновенно.</li>
+<li>Для просмотра используйте <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4673">Журналы событий</a>»</em> или <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4723">Цепочку событий</a>»</em>.</li>
+</ul>
+</li>
+<li>
+<p>Индексы и аллокация:</p>
+<ul>
+<li>Через API:</li>
+</ul>
+<p><div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-s<span class="w"> </span>http://&lt;host&gt;:9200/_cat/indices?v</code> <br/><code>curl<span class="w"> </span>-s<span class="w"> </span>http://&lt;host&gt;:9200/_cat/allocation?v</code> <br/></pre></code></div>
+- Через браузер:
+  - Откройте в браузере: <code>http://xxx.xxx.xxx.xxx:9200/_cat/indices</code>
+  - Найдите индекс вида <code>cmw_&lt;instanceName&gt;_suffix</code>.
+  - Перейдите по адресу: <code>http://xxx.xxx.xxx.xxx:9200/cmw_&lt;instanceName&gt;_suffix</code>.
+  - Включите Autoformat (Chrome: Pretty print/Автоформат) и убедитесь, что индекс отдаётся и выглядит корректно.</p>
+</li>
+<li>
+<p>Маппинг и количество документов для конкретного индекса:</p>
+<ul>
+<li>Через API:</li>
+</ul>
+<p><div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-s<span class="w"> </span>http://&lt;host&gt;:9200/cmw_&lt;instanceName&gt;_suffix/_mapping<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>.</code> <br/><code>curl<span class="w"> </span>-s<span class="w"> </span>http://&lt;host&gt;:9200/cmw_&lt;instanceName&gt;_suffix/_count<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>.</code> <br/></pre></code></div>
+- Через браузер (при необходимости дополнительно проверьте):
+  - <code>http://&lt;host&gt;:9200/cmw_&lt;instanceName&gt;_suffix/_mapping</code> — маппинг индекса.
+  - <code>http://&lt;host&gt;:9200/cmw_&lt;instanceName&gt;_suffix/_count</code> — количество документов.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Проверить индексы и их содержимое через браузер</p>
+<ul>
+<li>Откройте в браузере: <code>http://xxx.xxx.xxx.xxx:9200/_cat/indices</code></li>
+<li>Найдите индекс вида <code>cmw_&lt;instanceName&gt;_suffix</code>.</li>
+<li>Перейдите по адресу: <code>http://xxx.xxx.xxx.xxx:9200/cmw_&lt;instanceName&gt;_suffix</code>.</li>
+<li>Включите Autoformat (Chrome: Pretty print/Автоформат) и убедитесь, что индекс отдаётся и выглядит корректно.</li>
+</ul>
+<p>При необходимости дополнительно проверьте:</p>
+<ul>
+<li><code>http://&lt;host&gt;:9200/cmw_&lt;instanceName&gt;_suffix/_mapping</code> — маппинг индекса.</li>
+<li><code>http://&lt;host&gt;:9200/cmw_&lt;instanceName&gt;_suffix/_count</code> — количество документов.</li>
+</ul>
+</li>
+<li>
+<p>Если маппинг некорректен/повреждён — выполнить реиндексацию</p>
+<ul>
+<li>Перед реиндексацией обязательно создайте snapshot.</li>
+<li>Перед реиндексацией важно сверить маппинг с эталоном: выполните <code>GET /&lt;index&gt;/_mapping</code> и сравните с <code>comindware_default_mapping.json</code> (<strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/file.php?id=211">прилагается</a></strong>).</li>
+<li>Убедитесь, что у вас есть валидный JSON с маппингом (например, <code>comindware_default_mapping.json</code>).</li>
+<li>Возьмите префикс индексов из подключения Comindware Platform (UI) — далее он будет использован скриптом.</li>
+</ul>
+</li>
+</ol>
+<h2 id="troubleshooting_history_not_written_reindexing">Реиндексация индексов по префиксу (локальный OpenSearch (Elasticsearch))</h2>
+<p>Ниже кратко описан скрипт и порядок применения.</p>
+<p>См.прикреплённый архив с файлами: <a class="mkdocs_imported_link" href="https://kb.comindware.ru/file.php?id=211">https://kb.comindware.ru/file.php?id=211</a></p>
+<h3 id="troubleshooting_history_not_written_reindexing_script_purpose">Назначение скрипта</h3>
+<ul>
+<li>Найти все индексы по шаблону <code>cmw_&lt;prefix&gt;*</code>.</li>
+</ul>
+<div class="notice notice-warning">
+<p class="admonition-title">Важно!</p>
+<p>Нас интересуют индексы с суффиксами <code>_sln.xx....</code></p>
+</div>
+<ul>
+<li>Для каждого индекса: создать <code>&lt;index&gt;_v2</code> с требуемым маппингом, выполнить reindex туда, пересоздать оригинальный индекс с маппингом, выполнить reindex обратно, сверить количество документов, удалить <code>_v2</code> при совпадении.</li>
+</ul>
+<p>Дополнительно важно учитывать текущее поведение скрипта:</p>
+<ul>
+<li>Если указать префикс без <code>*</code>, скрипт автоматически добавит <code>*</code> при поиске индексов.</li>
+<li>Если <code>&lt;index&gt;_v2</code> существует, он будет удалён перед созданием нового <code>_v2</code>.</li>
+<li>Если <code>&lt;index&gt;</code> является алиасом, алиас временно удаляется со всех индексов, затем выполняется пересоздание индекса.</li>
+<li>Reindex выполняется синхронно (<code>wait_for_completion=true</code>).</li>
+</ul>
+<h3 id="troubleshooting_history_not_written_reindexing_script_keys">Ключи скрипта</h3>
+<ul>
+<li><code>-p | --prefix</code> — префикс Comindware Platform (например, <code>support</code> → ищет индексы <code>cmw_support*</code>).</li>
+<li><code>-ip | --journal_srv_ip</code> — <code>host:port</code> OpenSearch (Elasticsearch) (например, <code>10.0.0.5:9200</code>).</li>
+<li><code>-m | --map-file</code> — путь к JSON с маппингом (поддерживается как голый <code>mappings</code>, так и полный index body).</li>
+</ul>
+<div class="notice notice-info">
+<p class="admonition-title">Зависимость jq</p>
+<p>Скрипт проверяет наличие утилиты <code>jq</code> и при её отсутствии пытается установить её автоматически (через <code>apt-get</code> или <code>dnf</code>). Для установки потребуется <code>sudo</code>.</p>
+<p>Перед запуском скрипта перейдите в режим суперпользователя:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>-s</code> <br/></pre></code></div>
+<p>или</p>
+<div class="highlight"><code><pre><span></span><code>su<span class="w"> </span>-</code> <br/></pre></code></div>
+</div>
+<div class="notice notice-warning">
+<p class="admonition-title">Перед выполнением скрипта реиндексации</p>
+<p>Перед запуском:</p>
+<ul>
+<li>Остановите Comindware Platform.</li>
+<li>Сделайте актуальную резервную копию.</li>
+<li>Для остановки Comindware Platform выберите сервисное окно, когда нагрузка минимальна.</li>
+</ul>
+</div>
+<h3 id="troubleshooting_history_not_written_reindexing_examples">Примеры запуска</h3>
+<ul>
+<li>Локальный узел:</li>
+</ul>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>reindex_local_prefix.sh<span class="w"> </span>-p<span class="w"> </span>&lt;platformPrefix&gt;<span class="w"> </span>-ip<span class="w"> </span>localhost:9200<span class="w"> </span>-m<span class="w"> </span>comindware_default_mapping.json</code> <br/></pre></code></div>
+<ul>
+<li>Удалённый сервер:</li>
+</ul>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>reindex_local_prefix.sh<span class="w"> </span>-p<span class="w"> </span>&lt;platformPrefix&gt;<span class="w"> </span>-ip<span class="w"> </span><span class="m">10</span>.0.0.5:9200<span class="w"> </span>-m<span class="w"> </span>comindware_default_mapping.json</code> <br/></pre></code></div>
+<p>После выполнения реиндексации проверьте результат:</p>
+<ul>
+<li>
+<p>Убедитесь, что схема полей совпадает с эталоном (<code>comindware_default_mapping.json</code>), нет лишних/неверных типов.</p>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-s<span class="w"> </span>http://&lt;host&gt;:9200/&lt;index&gt;/_mapping<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>.</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Проверьте ожидаемое количество документов (не 0 без причины; сопоставимо с до-реиндексным значением).</p>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-s<span class="w"> </span>http://&lt;host&gt;:9200/&lt;index&gt;/_count<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>.</code> <br/></pre></code></div>
+</li>
+</ul>
+<h3 id="troubleshooting_history_not_written_reindexing_notes">Важные примечания</h3>
+<ul>
+<li>Скрипту нужен <code>jq</code>. При наличии <code>apt</code>/<code>dnf</code> он установится автоматически.</li>
+<li>Если кластер использует аутентификацию/HTTPS, потребуется доработать вызовы <code>curl</code> (добавить <code>-u user:pass</code>, <code>--cacert</code>/<code>-k</code> и т. п.).</li>
+<li>Перед запуском сравните актуальный маппинг индексов с эталонным <code>comindware_default_mapping.json</code>. Если маппинги совпадают, реиндексация может не потребоваться.</li>
+</ul>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5122">Установочные скрипты. Назначение и ключи</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4617">Elasticsearch. Установка в базовой конфигурации для Windows</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4612">Развёртывание Elasticsearch без сертификатов подлинности</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4601">Elasticsearch. Установка в базовой конфигурации</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4606">Настройка SSL-сертификатов для Elasticsearch</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4618">Примеры событий в файловых журналах</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4673">Журналы событий. Типы, просмотр, цепочки событий</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4723">Использование диаграммы экземпляра процесса</a></li>
+<li><a class="autorefs autorefs-internal mkdocs_imported_link" href="../business_apps/diagrams/process_diagram/process_error_monitor.html#process_error_monitor">Ошибки в процессе. Отслеживание</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4624">Обновление версии экземпляра ПО с его остановкой</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5097">Обновление версии экземпляра ПО без его остановки</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

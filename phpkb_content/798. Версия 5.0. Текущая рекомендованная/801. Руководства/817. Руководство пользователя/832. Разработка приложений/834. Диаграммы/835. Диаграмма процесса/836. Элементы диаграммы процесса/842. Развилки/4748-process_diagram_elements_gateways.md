@@ -1,11 +1,13 @@
 ---
-title: Развилки. Определение и типы
+title: 'Развилки. Определение и типы'
 kbId: 4748
+url: 'https://kb.comindware.ru/article.php?id=4748'
+updated: '2025-04-10 16:59:44'
 ---
 
 # Развилки. Определение и типы
 
-### Определение
+## Определения
 
 **Развилки** позволяют формировать расходящиеся и сходящиеся [потоки][process_diagram_elements_sequence_flow].
 
@@ -16,8 +18,7 @@ kbId: 4748
 
 --8<-- "related_topics_heading.md"
 
-**[Элементы диаграммы процесса][process_diagram_elements]**
-
-**[Редактирование диаграммы процесса][process_diagram]**
+- *[Элементы диаграммы процесса][process_diagram_elements]*
+- *[Редактирование диаграммы процесса][process_diagram_designer]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

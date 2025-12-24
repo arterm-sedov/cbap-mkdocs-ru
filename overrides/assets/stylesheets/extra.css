@@ -15,14 +15,26 @@
     --md-footer-bg-color: var(--md-primary-fg-color--dark);
     --md-footer-bg-color--dark: #343a40;
     --md-code-hl-comment-color: #65785c;
+    --md-default-fg-color: #000000;
+    --md-typeset-color: var(--md-default-fg-color) !important;
 }
 
-:root {
-    --md-text-font-family: OpenSans, Roboto;
+:root>* {
+    font-weight: 300;
+    /* Uncomment to make the main font 15px matching the KB site */
+    /*font-size: 18.75px;*/
 }
 
+.md-header__topic:first-child {
+    font-weight: 300;
+}
+
+strong {
+    font-weight: bold;
+}
 
 body {
+
     background: white;
     background-image: '';
 }
@@ -128,42 +140,52 @@ body {
     }
 }
 
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6 {
+    color: var(--md-default-fg-color);
+}
+
 .md-typeset .headerlink {
     font-family: "Font Awesome 6 Pro";
 }
 
 .md-typeset .api-method {
     width: 120px;
-    vertical-align: middle!important;
+    vertical-align: middle !important;
     color: white;
-    text-align: center!important;
+    text-align: center !important;
 }
 
 .md-typeset .api-method.get {
-    background: #0f6ab4!important;
+    background: #0f6ab4 !important;
 }
 
 .md-typeset .api-method.post {
-    background: #10a54a!important;
+    background: #10a54a !important;
 }
 
 .md-typeset .api-method.put {
-    background: #c5862b!important;
+    background: #c5862b !important;
 }
 
 .md-typeset .api-method.delete {
-    background: #a41e22!important;
+    background: #a41e22 !important;
 }
 
 @media screen {
 
-    .md-typeset pre code, pre {
+    .md-typeset pre code,
+    pre {
         max-height: 360px;
     }
 
 }
 
-.md-typeset .relatedTopics ul li{
+.md-typeset .relatedTopics ul li {
     font-style: italic;
 }
 
@@ -177,4 +199,37 @@ body {
 
 .md-typeset p:empty {
     display: none;
+}
+
+
+
+.md-typeset td pre {
+
+    @media (min-width: 1600px) {
+        max-width: 600px;
+    }
+
+    @media (max-width: 1599px) {
+        max-width: 540px;
+    }
+
+    @media (max-width: 1219px) {
+        max-width: 7800px;
+    }
+
+    @media (max-width: 1055px) {
+        max-width: 55vw;
+    }
+
+    @media (max-width: 959px) {
+        max-width: 78vw;
+    }
+
+    @media (max-width: 800px) {
+        max-width: 70vw;
+    }
+
+    @media (max-width: 559px) {
+        max-width: 55vw;
+    }
 }

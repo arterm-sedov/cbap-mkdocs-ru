@@ -1,70 +1,174 @@
-<h1>Атрибут типа «Список значений». Вычисление текущего значения</h1><div class="mce-toc">
-<h2 class="toc-heading">Содержание</h2>
-<ul>
-<li><a href="#mcetoc_1haudd0m51">Прикладная задача</a></li>
-<li><a href="#mcetoc_1haudcrcv0">Практический пример</a>
-<ul>
-<li><a href="#mcetoc_1haudv9rn2">Синтаксис формулы</a></li>
-</ul>
+<h1>Атрибут типа «Список значений». Вычисление текущего значения</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4913">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
 </li>
-<li><a href="#mcetoc_1hl3srb011">Связанные статьи</a></li>
-<li><a href="#mcetoc_1hl3sqvlm0">Атрибут типа «Список значений». Вычисление значения по справочнику</a></li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#прикладная-задача">
+<span class="md-ellipsis">
+      Прикладная задача
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-приложения">
+<span class="md-ellipsis">
+      Настройка приложения
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#тестирование">
+<span class="md-ellipsis">
+      Тестирование
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
 </ul>
 </div>
-<h2 id="mcetoc_1haudd0m51">Прикладная задача</h2>
-<p>В приложении может потребоваться определить (или сравнить с требуемым) значение атрибута типа «<a href="https://kb.comindware.ru/article.php?id=4779"><strong>Список значений</strong></a>».</p>
-<p>Для этого следует использовать функции <code>ENUMVALUE()</code>, <code>ID()</code> и <code>EQUALS()</code>.</p>
-<p>Атрибут типа «<strong>Список значений</strong>» хранит ID своего текущего значения. Поэтому в формуле необходимо использовать функцию <code>ID()</code>, которая приводит тип <code>string</code> к типу <code>id</code>, чтобы функция <code>EQUALS()</code> сравнивала значения одного типа.</p>
-<h2 id="mcetoc_1haudcrcv0">Практический пример</h2>
-<p><strong><span data-markjs="true">Конфигурация</span> <span data-markjs="true">приложения</span></strong></p>
-<ul style="list-style-type: disc;">
-<li style="list-style-type: circle;">Атрибут <em>«Статус претензии»</em>
-<ul style="list-style-type: disc;">
-<li style="list-style-type: square;"><strong>Системное имя</strong>: <em>ClaimStatus</em></li>
-<li style="list-style-type: square;"><strong>Тип данных</strong>: <strong>список значений</strong></li>
-<li style="list-style-type: square;"><strong>Список значений</strong> 
-<ul style="list-style-type: disc;">
-<li style="list-style-type: square;"><em>Значение 1</em>
-<ul style="list-style-type: disc;">
-<li style="list-style-type: square;"><strong>Системное имя</strong>: <em>Approved</em></li>
-<li><strong>EN</strong>: <em>Claim approved</em></li>
-<li><strong>RU</strong>: <em>Претензия удовлетворена</em></li>
-</ul>
-</li>
-<li style="list-style-type: square;">Значение 2
-<ul style="list-style-type: disc;">
-<li style="list-style-type: square;"><strong>Системное имя</strong>: <em>Rejected</em></li>
-<li><strong>EN</strong>: <em>Claim rejected</em></li>
-<li><strong>RU</strong>: <em>Претензия отклонена</em></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li style="list-style-type: circle;">Атрибут <em>«Претензия рассмотрена»</em> <br/>
-<ul style="list-style-type: disc;">
-<li style="list-style-type: square;"><strong>Тип данных</strong>: <strong>логический</strong></li>
-<li style="list-style-type: square;"><strong>Вычислять по выражению</strong>: флажок установлен</li>
-<li style="list-style-type: square;"><strong style="letter-spacing: 0.2px;">Вычисляемое значение</strong><span style="letter-spacing: 0.2px;">:</span>
-<pre><code><span style="color: #36464e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 13.5px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: #f5f5f5; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">EQUALS($ClaimStatus, ID(ENUMVALUE("ClaimStatus", "Approved")))<br/></span></code></pre>
-или
-<pre><code><span style="color: #36464e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 13.5px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: #f5f5f5; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">EQUALS(FORMAT("{0}",LIST($ClaimStatus)),"Approved")</span></code></pre>
-</li>
-</ul>
-</li>
-</ul>
-<p><strong><span style="letter-spacing: 0.2px;">Результирующее поведение</span></strong></p>
-<p><span style="letter-spacing: 0.2px;">Атрибут </span><em style="letter-spacing: 0.2px;">«Претензия рассмотрена» </em>будет принимать значение <code style="letter-spacing: 0.2px;">true</code> <span style="letter-spacing: 0.2px;"> , если претензия удовлетворена. </span></p>
-<h3 id="mcetoc_1haudv9rn2">Синтаксис формул</h3>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Здесь представлен пример сравнения значения атрибута типа «<strong>Список значений</strong>» с требуемым с помощью <strong>формулы</strong>.</p>
+<p>См. также <em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4779">подробное описание и другие примеры использования атрибута типа «Список значений»</a></em>.</p>
+<div class="notice notice-success">
+<p class="admonition-title">Структура атрибута типа «Список значений»</p>
 <ul>
-<li><code></code><code style="box-sizing: border-box; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 13.5px; color: #36464e !important; word-break: break-word; padding: 0px; background-color: #f5f5f5; border-radius: 0.25rem; font-weight: normal; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">EQUALS()</code><span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;"> — возвращает <code>true</code>, если для атрибута <em>«Статус претензии» </em>задано значение <em>«Претензия удовлетворена»</em>.</span></li>
-<li><code></code><code style="letter-spacing: 0.2px;"><span style="color: #36464e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 13.5px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: #f5f5f5; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">ENUMVALUE("ClaimStatus", "Approved")</span></code><span style="letter-spacing: 0.2px;"> — возвращает строку с ID значения </span><code style="letter-spacing: 0.2px;"><span style="color: #36464e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 13.5px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: #f5f5f5; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">Resolved</span></code><span style="letter-spacing: 0.2px;"> атрибута </span><code style="letter-spacing: 0.2px;"><span style="color: #36464e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 13.5px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: #f5f5f5; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">ClaimStatus</span></code><span style="letter-spacing: 0.2px;">.</span></li>
-<li><code><span style="color: #36464e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 13.5px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: #f5f5f5; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">ID()</span></code> — преобразует полученную строку в идентификатор объекта<span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">.</span></li>
-<li><span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;"><code><span style="color: #36464e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 13.5px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: #f5f5f5; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">LIST($ClaimStatus)</span></code> — возвращает список из одного элемента: значения атрибута <em>«Статус претензии».</em></span></li>
-<li><span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;"><code><span style="color: #36464e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 13.5px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: #f5f5f5; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">FORMAT("{0}"</span></code> — преобразует в строку системное имя значения атрибута <em>«Статус претензии».</em></span></li>
+<li>Атрибут типа «<strong>Список значений</strong>» хранит ID значения, выбранного из предварительно заданного списка.</li>
+<li>Список возможных значений настраивается в свойствах атрибута и не может быть изменён при выполнении приложения.</li>
+<li>Каждое возможное значение содержит:<ul>
+<li><strong>Системное имя</strong> значения.</li>
+<li>Отображаемые названия на <strong>русском</strong>, <strong>английском</strong> и <strong>немецком</strong> языках (достаточно указать название на одном языке).</li>
+<li><strong>Цвет</strong> — числовой код <strong>в десятичном формате</strong>. Для поиска кодов цветов и их преобразования из шестнадцатеричной в десятичную форму можно воспользоваться, например, сайтом <a class="mkdocs_imported_link" href="https://convertingcolors.com/">https://convertingcolors.com/</a>.</li>
+<li><strong>Значок</strong> — строка с кодом FontAwesome. Для поиска кодов значков можно воспользоваться встроенной <strong>галереей значков</strong> или сайтом <a class="mkdocs_imported_link" href="https://fontawesome.com/">https://fontawesome.com/</a>.</li>
 </ul>
-<h2 id="mcetoc_1hl3srb011">Связанные статьи</h2>
-<p><strong><a href="https://kb.comindware.ru/article.php?id=4779">Атрибут типа «Список значений»</a></strong></p>
-<p><a href="https://kb.comindware.ru/article.php?id=4916"><strong>Атрибут типа «Список значений». Вычисление значения по справочнику</strong></a></p>
-<p><a class="md-top md-icon mkdocs_imported_link" href="#"><em class="fa-light fa-arrow-up">‌</em> К началу</a></p>
+</li>
+</ul>
+</div>
+<div class="notice notice-tip">
+<p class="admonition-title">Сравнение значения атрибута типа «Список значений» с помощью формулы</p>
+<p>С помощью <strong>формулы</strong> сравнить значение атрибута типа «<strong>Список значений</strong>» с требуемым можно по системному имени значения следующими способами:</p>
+<ul>
+<li>
+<p>равенство</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">$</span><span class="n">EnumAttributeSystemName</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">EnumValueSystemName</span></code> <br/></pre></code></div>
+<p>или</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">EQUALS</span><span class="p">(</span><span class="err">$</span><span class="n">EnumAttributeSystemName</span><span class="o">-&gt;</span><span class="n">cmw</span><span class="p">.</span><span class="n">variantAlias</span><span class="p">,</span><span class="w"> </span><span class="s">"EnumValueSystemName"</span><span class="p">)</span></code> <br/></pre></code></div>
+<p>или</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">EQUALS</span><span class="p">(</span><span class="err">$</span><span class="n">EnumAttributeSystemName</span><span class="p">,</span><span class="w"> </span><span class="n">ENUMVALUE</span><span class="p">(</span><span class="s">"EnumAttributeSystemName"</span><span class="p">,</span><span class="w"> </span><span class="s">"EnumValueSystemName"</span><span class="p">))</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>неравенство</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">$</span><span class="n">EnumAttributeSystemName</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="n">EnumValueSystemName</span></code> <br/></pre></code></div>
+<p>или</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">NOT</span><span class="p">(</span><span class="n">EQUALS</span><span class="p">(</span><span class="err">$</span><span class="n">EnumAttributeSystemName</span><span class="o">-&gt;</span><span class="n">cmw</span><span class="p">.</span><span class="n">variantAlias</span><span class="p">,</span><span class="w"> </span><span class="s">"EnumValueSystemName"</span><span class="p">))</span></code> <br/></pre></code></div>
+<p>или</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">NOT</span><span class="p">(</span><span class="n">EQUALS</span><span class="p">(</span><span class="err">$</span><span class="n">EnumAttributeSystemName</span><span class="p">,</span><span class="w"> </span><span class="n">ENUMVALUE</span><span class="p">(</span><span class="s">"EnumAttributeSystemName"</span><span class="p">,</span><span class="w"> </span><span class="s">"EnumValueSystemName"</span><span class="p">)))</span></code> <br/></pre></code></div>
+</li>
+</ul>
+</div>
+<h2 id="прикладная-задача">Прикладная задача</h2>
+<p>Требуется, чтобы <strong>логический</strong> атрибут <em>«Одобрено»</em> принимал значение <code>true</code>, если для атрибута <em>«Статус претензии»</em> типа «<strong>Список значений</strong>» выбрано значение <em>«Претензия удовлетворена»</em>.</p>
+<h2 id="настройка-приложения">Настройка приложения</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте атрибут <em>«Статус претензии»</em> со следующими свойствами:</p>
+<ul>
+<li><strong>Системное имя</strong>: <em>ClaimStatus</em></li>
+<li><strong>Тип данных</strong>: <strong>список значений</strong></li>
+<li><strong>Список значений</strong></li>
+</ul>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Системное  имя</th>
+<th>EN</th>
+<th>RU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Approved</code></td>
+<td><em>Claim approved</em></td>
+<td><em>Претензия удовлетворена</em></td>
+</tr>
+<tr>
+<td><code>Rejected</code></td>
+<td><em>Claim rejected</em></td>
+<td><em>Претензия отклонена</em></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Создайте атрибут <em>«Одобрено»</em> со следующими свойствами:</p>
+<ul>
+<li><strong>Тип данных: логический</strong></li>
+<li><strong>Вычислять по выражению</strong>: флажок установлен</li>
+<li>
+<p><strong>Вычисляемое значение: формула</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="err">$</span><span class="n">ClaimStatus</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">"Approved"</span></code> <br/></pre></code></div>
+<p>или</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">EQUALS</span><span class="p">(</span><span class="err">$</span><span class="n">ClaimStatus</span><span class="o">-&gt;</span><span class="n">cmw</span><span class="p">.</span><span class="n">variantAlias</span><span class="p">,</span><span class="w"> </span><span class="s">"Approved"</span><span class="p">)</span></code> <br/></pre></code></div>
+<p>или</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">EQUALS</span><span class="p">(</span><span class="err">$</span><span class="n">ClaimStatus</span><span class="p">,</span><span class="w"> </span><span class="n">ENUMVALUE</span><span class="p">(</span><span class="s">"ClaimStatus"</span><span class="p">,</span><span class="w"> </span><span class="s">"Approved"</span><span class="p">))</span></code> <br/></pre></code></div>
+</li>
+</ul>
+</li>
+</ol>
+<div class="notice notice-tip">
+<p class="admonition-title">Синтаксис формул</p>
+<ul>
+<li>Все три варианта формулы возвращают <code>true</code>, если атрибут <em>«Статус претензии»</em> имеет значение <em>«Претензия удовлетворена»</em>.</li>
+<li><code>EQUALS()</code> — принимает два аргумента и возвращает <code>true</code>, если они равны.</li>
+<li><code>$ClaimStatus-&gt;cmw.variantAlias</code> — возвращает строку с системным именем текущего значения атрибута <code>ClaimStatus</code>.</li>
+<li><code>ENUMVALUE("ClaimStatus", "Approved")</code> — возвращает строку с ID значения <code>Approved</code> атрибута <code>ClaimStatus</code>.</li>
+</ul>
+</div>
+<h2 id="тестирование">Тестирование</h2>
+<ol class="colored_numbers_list">
+<li>Создайте запись.</li>
+<li>В поле атрибута <em>«Статус претензии»</em> установите значение <em>«Претензия отклонена»</em>.</li>
+<li>Сохраните запись.</li>
+<li>Поле атрибута <em>«Одобрено»</em> будет пустым.</li>
+<li>В поле атрибута <em>«Статус претензии»</em> установите значение <em>«Претензия удовлетворена»</em>.</li>
+<li>Сохраните запись.</li>
+<li>В поле атрибута <em>«Одобрено»</em> будет установлен флажок.</li>
+</ol>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4779">Атрибут типа «Список значений»</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4916">Атрибут типа «Список значений». Вычисление значения по справочнику</a></em></li>
+</ul>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

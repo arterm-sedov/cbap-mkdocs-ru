@@ -1,0 +1,36 @@
+<h1>Exporting Selected Records from a Custom Table</h1><p>This script is designed to download selected records from the table, taking into account user settings. That is, the user selects the columns and records that should be uploaded to Excel. Records are selected with a checkmark in the leftmost column, and columns are configured through the "<strong><em>My settings</em></strong>"-&gt; "<strong><em>Customize display</em></strong>" button.</p>
+<p>The script works with attributes with data type:</p>
+<ul>
+<li>Boolean;</li>
+<li>Number;</li>
+<li>Duration;</li>
+<li>Text;</li>
+<li>Record;</li>
+<li>Date and time;</li>
+<li>Account.</li>
+</ul>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">
+<p>using System; <br/>using System.Collections.Generic;<br/>using System.Linq;<br/>using Comindware.Data.Entity;<br/>using Comindware.TeamNetwork.Api.Data.UserCommands;<br/>using Comindware.TeamNetwork.Api.Data;<br/>using Comindware.TeamNetwork.Api.Data.Forms;<br/>using Comindware.Platform.Api.Data;<br/>using System.IO;<br/>using Aspose.Cells;<br/>using Aspose.Cells.Tables;</p>
+<p>class Script<br/>{<br/>public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)<br/>{<br/>var items = userCommandContext.ObjectIds as string[];<br/>if(items.Count() &gt; 0)<br/>{<br/>try<br/>{<br/>var listId = userCommandContext.Query.DatasetId;<br/>var paging = userCommandContext.Query.Paging;<br/>var sorting = userCommandContext.Query.Sorting;<br/>var filtr = userCommandContext.Query.Filter;<br/>var containerId = Api.Base.OntologyService.GetAxioms(items.First())["container"].First().ToString();<br/>var dataTablts = Api.TeamNetwork.DatasetService.GetQueries(containerId);</p>
+<p>Dataset dataset;<br/>Workbook workbook = new Workbook();<br/>Worksheet wh = workbook.Worksheets[0];</p>
+<p>var style = workbook.CreateStyle();<br/>var flag = new StyleFlag();<br/>flag.NumberFormat = true;</p>
+<p>foreach(var table in dataTablts)<br/>{<br/>table.Paging = paging;<br/>table.Sorting = sorting;<br/>table.Filter = filtr;<br/>if(table.DatasetId == listId)<br/>{<br/>var personaldataset = Api.TeamNetwork.DatasetConfigurationService.GetPersonalDataset(table.DatasetId);<br/>dataset = Api.TeamNetwork.DatasetService.QueryData(table);<br/>var columnsTabale = new Container[personaldataset.Columns.Count()];<br/>var i=0;<br/>foreach(var coll in personaldataset.Columns)<br/>{<br/>if(!coll.IsHidden)<br/>{ <br/>columnsTabale[i] = new Container(coll.DataSourceInfo.Id, i);<br/>wh.Cells[0,i].PutValue(coll.Name);<br/>var prop = coll.DataSourceInfo.PropertyPath.Last().ToString();</p>
+<p>if(prop != "id" &amp;&amp; prop != "lastWriteDate" &amp;&amp; prop != "creationDate" &amp;&amp; prop != "archived" &amp;&amp; prop != "creator")<br/>{<br/>var propData = Api.Base.OntologyService.GetAxioms(prop);<br/>prop = propData["propertyType"].Last().ToString();<br/>}</p>
+<p>switch(prop)<br/>{<br/>case "xsd.decimal":<br/>{<br/>style.Number = 1;<br/>wh.Cells.Columns[i].ApplyStyle(style, flag);<br/>}break;<br/>case "lastWriteDate":<br/>{<br/>style.Number = 22;<br/>wh.Cells.Columns[i].ApplyStyle(style, flag);<br/>wh.Cells.Columns[i].Width = 15;<br/>}break;<br/>case "creationDate":<br/>{<br/>style.Number = 22;<br/>wh.Cells.Columns[i].ApplyStyle(style, flag);<br/>wh.Cells.Columns[i].Width = 15;<br/>}break;<br/>case "xsd.dateTime":<br/>{<br/>style.Number = 22;<br/>wh.Cells.Columns[i].ApplyStyle(style, flag);<br/>wh.Cells.Columns[i].Width = 15;<br/>}break;<br/>}<br/>i++;<br/>}<br/>}<br/>var j=1;<br/>var y = 0;<br/>foreach(var coll in dataset.Columns)<br/>{<br/>try<br/>{<br/>var ds = coll.DataSourceInfo.Id;<br/>var t = Array.Find(columnsTabale, x=&gt; x.DS == ds).Id;<br/>columnsTabale[t].Place = y;<br/>}catch{}<br/>y++;<br/>}</p>
+<p>foreach(var row in dataset.Rows)<br/>{<br/>if(Array.Find(items, v =&gt; v == row.Id) != null)<br/>{<br/>var rowData = row.Data;<br/>for(var jj = 0; jj &lt; i; jj++)<br/>{<br/>var ii = columnsTabale[jj].Place;<br/>if(rowData[ii] != null)<br/>{ <br/>if(rowData[ii].GetType() != typeof(Comindware.TeamNetwork.Api.Data.Forms.AccountReference) &amp;&amp; rowData[ii].GetType() != typeof(System.Boolean) &amp;&amp; rowData[ii].GetType() != typeof(Comindware.Platform.Api.Data.Reference))<br/>{<br/>wh.Cells[j,jj].PutValue(rowData[ii]);<br/>}<br/>else if (rowData[ii].GetType() == typeof(Comindware.TeamNetwork.Api.Data.Forms.AccountReference))<br/>{<br/>wh.Cells[j,jj].PutValue(((AccountReference)rowData[ii]).Name);<br/>}<br/>else if(rowData[ii].GetType() == typeof(System.Boolean))<br/>{<br/>if((bool)rowData[ii])<br/>{<br/>wh.Cells[j,jj].PutValue("True");<br/>}<br/>else<br/>{<br/>wh.Cells[j,jj].PutValue("False");<br/>}<br/>}<br/>else if(rowData[ii].GetType() == typeof(Comindware.Platform.Api.Data.Reference))<br/>{<br/>wh.Cells[j,jj].PutValue(((Comindware.Platform.Api.Data.Reference)rowData[ii]).Name);<br/>}<br/>}<br/>}<br/>j++;<br/>}<br/>}<br/>ListObject listObject = wh.ListObjects[wh.ListObjects.Add(0,0, j-1,i-1, true)];<br/>}<br/>}</p>
+<p>MemoryStream stream = new MemoryStream();<br/>workbook.Save(stream, SaveFormat.Xlsx);</p>
+<p>var result = new UserCommandResult<br/>{<br/>Success = true,<br/>Commited = true,</p>
+<p>File=new UserCommandFileResult(){<br/>Content = stream.ToArray(),<br/>Name = "File.xlsx"<br/>},</p>
+<p>Messages = new[]<br/>{<br/>new UserCommandMessage<br/>{<br/>Severity = SeverityLevel.Normal,<br/>Text = "Success"<br/>}<br/>} <br/>};<br/>return result;</p>
+<p>}<br/>catch<br/>{<br/>var result1 = new UserCommandResult<br/>{<br/>Success = false,<br/>Commited = true,<br/>Messages = new[]<br/>{<br/>new UserCommandMessage<br/>{<br/>Severity = SeverityLevel.Normal,<br/>Text = "Failure"<br/>}<br/>} <br/>};<br/>return result1;<br/>}<br/>}<br/>else<br/>{<br/>var result1 = new UserCommandResult<br/>{<br/>Success = false,<br/>Commited = true,<br/>Messages = new[]<br/>{<br/>new UserCommandMessage<br/>{<br/>Severity = SeverityLevel.Normal,<br/>Text = "Failure"<br/>}<br/>} <br/>};<br/>return result1;<br/>}<br/>}</p>
+<p>public class Container<br/>{<br/>public int Id {get;set;}<br/>public int Place {get;set;}<br/>public string DS {get;set;}</p>
+<p>public Container(string ds , int id )<br/>{<br/>DS = ds; Id = id;<br/>}<br/>}<br/>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>

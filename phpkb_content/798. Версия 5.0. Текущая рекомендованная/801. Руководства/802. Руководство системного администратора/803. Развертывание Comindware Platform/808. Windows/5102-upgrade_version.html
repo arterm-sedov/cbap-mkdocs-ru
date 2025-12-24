@@ -1,0 +1,445 @@
+<h1>Обновление версии экземпляра ПО в Windows</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5102" kb-title="Обновление версии экземпляра ПО в Windows">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_windows_intro">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_windows_sequence">
+<span class="md-ellipsis">
+      Порядок обновления версии экземпляра ПО
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_windows_notes">
+<span class="md-ellipsis">
+      Примечания по установке
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_windows_prepare">
+<span class="md-ellipsis">
+      Подготовка экземпляра ПО к обновлению
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_windows_install">
+<span class="md-ellipsis">
+      Обновление версии ПО для экземпляра
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="upgrade_version_windows_intro">Введение</h2>
+<p>Здесь представлены инструкции по обновлению версии экземпляра ПО <strong>Comindware Platform</strong> на одном и том же сервере с остановкой экземпляра.</p>
+<p>Инструкции даны для обновления с версий 4.7.2 до версий 4.7.3–5.0 в ОС Windows.</p>
+<div class="notice notice-tip">
+<p class="admonition-title">Совет</p>
+<p>Этот способ можно использовать, если ПО <strong>Comindware Platform</strong> развёрнуто на одной машине и нет возможности развернуть новую машину для экземпляра ПО новой версии.</p>
+</div>
+<h2 id="upgrade_version_windows_sequence">Порядок обновления версии экземпляра ПО</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Подготовьте экземпляр ПО к обновлению:</p>
+<ul>
+<li>Создайте резервную копию экземпляра ПО.</li>
+<li>Сохраните конфигурацию экземпляра ПО и вспомогательных служб.</li>
+<li>Остановите экземпляр ПО и вспомогательные службы.</li>
+<li>Удалите компоненты старой версии ПО.</li>
+<li>Переместите директорию с базой данных экземпляра ПО в резервную директорию.</li>
+</ul>
+</li>
+<li>
+<p>Обновите версию экземпляра ПО:</p>
+<ul>
+<li>Скачайте и распакуйте два дистрибутива: вспомогательного ПО и новой версии ПО.</li>
+<li>Убедитесь, что установлены все необходимые компоненты вспомогательного ПО.</li>
+<li>Установите новую версию ПО.</li>
+<li>Удалите экземпляр ПО старой версии</li>
+<li>Создайте экземпляр ПО новой версии.</li>
+<li>Обновите конфигурацию экземпляра ПО и вспомогательных служб.</li>
+<li>Перезапустите экземпляр ПО и вспомогательные службы.</li>
+<li>Инициализируйте экземпляр ПО.</li>
+<li>Остановите экземпляр ПО.</li>
+<li>Скопируйте в экземпляр ПО ранее перемещённую директорию с базой данных.</li>
+<li>Запустите экземпляр ПО.</li>
+<li>Обновите структуру данных до новой версии.</li>
+<li>Снова перезапустите экземпляр ПО.</li>
+</ul>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="upgrade_version_windows_notes">Примечания по установке</h2>
+<div class="notice notice-info">
+<p class="admonition-title">Пути к файлам и директориям</p>
+<p>Используемые по умолчанию пути к файлам ПО <strong>Comindware Platform</strong> см. в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a>»</em>.</p>
+<p>В вашей конфигурации могут использоваться другие пути, поэтому внимательно подставляйте фактические пути в команды при выполнении инструкций.</p>
+</div>
+<div class="notice notice-tip">
+<p class="admonition-title">Вызов справки для скриптов</p>
+<p>Ключ <code>-h</code> позволяет просмотреть справку по ключам и назначению любого скрипта для развёртывания <strong>Comindware Platform</strong>.</p>
+<p>Используйте его без других ключей, например:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\\</span><span class="n">version_install</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-h</span></code> <br/></pre></code></div>
+</div>
+<div class="notice notice-tip">
+<p class="admonition-title">Обязательные ключи для скриптов</p>
+<p>Если не указать обязательный ключ, скрипт запросит его после запуска.</p>
+</div>
+<div class="notice notice-info">
+<p class="admonition-title">Условные обозначения</p>
+<p>Значения, которые вы должны подставить согласно своей конфигурации, заключены в угловые скобки: </p>
+<ul>
+<li><code>&lt;instanceName&gt;</code> — имя экземпляра ПО;</li>
+<li><code>&lt;portNumber&gt;</code> —  номер порта;</li>
+<li><code>&lt;versionNumber&gt;</code> — номер версии ПО вида <code>X.X.XXXX.X</code> (например: <code>5.0.1234.0</code>);</li>
+<li><code>&lt;prerequisitesDistPath&gt;</code> — путь к распакованному дистрибутиву вспомогательного ПО;</li>
+<li>
+<p><code>&lt;distPath&gt;</code> — путь к распакованному дистрибутиву ПО <strong>Comindware Platform</strong>.</p>
+</li>
+<li>
+<p><code>&lt;config_backup_path&gt;</code> — путь к папке для сохранения резервных копий файлов конфигурации (например, <code>X:\\backups\\config_tmp</code>).</p>
+</li>
+<li><code>&lt;iis-config-backup&gt;</code> — имя резервной копии конфигурации IIS.</li>
+<li><code>&lt;instanceAppPool&gt;</code> — имя пула приложений для экземпляра ПО.</li>
+<li><code>&lt;ГГГГ-ММ-ДД&gt;</code> — текущая дата.</li>
+</ul>
+</div>
+<p><a class="mkdocs_imported_link" href="" id="powershell_execution_policy"></a></p>
+<div class="notice notice-tip">
+<p class="admonition-title">Политика выполнения PowerShell</p>
+<p>В зависимости от конфигурации вашей системы для выполнения скриптов из дистрибутива <strong>Comindware Platform</strong> может потребоваться установить неограниченную политику выполнения <em>PowerShell</em>. Для этого может выполните указанные ниже действия.</p>
+<ol class="colored_numbers_list">
+<li>Запустите <em>PowerShell</em>.</li>
+<li>
+<p>Определите текущую политику выполнения <em>PowerShell</em>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">Get-ExecutionPolicy</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Если политика отличается от <code>Unrestricted</code>, установите неограниченную политику выполнения <em>PowerShell</em>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">Set-ExecutionPolicy</span> <span class="n">Unrestricted</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>В запросе на изменение политики выберите вариант «<strong>Да для всех</strong>», введя букву <span class="keys"><kbd class="key-a">A</kbd></span>.</p>
+</li>
+</ol>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>По окончании работы с дистрибутивом <strong>Comindware Platform</strong> верните исходную политику выполнения <em>PowerShell</em>.</p>
+</div>
+</div>
+<h2 class="pageBreakBefore" id="upgrade_version_windows_prepare">Подготовка экземпляра ПО к обновлению</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>Выполните подготовительные действия отдельно для каждого экземпляра ПО, версию которого требуется обновить.</p>
+</div>
+<ol class="colored_numbers_list">
+<li>Создайте и перенесите во внешнее хранилище резервную копию базы данных экземпляра ПО. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642#backup_configure_list_view">Настройка конфигураций и запуск резервного копирования</a>»</em>.</li>
+<li>Запустите <em>PowerShell</em> от имени администратора.</li>
+<li>
+<p id="ConfigBackup">Сохраните резервную копию конфигурации экземпляра ПО и вспомогательных служб:</p>
+<ul>
+<li>
+<p>Создайте директорию для резервных копий файлов конфигурации:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">New-Item</span> <span class="n">-Path</span> <span class="s2">"&lt;config_backup_path&gt;"</span> <span class="n">-ItemType</span> <span class="s2">"Directory"</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Скопируйте все файлы <code>.yml</code> и <code>.config</code> в директорию <code>&lt;config_backup_path&gt;</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">Copy-Item</span> <span class="n">-Path</span> <span class="s2">"C:\\ProgramData\\сomindware\\Instances\\&lt;instanceName&gt;\\сonfig\\*"</span> <span class="n">-Destination</span> <span class="s2">"&lt;config_backup_path&gt;"</span> <span class="n">-Recurse</span> <span class="n">-Include</span> <span class="s2">"*.yml"</span><span class="p">,</span> <span class="s2">"*.config"</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Сохраните резервную копию файла конфигурации экземпляра ПО <code>&lt;instanceName&gt;.yml</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">Copy-Item</span> <span class="n">-Path</span> <span class="s2">"C:\\ProgramData\\comindware\\configs\\instance\\&lt;instanceName&gt;.yml"</span> <span class="n">-Destination</span> <span class="s2">"&lt;config_backup_path&gt;"</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Создайте резервную копию конфигурации IIS:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd </span><span class="n">c</span><span class="p">:\\</span><span class="n">Windows</span><span class="p">\\</span><span class="n">system32</span><span class="p">\\</span><span class="n">inetsrv</span></code> <br/><code><span class="n">appcmd</span> <span class="n">add</span> <span class="n">backup</span> <span class="s2">"&lt;iis-config-backup&gt;"</span></code> <br/></pre></code></div>
+<p>Удостоверьтесь, что после выполнения этой команды в папке <code>c:\\Windows\\system32\\inetsrv\\backup</code> появилась папка <code>&lt;iis-config-backup&gt;</code>.</p>
+</li>
+<li>
+<p>Сохраните резервную копию конфигурации Java из следующих переменных среды (например, скопируйте их в текстовый файл):</p>
+<ul>
+<li><code>JAVA_HOME</code> — путь к исполняемым файлам Open JDK.</li>
+<li><code>JAVA_HOME_DLL</code> — путь к DLL-файлу Open JDK.</li>
+<li><code>JAVA_OPTS</code> — начальный и максимальный объёмы памяти, выделенные для Java.</li>
+<li><code>JVM_OPTS</code> — конфигурация запуска виртуальной машины Java</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Остановите экземпляр ПО и вспомогательные службы и удостоверьтесь, что они остановлены</p>
+<ul>
+<li>
+<p>Перейдите в директорию со скриптами для развёртывания ПО <strong>Comindware Platform</strong>:
+    <div class="highlight"><code><pre><span></span><code><span class="nb">cd </span><span class="s2">"&lt;distPath&gt;\\CMW_Windows&lt;versionNumber&gt;\\scripts"</span></code> <br/></pre></code></div></p>
+</li>
+<li>
+<p>Остановите экземпляр ПО, службу <code>adapterhost</code> и службу <code>apigateway</code> :</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\\</span><span class="n">instance_stop</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span></code> <br/><code><span class="p">.\\</span><span class="n">adapterhost_stop</span><span class="p">.</span><span class="n">ps1</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span></code> <br/><code><span class="p">.\\</span><span class="n">apigateway_stop</span><span class="p">.</span><span class="n">ps1</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span></code> <br/></pre></code></div>
+</li>
+</ul>
+</li>
+<li>
+<p>Проверьте статус экземпляра ПО в IIS:</p>
+<p>Запустите <strong>Диспетчер служб IIS</strong> (Internet Information Services (IIS) Manager):</p>
+<ul>
+<li>В левой древовидной панели <strong>«Подключения»</strong> (Connections), разверните меню с названием своего сервера.</li>
+<li>Выберите <strong>«Пулы приложений»</strong> (Application Pools).</li>
+<li>Убедитесь, что напротив служб <code>Comindware &lt;instanceName&gt;</code>, <code>Comindware &lt;instanceName&gt;_adapterhost</code>, <code>Comindware &lt;instanceName&gt;_apigateway</code> стоит статус «<strong>Остановлено</strong>» (Stopped).</li>
+</ul>
+</li>
+<li>
+<p>Удалите (или переместите в резервное хранилище) неиспользуемые предыдущие дистрибутивы ПО (<code>&lt;distPath&gt;</code> — путь к директории с дистрибутивом, <code>&lt;versionNumber&gt;</code> — версия ПО):</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">Remove-Item</span> <span class="p">&lt;</span><span class="n">distPath</span><span class="p">&gt;\\</span><span class="n">CMW_Windows</span><span class="p">&lt;</span><span class="n">versionNumber</span><span class="p">&gt;</span> <span class="n">-Recurse</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Сохраните резервную копию директории с базой данных экземпляра ПО:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">Copy-Item</span> <span class="n">-Path</span> <span class="s2">"C:\\ProgramData\\сomindware\\Instances\\&lt;instanceName&gt;\\Database"</span> <span class="n">-Destination</span> <span class="s2">"&lt;config_backup_path&gt;"</span> <span class="n">-Recurse</span></code> <br/></pre></code></div>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="upgrade_version_windows_install">Обновление версии ПО для экземпляра</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>Если при обновлении <a class="mkdocs_imported_link" href="#dataUpgrade">на шаге 28</a> будут обнаружены ошибки, не продолжайте обновление, установите старую версию ПО, восстановите экземпляр ПО из резервной копии и обратитесь в службу поддержки <strong>Comindware</strong>.</p>
+</div>
+<div class="notice notice-info">
+<p class="admonition-title">Обновление нескольких экземпляров ПО</p>
+<p>Выполните приведённые ниже шаги 9–21 для каждого экземпляра ПО, версию которого требуется обновить, так как скрипт обновления выполняется отдельно для указанного экземпляра ПО.</p>
+<p>После обновления всех экземпляров ПО для экономии места старую версию ПО можно удалить согласно инструкции <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5063#deploy_guide_windows_version_delete">Удаление версии ПО</a>»</em>.</p>
+</div>
+<ol class="colored_numbers_list">
+<li>Скачайте и распакуйте дистрибутив с новой версией вспомогательного ПО для <strong>Comindware Platform</strong>.</li>
+<li>Запустите <em>PowerShell</em> от имени администратора.</li>
+<li>При необходимости установите неограниченную политику выполнения <em>PowerShell</em>. См. <em>«<a class="mkdocs_imported_link" href="#powershell_execution_policy">Политика выполнения PowerShell</a>»</em>.</li>
+<li>
+<p>Перейдите в директорию со скриптами для развёртывания вспомогательного ПО:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd </span><span class="s2">"&lt;prerequisitesDistPath&gt;\\CMW_Windows&lt;versionNumber&gt;\\scripts"</span></code> <br/></pre></code></div>
+<p>Здесь <code>&lt;prerequisitesDistPath&gt;</code> — путь к распакованному дистрибутиву вспомогательного ПО (например, <code>&lt;distPath&gt;\\X.X-release-ru-&lt;versionNumber&gt;.prerequisites.windows</code>).</p>
+</li>
+<li>
+<p>Разблокируйте доступ к скачанным из интернета установочным файлам:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\\</span><span class="n">files_unblock</span><span class="p">.</span><span class="n">ps1</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Проверьте, что установлены все компоненты вспомогательного ПО:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\\</span><span class="n">prerequisites_list</span><span class="p">.</span><span class="n">ps1</span></code> <br/></pre></code></div>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>Важно, чтобы были установлены все компоненты вспомогательного ПО.</p>
+<p>Если каких-либо компонентов не хватает, то установите вспомогательное ПО:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\\</span><span class="n">prerequisites_install</span><span class="p">.</span><span class="n">ps1</span></code> <br/></pre></code></div>
+</div>
+</li>
+<li>
+<p>Скачайте и распакуйте архив с дистрибутивом новой версией ПО.</p>
+</li>
+<li>В запросе на изменение политики выберите вариант «<strong>Да для всех</strong>», введя букву <span class="keys"><kbd class="key-a">A</kbd></span>.</li>
+<li>
+<p>Перейдите в директорию со скриптами для развёртывания ПО <strong>Comindware Platform</strong>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd </span><span class="s2">"&lt;distPath&gt;\\CMW_Windows&lt;versionNumber&gt;\\scripts"</span></code> <br/></pre></code></div>
+<p>Здесь: <code>&lt;distPath&gt;</code> — путь к распакованному дистрибутиву ПО <strong>Comindware Platform</strong> (например, <code>&lt;distPath&gt;\\X.X-release-ru-&lt;versionNumber&gt;.windows</code>).</p>
+</li>
+<li>
+<p>Разблокируйте доступ к скачанным из нтернета установочным файлам:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\\</span><span class="n">files_unblock</span><span class="p">.</span><span class="n">ps1</span> </code> <br/></pre></code></div>
+</li>
+<li>
+<p>Установите новую версию ПО:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\\</span><span class="n">version_install</span><span class="p">.</span><span class="n">ps1</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Удостоверьтесь, что ПО установлено, вызвав список установленных версий ПО:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\\</span><span class="n">version_list</span><span class="p">.</span><span class="n">ps1</span></code> <br/></pre></code></div>
+<p>Пример списка установленных версий ПО:</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">Running</span> <span class="n">script</span> <span class="n">version_list</span><span class="p">.</span><span class="n">ps1</span><span class="p">.</span></code> <br/><code><span class="p">====================================================================</span></code> <br/><code><span class="n">Source</span> <span class="n">folder</span><span class="p">:</span> <span class="n">C</span><span class="p">:\\</span><span class="n">Program</span> <span class="n">Files</span><span class="p">\\</span><span class="n">Comindware</span><span class="p">\\</span><span class="n">CBAP</span></code> <br/><code><span class="p">====================================================================</span></code> <br/><code><span class="n">Version</span></code> <br/><code><span class="p">====================================================================</span></code> <br/><code><span class="n">5</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">13286</span><span class="p">.</span><span class="n">0</span></code> <br/><code><span class="n">5</span><span class="p">.</span><span class="n">0</span><span class="p">.</span><span class="n">13334</span><span class="p">.</span><span class="n">0</span></code> <br/><code></code> <br/><code><span class="c">####################################################################</span></code> <br/><code><span class="n">Command</span> <span class="n">executed</span><span class="p">.</span></code> <br/><code><span class="n">Complete</span> <span class="n">script</span> <span class="n">version_list</span><span class="p">.</span><span class="n">ps1</span><span class="p">.</span></code> <br/><code><span class="c">####################################################################</span></code> <br/><code><span class="n">Status</span><span class="p">:</span> <span class="n">Completed</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Удалите экземпляр ПО старой версии:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\\</span><span class="n">instance_delete</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span> <span class="n">-clear</span></code> <br/></pre></code></div>
+<p>Ключи:</p>
+<ul>
+<li><code>-name</code> — имя экземпляра.</li>
+<li><code>-clear</code> — удалить следующие объекты:<ul>
+<li>все файлы, папки, базу данных и пользовательские файлы экземпляра ПО;</li>
+<li>директорию экземпляра ПО вида <code>C:\\ProgramData\\Comindware\\Instances\\&lt;instanceName&gt;</code>;</li>
+<li>все службы экземпляра ПО;</li>
+<li>сайт и пул приложения из IIS.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Создайте экземпляр ПО новой версии:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\\</span><span class="n">instance_create</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span> <span class="n">-port</span> <span class="p">&lt;</span><span class="n">portNumber</span><span class="p">&gt;</span> <span class="n">-version</span> <span class="p">&lt;</span><span class="n">versionNumber</span><span class="p">&gt;</span></code> <br/></pre></code></div>
+<p>Ключи:</p>
+<ul>
+<li><code>-name</code> — имя экземпляра;</li>
+<li><code>-version</code> — номер версии ПО;</li>
+<li><code>-port</code> (необязательно) — порт для экземпляра ПО (по умолчанию: 80).</li>
+</ul>
+</li>
+<li>
+<p>По окончании создания экземпляра ПО скрипт выведет информацию об установленных службах. При наличии ошибок исправьте конфигурацию, как указано ниже, и перезапустите службу.</p>
+</li>
+<li>
+<p>Восстановите конфигурацию IIS для экземпляра ПО из резервной копии:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd </span><span class="n">c</span><span class="p">:\\</span><span class="n">Windows</span><span class="p">\\</span><span class="n">system32</span><span class="p">\\</span><span class="n">inetsrv</span><span class="p">\\</span></code> <br/><code><span class="n">appcmd</span> <span class="n">restore</span> <span class="n">backup</span> <span class="s2">"&lt;iis-config-backup&gt;"</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Перезапустите службу IIS для применения изменений:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">Restart-WebAppPool</span> <span class="n">-Name</span> <span class="p">&lt;</span><span class="n">instanceAppPool</span><span class="p">&gt;</span></code> <br/></pre></code></div>
+<p>Здесь <code>&lt;instanceAppPool&gt;</code> — имя пула приложений для экземпляра ПО.</p>
+</li>
+<li>
+<p>Отредактируйте файлы конфигурации экземпляра ПО и вспомогательных служб в соответствии с резервными копиями, <a class="mkdocs_imported_link" href="#ConfigBackup">сохранёнными ранее</a>:</p>
+<ul>
+<li><code>C:\\ProgramData\\сomindware\\Instances\\&lt;instanceName&gt;\\сonfig\\adapterhost.yml</code></li>
+<li><code>C:\\ProgramData\\сomindware\\Instances\\&lt;instanceName&gt;\\сonfig\\apigateway.yml</code></li>
+<li><code>C:\\ProgramData\\сomindware\\Instances\\&lt;instanceName&gt;\\сonfig\\Ignite.config</code></li>
+<li><code>C:\\ProgramData\\сomindware\\configs\\instance\\&lt;instanceName&gt;.yml</code></li>
+</ul>
+</li>
+<li>
+<p>Восстановите локальные переменные среды согласно сохранённым резервным копиям:</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">rundll32</span> <span class="n">sysdm</span><span class="p">.</span><span class="n">cpl</span><span class="p">,</span><span class="n">EditEnvironmentVariables</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Перезапустите службы, настройки которых были изменены, например:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd </span><span class="s2">"&lt;distPath&gt;\\CMW_Windows&lt;versionNumber&gt;\\scripts"</span></code> <br/><code><span class="p">.\\</span><span class="n">instance_stop</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span></code> <br/><code><span class="p">.\\</span><span class="n">apigateway_stop</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span></code> <br/><code><span class="p">.\\</span><span class="n">adapterhost_stop</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\\</span><span class="n">apigateway_start</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span></code> <br/><code><span class="p">.\\</span><span class="n">instance_start</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span></code> <br/><code><span class="p">.\\</span><span class="n">adapterhost_start</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Откройте сайт экземпляра ПО в браузере, одновременно открыв выдачу журналов экземпляра в <em>PowerShell</em>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">Get-Content</span> <span class="s2">"C:\\ProgramData\\comindware\\Instances\\&lt;instanceName&gt;\\Logs\\heartbeat_&lt;ГГГГ-ММ-ДД&gt;.log"</span> <span class="n">-Wait</span></code> <br/></pre></code></div>
+<p>Здесь <code>&lt;ГГГГ-ММ-ДД&gt;</code> — текущая дата.</p>
+<p>См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4623">Подсистема журналирования</a>»</em>.</p>
+</li>
+<li>
+<p>В браузере выполните инициализацию экземпляра ПО, выполните вход и проверьте работоспособность ПО.</p>
+</li>
+<li>
+<p>Остановите экземпляр ПО:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\\</span><span class="n">instance_stop</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Удалите или переименуйте директорию <code>Database</code> в  директории  экземпляра ПО:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">Remove-Item</span> <span class="n">-Path</span> <span class="s2">"C:\\ProgramData\\comindware\\Instances\\&lt;instanceName&gt;\\Database"</span> <span class="n">-Recurse</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Скопируйте в экземпляр ПО <a class="mkdocs_imported_link" href="#ConfigBackup">сохранённую ранее</a> резервную копию директории с базой данных экземпляра ПО:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">Copy-Item</span> <span class="n">-Path</span> <span class="s2">"&lt;config_backup_path&gt;\\Database"</span> <span class="n">-Destination</span> <span class="s2">"C:\\ProgramData\\сomindware\\Instances\\&lt;instanceName&gt;"</span> <span class="n">-Recurse</span> <span class="n">-Force</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Запустите экземпляр ПО:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">.\\</span><span class="n">instance_start</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Откройте сайт экземпляра ПО в браузере, одновременно открыв выдачу журналов экземпляра в <em>PowerShell</em>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">Get-Content</span> <span class="s2">"C:\\ProgramData\\comindware\\Instances\\&lt;instanceName&gt;\\Logs\\heartbeat_&lt;ГГГГ-ММ-ДД&gt;.log"</span> <span class="n">-Wait</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p id="dataUpgrade">Дождитесь завершения обновления структуры данных и проверьте его успешное выполнение.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>При обновлении с версии 4.7.2 на версии 4.7.3-5.0 обновляется структура базы данных.</p>
+<p>После этого необходимо вручную удалить некоторые данные кэша в старом формате.</p>
+<p>Поэтому продолжать обновление версии экземпляра ПО можно только после успешного обновления структуры данных. </p>
+</div>
+<ul>
+<li>Удостоверьтесь, что появились журналы обновления:<ul>
+<li><code>C:\\ProgramData\\сomindware\\Instances\\&lt;instanceName&gt;\\Logs\\UpgradeOntology_&lt;ГГГГ-ММ-ДД&gt;.log</code></li>
+<li><code>C:\\ProgramData\\сomindware\\Instances\\&lt;instanceName&gt;\\Logs\\upgrade&lt;ГГГГ-ММ-ДД&gt;.log</code></li>
+</ul>
+</li>
+<li>Удостоверьтесь, что в журнале <code>UpgradeOntology_&lt;ГГГГ-ММ-ДД&gt;.log</code> последняя запись содержит строку <code>Upgrade of ontology completed successfully</code>.</li>
+<li>Удостоверьтесь, что в журнале <code>upgrade&lt;ГГГГ-ММ-ДД&gt;.log</code> последняя запись содержит строку <code>Upgrade completed</code>.</li>
+<li>Удостоверьтесь, что в журналах отсутствуют ошибки обновления. Найдите их по ключевому слову <code>error</code>.</li>
+<li>Если обновление выполнено успешно, переходите к шагу 29.</li>
+<li>
+<p>Если в журнале обновления имеются ошибки:</p>
+<ol class="colored_numbers_list">
+<li>Не переходите к шагу 29.</li>
+<li>Снова установите для экземпляра старую версию ПО.</li>
+<li>Восстановите базу данных из резервной копии.</li>
+<li>Обратитесь в службу поддержки <strong>Comindware</strong>, предоставив журналы обновления и ошибок для анализа.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p>Создайте резервную копию экземпляра ПО. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642#backup_configure_list_view">Настройка конфигураций и запуск резервного копирования</a>»</em>.</p>
+</li>
+<li>Остановите экземпляр ПО.</li>
+<li>Распакуйте резервную копию.</li>
+<li>
+<p>Перейдите в директорию <code>&lt;dbBackupFolder&gt;\\Database\\db\\node*</code>.</p>
+<p>Здесь <code>&lt;dbBackupFolder&gt;</code> — путь к распакованной резервной копии экземпляра ПО.</p>
+</li>
+<li>
+<p>Удалите из неё следующие директории кэшей:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">Remove-Item</span> <span class="n">cacheGroup</span><span class="p">-*</span><span class="n">-TableIdentity</span> <span class="n">-Recurse</span> <span class="n">-Force</span></code> <br/><code><span class="nb">Remove-Item</span> <span class="n">cacheGroup</span><span class="p">-*</span><span class="n">-TableIdentityReplicated</span> <span class="n">-Recurse</span> <span class="n">-Force</span></code> <br/><code><span class="nb">Remove-Item</span> <span class="n">cacheGroup</span><span class="p">-*</span><span class="n">Value</span> <span class="n">-Recurse</span> <span class="n">-Force</span></code> <br/><code><span class="nb">Remove-Item</span> <span class="n">cacheGroup</span><span class="p">-*</span><span class="n">ValueReplicated</span> <span class="n">-Recurse</span> <span class="n">-Force</span></code> <br/><code><span class="nb">Remove-Item</span> <span class="n">cache-ignite-sys-cache</span> <span class="n">-Recurse</span> <span class="n">-Force</span></code> <br/><code><span class="nb">Remove-Item</span> <span class="nb">cp </span><span class="n">-Recurse</span> <span class="n">-Force</span></code> <br/><code><span class="nb">Remove-Item</span> <span class="n">metastorage</span> <span class="n">-Recurse</span> <span class="n">-Force</span></code> <br/><code><span class="nb">Remove-Item</span> <span class="n">cacheGroup-Keys</span> <span class="n">-Recurse</span> <span class="n">-Force</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Очистите директорию с базой данных экземпляра ПО:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">Remove-Item</span> <span class="n">-Path</span> <span class="s2">"C:\\ProgramData\\comindware\\Instances\\&lt;instanceName&gt;\\Database\\*"</span> <span class="n">-Recurse</span> <span class="n">-Force</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Скопируйте очищенную резервную копию в директорию с базой данных:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">Copy-Item</span> <span class="n">-Path</span> <span class="s2">"&lt;dbBackupFolder&gt;\\Database\\*"</span> <span class="n">-Destination</span> <span class="s2">"C:\\ProgramData\\comindware\\Instances\\&lt;instanceName&gt;\\Database"</span> <span class="n">-Recurse</span> <span class="n">-Force</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Запустите экземпляр ПО.</p>
+</li>
+<li>Откройте сайт экземпляра ПО в браузере, дождитесь его инициализации и выполните вход.</li>
+<li>Проверьте и при необходимости исправьте конфигурацию экземпляра ПО. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4651">Проверка и настройка конфигурации экземпляра ПО Comindware Platform после восстановления из резервной копии</a>»</em>.</li>
+<li>Проверьте и работоспособность экземпляра ПО.</li>
+<li>Создайте резервную копию работоспособного экземпляра <strong>Comindware Platform</strong>.</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5063#deploy_guide_windows_install_prerequisites">Установка вспомогательного ПО</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5063">Установка, запуск, инициализация и остановка Comindware Platform в Windows</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4644">Резервное копирование и восстановление Comindware Platform. Краткое руководство для ОС Windows</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642#backup_configure_list_view">Настройка конфигураций и запуск резервного копирования</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4623">Подсистема журналирования</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4651">Проверка и настройка конфигурации экземпляра ПО Comindware Platform после восстановления из резервной копии</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

@@ -1,6 +1,8 @@
 ---
-title: Пример подзапроса from
+title: 'Пример подзапроса from'
 kbId: 4989
+url: 'https://kb.comindware.ru/article.php?id=4989'
+updated: '2023-08-24 09:12:35'
 ---
 
 # Пример подзапроса from
@@ -9,8 +11,9 @@ kbId: 4989
 
 Для того чтобы применить сразу несколько запросов типа ***from*** (в данном примере выражение находит самый последний план (с самым большим номером), ссылающийся на текущий регламент), введите следующее выражение:
 
-| from a in db->Plan where a->Reglament == $id && EQUALS(MAX((from b in db->Plan  where b->Reglament == $id select b->Nomer)),a->Nomer) select a->id |
-| --- |
+```
+from a in db->Plan where a->Reglament == $id && EQUALS(MAX((from b in db->Plan  where b->Reglament == $id select b->Nomer)),a->Nomer) select a->id
+```
 
 **где:**
 
@@ -20,4 +23,6 @@ kbId: 4989
 
 **Nomer** – системное имя атрибута типа «Число» в Plan.
 
-Вложенных ***from*** может быть сколько угодно. Главное не путать параметры между собой.{% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
+Вложенных ***from*** может быть сколько угодно. Главное не путать параметры между собой.
+
+{% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

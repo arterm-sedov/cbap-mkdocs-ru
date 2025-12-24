@@ -1,6 +1,8 @@
 ---
-title: Zabbix Agent. Инструкции по установке для Windows
+title: 'Zabbix Agent. Инструкции по установке для Windows'
 kbId: 4615
+url: 'https://kb.comindware.ru/article.php?id=4615'
+updated: '2024-06-20 13:11:43'
 ---
 
 # Zabbix Agent. Инструкции по установке для Windows
@@ -55,7 +57,7 @@ _![](https://kb.comindware.ru/assets/img_63bbff44016eb.png)_*Проверка с
 
 ## 3. Добавление Windows-хоста в сеть мониторинга
 
-3.1. Откройте *Zabbix Frontend* (см. статью «[Zabbix Server, Zabbix Agent, Zabbix Frontend и MySQL. Инструкции по установке](app://obsidian.md/Zabbix%20Server,%20Zabbix%20Agent,%20Zabbix%20Frontend%20%D0%B8%20MySQL.%20%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D0%B8%20%D0%BF%D0%BE%20%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B5)».). Для э того в адресной строке браузера наберите: `<http://zabbix-server-ip-address:8080>`
+3.1. Откройте *Zabbix Frontend* (см. статью «[Zabbix Server, Zabbix Agent, Zabbix Frontend и MySQL. Инструкции по установке](app://obsidian.md/Zabbix%20Server,%20Zabbix%20Agent,%20Zabbix%20Frontend%20%D0%B8%20MySQL.%20%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D0%B8%20%D0%BF%D0%BE%20%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B5)».). Для э того в адресной строке браузера наберите: `http://zabbix-server-ip-address:8080`
 3.2. Откройте раздел «**Monitoring**» > «**Hosts**» и нажмите кнопку «**Create host**».
 
 ![Создание хоста](https://kb.comindware.ru/assets/img_63bc000e92138.png)

@@ -1,5 +1,71 @@
 <!-- Любые руководства -->
 
+<!-- Страницы оглавлений в БЗ. Начало -->
+
+[guides_toc]: {{ kbArticleURLPrefix }}4593
+
+[admin_guide_toc]: {{ kbArticleURLPrefix }}4594
+
+[developer_guide_toc]: {{ kbArticleURLPrefix }}4851
+
+[n3_guide_toc]: {{ kbArticleURLPrefix }}4931
+
+[root_toc]: {{ kbArticleURLPrefix }}4594
+
+<!-- Страниц оглавлений в БЗ. Конец -->
+
+<!-- Категории в БЗ. Начало -->
+
+[account_management_cat]: {{ kbCategoryURLPrefix }}813
+
+[account_management_linux_cat]: {{ kbCategoryURLPrefix }}814
+
+[account_management_windows_cat]: {{ kbCategoryURLPrefix }}815
+
+[deploy_cat]: {{ kbCategoryURLPrefix }}803
+
+[deploy_linux_cat]: {{ kbCategoryURLPrefix }}807
+
+[deploy_windows_cat]: {{ kbCategoryURLPrefix }}808
+
+[deploy_auxiliary_cat]: {{ kbCategoryURLPrefix }}804
+
+[deploy_auxiliary_linux_cat]: {{ kbCategoryURLPrefix }}805
+
+[deploy_auxiliary_windows_cat]: {{ kbCategoryURLPrefix }}806
+
+[backup_cat]: {{ kbCategoryURLPrefix }}810
+
+[backup_linux_cat]: {{ kbCategoryURLPrefix }}812
+
+[backup_windows_cat]: {{ kbCategoryURLPrefix }}811
+
+[architect_cat]: {{ kbCategoryURLPrefix }}861
+
+[troubleshooting_cat]: {{ kbCategoryURLPrefix }}887
+
+[examples_cat]: {{ kbCategoryURLPrefix }}871
+
+[expressioons_cat]: {{ kbCategoryURLPrefix }}876
+
+[api_developer_guide_cat]: {{ kbCategoryURLPrefix }}868
+
+[n3_developer_guide_cat]: {{ kbCategoryURLPrefix }}867
+
+[general_cat]: {{ kbCategoryURLPrefix }}799
+
+[integrations_cat]: {{ kbCategoryURLPrefix }}872
+
+[n3_guide_cat]: {{ kbCategoryURLPrefix }}877
+
+[user_guide_cat]: {{ kbCategoryURLPrefix }}817
+
+[admin_guide_cat]: {{ kbCategoryURLPrefix }}802
+
+<!-- Категории в БЗ. Конец -->
+
+[legal_policies]: https://www.comindware.ru/policy/
+
 [apache_ignite_clustering]: https://ignite.apache.org/docs/latest/clustering/clustering
 
 [apache_ignite_partition_loss_policy]: https://ignite.apache.org/docs/latest/configuring-caches/partition-loss-policy
@@ -10,9 +76,25 @@
 
 [apache_ignite_partition_partition_loss_policy]: https://ignite.apache.org/docs/latest/configuring-caches/partition-loss-policy
 
-[api_calls]: {{ kbCategoryURLPrefix }}868
+[browser_push_permissions_chrome_official]: https://support.google.com/chrome/answer/3220216?hl=ru-RU&co=GENIE.Platform%3DDesktop
 
-[attribute_date_time_use]: {{ kbArticleURLPrefix }}4886
+[browser_push_permissions_edge_official]: https://support.microsoft.com/ru-ru/microsoft-edge/управление-уведомлениями-сайтов-в-microsoft-edge-0c555609-5bf2-479d-a59d-fb30a0b80b2b
+
+[browser_push_permissions_firefox_official]: https://support.mozilla.org/ru/kb/veb-push-uvedomleniya-v-firefox
+
+[browser_push_permissions_safari_official]: https://support.apple.com/ru-ru/guide/safari/sfri40734/mac
+
+[browser_push_permissions_yandex_official]: https://yandex.ru/support/common/ru/browsers-settings/notifications
+
+[browser_push_permissions_chrome_official_mobile]: https://support.google.com/chrome/answer/3220216?co=GENIE.Platform%3DAndroid&hl=ru&oco=0
+
+[browser_push_permissions_firefox_official_mobile]: https://support.mozilla.org/ru/kb/upravlenie-opovesheniyami-v-firefox-dlya-android
+
+[browser_push_permissions_opera_official_mobile]: https://help.opera.com/ru/mobile/android/#notifications
+
+[browser_push_permissions_yandex_official_mobile]: https://yandex.ru/support/browser-mobile-android-phone/ru/personal-settings/notifications.html#sites
+
+[iana_timezone_db]: https://www.iana.org/time-zones
 
 [attribute_drawing_file_import]: {{ kbArticleURLPrefix }}4906
 
@@ -25,14 +107,7 @@
 [chevron_stage_render]: {{ kbArticleURLPrefix }}4915
 
 [csharp_examples]: {{ kbCategoryURLPrefix }}883
-
-[csharp_guide]: {{ kbArticleURLPrefix }}4864
-
 [document_digital_signature]: {{ kbArticleURLPrefix }}4910
-
-[example_attribute_record_get_selected_ids]: {{ kbArticleURLPrefix }}5100
-
-[example_n3_button_local_variable]: {{ kbArticleURLPrefix }}4909
 
 [example_csharp_my_profile_button]: {{ kbArticleURLPrefix }}5006
 
@@ -40,19 +115,27 @@
 
 [example_formula_condition_set_value]: {{ kbArticleURLPrefix }}4992
 
+[example_formula_count_records_no_archive]: {{ kbArticleURLPrefix }}4987
+
+[example_email_parse_process_id_from_subject]: {{ kbArticleURLPrefix }}4978
+
+[example_email_parse_address_before_at_sign]: {{ kbArticleURLPrefix }}4983
+
 [example_formula_group_account_calculate]: {{ kbArticleURLPrefix }}4991
 
 [example_n3_account_attributes_compare]: {{ kbArticleURLPrefix }}4932
 
+[example_n3_button_local_variable]: {{ kbArticleURLPrefix }}4909
+
 [example_n3_list_by_creator_filter]: {{ kbArticleURLPrefix }}4933
+
+[example_n3_process_hyperlink_calculate]: {{ kbArticleURLPrefix }}4959
 
 [experessions_intro]: {{ kbArticleURLPrefix }}4930
 
 [export_template_csharp_configure]: {{ kbArticleURLPrefix }}4793
 
 [export_template_csharp_collection_download]: {{ kbArticleURLPrefix }}4792
-
-[formula_context]: {{ kbArticleURLPrefix }}4892
 
 [formula_guide]: {{ kbCategoryURLPrefix }}880
 
@@ -62,15 +145,23 @@
 
 [integration_examples]: {{ kbCategoryURLPrefix }}875
 
-[manual_n3]: {{ kbArticleURLPrefix }}4852
+[n3_guide_graphs]: {{ kbArticleURLPrefix }}4853
 
-[n3_guide]: {{ kbCategoryURLPrefix }}877
+[n3_guide_knowledge_graphs]: {{ kbArticleURLPrefix }}4857
+
+[n3_guide_modelling]: {{ kbArticleURLPrefix }}4854
+
+[n3_guide_notation]: {{ kbArticleURLPrefix }}4858
+
+[n3_guide_ontology]: {{ kbArticleURLPrefix }}4856
+
+[n3_guide_terms_reference]: {{ kbArticleURLPrefix }}4855
+
+[n3_guide_ontology_structure]: {{ kbArticleURLPrefix }}4859
 
 [n3_use_examples]: {{ kbCategoryURLPrefix }}879
 
 [odata-filter-syntax]: https://msdn.microsoft.com/ru-ru/library/hh169248(v=nav.90).aspx
-
-[periodic_task_notifications]: {{ kbArticleURLPrefix }}4905
 
 [apps_kb]: {{ kbCategoryURLPrefix }}832
 
@@ -82,17 +173,19 @@
 
 [account_templates]: {{ kbArticleURLPrefix }}4757
 
-[account_template_attribute_system_names]: {{ kbArticleURLPrefix }}4757#account_template_attribute_system_names
+[accounts_required_unique]: {{ kbArticleURLPrefix }}4653#accounts_required_unique
 
-[accounts]: {{ kbArticleURLPrefix }}4653
+[accounts_substitution]: {{ kbArticleURLPrefix }}4653#accounts_substitution
+
+[accounts_link_to_template]: {{ kbArticleURLPrefix }}4653#accounts_link_to_template
+
+[accounts_timezone_configure]: {{ kbArticleURLPrefix }}4653#accounts_timezone_configure
 
 [account_permission_audit]: {{ kbArticleURLPrefix }}4664
 
 [ad_connection]: {{ kbArticleURLPrefix }}4687
 
-[administration]: {{ kbArticleURLPrefix }}4661
-
-[apps]: {{ kbArticleURLPrefix }}4714
+[authentication_authorization_sessions]: {{ kbArticleURLPrefix }}4656
 
 [backup_configure]: {{ kbArticleURLPrefix }}4642
 
@@ -100,11 +193,11 @@
 
 [backup_recommendations]: {{ kbArticleURLPrefix }}5082
 
+[browser_push_permissions]: {{ kbArticleURLPrefix }}5133
+
 [changelog]: {{ kbArticleURLPrefix }}4589
 
 [collabora_connection]: {{ kbArticleURLPrefix }}4688
-
-[common_notifications]: {{ kbArticleURLPrefix }}4681
 
 [connections_delete]: {{ kbArticleURLPrefix }}4675#connections_delete
 
@@ -130,8 +223,6 @@
 
 [git_connection]: {{ kbArticleURLPrefix }}4680
 
-[global_configuration]: {{ kbArticleURLPrefix }}4668
-
 [groups]: {{ kbArticleURLPrefix }}4654
 
 [licensing]: {{ kbArticleURLPrefix }}4670
@@ -140,23 +231,17 @@
 
 [logging_configuration]: {{ kbArticleURLPrefix }}4667
 
-[logs]: {{ kbArticleURLPrefix }}4673
-
 [logs_event_chain_view]: {{ kbArticleURLPrefix }}4673#logs_event_chain_view
 
-[logs_odata_inegration]: {{ kbArticleURLPrefix }}4673#logs_odata_inegration
+[logs_odata_integration]: {{ kbArticleURLPrefix }}4673#logs_odata_integration
 
 [map_configure]: {{ kbArticleURLPrefix }}4679
 
-[notification_types]: {{ kbArticleURLPrefix }}4682
+[model_templates]: {{ kbArticleURLPrefix }}5149
 
-[monitoring]: {{ kbArticleURLPrefix }}4666
+[n3_filter_active_tasks]: {{ kbArticleURLPrefix }}4935
 
 [navigation_sections_setup]: {{ kbArticleURLPrefix }}4809
-
-[odata_connection]: {{ kbArticleURLPrefix }}4702
-
-[odata_integration]: {{ kbArticleURLPrefix }}4697
 
 [openid_connection]: {{ kbArticleURLPrefix }}4685
 
@@ -164,25 +249,39 @@
 
 [r7_connection]: {{ kbArticleURLPrefix }}4689
 
-[performance]: {{ kbArticleURLPrefix }}4669
+[performance_optimize]: {{ kbArticleURLPrefix }}4712
 
-[process_diagram]: {{ kbArticleURLPrefix }}4721
+[buttons_not_shown]: {{ kbArticleURLPrefix }}5058
 
-[process_diagram_version_control]: {{ kbArticleURLPrefix }}4722
+[calculate_archive_records]: {{ kbArticleURLPrefix }}5048
 
-[process_diagram_view_instance]: {{ kbArticleURLPrefix }}4723
+[extract_form_elements]: {{ kbArticleURLPrefix }}5047
 
-[process_receiving_connection]: {{ kbArticleURLPrefix }}4695
+[hard_read_text_table]: {{ kbArticleURLPrefix }}5050
 
-[process_sending_connection]: {{ kbArticleURLPrefix }}4690
+[invalid_instance_reference]: {{ kbArticleURLPrefix }}5054
 
-[process_templates]: {{ kbArticleURLPrefix }}4758
+[optimize_calculate_attribute]: {{ kbArticleURLPrefix }}5055
 
-[record_templates]: {{ kbArticleURLPrefix }}4759
+[process_fails_several_records]: {{ kbArticleURLPrefix }}5059
+
+[process_id_not_found]: {{ kbArticleURLPrefix }}5052
+
+[process_notify_no_info]: {{ kbArticleURLPrefix }}5051
+
+[process_stuck]: {{ kbArticleURLPrefix }}5056
+
+[record_field_values_not_shown]: {{ kbArticleURLPrefix }}5060
 
 [record_template_properties]: {{ kbArticleURLPrefix }}4759#record_template_properties
 
 [registration_and_login]: {{ kbArticleURLPrefix }}4663
+
+[script_operation_error]: {{ kbArticleURLPrefix }}5057
+
+[table_open_error]: {{ kbArticleURLPrefix }}5049
+
+[view_calculate_attribute_history]: {{ kbArticleURLPrefix }}5053
 
 [release_notes_4.7.4822]: {{ kbArticleURLPrefix }}2611
 
@@ -198,29 +297,17 @@
 
 [release_notes_5.0.13334]: {{ kbArticleURLPrefix }}5094
 
-[roles]: {{ kbArticleURLPrefix }}4803
+[release_notes_5.0.20251010]: {{ kbArticleURLPrefix }}5137
 
 [role_templates]: {{ kbArticleURLPrefix }}4760
 
 [s3_connection]: {{ kbArticleURLPrefix }}4677
 
-[scenario_receive_email]: {{ kbArticleURLPrefix }}4693
-
-[scenario_send_email]: {{ kbArticleURLPrefix }}4692
-
 [security]: {{ kbArticleURLPrefix }}4660
 
-[sql_receive_connection]: {{ kbArticleURLPrefix }}4705
-
-[sql_send_connection]: {{ kbArticleURLPrefix }}4706
-
-[substitution]: {{ kbArticleURLPrefix }}4665
+[substitution_configuration]: {{ kbArticleURLPrefix }}4665#substitution_configuration
 
 [system_service_management]: {{ kbArticleURLPrefix }}4671
-
-[table_clone]: {{ kbArticleURLPrefix }}2552
-
-[table_configure_template]: {{ kbArticleURLPrefix }}2550
 
 [table_personal_use]: {{ kbArticleURLPrefix }}4815
 
@@ -228,11 +315,9 @@
 
 [table_personal_use_filter_extended]: {{ kbArticleURLPrefix }}4815#table_personal_use_filter_extended
 
-[task_notifications]: {{ kbArticleURLPrefix }}4684
-
 [task_notifications_email]: {{ kbArticleURLPrefix }}4684#task_notifications_email
 
-[templates]: {{ kbArticleURLPrefix }}4709
+[template_permissions]: {{ kbArticleURLPrefix }}4801
 
 [templates_move]: {{ kbArticleURLPrefix }}4709#templates_move
 
@@ -282,7 +367,7 @@
 
 {% endif %}
 
-{% if (not userGuide and (adminGuideLinux or adminGuideWindows)) or (tutorial and not userGuide) or kbExport %}
+{% if (not (userGuide or completeGuide) and (adminGuideLinux or adminGuideWindows or developerGuide or tutorial)) or kbExport %}
 
 <!-- Руководство администратора для Linux/Windows, отдельный учебник или экспорт в БЗ -->
 
@@ -295,8 +380,6 @@
 [architect_demo_organizational_structure_processes]: {{ kbArticleURLPrefix }}4826
 
 [architect_demo_organizational_structure_processes_export]: {{ kbArticleURLPrefix }}4826#architect_demo_organizational_structure_processes_export
-
-[architect_desktop]: {{ kbArticleURLPrefix }}4828
 
 [architect_description]: {{ kbArticleURLPrefix }}4828#architect_description
 
@@ -382,6 +465,10 @@
 
 [attribute_date_time]: {{ kbArticleURLPrefix }}4777
 
+[attribute_date_time_import_export]: {{ kbArticleURLPrefix }}4777#attribute_date_time_import_export
+
+[attribute_date_time_properties]: {{ kbArticleURLPrefix }}4777#attribute_date_time_properties
+
 [attribute_displayed]: {{ kbArticleURLPrefix }}4769
 
 [attribute_document]: {{ kbArticleURLPrefix }}4782
@@ -404,6 +491,8 @@
 
 [attribute_image]: {{ kbArticleURLPrefix }}4771
 
+[attribute_model]: {{ kbArticleURLPrefix }}5148
+
 [attribute_number]: {{ kbArticleURLPrefix }}4773
 
 [attribute_organizational_unit]: {{ kbArticleURLPrefix }}4767
@@ -418,7 +507,11 @@
 
 [attribute_text]: {{ kbArticleURLPrefix }}4768
 
+[attribute_text_masks]: {{ kbArticleURLPrefix }}5089
+
 [attribute_text_substring_search_n3]: {{ kbArticleURLPrefix }}4917
+
+[attribute_timezone]: {{ kbArticleURLPrefix }}5098
 
 [attributes]: {{ kbArticleURLPrefix }}4772
 
@@ -446,7 +539,11 @@
 
 [cards_view]: {{ kbArticleURLPrefix }}4820
 
+[csharp_guide]: {{ kbArticleURLPrefix }}4864
+
 [gantt_chart_create]: {{ kbArticleURLPrefix }}4891
+
+[attribute_date_time_value_format]: {{ kbArticleURLPrefix }}4977
 
 [desktop]: {{ kbArticleURLPrefix }}4823
 
@@ -472,6 +569,24 @@
 
 [example_document_download_to_server_csharp]: {{ kbArticleURLPrefix }}5002
 
+[example_n3_collection_get_selected_ids]: {{ kbArticleURLPrefix }}5100
+
+[example_n3_collection_join_filter_hierarchy]: {{ kbArticleURLPrefix }}5108
+
+[n3_collection_hierarchy_recursive_select]: {{ kbArticleURLPrefix }}5144
+
+[example_n3_dataset_join_filter]: {{ kbArticleURLPrefix }}5109
+
+[example_n3_collection_join_string]: {{ kbArticleURLPrefix }}5107
+
+[example_n3_periodic_task_notifications]: {{ kbArticleURLPrefix }}4905
+
+[example_task_hyperlink_n3_formula]: {{ kbArticleURLPrefix }}4879
+
+[example_task_accept_button_csharp]: {{ kbArticleURLPrefix }}5146
+
+[example_task_open_related_button_csharp]: {{ kbArticleURLPrefix }}5147
+
 [example_task_reassign]: {{ kbArticleURLPrefix }}5087
 
 [experimental_feature_support]: {{ kbArticleURLPrefix }}4579#experimental_feature_support
@@ -488,9 +603,13 @@
 
 [export_template_file_formula_format_values]: {{ kbArticleURLPrefix }}4794
 
+[export_template_file_formula_format_values_date_time_formatting_symbols]: {{ kbArticleURLPrefix }}4794#export_template_file_formula_format_values_date_time_formatting_symbols
+
 [expression_editor]: {{ kbArticleURLPrefix }}5025
 
 [expression_editor_reference]: {{ kbArticleURLPrefix }}5025#expression_editor_reference
+
+[formula_context]: {{ kbArticleURLPrefix }}4892
 
 [formula_function_list]: {{ kbArticleURLPrefix }}4993
 
@@ -510,6 +629,8 @@
 
 [formula_guide_queries]: {{ kbArticleURLPrefix }}4999#formula_guide_queries
 
+[n3_guide_reference]: {{ kbArticleURLPrefix }}4852
+
 [n3_editor_autocomplete]: {{ kbArticleURLPrefix }}5039
 
 [n3_editor_autocomplete_block]: {{ kbArticleURLPrefix }}5039
@@ -521,6 +642,8 @@
 [expression_debug]: {{ kbArticleURLPrefix }}4929
 
 [form_access_control]: {{ kbArticleURLPrefix }}4789
+
+[form_access_control_external_link]: {{ kbArticleURLPrefix }}4789#form_access_control_external_link
 
 [forms]: {{ kbArticleURLPrefix }}4786
 
@@ -543,6 +666,8 @@
 [form_dynamic_elements_color]: {{ kbArticleURLPrefix }}4785#form_dynamic_elements_color
 
 [form_dynamic_elements_color_diagram_example]: {{ kbArticleURLPrefix }}4785#form_dynamic_elements_color_diagram_example
+
+[form_dynamic_elements_date_time]: {{ kbArticleURLPrefix }}4785#form_dynamic_elements_date_time
 
 [form_dynamic_elements_drawing]: {{ kbArticleURLPrefix }}4785#form_dynamic_elements_drawing
 
@@ -596,11 +721,19 @@
 
 [http_send_example]: {{ kbArticleURLPrefix }}4699
 
+[http_send_example_csharp]: {{ kbArticleURLPrefix }}5141
+
 [http_send_file]: {{ kbArticleURLPrefix }}5066
 
 [http_send_request_connection]: {{ kbArticleURLPrefix }}4696
 
+[integration_recomendations]: {{ kbArticleURLPrefix }}5091
+
+[interface_use]: {{ kbArticleURLPrefix }}5105
+
 [import_data]: {{ kbArticleURLPrefix }}4802
+
+[identifiers_system_names]: {{ kbArticleURLPrefix }}4713
 
 [map_use]: {{ kbArticleURLPrefix }}4814
 
@@ -624,9 +757,15 @@
 
 [pages_setup]: {{ kbArticleURLPrefix }}4810
 
+[process_diagram]: {{ kbArticleURLPrefix }}4721
+
 [process_diagram_call_element_menu]: {{ kbArticleURLPrefix }}4721#process_diagram_call_element_menu
 
 [process_diagram_designer]: {{ kbArticleURLPrefix }}4721#process_diagram_designer
+
+[process_diagram_view_instance]: {{ kbArticleURLPrefix }}4723
+
+[process_diagram_version_control]: {{ kbArticleURLPrefix }}4722
 
 [process_diagram_element_common_properties]: {{ kbArticleURLPrefix }}4725
 
@@ -690,7 +829,9 @@
 
 [process_email_configure]: {{ kbArticleURLPrefix }}4691
 
-[scenario_actions]: {{ kbArticleURLPrefix }}2149
+[model_templates]: {{ kbArticleURLPrefix }}5149
+
+[process_templates]: {{ kbArticleURLPrefix }}4758
 
 [scenario_elements]: {{ kbArticleURLPrefix }}4718
 
@@ -721,6 +862,14 @@
 [process_diagram_elements_stop_process_end_event]: {{ kbArticleURLPrefix }}4746
 
 [table_configure]: {{ kbArticleURLPrefix }}4800
+
+[table_configure_clone]: {{ kbArticleURLPrefix }}4800
+
+[table_configure_tasks_view]: {{ kbArticleURLPrefix }}4800#table_configure_tasks_view
+
+[table_configure_template]: {{ kbArticleURLPrefix }}4800#table_configure_template
+
+[table_configure_properties]: {{ kbArticleURLPrefix }}4800#table_configure_properties
 
 [gantt_chart_use]: {{ kbArticleURLPrefix }}4817
 
@@ -764,7 +913,7 @@
 
 [backup_restore_windows]: {{ kbArticleURLPrefix }}4644
 
-[backup_windows_external]: {{ kbArticleURLPrefix }}2301
+[backup_windows_external]: {{ kbArticleURLPrefix }}4645
 
 [db_move_manual_windows]: {{ kbArticleURLPrefix }}4646
 
@@ -810,23 +959,27 @@
 
 [nginx_deploy]: {{ kbArticleURLPrefix }}4611
 
+[nginx_configure]: {{ kbArticleURLPrefix }}5143
+
 [nginx_geoid_deploy]: {{ kbArticleURLPrefix }}4610
 
 [restore_complete_backup]: {{ kbArticleURLPrefix }}4648
 
 [restore_test_configure]: {{ kbArticleURLPrefix }}4651
 
-[sso_authenticatation_configure]: {{ kbArticleURLPrefix }}4613
+[sso_authentication_configure]: {{ kbArticleURLPrefix }}4613
 
 [sso_authentication_configure_keytab_update]: {{ kbArticleURLPrefix }}4613#sso_authentication_configure_keytab_update
 
 {% endif %}
 
-{% if (userGuide and not adminGuideLinux) or (not adminGuideLinux and adminGuideWindows) or kbExport %}
+{% if (userGuide and not adminGuideLinux) or (not adminGuideLinux and adminGuideWindows) or apiGuide or kbExport %}
 
-<!-- Руководство пользователя, администратора для Windows или экспорт в БЗ  -->
+<!-- Руководство пользователя, администратора для Windows, API или экспорт в БЗ  -->
 
 [availability_fault_tolerance]: {{ kbArticleURLPrefix }}5079
+
+[backup_linux_script]: {{ kbArticleURLPrefix }}5140
 
 [backup_restore_cdbbz]: {{ kbArticleURLPrefix }}4647
 
@@ -834,11 +987,17 @@
 
 [configuration_files_linux]: {{ kbArticleURLPrefix }}5067
 
+[cluster_recovery]: {{ kbArticleURLPrefix }}5135
+
+[cluster_upgrade]: {{ kbArticleURLPrefix }}5134
+
 [deploy_guide_linux]: {{ kbArticleURLPrefix }}4622
 
 [deploy_guide_linux_delete_version]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_delete_version
 
 [deploy_guide_linux_initialize]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_initialize
+
+[deploy_guide_linux_prerequisites_install]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_prerequisites_install
 
 [deploy_cluster_linux]: {{ kbArticleURLPrefix }}5080
 
@@ -854,9 +1013,9 @@
 
 {% endif %}
 
-{% if (userGuide and not (adminGuideLinux or adminGuideWindows)) or kbExport %}
+{% if (userGuide and not (adminGuideLinux or adminGuideWindows)) or apiGuide or kbExport %}
 
-<!-- Руководство пользователя или экспорт в БЗ  -->
+<!-- Руководство пользователя, или API, или экспорт в БЗ  -->
 
 [accounts_dc_sync]: {{ kbArticleURLPrefix }}4655
 
@@ -882,6 +1041,10 @@
 
 [paths]: {{ kbArticleURLPrefix }}4620
 
+[service_mode]: {{ kbArticleURLPrefix }}5138
+
+[script_keys]: {{ kbArticleURLPrefix }}5122
+
 [system_requirements]: {{ kbArticleURLPrefix }}4659
 
 [upload_size_limit_configure]: {{ kbArticleURLPrefix }}4619
@@ -892,17 +1055,39 @@
 
 <!-- Руководства без учебника или экспорт в БЗ  -->
 
-[tutorial]: {{ kbCategoryURLPrefix }}870
-[lesson_1]: {{ kbArticleURLPrefix }}4871
-[lesson_2]: {{ kbArticleURLPrefix }}4873
-[lesson_3]: {{ kbArticleURLPrefix }}4874
-[lesson_4]: {{ kbArticleURLPrefix }}4865
-[lesson_5]: {{ kbArticleURLPrefix }}4869
-[lesson_6]: {{ kbArticleURLPrefix }}4870
-[lesson_7]: {{ kbArticleURLPrefix }}4872
-[lesson_8]: {{ kbArticleURLPrefix }}4867
-[lesson_9]: {{ kbArticleURLPrefix }}4868
-[lesson_10]: {{ kbArticleURLPrefix }}4866
+[tutorials_toc]: {{ kbArticleURLPrefix }}5123
+
+[tutorial_fleet]: {{ kbArticleURLPrefix }}5085
+[tutorial_fleet_lesson_1]: {{ kbArticleURLPrefix }}4871
+[tutorial_fleet_lesson_2]: {{ kbArticleURLPrefix }}4873
+[tutorial_fleet_lesson_3]: {{ kbArticleURLPrefix }}4874
+[tutorial_fleet_lesson_4]: {{ kbArticleURLPrefix }}4865
+[tutorial_fleet_lesson_5]: {{ kbArticleURLPrefix }}4869
+[tutorial_fleet_lesson_6]: {{ kbArticleURLPrefix }}4870
+[tutorial_fleet_lesson_7]: {{ kbArticleURLPrefix }}4872
+[tutorial_fleet_lesson_8]: {{ kbArticleURLPrefix }}4867
+[tutorial_fleet_lesson_9]: {{ kbArticleURLPrefix }}4868
+[tutorial_fleet_lesson_10]: {{ kbArticleURLPrefix }}4866
+
+[tutorial_hr]: {{ kbArticleURLPrefix }}5112
+[tutorial_hr_lesson_1]: {{ kbArticleURLPrefix }}5113
+[tutorial_hr_lesson_2]: {{ kbArticleURLPrefix }}5114
+[tutorial_hr_lesson_3]: {{ kbArticleURLPrefix }}5115
+[tutorial_hr_lesson_4]: {{ kbArticleURLPrefix }}5116
+[tutorial_hr_lesson_5]: {{ kbArticleURLPrefix }}5117
+[tutorial_hr_lesson_6]: {{ kbArticleURLPrefix }}5118
+[tutorial_hr_lesson_7]: {{ kbArticleURLPrefix }}5119
+[tutorial_hr_lesson_8]: {{ kbArticleURLPrefix }}5120
+[tutorial_hr_outro]: {{ kbArticleURLPrefix }}5121
+
+[tutorial_architect]: {{ kbArticleURLPrefix }}5124
+[tutorial_architect_lesson_1]: {{ kbArticleURLPrefix }}5125
+[tutorial_architect_lesson_2]: {{ kbArticleURLPrefix }}5126
+[tutorial_architect_lesson_3]: {{ kbArticleURLPrefix }}5127
+[tutorial_architect_lesson_4]: {{ kbArticleURLPrefix }}5128
+[tutorial_architect_lesson_5]: {{ kbArticleURLPrefix }}5129
+[tutorial_architect_outro]: {{ kbArticleURLPrefix }}5130
+[tutorial_architect_tests]: {{ kbArticleURLPrefix }}5131
 
 {% endif %}
 
@@ -920,7 +1105,7 @@
 
 {% endif %}
 
-{% if (not completeGuide and (apiGuide or adminGuideLinux or adminGuideWindows)) or kbExport %}
+{% if (not completeGuide and (apiGuide or developerGuide or adminGuideLinux or adminGuideWindows)) or kbExport %}
 
 <!-- Руководство по API, руководство администратора для Linux/Windows или экспорт в БЗ  -->
 
@@ -934,6 +1119,10 @@
 
 [scenarios]: {{ kbArticleURLPrefix }}4717
 
+[common_notifications]: {{ kbArticleURLPrefix }}4681
+
+[account_template_attribute_system_names]: {{ kbArticleURLPrefix }}4757#account_template_attribute_system_names
+
 {% endif %}
 
 {% if (not apiGuide) or kbExport %}
@@ -942,9 +1131,15 @@
 
 [api_intro]: {{ kbArticleURLPrefix }}4860
 
+[api_intro_authentication]: {{ kbArticleURLPrefix }}4860#api_intro_authentication
+
 [api_solution]: {{ kbArticleURLPrefix }}4863
 
 [api_system_core]: {{ kbArticleURLPrefix }}4862
+
+[api_system_core_account_service]: {{ kbArticleURLPrefix }}4862#api_system_core_account
+
+[api_system_core_encrypted_navigation_reference]: {{ kbArticleURLPrefix }}4862#api_system_core_encrypted_navigation_reference
 
 [api_system_core_user_task]: {{ kbArticleURLPrefix }}4862#api_system_core_user_task
 
@@ -952,7 +1147,57 @@
 
 {% endif %}
 
-{% if gostech or kbExport %}
+{% if developerGuide or kbExport %}
+
+<!-- Руководство программиста или экспорт в БЗ  -->
+
+[accounts]: {{ kbArticleURLPrefix }}4653
+
+[administration]: {{ kbArticleURLPrefix }}4661
+
+[apps]: {{ kbArticleURLPrefix }}4714
+
+[global_configuration]: {{ kbArticleURLPrefix }}4668
+
+[logs]: {{ kbArticleURLPrefix }}4673
+
+[monitoring]: {{ kbArticleURLPrefix }}4666
+
+[notification_types]: {{ kbArticleURLPrefix }}4682
+
+[odata_connection]: {{ kbArticleURLPrefix }}4702
+
+[odata_integration]: {{ kbArticleURLPrefix }}4697
+
+[performance]: {{ kbArticleURLPrefix }}4669
+
+[process_receiving_connection]: {{ kbArticleURLPrefix }}4695
+
+[process_sending_connection]: {{ kbArticleURLPrefix }}4690
+
+[model_templates]: {{ kbArticleURLPrefix }}5149
+
+[record_templates]: {{ kbArticleURLPrefix }}4759
+
+[roles]: {{ kbArticleURLPrefix }}4803
+
+[scenario_receive_email]: {{ kbArticleURLPrefix }}4693
+
+[scenario_send_email]: {{ kbArticleURLPrefix }}4692
+
+[sql_receive_connection]: {{ kbArticleURLPrefix }}4705
+
+[sql_send_connection]: {{ kbArticleURLPrefix }}4706
+
+[substitution]: {{ kbArticleURLPrefix }}4665
+
+[task_notifications]: {{ kbArticleURLPrefix }}4684
+
+[templates]: {{ kbArticleURLPrefix }}4709
+
+{% endif %}
+
+{% if gostech or developerGuide or kbExport %}
 
 <!-- Руководства для ГосТех или экспорт в БЗ  -->
 

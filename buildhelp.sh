@@ -4,15 +4,15 @@
 # Pass the `Help` folder path as first parameter to the script
 # This script is called by the `Build\scripts\magic\_site.sh`
 
-echo "Creating venv: py -m venv venv --upgrade-deps"
+echo "Creating venv: py -m venv .venv --upgrade-deps"
 cd $1
 pwd
-python3 -m venv venv --upgrade-deps
+python3 -m venv .venv --upgrade-deps
 
-echo "Activating venv: source venv/bin/activate"
+echo "Activating venv: source .venv/bin/activate"
 cd $1 
 pwd
-. ./venv/bin/activate
+. ./.venv/bin/activate
 cd $1
 pwd
 

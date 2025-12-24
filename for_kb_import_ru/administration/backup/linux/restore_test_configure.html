@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4651" kb-tags="" kb-title="Проверка и настройка конфигурации экземпляра ПО после восстановления из резервной копии">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4651" kb-tags="linux,резервное копирование,восстановление,конфигурация экземпляра,исправление конфигурации" kb-title="Проверка и настройка конфигурации экземпляра ПО после восстановления из резервной копии">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -9,14 +9,14 @@
       </h2>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<a class="md-nav__link mkdocs_imported_link" href="#restore_test_configure_intro">
 <span class="md-ellipsis">
       Введение
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#порядок-проверки-и-настройки-конфигурации">
+<a class="md-nav__link mkdocs_imported_link" href="#restore_test_configure_check_configure">
 <span class="md-ellipsis">
       Порядок проверки и настройки конфигурации
     </span>
@@ -34,29 +34,38 @@
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h2 id="введение">Введение</h2>
+<h2 id="restore_test_configure_intro">Введение</h2>
 <p>Здесь представлены инструкции по проверке и исправлению конфигурации экземпляра ПО <strong>Comindware Platform</strong>, восстановленного из резервной копии.</p>
-<h2 id="порядок-проверки-и-настройки-конфигурации">Порядок проверки и настройки конфигурации</h2>
+<h2 id="restore_test_configure_check_configure">Порядок проверки и настройки конфигурации</h2>
 <ol class="colored_numbers_list">
-<li>Запустите экземпляр ПО, восстановленный из резервной копии.</li>
+<li>
+<p>Проверьте настройки директив для подключения к OpenSearch (Elasticsearch) в файле конфигурации экземпляра ПО:</p>
+<ul>
+<li>journal.server — адрес сервера OpenSearch (Elasticsearch) (обязательно);</li>
+<li>journal.name — префикс индекса сервера OpenSearch (Elasticsearch) (необязательно, по умолчанию назначается префикс <code>cmw&lt;instanceName&gt;</code>, где <code>&lt;instanceName&gt;</code> — имя экземпляра ПО);</li>
+<li>journal.username — имя пользователя сервера OpenSearch (Elasticsearch) (необязательно);</li>
+<li>journal.password — пароль сервера OpenSearch (Elasticsearch) (необязательно).</li>
+</ul>
+<p>См.:</p>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5067">Конфигурация экземпляра, компонентов ПО и служб. Настройка</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a></em></li>
+</ul>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Префикс индекса служит для идентификации записей в БД OpenSearch (Elasticsearch). Если к одному серверу OpenSearch (Elasticsearch) подключается несколько экземпляров <strong>Comindware Platform</strong>, их префиксы индексов должны отличаться. В противном случае будет нарушена целостность данных в БД OpenSearch (Elasticsearch).</p>
+</div>
+</li>
+<li>
+<p>Запустите экземпляр ПО, восстановленный из резервной копии.</p>
+</li>
 <li>Откройте веб-сайт экземпляра ПО.</li>
 <li>Дождитесь инициализации экземпляра ПО. Этот процесс может занять некоторое время. Может потребоваться обновить страницу браузера.</li>
-<li>
-<p>Если откроется страница настройки подключения к службе OpenSearch (Elasticsearch):</p>
-<ul>
-<li>В поле «<strong>URI</strong>» введите адрес своего сервера OpenSearch (Elasticsearch).</li>
-<li>Введите <strong>префикс индекса</strong>, <strong>имя пользователя</strong> и <strong>пароль сервера OpenSearch (Elasticsearch)</strong>.</li>
-<li>Нажмите кнопку «<strong>Далее</strong>».</li>
-</ul>
-</li>
-<li>
-<p>Если откроется страница инициализации данных в OpenSearch (Elasticsearch), нажмите кнопку «<strong>Обновить</strong>».</p>
-</li>
+<li>Если откроется страница инициализации данных в OpenSearch (Elasticsearch), нажмите кнопку «<strong>Обновить</strong>».</li>
 <li>Дождитесь открытия начальной страницы <strong>Comindware Platform</strong>.</li>
 <li>Откройте страницу «<strong>Администрирование</strong>» — «<strong>Глобальная конфигурация</strong>».</li>
 <li>Удостоверьтесь, что указан корректный <strong>URL-адрес сервера</strong>.</li>
 <li>Откройте страницу «<strong>Администрирование</strong>» — «<strong>Подключения</strong>».</li>
-<li>Удостоверьтесь, что в подключении к серверу OpenSearch (Elasticsearch) корректно указаны <strong>префикс индекса</strong> и <strong>URL подключения для журналирования</strong>.</li>
 <li>Удостоверьтесь, что настроено подключение к почтовому серверу для отправки писем для сброса пароля и двухфакторной аутентификации.</li>
 <li>Откройте страницу «<strong>Администрирование</strong>» — «<strong>Резервное копирование</strong>».</li>
 <li>Проверьте конфигурации резервного копирования и при необходимости необходимости задайте корректные пути пути для сохранения резервных копий.</li>
@@ -66,8 +75,9 @@
 <ul>
 <li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642">Резервное копирование. Настройка и запуск, просмотр журнала сеансов</a></li>
 <li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4668">Глобальная конфигурация</a></li>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4678">OpenSearch (Elasticsearch). Настройка подключения</a></li>
 <li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4690">Отправка почты из процесса. Настройка подключения</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5067">Конфигурация экземпляра, компонентов ПО и служб. Настройка</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a></li>
 </ul>
 </div>
 </article>

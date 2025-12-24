@@ -1,0 +1,119 @@
+<h1>Configuring Conditional Coloring of an Attribute Value</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1gua289fh0">Use Case</a></li>
+<li><a href="#mcetoc_1gtviqia32">Prerequisites</a></li>
+<li><a href="#mcetoc_1gua28m8m1">Instructions</a>
+<ul>
+<li><a href="#mcetoc_1gtntho192">Formula Syntax</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gua2a8fu4">See Also</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1gua289fh0">Use Case</h2>
+<p>In the <strong>CMW Platform</strong>, the applied theme defines display formatting for all fields. You cannot specify formatting for the individual fields. But you can customize the font, color, or other formatting properties for the <strong>Text</strong> attribute with the <strong>HTML text</strong> display format. The <strong>HTML text</strong> attribute value is displayed with the configured HTML formatting in tables and forms.</p>
+<p>In this article, we will conditionally color the task status: when the task is overdue, highlight the status in red; otherwise highlight the status in green.</p>
+<h2 id="mcetoc_1gtviqia32">Prerequisites</h2>
+<p>To proceed with the example, create the attributes as shown in the table below:</p>
+<div class="table-responsive">
+<table border="1" style="height: 120px; width: 100%; border-collapse: collapse;">
+<tbody>
+<tr style="height: 40px;">
+<td style="width: 20%;"><strong>Record template system name</strong></td>
+<td style="height: 40px; width: 20%;"><strong>Attribute system name</strong></td>
+<td style="height: 40px; width: 20%;"><strong>Attribute type</strong></td>
+<td style="width: 40%;"><strong>Description</strong></td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 20%;"><em>Statuses</em></td>
+<td style="height: 40px; width: 20%;"><em>Name</em></td>
+<td style="height: 40px; width: 20%;"><strong>Text</strong></td>
+<td style="height: 40px; width: 40%;">
+<p>The <em>Name</em> attribute stores a status name.</p>
+<p>The <em>Statuses</em> template contains two records:</p>
+<ul>
+<li><em>Name</em> = Overdue</li>
+<li><em>Name</em> = Complete</li>
+</ul>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 20%;"><em>Tasks</em></td>
+<td style="height: 40px; width: 20%;"><em>StatusRef</em></td>
+<td style="height: 40px; width: 20%;"><strong>Record</strong></td>
+<td style="height: 40px; width: 40%;">
+<p>The <em>StatusRef</em> attribute is linked to the <em>Statuses</em> template <em>.</em></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="mcetoc_1gua28m8m1">Instructions</h2>
+<ol class="colored_numbers_list">
+<li>In the <em>Tasks</em> template, create the <em>Colored Status</em> <strong>Text</strong> attribute with the following properties:
+<ul>
+<li><strong> Display format</strong> —  <strong>HTML text</strong></li>
+<li><strong>Calculate using an expression </strong>— checked</li>
+<li><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0.2px;"><strong>Calculated value</strong> — <a href="#mcetoc_1gtntho192"><strong>formula</strong></a>:</span> </span>
+<pre class="language-html"><code>FORMAT(</code> <br/><code>IF(EQUALS($StatusRef-&gt;Name,"Overdue"),</code> <br/><code>"&lt;p&gt;&lt;span style='color:#000000'&gt;&lt;span style='background-color:#f02626'&gt;<span style="color: #ffffff; background-color: #f02626;">{0}</span>&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;",</code> <br/><code>"&lt;p&gt;&lt;span style='color:#000000'&gt;&lt;span style='background-color:#3ee028'&gt;<span style="background-color: #3ee028; color: #ffffff;">{0}</span>&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;"),</code> <br/><code>LIST($StatusRef-&gt;Name))</code></pre>
+</li>
+</ul>
+</li>
+<li>Place the <em>Colored Status</em> attribute on a form or table. The attribute value will be colored depending on the status name.</li>
+</ol>
+<h3 id="mcetoc_1gtntho192" style="text-align: left;">Formula Syntax</h3>
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%; height: 548px;">
+<tbody>
+<tr style="height: 40px; text-align: left;">
+<th style="height: 40px; width: 50%;">Element</th>
+<th style="width: 50%; height: 40px;">Description</th>
+</tr>
+<tr style="height: 65px;">
+<td style="width: 50%; height: 65px;"><code>FORMAT()</code></td>
+<td style="height: 65px;">This function takes a string and array as arguments, replaces the placeholders in the string with the array values, and returns the resulting string. Placeholders are numbered from 0.</td>
+</tr>
+<tr style="height: 40px; text-align: left;">
+<td style="height: 40px; width: 50%;"><code>IF(Argument1, Argument2, Argument3)</code></td>
+<td style="height: 40px;"><code></code>This <span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">function</span> takes three arguments. If <code>Argument1</code> resolves to <code>true</code>, it returns <code>Argument2</code>. Otherwise, it returns <code>Argument3</code>.</td>
+</tr>
+<tr style="height: 41px;">
+<td style="width: 50%; height: 41px;"><code>EQUALS($StatusRef-&gt;Name,"Overdue")</code></td>
+<td style="height: 41px;"><code>Argument1</code> — condition. The <code>EQUALS</code><code>()</code> function returns <code>true</code> if the <code>$</code><code>StatusRef-&gt;Name</code> value is <code>Overdue</code>.</td>
+</tr>
+<tr style="height: 81px;">
+<td style="width: 50%; height: 81px;"><code>$StatusRef</code></td>
+<td style="height: 81px;">The <code>$</code> prefix refers to the <em>StatusRef </em>attribute in the current record context.</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;"><code>-&gt;Name</code></td>
+<td style="height: 40px;">The <code>-&gt; </code>operator refers to the <em>Name</em> attribute of the linked <em>Statuses</em> template.</td>
+</tr>
+<tr style="height: 66px;">
+<td style="width: 50%; height: 66px;"><code>"&lt;p&gt;&lt;span style='color:#000000'&gt;&lt;span style='background-color:#f02626'&gt;<span style="color: #ffffff; background-color: #f02626;">{0}</span>&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;"</code></td>
+<td style="height: 66px;"><code>Argument2</code> — red status HTML code. The <code>color:#000000</code> CSS statement sets the text color to white. The <code>background-color</code><code>: #f02626</code> statement sets the background color to red.</td>
+</tr>
+<tr style="text-align: left;">
+<td style="height: 79px; width: 50%;"><code>"&lt;p&gt;&lt;span style='color:#000000'&gt;&lt;span style='background-color:#3ee028'&gt;<span style="background-color: #3ee028; color: #ffffff;">{0}</span>&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;"</code></td>
+<td style="height: 79px;"><code>Argument3</code> — green status HTML code. The <code>background-color</code><code>:#3ee028</code> statement sets the background color to green.</td>
+</tr>
+<tr style="height: 55px;">
+<td style="text-align: left; width: 50%; height: 55px;"><code>{0}</code></td>
+<td style="text-align: left; height: 55px;">
+<p>This placeholder is replaced with the array value returned by the <code>LIST()</code> function.</p>
+</td>
+</tr>
+<tr style="height: 41px;">
+<td style="text-align: left; height: 41px; width: 50%;"><code>LIST($StatusRef-&gt;Name)</code></td>
+<td style="text-align: left; height: 41px;">This function takes the <code>$StatusRef-&gt;Name</code> value and returns it as an array of one element. You have to use the <code>LIST()</code> function because the <code>FORMAT()</code> function only accepts an array of placeholder values and will not accept a single value.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="blue_note"><strong>Note:</strong> The <em>Status</em> attribute value will not be colored, but the calculated <em>Colored Status </em>attribute.</div>
+<div class="alert-message-tpl">
+<p><strong>Tip:</strong> You can customize the <strong>HTML text</strong> using most HTML features: text or background color, font family and size, HTML tags, etc.</p>
+</div>
+<h2 id="mcetoc_1gua2a8fu4">See Also</h2>
+<p><samp data-name="aid" data-title="" data-value="1999"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>{Article-ID:1999}</span></samp> </p>

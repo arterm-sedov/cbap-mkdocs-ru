@@ -1,0 +1,217 @@
+<h1>Configuring Export Template for Several Collections and Images Using C#</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1gu7p6g230">Use Case</a></li>
+<li><a href="#mcetoc_1gtqfuuju0">Prerequisites</a></li>
+<li><a href="#mcetoc_1gu7p9c1q3">Instructions</a>
+<ul>
+<li><a href="#mcetoc_1gu7snqu24">Script Syntax</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gu7p8dg22">See Also</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1gu7p6g230">Use Case</h2>
+<p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; font-size: 15px; font-weight: 300; letter-spacing: 0.2px; line-height: 25px; color: #545764; font-family: 'Open Sans', sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; -space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">In addition to the standard export template feature, you can configure a custom data export using a C# script with more flexible data processing. For example, you can export several collections or multi-value attributes from a record.</p>
+<p>In this article, we will create a Word export template file with two tables (from two collections) and several images (from a multi-value attribute).</p>
+<h2 id="mcetoc_1gtqfuuju0">Prerequisites</h2>
+<p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; font-size: 15px; font-weight: 300; letter-spacing: 0.2px; line-height: 25px; color: #545764; font-family: 'Open Sans', sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; -space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">To proceed with the example, create the templates and attributes as shown in the table below:</p>
+<div class="table-responsive">
+<table border="1" style="height: 298px; width: 100%; border-collapse: collapse;">
+<tbody>
+<tr style="height: 40px;">
+<td style="width: 20%;"><strong>Record template system name</strong></td>
+<td style="height: 40px; width: 20%;"><strong>Attribute system name</strong></td>
+<td style="height: 40px; width: 20%;"><strong>Attribute type</strong></td>
+<th style="width: 25%; height: 40px;"><strong>Description</strong></th>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 20%;"> </td>
+<td style="height: 102px; width: 20%;"><em>Photo_1_Atr</em></td>
+<td style="height: 102px; width: 20%;"><strong>Image</strong></td>
+<td style="width: 25%; height: 102px;">
+<p>Stores one or several images (<strong>Store multiple values</strong> box is checked).</p>
+</td>
+</tr>
+<tr>
+<td style="width: 20%;"> </td>
+<td style="width: 20%;"><em>Table_1_Atr</em></td>
+<td style="width: 20%;"><strong>Record</strong></td>
+<td style="width: 25%;">
+<p>Linked to the <em>Table_1</em> record template and stores multiple values (a <em>collection</em>).</p>
+</td>
+</tr>
+<tr>
+<td style="width: 20%;"> </td>
+<td style="width: 20%;"><em>Table_2_Atr</em></td>
+<td style="width: 20%;"><strong>Record</strong></td>
+<td style="width: 25%;">
+<p>Linked to the <em>Table_2</em> record template and stores multiple values (a <em>collection</em>).</p>
+</td>
+</tr>
+<tr>
+<td rowspan="3" style="width: 10%;"><em>Table_1</em> <br/><em><br/></em></td>
+<td style="width: 10%;"><em>Faсtor</em></td>
+<td style="width: 20%;"><strong>Record</strong></td>
+<td style="width: 25%;">
+<p>Linked to a record template, which has the <em>Title</em> text attribute.</p>
+</td>
+</tr>
+<tr>
+<td style="width: 10%;"><em>Parameter</em></td>
+<td style="width: 20%;"><strong>Record</strong></td>
+<td style="width: 25%;">
+<p>Linked to a record template, which has the <em>Title</em> text attribute.</p>
+</td>
+</tr>
+<tr>
+<td style="width: 10%;"><em>Value</em></td>
+<td style="width: 20%;"><strong>Number</strong></td>
+<td style="width: 25%;">
+<p>Stores a numeric value, e.g., order amount.</p>
+</td>
+</tr>
+<tr>
+<td rowspan="4" style="width: 10%;"><em style="letter-spacing: 0.2px;">Table_2</em><em><br/></em><em><br/></em><em><br/></em><em><br/></em></td>
+<td style="width: 10%;">Destination</td>
+<td style="width: 20%;"><strong>Text</strong></td>
+<td style="width: 25%;">
+<p>Stores a business trip destination.</p>
+</td>
+</tr>
+<tr>
+<td style="width: 10%;">Order</td>
+<td style="width: 20%;"><strong>Text</strong></td>
+<td style="width: 25%;">
+<p>Stores an order number.</p>
+</td>
+</tr>
+<tr>
+<td style="width: 10%;"><span style="letter-spacing: 0.2px;">Date </span></td>
+<td style="width: 20%;"><span style="letter-spacing: 0.2px; font-weight: 700 !important;"><strong>Date</strong></span></td>
+<td style="width: 25%;">
+<p>Stores an order date.</p>
+</td>
+</tr>
+<tr>
+<td style="width: 10%;"><span style="letter-spacing: 0.2px;">Responsible</span></td>
+<td style="width: 20%;"><span style="letter-spacing: 0.2px; font-weight: 700 !important;">Account</span><strong><br/></strong></td>
+<td style="width: 25%;">
+<p>Stores a user account ID.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="mcetoc_1gu7p9c1q3">Instructions</h2>
+<ol class="colored_numbers_list">
+<li>Create an export template as shown below using the <a aria-label="This link opens in new window" href="https://kb.cmwlab.com/file.php?id=171" rel="noopener" style="box-sizing: border-box; color: #0081a7; text-decoration: none; background-color: transparent; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; -space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;" target="_blank">template.docx</a> attached below the article:</li>
+</ol>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="" class="img-responsive" height="564" src="https://kb.cmwlab.com/assets/2021-12-15_08h18_25.png" width="883"/></p>
+<p class="caption" style="font-size: 15px !important;">Example template</p>
+</div>
+<div class="blue_note"><strong>Note:</strong> In the export template, the image field is placed inside a table to accommodate several images.</div>
+<ol class="colored_numbers_list" style="counter-increment: my-counter 1;">
+<li><span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; -space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">A button with the </span><strong style="box-sizing: border-box; font-weight: 700 !important; color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; -space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">Export record</strong> <span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; -space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">  operation will be automatically created. </span></li>
+<li>Open the <strong style="box-sizing: border-box; font-weight: 700 !important; color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; -space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">Export record </strong>button properties.</li>
+<li>On the <strong>Script</strong> tab, paste the script <span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; -space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">attached below the article (<a aria-label="This link opens in new window" href="https://kb.cmwlab.com/file.php?id=182" rel="noopener" style="box-sizing: border-box; color: #0081a7; text-decoration: none; background-color: transparent; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; -space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;" target="_blank">script for export.cs</a>).</span></li>
+</ol>
+<h3 id="mcetoc_1gu7snqu24" style="line-height: 18.75pt;">Script Syntax</h3>
+<ul>
+<li style="text-indent: -.25in;"><span style="font-size: 11.5pt; line-height: 115%; font-family: 'Arial',sans-serif; color: #545764; letter-spacing: .15pt;"><span style="font-size: 11.5pt; line-height: 115%; font-family: 'Arial',sans-serif; color: #545764; letter-spacing: .15pt;"><span style="font-size: 11.5pt; line-height: 115%; font-family: 'Arial',sans-serif; color: #545764; letter-spacing: .15pt;">In lines 17–24, the <code>GetPropertyValues()</code> API function is used to query the database for specific attribute values. This function improves the script performance with large datasets.</span> </span> </span> <span style="font-size: 11.5pt; line-height: 115%; font-family: 'Arial',sans-serif; color: #545764; letter-spacing: .15pt;"><span style="font-size: 11.5pt; line-height: 115%; font-family: 'Arial',sans-serif; color: #545764; letter-spacing: .15pt;"><br/></span> </span>
+<div>
+<table class="source_code_container brush: csharp; auto-links: false; toolbar: false">
+<tbody>
+<tr>
+<td class="source_code">
+<div class="line number1 index0 alt2" style="box-sizing: content-box !important; border-radius: 0px !important; background: none  !important; border: 0px !important; inset: auto !important; float: none !important; height: auto !important; line-height: 1.1em !important; margin: 0px !important; outline: 0px !important; overflow: visible !important; padding: 0px 1em 0px 0em !important; position: static !important; text-align: left; vertical-align: baseline !important; width: auto !important; font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace; font-weight: 400; font-style: normal; font-size: 15px; min-height: auto !important; -space: pre !important; color: #545764; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: 0.2px; orphans: 2; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><span style="font-size: 10pt;"><code class="csharp plain" style="word-break: break-word; box-sizing: content-box !important; font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace !important; color: black !important; padding: 0px !important; background: none !important; border-radius: 0px !important; font-weight: normal !important; border: 0px !important; inset: auto !important; float: none !important; height: auto !important; line-height: 1.1em !important; margin: 0px !important; outline: 0px !important; overflow: visible !important; position: static !important; text-align: left !important; vertical-align: baseline !important; width: auto !important; font-style: normal !important; min-height: auto !important;"></code></span><span style="font-size: 8pt;"><code class="csharp plain" style="word-break: break-word; box-sizing: content-box !important; font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace !important; color: black !important; padding: 0px !important; background-image: none !important; background-position: initial !important; background-size: initial !important; background-repeat: initial !important; background-attachment: initial !important; background-origin: initial !important; background-clip: initial !important; border-radius: 0px !important; font-weight: normal !important; border: 0px !important; inset: auto !important; float: none !important; height: auto !important; line-height: 1.1em !important; margin: 0px !important; outline: 0px !important; overflow: visible !important; position: static !important; text-align: left !important; vertical-align: baseline !important; width: auto !important; font-style: normal !important; min-height: auto !important;"></code></span></div>
+<div class="line number1 index0 alt2" style="box-sizing: content-box !important; border-radius: 0px !important; background: none  !important; border: 0px !important; inset: auto !important; float: none !important; height: auto !important; line-height: 1.1em !important; margin: 0px !important; outline: 0px !important; overflow: visible !important; padding: 0px 1em 0px 0em !important; position: static !important; text-align: left; vertical-align: baseline !important; width: auto !important; font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace; font-weight: 400; font-style: normal; font-size: 15px; min-height: auto !important; -space: pre !important; color: #545764; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: 0.2px; orphans: 2; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><span style="font-size: 10pt;"><code class="csharp plain" style="word-break: break-word; box-sizing: content-box !important; font-family: Consolas, 'Bitstream Vera Sans Mono', 'Courier New', Courier, monospace !important; color: black !important; padding: 0px !important; background: none !important; border-radius: 0px !important; font-weight: normal !important; border: 0px !important; inset: auto !important; float: none !important; height: auto !important; line-height: 1.1em !important; margin: 0px !important; outline: 0px !important; overflow: visible !important; position: static !important; text-align: left !important; vertical-align: baseline !important; width: auto !important; font-style: normal !important; min-height: auto !important;"><span style="color: #c7254e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 11.375px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: -24px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #fafafa; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">var data_ = Api.TeamNetwork.ObjectService.GetPropertyValues(</span><br style="box-sizing: border-box; color: #c7254e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 11.375px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: -24px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #fafafa; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"/><span style="color: #c7254e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 11.375px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: -24px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #fafafa; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">    userCommandContext.ObjectIds, // getting an array of one or multiple record IDs</span><br style="box-sizing: border-box; color: #c7254e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 11.375px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: -24px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #fafafa; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"/><span style="color: #c7254e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 11.375px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: -24px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #fafafa; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">    new[] {</span><br style="box-sizing: border-box; color: #c7254e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 11.375px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: -24px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #fafafa; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"/><span style="color: #c7254e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 11.375px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: -24px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #fafafa; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">       "Photo_1_Atr", // the system name of an Image attribute</span><br style="box-sizing: border-box; color: #c7254e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 11.375px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: -24px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #fafafa; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"/><span style="color: #c7254e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 11.375px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: -24px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #fafafa; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">       "Table_1_Atr", // the system name of a Record attribute</span><br style="box-sizing: border-box; color: #c7254e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 11.375px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: -24px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #fafafa; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"/><span style="color: #c7254e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 11.375px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: -24px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #fafafa; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">       "Table_2_Atr" // the system name of a Record attribute</span><br style="box-sizing: border-box; color: #c7254e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 11.375px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: -24px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #fafafa; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"/><span style="color: #c7254e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 11.375px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: -24px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #fafafa; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">    });</span><br style="box-sizing: border-box; color: #c7254e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 11.375px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: -24px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #fafafa; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"/><span style="color: #c7254e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 11.375px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: -24px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #fafafa; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">Dictionary&lt;string, object&gt; data = data_.FirstOrDefault().Value;</span><br/></code></span></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li style="text-indent: -.25in;"><span style="font-size: 11.5pt; line-height: 115%; font-family: 'Arial',sans-serif; color: #545764; letter-spacing: .15pt;"><span style="font-size: 11.5pt; line-height: 115%; font-family: 'Arial',sans-serif; color: #545764; letter-spacing: .15pt;">Lines 39–40 show how to get the linked template attribute values via the <strong>record</strong> attributes.</span></span></li>
+</ul>
+<div style="padding-left: 30px;">
+<table class="source_code_container brush: csharp; auto-links: false; toolbar: false">
+<tbody>
+<tr>
+<td class="source_code">
+<p><span style="background-color: initial; color: #c7254e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 11.375px; text-indent: -0.25in; letter-spacing: 0.2px;">string Faсtor_ = getByRef("Title", getString("Faсtor", Table_Data)); // getting the "Title" attribute value by reference via the "Factor" record attribute<br/>string Parameter_ = getByRef("Title", getString("Parameter", Table_Data)); // getting the "Title" attribute value by reference via the "Parameter" record attribute</span><code></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li style="text-indent: -.25in;"><span style="font-size: 11.5pt; line-height: 115%; font-family: 'Arial',sans-serif; color: #545764; letter-spacing: .15pt;"><span style="font-size: 11.5pt; line-height: 115%; font-family: 'Arial',sans-serif; color: #545764; letter-spacing: .15pt;">Lines 56 and 67 show how to get the <strong>FullName</strong> attribute value via an account attribute.</span> </span>
+<div>
+<table class="source_code_container brush: csharp; auto-links: false; toolbar: false">
+<tbody>
+<tr>
+<td class="source_code">
+<p><span style="background-color: initial; color: #c7254e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 11.375px; text-indent: -0.25in; letter-spacing: 0.2px;">var Responsible_ = Api.Base.AccountService.Get(getString("Responsible", Table_Data)); // getting the "Responsible" Account attribute value (account ID)</span></p>
+<p><span style="background-color: initial; color: #c7254e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 11.375px; text-indent: -0.25in; letter-spacing: 0.2px;">...</span></p>
+<p><span style="background-color: initial; color: #c7254e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 11.375px; text-indent: -0.25in; letter-spacing: 0.2px;">Responsible = Responsible_.FullName, // getting the responsible person's full name</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li style="text-indent: -.25in;"><span style="font-size: 11.5pt; line-height: 115%; font-family: 'Arial',sans-serif; color: #545764; letter-spacing: .15pt;"><span style="font-size: 11.5pt; line-height: 115%; font-family: 'Arial',sans-serif; color: #545764; letter-spacing: .15pt;">Lines 173–178 and 185–190 show how to check the image format.</span> </span>
+<div>
+<table class="source_code_container brush: csharp; auto-links: false; toolbar: false">
+<tbody>
+<tr>
+<td class="source_code">
+<p><span style="background-color: initial; color: #c7254e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; font-size: 11.375px; text-indent: -0.25in; letter-spacing: 0.2px;">if (FileName.EndsWith("png") || FileName.EndsWith("PNG") || FileName.EndsWith("jpeg") || FileName.EndsWith("jpg") || FileName.EndsWith("JPG"))<br/>{<br/>byte[] content = (Api.TeamNetwork.DocumentService.GetContent((string)result)).Data;<br/>listImages.Add(content);<br/>}</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+<ul class="colored_numbers_list" style="counter-increment: my-counter 1;">
+<li>Lines 232–258 define the data model:
+<div>
+<table class="source_code_container brush: csharp; auto-links: false; toolbar: false">
+<tbody>
+<tr>
+<td class="source_code">
+<p><code>public class IMG</code></p>
+<p><code>{</code></p>
+<p><code>    public byte[] Image_data { get; set; }</code></p>
+<p><code>}</code></p>
+<p><code>public class TBL_1</code></p>
+<p><code>{</code></p>
+<p><code>    public string Factor { get; set; }</code></p>
+<p><code>    public string Parameter { get; set; }</code></p>
+<p><code>    public string Value { get; set; }</code></p>
+<p><code>}</code></p>
+<p><code>public class TBL_2</code></p>
+<p><code>{</code></p>
+<p><code>    public string Destination { get; set; }</code></p>
+<p><code>    public string Order { get; set; }</code></p>
+<p><code>    public string Date { get; set; }</code></p>
+<p><code>    public string Responsible { get; set; }</code></p>
+<p><code>}</code></p>
+<p><code>public class RESULT</code></p>
+<p><code>{</code></p>
+<p><code>    public List&lt;IMG&gt; Photo_1 { get; set; }</code></p>
+<p><code>    public List&lt;TBL_1&gt; Table_1 { get; set; }</code></p>
+<p><code>    public List&lt;TBL_2&gt; Table_2 { get; set; }</code></p>
+<code>}</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="blue_note"><strong>Note: </strong>Define a unique class for e<span style="font-size: 11.5pt; font-family: 'Arial',sans-serif; color: #545764; letter-spacing: .15pt;">ach table in the export template.</span></div>
+</li>
+</ul>
+<h2 id="mcetoc_1gu7p8dg22">See Also</h2>
+<p><span style="font-size: 11.5pt; line-height: 115%; font-family: 'Arial',sans-serif; color: #545764; letter-spacing: .15pt;"><samp data-name="aid" data-title="" data-value="1943"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>{Article-ID:1943}</span> </samp> </span></p>

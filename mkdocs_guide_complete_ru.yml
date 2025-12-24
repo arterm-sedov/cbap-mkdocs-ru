@@ -11,12 +11,15 @@ nav:
   - Общие сведения:
     - index.md
     - product_description.md
+    - general/glossary.md
     - Обзор версий:
       - general/changelog/changelog.md
+      - general/changelog/release_notes_5.0.20251010.md
       - general/changelog/release_notes_5.0.13334.md
       - general/changelog/release_notes_5.0.md
   - Использование ПО:
     - using_the_system/index.md
+    - using_the_system/interface_use.md
     - Панель навигации:
       - using_the_system/navigation_panel/index.md
       - using_the_system/navigation_panel/desktop.md
@@ -30,15 +33,17 @@ nav:
     - Офисные приложения: using_the_system/office_connectiopn_use.md
     - using_the_system/mobile_app_use.md
     - using_the_system/password_restore.md
+    - using_the_system/browser_push_permissions.md
   - Администрирование ПО:
     - Развёртывание системы:
       - administration/deploy/system_requirements.md
       - administration/deploy/architecture_landscape.md
-      # - administration/deploy/availability_fault_tolerance.md
       - administration/deploy/security.md
       - administration/deploy/logging_engine.md
       - administration/deploy/log_files_event_examples.md
       - administration/deploy/paths.md
+      - administration/deploy/script_keys.md
+      - administration/deploy/availability_fault_tolerance.md
       - Развёртывание в Linux:
         - administration/deploy/linux/deploy_guide.md
         - administration/deploy/linux/configuration_files.md
@@ -48,7 +53,6 @@ nav:
         - administration/deploy/linux/upgrade_version.md
         - administration/deploy/linux/upgrade_version_no_stop.md
         - administration/deploy/linux/upload_size_limit_configure.md
-        - administration/deploy/linux/auxiliary_software_deploy/auxiliary_software_list.md
         - Вспомогательное ПО. Развёртывание:
           - administration/deploy/linux/auxiliary_software_deploy/elasticsearch_deploy_linux.md
           - administration/deploy/linux/auxiliary_software_deploy/elasticsearch_cluster_deploy_no_certificates.md
@@ -56,6 +60,7 @@ nav:
           - administration/deploy/linux/auxiliary_software_deploy/kafka_deploy_linux.md
           - administration/deploy/linux/auxiliary_software_deploy/apache_ignite_deploy.md
           - administration/deploy/linux/auxiliary_software_deploy/nginx_deploy.md
+          - administration/deploy/linux/auxiliary_software_deploy/nginx_configure.md
           - administration/deploy/linux/auxiliary_software_deploy/nginx_geoip_deploy.md
           - administration/deploy/linux/auxiliary_software_deploy/zabbix_agent_deploy.md
           - administration/deploy/linux/auxiliary_software_deploy/zabbix_deploy.md
@@ -64,13 +69,15 @@ nav:
         - administration/deploy/windows/deploy_guide.md
         - administration/deploy/windows/upgrade_version.md
         # - administration/deploy/windows/instance_upgrade_3_2_to_4_2_windows.md
-        - administration/deploy/windows/instance_stop_IIS.md
-        - administration/deploy/windows/instance_start_IIS.md
         - Вспомогательное ПО. Развёртывание:
           - administration/deploy/windows/auxiliary_software_deploy/zabbix_agent_deploy_windows.md
           - administration/deploy/windows/auxiliary_software_deploy/apache_ignite_deploy_windows.md
           - administration/deploy/windows/auxiliary_software_deploy/elasticsearch_deploy_windows.md
           - administration/deploy/windows/auxiliary_software_deploy/kafka_install_windows.md
+      - administration/deploy/linux/auxiliary_software_deploy/auxiliary_software_list.md
+      - administration/deploy/cluster_upgrade.md
+      - administration/deploy/cluster_recovery.md
+      - administration/deploy/service_mode.md
       - Вспомогательное ПО. Оптимизация:
         - administration/deploy/linux/auxiliary_software_deploy/auxiliary_software_optimize.md
         - administration/deploy/linux/auxiliary_software_deploy/antivirus_exceptions_configure.md
@@ -80,14 +87,13 @@ nav:
       - administration/backup/configure.md
       - Инструкции для Linux:
         - administration/backup/linux/complete_running_instance_backup.md
+        - administration/backup/linux/backup_script.md
         - administration/backup/linux/db_move_manually.md
         - administration/backup/linux/restore_cdbbz.md
         - administration/backup/linux/restore_complete_backup.md
         - administration/backup/linux/restore_test_configure.md
       - Инструкции для Windows:
-        - administration/backup/windows/restore_windows.md
         - administration/backup/windows/backup_restore_windows.md
-        - administration/backup/windows/db_move_manual_windows.md
         - administration/backup/windows/backup_windows_external.md
     - Администрирование системы:
       - administration/administration_page.md
@@ -113,9 +119,9 @@ nav:
           - administration/account_administration/accounts_dc_sync/index.md
           - Инструкции для Linux:
             - administration/account_administration/accounts_dc_sync/linux/ad_authentication_configure.md
-            - administration/account_administration/accounts_dc_sync/linux/sso_authenticatation_configure.md
+            - administration/account_administration/accounts_dc_sync/linux/sso_authentication_configure.md
           - Инструкции для Windows:
-            - administration/account_administration/accounts_dc_sync/windows/sso_authenticatation_configure_windows.md
+            - administration/account_administration/accounts_dc_sync/windows/sso_authentication_configure_windows.md
       - Инфраструктура:
         - administration/infrastructure/monitoring.md
         - administration/infrastructure/logs.md
@@ -135,14 +141,13 @@ nav:
             - administration/connections_communication_routes/system_connections/notifications/notification_types.md 
             - administration/connections_communication_routes/system_connections/notifications/common_notifications.md
             - administration/connections_communication_routes/system_connections/notifications/task_notifications.md
-          - administration/connections_communication_routes/system_connections/elasticsearch_connection.md
+          #- administration/connections_communication_routes/system_connections/elasticsearch_connection.md
           - administration/connections_communication_routes/system_connections/map_configure.md
           - administration/connections_communication_routes/system_connections/git_connection.md
           - administration/connections_communication_routes/system_connections/s3_connection.md
           #- administration/connections_communication_routes/system_connections/aws_pinpoint_connection.md
         - Аутентификация:
           - administration/connections_communication_routes/authentication/keycloak_connection.md
-          - administration/connections_communication_routes/authentication/wsfederation_connection.md
           - administration/connections_communication_routes/authentication/ad_connection.md
         - Подключения к офисным приложениям:
           - administration/connections_communication_routes/office_connections/collabora_connection.md
@@ -237,6 +242,8 @@ nav:
         - business_apps/templates/template_types/account_templates.md
         - business_apps/templates/template_types/role_templates.md
         - business_apps/templates/template_types/organizational_unit_templates.md
+        - business_apps/templates/template_types/model_templates.md
+      - business_apps/templates/template_permissions.md
       - Атрибуты:
         - business_apps/templates/attributes/index.md
         - business_apps/templates/attributes/attribute_change_type.md
@@ -254,11 +261,13 @@ nav:
           - Запись: business_apps/templates/attributes/attribute_record.md
           - Изображение: business_apps/templates/attributes/attribute_image.md
           - Логический: business_apps/templates/attributes/attribute_boolean.md
+          - Модель: business_apps/templates/attributes/attribute_model.md
           - Организационная единица: business_apps/templates/attributes/attribute_organizational_unit.md
           - Роль: business_apps/templates/attributes/attribute_role.md
           - Список значений: business_apps/templates/attributes/attribute_enum.md
           - Текст: business_apps/templates/attributes/attribute_text.md
           - Цвет: business_apps/templates/attributes/attribute_color.md
+          - Часовой пояс: business_apps/templates/attributes/attribute_timezone.md
           - Чертёж: business_apps/templates/attributes/attribute_drawing.md
           - Число: business_apps/templates/attributes/attribute_number.md
           - Штрихкод: business_apps/templates/attributes/attribute_barcode.md
@@ -321,32 +330,51 @@ nav:
       - examples/creating_gantt_chart.md
       - examples/using_gantt_chart.md
       - examples/process_email_configure.md
+      - examples/email_parse_process_id_from_subject.md
+      - examples/email_parse_address_before_at_sign.md
       - examples/autonumerating_records.md
       - examples/autonumerating_related_records.md
       - examples/document_clone_scenario_n3.md
       - examples/document_download_archive_csharp.md
       - examples/document_download_archive_related_record_csharp.md
       - examples/document_download_to_server_csharp.md
-      - examples/substring_search.md
+      - examples/attribute_text_masks.md
+      - examples/attribute_text_substring_search.md
       - examples/attribute_enum_value_calculation.md
       - examples/attribute_enum_value_filter.md
       - examples/attribute_enum_calculate_current_value.md
       - examples/attribute_enum_calculate_registry.md
+      - examples/attribute_date_time_value_format.md
       - examples/script_using_local_variable.md
       - examples/scenario_verify_data.md
       - examples/multilingual_app.md
+      - examples/n3_calculate_active_task_accounts.md
+      - examples/n3_calculate_active_task_assignee.md
+      - examples/n3_collection_join_filter.md
+      - examples/n3_filter_active_tasks.md
+      - examples/n3_periodic_task_notifications.md
+      - examples/n3_collection_select_conditional.md
+      - examples/n3_collection_join_string.md
+      - examples/n3_collection_join_filter.md
+      - examples/n3_collection_join_filter_hierarchy.md
       - administration/connections_communication_routes/rest_odata_connections/1c_integrations.md
       - administration/connections_communication_routes/rest_odata_connections/send_http_example.md
       - administration/connections_communication_routes/rest_odata_connections/http_send_post.md
       - administration/connections_communication_routes/rest_odata_connections/http_send_file.md
       - administration/connections_communication_routes/rest_odata_connections/jpath_example.md      
       - administration/connections_communication_routes/rest_odata_connections/http_receive_file.md
+      - examples/task_accept_button_csharp.md
+      - examples/task_open_related_button_csharp.md
       - examples/task_reassign.md
+      - examples/task_hyperlink_n3_formula.md
+      - examples/n3_process_hyperlink_calculate.md
       - examples/template_reference_data_api.md
-      - examples/get_selected_record_ids.md
+      - examples/n3_collection_get_selected_ids.md
       - examples/csharp_table_download_selection.md
       - examples/csharp_tax_service_integrate.md
-      - examples/process_end_button.md  
+      - examples/process_end_button.md
+      - examples/count_records_no_archive.md
+      - examples/chevron_stage_render.md
   - Моделирование корпоративной архитектуры:
     - architect/architect_desktop.md
     - architect/process_architecture_modeling/index.md
@@ -356,23 +384,66 @@ nav:
     - architect/organizational_structure_modeling/organizational_structure_designer.md
     - architect/conversations.md
     - architect/version_control.md
-    - architect/architect_demo.md
     - architect/architect_example.md
+    - architect/architect_demo.md
   - Обучение:
-    - tutorial/intro.md
-    - tutorial/lesson_1.md
-    - tutorial/lesson_2.md
-    - tutorial/lesson_3.md
-    - tutorial/lesson_4.md
-    - tutorial/lesson_5.md
-    - tutorial/lesson_6.md
-    - tutorial/lesson_7.md
-    - tutorial/lesson_8.md
-    - tutorial/lesson_9.md
-    - tutorial/lesson_10.md
+    - tutorials/index.md
+    - Аналитик. Ознакомительный:
+      - tutorials/tutorial_hr/intro.md
+      - tutorials/tutorial_hr/lesson_1.md
+      - tutorials/tutorial_hr/lesson_2.md
+      - tutorials/tutorial_hr/lesson_3.md
+      - tutorials/tutorial_hr/lesson_4.md
+      - tutorials/tutorial_hr/lesson_5.md
+      - tutorials/tutorial_hr/lesson_6.md
+      - tutorials/tutorial_hr/lesson_7.md
+      - tutorials/tutorial_hr/lesson_8.md
+      - tutorials/tutorial_hr/outro.md
+    - Корпоративная архитектура. Ознакомительный:
+      - tutorials/tutorial_architect/intro.md
+      - tutorials/tutorial_architect/lesson_1.md
+      - tutorials/tutorial_architect/lesson_2.md
+      - tutorials/tutorial_architect/lesson_3.md
+      - tutorials/tutorial_architect/lesson_4.md
+      - tutorials/tutorial_architect/lesson_5.md
+      - tutorials/tutorial_architect/outro.md
+      - tutorials/tutorial_architect/tests.md
+    - Управление автопарком:
+      - tutorials/tutorial_fleet/intro.md
+      - tutorials/tutorial_fleet/lesson_1.md
+      - tutorials/tutorial_fleet/lesson_2.md
+      - tutorials/tutorial_fleet/lesson_3.md
+      - tutorials/tutorial_fleet/lesson_4.md
+      - tutorials/tutorial_fleet/lesson_5.md
+      - tutorials/tutorial_fleet/lesson_6.md
+      - tutorials/tutorial_fleet/lesson_7.md
+      - tutorials/tutorial_fleet/lesson_8.md
+      - tutorials/tutorial_fleet/lesson_9.md
+      - tutorials/tutorial_fleet/lesson_10.md
+  - Диагностика и устранение неполадок:
+    - troubleshooting/performance_optimize.md
+    - troubleshooting/extract_form_elements.md
+    - troubleshooting/calculate_archive_records.md
+    - troubleshooting/table_open_error.md
+    - troubleshooting/hard_read_text_table.md
+    - troubleshooting/process_notify_no_info.md
+    - troubleshooting/process_id_not_found.md
+    - troubleshooting/view_calculate_attribute_history.md
+    - troubleshooting/invalid_instance_reference.md
+    - troubleshooting/optimize_calculate_attribute.md
+    - troubleshooting/process_stuck.md
+    - troubleshooting/script_operation_error.md
+    - troubleshooting/buttons_not_shown.md
+    - troubleshooting/process_fails_several_records.md
+    - troubleshooting/record_field_values_not_shown.md
 
 exclude_docs: |
+  administration/connections_communication_routes/authentication/wsfederation_connection.md
+  administration/deploy/windows/instance_stop_IIS.md
+  administration/deploy/windows/instance_start_IIS.md
   devops_wiki/**
+  administration/connections_communication_routes/authentication/google_connection.md
+  administration/connections_communication_routes/system_connections/aws_pinpoint_connection.md
   administration/deploy/linux/deploy_cluster.md
   administration/deploy/linux/db_migrate_4.2_to_4.7.md
   administration/deploy/windows/admin_utility/**
@@ -381,6 +452,8 @@ exclude_docs: |
   developer_guide/n3/n3_tutorial.md
   developer_guide/formulas/formula_toc.md
   administration/backup/linux/restore_cdbbz_gostech.md
+  administration/backup/windows/db_move_manual_windows.md
+  administration/backup/windows/restore_windows.md
   administration/deploy/linux/deploy_guide_gostech.md
   administration/deploy/linux/configuration_files_gostech.md
   administration/deploy/linux/upgrade_version_gostech.md
@@ -388,3 +461,29 @@ exclude_docs: |
   administration/deploy/linux/upload_size_limit_configure_gostech.md
   administration/connections_communication_routes/authentication/openid_connection_gostech.md
   administration/connections_communication_routes/system_connections/s3_connection_gostech.md
+  tutorials/tutorial_hr/taxonomies/**
+  tutorials/tutorial_architect/taxonomies/**
+  **/toc.md
+  guides_toc.md
+  troubleshooting/history_not_logged.md
+  **/[0-9]*-*.md
+  administration/connections_communication_routes/system_connections/elasticsearch_connection.md
+  administration/connections_communication_routes/system_connections/notifications/system_notifications.md
+  administration/deploy/toc_deploy_auxiliary_software.md
+  administration/deploy/commissioning_recommendations.md
+  developer_guide/n3/n3_examples.md
+  developer_guide/n3/n3_glossary.md
+  developer_guide/n3/n3_graphs.md
+  developer_guide/n3/n3_knowledge_graphs.md
+  developer_guide/n3/n3_model.md
+  developer_guide/n3/n3_notation.md
+  developer_guide/n3/n3_ontology.md
+  developer_guide/n3/n3_ontology_structure.md
+  developer_guide/toc.md
+  developer_guide/n3/toc.md
+  tutorials/tutorial_n3/lesson_1.md
+  tutorials/tutorial_n3/lesson_2.md
+  guides_toc.md
+  toc.md
+  administration/toc.md
+  administration/backup/toc.md

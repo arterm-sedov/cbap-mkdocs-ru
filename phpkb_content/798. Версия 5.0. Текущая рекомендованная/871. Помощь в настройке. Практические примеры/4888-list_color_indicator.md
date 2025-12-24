@@ -1,6 +1,8 @@
 ---
-title: Цветовой индикатор в списке. Настройка отображения
+title: 'Цветовой индикатор в списке. Настройка отображения'
 kbId: 4888
+url: 'https://kb.comindware.ru/article.php?id=4888'
+updated: '2024-08-01 18:04:50'
 ---
 
 # Цветовой индикатор в списке. Настройка отображения
@@ -11,8 +13,16 @@ kbId: 4888
 
 **2.** В поле «Вычисляемое выражение» вставьте следующую формулу, которую мы разберем ниже:
 
-| IF(GREATEREQ($Fakticheskayadata , $Planovayadata), "<span style='color:#B22222; font-size: 200%; text-shadow: 0 0 1px black; position: absolute; top:0px;'> ● </span>", "<span style='color:#45A521; font-size: 200%; text-shadow: 0 0 1px black; position: absolute; top:0px;'> ● </span>"                ) |
-| --- |
+```
+IF(GREATEREQ($
+Fakticheskayadata , $Planovayadata),
+
+"<span style='color:#B22222; font-size: 200%; text-shadow: 0 0 1px black; position: absolute; top:0px;'> ● </span>",
+
+"<span style='color:#45A521; font-size: 200%; text-shadow: 0 0 1px black; position: absolute; top:0px;'> ● </span>"               
+
+)
+```
 
 **где:**
 
@@ -24,12 +34,14 @@ kbId: 4888
 
 *"<span style='color:#B22222; font-size: 200%; text-shadow: 0 0 1px black; position: absolute; top:0px;'> ● </span>"*
 
-Если фактическая дата больше или равна плановой дате, то по данному примеру будет показан красный индикатор. Цвет можно поменять, изменив значение после двоеточия (*color:#B22222*).  
+Если фактическая дата больше или равна плановой дате, то по данному примеру будет показан красный индикатор. Цвет можно поменять, изменив значение после двоеточия (*color:#B22222*).
 
 - Аргумент 3 — Зеленый индикатор
 
 *"<span style='color:#45A521; font-size: 200%; text-shadow: 0 0 1px black; position: absolute; top:0px;'> ● </span>"*
 
-Если фактическая дата меньше плановой даты, то по данному примеру будет показан зеленый индикатор. Цвет также можно поменять, изменив значение после двоеточия (*color:#45A521*). 
+Если фактическая дата меньше плановой даты, то по данному примеру будет показан зеленый индикатор. Цвет также можно поменять, изменив значение после двоеточия (*color:#45A521*).
 
-**Примечание :** при выгрузке данного значения в Excel, данное поле будет отображаться как HTML код, так как Excel не поддерживает отображение HTML без предварительного форматирования строки, в который этот HTML будет выгружаться. {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
+**Примечание :** при выгрузке данного значения в Excel, данное поле будет отображаться как HTML код, так как Excel не поддерживает отображение HTML без предварительного форматирования строки, в который этот HTML будет выгружаться.
+
+{% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

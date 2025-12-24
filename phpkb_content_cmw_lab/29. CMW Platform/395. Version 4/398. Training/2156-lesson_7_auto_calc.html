@@ -1,0 +1,413 @@
+<h1>Lesson 7 &amp;mdash; Automatic Calculations</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1hf447spf0">Introduction</a></li>
+<li><a href="#mcetoc_1hf4278o30">Automatic Attribute Value Calculation</a></li>
+<li><a href="#mcetoc_1hf47iktt1">Display the Request Initiator's Full Name and Submission Date</a></li>
+<li><a href="#mcetoc_1hf42cjv0b">Calculate Total Costs </a>
+<ul>
+<li><a href="#mcetoc_1hf42c0269">Test the Total Costs Calculation</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gtb0gam20">Generate Request Number</a>
+<ul>
+<li><a href="#mcetoc_1hf42eb42c">Display the Request Number on the Form</a></li>
+<li><a href="#mcetoc_1hf42eqtsd">Test the Request Number Generation</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gtb6pa610">Track Vehicle Request Status</a>
+<ul>
+<li><a href="#mcetoc_1hf4gs13q1">Configure the Statuses Registry</a></li>
+<li><a href="#mcetoc_1hf4guk8h2">Configure the Status Calculation</a>
+<ul>
+<li><a href="#mcetoc_1hf4iml7v3">Set Status to Created</a></li>
+<li><a href="#mcetoc_1hf4imdh02">Set Status to In Approval</a></li>
+<li><a href="#mcetoc_1hf4infgd4">Set the Status to Rejected</a></li>
+<li><a href="#mcetoc_1hf4jropm0">Set Status to Trip in Progress</a></li>
+<li><a href="#mcetoc_1hf4lo2ic0">Set Status to Completed</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1hf42hde9f">Display the Request Status on the Form</a></li>
+<li><a href="#mcetoc_1hf4isq438">Display the Request Status and Number in the Request List</a></li>
+<li><a href="#mcetoc_1gtbe17d91">Test the Request Status Change</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gtbe8aik2">Customize Task Titles</a>
+<ul>
+<li><a href="#mcetoc_1gtbev4ug0">Test the Task Title Display in My Tasks</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gtbf62aa1">Results</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1hf447spf0">Introduction</h2>
+<p>In this lesson, you will learn how to show the initiator name and request date and implement automatic calculations: total costs, request number, request status, and task title.</p>
+<p><span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">Estimated time to complete</span>: 20 min</p>
+<p><span style="letter-spacing: 0.2px;">Prerequisite: complete</span> <samp data-name="aid" data-title="" data-value="2155"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2155}</span></samp></p>
+<p><strong><span data-preserver-spaces="true">Note:</span></strong><span data-preserver-spaces="true"> This lesson is for the <strong>CMW Platform</strong> version 4.2.571.0. In other versions, the page and menu appearance may differ from the screenshots.</span></p>
+<h2 id="mcetoc_1hf4278o30">Automatic Attribute Value Calculation</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Business Requirement</p>
+<p>We need to identify the requests by the request number and submission date. Also, we want the <em>Secretary</em> to know the request <em>Initiator</em> during the request approval. And we need to calculate the <em>Total costs</em>.</p>
+<ul>
+<li>The request <em>Initiator</em> is its creator, and the submission date is the request creation date. The <strong>Creator</strong> and <strong>Creation date </strong>system attributes are automatically set for each record. So, we will simply place these attributes on the request form.</li>
+<li>To calculate the request number and total cost amount, we will define the formulas.</li>
+</ul>
+</div>
+<h2 id="mcetoc_1hf47iktt1">Display the Request Initiator's Full Name and Submission Date</h2>
+<p>Let's add the request creator and submission date fields to the vehicle request form.</p>
+<p><strong>1.</strong> Open the <strong>Forms</strong> tab of the <em>Vehicle requests</em> record template.</p>
+<p><strong>2.</strong> Open the <em>Vehicle requests - Main Form</em> form.</p>
+<p><strong>3.</strong> Expand the <strong>Creator</strong> attribute in the element pane and drag the <strong>Full name</strong> attribute to the form layout.</p>
+<p><strong>4.</strong> Then drag the <strong>Creation date</strong> attribute to the form layout.</p>
+<p><strong>5.</strong> Click <strong>Save</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Adding system fields onto the request form" class="img-responsive" height="930" src="https://kb.cmwlab.com/assets/cmw_platform_lesson7_1.png" width="1693"/></p>
+<p class="caption" style="font-size: 15px !important;">Adding system fields onto the request form</p>
+</div>
+<h2 id="mcetoc_1hf42cjv0b">Calculate Total Costs </h2>
+<p>Let's configure the automatic <em>Total costs </em>calculation.</p>
+<p>To do this, we will select the <strong>Calculate using an expression</strong> checkbox in the <em>Total costs</em> attribute properties. Then, we will enter a formula to calculate the attribute value. We will compose the formula using the expression editor and predictive input.</p>
+<p><strong>1.</strong> Go to the <em>Ordering a corporate vehicle</em> process template, open the process diagram, and click <strong>Edit</strong>.</p>
+<p><strong>2.</strong> Select the <em>Complete the trip</em> task.</p>
+<p><strong>3. </strong>In the element menu, click <strong>Form</strong>.</p>
+<p><strong>4.</strong> In the form designer, expand the <em>Vehicle requests</em> attribute in the element pane.</p>
+<p><strong>5.</strong> Click <strong>Edit</strong> next to the <em>Total costs</em> attribute.</p>
+<p><strong>6.</strong> In the attribute properties window, select the <strong>Calculate using an expression</strong> checkbox.</p>
+<p><strong>7.</strong> In the <strong>Calculated value</strong> field, click <strong>Open in editor</strong>.</p>
+<p><strong>8.</strong> In the expression editor that appears, enter the following function: <code>SUM()</code>.</p>
+<p><strong>9.</strong> Place the cursor inside the brackets and press <kbd>Ctrl+Space</kbd>.</p>
+<p><strong>10.</strong> In the dropdown that appears, double-click the <em>Costs</em> attribute.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Configuring an expression in the expression editor" class="img-responsive" height="575" src="https://kb.cmwlab.com/assets/cmw_platform_lesson7_2.png" width="1693"/></p>
+<p class="caption" style="font-size: 15px !important;">Configuring an expression in the expression editor</p>
+</div>
+<p><strong>11.</strong> The following expression should be inserted into the <code>SUM</code> function: <code>from a in db-&gt;Costs where Your condition select a-&gt;id</code></p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Request query statement for a record template" class="img-responsive" height="575" src="https://kb.cmwlab.com/assets/cmw_platform_lesson7_3.png" width="1693"/></p>
+<p class="caption" style="font-size: 15px !important;">Request query statement for a record template</p>
+</div>
+<p><strong>12.</strong> Replace the <code>Your condition</code> text with <code>a-&gt;</code> and press <kbd>Ctrl+Space</kbd>.</p>
+<p><strong>13.</strong> In the dropdown that appears, double-click <code>Vehiclerequest</code> (system name of the <em>Vehicle request</em> attribute in the Costs record template).</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Entering the Vehicle request attribute's system name in the formula" class="img-responsive" height="618" src="https://kb.cmwlab.com/assets/cmw_platform_lesson7_4.png" width="1693"/></p>
+<p class="caption" style="font-size: 15px !important;">Entering the Vehicle request attribute's system name in the formula</p>
+</div>
+<p><strong>14.</strong> Enter <code>== $</code> after <code>Vehiclerequest</code>.</p>
+<p><strong>15.</strong> In the dropdown that appears, double-click the <code>id</code> (system name of the <em>ID</em> attribute in the <em>Vehicle requests</em> record template).</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Entering the ID attribute's system name in the formula" class="img-responsive" height="618" src="https://kb.cmwlab.com/assets/cmw_platform_lesson7_5.png" width="1693"/></p>
+<p class="caption" style="font-size: 15px !important;">Entering the ID attribute's system name in the formula</p>
+</div>
+<p><strong>16.</strong> Delete the <code>id</code> text after <code>select a-&gt;</code> and press <kbd>Ctrl+Space</kbd>.</p>
+<p><strong>17.</strong> In the dropdown that appears, double-click the <code>Amount</code> (the system name of the <em>Amount</em> attribute in the <em>Costs</em> record template).</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Entering the Amount attribute's system name in the formula" class="img-responsive" height="618" src="https://kb.cmwlab.com/assets/cmw_platform_lesson7_6.png" width="1693"/></p>
+<p class="caption" style="font-size: 15px !important;">Entering the Amount attribute's system name in the formula</p>
+</div>
+<p><strong>18. </strong>The resulting formula should look as follows:</p>
+<pre><code>SUM(from a in db-&gt;Costs where a-&gt;Vehiclerequest == $id select a-&gt;Amount)</code><code></code></pre>
+<div class="notice notice-success">
+<p class="admonition-title">Total Costs Formula and Database Query Syntax</p>
+<ul>
+<li><code>SUM()</code> — this function takes a value list and returns the sum of values. </li>
+</ul>
+<p>As an argument to the <code>SUM()</code> function, we pass the list (array) of <em>Amount</em> values ​​from the <em>Costs </em>template. To get these values, we use a database query:</p>
+<ul>
+<li><code>from a</code> — local variable <code>a</code> declaration.</li>
+<li><code> in db-&gt;Costs</code> — data source declaration: <em>Costs</em> record template.</li>
+<li><code>where a-&gt;Vehiclerequest == $id</code> — condition to sample the records from the <em>Costs</em> template, where the <em>Vehicle request</em> attribute value equals the ID attribute value of the current vehicle request.</li>
+<li><code>select a-&gt;Amount</code> — query clause to get the <em>Amount</em> attribute values from the <em>Costs</em> template.</li>
+<li><code>Costs</code> — the system name of the <em>Costs </em>record template.</li>
+<li><code>Vehiclerequest</code> — system name of the <em>Vehicle request</em> attribute in the <em>Costs</em> template.</li>
+<li><code>$id</code> — system name of the <em>ID</em> attribute in the <em>Vehicle requests</em> record template.</li>
+<li><code>Amount</code> — system name of the <em>Amount</em> attribute in the <em>Costs </em>record template.</li>
+</ul>
+</div>
+<p><strong>19.</strong> Click <strong>Apply</strong>, close the expression editor, and click <strong>Save</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="The total costs formula" class="img-responsive" height="449" src="https://kb.cmwlab.com/assets/img_6553362c14b7e.png" width="1229"/></p>
+<p class="caption" style="font-size: 15px !important;">The total costs formula</p>
+</div>
+<p><strong>20.</strong> Go to the business process diagram and click <strong>Publish</strong>.</p>
+<h3 id="mcetoc_1hf42c0269">Test the Total Costs Calculation</h3>
+<p><strong>1.</strong> Go to the instance list of the <em>Ordering a corporate vehicle</em> process template and click <strong>Create</strong>.</p>
+<p><strong>2.</strong> Go through the process up to the <em>Complete the trip</em> task.</p>
+<p><strong>3. </strong>Go to <strong>My tasks </strong>and open the <em>Ordering a corporate vehicle - Complete the trip</em> task.</p>
+<p><strong>4. </strong>Fill in the <em>Costs</em> table. The <em>Total costs</em> field should update automatically.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Total costs automatic calculation" class="img-responsive" height="449" src="https://kb.cmwlab.com/assets/img_6552158c7ac0b.png" width="1229"/></p>
+<p class="caption" style="font-size: 15px !important;">Total costs automatic calculation</p>
+</div>
+<h2 id="mcetoc_1gtb0gam20">Generate Request Number</h2>
+<p>Let’s set up automatic request numbering.</p>
+<p><strong>1.</strong> Go to the <strong>Attributes</strong> tab of the <em>Vehicle requests</em> record template.</p>
+<p><strong>2.</strong> Create a new attribute:</p>
+<ul>
+<li><strong>Name:</strong> <em>Number</em></li>
+<li><strong>Data type: Text</strong> </li>
+<li><strong>Use as a record title</strong>: selected.</li>
+</ul>
+<p><strong>3.</strong> Go to the <em>Ordering a corporate vehicle</em> process diagram and click <strong>Edit</strong>.</p>
+<p><strong>4.</strong> Select the start event and click <strong>Exit scenario </strong>in the element menu.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Navigating to the start event exit scenario" class="img-responsive" height="618" src="https://kb.cmwlab.com/assets/cmw_platform_lesson7_9.png" width="1693"/></p>
+<p class="caption" style="font-size: 15px !important;">Navigating to the start event exit scenario</p>
+</div>
+<p><strong>5.</strong> The scenario designer appears.</p>
+<p><strong>6.</strong> Inside the <strong>Change the context</strong> action, click <strong>Add action</strong> and select <strong>Change attribute values </strong>from the dropdown.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Adding the Change attribute values action to the scenario" class="img-responsive" height="930" src="https://kb.cmwlab.com/assets/cmw_platform_lesson7_10.png" width="1693"/></p>
+<p class="caption" style="font-size: 15px !important;">Adding the Change attribute values action to the scenario</p>
+</div>
+<p><strong>7. </strong>The new <strong>Change attribute values </strong>action appears inside the <strong>Change the context</strong> action.</p>
+<p><strong>8.</strong> Click <strong>Change </strong>in the <strong>Change attribute values</strong> ​​header.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Going to the scenario action properties" class="img-responsive" height="920" src="https://kb.cmwlab.com/assets/cmw_platform_lesson7_11.png" width="1693"/></p>
+<p class="caption" style="font-size: 15px !important;">Going to the scenario action properties</p>
+</div>
+<p><strong>9.</strong> The <strong>Action: Change attribute values</strong> window appears.</p>
+<p><strong>10.</strong> Click <strong>Create </strong>above the attribute table.</p>
+<p><strong>11.</strong> In the <strong>Attribute</strong> column, select the <em>Number</em> attribute.</p>
+<p><strong>12.</strong> In the <strong>Value operation</strong> column, select <strong>Replace</strong>.</p>
+<p><strong>13.</strong> In the <strong>Value</strong> column, select <strong>Formula</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt='Configuring the "Change attribute values" action' class="img-responsive" height="629" src="https://kb.cmwlab.com/assets/cmw_platform_lesson7_12.png" width="1693"/></p>
+<p class="caption" style="font-size: 15px !important;">Configuring the Change attribute values action</p>
+</div>
+<p><strong>14.</strong> In the <strong>Value</strong> field, click  <strong>Open in editor</strong>.</p>
+<p><strong>15.</strong> Enter the following formula:</p>
+<pre><code>FORMAT("RE-{0}",LIST(COUNT(from a in db-&gt;Vehiclerequests select a-&gt;id)))</code></pre>
+<div class="notice notice-success">
+<p class="admonition-title">Request Number Formula Syntax</p>
+<ul style="letter-spacing: 0.2px;">
+<li><code style="font-size: 13.125px;">FORMAT()</code> — this function takes a string and a value list, replaces the <code>{0}</code>–<code>{n}</code> placeholders with the list values, and returns the resulting string.</li>
+<li><code style="font-size: 13.125px;">LIST()</code> — this function combines its arguments into a list.</li>
+<li><code style="font-size: 13.125px;">COUNT()</code> — this function takes a value list and returns the number of list items.</li>
+<li><code style="font-size: 13.125px;">Vehichlerequests</code> — the system name of the <em>Vehicle requests</em> record template.</li>
+</ul>
+</div>
+<p><strong>16.</strong> Click <strong>Apply</strong>, close the expression editor, and click <strong>Save</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Expression for the request's number calculation" class="img-responsive" height="437" src="https://kb.cmwlab.com/assets/cmw_platform_lesson7_13.png" width="1693"/></p>
+<p class="caption" style="font-size: 15px !important;">Expression for the request's number calculation</p>
+</div>
+<p><strong>17.</strong> Go to the process diagram and click <strong>Publish</strong>.</p>
+<h3 id="mcetoc_1hf42eb42c">Display the Request Number on the Form</h3>
+<p>Let's add the request number field on the form.</p>
+<p><strong>1. </strong>Open the <strong>Forms</strong> tab of the <em>Vehicle requests</em> record template.</p>
+<p><strong>2.</strong> Open the <em>Vehicle requests - Main Form</em>.</p>
+<p><strong>3.</strong> Add the <em>Number</em> attribute to the form layout.</p>
+<p><strong>4.</strong> For the <em>Number</em> field, set <strong>Access</strong> to <strong>Read only</strong>.</p>
+<p><strong>5.</strong> <strong>Save</strong> the form.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Adding the request number to the vehicle request form" class="img-responsive" height="529" src="https://kb.cmwlab.com/assets/img_65522e68174ca.png" width="1229"/></p>
+<p class="caption" style="font-size: 15px !important;">Adding the request number to the vehicle request form</p>
+</div>
+<h3 id="mcetoc_1hf42eqtsd">Test the Request Number Generation</h3>
+<p><strong>1.</strong> Go to the instance list of the <em>Ordering a corporate vehicle</em> process template.</p>
+<p><strong>2.</strong> Click <strong>Create</strong> to initiate a new vehicle request.</p>
+<p><strong>3.</strong> In <strong>My tasks</strong>, open the <em>Ordering a corporate vehicle - Approve</em> <em>request</em> task.</p>
+<p><strong>4.</strong> The <em>Number</em> field should display the auto-generated request number.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p> </p>
+<p><img alt="The automatically generated request number" class="img-responsive" height="463" src="https://kb.cmwlab.com/assets/img_65532325f0787.png" width="1229"/></p>
+<p> </p>
+<p class="caption" style="font-size: 15px !important;">The automatically generated request number</p>
+</div>
+<h2 id="mcetoc_1gtb6pa610">Track Vehicle Request Status</h2>
+<p>Let's configure the application to automatically change the vehicle request status depending on the process stage. </p>
+<h3 id="mcetoc_1hf4gs13q1">Configure the Statuses Registry</h3>
+<p>We'll store the statuses in a new record template.</p>
+<p><strong>1.</strong> In the navigation pane on the left, select <strong>Diagrams</strong>.</p>
+<p><strong>2.</strong> Open the <em>Data model - Vehicle management</em> diagram.</p>
+<p><strong>3.</strong> Drag the <strong>New record type</strong> element to the diagram and create a new record template — <em>Statuses</em>.</p>
+<p><strong>4.</strong> Select the <em>Statuses </em>record template and add a new attribute:</p>
+<ul>
+<li><strong>Name: </strong><em>Title</em></li>
+<li><strong>Data type: Text</strong></li>
+<li><strong>Use as a record title:</strong> selected</li>
+</ul>
+<p><strong>5.</strong> Select the <em>Statuses</em> template and click <strong>Tables</strong> in the element menu.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Navigating to the template tables list from the data model diagram" class="img-responsive" height="700" src="https://kb.cmwlab.com/assets/cmw_platform_lesson7_16.png" width="1693"/></p>
+<p class="caption" style="font-size: 15px !important;">Navigating to the template table list from the data model diagram</p>
+</div>
+<p><strong>6.</strong> In the table list, open the <em>All records </em>table by double-clicking it.</p>
+<p><strong>7.</strong> Configure the table to display only the <em>Title</em> column.</p>
+<p><strong>9.</strong> Click <strong>Save</strong>.</p>
+<p><img alt="Configuring the Statuses default table" class="img-responsive" height="386" src="https://kb.cmwlab.com/assets/img_65523a010a825.png" width="1239"/></p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p class="caption" style="font-size: 15px !important;">Configuring the Statuses table</p>
+</div>
+<p><strong>9.</strong> Go to the <strong>Forms</strong> tab and open the <em>Statuses - Main Form</em>.</p>
+<p><strong>10.</strong> Add the <em>Title</em> attribute to the form.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt='Configuring the "Statuses" main screen form' class="img-responsive" height="592" src="https://kb.cmwlab.com/assets/cmw_platform_lesson7_18.png" width="1693"/></p>
+<p class="caption" style="font-size: 15px !important;">Configuring the Statuses main screen form</p>
+</div>
+<p><strong>11.</strong> Go to the record list and create the following status records: <em>Created</em>, <em>In Approval</em>, <em>Completed</em>, <em>Rejected</em>, and <em>Trip in Progress</em>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Vehicle status records" class="img-responsive" height="592" src="https://kb.cmwlab.com/assets/cmw_platform_lesson7_19.png" width="1693"/></p>
+<p class="caption" style="font-size: 15px !important;">Vehicle status records</p>
+</div>
+<p><strong>12. </strong>Return to the data model diagram and select the <em>Vehicle requests</em> record template.</p>
+<p><strong>13.</strong> Using the element menu, create a new attribute:</p>
+<ul>
+<li><strong>Name:</strong> <em>Status </em></li>
+<li><strong>Data type:</strong> <strong>Record</strong></li>
+<li><strong>Linked template:</strong> <em>Statuses</em></li>
+</ul>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Selected template relationships on the data model diagram are highlighted in blue" class="img-responsive" height="592" src="https://kb.cmwlab.com/assets/cmw_platform_lesson7_20.png" width="1693"/></p>
+<p class="caption" style="font-size: 15px !important;">Selected template relationships on the data model diagram are highlighted in blue</p>
+</div>
+<h3 id="mcetoc_1hf4guk8h2">Configure the Status Calculation</h3>
+<p>Let's configure the vehicle request status calculation depending on the process stage: </p>
+<ul>
+<li><em><span style="letter-spacing: 0.2px;">Created</span></em></li>
+<li><em><span style="letter-spacing: 0.2px;">In Approval</span></em></li>
+<li><em><span style="letter-spacing: 0.2px;">Rejected</span></em></li>
+<li><em><span style="letter-spacing: 0.2px;">Trip in Progress</span></em></li>
+<li><em><span style="letter-spacing: 0.2px;">Completed</span></em></li>
+</ul>
+<h4 id="mcetoc_1hf4iml7v3">Set Status to Created</h4>
+<p><strong>1. </strong>Go to the <em>Ordering a corporate vehicle </em>process diagram and click <strong>Edit</strong>.</p>
+<p><strong>2. </strong>Select the start event and click <strong>Exit scenario </strong>in the element menu.</p>
+<p><strong>3.</strong> Double-click the title of the <strong>Change attribute values </strong>action to configure its properties.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Editing the start event exit scenario" class="img-responsive" height="430" src="https://kb.cmwlab.com/assets/img_655336ce87765.png" width="1229"/></p>
+<p class="caption" style="font-size: 15px !important;">Editing the start event exit scenario</p>
+</div>
+<p><strong>4.</strong> Click <strong>Create </strong>above the attribute table.</p>
+<p><strong>6.</strong> In the <strong>Attribute</strong> column, select the <em>Status</em> attribute.</p>
+<p><strong>7.</strong> In the <strong>Value operation</strong> column, select <strong>Replace</strong>.</p>
+<p><strong>8.</strong> In the <strong>Value</strong> column, select <strong>Formula</strong>.</p>
+<p><strong>9.</strong> In the <strong>Value</strong> field, click <strong>Open in editor</strong>.</p>
+<p><strong>10.</strong> Enter the following formula:</p>
+<pre><code>OBJECT("Vehiclemanagement","Statuses","Title","Created")</code></pre>
+<div class="notice notice-success">
+<p class="admonition-title">Request Status Formula Syntax</p>
+<ul style="letter-spacing: 0.2px;">
+<li><code style="font-size: 13.125px;">OBJECT()</code> — this function takes the application system name, template system name, attribute system name, and attribute value. It returns the ID of the record where the attribute has the specified value.</li>
+<li><code style="font-size: 13.125px;">Vehiclemanagement</code> — the system name of the <em>Vehicle management</em> application.</li>
+<li><span style="letter-spacing: 0.2px;"><code style="font-size: 13.125px;">Statuses</code> — the system name of the <em>Statuses </em>record template.</span></li>
+<li><code style="font-size: 13.125px;">Title</code> — the system name of the <em>Title</em> attribute in the <em><span style="letter-spacing: 0.2px;">Statuses </span></em> <span style="letter-spacing: 0.2px;"> record template. </span></li>
+<li><code style="font-size: 13.125px;">Created</code> — the <em>Title</em> attribute value to search.</li>
+</ul>
+</div>
+<p><code></code></p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="A formula to change the vehicle request status to Created" class="img-responsive" height="592" src="https://kb.cmwlab.com/assets/cmw_platform_lesson7_22.png" width="1693"/></p>
+<p class="caption" style="font-size: 15px !important;">A formula to change the vehicle request status to Created</p>
+</div>
+<p><strong>11.</strong> Click <strong>Apply</strong>, close the expression editor, and click <strong>Save</strong>.</p>
+<h4 id="mcetoc_1hf4imdh02">Set Status to In Approval</h4>
+<p><strong>1.</strong> Return to the process diagram, but do not publish it yet.</p>
+<p><strong>2.</strong> If the business process diagram is not in the editing mode, click <strong>Edit</strong>.</p>
+<p><strong>3.</strong> Select the <em>Approve request</em> user task and click <strong>Entry scenario </strong>in the element menu.</p>
+<p><strong>4.</strong> Add the <strong>Change attribute values</strong> action inside the default <strong>Change the context</strong> action.</p>
+<p><strong>5.</strong> In the <strong>Change attribute values</strong> action, add the <em>Status </em>attribute with the <strong>Replace</strong> <strong>value operation</strong> and the following <strong>Value formula</strong>:</p>
+<pre><code>OBJECT("Vehiclemanagement","Statuses","Title","In Approval")</code></pre>
+<h4 id="mcetoc_1hf4infgd4">Set the Status to Rejected</h4>
+<p><strong>1.</strong> Select the Rejected user task and use the element menu to open the <strong>Entry scenario</strong>.</p>
+<p><strong>2.</strong> Add the <strong>Change attribute values</strong> action inside the default <strong>Change the context</strong> action.</p>
+<p><strong>3.</strong> In the <strong>Change attribute values</strong> action, add the <em>Status </em>attribute with the <strong>Replace</strong> <strong>value operation</strong> and the following <strong>Value formula</strong>:</p>
+<pre><code>OBJECT("Vehiclemanagement","Statuses","Title","Rejected")</code></pre>
+<h4 id="mcetoc_1hf4jropm0">Set Status to Trip in Progress</h4>
+<p><strong>1.</strong> Select a parallel gateway before the <em>Car assigned</em> and <em>Complete the trip </em>user tasks<em>.</em></p>
+<p><strong>2.</strong> Similarly to the above, configure the <strong>Exit scenario</strong> to change the request <em>Status</em> to <em>Trip in Progress</em>:</p>
+<pre><code>OBJECT("Vehiclemanagement","Statuses","Title","<em>Trip in Progress</em>")</code></pre>
+<h4 id="mcetoc_1hf4lo2ic0">Set Status to Completed</h4>
+<p><strong>1.</strong> Select the <em>Success</em> end event.</p>
+<p><strong>2.</strong> Configure the <strong>Entry scenario</strong> to change the request <em>Status</em> to <em>Completed</em>:</p>
+<pre><code>OBJECT("Vehiclemanagement","Statuses","Title","<em>Completed</em>")</code></pre>
+<p><strong>3. </strong>Publish the business process diagram for the changes to take effect.</p>
+<h3 id="mcetoc_1hf42hde9f">Display the Request Status on the Form</h3>
+<p>We have configured a new attribute — vehicle request <em>Status</em>. Let's add it to the request form.</p>
+<p><strong>1.</strong> Open the <strong>Forms</strong> tab of the <em>Vehicle requests</em> record template.</p>
+<p><strong>2.</strong> Open the <em>Vehicle requests - Main Form</em>.</p>
+<p><strong>3.</strong> Arrange the form fields in two or three <strong>columns</strong>.</p>
+<p><strong>4.</strong> Drag the <em>Status</em> attribute to the form.</p>
+<p><strong>5.</strong> Set the  <em>Status</em> field <strong>Access</strong> mode to <strong>Read only</strong>.</p>
+<p><strong>6.</strong> Click <strong>Save</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Adding the Status attribute to the vehicle request form" class="img-responsive" height="529" src="https://kb.cmwlab.com/assets/img_655248a7e701e.png" width="1229"/></p>
+<p class="caption" style="font-size: 15px !important;">Adding the Status attribute to the vehicle request form</p>
+</div>
+<h3 id="mcetoc_1hf4isq438">Display the Request Status and Number in the Request List</h3>
+<p>Let's add the vehicle request status and number to the table listing the vehicle requests.</p>
+<p><strong>1.</strong> Go to the <strong>Tables</strong> tab of the <em>Vehicle requests</em> record template.</p>
+<p><strong>2.</strong> Open the <em>All records </em>table designer.</p>
+<p><strong>3.</strong> Add the <em>Number </em>and <em>Status </em>columns to the table.</p>
+<p><strong>4. </strong>Click <strong>Save</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt='Adding attributes to the "Vehicle requests" default table' class="img-responsive" height="728" src="https://kb.cmwlab.com/assets/cmw_platform_lesson7_24.png" width="1693"/></p>
+<p class="caption" style="font-size: 15px !important;">Adding attributes to the Vehicle requests default table</p>
+</div>
+<h3 id="mcetoc_1gtbe17d91">Test the Request Status Change</h3>
+<p><strong>1.</strong> Go to the instance list of the <em>Ordering a corporate vehicle</em> process template and create a new request.</p>
+<p><strong>2.</strong> In <strong>My tasks</strong>, open the <em>Ordering a corporate vehicle - Approve request</em> task.</p>
+<p><strong>3.</strong> The <em>Status</em> should be <em>In Approval</em>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p> </p>
+<p><img alt="Automatically calculated Status attribute value" class="img-responsive" height="468" src="https://kb.cmwlab.com/assets/img_65532ffb54f9f.png" width="1229"/></p>
+<p> </p>
+<p class="caption" style="font-size: 15px !important;">Automatically calculated Status attribute value</p>
+</div>
+<h2 id="mcetoc_1gtbe8aik2">Customize Task Titles</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Business Requirement</p>
+<p>The default task titles are not very informative — they only contain the process and task names.</p>
+<p>For user convenience, we can add relevant request details to the task titles, e.g., the route and the Initiator's full name.</p>
+</div>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="The list of tasks with default titles" class="img-responsive" height="645" src="https://kb.cmwlab.com/assets/cmw_platform_lesson7_26.png" width="1693"/></p>
+<p class="caption" style="font-size: 15px !important;">The task list with default titles</p>
+</div>
+<p><strong>1.</strong> Go to the <em>Ordering a corporate vehicle</em> business process diagram and click <strong>Edit</strong>.</p>
+<p><strong>2.</strong> Select the <em>Approve request</em> user task.</p>
+<p><strong>3. </strong>Click <strong>Properties</strong> in the element menu.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Navigating to the user task properties" class="img-responsive" height="645" src="https://kb.cmwlab.com/assets/cmw_platform_lesson7_27.png" width="1693"/></p>
+<p class="caption" style="font-size: 15px !important;">Navigating to the user task properties</p>
+</div>
+<p><strong>4.</strong> In the <strong>User task properties</strong> window, go to the <strong>Advanced</strong> tab.</p>
+<p><strong>5.</strong> Select <strong>Formula</strong> in the <strong>Task title</strong> field.</p>
+<p><strong>6.</strong> Enter the following formula:</p>
+<pre><code>FORMAT(Approve request ({0} — {1}),LIST($Route,$_creator-&gt;fullName))</code></pre>
+<div class="notice notice-success">
+<p class="admonition-title">Task Title Formula Syntax</p>
+<ul>
+<li><code>Route </code>— the system name of the <em>Route</em> attribute.</li>
+<li><code>_creator-&gt;fullName</code> — full name of the user who created the request.</li>
+<li><code>FORMAT()</code> — this function takes a string and a value list, replaces the <code>{0}</code>–<code>{n}</code> placeholders with the list values, and returns the resulting string.</li>
+<li><code>LIST()</code> — this function combines its arguments into a list.</li>
+</ul>
+</div>
+<p><strong>7.</strong> Click <strong>Save</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="The Approve request task title formula" class="img-responsive" height="375" src="https://kb.cmwlab.com/assets/cmw_platform_lesson7_28.png" width="1693"/></p>
+<p class="caption" style="font-size: 15px !important;">The Approve request task title formula</p>
+</div>
+<p><strong>8.</strong> Similarly to the above, enter the <strong>Task title</strong> formulas for other tasks, specifying the appropriate task names:</p>
+<ul>
+<li><code>FORMAT(Accept request ({0} — {1}),LIST($Route,$_creator-&gt;fullName))</code></li>
+<li><code>FORMAT(Rejected ({0} — {1}),LIST($Route,$_creator-&gt;fullName))</code></li>
+<li><code>FORMAT(Complete the trip ({0} — {1}),LIST($Route,$_creator-&gt;fullName))</code></li>
+<li><code>FORMAT(Car assigned ({0} — {1}),LIST($Route,$_creator-&gt;fullName))</code></li>
+</ul>
+<p><strong>9.</strong> Publish the business process diagram.</p>
+<h3 id="mcetoc_1gtbev4ug0">Test the Task Title Display in My Tasks</h3>
+<p>Let's view the custom task titles in the task list.</p>
+<p><strong>1.</strong> Go to the instance list of the <em>Ordering a corporate vehicle</em> process template and create a new request.</p>
+<p><strong>2.</strong> Go to <strong>My tasks</strong>. </p>
+<p><strong>2.</strong> The new task title should contain the route and the request creator's full name.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="A task with the calculated task title containing the route and the initiator's name" class="img-responsive" height="660" src="https://kb.cmwlab.com/assets/cmw_platform_lesson7_29.png" width="1693"/></p>
+<p class="caption" style="font-size: 15px !important;">A task with the calculated title including the route and the Initiator's name</p>
+</div>
+<h2 id="mcetoc_1gtbf62aa1">Results</h2>
+<p>Congrats! You have learned how to configure automatic calculations for attribute values and task titles.</p>
+<p>Proceed to <samp data-name="aid" data-title="" data-value="2157"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2157}</span></samp> to configure user accounts, roles, and permissions in your business application.</p>
+<p><a class="md-top md-icon mkdocs_imported_link" href="#"> <em class="fa-light fa-arrow-up">‌</em> Back to top</a></p>

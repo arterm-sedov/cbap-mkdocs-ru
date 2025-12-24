@@ -1,6 +1,8 @@
 ---
-title: Zabbix Agent. Инструкции по установке
+title: 'Zabbix Agent. Инструкции по установке'
 kbId: 4608
+url: 'https://kb.comindware.ru/article.php?id=4608'
+updated: '2024-10-29 16:42:04'
 ---
 
 # Zabbix Agent. Инструкции по установке
@@ -155,6 +157,7 @@ ServerActive=192.168.0.1 # ip-адрес приведён как пример
 
 **Примечание**
 При любых изменениях в файле конфигурации необходимо остановить и снова запустить (при перезапуске используется конфигурация из памяти) сервис Zabbix Agent или перезагрузить компьютер.
+
 ## Использованные ресурсы
 
 [Официальная инструкция по установке Zabbix (на английском языке)](https://www.zabbix.com/documentation/current/en/manual/installation/install#installing-zabbix-daemons)

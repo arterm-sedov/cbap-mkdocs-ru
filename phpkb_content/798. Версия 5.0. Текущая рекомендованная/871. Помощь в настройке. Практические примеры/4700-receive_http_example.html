@@ -1,4 +1,4 @@
-<h1>HTTP-запросы. Получение JSON-данных. Настройка подключения, пути передачи данных и сценария</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4700">
+<h1>HTTP-запросы. Получение JSON-данных. Настройка подключения, пути передачи данных и сценария</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4700" kb-title="HTTP-запросы. Получение JSON-данных. Настройка подключения, пути передачи данных и сценария">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -156,7 +156,7 @@
 <p class="admonition-title">Примечание</p>
 <p>Здесь не рассматривается проверка полученных данных на уникальность и совпадение с имеющимися в записях.</p>
 </div>
-<h2 id="порядок-настройки-получения-http-запросов">Порядок настройки получения HTTP-запросов</h2>
+<h2 class="pageBreakBefore" id="порядок-настройки-получения-http-запросов">Порядок настройки получения HTTP-запросов</h2>
 <ol class="colored_numbers_list">
 <li>Настройте <a class="mkdocs_imported_link" href="#настройка-подключения">подключение</a> для получения HTTP-запросов.</li>
 <li>Настройте <a class="mkdocs_imported_link" href="#настройка-пути-передачи-данных">путь передачи данных</a> для получения HTTP-запросов.</li>
@@ -165,7 +165,7 @@
 </ol>
 <h2 id="настройка-подключения">Настройка подключения</h2>
 <ol class="colored_numbers_list">
-<li>На странице «<strong>Администрирование</strong>» выберите пункт «<strong>Инфраструктура</strong>» — «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4675"><strong>Подключения</strong></a>» <i class="fal fa-exchange-alt">‌<!--icon--></i>.</li>
+<li>На странице «<strong>Администрирование</strong>» выберите пункт «<strong>Инфраструктура</strong>» — «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4675"><strong>Подключения</strong></a>» <i fa-exchange-alt="" fal=""></i>.</li>
 <li>Откройте или создайте подключение типа «<strong>Подключения REST и OData</strong>» — «<strong>Получение HTTP-запросов</strong>».</li>
 <li>
 <p>Настройте подключение к серверу:</p>
@@ -182,7 +182,7 @@
 </li>
 <li>
 <p><strong>Базовый путь получения HTTP-запросов</strong> — добавьте <strong>путь URI</strong>, например <code>uploadData</code>. При необходимости введите дополнительный <strong>путь URI</strong> на вкладке «<strong>Интеграция</strong>» в свойствах <a class="mkdocs_imported_link" href="#настройка-пути-передачи-данных">пути передачи данных</a>. Укажите результирующий путь на внешнем сервере в качестве получателя запроса, например:</p>
-<div class="highlight"><code><pre><span></span><code>https://example.com/api/public/adapter/uploadData</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>https://&lt;hostname&gt;/api/public/adapter/uploadData</code> <br/></pre></code></div>
 </li>
 <li>
 <p><strong>Формат данных</strong> — выберите представление данных:</p>
@@ -289,7 +289,7 @@
 <ol class="colored_numbers_list">
 <li>
 <p>При необходимости укажите дополнительный суффикс в поле «<strong>Путь URI</strong>». Этот суффикс будет добавлен к URL-адресу в поле «<strong>Базовый путь получения HTTP-запросов</strong>» (совпадает с путём, настроенным в <a class="mkdocs_imported_link" href="#настройка-подключения">подключении</a>). Укажите результирующий адрес на внешнем сервере в качестве получателя запросов, например:</p>
-<div class="highlight"><code><pre><span></span><code>https://example.com/api/public/adapter/uploadData</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>https://&lt;hostname&gt;/api/public/adapter/uploadData</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Укажите <strong>атрибуты для десериализации данных</strong>. По умолчанию следует указать <code>$</code> в обоих столбцах, чтобы получить всю структуру JSON из запроса. Для поиска определенного атрибута используйте JSONPath.</p>
@@ -314,8 +314,6 @@
 </li>
 <li>
 <p>Добавьте действие «<strong>Повторять по количеству объектов</strong>» со следующими свойствами:</p>
-</li>
-</ol>
 <ul>
 <li><strong>Имя переменной:</strong> <em>local</em></li>
 <li>
@@ -323,16 +321,14 @@
 <div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы</span></code> <br/><code><span class="c"># с данными текущего сеанса и переменными</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">session:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">var:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session/variable#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Request — переменная из первого блока, </span></code> <br/><code>    <span class="c"># в которой находится разобранный JSON</span></code> <br/><code>    <span class="nn">session</span><span class="p">:</span><span class="nt">context</span> <span class="nn">var</span><span class="p">:</span><span class="nt">Request</span> <span class="err">?req</span><span class="p">.</span></code> <br/><code>    <span class="c"># ListZakazov - переменная, </span></code> <br/><code>    <span class="c"># в которой находится массив объектов</span></code> <br/><code>    <span class="err">?req</span> <span class="nn">var</span><span class="p">:</span><span class="nt">ListZakazov</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
 </li>
 </ul>
-<ol class="colored_numbers_list" start="4">
+</li>
 <li>
 <p>Внутрь действия «<strong>Повторять по количеству объектов</strong>» добавьте действие «<strong>Создать запись</strong>» и укажите  шаблон записи <em>«Заказы»</em>.</p>
 </li>
-<li>
-<p>Внутрь действия «<strong>Создать запись</strong>» добавьте действие «<strong>Изменить значения атрибутов</strong>».</p>
-</li>
+<li>Внутрь действия «<strong>Создать запись</strong>» добавьте действие «<strong>Изменить значения атрибутов</strong>».</li>
 <li>В действии «<strong>Изменить значения атрибутов</strong>» на вкладке «<strong>Дополнительно</strong>» установите флажок «<strong>Сбрасывать кэш значений</strong>».</li>
 <li>
-<p>На вкладке «<strong>Основные</strong>» настройте следующие атрибуты::</p>
+<p>На вкладке «<strong>Основные</strong>» настройте следующие атрибуты:</p>
 <table style="width: 100%;">
 <thead>
 <tr>
@@ -374,18 +370,18 @@
 <p><figure class="screenshot_with_caption" markdown=""><img alt="Сценарий обработки заказа" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/json10.png"/><figcaption class="caption">Сценарий обработки заказа</figcaption></figure></p>
 </li>
 </ol>
-<h2 id="тестирование">Тестирование</h2>
+<h2 class="pageBreakBefore" id="тестирование">Тестирование</h2>
 <ol class="colored_numbers_list">
 <li>
 <p>С внешнего сервера отправьте в <strong>Comindware Platform</strong> запрос с данными заказов, например:</p>
-<p><div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\\</span></code> <br/><code><span class="w">    </span>-u<span class="w"> </span>username:password<span class="w"> </span><span class="se">\\</span></code> <br/><code><span class="w">    </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\\</span></code> <br/><code><span class="w">    </span>-d<span class="w"> </span><span class="s1">'{</span></code> <br/><code><span class="s1">        "ListZakazov": [</span></code> <br/><code><span class="s1">            {</span></code> <br/><code><span class="s1">                "Zakaz": {</span></code> <br/><code><span class="s1">                    "Client": "Петров",</span></code> <br/><code><span class="s1">                    "Nomer": 54,</span></code> <br/><code><span class="s1">                    "Tovar": "Яблоко"</span></code> <br/><code><span class="s1">                }</span></code> <br/><code><span class="s1">            },</span></code> <br/><code><span class="s1">            {</span></code> <br/><code><span class="s1">                "Zakaz": {</span></code> <br/><code><span class="s1">                    "Client": "Иванов",</span></code> <br/><code><span class="s1">                    "Nomer": 60,</span></code> <br/><code><span class="s1">                    "Tovar": "Банан"</span></code> <br/><code><span class="s1">                }</span></code> <br/><code><span class="s1">            },</span></code> <br/><code><span class="s1">            {</span></code> <br/><code><span class="s1">                "Zakaz": {</span></code> <br/><code><span class="s1">                    "Client": "Сидоров",</span></code> <br/><code><span class="s1">                    "Nomer": 61,</span></code> <br/><code><span class="s1">                    "Tovar": "Груша"</span></code> <br/><code><span class="s1">                }</span></code> <br/><code><span class="s1">            }</span></code> <br/><code><span class="s1">        ]</span></code> <br/><code><span class="s1">    }'</span><span class="w"> </span><span class="se">\\</span></code> <br/><code><span class="w">    </span>https://example.com/api/public/adapter/uploadData</code> <br/><code><span class="w">    </span>-<span class="w"> </span>v</code> <br/></pre></code></div>
+<p><div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\\</span></code> <br/><code><span class="w">    </span>-u<span class="w"> </span>username:password<span class="w"> </span><span class="se">\\</span></code> <br/><code><span class="w">    </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\\</span></code> <br/><code><span class="w">    </span>-d<span class="w"> </span><span class="s1">'{</span></code> <br/><code><span class="s1">        "ListZakazov": [</span></code> <br/><code><span class="s1">            {</span></code> <br/><code><span class="s1">                "Zakaz": {</span></code> <br/><code><span class="s1">                    "Client": "Петров",</span></code> <br/><code><span class="s1">                    "Nomer": 54,</span></code> <br/><code><span class="s1">                    "Tovar": "Яблоко"</span></code> <br/><code><span class="s1">                }</span></code> <br/><code><span class="s1">            },</span></code> <br/><code><span class="s1">            {</span></code> <br/><code><span class="s1">                "Zakaz": {</span></code> <br/><code><span class="s1">                    "Client": "Иванов",</span></code> <br/><code><span class="s1">                    "Nomer": 60,</span></code> <br/><code><span class="s1">                    "Tovar": "Банан"</span></code> <br/><code><span class="s1">                }</span></code> <br/><code><span class="s1">            },</span></code> <br/><code><span class="s1">            {</span></code> <br/><code><span class="s1">                "Zakaz": {</span></code> <br/><code><span class="s1">                    "Client": "Сидоров",</span></code> <br/><code><span class="s1">                    "Nomer": 61,</span></code> <br/><code><span class="s1">                    "Tovar": "Груша"</span></code> <br/><code><span class="s1">                }</span></code> <br/><code><span class="s1">            }</span></code> <br/><code><span class="s1">        ]</span></code> <br/><code><span class="s1">    }'</span><span class="w"> </span><span class="se">\\</span></code> <br/><code><span class="w">    </span>https://&lt;hostname&gt;/api/public/adapter/uploadData</code> <br/><code><span class="w">    </span>-<span class="w"> </span>v</code> <br/></pre></code></div>
 Здесь:</p>
 <ul>
 <li><code>-X POST</code> — метод запроса (необязательный ключ);</li>
 <li><code>-u username:password</code> — базовая аутентификация c учётными данными аккаунта с разрешением на <strong>вызовы API</strong> <strong>Comindware Platform</strong>;</li>
 <li><code>-H "Content-Type: application/json"</code> — заголовок, указывающий на формат данных JSON;</li>
 <li><code>-d '...'</code> — тело запроса с JSON-структурой;</li>
-<li><code>https://example.com/api/public/adapter/uploadData</code> — <strong>базовый путь получения HTTP-запросов</strong> и <strong>путь URI</strong>, настроенные в <a class="mkdocs_imported_link" href="#настройка-пути-передачи-данных">пути передачи данных</a>;</li>
+<li><code>https://&lt;hostname&gt;/api/public/adapter/uploadData</code> — <strong>базовый путь получения HTTP-запросов</strong> и <strong>путь URI</strong>, настроенные в <a class="mkdocs_imported_link" href="#настройка-пути-передачи-данных">пути передачи данных</a>;</li>
 <li><code>-v</code> — вывод отладочных данных (необязательный ключ).</li>
 </ul>
 </li>
@@ -400,7 +396,7 @@
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
 <li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5083">HTTP-запросы с составным содержимым. Получение файлов в сценарии</a></em></li>
-<li><em><a class="autorefs autorefs-internal mkdocs_imported_link" href="http_send_file.html#http_send_file">HTTP-запросы типа POST. Отправка составного содержимого и файлов</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5066">HTTP-запросы типа POST. Отправка составного содержимого и файлов</a></em></li>
 <li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4717">Сценарии</a></em></li>
 <li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4653">Аккаунты</a></em></li>
 <li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4662">Системные роли</a></em></li>

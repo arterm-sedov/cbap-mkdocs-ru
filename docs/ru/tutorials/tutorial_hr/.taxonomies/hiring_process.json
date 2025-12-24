@@ -1,0 +1,39 @@
+{
+  "process": {
+    "id": "Process_1",
+    "name": "Отбор кандидата на открытую вакансию",
+    "lanes": [
+      {"id": "Lane_HR", "name": "HR-менеджер"},
+      {"id": "Lane_Manager", "name": "Нанимающий менеджер"},
+      {"id": "Lane_Security", "name": "Служба безопасности"}
+    ],
+    "elements": [
+      {"type": "none_start_event", "id": "StartEvent_1", "name": "Получены результаты тестирования", "lane": "Lane_HR"},
+      {"type": "user_task", "id": "Task_1", "name": "Зафиксировать результаты тестирования", "lane": "Lane_HR"},
+      {"type": "exclusive_gateway", "id": "Gateway_1", "name": "Кандидат прошёл тестирование?", "lane": "Lane_HR"},
+      {"type": "none_end_event", "id": "EndEvent_1", "name": "Кандидат не прошёл тестирование", "lane": "Lane_HR"},
+      {"type": "parallel_gateway", "id": "Gateway_2", "name": "Параллельное выполнение: собеседование и проверка", "lane": "Lane_HR"},
+      {"type": "user_task", "id": "Task_2", "name": "Провести собеседование", "lane": "Lane_Manager"},
+      {"type": "user_task", "id": "Task_3", "name": "Провести проверку кандидата", "lane": "Lane_Security"},
+      {"type": "parallel_gateway", "id": "Gateway_3", "name": "Синхронизация после параллельных задач", "lane": "Lane_HR"},
+      {"type": "exclusive_gateway", "id": "Gateway_4", "name": "Кандидат прошёл проверку?", "lane": "Lane_HR"},
+      {"type": "none_end_event", "id": "EndEvent_2", "name": "Кандидат не прошёл проверку", "lane": "Lane_HR"},
+      {"type": "user_task", "id": "Task_4", "name": "Сформировать и согласовать предложение с кандидатом", "lane": "Lane_HR"},
+      {"type": "none_end_event", "id": "EndEvent_3", "name": "Кандидат принят на работу", "lane": "Lane_HR"}
+    ],
+    "flows": [
+      {"id": "Flow_1", "source": "StartEvent_1", "target": "Task_1"},
+      {"id": "Flow_2", "source": "Task_1", "target": "Gateway_1"},
+      {"id": "Flow_3", "source": "Gateway_1", "target": "EndEvent_1", "name": "Нет"},
+      {"id": "Flow_4", "source": "Gateway_1", "target": "Gateway_2", "name": "Да"},
+      {"id": "Flow_5", "source": "Gateway_2", "target": "Task_2"},
+      {"id": "Flow_6", "source": "Gateway_2", "target": "Task_3"},
+      {"id": "Flow_7", "source": "Task_2", "target": "Gateway_3"},
+      {"id": "Flow_8", "source": "Task_3", "target": "Gateway_3"},
+      {"id": "Flow_9", "source": "Gateway_3", "target": "Gateway_4"},
+      {"id": "Flow_10", "source": "Gateway_4", "target": "EndEvent_2", "name": "Нет"},
+      {"id": "Flow_11", "source": "Gateway_4", "target": "Task_4", "name": "Да"},
+      {"id": "Flow_12", "source": "Task_4", "target": "EndEvent_3"}
+    ]
+  }
+} 

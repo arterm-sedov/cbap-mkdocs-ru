@@ -1,0 +1,14 @@
+<h1>Optimizing Calculated Attributes</h1><p>One possible reason for the performance degradation of CMW Platform is the use of calculated attributes. According to the existing logic, the value in the calculated attribute is not stored, but is calculated every time it is referred to. Depending on the complexity and correctness of the written expression, for example, a cyclic formula, recalculation can take a significant amount of time, and a calculated attribute can significantly affect the performance of some sections of the system:</p>
+<ul>
+<li>Table of records — when a calculated attribute is displayed on a table of records, at the moment the table is opened, all values ​​are recalculated according to the specified calculated expression;</li>
+<li>Record form — when a calculated attribute is displayed on a record form, the value is recalculated not only at the moment the form is opened, but also at any click on the attribute, changing the value of any other attribute, adding a record to the collection, etc .;</li>
+<li>API, C# scripts — when accessing data through the API, for example, obtaining information on a specific record or an array of records, the value for a calculated attribute will be recalculated before sending the request, which may increase the time it takes to receive a response to a request.</li>
+</ul>
+<p><strong>Solution</strong></p>
+<ol class="colored_numbers_list">
+<li><span style="letter-spacing: 0.2px;">Whenever possible, we recommend not to transfer calculated attributes to tables frequently used by employees to obtain operational information. Drag them out only for reports with warning users about a possible increase in data loading time.</span></li>
+<li><span style="letter-spacing: 0.2px;">When writing a calculated expression in Comindware Expression Language, we recommend rewriting it in N3 (you can find examples of expressions in N3 in the <a href="https://kb.cmwlab.com/category/411/">N3 language</a> category).</span></li>
+<li><span style="letter-spacing: 0.2px;">Use alternative options for obtaining a similar result instead of using calculated fields (items 4 and 5).</span></li>
+<li><span style="letter-spacing: 0.2px;">When using a calculated attribute in a process, it is possible to replace it with setting an entry or exit scenarios for a process element.</span></li>
+<li>When using a calculated attribute on a record form, it is possible to replace it with setting a value in the rules for a specific form.</li>
+</ol>

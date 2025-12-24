@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4622" kb-tags="" kb-title="Установка, запуск, инициализация и остановка ПО">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4622" kb-tags="linux,администрирование,инициализация,ключи,конфигурация,пререквезиты,развертывание,развёртывание,скрипты установки,установка,установочные скрипты,установщик" kb-title="Установка, запуск, инициализация и остановка ПО">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -259,19 +259,15 @@
 </li>
 <li>
 <p>Установите ПО из дистрибутива:</p>
-<div class="highlight"><code><pre><span></span><code>sh<span class="w"> </span>prerequisites_install.sh<span class="w"> </span>-p<span class="w"> </span><span class="o">[</span>-k<span class="o">]</span><span class="w"> </span><span class="o">[</span>-e<span class="o">]</span></code> <br/></pre></code></div>
-<p class="pageBreakBefore">Скрипт <code>prerequisites_install.sh</code> поддерживает следующие ключи:</p>
+<div class="highlight"><code><pre><span></span><code>sh<span class="w"> </span>prerequisites_install.sh<span class="w"> </span>-p</code> <br/></pre></code></div>
+<p class="pageBreakBefore">Ключи скрипта <code>prerequisites_install.sh</code>:</p>
 <ul>
-<li>
-<p><code>-p</code> — установить обязательное вспомогательное ПО.</p>
-</li>
-<li>
-<p><code>-e</code> — установить службу Elasticsearch (необязательный ключ).</p>
-</li>
-<li>
-<p><code>-k</code> — установить службу Kafka (необязательный ключ).</p>
-</li>
+<li><code>-p</code> — установить обязательное вспомогательное ПО.</li>
+<li><code>-d</code> — установить или переустановить ПО .NET (необязательный ключ).</li>
+<li><code>-e</code> или <code>-o</code> — установить службу Elasticsearch или OpenSearch (необязательный ключ).</li>
+<li><code>-i</code> — установить службу Apache Ignite (необязательный ключ).</li>
 <li><code>-kc</code> — установить клиент Apache Kafka (необязательный ключ).</li>
+<li><code>-k</code> — установить службу Apache Kafka (необязательный ключ).</li>
 <li><code>-kh=&lt;hostname&gt;</code> или <code>--kafkaHost=&lt;hostname&gt;</code> — использовать указанный хост для подключения к ПО Kafka (необязательный ключ).</li>
 <li><code>-kp=&lt;portNumber&gt;</code> или <code>--kafkaPort=&lt;portNumber&gt;</code> — использовать указанный порт для подключения к ПО Kafka (необязательный ключ).</li>
 <li><code>-h</code> — вызов краткой справки по использованию скрипта (указывать только без остальных ключей).</li>
@@ -289,11 +285,14 @@
 <li>
 <p>По окончании установки скрипт выведет информацию об установленных компонентах. Удостоверьтесь, что компоненты успешно установлены (имеют статус <code>OK</code>).</p>
 <p>Пример результата выполнения скрипта с ключом <code>-p</code> без установки OpenSearch (Elasticsearch) и Kafka:</p>
-<div class="highlight"><code><pre><span></span><code><span class="o">[</span>Done<span class="o">]</span><span class="w"> </span>Creating<span class="w"> </span>CBAP<span class="w"> </span>Data<span class="w"> </span>Dir.</code> <br/><code>-----------------------------------------</code> <br/><code>Environment<span class="w"> </span>details</code> <br/><code>Status<span class="w">     </span><span class="p">|</span><span class="w"> </span>Software<span class="w">   </span><span class="p">|</span><span class="w"> </span>Version<span class="w">   </span></code> <br/><code>-----------------------------------------</code> <br/><code>OK<span class="w">         </span><span class="p">|</span><span class="w"> </span>mono<span class="w">       </span><span class="p">|</span><span class="w"> </span><span class="m">6</span>.12.0.200<span class="w">     </span></code> <br/><code>OK<span class="w">         </span><span class="p">|</span><span class="w"> </span>dotnet<span class="w">     </span><span class="p">|</span><span class="w"> </span><span class="m">6</span>.0.417<span class="w">        </span></code> <br/><code>OK<span class="w">         </span><span class="p">|</span><span class="w"> </span>java<span class="w">       </span><span class="p">|</span><span class="w"> </span><span class="m">17</span>.0.7<span class="w">            </span></code> <br/><code>OK<span class="w">     </span>NGINX<span class="w"> </span>installed.</code> <br/><code>OK<span class="w">     </span>NGINX<span class="w"> </span>started.</code> <br/><code>OK<span class="w">     </span>CBAP<span class="w"> </span>version<span class="w"> </span>folder<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>CBAP<span class="w"> </span>configs<span class="w"> </span>folder<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>CBAP<span class="w"> </span>data<span class="w"> </span>folder<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>CBAP<span class="w"> </span>logs<span class="w"> </span>folder<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>CBAP<span class="w"> </span>dotnet<span class="w"> </span>folder<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>Local<span class="w"> </span>elasticsearch<span class="w"> </span>server<span class="w"> </span>installed:<span class="w"> </span>No<span class="w"> </span></code> <br/><code>OK<span class="w">     </span>Local<span class="w"> </span>elasticsearch<span class="w"> </span>server<span class="w"> </span>started:<span class="w"> </span>No<span class="w"> </span></code> <br/><code>OK<span class="w">     </span>Local<span class="w"> </span>kafka<span class="w"> </span>server<span class="w"> </span>installed:<span class="w"> </span>No<span class="w"> </span></code> <br/><code>OK<span class="w">     </span>Local<span class="w"> </span>kafka<span class="w"> </span>server<span class="w"> </span>started:<span class="w"> </span>No<span class="w"> </span></code> <br/><code>OK<span class="w">     </span>Final<span class="w"> </span>status.</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="o">[</span>Done<span class="o">]</span><span class="w"> </span>Creating<span class="w"> </span>CBAP<span class="w"> </span>Data<span class="w"> </span>Dir.</code> <br/><code>-----------------------------------------</code> <br/><code>Environment<span class="w"> </span>details</code> <br/><code>Status<span class="w">     </span><span class="p">|</span><span class="w"> </span>Software<span class="w">   </span><span class="p">|</span><span class="w"> </span>Version</code> <br/><code>-----------------------------------------</code> <br/><code>OK<span class="w">         </span><span class="p">|</span><span class="w"> </span>mono<span class="w">       </span><span class="p">|</span><span class="w"> </span><span class="m">6</span>.12.0.200</code> <br/><code>OK<span class="w">         </span><span class="p">|</span><span class="w"> </span>dotnet<span class="w">     </span><span class="p">|</span><span class="w"> </span><span class="m">8</span>.0.</code> <br/><code>OK<span class="w">         </span><span class="p">|</span><span class="w"> </span>java<span class="w">       </span><span class="p">|</span><span class="w"> </span><span class="m">17</span>.0.7</code> <br/><code>OK<span class="w">     </span>NGINX<span class="w"> </span>installed.</code> <br/><code>OK<span class="w">     </span>NGINX<span class="w"> </span>started.</code> <br/><code>OK<span class="w">     </span>CBAP<span class="w"> </span>version<span class="w"> </span>folder<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>CBAP<span class="w"> </span>configs<span class="w"> </span>folder<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>CBAP<span class="w"> </span>data<span class="w"> </span>folder<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>CBAP<span class="w"> </span>logs<span class="w"> </span>folder<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>CBAP<span class="w"> </span>dotnet<span class="w"> </span>folder<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>Local<span class="w"> </span>elasticsearch<span class="w"> </span>server<span class="w"> </span>installed:<span class="w"> </span>No<span class="w"> </span></code> <br/><code>OK<span class="w">     </span>Local<span class="w"> </span>elasticsearch<span class="w"> </span>server<span class="w"> </span>started:<span class="w"> </span>No<span class="w"> </span></code> <br/><code>OK<span class="w">     </span>Local<span class="w"> </span>kafka<span class="w"> </span>server<span class="w"> </span>installed:<span class="w"> </span>No<span class="w"> </span></code> <br/><code>OK<span class="w">     </span>Local<span class="w"> </span>kafka<span class="w"> </span>server<span class="w"> </span>started:<span class="w"> </span>No<span class="w"> </span></code> <br/><code>OK<span class="w">     </span>Final<span class="w"> </span>status.</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Удостоверьтесь, что компоненты установлены:</p>
 <div class="highlight"><code><pre><span></span><code>sh<span class="w"> </span>prerequisites_list.sh</code> <br/></pre></code></div>
+</li>
+<li>
+<p>При необходимости установите недостающие необходимые компоненты, запустив скрипт с соответствующими флагами.</p>
 </li>
 </ol>
 <h2 id="deploy_guide_linux_install_sw">Установка ПО Comindware Platform</h2>
@@ -446,7 +445,7 @@
 <li>
 <p>Разверните экземпляр ПО:</p>
 <div class="highlight"><code><pre><span></span><code>sh<span class="w"> </span>instance_create.sh<span class="w"> </span>-n<span class="o">=</span>&lt;instanceName&gt;<span class="w"> </span>-v<span class="o">=</span>&lt;versionNumber&gt;<span class="w"> </span><span class="o">[</span>-p<span class="o">=</span>&lt;portNumber&gt;<span class="o">]</span></code> <br/></pre></code></div>
-<p>Скрипт <code>instance_create.sh</code> поддерживает следующие ключи:</p>
+<p>Ключи скрипта <code>instance_create.sh</code>:</p>
 <ul>
 <li><code>-n=&lt;instanceName&gt;</code> — имя экземпляра ПО (<strong>обязательный</strong> ключ).</li>
 <li><code>-v=&lt;versionNumber&gt;</code> — номер версии ПО вида <code>X.X.XXXXX.X</code> (например: 5.0.00000.0, <strong>обязательный</strong> ключ). Версия должна быть установлена, см. <em>«<a class="mkdocs_imported_link" href="#deploy_guide_linux_install_sw">Установка Comindware Platform</a>»</em>.</li>
@@ -534,6 +533,13 @@
 <h2 class="pageBreakBefore" id="deploy_guide_linux_initialize">Инициализация Comindware Platform</h2>
 <ol class="colored_numbers_list">
 <li>
+<p>Удостоверьтесь, что корректно настроен файл конфигурации экземпляра ПО. См.:</p>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5067">Конфигурация экземпляра, компонентов ПО и служб. Настройка</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a></em></li>
+</ul>
+</li>
+<li>
 <p>Запустите веб-браузер и в адресной строке введите URL-адрес, на котором был развёрнут экземпляр ПО:</p>
 <div class="highlight"><code><pre><span></span><code>http://&lt;instanceHost&gt;:&lt;portNumber&gt;</code> <br/></pre></code></div>
 </li>
@@ -556,23 +562,6 @@
 </li>
 <li>
 <p>При необходимости откроется страница активации ПО. Выполните <strong>онлайновую</strong> или <strong>ручную активацию</strong> либо нажмите кнопку «<strong>Пропустить</strong>» для первоначального ознакомления с ПО без активации.</p>
-</li>
-<li>
-<p>При необходимости откроется страница настройки подключения к службе OpenSearch (Elasticsearch).</p>
-<ul>
-<li>В поле «<strong>URI</strong>» введите адрес сервера OpenSearch (Elasticsearch), например: <code>http://&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;</code>.</li>
-<li>При необходимости введите <strong>имя пользователя</strong> и <strong>пароль</strong> OpenSearch (Elasticsearch).</li>
-<li>Установите уникальный <strong>префикс индекса</strong>, например <code>mycompanyprefix</code>.</li>
-<li>Экземпляр ПО будет взаимодействовать с OpenSearch (Elasticsearch) под указанным пользователем и создавать, наполнять и читать индексы с заданным префиксом.</li>
-<li>Нажмите кнопку «<strong>Далее</strong>».</li>
-</ul>
-</li>
-<li>
-<p>При необходимости откроется страница инициализации данных в OpenSearch (Elasticsearch).</p>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Страница инициализации данных в OpenSearch (Elasticsearch)" src="/platform/v5.0/administration/deploy/linux/img/deploy_guide_elasticsearch_initialize.png"/><figcaption class="caption">Страница инициализации данных в OpenSearch (Elasticsearch)</figcaption></figure></p>
-</li>
-<li>
-<p>Нажмите кнопку «<strong>Обновить</strong>».</p>
 </li>
 <li>Дождитесь открытия начальной страницы <strong>Comindware Platform</strong>.</li>
 <li>На этом этапе развертывание экземпляра <strong>Comindware Platform</strong> завершено.</li>

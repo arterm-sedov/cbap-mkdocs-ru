@@ -1,0 +1,147 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5147" kb-tags="C#,активная задача,задачи,кнопки,исполнитель,навигация,пользовательская задача,принять в работу,процессы,скрипт,скрипты,сишарп" kb-title="Кнопка «Перейти к активной задаче пользователя». Настройка на C#">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_task_open_related_button_csharp_intro">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_task_open_related_button_csharp_use_case">
+<span class="md-ellipsis">
+      Прикладная задача
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_task_open_related_button_csharp_configure">
+<span class="md-ellipsis">
+      Настройка скрипта
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_task_open_related_button_csharp_test">
+<span class="md-ellipsis">
+      Тестирование
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="example_task_open_related_button_csharp_intro">Введение</h2>
+<p>Здесь представлен пример С#-скрипта для кнопки на форме записи, связанной с процессом. Нажав эту кнопку <strong>пользователь может перейти к своей активной задаче</strong>, связанной с этой записью.</p>
+<p>Скрипт проверяет наличие задач, связанных с записью, находит первую задачу, назначенную текущему пользователю, и выполняет переход к ней.</p>
+<div class="notice notice-success">
+<p class="admonition-title">Активная задача пользователя</p>
+<p>Приведённый здесь скрипт осуществляет переход к <strong>активной задаче</strong> пользователя:</p>
+<ul>
+<li>если задаче назначен <strong>только один исполнитель</strong>, то она считается активной для этого пользователя.</li>
+<li>если задаче назначено <strong>несколько возможных исполнителей</strong>, пользователь <strong>должен принять задачу в работу</strong>. <strong>Только принятая в работу</strong> задача будет назначена пользователю как активная. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5146">Кнопка «Принять в работу» для задачи. Настройка на C#</a>»</em></li>
+</ul>
+</div>
+<h2 class="pageBreakBefore" id="example_task_open_related_button_csharp_use_case">Прикладная задача</h2>
+<p>В бизнес-процессе с несколькими задачами пользователю требуется быстро перейти к своей активной задаче из записи, связанной с процессом.</p>
+<p>Например, в процессе согласования договора менеджер открывает запись договора и хочет сразу перейти к своей задаче на согласование, не выполняя поиск в списке задач.</p>
+<p>При нажатии кнопки <em>«Перейти к задаче»</em> скрипт должен выполнять следующие действия:</p>
+<ul>
+<li>проверить наличие задач, связанных с открытой записью;</li>
+<li>найти первую задачу, назначенную текущему пользователю;</li>
+<li>открыть найденную задачу;</li>
+<li>подходящая задача не найдена, показать пользователю соответствующее сообщение.</li>
+</ul>
+<h2 class="pageBreakBefore" id="example_task_open_related_button_csharp_configure">Настройка скрипта</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Логика работы скрипта</p>
+<p>Представленный здесь скрипт работает следующим образом:</p>
+<ol class="colored_numbers_list">
+<li>Получает ID текущего пользователя из контекста операции кнопки.</li>
+<li>Получает ID записи из контекста операции кнопки.</li>
+<li>Получает словарь ссылок на объекты, связанные с текущей записью.</li>
+<li>Проверяет наличие в словаре ссылок на задачи по ключу <code>cmw.task.objectId</code>.</li>
+<li>Получает коллекцию ID задач, связанных с текущей записью.</li>
+<li>Перебирает найденные задачи и ищет первую, назначенную текущему пользователю.</li>
+<li>Выполняет переход к найденной задаче или возвращает сообщение об ошибке.</li>
+</ol>
+</div>
+<ol class="colored_numbers_list">
+<li>
+<p>В <strong>шаблоне записи</strong>, связанном с шаблоном процесса, создайте кнопку со следующими свойствами:</p>
+<ul>
+<li><strong>Отображаемое название:</strong> <em>Перейти к задаче</em></li>
+<li><strong>Контекст операции: запись</strong></li>
+<li><strong>Операция: C#-скрипт</strong></li>
+<li><strong>Результат выполнения: навигация</strong></li>
+</ul>
+</li>
+<li>
+<p>На вкладке «<strong>Скрипт</strong>» введите следующий код:</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Важно: подстановка ID процесса</p>
+<p><strong>Обязательно</strong> замените в коде значение <code>pa.1</code> в строке <code>ContainerId = "pa.1"</code> на фактический ID процесса, связанного с шаблоном записей, из которых пользователь должен переходить к задачам.</p>
+<p>ID процесса отображается в списке шаблонов процессов и в URL при настройке процесса.</p>
+</div>
+<div class="highlight"><span class="filename">Скрипт для перехода к активной задаче пользователя</span><code><pre><span></span><code><span class="c1">// Импорт базовых типов и функций .NET Framework для работы с данными.</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span></code> <br/><code><span class="c1">// Импорт классов коллекций и словарей для хранения данных.</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Collections.Generic</span><span class="p">;</span></code> <br/><code><span class="c1">// Импорт классов для работы с LINQ-запросами.</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Linq</span><span class="p">;</span></code> <br/><code><span class="c1">// Импорт классов для работы с сущностями данных.</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.Data.Entity</span><span class="p">;</span></code> <br/><code><span class="c1">// Импорт классов для обработки нажатий кнопок </span></code> <br/><code><span class="c1">// и возврата результатов выполнения скрипта.</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.TeamNetwork.Api.Data.UserCommands</span><span class="p">;</span></code> <br/><code><span class="c1">// Импорт основных классов для работы с данными в {{ productName }}.</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.TeamNetwork.Api.Data</span><span class="p">;</span></code> <br/><code></code> <br/><code><span class="k">class</span><span class="w"> </span><span class="nc">Script</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="c1">// userCommandContext содержит данные контекста при нажатии кнопки.</span></code> <br/><code><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">UserCommandResult</span><span class="w"> </span><span class="nf">Main</span><span class="p">(</span><span class="n">UserCommandContext</span><span class="w"> </span><span class="n">userCommandContext</span><span class="p">,</span><span class="w"> </span><span class="n">Comindware</span><span class="p">.</span><span class="n">Entities</span><span class="w"> </span><span class="n">entities</span><span class="p">)</span></code> <br/><code><span class="w">    </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="c1">// Получаем ID текущего пользователя, нажавшего кнопку.</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">currentUser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userCommandContext</span><span class="p">.</span><span class="n">CurrentUserId</span><span class="p">;</span></code> <br/><code><span class="w">        </span><span class="c1">// Получаем ID записи из контекста операции кнопки.</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">objectId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userCommandContext</span><span class="p">.</span><span class="n">ObjectIds</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span></code> <br/><code></code> <br/><code><span class="w">        </span><span class="c1">// Получаем словарь ссылок на все объекты, связанные с записью:</span></code> <br/><code><span class="w">        </span><span class="c1">// ключи — типы ссылок, </span></code> <br/><code><span class="w">        </span><span class="c1">// значения — коллекции ID связанных объектов.</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">refData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">Base</span><span class="p">.</span><span class="n">OntologyService</span><span class="p">.</span><span class="n">GetReferences</span><span class="p">(</span><span class="n">objectId</span><span class="p">);</span></code> <br/><code></code> <br/><code><span class="w">        </span><span class="c1">// Проверяем в словаре наличие ссылок на задачи</span></code> <br/><code><span class="w">        </span><span class="c1">// по ключу cmw.task.objectId</span></code> <br/><code><span class="w">        </span><span class="c1">// и получаем коллекцию ID задач, связанных с текущей записью.</span></code> <br/><code><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">refData</span><span class="p">.</span><span class="n">ContainsKey</span><span class="p">(</span><span class="s">"cmw.task.objectId"</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">refData</span><span class="p">[</span><span class="s">"cmw.task.objectId"</span><span class="p">].</span><span class="n">Any</span><span class="p">())</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">taskRefs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">refData</span><span class="p">[</span><span class="s">"cmw.task.objectId"</span><span class="p">];</span></code> <br/><code></code> <br/><code><span class="w">            </span><span class="kt">string</span><span class="w"> </span><span class="n">idTask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">;</span></code> <br/><code></code> <br/><code><span class="w">            </span><span class="c1">// Ищем первую задачу, назначенную текущему пользователю.</span></code> <br/><code><span class="w">            </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">taskRef</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">taskRefs</span><span class="p">)</span></code> <br/><code><span class="w">            </span><span class="p">{</span></code> <br/><code><span class="w">                </span><span class="kt">var</span><span class="w"> </span><span class="n">taskId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">taskRef</span><span class="p">.</span><span class="n">ToString</span><span class="p">();</span></code> <br/><code><span class="w">                </span><span class="kt">var</span><span class="w"> </span><span class="n">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">UserTaskService</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="n">taskId</span><span class="p">);</span></code> <br/><code></code> <br/><code><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="n">Assignee</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">currentUser</span><span class="p">)</span></code> <br/><code><span class="w">                </span><span class="p">{</span></code> <br/><code><span class="w">                    </span><span class="n">idTask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">taskId</span><span class="p">;</span></code> <br/><code><span class="w">                    </span><span class="k">break</span><span class="p">;</span></code> <br/><code><span class="w">                </span><span class="p">}</span></code> <br/><code><span class="w">            </span><span class="p">}</span></code> <br/><code></code> <br/><code><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">idTask</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span></code> <br/><code><span class="w">            </span><span class="p">{</span></code> <br/><code><span class="w">                </span><span class="c1">// Переходим к найденной задаче.</span></code> <br/><code><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">UserCommandResult</span><span class="p">()</span></code> <br/><code><span class="w">                </span><span class="p">{</span></code> <br/><code><span class="w">                    </span><span class="n">Success</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">,</span></code> <br/><code><span class="w">                    </span><span class="n">Commited</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">,</span></code> <br/><code><span class="w">                    </span><span class="n">ResultType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UserCommandResultType</span><span class="p">.</span><span class="n">Navigate</span><span class="p">,</span></code> <br/><code><span class="w">                    </span><span class="n">NavigationResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserCommandNavigationResult</span></code> <br/><code><span class="w">                    </span><span class="p">{</span></code> <br/><code><span class="w">                        </span><span class="c1">// Обязательно замените значение `pa.1`</span></code> <br/><code><span class="w">                        </span><span class="c1">// на фактический ID процесса.</span></code> <br/><code><span class="w">                        </span><span class="n">ContainerId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"pa.1"</span><span class="p">,</span></code> <br/><code><span class="w">                        </span><span class="n">ObjectId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">idTask</span><span class="p">,</span></code> <br/><code><span class="w">                        </span><span class="n">Context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ContextType</span><span class="p">.</span><span class="n">Task</span></code> <br/><code><span class="w">                    </span><span class="p">}</span></code> <br/><code><span class="w">                </span><span class="p">};</span></code> <br/><code><span class="w">            </span><span class="p">}</span></code> <br/><code><span class="w">            </span><span class="k">else</span></code> <br/><code><span class="w">            </span><span class="p">{</span></code> <br/><code><span class="w">                </span><span class="c1">// Подходящая задача не найдена.</span></code> <br/><code><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">UserCommandResult</span><span class="p">()</span></code> <br/><code><span class="w">                </span><span class="p">{</span></code> <br/><code><span class="w">                    </span><span class="n">Success</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">,</span></code> <br/><code><span class="w">                    </span><span class="n">ResultType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UserCommandResultType</span><span class="p">.</span><span class="n">Notificate</span><span class="p">,</span></code> <br/><code><span class="w">                    </span><span class="n">Messages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="p">[]</span></code> <br/><code><span class="w">                    </span><span class="p">{</span></code> <br/><code><span class="w">                        </span><span class="k">new</span><span class="w"> </span><span class="n">UserCommandMessage</span></code> <br/><code><span class="w">                        </span><span class="p">{</span></code> <br/><code><span class="w">                            </span><span class="n">Severity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SeverityLevel</span><span class="p">.</span><span class="n">Normal</span><span class="p">,</span></code> <br/><code><span class="w">                            </span><span class="n">Text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"У пользователя нет активной задачи по данной записи"</span></code> <br/><code><span class="w">                        </span><span class="p">}</span></code> <br/><code><span class="w">                    </span><span class="p">}</span></code> <br/><code><span class="w">                </span><span class="p">};</span></code> <br/><code><span class="w">            </span><span class="p">}</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code><span class="w">        </span><span class="k">else</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="c1">// Поле cmw.task.objectId отсутствует или пусто.</span></code> <br/><code><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">UserCommandResult</span><span class="p">()</span></code> <br/><code><span class="w">            </span><span class="p">{</span></code> <br/><code><span class="w">                </span><span class="n">Success</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">,</span></code> <br/><code><span class="w">                </span><span class="n">ResultType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UserCommandResultType</span><span class="p">.</span><span class="n">Notificate</span><span class="p">,</span></code> <br/><code><span class="w">                </span><span class="n">Messages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="p">[]</span></code> <br/><code><span class="w">                </span><span class="p">{</span></code> <br/><code><span class="w">                    </span><span class="k">new</span><span class="w"> </span><span class="n">UserCommandMessage</span></code> <br/><code><span class="w">                    </span><span class="p">{</span></code> <br/><code><span class="w">                        </span><span class="n">Severity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SeverityLevel</span><span class="p">.</span><span class="n">Normal</span><span class="p">,</span></code> <br/><code><span class="w">                        </span><span class="n">Text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Нет задач, связанных с данной записью."</span></code> <br/><code><span class="w">                    </span><span class="p">}</span></code> <br/><code><span class="w">                </span><span class="p">}</span></code> <br/><code><span class="w">            </span><span class="p">};</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Сохраните кнопку.</p>
+</li>
+<li>Поместите кнопку <em>«Перейти к задаче»</em> <strong>на форму в шаблоне записи</strong>, связанном с шаблоном процесса.</li>
+</ol>
+<h2 class="pageBreakBefore" id="example_task_open_related_button_csharp_test">Тестирование</h2>
+<ol class="colored_numbers_list">
+<li>Запустите процесс с пользовательской задачей, назначенной текущему пользователю.</li>
+<li>Откройте запись, связанную с процессом.</li>
+<li>Нажмите кнопку <em>«Перейти к задаче»</em>.</li>
+<li>Убедитесь, что открылась задача, назначенная текущему пользователю.</li>
+<li>
+<p>Проверьте работу скрипта в следующих случаях:</p>
+<ul>
+<li>когда у пользователя нет активной задачи по текущей записи, должно отобразиться сообщение <em>«У пользователя нет активной задачи по данной записи»</em>;</li>
+<li>когда с записью не связаны никакие задачи (например, она не связана с процессом или связана с другим процессом), должно отобразиться сообщение <em>«Нет задач, связанных с данной записью»</em>.</li>
+</ul>
+</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5146">Кнопка «Принять в работу» для задачи. Настройка на C#</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4864">Справочник по скриптам на языке C#</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4730">Пользовательская задача</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4790">Кнопки. Определение, настройка, удаление</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4758">Шаблон процесса. Определение, настройка, удаление</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4721">Диаграмма процесса. Определения, просмотр, редактирование, публикация</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4759">Шаблон записи. Определение, настройка, удаление</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

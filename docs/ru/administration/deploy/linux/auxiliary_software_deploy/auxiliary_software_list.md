@@ -73,7 +73,7 @@ kbId: 4582
 | --- | --- | --- | --- |
 | [Antlr3.Runtime](https://github.com/antlr/antlr3) | Среда проектирования графического интерфейса пользователя для построения грамматик ANTLR v 3. | 3.3.1.7705 | BSD license |
 | [Antlr4.Runtime.Standard](https://github.com/antlr/antlr4) | Среда проектирования графического интерфейса пользователя для построения грамматик ANTLR v4. | 4.11.1.0 | BSD 3-Clause License |{% if not gostech %}
-| [Apache.Ignite.Core](https://ignite.apache.org/) | Распределенная база данных для высокопроизводительных вычислений со скоростью операций в памяти. | 2.16.0 | Apache 2.0 License |
+| [Apache.Ignite.Core](https://ignite.apache.org/) | Распределенная база данных для высокопроизводительных вычислений со скоростью операций в памяти. | 2.17.0 | Apache 2.0 License |
 | [Apache.Ignite.Linq](https://ignite.apache.org/) | Компонент библиотеки Apache.Ignite.Core. | 16.10.0.0 | Apache 2.0 License |
 | [Apache.Ignite.NLog](https://ignite.apache.org/) | Компонент библиотеки Apache.Ignite.Core. | 9.0.0.0 | Apache 2.0 License |
 | [Apache.Lucene.NET](https://github.com/apache/lucenenet) | Порт библиотеки Lucene для полнотекстового поиска. | 3.0.3.0 | Apache 2.0 License |
@@ -123,6 +123,7 @@ kbId: 4582
 | [YamlDotNet](https://github.com/aaubry/YamlDotNet) | Библиотека .NET для YAML. | 11.0.0.0 | MIT License |
 | [zxing](https://github.com/zxing/zxing) | Библиотека для сканирования штрихкодов ZXing для Java в Android. | 0.16.8.0 | Apache 2.0 License |
 
+{% if adminGuideLinux %}
 ## Вспомогательное ПО для «Альт Сервер»
 
 Перечисленное ниже вспомогательное ПО используется для работы **{{ productName }}** под управлением ОС «Альт Сервер».
@@ -130,9 +131,9 @@ kbId: 4582
 | **Наименование ПО и ссылка** | **Описание** | **Версия** | **Лицензия** |
 | --- | --- | --- | --- |
 | [dotnet-2.1](https://dotnet.microsoft.com/en-us/download/dotnet/2.1) | Виртуальный пакет для полной установки .NET 2.1 — платформы разработки с открытым исходным кодом. | 2.1.25 | MIT License |
-| [dotnet-6.0](https://packages.altlinux.org/ru/sisyphus/srpms/dotnet-runtime-6.0/) | Виртуальный пакет для полной установки .NET 6.0 — платформы разработки с открытым исходным кодом. | 6.0.12 | MIT License |
-| [dotnet-aspnetcore-runtime-6.0](https://packages.altlinux.org/ru/sisyphus/binary/dotnet-aspnetcore-runtime-6.0/) | Среда выполнения ASP.NET 6. Содержит все необходимые компоненты для запуска веб-приложений .NET Core. | 6.0.12 | MIT License |
-| [dotnet-sdk-6.0](https://packages.altlinux.org/ru/sisyphus/srpms/dotnet-sdk-6.0/) | SDK для среды выполнения и библиотек .NET. | 6.0.112 | MIT License |{% if not gostech %}
+| [dotnet-8.0](https://packages.altlinux.org/ru/sisyphus/srpms/dotnet-runtime-8.0/) | Виртуальный пакет для полной установки .NET 8.0 — платформы разработки с открытым исходным кодом. | 8.0 | MIT License |
+| [dotnet-aspnetcore-runtime-8.0](https://packages.altlinux.org/ru/sisyphus/binary/dotnet-aspnetcore-runtime-8.0/) | Среда выполнения ASP.NET 6. Содержит все необходимые компоненты для запуска веб-приложений .NET Core. | 8.0 | MIT License |
+| [dotnet-sdk-8.0](https://packages.altlinux.org/ru/sisyphus/srpms/dotnet-sdk-8.0/) | SDK для среды выполнения и библиотек .NET. | 8.0 | MIT License |{% if not gostech %}
 | [Elasticsearch](https://www.elastic.co/elasticsearch/) | Распределенная облачная поисковая система RESTful. | 8.10.2 | Elastic License |{% endif %}
 | [glib2](https://packages.altlinux.org/ru/sisyphus/srpms/glib2/) | GLib — это базовая низкоуровневая библиотека, которая обеспечивает обработку структур данных для C, предоставляет классы-оболочки переносимости и интерфейсы для таких функций времени выполнения, как цикл обработки событий, потоки, динамическая загрузка и объектная система. | 2.68.4 | LGPLv2+ |
 | [librdkafka](https://packages.altlinux.org/ru/sisyphus/srpms/librdkafka/) | Реализация протокола Apache Kafka в C-библиотеке, содержащая поддержку как Producer, так и Consumer. | 1.5.3 | BSD-2-CLAUSE |{% if not gostech %}
@@ -169,9 +170,10 @@ kbId: 4582
 | [libxpm4](http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.0/repository-base/) | Зависимость NGINX — библиотека X11 для работы с пиксельными картами (pixmap). Обеспечивает поддержку формата XPM в среде выполнения. | 1:3.5.12-1 | Другая |
 | [libxslt1.1](http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.0/repository-base/) | Зависимость NGINX — библиотека libxslt, используемая приложениями для преобразований XSLT. | 1.1.32-2.2~ deb10u2 | libxslt |{% if not gostech %}
 | [mono](http://www.mono-project.com/) | Mono — это платформа для запуска и разработки приложений. Предоставляемый пакет содержит:- интерфейс командной строки - LLVM - Roslyn - MCS - MSBuild - GAC - GC SGen, GC Boehm - XSP4 Server - FastCGI Mono Server 4 | 6.12.0.200- 0xamarin1+ debian9b1 | MIT License |{% endif %}
-| [.NET SDK 6.0](https://packages.microsoft.com/config/debian/) | Платформа разработки с открытым исходным кодом. Предоставляемый пакет содержит:- .NET SDK 6.0.405 - .NETCore.App.Runtime 6.0.13 - dotnet-runtime-deps-debian 6.0.13 - .NETCore.App.Ref 6.0.13 - .NET Host — 7.0.2 - .NET Host FX Resolver — 6.0.13 - .NETCore.App.Host 6.0.13 - NETStandard.Library.Ref 2.1.0 - aspnetcore-runtime-6.0 - aspnetcore-targeting-pack-6.0{% if not gostech %} **Примечание:** компания **{{ companyName }}** может заменить данное ПО на аналог по запросу и согласно ТЗ заказчика. {% endif %}| 6.0.405-1 | MIT License |
+| [.NET SDK 8.0](https://packages.microsoft.com/config/debian/) | Платформа разработки с открытым исходным кодом. Предоставляемый пакет содержит:- .NET SDK 8.0 - .NETCore.App.Runtime 8.0 - dotnet-runtime-deps-debian 8.0 - .NETCore.App.Ref 8.0 - .NET Host — 7.0.2 - .NET Host FX Resolver — 8.0 - .NETCore.App.Host 8.0 - NETStandard.Library.Ref 2.1.0 - aspnetcore-runtime-8.0 - aspnetcore-targeting-pack-8.0{% if not gostech %} **Примечание:** компания **{{ companyName }}** может заменить данное ПО на аналог по запросу и согласно ТЗ заказчика. {% endif %}| 8.0 | MIT License |
 | [nginx](http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.0/repository-base/) | Пакет зависимостей NGINX для установки nginx-core. | 1.18.0-6.1+ deb11u2 | BSD 2-Clause License |
 | [nginx-common](http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.0/repository-base/) | Зависимость NGINX — базовые файлы конфигурации, используемые всеми версиями NGINX. | 1.18.0-6.1+ deb11u2 | BSD 2-Clause License |
 | [nginx-core](http://download.astralinux.ru/astra/frozen/1.7_x86-64/1.7.0/repository-base/) | Веб/прокси-сервер NGINX. | 1.18.0-6.1+ deb11u2 | BSD 2-Clause License |
+{% endif %}
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

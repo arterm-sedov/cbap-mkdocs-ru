@@ -1,11 +1,24 @@
 ---
 title: Методы System Core API
 kbId: 4862
+tags:
+    - API
+    - REST
+    - Swagger
+    - System
+    - АПИ
+    - анонимные формы
+    - анонимные страницы
+    - внешние формы
+    - внешние страницы
+    - интеграции
+    - интеграция
+hide: tags
 ---
 
 # Методы System Core API {: #api_system_core }
 
-## Введение
+## Введение {: #api_system_core_intro }
 
 System Core API предоставляет системные RESTful-методы для работы со всеми сущностями в экземпляре **{{ productName }}**. Эти методы могут различаться в разных версиях **{{ productName }}**.
 
@@ -15,7 +28,7 @@ System Core API предоставляет системные RESTful-метод
 
     Вызывать методы System Core API следует, только если вы точно понимаете, что и зачем делаете, иначе вы можете потерять важные данные или настройки.
 
-## Доступ к System Core API
+## Доступ к System Core API {: #api_system_core_access }
 
 - Базовый URL-адрес для запросов к System Core API:
 
@@ -28,7 +41,7 @@ System Core API предоставляет системные RESTful-метод
 - System Core API поддерживает базовую проверку подлинности.
 - Методы System Core API можно вызывать в C#-скриптах (в отличие от методов Web API и Solution API).
 
-## Пример вызова метода System Core API
+## Пример вызова метода System Core API {: #api_system_core_example }
 
 Чтобы вызвать метод System Core API, отправьте HTTP-запрос на адрес метода (указанный в Swagger), например:
 
@@ -41,7 +54,7 @@ System Core API предоставляет системные RESTful-метод
     - В теле запроса (`body`) укажите системное имя шаблона записи (например, `"Car"`).
     - В ответ на запрос ПО отправит ID созданного шаблона записи (например, `"oa.1"`).
 
-## Использование Swagger
+## Использование Swagger {: #api_system_core_swagger }
 
 Swagger предоставляет подробную справку по методам API, включая описания запросов и ответов, а также модели данных с примерами значений.
 
@@ -51,6 +64,12 @@ Swagger позволяет выполнять запросы и просматр
 
 ```
 https://your-host/docs/SystemApi
+```
+
+URL-адрес JSON-спецификации System Core API:
+
+```
+https://your-host/api/public/system/swagger
 ```
 
 Здесь `your-host` — доменное имя вашего сервера.
@@ -85,9 +104,9 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 
 </div>
 
-## Описание методов System Core API
+## Описание методов System Core API {: #api_system_core_methods }
 
-### Account – аккаунты
+### Account – аккаунты {: #api_system_core_account_service }
 
 | POST {: .api-method .post } | /Base/AccountService/get_DefaultAccountLanguage |
 | --------------------------- | ---------------------------------------------- |
@@ -233,7 +252,37 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры**               | Не требуются. |
 | **Ответ**                   | Требования к паролю. |
 
-### Ontology – объект
+| POST {: .api-method .post } | /Base/AccountService/Disable1 |
+| --------------------------- | ----------------------------- |
+| **Описание**                | Отключает несколько аккаунтов. |
+| **Параметры**               | Идентификаторы аккаунтов. |
+| **Ответ**                   | Статус. |
+
+| POST {: .api-method .post } | /Base/AccountService/Enable1 |
+| --------------------------- | ---------------------------- |
+| **Описание**                | Включает несколько аккаунтов. |
+| **Параметры**               | Идентификаторы аккаунтов. |
+| **Ответ**                   | Статус. |
+
+| POST {: .api-method .post } | /Base/AccountService/Activate1 |
+| --------------------------- | ------------------------------ |
+| **Описание**                | Активирует несколько аккаунтов. |
+| **Параметры**               | Идентификаторы аккаунтов. |
+| **Ответ**                   | Статус. |
+
+| POST {: .api-method .post } | /Base/AccountService/Deactivate1 |
+| --------------------------- | -------------------------------- |
+| **Описание**                | Деактивирует несколько аккаунтов. |
+| **Параметры**               | Идентификаторы аккаунтов. |
+| **Ответ**                   | Статус. |
+
+| POST {: .api-method .post } | /Base/AccountService/UpdateCache |
+| --------------------------- | ------------------------------- |
+| **Описание**                | Обновляет кэш данных аккаунтов. |
+| **Параметры**               | Параметры обновления кэша. |
+| **Ответ**                   | Статус. |
+
+### Ontology – объект {: #api_system_core_ontology }
 
 | POST {: .api-method .post } | /Base/OntologyService/GetAxioms |
 | --------------------------- | ------------------------------- |
@@ -271,25 +320,90 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры**                   | Идентификатор объекта, предикат. |
 | **Ответ**                       | Статус. |
 
-| POST {: .api-method .post } | /Base/OntologyService/GetCurrentConnections |
-| --------------------------- | ------------------------------------------- |
-| **Описание**                | Получает текущие подключения. |
-| **Параметры**               | Не требуются. |
-| **Ответ**                   | - |
+| POST {: .api-method .post } | /Base/OntologyService/CreateIgniteCache |
+| --- | --- |
+| **Описание** | Создаёт кэш Ignite для предиката. |
+| **Параметры** | Предикат. |
+| **Ответ** | Логическое значение `true`/`false`. |
 
-| POST   {: .api-method .post } | /Base/OntologyService/ResetConnections |
-| ----------------------------- | ------------------------------------- |
-| **Описание**                  | Отключает все текущие подключения. |
-| **Параметры**                 | Не требуются. |
-| **Ответ**                     | Статус. |
+| POST {: .api-method .post } | /Base/OntologyService/CleanupRules |
+| --- | --- |
+| **Описание** | Очищает устаревшие правила. |
+| **Параметры** | - |
+| **Ответ** | Статус. |
 
-| POST   {: .api-method .post } | /Base/OntologyService/ResetConnection |
-| ----------------------------- | ------------------------------------ |
-| **Описание**                  | Отключает подключения по идентификатору аккаунта. |
-| **Параметры**                 | Идентификатор аккаунта. |
-| **Ответ**                     | Статус. |
+| POST {: .api-method .post } | /Base/OntologyService/RemoveUnusedRules |
+| --- | --- |
+| **Описание** | Удаляет неиспользуемые правила. |
+| **Параметры** | - |
+| **Ответ** | Список удалённых правил. |
 
-### AccountGroup – группы аккаунтов
+| POST {: .api-method .post } | /Base/OntologyService/GetPredicatesStatistic |
+| --- | --- |
+| **Описание** | Получает статистику по предикатам. |
+| **Параметры** | - |
+| **Ответ** | Список статистических сведений. |
+
+| POST {: .api-method .post } | /Base/OntologyService/GetPredicateInfo |
+| --- | --- |
+| **Описание** | Получает информацию о предикате. |
+| **Параметры** | Предикат. |
+| **Ответ** | Информация о предикате. |
+
+| POST {: .api-method .post } | /Base/OntologyService/GetTableInfo |
+| --- | --- |
+| **Описание** | Получает информацию о таблице хранения предиката. |
+| **Параметры** | Имя таблицы. |
+| **Ответ** | Информация о таблице. |
+| POST {: .api-method .post } | /Base/OntologyService/RemoveStatement |
+| --- | --- |
+| **Описание** | Удаляет утверждение (триплет). |
+| **Параметры** | Параметры утверждения. |
+| **Ответ** | Статус. |
+
+| POST {: .api-method .post } | /Base/OntologyService/AddStatement |
+| --- | --- |
+| **Описание** | Добавляет утверждение (триплет). |
+| **Параметры** | Параметры утверждения. |
+| **Ответ** | Статус. |
+
+| POST {: .api-method .post } | /Base/OntologyService/Clone |
+| --- | --- |
+| **Описание** | Клонирует объект онтологии. |
+| **Параметры** | Идентификатор объекта и параметры. |
+| **Ответ** | Идентификатор созданного объекта. |
+
+| POST {: .api-method .post } | /Base/OntologyService/GetIntersection |
+| --- | --- |
+| **Описание** | Получает пересечение множеств значений по предикатам. |
+| **Параметры** | Параметры запроса. |
+| **Ответ** | Результат пересечения. |
+
+| POST {: .api-method .post } | /Base/OntologyService/GetWithMultipleValues |
+| --- | --- |
+| **Описание** | Получает атрибуты с множественными значениями. |
+| **Параметры** | Идентификатор объекта и предикаты. |
+| **Ответ** | Значения. |
+
+| POST {: .api-method .post } | /Base/OntologyService/SynchronizePredicate |
+| --- | --- |
+| **Описание** | Синхронизирует предикат. |
+| **Параметры** | Параметры синхронизации. |
+| **Ответ** | Статус. |
+
+| POST {: .api-method .post } | /Base/OntologyService/ScheduleCleaningOldSchemeCaches |
+| --- | --- |
+| **Описание** | Планирует очистку устаревших кэшей схем. |
+| **Параметры** | Количество элементов к очистке. |
+| **Ответ** | Логическое значение `true`/`false`. |
+
+| POST {: .api-method .post } | /Base/OntologyService/ClearAllPersonalData |
+| --- | --- |
+| **Описание** | Удаляет все персональные данные из онтологии. |
+| **Параметры** | - |
+| **Ответ** | Статус. |
+
+### AccountGroup – группы аккаунтов {: #api_system_core_account_group }
 
 | POST {: .api-method .post } | /Base/AccountGroupService/ListReferences |
 | --------------------------- | --------------------------------------- |
@@ -369,7 +483,6 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры**               | Идентификатор группы аккаунтов. |
 | **Ответ**                   | Список идентификаторов аккаунтов. |
 
-
 | POST {: .api-method .post } | /Base/AccountGroupService/GetGroups |
 | --- | --- |
 | **Описание** | Получает список идентификаторов групп аккаунтов, которые входят в группу аккаунтов. |
@@ -400,28 +513,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Идентификатор группы. |
 | **Ответ** | Статус. |
 
-
-
-
-### GlobalConfiguration – глобальная конфигурация
-
-| POST {: .api-method .post } | /Base/GlobalConfigurationService/get_ExternalNotificationEnabled |
-| --- | --- |
-| **Описание** | Проверяет, включены ли внешние уведомления. |
-| **Параметры** | - |
-| **Ответ** | Логическое значение `true`/`false`. |
-
-| POST {: .api-method .post } | /Base/GlobalConfigurationService/get_GlobalNotificationListening |
-| --- | --- |
-| **Описание** | Проверяет, включены ли системные уведомления. |
-| **Параметры** | - |
-| **Ответ** | Логическое значение `true`/`false`. |
-
-| POST {: .api-method .post } | /Base/GlobalConfigurationService/get_TracingEnabled |
-| --- | --- |
-| **Описание** | Проверяет, включён ли мониторинг производительности. |
-| **Параметры** | - |
-| **Ответ** | Логическое значение `true`/`false`. |
+### GlobalConfiguration – глобальная конфигурация {: #api_system_core_global_configuration }
 
 | POST {: .api-method .post } | /Base/GlobalConfigurationService/get_ServerAddress |
 | --- | --- |
@@ -429,23 +521,23 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | - |
 | **Ответ** | Адрес сервера. |
 
+| POST {: .api-method .post } | /Base/GlobalConfigurationService/get_ServerLanguage |
+| --- | --- |
+| **Описание** | Получает текущий язык интерфейса ПО. |
+| **Параметры** | - |
+| **Ответ** | Язык интерфейса. |
+
+| POST {: .api-method .post } | /Base/GlobalConfigurationService/get_AllServerLanguages |
+| --- | --- |
+| **Описание** | Получает список доступных языков интерфейса ПО. |
+| **Параметры** | - |
+| **Ответ** | Список языков. |
+
 | POST {: .api-method .post } | /Base/GlobalConfigurationService/get_CompilationOnSaveDisabled |
 | --- | --- |
 | **Описание** | Отключает компиляцию при сохранении. |
 | **Параметры** | - |
 | **Ответ** | Логическое значение `true`/`false`. |
-
-| POST {: .api-method .post } | /Base/GlobalConfigurationService/get_LastTimestamp |
-| --- | --- |
-| **Описание** | Получает последние временные отметки. |
-| **Параметры** | - |
-| **Ответ** | Список временных отметок. |
-
-| POST {: .api-method .post } | /Base/GlobalConfigurationService/get_PasswordValidationPolicy |
-| --- | --- |
-| **Описание** | Получает установленную политику проверки пароля. |
-| **Параметры** | - |
-| **Ответ** | Политика проверки пароля. |
 
 | POST {: .api-method .post } | /Base/GlobalConfigurationService/get_RegisteredAuthChannels |
 | --- | --- |
@@ -489,9 +581,13 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Канал. |
 | **Ответ** | Статус. |
 
+| POST {: .api-method .post } | /Base/GlobalConfigurationService/GetPlatformLanguageFromUserPreferredLanguages |
+| --- | --- |
+| **Описание** | Определяет язык интерфейса ПО из предпочтительных языков пользователя. |
+| **Параметры** | Список предпочтительных языков. |
+| **Ответ** | Выбранный язык интерфейса. |
 
-
-### CommunicationChannel – подключения
+### CommunicationChannel – подключения {: #api_system_core_connections }
 
 | POST {: .api-method .post } | /Base/CommunicationChannelService/Get |
 | --- | --- |
@@ -583,25 +679,23 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | - |
 | **Ответ** | Набор атрибутов для группы аккаунтов. |
 
+### EncryptedNavigationReference — ссылки на внешние формы {: #api_system_core_encrypted_navigation_reference }
 
+См. _[Пример создания ссылки на внешнюю форму][form_access_control_external_link]_.
 
-### EncryptedNavigation Reference — внешние ссылки на формы
-
-| POST {: .api-method .post } | /Base/EncryptedNavigationReference/Encrypt |
+| POST {: .api-method .post } | /Base/EncryptedNavigationReferenceService/Generate |
 | --- | --- |
-| **Описание** | Формирует внешнюю ссылку на указанную форму. Если до перехода по ссылке пользователь не вошёл в систему, будет создан аккаунт в группе «Анонимные пользователи». Внешние ссылки работают только в мобильном приложении и в мобильном браузере. |
-| **Параметры** | Объект со свойствами целевой формы: `"SolutionId": "string"` – ID приложения; `"ObjectTypeId": "string"` – ID шаблона; `"TargetId": "string"` – ID формы; `"TargetType": "Form"` – тип целевого объекта — форма; `"PredefinedData": {"attributeSystemName":"attributeValue"}` – объект с парами системных имён и значений атрибутов для передачи в целевую форму. |
-| **Ответ** | Внешняя ссылка на форму. |
+| **Описание** | Формирует ссылку на указанную внешнюю форму. Если до перехода по ссылке пользователь не вошёл в систему, будет создан аккаунт в группе «Анонимные пользователи». Внешние ссылки работают только в мобильном приложении и в мобильном браузере. |
+| **Параметры** | Объект со свойствами внешнюю  формы: `"SolutionId": "string"` – ID приложения; `"ObjectTypeId": "string"` – ID шаблона; `"TargetId": "string"` – ID формы; `"TargetType": "Form"` – тип целевого объекта — форма; `"PredefinedData": {"attributeSystemName":"attributeValue"}` – объект с парами системных имён и значений атрибутов для передачи в целевую форму. |
+| **Ответ** | Ссылка на внешнюю форму вида `https://<your-host>/Resolve?data=<encryptedData>` |
 
-| POST {: .api-method .post } | /Base/EncryptedNavigationReference/Decrypt |
+| POST {: .api-method .post } | /Base/EncryptedNavigationReferenceService/Decrypt |
 | --- | --- |
-| **Описание** | Преобразует внешнюю ссылку в объект со свойствами целевой формы. |
-| **Параметры** | Внешняя ссылка. |
-| **Ответ** | Объект со свойствами целевой формы. |
+| **Описание** | Преобразует ссылку в объект со свойствами внешнюю формы. |
+| **Параметры** | Закодированная часть ссылки на внешнюю форму: <encryptedData> без части `https://<your-host>/Resolve?data=` |
+| **Ответ** | Объект со свойствами внешнюю  формы. |
 
-
-
-### Object — записи
+### Object — записи {: #api_system_core_object }
 
 | POST {: .api-method .post } | /TeamNetwork/ObjectService/Create |
 | --- | --- |
@@ -774,20 +868,80 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | POST {: .api-method .post } | /TeamNetwork/ObjectService/BulkCreate |
 | --- | --- |
 | **Описание** | Создаёт несколько записей по заданным параметрам. |
-| **Параметры** | Параметры для создания записей. |
+| **Параметры** | `data` — массив объектов `Dictionary<string,object>` для создания записей. |
 | **Ответ** | Идентификаторы созданных записей. |
+
+**Пример запроса:**
+
+``` json
+{
+  "containerId": "oa.XXX",
+  "data": [
+    {"op.XXX": 30},
+    {"op.XXX": 40}
+  ]
+}
+```
+
+Здесь:
+
+- `containerId` — идентификатор шаблона записи;
+- `data` — массив со словарями создаваемых записей;
+- `{"op.XXX": 30}`, `{"op.XXX": 40}` — словари записей:
+- `op.XXX` — идентификатор атрибута, значение которого требуется задать в новой записи;
+- `30`, `40` — значения атрибута в новых записях.
 
 | POST {: .api-method .post } | /TeamNetwork/ObjectService/BulkEdit |
 | --- | --- |
 | **Описание** | Изменяет несколько записей по заданным параметрам. |
-| **Параметры** | Параметры для редактирования записей. |
+| **Параметры** | `data` — словарь `Dictionary<string,Dictionary<string,object>>` для редактирования записей. |
 | **Ответ** | Количество отредактированных записей. |
+
+**Пример запроса:**
+
+``` json
+{
+  "containerId": "oa.XXX",
+  "data": {
+    "1": {"op.XXX": 30},
+    "2": {"op.XXX": 100}
+  }
+}
+```
+
+Здесь:
+
+- `containerId` — идентификатор шаблона записи;
+- `data` — словарь изменяемых записей;
+- `1`, `2` — идентификаторы изменяемых записей;
+- `{"op.XXX": 30}`, `{"op.XXX": 100}` — словари изменений для записей;
+- `op.XXX` — идентификатор атрибута, значения которого требуется изменить;
+- `30`, `100` — новые значение атрибута, которые требуется установить.
 
 | POST {: .api-method .post } | /TeamNetwork/ObjectService/BulkEdit1 |
 | --- | --- |
 | **Описание** | Изменяет несколько записей по заданным параметрам (без идентификатора шаблона записи). |
-| **Параметры** | Параметры для редактирования записей. |
+| **Параметры** | `data` — словарь `Dictionary<string,Dictionary<string,object>>` для редактирования записей. |
 | **Ответ** | Количество отредактированных записей. |
+
+**Пример запроса:**
+
+``` json
+{
+  "data": {
+    "1": {"op.XXX": 30},
+    "2": {"op.XXX": 400}
+  }
+}
+```
+
+Здесь:
+
+- `data` — словарь изменяемых записей;
+- `1`, `2` — идентификаторы изменяемых записей;
+- `{"op.XXX": 30}`, `{"op.XXX": 400}` — словари изменений для записей;
+- `op.XXX` — идентификатор атрибута, значения которого требуется изменить;
+- `30`, `400`  — новые значение атрибута, которые требуется установить.
 
 | POST {: .api-method .post } | /TeamNetwork/ObjectService/Edit1 |
 | --- | --- |
@@ -825,9 +979,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Системное имя шаблона записи и идентификатор записи. |
 | **Ответ** | Информация о записи. |
 
-
-
-### ObjectApp — шаблоны записей
+### ObjectApp — шаблоны записей {: #api_system_core_object_app }
 
 | POST {: .api-method .post } | /TeamNetwork/ObjectAppService/List |
 | --- | --- |
@@ -1213,12 +1365,6 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Параметры для редактирования. |
 | **Ответ** | Статус. |
 
-| POST {: .api-method .post } | /TeamNetwork/ObjectAppService/DeleteForm |
-| --- | --- |
-| **Описание** | Удаляет конкретную форму шаблона записи. |
-| **Параметры** | Идентификатор шаблона записи и формы. |
-| **Ответ** | Статус. |
-
 | POST {: .api-method .post } | /TeamNetwork/ObjectAppService/SetDefaultForm |
 | --- | --- |
 | **Описание** | Устанавливает форму по умолчанию. |
@@ -1335,7 +1481,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Параметры для создания шаблона экспорта. |
 | **Ответ** | Идентификатор шаблона экспорта. |
 
-| POST {: .api-method .post } | /TeamNetwork/ObjectAppExportService/CreateexportTemplate1 |
+| POST {: .api-method .post } | /TeamNetwork/ObjectAppExportService/CreateExportTemplate1 |
 | --- | --- |
 | **Описание** | Создаёт шаблон экспорта по расширенному набору заданных параметров. |
 | **Параметры** | Параметры для создания шаблона экспорта. |
@@ -1547,9 +1693,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Идентификатор задачи. |
 | **Ответ** | Идентификатор формы, записи и шаблона записи для задачи. |
 
-
-
-### Document — документы
+### Document — документы {: #api_system_core_document }
 
 | POST {: .api-method .post } | /TeamNetwork/DocumentService/GetDocument |
 | --- | --- |
@@ -1653,11 +1797,23 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Идентификатор документа и имя файла. |
 | **Ответ** | Идентификатор созданного документа. |
 
-| POST {: .api-method .post } | /TeamNetwork/DocumentService/SaveSignature1 |
+| POST {: .api-method .post } | /TeamNetwork/DocumentService/CreateSignature |
 | --- | --- |
 | **Описание** | Создаёт подпись по заданным параметрам. |
 | **Параметры** | Подписывающий, название подписи, содержание подписи. |
 | **Ответ** | Идентификатор созданной подписи. |
+
+| POST {: .api-method .post } | /TeamNetwork/DocumentService/RevokeSignature |
+| --- | --- |
+| **Описание** | Отзывает подпись. |
+| **Параметры** | Идентификатор подписи. |
+| **Ответ** | Статус. |
+
+| POST {: .api-method .post } | /TeamNetwork/DocumentService/AttachSignature |
+| --- | --- |
+| **Описание** | Присоединяет подпись к документу/версии. |
+| **Параметры** | Идентификатор подписи и версии документа. |
+| **Ответ** | Статус. |
 
 | POST {: .api-method .post } | /TeamNetwork/DocumentService/GetContent |
 | --- | --- |
@@ -1689,7 +1845,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | URI ресурса, логин, пароль. |
 | **Ответ** | Данные. |
 
-### Dataset — таблицы
+### Dataset — таблицы {: #api_system_core_dataset }
 
 | POST {: .api-method .post } | /TeamNetwork/DatasetService/QueryData |
 | --- | --- |
@@ -1709,7 +1865,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | - |
 | **Ответ** | - |
 
-| POST {: .api-method .post } | /TeamNetwork/DatasetService/GetCollectionFilteredSorteredValues |
+| POST {: .api-method .post } | /TeamNetwork/DatasetService/GetCollectionFilteredSortedValues|
 | --- | --- |
 | **Описание** | В текущей версии продукта данный метод не используется. |
 | **Параметры** | - |
@@ -1721,7 +1877,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | - |
 | **Ответ** | - |
 
-### DatasetExport - Экспорт данных
+### DatasetExport - Экспорт данных {: #api_system_core_dataset_export }
 
 | POST {: .api-method .post } | /TeamNetwork/DatasetExportService/ExportToExcel |
 | --- | --- |
@@ -1729,7 +1885,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Параметры для экспорта. |
 | **Ответ** | Имя и тип. |
 
-### DatasetConfiguration — пользовательская конфигурация таблиц
+### DatasetConfiguration — пользовательская конфигурация таблиц {: #api_system_core_dataset_configuration }
 
 | POST {: .api-method .post } | /TeamNetwork/DatasetConfigurationService/Create |
 | --- | --- |
@@ -1809,7 +1965,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Идентификатор таблицы. |
 | **Ответ** | Логическое значение `true`/`false`. |
 
-### GlobalFunction — скрипты
+### GlobalFunction — скрипты {: #api_system_core_global_function }
 
 | POST {: .api-method .post } | /TeamNetwork/GlobalFunctionService/Create |
 | --- | --- |
@@ -1883,7 +2039,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Идентификатор скрипта. |
 | **Ответ** | Информация о скрипте. |
 
-### ScriptDetails — свойства скриптов
+### ScriptDetails — свойства скриптов {: #api_system_core_script_details }
 
 | POST {: .api-method .post } | /TeamNetwork/ScriptDetailsService/GetSolutionId |
 | --- | --- |
@@ -1921,7 +2077,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | - |
 | **Ответ** | - |
 
-### Template — шаблоны
+### Template — шаблоны {: #api_system_core_template }
 
 | POST {: .api-method .post } | /Solution/TemplateService/List |
 | --- | --- |
@@ -1983,11 +2139,29 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Идентификатор шаблона. |
 | **Ответ** | Список использований шаблона. |
 
-| POST {: .api-method .post } | /Solution/TemplateService/GetNamePropertyId |
+| POST {: .api-method .post } | /Solution/TemplateService/SetNameProperty |
 | --- | --- |
-| **Описание** | Получает идентификатор атрибута, который является именем записей шаблона. |
+| **Описание** | Назначает атрибут, который является именем записей шаблона. |
+| **Параметры** | Идентификатор шаблона и идентификатор атрибута. |
+| **Ответ** | Статус. |
+
+| POST {: .api-method .post } | /Solution/TemplateService/GetContainerInfo |
+| --- | --- |
+| **Описание** | Получает основную информацию о шаблоне. |
 | **Параметры** | Идентификатор шаблона. |
-| **Ответ** | Идентификатор атрибута. |
+| **Ответ** | Основная информация о шаблоне. |
+
+| POST {: .api-method .post } | /Solution/TemplateService/GetAppAlias |
+| --- | --- |
+| **Описание** | Получает системное имя шаблона по идентификатору. |
+| **Параметры** | Идентификатор шаблона. |
+| **Ответ** | Системное имя шаблона. |
+
+| POST {: .api-method .post } | /Solution/TemplateService/GetClass |
+| --- | --- |
+| **Описание** | Получает класс шаблона. |
+| **Параметры** | Идентификатор шаблона. |
+| **Ответ** | Класс шаблона. |
 
 | POST {: .api-method .post } | /Solution/TemplateService/ListSolutionProperties |
 | --- | --- |
@@ -2001,7 +2175,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Фильтр для поиска ссылок. |
 | **Ответ** | Список ссылок на шаблон. |
 
-### SolutionVariable — переменные приложений
+### SolutionVariable — переменные приложений {: #api_system_core_solution_variable }
 
 | POST {: .api-method .post } | /Solution/SolutionVariableService/Create |
 | --- | --- |
@@ -2075,7 +2249,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Системное имя переменной, системное имя приложения и новое значение. |
 | **Ответ** | Новое значение переменной. |
 
-### ProcessApp — шаблоны процессов
+### ProcessApp — шаблоны процессов {: #api_system_core_process_app }
 
 | POST {: .api-method .post } | /Process/ProcessAppService/Get |
 | --- | --- |
@@ -2162,6 +2336,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Ответ** | - |
 
 | POST {: .api-method .post } | /Process/ProcessAppService/GetRouteStatistics |
+| POST {: .api-method .post } | /Process/ProcessAppService/GetRoutStatistics |
 | --- | --- |
 | **Описание** | В текущей версии продукта данный метод не используется. |
 | **Параметры** | - |
@@ -2191,7 +2366,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | - |
 | **Ответ** | - |
 
-| POST {: .api-method .post } | /Process/ProcessAppService/GetActiveSchemeId |
+| POST {: .api-method .post } | /Process/ProcessAppService/GetActiveScheme |
 | --- | --- |
 | **Описание** | Получает идентификатор активной диаграммы по идентификатору шаблона процесса. |
 | **Параметры** | Идентификатор шаблона процесса. |
@@ -2246,13 +2421,13 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | - |
 | **Ответ** | Статус. |
 
-| POST {: .api-method .post } | /Process/ProcessAppService/RebuildProcessRules |
+| POST {: .api-method .post } | /Process/ProcessAppService/RebuildScripts |
 | --- | --- |
 | **Описание** | Собрать заново правила для данных на неактуальных версиях. |
 | **Параметры** | Идентификатор шаблона процесса. |
 | **Ответ** | Количество собранных заново правил. |
 
-### ProcessObject — экземпляры процессов
+### ProcessObject — экземпляры процессов {: #api_system_core_process_object }
 
 | POST {: .api-method .post } | /Process/ProcessObjectService/CreateToken |
 | --- | --- |
@@ -2434,7 +2609,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Параметры миграции. |
 | **Ответ** | Результаты миграции. |
 
-### Diagram — диаграммы процессов
+### Diagram — диаграммы процессов {: #api_system_core_diagram }
 
 | POST {: .api-method .post } | /Process/DiagramService/Get |
 | --- | --- |
@@ -2646,7 +2821,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Версия диаграммы. |
 | **Ответ** | Статус. |
 
-### DiagramPublishing — публикация диаграмм
+### DiagramPublishing — публикация диаграмм {: #api_system_core_diagram_publishing }
 
 | POST {: .api-method .post } | /Process/DiagramPublishingService/Validate |
 | --- | --- |
@@ -2660,7 +2835,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Идентификаторы шаблона процесса и диаграммы, возможность опубликовать диаграмму как новую версию. |
 | **Ответ** | Список ошибок. |
 
-### ProcessReport — сообщения об ошибках
+### ProcessReport — сообщения об ошибках {: #api_system_core_process_report }
 
 | POST {: .api-method .post } | /Process/ProcessReportService/CreateScriptsReport |
 | --- | --- |
@@ -2680,7 +2855,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | - |
 | **Ответ** | - |
 
-| POST {: .api-method .post } | /Process/ProcessReportService/CreateReceivedMailReport |
+| POST {: .api-method .post } | /Process/ProcessReportService/CreateReсievedMailReport |
 | --- | --- |
 | **Описание** | В текущей версии продукта данный метод не используется. |
 | **Параметры** | - |
@@ -2716,7 +2891,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | - |
 | **Ответ** | - |
 
-| POST {: .api-method .post } | /Process/ProcessReportService/ResetReceivedMailCounter |
+| POST {: .api-method .post } | /Process/ProcessReportService/ResetRecievedMailCounter |
 | --- | --- |
 | **Описание** | В текущей версии продукта данный метод не используется. |
 | **Параметры** | - |
@@ -2734,7 +2909,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | - |
 | **Ответ** | - |
 
-### ConversationConfiguration — конфигурации обсуждений
+### ConversationConfiguration — конфигурации обсуждений {: #api_system_core_conversation_configuration }
 
 | POST {: .api-method .post } | /Conversation/ConversationConfigurationService/Create |
 | --- | --- |
@@ -2777,6 +2952,114 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Описание** | В текущей версии продукта данный метод не используется. |
 | **Параметры** | - |
 | **Ответ** | - |
+
+### Tracing – трассировка {: #api_system_core_tracing }
+
+| POST {: .api-method .post } | /Base/TracingService/ConfigureTracing |
+| --- | --- |
+| **Описание** | Настраивает параметры трассировки. |
+| **Параметры** | Параметры конфигурации. |
+| **Ответ** | Логическое значение `true`/`false`. |
+
+| POST {: .api-method .post } | /Base/TracingService/GetConfiguration |
+| --- | --- |
+| **Описание** | Получает текущую конфигурацию трассировки. |
+| **Параметры** | - |
+| **Ответ** | Объект конфигурации. |
+
+| POST {: .api-method .post } | /Base/TracingService/GetCurrentEvents |
+| --- | --- |
+| **Описание** | Получает текущие события трассировки. |
+| **Параметры** | - |
+| **Ответ** | Список событий. |
+
+| POST {: .api-method .post } | /Base/TracingService/TryAbortEvent |
+| --- | --- |
+| **Описание** | Пытается прервать событие трассировки. |
+| **Параметры** | Идентификатор события. |
+| **Ответ** | Логическое значение `true`/`false`. |
+
+### Mutex – мьютексы {: #api_system_core_mutex }
+
+| POST {: .api-method .post } | /Base/MutexService/GetAll |
+| --- | --- |
+| **Описание** | Получает список всех активных мьютексов. |
+| **Параметры** | - |
+| **Ответ** | Список мьютексов. |
+
+| POST {: .api-method .post } | /Base/MutexService/GetAllByNode |
+| --- | --- |
+| **Описание** | Получает мьютексы по идентификатору узла. |
+| **Параметры** | Идентификатор узла. |
+| **Ответ** | Список мьютексов. |
+
+| POST {: .api-method .post } | /Base/MutexService/Release |
+| --- | --- |
+| **Описание** | Освобождает мьютекс. |
+| **Параметры** | Имя мьютекса. |
+| **Ответ** | Логическое значение `true`/`false`. |
+
+| POST {: .api-method .post } | /Base/MutexService/TryEntrer |
+| --- | --- |
+| **Описание** | Пытается захватить мьютекс с параметрами. |
+| **Параметры** | Параметры входа. |
+| **Ответ** | Логическое значение `true`/`false`. |
+
+| POST {: .api-method .post } | /Base/MutexService/TryEntrer1 |
+| --- | --- |
+| **Описание** | Пытается захватить мьютекс (альтернативный метод). |
+| **Параметры** | Параметры входа. |
+| **Ответ** | Логическое значение `true`/`false`. |
+
+### LocalVariables – локальные переменные {: #api_system_core_local_variables }
+
+| POST {: .api-method .post } | /Base/LocalVariablesService/GetAll |
+| --- | --- |
+| **Описание** | Получает все локальные переменные по предикату. |
+| **Параметры** | Предикат. |
+| **Ответ** | Список значений. |
+
+| POST {: .api-method .post } | /Base/LocalVariablesService/Get |
+| --- | --- |
+| **Описание** | Получает значение локальной переменной по предикату. |
+| **Параметры** | Предикат. |
+| **Ответ** | Значение. |
+
+| POST {: .api-method .post } | /Base/LocalVariablesService/Clear |
+| --- | --- |
+| **Описание** | Очищает локальную переменную по предикату. |
+| **Параметры** | Предикат. |
+| **Ответ** | Статус. |
+
+| POST {: .api-method .post } | /Base/LocalVariablesService/Add |
+| --- | --- |
+| **Описание** | Добавляет значение локальной переменной. |
+| **Параметры** | Параметры добавления. |
+| **Ответ** | Статус. |
+
+| POST {: .api-method .post } | /Base/LocalVariablesService/Replace |
+| --- | --- |
+| **Описание** | Заменяет значение локальной переменной. |
+| **Параметры** | Параметры замены. |
+| **Ответ** | Статус. |
+
+| POST {: .api-method .post } | /Base/LocalVariablesService/Remove |
+| --- | --- |
+| **Описание** | Удаляет локальную переменную. |
+| **Параметры** | Параметры удаления. |
+| **Ответ** | Статус. |
+
+| POST {: .api-method .post } | /Base/LocalVariablesService/Get1 |
+| --- | --- |
+| **Описание** | Получает локальную переменную типизированного значения. |
+| **Параметры** | Предикат. |
+| **Ответ** | Значение. |
+
+| POST {: .api-method .post } | /Base/LocalVariablesService/Set |
+| --- | --- |
+| **Описание** | Устанавливает значение локальной переменной. |
+| **Параметры** | Параметры установки. |
+| **Ответ** | Статус. |
 
 | POST {: .api-method .post } | /Conversation/ConversationConfigurationService/GetOrAddObjectConversation |
 | --- | --- |

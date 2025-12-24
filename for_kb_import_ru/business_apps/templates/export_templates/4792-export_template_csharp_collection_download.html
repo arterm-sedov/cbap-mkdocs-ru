@@ -1,0 +1,38 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4792" kb-tags="" kb-title="Шаблон экспорта. Выгрузка нескольких коллекций и изображений с помощью C#">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Данная статья ориентирована на разработчиков С# скриптов. См. также: <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4793">Шаблон экспорта, Настройка с использованием C#</a>.</p>
+<p>Рассмотрим выгрузку записи в формате PDF. Будут выгружены две коллекции (в виде таблиц) и атрибут с типом данных «Изображение», содержащий изображение (изображения).</p>
+<p><strong>1.</strong> Сформируйте шаблон экспорта по примеру (приведённый образец шаблона можно найти во вложении к статье):</p>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример настроенного шаблона экспорта C#" src="https://kb.comindware.ru/assets/ctemplate.PNG"/><figcaption class="caption">Пример настроенного шаблона экспорта C#</figcaption></p>
+</figure>
+<p>В шаблоне поле под картинку помещено внутрь таблицы на случай, если в атрибуте будет содержаться несколько изображений.</p>
+<p><strong>2.</strong> Настройте модель данных в скрипте по примеру:</p>
+<div class="highlight"><code><pre><span></span><code>public class IMG</code> <br/><code>{</code> <br/><code>    public byte[] Image_data { get; set; }</code> <br/><code>}</code> <br/><code>public class TBL_1</code> <br/><code>{</code> <br/><code>    public string Faktor { get; set; }</code> <br/><code>    public string Parametr { get; set; }</code> <br/><code>    public string Value { get; set; }</code> <br/><code>}</code> <br/><code>public class TBL_2</code> <br/><code>{</code> <br/><code>    public string Destination { get; set; }</code> <br/><code>    public string Order { get; set; }</code> <br/><code>    public string Date { get; set; }</code> <br/><code>    public string Responsible { get; set; }</code> <br/><code>}</code> <br/><code>public class RESULT</code> <br/><code>{</code> <br/><code>    public List&lt;IMG&gt; Photo_1 { get; set; }</code> <br/><code>    public List&lt;TBL_1&gt; Table_1 { get; set; }</code> <br/><code>    public List&lt;TBL_2&gt; Table_2 { get; set; }</code> <br/><code>}</code> <br/></pre></code></div>
+<p>Обратите внимание, что под каждую таблицу должен быть определён свой уникальный класс.</p>
+<p><strong>3.</strong> Напишите весь скрипт (пример скрипта во вложении).</p>
+<p>Комментарии к скрипту:</p>
+<ul>
+<li>Для получения данных используется API-функция GetPropertyValues, которая позволяет запрашивать из базы данных значения только необходимых атрибутов, что ускоряет работу скрипта при большом количестве данных (строки 17-23).</li>
+<li>В строках 38-39 приведены примеры получения данных из ссылочных атрибутов.</li>
+<li>В строках 54, 65 приведён пример получения ФИО из атрибута с типом данных «Аккаунт».</li>
+<li>В строках 172, 184 реализована проверка на формат изображения (можете задать свои параметры).</li>
+</ul>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

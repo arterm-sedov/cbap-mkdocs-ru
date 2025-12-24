@@ -1,30 +1,42 @@
 ---
-title: Установка и настройка {{ apacheIgniteVariants }}. Краткое руководство для Windows
+title: Apache Ignite. Установка и настройка в Windows
 kbId: 4616
+tags:
+    - Apache Ignite
+    - Windows
+    - кластер
+    - развёртывание
+    - установка
+hide: tags
 ---
 
-# Установка и настройка Apache Ignite. Краткое руководство для Windows
+# {{ apacheIgniteVariants }}. Установка и настройка в Windows {: #apache_ignite_deploy_windows }
 
 {% include-markdown ".snippets/experimental_feature.md" %}
 
-## Введение
+## Введение {: #apache_ignite_deploy_windows_introduction }
+{{ apacheIgniteVariants }} — это распределенная высокопроизводительная система управления базами данных.
 
-Apache Ignite — это распределенная высокопроизводительная система управления базами данных.
+**{{ productName }}** использует {{ apacheIgniteVariants }} для хранения данных.
 
-{{ productName }} использует Apache Ignite для хранения данных.
+{{ apacheIgniteVariants }} в минимально необходимой конфигурации устанавливается автоматически при установке **{{ productName }}**.
 
-Здесь представлена краткая инструкция по установке Apache Ignite в ОС Windows из ZIP-файла на примере версии 2.16.0.
+## Прикладная задача {: #apache_ignite_deploy_windows_use_case }
 
-Полная инструкция по установке и настройке Apache Ignite представлена на следующем сайте: <https://ignite.apache.org/docs/latest/>
+{%
+include-markdown "administration/deploy/linux/auxiliary_software_deploy/apache_ignite_deploy.md"
+start="<!-- apache-ignite-deploy-use-case-start -->"
+end="<!-- apache-ignite-deploy-use-case-end -->"
+%}
 
-## Установка Apache Ignite
+## Установка {{ apacheIgniteVariants }} {: #apache_ignite_deploy_windows_installation .pageBreakBefore }
 
-1. Скачайте ZIP файл `apache-ignite-2.16.0-bin.zip` по ссылке: <https://ignite.apache.org/download.cgi#binaries>
-2. Распакуйте ZIP-файл в папку, например: `C:\apache-ignite-2.16.0-bin`
-3. Установите переменную среды Windows: `set IGNITE_HOME=C:\apache-ignite-2.16.0-bin`
+1. Скачайте ZIP файл `apache-ignite-2.17.0-bin.zip` по ссылке: <https://ignite.apache.org/download.cgi#binaries>
+2. Распакуйте ZIP-файл в папку, например: `C:\apache-ignite-2.17.0-bin`
+3. Установите переменную среды Windows: `set IGNITE_HOME=C:\apache-ignite-2.17.0-bin`
 4. Настройте конфигурацию Ignite, изменив файл `Apache.Ignite.exe.config`: `%IGNITE_HOME%\platforms\dotnet\bin\Apache.Ignite.exe.config`
 
-## Запуск Apache Ignite
+## Запуск {{ apacheIgniteVariants }} {: #apache_ignite_deploy_windows_startup }
 
 1. Запустите службу Ignite с помощью команды: `%IGNITE_HOME%\bin\ignite.bat -v`
 
@@ -32,17 +44,18 @@ Apache Ignite — это распределенная высокопроизво
 
 2. Если запустить Ignite не удалось, проверьте информацию в журнале, по умолчанию он хранится в папке `%IGNITE_HOME%\work\log`.
 
-## Пример файла конфигурации Ignite {: .pageBreakBefore }
+## Пример файла конфигурации Ignite {: #apache_ignite_deploy_windows_configuration_example .pageBreakBefore }
 
 Для стабильной работы Ignite вместе с {{ productName }} важны следующие директивы в данном примере:
 
 - `<igniteConfiguration xmlns="http://ignite.apache.org/schema/dotnet/IgniteConfigurationSection" gridName="myGrid1">` — в параметре `gridName` укажите имя сервера узла Ignite. У узлов кластера должно быть одинаковое имя сервера.
 - `<discoverySpi type="TcpDiscoverySpi"><ipFinder type="TcpDiscoveryStaticIpFinder"><endpoints> <string>127.0.0.1</string></endpoints></ipFinder></discoverySpi>` — в параметре `TcpDiscoveryStaticIpFinder` укажите адрес сервера.
 - `<dataRegionConfigurations type="DataRegionConfiguration"> <dataRegionConfiguration><name>Persistent</name><persistenceEnabled>true</persistenceEnabled>` — в директиве `dataRegionConfiguration` укажите `<persistenceEnabled>true</persistenceEnabled>`.
-- `<workDirectory>C:\apache-ignite-2.16.0-bin\</workDirectory>>` — укажите рабочую папку Ignite.
+- `<workDirectory>C:\apache-ignite-2.17.0-bin\</workDirectory>>` — укажите рабочую папку Ignite.
 - `<igniteInstanceName>Comindware_Instance2</igniteInstanceName>` — укажите имя экземпляра Ignite.
+{% include-markdown ".snippets/pdfPageBreakHard.md" %}
 
-``` {: .xml title="Пример файла конфигурации Ignite" .pageBreakAfter }
+``` {: .xml title="Пример файла конфигурации Ignite" .pageBreakBefore }
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
     <configSections>
@@ -55,11 +68,6 @@ Apache Ignite — это распределенная высокопроизво
         <localhost></localhost>
         <networkTimeout>1000</networkTimeout>
         <networkSendRetryDelay>1000</networkSendRetryDelay>
-{% if pdfOutput %}
-```
-
-``` { .xml title="Пример файла конфигурации Ignite — продолжение" .pageBreakBefore }
-{% endif %}
         <jvmOptions>
             <string>-Xms512m</string>
             <string>-Xmx3g</string>
@@ -72,6 +80,11 @@ Apache Ignite — это распределенная высокопроизво
             <string>-Djava.net.preferIPv4Stack=true</string>
             <string>--illegal-access=warn</string>
         </jvmOptions>
+{% if pdfOutput %}
+```
+{% include-markdown ".snippets/pdfPageBreakHard.md" %}
+``` { .xml title="Пример файла конфигурации Ignite — продолжение" .pageBreakBefore }
+{% endif %}
         <discoverySpi type="TcpDiscoverySpi">
             <ipFinder type="TcpDiscoveryStaticIpFinder">
                 <endpoints>
@@ -112,7 +125,7 @@ Apache Ignite — это распределенная высокопроизво
         </dataStorageConfiguration>
         <clientMode>false</clientMode>
         <includedEventTypes></includedEventTypes>
-        <workDirectory>C:\apache-ignite-2.16.0-bin\</workDirectory>
+        <workDirectory>C:\apache-ignite-2.17.0-bin\</workDirectory>
         <jvmDllPath></jvmDllPath>
         <igniteInstanceName>Comindware_Instance2</igniteInstanceName>
         <autoGenerateIgniteInstanceName>false</autoGenerateIgniteInstanceName>

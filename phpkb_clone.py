@@ -85,7 +85,7 @@ def cloneArticlesInCategory (category_id, newCategoryId):
     print(f"\nCloned {pages} articles, total {TOTAL_PAGES_CLONED}\n\n-----\n")
     return pages
 
-def cloneArticle(article_id, category_id, newCategoryId):
+def cloneArticle(article_id, category_id, newCategoryId, suffix="", show=True):
     
     c = CONNECTION.cursor(buffered=True)    
     
@@ -96,6 +96,12 @@ def cloneArticle(article_id, category_id, newCategoryId):
         c.execute(f"""
                 ALTER TABLE tmp DROP article_id;
                 """)
+        if suffix:
+            c.execute("UPDATE tmp SET article_title = CONCAT(article_title, %s)", (suffix,))
+        
+        article_show_status = 'yes' if show else 'no'
+        c.execute("UPDATE tmp SET article_show = %s", (article_show_status,))
+
         c.execute(f"""
                 INSERT INTO phpkb_articles SELECT 0,tmp.* FROM tmp;
                 """)
@@ -178,6 +184,31 @@ def listCategories(categories):
         print(f"{index}. {id}. {title}")
         index += 1
 
+def clone_specific_article(article_id):
+    c = CONNECTION.cursor(buffered=True)
+    c.execute(f"SELECT category_id FROM phpkb_relations WHERE article_id={article_id} LIMIT 1")
+    result = c.fetchone()
+    if not result:
+        print(f"Article {article_id} is not in any category and cannot be cloned.")
+        return False
+    original_category_id = result[0]
+
+    newCategoryId = input(f"Enter target category ID to clone article {article_id} into (or press Enter to clone to the same category {original_category_id}): ")
+    
+    if not newCategoryId:
+        newCategoryId = original_category_id
+    elif not newCategoryId.isnumeric():
+        print("Invalid Category ID. It must be a number.")
+        return False
+        
+    suffix = "_CLONE"
+    newArticleId = cloneArticle(article_id, original_category_id, newCategoryId, suffix, show=False)
+    if newArticleId:
+        print(f"Article {article_id} cloned as new article {newArticleId} into category {newCategoryId}")
+        ARTICLE_MAPPING.update({article_id:newArticleId})
+        return True
+    return False
+
 def main():
     
     with open(".serverCredentials.json", "r") as serverCredentialsFile: 
@@ -216,59 +247,72 @@ def main():
         database = sql_database
     )
     
-    cloneChildren = ''
-    categoryId = ''
-    parent_category = ''
-    categoryChoice = ''
-
-    print('\nRoot categories:\n')
-
-    while cloneChildren != 'y':
-        
-        
-        categoryChoice = ''
-        categories = fetchCategories(parent_id=categoryId)
-        if parent_category: print("\nParent: {}. {}\n".format(categoryId, categoryTitle))
-        if len(categories)>1: 
-            parent_category = categories[0]
-            listCategories(categories)
-            print("\n---------\n")
-            
-            if cloneChildren.isnumeric() and int(cloneChildren) <= len(categories):
-                    categoryChoice = int(cloneChildren)-1
-                    cloneChildren = 'y'
-            else:    
-                while not (categoryChoice.isnumeric() and int(categoryChoice) <= len(categories)):
-                    categoryChoice = input("Choose category to browse (1 to {}): ".format(len(categories)))
-                    if categoryChoice.isnumeric() and int(categoryChoice) <= len(categories):
-                        categoryChoice = int(categoryChoice)-1
-                        break
-                    else:
-                        categoryChoice = ''
-                        print ('Wrong category choice')
-                
-            
-            categoryId = categories[categoryChoice][0]
-            categoryTitle = categories[categoryChoice][1]  
-            childrenCategories = fetchCategories(parent_id=categoryId)
-            childrenCategoriesNumber = len(childrenCategories)
-        
-            print ("\nChosen category: {} {}".format(categoryId, categoryTitle))
-            if childrenCategoriesNumber > 0:
-                print ('\nIt has {} child categories:\n'.format(childrenCategoriesNumber))
-                listCategories(childrenCategories)
-                cloneChildren = input("\nEnter `Y` to clone the category and all its child categories and articles. \n Or choose a category to browse (1 to {}). \n".format(childrenCategoriesNumber)).lower()
-            else: 
-                print ('\nIt has no child categories')
-                cloneChildren = input("\nEnter `Y` to clone the category and all articles from this category. ".format(categoryId, categoryTitle)).lower()
-                if cloneChildren !='y': 
-                    print('Cloned nothing')
-                    break
-
+    if input('Clone specific articles? Y/N\n').lower() == 'y':
+        article_id = ''
+        while article_id.lower() != 'e':
+            article_id = str(input('Enter article ID to clone or E to exit: '))
+            if article_id.lower() == 'e':
+                break
+            if article_id.isnumeric():
+                success = clone_specific_article(article_id)
+                if not success:
+                    print("Please try another article ID or press 'E' to exit")
+            else:
+                print("Please enter a valid numeric article ID or 'E' to exit")
     else:
-        if categories[categoryChoice]:
-            # cloneParent = input("\nEnter `Y` to clone the parent category itself along with its children. ".format(categoryId, categoryTitle)).lower() == 'y'
-            cloneCategoryChildren(categories[categoryChoice])
+        cloneChildren = ''
+        categoryId = ''
+        parent_category = ''
+        categoryChoice = ''
+
+        print('\nRoot categories:\n')
+
+        while cloneChildren != 'y':
+            
+            
+            categoryChoice = ''
+            categories = fetchCategories(parent_id=categoryId)
+            if parent_category: print("\nParent: {}. {}\n".format(categoryId, categoryTitle))
+            if len(categories)>1: 
+                parent_category = categories[0]
+                listCategories(categories)
+                print("\n---------\n")
+                
+                if cloneChildren.isnumeric() and int(cloneChildren) <= len(categories):
+                        categoryChoice = int(cloneChildren)-1
+                        cloneChildren = 'y'
+                else:    
+                    while not (categoryChoice.isnumeric() and int(categoryChoice) <= len(categories)):
+                        categoryChoice = input("Choose category to browse (1 to {}): ".format(len(categories)))
+                        if categoryChoice.isnumeric() and int(categoryChoice) <= len(categories):
+                            categoryChoice = int(categoryChoice)-1
+                            break
+                        else:
+                            categoryChoice = ''
+                            print ('Wrong category choice')
+                    
+                
+                categoryId = categories[categoryChoice][0]
+                categoryTitle = categories[categoryChoice][1]  
+                childrenCategories = fetchCategories(parent_id=categoryId)
+                childrenCategoriesNumber = len(childrenCategories)
+            
+                print ("\nChosen category: {} {}".format(categoryId, categoryTitle))
+                if childrenCategoriesNumber > 0:
+                    print ('\nIt has {} child categories:\n'.format(childrenCategoriesNumber))
+                    listCategories(childrenCategories)
+                    cloneChildren = input("\nEnter `Y` to clone the category and all its child categories and articles. \n Or choose a category to browse (1 to {}). \n".format(childrenCategoriesNumber)).lower()
+                else: 
+                    print ('\nIt has no child categories')
+                    cloneChildren = input("\nEnter `Y` to clone the category and all articles from this category. ".format(categoryId, categoryTitle)).lower()
+                    if cloneChildren !='y': 
+                        print('Cloned nothing')
+                        break
+
+        else:
+            if categories[categoryChoice]:
+                # cloneParent = input("\nEnter `Y` to clone the parent category itself along with its children. ".format(categoryId, categoryTitle)).lower() == 'y'
+                cloneCategoryChildren(categories[categoryChoice])
         
     
     CONNECTION.close()

@@ -1,0 +1,508 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="" kb-tags="ElasticData,N3,Notation3,RDF,Turtle,выражения,разработка,обучение,платформа,триплеты,тройки,уроки,учебник,введение,синтаксис,HR" kb-title="Урок 1. Введение в графовую СУБД и язык N3">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_n3_lesson_1_intro">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_n3_lesson_1_taxonomy">
+<span class="md-ellipsis">
+      Темы, навыки и задания урока
+    </span>
+</a>
+<nav aria-label="Темы, навыки и задания урока" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_n3_lesson_1_topics">
+<span class="md-ellipsis">
+      Темы
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_n3_lesson_1_skills">
+<span class="md-ellipsis">
+      Навыки
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_n3_lesson_1_tasks">
+<span class="md-ellipsis">
+      Задания
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_n3_lesson_1_definitions">
+<span class="md-ellipsis">
+      Определения
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_n3_lesson_1_languages">
+<span class="md-ellipsis">
+      Языки запросов в Comindware Platform и их назначение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_n3_lesson_1_graph_benefits">
+<span class="md-ellipsis">
+      Преимущества использования графов и триплетов для описания, хранения и извлечения данных
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_n3_lesson_1_rdf_graphs">
+<span class="md-ellipsis">
+      СУБД Comindware ElasticData и графовая модель данных RDF
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_n3_lesson_1_data_storage">
+<span class="md-ellipsis">
+      Структура хранения данных в Comindware Platform
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_n3_lesson_1_n3_basic_syntax">
+<span class="md-ellipsis">
+      Язык N3 для обработки данных
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_n3_lesson_1_io_context">
+<span class="md-ellipsis">
+      Входные и выходные данные в N3
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_n3_lesson_1_calculate_attribute">
+<span class="md-ellipsis">
+      Практическое задание. Вычисление значения атрибута с помощью N3
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_n3_lesson_1_editor">
+<span class="md-ellipsis">
+      Редактор N3 и справочник функций
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_n3_lesson_1_typical_errors">
+<span class="md-ellipsis">
+      Типичные ошибки в выражениях на N3
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#tutorial_n3_lesson_1_summary">
+<span class="md-ellipsis">
+      Итоги урока
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="tutorial_n3_lesson_1_intro">Введение</h2>
+<p>В ходе этого урока вы ознакомитесь с RDF, графами знаний и принципами внутреннего представления и хранения данных в <strong>Comindware Platform</strong>.</p>
+<p>Кроме того, вы узнаете, что такое триплет вида <code>субъект–предикат-объект</code> и как составлять выражения в нотации N3 для манипуляций с данными в <strong>Comindware Platform</strong>, а также разберётесь с базовым синтаксисом языка N3, пятью типами запросов и контекстом исполнения выражений.</p>
+<p><strong>Предусловия:</strong></p>
+<ul>
+<li>Имеется доступ к веб-сайту с <strong>Comindware Platform</strong>.</li>
+<li><strong>Рекомендуется</strong> пройти <em>курс «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5112">Аналитик. Ознакомительный</a>»</em>, чтобы получить базовые навыки работы с <strong>Comindware Platform</strong>.</li>
+</ul>
+<p><strong>Расчётная продолжительность:</strong> 1,5 часа.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>В этом курсе используется контекст HR‑процесса подбора кандидатов с соответствующими сущностями.</p>
+<p>В примерах этого урока используется следующая модель данных:</p>
+<ul>
+<li>Связи между сущностями:<ul>
+<li>Сотрудник → Отдел</li>
+<li>Сотрудник → Компания</li>
+</ul>
+</li>
+<li>Атрибуты:<ul>
+<li>Шаблон <em>«Сотрудники»</em><ul>
+<li><em>ID</em> — <strong>запись</strong>, <strong>связанный шаблон</strong> <em>«Сотрудники»</em></li>
+<li><em>Фамилия</em>, <em>Имя</em>, <em>Отчество</em>, <em>Ф.И.О.</em> — <strong>текст</strong></li>
+<li><em>Отдел</em> — <strong>запись</strong>, <strong>связанный шаблон</strong> <em>«Отделы»</em></li>
+</ul>
+</li>
+<li>Шаблон <em>«Отделы»</em><ul>
+<li><em>Название</em> — <strong>текст</strong></li>
+</ul>
+</li>
+<li>Шаблон <em>«Компании»</em><ul>
+<li><em>Название</em> — <strong>текст</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>В данном уроке представлен продукт <strong>Comindware Platform</strong> версии 5.0, внешний вид страниц и меню в других версиях продукта может отличаться.</p>
+</div>
+<h2 id="tutorial_n3_lesson_1_taxonomy">Темы, навыки и задания урока</h2>
+<h3 id="tutorial_n3_lesson_1_topics">Темы</h3>
+<ul>
+<li>Языки запросов в <strong>Comindware Platform</strong></li>
+<li>RDF и графы знаний</li>
+<li>Хранение данных в графовой СУБД <strong>Comindware ElasticData</strong></li>
+<li>Триплеты — атомарные элементы N3</li>
+<li>Базовый синтаксис N3</li>
+<li>Области применения формул и N3</li>
+<li>Входные и выходные данные выражений на N3</li>
+<li>Редактор выражений N3</li>
+</ul>
+<h3 id="tutorial_n3_lesson_1_skills">Навыки</h3>
+<ul>
+<li>Понимание назначения и преимуществ использования языка N3 в <strong>Comindware Platform</strong></li>
+<li>Понимание принципов представления и хранения данных в виде триплетов в графовой СУБД</li>
+<li>Чтение и составление элементарных выражений на языке N3</li>
+<li>Понимание входных и выходных данных выражений на N3</li>
+<li>Выбор формул или языка N3 в соответствии с типом задачи</li>
+</ul>
+<h3 id="tutorial_n3_lesson_1_tasks">Задания</h3>
+<ul>
+<li>Освоить базовые принципы представления данных в виде триплетов</li>
+<li>Разобрать простейшие выражения в нотациях RDF и N3</li>
+<li>Составить выражение для вычисления значения атрибута с помощью N3</li>
+</ul>
+<div class="notice notice-success">
+<h2 class="admonition-title" id="tutorial_n3_lesson_1_definitions">Определения</h2>
+<ul>
+<li><strong>RDF (Resource Description Framework)</strong> — модель представления знаний в виде триплетов.</li>
+<li><strong>Граф знаний</strong> — сеть сущностей (узлов) и связей (рёбер), описывающих предметную область.</li>
+<li><strong>Триплет (тройка)</strong> — утверждение вида: <code>субъект — предикат — объект</code>.</li>
+<li><strong>N3</strong> — текстовая нотация для записи триплетов и графов.</li>
+<li><strong>URI</strong> — идентификатор ресурса вида <code>https://www.w3.org/1999/02/22-rdf-syntax-ns#type</code>.</li>
+<li><strong>Comindware ElasticData</strong> — фирменная СУБД в основе <strong>Comindware Platform</strong>, построенная на графовой модели RDF.</li>
+<li><strong>Литерал</strong> — неименованная константа, то есть фиксированное значение, не изменяющееся во время вычисления, например строка <code>"Бобров Б.Б."</code>.</li>
+</ul>
+</div>
+<h2 id="tutorial_n3_lesson_1_languages">Языки запросов в Comindware Platform и их назначение</h2>
+<p>В <strong>Comindware Platform</strong> предусмотрено два языка запросов:</p>
+<ol class="colored_numbers_list">
+<li>
+<p><strong>Формулы</strong> — фирменный язык выражений <strong>Comindware</strong>, похожий на формулы Excel. Является простым для восприятия и представляет собой надстройку над языком <strong>N3</strong>. Для базовой настройки системы его зачастую достаточно.</p>
+<p>Области применения формул:</p>
+<ul>
+<li>выборка данных из связанных шаблонов записей;</li>
+<li>подсчёт количества объектов;</li>
+<li>простые математические операции типа умножения и деления;</li>
+<li>конкатенация и преобразования строк.</li>
+</ul>
+</li>
+<li>
+<p><strong>N3</strong> (<strong>Notation 3</strong>, <strong>триплеты</strong>) — более продвинутый язык, позволяющий составлять сложные запросы и получать доступ к данным, которые затруднительно получить с помощью формул. Язык N3 представляет собой сокращённую запись RDF. Синтаксис N3 определён международным консорциумом W3C.</p>
+<p>Области применения языка N3:</p>
+<ul>
+<li>продвинутое использование <strong>Comindware Platform</strong> — составление сложных запросов;</li>
+<li>доступ ко всем сущностям — в формулах доступны не все системные атрибуты, а только те, которые используются чаще всего в типовых сценариях. N3 предоставляет доступ к большему количеству атрибутов и сущностей, чем формулы, например к системным атрибутам, атрибутам и экземплярам процессов и задач.</li>
+<li>расширенные возможности обработки данных — дополнительные математические функции, функции для работы со списками, приведения данных к одному типу, расчётов времени и т. д.;</li>
+<li>повышение скорости обработки данных — в случае обработки больших наборов данных запросы на языке N3 работают быстрее, чем формулы.</li>
+</ul>
+</li>
+</ol>
+<p>В рамках этого курса мы рассмотрим базовые принципы использования языка <strong>N3</strong>.</p>
+<h2 id="tutorial_n3_lesson_1_graph_benefits">Преимущества использования графов и триплетов для описания, хранения и извлечения данных</h2>
+<p><strong>Comindware Platform</strong> хранит данные в графовой СУБД <strong>Comindware ElasticData</strong>.</p>
+<p>Графовая модель данных позволяет отказаться от использования жёсткой структуры для представления, хранения и запросов данных (такой, как таблицы в SQL), что даёт ряд преимуществ:</p>
+<ul>
+<li><strong>Единое представление для хранения и запросов данных</strong> — для извлечения данных используются такие же триплеты на языке <strong>N3</strong>, как и для сохранения, благодаря чему достигается удобство обработки данных.</li>
+<li><strong>Простота построения модели данных</strong> — даже неподготовленный пользователь может быстро научиться создавать шаблоны записей и строить связи между ними.</li>
+<li><strong>Мгновенное добавление новых шаблонов записей и атрибутов</strong> — новые сущности сразу доступны для обработки без дополнительной настройки.</li>
+<li><strong>Неограниченная ширина и глубина связей между сущностями</strong> — нет ограничений по количеству атрибутов и связей между ними.</li>
+<li><strong>Простота и неограниченность навигации по связям</strong> — переход от одного справочника к другому через ссылочный атрибут описывается наглядными выражениями.</li>
+</ul>
+<p>Для более глубокого понимания принципов описания и хранения данных в графовой СУБД ознакомьтесь со следующими статьями:</p>
+<div class="relatedTopics">
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4856">Онтология</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4584">Технология Comindware ElasticData</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4853">Графы</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4857">Графы знаний</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4854">Моделирование на N3</a></li>
+</ul>
+</div>
+<h2 id="tutorial_n3_lesson_1_rdf_graphs">СУБД Comindware ElasticData и графовая модель данных RDF</h2>
+<p>Фирменная СУБД <strong>Comindware ElasticData</strong> построена на модели данных <strong>RDF</strong>.</p>
+<p><strong>RDF</strong> — это модель, которая описывает данные (знания) как граф, состоящий из <strong>утверждений</strong>.</p>
+<p><strong>Утверждение</strong> представляет собой так называемый <strong>триплет</strong> вида <code>субъект — предикат — объект</code>, где:</p>
+<ul>
+<li><code>субъект</code> — это описываемый ресурс;</li>
+<li><code>предикат</code> — это свойство или связь субъекта с объектом;</li>
+<li><code>объект</code> — это значение свойства или другой ресурс.</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Представление триплета RDF в виде графа" src="/platform/v5.0/tutorials/tutorial_n3/img/n3_tutorial_triple.png"/><figcaption class="caption">Представление триплета RDF в виде графа</figcaption></p>
+</figure>
+<div class="notice notice-tip">
+<p class="admonition-title">Триплеты и естественный язык</p>
+<p>Для лучшего понимания триплетов в RDF можно провести параллель с русским языком.</p>
+<p>Триплет можно представить как <strong>подлежащее, сказуемое и дополнение</strong>, например: <code>сотрудник — работает в — компании</code>. То есть объект и субъект представлены существительными, а предикат — глаголом.</p>
+</div>
+<p>Представление в виде графа знаний естественным образом соответствует любым предметным областям, где сущности и их отношения образуют семантическую сеть.</p>
+<p>Например, с помощью графа можно описать HR-процессы, участвующие в них сущности (ресурсы), их связи и взаимодействие — организационные единицы, сотрудников, документы и т. п.</p>
+<p>Пример триплета для утверждения <code>сотрудник Бобров работает в компании ООО «Деревообработка»</code>, составленного из URI ресурсов:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nv">&lt;http://example.com/hr/employee/бобров&gt;</span> <span class="nv">&lt;http://example.com/hr/relation/worksIn&gt;</span> <span class="nv">&lt;http://example.com/hr/company/деревообработка&gt;</span><span class="p">.</span></code> <br/><code>              <span class="err">субъект</span>                                   <span class="err">предикат</span>                                    <span class="err">объект</span></code> <br/><code>          <span class="err">сотрудник</span> <span class="err">Бобров</span>                             <span class="err">работает</span> <span class="err">в</span>                       <span class="err">компании</span> <span class="err">ООО</span> <span class="err">«Деревообработка»</span></code> <br/></pre></code></div>
+<p>Добавим в граф утверждение <code>сотрудник Бобров работает в отделе «Техдокументация»</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nv">&lt;http://example.com/hr/employee/бобров&gt;</span> <span class="nv">&lt;http://example.com/hr/relation/worksIn&gt;</span> <span class="nv">&lt;http://example.com/hr/company/деревообработка&gt;</span><span class="p">.</span></code> <br/><code>              <span class="err">субъект</span>                                   <span class="err">предикат</span>                                    <span class="err">объект</span></code> <br/><code>          <span class="err">сотрудник</span> <span class="err">Бобров</span>                             <span class="err">работает</span> <span class="err">в</span>                         <span class="err">отделе</span> <span class="err">«Техдокументация»</span></code> <br/></pre></code></div>
+<p>Таким образом, RDF позволяет легко добавлять новые свойства и связи между ресурсами и сформировать гибкую и расширяемую модель данных.</p>
+<p>Это облегчает поиск и организацию информации в базе данных.</p>
+<p>Так как нотация RDF стандартизирована и наглядна, данные легко интерпретировать как человеку, так и программному обеспечению.</p>
+<div class="notice notice-success">
+<p class="admonition-title">Что такое факт</p>
+<p>Триплет в <strong>Comindware Platform</strong> также называется <strong>фактом</strong>, то есть утверждением, фиксирующим некое знание, например: <code>Бобров работает в ООО «Деревообработка»</code>.</p>
+</div>
+<h2 id="tutorial_n3_lesson_1_data_storage">Структура хранения данных в Comindware Platform</h2>
+<p>В <strong>Comindware Platform</strong> все объекты имеют следующее внутренне представление:</p>
+<ul>
+<li>шаблоны, идентификаторы, атрибуты, значения атрибутов и любые другие сущности — это узлы (вершины) графа, то есть субъекты и объекты;</li>
+<li>связи между сущностями — это рёбра графа, то есть предикаты.</li>
+</ul>
+<p>Например, структуру графа, описывающего запись в шаблоне, можно упрощённо представить следующим образом:</p>
+<ul>
+<li><strong>Субъект</strong> — ID записи в шаблоне.</li>
+<li><strong>Предикат</strong> — атрибут записи.</li>
+<li><strong>Объект</strong> — значение атрибута.</li>
+</ul>
+<p>Например, имеется шаблон записи <em>«Сотрудники»</em> с атрибутами <em>«ID»</em>, <em>«Фамилия»</em> и <em>«Отдел»</em>.</p>
+<p>Данные записей в шаблоне хранятся в триплетах, которые в упрощённом виде можно представить следующим образом:</p>
+<div class="highlight"><code><pre><span></span><code><span class="s">"id_1234"</span> <span class="err">Фамилия</span> <span class="s">"Бобров"</span><span class="p">.</span></code> <br/><code><span class="s">"id_1234"</span> <span class="err">Отдел</span> <span class="s">"Техдокументация"</span><span class="p">.</span></code> <br/><code><span class="s">"id_1235"</span> <span class="err">Фамилия</span> <span class="s">"Филимонова"</span><span class="p">.</span></code> <br/><code><span class="s">"id_1235"</span> <span class="err">Отдел</span> <span class="s">"Бухгалтерия"</span><span class="p">.</span></code> <br/></pre></code></div>
+<p>Табличное представление этих записей в шаблоне <em>«Сотрудники»</em>:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>ID</th>
+<th>Фамилия</th>
+<th>Отдел</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1234</td>
+<td>Бобров</td>
+<td>Техдокументация</td>
+</tr>
+<tr>
+<td>1235</td>
+<td>Филимонова</td>
+<td>Бухгалтерия</td>
+</tr>
+</tbody>
+</table>
+<p>Аналогичным образом хранится вся метаинформация (описания шаблонов, форм, объектов, типов и т. д.), а также атрибуты окружения (текущий пользователь, текущее время, текущий контекст и т. д.).</p>
+<div class="notice notice-success">
+<p class="admonition-title">Направленный граф</p>
+<p>При работе с данными следует учитывать, что в <strong>Comindware Platform</strong> графы являются направленными.</p>
+<p>Поэтому утверждения <code>сотрудник → работает в → компании</code> и <code>сотрудника ← наняла ← компания</code> являются <strong>двумя разными фактами</strong>, описывающими ресурсы <code>сотрудник</code> и <code>компания</code>. Хотя семантически эти факты схожи, они хранятся в СУБД как <strong>две отдельных записи</strong>.</p>
+</div>
+<h2 id="tutorial_n3_lesson_1_n3_basic_syntax">Язык N3 для обработки данных</h2>
+<p>Для обработки данных в <strong>Comindware Platform</strong> используется язык <strong>N3</strong>, который представляет собой сокращенное человекочитаемое написание RDF.</p>
+<p>Та как данные в <strong>Comindware Platform</strong> хранятся в виде триплетов RDF, язык N3 позволяет описывать факты в базе данных и обращаться к ним наиболее естественным (нативным) образом.</p>
+<p>Например, запишем на языке N3 два факта:</p>
+<ul>
+<li><code>Сотрудник Бобров работает в отделе «Техдокументация»</code></li>
+<li><code>Сотрудник Филимонова работает в отделе «Бухгалтерия»</code></li>
+</ul>
+<div class="notice notice-success">
+<p class="admonition-title">Базовый синтаксис N3</p>
+<ul>
+<li>Каждый триплет должен завершаться <strong>точкой</strong> <code>.</code> — точка означает конец утверждения, как и в естественном языке.</li>
+<li>Каждый триплет должен находиться <strong>на одной строке</strong> и не может содержать переносов строк.</li>
+<li><code>@prefix</code> — директива, объявляющая сокращённое имя (псевдоним) ресурса по его URI. Такие имена позволяют сделать выражения на N3 более удобочитаемыми и наглядными.
+        - Директива <code>@prefix</code> аналогична объявлению пространства имён позволяет импортировать в выражение на N3 предикаты из соответствующего ресурса.
+        - Директивы <code>@prefix</code> должны располагаться в начале выражения. </li>
+<li>После директив <code>@prefix</code> должно следовать тело выражения, заключённое в фигурные скобки <code>{}</code>.</li>
+<li>Регистр символов имеет значение — <code>entity</code> и <code>Entity</code> — это две разные сущности.</li>
+<li><code>#</code> — символ комментария. Каждая строка комментария должна начинаться с <code>#</code> и может содержать произвольный текст.</li>
+</ul>
+<div class="highlight"><span class="filename">Базовая структура выражения на N3</span><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Тело выражения на N3</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</div>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Для удобочитаемости объявляем сокращённые имена ресурсов</span></code> <br/><code><span class="c"># с помощью директивы @prefix</span></code> <br/><code><span class="c"># Сущность «Сотрудник»: employee</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">employee:</span><span class="w"> </span><span class="nv">&lt;http://example.com/hr/employee#&gt;</span><span class="p">.</span></code> <br/><code><span class="c"># Тип отношения сущностей: relation</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">relation:</span><span class="w"> </span><span class="nv">&lt;http://example.com/hr/relation#&gt;</span><span class="p">.</span></code> <br/><code><span class="c"># Сущность «Отдел»: department</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">department:</span><span class="w"> </span><span class="nv">&lt;http://example.com/hr/department#&gt;</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Записываем два факта о сотрудниках в виде триплетов</span></code> <br/><code>    <span class="c"># с короткими именами ресурсов</span></code> <br/><code>    <span class="nn">employee</span><span class="p">:</span><span class="nt">Бобров</span> <span class="nn">relation</span><span class="p">:</span><span class="nt">worksIn</span> <span class="nn">department</span><span class="p">:</span><span class="nt">Техдокументация</span><span class="p">.</span></code> <br/><code>    <span class="nn">employee</span><span class="p">:</span><span class="nt">Филимонова</span> <span class="nn">relation</span><span class="p">:</span><span class="nt">worksIn</span> <span class="nn">department</span><span class="p">:</span><span class="nt">Бухгалтерия</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p>При сравнении записи одинаковых фактов в нотациях RDF и N3 очевидно, что запись N3 гораздо компактней:</p>
+<div class="highlight"><span class="filename">Факты в нотации RDF</span><code><pre><span></span><code><span class="nv">&lt;http://example.com/hr/employee/Бобров&gt;</span> <span class="nv">&lt;http://example.com/hr/relation/worksIn&gt;</span> <span class="nv">&lt;http://example.com/hr/department/Техдокументация&gt;</span><span class="p">.</span></code> <br/><code><span class="nv">&lt;http://example.com/hr/employee/Филимонова&gt;</span> <span class="nv">&lt;http://example.com/hr/relation/worksIn&gt;</span> <span class="nv">&lt;http://example.com/hr/department/Бухгалтерия&gt;</span><span class="p">.</span></code> <br/></pre></code></div>
+<div class="highlight"><span class="filename">Факты в нотации N3</span><code><pre><span></span><code><span class="nn">employee</span><span class="p">:</span><span class="nt">Бобров</span> <span class="nn">relation</span><span class="p">:</span><span class="nt">worksIn</span> <span class="nn">department</span><span class="p">:</span><span class="nt">Техдокументация</span><span class="p">.</span></code> <br/><code><span class="nn">employee</span><span class="p">:</span><span class="nt">Филимонова</span> <span class="nn">relation</span><span class="p">:</span><span class="nt">worksIn</span> <span class="nn">department</span><span class="p">:</span><span class="nt">Бухгалтерия</span><span class="p">.</span></code> <br/></pre></code></div>
+<p>Таким образом, язык N3 позволяет повысить удобочитаемость триплетов за счёт использования коротких псевдонимов ресурсов RDF.</p>
+<div class="notice notice-example">
+<p class="admonition-title">Факультативное задание</p>
+<p>Запишите в нотации RDF и на языке N3 следующие факты (утверждения):</p>
+<ul>
+<li><code>В ООО «Деревообработка» имеется отдел «Техподдержка»</code></li>
+<li><code>В отделе «Техподдержка» имеется вакантная должность «Специалист службы поддержки»</code></li>
+<li><code>Отдел кадров рассмотрел резюме кандидата Иванова</code></li>
+<li><code>Отдел кадров рассмотрел резюме кандидата Боброва</code></li>
+<li><code>Иванов принят на работу в отдел «Техподдержка»</code></li>
+<li><code>Бобров получил отказ</code></li>
+</ul>
+</div>
+<h2 id="tutorial_n3_lesson_1_io_context">Входные и выходные данные в N3</h2>
+<p>Чтобы выполнять полезные запросы и вычисления, выражения на N3 должны получать данные на вход и выводить результаты.</p>
+<p>Для этого в <strong>Comindware Platform</strong> предусмотрены две системные переменные:</p>
+<ul>
+<li><code>?item</code> — объект, содержащий входные данные. Обычно это текущая сущность контекста (например, запись в шаблоне).</li>
+<li><code>?value</code> — объект, в который помещаются выходные данные. Обычно это итоговое значение (или список значений).</li>
+</ul>
+<div class="notice notice-success">
+<p class="admonition-title">Синтаксис переменных</p>
+<p>В языке N3 переменные обозначаются вопросительным знаком, например:</p>
+<ul>
+<li><code>?item</code> — обращение к системной переменной;</li>
+<li><code>?myVariable</code> — объявление локальной переменной.</li>
+<li>Регистр имён переменных имеет значение — <code>?variable</code> и <code>?Variable</code> — это две разные переменные.
+```</li>
+</ul>
+</div>
+<p>Типы и семантика переменных <code>?item</code> и <code>?value</code> зависят от контекста обработки выражения на N3 (вычисляемый атрибут, фильтр таблицы или раскрывающегося списка, правило на форме, сценарий и т. п.).</p>
+<p>В этом курсе мы примем следующие упрощения (если не указано иное):</p>
+<ul>
+<li><code>?item</code> — входные данные;</li>
+<li><code>?value</code> — выходные данные.</li>
+</ul>
+<p>Полная матрица содержимого <code>?item</code> и <code>?value</code> в зависимости от контекста представлена в <em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4852">Справочнике по языку N3</a></em>.</p>
+<h2 id="tutorial_n3_lesson_1_calculate_attribute">Практическое задание. Вычисление значения атрибута с помощью N3</h2>
+<p>Теперь, когда вы ознакомились с базовым синтаксисом языка N3 и принципами работы с графовыми данными, научимся вычислять значение атрибута шаблона записи с помощью N3 и встроенных в <strong>Comindware Platform</strong> предикатов (функций).</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>Рассмотрим вычисление в N3 на следующем примере:</p>
+<p>В шаблоне записи <em>«Сотрудники»</em> требуется автоматически заполнять атрибут <em>«Ф.И.О.»</em> составной строкой из имени, фамилии и отчества сотрудника.</p>
+</div>
+<div class="notice notice-success">
+<p class="admonition-title">Расширенный синтаксис N3</p>
+<p>В этом примере мы применим следующие элементы N3:</p>
+<ul>
+<li>
+<p>Предикаты для обработки данных — это встроенные в <strong>Comindware Platform</strong> функции, которые можно импортировать в выражение посредством директивы <code>@prefix</code> с URI соответствующего ресурса. </p>
+<p>Например, ресурс <a class="mkdocs_imported_link" href="http://comindware.com/ontology/object#">http://comindware.com/ontology/object#</a> содержит предикаты для работы с записями и другими объектами.</p>
+</li>
+<li>
+<p>Списки — элементы списка перечисляются через пробел и заключаются в круглые скобки: <code>(element1 element2 element3)</code>.</p>
+</li>
+<li>Строковые литералы — строка объявляется в кавычках: <code>"произвольный текст"</code>.</li>
+<li>Присвоение значений выполняется с помощью оператора <code>-&gt;</code>:<ul>
+<li><code>?исходная_переменная -&gt; ?целевая_переменная</code>;</li>
+<li><code>"строковый литерал" -&gt; ?переменная</code>.</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>!!! tip "Предикаты <code>object:findProperty</code> и <code>cmwstring:format</code>"</p>
+<div class="highlight"><code><pre><span></span><code>Следующие два предиката пригодятся для решения многих практических бизнес-задач с помощью N3:</code> <br/><code></code> <br/><code>- `object:findProperty` — принимает системное имя шаблона и системное имя атрибута, возвращает идентификатор атрибута. Затем по идентификатору атрибута можно получить его значение. Этот предикат используется в большинстве выражений на N3.</code> <br/><code>- `cmwstring:format` — принимает произвольную строку (с заполнителями вида `{0}, {1} … {N}`, в которые требуется подставить значения) и список значений, подставляет значения из списка в заполнители и возвращает результирующую строку. Это полезный предикат для преобразования любых данных в строки, например, дат, чисел, списков значений любых типов.</code> <br/></pre></code></div>
+<ol class="colored_numbers_list">
+<li>Откройте для редактирования атрибут <em>«Ф.И.О.»</em></li>
+<li>Установите флажок «<strong>Вычислять автоматически</strong>».</li>
+<li>
+<p>В поле «<strong>Вычисляемое значение</strong>» введите следующее выражение на <strong>N3</strong>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Объявляем префиксы для использования </span></code> <br/><code><span class="c"># встроенных в Comindware Platform предикатов,</span></code> <br/><code><span class="c"># представляющих собой функции для обработки данных.</span></code> <br/><code><span class="c"># Ресурс http://comindware.com/ontology/object#</span></code> <br/><code><span class="c"># содержит предикаты для работы с записями.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="c"># Ресурс http://comindware.com/logics/string#</span></code> <br/><code><span class="c"># содержит предикаты для обработки строк.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwstring:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/string#&gt;</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># С помощью предиката object:findProperty получаем атрибуты</span></code> <br/><code>    <span class="c"># "Имя", "Фамилия", "Отчество".</span></code> <br/><code>    <span class="c"># Полученные атрибуты помещаем в переменные </span></code> <br/><code>    <span class="c"># ?firstNameAttribute, ?lastNameAttribute, ?patronymicAttribute</span></code> <br/><code>    <span class="c"># для дальнейшей обработки.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Сотрудники"</span> <span class="s">"Имя"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?firstNameAttribute</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Сотрудники"</span> <span class="s">"Фамилия"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?lastNameAttribute</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Сотрудники"</span> <span class="s">"Отчество"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?patronymicAttribute</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Получаем значения атрибутов "Имя", "Фамилия", "Отчество"</span></code> <br/><code>    <span class="c"># из текущей записи ?item.</span></code> <br/><code>    <span class="c"># Полученные значения атрибутов помещаем в переменные</span></code> <br/><code>    <span class="c"># ?firstNameValue, ?lastNameValue, ?patronymicValue</span></code> <br/><code>    <span class="c"># для дальнейшей обработки.</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?firstNameAttribute</span> <span class="err">?firstNameValue</span><span class="p">.</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?lastNameAttribute</span> <span class="err">?lastNameValue</span><span class="p">.</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?patronymicAttribute</span> <span class="err">?patronymicValue</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># С помощью предиката cmwstring:format соединяем</span></code> <br/><code>    <span class="c"># фамилию, имя и отчество в единую строку</span></code> <br/><code>    <span class="c"># и помещаем её в переменную ?fullName.</span></code> <br/><code>    <span class="p">(</span><span class="s">"{0} {1} {2}"</span> <span class="err">?lastNameValue</span> <span class="err">?firstNameValue</span> <span class="err">?patronymicValue</span><span class="p">)</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">format</span> <span class="err">?fullName</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Возвращаем результирующую строку с Ф.И.О</span></code> <br/><code>    <span class="c"># системную переменную value.</span></code> <br/><code>    <span class="err">?fullName</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<div class="notice notice-example">
+<p class="admonition-title">Сравнение формулы и выражения на N3</p>
+<p>Чтобы лучше понять логику <strong>N3</strong>, запишем тоже самое выражение в виде <strong>формулы</strong>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">FORMAT</span><span class="p">((</span><span class="ss">"{0} {1} {2}"</span><span class="p">),</span><span class="w"> </span><span class="n">LIST</span><span class="p">(</span><span class="err">$Фамилия</span><span class="p">,</span><span class="w"> </span><span class="err">$Имя</span><span class="p">,</span><span class="w"> </span><span class="err">$Отчество</span><span class="p">))</span></code> <br/></pre></code></div>
+<p>Видно, что для простых вычислений более уместно использовать формулы, а язык N3 следует применять для действительно сложных запросов, которые нецелесообразно составлять в виде формул.</p>
+<p>См. параграф <em>«<a class="mkdocs_imported_link" href="tutorial_n3_lesson_1_languages">Языки запросов в Comindware Platform и их назначение</a>»</em> выше.</p>
+</div>
+</li>
+<li>
+<p>Сохраните атрибут <em>«Ф.И.О.»</em> с настроенным вычислением.</p>
+</li>
+<li>Поместите атрибуты <em>«Имя»</em>, <em>«Фамилия»</em>, <em>«Отчество»</em> и <em>«Ф.И.О.»</em> на форму.</li>
+<li>Создайте запись в шаблоне <em>«Сотрудники»</em> и введите любые имя, фамилию и отчество.</li>
+<li>Удостоверьтесь, что поле <em>«Ф.И.О.»</em> заполняется автоматически ожидаемым образом.</li>
+</ol>
+<div class="notice notice-example">
+<p class="admonition-title">Факультативное задание</p>
+<p>Перепишите в выражении выше строку <code>("{0} {1} {2}" ?lastNameValue ?firstNameValue ?patronymicValue) cmwstring:format ?fullName.</code></p>
+<p>Вместо предиката cmwstring:format используйте предикат cmwstring:join</p>
+<div class="notice notice-tip">
+<p class="admonition-title">Предикат cmwstring:join</p>
+<p>Предикат <code>cmwstring:join</code> позволяет объединить значения нескольких переменных в одну строку, используя указанный разделитель. </p>
+<p>Синтаксис:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">(</span><span class="s">"separator"</span> <span class="err">?list</span><span class="p">)</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">join</span> <span class="err">?result</span><span class="p">.</span></code> <br/></pre></code></div>
+</div>
+<p>Здесь:</p>
+<ul>
+<li><code>?list</code> — список значений, которые нужно объединить, разделённых пробелами (также можно указать переменную, содержащую список);</li>
+<li><code>"separator"</code> — строка-разделитель (любой символ),</li>
+<li><code>?result</code> — переменная, в которую будет записана результирующая строка.</li>
+</ul>
+</div>
+<h2 id="tutorial_n3_lesson_1_editor">Редактор N3 и справочник функций</h2>
+<p>В <strong>Comindware Platform</strong> предусмотрен удобный редактор выражений на N3 с подсветкой синтаксиса, проверкой корректности выражений и встроенным справочником функций.</p>
+<p>Подробные сведения об использовании редактора N3 см. в статьях:</p>
+<p><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5025">Редактор выражений. Использование</a></em>
+<em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5039">Предиктивный ввод в выражениях на языке N3</a></em></p>
+<h2 id="tutorial_n3_lesson_1_typical_errors">Типичные ошибки в выражениях на N3</h2>
+<p>При составлении выражений на N3 чаще всего встречаются следующие ошибки:</p>
+<ul>
+<li>Отсутствует точка в конце триплета.</li>
+<li>Отсутствуют фигурные скобки вокруг тела выражения.</li>
+<li>Имя переменной указано без вопросительного знака.</li>
+</ul>
+<p>Такие ошибки помогает выявить проверка в редакторе выражений.</p>
+<h2 id="tutorial_n3_lesson_1_summary">Итоги урока</h2>
+<p>Вы разобрались с назначением языка N3 в <strong>Comindware Platform</strong>, устройством модели данных RDF, принципами хранения и представлением данных в СУБД <strong>Comindware ElasticData</strong>. Вы научились составлять простые триплеты для описания бизнес-сущностей и их связей и освоили базовый синтаксис N3. На основе полученных знаний вы составили простейшее выражение на языке N3 для вычисления значения атрибута с помощью предикатов, встроенных в <strong>Comindware Platform</strong>.</p>
+<p>В ходе <a class="autorefs autorefs-internal mkdocs_imported_link" href="lesson_2.html#tutorial_n3_lesson_2" title="Урок 2. Синтаксис N3, переменные и формы запросов">следующего урока</a> вы закрепите знания синтаксиса N3 и научитесь составлять более сложные выражения.</p>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4584">Технология Comindware ElasticData</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4852">Справочник по N3</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4856">Онтология</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4853">Графы</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4857">Графы знаний</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4858">Нотация N3</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4854">Моделирование на N3</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5025">Редактор выражений. Использование</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5039">Предиктивный ввод в выражениях на языке N3</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5112">Аналитик. Ознакомительный</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

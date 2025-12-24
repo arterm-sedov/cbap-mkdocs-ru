@@ -1,13 +1,20 @@
 ---
-title: Подключения
+title: 'Подключения'
+kbTitle: 'Подключения. Определения, типы, создание, настройка, удаление'
+kbId: 4675
 tags:
+  - интеграция
+  - интеграции
   - подключение
   - подключения
+  - путь передачи данных
+  - пути передачи данных
   - удаление подключения
   - проверка соединения
+  - коннекторы
+  - адаптеры
 hide:
   - tags
-kbId: 4675
 ---
 
 # Подключения. Определения, типы, создание, настройка, удаление {: #connections}
@@ -20,7 +27,18 @@ kbId: 4675
 - Для обмена данными требуется настроить **подключение** и **путь передачи данных**, который обеспечивает преобразование данных между системами. См. _«[Пути передачи данных. Определения, типы, создание, настройка, удаление][communication_routes]»._
 - Одно **подключение** можно использовать для нескольких **путей передачи данных**, чтобы не настраивать общие параметры, такие как URL-адрес, учетные данные, ключ API и т.&nbsp;п.
 
-См. также _[Примеры интеграций][integration_examples]_.
+См. также:
+
+- _[Примеры интеграций][integration_examples]_
+- _[Интеграция с внешними системами. Общие рекомендации][integration_recomendations]_
+
+</div>
+
+<div class="admonition warning" markdown="block">
+
+## Ответственность за использование сервисов третьих сторон {: .admonition-title #third_party_services_disclaimer_responsibility }
+
+{% include-markdown ".snippets/disclaimer_third_party_services.md" %}
 
 </div>
 
@@ -29,14 +47,13 @@ kbId: 4675
 ### Системные подключения
 
 - [Управление версиями через {{ gitVariants }}][git_connection]
-- [{{ openSearchVariants }}][elasticsearch_connection]
 - Абстрактное подключение
 - [Карты][map_configure]
 - [Хранилище S3][s3_connection]
 
 ### Аутентификация
 
-- [Аутентификация через WS-Federation][wsfederation_connection]
+<!-- - [Аутентификация через WS-Federation][wsfederation_connection] -->
 - [Аутентификация через OpenID Connect][openid_connection]
 - [Active Directory][ad_connection]
 
@@ -113,8 +130,9 @@ _![Список подключений](connection_list.png)_
 
 --8<-- "related_topics_heading.md"
 
-- _[Пути передачи данных. Определения, типы, создание, настройка, удаление][communication_routes]_
-- _[Примеры интеграций][integration_examples]_
+- [Пути передачи данных. Определения, типы, создание, настройка, удаление][communication_routes]
+- [Примеры интеграций][integration_examples]
+- [Интеграция с внешними системами. Общие рекомендации][integration_recomendations]
 
 </div>
 

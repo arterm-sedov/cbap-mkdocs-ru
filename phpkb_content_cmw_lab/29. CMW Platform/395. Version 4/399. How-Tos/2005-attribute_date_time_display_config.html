@@ -1,0 +1,22 @@
+<h1>Working with Date &amp;amp; time attribute</h1><p>The attribute with the «Date &amp; time» data type is used in <strong>CMW Platform</strong> to record and display data in date and time format.</p>
+<p>The attribute with the «Date &amp; time» data type is stored in the database in the «UTC 0» time zone:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">"op.117": "2020-12-10T07:45:00Z"</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>On the form or on the table, it is displayed in the server time zone, which is specified in the global configuration:</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="" class="img-responsive" height="676" src="https://kb.cmwlab.com/assets/2022-02-10_14h05_00.png" width="1008"/></p>
+<p class="caption" style="font-size: 15px !important;">Defining the time zone</p>
+</div>
+<p>When <strong>importing</strong> an attribute of the «Date &amp; time» data type, it is loaded into the database in «UTC 0» time zone, but displayed in the time zone specified in the global configuration.</p>
+<p>For example, the server time zone is UTC+3, so if you upload from a file to the system with the following date and time: <em>03.12.2020 17:00</em>, in the system in the attribute of the «Date &amp; time» data type you will see the same time, but in the database it will be stored as follows: <em>03.12.2020 14:00</em>.</p>
+<p>When <strong>exporting</strong> an attribute of the «Date &amp; time» data type, it is unloaded in the server time zone specified in the global configuration.</p>
+<p>For example, if you export the attribute of the «Date &amp; time» data type with the value «<em>12/03/2020 17:00</em>» to Excel, then this field will store exactly the same time as in the system.</p>
+<p>When <strong>changing the display format</strong> of the attribute of the «Date &amp; time» data type from «<em>dd.MM.YYYY hh: mm</em>» to the display format «<em>dd.MM.YYYY</em>», hours and minutes are reset to the zero time zone to avoid incorrect time display and display errors when importing and exporting.</p>
+<div class="blue_note"><strong>Note :</strong> the IANA library is used to determine the time zones in which to store information in the database.</div>

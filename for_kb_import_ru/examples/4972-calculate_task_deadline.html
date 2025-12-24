@@ -1,0 +1,27 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4972" kb-tags="" kb-title="Вычисление крайнего срока задачи с учетом выходных и праздничных дней">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для того чтобы вычислить срок выполнения задачи, учитывая выходные и праздничные дни (для этого в платформе должен быть создан справочник праздничных дней), введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code>WORKHOURS(NOW(),18,DURATION("PT9H"),DURATION("PT9H"),LIST((from a in db-&gt;holliday_calendar select a-&gt;Data)))</code> <br/></pre></code></div>
+<p><strong>где:</strong></p>
+<p><strong>18</strong> – количество рабочих часов, данных на выполнение задачи;</p>
+<p><strong>DURATION("PT9H")</strong> – в первом случае это – время начала рабочего дня, во втором – его продолжительность;</p>
+<p><strong>holliday_calendar</strong> – системное имя Шаблона записи с праздничными днями;</p>
+<p><strong>Data</strong> – системное имя атрибута типа «Дата/Время» в holliday_calendar.</p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

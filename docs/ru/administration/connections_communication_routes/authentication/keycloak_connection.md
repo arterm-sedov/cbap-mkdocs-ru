@@ -84,7 +84,7 @@ hide: tags
     _![Настройка параметров выхода для клиента Keycloak](img/openid_logout_settings.png)_
 
 13. Откройте вкладку **Credentials** (Учётные данные).
-14. Сохраните **Client Secret** (Секрет клиента). Его потребуется указать в директиве `auth.openId.clientSecret` в [файле конфигурации {{ productnName }}](#openid_connection_instance_configure).
+14. Сохраните **Client Secret** (Секрет клиента). Его потребуется указать в директиве `auth.openId.clientSecret` в [файле конфигурации {{ productName }}](#openid_connection_instance_configure).
 
     _![Настройка учётных данных для клиента Keycloak](img/openid_copy_client_secret.png)_
 
@@ -200,7 +200,7 @@ hide: tags
 
 ## Инициализация {{ productName }} для входа через Keycloak {: #openid_connection_initialize .pageBreakBefore }
 
-1. Откройте веб-сайт экземпляра **{{ productName }}**, например [https://<yourHost>](https://<yourHost>/)
+1. Откройте веб-сайт экземпляра **{{ productName }}**, например `https://<yourHost>/`
 2. Нажмите кнопку «**Войти как администратор**».
 3. Введите учётные данные администратора и нажмите кнопку «**Войти**».
 4. Выйдите из системы.

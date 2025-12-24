@@ -1,0 +1,84 @@
+<h1>Import Data into Excel via API</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1gui4dc0n0">Use Case</a></li>
+<li><a href="#mcetoc_1gui4e9vb1">Instructions</a>
+<ul>
+<li><a href="#mcetoc_1gui666u86">Obtaining the GET Request URL for a Template </a></li>
+<li><a href="#mcetoc_1gui4gcpj3">Importing Data to Excel</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="mcetoc_1gui4dc0n0">Use Case</h2>
+<p>Using the <strong>CMW Platform </strong>API, you can import the application data to Excel (via Power Query) or BI systems.</p>
+<p>In this article, we will import the data from a record template into an Excel file using the <strong>CMW Platform</strong> API and the Power Query add-in.</p>
+<h2 id="mcetoc_1gui4e9vb1">Instructions</h2>
+<h3 id="mcetoc_1gui666u86">Obtaining the GET Request URL for a Template </h3>
+<ol class="colored_numbers_list">
+<li>Open your <strong>Comindware Business Application Platform</strong> instance website.</li>
+<li>To open the API web interface, type <code>/docs</code> after the domain name in the browser address bar, for instance: <br/><code>mycompany.com/docs</code></li>
+<li>Go to the <strong>Solution API </strong>section that lists all application templates.</li>
+<li>Find the template you need by its system name and click it.</li>
+<li>Select the <strong>GET </strong>method (without the <code><strong>{id}</strong></code> suffix) that returns all the records from the record template.</li>
+<li>Click <strong>Try it out</strong>.</li>
+<li><a id="RequestURL"></a>Copy the value in the <strong>Request URL</strong> field, for example: <br/><code>https://mycompany.com/api/public/solution/Vehiclerequests</code></li>
+</ol>
+<div class="screenshot_with_caption">
+<p><img alt="Obtaining the template GET request URL" class="img-responsive" height="803" src="https://kb.cmwlab.com/assets/img_6442b00578cfd.png" width="872"/></p>
+<p class="caption">Obtaining the template GET request URL</p>
+</div>
+<div class="blue_note"><strong>Note:</strong> The <strong>CMW Platform</strong> API presents the data in JSON format.</div>
+<h3 id="mcetoc_1gui4gcpj3">Importing Data to Excel</h3>
+<p>The Power Query add-in is built into Excel 2016 and above. For earlier versions of Excel, you need to <a href="https://support.microsoft.com/en-us/office/about-power-query-in-excel-7104fbee-9e62-4cb9-a02e-5bfb1a6c536a?redirectsourcepath=%252fru-ru%252foffice%252fpower-query-%2525e2%252580%252594-%2525d0%2525be%2525d0%2525b1%2525d0%2525b7%2525d0%2525be%2525d1%252580-%2525d0%2525b8-%2525d0%2525be%2525d0%2525b1%2525d1%252583%2525d1%252587%2525d0%2525b5%2525d0%2525bd%2525d0%2525b8%2525d0%2525b5-ed614c81-4b00-4291-bd3a-55d80767f81d">install it</a>.</p>
+<ol class="colored_numbers_list">
+<li>On the <strong>Data</strong> tab in the ribbon, click <strong>From Web</strong></li>
+<li>In the <strong>URL </strong>field, paste the <a href="#RequestURL"><strong>Request URL </strong>you copied from the <strong>CMW Platform</strong> API</a>.
+<div class="screenshot_with_caption">
+<p><img alt="Initializing the Power Query in Excel" class="img-responsive" height="407" src="https://kb.cmwlab.com/assets/img_6442afcc8b705.png" width="772"/></p>
+<p class="caption">Initializing the Power Query in Excel</p>
+</div>
+</li>
+<li>In the <strong>Access Web content</strong> window:
+<ul>
+<li>Select <strong>Basic</strong>.</li>
+<li>Enter the <strong>user name</strong> and <strong>password</strong> of the account with permission to view the selected record template.</li>
+<li>Click <strong>Connect</strong>.
+<div class="screenshot_with_caption">
+<p><img class="img-responsive" src="https://kb.cmwlab.com/assets/img_6446481f27823.png"/></p>
+<p class="caption">Configuring the credentials for API access</p>
+</div>
+</li>
+</ul>
+</li>
+<li>The received data appears in the <strong>Power Query Editor</strong> window.
+<div class="screenshot_with_caption">
+<p><img alt="Power Query Editor with the imported data" class="img-responsive" height="415" src="https://kb.cmwlab.com/assets/img_644649e72f2d0.png" width="1218"/></p>
+<p class="caption">Power Query Editor with the imported data</p>
+</div>
+</li>
+<li>Click <strong>To Table</strong> in the ribbon. Click <strong>OK </strong>in the <strong>To Table</strong> window .
+<div class="screenshot_with_caption">
+<p><img alt="Configuring the query table" class="img-responsive" height="262" src="https://kb.cmwlab.com/assets/img_64464c555a6b4.png" width="700"/></p>
+<p class="caption">Configuring the query table</p>
+</div>
+</li>
+<li>Expand the list of all record template attributes and select the attributes to load in the table.
+<div class="screenshot_with_caption">
+<p><img class="img-responsive" src="https://kb.cmwlab.com/assets/img_64464c3c94675.png"/></p>
+<p class="caption">Configuring the columns</p>
+</div>
+</li>
+<li>Click <strong>Close &amp; Load</strong> in the ribbon to import the data into the Excel spreadsheet.
+<div class="screenshot_with_caption">
+<p><img alt="Loading the query table to the Excel spreadsheet" class="img-responsive" height="422" src="https://kb.cmwlab.com/assets/img_64464d4357314.png" width="1153"/></p>
+<p><em>Loading the query table to the Excel spreadsheet</em></p>
+</div>
+</li>
+<li>The data will appear in the Excel spreadsheet as shown below.
+<div class="screenshot_with_caption">
+<p><img alt="A query table imported to the Excel spreadsheet" class="img-responsive" height="411" src="https://kb.cmwlab.com/assets/img_64464d8ecaf5a.png" width="1232"/></p>
+<p class="caption">A query table imported to the Excel spreadsheet</p>
+</div>
+</li>
+</ol>

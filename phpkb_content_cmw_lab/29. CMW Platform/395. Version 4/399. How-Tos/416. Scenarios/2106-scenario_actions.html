@@ -1,0 +1,348 @@
+<h1>Scenario Actions</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#activity_type1">Common Action Properties</a></li>
+<li><a href="#mcetoc_1gj42f3a31">Scenario Action Types</a>
+<ul>
+<li><a href="#mcetoc_1ghqvc7u81">Validate the Expression Result</a></li>
+<li><a href="#activity_type2">Create a Record</a></li>
+<li><a href="#mcetoc_1gj43qa910">Clone a Record</a></li>
+<li><a href="#activity_type4">Change the Context</a></li>
+<li><a href="#activity_type5">Change Attribute Values</a></li>
+<li><a href="#mcetoc_1ghtunab10">Change Variable Values</a></li>
+<li><a href="#activity_type6">Start a Process</a></li>
+<li><a href="#mcetoc_1gii69f8v0">Send a Message</a></li>
+<li><a href="#mcetoc_1giiboep50">Import Data from a File</a></li>
+<li><a href="#mcetoc_1gil2osb20">Create a Document Using a Template</a></li>
+<li><a href="#mcetoc_1ginc06630">Store a Document in a Variable</a></li>
+<li><a href="#mcetoc_1gincndar1">Attach a Document to an Attribute</a></li>
+<li><a href="#mcetoc_1gi57l71d0">Execute on Conditions</a></li>
+<li><a href="#mcetoc_1gingga780">Iterate by Numeric Counter</a></li>
+<li><a href="#mcetoc_1ginhuqr40">Iterate by Object Counter</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1giv6f35k2">Related Articles</a></li>
+</ul>
+</div>
+<p><strong style="box-sizing: border-box; font-weight: 700 !important; orphans: 2; text-indent: 0px; text-decoration-color: initial;"> Comindware Business Application Platform </strong>scenarios may consist of the following actions. For specific action properties description, see the <a href="#mcetoc_1gj42f3a31">Scenario Action Types</a>.</p>
+<p>For information on configuring scenario actions, see <samp data-name="aid" data-title="" data-value="2109"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2109}</span></samp>.</p>
+<h2 id="activity_type1">Common Action Properties</h2>
+<div class="screenshot_with_caption">
+<p style="text-align: left;">All actions have the <strong><em>Description </em></strong>field on the <em><strong>General </strong></em>tab — an optional comment about the action purpose.</p>
+<p style="text-align: left;">All actions have the following properties on the <em><strong>Additional</strong></em> tab:</p>
+<ul>
+<li style="text-align: left;"><em><strong> Type </strong>— </em>the action type.</li>
+<li style="text-align: left;"><em> <strong>Context template </strong></em>— the action will be executed for this template.</li>
+<li style="text-align: left;"><em><strong>Ignore all errors</strong> — </em>if this box is checked, the scenario action will continue to run despite any errors: exceptions, invalid data, etc.<em><br/></em></li>
+<li style="text-align: left;"><em><strong> Execute Separately from the scenario</strong> — </em><span style="color: #5a5a5a; font-family: OpenSans, Arial, sans-serif; font-size: 14px; font-weight: 400; letter-spacing: normal; orphans: 2; text-indent: 0px;">if this box is checked, the action and all its child actions will be executed asynchronously with the remaining scenario actions.</span></li>
+<li style="text-align: left;"><em><strong>Clear cache</strong> — </em>if this box is checked, the data is refreshed before executing the action to avoid using obsolete cached values.</li>
+</ul>
+<div class="screenshot_with_caption">
+<p><img alt="Common actions properties on the Additional tab" class="img-responsive" height="353" src="https://kb.cmwlab.com/assets/img_6388a68d3d365.png" width="846"/></p>
+<p><em>Common actions properties on the Additional tab</em></p>
+</div>
+</div>
+<h2 id="mcetoc_1gj42f3a31">Scenario Action Types</h2>
+<h3 id="mcetoc_1ghqvc7u81">Validate the Expression Result</h3>
+<p>This action validates a condition in the context template (specified on the <em><strong>Additional</strong></em> tab). If the condition is not met, an error message is displayed with the specified text.</p>
+<p>The <em><strong>General</strong></em> tab provides the following properties:</p>
+<ul>
+<li><em><strong>Failure message</strong> — </em>the text that will be displayed to the user if the expression returns <code>false</code>.</li>
+<li><em><strong>Expression</strong> — </em>the condition to validate. The action will be triggered if the expression (<strong><em>formula</em></strong>, <em><strong>N3</strong>, </em>or <strong><em>DMN</em></strong>) returns <code>false</code>.</li>
+</ul>
+<div class="screenshot_with_caption">
+<p><img alt="Validate the Expression Result action general properties" class="img-responsive" height="396" src="https://kb.cmwlab.com/assets/img_6388a63c2b977.png" width="846"/></p>
+<p class="caption">Validate the Expression Result action general properties</p>
+</div>
+<h3 id="activity_type2">Create a Record</h3>
+<p>This action creates a record in the specified template.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Create a Record action general properties" class="img-responsive" height="460" src="https://kb.cmwlab.com/assets/img_6388a49fbe381.png" width="845"/></p>
+<p class="caption">Create a Record action general properties</p>
+</div>
+<p>The <strong>General</strong> tab provides the following properties:</p>
+<ul>
+<li><em> <strong>Target record template</strong></em> — the record will be created in this template.</li>
+<li><em> <strong>New record reference </strong></em>— a <em><strong>Record </strong></em>attribute of the<em><strong> context template</strong></em> (specified on the <em><strong>Additional</strong></em> tab) that will contain a link to the created record. You can set this field if the context template is linked with the target template.</li>
+<li><em><strong>Value operation </strong></em>​— available if a new record reference is selected:
+<ul style="list-style-type: circle;">
+<li><em> <strong>Add </strong>— </em>adds a created record link to the specified attribute (if the attribute’s <em><strong>Store multiple values</strong></em> check box is checked)<span style="vertical-align: inherit;">.</span></li>
+<li><em> <strong>Replace </strong></em>— replaces the existing links in the specified attribute with a created record link.</li>
+</ul>
+</li>
+</ul>
+<h3 id="mcetoc_1gj43qa910">Clone a Record</h3>
+<p>This action duplicates the specified records. The target template must match the context template (specified on the <em><strong>Additional</strong></em> tab).</p>
+<div class="screenshot_with_caption">
+<p><img alt="Clone a Record action properties" class="img-responsive" height="595" src="https://kb.cmwlab.com/assets/img_6388b07ccf52c.png" width="848"/></p>
+<p class="caption">Clone a Record action properties</p>
+</div>
+<p>The <strong>General</strong> tab provides the following properties:</p>
+<ul>
+<li><em><strong>Target record template</strong></em> — the duplicate record will be created in this template.</li>
+<li><em> <strong>New record reference </strong></em>— a <em><strong>Record </strong></em>attribute of the<em><strong> context template </strong></em>(specified on the <em><strong>Additional</strong></em> tab) that will contain a link to the created record. You can set this field if the context template is linked with the target template.</li>
+<li><em><strong>An attribute or expression to find the objects </strong></em>— a <em><strong>Record</strong></em> attribute linked to the records being cloned, or an expression (<em><strong>formula</strong></em>, <strong><em>N3</em></strong>, or <strong><em>DMN</em></strong>) that returns the ID of the records to clone.</li>
+<li><em><strong>Value operation </strong></em>​— available if a new record reference is selected:
+<ul style="list-style-type: circle;">
+<li><em> <strong>Add </strong>— </em>adds a created record link to the specified attribute (if the attribute’s <em><strong>Store multiple values</strong></em> check box is checked)<span style="vertical-align: inherit;">.</span></li>
+<li><em> <strong>Replace </strong></em>— replaces the existing links in the specified attribute with a created record link.</li>
+</ul>
+</li>
+<li><em><strong>Clone with child records</strong></em> — check this box to clone the record and the records it references. In this case, the action will only clone the child records referenced by the attributes with the checked <em><strong>Delete related records</strong></em> checkbox.
+<ul style="list-style-type: circle;">
+<li><strong><em>Cloning depth </em></strong>— the number of child record levels to clone.</li>
+</ul>
+</li>
+</ul>
+<h3 id="activity_type4">Change the Context</h3>
+<p>This action changes the scenario execution context to the specified records in the target template. The subsequent actions in the scenario will be executed for these records.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Change the Context action properties" class="img-responsive" height="382" src="https://kb.cmwlab.com/assets/img_6388b6b8c4f8a.png" width="845"/></p>
+<p class="caption">Change the Context action properties</p>
+</div>
+<p>The <strong>General</strong> tab provides the following properties:</p>
+<ul>
+<li><em><strong>Target record </strong></em><strong><em>template</em> </strong>— the scenario execution context will be changed to this template.</li>
+<li><em><strong>An attribute or expression to find the objects </strong></em>— a <em><strong>Record</strong></em> attribute or an expression (<em><strong>formula</strong></em>, <strong><em>N3</em></strong>, or <strong><em>DMN</em></strong>) that returns the IDs of one or more records to which the context will be changed. If an attribute or expression refers to multiple records, a loop for each of the referred records will be run with the actions nested within the <em><strong>Change the context</strong></em> action.</li>
+</ul>
+<h3 id="activity_type5">Change Attribute Values</h3>
+<p>This action changes the specified attribute values in the context template record (listed on the <em><strong>Additional</strong></em> tab).</p>
+<div class="screenshot_with_caption">
+<p><img alt="Change Attribute Values ​​action properties" class="img-responsive" height="367" src="https://kb.cmwlab.com/assets/img_6388bc8e23d2e.png" width="845"/></p>
+<p class="caption">Change Attribute Values ​​action properties</p>
+</div>
+<p>The <strong>General</strong> tab provides the following properties and buttons.</p>
+<ul>
+<li><em> <strong>Attribute </strong></em>— the context template attribute to be modified (the context template is specified on the <em><strong>Additional</strong></em> tab).</li>
+<li><em><strong>Value operation</strong></em>
+<ul style="list-style-type: circle;">
+<li><em> <strong>Replace </strong></em>— sets the attribute value specified in the<em><strong> Value</strong></em> column.</li>
+<li><em><strong>Delete </strong></em>— removes all attribute values.</li>
+<li><em> <strong>Add </strong></em>dd the value specified in the <strong>Value</strong> column to the attribute (this item is displayed for <em><strong>Record</strong>,</em> <em><strong>Account</strong></em>, <em><strong>Role</strong></em>, <strong><em>Organizational unit</em></strong>, <em><strong>Document</strong></em>, and <em><strong>Image</strong></em> attributes with the checked <em><strong>Store multiple values</strong></em>​ checkbox).</li>
+<li><em> <strong>Exclude </strong></em>— removes object references specified in the <strong>Value</strong> column from the attribute (this item is displayed for <em><strong>Record</strong>,</em> <em><strong>Account</strong></em>, <em><strong>Role</strong></em>, <strong><em>Organizational unit</em></strong>, <em><strong>Document</strong></em>, and <em><strong>Image</strong></em> attributes with the checked <em><strong>Store multiple values</strong></em>​ checkbox). The associated objects themselves will not be deleted.</li>
+<li><em><strong>Create </strong></em>— click this button to add an attribute.</li>
+<li><strong><em>Delete </em> </strong> — check the boxes for the attributes to be deleted and click this button to delete them.</li>
+</ul>
+</li>
+<li><em> <strong>Value </strong></em>— specify one or more attribute values ​​using an <em><strong>attribute</strong></em>, <em><strong>formula</strong>, </em><em><strong>N3</strong></em> expression, or <em><strong>DMN</strong></em> table.</li>
+</ul>
+<h3 id="mcetoc_1ghtunab10">Change Variable Values</h3>
+<p>This action changes the values in a structured variable set.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Change Variable Values ​​action properties" class="img-responsive" height="459" src="https://kb.cmwlab.com/assets/img_6388c34dbddf4.png" width="845"/></p>
+<p class="caption">Change Variable Values ​​action properties</p>
+</div>
+<p>The <strong>General</strong> tab provides the following properties:</p>
+<ul>
+<li><em><strong>Variable set</strong></em> — the name of the variable set to change. This variable set is a key-value dictionary.</li>
+<li><em><strong>Value operation</strong></em>
+<ul style="list-style-type: circle;">
+<li><em> <strong>Add </strong>— </em>adds the variables and values specified in <span style="letter-spacing: 0.2px;">the variable table to the variable </span>set.</li>
+<li><em><strong>Replace </strong></em>— sets the variables and values specified in <span style="letter-spacing: 0.2px;">the variable table to the </span><span style="letter-spacing: 0.2px;">variable </span>set.</li>
+<li><em> <strong>Exclude </strong></em>— removes all variables and values ​​from the variable set.</li>
+</ul>
+</li>
+<li>Variable table
+<ul style="list-style-type: circle;">
+<li><em><strong>Variable name</strong></em> — a variable to change.</li>
+<li><em><strong>Value</strong> </em> — an attribute or expression (<em><strong>formula</strong></em>, <em><strong>N3</strong></em>, or <em><strong>DMN</strong></em>) that specifies one or more variable values.</li>
+<li><em><strong>Create </strong></em>— click this button to add a variable.</li>
+<li><strong><em>Delete </em> </strong> — check the boxes for the variables to be deleted and click this button to delete them.</li>
+</ul>
+</li>
+</ul>
+<h3 id="activity_type6">Start a Process</h3>
+<p>This action creates an instance of the specified process template.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Start a Process action properties" class="img-responsive" height="319" src="https://kb.cmwlab.com/assets/img_6389c1276d862.png" width="845"/></p>
+<p class="caption">Start a Process action properties</p>
+</div>
+<p>The <strong>General</strong> tab provides the following properties:</p>
+<ul>
+<li><em> <strong>Process template</strong></em> — a process template in which a new instance will be created based on the current record of the context template (specified on the <em><strong>Additional</strong></em> tab). To start the process with a new record, execute the<strong><em> Create a record</em></strong> action before this action.</li>
+</ul>
+<h3 id="mcetoc_1gii69f8v0">Send a Message</h3>
+<p>This action sends a message through the specified connection and communication route.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Send a Message action properties" class="img-responsive" height="386" src="https://kb.cmwlab.com/assets/img_6389c316db2fa.png" width="845"/></p>
+<p class="caption">Send a Message action properties</p>
+</div>
+<p>The <strong>General</strong> tab provides the following properties:</p>
+<ul>
+<li><em> <strong>Connection </strong>—</em> the connection used to send the message.</li>
+<li><strong><em>Communication route </em></strong><em>— </em>the communication route used to generate the message.</li>
+<li><em><strong>Message variable name </strong></em><span style="color: #5a5a5a; font-family: OpenSans, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">— a variable that stores message content. This variable must be set using the preceding <em><strong>Change variable values</strong></em> action. </span>This variable is a key-value dictionary. The specified data path translates the message variable into a message. The resulting message will be sent over the specified connection.</li>
+<li><em><strong>Successful response variable name</strong></em> — <span style="color: #5a5a5a; font-family: OpenSans, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">a variable to store the server response if </span>message sending succeeds.</li>
+<li><em><strong>Error response </strong><strong>variable</strong> <strong>name </strong></em>— <span style="color: #5a5a5a; font-family: OpenSans, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">a variable to store the server response if </span>message sending fails.</li>
+</ul>
+<h3 id="mcetoc_1giiboep50">Import Data from a File</h3>
+<p>This action imports the data from the file into the context template (specified on the <strong><em>Additional</em> </strong>tab). Each line of data from the file is imported as a separate entry in the context template.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Import Data From a File action properties" class="img-responsive" height="860" src="https://kb.cmwlab.com/assets/img_6389c64d38c26.png" width="823"/></p>
+<p class="caption">Import Data from a File action properties</p>
+</div>
+<p>The <strong>General</strong> tab provides the following properties:</p>
+<ul>
+<li><em><strong>Data fil</strong><strong>e</strong> </em>— load a data file (by selecting the <em><strong>Value</strong></em> item), specify <em>an </em><em><strong>attribute</strong>,</em> <em><strong>formula</strong>, </em><strong><em>N3 </em></strong>expression, or<em><strong> DMN</strong></em> table that returns a document link.</li>
+<li><em><strong>Encoding </strong></em>— imported file data encoding.</li>
+<li><em><strong>Time zone </strong></em>— the time zone in which the date and time values are stored in the imported file.</li>
+<li><em><strong>Column</strong><strong> separator</strong> </em>— imported file data column separator (used for CSV file import): comma, semicolon, period, tab, space.</li>
+<li><em><strong>Ignore parsing errors </strong></em>— if this box is checked, the data will be imported even if errors occur during data processing.</li>
+<li><em><strong>Update existing records with data from the file</strong></em> — check this box<span style="color: #5a5a5a; font-family: OpenSans, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;"> to update existing records in the context template with the data from the corresponding rows of the imported file and create the missing records. If this check box is not checked, a new record will be created for each row of the imported file. </span>When this box is checked, the <em><strong>Key attribute</strong></em> table is displayed.</li>
+<li><em><strong>Key attribute </strong></em>— this table maps the context template key attribute to the imported file key column:
+<ul style="list-style-type: circle;">
+<li><strong><em>Attribute</em> </strong> — an attribute containing <span style="text-decoration: underline;"><em>unique values</em></span> ​​by which rows in the imported file will be mapped to the database records.</li>
+<li><strong><em>Format</em> </strong> — key column value format.</li>
+<li><strong><em>Column</em> </strong>— the column number in the imported file corresponding to the key attribute.</li>
+</ul>
+</li>
+<li><em><strong>Data mapping </strong></em>— this table maps the context template attributes to the imported file columns:
+<ul style="list-style-type: circle;">
+<li><strong><em>Attribute</em> </strong> — the attribute to import the values from the corresponding column.</li>
+<li><strong><em>Format</em> </strong> — imported column value format.</li>
+<li><strong><em>Column</em> </strong>— imported column number corresponding to the specified attribute.</li>
+</ul>
+</li>
+</ul>
+<h3 id="mcetoc_1gil2osb20">Create a Document Using a Template</h3>
+<p>This action generates a file using an export template and stores the generated file link in a variable.</p>
+<div class="screenshot_with_caption">
+<p> </p>
+<p><img alt="Create a Document Using a Template action properties" class="img-responsive" height="556" src="https://kb.cmwlab.com/assets/img_638ef501bb9af.png" width="843"/></p>
+<p> </p>
+<p class="caption">Create a Document Using a Template action properties</p>
+</div>
+<p>The <strong>General</strong> tab provides the following properties:</p>
+<ul>
+<li><em><strong>Place the document in a variable</strong></em>
+<ul style="list-style-type: circle;">
+<li><em><strong>Variable</strong></em> — a variable to store the generated file link.</li>
+<li><em><strong>Variable value operation</strong></em>
+<ul style="list-style-type: square;">
+<li><em><strong>Add</strong> — </em>adds the generated file link to the variable.</li>
+<li><em><strong>Replace</strong> </em> — replaces all file links stored in the variable with the generated file link (does not replace the files).</li>
+<li><strong><em>Remove </em></strong><em>—</em> removes all file links from the variable (does not delete the files).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><em><strong>Export template</strong></em>
+<ul style="list-style-type: circle;">
+<li><strong><em>Create </em></strong><em>— </em>create an export template to generate a file.
+<ul style="list-style-type: square;">
+<li><strong><em>Name </em></strong><em>— </em>a descriptive export template name.</li>
+<li><strong><em>System name </em></strong>— a unique export template name, auto-transliterated from the template name.</li>
+<li><strong><em>Template file </em></strong>— load an export template file (by selecting the <em><strong>Value</strong></em> item), specify a <em><strong>Document</strong></em> <strong>attribute</strong> that contains an export template file, or enter a <em><strong>formula</strong></em>, <em><strong>N3 </strong></em>expression, or <strong><em>DMN </em></strong>table that returns such an attribute.</li>
+<li><strong><em>Output file name </em></strong>— specify an <em><strong>attribute</strong></em>, <em><strong> formula</strong>, </em><em><strong>N3</strong> </em> expression, or <em><strong>DMN</strong></em> table that returns the name for the generated file.</li>
+<li><strong><em>Export as PDF</em></strong> — check this box to generate a PDF file.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="screenshot_with_caption">
+<p><img alt="Creating a new export template for the Create a Document Using a Template action" class="img-responsive" height="410" src="https://kb.cmwlab.com/assets/img_6389db296395a.png" width="825"/></p>
+<em>Creating a new export template for the Create a Document Using a Template action</em></div>
+<ul>
+<li style="list-style-type: none;">
+<ul style="list-style-type: circle;">
+<li><strong><em>Select existing</em></strong><em>:</em>
+<ul style="list-style-type: square;">
+<li><strong><em>Select an export template</em> </strong>— specify an export template that will be used to generate a new file.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="screenshot_with_caption">
+<p><img alt="Selecting an existing export template for the Create a Document Using a Template action" class="img-responsive" height="178" src="https://kb.cmwlab.com/assets/img_6389db63e2cf2.png" width="845"/></p>
+<p class="caption">Selecting an existing export template for the Create a Document Using a Template action</p>
+</div>
+<h3 id="mcetoc_1ginc06630">Store a Document in a Variable</h3>
+<p>This action stores file links from the specified attributes or variables in a variable set.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Store a Document in a Variable action properties" class="img-responsive" height="435" src="https://kb.cmwlab.com/assets/img_6389e955bc155.png" width="845"/></p>
+<p class="caption">Store a Document in a Variable action properties</p>
+</div>
+<p>The <strong>General</strong> tab provides the following properties:</p>
+<ul>
+<li><em><strong>Variable set</strong> — </em>the variable set name to store the file links. This variable set is a key-value dictionary.</li>
+<li><em><strong>Value operation</strong></em>
+<ul style="list-style-type: circle;">
+<li><em><strong>Add</strong> </em>— adds the file links specified in the<em><strong> Value</strong></em> column to the variable set.</li>
+<li><em><strong>Replace</strong> </em> — replaces all file links in the variable set with the file links specified in the <em><strong>Value</strong></em> column (does not replace the files).</li>
+<li><em><strong>Remove</strong> </em>— removes all variables and file links from the variable set (does not delete the files).</li>
+</ul>
+</li>
+<li><em>Variable table </em>
+<ul style="list-style-type: circle;">
+<li><em><strong>Variable name</strong></em> — a variable to store the file links specified in the <em><strong>Value</strong> </em>column.</li>
+<li><em><strong>Value</strong> </em> — specify the variable value (a file link) using an <em><strong>attribute</strong></em>, <strong><em> formula</em></strong><em>, </em><strong><em>N3</em> </strong> expression, <em>or </em><strong><em>DMN</em></strong> table.</li>
+<li><em><strong>Create </strong></em>— click this button to add a variable.</li>
+<li><strong><em>Delete </em> </strong> — check the boxes for the variables to be deleted and click this button to delete them.</li>
+</ul>
+</li>
+</ul>
+<h3 id="mcetoc_1gincndar1">Attach a Document to an Attribute</h3>
+<p>This action stores file links from the specified attributes or variables in the attributes.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Attach a Document to an Attribute action properties" class="img-responsive" height="368" src="https://kb.cmwlab.com/assets/img_6389ebf0925c6.png" width="845"/></p>
+<p class="caption">Attach a Document to an Attribute action properties</p>
+</div>
+<p>The <strong>General</strong> tab provides the following properties:</p>
+<ul>
+<li><em><strong>Attribute</strong> — </em>an attribute to store file links specified in the <em><strong>Value</strong></em> column.</li>
+<li><em><strong>Value operation</strong></em>
+<ul style="list-style-type: circle;">
+<li><em><strong>Adds</strong> </em>— adds file link to the attribute.</li>
+<li><em><strong>Replace</strong> </em> — replaces all file links in the attribute with the file links specified in the <em><strong>Value</strong></em> column (does not replace the files).</li>
+<li><strong><em>Create</em></strong> — creates new file links in the attribute.</li>
+</ul>
+</li>
+<li><em><strong>Value</strong> — </em> set attribute value (a file link) using an <strong>attribute</strong>, <strong><em> formula</em></strong><em>, </em><strong><em>N3</em> </strong> expression, <em>or </em><strong><em>DMN</em></strong> table.</li>
+<li><em><strong>Create </strong></em>— click this button to add an attribute.</li>
+<li><strong><em>Delete </em> </strong> — check the boxes for the attributes to be deleted and click this button to delete them.</li>
+</ul>
+<h3 id="mcetoc_1gi57l71d0">Execute on Conditions</h3>
+<p>This action executes the nested actions on the specified conditions. You can set several conditions. The nested action is executed if the conditional expression returns <code>true</code>. If none of the conditions returns <code>true</code>, the <em><strong>Execute on Conditions</strong></em> action and its nested actions are skipped.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Execute on Conditions action properties" class="img-responsive" height="396" src="https://kb.cmwlab.com/assets/img_6389f8c30c118.png" width="845"/></p>
+<p class="caption">Execute on Conditions action properties</p>
+</div>
+<p>The <strong>General</strong> tab provides the following properties and buttons.</p>
+<ul>
+<li><em><strong>Condition name</strong> </em> — a brief condition description.</li>
+<li><em><strong>Expression</strong> </em> — a tribute, <strong><em>formula</em></strong><em>, </em><strong><em>N3</em> </strong> exp ion, <em>or </em><strong><em>DMN</em></strong> table that specifies the nested action execution condition. For each condition, a track is created inside the <em><strong>Execute on Conditions</strong></em> action for nested actions that are executed if the expression returns <code>true</code>.</li>
+<li><em><strong>Create </strong></em>— click this button to add a condition.</li>
+<li><strong><em>Delete </em> </strong> — check the boxes for the conditions to be deleted and click this button to delete them.</li>
+</ul>
+<h3 id="mcetoc_1gingga780">Iterate by Numeric Counter</h3>
+<p>This action executes the nested actions a specified number of times.</p>
+<div class="screenshot_with_caption">
+<p> </p>
+<p><img alt="Iterate by Numeric Counter action properties" class="img-responsive" height="388" src="https://kb.cmwlab.com/assets/img_63eb66f010005.png" width="848"/></p>
+<p> </p>
+<p class="caption">Iterate by Numeric Counter action properties</p>
+</div>
+<p>The <strong>General</strong> tab provides the following properties:</p>
+<ul>
+<li><em><strong>Variable </strong>— </em>a counter variable to iterate the loop, similar to the <code>for</code> loop counter. The variable value increments from 0 to the value set in the <em><strong>Number of Iterations</strong></em> field, minus 1.</li>
+<li><em><strong>Number of iterations</strong> — </em>specify the loop iteration number using a numeric <em><strong>value</strong></em>, <em><strong>attribute</strong></em>, <strong><em>formula</em></strong>, <strong><em>N3 </em></strong>expression<em>,</em><em> or </em><strong><em>DMN</em></strong> table.</li>
+</ul>
+<h3 id="mcetoc_1ginhuqr40">Iterate by Object Counter</h3>
+<p>This action executes the nested actions with the objects returned by the specified <em><strong>attribute</strong></em>, <em><strong>formula</strong></em>, <em><strong>N3</strong> </em>expression, or <em><strong>DMN</strong> </em>table. The number of iterations equals the number of returned objects.</p>
+<div class="screenshot_with_caption">
+<p> </p>
+<p><img alt="Iterate by Object Counter action properties" class="img-responsive" height="397" src="https://kb.cmwlab.com/assets/img_63eb666142ecd.png" width="848"/></p>
+<p> </p>
+<p class="caption">Iterate by Object Counter action properties</p>
+</div>
+<p>The <strong>General</strong> tab provides the following properties:</p>
+<ul>
+<li><em><strong>Variable </strong>— </em>an iterator variable to execute the loop, similar to the <code>for each</code> loop iterator. This variable will be assigned the value of the given attribute or expression in the same way.</li>
+<li><em><strong>An attribute or expression to find the objects </strong>— </em>specify a value an <strong><em>attribute</em></strong>, <strong><em> formula</em></strong><em>, </em><strong><em>N3</em> </strong> expression, or <strong><em>DMN</em></strong> table that returns the object references to iterate the loop through<em>.</em></li>
+</ul>
+<h2 id="mcetoc_1giv6f35k2">Related Articles</h2>
+<p><strong><samp data-name="aid" data-title="" data-value="2108"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2108}</span></samp> </strong></p>
+<p><strong><samp data-name="aid" data-title="" data-value="2109"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2109}</span></samp> </strong></p>
+<p><strong><samp data-name="aid" data-title="" data-value="2110"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2110}</span></samp> </strong></p>

@@ -34,6 +34,7 @@ kbId: 4772
 - [Запись][attribute_record]
 - [Изображение][attribute_image]
 - [Логический][attribute_boolean]
+- [Модель][attribute_model]
 - [Организационная единица][attribute_organizational_unit]
 - [Роль][attribute_role]
 - [Список значений][attribute_enum]

@@ -1,0 +1,140 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4877" kb-tags="" kb-title="Назначение задачи на группу исполнителей, выбранную на форме. Пример настройки">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#прикладная-задача">
+<span class="md-ellipsis">
+      Прикладная задача
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-выбора-группы-исполнителей-с-помощью-селектора-на-форме">
+<span class="md-ellipsis">
+      Настройка выбора группы исполнителей с помощью селектора на форме
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#тестирование">
+<span class="md-ellipsis">
+      Тестирование
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>При проектировании бизнес-процессов можно назначить исполнителями <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4730">пользовательской задачи</a></strong> аккаунты и (или) роли:</p>
+<ul>
+<li>выбрать определённые аккаунты и роли;</li>
+<li>указать атрибут типа «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4774"><strong>Аккаунт</strong></a>» или «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4783"><strong>Роль</strong></a>», содержащий ID исполнителей;</li>
+<li>вычислить ID аккаунтов или ролей при помощи <strong>формулы</strong> или выражения на <strong>N3</strong>.</li>
+</ul>
+<p>Однако на этапе проектирования бизнес-процесса нет возможности назначить исполнителем задачи конкретную группу без использования <strong>формул</strong> или языка <strong>N3</strong>.</p>
+<p>Кроме того, в некоторых случаях необходимо дать возможность бизнес-пользователю выбрать группу, на которую будут назначены задачи, не предоставляя ему доступ к ролевой модели приложения.</p>
+<p>В этой статье представлен пример настройки приложения для назначения группы в качестве исполнителя задачи с помощью селектора группы на форме.</p>
+<h2 id="прикладная-задача">Прикладная задача</h2>
+<ul>
+<li>Имеется бизнес-процесс <em>«Оформление заявок»</em>, связанный с шаблоном записи <em>«Заявка»</em>.</li>
+<li>Менеджер должен назначить группу исполнителей заявки на форме.</li>
+<li>Участники группы исполнителей получат задачу <em>«Обработать заявку»</em>.</li>
+</ul>
+<h2 id="настройка-выбора-группы-исполнителей-с-помощью-селектора-на-форме">Настройка выбора группы исполнителей с помощью селектора на форме</h2>
+<p>Алгоритм выбора группы исполнителей для задачи с помощью формы</p>
+<p>Так как в <strong>Comindware Platform</strong> не предусмотрен атрибут типа «<strong>Группа</strong>», по значению которого можно было бы назначить исполнителей пользовательской задачи, мы настроим приложение следующим образом:</p>
+<ul>
+<li>Создадим вспомогательный шаблон <em>«Справочник групп»</em> и скопируем в него названия имеющихся групп.</li>
+<li>Создадим атрибут <em>«Группа исполнителей»</em>типа «<strong>Запись</strong>», ссылающийся на <em>Справочник групп</em>.</li>
+<li>Создадим вычисляемый атрибут <em>«Исполнители задачи»</em> и укажем его в качестве исполнителей в свойствах задачи.</li>
+<li>Когда пользователь выберет на форме <em>Группу исполнителей</em>из <em>Справочника групп</em>, значение атрибута <em>«Исполнители задачи»</em> будет заполнено ID аккаунтов исполнителей, входящих в группу с таким же названием, как у выбранной <em>Группы исполнителей</em><em>.</em></li>
+</ul>
+<ol class="colored_numbers_list">
+<li>Создайте группы на странице <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4654">«Администрирование» — «Администрирование аккаунтов» — «Группы»</a></strong>и добавьте в них аккаунты.</li>
+<li>Создайте <strong>шаблон записи</strong> <em>«Справочник групп»</em>.</li>
+<li>Создайте атрибут <em>«Название группы»</em> типа «<strong>Текст</strong>» и установите у него флажок <strong>«Использовать как заголовок записей»</strong>.</li>
+<li>Создайте несколько записей и в поле <em>«Название группы»</em> введите названия групп, указанные на странице «<strong>Группы</strong>», с точностью до прописных и строчных букв.</li>
+<li>В шаблоне записи <em>«Заявка»</em> создайте следующие атрибуты:</li>
+</ol>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Название</th>
+<th>Тип данных</th>
+<th>Свойства</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Группа исполнителей</em></td>
+<td><strong>Запись</strong></td>
+<td><strong>Связанный шаблон:</strong> <em>Справочник групп</em></td>
+</tr>
+<tr>
+<td><em>Исполнители задачи</em></td>
+<td><strong>Аккаунт</strong></td>
+<td><strong>Хранить несколько значений:</strong> флажок установлен  <strong>Вычислять автоматически:</strong> флажок установлен  <strong>Вычисляемое выражение: N3</strong></td>
+</tr>
+<tr>
+<td>6. В поле <strong>«Вычисляемое выражение»</strong> атрибута <em>«Исполнители задачи»</em> вставьте следующее выражение на <strong>N3</strong>:</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><div class="highlight"><code><pre><span></span><code># Импортируем функции для работы с записями, аккаунтами и базой данных</code> <br/><code>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.</code> <br/><code>@prefix account: &lt;http://comindware.com/ontology/account#&gt;.</code> <br/><code>@prefix cmw: &lt;http://comindware.com/logics#&gt;.</code> <br/><code>{</code> <br/><code># Находим атрибут Nazvaniegruppy (Название группы) в шаблоне Spravochnikgrupp (Справочник групп)</code> <br/><code># и помещаем его в переменную nazvaniegruppyAttribute</code> <br/><code>("Spravochnikgrupp" "Nazvaniegruppy") object:findProperty ?nazvaniegruppyAttribute.</code> <br/><code></code> <br/><code># Находим атрибут Zayavka (Заявка) в шаблоне Gruppaispolniteley (Группа исполнителей)</code> <br/><code># и помещаем его в переменную gruppaispolniteleyAttribute</code> <br/><code>("Gruppaispolniteley" "Zayavka") object:findProperty ?gruppaispolniteleyAttribute.</code> <br/><code></code> <br/><code># Помещаем значение атрибута Gruppaispolniteley, то есть группу,</code> <br/><code># выбранную в текущей заявке item,</code> <br/><code># в переменную gruppaispolniteleyValue,</code> <br/><code>?item ?gruppaispolniteleyAttribute ?gruppaispolniteleyValue.</code> <br/><code></code> <br/><code># Находим название выбранной группы шаблоне Spravochnikgrupp,</code> <br/><code># то есть значение атрибута Nazvaniegruppy,</code> <br/><code># и помещаем его в переменную nazvaniegruppy</code> <br/><code>?gruppaispolniteleyValue ?nazvaniegruppyAttribute ?nazvaniegruppy.</code> <br/><code></code> <br/><code># Находим группу по названию из переменной nazvaniegruppy</code> <br/><code># и помещаем группу в переменную gruppaispolniteley</code> <br/><code>?gruppaispolniteley account:groupName ?nazvaniegruppy.</code> <br/><code></code> <br/><code># Находим все аккаунты в группе из переменной gruppaispolniteley</code> <br/><code># и помещаем их в переменную value,</code> <br/><code># то есть заполняем значение атрибута «Исполнители задачи»</code> <br/><code>?gruppaispolniteley account:groupUsers ?value.</code> <br/><code>}</code> <br/></pre></code></div>
+7. Создайте процесс <em>«Оформление заявок»</em> и добавьте на диаграмму <strong>пользовательскую задачу</strong> <em>«Обработать заявку»</em>.
+8. На <strong>стартовую форму</strong> процесса добавьте атрибуты <em>«Группа исполнителей»</em> и <em>«Исполнители задачи»</em> шаблона записи <em>«Заявка»</em>.
+9. В свойствах пользовательской задачи <em>«Обработать заявку»</em> выберите в поле «<strong>Исполнители</strong>» <strong>атрибут</strong> <em>«Исполнители задачи»</em>.
+10. Опубликуйте диаграмму процесса <em>«Оформление заявок»</em>.</p>
+<div class="highlight"><code><pre><span></span><code>![Диаграмма процесса «Оформление заявок»](https://kb.comindware.ru/assets/img_66867a9324c0c.png)</code> <br/><code></code> <br/><code>Диаграмма процесса «Оформление заявок»</code> <br/></pre></code></div>
+<h2 id="тестирование">Тестирование</h2>
+<ol class="colored_numbers_list">
+<li>Создайте экземпляр процесса <em>«Оформление заявок»</em>.</li>
+<li>На стартовой форме выберите группу из раскрывающегося списка  <em>«Группа исполнителей»</em>.</li>
+<li>В поле <em>«Исполнители задачи»</em> отобразятся аккаунты, которые входят в выбранную группу.</li>
+<li>Нажмите кнопку «<strong>Создать</strong>».</li>
+<li>Задача <em>«Обработать заявку»</em> отобразится только у аккаунтов, которые входят в выбранную группу. У других аккаунтов задача отображаться не будет.</li>
+</ol>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4654">Группы. Создание, настройка, выбор участников, синхронизация с AD, удаление</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4730">Пользовательская задача</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4774">Атрибут типа «Аккаунт»</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4783">Атрибут типа «Роль»</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4661">Страница «Администрирование». Использование</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

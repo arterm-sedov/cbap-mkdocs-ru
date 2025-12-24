@@ -1,0 +1,141 @@
+<h1>Lesson 6 &amp;mdash; Advanced Process</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1hdo8uc441">Introduction</a></li>
+<li><a href="#mcetoc_1hesgv4is3">Enable Vehicle Type Selection at the Request Submission</a></li>
+<li><a href="#mcetoc_1hesgmlij1">Enable Vehicle Selection for the Trip</a></li>
+<li><a href="#mcetoc_1gtao2b3j0">Enable Trip Expense Accounting and On-The-Fly Vehicle Adding</a>
+<ul>
+<li><a href="#mcetoc_1heskc0k24">Configure the Vehicle Field and Costs Table on the Complete the Trip Form</a></li>
+<li><a href="#mcetoc_1heskdhrn5">Configure the Total Costs Attribute</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gtar2td30">Test the Vehicle Selection and Cost Tracking</a></li>
+<li><a href="#mcetoc_1gtarlktg0">Enable On-The-Fly Master Data Creation</a>
+<ul>
+<li><a href="#mcetoc_1hesqrlj43">Create a New Vehicle on the Fly</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gtasqnbl0">Results</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1hdo8uc441">Introduction</h2>
+<p>In this lesson, you will improve the vehicle booking process by using the record templates created in the previous lesson (<em>Vehicle types</em>, <em>Vehicles</em>, <em>Costs</em>, and <em>Cost types</em>). You will configure the app to enable vehicle type selection during request submission, manage the corporate vehicles, and track the costs.</p>
+<p><span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">Estimated time to complete</span>: 10 min</p>
+<p><span style="letter-spacing: 0.2px;">Prerequisite: complete</span> <samp data-name="aid" data-title="" data-value="2147"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2147}</span></samp> and <samp data-name="aid" data-title="" data-value="2154"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2154}</span></samp></p>
+<p><strong><span data-preserver-spaces="true">Note:</span></strong><span data-preserver-spaces="true"> This lesson is for the <strong>CMW Platform</strong> version 4.2.571.0. In other versions, the page and menu appearance may differ from the screenshots.</span></p>
+<h2 id="mcetoc_1hesgv4is3">Enable Vehicle Type Selection at the Request Submission</h2>
+<p>Let's add the option to select the vehicle type when submitting a request. To do this, we will configure the vehicle request form.</p>
+<p><strong>1.</strong> Go to the <em>Vehicle requests</em> record template. Select the <strong>Forms</strong> tab.</p>
+<p><strong>2.</strong> Open the <em>Vehicle requests – Main Form</em>.</p>
+<p><strong>3.</strong> Drag the <em>Vehicle type</em> attribute to the form layout.</p>
+<p><strong>4. </strong>Click <strong>Save</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Adding an attribute onto the form layout" class="img-responsive" height="740" src="https://kb.cmwlab.com/assets/cmw_platform_lesson6_1.png" width="1693"/></p>
+<p class="caption" style="font-size: 15px !important;">Adding an attribute to the form layout</p>
+</div>
+<h2 id="mcetoc_1hesgmlij1">Enable Vehicle Selection for the Trip</h2>
+<p>Let's configure the <em>Accept request</em> task form so the <em>Garage manager</em> can select a vehicle for the trip.</p>
+<p><strong>1.</strong> Go to the <em>Ordering a corporate vehicle</em> business process diagram and click <strong>Edit</strong>.</p>
+<p><strong>2.</strong> Select the <em>Accept request</em> task and click <strong>Form </strong>in the element menu.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Navigating to the task form designer from the process diagram" class="img-responsive" height="508" src="https://kb.cmwlab.com/assets/cmw_platform_lesson6_2.png" width="1161"/></p>
+<p class="caption" style="font-size: 15px !important;">Navigating to the task form designer from the process diagram</p>
+</div>
+<p><strong>3.</strong> Expand the <em>Vehicle requests</em> attribute in the element pane and drag the <em>Vehicle</em> attribute to the <em>Acceptance</em> area.</p>
+<p><strong>4. </strong>Set the <em>Vehicle</em> field <strong>Access</strong> mode to <strong>Require entry</strong> and click <strong>Save</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p> </p>
+<p><img alt="Adding the Vehicle dropdown to the Accept request task form" class="img-responsive" height="510" src="https://kb.cmwlab.com/assets/img_6557824124af8.png" width="1168"/></p>
+<p> </p>
+<p class="caption" style="font-size: 15px !important;">Adding the Vehicle dropdown to the Accept request task form</p>
+</div>
+<h2 id="mcetoc_1gtao2b3j0">Enable Trip Expense Accounting and On-The-Fly Vehicle Adding</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Business Requirement</p>
+<p>When the <em>Driver</em> receives the <em>Complete the trip</em> task, they should see the license plate number of the booked vehicle.</p>
+<p>We'll also enable them to add a new vehicle to the list and track the trip expenses.</p>
+<p>To achieve this, let's add the <em>Vehicle</em> dropdown and <em>Costs</em> table to the <em>Complete the trip</em> task form.</p>
+</div>
+<h3 id="mcetoc_1heskc0k24">Configure the Vehicle Field and Costs Table on the Complete the Trip Form</h3>
+<p><strong>1.</strong> In the process diagram, select the <em>Complete the trip</em> task and click <strong>Form </strong>in the element menu.</p>
+<p><strong>2. </strong>Expand the <em>Vehicle requests</em> attribute in the element pane and drag the <em>Vehicle</em> attribute to the <em>Complete the trip</em> area.</p>
+<p><strong>3. </strong>Drag the <em>Costs</em> attribute to the <em>Complete the trip</em> area.</p>
+<p><strong>4.</strong> In the <em>Costs</em> <strong>Field properties</strong> panel, set the <strong>Appearance</strong> to <strong>Table</strong>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Configuring and saving the Complete the trip task form" class="img-responsive" height="788" src="https://kb.cmwlab.com/assets/cmw_platform_lesson6_4.png" width="1693"/></p>
+<p class="caption" style="font-size: 15px !important;">Configuring and saving the Complete the trip task form</p>
+</div>
+<p><strong>5.</strong> Expand the <em>Costs</em> attribute in the element pane and drag the <em>Type</em> and <em>Amount</em> attributes to the <em>Costs</em> table on the form.</p>
+<p><strong>6. </strong>Select the table toolbar. Drag the following buttons from the element pane to the toolbar: <strong>Create</strong>, <strong>Edit</strong>, and <strong>Navigate</strong>. This allows the end-users to create, edit, and view cost records from the <em>Costs</em> table on the form.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p> </p>
+<p><img alt="Adding buttons to the table toolbar using the form designer" class="img-responsive" height="543" src="https://kb.cmwlab.com/assets/img_6557827ca8ef6.png" width="1168"/></p>
+<p> </p>
+<p class="caption" style="font-size: 15px !important;">Adding buttons to the table toolbar using the form designer</p>
+</div>
+<h3 id="mcetoc_1heskdhrn5">Configure the Total Costs Attribute</h3>
+<p>Let's add an attribute showing the total costs incurred for a vehicle request.</p>
+<p><strong>1.</strong> In the <em>Complete the trip </em>form designer, click <strong>Add attribute</strong> <em class="fa-light fa-plus">‌</em> next to the <em>Vehicle requests</em> attribute in the element pane.</p>
+<p><strong>2.</strong> Create a new attribute:</p>
+<ul>
+<li><strong>Name: </strong><em>Total costs</em></li>
+<li><strong>Data type:</strong> <strong>Number</strong></li>
+<li><strong>Numbers of digits after decimal point:</strong> 2</li>
+</ul>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Adding the Total costs attribute to the Vehicle requests record template" class="img-responsive" height="458" src="https://kb.cmwlab.com/assets/cmw_platform_lesson6_6.png" width="1693"/></p>
+<p class="caption" style="font-size: 15px !important;">Adding the Total costs attribute to the Vehicle requests record template</p>
+</div>
+<p><strong>3.</strong> Drag the <em>Total costs</em> attribute to the <em>Complete the trip</em> area under the <em>Costs</em> table.</p>
+<p><strong>4.</strong> Click <strong>Save</strong>.</p>
+<p><strong>5. </strong>Go back to the business process diagram and click <strong>Publish</strong>.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Note</p>
+<p>Changes to the business process diagram will not take effect until the diagram is published. When publishing, you can update the current diagram version or create a new version. If you create a new diagram version, all process instances running the old version will be completed using the old version. New instances will run using the new version.</p>
+</div>
+<h2 id="mcetoc_1gtar2td30">Test the Vehicle Selection and Cost Tracking</h2>
+<p><strong>1.</strong> Go to the <em>Ordering a corporate vehicle</em> process template. Click <strong>Navigate to instances </strong>on the <strong>Properties </strong>tab.</p>
+<p><strong>2.</strong> Start a new process by clicking <strong>Create </strong>in the process instance list.</p>
+<p><strong>3. </strong>Fill in the fields of the start form and indicate the vehicle type. Click <strong>Create</strong> to submit the form.</p>
+<p><strong>4.</strong> Go to <strong>My tasks</strong> using the navigation pane on the left.</p>
+<p><strong>5.</strong> Open the <em>Ordering a corporate vehicle - Approve request</em> task and select the <em>Approved</em> checkbox.</p>
+<p><strong>6. </strong>Click <strong>Complete task</strong>.</p>
+<p><strong>7.</strong> Return to <strong>My tasks</strong> and open the <em>Ordering a corporate vehicle - Accept request</em> task.</p>
+<p><strong>8.</strong> Select a car from the <em>Vehicle</em> dropdown.</p>
+<p><strong>9.</strong> Select <em>Yes</em> in the <em>Accepted</em> field and click <strong>Complete task</strong>.</p>
+<p><strong>10.</strong> Return to <strong>My tasks </strong>and open the <em>Ordering a corporate vehicle - Complete the trip</em> task.</p>
+<p><strong>11.</strong> Click <strong>Create </strong>in the <em>Costs</em> table.</p>
+<p><strong>12.</strong> Specify the cost <em>Type</em> and <em>Amount</em> and click <strong>Save</strong>.</p>
+<p><strong>13.</strong> Add more entries to the <em>Costs</em> table.</p>
+<p><strong>14.</strong> Click <strong>Complete task</strong>.</p>
+<h2 id="mcetoc_1gtarlktg0">Enable On-The-Fly Master Data Creation</h2>
+<p>Let's enable the <em>Driver</em> to add a new <em>Vehicle</em> record before commencing the trip.</p>
+<p><strong>1.</strong> Return to the business process diagram and click <em><strong>Edit</strong></em>.</p>
+<p><strong>2.</strong> Open the <em>Complete the trip</em> task form designer.</p>
+<p><strong>3.</strong> Select the <em>Vehicle</em> attribute. In the <strong>Field properties</strong> panel select the <strong>Records creation</strong> checkbox.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Note</p>
+<p>The <strong>Records creation</strong> checkbox in the field properties enables the end-user to create records using the linked template form. </p>
+<p>Selecting this box for the <em>Vehicle</em> field enables the <em>Driver</em> to add a new vehicle to the registry on the fly.</p>
+</div>
+<p><strong>4.</strong> Specify the <strong>form</strong> to use when adding a vehicle — <em>Vehicles - Main Form</em>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Enabling on-the-fly record creation via a record attribute on the form" class="img-responsive" height="860" src="https://kb.cmwlab.com/assets/cmw_platform_lesson6_7.png" width="1693"/></p>
+<p class="caption" style="font-size: 15px !important;">Enabling on-the-fly record creation via a record attribute on the form</p>
+</div>
+<p><strong>5.</strong> Save the task form and publish the business process diagram.</p>
+<h3 id="mcetoc_1hesqrlj43">Create a New Vehicle on the Fly</h3>
+<p>Let's test the on-the-fly new vehicle creation.</p>
+<p><strong>1.</strong> Start and go through the process up to the <em>Complete the trip</em> task.</p>
+<p><strong>2.</strong> Click <strong>Create </strong>in the <em>Vehicle</em> dropdown.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Adding a new vehicle record on the fly" class="img-responsive" height="575" src="https://kb.cmwlab.com/assets/cmw_platform_lesson6_8.png" width="1693"/></p>
+<p class="caption" style="font-size: 15px !important;">Adding a new vehicle record on the fly</p>
+</div>
+<p><strong>3.</strong> Fill in the fields and click <strong>OK</strong> to add a new vehicle to the list.</p>
+<p><strong>4.</strong> Click <strong>Complete task</strong>.</p>
+<h2 id="mcetoc_1gtasqnbl0">Results</h2>
+<p>In this lesson, you have configured the <em>Garage</em> staff task forms, enabled them to select a vehicle type and create vehicle records on the fly, and tested the improved vehicle booking process.</p>
+<p>Proceed to <samp data-name="aid" data-title="" data-value="2156"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.cmwlab.com/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2156}</span></samp> to configure automatic request number calculation, status, and total costs. You'll also learn how to filter vehicle records by the vehicle type.</p>
+<p><a class="md-top md-icon mkdocs_imported_link" href="#"> <em class="fa-light fa-arrow-up">‌</em> Back to top</a></p>

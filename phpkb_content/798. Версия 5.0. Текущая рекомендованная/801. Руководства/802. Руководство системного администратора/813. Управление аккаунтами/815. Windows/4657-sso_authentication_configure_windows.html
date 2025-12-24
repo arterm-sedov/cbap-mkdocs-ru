@@ -1,0 +1,88 @@
+<h1>Настройка единого входа (SSO-аутентификации) в ОС Windows</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4657" kb-tags="sso,аутентификация,единый вход,авторизация,active directory,windows,iis,internet information services,логин" kb-title="Настройка единого входа (SSO-аутентификации) в ОС Windows">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-экземпляра-по">
+<span class="md-ellipsis">
+      Настройка экземпляра ПО
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-клиента">
+<span class="md-ellipsis">
+      Настройка клиента
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Здесь представлены инструкции по настройке экземпляра ПО <strong>Comindware Platform</strong> под управлением Windows, служб IIS и браузера конечного пользователя для аутентификации посредством технологии единого входа через Active Directory.</p>
+<h2 id="настройка-экземпляра-по">Настройка экземпляра ПО</h2>
+<ol class="colored_numbers_list">
+<li>Настройте подключение к Active Directory, см. статью <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4687">Сервер каталогов. Настройка подключения</a>.</li>
+<li>На сервере с экземпляром ПО создайте доменного пользователя, под которым будет запускаться пул приложений экземпляра ПО в Internet Information Services (IIS).</li>
+<li>Добавьте пользователя, созданного на шаге 2, в локальную группу <em>Backup</em> <em>operators.</em></li>
+<li>Предоставьте созданному пользователю права локального администратора на сервере с экземпляром ПО .</li>
+<li>Обновите локальные групповые политики с помощью командной строки: <code>gpupdate</code></li>
+<li>Откройте созданного пользователя в оснастке «<strong>Пользователи и компьютеры Active Directory</strong>» и на вкладке «<strong>Редактор атрибутов</strong>» присвойте значение <code>HTTP/sitename</code> атрибуту <code>servicePrincipalName</code>, где <code>sitename</code> — имя хоста, по которому осуществляется доступ к экземпляру ПО.</li>
+<li>
+<p>Перейдите в Диспетчер служб IIS и настройте пул приложений экземпляра ПО, указав в поле «<strong>Удостоверение</strong>» пользователя, созданного на шаге 2. Пул приложений будет запускаться от имени указанного пользователя.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка пользователя для запуска пула приложений" src="https://kb.comindware.ru/assets/img_63bceabdd2790.png"/><figcaption class="caption">Настройка пользователя для запуска пула приложений</figcaption></figure></p>
+</li>
+<li>
+<p>Предоставьте созданному пользователю полные права на каталоги исполняемых файлов ПО и базы данных экземпляра ПО.</p>
+</li>
+<li>Откройте для редактирования файл <code>web.config</code> в папке файлов конфигурации экземпляра ПО. См. статью «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a>».</li>
+<li>В строке <code>&lt;authentication mode="None" /&gt;</code> измените значение <code>None</code> на значение <code>Windows</code>: <code>&lt;authentication mode="Windows"/&gt;</code></li>
+<li>В Диспетчере служб IIS выберите сайт экземпляра ПО в разделе «<strong>Сайты</strong>».</li>
+<li>
+<p>Откройте пункт «<strong>Проверка подлинности</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Пункт «Проверка подлинности» в диспетчере служб IIS" src="https://kb.comindware.ru/assets/img_63bcebb6e9a0b.png"/><figcaption class="caption">Пункт «Проверка подлинности» в диспетчере служб IIS</figcaption></figure></p>
+</li>
+<li>
+<p>Переведите все пункты в разделе «<strong>Проверка подлинности</strong>» в состояние «<strong>Отключен</strong>», кроме «<strong>Проверка подлинности Windows</strong>», этот пункт должен быть в состоянии «<strong>Включен</strong>».</p>
+</li>
+<li>
+<p>Если веб-сервер был установлен вручную, перейдите в Панель управления Windows; в разделе «<strong>Программы и компоненты</strong>» выберите пункт «<strong>Включение или отключение компонентов Windows</strong>». В открывшемся окне нажимайте далее, до этапа «<strong>Server roles</strong>». На этом этапе необходимо проверить, чтобы в «<strong>Web Server (IIS)</strong>» были установлены 27 из 43 компонентов. Для удобства ниже приведён весь список компонентов, которые обязательно должны быть установлены.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Необходимые компоненты веб-сервера" src="https://kb.comindware.ru/assets/img_64f5e2332ad53.png"/><figcaption class="caption">Необходимые компоненты веб-сервера</figcaption></figure></p>
+</li>
+<li>
+<p>Перезапустите пул приложения и экземпляр ПО.</p>
+</li>
+</ol>
+<h2 id="настройка-клиента">Настройка клиента</h2>
+<p>По умолчанию SSO-авторизация работает в браузерах Edge и Google Chrome, но необходимо в параметрах безопасности браузера добавить сайт в зону местной интрасети и включить режим «<strong>Автоматический вход в сеть только в зоне интрасети</strong>». Сведения о настройке других браузеров см. в соответствующей документации.</p>
+<figure class="screenshot_with_caption">
+<p><img alt="Окно настройки параметров безопасности браузера" src="https://kb.comindware.ru/assets/img_63bcecc1b498f.png"/><figcaption class="caption">Окно настройки параметров безопасности браузера</figcaption></p>
+</figure>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

@@ -1,11 +1,20 @@
 ---
-title: Развёртывание Elasticsearch без сертификатов подлинности
+title: Elasticsearch. Развёртывание без сертификатов подлинности
 kbId: 4612
+tags:
+    - Elasticsearch
+    - Linux
+    - OpenSearch
+    - администрирование
+    - настройка
+    - развёртывание
+    - установка
+hide: tags
 ---
 
-# Развёртывание Elasticsearch без сертификатов подлинности {: #elasticsearch_cluster_deploy_no_certificates}
+# Elasticsearch. Развёртывание без сертификатов подлинности {: #elasticsearch_cluster_deploy_no_certificates }
 
-## Введение
+## Введение {: #elasticsearch_cluster_deploy_no_certificates_intro }
 
 Для работы ПО **{{ productName }}** требуется сервер Elasticsearch версии не ниже 8.10.2.
 
@@ -13,13 +22,19 @@ kbId: 4612
 
 Только после запуска службы Elasticsearch можно приступать к развертыванию **{{ productName }}**, указав путь к серверу Elasticsearch.
 
-## Подготовка физических и виртуальных машин, пакетов программ
+!!! warning "Настройка OpenSearch"
+
+    Настроить сертификаты подлинности для OpenSearch можно аналогичным образом, при необходимости скорректировав шаги в соответствии с особенностями OpenSearch и вашей конкретной конфигурации.
+
+    См. [официальную документацию OpenSearch (английский язык)](https://docs.opensearch.org/latest/).
+
+## Подготовка физических и виртуальных машин, пакетов программ {: #elasticsearch_cluster_deploy_no_certificates_machines_software .pageBreakBefore }
 
 Установка в минимальной конфигурации выполняется на 3 разделённых виртуальных машинах.
 
 Для полнофункциональной отказоустойчивой системы требуется установка на 4 виртуальных машинах, расположенных на как минимум 3 физических машинах (IP-адреса приведены ниже исключительно для примера).
 
-### Пример конфигурации серверов
+### Пример конфигурации серверов {: #elasticsearch_cluster_deploy_no_certificates_server_config_example .pageBreakBefore }
 
 - `masterdatanode1` c IP-адресом `1.1.1.1` и ролями `data`, `master`, `ingest`.
 - ОЗУ не менее 8 ГБ, 4 ядра, SSD не менее 30 ГБ.
@@ -37,7 +52,7 @@ kbId: 4612
 - `deb`-пакет `elasticsearch-8.5.1-amd64.deb`
 - `yml`-файл конфигурации для Elasticsearch `customElasticConfig.yml`
 
-## Установка Elasticsearch из deb-пакета
+## Установка Elasticsearch из deb-пакета {: #elasticsearch_cluster_deploy_no_certificates_install_deb .pageBreakBefore }
 
 Повторите шаги, описанные в этом разделе, для каждого из узлов Elasticsearch.
 
@@ -85,7 +100,7 @@ kbId: 4612
 
 4. Обратите внимание на строку `The generated password for the elastic built-in superuser is` — напротив неё будет выведен автоматически сформированный пароль для встроенного суперпользователя elastic. **Сохраните этот пароль.**
 
-## Конфигурация Elasticsearch {: .pageBreakBefore }
+## Конфигурация Elasticsearch {: #elasticsearch_cluster_deploy_no_certificates_configuration .pageBreakBefore }
 
 Повторите шаги, описанные в этом разделе, для каждого из узлов Elasticsearch.
 
@@ -222,7 +237,7 @@ kbId: 4612
 
 16. Сохраните изменения `yml`-файла конфигурации и закройте текстовый редактор Nano, нажав клавиши: ++ctrl+O++, ++enter++, ++ctrl+x++.
 
-## Запуск Elasticsearch {: .pageBreakBefore }
+## Запуск Elasticsearch {: #elasticsearch_cluster_deploy_no_certificates_startup .pageBreakBefore }
 
 Повторите шаги, описанные в этом разделе, для каждого из узлов Elasticsearch.
 
@@ -298,7 +313,7 @@ kbId: 4612
     ```
     {% include-markdown ".snippets/pdfEndOfBlockHack.md" %}
 
-## Проверка состояния кластера
+## Проверка состояния кластера {: #elasticsearch_cluster_deploy_no_certificates_cluster_health .pageBreakBefore }
 
 1. Выполнив для каждого из узлов кластера Elasticsearch шаги, описанные в предыдущих разделах, от любого из узлов выполните GET-запрос проверки состояния кластера:
 
@@ -328,7 +343,7 @@ kbId: 4612
     }
     ```
 
-## Пример yml-файла конфигурации узла Elasticsearch {: .pageBreakBefore }
+## Пример yml-файла конфигурации узла Elasticsearch {: #elasticsearch_cluster_deploy_no_certificates_config_example .pageBreakBefore }
 
 ``` yaml
 bootstrap.memory_lock: false
@@ -356,5 +371,18 @@ cluster.initial_master_nodes:
   - elasticsearch2
   - elasticsearch3
 ```
+
+<div class="relatedTopics" markdown="block">
+
+--8<-- "related_topics_heading.md"
+
+- [Официальная документация Elasticsearch (английский язык)](https://www.elastic.co/docs/deploy-manage)
+- [Официальная документация OpenSearch (английский язык)](https://docs.opensearch.org/latest/)
+- [Elasticsearch. Настройка SSL-сертификатов][elasticsearch_ssl_certificate_configure]
+- [Elasticsearch. Установка в базовой конфигурации][elasticsearch_deploy_Linux]
+- [Установка, запуск, инициализация и остановка ПО {{ productName }}][deploy_guide_linux]
+- [Конфигурация экземпляра, компонентов ПО и служб. Настройка][configuration_files_linux]
+
+</div>
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

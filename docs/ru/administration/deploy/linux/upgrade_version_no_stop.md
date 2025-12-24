@@ -1,6 +1,31 @@
 ---
 title: 'Обновление версии экземпляра ПО без его остановки'
 kbId: 5097
+tags:
+    - Elasticsearch
+    - Kafka
+    - Linux
+    - Nginx
+    - OpenSearch
+    - апгрейд
+    - база данных
+    - версия
+    - восстановление
+    - диски
+    - экземпляр
+    - инициализация
+    - кафка
+    - конфигурация
+    - обновление
+    - отказоустойчивость
+    - развертывание
+    - резервное копирование
+    - сервисы
+    - скрипты
+    - установка
+    - администрирование
+    - устранение неполадок
+hide: tags
 ---
 
 # Обновление версии экземпляра ПО без его остановки {: #upgrade_version_linux_no_stop }
@@ -71,6 +96,8 @@ kbId: 5097
 
     - `<instanceName>` — имя экземпляра ПО.
     - `<database_backup_path>` — путь к внешнему хранилищу базы данных.
+
+{% include-markdown ".snippets/pdfPageBreakHard.md" %}
 
 3. Скопируйте файлы конфигурации во внешнее хранилище:
 
@@ -218,11 +245,11 @@ kbId: 5097
     Если какая-либо из служб имеет статус `FAILED`, перезапустите её, например:
 
     ``` sh
+    systemctl restart kafka.service
+    systemctl restart opensearch.service
+    systemctl restart adaperhost<instanceName>.service
     systemctl restart comindware<instanceName>.service
     systemctl restart apigateway<instanceName>.service
-    systemctl restart adaperhost<instanceName>.service
-    systemctl restart kafka.service
-    systemctl restart elasticsearch.service 
     ```
 
 3. Отредактируйте конфигурацию NGINX для экземпляра ПО в соответствии с резервной копией, [сохранённой ранее](#upgrade_version_linux_no_stop_old_instance_data_prepare):

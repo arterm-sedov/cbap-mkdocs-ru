@@ -1,0 +1,68 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="" kb-tags="" kb-title="">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>В данной статье описан пример правила на скрытие поля «<em>Получатель</em>» на форме при условии, если это поле пустое и отмечен флаг «<em>Ввести данные нового клиента</em>».</p>
+<p>Системные имена шаблонов записи и атрибутов, задействованных в примере, приведены в таблице:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Шаблон записи</th>
+<th>Атрибуты</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Request (Заявка)</td>
+<td>gp_name — получатель; create_flag — флаг «<em>Ввести данные нового клиента</em>»</td>
+</tr>
+</tbody>
+</table>
+<p>В выражении будут использованы следующие функции:</p>
+<ul>
+<li>функция «<strong><em>AND()</em></strong>» для выполнения логического сложения;</li>
+<li>функция «<strong><em>EMPTY()</em></strong>» для проверки значения на пустоту.</li>
+</ul>
+<p><strong>Пошаговая инструкция:</strong></p>
+<p><strong>1.</strong> Создайте и настройте шаблоны записей и атрибуты.</p>
+<p><strong>2.</strong> В шаблоне записи «<em>Request</em>» перейдите в раздел «<strong><em>Формы</em></strong>».</p>
+<p><strong>3.</strong> Откройте форму и перейдите в раздел «<strong><em>Правила для формы</em></strong>».</p>
+<p><strong>4.</strong> Добавьте правило на скрытие поля «<em>gp_name</em>».</p>
+<p><strong>5.</strong> Введите выражение.</p>
+<div class="highlight"><code><pre><span></span><code>AND(EMPTY($gp_name),$create_flag == true)</code> <br/></pre></code></div>
+<p><strong>6.</strong> Нажмите кнопку «<strong><em>Сохранить</em></strong>».</p>
+<p><strong>Синтаксис</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Элемент</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AND()</td>
+<td>логическое сложение — поле «<em>Получатель</em>» пустое и флаг «<em>Ввести данные нового клиента</em>» активен</td>
+</tr>
+<tr>
+<td>$</td>
+<td>указывает на то, что атрибут находится в текущей записи</td>
+</tr>
+</tbody>
+</table>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

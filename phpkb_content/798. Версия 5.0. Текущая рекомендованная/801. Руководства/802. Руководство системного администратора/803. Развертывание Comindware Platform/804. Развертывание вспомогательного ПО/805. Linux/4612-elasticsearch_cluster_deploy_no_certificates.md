@@ -1,15 +1,17 @@
 ---
-title: Установка Elasticsearch и настройка кластера Elasticsearch без сертификатов подлинности
+title: 'Установка и настройка Elasticsearch без сертификатов подлинности'
 kbId: 4612
+url: 'https://kb.comindware.ru/article.php?id=4612'
+updated: '2025-04-16 13:36:13'
 ---
 
-# Установка Elasticsearch и настройка кластера Elasticsearch без сертификатов подлинности
+# Установка и настройка Elasticsearch без сертификатов подлинности
 
 Введение
 
 Для работы ПО **{{ productName }}** требуется сервер Elasticsearch версии не ниже 8.10.2.
 
-В этой статье представлены требования к конфигурации компьютеров, инструкции по установке Elasticsearch, и настройке узлов кластера Elasticsearch без проверки сертификатов подлинности на виртуальных машинах с ОС Ubuntu 22.04.4 LTS.
+В этой статье представлены требования к конфигурации компьютеров, инструкции по установке и настройке узлов Elasticsearch без проверки сертификатов подлинности на виртуальных машинах с ОС Ubuntu 22.04.4 LTS.
 
 Только после запуска службы Elasticsearch можно приступать к развертыванию **{{ productName }}**, указав путь к серверу Elasticsearch.
 
@@ -172,7 +174,7 @@ sudo chmod 764 --recursive /etc/elasticsearch/elasticsearch.yml
 sudo nano /etc/elasticsearch/elasticsearch.yml
 ```
 
-3.9. Задайте имя кластера с помощью директивы `cluster.name` в строке 2 `yml`-файла конфигурации: 
+3.9. Задайте имя кластера с помощью директивы `cluster.name` в строке 2 `yml`-файла конфигурации:
 
 ```
 cluster.name: elasticsearch.example.cbap
@@ -181,7 +183,7 @@ cluster.name: elasticsearch.example.cbap
 **Примечание** 
 Имя кластера должно быть одинаковым для всех узлов кластера Elasticsearch.
 
-3.10. Задайте имя узла с помощью директивы `node.name` в строке 11 `yml`-файла конфигурации. 
+3.10. Задайте имя узла с помощью директивы `node.name` в строке 11 `yml`-файла конфигурации.
 
 **Примечание**
 Имя узла должно быть уникальным для каждого из узлов кластера Elasticsearch:
@@ -250,7 +252,7 @@ sudo systemctl status elasticsearch.service
 elasticsearch.service - Elasticsearch
   Loaded: loaded (/lib/systemd/system/elasticsearch.service; enabled; vendor preset: enabled)
   Active: active (running) since Thu 2022-12-01 10:12:27 UTC; 6s ago
-    Docs: <<https://www.elastic.co>>
+    Docs: <https://www.elastic.co>
 Main PID: 3597 (java)
    Tasks: 63 (limit: 4575)
   Memory: 629.9M
@@ -273,7 +275,7 @@ sudo less /var/elasticsearch/logs/yourClusterName.log
 4.4. С помощью curl убедитесь, что REST API узла Elasticsearch доступен:
 
 ```
-sudo curl <http://192.168.XXX.XX>Х:9200
+sudo curl http://192.168.XXX.XXХ:9200
 ```
 
 Пример ответа на запрос:
@@ -305,7 +307,7 @@ sudo curl <http://192.168.XXX.XX>Х:9200
 5.1. Выполнив для каждого из узлов кластера Elasticsearch шаги, описанные в предыдущих разделах, от любого из узлов выполните GET-запрос проверки состояния кластера:
 
 ```
-sudo curl <http://192.168.XXX.XX1:9200/_cluster/health?pretty>>
+sudo curl http://192.168.XXX.XX1:9200/_cluster/health?pretty>
 ```
 
 5.2. Убедитесь, что в ответе на запрос значение параметра `number_of_nodes` равно количеству узлов кластера:
@@ -358,7 +360,5 @@ cluster.initial_master_nodes:
   - elasticsearch2
   - elasticsearch3
 ```
-
-
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

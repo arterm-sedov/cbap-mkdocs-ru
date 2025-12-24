@@ -1,14 +1,35 @@
 ---
-title: Фильтр списка по дате, равной сегодняшней
+title: 'Фильтр списка по дате, равной сегодняшней'
 kbId: 4942
+url: 'https://kb.comindware.ru/article.php?id=4942'
+updated: '2023-12-21 14:52:05'
 ---
 
 # Фильтр списка по дате, равной сегодняшней
 
 Для того, чтобы настроить фильтр отображения записей в списке, где какая-либо дата равна сегодняшней (например, для списка сегодняшних заявок) с учетом часового пояса (в данном примере - московского), введите следующее выражение:
 
-| @prefix object: <http://comindware.com/ontology/object#>.@prefix session: <http://comindware.com/ontology/session#>.@prefix cmwtime: <http://comindware.com/logics/time#>.{  ("Zayavki" "Data") object:findProperty ?DateProperty.   session:context session:requestTime ?nowUTC.   (?nowUTC "Etc/GMT" "Europe/Moscow") cmwtime:fromTzToTz ?nowMoscow.  ?nowMoscow cmwtime:startOfDay ?startOfToday.      ?result ?DateProperty ?Dates.   (?Dates "Etc/GMT" "Europe/Moscow") cmwtime:fromTzToTz ?Moscow.  ?Moscow cmwtime:startOfDay ?startOfToday.     ?result -> ?item.} |
-| --- |
+```
+ 
+
+@prefix object: <http://comindware.com/ontology/object#>.
+@prefix session: <http://comindware.com/ontology/session#>.
+@prefix cmwtime: <http://comindware.com/logics/time#>.
+{
+  ("Zayavki" "Data") object:findProperty ?DateProperty. 
+  session:context session:requestTime ?nowUTC.
+
+  (?nowUTC "Etc/GMT" "Europe/Moscow") cmwtime:fromTzToTz ?nowMoscow.
+  ?nowMoscow cmwtime:startOfDay ?startOfToday.   
+
+  ?result ?DateProperty ?Dates.
+
+  (?Dates "Etc/GMT" "Europe/Moscow") cmwtime:fromTzToTz ?Moscow.
+  ?Moscow cmwtime:startOfDay ?startOfToday.  
+
+  ?result -> ?item.
+}
+```
 
 **где:**
 

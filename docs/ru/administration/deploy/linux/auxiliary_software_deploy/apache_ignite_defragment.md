@@ -1,71 +1,101 @@
 ---
-title: Дефрагментация данных Apache Ignite
+title: 'Apache Ignite. Дефрагментация данных'
 kbId: 4603
+tags:
+    - Apache Ignite
+    - Linux
+    - дефрагментация
+    - оптимизация хранилища
+    - производительность
+hide: tags
 ---
 
-# Дефрагментация данных Apache Ignite {: #apache_ignite_defragment}
+# {{ apacheIgniteVariants }}. Дефрагментация данных {: #apache_ignite_defragment}
 
 ## Введение
 
-Здесь представлены инструкции по дефрагментации хранилища данных Apache Ignite для ПО **{{ productName }}** в Linux. Дефрагментация хранилища Apache Ignite позволяет повысить производительность работы ПО и сократить объем данных хранилища на диске.
+Здесь представлены инструкции по дефрагментации хранилища данных {{ apacheIgniteVariants }} для ПО **{{ productName }}** в Linux. Дефрагментация хранилища {{ apacheIgniteVariants }} позволяет повысить производительность работы ПО и сократить объем данных хранилища на диске.
 
 !!! warning "Внимание!"
 
-    Во время дефрагментации хранилища Apache Ignite экземпляр ПО будет недоступен. Поэтому дефрагментацию следует выполнять в нерабочее время.
+    Во время дефрагментации хранилища {{ apacheIgniteVariants }} экземпляр ПО будет недоступен. Поэтому дефрагментацию следует выполнять в нерабочее время.
 
 ## Порядок дефрагментации
 
 1. Создайте резервную копию базы данных экземпляра ПО.
-2. Скачайте бинарный дистрибутив Apache Ignite, например [apache-ignite-2.16.0-bin.zip](https://downloads.apache.org/ignite/2.16.0/apache-ignite-2.16.0-bin.zip) или более новую версию.
+2. Скачайте бинарный дистрибутив {{ apacheIgniteVariants }}, например [apache-ignite-2.17.0-bin.zip](https://downloads.apache.org/ignite/2.17.0/apache-ignite-2.17.0-bin.zip) или более новую версию.
 3. Перейдите в режим суперпользователя:
-
 
     --8<-- "linux_sudo.md"
 
-4. Распакуйте дистрибутив Apache Ignite в домашнюю папку (здесь и далее `username` — имя текущего пользователя):
+4. Распакуйте дистрибутив {{ apacheIgniteVariants }} в домашнюю директорию (здесь и далее `username` — имя текущего пользователя):
 
     ``` sh
-    unzip apache-ignite-2.16.0-bin.zip -d /usr/share/ignite
+    unzip -q apache-ignite-2.17.0-bin.zip -d /usr/share/ignite
     ```
 
 5. Задайте переменную среды `IGNITE_HOME`:
 
     ``` sh
-    export IGNITE_HOME=/usr/share/ignite
+    export IGNITE_HOME=/usr/share/ignite/apache-ignite-2.17.0-bin
     ```
 
-6. Скопируйте в папку `/usr/share/ignite` файл `Ignite.config` из папки `/var/www/<instanceName>` (где `<instanceName>` — имя экземпляра ПО):
+6. Задайте переменную среды `IGNITE_CONTROL_UTILITY_USE_CONNECTOR_CONNECTION`:
 
     ``` sh
-    cp /var/www/<instanceName>/Ignite.config /usr/share/ignite/
+    export IGNITE_CONTROL_UTILITY_USE_CONNECTOR_CONNECTION=true
     ```
 
-    {% include-markdown ".snippets/pdfPageBreakHard.md" %}
-
-7. Перейдите в папку `bin` Apache Ignite:
+7. Перейдите в директорию `bin` {{ apacheIgniteVariants }}:
 
     ``` sh
-    cd /usr/share/ignite/bin
+    cd /usr/share/ignite/apache-ignite-2.17.0-bin/bin
     ```
 
-8. В файле `control.sh` измените директиву `DEFAULT_CONFIG`:
-
-    ``` sh
-    DEFAULT_CONFIG=config/Ignite.config
-    ```
-
-9. Получите список узлов, зарегистрированных в базовой топологии:
+8. Получите список узлов, зарегистрированных в базовой топологии:
 
     ``` sh
     bash control.sh --baseline
     ```
 
-10. Назначьте дефрагментацию данных Apache Ignite при перезапуске экземпляра ПО, указав вместо `<id>` идентификаторы узлов, полученные на шаге 9:
+    ``` sh title="Пример списка узлов в базовой конфигурации"
+    root@NODE1:/usr/share/ignite/apache-ignite-slim-2.17.0-bin/bin# export IGNITE_HOME=/usr/share/ignite/apache-ignite-slim-2.17.0-bin/
+    root@NODE1:/usr/share/ignite/apache-ignite-slim-2.17.0-bin/bin# cd apache-ignite-slim-2.17.0-bin/bin/
+    root@NODE1:/usr/share/ignite/apache-ignite-slim-2.17.0-bin/bin# bash control.sh --baseline
+    Control utility [2.17.0]
+    User: root
+    Time: 2025-12-04T11:43:07.505
+
+    [BASELINE]
+    Arguments: --baseline
+    
+    Cluster state: ACTIVE
+    Current topology version: 1
+    Baseline auto adjustment enabled: softTimeout=3000
+    Baseline auto-adjust are not scheduled
+    
+    Current topology version: 1
+    Coordinator: ConsistentId=a06ff4bf-3a28-4b6c-a66a-323bca97a8e0, Address=localhost/127.0.0.1, Order=1
+    
+    Baseline nodes:
+    ConsistentId=a06ff4bf-3a28-4b6c-a66a-323bca97a8e0, Address=localhost/127.0.0.1, State=ONLINE, Order=1
+    
+    Number of baseline nodes: 1
+    
+    Other nodes not found.
+    
+    Command [BASELINE] finished with code: 0
+    Time: 2025-12-04T11:43:07.839
+    Execution time: 334 ms
+    ```
+
+9. Назначьте дефрагментацию данных {{ apacheIgniteVariants }} при перезапуске экземпляра ПО, указав вместо `<id>` идентификаторы узлов (ConsistentId), полученные на шаге 9:
 
     ``` sh
     bash control.sh --defragmentation schedule --nodes <id>
     ```
-11. Остановите и запустите экземпляр ПО:
+
+10. Остановите и запустите экземпляр ПО:
 
     ``` sh
     systemctl stop comindware<instanceName>
@@ -75,7 +105,7 @@ kbId: 4603
 
     Здесь `<instanceName>` — имя экземпляра ПО.
 
-12. Инициируйте экземпляр ПО:
+11. Инициализируйте экземпляр ПО:
 
     - С помощью командной строки:
 
@@ -106,7 +136,7 @@ kbId: 4603
     - `<instance_ip>, <port>` — IP-адрес и порт экземпляра ПО;
     - `<instance_fqdn>` — адрес веб-сайта с экземпляром ПО.
 
-13. Дождитесь завершения дефрагментации данных.
+12. Дождитесь завершения дефрагментации данных.
 
     !!! note "Примечание"
 
@@ -116,18 +146,18 @@ kbId: 4603
         watch -cd bash control.sh --defragmentation status
         ```
 
-        - В процессе дефрагментации Apache Ignite будет вносить сведения в файл журнала вида `/var/lib/comindware/<instanceName>/Database/log/ignite-xxxxxxxx.0.log`. 
+        - В процессе дефрагментации {{ apacheIgniteVariants }} будет вносить сведения в файл журнала вида `/var/log/comindware/<instanceName>/Logs/igniteClient_xxxxxxxx.log`. 
         - По завершении дефрагментации:
-            - в журнале Apache Ignite должно появиться событие: `Defragmentation process complete`;
+            - в журнале {{ apacheIgniteVariants }} должно появиться событие: `Defragmentation process complete`;
             - команда  `watch -cd bash control.sh --defragmentation status` должна вывести сообщение `Defragmentation process complete`.
 
-14. Перезапустите экземпляр ПО, чтобы его снова можно было использовать.
+13. Перезапустите экземпляр ПО, чтобы его снова можно было использовать.
 
     ``` sh
     systemctl restart comindware<instanceName>
     ```
 
-15. Инициируйте экземпляр ПО, также как на шаге 12.
+14. Инициализируйте экземпляр ПО, также как на шаге 12.
 
 ## Решение возможных проблем {: .pageBreakBefore }
 
@@ -161,13 +191,13 @@ kbId: 4603
 4. Раскомментируйте строку и задайте значение в файле `/etc/systemd/user.conf`:
 
     ```  sh
-    DefaultLimitNOFILE=65536
+    DefaultLimitNOFILE=200000
     ```
 
 5. Раскомментируйте строку и задайте значение в файле `/etc/systemd/system.conf`:
 
-    ```
-    DefaultLimitNOFILE=65536
+    ``` sh
+    DefaultLimitNOFILE=200000
     ```
 
 6. Откройте для редактирования конфигурацию сервиса экземпляра ПО:
@@ -180,8 +210,8 @@ kbId: 4603
 
     ```  sh
     [Service]
-    LimitNOFILE=65536
-    LimitNOFILESoft=65536
+    LimitNOFILE=200000
+    LimitNOFILESoft=200000
     ```
 
 8. Перезагрузите машину и экземпляр ПО.
@@ -190,9 +220,9 @@ kbId: 4603
 
 --8<-- "related_topics_heading.md"
 
-- _[Резервное копирование и восстановление][backup_configure]_
-- _[Дефрагментация персистентного хранилища](https://ignite.apache.org/docs/2.11.1/persistence/native-persistence-defragmentation)_ (руководство Apache Ignite, английский язык)
-- _[Активация, деактивация и управление топологией](https://ignite.apache.org/docs/2.11.1/tools/control-script#activation-deactivation-and-topology-management)_ (руководство Apache Ignite, английский язык)
+- [Резервное копирование и восстановление][backup_configure]
+- [Дефрагментация персистентного хранилища  (руководство Apache Ignite, английский язык)](https://ignite.apache.org/docs/2.11.1/persistence/native-persistence-defragmentation)
+- [Активация, деактивация и управление топологией (руководство Apache Ignite, английский язык)](https://ignite.apache.org/docs/2.11.1/tools/control-script#activation-deactivation-and-topology-management)
 
 </div>
 

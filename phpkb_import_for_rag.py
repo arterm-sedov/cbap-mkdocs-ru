@@ -1,0 +1,431 @@
+from tools.ssh_kb_ru import establish_connection_interactive, close_connection
+import html
+from html.parser import HTMLParser
+import bs4
+from markdownify import markdownify as md
+from markdownify import MarkdownConverter
+import re
+from pathvalidate import sanitize_filename
+from pathlib import Path
+import shutil
+from cryptography.fernet import Fernet
+import os
+import os.path
+import json
+
+KB_ID_TO_FILENAME_MAP = None
+KB_ID_TO_TITLE_MAP = None
+KB_ID_TO_TITLE_MAP_FILE = '.article_id_filename_map_v5.json'
+THIS_FILE_DIR = os.path.dirname(os.path.realpath(__file__))
+IMPORT_PATH_DEFAULT = 'phpkb_content_rag'
+importPath = input(f'Path to import (default `{IMPORT_PATH_DEFAULT}`): ') 
+KB_DIR = os.path.dirname(importPath) if importPath else IMPORT_PATH_DEFAULT
+TOTAL_PAGES_IMPORTED = 0
+CONNECTION = None
+DOCS_RU_FOLDER = 'docs/ru'
+HYPERLINKS_FILE = os.path.join(DOCS_RU_FOLDER, '.snippets/hyperlinks_mkdocs_to_kb_map.md')
+
+# Function to search for pattern in hyperlinks file and replace
+def find_url_in_snippet(article_id, anchor):
+    url = ''
+    try:
+        with open(HYPERLINKS_FILE, 'r', encoding='utf-8') as file:
+            lines = file.readlines()
+        for line in lines:
+            # Search for the url with articleId
+            match = None
+            if anchor:
+                match = re.search(fr'(\[.*?\]):.*kbArticleURLPrefix.*{article_id}#{anchor}\n', line)
+            #     print (f"articleId {article_id} and anchor {anchor}")
+            if not match:
+                match = re.search(fr'(\[.*?\]):.*kbArticleURLPrefix.*{article_id}\n', line)
+            if match and match.group(1):
+                url = match.group(1)
+                #print(f"Found link and URL for articleId {article_id}: {url}")
+                break  # Found the match, no need to continue searching
+        return url
+    except (IOError, UnicodeDecodeError):
+        return url
+
+def importCategoryChildren(parent, categoryDirectory, show='yes', status='public'):
+        id = parent[0]
+        title = parent[1]
+        c4 = CONNECTION.cursor()    
+        c4.execute(f"""
+            SELECT DISTINCT (category_id), category_name, parent_id
+            FROM phpkb_categories 
+            WHERE category_show='{show}' 
+            AND category_status = '{status}'
+            AND phpkb_categories.language_id = 2
+            AND parent_id = {id}
+            """)
+        children = c4.fetchall()
+        print("\n-----\n\nCategory {}. {}. Children: {}\n".format(id, title, children))
+        dirName = sanitize_filename('{}. {}'.format(id, str(title)))
+        categoryDir = os.path.join(categoryDirectory, dirName)
+        if os.path.exists(categoryDir): 
+            print('Deleting dir:' + categoryDir)
+            shutil.rmtree(categoryDir, ignore_errors=True)
+        Path(categoryDir).mkdir(parents=True, exist_ok=True)
+        print('Importing articles to dir: ' + categoryDir + '\n')
+        importArtciclesInCategory(id, categoryDir)
+        for child in children:
+            importCategoryChildren(child, categoryDir)
+        return children
+    
+        
+def importArtciclesInCategory (categoryId, categoryDir):
+    c = CONNECTION.cursor()
+    c.execute(f"""
+            SELECT DISTINCT (phpkb_articles.article_id), phpkb_articles.article_content, phpkb_articles.article_title, phpkb_articles.article_last_updation
+            FROM phpkb_articles, phpkb_relations, phpkb_categories 
+            WHERE article_show='yes' 
+            AND article_status='approved'
+            AND phpkb_relations.category_id = {categoryId} 
+            AND phpkb_relations.article_id = phpkb_articles.article_id
+            """)
+    
+    articles = c.fetchall()
+    print(f"Found {len(articles)} articles in category {categoryId}")
+    global TOTAL_PAGES_IMPORTED
+    pages = 0
+    for id, content, title, last_updation in articles:
+        print(f"Processing article {id}: {title}")
+        sanitizedTitle = sanitize_filename(str(title))
+        print(f"Looking up existing filename for article {id}...")
+        existingFilename = findFilenameByArticleId(id, DOCS_RU_FOLDER)
+        if existingFilename:
+            sanitizedTitle = existingFilename
+            print(f"Found existing filename: {existingFilename}")
+        else: 
+            updateMappingJson(id, sanitizedTitle, KB_ID_TO_TITLE_MAP, KB_ID_TO_TITLE_MAP_FILE)
+            print(f"Using new filename: {sanitizedTitle}")
+        # Avoid duplicate kbId prefix in the target filename
+        if str(sanitizedTitle).startswith(f"{id}-"):
+            base_name = sanitizedTitle
+        else:
+            base_name = f"{id}-{sanitizedTitle}"
+
+        filename = os.path.join(categoryDir, f"{base_name}.md")
+        print ('    Importing article: ' + filename)
+        
+        with open(filename, "w+") as b:
+            print(f"  Starting BeautifulSoup processing for article {id}...")
+            p = bs4.BeautifulSoup(html.unescape(content), 'html.parser')
+            print(f"  BeautifulSoup completed for article {id}")
+            
+            article_title = p.new_tag("h1")
+            article_title.string=title
+            p.insert(0, article_title)
+            print(f"  Added title tag for article {id}")
+            
+            # Discard PHPKB TOC within <div class="mce-toc">
+            for toc in p.find_all('div', class_='mce-toc'):
+                toc.decompose()
+            
+            # Remove redundant TOC, created manually
+            # Find headers that say "Содержание" and remove them and their subsequent list.
+            potential_headers = p.find_all(['h2', 'p'])
+            
+            for header in list(potential_headers):
+                # Check if the element's text is "Содержание" or "Содержание:", ignoring case and whitespace.
+                text = header.get_text(strip=True).lower()
+                if text in ('содержание', 'содержание:', 'содержание.'):
+                    next_sibling = header.find_next_sibling()
+                    
+                    # The next sibling could be a NavigableString (e.g., whitespace).
+                    # We need to find the next actual tag.
+                    while next_sibling and isinstance(next_sibling, bs4.NavigableString):
+                        next_sibling = next_sibling.find_next_sibling()
+                        
+                    if next_sibling and next_sibling.name in ['ol', 'ul']:
+                        # This is a TOC. Decompose both the header and the list.
+                        print(f"  Decomposing standalone TOC header '{header.name}' and subsequent list '{next_sibling.name}'.")
+                        header.decompose()
+                        next_sibling.decompose()
+            
+            # Convert tables with class 'source_code_container' into a single <pre> with plain text
+            # and avoid nested <code> that leads to duplicate Markdown fences
+            # These tables were used as a workaround for code blocks.
+            for table in p.find_all('table', class_='source_code_container'):
+                print(f"  Converting source code table to <pre> block for article {id}...")
+                pre = p.new_tag("pre")
+                code_text_parts = []
+                for td in table.find_all('td', class_='source_code'):
+                    # Extract text preserving line breaks within the cell
+                    td_text = td.get_text(separator='\n', strip=False)
+                    code_text_parts.append(td_text)
+                # Join parts with newlines; assign as text content of <pre>
+                pre.string = "\n".join(code_text_parts).strip("\n")
+                table.replace_with(pre)
+                pre.insert_before(p.new_tag("p"))
+                
+            print(f"  Starting markdown conversion for article {id}...")
+            markdown = MarkdownConverter(heading_style='ATX', bullets='-', escape_misc=False).convert_soup(p)
+            print(f"  Markdown conversion completed for article {id}")
+            
+            print(f"  Starting regex processing for article {id}...")
+            try:
+                # Remove redundant new lines
+                print(f"    Processing redundant new lines for article {id}...")
+                pattern = re.compile(r'^\n^\n\n*', flags=re.MULTILINE)
+                markdown = re.sub(pattern, r'\n', markdown)
+                print(f"    Redundant new lines processed for article {id}")
+                
+                # Remove redundant spaces before new lines
+                print(f"    Processing redundant spaces for article {id}...")
+                pattern = re.compile(r' +\n', flags=re.MULTILINE)
+                markdown = re.sub(pattern, r'\n', markdown)
+                print(f"    Redundant spaces processed for article {id}")              
+                
+                # Remove redundant [*‌* К началу](#) links.
+                print(f"    Processing redundant 'К началу' links for article {id}...")
+                pattern = re.compile(r'\s*\[[^\]]*К началу[^\]]*\]\(#\)\s*')
+                markdown = re.sub(pattern, r'', markdown)
+                print(f"    Redundant 'К началу' links processed for article {id}")
+                
+                # Replace \t with four spaces
+                print(f"    Processing tabs for article {id}...")
+                markdown = markdown.replace('\t', '    ')
+                print(f"    Tabs processed for article {id}")
+                
+                # Reformat images with captions
+                print(f"    Processing image captions for article {id}...")
+                pattern = re.compile(r'(!\[(.*)\]\(.*\))\n\n\2', flags=re.MULTILINE)
+                markdown = re.sub(pattern, r'_\1_', markdown)
+                print(f"    Image captions processed for article {id}")
+
+                # Sanitize fenced code blocks to use 3 backticks instead of 4 or more, preserving indentation.
+                print(f"    Sanitizing fenced code blocks for article {id}...")
+                markdown = re.sub(r'`{4,}', r'```', markdown, flags=re.MULTILINE)
+                # Collapse duplicated triple fences produced on a single line: "``` ```" -> "```"
+                markdown = markdown.replace('``` ```', '```')
+                print(f"    Fenced code blocks sanitized for article {id}")
+                
+                # Final cleanup of excessive newlines.
+                print(f"    Cleaning up excessive newlines for article {id}...")
+                markdown = re.sub(r'\n{3,}', '\n\n', markdown)
+                print(f"    Excessive newlines cleaned up for article {id}")
+                
+                print(f"  Regex processing completed for article {id}")
+            except Exception as e:
+                print(f"  Warning: Regex processing failed for article {id}: {e}")
+                print(f"  Continuing with original markdown for article {id}")
+                # Continue with the original markdown if regex processing fails
+            
+            print(f"  Adding frontmatter for article {id}...")
+            # Compile and add frontmatter
+            frontmatter_lines = [
+                '---',
+                f"title: '{title}'",
+                f'kbId: {id}',
+                f"url: 'https://kb.comindware.ru/article.php?id={id}'",
+            ]
+            if last_updation:
+                frontmatter_lines.append(f"updated: '{last_updation}'")
+            frontmatter_lines += ['---', '\n']
+            frontmatter = '\n'.join(frontmatter_lines)
+            markdown = frontmatter + markdown.rstrip()
+            print(f"  Frontmatter added for article {id}")
+            
+            print(f"  Writing markdown file for article {id}...")
+            b.write(markdown)
+            print(f"  Markdown file written for article {id}")
+            # print(html.escape(str(p)))
+            pages += 1
+            print(f"Completed article {id}")
+    TOTAL_PAGES_IMPORTED += pages
+    print("\nImported {} articles, total {}\n\n-----\n".format(pages, TOTAL_PAGES_IMPORTED))
+    return pages
+
+
+def fetchCategories(show='yes', status='public', language_id=2, parent_id=''):
+
+    c = CONNECTION.cursor()    
+
+    c.execute(f"""
+            SELECT DISTINCT category_id, category_name, parent_id
+            FROM phpkb_categories 
+            WHERE category_show='{show}' 
+            AND category_status = '{status}'
+            AND phpkb_categories.language_id = {language_id}
+            AND parent_id = '{parent_id}'
+            """)
+    categories = c.fetchall()
+    return categories
+
+
+def listCategories(categories):
+    index = 1
+    for id, title, parent_id in categories:
+        print(f"{index}. {id}. {title}")
+        index += 1
+
+def main():
+    
+    global KB_ID_TO_TITLE_MAP
+        
+    KB_ID_TO_TITLE_MAP = loadMappingJson(KB_ID_TO_TITLE_MAP_FILE)
+    
+    if len(KB_ID_TO_TITLE_MAP) == 0:
+        KB_ID_TO_TITLE_MAP = dict()
+    
+    global CONNECTION
+    CONNECTION, server = establish_connection_interactive()
+    
+    importChildren = ''
+    categoryId = ''
+    parent_category = ''
+    categoryChoice = ''
+
+    print('\nRoot categories:\n')
+
+    while importChildren != 'y':
+        
+        
+        categoryChoice = ''
+        
+        categories = fetchCategories(parent_id=categoryId)
+        if parent_category: print("\nParent: {}. {}\n".format(categoryId, categoryTitle))
+        
+        if len(categories) == 0:
+            print("No categories found. Exiting.")
+            break
+        elif len(categories) == 1:
+            # If there's only one category, automatically select it
+            categoryChoice = 0
+            categoryId = categories[0][0]
+            categoryTitle = categories[0][1]
+            childrenCategories = fetchCategories(parent_id=categoryId)
+            childrenCategoriesNumber = len(childrenCategories)
+            
+            print(f"\nOnly one category found: {categoryId}. {categoryTitle}")
+            if childrenCategoriesNumber > 0:
+                print(f'\nIt has {childrenCategoriesNumber} child categories:\n')
+                listCategories(childrenCategories)
+                importChildren = input(f"\nEnter `Y` to import all child categories and articles. \n Or choose a category to browse (1 to {childrenCategoriesNumber}). \n").lower()
+            else:
+                print('\nIt has no child categories')
+                importChildren = input(f"\nEnter `Y` to import all articles from this category. ").lower()
+                if importChildren != 'y':
+                    print('Imported nothing')
+                    break
+        elif len(categories) > 1:
+            parent_category = categories[0]
+            listCategories(categories)
+            print("\n---------\n")
+            
+            if importChildren.isnumeric() and int(importChildren) <= len(categories):
+                    categoryChoice = int(importChildren)-1
+                    importChildren = 'y'
+            else:    
+                while not (categoryChoice.isnumeric() and int(categoryChoice) <= len(categories)):
+                    categoryChoice = input("Choose category to browse (1 to {}): ".format(len(categories)))
+                    if categoryChoice.isnumeric() and int(categoryChoice) <= len(categories):
+                        categoryChoice = int(categoryChoice)-1
+                        break
+                    else:
+                        categoryChoice = ''
+                        print ('Wrong category choice')
+                
+            
+            categoryId = categories[categoryChoice][0]
+            categoryTitle = categories[categoryChoice][1]  
+            childrenCategories = fetchCategories(parent_id=categoryId)
+            childrenCategoriesNumber = len(childrenCategories)
+        
+            print ("\nChosen category: {} {}".format(categoryId, categoryTitle))
+            if childrenCategoriesNumber > 0:
+                print ('\nIt has {} child categories:\n'.format(childrenCategoriesNumber))
+                listCategories(childrenCategories)
+                importChildren = input("\nEnter `Y` to import all child categories and articles. \n Or choose a category to browse (1 to {}). \n".format(childrenCategoriesNumber)).lower()
+            else: 
+                print ('\nIt has no child categories')
+                importChildren = input("\nEnter `Y` to import all articles from this category. ".format(categoryId, categoryTitle)).lower()
+                if importChildren !='y': 
+                    print('Imported nothing')
+                    break
+
+    else:
+        if len(categories) > 1 and categories[categoryChoice]:
+            importCategoryChildren(categories[categoryChoice], KB_DIR)
+        elif len(categories) == 1:
+            importCategoryChildren(categories[0], KB_DIR)
+        
+    
+    close_connection(CONNECTION, server)
+    
+def findFilenameByArticleId(article_id, docs_dir):
+    """
+    Find the filename in the specified docs directory containing the specified kbId.
+    Uses a cached dictionary to speed up subsequent lookups.
+    
+    Args:
+        article_id (str): The kbId to search for.
+        docs_dir (str): The directory to scan for markdown files.
+        
+    Returns:
+        str: The filename without the .md extension if found, else None.
+    """
+    global KB_ID_TO_FILENAME_MAP
+    
+    # Initialize and populate the mapping if not already done
+    if KB_ID_TO_FILENAME_MAP is None:
+        KB_ID_TO_FILENAME_MAP = {}
+        if not os.path.isdir(docs_dir):
+            raise FileNotFoundError(f"The directory '{docs_dir}' does not exist.")
+        
+        # Build the mapping from kbId to filenames
+        for root, _, files in os.walk(docs_dir):
+            for file in files:
+                if file.endswith(".md"):
+                    file_path = os.path.join(root, file)
+                    filename = os.path.splitext(file)[0]
+                    if not filename=='index':
+                        try:
+                            with open(file_path, "r", encoding="utf-8") as f:
+                                for line in f:
+                                    match = re.match(r"kbId:\s*(\S+)", line.strip())
+                                    if match:
+                                        kb_id = match.group(1)
+                                        KB_ID_TO_FILENAME_MAP[kb_id] = filename
+                                        break  # Stop scanning this file after finding kbId
+                        except (UnicodeDecodeError, IOError):
+                            # Skip files that can't be read
+                            continue
+    
+    foundFilename = KB_ID_TO_FILENAME_MAP.get(str(article_id))
+    foundTitle = KB_ID_TO_TITLE_MAP.get(str(article_id))
+    if not foundFilename:
+            try:
+                articleAnchor = find_url_in_snippet(article_id, None)
+                if articleAnchor:
+                    articleAnchor = re.sub(r'\[(.*)\]', r'\1', articleAnchor)
+                    KB_ID_TO_FILENAME_MAP[str(article_id)] = articleAnchor
+                elif foundTitle:
+                    KB_ID_TO_FILENAME_MAP[str(article_id)] = foundTitle
+            except (IOError, UnicodeDecodeError):
+                # If hyperlinks file can't be read, use title as fallback
+                if foundTitle:
+                    KB_ID_TO_FILENAME_MAP[str(article_id)] = foundTitle
+                
+                
+    # Lookup in the cached dictionary
+    return KB_ID_TO_FILENAME_MAP.get(str(article_id))
+
+def updateMappingJson(key, value, mapping, mappingFilename):
+    mapping.update({str(key):value})
+    with open(mappingFilename, "w") as mappingFile: 
+        mappingJson = json.dumps(mapping, indent = 4, ensure_ascii=False)
+        print(mappingJson)
+        mappingFile.write(mappingJson)
+        
+def loadMappingJson(mappingFilename):
+
+    with open(mappingFilename, "r") as mappingJsonFile: 
+        mappingJsonFileContent = mappingJsonFile.read()
+        mappingJson = json.loads(mappingJsonFileContent) if mappingJsonFileContent else dict()
+        return mappingJson
+
+if __name__ == "__main__":
+    main()

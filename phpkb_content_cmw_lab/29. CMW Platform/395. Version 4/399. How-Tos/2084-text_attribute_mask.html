@@ -1,0 +1,79 @@
+<h1>Configuring Custom Mask</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1guafgi6h1">Use Case</a></li>
+<li><a href="#mcetoc_1guafgtno2">Instructions</a></li>
+<li><a href="#mcetoc_1guahskts3">Mask Regular Expression Syntax</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1guafgi6h1">Use Case</h2>
+<p>In the <strong>CMW Platform</strong>, you can define a regular expression mask for the <strong>Text</strong> attribute display format. When the user enters the attribute value, the mask restricts it to the specified format. You can use the preconfigured <strong>E-mail address</strong> mask or specify a <strong>Custom mask</strong>.</p>
+<p>In this article, we will create the <em>Name</em> attribute that can consist maximum of 10 Latin letters and the <em>Phone </em>attribute restricted to the US phone numbers in international format: <em><span style="color: #4d5156; font-family: arial, sans-serif; font-size: 14px; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;">+1 (XXX) XXX-XXXX</span></em>.</p>
+<h2 id="mcetoc_1guafgtno2">Instructions</h2>
+<ol>
+<li>Create the <em>Name</em> attribute:
+<ul>
+<li><strong>Data type </strong>— <strong>Text</strong></li>
+<li><strong>Display format </strong>— <strong>Custom mask</strong></li>
+<li><strong>Mask regular expression: </strong><code>[A-Za-z]{10}</code></li>
+</ul>
+</li>
+<li>Create the <em>Phone</em> attribute:
+<ul>
+<li><strong>Data type </strong>— <strong>Text</strong></li>
+<li><strong>Display format </strong>— <strong>Custom mask</strong></li>
+<li><strong>Mask regular expression: </strong><code>\+1 \([0-9]{3}\) \([0-9]{3}\)-\([0-9]{4}\)</code>
+<div class="alert-message-tpl"><strong>Tip:</strong> To validate the attribute value (e.g., to make sure the user does not omit phone number digits), configure the validation expression and message on the <strong>Value validation</strong> tab.</div>
+</li>
+</ul>
+</li>
+<li>Place the <em>Name</em> and <em>Phone</em> attributes on a form.</li>
+<li>The <em>Name </em>field will allow entering up to 10 upper and lower case Latin letters.</li>
+<li>The <em>Phone </em>field will allow entering up to 10 digits. Other phone number elements will be fixed.</li>
+</ol>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Name and Phone fields with custom masks" class="img-responsive" height="133" src="https://kb.cmwlab.com/assets/img_643ec6f918a6d.png" width="350"/></p>
+<p class="caption" style="font-size: 15px !important;">Name and Phone fields with custom masks</p>
+</div>
+<h2 id="mcetoc_1guahskts3">Mask Regular Expression Syntax</h2>
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%; height: 335px;">
+<tbody>
+<tr style="height: 40px;">
+<th style="height: 40px; width: 20%;">Element</th>
+<th style="width: 50%; height: 40px;">Description</th>
+</tr>
+<tr style="height: 40px;">
+<th style="height: 0px; width: 20%;"><code>[A-Za-z]{10}</code></th>
+<td style="height: 0px;">
+<ul>
+<li>The <code>[ ]</code> square brackets define a character range.</li>
+<li>The number in the <code>{ }</code> curly brackets defines the preceding token repetition number.</li>
+<li>The <code>[A-Za-z]{10}</code> token defines a string 10 Latin upper and lower case letters.</li>
+</ul>
+</td>
+</tr>
+<tr style="height: 40px;">
+<th style="height: 0px; width: 20%;"><code>\+1</code></th>
+<td style="height: 0px;">
+<ul>
+<li>The <code>\</code> backslash escapes the reserved <code>+</code> character. Otherwise, it is interpreted as a regex token.</li>
+<li>The <code>+</code><code>1</code> are fixed characters. They are automatically entered in the field.</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th style="height: 0px; width: 20%;"><code>\([0-9]{3}\) \([0-9]{3}\)-\([0-9]{4}\)</code></th>
+<td style="height: 0px;">
+<ul>
+<li>The \ backslash escapes the reserved ( and ) characters. Otherwise, they are interpreted as a regex group token.</li>
+<li>The  <code>[0-9]{3}</code> token defines a string of 3 Arabic numbers.</li>
+<li>The parentheses, hyphen, and space are fixed characters. They are automatically entered in the field.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code></code></p>
+<div class="alert-message-tpl"><strong>Tip: </strong>You can learn more and experiment with regular expressions at <a href="https://regex101.com/">https://regex101.com/</a></div>

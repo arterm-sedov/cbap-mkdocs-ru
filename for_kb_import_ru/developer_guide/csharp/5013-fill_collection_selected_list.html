@@ -1,0 +1,26 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5013" kb-tags="" kb-title="Заполнение коллекции выбранным списком">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для того, чтобы в рамках процесса заполнить коллекцию в текущем объекте каким-либо списком, введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code>using System;</code> <br/><code>using System.Collections.Generic;</code> <br/><code>using System.Linq;</code> <br/><code>using Comindware.Data.Entity;</code> <br/><code>using Comindware.TeamNetwork.Api.Data.UserCommands;</code> <br/><code>using Comindware.TeamNetwork.Api.Data;</code> <br/><code></code> <br/><code>class Script</code> <br/><code>{</code> <br/><code>    public static void Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities)</code> <br/><code>    {     </code> <br/><code>        var query = new Comindware.TeamNetwork.Api.Data.DatasetQuery</code> <br/><code>        {</code> <br/><code>            DatasetId = "lst.53"</code> <br/><code>        };</code> <br/><code>        var sessionsData = Api.TeamNetwork.DatasetService.QueryData(query).Rows;</code> <br/><code>        if (sessionsData == null) { return; } //проверяем, что в списке есть записи</code> <br/><code>        </code> <br/><code>        var objectId = context.BusinessObjectId; //текущая запись</code> <br/><code>        List&lt;string&gt; ApplicationIds = new List&lt;string&gt;();</code> <br/><code>        foreach (var row in sessionsData) </code> <br/><code>        {</code> <br/><code>            ApplicationIds.Add(row.Id);</code> <br/><code>        }</code> <br/><code>        var data = new Dictionary&lt;string, object&gt;</code> <br/><code>        {</code> <br/><code>            { "Applications", ApplicationIds} //вторым аргументом пишем лист idшников</code> <br/><code>        };</code> <br/><code>        </code> <br/><code>        Api.TeamNetwork.ObjectService.EditWithAlias("Register", objectId, data); //записываем коллекцию в текущем объекте.</code> <br/><code>    }</code> <br/><code>}</code> <br/></pre></code></div>
+<p><strong>где:</strong></p>
+<p><strong>lst.53</strong> - ИД списка, на основе которого будет заполняться коллекция;</p>
+<p><strong>Applications</strong> - <strong>системное имя атрибута типа Коллекция в текущем Шаблоне записи, которую нужно заполнить в текущем объекте;</strong></p>
+<p><strong>Register</strong> - системное имя текущего Шаблона записи.</p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

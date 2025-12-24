@@ -1,0 +1,93 @@
+<h1>Configuring Button Display Condition with Formula</h1><div class="mce-toc">
+<h2 class="toc-heading">Table of Contents</h2>
+<ul>
+<li><a href="#mcetoc_1gtnsh0650">Use Case</a></li>
+<li><a href="#mcetoc_1gto4hpi00">Prerequisites</a></li>
+<li><a href="#mcetoc_1gtntl1bd3">Instructions</a>
+<ul>
+<li><a href="#mcetoc_1gtntho192">Formula Syntax</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="mcetoc_1gtnsh0650">Use Case</h2>
+<p>You can show or hide a button depending on the application context. For this, define the button <strong>Display condition</strong> using a <strong>formula </strong>or an <strong>N3 expression.</strong></p>
+<p>In this article, we will create and configure the <strong>Add new item </strong>button to be visible only when the <em>Request</em> <em>Status</em> is <em>New </em>or <em>AddedToCart</em>.</p>
+<h2 id="mcetoc_1gto4hpi00">Prerequisites</h2>
+<p>To proceed with the example, create the templates and attributes as shown in the table below:</p>
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%; height: 120px;">
+<tbody>
+<tr style="height: 40px;">
+<td style="height: 40px; width: 20%;"><strong>Record template system name</strong></td>
+<td style="height: 40px; width: 20%;"><strong>Attribute system name</strong></td>
+<td style="height: 40px; width: 20%;"><strong>Attribute type</strong></td>
+<td style="width: 40%;"><strong>Description</strong></td>
+</tr>
+<tr style="height: 40px;">
+<td style="height: 40px; width: 20%;"><em>Request</em></td>
+<td style="height: 40px; width: 20%;"><em>Status</em></td>
+<td style="height: 40px; width: 20%;"><strong>Record</strong></td>
+<td style="height: 40px; width: 40%;">The <em>Status </em>attribute is linked to the <em>Request_status</em> template.</td>
+</tr>
+<tr style="height: 40px;">
+<td style="height: 40px; width: 20%;"><em>Request_status</em></td>
+<td style="height: 40px; width: 20%;"><em>Status_code</em></td>
+<td style="height: 40px; width: 20%;"><strong>Text</strong></td>
+<td style="height: 40px; width: 40%;">
+<p>The <em>Request_status </em>template contains records with the following <em>Status_code </em>values:</p>
+<ul>
+<li><em>New</em></li>
+<li><em>AddedToCart</em></li>
+<li><em>Pending</em></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="mcetoc_1gtntl1bd3">Instructions</h2>
+<ol class="colored_numbers_list">
+<li>In the <em>Request</em> record template, go to the <em><strong>Buttons</strong></em> tab.</li>
+<li>Create the <strong>Add new item</strong> button.</li>
+<li>On the <em><strong>Display condition</strong></em> tab enter the <a href="#mcetoc_1gtntho192"><strong>formula</strong></a>:
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code"><code>OR($Status-&gt;Status_code == "New",$Status-&gt;Status_code == "AddedToCart")</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>Click <strong>Save</strong> to save the button.</li>
+<li>Place the <strong>Add new item</strong> button on the default form toolbar in the <em>Request</em> record template.</li>
+<li>Test the resulting button:
+<ul>
+<li>Create a <em>Request</em> with the <em>New</em> or <em>AddedToCart </em>status: the <strong>Add new item</strong> button should be visible.</li>
+<li>Create a <em>Request</em> with the <em>Pending </em>status: the <strong>Add new item</strong> button should not appear.</li>
+</ul>
+</li>
+</ol>
+<h3 id="mcetoc_1gtntho192">Formula Syntax</h3>
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%; height: 80px;">
+<tbody>
+<tr style="height: 40px;">
+<th style="width: 50%; height: 40px;">Element</th>
+<th style="width: 50%; height: 40px;">Description</th>
+</tr>
+<tr style="height: 40px;">
+<td style="height: 40px;"><code>OR()</code></td>
+<td style="height: 40px;">This function takes two arguments and returns <code>true</code> if any of the arguments is <code>true</code>. In our case, we evaluate if the <em>Status_code</em> attribute value equals <em>New </em>or <em>AddedToCart</em>.</td>
+</tr>
+<tr>
+<td><code>$</code></td>
+<td>This prefix refers to an attribute in the current record context.</td>
+</tr>
+<tr>
+<td><code>-&gt;</code></td>
+<td>This operator refers to an attribute of the linked <em>Request_status</em> template.</td>
+</tr>
+</tbody>
+</table>
+</div>

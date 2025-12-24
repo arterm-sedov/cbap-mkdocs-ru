@@ -1,19 +1,66 @@
-<h1>Переменные в сценарии. Определения, настройка и использование</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr">
+<h1>Переменные в сценарии</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4719" kb-tags="сценарии,сценарий,действие сценария,шаги сценария,действия,триггеры,переменные,системные переменные,локальные переменные,переменные в сценарии,тройки,формулы" kb-title="Переменные в сценарии">
 <div class="md-container" data-md-component="container">
-<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
 <div class="mce-toc">
-<h2 class="toc-heading">Содержание</h2>
+<h2 class="toc-heading">
+      Содержание
+      </h2>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#definitions"> <span class="md-ellipsis"> Определения </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#системные-переменные"> <span class="md-ellipsis"> Системные переменные </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#локальные-переменные-сценария"> <span class="md-ellipsis"> Локальные переменные сценария </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#использование-переменных-в-формулах-и-выражениях-n3"> <span class="md-ellipsis"> Использование переменных в формулах и выражениях N3 </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#практический-пример"> <span class="md-ellipsis"> Практический пример </span> </a><nav aria-label="Практический пример" class="md-nav">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#definitions">
+<span class="md-ellipsis">
+      Определения
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#системные-переменные">
+<span class="md-ellipsis">
+      Системные переменные
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#локальные-переменные-сценария">
+<span class="md-ellipsis">
+      Локальные переменные сценария
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#использование-переменных-в-формулах-и-выражениях-n3">
+<span class="md-ellipsis">
+      Использование переменных в формулах и выражениях N3
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#практический-пример">
+<span class="md-ellipsis">
+      Практический пример
+    </span>
+</a>
+<nav aria-label="Практический пример" class="md-nav">
 <ul class="md-nav__list">
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#тестирование"> <span class="md-ellipsis"> Тестирование </span> </a></li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#тестирование">
+<span class="md-ellipsis">
+      Тестирование
+    </span>
+</a>
+</li>
 </ul>
-</nav></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
 </ul>
 </div>
 </nav>
@@ -32,8 +79,7 @@
 <p>Предусмотрены следующие системные переменные:</p>
 <ul>
 <li><code>BusinessObject</code> — ID записи, связанной с текущим экземпляром шаблона процесса в сценариях по событиям «<strong>Вход токена</strong>» и «<strong>Выход токена</strong>».</li>
-<li><code>origin</code> — значение зависит от типа события, вызвавшего сценарий:
-<ul>
+<li><code>origin</code> — значение зависит от типа события, вызвавшего сценарий:<ul>
 <li>событие «<strong>Нажатие кнопки</strong>» — ID записи, экземпляра процесса, задачи или аккаунта, для которого была нажата кнопка;</li>
 <li>события «<strong>Создание записи</strong>», «<strong>Изменение записи</strong>» — ID записи;</li>
 <li>события «<strong>Запуск процесса</strong>», «<strong>Вход токена</strong>», «<strong>Выход токена</strong>» — ID экземпляра процесса.</li>
@@ -41,8 +87,7 @@
 </li>
 <li><code>ProcessObject</code> — ID экземпляра процесса в сценариях по событиям «<strong>Запуск процесса</strong>», «<strong>Вход токена</strong>», «<strong>Выход токена</strong>».</li>
 <li><code>dialogVariables</code> — <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4790#button_local_variables">локальные переменные кнопки</a>, которая вызвала сценарий по событию «<strong>Нажатие кнопки</strong>». Значения локальных переменных кнопки задаются в диалоговом окне для кнопки. См. <a class="mkdocs_imported_link" href="#практический-пример">пример</a>.</li>
-<li><code>IncomingMessage</code> — в эту переменную можно поместить значения атрибутов ответа на HTTP-запрос в сценариях по событию «<strong>Получено сообщение</strong>».
-<ul>
+<li><code>IncomingMessage</code> — в эту переменную можно поместить значения атрибутов ответа на HTTP-запрос в сценариях по событию «<strong>Получено сообщение</strong>».<ul>
 <li>Атрибуты ответа настраиваются в свойствах пути передачи данных «<strong>Получение HTTP-запросов</strong>».</li>
 <li>Чтобы изменить значения атрибутов ответа, используйте действие «<strong>Изменить значения переменных</strong>»: в поле «<strong>Набор переменных</strong>» укажите <code>IncomingMessage</code>, добавьте переменные в таблицу и задайте их значения.</li>
 </ul>
@@ -67,21 +112,17 @@
 <ul>
 <li>Создайте переменную, оставив её значение пустым.</li>
 <li>Установите флажок у имени родительской переменной в списке и нажмите кнопку «<strong>Создать</strong>».</li>
-<li>Дважды нажмите значок <em class="fa-light fa-angle-down anchor">‌<!--icon--></em> рядом с родительской переменной.</li>
+<li>Дважды нажмите значок <i class="fa-light fa-angle-down anchor">‌<!--icon--></i> рядом с родительской переменной.</li>
 <li>В таблице отобразится дочерняя переменная.</li>
 </ul>
 </div>
 <h2 class="pageBreakBefore" id="использование-переменных-в-формулах-и-выражениях-n3">Использование переменных в формулах и выражениях N3</h2>
 <p>Чтобы обратиться к переменной в формуле, укажите её системное имя с префиксом <code>$$</code>.</p>
 <p>Например, чтобы присвоить атрибуту значение ID процесса, связанного с шаблоном записи, используйте формулу:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="n">FORMAT</span><span class="p">(</span><span class="s">"{0}"</span><span class="p">,</span> <span class="n">LIST</span><span class="p">(</span><span class="err">$$</span><span class="n">ProcessObject</span><span class="p">))</span></code></pre>
-</div>
+<div class="highlight"><code><pre><span></span><code><span class="n">FORMAT</span><span class="p">(</span><span class="s">"{0}"</span><span class="p">,</span><span class="w"> </span><span class="n">LIST</span><span class="p">(</span><span class="err">$$</span><span class="n">ProcessObject</span><span class="p">))</span></code> <br/></pre></code></div>
 <p>В выражениях N3 с переменными следует работать как с атрибутами. Чтобы обратиться к переменной, требуется импортировать функции для работы с ними.</p>
 <p>Например, чтобы присвоить атрибуту значение ID процесса, связанного с шаблоном записи, используйте выражение:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="c"># Импортируем функции для работы с переменными</span></code><br/><code><span class="k">@prefix</span> <span class="nn">variable:</span> <span class="nv">&lt;http://comindware.com/ontology/session/variable#&gt;</span><span class="p">.</span></code><br/><code><span class="k">@prefix</span> <span class="nn">session:</span> <span class="nv">&lt;http://comindware.com/ontology/session#&gt;</span><span class="p">.</span></code><br/><code><span class="k">@prefix</span> <span class="nn">string:</span> <span class="nv">&lt;http://www.w3.org/2000/10/swap/string#&gt;</span><span class="p">.</span></code><br/><code><span class="k">@prefix</span> <span class="nn">cmwstring:</span> <span class="nv">&lt;http://comindware.com/logics/string#&gt;</span><span class="p">.</span></code><br/><code></code><br/><code><span class="p">{</span></code><br/><code>    <span class="c"># Находим значение системной переменной ProcessObject</span></code><br/><code>    <span class="c"># и помещаем его в ?ProcessObject.</span></code><br/><code>    <span class="nn">session</span><span class="p">:</span><span class="nt">context</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">ProcessObject</span> <span class="err">?ProcessObject</span><span class="p">.</span></code><br/><code>    <span class="c"># Форматируем ?ProcessObject в строку и помещаем в ?FullId.</span></code><br/><code>    <span class="p">(</span><span class="s">"{0}"</span> <span class="err">?ProcessObject</span><span class="p">)</span> <span class="nn">string</span><span class="p">:</span><span class="nt">format</span> <span class="err">?FullId</span><span class="p">.</span></code><br/><code>    <span class="c"># Обрезаем префикс "user." и помещаем ID процесса в атрибут.</span></code><br/><code>    <span class="p">(</span><span class="err">?FullId</span> <span class="mi">5</span><span class="p">)</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">substring</span> <span class="err">?value</span><span class="p">.</span></code><br/><code><span class="p">}</span></code></pre>
-</div>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы с переменными</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">variable:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session/variable#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">session:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">string:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/2000/10/swap/string#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwstring:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/string#&gt;</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Находим значение системной переменной ProcessObject</span></code> <br/><code>    <span class="c"># и помещаем его в ?ProcessObject.</span></code> <br/><code>    <span class="nn">session</span><span class="p">:</span><span class="nt">context</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">ProcessObject</span> <span class="err">?ProcessObject</span><span class="p">.</span></code> <br/><code>    <span class="c"># Форматируем ?ProcessObject в строку и помещаем в ?FullId.</span></code> <br/><code>    <span class="p">(</span><span class="s">"{0}"</span> <span class="err">?ProcessObject</span><span class="p">)</span> <span class="nn">string</span><span class="p">:</span><span class="nt">format</span> <span class="err">?FullId</span><span class="p">.</span></code> <br/><code>    <span class="c"># Обрезаем префикс "user." и помещаем ID процесса в атрибут.</span></code> <br/><code>    <span class="p">(</span><span class="err">?FullId</span> <span class="mi">5</span><span class="p">)</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">substring</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
 <h2 class="pageBreakBefore" id="практический-пример">Практический пример</h2>
 <p>Настроим сценарий для массовой корректировки записей в табеле трудозатрат с использованием локальных переменных кнопки.</p>
 <ol class="colored_numbers_list">
@@ -164,16 +205,13 @@
 <ul>
 <li><strong>N3:</strong></li>
 </ul>
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="c"># Импортируем функции для работы с переменными</span></code><br/><code><span class="k">@prefix</span> <span class="nn">variable:</span> <span class="nv">&lt;http://comindware.com/ontology/session/variable#&gt;</span><span class="p">.</span></code><br/><code><span class="k">@prefix</span> <span class="nn">session:</span> <span class="nv">&lt;http://comindware.com/ontology/session#&gt;</span><span class="p">.</span></code><br/><code></code><br/><code><span class="p">{</span></code><br/><code>    <span class="c"># Помещаем системную переменную dialogVariables в ?dialogVariables.</span></code><br/><code>    <span class="nn">session</span><span class="p">:</span><span class="nt">context</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">dialogVariables</span> <span class="err">?dialogVariables</span><span class="p">.</span></code><br/><code>    <span class="c"># Находим в ?dialogVariables значение переменной newTime.</span></code><br/><code>    <span class="err">?dialogVariables</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">newTime</span> <span class="err">?value</span><span class="p">.</span></code><br/><code><span class="p">}</span></code></pre>
-</div>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы с переменными</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">variable:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session/variable#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">session:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session#&gt;</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Помещаем системную переменную dialogVariables в ?dialogVariables.</span></code> <br/><code>    <span class="nn">session</span><span class="p">:</span><span class="nt">context</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">dialogVariables</span> <span class="err">?dialogVariables</span><span class="p">.</span></code> <br/><code>    <span class="c"># Находим в ?dialogVariables значение переменной newTime.</span></code> <br/><code>    <span class="err">?dialogVariables</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">newTime</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
 </li>
 </ul>
 </li>
 </ol>
 <figure class="screenshot_with_caption">
-<p><img alt="Пример сценария с использованием переменных" src="/platform/v5.0/business_apps/scenarios/img/scenario_with_variables.png"/></p>
-<figcaption class="caption">Пример сценария с использованием переменных</figcaption>
+<p><img alt="Результирующий сценарий" src="/platform/v5.0/business_apps/scenarios/img/scenario_with_variables.png"/><figcaption class="caption">Результирующий сценарий</figcaption></p>
 </figure>
 <h3 id="тестирование">Тестирование</h3>
 <ol class="colored_numbers_list">
@@ -195,5 +233,12 @@
 </article>
 </div>
 </div>
-<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
 </div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

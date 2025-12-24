@@ -1,0 +1,174 @@
+<h1>Setting up periodic reminders for open tasks</h1><p>CMW Platform, in its basic configuration, supports sending system notifications to a user on a given task as well as process notifications with information from a business process.</p>
+<p>Sometimes it becomes necessary to set up reminders for an employee about his open tasks, for example, every day at a certain time.</p>
+<p>For this setup, it is necessary to create 2 business processes:</p>
+<ul>
+<li>Search for employees to send a reminder</li>
+<li>Sending daily reminder</li>
+</ul>
+<p>The first process will be started by timer every day, for example, at 7am and search for employees who have open tasks at this point in time, and for each employee the system will initiate the subprocess "Sending daily reminder", which in its turn will form and send the list of the employee's open tasks in the form of a table by email.</p>
+<p> </p>
+<p><strong>Configuring the "Sending daily reminder" process</strong></p>
+<p><strong>1.</strong> Create a new Process Template.</p>
+<div class="screenshot_with_caption">
+<p><img align="" alt="New Process Template" class="img-responsive" height="598" src="https://kb.cmwlab.com/assets/remind_eng5.jpg" width="764"/></p>
+<p class="caption">New Process Template</p>
+</div>
+<p><strong>2.</strong> In the associated Record Template, create the following attributes:</p>
+<ul>
+<li><em><strong>Employee</strong></em> — an attribute of the "Account" data type to whom the reminder will be sent;</li>
+<li><em><strong>Body</strong></em> — a calculated text attribute of the HTML text display format that will contain a task table. Tick the box "Calculate using an expression" and insert the following expression in the "Calculated value":</li>
+</ul>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code"> 
+<p>@prefix cmw: &lt;http://comindware.com/logics#&gt;.</p>
+<p>@prefix string: &lt;http://www.w3.org/2000/10/swap/string#&gt;.</p>
+<p>@prefix cmwstring: &lt;http://comindware.com/logics/string#&gt;.</p>
+<p>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.</p>
+<p>@prefix configuration: &lt;http://comindware.com/ontology/configuration#&gt;.</p>
+<p>@prefix taskStatus: &lt;http://comindware.com/ontology/taskStatus#&gt;.</p>
+<p> </p>
+<p>{</p>
+<p>           ?confid a configuration:Configuration.</p>
+<p>           ?confid configuration:baseUri ?baseUri.</p>
+<p>           ("Searchesforemployeestosendareminder" "Employee") object:findProperty ?Employee.</p>
+<p> </p>
+<p>           ?item ?Employee ?EmployeeVal.</p>
+<p>                      </p>
+<p>    #First table</p>
+<p>    ("&lt;p style='font-size: 100%' &gt;List of tasks&lt;/p&gt;" "&lt;table border='1' style='width: 60%; border-collapse: collapse; border: 1px solid black' &gt;&lt;tbody&gt; &lt;tr&gt;&lt;td style='padding: 2px; width: 200px; border: 1px solid black'&gt;Task&lt;/td&gt; &lt;td style='width: 200px; padding: 2px; border: 1px solid black'&gt;Срок&lt;/td&gt;&lt;/tr&gt;") string:concatenation ?firstHeaderRow.</p>
+<p> </p>
+<p>    from {</p>
+<p>                       ?tasks a cmw:UserTask.</p>
+<p>                       or {?tasks cmw:assignee ?EmployeeVal.}</p>
+<p>                       or {?tasks cmw:possibleAssignee ?EmployeeVal.}.</p>
+<p>                       ?tasks cmw:taskStatus taskStatus:inProgress.</p>
+<p>                       ?tasks cmw:title ?title.</p>
+<p>                       ?tasks cmw:id ?id.</p>
+<p>        ("{0}" ?title) string:format ?titleVal.</p>
+<p>        ("{0}" ?id) string:format ?idVal.</p>
+<p>                      </p>
+<p>                       or {?tasks cmw:dueDate ?dueDate.}</p>
+<p>                       or {"" -&gt; ?dueDate.}.</p>
+<p>                      </p>
+<p>        ("{0}" ?dueDate) string:format ?dueDateVal.</p>
+<p>                      </p>
+<p>        ("&lt;tr&gt;&lt;td class='A' style='padding: 2px; border: 1px solid black; '&gt;&lt;a href='" ?baseUri "#task/" ?idVal "'&gt;" ?titleVal "&lt;/a&gt;&lt;/td&gt;&lt;td align='right' style='padding: 2px; border: 1px solid black; text-align: right'&gt;" ?dueDateVal "&lt;/td&gt;&lt;/tr&gt;") string:concatenation ?firstRow.</p>
+<p>    } select ?firstRow -&gt; ?firstFactrow.</p>
+<p>    (" " ?firstFactrow) cmwstring:join ?firstFact.</p>
+<p>    (?firstHeaderRow ?firstFact "&lt;/tbody&gt;&lt;/table&gt; &lt;br/&gt;") string:concatenation ?first.</p>
+<p>    ?first  -&gt; ?value.</p>
+<p>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><em><strong>To</strong></em> — a calculated text attribute that will contain the employee’s email address. Tick the box "Calculate using an expression" and insert the following expression in the "Calculated value":</li>
+</ul>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code"> $Employee-&gt;cmw.account.mbox</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>3.</strong> Create a process diagram as follows:</p>
+<div class="screenshot_with_caption">
+<p><img align="" alt="Process scheme" class="img-responsive" height="361" src="https://kb.cmwlab.com/assets/remind_eng6.jpg" width="777"/></p>
+<p class="caption">Process scheme</p>
+</div>
+<p><strong>4.</strong> Configure the settings for the sending message event.</p>
+<p><strong>5.</strong> Publish the process.</p>
+<p> </p>
+<p><strong>Configuring the "Search for employees to send a reminder" process</strong></p>
+<p><strong>1.</strong> Create a new Process Template.</p>
+<div class="screenshot_with_caption">
+<p><img align="" alt="New Process Template" class="img-responsive" height="682" src="https://kb.cmwlab.com/assets/remind_eng1.jpg" width="870"/></p>
+<p class="caption">New Process Template</p>
+</div>
+<p><strong>2.</strong> In the associated Record Template, create an attribute:</p>
+<ul>
+<li><em><strong>Employees</strong></em> — an attribute of the "Account" data type. Tick the boxes "Store multiple values" and "Calculate using an expression" and insert the following expression in the "Calculated value":</li>
+</ul>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code"> 
+<p>@prefix cmw: &lt;http://comindware.com/logics#&gt;.</p>
+<p>@prefix container: &lt;http://comindware.com/ontology/container#&gt;.</p>
+<p>@prefix account: &lt;http://comindware.com/ontology/account#&gt;.</p>
+<p>@prefix taskStatus: &lt;http://comindware.com/ontology/taskStatus#&gt;.</p>
+<p> </p>
+<p>{</p>
+<p>            ?class cmw:className "Account".</p>
+<p>            ?value a ?class.</p>
+<p>            ?value account:active true.</p>
+<p>            not {?value cmw:isDisabled true.}.</p>
+<p>            or {?tasks cmw:assignee ?value.}</p>
+<p>            or {?tasks cmw:possibleAssignee ?value.}.</p>
+<p>            ?tasks cmw:taskStatus taskStatus:inProgress.</p>
+<p>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><em><strong>Reminders</strong> </em>— an attribute with the "Record" data type, linked template is "Daily reminders". Establish a relationship with the new interlinking attribute — Search. Tick the box "Store multiple values".</li>
+</ul>
+<p><strong>3.</strong> Create a process diagram as follows:</p>
+<div class="screenshot_with_caption">
+<p><img align="" alt="Process scheme" class="img-responsive" height="352" src="https://kb.cmwlab.com/assets/remind_eng2.jpg" width="807"/></p>
+<p class="caption">Process scheme</p>
+</div>
+<p><strong>4.</strong> Configure the start timer event.</p>
+<div class="screenshot_with_caption">
+<p><img align="" alt="Timer configuration" class="img-responsive" height="766" src="https://kb.cmwlab.com/assets/remind_eng3.jpg" width="1068"/></p>
+<p class="caption">Timer configuration</p>
+</div>
+<div class="blue_note"><strong>Note :</strong> If needed, also provide a plain start event to be able to manually start the process without having to wait for a new work day.</div>
+<p><strong>5. </strong>Set up a scenario at the entrance to the reusable subprocess to create records that the subprocess will then run on.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Scenario setup" class="img-responsive" height="504" src="https://kb.cmwlab.com/assets/2023-02-09_12h50_34.png" width="530"/></p>
+<p class="caption" style="font-size: 15px !important;">Scenario setup</p>
+</div>
+<p><strong>5.1.</strong> The first two actions are added by default, so start by adding the "Object loop" action and setting it up.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt='Action "Object loop"' class="img-responsive" height="804" src="https://kb.cmwlab.com/assets/2023-02-09_12h54_30.png" width="1054"/></p>
+<p class="caption" style="font-size: 15px !important;">Action "Object loop"</p>
+</div>
+<p>The variable "local" will store one instance from the specified selection at a loop. At the bottom, specify the "Employees" attribute, in which employees with active tasks are calculated.</p>
+<p><strong>5.2.</strong> Add the "Create a record" action and configure it.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt='Action "Create a record"' class="img-responsive" height="803" src="https://kb.cmwlab.com/assets/2023-02-09_12h57_57.png" width="1051"/></p>
+<p class="caption" style="font-size: 15px !important;">Action "Create a record"</p>
+</div>
+<ul>
+<li>Target record template — Specify the record template "Daily Reminders"</li>
+<li>New record reference — specify the "Reminders" attribute created in step 3.</li>
+<li>Operation on the values — specify "Add".</li>
+</ul>
+<p><strong>5.3. </strong>Add the "Change attribute values" action and configure it.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt='Action "Create attribute values"' class="img-responsive" height="800" src="https://kb.cmwlab.com/assets/2023-02-09_13h17_47.png" width="1045"/></p>
+<p class="caption" style="font-size: 15px !important;">Action "Create attribute values"</p>
+</div>
+<p>Click "Create", select the "Employee" attribute, select "Replace" for "Operation on the values", and paste the $$local formula in the last column.</p>
+<p><strong>6.</strong> Configure the reusable subprocess.</p>
+<div class="screenshot_with_caption">
+<p><img align="" alt="Subprocess configuration" class="img-responsive" height="861" src="https://kb.cmwlab.com/assets/2023-02-09_13h21_21.png" width="1216"/></p>
+<p class="caption">Subprocess configuration</p>
+</div>
+<div>
+<p>In the "Record to execute the process", specify the attribute "Reminders", and in the "Called process template" — "Sending daily reminder".</p>
+</div>
+<p><strong>7.</strong> Publish the process and test.</p>
+<p>Before starting testing, check the operability of the E-mail sending connection and the correct configuration of the outgoing communication route.</p>
+<div class="blue_note"><strong>Note :</strong> for the correct computation of the calculated fields and the sub-process launch formulas, check the exact match of the system name of each Record Template and attribute, as well as Process Templates.</div>
