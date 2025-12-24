@@ -123,6 +123,8 @@
 
 [example_formula_group_account_calculate]: {{ kbArticleURLPrefix }}4991
 
+[example_image_gallery_on_form]: {{ kbArticleURLPrefix }}4975
+
 [example_n3_account_attributes_compare]: {{ kbArticleURLPrefix }}4932
 
 [example_n3_button_local_variable]: {{ kbArticleURLPrefix }}4909
