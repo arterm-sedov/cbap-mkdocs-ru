@@ -571,6 +571,8 @@
 
 [example_document_download_to_server_csharp]: {{ kbArticleURLPrefix }}5002
 
+[example_document_get_uri]: {{ kbArticleURLPrefix }}5151
+
 [example_n3_collection_get_selected_ids]: {{ kbArticleURLPrefix }}5100
 
 [example_n3_collection_join_filter_hierarchy]: {{ kbArticleURLPrefix }}5108
