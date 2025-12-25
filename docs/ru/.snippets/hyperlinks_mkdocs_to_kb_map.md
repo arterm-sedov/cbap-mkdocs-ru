@@ -1003,6 +1003,8 @@
 
 [deploy_guide_linux_prerequisites_install]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_prerequisites_install
 
+[deploy_guide_linux_vm_max_map_count]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_vm_max_map_count
+
 [deploy_cluster_linux]: {{ kbArticleURLPrefix }}5080
 
 [elasticsearch_deploy_Linux]: {{ kbArticleURLPrefix }}4601

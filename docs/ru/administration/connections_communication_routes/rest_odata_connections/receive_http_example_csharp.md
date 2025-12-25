@@ -16,7 +16,7 @@ hide: tags
 
 # HTTP-запросы. Получение JSON-данных в сценарии с помощью C# {: #http_receive_example_csharp }
 
-## Введение {: #http_receive_example_csharp_introduction }
+## Введение {: #http_receive_example_csharp_intro }
 
 **{{ productName }}** может получать и обрабатывать HTTP-запросы из внешних систем с помощью сценариев.
 
@@ -87,6 +87,7 @@ hide: tags
 
 --8<-- "http_receive_configure_sequence.md"
 
+[](){: #connection_configure }
 ## Настройка подключения {: #http_receive_example_csharp_connection }
 
 1. На странице «**Администрирование**» выберите пункт «**Инфраструктура**» — «[**Подключения**][connections]» <i fal fa-exchange-alt></i>.
@@ -110,6 +111,7 @@ hide: tags
 
 _![Настройка подключения для получения HTTP-запросов с помощью сценариев](img/receive_http_example_csharp_connection_create.png)_
 
+[](){: #communication_route_configure }
 ## Настройка пути передачи данных {: #http_receive_example_csharp_route .pageBreakBefore }
 
 1. Откройте страницу «**Администрирование**» — «**Архитектура**» или страницу «**Администрирование**» приложения.
@@ -186,6 +188,7 @@ _![Настройка основных свойств пути для получ
 
     _![Настройка интеграции](img/receive_http_example_csharp_route_integration.png)_
 
+[](){: #scenario_configure }
 ## Настройка сценария {: #http_receive_example_csharp_scenario .pageBreakBefore }
 
 !!! warning "Логика работы сценария"
@@ -308,6 +311,7 @@ _![Настройка основных свойств пути для получ
 
 5. Проверьте работу приложения.
 
+[](){: #testing }
 ## Тестирование {: #http_receive_example_csharp_testing .pageBreakBefore }
 
 Сценарий должен получать HTTP-запрос с данными заказов, обрабатывать их с помощью C#-скрипта, создавать позиции и заказ, а также формировать ответ с массивом позиций и их статусами.
