@@ -77,7 +77,7 @@ def importCategoryChildren(parent, categoryDirectory, show='yes', status='public
 def importArtciclesInCategory (categoryId, categoryDir):
     c = CONNECTION.cursor()
     c.execute(f"""
-            SELECT DISTINCT (phpkb_articles.article_id), phpkb_articles.article_content, phpkb_articles.article_title 
+            SELECT DISTINCT (phpkb_articles.article_id), phpkb_articles.article_content, phpkb_articles.article_title, phpkb_articles.article_last_updation
             FROM phpkb_articles, phpkb_relations, phpkb_categories 
             WHERE article_show='yes' 
             AND article_status='approved'
@@ -89,7 +89,7 @@ def importArtciclesInCategory (categoryId, categoryDir):
     print(f"Found {len(articles)} articles in category {categoryId}")
     global TOTAL_PAGES_IMPORTED
     pages = 0
-    for id, content, title in articles:
+    for id, content, title, last_updation in articles:
         print(f"Processing article {id}: {title}")
         sanitizedTitle = sanitize_filename(str(title))
         print(f"Looking up existing filename for article {id}...")
@@ -233,14 +233,16 @@ def importArtciclesInCategory (categoryId, categoryDir):
             
             print(f"  Adding frontmatter for article {id}...")
             # Compile and add frontmatter
-            frontmatter = '\n'.join([
+            frontmatter_lines = [
                 '---',
-                f'title: \'{title}\'',
+                f"title: '{title}'",
                 f'kbId: {id}',
-                f'url: \'https://kb.comindware.ru/article.php?id={id}\'',
-                '---',
-                '\n'
-                ])
+                f"url: 'https://kb.comindware.ru/article.php?id={id}'",
+            ]
+            if last_updation:
+                frontmatter_lines.append(f"updated: '{last_updation}'")
+            frontmatter_lines += ['---', '\n']
+            frontmatter = '\n'.join(frontmatter_lines)
             # Add link map to the bottom
             footer = '{% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}\n'
             markdown = frontmatter + markdown.rstrip() + '\n\n' + footer

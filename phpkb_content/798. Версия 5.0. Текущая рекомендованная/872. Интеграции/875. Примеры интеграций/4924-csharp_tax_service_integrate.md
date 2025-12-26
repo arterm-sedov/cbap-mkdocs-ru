@@ -2,6 +2,7 @@
 title: 'Получение данных от API ФНС с помощью C#'
 kbId: 4924
 url: 'https://kb.comindware.ru/article.php?id=4924'
+updated: '2025-04-29 19:13:34'
 ---
 
 # Получение данных от API ФНС с помощью C#

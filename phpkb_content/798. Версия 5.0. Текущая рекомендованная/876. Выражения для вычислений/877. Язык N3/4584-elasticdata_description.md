@@ -2,6 +2,7 @@
 title: 'Технология Comindware ElasticData'
 kbId: 4584
 url: 'https://kb.comindware.ru/article.php?id=4584'
+updated: '2025-04-01 10:35:41'
 ---
 
 # Технология Comindware ElasticData

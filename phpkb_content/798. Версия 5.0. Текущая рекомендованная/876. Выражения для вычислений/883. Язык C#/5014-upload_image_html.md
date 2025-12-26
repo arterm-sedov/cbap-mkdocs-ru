@@ -2,6 +2,7 @@
 title: 'Загрузка картинки из атрибута типа документ в HTML поле'
 kbId: 5014
 url: 'https://kb.comindware.ru/article.php?id=5014'
+updated: '2022-02-18 06:27:36'
 ---
 
 # Загрузка картинки из атрибута типа документ в HTML поле
@@ -9,7 +10,7 @@ url: 'https://kb.comindware.ru/article.php?id=5014'
 Для того, чтобы выгрузить картинку в HTML поле, введите следующее выражение:
 
 ```
- 
+ 
 
 using System;
 using System.Collections.Generic;

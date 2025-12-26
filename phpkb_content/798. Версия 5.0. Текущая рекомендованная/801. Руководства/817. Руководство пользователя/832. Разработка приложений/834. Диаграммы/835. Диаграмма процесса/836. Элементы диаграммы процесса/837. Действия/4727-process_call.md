@@ -2,6 +2,7 @@
 title: 'Вызов процесса'
 kbId: 4727
 url: 'https://kb.comindware.ru/article.php?id=4727'
+updated: '2025-04-10 16:35:32'
 ---
 
 # Вызов процесса
@@ -130,6 +131,6 @@ _![Настройка передачи данных в текущий проце
 - *[Встроенный подпроцесс][process_diagram_elements_embedded_subprocess]*
 - *[Общие свойства элементов диаграммы процесса][process_diagram_element_common_properties]*
 - *[Элементы диаграммы процесса][process_diagram_elements]*
-- *[Редактирование диаграммы процесса][process_diagram]*
+- *[Редактирование диаграммы процесса][process_diagram_designer]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

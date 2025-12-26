@@ -1,0 +1,26 @@
+---
+title: 'Вычисление всех пользователей группы'
+kbId: 4936
+url: 'https://kb.comindware.ru/article.php?id=4936'
+updated: '2023-12-21 14:18:20'
+---
+
+# Вычисление всех пользователей группы
+
+Для вычисления пользователей, входящих в определённую группу без учета подгрупп и их участников (в случае, если в группе нет вложенности), введите следующее выражение:
+
+```
+@prefix account: <http://comindware.com/ontology/account#>.
+{
+    ?projectOffice account:groupName "Менеджеры".
+    ?users account:userGroupMembership ?projectOffice.
+    ?users account:fullName ?.
+    ?users -> ?value.
+}
+```
+
+**где:**
+
+**"Менеджеры"** — название группы, пользователей которой требуется получить.
+
+Альтернатива статье `![](https://kb.comindware.ru/images/marker.png){Article-ID:1082}`.

@@ -210,3 +210,13 @@ hide: tags
     ?user -> ?value.
 }
 ```
+
+<div class="relatedTopics" markdown="block">
+
+--8<-- "related_topics_heading.md"
+
+- [Записи и коллекции. Выборка записей из иерархических коллекций с помощью N3][example_n3_collection_join_filter_hierarchy]
+
+</div>
+
+{% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

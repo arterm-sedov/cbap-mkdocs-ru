@@ -3,7 +3,7 @@
 <table class="source_code_container">
 <tbody>
 <tr>
-<td class="source_code"> 
+<td class="source_code"> 
 <p>using System;<br/>using System.IO;<br/>using System.Collections.Generic;<br/>using System.Linq;<br/>using Comindware.Data.Entity;<br/>using Comindware.TeamNetwork.Api.Data.UserCommands;</p>
 <p>public class Script<br/>{<br/>    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)<br/>    {<br/>        var currentObjectid = userCommandContext.ObjectIds;<br/>        foreach(var id in currentObjectid)<br/>        {<br/>            var request = Api.TeamNetwork.ObjectService.Get(id);<br/>            object descriptionObject;<br/>            request.TryGetValue("op.93", out descriptionObject);<br/>            object name;<br/>            request.TryGetValue("op.92", out name);<br/>            var propertyDictionary = new Dictionary&lt;string, object&gt;();<br/>            propertyDictionary.Add("Description", descriptionObject);<br/>            propertyDictionary.Add("title", name);<br/>            Api.TeamNetwork.ObjectService.CreateWithAlias("Issue", propertyDictionary);<br/>        }<br/>                var result = new UserCommandResult<br/>        {<br/>            Success = true,<br/>            Commited = true,<br/>            ResultType = UserCommandResultType.DataChange,<br/>            Messages = new[]<br/>            {<br/>                new UserCommandMessage<br/>                {<br/>                    Severity = SeverityLevel.Normal,<br/>                    Text = "Успешно"<br/>                }<br/>            }<br/>        };<br/>        return result;<br/>    }<br/>}</p>
 </td>

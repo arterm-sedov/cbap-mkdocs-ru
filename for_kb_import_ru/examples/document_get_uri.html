@@ -1,0 +1,175 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5151" kb-tags="N3,HTML,атрибут,выражения,вычисления,документ,загрузка,пример,ссылки,скачивание,файлы,формулы" kb-title="Атрибут типа «Документ». Формирование ссылки на файл">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_document_get_uri_intro">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_document_get_uri_task">
+<span class="md-ellipsis">
+      Прикладная задача
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_document_get_uri_source_data">
+<span class="md-ellipsis">
+      Исходные данные
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_document_get_uri_template_setup">
+<span class="md-ellipsis">
+      Настройка шаблона
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_document_get_uri_testing">
+<span class="md-ellipsis">
+      Тестирование
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="example_document_get_uri_intro">Введение</h2>
+<p><strong>Comindware Platform</strong> позволяет прикрепить любые файлы к атрибуту типа «<strong>Документ</strong>».</p>
+<p>Атрибут типа «<strong>Документ</strong>» хранит не сами файлы, а ссылки на них.</p>
+<p>Эти файлы доступны для скачивания по прямой ссылке без предоставления доступа к атрибуту типа «<strong>Документ</strong>».</p>
+<p>Здесь представлен пример настройки текстового атрибута в <strong>формате HTML</strong>, в который помещаются ссылки на файлы, загруженные в атрибут типа «<strong>Документ</strong>», с помощью выражения N3.</p>
+<div class="notice notice-success">
+<p class="admonition-title">Структура атрибута типа «Документ»</p>
+<ul>
+<li>Атрибут типа «<strong>Документ</strong>» хранит одну или несколько ссылок на записи (<strong>документы</strong>) в системном шаблоне документа, к которым прикрепляются файлы (например, загруженные пользователями).</li>
+<li>В шаблоне документа имеется атрибут <code>currentRevision</code> (текущая <strong>версия</strong>), который хранит ссылку на запись в системном шаблоне версии.</li>
+<li>
+<p>В шаблоне версии имеются атрибуты <code>title</code> (имя) и <code>content</code> (содержимое), которые хранят имя файла и ссылку на файл, физически хранящийся в папке <code>Streams</code> на сервере.
+Чтобы считать файл из атрибута типа «<strong>Документ</strong>» с помощью выражения N3, необходимо:</p>
+</li>
+<li>
+<p>получить объект с атрибутом:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">(</span><span class="s">"TemplateSystemName"</span> <span class="s">"DocumentAttributeSystemName"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?DocumentAttribute</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>из объекта с атрибутом получить значение атрибута в текущей записи:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?item</span> <span class="err">documentAttribute</span> <span class="err">?documentAttributeValue</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>из значения атрибута получить текущую версию документа:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?documentAttributeValue</span> <span class="nn">document</span><span class="p">:</span><span class="nt">revision</span> <span class="err">?revision</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>из версии получить содержимое файла в формате <code>base64</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?revision</span> <span class="nn">document</span><span class="p">:</span><span class="nt">content</span> <span class="err">?content</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>из версии получить имя файла:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?revision</span> <span class="nn">document</span><span class="p">:</span><span class="nt">title</span> <span class="err">?title</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>С помощью языка формул из атрибута типа «<strong>Документ</strong>»  можно получить следующие данные:</p>
+<ul>
+<li>текущую ревизию документа: <code>$AttributeDocument-&gt;currentRevision</code>;</li>
+<li>имя файла из ревизии: <code>$AttributeDocument-&gt;currentRevision-&gt;revisionFilename</code>;</li>
+<li>относительную ссылку из ревизии: <code>$AttributeDocument-&gt;currentRevision-&gt;httpUri</code>.</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="example_document_get_uri_task">Прикладная задача</h2>
+<p>Имеется шаблон с атрибутом типа «<strong>Документ</strong>», к которому прикрепляются различные файлы.</p>
+<p>Требуется настроить поле, в котором будут перечислены имена прикреплённых файлов со ссылками для их скачивания.</p>
+<h2 id="example_document_get_uri_source_data">Исходные данные</h2>
+<p>В шаблоне <em>«Заявки»</em> (системное имя <code>Заявки</code>) имеется атрибут <em>«Вложения»</em> со следующими свойствами:</p>
+<ul>
+<li><strong>Тип: документ</strong></li>
+<li><strong>Системное имя:</strong> <em>Вложения</em></li>
+<li><strong>Хранить несколько значений: флажок установлен</strong></li>
+</ul>
+<h2 id="example_document_get_uri_template_setup">Настройка шаблона</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте текстовый атрибут со следующими свойствами:</p>
+<ul>
+<li><strong>Название:</strong> <em>Ссылки для скачивания</em></li>
+<li>
+<p><strong>Формат отображения: HTML-текст</strong></p>
+<div class="notice notice-warning">
+<p class="admonition-title">Важно!</p>
+<p>Если задать для атрибута другой формат отображения, HTML-теги будут отображаться как обычный текст.</p>
+</div>
+</li>
+<li>
+<p><strong>Вычислять автоматически: флажок установлен</strong></p>
+</li>
+<li>
+<p><strong>Вычисляемое значение:</strong></p>
+<ul>
+<li><strong>Формула:</strong></li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="err">#</span><span class="w"> </span><span class="n">Из</span><span class="w"> </span><span class="n">атрибута</span><span class="w"> </span><span class="err">«</span><span class="n">Вложения</span><span class="err">»</span><span class="w"> </span><span class="p">(</span><span class="n">Вложения</span><span class="p">)</span><span class="w"> </span><span class="n">собираем</span><span class="w"> </span><span class="n">URI</span><span class="w"> </span><span class="n">и</span><span class="w"> </span><span class="n">имена</span><span class="w"> </span><span class="n">всех</span><span class="w"> </span><span class="n">прикреплённых</span><span class="w"> </span><span class="n">файлов</span></code> <br/><code><span class="err">#</span><span class="w"> </span><span class="n">и</span><span class="w"> </span><span class="n">соединяем</span><span class="w"> </span><span class="n">в</span><span class="w"> </span><span class="n">HTML</span><span class="w"> </span><span class="n">с</span><span class="w"> </span><span class="n">разделителем</span><span class="w"> </span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span></code> <br/><code><span class="err">#</span><span class="w"> </span><span class="err">'</span><span class="n">https</span><span class="p">:</span><span class="c1">//host-name' — имя хоста Comindware Platform</span></code> <br/><code><span class="n">FORMAT</span><span class="p">(</span></code> <br/><code><span class="w">    </span><span class="s">"&lt;ul&gt;{0}&lt;/u&gt;"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="n">LIST</span><span class="p">(</span></code> <br/><code><span class="w">        </span><span class="n">JOIN</span><span class="p">(</span><span class="s">" "</span><span class="p">,</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="err">$</span><span class="n">Вложения</span><span class="w"> </span><span class="k">select</span></code> <br/><code><span class="w">            </span><span class="n">FORMAT</span><span class="p">(</span><span class="s">"&lt;a href='https://host-name{0}'&gt;{1}&lt;/a&gt;"</span><span class="p">,</span><span class="w"> </span></code> <br/><code><span class="w">            </span><span class="n">LIST</span><span class="p">(</span><span class="n">a</span><span class="o">-&gt;</span><span class="n">currentRevision</span><span class="o">-&gt;</span><span class="n">httpUri</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">currentRevision</span><span class="o">-&gt;</span><span class="n">revisionFilename</span><span class="p">)</span></code> <br/><code><span class="w">            </span><span class="p">)</span></code> <br/><code><span class="w">        </span><span class="p">)</span></code> <br/><code><span class="w">    </span><span class="p">)</span></code> <br/><code><span class="p">)</span></code> <br/></pre></code></div>
+<p><strong>или</strong></p>
+<ul>
+<li><strong>N3</strong></li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы</span></code> <br/><code><span class="c"># с документами и строками</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">document:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/document#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwstring:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/string#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">string:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/2000/10/swap/string#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Находим атрибут «Вложения» и помещаем в ?filesAttribute</span></code> <br/><code>    <span class="p">(</span><span class="s">"Заявки"</span> <span class="s">"Вложения"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?filesAttribute</span><span class="p">.</span></code> <br/><code>    <span class="c"># Запускаем цикл</span></code> <br/><code>    <span class="err">from</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Находим содержимое ?filesAttribute в текущей</span></code> <br/><code>        <span class="c"># записи и помещаем в ?file</span></code> <br/><code>        <span class="err">?item</span> <span class="err">?filesAttribute</span> <span class="err">?file</span><span class="p">.</span></code> <br/><code>        <span class="c"># Получаем текущую ревизию документа и</span></code> <br/><code>        <span class="c"># помещаем в ?fileRevision</span></code> <br/><code>        <span class="err">?file</span> <span class="nn">document</span><span class="p">:</span><span class="nt">currentRevision</span> <span class="err">?fileRevision</span><span class="p">.</span></code> <br/><code>        <span class="c"># Получаем ссылку на файл без имени хоста</span></code> <br/><code>        <span class="c"># и помещаем в ?fileUri</span></code> <br/><code>        <span class="err">?fileRevision</span> <span class="nn">document</span><span class="p">:</span><span class="nt">httpUri</span> <span class="err">?fileUri</span><span class="p">.</span></code> <br/><code>        <span class="c"># Помещаем имя файла в ?fileName</span></code> <br/><code>        <span class="err">?fileRevision</span> <span class="nn">document</span><span class="p">:</span><span class="nt">name</span> <span class="err">?fileName</span><span class="p">.</span></code> <br/><code>        <span class="c"># Формируем строки с именами файлов и ссылками на них</span></code> <br/><code>        <span class="c"># и помещаем в ?formatUri</span></code> <br/><code>        <span class="c"># 'https://host-name' — имя хоста Comindware Platform</span></code> <br/><code>        <span class="p">(</span><span class="s">"&lt;li&gt;&lt;a href='https://host-name{0}'&gt;{1}&lt;/a&gt;&lt;/li&gt;"</span> <span class="err">?fileUri</span> <span class="err">?fileName</span><span class="p">)</span> <span class="nn">string</span><span class="p">:</span><span class="nt">format</span> <span class="err">?formatUri</span><span class="p">.</span></code> <br/><code>        <span class="p">}</span></code> <br/><code>    <span class="c"># Формируем ?uriList из ?formatUri.</span></code> <br/><code>    <span class="err">select</span> <span class="err">?formatUri</span> <span class="err">-&gt;</span> <span class="err">?uriList</span><span class="p">.</span></code> <br/><code>    <span class="c"># Формируем из ?uriList маркированный список </span></code> <br/><code>    <span class="c"># и возвращаем его в значение атрибута</span></code> <br/><code>    <span class="p">(</span><span class="s">" "</span> <span class="err">?uriList</span><span class="p">)</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">join</span> <span class="err">?listItems</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"&lt;ul&gt;{0}&lt;/u&gt;"</span> <span class="err">?listItems</span><span class="p">)</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">format</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+</ul>
+</li>
+<li>
+<p>Поместите на форму атрибут <em>«Ссылки для скачивания»</em>.</p>
+</li>
+</ol>
+<h2 id="example_document_get_uri_testing">Тестирование</h2>
+<ol class="colored_numbers_list">
+<li>Создайте запись в шаблоне <em>«Заявки»</em>.</li>
+<li>Прикрепите несколько файлов к атрибуту <em>«Вложения»</em>.</li>
+<li>Сохраните запись.</li>
+<li>В поле атрибута <em>«Ссылки для скачивания»</em> должен отобразиться маркированный список со ссылками для скачивания прикреплённых файлов.</li>
+<li>Проверьте, скачиваются ли файлы.</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4782">Атрибут типа «Документ»</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4921">Атрибут типа «Документ». Скачивание архива с файлами из выбранных строк таблицы и записи</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5081">Атрибут типа «Документ». Скачивание архива с файлами из всех строк таблицы с прикреплением архива к атрибуту</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5002">Атрибут типа «Документ». Скачивание файлов в папку на сервере</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4883">Атрибут типа «Документ». Клонирование записи вместе с прикреплёнными файлами</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

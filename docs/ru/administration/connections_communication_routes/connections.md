@@ -1,6 +1,7 @@
 ---
 title: 'Подключения'
 kbTitle: 'Подключения. Определения, типы, создание, настройка, удаление'
+kbId: 4675
 tags:
   - интеграция
   - интеграции
@@ -14,7 +15,6 @@ tags:
   - адаптеры
 hide:
   - tags
-kbId: 4675
 ---
 
 # Подключения. Определения, типы, создание, настройка, удаление {: #connections}
@@ -34,12 +34,19 @@ kbId: 4675
 
 </div>
 
+<div class="admonition warning" markdown="block">
+
+## Ответственность за использование сервисов третьих сторон {: .admonition-title #third_party_services_disclaimer_responsibility }
+
+{% include-markdown ".snippets/disclaimer_third_party_services.md" %}
+
+</div>
+
 ## Типы подключений
 
 ### Системные подключения
 
 - [Управление версиями через {{ gitVariants }}][git_connection]
-- [{{ openSearchVariants }}][elasticsearch_connection]
 - Абстрактное подключение
 - [Карты][map_configure]
 - [Хранилище S3][s3_connection]

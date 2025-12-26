@@ -1,0 +1,82 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4959" kb-tags="HTML,N3,Notation3,тройка,тройки,триплеты,процесс,история" kb-title="Вычисление гиперссылки на историю процесса">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_process_hyperlink_calculate_intro">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_process_hyperlink_calculate_use_case">
+<span class="md-ellipsis">
+      Прикладная задача
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_process_hyperlink_calculate_solution">
+<span class="md-ellipsis">
+      Пример решения
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="example_n3_process_hyperlink_calculate_intro">Введение</h2>
+<p>Зачастую требуется дать пользователю быстрый доступ к истории выполнения процесса, например из письма‑уведомления.</p>
+<p>В этом примере показано, как с помощью выражения на N3 сформировать HTML‑ссылку на страницу истории процесса, связанного с текущей <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4730">пользовательской задачей</a></strong>.</p>
+<h2 id="example_n3_process_hyperlink_calculate_use_case">Прикладная задача</h2>
+<p>Требуется:</p>
+<ul>
+<li>записать в текстовый атрибут HTML‑ссылку на историю текущего процесса;</li>
+<li>использовать эту ссылку, например, в тексте письма или в других HTML‑элементах;</li>
+<li>формировать ссылку автоматически, без ручного ввода идентификаторов процесса и адреса <strong>Comindware Platform</strong>.</li>
+</ul>
+<h2 id="example_n3_process_hyperlink_calculate_solution">Пример решения</h2>
+<ol class="colored_numbers_list">
+<li>В шаблоне записи, связанном с процессом, создайте атрибут типа «<strong>Текст</strong>» с форматом отображения <strong>HTML‑текст</strong>.</li>
+<li>Установите в свойствах атрибута флажок «<strong>Вычислять автоматически</strong>» и введите следующее выражение на <strong>N3</strong> в качестве <strong>вычисляемого значения</strong>:</li>
+</ol>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmw:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">process:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/process#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">string:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/2000/10/swap/string#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">configuration:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/configuration#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwlist:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/list#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwstring:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/string#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">task:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/task#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="err">once</span> </code> <br/><code>    <span class="p">{</span></code> <br/><code>        <span class="c"># Получаем задачу, связанную с текущей записью, </span></code> <br/><code>        <span class="c"># и связанный с задачей экземпляр процесса.</span></code> <br/><code>        <span class="err">?task</span> <span class="nn">task</span><span class="p">:</span><span class="nt">objectId</span> <span class="err">?item</span><span class="p">.</span></code> <br/><code>        <span class="err">?task</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">parent</span> <span class="err">?process</span><span class="p">.</span></code> <br/><code>        <span class="c"># Преобразуем в строку идентификатор экземпляра процесса.</span></code> <br/><code>        <span class="p">(</span><span class="s">"{0}"</span> <span class="err">?process</span><span class="p">)</span> <span class="nn">string</span><span class="p">:</span><span class="nt">format</span> <span class="err">?s</span><span class="p">.</span></code> <br/><code>        <span class="p">(</span><span class="s">"."</span> <span class="err">?s</span><span class="p">)</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">split</span> <span class="err">?resultList</span><span class="p">.</span></code> <br/><code>        <span class="p">(</span><span class="err">?resultList</span> <span class="mi">1</span><span class="p">)</span> <span class="nn">cmwlist</span><span class="p">:</span><span class="nt">at</span> <span class="err">?processInstanceId</span><span class="p">.</span></code> <br/><code>        <span class="c"># Формируем ссылкe на экземпляр процесса из двух частей:</span></code> <br/><code>        <span class="c"># ?hrefPart1 и ?hrefPart2</span></code> <br/><code>        <span class="c"># Вместо «Ссылка на процесс» введите наглядную подпись ссылки.</span></code> <br/><code>        <span class="p">(</span><span class="s">"#process/{0}/map'&gt;Ссылка на процесс&lt;/a&gt;"</span> <span class="err">?processInstanceId</span><span class="p">)</span> <span class="nn">string</span><span class="p">:</span><span class="nt">format</span> <span class="err">?hrefPart</span><span class="mi">2</span><span class="p">.</span></code> <br/><code>        <span class="c"># Получаем базовый URL Comindware Platform из конфигурации.</span></code> <br/><code>        <span class="err">?configObject</span> <span class="kt">a</span> <span class="nn">configuration</span><span class="p">:</span><span class="nt">Configuration</span><span class="p">.</span></code> <br/><code>        <span class="err">?configObject</span> <span class="nn">configuration</span><span class="p">:</span><span class="nt">baseUri</span> <span class="err">?baseUrl</span><span class="p">.</span></code> <br/><code>        <span class="p">(</span><span class="s">"&lt;a href='{0}"</span> <span class="err">?baseUrl</span><span class="p">)</span> <span class="nn">string</span><span class="p">:</span><span class="nt">format</span> <span class="err">?hrefPart</span><span class="mi">1</span><span class="p">.</span></code> <br/><code>        <span class="c"># Формируем итоговую HTML‑ссылку из двух частей.</span></code> <br/><code>        <span class="p">(</span><span class="err">?hrefPart</span><span class="mi">1</span> <span class="err">?hrefPart</span><span class="mi">2</span><span class="p">)</span> <span class="nn">string</span><span class="p">:</span><span class="nt">concatenation</span> <span class="err">?resultLink</span><span class="p">.</span></code> <br/><code>        <span class="c"># Возвращаем результирующую ссылку.</span></code> <br/><code>        <span class="err">?resultLink</span> <span class="err">==</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<ol class="colored_numbers_list" start="2">
+<li>Используйте значение этого атрибута, например, в тексте письма при отправке уведомлений.</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4730">Пользовательская задача</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4758">Шаблон процесса</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4852">Справочник по N3</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

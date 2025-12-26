@@ -2,6 +2,7 @@
 title: 'Аутентификация через Active Directory. Настройка контроллера домена и экземпляра ПО'
 kbId: 4605
 url: 'https://kb.comindware.ru/article.php?id=4605'
+updated: '2024-10-31 18:19:28'
 ---
 
 # Аутентификация через Active Directory. Настройка контроллера домена и экземпляра ПО

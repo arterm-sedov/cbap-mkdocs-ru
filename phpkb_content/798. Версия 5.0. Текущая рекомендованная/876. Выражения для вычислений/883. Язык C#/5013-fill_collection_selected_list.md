@@ -2,6 +2,7 @@
 title: 'Заполнение коллекции выбранным списком'
 kbId: 5013
 url: 'https://kb.comindware.ru/article.php?id=5013'
+updated: '2022-02-18 06:27:47'
 ---
 
 # Заполнение коллекции выбранным списком
@@ -9,7 +10,7 @@ url: 'https://kb.comindware.ru/article.php?id=5013'
 Для того, чтобы в рамках процесса заполнить коллекцию в текущем объекте каким-либо списком, введите следующее выражение:
 
 ```
- 
+ 
 
 using System;
 using System.Collections.Generic;

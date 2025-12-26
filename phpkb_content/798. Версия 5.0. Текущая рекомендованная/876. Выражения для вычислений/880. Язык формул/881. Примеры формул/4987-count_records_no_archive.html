@@ -1,19 +1,112 @@
-<h1>Подсчет количества записей без учета архивированных</h1><p>Для того, чтобы подсчитать количество записей с определённым статусом (например, согласованных заявок, оплаченных счетов),  введите следующее выражение:</p>
-<div>
-<table class="source_code_container">
-<tbody>
-<tr>
-<td class="source_code">COUNT(
-<p>(from a in db-&gt;requests</p>
-<p>where AND(EQUALS(a-&gt;status, “Согласована”), EQUALS(a-&gt; _isDisabled,false))</p>
-<p>select a-&gt;id)</p>
-      )</td>
-</tr>
-</tbody>
-</table>
+<h1>Подсчет количества записей без учета архивированных</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4987" kb-tags="COUNT,архивные записи,язык формул,пример,подсчет записей,формулы" kb-title="Подсчет количества записей без учета архивированных">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_formula_count_records_no_archive_introduction">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_formula_count_records_no_archive_use_case">
+<span class="md-ellipsis">
+      Прикладная задача
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_formula_count_records_no_archive_configuration">
+<span class="md-ellipsis">
+      Настройка подсчета записей
+    </span>
+</a>
+<nav aria-label="Настройка подсчета записей" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_formula_count_records_formula_syntax">
+<span class="md-ellipsis">
+      Синтаксис формулы
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_formula_count_records_no_archive_testing">
+<span class="md-ellipsis">
+      Тестирование
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
 </div>
-<p><span style="text-decoration: underline;"><strong>где:</strong></span></p>
-<p><strong>requests</strong> – шаблон записи с нужными записями (заявками, счетами и т.д.);</p>
-<p><strong>status</strong> –  атрибут типа текст (может быть любой другой атрибут), хранящий признак для выделения записей;</p>
-<p><strong>“Согласована”</strong> – признак для выделения записей (в данном случае, статус - Согласована);</p>
-<p><strong>_isDisabled</strong> – системный атрибут «В архиве».</p>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="example_formula_count_records_no_archive_introduction">Введение</h2>
+<p>В <strong>Comindware Platform</strong> при подсчете записей с определенным статусом или условием важно исключать архивные записи из расчета.</p>
+<p>Здесь представлен пример использования формулы для подсчета количества записей с определенным статусом, исключая архивные записи.</p>
+<h2 id="example_formula_count_records_no_archive_use_case">Прикладная задача</h2>
+<p>Требуется подсчитать количество записей с определенным статусом (например, согласованных заявок, оплаченных счетов), исключая из расчета архивные записи.</p>
+<h2 id="example_formula_count_records_no_archive_configuration">Настройка подсчета записей</h2>
+<p>Для подсчета количества записей с определенным статусом без учета архивированных используйте следующую формулу:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">COUNT</span><span class="p">(</span></code> <br/><code><span class="w">    </span><span class="p">(</span><span class="k">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">db</span><span class="o">-&gt;</span><span class="err">Запросы</span></code> <br/><code><span class="w">    </span><span class="k">where</span><span class="w"> </span><span class="k">AND</span><span class="p">(</span><span class="k">EQUALS</span><span class="p">(</span><span class="n">a</span><span class="o">-&gt;</span><span class="err">Статус</span><span class="p">,</span><span class="w"> </span><span class="ss">"Согласована"</span><span class="p">),</span><span class="w"> </span><span class="k">EQUALS</span><span class="p">(</span><span class="n">a</span><span class="o">-&gt;</span><span class="w"> </span><span class="n">_isDisabled</span><span class="p">,</span><span class="w"> </span><span class="k">false</span><span class="p">))</span></code> <br/><code><span class="w">    </span><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">)</span></code> <br/><code><span class="p">)</span></code> <br/></pre></code></div>
+<h3 id="example_formula_count_records_formula_syntax">Синтаксис формулы</h3>
+<ul>
+<li><code>COUNT()</code> — функция подсчета количества записей в результате запроса.</li>
+<li><code>from a in db-&gt;Запросы</code> — выборка из шаблона записей с системным именем <code>Запросы</code>.</li>
+<li><code>where AND(...)</code> — условие фильтрации записей.</li>
+<li><code>EQUALS(a-&gt;Статус, "Согласована")</code> — проверка статуса записи.</li>
+<li><code>EQUALS(a-&gt; _isDisabled, false)</code> — исключение архивных записей.</li>
+<li><code>select a-&gt;id</code> — выбор идентификаторов записей.</li>
+<li><strong>Аргументы</strong>:<ul>
+<li><code>Запросы</code> — системное имя шаблона записи с нужными записями (заявками, счетами и т.д.).</li>
+<li><code>Статус</code> — атрибут типа «<strong>Текст</strong>» (может быть любой другой атрибут), хранящий признак для выделения записей.</li>
+<li><code>Согласована</code> — признак для выделения записей (статус — <em>Согласована</em>).</li>
+<li><code>_isDisabled</code> — системный атрибут «<strong>В архиве</strong>».</li>
+</ul>
+</li>
+</ul>
+<h2 id="example_formula_count_records_no_archive_testing">Тестирование</h2>
+<ol class="colored_numbers_list">
+<li>Создайте несколько записей в шаблоне с разными статусами</li>
+<li>Архивируйте часть записей</li>
+<li>Используйте формулу для подсчета записей с определенным статусом</li>
+<li>Убедитесь, что архивные записи не учитываются в подсчете</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/category.php?id=880">Язык формул</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4993">Список функций языка формул Comindware</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4772">Атрибуты. Определения и настройка</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

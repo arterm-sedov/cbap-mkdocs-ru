@@ -2,6 +2,7 @@
 title: 'Структура описания онтологий'
 kbId: 4859
 url: 'https://kb.comindware.ru/article.php?id=4859'
+updated: '2024-11-28 15:27:42'
 ---
 
 # Структура описания онтологий

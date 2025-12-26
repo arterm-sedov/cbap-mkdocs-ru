@@ -15,11 +15,11 @@ $curDir = Get-Location
 echo "Changed directory to: $curDir"
 
 if ([System.Environment]::OSVersion.Platform -eq 'Unix') {
- echo "`nCreating venv: python3 -m venv venv --upgrade-deps"
- & python3 -m venv venv --upgrade-deps
+ echo "`nCreating venv: python3 -m venv .venv --upgrade-deps"
+ & python3 -m venv .venv --upgrade-deps
 
- echo "`nActivating venv: ./venv/bin/Activate.ps1"
- ./venv/bin/Activate.ps1
+ echo "`nActivating venv: ./.venv/bin/Activate.ps1"
+ ./.venv/bin/Activate.ps1
  
  echo "`nUpdating pip: python3 -m pip install --upgrade pip"
  & python3 -m pip install --upgrade pip
@@ -33,11 +33,11 @@ if ([System.Environment]::OSVersion.Platform -eq 'Unix') {
  & python3 -m mkdocs -V
 }
 else{
- echo "`nCreating venv: py -m venv venv --upgrade-deps"
- & py -m venv venv --upgrade-deps
+ echo "`nCreating venv: py -m venv .venv --upgrade-deps"
+ & py -m venv .venv --upgrade-deps
 
- echo "`nActivating venv: ./venv/Scripts/Activate.ps1"
- ./venv/Scripts/Activate.ps1
+ echo "`nActivating venv: ./.venv/Scripts/Activate.ps1"
+ ./.venv/Scripts/Activate.ps1
  
  echo "`nUpdating pip: py -m pip install --upgrade pip"
  & py -m pip install --upgrade pip

@@ -2,6 +2,7 @@
 title: 'NGINX. Установка и настройка'
 kbId: 4611
 url: 'https://kb.comindware.ru/article.php?id=4611'
+updated: '2025-04-04 18:14:16'
 ---
 
 # NGINX. Установка и настройка
@@ -27,6 +28,7 @@ url: 'https://kb.comindware.ru/article.php?id=4611'
 ```
 sudo apt update
 sudo apt install NGINX
+
 ```
 
 Первая команда обновляет базу данных пакетов, доступных для установки. Вторая — устанавливает компоненты NGINX.
@@ -77,6 +79,7 @@ server {
     access_log /var/log/NGINX/domain-access.log;
   }
 }
+
 ```
 
 ### Настройка UFW
@@ -114,6 +117,7 @@ server {
 
 ```
 add_header X-Frame-Options "SAMEORIGIN";
+
 ```
 
 #### Strict-Transport-Security
@@ -122,6 +126,7 @@ add_header X-Frame-Options "SAMEORIGIN";
 
 ```
 add_header Strict-Transport-Security "max-age=31536000; includeSubdomains; preload";
+
 ```
 
 #### Политика CSP
@@ -130,6 +135,7 @@ add_header Strict-Transport-Security "max-age=31536000; includeSubdomains; prelo
 
 ```
 add_header Content-Security-Policy "default-src 'self' http: https: data: blob: 'unsafe-inline'" always;
+
 ```
 
 #### Заголовок X-XSS-Protection
@@ -138,6 +144,7 @@ add_header Content-Security-Policy "default-src 'self' http: https: data: blob: 
 
 ```
 add_header X-XSS-Protection "1; mode=block”;
+
 ```
 
 ### Настройка SSL и наборов шифров Cipher Suite
@@ -146,12 +153,14 @@ add_header X-XSS-Protection "1; mode=block”;
 
 ```
 ssl_protocols TLSv1.2 TLSv1.3;
+
 ```
 
 Укажите конкретные наборы шифров (криптографических алгоритмов), чтобы предотвратить использование уязвимых наборов не поддерживаются. Либо для автоматического выбора шифра на стороне сервера добавьте следующую директиву в раздел `server`:
 
 ```
 ssl_prefer_server_ciphers on;
+
 ```
 
 ### Регулярное обновление сервера
@@ -164,6 +173,7 @@ ssl_prefer_server_ciphers on;
 
 ```
 $ systemctl status NGINX
+
 ```
 
 _![Статус веб-сервера NGINX](https://kb.comindware.ru/assets/Picture_10.png)_

@@ -52,7 +52,6 @@ hide: tags
 
 - [Резервное копирование. Настройка и запуск, просмотр журнала сеансов][backup_configure]
 - [Глобальная конфигурация][global_configuration]
-- [{{ openSearchVariantsUnquotedNominative }}. Настройка подключения][elasticsearch_connection]
 - [Отправка почты из процесса. Настройка подключения][process_sending_connection]
 - [Конфигурация экземпляра, компонентов ПО и служб. Настройка][configuration_files_linux]
 - [Пути и содержимое директорий экземпляра ПО][paths]

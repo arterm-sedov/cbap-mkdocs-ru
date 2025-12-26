@@ -2,6 +2,7 @@
 title: 'Шаблон экспорта, Настройка с использованием C#'
 kbId: 4793
 url: 'https://kb.comindware.ru/article.php?id=4793'
+updated: '2024-08-01 18:16:47'
 ---
 
 # Шаблон экспорта, Настройка с использованием C#
@@ -33,7 +34,7 @@ _![Автоматически созданная кнопка](https://kb.comind
 Перейдите на вкладку «***Скрипт***» в свойствах этой кнопки и добавьте следующий код:
 
 ```
- 
+ 
 
 using System;
 using System.Collections.Generic;
@@ -227,7 +228,7 @@ _![Пример word шаблона экспорта](https://kb.comindware.ru/a
 C# скрипт:
 
 ```
- 
+ 
 
 using System;
 using System.Collections.Generic;

@@ -2,6 +2,7 @@
 title: 'Интерфейс. Использование'
 kbId: 5105
 url: 'https://kb.comindware.ru/article.php?id=5105'
+updated: '2025-07-10 18:17:02'
 ---
 
 # Интерфейс. Использование

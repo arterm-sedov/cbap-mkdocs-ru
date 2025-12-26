@@ -2,6 +2,7 @@
 title: 'Фильтр списка по дате, равной сегодняшней'
 kbId: 4942
 url: 'https://kb.comindware.ru/article.php?id=4942'
+updated: '2023-12-21 14:52:05'
 ---
 
 # Фильтр списка по дате, равной сегодняшней
@@ -9,7 +10,7 @@ url: 'https://kb.comindware.ru/article.php?id=4942'
 Для того, чтобы настроить фильтр отображения записей в списке, где какая-либо дата равна сегодняшней (например, для списка сегодняшних заявок) с учетом часового пояса (в данном примере - московского), введите следующее выражение:
 
 ```
- 
+ 
 
 @prefix object: <http://comindware.com/ontology/object#>.
 @prefix session: <http://comindware.com/ontology/session#>.

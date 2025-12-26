@@ -2,6 +2,7 @@
 title: 'Синхронизация с сервером каталогов (Active Directory)'
 kbId: 4655
 url: 'https://kb.comindware.ru/article.php?id=4655'
+updated: '2025-09-08 17:17:30'
 ---
 
 # Синхронизация с сервером каталогов (Active Directory)
@@ -49,7 +50,7 @@ url: 'https://kb.comindware.ru/article.php?id=4655'
 - **`uSNChanged`** (Версия объекта);
 - **`distinguishedName`** (Уникальное имя).
 
-См. также *«[Обязательные атрибуты и уникальность аккаунтов][accounts]»*.
+См. также *«[Обязательные атрибуты и уникальность аккаунтов][accounts_required_unique]»*.
 
 | {{ productName }} | Active Directory |
 | --- | --- |
@@ -98,7 +99,7 @@ url: 'https://kb.comindware.ru/article.php?id=4655'
 
 - [Подключения. Определения, типы, создание, настройка, удаление][connections]
 - [Аккаунты. Администрирование, назначение лицензий][accounts]
-- [Обязательные атрибуты и уникальность аккаунтов][accounts]
+- [Обязательные атрибуты и уникальность аккаунтов][accounts_required_unique]
 - [Аудит разрешений аккаунтов][account_permission_audit]
 - [Шаблон аккаунта][account_templates]
 - [Группы. Создание, настройка, выбор участников, синхронизация с AD, удаление][groups]

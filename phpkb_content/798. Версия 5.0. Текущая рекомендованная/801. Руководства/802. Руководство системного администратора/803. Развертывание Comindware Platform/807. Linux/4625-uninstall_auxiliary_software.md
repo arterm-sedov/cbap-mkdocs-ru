@@ -2,6 +2,7 @@
 title: 'Полное удаление вспомогательных компонентов ПО'
 kbId: 4625
 url: 'https://kb.comindware.ru/article.php?id=4625'
+updated: '2025-08-12 18:56:41'
 ---
 
 # Полное удаление вспомогательных компонентов ПО
@@ -35,12 +36,14 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
 
    ```
    sudo -i
+
    ```
 2. Остановите экземпляр ПО (`<instancename>` — имя экземпляра ) и удостоверьтесь, что он остановлен:
 
    ```
    systemctl stop comindware<instancename>
    systemctl status comindware<instancename>
+
    ```
 3. Если развёрнуто несколько экземпляров ПО, повторите шаг 2 для остальных экземпляров.
 
@@ -50,6 +53,7 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
 
    ```
    sudo -i
+
    ```
 
 ### Удаление JRE
@@ -58,16 +62,19 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
 
    ```
    rm -rf /usr/lib/jvm/bellsoft-java17-runtime-amd64/
+
    ```
 2. Удалите ссылку на исполняемые файлы:
 
    ```
    rm /usr/bin/java
+
    ```
 3. Удалите конфигурацию JRE:
 
    ```
    rm /var/www/.cmw_environment/java
+
    ```
 
 ### Удаление Kafka
@@ -80,21 +87,25 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
    rm /usr/lib/systemd/system/kafka.service
    systemctl daemon-reload
    systemctl reset-failed
+
    ```
 2. Удалите бинарные файлы Kafka:
 
    ```
    rm -rf /usr/share/kafka
+
    ```
 3. Удалите журналы Kafka:
 
    ```
    rm -rf /var/log/comindware/.kafka
+
    ```
 4. Удалите конфигурацию Kafka:
 
    ```
    rm /var/www/.cmw_environment/kafka
+
    ```
 
 ### Удаление Mono
@@ -103,11 +114,13 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
 
    ```
    apt-get remove --purge -y mono-devel mono-core
+
    ```
 2. Удалите конфигурацию Mono:
 
    ```
    rm /var/www/.cmw_environment/mono
+
    ```
 
 ### Удаление .NET
@@ -116,16 +129,19 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
 
    ```
    rm -rf /usr/share/dotnet/
+
    ```
 2. Удалите ссылку на исполняемые файлы .NET:
 
    ```
    rm /usr/bin/dotnet
+
    ```
 3. Удалите конфигурацию .NET:
 
    ```
    rm /var/www/.cmw_environment/dotnet
+
    ```
 
 ### Удаление NGINX
@@ -135,11 +151,13 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
 
    ```
    apt-get remove --purge -y nginx
+
    ```
 3. Удалите конфигурацию NGINX:
 
    ```
    rm /var/www/.cmw_environment/nginx
+
    ```
 
 ## Удаление компонентов ПО — Astra Linux
@@ -148,6 +166,7 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
 
    ```
    sudo -i
+
    ```
 
 ### Удаление JRE
@@ -156,11 +175,13 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
 
    ```
    apt-get remove --purge -y bellsoft-java17-runtime
+
    ```
 2. Удалите конфигурацию JRE:
 
    ```
    rm /var/www/.cmw_environment/java
+
    ```
 
 ### Удаление Kafka
@@ -173,21 +194,25 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
    rm /usr/lib/systemd/system/kafka.service
    systemctl daemon-reload
    systemctl reset-failed
+
    ```
 2. Удалите бинарные файлы Kafka:
 
    ```
    rm -rf /usr/share/kafka
+
    ```
 3. Удалите журналы Kafka:
 
    ```
    rm -rf /var/log/comindware/.kafka
+
    ```
 4. Удалите конфигурацию Kafka:
 
    ```
    rm /var/www/.cmw_environment/kafka
+
    ```
 
 ### Удаление Mono
@@ -200,6 +225,7 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
        /usr/lib/libMono* \\
        /usr/lib/mono/ \\
        /usr/lib/mono-source-libs
+
    ```
 2. Удалите ссылки на исполняемые файлы:
 
@@ -212,6 +238,7 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
        /usr/bin/mcs \\
        /usr/bin/dmcs \\
        /usr/bin/fastcgi-mono-server4
+
    ```
 3. Удалите справочные файлы (man-страницы):
 
@@ -219,11 +246,13 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
    rm -rf /usr/share/man/man1/xsp4.1.gz \\
        /usr/share/man/man1/mono.1.gz \\
        /usr/share/man/man1/fastcgi-mono-server4.1.gz
+
    ```
 4. Удалите конфигурацию Mono:
 
    ```
    rm /var/www/.cmw_environment/mono
+
    ```
 
 ### Удаление .NET
@@ -232,16 +261,19 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
 
    ```
    rm -rf /usr/share/dotnet/
+
    ```
 2. Удалите ссылку на исполняемые файлы .NET:
 
    ```
    rm /usr/bin/dotnet
+
    ```
 3. Удалите конфигурацию .NET:
 
    ```
    rm /var/www/.cmw_environment/dotnet
+
    ```
 
 ### Удаление NGINX
@@ -251,11 +283,13 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
 
    ```
    apt-get remove --purge -y nginx nginx-core nginx-common
+
    ```
 3. Удалите конфигурацию NGINX:
 
    ```
    rm /var/www/.cmw_environment/nginx
+
    ```
 
 ## Удаление компонентов ПО — Debian
@@ -264,6 +298,7 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
 
    ```
    sudo -i
+
    ```
 
 ### Удаление JRE
@@ -272,16 +307,19 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
 
    ```
    apt-get remove --purge -y axiomjdk-java17-runtime-pro
+
    ```
 2. Удалите ссылку на исполняемые файлы:
 
    ```
    rm /usr/bin/java
+
    ```
 3. Удалите конфигурацию JRE:
 
    ```
    rm /var/www/.cmw_environment/java
+
    ```
 
 ### Удаление Kafka
@@ -294,21 +332,25 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
    rm /usr/lib/systemd/system/kafka.service
    systemctl daemon-reload
    systemctl reset-failed
+
    ```
 2. Удалите бинарные файлы Kafka:
 
    ```
    rm -rf /usr/share/kafka
+
    ```
 3. Удалите журналы Kafka:
 
    ```
    rm -rf /var/log/comindware/.kafka
+
    ```
 4. Удалите конфигурацию Kafka:
 
    ```
    rm /var/www/.cmw_environment/kafka
+
    ```
 
 ### Удаление Mono
@@ -317,11 +359,13 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
 
    ```
    apt-get remove --purge -y mono-runtime
+
    ```
 2. Удалите конфигурацию Mono:
 
    ```
    rm /var/www/.cmw_environment/mono
+
    ```
 
 ### Удаление .NET
@@ -330,16 +374,19 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
 
    ```
    rm -rf /usr/share/dotnet/
+
    ```
 2. Удалите ссылку на исполняемые файлы .NET:
 
    ```
    rm /usr/bin/dotnet
+
    ```
 3. Удалите конфигурацию .NET:
 
    ```
    rm /var/www/.cmw_environment/dotnet
+
    ```
 
 ### Удаление NGINX
@@ -349,11 +396,13 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
 
    ```
    apt-get remove --purge -y nginx-common
+
    ```
 3. Удалите конфигурацию NGINX:
 
    ```
    rm /var/www/.cmw_environment/nginx
+
    ```
 
 ## Удаление компонентов ПО — РЕД ОС
@@ -364,16 +413,19 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
 
    ```
    yum autoremove -y bellsoft-java17-runtime
+
    ```
 2. Удалите ссылку на исполняемые файлы:
 
    ```
    rm /usr/bin/java
+
    ```
 3. Удалите конфигурацию JRE:
 
    ```
    rm /var/www/.cmw_environment/java
+
    ```
 
 ### Удаление Kafka
@@ -386,21 +438,25 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
    rm /usr/lib/systemd/system/kafka.service
    systemctl daemon-reload
    systemctl reset-failed
+
    ```
 2. Удалите бинарные файлы Kafka:
 
    ```
    rm -rf /usr/share/kafka
+
    ```
 3. Удалите журналы Kafka:
 
    ```
    rm -rf /var/log/comindware/.kafka
+
    ```
 4. Удалите конфигурацию Kafka:
 
    ```
    rm /var/www/.cmw_environment/kafka
+
    ```
 
 ### Удаление Mono
@@ -425,6 +481,7 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
        /usr/lib/mono-source-libs \\
        /usr/lib/mono \\
        /usr/include/mono-2.0
+
    ```
 2. Удалите ссылки на исполняемые файлы:
 
@@ -461,11 +518,13 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
        /usr/bin/fastcgi* \\
        /usr/bin/csharp \\
        /usr/bin/asp-*
+
    ```
 3. Удалите конфигурацию Mono:
 
    ```
    rm /var/www/.cmw_environment/mono
+
    ```
 
 ### Удаление .NET
@@ -474,16 +533,19 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
 
    ```
    rm -rf /usr/share/dotnet/
+
    ```
 2. Удалите ссылку на исполняемые файлы .NET:
 
    ```
    rm /usr/bin/dotnet
+
    ```
 3. Удалите конфигурацию .NET:
 
    ```
    rm /var/www/.cmw_environment/dotnet
+
    ```
 
 ### Удаление NGINX
@@ -493,11 +555,13 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
 
    ```
    yum autoremove -y nginx
+
    ```
 3. Удалите конфигурацию NGINX:
 
    ```
    rm /var/www/.cmw_environment/nginx
+
    ```
 
 ## Удаление компонентов ПО — Rocky Linux
@@ -506,6 +570,7 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
 
    ```
    sudo -i
+
    ```
 
 ### Удаление JRE
@@ -514,16 +579,19 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
 
    ```
    yum autoremove -y bellsoft-java17-runtime
+
    ```
 2. Удалите ссылку на исполняемые файлы:
 
    ```
    rm /usr/bin/java
+
    ```
 3. Удалите конфигурацию JRE:
 
    ```
    rm /var/www/.cmw_environment/java
+
    ```
 
 ### Удаление Kafka
@@ -536,21 +604,25 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
    rm /usr/lib/systemd/system/kafka.service
    systemctl daemon-reload
    systemctl reset-failed
+
    ```
 2. Удалите бинарные файлы Kafka:
 
    ```
    rm -rf /usr/share/kafka
+
    ```
 3. Удалите журналы Kafka:
 
    ```
    rm -rf /var/log/comindware/.kafka
+
    ```
 4. Удалите конфигурацию Kafka:
 
    ```
    rm /var/www/.cmw_environment/kafka
+
    ```
 
 ### Удаление Mono
@@ -575,6 +647,7 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
        /usr/lib/mono-source-libs \\
        /usr/lib/mono \\
        /usr/include/mono-2.0
+
    ```
 2. Удалите ссылки на исполняемые файлы:
 
@@ -611,11 +684,13 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
        /usr/bin/fastcgi* \\
        /usr/bin/csharp \\
        /usr/bin/asp-*
+
    ```
 3. Удалите конфигурацию Mono:
 
    ```
    rm /var/www/.cmw_environment/mono
+
    ```
 
 ### Удаление .NET
@@ -624,16 +699,19 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
 
    ```
    rm -rf /usr/share/dotnet/Rocky
+
    ```
 2. Удалите ссылку на исполняемые файлы .NET:
 
    ```
    rm /usr/bin/dotnet
+
    ```
 3. Удалите конфигурацию .NET:
 
    ```
    rm /var/www/.cmw_environment/dotnet
+
    ```
 
 ### Удаление NGINX
@@ -643,11 +721,13 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
 
    ```
    yum autoremove -y nginx nginx-core nginx-filesystem
+
    ```
 3. Удалите конфигурацию NGINX:
 
    ```
    rm /var/www/.cmw_environment/nginx
+
    ```
 
 ## Удаление компонентов ПО — Ubuntu
@@ -656,6 +736,7 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
 
    ```
    sudo -i
+
    ```
 
 ### Удаление JRE
@@ -664,16 +745,19 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
 
    ```
    apt-get remove --purge -y bellsoft-java17-runtime
+
    ```
 2. Удалите ссылку на исполняемые файлы:
 
    ```
    rm /usr/bin/java
+
    ```
 3. Удалите конфигурацию JRE:
 
    ```
    rm /var/www/.cmw_environment/java
+
    ```
 
 ### Удаление Kafka
@@ -686,21 +770,25 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
    rm /usr/lib/systemd/system/kafka.service
    systemctl daemon-reload
    systemctl reset-failed
+
    ```
 2. Удалите бинарные файлы Kafka:
 
    ```
    rm -rf /usr/share/kafka
+
    ```
 3. Удалите журналы Kafka:
 
    ```
    rm -rf /var/log/comindware/.kafka
+
    ```
 4. Удалите конфигурацию Kafka:
 
    ```
    rm /var/www/.cmw_environment/kafka
+
    ```
 
 ### Удаление Mono
@@ -709,11 +797,13 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
 
    ```
    apt-get remove --purge -y mono-devel mono-runtime-common
+
    ```
 2. Удалите конфигурацию Mono:
 
    ```
    rm /var/www/.cmw_environment/mono
+
    ```
 
 ### Удаление .NET
@@ -729,11 +819,13 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
        dotnet-templates-8.0 \\
        dotnet-host \\
        dotnet-apphost-pack-8.0
+
    ```
 2. Удалите конфигурацию .NET:
 
    ```
    rm /var/www/.cmw_environment/dotnet
+
    ```
 
 ### Удаление NGINX
@@ -743,11 +835,13 @@ url: 'https://kb.comindware.ru/article.php?id=4625'
 
    ```
    apt-get remove --purge -y nginx-common
+
    ```
 3. Удалите конфигурацию NGINX:
 
    ```
    rm /var/www/.cmw_environment/nginx
+
    ```
 
 --8<-- "related_topics_heading.md"

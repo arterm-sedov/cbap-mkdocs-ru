@@ -2,6 +2,7 @@
 title: 'Записи и коллекции. Получение ID выбранных записей с помощью N3'
 kbId: 5100
 url: 'https://kb.comindware.ru/article.php?id=5100'
+updated: '2025-07-01 16:04:25'
 ---
 
 # Записи и коллекции. Получение ID выбранных записей с помощью N3
@@ -62,6 +63,7 @@ url: 'https://kb.comindware.ru/article.php?id=5100'
         # выбранных во всех таблицах на форме
         session:context context:selectedIds ?value.
     }
+
     ```
 13. Сохраните правила для формы.
 
@@ -102,6 +104,7 @@ url: 'https://kb.comindware.ru/article.php?id=5100'
         # выбранных во всех таблицах на форме
         session:context context:selectedIds ?value.
     }
+
     ```
 11. Сохраните правила для формы.
 12. Вернитесь к свойствам кнопки и сохраните её.
@@ -124,6 +127,7 @@ url: 'https://kb.comindware.ru/article.php?id=5100'
     # Получаем значение локальной переменной кнопки,
     # которая вызвала сценарий
     $$dialogVariables->ВыбранныеТовары
+
     ```
 
 ## Тестирование

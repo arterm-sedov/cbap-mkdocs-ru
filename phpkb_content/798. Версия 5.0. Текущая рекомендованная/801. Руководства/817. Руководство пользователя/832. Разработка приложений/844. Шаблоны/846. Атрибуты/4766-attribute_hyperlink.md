@@ -2,6 +2,7 @@
 title: 'Атрибут типа  «Гиперссылка»'
 kbId: 4766
 url: 'https://kb.comindware.ru/article.php?id=4766'
+updated: '2024-10-08 19:16:15'
 ---
 
 # Атрибут типа  «Гиперссылка»

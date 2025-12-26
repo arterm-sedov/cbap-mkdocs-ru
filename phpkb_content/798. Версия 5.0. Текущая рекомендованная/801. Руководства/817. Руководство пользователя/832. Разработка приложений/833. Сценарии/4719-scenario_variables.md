@@ -2,6 +2,7 @@
 title: 'Переменные в сценарии'
 kbId: 4719
 url: 'https://kb.comindware.ru/article.php?id=4719'
+updated: '2025-06-19 19:39:00'
 ---
 
 # Переменные в сценарии
@@ -68,6 +69,7 @@ url: 'https://kb.comindware.ru/article.php?id=4719'
 
 ```
 FORMAT("{0}", LIST($$ProcessObject))
+
 ```
 
 В выражениях N3 с переменными следует работать как с атрибутами. Чтобы обратиться к переменной, требуется импортировать функции для работы с ними.
@@ -90,6 +92,7 @@ FORMAT("{0}", LIST($$ProcessObject))
     # Обрезаем префикс "user." и помещаем ID процесса в атрибут.
     (?FullId 5) cmwstring:substring ?value.
 }
+
 ```
 
 ## Практический пример
@@ -158,6 +161,7 @@ FORMAT("{0}", LIST($$ProcessObject))
           # Находим в ?dialogVariables значение переменной newTime.
           ?dialogVariables variable:newTime ?value.
       }
+
       ```
 
 _![Результирующий сценарий](/platform/v5.0/business_apps/scenarios/img/scenario_with_variables.png)_

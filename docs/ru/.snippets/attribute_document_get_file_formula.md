@@ -1,0 +1,4 @@
+- С помощью языка формул из атрибута типа «**Документ**»  можно получить следующие данные:
+    - текущую ревизию документа: `$AttributeDocument->currentRevision`;
+    - имя файла из ревизии: `$AttributeDocument->currentRevision->revisionFilename`;
+    - относительную ссылку из ревизии: `$AttributeDocument->currentRevision->httpUri`.

@@ -2,6 +2,7 @@
 title: 'Системные требования Comindware Platform'
 kbId: 4659
 url: 'https://kb.comindware.ru/article.php?id=4659'
+updated: '2025-08-12 13:58:24'
 ---
 
 # Системные требования {{ productName }}

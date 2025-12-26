@@ -2,6 +2,7 @@
 title: 'Обновление версии экземпляра ПО без его остановки'
 kbId: 5097
 url: 'https://kb.comindware.ru/article.php?id=5097'
+updated: '2025-10-23 16:31:15'
 ---
 
 # Обновление версии экземпляра ПО без его остановки
@@ -58,17 +59,20 @@ url: 'https://kb.comindware.ru/article.php?id=5097'
 
    ```
    sudo -s
+
    ```
 
    или
 
    ```
    su -
+
    ```
 2. Скопируйте базу данных экземпляра ПО во внешнее хранилище:
 
    ```
    cp /var/lib/comindware/<instanceName>/Database <database_backup_path>
+
    ```
 
    Здесь:
@@ -85,6 +89,7 @@ url: 'https://kb.comindware.ru/article.php?id=5097'
    cp /var/www/<instanceName>/data/Plugins/Agent/Agent.config <config_backup_path>
    cp /etc/nginx/sites-available/comindware<instanceName> <config_backup_path>
    cp /etc/sysconfig/comindware<instanceName>-env <config_backup_path>
+
    ```
 
    - **РЕД ОС**, **Rocky** (RPM-based)
@@ -95,6 +100,7 @@ url: 'https://kb.comindware.ru/article.php?id=5097'
    cp /var/www/<instanceName>/data/Plugins/Agent/Agent.config <config_backup_path>
    cp /etc/nginx/conf.d/comindware<instanceName> <config_backup_path>
    cp /etc/sysconfig/comindware<instanceName>-env <config_backup_path>
+
    ```
 
    - **Альт Сервер**
@@ -105,6 +111,7 @@ url: 'https://kb.comindware.ru/article.php?id=5097'
    cp /var/www/<instanceName>/data/Plugins/Agent/Agent.config <config_backup_path>
    cp /etc/nginx/sites-available.d/comindware<instanceName> <config_backup_path>
    cp /etc/sysconfig/comindware<instanceName>-env <config_backup_path>
+
    ```
 
    Здесь `<config_backup_path>` — путь к внешнему хранилищу файлов конфигурации.
@@ -118,11 +125,13 @@ url: 'https://kb.comindware.ru/article.php?id=5097'
    ```
    cd <distPath>
    tar -xf X.X-release-ru-<prerequisitesVersion>.prerequisites.<osname>.tar.gz
+
    ```
 2. Перейдите в распакованную директорию библиотек `librdkafka`:
 
    ```
    cd CMW_<osname>/repo/kafka/librd/
+
    ```
 3. Обновите библиотеки `librdkafka`:
 
@@ -130,39 +139,46 @@ url: 'https://kb.comindware.ru/article.php?id=5097'
 
    ```
    dpkg -i *.deb
+
    ```
 
    - **РЕД ОС**, **Rocky** (RPM-based)
 
    ```
    rpm -i *.rpm
+
    ```
 
    - **Альт Сервер**
 
    ```
    apt-get install -y *.rpm
+
    ```
 4. Скачайте и распакуйте дистрибутив с новой версией ПО (`X.X`, `<version>` — номер версии):
 
    ```
    cd <distPath>
    tar -xf X.X-release-ru-<version>.<osname>.tar.gz
+
    ```
 5. Перейдите в распакованную директорию:
 
    ```
    cd CMW_<osname>_<version>/scripts/
+
    ```
 6. Установите новую версию ПО:
 
    ```
    bash version_install.sh
+
    ```
 7. Проверьте наличие и имя директории установленной версии ПО:
 
    ```
    bash version_list.sh
+
    ```
 8. Отобразится список установленных версий ПО на сервере.
 
@@ -174,6 +190,7 @@ url: 'https://kb.comindware.ru/article.php?id=5097'
 
    ```
    bash instance_create.sh -n=<instanceName> -p=<portNumber> -v=<version>
+
    ```
 
    Здесь:
@@ -208,16 +225,18 @@ url: 'https://kb.comindware.ru/article.php?id=5097'
    OK     NGINX started.
    OK     Final status.
    [Done] Upgrade CBAP instance.
+
    ```
 
    Если какая-либо из служб имеет статус `FAILED`, перезапустите её, например:
 
    ```
+   systemctl restart kafka.service
+   systemctl restart opensearch.service
+   systemctl restart adaperhost<instanceName>.service
    systemctl restart comindware<instanceName>.service
    systemctl restart apigateway<instanceName>.service
-   systemctl restart adaperhost<instanceName>.service
-   systemctl restart kafka.service
-   systemctl restart elasticsearch.service
+
    ```
 3. Отредактируйте конфигурацию NGINX для экземпляра ПО в соответствии с резервной копией, [сохранённой ранее](#upgrade_version_linux_no_stop_old_instance_data_prepare):
 
@@ -225,21 +244,25 @@ url: 'https://kb.comindware.ru/article.php?id=5097'
 
      ```
      nano /etc/nginx/sites-available/comindware<instanceName>
+
      ```
    - **РЕД ОС**, **Rocky** (RPM-based)
 
      ```
      nano /etc/nginx/conf.d/comindware<instanceName>
+
      ```
    - **Альт Сервер**
 
      ```
      nano /etc/nginx/sites-available.d/comindware<instanceName>
+
      ```
 4. Перезапустите службу NGINX для применения изменений:
 
    ```
    nginx -s reload
+
    ```
 5. Отредактируйте файлы конфигурации в соответствии с резервными копиями, [сохранёнными ранее](#upgrade_version_linux_no_stop_old_instance_data_prepare):
 
@@ -249,6 +272,7 @@ url: 'https://kb.comindware.ru/article.php?id=5097'
    nano /var/www/<instanceName>/apigateway.yml
    nano /var/www/<instanceName>/Ignite.config
    nano /usr/share/comindware/configs/instance/<instanceName>.yml
+
    ```
 
    Внимание!
@@ -259,11 +283,13 @@ url: 'https://kb.comindware.ru/article.php?id=5097'
 
    ```
    systemctl restart apigateway<instanceName> comindware<instanceName>
+
    ```
 7. Откройте сайт экземпляра ПО в браузере, одновременно открыв выдачу журналов экземпляра в терминале:
 
    ```
    tail -f /var/log/comindware/<instanceName>/Log/heartbeat*
+
    ```
 8. В браузере выполните инициализацию экземпляра ПО, выполните вход и проверьте работоспособность ПО.
 
@@ -275,16 +301,19 @@ url: 'https://kb.comindware.ru/article.php?id=5097'
 
    ```
    systemctl stop comindware<instanceName>
+
    ```
 2. Удалите базу данных нового экземпляра ПО:
 
    ```
    rm -r /var/lib/comindware/<instanceName>/Database/
+
    ```
 3. Скопируйте базу данных старого экземпляра ПО в новый экземпляр:
 
    ```
    cp -r /path/to/backup/Database/* /var/lib/comindware/<instanceName>/Database/
+
    ```
 4. Откройте сайт экземпляра ПО в браузере.
 5. Дождитесь завершения обновления структуры данных и проверьте его успешное выполнение.
@@ -328,11 +357,13 @@ url: 'https://kb.comindware.ru/article.php?id=5097'
    rm -rf cp
    rm -rf metastorage
    rm -rf cacheGroup-Keys
+
    ```
 9. Очистите директорию с базой данных экземпляра ПО:
 
    ```
    rm -rf /var/lib/comindware/<instanceName>/Database/*
+
    ```
 10. Скопируйте очищенную резервную копию в директорию с базой данных `/var/lib/comindware/<instanceName>/Database/`.
 11. Назначьте владельца директории с базой данных:
@@ -341,18 +372,21 @@ url: 'https://kb.comindware.ru/article.php?id=5097'
 
     ```
     chown -R www-data:www-data /var/lib/comindware/<instanceName>/Database
+
     ```
 
     - **РЕД ОС, Rocky** (RPM-based)
 
     ```
     chown -R nginx:nginx /var/lib/comindware/<instanceName>/Database
+
     ```
 
     - **Альт Сервер**
 
     ```
     chown -R _nginx:_nginx /var/lib/comindware/<instanceName>/Database
+
     ```
 12. Запустите экземпляр ПО.
 13. Откройте сайт экземпляра ПО в браузере, дождитесь его инициализации и выполните вход.

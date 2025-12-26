@@ -11,8 +11,10 @@ nav:
   - Общие сведения:
     - index.md
     - product_description.md
+    - general/glossary.md
     - Обзор версий:
       - general/changelog/changelog.md
+      - general/changelog/release_notes_5.0.20251010.md
       - general/changelog/release_notes_5.0.13334.md
       - general/changelog/release_notes_5.0.md
   - Использование ПО:
@@ -42,8 +44,6 @@ nav:
       - administration/deploy/paths.md
       - administration/deploy/script_keys.md
       - administration/deploy/availability_fault_tolerance.md
-      - administration/deploy/cluster_upgrade.md
-      - administration/deploy/cluster_recovery.md
       - Развёртывание в Linux:
         - administration/deploy/linux/deploy_guide.md
         - administration/deploy/linux/configuration_files.md
@@ -60,6 +60,7 @@ nav:
           - administration/deploy/linux/auxiliary_software_deploy/kafka_deploy_linux.md
           - administration/deploy/linux/auxiliary_software_deploy/apache_ignite_deploy.md
           - administration/deploy/linux/auxiliary_software_deploy/nginx_deploy.md
+          - administration/deploy/linux/auxiliary_software_deploy/nginx_configure.md
           - administration/deploy/linux/auxiliary_software_deploy/nginx_geoip_deploy.md
           - administration/deploy/linux/auxiliary_software_deploy/zabbix_agent_deploy.md
           - administration/deploy/linux/auxiliary_software_deploy/zabbix_deploy.md
@@ -74,6 +75,9 @@ nav:
           - administration/deploy/windows/auxiliary_software_deploy/elasticsearch_deploy_windows.md
           - administration/deploy/windows/auxiliary_software_deploy/kafka_install_windows.md
       - administration/deploy/linux/auxiliary_software_deploy/auxiliary_software_list.md
+      - administration/deploy/cluster_upgrade.md
+      - administration/deploy/cluster_recovery.md
+      - administration/deploy/service_mode.md
       - Вспомогательное ПО. Оптимизация:
         - administration/deploy/linux/auxiliary_software_deploy/auxiliary_software_optimize.md
         - administration/deploy/linux/auxiliary_software_deploy/antivirus_exceptions_configure.md
@@ -83,6 +87,7 @@ nav:
       - administration/backup/configure.md
       - Инструкции для Linux:
         - administration/backup/linux/complete_running_instance_backup.md
+        - administration/backup/linux/backup_script.md
         - administration/backup/linux/db_move_manually.md
         - administration/backup/linux/restore_cdbbz.md
         - administration/backup/linux/restore_complete_backup.md
@@ -237,6 +242,8 @@ nav:
         - business_apps/templates/template_types/account_templates.md
         - business_apps/templates/template_types/role_templates.md
         - business_apps/templates/template_types/organizational_unit_templates.md
+        - business_apps/templates/template_types/model_templates.md
+      - business_apps/templates/template_permissions.md
       - Атрибуты:
         - business_apps/templates/attributes/index.md
         - business_apps/templates/attributes/attribute_change_type.md
@@ -254,6 +261,7 @@ nav:
           - Запись: business_apps/templates/attributes/attribute_record.md
           - Изображение: business_apps/templates/attributes/attribute_image.md
           - Логический: business_apps/templates/attributes/attribute_boolean.md
+          - Модель: business_apps/templates/attributes/attribute_model.md
           - Организационная единица: business_apps/templates/attributes/attribute_organizational_unit.md
           - Роль: business_apps/templates/attributes/attribute_role.md
           - Список значений: business_apps/templates/attributes/attribute_enum.md
@@ -330,6 +338,7 @@ nav:
       - examples/document_download_archive_csharp.md
       - examples/document_download_archive_related_record_csharp.md
       - examples/document_download_to_server_csharp.md
+      - examples/document_get_uri.md
       - examples/attribute_text_masks.md
       - examples/attribute_text_substring_search.md
       - examples/attribute_enum_value_calculation.md
@@ -349,18 +358,28 @@ nav:
       - examples/n3_collection_join_string.md
       - examples/n3_collection_join_filter.md
       - examples/n3_collection_join_filter_hierarchy.md
+      - examples/n3_collection_hierarchy_recursive_select.md
       - administration/connections_communication_routes/rest_odata_connections/1c_integrations.md
       - administration/connections_communication_routes/rest_odata_connections/send_http_example.md
+      - administration/connections_communication_routes/rest_odata_connections/send_http_example_csharp.md
       - administration/connections_communication_routes/rest_odata_connections/http_send_post.md
       - administration/connections_communication_routes/rest_odata_connections/http_send_file.md
       - administration/connections_communication_routes/rest_odata_connections/jpath_example.md      
       - administration/connections_communication_routes/rest_odata_connections/http_receive_file.md
+      - administration/connections_communication_routes/rest_odata_connections/receive_http_example_csharp.md
+      - examples/task_accept_button_csharp.md
+      - examples/task_open_related_button_csharp.md
       - examples/task_reassign.md
+      - examples/task_hyperlink_n3_formula.md
+      - examples/n3_process_hyperlink_calculate.md
       - examples/template_reference_data_api.md
       - examples/n3_collection_get_selected_ids.md
       - examples/csharp_table_download_selection.md
       - examples/csharp_tax_service_integrate.md
-      - examples/process_end_button.md  
+      - examples/process_end_button.md
+      - examples/count_records_no_archive.md
+      - examples/chevron_stage_render.md
+      - examples/image_gallery_on_form.md
   - Моделирование корпоративной архитектуры:
     - architect/architect_desktop.md
     - architect/process_architecture_modeling/index.md
@@ -406,6 +425,22 @@ nav:
       - tutorials/tutorial_fleet/lesson_8.md
       - tutorials/tutorial_fleet/lesson_9.md
       - tutorials/tutorial_fleet/lesson_10.md
+  - Диагностика и устранение неполадок:
+    - troubleshooting/performance_optimize.md
+    - troubleshooting/extract_form_elements.md
+    - troubleshooting/calculate_archive_records.md
+    - troubleshooting/table_open_error.md
+    - troubleshooting/hard_read_text_table.md
+    - troubleshooting/process_notify_no_info.md
+    - troubleshooting/process_id_not_found.md
+    - troubleshooting/view_calculate_attribute_history.md
+    - troubleshooting/invalid_instance_reference.md
+    - troubleshooting/optimize_calculate_attribute.md
+    - troubleshooting/process_stuck.md
+    - troubleshooting/script_operation_error.md
+    - troubleshooting/buttons_not_shown.md
+    - troubleshooting/process_fails_several_records.md
+    - troubleshooting/record_field_values_not_shown.md
 
 exclude_docs: |
   administration/connections_communication_routes/authentication/wsfederation_connection.md
@@ -435,3 +470,25 @@ exclude_docs: |
   tutorials/tutorial_architect/taxonomies/**
   **/toc.md
   guides_toc.md
+  troubleshooting/history_not_logged.md
+  **/[0-9]*-*.md
+  administration/connections_communication_routes/system_connections/elasticsearch_connection.md
+  administration/connections_communication_routes/system_connections/notifications/system_notifications.md
+  administration/deploy/toc_deploy_auxiliary_software.md
+  administration/deploy/commissioning_recommendations.md
+  developer_guide/n3/n3_examples.md
+  developer_guide/n3/n3_glossary.md
+  developer_guide/n3/n3_graphs.md
+  developer_guide/n3/n3_knowledge_graphs.md
+  developer_guide/n3/n3_model.md
+  developer_guide/n3/n3_notation.md
+  developer_guide/n3/n3_ontology.md
+  developer_guide/n3/n3_ontology_structure.md
+  developer_guide/toc.md
+  developer_guide/n3/toc.md
+  tutorials/tutorial_n3/lesson_1.md
+  tutorials/tutorial_n3/lesson_2.md
+  guides_toc.md
+  toc.md
+  administration/toc.md
+  administration/backup/toc.md

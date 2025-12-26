@@ -2,6 +2,7 @@
 title: 'Встроенный подпроцесс'
 kbId: 4731
 url: 'https://kb.comindware.ru/article.php?id=4731'
+updated: '2025-06-02 13:10:43'
 ---
 
 # Встроенный подпроцесс
@@ -36,6 +37,6 @@ _![Свойства встроенного подпроцесса](/platform/v5.
 - [Вызов процесса][process_diagram_elements_process_call]
 - [Общие свойства элементов диаграммы процесса][process_diagram_element_common_properties]
 - [Элементы диаграммы процесса][process_diagram_elements]
-- [Редактирование диаграммы процесса][process_diagram]
+- [Редактирование диаграммы процесса][process_diagram_designer]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

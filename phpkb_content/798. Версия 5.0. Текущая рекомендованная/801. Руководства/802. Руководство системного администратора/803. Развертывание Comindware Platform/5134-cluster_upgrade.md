@@ -2,6 +2,7 @@
 title: 'Кластер Comindware Platform. Обновление ПО'
 kbId: 5134
 url: 'https://kb.comindware.ru/article.php?id=5134'
+updated: '2025-10-08 17:40:32'
 ---
 
 # Кластер {{ productName }}. Обновление ПО
@@ -149,12 +150,14 @@ _![Состав кластера](/platform/v5.0/administration/deploy/img/clust
 
    ```
    sudo -s
+
    ```
 
    или
 
    ```
    su -
+
    ```
 2. Скопируйте и распакуйте дистрибутив на общее хранилище и выдайте права на исполнение скриптов. Эту же общую директорию используйте для обновления последующих узлов.
 
@@ -165,11 +168,13 @@ _![Состав кластера](/platform/v5.0/administration/deploy/img/clust
    tar -xf X.X-release-ru-<versionNumber>.<osName>.tar.gz
    cd /mnt/cmw_dist/CMW*<versionNumber>/scripts/
    chmod +x *.sh
+
    ```
 3. Установите версию (подготовка версии на узле):
 
    ```
    ./version_install.sh
+
    ```
 4. Остановите на узле `cmw-node0` сервисы, затрагиваемые обновлением:
 
@@ -177,12 +182,14 @@ _![Состав кластера](/platform/v5.0/administration/deploy/img/clust
    systemctl stop comindware<instanceName>
    systemctl stop apigateway<instanceName>
    systemctl stop adapterhost<instanceName>
+
    ```
 5. С помощью команды `systemctl status <serviceName>` удостоверьтесь, что службы остановлены.
 6. Выполните обновление экземпляра ПО (укажите имя экземпляра и путь к установленной версии):
 
    ```
    ./instance_upgrade.sh -n=<instanceName> -vp=/var/www/.cmw_version/<versionNumber>
+
    ```
 7. Настройте конфигурацию обновлённого ПО (при необходимости) и запустите сервисы:
 
@@ -190,6 +197,7 @@ _![Состав кластера](/platform/v5.0/administration/deploy/img/clust
    systemctl start comindware<instanceName>
    systemctl start apigateway<instanceName>
    systemctl start adapterhost<instanceName>
+
    ```
 8. Проверьте работоспособность после обновления посредством инструментов мониторинга и прикладных проверок:
 

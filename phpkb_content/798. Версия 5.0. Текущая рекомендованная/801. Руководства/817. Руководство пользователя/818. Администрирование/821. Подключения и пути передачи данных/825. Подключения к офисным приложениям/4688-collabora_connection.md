@@ -2,6 +2,7 @@
 title: 'Collabora Online. Настройка подключения'
 kbId: 4688
 url: 'https://kb.comindware.ru/article.php?id=4688'
+updated: '2024-05-23 10:55:53'
 ---
 
 # Collabora Online. Настройка подключения

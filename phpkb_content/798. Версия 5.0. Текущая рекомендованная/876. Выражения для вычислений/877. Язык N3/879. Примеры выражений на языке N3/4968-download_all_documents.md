@@ -2,6 +2,7 @@
 title: 'Выгрузка всех документов стенда'
 kbId: 4968
 url: 'https://kb.comindware.ru/article.php?id=4968'
+updated: '2023-12-21 14:17:47'
 ---
 
 # Выгрузка всех документов стенда
@@ -9,7 +10,7 @@ url: 'https://kb.comindware.ru/article.php?id=4968'
 Для выгрузки всех документов стенда в один атрибут, введите следующее выражение:
 
 ```
- 
+ 
 
 @prefix cmwassert: <http://comindware.com/logics/assert#>.
 @prefix cmwtimeL: <http://comindware.com/logics/time/utc#>.

@@ -1,6 +1,17 @@
 ---
 title: Elasticsearch. Установка в базовой конфигурации
 kbId: 4601
+tags:
+    - Elasticsearch
+    - OpenSearch
+    - Linux
+    - администрирование
+    - конфигурация
+    - пример
+    - развёртывание
+    - сервер
+    - установка
+hide: tags
 ---
 
 # Elasticsearch. Установка в базовой конфигурации {: #elasticsearch_deploy_Linux}
@@ -99,6 +110,8 @@ cluster.name: my-application
 # ------------------------------------ Node ------------------------------------
 # Имя узла
 node.name: node-1
+# Роли узла
+node.roles: [ data, master ]
 # ----------------------------------- Paths ------------------------------------
 # Путь к директории с данными
 path.data: /var/lib/elasticsearch
@@ -144,8 +157,6 @@ xpack.security.transport.ssl:
   #  verification_mode: certificate
   #  keystore.path: certs/transport.p12
   #  truststore.path: certs/transport.p12
-# IP - слушать внешний интерфейс, 127.0.0.1 - localhost, 0.0.0.0 - все
-http.host: 0.0.0.0
 ```
 
 <div class="relatedTopics" markdown="block">

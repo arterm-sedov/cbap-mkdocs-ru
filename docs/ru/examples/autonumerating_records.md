@@ -113,6 +113,12 @@ kbId: 4895
     // Получаем значение переменной «Порядковый номер» по её ID — svar.1.
     // Присваиваем полученное значение переменной sequenceNumber.
             var sequenceNumber = (decimal)Api.Solution.SolutionVariableService.GetValue("svar.1");
+    // Приращиваем на 1 (или произвольный инкремент) значение переменной «Порядковый номер»
+            Api.Solution.SolutionVariableService.SetValue("svar.1", sequenceNumber+1);
+
+    // Альтернативный вариант, приращение переменной на 1 одной директивой вместо двух:
+            //var sequenceNumber = (decimal) Api.Solution.SolutionVariableService.IncrementValue("svar.1");
+
     // Nomerzayavki — системное имя атрибута «Номер заявки».
     // Создаём словарь data со значением атрибута «Номер заявки»,
     // равным значению переменной «Порядковый номер».
@@ -123,8 +129,7 @@ kbId: 4895
     // Zayavki — системное имя шаблона записи «Заявки».
     // Записываем значение атрибута «Порядковый номер» в текущей Заявке
             Api.TeamNetwork.ObjectService.EditWithAlias("Zayavki", objectId, data);
-    // Приращиваем на 1 значение переменной «Порядковый номер»
-            Api.Solution.SolutionVariableService.SetValue("svar.1", sequenceNumber+1);
+
         }
     }
     ```
@@ -175,6 +180,12 @@ C#-скрипт также можно применять для автонуме
         // Приращиваем на 1 значение переменной.
         // Присваиваем полученное значение переменной sequenceNumber.
                 var sequenceNumber = (decimal) Api.Solution.SolutionVariableService.IncrementValue("svar.1");
+        // Альтернативный вариант:
+        // Присваиваем полученное значение переменной sequenceNumber.
+        // Приращиваем на произвольный инкремент значение переменной «Порядковый номер»
+                //var sequenceNumber = (decimal)Api.Solution.SolutionVariableService.GetValue("svar.1");
+                //Api.Solution.SolutionVariableService.SetValue("svar.1", sequenceNumber+2);
+
         // Возвращаем значение sequenceNumber в указанный атрибут.
                 return sequenceNumber;
             }

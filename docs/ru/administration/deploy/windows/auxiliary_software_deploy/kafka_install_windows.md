@@ -163,21 +163,29 @@ hide:
 1. Задайте параметры подключения к Kafka в файле `apigateway.yml`:
 
     ``` yaml
-    # Укажите IP-адрес сервера Kafka
+    # IP-адрес сервера Kafka
     # без префикса http/https
     mq.server: <KafkaIP>:<kafkaBrokerPort>
-    # Укажите имя экземпляра ПО
+    # Префикс имени очередей сообщений
+    mq.name: <instanceName>
+    # Идентификатор группы очереди сообщений
     mq.group: <instanceName>
     # Идентификатор узла очереди сообщений
-    # Должен отличаться от mq.group.
-    mq.node: <instanceName>_Exclusive
+    mq.node: <instanceName>
     ```
 
 2. Задайте параметры подключения к Kafka в файле `adapterhost.yml`:
 
     ``` yaml
-    # Укажите IP-адрес сервера Kafka
+    # IP-адрес сервера Kafka
+    # без префикса http/https
     mq.server: <KafkaIP>:<kafkaBrokerPort>
+    # Префикс имени очередей сообщений
+    mq.name: <instanceName>
+    # Идентификатор группы очереди сообщений
+    mq.group: <instanceName>
+    # Идентификатор узла очереди сообщений
+    mq.node: <instanceName>
     ```
 
 3. Перезапустите экземпляр ПО.

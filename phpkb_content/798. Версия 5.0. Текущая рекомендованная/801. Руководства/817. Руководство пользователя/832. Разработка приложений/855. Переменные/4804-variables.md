@@ -2,6 +2,7 @@
 title: 'Переменные приложения. Просмотр списка, настройка и использование'
 kbId: 4804
 url: 'https://kb.comindware.ru/article.php?id=4804'
+updated: '2025-05-13 14:58:26'
 ---
 
 # Переменные приложения. Просмотр списка, настройка и использование
@@ -38,6 +39,7 @@ url: 'https://kb.comindware.ru/article.php?id=4804'
       # и возвращаем значение переменной.
       ("SolutionSystemName" "VariableSystemName") globalvariable:getValueByAlias ?value.
   }
+
   ```
 
   или
@@ -51,6 +53,7 @@ url: 'https://kb.comindware.ru/article.php?id=4804'
       # и возвращаем значение переменной.
       ("SolutionSystemName" "VariableSystemName") sln:getVariableValue ?value.
   }
+
   ```
 - **По ID переменной**
 
@@ -63,6 +66,7 @@ url: 'https://kb.comindware.ru/article.php?id=4804'
       # по её ID (svar.1) и возвращаем её значение.
       "svar.1" globalvariable:getValueById ?value.
   }
+
   ```
 
 ## Использование переменных приложения в C#-скриптах
@@ -92,6 +96,7 @@ url: 'https://kb.comindware.ru/article.php?id=4804'
             return result;
         }
     }
+
     ```
 - Чтобы использовать значение переменной приложения в **Задаче-вызове сценария** используйте образец C#-скрипта из статьи [*«Автонумерация записей с помощью формулы, C#-скрипта или выражения N3»*][auto_numerating_records].
 

@@ -2,6 +2,7 @@
 title: 'Сравнение двух атрибутов типа «Аккаунт»'
 kbId: 4932
 url: 'https://kb.comindware.ru/article.php?id=4932'
+updated: '2024-11-06 15:54:55'
 ---
 
 # Сравнение двух атрибутов типа «Аккаунт»
@@ -9,7 +10,7 @@ url: 'https://kb.comindware.ru/article.php?id=4932'
 Для сравнения двух пользователей (например, менеджер проекта и руководитель сотрудника), введите следующее выражение:
 
 ```
- 
+ 
 
 #EQUALS($WorkPlanOriginalRef->Curator, $Manager)
 

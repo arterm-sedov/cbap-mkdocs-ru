@@ -2,6 +2,7 @@
 title: 'HTTP-запросы типа POST. Отправка и получение ответа. Пример: настройка подключения, пути передачи данных и сценария'
 kbId: 5075
 url: 'https://kb.comindware.ru/article.php?id=5075'
+updated: '2025-02-03 14:40:01'
 ---
 
 # HTTP-запросы типа POST. Отправка и получение ответа. Пример: настройка подключения, пути передачи данных и сценария
@@ -26,6 +27,7 @@ url: 'https://kb.comindware.ru/article.php?id=5075'
         }
     }
 ]
+
 ```
 
 В ответ на HTTP-запрос с данными контакта внешний сервер отправляет ответ со значением `true`, если данные на сервере были обновлены:
@@ -34,6 +36,7 @@ url: 'https://kb.comindware.ru/article.php?id=5075'
 {
     "Success": "BOOL"
 }
+
 ```
 
 В **{{ productName }}** имеется шаблон записи *«Контакты клиентов»*.
@@ -160,6 +163,7 @@ url: 'https://kb.comindware.ru/article.php?id=5075'
           }
       }
   }
+
   ```
 
   - `$$Message->Contact->ID` — значение атрибута `$ID`.
@@ -175,6 +179,7 @@ url: 'https://kb.comindware.ru/article.php?id=5075'
           "PhoneNumber": "STRING"
       }
   }
+
   ```
 - Ответ сервера помещается в **логический** атрибут *«Данные обновлены»*.
 
@@ -204,16 +209,19 @@ url: 'https://kb.comindware.ru/article.php?id=5075'
 
        ```
        $ID
+
        ```
      - *FullName* — **значение: формула**
 
        ```
        $FullName
+
        ```
      - *PhoneNumber* — **значение: формула**
 
        ```
        $PhoneNumber
+
        ```
 
      Здесь `$ID`, `$FullName` и `$PhoneNumber` — атрибуты шаблона записи *«Контакты клиентов»*.
@@ -231,6 +239,7 @@ url: 'https://kb.comindware.ru/article.php?id=5075'
 
      ```
      $$Response->Success
+
      ```
 
 _![Сценарий отправки HTTP-запроса методом POST](/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/http_send_post.png)_

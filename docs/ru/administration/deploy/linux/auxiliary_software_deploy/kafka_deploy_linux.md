@@ -95,12 +95,14 @@ hide: tags
 2. Задайте параметры подключения к Kafka в файле `/usr/share/comindware/configs/instance/<instanceName>.yml` (`<instanceName>` — имя экземпляра ПО {{ productName }}):
 
     ``` yaml
-    # Адрес и порт сервера очереди сообщений (Kafka)
+    # Адрес и порт брокера сообщений (Kafka)
     mq.server: <kafkaBrokerIP>:<kafkaBrokerPort>
+    # Префикс имени очередей сообщений
+    mq.name: <instanceName>
     # Идентификатор группы очереди сообщений
     mq.group: <instanceName>
     # Идентификатор узла очереди сообщений
-    #mq.node: <instanceName>
+    mq.node: <instanceName>
     ```
 
     !!! warning "Внимание!"
@@ -114,20 +116,27 @@ hide: tags
 3. Задайте параметры подключения к Kafka в файле `/var/www/<instanceName>apigateway.yml`:
 
     ``` yaml
-    # Адрес и порт сервера очереди сообщений (Kafka)
+    # Адрес и порт брокера сообщений (Kafka)
     mq.server: <kafkaBrokerIp>:<kafkaBrokerPort>
+    # Префикс имени очередей сообщений
+    mq.name: <instanceName>
     # Идентификатор группы очереди сообщений
     mq.group: <instanceName>
     # Идентификатор узла очереди сообщений
-    # Должен отличаться от mq.group.
-    mq.node: <instanceName>_Exclusive
+    mq.node: <instanceName>
     ```
 
 4. Задайте параметры подключения к Kafka в файле `/var/www/<instanceName>/adapterhost.yml`:
 
     ``` yaml
-    # Адрес и порт сервера очереди сообщений (Kafka)
+    # Адрес и порт брокера сообщений (Kafka)
     mq.server: <kafkaBrokerIp>:<kafkaBrokerPort>
+    # Префикс имени очередей сообщений
+    mq.name: <instanceName>
+    # Идентификатор группы очереди сообщений
+    mq.group: <instanceName>
+    # Идентификатор узла очереди сообщений
+    mq.node: <instanceName>
     ```
 
 5. Перезапустите экземпляр ПО:

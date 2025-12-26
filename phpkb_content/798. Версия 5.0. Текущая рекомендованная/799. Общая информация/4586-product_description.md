@@ -2,6 +2,7 @@
 title: 'Описание Comindware Platform 5'
 kbId: 4586
 url: 'https://kb.comindware.ru/article.php?id=4586'
+updated: '2025-08-04 14:40:41'
 ---
 
 # Описание {{ productName }} 5

@@ -1,0 +1,153 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5146" kb-tags="C#,активная задача,задачи,исполнитель,кнопки,пользовательская задача,принять в работу,процессы,скрипт,скрипты,сишарп" kb-title="Кнопка «Принять в работу» для задачи. Настройка на C#">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_task_accept_button_csharp_intro">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_task_accept_button_csharp_use_case">
+<span class="md-ellipsis">
+      Прикладная задача
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_task_accept_button_csharp_configure">
+<span class="md-ellipsis">
+      Настройка скрипта
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_task_accept_button_csharp_test">
+<span class="md-ellipsis">
+      Тестирование
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="example_task_accept_button_csharp_intro">Введение</h2>
+<p>Здесь представлен пример С#-скрипта для кнопки, нажав которую, <strong>пользователь может принять задачу в работу</strong>. При этом в записи, связанной с задачей, <strong>будет проставлена дата принятия задачи</strong> в работу.</p>
+<p>Скрипт запускается по нажатию кнопки на форме пользовательской задачи.</p>
+<h2 id="example_task_accept_button_csharp_use_case">Прикладная задача</h2>
+<p>Имеется бизнес-процесс, в котором пользовательская задача назначается сразу на весь отдел.</p>
+<p>Требуется дать сотрудникам отдела возможность самостоятельно брать задачу в работу.</p>
+<p>При нажатии кнопки <em>«Принять в работу»</em> должны выполняться следующие действия:</p>
+<ul>
+<li>исполнителем задачи становится пользователь, нажавший кнопку;</li>
+<li>в атрибут <em>«Дата принятия в работу»</em> записывается текущая дата и время.</li>
+</ul>
+<p>Дату принятия в работу, например, можно использовать в бизнес-отчётах и для отслеживания хода работ.</p>
+<div class="notice notice-tip">
+<p class="admonition-title">Отслеживание дат принятия различных задач</p>
+<p>Если требуется отслеживать дату принятия нескольких задач, создайте для каждой задачи отдельный атрибут, хранящий дату принятия задачи в работу, и устанавливайте его значение отдельно для данной задачи.</p>
+<p>Если использовать один и тот же атрибут даты принятия в работу для разных задач, в них будет отображаться некорректная информация: дата последнего нажатия кнопки <em>«Принять в работу»</em>.</p>
+</div>
+<h2 class="pageBreakBefore" id="example_task_accept_button_csharp_configure">Настройка скрипта</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Логика работы скрипта</p>
+<p>Представленный здесь скрипт работает следующим образом:</p>
+<ol class="colored_numbers_list">
+<li>Получает ID текущей пользовательской задачи из контекста операции кнопки.</li>
+<li>Получает ID текущего пользователя, нажавшего кнопку.</li>
+<li>Назначает задачу текущему пользователю.</li>
+<li>Получает ID записи, связанной с задачей.</li>
+<li>Записывает текущую дату и время в атрибут <em>«Дата принятия в работу»</em> в запись, связанную с задачей.</li>
+<li>Возвращает результат выполнения операции с сообщением для пользователя.</li>
+</ol>
+</div>
+<ol class="colored_numbers_list">
+<li>
+<p>В <strong>шаблоне записи</strong>, связанном с шаблоном процесса, создайте атрибут типа «<strong>Дата и время</strong>»:</p>
+<ul>
+<li><strong>Название:</strong> <em>Дата принятия в работу</em></li>
+<li><strong>Системное имя:</strong> <code>ДатаПринятия</code></li>
+</ul>
+</li>
+<li>
+<p>На диаграмме процесса создайте <strong>пользовательскую задачу</strong> и выберите её <strong>исполнителей</strong> (например, укажите группу, содержащую всех сотрудников отдела).</p>
+</li>
+<li>
+<p>В <strong>шаблоне процесса</strong> создайте кнопку со следующими свойствами:</p>
+<ul>
+<li><strong>Отображаемое название:</strong> <em>Принять в работу</em></li>
+<li><strong>Контекст операции: пользовательская задача</strong></li>
+<li><strong>Операция: C#-скрипт</strong></li>
+<li><strong>Результат выполнения: обновить данные</strong></li>
+</ul>
+</li>
+<li>
+<p>На вкладке «<strong>Скрипт</strong>» введите следующий код:</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Подстановка фактических имён и значений</p>
+<p>Замените в коде системное имя <code>ДатаПринятия</code> на фактическое системное имя атрибута <em>«Дата принятия в работу»</em> в вашем шаблоне записи.</p>
+</div>
+<div class="highlight"><span class="filename">Скрипт для принятия задачи в работу</span><code><pre><span></span><code><span class="c1">// Импорт базовых типов и функций .NET Framework для работы с данными.</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span><span class="w"> </span></code> <br/><code><span class="c1">// Импорт классов коллекций и словарей для хранения данных.</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Collections.Generic</span><span class="p">;</span></code> <br/><code><span class="c1">// Импорт классов для работы с сущностями данных.</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.Data.Entity</span><span class="p">;</span></code> <br/><code><span class="c1">// Импорт классов для обработки нажатий кнопок </span></code> <br/><code><span class="c1">// и возврата результатов выполнения скрипта.</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.TeamNetwork.Api.Data.UserCommands</span><span class="p">;</span></code> <br/><code><span class="c1">// Импорт основных классов для работы с данными в {{ productName }}.</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.TeamNetwork.Api.Data</span><span class="p">;</span></code> <br/><code></code> <br/><code><span class="k">class</span><span class="w"> </span><span class="nc">Script</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="c1">// userCommandContext содержит данные контекста при нажатии кнопки.</span></code> <br/><code><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">UserCommandResult</span><span class="w"> </span><span class="nf">Main</span><span class="p">(</span><span class="n">UserCommandContext</span><span class="w"> </span><span class="n">userCommandContext</span><span class="p">,</span><span class="w"> </span><span class="n">Comindware</span><span class="p">.</span><span class="n">Entities</span><span class="w"> </span><span class="n">entities</span><span class="p">)</span></code> <br/><code><span class="w">    </span><span class="p">{</span><span class="w"> </span></code> <br/><code><span class="w">        </span><span class="c1">// Получаем ID текущего пользователя, нажавшего кнопку.</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">currentUser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userCommandContext</span><span class="p">.</span><span class="n">CurrentUserId</span><span class="p">;</span></code> <br/><code><span class="w">        </span><span class="c1">// Получаем ID текущей пользовательской задачи из контекста операции кнопки.</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">taskId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userCommandContext</span><span class="p">.</span><span class="n">ObjectIds</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">ToString</span><span class="p">();</span></code> <br/><code><span class="w">        </span><span class="c1">// Назначаем задачу текущему пользователю.</span></code> <br/><code><span class="w">        </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">UserTaskService</span><span class="p">.</span><span class="n">Reassign</span><span class="p">(</span><span class="n">taskId</span><span class="p">,</span><span class="w"> </span><span class="n">currentUser</span><span class="p">);</span></code> <br/><code></code> <br/><code><span class="w">        </span><span class="c1">// Получаем ID записи, связанной с пользовательской задачей.</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">businessObjectId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">UserTaskService</span><span class="p">.</span><span class="n">GetBusinessObject</span><span class="p">(</span><span class="n">taskId</span><span class="p">);</span></code> <br/><code><span class="w">        </span><span class="c1">// Получаем текущую дату и время для записи в атрибут.</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">currentDateTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">.</span><span class="n">ToString</span><span class="p">();</span></code> <br/><code><span class="w">        </span><span class="c1">// Записываем текущую дату и время в атрибут с системным именем ДатаПринятия.</span></code> <br/><code><span class="w">        </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">EditWithAlias</span><span class="p">(</span><span class="n">businessObjectId</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="kt">object</span><span class="o">&gt;</span><span class="p">{{</span><span class="s">"ДатаПринятия"</span><span class="p">,</span><span class="w"> </span><span class="n">currentDateTime</span><span class="p">}});</span></code> <br/><code><span class="w">        </span><span class="c1">// Формируем результат выполнения скрипта с сообщением для пользователя.</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserCommandResult</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="n">Success</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="n">Commited</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="n">Messages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="p">[]</span></code> <br/><code><span class="w">            </span><span class="p">{</span></code> <br/><code><span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">UserCommandMessage</span></code> <br/><code><span class="w">                </span><span class="p">{</span></code> <br/><code><span class="w">                    </span><span class="n">Severity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SeverityLevel</span><span class="p">.</span><span class="n">Normal</span><span class="p">,</span></code> <br/><code><span class="w">                    </span><span class="c1">// Пример: Задача (ID 12345) принята в работу 15.01.2024 14:30:00</span></code> <br/><code><span class="w">                    </span><span class="n">Text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Задача (ID "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">taskId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">") принята в работу "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">currentDateTime</span></code> <br/><code><span class="w">                </span><span class="p">}</span></code> <br/><code><span class="w">            </span><span class="p">}</span><span class="w">         </span></code> <br/><code><span class="w">        </span><span class="p">};</span></code> <br/><code><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Сохраните кнопку.</p>
+</li>
+<li>Поместите кнопку <em>«Принять в работу»</em> на форму пользовательской задачи.</li>
+</ol>
+<h2 class="pageBreakBefore" id="example_task_accept_button_csharp_test">Тестирование</h2>
+<ol class="colored_numbers_list">
+<li>Запустите процесс с пользовательской задачей, назначенной на отдел.</li>
+<li>Откройте пользовательскую задачу от имени одного из сотрудников отдела.</li>
+<li>Нажмите кнопку <em>«Принять в работу»</em>.</li>
+<li>
+<p>Убедитесь, что:</p>
+<ul>
+<li>исполнителем задачи стал пользователь, нажавший кнопку (задача должна появиться у него на странице «<strong>Мои задачи</strong>»);</li>
+<li>в атрибуте <em>«Дата принятия в работу»</em> записаны дата и время нажатия кнопки <em>«Принять в работу»</em>;</li>
+<li>отобразилось сообщение об успешном выполнении операции с указанием ID задачи и даты принятия в работу.</li>
+</ul>
+</li>
+<li>
+<p>Проверьте, что другие сотрудники отдела больше не видят эту задачу в своём списке задач.</p>
+</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4864">Справочник по скриптам на языке C#</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4730">Пользовательская задача</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5087">Пользовательская задача. Переназначение исполнителя</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4790">Кнопки. Определение, настройка, удаление</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4777">Атрибут типа «Дата и время»</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4721">Диаграмма процесса. Определения, просмотр, редактирование, публикация</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

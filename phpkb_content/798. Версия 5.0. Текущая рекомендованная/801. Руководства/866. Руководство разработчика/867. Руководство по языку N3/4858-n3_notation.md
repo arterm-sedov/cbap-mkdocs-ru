@@ -2,6 +2,7 @@
 title: 'Notation N3'
 kbId: 4858
 url: 'https://kb.comindware.ru/article.php?id=4858'
+updated: '2024-11-28 15:26:41'
 ---
 
 # Notation N3
@@ -15,26 +16,26 @@ Resource Description Framework (RDF, «среда описания ресурс�
 RDF-модель, записанная в стандартном XML-виде (RDF/XML):
 
 ```
-<rdf:RDF    
+<rdf:RDF    
 
 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"     xmlns:dc="http://purl.org/dc/elements/1.1/">  
 
 <rdf:Description rdf:about="http://en.wikipedia.org/wiki/Tony_Benn">     <dc:title>Tony Benn</dc:title>     <dc:publisher>Wikipedia</dc:publisher> 
 
 </rdf:Description>
-
+
 </rdf:RDF>
 ```
 
 В N3 её можно записать так:
 
 ```
-@prefix dc: <http://purl.org/dc/elements/1.1/>.
+@prefix dc: <http://purl.org/dc/elements/1.1/>.
 
  
 
 <http://en.wikipedia.org/wiki/Tony_Benn>   dc:title "Tony Benn";  
-
+
 dc:publisher "Wikipedia" .
 ```
 

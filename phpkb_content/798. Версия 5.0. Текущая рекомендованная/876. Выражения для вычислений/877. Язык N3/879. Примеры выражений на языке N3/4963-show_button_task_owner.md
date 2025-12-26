@@ -2,6 +2,7 @@
 title: 'Отображение кнопки только для текущего владельца задачи'
 kbId: 4963
 url: 'https://kb.comindware.ru/article.php?id=4963'
+updated: '2023-12-21 14:50:42'
 ---
 
 # Отображение кнопки только для текущего владельца задачи
@@ -11,7 +12,7 @@ url: 'https://kb.comindware.ru/article.php?id=4963'
 - Для системной кнопки «Завершить задачу» в Шаблоне процесса:
 
 ```
- 
+ 
 
 @prefix taskStatus: <http://comindware.com/ontology/taskStatus#>.
 
@@ -45,7 +46,7 @@ else {false -> ?value.}.
 - Для кнопки в связанном Шаблоне записи
 
 ```
- 
+ 
 
 @prefix taskStatus: <http://comindware.com/ontology/taskStatus#>.
 

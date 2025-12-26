@@ -2,6 +2,7 @@
 title: 'Настройка конфигурации вспомогательного ПО для оптимизации работы Comindware Platform'
 kbId: 4604
 url: 'https://kb.comindware.ru/article.php?id=4604'
+updated: '2023-09-22 14:51:00'
 ---
 
 # Настройка конфигурации вспомогательного ПО для оптимизации работы {{ productName }}
@@ -85,6 +86,7 @@ url: 'https://kb.comindware.ru/article.php?id=4604'
 
    ```
    сluster.max_shards_per_node: 3000
+
    ```
 3. Перезапустите службу Elasticsearch, чтобы изменения вступили в силу.
 
@@ -148,6 +150,7 @@ url: 'https://kb.comindware.ru/article.php?id=4604'
    gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
    ...
    }
+
    ```
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

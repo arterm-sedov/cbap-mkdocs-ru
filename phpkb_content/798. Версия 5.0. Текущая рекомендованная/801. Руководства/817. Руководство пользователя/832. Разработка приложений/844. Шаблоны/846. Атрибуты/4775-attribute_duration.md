@@ -2,6 +2,7 @@
 title: 'Атрибут типа «Длительность»'
 kbId: 4775
 url: 'https://kb.comindware.ru/article.php?id=4775'
+updated: '2024-07-01 13:44:48'
 ---
 
 # Атрибут типа «Длительность»

@@ -2,6 +2,7 @@
 title: 'Атрибут типа «Штрихкод»'
 kbId: 4764
 url: 'https://kb.comindware.ru/article.php?id=4764'
+updated: '2024-07-01 14:33:45'
 ---
 
 # Атрибут типа «Штрихкод»

@@ -2,6 +2,7 @@
 title: 'Старт процесса по записям списка (кнопка)'
 kbId: 5018
 url: 'https://kb.comindware.ru/article.php?id=5018'
+updated: '2022-02-18 06:30:54'
 ---
 
 # Старт процесса по записям списка (кнопка)
@@ -9,7 +10,7 @@ url: 'https://kb.comindware.ru/article.php?id=5018'
 Для того, чтобы на запустить процесс по каждой из записей определенного списка, введите следующее выражение:
 
 ```
- 
+ 
 
 using System;
 using System.Collections.Generic;

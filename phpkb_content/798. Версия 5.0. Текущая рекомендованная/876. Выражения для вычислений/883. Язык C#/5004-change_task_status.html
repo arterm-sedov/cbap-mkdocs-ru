@@ -3,7 +3,7 @@
 <table class="source_code_container">
 <tbody>
 <tr>
-<td class="source_code"> 
+<td class="source_code"> 
 <p>using System;<br/>using System.Collections.Generic;<br/>using System.Linq;<br/>using Comindware.Data.Entity;<br/>using Comindware.TeamNetwork.Api.Data.UserCommands;<br/>using Comindware.TeamNetwork.Api.Data;</p>
 <p>public class Script<br/>{<br/>    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)<br/>    {<br/>        var objectId = userCommandContext.ObjectIds.FirstOrDefault();       <br/>        var disapprovedStatus = entities.ApplicationStatus.Where(x =&gt; x.Name == "Отменена").Select(x =&gt; x.id).FirstOrDefault();<br/>        var data = new Dictionary&lt;string, object&gt;<br/>        {<br/>            { "ApprovalStatus", disapprovedStatus }<br/>        };<br/>        Api.TeamNetwork.ObjectService.EditWithAlias("SingleApproval", objectId, data);<br/>        var result = new UserCommandResult<br/>        {<br/>            Success = true,<br/>            Commited = true,<br/>            ResultType = UserCommandResultType.DataChange,<br/>            Messages = new[]<br/>            {<br/>                new UserCommandMessage<br/>                {<br/>                    Severity = SeverityLevel.Normal,<br/>                    Text = "Application disapproved"<br/>                    }<br/>            }<br/>        };<br/>        var activeTask = Api.Process.ProcessObjectService.GetReferencedTasks(objectId).Where(x =&gt; x.Status == UserTaskStatus.InProgress).FirstOrDefault().Id;<br/>        Api.TeamNetwork.UserTaskService.Complete(activeTask, true);<br/>        return result;<br/>    }<br/>}</p>
 </td>

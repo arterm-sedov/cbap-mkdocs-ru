@@ -2,6 +2,7 @@
 title: 'События. Определение и типы'
 kbId: 4733
 url: 'https://kb.comindware.ru/article.php?id=4733'
+updated: '2025-04-10 16:48:51'
 ---
 
 # События. Определение и типы
@@ -29,6 +30,6 @@ url: 'https://kb.comindware.ru/article.php?id=4733'
 --8<-- "related_topics_heading.md"
 
 - *[Элементы диаграммы процесса][process_diagram_elements]*
-- *[Редактирование диаграммы процесса][process_diagram]*
+- *[Редактирование диаграммы процесса][process_diagram_designer]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

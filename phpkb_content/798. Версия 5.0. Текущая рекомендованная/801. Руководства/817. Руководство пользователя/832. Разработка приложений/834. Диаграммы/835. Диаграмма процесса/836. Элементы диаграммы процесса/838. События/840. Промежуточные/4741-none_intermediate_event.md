@@ -2,6 +2,7 @@
 title: 'Простое промежуточное событие'
 kbId: 4741
 url: 'https://kb.comindware.ru/article.php?id=4741'
+updated: '2025-04-10 16:49:47'
 ---
 
 # Простое промежуточное событие
@@ -55,6 +56,6 @@ _![Дополнительные свойства простого промежу
 - *[Типы промежуточных событий][process_diagram_elements_events_intermediate]*
 - *[Общие свойства элементов диаграммы процесса][process_diagram_element_common_properties]*
 - *[Элементы диаграммы процесса][process_diagram_elements]*
-- *[Редактирование диаграммы процесса][process_diagram]*
+- *[Редактирование диаграммы процесса][process_diagram_designer]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

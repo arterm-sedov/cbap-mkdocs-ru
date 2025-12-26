@@ -2,6 +2,7 @@
 title: 'Изменение e-mail у всех пользователей в системе'
 kbId: 5019
 url: 'https://kb.comindware.ru/article.php?id=5019'
+updated: '2022-02-18 06:28:14'
 ---
 
 # Изменение e-mail у всех пользователей в системе
@@ -9,7 +10,7 @@ url: 'https://kb.comindware.ru/article.php?id=5019'
 Для того, чтобы поменять e-mail у всех пользователей в системе, введите следующее выражение:
 
 ```
- 
+ 
 
 using System; 
 using System.Collections.Generic; 

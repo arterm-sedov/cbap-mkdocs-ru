@@ -2,6 +2,7 @@
 title: 'Онтология'
 kbId: 4856
 url: 'https://kb.comindware.ru/article.php?id=4856'
+updated: '2024-11-28 15:27:22'
 ---
 
 # Онтология

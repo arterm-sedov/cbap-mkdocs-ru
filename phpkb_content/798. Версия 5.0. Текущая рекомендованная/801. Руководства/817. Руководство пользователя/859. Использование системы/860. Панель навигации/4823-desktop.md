@@ -2,6 +2,7 @@
 title: 'Рабочий стол. Использование'
 kbId: 4823
 url: 'https://kb.comindware.ru/article.php?id=4823'
+updated: '2024-08-27 16:26:04'
 ---
 
 # Рабочий стол. Использование

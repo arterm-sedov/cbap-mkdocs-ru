@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4700" kb-tags="HTTP-запросы,получение запросов,JSON,интеграции" kb-title="HTTP-запросы. Получение JSON-данных. Настройка подключения, пути передачи данных и сценария">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4700" kb-tags="GET-запрос,HTTP-запрос,JSON,интеграции,получение запросов" kb-title="HTTP-запросы. Получение JSON-данных. Настройка подключения, пути передачи данных и сценария">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -9,35 +9,35 @@
       </h2>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<a class="md-nav__link mkdocs_imported_link" href="#http_receive_example_intro">
 <span class="md-ellipsis">
       Введение
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#прикладная-задача">
+<a class="md-nav__link mkdocs_imported_link" href="#http_receive_example_use_case">
 <span class="md-ellipsis">
       Прикладная задача
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#порядок-настройки-получения-http-запросов">
+<a class="md-nav__link mkdocs_imported_link" href="#http_receive_example_sequence">
 <span class="md-ellipsis">
       Порядок настройки получения HTTP-запросов
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#настройка-подключения">
+<a class="md-nav__link mkdocs_imported_link" href="#http_receive_example_connection">
 <span class="md-ellipsis">
       Настройка подключения
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#настройка-пути-передачи-данных">
+<a class="md-nav__link mkdocs_imported_link" href="#http_receive_example_route">
 <span class="md-ellipsis">
       Настройка пути передачи данных
     </span>
@@ -45,21 +45,21 @@
 <nav aria-label="Настройка пути передачи данных" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#основные-свойства">
+<a class="md-nav__link mkdocs_imported_link" href="#http_receive_example_route_general">
 <span class="md-ellipsis">
       Основные свойства
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#атрибуты-сообщений">
+<a class="md-nav__link mkdocs_imported_link" href="#http_receive_example_route_attributes">
 <span class="md-ellipsis">
       Атрибуты сообщений
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#интеграция">
+<a class="md-nav__link mkdocs_imported_link" href="#http_receive_example_route_integration">
 <span class="md-ellipsis">
       Интеграция
     </span>
@@ -69,14 +69,14 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#настройка-сценария">
+<a class="md-nav__link mkdocs_imported_link" href="#http_receive_example_scenario">
 <span class="md-ellipsis">
       Настройка сценария
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#тестирование">
+<a class="md-nav__link mkdocs_imported_link" href="#http_receive_example_testing">
 <span class="md-ellipsis">
       Тестирование
     </span>
@@ -94,7 +94,7 @@
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h2 id="введение">Введение</h2>
+<h2 id="http_receive_example_intro">Введение</h2>
 <p><strong>Comindware Platform</strong> может получать и обрабатывать HTTP-запросы из внешних систем.</p>
 <p>Здесь представлен пример настройки подключения, пути передачи данных и сценария для получения и обработки HTTP-запроса в формате JSON с данными заказов.</p>
 <p>Настройка для обработки XML и простого текста будет аналогичной.</p>
@@ -135,7 +135,7 @@
 </ul>
 </div>
 <p>См. также <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5083">HTTP-запросы с составным содержимым. Получение файлов в сценарии</a>»</em></p>
-<h2 id="прикладная-задача">Прикладная задача</h2>
+<h2 id="http_receive_example_use_case">Прикладная задача</h2>
 <ul>
 <li>Имеется шаблон записи <em>«Заказы»</em>, с атрибутами:<ul>
 <li><em>Номер</em> типа «<strong>Число</strong>»</li>
@@ -156,14 +156,15 @@
 <p class="admonition-title">Примечание</p>
 <p>Здесь не рассматривается проверка полученных данных на уникальность и совпадение с имеющимися в записях.</p>
 </div>
-<h2 class="pageBreakBefore" id="порядок-настройки-получения-http-запросов">Порядок настройки получения HTTP-запросов</h2>
+<h2 class="pageBreakBefore" id="http_receive_example_sequence">Порядок настройки получения HTTP-запросов</h2>
 <ol class="colored_numbers_list">
-<li>Настройте <a class="mkdocs_imported_link" href="#настройка-подключения">подключение</a> для получения HTTP-запросов.</li>
-<li>Настройте <a class="mkdocs_imported_link" href="#настройка-пути-передачи-данных">путь передачи данных</a> для получения HTTP-запросов.</li>
-<li>Настройте <a class="mkdocs_imported_link" href="#настройка-сценария">сценарий</a> для обработки входящих HTTP-запросов.</li>
-<li><a class="mkdocs_imported_link" href="#тестирование">Проверьте работоспособность</a> настроенной конфигурации.</li>
+<li>Настройте <a class="mkdocs_imported_link" href="#connection_configure">подключение</a> для получения HTTP-запросов.</li>
+<li>Настройте <a class="mkdocs_imported_link" href="#communication_route_configure">путь передачи данных</a> для получения HTTP-запросов.</li>
+<li>Настройте <a class="mkdocs_imported_link" href="#scenario_configure">сценарий</a> для обработки входящих HTTP-запросов.</li>
+<li><a class="mkdocs_imported_link" href="#testing">Проверьте работоспособность</a> настроенной конфигурации.</li>
 </ol>
-<h2 id="настройка-подключения">Настройка подключения</h2>
+<p><a class="mkdocs_imported_link" href="" id="connection_configure"></a></p>
+<h2 id="http_receive_example_connection">Настройка подключения</h2>
 <ol class="colored_numbers_list">
 <li>На странице «<strong>Администрирование</strong>» выберите пункт «<strong>Инфраструктура</strong>» — «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4675"><strong>Подключения</strong></a>» <i fa-exchange-alt="" fal=""></i>.</li>
 <li>Откройте или создайте подключение типа «<strong>Подключения REST и OData</strong>» — «<strong>Получение HTTP-запросов</strong>».</li>
@@ -181,7 +182,7 @@
 </ul>
 </li>
 <li>
-<p><strong>Базовый путь получения HTTP-запросов</strong> — добавьте <strong>путь URI</strong>, например <code>uploadData</code>. При необходимости введите дополнительный <strong>путь URI</strong> на вкладке «<strong>Интеграция</strong>» в свойствах <a class="mkdocs_imported_link" href="#настройка-пути-передачи-данных">пути передачи данных</a>. Укажите результирующий путь на внешнем сервере в качестве получателя запроса, например:</p>
+<p><strong>Базовый путь получения HTTP-запросов</strong> — добавьте <strong>путь URI</strong>, например <code>uploadData</code>. При необходимости введите дополнительный <strong>путь URI</strong> на вкладке «<strong>Интеграция</strong>» в свойствах <a class="mkdocs_imported_link" href="#http_receive_example_route">пути передачи данных</a>. Укажите результирующий путь на внешнем сервере в качестве получателя запроса, например:</p>
 <div class="highlight"><code><pre><span></span><code>https://&lt;hostname&gt;/api/public/adapter/uploadData</code> <br/></pre></code></div>
 </li>
 <li>
@@ -204,7 +205,8 @@
 <p>Сохраните подключение.</p>
 </li>
 </ol>
-<h2 class="pageBreakBefore" id="настройка-пути-передачи-данных">Настройка пути передачи данных</h2>
+<p><a class="mkdocs_imported_link" href="" id="communication_route_configure"></a></p>
+<h2 class="pageBreakBefore" id="http_receive_example_route">Настройка пути передачи данных</h2>
 <ol class="colored_numbers_list">
 <li>Откройте страницу «<strong>Администрирование</strong>» — «<strong>Архитектура</strong>» или страницу «<strong>Администрирование</strong>» приложения.</li>
 <li>Выберите пункт «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4676"><strong>Пути передачи данных</strong></a>» <i aria-hidden="true" class="fa-light fa-route">&zwnj;<!--icon--></i>.</li>
@@ -212,26 +214,26 @@
 <li>
 <p>Настройте свойства пути передачи данных на следующих вкладках:</p>
 <ul>
-<li><a class="mkdocs_imported_link" href="#основные-свойства"><strong>Основные свойства</strong></a></li>
-<li><a class="mkdocs_imported_link" href="#атрибуты-сообщений"><strong>Атрибуты сообщений</strong></a></li>
-<li><a class="mkdocs_imported_link" href="#интеграция"><strong>Интеграция</strong></a></li>
+<li><a class="mkdocs_imported_link" href="#http_receive_example_route_general"><strong>Основные свойства</strong></a></li>
+<li><a class="mkdocs_imported_link" href="#http_receive_example_route_attributes"><strong>Атрибуты сообщений</strong></a></li>
+<li><a class="mkdocs_imported_link" href="#http_receive_example_route_integration"><strong>Интеграция</strong></a></li>
 </ul>
 </li>
 <li>
 <p>Сохраните путь передачи данных.</p>
 </li>
 </ol>
-<h3 id="основные-свойства">Основные свойства</h3>
+<h3 id="http_receive_example_route_general">Основные свойства</h3>
 <p>На вкладке «<strong>Основные свойства</strong>» настройте параметры использования пути передачи данных:</p>
 <ul>
-<li><strong>Подключение</strong> — выберите <a class="mkdocs_imported_link" href="#настройка-подключения">подключение для получения HTTP-запросов</a>.</li>
+<li><strong>Подключение</strong> — выберите <a class="mkdocs_imported_link" href="#http_receive_example_connection">подключение для получения HTTP-запросов</a>.</li>
 <li><strong>Системное имя</strong> — введите уникальное имя пути передачи данных.
     Не должно начинаться с цифры. Разрешены английские и русские буквы, цифры и символ «_». Рекомендуется использовать английские буквы.</li>
 <li><strong>Отключить</strong> — установите этот флажок, если требуется временно деактивировать путь передачи данных.</li>
 <li><strong>Описание</strong> — введите наглядное описание пути передачи данных, например <em>«Получение заказов по HTTP»</em>.</li>
 <li><strong>Номер шины данных</strong> — выберите номер от 0 до 3, если требуется распределить потоки данных нескольких путей для повышения производительности.</li>
 </ul>
-<h3 id="атрибуты-сообщений">Атрибуты сообщений</h3>
+<h3 id="http_receive_example_route_attributes">Атрибуты сообщений</h3>
 <div class="notice notice-warning">
 <p class="admonition-title">Составление атрибута сообщения типа «Объект»</p>
 <p>Чтобы составить <strong>атрибут сообщения</strong> типа «<strong>Объект</strong>» для хранения структурированных данных, необходимо создать структуру из родительского и дочерних атрибутов:</p>
@@ -285,10 +287,10 @@
 <p>При необходимости настройте <strong>ответ</strong> — здесь можно составить структуру JSON, которая будет отправляться в ответе на запрос после его успешной обработки, и ответ с ошибкой — структуру JSON для ответа на запрос, при обработке которого произошла ошибка.</p>
 </li>
 </ol>
-<h3 id="интеграция">Интеграция</h3>
+<h3 id="http_receive_example_route_integration">Интеграция</h3>
 <ol class="colored_numbers_list">
 <li>
-<p>При необходимости укажите дополнительный суффикс в поле «<strong>Путь URI</strong>». Этот суффикс будет добавлен к URL-адресу в поле «<strong>Базовый путь получения HTTP-запросов</strong>» (совпадает с путём, настроенным в <a class="mkdocs_imported_link" href="#настройка-подключения">подключении</a>). Укажите результирующий адрес на внешнем сервере в качестве получателя запросов, например:</p>
+<p>При необходимости укажите дополнительный суффикс в поле «<strong>Путь URI</strong>». Этот суффикс будет добавлен к URL-адресу в поле «<strong>Базовый путь получения HTTP-запросов</strong>» (совпадает с путём, настроенным в <a class="mkdocs_imported_link" href="#http_receive_example_connection">подключении</a>). Укажите результирующий адрес на внешнем сервере в качестве получателя запросов, например:</p>
 <div class="highlight"><code><pre><span></span><code>https://&lt;hostname&gt;/api/public/adapter/uploadData</code> <br/></pre></code></div>
 </li>
 <li>
@@ -299,15 +301,16 @@
 <p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка интеграции" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/json4.png"/><figcaption class="caption">Настройка интеграции</figcaption></figure></p>
 </li>
 </ol>
-<h2 class="pageBreakBefore" id="настройка-сценария">Настройка сценария</h2>
+<p><a class="mkdocs_imported_link" href="" id="scenario_configure"></a></p>
+<h2 class="pageBreakBefore" id="http_receive_example_scenario">Настройка сценария</h2>
 <ol class="colored_numbers_list">
 <li>Создайте новый сценарий <em>«Обработка заказов»</em>.</li>
 <li>
 <p>У начального события измените тип на «<strong>Получение сообщения</strong>» и настройте его:</p>
 <ul>
 <li><strong>Контекстный шаблон:</strong> <em>Заказы</em></li>
-<li><strong>Подключение:</strong> <a class="mkdocs_imported_link" href="#настройка-подключения">подключение для получения HTTP-запросов</a></li>
-<li><strong>Путь передачи данных:</strong> <a class="mkdocs_imported_link" href="#настройка-пути-передачи-данных">путь передачи данных для получения HTTP-запросов</a></li>
+<li><strong>Подключение:</strong> <a class="mkdocs_imported_link" href="#http_receive_example_connection">подключение для получения HTTP-запросов</a></li>
+<li><strong>Путь передачи данных:</strong> <a class="mkdocs_imported_link" href="#http_receive_example_route">путь передачи данных для получения HTTP-запросов</a></li>
 <li><strong>Имя переменной:</strong> <em>Request</em></li>
 </ul>
 </li>
@@ -369,7 +372,8 @@
 <p><figure class="screenshot_with_caption" markdown=""><img alt="Сценарий обработки заказа" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/json10.png"/><figcaption class="caption">Сценарий обработки заказа</figcaption></figure></p>
 </li>
 </ol>
-<h2 class="pageBreakBefore" id="тестирование">Тестирование</h2>
+<p><a class="mkdocs_imported_link" href="" id="testing"></a></p>
+<h2 class="pageBreakBefore" id="http_receive_example_testing">Тестирование</h2>
 <ol class="colored_numbers_list">
 <li>
 <p>С внешнего сервера отправьте в <strong>Comindware Platform</strong> запрос с данными заказов, например:</p>
@@ -380,7 +384,7 @@
 <li><code>-u username:password</code> — базовая аутентификация c учётными данными аккаунта с разрешением на <strong>вызовы API</strong> <strong>Comindware Platform</strong>;</li>
 <li><code>-H "Content-Type: application/json"</code> — заголовок, указывающий на формат данных JSON;</li>
 <li><code>-d '...'</code> — тело запроса с JSON-структурой;</li>
-<li><code>https://&lt;hostname&gt;/api/public/adapter/uploadData</code> — <strong>базовый путь получения HTTP-запросов</strong> и <strong>путь URI</strong>, настроенные в <a class="mkdocs_imported_link" href="#настройка-пути-передачи-данных">пути передачи данных</a>;</li>
+<li><code>https://&lt;hostname&gt;/api/public/adapter/uploadData</code> — <strong>базовый путь получения HTTP-запросов</strong> и <strong>путь URI</strong>, настроенные в <a class="mkdocs_imported_link" href="#http_receive_example_route">пути передачи данных</a>;</li>
 <li><code>-v</code> — вывод отладочных данных (необязательный ключ).</li>
 </ul>
 </li>

@@ -1,0 +1,92 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5056" kb-tags="диаграммы процессов,зацикливание,ошибки,процессы,устранение неполадок" kb-title="Зациклился процесс — что делать?">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#process_stuck_intro">
+<span class="md-ellipsis">
+      Описание проблемы
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#solution">
+<span class="md-ellipsis">
+      Решение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="process_stuck_intro">Описание проблемы</h2>
+<p><strong>Comindware Platform</strong> позволяет строить очень гибки бизнес-процессы.</p>
+<p>В частности, можно настроить вариативность шагов с помощью развилок «<strong>и</strong>» и «<strong>или</strong>», циклический запуск процессов, таймер на любом шаге процесса.</p>
+<p>При некорректной настройке развилки, вызова процесса или таймера есть риск зацикливания процесса.</p>
+<p>Что делать, если процесс опубликовали и запущен, после чего он зациклился?</p>
+<h2 id="solution">Решение</h2>
+<ol class="colored_numbers_list">
+<li>Первым делом, определите причину зацикливания процесса.</li>
+<li>Откройте историю процесса и определите, что явилось причиной зацикливания: таймер, развилка, подпроцесс.</li>
+<li>Если проблема в таймере (например, он был по ошибке выставлен на минимальный срок), поменяйте его настройку.</li>
+<li>Если проблема заключается в развилке, измените условие в «<strong>Дополнительных свойствах</strong>» развилки.</li>
+<li>Если проблема в подпроцессе, перейдите к свойствам подпроцесса и проверьте конфигурацию его запуска (возможно, вместо запуска по текущим записям каждый раз создаются новые, или наоборот, запускается процесс по текущим записям, которых неограниченное количество).</li>
+<li>После устранения причины зацикливания заново опубликуйте процесс.</li>
+<li>Чтобы удалить ошибочные записи из шаблона, выполните следующие шаги:</li>
+</ol>
+<ul>
+<li>Откройте <strong>шаблон записи</strong>.</li>
+<li>Перейдите на вкладку «<strong>Таблицы</strong>».</li>
+<li>Настройте таблицу «<strong>Все записи</strong>».</li>
+<li>Добавьте кнопку «<strong>Удалить</strong>» в область кнопок таблицы.</li>
+<li>Перейдите к списку экземпляров шаблона записи.</li>
+<li>Поставьте флажок у записей, которые требуется удалить.</li>
+<li>Нажмите кнопку «<strong>Удалить</strong>».</li>
+</ul>
+<ol class="colored_numbers_list" start="8">
+<li>Чтобы остановить экземпляры процесса, выполните следующие шаги:</li>
+</ol>
+<ul>
+<li>Откройте <strong>шаблон процесса</strong>.</li>
+<li>Перейдите к списку экземпляров шаблона процесса.</li>
+<li>Поставьте флажок у экземпляров процесса, которые требуется остановить.</li>
+<li>Нажмите кнопку «<strong>Остановить процесс</strong>».</li>
+</ul>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4758">Шаблон процесса</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4723">Использование диаграммы экземпляра процесса</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4721">Диаграмма процесса. Определения, редактирование, публикация</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4759">Шаблон записи</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4800">Таблицы. Настройка</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4929">Отладка формул, выражений N3, сценариев и C#-скриптов</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

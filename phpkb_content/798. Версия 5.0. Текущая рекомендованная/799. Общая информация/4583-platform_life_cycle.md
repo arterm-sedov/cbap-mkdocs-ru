@@ -2,6 +2,7 @@
 title: 'Comindware Platform. Описание жизненного цикла'
 kbId: 4583
 url: 'https://kb.comindware.ru/article.php?id=4583'
+updated: '2024-06-28 11:28:59'
 ---
 
 # {{ productName }}. Описание жизненного цикла

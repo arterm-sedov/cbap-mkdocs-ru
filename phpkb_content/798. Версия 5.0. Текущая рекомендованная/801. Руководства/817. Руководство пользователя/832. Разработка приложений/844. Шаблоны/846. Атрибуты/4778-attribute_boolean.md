@@ -2,6 +2,7 @@
 title: 'Атрибут типа «Логический»'
 kbId: 4778
 url: 'https://kb.comindware.ru/article.php?id=4778'
+updated: '2025-04-03 12:04:38'
 ---
 
 # Атрибут типа «Логический»

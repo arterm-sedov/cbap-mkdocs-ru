@@ -2,6 +2,7 @@
 title: 'Подсистема журналирования'
 kbId: 4623
 url: 'https://kb.comindware.ru/article.php?id=4623'
+updated: '2025-06-23 19:20:24'
 ---
 
 # Подсистема журналирования
@@ -406,6 +407,7 @@ _![Пример журнала аудита](/platform/v5.0/administration/deplo
    KeyName = "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Eventlog\\Application\\" & EventSourceName & "\\EventMessageFile"
    'Change path to .NET Framework version used
    WshShell.RegWrite KeyName,"%windir%\\Microsoft.NET\\Framework64\\v2.0.50727\\EventLogMessages.dll", "REG_EXPAND_SZ"
+
    ```
 3. Запустите скрипт, который создаст источник событий (`EventSource`) в журнале событий Windows.
 
@@ -415,18 +417,21 @@ _![Пример журнала аудита](/platform/v5.0/administration/deplo
 
    ```
    CreateEventSource.vbs "CBAP"
+
    ```
 4. Создайте в файле `logs.config` в подразделе `nlog.targets` (с конфигурацией файловых журналов) подраздел `target` с параметрами записи данных в журнал событий Windows:
 
    ```
    <target xsi:type="EventLogCBAPErrors" name="eventlog" layout="${message}"
    log="Application" source="CBAP"/>
+
    ```
 5. Создайте в файле `logs.config` правило (подраздел `logger` в разделе `nlog.rules`), которое будет определять сообщения, подлежащие записи в журнал событий Windows:
 
    ```
    <logger name="*" minlevel="Warn" maxlevel="Fatal"
    writeTo="errorsFile,EventLogCBAPErrors"/>
+
    ```
 6. Перезагрузите экземпляр ПО, чтобы изменения вступили в силу.
 

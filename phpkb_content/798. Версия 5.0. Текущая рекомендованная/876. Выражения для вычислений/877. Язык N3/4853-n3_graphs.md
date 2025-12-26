@@ -2,6 +2,7 @@
 title: 'Графы'
 kbId: 4853
 url: 'https://kb.comindware.ru/article.php?id=4853'
+updated: '2024-11-28 15:26:51'
 ---
 
 # Графы

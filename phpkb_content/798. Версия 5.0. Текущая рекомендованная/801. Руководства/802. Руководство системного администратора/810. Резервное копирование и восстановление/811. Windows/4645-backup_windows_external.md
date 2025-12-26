@@ -2,6 +2,7 @@
 title: 'Резервное копирование с помощью внешних средств в ОС Windows'
 kbId: 4645
 url: 'https://kb.comindware.ru/article.php?id=4645'
+updated: '2024-03-20 15:43:42'
 ---
 
 # Резервное копирование с помощью внешних средств в ОС Windows
@@ -17,7 +18,7 @@ url: 'https://kb.comindware.ru/article.php?id=4645'
 $login = «admin»
 $password = «admin»
 
-# Enter required backup
+# Enter required backup
 configuration ID
 $backupID = «backupConfig.1»
 

@@ -2,6 +2,7 @@
 title: 'Формы. Использование'
 kbId: 4816
 url: 'https://kb.comindware.ru/article.php?id=4816'
+updated: '2024-02-27 13:02:03'
 ---
 
 # Формы. Использование

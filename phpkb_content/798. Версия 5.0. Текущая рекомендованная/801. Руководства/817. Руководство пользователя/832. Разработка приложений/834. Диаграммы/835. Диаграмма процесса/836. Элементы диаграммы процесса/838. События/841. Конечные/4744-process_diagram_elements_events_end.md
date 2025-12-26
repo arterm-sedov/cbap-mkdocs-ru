@@ -2,6 +2,7 @@
 title: 'Конечные события'
 kbId: 4744
 url: 'https://kb.comindware.ru/article.php?id=4744'
+updated: '2025-04-10 16:27:45'
 ---
 
 # Конечные события
@@ -20,12 +21,12 @@ url: 'https://kb.comindware.ru/article.php?id=4744'
 
 1. Перетащите конечное событие с панели элементов на поток управления или пустое место диаграммы.
 2. Будет создано **[простое конечное событие][process_diagram_elements_none_end_event]**.
-3. При необходимости смените [тип события](#типы-конечных-событий) с помощью [меню элемента][process_diagram].
+3. При необходимости смените [тип события](#типы-конечных-событий) с помощью [меню элемента][process_diagram_call_element_menu].
 
 --8<-- "related_topics_heading.md"
 
 - *[События][process_diagram_elements_events]*
 - *[Элементы диаграммы процесса][process_diagram_elements]*
-- *[Редактирование диаграммы процесса][process_diagram]*
+- *[Редактирование диаграммы процесса][process_diagram_designer]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

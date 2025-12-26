@@ -2,6 +2,7 @@
 title: 'Уведомления. Типы, назначение, настройка, использование'
 kbId: 4682
 url: 'https://kb.comindware.ru/article.php?id=4682'
+updated: '2025-10-01 19:34:00'
 ---
 
 # Уведомления. Типы, назначение, настройка, использование
@@ -66,7 +67,7 @@ _![Просмотр внутренних уведомлений](/platform/v5.0/
 
 - [уведомления о задачах с особым текстом][task_notifications];
 - [периодические напоминания об открытых задачах][example_n3_periodic_task_notifications];
-- [уведомления о задачах по электронной почте][task_notifications].
+- [уведомления о задачах по электронной почте][task_notifications_email].
 
 _![Просмотр уведомлений о задачах](/platform/v5.0/administration/connections_communication_routes/system_connections/notifications/img/task_notifications_view.png)_
 

@@ -2,6 +2,7 @@
 title: 'Задача-выполнение сценария'
 kbId: 4728
 url: 'https://kb.comindware.ru/article.php?id=4728'
+updated: '2025-04-10 16:35:16'
 ---
 
 # Задача-выполнение сценария
@@ -51,6 +52,6 @@ _![Скрипт С# задачи-выполнения сценария](/platfor
 - *[Пользовательская задача][process_diagram_elements_user_task]*
 - *[Общие свойства элементов диаграммы процесса][process_diagram_element_common_properties]*
 - *[Элементы диаграммы процесса][process_diagram_elements]*
-- *[Редактирование диаграммы процесса][process_diagram]*
+- *[Редактирование диаграммы процесса][process_diagram_designer]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

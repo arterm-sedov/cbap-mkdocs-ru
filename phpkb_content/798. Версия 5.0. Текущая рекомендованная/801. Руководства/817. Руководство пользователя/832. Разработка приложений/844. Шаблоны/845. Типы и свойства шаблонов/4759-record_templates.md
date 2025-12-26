@@ -2,6 +2,7 @@
 title: 'Шаблон записи'
 kbId: 4759
 url: 'https://kb.comindware.ru/article.php?id=4759'
+updated: '2024-10-08 17:26:18'
 ---
 
 # Шаблон записи

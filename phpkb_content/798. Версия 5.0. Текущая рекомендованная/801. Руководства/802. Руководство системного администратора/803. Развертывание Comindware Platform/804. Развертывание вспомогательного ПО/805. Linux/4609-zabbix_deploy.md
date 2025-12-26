@@ -2,6 +2,7 @@
 title: 'Zabbix. Установка и настройка. Краткое руководство'
 kbId: 4609
 url: 'https://kb.comindware.ru/article.php?id=4609'
+updated: '2024-06-14 12:26:59'
 ---
 
 # Zabbix. Установка и настройка. Краткое руководство

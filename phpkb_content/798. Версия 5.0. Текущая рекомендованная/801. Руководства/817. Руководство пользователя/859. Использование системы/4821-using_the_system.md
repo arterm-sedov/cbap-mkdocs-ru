@@ -2,6 +2,7 @@
 title: 'Использование системы'
 kbId: 4821
 url: 'https://kb.comindware.ru/article.php?id=4821'
+updated: '2025-07-10 18:17:16'
 ---
 
 # Использование системы

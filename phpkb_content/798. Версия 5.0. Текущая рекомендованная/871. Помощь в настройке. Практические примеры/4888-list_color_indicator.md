@@ -2,6 +2,7 @@
 title: 'Цветовой индикатор в списке. Настройка отображения'
 kbId: 4888
 url: 'https://kb.comindware.ru/article.php?id=4888'
+updated: '2024-08-01 18:04:50'
 ---
 
 # Цветовой индикатор в списке. Настройка отображения
@@ -14,7 +15,7 @@ url: 'https://kb.comindware.ru/article.php?id=4888'
 
 ```
 IF(GREATEREQ($
-Fakticheskayadata , $Planovayadata),
+Fakticheskayadata , $Planovayadata),
 
 "<span style='color:#B22222; font-size: 200%; text-shadow: 0 0 1px black; position: absolute; top:0px;'> ● </span>",
 

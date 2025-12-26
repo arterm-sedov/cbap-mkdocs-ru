@@ -3,7 +3,7 @@
 <table class="source_code_container">
 <tbody>
 <tr>
-<td class="source_code"> 
+<td class="source_code"> 
 <p>using System; <br/>using System.Collections.Generic;<br/>using System.Linq;<br/>using Comindware.Data.Entity;<br/>using Comindware.TeamNetwork.Api.Data.UserCommands;<br/>using Comindware.TeamNetwork.Api.Data;</p>
 <p>class Script<br/>{<br/>    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)<br/>    {     <br/>          var CurrentObjectid = userCommandContext.ObjectIds[0];<br/>        var CurrentObjectData = Api.TeamNetwork.ObjectService.Get(CurrentObjectid);<br/>        var Gosnomer = CurrentObjectData["op.11"].ToString();<br/>    var bo = Api.TeamNetwork.GlobalFunctionService.ExecuteByAlias("Systemsolution", "Poisk", new Dictionary&lt;string, object&gt;(){{"Nomer", Gosnomer}});<br/>    Api.TeamNetwork.ObjectService.EditWithAlias("Kartochkivyzovov", userCommandContext.ObjectIds[0], bo);</p>
 <p>    var result = new UserCommandResult<br/>    {<br/>      Success = true,<br/>      Commited = true,<br/>      ResultType = UserCommandResultType.DataChange,<br/>      Messages = new[]<br/>      {<br/>        new UserCommandMessage<br/>        {<br/>          Severity = SeverityLevel.Normal,<br/>          Text = "VIN найден успешно"<br/>        }</p>

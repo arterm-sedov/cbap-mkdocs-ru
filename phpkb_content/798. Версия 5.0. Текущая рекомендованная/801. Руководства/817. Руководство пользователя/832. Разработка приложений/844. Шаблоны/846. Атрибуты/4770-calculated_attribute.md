@@ -2,6 +2,7 @@
 title: 'Вычисляемые атрибуты'
 kbId: 4770
 url: 'https://kb.comindware.ru/article.php?id=4770'
+updated: '2025-04-01 16:19:51'
 ---
 
 # Вычисляемые атрибуты

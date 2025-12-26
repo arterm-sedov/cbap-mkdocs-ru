@@ -2,6 +2,7 @@
 title: 'Комментарий'
 kbId: 4753
 url: 'https://kb.comindware.ru/article.php?id=4753'
+updated: '2025-04-10 16:21:27'
 ---
 
 # Комментарий
@@ -28,6 +29,6 @@ _![Свойства комментария](/platform/v5.0/business_apps/diagram
 
 - *[Общие свойства элементов диаграммы процесса][process_diagram_element_common_properties]*
 - *[Элементы диаграммы процесса][process_diagram_elements]*
-- *[Редактирование диаграммы процесса][process_diagram]*
+- *[Редактирование диаграммы процесса][process_diagram_designer]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

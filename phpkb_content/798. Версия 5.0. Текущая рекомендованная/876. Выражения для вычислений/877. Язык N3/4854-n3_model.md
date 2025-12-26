@@ -2,6 +2,7 @@
 title: 'Моделирование на N3'
 kbId: 4854
 url: 'https://kb.comindware.ru/article.php?id=4854'
+updated: '2024-11-28 15:27:11'
 ---
 
 # Моделирование на N3

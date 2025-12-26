@@ -2,6 +2,7 @@
 title: 'Атрибут типа «Запись»'
 kbId: 4780
 url: 'https://kb.comindware.ru/article.php?id=4780'
+updated: '2024-10-08 18:52:30'
 ---
 
 # Атрибут типа «Запись»

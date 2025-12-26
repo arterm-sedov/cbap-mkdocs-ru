@@ -2,6 +2,7 @@
 title: 'Обновление версии экземпляра ПО с его остановкой'
 kbId: 4624
 url: 'https://kb.comindware.ru/article.php?id=4624'
+updated: '2025-10-23 16:31:24'
 ---
 
 # Обновление версии экземпляра ПО с его остановкой
@@ -19,7 +20,6 @@ url: 'https://kb.comindware.ru/article.php?id=4624'
 ## Порядок обновления версии экземпляра ПО
 
 1. Подготовьте экземпляр ПО к обновлению:
-
    - Сохраните резервную копию экземпляра ПО.
    - Остановите экземпляр ПО.
    - Сохраните конфигурацию экземпляра ПО и вспомогательных служб.
@@ -34,6 +34,7 @@ url: 'https://kb.comindware.ru/article.php?id=4624'
    - Удалите экземпляр ПО старой версии.
    - Создайте экземпляр ПО новой версии.
 3. Обновите конфигурацию ПО и служб:
+
    - Отредактируйте конфигурационные файлы в соответствии с ранее сохранёнными резервными копиями.
    - Перезапустите экземпляр ПО и вспомогательные службы.
 4. Инициализируйте экземпляр ПО:
@@ -58,12 +59,14 @@ url: 'https://kb.comindware.ru/article.php?id=4624'
 
    ```
    sudo -s
+
    ```
 
    или
 
    ```
    su -
+
    ```
 3. Сохраните резервную копию файлов конфигурации, например в директорию `/var/backups/config_tmp`:
 
@@ -76,6 +79,7 @@ url: 'https://kb.comindware.ru/article.php?id=4624'
    cp /etc/nginx/sites-available/comindware<instanceName> /var/backups/config_tmp/
    cp /etc/sysconfig/comindware<instanceName>-env /var/backups/config_tmp/
    cp /usr/share/comindware/configs/instance/<instanceName>.yml /var/backups/config_tmp/
+
    ```
 
    - **РЕД ОС**, **Rocky** (RPM-based)
@@ -87,6 +91,7 @@ url: 'https://kb.comindware.ru/article.php?id=4624'
    cp /etc/nginx/conf.d/comindware<instanceName> /var/backups/config_tmp/
    cp /etc/sysconfig/comindware<instanceName>-env /var/backups/config_tmp/
    cp /usr/share/comindware/configs/instance/<instanceName>.yml /var/backups/config_tmp/
+
    ```
 
    - **Альт Сервер**
@@ -98,6 +103,7 @@ url: 'https://kb.comindware.ru/article.php?id=4624'
    cp /etc/nginx/sites-available.d/comindware<instanceName> /var/backups/config_tmp/
    cp /etc/sysconfig/comindware<instanceName>-env /var/backups/config_tmp/
    cp /usr/share/comindware/configs/instance/<instanceName>.yml /var/backups/config_tmp/
+
    ```
 
    Здесь `<instanceName>` — имя экземпляра ПО.
@@ -106,17 +112,20 @@ url: 'https://kb.comindware.ru/article.php?id=4624'
    ```
    systemctl stop apigateway<instanceName> adapterhost<instanceName> comindware<instanceName>
    systemctl status apigateway<instanceName> adapterhost<instanceName> comindware<instanceName>
+
    ```
 5. Удалите (или переместите в резервное хранилище) неиспользуемые предыдущие дистрибутивы ПО (`<distPath>` — путь к директории с дистрибутивом, `<osname>` — название операционной системы):
 
    ```
    rm -rf <distPath>/CMW_<osname>
+
    ```
 6. Переместите директорию с базой данных экземпляра ПО (`<username>` — имя пользователя Linux):
 
    ```
    mkdir -p /home/<username>/<instanceName>
    mv /var/lib/comindware/<instanceName> /home/<username>/
+
    ```
 
 ## Обновление версии ПО для экземпляра
@@ -138,11 +147,13 @@ url: 'https://kb.comindware.ru/article.php?id=4624'
    ```
    cd <distPath>
    tar -xf X.X-release-ru-<prerequisitesVersion>.prerequisites.<osname>.tar.gz
+
    ```
 2. Перейдите в директорию со скриптами для развёртывания вспомогательного ПО:
 
    ```
    cd <prerequisitesDistPath>/CMW_<osname>/scripts
+
    ```
 
    Здесь: `<prerequisitesDistPath>/CMW_<osname>/` — путь к распакованному дистрибутиву со вспомогательным ПО.
@@ -150,6 +161,7 @@ url: 'https://kb.comindware.ru/article.php?id=4624'
 
    ```
    sh prerequisites_list.sh
+
    ```
 
    Внимание!
@@ -160,32 +172,38 @@ url: 'https://kb.comindware.ru/article.php?id=4624'
    ```
    cd <distPath>
    tar -xf X.X-release-ru-<version>.<osname>.tar.gz
+
    ```
 5. Перейдите в распакованную директорию:
 
    ```
    cd CMW_<osname>_<version>/scripts/
+
    ```
 6. Установите новую версию ПО:
 
    ```
    bash version_install.sh
+
    ```
 7. Проверьте наличие и имя директории установленной версии ПО:
 
    ```
    bash version_list.sh
+
    ```
 8. Отобразится список установленных версий ПО на сервере.
 9. Удалите экземпляр ПО старой версии и его данные:
 
    ```
    bash instance_delete.sh -n=<instanceName> --deleteData
+
    ```
 10. Создайте экземпляр ПО новой версии:
 
     ```
     bash instance_create.sh -n=<instanceName> -p=<portNumber> -v=<version>
+
     ```
 
     Здесь:
@@ -220,6 +238,7 @@ url: 'https://kb.comindware.ru/article.php?id=4624'
     OK     NGINX started.
     OK     Final status.
     [Done] Upgrade CBAP instance.
+
     ```
 
     Если какая-либо из служб имеет статус `FAILED`, игнорируйте это и продолжайте выполнение следующих шагов согласно инструкции, так как устранять эти неполадки следует позже.
@@ -233,21 +252,25 @@ url: 'https://kb.comindware.ru/article.php?id=4624'
 
      ```
      nano /etc/nginx/sites-available/comindware<instanceName>
+
      ```
    - **РЕД ОС**, **Rocky** (RPM-based)
 
      ```
      nano /etc/nginx/conf.d/comindware<instanceName>
+
      ```
    - **Альт Сервер**
 
      ```
      nano /etc/nginx/sites-available.d/comindware<instanceName>
+
      ```
 2. Перезапустите службу NGINX для применения изменений:
 
    ```
    nginx -s reload
+
    ```
 3. Отредактируйте файлы конфигурации в соответствии с резервными копиями, [сохранёнными ранее](#ConfigBackup):
 
@@ -257,6 +280,7 @@ url: 'https://kb.comindware.ru/article.php?id=4624'
    nano /var/www/<instanceName>/apigateway.yml
    nano /var/www/<instanceName>/Ignite.config
    nano /usr/share/comindware/configs/instance/<instanceName>.yml
+
    ```
 
    Внимание!
@@ -269,6 +293,7 @@ url: 'https://kb.comindware.ru/article.php?id=4624'
    systemctl restart adapterhost<instanceName>.service
    systemctl restart comindware<instanceName>.service
    systemctl restart apigateway<instanceName>.service
+
    ```
 5. Инициализируйте экземпляра ПО.
 
@@ -278,26 +303,36 @@ url: 'https://kb.comindware.ru/article.php?id=4624'
 
    ```
    tail -f /var/log/comindware/<instanceName>/Logs/heartbeat*
+
    ```
 2. В браузере выполните инициализацию экземпляра ПО, выполните вход и проверьте работоспособность ПО.
 3. Остановите экземпляр ПО:
 
    ```
    systemctl stop comindware<instanceName>
+
    ```
-4. Скопируйте в экземпляр ПО директорию с базой данных экземпляра ПО, сохранённую ранее (`<username>` — имя пользователя Linux):
+4. Удалите базу данных, созданную при инициализации экземпляра:
+
+   ```
+   rm -rf /var/lib/comindware/<instanceName>/*
+
+   ```
+5. Скопируйте в экземпляр ПО директорию с базой данных экземпляра ПО, сохранённую ранее (`<username>` — имя пользователя Linux):
 
    ```
    cp  -R /home/<username>/<instanceName>/Database /var/lib/comindware/<instanceName>/
+
    ```
-5. Перейдите в папку с экземпляром ПО и поменяйте права для скопированной директории с базой данных:
+6. Перейдите в папку с экземпляром ПО и поменяйте права для скопированной директории с базой данных:
 
    ```
    cd /var/lib/comindware/<instanceName>/
    chmod -R 777 Database/
    sudo chown -R www-data:www-data Database/
+
    ```
-6. Обновите структуру данных.
+7. Обновите структуру данных.
 
 ## Обновление и проверка структуры данных
 
@@ -313,11 +348,13 @@ url: 'https://kb.comindware.ru/article.php?id=4624'
 
    ```
    systemctl start comindware<instanceName>
+
    ```
 2. Откройте сайт экземпляра ПО в браузере, дождитесь окончания загрузки, одновременно открыв выдачу журналов экземпляра в терминале:
 
    ```
    tail -f /var/log/comindware/<instanceName>/Logs/heartbeat*
+
    ```
 
    См. *«[Подсистема журналирования][logging_engine]»*.
@@ -335,8 +372,9 @@ url: 'https://kb.comindware.ru/article.php?id=4624'
 
      - При обновлении с версии 5.0:
        - Обновление структуры данных завершено.
-       - Переходите к [Подготовке восстановленного экземпляра ПО к работе](#upgrade_version_linux_prepare).
-     - При обновлении с версии 4.7 на версию 5.0 переходите к [шагу 5](#upgrade_version_linux_data_structure_update_and_verification_step5).
+       - Переходите к [подготовке восстановленного экземпляра ПО к работе](#upgrade_version_linux_prepare).
+     - При обновлении с версии 4.7 на версию 5.0:
+       - Переходите к [шагу 5](#upgrade_version_linux_data_structure_update_and_verification_step5).
    - **Если в журнале обновления имеются ошибки:**
 
      - Не переходите к шагу 5.
@@ -361,16 +399,19 @@ url: 'https://kb.comindware.ru/article.php?id=4624'
    rm -rf cp
    rm -rf metastorage
    rm -rf cacheGroup-Keys
+
    ```
 8. Очистите директорию с базой данных экземпляра ПО:
 
    ```
    rm -rf /var/lib/comindware/<instanceName>/Database/*
+
    ```
 9. Скопируйте очищенную резервную копию в директорию с базой данных:
 
    ```
    /var/lib/comindware/<instanceName>/Database/
+
    ```
 10. Назначьте владельца директории с базой данных:
 
@@ -378,18 +419,21 @@ url: 'https://kb.comindware.ru/article.php?id=4624'
 
     ```
     chown -R www-data:www-data /var/lib/comindware/<instanceName>/Database
+
     ```
 
     - **РЕД ОС, Rocky** (RPM-based)
 
     ```
     chown -R nginx:nginx /var/lib/comindware/<instanceName>/Database
+
     ```
 
     - **Альт Сервер**
 
     ```
     chown -R _nginx:_nginx /var/lib/comindware/<instanceName>/Database
+
     ```
 11. Подготовьте восстановленный экземпляр ПО к работе.
 

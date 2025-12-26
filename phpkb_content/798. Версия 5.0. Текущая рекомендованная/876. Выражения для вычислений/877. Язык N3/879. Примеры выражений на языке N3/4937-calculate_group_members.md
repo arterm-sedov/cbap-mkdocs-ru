@@ -2,6 +2,7 @@
 title: 'Вычисление состава группы'
 kbId: 4937
 url: 'https://kb.comindware.ru/article.php?id=4937'
+updated: '2023-12-21 14:47:29'
 ---
 
 # Вычисление состава группы

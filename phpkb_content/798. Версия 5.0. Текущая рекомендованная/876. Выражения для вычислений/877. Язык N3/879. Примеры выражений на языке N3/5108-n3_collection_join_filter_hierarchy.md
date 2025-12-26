@@ -2,6 +2,7 @@
 title: 'Записи и коллекции. Объединение и фильтрация иерархических коллекций с помощью N3'
 kbId: 5108
 url: 'https://kb.comindware.ru/article.php?id=5108'
+updated: '2025-08-21 11:58:40'
 ---
 
 # Записи и коллекции. Объединение и фильтрация иерархических коллекций с помощью N3
@@ -153,6 +154,7 @@ url: 'https://kb.comindware.ru/article.php?id=5108'
        # Возвращаем итоговую коллекцию категорий
        ?RequestCounterpartiesList list:member ?value.
    }
+
    ```
 
 ### 2. Фильтрация для роли
@@ -187,6 +189,7 @@ url: 'https://kb.comindware.ru/article.php?id=5108'
     # если ему разрешено работать с текущим запросом.
     ?user -> ?value.
 }
+
 ```
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

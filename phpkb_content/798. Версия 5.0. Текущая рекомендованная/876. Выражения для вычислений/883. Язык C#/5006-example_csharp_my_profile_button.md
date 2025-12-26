@@ -2,6 +2,7 @@
 title: 'Кнопка «Мой профиль»'
 kbId: 5006
 url: 'https://kb.comindware.ru/article.php?id=5006'
+updated: '2024-11-07 11:38:50'
 ---
 
 # Кнопка «Мой профиль»
@@ -9,7 +10,7 @@ url: 'https://kb.comindware.ru/article.php?id=5006'
 Для того чтобы разместить на боковую панель навигации ссылку на профиль пользователя, создайте кнопку c операцией C#-скрипт в шаблоне аккаунтов и введите следующее выражение:
 
 ```
- 
+ 
 
 using System;
 using System.Collections.Generic;

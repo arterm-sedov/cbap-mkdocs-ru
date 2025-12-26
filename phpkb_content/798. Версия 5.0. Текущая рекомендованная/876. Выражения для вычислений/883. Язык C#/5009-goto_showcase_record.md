@@ -2,6 +2,7 @@
 title: 'Переход в объект с витрины'
 kbId: 5009
 url: 'https://kb.comindware.ru/article.php?id=5009'
+updated: '2022-10-12 11:45:46'
 ---
 
 # Переход в объект с витрины

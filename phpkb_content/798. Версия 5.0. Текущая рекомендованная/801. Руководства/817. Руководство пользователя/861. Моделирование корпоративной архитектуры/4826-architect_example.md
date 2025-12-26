@@ -2,6 +2,7 @@
 title: 'Построение оргструктуры и архитектуры процессов организации. Практический пример'
 kbId: 4826
 url: 'https://kb.comindware.ru/article.php?id=4826'
+updated: '2025-08-05 15:21:03'
 ---
 
 # Построение оргструктуры и архитектуры процессов организации. Практический пример
@@ -228,8 +229,8 @@ _![Диаграмма оргструктуры](/platform/v5.0/architect/img/arc
 
    | Название | Системное имя | Свойства |
    | --- | --- | --- |
-   | *Тип служебный* | *Tipsluzhebnyy* | - **Тип данных: текст** - **Вычислять автоматически:** флажок установлен - **Вычисляемое выражение: формула** ```   FORMAT("{0}",LIST($unitType))   ``` |
-   | *Отдел* | *Otdel* | - **Тип данных: текст** - **Вычислять автоматически:** флажок установлен - **Вычисляемое выражение: N3** ```   @prefix object: <http://comindware.com/ontology/object#>.  {      ("systemSolution_OrganizationalStructure" "Tipsluzhebnyy") object:findProperty ?foundProperty.      ("systemSolution_OrganizationalStructure" "superiorUnit") object:findProperty ?superiorUnitProp.      ("systemSolution_OrganizationalStructure" "Otdel") object:findProperty ?Otdel.      ("systemSolution_OrganizationalStructure" "unitName") object:findProperty ?name.      if {?item ?foundProperty "Department". }      then { ?item ?name ?value.}      else {      ?item ?superiorUnitProp ?superiorUnit.          ?superiorUnit ?Otdel ?value.      }.  }   ``` |
+   | *Тип служебный* | *Tipsluzhebnyy* | - **Тип данных: текст** - **Вычислять автоматически:** флажок установлен - **Вычисляемое выражение: формула** ```   FORMAT("{0}",LIST($unitType))     ``` |
+   | *Отдел* | *Otdel* | - **Тип данных: текст** - **Вычислять автоматически:** флажок установлен - **Вычисляемое выражение: N3** ```   @prefix object: <http://comindware.com/ontology/object#>.  {      ("systemSolution_OrganizationalStructure" "Tipsluzhebnyy") object:findProperty ?foundProperty.      ("systemSolution_OrganizationalStructure" "superiorUnit") object:findProperty ?superiorUnitProp.      ("systemSolution_OrganizationalStructure" "Otdel") object:findProperty ?Otdel.      ("systemSolution_OrganizationalStructure" "unitName") object:findProperty ?name.      if {?item ?foundProperty "Department". }      then { ?item ?name ?value.}      else {      ?item ?superiorUnitProp ?superiorUnit.          ?superiorUnit ?Otdel ?value.      }.  }     ``` |
 2. Вынесите на основную форму **шаблона оргединицы** созданный атрибут *«Отдел»*.
 3. В правилах для формы добавьте действие для элемента *«Отдел»* со следующими свойствами:
 
@@ -239,6 +240,7 @@ _![Диаграмма оргструктуры](/platform/v5.0/architect/img/arc
 
      ```
      $Otdel == $unitName
+
      ```
 4. После этого при выборе оргединицы типа «**Должность**» на диаграмме оргструктуры в панели «**Свойства должности**» будет отображаться название отдела, к которому она относится.
 

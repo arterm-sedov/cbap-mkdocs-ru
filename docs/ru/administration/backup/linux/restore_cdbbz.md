@@ -363,7 +363,7 @@ hide: tags
 
         Этот репозиторий создаётся автоматически при запуске резервного копирования
 
-        Префикс индекса задаётся в [свойствах подключения к {{ openSearchVariants }}][elasticsearch_connection], используемого по умолчанию.
+        Префикс индекса задаётся в свойствах подключения к {{ openSearchVariants }}.
 
 8. Проверьте содержимое зарегистрированного репозитория:
 
@@ -396,7 +396,6 @@ hide: tags
 - [Проверка и настройка конфигурации экземпляра ПО {{ productName }} после восстановления из резервной копии][restore_test_configure]
 - [Регистрация репозитория {{ openSearchVariants }} (официальное руководство, английский язык)](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-filesystem-repository.html)
 - [Восстановление снимка {{ openSearchVariants }} (официальное руководство, английский язык)](https://www.elastic.co/guide/en/elasticsearch/reference/current/restore-snapshot-api.html)
-- [{{ openSearchVariants }}. Настройка подключения][elasticsearch_connection]
 - [Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО][complete_running_instance_backup]
 - [Восстановление базы данных, вложенных файлов и журналов из полной резервной копии][restore_complete_backup]
 - [Лицензирование. Активация, назначение, отзыв и продление лицензий][licensing]

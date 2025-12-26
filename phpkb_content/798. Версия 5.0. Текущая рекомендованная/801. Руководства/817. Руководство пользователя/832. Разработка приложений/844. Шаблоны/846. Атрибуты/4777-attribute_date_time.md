@@ -2,6 +2,7 @@
 title: 'Атрибут типа «Дата и время»'
 kbId: 4777
 url: 'https://kb.comindware.ru/article.php?id=4777'
+updated: '2025-06-30 10:01:51'
 ---
 
 # Атрибут типа «Дата и время»
@@ -81,7 +82,7 @@ _![Свойства атрибута типа «Дата и время»](/platf
 --8<-- "related_topics_heading.md"
 
 - [Атрибут типа «Часовой пояс»][attribute_timezone]
-- [Аккаунты. Настройка часового пояса][accounts]
+- [Аккаунты. Настройка часового пояса][accounts_timezone_configure]
 - [Настройка поля атрибута типа «Дата и время» на форме][form_dynamic_elements]
 - [Атрибут «Дата и время». Форматирование значений с помощью формул][attribute_date_time_value_format]
 - [Форматирование значений в файле шаблона экспорта и формулах][export_template_file_formula_format_values]

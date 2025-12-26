@@ -2,6 +2,7 @@
 title: 'Атрибут типа «Список значений». Вычисление значения по справочнику'
 kbId: 4916
 url: 'https://kb.comindware.ru/article.php?id=4916'
+updated: '2025-04-07 16:25:21'
 ---
 
 # Атрибут типа «Список значений». Вычисление значения по справочнику
@@ -30,21 +31,25 @@ url: 'https://kb.comindware.ru/article.php?id=4916'
 
   ```
   $EnumAttributeSystemName—>cmw.variantName
+
   ```
 - системное имя значения атрибута:
 
   ```
   $EnumAttributeSystemName—>cmw.variantAlias
+
   ```
 - код значка значения атрибута:
 
   ```
   $EnumAttributeSystemName—>cmw.variantIcon
+
   ```
 - цвет значения атрибута в десятичном формате:
 
   ```
   $EnumAttributeSystemName—>cmw.color
+
   ```
 
 Сравнение и фильтрация значения атрибута с помощью формулы
@@ -55,35 +60,41 @@ url: 'https://kb.comindware.ru/article.php?id=4916'
 
   ```
   $EnumAttributeSystemName == EnumValueSystemName
+
   ```
 
   или
 
   ```
   EQUALS($EnumAttributeSystemName->cmw.variantAlias, "EnumValueSystemName")
+
   ```
 
   или
 
   ```
   EQUALS($EnumAttributeSystemName, ENUMVALUE("EnumAttributeSystemName", "EnumValueSystemName"))
+
   ```
 - неравенство
 
   ```
   $EnumAttributeSystemName !== EnumValueSystemName
+
   ```
 
   или
 
   ```
   NOT(EQUALS($EnumAttributeSystemName->cmw.variantAlias, "EnumValueSystemName"))
+
   ```
 
   или
 
   ```
   NOT(EQUALS($EnumAttributeSystemName, ENUMVALUE("EnumAttributeSystemName", "EnumValueSystemName")))
+
   ```
 
 ## Прикладная задача
@@ -128,6 +139,7 @@ url: 'https://kb.comindware.ru/article.php?id=4916'
 
    ```
     ENUMVALUE("VehicleType",$Типзаявки->Кодтипазаявки)
+
    ```
 
    Синтаксис формулы

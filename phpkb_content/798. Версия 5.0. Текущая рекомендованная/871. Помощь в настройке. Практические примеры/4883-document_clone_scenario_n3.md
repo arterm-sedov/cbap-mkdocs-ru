@@ -2,6 +2,7 @@
 title: 'Атрибут типа «Документ». Копирование записи вместе с прикреплённым документом с помощью сценария по нажатию кнопки'
 kbId: 4883
 url: 'https://kb.comindware.ru/article.php?id=4883'
+updated: '2025-04-01 13:39:13'
 ---
 
 # Атрибут типа «Документ». Копирование записи вместе с прикреплённым документом с помощью сценария по нажатию кнопки
@@ -32,26 +33,31 @@ url: 'https://kb.comindware.ru/article.php?id=4883'
 
   ```
   ("TemplateSystemName" "DocumentAttributeSystemName") object:findProperty ?DocumentAttribute.
+
   ```
 - из объекта с атрибутом получить значение атрибута в текущей записи:
 
   ```
   ?item documentAttribute ?documentAttributeValue.
+
   ```
 - из значения атрибута получить текущую версию документа:
 
   ```
   ?documentAttributeValue document:revision ?revision.
+
   ```
 - из версии получить содержимое файла в формате `base64`:
 
   ```
   ?revision document:content ?content.
+
   ```
 - из версии получить имя файла:
 
   ```
   ?revision document:title ?title.
+
   ```
 
 Добавление файлов в атрибут типа «Документ» с помощью N3
@@ -62,16 +68,19 @@ url: 'https://kb.comindware.ru/article.php?id=4883'
 
   ```
   ?documentContentSource document:content ?content.
+
   ```
 - сформировать имя файла:
 
   ```
   ?documentTitleSource document:title ?title.
+
   ```
 - прикрепить полученный файл к атрибуту типа «**Документ**», т. е. поместить на него ссылку в версию:
 
   ```
   (?content ?title) document:attach ?documentAttributeValue.
+
   ```
 
 ## Прикладная задача
@@ -158,6 +167,7 @@ url: 'https://kb.comindware.ru/article.php?id=4883'
        # прикреплён хотя бы один файл
        true -> ?value.
    }
+
    ```
 
    Бизнес-логика
@@ -194,6 +204,7 @@ url: 'https://kb.comindware.ru/article.php?id=4883'
        # Возвращаем значение атрибута «Наименование пакета документов» из исходной записи
        ?docPackRecordId ?PackNameAttribute ?value.
    }
+
    ```
 
    Бизнес-логика
@@ -224,6 +235,7 @@ url: 'https://kb.comindware.ru/article.php?id=4883'
         # Возвращаем значение атрибута «Файлы документов» из исходной записи
         ?docPackRecordId ?AttachedFilesAttribute ?value.
     }
+
     ```
 
     Бизнес-логика
@@ -259,6 +271,7 @@ url: 'https://kb.comindware.ru/article.php?id=4883'
         #и возвращаем ID нового документа с прикреплённым файлом
         (?content ?filename) document:attach ?value.
     }
+
     ```
 
     Бизнес-логика

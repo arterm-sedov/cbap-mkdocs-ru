@@ -2,6 +2,7 @@
 title: 'Заключение. Курс «Корпоративная архитектура. Ознакомительный»'
 kbId: 5130
 url: 'https://kb.comindware.ru/article.php?id=5130'
+updated: '2025-08-12 18:26:07'
 ---
 
 # Заключение. Курс «{{ productNameArchitect }}. Ознакомительный»

@@ -2,6 +2,7 @@
 title: 'Функции и возможности Comindware Platform. Краткое описание'
 kbId: 4580
 url: 'https://kb.comindware.ru/article.php?id=4580'
+updated: '2024-06-14 12:33:36'
 ---
 
 # Функции и возможности {{ productName }}. Краткое описание

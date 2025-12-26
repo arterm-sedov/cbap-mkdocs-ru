@@ -2,6 +2,7 @@
 title: 'Кнопка «Моя компания»'
 kbId: 5023
 url: 'https://kb.comindware.ru/article.php?id=5023'
+updated: '2022-02-18 06:29:33'
 ---
 
 # Кнопка «Моя компания»
@@ -9,7 +10,7 @@ url: 'https://kb.comindware.ru/article.php?id=5023'
 Для того, чтобы разместить на боковую панель навигации ссылку на компанию пользователя, создайте операцию типа Скрипт в текущем Шаблоне записи и введите следующее выражение:
 
 ```
- 
+ 
 
 using System;
 using System.Collections.Generic;

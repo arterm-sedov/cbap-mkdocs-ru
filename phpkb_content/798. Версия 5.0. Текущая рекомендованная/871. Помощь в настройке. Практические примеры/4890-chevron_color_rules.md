@@ -2,6 +2,7 @@
 title: 'Шевроны. Правила окрашивания. Пример настройки'
 kbId: 4890
 url: 'https://kb.comindware.ru/article.php?id=4890'
+updated: '2024-04-01 14:48:47'
 ---
 
 # Шевроны. Правила окрашивания. Пример настройки
@@ -76,8 +77,8 @@ url: 'https://kb.comindware.ru/article.php?id=4890'
       | Цвет | Условие: формула |
       | --- | --- |
       | Оранжевый  #efbb3a | ``` AND(NOT(EMPTY($Datanachala)),EMPTY($Datazaversheniya)) ``` |
-      | Зелёный   #338320 | ``` AND(NOT(EMPTY($Datazaversheniya)),NOT(EMPTY($Datanachala))) ``` |
-      | Серый   #a8a8a8 | ``` AND(EMPTY($Datanachala),EMPTY($Datazaversheniya)) ``` |
+      | Зелёный   #338320 | ``` AND(NOT(EMPTY($Datazaversheniya)),NOT(EMPTY($Datanachala)))                ``` |
+      | Серый   #a8a8a8 | ``` AND(EMPTY($Datanachala),EMPTY($Datazaversheniya))                 ``` |
 
       Примечание
 

@@ -2,6 +2,7 @@
 title: 'Apache Ignite. Установка и настройка. Краткое руководство'
 kbId: 4600
 url: 'https://kb.comindware.ru/article.php?id=4600'
+updated: '2024-06-14 11:48:40'
 ---
 
 # Apache Ignite. Установка и настройка. Краткое руководство
@@ -29,6 +30,7 @@ Apache Ignite в минимально необходимой конфигура�
    unzip -q apache-ignite-2.16.0-bin.zip
    mv apache-ignite-2.16.0-bin /usr/share/ignite
    chown -R www-data:www-data /usr/share/ignite
+
    ```
 2. Установите переменную среды `IGNITE_HOME`, указав путь к папке Ignite без завершающего символа `/`: `export IGNITE_HOME=/usr/share/ignite`
 3. Дополнительные модули для использования Ignite в сочетании с {{ productName }} не требуются.
@@ -39,6 +41,7 @@ Apache Ignite в минимально необходимой конфигура�
    ```
    cd /usr/share/ignite/bin/
    nano ignite.sh
+
    ```
 7. Добавьте в начало скрипта `ignite.sh` следующие строки:
 
@@ -46,23 +49,27 @@ Apache Ignite в минимально необходимой конфигура�
    export "JVM_OPTS=-Xms512m -Xmx4g -XX:MaxDirectMemorySize=1g -Djava.net.preferIPv4Stack=true -XX:+AlwaysPreTouch -XX:+UseG1GC -XX:+ScavengeBeforeFullGC -XX:+DisableExplicitGC -XX:MinHeapFreeRatio=1 -XX:MaxHeapFreeRatio=10 -DIGNITE_QUIET=false -DIGNITE_NO_ASCII=true--add-opens=java.base/jdk.internal.misc=ALL-UNNAMED --add-opens=java.base/sun.nio.ch=ALL-UNNAMED --add-opens=java.management/com.sun.jmx.mbeanserver=ALL-UNNAMED --add-opens=jdk.internal.jvmstat/sun.jvmstat.monitor=ALL-UNNAMED --add-opens=java.base/sun.reflect.generics.reflectiveObjects=ALL-UNNAMED --add-opens=jdk.management/com.sun.management.internal=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.nio=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.base/java.util.concurrent.locks=ALL-UNNAMED --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.invoke=ALL-UNNAMED --add-opens=java.base/java.math=ALL-UNNAMED --add-opens=java.sql/java.sql=ALL-UNNAMED"
    export IGNITE_WORK_DIR=/var/lib/comindware/<instanceName>/Database
    export DEFAULT_CONFIG=/usr/share/ignite/config/Ignite.config
+
    ```
 8. Откройте для редактирования скрипт `control.sh`:
 
    ```
    nano control.sh
+
    ```
 
    9. Добавьте в скрипт `control.sh` следующие строки:
 
    ```
    DEFAULT_CONFIG=config/Ignite.config
+
    ```
 
    10. Создайте и откройте для редактирования скрипт `ignite_service_create.sh`. Этот скрипт будет создавать и запускать службу Apache Ignite:
 
    ```
    nano ignite_service_create.sh
+
    ```
 
    11. Введите в скрипт `ignite_service_create.sh` следующие директивы:
@@ -97,12 +104,14 @@ Apache Ignite в минимально необходимой конфигура�
    EOF
    systemctl daemon-reload
    systemctl enable ignite.service
+
    ```
 
    12. Инициализируйте и запустите службу Apache Ignite с помощью скрипта `ignite_service_create.sh`:
 
    ```
    bash ignite_service_create.sh
+
    ```
 
 ## Запуск Apache Ignite
@@ -111,12 +120,14 @@ Apache Ignite в минимально необходимой конфигура�
 
    ```
    systemctl start ignite
+
    ```
 2. Проверьте статус узла Apache Ignite:
 
    ```
    cd /usr/share/ignite/bin/
    bash control.sh --baseline
+
    ```
 
 ## Пример файла конфигурации Ignite
@@ -200,6 +211,7 @@ Apache Ignite в минимально необходимой конфигура�
       <autoGenerateIgniteinstanceName>false</autoGenerateIgniteinstanceName>
 </igniteConfiguration>
 </configuration>
+
 ```
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
