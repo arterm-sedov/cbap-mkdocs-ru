@@ -100,65 +100,67 @@ Telegram-бот будет представлять собой проект в V
            <PasswordBox x:Name="password" Password="введите пароль пользователя API  {{ productName }}" Width="240" Height="25" />
        </StackPanel>
    </Grid>
-   ```
+    ```
+
 7. Откройте файл `MainWindow.xaml.cs` с исходным кодом проекта и вставьте в него приведённый ниже код.
 
-   ```
-   using System.Windows;
-   using System;
-   using System.Threading;
-   using System.Threading.Tasks;
-   using Telegram.Bot;
-   using Telegram.Bot.Extensions.Polling;
-   using Telegram.Bot.Types;
+    ```
+    using System.Windows;
+    using System;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Telegram.Bot;
+    using Telegram.Bot.Extensions.Polling;
+    using Telegram.Bot.Types;
 
-   namespace Telegram
-   {
-       public partial class MainWindow : Window
-       {
-           static ITelegramBotClient bot;
+    namespace Telegram
+    {
+        public partial class MainWindow : Window
+        {
+            static ITelegramBotClient bot;
 
-           public MainWindow()
-           {
-               InitializeComponent();
-           }
+            public MainWindow()
+            {
+                InitializeComponent();
+            }
 
-           private void Button_Click(object  sender, RoutedEventArgs e)
-           {
-               bot = new TelegramBotClient(apitoken.Text);
-               var cts =   new   CancellationTokenSource();
-               var cancellationToken = cts.Token;
-               var receiverOptions =   new   ReceiverOptions
-               {
-                   AllowedUpdates = { }, // receive all update types
-               };
-               bot.StartReceiving(
-                   HandleUpdateAsync,
-                   HandleErrorAsync,
-                   receiverOptions,
-                   cancellationToken
-               );
-               MessageBox.Show("Бот запущен");
-           }
+            private void Button_Click(object  sender, RoutedEventArgs e)
+            {
+                bot = new TelegramBotClient(apitoken.Text);
+                var cts =   new   CancellationTokenSource();
+                var cancellationToken = cts.Token;
+                var receiverOptions =   new   ReceiverOptions
+                {
+                    AllowedUpdates = { }, // receive all update types
+                };
+                bot.StartReceiving(
+                    HandleUpdateAsync,
+                    HandleErrorAsync,
+                    receiverOptions,
+                    cancellationToken
+                );
+                MessageBox.Show("Бот запущен");
+            }
 
-           public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
-           {
-               try
-               {
-                   if (update.Type == Telegram.Bot.Types.Enums.UpdateType.Message)
-                   {
-                       var message = update.Message;
-                       await bot.SendTextMessageAsync(message.Chat.Id,   "Вы написали мне: "   + message.Text, Telegram.Bot.Types.Enums.ParseMode.Markdown);
-                   }
-               }catch { }
-           }
+            public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
+            {
+                try
+                {
+                    if (update.Type == Telegram.Bot.Types.Enums.UpdateType.Message)
+                    {
+                        var message = update.Message;
+                        await bot.SendTextMessageAsync(message.Chat.Id,   "Вы написали мне: "   + message.Text, Telegram.Bot.Types.Enums.ParseMode.Markdown);
+                    }
+                }catch { }
+            }
 
-           public async Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
-           {
-               MessageBox.Show("Ошибка " + exception.Message);
-           }
-       }}
-   ```
+            public async Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
+            {
+                MessageBox.Show("Ошибка " + exception.Message);
+            }
+        }}
+    ```
+
 8. Сохраните файл.
 9. Скомпилируйте и запустите приложение.
 10. В окне приложения нажмите кнопку *«Старт»* и подтвердите запуск ПО.
@@ -186,49 +188,50 @@ Telegram-бот будет представлять собой проект в V
 16. Добавьте в файл `MainWindow.xaml.cs` две функции:
 
     - `Get()` будет делать ***GET***-запрос для получения данных из шаблона аккаунта *«Sotrudniki»*. Результатом будет ***JSON***-ответ.
-    - `ValueFromJSON()` будет извлекать из этого ответа нужный атрибут. 
+    - `ValueFromJSON()` будет извлекать из этого ответа нужный атрибут.
 
-      ```
-      private string Get(string  OA_system_name)
-      {
-          var client =   new   RestClient(Domain);
-          client.Authenticator = new HttpBasicAuthenticator(Login, Password);
-          var request =   new   RestRequest("solution/" + OA_system_name, Method.Get);
-          request.AddHeader("Accept",   "application/json"  );
-          var response = client.Execute(request);
-          return response.Content;
-      }
+    ```
+    private string Get(string  OA_system_name)
+    {
+        var client =   new   RestClient(Domain);
+        client.Authenticator = new HttpBasicAuthenticator(Login, Password);
+        var request =   new   RestRequest("solution/" + OA_system_name, Method.Get);
+        request.AddHeader("Accept",   "application/json"  );
+        var response = client.Execute(request);
+        return response.Content;
+    }
 
-      private string ValueFromJSON(string  data,  string attribute_name, string  chat_id)
-      {
-          var doc = JsonDocument.Parse(data);
-          JsonElement root = doc.RootElement;
-          var users = root.EnumerateArray();
-          while (users.MoveNext())
-          {
-              var user = users.Current;
-              var props = user.EnumerateObject();
-              string value_ =   ""  , chat_id_ = "";
-              while (props.MoveNext())
-              {
-                  var prop = props.Current;
-                  if (prop.Name.ToLower() == attribute_name.ToLower())
-                  {
-                      value_ = prop.Value.ToString();
-                  }
-                  if (prop.Name.ToLower() ==   "chatid"  )
-                  {
-                      chat_id_ = prop.Value.ToString();
-                  }
-              }
-              if (chat_id_ == chat_id)
-              {
-                  return value_;
-              }
-          }
-          return "";
-      }
-      ```
+    private string ValueFromJSON(string  data,  string attribute_name, string  chat_id)
+    {
+        var doc = JsonDocument.Parse(data);
+        JsonElement root = doc.RootElement;
+        var users = root.EnumerateArray();
+        while (users.MoveNext())
+        {
+            var user = users.Current;
+            var props = user.EnumerateObject();
+            string value_ =   ""  , chat_id_ = "";
+            while (props.MoveNext())
+            {
+                var prop = props.Current;
+                if (prop.Name.ToLower() == attribute_name.ToLower())
+                {
+                    value_ = prop.Value.ToString();
+                }
+                if (prop.Name.ToLower() ==   "chatid"  )
+                {
+                    chat_id_ = prop.Value.ToString();
+                }
+            }
+            if (chat_id_ == chat_id)
+            {
+                return value_;
+            }
+        }
+        return "";
+    }
+    ```
+
 17. Теперь при запуске промежуточного ПО Telegram-бот запросит авторизацию.
 18. Реализуем процесс авторизации следующим образом: если пользователь по ChatID не найден, то будем рассматривать 3 варианта:
 

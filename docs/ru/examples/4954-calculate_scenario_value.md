@@ -12,11 +12,11 @@ kbId: 4954
 @prefix object: <http://comindware.com/ontology/object#>.
 @prefix cmwsession: <http://comindware.com/ontology/session#>.
 @prefix var: <http://comindware.com/ontology/session/variable#>.
- 
+
 {
    ("TimesheetPlan" "Performer") object:findProperty ?propTimesheetPerformer.
-    
-    cmwsession:context cmwsession:origin ?planWork. 
+
+    cmwsession:context cmwsession:origin ?planWork.
     ?planWork ?propTimesheetPerformer ?value.
 }
 

@@ -24,7 +24,7 @@ kbId: 4943
    ("Adresa" "Oblast") object:findProperty ?PropertyOblast.
    ("Organizatsii" "Adresaofisov_col") object:findProperty ?PropertyAdresaofisov_col.
    ("Organizatsii" "Filtrpooblasti") object:findProperty ?PropertyOblastFilter.
- 
+
    ?item ?PropertyOblastFilter ?filter.
    ?item ?PropertyAdresaofisov_col ?result_A.
    ?result_A ?PropertyOblast ?filter.

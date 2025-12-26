@@ -13,26 +13,26 @@ kbId: 4944
 @prefix sort: <http://comindware.com/ontology/dataset/sort#>.
 @prefix assert: <http://comindware.com/logics/assert#>.
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
- 
+
 {
     ("Document" "_creationDate") object:findProperty ?creationDate.
     ("Document" "_isDisabled") object:findProperty ?isDisabled.
   ("Document" "Otchety") object:findProperty ?Otcheti.
- 
- 
+
+
     from {
     ?OtchetiVal ?Otcheti ?item.
     not {?OtchetiVal ?isDisabled true.}.
     ?OtchetiVal ?creationDate ?creationDateVal.
     } select ?creationDateVal -> ?creationDateValList.
- 
+
     (?creationDateValList sort:timeComparer) assert:sort ?orderedCreationDateValList.
     ?orderedCreationDateValList rdf:last ?maxDate.
   once {?OtchetiVal2 ?Otcheti ?item.
     not {?OtchetiVal2 ?isDisabled true.}.
         ?OtchetiVal2 ?creationDate ?maxDate.
   }.
- 
+
     ?OtchetiVal2 -> ?value.
 }
 

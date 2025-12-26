@@ -16,13 +16,13 @@ kbId: 4961
 
 ```
 
-@prefix object: <http://comindware.com/ontology/object#>. 
+@prefix object: <http://comindware.com/ontology/object#>.
 @prefix cmwtime: <http://comindware.com/logics/time#>.
 {
     ("Works" "Date") object:findProperty ?dtProperty.
-    
+
     ?item ?dtProperty ?dtone.
-    ?dtone cmwtime:Year ?value.      
+    ?dtone cmwtime:Year ?value.
 }
 
 ```

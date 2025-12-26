@@ -13,7 +13,7 @@ kbId: 4942
 @prefix session: <http://comindware.com/ontology/session#>.
 @prefix cmwtime: <http://comindware.com/logics/time#>.
 {
-  ("Zayavki" "Data") object:findProperty ?DateProperty. 
+  ("Zayavki" "Data") object:findProperty ?DateProperty.
   session:context session:requestTime ?nowUTC.
 
   (?nowUTC "Etc/GMT" "Europe/Moscow") cmwtime:fromTzToTz ?nowMoscow.

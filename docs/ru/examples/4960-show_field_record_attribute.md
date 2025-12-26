@@ -13,10 +13,10 @@ kbId: 4960
 {
 ("Issue" "IssueTypeLink") object:findProperty ?IssueTypeProperty.
 ("IssueType" "Title") object:findProperty ?TitleProperty.
-   
+
  ?item ?IssueTypeProperty ?IssueType.
  ?IssueType ?TitleProperty ?Title.
-                                                                    
+
 if{?Title math:equalTo "Task".}
 then{true -> ?value.}
 else{false -> ?value.}

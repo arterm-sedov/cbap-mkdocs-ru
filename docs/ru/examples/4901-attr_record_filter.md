@@ -40,11 +40,11 @@ kbId: 4901
 {
     ("cities" "country") object:findProperty ?citiescountryProp.
     ("Zayavkinakomandirovku" "request_country") object:findProperty ?Zayavkinakomandirovkurequest_countryProp.
- 
+
     ?item ?Zayavkinakomandirovkurequest_countryProp ?Zayavkinakomandirovkurequest_countryProperty.
     ?value a [object:alias "cities"].
     ?value ?citiescountryProp ?Zayavkinakomandirovkurequest_countryProperty.
-    
+
 }
 
 ```

@@ -27,7 +27,7 @@ kbId: 4955
         ?item cmw:container ?cont2.
       ?item a cmw:UserTask.
     }
-)    
+)
     assert:union true.
 
 }
