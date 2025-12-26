@@ -173,8 +173,6 @@
 
 <!-- Экспорт в БЗ любых руководств -->
 
-[account_templates]: {{ kbArticleURLPrefix }}4757
-
 [accounts_required_unique]: {{ kbArticleURLPrefix }}4653#accounts_required_unique
 
 [accounts_substitution]: {{ kbArticleURLPrefix }}4653#accounts_substitution
@@ -243,11 +241,7 @@
 
 [n3_filter_active_tasks]: {{ kbArticleURLPrefix }}4935
 
-[navigation_sections_setup]: {{ kbArticleURLPrefix }}4809
-
 [openid_connection]: {{ kbArticleURLPrefix }}4685
-
-[organizational_unit_templates]: {{ kbArticleURLPrefix }}4755
 
 [r7_connection]: {{ kbArticleURLPrefix }}4689
 
@@ -300,8 +294,6 @@
 [release_notes_5.0.13334]: {{ kbArticleURLPrefix }}5094
 
 [release_notes_5.0.20251010]: {{ kbArticleURLPrefix }}5137
-
-[role_templates]: {{ kbArticleURLPrefix }}4760
 
 [s3_connection]: {{ kbArticleURLPrefix }}4677
 
@@ -1101,11 +1093,19 @@
 
 <!-- Руководство по API или экспорт в БЗ  -->
 
+[account_templates]: {{ kbArticleURLPrefix }}4757
+
 [authentication_keys]: {{ kbArticleURLPrefix }}4674
 
 [communication_routes]: {{ kbArticleURLPrefix }}4676
 
 [connections]: {{ kbArticleURLPrefix }}4675
+
+[navigation_sections_setup]: {{ kbArticleURLPrefix }}4809
+
+[organizational_unit_templates]: {{ kbArticleURLPrefix }}4755
+
+[role_templates]: {{ kbArticleURLPrefix }}4760
 
 [system_roles]: {{ kbArticleURLPrefix }}4662
 
