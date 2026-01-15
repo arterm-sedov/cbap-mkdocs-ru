@@ -2,7 +2,7 @@
 title: 'Конфигурация экземпляра, компонентов ПО и служб. Настройка'
 kbId: 5067
 url: 'https://kb.comindware.ru/article.php?id=5067'
-updated: '2025-10-27 17:56:30'
+updated: '2025-12-12 14:02:24'
 ---
 
 # Конфигурация экземпляра, компонентов ПО и служб. Настройка
@@ -56,7 +56,10 @@ updated: '2025-10-27 17:56:30'
    - `db.workDir` — директория для хранения базы данных экземпляра ПО.
    - `db.name` — префикс кэшей в базе данных экземпляра ПО.
    - `userStorage.localDisk.path` — директория для хранения загруженных файлов.
-   - `mq.server` — адрес сервера Apache Kafka.
+   - `mq.server` — адрес и порт брокера сообщений Apache Kafka.
+   - `mq.group` — идентификатор группы очереди сообщений.
+   - `mq.name` — префикс имени очередей сообщений.
+   - `mq.node` — идентификатор узла очереди сообщений.
    - `backup.defaultFolder` — директория для хранения резервных копий экземпляра ПО.
    - `backup.defaultFileName` — имя файла резервной копии экземпляра ПО.
 
@@ -124,8 +127,11 @@ configPath: <configPath>
 # Адрес службы журналирования OpenSearch (Elasticsearch).
 # Устаревшая директива: elasticsearchUri
 journal.server: http://<searchHostIP>:<searchHostPort>
-# Индекс службы журналирования.
-# journal.name: <prefix>-<instanceName>
+# Индекс службы журналирования OpenSearch (Elasticsearch).
+# Допускается использовать только строчные буквы и цифры.
+# Если в имени индекса будут прописные буквы или спецсимволы (например, дефис),
+# служба журналирования автоматически преобразует их в строчные буквы и символы подчёркивания.
+# journal.name: <prefix><instanceName>
 # Имя пользователя службы журналирования
 # journal.username: xxxx
 # Пароль службы журналирования
@@ -157,7 +163,11 @@ db.workDir: /var/lib/comindware/<instanceName>/Database
 #db.jvmOpts:
 # Настройки Java.
 #db.javaOpts:
+# Включение автоматической активации кластера Apache Ignite при запуске.
+# При использовании нескольких узлов рекомендуется отключить на всех узлах.
+#db.baselineAutoActivationEnabledFlag: false
 # Включение автоматической настройки узлов Apache Ignite.
+# На всех узлах должно быть одинаковое значение.
 #db.baselineAutoAdjustEnabledFlag: false
 # Время ожидания фактического изменения настройки узлов Apache Ignite
 # с момента последнего изменения.
@@ -167,10 +177,28 @@ db.workDir: /var/lib/comindware/<instanceName>/Database
 # Используемый префикс кэшей в базе данных
 # Устаревшая директива: databaseName
 db.name: <instanceName>
+# Вес узла (целочисленное значение) с точки зрения кластера Apache Ignite.
+# Суммарный вес всех узлов должен превышать 100.
+# Значение по умолчанию: 100/кол-во узлов.
+#db.weight:
 # Префикс кэшей в базе данных, используемый при обновлении.
 #db.upgradeName:
 # Путь к онтологии Comindware
 #db.n3Dir:
+# Директива применяется во время апгрейда кэшей. Если флаг не установлен, старые кэши необходимо удалять вручную.
+#db.autoRemoveCachesOnUpgrade: false
+# Директива применяется во время запуска системы. Если флаг установлен, на существующие кэши будет применена новая конфигурация (если она отличается).
+#db.applyCachesConfigsOnStart: false
+# Количество резервных копий для каждого кэша. При db.systemCacheConfig.cacheMode = Replicated не оказывает влияния.
+#db.cacheConfig.backups: 2
+# Тип кэша. Доступные значения: Partitioned | Replicated
+#db.cacheConfig.cacheMode: Replicated
+# Задержка ребалансировки (в секундах) при изменении топологии кластера Apache Ignite.
+#db.cacheConfig.rebalanceDelay: 0
+# Тип ребалансировки. Доступные значения: Sync | Async | None
+#db.cacheConfig.rebalanceMode: Async
+# Тип синхронизации данных кэша. Доступные значения: FullSync | FullAsync | PrimarySync
+db.cacheConfig.writeSynchronizationMode: FullSync
 
 ##### Настройка хранения загруженных файлов #####
 # Тип хранилища (LocalDisk | S3).
@@ -222,6 +250,14 @@ mq.node: <instanceName>
 #mq.sasl.password:
 # Тип механизма SASL (None | Plain | ScramSha256 | ScramSha512).
 #mq.sasl.mechanism:
+
+##### Создание топиков #####
+# Коэффициент репликации для создаваемого топика.
+#mq.replicationFactor: 3
+# Количество партиций для создаваемого топика.
+#mq.numPartitions: 16
+# Таймаут для запроса метаданных (миллисекунды).
+#mq.metadataTimeoutMsec: 3000
 
 ##### Настройка очереди сообщений для коммуникации с адаптерами #####
 # Выключение функции коммуникации брокера сообщений с адаптером 0.
@@ -301,7 +337,7 @@ backup.defaultFileName: <instanceName>
 # Тип хранилища (LocalDisk | S3).
 #backup.default.<backupName>.repository.type: LocalDisk
 # Путь к файлам резервных копий.
-#backup.default.<backupName>.repository.localDisk.path: /var/backups/<iname>
+#backup.default.<backupName>.repository.localDisk.path: /var/backups/<instanceName>
 # Имя корзины S3 для хранения файлов резервных копий.
 #backup.default.<backupName>.repository.s3.bucket:
 # Имя подключения к S3.
@@ -372,7 +408,6 @@ backup.defaultFileName: <instanceName>
 ##### Настройка сенсоров мониторинга #####
 # Выключение функции сенсоров мониторинга.
 #sensors.enabled: false
-
 ##### Настройка синхронизации аккаунтов с LDAP-сервисом #####
 # Выключение функции синхронизации.
 #sync.ldap.enabled: true

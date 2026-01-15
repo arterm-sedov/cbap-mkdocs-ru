@@ -2,7 +2,7 @@
 title: 'Elasticsearch. Установка в базовой конфигурации для Windows'
 kbId: 4617
 url: 'https://kb.comindware.ru/article.php?id=4617'
-updated: '2025-06-17 19:02:52'
+updated: '2025-12-03 12:06:10'
 ---
 
 # Elasticsearch. Установка в базовой конфигурации для Windows
@@ -11,11 +11,11 @@ updated: '2025-06-17 19:02:52'
 
 Для работы **Comindware Platform** требуется сервер Elasticsearch. См. [системные требования](https://kb.comindware.ru/article.php?id=4659).
 
-Установщик **Comindware Platform** в Windows можно установить службу Elasticsearch в базовой конфигурацию: без аутентификации и с одним узлом. Она доступна по адресу `localhost:9200`.
+Установщик **Comindware Platform** в Windows позволяет установить службу Elasticsearch в базовой конфигурации: без аутентификации и с одним узлом по адресу `localhost:9200`.
 
 См. *«[Установка, запуск, инициализация и остановка ПО в Windows](https://kb.comindware.ru/article.php?id=5063)»*.
 
-Вы можете использовать имеющуюся службу Elasticsearch или развернуть её на отдельном сервере.
+Кроме того, вы можете использовать уже имеющуюся у вас службу Elasticsearch или развернуть её на отдельном сервере.
 
 Здесь представлены требования к техническому обеспечению и инструкции по развёртыванию службы Elasticsearch в ОС Windows, а также приведён пример типового файла конфигурации. Инструкции представлены для версии Elasticsearch 8.10.2, для других версий содержимое файлов конфигурации и порядок установки могут быть иными.
 
@@ -89,24 +89,34 @@ updated: '2025-06-17 19:02:52'
 
 ## Подключение к Elasticsearch при развертывании экземпляра ПО
 
-1. При необходимости при запуске экземпляра ПО **Comindware Platform** укажите адрес сервера и префикс индекса Elasticsearch для данного экземпляра.
+После настройки Elasticsearch необходимо подключить к ней экземпляр ПО **Comindware Platform**.
 
-   ![Настройка адреса сервера Elasticsearch для экземпляра ПО](https://kb.comindware.ru/assets/Picture7.png)
+1. Укажите адрес сервера и префикс индекса Elasticsearch данного экземпляра в файле конфигурации экземпляра по `<instanceName>.yml` с помощью следующих директив:
 
-   Настройка адреса сервера Elasticsearch для экземпляра ПО
-2. После развертывания экземпляра ПО в разделе «**Администрирование системы**» — «**Подключения**» будет отображаться настроенное подключение к Elasticsearch.
+   - `journal.server` — адрес сервера OpenSearch (Elasticsearch).
+   - `journal.name` — префикс индекса сервера OpenSearch (Elasticsearch) (необязательно, по умолчанию назначается префикс `cmw<instanceName>`).
+   - `journal.username` — имя пользователя сервера OpenSearch (Elasticsearch) (необязательно).
+   - `journal.password` — пароль сервера OpenSearch (Elasticsearch) (необязательно).
 
-   ![Подключение к Elasticsearch в новом экземпляре ПО](/platform/v5.0/administration/deploy/windows/auxiliary_software_deploy/img/elasticsearch_deploy_windows_connection.png)
+   Пример конфигурации подключения к Elasticsearch```
+   # Адрес службы журналирования OpenSearch (Elasticsearch).
+   journal.server: http://<searchHostIP>:<searchHostPort>
+   # Индекс службы журналирования OpenSearch (Elasticsearch).
+   # Допускается использовать только строчные буквы и цифры.
+   # Если в имени индекса будут прописные буквы или спецсимволы (например, дефис),
+   # служба журналирования автоматически преобразует их в строчные буквы и символы подчёркивания.
+   # journal.name: <prefix><instanceName>
+   # Имя пользователя службы журналирования
+   # journal.username: xxxx
+   # Пароль службы журналирования
+   # journal.password: xxxx
+   # Выключение службы журналирования.
+   #journal.enabled: false
+   # Выключение проверки валидации сертификатов
+   #journal.certificateSkipValidation: false
 
-   Подключение к Elasticsearch в новом экземпляре ПО
-3. Чтобы изменить свойства подключения к Elasticsearch, дважды нажмите его строку в списке подключений.
-4. Отобразится окно «**Свойства подключения: Elasticsearch**».
-5. При необходимости измените свойства подключения, **проверьте соединение** и нажмите кнопку «**Сохранить**».
-
-   ![Настройка свойств подключения к Elasticsearch](/platform/v5.0/administration/deploy/windows/auxiliary_software_deploy/img/elasticsearch_deploy_windows_connection_configure.png)
-
-   Настройка свойств подключения к Elasticsearch
-6. После изменения свойств сервера Elasticsearch перезапустите экземпляр ПО.
+   ```
+2. После изменения конфигурации подключения к Elasticsearch перезапустите экземпляр ПО.
 
 ## Пример типового файла конфигурации Elasticsearch
 

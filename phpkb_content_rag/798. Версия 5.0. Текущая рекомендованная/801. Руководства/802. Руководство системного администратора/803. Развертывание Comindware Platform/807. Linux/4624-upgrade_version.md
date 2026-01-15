@@ -2,7 +2,7 @@
 title: 'Обновление версии экземпляра ПО с его остановкой'
 kbId: 4624
 url: 'https://kb.comindware.ru/article.php?id=4624'
-updated: '2025-10-23 16:31:24'
+updated: '2025-12-25 16:11:49'
 ---
 
 # Обновление версии экземпляра ПО с его остановкой
@@ -287,7 +287,31 @@ updated: '2025-10-23 16:31:24'
 
    - В новейших версиях **Comindware Platform** отсутствует файл `Workers.config`.
    - Настройка соответствующих служб выполняется в файле конфигурации экземпляра ПО `<instanceName>.yml`.
-4. Перезапустите службы **Comindware Platform**:
+4. Откройте для редактирования три службы **каждого** из установленных экземпляров ПО (`<instanceName>`):
+
+   ```
+   nano /usr/lib/systemd/system/comindware<instanceName>.service
+   nano /usr/lib/systemd/system/apigateway<instanceName>.service
+   nano /usr/lib/systemd/system/adapterhost<instanceName>.service
+
+   ```
+5. Если используются локальные службы Kafka и OpenSearch (Elasticsearch), откройте их для редактирования:
+
+   ```
+   nano /usr/lib/systemd/system/kafka.service
+   nano /usr/lib/systemd/system/elasticsearch.service
+
+   ```
+6. В каждом файле службы установите следующие директивы:
+
+   ```
+   # Макс. количество открытых файлов
+   LimitNOFILE=200000
+   # Макс. количество процессов
+   LimitNPROC=8192
+
+   ```
+7. Перезапустите службы **Comindware Platform**:
 
    ```
    systemctl restart adapterhost<instanceName>.service
@@ -295,7 +319,126 @@ updated: '2025-10-23 16:31:24'
    systemctl restart apigateway<instanceName>.service
 
    ```
-5. Инициализируйте экземпляра ПО.
+8. [Проверьте конфигурацию ОС и служб](#upgrade_version_linux_check_service_statuses).
+9. [Инициализируйте экземпляр ПО](#upgrade_version_linux_initialize).
+
+## Проверка конфигурации ОС и служб
+
+Перед созданием экземпляра ПО проверьте конфигурацию Linux и при необходимости внесите в неё перечисленные ниже изменения.
+
+1. Перейдите в режим суперпользователя:
+
+   ```
+   sudo -s
+
+   ```
+
+   или
+
+   ```
+   su -
+
+   ```
+2. Откройте для редактирования файл `limits.conf`:
+
+   ```
+   nano /etc/security/limits.conf
+
+   ```
+3. Установите следующие директивы:
+
+   - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+
+   ```
+   www-data soft nproc 200000
+   www-data hard nproc 200000
+   www-data soft nofile 200000
+   www-data hard nofile 200000
+
+   ```
+
+   - **РЕД ОС**, **Rocky** (RPM-based)
+
+   ```
+   nginx soft nproc 200000
+   nginx hard nproc 200000
+   nginx soft nofile 200000
+   nginx hard nofile 200000
+
+   ```
+
+   - **Альт Сервер**
+
+   ```
+   _nginx soft nproc 200000
+   _nginx hard nproc 200000
+   _nginx soft nofile 200000
+   _nginx hard nofile 200000
+
+   ```
+4. Откройте файл `common-session` для редактирования:
+
+   ```
+   nano /etc/pam.d/common-session
+
+   ```
+5. Установите следующую директиву:
+
+   ```
+   session required pam_limits.so
+
+   ```
+6. Откройте файл `sysctl.conf` для редактирования:
+
+   ```
+   nano /etc/sysctl.conf
+
+   ```
+7. Установите следующие директивы:
+
+   ```
+   fs.file-max=2097152
+   vm.max_map_count=262144
+   fs.inotify.max_user_instances=524288
+
+   ```
+
+   Оптимальное значение vm.max\_map\_count
+
+   Значение `vm.max_map_count=262144` приведено для примера.
+
+   Определите оптимальное значение `vm.max_map_count` согласно инструкциям в параграфе «[Настройка параметра vm.max\_map\_count](https://kb.comindware.ru/article.php?id=4622#deploy_guide_linux_vm_max_map_count)».
+8. Откройте файл `user.conf` для редактирования:
+
+   ```
+   nano /etc/systemd/user.conf
+
+   ```
+9. Установите следующую директиву:
+
+   ```
+   DefaultLimitNOFILE=200000
+
+   ```
+10. Откройте файл `system.conf` для редактирования:
+
+    ```
+    nano /etc/systemd/system.conf
+
+    ```
+11. Установите следующую директиву:
+
+    ```
+    DefaultLimitNOFILE=200000
+
+    ```
+12. После внесения изменений перезапустите демоны:
+
+    ```
+    sysctl -p
+    systemctl daemon-reexec
+
+    ```
 
 ## Инициализация экземпляра ПО
 
