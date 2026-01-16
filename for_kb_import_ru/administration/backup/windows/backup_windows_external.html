@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4645" kb-tags="" kb-title="Резервное копирование с помощью внешних средств в ОС Windows">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4645" kb-tags="Windows,резервное копирование,бэкап,бекап,backup,резервная копия" kb-title="Резервное копирование с помощью внешних средств в ОС Windows">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -6,6 +6,13 @@
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
+<div class="notice notice-warning">
+<p class="admonition-title">Резервное копирование крупных баз данных</p>
+<p>Если размер базы данных превышает 10 ГБ, рекомендуется использовать скрипт резервного копирования на сервере для обеспечения оптимальной производительности резервного копирования и работы <strong>Comindware Platform</strong>.</p>
+<p>Это связано с тем, что резервное копирование больших баз данных встроенными средствами <strong>Comindware Platform</strong> создаёт значительную вычислительную нагрузку и может приводить к снижению производительности.</p>
+<p>См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5140">Настройка и использование скрипта для резервного копирования данных (Linux)</a>»</em>.</p>
+<p>Скрипт резервного копирования следует запросить у <a class="mkdocs_imported_link" href="https://www.comindware.ru/company/contact-us/#tab_support">службы поддержки Comindware</a>.</p>
+</div>
 <p>Запустить резервное копирование по расписанию можно с помощью встроенного инструмента Windows – Планировщика заданий.</p>
 <ol class="colored_numbers_list">
 <li>
@@ -13,12 +20,12 @@
 </li>
 <li>
 <p>В созданном файле укажите <code>login</code> — имя пользователя, <code>password</code> — пароль для входа в экземпляр ПО, <code>backupID</code> — идентификатор конфигурации резервного копирования в экземпляре системы. См. раздел <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642">Просмотр списка конфигураций резервного копирования</a>»</em>.</p>
-<p><div class="highlight"><code><pre><span></span><code># Enter your credential</code> <br/><code>$login = «admin»</code> <br/><code>$password = «admin»</code> <br/><code></code> <br/><code># Enter required backup</code> <br/><code></code> <br/><code>configuration ID</code> <br/><code>$backupID = «backupConfig.1»</code> <br/><code></code> <br/><code># Execution</code> <br/><code>$localhost = «http://localhost:8081/»</code> <br/><code>$api = «webapi/backupsession?ConfigurationId=»</code> <br/><code>$uri = $localhost + $api + $backupID</code> <br/><code></code> <br/><code>$WebClient = New-Object System.Net.WebClient</code> <br/><code>$WebClient.Credentials = New-Object System.Net.NetworkCredential($login, $password)</code> <br/><code>$WebClient.Encoding = [System.Text.Encoding]::UTF8</code> <br/><code>$response = $WebClient.UploadString($uri, «POST»,»»)</code> <br/><code>$response</code> <br/></pre></code></div>
-3. Откройте Планировщик заданий. До этого удостоверьтесь, что служба планировщика запускается автоматически.</p>
+<div class="highlight"><code><pre><span></span><code><span class="c1"># Enter your credential</span></code> <br/><code><span class="na">$login</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"admin"</span></code> <br/><code><span class="na">$password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"admin"</span></code> <br/><code></code> <br/><code><span class="c1"># Enter required backup</span></code> <br/><code></code> <br/><code><span class="na">configuration ID</span></code> <br/><code><span class="na">$backupID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"backupConfig.1"</span></code> <br/><code></code> <br/><code><span class="c1"># Execution</span></code> <br/><code><span class="na">$localhost</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"http://localhost:8081/"</span></code> <br/><code><span class="na">$api</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"webapi/backupsession?ConfigurationId="</span></code> <br/><code><span class="na">$uri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">$localhost + $api + $backupID</span></code> <br/><code></code> <br/><code><span class="na">$WebClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">New-Object System.Net.WebClient</span></code> <br/><code><span class="na">$WebClient.Credentials</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">New-Object System.Net.NetworkCredential($login, $password)</span></code> <br/><code><span class="na">$WebClient.Encoding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">[System.Text.Encoding]::UTF8</span></code> <br/><code><span class="na">$response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">$WebClient.UploadString($uri, "POST","")</span></code> <br/><code><span class="na">$response</span></code> <br/></pre></code></div>
 </li>
 <li>
-<p>Откройте раздел «<strong>Windows</strong>».</p>
+<p>Откройте Планировщик заданий. До этого удостоверьтесь, что служба планировщика запускается автоматически.</p>
 </li>
+<li>Откройте раздел «<strong>Windows</strong>».</li>
 <li>
 <p>Создайте новую задачу, нажав кнопку «<strong>Создать задачу</strong>».</p>
 <p><figure class="screenshot_with_caption" markdown=""><img alt="Планировщик заданий" src="https://kb.comindware.ru/assets/img_63bbd8e851cae.png"/><figcaption class="caption">Планировщик заданий</figcaption></figure></p>

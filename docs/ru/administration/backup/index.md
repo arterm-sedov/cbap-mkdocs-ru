@@ -22,6 +22,8 @@ hide: tags
 
 Инструкции по настройке резервного копирования встроенными средствами **{{ productName }}** см. в статье _«[Резервное копирование. Настройка, запуск и просмотр журнала сеансов][backup_configure]»_.
 
+{% include-markdown ".snippets/backup_large_database_warning.md" %}
+
 ## Общие рекомендации
 
 - **Проведите анализ влияния на бизнес (BIA)**
@@ -111,15 +113,14 @@ hide: tags
 
 --8<-- "related_topics_heading.md"
 
-- _[Резервное копирование. Настройка, запуск и просмотр журнала сеансов][backup_configure]_
-- _[Восстановление базы данных из файла резервной копии в формате .CDBBZ][backup_restore_cdbbz]_
-- _[Хранилище S3. Настройка экземпляра ПО и подключения][s3_connection]_
+- [Резервное копирование. Настройка, запуск и просмотр журнала сеансов][backup_configure]
+- [Настройка и использование скрипта для резервного копирования данных (Linux)][backup_linux_script]
+- [Восстановление базы данных из файла резервной копии в формате .CDBBZ][backup_restore_cdbbz]
+- [Хранилище S3. Настройка экземпляра ПО и подключения][s3_connection]
 {% if kbExport %}
-- _[Резервное копирование и восстановление. Содержание раздела][backup_and_restore]_
+- [Резервное копирование и восстановление. Содержание раздела][backup_and_restore]
 {% endif %}
 
 </div>
 
-{%
-include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md"
-%}
+{% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

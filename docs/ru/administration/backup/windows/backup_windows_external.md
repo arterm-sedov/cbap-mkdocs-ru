@@ -1,7 +1,17 @@
 ---
 title: Резервное копирование с помощью внешних средств в ОС Windows
 kbId: 4645
+tags:
+    - Windows
+    - резервное копирование
+    - бэкап
+    - бекап
+    - backup
+    - резервная копия
+hide: tags
 ---
+
+{% include-markdown ".snippets/backup_large_database_warning.md" %}
 
 # Резервное копирование с помощью внешних средств в ОС Windows {: #backup_windows_external}
 
@@ -11,31 +21,30 @@ kbId: 4645
 
 2. В созданном файле укажите `login` — имя пользователя, `password` — пароль для входа в экземпляр ПО, `backupID` — идентификатор конфигурации резервного копирования в экземпляре системы. См. раздел *«[Просмотр списка конфигураций резервного копирования][backup_configure]»*.
 
-    ```
+    ``` ini
     # Enter your credential
-    $login = «admin»
-    $password = «admin»
+    $login = "admin"
+    $password = "admin"
 
     # Enter required backup
 
     configuration ID
-    $backupID = «backupConfig.1»
+    $backupID = "backupConfig.1"
 
     # Execution
-    $localhost = «http://localhost:8081/»
-    $api = «webapi/backupsession?ConfigurationId=»
+    $localhost = "http://localhost:8081/"
+    $api = "webapi/backupsession?ConfigurationId="
     $uri = $localhost + $api + $backupID
 
     $WebClient = New-Object System.Net.WebClient
     $WebClient.Credentials = New-Object System.Net.NetworkCredential($login, $password)
     $WebClient.Encoding = [System.Text.Encoding]::UTF8
-    $response = $WebClient.UploadString($uri, «POST»,»»)
+    $response = $WebClient.UploadString($uri, "POST","")
     $response
     ```
+
 3. Откройте Планировщик заданий. До этого удостоверьтесь, что служба планировщика запускается автоматически.
-
 4. Откройте раздел «**Windows**».
-
 5. Создайте новую задачу, нажав кнопку «**Создать задачу**».
 
     _![Планировщик заданий](https://kb.comindware.ru/assets/img_63bbd8e851cae.png)_

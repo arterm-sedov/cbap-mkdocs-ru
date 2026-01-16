@@ -66,6 +66,8 @@
 
 [legal_policies]: https://www.comindware.ru/policy/
 
+[supportUrl]: https://www.comindware.ru/company/contact-us/#tab_support
+
 [apache_ignite_clustering]: https://ignite.apache.org/docs/latest/clustering/clustering
 
 [apache_ignite_partition_loss_policy]: https://ignite.apache.org/docs/latest/configuring-caches/partition-loss-policy
