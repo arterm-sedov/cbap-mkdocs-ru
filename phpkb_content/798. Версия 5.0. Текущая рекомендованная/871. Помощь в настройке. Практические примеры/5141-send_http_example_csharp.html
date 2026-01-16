@@ -1,0 +1,294 @@
+<h1>HTTP-запросы POST. Отправка JSON-данных и обработка ответа с помощью C#-скриптов. Настройка подключения, пути передачи данных и сценария</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5141" kb-tags="C#,HTTP-запрос,JSON,POST-запрос,интеграция,интеграции,подключения,сценарии" kb-title="HTTP-запросы POST. Отправка JSON-данных и обработка ответа с помощью C#-скриптов. Настройка подключения, пути передачи данных и сценария">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#http_send_example_csharp_introduction">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#http_send_example_csharp_task">
+<span class="md-ellipsis">
+      Прикладная задача
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#http_send_example_csharp_connection">
+<span class="md-ellipsis">
+      Настройка подключения
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#http_send_example_csharp_route">
+<span class="md-ellipsis">
+      Настройка пути передачи данных
+    </span>
+</a>
+<nav aria-label="Настройка пути передачи данных" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#http_send_example_csharp_route_main">
+<span class="md-ellipsis">
+      Основные свойства
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#http_send_example_csharp_route_attributes">
+<span class="md-ellipsis">
+      Атрибуты сообщений
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#http_send_example_csharp_route_integration">
+<span class="md-ellipsis">
+      Интеграция
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#http_send_example_csharp_scenario">
+<span class="md-ellipsis">
+      Настройка сценария отправки HTTP-запроса
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="http_send_example_csharp_introduction">Введение</h2>
+<p><strong>Comindware Platform</strong> позволяет отправлять HTTP-запросы типов <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code> с помощью сценариев для взаимодействия с внешними системами.</p>
+<p>Здесь представлен пример настройки подключения, пути передачи данных и <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4717">сценария</a> для отправки HTTP-запросов <code>POST</code> с использованием C#-скриптов и записи данных из ответа сервера в формате JSON в атрибуты шаблона записи.</p>
+<p>Настройка для обработки данных в формате XML и простого текста будет аналогичной.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>Модели данных классов в C#-скриптах и в пути передачи данных должны совпадать, в противном случае данные не будут сопоставлены и не будут передаваться.</p>
+</div>
+<h2 class="pageBreakBefore" id="http_send_example_csharp_task">Прикладная задача</h2>
+<p>Требуется отправить заказ из нескольких позиций и получить статус заказа: <em>Принят</em> или <em>Отклонён</em>.</p>
+<p>Рассмотрим настройку отправки запросов на сервер и получение от него ответов.</p>
+<ul>
+<li>Имеются шаблоны записей:<ul>
+<li><em>«Заказы»</em> с атрибутами:</li>
+<li><em>«Номер заказа»</em> типа «<strong>Текст</strong>»;</li>
+<li><em>«Позиции»</em> типа «<strong>Запись</strong>», ссылается на шаблон <em>«Позиции заказов»</em> и <strong>хранит несколько значений</strong>;</li>
+<li><em>«Статус заказа»</em> типа «<strong>Текст</strong>».</li>
+<li><em>«Позиции заказов»</em> с атрибутами:</li>
+<li><em>«Товар»</em> типа «<strong>Текст</strong>»;</li>
+<li><em>«Количество»</em> типа «<strong>Число</strong>».</li>
+</ul>
+</li>
+<li>Базовый URL для HTTP-запросов: <code>https://&lt;hostname&gt;/api</code></li>
+<li>
+<p>Путь для отправки заказа на проверку статуса: <code>https://&lt;hostname&gt;/api/place-order</code></p>
+<p>При настройке приложения подставьте реальный адрес вместо <code>https://&lt;hostname&gt;/api/place-order</code></p>
+</li>
+<li>
+<p><a class="mkdocs_imported_link" href="#http_send_example_csharp_scenario">Сценарий</a> выполняет следующие операции:</p>
+<ul>
+<li>формирует данные для отправки с помощью C#-скрипта;</li>
+<li>отправляет HTTP-запрос на сервер;</li>
+<li>обрабатывает полученный ответ и изменяет статус заказа с помощью C#-скрипта.</li>
+</ul>
+</li>
+<li>
+<p>Запрос содержит данные позиций в формате JSON вида:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"orderNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="nt">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"int"</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code><span class="w">    </span><span class="p">]</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>В ответ на запрос сервер возвращает JSON-ответ вида:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+</ul>
+<h2 class="pageBreakBefore" id="http_send_example_csharp_connection">Настройка подключения</h2>
+<ol class="colored_numbers_list">
+<li>Откройте раздел «<strong>Администрирование</strong>» — «<strong>Подключения</strong>».</li>
+<li>
+<p>В меню «<strong>Создать</strong>» выберите пункт «<strong>Подключения REST и OData</strong>» — «<strong>Отправка HTTP-запросов</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Создание подключения для отправки HTTP-запросов" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/send_http_example_csharp_create.png"/><figcaption class="caption">Создание подключения для отправки HTTP-запросов</figcaption></figure></p>
+</li>
+<li>
+<p>Настройте подключение для отправки HTTP-запросов со следующими параметрами:</p>
+<ul>
+<li><strong>URI</strong> — <code>https://&lt;hostname&gt;/api</code>. Символ <code>/</code> в конце URI не требуется.</li>
+<li><strong>Формат данных</strong> — <strong>JSON</strong>. Также поддерживаются <strong>XML</strong> и <strong>простой текст</strong>, но здесь рассматривается обработка данных в формате JSON.</li>
+</ul>
+</li>
+<li>
+<p>Остальные параметры подключения настройте в соответствии с конфигурацией используемого сервера. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4703">Отправка HTTP-запросов. Настройка подключения</a>»</em>.</p>
+</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Настройка подключения для отправки HTTP-запросов" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/send_http_example_csharp_settings.png"/><figcaption class="caption">Настройка подключения для отправки HTTP-запросов</figcaption></p>
+</figure>
+<h2 class="pageBreakBefore" id="http_send_example_csharp_route">Настройка пути передачи данных</h2>
+<ol class="colored_numbers_list">
+<li>Откройте раздел «<strong>Администрирование</strong>» — «<strong>Пути передачи данных</strong>».</li>
+<li>
+<p>В меню «<strong>Создать</strong>» выберите пункт «<strong>Подключения REST и OData</strong>» — «<strong>Отправка HTTP-запросов</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Создание пути передачи данных для отправки HTTP-запросов" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/send_http_example_csharp_path_create.png"/><figcaption class="caption">Создание пути передачи данных для отправки HTTP-запросов</figcaption></figure></p>
+</li>
+<li>
+<p>Настройте путь передачи данных для отправки HTTP-запросов на вкладках «<strong>Основные свойства</strong>», «<strong>Атрибуты сообщений</strong>», «<strong>Интеграция</strong>».</p>
+</li>
+</ol>
+<h3 id="http_send_example_csharp_route_main">Основные свойства</h3>
+<ul>
+<li><strong>Подключение</strong> — выберите ранее созданное <a class="mkdocs_imported_link" href="#http_send_example_csharp_connection">подключение для отправки HTTP-запросов</a>.</li>
+<li><strong>Системное имя</strong> — введите системное имя пути передачи данных латинскими буквами.</li>
+<li><strong>Отключить</strong> — установите этот флажок, если требуется деактивировать путь передачи данных.</li>
+<li><strong>Описание</strong> — введите наглядное описание назначения пути передачи данных.</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Настройка подключения для отправки HTTP-запросов" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/send_http_example_csharp_route_general.png"/><figcaption class="caption">Настройка подключения для отправки HTTP-запросов</figcaption></p>
+</figure>
+<h3 class="pageBreakBefore" id="http_send_example_csharp_route_attributes">Атрибуты сообщений</h3>
+<ul>
+<li><strong>Тип сообщения</strong> — выберите «<strong>Отправка HTTP-запросов</strong>».</li>
+<li>
+<p><strong>Запрос</strong> — добавьте следующие атрибуты:</p>
+<ul>
+<li><code>orderNumber</code> типа «<strong>Строка</strong>» — номер заказа.</li>
+<li><code>items</code> типа «<strong>Объект</strong>»:<ul>
+<li>Установите флажок «<strong>Массив</strong>» — атрибут <code>items</code> будет содержать массив позиций.</li>
+<li>Установите флажок слева от атрибута <code>items</code> и добавьте в него дочерние атрибуты:<ul>
+<li><code>product</code> типа «<strong>Строка</strong>» — название товара.</li>
+<li><code>number</code> типа «<strong>Число</strong>» — количество товара.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>В эти атрибуты будут передаваться данные позиций для отправки на внешний сервер.</p>
+<p><strong>Системные имена</strong> этих атрибутов должны совпадать с именами соответствующих полей HTTP-запроса.</p>
+</li>
+<li>
+<p><strong>Ответ</strong> — добавьте атрибут <code>status</code> типа «<strong>Строка</strong>» — этот атрибут будет содержать статус с ответом от сервера.</p>
+</li>
+<li><strong>Ответ с ошибкой</strong> — добавьте атрибут <code>status</code> типа «<strong>Строка</strong>» — этот атрибут будет содержать статус с ошибкой от сервера.</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Настройка атрибутов сообщения в свойствах пути передачи данных для отправки HTTP-запросов" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/send_http_example_csharp_attribute_settings.png"/><figcaption class="caption">Настройка атрибутов сообщения в свойствах пути передачи данных для отправки HTTP-запросов</figcaption></p>
+</figure>
+<h3 class="pageBreakBefore" id="http_send_example_csharp_route_integration">Интеграция</h3>
+<ul>
+<li><strong>Метод запроса</strong> — выберите <strong>POST</strong>.</li>
+<li>
+<p><strong>Шаблон пути запроса</strong> — введите <code>place-order</code> (фактический путь к HTTP-запросу на сервере), этот суффикс будет добавлен к <strong>URI</strong>, указанному в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4703">свойствах подключения для отправки HTTP-запросов</a>.</p>
+<p>То есть, при шаблоне пути запроса <code>place-order</code> для <strong>URI</strong> <code>https://&lt;hostname&gt;/api</code> результирующий путь запроса будет <code>https://&lt;hostname&gt;/api/place-order</code>.</p>
+</li>
+<li>
+<p><strong>Атрибут для сериализации в тело запроса</strong> — введите через запятую системные имена атрибутов из таблицы «<strong>Запрос</strong>» на вкладке «<strong>Атрибуты сообщений</strong>», в нашем примере: <code>orderNumber</code>, <code>items</code>.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка интеграции в свойствах пути передачи данных для отправки HTTP-запросов" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/send_http_example_csharp_integration_settings.png"/><figcaption class="caption">Настройка интеграции в свойствах пути передачи данных для отправки HTTP-запросов</figcaption></figure></p>
+</li>
+<li>
+<p><strong>Атрибуты для десериализации ответа без ошибки</strong> и <strong>Атрибуты для десериализации ответа с ошибкой</strong> — создайте одну строку в каждой таблице и введите символ <code>$</code> в столбцы «<strong>Путь к атрибуту</strong>» и «<strong>Выражение на языке запросов</strong>». Этот символ обозначает передачу всей структуры <code>JSON</code>.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка атрибутов для десериализации ответа в пути передачи данных для отправки HTTP-запросов" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/send_http_example_csharp_attribute_serialization_settings.png"/><figcaption class="caption">Настройка атрибутов для десериализации ответа в пути передачи данных для отправки HTTP-запросов</figcaption></figure></p>
+</li>
+</ul>
+<h2 class="pageBreakBefore" id="http_send_example_csharp_scenario">Настройка сценария отправки HTTP-запроса</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Логика работы сценария</p>
+<ul>
+<li>В сценарии используются два C#-скрипта и три переменные для подготовки данных и обработки ответа сервера:<ul>
+<li><code>Body</code> — переменная для хранения данных сообщения перед отправкой;</li>
+<li><code>Success</code> — переменная для хранения успешного ответа от сервера;</li>
+<li><code>Error</code> — переменная для хранения ответа с ошибкой от сервера.</li>
+</ul>
+</li>
+<li>HTTP-запрос отправляется с помощью действия «<strong>Отправить сообщение</strong>».</li>
+</ul>
+</div>
+<ol class="colored_numbers_list">
+<li>Создайте <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4717">сценарий</a>, например, выполняющийся по нажатию кнопки.</li>
+<li>
+<p>В свойствах действия «<strong>Нажатие кнопки</strong>» укажите <strong>контекстный шаблон</strong>, содержащий атрибуты для HTTP-запроса и ответа.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка контекстного шаблона для отправки HTTP-запроса" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/send_http_example_csharp_template_settings.png"/><figcaption class="caption">Настройка контекстного шаблона для отправки HTTP-запроса</figcaption></figure></p>
+</li>
+<li>
+<p>После действия «<strong>Нажатие кнопки</strong>» добавьте действие «<strong>Проверить результат скрипта</strong>» для подготовки данных HTTP-запроса с помощью C#-скрипта следующим образом:</p>
+<ul>
+<li>
+<p><strong>Сообщение об ошибке</strong> — введите текст сообщения, которое будет отображено, если скрипт вернёт <code>false</code> (например, <em>«Не удалось подготовить данные заказа»</em>).</p>
+<p>Скрипт должен возвращать <code>true</code>. Если скрипт вернёт <code>false</code>, сценарий будет остановлен.</p>
+</li>
+<li>
+<p><strong>Выражение</strong> — задайте C#-скрипт для подготовки данных по следующему образцу:</p>
+</li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Collections.Generic</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Linq</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.Data.Entity</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.TeamNetwork.Api.Data.UserCommands</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.TeamNetwork.Api.Data</span><span class="p">;</span></code> <br/><code></code> <br/><code><span class="k">class</span><span class="w"> </span><span class="nc">Script</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">Main</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">o</span><span class="p">)</span></code> <br/><code><span class="w">    </span><span class="p">{</span><span class="w">      </span></code> <br/><code><span class="w">        </span><span class="c1">// Получаем ID текущей записи (заказа)</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">ToString</span><span class="p">().</span><span class="n">Replace</span><span class="p">(</span><span class="s">"user."</span><span class="p">,</span><span class="w"> </span><span class="s">""</span><span class="p">);</span></code> <br/><code></code> <br/><code><span class="w">        </span><span class="c1">// Получаем данные записи:</span></code> <br/><code><span class="w">        </span><span class="c1">// значения атрибутов «Позиции» и «Номер заказа»</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">GetPropertyValues</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="p">[]{</span><span class="n">id</span><span class="p">},</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="p">[]{</span><span class="s">"Позиции"</span><span class="p">,</span><span class="w"> </span><span class="s">"НомерЗаказа"</span><span class="p">});</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">itemsIdsArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">id</span><span class="p">][</span><span class="s">"Позиции"</span><span class="p">]</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">object</span><span class="p">[];</span></code> <br/><code></code> <br/><code><span class="w">        </span><span class="c1">// Объявляем массив позиций (класс Item)</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">listItems</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span><span class="p">();</span></code> <br/><code></code> <br/><code><span class="w">        </span><span class="c1">// Получаем данные каждой позиции</span></code> <br/><code><span class="w">        </span><span class="k">foreach</span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">itemId</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">itemsIdsArray</span><span class="p">)</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">itemData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">GetPropertyValues</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="p">[]{</span><span class="n">itemId</span><span class="p">.</span><span class="n">ToString</span><span class="p">()},</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="p">[]{</span><span class="s">"Товар"</span><span class="p">,</span><span class="w"> </span><span class="s">"Количество"</span><span class="p">});</span></code> <br/><code><span class="w">            </span><span class="c1">// Собираем экземпляр класса Item</span></code> <br/><code><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Item</span><span class="p">{</span><span class="n">product</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">itemData</span><span class="p">[</span><span class="n">itemId</span><span class="p">.</span><span class="n">ToString</span><span class="p">()][</span><span class="s">"Товар"</span><span class="p">].</span><span class="n">ToString</span><span class="p">(),</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Convert</span><span class="p">.</span><span class="n">ToInt32</span><span class="p">(</span><span class="n">itemData</span><span class="p">[</span><span class="n">itemId</span><span class="p">.</span><span class="n">ToString</span><span class="p">()][</span><span class="s">"Количество"</span><span class="p">].</span><span class="n">ToString</span><span class="p">())};</span></code> <br/><code><span class="w">            </span><span class="c1">// Собираем массив позиций для отправки</span></code> <br/><code><span class="w">            </span><span class="n">listItems</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">item</span><span class="p">);</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code></code> <br/><code><span class="w">        </span><span class="c1">// Переменная для отправляемых данных</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">outMessage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OutgoingRootMessage</span><span class="p">{</span><span class="n">orderNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">id</span><span class="p">][</span><span class="s">"НомерЗаказа"</span><span class="p">].</span><span class="n">ToString</span><span class="p">(),</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">listItems</span><span class="p">};</span></code> <br/><code><span class="w">        </span><span class="c1">// Проставляем в локальную переменную значение для последующей отправки</span></code> <br/><code><span class="w">        </span><span class="c1">// OutgoingRootMessage – класс сообщения (структура данных)</span></code> <br/><code><span class="w">        </span><span class="c1">// Имя RawBody – состоит из двух частей:</span></code> <br/><code><span class="w">        </span><span class="c1">//1. Raw – системная часть</span></code> <br/><code><span class="w">        </span><span class="c1">//2. Body – имя переменной с сообщением, заданной в действии «Отправить сообщение»</span></code> <br/><code><span class="w">        </span><span class="n">Api</span><span class="p">.</span><span class="n">Base</span><span class="p">.</span><span class="n">LocalVariablesService</span><span class="p">.</span><span class="n">Set</span><span class="o">&lt;</span><span class="n">OutgoingRootMessage</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"RawBody"</span><span class="p">,</span><span class="w"> </span><span class="n">outMessage</span><span class="p">);</span></code> <br/><code></code> <br/><code><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">true</span><span class="p">;</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/><code></code> <br/><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">OutgoingRootMessage</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">orderNumber</span><span class="w"> </span><span class="p">{</span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;}</span></code> <br/><code><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="p">{</span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;}</span></code> <br/><code><span class="p">}</span></code> <br/><code></code> <br/><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Item</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="p">{</span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;}</span></code> <br/><code><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="p">{</span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Добавьте и настройте действие «<strong>Отправить сообщение</strong>»:</p>
+<ul>
+<li><strong>Подключение</strong> — выберите <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4703">подключение для отправки HTTP-запросов</a>.</li>
+<li><strong>Путь передачи данных</strong> — выберите ранее настроенный <a class="mkdocs_imported_link" href="#http_send_example_csharp_route">путь для передачи данных</a> HTTP-запроса.</li>
+<li><strong>Переменная с сообщением</strong> — введите системное имя переменной, в которую предшествующее действие «<strong>Проверить результат скрипта</strong>» помещает данные запроса (в нашем примере <code>Body</code>, без префикса <code>Raw</code>).</li>
+<li><strong>Переменная для успешного ответа</strong> — введите системное имя переменной, в которую будет помещён ответ сервера на HTTP-запрос (например, <code>Success</code>).</li>
+<li>
+<p><strong>Переменная для ответа с ошибкой</strong> — введите системное имя переменной, в которую будет помещён ответ сервера в случае ошибки (например, <code>Error</code>).</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка действия сценария для отправки HTTP-запроса" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/send_http_example_csharp_scenario_send_message.png"/><figcaption class="caption">Настройка действия сценария для отправки HTTP-запроса</figcaption></figure></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Добавьте и настройте второе действие «<strong>Проверить результат скрипта</strong>» для проверки ответа после отправки.</p>
+<p>Это действие использует C#-скрипт для проверки и обработки ответа от сервера. Если скрипт вернёт <code>false</code>, сценарий будет остановлен.</p>
+<ul>
+<li><strong>Сообщение об ошибке</strong> — введите текст сообщения, которое будет отображено, если скрипт вернёт <code>false</code> (например, <code>"ошибка"</code>).</li>
+<li><strong>Выражение</strong> — задайте C#-скрипт для проверки ответа.</li>
+</ul>
+<p><strong>Образец скрипта для проверки ответа:</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Collections.Generic</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Linq</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.Data.Entity</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.TeamNetwork.Api.Data.UserCommands</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.TeamNetwork.Api.Data</span><span class="p">;</span></code> <br/><code></code> <br/><code><span class="k">class</span><span class="w"> </span><span class="nc">Script</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">Main</span><span class="p">(</span><span class="n">Object</span><span class="w"> </span><span class="n">o</span><span class="p">)</span></code> <br/><code><span class="w">    </span><span class="p">{</span></code> <br/><code></code> <br/><code><span class="w">        </span><span class="c1">// Получаем ID текущей записи</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">ToString</span><span class="p">().</span><span class="n">Replace</span><span class="p">(</span><span class="s">"user."</span><span class="p">,</span><span class="w"> </span><span class="s">""</span><span class="p">);</span></code> <br/><code></code> <br/><code><span class="w">        </span><span class="c1">// Получаем значения из успешного ответа.</span></code> <br/><code><span class="w">        </span><span class="c1">// Имя RawSuccess состоит из двух частей:</span></code> <br/><code><span class="w">        </span><span class="c1">// 1. Raw – неизменный системный префикс</span></code> <br/><code><span class="w">        </span><span class="c1">// 2. Success – имя переменной для успешного ответа, заданной в действии «Отправить сообщение»</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">inputSuccess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">Base</span><span class="p">.</span><span class="n">LocalVariablesService</span><span class="p">.</span><span class="n">Get</span><span class="o">&lt;</span><span class="n">IncomingRootMessage</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"RawSuccess"</span><span class="p">);</span></code> <br/><code><span class="w">        </span><span class="c1">// Получаем значение из ответа с ошибкой.</span></code> <br/><code><span class="w">        </span><span class="c1">// Имя RawError состоит из двух частей:</span></code> <br/><code><span class="w">        </span><span class="c1">// 1. Raw – неизменный системный префикс</span></code> <br/><code><span class="w">        </span><span class="c1">// 2. Error – имя переменной для ответа с ошибкой, заданной в действии «Отправить сообщение»</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">inputError</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">Base</span><span class="p">.</span><span class="n">LocalVariablesService</span><span class="p">.</span><span class="n">Get</span><span class="o">&lt;</span><span class="n">IncomingRootMessage</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"RawError"</span><span class="p">);</span></code> <br/><code></code> <br/><code></code> <br/><code><span class="w">        </span><span class="c1">// Помещает полученный статус в атрибут «Статус заказа»</span></code> <br/><code><span class="w">        </span><span class="c1">// СтатусЗаказа — системное имя атрибута</span></code> <br/><code><span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="n">inputSuccess</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">EditWithAlias</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="kt">object</span><span class="o">&gt;</span><span class="p">{{</span><span class="s">"СтатусЗаказа"</span><span class="p">,</span><span class="n">inputSuccess</span><span class="p">.</span><span class="n">status</span><span class="p">}});</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code><span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="nf">if</span><span class="p">(</span><span class="n">inputError</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">EditWithAlias</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="kt">object</span><span class="o">&gt;</span><span class="p">{{</span><span class="s">"СтатусЗаказа"</span><span class="p">,</span><span class="n">inputError</span><span class="p">.</span><span class="n">status</span><span class="p">}});</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code><span class="w">        </span><span class="k">else</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">EditWithAlias</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="kt">object</span><span class="o">&gt;</span><span class="p">{{</span><span class="s">"СтатусЗаказа"</span><span class="p">,</span><span class="s">"Произошла ошибка"</span><span class="p">}});</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code></code> <br/><code><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">true</span><span class="p">;</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/><code></code> <br/><code></code> <br/><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">IncomingRootMessage</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="p">{</span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Результирующий сценарий должен выглядеть, как показано на следующей иллюстрации.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Сценарий для отправки HTTP-запроса с использованием C#-скриптов" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/send_http_example_csharp_scenario_send.png"/><figcaption class="caption">Сценарий для отправки HTTP-запроса с использованием C#-скриптов</figcaption></figure></p>
+</li>
+<li>
+<p>Проверьте работу приложения: сценарий должен отправлять HTTP-запрос с позициями заказа и получать статус заказа от внешнего сервера.</p>
+</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4703">Отправка HTTP-запросов. Настройка подключения</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4718">Событие и действия сценария. Определения, типы, свойства, настройка</a></em></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

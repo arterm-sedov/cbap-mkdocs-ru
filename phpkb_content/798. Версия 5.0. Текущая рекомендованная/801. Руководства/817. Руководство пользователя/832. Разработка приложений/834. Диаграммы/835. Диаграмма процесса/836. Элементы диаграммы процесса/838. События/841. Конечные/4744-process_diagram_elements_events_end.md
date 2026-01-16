@@ -21,12 +21,12 @@ updated: '2025-04-10 16:27:45'
 
 1. Перетащите конечное событие с панели элементов на поток управления или пустое место диаграммы.
 2. Будет создано **[простое конечное событие][process_diagram_elements_none_end_event]**.
-3. При необходимости смените [тип события](#типы-конечных-событий) с помощью [меню элемента][process_diagram_call_element_menu].
+3. При необходимости смените [тип события](#типы-конечных-событий) с помощью [меню элемента][process_diagram].
 
 --8<-- "related_topics_heading.md"
 
 - *[События][process_diagram_elements_events]*
 - *[Элементы диаграммы процесса][process_diagram_elements]*
-- *[Редактирование диаграммы процесса][process_diagram_designer]*
+- *[Редактирование диаграммы процесса][process_diagram]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

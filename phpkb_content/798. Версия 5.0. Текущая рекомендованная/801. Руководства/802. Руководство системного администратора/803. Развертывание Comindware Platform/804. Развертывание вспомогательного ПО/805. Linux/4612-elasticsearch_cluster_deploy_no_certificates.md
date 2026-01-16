@@ -1,25 +1,31 @@
 ---
-title: 'Установка и настройка Elasticsearch без сертификатов подлинности'
+title: 'Elasticsearch. Развёртывание без сертификатов подлинности'
 kbId: 4612
 url: 'https://kb.comindware.ru/article.php?id=4612'
-updated: '2025-04-16 13:36:13'
+updated: '2025-12-03 10:40:03'
 ---
 
-# Установка и настройка Elasticsearch без сертификатов подлинности
+# Elasticsearch. Развёртывание без сертификатов подлинности
 
-Введение
+## Введение
 
 Для работы ПО **{{ productName }}** требуется сервер Elasticsearch версии не ниже 8.10.2.
 
-В этой статье представлены требования к конфигурации компьютеров, инструкции по установке и настройке узлов Elasticsearch без проверки сертификатов подлинности на виртуальных машинах с ОС Ubuntu 22.04.4 LTS.
+Здесь представлены требования к конфигурации компьютеров, инструкции по установке Elasticsearch, и настройке узлов кластера Elasticsearch без проверки сертификатов подлинности на виртуальных машинах с ОС Linux на базе Debian.
 
 Только после запуска службы Elasticsearch можно приступать к развертыванию **{{ productName }}**, указав путь к серверу Elasticsearch.
 
-## 1. Подготовка физических и виртуальных машин, пакетов программ
+Настройка OpenSearch
+
+Настроить сертификаты подлинности для OpenSearch можно аналогичным образом, при необходимости скорректировав шаги в соответствии с особенностями OpenSearch и вашей конкретной конфигурации.
+
+См. [официальную документацию OpenSearch (английский язык)](https://docs.opensearch.org/latest/).
+
+## Подготовка физических и виртуальных машин, пакетов программ
 
 Установка в минимальной конфигурации выполняется на 3 разделённых виртуальных машинах.
 
-Для полнофункциональной отказоустойчивой системы требуется установка на 4 виртуальных машинах с Ubuntu 22.04.LTS, расположенных на как минимум 3 физических машинах (IP-адреса приведены ниже исключительно для примера).
+Для полнофункциональной отказоустойчивой системы требуется установка на 4 виртуальных машинах, расположенных на как минимум 3 физических машинах (IP-адреса приведены ниже исключительно для примера).
 
 ### Пример конфигурации серверов
 
@@ -39,326 +45,339 @@ updated: '2025-04-16 13:36:13'
 - `deb`-пакет `elasticsearch-8.5.1-amd64.deb`
 - `yml`-файл конфигурации для Elasticsearch `customElasticConfig.yml`
 
-## 2. Установка Elasticsearch из deb-пакета
+## Установка Elasticsearch из deb-пакета
 
 Повторите шаги, описанные в этом разделе, для каждого из узлов Elasticsearch.
 
-2.1. Обновите ПО на сервере:
+1. Обновите ПО на сервере:
 
-```
-sudo apt update && sudo apt upgrade -y && sudo reboot
-```
+   ```
+   sudo apt update && sudo apt upgrade -y && sudo reboot
 
-В процессе обновления сервер перезагрузится.
+   ```
 
-2.2. Перейдите в папку пользователя:
+   В процессе обновления сервер перезагрузится.
+2. Перейдите в папку пользователя:
 
-```
-cd /home/username/
-```
+   ```
+   cd /home/username/
 
-2.3. Запустите процесс установки Elasticsearch:
+   ```
+3. Запустите процесс установки Elasticsearch:
 
-```
-sudo dpkg --install elasticsearch-8.5.1-amd64.deb
-```
+   ```
+   sudo dpkg --install elasticsearch-8.5.1-amd64.deb
 
-По окончании установки машина выдаст отчёт:
+   ```
 
-```
-Setting up elasticsearch (8.10.2) ...
----------------------------
-Security autoconfiguration information
-Authentication and authorization are enabled.
-TLS for the transport and HTTP layers is enabled and configured.
-The generated password for the elastic built-in superuser is : wfcEcSTqfyttNCNdpQgv
-If this node should join an existing cluster, you can reconfigure this with
-'/usr/share/elasticsearch/bin/elasticsearch-reconfigure-node --enrollment-token <token-here>'
-after creating an enrollment token on your existing cluster.
-You can complete the following actions at any time:
-Reset the password of the elastic built-in superuser with
-'/usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic'.
-Generate an enrollment token for Kibana instances with
-'/usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s kibana'.
-Generate an enrollment token for Elasticsearch nodes with
-'/usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s node'.
----------------------------------------------------------------------
-```
+   По окончании установки машина выдаст отчёт:
 
-2.4. Обратите внимание на строку The generated password for the elastic built-in superuser is — напротив неё будет выведен автоматически сформированный пароль для встроенного суперпользователя elastic. **Сохраните этот пароль.**
+   ```
+   Setting up elasticsearch (8.10.2) ...
+   ---------------------------
+   Security autoconfiguration information
+   Authentication and authorization are enabled.
+   TLS for the transport and HTTP layers is enabled and configured.
+   The generated password for the elastic built-in superuser is : wfcEcSTqfyttNCNdpQgv
+   If this node should join an existing cluster, you can reconfigure this with
+   '/usr/share/elasticsearch/bin/elasticsearch-reconfigure-node --enrollment-token <token-here>'
+   after creating an enrollment token on your existing cluster.
+   You can complete the following actions at any time:
+   Reset the password of the elastic built-in superuser with
+   '/usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic'.
+   Generate an enrollment token for Kibana instances with
+   '/usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s kibana'.
+   Generate an enrollment token for Elasticsearch nodes with
+   '/usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s node'.
+   ---------------------------------------------------------------------
 
-## 3. Конфигурация Elasticsearch
+   ```
+4. Обратите внимание на строку `The generated password for the elastic built-in superuser is` — напротив неё будет выведен автоматически сформированный пароль для встроенного суперпользователя elastic. **Сохраните этот пароль.**
+
+## Конфигурация Elasticsearch
 
 Повторите шаги, описанные в этом разделе, для каждого из узлов Elasticsearch.
 
 Помните, что имя кластера `cluster.name` для каждого из узлов должно совпадать, а имя узла `node.name` должно быть уникальным.
 
-3.1. Создайте папки, в которые Elasticsearch будет сохранять данные журналов, индексов и резервных копий:
+1. Создайте папки, в которые Elasticsearch будет сохранять данные журналов, индексов и резервных копий:
 
-```
-sudo mkdir /var/elasticsearch
-sudo mkdir /var/elasticsearch/data
-sudo mkdir /var/elasticsearch/logs
-sudo mkdir /var/elasticsearch/backups
-```
+   ```
+   sudo mkdir /var/elasticsearch
+   sudo mkdir /var/elasticsearch/data
+   sudo mkdir /var/elasticsearch/logs
+   sudo mkdir /var/elasticsearch/backups
 
-3.2. Измените владельца папки и права доступа к ней:
+   ```
+2. Измените владельца папки и права доступа к ней:
 
-```
-sudo chown elasticsearch:elasticsearch --recursive /var/elasticsearch/
-sudo chmod  764 --recursive /var/elasticsearch/
-```
+   ```
+   sudo chown elasticsearch:elasticsearch --recursive /var/elasticsearch/
+   sudo chmod  764 --recursive /var/elasticsearch/
 
-3.3. Создайте папку для хранения резервной копии `yml`-файла конфигурации Elasticsearch:
+   ```
+3. Создайте папку для хранения резервной копии `yml`-файла конфигурации Elasticsearch:
 
-```
-sudo mkdir /etc/elasticsearch/backupConfig
-```
+   ```
+   sudo mkdir /etc/elasticsearch/backupConfig
 
-3.4. Переместите `yml`-файл конфигурации Elasticsearch в папку `/etc/elasticsearch/backupConfig`:
+   ```
+4. Переместите `yml`-файл конфигурации Elasticsearch в папку `/etc/elasticsearch/backupConfig`:
 
-```
-sudo mv /etc/elasticsearch/elasticsearch.yml /etc/elasticsearch/backupConfig
-```
+   ```
+   sudo mv /etc/elasticsearch/elasticsearch.yml /etc/elasticsearch/backupConfig
 
-3.5. Создайте новый  `yml`-файл конфигурации Elasticsearch `elasticsearch.yml`:
+   ```
+5. Создайте новый  `yml`-файл конфигурации Elasticsearch `elasticsearch.yml`:
 
-```
-sudo nano /etc/elasticsearch/elasticsearch.yml
-```
+   ```
+   sudo nano /etc/elasticsearch/elasticsearch.yml
 
-3.6. Скопируйте в созданный файл конфигурации следующее содержимое:
+   ```
+6. Скопируйте в созданный файл конфигурации следующее содержимое:
 
-```
-bootstrap.memory_lock: false
-cluster.name: elasticsearch.example.cbap
-cluster.max_shards_per_node: 10000
-http.port: 9200
-node.roles: [ master, data, ingest, remote_cluster_client ]
-node.name: elasticsearch1
-path.data: /var/elasticsearch/data
-path.logs: /var/elasticsearch/logs
-path.repo: /var/elasticsearch/backups
-xpack.security.enabled: false
-xpack.security.http.ssl:
-  enabled: false
-#  keystore.path: certs/es1.p12    # [<-] specify path to signedNodeCert.p12 here
-xpack.security.transport.ssl:
-  enabled: false
-#  key: certs/es1.key    # [<-] specify path to nodecert.key here
-#  certificate: certs/es1.crt    # [<-] specify path to nodeCert.crt here
-#  certificate_authorities: [ "certs/CMW-RootCA.crt" ]    # [<-] specify path to CACert.crt here
-network.host: 192.168.1.43
-discovery.seed_hosts : ["192.168.1.43", "192.168.1.42","1.1.1.3"]
-cluster.initial_master_nodes:
-  - elasticsearch1
-  - elasticsearch2
-  - elasticsearch3
+   ```
+   bootstrap.memory_lock: false
+   cluster.name: elasticsearch.example.cbap
+   cluster.max_shards_per_node: 10000
+   http.port: 9200
+   node.roles: [ master, data, ingest, remote_cluster_client ]
+   node.name: elasticsearch1
+   path.data: /var/elasticsearch/data
+   path.logs: /var/elasticsearch/logs
+   path.repo: /var/elasticsearch/backups
+   xpack.security.enabled: false
+   xpack.security.http.ssl:
+     enabled: false
+   #  keystore.path: certs/es1.p12    # [<-] specify path to signedNodeCert.p12 here
+   xpack.security.transport.ssl:
+     enabled: false
+   #  key: certs/es1.key    # [<-] specify path to nodecert.key here
+   #  certificate: certs/es1.crt    # [<-] specify path to nodeCert.crt here
+   #  certificate_authorities: [ "certs/CMW-RootCA.crt" ]    # [<-] specify path to CACert.crt here
+   network.host: 192.168.1.43
+   discovery.seed_hosts : ["192.168.1.43", "192.168.1.42","1.1.1.3"]
+   cluster.initial_master_nodes:
+     - elasticsearch1
+     - elasticsearch2
+     - elasticsearch3
+   #Этот флаг требуется для записи данных в индексы
+   indices.id_field_data.enabled: true
 
-#Этот флаг требуется для записи данных в индексы
-indices.id_field_data.enabled: true
-```
+   ```
+7. Сохраните изменения `yml`-файла конфигурации закройте текстовый редактор Nano, нажав клавиши: ++ctrl+O++, `Ввод`, `Ctrl`+`X`.
+8. Измените для `yml`-файла конфигурации Elasticsearch владельца и права доступа:
 
-3.6. Сохраните изменения `yml`-файла конфигурации закройте текстовый редактор Nano, нажав клавиши: `Ctrl+O, Ввод, Ctrl+X`.
+   ```
+   sudo chown elasticsearch:elasticsearch --recursive /etc/elasticsearch/elasticsearch.yml
+   sudo chmod 764 --recursive /etc/elasticsearch/elasticsearch.yml
 
-3.7. Измените для `yml`-файла конфигурации Elasticsearch владельца и права доступа:
+   ```
+9. Откройте в текстовом редакторе Nano `yml`-файл конфигурации Elasticsearch:
 
-```
-sudo chown elasticsearch:elasticsearch --recursive /etc/elasticsearch/elasticsearch.yml
-sudo chmod 764 --recursive /etc/elasticsearch/elasticsearch.yml
-```
+   ```
+   sudo nano /etc/elasticsearch/elasticsearch.yml
 
-3.8. Откройте в текстовом редакторе Nano `yml`-файл конфигурации Elasticsearch:
+   ```
+10. Задайте имя кластера с помощью директивы `cluster.name` в строке 2 `yml`-файла конфигурации:
 
-```
-sudo nano /etc/elasticsearch/elasticsearch.yml
-```
+    ```
+    cluster.name: elasticsearch.example.cbap
 
-3.9. Задайте имя кластера с помощью директивы `cluster.name` в строке 2 `yml`-файла конфигурации:
+    ```
 
-```
-cluster.name: elasticsearch.example.cbap
-```
+    Примечание
 
-**Примечание** 
-Имя кластера должно быть одинаковым для всех узлов кластера Elasticsearch.
+    Имя кластера должно быть одинаковым для всех узлов кластера Elasticsearch.
+11. Задайте имя узла с помощью директивы `node.name` в строке 11 `yml`-файла конфигурации.
 
-3.10. Задайте имя узла с помощью директивы `node.name` в строке 11 `yml`-файла конфигурации.
+    Примечание
 
-**Примечание**
-Имя узла должно быть уникальным для каждого из узлов кластера Elasticsearch:
+    Имя узла должно быть уникальным для каждого из узлов кластера Elasticsearch:
 
-```
-node.name: elasticsearch1
-```
+    ```
+    node.name: elasticsearch1
 
-3.1. Укажите путь до директории, в которую настраиваемый узел Elasticsearch будет сохранять файлы данных шардов, отредактировав строку 13:
+    ```
+12. Укажите путь до директории, в которую настраиваемый узел Elasticsearch будет сохранять файлы данных шардов, отредактировав строку 13:
 
-```
-path.data: /var/elasticsearch/data
-```
+    ```
+    path.data: /var/elasticsearch/data
 
-3.12. Укажите путь до директории, в которую настраиваемый узел Elasticsearch будет сохранять файлы логов, отредактировав строку 14:
+    ```
+13. Укажите путь до директории, в которую настраиваемый узел Elasticsearch будет сохранять файлы логов, отредактировав строку 14:
 
-```
-path.logs: /var/elasticsearch/logs
-```
+    ```
+    path.logs: /var/elasticsearch/logs
 
-3.13. Укажите путь до директории, в которую настраиваемый узел Elasticsearch будет сохранять файлы резервного копирования, отредактировав строку 15:
+    ```
+14. Укажите путь до директории, в которую настраиваемый узел Elasticsearch будет сохранять файлы резервного копирования, отредактировав строку 15:
 
-```
-path.repo: /var/elasticsearch/backups
-```
+    ```
+    path.repo: /var/elasticsearch/backups
 
-3.14. Укажите уникальный IP-адрес (как пример - 192.168.ХХХ.1) машины настраиваемого узла Elasticsearch, отредактировав строку 29:
+    ```
+15. Укажите уникальный IP-адрес (как пример - 192.168.ХХХ.1) машины настраиваемого узла Elasticsearch, отредактировав строку 29:
 
-```
-network.host: 192.168.XXX.1
-```
+    ```
+    network.host: 192.168.XXX.1
 
-3.15. Задайте список IP-адресов машин (как пример - 192.168.XXX.1, 192.168.XXX.2, 192.168.XXX.3), на которых будут расположены узлы кластера Elasticsearch, отредактировав строку 31. Например, для кластера из трех узлов, директива будет вот такой:
+    ```
+16. Задайте список IP-адресов машин (как пример - 192.168.XXX.1, 192.168.XXX.2, 192.168.XXX.3), на которых будут расположены узлы кластера Elasticsearch, отредактировав строку 31. Например, для кластера из трех узлов, директива будет вот такой:
 
-```
-discovery.seed_hosts : ["192.168.XXX.1", "192.168.XXX.2","192.168.XXX.3"]
-```
+    ```
+    discovery.seed_hosts : ["192.168.XXX.1", "192.168.XXX.2","192.168.XXX.3"]
 
-3.16. Сохраните изменения `yml`-файла конфигурации и закройте текстовый редактор Nano, нажав клавиши: `Ctrl+O, Ввод, Ctrl+X`.
+    ```
+17. Сохраните изменения `yml`-файла конфигурации и закройте текстовый редактор Nano, нажав клавиши: ++ctrl+O++, `Ввод`, `Ctrl`+`X`.
 
-## 4. Запуск Elasticsearch
-
-Повторите шаги, описанные в этом разделе, для каждого из узлов Elasticsearch.
-
-4.1. Перезагрузите конфигурацию `systemd`:
-
-```
-sudo systemctl daemon-reload
-```
-
-4.2. Добавьте процесс `elasticsearch.service` в список автозагрузки при запуске ОС и запустите его:
-
-```
-sudo systemctl enable --now elasticsearch.service
-```
-
-4.3. Убедитесь, что процесс `elasticsearch.service` запустился:
-
-```
-sudo systemctl status elasticsearch.service
-```
-
-Пример результата проверки статуса процесса `elasticsearch.service`:
-
-```
-elasticsearch.service - Elasticsearch
-  Loaded: loaded (/lib/systemd/system/elasticsearch.service; enabled; vendor preset: enabled)
-  Active: active (running) since Thu 2022-12-01 10:12:27 UTC; 6s ago
-    Docs: <https://www.elastic.co>
-Main PID: 3597 (java)
-   Tasks: 63 (limit: 4575)
-  Memory: 629.9M
-     CPU: 44.422s
-  CGroup: /system.slice/elasticsearch.service
-          ├─3597 /usr/share/elasticsearch/jdk/bin/java -Xms4m -Xmx64m -XX:+UseSerialGC -Dcli.name=server -Dcli.scri>
-          ├─3656 /usr/share/elasticsearch/jdk/bin/java -Des.networkaddress.cache.ttl=60 -Des.networkaddress.cache.n>
-          └─3676 /usr/share/elasticsearch/modules/x-pack-ml/platform/linux-x86_64/bin/controller
-Dec 01 10:11:12 penguin-02 systemd[1]: Starting Elasticsearch...
-Dec 01 10:12:27 penguin-02 systemd[1]: Started Elasticsearch.
-```
-
-**Примечание**
-В случае возникновения ошибок при запуске процесса `elasticsearch.service` рекомендуется изучить файл журнала:
-
-```
-sudo less /var/elasticsearch/logs/yourClusterName.log
-```
-
-4.4. С помощью curl убедитесь, что REST API узла Elasticsearch доступен:
-
-```
-sudo curl http://192.168.XXX.XXХ:9200
-```
-
-Пример ответа на запрос:
-
-```
-{
-"name" : "elasticsearch1",
-"cluster_name" : "yourClusterName",
-"cluster_uuid" : "Xfj14lWBRf2c6GAuwtV5lg",
-"version" : {
-    "number" : "8.5.1",
-    "build_flavor" : "default",
-    "build_type" : "deb",
-    "build_hash" : "c1310c45fc534583afe2c1c03046491efba2bba2",
-    "build_date" : "2022-11-09T21:02:20.169855900Z",
-    "build_snapshot" : false,
-    "lucene_version" : "9.4.1",
-    "minimum_wire_compatibility_version" : "7.17.0",
-    "minimum_index_compatibility_version" : "7.0.0"
-    },
-"tagline" : "You Know, for Search"
-}
-```
+## Запуск Elasticsearch
 
 Повторите шаги, описанные в этом разделе, для каждого из узлов Elasticsearch.
 
-## 5. Проверка состояния кластера
+1. Перезагрузите конфигурацию `systemd`:
 
-5.1. Выполнив для каждого из узлов кластера Elasticsearch шаги, описанные в предыдущих разделах, от любого из узлов выполните GET-запрос проверки состояния кластера:
+   ```
+   sudo systemctl daemon-reload
 
-```
-sudo curl http://192.168.XXX.XX1:9200/_cluster/health?pretty>
-```
+   ```
+2. Добавьте процесс `elasticsearch.service` в список автозагрузки при запуске ОС и запустите его:
 
-5.2. Убедитесь, что в ответе на запрос значение параметра `number_of_nodes` равно количеству узлов кластера:
+   ```
+   sudo systemctl enable --now elasticsearch.service
 
-```
-{
-"cluster_name" : "yourClusterName",
-"status" : "green",
-"timed_out" : false,
-"number_of_nodes" : 2,
-"number_of_data_nodes" : 2,
-"active_primary_shards" : 1,
-"active_shards" : 2,
-"relocating_shards" : 0,
-"initializing_shards" : 0,
-"unassigned_shards" : 0,
-"delayed_unassigned_shards" : 0,
-"number_of_pending_tasks" : 0,
-"number_of_in_flight_fetch" : 0,
-"task_max_waiting_in_queue_millis" : 0,
-"active_shards_percent_as_number" : 100.0
-}
-```
+   ```
+3. Убедитесь, что процесс `elasticsearch.service` запустился:
+
+   ```
+   sudo systemctl status elasticsearch.service
+
+   ```
+
+   Пример результата проверки статуса процесса elasticsearch.service```
+   elasticsearch.service - Elasticsearch
+     Loaded: loaded (/lib/systemd/system/elasticsearch.service; enabled; vendor preset: enabled)
+     Active: active (running) since Thu 2022-12-01 10:12:27 UTC; 6s ago
+       Docs: <<https://www.elastic.co>>
+   Main PID: 3597 (java)
+     Tasks: 63 (limit: 4575)
+     Memory: 629.9M
+       CPU: 44.422s
+     CGroup: /system.slice/elasticsearch.service
+             ├─3597 /usr/share/elasticsearch/jdk/bin/java -Xms4m -Xmx64m -XX:+UseSerialGC -Dcli.name=server -Dcli.scri>
+             ├─3656 /usr/share/elasticsearch/jdk/bin/java -Des.networkaddress.cache.ttl=60 -Des.networkaddress.cache.n>
+             └─3676 /usr/share/elasticsearch/modules/x-pack-ml/platform/linux-x86_64/bin/controller
+   Dec 01 10:11:12 penguin-02 systemd[1]: Starting Elasticsearch...
+   Dec 01 10:12:27 penguin-02 systemd[1]: Started Elasticsearch.
+
+   ```
+
+   Примечание
+
+   В случае возникновения ошибок при запуске процесса `elasticsearch.service` рекомендуется изучить файл журнала:
+
+   ```
+   sudo less /var/elasticsearch/logs/yourClusterName.log
+
+   ```
+4. С помощью curl убедитесь, что REST API узла Elasticsearch доступен:
+
+   ```
+   sudo curl <http://192.168.XXX.XX>Х:9200
+
+   ```
+
+   Пример ответа на запрос:
+
+   ```
+   {
+   "name" : "elasticsearch1",
+   "cluster_name" : "yourClusterName",
+   "cluster_uuid" : "Xfj14lWBRf2c6GAuwtV5lg",
+   "version" : {
+       "number" : "8.5.1",
+       "build_flavor" : "default",
+       "build_type" : "deb",
+       "build_hash" : "c1310c45fc534583afe2c1c03046491efba2bba2",
+       "build_date" : "2022-11-09T21:02:20.169855900Z",
+       "build_snapshot" : false,
+       "lucene_version" : "9.4.1",
+       "minimum_wire_compatibility_version" : "7.17.0",
+       "minimum_index_compatibility_version" : "7.0.0"
+       },
+   "tagline" : "You Know, for Search"
+   }
+
+   ```
+
+## Проверка состояния кластера
+
+1. Выполнив для каждого из узлов кластера Elasticsearch шаги, описанные в предыдущих разделах, от любого из узлов выполните GET-запрос проверки состояния кластера:
+
+   ```
+   sudo curl <http://192.168.XXX.XX1:9200/_cluster/health?pretty>>
+
+   ```
+2. Убедитесь, что в ответе на запрос значение параметра `number_of_nodes` равно количеству узлов кластера:
+
+   ```
+   {
+   "cluster_name" : "yourClusterName",
+   "status" : "green",
+   "timed_out" : false,
+   "number_of_nodes" : 2,
+   "number_of_data_nodes" : 2,
+   "active_primary_shards" : 1,
+   "active_shards" : 2,
+   "relocating_shards" : 0,
+   "initializing_shards" : 0,
+   "unassigned_shards" : 0,
+   "delayed_unassigned_shards" : 0,
+   "number_of_pending_tasks" : 0,
+   "number_of_in_flight_fetch" : 0,
+   "task_max_waiting_in_queue_millis" : 0,
+   "active_shards_percent_as_number" : 100.0
+   }
+
+   ```
 
 ## Пример yml-файла конфигурации узла Elasticsearch
 
 ```
-bootstrap.memory_lock: false
-cluster.name: elasticsearch.example.cbap
-cluster.max_shards_per_node: 10000
-http.port: 9200
-node.roles: [ master, data, ingest, remote_cluster_client ]
-node.name: elasticsearch1
-path.data: /var/elasticsearch/data
-path.logs: /var/elasticsearch/logs
-path.repo: /var/elasticsearch/backups
-xpack.security.enabled: false
-xpack.security.http.ssl:
-  enabled: false
-#  keystore.path: certs/es1.p12    # [<-] specify path to signedNodeCert.p12 here
-xpack.security.transport.ssl:
-  enabled: false
-#  key: certs/es1.key    # [<-] specify path to nodecert.key here
-#  certificate: certs/es1.crt    # [<-] specify path to nodeCert.crt here
-#  certificate_authorities: [ "certs/CMW-RootCA.crt" ]    # [<-] specify path to CACert.crt here
-network.host: 192.168.1.43
-discovery.seed_hosts : ["192.168.1.43", "192.168.1.42","1.1.1.3"]
-cluster.initial_master_nodes:
-  - elasticsearch1
-  - elasticsearch2
+bootstrap.memory_lock: false
+cluster.name: elasticsearch.example.cbap
+cluster.max_shards_per_node: 10000
+http.port: 9200
+node.roles: [ master, data, ingest, remote_cluster_client ]
+node.name: elasticsearch1
+path.data: /var/elasticsearch/data
+path.logs: /var/elasticsearch/logs
+path.repo: /var/elasticsearch/backups
+xpack.security.enabled: false
+xpack.security.http.ssl:
+  enabled: false
+#  keystore.path: certs/es1.p12    # [<-] specify path to signedNodeCert.p12 here
+xpack.security.transport.ssl:
+  enabled: false
+#  key: certs/es1.key    # [<-] specify path to nodecert.key here
+#  certificate: certs/es1.crt    # [<-] specify path to nodeCert.crt here
+#  certificate_authorities: [ "certs/CMW-RootCA.crt" ]    # [<-] specify path to CACert.crt here
+network.host: 192.168.1.43
+discovery.seed_hosts : ["192.168.1.43", "192.168.1.42","1.1.1.3"]
+cluster.initial_master_nodes:
+  - elasticsearch1
+  - elasticsearch2
   - elasticsearch3
+
 ```
+
+--8<-- "related_topics_heading.md"
+
+- [Официальная документация Elasticsearch (английский язык)](https://www.elastic.co/docs/deploy-manage)
+- [Официальная документация OpenSearch (английский язык)](https://docs.opensearch.org/latest/)
+- [Elasticsearch. Настройка SSL-сертификатов][elasticsearch_ssl_certificate_configure]
+- [Elasticsearch. Установка в базовой конфигурации][elasticsearch_deploy_Linux]
+- [Установка, запуск, инициализация и остановка ПО {{ productName }}][deploy_guide_linux]
+- [Конфигурация экземпляра, компонентов ПО и служб. Настройка][configuration_files_linux]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
