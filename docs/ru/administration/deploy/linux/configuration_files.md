@@ -67,7 +67,10 @@ hide: tags
     - `db.workDir` — директория для хранения базы данных экземпляра ПО.
     - `db.name` — префикс кэшей в базе данных экземпляра ПО.
     - `userStorage.localDisk.path` — директория для хранения загруженных файлов.
-    - `mq.server` — адрес сервера {{ apacheKafkaVariants }}.
+    - `mq.server` — адрес и порт брокера сообщений {{ apacheKafkaVariants }}.
+    - `mq.group` — идентификатор группы очереди сообщений.
+    - `mq.name` — префикс имени очередей сообщений.
+    - `mq.node` — идентификатор узла очереди сообщений.
     - `backup.defaultFolder` — директория для хранения резервных копий экземпляра ПО.
     - `backup.defaultFileName` — имя файла резервной копии экземпляра ПО.
 
@@ -244,6 +247,14 @@ mq.node: <instanceName>
 #mq.sasl.password:
 # Тип механизма SASL (None | Plain | ScramSha256 | ScramSha512).
 #mq.sasl.mechanism:
+
+##### Создание топиков #####
+# Коэффициент репликации для создаваемого топика.
+#mq.replicationFactor: 3
+# Количество партиций для создаваемого топика.
+#mq.numPartitions: 16
+# Таймаут для запроса метаданных (миллисекунды).
+#mq.metadataTimeoutMsec: 3000
 
 {% if pdfOutput %}
 ```

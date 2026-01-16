@@ -8,7 +8,7 @@ kbId: 4932
 Для сравнения двух пользователей (например, менеджер проекта и руководитель сотрудника), введите следующее выражение:
 
 ```
- 
+
 #EQUALS($WorkPlanOriginalRef->Curator, $Manager)
 
 @prefix sort: <http://comindware.com/ontology/dataset/sort#>.
@@ -17,14 +17,14 @@ kbId: 4932
 @prefix ui: <http://comindware.com/ontology/ui#>.
 @prefix object: <http://comindware.com/ontology/object#>.
 {
-    ("WorkPlan" "Curator") object:findProperty ?curatorProperty.   
+    ("WorkPlan" "Curator") object:findProperty ?curatorProperty.
     ("WorkPlanDuplicate" "WorkPlanOriginal") object:findProperty ?workPlanOriginalProperty.
     ("WorkPlanDuplicate" "Manager") object:findProperty ?managerProperty.
     from {
         ?item ?managerProperty ?manager1.
           ?manager1 ui:toClientString ?manager.
     } select ?manager -> ?managerList.
-    
+
     (?managerList sort:stringComparer) assert:sort ?managerSort.
     ("," ?managerSort) cmwstring:join ?managerStr.
 
@@ -33,7 +33,7 @@ kbId: 4932
         ?workPlan ?curatorProperty ?curator1.
           ?curator1 ui:toClientString ?curatorStrg.
     } select ?curatorStrg -> ?curatorList.
-    
+
     (?curatorList sort:stringComparer) assert:sort ?curatorSort.
     ("," ?curatorSort) cmwstring:join ?curatorStr.
 

@@ -188,10 +188,11 @@ kbId: 4905
 
     ``` turtle
     # Импортируем основные функции для работы 
-    # с логикой, контейнерами, аккаунтами и статусами задач
+    # с логикой, контейнерами, аккаунтами, ролями и статусами задач
     @prefix cmw: <http://comindware.com/logics#>.
     @prefix container: <http://comindware.com/ontology/container#>.
     @prefix account: <http://comindware.com/ontology/account#>.
+    @prefix role: <http://comindware.com/ontology/role#>. 
     @prefix taskStatus: <http://comindware.com/ontology/taskStatus#>.
     {
         # Получаем все задачи.

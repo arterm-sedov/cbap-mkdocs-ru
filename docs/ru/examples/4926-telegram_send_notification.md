@@ -39,6 +39,7 @@ kbId: 4926
    ```
    {"ok":true,"result":[{"update_id":XXXXXXXX, "message":{"message_id":4,"from":{"id":1234567890,"is_bot":false,"first_name":"User Name","username":"username","language_code":"en"},"chat":{"id":1234567890,"first_name":"User Name","username":"username","type":"private"},"date":1717687196,"text":"chatid"}}]}
    ```
+
 10. Найдите в этом сообщении идентификатор чата вида `"from":{"id":1234567890` или `"chat":{"id":1234567890`, где цифры — это идентификатор чата вашего бота.
 11. Настройте подключение к Telegram с использованием полученных ключа и ID чата.
 

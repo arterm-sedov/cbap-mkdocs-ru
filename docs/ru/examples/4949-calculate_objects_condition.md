@@ -32,10 +32,10 @@ kbId: 4949
 @prefix assert: <http://comindware.com/logics/assert#>.
 @prefix cmw: <http://comindware.com/logics#>.
 {
-    ("projects" "required_skills") object:findProperty ?PropertyLittle. 
+    ("projects" "required_skills") object:findProperty ?PropertyLittle.
     ("employees" "available_skills") object:findProperty ?PropertyBig.
 
-    ?container object:alias "employees". 
+    ?container object:alias "employees".
     ?allObjs cmw:container ?container.
 
     {
@@ -46,7 +46,7 @@ kbId: 4949
     {
         ?item ?PropertyLittle ?resultA.
     } assert:count ?d.
-    
+
     if {?c == ?d}
     then {?allObjs -> ?value.}
 }

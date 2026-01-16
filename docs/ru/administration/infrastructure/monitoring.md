@@ -1,13 +1,21 @@
 ---
 title: Мониторинг
+kbTitle: 'Мониторинг. Просмотр диаграмм'
 kbId: 4666
+tags:
+ - дашборды
+ - диаграммы
+ - метрики
+ - мониторинг
+ - производительность
+hide: tags
 ---
 
 # Мониторинг. Просмотр диаграмм {:#monitoring}
 
-## Введение
+{% include-markdown ".snippets/obsolete_feature_dashboard.md" %}
 
-{% include-markdown ".snippets/experimental_feature.md" %}
+## Введение
 
 В **{{ productName }}** предусмотрена возможность просмотра диаграмм с показателями производительности системы на временной шкале.
 

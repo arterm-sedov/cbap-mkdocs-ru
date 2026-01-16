@@ -1,0 +1,313 @@
+<h1>Атрибуты типа «Изображение» и «Документ». Вывод изображения на форме</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4975" kb-tags="N3,HTML-текст,атрибут типа «Документ»,атрибут типа «Изображение»,галерея,документ,изображение,изображения,отображение,пример,тройки,триплеты,формулы,фотографии" kb-title="Атрибуты типа «Изображение» и «Документ». Вывод изображения на форме">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_image_gallery_on_form_intro">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_image_gallery_on_form_use_case">
+<span class="md-ellipsis">
+      Прикладная задача
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_image_gallery_on_form_initial_data">
+<span class="md-ellipsis">
+      Исходные данные
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_image_gallery_on_form_image_setup">
+<span class="md-ellipsis">
+      Порядок настройки для атрибута типа «Изображение»
+    </span>
+</a>
+<nav aria-label="Порядок настройки для атрибута типа «Изображение»" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_image_gallery_on_form_image_testing">
+<span class="md-ellipsis">
+      Тестирование для атрибута типа «Изображение»
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_image_gallery_on_form_document_setup">
+<span class="md-ellipsis">
+      Порядок настройки для атрибута типа «Документ»
+    </span>
+</a>
+<nav aria-label="Порядок настройки для атрибута типа «Документ»" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_image_gallery_on_form_document_testing">
+<span class="md-ellipsis">
+      Тестирование для атрибута типа «Документ»
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#примеры-стилизации-изображений">
+<span class="md-ellipsis">
+      Примеры стилизации изображений
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="example_image_gallery_on_form_intro">Введение</h2>
+<p>В <strong>Comindware Platform</strong> можно загрузить изображения, прикрепив их к атрибуту типа «<strong>Изображение</strong>» или «<strong>Документ</strong>».</p>
+<p>При этом изображения, прикреплённые к этим атрибутам отображаются на формах только в режиме предпросмотра и не растягиваются на весь размер формы.</p>
+<p>Чтобы вывести одно или несколько изображений на форму, задав произвольное HTML-форматирование, можно воспользоваться текстовым атрибутом, задав для него формат отображения «<strong>HTML-текст</strong>».</p>
+<p>Здесь представлены настройки по формированию галереи изображений на форме из атрибута типа «<strong>Изображение</strong>» или «<strong>Документ</strong>».</p>
+<div class="notice notice-success">
+<p class="admonition-title">Структура атрибута типа «Изображение»</p>
+<ul>
+<li>Атрибут типа «<strong>Изображение</strong>» хранит одну или несколько ссылок на записи (<strong>изображения</strong>) в системном шаблоне изображения, к которым прикрепляются графические файлы.</li>
+<li>В шаблоне изображения имеются атрибуты name (имя) и stream (содержимое), которые хранят имя файла и ссылку на файл, физически хранящийся в папке Streams на сервере.</li>
+<li>О файле из атрибута типа «<strong>Изображения</strong>» с помощью выражения N3 можно считать следующие данные:<ul>
+<li>имя файла: <code>?image image:name ?name</code>;</li>
+<li>расширение файла: <code>?image image:extension ?extension</code>;</li>
+<li>папку Streams на сервера, в которой хранится файл: <code>?image image:stream ?stream</code>;</li>
+<li>относительную ссылку на файл: <code>?image image:uri ?uri</code>.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="notice notice-success">
+<p class="admonition-title">Структура атрибута типа «Документ»</p>
+<ul>
+<li>Атрибут типа «<strong>Документ</strong>» хранит одну или несколько ссылок на записи (<strong>документы</strong>) в системном шаблоне документа, к которым прикрепляются файлы (например, загруженные пользователями).</li>
+<li>В шаблоне документа имеется атрибут <code>currentRevision</code> (текущая <strong>версия</strong>), который хранит ссылку на запись в системном шаблоне версии.</li>
+<li>
+<p>В шаблоне версии имеются атрибуты <code>title</code> (имя) и <code>content</code> (содержимое), которые хранят имя файла и ссылку на файл, физически хранящийся в папке <code>Streams</code> на сервере.
+Чтобы считать файл из атрибута типа «<strong>Документ</strong>» с помощью выражения N3, необходимо:</p>
+</li>
+<li>
+<p>получить объект с атрибутом:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">(</span><span class="s">"TemplateSystemName"</span> <span class="s">"DocumentAttributeSystemName"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?DocumentAttribute</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>из объекта с атрибутом получить значение атрибута в текущей записи:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?item</span> <span class="err">documentAttribute</span> <span class="err">?documentAttributeValue</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>из значения атрибута получить текущую версию документа:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?documentAttributeValue</span> <span class="nn">document</span><span class="p">:</span><span class="nt">revision</span> <span class="err">?revision</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>из версии получить содержимое файла в формате <code>base64</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?revision</span> <span class="nn">document</span><span class="p">:</span><span class="nt">content</span> <span class="err">?content</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>из версии получить имя файла:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?revision</span> <span class="nn">document</span><span class="p">:</span><span class="nt">title</span> <span class="err">?title</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>С помощью языка формул из атрибута типа «<strong>Документ</strong>»  можно получить следующие данные:</p>
+<ul>
+<li>текущую ревизию документа: <code>$AttributeDocument-&gt;currentRevision</code>;</li>
+<li>имя файла из ревизии: <code>$AttributeDocument-&gt;currentRevision-&gt;revisionFilename</code>;</li>
+<li>относительную ссылку из ревизии: <code>$AttributeDocument-&gt;currentRevision-&gt;httpUri</code>.</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 class="pageBreakBefore" id="example_image_gallery_on_form_use_case">Прикладная задача</h2>
+<p>Требуется вывести на форму галерею изображений, которые хранятся в атрибуте типа «<strong>Изображение</strong>» или «<strong>Документ</strong>».</p>
+<h2 id="example_image_gallery_on_form_initial_data">Исходные данные</h2>
+<p>В шаблоне <em>«Карточки товаров»</em> (системное имя <code>ProductCards</code>) имеются две формы:</p>
+<ul>
+<li><strong>основная</strong>, на которой данные заполняют сотрудники;</li>
+<li><em>Клиентская форма</em>, которая отображается для клиентов.</li>
+</ul>
+<h2 class="pageBreakBefore" id="example_image_gallery_on_form_image_setup">Порядок настройки для атрибута типа «Изображение»</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>В шаблоне <em>«Карточки товаров»</em> создайте атрибут <em>«Изображения»</em> со следующими свойствами:</p>
+<ul>
+<li><strong>Системное имя:</strong> <em>Изображения</em></li>
+<li><strong>Тип данных: изображение</strong></li>
+<li><strong>Хранить несколько значений: флажок установлен</strong></li>
+</ul>
+</li>
+<li>
+<p>Создайте атрибут <em>«Галерея»</em> со следующими свойствами:</p>
+<ul>
+<li><strong>Системное имя:</strong> <em>Галерея</em></li>
+<li><strong>Тип данных: текст</strong></li>
+<li>
+<p><strong>Формат отображения: HTML-текст</strong></p>
+<div class="notice notice-warning">
+<p class="admonition-title">Важно!</p>
+<p>Если задать для атрибута другой формат отображения, HTML-теги будут отображаться как обычный текст.</p>
+</div>
+</li>
+<li>
+<p><strong>Вычислять автоматически:</strong> флажок установлен</p>
+</li>
+<li>
+<p><strong>Выражение для вычислений:</strong></p>
+<ul>
+<li>
+<p><strong>Формула</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="o">#</span><span class="w"> </span><span class="err">Из</span><span class="w"> </span><span class="err">атрибута</span><span class="w"> </span><span class="err">«Изображения»</span><span class="w"> </span><span class="err">собираем</span><span class="w"> </span><span class="err">изображения</span></code> <br/><code><span class="o">#</span><span class="w"> </span><span class="err">и</span><span class="w"> </span><span class="err">соединяем</span><span class="w"> </span><span class="err">в</span><span class="w"> </span><span class="n">HTML</span><span class="w"> </span><span class="err">с</span><span class="w"> </span><span class="err">разделителем</span><span class="w"> </span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span></code> <br/><code><span class="o">#</span><span class="w"> </span><span class="s1">'https://host-name'</span><span class="w"> </span><span class="err">—</span><span class="w"> </span><span class="err">имя</span><span class="w"> </span><span class="err">хоста</span><span class="w"> </span><span class="n">Comindware</span><span class="w"> </span><span class="n">Platform</span></code> <br/><code><span class="k">JOIN</span><span class="p">(</span><span class="ss">"&lt;br/&gt;"</span><span class="p">,</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="err">$Изображения</span><span class="w"> </span><span class="k">select</span></code> <br/><code><span class="w">    </span><span class="n">FORMAT</span><span class="p">(</span><span class="ss">"&lt;img src='https://your-host{0}'&gt;"</span><span class="p">,</span><span class="w"> </span></code> <br/><code><span class="w">    </span><span class="n">LIST</span><span class="p">(</span><span class="n">a</span><span class="o">-&gt;</span><span class="n">uri</span><span class="p">)</span></code> <br/><code><span class="w">    </span><span class="p">)</span></code> <br/><code><span class="p">)</span></code> <br/></pre></code></div>
+</li>
+</ul>
+<p><strong>или</strong></p>
+<ul>
+<li>
+<p><strong>N3</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы</span></code> <br/><code><span class="c"># с изображениями и строками</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">image:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/image#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwstring:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/string#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">string:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/2000/10/swap/string#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Находим атрибут «Изображения» и помещаем в ?imagesAttribute</span></code> <br/><code>    <span class="p">(</span><span class="s">"ProductCards"</span> <span class="s">"Изображения"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?imagesAttribute</span><span class="p">.</span></code> <br/><code>    <span class="c"># Запускаем цикл</span></code> <br/><code>    <span class="err">from</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Находим содержимое ?imagesAttribute в текущей</span></code> <br/><code>        <span class="c"># записи и помещаем в ?image</span></code> <br/><code>        <span class="err">?item</span> <span class="err">?imagesAttribute</span> <span class="err">?image</span><span class="p">.</span></code> <br/><code>        <span class="c"># Получаем ссылку на файл без имени хоста</span></code> <br/><code>        <span class="c"># и помещаем в ?imageUri</span></code> <br/><code>        <span class="err">?image</span> <span class="nn">image</span><span class="p">:</span><span class="nt">uri</span> <span class="err">?imageUri</span><span class="p">.</span></code> <br/><code>        <span class="c"># Формируем HTML-строки c изображениями и помещаем в ?formatUri</span></code> <br/><code>        <span class="c"># 'https://host-name' — имя хоста Comindware Platform</span></code> <br/><code>        <span class="p">(</span><span class="s">"&lt;img src='https://host-name{0}'&gt;"</span> <span class="err">?imageUri</span><span class="p">)</span> <span class="nn">string</span><span class="p">:</span><span class="nt">format</span> <span class="err">?formatUri</span><span class="p">.</span></code> <br/><code>        <span class="p">}</span></code> <br/><code>    <span class="c"># Формируем лист HTML-строк ?uriList из ?formatUri.</span></code> <br/><code>    <span class="err">select</span> <span class="err">?formatUri</span> <span class="err">-&gt;</span> <span class="err">?uriList</span><span class="p">.</span></code> <br/><code>    <span class="c"># Формируем из ?uriList одну большую строку</span></code> <br/><code>    <span class="c"># с разделителем &lt;br/&gt; (перенос строки)</span></code> <br/><code>    <span class="c"># и возвращаем её в значение атрибута</span></code> <br/><code>    <span class="p">(</span><span class="s">"&lt;br/&gt;"</span> <span class="err">?uriList</span><span class="p">)</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">join</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Поместите атрибут <em>«Изображения»</em> на <strong>основную форму</strong>.</p>
+</li>
+<li>Поместите атрибут <em>«Галерея»</em> на форму <em>«Клиентская форма»</em>.</li>
+</ol>
+<h3 id="example_image_gallery_on_form_image_testing">Тестирование для атрибута типа «Изображение»</h3>
+<ol class="colored_numbers_list">
+<li>Создайте запись в шаблоне <em>«Карточки товаров»</em>.</li>
+<li>Сохраните запись.</li>
+<li>Прикрепите изображения к атрибуту <em>«Изображения»</em>.</li>
+<li>С помощью селектора <i class="fa-light fa-angle-down">‌<!--icon--></i> перейдите к форме <em>«Клиентская форма»</em>.</li>
+<li>На форме должны отобразиться прикреплённые изображения в виде галереи.</li>
+</ol>
+<h2 class="pageBreakBefore" id="example_image_gallery_on_form_document_setup">Порядок настройки для атрибута типа «Документ»</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>В шаблоне <em>«Карточки товаров»</em> добавьте атрибут <em>«Фотографии»</em> со следующими свойствами:</p>
+<ul>
+<li><strong>Системное имя:</strong> <em>Фотографии</em></li>
+<li><strong>Тип данных: документ</strong></li>
+<li><strong>Хранить несколько значений:</strong> флажок установлен</li>
+</ul>
+</li>
+<li>
+<p>Создайте атрибут <em>«Отображение фотографий на форме»</em> со следующими свойствами:</p>
+<ul>
+<li><strong>Системное имя:</strong> <em>Фотогалерея</em></li>
+<li><strong>Тип данных: текст</strong></li>
+<li>
+<p><strong>Формат отображения: HTML-текст</strong></p>
+<div class="notice notice-warning">
+<p class="admonition-title">Важно!</p>
+<p>Если задать для атрибута другой формат отображения, HTML-теги будут отображаться как обычный текст.</p>
+</div>
+</li>
+<li>
+<p><strong>Вычислять автоматически:</strong> флажок установлен</p>
+</li>
+<li>
+<p><strong>Выражение для вычислений:</strong></p>
+<ul>
+<li>
+<p><strong>Формула</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="o">#</span><span class="w"> </span><span class="err">Из</span><span class="w"> </span><span class="err">атрибута</span><span class="w"> </span><span class="err">«Фотографии»</span><span class="w"> </span><span class="err">собираем</span><span class="w"> </span><span class="err">изображения</span></code> <br/><code><span class="o">#</span><span class="w"> </span><span class="err">и</span><span class="w"> </span><span class="err">соединяем</span><span class="w"> </span><span class="err">в</span><span class="w"> </span><span class="n">HTML</span><span class="w"> </span><span class="err">с</span><span class="w"> </span><span class="err">разделителем</span><span class="w"> </span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span></code> <br/><code><span class="o">#</span><span class="w"> </span><span class="s1">'https://host-name'</span><span class="w"> </span><span class="err">—</span><span class="w"> </span><span class="err">имя</span><span class="w"> </span><span class="err">хоста</span><span class="w"> </span><span class="n">Comindware</span><span class="w"> </span><span class="n">Platform</span></code> <br/><code><span class="k">JOIN</span><span class="p">(</span><span class="ss">"&lt;br/&gt;"</span><span class="p">,</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="err">$Фотографии</span><span class="w"> </span><span class="k">select</span></code> <br/><code><span class="w">    </span><span class="n">FORMAT</span><span class="p">(</span><span class="ss">"&lt;img src='https://your-host{0}'/&gt;"</span><span class="p">,</span><span class="w"> </span></code> <br/><code><span class="w">    </span><span class="n">LIST</span><span class="p">(</span><span class="n">a</span><span class="o">-&gt;</span><span class="n">currentRevision</span><span class="o">-&gt;</span><span class="n">httpUri</span><span class="p">)</span></code> <br/><code><span class="w">    </span><span class="p">)</span></code> <br/><code><span class="p">)</span></code> <br/></pre></code></div>
+</li>
+</ul>
+<p><strong>или</strong></p>
+<ul>
+<li>
+<p><strong>N3</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы</span></code> <br/><code><span class="c"># с документами и строками</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">document:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/document#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwstring:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/string#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">string:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/2000/10/swap/string#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Находим атрибут «Изображения» (Фотографии) и помещаем в ?photosAttribute</span></code> <br/><code>    <span class="p">(</span><span class="s">"ProductCards"</span> <span class="s">"Фотографии"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?photosAttribute</span><span class="p">.</span></code> <br/><code>    <span class="c"># Запускаем цикл</span></code> <br/><code>    <span class="err">from</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Находим содержимое ?photosAttribute в текущей</span></code> <br/><code>        <span class="c"># записи и помещаем в ?photos</span></code> <br/><code>        <span class="err">?item</span> <span class="err">?photosAttribute</span> <span class="err">?photos</span><span class="p">.</span></code> <br/><code>        <span class="c"># Получаем текущую ревизию документа и</span></code> <br/><code>        <span class="c"># помещаем в ?fileRevision</span></code> <br/><code>        <span class="err">?photos</span> <span class="nn">document</span><span class="p">:</span><span class="nt">currentRevision</span> <span class="err">?fileRevision</span><span class="p">.</span></code> <br/><code>        <span class="c"># Получаем ссылку на файл без имени хоста</span></code> <br/><code>        <span class="c"># и помещаем в ?fileUri</span></code> <br/><code>        <span class="err">?fileRevision</span> <span class="nn">document</span><span class="p">:</span><span class="nt">httpUri</span> <span class="err">?fileUri</span><span class="p">.</span></code> <br/><code>        <span class="c"># Формируем HTML-строки c изображениями и помещаем в ?formatUri</span></code> <br/><code>        <span class="c"># 'https://host-name' — имя хоста Comindware Platform</span></code> <br/><code>        <span class="p">(</span><span class="s">"&lt;img src='https://host-name{0}'&gt;"</span> <span class="err">?fileUri</span><span class="p">)</span> <span class="nn">string</span><span class="p">:</span><span class="nt">format</span> <span class="err">?formatUri</span><span class="p">.</span></code> <br/><code>        <span class="p">}</span></code> <br/><code>    <span class="c"># Формируем лист HTML-строк ?uriList из ?formatUri.</span></code> <br/><code>    <span class="err">select</span> <span class="err">?formatUri</span> <span class="err">-&gt;</span> <span class="err">?uriList</span><span class="p">.</span></code> <br/><code>    <span class="c"># Формируем из ?uriList одну большую строку</span></code> <br/><code>    <span class="c"># с разделителем &lt;br/&gt; (перенос строки)</span></code> <br/><code>    <span class="c"># и возвращаем её в значение атрибута</span></code> <br/><code>    <span class="p">(</span><span class="s">"&lt;br/&gt;"</span> <span class="err">?uriList</span><span class="p">)</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">join</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Поместите атрибут <em>«Фотографии»</em> на <strong>основную форму</strong>.</p>
+</li>
+<li>Поместите атрибут <em>«Отображение фотографий на форме»</em> на форму <em>«Клиентская форма»</em>.</li>
+</ol>
+<h3 id="example_image_gallery_on_form_document_testing">Тестирование для атрибута типа «Документ»</h3>
+<ol class="colored_numbers_list">
+<li>Создайте запись в шаблоне <em>«Карточки товаров»</em>.</li>
+<li>Прикрепите изображения к атрибуту <em>«Фотографии»</em>.</li>
+<li>Сохраните запись.</li>
+<li>С помощью селектора <i class="fa-light fa-angle-down">‌<!--icon--></i> перейдите к форме <em>«Клиентская форма»</em>.</li>
+<li>На форме должны отобразиться прикреплённые изображения в виде галереи.</li>
+</ol>
+<h2 class="pageBreakBefore" id="примеры-стилизации-изображений">Примеры стилизации изображений</h2>
+<div class="notice notice-tip">
+<p class="admonition-title">Форматирование с помощью CSS</p>
+<p>Для форматирования изображения можно использовать следующие свойства CSS:</p>
+<ul>
+<li><code>max-width</code> и <code>max-height</code> для ограничения размера;</li>
+<li><code>border-radius</code> для скругления углов;</li>
+<li><code>border</code> для рамки;</li>
+<li><code>margin</code> для отступов вокруг изображения.</li>
+</ul>
+</div>
+<ul>
+<li>
+<p>Ограничение размера до 300x300 пикселей</p>
+<div class="highlight"><code><pre><span></span><code><span class="o">#</span><span class="w"> </span></code> <br/><code><span class="k">JOIN</span><span class="p">(</span><span class="ss">"&lt;br/&gt;"</span><span class="p">,</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="err">$Фотографии</span><span class="w"> </span><span class="k">select</span></code> <br/><code><span class="w">    </span><span class="n">FORMAT</span><span class="p">(</span><span class="ss">"&lt;img src='https://host-name{0}' style='max-width: 300px; max-height: 300px;' alt='Описание изображения'/&gt;"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="n">LIST</span><span class="p">(</span><span class="n">a</span><span class="o">-&gt;</span><span class="n">currentRevision</span><span class="o">-&gt;</span><span class="n">httpUri</span><span class="p">)</span></code> <br/><code><span class="w">    </span><span class="p">)</span></code> <br/><code><span class="p">)</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Обрезка по размеру 200x200 пикселей с обрезкой и скруглением углов радиусом 8 пикселей:</p>
+<div class="highlight"><code><pre><span></span><code><span class="o">#</span><span class="w"> </span><span class="err">Отображение</span><span class="w"> </span><span class="err">изображений</span><span class="w"> </span></code> <br/><code><span class="k">JOIN</span><span class="p">(</span><span class="ss">"&lt;br/&gt;"</span><span class="p">,</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="err">$Фотографии</span><span class="w"> </span><span class="k">select</span></code> <br/><code><span class="w">    </span><span class="n">FORMAT</span><span class="p">(</span><span class="ss">"&lt;div style='display: inline-block; margin: 5px;'&gt;&lt;img src='https://host-name{0}' width='200' height='200' style='object-fit: cover; border-radius: 8px;' alt='Описание изображения'/&gt;&lt;/div&gt;"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="n">LIST</span><span class="p">(</span><span class="n">a</span><span class="o">-&gt;</span><span class="n">currentRevision</span><span class="o">-&gt;</span><span class="n">httpUri</span><span class="p">)</span></code> <br/><code><span class="w">    </span><span class="p">)</span></code> <br/><code><span class="p">)</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Автоматическое масштабирование и рамка со скругленными углами радиусом 4 пикселя:</p>
+<div class="highlight"><code><pre><span></span><code><span class="o">#</span><span class="w"> </span><span class="err">Адаптивное</span><span class="w"> </span><span class="err">отображение</span><span class="w"> </span></code> <br/><code><span class="k">JOIN</span><span class="p">(</span><span class="ss">"&lt;br/&gt;"</span><span class="p">,</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="err">$Фотографии</span><span class="w"> </span><span class="k">select</span></code> <br/><code><span class="w">    </span><span class="n">FORMAT</span><span class="p">(</span><span class="ss">"&lt;div style='text-align: center; margin: 10px;'&gt;&lt;img src='https://host-name{0}' style='max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 4px;' alt='Описание изображения'/&gt;&lt;/div&gt;"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="n">LIST</span><span class="p">(</span><span class="n">a</span><span class="o">-&gt;</span><span class="n">currentRevision</span><span class="o">-&gt;</span><span class="n">httpUri</span><span class="p">)</span></code> <br/><code><span class="w">    </span><span class="p">)</span></code> <br/><code><span class="p">)</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Проверка наличия файлов изображений:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">IF</span><span class="p">(</span><span class="n">ISBLANK</span><span class="p">(</span><span class="err">$Фотографии</span><span class="p">),</span><span class="w"> </span><span class="ss">"&lt;p style='color: #999; font-style: italic;'&gt;Изображения не загружены&lt;/p&gt;"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="k">JOIN</span><span class="p">(</span><span class="ss">"&lt;br/&gt;"</span><span class="p">,</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="err">$Фотографии</span><span class="w"> </span><span class="k">select</span></code> <br/><code><span class="w">        </span><span class="n">FORMAT</span><span class="p">(</span><span class="ss">"&lt;img src='https://host-name{0}' style='max-width: 250px; max-height: 250px; margin: 5px;' alt='Описание изображения'/&gt;"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="n">LIST</span><span class="p">(</span><span class="n">a</span><span class="o">-&gt;</span><span class="n">currentRevision</span><span class="o">-&gt;</span><span class="n">httpUri</span><span class="p">)</span></code> <br/><code><span class="w">        </span><span class="p">)</span></code> <br/><code><span class="w">    </span><span class="p">)</span></code> <br/><code><span class="p">)</span></code> <br/></pre></code></div>
+</li>
+</ul>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4782">Атрибут типа «Документ»</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4771">Атрибут типа «Изображение»</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5151">Атрибут «Документ». Формирование ссылки на файл</a></em></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

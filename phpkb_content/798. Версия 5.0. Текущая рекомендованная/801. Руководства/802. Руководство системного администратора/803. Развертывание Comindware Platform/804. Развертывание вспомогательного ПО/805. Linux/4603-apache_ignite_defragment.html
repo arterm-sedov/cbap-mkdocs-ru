@@ -1,13 +1,41 @@
-<h1>Дефрагментация данных Apache Ignite</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr">
+<h1>Apache Ignite. Дефрагментация данных</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4603" kb-tags="Apache Ignite,Linux,дефрагментация,оптимизация хранилища,производительность" kb-title="Apache Ignite. Дефрагментация данных">
 <div class="md-container" data-md-component="container">
-<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
 <div class="mce-toc">
-<h2 class="toc-heading">Содержание</h2>
+<h2 class="toc-heading">
+      Содержание
+      </h2>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#порядок-дефрагментации"> <span class="md-ellipsis"> Порядок дефрагментации </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#решение-возможных-проблем"> <span class="md-ellipsis"> Решение возможных проблем </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#порядок-дефрагментации">
+<span class="md-ellipsis">
+      Порядок дефрагментации
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#решение-возможных-проблем">
+<span class="md-ellipsis">
+      Решение возможных проблем
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
 </ul>
 </div>
 </nav>
@@ -22,86 +50,57 @@
 <h2 id="порядок-дефрагментации">Порядок дефрагментации</h2>
 <ol class="colored_numbers_list">
 <li>Создайте резервную копию базы данных экземпляра ПО.</li>
-<li>Скачайте бинарный дистрибутив Apache Ignite, например <a class="mkdocs_imported_link" href="https://downloads.apache.org/ignite/2.16.0/apache-ignite-2.16.0-bin.zip">apache-ignite-2.16.0-bin.zip</a> или более новую версию.</li>
+<li>Скачайте бинарный дистрибутив Apache Ignite, например <a class="mkdocs_imported_link" href="https://downloads.apache.org/ignite/2.17.0/apache-ignite-2.17.0-bin.zip">apache-ignite-2.17.0-bin.zip</a> или более новую версию.</li>
 <li>
 <p>Перейдите в режим суперпользователя:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code>sudo -s</code> </pre>
-</div>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>-s</code> <br/></pre></code></div>
 <p>или</p>
-<div class="highlight"><code><code></code></code>
-<pre><code>su<span class="w"> </span>-</code> </pre>
-</div>
+<div class="highlight"><code><pre><span></span><code>su<span class="w"> </span>-</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Распакуйте дистрибутив Apache Ignite в домашнюю папку (здесь и далее <code>username</code> — имя текущего пользователя):</p>
-<div class="highlight"><code><code></code></code>
-<pre><code>unzip apache-ignite-2.16.0-bin.zip -d /usr/share/ignite</code> </pre>
-</div>
+<p>Распакуйте дистрибутив Apache Ignite в домашнюю директорию (здесь и далее <code>username</code> — имя текущего пользователя):</p>
+<div class="highlight"><code><pre><span></span><code>unzip<span class="w"> </span>-q<span class="w"> </span>apache-ignite-2.17.0-bin.zip<span class="w"> </span>-d<span class="w"> </span>/usr/share/ignite</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Задайте переменную среды <code>IGNITE_HOME</code>:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="nb">export</span> <span class="nv">IGNITE_HOME</span><span class="o">=</span>/usr/share/ignite</code> </pre>
-</div>
+<div class="highlight"><code><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">IGNITE_HOME</span><span class="o">=</span>/usr/share/ignite/apache-ignite-2.17.0-bin</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Скопируйте в папку <code>/usr/share/ignite</code> файл <code>Ignite.config</code> из папки <code>/var/www/&lt;instanceName&gt;</code> (где <code>&lt;instanceName&gt;</code> — имя экземпляра ПО):</p>
-<div class="highlight"><code><code></code></code>
-<pre><code>cp /var/www/&lt;instanceName&gt;/Ignite.config /usr/share/ignite/</code> </pre>
-</div>
+<p>Задайте переменную среды <code>IGNITE_CONTROL_UTILITY_USE_CONNECTOR_CONNECTION</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">IGNITE_CONTROL_UTILITY_USE_CONNECTOR_CONNECTION</span><span class="o">=</span><span class="nb">true</span></code> <br/></pre></code></div>
 </li>
 <li>
-<p>Перейдите в папку <code>bin</code> Apache Ignite:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="nb">cd</span> /usr/share/ignite/bin</code> </pre>
-</div>
-</li>
-<li>
-<p>В файле <code>control.sh</code> измените директиву <code>DEFAULT_CONFIG</code>:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="nv">DEFAULT_CONFIG</span><span class="o">=</span>config/Ignite.config</code> </pre>
-</div>
+<p>Перейдите в директорию <code>bin</code> Apache Ignite:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/usr/share/ignite/apache-ignite-2.17.0-bin/bin</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Получите список узлов, зарегистрированных в базовой топологии:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code>bash control.sh --baseline</code> </pre>
-</div>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>control.sh<span class="w"> </span>--baseline</code> <br/></pre></code></div>
+<div class="highlight"><span class="filename">Пример списка узлов в базовой конфигурации</span><code><pre><span></span><code>root@NODE1:/usr/share/ignite/apache-ignite-slim-2.17.0-bin/bin#<span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="nv">IGNITE_HOME</span><span class="o">=</span>/usr/share/ignite/apache-ignite-slim-2.17.0-bin/</code> <br/><code>root@NODE1:/usr/share/ignite/apache-ignite-slim-2.17.0-bin/bin#<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>apache-ignite-slim-2.17.0-bin/bin/</code> <br/><code>root@NODE1:/usr/share/ignite/apache-ignite-slim-2.17.0-bin/bin#<span class="w"> </span>bash<span class="w"> </span>control.sh<span class="w"> </span>--baseline</code> <br/><code>Control<span class="w"> </span>utility<span class="w"> </span><span class="o">[</span><span class="m">2</span>.17.0<span class="o">]</span></code> <br/><code>User:<span class="w"> </span>root</code> <br/><code>Time:<span class="w"> </span><span class="m">2025</span>-12-04T11:43:07.505</code> <br/><code></code> <br/><code><span class="o">[</span>BASELINE<span class="o">]</span></code> <br/><code>Arguments:<span class="w"> </span>--baseline</code> <br/><code></code> <br/><code>Cluster<span class="w"> </span>state:<span class="w"> </span>ACTIVE</code> <br/><code>Current<span class="w"> </span>topology<span class="w"> </span>version:<span class="w"> </span><span class="m">1</span></code> <br/><code>Baseline<span class="w"> </span>auto<span class="w"> </span>adjustment<span class="w"> </span>enabled:<span class="w"> </span><span class="nv">softTimeout</span><span class="o">=</span><span class="m">3000</span></code> <br/><code>Baseline<span class="w"> </span>auto-adjust<span class="w"> </span>are<span class="w"> </span>not<span class="w"> </span>scheduled</code> <br/><code></code> <br/><code>Current<span class="w"> </span>topology<span class="w"> </span>version:<span class="w"> </span><span class="m">1</span></code> <br/><code>Coordinator:<span class="w"> </span><span class="nv">ConsistentId</span><span class="o">=</span>a06ff4bf-3a28-4b6c-a66a-323bca97a8e0,<span class="w"> </span><span class="nv">Address</span><span class="o">=</span>localhost/127.0.0.1,<span class="w"> </span><span class="nv">Order</span><span class="o">=</span><span class="m">1</span></code> <br/><code></code> <br/><code>Baseline<span class="w"> </span>nodes:</code> <br/><code><span class="nv">ConsistentId</span><span class="o">=</span>a06ff4bf-3a28-4b6c-a66a-323bca97a8e0,<span class="w"> </span><span class="nv">Address</span><span class="o">=</span>localhost/127.0.0.1,<span class="w"> </span><span class="nv">State</span><span class="o">=</span>ONLINE,<span class="w"> </span><span class="nv">Order</span><span class="o">=</span><span class="m">1</span></code> <br/><code></code> <br/><code>Number<span class="w"> </span>of<span class="w"> </span>baseline<span class="w"> </span>nodes:<span class="w"> </span><span class="m">1</span></code> <br/><code></code> <br/><code>Other<span class="w"> </span>nodes<span class="w"> </span>not<span class="w"> </span>found.</code> <br/><code></code> <br/><code>Command<span class="w"> </span><span class="o">[</span>BASELINE<span class="o">]</span><span class="w"> </span>finished<span class="w"> </span>with<span class="w"> </span>code:<span class="w"> </span><span class="m">0</span></code> <br/><code>Time:<span class="w"> </span><span class="m">2025</span>-12-04T11:43:07.839</code> <br/><code>Execution<span class="w"> </span>time:<span class="w"> </span><span class="m">334</span><span class="w"> </span>ms</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Назначьте дефрагментацию данных Apache Ignite при перезапуске экземпляра ПО, указав вместо <code>&lt;id&gt;</code> идентификаторы узлов, полученные на шаге 9:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code>bash control.sh --defragmentation schedule --nodes &lt;id&gt;</code> </pre>
-</div>
-<p>11. Остановите и запустите экземпляр ПО:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code>systemctl stop comindware&lt;instanceName&gt;</code> <br/><code>systemctl start comindware&lt;instanceName&gt;</code> </pre>
-</div>
+<p>Назначьте дефрагментацию данных Apache Ignite при перезапуске экземпляра ПО, указав вместо <code>&lt;id&gt;</code> идентификаторы узлов (ConsistentId), полученные на шаге 9:</p>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>control.sh<span class="w"> </span>--defragmentation<span class="w"> </span>schedule<span class="w"> </span>--nodes<span class="w"> </span>&lt;id&gt;</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Остановите и запустите экземпляр ПО:</p>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>stop<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>start<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
 <p>Здесь <code>&lt;instanceName&gt;</code> — имя экземпляра ПО.</p>
 </li>
 <li>
-<p>Инициируйте экземпляр ПО:</p>
+<p>Инициализируйте экземпляр ПО:</p>
 <ul>
 <li>
 <p>С помощью командной строки:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code>curl localhost:&lt;port&gt;</code> </pre>
-</div>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>localhost:&lt;port&gt;</code> <br/></pre></code></div>
 <p>или</p>
-<div class="highlight"><code><code></code></code>
-<pre><code>curl &lt;instance_fqdn&gt;</code> </pre>
-</div>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>&lt;instance_fqdn&gt;</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Либо с помощью браузера, перейдя по адресу:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code>&lt;ip&gt;:&lt;port&gt;</code> </pre>
-</div>
+<div class="highlight"><code><pre><span></span><code>&lt;ip&gt;:&lt;port&gt;</code> <br/></pre></code></div>
 <p>или</p>
-<div class="highlight"><code><code></code></code>
-<pre><code>&lt;instance_fqdn&gt;</code> </pre>
-</div>
+<div class="highlight"><code><pre><span></span><code>&lt;instance_fqdn&gt;</code> <br/></pre></code></div>
 </li>
 </ul>
 <p>Здесь:</p>
@@ -117,13 +116,10 @@
 <ul>
 <li>В процессе дефрагментации для просмотра статуса используйте команду:</li>
 </ul>
-<div class="highlight"><code><code></code></code>
-<pre><code>watch -cd bash control.sh --defragmentation status</code> </pre>
-</div>
+<div class="highlight"><code><pre><span></span><code>watch -cd bash control.sh --defragmentation status</code> <br/></pre></code></div>
 <ul>
-<li>В процессе дефрагментации Apache Ignite будет вносить сведения в файл журнала вида <code>/var/lib/comindware/&lt;instanceName&gt;/Database/log/ignite-xxxxxxxx.0.log</code>.</li>
-<li>По завершении дефрагментации:
-<ul>
+<li>В процессе дефрагментации Apache Ignite будет вносить сведения в файл журнала вида <code>/var/log/comindware/&lt;instanceName&gt;/Logs/igniteClient_xxxxxxxx.log</code>. </li>
+<li>По завершении дефрагментации:<ul>
 <li>в журнале Apache Ignite должно появиться событие: <code>Defragmentation process complete</code>;</li>
 <li>команда  <code>watch -cd bash control.sh --defragmentation status</code> должна вывести сообщение <code>Defragmentation process complete</code>.</li>
 </ul>
@@ -133,12 +129,10 @@
 </li>
 <li>
 <p>Перезапустите экземпляр ПО, чтобы его снова можно было использовать.</p>
-<div class="highlight"><code><code></code></code>
-<pre><code>systemctl restart comindware&lt;instanceName&gt;</code> </pre>
-</div>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>restart<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Инициируйте экземпляр ПО, также как на шаге 12.</p>
+<p>Инициализируйте экземпляр ПО, также как на шаге 12.</p>
 </li>
 </ol>
 <h2 class="pageBreakBefore" id="решение-возможных-проблем">Решение возможных проблем</h2>
@@ -146,45 +140,31 @@
 <ol class="colored_numbers_list">
 <li>
 <p>Добавьте в файл <code>/etc/security/limits.conf</code> строки:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code>* soft nproc <span class="m">65535</span></code> <br/><code>* hard nproc <span class="m">65535</span></code> <br/><code>* soft nofile <span class="m">65535</span></code> <br/><code>* hard nofile <span class="m">65535</span></code> <br/><code>www-data soft nproc <span class="m">200000</span></code> <br/><code>www-data hard nproc <span class="m">200000</span></code> <br/><code>www-data soft nofile <span class="m">200000</span></code> <br/><code>www-data hard nofile <span class="m">200000</span></code> </pre>
-</div>
+<div class="highlight"><code><pre><span></span><code>*<span class="w"> </span>soft<span class="w"> </span>nproc<span class="w"> </span><span class="m">65535</span></code> <br/><code>*<span class="w"> </span>hard<span class="w"> </span>nproc<span class="w"> </span><span class="m">65535</span></code> <br/><code>*<span class="w"> </span>soft<span class="w"> </span>nofile<span class="w"> </span><span class="m">65535</span></code> <br/><code>*<span class="w"> </span>hard<span class="w"> </span>nofile<span class="w"> </span><span class="m">65535</span></code> <br/><code>www-data<span class="w"> </span>soft<span class="w"> </span>nproc<span class="w"> </span><span class="m">200000</span></code> <br/><code>www-data<span class="w"> </span>hard<span class="w"> </span>nproc<span class="w"> </span><span class="m">200000</span></code> <br/><code>www-data<span class="w"> </span>soft<span class="w"> </span>nofile<span class="w"> </span><span class="m">200000</span></code> <br/><code>www-data<span class="w"> </span>hard<span class="w"> </span>nofile<span class="w"> </span><span class="m">200000</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Добавьте в файл <code>/etc/pam.d/common-session</code> строку:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code>session required pam_limits.so</code> </pre>
-</div>
+<div class="highlight"><code><pre><span></span><code>session<span class="w"> </span>required<span class="w"> </span>pam_limits.so</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Добавьте в файл <code>/etc/sysctl.conf</code> строку:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code>fs.file-max <span class="o">=</span> <span class="m">2097152</span></code> </pre>
-</div>
+<div class="highlight"><code><pre><span></span><code>fs.file-max<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2097152</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Раскомментируйте строку и задайте значение в файле <code>/etc/systemd/user.conf</code>:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="nv">DefaultLimitNOFILE</span><span class="o">=</span><span class="m">65536</span></code> </pre>
-</div>
+<div class="highlight"><code><pre><span></span><code><span class="nv">DefaultLimitNOFILE</span><span class="o">=</span><span class="m">200000</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Раскомментируйте строку и задайте значение в файле <code>/etc/systemd/system.conf</code>:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code>DefaultLimitNOFILE=65536</code> </pre>
-</div>
+<div class="highlight"><code><pre><span></span><code><span class="nv">DefaultLimitNOFILE</span><span class="o">=</span><span class="m">200000</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Откройте для редактирования конфигурацию сервиса экземпляра ПО:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code>systemctl edit comindware&lt;instanceName&gt;.service</code> </pre>
-</div>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>edit<span class="w"> </span>comindware&lt;instanceName&gt;.service</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Добавьте в него строки:</p>
-<div class="highlight"><code><code></code></code>
-<pre><code><span class="o">[</span>Service<span class="o">]</span></code> <br/><code><span class="nv">LimitNOFILE</span><span class="o">=</span><span class="m">65536</span></code> <br/><code><span class="nv">LimitNOFILESoft</span><span class="o">=</span><span class="m">65536</span></code> </pre>
-</div>
+<div class="highlight"><code><pre><span></span><code><span class="o">[</span>Service<span class="o">]</span></code> <br/><code><span class="nv">LimitNOFILE</span><span class="o">=</span><span class="m">200000</span></code> <br/><code><span class="nv">LimitNOFILESoft</span><span class="o">=</span><span class="m">200000</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Перезагрузите машину и экземпляр ПО.</p>
@@ -193,13 +173,20 @@
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642">Резервное копирование и восстановление</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://ignite.apache.org/docs/2.11.1/persistence/native-persistence-defragmentation">Дефрагментация персистентного хранилища</a></em> (руководство Apache Ignite, английский язык)</li>
-<li><em><a class="mkdocs_imported_link" href="https://ignite.apache.org/docs/2.11.1/tools/control-script#activation-deactivation-and-topology-management">Активация, деактивация и управление топологией</a></em> (руководство Apache Ignite, английский язык)</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642">Резервное копирование и восстановление</a></li>
+<li><a class="mkdocs_imported_link" href="https://ignite.apache.org/docs/2.11.1/persistence/native-persistence-defragmentation">Дефрагментация персистентного хранилища  (руководство Apache Ignite, английский язык)</a></li>
+<li><a class="mkdocs_imported_link" href="https://ignite.apache.org/docs/2.11.1/tools/control-script#activation-deactivation-and-topology-management">Активация, деактивация и управление топологией (руководство Apache Ignite, английский язык)</a></li>
 </ul>
 </div>
 </article>
 </div>
 </div>
-<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
 </div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

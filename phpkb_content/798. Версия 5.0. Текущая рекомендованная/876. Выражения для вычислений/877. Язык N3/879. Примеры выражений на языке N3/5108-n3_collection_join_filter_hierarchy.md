@@ -2,7 +2,7 @@
 title: 'Записи и коллекции. Объединение и фильтрация иерархических коллекций с помощью N3'
 kbId: 5108
 url: 'https://kb.comindware.ru/article.php?id=5108'
-updated: '2025-08-21 11:58:40'
+updated: '2025-12-11 19:11:03'
 ---
 
 # Записи и коллекции. Объединение и фильтрация иерархических коллекций с помощью N3
@@ -191,5 +191,9 @@ updated: '2025-08-21 11:58:40'
 }
 
 ```
+
+--8<-- "related_topics_heading.md"
+
+- [Записи и коллекции. Выборка записей из иерархических коллекций с помощью N3][example_n3_collection_join_filter_hierarchy]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

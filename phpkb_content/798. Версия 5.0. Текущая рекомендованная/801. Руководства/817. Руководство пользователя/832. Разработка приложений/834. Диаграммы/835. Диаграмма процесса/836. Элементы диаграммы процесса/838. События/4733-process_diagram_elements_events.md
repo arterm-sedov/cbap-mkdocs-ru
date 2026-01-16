@@ -30,6 +30,6 @@ updated: '2025-04-10 16:48:51'
 --8<-- "related_topics_heading.md"
 
 - *[Элементы диаграммы процесса][process_diagram_elements]*
-- *[Редактирование диаграммы процесса][process_diagram_designer]*
+- *[Редактирование диаграммы процесса][process_diagram]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

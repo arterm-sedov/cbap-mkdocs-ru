@@ -1,0 +1,229 @@
+<h1>Записи и коллекции. Рекурсивная выборка записей из иерархических коллекций с помощью N3</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5144" kb-tags="N3,Notation 3,Notation3,RDF,атрибут типа «Запись»,вычисление,запись,иерархия,коллекция,корневая запись,обход иерархии,организационная структура,подразделение,рекурсивный обход,список,тройка,тройки,триплеты" kb-title="Записи и коллекции. Рекурсивная выборка записей из иерархических коллекций с помощью N3">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#n3_collection_hierarchy_recursive_select_intro">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#n3_collection_hierarchy_recursive_select_use_case">
+<span class="md-ellipsis">
+      Прикладная задача
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#n3_collection_hierarchy_recursive_select_initial_data">
+<span class="md-ellipsis">
+      Исходные данные
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#n3_collection_hierarchy_recursive_select_root">
+<span class="md-ellipsis">
+      Практический пример: получение компании, к которой относится текущее подразделение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#n3_collection_hierarchy_recursive_select_children">
+<span class="md-ellipsis">
+      Практический пример: получение списка всех сотрудников текущего подразделения и его дочерних подразделений
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="n3_collection_hierarchy_recursive_select_intro">Введение</h2>
+<p>Атрибут типа «<strong>Запись</strong>» хранит ID записей в связанном шаблоне (ссылки на них).</p>
+<p>Зачастую требуется предоставлять пользователю для выбора списки записей, объединённые из нескольких шаблонов и отфильтрованные по сложным правилам. Например, когда данные находятся в иерархически связанных справочниках.</p>
+<p>Для работы с иерархическими структурами в N3 доступны две функции обхода иерархии:</p>
+<ul>
+<li><code>object:getRootByParentProperty</code> — выполняет восходящий обход иерархии (от дочерней записи к корневой через цепочку родительских записей) и возвращает корневую запись;</li>
+<li><code>object:getRootByChildProperty</code> — выполняет нисходящий обход иерархии (от текущей записи по цепочке ко всем дочерним) и возвращает список всех найденных дочерних записей.</li>
+</ul>
+<p>Здесь представлены примеры использования этих функций для выборки записей из иерархических коллекций.</p>
+<h2 id="n3_collection_hierarchy_recursive_select_use_case">Прикладная задача</h2>
+<ul>
+<li>
+<p>В системе кадрового учёта имеется следующая иерархическая оргструктура:</p>
+<div class="highlight"><code><pre><span></span><code>Компания</code> <br/><code>└── Департамент</code> <br/><code>└── Сотрудники компании</code> <br/><code>    └── Отдел</code> <br/><code>    └── Сотрудники департамента</code> <br/><code>        └── Группа</code> <br/><code>        └── Сотрудники отдела</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Любое подразделение может содержать ссылки на произвольное количество дочерних подразделений и аккаунтов сотрудников.</p>
+</li>
+</ul>
+<p><strong>Требуется:</strong></p>
+<ol class="colored_numbers_list">
+<li>Найти корневое подразделение (Компанию), начиная от выбранного подразделения и двигаясь вверх по иерархии (восходящий обход).</li>
+<li>Найти все дочерние подразделения, начиная от выбранного подразделения и двигаясь вниз по иерархии (нисходящий обход).</li>
+<li>Получить список всех сотрудников, работающих в найденных подразделениях.</li>
+</ol>
+<h2 id="n3_collection_hierarchy_recursive_select_initial_data">Исходные данные</h2>
+<p>Имеются шаблоны записей <em>«Оргструктура»</em> и <em>«Сотрудники»</em>.</p>
+<ul>
+<li>
+<p>В шаблоне записи <em>«Оргструктура»</em> хранится организационная структура компании.</p>
+<p>Атрибуты в шаблоне:</p>
+<ul>
+<li><em>Родительское подразделение</em></li>
+<li><strong>Описание:</strong> <em>Ссылка на родительское подразделение в иерархии</em></li>
+<li><strong>Тип данных: запись</strong></li>
+<li><strong>Связанный шаблон:</strong> <em>Оргструктура</em></li>
+<li><strong>Хранить несколько значений:</strong> флажок снят</li>
+<li><em>Дочернее подразделение</em></li>
+<li><strong>Описание:</strong> <em>Коллекция дочерних подразделений в иерархии</em></li>
+<li><strong>Тип данных: запись</strong></li>
+<li><strong>Связанный шаблон:</strong> <em>Оргструктура</em></li>
+<li><strong>Хранить несколько значений:</strong> флажок установлен</li>
+<li><em>Сотрудники</em></li>
+<li><strong>Описание:</strong> <em>Коллекция сотрудников, работающих в подразделении</em></li>
+<li><strong>Тип данных: запись</strong></li>
+<li><strong>Связанный шаблон:</strong> <em>Сотрудники</em></li>
+<li><strong>Хранить несколько значений:</strong> флажок установлен</li>
+<li>В шаблоне записи <em>«Сотрудники»</em> хранится информация о сотрудниках организации.</li>
+</ul>
+<p>Атрибуты в шаблоне:</p>
+<ul>
+<li><em>Подразделение</em></li>
+<li><strong>Описание:</strong> <em>Ссылка на подразделение, в котором работает сотрудник</em></li>
+<li><strong>Тип данных: запись</strong></li>
+<li><strong>Связанный шаблон:</strong> <em>Оргструктура</em></li>
+<li><strong>Хранить несколько значений:</strong> флажок снят</li>
+<li><em>Аккаунт</em></li>
+<li><strong>Описание:</strong> <em>Ссылка на аккаунт сотрудника</em></li>
+<li><strong>Тип данных: аккаунт</strong></li>
+<li><strong>Связанный шаблон:</strong> <em>Сотрудники</em></li>
+<li><strong>Хранить несколько значений:</strong> флажок снят</li>
+</ul>
+</li>
+</ul>
+<h2 class="pageBreakBefore" id="n3_collection_hierarchy_recursive_select_root">Практический пример: получение компании, к которой относится текущее подразделение</h2>
+<p>Для вычисления корневого подразделения воспользуемся функцией восходящего обхода иерархической коллекции записей <code>object:getRootByParentProperty</code>.</p>
+<ol class="colored_numbers_list">
+<li>Откройте шаблон записи <em>«Оргструктура»</em>.</li>
+<li>Создайте атрибут <em>«Компания»</em> со следующими свойствами:</li>
+</ol>
+<ul>
+<li><strong>Описание:</strong> <em>Компания</em></li>
+<li><strong>Тип данных: запись</strong></li>
+<li><strong>Связанный шаблон:</strong> <em>Оргструктура</em></li>
+<li><strong>Хранить несколько значений:</strong> флажок снят</li>
+<li><strong>Вычислять автоматически:</strong> флажок установлен</li>
+</ul>
+<ol class="colored_numbers_list" start="3">
+<li>
+<p>Введите следующее <strong>вычисляемое значение</strong> на языке <strong>N3</strong>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Убедитесь, что системные имена соответствуют именам в вашем приложении.</span></code> <br/><code>    <span class="c"># Получаем атрибут, который ссылается на родительское подразделение</span></code> <br/><code>    <span class="p">(</span><span class="s">"Оргструктура"</span> <span class="s">"Родительскоеподразделение"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?ParentDepartmentAttribute</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Получаем корневую запись с помощью восходящего обхода</span></code> <br/><code>    <span class="c"># родительских записей от текущей записи (?item)</span></code> <br/><code>    <span class="p">(</span><span class="err">?item</span> <span class="err">?ParentDepartmentAttribute</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">getRootByParentProperty</span> <span class="err">?RootDepartment</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Возвращаем корневую запись</span></code> <br/><code>    <span class="err">?RootDepartment</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Поместите атрибут <em>«Компания»</em> на форму шаблона <em>«Оргструктура»</em>.</p>
+</li>
+</ol>
+<div class="notice notice-success">
+<p class="admonition-title">Логика работы функции <code>object:getRootByParentProperty</code></p>
+<p>Функция <code>object:getRootByParentProperty</code> обходит цепочку родительских записей от текущей записи, пока не найдёт запись без родительской записи (то есть корневую запись) и возвращает найденную корневую запись.</p>
+<ul>
+<li>
+<p>Синтаксис:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">(</span><span class="err">?startRecord</span> <span class="err">?parentAttribute</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">getRootByParentProperty</span> <span class="err">?returnValue</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Аргументы:</p>
+<ul>
+<li><code>?startRecord</code> — начальная запись, от которой начинается обход;</li>
+<li><code>?parentAttribute</code> — атрибут, ссылающийся на родительскую запись;</li>
+<li><code>?returnValue</code> — возвращаемое значение.</li>
+</ul>
+</li>
+<li>
+<p>Пример иерархии при восходящем обходе:</p>
+<div class="highlight"><code><pre><span></span><code>Компания (корневая запись)</code> <br/><code>└─ Департамент</code> <br/><code>   └─ Отдел</code> <br/><code>      └─ Группа (начальная запись — ?startRecord)</code> <br/></pre></code></div>
+<p>При вызове функции с начальной записью <em>«Группа»</em> функция вернёт запись <em>«Компания»</em>.</p>
+</li>
+</ul>
+</div>
+<h2 class="pageBreakBefore" id="n3_collection_hierarchy_recursive_select_children">Практический пример: получение списка всех сотрудников текущего подразделения и его дочерних подразделений</h2>
+<p>Для получения списка всех сотрудников, работающих в текущем подразделении и всех его дочерних подразделениях, воспользуемся функцией нисходящего обхода иерархической коллекции записей <code>object:getRootByChildProperty</code>.</p>
+<ol class="colored_numbers_list">
+<li>Откройте шаблон записи <em>«Оргструктура»</em>.</li>
+<li>Создайте атрибут <em>«Все сотрудники»</em> со следующими свойствами:</li>
+</ol>
+<ul>
+<li><strong>Описание:</strong> <em>Список всех сотрудников в текущем подразделении и всех его дочерних подразделениях</em></li>
+<li><strong>Тип данных: запись</strong></li>
+<li><strong>Связанный шаблон:</strong> <em>Сотрудники</em></li>
+<li><strong>Хранить несколько значений:</strong> флажок установлен</li>
+<li><strong>Вычислять автоматически:</strong> флажок установлен</li>
+</ul>
+<ol class="colored_numbers_list" start="3">
+<li>
+<p>Введите следующее <strong>вычисляемое значение</strong> на языке <strong>N3</strong>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">list:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/2000/10/swap/list#&gt;</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Убедитесь, что системные имена соответствуют именам в вашем приложении.</span></code> <br/><code>    <span class="c"># Получаем атрибуты для дальнейших вычислений</span></code> <br/><code>    <span class="p">(</span><span class="s">"Оргструктура"</span> <span class="s">"Дочернееподразделение"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?ChildDepartmentAttribute</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Оргструктура"</span> <span class="s">"Сотрудники"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?EmployeesAttribute</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Получаем все дочерние подразделения с помощью нисходящего обхода</span></code> <br/><code>    <span class="c"># от текущей записи (?item) до конечной без дочерних подразделений</span></code> <br/><code>    <span class="p">(</span><span class="err">?item</span> <span class="err">?ChildDepartmentAttribute</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">getRootByChildProperty</span> <span class="err">?ChildDepartments</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Получаем всех сотрудников из всех найденных подразделений</span></code> <br/><code>    <span class="err">?ChildDepartments</span> <span class="err">?EmployeesAttribute</span> <span class="err">?Employees</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Возвращаем список найденных сотрудников</span></code> <br/><code>    <span class="err">?Employees</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Поместите атрибут <em>«Все сотрудники»</em> на форму шаблона <em>«Оргструктура»</em>.</p>
+</li>
+</ol>
+<div class="notice notice-success">
+<p class="admonition-title">Логика работы функции <code>object:getRootByChildProperty</code></p>
+<p>Функция <code>object:getRootByChildProperty</code> последовательно обходит цепочку дочерних записей от текущей записи, пока не встретит запись, у которой отсутствует дочерняя запись (то есть конечную запись). Функция возвращает список всех дочерних записей, найденных при обходе.</p>
+<ul>
+<li>
+<p>Синтаксис:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">(</span><span class="err">?startRecord</span> <span class="err">?childAttribute</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">getRootByChildProperty</span> <span class="err">?returnValue</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Аргументы:</p>
+<ul>
+<li><code>?startRecord</code> — текущая запись, от которой начинается обход;</li>
+<li><code>?childAttribute</code> — атрибут, ссылающийся на дочерние записи;</li>
+<li><code>?returnValue</code> — возвращаемое значение (список дочерних записей).</li>
+</ul>
+</li>
+<li>
+<p>Пример иерархии для нисходящего обхода:</p>
+<div class="highlight"><code><pre><span></span><code>Компания (начальная точка — ?item)</code> <br/><code>└─ Департамент</code> <br/><code>   └─ Отдел</code> <br/><code>      └─ Группа</code> <br/></pre></code></div>
+<p>При вызове функции с начальной записью <em>«Компания»</em> функция вернёт список: <code>[Компания, Департамент, Отдел, Группа]</code>.</p>
+</li>
+</ul>
+</div>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5108">Записи и коллекции. Объединение и фильтрация иерархических коллекций с помощью N3</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

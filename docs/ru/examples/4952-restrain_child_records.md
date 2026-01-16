@@ -22,7 +22,7 @@ kbId: 4952
 (
    { ?parent -> ?value.  }
    { ?parent object:pt ?colValue.
-    ?colValue -> ?value. } 
+    ?colValue -> ?value. }
   ) assert:union true.
 }=>{ ?item object:pt ?value }.
 

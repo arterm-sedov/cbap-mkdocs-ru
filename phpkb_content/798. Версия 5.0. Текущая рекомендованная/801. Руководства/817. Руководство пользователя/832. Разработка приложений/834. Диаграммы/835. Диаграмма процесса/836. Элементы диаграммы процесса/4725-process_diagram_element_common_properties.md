@@ -2,7 +2,7 @@
 title: 'Общие свойства элементов диаграммы процесса'
 kbId: 4725
 url: 'https://kb.comindware.ru/article.php?id=4725'
-updated: '2025-04-10 16:14:37'
+updated: '2025-11-11 17:04:20'
 ---
 
 # Общие свойства элементов диаграммы процесса
@@ -21,14 +21,12 @@ updated: '2025-04-10 16:14:37'
   - **Пропуск** — токен проходит через элемент без выполнения элемента.
 - **Описание** — необязательный комментарий относительно назначения элемента.
 
-Общие свойства элемента (кроме статуса активности) отображаются в панели свойств элемента при его выборе в [конструкторе диаграммы процесса][process_diagram_designer], а также в [окне свойств элемента](#process_diagram_element_properties_setting).
-
-_![Свойства выбранного элемента в панели свойств элемента](/platform/v5.0/business_apps/diagrams/process_diagram/process_diagram_elements/img/process_diagram_element_common_properties_in_properties_panel.png)_
+Помимо общих свойств, у элементов могут быть предусмотрены специфические свойства в зависимости от их типа.
 
 ## Настройка свойств элемента
 
-1. Нажмите элемент диаграммы.
-2. Нажмите кнопку «**Свойства**» *‌* в меню элемента.
+1. Нажмите элемент диаграммы правой кнопкой мыши.
+2. Нажмите кнопку «**Настроить**» *‌* в меню элемента.
 
    ![Переход к настройке свойств элемента диаграммы](/platform/v5.0/business_apps/diagrams/process_diagram/process_diagram_elements/img/process_diagram_element_common_properties_configure_button.png)
 
@@ -44,6 +42,6 @@ _![Свойства выбранного элемента в панели сво
 
 - *[Элементы диаграммы процесса][process_diagram_elements]*
 - *[Диаграмма процесса][process_diagram]*
-- *[Конструктор диаграммы процесса][process_diagram_designer]*
+- *[Конструктор диаграммы процесса][process_diagram]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

@@ -44,6 +44,13 @@
 </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_check_service_statuses">
+<span class="md-ellipsis">
+      Проверка конфигурации ОС и служб
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_initialize">
 <span class="md-ellipsis">
       Инициализация экземпляра ПО
@@ -275,11 +282,94 @@
 </div>
 </li>
 <li>
+<p>Откройте для редактирования три службы <strong>каждого</strong> из установленных экземпляров ПО (<code>&lt;instanceName&gt;</code>):</p>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/usr/lib/systemd/system/comindware&lt;instanceName&gt;.service</code> <br/><code>nano<span class="w"> </span>/usr/lib/systemd/system/apigateway&lt;instanceName&gt;.service</code> <br/><code>nano<span class="w"> </span>/usr/lib/systemd/system/adapterhost&lt;instanceName&gt;.service</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Если используются локальные службы Kafka и OpenSearch (Elasticsearch), откройте их для редактирования:</p>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/usr/lib/systemd/system/kafka.service</code> <br/><code>nano<span class="w"> </span>/usr/lib/systemd/system/elasticsearch.service</code> <br/></pre></code></div>
+</li>
+<li>
+<p>В каждом файле службы установите следующие директивы:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">#</span><span class="w"> </span><span class="n">Макс</span><span class="p">.</span><span class="w"> </span><span class="n">количество</span><span class="w"> </span><span class="n">открытых</span><span class="w"> </span><span class="n">файлов</span></code> <br/><code><span class="n">LimitNOFILE</span><span class="o">=</span><span class="mi">200000</span></code> <br/><code><span class="err">#</span><span class="w"> </span><span class="n">Макс</span><span class="p">.</span><span class="w"> </span><span class="n">количество</span><span class="w"> </span><span class="n">процессов</span></code> <br/><code><span class="n">LimitNPROC</span><span class="o">=</span><span class="mi">8192</span></code> <br/></pre></code></div>
+</li>
+<li>
 <p>Перезапустите службы <strong>Comindware Platform</strong>:</p>
 <div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>restart<span class="w"> </span>adapterhost&lt;instanceName&gt;.service</code> <br/><code>systemctl<span class="w"> </span>restart<span class="w"> </span>comindware&lt;instanceName&gt;.service</code> <br/><code>systemctl<span class="w"> </span>restart<span class="w"> </span>apigateway&lt;instanceName&gt;.service</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Инициализируйте экземпляра ПО.</p>
+<p><a class="mkdocs_imported_link" href="#upgrade_version_linux_check_service_statuses">Проверьте конфигурацию ОС и служб</a>.</p>
+</li>
+<li><a class="mkdocs_imported_link" href="#upgrade_version_linux_initialize">Инициализируйте экземпляр ПО</a>.</li>
+</ol>
+<h2 class="pageBreakBefore" id="upgrade_version_linux_check_service_statuses">Проверка конфигурации ОС и служб</h2>
+<p>Перед созданием экземпляра ПО проверьте конфигурацию Linux и при необходимости внесите в неё перечисленные ниже изменения.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите в режим суперпользователя:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>-s</code> <br/></pre></code></div>
+<p>или</p>
+<div class="highlight"><code><pre><span></span><code>su<span class="w"> </span>-</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Откройте для редактирования файл <code>limits.conf</code>:</p>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/etc/security/limits.conf</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Установите следующие директивы:</p>
+<ul>
+<li><strong>Astra Linux</strong>, <strong>Ubuntu</strong>, <strong>Debian</strong> (DEB-based)</li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="err">www-data soft nproc 200000</span></code> <br/><code><span class="err">www-data hard nproc 200000</span></code> <br/><code><span class="err">www-data soft nofile 200000</span></code> <br/><code><span class="err">www-data hard nofile 200000</span></code> <br/></pre></code></div>
+<ul>
+<li><strong>РЕД ОС</strong>, <strong>Rocky</strong> (RPM-based)</li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="err">nginx soft nproc 200000</span></code> <br/><code><span class="err">nginx hard nproc 200000</span></code> <br/><code><span class="err">nginx soft nofile 200000</span></code> <br/><code><span class="err">nginx hard nofile 200000</span></code> <br/></pre></code></div>
+<ul>
+<li><strong>Альт Сервер</strong></li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="err">_nginx soft nproc 200000</span></code> <br/><code><span class="err">_nginx hard nproc 200000</span></code> <br/><code><span class="err">_nginx soft nofile 200000</span></code> <br/><code><span class="err">_nginx hard nofile 200000</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Откройте файл <code>common-session</code> для редактирования:</p>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/etc/pam.d/common-session</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Установите следующую директиву:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">session required pam_limits.so</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Откройте файл <code>sysctl.conf</code> для редактирования:</p>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/etc/sysctl.conf</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Установите следующие директивы:</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">fs</span><span class="p">.</span><span class="n">file</span><span class="o">-</span><span class="n">max</span><span class="o">=</span><span class="mi">2097152</span></code> <br/><code><span class="n">vm</span><span class="p">.</span><span class="n">max_map_count</span><span class="o">=</span><span class="mi">262144</span></code> <br/><code><span class="n">fs</span><span class="p">.</span><span class="n">inotify</span><span class="p">.</span><span class="n">max_user_instances</span><span class="o">=</span><span class="mi">524288</span></code> <br/></pre></code></div>
+<div class="notice notice-tip">
+<p class="admonition-title">Оптимальное значение vm.max_map_count</p>
+<p>Значение <code>vm.max_map_count=262144</code> приведено для примера.</p>
+<p>Определите оптимальное значение <code>vm.max_map_count</code> согласно инструкциям в параграфе «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622#deploy_guide_linux_vm_max_map_count">Настройка параметра vm.max_map_count</a>».</p>
+</div>
+</li>
+<li>
+<p>Откройте файл <code>user.conf</code> для редактирования:</p>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/etc/systemd/user.conf</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Установите следующую директиву:</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">DefaultLimitNOFILE</span><span class="o">=</span><span class="mi">200000</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Откройте файл <code>system.conf</code> для редактирования:</p>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/etc/systemd/system.conf</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Установите следующую директиву:</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">DefaultLimitNOFILE</span><span class="o">=</span><span class="mi">200000</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>После внесения изменений перезапустите демоны:</p>
+<div class="highlight"><code><pre><span></span><code>sysctl<span class="w"> </span>-p</code> <br/><code>systemctl<span class="w"> </span>daemon-reexec</code> <br/></pre></code></div>
 </li>
 </ol>
 <h2 class="pageBreakBefore" id="upgrade_version_linux_initialize">Инициализация экземпляра ПО</h2>

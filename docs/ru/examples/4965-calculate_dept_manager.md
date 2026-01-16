@@ -17,8 +17,8 @@ kbId: 4965
     ("Sotrudniki" "Rukovoditelbool") object:findProperty ?rukovoditel.
     ("Sotrudniki" "Podrazdelenie") object:findProperty ?userDiv.
     ("Naryady" "NaryadPodrazdelenie") object:findProperty ?divNar.
-    ("Divisions" "Title") object:findProperty ?divID.                                                                                                             
-        
+    ("Divisions" "Title") object:findProperty ?divID.
+
         ?item ?divNar ?div.
         ?div ?divID ?divtext.
         ?user a account:Account.

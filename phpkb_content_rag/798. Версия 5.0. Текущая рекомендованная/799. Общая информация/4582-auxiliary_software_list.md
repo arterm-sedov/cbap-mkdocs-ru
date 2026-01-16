@@ -2,7 +2,7 @@
 title: 'Comindware Platform 5.0. Перечень стороннего программного обеспечения для Linux'
 kbId: 4582
 url: 'https://kb.comindware.ru/article.php?id=4582'
-updated: '2025-08-12 13:56:06'
+updated: '2025-12-03 13:00:12'
 ---
 
 # Comindware Platform 5.0. Перечень стороннего программного обеспечения для Linux
@@ -71,7 +71,7 @@ updated: '2025-08-12 13:56:06'
 | --- | --- | --- | --- |
 | [Antlr3.Runtime](https://github.com/antlr/antlr3) | Среда проектирования графического интерфейса пользователя для построения грамматик ANTLR v 3. | 3.3.1.7705 | BSD license |
 | [Antlr4.Runtime.Standard](https://github.com/antlr/antlr4) | Среда проектирования графического интерфейса пользователя для построения грамматик ANTLR v4. | 4.11.1.0 | BSD 3-Clause License |
-| [Apache.Ignite.Core](https://ignite.apache.org/) | Распределенная база данных для высокопроизводительных вычислений со скоростью операций в памяти. | 2.16.0 | Apache 2.0 License |
+| [Apache.Ignite.Core](https://ignite.apache.org/) | Распределенная база данных для высокопроизводительных вычислений со скоростью операций в памяти. | 2.17.0 | Apache 2.0 License |
 | [Apache.Ignite.Linq](https://ignite.apache.org/) | Компонент библиотеки Apache.Ignite.Core. | 16.10.0.0 | Apache 2.0 License |
 | [Apache.Ignite.NLog](https://ignite.apache.org/) | Компонент библиотеки Apache.Ignite.Core. | 9.0.0.0 | Apache 2.0 License |
 | [Apache.Lucene.NET](https://github.com/apache/lucenenet) | Порт библиотеки Lucene для полнотекстового поиска. | 3.0.3.0 | Apache 2.0 License |

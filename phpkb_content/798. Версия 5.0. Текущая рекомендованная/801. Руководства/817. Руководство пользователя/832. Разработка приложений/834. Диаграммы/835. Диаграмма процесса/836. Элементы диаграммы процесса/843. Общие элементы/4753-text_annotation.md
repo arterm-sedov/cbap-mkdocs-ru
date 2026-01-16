@@ -29,6 +29,6 @@ _![Свойства комментария](/platform/v5.0/business_apps/diagram
 
 - *[Общие свойства элементов диаграммы процесса][process_diagram_element_common_properties]*
 - *[Элементы диаграммы процесса][process_diagram_elements]*
-- *[Редактирование диаграммы процесса][process_diagram_designer]*
+- *[Редактирование диаграммы процесса][process_diagram]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

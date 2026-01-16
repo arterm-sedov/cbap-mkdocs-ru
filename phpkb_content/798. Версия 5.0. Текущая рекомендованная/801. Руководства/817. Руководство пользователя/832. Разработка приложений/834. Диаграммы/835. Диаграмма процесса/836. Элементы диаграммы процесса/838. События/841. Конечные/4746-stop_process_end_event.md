@@ -53,6 +53,6 @@ _![Дополнительные свойства конечного событи
 - *[Простое промежуточное событие][process_diagram_elements_none_intermediate_event]*
 - *[Общие свойства элементов диаграммы процесса][process_diagram_element_common_properties]*
 - *[Элементы диаграммы процесса][process_diagram_elements]*
-- *[Редактирование диаграммы процесса][process_diagram_designer]*
+- *[Редактирование диаграммы процесса][process_diagram]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

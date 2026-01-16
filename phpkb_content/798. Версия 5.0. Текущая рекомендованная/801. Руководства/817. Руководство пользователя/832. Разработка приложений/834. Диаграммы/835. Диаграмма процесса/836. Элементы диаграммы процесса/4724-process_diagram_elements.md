@@ -43,7 +43,7 @@ updated: '2025-07-18 12:19:36'
 
 - *[Общие свойства элементов диаграммы процесса][process_diagram_element_common_properties]*
 - *[Диаграмма процесса][process_diagram]*
-- *[Просмотр диаграммы процесса][process_diagram_view]*
-- *[Редактирование диаграммы процесса][process_diagram_designer]*
+- *[Просмотр диаграммы процесса][process_diagram]*
+- *[Редактирование диаграммы процесса][process_diagram]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

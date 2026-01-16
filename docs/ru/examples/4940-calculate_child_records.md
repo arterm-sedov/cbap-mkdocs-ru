@@ -14,7 +14,7 @@ kbId: 4940
 {
     ("Rabotypoproektu" "Dochernieraboty") object:findProperty ?dochprop.
     ("Rabotypoproektu" "Vsedochernie") object:findProperty ?vsedochprop.
-   
+
     (
                {?item ?dochprop ?value.}
         {

@@ -24,7 +24,7 @@ kbId: 4962
                 ?ProjectPlansVal ?ProdolzhitelnostProperty ?ProdolzhitelnostVal.
                 not{?ProdolzhitelnostVal ?_isDisabled true.}.
                                          }select ?ProdolzhitelnostVal -> ?durationList.
-                ?durationList cmwmath:sum  ?value.           
+                ?durationList cmwmath:sum  ?value.
                 }
 
 ```

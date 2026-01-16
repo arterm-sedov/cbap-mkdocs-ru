@@ -314,7 +314,7 @@
 </tr>
 </tbody>
 </table>
-<div class="highlight"><code><pre><span></span><code> ![Добавление нового товара со склада](https://kb.comindware.ru/assets/img_6682d359298b9.png)</code> <br/><code></code> <br/><code> Диаграмма бизнес-процесса «*Добавление нового товара со склада*»</code> <br/></pre></code></div>
+<figure class="screenshot_with_caption" markdown="block">![Диаграмма бизнес-процесса «Добавление нового товара со склада»](https://kb.comindware.ru/assets/img_6682d359298b9.png)&lt;figcaption&gt;Диаграмма бизнес-процесса «Добавление нового товара со склада»&lt;/figcaption&gt;</figure>
 <ol class="colored_numbers_list" start="7">
 <li>В начальном событии создайте и настройте сценарий «<strong>Изменить значения атрибутов</strong>»:</li>
 </ol>
@@ -332,96 +332,36 @@
 <td><strong>Заменить</strong></td>
 <td><strong>Формула</strong>:   <code>FORMAT("{0}", LIST($$ProcessObject))</code> <strong>Здесь:</strong> <code>$$ProcessObject</code> — системная переменная, хранящая ID экземпляра процесса. См. <em><code>Использование переменных в сценарии {Article-ID:4719}</code></em> <em>.</em>  Данная формула преобразует ID экземпляра процесса в строку.</td>
 </tr>
-<tr>
-<td>8. На <strong>стартовую форму</strong> начального события поместите (как вложенную) форму <em>«Редактирование карточки товара»</em>.</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>9. На форму задачи <em>«Отредактировать карточку»</em> поместите (как вложенную) основную форму шаблона записи «<em>Карточка товара</em>».</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>10. Назначьте себя исполнителем задачи <em>«Отредактировать карточку»</em>.</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>11. Настройте <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4692">подключение к SMTP-серверу</a> с названием <em>«Системное уведомление»</em>.</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>12. Настройте <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4690">путь передачи данных для отправки эл. почты из процесса</a>:</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- <strong>Основные свойства</strong></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- <strong>Название:</strong> <em>Уведомление «Создана карточка товара»</em></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- <strong>Подключение:</strong> <em>Системное уведомление</em></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- <strong>Имя сообщения:</strong> <em>MessageNewCard</em></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- <strong>Атрибуты сообщения</strong></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- <strong>Название:</strong> <em>Ссылка на экземпляр процесса</em></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- <strong>Системное имя:</strong> <em>ProcessLink</em></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- <strong>Тип данных:</strong> <strong>Текст</strong></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- <strong>Свойства сообщения</strong></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- <strong>Кому:</strong> укажите свой адрес эл. почты</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- <strong>Формат сообщения: Размеченный</strong></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>- <strong>Сообщение</strong>:</td>
-<td></td>
-<td></td>
-</tr>
 </tbody>
 </table>
-<div class="highlight"><code><pre><span></span><code>    ```</code> <br/><code>    Добрый день!</code> <br/><code>    Добавлен новый товар со склада. {ProcessLink}</code> <br/><code>    ```</code> <br/></pre></code></div>
-<ol class="colored_numbers_list" start="13">
-<li>Вернитесь к диаграмме бизнес-процесса и настройте <strong>промежуточное событие-отправку сообщения</strong><em>«Уведомление о создании карточки»</em>:<ul>
+<ol class="colored_numbers_list" start="8">
+<li>На <strong>стартовую форму</strong> начального события поместите (как вложенную) форму <em>«Редактирование карточки товара»</em>.</li>
+<li>На форму задачи <em>«Отредактировать карточку»</em> поместите (как вложенную) основную форму шаблона записи «<em>Карточка товара</em>».</li>
+<li>Назначьте себя исполнителем задачи <em>«Отредактировать карточку»</em>.</li>
+<li>Настройте <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4692">подключение к SMTP-серверу</a> с названием <em>«Системное уведомление»</em>.</li>
+<li>
+<p>Настройте <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4690">путь передачи данных для отправки эл. почты из процесса</a>:</p>
+<ul>
+<li><strong>Основные свойства</strong></li>
+<li><strong>Название:</strong> <em>Уведомление «Создана карточка товара»</em></li>
+<li><strong>Подключение:</strong> <em>Системное уведомление</em></li>
+<li><strong>Имя сообщения:</strong> <em>MessageNewCard</em></li>
+<li><strong>Атрибуты сообщения</strong></li>
+<li><strong>Название:</strong> <em>Ссылка на экземпляр процесса</em></li>
+<li><strong>Системное имя:</strong> <em>ProcessLink</em></li>
+<li><strong>Тип данных:</strong> <strong>Текст</strong></li>
+<li><strong>Свойства сообщения</strong></li>
+<li><strong>Кому:</strong> укажите свой адрес эл. почты</li>
+<li><strong>Формат сообщения: Размеченный</strong></li>
+<li>
+<p><strong>Сообщение</strong>:</p>
+<div class="highlight"><code><pre><span></span><code>Добрый день!</code> <br/><code>Добавлен новый товар со склада. {ProcessLink}</code> <br/></pre></code></div>
+</li>
+</ul>
+</li>
+<li>
+<p>Вернитесь к диаграмме бизнес-процесса и настройте <strong>промежуточное событие-отправку сообщения</strong><em>«Уведомление о создании карточки»</em>:</p>
+<ul>
 <li><strong>Дополнительные</strong></li>
 <li><strong>Место назначения:</strong> <strong>внешний сокет</strong></li>
 <li><strong>Использовать путь передачи данных:</strong> <em>Уведомление «Создана карточка товара»</em></li>

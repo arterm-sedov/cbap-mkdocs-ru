@@ -14,10 +14,10 @@ kbId: 4948
 {
 
     ("Sotrudniki" "Uchastvuet") object:findProperty ?Uchastvuet.
-            
+
     ?value a account:Account.
     ?value ?Uchastvuet true.
-    
+
 }
 
 ```

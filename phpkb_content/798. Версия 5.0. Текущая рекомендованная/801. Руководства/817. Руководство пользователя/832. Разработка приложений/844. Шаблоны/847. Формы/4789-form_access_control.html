@@ -41,7 +41,7 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#form_access_control_external_form">
+<a class="md-nav__link mkdocs_imported_link" href="#form_access_control_external_link">
 <span class="md-ellipsis">
       Пример создания ссылки на внешнюю форму
     </span>
@@ -49,14 +49,14 @@
 <nav aria-label="Пример создания ссылки на внешнюю форму" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#form_access_control_external_form">
+<a class="md-nav__link mkdocs_imported_link" href="#form_access_control_external_link">
 <span class="md-ellipsis">
       Настройка ссылки
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#form_access_control_external_form_test">
+<a class="md-nav__link mkdocs_imported_link" href="#form_access_control_external_link_test">
 <span class="md-ellipsis">
       Тестирование внешней формы
     </span>
@@ -186,7 +186,7 @@
 </ul>
 </li>
 </ol>
-<h2 id="form_access_control_external_form">Пример создания ссылки на внешнюю форму</h2>
+<h2 id="form_access_control_external_link">Пример создания ссылки на внешнюю форму</h2>
 <p>Рассмотрим пример настройки ссылки на внешнюю форму <em>«Клиент»</em> из <em><a class="mkdocs_imported_link" href="#form_access_control_configure">предыдущего примера</a></em>, чтобы любой клиент мог оставлять заявку, не выполняя вход в <strong>Comindware Platform</strong>.</p>
 <div class="notice notice-warning">
 <p class="admonition-title">Логика работы внешних форм</p>
@@ -216,7 +216,8 @@
 <ul>
 <li><code>&lt;your-host&gt;</code> — URL экземпляра <strong>Comindware Platform</strong>;</li>
 <li><code>SolutionId</code> — <code>строка</code> вида <code>sol.XXX</code>, ID приложения, к которому относится форма;</li>
-<li><code>ObjectId</code> — <code>строка</code> вида <code>oa.XXX</code>, ID шаблона записи, к которому относится форма;</li>
+<li><code>ObjectTypeId</code> — <code>строка</code> вида <code>oa.XXX</code>, ID шаблона записи, к которому относится форма;</li>
+<li><code>ObjectId</code> — <code>строка</code> вида <code>XXX</code>, ID записи (<strong>необязательно</strong>);</li>
 <li><code>TargetId</code> — <code>строка</code> вида <code>form.XXX</code>, ID формы, которую должны открывать внешние пользователи;</li>
 <li><code>UserCommandId</code> — <code>строка</code> вида <code>event.XXX</code>, ID кнопки, которую требуется добавить на форму (<strong>необязательный параметр</strong>). Эта кнопка будет добавлена к кнопкам, настроенным с помощью конструктора формы.</li>
 <li>
@@ -225,7 +226,7 @@
 </li>
 </ul>
 </div>
-<h3 id="form_access_control_external_form">Настройка ссылки</h3>
+<h3 id="form_access_control_external_link">Настройка ссылки</h3>
 <div class="notice notice-warning">
 <p class="admonition-title">Необходим доступ к API</p>
 <p>Для формирования ссылки на внешнюю форму используется метод System Core API <code>/Base/EncryptedNavigationReferenceService/Generate</code>, поэтому <strong>вам потребуется доступ к API Comindware Platform</strong>.</p>
@@ -243,7 +244,7 @@
 </li>
 <li>
 <p>Выполните <code>POST</code>‑запрос к методу <code>Base/EncryptedNavigationReferenceService/Generate</code>:</p>
-<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\\</span></code> <br/><code><span class="s2">"https://&lt;your-host&gt;/api/public/system/Base/EncryptedNavigationReferenceService/Generate"</span><span class="w"> </span><span class="se">\\</span></code> <br/><code>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\\</span></code> <br/><code>-u<span class="w"> </span>&lt;username&gt;:&lt;password&gt;<span class="w"> </span><span class="se">\\</span></code> <br/><code>-d<span class="w"> </span><span class="s1">'{</span></code> <br/><code><span class="s1">    "SolutionId": "sol.1",</span></code> <br/><code><span class="s1">    "ObjectId": "oa.1",</span></code> <br/><code><span class="s1">    "TargetId": "form.1",</span></code> <br/><code><span class="s1">    "TargetType": "Form"</span></code> <br/><code><span class="s1">    }'</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\\</span></code> <br/><code><span class="s2">"https://&lt;your-host&gt;/api/public/system/Base/EncryptedNavigationReferenceService/Generate"</span><span class="w"> </span><span class="se">\\</span></code> <br/><code>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\\</span></code> <br/><code>-u<span class="w"> </span>&lt;username&gt;:&lt;password&gt;<span class="w"> </span><span class="se">\\</span></code> <br/><code>-d<span class="w"> </span><span class="s1">'{</span></code> <br/><code><span class="s1">    "SolutionId": "sol.1",</span></code> <br/><code><span class="s1">    "ObjectTypeId": "oa.1",</span></code> <br/><code><span class="s1">    "TargetId": "form.1",</span></code> <br/><code><span class="s1">    "TargetType": "Form"</span></code> <br/><code><span class="s1">    }'</span></code> <br/></pre></code></div>
 <p>Здесь: <code>"TargetType": "Form"</code> — <strong>обязательный</strong> фиксированный параметр, который <strong>не следует изменять</strong>.</p>
 <div class="notice notice-warning">
 <p class="admonition-title">Подставьте фактические ID</p>
@@ -260,10 +261,10 @@
 </li>
 <li>
 <p>В ответ должен прийти объект со свойствами целевой формы:</p>
-<div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"SolutionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sol.1"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"ObjectId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oa.1"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"TargetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"form.1"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"TargetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Form"</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"SolutionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sol.1"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"ObjectTypeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oa.1"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"TargetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"form.1"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"TargetType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Form"</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
 </li>
 </ol>
-<h3 class="pageBreakBefore" id="form_access_control_external_form_test">Тестирование внешней формы</h3>
+<h3 class="pageBreakBefore" id="form_access_control_external_link_test">Тестирование внешней формы</h3>
 <ol class="colored_numbers_list">
 <li>Откройте браузер <strong>на мобильном устройстве</strong> в режиме «<strong>Инкогнито</strong>», чтобы протестировать форму от лица внешнего пользователя.</li>
 <li>

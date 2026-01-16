@@ -1,11 +1,11 @@
 ---
-title: 'Дефрагментация данных Apache Ignite'
+title: 'Apache Ignite. Дефрагментация данных'
 kbId: 4603
 url: 'https://kb.comindware.ru/article.php?id=4603'
-updated: '2024-12-09 15:07:56'
+updated: '2025-12-22 12:20:20'
 ---
 
-# Дефрагментация данных Apache Ignite
+# Apache Ignite. Дефрагментация данных
 
 ## Введение
 
@@ -18,85 +18,124 @@ updated: '2024-12-09 15:07:56'
 ## Порядок дефрагментации
 
 1. Создайте резервную копию базы данных экземпляра ПО.
-2. Скачайте бинарный дистрибутив Apache Ignite, например [apache-ignite-2.16.0-bin.zip](https://downloads.apache.org/ignite/2.16.0/apache-ignite-2.16.0-bin.zip) или более новую версию.
+2. Скачайте бинарный дистрибутив Apache Ignite, например [apache-ignite-2.17.0-bin.zip](https://downloads.apache.org/ignite/2.17.0/apache-ignite-2.17.0-bin.zip) или более новую версию.
 3. Перейдите в режим суперпользователя:
 
    ```
    sudo -s
+
    ```
 
    или
 
    ```
    su -
-   ```
-4. Распакуйте дистрибутив Apache Ignite в домашнюю папку (здесь и далее `username` — имя текущего пользователя):
 
    ```
-   unzip apache-ignite-2.16.0-bin.zip -d /usr/share/ignite
+4. Распакуйте дистрибутив Apache Ignite в домашнюю директорию (здесь и далее `username` — имя текущего пользователя):
+
+   ```
+   unzip -q apache-ignite-2.17.0-bin.zip -d /usr/share/ignite
+
    ```
 5. Задайте переменную среды `IGNITE_HOME`:
 
    ```
-   export IGNITE_HOME=/usr/share/ignite
-   ```
-6. Скопируйте в папку `/usr/share/ignite` файл `Ignite.config` из папки `/var/www/<instanceName>` (где `<instanceName>` — имя экземпляра ПО):
+   export IGNITE_HOME=/usr/share/ignite/apache-ignite-2.17.0-bin
 
    ```
-   cp /var/www/<instanceName>/Ignite.config /usr/share/ignite/
-   ```
-7. Перейдите в папку `bin` Apache Ignite:
+6. Задайте переменную среды `IGNITE_CONTROL_UTILITY_USE_CONNECTOR_CONNECTION`:
 
    ```
-   cd /usr/share/ignite/bin
-   ```
-8. В файле `control.sh` измените директиву `DEFAULT_CONFIG`:
+   export IGNITE_CONTROL_UTILITY_USE_CONNECTOR_CONNECTION=true
 
    ```
-   DEFAULT_CONFIG=config/Ignite.config
+7. Перейдите в директорию `bin` Apache Ignite:
+
    ```
-9. Получите список узлов, зарегистрированных в базовой топологии:
+   cd /usr/share/ignite/apache-ignite-2.17.0-bin/bin
+
+   ```
+8. Получите список узлов, зарегистрированных в базовой топологии:
 
    ```
    bash control.sh --baseline
+
    ```
-10. Назначьте дефрагментацию данных Apache Ignite при перезапуске экземпляра ПО, указав вместо `<id>` идентификаторы узлов, полученные на шаге 9:
 
-    ```
-    bash control.sh --defragmentation schedule --nodes <id>
-    ```
+   Пример списка узлов в базовой конфигурации```
+   root@NODE1:/usr/share/ignite/apache-ignite-slim-2.17.0-bin/bin# export IGNITE_HOME=/usr/share/ignite/apache-ignite-slim-2.17.0-bin/
+   root@NODE1:/usr/share/ignite/apache-ignite-slim-2.17.0-bin/bin# cd apache-ignite-slim-2.17.0-bin/bin/
+   root@NODE1:/usr/share/ignite/apache-ignite-slim-2.17.0-bin/bin# bash control.sh --baseline
+   Control utility [2.17.0]
+   User: root
+   Time: 2025-12-04T11:43:07.505
 
-    11. Остановите и запустите экземпляр ПО:
+   [BASELINE]
+   Arguments: --baseline
+
+   Cluster state: ACTIVE
+   Current topology version: 1
+   Baseline auto adjustment enabled: softTimeout=3000
+   Baseline auto-adjust are not scheduled
+
+   Current topology version: 1
+   Coordinator: ConsistentId=a06ff4bf-3a28-4b6c-a66a-323bca97a8e0, Address=localhost/127.0.0.1, Order=1
+
+   Baseline nodes:
+   ConsistentId=a06ff4bf-3a28-4b6c-a66a-323bca97a8e0, Address=localhost/127.0.0.1, State=ONLINE, Order=1
+
+   Number of baseline nodes: 1
+
+   Other nodes not found.
+
+   Command [BASELINE] finished with code: 0
+   Time: 2025-12-04T11:43:07.839
+   Execution time: 334 ms
+
+   ```
+9. Назначьте дефрагментацию данных Apache Ignite при перезапуске экземпляра ПО, указав вместо `<id>` идентификаторы узлов (ConsistentId), полученные на шаге 9:
+
+   ```
+   bash control.sh --defragmentation schedule --nodes <id>
+
+   ```
+10. Остановите и запустите экземпляр ПО:
 
     ```
     systemctl stop comindware<instanceName>
     systemctl start comindware<instanceName>
+
     ```
 
     Здесь `<instanceName>` — имя экземпляра ПО.
-11. Инициируйте экземпляр ПО:
+11. Инициализируйте экземпляр ПО:
 
     - С помощью командной строки:
 
       ```
       curl localhost:<port>
+
       ```
 
       или
 
       ```
       curl <instance_fqdn>
+
       ```
     - Либо с помощью браузера, перейдя по адресу:
 
       ```
       <ip>:<port>
+
       ```
 
       или
 
       ```
       <instance_fqdn>
+
       ```
 
     Здесь:
@@ -111,9 +150,10 @@ updated: '2024-12-09 15:07:56'
 
     ```
     watch -cd bash control.sh --defragmentation status
+
     ```
 
-    - В процессе дефрагментации Apache Ignite будет вносить сведения в файл журнала вида `/var/lib/comindware/<instanceName>/Database/log/ignite-xxxxxxxx.0.log`.
+    - В процессе дефрагментации Apache Ignite будет вносить сведения в файл журнала вида `/var/log/comindware/<instanceName>/Logs/igniteClient_xxxxxxxx.log`.
     - По завершении дефрагментации:
       - в журнале Apache Ignite должно появиться событие: `Defragmentation process complete`;
       - команда  `watch -cd bash control.sh --defragmentation status` должна вывести сообщение `Defragmentation process complete`.
@@ -121,8 +161,9 @@ updated: '2024-12-09 15:07:56'
 
     ```
     systemctl restart comindware<instanceName>
+
     ```
-14. Инициируйте экземпляр ПО, также как на шаге 12.
+14. Инициализируйте экземпляр ПО, также как на шаге 12.
 
 ## Решение возможных проблем
 
@@ -139,45 +180,52 @@ updated: '2024-12-09 15:07:56'
    www-data hard nproc 200000
    www-data soft nofile 200000
    www-data hard nofile 200000
+
    ```
 2. Добавьте в файл `/etc/pam.d/common-session` строку:
 
    ```
    session required pam_limits.so
+
    ```
 3. Добавьте в файл `/etc/sysctl.conf` строку:
 
    ```
    fs.file-max = 2097152
+
    ```
 4. Раскомментируйте строку и задайте значение в файле `/etc/systemd/user.conf`:
 
    ```
-   DefaultLimitNOFILE=65536
+   DefaultLimitNOFILE=200000
+
    ```
 5. Раскомментируйте строку и задайте значение в файле `/etc/systemd/system.conf`:
 
    ```
-   DefaultLimitNOFILE=65536
+   DefaultLimitNOFILE=200000
+
    ```
 6. Откройте для редактирования конфигурацию сервиса экземпляра ПО:
 
    ```
    systemctl edit comindware<instanceName>.service
+
    ```
 7. Добавьте в него строки:
 
    ```
    [Service]
-   LimitNOFILE=65536
-   LimitNOFILESoft=65536
+   LimitNOFILE=200000
+   LimitNOFILESoft=200000
+
    ```
 8. Перезагрузите машину и экземпляр ПО.
 
 --8<-- "related_topics_heading.md"
 
-- *[Резервное копирование и восстановление][backup_configure]*
-- *[Дефрагментация персистентного хранилища](https://ignite.apache.org/docs/2.11.1/persistence/native-persistence-defragmentation)* (руководство Apache Ignite, английский язык)
-- *[Активация, деактивация и управление топологией](https://ignite.apache.org/docs/2.11.1/tools/control-script#activation-deactivation-and-topology-management)* (руководство Apache Ignite, английский язык)
+- [Резервное копирование и восстановление][backup_configure]
+- [Дефрагментация персистентного хранилища (руководство Apache Ignite, английский язык)](https://ignite.apache.org/docs/2.11.1/persistence/native-persistence-defragmentation)
+- [Активация, деактивация и управление топологией (руководство Apache Ignite, английский язык)](https://ignite.apache.org/docs/2.11.1/tools/control-script#activation-deactivation-and-topology-management)
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

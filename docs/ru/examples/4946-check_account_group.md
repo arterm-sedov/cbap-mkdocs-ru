@@ -29,7 +29,7 @@ kbId: 4946
     if {not {?c == 0}}
     then {true -> ?value.}
     else {}.
-    
+
 }
 
 ```

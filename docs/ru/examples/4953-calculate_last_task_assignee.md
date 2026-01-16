@@ -22,10 +22,10 @@ kbId: 4953
      from {
     ?task task:objectId ?item.
     ?task cmw:taskStatus taskStatus:completed.
-    ?task cmw:scheduledEndDate ?taskDate.                
+    ?task cmw:scheduledEndDate ?taskDate.
      } select ?taskDate -> ?taskList.
-    ?taskList cmwmath:max ?max.    
-    ?taskmax cmw:scheduledEndDate ?max.          
+    ?taskList cmwmath:max ?max.
+    ?taskmax cmw:scheduledEndDate ?max.
     ?taskmax cmw:completedBy ?value.
     }
 

@@ -2,16 +2,16 @@
 title: 'Мониторинг. Просмотр диаграмм'
 kbId: 4666
 url: 'https://kb.comindware.ru/article.php?id=4666'
-updated: '2024-07-19 13:40:13'
+updated: '2026-01-14 15:09:43'
 ---
 
 # Мониторинг. Просмотр диаграмм
 
+Устаревшая функция
+
+Данная функция устарела. В следующих версиях **Comindware Platform** функции мониторинга и просмотра показателей производительности перенесены на новый дашборд и в расширенные журналы.
+
 ## Введение
-
-Экспериментальная функция
-
-Представленная здесь функция находится на стадии разработки. См. *«[Поддержка экспериментальных функций](https://kb.comindware.ru/article.php?id=4579#mcetoc_1hsfq7ksu2)»*.
 
 В **Comindware Platform** предусмотрена возможность просмотра диаграмм с показателями производительности системы на временной шкале.
 
@@ -21,7 +21,7 @@ updated: '2024-07-19 13:40:13'
 
 ## Просмотр диаграмм мониторинга
 
-1. На странице [«**Администрирование**» — «**Инфраструктура**»](https://kb.comindware.ru/article.php?id=4661) выберите пункт «**Мониторинг**» *‌*.
+1. На странице [«**Администрирование**» — «**Инфраструктура**»](https://kb.comindware.ru/article.php?id=4661) выберите пункт «**Мониторинг**»*‌*.
 2. Отобразится страница «**Мониторинг**» с перечисленными ниже диаграммами.
    - **Аккаунты**
      - **Активные аккаунты** — количество одновременно активных аккаунтов.
@@ -52,13 +52,13 @@ updated: '2024-07-19 13:40:13'
      - **Запущенные** — количество одновременно выполняющихся сценариев.
      - **Время выполнения** — суммарное время выполнения сценариев, на каждом отрезке временной шкалы.
 
-_![Страница «Мониторинг»](https://kb.comindware.ru/assets/monitoring_page_1.png)_
+_![Страница «Мониторинг»](/platform/v5.0/administration/infrastructure/img/monitoring_page_1.png)_
 
 ## Масштабирование диаграмм
 
-Для масштабирования временной шкалы диаграммы нажимайте кнопки «**Увеличить**» ![Кнопка «Увеличить»](https://kb.comindware.ru/assets/monitoring_zoom_in.png) , «**Уменьшить**» ![Кнопка «Уменьшить»](https://kb.comindware.ru/assets/monitoring_zoom_out.png) , «**Сбросить увеличение**» ![Кнопка «Сбросить увеличение»](https://kb.comindware.ru/assets/monitoring_zoom_reset.png) .
+Для масштабирования временной шкалы диаграммы нажимайте кнопки «**Увеличить**» ![Кнопка «Увеличить»](/platform/v5.0/administration/infrastructure/img/monitoring_zoom_in.png), «**Уменьшить**» ![Кнопка «Уменьшить»](/platform/v5.0/administration/infrastructure/img/monitoring_zoom_out.png), «**Сбросить увеличение**» ![Кнопка «Сбросить увеличение»](/platform/v5.0/administration/infrastructure/img/monitoring_zoom_reset.png).
 
-_![Кнопки масштабирования диаграмм](https://kb.comindware.ru/assets/monitoring_zoom_buttons.png)_
+_![Кнопки масштабирования диаграмм](/platform/v5.0/administration/infrastructure/img/monitoring_zoom_buttons.png)_
 
 ## Просмотр данных за определенное время
 
@@ -73,26 +73,23 @@ _![Кнопки масштабирования диаграмм](https://kb.comi
 4. Справа от диаграммы отобразится панель сведений со следующими данными:
    - **дата и время**, к которым относятся данные в столбце;
    - **наименование столбца** диаграммы;
-   - кнопка «**Просмотреть журнал**» ![Кнопка «Просмотреть журнал»](https://kb.comindware.ru/assets/monitoring_view_log_button.png) для перехода к журналу соответствующих событий;
+   - кнопка «**Просмотреть журнал**» ![Кнопка «Просмотреть журнал»](/platform/v5.0/administration/infrastructure/img/monitoring_view_log_button.png) для перехода к журналу соответствующих событий;
    - **значение показателя** в данном столбце.
 
-_![Подробные сведения на диаграмме](https://kb.comindware.ru/assets/monitoring_column_details.png)_
+_![Подробные сведения на диаграмме](/platform/v5.0/administration/infrastructure/img/monitoring_column_details.png)_
 
 ## Переход к журналу с диаграммы
 
 1. Нажмите столбец любой диаграммы.
 2. Справа от диаграммы отобразится панель сведений.
-3. Нажмите кнопку «**Просмотреть журнал**» ![Кнопка «Просмотреть журнал»](https://kb.comindware.ru/assets/monitoring_view_log_button.png).
+3. Нажмите кнопку «**Просмотреть журнал**» ![Кнопка «Просмотреть журнал»](/platform/v5.0/administration/infrastructure/img/monitoring_view_log_button.png).
 4. Откроется страница «**Журнал**» с соответствующей вкладкой.
 
-_![Панель сведений с кнопкой «Просмотреть журнал»](https://kb.comindware.ru/assets/monitoring_details.png)_
+_![Панель сведений с кнопкой «Просмотреть журнал»](/platform/v5.0/administration/infrastructure/img/monitoring_details.png)_
 
 ## Связанные статьи
 
-**`![](https://kb.comindware.ru/images/marker.png) Глобальная конфигурация {Article-ID:4668}`**
-
-**`![](https://kb.comindware.ru/images/marker.png)Журналы событий {Article-ID:4673}`**
-
-**`![](https://kb.comindware.ru/images/marker.png)Производительность {Article-ID:4669}`**
-
-**`![](https://kb.comindware.ru/images/marker.png)Подсистема журналирования {Article-ID:4623}`**
+- *[Глобальная конфигурация](https://kb.comindware.ru/article.php?id=4668)*
+- *[Журналы событий](https://kb.comindware.ru/article.php?id=4673)*
+- *[Производительность](https://kb.comindware.ru/article.php?id=4669)*
+- *[Подсистема журналирования](https://kb.comindware.ru/article.php?id=4623)*
