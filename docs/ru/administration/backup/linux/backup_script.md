@@ -1,6 +1,6 @@
 ---
-title: 'Скрипт для резервного копирования данных Comindware Platform (Linux)'
-kbTitle: 'Настройка и использование скрипта для резервного копирования данных Comindware Platform (Linux)'
+title: 'Резервное копирование с помощью скриптов (Linux)'
+kbTitle: 'Резервное копирование. Настройка и запуск с помощью скриптов (Linux)'
 kbId: 5140
 tags:
     - Apache Ignite
@@ -17,7 +17,7 @@ tags:
 hide: tags
 ---
 
-# Настройка и использование скрипта для резервного копирования данных (Linux) {: #backup_linux_script }
+# Резервное копирование. Настройка и запуск с помощью скриптов (Linux) {: #backup_linux_script }
 
 {% include-markdown ".snippets/experimental_feature.md" %}
 
@@ -33,10 +33,10 @@ hide: tags
 Резервное копирование с помощью скриптов включает следующие шаги:
 
 - создание снимка данных {{ apacheIgniteVariants }}, архивирование и копирование снимка в хранилище резервных копий, очистка использованных ресурсов;
-- создание снимка данных {{ openSearchVariants }}, архивирование и копирование снимка в хранилище резервных копий, очистка использованных ресурсов;
-- синхронизация сетевой папки с пользовательскими файлами (`Streams`), архивирование и копирование файлов в хранилище резервных копий, очистка использованных ресурсов.
+- (необязательно) создание снимка данных {{ openSearchVariants }}, архивирование и копирование снимка в хранилище резервных копий, очистка использованных ресурсов;
+- (необязательно) синхронизация сетевой папки с пользовательскими файлами (`Streams`), архивирование и копирование файлов в хранилище резервных копий, очистка использованных ресурсов.
 
-Скрипт резервного копирования  (`cmw_backups_create.sh`) выполняет следующие операции:
+Скрипт резервного копирования  (`backups_create.sh`) выполняет следующие операции:
 
 - ведёт журнал по пути, указанном в переменной `logFile`;
 - сокращает журнал до последних 1000 строк при каждом запуске;
@@ -75,10 +75,10 @@ hide: tags
     ...
     ```
 
-3. Откройте скрипт резервного копирования `cmw_backups_create.sh` для редактирования:
+3. Откройте скрипт резервного копирования `backups_create.sh` для редактирования:
 
     ``` sh
-    nano /usr/share/comindware/bin/cmw_backups_create.sh
+    nano /usr/share/comindware/bin/backups_create.sh 
     ```
 
 4. Настройте в скрипте пути и имена в переменных в соответствии с вашей конфигурацией:
@@ -103,24 +103,44 @@ hide: tags
         
         Поэтому рекомендуется директорию со снимками данных {{ apacheIgniteVariants }} (`backupsPath`) размещать на выделенной области SSD-хранилища типа NVMe.
 
-5. Проверьте выполнения скрипта `cmw_backups_create.sh`, выполнив команду:
+5. Проверьте выполнения скрипта `backups_create.sh`, выполнив команду:
 
     ``` sh
-    bash /usr/share/comindware/bin/cmw_backups_create.sh -vso
+    bash /usr/share/comindware/bin/backups_create.sh <instanceName> -vso
     ```
+
+    !!! warning "Внимание!"
+
+        В новейшей версии скрипта обязательно указывать имя экземпляра **{{ productName }}** — `<instanceName>`. Если имя экземпляра не указано, скрипт выдаст ошибку и остановится.
 
     !!! warning "Внимание!"
 
         Обратите внимание на время создания снимков, а также время сохранения и размеры архивов.
 
-    !!! tip "Ключи скрипта cmw_backups_create.sh"
+    !!! tip "Ключи скрипта backups_create.sh"
 
-        Скрипт `cmw_backups_create.sh` поддерживает следующие ключи:
+        Скрипт `backups_create.sh` поддерживает следующие ключи:
 
-        - `-s` — включает создание и архивирование вложенных файлов.
-        - `-o` — включает снятие и архивирование снимков данных {{ openSearchVariants }}.
-        - `-v` — подробный вывод (verbose), выводит сообщения в терминал помимо записи в лог
-        - `-c` — только очистка (clean-only), выполняет только операции очистки старых снимков без создания нового.
+        - `-v`, `--verbose` — вывод отчёта в терминал;
+        - `-c`, `--cleanup-only` — только архивация имеющихся снимков {{ apacheIgniteVariants }};
+        - `-s`, `--with-streams` — создание архива вложенных файлов;
+        - `-o`, `--with-history` — создание резервной копии данных {{ openSearchVariants }};
+        - `-t`, `--check-config` — проверка конфигурации без выполнения резервного копирования.
+        - `--lock-file PATH` — путь к файлу блокировки выполнения резервного копирования;
+        - `--log-file PATH` — путь к файлу журнала;
+        - `--backup-depth DAYS` — глубина резервного копирования;
+        - `--ignite-home PATH` — путь к директории со скриптами {{ apacheIgniteVariants }};
+        - `--ignite-host HOST` — хост коннектора {{ apacheIgniteVariants }};
+        - `--ignite-port PORT` — порт коннектора {{ apacheIgniteVariants }};
+        - `--snapshot-path PATH` — расположение снимков {{ apacheIgniteVariants }};
+        - `--backup-prefix PREFIX` — префикс снимков {{ apacheIgniteVariants }};
+        - `--os-server URL` — URL сервера журналирования;
+        - `--os-repo-path PATH` — путь к репозиторию {{ openSearchVariants }};
+        - `--os-index-prefix PREFIX` — префикс индексов {{ openSearchVariants }};
+        - `--os-repo-name NAME` — имя репозитория {{ openSearchVariants }};
+        - `--streams-path PATH` — путь к директории вложенных файлов;
+        - `--backups-path PATH` — путь к хранилищу резервных копий;
+        - `--local-temp-path PATH` — путь к директории `LocalTemp`.
     {% include-markdown ".snippets/pdfPageBreakHard.md" %}
 
 ## Запуск скрипта с помощью планировщика (cron) {: #backup_linux_script_cron .pageBreakBefore }
@@ -133,13 +153,15 @@ hide: tags
     sudo crontab -e
     ```
 
-2. Добавьте строку запуска скрипта `cmw_backups_create.sh`:
+2. Добавьте строку запуска скрипта `backups_create.sh`:
 
     ``` sh
-    0 6-22 * * * sudo bash /usr/share/comindware/bin/cmw_backups_create.sh
+    0 6-22 * * * sudo bash /usr/share/comindware/bin/backups_create.sh  <instanceName>
     ```
 
-## Запуск скрипта cmw_backups_create.sh для нескольких узлов кластера {: #backup_linux_script_cluster_nodes .pageBreakBefore }
+    Здесь `<instanceName>` — имя экземпляра **{{ productName }}**.
+
+## Запуск скрипта backups_create.sh для нескольких узлов кластера {: #backup_linux_script_cluster_nodes .pageBreakBefore }
 
 С помощью `crontab` можно распределить операции резервного копирования узлов кластера на разные временные интервалы.
 
@@ -155,18 +177,18 @@ hide: tags
 
     ```sh
     # Запуск резервного копирования текущего узла
-    0 6-18/4 * * * sudo bash /home/admin-ag/cmw_snapshot_create.sh -so
+    0 6-18/4 * * * sudo bash /usr/share/comindware/bin/backups_create.sh -so
     # Сохранение снимков
-    30 6-21 * * * sudo bash /home/admin-ag/cmw_snapshot_create.sh -c
+    30 6-21 * * * sudo bash /usr/share/comindware/bin/backups_create.sh -c
     ```
 
 3. Для второго узла добавьте строки:
 
     ```sh
     # Запуск резервного копирования текущего узла
-    0 7-19/4 * * * sudo bash /home/admin-ag/cmw_snapshot_create.sh -so
+    0 7-19/4 * * * sudo bash /usr/share/comindware/bin/backups_create.sh -so
     # Сохранение снимков
-    30 6-19/4 * * * sudo bash /home/admin-ag/cmw_snapshot_create.sh -c
+    30 6-19/4 * * * sudo bash /usr/share/comindware/bin/backups_create.sh -c
     ```
 
 4. Аналогичным образом разнесите по времени и настройте автозапуск скрипта на остальных узлах.
