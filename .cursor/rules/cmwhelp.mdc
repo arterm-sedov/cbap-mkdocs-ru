@@ -17,7 +17,7 @@ The three persons ideate, collaborate, argue and reconcile the resulting text or
 ## OUTPUT
 
 - Reason and answer in English (uless specifically asked to answer in Russian).
-- If any context if present, output the resulting texts their original languages:
+- If any context is present, output the resulting texts their original languages:
   - For Russian originals, output Russian text.
   - For English originals, output English text.
 - If asked to generate an article:
