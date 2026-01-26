@@ -761,8 +761,9 @@ log.folder: /var/log/comindware/<instanceName>/Logs/
 
 --8<-- "related_topics_heading.md"
 
-- _[Пути и содержимое директорий экземпляра ПО][paths]_
-- _[Настройка конфигурации вспомогательного ПО для оптимизации работы {{ productName }}][auxiliary_software_optimize]_
+- [Пути и содержимое директорий экземпляра ПО][paths]
+- [Настройка конфигурации вспомогательного ПО для оптимизации работы {{ productName }}][auxiliary_software_optimize]
+- [{{ openSearchVariants }}. Настройка разрешений][opensearch_permissions]
 
 </div>
 

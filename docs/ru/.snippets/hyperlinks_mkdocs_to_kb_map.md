@@ -217,6 +217,8 @@
 
 [elasticsearch_connection]: {{ kbArticleURLPrefix }}4678
 
+[opensearch_permissions]: {{ kbArticleURLPrefix }}5152
+
 [esphere_receive_configure]: {{ kbArticleURLPrefix }}5061
 
 [esphere_send_configure]: {{ kbArticleURLPrefix }}5062

@@ -44,6 +44,7 @@ _![Настройка подключения к {{ openSearchVariants }}](elasti
 
 --8<-- "related_topics_heading.md"
 
+- _[{{ openSearchVariants }}. Настройка разрешений][opensearch_permissions]_
 - _[Инициализация {{ productName }}][deploy_guide_linux_initialize]_
 
 </div>

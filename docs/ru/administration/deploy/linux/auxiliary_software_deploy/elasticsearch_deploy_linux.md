@@ -163,9 +163,10 @@ xpack.security.transport.ssl:
 
 --8<-- "related_topics_heading.md"
 
-- _[Официальный сайт Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/targz.html)_ (английский язык)
-- _[Установка и настройка Elasticsearch без сертификатов подлинности][elasticsearch_cluster_deploy_no_certificates]_
-- _[Установка, запуск, инициализация и остановка ПО {{ productName }}][deploy_guide_linux]_
+- [Официальный сайт Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/targz.html) (английский язык)
+- [Установка и настройка Elasticsearch без сертификатов подлинности][elasticsearch_cluster_deploy_no_certificates]
+- [{{ openSearchVariants }}. Настройка разрешений][opensearch_permissions]
+- [Установка, запуск, инициализация и остановка ПО {{ productName }}][deploy_guide_linux]
 
 </div>
 
