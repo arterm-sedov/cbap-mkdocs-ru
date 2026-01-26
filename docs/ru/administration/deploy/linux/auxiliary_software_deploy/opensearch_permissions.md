@@ -76,7 +76,6 @@ hide:
 | `indices:data/write/index` | Индексирование транзакций | Основная операция записи транзакций в журнал |
 | `indices:data/write/update` | Обновление существующих транзакций | Коррекция ошибочных записей |
 | `indices:data/write/update/byquery` | Массовое обновление по условию | Батч-операции для исправления данных |
-| `indices:data/write*` | Все операции записи | Удаление, переиндексация и прочие операции |
 
 ### Глобальные разрешения кластера {: #opensearch_permissions_cluster }
 
@@ -161,12 +160,21 @@ hide:
     # Адрес службы журналирования {{ openSearchVariants }}.
     journal.server: https://<openSearchHost>:<port>
     # Префикс индекса службы журналирования {{ openSearchVariants }}.
+    # Индекс службы журналирования {{ openSearchVariants }}.
     journal.name: <prefix>
     # Имя пользователя службы журналирования
     journal.username: <cmwJournalUserName>
     # Пароль службы журналирования
     journal.password: <safePassword>
     ```
+
+    !!! note "Примечание"
+
+        {% include-markdown ".snippets/opensearch_prefix_requirements.md" %}
+
+    !!! warning "Допустимый префикс индекса"
+
+        {% include-markdown ".snippets/opensearch_index_naming_requirements.md" %}
 
 ### Создание роли через OpenSearch Dashboards {: #opensearch_permissions_role_config_dashboards }
 
@@ -281,9 +289,9 @@ hide:
 
 --8<-- "related_topics_heading.md"
 
-- _[{{ openSearchVariants }}. Настройка подключения][elasticsearch_connection]_
-- _[Конфигурация экземпляра ПО][configuration_files]_
-- _[Журнал изменений не записывается. Диагностика и исправление][troubleshooting_history_not_written]_
+- [{{ openSearchVariants }}. Настройка подключения][elasticsearch_connection]
+- [Конфигурация экземпляра ПО][configuration_files_linux]
+- [Журнал изменений не записывается. Диагностика и исправление][troubleshooting_history_not_written]
 
 </div>
 

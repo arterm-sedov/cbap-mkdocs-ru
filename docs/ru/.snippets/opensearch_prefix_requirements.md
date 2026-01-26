@@ -1,0 +1,1 @@
+Префикс индекса служит для идентификации записей в БД {{ openSearchVariantsUnquotedGenitive }}. Если к {% if not gostech %}одному серверу{% endif %} {{ openSearchVariantsUnquotedDative }} подключается несколько экземпляров {{ productName }}, их префиксы индексов должны отличаться. В противном случае будет нарушена целостность данных в БД {{ openSearchVariantsUnquotedGenitive }}.
