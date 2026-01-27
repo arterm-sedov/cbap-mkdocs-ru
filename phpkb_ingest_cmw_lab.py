@@ -66,7 +66,7 @@ if __name__ == "__main__":
     # Extract only the 'Files analyzed' and 'Estimated tokens' lines from the summary using regex
     matches = re.findall(r'^(Files analyzed:.*|Estimated tokens:.*)$', summary, re.MULTILINE)
     summary_short = "\n".join([m.strip() for m in matches])# if len(matches) == 2 else summary
-    with open("kb.cmwlab.com.platform_v4_for_llm_ingestion.md", "w", encoding="utf-8", newline='\r\n') as f:
+    with open("kb.cmwlab.com.platform_v4_for_llm_ingestion.md", "w", encoding="utf-8-sig", newline='\r\n') as f:
         f.write(
             f"\n----------------------\n\n"
             f"Ingestion date: {ingestion_date}\n"
