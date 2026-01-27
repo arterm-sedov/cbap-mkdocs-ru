@@ -1,7 +1,7 @@
 
 ----------------------
 
-Ingestion date: 2025-07-21 19:31:28
+Ingestion date: 2026-01-27 19:24:24
 Title: Comindware Platform V4 knowledge base for AI ingestion
 Description: Provide this file to your AI agent. For better results, add the prompt below
 Source: https://kb.cmwlab.com/category.php?id=29
@@ -179,6 +179,7 @@ title: CMW Platform v4.7. Section content
 kbId: 2162
 ---
 
+
 # CMW Platform v4.7. Section content
 
 - [Deploying the CMW Platform](https://kb.cmwlab.com/category.php?id=426)
@@ -188,6 +189,10 @@ kbId: 2162
 - [Integrations](https://kb.cmwlab.com/category.php?id=407)
 - [Expression Examples](https://kb.cmwlab.com/category.php?id=400)
 - [Troubleshooting](https://kb.cmwlab.com/category.php?id=401)
+
+
+
+
 
 ================================================
 FILE: 395. Version 4/2162-platform_4_7_content.md
@@ -197,6 +202,7 @@ title: CMW Platform v4.7. Section content
 kbId: 2162
 ---
 
+
 # CMW Platform v4.7. Section content
 
 - [Deploying the CMW Platform](https://kb.cmwlab.com/category.php?id=426)
@@ -207,6 +213,10 @@ kbId: 2162
 - [Expression Examples](https://kb.cmwlab.com/category.php?id=400)
 - [Troubleshooting](https://kb.cmwlab.com/category.php?id=401)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/397. Guides/2163-guides_content.md
 ================================================
@@ -215,10 +225,15 @@ title: Guides. Section content
 kbId: 2163
 ---
 
+
 # Guides. Section content
 
 - [Deploying the CMW Platform](https://kb.cmwlab.com/category.php?id=426)
 - [Using the CMW Lab Administration Tool](https://kb.cmwlab.com/category.php?id=425)
+
+
+
+
 
 ================================================
 FILE: 395. Version 4/397. Guides/424. System Administration Guide/2163-guides_content.md
@@ -228,10 +243,15 @@ title: Guides. Section content
 kbId: 2163
 ---
 
+
 # Guides. Section content
 
 - [Deploying the CMW Platform](https://kb.cmwlab.com/category.php?id=426)
 - [Using the CMW Lab Administration Tool](https://kb.cmwlab.com/category.php?id=425)
+
+
+
+
 
 ================================================
 FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the CMW Lab Administration Tool/2130-install_admin_tool.md
@@ -240,6 +260,7 @@ FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the
 title: Installing the CMW Lab Administration Tool
 kbId: 2130
 ---
+
 
 # Installing the CMW Lab Administration Tool
 
@@ -261,6 +282,10 @@ _![The Administration Tool initial window](https://kb.cmwlab.com/assets/img_6424
 
 _![The Administration Tool main window](https://kb.cmwlab.com/assets/img_64240810230f9.png)_
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the CMW Lab Administration Tool/2131-change_admin_tool_path.md
 ================================================
@@ -268,6 +293,7 @@ FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the
 title: Changing the CMW Lab Administration Tool Installation Path
 kbId: 2131
 ---
+
 
 # Changing the CMW Lab Administration Tool Installation Path
 
@@ -281,6 +307,10 @@ By default, the **CMW Lab** **Administration Tool** is installed on drive `C`.
 msiexec /i "D:\Platform.Install.msi" INSTALLFOLDER="D:\Program Files\CMW Lab\Install and Administration Tool"
 ```
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the CMW Lab Administration Tool/2132-launch_admin_tool.md
 ================================================
@@ -288,6 +318,7 @@ FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the
 title: Launching the CMW Lab Administration Tool
 kbId: 2132
 ---
+
 
 # Launching the CMW Lab Administration Tool
 
@@ -307,6 +338,10 @@ _![The Administration Tool initial window](https://kb.cmwlab.com/assets/img_6424
 
 _![The Administration Tool main window](https://kb.cmwlab.com/assets/img_64240810230f9.png)_
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the CMW Lab Administration Tool/2133-install_platform_software.md
 ================================================
@@ -314,6 +349,7 @@ FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the
 title: Installing the CMW Platform Software
 kbId: 2133
 ---
+
 
 # Installing the CMW Platform Software
 
@@ -371,6 +407,10 @@ _![The software installation progress](https://kb.cmwlab.com/assets/img_64243c57
 
 _![The message showing the installed software version](https://kb.cmwlab.com/assets/img_6425512046336.png)_
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the CMW Lab Administration Tool/2134-config_admin_tool.md
 ================================================
@@ -378,6 +418,7 @@ FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the
 title: Configuring the CMW Lab Administration Tool
 kbId: 2134
 ---
+
 
 # Configuring the CMW Lab Administration Tool
 
@@ -448,6 +489,10 @@ _![Diagnostics tab](https://kb.cmwlab.com/assets/img_64244d36eeda7.png)_
 
 **9.**  After configuring the parameters, click **Save**.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the CMW Lab Administration Tool/2135-diagnose_platform_instance.md
 ================================================
@@ -455,6 +500,7 @@ FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the
 title: Diagnosing a CMW Platform Instance
 kbId: 2135
 ---
+
 
 # Diagnosing a CMW Platform Instance
 
@@ -548,6 +594,10 @@ _![Diagnostic data collection completion message](https://kb.cmwlab.com/assets/i
 
 _![Diagnostic results folder example](https://kb.cmwlab.com/assets/img_64246376a7d72.png)_
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the CMW Lab Administration Tool/2136-upgrade_platform_instance.md
 ================================================
@@ -555,6 +605,7 @@ FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the
 title: Upgrading a Deployed Instance to a New CMW Platform Software Version
 kbId: 2136
 ---
+
 
 # Upgrading a Deployed Instance to a New CMW Platform Software Version
 
@@ -601,6 +652,10 @@ _![Opening the instance website](https://kb.cmwlab.com/assets/img_64255ef0bc8f4.
 
 _![CMW Platform login page](https://kb.cmwlab.com/assets/img_6425606220031.png)_
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the CMW Lab Administration Tool/2137-create_platform_instance.md
 ================================================
@@ -608,6 +663,7 @@ FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the
 title: Creating a CMW Platform Instance
 kbId: 2137
 ---
+
 
 # Creating a CMW Platform Instance
 
@@ -657,6 +713,10 @@ _![New instance in the product instances list](https://kb.cmwlab.com/assets/img_
 
 _![The instance website listed in the Internet Information Services (IIS) Manager](https://kb.cmwlab.com/assets/img_642589c4a5ff8.png)_
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the CMW Lab Administration Tool/2138-create_instance_from_backup.md
 ================================================
@@ -664,6 +724,7 @@ FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the
 title: Creating a CMW Platform Instance from a Backup
 kbId: 2138
 ---
+
 
 # Creating a CMW Platform Instance from a Backup
 
@@ -675,6 +736,10 @@ _![Selecting a backup file to create a new instance](https://kb.cmwlab.com/asset
 
 **3.** The new instance will appear in the **Product instances** list and IIS Manager.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the CMW Lab Administration Tool/2139-uninstall_platform_version.md
 ================================================
@@ -682,6 +747,7 @@ FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the
 title: Uninstalling a CMW Platform Software Version
 kbId: 2139
 ---
+
 
 # Uninstalling a CMW Platform Software Version
 
@@ -707,6 +773,10 @@ _![Confirming the software version uninstallation](https://kb.cmwlab.com/assets/
 
 _![The software uninstallation success message](https://kb.cmwlab.com/assets/img_6425a0b9e1a06.png)_
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the CMW Lab Administration Tool/2140-delete_platform_instance.md
 ================================================
@@ -714,6 +784,7 @@ FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the
 title: Deleting a CMW Platform Instance
 kbId: 2140
 ---
+
 
 # Deleting a CMW Platform Instance
 
@@ -745,6 +816,10 @@ _![Confirming the instance deletion](https://kb.cmwlab.com/assets/img_6425a4ca94
 
 _![The instance deletion success message](https://kb.cmwlab.com/assets/img_6425a69582730.png)_
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the CMW Lab Administration Tool/2141-config_platform_instance.md
 ================================================
@@ -752,6 +827,7 @@ FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the
 title: Configuring a CMW Platform Instance
 kbId: 2141
 ---
+
 
 # Configuring a CMW Platform Instance
 
@@ -812,6 +888,10 @@ _![Confirming the instance paths change without moving the data](https://kb.cmwl
 
 _![The instance path change success message](https://kb.cmwlab.com/assets/img_6426b5d7e4eec.png)_
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the CMW Lab Administration Tool/2142-instance_status_indication.md
 ================================================
@@ -819,6 +899,7 @@ FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the
 title: CMW Platform Instance Status Indication
 kbId: 2142
 ---
+
 
 # CMW Platform Instance Status Indication
 
@@ -831,6 +912,10 @@ kbId: 2142
 
 _![CMW Platform instance status icons](https://kb.cmwlab.com/assets/img_6426bde243e28.png)_
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the CMW Lab Administration Tool/2143-restore_instance_backup.md
 ================================================
@@ -838,6 +923,7 @@ FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the
 title: Restoring a CMW Platform Instance from a Backup
 kbId: 2143
 ---
+
 
 # Restoring a CMW Platform Instance from a Backup
 
@@ -881,6 +967,10 @@ _![The successful restore message](https://kb.cmwlab.com/assets/img_6426c59458e9
 
 **14.** To view the error log, click **Log**.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the CMW Lab Administration Tool/2144-add_instance_to_list.md
 ================================================
@@ -888,6 +978,7 @@ FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the
 title: Adding a Missing CMW Platform Instance to the Instance List
 kbId: 2144
 ---
+
 
 # Adding a Missing CMW Platform Instance to the Instance List
 
@@ -913,6 +1004,10 @@ _![Selecting the missing instances to add](https://kb.cmwlab.com/assets/img_6426
 
 _![Updating the instance list with the newly added instance](https://kb.cmwlab.com/assets/img_6426eb9ec34eb.png)_
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the CMW Lab Administration Tool/2145-refresh_instance_list.md
 ================================================
@@ -920,6 +1015,7 @@ FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the
 title: Refreshing the CMW Platform Instance List
 kbId: 2145
 ---
+
 
 # Refreshing the CMW Platform Instance List
 
@@ -933,6 +1029,10 @@ To view up-to-date **CMW Platform**instance data: newly added instances, databas
 
 _![Refreshing the instance list](https://kb.cmwlab.com/assets/img_6426f89301857.png)_
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the CMW Lab Administration Tool/2146-init_platform_instance.md
 ================================================
@@ -940,6 +1040,7 @@ FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the
 title: Initializing a CMW Platform Instance
 kbId: 2146
 ---
+
 
 # Initializing a CMW Platform Instance
 
@@ -989,6 +1090,10 @@ _![Configuring the Elasticsearch connection](https://kb.cmwlab.com/assets/img_64
 
 _![CMW Platform home page](https://kb.cmwlab.com/assets/img_6426fd1327c26.png)_
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the CMW Lab Administration Tool/2148-stop_platform_instance.md
 ================================================
@@ -996,6 +1101,7 @@ FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the
 title: Stopping a CMW Platform Instance
 kbId: 2148
 ---
+
 
 # Stopping a CMW Platform Instance
 
@@ -1007,6 +1113,10 @@ kbId: 2148
 
 _![Stopping a CMW Platform instance using the Administration Tool](https://kb.cmwlab.com/assets/img_642a8fcc6e312.png)_
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the CMW Lab Administration Tool/2149-start_platform_instance.md
 ================================================
@@ -1014,6 +1124,7 @@ FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the
 title: Starting a CMW Platform Instance
 kbId: 2149
 ---
+
 
 # Starting a CMW Platform Instance
 
@@ -1025,6 +1136,10 @@ kbId: 2149
 
 _![Starting a CMW Platform instance using the Administration Utility](https://kb.cmwlab.com/assets/img_642aa6bf453be.png)_
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the CMW Lab Administration Tool/2150-view_instance_paths.md
 ================================================
@@ -1032,6 +1147,7 @@ FILE: 395. Version 4/397. Guides/424. System Administration Guide/425. Using the
 title: Viewing  the Paths to a CMW Platform Instance
 kbId: 2150
 ---
+
 
 # Viewing the Paths to a CMW Platform Instance
 
@@ -1051,6 +1167,10 @@ _![Selecting an instance to view its paths](https://kb.cmwlab.com/assets/img_642
 
 _![Viewing the paths to an instance](https://kb.cmwlab.com/assets/img_642a9ad0bdd07.png)_
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/397. Guides/424. System Administration Guide/426. Deploying the CMW Platform/2151-platform_system_requirements.md
 ================================================
@@ -1058,6 +1178,7 @@ FILE: 395. Version 4/397. Guides/424. System Administration Guide/426. Deploying
 title: CMW Platform System Requirements
 kbId: 2151
 ---
+
 
 # CMW Platform System Requirements
 
@@ -1106,6 +1227,10 @@ Below are the minimum system requirements to deploy and use the **CMW Platform**
 | Web browser | Google Chrome, Mozilla Firefox, or Microsoft Edge (latest public version) |
 | Additional software | To open the files downloaded from the system |
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/397. Guides/424. System Administration Guide/426. Deploying the CMW Platform/2152-platform_architecture_config.md
 ================================================
@@ -1113,6 +1238,7 @@ FILE: 395. Version 4/397. Guides/424. System Administration Guide/426. Deploying
 title: CMW Platform Architecture, Landscape, and Software &amp; Hardware Configuration
 kbId: 2152
 ---
+
 
 # CMW Platform Architecture, Landscape, and Software &amp; Hardware Configuration
 
@@ -1357,6 +1483,10 @@ To optimize data processing, storage, and backup, configure separate storage for
 | --- | --- | --- |
 | 07.04.2023 | 1.0 | Original version. |
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/398. Training/1109-lesson_1_intro.md
 ================================================
@@ -1364,6 +1494,7 @@ FILE: 395. Version 4/398. Training/1109-lesson_1_intro.md
 title: Lesson 1 &mdash; Getting Started
 kbId: 1109
 ---
+
 
 # Lesson 1 &mdash; Getting Started
 
@@ -1436,6 +1567,10 @@ Proceed to [Lesson 2 &mdash; My First Data Registry](https://kb.comindware.ru/ar
 
  [*‌* Back to top](#)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/398. Training/1110-lesson_2_data_register.md
 ================================================
@@ -1443,6 +1578,7 @@ FILE: 395. Version 4/398. Training/1110-lesson_2_data_register.md
 title: Lesson 2 &mdash; My First Data Registry
 kbId: 1110
 ---
+
 
 # Lesson 2 &mdash; My First Data Registry
 
@@ -1836,6 +1972,10 @@ Proceed to [Lesson 3 &mdash; My First Business Process](https://kb.comindware.ru
 
  [*‌* Back to top](#)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/398. Training/2147-lesson_3_business.md
 ================================================
@@ -1843,6 +1983,7 @@ FILE: 395. Version 4/398. Training/2147-lesson_3_business.md
 title: Lesson 3 &mdash; My First Business Process
 kbId: 2147
 ---
+
 
 # Lesson 3 &mdash; My First Business Process
 
@@ -2357,6 +2498,10 @@ Proceed to [Lesson 4 &mdash; Monitoring and analytics](https://kb.comindware.ru/
 
  [*‌* Back to top](#)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/398. Training/2153-lesson_4_monitoring.md
 ================================================
@@ -2364,6 +2509,7 @@ FILE: 395. Version 4/398. Training/2153-lesson_4_monitoring.md
 title: Lesson 4 &mdash; Monitoring and analytics
 kbId: 2153
 ---
+
 
 # Lesson 4 &mdash; Monitoring and analytics
 
@@ -2556,6 +2702,10 @@ Proceed to [Lesson 5 &mdash; Data Structures](https://kb.comindware.ru/article.p
 
  [*‌* Back to top](#)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/398. Training/2154-lesson_5_data.md
 ================================================
@@ -2563,6 +2713,7 @@ FILE: 395. Version 4/398. Training/2154-lesson_5_data.md
 title: Lesson 5 &mdash; Data Structures
 kbId: 2154
 ---
+
 
 # Lesson 5 &mdash; Data Structures
 
@@ -3058,6 +3209,10 @@ Proceed to [Lesson 6 &mdash; Advanced Process](https://kb.comindware.ru/article.
 
  [*‌* Back to top](#)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/398. Training/2155-lesson_6_advanced.md
 ================================================
@@ -3065,6 +3220,7 @@ FILE: 395. Version 4/398. Training/2155-lesson_6_advanced.md
 title: Lesson 6 &mdash; Advanced Process
 kbId: 2155
 ---
+
 
 # Lesson 6 &mdash; Advanced Process
 
@@ -3236,6 +3392,10 @@ Proceed to [Lesson 7 &mdash; Automatic Calculations](https://kb.comindware.ru/a
 
  [*‌* Back to top](#)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/398. Training/2156-lesson_7_auto_calc.md
 ================================================
@@ -3243,6 +3403,7 @@ FILE: 395. Version 4/398. Training/2156-lesson_7_auto_calc.md
 title: Lesson 7 &mdash; Automatic Calculations
 kbId: 2156
 ---
+
 
 # Lesson 7 &mdash; Automatic Calculations
 
@@ -3731,6 +3892,10 @@ Proceed to [Lesson 8 &mdash; Accounts](https://kb.comindware.ru/article.php?id=
 
  [*‌* Back to top](#)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/398. Training/2157-lesson_8_accounts.md
 ================================================
@@ -3738,6 +3903,7 @@ FILE: 395. Version 4/398. Training/2157-lesson_8_accounts.md
 title: Lesson 8 &mdash; Accounts
 kbId: 2157
 ---
+
 
 # Lesson 8 &mdash; Accounts
 
@@ -4179,6 +4345,10 @@ Proceed to [Lesson 9 &mdash; Document Generation](https://kb.comindware.ru/arti
 
  [*‌* Back to top](#)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/398. Training/2158-lesson_9_documents.md
 ================================================
@@ -4186,6 +4356,7 @@ FILE: 395. Version 4/398. Training/2158-lesson_9_documents.md
 title: Lesson 9 &mdash; Document Generation
 kbId: 2158
 ---
+
 
 # Lesson 9 &mdash; Document Generation
 
@@ -4392,6 +4563,10 @@ Proceed to [Lesson 10 &mdash; Working with Files](https://kb.comindware.ru/artic
 
  [*‌* Back to top](#)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/398. Training/2159-lesson_10_files.md
 ================================================
@@ -4399,6 +4574,7 @@ FILE: 395. Version 4/398. Training/2159-lesson_10_files.md
 title: Lesson 10 &mdash; Working with Files
 kbId: 2159
 ---
+
 
 # Lesson 10 &mdash; Working with Files
 
@@ -4497,6 +4673,10 @@ Congrats! You have learned how to upload and download the files in the **CMW Pla
 
  [*‌* Back to top](#)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/1943-export_template_csharp.md
 ================================================
@@ -4504,6 +4684,7 @@ FILE: 395. Version 4/399. How-Tos/1943-export_template_csharp.md
 title: Configure an Export Template with C# Data Processing
 kbId: 1943
 ---
+
 
 # Configure an Export Template with C# Data Processing
 
@@ -4932,6 +5113,10 @@ public class RESULT
 ```
 **Note:**In the script above, the lines with the attribute and template system names are marked with comments. In these lines substitute the actual system names from your application.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/1945-export_collections_images.md
 ================================================
@@ -4939,6 +5124,7 @@ FILE: 395. Version 4/399. How-Tos/1945-export_collections_images.md
 title: Configuring Export Template for Several Collections and Images Using C#
 kbId: 1945
 ---
+
 
 # Configuring Export Template for Several Collections and Images Using C#
 
@@ -5055,6 +5241,10 @@ string Parameter_ = getByRef("Title", getString("Parameter", Table_Data)); // ge
 
 [Configure an Export Template with C# Data Processing](https://kb.comindware.ru/article.php?id=1943)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/1947-qr_code_csharp_button.md
 ================================================
@@ -5062,6 +5252,7 @@ FILE: 395. Version 4/399. How-Tos/1947-qr_code_csharp_button.md
 title: Generate a QR Code Using C# and a Third-Party Service on Button Click
 kbId: 1947
 ---
+
 
 # Generate a QR Code Using C# and a Third-Party Service on Button Click
 
@@ -5146,6 +5337,10 @@ To proceed with the example, create the attributes as shown in the table below:
 6. Open or create a record in the *QRCodes* template.
 7. Click the *Generate QR code* button: you should see the generated QR code on the form.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/1955-import_excel_data.md
 ================================================
@@ -5153,6 +5348,7 @@ FILE: 395. Version 4/399. How-Tos/1955-import_excel_data.md
 title: Import Data into Excel via API
 kbId: 1955
 ---
+
 
 # Import Data into Excel via API
 
@@ -5219,6 +5415,10 @@ The Power Query add-in is built into Excel 2016 and above. For earlier versions 
 
    A query table imported to the Excel spreadsheet
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/1965-task_notify_change_text.md
 ================================================
@@ -5226,6 +5426,7 @@ FILE: 395. Version 4/399. How-Tos/1965-task_notify_change_text.md
 title: Customizing Notification E-mail Message
 kbId: 1965
 ---
+
 
 # Customizing Notification E-mail Message
 
@@ -5274,6 +5475,10 @@ To customize the subject or body of the task notification e-mail (e.g., to inclu
 5. Publish the process diagram.
 6. Test the process task notifications.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/1971-transfer_solution_settings.md
 ================================================
@@ -5281,6 +5486,7 @@ FILE: 395. Version 4/399. How-Tos/1971-transfer_solution_settings.md
 title: Transferring business solutions
 kbId: 1971
 ---
+
 
 # Transferring business solutions
 
@@ -5300,6 +5506,10 @@ Manual transfer implies a step-by-step transfer of data and settings between ins
 
 This method is limited to transferring records in business application templates, all the settings and data will be transferred, with the exception of template records. This method is characterized by a fast speed of data transfer.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/1973-import_excel_data.md
 ================================================
@@ -5307,6 +5517,7 @@ FILE: 395. Version 4/399. How-Tos/1973-import_excel_data.md
 title: Exporting and Importing Applications
 kbId: 1973
 ---
+
 
 # Exporting and Importing Applications
 
@@ -5361,6 +5572,10 @@ The application configuration is exported as a `.CTF` file. Export a separate f
 
    _![   Configuring the application import](https://kb.cmwlab.com/assets/img_64479d972de9e.png)_
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/1983-global_notifications_setup.md
 ================================================
@@ -5368,6 +5583,7 @@ FILE: 395. Version 4/399. How-Tos/1983-global_notifications_setup.md
 title: Setting up global notifications
 kbId: 1983
 ---
+
 
 # Setting up global notifications
 
@@ -5429,6 +5645,10 @@ Now, when starting the process, you will need to enter the notification message.
 
 _![Entering notification message](https://kb.cmwlab.com/assets/2021-12-27_13h18_31.png)_
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/1985-button_display_formula.md
 ================================================
@@ -5436,6 +5656,7 @@ FILE: 395. Version 4/399. How-Tos/1985-button_display_formula.md
 title: Configuring Button Display Condition with Formula
 kbId: 1985
 ---
+
 
 # Configuring Button Display Condition with Formula
 
@@ -5476,6 +5697,10 @@ To proceed with the example, create the templates and attributes as shown in the
 | `$` | This prefix refers to an attribute in the current record context. |
 | `->` | This operator refers to an attribute of the linked *Request\_status* template. |
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/1987-form_rule_hide_field.md
 ================================================
@@ -5483,6 +5708,7 @@ FILE: 395. Version 4/399. How-Tos/1987-form_rule_hide_field.md
 title: Configuring Form Rule Using Formula
 kbId: 1987
 ---
+
 
 # Configuring Form Rule Using Formula
 
@@ -5536,6 +5762,10 @@ To proceed with the example, create the templates and attributes as shown in the
 
 [Configuring Dynamic Field Display Using a Form Rule](https://kb.comindware.ru/article.php?id=2070)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/1989-record_many_many.md
 ================================================
@@ -5543,6 +5773,7 @@ FILE: 395. Version 4/399. How-Tos/1989-record_many_many.md
 title: Configuring Many-To-Many Relationship
 kbId: 1989
 ---
+
 
 # Configuring Many-To-Many Relationship
 
@@ -5616,6 +5847,10 @@ This approach has certain limitations:
 
 Using this approach, you can store project-specific employee data in the *Projects and Employees*template, such as time spent on the project, employee role, payment rate, etc.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/1991-calculated_attribute_formula.md
 ================================================
@@ -5623,6 +5858,7 @@ FILE: 395. Version 4/399. How-Tos/1991-calculated_attribute_formula.md
 title: Configuring a Calculated Attribute with a Formula
 kbId: 1991
 ---
+
 
 # Configuring a Calculated Attribute with a Formula
 
@@ -5663,6 +5899,10 @@ To proceed with the example, create the templates and attributes as shown in the
 | `where EQUALS(a>Manager,USER())` | `where` operator defines the data selection condition:   - `USER()` function returns the current user ID. - `EQUALS()` function returns `true` if the *Manager*attribute value in a *Contact\_persons* record equals the current user ID. |
 | `select a->Client->Name` | `select` operator collects the entities matching the selection condition:   - Returns an array of the *Name* attribute values from the *Clients* records that correspond to the current user. |
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/1993-change_process_real_time.md
 ================================================
@@ -5670,6 +5910,7 @@ FILE: 395. Version 4/399. How-Tos/1993-change_process_real_time.md
 title: Making changes to a workflow in real time
 kbId: 1993
 ---
+
 
 # Making changes to a workflow in real time
 
@@ -5697,6 +5938,10 @@ In addition, **CMW Platform** supports versioning of process diagrams, which mea
 
 _![Selecting a version](https://kb.cmwlab.com/assets/2021-12-29_09h10_17.png)_
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/1997-import_excel_data.md
 ================================================
@@ -5704,6 +5949,7 @@ FILE: 395. Version 4/399. How-Tos/1997-import_excel_data.md
 title: Importing Linked Records From an Excel Spreadsheet
 kbId: 1997
 ---
+
 
 # Importing Linked Records From an Excel Spreadsheet
 
@@ -5758,6 +6004,10 @@ To proceed with the example, create the templates and attributes as shown in the
 
    The table of requests linked to the client record
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/1999-list_color_indicator.md
 ================================================
@@ -5765,6 +6015,7 @@ FILE: 395. Version 4/399. How-Tos/1999-list_color_indicator.md
 title: Configuring Color Indicator
 kbId: 1999
 ---
+
 
 # Configuring Color Indicator
 
@@ -5810,6 +6061,10 @@ To proceed with the example, create the attributes as shown in the table below:
 
 [Configuring Conditional Coloring of an Attribute Value](https://kb.comindware.ru/article.php?id=2009)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/2001-receive_mail.md
 ================================================
@@ -5817,6 +6072,7 @@ FILE: 395. Version 4/399. How-Tos/2001-receive_mail.md
 title: Configuring E-mail Receiving
 kbId: 2001
 ---
+
 
 # Configuring E-mail Receiving
 
@@ -5866,6 +6122,10 @@ _![Mapping the record template attributes to the e-mail message attributes](http
 
 **Note:** Using the CMW formula or N3 language expressions and scenarios, you might need to parse the e-mail subject line, body, or other elements (e.g., to determine the request type or decide if the message is a new request or a response regarding an existing one).
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/2003-combine_values.md
 ================================================
@@ -5873,6 +6133,7 @@ FILE: 395. Version 4/399. How-Tos/2003-combine_values.md
 title: Combine Several Values Into a Record Title
 kbId: 2003
 ---
+
 
 # Combine Several Values Into a Record Title
 
@@ -5911,6 +6172,10 @@ Note
 - You can pass any values to the `LIST()` function, not necessarily attribute references. For example, you could pass the current user's full name as a second argument:
   `LIST($CityName,USER()->fullName,$StatusName)`.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/2005-attribute_date_time_display_config.md
 ================================================
@@ -5918,6 +6183,7 @@ FILE: 395. Version 4/399. How-Tos/2005-attribute_date_time_display_config.md
 title: Working with Date &amp; time attribute
 kbId: 2005
 ---
+
 
 # Working with Date &amp; time attribute
 
@@ -5945,6 +6211,10 @@ When **changing the display format** of the attribute of the «Date & time» dat
 
 **Note :** the IANA library is used to determine the time zones in which to store information in the database.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/2007-solution_setup_recommendations.md
 ================================================
@@ -5952,6 +6222,7 @@ FILE: 395. Version 4/399. How-Tos/2007-solution_setup_recommendations.md
 title: Recommendations for setting up a business solution
 kbId: 2007
 ---
+
 
 # Recommendations for setting up a business solution
 
@@ -5994,6 +6265,10 @@ For visual modeling, you can use the following diagrams:
 
 **Note :** keep in mind that one record template can only be stored in one business application. To transfer an record template to another business application, open the record template settings and on the «***Properties***» tab, click the «*Change the business application*» button.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/2009-attr_value_color.md
 ================================================
@@ -6001,6 +6276,7 @@ FILE: 395. Version 4/399. How-Tos/2009-attr_value_color.md
 title: Configuring Conditional Coloring of an Attribute Value
 kbId: 2009
 ---
+
 
 # Configuring Conditional Coloring of an Attribute Value
 
@@ -6056,6 +6332,10 @@ To proceed with the example, create the attributes as shown in the table below:
 
 [Configuring Color Indicator](https://kb.comindware.ru/article.php?id=1999)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/2020-attr_record_filter.md
 ================================================
@@ -6063,6 +6343,7 @@ FILE: 395. Version 4/399. How-Tos/2020-attr_record_filter.md
 title: Configuring Filters for Record Attributes
 kbId: 2020
 ---
+
 
 # Configuring Filters for Record Attributes
 
@@ -6095,6 +6376,10 @@ To configure a filter for a field on a form:
 
 [Configuring Context-Dependent Filter for Record Attribute](https://kb.comindware.ru/article.php?id=2022)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/2022-attr_record_account_filter.md
 ================================================
@@ -6102,6 +6387,7 @@ FILE: 395. Version 4/399. How-Tos/2022-attr_record_account_filter.md
 title: Configuring Context-Dependent Filter for Record Attribute
 kbId: 2022
 ---
+
 
 # Configuring Context-Dependent Filter for Record Attribute
 
@@ -6182,6 +6468,10 @@ To proceed with the example, create the templates and attributes as shown in the
 
 [Configuring Filters for Record Attributes](https://kb.comindware.ru/article.php?id=2020)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/2050-example_field_filter.md
 ================================================
@@ -6189,6 +6479,7 @@ FILE: 395. Version 4/399. How-Tos/2050-example_field_filter.md
 title: Reference Attribute Filter Example
 kbId: 2050
 ---
+
 
 # Reference Attribute Filter Example
 
@@ -6230,6 +6521,10 @@ from a in db->Contracts where EQUALS($client_requestor,a->client) select a->id
 | where EQUALS($client\_requestor,a->client) | Selecting a record in which the value in "*client\_requestor*" of the current request matches the value of the "*client*" attribute in the “*Contracts*” record template. |
 | select a->id | Select the required record IDs. |
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/2070-form_dynamic_display.md
 ================================================
@@ -6237,6 +6532,7 @@ FILE: 395. Version 4/399. How-Tos/2070-form_dynamic_display.md
 title: Configuring Dynamic Field Display Using a Form Rule
 kbId: 2070
 ---
+
 
 # Configuring Dynamic Field Display Using a Form Rule
 
@@ -6305,6 +6601,10 @@ To proceed with the example, set up the template, attributes, and form fields as
 
 [Configuring Form Rule Using Formula](https://kb.comindware.ru/article.php?id=1987)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/2076-object_search_filter.md
 ================================================
@@ -6312,6 +6612,7 @@ FILE: 395. Version 4/399. How-Tos/2076-object_search_filter.md
 title: Setting up advanced object search by parameters
 kbId: 2076
 ---
+
 
 # Setting up advanced object search by parameters
 
@@ -6337,6 +6638,10 @@ Besides, you can configure an advanced search for an object by certain parameter
 
 **Note :** you can use this record template to find objects from different record templates. To do this, you need to create the required number of forms, attributes for the search and create different buttons to select the required search forms.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/2082-notification_template_body.md
 ================================================
@@ -6344,6 +6649,7 @@ FILE: 395. Version 4/399. How-Tos/2082-notification_template_body.md
 title: Generate Notification Body Using a Template with Placeholders
 kbId: 2082
 ---
+
 
 # Generate Notification Body Using a Template with Placeholders
 
@@ -6399,6 +6705,10 @@ To proceed with the example, create the attributes as shown in the table below:
 | `LIST(argument1, ..., argumentN)` | The `LIST()` function takes several arguments and returns an array of the argument values. |
 | `$` | The `$` prefix refers to an attribute system name in the current record context. |
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/2084-text_attribute_mask.md
 ================================================
@@ -6406,6 +6716,7 @@ FILE: 395. Version 4/399. How-Tos/2084-text_attribute_mask.md
 title: Configuring Custom Mask
 kbId: 2084
 ---
+
 
 # Configuring Custom Mask
 
@@ -6442,6 +6753,10 @@ _![Name and Phone fields with custom masks](https://kb.cmwlab.com/assets/img_643
 
 **Tip:** You can learn more and experiment with regular expressions at <https://regex101.com/>
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/2085-context_change_bap.md
 ================================================
@@ -6449,6 +6764,7 @@ FILE: 395. Version 4/399. How-Tos/2085-context_change_bap.md
 title: Understanding and changing the context in CMW Platform
 kbId: 2085
 ---
+
 
 # Understanding and changing the context in CMW Platform
 
@@ -6498,6 +6814,10 @@ $$BusinessObject->field
 
 where *field* is the system attribute name in the associated record template.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/2089-account_templates_usage.md
 ================================================
@@ -6505,6 +6825,7 @@ FILE: 395. Version 4/399. How-Tos/2089-account_templates_usage.md
 title: Usage of account templates
 kbId: 2089
 ---
+
 
 # Usage of account templates
 
@@ -6542,6 +6863,10 @@ Adding a user to a template with the "Account template" type is available:
 - In the button area for tables in a template with the "Account template" type, by clicking on the "Add to template" button. It is possible to add several users at once to the current template with the "Account template" type.
 - In the "Accounts" section, by selecting a user and clicking on the "Link to template" button. It is possible to add multiple users to multiple templates with the "Account Template" type.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/2090-data_model_class_diagrams.md
 ================================================
@@ -6549,6 +6874,7 @@ FILE: 395. Version 4/399. How-Tos/2090-data_model_class_diagrams.md
 title: Viewing and Editing Data Model and Class Diagrams
 kbId: 2090
 ---
+
 
 # Viewing and Editing Data Model and Class Diagrams
 
@@ -6607,6 +6933,10 @@ When you select a template on the diagram, the element menu appears where y can 
 
 [Understanding the Application Data Model](https://kb.comindware.ru/article.php?id=2091)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/2091-application_data_model.md
 ================================================
@@ -6614,6 +6944,7 @@ FILE: 395. Version 4/399. How-Tos/2091-application_data_model.md
 title: Understanding the Application Data Model
 kbId: 2091
 ---
+
 
 # Understanding the Application Data Model
 
@@ -6648,6 +6979,10 @@ You can save several versions of a class diagram and recall them to have differe
 
 [Viewing and Editing Data Model and Class Diagrams](https://kb.comindware.ru/article.php?id=2090)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/2093-universal_record_url.md
 ================================================
@@ -6655,6 +6990,7 @@ FILE: 395. Version 4/399. How-Tos/2093-universal_record_url.md
 title: Universal URL to open any record in the system
 kbId: 2093
 ---
+
 
 # Universal URL to open any record in the system
 
@@ -6672,6 +7008,10 @@ where the product instance URL should be replaced with the address of the produc
 
 See also: [Computing a hyperlink to a process instance](https://kb.comindware.ru/article.php?id=1891).
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/2096-chevron_coloring_logic.md
 ================================================
@@ -6679,6 +7019,7 @@ FILE: 395. Version 4/399. How-Tos/2096-chevron_coloring_logic.md
 title: Setting up coloring logic for chevrons
 kbId: 2096
 ---
+
 
 # Setting up coloring logic for chevrons
 
@@ -6703,6 +7044,10 @@ Let's analyze an example of visualization of the stages of an application for a 
 
 These conditions set the order of coloring individual chevron windows, that is, for each stage, a check for these conditions will be carried out, the chevron element will change color in accordance with the dates filled in.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/2098-mass_process_local_var.md
 ================================================
@@ -6710,6 +7055,7 @@ FILE: 395. Version 4/399. How-Tos/2098-mass_process_local_var.md
 title: Using a Local Variable to Mass Process Records
 kbId: 2098
 ---
+
 
 # Using a Local Variable to Mass Process Records
 
@@ -6765,6 +7111,10 @@ Then add the "Start a Process" action, select the "Request processing" process. 
 
 **4.** Test. Select several requests, click on the "Assign responsible" button. A dialog box will open with the local variable "Responsible". Select a user, confirm the operation.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/2103-holiday_calendar.md
 ================================================
@@ -6772,6 +7122,7 @@ FILE: 395. Version 4/399. How-Tos/2103-holiday_calendar.md
 title: Setting up and using the holiday calendar
 kbId: 2103
 ---
+
 
 # Setting up and using the holiday calendar
 
@@ -6805,6 +7156,10 @@ This formula is deciphered as follows: starting from the current moment (when th
 
 **Note:** if you add a weekend (Saturday or Sunday) to the holiday calendar, then when calculating the expression, it will be considered as a working day.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/2105-record_template_multiapp.md
 ================================================
@@ -6812,6 +7167,7 @@ FILE: 395. Version 4/399. How-Tos/2105-record_template_multiapp.md
 title: Working with a record template from different applications
 kbId: 2105
 ---
+
 
 # Working with a record template from different applications
 
@@ -6831,6 +7187,10 @@ _![Application change](https://kb.cmwlab.com/assets/2022-11-11_10h00_25.png)_
 
 In the current record templates in the CRM application, all links to the "Clients" record template are preserved and continue to work, and now you can create attributes in the SRM application that refer to the "Clients" record template. In order to create new links to the "Clients" record template in the CRM application, you need to change the application again.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/2112-adapters.md
 ================================================
@@ -6838,6 +7198,7 @@ FILE: 395. Version 4/399. How-Tos/2112-adapters.md
 title: Adapters
 kbId: 2112
 ---
+
 
 # Adapters
 
@@ -6917,6 +7278,10 @@ _![Adapter delete confirmation](https://kb.cmwlab.com/assets/adapter_delete_conf
 
  [Back to top](#)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/2113-administration.md
 ================================================
@@ -6924,6 +7289,7 @@ FILE: 395. Version 4/399. How-Tos/2113-administration.md
 title: Administration
 kbId: 2113
 ---
+
 
 # Administration
 
@@ -6972,6 +7338,10 @@ The **Administration** page appears with the following sections:
 
  [Back to top](#)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/2127-periodic_task_reminders.md
 ================================================
@@ -6979,6 +7349,7 @@ FILE: 395. Version 4/399. How-Tos/2127-periodic_task_reminders.md
 title: Setting up periodic reminders for open tasks
 kbId: 2127
 ---
+
 
 # Setting up periodic reminders for open tasks
 
@@ -7138,6 +7509,10 @@ Before starting testing, check the operability of the E-mail sending connection 
 
 **Note :** for the correct computation of the calculated fields and the sub-process launch formulas, check the exact match of the system name of each Record Template and attribute, as well as Process Templates.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/2129-cancel_process_button.md
 ================================================
@@ -7145,6 +7520,7 @@ FILE: 395. Version 4/399. How-Tos/2129-cancel_process_button.md
 title: Stopping the Process on a Button Click
 kbId: 2129
 ---
+
 
 # Stopping the Process on a Button Click
 
@@ -7207,6 +7583,10 @@ Auxiliary *Contract Withdrawal*process diagram
 4. Place the *Withdraw contract* button on any form or table toolbar.
 5. Test the process.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/416. Scenarios/2106-scenario_actions.md
 ================================================
@@ -7214,6 +7594,7 @@ FILE: 395. Version 4/399. How-Tos/416. Scenarios/2106-scenario_actions.md
 title: Scenario Actions
 kbId: 2106
 ---
+
 
 # Scenario Actions
 
@@ -7488,6 +7869,10 @@ The **General** tab provides the following properties:
 
 **[Scenario Definition and List](https://kb.comindware.ru/article.php?id=2110)**
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/416. Scenarios/2108-creating_scenario.md
 ================================================
@@ -7495,6 +7880,7 @@ FILE: 395. Version 4/399. How-Tos/416. Scenarios/2108-creating_scenario.md
 title: Creating a Scenario
 kbId: 2108
 ---
+
 
 # Creating a Scenario
 
@@ -7543,6 +7929,10 @@ kbId: 2108
 
 **[Scenario Actions](https://kb.comindware.ru/article.php?id=2106)**
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/416. Scenarios/2109-configuring_scenario.md
 ================================================
@@ -7550,6 +7940,7 @@ FILE: 395. Version 4/399. How-Tos/416. Scenarios/2109-configuring_scenario.md
 title: Configuring a Scenario
 kbId: 2109
 ---
+
 
 # Configuring a Scenario
 
@@ -7673,6 +8064,10 @@ _![Deleting a scenario action](https://kb.cmwlab.com/assets/img_639094ddad17b.pn
 
 **[Scenario Actions](https://kb.comindware.ru/article.php?id=2106)**
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/416. Scenarios/2110-scenario_definition_list.md
 ================================================
@@ -7680,6 +8075,7 @@ FILE: 395. Version 4/399. How-Tos/416. Scenarios/2110-scenario_definition_list.m
 title: Scenario Definition and List
 kbId: 2110
 ---
+
 
 # Scenario Definition and List
 
@@ -7723,6 +8119,10 @@ _![List of scenarios in the application](https://kb.cmwlab.com/assets/img_638f00
 
 **[Scenario Actions](https://kb.comindware.ru/article.php?id=2106)**
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/419. Buttons/2114-buttons.md
 ================================================
@@ -7730,6 +8130,7 @@ FILE: 395. Version 4/399. How-Tos/419. Buttons/2114-buttons.md
 title: Buttons
 kbId: 2114
 ---
+
 
 # Buttons
 
@@ -7751,6 +8152,10 @@ A button is a visual element on a form that performs a configured action on a cl
 
  [Back to top](#)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/419. Buttons/2115-deleting_button.md
 ================================================
@@ -7758,6 +8163,7 @@ FILE: 395. Version 4/399. How-Tos/419. Buttons/2115-deleting_button.md
 title: Deleting a Button
 kbId: 2115
 ---
+
 
 # Deleting a Button
 
@@ -7782,6 +8188,10 @@ kbId: 2115
 
  [Back to top](#)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/419. Buttons/2116-creating_button.md
 ================================================
@@ -7789,6 +8199,7 @@ FILE: 395. Version 4/399. How-Tos/419. Buttons/2116-creating_button.md
 title: Creating a Button
 kbId: 2116
 ---
+
 
 # Creating a Button
 
@@ -7809,6 +8220,10 @@ _![Creating a button from the button list](https://kb.cmwlab.com/assets/button_c
 
  [Back to top](#)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/419. Buttons/2117-button_designer.md
 ================================================
@@ -7816,6 +8231,7 @@ FILE: 395. Version 4/399. How-Tos/419. Buttons/2117-button_designer.md
 title: Button Designer
 kbId: 2117
 ---
+
 
 # Button Designer
 
@@ -7948,6 +8364,10 @@ _![Button designer — Relations tab](https://kb.cmwlab.com/assets/button_design
 
  [Back to top](#)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/419. Buttons/2118-template_button_list.md
 ================================================
@@ -7955,6 +8375,7 @@ FILE: 395. Version 4/399. How-Tos/419. Buttons/2118-template_button_list.md
 title: Viewing the Template Button List
 kbId: 2118
 ---
+
 
 # Viewing the Template Button List
 
@@ -7974,6 +8395,10 @@ _![Template button list](https://kb.cmwlab.com/assets/button_list.png)_
 
  [Back to top](#)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/419. Buttons/2119-button_list_operations.md
 ================================================
@@ -7981,6 +8406,7 @@ FILE: 395. Version 4/399. How-Tos/419. Buttons/2119-button_list_operations.md
 title: Button List Operations
 kbId: 2119
 ---
+
 
 # Button List Operations
 
@@ -8006,6 +8432,10 @@ The [button list](https://kb.cmwlab.com/article.php?id=2118) provides the follo
 
  [Back to top](#)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/420. Forms/2120-template_form_list.md
 ================================================
@@ -8013,6 +8443,7 @@ FILE: 395. Version 4/399. How-Tos/420. Forms/2120-template_form_list.md
 title: Viewing the Template Form List
 kbId: 2120
 ---
+
 
 # Viewing the Template Form List
 
@@ -8036,6 +8467,10 @@ Template form list
 
  [Back to top](#)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/420. Forms/2122-deleting_form.md
 ================================================
@@ -8043,6 +8478,7 @@ FILE: 395. Version 4/399. How-Tos/420. Forms/2122-deleting_form.md
 title: Deleting a Form
 kbId: 2122
 ---
+
 
 # Deleting a Form
 
@@ -8069,6 +8505,10 @@ kbId: 2122
 
  [Back to top](#)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/420. Forms/2123-form_list_operations.md
 ================================================
@@ -8076,6 +8516,7 @@ FILE: 395. Version 4/399. How-Tos/420. Forms/2123-form_list_operations.md
 title: Operations In the Form List
 kbId: 2123
 ---
+
 
 # Operations In the Form List
 
@@ -8102,6 +8543,10 @@ The [form list](https://kb.cmwlab.com/article.php?id=2120) provides the followi
 
  [Back to top](#)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/420. Forms/2124-forms.md
 ================================================
@@ -8109,6 +8554,7 @@ FILE: 395. Version 4/399. How-Tos/420. Forms/2124-forms.md
 title: Forms
 kbId: 2124
 ---
+
 
 # Forms
 
@@ -8130,6 +8576,10 @@ A form is a web page designed to enter and display data. You can place fields as
 
  [Back to top](#)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/399. How-Tos/420. Forms/2125-form_designer.md
 ================================================
@@ -8137,6 +8587,7 @@ FILE: 395. Version 4/399. How-Tos/420. Forms/2125-form_designer.md
 title: Form Designer
 kbId: 2125
 ---
+
 
 # Form Designer
 
@@ -8264,6 +8715,10 @@ You can place the following elements on the form.
 
  [Back to top](#)
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/400. Expression examples/411. N3 language/2024-calculate_objects_condition.md
 ================================================
@@ -8271,6 +8726,7 @@ FILE: 395. Version 4/400. Expression examples/411. N3 language/2024-calculate_ob
 title: Calculation of objects that meet the condition
 kbId: 2024
 ---
+
 
 # Calculation of objects that meet the condition
 
@@ -8322,6 +8778,10 @@ In order to calculate objects that meet the condition specified in the main obje
 
 ```
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/400. Expression examples/411. N3 language/2104-calculate_child_records.md
 ================================================
@@ -8329,6 +8789,7 @@ FILE: 395. Version 4/400. Expression examples/411. N3 language/2104-calculate_ch
 title: Calculating child records of all levels of the tree structure
 kbId: 2104
 ---
+
 
 # Calculating child records of all levels of the tree structure
 
@@ -8361,6 +8822,10 @@ In **CMW Platform** it is possible to create mutual links both between record te
 
 ***Allchildrenworks*** — the system name of an attribute with the "Record" data type, which is located in the specified record template, and in which this calculation occurs (i.e., we reuse the calculated attribute in which this calculation occurs).
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/400. Expression examples/411. N3 language/2107-task_object_value.md
 ================================================
@@ -8368,6 +8833,7 @@ FILE: 395. Version 4/400. Expression examples/411. N3 language/2107-task_object_
 title: Calculating the Display Value of an Object Associated with a Task
 kbId: 2107
 ---
+
 
 # Calculating the Display Value of an Object Associated with a Task
 
@@ -8390,6 +8856,10 @@ In **CMW Platform** one can calculate the system task table in a separate record
 
 ```
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/400. Expression examples/411. N3 language/2126-substitution_parameters_calc.md
 ================================================
@@ -8397,6 +8867,7 @@ FILE: 395. Version 4/400. Expression examples/411. N3 language/2126-substitution
 title: Calculating substitution parameters
 kbId: 2126
 ---
+
 
 # Calculating substitution parameters
 
@@ -8417,6 +8888,10 @@ This prefix stores the following substitution parameters:
 
 In order to get the value of a particular parameter, you need to use the following predicate construction: *substitution:parameter*.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/400. Expression examples/412. C# language/2088-upload_file.md
 ================================================
@@ -8424,6 +8899,7 @@ FILE: 395. Version 4/400. Expression examples/412. C# language/2088-upload_file.
 title: Uploading a file from a local folder
 kbId: 2088
 ---
+
 
 # Uploading a file from a local folder
 
@@ -8503,6 +8979,10 @@ class Script
 
 ***Attachment***— system name of the attribute with the "Document" data type where you want to upload the file.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/400. Expression examples/412. C# language/2095-add_group_accounts.md
 ================================================
@@ -8510,6 +8990,7 @@ FILE: 395. Version 4/400. Expression examples/412. C# language/2095-add_group_ac
 title: Adding users to a group
 kbId: 2095
 ---
+
 
 # Adding users to a group
 
@@ -8581,6 +9062,10 @@ Api.Base.AccountGroupService.IncludeMembers(group, accountsIds);
 
 This script, when called, firstly removes all users from the group, and then iterates through all records in the specified record template and adds users from the specified attribute to the group, thus updating the composition of the system group.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/400. Expression examples/412. C# language/2097-upload_list_folder.md
 ================================================
@@ -8588,6 +9073,7 @@ FILE: 395. Version 4/400. Expression examples/412. C# language/2097-upload_list_
 title: Uploading attachments to a local folder
 kbId: 2097
 ---
+
 
 # Uploading attachments to a local folder
 
@@ -8681,6 +9167,10 @@ class Script
 
 ***Document*** – system name of the attribute with the "Document" data type.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/400. Expression examples/412. C# language/2099-delete_related_record.md
 ================================================
@@ -8688,6 +9178,7 @@ FILE: 395. Version 4/400. Expression examples/412. C# language/2099-delete_relat
 title: Deleting a related object when a condition is met
 kbId: 2099
 ---
+
 
 # Deleting a related object when a condition is met
 
@@ -8733,6 +9224,10 @@ catch
 
 ***Qty***— system name of the attribute with the "Number" data type in the associated record template.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/400. Expression examples/412. C# language/2101-goto_showcase_record.md
 ================================================
@@ -8740,6 +9235,7 @@ FILE: 395. Version 4/400. Expression examples/412. C# language/2101-goto_showcas
 title: Navigating to the object from the storefront widget
 kbId: 2101
 ---
+
 
 # Navigating to the object from the storefront widget
 
@@ -8783,6 +9279,10 @@ ResultType = UserCommandResultType.Navigate ,
 
 ***oa.8*** — ID of the record template where the objects from the storefront are located.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/400. Expression examples/412. C# language/2128-download_table_entries.md
 ================================================
@@ -8790,6 +9290,7 @@ FILE: 395. Version 4/400. Expression examples/412. C# language/2128-download_tab
 title: Exporting Selected Records from a Custom Table
 kbId: 2128
 ---
+
 
 # Exporting Selected Records from a Custom Table
 
@@ -9029,6 +9530,10 @@ DS = ds; Id = id;
 
 ```
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/400. Expression examples/413. Expression language/2086-call_related_data.md
 ================================================
@@ -9036,6 +9541,7 @@ FILE: 395. Version 4/400. Expression examples/413. Expression language/2086-call
 title: Retrieving Related Data
 kbId: 2086
 ---
+
 
 # Retrieving Related Data
 
@@ -9050,6 +9556,10 @@ To retrieve the name of a driver from thr “Car” entry, use the following exp
 
 You can use the links an unlimited number of times, but be careful not to create a loop.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/400. Expression examples/413. Expression language/2087-expression_language_operators.md
 ================================================
@@ -9057,6 +9567,7 @@ FILE: 395. Version 4/400. Expression examples/413. Expression language/2087-expr
 title: List of Comindware Expression Language Operators
 kbId: 2087
 ---
+
 
 # List of Comindware Expression Language Operators
 
@@ -9084,6 +9595,10 @@ The following words cannot be used as local variables:
 - group;
 - any word that starts with an underscore (\_).
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/400. Expression examples/413. Expression language/2094-calculate_hyperlink.md
 ================================================
@@ -9091,6 +9606,7 @@ FILE: 395. Version 4/400. Expression examples/413. Expression language/2094-calc
 title: Calculating a hyperlink to a record
 kbId: 2094
 ---
+
 
 # Calculating a hyperlink to a record
 
@@ -9110,6 +9626,10 @@ FORMAT("<a href=https://cmw.com/#form/oa.2/form.3/{0}>Request</a>",LIST($id))
 
 The calculated attribute must be in the HTML display format to display the link correctly.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/401. Troubleshooting/1949-buttons_not_shown.md
 ================================================
@@ -9117,6 +9637,7 @@ FILE: 395. Version 4/401. Troubleshooting/1949-buttons_not_shown.md
 title: Buttons are not displayed
 kbId: 1949
 ---
+
 
 # Buttons are not displayed
 
@@ -9129,6 +9650,10 @@ What if you customize and place the buttons, but the users can't see them?
 1. Check the user role permissions settings. The «Use buttons» flag next to the button must be checked.
 2. Check the button’s display condition. To do this, go to the button’s settings, then to the «Display condition» tab. Make sure that the expression, if it is written there, is correct.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/401. Troubleshooting/1951-reference_field_empty.md
 ================================================
@@ -9136,6 +9661,7 @@ FILE: 395. Version 4/401. Troubleshooting/1951-reference_field_empty.md
 title: Reference field is empty
 kbId: 1951
 ---
+
 
 # Reference field is empty
 
@@ -9152,6 +9678,10 @@ Sometimes a user may face a situation when there is no possibility of choosing a
 
 **Note:** If there is no display attribute chosen, the record IDs will be displayed in the reference field by default.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/401. Troubleshooting/1953-invalid_instance_reference.md
 ================================================
@@ -9160,11 +9690,16 @@ title: Invalid instance hyperlink
 kbId: 1953
 ---
 
+
 # Invalid instance hyperlink
 
 If a user receives a system notification about a task assigned to him/her, and when he/she clicks on a link to a task, the system either gives an error or leads him/her to the wrong place, then most likely the system notifications were configured incorrectly.
 
 Pay special attention to which external server address is specified in the global configuration. It must match the current URL.
+
+
+
+
 
 ================================================
 FILE: 395. Version 4/401. Troubleshooting/1962-process_fails_several_records.md
@@ -9173,6 +9708,7 @@ FILE: 395. Version 4/401. Troubleshooting/1962-process_fails_several_records.md
 title: Can&#039;t start a process based on several records
 kbId: 1962
 ---
+
 
 # Can&#039;t start a process based on several records
 
@@ -9184,6 +9720,10 @@ Thus, one process = one record.
 
 If you still want to provide users with the ability to select several records to start the process, then you will need to create a button with the script operation that will start a process for each record, or start a related process using several records.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/401. Troubleshooting/1964-script_operation_error.md
 ================================================
@@ -9191,6 +9731,7 @@ FILE: 395. Version 4/401. Troubleshooting/1964-script_operation_error.md
 title: Script operation error
 kbId: 1964
 ---
+
 
 # Script operation error
 
@@ -9201,6 +9742,10 @@ When setting up a button with the C# script operation, it is always important to
 1. Check the correctness of the script.
 2. Check roles permissions. It is important that the role has permissions to the button itself and to all the templates specified in the script.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/401. Troubleshooting/1967-optimize_calculate_attribute.md
 ================================================
@@ -9208,6 +9753,7 @@ FILE: 395. Version 4/401. Troubleshooting/1967-optimize_calculate_attribute.md
 title: Optimizing Calculated Attributes
 kbId: 1967
 ---
+
 
 # Optimizing Calculated Attributes
 
@@ -9225,6 +9771,10 @@ One possible reason for the performance degradation of CMW Platform is the use o
 4. When using a calculated attribute in a process, it is possible to replace it with setting an entry or exit scenarios for a process element.
 5. When using a calculated attribute on a record form, it is possible to replace it with setting a value in the rules for a specific form.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/401. Troubleshooting/1969-process_id_not_found.md
 ================================================
@@ -9232,6 +9782,7 @@ FILE: 395. Version 4/401. Troubleshooting/1969-process_id_not_found.md
 title: Error “Identifier “…” not found on the process diagram
 kbId: 1969
 ---
+
 
 # Error “Identifier “…” not found on the process diagram
 
@@ -9244,6 +9795,10 @@ If, when checking or publishing a process diagram, you encounter the error ***"I
 1. The easiest way is to create the required attribute in the associated record template.
 2. If you need to use this particular attribute located in another record template, refer to it through the expression language.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/401. Troubleshooting/1975-process_notify_no_info.md
 ================================================
@@ -9251,6 +9806,7 @@ FILE: 395. Version 4/401. Troubleshooting/1975-process_notify_no_info.md
 title: Information in the process notification was not sent
 kbId: 1975
 ---
+
 
 # Information in the process notification was not sent
 
@@ -9267,6 +9823,10 @@ If, after the process has started, it turned out that some of the information wa
 
    Go to the «**Communication routes**» section, select the outgoing route used in the process and check the correct use of the attributes in the «***Message properties***» tab.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/401. Troubleshooting/1977-attribute_history_view.md
 ================================================
@@ -9274,6 +9834,7 @@ FILE: 395. Version 4/401. Troubleshooting/1977-attribute_history_view.md
 title: Calculated attribute change log cannot be viewed
 kbId: 1977
 ---
+
 
 # Calculated attribute change log cannot be viewed
 
@@ -9288,6 +9849,10 @@ If you still need to store change log of calculated attributes, then:
 1. Create a non-calculated attribute (for each calculated one).
 2. Manually (or by scenario) write the calculated value in the new attribute.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/401. Troubleshooting/1979-change_attribute_data_type.md
 ================================================
@@ -9295,6 +9860,7 @@ FILE: 395. Version 4/401. Troubleshooting/1979-change_attribute_data_type.md
 title: How to change the data type of an existing attribute?
 kbId: 1979
 ---
+
 
 # How to change the data type of an existing attribute?
 
@@ -9314,6 +9880,10 @@ If the attribute is dragged on a large number of forms and tables and is used in
 
 **Note :** when you change the display format of an attribute, you do not need to drag it on the form or on a table again, these changes are applied automatically.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/401. Troubleshooting/1981-archived_records_in_expression.md
 ================================================
@@ -9321,6 +9891,7 @@ FILE: 395. Version 4/401. Troubleshooting/1981-archived_records_in_expression.md
 title: Calculated expression returns archived records
 kbId: 1981
 ---
+
 
 # Calculated expression returns archived records
 
@@ -9334,6 +9905,10 @@ To exclude archived records from the calculation result, add the «***EQUALS (a-
 
 **Note :** archived records are not displayed in the tables by default. To enable their display, select the «***Show archived records***» flag in the table properties.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/401. Troubleshooting/1995-hard_read_text_table.md
 ================================================
@@ -9341,6 +9916,7 @@ FILE: 395. Version 4/401. Troubleshooting/1995-hard_read_text_table.md
 title: Unreadable text fields in a table on the form
 kbId: 1995
 ---
+
 
 # Unreadable text fields in a table on the form
 
@@ -9353,6 +9929,10 @@ By default, a limited amount of text is displayed in the table cells. To view al
 3. Save the form.
 4. Open any record, right-click on the cell with the text and select «***Navigate***».
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/401. Troubleshooting/2016-table_open_error.md
 ================================================
@@ -9360,6 +9940,7 @@ FILE: 395. Version 4/401. Troubleshooting/2016-table_open_error.md
 title: Table stopped working (error «Object reference not set to an instance of an object»)
 kbId: 2016
 ---
+
 
 # Table stopped working (error «Object reference not set to an instance of an object»)
 
@@ -9375,6 +9956,10 @@ This problem can only be fixed by deleting the personal configuration of the tab
 4. Then you need to find the personal configuration of the table created by the user who encountered the error. Select «***Ontology***» and then «***GetAxioms***». In the query field, enter the table's personal configuration ID and click «***Try it out!***». Thus, you’ll get information on the specified personal configuration of the table.
 5. Once you have determined the personal configuration of the table you want to remove, select «***Ontology***» and then «***Remove***». In the query field, enter the table's personal configuration ID and click «***Try it out!***».
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/401. Troubleshooting/2102-form_reference_field_error.md
 ================================================
@@ -9382,6 +9967,7 @@ FILE: 395. Version 4/401. Troubleshooting/2102-form_reference_field_error.md
 title: Unable to place some elements on a form through a reference field
 kbId: 2102
 ---
+
 
 # Unable to place some elements on a form through a reference field
 
@@ -9391,6 +9977,10 @@ If only one associated value can be stored in an attribute, any of the available
 
 But, if several values ​​can be stored in an attribute with the “Record” data type, then not all elements from this attribute can be transferred to the form of the main object. So, for example, you can't move a form, because the attribute stores multiple records, and the form always corresponds to just one record. The attributes of the target record template also cannot be placed on the form of the main object in an arbitrary order, but only by changing the representation of the attribute with the "Record" data type on the form to "Table" and transferring the attributes as columns of the table.
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/407. Integrations/1941-core_api_methods.md
 ================================================
@@ -9398,6 +9988,7 @@ FILE: 395. Version 4/407. Integrations/1941-core_api_methods.md
 title: Web API Methods
 kbId: 1941
 ---
+
 
 # Web API Methods
 
@@ -9638,6 +10229,10 @@ The Web API methods and Swagger documentation use the following names for the C
 | GET | /webapi/WorkerEngine/GetConfiguration | Gets system service statuses (`true` — enabled). |  | Object with system service statuses |
 | PUT | /webapi/WorkerEngine/SetConfiguration | Sets system service statuses. | Object with system service statuses (`true` — enabled) | Status object |
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/407. Integrations/1955-import_excel_data.md
 ================================================
@@ -9645,6 +10240,7 @@ FILE: 395. Version 4/407. Integrations/1955-import_excel_data.md
 title: Import Data into Excel via API
 kbId: 1955
 ---
+
 
 # Import Data into Excel via API
 
@@ -9711,6 +10307,10 @@ The Power Query add-in is built into Excel 2016 and above. For earlier versions 
 
    A query table imported to the Excel spreadsheet
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/407. Integrations/2074-solution_api_methods.md
 ================================================
@@ -9718,6 +10318,7 @@ FILE: 395. Version 4/407. Integrations/2074-solution_api_methods.md
 title: Solution API Methods
 kbId: 2074
 ---
+
 
 # Solution API Methods
 
@@ -9768,6 +10369,10 @@ _![Swagger UI for the method that creates a template record](https://kb.cmwlab.c
 | GET | /TemplateSystemName | Gets data of all records in the TemplateSystemName template |  | Array of objects with record attribute values:`[{"attributeSystemName": "value"}]` |
 | POST | /TemplateSystemName | Creates a record in the TemplateSystemName template | Object with record attribute values: `{"attributeSystemName": "value"}` | Record ID |
 
+
+
+
+
 ================================================
 FILE: 395. Version 4/407. Integrations/2161-get_started_with_cmw_api.md
 ================================================
@@ -9775,6 +10380,7 @@ FILE: 395. Version 4/407. Integrations/2161-get_started_with_cmw_api.md
 title: Get Started With CMW API
 kbId: 2161
 ---
+
 
 # Get Started With CMW API
 
@@ -9904,4 +10510,7 @@ http://your-host/api/public/system/TeamNetwork/ObjectAppService/Create
 **[Web API Methods](https://kb.comindware.ru/article.php?id=1941)**
 
  [*‌*Back to top](#)
+
+
+
 
