@@ -1,6 +1,7 @@
 ---
 title: 'Фильтр списка по активным задачам'
 kbTitle: 'Фильтрация списка по активным задачам текущего пользователя с помощью N3: по всем процессам, по конкретному процессу'
+kbId: 4935
 tags:
     - N3
     - Notation 3
@@ -19,7 +20,6 @@ tags:
     - фильтрация
 hide:
     - tags
-kbId: 4935
 ---
 
 # Фильтрация списка по активным задачам с помощью N3 {: #n3_filter_active_tasks }
@@ -118,19 +118,19 @@ kbId: 4935
 
     ``` turtle
     # Импортируем функции для работы с логикой, задачами,
-    # статусами задач, объектами, аккаунтами и ролями
+    # статусами задач, аккаунтами и ролями
     @prefix cmw: <http://comindware.com/logics#>.
     @prefix taskStatus: <http://comindware.com/ontology/taskStatus#>.
-    @prefix object: <http://comindware.com/ontology/object#>.
     @prefix account: <http://comindware.com/ontology/account#>.
     @prefix role: <http://comindware.com/ontology/role#>.
+    @prefix process: <http://comindware.com/ontology/process#>.
     {
         # Получаем шаблон процесса по его системному имени
-        ?process object:alias "СистемноеИмяШаблонаПроцесса".
+        ?process process:alias "СистемноеИмяШаблонаПроцесса".
         # Получаем аккаунт текущего пользователя из контекста безопасности.
         cmw:securityContext cmw:currentUser ?currentUser.
         # Помещаем массив всех задач в переменную ?item
-        # Если выражение используется в таблице задач процесса, 
+        # Если выражение используется в таблице задач процесса,
         # то эта строка не требуется, т. к. контекст уже будет задачей.
         ?item a cmw:UserTask.
         # Начинаем цикл по массиву задач

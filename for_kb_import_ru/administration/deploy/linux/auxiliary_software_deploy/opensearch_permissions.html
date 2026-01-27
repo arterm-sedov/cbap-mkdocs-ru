@@ -150,7 +150,6 @@
 <li>Экземпляр ПО будет взаимодействовать с OpenSearch (Elasticsearch) под указанным пользователем и создавать, наполнять и читать индексы с заданным префиксом.</li>
 </ul>
 </div>
-<p>См. также <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4678">OpenSearch (Elasticsearch). Настройка подключения</a>»</em>.</p>
 <h2 id="opensearch_permissions_overview">Обзор необходимых разрешений</h2>
 <p>Для корректной работы журнала транзакций пользователь <strong>Comindware Platform</strong> в OpenSearch (Elasticsearch) должен иметь перечисленные ниже разрешения.</p>
 <h3 id="opensearch_permissions_index_management">Разрешения на управление индексами</h3>
@@ -295,10 +294,12 @@
 <li>
 <p>Создайте роль с необходимыми разрешениями:</p>
 <div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">  </span>--user<span class="w"> </span>&lt;cmwJournalUserName&gt;:&lt;safePassword&gt;<span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">  </span>--cacert<span class="w"> </span>/path/to/root.crt<span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">  </span>https://&lt;openSearchHost&gt;:&lt;port&gt;/_plugins/_security/api/roles/&lt;cmwJournalRole&gt;<span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">  </span>-d<span class="w"> </span><span class="s1">'{</span></code> <br/><code><span class="s1">    "index_permissions": [{</span></code> <br/><code><span class="s1">      "index_patterns": ["&lt;prefix&gt;*"],</span></code> <br/><code><span class="s1">      "dls": "",</span></code> <br/><code><span class="s1">      "fls": [],</span></code> <br/><code><span class="s1">      "masked_fields": [],</span></code> <br/><code><span class="s1">      "allowed_actions": [</span></code> <br/><code><span class="s1">        "indices:admin/create",</span></code> <br/><code><span class="s1">        "indices:admin/data_stream/create",</span></code> <br/><code><span class="s1">        "indices:admin/mapping/put",</span></code> <br/><code><span class="s1">        "indices:data/read/get",</span></code> <br/><code><span class="s1">        "indices:data/read/search",</span></code> <br/><code><span class="s1">        "indices:data/read/search*",</span></code> <br/><code><span class="s1">        "indices:data/read/search/template",</span></code> <br/><code><span class="s1">        "indices:data/read/point_in_time/create",</span></code> <br/><code><span class="s1">        "indices:data/read/point_in_time/readall",</span></code> <br/><code><span class="s1">        "indices:data/write/index",</span></code> <br/><code><span class="s1">        "indices:data/write/update",</span></code> <br/><code><span class="s1">        "indices:data/write/update/byquery",</span></code> <br/><code><span class="s1">        "indices:data/write*"</span></code> <br/><code><span class="s1">      ]</span></code> <br/><code><span class="s1">    }],</span></code> <br/><code><span class="s1">    "cluster_permissions": [</span></code> <br/><code><span class="s1">      "read",</span></code> <br/><code><span class="s1">      "write"</span></code> <br/><code><span class="s1">    ]</span></code> <br/><code><span class="s1">  }'</span></code> <br/></pre></code></div>
-<p>Здесь:
-- <code>&lt;prefix&gt;</code> — значение параметра <code>journal.name</code> из конфигурации экземпляра ПО (по умолчанию <code>cmw&lt;instanceName&gt;</code>, где <code>&lt;instanceName&gt;</code> — имя экземпляра ПО);
-- <code>&lt;host&gt;:&lt;port&gt;</code> — адрес сервера OpenSearch (Elasticsearch);
-- <code>/path/to/root.crt</code> — путь к сертификату корневого центра сертификации (если используется TLS).</p>
+<p>Здесь:</p>
+<ul>
+<li><code>&lt;prefix&gt;</code> — значение параметра <code>journal.name</code> из конфигурации экземпляра ПО (по умолчанию <code>cmw&lt;instanceName&gt;</code>, где <code>&lt;instanceName&gt;</code> — имя экземпляра ПО);</li>
+<li><code>&lt;openSearchHost&gt;:&lt;port&gt;</code> — адрес сервера OpenSearch (Elasticsearch);</li>
+<li><code>/path/to/root.crt</code> — путь к сертификату корневого центра сертификации (если используется TLS).</li>
+</ul>
 <div class="notice notice-info">
 <p class="admonition-title">Примечание</p>
 <p>Если используется несколько экземпляров <strong>Comindware Platform</strong> с разными префиксами индексов, создайте отдельную роль для каждого префикса или используйте шаблон индекса, охватывающий все необходимые префиксы.</p>
@@ -383,15 +384,6 @@
 <div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">  </span>--user<span class="w"> </span>&lt;adminUser&gt;:&lt;safePassword&gt;<span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">  </span>--cacert<span class="w"> </span>/path/to/root.crt<span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">  </span>https://&lt;openSearchHost&gt;:&lt;port&gt;/&lt;prefix_test_index&gt;</code> <br/></pre></code></div>
 </div>
 </li>
-<li>
-<p>Проверьте подключение из <strong>Comindware Platform</strong>:</p>
-<ul>
-<li>Перейдите в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4675">список подключений</a>.</li>
-<li>Откройте подключение к OpenSearch (Elasticsearch).</li>
-<li>Нажмите <strong>Проверить соединение</strong>.</li>
-</ul>
-<p>Должно отобразиться сообщение «<strong>Соединение установлено</strong>».</p>
-</li>
 </ol>
 <div class="notice notice-warning">
 <p class="admonition-title">Ошибки доступа</p>
@@ -409,13 +401,13 @@
 <ul>
 <li>Ограничьте доступ только индексами с префиксом экземпляра ПО.</li>
 <li>Не предоставляйте разрешения на удаление индексов (<code>indices:admin/delete</code>), если это не требуется.</li>
-<li>Не используйте роль с полным доступом (<code>all_access</code>) для пользователя <strong>Comindware Platform</strong>.</li>
+<li>Не используйте роль с полным доступом (<code>all_access</code>) для пользователя <strong>Comindware Platform</strong>, если это не требуется.</li>
 </ul>
 <h3 id="opensearch_permissions_security_index_pattern">Ограничение шаблона индексов</h3>
 <p>Используйте конкретный префикс индекса в шаблоне роли вместо широкого шаблона (например, <code>*</code>):</p>
 <ul>
 <li>Правильно: <code>cmw&lt;instanceName&gt;*</code> — доступ только к индексам экземпляра <code>&lt;instanceName&gt;</code>.</li>
-<li>Неправильно: <code>*</code> — доступ ко всем индексам кластера.</li>
+<li>Неправильно: <code>*</code> — доступ ко всем индексам.</li>
 </ul>
 <h3 id="opensearch_permissions_security_tls">Использование TLS</h3>
 <p>Используйте HTTPS/TLS для подключения к OpenSearch (Elasticsearch):</p>
