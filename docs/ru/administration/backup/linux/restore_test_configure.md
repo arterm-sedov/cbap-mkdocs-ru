@@ -32,7 +32,11 @@ hide: tags
 
     !!! note "Примечание"
 
-        Префикс индекса служит для идентификации записей в БД {{ openSearchVariantsUnquotedGenitive }}. Если к {% if not gostech %}одному серверу{% endif %} {{ openSearchVariantsUnquotedDative }} подключается несколько экземпляров **{{ productName }}**, их префиксы индексов должны отличаться. В противном случае будет нарушена целостность данных в БД {{ openSearchVariantsUnquotedGenitive }}.
+        {% include-markdown ".snippets/opensearch_prefix_requirements.md" %}
+
+    !!! warning "Допустимый префикс индекса"
+
+        {% include-markdown ".snippets/opensearch_index_naming_requirements.md" %}
 
 2. Запустите экземпляр ПО, восстановленный из резервной копии.
 3. Откройте веб-сайт экземпляра ПО.

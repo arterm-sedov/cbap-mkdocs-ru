@@ -194,6 +194,7 @@ ingest.geoip.downloader.enabled: false
 
 - [Установка, запуск, инициализация и остановка ПО в Windows][deploy_guide_windows]
 - [Пути и содержимое директорий экземпляра ПО][paths_windows]
+- [{{ openSearchVariants }}. Настройка разрешений][opensearch_permissions]
 
 </div>
 

@@ -234,6 +234,7 @@ bash reindex_local_prefix.sh -p <platformPrefix> -ip 10.0.0.5:9200 -m comindware
 - [Развёртывание Elasticsearch без сертификатов подлинности][elasticsearch_cluster_deploy_no_certificates]
 - [Elasticsearch. Установка в базовой конфигурации][elasticsearch_deploy_Linux]
 - [Настройка SSL-сертификатов для Elasticsearch][elasticsearch_ssl_certificate_configure]
+- [{{ openSearchVariants }}. Настройка разрешений][opensearch_permissions]
 - [Примеры событий в файловых журналах][log_files_event_examples]
 - [Журналы событий. Типы, просмотр, цепочки событий][logs]
 - [Использование диаграммы экземпляра процесса][process_diagram_view_instance]

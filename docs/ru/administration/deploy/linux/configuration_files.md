@@ -165,7 +165,7 @@ db.workDir: /var/lib/comindware/<instanceName>/Database
 # Устаревшая директива: databaseName
 db.name: <instanceName>
 # Вес узла (целочисленное значение) с точки зрения кластера {{ apacheIgniteVariants }}.
-# Суммарный вес всех узлов должен превышать 100.
+# Суммарный вес всех узлов не должен превышать 100.
 # Значение по умолчанию: 100/кол-во узлов.
 #db.weight:
 # Префикс кэшей в базе данных, используемый при обновлении.
@@ -761,8 +761,9 @@ log.folder: /var/log/comindware/<instanceName>/Logs/
 
 --8<-- "related_topics_heading.md"
 
-- _[Пути и содержимое директорий экземпляра ПО][paths]_
-- _[Настройка конфигурации вспомогательного ПО для оптимизации работы {{ productName }}][auxiliary_software_optimize]_
+- [Пути и содержимое директорий экземпляра ПО][paths]
+- [Настройка конфигурации вспомогательного ПО для оптимизации работы {{ productName }}][auxiliary_software_optimize]
+- [{{ openSearchVariants }}. Настройка разрешений][opensearch_permissions]
 
 </div>
 

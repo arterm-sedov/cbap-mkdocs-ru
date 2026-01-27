@@ -1,6 +1,15 @@
 ---
 title: 'Резервное копирование и восстановление в Windows'
 kbId: 4644
+tags:
+    - Windows
+    - резервное копирование
+    - восстановление
+    - бэкап
+    - бекап
+    - backup
+    - резервная копия
+hide: tags
 ---
 
 # Резервное копирование и восстановление {{ productName }} в ОС Windows {: #backup_restore_windows }
@@ -37,6 +46,9 @@ kbId: 4644
 Здесь представлен следующий порядок резервного копирования:
 
 1. [Сохраните резервную копию базы данных экземпляра продукта][backup_configure_list_view].
+
+    {% include-markdown ".snippets/backup_large_database_warning.md" %}
+
 2. [Создайте снимок сервера {{ openSearchVariants }}](#backup_restore_windows_registry_snapshot). Этот шаг может не потребоваться в зависимости от вашей конфигурации {{ openSearchVariants }}.
 
 ### Регистрация репозитория и создание снимка {{ openSearchVariants }} {: #backup_restore_windows_registry_snapshot }
@@ -139,6 +151,7 @@ curl -X POST "<openSearchHost>:<opeSearchPort>/_snapshot/<repository_name>/<snap
 --8<-- "related_topics_heading.md"
 
 - [Резервное копирование. Настройка и запуск, просмотр журнала сеансов][backup_configure]
+- [Настройка и использование скрипта для резервного копирования данных (Linux)][backup_linux_script]
 - [Пути и содержимое директорий экземпляра ПО][paths]
 - [Установка, запуск, инициализация и остановка Comindware Platform в Windows][deploy_guide_windows]
 - [Проверка и настройка конфигурации экземпляра ПО {{ productName }} после восстановления из резервной копии][restore_test_configure]

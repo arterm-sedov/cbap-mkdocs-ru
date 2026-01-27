@@ -2,7 +2,7 @@
 title: 'Фильтрация списка по активным задачам текущего пользователя с помощью N3: по всем процессам, по конкретному процессу'
 kbId: 4935
 url: 'https://kb.comindware.ru/article.php?id=4935'
-updated: '2025-09-19 18:15:47'
+updated: '2026-01-27 18:41:01'
 ---
 
 # Фильтрация списка по активным задачам текущего пользователя с помощью N3: по всем процессам, по конкретному процессу
@@ -101,15 +101,15 @@ updated: '2025-09-19 18:15:47'
 
    ```
    # Импортируем функции для работы с логикой, задачами,
-   # статусами задач, объектами, аккаунтами и ролями
+   # статусами задач, аккаунтами и ролями
    @prefix cmw: <http://comindware.com/logics#>.
    @prefix taskStatus: <http://comindware.com/ontology/taskStatus#>.
-   @prefix object: <http://comindware.com/ontology/object#>.
    @prefix account: <http://comindware.com/ontology/account#>.
    @prefix role: <http://comindware.com/ontology/role#>.
+   @prefix process: <http://comindware.com/ontology/process#>.
    {
        # Получаем шаблон процесса по его системному имени
-       ?process object:alias "СистемноеИмяШаблонаПроцесса".
+       ?process process:alias "СистемноеИмяШаблонаПроцесса".
        # Получаем аккаунт текущего пользователя из контекста безопасности.
        cmw:securityContext cmw:currentUser ?currentUser.
        # Помещаем массив всех задач в переменную ?item

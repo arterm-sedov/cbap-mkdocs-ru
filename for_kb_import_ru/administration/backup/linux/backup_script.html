@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5140" kb-tags="Apache Ignite,cron,Linux,OpenSearch,администрирование,журналы,крон,бэкапы,бекапы,резервное копирование,скрипты" kb-title="Настройка и использование скрипта для резервного копирования данных Comindware Platform (Linux)">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5140" kb-tags="Apache Ignite,cron,Linux,OpenSearch,администрирование,журналы,крон,бэкапы,бекапы,резервное копирование,скрипты" kb-title="Резервное копирование. Настройка и запуск с помощью скриптов (Linux)">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -32,7 +32,7 @@
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#backup_linux_script_cluster_nodes">
 <span class="md-ellipsis">
-      Запуск скрипта cmw_backups_create.sh для нескольких узлов кластера
+      Запуск скрипта backups_create.sh для нескольких узлов кластера
     </span>
 </a>
 </li>
@@ -53,15 +53,19 @@
 <p>Представленная здесь функция находится на стадии разработки. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4579#experimental_feature_support">Поддержка экспериментальных функций</a>»</em>.</p>
 </div>
 <h2 id="backup_linux_script_intro">Введение</h2>
-<p>Здесь представлены инструкции по резервному копированию данных <strong>Comindware Platform</strong> с помощью скриптов на стороне сервера вместо использования веб-интерфейса.</p>
-<p>Это позволяет системному администратору более гибко управлять процессом и параметрами резервного копирования.</p>
+<p>Здесь представлены инструкции по резервному копированию данных <strong>Comindware Platform</strong> с помощью скриптов на стороне сервера вместо использования встроенных средств <strong>Comindware Platform</strong> посредством веб-интерфейса.</p>
+<p>Это даёт следующие преимущества:</p>
+<ul>
+<li>системный администратор может более гибко управлять процессом и параметрами резервного копирования;</li>
+<li>резервное копирование больших баз данных с помощью скриптов позволяет снять вычислительную нагрузку с <strong>Comindware Platform</strong>. Поэтому <strong>данный способ рекомендуется использовать, если размер базы данных превышает 10 ГБ</strong>.</li>
+</ul>
 <p>Резервное копирование с помощью скриптов включает следующие шаги:</p>
 <ul>
 <li>создание снимка данных Apache Ignite, архивирование и копирование снимка в хранилище резервных копий, очистка использованных ресурсов;</li>
-<li>создание снимка данных OpenSearch (Elasticsearch), архивирование и копирование снимка в хранилище резервных копий, очистка использованных ресурсов;</li>
-<li>синхронизация сетевой папки с пользовательскими файлами (<code>Streams</code>), архивирование и копирование файлов в хранилище резервных копий, очистка использованных ресурсов.</li>
+<li>(необязательно) создание снимка данных OpenSearch (Elasticsearch), архивирование и копирование снимка в хранилище резервных копий, очистка использованных ресурсов;</li>
+<li>(необязательно) синхронизация сетевой папки с пользовательскими файлами (<code>Streams</code>), архивирование и копирование файлов в хранилище резервных копий, очистка использованных ресурсов.</li>
 </ul>
-<p>Скрипт резервного копирования  (<code>cmw_backups_create.sh</code>) выполняет следующие операции:</p>
+<p>Скрипт резервного копирования  (<code>backups_create.sh</code>) выполняет следующие операции:</p>
 <ul>
 <li>ведёт журнал по пути, указанном в переменной <code>logFile</code>;</li>
 <li>сокращает журнал до последних 1000 строк при каждом запуске;</li>
@@ -91,8 +95,8 @@
 <div class="highlight"><code><pre><span></span><code>...</code> <br/><code><span class="w">    </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"clientConnectorConfiguration"</span><span class="nt">&gt;</span></code> <br/><code><span class="w">    </span><span class="nt">&lt;bean</span><span class="w"> </span><span class="na">class=</span><span class="s">"org.apache.ignite.configuration.ClientConnectorConfiguration"</span><span class="nt">&gt;</span></code> <br/><code><span class="w">        </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"thinClientEnabled"</span><span class="w"> </span><span class="na">value=</span><span class="s">"true"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code><span class="w">        </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"host"</span><span class="w"> </span><span class="na">value=</span><span class="s">"127.0.0.1"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code><span class="w">        </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"port"</span><span class="w"> </span><span class="na">value=</span><span class="s">"10800"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code>...</code> <br/><code><span class="w">    </span><span class="nt">&lt;/bean&gt;</span></code> <br/><code><span class="w">    </span><span class="nt">&lt;/property&gt;</span></code> <br/><code>...</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Откройте скрипт резервного копирования <code>cmw_backups_create.sh</code> для редактирования:</p>
-<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/usr/share/comindware/bin/cmw_backups_create.sh</code> <br/></pre></code></div>
+<p>Откройте скрипт резервного копирования <code>backups_create.sh</code> для редактирования:</p>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/usr/share/comindware/bin/backups_create.sh<span class="w"> </span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Настройте в скрипте пути и имена в переменных в соответствии с вашей конфигурацией:</p>
@@ -117,20 +121,40 @@
 </div>
 </li>
 <li>
-<p>Проверьте выполнения скрипта <code>cmw_backups_create.sh</code>, выполнив команду:</p>
-<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>/usr/share/comindware/bin/cmw_backups_create.sh<span class="w"> </span>-vso</code> <br/></pre></code></div>
+<p>Проверьте выполнения скрипта <code>backups_create.sh</code>, выполнив команду:</p>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>/usr/share/comindware/bin/backups_create.sh<span class="w"> </span>&lt;instanceName&gt;<span class="w"> </span>-vso</code> <br/></pre></code></div>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>В новейшей версии скрипта обязательно указывать имя экземпляра <strong>Comindware Platform</strong> — <code>&lt;instanceName&gt;</code>. Если имя экземпляра не указано, скрипт выдаст ошибку и остановится.</p>
+</div>
 <div class="notice notice-warning">
 <p class="admonition-title">Внимание!</p>
 <p>Обратите внимание на время создания снимков, а также время сохранения и размеры архивов.</p>
 </div>
 <div class="notice notice-tip">
-<p class="admonition-title">Ключи скрипта cmw_backups_create.sh</p>
-<p>Скрипт <code>cmw_backups_create.sh</code> поддерживает следующие ключи:</p>
+<p class="admonition-title">Ключи скрипта backups_create.sh</p>
+<p>Скрипт <code>backups_create.sh</code> поддерживает следующие ключи:</p>
 <ul>
-<li><code>-s</code> — включает создание и архивирование вложенных файлов.</li>
-<li><code>-o</code> — включает снятие и архивирование снимков данных OpenSearch (Elasticsearch).</li>
-<li><code>-v</code> — подробный вывод (verbose), выводит сообщения в терминал помимо записи в лог</li>
-<li><code>-c</code> — только очистка (clean-only), выполняет только операции очистки старых снимков без создания нового.</li>
+<li><code>-v</code>, <code>--verbose</code> — вывод отчёта в терминал;</li>
+<li><code>-c</code>, <code>--cleanup-only</code> — только архивация имеющихся снимков Apache Ignite;</li>
+<li><code>-s</code>, <code>--with-streams</code> — создание архива вложенных файлов;</li>
+<li><code>-o</code>, <code>--with-history</code> — создание резервной копии данных OpenSearch (Elasticsearch);</li>
+<li><code>-t</code>, <code>--check-config</code> — проверка конфигурации без выполнения резервного копирования.</li>
+<li><code>--lock-file PATH</code> — путь к файлу блокировки выполнения резервного копирования;</li>
+<li><code>--log-file PATH</code> — путь к файлу журнала;</li>
+<li><code>--backup-depth DAYS</code> — глубина резервного копирования;</li>
+<li><code>--ignite-home PATH</code> — путь к директории со скриптами Apache Ignite;</li>
+<li><code>--ignite-host HOST</code> — хост коннектора Apache Ignite;</li>
+<li><code>--ignite-port PORT</code> — порт коннектора Apache Ignite;</li>
+<li><code>--snapshot-path PATH</code> — расположение снимков Apache Ignite;</li>
+<li><code>--backup-prefix PREFIX</code> — префикс снимков Apache Ignite;</li>
+<li><code>--os-server URL</code> — URL сервера журналирования;</li>
+<li><code>--os-repo-path PATH</code> — путь к репозиторию OpenSearch (Elasticsearch);</li>
+<li><code>--os-index-prefix PREFIX</code> — префикс индексов OpenSearch (Elasticsearch);</li>
+<li><code>--os-repo-name NAME</code> — имя репозитория OpenSearch (Elasticsearch);</li>
+<li><code>--streams-path PATH</code> — путь к директории вложенных файлов;</li>
+<li><code>--backups-path PATH</code> — путь к хранилищу резервных копий;</li>
+<li><code>--local-temp-path PATH</code> — путь к директории <code>LocalTemp</code>.</li>
 </ul>
 </div>
 </li>
@@ -143,11 +167,12 @@
 <div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>crontab<span class="w"> </span>-e</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Добавьте строку запуска скрипта <code>cmw_backups_create.sh</code>:</p>
-<div class="highlight"><code><pre><span></span><code><span class="m">0</span><span class="w"> </span><span class="m">6</span>-22<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>sudo<span class="w"> </span>bash<span class="w"> </span>/usr/share/comindware/bin/cmw_backups_create.sh</code> <br/></pre></code></div>
+<p>Добавьте строку запуска скрипта <code>backups_create.sh</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="m">0</span><span class="w"> </span><span class="m">6</span>-22<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>sudo<span class="w"> </span>bash<span class="w"> </span>/usr/share/comindware/bin/backups_create.sh<span class="w">  </span>&lt;instanceName&gt;</code> <br/></pre></code></div>
+<p>Здесь <code>&lt;instanceName&gt;</code> — имя экземпляра <strong>Comindware Platform</strong>.</p>
 </li>
 </ol>
-<h2 class="pageBreakBefore" id="backup_linux_script_cluster_nodes">Запуск скрипта cmw_backups_create.sh для нескольких узлов кластера</h2>
+<h2 class="pageBreakBefore" id="backup_linux_script_cluster_nodes">Запуск скрипта backups_create.sh для нескольких узлов кластера</h2>
 <p>С помощью <code>crontab</code> можно распределить операции резервного копирования узлов кластера на разные временные интервалы.</p>
 <p>Например, настроим поочередное выполнение резервного копирования на 4-х узлах кластера раз в час с 6-00 до 22-00.</p>
 <ol class="colored_numbers_list">
@@ -157,11 +182,11 @@
 </li>
 <li>
 <p>Добавьте строки запуска скрипта для первого узла:</p>
-<div class="highlight"><code><pre><span></span><code><span class="c1"># Запуск резервного копирования текущего узла</span></code> <br/><code><span class="m">0</span><span class="w"> </span><span class="m">6</span>-18/4<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>sudo<span class="w"> </span>bash<span class="w"> </span>/home/admin-ag/cmw_snapshot_create.sh<span class="w"> </span>-so</code> <br/><code><span class="c1"># Сохранение снимков</span></code> <br/><code><span class="m">30</span><span class="w"> </span><span class="m">6</span>-21<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>sudo<span class="w"> </span>bash<span class="w"> </span>/home/admin-ag/cmw_snapshot_create.sh<span class="w"> </span>-c</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="c1"># Запуск резервного копирования текущего узла</span></code> <br/><code><span class="m">0</span><span class="w"> </span><span class="m">6</span>-18/4<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>sudo<span class="w"> </span>bash<span class="w"> </span>/usr/share/comindware/bin/backups_create.sh<span class="w"> </span>-so</code> <br/><code><span class="c1"># Сохранение снимков</span></code> <br/><code><span class="m">30</span><span class="w"> </span><span class="m">6</span>-21<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>sudo<span class="w"> </span>bash<span class="w"> </span>/usr/share/comindware/bin/backups_create.sh<span class="w"> </span>-c</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Для второго узла добавьте строки:</p>
-<div class="highlight"><code><pre><span></span><code><span class="c1"># Запуск резервного копирования текущего узла</span></code> <br/><code><span class="m">0</span><span class="w"> </span><span class="m">7</span>-19/4<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>sudo<span class="w"> </span>bash<span class="w"> </span>/home/admin-ag/cmw_snapshot_create.sh<span class="w"> </span>-so</code> <br/><code><span class="c1"># Сохранение снимков</span></code> <br/><code><span class="m">30</span><span class="w"> </span><span class="m">6</span>-19/4<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>sudo<span class="w"> </span>bash<span class="w"> </span>/home/admin-ag/cmw_snapshot_create.sh<span class="w"> </span>-c</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="c1"># Запуск резервного копирования текущего узла</span></code> <br/><code><span class="m">0</span><span class="w"> </span><span class="m">7</span>-19/4<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>sudo<span class="w"> </span>bash<span class="w"> </span>/usr/share/comindware/bin/backups_create.sh<span class="w"> </span>-so</code> <br/><code><span class="c1"># Сохранение снимков</span></code> <br/><code><span class="m">30</span><span class="w"> </span><span class="m">6</span>-19/4<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>sudo<span class="w"> </span>bash<span class="w"> </span>/usr/share/comindware/bin/backups_create.sh<span class="w"> </span>-c</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Аналогичным образом разнесите по времени и настройте автозапуск скрипта на остальных узлах.</p>

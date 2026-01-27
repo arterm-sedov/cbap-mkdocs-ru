@@ -14,6 +14,8 @@ hide: tags
 
 # Cоздание полной резервной копии без остановки экземпляра ПО {: #complete_running_instance_backup}
 
+{% include-markdown ".snippets/backup_large_database_warning.md" %}
+
 ## Введение
 
 Здесь представлены инструкции по созданию резервной копии базы данных экземпляра ПО **{{ productName }}** без его остановки.
@@ -220,7 +222,8 @@ hide: tags
 
 --8<-- "related_topics_heading.md"
 
-- _[Восстановление базы данных, вложенных файлов и журналов из полной резервной копии][restore_complete_backup]_
+- [Настройка и использование скрипта для резервного копирования данных (Linux)][backup_linux_script]
+- [Восстановление базы данных, вложенных файлов и журналов из полной резервной копии][restore_complete_backup]
 
 </div>
 

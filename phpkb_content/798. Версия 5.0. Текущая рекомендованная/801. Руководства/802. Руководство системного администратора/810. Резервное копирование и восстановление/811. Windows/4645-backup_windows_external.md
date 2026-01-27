@@ -2,58 +2,70 @@
 title: 'Резервное копирование с помощью внешних средств в ОС Windows'
 kbId: 4645
 url: 'https://kb.comindware.ru/article.php?id=4645'
-updated: '2024-03-20 15:43:42'
+updated: '2026-01-16 17:25:17'
 ---
 
 # Резервное копирование с помощью внешних средств в ОС Windows
 
+Резервное копирование крупных баз данных
+
+Если размер базы данных превышает 10 ГБ, рекомендуется использовать скрипт резервного копирования на сервере для обеспечения оптимальной производительности резервного копирования и работы **{{ productName }}**.
+
+Это связано с тем, что резервное копирование больших баз данных встроенными средствами **{{ productName }}** создаёт значительную вычислительную нагрузку и может приводить к снижению производительности.
+
+См. *«[Настройка и использование скрипта для резервного копирования данных (Linux)][backup_linux_script]»*.
+
+Скрипт резервного копирования следует запросить у [службы поддержки Comindware](https://www.comindware.ru/company/contact-us/#tab_support).
+
 Запустить резервное копирование по расписанию можно с помощью встроенного инструмента Windows – Планировщика заданий.
 
-**1.** Создайте файл `powershell` со скриптом для запуска резервного копирования, например `backupscript``.``ps``1`.
+1. Создайте файл `powershell` со скриптом для запуска резервного копирования, например `backupscript.ps1`.
+2. В созданном файле укажите `login` — имя пользователя, `password` — пароль для входа в экземпляр ПО, `backupID` — идентификатор конфигурации резервного копирования в экземпляре системы. См. раздел *«[Просмотр списка конфигураций резервного копирования][backup_configure]»*.
 
-**2.** В созданном файле укажите `login` — имя пользователя, `password` — пароль для входа в экземпляр ПО, `backupID` — идентификатор конфигурации резервного копирования в экземпляре системы. См. раздел [*«**Просмотр списка конфигураций резервного копирования*][backup_configure]*[»][backup_configure].*
+   ```
+   # Enter your credential
+   $login = "admin"
+   $password = "admin"
 
-```
-# Enter your credential
-$login = «admin»
-$password = «admin»
+   # Enter required backup
 
-# Enter required backup
-configuration ID
-$backupID = «backupConfig.1»
+   configuration ID
+   $backupID = "backupConfig.1"
 
-# Execution
-$localhost = «http://localhost:8081/»
-$api = «webapi/backupsession?ConfigurationId=»
-$uri = $localhost + $api + $backupID
+   # Execution
+   $localhost = "http://localhost:8081/"
+   $api = "webapi/backupsession?ConfigurationId="
+   $uri = $localhost + $api + $backupID
 
-$WebClient = New-Object System.Net.WebClient
-$WebClient.Credentials = New-Object System.Net.NetworkCredential($login, $password)
-$WebClient.Encoding = [System.Text.Encoding]::UTF8
-$response = $WebClient.UploadString($uri, «POST»,»»)
-$response
-```
+   $WebClient = New-Object System.Net.WebClient
+   $WebClient.Credentials = New-Object System.Net.NetworkCredential($login, $password)
+   $WebClient.Encoding = [System.Text.Encoding]::UTF8
+   $response = $WebClient.UploadString($uri, "POST","")
+   $response
 
-**3.** Откройте Планировщик заданий. До этого удостоверьтесь, что служба планировщика запускается автоматически.
+   ```
+3. Откройте Планировщик заданий. До этого удостоверьтесь, что служба планировщика запускается автоматически.
+4. Откройте раздел «**Windows**».
+5. Создайте новую задачу, нажав кнопку «**Создать задачу**».
 
-**4.** Откройте раздел «**Windows**».
+   ![Планировщик заданий](https://kb.comindware.ru/assets/img_63bbd8e851cae.png)
 
-**5.** Создайте новую задачу, нажав кнопку «**Создать задачу**».
+   Планировщик заданий
+6. Укажите имя задачи и условия её выполнения.
 
-_![Планировщик заданий](https://kb.comindware.ru/assets/img_63bbd8e851cae.png)_
+   ![Создание задачи](https://kb.comindware.ru/assets/img_63bbd93ec6e19.jpeg)
 
-**6.** Укажите имя задачи и условия её выполнения.
+   Создание задачи
+7. Перейдите на вкладку «**Действия**» и нажмите кнопку «**Создать**». В поле «**Программа или сценарий**» укажите программу, с помощью которой будет запущен скрипт. В поле «**Добавить аргументы**» укажите путь к файлу со скриптом.
 
-_![Создание задачи](https://kb.comindware.ru/assets/img_63bbd93ec6e19.jpeg)_
+   ![Создание действия](https://kb.comindware.ru/assets/img_63bbd9aa494e5.png)
 
-**7.** Перейдите на вкладку «**Действия**» и нажмите кнопку «**Создать**». В поле «**Программа или сценарий**» укажите программу, с помощью которой будет запущен скрипт. В поле «**Добавить аргументы**» укажите путь к файлу со скриптом.
+   Создание действия
+8. Перейдите на вкладку «**Триггеры**» и нажмите кнопку «**Создать**».
+9. Составьте расписание, по которому будет запускаться скрипт.
 
-_![Создание действия](https://kb.comindware.ru/assets/img_63bbd9aa494e5.png)_
+   ![Создание расписания](https://kb.comindware.ru/assets/img_63bbda3654a2d.png)
 
-**8.** Перейдите на вкладку «**Триггеры**» и нажмите кнопку «**Создать**».
-
-**9.** Составьте расписание, по которому будет запускаться скрипт.
-
-_![](https://kb.comindware.ru/assets/img_63bbda3654a2d.png)_Создание расписания
+   Создание расписания
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
