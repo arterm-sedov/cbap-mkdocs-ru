@@ -2,7 +2,7 @@
 title: 'Elasticsearch. Установка в базовой конфигурации'
 kbId: 4601
 url: 'https://kb.comindware.ru/article.php?id=4601'
-updated: '2025-10-23 16:30:57'
+updated: '2026-01-26 18:43:50'
 ---
 
 # Elasticsearch. Установка в базовой конфигурации
@@ -162,8 +162,9 @@ xpack.security.transport.ssl:
 
 --8<-- "related_topics_heading.md"
 
-- *[Официальный сайт Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/targz.html)* (английский язык)
-- *[Установка и настройка Elasticsearch без сертификатов подлинности][elasticsearch_cluster_deploy_no_certificates]*
-- *[Установка, запуск, инициализация и остановка ПО {{ productName }}][deploy_guide_linux]*
+- [Официальный сайт Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/targz.html) (английский язык)
+- [Установка и настройка Elasticsearch без сертификатов подлинности][elasticsearch_cluster_deploy_no_certificates]
+- [OpenSearch (Elasticsearch). Настройка разрешений][opensearch_permissions]
+- [Установка, запуск, инициализация и остановка ПО {{ productName }}][deploy_guide_linux]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

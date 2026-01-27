@@ -1,4 +1,4 @@
-<h1>HTTP-запросы POST. Отправка JSON-данных и обработка ответа с помощью C#-скриптов. Настройка подключения, пути передачи данных и сценария</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5141" kb-tags="C#,HTTP-запрос,JSON,POST-запрос,интеграция,интеграции,подключения,сценарии" kb-title="HTTP-запросы POST. Отправка JSON-данных и обработка ответа с помощью C#-скриптов. Настройка подключения, пути передачи данных и сценария">
+<h1>HTTP-запросы POST. Отправка JSON/XML и обработка ответа с помощью C#-скриптов. Настройка подключения, пути передачи данных и сценария</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5141" kb-tags="C#,HTTP-запрос,JSON,POST-запрос,интеграция,интеграции,подключения,сценарии" kb-title="HTTP-запросы POST. Отправка JSON/XML и обработка ответа с помощью C#-скриптов. Настройка подключения, пути передачи данных и сценария">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -82,8 +82,7 @@
 <article class="md-content__inner md-typeset">
 <h2 id="http_send_example_csharp_introduction">Введение</h2>
 <p><strong>Comindware Platform</strong> позволяет отправлять HTTP-запросы типов <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code> с помощью сценариев для взаимодействия с внешними системами.</p>
-<p>Здесь представлен пример настройки подключения, пути передачи данных и <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4717">сценария</a> для отправки HTTP-запросов <code>POST</code> с использованием C#-скриптов и записи данных из ответа сервера в формате JSON в атрибуты шаблона записи.</p>
-<p>Настройка для обработки данных в формате XML и простого текста будет аналогичной.</p>
+<p>Здесь представлен пример настройки подключения, пути передачи данных и <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4717">сценария</a> для отправки HTTP-запросов <code>POST</code> с использованием C#-скриптов и записи данных из ответа сервера в формате JSON или XML в атрибуты шаблона записи.</p>
 <div class="notice notice-warning">
 <p class="admonition-title">Внимание!</p>
 <p>Модели данных классов в C#-скриптах и в пути передачи данных должны совпадать, в противном случае данные не будут сопоставлены и не будут передаваться.</p>
@@ -116,12 +115,18 @@
 </ul>
 </li>
 <li>
-<p>Запрос содержит данные позиций в формате JSON вида:</p>
+<p>Запрос содержит данные позиций в форматах JSON или XML вида:</p>
+<p><strong>JSON</strong>:</p>
 <div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"orderNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="nt">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"int"</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code><span class="w">    </span><span class="p">]</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>XML</strong>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nt">&lt;orderNumber&gt;</span>string<span class="nt">&lt;/orderNumber&gt;</span></code> <br/><code><span class="nt">&lt;items&gt;</span></code> <br/><code><span class="w">    </span><span class="nt">&lt;item&gt;</span></code> <br/><code><span class="w">        </span><span class="nt">&lt;product&gt;</span>string<span class="nt">&lt;/product&gt;</span></code> <br/><code><span class="w">        </span><span class="nt">&lt;quantity&gt;</span>int<span class="nt">&lt;/quantity&gt;</span></code> <br/><code><span class="w">    </span><span class="nt">&lt;/item&gt;</span></code> <br/><code><span class="nt">&lt;/items&gt;</span></code> <br/></pre></code></div>
 </li>
 <li>
-<p>В ответ на запрос сервер возвращает JSON-ответ вида:</p>
+<p>В ответ на запрос сервер возвращает ответ в форматах JSON и XML вида:</p>
+<p><strong>JSON</strong>:</p>
 <div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>XML</strong>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nt">&lt;status&gt;</span>string<span class="nt">&lt;/status&gt;</span></code> <br/></pre></code></div>
 </li>
 </ul>
 <h2 class="pageBreakBefore" id="http_send_example_csharp_connection">Настройка подключения</h2>
@@ -206,8 +211,30 @@
 <p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка интеграции в свойствах пути передачи данных для отправки HTTP-запросов" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/send_http_example_csharp_integration_settings.png"/><figcaption class="caption">Настройка интеграции в свойствах пути передачи данных для отправки HTTP-запросов</figcaption></figure></p>
 </li>
 <li>
-<p><strong>Атрибуты для десериализации ответа без ошибки</strong> и <strong>Атрибуты для десериализации ответа с ошибкой</strong> — создайте одну строку в каждой таблице и введите символ <code>$</code> в столбцы «<strong>Путь к атрибуту</strong>» и «<strong>Выражение на языке запросов</strong>». Этот символ обозначает передачу всей структуры <code>JSON</code>.</p>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка атрибутов для десериализации ответа в пути передачи данных для отправки HTTP-запросов" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/send_http_example_csharp_attribute_serialization_settings.png"/><figcaption class="caption">Настройка атрибутов для десериализации ответа в пути передачи данных для отправки HTTP-запросов</figcaption></figure></p>
+<p><strong>Атрибуты для десериализации ответа без ошибки</strong> и <strong>Атрибуты для десериализации ответа с ошибкой</strong> — создайте одну строку в каждой таблице:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Формат данных</th>
+<th>Путь к атрибуту</th>
+<th>Выражение на языке запросов</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>JSON</strong></td>
+<td><code>$</code></td>
+<td><code>$</code></td>
+</tr>
+<tr>
+<td><strong>XML</strong></td>
+<td><code>$</code></td>
+<td><code>/</code></td>
+</tr>
+</tbody>
+</table>
+<p>Символы <code>$</code> и <code>/</code> обозначают передачу и полный маппинг всей структуры <code>JSON</code> / <code>XML</code>.</p>
+<p>В качестве альтернативы можно указать необходимые структуры с помощью выражений на <code>JPATH</code> или <code>XPATH</code></p>
 </li>
 </ul>
 <h2 class="pageBreakBefore" id="http_send_example_csharp_scenario">Настройка сценария отправки HTTP-запроса</h2>

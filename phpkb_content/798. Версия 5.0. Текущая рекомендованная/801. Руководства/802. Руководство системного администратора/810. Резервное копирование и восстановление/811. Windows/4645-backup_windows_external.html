@@ -1,29 +1,60 @@
-<h1>Резервное копирование с помощью внешних средств в ОС Windows</h1><p>Запустить резервное копирование по расписанию можно с помощью встроенного инструмента Windows – Планировщика заданий.</p>
-<p><strong>1.</strong> Создайте файл <code>powershell</code> со скриптом для запуска резервного копирования, например <code>backupscript</code><code>.</code><code>ps</code><code>1</code>.</p>
-<p><strong>2.</strong> В созданном файле укажите <code>login</code> — имя пользователя, <code>password</code> — пароль для входа в экземпляр ПО, <code>backupID</code> — идентификатор конфигурации резервного копирования в экземпляре системы. См. раздел <a href="https://kb.comindware.ru/article.php?id=4642"><em>«</em><em>Просмотр списка конфигураций резервного копирования</em></a><em><a href="https://kb.comindware.ru/article.php?id=4642">»</a>.</em></p>
-<pre class="-"><code><span style="font-size: 10.0pt;"># Enter your credential</span></code><br/><code><span style="font-size: 10.0pt;">$login = «admin»</span></code><br/><code><span style="font-size: 10.0pt;">$password = «admin»</span></code><br/><br/><code><span style="font-size: 10.0pt;"># Enter required backup
-configuration ID</span></code><br/><code><span style="font-size: 10.0pt;">$backupID = «backupConfig.1»</span></code><br/><br/><code><span style="font-size: 10.0pt;"># Execution</span></code><br/><code><span style="font-size: 10.0pt;">$localhost = «http://localhost:8081/»</span></code><br/><code><span style="font-size: 10.0pt;">$api = «webapi/backupsession?ConfigurationId=»</span></code><br/><code><span style="font-size: 10.0pt;">$uri = $localhost + $api + $backupID</span></code><br/><br/><code><span style="font-size: 10.0pt;">$WebClient = New-Object System.Net.WebClient</span></code><br/><code><span style="font-size: 10.0pt;">$WebClient.Credentials = New-Object System.Net.NetworkCredential($login, $password)</span></code><br/><code><span style="font-size: 10.0pt;">$WebClient.Encoding = [System.Text.Encoding]::UTF8</span></code><br/><code><span style="font-size: 10.0pt;">$response = $WebClient.UploadString($uri, «POST»,»»)</span></code><br/><code><span style="font-size: 10.0pt;">$response</span></code></pre>
-<div> </div>
-<p><strong>3.</strong> Откройте Планировщик заданий. До этого удостоверьтесь, что служба планировщика запускается автоматически.</p>
-<p><strong>4.</strong> Откройте раздел «<strong>Windows</strong>».</p>
-<p><strong>5.</strong> Создайте новую задачу, нажав кнопку «<strong>Создать задачу</strong>».</p>
-<div class="screenshot_with_caption" style="font-size: 15px !important;">
-<p><img alt="Планировщик заданий" class="img-responsive" height="423" src="https://kb.comindware.ru/assets/img_63bbd8e851cae.png" width="787"/></p>
-<p class="caption" style="font-size: 15px !important;">Планировщик заданий</p>
+<h1>Резервное копирование с помощью внешних средств в ОС Windows</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4645" kb-tags="Windows,резервное копирование,бэкап,бекап,backup,резервная копия" kb-title="Резервное копирование с помощью внешних средств в ОС Windows">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<div class="notice notice-warning">
+<p class="admonition-title">Резервное копирование крупных баз данных</p>
+<p>Если размер базы данных превышает 10 ГБ, рекомендуется использовать скрипт резервного копирования на сервере для обеспечения оптимальной производительности резервного копирования и работы <strong>Comindware Platform</strong>.</p>
+<p>Это связано с тем, что резервное копирование больших баз данных встроенными средствами <strong>Comindware Platform</strong> создаёт значительную вычислительную нагрузку и может приводить к снижению производительности.</p>
+<p>См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5140">Настройка и использование скрипта для резервного копирования данных (Linux)</a>»</em>.</p>
+<p>Скрипт резервного копирования следует запросить у <a class="mkdocs_imported_link" href="https://www.comindware.ru/company/contact-us/#tab_support">службы поддержки Comindware</a>.</p>
 </div>
-<p><strong>6.</strong> Укажите имя задачи и условия её выполнения.</p>
-<div class="screenshot_with_caption" style="font-size: 15px !important;">
-<p><img alt="Создание задачи" class="img-responsive" height="480" src="https://kb.comindware.ru/assets/img_63bbd93ec6e19.jpeg" width="631"/></p>
-<p class="caption" style="font-size: 15px !important;">Создание задачи</p>
+<p>Запустить резервное копирование по расписанию можно с помощью встроенного инструмента Windows – Планировщика заданий.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте файл <code>powershell</code> со скриптом для запуска резервного копирования, например <code>backupscript.ps1</code>.</p>
+</li>
+<li>
+<p>В созданном файле укажите <code>login</code> — имя пользователя, <code>password</code> — пароль для входа в экземпляр ПО, <code>backupID</code> — идентификатор конфигурации резервного копирования в экземпляре системы. См. раздел <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642">Просмотр списка конфигураций резервного копирования</a>»</em>.</p>
+<div class="highlight"><code><pre><span></span><code><span class="c1"># Enter your credential</span></code> <br/><code><span class="na">$login</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"admin"</span></code> <br/><code><span class="na">$password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"admin"</span></code> <br/><code></code> <br/><code><span class="c1"># Enter required backup</span></code> <br/><code></code> <br/><code><span class="na">configuration ID</span></code> <br/><code><span class="na">$backupID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"backupConfig.1"</span></code> <br/><code></code> <br/><code><span class="c1"># Execution</span></code> <br/><code><span class="na">$localhost</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"http://localhost:8081/"</span></code> <br/><code><span class="na">$api</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"webapi/backupsession?ConfigurationId="</span></code> <br/><code><span class="na">$uri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">$localhost + $api + $backupID</span></code> <br/><code></code> <br/><code><span class="na">$WebClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">New-Object System.Net.WebClient</span></code> <br/><code><span class="na">$WebClient.Credentials</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">New-Object System.Net.NetworkCredential($login, $password)</span></code> <br/><code><span class="na">$WebClient.Encoding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">[System.Text.Encoding]::UTF8</span></code> <br/><code><span class="na">$response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">$WebClient.UploadString($uri, "POST","")</span></code> <br/><code><span class="na">$response</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Откройте Планировщик заданий. До этого удостоверьтесь, что служба планировщика запускается автоматически.</p>
+</li>
+<li>Откройте раздел «<strong>Windows</strong>».</li>
+<li>
+<p>Создайте новую задачу, нажав кнопку «<strong>Создать задачу</strong>».</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Планировщик заданий" src="https://kb.comindware.ru/assets/img_63bbd8e851cae.png"/><figcaption class="caption">Планировщик заданий</figcaption></figure></p>
+</li>
+<li>
+<p>Укажите имя задачи и условия её выполнения.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Создание задачи" src="https://kb.comindware.ru/assets/img_63bbd93ec6e19.jpeg"/><figcaption class="caption">Создание задачи</figcaption></figure></p>
+</li>
+<li>
+<p>Перейдите на вкладку «<strong>Действия</strong>» и нажмите кнопку «<strong>Создать</strong>». В поле «<strong>Программа или сценарий</strong>» укажите программу, с помощью которой будет запущен скрипт. В поле «<strong>Добавить аргументы</strong>» укажите путь к файлу со скриптом.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Создание действия" src="https://kb.comindware.ru/assets/img_63bbd9aa494e5.png"/><figcaption class="caption">Создание действия</figcaption></figure></p>
+</li>
+<li>
+<p>Перейдите на вкладку «<strong>Триггеры</strong>» и нажмите кнопку «<strong>Создать</strong>».</p>
+</li>
+<li>
+<p>Составьте расписание, по которому будет запускаться скрипт.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Создание расписания" src="https://kb.comindware.ru/assets/img_63bbda3654a2d.png"/><figcaption class="caption">Создание расписания</figcaption></figure></p>
+</li>
+</ol>
+</article>
 </div>
-<p><strong>7.</strong> Перейдите на вкладку «<strong>Действия</strong>» и нажмите кнопку «<strong>Создать</strong>». В поле «<strong>Программа или сценарий</strong>» укажите программу, с помощью которой будет запущен скрипт. В поле «<strong>Добавить аргументы</strong>» укажите путь к файлу со скриптом.</p>
-<div class="screenshot_with_caption" style="font-size: 15px !important;">
-<p><img alt="Создание действия" class="img-responsive" height="500" src="https://kb.comindware.ru/assets/img_63bbd9aa494e5.png" width="454"/></p>
-<p class="caption" style="font-size: 15px !important;">Создание действия</p>
 </div>
-<p><strong>8.</strong> Перейдите на вкладку «<strong>Триггеры</strong>» и нажмите кнопку «<strong>Создать</strong>».</p>
-<p><strong>9.</strong> Составьте расписание, по которому будет запускаться скрипт.</p>
-<div class="screenshot_with_caption" style="font-size: 15px !important;">
-<p><img class="img-responsive" src="https://kb.comindware.ru/assets/img_63bbda3654a2d.png"/></p>
-<p class="caption" style="font-size: 15px !important;">Создание расписания</p>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
 </div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

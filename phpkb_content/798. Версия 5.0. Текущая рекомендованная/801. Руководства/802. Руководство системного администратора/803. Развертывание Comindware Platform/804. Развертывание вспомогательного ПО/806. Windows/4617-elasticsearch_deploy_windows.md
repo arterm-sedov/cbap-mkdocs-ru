@@ -2,7 +2,7 @@
 title: 'Elasticsearch. Установка в базовой конфигурации для Windows'
 kbId: 4617
 url: 'https://kb.comindware.ru/article.php?id=4617'
-updated: '2025-12-03 12:06:10'
+updated: '2026-01-26 18:43:57'
 ---
 
 # Elasticsearch. Установка в базовой конфигурации для Windows
@@ -189,5 +189,6 @@ ingest.geoip.downloader.enabled: false
 
 - [Установка, запуск, инициализация и остановка ПО в Windows][deploy_guide_windows]
 - [Пути и содержимое директорий экземпляра ПО][paths_windows]
+- [OpenSearch (Elasticsearch). Настройка разрешений][opensearch_permissions]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

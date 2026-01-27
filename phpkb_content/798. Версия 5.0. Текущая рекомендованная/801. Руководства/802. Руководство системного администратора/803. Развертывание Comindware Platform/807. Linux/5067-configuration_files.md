@@ -2,7 +2,7 @@
 title: 'Конфигурация экземпляра, компонентов ПО и служб. Настройка'
 kbId: 5067
 url: 'https://kb.comindware.ru/article.php?id=5067'
-updated: '2025-12-12 14:02:24'
+updated: '2026-01-26 18:43:26'
 ---
 
 # Конфигурация экземпляра, компонентов ПО и служб. Настройка
@@ -178,7 +178,7 @@ db.workDir: /var/lib/comindware/<instanceName>/Database
 # Устаревшая директива: databaseName
 db.name: <instanceName>
 # Вес узла (целочисленное значение) с точки зрения кластера Apache Ignite.
-# Суммарный вес всех узлов должен превышать 100.
+# Суммарный вес всех узлов не должен превышать 100.
 # Значение по умолчанию: 100/кол-во узлов.
 #db.weight:
 # Префикс кэшей в базе данных, используемый при обновлении.
@@ -740,7 +740,8 @@ log.folder: /var/log/comindware/<instanceName>/Logs/
 
 --8<-- "related_topics_heading.md"
 
-- *[Пути и содержимое директорий экземпляра ПО][paths]*
-- *[Настройка конфигурации вспомогательного ПО для оптимизации работы {{ productName }}][auxiliary_software_optimize]*
+- [Пути и содержимое директорий экземпляра ПО][paths]
+- [Настройка конфигурации вспомогательного ПО для оптимизации работы {{ productName }}][auxiliary_software_optimize]
+- [OpenSearch (Elasticsearch). Настройка разрешений][opensearch_permissions]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
