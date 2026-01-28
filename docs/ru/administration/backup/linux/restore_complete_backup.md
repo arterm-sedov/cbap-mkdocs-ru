@@ -110,11 +110,27 @@ kbId: 4648
     chmod -R 755 /var/lib/comindware/<instancename>/Database/
     ```
 
-8. Назначьте перенесенным папкам владельца `www-data`:
+8. Назначьте перенесённым папкам владельца:
 
-    ```
+    **Astra Linux, Debian, DEB-дистрибутивы**
+
+    ``` sh
     chown -R www-data:www-data /var/lib/comindware/<instancename>/Database/Streams/
     chown -R www-data:www-data /var/lib/comindware/<instancename>/Database/
+    ```
+
+    **РЕД ОС, RPM-дистрибутивы**
+
+    ``` sh
+    chown -R nginx:nginx /var/lib/comindware/<instancename>/Database/Streams/
+    chown -R nginx:nginx /var/lib/comindware/<instancename>/Database/
+    ```
+
+    **Альт Сервер**
+
+    ``` sh
+    chown -R _nginx:_nginx /var/lib/comindware/<instancename>/Database/Streams/
+    chown -R _nginx:_nginx /var/lib/comindware/<instancename>/Database/
     ```
 
 ## Восстановление индексов {{ openSearchVariants }} из резервной копии репозитория

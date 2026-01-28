@@ -39,9 +39,9 @@ hide: tags
 !!! tip "Совет"
 
     Такой способ обновления можно использовать, если ПО **{{ productName }}** возможно развернуть **на нескольких машинах**. 
-    
+
     Тогда каждый экземпляр ПО можно обновить последовательно без его остановки.
-    
+
     **Если вы не можете развернуть дополнительную машину**, следуйте инструкции _«[Обновление версии экземпляра ПО с его остановкой][upgrade_version_linux]»_.
 
 ## Порядок обновления версии экземпляра ПО {: .pageBreakBefore }
@@ -101,7 +101,7 @@ hide: tags
 
 3. Скопируйте файлы конфигурации во внешнее хранилище:
 
-    - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+    - **Astra Linux, Debian, DEB-дистрибутивы**
 
     ``` sh
     cd /var/www/<instanceName>/
@@ -111,7 +111,7 @@ hide: tags
     cp /etc/sysconfig/comindware<instanceName>-env <config_backup_path>
     ```
 
-    - **РЕД ОС**, **Rocky** (RPM-based)
+    - **РЕД ОС, RPM-дистрибутивы**
 
     ``` sh
     cd /var/www/<instanceName>/
@@ -152,13 +152,13 @@ hide: tags
 
 3. Обновите библиотеки `librdkafka`:
 
-    - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+    - **Astra Linux, Debian, DEB-дистрибутивы**
 
     ``` sh
     dpkg -i *.deb
     ```
 
-    - **РЕД ОС**, **Rocky** (RPM-based)
+    - **РЕД ОС, RPM-дистрибутивы**
 
     ``` sh
     rpm -i *.rpm
@@ -254,13 +254,13 @@ hide: tags
 
 3. Отредактируйте конфигурацию NGINX для экземпляра ПО в соответствии с резервной копией, [сохранённой ранее](#upgrade_version_linux_no_stop_old_instance_data_prepare):
 
-    - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+    - **Astra Linux, Debian, DEB-дистрибутивы**
 
         ``` sh
         nano /etc/nginx/sites-available/comindware<instanceName>
         ```
 
-    - **РЕД ОС**, **Rocky** (RPM-based)
+    - **РЕД ОС, RPM-дистрибутивы**
 
         ``` sh
         nano /etc/nginx/conf.d/comindware<instanceName>
@@ -387,13 +387,13 @@ hide: tags
 10. Скопируйте очищенную резервную копию в директорию с базой данных `/var/lib/comindware/<instanceName>/Database/`.
 11. Назначьте владельца директории с базой данных:
 
-    - **Astra Linux, Ubuntu, Debian** (DEB-based)
+    - **Astra Linux, Debian, DEB-дистрибутивы**
 
     ``` sh
     chown -R www-data:www-data /var/lib/comindware/<instanceName>/Database
     ```
 
-    - **РЕД ОС, Rocky** (RPM-based)
+    - **РЕД ОС, RPM-дистрибутивы**
 
     ``` sh
     chown -R nginx:nginx /var/lib/comindware/<instanceName>/Database

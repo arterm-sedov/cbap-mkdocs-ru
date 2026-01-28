@@ -87,7 +87,7 @@ hide: tags
 3. Сохраните резервную копию файлов конфигурации, например в директорию `/var/backups/config_tmp`:
 {: #NginxBackup}
 
-    - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+    - **Astra Linux, Debian, DEB-дистрибутивы**
 
     ``` sh
     mkdir -p /var/backups/config_tmp/
@@ -98,7 +98,7 @@ hide: tags
     cp /usr/share/comindware/configs/instance/<instanceName>.yml /var/backups/config_tmp/
     ```
 
-    - **РЕД ОС**, **Rocky** (RPM-based)
+    - **РЕД ОС, RPM-дистрибутивы**
 
     ``` sh
     mkdir -p /var/backups/config_tmp/
@@ -269,13 +269,13 @@ hide: tags
 
 1. Отредактируйте конфигурацию NGINX для экземпляра ПО в соответствии с резервной копией, [сохранённой ранее](#NginxBackup):
 
-    - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+    - **Astra Linux, Debian, DEB-дистрибутивы**
 
         ``` sh
         nano /etc/nginx/sites-available/comindware<instanceName>
         ```
 
-    - **РЕД ОС**, **Rocky** (RPM-based)
+    - **РЕД ОС, RPM-дистрибутивы**
 
         ``` sh
         nano /etc/nginx/conf.d/comindware<instanceName>
@@ -383,7 +383,24 @@ end="<!-- instance-create-prepare-end -->"
     ``` sh
     cd /var/lib/comindware/<instanceName>/
     chmod -R 777 Database/ 
+    ```
+
+    **Astra Linux, Debian, DEB-дистрибутивы**
+
+    ``` sh
     sudo chown -R www-data:www-data Database/
+    ```
+
+    **РЕД ОС, RPM-дистрибутивы**
+
+    ``` sh
+    sudo chown -R nginx:nginx Database/
+    ```
+
+    **Альт Сервер**
+
+    ``` sh
+    sudo chown -R _nginx:_nginx Database/
     ```
 
 7. Обновите структуру данных.
@@ -479,13 +496,13 @@ end="<!-- instance-create-prepare-end -->"
 
 10.  Назначьте владельца директории с базой данных:
 
-    - **Astra Linux, Ubuntu, Debian** (DEB-based)
+    - **Astra Linux, Debian, DEB-дистрибутивы**
 
     ``` sh
     chown -R www-data:www-data /var/lib/comindware/<instanceName>/Database
     ```
 
-    - **РЕД ОС, Rocky** (RPM-based)
+    - **РЕД ОС, RPM-дистрибутивы**
 
     ``` sh
     chown -R nginx:nginx /var/lib/comindware/<instanceName>/Database

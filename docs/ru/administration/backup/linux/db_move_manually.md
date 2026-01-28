@@ -189,10 +189,27 @@ kbId: 4649
 
 13. Замените права доступа и владельцев папок:
 
-    ```
+    ``` sh
     cd /var/www/
     chmod -R 777 cmw-db/
+    ```
+
+    **Astra Linux, Debian, DEB-дистрибутивы**
+
+    ``` sh
     sudo chown -R www-data:www-data cmw-db/
+    ```
+
+    **РЕД ОС, RPM-дистрибутивы**
+
+    ``` sh
+    sudo chown -R nginx:nginx cmw-db/
+    ```
+
+    **Альт Сервер**
+
+    ``` sh
+    sudo chown -R _nginx:_nginx cmw-db/
     ```
 
 14. Проверьте права доступа и владельцев папок:

@@ -292,13 +292,13 @@ The `{adapterName}` project must implement the `IOutgoingConnectionService` inte
 
 2. Open the NGINX configuration file for editing (`instanceName` — software instance name):
 
-    - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+    - **Astra Linux**, **Debian**, DEB-distros
 
         ``` sh
         nano /etc/nginx/sites-available/comindware<instanceName>
         ```
 
-    - **RED OS**, **Rocky** (RPM-based)
+    - **RED OS**, RPM-distros
 
         ``` sh
         nano /etc/nginx/conf.d/comindware<instanceName>

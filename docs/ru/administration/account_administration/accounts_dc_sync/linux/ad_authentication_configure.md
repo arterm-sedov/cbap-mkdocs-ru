@@ -59,7 +59,7 @@ kbId: 4605
 | Доменное имя                | `<domain.name>`                  |
 | IP-адрес контроллера домена | `<domain.controller.ip.address>` |
 
-## Настройка машины linuxHost с экземпляром ПО для Astra Linux и Ubuntu
+## Настройка машины linuxHost с экземпляром ПО для Astra Linux, Debian, DEB-дистрибутивов
 
 ### Настройка конфигурации Kerberos
 
@@ -131,7 +131,7 @@ kbId: 4605
 
     Здесь `<username>` — любой пользователь домена, для которого известен пароль.
 
-## Настройка машины linuxHost с экземпляром ПО для Rocky Linux {: .pageBreakBefore }
+## Настройка машины linuxHost с экземпляром ПО для РЕД ОС и RHL-дистрибутивов {: .pageBreakBefore }
 
 ### Настройка конфигурации Kerberos
 
