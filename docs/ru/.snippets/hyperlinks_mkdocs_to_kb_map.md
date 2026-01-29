@@ -759,6 +759,8 @@
 
 [pages_setup]: {{ kbArticleURLPrefix }}4810
 
+[pages_setup_timeline]: {{ kbArticleURLPrefix }}4810#pages_setup_timeline
+
 [process_diagram]: {{ kbArticleURLPrefix }}4721
 
 [process_diagram_call_element_menu]: {{ kbArticleURLPrefix }}4721#process_diagram_call_element_menu
