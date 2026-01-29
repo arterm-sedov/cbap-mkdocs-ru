@@ -177,7 +177,13 @@ _![Запуск резервного копирования экземпляра
 
     ```
 
-    **Альт Сервер, РЕД ОС, RPM-дистрибутивы**
+    **РЕД ОС, RPM-дистрибутивы**
+
+    ``` sh
+    sh install.sh -e -p -k -d=clear -u=nginx -g=nginx -i=<instanceName>
+    ```
+
+    **Альт Сервер**
 
     ``` sh
     sh install.sh -e -p -k -d=clear -u=_nginx -g=_nginx -i=<instanceName>
@@ -209,7 +215,13 @@ _![Запуск резервного копирования экземпляра
     chown -R www-data:www-data /var/lib/comindware/
     ```
 
-    **Альт Сервер, РЕД ОС, RPM-дистрибутивы**
+    **РЕД ОС, RPM-дистрибутивы**
+
+    ``` sh
+    chown -R nginx:nginx /var/lib/comindware/
+    ```
+
+    **Альт Сервер**
 
     ``` sh
     chown -R _nginx:_nginx /var/lib/comindware/
