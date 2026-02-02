@@ -250,7 +250,7 @@ hide: tags
 
 3. Установите следующие директивы:
 
-    - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+    - **Astra Linux, Debian, DEB-дистрибутивы**
 
     ``` systemd
     www-data soft nproc 200000
@@ -259,7 +259,7 @@ hide: tags
     www-data hard nofile 200000
     ```
 
-    - **РЕД ОС**, **Rocky** (RPM-based)
+    - **РЕД ОС, RPM-дистрибутивы**
 
     ``` systemd
     nginx soft nproc 200000

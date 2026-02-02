@@ -73,7 +73,7 @@ hide: tags
 
 1. Создайте директорию, в которой будут сохраняться резервные копии. Для этой директории предоставьте разрешения на полный доступ, чтобы система могла сохранять в неё резервные копии, например:
 
-    **Astra Linux, Ubuntu, Rocky**
+    **Astra Linux, Debian, DEB-дистрибутивы**
 
     ``` sh
     mkdir /var/backups/comindware/<instanceName>
@@ -81,7 +81,15 @@ hide: tags
     chown -R www-data:www-data /var/backups/comindware/<instanceName>
     ```
 
-    **Альт Сервер, РЕД ОС**
+    **РЕД ОС, RPM-дистрибутивы**
+
+    ``` sh
+    mkdir /var/backups/comindware/<instanceName>
+    chmod 777 /var/backups/comindware/<instanceName>
+    chown -R nginx:nginx /var/backups/comindware/<instanceName>
+    ```
+
+    **Альт Сервер**
 
     ``` sh
     mkdir /var/backups/comindware/<instanceName>
@@ -125,7 +133,7 @@ hide: tags
     !!! warning "Внимание!"
 
         Это подключение будет использоваться для конфигураций, настроенных в списке конфигураций резервного копирования.
-        
+
         См. _«[Настройка конфигураций и запуск резервного копирования](#backup_configure_list_view)»_.
 
     ``` yaml
@@ -219,7 +227,7 @@ hide: tags
 !!! note "Примечание"
 
     Здесь представлены инструкции по настройке {{ openSearchVariants }} для Linux.
-    
+
     Настройка для Windows выполняется аналогичным образом с указанием соответствующих путей. Подробные инструкции для Windows см. в документации _{{ openSearchVariants }}_.
 
 !!! warning "Внимание!"
@@ -227,7 +235,7 @@ hide: tags
     - Для корректного резервного копирования данных истории на диск настройте конфигурацию службы {{ openSearchVariants }} и **{{ productName }}** так, чтобы они использовали общую директорию репозитория резервных копий {{ openSearchVariants }}.
 
         - Для этого в директивах `path.repo` и `backup.journalRepository.localDisk.path` укажите директорию, доступную одновременно {{ openSearchVariants }} и **{{ productName }}**:
-        
+
             - либо расположенную на одной машине, где установлены {{ openSearchVariants }} и **{{ productName }}**;
             - либо доступную через сеть для {{ openSearchVariants }} и **{{ productName }}**, если они расположены на разных машинах.
 
@@ -295,7 +303,7 @@ hide: tags
 !!! note "Примечание"
 
     Здесь представлены инструкции по настройке {{ openSearchVariants }} для Linux.
-    
+
     Настройка для Windows выполняется аналогичным образом с указанием соответствующих путей. Подробные инструкции для Windows см. в документации _{{ openSearchVariants }}_.
 
 {% include-markdown ".snippets/s3_warning.md" %}
@@ -396,7 +404,7 @@ hide: tags
                 См. _«[Настройка экземпляра ПО {{ productName }} для хранения резервных копий в S3](#backup_configure_instance_s3)»_.
 
             !!! tip "Совет"
-                
+
                 Настроить более сложную конфигурацию резервного копирования в S3 можно в файле `<instanceName>.yml`. См. _«[Настройка экземпляра ПО {{ productName }} для резервного копирования в дополнительное хранилище S3 по расписанию](#backup_configure_instance_s3_advanced)»_.
             {% endif %}
 
@@ -408,7 +416,7 @@ hide: tags
         !!! warning "Внимание!"
 
             Для резервного копирования журнала транзакций (истории) необходимо настроить экземпляр ПО и службу {{ openSearchVariants }}.
-            
+
             {% if not gostech %}
             См. _«[Настройка резервного копирования данных {{ openSearchVariants }}](#backup_configure_elasticsearch)»_.
             {% endif %}

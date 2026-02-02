@@ -110,10 +110,17 @@ hide: tags
 
 9. Смените владельца директории `apache-ignite`:
 
-    **Astra Linux, Ubuntu, Rocky**
+    **Astra Linux, Debian, DEB-дистрибутивы**
 
     ``` sh
     chown -R www-data:www-data apache-ignite/
+
+    ```
+
+    **РЕД ОС, RPM-дистрибутивы**
+
+    ``` sh
+    chown -R nginx:nginx apache-ignite/
 
     ```
 
@@ -143,11 +150,16 @@ hide: tags
 
 13. Смените владельца директории `backups`:
 
-    **Astra Linux, Ubuntu, Rocky**
+    **Astra Linux, Debian, DEB-дистрибутивы**
 
     ``` sh
-    chown -R www-data:www-data backups/
+    chown -R www-data:www-data backups/   
+    ```
 
+    **РЕД ОС, RPM-дистрибутивы**
+
+    ``` sh
+    chown -R nginx:nginx backups/
     ```
 
     **Альт Сервер**

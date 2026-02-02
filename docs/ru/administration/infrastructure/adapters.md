@@ -331,14 +331,14 @@ _![Пример содержимого архива с исходным кодо
 
 2. Установите пакеты .NET:
 
-    - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+    - **Astra Linux, Debian, DEB-дистрибутивы**
 
         ``` sh
         apt-get update
         apt-get install -y dotnet-sdk-8.0
         ```
 
-    - **РЕД ОС**, **Rocky** (RPM-based)
+    - **РЕД ОС, RPM-дистрибутивы**
 
         ``` sh
         dnf install dotnet-sdk-8.0
@@ -353,13 +353,13 @@ _![Пример содержимого архива с исходным кодо
 
 3. Откройте файл конфигурации NGINX для редактирования (`instanceName` — имя экземпляра ПО):
 
-    - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+    - **Astra Linux, Debian, DEB-дистрибутивы**
 
         ``` sh
         nano /etc/nginx/sites-available/comindware<instanceName>
         ```
 
-    - **РЕД ОС**, **Rocky** (RPM-based)
+    - **РЕД ОС, RPM-дистрибутивы**
 
         ``` sh
         nano /etc/nginx/conf.d/comindware<instanceName>

@@ -708,13 +708,13 @@ log.folder: /var/log/comindware/<instanceName>/Logs/
 
 1. Откройте файл конфигурации {{ nginxVariants }} для редактирования:
 
-    - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+    - **Astra Linux, Debian, DEB-дистрибутивы**
 
         ``` sh
         nano /etc/nginx/sites-available/comindware<instanceName>
         ```
 
-    - **РЕД ОС**, **Rocky** (RPM-based)
+    - **РЕД ОС, RPM-дистрибутивы**
 
         ``` sh
         nano /etc/nginx/conf.d/comindware<instanceName>

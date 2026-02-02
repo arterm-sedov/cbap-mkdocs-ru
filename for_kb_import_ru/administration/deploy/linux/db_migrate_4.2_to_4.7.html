@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4621" kb-tags="" kb-title="Перенос базы данных из ПО версии 4.2 для Windows в ПО версии 5 для Linux">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4621" kb-tags="Linux,Windows,апгрейд,база данных,конвертация,миграция,обновление,перенос,4.2 на 5.0" kb-title="Перенос базы данных из ПО версии 4.2 для Windows в ПО версии 5 для Linux">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -195,9 +195,9 @@
 <ol class="colored_numbers_list">
 <li>
 <p>Перейдите в режим суперпользователя:</p>
-<p><strong>Astra Linux, Ubuntu</strong></p>
+<p><strong>Astra Linux, Debian, DEB-дистрибутивы</strong></p>
 <div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>-i</code> <br/></pre></code></div>
-<p><strong>Альт Сервер, РЕД ОС</strong></p>
+<p><strong>Альт Сервер, РЕД ОС, RPM-дистрибутивы</strong></p>
 <div class="highlight"><code><pre><span></span><code>su<span class="w"> </span>-</code> <br/></pre></code></div>
 </li>
 <li>
@@ -206,9 +206,11 @@
 <li>См. <em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622">Установка и запуск Comindware Platform</a></em></li>
 <li>При установке ПО используйте ключ <code>d=clear</code> — установить ПО без демонстрационной базы данных:</li>
 </ul>
-<p><strong>Astra Linux, Ubuntu</strong></p>
+<p><strong>Astra Linux, Debian, DEB-дистрибутивы</strong></p>
 <div class="highlight"><code><pre><span></span><code>sh<span class="w"> </span>install.sh<span class="w"> </span>-e<span class="w"> </span>-p<span class="w"> </span>-k<span class="w"> </span>-d<span class="o">=</span>clear<span class="w"> </span>-u<span class="o">=</span>www-data<span class="w"> </span>-g<span class="o">=</span>www-data<span class="w"> </span>-i<span class="o">=</span>&lt;instanceName&gt;</code> <br/></pre></code></div>
-<p><strong>Альт Сервер, РЕД ОС</strong></p>
+<p><strong>РЕД ОС, RPM-дистрибутивы</strong></p>
+<div class="highlight"><code><pre><span></span><code>sh<span class="w"> </span>install.sh<span class="w"> </span>-e<span class="w"> </span>-p<span class="w"> </span>-k<span class="w"> </span>-d<span class="o">=</span>clear<span class="w"> </span>-u<span class="o">=</span>nginx<span class="w"> </span>-g<span class="o">=</span>nginx<span class="w"> </span>-i<span class="o">=</span>&lt;instanceName&gt;</code> <br/></pre></code></div>
+<p><strong>Альт Сервер</strong></p>
 <div class="highlight"><code><pre><span></span><code>sh<span class="w"> </span>install.sh<span class="w"> </span>-e<span class="w"> </span>-p<span class="w"> </span>-k<span class="w"> </span>-d<span class="o">=</span>clear<span class="w"> </span>-u<span class="o">=</span>_nginx<span class="w"> </span>-g<span class="o">=</span>_nginx<span class="w"> </span>-i<span class="o">=</span>&lt;instanceName&gt;</code> <br/></pre></code></div>
 <p>Здесь <code>&lt;instanceName&gt;</code> — имя экземпляра ПО. Если не указать этот параметр, будет задано стандартное имя экземпляра: <code>cmwdata</code></p>
 </li>
@@ -221,9 +223,11 @@
 </li>
 <li>
 <p>Смените владельца папки <code>/var/lib/comindware/</code>:</p>
-<p><strong>Astra Linux, Ubuntu</strong></p>
+<p><strong>Astra Linux, Debian, DEB-дистрибутивы</strong></p>
 <div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>www-data:www-data<span class="w"> </span>/var/lib/comindware/</code> <br/></pre></code></div>
-<p><strong>Альт Сервер, РЕД ОС</strong></p>
+<p><strong>РЕД ОС, RPM-дистрибутивы</strong></p>
+<div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>nginx:nginx<span class="w"> </span>/var/lib/comindware/</code> <br/></pre></code></div>
+<p><strong>Альт Сервер</strong></p>
 <div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>_nginx:_nginx<span class="w"> </span>/var/lib/comindware/</code> <br/></pre></code></div>
 </li>
 </ol>

@@ -118,22 +118,22 @@ hide:
 
     ``` turtle
     # Импортируем функции для работы с логикой, задачами,
-    # статусами задач, аккаунтами и ролями
+    # статусами задач, шаблонами, аккаунтами и ролями
     @prefix cmw: <http://comindware.com/logics#>.
     @prefix taskStatus: <http://comindware.com/ontology/taskStatus#>.
     @prefix account: <http://comindware.com/ontology/account#>.
     @prefix role: <http://comindware.com/ontology/role#>.
-    @prefix process: <http://comindware.com/ontology/process#>.
+    @prefix container: <http://comindware.com/ontology/container#>.
     {
-        # Получаем шаблон процесса по его системному имени
-        ?process process:alias "СистемноеИмяШаблонаПроцесса".
+        # Получаем шаблон процесса по его системному имени.
+        ?process container:alias "СистемноеИмяШаблонаПроцесса".
         # Получаем аккаунт текущего пользователя из контекста безопасности.
         cmw:securityContext cmw:currentUser ?currentUser.
         # Помещаем массив всех задач в переменную ?item
         # Если выражение используется в таблице задач процесса,
         # то эта строка не требуется, т. к. контекст уже будет задачей.
         ?item a cmw:UserTask.
-        # Начинаем цикл по массиву задач
+        # Начинаем цикл по массиву задач.
         # Фильтруем задачи по конкретному процессу.
         ?item cmw:container ?process.
         # Получаем активные задачи.

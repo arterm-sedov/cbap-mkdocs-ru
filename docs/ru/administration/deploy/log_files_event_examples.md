@@ -1016,7 +1016,7 @@ Stack:
 
 Системная информация:
 
-  Сервер: ubuntu-vm-server-gen2
+  Сервер: vm-server-gen2
 
   База данных: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 

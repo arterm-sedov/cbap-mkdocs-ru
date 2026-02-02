@@ -255,13 +255,13 @@ hide: tags
 
 6. Удостоверьтесь, что существует директория `/var/lib/comindware/<instanceName>`, и задайте её владельца:
 
-    - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+    - **Astra Linux, Debian, DEB-дистрибутивы**
 
         ``` sh
         chown -R www-data: /var/lib/comindware/<instanceName>
         ```
 
-    - **РЕД ОС**, **Rocky** (RPM-based)
+    - **РЕД ОС, RPM-дистрибутивы**
 
         ``` sh
         chown -R nginx: /var/lib/comindware/<instanceName>
@@ -373,7 +373,7 @@ hide: tags
         <property name="messageQueueLimit" value="1024" />
       </bean>
     </property>
-    
+
     ...
 
     <property name="dataRegionConfigurations">
@@ -480,13 +480,13 @@ hide: tags
 
 11. Задайте владельца файла `Workers.config`:
 
-    - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+    - **Astra Linux, Debian, DEB-дистрибутивы**
 
         ``` sh
         chown www-data: /var/www/<instanceName>/Workers.config
         ```
 
-    - **РЕД ОС**, **Rocky** (RPM-based)
+    - **РЕД ОС, RPM-дистрибутивы**
 
         ``` sh
         chown nginx: /var/www/<instanceName>/Workers.config
@@ -528,7 +528,7 @@ hide: tags
       <bean class="org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi">
         <!-- укажите IP-адрес узла N -->
         <property name="localAddress" value="<node_N_IP>" />
-        
+
         ...
 
       </bean>
@@ -542,7 +542,7 @@ hide: tags
       </bean>
     </property>
     ...
-    
+
     ```
 
 5. Откройте файл конфигурации экземпляра ПО для редактирования:
@@ -624,13 +624,13 @@ hide: tags
 
 3. На каждом узле назначьте владельца директории `LocalTemp` на NFS-сервере:
 
-    - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+    - **Astra Linux, Debian, DEB-дистрибутивы**
 
         ``` sh
         chown -R www-data:www-data /mnt/share/<instanceName>/LocalTemp
         ```
 
-    - **РЕД ОС**, **Rocky** (RPM-based)
+    - **РЕД ОС, RPM-дистрибутивы**
 
         ``` sh
         chown -R nginx:nginx /mnt/share/<instanceName>/LocalTemp

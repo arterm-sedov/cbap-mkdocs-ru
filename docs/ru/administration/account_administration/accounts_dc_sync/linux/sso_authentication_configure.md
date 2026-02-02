@@ -125,7 +125,7 @@ _![Настройка свойств сервисного аккаунта дл�
 
 3. Создайте keytab-файл аутентификации `<authuser>.keytab`:
 
-    **Альт Сервер, Astra Linux, Debian**
+    **Astra Linux, Debian, DEB-дистрибутивы**
 
     ``` sh
     ktpass /out <authuser>.keytab /mapuser <authuser> /princ HTTP/<DCName>.<domain.name>@<DOMAIN.NAME> /pass <P@$$W0RD> /crypto RC4-HMAC-NT /ptype KRB5_NT_PRINCIPAL
@@ -164,13 +164,13 @@ _![Настройка свойств сервисного аккаунта дл�
 
 4. Создайте keytab-файл аутентификации `<authuser>.keytab`:
 
-    **Для Rocky Linux**
+    **РЕД ОС, RPM-дистрибутивы**
 
     ```sh
     ktpass /out <authuser>.keytab /mapuser <authuser> /princ HTTP/<DCName>.<domain.name>@<DOMAIN.NAME> /pass <P@$$W0RD> /crypto AES256-SHA1 /ptype KRB5_NT_PRINCIPAL
     ```
 
-    **Для Astra Linux и Ubuntu**
+    **Astra Linux, Debian, DEB-дистрибутивы**
 
     ```sh
     ktpass /out <authuser>.keytab /mapuser <authuser> /princ HTTP/<DCName>.<domain.name>@<DOMAIN.NAME> /pass <P@$$W0RD> /crypto RC4-HMAC-NT /ptype KRB5_NT_PRINCIPAL
@@ -197,20 +197,6 @@ _![Настройка свойств сервисного аккаунта дл�
     kinit -k -t /etc/nginx/sasl/<authuser>.keytab HTTP/<DCName>.<domain.name>
     ```
 
-9. Выдайте права на файл `krb5cc_<id>` (в примере — `krb5cc_991` или `krb5cc_33`, где `991` и `33` — `id` пользователя  `nginx` и `www-data` соответственно):
-
-    **Rocky Linux**
-
-    ``` sh
-    chown -R nginx:nginx /etc/nginx/sasl/krb5cc_991
-
-    ```
-
-    **Astra Linux и Ubuntu**
-
-    ``` sh
-    chown -R www-data:www-data /etc/nginx/sasl/krb5cc_33
-    ```
 
 ## Настройка машины linuxHost с экземпляром ПО {: .pageBreakBefore }
 
@@ -379,7 +365,7 @@ _![Настройка свойств сервисного аккаунта дл�
 2. Отредактируйте файл `krb5.conf` согласно следующему примеру:
 {: .pageBreakInsideAvoid}
 
-    **Astra Linux, Debian**
+    **Astra Linux, Debian, DEB-дистрибутивы**
 
     ``` sh
     #astra/debian-winbind
@@ -660,8 +646,8 @@ _![Окно настройки параметров безопасности б�
 
 --8<-- "related_topics_heading.md"
 
-- _[Аутентификация через Active Directory. Настройка контроллера домена и экземпляра ПО][ad_authentication_configure]_
-- _[Аутентификация через OpenID Connect. Настройка подключения и служб][openid_connection]_
+- [Аутентификация через Active Directory. Настройка контроллера домена и экземпляра ПО][ad_authentication_configure]
+- [Аутентификация через OpenID Connect. Настройка подключения и служб][openid_connection]
 
 </div>
 

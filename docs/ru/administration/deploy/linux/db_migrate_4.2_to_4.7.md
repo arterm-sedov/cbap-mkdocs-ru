@@ -1,6 +1,17 @@
 ---
 title: Перенос базы данных из ПО версии 4.2 для Windows в ПО версии 5 для Linux
 kbId: 4621
+tags:
+    - Linux
+    - Windows
+    - апгрейд
+    - база данных
+    - конвертация
+    - миграция
+    - обновление
+    - перенос
+    - 4.2 на 5.0
+hide: tags
 ---
 
 # Перенос базы данных из ПО версии 4.2 для Windows в ПО версии 5 для Linux {: #db_migrate_4.2_to_5}
@@ -142,13 +153,13 @@ _![Запуск резервного копирования экземпляра
 
 1. Перейдите в режим суперпользователя:
 
-    **Astra Linux, Ubuntu**
+    **Astra Linux, Debian, DEB-дистрибутивы**
 
     ``` sh
     sudo -i
     ```
 
-    **Альт Сервер, РЕД ОС**
+    **Альт Сервер, РЕД ОС, RPM-дистрибутивы**
 
     ``` sh
     su -
@@ -159,14 +170,20 @@ _![Запуск резервного копирования экземпляра
     - См. *[Установка и запуск {{ productName }}][deploy_guide_linux]*
     - При установке ПО используйте ключ `d=clear` — установить ПО без демонстрационной базы данных:
 
-    **Astra Linux, Ubuntu**
+    **Astra Linux, Debian, DEB-дистрибутивы**
 
     ``` sh
     sh install.sh -e -p -k -d=clear -u=www-data -g=www-data -i=<instanceName>
 
     ```
 
-    **Альт Сервер, РЕД ОС**
+    **РЕД ОС, RPM-дистрибутивы**
+
+    ``` sh
+    sh install.sh -e -p -k -d=clear -u=nginx -g=nginx -i=<instanceName>
+    ```
+
+    **Альт Сервер**
 
     ``` sh
     sh install.sh -e -p -k -d=clear -u=_nginx -g=_nginx -i=<instanceName>
@@ -192,13 +209,19 @@ _![Запуск резервного копирования экземпляра
 4. Поместите в папку `/var/lib/comindware/<instanceName>/Database/` содержимое папки с преобразованной базой данных. См. _«[Преобразование базы данных в Windows](#преобразование-базы-данных-в-windows)»_.
 5. Смените владельца папки `/var/lib/comindware/`:
 
-    **Astra Linux, Ubuntu**
+    **Astra Linux, Debian, DEB-дистрибутивы**
 
     ``` sh
     chown -R www-data:www-data /var/lib/comindware/
     ```
 
-    **Альт Сервер, РЕД ОС**
+    **РЕД ОС, RPM-дистрибутивы**
+
+    ``` sh
+    chown -R nginx:nginx /var/lib/comindware/
+    ```
+
+    **Альт Сервер**
 
     ``` sh
     chown -R _nginx:_nginx /var/lib/comindware/

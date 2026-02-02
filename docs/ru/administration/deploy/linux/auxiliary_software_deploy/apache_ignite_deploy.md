@@ -48,42 +48,73 @@ hide: tags
 
 ## Установка {{ apacheIgniteVariants }} {: #apache_ignite_deploy_installation .pageBreakBefore }
 
-1. Скачайте, распакуйте и установите {{ apacheIgniteVariants }} и задайте права:
-    ```sh
+1. Скачайте, распакуйте и установите {{ apacheIgniteVariants }}:
+
+    ``` sh
     wget https://downloads.apache.org/ignite/2.17.0/apache-ignite-2.17.0-bin.zip
     unzip -q apache-ignite-2.17.0-bin.zip
     mv apache-ignite-2.17.0-bin /usr/share/ignite
+    ```
+
+2. Назначьте владельца каталога `/usr/share/ignite`:
+
+    **Astra Linux, Debian, DEB-дистрибутивы**
+
+    ``` sh
     chown -R www-data:www-data /usr/share/ignite
     ```
-2. Установите переменную среды `IGNITE_HOME`, указав путь к папке Ignite без завершающего символа `/`: `export IGNITE_HOME=/usr/share/ignite`
-3. Дополнительные модули для использования Ignite в сочетании с {{ productName }} не требуются.
-4. Скопируйте в папку `/usr/share/ignite` файл `Ignite.config` из папки `/var/www/<instanceName>` (где `<instanceName>` — имя экземпляра ПО).
-5. Пример файла `Ignite.config` представлен в параграфе [«Пример файла конфигурации Ignite»](#apache_ignite_deploy_configuration_example).
-6. Откройте для редактирования скрипт запуска Ignite `ignite.sh`:
+
+    **РЕД ОС, RPM-дистрибутивы**
+
+    ``` sh
+    chown -R nginx:nginx /usr/share/ignite
+    ```
+
+    **Альт Сервер**
+
+    ``` sh
+    chown -R _nginx:_nginx /usr/share/ignite
+    ```
+
+3. Установите переменную среды `IGNITE_HOME`, указав путь к папке Ignite без завершающего символа `/`: `export IGNITE_HOME=/usr/share/ignite`
+4. Дополнительные модули для использования Ignite в сочетании с {{ productName }} не требуются.
+5. Скопируйте в папку `/usr/share/ignite` файл `Ignite.config` из папки `/var/www/<instanceName>` (где `<instanceName>` — имя экземпляра ПО).
+6. Пример файла `Ignite.config` представлен в параграфе [«Пример файла конфигурации Ignite»](#apache_ignite_deploy_configuration_example).
+7. Откройте для редактирования скрипт запуска Ignite `ignite.sh`:
+
     ``` sh
     cd /usr/share/ignite/bin/
     nano ignite.sh
     ```
+
 7. Добавьте в начало скрипта `ignite.sh` следующие строки:
+
     ``` sh
     export "JVM_OPTS=-Xms512m -Xmx4g -XX:MaxDirectMemorySize=1g -Djava.net.preferIPv4Stack=true -XX:+AlwaysPreTouch -XX:+UseG1GC -XX:+ScavengeBeforeFullGC -XX:+DisableExplicitGC -XX:MinHeapFreeRatio=1 -XX:MaxHeapFreeRatio=10 -DIGNITE_QUIET=false -DIGNITE_NO_ASCII=true--add-opens=java.base/jdk.internal.misc=ALL-UNNAMED --add-opens=java.base/sun.nio.ch=ALL-UNNAMED --add-opens=java.management/com.sun.jmx.mbeanserver=ALL-UNNAMED --add-opens=jdk.internal.jvmstat/sun.jvmstat.monitor=ALL-UNNAMED --add-opens=java.base/sun.reflect.generics.reflectiveObjects=ALL-UNNAMED --add-opens=jdk.management/com.sun.management.internal=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.nio=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.base/java.util.concurrent.locks=ALL-UNNAMED --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.invoke=ALL-UNNAMED --add-opens=java.base/java.math=ALL-UNNAMED --add-opens=java.sql/java.sql=ALL-UNNAMED"
     export IGNITE_WORK_DIR=/var/lib/comindware/<instanceName>/Database
     export DEFAULT_CONFIG=/usr/share/ignite/config/Ignite.config
     ```
+
 8. Откройте для редактирования скрипт `control.sh`:
 
     ``` sh
     nano control.sh
     ```
+
 9. Добавьте в скрипт `control.sh` следующие строки:
+
     ``` sh
     DEFAULT_CONFIG=config/Ignite.config
     ```
+
 10. Создайте и откройте для редактирования скрипт `ignite_service_create.sh`. Этот скрипт будет создавать и запускать службу {{ apacheIgniteVariants }}:
+
     ``` sh
     nano ignite_service_create.sh
     ```
+
 11. Введите в скрипт `ignite_service_create.sh` следующие директивы:
+
     ``` sh
     #!/bin/bash
     # create apache ignite daemon service
@@ -95,8 +126,8 @@ hide: tags
     After=network.target
     [Service]
     WorkingDirectory=/usr/share/ignite
-    User=www-data
-    Group=www-data
+    User=<User>
+    Group=<Group>
     PrivateDevices=yes
     ProtectSystem=full
     Type=simple
@@ -112,9 +143,14 @@ hide: tags
     WantedBy=multi-user.target
     Alias=ignite.service
     EOF
+    # Пример соответствия параметров User/Group различным ОС:
+    # Astra Linux, Debian, DEB-дистрибутивы: User=www-data, Group=www-data
+    # РЕД ОС, RPM-дистрибутивы:              User=nginx,   Group=nginx
+    # Альт Сервер:                     User=_nginx,  Group=_nginx
     systemctl daemon-reload
     systemctl enable ignite.service
     ```
+
 12. Инициализируйте и запустите службу {{ apacheIgniteVariants }} с помощью скрипта `ignite_service_create.sh`:
     ``` sh
     bash ignite_service_create.sh
@@ -123,10 +159,13 @@ hide: tags
 ## Запуск {{ apacheIgniteVariants }} {: #apache_ignite_deploy_startup .pageBreakBefore }
 
 1. Запустите службу {{ apacheIgniteVariants }}:
+
     ``` sh
     systemctl start ignite
     ```
+
 2. Проверьте статус узла {{ apacheIgniteVariants }}:
+
     ``` sh
     cd /usr/share/ignite/bin/
     bash control.sh --baseline
@@ -216,8 +255,21 @@ hide: tags
       <jvmDllPath></jvmDllPath>
       <igniteinstanceName>Comindware_Instance2</igniteinstanceName>
       <autoGenerateIgniteinstanceName>false</autoGenerateIgniteinstanceName>
+
 </igniteConfiguration>
 </configuration>
 ```
+
+<div class="relatedTopics" markdown="block">
+
+--8<-- "related_topics_heading.md"
+
+- [Apache Ignite. Дефрагментация и обслуживание кластера][apache_ignite_defragment]
+- [Установка, запуск, инициализация и остановка ПО][deploy_guide_linux]
+- [Создание полной резервной копии без остановки экземпляра ПО][complete_running_instance_backup]
+- [Восстановление базы данных из полной резервной копии][restore_complete_backup]
+- [Оптимизация работы вспомогательного ПО][auxiliary_software_optimize]
+
+</div>
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
