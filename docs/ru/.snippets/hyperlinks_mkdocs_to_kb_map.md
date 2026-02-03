@@ -64,6 +64,12 @@
 
 <!-- Категории в БЗ. Конец -->
 
+[gigachat_api_reference]: https://developers.sber.ru/docs/ru/gigachat/api/reference/rest/gigachat-api
+
+[gigachat_developer_portal]: https://developers.sber.ru/dev
+
+[gigachat_studio_login]: https://developers.sber.ru/studio/login
+
 [legal_policies]: https://www.comindware.ru/policy/
 
 [supportUrl]: https://www.comindware.ru/company/contact-us/#tab_support
