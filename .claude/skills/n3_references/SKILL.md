@@ -1,6 +1,6 @@
 ---
+name: n3_references
 description: Reference files to use when writing about N3/Turtle/RDF/Notation3/Triples
-alwaysApply: false
 ---
 When writing content about Notation3/N3/Turtle/RDF/Triples use the following sources to extract content and code samples:
 

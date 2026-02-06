@@ -1,7 +1,7 @@
 ---
+name: cmwhelp_commit
 description: Apply this rule to git commit messages.
 ---
-
 This rule applies to git commit messages in the version control pane and in the terminal.
 
 Generate the commit message text, but do no add files, stage or push the commit.

@@ -1,5 +1,5 @@
 ---
-alwaysApply: false
+name: n3_tutorial_create_cursor
 description: Reference files to use when writing tutorial about N3/Turtle/RDF/Notation3/Triples
 ---
 
@@ -38,7 +38,7 @@ Generate a complete, standalone N3 (Notation 3/Turtle/RDF) tutorial for Comindwa
 - Platform N3 editor brief intro; glossary of terms
 - Simple HR data query walk‑through (candidate → department or employee → department)
 - Common mistakes mini‑box: missing dot, braces, variable reuse
-- Sources (curated via `@n3_references.mdc`):
+- Sources:
   - `docs/ru/developer_guide/n3/n3_tutorial.md` — baseline tutorial narrative
   - `docs/ru/developer_guide/n3/n3_guide.md` — syntax, five query types, built‑ins, I/O matrix
   - `docs/ru/developer_guide/n3/n3_notation.md` — N3 notation fundamentals
