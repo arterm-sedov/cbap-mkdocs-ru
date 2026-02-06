@@ -53,7 +53,7 @@ hide: tags
 4. [Настроить путь передачи данных в LLM](#ai_feature_guide_route_configure).
 5. [Настроить сценарий для работы с LLM](#ai_feature_guide_agents).
 
-_![Пример чата с ИИ с настроенным сценарием](img/ai_features_guide_chat_scenario.png)_
+_![Пример чата с ИИ и настроенного для него сценария](img/ai_features_guide_chat_scenario.png)_
 
 ## Компиляция адаптера для LLM {: #ai_feature_guide_adapter_compile .pageBreakBefore }
 
@@ -176,7 +176,7 @@ _![Пример чата с ИИ с настроенным сценарием](i
     Остальные чаты служат для прямого общения с LLM и не влияют на **{{ productName }}**.
 
 
-    _![Пример сценария для работы с чатом через LLM](img/ai_features_guide_scenario.png)_
+_![Пример сценария для работы с чатом через LLM](img/ai_features_guide_scenario.png)_
 
 ### Предварительные условия {: #ai_feature_guide_agents_prerequisites }
 
