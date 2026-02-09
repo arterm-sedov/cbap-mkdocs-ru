@@ -115,3 +115,7 @@ For H1 generate a concise semantic anchor in English (might be similar to filena
 For H2-H6 generate a concise semantic anchors with H1 anchor as a prefix:
 
 {: #article_name_heading_name }
+
+## Commit messages
+
+Follow the commit message rules given here: .cursor/rules/cmwhelp_commit.md

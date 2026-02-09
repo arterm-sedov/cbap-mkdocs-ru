@@ -4,4 +4,4 @@ description: Apply this rule to git commit messages.
 ---
 This rule applies to git commit messages in the version control pane and in the terminal.
 
-Read the complete rule here: ../../../.cursor/rules/cmwhelp_commit.md
+Follow the commit message rules given here: .cursor/rules/cmwhelp_commit.md
