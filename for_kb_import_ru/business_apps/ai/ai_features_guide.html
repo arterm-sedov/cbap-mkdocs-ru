@@ -1,0 +1,1073 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="" kb-tags="AI,JSON,LLM,low-code-агенты,адаптер ИИ,ассистент,БЯМ,искусственный интеллект,кнопки,операции,подключения,пути передачи данных,чат,чат-бот" kb-title="Работа с ИИ. Настройка адаптера, low-code-агентов и тестирование">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ai_feature_guide_intro">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ai_feature_guide_sequence">
+<span class="md-ellipsis">
+      Порядок настройки взаимодействия с LLM
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ai_feature_guide_adapter_compile">
+<span class="md-ellipsis">
+      Компиляция адаптера для LLM
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ai_feature_guide_connection_configure">
+<span class="md-ellipsis">
+      Настройка подключения к LLM
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ai_feature_guide_adapter_api_key">
+<span class="md-ellipsis">
+      Получение ключа API для работы с LLM
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ai_feature_guide_route_configure">
+<span class="md-ellipsis">
+      Настройка пути передачи данных для LLM
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ai_feature_guide_agents">
+<span class="md-ellipsis">
+      Построение ИИ-агента
+    </span>
+</a>
+<nav aria-label="Построение ИИ-агента" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ai_feature_guide_agents_logic">
+<span class="md-ellipsis">
+      Логика работы ИИ-агента
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ai_feature_guide_agents_prerequisites">
+<span class="md-ellipsis">
+      Предварительные условия
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ai_feature_guide_agents_scenario_actions">
+<span class="md-ellipsis">
+      Порядок настройки сценария для работы с чатом
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ai_feature_guide_debug_testing">
+<span class="md-ellipsis">
+      Отладка операций без подключения к LLM
+    </span>
+</a>
+<nav aria-label="Отладка операций без подключения к LLM" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ai_feature_guide_debug_enable">
+<span class="md-ellipsis">
+      Включение режима отладки
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ai_feature_guide_json_examples">
+<span class="md-ellipsis">
+      Примеры JSON-структур операций для отладки и использования в сценариях
+    </span>
+</a>
+<nav aria-label="Примеры JSON-структур операций для отладки и использования в сценариях" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ai_feature_guide_json_examples_open_instance">
+<span class="md-ellipsis">
+      Открыть конкретную запись в определённой форме
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ai_feature_guide_json_examples_open_instance">
+<span class="md-ellipsis">
+      Нажать кнопку за пользователя
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ai_feature_guide_json_examples_open_list">
+<span class="md-ellipsis">
+      Открыть и отфильтровать определённую таблицу
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ai_feature_guide_json_examples_actualize">
+<span class="md-ellipsis">
+      Актуализация данных с помощью нажатия кнопки в шаблоне
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ai_feature_guide_json_examples_create_record">
+<span class="md-ellipsis">
+      Создание записи
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ai_feature_guide_json_examples_open_task">
+<span class="md-ellipsis">
+      Переход к пользовательской задаче
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ai_feature_guide_full_json_search">
+<span class="md-ellipsis">
+      Поиск записей
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ai_feature_guide_json_examples_dashboard">
+<span class="md-ellipsis">
+      Переход к детализации диаграммы на дашборде
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ai_feature_guide_full_json_navigate_widget">
+<span class="md-ellipsis">
+      Открытие формы и переход к определённому полю
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#ai_feature_guide_limits_and_roadmap">
+<span class="md-ellipsis">
+      Ограничения и планы развития
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="ai_feature_guide_intro">Введение</h2>
+<p><strong>Comindware Platform</strong> поддерживает взаимодействие с LLM и создание чат-ботов, выполняющих команды пользователя на естественном языке.</p>
+<div class="notice notice-success">
+<p class="admonition-title">Определения</p>
+<ul>
+<li><strong>LLM</strong> — большая языковая модель (БЯМ, от англ. large language model). Это алгоритм, построенный на основе нейронных сетей и моделирующий общение на естественном языке. LLM предсказывает наиболее вероятный ответ на входной запрос (промпт), основываясь на данных, заложенных в неё на этапе обучения.</li>
+<li><strong>Промпт</strong> — запрос к LLM, составленный на естественном языке.</li>
+<li><strong>Чат-бот</strong> — это диалоговый агент, взаимодействующий с пользователем через чат на естественном языке, а с LLM и <strong>Comindware Platform</strong> —— посредством <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4717">сценария</a></strong>.</li>
+<li><strong>Чаты с ИИ</strong> — располагаются в панели навигации:<ul>
+<li><strong>Системный чат с ИИ-ассистентом</strong> — это чат, который взаимодействует со сценариями. Он позволяет выстроить взаимодействие между пользователем и <strong>Comindware Platform</strong> в форме диалога.</li>
+<li><strong>Чаты, создаваемые пользователями,</strong> — это чаты, которые не взаимодействуют со сценариями и не обмениваются данными с <strong>Comindware Platform</strong>. В них можно обсуждать произвольные темы, как в обычном чате с ИИ. Их можно перемещать, удалять и переименовывать аналогично обычным разделам навигации. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4824">Использование панели навигации</a>»</em>.</li>
+</ul>
+</li>
+<li><strong>Операции:</strong><ul>
+<li>Помимо текста в чатах используются <strong>операции</strong> — это действия, формируемые сценарием при взаимодействии с чатом. </li>
+<li>Сценарий отправляет одну или несколько операций в чат вместе с ответом на запрос пользователя.</li>
+<li>В чате операции отображаются в виде кнопок.</li>
+<li>Нажав кнопку в чате, пользователь выполнит назначенную ей операцию в <strong>Comindware Platform</strong>, например откроет запись или таблицу.</li>
+<li>Первая операция, отправленная сценарием в чат, выполняется автоматически, даже если пользователь не нажал соответствующую кнопку.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="notice notice-warning">
+<p class="admonition-title">Логика взаимодействия с LLM</p>
+<p>Взаимодействие между пользователем, чатом, большой языковой моделью в <strong>Comindware Platform</strong> происходит следующим образом:</p>
+<ul>
+<li>Запускается сценарий по любому событию:<ul>
+<li>пользователь отправил сообщение в чат;</li>
+<li>поступило электронное письмо;</li>
+<li>нажата кнопка;</li>
+<li>поступил HTTP-запрос;</li>
+<li>токен вошёл или вышел из элемента диаграммы процесса и т. п.</li>
+</ul>
+</li>
+<li>Сценарий получает сообщение из чата или иные данные в зависимости от запустившего его события.</li>
+<li>Сценарий анализирует входные данные.</li>
+<li>Сценарий формирует и отправляет запрос в LLM (промпт), при включив в него необходимые бизнес-данные для обработки с помощью LLM.</li>
+<li>LLM анализирует запрос и выдаёт ответ согласно промпту в требуемом формате. Например, LLM классифицирует заявку и выдаёт её категорию.</li>
+<li>Сценарий получает и обрабатывает ответ от LLM.</li>
+<li>На основе ответа LLM сценарий выполняет действия согласно бизнес-логике.</li>
+<li>При необходимости сценарий возвращает в чат ответ. Ответ в чате может содержать как текст, так кнопки для взаимодействия с <strong>Comindware Platform</strong>.</li>
+</ul>
+</div>
+<p>Здесь представлены инструкции по настройке и использованию функций LLM в <strong>Comindware Platform</strong>:</p>
+<ul>
+<li><a class="mkdocs_imported_link" href="#ai_feature_guide_sequence">Подготовка к работе</a> — компиляция адаптера, настройка подключения, получение ключа API для языковой модели (LLM), настройка пути передачи данных.</li>
+<li><a class="mkdocs_imported_link" href="#ai_feature_guide_agents">Построение ИИ-агента</a> — настройка сценария для взаимодействия с LLM.</li>
+<li><a class="mkdocs_imported_link" href="#ai_feature_guide_debug_testing">Отладка операций</a> — проверка работы операций в чате без взаимодействия с LLM.</li>
+<li><a class="mkdocs_imported_link" href="#ai_feature_guide_json_examples">Примеры JSON для операций</a> — справочник с готовыми JSON-схемами операций, которые можно выполнять в чате, для решения различных бизнес-задач.</li>
+</ul>
+<h2 id="ai_feature_guide_sequence">Порядок настройки взаимодействия с LLM</h2>
+<p>Для работы с языковыми моделями в <strong>Comindware Platform</strong> необходимо подготовить систему:</p>
+<ol class="colored_numbers_list">
+<li><a class="mkdocs_imported_link" href="#ai_feature_guide_adapter_compile">Скомпилировать адаптер для LLM</a>.</li>
+<li><a class="mkdocs_imported_link" href="#ai_feature_guide_connection_configure">Настроить подключение к LLM</a>.</li>
+<li><a class="mkdocs_imported_link" href="#ai_feature_guide_adapter_api_key">Получить ключ API LLM</a></li>
+<li><a class="mkdocs_imported_link" href="#ai_feature_guide_route_configure">Настроить путь передачи данных в LLM</a>.</li>
+<li><a class="mkdocs_imported_link" href="#ai_feature_guide_agents">Настроить сценарий для работы с LLM</a>.</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример чата с ИИ и настроенного для него сценария" src="/platform/v5.0/business_apps/ai/img/ai_features_guide_chat_scenario.png"/><figcaption class="caption">Пример чата с ИИ и настроенного для него сценария</figcaption></p>
+</figure>
+<h2 class="pageBreakBefore" id="ai_feature_guide_adapter_compile">Компиляция адаптера для LLM</h2>
+<p>Получите у <strong>Comindware</strong> файл с исходным кодом адаптера (например, <code>AIAdapter.zip</code>).</p>
+<ol class="colored_numbers_list">
+<li>На странице «<strong>Администрирование</strong>» выберите пункт «<strong>Инфраструктура</strong>» — «<strong>Адаптеры</strong>» <i class="fa-light fa-puzzle-piece-simple">&zwnj;<!--icon--></i>.</li>
+<li>В списке адаптеров создайте адаптер.</li>
+<li>Откроется окно свойств адаптера.</li>
+<li>Введите уникальное <strong>системное имя</strong>, например <code>AIAdapter</code>.</li>
+<li>Загрузите файл <code>AIAdapter.zip</code> в поле «<strong>Исходный код адаптера</strong>».</li>
+<li><strong>Сохраните</strong> адаптер.</li>
+<li>Нажмите кнопку «<strong>Опубликовать</strong>», чтобы скомпилировать адаптер.</li>
+<li>Удостоверьтесь, что адаптер успешно скомпилирован и опубликован.</li>
+<li><a class="mkdocs_imported_link" href="#ai_feature_guide_connection_configure">Настройте подключение к LLM</a>.</li>
+</ol>
+<p>См. также <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4672">Адаптеры. Определения, настройка, удаление</a>»</em>.</p>
+<h2 class="pageBreakBefore" id="ai_feature_guide_connection_configure">Настройка подключения к LLM</h2>
+<p>Для взаимодействия с LLM необходимо создать подключение на основе скомпилированного адаптера для LLM.</p>
+<ol class="colored_numbers_list">
+<li>На странице «<strong>Администрирование</strong>» выберите пункт «<strong>Инфраструктура</strong>» — «<strong>Подключения</strong>» <i class="fa-light fa-exchange-alt">&zwnj;<!--icon--></i>.</li>
+<li>Создайте <strong>пользовательское подключение</strong> типа «<strong>AI agent adapter</strong>».</li>
+<li>Введите уникальное <strong>системное имя</strong> (например, <code>LLMConnection</code>) и наглядное <strong>описание</strong> подключения.</li>
+<li>Сохраните подключение.</li>
+<li><a class="mkdocs_imported_link" href="#ai_feature_guide_adapter_api_key">Получите ключ к API</a>.</li>
+</ol>
+<h2 class="pageBreakBefore" id="ai_feature_guide_adapter_api_key">Получение ключа API для работы с LLM</h2>
+<p>Для подключения LLM необходимо получить ключ API.</p>
+<p>Поддерживаются провайдеры GigaChat и OpenRouter.</p>
+<p>Ниже даны инструкции для GigaChat.</p>
+<ol class="colored_numbers_list">
+<li>Перейдите на сайт <a class="mkdocs_imported_link" href="https://developers.sber.ru/dev">https://developers.sber.ru</a>.</li>
+<li>Войдите в личный кабинет через SberID: <a class="mkdocs_imported_link" href="https://developers.sber.ru/studio/login">https://developers.sber.ru/studio/login</a>.</li>
+<li>Откройте проект GigaChat API в личном кабинете Studio.</li>
+<li>В левой панели выберите раздел «<strong>Настройки API</strong>».</li>
+<li>Нажмите кнопку «<strong>Получить ключ</strong>».</li>
+<li>Сохраните ключ в надёжном месте и используйте его при настройке пути передачи данных для LLM.</li>
+<li><a class="mkdocs_imported_link" href="#ai_feature_guide_route_configure">Настройте путь передачи данных</a>.</li>
+</ol>
+<p>См. также <em><a class="mkdocs_imported_link" href="https://developers.sber.ru/docs/ru/gigachat/api/reference/rest/gigachat-api">документацию по API GigaChat</a></em>.</p>
+<h2 id="ai_feature_guide_route_configure">Настройка пути передачи данных для LLM</h2>
+<p>Для преобразования данных между <strong>Comindware Platform</strong> и LLM необходимо настроить путь передачи данных.</p>
+<ol class="colored_numbers_list">
+<li>На странице «<strong>Администрирование</strong>» выберите пункт «<strong>Архитектура</strong>» — «<strong>Пути передачи данных</strong>» <i class="fa-light fa-route">&zwnj;<!--icon--></i>.</li>
+<li>Создайте путь передачи данных типа «<strong>Пользовательские подключения</strong>» — «<strong>AI agent adapter</strong>».</li>
+<li>
+<p>На вкладке «<strong>Основные свойства</strong>»:</p>
+<ul>
+<li>введите уникальное <strong>системное имя</strong> (например, <code>LLMCommunicationRoute</code>)</li>
+<li>введите наглядное <strong>описание</strong> пути передачи данных;</li>
+<li>выберите созданное ранее <strong>подключение</strong> <code>LLMConnection</code>.</li>
+</ul>
+</li>
+<li>
+<p>На вкладке «<strong>Атрибуты сообщений</strong>» выберите <strong>Тип сообщения GigaChat</strong>.</p>
+</li>
+<li>
+<p>Настройте параметры на вкладке «<strong>Интеграции</strong>»:</p>
+<ul>
+<li><strong>Модель (Llm Model)</strong> — имя языковой модели точно в том виде, в котором его предоставляет провайдер, например <code>GigaChat-2</code>.</li>
+<li><strong>Ключ API (Llm API Key)</strong> — полученный ранее ключ для доступа к API языковой модели.</li>
+<li><strong>Эндпоинт авторизации (Llm OAuth Endpoint)</strong> — URL-адрес для аутентификации и авторизации при работе с API. Для GigaChat обычно используется <a class="mkdocs_imported_link" href="https://ngw.devices.sberbank.ru:9443/api/v2/oauth">https://ngw.devices.sberbank.ru:9443/api/v2/oauth</a>.</li>
+<li><strong>Зона авторизации (Llm OAuth Scope)</strong> — набор разрешений при аутентификации через OAuth. Для GigaChat обычно используется <code>GIGACHAT_API_PERS</code>.</li>
+<li><strong>Эндпоинт инференса (Llm Endpoint)</strong> — URL-адрес для взаимодействия c LLM. Для Для GigaChat обычно используется <a class="mkdocs_imported_link" href="https://gigachat.devices.sberbank.ru/api/v1/chat/completions">https://gigachat.devices.sberbank.ru/api/v1/chat/completions</a>.</li>
+</ul>
+</li>
+<li>
+<p>Не устанавливайте флажок «<strong>Использовать режим отладки</strong>» (<strong>ResponseWithMocks</strong>) и не заполняйте поля «<strong>Готовые операции</strong>» (<strong>MockNavigation</strong>) и «<strong>Готовые ответы</strong>» (<strong>MessageToNavigation</strong>).</p>
+<p>Эти поля используются для тестирования взаимодействия сценариев с чатом.</p>
+<p>Подробные инструкции см. в параграфе <em>«<a class="mkdocs_imported_link" href="#ai_feature_guide_debug_enable">Использование режима отладки</a></em>.</p>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="ai_feature_guide_agents">Построение ИИ-агента</h2>
+<h3 id="ai_feature_guide_agents_logic">Логика работы ИИ-агента</h3>
+<p>ИИ-агент в <strong>Comindware Platform</strong> строится на основе <strong>сценария</strong> и работает следующим образом:</p>
+<ol class="colored_numbers_list">
+<li>Пользователь отправляет сообщение в чат с ИИ или нажимает кнопку, назначенную сценарию агента.</li>
+<li>Срабатывает сценарий по событию «<strong>Получение сообщения из чата</strong>» или «<strong>Нажата кнопка</strong>».</li>
+<li>Если сценарий запущен по сообщению из чата, сообщение помещается в переменную в сценарии.</li>
+<li>
+<p>Сценарий формирует промпт для LLM посредством действия «<strong>Изменить значения переменных</strong>».</p>
+<div class="notice notice-tip">
+<p class="admonition-title">Формирование промпта для LLM</p>
+<p>Промпт представляет собой текст с инструкциями и данными для LLM.</p>
+<ul>
+<li>
+<p>Промпт может содержать следующие элементы:</p>
+<ul>
+<li>подробные и наглядные инструкции для LLM на естественном языке:<ul>
+<li>правила обработки и интерпретации входных данных;</li>
+<li>правила форматирования ответа LLM для последующей обработки в сценарии;</li>
+</ul>
+</li>
+<li>входные данные:<ul>
+<li>сообщение из чата;</li>
+<li>данные из <strong>{{ platformName }}</strong>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Для формирования промпта можно использовать <strong>формулы</strong> и выражения на <strong>N3</strong>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Сценарий отправляет сформированный промпт в LLM посредством действия «<strong>Отправить сообщение</strong>».</p>
+</li>
+<li>Сценарий обрабатывает и классифицирует ответ LLM посредством действия «<strong>Выполнить по условиям</strong>».</li>
+<li>Сценарий выполняет требуемые действия в соответствии с требуемой бизнес-логикой.</li>
+<li>
+<p>Если требуется отправить ответ в чат:</p>
+<ol class="colored_numbers_list">
+<li>Сценарий формирует ответ и набор операций для отправки в чат.</li>
+<li>Сценарий отправляет в чат пользователю сообщение с ответом и операциями посредством действия «<strong>Отправить сообщение в чат</strong>».</li>
+<li>Первая операция выполняется автоматически, например заполняется текущая форма.</li>
+<li>Пользователь может выполнить остальные полученные операции, нажав соответствующие кнопки в чате.</li>
+</ol>
+</li>
+</ol>
+<div class="notice notice-success">
+<p class="admonition-title">Операции в чате</p>
+<p>С помощью действия «<strong>Отправить сообщение в чат</strong>» из сценария можно отправить в чат набор операций в дополнение к текстовому сообщению.</p>
+<p><strong>Операции</strong> в чате отображаются в виде кнопок, которые пользователь может нажимать, чтобы выполнить соответствующие действия в <strong>Comindware Platform</strong>.</p>
+<p>Первая операция выполняется автоматически от имени пользователя.</p>
+</div>
+<div class="notice notice-warning">
+<p class="admonition-title">Сценарии и системный чат</p>
+<p>Сценарии работают только с сообщениями в <strong>системном чате</strong>.</p>
+<p>Остальные чаты служат для прямого общения с LLM и не влияют на <strong>Comindware Platform</strong>.</p>
+</div>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример сценария для работы с чатом через LLM" src="/platform/v5.0/business_apps/ai/img/ai_features_guide_scenario.png"/><figcaption class="caption">Пример сценария для работы с чатом через LLM</figcaption></p>
+</figure>
+<h3 id="ai_feature_guide_agents_prerequisites">Предварительные условия</h3>
+<p>Для взаимодействия сценариев с LLM необходимо соблюсти следующие условия:</p>
+<ul>
+<li>настроить адаптер для LLM;</li>
+<li>настроить подключение к LLM;</li>
+<li>настроить путь передачи данных в LLM согласно требованиям провайдера (например, GigaChat).</li>
+</ul>
+<h3 id="ai_feature_guide_agents_scenario_actions">Порядок настройки сценария для работы с чатом</h3>
+<ol class="colored_numbers_list">
+<li>Создайте сценарий в приложении, где требуется взаимодействие с чатом.</li>
+<li>
+<p>Настройте автоматически созданное событие «<strong>Нажата кнопка</strong>» на получение сообщения из чата.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Логика обработки сообщения из чата</p>
+<p>Вы можете создавать персонализированные диалоговые сценарии с учётом контекста пользователя.</p>
+<p>При получении сообщения из чата выполняется следующая последовательность действий:</p>
+<ol class="colored_numbers_list">
+<li>Срабатывает сценарий по событию «<strong>Получение сообщения из чата</strong>».</li>
+<li>Сообщение и ID аккаунта пользователя сохраняются в локальной переменной (например <code>userMessage</code>).</li>
+<li>Далее эта переменная используется при формировании промпта для LLM и обработки ответа LLM.</li>
+</ol>
+</div>
+<ul>
+<li>
+<p>Настройте событие:</p>
+<ul>
+<li><strong>Тип: Получение сообщения из чата</strong>.</li>
+<li><strong>Контекстный шаблон:</strong> любой (не влияет на обработку события и работу сценария).</li>
+<li><strong>Имя переменной</strong> — введите наглядное имя локальной переменной (например <code>userMessage</code>), в которую будут помещены полученное сообщение и ID аккаунта пользователя.</li>
+</ul>
+</li>
+</ul>
+<div class="notice notice-success">
+<p class="admonition-title">Структура переменной с сообщением из чата</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="nt">"Title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Сообщение, введённое пользователем (не заголовок)"</span><span class="p">,</span></code> <br/><code><span class="nt">"Creator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ID аккаунта пользователя, отправившего сообщение"</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</div>
+</li>
+<li>
+<p>Добавьте и настройте действие «<strong>Изменить значения переменных</strong>», чтобы сформировать сообщение для LLM.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Логика формирования промпта для LLM</p>
+<p>Промпт позволяет LLM точно понимать задачу и возвращать структурированный ответ для дальнейшей обработки.</p>
+<p>Промпт для LLM формируется следующим образом:</p>
+<ol class="colored_numbers_list">
+<li>Действие «<strong>Изменить значения переменных</strong>» создаёт локальную переменную.</li>
+<li>Функция <code>FORMAT()</code> динамически формирует текст промпта, включая:</li>
+</ol>
+<ul>
+<li>инструкции для LLM по анализу и классификации намерений пользователя;</li>
+<li>правила обработки различных типов запросов (Клиент, Сделка, Не определено);</li>
+<li>формат ответа (например, одно слово: Клиент/Сделка или True/False);</li>
+<li>исходное сообщение пользователя (из переменной  <code>$$chat_message-&gt;Title</code>);</li>
+<li>любые дополнительные данные из <strong>Comindware Platform</strong> для контекста.</li>
+</ul>
+<ol class="colored_numbers_list" start="3">
+<li>Готовый промпт сохраняется в переменной <code>Message</code> для передачи в LLM.</li>
+</ol>
+</div>
+<ul>
+<li>
+<p>Настройте действие:</p>
+<ul>
+<li>Введите наглядное имя <strong>набора переменных</strong>, например <code>prompt</code>.</li>
+<li>
+<p>Создайте переменную с промптом для LLM:</p>
+<ul>
+<li><strong>Имя переменной:</strong> <code>Message</code>. Это зарезервированное системное имя. Оно должно совпадать с именами атрибутов сообщений в таблицах «<strong>Запрос</strong>» и «<strong>Ответ</strong>» пути передачи данных. См. «<a class="mkdocs_imported_link" href="#ai_feature_guide_route_configure">Настройка пути передачи данных для LLM</a>.</li>
+<li><strong>Значение: формула</strong>, динамически формирующая промпт (инструкции) для LLM, например:</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="o">#</span><span class="w"> </span><span class="err">Пример</span><span class="w"> </span><span class="err">промпта</span><span class="w"> </span><span class="err">для</span><span class="w"> </span><span class="err">классификации</span><span class="w"> </span><span class="err">намерения</span><span class="p">:</span><span class="w"> </span><span class="err">Клиент</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="err">Сделка</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="err">Не</span><span class="w"> </span><span class="err">определено</span></code> <br/><code></code> <br/><code><span class="n">FORMAT</span></code> <br/><code><span class="p">(</span><span class="ss">"</span></code> <br/><code><span class="ss">    Проанализируй входящее сообщение пользователя и определи его намерение: хочет ли он создать Клиента или Сделку.</span></code> <br/><code></code> <br/><code><span class="ss">    Учитывай только явные или косвенные указания на создание одной из этих сущностей. Игнорируй все прочие действия (редактирование, просмотр, удаление, уточнение и т.п.), а также любые дополнительные детали, не относящиеся к выбору между «Клиент» и «Сделка».</span></code> <br/><code></code> <br/><code><span class="ss">    Если в сообщении содержится запрос на создание клиента (например: «создай клиента», «добавь нового клиента», «хочу завести клиента» и т.п.) — ответь строго: Клиент.</span></code> <br/><code></code> <br/><code><span class="ss">    Если в сообщении содержится запрос на создание сделки (например: «создай сделку», «новая сделка», «заведи сделку по клиенту» и т.п.) — ответь строго: Сделка.</span></code> <br/><code></code> <br/><code><span class="ss">    Если намерение неясно или отсутствует — ответь: Не определено.</span></code> <br/><code></code> <br/><code><span class="ss">    Формат ответа: одно слово — Клиент, Сделка или Не определено. Никаких пояснений, преамбул или дополнительных символов.</span></code> <br/><code></code> <br/><code><span class="ss">    Запрос пользователя:</span></code> <br/><code></code> <br/><code><span class="ss">    {0}</span></code> <br/><code><span class="ss">"</span><span class="p">,</span></code> <br/><code><span class="n">LIST</span><span class="p">(</span><span class="err">$$</span><span class="n">chat_message</span><span class="o">-&gt;</span><span class="n">Title</span><span class="p">)</span></code> <br/><code><span class="p">)</span></code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><code>LIST($$userMessage-&gt;Title)</code> — преобразует сообщение из чата в список для подстановки в функцию <code>FORMAT()</code>;</li>
+<li><code>FORMAT()</code> — формирует инструкции (промпт) для LLM и добавляет в него исходное сообщение из чата.</li>
+</ul>
+</li>
+</ul>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Формирование промпта для LLM в сценарии" src="/platform/v5.0/business_apps/ai/img/ai_features_guide_scenario_prompt_format.png"/><figcaption class="caption">Формирование промпта для LLM в сценарии</figcaption></figure></p>
+</li>
+<li>
+<p>Добавьте и настройте действие «<strong>Отправить сообщение</strong>», чтобы передать сформированный промпт в LLM:</p>
+<ul>
+<li><strong>Подключение</strong> — выберите созданное ранее подключение через адаптер AI, например <code>LLMConnection</code>.</li>
+<li><strong>Путь передачи данных</strong> — настроенный ранее путь, например <code>LLMCommunicationRoute</code>.</li>
+<li>Переменная сообщения будет промптом для LLM.</li>
+<li>Переменная для успешного ответа хранит ответ от LLM в виде, например: <code>"response": { "Message": "Ответ LLM" }</code> (в виде простого текста).</li>
+</ul>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка отправки промпта в LLM" src="/platform/v5.0/business_apps/ai/img/ai_features_guide_scenario_send_to_llm.png"/><figcaption class="caption">Настройка отправки промпта в LLM</figcaption></figure></p>
+</li>
+<li>
+<p>Добавьте и настройте действие «<strong>Выполнить по условиям</strong>» для обработки ответа LLM.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Логика обработки ответа LLM</p>
+<p>Вы можете создавать интеллектуальные диалоговые сценарии, где LLM анализирует запрос пользователя и направляет его по требуемому потоку действия (создание клиента, сделки и т. д.).</p>
+<p>В действии «<strong>Выполнить по условиям</strong>» происходит анализ ответа от LLM и принятие решения о дальнейших действиях:</p>
+<ol class="colored_numbers_list">
+<li>LLM возвращает ответ в переменной <code>$$response-&gt;Message</code>.</li>
+<li>Каждое условие проверяет соответствие ответа ожидаемому значению.</li>
+<li>При выполнении условия выполняется соответствующий блок действий.</li>
+<li>Внутри условного блока формируются ответ и операции для отправки в чат.</li>
+</ol>
+</div>
+<ul>
+<li>Создайте два условия:</li>
+</ul>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Название условия</th>
+<th>Выражение (формула)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Создать клиента</td>
+<td><code>$$response-&gt;Message == "Клиент"</code></td>
+</tr>
+<tr>
+<td>Создать сделку</td>
+<td><code>$$response-&gt;Message == "Сделка"</code></td>
+</tr>
+</tbody>
+</table>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Настройка условной обработки ответа LLM" src="/platform/v5.0/business_apps/ai/img/ai_features_guide_scenario_condition.png"/><figcaption class="caption">Настройка условной обработки ответа LLM</figcaption></figure></p>
+</li>
+<li>
+<p>Внутри действия «<strong>Выполнить по условиям</strong>» в блоке каждого условия добавьте и настройте действие «<strong>Изменить значения переменных</strong>», чтобы сформировать операции для отправки в чат.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Логика формирования операций для чата</p>
+<p>Вместе с текстовым сообщением в чат можно передать одну или несколько <strong>операций</strong>.</p>
+<ul>
+<li>Операция представляет собой структурированное описание действия, которое требуется выполнить в <strong>Comindware Platform</strong>.</li>
+<li>Операции отображаются в чате в виде кнопок.</li>
+<li>Кнопки операций исчезают из чата после обновления страницы.</li>
+<li>Операция формируется в виде JSON-структуры, описывающей необходимое действие и сущности для обработки.</li>
+<li>Операции передаются в чат в <strong>массиве</strong> (<strong>наборе переменных</strong>) .</li>
+<li>Сформируйте требуемый массив операций, используя в их JSON различные идентификаторы записей, форм, шаблонов и других сущностей согласно вашей бизнес-логике.</li>
+</ul>
+<p>**Порядок операций в массиве важен: **</p>
+<ul>
+<li>первая операция всегда выполняется автоматически;</li>
+<li>последующие операции пользователь должен выполнять сам, нажимая соответствующие кнопки в чате;</li>
+</ul>
+</div>
+<div class="notice notice-error">
+<p class="admonition-title">Важно! Данные должен сохранять сам пользователь</p>
+<p>Даже если операция автоматически создала запись и открыла форму с ней, пользователь должен сам сохранить созданную запись, нажав соответствующую кнопку на форме.</p>
+<p>Аналогично, если операция откроет пользовательскую задачу, завершить задачу должен сам пользователь.</p>
+<p>Операции в чате не сохраняют данные в <strong>Comindware Platform</strong>.</p>
+</div>
+<p>Настройте действие массив операций:</p>
+<ul>
+<li>Введите наглядное имя <strong>набора переменных</strong>, например <code>actions1</code>. Набор переменных будет содержать массив операций.</li>
+<li>Создайте одну или несколько переменных <code>operation</code> — это зарезервированное системное имя переменной с JSON-структурой операции.</li>
+<li>Для каждой операции в столбце «<strong>Значение</strong>» задайте JSON-структуру, например, с помощью <strong>формулы</strong>:</li>
+</ul>
+<div class="highlight"><span class="filename">Пример JSON-структуры для операции создания новой записи и навигации на её форму</span><code><pre><span></span><code><span class="err">'</span><span class="p">{</span></code> <br/><code><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.NavigateOperation, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Navigate"</span><span class="p">,</span></code> <br/><code><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Создать компанию"</span><span class="p">,</span></code> <br/><code><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.FormNavigationPayload, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Form"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"objectId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cmw.temp.1"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oa.1"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"form"</span><span class="p">:</span><span class="w"> </span><span class="s2">"form.143"</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span><span class="err">'</span></code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><code>$type</code> — классы операции;</li>
+<li><code>type</code> — тип операции;</li>
+<li><code>name</code> — название кнопки, под которым она будет отображаться в чате;</li>
+<li><code>payload</code> — данные операции:<ul>
+<li><code>$type</code> — классы сущности, с которой выполняется операция;</li>
+<li><code>type</code> — тип сущности операции</li>
+<li><code>objectId</code> — ID записи, к которой требуется перейти, или ID несуществующей записи для создания новой записи (например, <code>cmw.temp.1</code>);</li>
+<li><code>template</code> — ID шаблона записи;</li>
+<li><code>form</code> — ID формы, в которой требуется открыть запись.</li>
+</ul>
+</li>
+</ul>
+<div class="notice notice-error">
+<p class="admonition-title">Динамическая подстановка данных в операции</p>
+<p>Чтобы подставить в JSON-структуру операции вычисляемые ID сущностей, можно использовать функцию <code>FORMAT()</code>.</p>
+<p>При этом необходимо экранировать фигурные скобки JSON двойными символами <code>{{</code> и <code>}}</code>, например:</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">FORMAT</span><span class="p">(</span></code> <br/><code><span class="s1">'{{ </span></code> <br/><code><span class="s1">    "$type": "Comindware.Conversation.Entities.NavigateOperation, Comindware.Conversation.Entities",</span></code> <br/><code><span class="s1">    "type": "Navigate", "name": "Карточка звонка", </span></code> <br/><code><span class="s1">    "payload": {{ </span></code> <br/><code><span class="s1">        "$type": "Comindware.Conversation.Entities.FormNavigationPayload, Comindware.Conversation.Entities",</span></code> <br/><code><span class="s1">        "type": "Form", "objectId": {0}, "template": "oa.13", "form": "form.216" </span></code> <br/><code><span class="s1">    }} </span></code> <br/><code><span class="s1">}}'</span><span class="p">,</span></code> <br/><code><span class="n">LIST</span><span class="p">(</span><span class="err">$$</span><span class="k">Call</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">)</span></code> <br/><code><span class="p">)</span></code> <br/></pre></code></div>
+<p>Здесь: <code>LIST($$Call-&gt;id)</code> вычисляет ID записи, к которой операция выполнит переход, а <code>FORMAT(...)</code> подставляет этот ID в заменитель <code>{0}</code>.</p>
+<ul>
+<li>Экранирование фигурных скобок в функции <code>FORMAT()</code> требуется, потому что заменители для подстановки данных заключаются в фигурные скобки, например: <code>{0}</code>.</li>
+<li>Если фигурные скобки JSON в функции <code>FORMAT()</code> не заэкранировать, операция в чате не будет работать.</li>
+<li>Экранирование фигурных скобок JSON требуется только при формировании операции для чата с динамическими данными с помощью функции <code>FORMAT()</code>.</li>
+<li>Экранирование не требуется в следующих случаях (используйте одинарные <code>{</code> и <code>}</code>):<ul>
+<li>в полях <strong>MockNavigation</strong>, <strong>MessageToNavigation</strong> пути передачи данных;</li>
+<li>при формировании JSON операции в виде строкового литерала без подстановки динамических данных и без использования функции <code>FORMAT()</code>.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="notice notice-tip">
+<p class="admonition-title">Формирование операций по системным именам с помощью N3</p>
+<p>С помощью языка <strong>N3</strong> можно сформировать операцию, преобразовав системные имена сущностей в их ID.</p>
+<p>Это может быть полезно, так как системные имена не меняются при переносе приложений на новые экземпляры <strong>Comindware Platform</strong>.</p>
+</div>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Формирование массива операций для передачи в чат" src="/platform/v5.0/business_apps/ai/img/ai_features_guide_scenario_operation_array.png"/><figcaption class="caption">Формирование массива операций для передачи в чат</figcaption></figure></p>
+</li>
+<li>
+<p>Внутри действия «<strong>Выполнить по условиям</strong>» в блоке каждого условия добавьте и настройте действие «<strong>Оправить сообщение в чат</strong>», чтобы сформировать ответ пользователю:</p>
+<ul>
+<li>
+<p><strong>Тело сообщения</strong> — текст, который получит пользователь в чат; можно передать любые текстовые данные, в том числе ответ LLM с предыдущих шагов. Используйте простой текст без форматирования или простейшую разметку Markdown.</p>
+<div class="notice notice-tip">
+<p class="admonition-title">Поддерживаемая разметка Markdown</p>
+<p>В <strong>теле сообщения</strong> можно использовать следующие элементы форматирования Markdown:</p>
+<ul>
+<li><code>**полужирный шрифт**</code></li>
+<li><code>_курсивный шрифт_</code></li>
+<li><code>||спойлер||</code></li>
+<li><code>__подчёркнутый текст__</code></li>
+<li><code>~~перечёркнутый текст~~</code></li>
+<li><code>[гиперссылка](https://address.ru)</code></li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Получатели</strong> — один или несколько ID аккаунтов, пользователи которых получат сообщение в свой системный чат. Другим пользователям сообщение не будет видно.</p>
+</li>
+<li><strong>Имя набора переменных действий чата</strong> — укажите имя набора переменных с операциями (например, <code>actions1</code>).</li>
+</ul>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Формирование и отправка ответа пользователю в чате" src="/platform/v5.0/business_apps/ai/img/ai_features_guide_scenario_send_response.png"/><figcaption class="caption">Формирование и отправка ответа пользователю в чате</figcaption></figure></p>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="ai_feature_guide_debug_testing">Отладка операций без подключения к LLM</h2>
+<p>В пути передачи данных для LLM предусмотрен инструмент для тестирования операций без обращения к LLM.</p>
+<p>См. <em>«<a class="mkdocs_imported_link" href="#ai_feature_guide_route_configure">Настройка пути передачи данных для LLM</a>»</em>.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Логика работы режима отладки</p>
+<p>Режим отладки позволяет имитировать работу с LLM и работает следующим образом:</p>
+<ul>
+<li>Взаимодействие с LLM во всех чатах (включая системный) отключается.</li>
+<li>Все чаты (кроме системного) ожидают ввода определённого ключевого слова, заданного в поле <strong>MessageToNavigation</strong>.</li>
+<li>При вводе в чат ключевой фразы, в чат передаётся соответствующий готовый ответ со следующими компонентами:<ul>
+<li>массив операций, настроенных в поле <strong>MockNavigation</strong>;</li>
+<li>ответ из поля <strong>MessageToNavigation</strong>.</li>
+</ul>
+</li>
+<li>После отправки ответа в чат, автоматически выполняется первая операция, содержавшаяся в ответе.</li>
+</ul>
+</div>
+<h3 id="ai_feature_guide_debug_enable">Включение режима отладки</h3>
+<ol class="colored_numbers_list">
+<li>Откройте путь передачи данных для LLM.</li>
+<li>На вкладке «<strong>Интеграция</strong>»  установите флажок «<strong>Использовать готовые ответы</strong>» (<strong>ResponseWithMocks</strong>).</li>
+<li>Настройте поля <strong>MockNavigation</strong> (Отладочные операции) и <strong>MessageToNavigation</strong> (Отладочный ответ).</li>
+</ol>
+<h2 class="pageBreakBefore" id="ai_feature_guide_json_examples">Примеры JSON-структур операций для отладки и использования в сценариях</h2>
+<p>Ниже даны примеры JSON типовых операций для взаимодействия с чатами и LLM.</p>
+<p>Чтобы понять принцип работы чатов с LLM, используйте эти примеры в режиме отладки для настройки полей <strong>MockNavigation</strong> и <strong>MessageToNavigation</strong>.</p>
+<p>После отладки аналогичные JSON-структуры можно использовать для настройки продуктивных сценариев взаимодействия с LLM.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Используйте фактические идентификаторы</p>
+<p>Значения идентификаторов в примерах (<code>event.*</code>, <code>oa.*</code>, <code>form.*</code>, <code>lst.*</code>, <code>ds.*</code>, <code>fw.*</code>, <code>dwc.*</code> и т.&amp;nbsplд.) приведены для наглядности.</p>
+<p>Не используйте их напрямую в своих сценариях.</p>
+<p>Замените идентификаторы на конкретные значения для вашего экземпляра <strong>Comindware Platform</strong>. </p>
+<p>Получить идентификаторы можно с помощью DevTools в браузере: нажмите клавишу ++F12++, на вкладке <strong>Network</strong> выберите пункты <strong>Query</strong>/<strong>Execute</strong>/<strong>Get</strong>, а затем — <strong>Payload</strong> или <strong>Response</strong>.</p>
+</div>
+<h3 class="pageBreakBefore" id="ai_feature_guide_json_examples_open_instance">Открыть конкретную запись в определённой форме</h3>
+<p><strong>Задача:</strong> открыть имеющуюся запись, автоматически выбрав необходимую форму.</p>
+<p><strong>Предусловия:</strong> в требуемом шаблоне настроена целевая форма. Известны или вычислены ID шаблона и формы.</p>
+<ul>
+<li>
+<p><strong>MockNavigation:</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="p">[</span></code> <br/><code><span class="w">    </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.NavigateOperation, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Navigate"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Открыть сделку"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.FormNavigationPayload, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Form"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"objectId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cmw.temp.1"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oa.1"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"form"</span><span class="p">:</span><span class="w"> </span><span class="s2">"form.143"</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">]</span></code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><code>$type</code> — классы операции.<ul>
+<li><code>"type": "Navigate"</code> — тип операции: переход к объекту.</li>
+<li><code>name</code> — имя операции и название кнопки в чате. Это ключевое свойство операции, его необходимо указать в массиве <code>operations</code> в поле <strong>MessageToNavigation</strong>.</li>
+<li><code>payload</code> — данные операции:<ul>
+<li><code>$type</code> — классы сущности, с которой выполняется операция;</li>
+<li><code>"type": "Form"</code> — тип сущности: форма;</li>
+<li><code>objectId</code> — ID записи, к которой требуется перейти, или ID несуществующей записи для создания новой записи (например, <code>cmw.temp.1</code>);</li>
+<li><code>template</code> — ID шаблона записи;</li>
+<li><code>form</code> — ID формы, в которой требуется открыть запись.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>MessageToNavigation:</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span><span class="w"> </span></code> <br/><code><span class="w">    </span><span class="nt">"Открой сделку"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="nt">"operations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Открыть сделку"</span><span class="p">],</span></code> <br/><code><span class="w">        </span><span class="nt">"responseText"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Открыл для вас компанию"</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><strong>Открой сделку</strong> — ключевая фраза, по которой сработает отладка. Введя эту фразу в чате, пользователь получит в чате настроенный ответ с кнопкой операции. При этом автоматически откроется запись, настроенная в операции.</li>
+<li><code>operations</code> — массив имён операций, которые требуется передать в чат.</li>
+<li><code>responseText</code> — ответ, который требуется передать в чат.</li>
+</ul>
+<div class="notice notice-tip">
+<p class="admonition-title">Передача нескольких операций в чат</p>
+<p>Можно объединить несколько операций в одном ответе.</p>
+<p>Для этого перечислите их в массиве <code>operations</code>.</p>
+<p>Например объедините операции "Открыть сделку" и "Актуализировать информацию":</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"Актуализируй данные сделки"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="nt">"operations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Открыть сделку"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Актуализировать информацию"</span><span class="p">],</span></code> <br/><code><span class="w">        </span><span class="nt">"responseText"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Открыл вам карточку шз1"</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</div>
+</li>
+</ul>
+<h3 class="pageBreakBefore" id="ai_feature_guide_json_examples_open_instance">Нажать кнопку за пользователя</h3>
+<p><strong>Задача:</strong> автоматически выполнить операцию, назначенную кнопке в шаблоне.</p>
+<p>Важно: не путайте с операциями в чате. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4790#button_configure">Кнопки. Настройка</a>»</em>.</p>
+<p><strong>Предусловия:</strong> в требуемом шаблоне настроена кнопка, запускающая, например, сценарий. Известны или вычислены ID кнопки и записи, с которой должна работать кнопка.</p>
+<ul>
+<li>
+<p><strong>MockNavigation:</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="p">[</span></code> <br/><code><span class="w">    </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.UserCommandPageOperation, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UserCommand"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Проанализировать звонок"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.UserCommandPayload, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"Kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UserEvent"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"UserCommandId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"event.910"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"ObjectId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"629"</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">]</span></code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><code>$type</code> — классы операции.<ul>
+<li><code>"type": "UserCommand"</code> — тип операции: нажатие кнопки.</li>
+<li><code>name</code> — имя операции и название кнопки в чате. Это ключевое свойство операции, его необходимо указать в массиве <code>operations</code> в поле <strong>MessageToNavigation</strong>.</li>
+<li><code>payload</code> — данные операции:<ul>
+<li><code>$type</code> — классы сущности, с которой выполняется операция;</li>
+<li><code>"Kind": "UserEvent"</code> — тип сущности: кнопка;</li>
+<li><code>UserCommandId</code> — ID кнопки, которую следует нажать за пользователя;</li>
+<li><code>objectId</code> — ID записи, с которой требуется выполнить операцию, назначенную кнопке.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>MessageToNavigation:</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span><span class="w"> </span></code> <br/><code><span class="w">    </span><span class="nt">"Проанализируй звонок"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="nt">"operations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Проанализировать звонок"</span><span class="p">],</span></code> <br/><code><span class="w">        </span><span class="nt">"responseText"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Звонок проанализирован"</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><strong>Проанализируй звонок</strong> — ключевая фраза, по которой сработает отладка. Введя эту фразу в чате, пользователь получит в чате настроенный ответ с кнопкой операции. При этом будет автоматически выполнена операция, назначенная кнопке в шаблоне (не путать с операцией и кнопкой в чате).</li>
+<li><code>operations</code> — массив имён операций, которые требуется передать в чат;</li>
+<li><code>responseText</code> — ответ, который требуется передать в чат.</li>
+</ul>
+</li>
+</ul>
+<h3 class="pageBreakBefore" id="ai_feature_guide_json_examples_open_list">Открыть и отфильтровать определённую таблицу</h3>
+<p><strong>Задача:</strong> открыть список записей с заданными столбцами, фильтрами и сортировкой.</p>
+<p><strong>Предусловия:</strong> настроена таблица с требуемыми столбцами, двумя фильтрами и одним условием сортировки. Известны или вычислены ID шаблона и таблицы.</p>
+<p>С помощью DevTools в браузере получите модель данных таблицы:</p>
+<ol class="colored_numbers_list">
+<li>Откройте DevTools в браузере, нажав клавишу ++F12++.</li>
+<li>Откройте настроенную таблицу.</li>
+<li>В DevTools на вкладке <strong>Network</strong> выберите пункт <strong>Query</strong>, а затем — <strong>Payload</strong>.</li>
+<li>
+<p>Запишите следующие данные:</p>
+<ul>
+<li><code>datasetId</code> — ID таблицы;</li>
+<li><code>columns</code> — массив ID столбцов;</li>
+<li><code>filter</code> — параметры фильтрации.</li>
+<li><code>sorting</code> — параметры сортировки:<ul>
+<li><code>datasourceId</code> — столбец для сортировки;</li>
+<li><code>direction</code> — направление сортировки;</li>
+</ul>
+</li>
+<li><code>paging</code> — параметры разбивки таблицы на страницы.</li>
+</ul>
+</li>
+<li>
+<p>Используйте полученные данные для формирования объекта <code>query</code> в JSON-структуре операции для чата.</p>
+</li>
+</ol>
+<ul>
+<li>
+<p><strong>MockNavigation</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="p">[</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.NavigateOperation, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Navigate"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Показать все сделки"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.DatasetNavigationPayload, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RecordTemplateList"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oa.13"</span><span class="p">,</span></code> <br/><code></code> <br/><code><span class="w">    </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.DatasetQuery, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"datasetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lst.262"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"columns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"ds.2288"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ds.2289"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ds.2290"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ds.2291"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ds.2292"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ds.2293"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ds.2294"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ds.2295"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ds.2296"</span><span class="p">],</span></code> <br/><code><span class="w">        </span><span class="nt">"isPersonal"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.FilterTree, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FilterTree"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"groupOperator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"and"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span></code> <br/><code><span class="w">            </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.FilterLeaf, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FilterLeaf"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"datasourceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ds.2294"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"operator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gt"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span></code> <br/><code><span class="w">            </span><span class="p">},</span></code> <br/><code><span class="w">            </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.FilterLeaf, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FilterLeaf"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"datasourceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ds.2295"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"operator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eq"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"account.12"</span></code> <br/><code><span class="w">            </span><span class="p">}</span></code> <br/><code><span class="w">        </span><span class="p">]</span></code> <br/><code><span class="w">        </span><span class="p">},</span></code> <br/><code><span class="w">        </span><span class="nt">"grouping"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span></code> <br/><code><span class="w">        </span><span class="nt">"sorting"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.SortingConfiguration, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"datasourceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ds.2296"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"direction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Desc"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"nullValuesOnTop"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code><span class="w">        </span><span class="p">],</span></code> <br/><code><span class="w">        </span><span class="nt">"paging"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.PagingConfiguration, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span></code> <br/><code><span class="w">        </span><span class="p">},</span></code> <br/><code><span class="w">        </span><span class="nt">"stickedColumnsCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"excludeValues"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/><code><span class="p">]</span></code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><code>$type</code> — классы операции:;<ul>
+<li><code>"type": "Navigate"</code> — тип операции: переход к объекту.</li>
+<li><code>name</code> — имя операции и название кнопки в чате. Это ключевое свойство операции, его необходимо указать в массиве <code>operations</code> в поле <strong>MessageToNavigation</strong>.</li>
+<li><code>payload</code> — данные операции:<ul>
+<li><code>$type</code> — классы сущности, с которой выполняется операция;</li>
+<li><code>"type": "RecordTemplateList"</code> — тип сущности: таблица в шаблоне записи;</li>
+<li><code>template</code> — ID шаблона записи;</li>
+<li><code>query</code> — объект запроса для выборки данных в таблице:<ul>
+<li><code>datasetId</code> — ID таблицы;</li>
+<li><code>columns</code> — массив ID столбцов;</li>
+<li><code>filter</code> — параметры фильтрации.</li>
+<li><code>sorting</code> — параметры сортировки:<ul>
+<li><code>datasourceId</code> — столбец для сортировки;</li>
+<li><code>direction</code> — направление сортировки;</li>
+</ul>
+</li>
+<li><code>paging</code> — параметры разбивки таблицы на страницы.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>MessageToNavigation</strong>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"Покажи сделки"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="nt">"operations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Показать все сделки"</span><span class="p">],</span></code> <br/><code><span class="w">        </span><span class="nt">"responseText"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Открыл для вас список сделок"</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><strong>Покажи сделки</strong> — ключевая фраза, по которой сработает отладка. Введя эту фразу в чате, пользователь получит в чате настроенный ответ с кнопкой операции. При этом автоматически откроется таблица, настроенная в операции.</li>
+<li><code>operations</code> — массив имён операций, которые требуется передать в чат.</li>
+<li><code>responseText</code> — ответ, который требуется передать в чат.</li>
+</ul>
+</li>
+</ul>
+<h3 class="pageBreakBefore" id="ai_feature_guide_json_examples_actualize">Актуализация данных с помощью нажатия кнопки в шаблоне</h3>
+<p><strong>Задача:</strong> выполнить операцию, назначенную кнопке в шаблоне записи, например обновление данных по ОГРН, ИНН, адресу.</p>
+<p><strong>Предусловия:</strong> в шаблоне записи есть текстовые атрибуты (например, ОГРН, ИНН, адрес).</p>
+<ul>
+<li>
+<p><strong>MockNavigation</strong> (один элемент <code>UserCommandPageOperation</code>):</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">[</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.UserCommandPageOperation, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UserCommand"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Актуализировать информацию"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.UserCommandPayload, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"UserCommandId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"event.1333"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"ObjectId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"469"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"Kind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UserEvent"</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/><code><span class="p">]</span></code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><code>$type</code> — классы операции.<ul>
+<li><code>"type": "UserCommand"</code> — тип операции: нажатие кнопки.</li>
+<li><code>name</code> — имя операции и название кнопки в чате. Это ключевое свойство операции, его необходимо указать в массиве <code>operations</code> в поле <strong>MessageToNavigation</strong>.</li>
+<li><code>payload</code> — данные операции:<ul>
+<li><code>$type</code> — классы сущности, с которой выполняется операция;</li>
+<li><code>"Kind": "UserEvent"</code> — тип сущности: кнопка;</li>
+<li><code>UserCommandId</code> — ID кнопки, которую следует нажать за пользователя;</li>
+<li><code>objectId</code> — ID записи, с которой требуется выполнить операцию, назначенную кнопке.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>MessageToNavigation</strong>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"Актуализируй данные сделки"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="nt">"operations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Актуализировать информацию"</span><span class="p">],</span></code> <br/><code><span class="w">        </span><span class="nt">"responseText"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Обновил данные в сделке"</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><strong>Актуализируй данные сделки</strong> — ключевая фраза, по которой сработает отладка. Введя эту фразу в чате, пользователь получит в чате настроенный ответ с кнопкой операции. При этом будет автоматически выполнена операция, назначенная кнопке в шаблоне (не путать с операцией и кнопкой в чате).</li>
+<li><code>operations</code> — массив имён операций, которые требуется передать в чат;</li>
+<li><code>responseText</code> — ответ, который требуется передать в чат.</li>
+</ul>
+</li>
+</ul>
+<h3 class="pageBreakBefore" id="ai_feature_guide_json_examples_create_record">Создание записи</h3>
+<p><strong>Задача:</strong> создать запись, заполнить поля, открыть запись в необходимой форме.</p>
+<p>Обратите внимание, что созданная запись не будет сохранена, пользователь должен будет сохранить её сам.</p>
+<p><strong>Предусловия:</strong> настроена форма записи. Известны или вычислены ID шаблона и формы.</p>
+<p>С помощью DevTools в браузере получите модель данных при создании записи:</p>
+<ol class="colored_numbers_list">
+<li>Откройте DevTools в браузере, нажав клавишу ++F12++.</li>
+<li>Вручную создайте запись и заполните данные формы.</li>
+<li>Нажмите кнопку <strong>Сохранить</strong></li>
+<li>В DevTools на вкладке <strong>Network</strong> выберите пункт <strong>Execute</strong>, а затем — <strong>Response</strong>.</li>
+<li>
+<p>Запишите следующие данные:</p>
+<ul>
+<li><code>tempId</code> — образец идентификатора записи;</li>
+<li><code>changes</code> (<code>fw.***</code>, <code>literal</code>, <code>time</code>) — данные полей;</li>
+<li><code>"commandKind": "Create"</code> — тип операции;</li>
+<li><code>typeId</code> — ID шаблона записи.</li>
+</ul>
+</li>
+<li>
+<p>Используйте полученные данные для формирования объекта <code>dataformChanges.widgetChanges</code> в JSON-структуре операции для чата.</p>
+</li>
+</ol>
+<ul>
+<li>
+<p><strong>MockNavigation:</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="p">[</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.NavigateOperation, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Navigate"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Создать сделку"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.FormNavigationPayload, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Form"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"objectId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cmw.temp.1"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oa.13"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"form"</span><span class="p">:</span><span class="w"> </span><span class="s2">"form.287"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"dataformChanges"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="nt">"widgetChanges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span></code> <br/><code><span class="w">            </span><span class="p">{</span></code> <br/><code><span class="w">                </span><span class="nt">"objId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></code> <br/><code><span class="w">                </span><span class="nt">"tempId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cmw.temp.1"</span><span class="p">,</span></code> <br/><code><span class="w">                </span><span class="nt">"changes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">                </span><span class="nt">"fw.1879"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"origin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Store"</span><span class="p">,</span><span class="w"> </span><span class="nt">"literal"</span><span class="p">:</span><span class="w"> </span><span class="mf">123.0</span><span class="p">,</span><span class="w"> </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1763542700000</span><span class="w"> </span><span class="p">},</span></code> <br/><code><span class="w">                </span><span class="nt">"fw.1881"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"origin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Store"</span><span class="p">,</span><span class="w"> </span><span class="nt">"literal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"account.2"</span><span class="p">,</span><span class="w"> </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1763542700001</span><span class="w"> </span><span class="p">},</span></code> <br/><code><span class="w">                </span><span class="nt">"fw.1885"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"origin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Store"</span><span class="p">,</span><span class="w"> </span><span class="nt">"literal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://10.9.0.185:8081/"</span><span class="p">,</span><span class="w"> </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1763542700002</span><span class="w"> </span><span class="p">},</span></code> <br/><code><span class="w">                </span><span class="nt">"fw.1884"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"origin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Store"</span><span class="p">,</span><span class="w"> </span><span class="nt">"literal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2222222222"</span><span class="p">,</span><span class="w"> </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1763542700003</span><span class="w"> </span><span class="p">},</span></code> <br/><code><span class="w">                </span><span class="nt">"fw.1880"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"origin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Store"</span><span class="p">,</span><span class="w"> </span><span class="nt">"literal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"125009, г. Москва, ул. Тверская, д. 7"</span><span class="p">,</span><span class="w"> </span><span class="nt">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1763542700004</span><span class="w"> </span><span class="p">}</span></code> <br/><code><span class="w">                </span><span class="p">},</span></code> <br/><code><span class="w">                </span><span class="nt">"commandKind"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Create"</span><span class="p">,</span></code> <br/><code><span class="w">                </span><span class="nt">"typeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oa.13"</span></code> <br/><code><span class="w">            </span><span class="p">}</span></code> <br/><code><span class="w">            </span><span class="p">]</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/><code><span class="p">]</span></code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><code>$type</code> — классы операции.<ul>
+<li><code>"type": "Navigate"</code> — тип операции: переход к объекту.</li>
+<li><code>name</code> — имя операции и название кнопки в чате. Это ключевое свойство операции, его необходимо указать в массиве <code>operations</code> в поле <strong>MessageToNavigation</strong>.</li>
+<li><code>payload</code> — данные операции:<ul>
+<li><code>$type</code> — классы сущности, с которой выполняется операция;</li>
+<li><code>"type": "Form"</code> — тип сущности: форма;</li>
+<li><code>objectId</code> — ID несуществующей записи;</li>
+<li><code>template</code> — ID шаблона записи;</li>
+<li><code>form</code> — ID формы, в которой требуется открыть запись.</li>
+<li><code>dataformChanges</code> — объект с данными для заполнения формы.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>MessageToNavigation</strong> :</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"Создай сделку"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="nt">"operations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Создать сделку"</span><span class="p">],</span></code> <br/><code><span class="w">        </span><span class="nt">"responseText"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Создал сделку и заполнил вашими данными"</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><strong>Создай сделку</strong> — ключевая фраза, по которой сработает отладка. Введя эту фразу в чате, пользователь получит в чате настроенный ответ с кнопкой операции. При этом будет автоматически создана запись и заполнена её форма. Но запись сохранена не будет. Пользователь должен сохранить её сам.</li>
+<li><code>operations</code> — массив имён операций, которые требуется передать в чат.</li>
+<li><code>responseText</code> — ответ, который требуется передать в чат.</li>
+</ul>
+</li>
+</ul>
+<h3 class="pageBreakBefore" id="ai_feature_guide_json_examples_open_task">Переход к пользовательской задаче</h3>
+<p><strong>Задача:</strong> открыть определённую задачу пользователя.</p>
+<p><strong>Предусловия:</strong> известен ID задачи, к которой требуется перейти. Например, его можно вычислить в контексте записи, связанной с задачей.</p>
+<ul>
+<li>
+<p><strong>MockNavigation</strong>.</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">[</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.NavigateOperation, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Navigate"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Открыть задачу"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.TaskNavigationPayload, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Task"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"taskId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"474"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"widget"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"selected"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span></code> <br/><code><span class="w">        </span><span class="nt">"dataformChanges"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="nt">"widgetChanges"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/><code><span class="p">]</span></code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><code>$type</code> — классы операции.<ul>
+<li><code>"type": "Navigate"</code> — тип операции: переход к объекту.</li>
+<li><code>name</code> — имя операции и название кнопки в чате. Это ключевое свойство операции, его необходимо указать в массиве <code>operations</code> в поле <strong>MessageToNavigation</strong>.</li>
+<li><code>payload</code> — данные операции:<ul>
+<li><code>$type</code> — классы сущности, с которой выполняется операция;</li>
+<li><code>"type": "Task"</code> — тип сущности: задача;</li>
+<li><code>taskId</code> — ID задачи, к которой требуется перейти.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>MessageToNavigation:</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"Открой мою задачу"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="nt">"operations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Открыть задачу"</span><span class="p">],</span></code> <br/><code><span class="w">        </span><span class="nt">"responseText"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Открыл вашу задачу"</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><strong>Открой мою задачу</strong> — ключевая фраза, по которой сработает отладка. Введя эту фразу в чате, пользователь получит в чате настроенный ответ с кнопкой операции. При этом будет автоматически открыта задача, настроенная в операции.</li>
+<li><code>operations</code> — массив имён операций, которые требуется передать в чат.</li>
+<li><code>responseText</code> — ответ, который требуется передать в чат.</li>
+</ul>
+</li>
+</ul>
+<h3 class="pageBreakBefore" id="ai_feature_guide_full_json_search">Поиск записей</h3>
+<p><strong>Задача:</strong> выполнить глобальный поиск записей с определённым текстом.</p>
+<p><strong>Предусловия:</strong> отсутствуют.</p>
+<ul>
+<li>
+<p><strong>MockNavigation:</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="p">[</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.NavigateOperation, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Navigate"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Записи по Ромашке"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.GlobalSearchNavigationPayload, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GlobalSearch"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"SearchText"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ООО «Ромашка»"</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/><code><span class="p">]</span></code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><code>$type</code> — классы операции.<ul>
+<li><code>"type": "Navigate"</code> — тип операции: переход к объекту.</li>
+<li><code>name</code> — имя операции и название кнопки в чате. Это ключевое свойство операции, его необходимо указать в массиве <code>operations</code> в поле <strong>MessageToNavigation</strong>.</li>
+<li><code>payload</code> — данные операции:<ul>
+<li><code>$type</code> — классы сущности, с которой выполняется операция;</li>
+<li><code>"type": "GlobalSearch"</code> — тип сущности: поиск по всем записям;</li>
+<li><code>SearchText</code> — искомый текст.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>MessageToNavigation:</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"Найди мне все записи ООО Ромашка"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="nt">"operations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Записи по Ромашке"</span><span class="p">],</span></code> <br/><code><span class="w">        </span><span class="nt">"responseText"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Нашёл записи, где упоминается ООО «Ромашка»"</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><strong>Найди мне все записи ООО Ромашка</strong> — ключевая фраза, по которой сработает отладка. Введя эту фразу в чате, пользователь получит в чате настроенный ответ с кнопкой операции. При этом будет открыт список записей, содержащих искомое слово, настроенное в операции.</li>
+<li><code>operations</code> — массив имён операций, которые требуется передать в чат;</li>
+<li><code>responseText</code> — ответ, который требуется передать в чат.</li>
+</ul>
+</li>
+</ul>
+<h3 class="pageBreakBefore" id="ai_feature_guide_json_examples_dashboard">Переход к детализации диаграммы на дашборде</h3>
+<p><strong>Задача:</strong> открыть детализацию диаграммы на дашборде.</p>
+<p><strong>Предусловия:</strong> настроена информационная страница с диаграммой (дашборд). Известны или вычислены ID страницы и диаграммы.</p>
+<p>С помощью DevTools в браузере получите модель данных при детализации диаграммы с фильтром по столбцу:</p>
+<ol class="colored_numbers_list">
+<li>Откройте DevTools в браузере, нажав клавишу ++F12++.</li>
+<li>Откройте настроенный дашборд и примените фильтр по столбцу в детализации к диаграмме.</li>
+<li>В DevTools на вкладке <strong>Network</strong> выберите пункт <strong>Get</strong>, а затем — <strong>Payload</strong>.</li>
+<li>
+<p>Запишите следующие данные:</p>
+<ul>
+<li><code>widgetId</code> — идентификатор дашборда (страницы);</li>
+<li><code>ChartQuery</code> — тело запроса:<ul>
+<li><code>widgetConfigId</code> - идентификатор диаграммы;</li>
+<li><code>datasetId</code> — ID детализации;</li>
+<li><code>columns</code> — столбцы детализации;</li>
+<li><code>filter</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Используйте полученные данные для формирования объекта <code>query</code> в JSON-структуре операции для чата.</p>
+</li>
+</ol>
+<ul>
+<li>
+<p><strong>MockNavigation:</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="p">[</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.NavigateOperation, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Navigate"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Дашборд"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.ChartNavigationPayload, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chart"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"widgetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dwc.14"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.ChartQuery, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"widgetConfigId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dwc.14"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"dataPointIndex"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"dateFilterType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Undefined"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"datasetId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dwc.14"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"columns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"ds.2332"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ds.2333"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ds.2334"</span><span class="p">],</span></code> <br/><code><span class="w">            </span><span class="nt">"isPersonal"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.FilterTree, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FilterTree"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"groupOperator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"and"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span></code> <br/><code><span class="w">                </span><span class="p">{</span></code> <br/><code><span class="w">                </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.FilterLeaf, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FilterLeaf"</span><span class="p">,</span></code> <br/><code><span class="w">                </span><span class="nt">"datasourceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ds.2334"</span><span class="p">,</span></code> <br/><code><span class="w">                </span><span class="nt">"operator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gt"</span><span class="p">,</span></code> <br/><code><span class="w">                </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span></code> <br/><code><span class="w">                </span><span class="p">}</span></code> <br/><code><span class="w">            </span><span class="p">]</span></code> <br/><code><span class="w">            </span><span class="p">},</span></code> <br/><code><span class="w">            </span><span class="nt">"grouping"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span></code> <br/><code><span class="w">            </span><span class="nt">"excludeValues"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span></code> <br/><code><span class="w">            </span><span class="nt">"withRows"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/><code><span class="p">]</span></code> <br/></pre></code></div>
+<ul>
+<li><code>$type</code> — классы операции.<ul>
+<li><code>"type": "Navigate"</code> — тип операции: переход к объекту.</li>
+<li><code>name</code> — имя операции и название кнопки в чате. Это ключевое свойство операции, его необходимо указать в массиве <code>operations</code> в поле <strong>MessageToNavigation</strong>.</li>
+<li><code>payload</code> — данные операции:<ul>
+<li><code>$type</code> — классы сущности, с которой выполняется операция;</li>
+<li><code>"type": "Chart"</code> — тип сущности: диаграмма;</li>
+<li><code>widgetId</code> — идентификатор диаграммы;</li>
+<li><code>query</code> — тело запроса;</li>
+<li><code>widgetConfigId</code> — идентификатор диаграммы;</li>
+<li><code>datasetId</code> — ID детализации.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>MessageToNavigation:</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"Открой дашборд"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="nt">"operations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Дашборд"</span><span class="p">],</span></code> <br/><code><span class="w">        </span><span class="nt">"responseText"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Открыл для вас дашборд"</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><strong>Открой дашборд</strong> — ключевая фраза, по которой сработает отладка. Введя эту фразу в чате, пользователь получит в чате настроенный ответ с кнопкой операции. При этом откроется детализация диаграммы согласно, настроенная в операции.</li>
+<li><code>operations</code> — массив имён операций, которые требуется передать в чат.</li>
+<li><code>responseText</code> — ответ, который требуется передать в чат.</li>
+</ul>
+</li>
+</ul>
+<h2 class="pageBreakBefore" id="ai_feature_guide_full_json_navigate_widget">Открытие формы и переход к определённому полю</h2>
+<p><strong>Задача:</strong> по ключевой фразе открыть форму записи с фокусом на конкретном поле.</p>
+<p><strong>Предусловия:</strong> настроена форма с полем требуемого типа. Известны или вычислены ID шаблона, формы, записи и поля.</p>
+<ul>
+<li>
+<p><strong>MockNavigation:</strong>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">[</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.NavigateOperation, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Navigate"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Навигация на поле ОГРН"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="nt">"$type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comindware.Conversation.Entities.FormNavigationPayload, Comindware.Conversation.Entities"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Form"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"objectId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"469"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"widget"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fw.1880"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"template"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oa.13"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"form"</span><span class="p">:</span><span class="w"> </span><span class="s2">"form.287"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"dataformChanges"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="nt">"widgetChanges"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/><code><span class="p">]</span></code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><code>$type</code> — классы операции.<ul>
+<li><code>"type": "Navigate"</code> — тип операции: переход к объекту.</li>
+<li><code>name</code> — имя операции и название кнопки в чате. Это ключевое свойство операции, его необходимо указать в массиве <code>operations</code> в поле <strong>MessageToNavigation</strong>.</li>
+<li><code>payload</code> — данные операции:<ul>
+<li><code>$type</code> — классы сущности, с которой выполняется операция;</li>
+<li><code>"type": "Form"</code> — тип сущности: форма;</li>
+<li><code>objectId</code> — ID записи, к которой требуется перейти;</li>
+<li><code>widget</code> — ID поля на форме.</li>
+<li><code>template</code> — ID шаблона записи;</li>
+<li><code>form</code> — ID формы, в которой требуется открыть запись.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>MessageToNavigation:</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"Перейди к полю ОГРН"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="nt">"operations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Навигация на поле ОГРН"</span><span class="p">],</span></code> <br/><code><span class="w">        </span><span class="nt">"responseText"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Перешёл на поле ОГРН"</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<ul>
+<li><strong>Перейди к полю ОГРН</strong> — ключевая фраза, по которой сработает отладка. Введя эту фразу в чате, пользователь получит в чате настроенный ответ с кнопкой операции. При этом автоматически откроется запись, настроенная в операции, и фокус ввода будет установлен на целевое поле.</li>
+<li><code>operations</code> — массив имён операций, которые требуется передать в чат.</li>
+<li><code>responseText</code> — ответ, который требуется передать в чат.</li>
+</ul>
+</li>
+</ul>
+<h2 class="pageBreakBefore" id="ai_feature_guide_limits_and_roadmap">Ограничения и планы развития</h2>
+<p>Здесь представлена только реализованная на текущий момент функциональность.</p>
+<p>Ограничения и запланированные улучшения:</p>
+<ul>
+<li><strong>Обработка сообщений:</strong> с помощью сценариев обрабатываются сообщения только из системного чата. Выбор источника сообщений (системный чат или произвольный чат) в текущей версии не предусмотрен.</li>
+<li><strong>Планы:</strong> планируется реализация привязки сценариев к определённым чатам.</li>
+</ul>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4672">Адаптеры. Настройка</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4675">Подключения. Настройка</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4676">Пути передачи данных. Настройка</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4717">Сценарии. Настройка</a></li>
+<li><a class="mkdocs_imported_link" href="https://developers.sber.ru/dev">Портал разработчиков Сбера</a></li>
+<li><a class="mkdocs_imported_link" href="https://developers.sber.ru/studio/login">Личный кабинет Сбер Studio</a></li>
+<li><a class="mkdocs_imported_link" href="https://developers.sber.ru/docs/ru/gigachat/api/reference/rest/gigachat-api">Документация по API GigaChat</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4824">Панель навигации. Использование</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4790#button_configure">Кнопки. Настройка</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>
