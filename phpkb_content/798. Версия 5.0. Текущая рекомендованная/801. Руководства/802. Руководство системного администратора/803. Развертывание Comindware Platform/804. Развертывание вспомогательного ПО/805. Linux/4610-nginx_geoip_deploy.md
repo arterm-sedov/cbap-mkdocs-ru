@@ -1,11 +1,11 @@
 ---
-title: 'Модуль GeoIP для NGINX. Установка и настройка. Краткое руководство'
+title: 'Модуль GeoIP для NGINX. Установка и настройка'
 kbId: 4610
 url: 'https://kb.comindware.ru/article.php?id=4610'
-updated: '2024-11-01 19:00:43'
+updated: '2026-01-29 18:28:35'
 ---
 
-# Модуль GeoIP для NGINX. Установка и настройка. Краткое руководство
+# Модуль GeoIP для NGINX. Установка и настройка
 
 ## Введение
 
@@ -22,9 +22,9 @@ updated: '2024-11-01 19:00:43'
 
 1. Для установки необходимых пакетов в операционной системе выполните указанные ниже команды.
 
-   - **Astra/Debian/Ubuntu**: `sudo apt-get install nginx-module-geoip`
-   - **Alt**: `sudo apt-get install nginx-geoip`
-   - **CentOS**: `yum install nginx-module-geoip`
+   - **Astra, Debian, DEB-дистрибутивы**: `sudo apt-get install nginx-module-geoip`
+   - **Альт Сервер**: `sudo apt-get install nginx-geoip`
+   - **РЕД ОС, RPM-дистрибутивы**: `yum install nginx-module-geoip`
 2. Обновите базы GeoIP до актуальной версии с помощью команд:
 
    ```
@@ -32,6 +32,7 @@ updated: '2024-11-01 19:00:43'
    cd /usr/share/GeoIP/
    wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz
    gunzip GeoIP.dat.gz
+
    ```
 3. С помощью команды `nginx -V` убедитесь, что веб-сервер собран с параметром `--with-http_geoip_module`. В противном случае необходимо самостоятельно собрать модуль NGINX. Исходные коды GeoIP находятся в открытом доступе.
 
@@ -46,6 +47,7 @@ updated: '2024-11-01 19:00:43'
                UA no;
                US no;
        }
+
    ```
 2. Чтобы разрешить использование сайта только пользователям из России, Китая и Тайваня, используйте в файле конфигурации следующие директивы:
 
@@ -57,6 +59,7 @@ updated: '2024-11-01 19:00:43'
            CN yes;
            TW yes;
        }
+
    ```
 3. В файле конфигурации `/etc/nginx/nginx.conf` в разделе `http` добавьте следующую директиву: `include include/block.map.include;`
 4. В настройках хоста (раздел `server`) добавьте следующую директиву:
@@ -65,6 +68,7 @@ updated: '2024-11-01 19:00:43'
    if ($allowed_country = no) {
        return 404;
    }
+
    ```
 5. Примените изменения: `# nginx -s reload`
 
@@ -93,6 +97,7 @@ done
 [ -d "${TMPDIR}" ] && rm -rf $TMPDIR
 fi
 fi
+
 ```
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

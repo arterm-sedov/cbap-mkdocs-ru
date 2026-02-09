@@ -1,11 +1,11 @@
 ---
-title: 'Восстановление базы данных, вложенных файлов и журналов из полной резервной копии'
+title: 'Восстановление базы данных из полной резервной копии'
 kbId: 4648
 url: 'https://kb.comindware.ru/article.php?id=4648'
-updated: '2024-12-09 15:06:09'
+updated: '2026-01-29 18:26:44'
 ---
 
-# Восстановление базы данных, вложенных файлов и журналов из полной резервной копии
+# Восстановление базы данных из полной резервной копии
 
 ## Введение
 
@@ -13,7 +13,7 @@ updated: '2024-12-09 15:06:09'
 
 Данные инструкции подходят для восстановления из резервной копии, созданной по инструкциям в статье *«[Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО][complete_running_instance_backup]»*.
 
-В данных инструкциях используются только стандартные средства операционной системы и Elasticsearch.
+В данных инструкциях используются только стандартные средства операционной системы и OpenSearch (Elasticsearch).
 
 В статье рассмотрены два сценария:
 
@@ -22,7 +22,7 @@ updated: '2024-12-09 15:06:09'
 
 Для восстановления базы данных экземпляра ПО из файла резервной копии необходимо распаковать архив резерва в пользовательскую или временную директорию, откуда уже перенести файлы и директории в целевые директории.
 
-Для восстановления журнала операций требуется зарегистрировать репозиторий в Elasticsearch и из зарегистрированного репозитория восстановить данные.
+Для восстановления журнала операций требуется зарегистрировать репозиторий в OpenSearch (Elasticsearch) и из зарегистрированного репозитория восстановить данные.
 
 Исходные данные
 
@@ -93,9 +93,9 @@ updated: '2024-12-09 15:06:09'
 
    - `Database` — файлы базы данных.
      - `Scripts` — скомпилированные библиотеки для скриптов на языке C#.
-     - `snapshots` — снимок данных Apache Ignite Ignite.
+     - `snapshots` — снимок данных Apache Ignite.
      - `wal` — журнал предварительной записи.
-     - `elastic` — копия репозитория Elasticsearch (OpenSearch).
+     - `elastic` — копия репозитория OpenSearch (Elasticsearch).
      - `Streams` — загруженные пользователями и сформированные системой файлы, которые прикреплены к соответствующим атрибутам.
 
    ![Структура резервной копии](https://kb.comindware.ru/assets/Pasted image 20230125134843.png)
@@ -126,7 +126,9 @@ updated: '2024-12-09 15:06:09'
    chmod -R 755 /var/lib/comindware/<instancename>/Database/
 
    ```
-8. Назначьте перенесенным папкам владельца `www-data`:
+8. Назначьте перенесённым папкам владельца:
+
+   **Astra Linux, Debian, DEB-дистрибутивы**
 
    ```
    chown -R www-data:www-data /var/lib/comindware/<instancename>/Database/Streams/
@@ -134,9 +136,25 @@ updated: '2024-12-09 15:06:09'
 
    ```
 
-## Восстановление индексов Elasticsearch из резервной копии репозитория
+   **РЕД ОС, RPM-дистрибутивы**
 
-1. Создайте директорию репозитория Elasticsearch и перенесите в неё файлы из резервной копии:
+   ```
+   chown -R nginx:nginx /var/lib/comindware/<instancename>/Database/Streams/
+   chown -R nginx:nginx /var/lib/comindware/<instancename>/Database/
+
+   ```
+
+   **Альт Сервер**
+
+   ```
+   chown -R _nginx:_nginx /var/lib/comindware/<instancename>/Database/Streams/
+   chown -R _nginx:_nginx /var/lib/comindware/<instancename>/Database/
+
+   ```
+
+## Восстановление индексов OpenSearch (Elasticsearch) из резервной копии репозитория
+
+1. Создайте директорию репозитория OpenSearch (Elasticsearch) и перенесите в неё файлы из резервной копии:
 
    ```
    mkdir /var/www/backups/elasticsearch/
@@ -162,41 +180,41 @@ updated: '2024-12-09 15:06:09'
 
    ```
 
-   ![Путь к репозиторию в файле конфигурации Elasticsearch](https://kb.comindware.ru/assets/Pasted image 20230125204737.png)
+   ![Путь к репозиторию в файле конфигурации OpenSearch (Elasticsearch)](https://kb.comindware.ru/assets/Pasted image 20230125204737.png)
 
-   Путь к репозиторию в файле конфигурации Elasticsearch
-5. Запустите службу Elasticsearch:
+   Путь к репозиторию в файле конфигурации OpenSearch (Elasticsearch)
+5. Запустите службу OpenSearch (Elasticsearch):
 
    ```
    systemctl start elasticsearch.service
 
    ```
-6. Зарегистрируйте новый репозиторий снимков Elasticsearch:
+6. Зарегистрируйте новый репозиторий снимков OpenSearch (Elasticsearch):
 
    ```
-   curl -X PUT "localhost:9200/_snapshot/elastic_snap?pretty" -H 'Content-Type: application/json' -d' {"type": "fs", "settings": {"location": "/var/www/backups/elasticsearch"}}'
+   curl -X PUT "<openSearchHost>:<opeSearchPort>/_snapshot/elastic_snap?pretty" -H 'Content-Type: application/json' -d' {"type": "fs", "settings": {"location": "/var/www/backups/elasticsearch"}}'
 
    ```
 7. Проверьте содержимое зарегистрированного репозитория:
 
    ```
-   curl -X GET "localhost:9200/_cat/snapshots/elastic_snap?pretty"
+   curl -X GET "<openSearchHost>:<opeSearchPort>/_cat/snapshots/elastic_snap?pretty"
 
    ```
-8. Выберите необходимый снимок и восстановите состояние Elasticsearch:
+8. Выберите необходимый снимок и восстановите состояние OpenSearch (Elasticsearch):
 
    ```
-   curl -X POST "localhost:9200/_snapshot/elastic_snap/snapshot2023_01_23_10_17/_restore?pretty"
+   curl -X POST "<openSearchHost>:<opeSearchPort>/_snapshot/elastic_snap/snapshot2023_01_23_10_17/_restore?pretty"
 
    ```
 9. Проверьте наличие индексов в восстановленном каталоге:
 
    ```
-   curl -X GET "localhost:9200/_cat/indices?pretty"
+   curl -X GET "<openSearchHost>:<opeSearchPort>/_cat/indices?pretty"
 
    ```
 
-_![Отображение списка индексов Elasticsearch](https://kb.comindware.ru/assets/Pasted image 20230127153756.png)_
+_![Отображение списка индексов OpenSearch (Elasticsearch)](https://kb.comindware.ru/assets/Pasted image 20230127153756.png)_
 
 ## Запуск и проверка конфигурации экземпляра ПО
 

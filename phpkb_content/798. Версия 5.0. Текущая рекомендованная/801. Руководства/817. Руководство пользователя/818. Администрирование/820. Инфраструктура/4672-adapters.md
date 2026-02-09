@@ -2,7 +2,7 @@
 title: 'Адаптеры'
 kbId: 4672
 url: 'https://kb.comindware.ru/article.php?id=4672'
-updated: '2025-08-12 14:16:41'
+updated: '2026-01-29 18:13:36'
 ---
 
 # Адаптеры
@@ -315,14 +315,14 @@ _![Пример содержимого архива с исходным кодо
    ```
 2. Установите пакеты .NET:
 
-   - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+   - **Astra Linux, Debian, DEB-дистрибутивы**
 
      ```
      apt-get update
      apt-get install -y dotnet-sdk-8.0
 
      ```
-   - **РЕД ОС**, **Rocky** (RPM-based)
+   - **РЕД ОС, RPM-дистрибутивы**
 
      ```
      dnf install dotnet-sdk-8.0
@@ -337,13 +337,13 @@ _![Пример содержимого архива с исходным кодо
      ```
 3. Откройте файл конфигурации NGINX для редактирования (`instanceName` — имя экземпляра ПО):
 
-   - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+   - **Astra Linux, Debian, DEB-дистрибутивы**
 
      ```
      nano /etc/nginx/sites-available/comindware<instanceName>
 
      ```
-   - **РЕД ОС**, **Rocky** (RPM-based)
+   - **РЕД ОС, RPM-дистрибутивы**
 
      ```
      nano /etc/nginx/conf.d/comindware<instanceName>

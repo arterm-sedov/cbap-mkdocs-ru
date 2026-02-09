@@ -2,7 +2,7 @@
 title: 'Резервное копирование. Настройка, запуск и просмотр журнала сеансов'
 kbId: 4642
 url: 'https://kb.comindware.ru/article.php?id=4642'
-updated: '2026-01-16 17:27:06'
+updated: '2026-01-29 18:28:05'
 ---
 
 # Резервное копирование. Настройка, запуск и просмотр журнала сеансов
@@ -67,7 +67,7 @@ updated: '2026-01-16 17:27:06'
 
 1. Создайте директорию, в которой будут сохраняться резервные копии. Для этой директории предоставьте разрешения на полный доступ, чтобы система могла сохранять в неё резервные копии, например:
 
-   **Astra Linux, Ubuntu, Rocky**
+   **Astra Linux, Debian, DEB-дистрибутивы**
 
    ```
    mkdir /var/backups/comindware/<instanceName>
@@ -76,7 +76,16 @@ updated: '2026-01-16 17:27:06'
 
    ```
 
-   **Альт Сервер, РЕД ОС**
+   **РЕД ОС, RPM-дистрибутивы**
+
+   ```
+   mkdir /var/backups/comindware/<instanceName>
+   chmod 777 /var/backups/comindware/<instanceName>
+   chown -R nginx:nginx /var/backups/comindware/<instanceName>
+
+   ```
+
+   **Альт Сервер**
 
    ```
    mkdir /var/backups/comindware/<instanceName>

@@ -2,7 +2,7 @@
 title: 'Конфигурация экземпляра, компонентов ПО и служб. Настройка'
 kbId: 5067
 url: 'https://kb.comindware.ru/article.php?id=5067'
-updated: '2026-01-26 18:43:26'
+updated: '2026-01-29 18:06:59'
 ---
 
 # Конфигурация экземпляра, компонентов ПО и служб. Настройка
@@ -688,13 +688,13 @@ log.folder: /var/log/comindware/<instanceName>/Logs/
 
 1. Откройте файл конфигурации NGINX для редактирования:
 
-   - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+   - **Astra Linux, Debian, DEB-дистрибутивы**
 
      ```
      nano /etc/nginx/sites-available/comindware<instanceName>
 
      ```
-   - **РЕД ОС**, **Rocky** (RPM-based)
+   - **РЕД ОС, RPM-дистрибутивы**
 
      ```
      nano /etc/nginx/conf.d/comindware<instanceName>

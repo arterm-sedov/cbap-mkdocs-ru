@@ -2,7 +2,7 @@
 title: 'Примеры событий в файловых журналах'
 kbId: 4618
 url: 'https://kb.comindware.ru/article.php?id=4618'
-updated: '2025-08-12 14:03:28'
+updated: '2026-01-29 18:12:58'
 ---
 
 # Примеры событий в файловых журналах
@@ -1017,7 +1017,7 @@ Stack:
 
 Системная информация:
 
-  Сервер: ubuntu-vm-server-gen2
+  Сервер: vm-server-gen2
 
   База данных: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 

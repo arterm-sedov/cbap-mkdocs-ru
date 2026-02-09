@@ -2,7 +2,7 @@
 title: 'Обновление версии экземпляра ПО с его остановкой'
 kbId: 4624
 url: 'https://kb.comindware.ru/article.php?id=4624'
-updated: '2025-12-25 16:11:49'
+updated: '2026-01-29 18:12:31'
 ---
 
 # Обновление версии экземпляра ПО с его остановкой
@@ -70,7 +70,7 @@ updated: '2025-12-25 16:11:49'
    ```
 3. Сохраните резервную копию файлов конфигурации, например в директорию `/var/backups/config_tmp`:
 
-   - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+   - **Astra Linux, Debian, DEB-дистрибутивы**
 
    ```
    mkdir -p /var/backups/config_tmp/
@@ -82,7 +82,7 @@ updated: '2025-12-25 16:11:49'
 
    ```
 
-   - **РЕД ОС**, **Rocky** (RPM-based)
+   - **РЕД ОС, RPM-дистрибутивы**
 
    ```
    mkdir -p /var/backups/config_tmp/
@@ -248,13 +248,13 @@ updated: '2025-12-25 16:11:49'
 
 1. Отредактируйте конфигурацию NGINX для экземпляра ПО в соответствии с резервной копией, [сохранённой ранее](#NginxBackup):
 
-   - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+   - **Astra Linux, Debian, DEB-дистрибутивы**
 
      ```
      nano /etc/nginx/sites-available/comindware<instanceName>
 
      ```
-   - **РЕД ОС**, **Rocky** (RPM-based)
+   - **РЕД ОС, RPM-дистрибутивы**
 
      ```
      nano /etc/nginx/conf.d/comindware<instanceName>
@@ -347,7 +347,7 @@ updated: '2025-12-25 16:11:49'
    ```
 3. Установите следующие директивы:
 
-   - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+   - **Astra Linux, Debian, DEB-дистрибутивы**
 
    ```
    www-data soft nproc 200000
@@ -357,7 +357,7 @@ updated: '2025-12-25 16:11:49'
 
    ```
 
-   - **РЕД ОС**, **Rocky** (RPM-based)
+   - **РЕД ОС, RPM-дистрибутивы**
 
    ```
    nginx soft nproc 200000
@@ -472,7 +472,27 @@ updated: '2025-12-25 16:11:49'
    ```
    cd /var/lib/comindware/<instanceName>/
    chmod -R 777 Database/
+
+   ```
+
+   **Astra Linux, Debian, DEB-дистрибутивы**
+
+   ```
    sudo chown -R www-data:www-data Database/
+
+   ```
+
+   **РЕД ОС, RPM-дистрибутивы**
+
+   ```
+   sudo chown -R nginx:nginx Database/
+
+   ```
+
+   **Альт Сервер**
+
+   ```
+   sudo chown -R _nginx:_nginx Database/
 
    ```
 7. Обновите структуру данных.
@@ -558,14 +578,14 @@ updated: '2025-12-25 16:11:49'
    ```
 10. Назначьте владельца директории с базой данных:
 
-    - **Astra Linux, Ubuntu, Debian** (DEB-based)
+    - **Astra Linux, Debian, DEB-дистрибутивы**
 
     ```
     chown -R www-data:www-data /var/lib/comindware/<instanceName>/Database
 
     ```
 
-    - **РЕД ОС, Rocky** (RPM-based)
+    - **РЕД ОС, RPM-дистрибутивы**
 
     ```
     chown -R nginx:nginx /var/lib/comindware/<instanceName>/Database

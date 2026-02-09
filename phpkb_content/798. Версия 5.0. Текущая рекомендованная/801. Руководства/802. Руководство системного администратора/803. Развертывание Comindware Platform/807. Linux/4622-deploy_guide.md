@@ -2,7 +2,7 @@
 title: 'Установка, запуск, инициализация и остановка ПО'
 kbId: 4622
 url: 'https://kb.comindware.ru/article.php?id=4622'
-updated: '2025-12-25 16:11:13'
+updated: '2026-01-29 18:11:31'
 ---
 
 # Установка, запуск, инициализация и остановка ПО
@@ -269,7 +269,7 @@ updated: '2025-12-25 16:11:13'
    ```
 3. Установите следующие директивы:
 
-   - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+   - **Astra Linux, Debian, DEB-дистрибутивы**
 
    ```
    www-data soft nproc 200000
@@ -279,7 +279,7 @@ updated: '2025-12-25 16:11:13'
 
    ```
 
-   - **РЕД ОС**, **Rocky** (RPM-based)
+   - **РЕД ОС, RPM-дистрибутивы**
 
    ```
    nginx soft nproc 200000

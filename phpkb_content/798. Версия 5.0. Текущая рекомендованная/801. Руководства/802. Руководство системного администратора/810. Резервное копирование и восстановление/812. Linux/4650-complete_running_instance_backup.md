@@ -2,7 +2,7 @@
 title: 'Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО'
 kbId: 4650
 url: 'https://kb.comindware.ru/article.php?id=4650'
-updated: '2026-01-16 17:24:46'
+updated: '2026-01-29 18:25:35'
 ---
 
 # Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО
@@ -113,10 +113,17 @@ updated: '2026-01-16 17:24:46'
    ```
 9. Смените владельца директории `apache-ignite`:
 
-   **Astra Linux, Ubuntu, Rocky**
+   **Astra Linux, Debian, DEB-дистрибутивы**
 
    ```
    chown -R www-data:www-data apache-ignite/
+
+   ```
+
+   **РЕД ОС, RPM-дистрибутивы**
+
+   ```
+   chown -R nginx:nginx apache-ignite/
 
    ```
 
@@ -146,10 +153,17 @@ updated: '2026-01-16 17:24:46'
     ```
 13. Смените владельца директории `backups`:
 
-    **Astra Linux, Ubuntu, Rocky**
+    **Astra Linux, Debian, DEB-дистрибутивы**
 
     ```
     chown -R www-data:www-data backups/
+
+    ```
+
+    **РЕД ОС, RPM-дистрибутивы**
+
+    ```
+    chown -R nginx:nginx backups/
 
     ```
 

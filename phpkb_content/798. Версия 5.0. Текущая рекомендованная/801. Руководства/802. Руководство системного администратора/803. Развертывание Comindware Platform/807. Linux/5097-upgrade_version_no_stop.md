@@ -2,7 +2,7 @@
 title: 'Обновление версии экземпляра ПО без его остановки'
 kbId: 5097
 url: 'https://kb.comindware.ru/article.php?id=5097'
-updated: '2025-10-23 16:31:15'
+updated: '2026-01-29 18:11:56'
 ---
 
 # Обновление версии экземпляра ПО без его остановки
@@ -81,7 +81,7 @@ updated: '2025-10-23 16:31:15'
    - `<database_backup_path>` — путь к внешнему хранилищу базы данных.
 3. Скопируйте файлы конфигурации во внешнее хранилище:
 
-   - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+   - **Astra Linux, Debian, DEB-дистрибутивы**
 
    ```
    cd /var/www/<instanceName>/
@@ -92,7 +92,7 @@ updated: '2025-10-23 16:31:15'
 
    ```
 
-   - **РЕД ОС**, **Rocky** (RPM-based)
+   - **РЕД ОС, RPM-дистрибутивы**
 
    ```
    cd /var/www/<instanceName>/
@@ -135,14 +135,14 @@ updated: '2025-10-23 16:31:15'
    ```
 3. Обновите библиотеки `librdkafka`:
 
-   - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+   - **Astra Linux, Debian, DEB-дистрибутивы**
 
    ```
    dpkg -i *.deb
 
    ```
 
-   - **РЕД ОС**, **Rocky** (RPM-based)
+   - **РЕД ОС, RPM-дистрибутивы**
 
    ```
    rpm -i *.rpm
@@ -240,13 +240,13 @@ updated: '2025-10-23 16:31:15'
    ```
 3. Отредактируйте конфигурацию NGINX для экземпляра ПО в соответствии с резервной копией, [сохранённой ранее](#upgrade_version_linux_no_stop_old_instance_data_prepare):
 
-   - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+   - **Astra Linux, Debian, DEB-дистрибутивы**
 
      ```
      nano /etc/nginx/sites-available/comindware<instanceName>
 
      ```
-   - **РЕД ОС**, **Rocky** (RPM-based)
+   - **РЕД ОС, RPM-дистрибутивы**
 
      ```
      nano /etc/nginx/conf.d/comindware<instanceName>
@@ -368,14 +368,14 @@ updated: '2025-10-23 16:31:15'
 10. Скопируйте очищенную резервную копию в директорию с базой данных `/var/lib/comindware/<instanceName>/Database/`.
 11. Назначьте владельца директории с базой данных:
 
-    - **Astra Linux, Ubuntu, Debian** (DEB-based)
+    - **Astra Linux, Debian, DEB-дистрибутивы**
 
     ```
     chown -R www-data:www-data /var/lib/comindware/<instanceName>/Database
 
     ```
 
-    - **РЕД ОС, Rocky** (RPM-based)
+    - **РЕД ОС, RPM-дистрибутивы**
 
     ```
     chown -R nginx:nginx /var/lib/comindware/<instanceName>/Database

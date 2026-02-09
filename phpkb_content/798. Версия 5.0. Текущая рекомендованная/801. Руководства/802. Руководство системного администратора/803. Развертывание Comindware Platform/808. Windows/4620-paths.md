@@ -2,7 +2,7 @@
 title: 'Пути и содержимое директорий экземпляра ПО'
 kbId: 4620
 url: 'https://kb.comindware.ru/article.php?id=4620'
-updated: '2025-05-20 16:53:47'
+updated: '2026-02-09 16:53:09'
 ---
 
 # Пути и содержимое директорий экземпляра ПО
@@ -36,8 +36,7 @@ updated: '2025-05-20 16:53:47'
   - `apigateway.yml` — конфигурация службы Apigateway;
   - `Ignite.config` — конфигурация Apache Ignite.
 - `/var/lib/comindware/<instanceName>/Database/db` — файлы базы данных.
-- `/var/lib/comindware/<instanceName>/Database/log` — файлы журналов Apache Ignite.
-- `/var/log/comindware/<instanceName>/Logs/` — файлы журналов.
+- `/var/log/comindware/<instanceName>/Logs/` — файлы журналов (в том числе журналы Apache Ignite).
 - `/var/lib/comindware/<instanceName>/Database/Scripts` — скомпилированные библиотеки для скриптов на языке С#.
 - `/var/lib/comindware/<instanceName>/Streams` — загруженные пользователями и сформированные системой файлы, которые прикреплены к соответствующим атрибутам.
 - Вспомогательные файлы:
