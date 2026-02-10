@@ -99,9 +99,9 @@ _![Схема ландшафта {{ productName }} в составе ЕЦП «Г
 
 {% else %}
 
-### Рекомендуемые варианты развертывания Системы {: #architecture_landscape_deployment_options }
+### Рекомендуемые варианты развертывания Системы {: #architecture_landscape_deployment_options .pageBreakBefore }
 
-#### Минимальная конфигурация {: #architecture_landscape_minimal_configuration .pageBreakBefore}
+#### Минимальная конфигурация {: #architecture_landscape_minimal_configuration }
 
 Компоненты типовой минимальная конфигурации Системы, предназначенной для демонстраций и реализации пилотных проектов:
 
@@ -111,7 +111,7 @@ _![Схема ландшафта {{ productName }} в составе ЕЦП «Г
 
 _![Минимальная конфигурация Системы](https://kb.comindware.ru/assets/Picture2_2.png)_
 
-#### Продуктовая конфигурация {: #architecture_landscape_production_configuration }
+#### Продуктовая конфигурация {: #architecture_landscape_production_configuration .pageBreakBefore }
 
 Компоненты типовой продуктовой конфигурации, обеспечивающей дублирование и резервирование ресурсов, а также отказоустойчивость Системы:
 
