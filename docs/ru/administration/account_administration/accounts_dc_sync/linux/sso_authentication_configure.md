@@ -384,16 +384,10 @@ _![Настройка свойств сервисного аккаунта дл�
     which krb5-config
     ```
 
-4. Установите пакеты `samba-dc` и `kerberos-kdc`:
+4. Установите пакеты `kerberos-kdc`:
 
     ``` sh
-    apt-get install task-samba-dc krb5-kdc
-    ```
-
-5. Убедитесь, что модули установлены:
-
-    ``` sh
-    apt list task-samba-dc krb5-kdc
+    apt-get install krb5-kdc
     ```
 
 #### Настройка аутентификации Kerberos {: #sso_authentication_configure_kerberos_auth .pageBreakBefore }
@@ -407,7 +401,7 @@ _![Настройка свойств сервисного аккаунта дл�
 2. Отредактируйте файл `krb5.conf` согласно следующему примеру:
 {: .pageBreakInsideAvoid}
 
-    **Astra Linux, Debian, DEB-дистрибутивы**
+    **Astra Linux, Альт Сервер, Debian, DEB-дистрибутивы**
 
     ``` sh
     #astra/debian-winbind

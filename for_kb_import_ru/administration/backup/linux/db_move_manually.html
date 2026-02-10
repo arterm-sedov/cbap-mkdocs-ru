@@ -80,7 +80,7 @@
 <li>
 <p>Проверьте содержимое директивы <code>&lt;workDirectory&gt;</code>:</p>
 <div class="highlight"><code><pre><span></span><code>&lt;workDirectory&gt;/path/to/WorkDir&lt;/workDirectory&gt;</code> <br/></pre></code></div>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Путь к рабочей папке в файле конфигурации Apache Ignite" src="https://kb.comindware.ru/assets/img_63567910ececd.png"/><figcaption class="caption">Путь к рабочей папке в файле конфигурации Apache Ignite</figcaption></figure></p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Путь к рабочей папке в файле конфигурации Apache Ignite" src="https://kb.comindware.ru/assets/img_63567910ececd.png"/><figcaption class="caption">Путь к рабочей папке в файле конфигурации Apache Ignite</figcaption></figure>
 <p>Если директива <code>&lt;workDirectory&gt;</code> имеется, она содержит путь к рабочей папке базы данных экземпляра ПО.</p>
 <p>Если директива <code>&lt;workDirectory&gt;</code> отсутствует, база данных экземпляра ПО хранится в папке <code>var/www/comindware/data/Database/</code></p>
 <p>Путь к базе данных экземпляра ПО: <code>/var/lib/comindware/&lt;instanceName&gt;/Database/db</code>. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое папок экземпляра ПО</a>»</em>.</p>
@@ -92,7 +92,7 @@
 <li>
 <p>Перейдите в папку с базой данных экземпляра ПО в рабочей папке и выведите на экран её содержимое:</p>
 <div class="highlight"><code><pre><span></span><code>cd /var/lib/comindware/&lt;instanceName&gt;/Database/dbdb/ &amp;&amp; ll</code> <br/></pre></code></div>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Просмотр содержимого папки с базой данных экземпляра ПО" src="https://kb.comindware.ru/assets/img_635679e668157.png"/><figcaption class="caption">Просмотр содержимого папки с базой данных экземпляра ПО</figcaption></figure></p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Просмотр содержимого папки с базой данных экземпляра ПО" src="https://kb.comindware.ru/assets/img_635679e668157.png"/><figcaption class="caption">Просмотр содержимого папки с базой данных экземпляра ПО</figcaption></figure>
 </li>
 <li>
 <p>Проверьте актуальность данных по дате последней записи — она должна совпадать с датой последней активности платформы. В примере на иллюстрации видно, что содержимое папок <code>/marshaller</code> и <code>/node-29690-2969e7d-e435-43b4-983a-7979ccec12c7/</code> изменялось 21 октября.</p>
@@ -104,7 +104,7 @@
 <li>
 <p>Создайте с помощью nano скрипт <code>snapshot.sh</code>:</p>
 <div class="highlight"><code><pre><span></span><code>nano snapshot.sh</code> <br/></pre></code></div>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Создание скрипта с помощью nano" src="https://kb.comindware.ru/assets/img_63567a89286c4.png"/><figcaption class="caption">Создание скрипта с помощью nano</figcaption></figure></p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Создание скрипта с помощью nano" src="https://kb.comindware.ru/assets/img_63567a89286c4.png"/><figcaption class="caption">Создание скрипта с помощью nano</figcaption></figure>
 </li>
 <li>
 <p>Введите скрипт создания снимка, например:</p>
@@ -116,12 +116,12 @@
 <li>
 <p>Запустите созданный скрипт из папки <code>/tmp/</code>:</p>
 <div class="highlight"><code><pre><span></span><code>sh snapshot.sh</code> <br/></pre></code></div>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Запуск скрипта создания снимка" src="https://kb.comindware.ru/assets/img_63567b113131e.png"/><figcaption class="caption">Запуск скрипта создания снимка</figcaption></figure></p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Запуск скрипта создания снимка" src="https://kb.comindware.ru/assets/img_63567b113131e.png"/><figcaption class="caption">Запуск скрипта создания снимка</figcaption></figure>
 </li>
 <li>
 <p class="pageBreakBefore">Просмотрите содержимое папки со снимками Apache Ignite:</p>
 <div class="highlight"><code><pre><span></span><code>cd /var/lib/comindware/&lt;instanceName&gt;/Database/snapshots/ &amp;&amp; ll </code> <br/></pre></code></div>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Содержимое папки со снимками Apache Ignite" src="https://kb.comindware.ru/assets/img_63567d1f7a888.png"/><figcaption class="caption">Содержимое папки со снимками Apache Ignite</figcaption></figure></p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Содержимое папки со снимками Apache Ignite" src="https://kb.comindware.ru/assets/img_63567d1f7a888.png"/><figcaption class="caption">Содержимое папки со снимками Apache Ignite</figcaption></figure>
 </li>
 <li>
 <p>Создайте архив папки снимка, например, /snapshot_2022_10_21/, и перенесите его на внешнее хранилище.</p>
@@ -155,7 +155,7 @@
 <li>
 <p>Убедитесь, что сервисы остановлены. Статус должен быть <code>Active: inactive (dead)</code>:</p>
 <div class="highlight"><code><pre><span></span><code>systemctl status zookeeper.service kafka.service nginx.service comindware&lt;instanceName&gt;.service elasticsearch.service</code> <br/></pre></code></div>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Проверка остановки сервисов OpenSearch (Elasticsearch), comindware&lt;instanceName&gt;, NGINX, Kafka и Zookeeper" src="https://kb.comindware.ru/assets/img_63567da91a5c6.png"/><figcaption class="caption">Проверка остановки сервисов OpenSearch (Elasticsearch), comindware<instancename>, NGINX, Kafka и Zookeeper</instancename></figcaption></figure></p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Проверка остановки сервисов OpenSearch (Elasticsearch), comindware&lt;instanceName&gt;, NGINX, Kafka и Zookeeper" src="https://kb.comindware.ru/assets/img_63567da91a5c6.png"/><figcaption class="caption">Проверка остановки сервисов OpenSearch (Elasticsearch), comindware<instancename>, NGINX, Kafka и Zookeeper</instancename></figcaption></figure>
 </li>
 <li>
 <p>Скопируйте архив со снимком базы данных экземпляра ПО в папку <code>/tmp/</code>.</p>
@@ -163,7 +163,7 @@
 <li>Распакуйте архив в текущую папку.</li>
 <li>
 <p>Перенесите содержимое папки снимка (например, <code>/tmp/snapshot_2022_10_21</code>) в папку базы данных экземпляра ПО: <code>/var/www/cmw-db/</code></p>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Содержимое папки снимка" src="https://kb.comindware.ru/assets/img_63567e41566e4.png"/><figcaption class="caption">Содержимое папки снимка</figcaption></figure></p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Содержимое папки снимка" src="https://kb.comindware.ru/assets/img_63567e41566e4.png"/><figcaption class="caption">Содержимое папки снимка</figcaption></figure>
 </li>
 <li>
 <p>Перейдите в папку с ПО:</p>
@@ -176,13 +176,13 @@
 <li>
 <p>Найдите директиву <code>&lt;workDirectory&gt;</code> и укажите в ней путь папке базы данных экземпляра ПО:</p>
 <div class="highlight"><code><pre><span></span><code>&lt;workDirectory&gt;/var/www/cmw-db&lt;/workDirectory&gt;</code> <br/></pre></code></div>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Путь к новой папке базы данных в файле конфигурации Apache Ignite" src="https://kb.comindware.ru/assets/img_63567eabb2a14.png"/><figcaption class="caption">Путь к новой папке базы данных в файле конфигурации Apache Ignite</figcaption></figure></p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Путь к новой папке базы данных в файле конфигурации Apache Ignite" src="https://kb.comindware.ru/assets/img_63567eabb2a14.png"/><figcaption class="caption">Путь к новой папке базы данных в файле конфигурации Apache Ignite</figcaption></figure>
 </li>
 <li>
 <p>Проверьте наличие, а также дату и время создания файлов и папок в папке с базой данных экземпляра ПО:</p>
 <div class="highlight"><code><pre><span></span><code>cd /var/www/cmw-db/ &amp;&amp; ll</code> <br/><code>cd /var/www/cmw-db/db/ &amp;&amp; ll</code> <br/></pre></code></div>
 <p>Должны быть указаны дата и время создания снимка, если дата и время не совпадают с временем создания снимка, необходимо повторить перенос базы данных.</p>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Проверка наличия, даты и времени создания файлов и папок в папке базы данных экземпляра ПО" src="https://kb.comindware.ru/assets/img_63567efdbf883.png"/><figcaption class="caption">Проверка наличия, даты и времени создания файлов и папок в папке базы данных экземпляра ПО</figcaption></figure></p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Проверка наличия, даты и времени создания файлов и папок в папке базы данных экземпляра ПО" src="https://kb.comindware.ru/assets/img_63567efdbf883.png"/><figcaption class="caption">Проверка наличия, даты и времени создания файлов и папок в папке базы данных экземпляра ПО</figcaption></figure>
 </li>
 <li>
 <p>Замените права доступа и владельцев папок:</p>
@@ -197,7 +197,7 @@
 <li>
 <p>Проверьте права доступа и владельцев папок:</p>
 <div class="highlight"><code><pre><span></span><code>ll</code> <br/></pre></code></div>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Проверка прав доступа и владельцев папок" src="https://kb.comindware.ru/assets/img_635680c397312.png"/><figcaption class="caption">Проверка прав доступа и владельцев папок</figcaption></figure></p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Проверка прав доступа и владельцев папок" src="https://kb.comindware.ru/assets/img_635680c397312.png"/><figcaption class="caption">Проверка прав доступа и владельцев папок</figcaption></figure>
 </li>
 </ol>
 <h2 id="запуск-и-проверка-конфигурации-экземпляра-по">Запуск и проверка конфигурации экземпляра ПО</h2>
@@ -205,7 +205,7 @@
 <li>
 <p>Запустите необходимые службы и проверьте их статус. Статус должен быть <code>Active: running</code>:</p>
 <div class="highlight"><code><pre><span></span><code>systemctl start elasticsearch kafka nginx comindware&lt;instanceName&gt;</code> <br/><code>systemctl status elasticsearch kafka nginx comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
-<p><figure class="screenshot_with_caption" markdown=""><img alt="Проверка активного состояния сервисов" src="https://kb.comindware.ru/assets/img_635680edb9d1d.png"/><figcaption class="caption">Проверка активного состояния сервисов</figcaption></figure></p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Проверка активного состояния сервисов" src="https://kb.comindware.ru/assets/img_635680edb9d1d.png"/><figcaption class="caption">Проверка активного состояния сервисов</figcaption></figure>
 </li>
 <li>
 <p>Перезапустите машину.</p>
@@ -237,5 +237,5 @@
 </main>
 </div>
 <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
-document$.subscribe(() => { lightbox.reload() });
+document$.subscribe(()=>{ lightbox.reload(); });
 </script></div>
