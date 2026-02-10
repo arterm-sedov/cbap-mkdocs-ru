@@ -38,7 +38,42 @@ hide: tags
     - **Домен Active Directory** — группа объектов в сети.
     - **Single Sign-on (SSO)** — технология единого входа, позволяющая пользователям выполнять аутентификацию с использованием одного набора учётных данных в нескольких независимых системах.
 
-## Примеры значений параметров {: #sso_authentication_configure_parameter_values_examples }
+## Порядок настройки {: #sso_authentication_configure_sequence }
+
+1. Подготовьте параметры и инфраструктуру аутентификации:
+
+    - Ознакомьтесь с [примерами значений параметров](#sso_authentication_configure_parameter_values_examples).
+    - Определите [конфигурацию машины с экземпляром ПО **{{ productName }}**](#sso_authentication_configure_instance).
+    - Определите [конфигурацию машины с контроллером домена](#sso_authentication_configure_dc_configuration).
+    - При необходимости настройте [надёжные узлы на контроллере домена](#sso_authentication_configure_dc_trusted_hosts).
+    - Создайте и настройте [сервисного пользователя домена](#sso_authentication_configure_service_user) и [пользователей для проверки аутентификации](#sso_authentication_configure_test_users).
+
+2. Подготовьте SPN и keytab-файл аутентификации:
+
+    - [Создайте keytab-файл аутентификации и перенесите его на машину с экземпляром ПО **{{ productName }}**](#sso_authentication_configure_keytab_creation).
+    - [Настройте обновление keytab-файла аутентификации для аутентификации новых пользователей](#sso_authentication_configure_keytab_update).
+
+3. [Настройте машину с экземпляром ПО **{{ productName }}**](#sso_authentication_configure_linux_host_setup) для использования SSO:
+
+    - [Проверьте требования к машине](#sso_authentication_configure_linux_host_requirements).
+    - [Настройте параметры сети](#sso_authentication_configure_linux_host_network_settings).
+    - [Проверьте настройку сети](#sso_authentication_configure_linux_host_network_verification).
+    - [Настройте синхронизацию времени между контроллером домена и экземпляром ПО](#sso_authentication_configure_time_sync);
+    - [Настройте конфигурацию Kerberos](#sso_authentication_configure_kerberos_config)
+    - [Установите ПО **{{ productName }}**](#sso_authentication_configure_product_installation)
+    - [Включите SSO в экземпляре **{{ productName }}** ПО](#sso_authentication_configure_product_configuration);
+    - [Установите и настройте модуль NGINX SPNEGO](#sso_authentication_configure_nginx_spnego)
+    - [Синхронизируйте аккаунты экземпляра ПО с сервером каталогов](#sso_authentication_configure_instance_configuration).
+    - [Проверьте вывод трассировщика ошибок в Shell](#sso_authentication_configure_kerberos_trace_check)
+    - [Запустите и инициализируйте экземпляр ПО](#sso_authentication_configure_client_setup)
+
+4. Настройте клиентские компьютеры для использования Kerberos-аутентификации при подключении к **{{ productName }}**:
+
+    - [Настройте клиентский компьютер](#sso_authentication_configure_client_setup).
+
+## Подготовка параметров и конфигурации машин {: #sso_authentication_configure_preparation .pageBreakBefore }
+
+### Примеры значений параметров {: #sso_authentication_configure_parameter_values_examples }
 
 Здесь примеры значений параметров заключены в угловые скобки `< >`. При настройке конфигурации заменяйте их на фактические значения, как показано в следующей таблице:
 
@@ -54,7 +89,9 @@ hide: tags
 
     Протокол аутентификации Kerberos учитывает регистр символов — там, где в инструкциях даны примеры параметров в верхнем регистре, следует подставлять фактические значения также в верхнем регистре.
 
-## Конфигурация машины linuxHost с экземпляром ПО {{ productName }} {: #sso_authentication_configure_instance }
+### Конфигурации машины `<linuxHost>` с экземпляром ПО {{ productName }} {: #sso_authentication_configure_instance }
+
+В этой статье используются следующие параметры конфигурации машины с экземпляром ПО.
 
 | Параметр             | Значение                  |
 | -------------------- | ------------------------- |
@@ -62,7 +99,9 @@ hide: tags
 | Имя хоста            | `<linuxHost>`             |
 | IP-адрес хоста       | `<linux.host.ip.address>` |
 
-## Конфигурация машины DCName с контроллером домена {: #sso_authentication_configure_dc_configuration }
+### Конфигурация машины `<DCName>` с контроллером домена {: #sso_authentication_configure_dc_configuration }
+
+В этой статье используются следующие параметры конфигурации машины с контроллером домена.
 
 | Параметр                    | Значение                         |
 | --------------------------- | -------------------------------- |
@@ -111,7 +150,9 @@ _![Настройка свойств сервисного аккаунта дл�
 | `sAmAccountName`    | `<domain>/user1`      | `<domain>/user2`      |
 | `userPrincipalName` | `user1@<DOMAIN.NAME>` | `user2@<DOMAIN.NAME>` |
 
-## Создание keytab-файла аутентификации {: #sso_authentication_configure_keytab_creation }
+## Подготовка SPN и keytab-файл аутентификации {: #sso_authentication_configure_keytab_prepare .pageBreakBefore }
+
+### Создание keytab-файла аутентификации {: #sso_authentication_configure_keytab_creation }
 
 1. На контроллере домена `<DCName>` выведите список Service Principal Names (SPN), привязанных к пользователю `<authuser>`:
 
@@ -141,7 +182,7 @@ _![Настройка свойств сервисного аккаунта дл�
 5. [Настройте машину `<linuxHost>`](#sso_authentication_configure_linux_host_setup) с экземпляром ПО.
 6. Перенесите keytab-файл `<authuser>.keytab` на машину `<linuxHost>` с экземпляром ПО.
 
-## Обновление keytab-файла аутентификации для аутентификации новых пользователей {: #sso_authentication_configure_keytab_update}
+### Обновление keytab-файла аутентификации для аутентификации новых пользователей {: #sso_authentication_configure_keytab_update .pageBreakBefore}
 
 !!! warning "Внимание!"
 
@@ -209,7 +250,7 @@ _![Настройка свойств сервисного аккаунта дл�
 - Должен быть установлен и сконфигурирован `Kerberos`.
 - Должен быть установлен и настроен прокси-сервер _NGINX_ с модулем аутентификации _SPNEGO_ и зависимостями исполняемой среды для него.
 
-### Настройка параметров сети для разрешения DC FQDN {: #sso_authentication_configure_linux_host_network_settings }
+### Настройка параметров сети для разрешения DC FQDN {: #sso_authentication_configure_linux_host_network_settings .pageBreakBefore }
 
 #### Изменение файла hosts {: #sso_authentication_configure_linux_host_hosts_file }
 
@@ -260,7 +301,7 @@ _![Настройка свойств сервисного аккаунта дл�
     chattr +i /etc/resolv.conf
     ```
 
-### Проверка корректности настроек сети {: #sso_authentication_configure_linux_host_network_verification }
+### Проверка корректности настроек сети {: #sso_authentication_configure_linux_host_network_verification .pageBreakBefore }
 
 1. Убедитесь, что FQDN `<DCName>.<domain.name>` разрешается:
 
@@ -275,7 +316,7 @@ _![Настройка свойств сервисного аккаунта дл�
     host <domain.controller.ip.address>
     ```
 
-### Синхронизация времени между машинами DCName и linuxHost {: #sso_authentication_configure_time_sync }
+### Синхронизация времени между машинами DCName и linuxHost {: #sso_authentication_configure_time_sync .pageBreakBefore }
 
 Синхронизацию времени следует настраивать в следующих случаях:
 
@@ -320,7 +361,7 @@ _![Настройка свойств сервисного аккаунта дл�
     systemctl status ntp
     ```
 
-### Настройка конфигурации Kerberos {: #sso_authentication_configure_kerberos_config }
+### Настройка конфигурации Kerberos {: #sso_authentication_configure_kerberos_config .pageBreakBefore }
 
 #### Установка вспомогательных пакетов {: #sso_authentication_configure_kerberos_helpers_install }
 
@@ -439,80 +480,102 @@ _![Настройка свойств сервисного аккаунта дл�
     <domain.name> = <DOMAIN.NAME>
     ```
 
-#### Для ОС «Альт Сервер»: настройка pam\_winbind.conf {: #sso_authentication_configure_alt_server_pam_winbind }
+### Установка экземпляра ПО {: #sso_authentication_configure_product_installation .pageBreakBefore }
 
-1. Откройте для редактирования файл конфигурации `pam_winbind.conf`:
+1. Установите вспомогательне ПО для **{{ productName }}** согласно инструкциям в параграфе _«[Порядок установки вспомогательного ПО][deploy_guide_linux_prerequisites_install_order]»_.
+2. Установите ПО **{{ productName }}** согласно инструкциям в параграфе _«[Порядок установки ПО {{ productName }}][deploy_guide_linux_install_order]»_.
 
-    ``` sh
-    vim /etc/security/pam_winbind.conf
-    ```
+3. Создайте экземпляр ПО **{{ productName }}**, согласно инструкциям в параграфе _«[Создание экземпляра ПО {{ productName }}][deploy_guide_linux_instance_create]»_. Далее `<instanceName>` — имя созданного экземпляра ПО.
 
-2. Отредактировать файл конфигурации `pam_winbind.conf` согласно следующему примеру:
-{: .pageBreakInsideAvoid}
+!!! warning "Не запускайте и не инициализируйте экземпляр ПО"
 
-    ``` sh
-    [global]
-    debug = no
-    debug_state = no
-    try_first_pass = yes
-    cached_login = yes
-    krb5_auth = yes
-    krb_ccache_type = FILE
-    silent = yes
-    mkhomedir = yes
-    ```
+    После создания экземпляра ПО **{{ productName }}** не запускайте и не инициализируйте его.
 
-#### Установка экземпляра ПО {: #sso_authentication_configure_product_installation .pageBreakBefore }
+    Вместо этого переходите к следующим этапам настройки SSO.
 
-1. Скачайте и распакуйте дистрибутив ПО **{{ productName }}** в директорию `/home/<username>` и  перейдите в директорию с распакованным ПО (`X.X.XXXX.X` — номер версии ПО, `<osname>` — название операционной системы):
-
-    ``` sh
-    tar -xvzf X.X.XXXX.X.<osname>.tar.gz -C /home/<username>
-    cd /home/<username>/CMW_<osname>/
-    ```
-
-2. Установите ПО **{{ productName }}**  без создания экземпляра ПО и с ключом `-d=clear` — без демонстрационной базы данных:
-
-    ```
-    sh install.sh -p -d=clear
-    ```
-
-3. Создайте экземпляр ПО, указав вместо `<instanceName>` требуемое имя экземпляра (`X.X.XXXX.X` — номер версии ПО):
-
-    ``` sh
-    cd scripts/instance/
-    sh create.sh -n=<instanceName> -p=80 -v=X.X.XXXX.X
-    ```
-
-#### Настройка экземпляра ПО {: #sso_authentication_configure_product_configuration }
+### Включение SSO в экземпляре ПО {: #sso_authentication_configure_product_configuration .pageBreakBefore }
 
 Для включения функционала SSO аутентификации в экземпляре ПО необходимо настроить его файл конфигурации.
 
-1. Откройте для редактирования файл конфигурации экземпляра ПО (`instanceName` — имя экземпляра ПО):
+1. Откройте для редактирования файл конфигурации экземпляра ПО (`<instanceName>` — имя экземпляра ПО):
 
     ``` sh
-    vim /usr/share/comindware/configs/instance/instanceName.yml
+    vim /usr/share/comindware/configs/instance/<instanceName>.yml
     ```
 
 2. Добавьте в файл директиву `isLinuxSSOAuthorization: true`
 
-_![Пример файла instanceName.yml с директивой  isLinuxSSOAuthorization: true](img/sso_authentication_configure_yml_file_example.png)_
+_![Пример файла <instanceName>.yml с директивой  isLinuxSSOAuthorization: true](img/sso_authentication_configure_yml_file_example.png)_
 
-#### Установка и настройка модуля NGINX SPNEGO {: #sso_authentication_configure_nginx_spnego .pageBreakBefore }
+### Установка и настройка модуля NGINX SPNEGO {: #sso_authentication_configure_nginx_spnego .pageBreakBefore }
 
-1. Установите модуль _NGINX-SPNEGO_:
+Перед установкой ознакомьтесь с [документацией модуля NGINX SPNEGO][spnego_http_auth_nginx_module] (раздел _Installation_).
 
-    **Любые ОС (кроме Astra Linux 1.8.3):**
+1. Все последующие команды следует выполнять от имени суперпользователя `root`. Для этого введите команду:
 
-    ``` sh
-    apt-get install nginx-spnego
-    ```
+    --8<-- "linux_sudo.md"
 
-    **Astra Linux 1.8.3 и выше:**
+2. Установите модуль _NGINX-SPNEGO_:
 
-    Установите модуль `ngx_http_auth_spnego_module.so` из пакета `nginx-spnego-module_1.26.3-1_amd64.deb`, который поставляется в составе инсталлятора **{{ productName }}** для Astra Linux 1.8.3 и выше.
+    - **Astra Linux (версии 1.8.3 и выше)**
 
-2. Добавить модуль _SPNEGO_ к рабочей конфигурации _NGINX_:
+        Установите модуль `ngx_http_auth_spnego_module.so` из пакета `nginx-spnego-module_1.26.3-1_amd64.deb`, который поставляется в составе инсталлятора **{{ productName }}** для Astra Linux 1.8.3 и выше.
+
+    - **Astra Linux (версии ниже 1.8.3), Debian, DEB-дистрибутивы**
+
+        ``` sh
+        apt-get update
+        apt-get install -y build-essential git wget
+
+        cd /usr/src
+        wget http://nginx.org/download/nginx-<nginx.version>.tar.gz
+        tar -xvzf nginx-<nginx.version>.tar.gz
+        cd nginx-<nginx.version>
+
+        git clone https://github.com/stnoonan/spnego-http-auth-nginx-module.git
+
+        ./configure --add-module=./spnego-http-auth-nginx-module
+        make
+        make install
+        ```
+
+    - **РЕД ОС, RPM-дистрибутивы**
+
+        ``` sh
+        yum groupinstall -y "Development Tools"
+        yum install -y git wget
+
+        cd /usr/src
+        wget http://nginx.org/download/nginx-<nginx.version>.tar.gz
+        tar -xvzf nginx-<nginx.version>.tar.gz
+        cd nginx-<nginx.version>
+
+        git clone https://github.com/stnoonan/spnego-http-auth-nginx-module.git
+
+        ./configure --add-module=./spnego-http-auth-nginx-module
+        make
+        make install
+        ```
+
+    - **Альт Сервер**
+
+        ``` sh
+        apt-get update
+        apt-get install -y gcc make git wget
+
+        cd /usr/src
+        wget http://nginx.org/download/nginx-<nginx.version>.tar.gz
+        tar -xvzf nginx-<nginx.version>.tar.gz
+        cd nginx-<nginx.version>
+
+        git clone https://github.com/stnoonan/spnego-http-auth-nginx-module.git
+
+        ./configure --add-module=./spnego-http-auth-nginx-module
+        make
+        make install
+        ```
+
+3. Добавьте модуль _SPNEGO_ к рабочей конфигурации _NGINX_:
 
     **Любые ОС (кроме Astra Linux 1.8.3):**
 
@@ -528,7 +591,7 @@ _![Пример файла instanceName.yml с директивой  isLinuxSSOA
     load_module modules/ngx_http_auth_spnego_module.so;
     ```
 
-3. Поместить keytab-файл `<authuser>.keytab` в директорию конфигурации NGINX и сделать его доступным для чтения:
+4. Поместите keytab-файл `<authuser>.keytab` в директорию конфигурации NGINX и сделать его доступным для чтения:
 
     ``` sh
     cp /<path_to_keytab>/<authuser>.keytab /etc/nginx
@@ -537,92 +600,67 @@ _![Пример файла instanceName.yml с директивой  isLinuxSSOA
 
     Здесь `<path_to_keytab>` — папка, в которой находится keytab-файл `<authuser>.keytab`, взятый с контроллера домена.
 
-4. Откройте для редактирования описание веб-приложения _NGINX_ для экземпляра ПО `<instanceName>`:
+5. Откройте для редактирования описание веб-приложения _NGINX_ для экземпляра ПО `<instanceName>`:
 
     ``` sh
     vim /etc/nginx/sites-available.d/comindware<instanceName>
     ```
 
-5. Отредактируйте файл `comindware<instanceName>` согласно следующему примеру:
+6. Отредактируйте файл `comindware<instanceName>` согласно следующему примеру (раскомментируйте все директивы `auth_gss` ):
 
     !!! warning "Для Astra Linux 1.8.3 и выше"
 
         Перед включением директивы `auth_gss on;` в конфигурации экземпляра ПО убедитесь, что модуль `ngx_http_auth_spnego_module.so` установлен и загружен, как указано на шагах 1–2.
 
     ``` { .sh .pageBreakAfter title="Пример файла comindware&lt;instanceName&gt;" }
-    server {
-            listen 8999 http2;
-            root /var/www/cmwdata;
 
-                location /async {
-                    grpc_pass grpc_cmwdata;
-            }
-    }
-    server {
-            listen       80 default;
-            root         /var/www/cmwdata;
+    ...
 
-            client_header_timeout 3h;
-            client_body_timeout 3h;
-            grpc_read_timeout 3h;
-            grpc_send_timeout 3h;
-            client_max_body_size 300m;
-            fastcgi_read_timeout 10000;
+    location / {
+        # Authentication Configuration
+        # Раскомментируйте директивы auth_gss
+        auth_gss on;
+        auth_gss_realm <DOMAIN.DNS>;
+        auth_gss_keytab /etc/nginx/<authuser>.keytab;
+        auth_gss_service_name HTTP/<authuser>.<domain.dns>;
+        auth_gss_allow_basic_fallback on;
 
-    {% if pdfOutput %}
-    ```
-
-    ``` sh title="Пример файла comindware&lt;instanceName&gt; — продолжение"
-    {% endif %}
-                location /async {
-                    grpc_pass grpc_cmwdata;
-                }
-
-                location / {
-                    # SPNEGO Configuration
-                    add_header Set-Cookie "cmw_user=$remote_user";
-                    auth_gss on;
-                    auth_gss_realm <DOMAIN.NAME>;
-                    auth_gss_keytab /etc/nginx/<authuser>.keytab;
-                    auth_gss_service_name HTTP/<authuser>.<domain.name>;
-                    auth_gss_allow_basic_fallback on;
-
-                    proxy_read_timeout 10000;
-                    proxy_connect_timeout 10000;
-                    proxy_send_timeout 10000;
-                    root                /var/www/cmwdata/;
-                    fastcgi_pass        unix:/var/www/cmwdata/App_Data/cmwdata.socket;
-                    include             /etc/nginx/fastcgi.conf;
-                }
+        proxy_set_header  X-Request-ID        $request_id;
+        proxy_read_timeout 10000;
+        proxy_connect_timeout 10000;
+        proxy_send_timeout 10000;
+        root                /var/www/<instancename>/;
+        fastcgi_pass        unix:/var/www/<instancename>/App_Data/<instancename>.socket;
+        include             /etc/nginx/fastcgi.conf;
     }
     ```
 
-6. Проверьте синтаксис веб-приложения _NGINX_ для экземпляра ПО `<instanceName>`:
+7. Проверьте синтаксис веб-приложения _NGINX_ для экземпляра ПО `<instanceName>`:
 
     ``` sh
     nginx -t
     ```
 
-7. Примените настройки и перезапустите _NGINX_:
+8. Примените настройки и перезапустите _NGINX_:
 
     ``` sh
     nginx -s reload
     ```
 
-8. Проверьте статус сервиса _NGINX_:
+9. Проверьте статус сервиса _NGINX_:
 
     ``` sh
     systemctl status nginx
     ```
 
-9. Проверьте статус сервиса экземпляра ПО `<instanceName>`:
+10. Проверьте статус сервиса экземпляра ПО `<instanceName>`:
 {: .pageBreakBefore }
 
     ``` sh
     systemctl status comindware<instanceName>
     ```
 
-### Изменение конфигурации экземпляра ПО {: #sso_authentication_configure_instance_configuration .pageBreakBefore }
+### Синхронизация аккаунтов экземпляра ПО с сервером каталогов {: #sso_authentication_configure_instance_configuration .pageBreakBefore }
 
 1. Войдите в экземпляр ПО с помощью браузера.
 2. Откройте свойства [подключения к серверу каталогов][ad_connection], которое будет использоваться для синхронизации аккаунтов.
@@ -635,7 +673,7 @@ _![Пример файла instanceName.yml с директивой  isLinuxSSOA
     systemctl restart comindware<instance_name>
     ```
 
-### Проверка работы функционала Kerberos на машине linuxHost {: #sso_authentication_configure_kerberos_check }
+### Проверка работы функционала Kerberos на машине linuxHost {: #sso_authentication_configure_kerberos_check .pageBreakBefore }
 
 1. Создайте тикет для приложения `HTTP/<DCName>.<domain.name>`:
 
@@ -657,7 +695,14 @@ _![Пример файла instanceName.yml с директивой  isLinuxSSOA
     KRB5_TRACE=/dev/stdout kinit -k -t /etc/nginx/<authuser>.keytab HTTP/<DCName>.<domain.name>
     ```
 
-## Настройка клиента {: #sso_authentication_configure_client_setup }
+### Запуск и инициализация экземпляра ПО {: #sso_authentication_configure_client_setup .pageBreakBefore }
+
+После настройки SSO необходимо запустить и инициализировать экземпляр ПО **{{ productName }}**:
+
+1. Запустите экземпляр ПО согласно инструкциям в параграфе «_[Запуск экземпляра ПО][deploy_guide_linux_instance_start]_».
+2. Запустите экземпляр ПО согласно инструкциям в параграфе «_[Инициализация {{ productName }}][deploy_guide_linux_initialize]_».
+
+## Настройка клиента {: #sso_authentication_configure_client_setup .pageBreakBefore }
 
 По умолчанию SSO-авторизация работает в браузерах Edge и Google Chrome, но необходимо в параметрах безопасности браузера добавить сайт в зону местной интрасети и включить режим «**Автоматический вход в сеть только в зоне интрасети**». Сведения о настройке других браузеров см. в соответствующей документации.
 
@@ -667,8 +712,14 @@ _![Окно настройки параметров безопасности б�
 
 --8<-- "related_topics_heading.md"
 
+- [Установка, запуск, инициализация и остановка ПО][deploy_guide_linux]
 - [Аутентификация через Active Directory. Настройка контроллера домена и экземпляра ПО][ad_authentication_configure]
 - [Аутентификация через OpenID Connect. Настройка подключения и служб][openid_connection]
+- [Синхронизация с сервером каталогов (Active Directory)][accounts_dc_sync]
+- [Конфигурация экземпляра, компонентов ПО и служб. Настройка][configuration_files_linux]
+- [Развёртывание веб-сервера NGINX в Linux][nginx_deploy]
+- [Модуль GeoIP для NGINX. Установка и настройка][nginx_geoid_deploy]
+- [Документация модуля NGINX SPNEGO][spnego_http_auth_nginx_module]
 
 </div>
 

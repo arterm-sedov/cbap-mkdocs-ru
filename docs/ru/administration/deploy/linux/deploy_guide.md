@@ -55,6 +55,12 @@ hide: tags
 
 ### Видеоинструкция {: #deploy_guide_linux_prerequisites_install_video }
 
+!!! warning "Следуйте письменным инструкциям"
+
+    Видеоролик представлен исключительно в качестве общей иллюстрации процесса, а не конкретных инструкций.
+
+    Для установки вспомогательного ПО всегда следуйте письменным инструкциям, представленным ниже.
+
 [Ссылка на видеоролик](https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/deploy_guide_linux_auxiliary_software.mp4)
 
 <video controls="controls" width="100%" height="100%">
@@ -161,6 +167,12 @@ hide: tags
 
 ### Видеоинструкция {: #deploy_guide_linux_install_sw_video }
 
+!!! warning "Следуйте письменным инструкциям"
+
+    Видеоролик представлен исключительно в качестве общей иллюстрации процесса, а не конкретных инструкций.
+
+    Для установки ПО **{{ productName }}** всегда следуйте письменным инструкциям, представленным ниже.
+
 [Ссылка на видеоролик](https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/deploy_guide_linux_software.mp4)
 
 <video controls="controls" width="100%" height="100%">
@@ -226,6 +238,12 @@ hide: tags
 Прежде чем приступать к установке экземпляра ПО **{{ productName }}**, ознакомьтесь с видеороликом и инструкциями, представленными ниже.
 
 ### Видеоинструкция
+
+!!! warning "Следуйте письменным инструкциям"
+
+    Видеоролик представлен исключительно в качестве общей иллюстрации процесса, а не конкретных инструкций.
+
+    Для создания экземпляра ПО **{{ productName }}** всегда следуйте письменным инструкциям, представленным ниже.
 
 [Ссылка на видеоролик](https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/deploy_guide_linux_instance.mp4)
 

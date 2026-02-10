@@ -84,6 +84,8 @@
 
 [apache_ignite_partition_partition_loss_policy]: https://ignite.apache.org/docs/latest/configuring-caches/partition-loss-policy
 
+[spnego_http_auth_nginx_module]: https://github.com/stnoonan/spnego-http-auth-nginx-module
+
 [browser_push_permissions_chrome_official]: https://support.google.com/chrome/answer/3220216?hl=ru-RU&co=GENIE.Platform%3DDesktop
 
 [browser_push_permissions_edge_official]: https://support.microsoft.com/ru-ru/microsoft-edge/управление-уведомлениями-сайтов-в-microsoft-edge-0c555609-5bf2-479d-a59d-fb30a0b80b2b
@@ -1007,7 +1009,15 @@
 
 [deploy_guide_linux_initialize]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_initialize
 
+[deploy_guide_linux_install_order]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_install_order
+
+[deploy_guide_linux_instance_create]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_instance_create
+
+[deploy_guide_linux_instance_start]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_instance_start
+
 [deploy_guide_linux_prerequisites_install]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_prerequisites_install
+
+[deploy_guide_linux_prerequisites_install_order]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_prerequisites_install_order
 
 [deploy_guide_linux_vm_max_map_count]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_vm_max_map_count
 
