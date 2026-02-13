@@ -1,0 +1,853 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan">
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="SRV_HOST" elementType="Argument">
+            <stringProp name="Argument.name">SRV_HOST</stringProp>
+            <stringProp name="Argument.value"></stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SRV_PORT" elementType="Argument">
+            <stringProp name="Argument.name">SRV_PORT</stringProp>
+            <stringProp name="Argument.value">443</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SRV_PROTOCOL" elementType="Argument">
+            <stringProp name="Argument.name">SRV_PROTOCOL</stringProp>
+            <stringProp name="Argument.value">https</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="AccountsCount" elementType="Argument">
+            <stringProp name="Argument.name">AccountsCount</stringProp>
+            <stringProp name="Argument.value">200</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="ReadAcc" elementType="Argument">
+            <stringProp name="Argument.name">ReadAcc</stringProp>
+            <stringProp name="Argument.value">200</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="ramp_up" elementType="Argument">
+            <stringProp name="Argument.name">ramp_up</stringProp>
+            <stringProp name="Argument.value">200</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="Iterations" elementType="Argument">
+            <stringProp name="Argument.name">Iterations</stringProp>
+            <stringProp name="Argument.value">1</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="AccountsStartId" elementType="Argument">
+            <stringProp name="Argument.name">AccountsStartId</stringProp>
+            <stringProp name="Argument.value">100</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="TestPrefix" elementType="Argument">
+            <stringProp name="Argument.name">TestPrefix</stringProp>
+            <stringProp name="Argument.value">OK</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SOTRUDNIK_LOGIN" elementType="Argument">
+            <stringProp name="Argument.name">SOTRUDNIK_LOGIN</stringProp>
+            <stringProp name="Argument.value"></stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="SOTRUDNIK_PASSWORD" elementType="Argument">
+            <stringProp name="Argument.name">SOTRUDNIK_PASSWORD</stringProp>
+            <stringProp name="Argument.value"></stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="counter" elementType="Argument">
+            <stringProp name="Argument.name">counter</stringProp>
+            <stringProp name="Argument.value">__counter(False,)</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </elementProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Сотрудник.">
+        <stringProp name="ThreadGroup.num_threads">${ReadAcc}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${ramp_up}</stringProp>
+        <longProp name="ThreadGroup.duration">3660</longProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">${Iterations}</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="false">
+          <stringProp name="delimiter">,</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="filename"></stringProp>
+          <boolProp name="ignoreFirstLine">false</boolProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <stringProp name="shareMode">shareMode.all</stringProp>
+          <boolProp name="stopThread">false</boolProp>
+          <stringProp name="variableNames"></stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <AuthManager guiclass="AuthPanel" testclass="AuthManager" testname="HTTP Authorization Manager">
+          <collectionProp name="AuthManager.auth_list">
+            <elementProp name="" elementType="Authorization">
+              <stringProp name="Authorization.url">${SRV_PROTOCOL}://${SRV_HOST}:${SRV_PORT}/</stringProp>
+              <stringProp name="Authorization.username">${SOTRUDNIK_LOGIN}</stringProp>
+              <stringProp name="Authorization.password">${SOTRUDNIK_PASSWORD}</stringProp>
+              <stringProp name="Authorization.domain"></stringProp>
+              <stringProp name="Authorization.realm"></stringProp>
+            </elementProp>
+            <elementProp name="" elementType="Authorization">
+              <stringProp name="Authorization.url"></stringProp>
+              <stringProp name="Authorization.username"></stringProp>
+              <stringProp name="Authorization.password"></stringProp>
+              <stringProp name="Authorization.domain"></stringProp>
+              <stringProp name="Authorization.realm"></stringProp>
+            </elementProp>
+            <elementProp name="" elementType="Authorization">
+              <stringProp name="Authorization.url"></stringProp>
+              <stringProp name="Authorization.username"></stringProp>
+              <stringProp name="Authorization.password"></stringProp>
+              <stringProp name="Authorization.domain"></stringProp>
+              <stringProp name="Authorization.realm"></stringProp>
+            </elementProp>
+          </collectionProp>
+          <boolProp name="AuthManager.controlledByThreadGroup">false</boolProp>
+        </AuthManager>
+        <hashTree/>
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
+          <collectionProp name="HeaderManager.headers">
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">Content-Type</stringProp>
+              <stringProp name="Header.value">application/json</stringProp>
+            </elementProp>
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">Accept</stringProp>
+              <stringProp name="Header.value">application/json</stringProp>
+            </elementProp>
+          </collectionProp>
+        </HeaderManager>
+        <hashTree/>
+        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager">
+          <collectionProp name="CookieManager.cookies"/>
+          <boolProp name="CookieManager.clearEachIteration">false</boolProp>
+          <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
+        </CookieManager>
+        <hashTree/>
+        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults">
+          <stringProp name="HTTPSampler.domain">${SRV_HOST}</stringProp>
+          <stringProp name="HTTPSampler.port">${SRV_PORT}</stringProp>
+          <stringProp name="HTTPSampler.protocol">${SRV_PROTOCOL}</stringProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.implementation"></stringProp>
+        </ConfigTestElement>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Сотрудник. Логин">
+          <stringProp name="TestPlan.comments">Логинимся</stringProp>
+          <stringProp name="HTTPSampler.domain">${SRV_HOST}</stringProp>
+          <stringProp name="HTTPSampler.port">${SRV_PORT}</stringProp>
+          <stringProp name="HTTPSampler.protocol">${SRV_PROTOCOL}</stringProp>
+          <stringProp name="HTTPSampler.path">/Home/ExternalLogin</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Пример сценария">
+          <boolProp name="TransactionController.includeTimers">false</boolProp>
+        </TransactionController>
+        <hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Открыть список">
+            <boolProp name="TransactionController.parent">true</boolProp>
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Открыть таблицу Закупки - Все записи">
+              <stringProp name="HTTPSampler.domain">${SRV_HOST}</stringProp>
+              <stringProp name="HTTPSampler.port">${SRV_PORT}</stringProp>
+              <stringProp name="HTTPSampler.protocol">${SRV_PROTOCOL}</stringProp>
+              <stringProp name="HTTPSampler.path">/DatasetData/Query</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;query&quot;: {&#xd;
+    &quot;datasetId&quot;: &quot;lst.28&quot;,&#xd;
+    &quot;columns&quot;: [&#xd;
+      &quot;ds.28318&quot;,&#xd;
+      &quot;ds.28312&quot;,&#xd;
+      &quot;ds.47089&quot;,&#xd;
+      &quot;ds.47091&quot;,&#xd;
+      &quot;ds.33782&quot;,&#xd;
+      &quot;ds.45747&quot;,&#xd;
+      &quot;ds.43268&quot;,&#xd;
+      &quot;ds.48706&quot;,&#xd;
+      &quot;ds.47618&quot;,&#xd;
+      &quot;ds.28331&quot;,&#xd;
+      &quot;ds.39142&quot;,&#xd;
+      &quot;ds.28314&quot;,&#xd;
+      &quot;ds.47092&quot;,&#xd;
+      &quot;ds.47094&quot;,&#xd;
+      &quot;ds.47615&quot;,&#xd;
+      &quot;ds.47614&quot;,&#xd;
+      &quot;ds.47093&quot;,&#xd;
+      &quot;ds.47095&quot;,&#xd;
+      &quot;ds.47605&quot;,&#xd;
+      &quot;ds.47606&quot;,&#xd;
+      &quot;ds.47607&quot;,&#xd;
+      &quot;ds.48704&quot;,&#xd;
+      &quot;ds.47612&quot;,&#xd;
+      &quot;ds.47613&quot;,&#xd;
+      &quot;ds.47611&quot;,&#xd;
+      &quot;ds.47617&quot;&#xd;
+    ],&#xd;
+    &quot;isPersonal&quot;: true,&#xd;
+    &quot;grouping&quot;: [],&#xd;
+    &quot;sorting&quot;: [&#xd;
+      {&#xd;
+        &quot;datasourceId&quot;: &quot;ds.28331&quot;,&#xd;
+        &quot;direction&quot;: &quot;Desc&quot;,&#xd;
+        &quot;nullValuesOnTop&quot;: false&#xd;
+      }&#xd;
+    ],&#xd;
+    &quot;paging&quot;: {&#xd;
+      &quot;page&quot;: 0,&#xd;
+      &quot;size&quot;: 50,&#xd;
+      &quot;skipSize&quot;: 0&#xd;
+    },&#xd;
+    &quot;stickedColumnsCount&quot;: 0,&#xd;
+    &quot;excludeValues&quot;: []&#xd;
+  }&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="Referer" elementType="Header">
+                    <stringProp name="Header.name">Referer</stringProp>
+                    <stringProp name="Header.value">${SRV_PROTOCOL}://${SRV_HOST}:${SRV_PORT}/</stringProp>
+                  </elementProp>
+                  <elementProp name="Accept-Language" elementType="Header">
+                    <stringProp name="Header.name">Accept-Language</stringProp>
+                    <stringProp name="Header.value">ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3</stringProp>
+                  </elementProp>
+                  <elementProp name="Origin" elementType="Header">
+                    <stringProp name="Header.name">Origin</stringProp>
+                    <stringProp name="Header.value">${SRV_PROTOCOL}://${SRV_HOST}:${SRV_PORT}</stringProp>
+                  </elementProp>
+                  <elementProp name="Accept" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.0${AccountsCount}</stringProp>
+                  </elementProp>
+                  <elementProp name="request-signature" elementType="Header">
+                    <stringProp name="Header.name">request-signature</stringProp>
+                    <stringProp name="Header.value">i+EJC48XeMfxzva093SxHmtSQ3Y=</stringProp>
+                  </elementProp>
+                  <elementProp name="request-token" elementType="Header">
+                    <stringProp name="Header.name">request-token</stringProp>
+                    <stringProp name="Header.value">05d55${AccountsCount}4eae704ca3b63fd4f859c${AccountsCount}edb3</stringProp>
+                  </elementProp>
+                  <elementProp name="X-Requested-With" elementType="Header">
+                    <stringProp name="Header.name">X-Requested-With</stringProp>
+                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                  </elementProp>
+                  <elementProp name="Content-Type" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                  <elementProp name="request-signature-data" elementType="Header">
+                    <stringProp name="Header.name">request-signature-data</stringProp>
+                    <stringProp name="Header.value">FlwmwCrGT3y8FL+gix4o+NZ9YYg=</stringProp>
+                  </elementProp>
+                  <elementProp name="Accept-Encoding" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate</stringProp>
+                  </elementProp>
+                  <elementProp name="User-Agent" elementType="Header">
+                    <stringProp name="Header.name">User-Agent</stringProp>
+                    <stringProp name="Header.value">Mozilla/5.0 (Windows NT ${AccountsCount}0.0; Win64; x64; rv:${AccountsCount}39.0) Gecko/20${AccountsCount}00${AccountsCount}0${AccountsCount} Firefox/${AccountsCount}39.0</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Сохранить запись" enabled="false">
+            <boolProp name="TransactionController.parent">true</boolProp>
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Кнопка Сохранить с заполненной формой">
+              <stringProp name="HTTPSampler.domain">${SRV_HOST}</stringProp>
+              <stringProp name="HTTPSampler.port">${SRV_PORT}</stringProp>
+              <stringProp name="HTTPSampler.protocol">${SRV_PROTOCOL}</stringProp>
+              <stringProp name="HTTPSampler.path">/Records/Execute</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;ucmd&quot;: &quot;event.614&quot;,&#xd;
+  &quot;contextObjectId&quot;: &quot;cmw.temp.388&quot;,&#xd;
+  &quot;selected&quot;: [],&#xd;
+  &quot;changes&quot;: &quot;{\&quot;changes\&quot;:{\&quot;widgetChanges\&quot;:[{\&quot;objId\&quot;:null,\&quot;tempId\&quot;:\&quot;cmw.temp.388\&quot;,\&quot;changes\&quot;:{\&quot;fw.950\&quot;:{\&quot;origin\&quot;:\&quot;Manual\&quot;,\&quot;literal\&quot;:\&quot;eqwrq\&quot;,\&quot;time\&quot;:1749051649669},\&quot;fw.951\&quot;:{\&quot;origin\&quot;:\&quot;Manual\&quot;,\&quot;literal\&quot;:\&quot;qwerqwe\&quot;,\&quot;time\&quot;:1749051650485},\&quot;fw.952\&quot;:{\&quot;origin\&quot;:\&quot;Manual\&quot;,\&quot;literal\&quot;:\&quot;qwer\&quot;,\&quot;time\&quot;:1749051651077},\&quot;fw.953\&quot;:{\&quot;origin\&quot;:\&quot;Manual\&quot;,\&quot;literal\&quot;:\&quot;wqer\&quot;,\&quot;time\&quot;:1749051653052}},\&quot;commandKind\&quot;:\&quot;Create\&quot;,\&quot;typeId\&quot;:\&quot;oa.1\&quot;}],\&quot;complexObjectChanges\&quot;:[]},\&quot;queries\&quot;:[{\&quot;wiId\&quot;:\&quot;fw.945\&quot;,\&quot;objId\&quot;:null,\&quot;tempId\&quot;:\&quot;cmw.temp.388\&quot;,\&quot;rootObjId\&quot;:null,\&quot;rootTempId\&quot;:\&quot;cmw.temp.388\&quot;,\&quot;widgets\&quot;:[],\&quot;queryObjectTitle\&quot;:true,\&quot;queryChildWidgets\&quot;:true,\&quot;queryObjectToolbar\&quot;:true}]}&quot;,&#xd;
+  &quot;isCollectionOperation&quot;: false,&#xd;
+  &quot;confirmation&quot;: false&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="Referer" elementType="Header">
+                    <stringProp name="Header.name">Referer</stringProp>
+                    <stringProp name="Header.value">${SRV_PROTOCOL}://${SRV_HOST}:${SRV_PORT}/</stringProp>
+                  </elementProp>
+                  <elementProp name="Accept-Language" elementType="Header">
+                    <stringProp name="Header.name">Accept-Language</stringProp>
+                    <stringProp name="Header.value">ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3</stringProp>
+                  </elementProp>
+                  <elementProp name="Origin" elementType="Header">
+                    <stringProp name="Header.name">Origin</stringProp>
+                    <stringProp name="Header.value">${SRV_PROTOCOL}://${SRV_HOST}:${SRV_PORT}</stringProp>
+                  </elementProp>
+                  <elementProp name="Accept" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.0${AccountsCount}</stringProp>
+                  </elementProp>
+                  <elementProp name="request-signature" elementType="Header">
+                    <stringProp name="Header.name">request-signature</stringProp>
+                    <stringProp name="Header.value">TCxxyuQKZuf7gTYGOEO4${AccountsCount}u75jyA=</stringProp>
+                  </elementProp>
+                  <elementProp name="request-token" elementType="Header">
+                    <stringProp name="Header.name">request-token</stringProp>
+                    <stringProp name="Header.value">567c9${AccountsCount}e5cccb43bba2b${AccountsCount}8c799299b98f</stringProp>
+                  </elementProp>
+                  <elementProp name="X-Requested-With" elementType="Header">
+                    <stringProp name="Header.name">X-Requested-With</stringProp>
+                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                  </elementProp>
+                  <elementProp name="Content-Type" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                  <elementProp name="request-signature-data" elementType="Header">
+                    <stringProp name="Header.name">request-signature-data</stringProp>
+                    <stringProp name="Header.value">cDOv0g3PNRl+Urxu9FOuZMWTv3M=</stringProp>
+                  </elementProp>
+                  <elementProp name="Accept-Encoding" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate</stringProp>
+                  </elementProp>
+                  <elementProp name="User-Agent" elementType="Header">
+                    <stringProp name="Header.name">User-Agent</stringProp>
+                    <stringProp name="Header.value">Mozilla/5.0 (Windows NT ${AccountsCount}0.0; Win64; x64; rv:${AccountsCount}39.0) Gecko/20${AccountsCount}00${AccountsCount}0${AccountsCount} Firefox/${AccountsCount}39.0</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Все поля пустые Сохранить" enabled="false">
+              <stringProp name="HTTPSampler.domain">${SRV_HOST}</stringProp>
+              <stringProp name="HTTPSampler.port">${SRV_PORT}</stringProp>
+              <stringProp name="HTTPSampler.protocol">${SRV_PROTOCOL}</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+              <stringProp name="HTTPSampler.path">/Records/Execute</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;ucmd&quot;: &quot;event.614&quot;,&#xd;
+  &quot;contextObjectId&quot;: &quot;cmw.temp.347&quot;,&#xd;
+  &quot;selected&quot;: [],&#xd;
+  &quot;changes&quot;: &quot;{\&quot;changes\&quot;:{\&quot;widgetChanges\&quot;:[{\&quot;objId\&quot;:null,\&quot;tempId\&quot;:\&quot;cmw.temp.347\&quot;,\&quot;changes\&quot;:{},\&quot;commandKind\&quot;:\&quot;Create\&quot;,\&quot;typeId\&quot;:\&quot;oa.1\&quot;}],\&quot;complexObjectChanges\&quot;:[]},\&quot;queries\&quot;:[{\&quot;wiId\&quot;:\&quot;fw.945\&quot;,\&quot;objId\&quot;:null,\&quot;tempId\&quot;:\&quot;cmw.temp.347\&quot;,\&quot;rootObjId\&quot;:null,\&quot;rootTempId\&quot;:\&quot;cmw.temp.347\&quot;,\&quot;widgets\&quot;:[],\&quot;queryObjectTitle\&quot;:true,\&quot;queryChildWidgets\&quot;:true,\&quot;queryObjectToolbar\&quot;:true}]}&quot;,&#xd;
+  &quot;isCollectionOperation&quot;: false,&#xd;
+  &quot;confirmation&quot;: false&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="Referer" elementType="Header">
+                    <stringProp name="Header.name">Referer</stringProp>
+                    <stringProp name="Header.value">${SRV_PROTOCOL}://${SRV_HOST}:${SRV_PORT}/</stringProp>
+                  </elementProp>
+                  <elementProp name="Accept-Language" elementType="Header">
+                    <stringProp name="Header.name">Accept-Language</stringProp>
+                    <stringProp name="Header.value">ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3</stringProp>
+                  </elementProp>
+                  <elementProp name="Origin" elementType="Header">
+                    <stringProp name="Header.name">Origin</stringProp>
+                    <stringProp name="Header.value">${SRV_PROTOCOL}://${SRV_HOST}:${SRV_PORT}</stringProp>
+                  </elementProp>
+                  <elementProp name="Accept" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.0${AccountsCount}</stringProp>
+                  </elementProp>
+                  <elementProp name="request-signature" elementType="Header">
+                    <stringProp name="Header.name">request-signature</stringProp>
+                    <stringProp name="Header.value">tcD9JuZcXM8naMOrm${AccountsCount}DM${AccountsCount}vrqF+8=</stringProp>
+                  </elementProp>
+                  <elementProp name="request-token" elementType="Header">
+                    <stringProp name="Header.name">request-token</stringProp>
+                    <stringProp name="Header.value">567c9${AccountsCount}e5cccb43bba2b${AccountsCount}8c799299b98f</stringProp>
+                  </elementProp>
+                  <elementProp name="X-Requested-With" elementType="Header">
+                    <stringProp name="Header.name">X-Requested-With</stringProp>
+                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                  </elementProp>
+                  <elementProp name="Content-Type" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                  <elementProp name="request-signature-data" elementType="Header">
+                    <stringProp name="Header.name">request-signature-data</stringProp>
+                    <stringProp name="Header.value">kugL/m7Nin6mi5S${AccountsCount}xdYxfdLhIFU=</stringProp>
+                  </elementProp>
+                  <elementProp name="Accept-Encoding" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate</stringProp>
+                  </elementProp>
+                  <elementProp name="User-Agent" elementType="Header">
+                    <stringProp name="Header.name">User-Agent</stringProp>
+                    <stringProp name="Header.value">Mozilla/5.0 (Windows NT ${AccountsCount}0.0; Win64; x64; rv:${AccountsCount}39.0) Gecko/20${AccountsCount}00${AccountsCount}0${AccountsCount} Firefox/${AccountsCount}39.0</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+            </hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Запросы данных формы" enabled="false">
+              <stringProp name="HTTPSampler.domain">${SRV_HOST}</stringProp>
+              <stringProp name="HTTPSampler.port">${SRV_PORT}</stringProp>
+              <stringProp name="HTTPSampler.protocol">${SRV_PROTOCOL}</stringProp>
+              <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+              <stringProp name="HTTPSampler.path">api/Dataform/QueryData</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;changes&quot;: {&#xd;
+    &quot;widgetChanges&quot;: [],&#xd;
+    &quot;complexObjectChanges&quot;: []&#xd;
+  },&#xd;
+  &quot;queries&quot;: [&#xd;
+    {&#xd;
+      &quot;wiId&quot;: &quot;fw.945&quot;,&#xd;
+      &quot;objId&quot;: &quot;220&quot;,&#xd;
+      &quot;tempId&quot;: null,&#xd;
+      &quot;rootObjId&quot;: &quot;220&quot;,&#xd;
+      &quot;rootTempId&quot;: null,&#xd;
+      &quot;widgets&quot;: [&#xd;
+        {&#xd;
+          &quot;wiId&quot;: &quot;fw.946&quot;,&#xd;
+          &quot;objId&quot;: null,&#xd;
+          &quot;rootObjId&quot;: null,&#xd;
+          &quot;widgets&quot;: [&#xd;
+            {&#xd;
+              &quot;wiId&quot;: &quot;fw.947&quot;,&#xd;
+              &quot;objId&quot;: null,&#xd;
+              &quot;rootObjId&quot;: null,&#xd;
+              &quot;widgets&quot;: [&#xd;
+                {&#xd;
+                  &quot;wiId&quot;: &quot;fw.948&quot;,&#xd;
+                  &quot;objId&quot;: null,&#xd;
+                  &quot;rootObjId&quot;: null,&#xd;
+                  &quot;widgets&quot;: [&#xd;
+                    {&#xd;
+                      &quot;wiId&quot;: &quot;fw.949&quot;,&#xd;
+                      &quot;objId&quot;: null,&#xd;
+                      &quot;rootObjId&quot;: null,&#xd;
+                      &quot;widgets&quot;: [&#xd;
+                        {&#xd;
+                          &quot;wiId&quot;: &quot;fw.950&quot;,&#xd;
+                          &quot;objId&quot;: null,&#xd;
+                          &quot;rootObjId&quot;: null,&#xd;
+                          &quot;widgets&quot;: []&#xd;
+                        },&#xd;
+                        {&#xd;
+                          &quot;wiId&quot;: &quot;fw.951&quot;,&#xd;
+                          &quot;objId&quot;: null,&#xd;
+                          &quot;rootObjId&quot;: null,&#xd;
+                          &quot;widgets&quot;: []&#xd;
+                        },&#xd;
+                        {&#xd;
+                          &quot;wiId&quot;: &quot;fw.952&quot;,&#xd;
+                          &quot;objId&quot;: null,&#xd;
+                          &quot;rootObjId&quot;: null,&#xd;
+                          &quot;widgets&quot;: []&#xd;
+                        },&#xd;
+                        {&#xd;
+                          &quot;wiId&quot;: &quot;fw.953&quot;,&#xd;
+                          &quot;objId&quot;: null,&#xd;
+                          &quot;rootObjId&quot;: null,&#xd;
+                          &quot;widgets&quot;: []&#xd;
+                        }&#xd;
+                      ]&#xd;
+                    },&#xd;
+                    {&#xd;
+                      &quot;wiId&quot;: &quot;fw.954&quot;,&#xd;
+                      &quot;objId&quot;: null,&#xd;
+                      &quot;rootObjId&quot;: null,&#xd;
+                      &quot;widgets&quot;: [&#xd;
+                        {&#xd;
+                          &quot;wiId&quot;: &quot;fw.955&quot;,&#xd;
+                          &quot;objId&quot;: null,&#xd;
+                          &quot;rootObjId&quot;: null,&#xd;
+                          &quot;widgets&quot;: []&#xd;
+                        },&#xd;
+                        {&#xd;
+                          &quot;wiId&quot;: &quot;fw.956&quot;,&#xd;
+                          &quot;objId&quot;: null,&#xd;
+                          &quot;rootObjId&quot;: null,&#xd;
+                          &quot;widgets&quot;: []&#xd;
+                        },&#xd;
+                        {&#xd;
+                          &quot;wiId&quot;: &quot;fw.957&quot;,&#xd;
+                          &quot;objId&quot;: null,&#xd;
+                          &quot;rootObjId&quot;: null,&#xd;
+                          &quot;widgets&quot;: []&#xd;
+                        },&#xd;
+                        {&#xd;
+                          &quot;wiId&quot;: &quot;fw.958&quot;,&#xd;
+                          &quot;objId&quot;: null,&#xd;
+                          &quot;rootObjId&quot;: null,&#xd;
+                          &quot;widgets&quot;: []&#xd;
+                        }&#xd;
+                      ]&#xd;
+                    }&#xd;
+                  ]&#xd;
+                },&#xd;
+                {&#xd;
+                  &quot;wiId&quot;: &quot;fw.1007&quot;,&#xd;
+                  &quot;objId&quot;: null,&#xd;
+                  &quot;rootObjId&quot;: null,&#xd;
+                  &quot;widgets&quot;: []&#xd;
+                }&#xd;
+              ]&#xd;
+            }&#xd;
+          ]&#xd;
+        }&#xd;
+      ],&#xd;
+      &quot;queryObjectTitle&quot;: true,&#xd;
+      &quot;queryObjectToolbar&quot;: true&#xd;
+    }&#xd;
+  ]&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="Referer" elementType="Header">
+                    <stringProp name="Header.name">Referer</stringProp>
+                    <stringProp name="Header.value">${SRV_PROTOCOL}://${SRV_HOST}:${SRV_PORT}/</stringProp>
+                  </elementProp>
+                  <elementProp name="Accept-Language" elementType="Header">
+                    <stringProp name="Header.name">Accept-Language</stringProp>
+                    <stringProp name="Header.value">ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3</stringProp>
+                  </elementProp>
+                  <elementProp name="Origin" elementType="Header">
+                    <stringProp name="Header.name">Origin</stringProp>
+                    <stringProp name="Header.value">${SRV_PROTOCOL}://${SRV_HOST}:${SRV_PORT}</stringProp>
+                  </elementProp>
+                  <elementProp name="Accept" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.0${AccountsCount}</stringProp>
+                  </elementProp>
+                  <elementProp name="request-signature" elementType="Header">
+                    <stringProp name="Header.name">request-signature</stringProp>
+                    <stringProp name="Header.value">2bTPJMPAPqSXeaO+eQAX4aseEGo=</stringProp>
+                  </elementProp>
+                  <elementProp name="request-token" elementType="Header">
+                    <stringProp name="Header.name">request-token</stringProp>
+                    <stringProp name="Header.value">567c9${AccountsCount}e5cccb43bba2b${AccountsCount}8c799299b98f</stringProp>
+                  </elementProp>
+                  <elementProp name="X-Requested-With" elementType="Header">
+                    <stringProp name="Header.name">X-Requested-With</stringProp>
+                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                  </elementProp>
+                  <elementProp name="Content-Type" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                  <elementProp name="request-signature-data" elementType="Header">
+                    <stringProp name="Header.name">request-signature-data</stringProp>
+                    <stringProp name="Header.value">z2PjYLl6E4k7jOpR/Vf+${AccountsCount}ssIl7U=</stringProp>
+                  </elementProp>
+                  <elementProp name="Accept-Encoding" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate</stringProp>
+                  </elementProp>
+                  <elementProp name="User-Agent" elementType="Header">
+                    <stringProp name="Header.name">User-Agent</stringProp>
+                    <stringProp name="Header.value">Mozilla/5.0 (Windows NT ${AccountsCount}0.0; Win64; x64; rv:${AccountsCount}39.0) Gecko/20${AccountsCount}00${AccountsCount}0${AccountsCount} Firefox/${AccountsCount}39.0</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Выбрать 5 любых заявок и нажать на кнопку «создать ЗП» ">
+            <boolProp name="TransactionController.parent">true</boolProp>
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+          </TransactionController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Кнопку «создать ЗП» ">
+              <stringProp name="HTTPSampler.domain">${SRV_HOST}</stringProp>
+              <stringProp name="HTTPSampler.port">${SRV_PORT}</stringProp>
+              <stringProp name="HTTPSampler.protocol">${SRV_PROTOCOL}</stringProp>
+              <stringProp name="HTTPSampler.path">/UserCommandExecution/PerformUserAction</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+  &quot;userActionId&quot;: &quot;event.3400&quot;,&#xd;
+  &quot;datasetCommand&quot;: {&#xd;
+    &quot;objects&quot;: [&#xd;
+      &quot;621295&quot;,&#xd;
+      &quot;621291&quot;,&#xd;
+      &quot;621287&quot;,&#xd;
+      &quot;621283&quot;,&#xd;
+      &quot;619104&quot;&#xd;
+    ],&#xd;
+    &quot;query&quot;: {&#xd;
+      &quot;datasetId&quot;: &quot;lst.28&quot;,&#xd;
+      &quot;columns&quot;: [&#xd;
+        &quot;ds.28318&quot;,&#xd;
+        &quot;ds.28312&quot;,&#xd;
+        &quot;ds.47089&quot;,&#xd;
+        &quot;ds.47091&quot;,&#xd;
+        &quot;ds.33782&quot;,&#xd;
+        &quot;ds.45747&quot;,&#xd;
+        &quot;ds.43268&quot;,&#xd;
+        &quot;ds.48706&quot;,&#xd;
+        &quot;ds.47618&quot;,&#xd;
+        &quot;ds.28331&quot;,&#xd;
+        &quot;ds.39142&quot;,&#xd;
+        &quot;ds.28314&quot;,&#xd;
+        &quot;ds.47092&quot;,&#xd;
+        &quot;ds.47094&quot;,&#xd;
+        &quot;ds.47615&quot;,&#xd;
+        &quot;ds.47614&quot;,&#xd;
+        &quot;ds.47093&quot;,&#xd;
+        &quot;ds.47095&quot;,&#xd;
+        &quot;ds.47605&quot;,&#xd;
+        &quot;ds.47606&quot;,&#xd;
+        &quot;ds.47607&quot;,&#xd;
+        &quot;ds.48704&quot;,&#xd;
+        &quot;ds.47612&quot;,&#xd;
+        &quot;ds.47613&quot;,&#xd;
+        &quot;ds.47611&quot;,&#xd;
+        &quot;ds.47617&quot;&#xd;
+      ],&#xd;
+      &quot;isPersonal&quot;: true,&#xd;
+      &quot;grouping&quot;: [],&#xd;
+      &quot;sorting&quot;: [&#xd;
+        {&#xd;
+          &quot;datasourceId&quot;: &quot;ds.28331&quot;,&#xd;
+          &quot;direction&quot;: &quot;Desc&quot;,&#xd;
+          &quot;nullValuesOnTop&quot;: false&#xd;
+        }&#xd;
+      ],&#xd;
+      &quot;paging&quot;: {&#xd;
+        &quot;page&quot;: 0,&#xd;
+        &quot;size&quot;: 50,&#xd;
+        &quot;skipSize&quot;: 0&#xd;
+      },&#xd;
+      &quot;stickedColumnsCount&quot;: 0,&#xd;
+      &quot;excludeValues&quot;: []&#xd;
+    },&#xd;
+    &quot;formChanges&quot;: &quot;{\&quot;changes\&quot;:{\&quot;widgetChanges\&quot;:[{\&quot;objId\&quot;:\&quot;621295\&quot;,\&quot;tempId\&quot;:null,\&quot;changes\&quot;:{\&quot;fw.46908\&quot;:{\&quot;origin\&quot;:\&quot;Manual\&quot;,\&quot;add\&quot;:[\&quot;681\&quot;],\&quot;rem\&quot;:[],\&quot;edit\&quot;:[{\&quot;id\&quot;:\&quot;681\&quot;,\&quot;name\&quot;:\&quot;Закупка из одного источника\&quot;,\&quot;isBadge\&quot;:false,\&quot;isIndicator\&quot;:false}],\&quot;time\&quot;:1749218091930},\&quot;fw.46841\&quot;:{\&quot;origin\&quot;:\&quot;Manual\&quot;,\&quot;literal\&quot;:true,\&quot;time\&quot;:1749218103529}},\&quot;commandKind\&quot;:\&quot;Edit\&quot;,\&quot;typeId\&quot;:\&quot;msgt.502\&quot;}],\&quot;complexObjectChanges\&quot;:[]}}&quot;&#xd;
+  }&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="Referer" elementType="Header">
+                    <stringProp name="Header.name">Referer</stringProp>
+                    <stringProp name="Header.value">${SRV_PROTOCOL}://${SRV_HOST}:${SRV_PORT}/</stringProp>
+                  </elementProp>
+                  <elementProp name="Accept-Language" elementType="Header">
+                    <stringProp name="Header.name">Accept-Language</stringProp>
+                    <stringProp name="Header.value">ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3</stringProp>
+                  </elementProp>
+                  <elementProp name="Origin" elementType="Header">
+                    <stringProp name="Header.name">Origin</stringProp>
+                    <stringProp name="Header.value">${SRV_PROTOCOL}://${SRV_HOST}:${SRV_PORT}</stringProp>
+                  </elementProp>
+                  <elementProp name="Priority" elementType="Header">
+                    <stringProp name="Header.name">Priority</stringProp>
+                    <stringProp name="Header.value">u=0</stringProp>
+                  </elementProp>
+                  <elementProp name="Accept" elementType="Header">
+                    <stringProp name="Header.name">Accept</stringProp>
+                    <stringProp name="Header.value">application/json, text/javascript, */*; q=0.0${AccountsCount}</stringProp>
+                  </elementProp>
+                  <elementProp name="request-signature" elementType="Header">
+                    <stringProp name="Header.name">request-signature</stringProp>
+                    <stringProp name="Header.value">fBQ+RrebdleHZz8B5a2NVHVkvFU=</stringProp>
+                  </elementProp>
+                  <elementProp name="request-token" elementType="Header">
+                    <stringProp name="Header.name">request-token</stringProp>
+                    <stringProp name="Header.value">05d55${AccountsCount}4eae704ca3b63fd4f859c${AccountsCount}edb3</stringProp>
+                  </elementProp>
+                  <elementProp name="X-Requested-With" elementType="Header">
+                    <stringProp name="Header.name">X-Requested-With</stringProp>
+                    <stringProp name="Header.value">XMLHttpRequest</stringProp>
+                  </elementProp>
+                  <elementProp name="Content-Type" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                  <elementProp name="request-signature-data" elementType="Header">
+                    <stringProp name="Header.name">request-signature-data</stringProp>
+                    <stringProp name="Header.value">uReKoSuEGZM/98TNnMQ+8fu0eBg=</stringProp>
+                  </elementProp>
+                  <elementProp name="Accept-Encoding" elementType="Header">
+                    <stringProp name="Header.name">Accept-Encoding</stringProp>
+                    <stringProp name="Header.value">gzip, deflate</stringProp>
+                  </elementProp>
+                  <elementProp name="User-Agent" elementType="Header">
+                    <stringProp name="Header.name">User-Agent</stringProp>
+                    <stringProp name="Header.value">Mozilla/5.0 (Windows NT ${AccountsCount}0.0; Win64; x64; rv:${AccountsCount}39.0) Gecko/20${AccountsCount}00${AccountsCount}0${AccountsCount} Firefox/${AccountsCount}39.0</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

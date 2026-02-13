@@ -150,7 +150,7 @@ def duplicate_pdfs_with_date():
             continue
         
         # Construct new filename: original_name.YYYY.MM.DD.pdf
-        new_filename = f"{pdf_file.stem}.{date_suffix}{pdf_file.suffix}"
+        new_filename = f"{pdf_file.stem}. {date_suffix}{pdf_file.suffix}"
         dest_path = target_path / new_filename
         
         # Check if duplicate already exists

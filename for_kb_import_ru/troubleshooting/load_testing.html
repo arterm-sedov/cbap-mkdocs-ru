@@ -1,0 +1,353 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5153" kb-tags="Apache JMeter,нагрузочное тестирование,оптимизация,производительность,тестирование" kb-title="Нагрузочное тестирование Comindware Platform">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#load_testing_intro">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#load_testing_goals">
+<span class="md-ellipsis">
+      Цели тестирования
+    </span>
+</a>
+<nav aria-label="Цели тестирования" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#load_testing_goals_technical">
+<span class="md-ellipsis">
+      Технические цели
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#load_testing_goals_business">
+<span class="md-ellipsis">
+      Бизнес-цели
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#load_testing_outcomes">
+<span class="md-ellipsis">
+      Ожидаемые результаты
+    </span>
+</a>
+<nav aria-label="Ожидаемые результаты" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#load_testing_outcomes_technical">
+<span class="md-ellipsis">
+      Технические результаты
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#load_testing_outcomes_business">
+<span class="md-ellipsis">
+      Бизнес-результаты
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#load_testing_sequence">
+<span class="md-ellipsis">
+      Порядок нагрузочного тестирования
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#load_testing_deployment">
+<span class="md-ellipsis">
+      Развертывание Comindware Platform
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#load_testing_jmeter_setup">
+<span class="md-ellipsis">
+      Установка и настройка Apache JMeter
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#load_testing_jmeter_scenarios">
+<span class="md-ellipsis">
+      Настройка тестовых сценариев в Apache JMeter
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#load_testing_jmeter_get_request">
+<span class="md-ellipsis">
+      Получение пути и тела тестового запроса
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#load_testing_different_roles">
+<span class="md-ellipsis">
+      Выполнение тестовых сценариев под разными пользовательскими ролями
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#load_testing_execution">
+<span class="md-ellipsis">
+      Проведение нагрузочного тестирования
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="load_testing_intro">Введение</h2>
+<p>Нагрузочное тестирование — это критически важный этап подготовки приложений к промышленной эксплуатации. Оно позволяет заблаговременно выявить узкие места системы и обеспечить надёжную работу приложений под нагрузкой.</p>
+<h2 id="load_testing_goals">Цели тестирования</h2>
+<h3 id="load_testing_goals_technical">Технические цели</h3>
+<ul>
+<li>Определить максимальную пропускную способность системы и количество одновременных пользователей, которое она может обрабатывать без нарушения требований к производительности.</li>
+<li>Выявить узкие места в архитектуре приложения, конфигурации серверов и инфраструктурных службах.</li>
+<li>Проверить корректность работы системы при пиковых нагрузках и стрессовых сценариях.</li>
+<li>Измерить время отклика ключевых операций и убедиться, что оно соответствует установленным нормам.</li>
+<li>Оценить потребление системных ресурсов (процессор, память, сеть, диск) под нагрузкой.</li>
+</ul>
+<h3 id="load_testing_goals_business">Бизнес-цели</h3>
+<ul>
+<li>Обеспечить бесперебойную работу критически важных бизнес-процессов в пиковые периоды.</li>
+<li>Подтвердить готовность системы к промышленной эксплуатации и определить оптимальную конфигурацию оборудования.</li>
+<li>Минимизировать риски простоев и потери данных.</li>
+<li>Получить количественные метрики для планирования ресурсов и масштабирования системы.</li>
+</ul>
+<h2 id="load_testing_outcomes">Ожидаемые результаты</h2>
+<h3 id="load_testing_outcomes_technical">Технические результаты</h3>
+<ul>
+<li>Значения ключевых метрик производительности системы:</li>
+<li><strong>время отклика</strong> — время выполнения типовых операций (открытие таблицы, сохранение формы, запуск процесса);</li>
+<li><strong>пропускная способность</strong> — количество запросов в секунду, которое система обрабатывает без перебоев;</li>
+<li><strong>процент ошибок</strong> — доля неуспешных запросов при заданной нагрузке;</li>
+<li><strong>загрузка ресурсов</strong> — потребление ресурсов ЦП, оперативной памяти, операций дискового ввода-вывода, сетевого трафика.</li>
+<li>Выявленные узкие места и рекомендации по их устранению.</li>
+<li>Рекомендуемые значения параметров конфигурации для достижения целевой производительности.</li>
+</ul>
+<h3 id="load_testing_outcomes_business">Бизнес-результаты</h3>
+<ul>
+<li>Обоснование выбора конфигурации оборудования для промышленной эксплуатации.</li>
+<li>Подтверждение соответствия системы требованиям к производительности и масштабируемости.</li>
+<li>Базовые показатели для последующего мониторинга и сравнения при изменениях в системе.</li>
+<li>Уверенность в стабильной работе системы при ожидаемой и пиковой нагрузке.</li>
+</ul>
+<h2 id="load_testing_sequence">Порядок нагрузочного тестирования</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="#load_testing_deployment">Развернуть</a> <strong>Comindware Platform</strong> в конфигурации, близкой к продуктовой (согласно рассчитанному сайзингу).</li>
+<li><a class="mkdocs_imported_link" href="#load_testing_jmeter_install">Установить</a> Java 8+ и Apache JMeter.</li>
+<li><a class="mkdocs_imported_link" href="#load_testing_jmeter_config">Скачать и настроить</a> файл конфигурации JMeter: указать параметры подключения, количество пользователей, интервал запуска, количество итераций.</li>
+<li><a class="mkdocs_imported_link" href="#load_testing_jmeter_scenarios">Создать тестовые сценарии</a>: добавить контроллеры транзакций и HTTP-запросы для типовых операций.</li>
+<li><a class="mkdocs_imported_link" href="#load_testing_jmeter_get_request">Получить пути и тела тестовых запросов</a> из браузера (с помощью инструментов разработчика).</li>
+<li><a class="mkdocs_imported_link" href="#load_testing_execution">Настроить тестовую среду</a>: добавить параметр <code>isTestEnvironment: true</code> в файл конфигурации системы.</li>
+<li><a class="mkdocs_imported_link" href="#load_testing_execution">Запустить нагрузочное тестирование</a> и собрать результаты.</li>
+<li><a class="mkdocs_imported_link" href="#load_testing_outcomes">Проанализировать метрики</a>: время отклика, пропускную способность, процент ошибок, загрузку ресурсов.</li>
+<li>Выгрузить и проанализировать журналы системы.</li>
+<li><a class="mkdocs_imported_link" href="#load_testing_execution">Удалить параметр тестовой среды</a> после завершения тестирования.</li>
+</ul>
+<h2 id="load_testing_deployment">Развертывание Comindware Platform</h2>
+<p>Перед нагрузочным тестированием разверните <strong>Comindware Platform</strong>.</p>
+<p>Конфигурация системы должна быть продуктовой или близка к ней (согласно <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4659">рассчитанному сайзингу</a>).
+Это позволит получить более точные результаты и провести дальнейшую аналитику журналов.</p>
+<p>См.:</p>
+<div class="relatedTopics">
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622">Установка, запуск, инициализация и остановка ПО в Linux</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5063">Установка, запуск, инициализация и остановка ПО в Windows</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4659">Системные требования Comindware Platform</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4712">Факторы, влияющие на производительность. Рекомендации по оптимизации</a></li>
+</ul>
+</div>
+<h2 id="load_testing_jmeter_setup">Установка и настройка Apache JMeter</h2>
+<ol class="colored_numbers_list">
+<li>Установите ПО Java 8+.</li>
+<li>Скачайте и распакуйте в любую папку архив Apache JMeter <a class="mkdocs_imported_link" href="https://jmeter.apache.org/download_jmeter.cgi">с официального сайта</a>.</li>
+<li>Скачайте готовый файл конфигурации Apache JMeter: <a class="mkdocs_imported_link" href="https://kb.comindware.ru/file.php?id=213"><code>jmeter-example-settings.jmx</code></a>.</li>
+<li>Запустите JMeter и откройте файл <code>jmeter-example-settings.jmx</code> с помощью меню <strong>File</strong> — <strong>Open</strong>.</li>
+<li>
+<p>В разделе <strong>Test Plan</strong> укажите свои параметры:</p>
+<ul>
+<li><code>SRV_HOST</code> — адрес экземпляра <strong>Comindware Platform</strong>;</li>
+<li><code>SOTRUDNIK_LOGIN</code> — имя пользователя <strong>Comindware Platform</strong>;</li>
+<li><code>SOTRUDNIK_PASSWORD</code> — пароль;</li>
+<li><code>AccountsCount</code> и <code>ReadAcc</code> — количество пользовательских сеансов, которое требуется запустить;</li>
+<li><code>ramp_up</code> — интервал в миллисекундах между запуском сеансов;</li>
+<li><code>iterations</code> — количество итераций прогона теста.</li>
+</ul>
+</li>
+</ol>
+<h2 id="load_testing_jmeter_scenarios">Настройка тестовых сценариев в Apache JMeter</h2>
+<p>Готовый файл конфигурации <code>jmeter-example-settings.jmx</code> содержит примеры следующих сценариев тестирования:</p>
+<ul>
+<li>открыть таблицу (список);</li>
+<li>сохранить форму с заполненными данными;</li>
+<li>нажатие кнопки для выбранных записей в таблице.</li>
+</ul>
+<p>По образцу этих примеров настройте собственные сценарии:</p>
+<ol class="colored_numbers_list">
+<li>В разделе <strong>Test Plan</strong> создайте копию группы тестов (<strong>Thread Group</strong>): нажмите группу правой кнопкой мыши и выберите пункт <strong>Duplicate</strong>.</li>
+<li>
+<p>Создайте контроллер транзакций:</p>
+<ul>
+<li>нажмите группу тестов правой кнопкой мыши;</li>
+<li>выберите пункты <strong>Add</strong> — <strong>Logic Controller</strong> — «<strong>Transaction Controller</strong>;</li>
+</ul>
+<figure class="screenshot_with_caption" markdown=""><img alt="Добавление контроллера транзакций" src="/platform/v5.0/troubleshooting/img/jmeter_transaction_controller.png"/><figcaption class="caption">Добавление контроллера транзакций</figcaption></figure>
+</li>
+<li>
+<p>Создайте HTTP-запрос:</p>
+<ul>
+<li>нажмите любое действие сценария правой кнопкой мыши;</li>
+<li>выберите пункты <strong>Add</strong> — <strong>Sampler</strong> — <strong>HTTP Request</strong>.</li>
+</ul>
+<figure class="screenshot_with_caption" markdown=""><img alt="Добавление HTTP-запроса" src="/platform/v5.0/troubleshooting/img/jmeter_interface.png"/><figcaption class="caption">Добавление HTTP-запроса</figcaption></figure>
+</li>
+<li>
+<p>Настройте HTTP-запрос по аналогии с примерами из файла <code>jmeter-example-settings.jmx</code>:</p>
+<ul>
+<li>заполните поля в разделе <strong>Web Server</strong>:<ul>
+<li><strong>Protocol</strong> — <strong>http</strong> или <code>https</code>;</li>
+<li><strong>Server Name or IP</strong> и <strong>Port Number</strong> — адрес и порт <strong>Comindware Platform</strong>;</li>
+</ul>
+</li>
+<li><a class="mkdocs_imported_link" href="#load_testing_jmeter_get_request">получите путь и тело тестового запроса</a>;</li>
+<li>Заполните поля в разделе <strong>HTTP Request</strong>:<ul>
+<li><strong><code>POST</code></strong> — метод запроса;</li>
+<li><strong>Path</strong> — укажите путь в поле;</li>
+<li><strong>Body Data</strong> — тело запроса.</li>
+</ul>
+</li>
+</ul>
+<figure class="screenshot_with_caption" markdown=""><img alt="Настройка HTTP-запроса" src="/platform/v5.0/troubleshooting/img/jmeter_http_request_config.png"/><figcaption class="caption">Настройка HTTP-запроса</figcaption></figure>
+</li>
+<li>
+<p>Чтобы выключить или включить любой элемент сценария без удаления нажмите его правой кнопкой мыши и выберите пункт <strong>Disable</strong> или <strong>Enable</strong>. Выключенные элементы отображаются серым цветом и пропускаются при выполнении теста.</p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Отключение элемента в JMeter" src="/platform/v5.0/troubleshooting/img/jmeter_disable_element.png"/><figcaption class="caption">Отключение элемента в JMeter</figcaption></figure>
+<figure class="screenshot_with_caption" markdown=""><img alt="Выключенный элемент в JMeter" src="/platform/v5.0/troubleshooting/img/jmeter_disabled_element.png"/><figcaption class="caption">Выключенный элемент в JMeter</figcaption></figure>
+</li>
+</ol>
+<h2 id="load_testing_jmeter_get_request">Получение пути и тела тестового запроса</h2>
+<ol class="colored_numbers_list">
+<li>Откройте в <strong>Comindware Platform</strong> страницу с формой или таблицей, которую требуется протестировать.</li>
+<li>В браузере включите режим разработки DevTools: нажмите клавишу <span class="keys"><kbd class="key-f12">F12</kbd></span> или выберите в меню настроек пункты «<strong>Дополнительные инструменты</strong>» — «<strong>Инструменты разработчика</strong>».</li>
+<li>Выберите вкладку <strong>Network</strong>.</li>
+<li>Соберите сетевой трафик: нажмите в <strong>Comindware Platform</strong> любую кнопку, перезагрузите страницу, выберите значение в раскрывающемся списке или заполните поле.</li>
+<li>В таблице <strong>Name</strong> найдите элемент, который требуется протестировать: <strong>Query</strong> (таблица), <strong>QueryForm</strong> (форма), <strong>Execute</strong> (кнопка), <strong>QueryData</strong> (заполнение поля).</li>
+<li>
+<p>Путь HTTP-запроса будет указан на вкладке <strong>Headers</strong> в строке <strong>Request URL</strong> после адреса <strong>Comindware Platform</strong>.</p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Просмотр пути HTTP-запроса на вкладке Network в браузере" src="/platform/v5.0/troubleshooting/img/browser_network_tab.png"/><figcaption class="caption">Просмотр пути HTTP-запроса на вкладке Network в браузере</figcaption></figure>
+</li>
+<li>
+<p>Тело запроса будет отображаться на вкладке <strong>Payload</strong>.</p>
+</li>
+<li>
+<p>Скопируйте тело запроса: нажмите правой кнопкой мыши первую строку под заголовком <strong>Request Payload</strong> и выберите пункт <strong>Copy value</strong> или <strong>Copy object</strong>.</p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Копирование тела запроса с вкладки Payload в браузере" src="/platform/v5.0/troubleshooting/img/browser_payload_tab.png"/><figcaption class="caption">Копирование тела запроса с вкладки Payload в браузере</figcaption></figure>
+</li>
+</ol>
+<div class="notice notice-tip">
+<p class="admonition-title">Подстановка ID записей в теле запроса</p>
+<p>Поле <code>objId</code> в теле запроса — это ID записи, для которой выполняется запрос.</p>
+<p>Значение <code>objId</code> можно менять для выполнения операций с разными записями.</p>
+<p>Если запускаете сценарий создания новой записи, не меняйте скопированное тело запроса.</p>
+<p>Так же сценарий создания новой записи выполняется при нажатии кнопки «<strong>Сохранить</strong>» на форме новой записи.</p>
+</div>
+<h2 id="load_testing_different_roles">Выполнение тестовых сценариев под разными пользовательскими ролями</h2>
+<p>Чтобы запускать сценарии одновременно от аккаунтов с разными ролями, создайте группу тестов с данными для авторизации пользователя под каждой требуемой ролью:</p>
+<ol class="colored_numbers_list">
+<li>В <strong>Test Plan</strong> создайте новую группу тестов (<strong>Thread Group</strong>): нажмите имеющуюся группу правой кнопкой мыши и выберите пункт <strong>Duplicate</strong>.</li>
+<li>Выберите раздел <strong>HTTP Authorization Manager</strong>.</li>
+<li>В таблице <strong>Authorizations stored in the Authorization Manager</strong> укажите учётные данные тестового аккаунта в <strong>Comindware Platform</strong> в полях <strong>Username</strong> и <strong>Password</strong>.</li>
+<li>
+<p>Настройте остальные элементы тестовой группы согласно требуемой логике тестирования.</p>
+<figure class="screenshot_with_caption" markdown=""><img alt="HTTP Authorization Manager" src="/platform/v5.0/troubleshooting/img/jmeter_http_auth_manager.png"/><figcaption class="caption">HTTP Authorization Manager</figcaption></figure>
+</li>
+</ol>
+<h2 id="load_testing_execution">Проведение нагрузочного тестирования</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Перед началом тестирования измените конфигурацию системы: </p>
+<ul>
+<li>откройте для редактирования файл конфигурации <strong>Comindware Platform</strong> (например, <code>/usr/share/comindware/configs/&lt;instanceName&gt;/cmwdata.yml</code>, где <code>&lt;instanceName&gt;</code> — имя экземпляра);</li>
+<li>в любую строку файла конфигурации (например, после номера версии ПО), добавьте директиву:</li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="nt">isTestEnvironment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span></code> <br/></pre></code></div>
+<p>См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5067">Конфигурация экземпляра, компонентов ПО и служб. Настройка</a>»</em>.</p>
+</li>
+<li>
+<p>Перезагрузите <strong>Comindware Platform</strong>.</p>
+</li>
+<li>
+<p>Для запуска теста в JMeter нажмите кнопку <strong>Start</strong>.</p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Кнопка Start в JMeter" src="/platform/v5.0/troubleshooting/img/jmeter_start_button.png"/><figcaption class="caption">Кнопка Start в JMeter</figcaption></figure>
+</li>
+<li>
+<p>По окончании тестирования отчеты появятся в разделах <strong>View Result Tree</strong> и <strong>Summary Report</strong>.</p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Просмотр результатов тестирования" src="/platform/v5.0/troubleshooting/img/jmeter_view_results.png"/><figcaption class="caption">Просмотр результатов тестирования</figcaption></figure>
+<figure class="screenshot_with_caption" markdown=""><img alt="Сводный отчёт по тестированию" src="/platform/v5.0/troubleshooting/img/jmeter_summary_report.png"/><figcaption class="caption">Сводный отчёт по тестированию</figcaption></figure>
+</li>
+<li>
+<p>Скачайте журналы из <strong>Comindware Platform</strong> и загрузите их в JMeter для анализа.</p>
+</li>
+<li>
+<p>После проведения всех работ:</p>
+<ul>
+<li>удалите директиву <code>isTestEnvironment: true</code> из файла конфигурации <strong>Comindware Platform</strong>;</li>
+<li>перезагрузите <strong>Comindware Platform</strong>.</li>
+</ul>
+</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://jmeter.apache.org/download_jmeter.cgi">Страница загрузки Apache JMeter</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622">Установка, запуск, инициализация и остановка ПО в Linux</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5063">Установка, запуск, инициализация и остановка ПО в Windows</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4659">Системные требования Comindware Platform</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4712">Факторы, влияющие на производительность. Рекомендации по оптимизации</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5067">Конфигурация экземпляра, компонентов ПО и служб. Настройка</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>
