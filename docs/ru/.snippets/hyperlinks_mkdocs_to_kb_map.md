@@ -64,6 +64,8 @@
 
 <!-- Категории в БЗ. Конец -->
 
+[jmeter_download]: https://jmeter.apache.org/download_jmeter.cgi
+
 [gigachat_api_reference]: https://developers.sber.ru/docs/ru/gigachat/api/reference/rest/gigachat-api
 
 [gigachat_developer_portal]: https://developers.sber.ru/dev
