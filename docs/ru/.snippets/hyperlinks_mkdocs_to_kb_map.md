@@ -881,6 +881,8 @@
 
 [table_configure_tasks_view]: {{ kbArticleURLPrefix }}4800#table_configure_tasks_view
 
+[table_configure_add_to_my_tasks]: {{ kbArticleURLPrefix }}4800#table_configure_add_to_my_tasks
+
 [table_configure_template]: {{ kbArticleURLPrefix }}4800#table_configure_template
 
 [table_configure_properties]: {{ kbArticleURLPrefix }}4800#table_configure_properties
