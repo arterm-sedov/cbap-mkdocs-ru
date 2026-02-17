@@ -25,9 +25,18 @@ git rev-parse --abbrev-ref HEAD
 ```
 
 2. Extract the first sequence of digits (usually up to the `_` character), eg. `12345`.
-3. Find a previous commit message if the branch name has no issue number. Previous commit message might already contain the right [#XXXXX] pattern.
+3. If branch name has no issue number, find it from previous commits:
+   - Check recent commit messages: `git log -n 20 --pretty=%B`
+   - Look for the pattern `[#XXXXX]` in the most recent commits on this branch
+   - Use the first matching issue number found
 4. Use the issue number in square brackets with a `#` at the start of the commit message (no spaces inside the brackets).
-5. After the brackets, provide a concise, to-the-point description of the change.
+5. Generate a concise description by analyzing the changes:
+   - **Check staging status**: Use `git status` to see what's staged vs unstaged
+   - **Prefer staged files only**: If there are staged files AND there are also unstaged files, use `git diff --cached` to analyze only staged changes
+   - **Fallback to whole diff**: Only if no files are staged OR all files are staged (no unstaged changes exist), then use `git diff` to analyze all changes
+   - Focus on the main change: what was added, fixed, or modified
+   - Use imperative mood: "Add", "Fix", "Update", "Remove", etc.
+   - Keep it to one short sentence (50-70 characters ideal)
 
 **Correct examples:**
 
@@ -51,3 +60,7 @@ Commit message: `[#67890] Fix data processing bug`
 
 - The message must be concise, structured, and strictly relevant to the changes in the commit.
 - Keep the length to the necessary minimum. Avoid blabber.
+- Use imperative mood (e.g., "Add feature" not "Added feature" or "Adds feature").
+- Focus on what the commit does, not why (unless critical context is needed).
+
+**Note:** Git hooks in `.githooks/` automatically prepend `[#XXXXX]` if missing, but you should still follow this format when generating commit messages manually or via AI.
