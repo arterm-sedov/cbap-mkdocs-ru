@@ -66,7 +66,7 @@
 <p>Если вам требуется отфильтровать список задач, см. также <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4935">Фильтр списка по активным задачам текущего пользователя: по всем процессам, по конкретному процессу</a>»</em>.
 .</p>
 <h2 id="example_n3_task_list_custom_use_case">Прикладная задача</h2>
-<p>Имеется шаблон процесса <em>«Обработка заявок»</em> со связанным шаблоном записей <em>«Заявки»</em>.</p>
+<p>Имеется шаблон записей <em>«Задачи пользователей»</em>.</p>
 <p>Требуется настроить таблицу <em>«Все задачи»</em> со следующими параметрами:</p>
 <ul>
 <li>выводить задачи всех пользователей: как активные, так и завершённые;</li>
@@ -81,14 +81,13 @@
 <h2 class="pageBreakBefore" id="example_n3_task_list_custom_configure">Пример настройки</h2>
 <p>Решим задачу следующим образом:</p>
 <ul>
-<li>В шаблоне записей <em>«Заявки»</em> <a class="mkdocs_imported_link" href="#example_n3_task_list_custom_attributes">создадим атрибуты для контроля просрочки</a>:<ul>
+<li>В шаблоне записей <em>«Задачи пользователей»</em> <a class="mkdocs_imported_link" href="#example_n3_task_list_custom_attributes">создадим атрибуты для контроля просрочки</a>:<ul>
 <li><strong>вычисляемый логический</strong> атрибут <em>«Статус просрочки»</em> с выражением на <strong>N3</strong> для определения признака просрочки;</li>
 <li><strong>вычисляемый текстовый</strong> атрибут <em>«Просрочена»</em> с <strong>формулой</strong> для отображения в таблице статуса просрочки в виде <em>«Да»</em> и <em>«Нет»</em>;</li>
 <li><strong>вычисляемый</strong> атрибут <em>«Длительность просрочки»</em> типа «<strong>дата и время</strong>» с выражением на <strong>N3</strong> для определения длительности просрочки.</li>
 <li>Статус и длительность просрочки вычислим с помощью <strong>N3</strong> по разности между текущим временем (для активных задач) или фактической датой завершения (для закрытых задач) и плановой датой завершения.</li>
 </ul>
 </li>
-<li>В шаблоне процесса <em>«Обработка заявок»</em> <a class="mkdocs_imported_link" href="#example_n3_task_list_custom_table">создадим <strong>таблицу задач</strong></a> с <strong>системным фильтром</strong> для выборки всех задач всех пользователей и требуемыми столбцами.</li>
 </ul>
 <div class="notice notice-warning">
 <p class="admonition-title">Внимание!</p>
@@ -96,7 +95,7 @@
 </div>
 <h3 id="example_n3_task_list_custom_attributes">Настройка атрибутов</h3>
 <ol class="colored_numbers_list">
-<li>В шаблоне записи <em>«Заявки»</em> создайте атрибут для вычисления признака просрочки:</li>
+<li>В шаблоне записи <em>«Задачи пользователей»</em> создайте атрибут для вычисления признака просрочки:</li>
 </ol>
 <ul>
 <li><strong>Название:</strong> <code>Статус просрочки</code></li>
@@ -110,7 +109,7 @@
 </li>
 </ul>
 <ol class="colored_numbers_list" start="2">
-<li>В шаблоне <em>«Заявки»</em> создайте атрибут для отображения признака просрочки:</li>
+<li>В шаблоне <em>«Задачи пользователей»</em> создайте атрибут для отображения признака просрочки:</li>
 </ol>
 <ul>
 <li><strong>Название:</strong> <code>Просрочена</code></li>
@@ -124,7 +123,7 @@
 </li>
 </ul>
 <ol class="colored_numbers_list" start="3">
-<li>В шаблоне записи <em>«Заявки»</em> создайте атрибут для вычисления длительности просрочки:</li>
+<li>В шаблоне записи <em>«Задачи пользователей»</em> создайте атрибут для вычисления длительности просрочки:</li>
 </ol>
 <ul>
 <li><strong>Название:</strong> <code>Длительность просрочки</code></li>
@@ -139,25 +138,16 @@
 </ul>
 <h3 class="pageBreakBefore" id="example_n3_task_list_custom_table">Настройка таблицы задач</h3>
 <ol class="colored_numbers_list">
-<li>В шаблоне <em>«Обработка заявок»</em> создайте <strong>таблицу задач</strong> <em>«Все задачи»</em>. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4800#table_configure_tasks_view">Создание таблицы со списком задач</a>»</em>.</li>
+<li>В шаблоне <em>«Задачи пользователей»</em> создайте <strong>таблицу</strong> <em>«Все задачи»</em>.</li>
 <li>
 <p>В конструкторе таблицы на вкладке «<strong>Основные</strong>» следующий <strong>системный фильтр</strong> на <strong>N3</strong>:</p>
 <div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы с объектами</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmw:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics#&gt;</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="c"># Получаем все пользовательские задачи</span></code> <br/><code><span class="p">{</span><span class="err">?item</span> <span class="kt">a</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">UserTask</span><span class="p">.}</span></code> <br/></pre></code></div>
 <p>С таким фильтром в таблице будут отображаться задачи всех пользователей и с любым статусом: активные и завершённые.</p>
 </li>
 <li>
-<p>Добавьте в столбцы таблицы задач системные атрибуты:</p>
+<p>Добавьте в столбцы таблицы атрибуты:</p>
 <ul>
-<li><strong>Задача</strong></li>
-<li><strong>Исполнитель</strong></li>
-<li><strong>Дата создания</strong></li>
-<li><strong>Плановая дата завершения</strong></li>
-<li><strong>Дата завершения</strong></li>
-</ul>
-</li>
-<li>
-<p>Добавьте в столбцы таблицы задач атрибуты, показывающие статус просрочки:</p>
-<ul>
+<li><em>ID</em></li>
 <li><em>Просрочена</em></li>
 <li><em>Длительность просрочки</em></li>
 </ul>
