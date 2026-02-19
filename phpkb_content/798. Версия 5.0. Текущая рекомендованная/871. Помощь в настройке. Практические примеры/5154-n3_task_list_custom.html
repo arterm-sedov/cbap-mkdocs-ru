@@ -1,0 +1,299 @@
+<h1>Список задач всех пользователей со статусом и длительностью просрочки. Настройка с помощью N3</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5154" kb-tags="N3,Notation 3,RDF,дата и время,длительность,задачи,вычисление,список задач,пример,просрочка,срок выполнения,триплеты,тройка,тройки" kb-title="Список задач всех пользователей со статусом и длительностью просрочки. Настройка с помощью N3">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_task_list_custom_intro">
+<span class="md-ellipsis">
+      
+        Введение
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_task_list_custom_use_case">
+<span class="md-ellipsis">
+      
+        Прикладная задача
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_task_list_custom_configure">
+<span class="md-ellipsis">
+      
+        Пример настройки
+      
+    </span>
+</a>
+<nav aria-label="Пример настройки" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_task_list_custom_attributes">
+<span class="md-ellipsis">
+      
+        Настройка атрибутов шаблона записи «Задачи»
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_task_list_custom_table">
+<span class="md-ellipsis">
+      
+        Настройка таблицы «Статус просрочки задач»
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      
+        Связанные статьи
+      
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="example_n3_task_list_custom_intro">Введение</h2>
+<p><strong>Comindware Platform</strong> предусмотрена стандартная страница «<strong>Мои задачи</strong>, которая показывает список задач для текущего пользователя с заранее заданными столбцами.</p>
+<p>Чтобы вывести список задач определённых пользователей, с дополнительными бизнес-данными и т. п, можно настроить таблицу с требуемыми вычисляемыми атрибутами и особыми параметрами фильтрации, группировки и сортировки.</p>
+<p>Здесь приведён пример вычисления с помощью языка <strong>N3</strong> дополнительных атрибутов задач и настройки списка всех задач для всех пользователей с этими атрибутами (например, статуса и длительности просрочки).</p>
+<p>Если вам требуется отфильтровать список задач, см. также <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4935">Фильтр списка по активным задачам текущего пользователя: по всем процессам, по конкретному процессу</a>»</em>.
+.</p>
+<h2 id="example_n3_task_list_custom_use_case">Прикладная задача</h2>
+<p>Требуется настроить таблицу <em>«Статус просрочки задач»</em> со следующими параметрами:</p>
+<ul>
+<li>выводить задачи всех пользователей: как активные, так и завершённые;</li>
+<li>
+<p>выводить только задачи, у которых <strong>задан крайний срок</strong> (задачи без крайнего срока, не должны отображаться в таблице).</p>
+<div class="notice notice-success">
+<p class="admonition-title">Настройка крайнего срока задачи</p>
+<p>Крайний срок задачи вычисляется автоматически по заданной <strong>продолжительности выполнения</strong> задачи.</p>
+<p><strong>Продолжительность выполнения</strong> можно установить в свойствах <strong>пользовательской задачи</strong> на вкладке «<strong>Дополнительные</strong>».</p>
+<p>См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4730">Пользовательская задача</a>»</em>.</p>
+</div>
+</li>
+<li>
+<p>столбцы <strong>Название</strong>, <strong>Исполнитель</strong>, <strong>Дата создания</strong>, <strong>Крайний срок</strong>, <strong>Дата завершения</strong>;</p>
+</li>
+<li>столбец <em>«Просрочена»</em> с <strong>логическим</strong> (булевым) значением в <strong>текстовом</strong> виде:<ul>
+<li><em>Да</em> — если задача активна и <strong>крайний срок</strong> уже наступил, либо задача завершена, но <strong>дата завершения</strong> позже <strong>крайнего срока</strong>;</li>
+<li><em>Нет</em> — в остальных случаях.</li>
+</ul>
+</li>
+<li>столбец <em>«Длительность просрочки»</em> (<em>0</em>, если задача не просрочена).</li>
+</ul>
+<h2 class="pageBreakBefore" id="example_n3_task_list_custom_configure">Пример настройки</h2>
+<p>Решим задачу следующим образом:</p>
+<ul>
+<li>Создадим служебный шаблон записей <em>«Задачи»</em>.</li>
+<li>В шаблоне записей <em>«Задачи»</em> <a class="mkdocs_imported_link" href="#example_n3_task_list_custom_attributes">создадим вычисляемые атрибуты для контроля просрочки</a>:<ul>
+<li>атрибут <em>«Длительность просрочки»</em> типа «<strong>Дата и время</strong>» с выражением на <strong>N3</strong> для определения длительности просрочки:<ul>
+<li>для активных просроченных задач — разность между <strong>текущим временем</strong> и <strong>крайним сроком</strong>;</li>
+<li>для закрытых просроченных задач — разность между <strong>фактической датой завершения</strong> и <strong>крайним сроком</strong>;</li>
+<li>для задач без просрочки — <code>0</code>;</li>
+</ul>
+</li>
+<li><strong>текстовый</strong> атрибут <em>«Просрочена»</em> с <strong>формулой</strong> для определения признака просрочки:<ul>
+<li><em>Да</em> — если длительность просрочки больше <code>0</code>;</li>
+<li><em>Нет</em> — если длительность просрочки <code>0</code>;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>В шаблоне <em>«Задачи»</em> создадим <strong>вычисляемые</strong> атрибуты с выражениями на <strong>N3</strong> для вывода стандартных атрибутов задач:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Название</th>
+<th>Тип данных</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Название</em></td>
+<td><strong>текст</strong></td>
+</tr>
+<tr>
+<td><em>Исполнитель</em></td>
+<td><strong>Аккаунт</strong></td>
+</tr>
+<tr>
+<td><em>Крайний срок</em></td>
+<td><strong>Дата и время</strong></td>
+</tr>
+<tr>
+<td><em>Дата завершения</em></td>
+<td><strong>Дата и время</strong></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>В шаблоне <em>«Задачи»</em> <a class="mkdocs_imported_link" href="#example_n3_task_list_custom_table">создадим таблицу <em>«Статус просрочки задач»</em></a> со специальным <strong>системным фильтром</strong> на <strong>N3</strong> и поместим в неё требуемые атрибуты.</p>
+</li>
+<li>Добавим таблицу <em>«Статус просрочки задач»</em> на информационную страницу.</li>
+</ul>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>Для корректного вычисления выражений указывайте в них те системные имена шаблонов и атрибутов, которые используются в вашем приложении. Они могут отличаться от указанных в примере.</p>
+</div>
+<h3 id="example_n3_task_list_custom_attributes">Настройка атрибутов шаблона записи <em>«Задачи»</em></h3>
+<p>Для формирования требуемых атрибутов задач создадим служебный шаблон записи.</p>
+<ol class="colored_numbers_list">
+<li>Создайте шаблон записи <em>«Задачи»</em>.</li>
+<li>В шаблоне <em>«Задачи»</em> создайте атрибут для вычисления длительности просрочки:</li>
+</ol>
+<ul>
+<li><strong>Название:</strong> <code>Длительность просрочки</code></li>
+<li><strong>Системное имя:</strong> <code>Длительностьпросрочки</code></li>
+<li><strong>Тип данных: длительность</strong></li>
+<li><strong>Описание:</strong> <em>Длительность просрочки задачи</em></li>
+<li><strong>Вычислять автоматически:</strong> флажок установлен</li>
+<li>
+<p><strong>Вычисляемое значение: N3</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы с объектами, статусами задач,</span></code> <br/><code><span class="c"># сеансами, временем и сравнения величин</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmw:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">taskStatus:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/taskStatus#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">session:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwtime:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/time#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">w3math:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/2000/10/swap/math#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Получим текущее время (UTC) для сравнения со сроками</span></code> <br/><code>    <span class="c"># в переменную ?nowUTC.</span></code> <br/><code>    <span class="nn">session</span><span class="p">:</span><span class="nt">context</span> <span class="nn">session</span><span class="p">:</span><span class="nt">requestTime</span> <span class="err">?nowUTC</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получим крайние сроки всех задач в переменную ?dueDates</span></code> <br/><code>    <span class="c"># Предикат cmw:dueDate возвращает крайний срок задачи </span></code> <br/><code>    <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">dueDate</span> <span class="err">?dueDates</span><span class="p">.</span></code> <br/><code>    <span class="err">if</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Активная задача с истёкшим сроком — просрочена.</span></code> <br/><code>        <span class="c"># Получим активные задачи</span></code> <br/><code>        <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">taskStatus</span> <span class="nn">taskStatus</span><span class="p">:</span><span class="nt">inProgress</span><span class="p">.</span></code> <br/><code>        <span class="c"># Получим задачи, у которых крайний срок</span></code> <br/><code>        <span class="c"># предшествует текущей дате.</span></code> <br/><code>        <span class="err">?dueDates</span> <span class="nn">w3math</span><span class="p">:</span><span class="nt">lessThan</span> <span class="err">?nowUTC</span><span class="p">.</span></code> <br/><code>        <span class="c"># Вычисляем разность между текущим временем и крайним сроком. </span></code> <br/><code>        <span class="p">(</span><span class="err">?nowUTC</span> <span class="err">?dueDates</span><span class="p">)</span> <span class="nn">cmwtime</span><span class="p">:</span><span class="nt">getSpan</span> <span class="err">?overdueDuration</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="c"># Возвращаем длительность просрочки</span></code> <br/><code>    <span class="err">then</span> <span class="p">{</span><span class="err">?overdueDuration</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span> <span class="p">}</span></code> <br/><code>    <span class="err">else</span> <span class="p">{</span></code> <br/><code>        <span class="c"># Завершённая задача: просрочена, </span></code> <br/><code>        <span class="c"># если завершена после крайнего срока.</span></code> <br/><code>        <span class="err">if</span> <span class="p">{</span></code> <br/><code>            <span class="c"># Получаем завершённые задачи.</span></code> <br/><code>            <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">taskStatus</span> <span class="nn">taskStatus</span><span class="p">:</span><span class="nt">completed</span><span class="p">.</span></code> <br/><code>            <span class="c"># Получим задачи, у которых дата завершения</span></code> <br/><code>            <span class="c"># cmw:completionDate больше крайнего срока.</span></code> <br/><code>            <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">completionDate</span> <span class="err">?endDates</span><span class="p">.</span></code> <br/><code>            <span class="err">?dueDates</span> <span class="nn">w3math</span><span class="p">:</span><span class="nt">lessThan</span> <span class="err">?endDates</span><span class="p">.</span></code> <br/><code>            <span class="c"># Вычисляем разность</span></code> <br/><code>            <span class="c"># между датой завершения временем и крайним сроком.</span></code> <br/><code>            <span class="p">(</span><span class="err">?endDates</span> <span class="err">?dueDates</span><span class="p">)</span> <span class="nn">cmwtime</span><span class="p">:</span><span class="nt">getSpan</span> <span class="err">?overdueDuration</span><span class="p">.</span></code> <br/><code>        <span class="p">}</span></code> <br/><code>        <span class="c"># Возвращаем длительность просрочки</span></code> <br/><code>        <span class="err">then</span> <span class="p">{</span><span class="err">?overdueDuration</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span> <span class="p">}</span></code> <br/><code>        <span class="c"># Возвращаем 0, если задача не просрочена</span></code> <br/><code>        <span class="err">else</span> <span class="p">{</span><span class="mi">0</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span> <span class="p">}.</span></code> <br/><code>    <span class="p">}.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+</ul>
+<ol class="colored_numbers_list" start="3">
+<li>Создайте атрибут для вычисления статуса просрочки:</li>
+</ol>
+<ul>
+<li><strong>Название:</strong> <code>Просрочена</code></li>
+<li><strong>Системное имя:</strong> <code>Просрочена</code></li>
+<li><strong>Тип данных: текстовый</strong></li>
+<li><strong>Описание:</strong> <em>Текстовый статус просрочки задачи</em></li>
+<li><strong>Вычислять автоматически:</strong> флажок установлен</li>
+<li>
+<p><strong>Вычисляемое значение: формула</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="k">IF</span><span class="p">(</span><span class="n">GREATER</span><span class="p">(</span><span class="ss">"Длительностьпросрочки"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="ss">"Да"</span><span class="p">,</span><span class="w"> </span><span class="ss">"Нет"</span><span class="p">)</span></code> <br/></pre></code></div>
+</li>
+</ul>
+<ol class="colored_numbers_list" start="4">
+<li>Создайте атрибут для вычисления названия задачи:</li>
+</ol>
+<ul>
+<li><strong>Название:</strong> <code>Название</code></li>
+<li><strong>Системное имя:</strong> <code>Название</code></li>
+<li><strong>Тип данных: текст</strong></li>
+<li><strong>Описание:</strong> <em>Заголовок задачи</em></li>
+<li><strong>Вычислять автоматически:</strong> флажок установлен</li>
+<li>
+<p><strong>Вычисляемое значение: N3</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmw:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">title</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+</ul>
+<ol class="colored_numbers_list" start="5">
+<li>Создайте атрибут для вычисления исполнителя:</li>
+</ol>
+<ul>
+<li><strong>Название:</strong> <code>Исполнитель</code></li>
+<li><strong>Системное имя:</strong> <code>Исполнитель</code></li>
+<li><strong>Тип данных: аккаунт</strong></li>
+<li><strong>Описание:</strong> <em>Аккаунт исполнителя задачи</em></li>
+<li><strong>Хранить несколько значений:</strong> флажок установлен</li>
+<li><strong>Вычислять автоматически:</strong> флажок установлен</li>
+<li>
+<p><strong>Вычисляемое значение: N3</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmw:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">assert:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/assert#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Собираем список всех исполнителей, назначенных задаче.</span></code> <br/><code>    <span class="err">?item</span> <span class="kt">a</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">UserTask</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span></code> <br/><code>        <span class="p">{</span><span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">assignee</span> <span class="err">?</span><span class="p">.</span></code> <br/><code>        <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">assignee</span> <span class="err">?users</span><span class="p">.}</span></code> <br/><code>        <span class="p">{</span><span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">possibleAssignee</span> <span class="err">?</span><span class="p">.</span></code> <br/><code>        <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">possibleAssignee</span> <span class="err">?users</span><span class="p">}</span></code> <br/><code>    <span class="p">)</span><span class="nn">assert</span><span class="p">:</span><span class="nt">union</span> <span class="l">true</span><span class="p">.</span></code> <br/><code>    <span class="err">?users</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+</ul>
+<ol class="colored_numbers_list" start="6">
+<li>Создайте атрибут для вычисления даты создания:</li>
+</ol>
+<ul>
+<li><strong>Название:</strong> <code>Дата создания</code></li>
+<li><strong>Системное имя:</strong> <code>Датасоздания</code></li>
+<li><strong>Тип данных: дата и время</strong></li>
+<li><strong>Описание:</strong> <em>Дата создания задачи</em></li>
+<li><strong>Вычислять автоматически:</strong> флажок установлен</li>
+<li>
+<p><strong>Вычисляемое значение: N3</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmw:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">dueDate</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+</ul>
+<ol class="colored_numbers_list" start="7">
+<li>Создайте атрибут для вычисления фактической даты завершения:</li>
+</ol>
+<ul>
+<li><strong>Название:</strong> <code>Дата завершения</code></li>
+<li><strong>Системное имя:</strong> <code>Датазавершения</code></li>
+<li><strong>Тип данных: дата и время</strong></li>
+<li><strong>Описание:</strong> <em>Фактическая дата завершения задачи</em></li>
+<li><strong>Вычислять автоматически:</strong> флажок установлен</li>
+<li>
+<p><strong>Вычисляемое значение: N3</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmw:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">completionDate</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+</ul>
+<h3 class="pageBreakBefore" id="example_n3_task_list_custom_table">Настройка таблицы <em>«Статус просрочки задач»</em></h3>
+<ol class="colored_numbers_list">
+<li>В шаблоне <em>«Задачи»</em> создайте <strong>таблицу</strong> <em>«Статус просрочки задач»</em>.</li>
+<li>
+<p>В конструкторе таблицы на вкладке «<strong>Основные</strong>» задайте <strong>системный фильтр</strong> на <strong>N3</strong>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы с объектами</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmw:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics#&gt;</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="c"># Получаем все пользовательские задачи,</span></code> <br/><code><span class="c"># у которых задан крайний срок cmw:dueDate</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="err">?item</span> <span class="kt">a</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">UserTask</span><span class="p">.</span></code> <br/><code>    <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">dueDate</span> <span class="err">?</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p>С таким фильтром в таблице будут отображаться задачи всех пользователей у которых задан <strong>крайний срок</strong>, с любым статусом: активные и завершённые.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Фильтрация задач без крайнего срока</p>
+<p>Если крайний срок не задан, задачи попадать не будут попадать в таблицу.</p>
+</div>
+</li>
+<li>
+<p>Добавьте в столбцы таблицы атрибуты:</p>
+<ul>
+<li><strong>ID</strong></li>
+<li><strong>Название</strong></li>
+<li><strong>Просрочена</strong></li>
+<li><strong>Длительность просрочки</strong></li>
+<li><strong>Исполнитель</strong></li>
+<li><strong>Дата создания</strong></li>
+<li><strong>Крайний срок</strong></li>
+<li><strong>Дата завершения</strong></li>
+</ul>
+</li>
+<li>
+<p>Добавьте таблицу <em>«Статус просрочки задач»</em> на требуемую информационную страницу приложения. Например, <em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4800#table_configure_add_to_my_tasks">на страницу «Мои задачи»</a></em>.</p>
+</li>
+<li>Откройте результирующую таблицу и проверьте её состав.</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4730">Пользовательская задача</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4800#table_configure_tasks_view">Создание таблицы со списком задач</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4800#table_configure_add_to_my_tasks">Добавление таблицы на страницу «Мои задачи»</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4852">Справочник по языку N3</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4993">Справочник по формулам</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4935">Фильтр списка по активным задачам текущего пользователя: по всем процессам, по конкретному процессу</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

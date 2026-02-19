@@ -31,32 +31,27 @@ updated: '2026-01-29 18:25:58'
 
    ```
    sudo -s
-
    ```
 
    или
 
    ```
    su -
-
    ```
 2. Перейдите в папку ПО:
 
    ```
    cd /var/www/comindware/
-
    ```
 3. Откройте файл `Ignite.config` в текстовом редакторе nano:
 
    ```
    nano -v Ignite.config
-
    ```
 4. Проверьте содержимое директивы `<workDirectory>`:
 
    ```
    <workDirectory>/path/to/WorkDir</workDirectory>
-
    ```
 
    ![Путь к рабочей папке в файле конфигурации Apache Ignite](https://kb.comindware.ru/assets/img_63567910ececd.png)
@@ -72,13 +67,11 @@ updated: '2026-01-29 18:25:58'
 
    ```
    ctrl+X
-
    ```
 6. Перейдите в папку с базой данных экземпляра ПО в рабочей папке и выведите на экран её содержимое:
 
    ```
    cd /var/lib/comindware/<instanceName>/Database/dbdb/ && ll
-
    ```
 
    ![Просмотр содержимого папки с базой данных экземпляра ПО](https://kb.comindware.ru/assets/img_635679e668157.png)
@@ -89,13 +82,11 @@ updated: '2026-01-29 18:25:58'
 
    ```
    cd /tmp/
-
    ```
 9. Создайте с помощью nano скрипт `snapshot.sh`:
 
    ```
    nano snapshot.sh
-
    ```
 
    ![Создание скрипта с помощью nano](https://kb.comindware.ru/assets/img_63567a89286c4.png)
@@ -106,14 +97,12 @@ updated: '2026-01-29 18:25:58'
     ```
     now=$(date +%Y_%m_%d)
     /usr/share/ignite/bin/control.sh --snapshot create snapshot_$now
-
     ```
 11. Сохраните скрипт: `ctrl+O` и закройте nano: `ctrl+X`.
 12. Запустите созданный скрипт из папки `/tmp/`:
 
     ```
     sh snapshot.sh
-
     ```
 
     ![Запуск скрипта создания снимка](https://kb.comindware.ru/assets/img_63567b113131e.png)
@@ -123,7 +112,6 @@ updated: '2026-01-29 18:25:58'
 
     ```
     cd /var/lib/comindware/<instanceName>/Database/snapshots/ && ll 
-
     ```
 
     ![Содержимое папки со снимками Apache Ignite](https://kb.comindware.ru/assets/img_63567d1f7a888.png)
@@ -142,20 +130,17 @@ updated: '2026-01-29 18:25:58'
 
    ```
    sudo -s
-
    ```
 
    или
 
    ```
    su -
-
    ```
 3. Создайте папку для базы данных экземпляра ПО (например, `/cmw-db/`):
 
    ```
    mkdir /var/www/cmw-db/
-
    ```
 
    Примечание
@@ -165,13 +150,11 @@ updated: '2026-01-29 18:25:58'
 
    ```
    systemctl stop elasticsearch.service comindware<instanceName>.service nginx.service kafka.service zookeeper.service
-
    ```
 5. Убедитесь, что сервисы остановлены. Статус должен быть `Active: inactive (dead)`:
 
    ```
    systemctl status zookeeper.service kafka.service nginx.service comindware<instanceName>.service elasticsearch.service
-
    ```
 
    ![Проверка остановки сервисов OpenSearch (Elasticsearch), comindware<instanceName>, NGINX, Kafka и Zookeeper](https://kb.comindware.ru/assets/img_63567da91a5c6.png)
@@ -188,19 +171,16 @@ updated: '2026-01-29 18:25:58'
 
    ```
     cd /var/www/comindware/
-
    ```
 10. Откройте файл `Ignite.config` в текстовом редакторе nano:
 
     ```
     nano Ignite.config
-
     ```
 11. Найдите директиву `<workDirectory>` и укажите в ней путь папке базы данных экземпляра ПО:
 
     ```
     <workDirectory>/var/www/cmw-db</workDirectory>
-
     ```
 
     ![Путь к новой папке базы данных в файле конфигурации Apache Ignite](https://kb.comindware.ru/assets/img_63567eabb2a14.png)
@@ -211,7 +191,6 @@ updated: '2026-01-29 18:25:58'
     ```
     cd /var/www/cmw-db/ && ll
     cd /var/www/cmw-db/db/ && ll
-
     ```
 
     Должны быть указаны дата и время создания снимка, если дата и время не совпадают с временем создания снимка, необходимо повторить перенос базы данных.
@@ -224,34 +203,29 @@ updated: '2026-01-29 18:25:58'
     ```
     cd /var/www/
     chmod -R 777 cmw-db/
-
     ```
 
     **Astra Linux, Debian, DEB-дистрибутивы**
 
     ```
     sudo chown -R www-data:www-data cmw-db/
-
     ```
 
     **РЕД ОС, RPM-дистрибутивы**
 
     ```
     sudo chown -R nginx:nginx cmw-db/
-
     ```
 
     **Альт Сервер**
 
     ```
     sudo chown -R _nginx:_nginx cmw-db/
-
     ```
 14. Проверьте права доступа и владельцев папок:
 
     ```
     ll
-
     ```
 
     ![Проверка прав доступа и владельцев папок](https://kb.comindware.ru/assets/img_635680c397312.png)
@@ -265,7 +239,6 @@ updated: '2026-01-29 18:25:58'
    ```
    systemctl start elasticsearch kafka nginx comindware<instanceName>
    systemctl status elasticsearch kafka nginx comindware<instanceName>
-
    ```
 
    ![Проверка активного состояния сервисов](https://kb.comindware.ru/assets/img_635680edb9d1d.png)

@@ -320,7 +320,6 @@ updated: '2025-12-11 13:14:25'
 
 ```
 http://your-host/docs
-
 ```
 
 Здесь `your-host` — адрес сервера **{{ productName }}**.

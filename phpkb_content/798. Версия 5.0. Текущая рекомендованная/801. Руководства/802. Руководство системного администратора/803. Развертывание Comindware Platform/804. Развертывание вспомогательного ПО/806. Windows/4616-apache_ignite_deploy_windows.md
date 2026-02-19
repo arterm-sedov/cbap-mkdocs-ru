@@ -136,7 +136,6 @@ Apache Ignite в минимально необходимой конфигура�
 
 </igniteConfiguration>
 </configuration>
-
 ```
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

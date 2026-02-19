@@ -32,7 +32,6 @@ updated: '2026-01-29 18:28:35'
    cd /usr/share/GeoIP/
    wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz
    gunzip GeoIP.dat.gz
-
    ```
 3. С помощью команды `nginx -V` убедитесь, что веб-сервер собран с параметром `--with-http_geoip_module`. В противном случае необходимо самостоятельно собрать модуль NGINX. Исходные коды GeoIP находятся в открытом доступе.
 
@@ -47,7 +46,6 @@ updated: '2026-01-29 18:28:35'
                UA no;
                US no;
        }
-
    ```
 2. Чтобы разрешить использование сайта только пользователям из России, Китая и Тайваня, используйте в файле конфигурации следующие директивы:
 
@@ -59,7 +57,6 @@ updated: '2026-01-29 18:28:35'
            CN yes;
            TW yes;
        }
-
    ```
 3. В файле конфигурации `/etc/nginx/nginx.conf` в разделе `http` добавьте следующую директиву: `include include/block.map.include;`
 4. В настройках хоста (раздел `server`) добавьте следующую директиву:
@@ -68,7 +65,6 @@ updated: '2026-01-29 18:28:35'
    if ($allowed_country = no) {
        return 404;
    }
-
    ```
 5. Примените изменения: `# nginx -s reload`
 
@@ -97,7 +93,6 @@ done
 [ -d "${TMPDIR}" ] && rm -rf $TMPDIR
 fi
 fi
-
 ```
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

@@ -25,7 +25,6 @@ Solution API предоставляет RESTful-методы, которые а�
 
   ```
   https://your-host/api/public/solution/
-
   ```
 - Solution API поддерживает запросы `GET`, `PUT`, `POST`, `DELETE`.
 - Методы Solution API передают данные в формате JSON.
@@ -41,14 +40,12 @@ Swagger позволяет выполнять запросы и просматр
 
 ```
 http://your-host/Docs/SolutionApi
-
 ```
 
 URL-адрес JSON-спецификации Solution API:
 
 ```
 https://your-host/api/public/solution/swagger
-
 ```
 
 Здесь `your-host` — доменное имя вашего сервера.

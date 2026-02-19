@@ -36,21 +36,18 @@ updated: '2026-01-29 18:26:44'
 
    ```
    sudo -s
-
    ```
 
    или
 
    ```
    su -
-
    ```
 2. Перед тем как выполнять любые действия с файлами ПО и базы данных, остановите экземпляр ПО и его вспомогательные службы и удостоверьтесь, что они остановлены:
 
    ```
    systemctl stop elasticsearch nginx kafka comindware<instancename>
    systemctl status elasticsearch nginx kafka comindware<instancename>
-
    ```
 
    Здесь `<instancename>` — имя экземпляра ПО.
@@ -60,7 +57,6 @@ updated: '2026-01-29 18:26:44'
    ```
    rm -rf /var/lib/comindware/<instancename>/Database/*
    rm -rf /var/lib/comindware/<instancename>/Streams/*
-
    ```
 
 ## Восстановление базы данных из резервной копии
@@ -69,20 +65,17 @@ updated: '2026-01-29 18:26:44'
 
    ```
    cd /tmp/
-
    ```
 2. Распакуйте архив с резервной копией (например, `backup_2023_01_23_10_17.tar.bz2`):
 
    ```
    tar -xf backup_2023_01_23_10_17.tar.bz2
-
    ```
 3. Войдите в директорию резервной копии и просмотрите её содержимое:
 
    ```
    cd backup_2023_01_23_10_17/
    ll
-
    ```
 
    ![Содержимое папки резервной копии](https://kb.comindware.ru/assets/Pasted image 20230125133846.png)
@@ -105,26 +98,22 @@ updated: '2026-01-29 18:26:44'
 
    ```
    mv Database/snapshots/snapshot_2023_01_23_10_17/* /var/lib/comindware/<instancename>/Database/
-
    ```
 5. Перенесите директорию со скриптами из резервной копии в рабочую директорию Apache Ignite:
 
    ```
    mv Database/Scripts /var/lib/comindware/<instancename>/Database/
-
    ```
 6. Перенесите директорию с загруженными файлами из резервной копии в целевую директорию:
 
    ```
    mv Streams /var/lib/comindware/<instancename>/Database/
-
    ```
 7. Назначьте перенесённым папкам права `rwxr-xr-x`:
 
    ```
    chmod -R 755 /var/lib/comindware/<instancename>/Database/Streams/
    chmod -R 755 /var/lib/comindware/<instancename>/Database/
-
    ```
 8. Назначьте перенесённым папкам владельца:
 
@@ -133,7 +122,6 @@ updated: '2026-01-29 18:26:44'
    ```
    chown -R www-data:www-data /var/lib/comindware/<instancename>/Database/Streams/
    chown -R www-data:www-data /var/lib/comindware/<instancename>/Database/
-
    ```
 
    **РЕД ОС, RPM-дистрибутивы**
@@ -141,7 +129,6 @@ updated: '2026-01-29 18:26:44'
    ```
    chown -R nginx:nginx /var/lib/comindware/<instancename>/Database/Streams/
    chown -R nginx:nginx /var/lib/comindware/<instancename>/Database/
-
    ```
 
    **Альт Сервер**
@@ -149,7 +136,6 @@ updated: '2026-01-29 18:26:44'
    ```
    chown -R _nginx:_nginx /var/lib/comindware/<instancename>/Database/Streams/
    chown -R _nginx:_nginx /var/lib/comindware/<instancename>/Database/
-
    ```
 
 ## Восстановление индексов OpenSearch (Elasticsearch) из резервной копии репозитория
@@ -159,25 +145,21 @@ updated: '2026-01-29 18:26:44'
    ```
    mkdir /var/www/backups/elasticsearch/
    mv elastic/* /var/www/backups/elasticsearch/
-
    ```
 2. Назначьте папке репозитория и её содержимому права `rwxr-xr-x`:
 
    ```
    chmod -R 755 /var/www/backups/
-
    ```
 3. Назначьте владельца `elasticsearch` директории репозитория и её содержимому:
 
    ```
    chown -R elasticsearch:elasticsearch /var/www/backups/
-
    ```
 4. В файле конфигурации `elasticsearch.yml` с помощью директивы `path.repo: /var/www/backups/elasticsearch` укажите путь к созданному репозиторию (например, с помощью редактора `nano`):
 
    ```
    nano /etc/elasticsearch/elasticsearch.yml
-
    ```
 
    ![Путь к репозиторию в файле конфигурации OpenSearch (Elasticsearch)](https://kb.comindware.ru/assets/Pasted image 20230125204737.png)
@@ -187,31 +169,26 @@ updated: '2026-01-29 18:26:44'
 
    ```
    systemctl start elasticsearch.service
-
    ```
 6. Зарегистрируйте новый репозиторий снимков OpenSearch (Elasticsearch):
 
    ```
    curl -X PUT "<openSearchHost>:<opeSearchPort>/_snapshot/elastic_snap?pretty" -H 'Content-Type: application/json' -d' {"type": "fs", "settings": {"location": "/var/www/backups/elasticsearch"}}'
-
    ```
 7. Проверьте содержимое зарегистрированного репозитория:
 
    ```
    curl -X GET "<openSearchHost>:<opeSearchPort>/_cat/snapshots/elastic_snap?pretty"
-
    ```
 8. Выберите необходимый снимок и восстановите состояние OpenSearch (Elasticsearch):
 
    ```
    curl -X POST "<openSearchHost>:<opeSearchPort>/_snapshot/elastic_snap/snapshot2023_01_23_10_17/_restore?pretty"
-
    ```
 9. Проверьте наличие индексов в восстановленном каталоге:
 
    ```
    curl -X GET "<openSearchHost>:<opeSearchPort>/_cat/indices?pretty"
-
    ```
 
 _![Отображение списка индексов OpenSearch (Elasticsearch)](https://kb.comindware.ru/assets/Pasted image 20230127153756.png)_
@@ -223,7 +200,6 @@ _![Отображение списка индексов OpenSearch (Elasticsearc
    ```
    systemctl start elasticsearch kafka nginx comindware<instancename>
    systemctl status elasticsearch kafka nginx comindware<instancename>
-
    ```
 2. Откройте в браузере веб-сайт с экземпляром ПО.
 3. Дождитесь инициализации экземпляра ПО. Этот процесс может занять некоторое время. Может потребоваться обновить страницу браузера.

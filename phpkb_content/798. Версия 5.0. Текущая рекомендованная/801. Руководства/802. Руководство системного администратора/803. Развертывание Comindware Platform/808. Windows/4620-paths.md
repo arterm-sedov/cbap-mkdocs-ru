@@ -23,7 +23,6 @@ updated: '2026-02-09 16:53:09'
 
 ```
 /usr/share/comindware/configs/instance/<instanceName>.yml
-
 ```
 
 **Пути по умолчанию**
@@ -58,7 +57,6 @@ updated: '2026-02-09 16:53:09'
 
 ```
 C:\\ProgramData\\сomindware\\configs\\instance\\<instanceName>.yml
-
 ```
 
 **Пути по умолчанию**

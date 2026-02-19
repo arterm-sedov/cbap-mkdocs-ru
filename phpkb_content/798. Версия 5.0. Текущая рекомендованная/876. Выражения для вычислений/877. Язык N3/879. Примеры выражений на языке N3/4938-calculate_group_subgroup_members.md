@@ -24,7 +24,6 @@ updated: '2023-12-21 14:20:03'
          ?users -> ?value.}
     )assert:union true.
 }
-
 ```
 
 **где:**

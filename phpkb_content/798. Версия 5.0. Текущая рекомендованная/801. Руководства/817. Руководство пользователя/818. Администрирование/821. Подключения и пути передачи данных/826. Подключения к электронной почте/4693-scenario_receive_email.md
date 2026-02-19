@@ -235,7 +235,6 @@ updated: '2025-09-03 16:33:43'
 
    ```
    FORMAT ("{0} <1>", LIST($$message->From->Name, $$message->From->Address))
-
    ```
 
    Эта формула берёт данные отправителя из переменной `message` и возвращает имя и адрес отправителя письма в следующем формате: `Имя <address@example.com>`
@@ -246,7 +245,6 @@ updated: '2025-09-03 16:33:43'
 
    ```
    $$message->Attachments
-
    ```
 
    Эта формула берет из переменной `message` и возвращает массив объектов с прикреплёнными к письму файлами.
@@ -281,7 +279,6 @@ updated: '2025-09-03 16:33:43'
        # и возвращаем ID нового документа с прикреплённым файлом.
        (?contentValue ?filenameValue) document:attach ?value.
    }
-
    ```
 
 _![Сценарий для получения электронной почты](/platform/v5.0/administration/connections_communication_routes/email_connections/img/scenario_receive_email_scenario.png)_

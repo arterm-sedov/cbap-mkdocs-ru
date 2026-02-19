@@ -62,13 +62,11 @@ updated: '2026-01-19 12:35:23'
        </bean>
        </property>
    ...
-
    ```
 3. Откройте скрипт резервного копирования `backups_create.sh` для редактирования:
 
    ```
    nano /usr/share/comindware/bin/backups_create.sh
-
    ```
 4. Настройте в скрипте пути и имена в переменных в соответствии с вашей конфигурацией:
 
@@ -95,7 +93,6 @@ updated: '2026-01-19 12:35:23'
 
    ```
    bash /usr/share/comindware/bin/backups_create.sh <instanceName> -vso
-
    ```
 
    Внимание!
@@ -139,13 +136,11 @@ updated: '2026-01-19 12:35:23'
 
    ```
    sudo crontab -e
-
    ```
 2. Добавьте строку запуска скрипта `backups_create.sh`:
 
    ```
    0 6-22 * * * sudo bash /usr/share/comindware/bin/backups_create.sh  <instanceName>
-
    ```
 
    Здесь `<instanceName>` — имя экземпляра **{{ productName }}**.
@@ -160,7 +155,6 @@ updated: '2026-01-19 12:35:23'
 
    ```
    sudo crontab -e
-
    ```
 2. Добавьте строки запуска скрипта для первого узла:
 
@@ -169,7 +163,6 @@ updated: '2026-01-19 12:35:23'
    0 6-18/4 * * * sudo bash /usr/share/comindware/bin/backups_create.sh -so
    # Сохранение снимков
    30 6-21 * * * sudo bash /usr/share/comindware/bin/backups_create.sh -c
-
    ```
 3. Для второго узла добавьте строки:
 
@@ -178,7 +171,6 @@ updated: '2026-01-19 12:35:23'
    0 7-19/4 * * * sudo bash /usr/share/comindware/bin/backups_create.sh -so
    # Сохранение снимков
    30 6-19/4 * * * sudo bash /usr/share/comindware/bin/backups_create.sh -c
-
    ```
 4. Аналогичным образом разнесите по времени и настройте автозапуск скрипта на остальных узлах.
 5. В результате запуск скриптов для узлов кластера должен выполняться по представленному в следующей таблице графику:
