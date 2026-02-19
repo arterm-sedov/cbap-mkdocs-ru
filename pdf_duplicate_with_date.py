@@ -6,14 +6,14 @@ Duplicates PDF files in the current directory and adds a date suffix
 in YYYY.MM.DD format to the copies.
 
 Configuration:
-    Create a .env file with PDF_DATED_DIR=/path/to/backup/directory
+    Create a .env file with PDF_DATED_DIR=/path/to/target/directory
     If not specified, copies files to current directory
 
 Usage:
     python duplicate_pdfs_with_date.py
 
 Result:
-    original_file.pdf -> original_name.YYYY.MM.DD.pdf (in backup directory or current dir)
+    original_file.pdf -> original_name.YYYY.MM.DD.pdf (in target directory or current dir)
 """
 
 import os
@@ -31,25 +31,25 @@ except ImportError:
     _load_dotenv = None
 
 
-def get_backup_directory():
-    """Get backup directory from environment or use current directory.
+def get_target_directory():
+    """Get target directory from environment or use current directory.
     
     Returns:
         tuple: (directory_path, is_from_env) where is_from_env is True if path came from .env
     """
-    backup_dir = None
+    target_dir = None
     from_env = False
     
     if _dotenv_available and _load_dotenv is not None:
         _load_dotenv()
-        backup_dir = os.getenv('PDF_DATED_DIR')
-        if backup_dir:
+        target_dir = os.getenv('PDF_DATED_DIR')
+        if target_dir:
             from_env = True
     
-    if backup_dir:
+    if target_dir:
         # Expand ~ to user's home directory
-        backup_dir = os.path.expanduser(backup_dir)
-        return os.path.normpath(backup_dir), from_env
+        target_dir = os.path.expanduser(target_dir)
+        return os.path.normpath(target_dir), from_env
     
     # Default to current directory (PWD)
     return os.getcwd(), from_env
@@ -80,10 +80,10 @@ def duplicate_pdfs_with_date():
     """
     Duplicate PDF files modified today with date suffix.
     
-    Copies PDFs modified today to backup directory with YYYY.MM.DD suffix.
+    Copies PDFs modified today to target directory with YYYY.MM.DD suffix.
     """
     # Get target directory
-    target_dir, from_env = get_backup_directory()
+    target_dir, from_env = get_target_directory()
     
     # Validate target directory
     target_path = Path(target_dir)
@@ -102,9 +102,9 @@ def duplicate_pdfs_with_date():
         except Exception as e:
             print(f"Error creating directory {target_dir}: {e}")
             return
-        print(f"Backup directory (from .env): {target_dir}\n")
+        print(f"Target directory (from .env): {target_dir}\n")
     else:
-        print(f"Backup directory (.env not configured, using current directory): {target_dir}\n")
+        print(f"Target directory (.env not configured, using current directory): {target_dir}\n")
     
     # Get current working directory for source files
     cwd = Path.cwd()
