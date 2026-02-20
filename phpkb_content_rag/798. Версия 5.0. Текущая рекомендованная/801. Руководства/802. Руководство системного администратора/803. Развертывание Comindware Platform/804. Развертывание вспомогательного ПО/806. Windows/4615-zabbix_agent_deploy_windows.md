@@ -97,12 +97,10 @@ _![Статус хоста Zabbix Agent](https://kb.comindware.ru/assets/img_63b
 
 ```
 Server=192.168.0.1 # ip-адрес приведён как пример
-
 ```
 
 ```
 ServerActive=192.168.0.1 # ip-адрес приведён как пример
-
 ```
 
 **Примечание**

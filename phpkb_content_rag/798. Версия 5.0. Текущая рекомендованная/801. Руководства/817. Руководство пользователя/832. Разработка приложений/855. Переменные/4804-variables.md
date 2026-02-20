@@ -39,7 +39,6 @@ updated: '2025-05-13 14:58:26'
       # и возвращаем значение переменной.
       ("SolutionSystemName" "VariableSystemName") globalvariable:getValueByAlias ?value.
   }
-
   ```
 
   или
@@ -53,7 +52,6 @@ updated: '2025-05-13 14:58:26'
       # и возвращаем значение переменной.
       ("SolutionSystemName" "VariableSystemName") sln:getVariableValue ?value.
   }
-
   ```
 - **По ID переменной**
 
@@ -66,7 +64,6 @@ updated: '2025-05-13 14:58:26'
       # по её ID (svar.1) и возвращаем её значение.
       "svar.1" globalvariable:getValueById ?value.
   }
-
   ```
 
 ## Использование переменных приложения в C#-скриптах
@@ -96,7 +93,6 @@ updated: '2025-05-13 14:58:26'
             return result;
         }
     }
-
     ```
 - Чтобы использовать значение переменной приложения в **Задаче-вызове сценария** используйте образец C#-скрипта из статьи [*«Автонумерация записей с помощью формулы, C#-скрипта или выражения N3»*](https://kb.comindware.ru/article.php?id=4895).
 

@@ -1,11 +1,11 @@
 ---
-title: 'Модуль GeoIP для NGINX. Установка и настройка. Краткое руководство'
+title: 'Модуль GeoIP для NGINX. Установка и настройка'
 kbId: 4610
 url: 'https://kb.comindware.ru/article.php?id=4610'
-updated: '2024-11-01 19:00:43'
+updated: '2026-01-29 18:28:35'
 ---
 
-# Модуль GeoIP для NGINX. Установка и настройка. Краткое руководство
+# Модуль GeoIP для NGINX. Установка и настройка
 
 ## Введение
 
@@ -22,9 +22,9 @@ updated: '2024-11-01 19:00:43'
 
 1. Для установки необходимых пакетов в операционной системе выполните указанные ниже команды.
 
-   - **Astra/Debian/Ubuntu**: `sudo apt-get install nginx-module-geoip`
-   - **Alt**: `sudo apt-get install nginx-geoip`
-   - **CentOS**: `yum install nginx-module-geoip`
+   - **Astra, Debian, DEB-дистрибутивы**: `sudo apt-get install nginx-module-geoip`
+   - **Альт Сервер**: `sudo apt-get install nginx-geoip`
+   - **РЕД ОС, RPM-дистрибутивы**: `yum install nginx-module-geoip`
 2. Обновите базы GeoIP до актуальной версии с помощью команд:
 
    ```

@@ -2,7 +2,7 @@
 title: 'Резервное копирование. Настройка, запуск и просмотр журнала сеансов'
 kbId: 4642
 url: 'https://kb.comindware.ru/article.php?id=4642'
-updated: '2025-05-22 13:04:51'
+updated: '2026-01-29 18:28:05'
 ---
 
 # Резервное копирование. Настройка, запуск и просмотр журнала сеансов
@@ -11,22 +11,32 @@ updated: '2025-05-22 13:04:51'
 
 Для обеспечения бесперебойной работы **Comindware Platform** необходимо настроить регулярное резервное копирование данных экземпляра ПО.
 
-Здесь представлены рекомендации по настройке и запуску резервного копирования, а также по просмотру журнала сеансов.
+Здесь представлены рекомендации по настройке и запуску резервного копирования, а также по просмотру журнала сеансов встроенными средствами **Comindware Platform**.
 
 Прежде чем приступать к настройке резервного копирования ознакомьтесь с *[рекомендациями по организации и оптимизации резервного копирования и восстановления](https://kb.comindware.ru/article.php?id=5082)*.
 
-Дополнительные инструкции по резервному копированию и восстановлению данных встроенными и внешними средствами см. в разделе *«[Резервное копирование и восстановление](https://kb.comindware.ru/article.php?id=4643)»* базы знаний **Comindware**.
+Дополнительные инструкции по резервному копированию и восстановлению данных встроенными и внешними средствами см. в разделе *«[Резервное копирование и восстановление](https://kb.comindware.ru/article.php?id=4643)»*.
 
 ## Инструменты резервного копирования и восстановления Comindware Platform
 
-- В **Comindware Platform** предусмотрена функция резервного копирования полного образа экземпляра ПО в формате файла с расширением `.CDBBZ`.
+- В **Comindware Platform** предусмотрена встроенная функция резервного копирования полного образа экземпляра ПО в формате файла с расширением `.CDBBZ`.
   - В такой резервной копии сохраняются все данные всех приложений и настройки экземпляра ПО **Comindware Platform**.
   - Резервные копии могут храниться как в файловой системе сервера **Comindware Platform**, так и в хранилище S3. См. *«[Настройка экземпляра ПО Comindware Platform для хранения резервных копий в S3](#backup_configure_instance_s3)»*.
   - Резервное копирование может запускаться вручную или по расписанию.
   - Резервное копирование следует настраивать и запускать с помощью страницы «**Администрирование**» — «**Инфраструктура**» — «**Резервное копирование**». См. *«[Настройка конфигураций и запуск резервного копирования](#backup_configure_list_view)»*.
   - В **Comindware Platform** предусмотрен [журнал сеансов резервного копирования](#backup_configure_list_view).
+- В зависимости от размера базы данных, конфигурации, требуемого уровня надежности, доступности и отказоустойчивости системы, резервное копирование и восстановление также можно выполнять с помощью скриптов, средств виртуализации, файловой системы, Apache Ignite, OpenSearch (Elasticsearch) и Apache Ignite. См. *[Рекомендации по организации и оптимизации резервного копирования и восстановления](https://kb.comindware.ru/article.php?id=5082)*.
+
+  Резервное копирование крупных баз данных
+
+  Если размер базы данных превышает 10 ГБ, рекомендуется использовать скрипт резервного копирования на сервере для обеспечения оптимальной производительности резервного копирования и работы **Comindware Platform**.
+
+  Это связано с тем, что резервное копирование больших баз данных встроенными средствами **Comindware Platform** создаёт значительную вычислительную нагрузку и может приводить к снижению производительности.
+
+  См. *«[Настройка и использование скрипта для резервного копирования данных (Linux)](https://kb.comindware.ru/article.php?id=5140)»*.
+
+  Скрипт резервного копирования следует запросить у [службы поддержки Comindware](https://www.comindware.ru/company/contact-us/#tab_support).
 - Восстановление данных осуществляется на стороне сервера **Comindware Platform**. См. *«[Восстановление базы данных из файла резервной копии в формате .CDBBZ](https://kb.comindware.ru/article.php?id=4647)»*.
-- В зависимости от требуемого уровня надежности, доступности и отказоустойчивости системы, резервное копирование также можно выполнять средствами виртуализации, файловой системы, Apache Ignite, OpenSearch (Elasticsearch) и Apache Ignite. См. *[Рекомендации по организации и оптимизации резервного копирования и восстановления](https://kb.comindware.ru/article.php?id=5082)*.
 
 ## Порядок резервного копирования и восстановления
 
@@ -57,22 +67,28 @@ updated: '2025-05-22 13:04:51'
 
 1. Создайте директорию, в которой будут сохраняться резервные копии. Для этой директории предоставьте разрешения на полный доступ, чтобы система могла сохранять в неё резервные копии, например:
 
-   **Astra Linux, Ubuntu, Rocky**
+   **Astra Linux, Debian, DEB-дистрибутивы**
 
    ```
    mkdir /var/backups/comindware/<instanceName>
    chmod 777 /var/backups/comindware/<instanceName>
    chown -R www-data:www-data /var/backups/comindware/<instanceName>
-
    ```
 
-   **Альт Сервер, РЕД ОС**
+   **РЕД ОС, RPM-дистрибутивы**
+
+   ```
+   mkdir /var/backups/comindware/<instanceName>
+   chmod 777 /var/backups/comindware/<instanceName>
+   chown -R nginx:nginx /var/backups/comindware/<instanceName>
+   ```
+
+   **Альт Сервер**
 
    ```
    mkdir /var/backups/comindware/<instanceName>
    chmod 777 /var/backups/comindware/<instanceName>
    chown -R _nginx:_nginx /var/backups/comindware/<instanceName>
-
    ```
 
    **Здесь** `<instanceName>` — имя экземпляра ПО.
@@ -94,7 +110,6 @@ updated: '2025-05-22 13:04:51'
    # К нему будут добавляться метка времени и расширение cdbbz, например:
    # Backup.202202161625.cdbbz
    backup.defaultFileName: Backup
-
    ```
 4. Перезапустите **Comindware Platform**.
 5. При необходимости настройте [резервное копирование данных OpenSearch (Elasticsearch) на диск](#backup_configure_elasticsearch_s3).
@@ -128,7 +143,6 @@ updated: '2025-05-22 13:04:51'
    # Установите значение true, если сервер принимает только запросы path-style вида:
    # https://<s3hostname>/bucket-name/key-name
    #s3.default.pathStyleAccess: true
-
    ```
 3. Перезапустите **Comindware Platform**.
 4. При необходимости настройте [резервное копирование данных OpenSearch (Elasticsearch) в S3](#backup_configure_elasticsearch_s3).
@@ -157,7 +171,6 @@ updated: '2025-05-22 13:04:51'
    s3.<s3connectionName>.accessKey: xxxx
    s3.<s3connectionName>.secretKey: xxxx
    #s3.<s3connectionName>.pathStyleAccess: true
-
    ```
 3. Настройте конфигурацию резервного копирования по умолчанию. Эта конфигурация не будет отображаться в списке конфигураций. Она будет запускаться автоматически по заданному расписанию.
 
@@ -193,7 +206,6 @@ updated: '2025-05-22 13:04:51'
    backup.default.<backupName>.withScripts: true
    # Управление составом резервной копии — файлы истории (OpenSearch (Elasticsearch)).
    backup.default.<backupName>.withJournal: true
-
    ```
 4. Перезапустите **Comindware Platform**.
 
@@ -228,20 +240,17 @@ updated: '2025-05-22 13:04:51'
    # Внутри этой директории будет создана директория,
    # имя которой будет совпадать с префиксом индекса OpenSearch (Elasticsearch).
    path.repo: /var/backups/elasticsearch
-
    ```
 4. Предоставьте доступ OpenSearch (Elasticsearch) к репозиторию резервных копий:
 
    ```
    chmod -R 777 /var/backups/elasticsearch
    chown -R elasticsearch:elasticsearch /var/backups/elasticsearch
-
    ```
 5. Перезапустите службу OpenSearch (Elasticsearch):
 
    ```
    systemctl restart elasticsearch
-
    ```
 6. Перейдите к настройке машины с экземпляром ПО **Comindware Platform**.
 7. Откройте для редактирования файл конфигурации `<instanceName>.yml`. См. *«[Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=4620)»*.
@@ -256,7 +265,6 @@ updated: '2025-05-22 13:04:51'
    # будет скопирован в директорию History
    # внутри файла .CDBBZ резервной копии Comindware Platform
    backup.journalRepository.localDisk.path: /var/backups/elasticsearch
-
    ```
 
    Внимание!
@@ -270,7 +278,6 @@ updated: '2025-05-22 13:04:51'
 
    ```
    systemctl restart comindware<instanceName>
-
    ```
 10. Настройте конфигурацию резервного копирования на диск c помощью *«[списка конфигураций резервного копирования](#backup_configure_list_view)»*.
 
@@ -310,13 +317,11 @@ updated: '2025-05-22 13:04:51'
    # Установите значение true, если сервер принимает только запросы path-style вида:
    # https://<s3hostname>/bucket-name/key-name
    s3.client.default.path_style_access: true
-
    ```
 4. Перезапустите службу OpenSearch (Elasticsearch):
 
    ```
    systemctl restart elasticsearch
-
    ```
 5. Перейдите к настройке машины с экземпляром ПО **Comindware Platform**.
 6. Откройте для редактирования файл конфигурации `<instanceName>.yml`.
@@ -336,7 +341,6 @@ updated: '2025-05-22 13:04:51'
    # Установите значение true, если сервер принимает только запросы path-style вида:
    # https://<s3hostname>/bucket-name/key-name
    #s3.default.pathStyleAccess: true
-
    ```
 8. Укажите тип репозитория резервных копий OpenSearch (Elasticsearch): `S3`, и корзину для репозитория, например:
 
@@ -350,13 +354,11 @@ updated: '2025-05-22 13:04:51'
    backup.journalRepository.s3.platformConnection: default
    # Имя подключения к хранилищу S3, используемому по умолчанию на стороне OpenSearch (Elasticsearch)
    backup.journalRepository.s3.journalConnection: default
-
    ```
 9. Перезапустите экземпляр **Comindware Platform**:
 
    ```
    systemctl restart comindware<instanceName>
-
    ```
 10. Настройте конфигурацию резервного копирования в S3 c помощью *«[списка конфигураций резервного копирования](#backup_configure_list_view)»*.
 
@@ -457,6 +459,7 @@ _![Список сеансов резервного копирования](/pla
 ## Связанные статьи
 
 - [Резервное копирование и восстановление. Рекомендации по организации и оптимизации](https://kb.comindware.ru/article.php?id=5082)
+- [Настройка и использование скрипта для резервного копирования данных (Linux)](https://kb.comindware.ru/article.php?id=5140)
 - [Восстановление базы данных из файла резервной копии в формате .CDBBZ](https://kb.comindware.ru/article.php?id=4647)
 - [Хранилище S3. Настройка экземпляра ПО и подключения](https://kb.comindware.ru/article.php?id=4677)
 - [Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=4620)

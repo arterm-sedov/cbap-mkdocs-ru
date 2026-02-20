@@ -84,7 +84,6 @@ _![Жизненный цикл аккаунтов в системе](https://kb.
       "isAnonymous": false,
       "authenticationMethod": "Builtin"
   }
-
   ```
 
   - При использовании метода `/Base/AccountService/Edit` необходимо задать ID аккаунта, имя пользователя и адрес эл. почты:
@@ -95,7 +94,6 @@ _![Жизненный цикл аккаунтов в системе](https://kb.
           "Mbox": "address@example.ru",
           "Username": "example_login",
   }
-
   ```
 
   См. *«[Методы System Core API](https://kb.comindware.ru/article.php?id=4862#api_system_core_account)»*.

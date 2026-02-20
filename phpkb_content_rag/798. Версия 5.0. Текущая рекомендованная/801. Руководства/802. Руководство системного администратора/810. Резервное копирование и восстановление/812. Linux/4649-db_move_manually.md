@@ -2,7 +2,7 @@
 title: 'Ручной перенос базы данных экземпляра ПО'
 kbId: 4649
 url: 'https://kb.comindware.ru/article.php?id=4649'
-updated: '2025-04-16 13:18:10'
+updated: '2026-01-29 18:25:58'
 ---
 
 # Ручной перенос базы данных экземпляра ПО
@@ -145,7 +145,7 @@ updated: '2025-04-16 13:18:10'
 
    Примечание
 
-   Любые операции копирования в папку базы данных экземпляра ПО и из неё следует выполнять только после отключения сервисов Elasticsearch, comindware (где  `<instanceName>` — имя экземпляра ПО), NGINX, Kafka и Zookeeper.
+   Любые операции копирования в папку базы данных экземпляра ПО и из неё следует выполнять только после отключения сервисов OpenSearch (Elasticsearch), comindware (где  `<instanceName>` — имя экземпляра ПО), NGINX, Kafka и Zookeeper.
 4. Остановите сервисы:
 
    ```
@@ -157,9 +157,9 @@ updated: '2025-04-16 13:18:10'
    systemctl status zookeeper.service kafka.service nginx.service comindware<instanceName>.service elasticsearch.service
    ```
 
-   ![Проверка остановки сервисов Elasticsearch, comindware<instanceName>, NGINX, Kafka и Zookeeper](https://kb.comindware.ru/assets/img_63567da91a5c6.png)
+   ![Проверка остановки сервисов OpenSearch (Elasticsearch), comindware<instanceName>, NGINX, Kafka и Zookeeper](https://kb.comindware.ru/assets/img_63567da91a5c6.png)
 
-   Проверка остановки сервисов Elasticsearch, comindware, NGINX, Kafka и Zookeeper
+   Проверка остановки сервисов OpenSearch (Elasticsearch), comindware, NGINX, Kafka и Zookeeper
 6. Скопируйте архив со снимком базы данных экземпляра ПО в папку `/tmp/`.
 7. Распакуйте архив в текущую папку.
 8. Перенесите содержимое папки снимка (например, `/tmp/snapshot_2022_10_21`) в папку базы данных экземпляра ПО: `/var/www/cmw-db/`
@@ -203,7 +203,24 @@ updated: '2025-04-16 13:18:10'
     ```
     cd /var/www/
     chmod -R 777 cmw-db/
+    ```
+
+    **Astra Linux, Debian, DEB-дистрибутивы**
+
+    ```
     sudo chown -R www-data:www-data cmw-db/
+    ```
+
+    **РЕД ОС, RPM-дистрибутивы**
+
+    ```
+    sudo chown -R nginx:nginx cmw-db/
+    ```
+
+    **Альт Сервер**
+
+    ```
+    sudo chown -R _nginx:_nginx cmw-db/
     ```
 14. Проверьте права доступа и владельцев папок:
 

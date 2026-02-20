@@ -31,25 +31,21 @@ updated: '2025-04-07 16:25:21'
 
   ```
   $EnumAttributeSystemName—>cmw.variantName
-
   ```
 - системное имя значения атрибута:
 
   ```
   $EnumAttributeSystemName—>cmw.variantAlias
-
   ```
 - код значка значения атрибута:
 
   ```
   $EnumAttributeSystemName—>cmw.variantIcon
-
   ```
 - цвет значения атрибута в десятичном формате:
 
   ```
   $EnumAttributeSystemName—>cmw.color
-
   ```
 
 Сравнение и фильтрация значения атрибута с помощью формулы
@@ -60,41 +56,35 @@ updated: '2025-04-07 16:25:21'
 
   ```
   $EnumAttributeSystemName == EnumValueSystemName
-
   ```
 
   или
 
   ```
   EQUALS($EnumAttributeSystemName->cmw.variantAlias, "EnumValueSystemName")
-
   ```
 
   или
 
   ```
   EQUALS($EnumAttributeSystemName, ENUMVALUE("EnumAttributeSystemName", "EnumValueSystemName"))
-
   ```
 - неравенство
 
   ```
   $EnumAttributeSystemName !== EnumValueSystemName
-
   ```
 
   или
 
   ```
   NOT(EQUALS($EnumAttributeSystemName->cmw.variantAlias, "EnumValueSystemName"))
-
   ```
 
   или
 
   ```
   NOT(EQUALS($EnumAttributeSystemName, ENUMVALUE("EnumAttributeSystemName", "EnumValueSystemName")))
-
   ```
 
 ## Прикладная задача
@@ -139,7 +129,6 @@ updated: '2025-04-07 16:25:21'
 
    ```
     ENUMVALUE("VehicleType",$Типзаявки->Кодтипазаявки)
-
    ```
 
    Синтаксис формулы

@@ -77,8 +77,8 @@ updated: '2024-04-01 14:48:47'
       | Цвет | Условие: формула |
       | --- | --- |
       | Оранжевый  #efbb3a | ``` AND(NOT(EMPTY($Datanachala)),EMPTY($Datazaversheniya)) ``` |
-      | Зелёный   #338320 | ``` AND(NOT(EMPTY($Datazaversheniya)),NOT(EMPTY($Datanachala)))                ``` |
-      | Серый   #a8a8a8 | ``` AND(EMPTY($Datanachala),EMPTY($Datazaversheniya))                 ``` |
+      | Зелёный   #338320 | ``` AND(NOT(EMPTY($Datazaversheniya)),NOT(EMPTY($Datanachala))) ``` |
+      | Серый   #a8a8a8 | ``` AND(EMPTY($Datanachala),EMPTY($Datazaversheniya)) ``` |
 
       Примечание
 

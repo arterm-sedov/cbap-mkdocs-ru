@@ -2,7 +2,7 @@
 title: 'Примеры событий в файловых журналах'
 kbId: 4618
 url: 'https://kb.comindware.ru/article.php?id=4618'
-updated: '2025-08-12 14:03:28'
+updated: '2026-01-29 18:12:58'
 ---
 
 # Примеры событий в файловых журналах
@@ -19,7 +19,6 @@ updated: '2025-08-12 14:03:28'
 
 ```
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000  username XXX.XXX.XXX.XXX http://SERVER_URL/Home/Login/?returnUrl=/ OK HH:mm:ss.SSS 'Builtin: user logged in'
-
 ```
 
 **Поля события**
@@ -40,7 +39,6 @@ updated: '2025-08-12 14:03:28'
 
 ```
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000  username XXX.XXX.XXX.XXX  http://SERVER_URL/Home/Logout/ OK HH:mm:ss.SSS 'User logout success' ''
-
 ```
 
 **Поля события**
@@ -63,7 +61,6 @@ updated: '2025-08-12 14:03:28'
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/Home/Login/?returnUrl=/Resolve OK HH:mm:ss.SSS '"Builtin": user login failed for "username"' ''
 
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000  XXX.XXX.XXX.XXX http://SERVER_URL/Home/Login/?failedLogin=InvalidLoginAndPassword&inputID=&returnUrl==%2fResolve   'GET' ''
-
 ```
 
 **Поля события**
@@ -86,7 +83,6 @@ updated: '2025-08-12 14:03:28'
 
 ```
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/UserApi/SetSystemInfo   'POST: "{"accountFormChanges":{"PasswordHash":"XXXXXX","OldPasswordHash":null,"DataformChanges":{"WidgetChanges":[{"ObjId":null,"TempId":"cmw.temp.21","TypeId":"cmw.account.Account","Changes": {"cmw.account.form.group0text1":{"Origin":4,"Literal":"FULL_NAME","Clean":null,"Time":1698153500360,"Add":null,"Rem":null,"StreamName":null,"StreamId":null,"Parent":null, "ClearParent":null,"Number":null,"Order":null,"ComplexValues":null}, "cmw.account.form.group0text2":{"Origin":4,"Literal":"USER_NAME","Clean":null,"Time":1698153505344,"Add":null,"Rem":null,"StreamName":null,","StreamId":null,"Parent":null, "ClearParent":null,"Number":null,"Order":null,"ComplexValues":null}, "cmw.account.form.group0text3":{"Origin":4,"Literal":"EMAIL","Clean":null,"Time":1698153518245,"Add":null,"Rem":null,"StreamName":null,"StreamId":null,"Parent":null, "ClearParent":null,"Number":null,"Order":null,"ComplexValues":null}},"CommandId":null,"CommandKind":2,"CommandContextChanges":null}],"ComplexObjectChanges":[]},"Id":"cmw.temp.21","IsActive":null,"IsAnonymous":null,"IsDisabled":null,"Language:"ru","AuthenticationMethod":0,"PasswordValidationParameters":null,"ProfilePhoto":null}}"' ''
-
 ```
 
 **Поля события**
@@ -115,7 +111,6 @@ updated: '2025-08-12 14:03:28'
 
 ```
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/UserApi/SetSystemInfo   'DELETE: "{"accountIds":["account.1", "account.2"]}"' ''
-
 ```
 
 **Поля события**
@@ -181,7 +176,6 @@ Stack:
   at Comindware.Platform.Core.Logging.ExceptionsInterceptor.Intercept (Castle.DynamicProxy.IInvocation invocation) [0x00000] in <13c6df997e3e467ca2451c9fd9f35e67>:0
 
  '
-
 ```
 
 **Поля события**
@@ -240,7 +234,6 @@ Stack:
   at Comindware.Platform.Core.Logging.ExceptionsInterceptor.Intercept (Castle.DynamicProxy.IInvocation invocation) [0x00000] in <13c6df997e3e467ca2451c9fd9f35e67>:0
 
  '
-
 ```
 
 **Поля события**
@@ -270,7 +263,6 @@ Stack:
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/Dataform/QueryData   'POST: "{"query":{"Changes":{"WidgetChanges":[{"ObjId":"account.ID","TypeId":"cmw.account.Account","Changes":{"cmw.account.form.group2flag1":{"Origin":4,"Literal":false,"Time":1698244978684}},"CommandKind":3}],"ComplexObjectChanges":[]},"Queries":[{"WiId":"cmw.account.form.root","QueryChildWidgets":true,"Widgets":[],"QueryObjectTitle":true,"QueryObjectToolbar":true,"ObjId":"account.ID","RootObjId":"account.ID"}]}}"' ''
 
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/Dataform/QueryData OK HH:mm:ss.SSS 'POST completed'
-
 ```
 
 **Поля события**
@@ -300,7 +292,6 @@ Stack:
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/Dataform/QueryData   'POST: "{"query":{"Changes":{"WidgetChanges":[{"ObjId":"account.ID","TypeId":"cmw.account.Account","Changes":{"cmw.account.form.group2flag1":{"Origin":4,"Literal":true,"Time":1698245267640}},"CommandKind":3}],"ComplexObjectChanges":[]},"Queries":[{"WiId":"cmw.account.form.root","QueryChildWidgets":true,"Widgets":[],"QueryObjectTitle":true,"QueryObjectToolbar":true,"ObjId":"account.ID","RootObjId":"account.ID"}]}}"' ''
 
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/Dataform/QueryData OK HH:mm:ss.SSS 'POST completed'
-
 ```
 
 **Поля события**
@@ -328,7 +319,6 @@ Stack:
 
 ```
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/UserApi/SetSystemInfo   'POST: "{"accountFormChanges":{"PasswordHash":"XXXXXXX","OldPasswordHash":null,"DataformChanges":{"WidgetChanges":[{"ObjId":"account.ID","TempId":null,"TypeId":"cmw.account.Account","Changes":{"cmw.account.form.group2flag1":{"Origin":4,"Literal":true,"Clean":null,"Time":1698245267640,"Add":null,"Rem":null,"StreamName":null,"StreamId":null,"Parent":null, "ClearParent":null,"Number":null,"Order":null,"ComplexValues":null}},"CommandId":null,"CommandKind":3,"CommandContextChanges":null}], "ComplexObjectChanges":[]},"Id":"account.ID","IsActive":null,"IsAnonymous":null,"IsDisabled":null,"Language":null,"AuthenticationMethod":0,"PasswordValidationParameters":null,"ProfilePhoto":null}}"' ''
-
 ```
 
 **Поля события**
@@ -358,7 +348,6 @@ Stack:
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/RolesCollectionApi/Post   'POST: "{"role":{"Name":"Role Name","Alias":"RoleSystemName","Solution":"sln.1", "Members":[],"IsActive":true,"RoleType":0}}"' ''
 
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/RolesCollectionApi/Post OK HH:mm:ss.SSS 'POST completed' ''
-
 ```
 
 **Поля события**
@@ -386,7 +375,6 @@ Stack:
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/GroupApi/Post   'POST: "{"group":{"HoldMembersActive":false,"HoldMembersEnabled":false,"Users":[], "MemberOf":[],"Name":"Group Name","Origin":1}}"' ''
 
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/GroupApi/Post OK HH:mm:ss.SSS 'POST completed' ''
-
 ```
 
 **Поля события**
@@ -414,7 +402,6 @@ Stack:
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/RolesCollectionApi/Delete   'DELETE: "{"rolesIds":["role.1","role.2"]}"' ''
 
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/RolesCollectionApi/Delete NoContent HH:mm:ss.SSS 'DELETE completed' ''
-
 ```
 
 **Поля события**
@@ -441,7 +428,6 @@ Stack:
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/GroupApi/Delete   'DELETE: "{"ids":["group.1","group.2"]}"' ''
 
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/GroupApi/Delete NoContent HH:mm:ss.SSS 'DELETE completed' ''
-
 ```
 
 **Поля события**
@@ -480,7 +466,6 @@ Stack:
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/RolesCollectionApi/Put   'Разрешение добавлено в роль' '{"Privilege":"Read","Role":"[ApplicationSystemName] RoleSystemName","RoleType":"BusinessApp","Resource":"[systemSolution_OrganizationalStructure] defaultList", "ResourceType":"List"}'
 
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/RolesCollectionApi/Put OK HH:mm:ss.SSS 'PUT completed' ''
-
 ```
 
 **Поля события**
@@ -550,7 +535,6 @@ Stack:
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/RolesCollectionApi/Put   'Разрешение удалено из роли' '{"Privilege":"Delete","Role":"[ApplicationSystemName] RoleSystemName","RoleType":"BusinessApp","Resource":"[ParentSystemName] ResourceSystemName", "ResourceType":"RecordTemplate"}'
 
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/RolesCollectionApi/Put OK HH:mm:ss.SSS 'PUT completed' ''
-
 ```
 
 **Поля события**
@@ -624,7 +608,6 @@ Stack:
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/RolesCollectionApi/Put   'Аккаунт удален из роли' '{"User":"username","Role":"[ApplicationSystemName] RoleSystemName","RoleType":"BusinessApp"}'
 
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/RolesCollectionApi/Put OK HH:mm:ss.SSS 'PUT completed' ''
-
 ```
 
 **Поля события**
@@ -681,7 +664,6 @@ Stack:
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/TemplatesApi/Create   'POST: "{"template":{"Alias":"TemplateSystemName","Name":"Template Name","IsDisabled":false,"Type":4,"Solution":"sln.ID","CreationDate":"0001-01-01T00:00:00","IsReferenceData":false, "IsTransferable":false,"ConversationDisplayConfig":{"DisableSidePanelConversations":true,"DisableWidgetConversations":true,"ProhibitedReferenceTypes":[],"HideArchivedMessages":false}}}"' ''
 
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/TemplatesApi/Create OK 03:00:00.296 'POST completed' ''
-
 ```
 
 **Поля события**
@@ -731,7 +713,6 @@ Stack:
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/RecordTypeContextApi?recordTypeId=oa.91 OK HH:mm:ss.SSS 'GET completed' ''
 
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/TemplatesApi/List OK 03:00:00.046 'POST completed' ''
-
 ```
 
 **Поля события**
@@ -787,7 +768,6 @@ Stack:
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/FormDesigner/CloneRecordForm   'POST: "{"recordTypeId":"oa.91","cloningFormId":"form.3355","newName":"New Form Name","newAlias":"NewFormSystemName"}"' ''
 
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/FormDesigner/CloneRecordForm 200 HH:mm:ss.SSS 'POST completed' ''
-
 ```
 
 **Поля события**
@@ -816,7 +796,6 @@ Stack:
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/RecordTypeContextApi   'POST: "{"property":{"Unique":false,"Obsolete":false,"Indexed":true,"Tracked":true,"DigitGrouping":true,"Calculated":false,"CalculateExpression":"","RecordTypeId":"oa.91","DisplayAttribute":false,"IgnoreUniqueErrors":false,"Type":0,"Format":29,"Name":"Attribute Name","Alias":"AttributeSystemName","IsSystem":false,"IsMultiValue":false,"IsMandatory":false, "IsOwnership":false,"PossibleValueExpression":""}}"' ''
 
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/RecordTypeContextApi OK HH:mm:ss.SSS 'POST completed' ''
-
 ```
 
 **Поля события**
@@ -845,7 +824,6 @@ Stack:
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/RecordTypeContextApi/Delete/op.941   'DELETE: "{"id":"op.941"}"' ''
 
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/RecordTypeContextApi/Delete/op.941 OK HH:mm:ss.SSS 'DELETE completed' ''
-
 ```
 
 **Поля события**
@@ -878,7 +856,6 @@ Stack:
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/RolesCollectionApi/Put   'Разрешение добавлено в роль' '{"Privilege":"Delete","Role":"[ApplicationSystemName] RoleSystemName","RoleType":"BusinessApp","Resource":"[ParentSystemName] ResourceSystemName", "ResourceType":"RecordTemplate"}'
 
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/RolesCollectionApi/Put OK HH:mm:ss.SSS 'PUT completed' ''
-
 ```
 
 **Поля события**
@@ -948,7 +925,6 @@ Stack:
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/RolesCollectionApi/Put   'Разрешение удалено из роли' '{"Privilege":"Delete","Role":"[ApplicationSystemName] RoleSystemName","RoleType":"BusinessApp","Resource":"[ParentSystemName] ResourceSystemName", "ResourceType":"RecordTemplate"}'
 
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/api/RolesCollectionApi/Put OK HH:mm:ss.SSS 'PUT completed' ''
-
 ```
 
 **Поля события**
@@ -1017,7 +993,7 @@ Stack:
 
 Системная информация:
 
-  Сервер: ubuntu-vm-server-gen2
+  Сервер: vm-server-gen2
 
   База данных: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 
@@ -1040,7 +1016,6 @@ Stack:
   Аутентификация приложения: Ldap | Builtin
 
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 systemAccount    PerformanceHelper.Perform: FullTextSearchService.RebuildThreadWorker() succeed Time:59184ms TotalGCMemory:472MB DeltaGCMemory:-146MB TotalProcessMemory:462MB DeltaProcessMemory:0MB
-
 ```
 
 #### Версия 4.2 (Windows)
@@ -1073,7 +1048,6 @@ System information:
 IIS authentication: Anonymous
 
  Application authentication: Anonymous
-
 ```
 
 **Поля события**
@@ -1109,7 +1083,6 @@ IIS authentication: Anonymous
 
 ```
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 systemAccount    Comindware Platform has stopped.
-
 ```
 
 **Поля события**
@@ -1138,7 +1111,6 @@ IIS authentication: Anonymous
 2023-11-30 14:34:35,113 INFO 00000000-0000-0000-0000-000000000000 systemAccount    Initialize document converters: 501ms
 
 2023-11-30 14:34:35,116 INFO 00000000-0000-0000-0000-000000000000 systemAccount    Synchronization with platform configuration 2ms
-
 ```
 
 **Поля события**
@@ -1160,7 +1132,6 @@ IIS authentication: Anonymous
 
 ```
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 systemAccount    Comindware Platform has stopped.
-
 ```
 
 **Поля события**
@@ -1181,7 +1152,6 @@ IIS authentication: Anonymous
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 username XXX.XXX.XXX.XXX http://SERVER_URL/UserCommandExecution/Prepare 200 HH:mm:ss.SSS 'POST completed' ''
 
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 systemAccount    Process runned count=11 (completed=3) lastRunTime="DD.MM.YYYY HH:mm:ss"; scripts started=1 (failed=0); worker threads started=7 (failed=0); messages total=0 (failed=0).
-
 ```
 
 **Поля события**
@@ -1209,7 +1179,6 @@ IIS authentication: Anonymous
 
 ```
 -MM-dd HH:mm:ss,SSS INFO 00000000-0000-0000-0000-000000000000 systemAccount    Core Loaded
-
 ```
 
 **Поля события**
@@ -1226,7 +1195,6 @@ IIS authentication: Anonymous
 
 ```
 [yyyy-MM-dd HH:mm:ss,SSS][INFO] PlatformKey: instanceName. Endpoint: connectionName (endpoint.XX). Adapter: incomingAdapter Connection test started
-
 ```
 
 **Поля события**
@@ -1249,7 +1217,6 @@ IIS authentication: Anonymous
 
 [2023-12-08 00:10:20,667][INFO][Meta is ready for XxxSenderAdapter.] Platform key: XXX_AdapterAgent5b28ad88a4cb4d4f8078c4deef1ee08b; Service name: ServiceName; Runtime: .NET 8.0
 data: {"Name":"XxxSenderAdapter","Description":"Адаптер для связи с системой «XXX»","Direction":"Outgoing","EndpointDefinitionJson":{}}
-
 ```
 
 - `yyyy-MM-dd HH:mm:ss,SSS` — дата и время события.
@@ -1270,7 +1237,6 @@ Kestrel. Incoming adapters:
 [WHITE] Number of subscribed integrations 1
 [WHITE] Adapter name: incomingAdapter
 [GREEN] Integration: messageTypeName. Route: Integration/SendRoute, HttpMethod: Post, AuthorizationType: Basic, ProcedureName: communicationRouteName, DataBusNumber: 0,  ProcedureIsDisable: False, EndpointIsAvailable: True
-
 ```
 
 **Поля события**
@@ -1301,7 +1267,6 @@ Kestrel. Incoming adapters:
 [yyyy-MM-dd HH:mm:ss,SSS][INFO] machineName_instanceName
 Проверка подключений:
 [GREEN] connectionName (endpoint.XX) - Соединение установлено (адаптер: incomingAdapter)
-
 ```
 
 **Поля события**
@@ -1330,7 +1295,6 @@ Kestrel. Incoming adapters:
 [WHITE] Максимальный выделенный объем выгружаемой памяти 0 B
 [WHITE] Выделенный объем виртуальной памяти 4,8 GB
 [WHITE] Максимальный выделенный объем виртуальной памяти 5,4 GB
-
 ```
 
 **Поля события**
@@ -1349,7 +1313,6 @@ Kestrel. Incoming adapters:
 [yyyy-MM-dd HH:mm:ss,SSS][INFO] machineName_instanceName
 Созданные экземпляры путей передачи данных:
 [WHITE] communicationRouteName (procedure.XX) - Адаптер: incomingAdapter. Подключение: connectionName (endpoint.XX). Запущен: True.
-
 ```
 
 **Поля события**
@@ -1373,7 +1336,6 @@ Kestrel. Incoming adapters:
 [yyyy-MM-dd HH:mm:ss,SSS][INFO] machineName_instanceName
 Загруженные адаптеры:
 [WHITE] incomingAdapter Описание: adapterDescription.
-
 ```
 
 **Поля события**
@@ -1407,7 +1369,6 @@ logFolder: /var/log/comindware/instanceName/Logs/
 archiveFolder: /var/log/comindware/instanceName/Logs/Archive/
 maxArchiveFiles: 100
 archiveAboveSize: 1048576000
-
 ```
 
 **Поля события**
@@ -1432,7 +1393,6 @@ archiveAboveSize: 1048576000
 
 ```
 [yyyy-MM-dd HH:mm:ss,SSS][INFO]  [88c1a6eb92f140fabs652bb8d9a630e8] [Metadata][Topic] reply_queue_instanceName_deploy_external:NoError 1:1:NoError:1:1 4:1:NoError:1:1 13:1:NoError:1:1 10:1:NoError:1:1 2:1:NoError:1:1 7:1:NoError:1:1 15:1:NoError:1:1 12:1:NoError:1:1 5:1:NoError:1:1 9:1:NoError:1:1 8:1:NoError:1:1 0:1:NoError:1:1 14:1:NoError:1:1 6:1:NoError:1:1 3:1:NoError:1:1 11:1:NoError:1:1
-
 ```
 
 **Поля события**

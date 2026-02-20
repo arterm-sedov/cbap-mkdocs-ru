@@ -119,7 +119,6 @@ updated: '2025-02-11 14:42:03'
 
   ```
   ObjectType@[ContainerSystemName].ObjectSystemName
-
   ```
 - **Instance** — экземпляр **Comindware Platform**.
 - **Property** — свойство объекта.

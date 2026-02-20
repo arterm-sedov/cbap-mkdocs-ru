@@ -31,41 +31,35 @@ updated: '2025-04-01 13:37:33'
 
   ```
   $EnumAttributeSystemName == EnumValueSystemName
-
   ```
 
   или
 
   ```
   EQUALS($EnumAttributeSystemName->cmw.variantAlias, "EnumValueSystemName")
-
   ```
 
   или
 
   ```
   EQUALS($EnumAttributeSystemName, ENUMVALUE("EnumAttributeSystemName", "EnumValueSystemName"))
-
   ```
 - неравенство
 
   ```
   $EnumAttributeSystemName !== EnumValueSystemName
-
   ```
 
   или
 
   ```
   NOT(EQUALS($EnumAttributeSystemName->cmw.variantAlias, "EnumValueSystemName"))
-
   ```
 
   или
 
   ```
   NOT(EQUALS($EnumAttributeSystemName, ENUMVALUE("EnumAttributeSystemName", "EnumValueSystemName")))
-
   ```
 
 ## Прикладная задача
@@ -92,21 +86,18 @@ updated: '2025-04-01 13:37:33'
 
      ```
      $ClaimStatus == "Approved"
-
      ```
 
      или
 
      ```
      EQUALS($ClaimStatus->cmw.variantAlias, "Approved")
-
      ```
 
      или
 
      ```
      EQUALS($ClaimStatus, ENUMVALUE("ClaimStatus", "Approved"))
-
      ```
 
 Синтаксис формул

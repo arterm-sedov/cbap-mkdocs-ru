@@ -2,7 +2,7 @@
 title: 'Адаптеры'
 kbId: 4672
 url: 'https://kb.comindware.ru/article.php?id=4672'
-updated: '2025-08-12 14:16:41'
+updated: '2026-01-29 18:13:36'
 ---
 
 # Адаптеры
@@ -304,56 +304,48 @@ _![Пример содержимого архива с исходным кодо
 
    ```
    sudo -s
-
    ```
 
    или
 
    ```
    su -
-
    ```
 2. Установите пакеты .NET:
 
-   - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+   - **Astra Linux, Debian, DEB-дистрибутивы**
 
      ```
      apt-get update
      apt-get install -y dotnet-sdk-8.0
-
      ```
-   - **РЕД ОС**, **Rocky** (RPM-based)
+   - **РЕД ОС, RPM-дистрибутивы**
 
      ```
      dnf install dotnet-sdk-8.0
-
      ```
    - **Альт Сервер**
 
      ```
      apt-get update
      apt-get install dotnet-sdk
-
      ```
 3. Откройте файл конфигурации NGINX для редактирования (`instanceName` — имя экземпляра ПО):
 
-   - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+   - **Astra Linux, Debian, DEB-дистрибутивы**
 
      ```
      nano /etc/nginx/sites-available/comindware<instanceName>
-
      ```
-   - **РЕД ОС**, **Rocky** (RPM-based)
+   - **РЕД ОС, RPM-дистрибутивы**
 
      ```
      nano /etc/nginx/conf.d/comindware<instanceName>
-
      ```
    - **Альт Сервер**
 
      ```
      nano /etc/nginx/sites-available.d/comindware<instanceName>
-
      ```
 4. Добавьте следующие директивы **для каждого пути передачи данных** (`CommunicationRoutePath` — URI пути передачи данных, `hostName` — адрес сервера **Comindware Platform**, `portNumber` — порт, по которому доступен адаптер):
 
@@ -365,7 +357,6 @@ _![Пример содержимого архива с исходным кодо
    location <CommunicationRoutePath> {
        proxy_pass https://<hostName>:<portNumber>;
    }
-
    ```
 5. При необходимости перезапустите NGINX.
 

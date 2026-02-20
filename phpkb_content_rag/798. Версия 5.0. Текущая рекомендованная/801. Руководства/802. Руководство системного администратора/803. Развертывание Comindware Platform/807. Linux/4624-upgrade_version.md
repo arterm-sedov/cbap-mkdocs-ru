@@ -2,7 +2,7 @@
 title: 'Обновление версии экземпляра ПО с его остановкой'
 kbId: 4624
 url: 'https://kb.comindware.ru/article.php?id=4624'
-updated: '2025-12-25 16:11:49'
+updated: '2026-01-29 18:12:31'
 ---
 
 # Обновление версии экземпляра ПО с его остановкой
@@ -59,18 +59,16 @@ updated: '2025-12-25 16:11:49'
 
    ```
    sudo -s
-
    ```
 
    или
 
    ```
    su -
-
    ```
 3. Сохраните резервную копию файлов конфигурации, например в директорию `/var/backups/config_tmp`:
 
-   - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+   - **Astra Linux, Debian, DEB-дистрибутивы**
 
    ```
    mkdir -p /var/backups/config_tmp/
@@ -79,10 +77,9 @@ updated: '2025-12-25 16:11:49'
    cp /etc/nginx/sites-available/comindware<instanceName> /var/backups/config_tmp/
    cp /etc/sysconfig/comindware<instanceName>-env /var/backups/config_tmp/
    cp /usr/share/comindware/configs/instance/<instanceName>.yml /var/backups/config_tmp/
-
    ```
 
-   - **РЕД ОС**, **Rocky** (RPM-based)
+   - **РЕД ОС, RPM-дистрибутивы**
 
    ```
    mkdir -p /var/backups/config_tmp/
@@ -91,7 +88,6 @@ updated: '2025-12-25 16:11:49'
    cp /etc/nginx/conf.d/comindware<instanceName> /var/backups/config_tmp/
    cp /etc/sysconfig/comindware<instanceName>-env /var/backups/config_tmp/
    cp /usr/share/comindware/configs/instance/<instanceName>.yml /var/backups/config_tmp/
-
    ```
 
    - **Альт Сервер**
@@ -103,7 +99,6 @@ updated: '2025-12-25 16:11:49'
    cp /etc/nginx/sites-available.d/comindware<instanceName> /var/backups/config_tmp/
    cp /etc/sysconfig/comindware<instanceName>-env /var/backups/config_tmp/
    cp /usr/share/comindware/configs/instance/<instanceName>.yml /var/backups/config_tmp/
-
    ```
 
    Здесь `<instanceName>` — имя экземпляра ПО.
@@ -112,20 +107,17 @@ updated: '2025-12-25 16:11:49'
    ```
    systemctl stop apigateway<instanceName> adapterhost<instanceName> comindware<instanceName>
    systemctl status apigateway<instanceName> adapterhost<instanceName> comindware<instanceName>
-
    ```
 5. Удалите (или переместите в резервное хранилище) неиспользуемые предыдущие дистрибутивы ПО (`<distPath>` — путь к директории с дистрибутивом, `<osname>` — название операционной системы):
 
    ```
    rm -rf <distPath>/CMW_<osname>
-
    ```
 6. Переместите директорию с базой данных экземпляра ПО (`<username>` — имя пользователя Linux):
 
    ```
    mkdir -p /home/<username>/<instanceName>
    mv /var/lib/comindware/<instanceName> /home/<username>/
-
    ```
 
 ## Обновление версии ПО для экземпляра
@@ -147,13 +139,11 @@ updated: '2025-12-25 16:11:49'
    ```
    cd <distPath>
    tar -xf X.X-release-ru-<prerequisitesVersion>.prerequisites.<osname>.tar.gz
-
    ```
 2. Перейдите в директорию со скриптами для развёртывания вспомогательного ПО:
 
    ```
    cd <prerequisitesDistPath>/CMW_<osname>/scripts
-
    ```
 
    Здесь: `<prerequisitesDistPath>/CMW_<osname>/` — путь к распакованному дистрибутиву со вспомогательным ПО.
@@ -161,7 +151,6 @@ updated: '2025-12-25 16:11:49'
 
    ```
    sh prerequisites_list.sh
-
    ```
 
    Внимание!
@@ -172,38 +161,32 @@ updated: '2025-12-25 16:11:49'
    ```
    cd <distPath>
    tar -xf X.X-release-ru-<version>.<osname>.tar.gz
-
    ```
 5. Перейдите в распакованную директорию:
 
    ```
    cd CMW_<osname>_<version>/scripts/
-
    ```
 6. Установите новую версию ПО:
 
    ```
    bash version_install.sh
-
    ```
 7. Проверьте наличие и имя директории установленной версии ПО:
 
    ```
    bash version_list.sh
-
    ```
 8. Отобразится список установленных версий ПО на сервере.
 9. Удалите экземпляр ПО старой версии и его данные:
 
    ```
    bash instance_delete.sh -n=<instanceName> --deleteData
-
    ```
 10. Создайте экземпляр ПО новой версии:
 
     ```
     bash instance_create.sh -n=<instanceName> -p=<portNumber> -v=<version>
-
     ```
 
     Здесь:
@@ -238,7 +221,6 @@ updated: '2025-12-25 16:11:49'
     OK     NGINX started.
     OK     Final status.
     [Done] Upgrade CBAP instance.
-
     ```
 
     Если какая-либо из служб имеет статус `FAILED`, игнорируйте это и продолжайте выполнение следующих шагов согласно инструкции, так как устранять эти неполадки следует позже.
@@ -248,29 +230,25 @@ updated: '2025-12-25 16:11:49'
 
 1. Отредактируйте конфигурацию NGINX для экземпляра ПО в соответствии с резервной копией, [сохранённой ранее](#NginxBackup):
 
-   - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+   - **Astra Linux, Debian, DEB-дистрибутивы**
 
      ```
      nano /etc/nginx/sites-available/comindware<instanceName>
-
      ```
-   - **РЕД ОС**, **Rocky** (RPM-based)
+   - **РЕД ОС, RPM-дистрибутивы**
 
      ```
      nano /etc/nginx/conf.d/comindware<instanceName>
-
      ```
    - **Альт Сервер**
 
      ```
      nano /etc/nginx/sites-available.d/comindware<instanceName>
-
      ```
 2. Перезапустите службу NGINX для применения изменений:
 
    ```
    nginx -s reload
-
    ```
 3. Отредактируйте файлы конфигурации в соответствии с резервными копиями, [сохранёнными ранее](#ConfigBackup):
 
@@ -280,7 +258,6 @@ updated: '2025-12-25 16:11:49'
    nano /var/www/<instanceName>/apigateway.yml
    nano /var/www/<instanceName>/Ignite.config
    nano /usr/share/comindware/configs/instance/<instanceName>.yml
-
    ```
 
    Внимание!
@@ -293,14 +270,12 @@ updated: '2025-12-25 16:11:49'
    nano /usr/lib/systemd/system/comindware<instanceName>.service
    nano /usr/lib/systemd/system/apigateway<instanceName>.service
    nano /usr/lib/systemd/system/adapterhost<instanceName>.service
-
    ```
 5. Если используются локальные службы Kafka и OpenSearch (Elasticsearch), откройте их для редактирования:
 
    ```
    nano /usr/lib/systemd/system/kafka.service
    nano /usr/lib/systemd/system/elasticsearch.service
-
    ```
 6. В каждом файле службы установите следующие директивы:
 
@@ -309,7 +284,6 @@ updated: '2025-12-25 16:11:49'
    LimitNOFILE=200000
    # Макс. количество процессов
    LimitNPROC=8192
-
    ```
 7. Перезапустите службы **Comindware Platform**:
 
@@ -317,7 +291,6 @@ updated: '2025-12-25 16:11:49'
    systemctl restart adapterhost<instanceName>.service
    systemctl restart comindware<instanceName>.service
    systemctl restart apigateway<instanceName>.service
-
    ```
 8. [Проверьте конфигурацию ОС и служб](#upgrade_version_linux_check_service_statuses).
 9. [Инициализируйте экземпляр ПО](#upgrade_version_linux_initialize).
@@ -330,41 +303,36 @@ updated: '2025-12-25 16:11:49'
 
    ```
    sudo -s
-
    ```
 
    или
 
    ```
    su -
-
    ```
 2. Откройте для редактирования файл `limits.conf`:
 
    ```
    nano /etc/security/limits.conf
-
    ```
 3. Установите следующие директивы:
 
-   - **Astra Linux**, **Ubuntu**, **Debian** (DEB-based)
+   - **Astra Linux, Debian, DEB-дистрибутивы**
 
    ```
    www-data soft nproc 200000
    www-data hard nproc 200000
    www-data soft nofile 200000
    www-data hard nofile 200000
-
    ```
 
-   - **РЕД ОС**, **Rocky** (RPM-based)
+   - **РЕД ОС, RPM-дистрибутивы**
 
    ```
    nginx soft nproc 200000
    nginx hard nproc 200000
    nginx soft nofile 200000
    nginx hard nofile 200000
-
    ```
 
    - **Альт Сервер**
@@ -374,25 +342,21 @@ updated: '2025-12-25 16:11:49'
    _nginx hard nproc 200000
    _nginx soft nofile 200000
    _nginx hard nofile 200000
-
    ```
 4. Откройте файл `common-session` для редактирования:
 
    ```
    nano /etc/pam.d/common-session
-
    ```
 5. Установите следующую директиву:
 
    ```
    session required pam_limits.so
-
    ```
 6. Откройте файл `sysctl.conf` для редактирования:
 
    ```
    nano /etc/sysctl.conf
-
    ```
 7. Установите следующие директивы:
 
@@ -400,7 +364,6 @@ updated: '2025-12-25 16:11:49'
    fs.file-max=2097152
    vm.max_map_count=262144
    fs.inotify.max_user_instances=524288
-
    ```
 
    Оптимальное значение vm.max\_map\_count
@@ -412,32 +375,27 @@ updated: '2025-12-25 16:11:49'
 
    ```
    nano /etc/systemd/user.conf
-
    ```
 9. Установите следующую директиву:
 
    ```
    DefaultLimitNOFILE=200000
-
    ```
 10. Откройте файл `system.conf` для редактирования:
 
     ```
     nano /etc/systemd/system.conf
-
     ```
 11. Установите следующую директиву:
 
     ```
     DefaultLimitNOFILE=200000
-
     ```
 12. После внесения изменений перезапустите демоны:
 
     ```
     sysctl -p
     systemctl daemon-reexec
-
     ```
 
 ## Инициализация экземпляра ПО
@@ -446,34 +404,46 @@ updated: '2025-12-25 16:11:49'
 
    ```
    tail -f /var/log/comindware/<instanceName>/Logs/heartbeat*
-
    ```
 2. В браузере выполните инициализацию экземпляра ПО, выполните вход и проверьте работоспособность ПО.
 3. Остановите экземпляр ПО:
 
    ```
    systemctl stop comindware<instanceName>
-
    ```
 4. Удалите базу данных, созданную при инициализации экземпляра:
 
    ```
    rm -rf /var/lib/comindware/<instanceName>/*
-
    ```
 5. Скопируйте в экземпляр ПО директорию с базой данных экземпляра ПО, сохранённую ранее (`<username>` — имя пользователя Linux):
 
    ```
    cp  -R /home/<username>/<instanceName>/Database /var/lib/comindware/<instanceName>/
-
    ```
 6. Перейдите в папку с экземпляром ПО и поменяйте права для скопированной директории с базой данных:
 
    ```
    cd /var/lib/comindware/<instanceName>/
    chmod -R 777 Database/
-   sudo chown -R www-data:www-data Database/
+   ```
 
+   **Astra Linux, Debian, DEB-дистрибутивы**
+
+   ```
+   sudo chown -R www-data:www-data Database/
+   ```
+
+   **РЕД ОС, RPM-дистрибутивы**
+
+   ```
+   sudo chown -R nginx:nginx Database/
+   ```
+
+   **Альт Сервер**
+
+   ```
+   sudo chown -R _nginx:_nginx Database/
    ```
 7. Обновите структуру данных.
 
@@ -491,13 +461,11 @@ updated: '2025-12-25 16:11:49'
 
    ```
    systemctl start comindware<instanceName>
-
    ```
 2. Откройте сайт экземпляра ПО в браузере, дождитесь окончания загрузки, одновременно открыв выдачу журналов экземпляра в терминале:
 
    ```
    tail -f /var/log/comindware/<instanceName>/Logs/heartbeat*
-
    ```
 
    См. *«[Подсистема журналирования](https://kb.comindware.ru/article.php?id=4623)»*.
@@ -542,41 +510,35 @@ updated: '2025-12-25 16:11:49'
    rm -rf cp
    rm -rf metastorage
    rm -rf cacheGroup-Keys
-
    ```
 8. Очистите директорию с базой данных экземпляра ПО:
 
    ```
    rm -rf /var/lib/comindware/<instanceName>/Database/*
-
    ```
 9. Скопируйте очищенную резервную копию в директорию с базой данных:
 
    ```
    /var/lib/comindware/<instanceName>/Database/
-
    ```
 10. Назначьте владельца директории с базой данных:
 
-    - **Astra Linux, Ubuntu, Debian** (DEB-based)
+    - **Astra Linux, Debian, DEB-дистрибутивы**
 
     ```
     chown -R www-data:www-data /var/lib/comindware/<instanceName>/Database
-
     ```
 
-    - **РЕД ОС, Rocky** (RPM-based)
+    - **РЕД ОС, RPM-дистрибутивы**
 
     ```
     chown -R nginx:nginx /var/lib/comindware/<instanceName>/Database
-
     ```
 
     - **Альт Сервер**
 
     ```
     chown -R _nginx:_nginx /var/lib/comindware/<instanceName>/Database
-
     ```
 11. Подготовьте восстановленный экземпляр ПО к работе.
 

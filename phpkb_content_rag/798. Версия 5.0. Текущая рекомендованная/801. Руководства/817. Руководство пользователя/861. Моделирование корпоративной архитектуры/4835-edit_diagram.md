@@ -127,14 +127,12 @@ _![Конструктор диаграмм бизнес-способностей
 
    ```
    chrome://flags/#unsafely-treat-insecure-origin-as-secure
-
    ```
 2. Включите функцию «**Insecure origins treated as secure**» (Разрешить небезопасные источники).
 3. Добавьте в список источников адрес сервера **Comindware Platform**, например:
 
    ```
    http://your-host/
-
    ```
 4. Нажмите кнопку «**Перезапустить**».
 
