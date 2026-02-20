@@ -204,21 +204,25 @@ The real connection test script verifies:
    - Proper closure of MySQL connection
    - Proper shutdown of SSH tunnel
 
-### Credentials Files
+### Credentials Configuration
 
-The script uses the same credentials files as the import scripts:
+Credentials are stored in the `.env` file using server profiles:
 
-- **CMW Lab**: `.serverCredentialsCmwlab.json`
-- **Comindware**: `.serverCredentials.json`
+- **CMW Lab**: Server profile `cmwlab` (uses `CMWLAB_` prefix in `.env`)
+- **Comindware**: Server profile `cmw` (uses `CMW_` prefix in `.env`)
 
-If these files don't exist, the script will prompt you for all connection details interactively.
+Set `SERVER_PROFILE` in `.env` to select the default server profile, or pass it as an argument to scripts.
+
+If credentials are not found in `.env`, the script will prompt you for all connection details interactively.
+
+**Legacy support**: JSON files (`.serverCredentials.json`, `.serverCredentialsCmwlab.json`) are still supported for backward compatibility.
 
 ### Example Output
 
 ```
 ============================================================
 Testing connection to CMW Lab Server
-Credentials file: .serverCredentialsCmwlab.json
+Server profile: cmwlab
 ============================================================
 
 Step 1: Establishing SSH tunnel and MySQL connection...

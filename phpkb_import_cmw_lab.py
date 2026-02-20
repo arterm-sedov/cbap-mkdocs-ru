@@ -328,7 +328,7 @@ def main():
     server = None
     
     try:
-        CONNECTION, server = establish_connection_interactive(".serverCredentialsCmwlab.json")
+        CONNECTION, server = establish_connection_interactive("cmwlab")
         
         importChildren = ''
         categoryId = ''

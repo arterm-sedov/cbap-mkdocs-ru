@@ -17,7 +17,6 @@ Features:
 - Enhanced error handling with specific exceptions
 """
 
-import json
 import os
 import platform
 import socket
@@ -281,47 +280,66 @@ def _set_keychain_password(server_profile: str, credential_type: str, password: 
         return (False, error_msg if verbose else None)
 
 
-def _get_server_profile_from_path(credentials_path: str) -> str:
-    """Extract server profile identifier from credentials file path.
+def _get_server_profile(server_profile: str = None) -> str:
+    """Return server profile: 'cmw' (comindware.ru) or 'cmwlab' (cmwlab.com).
     
     Args:
-        credentials_path: Path to credentials JSON file
+        server_profile: 'cmw', 'cmwlab', or None to use SERVER_PROFILE from .env
     
     Returns:
-        Server profile identifier (filename without extension)
+        'cmw' or 'cmwlab'
     """
-    profile = Path(credentials_path).stem
-    # Remove leading dot if present (e.g., ".serverCredentials" -> "serverCredentials")
-    if profile.startswith("."):
-        profile = profile[1:]
-    return profile
+    if server_profile and server_profile.strip().lower() in ("cmw", "cmwlab"):
+        return server_profile.strip().lower()
+    return os.getenv("SERVER_PROFILE", "cmw").lower()
 
 
-def _load_server_credentials(credentials_path: str = ".serverCredentials.json") -> dict:
-    """Load server credentials from JSON file, with .env path override support.
+def _load_server_credentials(server_profile: str = None) -> dict:
+    """Load server credentials from .env file based on server profile.
     
-    Checks .env file for CREDENTIALS_PATH variable first, then falls back to
-    the provided credentials_path parameter.
+    Two servers are used interchangeably (different usernames/passwords):
+    - comindware.ru → profile 'cmw' (prefix CMW_)
+    - cmwlab.com    → profile 'cmwlab' (prefix CMWLAB_)
     
     Args:
-        credentials_path: Default path to credentials JSON file
+        server_profile: 'cmw' or 'cmwlab', or None to use SERVER_PROFILE from .env
     
     Returns:
-        Dictionary with server credentials, empty dict if file is empty or not found
+        Dictionary with server credentials from .env
     """
-    # Check .env for credentials path override
-    env_path = os.getenv("CREDENTIALS_PATH") or os.getenv("SERVER_CREDENTIALS_PATH")
-    if env_path:
-        credentials_path = env_path
+    # Determine server profile
+    if server_profile is None:
+        server_profile = os.getenv("SERVER_PROFILE", "cmw").lower()
     
-    try:
-        with open(credentials_path, "r") as server_credentials_file:
-            content = server_credentials_file.read()
-            return json.loads(content) if content else {}
-    except FileNotFoundError:
-        return {}
-    except json.JSONDecodeError:
-        return {}
+    # Normalize profile: only 'cmw' (comindware.ru) or 'cmwlab' (cmwlab.com)
+    server_profile = (server_profile or "").strip().lower()
+    if server_profile not in ("cmw", "cmwlab"):
+        server_profile = "cmw"
+    
+    profile_prefix_map = {"cmw": "CMW_", "cmwlab": "CMWLAB_"}
+    prefix = profile_prefix_map[server_profile]
+    
+    # Load credentials from .env only (no JSON fallback)
+    credentials = {}
+    env_var_map = {
+        "ssh_host": f"{prefix}SSH_HOST",
+        "ssh_port": f"{prefix}SSH_PORT",
+        "ssh_username": f"{prefix}SSH_USERNAME",
+        "ssh_password": f"{prefix}SSH_PASSWORD",
+        "sql_hostname": f"{prefix}SQL_HOSTNAME",
+        "sql_ip": f"{prefix}SQL_IP",
+        "sql_port": f"{prefix}SQL_PORT",
+        "sql_port_local": f"{prefix}SQL_PORT_LOCAL",
+        "sql_username": f"{prefix}SQL_USERNAME",
+        "sql_password": f"{prefix}SQL_PASSWORD",
+        "sql_database": f"{prefix}SQL_DATABASE",
+    }
+    for key, env_var in env_var_map.items():
+        value = os.getenv(env_var)
+        if value is not None:
+            credentials[key] = value
+    
+    return credentials
 
 
 def _parse_ssh_config(hostname: str) -> Dict[str, str]:
@@ -458,12 +476,15 @@ def _prompt_with_default(prompt: str, default_value: str) -> str:
         return input(prompt)
 
 
-def _prompt_for_stored_credential(credential_type: str, server_profile: str) -> Optional[str]:
+def _prompt_for_stored_credential(
+    credential_type: str, server_profile: str, display_name: Optional[str] = None
+) -> Optional[str]:
     """Prompt user to use stored credential or enter a new one.
     
     Args:
         credential_type: Type of credential ('ssh_password' or 'sql_password')
-        server_profile: Server profile identifier
+        server_profile: Server profile identifier (for keychain lookup)
+        display_name: User-facing label, e.g. SSH hostname (defaults to server_profile)
     
     Returns:
         Password string to use, or None if user wants to enter new one
@@ -472,10 +493,11 @@ def _prompt_for_stored_credential(credential_type: str, server_profile: str) -> 
         KeyboardInterrupt: If user cancels with Ctrl+C
     """
     stored_password = _get_keychain_password(server_profile, credential_type)
+    label = display_name or server_profile
     
     if stored_password:
         credential_name = "SSH password" if credential_type == "ssh_password" else "SQL password"
-        print(f"\n✓ Found stored {credential_name} in keychain for '{server_profile}'")
+        print(f"\n✓ Found stored {credential_name} in keychain for '{label}'")
         try:
             choice = input(f"Use stored {credential_name}? (Y/n/Enter): ").strip().lower()
         except KeyboardInterrupt:
@@ -625,13 +647,13 @@ def _try_ssh_connection_with_key(
         return None
 
 
-def establish_connection_interactive(credentials_path: str = ".serverCredentials.json") -> Tuple[mysql.connector.MySQLConnection, SSHTunnelForwarder]:
+def establish_connection_interactive(server_profile: str = None) -> Tuple[mysql.connector.MySQLConnection, SSHTunnelForwarder]:
     """Establish an SSH tunnel and MySQL connection using interactive prompts.
     
     This function:
-    1. Loads credentials from JSON file (with .env path override support)
+    1. Loads credentials from .env file based on server profile (comindware.ru = 'cmw', cmwlab.com = 'cmwlab')
     2. Parses SSH config file (~/.ssh/config) for host-specific settings
-    3. Prompts for missing values with defaults from JSON and SSH config
+    3. Prompts for missing values with defaults from .env and SSH config
     4. Tries SSH key authentication first (with passphrase support)
     5. Falls back to password authentication if keys are not available
     6. Stores passwords and passphrases in OS keychain for future use
@@ -639,7 +661,7 @@ def establish_connection_interactive(credentials_path: str = ".serverCredentials
     8. Establishes MySQL connection through SSH tunnel
     
     Args:
-        credentials_path: Path to credentials JSON file (can be overridden via .env)
+        server_profile: 'cmw' (comindware.ru) or 'cmwlab' (cmwlab.com), or None to use SERVER_PROFILE from .env
     
     Returns:
         Tuple of (mysql_connection, ssh_tunnel_server). Caller is responsible
@@ -654,8 +676,8 @@ def establish_connection_interactive(credentials_path: str = ".serverCredentials
     server = None
     
     try:
-        server_credentials = _load_server_credentials(credentials_path)
-        server_profile = _get_server_profile_from_path(credentials_path)
+        server_profile = _get_server_profile(server_profile)
+        server_credentials = _load_server_credentials(server_profile)
         
         # Get SSH host from credentials or prompt
         ssh_host = server_credentials.get("ssh_host", "")
@@ -765,7 +787,9 @@ def establish_connection_interactive(credentials_path: str = ".serverCredentials
             print("SSH key authentication failed, trying password authentication...")
             # Check for stored SSH password and prompt user
             try:
-                ssh_password = _prompt_for_stored_credential("ssh_password", server_profile)
+                ssh_password = _prompt_for_stored_credential(
+                    "ssh_password", server_profile, display_name=ssh_hostname
+                )
             except KeyboardInterrupt:
                 print("\n\nOperation cancelled by user.")
                 raise
@@ -779,7 +803,7 @@ def establish_connection_interactive(credentials_path: str = ".serverCredentials
                 # Store password in keychain for future use
                 stored, error_msg = _set_keychain_password(server_profile, "ssh_password", ssh_password, verbose=True)
                 if stored:
-                    print("✓ SSH password stored in keychain for future use")
+                    print(f"✓ SSH password stored in keychain for '{ssh_hostname}'")
                 else:
                     print(f"⚠ Warning: Could not store SSH password in keychain: {error_msg}")
                     print("   You will be prompted next time.")
@@ -815,7 +839,9 @@ def establish_connection_interactive(credentials_path: str = ".serverCredentials
         
         # Get SQL password from keychain or prompt
         try:
-            sql_password = _prompt_for_stored_credential("sql_password", server_profile)
+            sql_password = _prompt_for_stored_credential(
+                "sql_password", server_profile, display_name=ssh_hostname
+            )
         except KeyboardInterrupt:
             print("\n\nOperation cancelled by user.")
             if server:
@@ -839,7 +865,7 @@ def establish_connection_interactive(credentials_path: str = ".serverCredentials
             # Store password in keychain for future use
             stored, error_msg = _set_keychain_password(server_profile, "sql_password", sql_password, verbose=True)
             if stored:
-                print("✓ SQL password stored in keychain for future use")
+                print(f"✓ SQL password stored in keychain for '{ssh_hostname}'")
             else:
                 print(f"⚠ Warning: Could not store SQL password in keychain: {error_msg}")
                 print("   You will be prompted next time.")

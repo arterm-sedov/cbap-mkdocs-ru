@@ -20,11 +20,11 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from tools.ssh_kb_ru import establish_connection_interactive, close_connection
 
 
-def test_connection(credentials_file, server_name):
+def test_connection(server_profile, server_name):
     """Test connection to a specific server.
     
     Args:
-        credentials_file: Path to credentials JSON file
+        server_profile: Server profile identifier ('cmw' or 'cmwlab')
         server_name: Name of the server for display purposes
     
     Returns:
@@ -32,7 +32,7 @@ def test_connection(credentials_file, server_name):
     """
     print(f"\n{'='*60}")
     print(f"Testing connection to {server_name}")
-    print(f"Credentials file: {credentials_file}")
+    print(f"Server profile: {server_profile}")
     print(f"{'='*60}\n")
     
     connection = None
@@ -41,7 +41,7 @@ def test_connection(credentials_file, server_name):
     try:
         # Establish connection
         print("Step 1: Establishing SSH tunnel and MySQL connection...")
-        connection, server = establish_connection_interactive(credentials_file)
+        connection, server = establish_connection_interactive(server_profile)
         
         if not connection:
             print("❌ FAILED: Connection object is None")
@@ -146,20 +146,18 @@ def main():
     results = {}
     
     if args.server in ["cmw_lab", "both"]:
-        credentials_file = ".serverCredentialsCmwlab.json"
-        if not Path(credentials_file).exists():
-            print(f"\n⚠️  Warning: Credentials file '{credentials_file}' not found.")
-            print("   The script will prompt you for all connection details.")
+        server_profile = "cmwlab"
+        print(f"\n⚠️  Note: Using server profile '{server_profile}' from .env file.")
+        print("   Set SERVER_PROFILE=cmwlab in .env or pass as argument.")
         
-        results["CMW Lab"] = test_connection(credentials_file, "CMW Lab Server")
+        results["CMW Lab"] = test_connection(server_profile, "CMW Lab Server")
     
     if args.server in ["comindware", "both"]:
-        credentials_file = ".serverCredentials.json"
-        if not Path(credentials_file).exists():
-            print(f"\n⚠️  Warning: Credentials file '{credentials_file}' not found.")
-            print("   The script will prompt you for all connection details.")
+        server_profile = "cmw"
+        print(f"\n⚠️  Note: Using server profile '{server_profile}' from .env file.")
+        print("   Set SERVER_PROFILE=cmw in .env or pass as argument.")
         
-        results["Comindware"] = test_connection(credentials_file, "Comindware Server")
+        results["Comindware"] = test_connection(server_profile, "Comindware Server")
     
     # Summary
     print("\n" + "="*60)

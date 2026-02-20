@@ -37,7 +37,8 @@ No special configuration is needed. The module automatically detects the environ
 from tools.ssh_kb_ru import establish_connection_interactive
 
 # On headless Linux, this will automatically use file-based keyring
-connection, server = establish_connection_interactive(".serverCredentials.json")
+# Use server profile 'cmw' or 'cmwlab' instead of JSON file path
+connection, server = establish_connection_interactive("cmw")
 ```
 
 ## Security Considerations

@@ -142,71 +142,64 @@ class TestKeychainFunctions:
 
 
 class TestServerProfile:
-    """Test server profile extraction."""
+    """Test server profile resolution (comindware.ru = cmw, cmwlab.com = cmwlab)."""
     
-    def test_get_server_profile_from_path_normal(self):
-        """Test extracting profile from normal filename."""
-        result = ssh_kb_ru._get_server_profile_from_path("serverCredentials.json")
-        assert result == "serverCredentials"
+    def test_get_server_profile_cmw(self):
+        """Profile 'cmw' returns 'cmw'."""
+        assert ssh_kb_ru._get_server_profile("cmw") == "cmw"
     
-    def test_get_server_profile_from_path_dot_prefix(self):
-        """Test extracting profile from dot-prefixed filename."""
-        result = ssh_kb_ru._get_server_profile_from_path(".serverCredentials.json")
-        assert result == "serverCredentials"
+    def test_get_server_profile_cmwlab(self):
+        """Profile 'cmwlab' returns 'cmwlab'."""
+        assert ssh_kb_ru._get_server_profile("cmwlab") == "cmwlab"
     
-    def test_get_server_profile_from_path_full_path(self):
-        """Test extracting profile from full path."""
-        result = ssh_kb_ru._get_server_profile_from_path("/path/to/.serverCredentials.json")
-        assert result == "serverCredentials"
+    def test_get_server_profile_from_env(self, monkeypatch):
+        """None uses SERVER_PROFILE from environment."""
+        monkeypatch.setenv("SERVER_PROFILE", "cmwlab")
+        assert ssh_kb_ru._get_server_profile(None) == "cmwlab"
+        monkeypatch.setenv("SERVER_PROFILE", "cmw")
+        assert ssh_kb_ru._get_server_profile(None) == "cmw"
+    
+    def test_get_server_profile_default(self, monkeypatch):
+        """Missing/invalid profile defaults to 'cmw'."""
+        monkeypatch.delenv("SERVER_PROFILE", raising=False)
+        assert ssh_kb_ru._get_server_profile(None) == "cmw"
+        assert ssh_kb_ru._get_server_profile("invalid") == "cmw"
 
 
 class TestLoadServerCredentials:
-    """Test loading server credentials from JSON."""
+    """Test loading server credentials from .env (profile-based)."""
     
-    def test_load_server_credentials_success(self, temp_dir):
-        """Test loading credentials from valid JSON file."""
-        creds_file = temp_dir / "test_creds.json"
-        creds_data = {"ssh_host": "test.com", "ssh_port": "22"}
-        creds_file.write_text(json.dumps(creds_data))
-        
-        result = ssh_kb_ru._load_server_credentials(str(creds_file))
-        assert result == creds_data
+    def test_load_server_credentials_cmw_from_env(self, monkeypatch):
+        """Load cmw (comindware.ru) credentials from env vars."""
+        monkeypatch.setenv("CMW_SSH_HOST", "comindware.example")
+        monkeypatch.setenv("CMW_SSH_PORT", "22")
+        monkeypatch.setenv("CMW_SSH_USERNAME", "user1")
+        result = ssh_kb_ru._load_server_credentials("cmw")
+        assert result["ssh_host"] == "comindware.example"
+        assert result["ssh_port"] == "22"
+        assert result["ssh_username"] == "user1"
     
-    def test_load_server_credentials_file_not_found(self):
-        """Test loading credentials when file doesn't exist."""
-        result = ssh_kb_ru._load_server_credentials("nonexistent.json")
-        assert result == {}
+    def test_load_server_credentials_cmwlab_from_env(self, monkeypatch):
+        """Load cmwlab (cmwlab.com) credentials from env vars."""
+        monkeypatch.setenv("CMWLAB_SSH_HOST", "kb.cmwlab.com")
+        monkeypatch.setenv("CMWLAB_SSH_PORT", "2222")
+        monkeypatch.setenv("CMWLAB_SSH_USERNAME", "user2")
+        result = ssh_kb_ru._load_server_credentials("cmwlab")
+        assert result["ssh_host"] == "kb.cmwlab.com"
+        assert result["ssh_port"] == "2222"
+        assert result["ssh_username"] == "user2"
     
-    def test_load_server_credentials_invalid_json(self, temp_dir):
-        """Test loading credentials from invalid JSON file."""
-        creds_file = temp_dir / "invalid.json"
-        creds_file.write_text("{invalid json}")
-        
-        result = ssh_kb_ru._load_server_credentials(str(creds_file))
-        assert result == {}
+    def test_load_server_credentials_returns_dict(self):
+        """_load_server_credentials returns a dict (from .env or empty)."""
+        result = ssh_kb_ru._load_server_credentials("cmw")
+        assert isinstance(result, dict)
     
-    def test_load_server_credentials_empty_file(self, temp_dir):
-        """Test loading credentials from empty file."""
-        creds_file = temp_dir / "empty.json"
-        creds_file.write_text("")
-        
-        result = ssh_kb_ru._load_server_credentials(str(creds_file))
-        assert result == {}
-    
-    def test_load_server_credentials_env_override(self, temp_dir, monkeypatch):
-        """Test credentials path override from environment variable."""
-        env_creds_file = temp_dir / "env_creds.json"
-        env_creds_data = {"ssh_host": "env.com"}
-        env_creds_file.write_text(json.dumps(env_creds_data))
-        
-        default_creds_file = temp_dir / "default.json"
-        default_creds_data = {"ssh_host": "default.com"}
-        default_creds_file.write_text(json.dumps(default_creds_data))
-        
-        monkeypatch.setenv("CREDENTIALS_PATH", str(env_creds_file))
-        
-        result = ssh_kb_ru._load_server_credentials(str(default_creds_file))
-        assert result == env_creds_data
+    def test_load_server_credentials_default_profile(self, monkeypatch):
+        """None profile uses SERVER_PROFILE env."""
+        monkeypatch.setenv("SERVER_PROFILE", "cmwlab")
+        monkeypatch.setenv("CMWLAB_SSH_HOST", "lab.example")
+        result = ssh_kb_ru._load_server_credentials(None)
+        assert result.get("ssh_host") == "lab.example"
 
 
 class TestSSHConfigParsing:
@@ -470,7 +463,7 @@ class TestTrySSHConnectionWithKey:
 class TestEstablishConnectionInteractive:
     """Test main connection establishment function."""
     
-    def test_establish_connection_key_auth_success(self, credentials_file, mock_ssh_tunnel, mock_mysql_connection):
+    def test_establish_connection_key_auth_success(self, mock_ssh_tunnel, mock_mysql_connection):
         """Test successful connection establishment with key authentication."""
         def mock_input(prompt):
             if "username" in prompt.lower():
@@ -492,11 +485,11 @@ class TestEstablishConnectionInteractive:
                             with patch("builtins.input", side_effect=mock_input):
                                 with patch("tools.ssh_kb_ru.getpass", return_value="sql_password"):
                                     with patch("mysql.connector.MySQLConnection", return_value=mock_mysql_connection):
-                                        conn, server = ssh_kb_ru.establish_connection_interactive(credentials_file)
+                                        conn, server = ssh_kb_ru.establish_connection_interactive("cmw")
                                         assert conn == mock_mysql_connection
                                         assert server == mock_ssh_tunnel
     
-    def test_establish_connection_password_auth_success(self, credentials_file, mock_ssh_tunnel, mock_mysql_connection):
+    def test_establish_connection_password_auth_success(self, mock_ssh_tunnel, mock_mysql_connection):
         """Test successful connection establishment with password authentication."""
         def mock_input(prompt):
             if "username" in prompt.lower():
@@ -519,11 +512,11 @@ class TestEstablishConnectionInteractive:
                                 with patch("tools.ssh_kb_ru.getpass", return_value="password123"):
                                     with patch("tools.ssh_kb_ru.SSHTunnelForwarder", return_value=mock_ssh_tunnel):
                                         with patch("mysql.connector.MySQLConnection", return_value=mock_mysql_connection):
-                                            conn, server = ssh_kb_ru.establish_connection_interactive(credentials_file)
+                                            conn, server = ssh_kb_ru.establish_connection_interactive("cmw")
                                             assert conn == mock_mysql_connection
                                             assert server == mock_ssh_tunnel
     
-    def test_establish_connection_keychain_passwords(self, credentials_file, mock_ssh_tunnel, mock_mysql_connection):
+    def test_establish_connection_keychain_passwords(self, mock_ssh_tunnel, mock_mysql_connection):
         """Test connection establishment using passwords from keychain."""
         def mock_input(prompt):
             if "username" in prompt.lower():
@@ -544,11 +537,11 @@ class TestEstablishConnectionInteractive:
                         with patch("builtins.input", side_effect=mock_input):
                             with patch("tools.ssh_kb_ru.SSHTunnelForwarder", return_value=mock_ssh_tunnel):
                                 with patch("mysql.connector.MySQLConnection", return_value=mock_mysql_connection):
-                                    conn, server = ssh_kb_ru.establish_connection_interactive(credentials_file)
+                                    conn, server = ssh_kb_ru.establish_connection_interactive("cmw")
                                     assert conn == mock_mysql_connection
                                     assert server == mock_ssh_tunnel
     
-    def test_establish_connection_ssh_auth_failure(self, credentials_file):
+    def test_establish_connection_ssh_auth_failure(self):
         """Test connection establishment when SSH authentication fails."""
         def mock_input(prompt):
             if "username" in prompt.lower():
@@ -573,9 +566,9 @@ class TestEstablishConnectionInteractive:
                             with patch("tools.ssh_kb_ru.getpass", return_value="wrong_password"):
                                 with patch("tools.ssh_kb_ru.SSHTunnelForwarder", return_value=mock_tunnel):
                                     with pytest.raises(ConnectionError):
-                                        ssh_kb_ru.establish_connection_interactive(credentials_file)
+                                        ssh_kb_ru.establish_connection_interactive("cmw")
     
-    def test_establish_connection_mysql_failure(self, credentials_file, mock_ssh_tunnel):
+    def test_establish_connection_mysql_failure(self, mock_ssh_tunnel):
         """Test connection establishment when MySQL connection fails."""
         def mock_input(prompt):
             if "username" in prompt.lower():
@@ -599,11 +592,11 @@ class TestEstablishConnectionInteractive:
                             with patch("tools.ssh_kb_ru.getpass", return_value="sql_password"):
                                 with patch("mysql.connector.MySQLConnection", side_effect=mysql.connector.Error("Connection failed")):
                                     with pytest.raises(mysql.connector.Error):
-                                        ssh_kb_ru.establish_connection_interactive(credentials_file)
+                                        ssh_kb_ru.establish_connection_interactive("cmw")
                                     # Verify tunnel is stopped on MySQL failure
                                     mock_ssh_tunnel.stop.assert_called_once()
     
-    def test_establish_connection_ssh_config_integration(self, credentials_file, mock_ssh_tunnel, mock_mysql_connection):
+    def test_establish_connection_ssh_config_integration(self, mock_ssh_tunnel, mock_mysql_connection):
         """Test connection establishment using SSH config values."""
         def mock_input(prompt):
             if "database" in prompt.lower():
@@ -630,7 +623,7 @@ class TestEstablishConnectionInteractive:
                             with patch("builtins.input", side_effect=mock_input):
                                 with patch("tools.ssh_kb_ru.getpass", return_value="sql_password"):
                                     with patch("mysql.connector.MySQLConnection", return_value=mock_mysql_connection):
-                                        conn, server = ssh_kb_ru.establish_connection_interactive(credentials_file)
+                                        conn, server = ssh_kb_ru.establish_connection_interactive("cmw")
                                         # Verify SSH config values were used
                                         mock_try.assert_called_once()
                                         call_args = mock_try.call_args

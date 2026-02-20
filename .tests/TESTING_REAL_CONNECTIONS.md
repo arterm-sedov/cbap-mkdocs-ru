@@ -48,32 +48,56 @@ The `test_real_connections.py` script performs the following checks:
 - ✅ Properly closes MySQL connection
 - ✅ Properly shuts down SSH tunnel
 
-## Credentials Files
+## Credentials Configuration
 
-The script uses the same credentials files as the import scripts:
+Credentials are now stored in the `.env` file using environment variables with server profile prefixes.
 
-| Server | Credentials File | Used By Script |
-|--------|-----------------|----------------|
-| CMW Lab | `.serverCredentialsCmwlab.json` | `phpkb_import_cmw_lab.py` |
-| Comindware | `.serverCredentials.json` | `phpkb_import.py` |
+### Server Profiles
 
-### Credentials File Format
+| Server | Profile | Environment Variables Prefix |
+|--------|--------|----------------------------|
+| CMW Lab | `cmwlab` | `CMWLAB_` |
+| Comindware | `cmw` | `CMW_` |
 
-```json
-{
-  "ssh_host": "example.com",
-  "ssh_port": "22",
-  "ssh_username": "your_username",
-  "sql_hostname": "localhost",
-  "sql_username": "db_user",
-  "sql_database": "database_name",
-  "sql_port": "3306",
-  "sql_port_local": "3307",
-  "sql_ip": "127.0.0.1"
-}
+### .env File Format
+
+Set `SERVER_PROFILE` in `.env` to select the default server profile, or pass it as an argument:
+
+```bash
+# Default server profile (used when no profile is specified)
+SERVER_PROFILE=cmw
+
+# Comindware Server Credentials
+CMW_SSH_HOST=31.135.15.59
+CMW_SSH_PORT=8223
+CMW_SSH_USERNAME=ased
+CMW_SSH_PASSWORD=
+CMW_SQL_HOSTNAME=localhost
+CMW_SQL_IP=127.0.0.1
+CMW_SQL_PORT=3306
+CMW_SQL_PORT_LOCAL=3307
+CMW_SQL_USERNAME=ased
+CMW_SQL_PASSWORD=
+CMW_SQL_DATABASE=phpkbv9
+
+# CMW Lab Server Credentials
+CMWLAB_SSH_HOST=kb.cmwlab.com
+CMWLAB_SSH_PORT=22
+CMWLAB_SSH_USERNAME=ased
+CMWLAB_SSH_PASSWORD=
+CMWLAB_SQL_HOSTNAME=localhost
+CMWLAB_SQL_IP=127.0.0.1
+CMWLAB_SQL_PORT=3306
+CMWLAB_SQL_PORT_LOCAL=3307
+CMWLAB_SQL_USERNAME=ased
+CMWLAB_SQL_PASSWORD=
+CMWLAB_SQL_DATABASE=phpkbcmwlab
 ```
 
-**Note**: If credentials files don't exist, the script will prompt you interactively for all connection details.
+**Note**: 
+- Passwords can be left empty (will prompt if needed)
+- If credentials are not found in `.env`, the script will prompt you interactively for all connection details
+- Legacy JSON files (`.serverCredentials.json`, `.serverCredentialsCmwlab.json`) are still supported for backward compatibility
 
 ## Authentication Methods
 
@@ -104,7 +128,7 @@ python phpkb_import_cmw_lab.py
 
 This will:
 1. Prompt for import path (default: `phpkb_content_cmw_lab`)
-2. Establish connection using `.serverCredentialsCmwlab.json`
+2. Establish connection using `cmwlab` server profile from `.env`
 3. Show root categories
 4. Allow you to browse and import categories/articles
 
@@ -116,7 +140,7 @@ python phpkb_import.py
 
 This will:
 1. Prompt for import path (default: `phpkb_content`)
-2. Establish connection using `.serverCredentials.json`
+2. Establish connection using `cmw` server profile from `.env` (or SERVER_PROFILE env var)
 3. Show root categories
 4. Allow you to browse and import categories/articles
 
@@ -134,7 +158,7 @@ This will:
 1. Check SSH key location: `~/.ssh/id_rsa` or `~/.ssh/id_ed25519`
 2. Verify SSH config: `~/.ssh/config` (if using)
 3. Try password authentication (will prompt if key auth fails)
-4. Check credentials file values
+4. Check `.env` file values for the correct server profile prefix (CMW_ or CMWLAB_)
 
 ### Connection Fails with "Connection refused"
 
@@ -232,7 +256,7 @@ You will be prompted for credentials if not stored in keychain.
 
 ============================================================
 Testing connection to CMW Lab Server
-Credentials file: .serverCredentialsCmwlab.json
+Server profile: cmwlab
 ============================================================
 
 Step 1: Establishing SSH tunnel and MySQL connection...
