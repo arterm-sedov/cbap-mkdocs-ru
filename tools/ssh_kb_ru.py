@@ -139,31 +139,34 @@ def _get_keychain_password(server_profile: str, credential_type: str) -> Optiona
     if not KEYRING_AVAILABLE:
         return None
     
+    # Import keyring at function level to avoid UnboundLocalError
+    import keyring as kr  # Use alias to avoid shadowing
+    
     try:
         key = _get_keychain_key(server_profile, credential_type)
-        password = keyring.get_password(KEYCHAIN_SERVICE, key)
+        password = kr.get_password(KEYCHAIN_SERVICE, key)
         return password
     except (RuntimeError, Exception) as e:
         # Check if it's a keyring backend initialization error
         is_keyring_error = False
-        if hasattr(keyring, 'errors'):
-            if isinstance(e, (keyring.errors.NoKeyringError, keyring.errors.InitError)):
+        if hasattr(kr, 'errors'):
+            if isinstance(e, (kr.errors.NoKeyringError, kr.errors.InitError)):
                 is_keyring_error = True
         # RuntimeError is common when D-Bus is not available on headless Linux
         if isinstance(e, RuntimeError) or is_keyring_error:
             # Keyring backend not available (e.g., no D-Bus on headless Linux)
             # Try to initialize file-based backend as fallback
             try:
-                import keyring.backends.file
+                import keyring.backends.file as kr_backends_file
                 # Try EncryptedKeyring first (more secure)
                 try:
-                    file_keyring = keyring.backends.file.EncryptedKeyring()
+                    file_keyring = kr_backends_file.EncryptedKeyring()
                 except Exception:
                     # Fall back to PlaintextKeyring if encryption not available
-                    file_keyring = keyring.backends.file.PlaintextKeyring()
-                keyring.set_keyring(file_keyring)
+                    file_keyring = kr_backends_file.PlaintextKeyring()
+                kr.set_keyring(file_keyring)
                 # Retry with file backend
-                password = keyring.get_password(KEYCHAIN_SERVICE, key)
+                password = kr.get_password(KEYCHAIN_SERVICE, key)
                 return password
             except Exception:
                 # File backend also failed
@@ -199,10 +202,11 @@ def _set_keychain_key_passphrase(server_profile: str, key_path: str, passphrase:
         True if successful, False otherwise
     """
     credential_type = f"ssh_key_passphrase:{key_path}"
-    return _set_keychain_password(server_profile, credential_type, passphrase)
+    stored, _ = _set_keychain_password(server_profile, credential_type, passphrase, verbose=False)
+    return stored
 
 
-def _set_keychain_password(server_profile: str, credential_type: str, password: str) -> bool:
+def _set_keychain_password(server_profile: str, credential_type: str, password: str, verbose: bool = False) -> Tuple[bool, Optional[str]]:
     """Store a password in the OS keychain.
     
     Supports both GUI-based keyrings (GNOME Keyring, KWallet, Windows Credential Manager)
@@ -212,44 +216,69 @@ def _set_keychain_password(server_profile: str, credential_type: str, password: 
         server_profile: Server profile identifier
         credential_type: Type of credential ('ssh_password' or 'sql_password')
         password: Password to store
+        verbose: If True, return error message in tuple
     
     Returns:
-        True if successful, False otherwise
+        Tuple of (success: bool, error_message: Optional[str])
+        If verbose=False, returns (bool, None)
     """
     if not KEYRING_AVAILABLE:
-        return False
+        error_msg = "Keyring module is not available"
+        return (False, error_msg if verbose else None)
+    
+    # Import keyring at function level to avoid UnboundLocalError
+    import keyring as kr_set  # Use alias to avoid shadowing
     
     try:
         key = _get_keychain_key(server_profile, credential_type)
-        keyring.set_password(KEYCHAIN_SERVICE, key, password)
-        return True
+        kr_set.set_password(KEYCHAIN_SERVICE, key, password)
+        # Verify password was stored by trying to retrieve it
+        stored_password = kr_set.get_password(KEYCHAIN_SERVICE, key)
+        if stored_password == password:
+            return (True, None)
+        else:
+            # Password was stored but doesn't match - might be a keyring issue
+            error_msg = f"Password verification failed (stored password doesn't match)"
+            return (False, error_msg if verbose else None)
     except (RuntimeError, Exception) as e:
+        error_msg = str(e)
         # Check if it's a keyring backend initialization error
         is_keyring_error = False
-        if hasattr(keyring, 'errors'):
-            if isinstance(e, (keyring.errors.NoKeyringError, keyring.errors.InitError)):
+        if hasattr(kr_set, 'errors'):
+            if isinstance(e, (kr_set.errors.NoKeyringError, kr_set.errors.InitError)):
                 is_keyring_error = True
         # RuntimeError is common when D-Bus is not available on headless Linux
         if isinstance(e, RuntimeError) or is_keyring_error:
             # Keyring backend not available (e.g., no D-Bus on headless Linux)
             # Try to initialize file-based backend as fallback
             try:
-                import keyring.backends.file
+                import keyring.backends.file as kr_backends_file
                 # Try EncryptedKeyring first (more secure)
                 try:
-                    file_keyring = keyring.backends.file.EncryptedKeyring()
-                except Exception:
+                    file_keyring = kr_backends_file.EncryptedKeyring()
+                except Exception as enc_error:
                     # Fall back to PlaintextKeyring if encryption not available
-                    file_keyring = keyring.backends.file.PlaintextKeyring()
-                keyring.set_keyring(file_keyring)
+                    try:
+                        file_keyring = kr_backends_file.PlaintextKeyring()
+                    except Exception as plain_error:
+                        error_msg = f"File backend initialization failed: {plain_error}"
+                        return (False, error_msg if verbose else None)
+                kr_set.set_keyring(file_keyring)
                 # Retry with file backend
-                keyring.set_password(KEYCHAIN_SERVICE, key, password)
-                return True
-            except Exception:
-                # File backend also failed
-                return False
+                kr_set.set_password(KEYCHAIN_SERVICE, key, password)
+                # Verify with file backend
+                stored_password = kr_set.get_password(KEYCHAIN_SERVICE, key)
+                if stored_password == password:
+                    return (True, None)
+                else:
+                    error_msg = "File backend: Password verification failed"
+                    return (False, error_msg if verbose else None)
+            except Exception as file_error:
+                error_msg = f"File backend failed: {file_error}"
+                return (False, error_msg if verbose else None)
         # Other keyring errors
-        return False
+        error_msg = f"Keyring error: {error_msg}"
+        return (False, error_msg if verbose else None)
 
 
 def _get_server_profile_from_path(credentials_path: str) -> str:
@@ -429,6 +458,40 @@ def _prompt_with_default(prompt: str, default_value: str) -> str:
         return input(prompt)
 
 
+def _prompt_for_stored_credential(credential_type: str, server_profile: str) -> Optional[str]:
+    """Prompt user to use stored credential or enter a new one.
+    
+    Args:
+        credential_type: Type of credential ('ssh_password' or 'sql_password')
+        server_profile: Server profile identifier
+    
+    Returns:
+        Password string to use, or None if user wants to enter new one
+    
+    Raises:
+        KeyboardInterrupt: If user cancels with Ctrl+C
+    """
+    stored_password = _get_keychain_password(server_profile, credential_type)
+    
+    if stored_password:
+        credential_name = "SSH password" if credential_type == "ssh_password" else "SQL password"
+        print(f"\n✓ Found stored {credential_name} in keychain for '{server_profile}'")
+        try:
+            choice = input(f"Use stored {credential_name}? (Y/n/Enter): ").strip().lower()
+        except KeyboardInterrupt:
+            print("\n\nOperation cancelled by user.")
+            raise
+        
+        if choice in ('', 'y', 'yes'):
+            print(f"Using stored {credential_name}...")
+            return stored_password
+        else:
+            print(f"Entering new {credential_name}...")
+            return None
+    else:
+        return None
+
+
 def _load_ssh_key_with_passphrase(key_path: str, server_profile: str) -> Optional[paramiko.PKey]:
     """Load an SSH private key, handling encrypted keys with passphrases.
     
@@ -583,117 +646,238 @@ def establish_connection_interactive(credentials_path: str = ".serverCredentials
         for closing both via `close_connection`.
     
     Raises:
+        KeyboardInterrupt: If user cancels with Ctrl+C (connections are cleaned up)
         ConnectionError: If SSH tunnel cannot be established
         mysql.connector.Error: If MySQL connection fails
     """
-    server_credentials = _load_server_credentials(credentials_path)
-    server_profile = _get_server_profile_from_path(credentials_path)
-    
-    # Prompt for SSH host first to enable SSH config lookup
-    ssh_host = _prompt_with_default("PHPKB host:\n", server_credentials.get("ssh_host", ""))
-    
-    # Parse SSH config for this host
-    ssh_config = _parse_ssh_config(ssh_host)
-    if ssh_config:
-        print(f"Found SSH config entry for {ssh_host}")
-    
-    # Use SSH config values as defaults, fall back to JSON credentials
-    ssh_hostname = ssh_config.get("hostname", ssh_host)
-    ssh_port = int(ssh_config.get("port") or server_credentials.get("ssh_port", "22"))
-    ssh_username = _prompt_with_default(
-        "SSH username:\n",
-        ssh_config.get("user") or server_credentials.get("ssh_username", "")
-    )
-    
-    # Prompt for SQL connection parameters
-    sql_username = _prompt_with_default("SQL username:\n", server_credentials.get("sql_username", ""))
-    sql_database = _prompt_with_default("Database name:\n", server_credentials.get("sql_database", ""))
-    sql_port = server_credentials.get("sql_port", "") or input("SQL remote port:\n")
-    sql_port_local = server_credentials.get("sql_port_local", "") or input("SQL local port:\n")
-    sql_ip = server_credentials.get("sql_ip", "") or input("SQL remote IP:\n")
-    
-    # Try SSH key authentication first (preferred method)
-    print("Attempting SSH key authentication...")
-    server = _try_ssh_connection_with_key(
-        ssh_hostname,
-        ssh_port,
-        ssh_username,
-        (sql_ip, int(sql_port)),
-        (sql_ip, int(sql_port_local)),
-        server_profile,
-        ssh_config,
-    )
-    
-    # If key auth failed, fall back to password authentication
-    if server is None:
-        print("SSH key authentication failed, trying password authentication...")
-        # Try to get SSH password from keychain first
-        ssh_password = _get_keychain_password(server_profile, "ssh_password")
-        
-        if not ssh_password:
-            ssh_password = getpass("SSH password:\n")
-            # Store password in keychain for future use
-            _set_keychain_password(server_profile, "ssh_password", ssh_password)
-        else:
-            print("Using SSH password from keychain...")
-        
-        try:
-            print(f"Attempting SSH password authentication to {ssh_hostname}:{ssh_port} as {ssh_username}...")
-            server = SSHTunnelForwarder(
-                (ssh_hostname, ssh_port),
-                ssh_username=ssh_username,
-                ssh_password=ssh_password,
-                remote_bind_address=(sql_ip, int(sql_port)),
-                local_bind_address=(sql_ip, int(sql_port_local)),
-            )
-            server.start()
-            
-            # Verify tunnel is actually working
-            if not server.is_alive:
-                server.stop()
-                raise ConnectionError("SSH tunnel started but is not alive")
-            
-            print(f"SSH tunnel established successfully on local port {server.local_bind_port}")
-            
-        except paramiko.AuthenticationException as e:
-            raise ConnectionError(f"SSH authentication failed: {e}") from e
-        except paramiko.SSHException as e:
-            raise ConnectionError(f"SSH error occurred: {e}") from e
-        except (socket.error, OSError) as e:
-            raise ConnectionError(f"Connection error: {e}") from e
-        except Exception as e:
-            raise ConnectionError(f"Failed to establish SSH tunnel: {e}") from e
-    else:
-        print("SSH key authentication successful!")
-    
-    # Get SQL password from keychain or prompt
-    sql_password = _get_keychain_password(server_profile, "sql_password")
-    if not sql_password:
-        sql_password = getpass("SQL password:\n")
-        # Store password in keychain for future use
-        _set_keychain_password(server_profile, "sql_password", sql_password)
-    else:
-        print("Using SQL password from keychain...")
+    connection = None
+    server = None
     
     try:
-        print(f"Connecting to MySQL database {sql_database} on {sql_ip}:{server.local_bind_port}...")
-        connection = mysql.connector.MySQLConnection(
-            user=sql_username,
-            password=sql_password,
-            host=sql_ip,
-            port=server.local_bind_port,
-            database=sql_database,
-        )
-        print("MySQL connection established successfully")
-        return connection, server
-    except mysql.connector.Error as e:
-        # Close SSH tunnel if MySQL connection fails
-        if server:
+        server_credentials = _load_server_credentials(credentials_path)
+        server_profile = _get_server_profile_from_path(credentials_path)
+        
+        # Get SSH host from credentials or prompt
+        ssh_host = server_credentials.get("ssh_host", "")
+        if not ssh_host:
             try:
-                server.stop()
+                ssh_host = input("PHPKB host:\n").strip()
+            except KeyboardInterrupt:
+                print("\n\nOperation cancelled by user.")
+                raise
+        else:
+            print(f"PHPKB host: {ssh_host} (from credentials)")
+        
+        # Parse SSH config for this host
+        ssh_config = _parse_ssh_config(ssh_host)
+        if ssh_config:
+            print(f"Found SSH config entry for {ssh_host}")
+        
+        # Use SSH config values as defaults, fall back to JSON credentials
+        ssh_hostname = ssh_config.get("hostname", ssh_host)
+        if ssh_hostname != ssh_host:
+            print(f"SSH hostname: {ssh_hostname} (from SSH config)")
+        
+        ssh_port_str = ssh_config.get("port") or server_credentials.get("ssh_port", "22")
+        ssh_port = int(ssh_port_str)
+        if ssh_config.get("port"):
+            print(f"SSH port: {ssh_port} (from SSH config)")
+        elif server_credentials.get("ssh_port"):
+            print(f"SSH port: {ssh_port} (from credentials)")
+        
+        # Get SSH username from config or credentials, or prompt
+        ssh_username = ssh_config.get("user") or server_credentials.get("ssh_username", "")
+        if not ssh_username:
+            try:
+                ssh_username = input("SSH username:\n").strip()
+            except KeyboardInterrupt:
+                print("\n\nOperation cancelled by user.")
+                raise
+        else:
+            source = "SSH config" if ssh_config.get("user") else "credentials"
+            print(f"SSH username: {ssh_username} (from {source})")
+        
+        # Get SQL connection parameters from credentials or prompt
+        sql_username = server_credentials.get("sql_username", "")
+        if not sql_username:
+            try:
+                sql_username = input("SQL username:\n").strip()
+            except KeyboardInterrupt:
+                print("\n\nOperation cancelled by user.")
+                raise
+        else:
+            print(f"SQL username: {sql_username} (from credentials)")
+        
+        sql_database = server_credentials.get("sql_database", "")
+        if not sql_database:
+            try:
+                sql_database = input("Database name:\n").strip()
+            except KeyboardInterrupt:
+                print("\n\nOperation cancelled by user.")
+                raise
+        else:
+            print(f"Database name: {sql_database} (from credentials)")
+        
+        sql_port = server_credentials.get("sql_port", "")
+        if not sql_port:
+            try:
+                sql_port = input("SQL remote port:\n").strip()
+            except KeyboardInterrupt:
+                print("\n\nOperation cancelled by user.")
+                raise
+        else:
+            print(f"SQL remote port: {sql_port} (from credentials)")
+        
+        sql_port_local = server_credentials.get("sql_port_local", "")
+        if not sql_port_local:
+            try:
+                sql_port_local = input("SQL local port:\n").strip()
+            except KeyboardInterrupt:
+                print("\n\nOperation cancelled by user.")
+                raise
+        else:
+            print(f"SQL local port: {sql_port_local} (from credentials)")
+        
+        sql_ip = server_credentials.get("sql_ip", "")
+        if not sql_ip:
+            try:
+                sql_ip = input("SQL remote IP:\n").strip()
+            except KeyboardInterrupt:
+                print("\n\nOperation cancelled by user.")
+                raise
+        else:
+            print(f"SQL remote IP: {sql_ip} (from credentials)")
+    
+        # Try SSH key authentication first (preferred method)
+        print("Attempting SSH key authentication...")
+        server = _try_ssh_connection_with_key(
+            ssh_hostname,
+            ssh_port,
+            ssh_username,
+            (sql_ip, int(sql_port)),
+            (sql_ip, int(sql_port_local)),
+            server_profile,
+            ssh_config,
+        )
+        
+        # If key auth failed, fall back to password authentication
+        if server is None:
+            print("SSH key authentication failed, trying password authentication...")
+            # Check for stored SSH password and prompt user
+            try:
+                ssh_password = _prompt_for_stored_credential("ssh_password", server_profile)
+            except KeyboardInterrupt:
+                print("\n\nOperation cancelled by user.")
+                raise
+            
+            if not ssh_password:
+                try:
+                    ssh_password = getpass("SSH password:\n")
+                except KeyboardInterrupt:
+                    print("\n\nOperation cancelled by user.")
+                    raise
+                # Store password in keychain for future use
+                stored, error_msg = _set_keychain_password(server_profile, "ssh_password", ssh_password, verbose=True)
+                if stored:
+                    print("✓ SSH password stored in keychain for future use")
+                else:
+                    print(f"⚠ Warning: Could not store SSH password in keychain: {error_msg}")
+                    print("   You will be prompted next time.")
+            
+            try:
+                print(f"Attempting SSH password authentication to {ssh_hostname}:{ssh_port} as {ssh_username}...")
+                server = SSHTunnelForwarder(
+                    (ssh_hostname, ssh_port),
+                    ssh_username=ssh_username,
+                    ssh_password=ssh_password,
+                    remote_bind_address=(sql_ip, int(sql_port)),
+                    local_bind_address=(sql_ip, int(sql_port_local)),
+                )
+                server.start()
+                
+                # Verify tunnel is actually working
+                if not server.is_alive:
+                    server.stop()
+                    raise ConnectionError("SSH tunnel started but is not alive")
+                
+                print(f"SSH tunnel established successfully on local port {server.local_bind_port}")
+                
+            except paramiko.AuthenticationException as e:
+                raise ConnectionError(f"SSH authentication failed: {e}") from e
+            except paramiko.SSHException as e:
+                raise ConnectionError(f"SSH error occurred: {e}") from e
+            except (socket.error, OSError) as e:
+                raise ConnectionError(f"Connection error: {e}") from e
+            except Exception as e:
+                raise ConnectionError(f"Failed to establish SSH tunnel: {e}") from e
+        else:
+            print("SSH key authentication successful!")
+        
+        # Get SQL password from keychain or prompt
+        try:
+            sql_password = _prompt_for_stored_credential("sql_password", server_profile)
+        except KeyboardInterrupt:
+            print("\n\nOperation cancelled by user.")
+            if server:
+                try:
+                    close_connection(None, server)
+                except Exception:
+                    pass
+            raise
+        
+        if not sql_password:
+            try:
+                sql_password = getpass("SQL password:\n")
+            except KeyboardInterrupt:
+                print("\n\nOperation cancelled by user.")
+                if server:
+                    try:
+                        close_connection(None, server)
+                    except Exception:
+                        pass
+                raise
+            # Store password in keychain for future use
+            stored, error_msg = _set_keychain_password(server_profile, "sql_password", sql_password, verbose=True)
+            if stored:
+                print("✓ SQL password stored in keychain for future use")
+            else:
+                print(f"⚠ Warning: Could not store SQL password in keychain: {error_msg}")
+                print("   You will be prompted next time.")
+        
+        try:
+            print(f"Connecting to MySQL database {sql_database} on {sql_ip}:{server.local_bind_port}...")
+            connection = mysql.connector.MySQLConnection(
+                user=sql_username,
+                password=sql_password,
+                host=sql_ip,
+                port=server.local_bind_port,
+                database=sql_database,
+            )
+            print("MySQL connection established successfully")
+            return connection, server
+        except mysql.connector.Error as e:
+            # Close SSH tunnel if MySQL connection fails
+            if server:
+                try:
+                    close_connection(None, server)
+                except Exception:
+                    pass
+            raise mysql.connector.Error(f"Failed to establish MySQL connection: {e}") from e
+    except KeyboardInterrupt:
+        # Clean up any connections that were established before Ctrl+C
+        print("\n\nOperation cancelled by user. Cleaning up connections...")
+        if connection:
+            try:
+                connection.close()
             except Exception:
                 pass
-        raise mysql.connector.Error(f"Failed to establish MySQL connection: {e}") from e
+        if server:
+            try:
+                close_connection(None, server)
+            except Exception:
+                pass
+        print("Connections closed.")
+        raise
 
 
 def close_connection(connection: mysql.connector.MySQLConnection, server: SSHTunnelForwarder) -> None:

@@ -1,5 +1,6 @@
 import mysql.connector
 from tools.ssh_kb_ru import establish_connection_interactive, close_connection
+from tools.graceful_interrupt import safe_input, ensure_cleanup
 import html
 from html.parser import HTMLParser
 import bs4
@@ -324,88 +325,93 @@ def main():
         KB_ID_TO_TITLE_MAP = dict()
     
     global CONNECTION
-    CONNECTION, server = establish_connection_interactive(".serverCredentialsCmwlab.json")
+    server = None
     
-    importChildren = ''
-    categoryId = ''
-    parent_category = ''
-    categoryChoice = ''
-
-    print('\nRoot categories:\n')
-
-    while importChildren != 'y':
+    try:
+        CONNECTION, server = establish_connection_interactive(".serverCredentialsCmwlab.json")
         
-        
+        importChildren = ''
+        categoryId = ''
+        parent_category = ''
         categoryChoice = ''
-        
-        categories = fetchCategories(parent_id=categoryId)
-        if parent_category: print("\nParent: {}. {}\n".format(categoryId, categoryTitle))
-        
-        if len(categories) == 0:
-            print("No categories found. Exiting.")
-            break
-        elif len(categories) == 1:
-            # If there's only one category, automatically select it
-            categoryChoice = 0
-            categoryId = categories[0][0]
-            categoryTitle = categories[0][1]
-            childrenCategories = fetchCategories(parent_id=categoryId)
-            childrenCategoriesNumber = len(childrenCategories)
-            
-            print(f"\nOnly one category found: {categoryId}. {categoryTitle}")
-            if childrenCategoriesNumber > 0:
-                print(f'\nIt has {childrenCategoriesNumber} child categories:\n')
-                listCategories(childrenCategories)
-                importChildren = input(f"\nEnter `Y` to import all child categories and articles. \n Or choose a category to browse (1 to {childrenCategoriesNumber}). \n").lower()
-            else:
-                print('\nIt has no child categories')
-                importChildren = input(f"\nEnter `Y` to import all articles from this category. ").lower()
-                if importChildren != 'y':
-                    print('Imported nothing')
-                    break
-        elif len(categories) > 1:
-            parent_category = categories[0]
-            listCategories(categories)
-            print("\n---------\n")
-            
-            if importChildren.isnumeric() and int(importChildren) <= len(categories):
-                    categoryChoice = int(importChildren)-1
-                    importChildren = 'y'
-            else:    
-                while not (categoryChoice.isnumeric() and int(categoryChoice) <= len(categories)):
-                    categoryChoice = input("Choose category to browse (1 to {}): ".format(len(categories)))
-                    if categoryChoice.isnumeric() and int(categoryChoice) <= len(categories):
-                        categoryChoice = int(categoryChoice)-1
-                        break
-                    else:
-                        categoryChoice = ''
-                        print ('Wrong category choice')
-                
-            
-            categoryId = categories[categoryChoice][0]
-            categoryTitle = categories[categoryChoice][1]  
-            childrenCategories = fetchCategories(parent_id=categoryId)
-            childrenCategoriesNumber = len(childrenCategories)
-        
-            print ("\nChosen category: {} {}".format(categoryId, categoryTitle))
-            if childrenCategoriesNumber > 0:
-                print ('\nIt has {} child categories:\n'.format(childrenCategoriesNumber))
-                listCategories(childrenCategories)
-                importChildren = input("\nEnter `Y` to import all child categories and articles. \n Or choose a category to browse (1 to {}). \n".format(childrenCategoriesNumber)).lower()
-            else: 
-                print ('\nIt has no child categories')
-                importChildren = input("\nEnter `Y` to import all articles from this category. ".format(categoryId, categoryTitle)).lower()
-                if importChildren !='y': 
-                    print('Imported nothing')
-                    break
 
-    else:
-        if len(categories) > 1 and categories[categoryChoice]:
-            importCategoryChildren(categories[categoryChoice], KB_DIR)
-        elif len(categories) == 1:
-            importCategoryChildren(categories[0], KB_DIR)
-        
-    close_connection(CONNECTION, server)
+        print('\nRoot categories:\n')
+
+        while importChildren != 'y':
+            categoryChoice = ''
+            
+            categories = fetchCategories(parent_id=categoryId)
+            if parent_category: print("\nParent: {}. {}\n".format(categoryId, categoryTitle))
+            
+            if len(categories) == 0:
+                print("No categories found. Exiting.")
+                break
+            elif len(categories) == 1:
+                # If there's only one category, automatically select it
+                categoryChoice = 0
+                categoryId = categories[0][0]
+                categoryTitle = categories[0][1]
+                childrenCategories = fetchCategories(parent_id=categoryId)
+                childrenCategoriesNumber = len(childrenCategories)
+                
+                print(f"\nOnly one category found: {categoryId}. {categoryTitle}")
+                if childrenCategoriesNumber > 0:
+                    print(f'\nIt has {childrenCategoriesNumber} child categories:\n')
+                    listCategories(childrenCategories)
+                    importChildren = safe_input(f"\nEnter `Y` to import all child categories and articles. \n Or choose a category to browse (1 to {childrenCategoriesNumber})").lower()
+                else:
+                    print('\nIt has no child categories')
+                    importChildren = safe_input(f"\nEnter `Y` to import all articles from this category").lower()
+                    if importChildren != 'y':
+                        print('Imported nothing')
+                        break
+            elif len(categories) > 1:
+                parent_category = categories[0]
+                listCategories(categories)
+                print("\n---------\n")
+                
+                if importChildren.isnumeric() and int(importChildren) <= len(categories):
+                        categoryChoice = int(importChildren)-1
+                        importChildren = 'y'
+                else:    
+                    while not (categoryChoice.isnumeric() and int(categoryChoice) <= len(categories)):
+                        categoryChoice = safe_input("Choose category to browse (1 to {})".format(len(categories)))
+                        if categoryChoice.isnumeric() and int(categoryChoice) <= len(categories):
+                            categoryChoice = int(categoryChoice)-1
+                            break
+                        else:
+                            categoryChoice = ''
+                            print ('Wrong category choice')
+                    
+                
+                categoryId = categories[categoryChoice][0]
+                categoryTitle = categories[categoryChoice][1]  
+                childrenCategories = fetchCategories(parent_id=categoryId)
+                childrenCategoriesNumber = len(childrenCategories)
+            
+                print ("\nChosen category: {} {}".format(categoryId, categoryTitle))
+                if childrenCategoriesNumber > 0:
+                    print ('\nIt has {} child categories:\n'.format(childrenCategoriesNumber))
+                    listCategories(childrenCategories)
+                    importChildren = safe_input("\nEnter `Y` to import all child categories and articles. \n Or choose a category to browse (1 to {})".format(childrenCategoriesNumber)).lower()
+                else: 
+                    print ('\nIt has no child categories')
+                    importChildren = safe_input("\nEnter `Y` to import all articles from this category".format(categoryId, categoryTitle)).lower()
+                    if importChildren !='y': 
+                        print('Imported nothing')
+                        break
+
+        else:
+            if len(categories) > 1 and categories[categoryChoice]:
+                importCategoryChildren(categories[categoryChoice], KB_DIR)
+            elif len(categories) == 1:
+                importCategoryChildren(categories[0], KB_DIR)
+    except KeyboardInterrupt:
+        # Connection cleanup handled in finally block
+        pass
+    finally:
+        # Always ensure connections are closed, even on interrupt
+        ensure_cleanup(CONNECTION, server)
     
 def findFilenameByArticleId(article_id, docs_dir):
     """
