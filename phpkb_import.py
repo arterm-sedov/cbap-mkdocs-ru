@@ -20,7 +20,7 @@ KB_ID_TO_TITLE_MAP_FILE = '.article_id_filename_map_v5.json'
 THIS_FILE_DIR = os.path.dirname(os.path.realpath(__file__))
 IMPORT_PATH_DEFAULT = 'phpkb_content'
 importPath = safe_input(f'Path to import (default `{IMPORT_PATH_DEFAULT}`)', default=IMPORT_PATH_DEFAULT)
-KB_DIR = os.path.dirname(importPath) if importPath else IMPORT_PATH_DEFAULT
+KB_DIR = (importPath.strip() if (importPath and importPath.strip()) else IMPORT_PATH_DEFAULT)
 TOTAL_PAGES_IMPORTED = 0
 CONNECTION = None
 DOCS_RU_FOLDER = 'docs/ru'
