@@ -602,7 +602,7 @@ def _try_ssh_connection_with_key(
     
     try:
         print(f"Attempting SSH connection to {ssh_host}:{ssh_port} as {ssh_username}...")
-        
+
         # Build tunnel parameters
         tunnel_params = {
             "ssh_address_or_host": (ssh_host, ssh_port),
@@ -611,7 +611,7 @@ def _try_ssh_connection_with_key(
             "remote_bind_address": remote_bind_address,
             "local_bind_address": local_bind_address,
         }
-        
+
         # Add explicit key if we loaded one
         if ssh_pkey:
             tunnel_params["ssh_pkey"] = ssh_pkey
@@ -620,9 +620,16 @@ def _try_ssh_connection_with_key(
             # Fall back to directory-based key discovery
             tunnel_params["host_pkey_directories"] = [str(ssh_dir)]
             print(f"Using SSH key directory: {ssh_dir}")
-        
-        server = SSHTunnelForwarder(**tunnel_params)
-        server.start()
+
+        # Apply a temporary global socket timeout so SSH connect/handshake
+        # cannot hang indefinitely. This is reverted immediately after start().
+        old_timeout = socket.getdefaulttimeout()
+        socket.setdefaulttimeout(15)
+        try:
+            server = SSHTunnelForwarder(**tunnel_params)
+            server.start()
+        finally:
+            socket.setdefaulttimeout(old_timeout)
         
         # Verify tunnel is actually working
         if not server.is_alive:
@@ -810,15 +817,23 @@ def establish_connection_interactive(server_profile: str = None) -> Tuple[mysql.
             
             try:
                 print(f"Attempting SSH password authentication to {ssh_hostname}:{ssh_port} as {ssh_username}...")
-                server = SSHTunnelForwarder(
-                    (ssh_hostname, ssh_port),
-                    ssh_username=ssh_username,
-                    ssh_password=ssh_password,
-                    remote_bind_address=(sql_ip, int(sql_port)),
-                    local_bind_address=(sql_ip, int(sql_port_local)),
-                )
-                server.start()
-                
+
+                # Apply a temporary global socket timeout so SSH connect/handshake
+                # cannot hang indefinitely. This is reverted immediately after start().
+                old_timeout = socket.getdefaulttimeout()
+                socket.setdefaulttimeout(15)
+                try:
+                    server = SSHTunnelForwarder(
+                        (ssh_hostname, ssh_port),
+                        ssh_username=ssh_username,
+                        ssh_password=ssh_password,
+                        remote_bind_address=(sql_ip, int(sql_port)),
+                        local_bind_address=(sql_ip, int(sql_port_local)),
+                    )
+                    server.start()
+                finally:
+                    socket.setdefaulttimeout(old_timeout)
+
                 # Verify tunnel is actually working
                 if not server.is_alive:
                     server.stop()
@@ -872,12 +887,14 @@ def establish_connection_interactive(server_profile: str = None) -> Tuple[mysql.
         
         try:
             print(f"Connecting to MySQL database {sql_database} on {sql_ip}:{server.local_bind_port}...")
+            # Add a reasonable timeout so hangs surface as explicit errors
             connection = mysql.connector.MySQLConnection(
                 user=sql_username,
                 password=sql_password,
                 host=sql_ip,
                 port=server.local_bind_port,
                 database=sql_database,
+                connection_timeout=10,
             )
             print("MySQL connection established successfully")
             return connection, server
