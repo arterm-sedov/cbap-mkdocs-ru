@@ -644,10 +644,10 @@ def _try_ssh_connection_with_key(
         print(f"SSH authentication failed: {e}")
         return None
     except paramiko.SSHException as e:
-        print(f"SSH error occurred: {e}")
+        print(f"SSH tunnel error occurred 15s socket timeout in effect): {e}")
         return None
     except (socket.error, OSError) as e:
-        print(f"Connection error: {e}")
+        print(f"Connection error while establishing SSH tunnel (15s socket timeout in effect): {e}")
         return None
     except Exception as e:
         print(f"Unexpected error during SSH key authentication: {e}")
@@ -900,6 +900,7 @@ def establish_connection_interactive(server_profile: str = None) -> Tuple[mysql.
             return connection, server
         except mysql.connector.Error as e:
             # Close SSH tunnel if MySQL connection fails
+            print(f"MySQL connection failed (connection_timeout=10s): {e}")
             if server:
                 try:
                     close_connection(None, server)
