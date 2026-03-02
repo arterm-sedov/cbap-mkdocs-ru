@@ -363,6 +363,8 @@
 
 [version_control_git]: {{ kbArticleURLPrefix }}4806
 
+[version_control_methodology]: {{ kbArticleURLPrefix }}XXXX
+
 {% endif %}
 
 {% if gostech or (not userGuide and (adminGuideLinux or adminGuideWindows)) or (tutorial and not userGuide) or kbExport %}
