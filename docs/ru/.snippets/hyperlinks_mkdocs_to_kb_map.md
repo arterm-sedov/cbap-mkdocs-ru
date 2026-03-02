@@ -363,7 +363,7 @@
 
 [version_control_git]: {{ kbArticleURLPrefix }}4806
 
-[version_control_methodology]: {{ kbArticleURLPrefix }}XXXX
+[version_control_methodology]: {{ kbArticleURLPrefix }}5155
 
 {% endif %}
 
