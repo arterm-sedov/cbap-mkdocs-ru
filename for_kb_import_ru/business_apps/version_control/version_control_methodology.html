@@ -1,0 +1,485 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5155" kb-tags="dev,git,main,master,pull-request,push,ветка,коммиты,методология,откат,продуктив,релиз,трансфер,управление версиями" kb-title="Управление версиями приложений через Git. Методология и рекомендации">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_intro">
+<span class="md-ellipsis">
+      
+        Введение
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_envs_branches">
+<span class="md-ellipsis">
+      
+        Среды и ветки
+      
+    </span>
+</a>
+<nav aria-label="Среды и ветки" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_envs_recommended_envs">
+<span class="md-ellipsis">
+      
+        Рекомендуемые среды
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_envs_branches_scheme">
+<span class="md-ellipsis">
+      
+        Рекомендуемая схема веток
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_envs_prod_no_direct_changes">
+<span class="md-ellipsis">
+      
+        Запрет прямых изменений в продуктивной среде
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_cycle">
+<span class="md-ellipsis">
+      
+        Цикл настройки приложения
+      
+    </span>
+</a>
+<nav aria-label="Цикл настройки приложения" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_cycle_allowed_changes">
+<span class="md-ellipsis">
+      
+        Допустимые типы изменений
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_cycle_logical_changes">
+<span class="md-ellipsis">
+      
+        Логически завершённые изменения
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_cycle_dev_check">
+<span class="md-ellipsis">
+      
+        Проверка изменений в среде разработки
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_commits">
+<span class="md-ellipsis">
+      
+        Фиксация изменений (коммиты)
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_transfer_to_prod">
+<span class="md-ellipsis">
+      
+        Подготовка и перенос изменений в продуктивную среду
+      
+    </span>
+</a>
+<nav aria-label="Подготовка и перенос изменений в продуктивную среду" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_transfer_prepare_release">
+<span class="md-ellipsis">
+      
+        Подготовка к релизу
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_transfer_merge_release">
+<span class="md-ellipsis">
+      
+        Слияние веток для формирования релиза
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_transfer_update_prod">
+<span class="md-ellipsis">
+      
+        Обновление продуктивной среды
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_checklists">
+<span class="md-ellipsis">
+      
+        Контрольные списки релиза и отката
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_versions">
+<span class="md-ellipsis">
+      
+        Версионирование и откат
+      
+    </span>
+</a>
+<nav aria-label="Версионирование и откат" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_versions_fixing">
+<span class="md-ellipsis">
+      
+        Фиксация версий приложения
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_versions_rollback">
+<span class="md-ellipsis">
+      
+        Откат к предыдущей версии
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_transfer_behavior">
+<span class="md-ellipsis">
+      
+        Особенности и ограничения импорта и экспорта версий приложения
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_common_errors">
+<span class="md-ellipsis">
+      
+        Типовые ошибки и рекомендации по их предотвращению
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_existing_prod">
+<span class="md-ellipsis">
+      
+        Подключение управления версиями к уже работающему продуктиву
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      
+        Связанные статьи
+      
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="version_control_methodology_intro">Введение</h2>
+<p>Здесь представлена рекомендуемая методология разработки, сопровождения и управления версиями приложений в <strong>Comindware Platform</strong>.</p>
+<p>Методология описывает общий процесс управления версиями, ветками, средами и релизами в Git. Данные принципы и подходы также применимы при управлении версиями с помощью файлов <code>CTF</code> и Excel.</p>
+<p>Методология дополняет функциональные инструкции из статей:</p>
+<div class="relatedTopics">
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4808">Управление версиями приложения. Экспорт и импорт</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4806">Экспорт и импорт версий приложения с помощью Git</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4807">Экспорт и импорт версий приложения вручную</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5071">Экспорт и импорт версий приложения с помощью Excel</a></li>
+</ul>
+</div>
+<p>Подробные пошаговые инструкции по экспорту и импорту версий приложений в <strong>Comindware Platform</strong> см. в соответствующих статьях.</p>
+<h2 id="version_control_methodology_envs_branches">Среды и ветки</h2>
+<h3 id="version_control_methodology_envs_recommended_envs">Рекомендуемые среды</h3>
+<p>Для разработки приложения в <strong>Comindware Platform</strong> рекомендуется использовать как минимум две среды:</p>
+<ul>
+<li><strong>среда разработки</strong> — экземпляр <strong>Comindware Platform</strong>, на котором выполняются настройка, отладка и проверка изменений;</li>
+<li><strong>продуктивная среда</strong> — экземпляр <strong>Comindware Platform</strong>, на котором приложение используется конечными пользователями.</li>
+</ul>
+<p>В <strong>продуктивной среде</strong> новые версии и настройки версии приложения следует получать только из репозитория управления версиями посредством импорта подготовленных версий из <strong>среды разработки</strong>.</p>
+<p>При необходимости можно использовать <strong>дополнительные среды</strong> (например, <strong>тестовую</strong> или <strong>предпродуктивную</strong>), однако базовый принцип остаётся неизменным:</p>
+<ul>
+<li>изменения в приложение сначала необходимо вносить и тестировать в отдельной среде;</li>
+<li>только после тестирования в отдельной среде изменения допустимо переносить в продуктивную среду.</li>
+</ul>
+<h3 id="version_control_methodology_envs_branches_scheme">Рекомендуемая схема веток</h3>
+<p>В Git рекомендуется настроить репозиторий с как минимум двумя ветками:</p>
+<ul>
+<li><strong>рабочая ветка разработки</strong> (например, <code>develop</code>) — для текущих изменений и интеграции задач;</li>
+<li><strong>стабильная ветка продуктивных версий</strong> (например, <code>main</code>) — для версий, которые развернуты или запланированы к развертыванию в продуктивной среде.</li>
+</ul>
+<div class="notice notice-tip">
+<p class="admonition-title">Используйте собственные соглашения по именам веток</p>
+<p>В примерах используются названия веток <code>develop</code> и <code>main</code> как наиболее распространённые.</p>
+<p>В вашей команде имена веток могут отличаться — важно лишь, чтобы была рабочая ветка для разработки и стабильная ветка для продуктивных версий и чтобы это было зафиксировано в общих соглашениях по работе с репозиторием.</p>
+</div>
+<p>В базовой схеме экземпляр <strong>Comindware Platform</strong> среды разработки связан с рабочей веткой, а продуктивный экземпляр — со стабильной веткой. При этом:</p>
+<ol class="colored_numbers_list">
+<li>Изменения фиксируются в рабочей ветке.</li>
+<li>Перед выпуском новой версии приложения изменения из рабочей ветки объединяются со стабильной веткой.</li>
+<li>Импорт в продуктивную среду выполняется из стабильной ветки.</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример схемы веток репозитория для среды разработки и продуктивной среды" src="/platform/v5.0/business_apps/version_control/img/version_control_git_flow.png"/></p><figcaption class="caption">Пример схемы веток репозитория для среды разработки и продуктивной среды</figcaption>
+</figure>
+<h3 id="version_control_methodology_envs_prod_no_direct_changes">Запрет прямых изменений в продуктивной среде</h3>
+<p>Придерживайтесь следующих правил:</p>
+<ul>
+<li>Выполняйте настройку приложения только в среде разработки.</li>
+<li>Вносите любые изменения конфигурации в продуктивной среде только в исключительных случаях, после чего воспроизводите их в среде разработки и переносите через механизм управления версиями.</li>
+<li>Не используйте стабильную ветку репозитория (например, <code>main</code> или <code>master</code>) для непосредственной разработки — вносите изменения в неё только через слияние из рабочей ветки (например, <code>develop</code>).</li>
+<li>После слияния рабочей и стабильной веток обновляйте продуктивную среду, выполнив импорт подготовленной версии приложения из стабильной ветки.</li>
+</ul>
+<h2 id="version_control_methodology_cycle">Цикл настройки приложения</h2>
+<h3 id="version_control_methodology_cycle_allowed_changes">Допустимые типы изменений</h3>
+<p>В рамках одного цикла настройки могут изменяться различные параметры конфигурации и элементы приложения, в том числе:</p>
+<ul>
+<li>бизнес-процессы и диаграммы процессов;</li>
+<li>формы и правила для форм;</li>
+<li>таблицы и фильтры;</li>
+<li>атрибуты и вычисления;</li>
+<li>шаблоны записей, включая справочники;</li>
+<li>сценарии и параметры приложения;</li>
+<li>разделы навигации и страницы.</li>
+</ul>
+<h3 id="version_control_methodology_cycle_logical_changes">Логически завершённые изменения</h3>
+<p>Рекомендуется группировать изменения в логически завершённые блоки.</p>
+<p>Для каждого блока:</p>
+<ul>
+<li>формулируйте цель (например, реализация конкретной задачи или пользовательского сценария);</li>
+<li>не смешивайте изменения с другими, не связанными задачами;</li>
+<li>обеспечьте возможность проверки результата отдельно от других работ.</li>
+</ul>
+<p>Такой подход упрощает анализ коммитов, поиск причин ошибок и откаты к предыдущим версиям.</p>
+<h3 id="version_control_methodology_cycle_dev_check">Проверка изменений в среде разработки</h3>
+<p>После внесения целостного блока изменений выполните проверку работоспособности приложения в среде разработки.</p>
+<p>Проверьте:</p>
+<ul>
+<li>корректность выполнения процессов;</li>
+<li>отображение форм и таблиц;</li>
+<li>работа правил для форм;</li>
+<li>работоспособность сценариев;</li>
+<li>работоспособность интеграций;</li>
+<li>воспроизведение ключевых пользовательских сценариев;</li>
+<li>другие функции приложения.</li>
+</ul>
+<p>При выявлении ошибок внесите исправления и повторите цикл проверки.</p>
+<h3 id="version_control_methodology_commits">Фиксация изменений (коммиты)</h3>
+<p>После того как изменения успешно проверены в среде разработки, зафиксируйте их как новую версию приложения:</p>
+<ol class="colored_numbers_list">
+<li>Экспортируйте приложение в репозиторий из среды разработки.</li>
+<li>Создайте коммит с конфигурацией приложения в выбранной ветке.</li>
+</ol>
+<div class="notice notice-tip">
+<p class="admonition-title">Описание версий — сообщения коммитов</p>
+</div>
+<p>Сообщение коммитов представляет собой описание версии приложения.</p>
+<p>Сообщение коммита рекомендуется формулировать так, чтобы по ним можно было понять суть изменений без изучения конфигурации. Например:</p>
+<ul>
+<li>указывать номер задачи из системы управления задачами;</li>
+<li>кратко описывать изменённый функционал или область приложения.</li>
+</ul>
+<p>При ручном экспорте в файл <code>CTF</code> или Excel:</p>
+<ul>
+<li>используйте понятную схему именования файлов и каталогов, например кратко указывайте номера задач, релизов, версий и цели изменений.</li>
+<li>сохраняйте в папке с экспортированным файлом текстовый файл с кратким описанием версии.</li>
+</ul>
+<h2 id="version_control_methodology_transfer_to_prod">Подготовка и перенос изменений в продуктивную среду</h2>
+<h3 id="version_control_methodology_transfer_prepare_release">Подготовка к релизу</h3>
+<p>Перед переносом изменений в продуктивную среду:</p>
+<ol class="colored_numbers_list">
+<li>Убедитесь, что рабочая ветка с изменениями актуальна и включает все необходимые коммиты.</li>
+<li>Согласуйте с командой параллельные работы (если их невозможно остановить), чтобы избежать конфликтов и неожиданных изменений.</li>
+<li>Зафиксируйте состав изменений, входящих в релиз (например, список задач или требований).</li>
+<li>Сопоставьте изменения в конфигурации приложения с выбранными коммитами и убедитесь, что в релиз не попадают изменения, не относящиеся к задачам этого релиза.</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример сравнения двух версий конфигурации при подготовке релиза" src="/platform/v5.0/business_apps/version_control/img/version_control_release_diff.png"/></p><figcaption class="caption">Пример сравнения двух версий конфигурации при подготовке релиза</figcaption>
+</figure>
+<h3 id="version_control_methodology_transfer_merge_release">Слияние веток для формирования релиза</h3>
+<p>Типовой порядок действий:</p>
+<ol class="colored_numbers_list">
+<li>Подготовьте изменения в рабочей ветке (например, <code>develop</code>) и убедитесь, что они успешно проходят проверку в среде разработки.</li>
+<li>Создайте запрос на слияние (pull request) из рабочей ветки в стабильную ветку (например, <code>main</code>).</li>
+<li>Проанализируйте список изменений и при необходимости устраните конфликты.</li>
+<li>Выполните слияние в стабильную ветку.</li>
+<li>Установите тег версии в стабильной ветке (см. раздел «Версионирование и откат»).</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример запроса на слияние (pull request) из рабочей ветки в стабильную ветку перед релизом" src="/platform/v5.0/business_apps/version_control/img/version_control_release_pr.png"/></p><figcaption class="caption">Пример запроса на слияние (pull request) из рабочей ветки в стабильную ветку перед релизом</figcaption>
+</figure>
+<h3 id="version_control_methodology_transfer_update_prod">Обновление продуктивной среды</h3>
+<ol class="colored_numbers_list">
+<li>Убедитесь, что для продуктивной среды настроено и выполняется регулярное резервное копирование, и перед обновлением создана наиболее актуальная резервная копия. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5082">Резервное копирование и восстановление. Рекомендации по организации и оптимизации</a>»</em>.</li>
+<li>Сформируйте новую версию приложения в среде разработки.</li>
+<li>Выполните шаги, указанные в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4808#version_control_app_prepare">Подготовка приложения к экспорту</a>»</em>.</li>
+<li>Перенесите новую версию приложения в продуктивную среду.</li>
+<li>Выполните проверки по заранее подготовленным тест-кейсам или контрольным спискам.</li>
+</ol>
+<h3 id="version_control_methodology_checklists">Контрольные списки релиза и отката</h3>
+<p><strong>Перед релизом (обновлением продуктивной среды):</strong></p>
+<ol class="colored_numbers_list">
+<li>Протестируйте релизную версию приложения в среде разработки.</li>
+<li>Зафиксируйте и согласуйте состав изменений (список задач и требований без случайных правок).</li>
+<li>Оцените риски и подготовьте план отката (определите предыдущую стабильную версию).</li>
+<li>Согласуйте окно работ и при необходимости подготовьте резервную копию продуктивной среды.</li>
+</ol>
+<p><strong>После релиза:</strong></p>
+<ol class="colored_numbers_list">
+<li>Проверьте ключевые пользовательские сценарии в продуктивной среде по чек-листу.</li>
+<li>Просмотрите журналы экспорта/импорта и системные логи на наличие критичных ошибок.</li>
+<li>Обновите документацию решения и журнал версий (номер версии, дата, краткое описание изменений).</li>
+<li>Примите и зафиксируйте решение о статусе релиза (успешен, требуется корректирующий релиз или откат).</li>
+</ol>
+<h2 id="version_control_methodology_versions">Версионирование и откат</h2>
+<h3 id="version_control_methodology_versions_fixing">Фиксация версий приложения</h3>
+<p>Каждое обновление продуктивной среды рекомендуется рассматривать как отдельную версию приложения.</p>
+<p>При использовании Git это обычно реализуется с помощью тегов в стабильной ветке. Например:</p>
+<ul>
+<li>тег содержит номер версии приложения и при необходимости краткое описание;</li>
+<li>тег ставится на коммит, соответствующий версии, развернутой в продуктивной среде.</li>
+</ul>
+<p>Кроме того, номер версии следует фиксировать в сопровождающей документации версии и, при необходимости, в самом приложении.</p>
+<h3 id="version_control_methodology_versions_rollback">Откат к предыдущей версии</h3>
+<p>При использовании Git откат версии конфигурации в репозитории выполняется на стороне системы контроля версий, а в <strong>Comindware Platform</strong> импортируется соответствующая версия приложения. При использовании файла <code>CTF</code> или Excel, выполняется импорт требуемой версии.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Не выполняйте откат в обход системы контроля версий</p>
+<p>Не выполняйте откат путём ручного редактирования файлов конфигурации (например, экспортированных <code>JSON</code> или <code>CTF</code>) во внешних редакторах — вносите изменения только через платформу и систему контроля версий, чтобы не нарушить связи между сущностями.</p>
+</div>
+<p>При необходимости возврата к предыдущей версии:</p>
+<ol class="colored_numbers_list">
+<li>Определите целевую версию (тег, номер или коммит, соответствующий стабильному состоянию приложения).</li>
+<li>Оцените влияние отката на данные, связанные приложения и интеграции.</li>
+<li>Подготовьте конфигурацию этой версии.</li>
+<li>Обеспечьте возможность вернуться даже от неудачного отката (подготовьте резервную копию текущего состояния).</li>
+<li>Согласуйте план отката и коммуникации с пользователями.</li>
+<li>Импортируйте выбранную версию в продуктивную среду.</li>
+<li>Проверьте работоспособность ключевых пользовательских сценариев на откатанной версии.</li>
+<li>Зафиксируйте причины отката и план последующих действий (исправления, новый релиз).</li>
+<li>Обновите журнал версий и документацию (к какой версии вернулись, когда и почему).</li>
+<li>Снимите или пересмотрите временные ограничения и временные меры, введённые на время инцидента.</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример тега версии приложения в стабильной ветке репозитория" src="/platform/v5.0/business_apps/version_control/img/version_control_release_tag.png"/></p><figcaption class="caption">Пример тега версии приложения в стабильной ветке репозитория</figcaption>
+</figure>
+<h2 id="version_control_methodology_transfer_behavior">Особенности и ограничения импорта и экспорта версий приложения</h2>
+<p>Общие особенности поведения при экспорте и импорте, а также перечень сущностей, которые переносятся или не переносятся, подробно описаны в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4808">Управление версиями приложения. Экспорт и импорт</a>»</em>.</p>
+<p>При планировании релизов и анализе последствий импорта версии приложения учитывайте, что:</p>
+<ul>
+<li>шаблоны, отсутствующие в импортируемой версии, но присутствующие в текущем приложении, могут быть признаны неактуальными и удалены вместе с записями;</li>
+<li>некоторые сущности не экспортируются и должны настраиваться отдельно (например, аккаунты, группы, системные роли, подключения, отдельные пути передачи данных и элементы навигации);</li>
+<li>при импорте переносятся опубликованные диаграммы процессов, при этом старые экземпляры процессов продолжают выполняться по прежним версиям диаграмм;</li>
+<li>обсуждения и часть истории могут не переноситься.</li>
+</ul>
+<p>Перед каждым импортом версии приложения рекомендуется предварительно оценить влияние операции на связанные приложения и внешние интеграции.</p>
+<p>Подробную информацию о влиянии экспорта и импорта на идентификаторы и системные имена см. в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4713">Идентификаторы и системные имена</a>»</em>.</p>
+<h2 id="version_control_methodology_common_errors">Типовые ошибки и рекомендации по их предотвращению</h2>
+<p>В процессе управления версиями приложений часто встречаются следующие ситуации:</p>
+<ul>
+<li>попытка экспорта или импорта при некорректных настройках подключения к репозиторию или ограничениях доступа;</li>
+<li>отсутствие фактических изменений в конфигурации приложения при попытке выполнить экспорт;</li>
+<li>использование идентификаторов объектов в выражениях вместо системных имён; идентификаторы могут стать недействительными после импорта в другой экземпляр <strong>Comindware Platform</strong>;</li>
+<li>экспорт приложений со связанными шаблонами из других приложений без предварительной подготовки;</li>
+<li>смешивание нескольких несвязанных задач в одном релизе или коммите, что усложняет анализ и откат;</li>
+<li>выполнение изменений непосредственно в стабильной ветке репозитория (например, <code>main</code>) вместо слияния из рабочей ветки.</li>
+</ul>
+<p>Чтобы снизить риски:</p>
+<ul>
+<li>заранее готовьте приложения к экспорту согласно разделу «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4808#version_control_app_prepare">Подготовка приложения к экспорту</a>»;</li>
+<li>используйте системные имена вместо идентификаторов в выражениях, когда это возможно;</li>
+<li>разбивайте крупные изменения на несколько версий с промежуточными проверками;</li>
+<li>избегайте выполнения настройки непосредственно на продуктивной среде;</li>
+<li>фиксируйте информацию о составе изменений каждой версии.</li>
+</ul>
+<h2 id="version_control_methodology_existing_prod">Подключение управления версиями к уже работающему продуктиву</h2>
+<p>Если приложение уже используется в продуктивной среде, но управление версиями ещё не было настроено, рекомендуется следующий подход:</p>
+<ol class="colored_numbers_list">
+<li>Создайте <strong>среду разработки</strong>, максимально соответствующую текущему состоянию <strong>продуктивной среды</strong>:</li>
+</ol>
+<ul>
+<li>создайте резервную копию продуктивного экземпляра <strong>Comindware Platform</strong>;</li>
+<li>разверните копию на отдельном сервере или в отдельном экземпляре, руководствуясь <em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5082">рекомендациями по резервному копированию и восстановлению</a></em>.</li>
+</ul>
+<ol class="colored_numbers_list" start="2">
+<li>Настройте подключение к репозиторию Git, если планируется использование Git. См. статью <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4680">Управление версиями через Git. Настройка подключения</a>»</em>.</li>
+<li>Попробуйте выполнить экспорт приложения.</li>
+<li>Устраните в среде разработки ошибки и несоответствия, препятствующие экспорту приложения.</li>
+<li>Включите управление версиями для приложения и выполните первый экспорт в репозиторий или в файл версии.</li>
+<li>Начните использовать описанную в этой статье методологию для дальнейших изменений и релизов.</li>
+</ol>
+<p>Такой подход позволяет максимально безопасно перевести уже используемое приложение на управление версиями без прямых экспериментов в продуктивной среде.</p>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4808">Управление версиями приложения. Экспорт и импорт</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4806">Экспорт и импорт версий приложения с помощью Git</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4807">Экспорт и импорт версий приложения вручную</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5071">Экспорт и импорт версий приложения с помощью Excel</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4680">Управление версиями через Git. Настройка подключения</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4713">Идентификаторы и системные имена</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5082">Резервное копирование и восстановление. Рекомендации по организации и оптимизации</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>
