@@ -167,7 +167,7 @@ Generate a complete, standalone N3 (Notation 3/Turtle/RDF) tutorial for Comindwa
 
 **Content:**
 
-- Small OR patterns; avoid long chains (prefer sets + `w3list:in`)
+- Small OR patterns; avoid long chains
   
   - Ultra-simple OR examples (2–3 branches):
     - Attribute A OR B is present
@@ -506,7 +506,7 @@ hide: tags
 #### **Pattern Cards (reusable snippets to include where relevant)**
 
 - Multi-step navigation: subject → link → target (name intermediates clearly)
-- Small OR: two or three branches only; otherwise use sets + `assert:union` + `w3list:in`
+- Small OR: two or three branches only; otherwise use sets + `assert:union`
 - Collection to list to aggregate: `from-select` → list op (sum/sort/last)
 
 #### **Definitions Section**
