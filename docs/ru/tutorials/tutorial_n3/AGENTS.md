@@ -420,7 +420,7 @@ Separate each heading with double new line \n\n
 
 - **Tutorial cross-references**: `[N3 tutorial lesson 1][tutorial_n3_lesson_1]` (using h1 anchors)
 - **Internal tutorial links**: `[next lesson](#tutorial_n3_lesson_2)`
-- **External documentation**: `[N3 guide][n3_guide]` (using h1 anchors)
+- **External documentation**: `[N3 guide][n3_guide_reference]` (using h1 anchors)
 - **Platform documentation**: `[ElasticData][elasticdata_description]` (using h1 anchors)
 
 #### **Includes & Snippets**
