@@ -21,10 +21,13 @@ def on_post_page (output, page, config, **kwargs):
         h1.decompose()
 
     # Cleanup empty Ps        
+    empty_p_deleted = 0
     for i in p.find_all('p'):
         if (not i.contents):
-            print ('deleting empty P from ' + page.title)
+            empty_p_deleted += 1
             i.decompose()
+    if empty_p_deleted:
+        print('deleted empty <p> tags from ' + page.title + ': ' + str(empty_p_deleted))
             
     # Cleanup comments    
     for i in p.find_all(string=lambda text: isinstance(text, Comment)):
