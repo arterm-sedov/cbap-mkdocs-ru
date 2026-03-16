@@ -84,7 +84,7 @@ hide: tags
 2. Откройте файл конфигурации Kerberos для редактирования:
 
     ``` sh
-    vim /etc/krb5.conf
+    nano /etc/krb5.conf
     ```
 
 3. Отредактируйте файл `krb5.conf` согласно следующему примеру:
@@ -156,7 +156,7 @@ hide: tags
 2. Откройте файла конфигурации Kerberos для редактирования:
 
     ``` sh
-    vim /etc/krb5.conf
+    nano /etc/krb5.conf
     ```
 
 3. Отредактируйте файл `krb5.conf` согласно следующему примеру:
@@ -188,7 +188,7 @@ hide: tags
 4. Откройте файл конфигурации `kcm_default_ccache` для редактирования:
 
     ``` sh
-    vim /etc/krb5.conf.d/kcm_default_ccache
+    nano /etc/krb5.conf.d/kcm_default_ccache
     ```
 
 5. Отредактируйте файл `kcm_default_ccache` согласно следующему примеру:
