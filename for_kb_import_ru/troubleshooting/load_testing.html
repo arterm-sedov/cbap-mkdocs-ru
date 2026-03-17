@@ -228,6 +228,8 @@
 <p>В разделе <strong>Test Plan</strong> укажите свои параметры:</p>
 <ul>
 <li><code>SRV_HOST</code> — адрес экземпляра <strong>Comindware Platform</strong>;</li>
+<li><code>SRV_PORT</code> — порт экземпляра <strong>Comindware Platform</strong>;</li>
+<li><code>SRV_PROTOCOL</code> — протокол стенда (<code>http</code> или <code>https</code>);</li>
 <li><code>SOTRUDNIK_LOGIN</code> — имя пользователя <strong>Comindware Platform</strong>;</li>
 <li><code>SOTRUDNIK_PASSWORD</code> — пароль;</li>
 <li><code>AccountsCount</code> и <code>ReadAcc</code> — количество пользовательских сеансов, которое требуется запустить;</li>
@@ -245,7 +247,7 @@
 </ul>
 <p>По образцу этих примеров настройте собственные сценарии:</p>
 <ol class="colored_numbers_list">
-<li>В разделе <strong>Test Plan</strong> создайте копию группы тестов (<strong>Thread Group</strong>): нажмите группу правой кнопкой мыши и выберите пункт <strong>Duplicate</strong>.</li>
+<li>В разделе <strong>Test Plan</strong> создайте копию группы тестов (<strong>Thread Group</strong>): нажмите группу правой кнопкой мыши и выберите пункт <strong>Duplicate</strong>. Отключите одну из копий группы тестов (<strong>Thread Group</strong>): нажмите группу правой кнопкой мыши и выберите пункт <strong>Disable</strong>.</li>
 <li>
 <p>Создайте контроллер транзакций:</p>
 <ul>
@@ -266,8 +268,9 @@
 <p>Настройте HTTP-запрос по аналогии с примерами из файла <code>jmeter-example-settings.jmx</code>:</p>
 <ul>
 <li>заполните поля в разделе <strong>Web Server</strong>:<ul>
-<li><strong>Protocol</strong> — <strong>http</strong> или <code>https</code>;</li>
-<li><strong>Server Name or IP</strong> и <strong>Port Number</strong> — адрес и порт <strong>Comindware Platform</strong>;</li>
+<li><strong>Protocol</strong> — <code>${SRV_PROTOCOL}</code>;</li>
+<li><strong>Server Name or IP</strong> — <code>${SRV_HOST}</code>;</li>
+<li><strong>Port Number</strong> — <code>${SRV_PORT}</code>;</li>
 </ul>
 </li>
 <li><a class="mkdocs_imported_link" href="#load_testing_jmeter_get_request">получите путь и тело тестового запроса</a>;</li>
