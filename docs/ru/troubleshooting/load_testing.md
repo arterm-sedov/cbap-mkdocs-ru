@@ -93,6 +93,8 @@ hide: tags
 5. В разделе **Test Plan** укажите свои параметры:
 
     - `SRV_HOST` — адрес экземпляра **{{ productName }}**;
+    - `SRV_PORT` — порт экземпляра **{{ productName }}**;
+    - `SRV_PROTOCOL` — протокол стенда (`http` или `https`);
     - `SOTRUDNIK_LOGIN` — имя пользователя **{{ productName }}**;
     - `SOTRUDNIK_PASSWORD` — пароль;
     - `AccountsCount` и `ReadAcc` — количество пользовательских сеансов, которое требуется запустить;
@@ -109,7 +111,7 @@ hide: tags
 
 По образцу этих примеров настройте собственные сценарии:
 
-1. В разделе **Test Plan** создайте копию группы тестов (**Thread Group**): нажмите группу правой кнопкой мыши и выберите пункт **Duplicate**.
+1. В разделе **Test Plan** создайте копию группы тестов (**Thread Group**): нажмите группу правой кнопкой мыши и выберите пункт **Duplicate**. Отключите одну из копий группы тестов (**Thread Group**): нажмите группу правой кнопкой мыши и выберите пункт **Disable**.
 2. Создайте контроллер транзакций:
 
     - нажмите группу тестов правой кнопкой мыши;
@@ -127,8 +129,9 @@ hide: tags
 4. Настройте HTTP-запрос по аналогии с примерами из файла `jmeter-example-settings.jmx`:
 
     - заполните поля в разделе **Web Server**:
-        - **Protocol** — **http** или `https`;
-        - **Server Name or IP** и **Port Number** — адрес и порт **{{ productName }}**;
+        - **Protocol** — `${SRV_PROTOCOL}`;
+        - **Server Name or IP** — `${SRV_HOST}`;
+        - **Port Number** — `${SRV_PORT}`;
     - [получите путь и тело тестового запроса](#load_testing_jmeter_get_request);
     - Заполните поля в разделе **HTTP Request**:
         - **`POST`** — метод запроса;
