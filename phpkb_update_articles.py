@@ -19,6 +19,17 @@ TOTAL_PAGES_UPDATED = 0
 CONNECTION = None
 KB_CONTENT_FOLDER = 'for_kb_import_ru'
 
+# Optional on .md-body: only unlisted articles emit kb-unlisted="1"; missing attribute means listed (0).
+_KB_UNLISTED_PATTERN = re.compile(r'kb-unlisted="([01])"')
+
+
+def parse_kb_unlisted(html_content: str) -> int:
+    """1 if export has kb-unlisted=\"1\", else 0 (attribute omitted for normal listed articles)."""
+    match = _KB_UNLISTED_PATTERN.search(html_content)
+    if not match:
+        return 0
+    return int(match.group(1))
+
 
 def updateCategoryChildren(parent):
     c = CONNECTION.cursor(buffered=True)
@@ -79,7 +90,8 @@ def updateArticle(article_id):
     
     c = CONNECTION.cursor() #(buffered=True)
     c.execute(f"""
-            SELECT article_content, article_title, article_keywords from phpkb_articles WHERE article_id={article_id};
+            SELECT article_content, article_title, article_keywords, unlisted
+            FROM phpkb_articles WHERE article_id={article_id};
             """)
     
     result = c.fetchone()
@@ -90,13 +102,14 @@ def updateArticle(article_id):
     
     article_title = result[1]
     article_keywords = result[2]
+    article_unlisted_db = 0 if result[3] is None else int(result[3])
     content_result = getArticleContentById(article_id)
     
     if content_result is None:
         print(f'Content for article {article_id} not found in files')
         return False
         
-    article_content, mkdocs_title, mkdocs_tags = content_result
+    article_content, mkdocs_title, mkdocs_tags, mkdocs_unlisted = content_result
     
     # Escape the HTML and backslashes for MySQL
     article_content = html.escape(article_content).replace('\\','\\\\')
@@ -105,7 +118,12 @@ def updateArticle(article_id):
     
     if contentFound:
         try:
-            update = input(f"KB title:     {article_title}\nKB tags:      {article_keywords}\nUpdate article {article_id} content, title and tags? Y/N\n").lower() == 'y'
+            update = input(
+                f"KB title:     {article_title}\n"
+                f"KB tags:      {article_keywords}\n"
+                f"KB unlisted:  {article_unlisted_db}\n"
+                f"Update article {article_id} content, title, tags and unlisted? Y/N\n"
+            ).lower() == 'y'
             if update:
                 article_last_updation = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 c.execute("""
@@ -116,9 +134,17 @@ def updateArticle(article_id):
                         article_last_updation=%s,
                         article_status='approved',
                         article_show='yes',
-                        article_keywords=%s
+                        article_keywords=%s,
+                        unlisted=%s
                         WHERE article_id=%s;
-                        """, (mkdocs_title, article_content, article_last_updation, mkdocs_tags, article_id))
+                        """, (
+                    mkdocs_title,
+                    article_content,
+                    article_last_updation,
+                    mkdocs_tags,
+                    mkdocs_unlisted,
+                    article_id,
+                ))
                 CONNECTION.commit()
                 print(f"Updated article {article_id} updated")
                 return True
@@ -267,9 +293,11 @@ def getArticleContentById(article_id):
                                 removed_tag = tag_list.pop()
                                 print(f'Popping tag: {removed_tag}')
                                 tags = ','.join(tag_list)
+                        unlisted_flag = parse_kb_unlisted(content)
                         print(f'MkDocs title: {title}')
                         print(f'MkDocs tags:  {tags}')
-                        return content, title, tags
+                        print(f'MkDocs unlisted: {unlisted_flag}')
+                        return content, title, tags, unlisted_flag
                     else: content = None
 
     return None
