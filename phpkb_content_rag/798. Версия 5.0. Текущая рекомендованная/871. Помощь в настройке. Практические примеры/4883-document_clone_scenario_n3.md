@@ -33,31 +33,26 @@ updated: '2025-04-01 13:39:13'
 
   ```
   ("TemplateSystemName" "DocumentAttributeSystemName") object:findProperty ?DocumentAttribute.
-
   ```
 - из объекта с атрибутом получить значение атрибута в текущей записи:
 
   ```
   ?item documentAttribute ?documentAttributeValue.
-
   ```
 - из значения атрибута получить текущую версию документа:
 
   ```
   ?documentAttributeValue document:revision ?revision.
-
   ```
 - из версии получить содержимое файла в формате `base64`:
 
   ```
   ?revision document:content ?content.
-
   ```
 - из версии получить имя файла:
 
   ```
   ?revision document:title ?title.
-
   ```
 
 Добавление файлов в атрибут типа «Документ» с помощью N3
@@ -68,19 +63,16 @@ updated: '2025-04-01 13:39:13'
 
   ```
   ?documentContentSource document:content ?content.
-
   ```
 - сформировать имя файла:
 
   ```
   ?documentTitleSource document:title ?title.
-
   ```
 - прикрепить полученный файл к атрибуту типа «**Документ**», т. е. поместить на него ссылку в версию:
 
   ```
   (?content ?title) document:attach ?documentAttributeValue.
-
   ```
 
 ## Прикладная задача
@@ -167,7 +159,6 @@ updated: '2025-04-01 13:39:13'
        # прикреплён хотя бы один файл
        true -> ?value.
    }
-
    ```
 
    Бизнес-логика
@@ -204,7 +195,6 @@ updated: '2025-04-01 13:39:13'
        # Возвращаем значение атрибута «Наименование пакета документов» из исходной записи
        ?docPackRecordId ?PackNameAttribute ?value.
    }
-
    ```
 
    Бизнес-логика
@@ -235,7 +225,6 @@ updated: '2025-04-01 13:39:13'
         # Возвращаем значение атрибута «Файлы документов» из исходной записи
         ?docPackRecordId ?AttachedFilesAttribute ?value.
     }
-
     ```
 
     Бизнес-логика
@@ -271,7 +260,6 @@ updated: '2025-04-01 13:39:13'
         #и возвращаем ID нового документа с прикреплённым файлом
         (?content ?filename) document:attach ?value.
     }
-
     ```
 
     Бизнес-логика

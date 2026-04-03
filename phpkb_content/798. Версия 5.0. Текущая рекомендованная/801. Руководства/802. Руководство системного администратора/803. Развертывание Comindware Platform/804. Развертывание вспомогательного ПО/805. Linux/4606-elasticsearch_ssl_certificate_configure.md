@@ -33,26 +33,22 @@ updated: '2025-12-03 10:40:08'
 
      ```
      dpkg --list | grep openssl
-
      ```
    - Для дистрибутивов на базе RHEL:
 
      ```
      dnf list installed | grep openssl
-
      ```
 2. При необходимости перед установкой OpenSSL обновите ПО:
 
    ```
    sudo apt update
    sudo apt upgrade
-
    ```
 3. Установите OpenSSL (для дистрибутивов на базе Debian; для других дистрибутивов используйте соответствующий менеджер пакетов):
 
    ```
    sudo apt install openssl
-
    ```
 
 ### Формирование сертификата СА
@@ -61,25 +57,21 @@ updated: '2025-12-03 10:40:08'
 
    ```
    mkdir certsGen
-
    ```
 2. Перейдите в директорию `certsGen`:
 
    ```
    cd certsGen/
-
    ```
 3. Создайте закрытый ключ `ca-key.pem` для центра сертификации (CA):
 
    ```
    openssl genpkey -out ca-key.pem -algorithm RSA -pkeyopt rsa_keygen_bits:2048
-
    ```
 4. Создайте сертификат СА `ca.pem`:
 
    ```
    openssl req -new -x509 -sha256 -key ca-key.pem -out ca.pem -days 3650 -subj "/CN=ElasticSearchCA"
-
    ```
 5. В результате вы получите:
 
@@ -94,7 +86,6 @@ updated: '2025-12-03 10:40:08'
 
    ```
    openssl genpkey -out elastic-key.pem -algorithm RSA -pkeyopt rsa_keygen_bits:2048
-
    ```
 2. Создайте файл описания узла `openssl.cnf` со следующим содержимым (подставьте фактический IP‑адрес узла Elasticsearch вместо `<XXX.XXX.XXX.XXX>`):
 
@@ -112,19 +103,16 @@ updated: '2025-12-03 10:40:08'
 
    [ alt_names ]
    IP.1 = <XXX.XXX.XXX.XXX>
-
    ```
 3. Используя файл описания `openssl.cnf` и ключ узла `elastic-key.pem`, создайте запрос на сертификат (CSR) `elastic.csr`:
 
    ```
    openssl req -new -key elastic-key.pem -out elastic.csr -config openssl.cnf
-
    ```
 4. Используя CSR, сертификат CA и закрытый ключ CA, создайте подписанный CA сертификат узла Elasticsearch `elastic-cert.pem`:
 
    ```
    openssl x509 -req -in elastic.csr -CA ca.pem -CAkey ca-key.pem -CAcreateserial -out elastic-cert.pem -days 365 -sha256 -extfile openssl.cnf -extensions req_ext
-
    ```
 5. Аналогично [шагам 1–4](#P1_3_1) создайте ключи и сертификаты для остальных узлов Elasticsearch, указывая их IP‑адреса в `openssl.cnf`.
 
@@ -136,7 +124,6 @@ updated: '2025-12-03 10:40:08'
    sudo scp ca.pem <username>@<XXX.XXX.XXX.XXX>:/home/<username>/
    sudo scp elastic-cert.pem <username>@<XXX.XXX.XXX.XXX>:/home/<username>/
    sudo scp elastic-key.pem <username>@<XXX.XXX.XXX.XXX>:/home/<username>/
-
    ```
 2. На каждом из узлов перенесите сгенерированные файлы в директорию, из которой Elasticsearch будет считывать сертификаты (например, `/etc/elasticsearch/`):
 
@@ -144,14 +131,12 @@ updated: '2025-12-03 10:40:08'
    sudo mv /home/<username>/ca.pem /etc/elasticsearch/
    sudo mv /home/<username>/elastic-cert.pem /etc/elasticsearch/
    sudo mv /home/<username>/elastic-key.pem /etc/elasticsearch/
-
    ```
 3. Задайте владельца и права доступа к директории:
 
    ```
    sudo chown elasticsearch:elasticsearch --recursive /etc/elasticsearch/
    sudo chmod 764 --recursive /etc/elasticsearch/
-
    ```
 
 ## Настройка кластера Elasticsearch
@@ -163,13 +148,11 @@ updated: '2025-12-03 10:40:08'
    ```
    sudo cp /etc/elasticsearch/ca.pem /usr/local/share/ca-certificates/ca.crt
    sudo update-ca-certificates
-
    ```
 2. Добавьте сертификат CA в хранилище сертификатов Mono Framework:
 
    ```
    sudo mono /usr/lib/mono/4.5/cert-sync.exe /etc/elasticsearch/ca.pem
-
    ```
 
 ### Настройка узла кластера для работы с SSL-сертификатами
@@ -178,7 +161,6 @@ updated: '2025-12-03 10:40:08'
 
    ```
    sudo nano /etc/elasticsearch/elasticsearch.yml
-
    ```
 2. Добавьте настройки SSL для узла Elasticsearch, указав фактические пути к созданным файлам `elastic-key.pem`, `elastic-cert.pem` и `ca.pem`:
 
@@ -195,7 +177,6 @@ updated: '2025-12-03 10:40:08'
    xpack.security.http.ssl.key: /etc/elasticsearch/elastic-key.pem
    xpack.security.http.ssl.certificate: /etc/elasticsearch/elastic-cert.pem
    xpack.security.http.ssl.certificate_authorities: [ "/etc/elasticsearch/ca.pem" ]
-
    ```
 3. Ниже приведён пример файла `elasticsearch.yml` для конфигурации с одним узлом. При необходимости адаптируйте параметры `cluster.name`, `node.name`, `http.host` и другие настройки в соответствии с вашей конфигурацией:
 
@@ -252,7 +233,6 @@ updated: '2025-12-03 10:40:08'
    xpack.security.http.ssl.key: /etc/elasticsearch/elastic-key.pem
    xpack.security.http.ssl.certificate: /etc/elasticsearch/elastic-cert.pem
    xpack.security.http.ssl.certificate_authorities: [ "/etc/elasticsearch/ca.pem" ]
-
    ```
 4. Сохраните изменения и закройте текстовый редактор Nano, нажав клавиши: ++ctrl+O++, `Ввод`, `Ctrl`+`X`.
 5. Повторите шаги 1–4 для каждого из узлов Elasticsearch.
@@ -263,14 +243,12 @@ updated: '2025-12-03 10:40:08'
 
    ```
    sudo nano /etc/elasticsearch/jvm.options
-
    ```
 2. Убедитесь, что параметры начального и максимального размера кучи заданы и не закомментированы (значения подберите в соответствии с объёмом доступной памяти сервера):
 
    ```
    -Xms4g
    -Xmx4g
-
    ```
 3. Сохраните изменения и закройте файл.
 
@@ -281,7 +259,6 @@ updated: '2025-12-03 10:40:08'
    ```
    sudo mono /usr/lib/mono/4.5/cert-sync.exe /etc/elasticsearch/ca.pem
    sudo mono /usr/lib/mono/4.5/cert-sync.exe /etc/elasticsearch/elastic-cert.pem
-
    ```
 
 ## Запуск Elasticsearch
@@ -292,19 +269,16 @@ updated: '2025-12-03 10:40:08'
 
    ```
    sudo systemctl daemon-reload
-
    ```
 2. Перезапустите процесс `elasticsearch.service`:
 
    ```
    sudo systemctl restart elasticsearch.service
-
    ```
 3. Убедитесь, что процесс `elasticsearch.service` запустился:
 
    ```
    sudo systemctl status elasticsearch.service
-
    ```
 
    Пример результата проверки статуса процесса elasticsearch.service```
@@ -324,7 +298,6 @@ updated: '2025-12-03 10:40:08'
                └─3676 /usr/share/elasticsearch/modules/x-pack-ml/platform/linux-x86_64/bin/controller
    Dec 01 10:11:12 penguin-02 systemd[1]: Starting Elasticsearch...
    Dec 01 10:12:27 penguin-02 systemd[1]: Started Elasticsearch.
-
    ```
 
    Примечание
@@ -333,7 +306,6 @@ updated: '2025-12-03 10:40:08'
 
    ```
    sudo less /var/elasticsearch/logs/yourClusterName.log
-
    ```
 4. Повторите шаги 1–3 для каждого из узлов Elasticsearch.
 
@@ -343,7 +315,6 @@ updated: '2025-12-03 10:40:08'
 
    ```
    sudo /usr/share/elasticsearch/bin/elasticsearch-reset-password -i -u elastic
-
    ```
 2. Следуйте интерактивным подсказкам утилиты и сохраните новый пароль.
 
@@ -370,7 +341,6 @@ updated: '2025-12-03 10:40:08'
 
    ```
    https://192.168.XXX.XX1:9200/_cluster/health?pretty
-
    ```
 2. Браузер отобразит форму для ввода учётных данных.
 3. Введите имя встроенного суперпользователя `elastic` и один из автоматически сгенерированных паролей, которые были созданы при развёртывании Elasticsearch.
@@ -393,13 +363,11 @@ updated: '2025-12-03 10:40:08'
 
      ```
      sudo chown -R elasticsearch:elasticsearch /var/lib/comindware/
-
      ```
    - Назначьте права доступа:
 
      ```
      sudo chmod -R 766 /var/lib/comindware/
-
      ```
 2. В случае возникновения проблем с библиотекой `jna-5.10.0.jar` или других ошибок в работе Elasticsearch изучите журналы:
 
@@ -408,7 +376,6 @@ updated: '2025-12-03 10:40:08'
    tail -f /var/log/comindware/instanceName/Logs/audit_0000-00-00.log
    nano /var/log/comindware/instanceName/Logs/audit_0000-00-00.log
    cat /var/elasticsearch/logs/elasticsearch.example.cbap.log
-
    ```
 
 --8<-- "related_topics_heading.md"

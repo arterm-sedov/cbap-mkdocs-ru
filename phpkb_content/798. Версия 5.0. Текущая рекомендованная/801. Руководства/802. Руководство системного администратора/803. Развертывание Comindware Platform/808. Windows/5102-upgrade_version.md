@@ -58,7 +58,6 @@ updated: '2025-05-23 13:00:29'
 
 ```
 .\\version_install.ps1 -h
-
 ```
 
 Обязательные ключи для скриптов
@@ -88,13 +87,11 @@ updated: '2025-05-23 13:00:29'
 
    ```
    Get-ExecutionPolicy
-
    ```
 3. Если политика отличается от `Unrestricted`, установите неограниченную политику выполнения *PowerShell*:
 
    ```
    Set-ExecutionPolicy Unrestricted
-
    ```
 4. В запросе на изменение политики выберите вариант «**Да для всех**», введя букву `A`.
 
@@ -116,26 +113,22 @@ updated: '2025-05-23 13:00:29'
 
      ```
      New-Item -Path "<config_backup_path>" -ItemType "Directory"
-
      ```
    - Скопируйте все файлы `.yml` и `.config` в директорию `<config_backup_path>`:
 
      ```
      Copy-Item -Path "C:\\ProgramData\\сomindware\\Instances\\<instanceName>\\сonfig\\*" -Destination "<config_backup_path>" -Recurse -Include "*.yml", "*.config"
-
      ```
    - Сохраните резервную копию файла конфигурации экземпляра ПО `<instanceName>.yml`:
 
      ```
      Copy-Item -Path "C:\\ProgramData\\comindware\\configs\\instance\\<instanceName>.yml" -Destination "<config_backup_path>"
-
      ```
    - Создайте резервную копию конфигурации IIS:
 
      ```
      cd c:\\Windows\\system32\\inetsrv
      appcmd add backup "<iis-config-backup>"
-
      ```
 
      Удостоверьтесь, что после выполнения этой команды в папке `c:\\Windows\\system32\\inetsrv\\backup` появилась папка `<iis-config-backup>`.
@@ -151,7 +144,6 @@ updated: '2025-05-23 13:00:29'
 
      ```
      cd "<distPath>\\CMW_Windows<versionNumber>\\scripts"
-
      ```
    - Остановите экземпляр ПО, службу `adapterhost` и службу `apigateway` :
 
@@ -159,7 +151,6 @@ updated: '2025-05-23 13:00:29'
      .\\instance_stop.ps1 -name <instanceName>
      .\\adapterhost_stop.ps1 <instanceName>
      .\\apigateway_stop.ps1 <instanceName>
-
      ```
 5. Проверьте статус экземпляра ПО в IIS:
 
@@ -172,13 +163,11 @@ updated: '2025-05-23 13:00:29'
 
    ```
    Remove-Item <distPath>\\CMW_Windows<versionNumber> -Recurse
-
    ```
 7. Сохраните резервную копию директории с базой данных экземпляра ПО:
 
    ```
    Copy-Item -Path "C:\\ProgramData\\сomindware\\Instances\\<instanceName>\\Database" -Destination "<config_backup_path>" -Recurse
-
    ```
 
 ## Обновление версии ПО для экземпляра
@@ -200,7 +189,6 @@ updated: '2025-05-23 13:00:29'
 
    ```
    cd "<prerequisitesDistPath>\\CMW_Windows<versionNumber>\\scripts"
-
    ```
 
    Здесь `<prerequisitesDistPath>` — путь к распакованному дистрибутиву вспомогательного ПО (например, `<distPath>\\X.X-release-ru-<versionNumber>.prerequisites.windows`).
@@ -208,13 +196,11 @@ updated: '2025-05-23 13:00:29'
 
    ```
    .\\files_unblock.ps1
-
    ```
 6. Проверьте, что установлены все компоненты вспомогательного ПО:
 
    ```
    .\\prerequisites_list.ps1
-
    ```
 
    Внимание!
@@ -225,7 +211,6 @@ updated: '2025-05-23 13:00:29'
 
    ```
    .\\prerequisites_install.ps1
-
    ```
 7. Скачайте и распакуйте архив с дистрибутивом новой версией ПО.
 8. В запросе на изменение политики выберите вариант «**Да для всех**», введя букву `A`.
@@ -233,7 +218,6 @@ updated: '2025-05-23 13:00:29'
 
    ```
    cd "<distPath>\\CMW_Windows<versionNumber>\\scripts"
-
    ```
 
    Здесь: `<distPath>` — путь к распакованному дистрибутиву ПО **{{ productName }}** (например, `<distPath>\\X.X-release-ru-<versionNumber>.windows`).
@@ -241,19 +225,16 @@ updated: '2025-05-23 13:00:29'
 
     ```
     .\\files_unblock.ps1
-
     ```
 11. Установите новую версию ПО:
 
     ```
     .\\version_install.ps1
-
     ```
 12. Удостоверьтесь, что ПО установлено, вызвав список установленных версий ПО:
 
     ```
     .\\version_list.ps1
-
     ```
 
     Пример списка установленных версий ПО:
@@ -273,13 +254,11 @@ updated: '2025-05-23 13:00:29'
     Complete script version_list.ps1.
     ####################################################################
     Status: Completed
-
     ```
 13. Удалите экземпляр ПО старой версии:
 
     ```
     .\\instance_delete.ps1 -name <instanceName> -clear
-
     ```
 
     Ключи:
@@ -294,7 +273,6 @@ updated: '2025-05-23 13:00:29'
 
     ```
     .\\instance_create.ps1 -name <instanceName> -port <portNumber> -version <versionNumber>
-
     ```
 
     Ключи:
@@ -308,13 +286,11 @@ updated: '2025-05-23 13:00:29'
     ```
     cd c:\\Windows\\system32\\inetsrv\\
     appcmd restore backup "<iis-config-backup>"
-
     ```
 17. Перезапустите службу IIS для применения изменений:
 
     ```
     Restart-WebAppPool -Name <instanceAppPool>
-
     ```
 
     Здесь `<instanceAppPool>` — имя пула приложений для экземпляра ПО.
@@ -328,7 +304,6 @@ updated: '2025-05-23 13:00:29'
 
     ```
     rundll32 sysdm.cpl,EditEnvironmentVariables
-
     ```
 20. Перезапустите службы, настройки которых были изменены, например:
 
@@ -337,20 +312,17 @@ updated: '2025-05-23 13:00:29'
     .\\instance_stop.ps1 -name <instanceName>
     .\\apigateway_stop.ps1 -name <instanceName>
     .\\adapterhost_stop.ps1 -name <instanceName>
-
     ```
 
     ```
     .\\apigateway_start.ps1 -name <instanceName>
     .\\instance_start.ps1 -name <instanceName>
     .\\adapterhost_start.ps1 -name <instanceName>
-
     ```
 21. Откройте сайт экземпляра ПО в браузере, одновременно открыв выдачу журналов экземпляра в *PowerShell*:
 
     ```
     Get-Content "C:\\ProgramData\\comindware\\Instances\\<instanceName>\\Logs\\heartbeat_<ГГГГ-ММ-ДД>.log" -Wait
-
     ```
 
     Здесь `<ГГГГ-ММ-ДД>` — текущая дата.
@@ -361,31 +333,26 @@ updated: '2025-05-23 13:00:29'
 
     ```
     .\\instance_stop.ps1 -name <instanceName>
-
     ```
 24. Удалите или переименуйте директорию `Database` в директории экземпляра ПО:
 
     ```
     Remove-Item -Path "C:\\ProgramData\\comindware\\Instances\\<instanceName>\\Database" -Recurse
-
     ```
 25. Скопируйте в экземпляр ПО [сохранённую ранее](#ConfigBackup) резервную копию директории с базой данных экземпляра ПО:
 
     ```
     Copy-Item -Path "<config_backup_path>\\Database" -Destination "C:\\ProgramData\\сomindware\\Instances\\<instanceName>" -Recurse -Force
-
     ```
 26. Запустите экземпляр ПО:
 
     ```
     .\\instance_start.ps1 -name <instanceName>
-
     ```
 27. Откройте сайт экземпляра ПО в браузере, одновременно открыв выдачу журналов экземпляра в *PowerShell*:
 
     ```
     Get-Content "C:\\ProgramData\\comindware\\Instances\\<instanceName>\\Logs\\heartbeat_<ГГГГ-ММ-ДД>.log" -Wait
-
     ```
 28. Дождитесь завершения обновления структуры данных и проверьте его успешное выполнение.
 
@@ -427,19 +394,16 @@ updated: '2025-05-23 13:00:29'
     Remove-Item cp -Recurse -Force
     Remove-Item metastorage -Recurse -Force
     Remove-Item cacheGroup-Keys -Recurse -Force
-
     ```
 34. Очистите директорию с базой данных экземпляра ПО:
 
     ```
     Remove-Item -Path "C:\\ProgramData\\comindware\\Instances\\<instanceName>\\Database\\*" -Recurse -Force
-
     ```
 35. Скопируйте очищенную резервную копию в директорию с базой данных:
 
     ```
     Copy-Item -Path "<dbBackupFolder>\\Database\\*" -Destination "C:\\ProgramData\\comindware\\Instances\\<instanceName>\\Database" -Recurse -Force
-
     ```
 36. Запустите экземпляр ПО.
 37. Откройте сайт экземпляра ПО в браузере, дождитесь его инициализации и выполните вход.

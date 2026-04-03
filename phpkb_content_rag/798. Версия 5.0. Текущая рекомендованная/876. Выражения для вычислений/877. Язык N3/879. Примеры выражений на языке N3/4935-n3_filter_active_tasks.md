@@ -2,7 +2,7 @@
 title: 'Фильтрация списка по активным задачам текущего пользователя с помощью N3: по всем процессам, по конкретному процессу'
 kbId: 4935
 url: 'https://kb.comindware.ru/article.php?id=4935'
-updated: '2025-09-19 18:15:47'
+updated: '2026-01-28 16:14:38'
 ---
 
 # Фильтрация списка по активным задачам текущего пользователя с помощью N3: по всем процессам, по конкретному процессу
@@ -87,7 +87,6 @@ updated: '2025-09-19 18:15:47'
            ?item cmw:possibleAssignee ?roleGroups.
        }.
    }
-
    ```
 4. Добавьте таблицу *«Задачи по всем процессам»* на страницу «**Мои задачи**». См. *«[Создание таблицы со списком задач](https://kb.comindware.ru/article.php?id=4800#table_configure_tasks_view)»*.
 
@@ -101,22 +100,22 @@ updated: '2025-09-19 18:15:47'
 
    ```
    # Импортируем функции для работы с логикой, задачами,
-   # статусами задач, объектами, аккаунтами и ролями
+   # статусами задач, шаблонами, аккаунтами и ролями
    @prefix cmw: <http://comindware.com/logics#>.
    @prefix taskStatus: <http://comindware.com/ontology/taskStatus#>.
-   @prefix object: <http://comindware.com/ontology/object#>.
    @prefix account: <http://comindware.com/ontology/account#>.
    @prefix role: <http://comindware.com/ontology/role#>.
+   @prefix container: <http://comindware.com/ontology/container#>.
    {
-       # Получаем шаблон процесса по его системному имени
-       ?process object:alias "СистемноеИмяШаблонаПроцесса".
+       # Получаем шаблон процесса по его системному имени.
+       ?process container:alias "СистемноеИмяШаблонаПроцесса".
        # Получаем аккаунт текущего пользователя из контекста безопасности.
        cmw:securityContext cmw:currentUser ?currentUser.
        # Помещаем массив всех задач в переменную ?item
        # Если выражение используется в таблице задач процесса,
        # то эта строка не требуется, т. к. контекст уже будет задачей.
        ?item a cmw:UserTask.
-       # Начинаем цикл по массиву задач
+       # Начинаем цикл по массиву задач.
        # Фильтруем задачи по конкретному процессу.
        ?item cmw:container ?process.
        # Получаем активные задачи.
@@ -155,7 +154,6 @@ updated: '2025-09-19 18:15:47'
            ?item cmw:possibleAssignee ?roleGroups.
        }.
    }
-
    ```
 4. Добавьте таблицу *«Задачи по проектам»* на страницу «**Мои задачи**».
 

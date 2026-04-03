@@ -68,13 +68,11 @@ updated: '2026-01-29 18:24:11'
 
    ```
    apt install krb5-user krb5-config
-
    ```
 2. Откройте файл конфигурации Kerberos для редактирования:
 
    ```
    vim /etc/krb5.conf
-
    ```
 3. Отредактируйте файл `krb5.conf` согласно следующему примеру:
 
@@ -101,7 +99,6 @@ updated: '2026-01-29 18:24:11'
    [login]
        krb4_convert = false
        krb4_get_tickets = false
-
    ```
 
 ### Настройка конфигурации экземпляра ПО
@@ -118,7 +115,6 @@ updated: '2026-01-29 18:24:11'
 
    ```
    systemctl restart comindware<instance_name>
-
    ```
 
    Здесь `<instance_name>` — имя экземпляра ПО.
@@ -129,7 +125,6 @@ updated: '2026-01-29 18:24:11'
 
    ```
    KRB5_TRACE=/dev/stdout kinit <username>
-
    ```
 
    Здесь `<username>` — любой пользователь домена, для которого известен пароль.
@@ -142,13 +137,11 @@ updated: '2026-01-29 18:24:11'
 
    ```
    yum install krb5-workstation
-
    ```
 2. Откройте файла конфигурации Kerberos для редактирования:
 
    ```
    vim /etc/krb5.conf
-
    ```
 3. Отредактируйте файл `krb5.conf` согласно следующему примеру:
 
@@ -173,20 +166,17 @@ updated: '2026-01-29 18:24:11'
    [login]
        krb4_convert = false
        krb4_get_tickets = false
-
    ```
 4. Откройте файл конфигурации `kcm_default_ccache` для редактирования:
 
    ```
    vim /etc/krb5.conf.d/kcm_default_ccache
-
    ```
 5. Отредактируйте файл `kcm_default_ccache` согласно следующему примеру:
 
    ```
    [libdefaults]
    default_ccache_name = DIR:/tmp
-
    ```
 
 ### Настройка конфигурации экземпляра ПО
@@ -203,7 +193,6 @@ updated: '2026-01-29 18:24:11'
 
    ```
    systemctl restart comindware<instance_name>
-
    ```
 
 ### Проверка вывода трассировщика ошибок в Shell
@@ -212,7 +201,6 @@ updated: '2026-01-29 18:24:11'
 
    ```
    KRB5_TRACE=/dev/stdout kinit <username>
-
    ```
 
    Здесь `<username>` — имя любого пользователя домена, для которого известен пароль.

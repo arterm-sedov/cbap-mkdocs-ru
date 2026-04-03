@@ -116,7 +116,6 @@ updated: '2026-01-27 18:41:10'
          "write"
        ]
      }'
-
    ```
 
    Здесь:
@@ -142,7 +141,6 @@ updated: '2026-01-27 18:41:10'
        "backend_roles": [],
        "attributes": {}
      }'
-
    ```
 3. Укажите созданного пользователя в конфигурации экземпляра ПО:
 
@@ -156,7 +154,6 @@ updated: '2026-01-27 18:41:10'
    journal.username: <cmwJournalUserName>
    # Пароль службы журналирования
    journal.password: <safePassword>
-
    ```
 
    Примечание
@@ -210,7 +207,6 @@ updated: '2026-01-27 18:41:10'
      --user <cmwJournalUserName>:<safePassword> \\
      --cacert /path/to/root.crt \\
      https://<openSearchHost>:<port>/<prefix>*/_search?size=10
-
    ```
 2. Проверьте возможность создания индекса:
 
@@ -219,7 +215,6 @@ updated: '2026-01-27 18:41:10'
      --user <userName>:<safePassword> \\
      --cacert /path/to/root.crt \\
      https://<openSearchHost>:<port>/<prefix_test_index>
-
    ```
 
    Очистка тестового индекса
@@ -233,7 +228,6 @@ updated: '2026-01-27 18:41:10'
      --user <adminUser>:<safePassword> \\
      --cacert /path/to/root.crt \\
      https://<openSearchHost>:<port>/<prefix_test_index>
-
    ```
 
 Ошибки доступа

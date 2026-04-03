@@ -79,7 +79,6 @@ updated: '2026-01-12 18:23:39'
 
    ```
    http://<hostname>/#form/<oa.XX>/<form.XX>/<RecordID>
-
    ```
 
    Здесь:
@@ -130,7 +129,6 @@ updated: '2026-01-12 18:23:39'
       ...
       "attributeNSystemName": "value"
   }
-
   ```
 
 ### Настройка ссылки
@@ -160,7 +158,6 @@ updated: '2026-01-12 18:23:39'
        "TargetId": "form.1",
        "TargetType": "Form"
        }'
-
    ```
 
    Здесь: `"TargetType": "Form"` — **обязательный** фиксированный параметр, который **не следует изменять**.
@@ -172,7 +169,6 @@ updated: '2026-01-12 18:23:39'
 
    ```
    "https://<your-host>/Resolve?data=<encryptedData>"
-
    ```
 4. Проверьте, что ссылка сформирована корректно, с помощью метода `Base/EncryptedNavigationReferenceService/Decrypt`, указав в теле запроса закодированную строку `<encryptedData>` (**без части `https://<your-host>/Resolve?data=`**):
 
@@ -182,7 +178,6 @@ updated: '2026-01-12 18:23:39'
    -H "Content-Type: application/json" \\
    -u <username>:<password> \\
    -d "<encrypted>"
-
    ```
 5. В ответ должен прийти объект со свойствами целевой формы:
 
@@ -193,7 +188,6 @@ updated: '2026-01-12 18:23:39'
        "TargetId": "form.1",
        "TargetType": "Form"
    }
-
    ```
 
 ### Тестирование внешней формы
@@ -203,7 +197,6 @@ updated: '2026-01-12 18:23:39'
 
    ```
    https://<your-host>/Resolve?data=<encryptedData>
-
    ```
 3. Должна открыться форма *«Клиент»*.
 4. Заполните и сохраните форму.

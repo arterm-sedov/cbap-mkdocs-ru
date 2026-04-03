@@ -27,31 +27,26 @@ updated: '2025-12-25 12:38:20'
 
   ```
   ("TemplateSystemName" "DocumentAttributeSystemName") object:findProperty ?DocumentAttribute.
-
   ```
 - из объекта с атрибутом получить значение атрибута в текущей записи:
 
   ```
   ?item documentAttribute ?documentAttributeValue.
-
   ```
 - из значения атрибута получить текущую версию документа:
 
   ```
   ?documentAttributeValue document:revision ?revision.
-
   ```
 - из версии получить содержимое файла в формате `base64`:
 
   ```
   ?revision document:content ?content.
-
   ```
 - из версии получить имя файла:
 
   ```
   ?revision document:title ?title.
-
   ```
 - С помощью языка формул из атрибута типа «**Документ**» можно получить следующие данные:
 
@@ -102,7 +97,6 @@ updated: '2025-12-25 12:38:20'
              )
          )
      )
-
      ```
 
      **или**
@@ -144,7 +138,6 @@ updated: '2025-12-25 12:38:20'
          (" " ?uriList) cmwstring:join ?listItems.
          ("<ul>{0}</u>" ?listItems) cmwstring:format ?value.
      }
-
      ```
 2. Поместите на форму атрибут *«Ссылки для скачивания»*.
 

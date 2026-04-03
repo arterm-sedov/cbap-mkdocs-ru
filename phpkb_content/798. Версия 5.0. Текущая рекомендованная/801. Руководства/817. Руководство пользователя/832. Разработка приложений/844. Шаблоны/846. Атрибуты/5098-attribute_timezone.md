@@ -45,7 +45,6 @@ updated: '2025-06-24 12:39:45'
 
   ```
   "Europe/Moscow"
-
   ```
 
   Список идентификаторов см. на [сайте IANA](https://www.iana.org/time-zones).

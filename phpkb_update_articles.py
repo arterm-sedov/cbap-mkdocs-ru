@@ -1,4 +1,5 @@
 from tools.ssh_kb_ru import establish_connection_interactive, close_connection
+from tools.graceful_interrupt import safe_input, ensure_cleanup
 import html
 from html.parser import HTMLParser
 import bs4
@@ -153,80 +154,82 @@ def listCategories(categories):
         index += 1
 
 def main():
-    
-    
     global CONNECTION
-    CONNECTION, server = establish_connection_interactive()
+    server = None
     
-
-    if input('Update specific articles? Y/N\n').lower() == 'y':
-        article_id = ''
-        while article_id.lower() != 'e':
-            article_id = str(input('Enter article ID to update or E to exit: '))
-            if article_id.lower() == 'e':
-                break
-            if article_id.isnumeric():
-                success = updateArticle(article_id)
-                if not success:
-                    print("Please try another article ID or press 'E' to exit")
-            else:
-                print("Please enter a valid numeric article ID or 'E' to exit")
-    else:
-        updateChildren = ''
-        categoryId = ''
-        parent_category = ''
-        categoryChoice = ''
+    try:
+        CONNECTION, server = establish_connection_interactive()
         
-        print('\nRoot categories:\n')
-
-        while updateChildren != 'y':
-            
-            
-            categoryChoice = ''
-            categories = fetchCategories(parent_id=categoryId)
-            if parent_category: print("\nParent: {}. {}\n".format(categoryId, categoryTitle))
-            if len(categories)>1: 
-                parent_category = categories[0]
-                listCategories(categories)
-                print("\n---------\n")
-                
-                if updateChildren.isnumeric() and int(updateChildren) <= len(categories):
-                        categoryChoice = int(updateChildren)-1
-                        updateChildren = 'y'
-                else:    
-                    while not (categoryChoice.isnumeric() and int(categoryChoice) <= len(categories)):
-                        categoryChoice = input("Choose category to browse (1 to {}): ".format(len(categories)))
-                        if categoryChoice.isnumeric() and int(categoryChoice) <= len(categories):
-                            categoryChoice = int(categoryChoice)-1
-                            break
-                        else:
-                            categoryChoice = ''
-                            print ('Wrong category choice')
-                    
-                
-                categoryId = categories[categoryChoice][0]
-                categoryTitle = categories[categoryChoice][1]  
-                childrenCategories = fetchCategories(parent_id=categoryId)
-                childrenCategoriesNumber = len(childrenCategories)
-            
-                print ("\nChosen category: {} {}".format(categoryId, categoryTitle))
-                if childrenCategoriesNumber > 0:
-                    print ('\nIt has {} child categories:\n'.format(childrenCategoriesNumber))
-                    listCategories(childrenCategories)
-                    updateChildren = input("\nEnter `Y` to update the category and all its child categories and articles. \n Or choose a category to browse (1 to {}). \n".format(childrenCategoriesNumber)).lower()
-                else: 
-                    print ('\nIt has no child categories')
-                    updateChildren = input("\nEnter `Y` to update the category and all articles from this category. ".format(categoryId, categoryTitle)).lower()
-                    if updateChildren !='y': 
-                        print('Updated nothing')
-                        break
-
+        choice = safe_input('Update specific articles? Y/N').lower()
+        
+        if choice == 'y':
+            article_id = ''
+            while article_id.lower() != 'e':
+                article_id = safe_input('Enter article ID to update or E to exit')
+                if article_id.lower() == 'e':
+                    break
+                if article_id.isnumeric():
+                    success = updateArticle(article_id)
+                    if not success:
+                        print("Please try another article ID or press 'E' to exit")
+                else:
+                    print("Please enter a valid numeric article ID or 'E' to exit")
         else:
-            if categories[categoryChoice]:
-                updateCategoryChildren(categories[categoryChoice])
-        
-    
-    close_connection(CONNECTION, server)
+            updateChildren = ''
+            categoryId = ''
+            parent_category = ''
+            categoryChoice = ''
+            
+            print('\nRoot categories:\n')
+
+            while updateChildren != 'y':
+                categoryChoice = ''
+                categories = fetchCategories(parent_id=categoryId)
+                if parent_category: print("\nParent: {}. {}\n".format(categoryId, categoryTitle))
+                if len(categories)>1: 
+                    parent_category = categories[0]
+                    listCategories(categories)
+                    print("\n---------\n")
+                    
+                    if updateChildren.isnumeric() and int(updateChildren) <= len(categories):
+                            categoryChoice = int(updateChildren)-1
+                            updateChildren = 'y'
+                    else:    
+                        while not (categoryChoice.isnumeric() and int(categoryChoice) <= len(categories)):
+                            categoryChoice = safe_input("Choose category to browse (1 to {})".format(len(categories)))
+                            if categoryChoice.isnumeric() and int(categoryChoice) <= len(categories):
+                                categoryChoice = int(categoryChoice)-1
+                                break
+                            else:
+                                categoryChoice = ''
+                                print ('Wrong category choice')
+                    
+                    categoryId = categories[categoryChoice][0]
+                    categoryTitle = categories[categoryChoice][1]  
+                    childrenCategories = fetchCategories(parent_id=categoryId)
+                    childrenCategoriesNumber = len(childrenCategories)
+                
+                    print ("\nChosen category: {} {}".format(categoryId, categoryTitle))
+                    if childrenCategoriesNumber > 0:
+                        print ('\nIt has {} child categories:\n'.format(childrenCategoriesNumber))
+                        listCategories(childrenCategories)
+                        updateChildren = safe_input("\nEnter `Y` to update the category and all its child categories and articles. \n Or choose a category to browse (1 to {})".format(childrenCategoriesNumber)).lower()
+                    else: 
+                        print ('\nIt has no child categories')
+                        updateChildren = safe_input("\nEnter `Y` to update the category and all articles from this category.".format(categoryId, categoryTitle)).lower()
+                        if updateChildren !='y': 
+                            print('Updated nothing')
+                            break
+
+                else:
+                    if categories[categoryChoice]:
+                        updateCategoryChildren(categories[categoryChoice])
+    except KeyboardInterrupt:
+        # Connection cleanup handled in finally block
+        pass
+    finally:
+        # Always ensure connections are closed, even on interrupt
+        ensure_cleanup(CONNECTION, server)
        
 
 def getArticleContentById(article_id):

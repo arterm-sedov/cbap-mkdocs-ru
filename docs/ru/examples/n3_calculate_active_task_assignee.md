@@ -77,7 +77,7 @@ kbId: 4950
             ?groupMembers account:groupUsers ?value.
         }
         or {
-
+ 
             # Возвращаем фактического исполнителя,
             # если он назначен через роли.
             ?tasks cmw:assignee ?assigneeRoles.
@@ -88,19 +88,19 @@ kbId: 4950
             # если он назначен через аккаунт.
             ?tasks cmw:assignee ?value.
         }
-        or{
+        or {
             # Возвращаем список возможных исполнителей,
             # если они назначены через группы и роли.
-            ?tasks cmw:possibleAssignee ?possibleRoles.
-            ?assigneeRoles role:roleMembers ?groupMembers.
+            ?tasks cmw:possibleAssignee ?possibleGroups.
+            ?possibleGroups role:roleMembers ?groupMembers.
             ?groupMembers account:groupUsers ?value.
         }
         or {
-
+ 
             # Возвращаем список возможных исполнителей,
             # если они назначены через роли.
             ?tasks cmw:possibleAssignee ?possibleRoles.
-            ?assigneeRoles role:roleMembers ?value.
+            ?possibleRoles role:roleMembers ?value.
         }
         or {
             # Возвращаем список возможных исполнителей,

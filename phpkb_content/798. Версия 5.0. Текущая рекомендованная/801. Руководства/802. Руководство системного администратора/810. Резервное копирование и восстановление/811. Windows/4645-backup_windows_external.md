@@ -42,7 +42,6 @@ updated: '2026-01-16 17:25:17'
    $WebClient.Encoding = [System.Text.Encoding]::UTF8
    $response = $WebClient.UploadString($uri, "POST","")
    $response
-
    ```
 3. Откройте Планировщик заданий. До этого удостоверьтесь, что служба планировщика запускается автоматически.
 4. Откройте раздел «**Windows**».

@@ -64,6 +64,8 @@
 
 <!-- Категории в БЗ. Конец -->
 
+[jmeter_download]: https://jmeter.apache.org/download_jmeter.cgi
+
 [gigachat_api_reference]: https://developers.sber.ru/docs/ru/gigachat/api/reference/rest/gigachat-api
 
 [gigachat_developer_portal]: https://developers.sber.ru/dev
@@ -85,6 +87,8 @@
 [apache_ignite_partition_baseline_topology]: https://ignite.apache.org/docs/latest/clustering/baseline-topology
 
 [apache_ignite_partition_partition_loss_policy]: https://ignite.apache.org/docs/latest/configuring-caches/partition-loss-policy
+
+[spnego_http_auth_nginx_module]: https://github.com/stnoonan/spnego-http-auth-nginx-module
 
 [browser_push_permissions_chrome_official]: https://support.google.com/chrome/answer/3220216?hl=ru-RU&co=GENIE.Platform%3DDesktop
 
@@ -360,6 +364,8 @@
 [version_control_app_prepare]: {{ kbArticleURLPrefix }}4808#version_control_app_prepare
 
 [version_control_git]: {{ kbArticleURLPrefix }}4806
+
+[version_control_methodology]: {{ kbArticleURLPrefix }}5155
 
 {% endif %}
 
@@ -879,6 +885,8 @@
 
 [table_configure_tasks_view]: {{ kbArticleURLPrefix }}4800#table_configure_tasks_view
 
+[table_configure_add_to_my_tasks]: {{ kbArticleURLPrefix }}4800#table_configure_add_to_my_tasks
+
 [table_configure_template]: {{ kbArticleURLPrefix }}4800#table_configure_template
 
 [table_configure_properties]: {{ kbArticleURLPrefix }}4800#table_configure_properties
@@ -1009,7 +1017,15 @@
 
 [deploy_guide_linux_initialize]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_initialize
 
+[deploy_guide_linux_install_order]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_install_order
+
+[deploy_guide_linux_instance_create]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_instance_create
+
+[deploy_guide_linux_instance_start]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_instance_start
+
 [deploy_guide_linux_prerequisites_install]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_prerequisites_install
+
+[deploy_guide_linux_prerequisites_install_order]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_prerequisites_install_order
 
 [deploy_guide_linux_vm_max_map_count]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_vm_max_map_count
 

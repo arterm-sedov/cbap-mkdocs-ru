@@ -77,7 +77,6 @@ in ?item.
 {
   #наш код
 } => { ?item attribute:value ?value. }.
-
 ```
 
 ### Пять видов запросов
@@ -152,7 +151,6 @@ _![Рисунок 2. Порядок обработки запроса для п�
   ?item ?Region ?.
   ?item -> ?value.
 }
-
 ```
 
 ### Функция `once`
@@ -169,7 +167,6 @@ once {
 }.
 true -> ?value.
 }
-
 ```
 
 ### Оператор `if`
@@ -189,7 +186,6 @@ true -> ?value.
 }
   else {?tasks -> ?value.}.
 }
-
 ```
 
 ### Оператор `from` и функция `sum`
@@ -208,7 +204,6 @@ from  {
 
 ?SummaList math:sum ?value.
 }
-
 ```
 
 ### Функция `count`
@@ -223,7 +218,6 @@ from  {
   ?item ?Positions ?PositionsVal.
 } assert:count ?value.
 }
-
 ```
 
 ### Функция `distinct`
@@ -241,7 +235,6 @@ from  {
 } assert:distinct ?ItemsVal.
 } assert:count ?value.
 }
-
 ```
 
 ### Оператор `union`
@@ -259,7 +252,6 @@ from  {
 ) assert:union true.
 ?Contractor -> ?value.
 }
-
 ```
 
 ## Примеры использования расширений Comindware для языка N3
@@ -282,7 +274,6 @@ from  {
   ?Status != "Завершен".
   ?value == ?Proekty.
 }
-
 ```
 
 ### Пример 2
@@ -304,7 +295,6 @@ from  {
   }.
   ?value == ?Proekty.
 }
-
 ```
 
 ### Пример 3
@@ -327,7 +317,6 @@ from  {
   }.
   ?value == ?users.
 }
-
 ```
 
 ### Пример 4
@@ -340,7 +329,6 @@ from  {
   ("Zayavitel" "Application") object:findProperty ?ApplicationProp.
   ?Zayavitel ?ApplicationProp ? .
 }
-
 ```
 
 ### Пример 5
@@ -364,7 +352,6 @@ from  {
     ?value == true.
   }.
 }
-
 ```
 
 ### Пример 6
@@ -391,7 +378,6 @@ from  {
   ("Заявка" ?Name "завершена") string:format ?warning.
   output:result output:warning "Завершена".
 }
-
 ```
 
 ## Справочник встроенных функций N3
@@ -411,47 +397,47 @@ from  {
 | `w3math:quotient` | |
 | --- | --- |
 | **Описание** | Берёт 2 аргумента в скобках, указанные в субъекте и результат деления первого на второе помещает в переменную объекта. |
-| **Синтаксис** | ``` (?WorkInSeconds ?WorkDaysInSeconds) w3math:quotient ?WorkSeconds.   ``` |
+| **Синтаксис** | ``` (?WorkInSeconds ?WorkDaysInSeconds) w3math:quotient ?WorkSeconds. ``` |
 | **Возвращает** | `number` |
 | `w3math:integerQuotient` | |
 | **Описание** | Берёт 2 аргумента в скобках, указанные в субъекте и результат целочисленного деления первого на второе помещает в переменную объекта. |
-| **Синтаксис** | ``` (?WorkInSeconds ?WorkDaysInSeconds) w3math:integerQuotient ?WorkSeconds.   ``` |
+| **Синтаксис** | ``` (?WorkInSeconds ?WorkDaysInSeconds) w3math:integerQuotient ?WorkSeconds. ``` |
 | **Возвращает** | `number` |
 | `w3math:remainder` | |
 | **Описание** | Берёт 2 аргумента в скобках, указанные в субъекте и остаток от деления первого на второе помещает в переменную объекта. |
-| **Синтаксис** | ``` (?remainingWorkInSeconds ?remainingWorkDaysInSeconds) math:remainder ?remainingWorkSeconds.   ``` |
+| **Синтаксис** | ``` (?remainingWorkInSeconds ?remainingWorkDaysInSeconds) math:remainder ?remainingWorkSeconds. ``` |
 | **Возвращает** | `number` |
 | `w3math:product` | |
 | **Описание** | Берёт 2 аргумента в скобках, указанные в субъекте и результат их умножения помещает в переменную объекта. |
-| **Синтаксис** | ``` (?productingWorkInSeconds ?productingWorkDaysInSeconds) w3math:product ?productingWorkSeconds.   ``` |
+| **Синтаксис** | ``` (?productingWorkInSeconds ?productingWorkDaysInSeconds) w3math:product ?productingWorkSeconds. ``` |
 | **Возвращает** | `number` |
 | `w3math:lessThan` | |
 | **Описание** | Меньше чем |
-| **Синтаксис** | ``` ?recordDate w3math:lessThan ?maxDate.   ``` |
+| **Синтаксис** | ``` ?recordDate w3math:lessThan ?maxDate. ``` |
 | **Возвращает** | `bool` |
 | `w3math:notLessThan` | |
 | **Описание** | Не меньше чем |
-| **Синтаксис** | ``` ?documentRecordsCount w3math:notLessThan 2.   ``` |
+| **Синтаксис** | ``` ?documentRecordsCount w3math:notLessThan 2. ``` |
 | **Возвращает** | `bool` |
 | `w3math:equalTo` | |
 | **Описание** | Равно (`dateTime` , `date` , `duration` , `string` , `number`). |
-| **Синтаксис** | ``` ?countWorkingDaysMounth w3math:equalTo ?countWorkingDays.   ``` |
+| **Синтаксис** | ``` ?countWorkingDaysMounth w3math:equalTo ?countWorkingDays. ``` |
 | **Возвращает** | `bool` |
 | `w3math:notEqualTo` | |
 | **Описание** | Не равно (`dateTime` , `date` , `duration` , `string` , `number`). |
-| **Синтаксис** | ``` ?countWorkingDaysMounth w3math:notEqualTo ?countWorkingDays.   ``` |
+| **Синтаксис** | ``` ?countWorkingDaysMounth w3math:notEqualTo ?countWorkingDays. ``` |
 | **Возвращает** | `bool` |
 | `w3math:greaterThan` | |
 | **Описание** | Больше чем (`dateTime` , `date` , `duration` , `string` , `number`). |
-| **Синтаксис** | ``` ?recordDate w3math:greaterThan ?minDate.   ``` |
+| **Синтаксис** | ``` ?recordDate w3math:greaterThan ?minDate. ``` |
 | **Возвращает** | `bool` |
 | `w3math:notGreaterThan` | |
 | **Описание** | Не больше чем (`dateTime` , `date` , `duration` , `string` , `number`). |
-| **Синтаксис** | ``` ?documentRecordsCount w3math:notGreaterThan 2.   ``` |
+| **Синтаксис** | ``` ?documentRecordsCount w3math:notGreaterThan 2. ``` |
 | **Возвращает** | `bool` |
 | `w3math:negation` | |
 | **Описание** | Отрицание |
-| **Синтаксис** | ``` ?firstNumber w3math:negation ?negationNumber.   ``` |
+| **Синтаксис** | ``` ?firstNumber w3math:negation ?negationNumber. ``` |
 | **Возвращает** | `number` |
 
 ### Математические функции `cmwmath`
@@ -461,35 +447,35 @@ from  {
 | `cmwmath:sum` | |
 | --- | --- |
 | **Описание** | Берёт сумму из субъекта типа List и записывает значение в объект. |
-| **Синтаксис** | ``` ?durationsSeconds cmwmath:sum ?durationSumSeconds.   ``` |
+| **Синтаксис** | ``` ?durationsSeconds cmwmath:sum ?durationSumSeconds. ``` |
 | **Возвращает** | `number` |
 | `cmwmath:difference` | |
 | **Описание** | Берёт разность из субъекта типа List и записывает значение в объект. |
-| **Синтаксис** | ``` ?list cmwmath:difference ?differenceTotal.   ``` |
+| **Синтаксис** | ``` ?list cmwmath:difference ?differenceTotal. ``` |
 | **Возвращает** | `number` |
 | `cmwmath:min` | |
 | **Описание** | Берёт минимальное значение из субъекта типа List и записывает значение в объект. |
-| **Синтаксис** | ``` ?listQueue cmwmath:min ?queueMin.   ``` |
+| **Синтаксис** | ``` ?listQueue cmwmath:min ?queueMin. ``` |
 | **Возвращает** | `number` `dateTime` `duration` |
 | `cmwmath:max` | |
 | **Описание** | Берёт максимальное значение из субъекта типа List и записывает значение в объект. |
-| **Синтаксис** | ``` ?listQueue cmwmath:max ?queueMax.   ``` |
+| **Синтаксис** | ``` ?listQueue cmwmath:max ?queueMax. ``` |
 | **Возвращает** | `number` `dateTime` `duration` |
 | `cmwmath:average` | |
 | **Описание** | Берёт 2 аргумента в скобках, указанные в субъекте и помещает их среднее арифметическое в переменную объекта. |
-| **Синтаксис** | ``` (?priceFirst ?priceSecond) cmwmath:average ?priceAverage.   ``` |
+| **Синтаксис** | ``` (?priceFirst ?priceSecond) cmwmath:average ?priceAverage. ``` |
 | **Возвращает** | `number` |
 | `cmwmath:round` | |
 | **Описание** | Округление к ближайшему целому. |
-| **Синтаксис** | ``` ?quotientPrice cmwmath:round ?numberRound.   ``` |
+| **Синтаксис** | ``` ?quotientPrice cmwmath:round ?numberRound. ``` |
 | **Возвращает** | `number` |
 | `cmwmath:floor` | |
 | **Описание** | Округление в меньшую сторону. |
-| **Синтаксис** | ``` ?quotientPrice cmwmath:floor ?numberFloor.   ``` |
+| **Синтаксис** | ``` ?quotientPrice cmwmath:floor ?numberFloor. ``` |
 | **Возвращает** | `number` |
 | `cmwmath:ceil` | |
 | **Описание** | Округление в большую сторону. |
-| **Синтаксис** | ``` ?quotientPrice cmwmath:ceil ?numberCeil.   ``` |
+| **Синтаксис** | ``` ?quotientPrice cmwmath:ceil ?numberCeil. ``` |
 | **Возвращает** | `number` |
 
 ### Функции для работы с датами и временем `w3time`
@@ -499,7 +485,7 @@ from  {
 | `w3time:inSeconds` | |
 | --- | --- |
 | **Описание** | Конвертирует значение типа `dateTime` или `duration` в количество секунд. Конвертирует количество секунд в значение типа `dateTime` от начала времен. |
-| **Синтаксис** | ``` ?durationWorkingDay w3time:inSeconds ?secondsWorkingDay.   ``` |
+| **Синтаксис** | ``` ?durationWorkingDay w3time:inSeconds ?secondsWorkingDay. ``` |
 | **Возвращает** | `number` |
 
 ### Функции для работы с датами и временем `cmwtime`
@@ -509,99 +495,99 @@ from  {
 | `cmwtime:toDuration` | |
 | --- | --- |
 | **Описание** | Конвертирует количество секунд в значение типа `duration`. |
-| **Синтаксис** | ``` ?secondsWorkingDay cmwtime:toDuration ?durationWorkingDay.   ``` |
+| **Синтаксис** | ``` ?secondsWorkingDay cmwtime:toDuration ?durationWorkingDay. ``` |
 | **Возвращает** | `duration` |
 | `cmwtime:getSpan` | |
 | **Описание** | Вычитает из первого значения субъекта типа `dateTime` второе значение субъекта типа `dateTime`. |
-| **Синтаксис** | ``` (?dateTime1 ?dateTime2) cmwtime:getSpan ?resultTimeSpan.   ``` |
+| **Синтаксис** | ``` (?dateTime1 ?dateTime2) cmwtime:getSpan ?resultTimeSpan. ``` |
 | **Возвращает** | `duration` |
 | `cmwtime:addDuration` | |
 | **Описание** | Добавляет к значению субъекта типа `dateTime` значение типа `duration`. |
-| **Синтаксис** | ``` (?dateTime ?duration) cmwtime:addDuration ?value.   ``` |
+| **Синтаксис** | ``` (?dateTime ?duration) cmwtime:addDuration ?value. ``` |
 | **Возвращает** | `dateTime` |
 | `cmwtime:subDuration` | |
 | **Описание** | Вычитает из значения субъекта типа `dateTime` значение типа `duration`. |
-| **Синтаксис** | ``` (?dateTime ?duration) cmwtime:subDuration ?value.   ``` |
+| **Синтаксис** | ``` (?dateTime ?duration) cmwtime:subDuration ?value. ``` |
 | **Возвращает** | `dateTime` |
 | `cmwtime:endOfDay` | |
 | **Описание** | Берёт значение из субъекта типа `dateTime` и возвращает дату и время окончания дня, в пределах которого находится значение субъекта. |
-| **Синтаксис** | ``` ?creationDateTime cmwtime:endOfDay ?endDateTime.   ``` |
+| **Синтаксис** | ``` ?creationDateTime cmwtime:endOfDay ?endDateTime. ``` |
 | **Возвращает** | `dateTime` |
 | `cmwtime:startOfDay` | |
 | **Описание** | Берёт значение из субъекта типа `dateTime` и возвращает дату и время начала дня, в пределах которого находится значение субъекта. |
-| **Синтаксис** | ``` ?creationDateTime cmwtime:startOfDay ?startDateTime.   ``` |
+| **Синтаксис** | ``` ?creationDateTime cmwtime:startOfDay ?startDateTime. ``` |
 | **Возвращает** | `dateTime` |
 | `cmwtime:startOfWeek` | |
 | **Описание** | Берёт значение из субъекта типа `dateTime` и возвращает дату и время начала недели, в пределах которой находится значение субъекта. |
-| **Синтаксис** | ``` ?creationDateTime cmwtime:startOfWeek ?startDateTime.   ``` |
+| **Синтаксис** | ``` ?creationDateTime cmwtime:startOfWeek ?startDateTime. ``` |
 | **Возвращает** | `dateTime` |
 | `cmwtime:startOfMonth` | |
 | **Описание** | Берёт значение из субъекта типа `dateTime` и возвращает дату и время начала месяца, в пределах которого находится значение субъекта. |
-| **Синтаксис** | ``` ?creationDateTime cmwtime:startOfMonth ?startDateTime.   ``` |
+| **Синтаксис** | ``` ?creationDateTime cmwtime:startOfMonth ?startDateTime. ``` |
 | **Возвращает** | `dateTime` |
 | `cmwtime:fromTzToTz` | |
 | **Описание** | Перевод значения типа `dateTime` в заданный часовой пояс. |
-| **Синтаксис** | ``` (?someDateTime "Etc/GMT" "Europe/Moscow") cmwtime:fromTzToTz ?tzDateTime.   ``` |
+| **Синтаксис** | ``` (?someDateTime "Etc/GMT" "Europe/Moscow") cmwtime:fromTzToTz ?tzDateTime. ``` |
 | **Возвращает** | `dateTime` |
 | `cmwtime:timeZoneHours` | |
 | **Описание** | Возвращает разницу во времени UTC и местным часовым поясом. |
-| **Синтаксис** | ``` ? cmwtime:timeZoneHours ?timeZoneDifferenceInHours.   ``` |
+| **Синтаксис** | ``` ? cmwtime:timeZoneHours ?timeZoneDifferenceInHours. ``` |
 | **Возвращает** | `integer` |
 | `cmwtime:isToday` | |
 | **Описание** | Берёт значение из субъекта типа `dateTime` и проверяет на текущую дату. |
-| **Синтаксис** | ``` ?creationDate cmwtime:isToday ?today.   ``` |
+| **Синтаксис** | ``` ?creationDate cmwtime:isToday ?today. ``` |
 | **Возвращает** | `bool` |
 | `cmwtime:century` | |
 | **Описание** | Берёт значение из субъекта типа `dateTime` и возвращает числовое значение, соответствующее веку указанной даты в местном часовом поясе. |
-| **Синтаксис** | ``` ?creationDate cmwtime:century ?numberCentury.   ``` |
+| **Синтаксис** | ``` ?creationDate cmwtime:century ?numberCentury. ``` |
 | **Возвращает** | `number` |
 | `cmwtime:isoFormat` | |
 | **Описание** | Конвертирует значение типа `dateTime` в формат ISO. |
-| **Синтаксис** | ``` ?creationDate cmwtime:isoFormat ?isoFormatDate.   ``` |
+| **Синтаксис** | ``` ?creationDate cmwtime:isoFormat ?isoFormatDate. ``` |
 | **Возвращает** | `string` |
 | `cmwtime:year` | |
 | **Описание** | Берёт значение из субъекта типа `dateTime` и возвращает числовое значение, соответствующее году указанной даты в местном часовом поясе. |
-| **Синтаксис** | ``` ?creationDate cmwtime:year ?numberYear.   ``` |
+| **Синтаксис** | ``` ?creationDate cmwtime:year ?numberYear. ``` |
 | **Возвращает** | `number` |
 | `cmwtime:month` | |
 | **Описание** | Берёт значение из субъекта типа `dateTime` и возвращает числовое значение, соответствующее месяцу указанной даты в местном часовом поясе. |
-| **Синтаксис** | ``` ?creationDate cmwtime:month ?numberMonth.   ``` |
+| **Синтаксис** | ``` ?creationDate cmwtime:month ?numberMonth. ``` |
 | **Возвращает** | `number` |
 | `cmwtime:day` | |
 | **Описание** | Берёт значение из субъекта типа `dateTime` и возвращает числовое значение, соответствующее дню месяца указанной даты в местном часовом поясе. |
-| **Синтаксис** | ``` ?creationDate cmwtime:day ?numberDay.   ``` |
+| **Синтаксис** | ``` ?creationDate cmwtime:day ?numberDay. ``` |
 | **Возвращает** | `number` |
 | `cmwtime:hour` | |
 | **Описание** | Берёт значение из субъекта типа `dateTime` и возвращает числовое значение, соответствующее часу указанной даты в местном часовом поясе. |
-| **Синтаксис** | ``` ?creationDate cmwtime:hour ?numberHour.   ``` |
+| **Синтаксис** | ``` ?creationDate cmwtime:hour ?numberHour. ``` |
 | **Возвращает** | `number` |
 | `cmwtime:minute` | |
 | **Описание** | Берёт значение из субъекта типа `dateTime` и возвращает числовое значение, соответствующее минуте указанной даты в местном часовом поясе. |
-| **Синтаксис** | ``` ?creationDate cmwtime:minute ?numberMinute.   ``` |
+| **Синтаксис** | ``` ?creationDate cmwtime:minute ?numberMinute. ``` |
 | **Возвращает** | `number` |
 | `cmwtime:second` | |
 | **Описание** | Берёт значение из субъекта типа `dateTime` и возвращает числовое значение, соответствующее секундам указанной даты в местном часовом поясе. |
-| **Синтаксис** | ``` ?creationDate cmwtime:second ?numberSecond.   ``` |
+| **Синтаксис** | ``` ?creationDate cmwtime:second ?numberSecond. ``` |
 | **Возвращает** | `number` |
 | `cmwtime:makeDate` | |
 | **Описание** | Берёт значения субъекта типа число и возвращает объект типа `dateTime`. |
-| **Синтаксис** | ``` (?intervalBeginYear ?intervalBeginMonth ?intervalBeginDay 23 59 59) cmwtime:makeDate ?brokenIntervalEnd.   ```  ``` (?intervalEndYear ?intervalEndMonth ?intervalEndDay 0 0 0) cmwtime:makeDate ?brokenIntervalBegin.   ```  ``` (?startDateYear ?startDateMonth ?startDateDay) cmwtime:makeDate ?startDayDate.   ```  ``` (?startDateYear ?startDateMonth ?startDateDay ?startDateHour ?startDateMinute ?startDateSecond) cmwtime:makeDate ?intervalBegin.   ``` |
+| **Синтаксис** | ``` (?intervalBeginYear ?intervalBeginMonth ?intervalBeginDay 23 59 59) cmwtime:makeDate ?brokenIntervalEnd. ```  ``` (?intervalEndYear ?intervalEndMonth ?intervalEndDay 0 0 0) cmwtime:makeDate ?brokenIntervalBegin. ```  ``` (?startDateYear ?startDateMonth ?startDateDay) cmwtime:makeDate ?startDayDate. ```  ``` (?startDateYear ?startDateMonth ?startDateDay ?startDateHour ?startDateMinute ?startDateSecond) cmwtime:makeDate ?intervalBegin. ``` |
 | **Возвращает** | `dateTime` |
 | `cmwtime:workhours` | |
 | **Описание** | Возвращает дату и время на основании количества рабочих часов с определенного момента времени, с поправкой на праздники и фактические выходные дни. |
-| **Синтаксис** | ``` (?startWorkDateTime ?qountWorkingHours ?startWorkingDay ?durationWorkingDay (?dateNotHoliday)) cmwtime:workhours ?newDateTime.   ``` |
+| **Синтаксис** | ``` (?startWorkDateTime ?qountWorkingHours ?startWorkingDay ?durationWorkingDay (?dateNotHoliday)) cmwtime:workhours ?newDateTime. ``` |
 | **Возвращает** | `dateTime` |
 | `cmwtime:workdays` | |
 | **Описание** | Возвращает дату на основании количества рабочих дней с определенной даты, с поправкой на праздники и фактические выходные дни. |
-| **Синтаксис** | ``` (?startWorkDateTime ?qountWorkingHours (?firstDateNotHoliday ?secondDateNotWorking)) cmwtime:workdays ?newDateTime.   ``` |
+| **Синтаксис** | ``` (?startWorkDateTime ?qountWorkingHours (?firstDateNotHoliday ?secondDateNotWorking)) cmwtime:workdays ?newDateTime. ``` |
 | **Возвращает** | `dateTime` |
 | `cmwtime:workhoursDuration` | |
 | **Описание** | Возвращает продолжительность работы между двумя датами при условии, что рабочий день начинается в заданное время и имеет определенную длительность. |
-| **Синтаксис** | ``` (?startWorkDateTime ?endWorkDateTime ?timeStartWorkingDay ?durationWorkingDay) cmwtime:workhoursDuration ?newDuration.   ``` |
+| **Синтаксис** | ``` (?startWorkDateTime ?endWorkDateTime ?timeStartWorkingDay ?durationWorkingDay) cmwtime:workhoursDuration ?newDuration. ``` |
 | **Возвращает** | `duration` |
 | `cmwtime:workdaysDuration` | |
 | **Описание** | Возвращает продолжительность работы между двумя датами, на основании предположения, что рабочий день начинается в 00:00 и длится 24 часа. |
-| **Синтаксис** | ``` (?startWorkDateTime ?endWorkDateTime) cmwtime:workdaysDuration ?newDuration.   ``` |
+| **Синтаксис** | ``` (?startWorkDateTime ?endWorkDateTime) cmwtime:workdaysDuration ?newDuration. ``` |
 | **Возвращает** | `duration` |
 
 ### Функции для работы с интервалами времени `cmwduration`
@@ -611,15 +597,15 @@ from  {
 | `cmwduration:days` | |
 | --- | --- |
 | **Описание** | Берёт промежуток времени и возвращает количество дней. |
-| **Синтаксис** | ``` ?durationHoliday cmwduration:days ?countDaysOfHoliday.   ``` |
+| **Синтаксис** | ``` ?durationHoliday cmwduration:days ?countDaysOfHoliday. ``` |
 | **Возвращает** | `number` |
 | `cmwduration:hours` | |
 | **Описание** | Берёт промежуток времени и возвращает количество часов. |
-| **Синтаксис** | ``` ?durationHoliday cmwduration:hours ?countHoursOfHoliday.   ``` |
+| **Синтаксис** | ``` ?durationHoliday cmwduration:hours ?countHoursOfHoliday. ``` |
 | **Возвращает** | `number` |
 | `cmwduration:minutes` | |
 | **Описание** | Берёт промежуток времени и возвращает количество минут. |
-| **Синтаксис** | ``` ?durationHoliday cmwduration:minutes ?countMinutesOfHoliday.   ``` |
+| **Синтаксис** | ``` ?durationHoliday cmwduration:minutes ?countMinutesOfHoliday. ``` |
 | **Возвращает** | `number` |
 
 ### Функции для работы со строками `w3string`
@@ -629,31 +615,31 @@ from  {
 | `w3string:format` | |
 | --- | --- |
 | **Описание** | Подставляет аргументы в нумерованные заместители вида `{0}`…`{n}` в исходной строке и возвращает результирующую строку. |
-| **Синтаксис** | ``` ("{0}/{1} - {2}" ?value0 ?value1 ?value2) w3string:format ?outString.   ``` |
+| **Синтаксис** | ``` ("{0}/{1} - {2}" ?value0 ?value1 ?value2) w3string:format ?outString. ``` |
 | **Возвращает** | `string` |
 | `w3string:matches` | |
 | **Описание** | Использует в качестве аргументов строку и регулярное выражение. Возвращает логическое значение Истина, если какая-либо часть строки или строка полностью соответствует условию, заданному регулярным выражением. В противном случае возвращает результат Ложь. |
-| **Синтаксис** | ``` ?stringExample w3string:matches ?expression.   ``` |
+| **Синтаксис** | ``` ?stringExample w3string:matches ?expression. ``` |
 | **Возвращает** | `bool` |
 | `w3string:notMatches` | |
 | **Описание** | Использует в качестве аргументов строку и регулярное выражение. Возвращает логическое значение Истина, если часть строки или строка полностью не соответствуют условию, заданному регулярным выражением. В противном случае возвращает результат Ложь. |
-| **Синтаксис** | ``` ?stringExample w3string:notMatches ?expression.   ``` |
+| **Синтаксис** | ``` ?stringExample w3string:notMatches ?expression. ``` |
 | **Возвращает** | `bool` |
 | `w3string:greaterThan` | |
 | **Описание** | Возвращает логическое значение Истина, если аргумент2 больше аргумента1, в противном случае возвращает результат Ложь. |
-| **Синтаксис** | ``` ?creationDate w3string:greaterThan ?chooseDate.   ``` |
+| **Синтаксис** | ``` ?creationDate w3string:greaterThan ?chooseDate. ``` |
 | **Возвращает** | `bool` |
 | `w3string:lessThan` | |
 | **Описание** | Возвращает логическое значение Истина, если аргумент2 меньше аргумента1, в противном случае возвращает результат Ложь. |
-| **Синтаксис** | ``` ?creationDate w3string:lessThan ?chooseDate.   ``` |
+| **Синтаксис** | ``` ?creationDate w3string:lessThan ?chooseDate. ``` |
 | **Возвращает** | `bool` |
 | `w3string:notGreaterThan` | |
 | **Описание** | Возвращает логическое значение Истина, если аргумент2 НЕ больше аргумента1, в противном случае возвращает результат Ложь. |
-| **Синтаксис** | ``` ?creationDate w3string:notGreaterThan ?chooseDate.   ``` |
+| **Синтаксис** | ``` ?creationDate w3string:notGreaterThan ?chooseDate. ``` |
 | **Возвращает** | `bool` |
 | `w3string:notLessThan` | |
 | **Описание** | Возвращает логическое значение Истина, если аргумент2 НЕ меньше аргумента1, в противном случае возвращает результат Ложь. |
-| **Синтаксис** | ``` ?creationDate w3string:notLessThan ?chooseDate.   ``` |
+| **Синтаксис** | ``` ?creationDate w3string:notLessThan ?chooseDate. ``` |
 | **Возвращает** | `bool` |
 
 ### Функции для работы со строками `cmwstring`
@@ -663,59 +649,59 @@ from  {
 | `cmwstring:join` | |
 | --- | --- |
 | **Описание** | Объединяет строки с использованием заданного разделителя. |
-| **Синтаксис** | ``` ("," ?newDependencyLinks) cmwstring:join ?newDependencyLinksStr.   ``` |
+| **Синтаксис** | ``` ("," ?newDependencyLinks) cmwstring:join ?newDependencyLinksStr. ``` |
 | **Возвращает** | `string` |
 | `cmwstring:replace` | |
 | **Описание** | Заменяет все экземпляры заданной строки в исходной строке на новое значение. |
-| **Синтаксис** | ``` (?text "\\n" "<br>") cmwstring:replace ?html.   ``` |
+| **Синтаксис** | ``` (?text "\\n" "<br>") cmwstring:replace ?html. ``` |
 | **Возвращает** | `string` |
 | `cmwstring:cutString` | |
 | **Описание** | Обрезает строку на заданную длину и добавляет в конец заданные символы. |
-| **Синтаксис** | ``` (?taskTitleLong 50 "...") cmwstring:cutString ?taskTitle.   ``` |
+| **Синтаксис** | ``` (?taskTitleLong 50 "...") cmwstring:cutString ?taskTitle. ``` |
 | **Возвращает** | `string` |
 | `cmwstring:firstCapital` | |
 | **Описание** | Преобразует первый символ строки в прописной. |
-| **Синтаксис** | ``` ?youStr cmwstring:firstCapital ?youStrCapital.   ``` |
+| **Синтаксис** | ``` ?youStr cmwstring:firstCapital ?youStrCapital. ``` |
 | **Возвращает** | `string` |
 | `cmwstring:concatenation` | |
 | **Описание** | Конкатенация строк. |
-| **Синтаксис** | ``` (?firstString ?secondString) cmwstring:concatenation ?newString.   ``` |
+| **Синтаксис** | ``` (?firstString ?secondString) cmwstring:concatenation ?newString. ``` |
 | **Возвращает** | `string` |
 | `cmwstring:length` | |
 | **Описание** | Возвращает количество символов в строке. |
-| **Синтаксис** | ``` ?stringName cmwstring:length ?countSymbols.   ``` |
+| **Синтаксис** | ``` ?stringName cmwstring:length ?countSymbols. ``` |
 | **Возвращает** | `number` |
 | `cmwstring:substring` | |
 | **Описание** | Обрезает строку от заданной позиции на заданное количество символов (опционально). |
-| **Синтаксис** | ``` (?sourceString 2 4) cmwstring:substring ?resultString.  (?sourceString 2) cmwstring:substring ?resultString.   ``` |
+| **Синтаксис** | ``` (?sourceString 2 4) cmwstring:substring ?resultString.  (?sourceString 2) cmwstring:substring ?resultString. ``` |
 | **Возвращает** | `string` |
 | `cmwstring:indexOf` | |
 | **Описание** | Возвращает номер (отсчитываемый от нуля) позиции, на которой располагается искомая строка в исходной строке. Номер позиции может отсчитываться от произвольного положения (опционально). |
-| **Синтаксис** | ``` (?sourceString ?subString) cmwstring:indexOf ?resultString.   ```  ``` (?sourceString ?subString 4) cmwstring:indexOf ?resultString.   ``` |
+| **Синтаксис** | ``` (?sourceString ?subString) cmwstring:indexOf ?resultString. ```  ``` (?sourceString ?subString 4) cmwstring:indexOf ?resultString. ``` |
 | **Возвращает** | `number` |
 | `cmwstring:toUri` | |
 | **Описание** | Преобразует escape-последовательности в URI. |
-| **Синтаксис** | ``` ?sequence cmwstring:toUri ?reference.   ``` |
+| **Синтаксис** | ``` ?sequence cmwstring:toUri ?reference. ``` |
 | **Возвращает** | `string` |
 | `cmwstring:fromUri` | |
 | **Описание** | Преобразует URI в escape-последовательности. |
-| **Синтаксис** | ``` ?reference cmwstring:fromUri ?sequence.   ``` |
+| **Синтаксис** | ``` ?reference cmwstring:fromUri ?sequence. ``` |
 | **Возвращает** | `string` |
 | `cmwstring:toBase64` | |
 | **Описание** | Преобразует строку по стандарту кодирования Base64. |
-| **Синтаксис** | ``` ?string cmwstring:toBase64 ?newStringBase.   ``` |
+| **Синтаксис** | ``` ?string cmwstring:toBase64 ?newStringBase. ``` |
 | **Возвращает** | `string` |
 | `cmwstring:fromBase64` | |
 | **Описание** | Декодирует строку по стандарту Base64. |
-| **Синтаксис** | ``` ?stringBase cmwstring:fromBase64 ?newString.   ``` |
+| **Синтаксис** | ``` ?stringBase cmwstring:fromBase64 ?newString. ``` |
 | **Возвращает** | `string` |
 | `cmwstring:split` | |
 | **Описание** | Находит заданный разделитель в строке и создает список. |
-| **Синтаксис** | ``` ("_" ?string) cmwstring:split ?newString.   ``` |
+| **Синтаксис** | ``` ("_" ?string) cmwstring:split ?newString. ``` |
 | **Возвращает** | — |
 | `cmwstring:format` | |
 | **Описание** | Форматирует аргументы в соответствии с заданным шаблоном. Возвращает отформатированную строку. |
-| **Синтаксис** | ``` ("{0}/{1} - {2}" ?v0 ?v1 ?v2) cmwstring:format ?outString.   ``` |
+| **Синтаксис** | ``` ("{0}/{1} - {2}" ?v0 ?v1 ?v2) cmwstring:format ?outString. ``` |
 | **Возвращает** | `string` |
 
 ### Функции для работы со строками `cmwlogics`
@@ -725,7 +711,7 @@ from  {
 | `cmwlogics:value` | |
 | --- | --- |
 | **Описание** | Присваивает значение субъекта объекту. |
-| **Синтаксис** | ``` ?left cmwlogics:value ?right.   ```  ``` {    time:now => ?left.    ?left cmwlogics:value ?right.    Result: ?right = dateTime.UtcNow.  }   ``` |
+| **Синтаксис** | ``` ?left cmwlogics:value ?right. ```  ``` {    time:now => ?left.    ?left cmwlogics:value ?right.    Result: ?right = dateTime.UtcNow.  } ``` |
 | **Возвращает** | `number` `dateTime` `string` `duration` `reference` `account` |
 
 ### Функции для работы со строками `cmwentity`
@@ -735,31 +721,31 @@ from  {
 | `cmwentity:like` | |
 | --- | --- |
 | **Описание** | Сравнивает шаблон и строку. |
-| **Синтаксис** | ``` ?pattern cmwentity:like ?sourceString.   ``` |
+| **Синтаксис** | ``` ?pattern cmwentity:like ?sourceString. ``` |
 | **Возвращает** | `bool` |
 | `cmwentity:startsWith` | |
 | **Описание** | Проверяет, что заданная строка начинается в соответствии с шаблоном и (опционально) в соответствии с заданной опцией сравнения (StringComparison). |
-| **Синтаксис** | ``` ?sourceString entity:startsWith ?pattern.   ```  ``` (?sourceString "OrdinalIgnoreCase") entity:startsWith ?pattern.   ``` |
+| **Синтаксис** | ``` ?sourceString entity:startsWith ?pattern. ```  ``` (?sourceString "OrdinalIgnoreCase") entity:startsWith ?pattern. ``` |
 | **Возвращает** | `bool` |
 | `cmwentity:endsWith` | |
 | **Описание** | Проверяет, что заданная строка заканчивается в соответствии с шаблоном и (опционально) в соответствии с заданной опцией сравнения (StringComparison). |
-| **Синтаксис** | ``` ?sourceString entity:endsWith ?pattern.   ```  ``` (?sourceString "OrdinalIgnoreCase") entity:endsWith ?pattern.   ``` |
+| **Синтаксис** | ``` ?sourceString entity:endsWith ?pattern. ```  ``` (?sourceString "OrdinalIgnoreCase") entity:endsWith ?pattern. ``` |
 | **Возвращает** | `bool` |
 | `cmwentity:indexOf` | |
 | **Описание** | Возвращает индекс первого вхождения подстроки в строку. Отсчет начинается с 1. |
-| **Синтаксис** | ``` (?sourceString ?substring) entity:indexOf ?index.   ``` |
+| **Синтаксис** | ``` (?sourceString ?substring) entity:indexOf ?index. ``` |
 | **Возвращает** | `number` |
 | `cmwentity:toLower` | |
 | **Описание** | Преобразует все символы строки в строчные. |
-| **Синтаксис** | ``` ?string entity:toLower ?stringLow.   ``` |
+| **Синтаксис** | ``` ?string entity:toLower ?stringLow. ``` |
 | **Возвращает** | `string` |
 | `cmwentity:toUpper` | |
 | **Описание** | Преобразует все символы строки в прописные. |
-| **Синтаксис** | ``` ?string entity:toUpper ?stringUpper.   ``` |
+| **Синтаксис** | ``` ?string entity:toUpper ?stringUpper. ``` |
 | **Возвращает** | `string` |
 | `cmwentity:contains` | |
 | **Описание** | Проверяет вхождение значения объекта типа `string` в значение субъекта типа `string`. |
-| **Синтаксис** | ``` ?string entity:contains ?subString.   ``` |
+| **Синтаксис** | ``` ?string entity:contains ?subString. ``` |
 | **Возвращает** | `string` |
 
 ### Функции для работы со строками `cmwbuiltin`
@@ -769,7 +755,7 @@ from  {
 | `cmwbuiltin:toPlainText` | |
 | --- | --- |
 | **Описание** | Конвертирует HTML-текст в обычный. |
-| **Синтаксис** | ``` ?htmlText builtin:toPlainText ?plainText.   ``` |
+| **Синтаксис** | ``` ?htmlText builtin:toPlainText ?plainText. ``` |
 | **Возвращает** | `string` |
 
 ### Функции для работы со списками `w3list`
@@ -779,19 +765,19 @@ from  {
 | `w3list:append` | |
 | --- | --- |
 | **Описание** | Добавляет элементы к списку |
-| **Синтаксис** | ``` ((1 2) (3 4)) w3list:append ?resultingList1234.   ``` |
+| **Синтаксис** | ``` ((1 2) (3 4)) w3list:append ?resultingList1234. ``` |
 | **Возвращает** | `list` |
 | `w3list:in` | |
 | **Описание** | Если объект — список, и в нём есть субъект, возвращает `true` |
-| **Синтаксис** | ``` ?subjectToFind w3list:in ?list.   ``` |
+| **Синтаксис** | ``` ?subjectToFind w3list:in ?list. ``` |
 | **Возвращает** | `bool` |
 | `w3list:last` | |
 | **Описание** | Из представленной последовательности получает последний элемент. |
-| **Синтаксис** | ``` ?listFlowers w3list:last ?lastFlower.   ``` |
+| **Синтаксис** | ``` ?listFlowers w3list:last ?lastFlower. ``` |
 | **Возвращает** | `string` |
 | `w3list:member` | |
 | **Описание** | - Если субъект — список, и в нём есть объект, возвращает `true`. - Если субъект — список, а объект не задан, возвращает итератор по элементам списка. |
-| **Синтаксис** | ``` ?list w3list:member ?objectToFind.   ```  ``` ?list w3list:member ?listElements.   ``` |
+| **Синтаксис** | ``` ?list w3list:member ?objectToFind. ```  ``` ?list w3list:member ?listElements. ``` |
 | **Возвращает** | `bool`, `iterator` |
 |
 
@@ -800,11 +786,11 @@ from  {
 `@prefix cmwlist: <http://comindware.com/logics/list#>.` | || `cmwlist:length` | |
 | --- | --- |
 | **Описание** | Возвращает количество элементов последовательности. |
-| **Синтаксис** | ``` ?listFlowers cmwlist:length ?countFlowers.   ``` |
+| **Синтаксис** | ``` ?listFlowers cmwlist:length ?countFlowers. ``` |
 | **Возвращает** | `number` |
 | `cmwlist:at` | |
 | **Описание** | Берёт список элементов и задает индекс. Возвращает значение элемента, соответствующее индексу. `([23, 25, 12] 2)` возвращает `12`. |
-| **Синтаксис** | ``` (?list ?index) cmwlist:at ?valueOfIndex.   ``` |
+| **Синтаксис** | ``` (?list ?index) cmwlist:at ?valueOfIndex. ``` |
 | **Возвращает** | `string` |
 
 ### Функции группировки и сортировки списков `cmwentity`
@@ -814,11 +800,11 @@ from  {
 | `cmwentity:groupby` | |
 | --- | --- |
 | **Описание** | Группировка |
-| **Синтаксис** | ``` (?recordTemplate ?dataSet) entity:groupby ?attributeGroup.   ```  Входные данные:  ``` (("key1_1" "key2_1" "value1_1") ("key1_2" "key2_2" "value1_2") ("key1_3" "key2_3" "value1_3"))   ```  Результат: ```  (("value1_2") ("value1_1") ("value1_3"))   ``` |
+| **Синтаксис** | ``` (?recordTemplate ?dataSet) entity:groupby ?attributeGroup. ```  Входные данные:  ``` (("key1_1" "key2_1" "value1_1") ("key1_2" "key2_2" "value1_2") ("key1_3" "key2_3" "value1_3")) ```  Результат: ```  (("value1_2") ("value1_1") ("value1_3")) ``` |
 | **Возвращает** | `list` |
 | `cmwentity:sortby` | |
 | **Описание** | Сортировка |
-| **Синтаксис** | ``` (?recordTemplate ?dataSet) entity:sortby ?attributeGroup.   ```  Входные данные:  ``` (("key1_1" "key2_1" "value1_1") ("key1_2" "key2_2" "value1_2") ("key1_3" "key2_3" "value1_3"))   ```  Результат: ```  (("value1_2") ("value1_1") ("value1_3"))   ``` |
+| **Синтаксис** | ``` (?recordTemplate ?dataSet) entity:sortby ?attributeGroup. ```  Входные данные:  ``` (("key1_1" "key2_1" "value1_1") ("key1_2" "key2_2" "value1_2") ("key1_3" "key2_3" "value1_3")) ```  Результат: ```  (("value1_2") ("value1_1") ("value1_3")) ``` |
 | **Возвращает** | `list` |
 
 ### Функции логических выражений и логики `cmwassert`
@@ -828,39 +814,39 @@ from  {
 | `cmwassert:true` | |
 | --- | --- |
 | **Описание** | Объявляет логическое значение `true` |
-| **Синтаксис** | ``` true   ``` |
+| **Синтаксис** | ``` true ``` |
 | **Возвращает** | `boolean` |
 | `cmwassert:false` | |
 | **Описание** | Объявляет логическое значение `false` |
-| **Синтаксис** | ``` false   ``` |
+| **Синтаксис** | ``` false ``` |
 | **Возвращает** | `boolean` |
 | `cmwassert:or` | |
 | **Описание** | Оператор `ИЛИ` |
-| **Синтаксис** | ``` or {} or {} … or {}.   ``` |
+| **Синтаксис** | ``` or {} or {} … or {}. ``` |
 | **Возвращает** | `boolean` |
 | `cmwassert:if` | |
 | **Описание** | Условный оператор |
-| **Синтаксис** | ``` if {} then {} else {}.   ``` |
+| **Синтаксис** | ``` if {} then {} else {}. ``` |
 | **Возвращает** | `boolean` |
 | `cmwassert:count` | |
 | **Описание** | Выводит количество записей, удовлетворяющих условиям. |
-| **Синтаксис** | ``` {} assert:count ?c.   ``` |
+| **Синтаксис** | ``` {} assert:count ?c. ``` |
 | **Возвращает** | `number` |
 | `cmwassert:union` | |
 | **Описание** | Объединяет итераторы в один. |
-| **Синтаксис** | ``` ({} … {}) assert:union true.   ``` |
+| **Синтаксис** | ``` ({} … {}) assert:union true. ``` |
 | **Возвращает** | `list` |
 | `cmwassert:distinct` | |
 | **Описание** | Выбирает уникальные записи из связанных наборов данных. |
-| **Синтаксис** | ``` {  ?item ?Positions ?PositionsVal.  ?PositionsVal ?Items ?ItemsVal.  } assert:distinct ?ItemsVal.   ``` |
+| **Синтаксис** | ``` {  ?item ?Positions ?PositionsVal.  ?PositionsVal ?Items ?ItemsVal.  } assert:distinct ?ItemsVal. ``` |
 | **Возвращает** | `list` |
 | `cmwassert:sort` | |
 | **Описание** | Сортирует элементы по заданному критерию. |
-| **Синтаксис** | ``` @in ?historyRecord1, ?historyRecord2.  @out ?result.  {    ?historyRecord1 history:recordDate ?recordDate1.    ?historyRecord2 history:recordDate ?recordDate2.    (?recordDate1 ?recordDate2) sort:timeComparer ?result.  } => { (?historyRecord1 ?historyRecord2) notification:sortHistoryRecords ?result }.    {    from {      ?actualHistoryRecord history:recordOfSubjectHistory ?subject.      ?actualHistoryRecord history:recordDate ?actualHistoryDate.      ?actualHistoryDate math:notLessThan ?oldestHistoryDate.      ?actualHistoryDate math:notGreaterThan ?newestHistoryDate.    } select ?actualHistoryRecord -> ?actualHistoryRecords.    (?actualHistoryRecords notification:sortHistoryRecords) assert:sort ?actualHistoryRecordsSorted.  }   ``` |
+| **Синтаксис** | ``` @in ?historyRecord1, ?historyRecord2.  @out ?result.  {    ?historyRecord1 history:recordDate ?recordDate1.    ?historyRecord2 history:recordDate ?recordDate2.    (?recordDate1 ?recordDate2) sort:timeComparer ?result.  } => { (?historyRecord1 ?historyRecord2) notification:sortHistoryRecords ?result }.    {    from {      ?actualHistoryRecord history:recordOfSubjectHistory ?subject.      ?actualHistoryRecord history:recordDate ?actualHistoryDate.      ?actualHistoryDate math:notLessThan ?oldestHistoryDate.      ?actualHistoryDate math:notGreaterThan ?newestHistoryDate.    } select ?actualHistoryRecord -> ?actualHistoryRecords.    (?actualHistoryRecords notification:sortHistoryRecords) assert:sort ?actualHistoryRecordsSorted.  } ``` |
 | **Возвращает** | `list` |
 | `cmwassert:once` | |
 | **Описание** | Выходит после первой успешной итерации |
-| **Синтаксис** | ``` once {}.   ``` |
+| **Синтаксис** | ``` once {}. ``` |
 | **Возвращает** | — |
 
 ### Функции для работы с идентификаторами ресурсов `cmwurl`
@@ -870,15 +856,15 @@ from  {
 | `cmwurl:encode` | |
 | --- | --- |
 | **Описание** | Кодирует строку URL-адреса. Аналог `System.Web.HttpUtility.UrlEncode(url)` |
-| **Синтаксис** | ``` ?url cmwurl:encode ?encodedUrl.   ``` |
+| **Синтаксис** | ``` ?url cmwurl:encode ?encodedUrl. ``` |
 | **Возвращает** | `string` |
 | `cmwurl:combine` | |
 | **Описание** | Объединяет части предоставления списка строк пути в путь одной строкой. Аналог `System.IO.Path.Combine` |
-| **Синтаксис** | ``` (?path1 ?path2 ?path3 ...) cmwurl:combine ?combinedPath.   ``` |
+| **Синтаксис** | ``` (?path1 ?path2 ?path3 ...) cmwurl:combine ?combinedPath. ``` |
 | **Возвращает** | `string` |
 | `cmwurl:siteDir` | |
 | **Описание** | Получает текущую директорию нахождения проекта. |
-| **Синтаксис** | ``` ?unused cmwurl:siteDir ?siteDir.   ``` |
+| **Синтаксис** | ``` ?unused cmwurl:siteDir ?siteDir. ``` |
 | **Возвращает** | `string` |
 
 ### Функции для работы с идентификаторами ресурсов `cmwui`
@@ -888,11 +874,11 @@ from  {
 | `cmwui:toClientString` | |
 | --- | --- |
 | **Описание** | Получает строковое представление ресурса (элемента или атрибута). |
-| **Синтаксис** | ``` ?object cmwui:toClientString ?string.   ``` |
+| **Синтаксис** | ``` ?object cmwui:toClientString ?string. ``` |
 | **Возвращает** | `string` |
 | `cmwui:toQName` | |
 | **Описание** | Преобразует строковое представление ресурса в QName. |
-| **Синтаксис** | ``` ?object cmwui:toQName ?qName.   ``` |
+| **Синтаксис** | ``` ?object cmwui:toQName ?qName. ``` |
 | **Возвращает** | `string` |
 
 ### Функции поддерживающие и корректно обрабатывающие нулевые значения `cmwnullable`
@@ -902,119 +888,119 @@ from  {
 | `cmwnullable:lessThan` | |
 | --- | --- |
 | **Описание** | Меньше чем. (`dateTime` , `date` , `duration` , `string` , `number`). Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` ?recordDate cmwnullable:lessThan ?maxDate.   ``` |
+| **Синтаксис** | ``` ?recordDate cmwnullable:lessThan ?maxDate. ``` |
 | **Возвращает** | `bool` |
 | `cmwnullable:greaterThan` | |
 | **Описание** | Больше чем (`dateTime` , `date` , `duration` , `string` , `number`). Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` ?recordDate cmwnullable:greaterThan ?minDate.   ``` |
+| **Синтаксис** | ``` ?recordDate cmwnullable:greaterThan ?minDate. ``` |
 | **Возвращает** | `bool` |
 | `cmwnullable:notLessThan` | |
 | **Описание** | Не меньше (`dateTime` , `date` , `duration` , `string` , `number`). Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` ?documentRecordsCount cmwnullable:notLessThan 2.   ``` |
+| **Синтаксис** | ``` ?documentRecordsCount cmwnullable:notLessThan 2. ``` |
 | **Возвращает** | `bool` |
 | `cmwnullable:notGreaterThan` | |
 | **Описание** | Не больше (`dateTime` , `date` , `duration` , `string` , `number`). Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` ?documentRecordsCount cmwnullable:notGreaterThan 2.   ``` |
+| **Синтаксис** | ``` ?documentRecordsCount cmwnullable:notGreaterThan 2. ``` |
 | **Возвращает** | `bool` |
 | `cmwnullable:quotient` | |
 | **Описание** | Берёт 2 аргумента в скобках, указанные в субъекте и результат деления первого на второе помещает в переменную объекта. Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` (?WorkInSeconds ?WorkDaysInSeconds) cmwnullable:quotient ?WorkSeconds.   ``` |
+| **Синтаксис** | ``` (?WorkInSeconds ?WorkDaysInSeconds) cmwnullable:quotient ?WorkSeconds. ``` |
 | **Возвращает** | `number` |
 | `cmwnullable:product` | |
 | **Описание** | Берёт 2 аргумента в скобках, указанные в субъекте и результат их умножения помещает в переменную объекта. Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` (?productingWorkInSeconds ?productingWorkDaysInSeconds) cmwnullable:product ?productingWorkSeconds.   ``` |
+| **Синтаксис** | ``` (?productingWorkInSeconds ?productingWorkDaysInSeconds) cmwnullable:product ?productingWorkSeconds. ``` |
 | **Возвращает** | `number` |
 | `cmwnullable:integerQuotient` | |
 | **Описание** | Берёт 2 аргумента в скобках, указанные в субъекте и результат целочисленного деления первого на второе помещает в переменную объекта. Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` (?WorkInSeconds ?WorkDaysInSeconds) cmwnullable:integerQuotient ?WorkSeconds.   ``` |
+| **Синтаксис** | ``` (?WorkInSeconds ?WorkDaysInSeconds) cmwnullable:integerQuotient ?WorkSeconds. ``` |
 | **Возвращает** | `number` |
 | `cmwnullable:remainder` | |
 | **Описание** | Берёт 2 аргумента в скобках, указанные в субъекте и остаток от деления первого на второе помещает в переменную объекта. Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` (?remainingWorkInSeconds ?remainingWorkDaysInSeconds) cmwnullable:remainder ?remainingWorkSeconds.   ``` |
+| **Синтаксис** | ``` (?remainingWorkInSeconds ?remainingWorkDaysInSeconds) cmwnullable:remainder ?remainingWorkSeconds. ``` |
 | **Возвращает** | `number` |
 | `cmwnullable:sum` | |
 | **Описание** | Берёт сумму из субъекта типа `List` и записывает значение в объект. Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` ?durationsSeconds cmwnullable:sum ?durationSumSeconds.   ``` |
+| **Синтаксис** | ``` ?durationsSeconds cmwnullable:sum ?durationSumSeconds. ``` |
 | **Возвращает** | `number` |
 | `cmwnullable:difference` | |
 | **Описание** | Берёт разность из субъекта типа `List` и записывает значение в объект. Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` ?list cmwnullable:difference ?differenceTotal.   ``` |
+| **Синтаксис** | ``` ?list cmwnullable:difference ?differenceTotal. ``` |
 | **Возвращает** | `number` |
 | `cmwnullable:startOfDay` | |
 | **Описание** | Берёт значение из субъекта типа `dateTime` и возвращает дату и время начала дня, в пределах которого находится значение субъекта. Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` ?creationDateTime cmwnullable:startOfDay ?startDateTime.   ``` |
+| **Синтаксис** | ``` ?creationDateTime cmwnullable:startOfDay ?startDateTime. ``` |
 | **Возвращает** | `dateTime` |
 | `cmwnullable:startOfWeek` | |
 | **Описание** | Берёт значение из субъекта типа `dateTime` и возвращает дату и время начала недели, в пределах которой находится значение субъекта. Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` ?creationDateTime cmwnullable:startOfWeek ?startDateTime.   ``` |
+| **Синтаксис** | ``` ?creationDateTime cmwnullable:startOfWeek ?startDateTime. ``` |
 | **Возвращает** | `dateTime` |
 | `cmwnullable:startOfMonth` | |
 | **Описание** | Берёт значение из субъекта типа `dateTime` и возвращает дату и время начала месяца, в пределах которого находится значение субъекта. Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` ?creationDateTime cmwnullable:startOfMonth ?startDateTime.   ``` |
+| **Синтаксис** | ``` ?creationDateTime cmwnullable:startOfMonth ?startDateTime. ``` |
 | **Возвращает** | `dateTime` |
 | `cmwnullable:startOfQuarter` | |
 | **Описание** | Берёт значение из субъекта типа `dateTime` и возвращает дату и время начала квартала, в пределах которого находится значение субъекта. Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` ?creationDateTime cmwnullable:startOfQuarter ?startDateTime.   ``` |
+| **Синтаксис** | ``` ?creationDateTime cmwnullable:startOfQuarter ?startDateTime. ``` |
 | **Возвращает** | `dateTime` |
 | `cmwnullable:startOfYear` | |
 | **Описание** | Берёт значение из субъекта типа `dateTime` и возвращает дату и время начала месяца, в пределах которого находится значение субъекта. Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` ?creationDateTime cmwnullable:startOfYear ?startDateTime.   ``` |
+| **Синтаксис** | ``` ?creationDateTime cmwnullable:startOfYear ?startDateTime. ``` |
 | **Возвращает** | `dateTime` |
 | `cmwnullable:endOfDay` | |
 | **Описание** | Берёт значение из субъекта типа `dateTime` и возвращает дату и время окончания дня, в пределах которого находится значение субъекта. Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` ?creationDateTime cmwnullable:endOfDay ?endDateTime.   ``` |
+| **Синтаксис** | ``` ?creationDateTime cmwnullable:endOfDay ?endDateTime. ``` |
 | **Возвращает** | `dateTime` |
 | `cmwnullable:endOfWeek` | |
 | **Описание** | Берёт значение из субъекта типа `dateTime` и возвращает дату и время окончания недели, в пределах которой находится значение субъекта. Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` ?creationDateTime cmwnullable:endOfWeek ?endDateTime.   ``` |
+| **Синтаксис** | ``` ?creationDateTime cmwnullable:endOfWeek ?endDateTime. ``` |
 | **Возвращает** | `dateTime` |
 | `cmwnullable:endOfMonth` | |
 | **Описание** | Берёт значение из субъекта типа `dateTime` и возвращает дату и время окончания месяца, в пределах которого находится значение субъекта. Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` ?creationDateTime cmwnullable:endOfMonth ?endDateTime.   ``` |
+| **Синтаксис** | ``` ?creationDateTime cmwnullable:endOfMonth ?endDateTime. ``` |
 | **Возвращает** | `dateTime` |
 | `cmwnullable:endOfQuarter` | |
 | **Описание** | Берёт значение из субъекта типа `dateTime` и возвращает дату и время окончания квартала, в пределах которого находится значение субъекта. Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` ?creationDateTime cmwnullable:endOfQuarter ?endDateTime.   ``` |
+| **Синтаксис** | ``` ?creationDateTime cmwnullable:endOfQuarter ?endDateTime. ``` |
 | **Возвращает** | `dateTime` |
 | `cmwnullable:endOfYear` | |
 | **Описание** | Берёт значение из субъекта типа `dateTime` и возвращает дату и время окончания года, в пределах которого находится значение субъекта. Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` ?creationDateTime cmwnullable:endOfYear ?endDateTime.   ``` |
+| **Синтаксис** | ``` ?creationDateTime cmwnullable:endOfYear ?endDateTime. ``` |
 | **Возвращает** | `dateTime` |
 | `cmwnullable:inSeconds` | |
 | **Описание** | Конвертирует значение длительности в количество секунд. Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` ?durationWorkingDay cmwnullable:inSeconds ?secondsWorkingDay.   ``` |
+| **Синтаксис** | ``` ?durationWorkingDay cmwnullable:inSeconds ?secondsWorkingDay. ``` |
 | **Возвращает** | `number` |
 | `cmwnullable:min` | |
 | **Описание** | Берёт минимальное значение из субъекта типа `List` и записывает значение в объект. Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` ?listQueue cmwnullable:min ?queueMin.   ``` |
+| **Синтаксис** | ``` ?listQueue cmwnullable:min ?queueMin. ``` |
 | **Возвращает** | `number` `dateTime` `date` `duration` |
 | `cmwnullable:max` | |
 | **Описание** | Берёт максимальное значение из субъекта типа `List` и записывает значение в объект. Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` ?listQueue cmwnullable:max ?queueMax.   ``` |
+| **Синтаксис** | ``` ?listQueue cmwnullable:max ?queueMax. ``` |
 | **Возвращает** | `number` `dateTime` `date` `duration` |
 | `cmwnullable:average` | |
 | **Описание** | Берёт 2 аргумента в скобках, указанные в субъекте и помещает их среднее арифметическое в переменную объекта. Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` (?priceFirst ?priceSecond) cmwnullable:average ?priceAverage.   ``` |
+| **Синтаксис** | ``` (?priceFirst ?priceSecond) cmwnullable:average ?priceAverage. ``` |
 | **Возвращает** | `number` |
 | `cmwnullable:toDuration` | |
 | **Описание** | Конвертирует количество секунд в значение типа `duration`. Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` ?secondsWorkingDay cmwnullable:toDuration ?durationWorkingDay.   ``` |
+| **Синтаксис** | ``` ?secondsWorkingDay cmwnullable:toDuration ?durationWorkingDay. ``` |
 | **Возвращает** | `duration` |
 | `cmwnullable:round` | |
 | **Описание** | Округление к ближайшему целому. Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` ?quotientPrice cmwnullable:round ?numberRound.   ``` |
+| **Синтаксис** | ``` ?quotientPrice cmwnullable:round ?numberRound. ``` |
 | **Возвращает** | `number` |
 | `cmwnullable:floor` | |
 | **Описание** | Округление в меньшую сторону. Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` ?quotientPrice cmwnullable:floor ?numberFloor.   ``` |
+| **Синтаксис** | ``` ?quotientPrice cmwnullable:floor ?numberFloor. ``` |
 | **Возвращает** | `number` |
 | `cmwnullable:ceiling` | |
 | **Описание** | Округление в большую сторону. Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` ?quotientPrice cmwnullable:ceiling ?numberCeil.   ``` |
+| **Синтаксис** | ``` ?quotientPrice cmwnullable:ceiling ?numberCeil. ``` |
 | **Возвращает** | `number` |
 | `cmwnullable:format` | |
 | **Описание** | Форматирует аргументы в соответствии с заданным шаблоном. Возвращает отформатированную строку. Если в субъекте нулевое значение, возвращает нулевое значение. |
-| **Синтаксис** | ``` ("{0}/{1} - {2}" ?v0 ?v1 ?v2) cmwnullable:format ?outString.   ``` |
+| **Синтаксис** | ``` ("{0}/{1} - {2}" ?v0 ?v1 ?v2) cmwnullable:format ?outString. ``` |
 | **Возвращает** | `string` |
 
 ### Функции для работы с изображениями `cmwbuiltin`
@@ -1024,11 +1010,11 @@ from  {
 | `cmwbuiltin:isSupportedImage` | |
 | --- | --- |
 | **Описание** | Проверяет формат файла на соответствие одному из допустимых форматов: `.bmp, .gif, .exif, .jpg, .jpeg, .png, .tif` |
-| **Синтаксис** | ``` "bllalblablab.jpg" => ?fileName.  ?fileName builtin:isSupportedImage ?right.   ``` |
+| **Синтаксис** | ``` "bllalblablab.jpg" => ?fileName.  ?fileName builtin:isSupportedImage ?right. ``` |
 | **Возвращает** | `bool` |
 | `cmwbuiltin:dimensions` | |
 | **Описание** | По `streamId` изображения получает разрешение в формате ширина × высота. |
-| **Синтаксис** | ``` ?streamId builtin:dimensions ?dimensions.   ``` |
+| **Синтаксис** | ``` ?streamId builtin:dimensions ?dimensions. ``` |
 | **Возвращает** | `string` |
 
 ### Специальные функции для работы с аккаунтами и группами `cmwlogics`
@@ -1038,11 +1024,11 @@ from  {
 | `cmwlogics:currentUser` | |
 | --- | --- |
 | **Описание** | Предикат, получающий аккаунт текущего пользователя. |
-| **Синтаксис** | ``` cmwlogics:securityContext cmwlogics:currentUser ?userVal.   ``` |
+| **Синтаксис** | ``` cmwlogics:securityContext cmwlogics:currentUser ?userVal. ``` |
 | **Возвращает** | — |
 | `cmwlogics:securityContext` | |
 | **Описание** | Субъект, определяющий контекст персонального пространства. |
-| **Синтаксис** | ``` cmwlogics:securityContext cmwlogics:currentUser ?userVal.   ``` |
+| **Синтаксис** | ``` cmwlogics:securityContext cmwlogics:currentUser ?userVal. ``` |
 | **Возвращает** | — |
 
 ### Специальные функции для работы с аккаунтами и группами `cmwaccount`
@@ -1052,135 +1038,135 @@ from  {
 | `cmwaccount:Group` | |
 | --- | --- |
 | **Описание** | Определяет тип переменной Группа. |
-| **Синтаксис** | ``` ?group rdf:type cmwaccount:Group.   ``` |
+| **Синтаксис** | ``` ?group rdf:type cmwaccount:Group. ``` |
 | **Возвращает** | — |
 | `cmwaccount:groupName` | |
 | **Описание** | Предикат для получения наименования группы. |
-| **Синтаксис** | ``` ?group cmwaccount:groupName ?groupName.   ``` |
+| **Синтаксис** | ``` ?group cmwaccount:groupName ?groupName. ``` |
 | **Возвращает** | `string` |
 | `cmwaccount:isSystemAdministrator` | |
 | **Описание** | Предикат для определения принадлежности аккаунта к системной роли «Системные администраторы» |
-| **Синтаксис** | ``` ?user cmwaccount:isSystemAdministrator ?access.   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:isSystemAdministrator ?access. ``` |
 | **Возвращает** | `bool` |
 | `cmwaccount:displayName` | |
 | **Описание** | Предикат, для получения полного имени аккаунта |
-| **Синтаксис** | ``` ?user cmwaccount:displayName ?userDisplayName.   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:displayName ?userDisplayName. ``` |
 | **Возвращает** | `string` |
 | `cmwaccount:fullName` | |
 | **Описание** | Предикат для получения Ф. И. О. аккаунта. |
-| **Синтаксис** | ``` ?user cmwaccount:fullName ?userNameSurname.   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:fullName ?userNameSurname. ``` |
 | **Возвращает** | `string` |
 | `cmwaccount:manager` | |
 | **Описание** | Предикат для получения аккаунта руководителя, указанного для аккаунта. |
-| **Синтаксис** | ``` ?user cmwaccount:manager ?userManager.   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:manager ?userManager. ``` |
 | **Возвращает** | `accountProperty` |
 | `cmwaccount:mbox` | |
 | **Описание** | Предикат для получения адреса эл. почты аккаунта. |
-| **Синтаксис** | ``` ?user cmwaccount:mbox ?userEmail.   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:mbox ?userEmail. ``` |
 | **Возвращает** | `string` |
 | `cmwaccount:phone` | |
 | **Описание** | Предикат для получения номера телефона аккаунта. |
-| **Синтаксис** | ``` ?user cmwaccount:phone ?userMobile.   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:phone ?userMobile. ``` |
 | **Возвращает** | `string` |
 | `cmwaccount:instantMessagingId` | |
 | **Описание** | Предикат для получения идентификатора аккаунта в мессенджере. |
-| **Синтаксис** | ``` account:instantMessagingId   ``` |
+| **Синтаксис** | ``` account:instantMessagingId ``` |
 | **Возвращает** | `string` |
 | `cmwaccount:status` | |
 | **Описание** | Предикат для получения статуса аккаунта: `true` — включён. |
-| **Синтаксис** | ``` ?user cmwaccount:status ? enabled.   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:status ? enabled. ``` |
 | **Возвращает** | `bool` |
 | `cmwaccount:skype` | |
 | **Описание** | Предикат для получения идентификатора аккаунта в Skype. |
-| **Синтаксис** | ``` ?user cmwaccount:skype ?loginSkype.   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:skype ?loginSkype. ``` |
 | **Возвращает** | `string` |
 | `cmwaccount:username` | |
 | **Описание** | Предикат для получения имени пользователя (логина) аккаунта. |
-| **Синтаксис** | ``` ?user cmwaccount:username ?login.   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:username ?login. ``` |
 | **Возвращает** | `string` |
 | `cmwaccount:active` | |
 | **Описание** | Предикат для получения состояния аккаунта: `true` — включён. |
-| **Синтаксис** | ``` ?user cmwaccount:active ? enabled.   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:active ? enabled. ``` |
 | **Возвращает** | `bool` |
 | `cmwaccount:lastLoginDate` | |
 | **Описание** | Предикат для получения даты последней авторизации аккаунта. |
-| **Синтаксис** | ``` ?user cmwaccount:lastLoginDate ?lastLoginDate.   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:lastLoginDate ?lastLoginDate. ``` |
 | **Возвращает** | `dateTime` |
 | `cmwaccount:language` | |
 | **Описание** | Предикат для получения кода языка отображения веб-сайта для аккаунта. |
-| **Синтаксис** | ``` ?user cmwaccount:language ?userLanguage.   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:language ?userLanguage. ``` |
 | **Возвращает** | `string` |
 | `cmwaccount:sid` | |
 | **Описание** | Предикат для получения Active Directory Security ID аккаунта. |
-| **Синтаксис** | ``` ?user account:sid ?sid.   ``` |
+| **Синтаксис** | ``` ?user account:sid ?sid. ``` |
 | **Возвращает** | `string` |
 | `cmwaccount:notificationSettings` | |
 | **Описание** | Предикат для получения параметров уведомлений аккаунта |
-| **Синтаксис** | ``` ?user account:notificationSettings ?notificationConfig .   ``` |
+| **Синтаксис** | ``` ?user account:notificationSettings ?notificationConfig . ``` |
 | **Возвращает** | `multiValue` |
 | `cmwaccount:password` | |
 | **Описание** | Предикат для получения пароля к аккаунту. |
-| **Синтаксис** | ``` ?user cmwaccount:password ?userPassword   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:password ?userPassword ``` |
 | **Возвращает** | `string` |
 | `cmwaccount:userpic` | |
 | **Описание** | Предикат для получения изображения профиля аккаунта. |
-| **Синтаксис** | ``` ?user cmwaccount:userpic ?picture ..   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:userpic ?picture .. ``` |
 | **Возвращает** | `string` |
 | `cmwaccount:userpicLarge` | |
 | **Описание** | Предикат для получения увеличенного изображения профиля аккаунта. |
-| **Синтаксис** | ``` ?user cmwaccount:userpicLarge ?picture.   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:userpicLarge ?picture. ``` |
 | **Возвращает** | `string` |
 | `cmwaccount:title` | |
 | **Описание** | Предикат для получения наименования должности аккаунта. |
-| **Синтаксис** | ``` ?user cmwaccount:title  ?jobTitle.   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:title  ?jobTitle. ``` |
 | **Возвращает** | `string` |
 | `cmwaccount:department` | |
 | **Описание** | Предикат для получения наименования отдела аккаунта. |
-| **Синтаксис** | ``` ?user cmwaccount:department  ?departmentName.   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:department  ?departmentName. ``` |
 | **Возвращает** | `string` |
 | `cmwaccount:office` | |
 | **Описание** | Предикат для получения наименования офиса аккаунта. |
-| **Синтаксис** | ``` ?user cmwaccount:office  ?officeName.   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:office  ?officeName. ``` |
 | **Возвращает** | `string` |
 | `cmwaccount:userGroupMembership` | |
 | **Описание** | Предикат для получения списка групп, в которых состоит аккаунт. |
-| **Синтаксис** | ``` ?user cmwaccount:userGroupMembership  ?groupList.   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:userGroupMembership  ?groupList. ``` |
 | **Возвращает** | `multiValue groupProperty` |
 | `cmwaccount:authenticationMethod` | |
 | **Описание** | Предикат для получения способа аутентификации аккаунта. |
-| **Синтаксис** | ``` ?user cmwaccount:authenticationMethod ?authMethod.   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:authenticationMethod ?authMethod. ``` |
 | **Возвращает** | `string` |
 | `cmwaccount:substitute` | |
 | **Описание** | Предикат для получения аккаунта заместителя, назначенного аккаунту. |
-| **Синтаксис** | ``` ?user cmwaccount:substitute ?substituteAccount.   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:substitute ?substituteAccount. ``` |
 | **Возвращает** | `accountProperty` |
 | `cmwaccount:substituteDateFrom` | |
 | **Описание** | Предикат для получения даты начала замещения аккаунта. |
-| **Синтаксис** | ``` ?user cmwaccount:substituteDateFrom  ?subsitutionStart   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:substituteDateFrom  ?subsitutionStart ``` |
 | **Возвращает** | `dateTime` |
 | `cmwaccount:substituteDateTo` | |
 | **Описание** | Предикат для получения даты окончания замещения аккаунта. |
-| **Синтаксис** | ``` ?user cmwaccount:substituteDateTo  ?subsitutionEnd   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:substituteDateTo  ?subsitutionEnd ``` |
 | **Возвращает** | `dateTime` |
 | `cmwaccount:birthday` | |
 | **Описание** | Предикат для получения дня рождения аккаунта. |
-| **Синтаксис** | ``` ?user cmwaccount:birthday  ?birthday.   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:birthday  ?birthday. ``` |
 | **Возвращает** | `dateTime` |
 | `cmwaccount:personalCalendarId` | |
 | **Описание** | Предикат для получения ID персонального календаря аккаунта. |
-| **Синтаксис** | ``` ?user cmwaccount:personalCalendarId  ?calendarID.   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:personalCalendarId  ?calendarID. ``` |
 | **Возвращает** | `string` |
 | `cmwaccount:personalCalendarUri` | |
 | **Описание** | Предикат для получения URI персонального календаря аккаунта. |
-| **Синтаксис** | ``` ?user cmwaccount:personalCalendarUri  ?calendarURI.   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:personalCalendarUri  ?calendarURI. ``` |
 | **Возвращает** | `string` |
 | `cmwaccount:presentedOnOrgchart` | |
 | **Описание** | Предикат для получения статуса включения аккаунта в организационную структуру: `true` — включён. |
-| **Синтаксис** | ``` ?user cmwaccount:presentedOnOrgchart ?onOrgChart.   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:presentedOnOrgchart ?onOrgChart. ``` |
 | **Возвращает** | `bool` |
 | `cmwaccount:timeZone` | |
 | **Описание** | Предикат для получения серверного часового пояса аккаунта. |
-| **Синтаксис** | ``` ?user cmwaccount:timeZone ?userTimeZone.   ``` |
+| **Синтаксис** | ``` ?user cmwaccount:timeZone ?userTimeZone. ``` |
 | **Возвращает** | `string` |
 
 ### Специальные функции `cmwobject`
@@ -1190,7 +1176,7 @@ from  {
 | `cmwobject:findProperty` | |
 | --- | --- |
 | **Описание** | Возвращает в объект ID атрибута по заданной в субъекте паре системных имён шаблона записи и атрибута. |
-| **Синтаксис** | ``` ("templateClients" "attibuteClientCode") cmwobject:findProperty ?attibute.   ``` |
+| **Синтаксис** | ``` ("templateClients" "attibuteClientCode") cmwobject:findProperty ?attibute. ``` |
 | **Возвращает** | `string` |
 
 ### Специальные функции `cmwcontext`
@@ -1200,19 +1186,19 @@ from  {
 | `cmwcontext:time` | |
 | --- | --- |
 | **Описание** | Возвращает текущее время сеанса. |
-| **Синтаксис** | ``` cmwcontext:time   ``` |
+| **Синтаксис** | ``` cmwcontext:time ``` |
 | **Возвращает** | `dateTime` |
 | `cmwcontext:timeZoneOffset` | |
 | **Описание** | Возвращает смещение часового пояса сеанса. |
-| **Синтаксис** | ``` cmwcontext:timeZoneOffset   ``` |
+| **Синтаксис** | ``` cmwcontext:timeZoneOffset ``` |
 | **Возвращает** | `number` |
 | `cmwcontext:origin` | |
 | **Описание** | Возвращает объект, по которому был запущен сценарий. |
-| **Синтаксис** | ``` cmwcontext:origin   ``` |
+| **Синтаксис** | ``` cmwcontext:origin ``` |
 | **Возвращает** | — |
 | `cmwcontext:variable` | |
 | **Описание** | Возвращает переменную в контексте. |
-| **Синтаксис** | ``` cmwcontext:variable   ``` |
+| **Синтаксис** | ``` cmwcontext:variable ``` |
 | **Возвращает** | — |
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

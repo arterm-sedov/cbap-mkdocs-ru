@@ -16,6 +16,21 @@
 </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#sso_authentication_configure_sequence">
+<span class="md-ellipsis">
+      Порядок настройки
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#sso_authentication_configure_preparation">
+<span class="md-ellipsis">
+      Подготовка параметров и конфигурации машин
+    </span>
+</a>
+<nav aria-label="Подготовка параметров и конфигурации машин" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#sso_authentication_configure_parameter_values_examples">
 <span class="md-ellipsis">
       Примеры значений параметров
@@ -25,18 +40,17 @@
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#sso_authentication_configure_instance">
 <span class="md-ellipsis">
-      Конфигурация машины linuxHost с экземпляром ПО Comindware Platform
+      Конфигурации машины &lt;linuxHost&gt; с экземпляром ПО Comindware Platform
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#sso_authentication_configure_dc_configuration">
 <span class="md-ellipsis">
-      Конфигурация машины DCName с контроллером домена
+      Конфигурация машины &lt;DCName&gt; с контроллером домена
     </span>
 </a>
-<nav aria-label="Конфигурация машины DCName с контроллером домена" class="md-nav">
-<ul class="md-nav__list">
+</li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#sso_authentication_configure_dc_trusted_hosts">
 <span class="md-ellipsis">
@@ -62,6 +76,14 @@
 </nav>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#sso_authentication_configure_keytab_prepare">
+<span class="md-ellipsis">
+      Подготовка SPN и keytab-файл аутентификации
+    </span>
+</a>
+<nav aria-label="Подготовка SPN и keytab-файл аутентификации" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#sso_authentication_configure_keytab_creation">
 <span class="md-ellipsis">
       Создание keytab-файла аутентификации
@@ -74,6 +96,9 @@
       Обновление keytab-файла аутентификации для аутентификации новых пользователей
     </span>
 </a>
+</li>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#sso_authentication_configure_linux_host_setup">
@@ -151,12 +176,8 @@
     </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#sso_authentication_configure_alt_server_pam_winbind">
-<span class="md-ellipsis">
-      Для ОС «Альт Сервер»: настройка pam_winbind.conf
-    </span>
-</a>
+</ul>
+</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#sso_authentication_configure_product_installation">
@@ -168,7 +189,7 @@
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#sso_authentication_configure_product_configuration">
 <span class="md-ellipsis">
-      Настройка экземпляра ПО
+      Включение SSO в экземпляре ПО
     </span>
 </a>
 </li>
@@ -179,13 +200,10 @@
     </span>
 </a>
 </li>
-</ul>
-</nav>
-</li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#sso_authentication_configure_instance_configuration">
 <span class="md-ellipsis">
-      Изменение конфигурации экземпляра ПО
+      Синхронизация аккаунтов экземпляра ПО с сервером каталогов
     </span>
 </a>
 </li>
@@ -200,6 +218,13 @@
 <a class="md-nav__link mkdocs_imported_link" href="#sso_authentication_configure_kerberos_trace_check">
 <span class="md-ellipsis">
       Проверка вывода трассировщика ошибок в Shell
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#sso_authentication_configure_client_setup">
+<span class="md-ellipsis">
+      Запуск и инициализация экземпляра ПО
     </span>
 </a>
 </li>
@@ -243,7 +268,50 @@
 <li><strong>Single Sign-on (SSO)</strong> — технология единого входа, позволяющая пользователям выполнять аутентификацию с использованием одного набора учётных данных в нескольких независимых системах.</li>
 </ul>
 </div>
-<h2 id="sso_authentication_configure_parameter_values_examples">Примеры значений параметров</h2>
+<h2 id="sso_authentication_configure_sequence">Порядок настройки</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Подготовьте параметры и инфраструктуру аутентификации:</p>
+<ul>
+<li>Ознакомьтесь с <a class="mkdocs_imported_link" href="#sso_authentication_configure_parameter_values_examples">примерами значений параметров</a>.</li>
+<li>Определите <a class="mkdocs_imported_link" href="#sso_authentication_configure_instance">конфигурацию машины с экземпляром ПО <strong>Comindware Platform</strong></a>.</li>
+<li>Определите <a class="mkdocs_imported_link" href="#sso_authentication_configure_dc_configuration">конфигурацию машины с контроллером домена</a>.</li>
+<li>При необходимости настройте <a class="mkdocs_imported_link" href="#sso_authentication_configure_dc_trusted_hosts">надёжные узлы на контроллере домена</a>.</li>
+<li>Создайте и настройте <a class="mkdocs_imported_link" href="#sso_authentication_configure_service_user">сервисного пользователя домена</a> и <a class="mkdocs_imported_link" href="#sso_authentication_configure_test_users">пользователей для проверки аутентификации</a>.</li>
+</ul>
+</li>
+<li>
+<p>Подготовьте SPN и keytab-файл аутентификации:</p>
+<ul>
+<li><a class="mkdocs_imported_link" href="#sso_authentication_configure_keytab_creation">Создайте keytab-файл аутентификации и перенесите его на машину с экземпляром ПО <strong>Comindware Platform</strong></a>.</li>
+<li><a class="mkdocs_imported_link" href="#sso_authentication_configure_keytab_update">Настройте обновление keytab-файла аутентификации для аутентификации новых пользователей</a>.</li>
+</ul>
+</li>
+<li>
+<p><a class="mkdocs_imported_link" href="#sso_authentication_configure_linux_host_setup">Настройте машину с экземпляром ПО <strong>Comindware Platform</strong></a> для использования SSO:</p>
+<ul>
+<li><a class="mkdocs_imported_link" href="#sso_authentication_configure_linux_host_requirements">Проверьте требования к машине</a>.</li>
+<li><a class="mkdocs_imported_link" href="#sso_authentication_configure_linux_host_network_settings">Настройте параметры сети</a>.</li>
+<li><a class="mkdocs_imported_link" href="#sso_authentication_configure_linux_host_network_verification">Проверьте настройку сети</a>.</li>
+<li><a class="mkdocs_imported_link" href="#sso_authentication_configure_time_sync">Настройте синхронизацию времени между контроллером домена и экземпляром ПО</a>;</li>
+<li><a class="mkdocs_imported_link" href="#sso_authentication_configure_kerberos_config">Настройте конфигурацию Kerberos</a></li>
+<li><a class="mkdocs_imported_link" href="#sso_authentication_configure_product_installation">Установите ПО <strong>Comindware Platform</strong></a></li>
+<li><a class="mkdocs_imported_link" href="#sso_authentication_configure_product_configuration">Включите SSO в экземпляре <strong>Comindware Platform</strong> ПО</a>;</li>
+<li><a class="mkdocs_imported_link" href="#sso_authentication_configure_nginx_spnego">Установите и настройте модуль NGINX SPNEGO</a></li>
+<li><a class="mkdocs_imported_link" href="#sso_authentication_configure_instance_configuration">Синхронизируйте аккаунты экземпляра ПО с сервером каталогов</a>.</li>
+<li><a class="mkdocs_imported_link" href="#sso_authentication_configure_kerberos_trace_check">Проверьте вывод трассировщика ошибок в Shell</a></li>
+<li><a class="mkdocs_imported_link" href="#sso_authentication_configure_client_setup">Запустите и инициализируйте экземпляр ПО</a></li>
+</ul>
+</li>
+<li>
+<p>Настройте клиентские компьютеры для использования Kerberos-аутентификации при подключении к <strong>Comindware Platform</strong>:</p>
+<ul>
+<li><a class="mkdocs_imported_link" href="#sso_authentication_configure_client_setup">Настройте клиентский компьютер</a>.</li>
+</ul>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="sso_authentication_configure_preparation">Подготовка параметров и конфигурации машин</h2>
+<h3 id="sso_authentication_configure_parameter_values_examples">Примеры значений параметров</h3>
 <p>Здесь примеры значений параметров заключены в угловые скобки <code>&lt; &gt;</code>. При настройке конфигурации заменяйте их на фактические значения, как показано в следующей таблице:</p>
 <table style="width: 100%;">
 <thead>
@@ -279,7 +347,8 @@
 <p class="admonition-title">Примечание</p>
 <p>Протокол аутентификации Kerberos учитывает регистр символов — там, где в инструкциях даны примеры параметров в верхнем регистре, следует подставлять фактические значения также в верхнем регистре.</p>
 </div>
-<h2 id="sso_authentication_configure_instance">Конфигурация машины linuxHost с экземпляром ПО Comindware Platform</h2>
+<h3 id="sso_authentication_configure_instance">Конфигурации машины <code>&lt;linuxHost&gt;</code> с экземпляром ПО Comindware Platform</h3>
+<p>В этой статье используются следующие параметры конфигурации машины с экземпляром ПО.</p>
 <table style="width: 100%;">
 <thead>
 <tr>
@@ -302,7 +371,8 @@
 </tr>
 </tbody>
 </table>
-<h2 id="sso_authentication_configure_dc_configuration">Конфигурация машины DCName с контроллером домена</h2>
+<h3 id="sso_authentication_configure_dc_configuration">Конфигурация машины <code>&lt;DCName&gt;</code> с контроллером домена</h3>
+<p>В этой статье используются следующие параметры конфигурации машины с контроллером домена.</p>
 <table style="width: 100%;">
 <thead>
 <tr>
@@ -344,7 +414,7 @@
 <li>В отобразившемся окне добавьте в список надёжных узлов <code>&lt;linuxHost&gt;</code>.</li>
 </ol>
 <figure class="screenshot_with_caption">
-<p><img alt="Добавление машины с экземпляром ПО в список доверенных узлов на контроллере домена" src="/platform/v5.0/administration/account_administration/accounts_dc_sync/linux/img/sso_authentication_configure_make_host_machine_trusted.png"/><figcaption class="caption">Добавление машины с экземпляром ПО в список доверенных узлов на контроллере домена</figcaption></p>
+<p><img alt="Добавление машины с экземпляром ПО в список доверенных узлов на контроллере домена" src="/platform/v5.0/administration/account_administration/accounts_dc_sync/linux/img/sso_authentication_configure_make_host_machine_trusted.png"/></p><figcaption class="caption">Добавление машины с экземпляром ПО в список доверенных узлов на контроллере домена</figcaption>
 </figure>
 <h3 class="pageBreakBefore" id="sso_authentication_configure_service_user">Сервисный пользователь домена</h3>
 <p>В домене должен существовать пользователь <code>&lt;authuser&gt;</code>, выступающий в роли сервисного аккаунта для модуля аутентификации <em>NGINX</em>, работающего на машине <code>&lt;linuxHost&gt;</code> с экземпляром ПО.</p>
@@ -373,7 +443,7 @@
 </table>
 <p>При создании пользователя <code>&lt;authuser&gt;</code> на вкладке «<strong>Учётная запись</strong>» (<strong>Account</strong>) необходимо установить флажки «<strong>Пользователь не может менять пароль</strong>» (<strong>User cannot change password</strong>) и «<strong>Срок действия пароля не истекает</strong>» (<strong>Password never expires</strong>), как показано на иллюстрации.</p>
 <figure class="screenshot_with_caption">
-<p><img alt="Настройка свойств сервисного аккаунта для NGINX" src="/platform/v5.0/administration/account_administration/accounts_dc_sync/linux/img/Kerberos_Rocky%2BAstra_authuser_account_config.png"/><figcaption class="caption">Настройка свойств сервисного аккаунта для NGINX</figcaption></p>
+<p><img alt="Настройка свойств сервисного аккаунта для NGINX" src="/platform/v5.0/administration/account_administration/accounts_dc_sync/linux/img/Kerberos_Rocky%2BAstra_authuser_account_config.png"/></p><figcaption class="caption">Настройка свойств сервисного аккаунта для NGINX</figcaption>
 </figure>
 <h3 id="sso_authentication_configure_test_users">Пользователи для проверки аутентификации</h3>
 <p>Для проверки работоспособности процедуры аутентификации здесь используются пользователи <code>user1</code> и <code>user2</code>, см. следующую таблицу:</p>
@@ -403,7 +473,8 @@
 </tr>
 </tbody>
 </table>
-<h2 id="sso_authentication_configure_keytab_creation">Создание keytab-файла аутентификации</h2>
+<h2 class="pageBreakBefore" id="sso_authentication_configure_keytab_prepare">Подготовка SPN и keytab-файл аутентификации</h2>
+<h3 id="sso_authentication_configure_keytab_creation">Создание keytab-файла аутентификации</h3>
 <ol class="colored_numbers_list">
 <li>
 <p>На контроллере домена <code>&lt;DCName&gt;</code> выведите список Service Principal Names (SPN), привязанных к пользователю <code>&lt;authuser&gt;</code>:</p>
@@ -428,7 +499,7 @@
 <li><a class="mkdocs_imported_link" href="#sso_authentication_configure_linux_host_setup">Настройте машину <code>&lt;linuxHost&gt;</code></a> с экземпляром ПО.</li>
 <li>Перенесите keytab-файл <code>&lt;authuser&gt;.keytab</code> на машину <code>&lt;linuxHost&gt;</code> с экземпляром ПО.</li>
 </ol>
-<h2 id="sso_authentication_configure_keytab_update">Обновление keytab-файла аутентификации для аутентификации новых пользователей</h2>
+<h3 class="pageBreakBefore" id="sso_authentication_configure_keytab_update">Обновление keytab-файла аутентификации для аутентификации новых пользователей</h3>
 <div class="notice notice-warning">
 <p class="admonition-title">Внимание!</p>
 <p>Для обеспечения возможности аутентификации новых пользователей, добавленных при синхронизации с сервером каталогов необходимо заново создать keytab-файл на машине <code>&lt;linuxHost&gt;</code> с экземпляром ПО.</p>
@@ -479,7 +550,7 @@
 <li>Должен быть установлен и сконфигурирован <code>Kerberos</code>.</li>
 <li>Должен быть установлен и настроен прокси-сервер <em>NGINX</em> с модулем аутентификации <em>SPNEGO</em> и зависимостями исполняемой среды для него.</li>
 </ul>
-<h3 id="sso_authentication_configure_linux_host_network_settings">Настройка параметров сети для разрешения DC FQDN</h3>
+<h3 class="pageBreakBefore" id="sso_authentication_configure_linux_host_network_settings">Настройка параметров сети для разрешения DC FQDN</h3>
 <h4 id="sso_authentication_configure_linux_host_hosts_file">Изменение файла hosts</h4>
 <ol class="colored_numbers_list">
 <li>
@@ -511,14 +582,14 @@
 <div class="highlight"><code><pre><span></span><code>chattr<span class="w"> </span>+i<span class="w"> </span>/etc/resolv.conf</code> <br/></pre></code></div>
 </li>
 </ol>
-<h3 id="sso_authentication_configure_linux_host_network_verification">Проверка корректности настроек сети</h3>
+<h3 class="pageBreakBefore" id="sso_authentication_configure_linux_host_network_verification">Проверка корректности настроек сети</h3>
 <ol class="colored_numbers_list">
 <li>
 <p>Убедитесь, что FQDN <code>&lt;DCName&gt;.&lt;domain.name&gt;</code> разрешается:</p>
 <div class="highlight"><code><pre><span></span><code><span class="c1"># DNS Lookup of DC</span></code> <br/><code>nslookup<span class="w"> </span>&lt;DCName&gt;</code> <br/><code>nslookup<span class="w"> </span>&lt;DCName&gt;.&lt;domain.name&gt;</code> <br/><code></code> <br/><code>host<span class="w"> </span>&lt;DCName&gt;.&lt;domain.name&gt;</code> <br/><code></code> <br/><code><span class="c1"># Reverse DNS lookup of `nameserver`</span></code> <br/><code>host<span class="w"> </span>&lt;domain.controller.ip.address&gt;</code> <br/></pre></code></div>
 </li>
 </ol>
-<h3 id="sso_authentication_configure_time_sync">Синхронизация времени между машинами DCName и linuxHost</h3>
+<h3 class="pageBreakBefore" id="sso_authentication_configure_time_sync">Синхронизация времени между машинами DCName и linuxHost</h3>
 <p>Синхронизацию времени следует настраивать в следующих случаях:</p>
 <ul>
 <li>машины <code>&lt;DCName&gt;</code> и <code>&lt;linuxHost&gt;</code> находятся в разных часовых поясах;</li>
@@ -546,7 +617,7 @@
 <div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>status<span class="w"> </span>ntp</code> <br/></pre></code></div>
 </li>
 </ol>
-<h3 id="sso_authentication_configure_kerberos_config">Настройка конфигурации Kerberos</h3>
+<h3 class="pageBreakBefore" id="sso_authentication_configure_kerberos_config">Настройка конфигурации Kerberos</h3>
 <h4 id="sso_authentication_configure_kerberos_helpers_install">Установка вспомогательных пакетов</h4>
 <ol class="colored_numbers_list">
 <li>
@@ -562,12 +633,8 @@
 <div class="highlight"><code><pre><span></span><code>which<span class="w"> </span>krb5-user</code> <br/><code>which<span class="w"> </span>krb5-config</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Установите пакеты <code>samba-dc</code> и <code>kerberos-kdc</code>:</p>
-<div class="highlight"><code><pre><span></span><code>apt-get<span class="w"> </span>install<span class="w"> </span>task-samba-dc<span class="w"> </span>krb5-kdc</code> <br/></pre></code></div>
-</li>
-<li>
-<p>Убедитесь, что модули установлены:</p>
-<div class="highlight"><code><pre><span></span><code>apt<span class="w"> </span>list<span class="w"> </span>task-samba-dc<span class="w"> </span>krb5-kdc</code> <br/></pre></code></div>
+<p>Установите пакеты <code>kerberos-kdc</code>:</p>
+<div class="highlight"><code><pre><span></span><code>apt-get<span class="w"> </span>install<span class="w"> </span>krb5-kdc</code> <br/></pre></code></div>
 </li>
 </ol>
 <h4 class="pageBreakBefore" id="sso_authentication_configure_kerberos_auth">Настройка аутентификации Kerberos</h4>
@@ -578,63 +645,73 @@
 </li>
 <li>
 <p class="pageBreakInsideAvoid">Отредактируйте файл <code>krb5.conf</code> согласно следующему примеру:</p>
-<p><strong>Astra Linux, Debian, DEB-дистрибутивы</strong></p>
+<p><strong>Astra Linux, Альт Сервер, Debian, DEB-дистрибутивы</strong></p>
 <div class="highlight"><code><pre><span></span><code><span class="c1">#astra/debian-winbind</span></code> <br/><code><span class="o">[</span>libdefaults<span class="o">]</span></code> <br/><code><span class="w">    </span><span class="nv">default_realm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>&lt;DOMAIN.NAME&gt;</code> <br/><code><span class="w">    </span><span class="nv">kdc_timesync</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span></code> <br/><code><span class="w">    </span><span class="nv">ccache_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span></code> <br/><code><span class="w">    </span><span class="nv">forwardable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span></code> <br/><code><span class="w">    </span><span class="nv">proxiable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span></code> <br/><code></code> <br/><code><span class="w">    </span>fcc-mit-ticketflags<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span></code> <br/><code><span class="w">    </span><span class="nv">dns_lookup_realm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span></code> <br/><code><span class="w">    </span><span class="nv">dns_lookup_kdc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span></code> <br/><code><span class="w">    </span><span class="nv">v4_instance_resolve</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span></code> <br/><code><span class="w">    </span><span class="nv">v4_name_convert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span></code> <br/><code><span class="w">        </span><span class="nv">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span></code> <br/><code><span class="w">            </span><span class="nv">rcmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>host</code> <br/><code><span class="w">            </span><span class="nv">ftp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>ftp</code> <br/><code><span class="w">        </span><span class="o">}</span></code> <br/><code><span class="w">        </span><span class="nv">plain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span></code> <br/><code><span class="w">            </span><span class="nv">something</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>something-else</code> <br/><code><span class="w">        </span><span class="o">}</span></code> <br/><code><span class="w">    </span><span class="o">}</span></code> <br/><code></code> <br/><code><span class="o">[</span>realms<span class="o">]</span></code> <br/><code><span class="w">    </span>&lt;DOMAIN.NAME&gt;<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span></code> <br/><code><span class="w">        </span><span class="nv">kdc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>&lt;DCName&gt;.&lt;domain.name&gt;</code> <br/><code><span class="w">        </span><span class="nv">admin_server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>&lt;DCName&gt;.&lt;domain.name&gt;</code> <br/><code><span class="w">        </span><span class="nv">default_domain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>&lt;domain.name&gt;</code> <br/><code><span class="w">    </span><span class="o">}</span></code> <br/><code></code> <br/><code><span class="o">[</span>domain_realm<span class="o">]</span></code> <br/><code><span class="w">    </span>.&lt;domain.name&gt;<span class="w"> </span><span class="o">=</span><span class="w"> </span>&lt;DOMAIN.NAME&gt;</code> <br/><code><span class="w">    </span>&lt;domain.name&gt;<span class="w"> </span><span class="o">=</span><span class="w"> </span>&lt;DOMAIN.NAME&gt;</code> <br/><code><span class="o">[</span>login<span class="o">]</span></code> <br/><code><span class="w">    </span><span class="nv">krb4_convert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span></code> <br/><code><span class="w">    </span><span class="nv">krb4_get_tickets</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span></code> <br/></pre></code></div>
 <p class="pageBreakBefore"><strong>Альт Сервер</strong></p>
 <div class="highlight"><code><pre><span></span><code>includedir<span class="w"> </span>/etc/krb5.conf.d/</code> <br/><code><span class="o">[</span>logging<span class="o">]</span></code> <br/><code><span class="c1"># default = FILE:/var/log/krb5libs.log</span></code> <br/><code><span class="c1"># kdc = FILE:/var/log/krb5kdc.log</span></code> <br/><code><span class="c1"># admin_server = FILE:/var/log/kadmind.log</span></code> <br/><code></code> <br/><code><span class="o">[</span>libdefaults<span class="o">]</span></code> <br/><code><span class="nv">dns_lookup_kdc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span></code> <br/><code><span class="nv">dns_lookup_realm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span></code> <br/><code><span class="nv">ticket_lifetime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>24h</code> <br/><code><span class="nv">renew_lifetime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>7d</code> <br/><code><span class="nv">forwardable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span></code> <br/><code><span class="nv">rdns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span></code> <br/><code><span class="nv">default_realm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>&lt;DOMAIN.NAME&gt;</code> <br/><code><span class="nv">default_ccache_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>KEYRING:persistent:%<span class="o">{</span>uid<span class="o">}</span></code> <br/><code></code> <br/><code><span class="o">[</span>realms<span class="o">]</span></code> <br/><code>&lt;DOMAIN.NAME&gt;<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span></code> <br/><code><span class="w">    </span><span class="nv">kdc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>&lt;DCName&gt;.&lt;domain.name&gt;</code> <br/><code><span class="w">    </span><span class="nv">admin_server</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>&lt;DCName&gt;.&lt;domain.name&gt;</code> <br/><code><span class="w">    </span><span class="nv">default_domain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>&lt;domain.name&gt;</code> <br/><code><span class="o">}</span></code> <br/><code></code> <br/><code><span class="o">[</span>domain_realm<span class="o">]</span></code> <br/><code>&lt;.domain.name&gt;<span class="w"> </span><span class="o">=</span><span class="w"> </span>&lt;DOMAIN.NAME&gt;<span class="w">  </span>Comindware<span class="w"> </span>Platform</code> <br/><code>&lt;domain.name&gt;<span class="w"> </span><span class="o">=</span><span class="w"> </span>&lt;DOMAIN.NAME&gt;</code> <br/></pre></code></div>
 </li>
 </ol>
-<h4 id="sso_authentication_configure_alt_server_pam_winbind">Для ОС «Альт Сервер»: настройка pam_winbind.conf</h4>
+<h3 class="pageBreakBefore" id="sso_authentication_configure_product_installation">Установка экземпляра ПО</h3>
 <ol class="colored_numbers_list">
+<li>Установите вспомогательне ПО для <strong>Comindware Platform</strong> согласно инструкциям в параграфе <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622#deploy_guide_linux_prerequisites_install_order">Порядок установки вспомогательного ПО</a>»</em>.</li>
 <li>
-<p>Откройте для редактирования файл конфигурации <code>pam_winbind.conf</code>:</p>
-<div class="highlight"><code><pre><span></span><code>vim<span class="w"> </span>/etc/security/pam_winbind.conf</code> <br/></pre></code></div>
+<p>Установите ПО <strong>Comindware Platform</strong> согласно инструкциям в параграфе <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622#deploy_guide_linux_install_order">Порядок установки ПО Comindware Platform</a>»</em>.</p>
 </li>
 <li>
-<p class="pageBreakInsideAvoid">Отредактировать файл конфигурации <code>pam_winbind.conf</code> согласно следующему примеру:</p>
-<div class="highlight"><code><pre><span></span><code><span class="o">[</span>global<span class="o">]</span></code> <br/><code><span class="nv">debug</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>no</code> <br/><code><span class="nv">debug_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>no</code> <br/><code><span class="nv">try_first_pass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>yes</code> <br/><code><span class="nv">cached_login</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>yes</code> <br/><code><span class="nv">krb5_auth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>yes</code> <br/><code><span class="nv">krb_ccache_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>FILE</code> <br/><code><span class="nv">silent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>yes</code> <br/><code><span class="nv">mkhomedir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>yes</code> <br/></pre></code></div>
+<p>Создайте экземпляр ПО <strong>Comindware Platform</strong>, согласно инструкциям в параграфе <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622#deploy_guide_linux_instance_create">Создание экземпляра ПО Comindware Platform</a>»</em>. Далее <code>&lt;instanceName&gt;</code> — имя созданного экземпляра ПО.</p>
 </li>
 </ol>
-<h4 class="pageBreakBefore" id="sso_authentication_configure_product_installation">Установка экземпляра ПО</h4>
-<ol class="colored_numbers_list">
-<li>
-<p>Скачайте и распакуйте дистрибутив ПО <strong>Comindware Platform</strong> в директорию <code>/home/&lt;username&gt;</code> и  перейдите в директорию с распакованным ПО (<code>X.X.XXXX.X</code> — номер версии ПО, <code>&lt;osname&gt;</code> — название операционной системы):</p>
-<div class="highlight"><code><pre><span></span><code>tar<span class="w"> </span>-xvzf<span class="w"> </span>X.X.XXXX.X.&lt;osname&gt;.tar.gz<span class="w"> </span>-C<span class="w"> </span>/home/&lt;username&gt;</code> <br/><code><span class="nb">cd</span><span class="w"> </span>/home/&lt;username&gt;/CMW_&lt;osname&gt;/</code> <br/></pre></code></div>
-</li>
-<li>
-<p>Установите ПО <strong>Comindware Platform</strong>  без создания экземпляра ПО и с ключом <code>-d=clear</code> — без демонстрационной базы данных:</p>
-<div class="highlight"><code><pre><span></span><code>sh install.sh -p -d=clear</code> <br/></pre></code></div>
-</li>
-<li>
-<p>Создайте экземпляр ПО, указав вместо <code>&lt;instanceName&gt;</code> требуемое имя экземпляра (<code>X.X.XXXX.X</code> — номер версии ПО):</p>
-<div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>scripts/instance/</code> <br/><code>sh<span class="w"> </span>create.sh<span class="w"> </span>-n<span class="o">=</span>&lt;instanceName&gt;<span class="w"> </span>-p<span class="o">=</span><span class="m">80</span><span class="w"> </span>-v<span class="o">=</span>X.X.XXXX.X</code> <br/></pre></code></div>
-</li>
-</ol>
-<h4 id="sso_authentication_configure_product_configuration">Настройка экземпляра ПО</h4>
+<div class="notice notice-warning">
+<p class="admonition-title">Не запускайте и не инициализируйте экземпляр ПО</p>
+<p>После создания экземпляра ПО <strong>Comindware Platform</strong> не запускайте и не инициализируйте его.</p>
+<p>Вместо этого переходите к следующим этапам настройки SSO.</p>
+</div>
+<h3 class="pageBreakBefore" id="sso_authentication_configure_product_configuration">Включение SSO в экземпляре ПО</h3>
 <p>Для включения функционала SSO аутентификации в экземпляре ПО необходимо настроить его файл конфигурации.</p>
 <ol class="colored_numbers_list">
 <li>
-<p>Откройте для редактирования файл конфигурации экземпляра ПО (<code>instanceName</code> — имя экземпляра ПО):</p>
-<div class="highlight"><code><pre><span></span><code>vim<span class="w"> </span>/usr/share/comindware/configs/instance/instanceName.yml</code> <br/></pre></code></div>
+<p>Откройте для редактирования файл конфигурации экземпляра ПО (<code>&lt;instanceName&gt;</code> — имя экземпляра ПО):</p>
+<div class="highlight"><code><pre><span></span><code>vim<span class="w"> </span>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Добавьте в файл директиву <code>isLinuxSSOAuthorization: true</code></p>
 </li>
 </ol>
 <figure class="screenshot_with_caption">
-<p><img alt="Пример файла instanceName.yml с директивой  isLinuxSSOAuthorization: true" src="/platform/v5.0/administration/account_administration/accounts_dc_sync/linux/img/sso_authentication_configure_yml_file_example.png"/><figcaption class="caption">Пример файла instanceName.yml с директивой  isLinuxSSOAuthorization: true</figcaption></p>
+<p><img alt="Пример файла &lt;instanceName&gt;.yml с директивой  isLinuxSSOAuthorization: true" src="/platform/v5.0/administration/account_administration/accounts_dc_sync/linux/img/sso_authentication_configure_yml_file_example.png"/></p><figcaption class="caption">Пример файла <instancename>.yml с директивой  isLinuxSSOAuthorization: true</instancename></figcaption>
 </figure>
-<h4 class="pageBreakBefore" id="sso_authentication_configure_nginx_spnego">Установка и настройка модуля NGINX SPNEGO</h4>
+<h3 class="pageBreakBefore" id="sso_authentication_configure_nginx_spnego">Установка и настройка модуля NGINX SPNEGO</h3>
+<p>Перед установкой ознакомьтесь с <a class="mkdocs_imported_link" href="https://github.com/stnoonan/spnego-http-auth-nginx-module">документацией модуля NGINX SPNEGO</a> (раздел <em>Installation</em>).</p>
 <ol class="colored_numbers_list">
 <li>
+<p>Все последующие команды следует выполнять от имени суперпользователя <code>root</code>. Для этого введите команду:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>-s</code> <br/></pre></code></div>
+<p>или</p>
+<div class="highlight"><code><pre><span></span><code>su<span class="w"> </span>-</code> <br/></pre></code></div>
+</li>
+<li>
 <p>Установите модуль <em>NGINX-SPNEGO</em>:</p>
-<p><strong>Любые ОС (кроме Astra Linux 1.8.3):</strong></p>
-<div class="highlight"><code><pre><span></span><code>apt-get<span class="w"> </span>install<span class="w"> </span>nginx-spnego</code> <br/></pre></code></div>
-<p><strong>Astra Linux 1.8.3 и выше:</strong></p>
+<ul>
+<li>
+<p><strong>Astra Linux (версии 1.8.3 и выше)</strong></p>
 <p>Установите модуль <code>ngx_http_auth_spnego_module.so</code> из пакета <code>nginx-spnego-module_1.26.3-1_amd64.deb</code>, который поставляется в составе инсталлятора <strong>Comindware Platform</strong> для Astra Linux 1.8.3 и выше.</p>
 </li>
 <li>
-<p>Добавить модуль <em>SPNEGO</em> к рабочей конфигурации <em>NGINX</em>:</p>
+<p><strong>Astra Linux (версии ниже 1.8.3), Debian, DEB-дистрибутивы</strong></p>
+<div class="highlight"><code><pre><span></span><code>apt-get<span class="w"> </span>update</code> <br/><code>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>build-essential<span class="w"> </span>git<span class="w"> </span>wget</code> <br/><code></code> <br/><code><span class="nb">cd</span><span class="w"> </span>/usr/src</code> <br/><code>wget<span class="w"> </span>http://nginx.org/download/nginx-&lt;nginx.version&gt;.tar.gz</code> <br/><code>tar<span class="w"> </span>-xvzf<span class="w"> </span>nginx-&lt;nginx.version&gt;.tar.gz</code> <br/><code><span class="nb">cd</span><span class="w"> </span>nginx-&lt;nginx.version&gt;</code> <br/><code></code> <br/><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/stnoonan/spnego-http-auth-nginx-module.git</code> <br/><code></code> <br/><code>./configure<span class="w"> </span>--add-module<span class="o">=</span>./spnego-http-auth-nginx-module</code> <br/><code>make</code> <br/><code>make<span class="w"> </span>install</code> <br/></pre></code></div>
+</li>
+<li>
+<p><strong>РЕД ОС, RPM-дистрибутивы</strong></p>
+<div class="highlight"><code><pre><span></span><code>yum<span class="w"> </span>groupinstall<span class="w"> </span>-y<span class="w"> </span><span class="s2">"Development Tools"</span></code> <br/><code>yum<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>git<span class="w"> </span>wget</code> <br/><code></code> <br/><code><span class="nb">cd</span><span class="w"> </span>/usr/src</code> <br/><code>wget<span class="w"> </span>http://nginx.org/download/nginx-&lt;nginx.version&gt;.tar.gz</code> <br/><code>tar<span class="w"> </span>-xvzf<span class="w"> </span>nginx-&lt;nginx.version&gt;.tar.gz</code> <br/><code><span class="nb">cd</span><span class="w"> </span>nginx-&lt;nginx.version&gt;</code> <br/><code></code> <br/><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/stnoonan/spnego-http-auth-nginx-module.git</code> <br/><code></code> <br/><code>./configure<span class="w"> </span>--add-module<span class="o">=</span>./spnego-http-auth-nginx-module</code> <br/><code>make</code> <br/><code>make<span class="w"> </span>install</code> <br/></pre></code></div>
+</li>
+<li>
+<p><strong>Альт Сервер</strong></p>
+<div class="highlight"><code><pre><span></span><code>apt-get<span class="w"> </span>update</code> <br/><code>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>gcc<span class="w"> </span>make<span class="w"> </span>git<span class="w"> </span>wget</code> <br/><code></code> <br/><code><span class="nb">cd</span><span class="w"> </span>/usr/src</code> <br/><code>wget<span class="w"> </span>http://nginx.org/download/nginx-&lt;nginx.version&gt;.tar.gz</code> <br/><code>tar<span class="w"> </span>-xvzf<span class="w"> </span>nginx-&lt;nginx.version&gt;.tar.gz</code> <br/><code><span class="nb">cd</span><span class="w"> </span>nginx-&lt;nginx.version&gt;</code> <br/><code></code> <br/><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/stnoonan/spnego-http-auth-nginx-module.git</code> <br/><code></code> <br/><code>./configure<span class="w"> </span>--add-module<span class="o">=</span>./spnego-http-auth-nginx-module</code> <br/><code>make</code> <br/><code>make<span class="w"> </span>install</code> <br/></pre></code></div>
+</li>
+</ul>
+</li>
+<li>
+<p>Добавьте модуль <em>SPNEGO</em> к рабочей конфигурации <em>NGINX</em>:</p>
 <p><strong>Любые ОС (кроме Astra Linux 1.8.3):</strong></p>
 <div class="highlight"><code><pre><span></span><code>ln<span class="w"> </span>-s<span class="w"> </span>/etc/nginx/modules-available.d/http_auth_spnego.conf<span class="w"> </span>/etc/nginx/modules-enabled/</code> <br/></pre></code></div>
 <p><strong>Astra Linux 1.8.3 и выше:</strong></p>
@@ -642,7 +719,7 @@
 <div class="highlight"><code><pre><span></span><code><span class="k">load_module</span><span class="w"> </span><span class="s">modules/ngx_http_auth_spnego_module.so</span><span class="p">;</span></code> <br/></pre></code></div>
 </li>
 <li>
-<p>Поместить keytab-файл <code>&lt;authuser&gt;.keytab</code> в директорию конфигурации NGINX и сделать его доступным для чтения:</p>
+<p>Поместите keytab-файл <code>&lt;authuser&gt;.keytab</code> в директорию конфигурации NGINX и сделать его доступным для чтения:</p>
 <div class="highlight"><code><pre><span></span><code>cp<span class="w"> </span>/&lt;path_to_keytab&gt;/&lt;authuser&gt;.keytab<span class="w"> </span>/etc/nginx</code> <br/><code>chmod<span class="w"> </span><span class="m">664</span><span class="w"> </span>/etc/nginx/&lt;authuser&gt;.keytab</code> <br/></pre></code></div>
 <p>Здесь <code>&lt;path_to_keytab&gt;</code> — папка, в которой находится keytab-файл <code>&lt;authuser&gt;.keytab</code>, взятый с контроллера домена.</p>
 </li>
@@ -651,12 +728,12 @@
 <div class="highlight"><code><pre><span></span><code>vim<span class="w"> </span>/etc/nginx/sites-available.d/comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Отредактируйте файл <code>comindware&lt;instanceName&gt;</code> согласно следующему примеру:</p>
+<p>Отредактируйте файл <code>comindware&lt;instanceName&gt;</code> согласно следующему примеру (раскомментируйте все директивы <code>auth_gss</code> ):</p>
 <div class="notice notice-warning">
 <p class="admonition-title">Для Astra Linux 1.8.3 и выше</p>
 <p>Перед включением директивы <code>auth_gss on;</code> в конфигурации экземпляра ПО убедитесь, что модуль <code>ngx_http_auth_spnego_module.so</code> установлен и загружен, как указано на шагах 1–2.</p>
 </div>
-<div class="pageBreakAfter highlight"><span class="filename">Пример файла comindware&lt;instanceName&gt;</span><code><pre><span></span><code>server<span class="w"> </span><span class="o">{</span></code> <br/><code><span class="w">        </span>listen<span class="w"> </span><span class="m">8999</span><span class="w"> </span>http2<span class="p">;</span></code> <br/><code><span class="w">        </span>root<span class="w"> </span>/var/www/cmwdata<span class="p">;</span></code> <br/><code></code> <br/><code><span class="w">            </span>location<span class="w"> </span>/async<span class="w"> </span><span class="o">{</span></code> <br/><code><span class="w">                </span>grpc_pass<span class="w"> </span>grpc_cmwdata<span class="p">;</span></code> <br/><code><span class="w">        </span><span class="o">}</span></code> <br/><code><span class="o">}</span></code> <br/><code>server<span class="w"> </span><span class="o">{</span></code> <br/><code><span class="w">        </span>listen<span class="w">       </span><span class="m">80</span><span class="w"> </span>default<span class="p">;</span></code> <br/><code><span class="w">        </span>root<span class="w">         </span>/var/www/cmwdata<span class="p">;</span></code> <br/><code></code> <br/><code><span class="w">        </span>client_header_timeout<span class="w"> </span>3h<span class="p">;</span></code> <br/><code><span class="w">        </span>client_body_timeout<span class="w"> </span>3h<span class="p">;</span></code> <br/><code><span class="w">        </span>grpc_read_timeout<span class="w"> </span>3h<span class="p">;</span></code> <br/><code><span class="w">        </span>grpc_send_timeout<span class="w"> </span>3h<span class="p">;</span></code> <br/><code><span class="w">        </span>client_max_body_size<span class="w"> </span>300m<span class="p">;</span></code> <br/><code><span class="w">        </span>fastcgi_read_timeout<span class="w"> </span><span class="m">10000</span><span class="p">;</span></code> <br/><code></code> <br/><code></code> <br/><code><span class="w">            </span>location<span class="w"> </span>/async<span class="w"> </span><span class="o">{</span></code> <br/><code><span class="w">                </span>grpc_pass<span class="w"> </span>grpc_cmwdata<span class="p">;</span></code> <br/><code><span class="w">            </span><span class="o">}</span></code> <br/><code></code> <br/><code><span class="w">            </span>location<span class="w"> </span>/<span class="w"> </span><span class="o">{</span></code> <br/><code><span class="w">                </span><span class="c1"># SPNEGO Configuration</span></code> <br/><code><span class="w">                </span>add_header<span class="w"> </span>Set-Cookie<span class="w"> </span><span class="s2">"cmw_user=</span><span class="nv">$remote_user</span><span class="s2">"</span><span class="p">;</span></code> <br/><code><span class="w">                </span>auth_gss<span class="w"> </span>on<span class="p">;</span></code> <br/><code><span class="w">                </span>auth_gss_realm<span class="w"> </span>&lt;DOMAIN.NAME&gt;<span class="p">;</span></code> <br/><code><span class="w">                </span>auth_gss_keytab<span class="w"> </span>/etc/nginx/&lt;authuser&gt;.keytab<span class="p">;</span></code> <br/><code><span class="w">                </span>auth_gss_service_name<span class="w"> </span>HTTP/&lt;authuser&gt;.&lt;domain.name&gt;<span class="p">;</span></code> <br/><code><span class="w">                </span>auth_gss_allow_basic_fallback<span class="w"> </span>on<span class="p">;</span></code> <br/><code></code> <br/><code><span class="w">                </span>proxy_read_timeout<span class="w"> </span><span class="m">10000</span><span class="p">;</span></code> <br/><code><span class="w">                </span>proxy_connect_timeout<span class="w"> </span><span class="m">10000</span><span class="p">;</span></code> <br/><code><span class="w">                </span>proxy_send_timeout<span class="w"> </span><span class="m">10000</span><span class="p">;</span></code> <br/><code><span class="w">                </span>root<span class="w">                </span>/var/www/cmwdata/<span class="p">;</span></code> <br/><code><span class="w">                </span>fastcgi_pass<span class="w">        </span>unix:/var/www/cmwdata/App_Data/cmwdata.socket<span class="p">;</span></code> <br/><code><span class="w">                </span>include<span class="w">             </span>/etc/nginx/fastcgi.conf<span class="p">;</span></code> <br/><code><span class="w">            </span><span class="o">}</span></code> <br/><code><span class="o">}</span></code> <br/></pre></code></div>
+<div class="pageBreakAfter highlight"><span class="filename">Пример файла comindware&lt;instanceName&gt;</span><code><pre><span></span><code>...</code> <br/><code></code> <br/><code>location<span class="w"> </span>/<span class="w"> </span><span class="o">{</span></code> <br/><code><span class="w">    </span><span class="c1"># Authentication Configuration</span></code> <br/><code><span class="w">    </span><span class="c1"># Раскомментируйте директивы auth_gss</span></code> <br/><code><span class="w">    </span>auth_gss<span class="w"> </span>on<span class="p">;</span></code> <br/><code><span class="w">    </span>auth_gss_realm<span class="w"> </span>&lt;DOMAIN.DNS&gt;<span class="p">;</span></code> <br/><code><span class="w">    </span>auth_gss_keytab<span class="w"> </span>/etc/nginx/&lt;authuser&gt;.keytab<span class="p">;</span></code> <br/><code><span class="w">    </span>auth_gss_service_name<span class="w"> </span>HTTP/&lt;authuser&gt;.&lt;domain.dns&gt;<span class="p">;</span></code> <br/><code><span class="w">    </span>auth_gss_allow_basic_fallback<span class="w"> </span>on<span class="p">;</span></code> <br/><code></code> <br/><code><span class="w">    </span>proxy_set_header<span class="w">  </span>X-Request-ID<span class="w">        </span><span class="nv">$request_id</span><span class="p">;</span></code> <br/><code><span class="w">    </span>proxy_read_timeout<span class="w"> </span><span class="m">10000</span><span class="p">;</span></code> <br/><code><span class="w">    </span>proxy_connect_timeout<span class="w"> </span><span class="m">10000</span><span class="p">;</span></code> <br/><code><span class="w">    </span>proxy_send_timeout<span class="w"> </span><span class="m">10000</span><span class="p">;</span></code> <br/><code><span class="w">    </span>root<span class="w">                </span>/var/www/&lt;instancename&gt;/<span class="p">;</span></code> <br/><code><span class="w">    </span>fastcgi_pass<span class="w">        </span>unix:/var/www/&lt;instancename&gt;/App_Data/&lt;instancename&gt;.socket<span class="p">;</span></code> <br/><code><span class="w">    </span>include<span class="w">             </span>/etc/nginx/fastcgi.conf<span class="p">;</span></code> <br/><code><span class="o">}</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Проверьте синтаксис веб-приложения <em>NGINX</em> для экземпляра ПО <code>&lt;instanceName&gt;</code>:</p>
@@ -675,7 +752,7 @@
 <div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>status<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
 </li>
 </ol>
-<h3 class="pageBreakBefore" id="sso_authentication_configure_instance_configuration">Изменение конфигурации экземпляра ПО</h3>
+<h3 class="pageBreakBefore" id="sso_authentication_configure_instance_configuration">Синхронизация аккаунтов экземпляра ПО с сервером каталогов</h3>
 <ol class="colored_numbers_list">
 <li>Войдите в экземпляр ПО с помощью браузера.</li>
 <li>Откройте свойства <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4687">подключения к серверу каталогов</a>, которое будет использоваться для синхронизации аккаунтов.</li>
@@ -687,7 +764,7 @@
 <div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>restart<span class="w"> </span>comindware&lt;instance_name&gt;</code> <br/></pre></code></div>
 </li>
 </ol>
-<h3 id="sso_authentication_configure_kerberos_check">Проверка работы функционала Kerberos на машине linuxHost</h3>
+<h3 class="pageBreakBefore" id="sso_authentication_configure_kerberos_check">Проверка работы функционала Kerberos на машине linuxHost</h3>
 <ol class="colored_numbers_list">
 <li>
 <p>Создайте тикет для приложения <code>HTTP/&lt;DCName&gt;.&lt;domain.name&gt;</code>:</p>
@@ -705,16 +782,28 @@
 <div class="highlight"><code><pre><span></span><code><span class="nv">KRB5_TRACE</span><span class="o">=</span>/dev/stdout<span class="w"> </span>kinit<span class="w"> </span>-k<span class="w"> </span>-t<span class="w"> </span>/etc/nginx/&lt;authuser&gt;.keytab<span class="w"> </span>HTTP/&lt;DCName&gt;.&lt;domain.name&gt;</code> <br/></pre></code></div>
 </li>
 </ol>
-<h2 id="sso_authentication_configure_client_setup">Настройка клиента</h2>
+<h3 class="pageBreakBefore" id="sso_authentication_configure_client_setup">Запуск и инициализация экземпляра ПО</h3>
+<p>После настройки SSO необходимо запустить и инициализировать экземпляр ПО <strong>Comindware Platform</strong>:</p>
+<ol class="colored_numbers_list">
+<li>Запустите экземпляр ПО согласно инструкциям в параграфе «<em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622#deploy_guide_linux_instance_start">Запуск экземпляра ПО</a></em>».</li>
+<li>Запустите экземпляр ПО согласно инструкциям в параграфе «<em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622#deploy_guide_linux_initialize">Инициализация Comindware Platform</a></em>».</li>
+</ol>
+<h2 class="pageBreakBefore" id="sso_authentication_configure_client_setup">Настройка клиента</h2>
 <p>По умолчанию SSO-авторизация работает в браузерах Edge и Google Chrome, но необходимо в параметрах безопасности браузера добавить сайт в зону местной интрасети и включить режим «<strong>Автоматический вход в сеть только в зоне интрасети</strong>». Сведения о настройке других браузеров см. в соответствующей документации.</p>
 <figure class="screenshot_with_caption">
-<p><img alt="Окно настройки параметров безопасности браузера" src="https://kb.comindware.ru/assets/img_63bcecc1b498f.png"/><figcaption class="caption">Окно настройки параметров безопасности браузера</figcaption></p>
+<p><img alt="Окно настройки параметров безопасности браузера" src="https://kb.comindware.ru/assets/img_63bcecc1b498f.png"/></p><figcaption class="caption">Окно настройки параметров безопасности браузера</figcaption>
 </figure>
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622">Установка, запуск, инициализация и остановка ПО</a></li>
 <li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4605">Аутентификация через Active Directory. Настройка контроллера домена и экземпляра ПО</a></li>
 <li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4685">Аутентификация через OpenID Connect. Настройка подключения и служб</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4655">Синхронизация с сервером каталогов (Active Directory)</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5067">Конфигурация экземпляра, компонентов ПО и служб. Настройка</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4611">Развёртывание веб-сервера NGINX в Linux</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4610">Модуль GeoIP для NGINX. Установка и настройка</a></li>
+<li><a class="mkdocs_imported_link" href="https://github.com/stnoonan/spnego-http-auth-nginx-module">Документация модуля NGINX SPNEGO</a></li>
 </ul>
 </div>
 </article>
@@ -727,5 +816,5 @@
 </main>
 </div>
 <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
-document$.subscribe(() => { lightbox.reload() });
+document$.subscribe(()=>{ lightbox.reload(); });
 </script></div>

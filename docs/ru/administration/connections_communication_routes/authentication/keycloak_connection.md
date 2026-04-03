@@ -154,7 +154,7 @@ hide: tags
 4. Откройте для редактирования файл конфигурации NGINX:
 
     ```
-    vim /etc/nginx/sites-available/comindware<instanceName>
+    nano /etc/nginx/sites-available/comindware<instanceName>
     ```
 
     {% include-markdown ".snippets/pdfPageBreakHard.md" %}
