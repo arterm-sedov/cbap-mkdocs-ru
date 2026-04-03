@@ -108,7 +108,7 @@ hide: tags
 </td>
 {% if adminGuideWindows %}<td>Windows Server Standard 2022</td>{% endif %}
 {% if adminGuideLinux %}<td markdown="block">
-- Astra Linux Special Edition 1.7.5
+- Astra Linux Special Edition 1.7.5, 1.8
 - Альт Сервер 11, Альт&nbsp;СПАльт&nbsp;11
 {% if not gostech %}
 - РЕД ОС 8
@@ -145,14 +145,14 @@ NGINX 1.24
 - NET 8.0
 - .NET Framework 4.8.1
 - {% if gostech %}{{ apacheKafkaVariants }}{% else %}Apache Kafka 3.6.0 {% endif %}
-- {% if gostech %}{{ openSearchVariants }}{% else %}OpenSearch 2.18.0 или Elasticsearch 8.10{% endif %}</td>
+- {% if gostech %}{{ openSearchVariants }}{% else %}OpenSearch 2.18.0{% endif %}</td>
 {% endif %}
 {% if adminGuideLinux %}
 <td markdown="block">
 - NET 8.0
 {% if not gostech %}- Mono 6.12{% endif %}
 - {% if gostech %}{{ apacheKafkaVariants }}{% else %}Apache Kafka 3.6.0 {% endif %}
-- {% if gostech %}{{ openSearchVariants }}{% else %}OpenSearch 2.18.0 или Elasticsearch 8.10{% endif %}</td>
+- {% if gostech %}{{ openSearchVariants }}{% else %}OpenSearch 2.18.0{% endif %}</td>
 {% endif %}
 </tr>
 </tbody>
