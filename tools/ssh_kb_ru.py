@@ -78,7 +78,7 @@ try:
 except ImportError:
     DOTENV_AVAILABLE = False
 
-# Load .env from repository root
+# Load .env from repository root (directory that contains tools/) — one file, predictable path
 if DOTENV_AVAILABLE:
     load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
@@ -87,7 +87,7 @@ KEYCHAIN_SERVICE = "ssh_kb_ru"
 
 # When set to 1/true/yes in .env (repo root) or the environment, use SQL/SSH
 # passwords from the keychain without prompting. Use for automation or agents.
-_ENV_USE_STORED = "SSH_KB_RU_USE_STORED_CREDENTIALS"
+_ENV_USE_STORED = "SSH_USE_STORED_CREDENTIALS"
 
 
 def _env_use_stored_credentials_without_prompt() -> bool:
