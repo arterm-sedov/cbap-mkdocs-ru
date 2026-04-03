@@ -76,7 +76,9 @@
 
 [supportUrl]: https://www.comindware.ru/company/contact-us/#tab_support
 
-[vulnerability_policy]: general/vulnerability_policy/
+[vulnerability_policy]: {{ kbArticleURLPrefix }}5158
+
+[vulnerability_pt_dec2025]: {{ kbArticleURLPrefix }}5157
 
 [apache_ignite_clustering]: https://ignite.apache.org/docs/latest/clustering/clustering
 
