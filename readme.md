@@ -88,6 +88,61 @@ This is the MkDocs repository with source files for the RU CMW knowledge base.
     mkdocs build -f mkdocs_ru_pdf.yml
     ```
 
+## Mermaid Diagram Support in PDF
+
+PDF generation uses WeasyPrint which does not execute JavaScript, so Mermaid diagrams require pre-rendering to static images.
+
+### Recommended Approach: `mkdocs-mermaid-to-svg` + `mmdc`
+
+#### Dependencies
+
+1. **Python package** (already in `install/requirements.txt`):
+   ```
+   pip install mkdocs-mermaid-to-svg
+   ```
+
+2. **Node.js** (required for `mmdc` — Mermaid CLI):
+   - Install from https://nodejs.org/ or via package manager
+   - Verify: `node --version` (tested with v18.20.7+)
+
+3. **Mermaid CLI** (global npm package):
+   ```
+   npm install -g @mermaid-js/mermaid-cli
+   ```
+   - Verify: `mmdc --version` (tested with 11.12.0+)
+
+#### Configuration
+
+Add to your MkDocs YAML config:
+
+```yaml
+plugins:
+  mermaid-to-svg:
+    output_dir: _mermaid_assets
+  with-pdf:
+    # ... existing with-pdf config
+```
+
+#### How It Works
+
+1. `mkdocs-mermaid-to-svg` scans markdown files for ` ```mermaid ` code blocks
+2. Each diagram is rendered to SVG via `mmdc` (Node.js Mermaid CLI)
+3. SVG files are saved to `_mermaid_assets/` directory
+4. Original mermaid blocks are replaced with `<img>` tags pointing to SVGs
+5. WeasyPrint includes the SVGs in the final PDF (vector quality, infinite scaling)
+
+### Alternative: `render_js: true` (Does NOT Work)
+
+The `with-pdf` plugin has a `render_js: true` option that attempts to use Headless Chrome to execute JavaScript before PDF generation. **This does not work** with current versions due to a bug in `mkdocs-with-pdf` v0.9.3:
+
+```
+AttributeError: property 'text' of 'Tag' object has no setter
+```
+
+The plugin (last updated 2021) is incompatible with newer BeautifulSoup versions. The `_render_js` method tries to set the read-only `.text` property of a BeautifulSoup `Tag` object.
+
+**Conclusion:** Use `mkdocs-mermaid-to-svg` + `mmdc` — it's the only working approach for Mermaid in PDF.
+
 ## Serve Live Help Site
 
 You can view the live MkDocs site without building it or compiling the product. The live server watches for changes in the `docs` folder and update accordingly.
