@@ -136,6 +136,16 @@
 <article class="md-content__inner md-typeset">
 <h2 id="openid_connection_intro">Введение</h2>
 <p>Здесь представлены краткие инструкции по настройке аутентификации в <strong>Comindware Platform</strong> посредством Keycloak и OpenID Connect для ОС Linux.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Использование нескольких доменов и каталогов</p>
+<p>Keycloak и OpenID Connect позволяют организовать единую точку входа для пользователей из нескольких доменов сервера каталогов (Active Directory, LDAP, FreeIPA и т. п.) за счёт настройки федерации удостоверений и доверительных отношений <strong>на стороне Keycloak или AD FS</strong>.</p>
+<p>В этом случае:</p>
+<ul>
+<li><strong>Comindware Platform</strong> интегрируется с одним поставщиком идентификации (например, Keycloak), а поддержка нескольких доменов и источников учётных записей настраивается вне <strong>Comindware Platform</strong>, в инфраструктуре служб идентификации организации (например, Keycloak, Active Directory, LDAP и т. п.).</li>
+<li>Пользователи могут проходить аутентификацию в <strong>Comindware Platform</strong> через SSO из разных доменов, согласно правилам, настроенным в Keycloak (<code>realm</code>, <code>identity provider</code>, <code>user federation</code> и т. п.).</li>
+</ul>
+<p>Конкретные сценарии интеграции нескольких доменов (количество доменов, типы каталогов, доверительные отношения между ними) настраиваются администраторами инфраструктуры клиента и выходят за рамки данной статьи.</p>
+</div>
 <h2 id="openid_connection_sequence">Порядок настройки</h2>
 <ol class="colored_numbers_list">
 <li>
