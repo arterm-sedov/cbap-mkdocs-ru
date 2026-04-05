@@ -78,12 +78,21 @@ try:
 except ImportError:
     DOTENV_AVAILABLE = False
 
-# Load .env file if available
+# Load .env from repository root (directory that contains tools/) — one file, predictable path
 if DOTENV_AVAILABLE:
-    load_dotenv()
+    load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
 # Keychain service name for storing credentials
 KEYCHAIN_SERVICE = "ssh_kb_ru"
+
+# When set to 1/true/yes in .env (repo root) or the environment, use SQL/SSH
+# passwords from the keychain without prompting. Use for automation or agents.
+_ENV_USE_STORED = "SSH_USE_STORED_CREDENTIALS"
+
+
+def _env_use_stored_credentials_without_prompt() -> bool:
+    v = os.environ.get(_ENV_USE_STORED, "").strip().lower()
+    return v in ("1", "true", "yes", "y")
 
 
 def _get_ssh_key_directory() -> Path:
@@ -498,12 +507,17 @@ def _prompt_for_stored_credential(
     if stored_password:
         credential_name = "SSH password" if credential_type == "ssh_password" else "SQL password"
         print(f"\n✓ Found stored {credential_name} in keychain for '{label}'")
+        if _env_use_stored_credentials_without_prompt():
+            print(
+                f"Using stored {credential_name} (non-interactive: {_ENV_USE_STORED} is set)..."
+            )
+            return stored_password
         try:
             choice = input(f"Use stored {credential_name}? (Y/n/Enter): ").strip().lower()
         except KeyboardInterrupt:
             print("\n\nOperation cancelled by user.")
             raise
-        
+
         if choice in ('', 'y', 'yes'):
             print(f"Using stored {credential_name}...")
             return stored_password

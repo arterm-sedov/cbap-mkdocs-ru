@@ -76,6 +76,10 @@
 
 [supportUrl]: https://www.comindware.ru/company/contact-us/#tab_support
 
+[vulnerability_policy]: {{ kbArticleURLPrefix }}5157
+
+[vulnerability_pt_dec2025]: {{ kbArticleURLPrefix }}5158
+
 [apache_ignite_clustering]: https://ignite.apache.org/docs/latest/clustering/clustering
 
 [apache_ignite_partition_loss_policy]: https://ignite.apache.org/docs/latest/configuring-caches/partition-loss-policy
