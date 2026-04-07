@@ -1,6 +1,6 @@
 ---
 name: search-knowledge-base
-description: Use this skill whenever the user asks about Comindware Platform, or requests N3/Triples/Turtle/Notation3 expressions, scripts, formulas, or C# code related to Comindware Platform. Trigger on questions about Comindware KB articles, developer documentation, or platform-specific development tasks. Also use when user wants to generate new articles or documentation for Comindware Platform.
+description: Use this skill whenever the user asks about Comindware Platform, or requests Notation3/N3/Turtle/RDF/Triples/Тройки expressions, scripts, formulas, or C# code related to Comindware Platform. Trigger on questions about Comindware KB articles, developer documentation, or platform-specific development tasks. Also use when user wants to generate new articles or documentation for Comindware Platform.
 ---
 
 # Role

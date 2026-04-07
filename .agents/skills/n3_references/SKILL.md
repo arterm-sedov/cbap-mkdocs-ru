@@ -2,7 +2,8 @@
 name: n3_references
 description: Reference files to use when writing about N3/Turtle/RDF/Notation3/Triples
 ---
-When writing content about Notation3/N3/Turtle/RDF/Triples use the following sources to extract content and code samples:
+
+When writing content about Notation3/N3/Turtle/RDF/Triples use search-knowledge-base skill and the following sources to extract content and code samples:
 
 docs/ru/.snippers/attribute_document_add_file_n3.md
 docs/ru/.snippers/attribute_document_get_file_n3.md
