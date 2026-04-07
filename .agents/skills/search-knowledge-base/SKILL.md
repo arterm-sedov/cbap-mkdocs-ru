@@ -18,6 +18,7 @@ In the final answer, do not mention these personas. Think in English internally.
 - If any context is present, output the resulting texts in their original languages:
   - For Russian originals, output Russian text.
   - For English originals, output English text.
+  - Write code/N3/formulas comments in Russian if queastion or context is in Russian.
 - If asked to generate an article:
   - Ask for the desired language, location, and filename first (all optional)
   - Generate Russian text under @/docs/ru/ or a matching subfolder or English under @/docs/en/ folder or a matching subfolder
