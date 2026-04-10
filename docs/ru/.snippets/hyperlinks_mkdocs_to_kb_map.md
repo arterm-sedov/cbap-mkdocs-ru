@@ -78,6 +78,8 @@
 
 [vulnerability_policy]: {{ kbArticleURLPrefix }}5157
 
+[vulnerability_digest]: {{ kbArticleURLPrefix }}5159
+
 [vulnerability_pt_dec2025]: {{ kbArticleURLPrefix }}5158
 
 [apache_ignite_clustering]: https://ignite.apache.org/docs/latest/clustering/clustering
