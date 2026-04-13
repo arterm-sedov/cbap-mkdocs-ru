@@ -129,10 +129,10 @@ http://your-host/#task/<TaskID>
     - **Вычисляемое выражение: формула**
 
     ``` sql
-    FORMAT("<a href='/#Resolver/{0}'> Перейти к готовой карточке </a>", LIST($id))
+    FORMAT("<a href='/#Resolver/{0}'>Перейти к готовой карточке</a>", LIST($id))
     ```
 
-    !!! tip "Одинарные кавычки для атрибута href"
+    !!! tip "Одинарные кавычки для атрибута `href`"
 
         В качестве внешних кавычек формулы используются двойные кавычки (`"`).
 
@@ -156,7 +156,7 @@ http://your-host/#task/<TaskID>
     - **Вычисляемое выражение: формула**
 
     ``` sql
-    FORMAT("<a href=https://your-host/#process/{0}/map> Перейти к процессу </a>", LIST($ProcessID))
+    FORMAT("<a href=`https://your-host/#process/{0}/map`>Перейти к процессу </a>", LIST($ProcessID))
     ```
 
     **Здесь:**
@@ -182,7 +182,7 @@ http://your-host/#task/<TaskID>
     - **Вычисляемое выражение: формула**
 
     ``` sql
-    FORMAT("<a href='http://your-host/#form/oa.6/form.333/{0}'> Перейти к форме редактирования </a>", LIST($id))
+    FORMAT("<a href='http://your-host/#form/oa.6/form.333/{0}'>Перейти к форме редактирования</a>", LIST($id))
     ```
 
     **Здесь:**
