@@ -603,6 +603,8 @@
 
 [example_task_hyperlink_n3_formula]: {{ kbArticleURLPrefix }}4879
 
+[example_list_color_indicator]: {{ kbArticleURLPrefix }}4888
+
 [example_hyperlink_calculate_formula]: {{ kbArticleURLPrefix }}4918
 
 [example_task_accept_button_csharp]: {{ kbArticleURLPrefix }}5146
