@@ -192,10 +192,10 @@
 </li>
 <li>
 <p>Перейдите к форме <em>«Диспетчер»</em>, используя ссылку вида:</p>
-<div class="highlight"><code><pre><span></span><code>http://<span class="p">&lt;</span><span class="nt">hostname</span><span class="p">&gt;</span>/#form/<span class="p">&lt;</span><span class="nt">oa.XX</span><span class="p">&gt;</span>/<span class="p">&lt;</span><span class="nt">form.XX</span><span class="p">&gt;</span>/<span class="p">&lt;</span><span class="nt">RecordID</span><span class="p">&gt;</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>http://<span class="p">&lt;</span><span class="nt">your-host</span><span class="p">&gt;</span>/#form/<span class="p">&lt;</span><span class="nt">oa.XX</span><span class="p">&gt;</span>/<span class="p">&lt;</span><span class="nt">form.XX</span><span class="p">&gt;</span>/<span class="p">&lt;</span><span class="nt">RecordID</span><span class="p">&gt;</span></code> <br/></pre></code></div>
 <p>Здесь:</p>
 <ul>
-<li><code>http://&lt;hostname&gt;/</code> — адрес сервера <strong>Comindware Platform</strong>;</li>
+<li><code>http://&lt;your-host&gt;/</code> — адрес сервера <strong>Comindware Platform</strong>;</li>
 <li><code>&lt;oa.XX&gt;</code> — ID шаблона записи <em>«Заявки»</em> (его видно в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4709#templates_view_in_app">списке шаблонов</a>);</li>
 <li><code>&lt;form.XX&gt;</code> — ID формы <em>«Диспетчер»</em> (его видно в адресной строке браузера в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4786">конструкторе формы</a>);</li>
 <li><code>&lt;RecordID&gt;</code> — ID записи <em>«Заявки»</em>.</li>
@@ -206,7 +206,7 @@
 <p>Рассмотрим пример настройки ссылки на внешнюю форму <em>«Клиент»</em> из <em><a class="mkdocs_imported_link" href="#form_access_control_configure">предыдущего примера</a></em>, чтобы любой клиент мог оставлять заявку, не выполняя вход в <strong>Comindware Platform</strong>.</p>
 <div class="notice notice-warning">
 <p class="admonition-title">Логика работы внешних форм</p>
-<p>Если для создана ссылка на внешнюю форму, она действует следующим образом:</p>
+<p>Если создана ссылка на внешнюю форму, она действует следующим образом:</p>
 <ul>
 <li>Пользователь переходит по ссылке на внешнюю форму:<ul>
 <li>если пользователь не вошёл в <strong>Comindware Platform</strong>, для него будет создан аккаунт в группе «<strong>Анонимные пользователи</strong>» с соответствующими разрешениями;</li>
@@ -254,8 +254,7 @@
 <ul>
 <li>ID приложения <em>«Оформление заявок»</em>, например <code>sol.1</code>;</li>
 <li>ID шаблона <em>«Заявки»</em>, например <code>oa.1</code>;</li>
-<li>ID формы <em>«Клиент»</em>, например <code>form.1</code>;</li>
-<li>Значение атрибута <em>«Количество пассажиров»</em> для заполнения формы, например <code>2</code>.</li>
+<li>ID формы <em>«Клиент»</em>, например <code>form.1</code>.</li>
 </ul>
 </li>
 <li>
@@ -273,7 +272,7 @@
 </li>
 <li>
 <p>Проверьте, что ссылка сформирована корректно, с помощью метода <code>Base/EncryptedNavigationReferenceService/Decrypt</code>, указав в теле запроса закодированную строку <code>&lt;encryptedData&gt;</code> (<strong>без части <code>https://&lt;your-host&gt;/Resolve?data=</code></strong>):</p>
-<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span></code> <br/><code><span class="s2">"https://&lt;your-host&gt;/api/public/system/Base/EncryptedNavigationReferenceService/Decrypt"</span><span class="w"> </span><span class="se">\</span></code> <br/><code>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span></code> <br/><code>-u<span class="w"> </span>&lt;username&gt;:&lt;password&gt;<span class="w"> </span><span class="se">\</span></code> <br/><code>-d<span class="w"> </span><span class="s2">"&lt;encrypted&gt;"</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span></code> <br/><code><span class="s2">"https://&lt;your-host&gt;/api/public/system/Base/EncryptedNavigationReferenceService/Decrypt"</span><span class="w"> </span><span class="se">\</span></code> <br/><code>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span><span class="se">\</span></code> <br/><code>-u<span class="w"> </span>&lt;username&gt;:&lt;password&gt;<span class="w"> </span><span class="se">\</span></code> <br/><code>-d<span class="w"> </span><span class="s2">"&lt;encryptedData&gt;"</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>В ответ должен прийти объект со свойствами целевой формы:</p>
