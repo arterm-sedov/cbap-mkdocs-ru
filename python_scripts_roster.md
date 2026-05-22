@@ -23,21 +23,21 @@ These scripts support cloning PHPKB category/article trees and then cleaning up 
 
 | Script | Role | Main side effects / outputs |
 |---|---|---|
-| `phpkb_clone.py` | Clones PHPKB categories and articles inside the DB. Can clone whole category trees or individual articles. | Inserts new DB rows; maintains article/category mapping. |
-| `phpkb_update_links.py` | Updates article/category links in PHPKB after cloning/migration using mapping JSON. Also performs product/version text replacements. | Connects to DB; rewrites article HTML/title after prompts. |
-| `replace_related_topics.py` | Mass-edits related-topic sections in `docs/ru/using_the_system`. Converts bold reference links into italic bullet links inside a wrapper div. | Rewrites matching Markdown files in place. |
-| `update_article_ids.py` | Prototype/helper for finding KB article IDs in Markdown links and resolving them via the hyperlinks snippet. | Currently runs immediately on hardcoded `article-2198.md`; no `__main__` guard. |
-| `update_kbids_to_v5.py` | Migrates `kbId` frontmatter values in `docs/ru` using `.v5mapping.json`. | Rewrites Markdown files in place. |
+| `utilities/phpkb_cloning/phpkb_clone.py` | Clones PHPKB categories and articles inside the DB. Can clone whole category trees or individual articles. | Inserts new DB rows; maintains article/category mapping. |
+| `utilities/phpkb_cloning/phpkb_clone_update_links.py` | Updates article/category links in PHPKB after cloning/migration using mapping JSON. Also performs product/version text replacements. | Connects to DB; rewrites article HTML/title after prompts. |
+| `utilities/phpkb_cloning/phpkb_clone_replace_related_topics.py` | Mass-edits related-topic sections in `docs/ru/using_the_system`. Converts bold reference links into italic bullet links inside a wrapper div. | Rewrites matching Markdown files in place. |
+| `utilities/phpkb_cloning/phpkb_clone_update_article_ids.py` | Prototype/helper for finding KB article IDs in Markdown links and resolving them via the hyperlinks snippet. | Currently runs immediately on hardcoded `article-2198.md`; no `__main__` guard. |
+| `utilities/phpkb_cloning/phpkb_clone_update_kbids_to_v5.py` | Migrates `kbId` frontmatter values in `docs/ru` using `.v5mapping.json`. | Rewrites Markdown files in place. |
 
 ## Script Clusters
 
 - **Build utilities:** `buildhelp.py`, `pdf_build_guides.py`, `pdf_duplicate_with_date.py`.
 - **MkDocs-to-PHPKB HTML hooks:** `kb_html_cleanup_hook.py`, `kb_html_cleanup_hook_v4.7.py`.
 - **PHPKB DB tools:** `phpkb_import*.py`, `phpkb_update_articles.py`.
-- **PHPKB cloning:** `phpkb_clone.py`, `phpkb_update_links.py`, `replace_related_topics.py`, `update_article_ids.py`, `update_kbids_to_v5.py`.
+- **PHPKB cloning:** scripts under `utilities/phpkb_cloning/`.
 - **RAG/LLM bundle builders:** `phpkb_ingest.py`, `phpkb_ingest_cmw_lab.py`.
 
 ## Risk Notes
 
-- Highest-risk DB-mutating scripts: `phpkb_clone.py`, `phpkb_update_articles.py`, and `phpkb_update_links.py`.
-- Highest-risk local file rewriters: `replace_related_topics.py` and `update_kbids_to_v5.py`.
+- Highest-risk DB-mutating scripts: `utilities/phpkb_cloning/phpkb_clone.py`, `phpkb_update_articles.py`, and `utilities/phpkb_cloning/phpkb_clone_update_links.py`.
+- Highest-risk local file rewriters: `utilities/phpkb_cloning/phpkb_clone_replace_related_topics.py` and `utilities/phpkb_cloning/phpkb_clone_update_kbids_to_v5.py`.

@@ -4,7 +4,8 @@ import sys
 import types
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).parent.parent))
+repo_root = Path(__file__).parent.parent
+sys.path.insert(0, str(repo_root / "utilities" / "phpkb_cloning"))
 
 pathvalidate = types.ModuleType("pathvalidate")
 pathvalidate.sanitize_filename = lambda value: value

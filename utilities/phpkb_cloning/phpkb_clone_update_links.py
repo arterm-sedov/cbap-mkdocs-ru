@@ -1,3 +1,10 @@
+import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
 from tools.ssh_kb_ru import establish_connection_interactive, close_connection
 from tools.graceful_interrupt import safe_input, ensure_cleanup
 import html
@@ -7,7 +14,6 @@ from markdownify import markdownify as md
 from markdownify import MarkdownConverter
 import re
 from pathvalidate import sanitize_filename
-from pathlib import Path
 import shutil
 from cryptography.fernet import Fernet
 
