@@ -38,4 +38,20 @@ Keep clone and post-clone update scripts on the same profile.
 - Treat `phpkb_clone.py` and `phpkb_clone_update_links.py` as DB-mutating scripts.
 - Do not run DB-mutating scripts as a test.
 - Confirm `.mapping.json` before running link updates.
-- The scripts are interactive and do not currently expose a stable CLI argument interface.
+## CLI Usage
+
+Without arguments, `phpkb_clone.py` keeps the historical interactive flow.
+
+Scripted category tree clone:
+
+``` powershell
+python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --category-id 798 --target-parent-id 1000
+```
+
+Scripted article clone:
+
+``` powershell
+python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --article-id 4578 --target-category-id 900 --suffix _CLONE
+```
+
+Use `--article-id` multiple times to clone several articles into one target category. Add `--show` only when the cloned article should be visible immediately.

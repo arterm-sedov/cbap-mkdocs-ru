@@ -105,3 +105,61 @@ def test_clone_article_does_not_duplicate_dependents_for_mapped_article(monkeypa
     assert new_article_id == "9001"
     assert not any("phpkb_attachments" in sql for sql, _ in cursor.calls)
     assert not any("phpkb_custom_data" in sql for sql, _ in cursor.calls)
+
+
+def test_parse_args_accepts_scripted_article_clones():
+    args = phpkb_clone.parse_args([
+        "--profile", "cmwlab",
+        "--article-id", "100",
+        "--article-id", "101",
+        "--target-category-id", "900",
+        "--suffix", "_V5",
+        "--show",
+    ])
+
+    assert args.profile == "cmwlab"
+    assert args.article_id == ["100", "101"]
+    assert args.target_category_id == "900"
+    assert args.suffix == "_V5"
+    assert args.show is True
+    assert phpkb_clone.has_cli_action(args) is True
+
+
+def test_run_cli_clones_articles_without_prompting(monkeypatch):
+    calls = []
+    args = phpkb_clone.parse_args([
+        "--article-id", "100",
+        "--article-id", "101",
+        "--target-category-id", "900",
+        "--suffix", "_V5",
+        "--show",
+    ])
+
+    monkeypatch.setattr(
+        phpkb_clone,
+        "clone_specific_article_to",
+        lambda article_id, target_category_id=None, suffix="_CLONE", show=False: calls.append(
+            (article_id, target_category_id, suffix, show)
+        ) or True,
+    )
+
+    assert phpkb_clone.run_cli(args) is True
+    assert calls == [
+        ("100", "900", "_V5", True),
+        ("101", "900", "_V5", True),
+    ]
+
+
+def test_run_cli_clones_category_tree_with_target_parent(monkeypatch):
+    calls = []
+    args = phpkb_clone.parse_args(["--category-id", "798", "--target-parent-id", "1000"])
+
+    monkeypatch.setattr(phpkb_clone, "fetchCategory", lambda category_id: (category_id, "Version", "1"))
+    monkeypatch.setattr(
+        phpkb_clone,
+        "cloneCategoryChildren",
+        lambda category, target_parent_id="": calls.append((category, target_parent_id)) or [],
+    )
+
+    assert phpkb_clone.run_cli(args) is True
+    assert calls == [(("798", "Version", "1"), "1000")]
