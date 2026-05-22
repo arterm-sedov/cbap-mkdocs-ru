@@ -10,7 +10,7 @@ Run scripts from the repository root:
 - `utilities/phpkb_cloning/phpkb_clone_update_links.py`
 - `utilities/phpkb_cloning/phpkb_clone_replace_related_topics.py`
 - `utilities/phpkb_cloning/phpkb_clone_update_article_ids.py`
-- `utilities/phpkb_cloning/phpkb_clone_update_kbids_to_v5.py`
+- `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py`
 
 ## Profile Selection
 
@@ -28,7 +28,7 @@ Keep clone and post-clone update scripts on the same profile.
 3. Keep the generated `.mapping.json`; it maps old category/article IDs to new IDs.
 4. Run `utilities/phpkb_cloning/phpkb_clone_update_links.py` to rewrite article/category links in cloned PHPKB content.
 5. Run local Markdown migration helpers only if the workflow includes local docs updates:
-   - `utilities/phpkb_cloning/phpkb_clone_update_kbids_to_v5.py`
+   - `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py --mapping .mapping.json --target all`
    - `utilities/phpkb_cloning/phpkb_clone_replace_related_topics.py`
    - `utilities/phpkb_cloning/phpkb_clone_update_article_ids.py`
 6. Verify local file changes with `git status --short` and targeted diffs.

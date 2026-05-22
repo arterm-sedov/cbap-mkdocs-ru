@@ -1,6 +1,6 @@
 ---
 name: phpkb-cloning
-description: "Use when working on the PHPKB cloning and post-clone migration workflow in this repository: creating a new PHPKB section for a new product version, cloning PHPKB categories or articles, updating cloned PHPKB article/category links, migrating kbId frontmatter values to v5 IDs, fixing related topics after cloning, or analyzing/updating scripts in utilities/phpkb_cloning."
+description: "Use when working on the PHPKB cloning and post-clone migration workflow in this repository: creating a new PHPKB section for a new product version, cloning PHPKB categories or articles, updating cloned PHPKB article/category links, migrating local docs IDs with clone mappings, fixing related topics after cloning, or analyzing/updating scripts in utilities/phpkb_cloning."
 ---
 
 # PHPKB Cloning
@@ -17,7 +17,7 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 | `utilities/phpkb_cloning/phpkb_clone_update_links.py` | Update PHPKB article/category links after cloning or migration using mapping JSON. Also performs product/version text replacements. | Connects to DB; rewrites article HTML/title after prompts. |
 | `utilities/phpkb_cloning/phpkb_clone_replace_related_topics.py` | Mass-edit related-topic sections in `docs/ru/using_the_system`. Converts bold reference links into italic bullet links inside a wrapper div. | Rewrites matching Markdown files in place. |
 | `utilities/phpkb_cloning/phpkb_clone_update_article_ids.py` | Prototype/helper for finding KB article IDs in Markdown links and resolving them via the hyperlinks snippet. | Currently runs immediately on hardcoded `article-2198.md`; no `__main__` guard. |
-| `utilities/phpkb_cloning/phpkb_clone_update_kbids_to_v5.py` | Migrate `kbId` frontmatter values in `docs/ru` using `.v5mapping.json`. | Rewrites Markdown files in place. |
+| `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py` | Update local docs IDs using a clone mapping. Handles `kbId` frontmatter in `docs/ru` and article/category IDs in `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md`. | Dry-run by default; rewrites Markdown files only with `--write`. |
 
 ## References
 
@@ -33,10 +33,10 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
    `phpkb_clone.py` and `phpkb_clone_update_links.py` connect to PHPKB through `tools.ssh_kb_ru` and can insert or update production-like database records. Do not run them unless the user explicitly asks to execute the DB operation and understands the target.
 
 3. Verify mapping files before link or ID migration.
-   Check `.v5mapping.json`, `.mapping.json`, and article ID filename maps as relevant before using `phpkb_clone_update_links.py` or `phpkb_clone_update_kbids_to_v5.py`.
+   Check `.mapping.json` or another explicit mapping file before using `phpkb_clone_update_links.py` or `phpkb_clone_update_mapped_ids.py`.
 
 4. Treat file-rewriting helpers as batch migrations.
-   `phpkb_clone_replace_related_topics.py` and `phpkb_clone_update_kbids_to_v5.py` rewrite Markdown files in place. Before running them, check `git status --short`, inspect the search scope, and confirm it matches the requested files.
+   `phpkb_clone_replace_related_topics.py` and `phpkb_clone_update_mapped_ids.py --write` rewrite Markdown files in place. Before running them, check `git status --short`, inspect the search scope, and confirm it matches the requested files.
 
 5. After running or editing any cloning script, verify with Git.
    Use `git status --short` and targeted diffs for local files. For DB scripts, summarize prompts answered, target categories/articles, and any mapping files affected.
@@ -60,10 +60,13 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 
 ### Migrate Local KB IDs
 
-- Review `utilities/phpkb_cloning/phpkb_clone_update_kbids_to_v5.py`.
-- Confirm `.v5mapping.json` contains the intended `Articles` mapping.
-- Expect Markdown files under `docs/ru` to be rewritten in place.
-- Note that hyperlink snippet updates are present but commented out in the current script.
+- Review `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py`.
+- Confirm the selected mapping JSON contains the intended `Articles` and `Categories` sections.
+- Run dry-run first:
+  `python utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py --mapping .mapping.json --target all`
+- Use `--write` only after the report looks correct.
+- `frontmatter-kbids` updates `kbId:` values in Markdown files under `docs/ru` using `Articles`.
+- `hyperlink-map` updates only `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md`, using `Articles` for `{{ kbArticleURLPrefix }}` IDs and `Categories` for `{{ kbCategoryURLPrefix }}` IDs.
 
 ### Clean Related Topics
 
