@@ -215,7 +215,9 @@ def main():
     server = None
     
     try:
-        CONNECTION, server = establish_connection_interactive("cmw")
+        server_profile = os.getenv("SERVER_PROFILE", "cmw")
+        print(f"Using PHPKB server profile: {server_profile}")
+        CONNECTION, server = establish_connection_interactive()
         
         if safe_input('Clone specific articles? Y/N').lower() == 'y':
             article_id = ''
