@@ -26,7 +26,52 @@ CONNECTION = None
 MAPPING = dict()
 CATEGORY_MAPPING = dict()
 ARTICLE_MAPPING = dict()
+ARTICLE_CHILD_CLONE_SPECS = (
+    {
+        "label": "attachments",
+        "table": "phpkb_attachments",
+        "columns": ("article_id", "file_guid", "file_name", "file_type", "file_views", "file_status"),
+    },
+    {
+        "label": "custom data",
+        "table": "phpkb_custom_data",
+        "columns": ("field_id", "article_id", "field_data"),
+    },
+)
 # CATEGORY_COUNTER = 0
+
+def sql_name(identifier):
+    if not identifier.replace("_", "").isalnum():
+        raise ValueError(f"Unsafe SQL identifier: {identifier}")
+    return f"`{identifier}`"
+
+def clone_article_child_rows(cursor, old_article_id, new_article_id, spec):
+    table = sql_name(spec["table"])
+    columns = spec["columns"]
+    insert_columns = ", ".join(sql_name(column) for column in columns)
+    select_columns = ", ".join("%s" if column == "article_id" else sql_name(column) for column in columns)
+
+    cursor.execute(f"SELECT COUNT(*) FROM {table} WHERE `article_id`=%s", (old_article_id,))
+    row_count = cursor.fetchone()[0]
+    if not row_count:
+        return 0
+
+    cursor.execute(
+        f"""
+            INSERT INTO {table} ({insert_columns})
+            SELECT {select_columns}
+            FROM {table}
+            WHERE `article_id`=%s
+            """,
+        (new_article_id, old_article_id),
+    )
+    return row_count
+
+def clone_article_dependents(cursor, old_article_id, new_article_id):
+    for spec in ARTICLE_CHILD_CLONE_SPECS:
+        cloned = clone_article_child_rows(cursor, old_article_id, new_article_id, spec)
+        if cloned:
+            print(f"Cloned {cloned} {spec['label']} rows for article {old_article_id} -> {new_article_id}")
 
 def cloneCategoryChildren(parent, newParentId=''):
     c = CONNECTION.cursor(buffered=True)
@@ -88,6 +133,7 @@ def cloneArticlesInCategory (category_id, newCategoryId):
 def cloneArticle(article_id, category_id, newCategoryId, suffix="", show=True):
     
     c = CONNECTION.cursor(buffered=True)    
+    article_created = False
     
     if not article_id in ARTICLE_MAPPING:
         c.execute(f"""
@@ -113,6 +159,7 @@ def cloneArticle(article_id, category_id, newCategoryId, suffix="", show=True):
                 """)
         
         newArticleId = str(c.fetchone()[0])
+        article_created = True
     else:
         newArticleId = ARTICLE_MAPPING[article_id]
     
@@ -131,6 +178,9 @@ def cloneArticle(article_id, category_id, newCategoryId, suffix="", show=True):
             INSERT INTO phpkb_relations (article_id, category_id, article_priority)
             VALUES ({newArticleId}, {newCategoryId}, {article_priority});
             """)
+
+    if article_created:
+        clone_article_dependents(c, article_id, newArticleId)
 
     return newArticleId
 

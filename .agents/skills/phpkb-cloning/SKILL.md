@@ -11,7 +11,7 @@ Use this skill to work safely with the repository scripts that clone PHPKB conte
 
 | Script | Purpose | Main side effects |
 |---|---|---|
-| `phpkb_clone.py` | Clone PHPKB categories and articles inside the database. Can clone whole category trees or individual articles. | Inserts new DB rows; maintains article/category mapping. |
+| `phpkb_clone.py` | Clone PHPKB categories and articles inside the database. Can clone whole category trees or individual articles. | Inserts new DB rows; maintains article/category mapping; clones article attachment and custom data backrefs. |
 | `phpkb_update_links.py` | Update PHPKB article/category links after cloning or migration using mapping JSON. Also performs product/version text replacements. | Connects to DB; rewrites article HTML/title after prompts. |
 | `replace_related_topics.py` | Mass-edit related-topic sections in `docs/ru/using_the_system`. Converts bold reference links into italic bullet links inside a wrapper div. | Rewrites matching Markdown files in place. |
 | `update_article_ids.py` | Prototype/helper for finding KB article IDs in Markdown links and resolving them via the hyperlinks snippet. | Currently runs immediately on hardcoded `article-2198.md`; no `__main__` guard. |
@@ -42,6 +42,7 @@ Use this skill to work safely with the repository scripts that clone PHPKB conte
 - Confirm whether the task is a whole category tree clone or a specific article clone.
 - Confirm the target category ID when cloning individual articles.
 - Expect the script to maintain category/article mapping in JSON and insert rows into PHPKB tables.
+- Expect cloned articles to receive copied `phpkb_attachments` and `phpkb_custom_data` rows remapped to the new `article_id`; attachment files are not duplicated.
 
 ### Update Links After Cloning
 
