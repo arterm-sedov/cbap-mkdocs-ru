@@ -1,6 +1,6 @@
 ---
 title: Ручной перенос базы данных экземпляра ПО
-kbId: 4649
+kbId: 5574
 tags:
     - Apache Ignite
     - Linux

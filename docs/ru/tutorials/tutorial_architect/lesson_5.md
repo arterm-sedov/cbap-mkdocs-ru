@@ -1,6 +1,6 @@
 ---
 title: 'Урок 5. Экспорт диаграмм, настройка экспорта регламентов, управление версиями архитектуры'
-kbId: 5129
+kbId: 5417
 tags:
   # Common tutorial_architect tags
   - Architect

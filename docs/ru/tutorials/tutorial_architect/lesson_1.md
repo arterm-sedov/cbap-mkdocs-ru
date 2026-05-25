@@ -1,6 +1,6 @@
 ---
 title: 'Урок 1. Обзор возможностей Comindware Platform Enterprise'
-kbId: 5125
+kbId: 5422
 tags:
   # Common tutorial_architect tags
   - Architect

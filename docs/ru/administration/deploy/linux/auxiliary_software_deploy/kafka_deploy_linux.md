@@ -1,6 +1,6 @@
 ---
 title: Apache Kafka. Установка в базовой конфигурации
-kbId: 5074
+kbId: 5450
 tags:
     - Kafka
     - Linux

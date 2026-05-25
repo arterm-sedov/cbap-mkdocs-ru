@@ -1,6 +1,6 @@
 ---
 title: 'Apache Ignite. Дефрагментация данных'
-kbId: 4603
+kbId: 5455
 tags:
     - Apache Ignite
     - Linux

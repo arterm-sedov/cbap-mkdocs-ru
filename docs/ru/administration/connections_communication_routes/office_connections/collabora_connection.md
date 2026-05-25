@@ -1,6 +1,6 @@
 ---
 title: Collabora Online
-kbId: 4688
+kbId: 5627
 ---
 
 # Collabora Online. Настройка подключения {: #collabora_connection}

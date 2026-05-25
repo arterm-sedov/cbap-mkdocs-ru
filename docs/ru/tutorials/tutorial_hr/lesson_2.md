@@ -1,6 +1,6 @@
 ---
 title: Урок 2. Создание реестра данных
-kbId: 5114
+kbId: 5395
 tags:
 # Common tutorial_hr tags
   - BPMS

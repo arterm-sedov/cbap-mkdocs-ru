@@ -1,6 +1,6 @@
 ---
 title: 'Обновление версии экземпляра ПО без его остановки'
-kbId: 5097
+kbId: 5553
 tags:
     - Elasticsearch
     - Kafka

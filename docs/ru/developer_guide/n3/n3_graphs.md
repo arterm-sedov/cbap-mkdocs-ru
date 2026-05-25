@@ -1,6 +1,6 @@
 ---
 title: Графы
-kbId: 4853
+kbId: 5257
 ---
 
 # Графы {: #n3_guide_graphs }

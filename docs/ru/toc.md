@@ -1,6 +1,6 @@
 ---
 title: Comindware Platform. Версия 5.0. Содержание раздела
-kbId: 4578
+kbId: 5162
 ---
 
 # {{ productName }}. Версия 5.0. Содержание раздела {: #root_toc }

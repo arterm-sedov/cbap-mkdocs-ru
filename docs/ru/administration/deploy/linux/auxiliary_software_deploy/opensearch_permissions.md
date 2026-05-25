@@ -1,6 +1,6 @@
 ---
 title: 'OpenSearch. Настройка разрешений'
-kbId: 5152
+kbId: 5465
 tags:
   - OpenSearch
   - разрешения

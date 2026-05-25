@@ -1,6 +1,6 @@
 ---
 title: Notation N3
-kbId: 4858
+kbId: 5258
 ---
 
 # Notation N3 {: #n3_guide_notation }

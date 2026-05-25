@@ -1,6 +1,6 @@
 ---
 title: Elasticsearch. Установка в базовой конфигурации
-kbId: 4601
+kbId: 5457
 tags:
     - Elasticsearch
     - OpenSearch

@@ -1,6 +1,6 @@
 ---
 title: Методы Solution API
-kbId: 4863
+kbId: 5333
 tags:
     - API
     - REST

@@ -1,6 +1,6 @@
 ---
 title: 'Урок 6. Управление доступом: аккаунты, роли, навигация'
-kbId: 5118
+kbId: 5401
 tags:
   # Common tutorial_hr tags
   - BPMS

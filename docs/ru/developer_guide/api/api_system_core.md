@@ -1,6 +1,6 @@
 ---
 title: Методы System Core API
-kbId: 4862
+kbId: 5331
 tags:
     - API
     - REST

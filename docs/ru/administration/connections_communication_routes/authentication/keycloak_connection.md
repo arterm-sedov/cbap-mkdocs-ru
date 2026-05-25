@@ -1,6 +1,6 @@
 ---
 title: 'Аутентификация через Keycloak и OpenID Connect. Настройка подключения и служб'
-kbId: 4685
+kbId: 5318
 tags:
     - OpenID
     - Keycloak

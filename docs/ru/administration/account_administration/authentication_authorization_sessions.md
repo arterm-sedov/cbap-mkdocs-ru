@@ -1,6 +1,6 @@
 ---
 title: 'Аутентификация, авторизация и сеансы пользователей'
-kbId: 4656
+kbId: 5582
 tags:
 tags:
     - Active Directory

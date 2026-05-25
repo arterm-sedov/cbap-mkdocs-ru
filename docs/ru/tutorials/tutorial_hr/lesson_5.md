@@ -1,6 +1,6 @@
 ---
 title: 'Урок 5. Автоматизация: сценарии, вычисления, условия и проверки'
-kbId: 5117
+kbId: 5400
 tags:
 # Common tutorial_hr tags
   - BPMS

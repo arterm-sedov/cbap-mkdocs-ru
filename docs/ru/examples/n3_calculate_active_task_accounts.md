@@ -24,7 +24,7 @@ tags:
     - фильтрация
 hide:
     - tags
-kbId: 4966
+kbId: 5292
 ---
 
 # Аккаунты и задачи. Вычисление пользователей с активными задачами с помощью N3  {: #example_n3_calculate_active_task_accounts }

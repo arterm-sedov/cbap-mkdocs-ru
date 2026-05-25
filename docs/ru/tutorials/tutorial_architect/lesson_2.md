@@ -1,6 +1,6 @@
 ---
 title: 'Урок 2. Вход в систему, рабочий стол, навигация, роли, оргструктура'
-kbId: 5126
+kbId: 5421
 tags:
   # Common tutorial_architect tags
   - Architect

@@ -1,6 +1,6 @@
 ---
 title: 'Урок 3. Моделирование процессной архитектуры, импорт диаграмм, экспорт регламентов'
-kbId: 5127
+kbId: 5420
 tags:
   # Common tutorial_architect tags
   - Architect

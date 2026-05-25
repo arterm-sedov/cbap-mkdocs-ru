@@ -1,6 +1,6 @@
 ---
 title: 'Обновление версии экземпляра ПО в Windows'
-kbId: 5102
+kbId: 5565
 ---
 
 # Обновление версии экземпляра ПО в Windows {: #upgrade_version_windows }
