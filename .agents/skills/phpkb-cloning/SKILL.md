@@ -19,7 +19,7 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 
 ## References
 
-- Read `references/workflow.md` before planning or running the annual cloning workflow.
+- Read `references/workflow.md` before planning or running the per-release cloning workflow.
 - Read `references/schema-notes.md` before changing what database rows are cloned.
 
 ## Workflow
@@ -47,6 +47,7 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 - Confirm whether the task is a whole category tree clone or a specific article clone.
 - Confirm the target category ID when cloning individual articles.
 - Expect the script to load an existing mapping JSON and resume by default.
+- For V5 to V6 migrations, prefer `--mapping .v6mapping.json` and pass that same file to post-clone update scripts.
 - Use `--fresh` only when starting a new clone and refusing to reuse an existing mapping file.
 - Expect the script to maintain category/article mapping in JSON and insert rows into PHPKB tables.
 - Expect newly generated article/category IDs to be read from `cursor.lastrowid`, not from global `MAX(...)` queries.

@@ -11,7 +11,7 @@ Core behavior:
 - updates `phpkb_articles.article_title` and `article_content` only when
   changes are found.
 
-CLI mode is designed for scripted annual migrations:
+CLI mode is designed for scripted per-release migrations:
 - dry-run by default;
 - pass `--write` to update PHPKB rows;
 - pass `--category-id` to update a category tree, or repeat `--article-id`
