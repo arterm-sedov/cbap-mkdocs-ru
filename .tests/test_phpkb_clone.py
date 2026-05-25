@@ -245,6 +245,18 @@ def test_count_article_child_rows_counts_supported_backrefs():
     ]
 
 
+def test_count_article_child_rows_for_articles_counts_in_bulk():
+    cursor = FakeCursor(fetches=[(5,), (3,)])
+
+    counts = phpkb_clone.count_article_child_rows_for_articles(cursor, ("100", "101"))
+
+    assert counts == {"attachments": 5, "custom data": 3}
+    assert cursor.calls == [
+        ("SELECT COUNT(*) FROM `phpkb_attachments` WHERE `article_id` IN (%s, %s)", ("100", "101")),
+        ("SELECT COUNT(*) FROM `phpkb_custom_data` WHERE `article_id` IN (%s, %s)", ("100", "101")),
+    ]
+
+
 def test_plan_specific_article_reports_reused_article_without_backref_counts(monkeypatch):
     cursor = FakeCursor(fetches=[("200",)])
     monkeypatch.setattr(phpkb_clone, "CONNECTION", FakeConnection(cursor))

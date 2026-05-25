@@ -207,6 +207,25 @@ def count_article_child_rows(cursor, article_id):
         counts[spec["label"]] = cursor.fetchone()[0]
     return counts
 
+def sql_placeholders(values):
+    return ", ".join(["%s"] * len(values))
+
+def count_article_child_rows_for_articles(cursor, article_ids):
+    article_ids = tuple(str(article_id) for article_id in article_ids)
+    counts = {spec["label"]: 0 for spec in ARTICLE_CHILD_CLONE_SPECS}
+    if not article_ids:
+        return counts
+
+    placeholders = sql_placeholders(article_ids)
+    for spec in ARTICLE_CHILD_CLONE_SPECS:
+        table = sql_name(spec["table"])
+        cursor.execute(
+            f"SELECT COUNT(*) FROM {table} WHERE `article_id` IN ({placeholders})",
+            article_ids,
+        )
+        counts[spec["label"]] = cursor.fetchone()[0]
+    return counts
+
 def planArticlesInCategory(category_id):
     c = CONNECTION.cursor(buffered=True)
     c.execute(f"""
@@ -218,6 +237,7 @@ def planArticlesInCategory(category_id):
             """)
 
     plan = empty_clone_plan()
+    unmapped_article_ids = []
     for article_id, _content, _title in c.fetchall():
         article_id = str(article_id)
         plan["articles_seen"] += 1
@@ -227,9 +247,11 @@ def planArticlesInCategory(category_id):
             continue
 
         plan["articles_would_clone"] += 1
-        child_counts = count_article_child_rows(c, article_id)
-        plan["attachment_rows"] += child_counts.get("attachments", 0)
-        plan["custom_data_rows"] += child_counts.get("custom data", 0)
+        unmapped_article_ids.append(article_id)
+
+    child_counts = count_article_child_rows_for_articles(c, unmapped_article_ids)
+    plan["attachment_rows"] += child_counts.get("attachments", 0)
+    plan["custom_data_rows"] += child_counts.get("custom data", 0)
     return plan
 
 def planCategoryChildren(parent, newParentId=''):
