@@ -38,6 +38,20 @@ Preflight behavior:
   JSON;
 - it is useful before first runs and before resuming from an existing mapping.
 
+Visibility during category-tree clone (default):
+- child categories: `category_show='yes'`, `category_status='public'`,
+  `language_id=2` (Russian);
+- articles in each category: `article_show='yes'` only;
+- PHPKB `unlisted` is not filtered; it is copied with the full article row.
+- Hidden categories (`category_show='no'`) and hidden articles
+  (`article_show='no'`) are never walked, even with `--include-private`.
+- `--include-private` adds `category_status='private'` subtrees only.
+
+`--show` applies only to `--article-id` clones. Those clones default to
+`article_show='no'` so one-off copies stay out of KB navigation until reviewed.
+Category-tree clones keep each source article's visibility (`article_show='yes'`
+for rows that pass the article filter).
+
 Generated article/category IDs are captured from `cursor.lastrowid`, which is
 the auto-increment value produced by this connection's INSERT. Do not replace
 that with `SELECT MAX(...)`, because global MAX queries can pick up another
@@ -119,8 +133,26 @@ def parse_args(argv=None):
     parser.add_argument("--target-parent-id", type=numeric_id, help="Parent category for --category-id clones. Defaults to the source parent.")
     parser.add_argument("--target-category-id", type=numeric_id, help="Target category for --article-id clones. Defaults to each source article category.")
     parser.add_argument("--suffix", default="_CLONE", help="Title suffix for --article-id clones. Defaults to _CLONE.")
-    parser.add_argument("--show", action="store_true", help="Make --article-id clones visible. By default they are hidden.")
+    parser.add_argument(
+        "--show",
+        action="store_true",
+        help="For --article-id only: set cloned article_show='yes'. Default is 'no' (hidden in KB).",
+    )
+    parser.add_argument(
+        "--include-private",
+        action="store_true",
+        help="For --category-id: also walk category_status='private' children. Still skips hidden categories and articles.",
+    )
     return parser.parse_args(argv)
+
+
+def category_child_where(include_private=False):
+    """SQL predicates for traversing visible Russian child categories."""
+    parts = ["category_show='yes'"]
+    if not include_private:
+        parts.append("category_status = 'public'")
+    parts.append("phpkb_categories.language_id = 2")
+    return " AND ".join(parts)
 
 def has_cli_action(args):
     return bool(args.category_id or args.article_id)
@@ -264,7 +296,7 @@ def planArticlesInCategory(category_id):
     plan["custom_data_rows"] += child_counts.get("custom data", 0)
     return plan
 
-def planCategoryChildren(parent, newParentId=''):
+def planCategoryChildren(parent, newParentId='', include_private=False):
     c = CONNECTION.cursor(buffered=True)
 
     category_id = str(parent[0])
@@ -283,9 +315,7 @@ def planCategoryChildren(parent, newParentId=''):
     c.execute(f"""
         SELECT DISTINCT (category_id), category_name, parent_id
         FROM phpkb_categories
-        WHERE category_show='yes'
-        AND category_status = 'public'
-        AND phpkb_categories.language_id = 2
+        WHERE {category_child_where(include_private)}
         AND parent_id = {category_id}
         """)
     children = c.fetchall()
@@ -293,7 +323,7 @@ def planCategoryChildren(parent, newParentId=''):
     print(f"\n-----\n\nDry-run category {category_id}. {title}. Target: {target_category_id}. Children: {len(children)}\n")
     merge_clone_plan(plan, planArticlesInCategory(category_id))
     for child in children:
-        merge_clone_plan(plan, planCategoryChildren(child, target_category_id))
+        merge_clone_plan(plan, planCategoryChildren(child, target_category_id, include_private=include_private))
     return plan
 
 def print_clone_plan(plan):
@@ -334,7 +364,7 @@ def plan_specific_article_to(article_id, target_category_id=None):
     print(f"Dry-run article {article_id}. Target category: {target}")
     return plan
 
-def cloneCategoryChildren(parent, newParentId=''):
+def cloneCategoryChildren(parent, newParentId='', include_private=False):
     c = CONNECTION.cursor(buffered=True)
     
     id = str(parent[0])
@@ -351,9 +381,7 @@ def cloneCategoryChildren(parent, newParentId=''):
     c.execute(f"""
         SELECT DISTINCT (category_id), category_name, parent_id
         FROM phpkb_categories 
-        WHERE category_show='yes' 
-        AND category_status = 'public'
-        AND phpkb_categories.language_id = 2
+        WHERE {category_child_where(include_private)}
         AND parent_id = {id}
         """)
     children = c.fetchall()
@@ -361,7 +389,7 @@ def cloneCategoryChildren(parent, newParentId=''):
     print(f'Cloning articles from Category {id}. {title}.')
     cloneArticlesInCategory(id, newCategoryId)
     for child in children:
-        cloneCategoryChildren(child, newCategoryId)
+        cloneCategoryChildren(child, newCategoryId, include_private=include_private)
     return children
     
         
@@ -560,7 +588,14 @@ def run_cli(args):
             if not category:
                 print(f"Category {args.category_id} not found.")
                 return False
-            merge_clone_plan(plan, planCategoryChildren(category, args.target_parent_id or ''))
+            merge_clone_plan(
+                plan,
+                planCategoryChildren(
+                    category,
+                    args.target_parent_id or '',
+                    include_private=args.include_private,
+                ),
+            )
             print_clone_plan(plan)
             return True
 
@@ -577,7 +612,11 @@ def run_cli(args):
         if not category:
             print(f"Category {args.category_id} not found.")
             return False
-        cloneCategoryChildren(category, args.target_parent_id or '')
+        cloneCategoryChildren(
+            category,
+            args.target_parent_id or '',
+            include_private=args.include_private,
+        )
         return True
 
     for article_id in args.article_id or ():

@@ -60,6 +60,9 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 - Expect cloned articles to receive copied `phpkb_attachments` and `phpkb_custom_data` rows remapped to the new `article_id`; attachment files are not duplicated.
 - Treat clone dry-run as a preflight/resume report. It cannot predict final new IDs because those are generated only by real inserts.
 - After a real clone, verify both unique mapped articles and article-category relations. A source tree can contain fewer unique article rows than article-category placements because one article can be linked under multiple categories.
+- Category-tree clones walk Russian child categories (`language_id=2`) that are visible (`category_show='yes'`) and public (`category_status='public'`) unless `--include-private` is set. Hidden categories and `article_show='no'` articles are never bulk-cloned.
+- PHPKB `unlisted` is copied with the article row and is not a clone filter. MkDocs `unlisted: true` in `docs/ru` is pushed to PHPKB only through root-level `phpkb_update_articles.py` and export HTML `kb-unlisted="1"`.
+- `--show` is only for `--article-id` clones. Without it, one-off clones default to `article_show='no'` so they stay hidden until reviewed.
 
 ### Verify A Completed Clone
 

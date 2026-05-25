@@ -192,6 +192,18 @@ def test_update_mapping_json_prints_compact_summary(tmp_path, monkeypatch, capsy
     assert mapping_file.exists()
 
 
+def test_category_child_where_defaults_to_public_visible_russian_categories():
+    assert phpkb_clone.category_child_where() == (
+        "category_show='yes' AND category_status = 'public' AND phpkb_categories.language_id = 2"
+    )
+
+
+def test_category_child_where_include_private_drops_public_only_filter():
+    assert phpkb_clone.category_child_where(include_private=True) == (
+        "category_show='yes' AND phpkb_categories.language_id = 2"
+    )
+
+
 def test_parse_args_accepts_scripted_article_clones():
     args = phpkb_clone.parse_args([
         "--profile", "cmwlab",
@@ -249,11 +261,28 @@ def test_run_cli_clones_category_tree_with_target_parent(monkeypatch):
     monkeypatch.setattr(
         phpkb_clone,
         "cloneCategoryChildren",
-        lambda category, target_parent_id="": calls.append((category, target_parent_id)) or [],
+        lambda category, target_parent_id="", include_private=False: calls.append(
+            (category, target_parent_id, include_private)
+        ) or [],
     )
 
     assert phpkb_clone.run_cli(args) is True
-    assert calls == [(("798", "Version", "1"), "1000")]
+    assert calls == [(("798", "Version", "1"), "1000", False)]
+
+
+def test_run_cli_passes_include_private_to_category_clone(monkeypatch):
+    calls = []
+    args = phpkb_clone.parse_args(["--category-id", "798", "--include-private"])
+
+    monkeypatch.setattr(phpkb_clone, "fetchCategory", lambda category_id: (category_id, "Version", "1"))
+    monkeypatch.setattr(
+        phpkb_clone,
+        "cloneCategoryChildren",
+        lambda category, target_parent_id="", include_private=False: calls.append(include_private) or [],
+    )
+
+    assert phpkb_clone.run_cli(args) is True
+    assert calls == [True]
 
 
 def test_count_article_child_rows_counts_supported_backrefs():
@@ -316,7 +345,9 @@ def test_run_cli_dry_run_category_uses_plan_without_cloning(monkeypatch):
     monkeypatch.setattr(
         phpkb_clone,
         "planCategoryChildren",
-        lambda category, newParentId="": calls.append((category, newParentId)) or {
+        lambda category, newParentId="", include_private=False: calls.append(
+            (category, newParentId, include_private)
+        ) or {
             **phpkb_clone.empty_clone_plan(),
             "categories_seen": 1,
             "categories_would_clone": 1,
@@ -329,4 +360,4 @@ def test_run_cli_dry_run_category_uses_plan_without_cloning(monkeypatch):
     )
 
     assert phpkb_clone.run_cli(args) is True
-    assert calls == [(("798", "Version", "1"), "1000")]
+    assert calls == [(("798", "Version", "1"), "1000", False)]

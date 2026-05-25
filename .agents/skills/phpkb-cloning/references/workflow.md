@@ -132,6 +132,35 @@ mapping. In that run, orphan rows were isolated into a temporary
 and verified with zero unmapped article/category rows remaining in the clone ID
 ranges.
 
+## Clone Visibility Rules
+
+`phpkb_clone.py` uses different defaults for category-tree clones and one-off article clones.
+
+| PHPKB field | Category-tree clone (default) | With `--include-private` |
+| --- | --- | --- |
+| `category_status='private'` | skipped | included |
+| `category_show='no'` | skipped | skipped |
+| `article_show='no'` | skipped | skipped |
+| `unlisted=1` | included when `article_show='yes'` | same |
+
+- Russian scope: child categories require `language_id = 2`. Articles are selected by
+  category relations, not by `phpkb_articles.language_id`.
+- `--include-private` affects `--category-id` dry-run and write the same way.
+- There is no bulk flag for hidden articles. Clone them with `--article-id` if needed.
+
+### `--show` (article clones only)
+
+`--show` applies only to `--article-id`, not to `--category-id`.
+
+- Without `--show`, a one-off cloned article is inserted with `article_show='no'`. It stays
+  out of KB navigation until an editor publishes it.
+- With `--show`, the clone is visible immediately (`article_show='yes'`).
+- Category-tree clones do not use `--show`. They keep visible articles visible because the
+  walk already selects `article_show='yes'` rows and copies the rest of each article row.
+
+Use `--show` when you intentionally clone a draft or hidden source article into a target
+category and want it live right away. Omit it for test copies and staged migrations.
+
 ## CLI Usage
 
 Without arguments, `phpkb_clone.py` keeps the historical interactive flow.
@@ -151,6 +180,12 @@ Preflight category tree clone:
 
 ``` powershell
 python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .v6mapping.json --category-id 798 --target-parent-id 1000 --dry-run
+```
+
+Private category subtrees (still skips hidden categories and articles):
+
+``` powershell
+python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .v6mapping.json --category-id 798 --include-private --dry-run
 ```
 
 Scripted article clone:
