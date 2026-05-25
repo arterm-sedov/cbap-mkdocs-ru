@@ -73,12 +73,15 @@ def test_clone_article_child_rows_skips_empty_sources():
 
 def test_clone_article_clones_dependents_once_for_new_article(monkeypatch):
     cursor = FakeCursor(fetches=[(7,), (0,), (2,), (1,)], lastrowid=9001)
+    mapping_saves = []
     monkeypatch.setattr(phpkb_clone, "CONNECTION", FakeConnection(cursor))
     monkeypatch.setattr(phpkb_clone, "ARTICLE_MAPPING", {})
+    monkeypatch.setattr(phpkb_clone, "updateMappingJson", lambda: mapping_saves.append("saved"))
 
     new_article_id = phpkb_clone.cloneArticle("100", "200", "300")
 
     assert new_article_id == "9001"
+    assert mapping_saves == ["saved"]
     assert not any("SELECT MAX(article_id)" in sql for sql, _ in cursor.calls)
     assert (
         "INSERT INTO phpkb_relations (article_id, category_id, article_priority) VALUES (9001, 300, 7);",
@@ -122,13 +125,16 @@ def test_clone_article_skips_existing_relation_for_mapped_article(monkeypatch):
 
 def test_clone_category_uses_lastrowid_and_updates_mapping(monkeypatch):
     cursor = FakeCursor(lastrowid=8001)
+    mapping_saves = []
     monkeypatch.setattr(phpkb_clone, "CONNECTION", FakeConnection(cursor))
     monkeypatch.setattr(phpkb_clone, "CATEGORY_MAPPING", {})
+    monkeypatch.setattr(phpkb_clone, "updateMappingJson", lambda: mapping_saves.append("saved"))
 
     new_category_id = phpkb_clone.cloneCategory("700", "800")
 
     assert new_category_id == "8001"
     assert phpkb_clone.CATEGORY_MAPPING == {"700": "8001"}
+    assert mapping_saves == ["saved"]
     assert not any("SELECT MAX(category_id)" in sql for sql, _ in cursor.calls)
 
 
@@ -167,6 +173,23 @@ def test_initialize_mapping_fresh_refuses_existing_mapping(tmp_path):
         pass
     else:
         raise AssertionError("Expected FileExistsError for --fresh with an existing mapping")
+
+
+def test_update_mapping_json_prints_compact_summary(tmp_path, monkeypatch, capsys):
+    mapping_file = tmp_path / ".mapping.json"
+    monkeypatch.setattr(phpkb_clone, "MAPPING_FILE", str(mapping_file))
+    monkeypatch.setattr(phpkb_clone, "CATEGORY_MAPPING", {"798": "896"})
+    monkeypatch.setattr(phpkb_clone, "ARTICLE_MAPPING", {"4578": "5162", "4579": "5161"})
+    monkeypatch.setattr(phpkb_clone, "MAPPING", {})
+
+    phpkb_clone.updateMappingJson()
+
+    output = capsys.readouterr().out
+    assert "Saved mapping" in output
+    assert "categories=1" in output
+    assert "articles=2" in output
+    assert '"Articles"' not in output
+    assert mapping_file.exists()
 
 
 def test_parse_args_accepts_scripted_article_clones():

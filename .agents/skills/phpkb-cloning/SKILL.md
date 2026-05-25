@@ -12,7 +12,7 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 ## Script Roster
 
 | Script | Purpose | Main side effects |
-|---|---|---|
+| --- | --- | --- |
 | `utilities/phpkb_cloning/phpkb_clone.py` | Clone PHPKB categories and articles inside the database. Can clone whole category trees or individual articles. | Inserts new DB rows; maintains article/category mapping; clones article attachment and custom data backrefs. |
 | `utilities/phpkb_cloning/phpkb_clone_rollback.py` | Delete cloned PHPKB rows using the mapped target IDs from a clone mapping JSON. | Dry-run by default; deletes DB rows only with `--write --confirm-delete-cloned-content`. |
 | `utilities/phpkb_cloning/phpkb_clone_update_links.py` | Update PHPKB article/category links after cloning or migration using mapping JSON. Optional product/version replacements can be enabled explicitly. | Connects to DB; CLI mode is dry-run unless `--write` is passed. |
@@ -56,8 +56,18 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 - Use `--fresh` only when starting a new clone and refusing to reuse an existing mapping file.
 - Expect the script to maintain category/article mapping in JSON and insert rows into PHPKB tables.
 - Expect newly generated article/category IDs to be read from `cursor.lastrowid`, not from global `MAX(...)` queries.
+- Expect mapping saves to be compact progress lines, not full JSON dumps, during long production runs.
 - Expect cloned articles to receive copied `phpkb_attachments` and `phpkb_custom_data` rows remapped to the new `article_id`; attachment files are not duplicated.
 - Treat clone dry-run as a preflight/resume report. It cannot predict final new IDs because those are generated only by real inserts.
+- After a real clone, verify both unique mapped articles and article-category relations. A source tree can contain fewer unique article rows than article-category placements because one article can be linked under multiple categories.
+
+### Verify A Completed Clone
+
+- Confirm the mapping counts: categories, articles, and source root mapping.
+- Confirm every mapped target category/article exists in PHPKB.
+- Confirm there are no unmapped rows in the new clone ID ranges. If interrupted attempts left duplicate rows outside the real mapping, put only those target IDs into a temporary orphan mapping and dry-run `phpkb_clone_rollback.py`.
+- Confirm article-category placement preservation by comparing source `(article_id, category_id)` pairs mapped through `.v6mapping.json` against actual target `phpkb_relations`.
+- For the V5 to V6 run, source category `798` cloned adjacent as category `896`; the verified clone had `84` mapped categories, `498` unique mapped articles, and `616` mapped article-category relations.
 
 ### Update Links After Cloning
 
@@ -82,6 +92,7 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
   `python utilities/phpkb_cloning/phpkb_clone_rollback.py --mapping .v6mapping.json`
 - Use `--write --confirm-delete-cloned-content` only after the reported counts match the intended rollback.
 - Expect deletes in dependency order: attachment/custom data rows, relations, articles, then categories.
+- For aborted-run orphan cleanup, use a separate temporary mapping that contains only orphan target IDs. Delete that temporary mapping after cleanup and verification.
 
 ### Migrate Local KB IDs
 

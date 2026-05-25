@@ -1,6 +1,6 @@
 # PHPKB Cloning Workflow
 
-Use this workflow for the rare task of creating a new PHPKB section for a new product version.
+Use this workflow for creating a new PHPKB section for a new product release.
 
 ## Script Location
 
@@ -30,16 +30,21 @@ Keep clone and post-clone update scripts on the same profile.
    For V5 to V6 migrations, prefer an explicit versioned file such as `.v6mapping.json`.
    Use `--dry-run` first for a preflight/resume report with no inserts and no mapping writes.
 4. Keep the generated mapping JSON; it maps old category/article IDs to new IDs.
-5. Run `utilities/phpkb_cloning/phpkb_clone_update_links.py` to rewrite article/category links in cloned PHPKB content.
+5. Verify the completed clone before post-clone rewrites.
+   Check mapped category/article counts, confirm there are no unmapped rows in
+   the clone ID ranges, and verify mapped article-category relations. Unique
+   mapped article rows can be fewer than article-category placements because
+   one article can be linked under multiple categories.
+6. Run `utilities/phpkb_cloning/phpkb_clone_update_links.py` to rewrite article/category links in cloned PHPKB content.
    Start with dry-run CLI mode, for example:
    `python utilities/phpkb_cloning/phpkb_clone_update_links.py --mapping .v6mapping.json --category-id 900`
    Here `--category-id` is the cloned category tree to update, not the original source category.
    For a V5 to V6 text migration, add `--old-version 5.0 --new-version 6.0`.
    Add `--replace-product-names` only when legacy product-name replacements are still required.
    Add `--write` only after the dry-run output looks correct.
-6. Run local Markdown migration helpers only if the workflow includes local docs updates:
+7. Run local Markdown migration helpers only if the workflow includes local docs updates:
    - `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py --mapping .v6mapping.json --target all`
-7. Verify local file changes with `git status --short` and targeted diffs.
+8. Verify local file changes with `git status --short` and targeted diffs.
 
 The root-level `phpkb_replace_related_topics.py` is a post-import Markdown
 cleanup helper, not part of the PHPKB DB cloning scripts.
@@ -103,6 +108,30 @@ python utilities/phpkb_cloning/phpkb_clone_rollback.py --profile cmw --mapping .
 
 The rollback deletes only mapped target IDs from the mapping values. It cleans
 attachment/custom data rows first, then relations, articles, and categories.
+
+For cleanup after an interrupted clone, do not edit the real clone mapping.
+Create a temporary mapping that contains only the unmapped orphan target IDs,
+run rollback dry-run against that temporary mapping, then delete the temporary
+mapping file after the orphan rows are removed and verified.
+
+## Post-Clone Verification Findings
+
+In the V5 to V6 clone run, source category `798` was cloned adjacent as category
+`896`. The final verified mapping contained:
+
+- `84` categories;
+- `498` unique article rows;
+- `616` article-category relation pairs.
+
+This is expected: some PHPKB articles are linked under more than one category.
+Verify relation pairs, not only article counts, before running link rewrites.
+
+Interrupted attempts can leave duplicate rows that are not present in the real
+mapping. In that run, orphan rows were isolated into a temporary
+`.v6mapping_orphans.json`, dry-run through `phpkb_clone_rollback.py`, removed,
+and verified with zero unmapped article/category rows remaining in the clone ID
+ranges.
+
 ## CLI Usage
 
 Without arguments, `phpkb_clone.py` keeps the historical interactive flow.

@@ -20,7 +20,17 @@ Resume behavior:
 - existing mappings are loaded by default, so interrupted clone runs can be
   resumed without recloning already mapped categories/articles;
 - `--fresh` refuses to run when the selected mapping file already exists;
-- mapping writes are atomic via temporary file replacement.
+- mapping writes are atomic via temporary file replacement;
+- newly generated article/category IDs are saved to the mapping immediately
+  after each insert, before relation/backref work continues;
+- mapping save output is intentionally compact because large JSON dumps can
+  make long production runs noisy and harder to monitor.
+
+If an older or interrupted run inserts rows before those rows are persisted in
+the mapping, a resume cannot recognize them and may create duplicate "orphan"
+clone rows. Detect those separately and clean them with `phpkb_clone_rollback.py`
+using a temporary orphan-only mapping; do not mix orphan IDs into the real clone
+mapping.
 
 Preflight behavior:
 - `--dry-run` fetches source rows and reports what a scripted clone would do;
@@ -336,7 +346,6 @@ def cloneCategoryChildren(parent, newParentId=''):
     
     newCategoryId = cloneCategory(id, parentId)
     CATEGORY_MAPPING.update({id:newCategoryId})
-    updateMappingJson()
     
     #for id, title, parent_id, in parent:
     c.execute(f"""
@@ -377,7 +386,6 @@ def cloneArticlesInCategory (category_id, newCategoryId):
         pages += 1
         newArticleId = cloneArticle(id, category_id, newCategoryId)
         ARTICLE_MAPPING.update({id:newArticleId})
-        updateMappingJson()
     TOTAL_PAGES_CLONED += pages
     print(f"\nCloned {pages} articles, total {TOTAL_PAGES_CLONED}\n\n-----\n")
     return pages
@@ -414,6 +422,7 @@ def cloneArticle(article_id, category_id, newCategoryId, suffix="", show=True):
                 """)
         article_created = True
         ARTICLE_MAPPING.update({article_id:newArticleId})
+        updateMappingJson()
     else:
         newArticleId = ARTICLE_MAPPING[article_id]
     
@@ -477,6 +486,7 @@ def cloneCategory(category_id, newParentId):
             DROP TABLE tmp;
             """)
     CATEGORY_MAPPING.update({category_id:newCategoryId})
+    updateMappingJson()
     
     print(newCategoryId)
 
@@ -678,9 +688,12 @@ def updateMappingJson(mapping_file=None):
     temp = target.with_suffix(target.suffix + ".tmp")
     with temp.open("w", encoding="utf-8") as mappingFile:
         mappingJson = json.dumps(MAPPING, indent = 4, ensure_ascii=False)
-        print(mappingJson)
         mappingFile.write(mappingJson)
     temp.replace(target)
+    print(
+        f"Saved mapping {target}: "
+        f"categories={len(CATEGORY_MAPPING)}, articles={len(ARTICLE_MAPPING)}"
+    )
 
 if __name__ == "__main__":
     main()
