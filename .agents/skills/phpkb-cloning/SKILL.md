@@ -14,6 +14,7 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 | Script | Purpose | Main side effects |
 |---|---|---|
 | `utilities/phpkb_cloning/phpkb_clone.py` | Clone PHPKB categories and articles inside the database. Can clone whole category trees or individual articles. | Inserts new DB rows; maintains article/category mapping; clones article attachment and custom data backrefs. |
+| `utilities/phpkb_cloning/phpkb_clone_rollback.py` | Delete cloned PHPKB rows using the mapped target IDs from a clone mapping JSON. | Dry-run by default; deletes DB rows only with `--write --confirm-delete-cloned-content`. |
 | `utilities/phpkb_cloning/phpkb_clone_update_links.py` | Update PHPKB article/category links after cloning or migration using mapping JSON. Optional product/version replacements can be enabled explicitly. | Connects to DB; CLI mode is dry-run unless `--write` is passed. |
 | `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py` | Update local docs IDs using a clone mapping. Handles `kbId` frontmatter in `docs/ru` and article/category IDs in `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md`. | Dry-run by default; rewrites Markdown files only with `--write`. |
 
@@ -64,6 +65,16 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 - Product-name replacements are optional via `--replace-product-names`.
 - Version replacements are optional and parameterized, for example `--old-version 5.0 --new-version 6.0`.
 - No-argument interactive mode preserves the older prompt-driven behavior, including `4.7` to `5.0` prompts.
+
+### Roll Back A Bad Clone
+
+- Review `utilities/phpkb_cloning/phpkb_clone_rollback.py`.
+- Confirm the selected mapping JSON contains only the clone run that should be removed.
+- The script deletes only mapped target IDs, that is, mapping values, never source IDs from mapping keys.
+- Run dry-run first:
+  `python utilities/phpkb_cloning/phpkb_clone_rollback.py --mapping .v6mapping.json`
+- Use `--write --confirm-delete-cloned-content` only after the reported counts match the intended rollback.
+- Expect deletes in dependency order: attachment/custom data rows, relations, articles, then categories.
 
 ### Migrate Local KB IDs
 

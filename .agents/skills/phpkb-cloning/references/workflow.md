@@ -7,6 +7,7 @@ Use this workflow for the rare task of creating a new PHPKB section for a new pr
 Run scripts from the repository root:
 
 - `utilities/phpkb_cloning/phpkb_clone.py`
+- `utilities/phpkb_cloning/phpkb_clone_rollback.py`
 - `utilities/phpkb_cloning/phpkb_clone_update_links.py`
 - `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py`
 
@@ -45,8 +46,26 @@ lookup prototype, not part of the PHPKB DB cloning scripts.
 ## Safety Notes
 
 - Treat `phpkb_clone.py` and `phpkb_clone_update_links.py` as DB-mutating scripts.
+- Treat `phpkb_clone_rollback.py --write` as destructive; run it only for a deliberate cleanup of cloned rows.
 - Do not run DB-mutating scripts as a test.
 - Confirm the selected mapping JSON, for example `.v6mapping.json`, before running link updates.
+
+## Rollback
+
+If a clone run must be removed, start with a dry-run report:
+
+``` powershell
+python utilities/phpkb_cloning/phpkb_clone_rollback.py --profile cmw --mapping .v6mapping.json
+```
+
+Delete cloned rows only after checking the counts:
+
+``` powershell
+python utilities/phpkb_cloning/phpkb_clone_rollback.py --profile cmw --mapping .v6mapping.json --write --confirm-delete-cloned-content
+```
+
+The rollback deletes only mapped target IDs from the mapping values. It cleans
+attachment/custom data rows first, then relations, articles, and categories.
 ## CLI Usage
 
 Without arguments, `phpkb_clone.py` keeps the historical interactive flow.
