@@ -109,6 +109,7 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 
 - Check `git status --short` before local batch rewrites.
 - Read the script and confirm hardcoded paths before execution.
+- Before production clone or rollback runs, create and verify a full `phpkbv9` DB backup as described in `references/workflow.md`.
 - Do not run DB-mutating scripts as a casual verification step.
 - Keep edits narrow and preserve existing interactive safeguards unless the user asks for automation.
 - For generated or updated Markdown, follow the repository formatting rules in `AGENTS.md`.

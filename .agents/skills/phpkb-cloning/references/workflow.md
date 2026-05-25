@@ -23,22 +23,23 @@ Keep clone and post-clone update scripts on the same profile.
 ## Recommended Order
 
 1. Set and verify `.env` `SERVER_PROFILE`.
-2. Run `utilities/phpkb_cloning/phpkb_clone.py` to clone the source category tree or selected articles.
+2. Create and verify a complete `phpkbv9` database backup on the PHPKB server.
+3. Run `utilities/phpkb_cloning/phpkb_clone.py` to clone the source category tree or selected articles.
    The script resumes from `.mapping.json` by default. Use `--mapping <path>` for a different mapping file.
    Use `--fresh` only when starting a new clone and refusing to continue from an existing mapping file.
    For V5 to V6 migrations, prefer an explicit versioned file such as `.v6mapping.json`.
    Use `--dry-run` first for a preflight/resume report with no inserts and no mapping writes.
-3. Keep the generated mapping JSON; it maps old category/article IDs to new IDs.
-4. Run `utilities/phpkb_cloning/phpkb_clone_update_links.py` to rewrite article/category links in cloned PHPKB content.
+4. Keep the generated mapping JSON; it maps old category/article IDs to new IDs.
+5. Run `utilities/phpkb_cloning/phpkb_clone_update_links.py` to rewrite article/category links in cloned PHPKB content.
    Start with dry-run CLI mode, for example:
    `python utilities/phpkb_cloning/phpkb_clone_update_links.py --mapping .v6mapping.json --category-id 900`
    Here `--category-id` is the cloned category tree to update, not the original source category.
    For a V5 to V6 text migration, add `--old-version 5.0 --new-version 6.0`.
    Add `--replace-product-names` only when legacy product-name replacements are still required.
    Add `--write` only after the dry-run output looks correct.
-5. Run local Markdown migration helpers only if the workflow includes local docs updates:
+6. Run local Markdown migration helpers only if the workflow includes local docs updates:
    - `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py --mapping .v6mapping.json --target all`
-6. Verify local file changes with `git status --short` and targeted diffs.
+7. Verify local file changes with `git status --short` and targeted diffs.
 
 The root-level `phpkb_replace_related_topics.py` is a post-import Markdown
 cleanup helper, not part of the PHPKB DB cloning scripts.
@@ -50,7 +51,41 @@ lookup prototype, not part of the PHPKB DB cloning scripts.
 - Treat `phpkb_clone.py` and `phpkb_clone_update_links.py` as DB-mutating scripts.
 - Treat `phpkb_clone_rollback.py --write` as destructive; run it only for a deliberate cleanup of cloned rows.
 - Do not run DB-mutating scripts as a test.
+- Create and verify a full DB backup before any production clone or rollback run.
 - Confirm the selected mapping JSON, for example `.v6mapping.json`, before running link updates.
+
+## Database Backup
+
+When working directly on the PHPKB server over SSH, create a full `phpkbv9`
+dump before any production clone or rollback run:
+
+``` bash
+sudo mysqldump \
+  --default-character-set=utf8mb4 \
+  --routines \
+  --triggers \
+  --events \
+  --lock-tables \
+  --databases phpkbv9 \
+  > phpkbv9_backup_before_v6_clone_$(date +%Y%m%d_%H%M%S).sql
+```
+
+Use `--lock-tables` because the PHPKB tables use MyISAM in the current schema
+notes; `--single-transaction` is not enough for a consistent MyISAM backup.
+
+Verify the backup exists and looks plausible:
+
+``` bash
+ls -lh phpkbv9_backup_before_v6_clone_*.sql
+head -40 phpkbv9_backup_before_v6_clone_*.sql
+```
+
+Expected sanity checks:
+
+- the file is large enough for the current database, for example around `1.5G`;
+- the header names `Database: phpkbv9`;
+- the dump contains `CREATE DATABASE` and `USE \`phpkbv9\``;
+- PHPKB tables such as `phpkb_api_keys` or `phpkb_articles` appear in the dump.
 
 ## Rollback
 
