@@ -15,7 +15,6 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 |---|---|---|
 | `utilities/phpkb_cloning/phpkb_clone.py` | Clone PHPKB categories and articles inside the database. Can clone whole category trees or individual articles. | Inserts new DB rows; maintains article/category mapping; clones article attachment and custom data backrefs. |
 | `utilities/phpkb_cloning/phpkb_clone_update_links.py` | Update PHPKB article/category links after cloning or migration using mapping JSON. Optional product/version replacements can be enabled explicitly. | Connects to DB; CLI mode is dry-run unless `--write` is passed. |
-| `utilities/phpkb_cloning/phpkb_clone_update_article_ids.py` | Prototype/helper for finding KB article IDs in Markdown links and resolving them via the hyperlinks snippet. | Currently runs immediately on hardcoded `article-2198.md`; no `__main__` guard. |
 | `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py` | Update local docs IDs using a clone mapping. Handles `kbId` frontmatter in `docs/ru` and article/category IDs in `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md`. | Dry-run by default; rewrites Markdown files only with `--write`. |
 
 ## References
@@ -81,11 +80,11 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 - Confirm the hardcoded directory, currently `docs/ru/using_the_system`.
 - Expect matching related-topic sections to be wrapped in `<div class="relatedTopics" markdown="block">` and bold links converted to bullet italic links.
 
-### Work With `phpkb_clone_update_article_ids.py`
+### Work With Article ID Lookup
 
-- Treat it as a prototype unless updated first.
+- Use root-level `phpkb_update_article_ids.py` as a post-import Markdown lookup prototype, not for DB cloning.
 - It runs `process_markdown_file('article-2198.md')` at import time without an `if __name__ == "__main__"` guard.
-- Add a proper entry point or parameters before using it for a broader migration.
+- Add a proper entry point or parameters before using it for real cleanup.
 
 ## Safety Checklist
 

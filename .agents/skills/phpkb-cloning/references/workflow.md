@@ -8,7 +8,6 @@ Run scripts from the repository root:
 
 - `utilities/phpkb_cloning/phpkb_clone.py`
 - `utilities/phpkb_cloning/phpkb_clone_update_links.py`
-- `utilities/phpkb_cloning/phpkb_clone_update_article_ids.py`
 - `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py`
 
 ## Profile Selection
@@ -35,11 +34,12 @@ Keep clone and post-clone update scripts on the same profile.
    Add `--write` only after the dry-run output looks correct.
 5. Run local Markdown migration helpers only if the workflow includes local docs updates:
    - `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py --mapping .mapping.json --target all`
-   - `utilities/phpkb_cloning/phpkb_clone_update_article_ids.py`
 6. Verify local file changes with `git status --short` and targeted diffs.
 
 The root-level `phpkb_replace_related_topics.py` is a post-import Markdown
 cleanup helper, not part of the PHPKB DB cloning scripts.
+The root-level `phpkb_update_article_ids.py` is also a post-import Markdown
+lookup prototype, not part of the PHPKB DB cloning scripts.
 
 ## Safety Notes
 

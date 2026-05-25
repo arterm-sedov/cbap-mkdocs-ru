@@ -1,3 +1,33 @@
+"""Clone PHPKB categories/articles and keep a resumable ID mapping.
+
+This is the main DB-mutating utility in the PHPKB cloning workflow. It connects
+to PHPKB through `tools.ssh_kb_ru.establish_connection_interactive()` and can
+clone either a whole category tree or selected articles.
+
+Core behavior:
+- clones full `phpkb_categories` rows except regenerated `category_id`;
+- clones full `phpkb_articles` rows except regenerated `article_id`;
+- inserts `phpkb_relations` rows that point cloned articles to cloned or
+  selected target categories;
+- copies article-owned backrefs from `phpkb_attachments` and
+  `phpkb_custom_data`, remapping only `article_id`;
+- does not duplicate physical attachment files;
+- writes old-to-new IDs into a mapping JSON with `Categories` and `Articles`
+  sections.
+
+Resume behavior:
+- `--mapping` selects the mapping file, default `.mapping.json`;
+- existing mappings are loaded by default, so interrupted clone runs can be
+  resumed without recloning already mapped categories/articles;
+- `--fresh` refuses to run when the selected mapping file already exists;
+- mapping writes are atomic via temporary file replacement.
+
+Generated article/category IDs are captured from `cursor.lastrowid`, which is
+the auto-increment value produced by this connection's INSERT. Do not replace
+that with `SELECT MAX(...)`, because global MAX queries can pick up another
+process's concurrent insert.
+"""
+
 import mysql.connector
 import argparse
 import sys

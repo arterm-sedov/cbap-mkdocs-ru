@@ -1,8 +1,9 @@
-"""Prototype helper for looking up shared hyperlink labels for direct KB URLs.
+"""Post-import prototype for looking up shared hyperlink labels.
 
-This script is not part of the operational PHPKB clone/migration pipeline.
-It does not rewrite Markdown, format migrated hyperlinks, update IDs from
-`.mapping.json`, or handle category links.
+This root-level helper is for local Markdown analysis after PHPKB import or
+documentation migration. It is not part of the PHPKB cloning DB workflow: it
+does not connect to PHPKB, does not use `.mapping.json`, does not remap
+article/category IDs, and does not format migrated hyperlinks.
 
 Current behavior:
 - reads a hardcoded Markdown file, `article-2198.md`;
@@ -12,7 +13,7 @@ Current behavior:
   labels that point to the same article IDs;
 - prints the matching reference labels, if any.
 
-Before using this for real migrations, add a CLI entry point, remove the
+Before using this for real cleanup, add a CLI entry point, remove the
 hardcoded input file, and implement explicit read-only or write modes.
 """
 

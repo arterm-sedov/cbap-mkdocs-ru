@@ -1,3 +1,23 @@
+"""Update local Markdown IDs using a PHPKB clone mapping.
+
+This is a local-file post-clone migration helper. It does not connect to PHPKB
+and does not mutate the database. Use it after `phpkb_clone.py` has produced a
+mapping JSON with `Articles` and `Categories` sections.
+
+Targets:
+- `frontmatter-kbids` scans Markdown files under `docs/ru` by default and
+  updates `kbId:` frontmatter values using `mapping["Articles"]`;
+- `hyperlink-map` updates only
+  `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md`;
+- `all` runs both targets.
+
+Hyperlink-map updates are prefix-aware:
+- `{{ kbArticleURLPrefix }}...` uses `mapping["Articles"]`;
+- `{{ kbCategoryURLPrefix }}...` uses `mapping["Categories"]`.
+
+The CLI is dry-run by default. Pass `--write` to rewrite local files.
+"""
+
 import argparse
 import json
 import re
