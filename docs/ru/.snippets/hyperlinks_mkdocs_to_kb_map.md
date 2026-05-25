@@ -80,7 +80,7 @@
 
 [vulnerability_digest]: {{ kbArticleURLPrefix }}5434
 
-[vulnerability_pt_dec2025]: {{ kbArticleURLPrefix }}5433
+[vulnerability_pt_dec2025]: {{ kbArticleURLPrefix }}5158
 
 [apache_ignite_clustering]: https://ignite.apache.org/docs/latest/clustering/clustering
 
@@ -309,13 +309,13 @@
 
 [release_notes_4.7.3084]: {{ kbArticleURLPrefix }}2649
 
-[release_notes_5.0]: {{ kbArticleURLPrefix }}5439
+[release_notes_5.0]: {{ kbArticleURLPrefix }}5073
 
-[release_notes_5.0.13334]: {{ kbArticleURLPrefix }}5437
+[release_notes_5.0.13334]: {{ kbArticleURLPrefix }}5094
 
-[release_notes_5.0.20251010]: {{ kbArticleURLPrefix }}5436
+[release_notes_5.0.20251010]: {{ kbArticleURLPrefix }}5137
 
-[release_notes_5.0.20251231]: {{ kbArticleURLPrefix }}5435
+[release_notes_5.0.20251231]: {{ kbArticleURLPrefix }}5145
 
 [s3_connection]: {{ kbArticleURLPrefix }}5317
 
