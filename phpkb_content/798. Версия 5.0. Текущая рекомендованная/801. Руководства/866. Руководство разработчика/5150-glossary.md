@@ -2,7 +2,7 @@
 title: 'Сущности Comindware Platform. Определения и термины'
 kbId: 5150
 url: 'https://kb.comindware.ru/article.php?id=5150'
-updated: '2025-12-24 17:24:28'
+updated: '2026-03-18 14:27:49'
 ---
 
 # Сущности {{ productName }}. Определения и термины
