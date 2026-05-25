@@ -27,6 +27,7 @@ Keep clone and post-clone update scripts on the same profile.
    The script resumes from `.mapping.json` by default. Use `--mapping <path>` for a different mapping file.
    Use `--fresh` only when starting a new clone and refusing to continue from an existing mapping file.
    For V5 to V6 migrations, prefer an explicit versioned file such as `.v6mapping.json`.
+   Use `--dry-run` first for a preflight/resume report with no inserts and no mapping writes.
 3. Keep the generated mapping JSON; it maps old category/article IDs to new IDs.
 4. Run `utilities/phpkb_cloning/phpkb_clone_update_links.py` to rewrite article/category links in cloned PHPKB content.
    Start with dry-run CLI mode, for example:
@@ -74,6 +75,12 @@ Scripted category tree clone:
 
 ``` powershell
 python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --category-id 798 --target-parent-id 1000
+```
+
+Preflight category tree clone:
+
+``` powershell
+python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .v6mapping.json --category-id 798 --target-parent-id 1000 --dry-run
 ```
 
 Scripted article clone:

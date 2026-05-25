@@ -22,6 +22,12 @@ Resume behavior:
 - `--fresh` refuses to run when the selected mapping file already exists;
 - mapping writes are atomic via temporary file replacement.
 
+Preflight behavior:
+- `--dry-run` fetches source rows and reports what a scripted clone would do;
+- it does not insert rows, create temp tables, clone backrefs, or write mapping
+  JSON;
+- it is useful before first runs and before resuming from an existing mapping.
+
 Generated article/category IDs are captured from `cursor.lastrowid`, which is
 the auto-increment value produced by this connection's INSERT. Do not replace
 that with `SELECT MAX(...)`, because global MAX queries can pick up another
@@ -96,6 +102,7 @@ def parse_args(argv=None):
     parser.add_argument("--profile", choices=("cmw", "cmwlab"), help="PHPKB server profile. Defaults to SERVER_PROFILE from .env.")
     parser.add_argument("--mapping", default=DEFAULT_MAPPING_FILE, help=f"Mapping JSON to read/write. Default: {DEFAULT_MAPPING_FILE}")
     parser.add_argument("--fresh", action="store_true", help="Start a fresh clone and refuse to run if the mapping file already exists.")
+    parser.add_argument("--dry-run", action="store_true", help="Report what would be cloned or reused without inserting rows or writing the mapping file.")
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--category-id", type=numeric_id, help="Clone this category and all child categories/articles.")
     mode.add_argument("--article-id", action="append", type=numeric_id, help="Clone an article. Can be used multiple times.")
@@ -173,6 +180,127 @@ def clone_article_dependents(cursor, old_article_id, new_article_id):
         cloned = clone_article_child_rows(cursor, old_article_id, new_article_id, spec)
         if cloned:
             print(f"Cloned {cloned} {spec['label']} rows for article {old_article_id} -> {new_article_id}")
+
+def empty_clone_plan():
+    return {
+        "categories_seen": 0,
+        "categories_would_clone": 0,
+        "categories_reused": 0,
+        "articles_seen": 0,
+        "articles_would_clone": 0,
+        "articles_reused": 0,
+        "relations_to_create": 0,
+        "attachment_rows": 0,
+        "custom_data_rows": 0,
+    }
+
+def merge_clone_plan(target, source):
+    for key, value in source.items():
+        target[key] += value
+    return target
+
+def count_article_child_rows(cursor, article_id):
+    counts = {}
+    for spec in ARTICLE_CHILD_CLONE_SPECS:
+        table = sql_name(spec["table"])
+        cursor.execute(f"SELECT COUNT(*) FROM {table} WHERE `article_id`=%s", (str(article_id),))
+        counts[spec["label"]] = cursor.fetchone()[0]
+    return counts
+
+def planArticlesInCategory(category_id):
+    c = CONNECTION.cursor(buffered=True)
+    c.execute(f"""
+            SELECT DISTINCT (phpkb_articles.article_id), phpkb_articles.article_content, phpkb_articles.article_title
+            FROM phpkb_articles, phpkb_relations, phpkb_categories
+            WHERE article_show='yes'
+            AND phpkb_relations.category_id = {category_id}
+            AND phpkb_relations.article_id = phpkb_articles.article_id
+            """)
+
+    plan = empty_clone_plan()
+    for article_id, _content, _title in c.fetchall():
+        article_id = str(article_id)
+        plan["articles_seen"] += 1
+        plan["relations_to_create"] += 1
+        if article_id in ARTICLE_MAPPING:
+            plan["articles_reused"] += 1
+            continue
+
+        plan["articles_would_clone"] += 1
+        child_counts = count_article_child_rows(c, article_id)
+        plan["attachment_rows"] += child_counts.get("attachments", 0)
+        plan["custom_data_rows"] += child_counts.get("custom data", 0)
+    return plan
+
+def planCategoryChildren(parent, newParentId=''):
+    c = CONNECTION.cursor(buffered=True)
+
+    category_id = str(parent[0])
+    title = parent[1]
+    parent_id = str(newParentId or parent[2])
+
+    plan = empty_clone_plan()
+    plan["categories_seen"] += 1
+    if category_id in CATEGORY_MAPPING:
+        plan["categories_reused"] += 1
+        target_category_id = CATEGORY_MAPPING[category_id]
+    else:
+        plan["categories_would_clone"] += 1
+        target_category_id = f"<new under {parent_id}>"
+
+    c.execute(f"""
+        SELECT DISTINCT (category_id), category_name, parent_id
+        FROM phpkb_categories
+        WHERE category_show='yes'
+        AND category_status = 'public'
+        AND phpkb_categories.language_id = 2
+        AND parent_id = {category_id}
+        """)
+    children = c.fetchall()
+
+    print(f"\n-----\n\nDry-run category {category_id}. {title}. Target: {target_category_id}. Children: {len(children)}\n")
+    merge_clone_plan(plan, planArticlesInCategory(category_id))
+    for child in children:
+        merge_clone_plan(plan, planCategoryChildren(child, target_category_id))
+    return plan
+
+def print_clone_plan(plan):
+    print("\nClone preflight dry-run:")
+    print(f"  categories seen: {plan['categories_seen']}")
+    print(f"  categories would clone: {plan['categories_would_clone']}")
+    print(f"  categories reused from mapping: {plan['categories_reused']}")
+    print(f"  articles seen: {plan['articles_seen']}")
+    print(f"  articles would clone: {plan['articles_would_clone']}")
+    print(f"  articles reused from mapping: {plan['articles_reused']}")
+    print(f"  relations to create/check: {plan['relations_to_create']}")
+    print(f"  attachment rows to link: {plan['attachment_rows']}")
+    print(f"  custom data rows to clone: {plan['custom_data_rows']}")
+    print("\nNo DB rows were inserted.")
+    print("No mapping file was written.")
+
+def plan_specific_article_to(article_id, target_category_id=None):
+    c = CONNECTION.cursor(buffered=True)
+    article_id = str(article_id)
+    c.execute(f"SELECT category_id FROM phpkb_relations WHERE article_id={article_id} LIMIT 1")
+    result = c.fetchone()
+    if not result:
+        print(f"Article {article_id} is not in any category and cannot be cloned.")
+        return empty_clone_plan()
+
+    plan = empty_clone_plan()
+    plan["articles_seen"] = 1
+    plan["relations_to_create"] = 1
+    if article_id in ARTICLE_MAPPING:
+        plan["articles_reused"] = 1
+    else:
+        plan["articles_would_clone"] = 1
+        child_counts = count_article_child_rows(c, article_id)
+        plan["attachment_rows"] = child_counts.get("attachments", 0)
+        plan["custom_data_rows"] = child_counts.get("custom data", 0)
+
+    target = target_category_id or result[0]
+    print(f"Dry-run article {article_id}. Target category: {target}")
+    return plan
 
 def cloneCategoryChildren(parent, newParentId=''):
     c = CONNECTION.cursor(buffered=True)
@@ -393,6 +521,25 @@ def clone_specific_article_to(article_id, target_category_id=None, suffix="_CLON
     return False
 
 def run_cli(args):
+    if args.dry_run:
+        plan = empty_clone_plan()
+        if args.category_id:
+            category = fetchCategory(args.category_id)
+            if not category:
+                print(f"Category {args.category_id} not found.")
+                return False
+            merge_clone_plan(plan, planCategoryChildren(category, args.target_parent_id or ''))
+            print_clone_plan(plan)
+            return True
+
+        for article_id in args.article_id or ():
+            merge_clone_plan(
+                plan,
+                plan_specific_article_to(article_id, target_category_id=args.target_category_id),
+            )
+        print_clone_plan(plan)
+        return True
+
     if args.category_id:
         category = fetchCategory(args.category_id)
         if not category:
@@ -493,7 +640,8 @@ def main(argv=None):
         else:
             run_interactive()
         
-        updateMappingJson()
+        if not args.dry_run:
+            updateMappingJson()
     except KeyboardInterrupt:
         # Connection cleanup handled in finally block
         pass

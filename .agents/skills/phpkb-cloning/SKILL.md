@@ -47,12 +47,14 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 - Review `utilities/phpkb_cloning/phpkb_clone.py`.
 - Confirm whether the task is a whole category tree clone or a specific article clone.
 - Confirm the target category ID when cloning individual articles.
+- Use `--dry-run` first for scripted clones to get a preflight scope report without inserts or mapping writes.
 - Expect the script to load an existing mapping JSON and resume by default.
 - For V5 to V6 migrations, prefer `--mapping .v6mapping.json` and pass that same file to post-clone update scripts.
 - Use `--fresh` only when starting a new clone and refusing to reuse an existing mapping file.
 - Expect the script to maintain category/article mapping in JSON and insert rows into PHPKB tables.
 - Expect newly generated article/category IDs to be read from `cursor.lastrowid`, not from global `MAX(...)` queries.
 - Expect cloned articles to receive copied `phpkb_attachments` and `phpkb_custom_data` rows remapped to the new `article_id`; attachment files are not duplicated.
+- Treat clone dry-run as a preflight/resume report. It cannot predict final new IDs because those are generated only by real inserts.
 
 ### Update Links After Cloning
 

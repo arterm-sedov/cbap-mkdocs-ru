@@ -174,6 +174,7 @@ def test_parse_args_accepts_scripted_article_clones():
         "--profile", "cmwlab",
         "--mapping", ".clone.json",
         "--fresh",
+        "--dry-run",
         "--article-id", "100",
         "--article-id", "101",
         "--target-category-id", "900",
@@ -184,6 +185,7 @@ def test_parse_args_accepts_scripted_article_clones():
     assert args.profile == "cmwlab"
     assert args.mapping == ".clone.json"
     assert args.fresh is True
+    assert args.dry_run is True
     assert args.article_id == ["100", "101"]
     assert args.target_category_id == "900"
     assert args.suffix == "_V5"
@@ -225,6 +227,70 @@ def test_run_cli_clones_category_tree_with_target_parent(monkeypatch):
         phpkb_clone,
         "cloneCategoryChildren",
         lambda category, target_parent_id="": calls.append((category, target_parent_id)) or [],
+    )
+
+    assert phpkb_clone.run_cli(args) is True
+    assert calls == [(("798", "Version", "1"), "1000")]
+
+
+def test_count_article_child_rows_counts_supported_backrefs():
+    cursor = FakeCursor(fetches=[(3,), (2,)])
+
+    counts = phpkb_clone.count_article_child_rows(cursor, "100")
+
+    assert counts == {"attachments": 3, "custom data": 2}
+    assert cursor.calls == [
+        ("SELECT COUNT(*) FROM `phpkb_attachments` WHERE `article_id`=%s", ("100",)),
+        ("SELECT COUNT(*) FROM `phpkb_custom_data` WHERE `article_id`=%s", ("100",)),
+    ]
+
+
+def test_plan_specific_article_reports_reused_article_without_backref_counts(monkeypatch):
+    cursor = FakeCursor(fetches=[("200",)])
+    monkeypatch.setattr(phpkb_clone, "CONNECTION", FakeConnection(cursor))
+    monkeypatch.setattr(phpkb_clone, "ARTICLE_MAPPING", {"100": "9001"})
+
+    plan = phpkb_clone.plan_specific_article_to("100", target_category_id="300")
+
+    assert plan["articles_seen"] == 1
+    assert plan["articles_reused"] == 1
+    assert plan["articles_would_clone"] == 0
+    assert plan["relations_to_create"] == 1
+    assert not any("phpkb_attachments" in sql for sql, _ in cursor.calls)
+
+
+def test_plan_specific_article_counts_backrefs_for_unmapped_article(monkeypatch):
+    cursor = FakeCursor(fetches=[("200",), (3,), (2,)])
+    monkeypatch.setattr(phpkb_clone, "CONNECTION", FakeConnection(cursor))
+    monkeypatch.setattr(phpkb_clone, "ARTICLE_MAPPING", {})
+
+    plan = phpkb_clone.plan_specific_article_to("100", target_category_id="300")
+
+    assert plan["articles_seen"] == 1
+    assert plan["articles_would_clone"] == 1
+    assert plan["articles_reused"] == 0
+    assert plan["attachment_rows"] == 3
+    assert plan["custom_data_rows"] == 2
+
+
+def test_run_cli_dry_run_category_uses_plan_without_cloning(monkeypatch):
+    args = phpkb_clone.parse_args(["--category-id", "798", "--target-parent-id", "1000", "--dry-run"])
+    calls = []
+
+    monkeypatch.setattr(phpkb_clone, "fetchCategory", lambda category_id: (category_id, "Version", "1"))
+    monkeypatch.setattr(
+        phpkb_clone,
+        "planCategoryChildren",
+        lambda category, newParentId="": calls.append((category, newParentId)) or {
+            **phpkb_clone.empty_clone_plan(),
+            "categories_seen": 1,
+            "categories_would_clone": 1,
+        },
+    )
+    monkeypatch.setattr(
+        phpkb_clone,
+        "cloneCategoryChildren",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(AssertionError("dry-run must not clone")),
     )
 
     assert phpkb_clone.run_cli(args) is True

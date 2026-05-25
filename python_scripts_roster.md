@@ -25,7 +25,7 @@ These scripts support cloning PHPKB category/article trees and then cleaning up 
 
 | Script | Role | Main side effects / outputs |
 |---|---|---|
-| `utilities/phpkb_cloning/phpkb_clone.py` | Clones PHPKB categories and articles inside the DB. Can clone whole category trees or individual articles and resume from a mapping JSON. | Inserts new DB rows; maintains article/category mapping. |
+| `utilities/phpkb_cloning/phpkb_clone.py` | Clones PHPKB categories and articles inside the DB. Can clone whole category trees or individual articles, resume from a mapping JSON, and produce a dry-run preflight report. | Inserts new DB rows unless `--dry-run`; maintains article/category mapping. |
 | `utilities/phpkb_cloning/phpkb_clone_rollback.py` | Deletes cloned PHPKB rows by reading mapped target IDs from a clone mapping JSON. | Dry-run by default; deletes DB rows only with `--write --confirm-delete-cloned-content`. |
 | `utilities/phpkb_cloning/phpkb_clone_update_links.py` | Updates article/category links in PHPKB after cloning/migration using mapping JSON. Optional product/version replacements can be enabled explicitly. | Connects to DB; CLI mode is dry-run unless `--write` is passed. |
 | `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py` | Updates local docs IDs using a clone mapping. Handles `kbId` frontmatter in `docs/ru` and article/category IDs in `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md`. | Dry-run by default; rewrites Markdown files only with `--write`. |
