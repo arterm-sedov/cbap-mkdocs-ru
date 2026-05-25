@@ -46,6 +46,9 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 
 - Review `utilities/phpkb_cloning/phpkb_clone.py`.
 - Confirm whether the task is a whole category tree clone or a specific article clone.
+- For category tree clones, `--category-id` is the source category to clone.
+- For category tree clones, `--target-parent-id` is the destination parent category for the cloned root category.
+- If `--target-parent-id` is omitted, the cloned root category uses the source category's parent, so it is created adjacent to the source category.
 - Confirm the target category ID when cloning individual articles.
 - Use `--dry-run` first for scripted clones to get a preflight scope report without inserts or mapping writes.
 - Expect the script to load an existing mapping JSON and resume by default.
@@ -60,9 +63,11 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 
 - Review `utilities/phpkb_cloning/phpkb_clone_update_links.py`.
 - Load the mapping JSON before making changes.
+- `--category-id` is the cloned category tree whose article links should be updated.
+- `--article-id` can be repeated to update selected cloned articles.
 - Expect replacements for article IDs, category IDs, product names, and selected version strings.
 - In CLI mode, run dry-run first:
-  `python utilities/phpkb_cloning/phpkb_clone_update_links.py --mapping .mapping.json --category-id <id>`
+  `python utilities/phpkb_cloning/phpkb_clone_update_links.py --mapping .v6mapping.json --category-id <cloned-category-id>`
 - Use `--write` only after the dry-run output looks correct.
 - Product-name replacements are optional via `--replace-product-names`.
 - Version replacements are optional and parameterized, for example `--old-version 5.0 --new-version 6.0`.
@@ -83,7 +88,7 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 - Review `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py`.
 - Confirm the selected mapping JSON contains the intended `Articles` and `Categories` sections.
 - Run dry-run first:
-  `python utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py --mapping .mapping.json --target all`
+  `python utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py --mapping .v6mapping.json --target all`
 - Use `--write` only after the report looks correct.
 - `frontmatter-kbids` updates `kbId:` values in Markdown files under `docs/ru` using `Articles`.
 - `hyperlink-map` updates only `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md`, using `Articles` for `{{ kbArticleURLPrefix }}` IDs and `Categories` for `{{ kbCategoryURLPrefix }}` IDs.

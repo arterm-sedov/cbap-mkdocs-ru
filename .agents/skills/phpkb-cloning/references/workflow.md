@@ -32,6 +32,7 @@ Keep clone and post-clone update scripts on the same profile.
 4. Run `utilities/phpkb_cloning/phpkb_clone_update_links.py` to rewrite article/category links in cloned PHPKB content.
    Start with dry-run CLI mode, for example:
    `python utilities/phpkb_cloning/phpkb_clone_update_links.py --mapping .v6mapping.json --category-id 900`
+   Here `--category-id` is the cloned category tree to update, not the original source category.
    For a V5 to V6 text migration, add `--old-version 5.0 --new-version 6.0`.
    Add `--replace-product-names` only when legacy product-name replacements are still required.
    Add `--write` only after the dry-run output looks correct.
@@ -77,6 +78,11 @@ Scripted category tree clone:
 python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --category-id 798 --target-parent-id 1000
 ```
 
+`--category-id` is the source category tree to clone. `--target-parent-id` is
+the destination parent category for the cloned root category. If
+`--target-parent-id` is omitted, the cloned root category keeps the source
+category's parent ID, so the clone is created adjacent to the source category.
+
 Preflight category tree clone:
 
 ``` powershell
@@ -89,7 +95,12 @@ Scripted article clone:
 python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --article-id 4578 --target-category-id 900 --suffix _CLONE
 ```
 
-Use `--article-id` multiple times to clone several articles into one target category. Add `--show` only when the cloned article should be visible immediately.
+`--article-id` is the source article to clone. `--target-category-id` is the
+category that should receive the cloned article relation. If
+`--target-category-id` is omitted, the clone is related to the source article's
+first category. Use `--article-id` multiple times to clone several articles
+into one target category. Add `--show` only when the cloned article should be
+visible immediately.
 
 Use a separate mapping file when testing or preparing a new per-release migration.
 For V5 to V6, prefer `.v6mapping.json`:
