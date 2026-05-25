@@ -33,6 +33,8 @@ import json
 
 TOTAL_PAGES_CLONED = 0
 CONNECTION = None
+DEFAULT_MAPPING_FILE = ".mapping.json"
+MAPPING_FILE = DEFAULT_MAPPING_FILE
 
 MAPPING = dict()
 CATEGORY_MAPPING = dict()
@@ -62,6 +64,8 @@ def parse_args(argv=None):
         description="Clone PHPKB categories or articles and write .mapping.json.",
     )
     parser.add_argument("--profile", choices=("cmw", "cmwlab"), help="PHPKB server profile. Defaults to SERVER_PROFILE from .env.")
+    parser.add_argument("--mapping", default=DEFAULT_MAPPING_FILE, help=f"Mapping JSON to read/write. Default: {DEFAULT_MAPPING_FILE}")
+    parser.add_argument("--fresh", action="store_true", help="Start a fresh clone and refuse to run if the mapping file already exists.")
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--category-id", type=numeric_id, help="Clone this category and all child categories/articles.")
     mode.add_argument("--article-id", action="append", type=numeric_id, help="Clone an article. Can be used multiple times.")
@@ -73,6 +77,39 @@ def parse_args(argv=None):
 
 def has_cli_action(args):
     return bool(args.category_id or args.article_id)
+
+def normalize_mapping(mapping):
+    return {str(source_id): str(target_id) for source_id, target_id in (mapping or {}).items()}
+
+def loadMappingJson(mapping_file):
+    path = Path(mapping_file)
+    if not path.exists():
+        return {"Categories": {}, "Articles": {}}
+
+    with path.open("r", encoding="utf-8") as mappingFile:
+        mappingJson = json.load(mappingFile) if path.stat().st_size else {}
+    return {
+        "Categories": normalize_mapping(mappingJson.get("Categories")),
+        "Articles": normalize_mapping(mappingJson.get("Articles")),
+    }
+
+def initializeMapping(mapping_file=DEFAULT_MAPPING_FILE, fresh=False):
+    global MAPPING_FILE, MAPPING, CATEGORY_MAPPING, ARTICLE_MAPPING
+
+    MAPPING_FILE = mapping_file
+    if fresh and Path(mapping_file).exists():
+        raise FileExistsError(f"Mapping file '{mapping_file}' already exists. Use a new --mapping path or omit --fresh to resume.")
+
+    loaded_mapping = {"Categories": {}, "Articles": {}} if fresh else loadMappingJson(mapping_file)
+    CATEGORY_MAPPING = loaded_mapping["Categories"]
+    ARTICLE_MAPPING = loaded_mapping["Articles"]
+    MAPPING = {"Categories": CATEGORY_MAPPING, "Articles": ARTICLE_MAPPING}
+
+    mode = "fresh" if fresh else "resume"
+    print(f"Mapping: {mapping_file}")
+    print(f"Mode: {mode}")
+    print(f"Loaded mapped categories: {len(CATEGORY_MAPPING)}")
+    print(f"Loaded mapped articles: {len(ARTICLE_MAPPING)}")
 
 def sql_name(identifier):
     if not identifier.replace("_", "").isalnum():
@@ -110,12 +147,12 @@ def clone_article_dependents(cursor, old_article_id, new_article_id):
 def cloneCategoryChildren(parent, newParentId=''):
     c = CONNECTION.cursor(buffered=True)
     
-    id = parent[0]
+    id = str(parent[0])
     title = parent[1]
-    parentId = parent[2]
+    parentId = str(parent[2])
     
     if newParentId:
-        parentId = newParentId
+        parentId = str(newParentId)
     
     newCategoryId = cloneCategory(id, parentId)
     CATEGORY_MAPPING.update({id:newCategoryId})
@@ -153,6 +190,7 @@ def cloneArticlesInCategory (category_id, newCategoryId):
     global TOTAL_PAGES_CLONED
     pages = 0
     for id, content, title in articles:
+        id = str(id)
         sanitizedTitle=sanitize_filename(title)
         filename = f"{id} - {sanitizedTitle}"
         print ('    Cloning article: ' + filename)
@@ -168,6 +206,9 @@ def cloneArticle(article_id, category_id, newCategoryId, suffix="", show=True):
     
     c = CONNECTION.cursor(buffered=True)    
     article_created = False
+    article_id = str(article_id)
+    category_id = str(category_id)
+    newCategoryId = str(newCategoryId)
     
     if not article_id in ARTICLE_MAPPING:
         c.execute(f"""
@@ -185,15 +226,14 @@ def cloneArticle(article_id, category_id, newCategoryId, suffix="", show=True):
         c.execute(f"""
                 INSERT INTO phpkb_articles SELECT 0,tmp.* FROM tmp;
                 """)
+        newArticleId = str(c.lastrowid)
+        if not newArticleId or newArticleId == "0":
+            raise RuntimeError("Could not determine cloned article ID from cursor.lastrowid.")
         c.execute(f"""
                 DROP TABLE tmp;
                 """)
-        c.execute(f"""
-                SELECT MAX(article_id) FROM phpkb_articles;
-                """)
-        
-        newArticleId = str(c.fetchone()[0])
         article_created = True
+        ARTICLE_MAPPING.update({article_id:newArticleId})
     else:
         newArticleId = ARTICLE_MAPPING[article_id]
     
@@ -209,9 +249,19 @@ def cloneArticle(article_id, category_id, newCategoryId, suffix="", show=True):
     print(article_priority)
     
     c.execute(f"""
-            INSERT INTO phpkb_relations (article_id, category_id, article_priority)
-            VALUES ({newArticleId}, {newCategoryId}, {article_priority});
+            SELECT COUNT(*) FROM phpkb_relations
+            WHERE article_id={newArticleId}
+            AND category_id={newCategoryId};
             """)
+
+    relation_exists = c.fetchone()[0]
+    if relation_exists:
+        print(f"Relation already exists for article {newArticleId} in category {newCategoryId}")
+    else:
+        c.execute(f"""
+                INSERT INTO phpkb_relations (article_id, category_id, article_priority)
+                VALUES ({newArticleId}, {newCategoryId}, {article_priority});
+                """)
 
     if article_created:
         clone_article_dependents(c, article_id, newArticleId)
@@ -220,6 +270,14 @@ def cloneArticle(article_id, category_id, newCategoryId, suffix="", show=True):
 
 def cloneCategory(category_id, newParentId):
     c = CONNECTION.cursor(buffered=True)
+    category_id = str(category_id)
+    newParentId = str(newParentId)
+
+    if category_id in CATEGORY_MAPPING:
+        newCategoryId = CATEGORY_MAPPING[category_id]
+        print(f"Reusing mapped category {category_id} -> {newCategoryId}")
+        return newCategoryId
+
     c.execute(f"""
             CREATE TEMPORARY TABLE tmp SELECT * from phpkb_categories WHERE category_id={category_id};
             """)
@@ -232,14 +290,13 @@ def cloneCategory(category_id, newParentId):
     c.execute(f"""
             INSERT INTO phpkb_categories SELECT 0,tmp.* FROM tmp;
             """)
+    newCategoryId = str(c.lastrowid)
+    if not newCategoryId or newCategoryId == "0":
+        raise RuntimeError("Could not determine cloned category ID from cursor.lastrowid.")
     c.execute(f"""
             DROP TABLE tmp;
             """)
-    c.execute(f"""
-            SELECT MAX(category_id) FROM phpkb_categories;
-            """)
-    
-    newCategoryId = str(c.fetchone()[0])
+    CATEGORY_MAPPING.update({category_id:newCategoryId})
     
     print(newCategoryId)
 
@@ -282,6 +339,7 @@ def clone_specific_article(article_id):
 
 def clone_specific_article_to(article_id, target_category_id=None, suffix="_CLONE", show=False):
     c = CONNECTION.cursor(buffered=True)
+    article_id = str(article_id)
     c.execute(f"SELECT category_id FROM phpkb_relations WHERE article_id={article_id} LIMIT 1")
     result = c.fetchone()
     if not result:
@@ -395,6 +453,7 @@ def main(argv=None):
     args = parse_args(argv)
     
     try:
+        initializeMapping(args.mapping, args.fresh)
         server_profile = args.profile or os.getenv("SERVER_PROFILE", "cmw")
         print(f"Using PHPKB server profile: {server_profile}")
         CONNECTION, server = establish_connection_interactive(args.profile)
@@ -412,13 +471,16 @@ def main(argv=None):
         # Always ensure connections are closed, even on interrupt
         ensure_cleanup(CONNECTION, server)
 
-def updateMappingJson():
+def updateMappingJson(mapping_file=None):
     MAPPING.update({'Categories':CATEGORY_MAPPING, 'Articles':ARTICLE_MAPPING})
     #if input('Save mapping? Y / N\n').lower() == 'y':
-    with open(".mapping.json", "w") as mappingFile: 
+    target = Path(mapping_file or MAPPING_FILE)
+    temp = target.with_suffix(target.suffix + ".tmp")
+    with temp.open("w", encoding="utf-8") as mappingFile:
         mappingJson = json.dumps(MAPPING, indent = 4, ensure_ascii=False)
         print(mappingJson)
         mappingFile.write(mappingJson)
+    temp.replace(target)
 
 if __name__ == "__main__":
     main()

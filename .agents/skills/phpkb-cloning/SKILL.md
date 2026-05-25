@@ -15,7 +15,6 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 |---|---|---|
 | `utilities/phpkb_cloning/phpkb_clone.py` | Clone PHPKB categories and articles inside the database. Can clone whole category trees or individual articles. | Inserts new DB rows; maintains article/category mapping; clones article attachment and custom data backrefs. |
 | `utilities/phpkb_cloning/phpkb_clone_update_links.py` | Update PHPKB article/category links after cloning or migration using mapping JSON. Optional product/version replacements can be enabled explicitly. | Connects to DB; CLI mode is dry-run unless `--write` is passed. |
-| `utilities/phpkb_cloning/phpkb_clone_replace_related_topics.py` | Mass-edit related-topic sections in `docs/ru/using_the_system`. Converts bold reference links into italic bullet links inside a wrapper div. | Rewrites matching Markdown files in place. |
 | `utilities/phpkb_cloning/phpkb_clone_update_article_ids.py` | Prototype/helper for finding KB article IDs in Markdown links and resolving them via the hyperlinks snippet. | Currently runs immediately on hardcoded `article-2198.md`; no `__main__` guard. |
 | `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py` | Update local docs IDs using a clone mapping. Handles `kbId` frontmatter in `docs/ru` and article/category IDs in `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md`. | Dry-run by default; rewrites Markdown files only with `--write`. |
 
@@ -36,7 +35,7 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
    Check `.mapping.json` or another explicit mapping file before using `phpkb_clone_update_links.py` or `phpkb_clone_update_mapped_ids.py`.
 
 4. Treat file-rewriting helpers as batch migrations.
-   `phpkb_clone_replace_related_topics.py` and `phpkb_clone_update_mapped_ids.py --write` rewrite Markdown files in place. Before running them, check `git status --short`, inspect the search scope, and confirm it matches the requested files.
+   `phpkb_clone_update_mapped_ids.py --write` rewrites Markdown files in place. Before running it, check `git status --short`, inspect the search scope, and confirm it matches the requested files.
 
 5. After running or editing any cloning script, verify with Git.
    Use `git status --short` and targeted diffs for local files. For DB scripts, summarize prompts answered, target categories/articles, and any mapping files affected.
@@ -48,7 +47,10 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 - Review `utilities/phpkb_cloning/phpkb_clone.py`.
 - Confirm whether the task is a whole category tree clone or a specific article clone.
 - Confirm the target category ID when cloning individual articles.
+- Expect the script to load an existing mapping JSON and resume by default.
+- Use `--fresh` only when starting a new clone and refusing to reuse an existing mapping file.
 - Expect the script to maintain category/article mapping in JSON and insert rows into PHPKB tables.
+- Expect newly generated article/category IDs to be read from `cursor.lastrowid`, not from global `MAX(...)` queries.
 - Expect cloned articles to receive copied `phpkb_attachments` and `phpkb_custom_data` rows remapped to the new `article_id`; attachment files are not duplicated.
 
 ### Update Links After Cloning
@@ -75,7 +77,7 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 
 ### Clean Related Topics
 
-- Review `utilities/phpkb_cloning/phpkb_clone_replace_related_topics.py`.
+- Use root-level `phpkb_replace_related_topics.py` for post-import Markdown cleanup, not for DB cloning.
 - Confirm the hardcoded directory, currently `docs/ru/using_the_system`.
 - Expect matching related-topic sections to be wrapped in `<div class="relatedTopics" markdown="block">` and bold links converted to bullet italic links.
 

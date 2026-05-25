@@ -8,7 +8,6 @@ Run scripts from the repository root:
 
 - `utilities/phpkb_cloning/phpkb_clone.py`
 - `utilities/phpkb_cloning/phpkb_clone_update_links.py`
-- `utilities/phpkb_cloning/phpkb_clone_replace_related_topics.py`
 - `utilities/phpkb_cloning/phpkb_clone_update_article_ids.py`
 - `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py`
 
@@ -25,6 +24,8 @@ Keep clone and post-clone update scripts on the same profile.
 
 1. Set and verify `.env` `SERVER_PROFILE`.
 2. Run `utilities/phpkb_cloning/phpkb_clone.py` to clone the source category tree or selected articles.
+   The script resumes from `.mapping.json` by default. Use `--mapping <path>` for a different mapping file.
+   Use `--fresh` only when starting a new clone and refusing to continue from an existing mapping file.
 3. Keep the generated `.mapping.json`; it maps old category/article IDs to new IDs.
 4. Run `utilities/phpkb_cloning/phpkb_clone_update_links.py` to rewrite article/category links in cloned PHPKB content.
    Start with dry-run CLI mode, for example:
@@ -34,9 +35,11 @@ Keep clone and post-clone update scripts on the same profile.
    Add `--write` only after the dry-run output looks correct.
 5. Run local Markdown migration helpers only if the workflow includes local docs updates:
    - `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py --mapping .mapping.json --target all`
-   - `utilities/phpkb_cloning/phpkb_clone_replace_related_topics.py`
    - `utilities/phpkb_cloning/phpkb_clone_update_article_ids.py`
 6. Verify local file changes with `git status --short` and targeted diffs.
+
+The root-level `phpkb_replace_related_topics.py` is a post-import Markdown
+cleanup helper, not part of the PHPKB DB cloning scripts.
 
 ## Safety Notes
 
@@ -60,3 +63,9 @@ python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --article-id 4578 --
 ```
 
 Use `--article-id` multiple times to clone several articles into one target category. Add `--show` only when the cloned article should be visible immediately.
+
+Use a separate mapping file when testing or preparing a new annual migration:
+
+``` powershell
+python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .mapping-v6.json --fresh --category-id 798 --target-parent-id 1000
+```

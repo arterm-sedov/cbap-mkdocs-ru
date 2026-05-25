@@ -15,9 +15,10 @@ import phpkb_clone
 
 
 class FakeCursor:
-    def __init__(self, fetches=()):
+    def __init__(self, fetches=(), lastrowid=0):
         self.fetches = list(fetches)
         self.calls = []
+        self.lastrowid = lastrowid
 
     def execute(self, sql, params=None):
         self.calls.append((" ".join(sql.split()), params))
@@ -71,13 +72,14 @@ def test_clone_article_child_rows_skips_empty_sources():
 
 
 def test_clone_article_clones_dependents_once_for_new_article(monkeypatch):
-    cursor = FakeCursor(fetches=[("9001",), (7,), (2,), (1,)])
+    cursor = FakeCursor(fetches=[(7,), (0,), (2,), (1,)], lastrowid=9001)
     monkeypatch.setattr(phpkb_clone, "CONNECTION", FakeConnection(cursor))
     monkeypatch.setattr(phpkb_clone, "ARTICLE_MAPPING", {})
 
     new_article_id = phpkb_clone.cloneArticle("100", "200", "300")
 
     assert new_article_id == "9001"
+    assert not any("SELECT MAX(article_id)" in sql for sql, _ in cursor.calls)
     assert (
         "INSERT INTO phpkb_relations (article_id, category_id, article_priority) VALUES (9001, 300, 7);",
         None,
@@ -96,7 +98,7 @@ def test_clone_article_clones_dependents_once_for_new_article(monkeypatch):
 
 
 def test_clone_article_does_not_duplicate_dependents_for_mapped_article(monkeypatch):
-    cursor = FakeCursor(fetches=[(7,)])
+    cursor = FakeCursor(fetches=[(7,), (0,)])
     monkeypatch.setattr(phpkb_clone, "CONNECTION", FakeConnection(cursor))
     monkeypatch.setattr(phpkb_clone, "ARTICLE_MAPPING", {"100": "9001"})
 
@@ -107,9 +109,71 @@ def test_clone_article_does_not_duplicate_dependents_for_mapped_article(monkeypa
     assert not any("phpkb_custom_data" in sql for sql, _ in cursor.calls)
 
 
+def test_clone_article_skips_existing_relation_for_mapped_article(monkeypatch):
+    cursor = FakeCursor(fetches=[(7,), (1,)])
+    monkeypatch.setattr(phpkb_clone, "CONNECTION", FakeConnection(cursor))
+    monkeypatch.setattr(phpkb_clone, "ARTICLE_MAPPING", {"100": "9001"})
+
+    new_article_id = phpkb_clone.cloneArticle("100", "200", "300")
+
+    assert new_article_id == "9001"
+    assert not any("INSERT INTO phpkb_relations" in sql for sql, _ in cursor.calls)
+
+
+def test_clone_category_uses_lastrowid_and_updates_mapping(monkeypatch):
+    cursor = FakeCursor(lastrowid=8001)
+    monkeypatch.setattr(phpkb_clone, "CONNECTION", FakeConnection(cursor))
+    monkeypatch.setattr(phpkb_clone, "CATEGORY_MAPPING", {})
+
+    new_category_id = phpkb_clone.cloneCategory("700", "800")
+
+    assert new_category_id == "8001"
+    assert phpkb_clone.CATEGORY_MAPPING == {"700": "8001"}
+    assert not any("SELECT MAX(category_id)" in sql for sql, _ in cursor.calls)
+
+
+def test_clone_category_reuses_loaded_mapping(monkeypatch):
+    cursor = FakeCursor()
+    monkeypatch.setattr(phpkb_clone, "CONNECTION", FakeConnection(cursor))
+    monkeypatch.setattr(phpkb_clone, "CATEGORY_MAPPING", {"700": "8001"})
+
+    new_category_id = phpkb_clone.cloneCategory("700", "999")
+
+    assert new_category_id == "8001"
+    assert cursor.calls == []
+
+
+def test_initialize_mapping_loads_existing_mapping(tmp_path):
+    mapping_file = tmp_path / ".mapping.json"
+    mapping_file.write_text(
+        '{"Categories": {"700": 8001}, "Articles": {"100": 9001}}',
+        encoding="utf-8",
+    )
+
+    phpkb_clone.initializeMapping(str(mapping_file))
+
+    assert phpkb_clone.CATEGORY_MAPPING == {"700": "8001"}
+    assert phpkb_clone.ARTICLE_MAPPING == {"100": "9001"}
+    assert phpkb_clone.MAPPING_FILE == str(mapping_file)
+
+
+def test_initialize_mapping_fresh_refuses_existing_mapping(tmp_path):
+    mapping_file = tmp_path / ".mapping.json"
+    mapping_file.write_text("{}", encoding="utf-8")
+
+    try:
+        phpkb_clone.initializeMapping(str(mapping_file), fresh=True)
+    except FileExistsError:
+        pass
+    else:
+        raise AssertionError("Expected FileExistsError for --fresh with an existing mapping")
+
+
 def test_parse_args_accepts_scripted_article_clones():
     args = phpkb_clone.parse_args([
         "--profile", "cmwlab",
+        "--mapping", ".clone.json",
+        "--fresh",
         "--article-id", "100",
         "--article-id", "101",
         "--target-category-id", "900",
@@ -118,6 +182,8 @@ def test_parse_args_accepts_scripted_article_clones():
     ])
 
     assert args.profile == "cmwlab"
+    assert args.mapping == ".clone.json"
+    assert args.fresh is True
     assert args.article_id == ["100", "101"]
     assert args.target_category_id == "900"
     assert args.suffix == "_V5"

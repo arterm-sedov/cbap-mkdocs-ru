@@ -16,6 +16,7 @@ This report lists the Python scripts found in the repository root of `D:\Repo\CB
 | `phpkb_copy_images.py` | Copies image assets from `for_kb_import_ru/` into `kb.comindware.ru/platform/v5.0`. | Copies `.png`, `.svg`, `.jpg`, `.jpeg`, `.gif`; overwrites by default. |
 | `phpkb_ingest.py` | Builds a single LLM-ingestion Markdown bundle for v5 KB content using `gitingest`. | Writes `kb.comindware.ru.platform_v5_for_llm_ingestion.md` and copies it to `kb.comindware.ru/platform/v5.0/`. |
 | `phpkb_ingest_cmw_lab.py` | Builds a single LLM-ingestion Markdown bundle for CMW Lab/v4 content. | Writes `kb.cmwlab.com.platform_v4_for_llm_ingestion.md`. |
+| `phpkb_replace_related_topics.py` | Post-import local Markdown cleanup for related-topic sections under `docs/ru/using_the_system`. Converts bold reference links into italic bullet links inside a wrapper div. | Rewrites matching Markdown files in place. |
 
 ## PHPKB Cloning
 
@@ -23,9 +24,8 @@ These scripts support cloning PHPKB category/article trees and then cleaning up 
 
 | Script | Role | Main side effects / outputs |
 |---|---|---|
-| `utilities/phpkb_cloning/phpkb_clone.py` | Clones PHPKB categories and articles inside the DB. Can clone whole category trees or individual articles. | Inserts new DB rows; maintains article/category mapping. |
+| `utilities/phpkb_cloning/phpkb_clone.py` | Clones PHPKB categories and articles inside the DB. Can clone whole category trees or individual articles and resume from a mapping JSON. | Inserts new DB rows; maintains article/category mapping. |
 | `utilities/phpkb_cloning/phpkb_clone_update_links.py` | Updates article/category links in PHPKB after cloning/migration using mapping JSON. Optional product/version replacements can be enabled explicitly. | Connects to DB; CLI mode is dry-run unless `--write` is passed. |
-| `utilities/phpkb_cloning/phpkb_clone_replace_related_topics.py` | Mass-edits related-topic sections in `docs/ru/using_the_system`. Converts bold reference links into italic bullet links inside a wrapper div. | Rewrites matching Markdown files in place. |
 | `utilities/phpkb_cloning/phpkb_clone_update_article_ids.py` | Prototype/helper for finding KB article IDs in Markdown links and resolving them via the hyperlinks snippet. | Currently runs immediately on hardcoded `article-2198.md`; no `__main__` guard. |
 | `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py` | Updates local docs IDs using a clone mapping. Handles `kbId` frontmatter in `docs/ru` and article/category IDs in `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md`. | Dry-run by default; rewrites Markdown files only with `--write`. |
 
@@ -35,9 +35,10 @@ These scripts support cloning PHPKB category/article trees and then cleaning up 
 - **MkDocs-to-PHPKB HTML hooks:** `kb_html_cleanup_hook.py`, `kb_html_cleanup_hook_v4.7.py`.
 - **PHPKB DB tools:** `phpkb_import*.py`, `phpkb_update_articles.py`.
 - **PHPKB cloning:** scripts under `utilities/phpkb_cloning/`.
+- **Post-import Markdown cleanup:** `phpkb_replace_related_topics.py`.
 - **RAG/LLM bundle builders:** `phpkb_ingest.py`, `phpkb_ingest_cmw_lab.py`.
 
 ## Risk Notes
 
 - Highest-risk DB-mutating scripts: `utilities/phpkb_cloning/phpkb_clone.py`, `phpkb_update_articles.py`, and `utilities/phpkb_cloning/phpkb_clone_update_links.py`.
-- Highest-risk local file rewriters: `utilities/phpkb_cloning/phpkb_clone_replace_related_topics.py` and `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py --write`.
+- Highest-risk local file rewriters: `phpkb_replace_related_topics.py` and `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py --write`.

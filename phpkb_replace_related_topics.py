@@ -1,3 +1,27 @@
+"""Post-import formatter for related-topic blocks in local Markdown docs.
+
+This root-level helper is for local Markdown cleanup after PHPKB import or
+documentation migration. It is not part of the PHPKB cloning DB workflow: it
+does not connect to PHPKB, does not use `.mapping.json`, and does not remap
+article/category IDs.
+
+Current behavior:
+- walks the hardcoded `docs/ru/using_the_system` directory;
+- finds sections that start with the related-topics snippet marker:
+  `--8<-- "related_topics_heading.md"`;
+- wraps the detected related-topic block in
+  `<div class="relatedTopics" markdown="block">`;
+- converts standalone bold reference links like
+  `**[Title][reference]**`
+  into italic bullet links like
+  `- _[Title][reference]_`;
+- rewrites matching Markdown files in place.
+
+The script rewrites files in place. Before broadening it, add CLI arguments
+for the root directory and dry-run/write mode, then test the exact block
+boundaries on representative Markdown files.
+"""
+
 import os
 import re
 
