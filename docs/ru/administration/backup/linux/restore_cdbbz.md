@@ -60,10 +60,10 @@ hide: tags
 
 <!-- ### Видеоинструкция
 
-Ссылка на видеоролик: <https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/restore_complete_backup_linux.mp4>
+Ссылка на видеоролик: <https://kb.comindware.ru/platform/v6.0/administration/deploy/linux/img/restore_complete_backup_linux.mp4>
 
 <video controls="controls" width="100%" height="100%">
-<source src="https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/restore_complete_backup_linux.mp4" type="video/mp4" />
+<source src="https://kb.comindware.ru/platform/v6.0/administration/deploy/linux/img/restore_complete_backup_linux.mp4" type="video/mp4" />
 </video> -->
 
 ## Восстановление базы данных и скриптов {: #backup_restore_cdbbz_db_scripts .pageBreakBefore }

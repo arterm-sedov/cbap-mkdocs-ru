@@ -61,10 +61,10 @@ hide: tags
 
     Для установки вспомогательного ПО всегда следуйте письменным инструкциям, представленным ниже.
 
-[Ссылка на видеоролик](https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/deploy_guide_linux_auxiliary_software.mp4)
+[Ссылка на видеоролик](https://kb.comindware.ru/platform/v6.0/administration/deploy/linux/img/deploy_guide_linux_auxiliary_software.mp4)
 
 <video controls="controls" width="100%" height="100%">
-<source src="https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/deploy_guide_linux_auxiliary_software.mp4" type="video/mp4" />
+<source src="https://kb.comindware.ru/platform/v6.0/administration/deploy/linux/img/deploy_guide_linux_auxiliary_software.mp4" type="video/mp4" />
 </video>
 
 ### Порядок установки вспомогательного ПО {: #deploy_guide_linux_prerequisites_install_order }
@@ -173,10 +173,10 @@ hide: tags
 
     Для установки ПО **{{ productName }}** всегда следуйте письменным инструкциям, представленным ниже.
 
-[Ссылка на видеоролик](https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/deploy_guide_linux_software.mp4)
+[Ссылка на видеоролик](https://kb.comindware.ru/platform/v6.0/administration/deploy/linux/img/deploy_guide_linux_software.mp4)
 
 <video controls="controls" width="100%" height="100%">
-<source src="https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/deploy_guide_linux_software.mp4" type="video/mp4" />
+<source src="https://kb.comindware.ru/platform/v6.0/administration/deploy/linux/img/deploy_guide_linux_software.mp4" type="video/mp4" />
 </video>
 
 ### Порядок установки ПО {{ productName }} {: #deploy_guide_linux_install_order }
@@ -245,10 +245,10 @@ hide: tags
 
     Для создания экземпляра ПО **{{ productName }}** всегда следуйте письменным инструкциям, представленным ниже.
 
-[Ссылка на видеоролик](https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/deploy_guide_linux_instance.mp4)
+[Ссылка на видеоролик](https://kb.comindware.ru/platform/v6.0/administration/deploy/linux/img/deploy_guide_linux_instance.mp4)
 
 <video controls="controls" width="100%" height="100%">
-<source src="https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/deploy_guide_linux_instance.mp4" type="video/mp4" />
+<source src="https://kb.comindware.ru/platform/v6.0/administration/deploy/linux/img/deploy_guide_linux_instance.mp4" type="video/mp4" />
 </video>
 
 ### Подготовка к созданию экземпляра ПО {: #deploy_guide_linux_instance_create_prepare }
@@ -673,10 +673,10 @@ mmap(PROT_NONE) failed
 
 ### Видеоинструкция
 
-[Ссылка на видеоролик](https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/deploy_guide_linux_delete_version_instance.mp4)
+[Ссылка на видеоролик](https://kb.comindware.ru/platform/v6.0/administration/deploy/linux/img/deploy_guide_linux_delete_version_instance.mp4)
 
 <video controls="controls" width="100%" height="100%">
-<source src="https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/deploy_guide_linux_delete_version_instance.mp4" type="video/mp4" />
+<source src="https://kb.comindware.ru/platform/v6.0/administration/deploy/linux/img/deploy_guide_linux_delete_version_instance.mp4" type="video/mp4" />
 </video>
 
 ### Удаление экземпляра ПО {: .pageBreakBefore }
