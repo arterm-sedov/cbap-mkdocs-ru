@@ -27,6 +27,11 @@ Keep clone and post-clone update scripts on the same profile.
 2. Run `utilities/phpkb_cloning/phpkb_clone.py` to clone the source category tree or selected articles.
 3. Keep the generated `.mapping.json`; it maps old category/article IDs to new IDs.
 4. Run `utilities/phpkb_cloning/phpkb_clone_update_links.py` to rewrite article/category links in cloned PHPKB content.
+   Start with dry-run CLI mode, for example:
+   `python utilities/phpkb_cloning/phpkb_clone_update_links.py --mapping .mapping.json --category-id 900`
+   For a V5 to V6 text migration, add `--old-version 5.0 --new-version 6.0`.
+   Add `--replace-product-names` only when legacy product-name replacements are still required.
+   Add `--write` only after the dry-run output looks correct.
 5. Run local Markdown migration helpers only if the workflow includes local docs updates:
    - `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py --mapping .mapping.json --target all`
    - `utilities/phpkb_cloning/phpkb_clone_replace_related_topics.py`

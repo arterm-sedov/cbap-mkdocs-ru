@@ -1,3 +1,21 @@
+"""Prototype helper for looking up shared hyperlink labels for direct KB URLs.
+
+This script is not part of the operational PHPKB clone/migration pipeline.
+It does not rewrite Markdown, format migrated hyperlinks, update IDs from
+`.mapping.json`, or handle category links.
+
+Current behavior:
+- reads a hardcoded Markdown file, `article-2198.md`;
+- finds direct `https://kb.comindware.ru/...` article URLs in that file;
+- extracts article IDs from `id=<number>` or `-<number>.html` URL forms;
+- searches `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md` for reference
+  labels that point to the same article IDs;
+- prints the matching reference labels, if any.
+
+Before using this for real migrations, add a CLI entry point, remove the
+hardcoded input file, and implement explicit read-only or write modes.
+"""
+
 import os
 import re
 

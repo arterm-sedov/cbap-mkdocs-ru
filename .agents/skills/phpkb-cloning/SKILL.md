@@ -14,7 +14,7 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 | Script | Purpose | Main side effects |
 |---|---|---|
 | `utilities/phpkb_cloning/phpkb_clone.py` | Clone PHPKB categories and articles inside the database. Can clone whole category trees or individual articles. | Inserts new DB rows; maintains article/category mapping; clones article attachment and custom data backrefs. |
-| `utilities/phpkb_cloning/phpkb_clone_update_links.py` | Update PHPKB article/category links after cloning or migration using mapping JSON. Also performs product/version text replacements. | Connects to DB; rewrites article HTML/title after prompts. |
+| `utilities/phpkb_cloning/phpkb_clone_update_links.py` | Update PHPKB article/category links after cloning or migration using mapping JSON. Optional product/version replacements can be enabled explicitly. | Connects to DB; CLI mode is dry-run unless `--write` is passed. |
 | `utilities/phpkb_cloning/phpkb_clone_replace_related_topics.py` | Mass-edit related-topic sections in `docs/ru/using_the_system`. Converts bold reference links into italic bullet links inside a wrapper div. | Rewrites matching Markdown files in place. |
 | `utilities/phpkb_cloning/phpkb_clone_update_article_ids.py` | Prototype/helper for finding KB article IDs in Markdown links and resolving them via the hyperlinks snippet. | Currently runs immediately on hardcoded `article-2198.md`; no `__main__` guard. |
 | `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py` | Update local docs IDs using a clone mapping. Handles `kbId` frontmatter in `docs/ru` and article/category IDs in `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md`. | Dry-run by default; rewrites Markdown files only with `--write`. |
@@ -56,7 +56,12 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 - Review `utilities/phpkb_cloning/phpkb_clone_update_links.py`.
 - Load the mapping JSON before making changes.
 - Expect replacements for article IDs, category IDs, product names, and selected version strings.
-- Watch for interactive prompts around replacing `4.7` with `5.0`.
+- In CLI mode, run dry-run first:
+  `python utilities/phpkb_cloning/phpkb_clone_update_links.py --mapping .mapping.json --category-id <id>`
+- Use `--write` only after the dry-run output looks correct.
+- Product-name replacements are optional via `--replace-product-names`.
+- Version replacements are optional and parameterized, for example `--old-version 5.0 --new-version 6.0`.
+- No-argument interactive mode preserves the older prompt-driven behavior, including `4.7` to `5.0` prompts.
 
 ### Migrate Local KB IDs
 
