@@ -46,6 +46,18 @@ Keep clone and post-clone update scripts on the same profile.
    - `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py --mapping .v6mapping.json --target all`
 8. Verify local file changes with `git status --short` and targeted diffs.
 
+## PHPKB HTML Export And Images
+
+- Build RU PHPKB HTML from the repository root:
+  `mkdocs build -f mkdocs_for_kb_import_ru.yml`
+- On `platform_v6` branch, `mkdocs_for_kb_import_ru.yml` uses
+  `site_url: https://kb.comindware.ru/platform/v6.0/` so exported HTML image
+  paths point at the V6 web asset folder.
+- Rebuild `for_kb_import_ru/` after doc or `kbId` changes.
+- Copy exported images into the PHPKB web tree with root-level
+  `phpkb_copy_images.py` (`for_kb_import_ru/` →
+  `kb.comindware.ru/platform/v6.0`; paths are fixed per branch).
+
 The root-level `phpkb_replace_related_topics.py` is a post-import Markdown
 cleanup helper, not part of the PHPKB DB cloning scripts.
 The root-level `phpkb_update_article_ids.py` is also a post-import Markdown

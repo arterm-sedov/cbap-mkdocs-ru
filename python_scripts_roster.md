@@ -13,7 +13,7 @@ This report lists the Python scripts found in the repository root of `D:\Repo\CB
 | `phpkb_import_for_rag.py` | Same import pipeline as `phpkb_import.py`, but default target is `phpkb_content_rag`. | DB read plus local file export for RAG-oriented corpus. |
 | `phpkb_import_cmw_lab.py` | CMW Lab/v4 import variant. Uses `phpkb_content_cmw_lab`, language ID `1`, and `.article_id_filename_map_v4_cmw_lab.json`. | DB read plus local export of CMW Lab KB content. |
 | `phpkb_update_articles.py` | Pushes local Markdown/HTML content from `for_kb_import_ru` back into PHPKB articles. Also updates title, tags, `unlisted`. | Connects to DB; asks confirmation per article; updates PHPKB rows. |
-| `phpkb_copy_images.py` | Copies image assets from `for_kb_import_ru/` into `kb.comindware.ru/platform/v5.0`. | Copies `.png`, `.svg`, `.jpg`, `.jpeg`, `.gif`; overwrites by default. |
+| `phpkb_copy_images.py` | Copies image assets from `for_kb_import_ru/` into `kb.comindware.ru/platform/v6.0`. | Copies `.png`, `.svg`, `.jpg`, `.jpeg`, `.gif`; overwrites by default. |
 | `phpkb_ingest.py` | Builds a single LLM-ingestion Markdown bundle for v5 KB content using `gitingest`. | Writes `kb.comindware.ru.platform_v5_for_llm_ingestion.md` and copies it to `kb.comindware.ru/platform/v5.0/`. |
 | `phpkb_ingest_cmw_lab.py` | Builds a single LLM-ingestion Markdown bundle for CMW Lab/v4 content. | Writes `kb.cmwlab.com.platform_v4_for_llm_ingestion.md`. |
 | `phpkb_replace_related_topics.py` | Post-import local Markdown cleanup for related-topic sections under `docs/ru/using_the_system`. Converts bold reference links into italic bullet links inside a wrapper div. | Rewrites matching Markdown files in place. |
