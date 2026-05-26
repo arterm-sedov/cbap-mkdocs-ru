@@ -1,0 +1,216 @@
+<h1>Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4650" kb-tags="Linux,резервное копирование,бэкап,бекап,backup,резервная копия" kb-title="Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#сбор-данных-об-экземпляре-по">
+<span class="md-ellipsis">
+      Сбор данных об экземпляре ПО
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#установка-и-настройка-исполняемых-скриптов-apache-ignite">
+<span class="md-ellipsis">
+      Установка и настройка исполняемых скриптов Apache Ignite
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#создание-резервной-копии">
+<span class="md-ellipsis">
+      Создание резервной копии
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<div class="notice notice-warning">
+<p class="admonition-title">Резервное копирование крупных баз данных</p>
+<p>Если размер базы данных превышает 10 ГБ, рекомендуется использовать скрипт резервного копирования на сервере для обеспечения оптимальной производительности резервного копирования и работы <strong>Comindware Platform</strong>.</p>
+<p>Это связано с тем, что резервное копирование больших баз данных встроенными средствами <strong>Comindware Platform</strong> создаёт значительную вычислительную нагрузку и может приводить к снижению производительности.</p>
+<p>См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5569">Настройка и использование скрипта для резервного копирования данных (Linux)</a>»</em>.</p>
+<p>Скрипт резервного копирования следует запросить у <a class="mkdocs_imported_link" href="https://www.comindware.ru/company/contact-us/#tab_support">службы поддержки Comindware</a>.</p>
+</div>
+<h2 id="введение">Введение</h2>
+<p>Здесь представлены инструкции по созданию резервной копии базы данных экземпляра ПО <strong>Comindware Platform</strong> без его остановки.</p>
+<p>Для создания полной резервной копии базы данных в ОС Linux необходимо с помощью терминала выполнить следующие действия:</p>
+<ul>
+<li>создать снимки состояния памяти Apache Ignite и OpenSearch (Elasticsearch);</li>
+<li>скопировать содержимое папок со скриптами и вложенными файлами.</li>
+</ul>
+<p>Сведения о последующем восстановлении данных см. в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5575">Восстановление базы данных, вложенных файлов и журналов из полной резервной копии</a>»</em>.</p>
+<h2 id="сбор-данных-об-экземпляре-по">Сбор данных об экземпляре ПО</h2>
+<p>Для создания резервной копии соберите перечисленные ниже данные об экземпляре ПО.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Имя экземпляра ПО: <code>&lt;instanceName&gt;</code>. Можно получить в ответе на запрос <code>&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_cat/indices</code>, например <code>cmw_cmw-study</code>, как показано на следующей иллюстрации.</p>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Определение имени экземпляра ПО" src="https://kb.comindware.ru/assets/Pasted%20image%2020221229181253.png"/><figcaption class="caption">Определение имени экземпляра ПО</figcaption></figure></p>
+</li>
+<li>
+<p>Директория с базой данных экземпляра ПО: <code>/var/lib/comindware/&lt;instanceName&gt;/Database</code>. Может быть задана другая директория с помощью директивы <code>&lt;workDirectory&gt;</code> в файле конфигурации <code>/var/www/comindware/Ignite.config</code>. Если в файле конфигурации директива <code>&lt;workDirectory&gt;</code> не содержит директории, используется директория по умолчанию.</p>
+</li>
+<li>Путь для сохранения снимков базы данных Apache Ignite, по умолчанию: <code>/var/lib/comindware/&lt;instanceName&gt;/Database/snapshots/</code></li>
+<li>Имя репозитория OpenSearch (Elasticsearch), заданное при его регистрации, например: <code>elastic_search_repo_name</code></li>
+<li>
+<p>Путь для сохранения резервных копий OpenSearch (Elasticsearch):</p>
+<ul>
+<li>например, <code>/var/www/backups/elasticsearch</code></li>
+<li>должен быть указан в директиве <code>path.repo</code> в файле <code>/etc/elasticsearch/elasticsearch.yml</code></li>
+<li>должен ссылаться на существующий диск;</li>
+<li>должен находиться на отдельном диске, отдельно от базы данных.</li>
+</ul>
+<p><figure class="screenshot_with_caption" markdown=""><img alt="Определение пути для резервных копий OpenSearch (Elasticsearch)" src="https://kb.comindware.ru/assets/Pasted%20image%2020221229181640.png"/><figcaption class="caption">Определение пути для резервных копий OpenSearch (Elasticsearch)</figcaption></figure></p>
+</li>
+<li>
+<p>Имя снимка, заданное администратором, например, в формате <code>&lt;instanceName&gt;&lt;Date&gt;&lt;Time&gt;</code></p>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="установка-и-настройка-исполняемых-скриптов-apache-ignite">Установка и настройка исполняемых скриптов Apache Ignite</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Для установки исполняемых скриптов перейдите в режим суперпользователя <code>root</code>:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>-i</code> <br/></pre></code></div>
+<p>или</p>
+<div class="highlight"><code><pre><span></span><code>su<span class="w"> </span>-</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Проверьте наличие пакета <code>apache-ignite</code> на машине:</p>
+<div class="highlight"><code><pre><span></span><code>dpkg<span class="w"> </span>-s<span class="w"> </span>apache-ignite</code> <br/></pre></code></div>
+<p>Если пакет имеется, пропустите шаги 3–7 и переходите к <a class="mkdocs_imported_link" href="#assignRights">назначению прав директории</a>.</p>
+</li>
+<li>
+<p>Если пакета нет, загрузите zip-архив со скриптами:</p>
+<div class="highlight"><code><pre><span></span><code>wget<span class="w"> </span>-P<span class="w"> </span>/tmp/<span class="w"> </span>https://archive.apache.org/dist/ignite/2.17.0/apache-ignite-2.17.0-bin.zip</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Если на машине ранее не был установлен пакет <code>zip</code>, установите его:</p>
+<div class="highlight"><code><pre><span></span><code>apt<span class="w"> </span>install<span class="w"> </span>zip</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Разархивируйте пакет в директорию <code>/var/www/</code>:</p>
+<div class="highlight"><code><pre><span></span><code>unzip<span class="w"> </span>/tmp/apache-ignite-2.17.0-bin.zip<span class="w"> </span>-d<span class="w"> </span>/var/www</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Переименуйте получившуюся директорию со скриптами <code>Apache Ignite</code> в <code>apache-ignite</code>:</p>
+<div class="highlight"><code><pre><span></span><code>mv<span class="w"> </span>/var/www/apache-ignite-2.17.0-bin<span class="w"> </span>/var/www/apache-ignite</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Перейдите в директорию <code>/var/www/</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/var/www/</code> <br/></pre></code></div>
+</li>
+<li>
+<p id="assignRights">Назначьте папке <code>apache-ignite</code> права на чтение-запись <code>rwxrwxrwx</code>:</p>
+<div class="highlight"><code><pre><span></span><code>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">777</span><span class="w"> </span>apache-ignite/</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Смените владельца директории <code>apache-ignite</code>:</p>
+<p><strong>Astra Linux, Debian, DEB-дистрибутивы</strong></p>
+<div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>www-data:www-data<span class="w"> </span>apache-ignite/</code> <br/></pre></code></div>
+<p><strong>РЕД ОС, RPM-дистрибутивы</strong></p>
+<div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>nginx:nginx<span class="w"> </span>apache-ignite/</code> <br/></pre></code></div>
+<p><strong>Альт Сервер</strong></p>
+<div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>_nginx:_nginx<span class="w"> </span>apache-ignite/</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Создайте директории для сохранения резервных копий:</p>
+<div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>/var/www/backups/</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Создайте директорию репозитория OpenSearch (Elasticsearch):</p>
+<div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>/var/www/backups/elasticsearch</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Присвойте директории <code>backups</code> права на чтение-запись <code>rwxrwxrwx</code>:</p>
+<div class="highlight"><code><pre><span></span><code>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">777</span><span class="w"> </span>backups/</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Смените владельца директории <code>backups</code>:</p>
+<p><strong>Astra Linux, Debian, DEB-дистрибутивы</strong></p>
+<div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>www-data:www-data<span class="w"> </span>backups/<span class="w">   </span></code> <br/></pre></code></div>
+<p><strong>РЕД ОС, RPM-дистрибутивы</strong></p>
+<div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>nginx:nginx<span class="w"> </span>backups/</code> <br/></pre></code></div>
+<p><strong>Альт Сервер</strong></p>
+<div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>_nginx:_nginx<span class="w"> </span>backups/</code> <br/></pre></code></div>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="создание-резервной-копии">Создание резервной копии</h2>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>При создании снимка после перезагрузки машины необходимо убедиться в том, что экземпляр ПО запущен и Apache Ignite работает. Для этого достаточно в браузере открыть веб-сайт с экземпляром ПО.</p>
+</div>
+<ol class="colored_numbers_list">
+<li>
+<p>Задайте переменную <code>now</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nv">now</span><span class="o">=</span><span class="k">$(</span>date<span class="w">  </span>%Y_%m_%d_%H_%M<span class="k">)</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Проверьте окружение и создайте снимок состояния Apache Ignite:</p>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>/var/www/apache-ignite/bin/control.sh<span class="w"> </span>--baseline</code> <br/><code>bash<span class="w"> </span>/var/www/apache-ignite/bin/control.sh<span class="w"> </span>--snapshot<span class="w"> </span>create<span class="w"> </span>snapshot_name_<span class="nv">$now</span><span class="w"> </span>--sync</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Зарегистрируйте репозиторий OpenSearch (Elasticsearch). Вместо <code>elasticsearch_repo_name</code> и <code>/var/www/backups/elasticsearch</code> подставьте своё имя репозитория и путь к его папке:</p>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/elasticsearch_repo_name?pretty"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">'{"type": "fs", "settings": {"location": "/var/www/backups/elasticsearch"}}'</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Создайте снимок состояния OpenSearch (Elasticsearch), заменив <strong><em><code>elasticsearch_repo_name</code></em>*,</strong> <code>snapshot_name</code>* и <code>prefix_name</code>(префикс индекса, указанный в конфигурации экземпляра ПО) на свои значения:</p>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/elasticsearch_repo_name/snapshot_name_</span><span class="nv">$now</span><span class="s2">?wait_for_completion=true&amp;pretty"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">'{"indices": "cmw_prefix_name*", "ignore_unavailable": true, "include_global_state": false}'</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Создайте директории для хранения компонентов резервной копии:</p>
+<div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span></code> <br/><code>mkdir<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/Database</code> <br/><code>mkdir<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/elastic</code> <br/><code>mkdir<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/Streams</code> <br/><code>mkdir<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/Scripts</code> <br/><code>mkdir<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/wal</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Перенесите и скопируйте компоненты в директорию резервной копии:</p>
+<div class="highlight"><code><pre><span></span><code>mv<span class="w"> </span>/var/www/comindware/data/Database/snapshots/snapshot_name_<span class="nv">$now</span><span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/Database</code> <br/><code>cp<span class="w"> </span>-r<span class="w"> </span>/var/www/backups/elasticsearch/*<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/elastic</code> <br/><code>cp<span class="w"> </span>-r<span class="w"> </span>/var/www/comindware/data/Database/wal/*<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/wal</code> <br/><code>cp<span class="w"> </span>-r<span class="w"> </span>/var/www/comindware/data/Database/Scripts/*<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/Scripts</code> <br/><code>cp<span class="w"> </span>-r<span class="w"> </span>/var/www/comindware/data/Streams/*<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/Streams</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Создайте архив с резервной копией:</p>
+<div class="highlight"><code><pre><span></span><code>tar<span class="w"> </span>-cvjf<span class="w"> </span>backup_<span class="nv">$now</span>.tar.bz2<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Перенесите архив с резервной копией во внешнее хранилище.</p>
+</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5569">Настройка и использование скрипта для резервного копирования данных (Linux)</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5575">Восстановление базы данных, вложенных файлов и журналов из полной резервной копии</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

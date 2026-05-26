@@ -1,0 +1,3516 @@
+<h1>Методы Web API</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4861" kb-tags="API,REST,Swagger,Web,АПИ,интеграции,интеграция" kb-title="Методы Web API">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#доступ-к-web-api">
+<span class="md-ellipsis">
+      Доступ к Web API
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#использование-swagger">
+<span class="md-ellipsis">
+      Использование Swagger
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#definitions">
+<span class="md-ellipsis">
+      Определения
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#описание-методов-web-api">
+<span class="md-ellipsis">
+      Описание методов Web API
+    </span>
+</a>
+<nav aria-label="Описание методов Web API" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#аккаунт--отдельные-аккаунты">
+<span class="md-ellipsis">
+      Аккаунт — отдельные аккаунты
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#accounttemplate--шаблоны-аккаунтов-и-связанные-с-ними-аккаунты">
+<span class="md-ellipsis">
+      AccountTemplate — шаблоны аккаунтов и связанные с ними аккаунты
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#attribute--атрибуты-шаблона">
+<span class="md-ellipsis">
+      Attribute — атрибуты шаблона
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#backup--резервное-копирование-конфигураций-и-сессий">
+<span class="md-ellipsis">
+      Backup — резервное копирование конфигураций и сессий
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#behaviourstate--сценарии-и-элементы-процессов">
+<span class="md-ellipsis">
+      BehaviourState — сценарии и элементы процессов
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#casetemplate--шаблоны-кейсов-не-используются">
+<span class="md-ellipsis">
+      CaseTemplate — шаблоны кейсов (не используются)
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#dataset--таблицы">
+<span class="md-ellipsis">
+      Dataset — таблицы
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#document--файлы-прикрепленные-к-атрибутам-типа-документ">
+<span class="md-ellipsis">
+      Document — файлы, прикрепленные к атрибутам типа «документ»
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#documentexporttemplate--шаблоны-экспорта">
+<span class="md-ellipsis">
+      DocumentExportTemplate — шаблоны экспорта
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#form--формы-и-правила-для-форм-кроме-стартовых-форм-процессов-и-форм-пользовательских-задач">
+<span class="md-ellipsis">
+      Form — формы и правила для форм (кроме стартовых форм процессов и форм пользовательских задач)
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#solutiongitintegration--контроль-версий-приложений-через-git">
+<span class="md-ellipsis">
+      SolutionGitIntegration — контроль версий приложений через Git
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#heartbeat--мониторинг-состояния-сервера-процессов-скриптов-и-служб">
+<span class="md-ellipsis">
+      Heartbeat — мониторинг состояния сервера, процессов, скриптов и служб
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#api_web_image">
+<span class="md-ellipsis">
+      Image — изображения
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#api_web_license">
+<span class="md-ellipsis">
+      License — лицензии
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#processobjects--миграция-версии-диаграммы-процесса">
+<span class="md-ellipsis">
+      ProcessObjects — миграция версии диаграммы процесса
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#processtemplate--шаблоны-процессов">
+<span class="md-ellipsis">
+      ProcessTemplate — шаблоны процессов
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#record--одна-запись-кроме-шаблонов-процессов">
+<span class="md-ellipsis">
+      Record — одна запись (кроме шаблонов процессов)
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#records--несколько-записей-и-экспортимпорт-записей-кроме-шаблонов-процессов">
+<span class="md-ellipsis">
+      Records — несколько записей и экспорт/импорт записей (кроме шаблонов процессов)
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#recordtemplate--шаблоны-записей">
+<span class="md-ellipsis">
+      RecordTemplate — шаблоны записей
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#referencedata--записи-с-указанными-значениями-атрибутов">
+<span class="md-ellipsis">
+      ReferenceData — записи с указанными значениями атрибутов
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#solution--приложения">
+<span class="md-ellipsis">
+      Solution — приложения
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#toolbar--области-кнопок-и-кнопки-на-них">
+<span class="md-ellipsis">
+      Toolbar — области кнопок и кнопки на них
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#transfer--экспортимпорт-модели-приложения">
+<span class="md-ellipsis">
+      Transfer — экспорт/импорт модели приложения
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#usercommand--кнопки">
+<span class="md-ellipsis">
+      UserCommand — кнопки
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Web API предоставляет общие RESTful-методы. Эти методы одинаковы для всех версий <strong>Comindware Platform</strong>.</p>
+<p>В этом разделе представлен обзор методов Web API. Полную информацию см. в Swagger.</p>
+<h2 id="доступ-к-web-api">Доступ к Web API</h2>
+<ul>
+<li>
+<p>Базовый URL-адрес для запросов Web API:</p>
+<div class="highlight"><code><pre><span></span><code>https://your-host/webapi/</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Web API поддерживает запросы <code>GET</code>, <code>PUT</code>, <code>POST</code>, <code>DELETE</code>.</p>
+</li>
+<li>Методы Web API передают данные в форматах JSON и XML.</li>
+</ul>
+<h2 id="использование-swagger">Использование Swagger</h2>
+<p>Swagger предоставляет подробную справку по методам API, включая описания запросов и ответов, а также модели данных с примерами значений.</p>
+<p>Swagger позволяет выполнять запросы и просматривать ответы.</p>
+<p>Интерфейс Swagger для Web API доступен по адресу:</p>
+<div class="highlight"><code><pre><span></span><code>https://your-host/docs/webapi</code> <br/></pre></code></div>
+<p>URL-адрес JSON-спецификации Web API:</p>
+<div class="highlight"><code><pre><span></span><code>https://your-host/swagger/WebApi/v1</code> <br/></pre></code></div>
+<p>Здесь <code>your-host</code> — доменное имя сервера <strong>Comindware Platform</strong>.</p>
+<figure class="screenshot_with_caption">
+<p><img alt="Интерфейс Swagger для метода Web API, создающего шаблон аккаунта" src="https://kb.comindware.ru/assets/img_64d3708401e22.png"/><figcaption class="caption">Интерфейс Swagger для метода Web API, создающего шаблон аккаунта</figcaption></p>
+</figure>
+<div class="notice notice-success">
+<h2 class="admonition-title" id="definitions">Определения</h2>
+<p>Методы Web API и документация Swagger используют следующие <strong>специфические имена</strong> для сущностей <strong>Comindware Platform</strong>:</p>
+<ul>
+<li><strong>activity</strong> — элемент диаграммы процесса</li>
+<li><strong>alias</strong> — системное имя</li>
+<li><strong>behaviour</strong> — сценарий, элемент диаграммы процесса</li>
+<li><strong>container</strong> — шаблон, приложение</li>
+<li><strong>dataset</strong> — таблица в шаблоне</li>
+<li><strong>global</strong> <strong>alias</strong> <em>(глобальный псевдоним)</em> — путь к объекту, состоящий из его типа, имени родительской системы и имени системы объекта</li>
+<li><strong>id</strong> — идентификатор объекта</li>
+<li><strong>inline</strong> — особый тип документа, который отображается на форме как текстовый блок и который можно редактировать в форме</li>
+<li><strong>list</strong> — массив</li>
+<li><strong>object</strong> (<em>объект</em>) — набор пар свойство/значение</li>
+<li><strong>property</strong>— атрибут</li>
+<li><strong>record</strong>— запись</li>
+<li><strong>revision</strong> — версия файла, прикреплённого к атрибуту</li>
+<li><strong>solution</strong> — приложение</li>
+<li><strong>scheme</strong> — диаграмма процесса</li>
+<li><strong>stream</strong> — файл, хранящийся в системе</li>
+<li><strong>template</strong> — шаблон</li>
+<li><strong>transfer</strong> — управление версиями приложения</li>
+<li><strong>trigger</strong> — сценарий</li>
+<li><strong>user</strong> <strong>command</strong> — кнопка</li>
+<li><strong>worker</strong> — системный сервис</li>
+</ul>
+</div>
+<h2 id="описание-методов-web-api">Описание методов Web API</h2>
+<h3 id="аккаунт--отдельные-аккаунты">Аккаунт — отдельные аккаунты</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Account</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает все аккаунты.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Не требуются.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Массив объектов со свойствами аккаунтов.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Account</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Создает аккаунт.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Объект свойств аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Идентификатор аккаунта.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/Account</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Изменяет свойства аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Объект свойств аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method delete">DELETE</th>
+<th>/webapi/Account/{accountId}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Удаляет аккаунт.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Account/{accountId}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает свойства аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект свойств аккаунта.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="accounttemplate--шаблоны-аккаунтов-и-связанные-с-ними-аккаунты">AccountTemplate — шаблоны аккаунтов и связанные с ними аккаунты</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/AccountTemplate/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Создает шаблон аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, объект свойств шаблона аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект с системным именем шаблона аккаунта.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/AccountTemplate/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Изменяет свойства шаблона аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, объект свойств шаблона аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method delete">DELETE</th>
+<th>/webapi/AccountTemplate/{solutionAlias}/{accountTemplateAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Удаляет шаблон аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, системное имя шаблона аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/AccountTemplate/{solutionAlias}/{accountTemplateAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает свойства шаблона аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, системное имя шаблона аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект свойств шаблона аккаунта.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/AccountTemplate/{solutionAlias}/{accountTemplateAlias}/Disable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Архивирует шаблон аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, системное имя шаблона аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/AccountTemplate/{solutionAlias}/{accountTemplateAlias}/Enable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Разархивирует шаблон аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, системное имя шаблона аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/AccountTemplate/{solutionAlias}/{accountTemplateAlias}/Exclude</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Отвязывает аккаунты от указанного шаблона аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, системное имя шаблона аккаунта, массив идентификаторов аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/AccountTemplate/{solutionAlias}/{accountTemplateAlias}/Include</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Привязывает указанные аккаунты к указанному шаблону аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, системное имя шаблона аккаунта, массив идентификаторов аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/AccountTemplate/{solutionAlias}/{accountTemplateAlias}/ListIncluded</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает аккаунты, привязанные к указанному шаблону аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, системное имя шаблона аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Массив объектов со свойствами аккаунтов.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/AccountTemplate/List/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает все шаблоны аккаунтов в указанном приложении.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Массив объектов со свойствами шаблонов аккаунта.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="attribute--атрибуты-шаблона">Attribute — атрибуты шаблона</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Attribute/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Создает атрибут.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, объект свойств атрибута.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект с системным именем атрибута.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/Attribute/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Изменяет свойства атрибута.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, объект свойств атрибута.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method delete">DELETE</th>
+<th>/webapi/Attribute/{solutionAlias}/{attributeGlobalAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Удаляет атрибут.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним атрибута: <code>Attribute@templateSystemName.attributeSystemName</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Attribute/{solutionAlias}/{attributeGlobalAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает свойства атрибута.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним атрибута: <code>Attribute@templateSystemName.attributeSystemName</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект свойств атрибута.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/Attribute/{solutionAlias}/{attributeGlobalAlias}/Disable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Архивирует атрибут.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним атрибута: <code>Attribute@templateSystemName.attributeSystemName</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/Attribute/{solutionAlias}/{attributeGlobalAlias}/Enable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Разархивирует атрибут.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним атрибута: <code>Attribute@templateSystemName.attributeSystemName</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Attribute/List/{templateGlobalAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает все атрибуты указанного шаблона.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Глобальный псевдоним шаблона: <code>Template@applicationSystemName.templateSystemName</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Массив объектов с атрибутивными свойствами.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="backup--резервное-копирование-конфигураций-и-сессий">Backup — резервное копирование конфигураций и сессий</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method delete">DELETE</th>
+<th>/webapi/Backup/Configuration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Удаляет указанные конфигурации резервного копирования.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Массив идентификаторов конфигурации резервного копирования.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Backup/Configuration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает все конфигурации резервного копирования.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Не требуются.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Массив резервных объектов конфигурации.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Backup/Configuration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Создает конфигурацию резервного копирования.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Резервный объект конфигурации.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Идентификатор конфигурации резервного копирования.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/Backup/Configuration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Изменяет конфигурацию резервного копирования.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Резервный объект конфигурации.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Backup/Configuration/{configurationId}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает конфигурацию резервного копирования.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор конфигурации резервного копирования.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Резервный объект конфигурации.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method delete">DELETE</th>
+<th>/webapi/Backup/Session</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Удаляет указанные сеансы резервного копирования.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Массив идентификаторов сеансов резервного копирования.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Backup/Session</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Возвращает сеансы резервного копирования, соответствующие указанному фильтру.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Объект с фильтром сеанса резервного копирования.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Массив объектов со сведениями о сеансах резервного копирования.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Backup/Session/{configurationId}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Инициирует сеанс резервного копирования с использованием указанной конфигурации.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор конфигурации резервного копирования.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект со сведениями о сеансе резервного копирования.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Backup/Session/{sessionId}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает сеанс резервного копирования.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор сеанса резервного копирования.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект со сведениями о сеансе резервного копирования.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/Backup/Session/{sessionId}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Прерывает сеанс резервного копирования.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор сеанса резервного копирования.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект со сведениями о сеансе резервного копирования.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Backup/Session/CreateRecord</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Создает запись сеанса резервного копирования.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Объект сеанса резервного копирования.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/Backup/Session/UpdateRecord</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Обновляет запись сеанса резервного копирования.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Объект сеанса резервного копирования.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="behaviourstate--сценарии-и-элементы-процессов">BehaviourState — сценарии и элементы процессов</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/BehaviourState/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает состояния сценариев и элементов процессов в указанном приложении.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект с состояниями сценариев и элементов процессов.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/BehaviourState/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Обновляет состояния сценариев и элементов процессов в указанном приложении.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Объект с состояниями сценариев и элементов процессов.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="casetemplate--шаблоны-кейсов-не-используются">CaseTemplate — шаблоны кейсов (не используются)</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/CaseTemplate/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Создает шаблон кейса с/без связанного шаблона записи.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, объект свойств шаблона кейса.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект с системным именем шаблона кейса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/CaseTemplate/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Изменяет шаблон кейса.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, объект свойств шаблона кейса.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method delete">DELETE</th>
+<th>/webapi/CaseTemplate/{solutionAlias}/{caseTemplateAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Удаляет шаблон кейса.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, системное имя шаблона кейса.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/CaseTemplate/{solutionAlias}/{caseTemplateAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает свойства шаблона кейса.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, системное имя шаблона кейса.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект свойств шаблона кейса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/CaseTemplate/{solutionAlias}/{caseTemplateAlias}/Disable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Архивирует шаблон кейса.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, системное имя шаблона кейса.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/CaseTemplate/{solutionAlias}/{caseTemplateAlias}/Enable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Разархивирует шаблон кейса.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, системное имя шаблона кейса.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/CaseTemplate/List/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает все шаблоны кейсов в указанном приложении.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Массив объектов со свойствами шаблонов кейсов.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dataset--таблицы">Dataset — таблицы</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Dataset/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Создает таблицу.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, объект конфигурации таблицы.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект конфигурации таблицы.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/Dataset/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Изменяет конфигурацию таблицы.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, объект конфигурации таблицы.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method delete">DELETE</th>
+<th>/webapi/Dataset/{solutionAlias}/{datasetGlobalAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Удаляет таблицу.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним таблицы: <code>Dataset@templateSystemName.tableSystemName</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Dataset/{solutionAlias}/{datasetGlobalAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает конфигурацию таблицы.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним таблицы: <code>Dataset@templateSystemName.tableSystemName</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект конфигурации таблицы.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Dataset/List/{templateGlobalAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает все таблицы указанного шаблона.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним шаблона: <code>Template@applicationSystemName.templateSystemName</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Массив объектов с конфигурациями таблиц.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="document--файлы-прикрепленные-к-атрибутам-типа-документ">Document — файлы, прикрепленные к атрибутам типа «документ»</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Document</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Создает документ.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Объект свойств документа.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект с идентификатором документа.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/Document</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Изменяет свойства документа.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Объект свойств документа.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method delete">DELETE</th>
+<th>/webapi/Document/{documentId}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Удаляет документ.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор документа.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Document/{documentId}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает свойства документа.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор документа.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект свойств документа.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Document/{documentId}/Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает содержимое документа.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор документа.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Содержимое документа (<code>application/octet-stream</code>).</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Document/Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Создает документ путем загрузки файла.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Объект с именем файла и его содержимым (<code>byte array</code>).</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект с идентификатором документа.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Document/Revision/{documentId}/Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Создает версию путем загрузки файла.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор документа, объект с именем файла и его содержимым (<code>byte array</code>).</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект с идентификатором версии.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Document/Revision/{revisionId}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает свойства версии.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор версии.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект свойств версии.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Document/Revision/{revisionId}/Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает содержимое версии.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор версии.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Содержимое версии (<code>application/octet-stream</code>).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="documentexporttemplate--шаблоны-экспорта">DocumentExportTemplate — шаблоны экспорта</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/DocumentExportTemplate/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Создает шаблон экспорта.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, объект свойств шаблона экспорта.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Системное имя шаблона экспорта.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/DocumentExportTemplate/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Изменяет шаблон экспорта.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, объект свойств шаблона экспорта.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method delete">DELETE</th>
+<th>/webapi/DocumentExportTemplate/{solutionAlias}/{exportTemplateGlobalAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Удаляет шаблон экспорта.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним шаблона экспорта: <code>ExportTemplate@templateSystemName.exportTemplateSystemName</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/DocumentExportTemplate/{solutionAlias}/{exportTemplateGlobalAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает свойства шаблона экспорта.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним шаблона экспорта: <code>ExportTemplate@templateSystemName.exportTemplateSystemName</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект свойств шаблона экспорта.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/DocumentExportTemplate/List/{templateGlobalAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает все шаблоны экспорта для указанного шаблона.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним шаблона: <code>Template@applicationSystemName.templateSystemName</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Массив объектов со свойствами шаблонов экспорта.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="form--формы-и-правила-для-форм-кроме-стартовых-форм-процессов-и-форм-пользовательских-задач">Form — формы и правила для форм (кроме стартовых форм процессов и форм пользовательских задач)</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Form/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Создает форму.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, объект конфигурации формы.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Системное имя формы.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/Form/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Изменяет форму.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, объект конфигурации формы.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method delete">DELETE</th>
+<th>/webapi/Form/{solutionAlias}/{formGlobalAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Удаляет форму.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним формы: <code>Form@templateSystemName.formSystemName</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Form/{solutionAlias}/{formGlobalAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает конфигурацию формы.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним формы: <code>Form@templateSystemName.formSystemName</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект конфигурации формы.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Form/FormRules/{solutionAlias}/{formGlobalAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает правила для формы.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним формы: <code>Form@templateSystemName.formSystemName</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект правил для формы.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/Form/FormRules/{solutionAlias}/{formGlobalAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Устанавливает правила для формы.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним формы: <code>Form@templateSystemName.formSystemName</code>, объект правил для формы.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Form/List/{templateGlobalAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает все формы указанного шаблона.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним шаблона: <code>Template@applicationSystemName.templateSystemName</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Массив объектов с конфигурациями форм.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="solutiongitintegration--контроль-версий-приложений-через-git">SolutionGitIntegration — контроль версий приложений через Git</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Git/AddRemoteBranch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Создает ветвь в удаленном репозитории.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Объект конфигурации репозитория и ветви.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Git/Connect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Инициализирует соединение с указанным репозиторием.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Объект конфигурации репозитория.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Git/GetRepositoryDetails</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает коммиты репозитория.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Объект конфигурации репозитория.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Массив объектов со свойствами коммитов.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Git/GetUserConfiguration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает учетные данные пользователя репозитория.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Не требуются.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект с учетными данными пользователя репозитория.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Git/GetUserSolutionConfig</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает конфигурацию репозитория и сведения о пользователе.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Не требуются.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект с конфигурацией репозитория и учетными данными пользователя.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Git/ListBranches</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает все ветви репозитория.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Объект конфигурации репозитория.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Массив объектов со свойствами ветвей.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Git/SaveUserCredentials</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Сохраняет учетные данные пользователя.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Объект с конфигурацией репозитория и учетными данными пользователя.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Git/ListRepositories</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает все репозитории подключений к Git.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Не требуются.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Массив объектов с конфигурациями репозиториев.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heartbeat--мониторинг-состояния-сервера-процессов-скриптов-и-служб">Heartbeat — мониторинг состояния сервера, процессов, скриптов и служб</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Heartbeat/Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает статистику использования служб.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Не требуются.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект сведений об использовании служб.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Heartbeat/IsAlive</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает статус доступности служб.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Не требуются.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Heartbeat/ServerDetails</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает информацию о сервере.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Не требуются.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект сведений о сервере.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="api_web_image">Image — изображения</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Image</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает изображение по указанному идентификатору файла.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор изображения.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект изображения.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/Image</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Изменяет изображение на основе файла.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор изображения, объект изображения.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Image/Create</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Создает изображение из содержимого.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Файл изображения.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект изображения.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="api_web_license">License — лицензии</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/License/DeleteSession</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Удаляет указанный сеанс пользователя или все сеансы пользователя.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор аккаунта, идентификатор сеанса.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/License/GetLicenseStatus</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает статус лицензирования.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Не требуются.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса лицензирования.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/License/GetSessions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает сеансы.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Массив объектов сеансов.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/License/GetUserLicense</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает статус лицензирования аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор аккаунта.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса лицензирования аккаунта.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="processobjects--миграция-версии-диаграммы-процесса">ProcessObjects — миграция версии диаграммы процесса</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/ProcessObjects/Migrate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Изменяет версию диаграммы экземпляров процесса и перемещает токены.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Глобальный псевдоним шаблона процесса (<code>ProcessTemplate@applicationSystemName.templateSystemName</code>), идентификатор целевой диаграммы, идентификаторы экземпляров процесса.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="processtemplate--шаблоны-процессов">ProcessTemplate — шаблоны процессов</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/ProcessTemplate/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Создает шаблон процесса.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, объект свойств шаблона процесса.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Системное имя шаблона процесса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/ProcessTemplate/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Изменяет свойства шаблона процесса.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, объект свойств шаблона процесса.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method delete">DELETE</th>
+<th>/webapi/ProcessTemplate/{solutionAlias}/{processTemplateAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Удаляет шаблон процесса.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, системное имя шаблона процесса.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/ProcessTemplate/{solutionAlias}/{processTemplateAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает свойства шаблона процесса.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, системное имя шаблона процесса.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект свойств шаблона процесса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/ProcessTemplate/{solutionAlias}/{processTemplateAlias}/Disable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Архивирует шаблон процесса.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, системное имя шаблона процесса.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/ProcessTemplate/{solutionAlias}/{processTemplateAlias}/Enable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Разархивирует шаблон процесса.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, системное имя шаблона процесса.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/ProcessTemplate/List/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает все шаблоны процессов в указанном приложении.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Массив объектов со свойствами шаблона процесса.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="record--одна-запись-кроме-шаблонов-процессов">Record — одна запись (кроме шаблонов процессов)</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method delete">DELETE</th>
+<th>/webapi/Record/{recordId}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Удаляет запись.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор записи.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Record/{recordId}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает запись.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор записи.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект со значениями атрибутов записи: <code>{"attributeSystemName": "value"}</code>.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/Record/{recordId}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Изменяет запись.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор записи, объект со значениями атрибутов записи: <code>[{"attributeSystemName": "value"}]</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Record/{recordId}/{deepClone}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Клонирует запись.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор записи, флаг глубокого клонирования (<code>true</code> — клонировать связанные записи).</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Клонированный идентификатор записи.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/Record/{recordId}/Disable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Архивирует запись.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор записи.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/Record/{recordId}/Enable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Разархивирует запись.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор записи.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Record/{templateGlobalAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Создает запись.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним шаблона (<code>Template@applicationSystemName.templateSystemName</code>), объект со значениями атрибутов записи: <code>[{"attributeSystemName": "value"}]</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Идентификатор записи.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="records--несколько-записей-и-экспортимпорт-записей-кроме-шаблонов-процессов">Records — несколько записей и экспорт/импорт записей (кроме шаблонов процессов)</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method delete">DELETE</th>
+<th>/webapi/Records</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Удаляет указанные записи.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Массив идентификаторов записей.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/Records</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Изменяет указанные записи.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Массив идентификаторов записей и объектов со значениями атрибутов записей: <code>[{"attributeSystemName": "value"}]</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method delete">DELETE</th>
+<th>/webapi/Records/{templateGlobalAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Удаляет все записи из указанного шаблона.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним шаблона: <code>Template@applicationSystemName.templateSystemName</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Records/{templateGlobalAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает все записи указанного шаблона.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним шаблона: <code>Template@applicationSystemName.templateSystemName</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Массив объектов со значениями атрибутов записей: <code>[{"attributeSystemName": "value"}]</code>.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Records/{templateGlobalAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Создает записи.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Глобальный псевдоним шаблона (<code>Template@applicationSystemName.templateSystemName</code>), массив объектов со значениями атрибутов записи: <code>[{"attributeSystemName": "value"}]</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Массив идентификаторов записей.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Records/{templateGlobalAlias}/Export</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Экспортирует все записи указанного шаблона.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним шаблона: <code>Template@applicationSystemName.templateSystemName</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Серийные записи данных.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/Records/BulkEdit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Обновляет указанные записи с теми же данными.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Запишите свойства и значения для обновления.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/Records/Disable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Архивирует указанные записи.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Массив идентификаторов записей.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/Records/Enable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Разархивирует указанные записи.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Массив идентификаторов записей.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Records/Export</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Экспортирует указанные записи.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Объект глобального псевдонима шаблона записи, массив идентификаторов записей.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Серийные записи данных.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Records/Import</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Импортирует записи из файла.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор загруженного файла с сериализованными данными записей.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Количество импортированных записей.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="recordtemplate--шаблоны-записей">RecordTemplate — шаблоны записей</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/RecordTemplate/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Создает шаблон записи.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, объект свойств шаблона записи.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Системное имя шаблона записи.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/RecordTemplate/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Изменяет шаблон записи.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, объект свойств шаблона записи.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method delete">DELETE</th>
+<th>/webapi/RecordTemplate/{solutionAlias}/{recordTemplateAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Удаляет шаблон записи.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, системное имя шаблона записи.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/RecordTemplate/{solutionAlias}/{recordTemplateAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает шаблон по имени системы.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, системное имя шаблона записи.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект свойств шаблона записи.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/RecordTemplate/{solutionAlias}/{recordTemplateAlias}/Disable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Архивирует шаблон записи.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, системное имя шаблона записи.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/RecordTemplate/{solutionAlias}/{recordTemplateAlias}/Enable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Разархивирует шаблон записи.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, системное имя шаблона записи.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/RecordTemplate/List/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает все шаблоны записей в указанном приложении.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Массив объектов со свойствами шаблона записи.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="referencedata--записи-с-указанными-значениями-атрибутов">ReferenceData — записи с указанными значениями атрибутов</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method delete">DELETE</th>
+<th>/webapi/ReferenceData/Delete</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Удаляет запись с указанными значениями ключевых атрибутов.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Объект глобального псевдонима шаблона, объект с системными именами и значениями ключевых атрибутов.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Идентификатор удалённой записи. Если несколько записей совпадают, возвращает <code>null</code>, и никакие записи не удаляются.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/ReferenceData/Get</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает значения атрибутов записи с указанными значениями ключевых атрибутов.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Объект глобального псевдонима шаблона, объект с ключевыми системными именами атрибутов и значениями, массив системных имён атрибутов, которые необходимо получить.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект со значениями атрибутов записи. Если несколько записей совпадают, возвращает <code>null</code>.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/ReferenceData/List</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает список записей с указанными значениями ключевых атрибутов.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Объект глобального псевдонима шаблона, объект с ключевыми системными именами атрибутов и значениями, массив системных имён атрибутов, которые необходимо получить.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Массив объектов со значениями атрибутов записей.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/ReferenceData/Put</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Изменяет запись с указанными значениями ключевых атрибутов.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Объект глобального псевдонима шаблона, массив системных имён ключевых атрибутов, объект с системными именами и значениями ключевых атрибутов, объект с системными именами атрибутов и их новыми значениями.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Идентификатор отредактированной записи. Если несколько записей совпадают, возвращает <code>null</code> и никакие записи не редактируются.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="solution--приложения">Solution — приложения</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает все приложения.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Не требуются.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Массив объектов со свойствами приложения.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Создает приложение.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Объект со свойствами приложения.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Системное имя приложения.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Изменяет свойства приложения.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Объект со свойствами приложения.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method delete">DELETE</th>
+<th>/webapi/Solution/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Удаляет приложение.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Solution/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает свойства приложения.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект со свойствами приложения.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="toolbar--области-кнопок-и-кнопки-на-них">Toolbar — области кнопок и кнопки на них</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Toolbar/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Создает область кнопок.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, объект конфигурации области кнопок.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Системное имя области кнопок.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/Toolbar/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Изменяет область кнопок.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, объект конфигурации области кнопок.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method delete">DELETE</th>
+<th>/webapi/Toolbar/{solutionAlias}/{toolbarGlobalAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Удаляет область кнопок.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним области кнопок: <code>Toolbar@templateSystemName.toolbarAlias</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Toolbar/{solutionAlias}/{toolbarGlobalAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает область кнопок по имени системы.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним области кнопок: <code>Toolbar@templateSystemName.toolbarAlias</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект конфигурации области кнопок.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Toolbar/List/{templateGlobalAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает все области кнопок для указанного шаблона.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним шаблона: <code>Template@applicationSystemName.templateSystemName</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Массив объектов конфигурации области кнопок.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="transfer--экспортимпорт-модели-приложения">Transfer — экспорт/импорт модели приложения</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Transfer/{fileId}/Validate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Проверяет модель приложения.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Идентификатор файла модели приложения.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект с итогом проверки.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/Transfer/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Экспорт модели приложения.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект с ZIP-файлом модели приложения в формате Base64 и сводкой экспорта.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Transfer/{solutionAlias}/{fileId}/{publishAfterImport}/{policy}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Импортирует модель приложения.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, идентификатор файла ZIP/CTF модели приложения, флаг публикации импортированных диаграмм процессов (<code>true</code> — публикация), политика состояния поведения (<code>ApplyNew</code>, <code>ApplyOld</code>, <code>DisableAll</code> или <code>EnableAll</code>).</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект со сводкой по импорту приложений.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/Transfer/Upload</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Загружает файл модели приложения.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>ZIP-файл модели приложения в формате Base64.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект с идентификатором загруженного файла.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="usercommand--кнопки">UserCommand — кнопки</h3>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method post">POST</th>
+<th>/webapi/UserCommand/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Создает кнопку.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, объект конфигурации кнопки.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Системное имя кнопки.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/UserCommand/{solutionAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Изменяет кнопку.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, объект конфигурации кнопки.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method delete">DELETE</th>
+<th>/webapi/UserCommand/{solutionAlias}/{userCommandGlobalAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Удаляет кнопку.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним кнопки: <code>UserCommand@templateSystemName.userCommandAlias</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/UserCommand/{solutionAlias}/{userCommandGlobalAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает конфигурацию кнопки.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним кнопки: <code>UserCommand@templateSystemName.userCommandAlias</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект конфигурации кнопки.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/UserCommand/{solutionAlias}/{userCommandGlobalAlias}/Disable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Архивирует кнопку.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним кнопки: <code>UserCommand@templateSystemName.userCommandAlias</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method put">PUT</th>
+<th>/webapi/UserCommand/{solutionAlias}/{userCommandGlobalAlias}/Enable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Разархивирует кнопку.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним кнопки: <code>UserCommand@templateSystemName.userCommandAlias</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Объект статуса.</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th class="api-method get">GET</th>
+<th>/webapi/UserCommand/List/{templateGlobalAlias}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Описание</strong></td>
+<td>Получает все кнопки указанного шаблона.</td>
+</tr>
+<tr>
+<td><strong>Параметры</strong></td>
+<td>Системное имя приложения, глобальный псевдоним шаблона: <code>Template@applicationSystemName.templateSystemName</code>.</td>
+</tr>
+<tr>
+<td><strong>Ответ</strong></td>
+<td>Массив объектов конфигурации кнопок.</td>
+</tr>
+</tbody>
+</table>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5332">Общие сведения об API Comindware Platform</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5333">Методы Solution API</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5331">Методы System Core API</a></em></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

@@ -1,0 +1,14 @@
+<h1>Ограничение на проставление чекбокса в коллекции</h1><p>Для того, чтобы можно было проставить только один чекбокс в коллекции (например, выбор только одного критерия из таблицы), нужно настроить правило на изменение типа доступа на «Только для чтения» для данного логического атрибута, и ввести следующее выражение:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code"> EQUALS(COUNT((from a in db-&gt;Goals where AND(a-&gt;EPAF == $id,a-&gt;Boolean == true) select a-&gt;id)),1)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span style="text-decoration: underline;"><strong>где:</strong></span></p>
+<p><strong>Goals</strong> – системное имя Шаблона записи, где хранится коллекция;</p>
+<p><strong>EPAF</strong> – системное имя ссылки на текущий Шаблон записи;</p>
+<p><strong>Boolean</strong> – системное имя логического атрибута.</p>

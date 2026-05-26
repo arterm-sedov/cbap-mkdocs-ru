@@ -1,0 +1,19 @@
+<h1>Отображение кнопки при отсутствии запущенных процессов по записи</h1><p>Для того, чтобы отобразить кнопку при условии, что по текущей записи не запущен ни один процесс, введите следующее выражение:</p>
+<div>
+<table class="source_code_container" style="width: 100%;">
+<tbody>
+<tr style="width: 100%;">
+<td class="source_code" style="width: 100%;">
+<p style="margin-bottom: 0in;">@prefix task: &lt;http://comindware.com/ontology/task#&gt;.</p>
+<p>@prefix process: &lt;http://comindware.com/ontology/process#&gt;.</p>
+<p>{</p>
+<p>if { ?processObject process:businessObject ?item.}</p>
+<p>then {false -&gt; ?value.}</p>
+<p>else {true -&gt; ?value.}.</p>
+<p>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="blue_note"><strong>Примечание:</strong> данное условие не применимо только к процессам, запущенным по текущей записи (процессам, связанным с текущим шаблоном записи).</div>

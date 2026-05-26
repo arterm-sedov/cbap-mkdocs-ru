@@ -1,0 +1,21 @@
+<h1>Фильтр списка по дате, равной сегодняшней</h1><p>Для того, чтобы настроить фильтр отображения записей в списке, где какая-либо дата равна сегодняшней (например, для списка сегодняшних заявок) <span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">с учетом часового пояса (в данном примере - московского)</span>, введите следующее выражение:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code"> 
+<p>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.<br/>@prefix session: &lt;http://comindware.com/ontology/session#&gt;.<br/>@prefix cmwtime: &lt;http://comindware.com/logics/time#&gt;.<br/>{<br/>  ("Zayavki" "Data") object:findProperty ?DateProperty. <br/>  session:context session:requestTime ?nowUTC.</p>
+<p>  (?nowUTC "Etc/GMT" "Europe/Moscow") cmwtime:fromTzToTz ?nowMoscow.<br/>  ?nowMoscow cmwtime:startOfDay ?startOfToday.   </p>
+<p>  ?result ?DateProperty ?Dates.</p>
+<p>  (?Dates "Etc/GMT" "Europe/Moscow") cmwtime:fromTzToTz ?Moscow.<br/>  ?Moscow cmwtime:startOfDay ?startOfToday.  </p>
+<p>  ?result -&gt; ?item.<br/>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span style="text-decoration: underline;"><strong>где:</strong></span></p>
+<p><strong>Zayavki</strong> – системное имя текущего Шаблона записи;</p>
+<p><strong>Data</strong> – системное имя атрибута типа "Дата / Время", которое будет сравниваться с текущим днём;</p>
+<p><strong>Etc/GMT</strong> – определение смещения часового пояса;</p>
+<p><strong>Europe/Moscow</strong> – определение конкретного часового пояса.</p>

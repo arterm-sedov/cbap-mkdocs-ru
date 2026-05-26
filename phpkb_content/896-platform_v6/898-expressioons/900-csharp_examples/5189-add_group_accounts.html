@@ -1,0 +1,19 @@
+<h1>Добавление пользователей в группу</h1><p>Для того, чтобы в рамках процесса можно было добавить пользователя или пользователей в определенную системную группу (например, для управления ролевой моделью), введите следующее выражение:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">
+<p>using System;<br/>using System.Collections.Generic;<br/>using System.Linq;<br/>using Comindware.Data.Entity;<br/>using Comindware.TeamNetwork.Api.Data.UserCommands;<br/>using Comindware.TeamNetwork.Api.Data;</p>
+<p>class Script<br/>{<br/>public static void Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities)<br/>{<br/>string[] OA = new string[] {<br/>"Kontragenty"<br/>};<br/>string[] OP = new string[] {<br/>"Podpisant"<br/>};<br/>string[] GROUP = new string[] {<br/>"group.28"<br/>};<br/><br/>for(int j = 0; j &lt; GROUP.Length; j++)<br/>{<br/>var group = GROUP[j];<br/>var old_users = Api.Base.AccountGroupService.Get(group);<br/>Api.Base.AccountGroupService.ExcludeMembers(group, old_users.Users);<br/><br/>var my_list = Api.TeamNetwork.ObjectService.ListWithAlias(OA[j]);<br/>foreach (var i in my_list)<br/>{<br/>var data = i as Dictionary&lt;string,object&gt;;<br/>data.TryGetValue(OP[j], out object obj);<br/>if (obj == null)<br/>{<br/>continue;<br/>}</p>
+<p>if (obj is string)<br/>{<br/>Api.Base.AccountGroupService.IncludeMembers(group, new List&lt;string&gt;(){ obj.ToString() }); ÿ<br/>}<br/>else<br/>{<br/>var accounts = obj as object[];<br/>var accountsIds = accounts.Select(x =&gt; x.ToString());<br/>Api.Base.AccountGroupService.IncludeMembers(group, accountsIds);<br/>}<br/>}<br/>}<br/>}<br/>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>где:</strong></p>
+<p><em><strong>Kontragenty</strong> </em>— системное имя шаблона записи;</p>
+<p><em><strong>Podpisant</strong> </em>— системное имя атрибута с типом данных «Аккаунт» из шаблона записи <em><strong>Kontragenty</strong></em>, хранящее пользователя;</p>
+<p><em><strong>group.28</strong></em> — ИД системной группы, куда необходимо добавить пользователя из поля <em><strong>Podpisant</strong></em>.</p>
+<div class="blue_note">Данный скрипт при вызове сначала удаляет всех пользователей из группы, а затем проходит по всем записям в указанном шаблоне записи и добавляет пользователей из указанного атрибута в группу, т. о., обновляя состав системной группы.</div>

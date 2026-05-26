@@ -1,0 +1,22 @@
+<h1>Запуск глобальной функции из операции</h1><p>Для того, чтобы запустить глобальную функцию по кнопке, введите следующее выражение:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code"> 
+<p>using System; <br/>using System.Collections.Generic;<br/>using System.Linq;<br/>using Comindware.Data.Entity;<br/>using Comindware.TeamNetwork.Api.Data.UserCommands;<br/>using Comindware.TeamNetwork.Api.Data;</p>
+<p>class Script<br/>{<br/>    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)<br/>    {     <br/>          var CurrentObjectid = userCommandContext.ObjectIds[0];<br/>        var CurrentObjectData = Api.TeamNetwork.ObjectService.Get(CurrentObjectid);<br/>        var Gosnomer = CurrentObjectData["op.11"].ToString();<br/>    var bo = Api.TeamNetwork.GlobalFunctionService.ExecuteByAlias("Systemsolution", "Poisk", new Dictionary&lt;string, object&gt;(){{"Nomer", Gosnomer}});<br/>    Api.TeamNetwork.ObjectService.EditWithAlias("Kartochkivyzovov", userCommandContext.ObjectIds[0], bo);</p>
+<p>    var result = new UserCommandResult<br/>    {<br/>      Success = true,<br/>      Commited = true,<br/>      ResultType = UserCommandResultType.DataChange,<br/>      Messages = new[]<br/>      {<br/>        new UserCommandMessage<br/>        {<br/>          Severity = SeverityLevel.Normal,<br/>          Text = "VIN найден успешно"<br/>        }</p>
+<p>      }<br/>    };<br/>    return result;<br/>    <br/>    }<br/>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span style="text-decoration: underline;"><strong>где:</strong></span></p>
+<p><strong>op.11 -</strong> ИД атрибута в текущем Шаблоне записи, которое передается на вход ГФ;</p>
+<p><strong>Systemsolution</strong> – системное имя текущего Бизнес-приложения;</p>
+<p><strong>Poisk</strong> – системное имя Глобальной функции;</p>
+<p><strong>Nomer</strong> - переменная в шаблоне сообщения на входе;</p>
+<p><strong>Kartochkivyzovov</strong> - имя текущего шаблона записи, откуда вызывается операция;</p>
+<p><strong>VIN найден успешно</strong> - <span style="color: #333333; font-family: 'Open Sans', sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 100; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">текст сообщения, которое высветится пользователю в случае успешного исполнения скрипта.</span></p>

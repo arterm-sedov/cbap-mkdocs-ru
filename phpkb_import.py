@@ -1,12 +1,18 @@
 from tools.ssh_kb_ru import establish_connection_interactive, close_connection
 from tools.graceful_interrupt import safe_input, ensure_cleanup
+import argparse
 import html
 from html.parser import HTMLParser
 import bs4
 from markdownify import markdownify as md
 from markdownify import MarkdownConverter
 import re
-from pathvalidate import sanitize_filename
+import sys
+try:
+    from pathvalidate import sanitize_filename
+except ImportError:
+    def sanitize_filename(value):
+        return str(value)
 from pathlib import Path
 import shutil
 from cryptography.fernet import Fernet
@@ -16,15 +22,64 @@ import json
 
 KB_ID_TO_FILENAME_MAP = None
 KB_ID_TO_TITLE_MAP = None
-KB_ID_TO_TITLE_MAP_FILE = '.article_id_filename_map_v5.json'
+KB_ID_TO_CATEGORY_FOLDER_MAP = None
+KB_ID_TO_TITLE_MAP_FILE = '.article_id_filename_map_v6.json'
 THIS_FILE_DIR = os.path.dirname(os.path.realpath(__file__))
 IMPORT_PATH_DEFAULT = 'phpkb_content'
-importPath = safe_input(f'Path to import (default `{IMPORT_PATH_DEFAULT}`)', default=IMPORT_PATH_DEFAULT)
-KB_DIR = (importPath.strip() if (importPath and importPath.strip()) else IMPORT_PATH_DEFAULT)
+KB_DIR = IMPORT_PATH_DEFAULT
 TOTAL_PAGES_IMPORTED = 0
 CONNECTION = None
 DOCS_RU_FOLDER = 'docs/ru'
 HYPERLINKS_FILE = os.path.join(DOCS_RU_FOLDER, '.snippets/hyperlinks_mkdocs_to_kb_map.md')
+LEGACY_PREFIX_PATTERN = re.compile(r'^(\d+)-(.+)$')
+
+
+def normalize_import_stem(article_id, stem):
+    """Drop legacy numeric prefix when it is not the current PHPKB article id."""
+    article_id = str(article_id)
+    stem = str(stem).strip()
+    match = LEGACY_PREFIX_PATTERN.match(stem)
+    if match and match.group(1) != article_id:
+        return match.group(2)
+    return stem
+
+
+def build_import_base_name(article_id, stem):
+    stem = normalize_import_stem(article_id, stem)
+    article_id = str(article_id)
+    if stem.startswith(f"{article_id}-"):
+        return stem
+    return f"{article_id}-{stem}"
+
+
+def category_child_filters_import(include_private=False):
+    parts = ["category_show='yes'", "phpkb_categories.language_id = 2"]
+    if not include_private:
+        parts.insert(1, "category_status = 'public'")
+    return " AND ".join(parts)
+
+
+def parse_mapping_file(mapping_json):
+    """Return (articles_map, categories_map) from flat or structured JSON."""
+    if not mapping_json:
+        return {}, {}
+    if isinstance(mapping_json, dict) and (
+        "Articles" in mapping_json or "Categories" in mapping_json
+    ):
+        articles = mapping_json.get("Articles") or {}
+        categories = mapping_json.get("Categories") or {}
+        return articles, categories
+    return mapping_json, {}
+
+
+def build_category_dir_name(category_id, title, category_folder_map=None):
+    """Build import folder name: '{id}-{ascii_slug}' (same id-stem pattern as article files)."""
+    category_id = str(category_id)
+    folder_map = category_folder_map if category_folder_map is not None else KB_ID_TO_CATEGORY_FOLDER_MAP
+    slug = (folder_map or {}).get(category_id)
+    if slug:
+        return sanitize_filename(f"{category_id}-{slug}")
+    return sanitize_filename(f"{category_id}-{title}")
 
 # Function to search for pattern in hyperlinks file and replace
 def find_url_in_snippet(article_id, anchor):
@@ -48,21 +103,19 @@ def find_url_in_snippet(article_id, anchor):
     except (IOError, UnicodeDecodeError):
         return url
 
-def importCategoryChildren(parent, categoryDirectory, show='yes', status='public'):
+def importCategoryChildren(parent, categoryDirectory, include_private=False):
         id = parent[0]
         title = parent[1]
-        c4 = CONNECTION.cursor()    
+        c4 = CONNECTION.cursor()
         c4.execute(f"""
             SELECT DISTINCT (category_id), category_name, parent_id
             FROM phpkb_categories 
-            WHERE category_show='{show}' 
-            AND category_status = '{status}'
-            AND phpkb_categories.language_id = 2
+            WHERE {category_child_filters_import(include_private)}
             AND parent_id = {id}
             """)
         children = c4.fetchall()
         print("\n-----\n\nCategory {}. {}. Children: {}\n".format(id, title, children))
-        dirName = sanitize_filename('{}. {}'.format(id, str(title)))
+        dirName = build_category_dir_name(id, title)
         categoryDir = os.path.join(categoryDirectory, dirName)
         if os.path.exists(categoryDir): 
             print('Deleting dir:' + categoryDir)
@@ -71,7 +124,7 @@ def importCategoryChildren(parent, categoryDirectory, show='yes', status='public
         print('Importing articles to dir: ' + categoryDir + '\n')
         importArtciclesInCategory(id, categoryDir)
         for child in children:
-            importCategoryChildren(child, categoryDir)
+            importCategoryChildren(child, categoryDir, include_private=include_private)
         return children
     
         
@@ -98,15 +151,12 @@ def importArtciclesInCategory (categoryId, categoryDir):
         if existingFilename:
             sanitizedTitle = existingFilename
             print(f"Found existing filename: {existingFilename}")
-        else: 
+        else:
+            sanitizedTitle = normalize_import_stem(id, sanitizedTitle)
             updateMappingJson(id, sanitizedTitle, KB_ID_TO_TITLE_MAP, KB_ID_TO_TITLE_MAP_FILE)
             print(f"Using new filename: {sanitizedTitle}")
-        # Avoid duplicate kbId prefix in the target filename
-        if str(sanitizedTitle).startswith(f"{id}-"):
-            base_name = sanitizedTitle
-        else:
-            base_name = f"{id}-{sanitizedTitle}"
 
+        base_name = build_import_base_name(id, sanitizedTitle)
         filename = os.path.join(categoryDir, f"{base_name}.md")
         filename_html = os.path.join(categoryDir, f"{base_name}.html")
         print ('    Importing article: ' + filename)
@@ -314,21 +364,99 @@ def fetchCategories(show='yes', status='public', language_id=2, parent_id=''):
     return categories
 
 
+def fetchCategoryById(category_id):
+    c = CONNECTION.cursor()
+    c.execute(
+        """
+            SELECT category_id, category_name, parent_id
+            FROM phpkb_categories
+            WHERE category_id = %s
+            """,
+        (str(category_id),),
+    )
+    return c.fetchone()
+
+
 def listCategories(categories):
     index = 1
     for id, title, parent_id in categories:
         print(f"{index}. {id}. {title}")
         index += 1
 
+
+def prompt_include_private():
+    """Ask whether to walk category_status='private' children during import."""
+    answer = safe_input("Include private categories? (Y/n)", default="n").strip().lower()
+    return answer in ("y", "yes")
+
+
+def parse_args(argv=None):
+    parser = argparse.ArgumentParser(description="Import PHPKB categories/articles to local files.")
+    parser.add_argument(
+        "--category-id",
+        help="Import this PHPKB category tree non-interactively (e.g. 896 for V6).",
+    )
+    parser.add_argument(
+        "--kb-dir",
+        default=IMPORT_PATH_DEFAULT,
+        help=f"Output root directory. Default: {IMPORT_PATH_DEFAULT}",
+    )
+    parser.add_argument(
+        "--article-map",
+        default=KB_ID_TO_TITLE_MAP_FILE,
+        help=f"Gap-fill article id to filename stem map. Default: {KB_ID_TO_TITLE_MAP_FILE}",
+    )
+    parser.add_argument(
+        "--include-private",
+        action="store_true",
+        help="Import private categories (e.g. V6 root category 896).",
+    )
+    return parser.parse_args(argv)
+
+
+def initialize_article_map(mapping_file):
+    global KB_ID_TO_TITLE_MAP, KB_ID_TO_CATEGORY_FOLDER_MAP, KB_ID_TO_TITLE_MAP_FILE
+    KB_ID_TO_TITLE_MAP_FILE = mapping_file
+    articles, categories = parse_mapping_file(loadMappingJson(KB_ID_TO_TITLE_MAP_FILE) or {})
+    KB_ID_TO_TITLE_MAP = articles
+    KB_ID_TO_CATEGORY_FOLDER_MAP = categories
+
+
+def run_cli_import(category_id, kb_dir, include_private=False):
+    global KB_DIR, KB_ID_TO_FILENAME_MAP, CONNECTION, TOTAL_PAGES_IMPORTED
+
+    KB_DIR = kb_dir
+    KB_ID_TO_FILENAME_MAP = None
+    TOTAL_PAGES_IMPORTED = 0
+    server = None
+
+    try:
+        CONNECTION, server = establish_connection_interactive()
+        category = fetchCategoryById(category_id)
+        if not category:
+            print(f"Category {category_id} not found.")
+            return 1
+        print(f"Importing category tree {category[0]}. {category[1]} into {KB_DIR}")
+        importCategoryChildren(category, KB_DIR, include_private=include_private)
+        print(f"Import finished. Total articles imported: {TOTAL_PAGES_IMPORTED}")
+        return 0
+    except KeyboardInterrupt:
+        return 1
+    finally:
+        ensure_cleanup(CONNECTION, server)
+
+
 def main():
-    
-    global KB_ID_TO_TITLE_MAP
-        
-    KB_ID_TO_TITLE_MAP = loadMappingJson(KB_ID_TO_TITLE_MAP_FILE)
-    
-    if len(KB_ID_TO_TITLE_MAP) == 0:
-        KB_ID_TO_TITLE_MAP = dict()
-    
+    global KB_ID_TO_TITLE_MAP, KB_DIR
+
+    initialize_article_map(KB_ID_TO_TITLE_MAP_FILE)
+
+    import_path = safe_input(
+        f'Path to import (default `{IMPORT_PATH_DEFAULT}`)',
+        default=IMPORT_PATH_DEFAULT,
+    )
+    KB_DIR = import_path.strip() if import_path and import_path.strip() else IMPORT_PATH_DEFAULT
+
     global CONNECTION
     server = None
     
@@ -407,10 +535,19 @@ def main():
                         break
 
         else:
+            include_private = prompt_include_private()
             if len(categories) > 1 and categories[categoryChoice]:
-                importCategoryChildren(categories[categoryChoice], KB_DIR)
+                importCategoryChildren(
+                    categories[categoryChoice],
+                    KB_DIR,
+                    include_private=include_private,
+                )
             elif len(categories) == 1:
-                importCategoryChildren(categories[0], KB_DIR)
+                importCategoryChildren(
+                    categories[0],
+                    KB_DIR,
+                    include_private=include_private,
+                )
     except KeyboardInterrupt:
         # Connection cleanup handled in finally block
         pass
@@ -444,18 +581,17 @@ def findFilenameByArticleId(article_id, docs_dir):
                 if file.endswith(".md"):
                     file_path = os.path.join(root, file)
                     filename = os.path.splitext(file)[0]
-                    if not filename=='index':
-                        try:
-                            with open(file_path, "r", encoding="utf-8") as f:
-                                for line in f:
-                                    match = re.match(r"kbId:\s*(\S+)", line.strip())
-                                    if match:
-                                        kb_id = match.group(1)
-                                        KB_ID_TO_FILENAME_MAP[kb_id] = filename
-                                        break  # Stop scanning this file after finding kbId
-                        except (UnicodeDecodeError, IOError):
-                            # Skip files that can't be read
-                            continue
+                    try:
+                        with open(file_path, "r", encoding="utf-8") as f:
+                            for line in f:
+                                match = re.match(r"kbId:\s*(\S+)", line.strip())
+                                if match:
+                                    kb_id = match.group(1)
+                                    KB_ID_TO_FILENAME_MAP[kb_id] = filename
+                                    break  # Stop scanning this file after finding kbId
+                    except (UnicodeDecodeError, IOError):
+                        # Skip files that can't be read
+                        continue
     
     foundFilename = KB_ID_TO_FILENAME_MAP.get(str(article_id))
     foundTitle = KB_ID_TO_TITLE_MAP.get(str(article_id))
@@ -464,31 +600,51 @@ def findFilenameByArticleId(article_id, docs_dir):
                 articleAnchor = find_url_in_snippet(article_id, None)
                 if articleAnchor:
                     articleAnchor = re.sub(r'\[(.*)\]', r'\1', articleAnchor)
-                    KB_ID_TO_FILENAME_MAP[str(article_id)] = articleAnchor
+                    KB_ID_TO_FILENAME_MAP[str(article_id)] = normalize_import_stem(
+                        article_id, articleAnchor
+                    )
                 elif foundTitle:
-                    KB_ID_TO_FILENAME_MAP[str(article_id)] = foundTitle
+                    KB_ID_TO_FILENAME_MAP[str(article_id)] = normalize_import_stem(
+                        article_id, foundTitle
+                    )
             except (IOError, UnicodeDecodeError):
                 # If hyperlinks file can't be read, use title as fallback
                 if foundTitle:
-                    KB_ID_TO_FILENAME_MAP[str(article_id)] = foundTitle
-                
-                
+                    KB_ID_TO_FILENAME_MAP[str(article_id)] = normalize_import_stem(
+                        article_id, foundTitle
+                    )
+
     # Lookup in the cached dictionary
     return KB_ID_TO_FILENAME_MAP.get(str(article_id))
 
 def updateMappingJson(key, value, mapping, mappingFilename):
-    mapping.update({str(key):value})
-    with open(mappingFilename, "w") as mappingFile: 
-        mappingJson = json.dumps(mapping, indent = 4, ensure_ascii=False)
-        print(mappingJson)
-        mappingFile.write(mappingJson)
-        
-def loadMappingJson(mappingFilename):
+    key = str(key)
+    mapping[key] = value
+    existing = loadMappingJson(mappingFilename) or {}
+    articles, categories = parse_mapping_file(existing)
+    articles[key] = value
+    payload = {"Articles": articles, "Categories": categories}
+    with open(mappingFilename, "w", encoding="utf-8") as mapping_file:
+        json.dump(payload, mapping_file, indent=4, ensure_ascii=False)
+        mapping_file.write("\n")
+    print(f"Updated article map entry {key} -> {value}")
 
-    with open(mappingFilename, "r") as mappingJsonFile: 
-        mappingJsonFileContent = mappingJsonFile.read()
-        mappingJson = json.loads(mappingJsonFileContent) if mappingJsonFileContent else dict()
-        return mappingJson
+
+def loadMappingJson(mappingFilename):
+    with open(mappingFilename, "r", encoding="utf-8") as mapping_json_file:
+        mapping_json_file_content = mapping_json_file.read()
+        return json.loads(mapping_json_file_content) if mapping_json_file_content else dict()
+
 
 if __name__ == "__main__":
+    cli_args = parse_args()
+    if cli_args.category_id:
+        initialize_article_map(cli_args.article_map)
+        raise SystemExit(
+            run_cli_import(
+                cli_args.category_id,
+                cli_args.kb_dir,
+                include_private=cli_args.include_private,
+            )
+        )
     main()

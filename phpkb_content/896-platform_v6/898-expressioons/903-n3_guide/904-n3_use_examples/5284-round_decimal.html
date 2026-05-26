@@ -1,0 +1,13 @@
+<h1>Округление вверх десятичного числа до двух знаков после запятой</h1><p>Для того, чтобы округлить десятичное число до двух знаков после  запятой (например, 16.782 до 16.79), введите следующее выражение:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">@prefix w3math: &lt;http://www.w3.org/2000/10/swap/math#&gt;.<br/>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.<br/>@prefix cmwmath: &lt;http://comindware.com/logics/math#&gt;.<br/>{<br/>    (<br/>        "Work" "Desyatichnoe") object:findProperty ?DesyatichnoeProperty.<br/>    ?item ?DesyatichnoeProperty ?Desyatichnoe.<br/>    (<br/>        ?Desyatichnoe  100) w3math:product ?number1.<br/>    ?number1 cmwmath:floor ?numberFloor.<br/>    (<br/>        ?number1  ?numberFloor ) cmwmath:difference ?difference.<br/>    if {<br/>        ?difference w3math:greaterThan 0.}<br/>    then {<br/>        (<br/>            ?numberFloor  1 ) cmwmath:sum  ?number2.<br/>        (<br/>            ?number2 100) w3math:quotient ?value.}<br/>    else{<br/>        (<br/>            ?number1 100) w3math:quotient ?value.}<br/>    }</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span style="text-decoration: underline;"><strong>где:</strong></span></p>
+<p><strong>Work</strong> – системное имя текущего Шаблона записи;</p>
+<p><strong>Desyatichnoe</strong> – системное имя атрибута типа "Число" (десятичное), который нужно округлить.</p>

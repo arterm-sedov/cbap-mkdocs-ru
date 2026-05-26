@@ -10,7 +10,7 @@ This report lists the Python scripts found in the repository root of `D:\Repo\CB
 | `kb_html_cleanup_hook.py` | MkDocs `on_post_page` hook that converts generated HTML into PHPKB-compatible HTML. | Used by MkDocs build pipeline; modifies output HTML in memory. |
 | `kb_html_cleanup_hook_v4.7.py` | Older v4.7 variant of the PHPKB cleanup hook. Uses fixed `https://kb.comindware.ru/assets/` image URLs. | Used by legacy v4.7 build configs. |
 | `phpkb_import.py` | Imports Russian PHPKB articles/categories from DB into Markdown/HTML files under `phpkb_content` by default. | Connects to PHPKB DB; writes imported `.md` and `.html`; updates `.article_id_filename_map_v5.json`. |
-| `phpkb_import_for_rag.py` | Same import pipeline as `phpkb_import.py`, but default target is `phpkb_content_rag`. | DB read plus local file export for RAG-oriented corpus. |
+| `phpkb_import_for_rag.py` | Same category/filename/CLI behavior as `phpkb_import.py` (V6 map, `--include-private`), but default target is `phpkb_content_rag` and export is markdown-only without mkdocs link/product transforms. | DB read plus local file export for RAG-oriented corpus. |
 | `phpkb_import_cmw_lab.py` | CMW Lab/v4 import variant. Uses `phpkb_content_cmw_lab`, language ID `1`, and `.article_id_filename_map_v4_cmw_lab.json`. | DB read plus local export of CMW Lab KB content. |
 | `phpkb_update_articles.py` | Pushes local Markdown/HTML content from `for_kb_import_ru` back into PHPKB articles. Also updates title, tags, `unlisted`. | Connects to DB; asks confirmation per article; updates PHPKB rows. |
 | `phpkb_copy_images.py` | Copies image assets from `for_kb_import_ru/` into `kb.comindware.ru/platform/v6.0`. | Copies `.png`, `.svg`, `.jpg`, `.jpeg`, `.gif`; overwrites by default. |

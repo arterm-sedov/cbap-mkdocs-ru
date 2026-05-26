@@ -1,0 +1,83 @@
+<h1>QR-код. Формирование с помощью C#-скрипта по нажатию кнопки</h1><p>В процессе настройки решения может понадобиться генерация QR-кода по нажатию кнопки (например, для формирования внутреннего кода для сотрудников). В данной статье мы рассмотрим пошаговую настройку генерации QR-кода по кнопке на форме.</p>
+<p><strong>1.</strong> В шаблоне записи, где вы планируете генерировать QR-код, создайте новый атрибут с типом данных «Текст» (<em><strong>QRinbase</strong></em>). Формат отображения не важен.</p>
+<p><strong>2.</strong> В том же шаблоне записи создайте ещё один атрибут с типом данных «Текст» (<strong><em>QRcode</em></strong>) и форматом отображения «HTML-текст». Установите флаг «Вычисляемый» и в поле «Вычисляемое выражение» вставьте следующую строку:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">
+<p>FORMAT("&lt;img align='center'src='data:image/png;base64,{0}'width='60' height='60' frameborder='0'&lt;/img&gt;",LIST($QRinbase))</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>где:</strong></p>
+<p><em><strong>width='60' / height='60'</strong> </em>— значения ширины и высоты QR-кода на форме;</p>
+<p><em><strong>QRinbase</strong> </em>— системное имя атрибута, созданного в п.1.</p>
+<div class="blue_note">Нам необходимо именно два атрибута, так как в первом будет храниться созданный QR-код в формате base64, а во втором — он же, но в формате изображения.</div>
+<p><strong>3.</strong> В том же шаблоне записи создайте новую кнопку (<em><strong>Сформировать QR-код</strong></em>) со следующими параметрами:</p>
+<ul>
+<li>Операция — C# скрипт;</li>
+<li>Контекст операции — Запись;</li>
+<li>Результат выполнения — Обновить данные.</li>
+</ul>
+<p>Во вкладке «Скрипт» вставьте следующее:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">
+<p>using System;</p>
+<p>using System.Collections.Generic;</p>
+<p>using System.Linq;</p>
+<p>using Comindware.Data.Entity;</p>
+<p>using Comindware.TeamNetwork.Api.Data.UserCommands;</p>
+<p>using Comindware.TeamNetwork.Api.Data;</p>
+<p>using RestSharp;</p>
+<p> </p>
+<p>class Script</p>
+<p>{</p>
+<p>    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)</p>
+<p>    {</p>
+<p>        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;</p>
+<p>        var link = Uri.EscapeDataString("https://yourinstance.comindware.net/#form/oa.1/form.2/" + userCommandContext.ObjectIds[0]);</p>
+<p>        byte[] AsBytes = new System.Net.WebClient().DownloadData</p>
+<p>            ("https://qrcode.tec-it.com/API/QRCode?size=small&amp;data="+link);</p>
+<p>      string AsBase64String = Convert.ToBase64String(AsBytes);</p>
+<p>       </p>
+<p>        var data = new Dictionary&lt;string, object&gt;</p>
+<p>        {</p>
+<p>            { "QRinbase", AsBase64String }</p>
+<p>        };</p>
+<p>        Api.TeamNetwork.ObjectService.EditWithAlias("RecordTemplate", userCommandContext.ObjectIds[0], data);</p>
+<p>       </p>
+<p>    var result = new UserCommandResult</p>
+<p>    {</p>
+<p>      Success = true,</p>
+<p>      Commited = true,</p>
+<p>      Messages = new[]</p>
+<p>      {</p>
+<p>        new UserCommandMessage</p>
+<p>        {</p>
+<p>          Severity = SeverityLevel.Normal,</p>
+<p>          Text = "QR-код сформирован"</p>
+<p>        }</p>
+<p>      }</p>
+<p>    };</p>
+<p>    return result;</p>
+<p>    }</p>
+<p>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>где:</strong></p>
+<p><strong><em>https://yourinstance.comindware.net/#form/oa.1/form.2/ </em></strong>— ссылка на форму в шаблоне записи, на которую пользователь должен попадать после сканирования QR-кода;</p>
+<p><strong><em>QRinbase</em></strong> — системное имя атрибута в текущем шаблоне записи, созданного в п.1, куда записывается QR-код в формате base64;</p>
+<p><em><strong>RecordTemplate</strong></em> — системное имя текущего шаблона записи;</p>
+<p><em><strong>QR-код сформирован</strong></em> — текст сообщения для пользователя при успешном выполнении операции.</p>
+<p><strong>4.</strong> В том же шаблоне записи вынесите атрибут, созданный в п.2, на нужную форму(ы). </p>
+<p><strong>5.</strong> Вынесите кнопку, созданную в п.3, в нужное место: на форму(ы) или на область кнопок для форм.</p>
+<p><strong>6.</strong> Протестируйте.</p>
