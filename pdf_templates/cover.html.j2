@@ -1,47 +1,56 @@
+{# PDF frontpage and page footers are driven by extra.pdf; see pdf_templates/README.md. #}
+{% set frontpage = pdf.frontpage %}
+{% set pageFooter = pdf.pageFooter %}
+{% set pdfCopyright = pdf.copyright %}
+{% set frontpageFooterRight = frontpage.footerRight | default(pdfCopyright) %}
+{% set pageFooterLeft = pageFooter.left | default('') %}
+{% set pageFooterRight = pageFooter.right | default(pdfCopyright) %}
 <style>
-
 @media print {
-    @page: first {
-        {
-            % if copyright is defined %
+    @page {
+        @bottom-left {
+            content: '{{ pageFooterLeft | e }}';
+            font-size: 1rem;
         }
 
         @bottom-right {
-            content: '{{ copyright | e }}';
+            content: '{{ pageFooterRight | e }}';
+            font-size: 1rem;
+        }
+    }
+
+    @page: first {
+        @bottom-right {
+            content: '{{ frontpageFooterRight | e }}';
         }
 
         @bottom-left {
-            content: '{{ publicationDate | e }}'
-        }
-
-            {
-            % endif %
+            content: '{{ frontpage.footerLeft | e }}';
         }
     }
 }
 </style>
 
-
 <article id="doc-cover">
-    {% if cover_logo is defined %}
+    {% if frontpage.logo or frontpage.headerRight %}
         <div class="wrapper upper">
             <div class="header">
-                <!--<div class="logo" style="background-image: url();"></div>-->
-                {% set imgUrl = cover_logo | to_url | replace('\\', '/') | replace('file://', 'file:///')  %}
-                <div class="logotype"><img src={{ imgUrl }}></div>
-                {% if author is defined %}<div class="author">{{ author | e }}</div>{% endif %}
+                {% if frontpage.logo %}
+                    {% set imgUrl = frontpage.logo | to_url | replace('\\', '/') | replace('file://', 'file:///')  %}
+                    <div class="logotype"><img src={{ imgUrl }}></div>
+                {% endif %}
+                {% if frontpage.headerRight %}<div class="header-right">{{ frontpage.headerRight | e }}</div>{% endif %}
             </div>
         </div>
     {% else %}
         <div class="wrapper"></div>
     {% endif %}
     <div class="wrapper middle">
-        <h1>{{ productName | e }} {{ productVersion | e }}</h1>
-        <h2>{{ cover_subtitle | e }}</h2>
+        <h1>{{ frontpage.title | e }}</h1>
+        <h2>{{ frontpage.subtitle | e }}</h2>
     </div>
     <div class="properties">
         <address>
-            <!--{% if author is defined %}<p id="author">{{ author | e }}</p>{% endif %}</div>-->            
         </address>
     </div>
 </article>
