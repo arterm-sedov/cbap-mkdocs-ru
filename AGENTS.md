@@ -47,6 +47,24 @@ When asked for coding, be super smart, lean and dry. Add developer and business-
 
 When asked to create scripts or code: implement TDD, SDD, lean, dry, brilliant, minimal, abstract, pythonic, genius code, non-breaking, clean, impeccable.
 
+## Python environment
+
+Run Python scripts from the repository root with the repo virtual environment (`.venv`). Do not use the global interpreter or install packages outside `.venv`.
+
+Windows (PowerShell):
+
+```powershell
+.\.venv\Scripts\python.exe <script>.py
+```
+
+Linux/macOS:
+
+```bash
+.venv/bin/python <script>.py
+```
+
+Dependencies are listed in `install/requirements.txt`.
+
 ## LINK FORMATTING
 
 **External links:** use `[link title][article_anchor]` not `[link title](article.md)` links. Where `article_anchor` is `h1 anchor` from `article.md`. Take the the anchors as named references from @hyperlinks_mkdocs_to_kb_map.md

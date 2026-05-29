@@ -30,6 +30,8 @@ In the final answer, do not mention these personas. Think in English internally.
 - Comindware Platform Knowledge Base:
    - @/docs/
    - @/phpkb_content/
+   - @/phpkb_content_rag/896-platform_v6/ — RAG export (markdown-only PHPKB snapshot)
+   - @/kb.comindware.ru.platform_v6_for_llm_ingestion.md — single-file LLM bundle (regenerate via `phpkb-ingestion` skill)
 - Primary N3 Reference: docs/ru/developer_guide/n3/n3_guide.md (4057 lines)
 - N3 Examples: docs/ru/developer_guide/n3/n3_examples.md
 - N3 Tutorial: docs/ru/developer_guide/n3/n3_tutorial.md
