@@ -49,7 +49,6 @@ updated: '2025-05-30 18:00:46'
 
   ```
   $link->atributSystemName
-
   ```
 
   Здесь:
@@ -64,7 +63,6 @@ updated: '2025-05-30 18:00:46'
   from a in db->recordTemplateSystemName
   where EQUALS(a->attirbute1, $attribute2)
   select a->id
-
   ```
 
   Здесь:
@@ -79,7 +77,6 @@ updated: '2025-05-30 18:00:46'
 
   ```
   $cmw.task.objectId->op.11
-
   ```
 
   Здесь `op.11` — ID атрибута в связанном шаблоне записи.
@@ -87,7 +84,6 @@ updated: '2025-05-30 18:00:46'
 
   ```
   $$BusinessObject->attributeSystemName
-
   ```
 
   Здесь `attributeSystemName` — системное имя атрибута в связанном шаблоне записи.
@@ -126,7 +122,6 @@ updated: '2025-05-30 18:00:46'
 
 ```
 $Driver->Name
-
 ```
 
 Переходить по ссылкам можно неограниченное количество раз, но будьте внимательны, чтобы не образовалось зацикливание.
@@ -172,7 +167,6 @@ $Driver->Name
   where a->CityName == "Москва"
   orderby a->Districts->DistrictName descending
   select a->Districts
-
   ```
 - Запрос названий и авторов книг, у которых указан автор, с сортировкой по возрастанию имени автора и выводом в формате *«Название: название книги. Автор: имя автора»*.
 
@@ -185,7 +179,6 @@ $Driver->Name
           'Название: ', book->Name, '. Автор: ', book->Author->Name
       )
   )
-
   ```
 - Запрос просроченных отправлений (основной запрос) со склада в Сибири (вложенный запрос).
 
@@ -196,7 +189,6 @@ $Driver->Name
   select warehouse->shipments
   )
   where shipment->DeliveryDate < NOW() select shipment->id
-
   ```
 
 --8<-- "related_topics_heading.md"

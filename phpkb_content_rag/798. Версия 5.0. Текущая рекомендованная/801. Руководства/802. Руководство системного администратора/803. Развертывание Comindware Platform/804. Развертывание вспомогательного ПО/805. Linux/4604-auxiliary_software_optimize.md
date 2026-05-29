@@ -86,7 +86,6 @@ updated: '2023-09-22 14:51:00'
 
    ```
    сluster.max_shards_per_node: 3000
-
    ```
 3. Перезапустите службу Elasticsearch, чтобы изменения вступили в силу.
 
@@ -150,5 +149,4 @@ updated: '2023-09-22 14:51:00'
    gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
    ...
    }
-
    ```

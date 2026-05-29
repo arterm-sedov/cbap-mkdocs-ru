@@ -85,7 +85,6 @@ updated: '2025-08-12 18:19:25'
 
      ```
      FORMAT("https://your-host/#Resolver/{0}", LIST($id))
-
      ```
 
    Внимание!
@@ -117,7 +116,6 @@ updated: '2025-08-12 18:19:25'
          # Считываем имя файла из значения атрибута «Файл» и возвращаем его.
          ?DocumentAttributeValue document:title ?value.
      }
-
      ```
 
      Язык N3

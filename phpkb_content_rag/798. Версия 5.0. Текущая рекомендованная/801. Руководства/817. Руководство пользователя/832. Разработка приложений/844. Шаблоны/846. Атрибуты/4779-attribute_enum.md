@@ -27,25 +27,21 @@ updated: '2025-05-30 18:01:50'
 
   ```
   $EnumAttributeSystemName—>cmw.variantName
-
   ```
 - системное имя значения атрибута:
 
   ```
   $EnumAttributeSystemName—>cmw.variantAlias
-
   ```
 - код значка значения атрибута:
 
   ```
   $EnumAttributeSystemName—>cmw.variantIcon
-
   ```
 - цвет значения атрибута в десятичном формате:
 
   ```
   $EnumAttributeSystemName—>cmw.color
-
   ```
 
 Установка значения атрибута с помощью формулы
@@ -56,7 +52,6 @@ updated: '2025-05-30 18:01:50'
 
   ```
   ID(ENUMVALUE("EnumAttributeSystemName", "EnumValueSystemName"))
-
   ```
 
 Сравнение значения атрибута с помощью формулы
@@ -67,41 +62,35 @@ updated: '2025-05-30 18:01:50'
 
   ```
   $EnumAttributeSystemName == EnumValueSystemName
-
   ```
 
   или
 
   ```
   EQUALS($EnumAttributeSystemName->cmw.variantAlias, "EnumValueSystemName")
-
   ```
 
   или
 
   ```
   EQUALS($EnumAttributeSystemName, ENUMVALUE("EnumAttributeSystemName", "EnumValueSystemName"))
-
   ```
 - неравенство
 
   ```
   $EnumAttributeSystemName !== EnumValueSystemName
-
   ```
 
   или
 
   ```
   NOT(EQUALS($EnumAttributeSystemName->cmw.variantAlias, "EnumValueSystemName"))
-
   ```
 
   или
 
   ```
   NOT(EQUALS($EnumAttributeSystemName, ENUMVALUE("EnumAttributeSystemName", "EnumValueSystemName")))
-
   ```
 
 Префиксы N3 для работы с атрибутом
@@ -115,7 +104,6 @@ updated: '2025-05-30 18:01:50'
 @prefix cmwentity: <http://comindware.com/ontology/entity#>.
 @prefix string: <http://www.w3.org/2000/10/swap/string#>.
 @prefix convert: <http://comindware.com/logics/convertions#>.
-
 ```
 
 Получение данных из атрибута с помощью N3
@@ -126,19 +114,16 @@ updated: '2025-05-30 18:01:50'
 
   ```
   ("EnumAttributeSystemName" "enumValueSystemName") convert:enumValue ?enumValueId.
-
   ```
 - объект с атрибутом:
 
   ```
   ("TemplateSystemName" "EnumAttributeSystemName") object:findProperty ?enumAttribute.
-
   ```
 - из объекта с атрибутом — массив возможных значений атрибута в текущей записи:
 
   ```
   ?item ?enumAttribute ?enumAttributeValues.
-
   ```
 
   **Из этого массива можно получить:**
@@ -147,25 +132,21 @@ updated: '2025-05-30 18:01:50'
 
     ```
     ?enumAttributeValues cmw:variantName ?enumValueId.
-
     ```
   - системное имя значения атрибута:
 
     ```
     ?enumAttributeValues cmw:variantAlias ?enumValueSystemName.
-
     ```
   - код значка значения атрибута:
 
     ```
     ?enumAttributeValues cmw:variantIcon ?enumValueIcon.
-
     ```
   - цвет значения атрибута в десятичном формате:
 
     ```
     ?enumAttributeValues cmw:color ?enumValueColor.
-
     ```
 
 Получение значения атрибута на определённом языке с помощью N3
@@ -196,7 +177,6 @@ updated: '2025-05-30 18:01:50'
         # записываем значение на русском языке в вычисляемый атрибут.
         ?names l10n:data ?value.
 # переходим к следующей итерации по ?enumValueLanguageVersions.
-
 ```
 
 Установка значения атрибута с помощью N3
@@ -207,13 +187,11 @@ updated: '2025-05-30 18:01:50'
 
   ```
   ("EnumAttributeSystemName" "ValueSystemName") convert:enumValue ?enumValueId.
-
   ```
 - вернуть полученный ID:
 
   ```
   ?enumIdOverdue -> ?value.
-
   ```
 
 Сравнение значения атрибута с помощью N3
@@ -247,7 +225,6 @@ updated: '2025-05-30 18:01:50'
           false -> ?value.
       }
   }
-
   ```
 
 Фильтрация значения атрибута с помощью N3
@@ -267,7 +244,6 @@ updated: '2025-05-30 18:01:50'
       # Возвращаем записи, у которых атрибут имеет значение "enumValueSystemName".
       ?item ?enumAttribute ?enumValueId.
   }
-
   ```
 - Фильтрация добавляемых записей (в таблице на форме или раскрывающемся списке на форме) записей с требуемым значением атрибута:
 
@@ -284,7 +260,6 @@ updated: '2025-05-30 18:01:50'
       ?filteredRecordIds ?enumAttribute ?enumValueId.
       ?filteredRecordIds -> ?value.
   }
-
   ```
 - Фильтрация отображаемых записей (в таблице на форме, раскрывающемся списке на форме, вычисляемом атрибуте или правиле для формы) записей с требуемым значением атрибута:
 
@@ -305,7 +280,6 @@ updated: '2025-05-30 18:01:50'
       ?filteredRecordIds ?enumAttribute ?enumValueId.
       ?filteredRecordIds -> ?value.
   }
-
   ```
 
 ## Настройка свойств атрибута

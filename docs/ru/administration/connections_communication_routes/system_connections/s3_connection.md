@@ -76,7 +76,7 @@ hide:
 2. Откройте для редактирования файл конфигурации экземпляра ПО:
 
     ``` sh
-    vim /usr/share/comindware/configs/instance/<instanceName>.yml
+    nano /usr/share/comindware/configs/instance/<instanceName>.yml
     ```
 
     Здесь  `<instanceName>` — имя экземпляра ПО.

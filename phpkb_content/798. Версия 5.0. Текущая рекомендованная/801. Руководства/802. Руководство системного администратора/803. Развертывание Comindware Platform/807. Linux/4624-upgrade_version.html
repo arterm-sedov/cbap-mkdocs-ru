@@ -11,70 +11,90 @@
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_introduction">
 <span class="md-ellipsis">
-      Введение
+      
+        Введение
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_update_procedure">
 <span class="md-ellipsis">
-      Порядок обновления версии экземпляра ПО
+      
+        Порядок обновления версии экземпляра ПО
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_preparation">
 <span class="md-ellipsis">
-      Подготовка экземпляра ПО к обновлению
+      
+        Подготовка экземпляра ПО к обновлению
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_instance_software_update">
 <span class="md-ellipsis">
-      Обновление версии ПО для экземпляра
+      
+        Обновление версии ПО для экземпляра
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_config_edit">
 <span class="md-ellipsis">
-      Обновление конфигурации ПО и служб
+      
+        Обновление конфигурации ПО и служб
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_check_service_statuses">
 <span class="md-ellipsis">
-      Проверка конфигурации ОС и служб
+      
+        Проверка конфигурации ОС и служб
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_initialize">
 <span class="md-ellipsis">
-      Инициализация экземпляра ПО
+      
+        Инициализация экземпляра ПО
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_data_structure_update_and_verification">
 <span class="md-ellipsis">
-      Обновление и проверка структуры данных
+      
+        Обновление и проверка структуры данных
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_prepare">
 <span class="md-ellipsis">
-      Подготовка восстановленного ПО к работе
+      
+        Подготовка восстановленного ПО к работе
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
 <span class="md-ellipsis">
-      Связанные статьи
+      
+        Связанные статьи
+      
     </span>
 </a>
 </li>
@@ -107,7 +127,6 @@
 <li>Удостоверьтесь, что все компоненты вспомогательного ПО установлены корректно.</li>
 <li>При необходимости обновите или установите вспомогательное ПО.</li>
 <li>Установите новую версию ПО.</li>
-<li>Удалите экземпляр ПО старой версии.</li>
 <li>Создайте экземпляр ПО новой версии.</li>
 </ul>
 </li>
@@ -132,6 +151,7 @@
 </ul>
 </li>
 <li>Подготовьте восстановленный экземпляр ПО к работе.</li>
+<li>Удалите экземпляр ПО старой версии и его данные.</li>
 </ol>
 <h2 class="pageBreakBefore" id="upgrade_version_linux_preparation">Подготовка экземпляра ПО к обновлению</h2>
 <div class="notice notice-warning">
@@ -149,11 +169,11 @@
 <li>
 <p id="NginxBackup">Сохраните резервную копию файлов конфигурации, например в директорию <code>/var/backups/config_tmp</code>:</p>
 <ul>
-<li><strong>Astra Linux</strong>, <strong>Ubuntu</strong>, <strong>Debian</strong> (DEB-based)</li>
+<li><strong>Astra Linux, Debian, DEB-дистрибутивы</strong></li>
 </ul>
 <div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>/var/backups/config_tmp/</code> <br/><code><span class="nb">cd</span><span class="w"> </span>/var/www/&lt;instanceName&gt;/</code> <br/><code>cp<span class="w"> </span>*.config<span class="w"> </span>*.yml<span class="w"> </span>*.json<span class="w"> </span>/var/backups/config_tmp/</code> <br/><code>cp<span class="w"> </span>/etc/nginx/sites-available/comindware&lt;instanceName&gt;<span class="w"> </span>/var/backups/config_tmp/</code> <br/><code>cp<span class="w"> </span>/etc/sysconfig/comindware&lt;instanceName&gt;-env<span class="w"> </span>/var/backups/config_tmp/</code> <br/><code>cp<span class="w"> </span>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml<span class="w"> </span>/var/backups/config_tmp/</code> <br/></pre></code></div>
 <ul>
-<li><strong>РЕД ОС</strong>, <strong>Rocky</strong> (RPM-based)</li>
+<li><strong>РЕД ОС, RPM-дистрибутивы</strong></li>
 </ul>
 <div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>/var/backups/config_tmp/</code> <br/><code><span class="nb">cd</span><span class="w"> </span>/var/www/&lt;instanceName&gt;/</code> <br/><code>cp<span class="w"> </span>*.config<span class="w"> </span>*.yml<span class="w"> </span>*.json<span class="w"> </span>/var/backups/config_tmp/</code> <br/><code>cp<span class="w"> </span>/etc/nginx/conf.d/comindware&lt;instanceName&gt;<span class="w"> </span>/var/backups/config_tmp/</code> <br/><code>cp<span class="w"> </span>/etc/sysconfig/comindware&lt;instanceName&gt;-env<span class="w"> </span>/var/backups/config_tmp/</code> <br/><code>cp<span class="w"> </span>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml<span class="w"> </span>/var/backups/config_tmp/</code> <br/></pre></code></div>
 <ul>
@@ -185,6 +205,7 @@
 <p>Выполните приведённые ниже шаги для каждого экземпляра ПО, версию которого требуется обновить, так как скрипт обновления выполняется отдельно для указанного экземпляра ПО.</p>
 <p>Установка вспомогательного ПО и дистрибутива с новой версией ПО осуществляется только при обновлении первого экземпляра ПО. При обновлении последующих экземплятов ПО на эту версию, повторять шаги 1-5 не требуется.</p>
 <p>После обновления всех экземпляров ПО для экономии места старую версию ПО можно удалить согласно инструкции <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622#deploy_guide_linux_delete_version">Удаление версии ПО</a>»</em>.</p>
+<p>Удалить старую версию ПО можно только при отсутствии других экземпляров ПО версии.</p>
 </div>
 <ol class="colored_numbers_list">
 <li>
@@ -224,10 +245,6 @@
 <p>Отобразится список установленных версий ПО на сервере.</p>
 </li>
 <li>
-<p>Удалите экземпляр ПО старой версии и его данные:</p>
-<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>instance_delete.sh<span class="w"> </span>-n<span class="o">=</span>&lt;instanceName&gt;<span class="w"> </span>--deleteData</code> <br/></pre></code></div>
-</li>
-<li>
 <p>Создайте экземпляр ПО новой версии:</p>
 <div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>instance_create.sh<span class="w"> </span>-n<span class="o">=</span>&lt;instanceName&gt;<span class="w"> </span>-p<span class="o">=</span>&lt;portNumber&gt;<span class="w"> </span>-v<span class="o">=</span>&lt;version&gt;</code> <br/></pre></code></div>
 <p>Здесь:</p>
@@ -253,11 +270,11 @@
 <p>Отредактируйте конфигурацию NGINX для экземпляра ПО в соответствии с резервной копией, <a class="mkdocs_imported_link" href="#NginxBackup">сохранённой ранее</a>:</p>
 <ul>
 <li>
-<p><strong>Astra Linux</strong>, <strong>Ubuntu</strong>, <strong>Debian</strong> (DEB-based)</p>
+<p><strong>Astra Linux, Debian, DEB-дистрибутивы</strong></p>
 <div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/etc/nginx/sites-available/comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
 </li>
 <li>
-<p><strong>РЕД ОС</strong>, <strong>Rocky</strong> (RPM-based)</p>
+<p><strong>РЕД ОС, RPM-дистрибутивы</strong></p>
 <div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/etc/nginx/conf.d/comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
 </li>
 <li>
@@ -318,11 +335,11 @@
 <li>
 <p>Установите следующие директивы:</p>
 <ul>
-<li><strong>Astra Linux</strong>, <strong>Ubuntu</strong>, <strong>Debian</strong> (DEB-based)</li>
+<li><strong>Astra Linux, Debian, DEB-дистрибутивы</strong></li>
 </ul>
 <div class="highlight"><code><pre><span></span><code><span class="err">www-data soft nproc 200000</span></code> <br/><code><span class="err">www-data hard nproc 200000</span></code> <br/><code><span class="err">www-data soft nofile 200000</span></code> <br/><code><span class="err">www-data hard nofile 200000</span></code> <br/></pre></code></div>
 <ul>
-<li><strong>РЕД ОС</strong>, <strong>Rocky</strong> (RPM-based)</li>
+<li><strong>РЕД ОС, RPM-дистрибутивы</strong></li>
 </ul>
 <div class="highlight"><code><pre><span></span><code><span class="err">nginx soft nproc 200000</span></code> <br/><code><span class="err">nginx hard nproc 200000</span></code> <br/><code><span class="err">nginx soft nofile 200000</span></code> <br/><code><span class="err">nginx hard nofile 200000</span></code> <br/></pre></code></div>
 <ul>
@@ -395,7 +412,13 @@
 </li>
 <li>
 <p>Перейдите в папку с экземпляром ПО и поменяйте права для скопированной директории с базой данных:</p>
-<div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/</code> <br/><code>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">777</span><span class="w"> </span>Database/<span class="w"> </span></code> <br/><code>sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span>www-data:www-data<span class="w"> </span>Database/</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/</code> <br/><code>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">777</span><span class="w"> </span>Database/<span class="w"> </span></code> <br/></pre></code></div>
+<p><strong>Astra Linux, Debian, DEB-дистрибутивы</strong></p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span>www-data:www-data<span class="w"> </span>Database/</code> <br/></pre></code></div>
+<p><strong>РЕД ОС, RPM-дистрибутивы</strong></p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span>nginx:nginx<span class="w"> </span>Database/</code> <br/></pre></code></div>
+<p><strong>Альт Сервер</strong></p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span>_nginx:_nginx<span class="w"> </span>Database/</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Обновите структуру данных.</p>
@@ -489,11 +512,11 @@
 <li>
 <p>Назначьте владельца директории с базой данных:</p>
 <ul>
-<li><strong>Astra Linux, Ubuntu, Debian</strong> (DEB-based)</li>
+<li><strong>Astra Linux, Debian, DEB-дистрибутивы</strong></li>
 </ul>
 <div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>www-data:www-data<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/Database</code> <br/></pre></code></div>
 <ul>
-<li><strong>РЕД ОС, Rocky</strong> (RPM-based)</li>
+<li><strong>РЕД ОС, RPM-дистрибутивы</strong></li>
 </ul>
 <div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>nginx:nginx<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/Database</code> <br/></pre></code></div>
 <ul>
@@ -511,6 +534,10 @@
 <li>Проверьте и при необходимости исправьте конфигурацию экземпляра ПО. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4651">Проверка и настройка конфигурации экземпляра ПО Comindware Platform после восстановления из резервной копии</a>»</em>.</li>
 <li>Проверьте и работоспособность экземпляра ПО.</li>
 <li>Создайте резервную копию работоспособного экземпляра <strong>Comindware Platform</strong>.</li>
+<li>
+<p>Удалите экземпляр ПО старой версии и его данные:</p>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>instance_delete.sh<span class="w"> </span>-n<span class="o">=</span>&lt;instanceName&gt;<span class="w"> </span>--deleteData</code> <br/></pre></code></div>
+</li>
 </ol>
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
@@ -532,5 +559,5 @@
 </main>
 </div>
 <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
-document$.subscribe(() => { lightbox.reload() });
+document$.subscribe(()=>{ lightbox.reload(); });
 </script></div>

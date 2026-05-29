@@ -58,19 +58,16 @@ updated: '2026-01-26 18:43:57'
 
    ```
    "C:\\Program Files\\Elasticsearch\\elasticsearch-<8.XX.X>\\bin\\elasticsearch-service.bat" install
-
    ```
 6. Запустите службу Elasticsearch, выполнив следующую команду:
 
    ```
    "C:\\Program Files\\Elasticsearch\\elasticsearch-<8.XX.X>\\bin\\elasticsearch-service.bat" start
-
    ```
 7. Сформируйте пароль для пользователя Elasticsearch с помощью следующей команды:
 
    ```
    "C:\\Program Files\\Elasticsearch\\elasticsearch-<8.XX.X>\\bin\\elasticsearch-reset-password.bat" –u elastic
-
    ```
 8. Сохраните пароль, который отобразится на экране.
 
@@ -114,7 +111,6 @@ updated: '2026-01-26 18:43:57'
    #journal.enabled: false
    # Выключение проверки валидации сертификатов
    #journal.certificateSkipValidation: false
-
    ```
 2. После изменения конфигурации подключения к Elasticsearch перезапустите экземпляр ПО.
 
@@ -182,7 +178,6 @@ indices.id_field_data.enabled: true
 
 # Геолокация отключена
 ingest.geoip.downloader.enabled: false
-
 ```
 
 --8<-- "related_topics_heading.md"

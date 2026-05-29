@@ -119,7 +119,6 @@ updated: '2025-02-11 14:42:03'
 
   ```
   ObjectType@[ContainerSystemName].ObjectSystemName
-
   ```
 - **Instance** — экземпляр **{{ productName }}**.
 - **Property** — свойство объекта.

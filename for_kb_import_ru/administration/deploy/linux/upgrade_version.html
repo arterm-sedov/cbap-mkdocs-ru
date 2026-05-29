@@ -11,70 +11,90 @@
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_introduction">
 <span class="md-ellipsis">
-      Введение
+      
+        Введение
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_update_procedure">
 <span class="md-ellipsis">
-      Порядок обновления версии экземпляра ПО
+      
+        Порядок обновления версии экземпляра ПО
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_preparation">
 <span class="md-ellipsis">
-      Подготовка экземпляра ПО к обновлению
+      
+        Подготовка экземпляра ПО к обновлению
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_instance_software_update">
 <span class="md-ellipsis">
-      Обновление версии ПО для экземпляра
+      
+        Обновление версии ПО для экземпляра
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_config_edit">
 <span class="md-ellipsis">
-      Обновление конфигурации ПО и служб
+      
+        Обновление конфигурации ПО и служб
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_check_service_statuses">
 <span class="md-ellipsis">
-      Проверка конфигурации ОС и служб
+      
+        Проверка конфигурации ОС и служб
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_initialize">
 <span class="md-ellipsis">
-      Инициализация экземпляра ПО
+      
+        Инициализация экземпляра ПО
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_data_structure_update_and_verification">
 <span class="md-ellipsis">
-      Обновление и проверка структуры данных
+      
+        Обновление и проверка структуры данных
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#upgrade_version_linux_prepare">
 <span class="md-ellipsis">
-      Подготовка восстановленного ПО к работе
+      
+        Подготовка восстановленного ПО к работе
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
 <span class="md-ellipsis">
-      Связанные статьи
+      
+        Связанные статьи
+      
     </span>
 </a>
 </li>
@@ -107,7 +127,6 @@
 <li>Удостоверьтесь, что все компоненты вспомогательного ПО установлены корректно.</li>
 <li>При необходимости обновите или установите вспомогательное ПО.</li>
 <li>Установите новую версию ПО.</li>
-<li>Удалите экземпляр ПО старой версии.</li>
 <li>Создайте экземпляр ПО новой версии.</li>
 </ul>
 </li>
@@ -132,6 +151,7 @@
 </ul>
 </li>
 <li>Подготовьте восстановленный экземпляр ПО к работе.</li>
+<li>Удалите экземпляр ПО старой версии и его данные.</li>
 </ol>
 <h2 class="pageBreakBefore" id="upgrade_version_linux_preparation">Подготовка экземпляра ПО к обновлению</h2>
 <div class="notice notice-warning">
@@ -185,6 +205,7 @@
 <p>Выполните приведённые ниже шаги для каждого экземпляра ПО, версию которого требуется обновить, так как скрипт обновления выполняется отдельно для указанного экземпляра ПО.</p>
 <p>Установка вспомогательного ПО и дистрибутива с новой версией ПО осуществляется только при обновлении первого экземпляра ПО. При обновлении последующих экземплятов ПО на эту версию, повторять шаги 1-5 не требуется.</p>
 <p>После обновления всех экземпляров ПО для экономии места старую версию ПО можно удалить согласно инструкции <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622#deploy_guide_linux_delete_version">Удаление версии ПО</a>»</em>.</p>
+<p>Удалить старую версию ПО можно только при отсутствии экземпляров ПО данной версии.</p>
 </div>
 <ol class="colored_numbers_list">
 <li>
@@ -222,10 +243,6 @@
 </li>
 <li>
 <p>Отобразится список установленных версий ПО на сервере.</p>
-</li>
-<li>
-<p>Удалите экземпляр ПО старой версии и его данные:</p>
-<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>instance_delete.sh<span class="w"> </span>-n<span class="o">=</span>&lt;instanceName&gt;<span class="w"> </span>--deleteData</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Создайте экземпляр ПО новой версии:</p>
@@ -517,6 +534,10 @@
 <li>Проверьте и при необходимости исправьте конфигурацию экземпляра ПО. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4651">Проверка и настройка конфигурации экземпляра ПО Comindware Platform после восстановления из резервной копии</a>»</em>.</li>
 <li>Проверьте и работоспособность экземпляра ПО.</li>
 <li>Создайте резервную копию работоспособного экземпляра <strong>Comindware Platform</strong>.</li>
+<li>
+<p>Удалите экземпляр ПО старой версии и его данные:</p>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>instance_delete.sh<span class="w"> </span>-n<span class="o">=</span>&lt;instanceName&gt;<span class="w"> </span>--deleteData</code> <br/></pre></code></div>
+</li>
 </ol>
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
@@ -538,5 +559,5 @@
 </main>
 </div>
 <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
-document$.subscribe(() => { lightbox.reload() });
+document$.subscribe(()=>{ lightbox.reload(); });
 </script></div>

@@ -27,7 +27,6 @@ COUNT(
     where AND(EQUALS(a->Статус, "Согласована"), EQUALS(a-> _isDisabled, false))
     select a->id)
 )
-
 ```
 
 ### Синтаксис формулы

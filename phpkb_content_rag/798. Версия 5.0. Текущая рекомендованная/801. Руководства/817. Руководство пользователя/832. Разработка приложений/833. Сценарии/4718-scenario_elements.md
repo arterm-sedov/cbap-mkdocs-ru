@@ -353,7 +353,6 @@ class Script
         return result;
     }
 }
-
 ```
 
 _![Настройка действия «Проверить результат скрипта»](/platform/v5.0/business_apps/scenarios/img/scenario_actions_check_script_result.png)_
@@ -498,7 +497,6 @@ public class Script {
         return result;
     }
 }
-
 ```
 
 _![Настройка действия «Изменить значения скриптом»](/platform/v5.0/business_apps/scenarios/img/scenario_actions_change_value_script.png)_

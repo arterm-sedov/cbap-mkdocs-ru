@@ -35,7 +35,6 @@ updated: '2025-12-03 17:03:18'
       "orderNumber": "string",
       "quantity": "number"
   }]
-
   ```
 
 ## Создание конфигурации прокси-сервера NGINX
@@ -48,7 +47,6 @@ updated: '2025-12-03 17:03:18'
 
    ```
    sudo nano /etc/nginx/sites-available/proxy-service
-
    ```
 
    Здесь `proxy-service` — имя файла конфигурации NGINX. Вы можете использовать собственное наглядное имя.
@@ -72,7 +70,6 @@ updated: '2025-12-03 17:03:18'
            client_max_body_size 10M;
        }
    }
-
    ```
 
    Здесь:
@@ -88,19 +85,16 @@ updated: '2025-12-03 17:03:18'
 
    ```
    sudo ln -s /etc/nginx/sites-available/proxy-service /etc/nginx/sites-enabled/
-
    ```
 2. Проверьте корректность конфигурации NGINX:
 
    ```
    sudo nginx -t
-
    ```
 3. Если проверка прошла успешно, перезапустите NGINX:
 
    ```
    sudo systemctl restart nginx
-
    ```
 
 ## Настройка подключения в Comindware Platform
@@ -163,7 +157,6 @@ updated: '2025-12-03 17:03:18'
 
      ```
      from a in db->Заказы where a->НомерЗаказа==$$orderRequest->orderNumber select a->id
-
      ```
 
      Здесь:
@@ -193,7 +186,6 @@ updated: '2025-12-03 17:03:18'
        }' \\
        http://<your_host>:8123/api/public/orders/request \\
        -v`
-
    ```
 
    Здесь:
@@ -219,7 +211,6 @@ updated: '2025-12-03 17:03:18'
        }
      ]
    }
-
    ```
 
 ## Связанные статьи

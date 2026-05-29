@@ -136,5 +136,4 @@ Apache Ignite в минимально необходимой конфигура�
 
 </igniteConfiguration>
 </configuration>
-
 ```

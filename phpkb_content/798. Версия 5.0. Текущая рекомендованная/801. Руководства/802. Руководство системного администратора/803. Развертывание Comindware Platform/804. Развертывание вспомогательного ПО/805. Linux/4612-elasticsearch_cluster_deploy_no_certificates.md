@@ -53,7 +53,6 @@ updated: '2025-12-03 10:40:03'
 
    ```
    sudo apt update && sudo apt upgrade -y && sudo reboot
-
    ```
 
    В процессе обновления сервер перезагрузится.
@@ -61,13 +60,11 @@ updated: '2025-12-03 10:40:03'
 
    ```
    cd /home/username/
-
    ```
 3. Запустите процесс установки Elasticsearch:
 
    ```
    sudo dpkg --install elasticsearch-8.5.1-amd64.deb
-
    ```
 
    По окончании установки машина выдаст отчёт:
@@ -90,7 +87,6 @@ updated: '2025-12-03 10:40:03'
    Generate an enrollment token for Elasticsearch nodes with
    '/usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s node'.
    ---------------------------------------------------------------------
-
    ```
 4. Обратите внимание на строку `The generated password for the elastic built-in superuser is` — напротив неё будет выведен автоматически сформированный пароль для встроенного суперпользователя elastic. **Сохраните этот пароль.**
 
@@ -107,32 +103,27 @@ updated: '2025-12-03 10:40:03'
    sudo mkdir /var/elasticsearch/data
    sudo mkdir /var/elasticsearch/logs
    sudo mkdir /var/elasticsearch/backups
-
    ```
 2. Измените владельца папки и права доступа к ней:
 
    ```
    sudo chown elasticsearch:elasticsearch --recursive /var/elasticsearch/
    sudo chmod  764 --recursive /var/elasticsearch/
-
    ```
 3. Создайте папку для хранения резервной копии `yml`-файла конфигурации Elasticsearch:
 
    ```
    sudo mkdir /etc/elasticsearch/backupConfig
-
    ```
 4. Переместите `yml`-файл конфигурации Elasticsearch в папку `/etc/elasticsearch/backupConfig`:
 
    ```
    sudo mv /etc/elasticsearch/elasticsearch.yml /etc/elasticsearch/backupConfig
-
    ```
 5. Создайте новый  `yml`-файл конфигурации Elasticsearch `elasticsearch.yml`:
 
    ```
    sudo nano /etc/elasticsearch/elasticsearch.yml
-
    ```
 6. Скопируйте в созданный файл конфигурации следующее содержимое:
 
@@ -163,7 +154,6 @@ updated: '2025-12-03 10:40:03'
      - elasticsearch3
    #Этот флаг требуется для записи данных в индексы
    indices.id_field_data.enabled: true
-
    ```
 7. Сохраните изменения `yml`-файла конфигурации закройте текстовый редактор Nano, нажав клавиши: ++ctrl+O++, `Ввод`, `Ctrl`+`X`.
 8. Измените для `yml`-файла конфигурации Elasticsearch владельца и права доступа:
@@ -171,19 +161,16 @@ updated: '2025-12-03 10:40:03'
    ```
    sudo chown elasticsearch:elasticsearch --recursive /etc/elasticsearch/elasticsearch.yml
    sudo chmod 764 --recursive /etc/elasticsearch/elasticsearch.yml
-
    ```
 9. Откройте в текстовом редакторе Nano `yml`-файл конфигурации Elasticsearch:
 
    ```
    sudo nano /etc/elasticsearch/elasticsearch.yml
-
    ```
 10. Задайте имя кластера с помощью директивы `cluster.name` в строке 2 `yml`-файла конфигурации:
 
     ```
     cluster.name: elasticsearch.example.cbap
-
     ```
 
     Примечание
@@ -197,37 +184,31 @@ updated: '2025-12-03 10:40:03'
 
     ```
     node.name: elasticsearch1
-
     ```
 12. Укажите путь до директории, в которую настраиваемый узел Elasticsearch будет сохранять файлы данных шардов, отредактировав строку 13:
 
     ```
     path.data: /var/elasticsearch/data
-
     ```
 13. Укажите путь до директории, в которую настраиваемый узел Elasticsearch будет сохранять файлы логов, отредактировав строку 14:
 
     ```
     path.logs: /var/elasticsearch/logs
-
     ```
 14. Укажите путь до директории, в которую настраиваемый узел Elasticsearch будет сохранять файлы резервного копирования, отредактировав строку 15:
 
     ```
     path.repo: /var/elasticsearch/backups
-
     ```
 15. Укажите уникальный IP-адрес (как пример - 192.168.ХХХ.1) машины настраиваемого узла Elasticsearch, отредактировав строку 29:
 
     ```
     network.host: 192.168.XXX.1
-
     ```
 16. Задайте список IP-адресов машин (как пример - 192.168.XXX.1, 192.168.XXX.2, 192.168.XXX.3), на которых будут расположены узлы кластера Elasticsearch, отредактировав строку 31. Например, для кластера из трех узлов, директива будет вот такой:
 
     ```
     discovery.seed_hosts : ["192.168.XXX.1", "192.168.XXX.2","192.168.XXX.3"]
-
     ```
 17. Сохраните изменения `yml`-файла конфигурации и закройте текстовый редактор Nano, нажав клавиши: ++ctrl+O++, `Ввод`, `Ctrl`+`X`.
 
@@ -239,19 +220,16 @@ updated: '2025-12-03 10:40:03'
 
    ```
    sudo systemctl daemon-reload
-
    ```
 2. Добавьте процесс `elasticsearch.service` в список автозагрузки при запуске ОС и запустите его:
 
    ```
    sudo systemctl enable --now elasticsearch.service
-
    ```
 3. Убедитесь, что процесс `elasticsearch.service` запустился:
 
    ```
    sudo systemctl status elasticsearch.service
-
    ```
 
    Пример результата проверки статуса процесса elasticsearch.service```
@@ -269,7 +247,6 @@ updated: '2025-12-03 10:40:03'
              └─3676 /usr/share/elasticsearch/modules/x-pack-ml/platform/linux-x86_64/bin/controller
    Dec 01 10:11:12 penguin-02 systemd[1]: Starting Elasticsearch...
    Dec 01 10:12:27 penguin-02 systemd[1]: Started Elasticsearch.
-
    ```
 
    Примечание
@@ -278,13 +255,11 @@ updated: '2025-12-03 10:40:03'
 
    ```
    sudo less /var/elasticsearch/logs/yourClusterName.log
-
    ```
 4. С помощью curl убедитесь, что REST API узла Elasticsearch доступен:
 
    ```
    sudo curl <http://192.168.XXX.XX>Х:9200
-
    ```
 
    Пример ответа на запрос:
@@ -307,7 +282,6 @@ updated: '2025-12-03 10:40:03'
        },
    "tagline" : "You Know, for Search"
    }
-
    ```
 
 ## Проверка состояния кластера
@@ -316,7 +290,6 @@ updated: '2025-12-03 10:40:03'
 
    ```
    sudo curl <http://192.168.XXX.XX1:9200/_cluster/health?pretty>>
-
    ```
 2. Убедитесь, что в ответе на запрос значение параметра `number_of_nodes` равно количеству узлов кластера:
 
@@ -338,7 +311,6 @@ updated: '2025-12-03 10:40:03'
    "task_max_waiting_in_queue_millis" : 0,
    "active_shards_percent_as_number" : 100.0
    }
-
    ```
 
 ## Пример yml-файла конфигурации узла Elasticsearch
@@ -368,7 +340,6 @@ cluster.initial_master_nodes:
   - elasticsearch1
   - elasticsearch2
   - elasticsearch3
-
 ```
 
 --8<-- "related_topics_heading.md"

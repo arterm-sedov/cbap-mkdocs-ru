@@ -64,9 +64,23 @@
 
 <!-- Категории в БЗ. Конец -->
 
+[jmeter_download]: https://jmeter.apache.org/download_jmeter.cgi
+
+[gigachat_api_reference]: https://developers.sber.ru/docs/ru/gigachat/api/reference/rest/gigachat-api
+
+[gigachat_developer_portal]: https://developers.sber.ru/dev
+
+[gigachat_studio_login]: https://developers.sber.ru/studio/login
+
 [legal_policies]: https://www.comindware.ru/policy/
 
 [supportUrl]: https://www.comindware.ru/company/contact-us/#tab_support
+
+[vulnerability_policy]: {{ kbArticleURLPrefix }}5157
+
+[vulnerability_digest]: {{ kbArticleURLPrefix }}5159
+
+[vulnerability_pt_dec2025]: {{ kbArticleURLPrefix }}5158
 
 [apache_ignite_clustering]: https://ignite.apache.org/docs/latest/clustering/clustering
 
@@ -77,6 +91,8 @@
 [apache_ignite_partition_baseline_topology]: https://ignite.apache.org/docs/latest/clustering/baseline-topology
 
 [apache_ignite_partition_partition_loss_policy]: https://ignite.apache.org/docs/latest/configuring-caches/partition-loss-policy
+
+[spnego_http_auth_nginx_module]: https://github.com/stnoonan/spnego-http-auth-nginx-module
 
 [browser_push_permissions_chrome_official]: https://support.google.com/chrome/answer/3220216?hl=ru-RU&co=GENIE.Platform%3DDesktop
 
@@ -353,6 +369,8 @@
 
 [version_control_git]: {{ kbArticleURLPrefix }}4806
 
+[version_control_methodology]: {{ kbArticleURLPrefix }}5155
+
 {% endif %}
 
 {% if gostech or (not userGuide and (adminGuideLinux or adminGuideWindows)) or (tutorial and not userGuide) or kbExport %}
@@ -584,6 +602,10 @@
 [example_n3_periodic_task_notifications]: {{ kbArticleURLPrefix }}4905
 
 [example_task_hyperlink_n3_formula]: {{ kbArticleURLPrefix }}4879
+
+[example_list_color_indicator_formula]: {{ kbArticleURLPrefix }}4888
+
+[example_hyperlink_calculate_formula]: {{ kbArticleURLPrefix }}4918
 
 [example_task_accept_button_csharp]: {{ kbArticleURLPrefix }}5146
 
@@ -871,6 +893,8 @@
 
 [table_configure_tasks_view]: {{ kbArticleURLPrefix }}4800#table_configure_tasks_view
 
+[table_configure_add_to_my_tasks]: {{ kbArticleURLPrefix }}4800#table_configure_add_to_my_tasks
+
 [table_configure_template]: {{ kbArticleURLPrefix }}4800#table_configure_template
 
 [table_configure_properties]: {{ kbArticleURLPrefix }}4800#table_configure_properties
@@ -1001,7 +1025,15 @@
 
 [deploy_guide_linux_initialize]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_initialize
 
+[deploy_guide_linux_install_order]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_install_order
+
+[deploy_guide_linux_instance_create]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_instance_create
+
+[deploy_guide_linux_instance_start]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_instance_start
+
 [deploy_guide_linux_prerequisites_install]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_prerequisites_install
+
+[deploy_guide_linux_prerequisites_install_order]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_prerequisites_install_order
 
 [deploy_guide_linux_vm_max_map_count]: {{ kbArticleURLPrefix }}4622#deploy_guide_linux_vm_max_map_count
 

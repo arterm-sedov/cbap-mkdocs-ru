@@ -39,8 +39,7 @@ kbId: 4620
 {% endif %}
 - `/var/lib/comindware/<instanceName>/Database/db` — файлы базы данных.
 {% if not gostech %}
-- `/var/lib/comindware/<instanceName>/Database/log` — файлы журналов {{ apacheIgniteVariants }}.
-- `/var/log/comindware/<instanceName>/Logs/` — файлы журналов.
+- `/var/log/comindware/<instanceName>/Logs/` — файлы журналов (в том числе журналы {{ apacheIgniteVariants }}).
 {% endif %}
 - `/var/lib/comindware/<instanceName>/Database/Scripts` — скомпилированные библиотеки для скриптов на языке С#.
 - `/var/lib/comindware/<instanceName>/Streams` — загруженные пользователями и сформированные системой файлы, которые прикреплены к соответствующим атрибутам.

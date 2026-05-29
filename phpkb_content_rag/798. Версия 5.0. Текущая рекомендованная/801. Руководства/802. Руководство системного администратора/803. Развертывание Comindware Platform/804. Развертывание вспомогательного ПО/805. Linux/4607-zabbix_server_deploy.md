@@ -21,7 +21,6 @@ updated: '2025-03-31 16:54:52'
 
    ```
    sudo apt install -y nginx
-
    ```
 2. Загрузите deb-пакет из репозитория:
 
@@ -29,13 +28,11 @@ updated: '2025-03-31 16:54:52'
    sudo wget <https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.0-4%2Bubuntu22.04_all.deb>
    sudo dpkg -i zabbix-release_6.0-4+ubuntu22.04_all.deb
    sudo apt update
-
    ```
 3. Установите *Zabbix Server*, *Zabbix Frontend* и *Zabbix Agent*:
 
    ```
    sudo apt install -y zabbix-server-mysql zabbix-frontend-php zabbix-nginx-conf zabbix-sql-scripts zabbix-agent
-
    ```
 
 ## Установка и конфигурация MySQL
@@ -45,31 +42,26 @@ updated: '2025-03-31 16:54:52'
    ```
    sudo apt install -y mysql-server
    sudo systemctl enable --now mysql
-
    ```
 2. Запустите MySQL от имени суперпользователя root:
 
    ```
    sudo mysql
-
    ```
 3. После входа в консоль MySQL выполните запрос, подставив свои значения в поля `'root'`,`'localhost'` и `'password'`:
 
    ```
    ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
-
    ```
 4. Ожидаемый ответ консоли MySQL с подтверждением внесённых изменений:
 
    ```
    Query OK, 0 rows affected (0.01 sec)
-
    ```
 5. Выйдите из сеанса для пользователя root :
 
    ```
    quit;
-
    ```
 6. Запустите скрипт `mysql_secure_installation` и в интерактивном режиме согласитесь удалить тестовую базу данных и аккаунт анонимного пользователя:
 
@@ -118,7 +110,6 @@ updated: '2025-03-31 16:54:52'
 
    Success.
    All done!
-
    ```
 
 ## Создание базы данных для Zabbix в MySQL
@@ -127,13 +118,11 @@ updated: '2025-03-31 16:54:52'
 
    ```
    mysql -uroot -p
-
    ```
 2. Создайте базу данных `zabbix`:
 
    ```
    create database zabbix character set utf8mb4 collate utf8mb4_bin;
-
    ```
 3. Создайте пользователя `zabbix`. Не забудьте задать пароль:
 
@@ -142,13 +131,11 @@ updated: '2025-03-31 16:54:52'
    grant all privileges on zabbix.* to zabbix@localhost;
    SET GLOBAL log_bin_trust_function_creators = 1;
    quit;
-
    ```
 4. Создайте схему данных для Zabbix:
 
    ```
    zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | mysql --default-character-set=utf8mb4 -uzabbix -p zabbix
-
    ```
 5. Введите пароль пользователя zabbix для доступа к MySQL, заданный на шаге 3.3., и дождитесь завершения выполнения скрипта.
 
@@ -158,7 +145,6 @@ updated: '2025-03-31 16:54:52'
 
    ```
    sudo nano /etc/zabbix/zabbix_server.conf
-
    ```
 2. Укажите пароль пользователя zabbix (заданный на шаге 3.3) для доступа к MySQL:
 
@@ -171,7 +157,6 @@ updated: '2025-03-31 16:54:52'
    # Default:
    # DBPassword=
    DBPassword=password
-
    ```
 3. Сохраните изменения и выйдите.
 
@@ -181,21 +166,18 @@ updated: '2025-03-31 16:54:52'
 
    ```
    sudo nano /etc/zabbix/nginx.conf
-
    ```
 2. Раскомментируйте директивы `listen` и `server_name` и присвойте им значения:
 
    ```
    listen 8080;
    server_name <hostname>; # замените на своё имя хоста
-
    ```
 3. Запустите службы *Zabbix Server, Zabbix Agent, Zabbix Frontend* и *NGINX*:
 
    ```
    sudo systemctl daemon-reload
    sudo systemctl enable --now zabbix-server zabbix-agent nginx php8.1-fpm
-
    ```
 
 ## Использование Zabbix Frontend
@@ -229,7 +211,6 @@ updated: '2025-03-31 16:54:52'
    ```
    Admin
    zabbix
-
    ```
 
    ![Вход в Zabbix Frontend](https://kb.comindware.ru/assets/img_63af07227b847.png)
@@ -248,7 +229,6 @@ updated: '2025-03-31 16:54:52'
 
    ```
    sudo nano /etc/zabbix/zabbix_agentd.conf
-
    ```
 2. В файле конфигурации необходимо указать IP-адрес *Zabbix Server*. Если сервер развёрнут на наблюдаемой машине укажите IP-адрес 127.0.0.1 (если интерфейс loopback не настроен иначе):
 
@@ -265,38 +245,32 @@ updated: '2025-03-31 16:54:52'
    # Default:
    # Server=your.server.ip.address
    Server=127.0.0.1
-
    ```
 3. Отредактируйте директиву `ServerActive`:
 
    ```
    ServerActive=127.0.0.1
-
    ```
 4. Разрешите в сетевом экране использование порта 10050:
 
    ```
    sudo ufw allow 10050/tcp
-
    ```
 5. Примените изменения:
 
    ```
    sudo systemctl daemon-reload
    sudo ufw reload
-
    ```
 6. Запустите *Zabbix Agent* и добавьте его в список автозагрузки:
 
    ```
    sudo systemctl enable  --now zabbix-agent
-
    ```
 7. Удостоверьтесь, что служба работает:
 
    ```
    systemctl status zabbix.agent
-
    ```
 
 _![Ожидаемый статус сервиса Zabbix Agent](https://kb.comindware.ru/assets/img_63af05a8d77f5.png)_

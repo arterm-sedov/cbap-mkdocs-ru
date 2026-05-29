@@ -23,7 +23,6 @@ System Core API предоставляет системные RESTful-метод
 
   ```
   https://your-host/api/public/system/
-
   ```
 - System Core API поддерживает запросы `POST`.
 - Методы System Core API передают данные в формате JSON.
@@ -38,7 +37,6 @@ System Core API предоставляет системные RESTful-метод
 
   ```
   http://your-host/api/public/system/TeamNetwork/ObjectAppService/Create
-
   ```
 
   - В теле запроса (`body`) укажите системное имя шаблона записи (например, `"Car"`).
@@ -54,14 +52,12 @@ Swagger позволяет выполнять запросы и просматр
 
 ```
 https://your-host/docs/SystemApi
-
 ```
 
 URL-адрес JSON-спецификации System Core API:
 
 ```
 https://your-host/api/public/system/swagger
-
 ```
 
 Здесь `your-host` — доменное имя вашего сервера.
@@ -869,7 +865,6 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
     {"op.XXX": 40}
   ]
 }
-
 ```
 
 Здесь:
@@ -896,7 +891,6 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
     "2": {"op.XXX": 100}
   }
 }
-
 ```
 
 Здесь:
@@ -923,7 +917,6 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
     "2": {"op.XXX": 400}
   }
 }
-
 ```
 
 Здесь:

@@ -1,4 +1,5 @@
 from tools.ssh_kb_ru import establish_connection_interactive, close_connection
+from tools.graceful_interrupt import safe_input, ensure_cleanup
 import html
 from html.parser import HTMLParser
 import bs4
@@ -17,6 +18,17 @@ import datetime
 TOTAL_PAGES_UPDATED = 0
 CONNECTION = None
 KB_CONTENT_FOLDER = 'for_kb_import_ru'
+
+# Optional on .md-body: only unlisted articles emit kb-unlisted="1"; missing attribute means listed (0).
+_KB_UNLISTED_PATTERN = re.compile(r'kb-unlisted="([01])"')
+
+
+def parse_kb_unlisted(html_content: str) -> int:
+    """1 if export has kb-unlisted=\"1\", else 0 (attribute omitted for normal listed articles)."""
+    match = _KB_UNLISTED_PATTERN.search(html_content)
+    if not match:
+        return 0
+    return int(match.group(1))
 
 
 def updateCategoryChildren(parent):
@@ -78,7 +90,8 @@ def updateArticle(article_id):
     
     c = CONNECTION.cursor() #(buffered=True)
     c.execute(f"""
-            SELECT article_content, article_title, article_keywords from phpkb_articles WHERE article_id={article_id};
+            SELECT article_content, article_title, article_keywords, unlisted
+            FROM phpkb_articles WHERE article_id={article_id};
             """)
     
     result = c.fetchone()
@@ -89,13 +102,14 @@ def updateArticle(article_id):
     
     article_title = result[1]
     article_keywords = result[2]
+    article_unlisted_db = 0 if result[3] is None else int(result[3])
     content_result = getArticleContentById(article_id)
     
     if content_result is None:
         print(f'Content for article {article_id} not found in files')
         return False
         
-    article_content, mkdocs_title, mkdocs_tags = content_result
+    article_content, mkdocs_title, mkdocs_tags, mkdocs_unlisted = content_result
     
     # Escape the HTML and backslashes for MySQL
     article_content = html.escape(article_content).replace('\\','\\\\')
@@ -104,7 +118,12 @@ def updateArticle(article_id):
     
     if contentFound:
         try:
-            update = input(f"KB title:     {article_title}\nKB tags:      {article_keywords}\nUpdate article {article_id} content, title and tags? Y/N\n").lower() == 'y'
+            update = input(
+                f"KB title:     {article_title}\n"
+                f"KB tags:      {article_keywords}\n"
+                f"KB unlisted:  {article_unlisted_db}\n"
+                f"Update article {article_id} content, title, tags and unlisted? Y/N\n"
+            ).lower() == 'y'
             if update:
                 article_last_updation = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 c.execute("""
@@ -115,9 +134,17 @@ def updateArticle(article_id):
                         article_last_updation=%s,
                         article_status='approved',
                         article_show='yes',
-                        article_keywords=%s
+                        article_keywords=%s,
+                        unlisted=%s
                         WHERE article_id=%s;
-                        """, (mkdocs_title, article_content, article_last_updation, mkdocs_tags, article_id))
+                        """, (
+                    mkdocs_title,
+                    article_content,
+                    article_last_updation,
+                    mkdocs_tags,
+                    mkdocs_unlisted,
+                    article_id,
+                ))
                 CONNECTION.commit()
                 print(f"Updated article {article_id} updated")
                 return True
@@ -153,80 +180,82 @@ def listCategories(categories):
         index += 1
 
 def main():
-    
-    
     global CONNECTION
-    CONNECTION, server = establish_connection_interactive()
+    server = None
     
-
-    if input('Update specific articles? Y/N\n').lower() == 'y':
-        article_id = ''
-        while article_id.lower() != 'e':
-            article_id = str(input('Enter article ID to update or E to exit: '))
-            if article_id.lower() == 'e':
-                break
-            if article_id.isnumeric():
-                success = updateArticle(article_id)
-                if not success:
-                    print("Please try another article ID or press 'E' to exit")
-            else:
-                print("Please enter a valid numeric article ID or 'E' to exit")
-    else:
-        updateChildren = ''
-        categoryId = ''
-        parent_category = ''
-        categoryChoice = ''
+    try:
+        CONNECTION, server = establish_connection_interactive()
         
-        print('\nRoot categories:\n')
-
-        while updateChildren != 'y':
-            
-            
-            categoryChoice = ''
-            categories = fetchCategories(parent_id=categoryId)
-            if parent_category: print("\nParent: {}. {}\n".format(categoryId, categoryTitle))
-            if len(categories)>1: 
-                parent_category = categories[0]
-                listCategories(categories)
-                print("\n---------\n")
-                
-                if updateChildren.isnumeric() and int(updateChildren) <= len(categories):
-                        categoryChoice = int(updateChildren)-1
-                        updateChildren = 'y'
-                else:    
-                    while not (categoryChoice.isnumeric() and int(categoryChoice) <= len(categories)):
-                        categoryChoice = input("Choose category to browse (1 to {}): ".format(len(categories)))
-                        if categoryChoice.isnumeric() and int(categoryChoice) <= len(categories):
-                            categoryChoice = int(categoryChoice)-1
-                            break
-                        else:
-                            categoryChoice = ''
-                            print ('Wrong category choice')
-                    
-                
-                categoryId = categories[categoryChoice][0]
-                categoryTitle = categories[categoryChoice][1]  
-                childrenCategories = fetchCategories(parent_id=categoryId)
-                childrenCategoriesNumber = len(childrenCategories)
-            
-                print ("\nChosen category: {} {}".format(categoryId, categoryTitle))
-                if childrenCategoriesNumber > 0:
-                    print ('\nIt has {} child categories:\n'.format(childrenCategoriesNumber))
-                    listCategories(childrenCategories)
-                    updateChildren = input("\nEnter `Y` to update the category and all its child categories and articles. \n Or choose a category to browse (1 to {}). \n".format(childrenCategoriesNumber)).lower()
-                else: 
-                    print ('\nIt has no child categories')
-                    updateChildren = input("\nEnter `Y` to update the category and all articles from this category. ".format(categoryId, categoryTitle)).lower()
-                    if updateChildren !='y': 
-                        print('Updated nothing')
-                        break
-
+        choice = safe_input('Update specific articles? Y/N').lower()
+        
+        if choice == 'y':
+            article_id = ''
+            while article_id.lower() != 'e':
+                article_id = safe_input('Enter article ID to update or E to exit')
+                if article_id.lower() == 'e':
+                    break
+                if article_id.isnumeric():
+                    success = updateArticle(article_id)
+                    if not success:
+                        print("Please try another article ID or press 'E' to exit")
+                else:
+                    print("Please enter a valid numeric article ID or 'E' to exit")
         else:
-            if categories[categoryChoice]:
-                updateCategoryChildren(categories[categoryChoice])
-        
-    
-    close_connection(CONNECTION, server)
+            updateChildren = ''
+            categoryId = ''
+            parent_category = ''
+            categoryChoice = ''
+            
+            print('\nRoot categories:\n')
+
+            while updateChildren != 'y':
+                categoryChoice = ''
+                categories = fetchCategories(parent_id=categoryId)
+                if parent_category: print("\nParent: {}. {}\n".format(categoryId, categoryTitle))
+                if len(categories)>1: 
+                    parent_category = categories[0]
+                    listCategories(categories)
+                    print("\n---------\n")
+                    
+                    if updateChildren.isnumeric() and int(updateChildren) <= len(categories):
+                            categoryChoice = int(updateChildren)-1
+                            updateChildren = 'y'
+                    else:    
+                        while not (categoryChoice.isnumeric() and int(categoryChoice) <= len(categories)):
+                            categoryChoice = safe_input("Choose category to browse (1 to {})".format(len(categories)))
+                            if categoryChoice.isnumeric() and int(categoryChoice) <= len(categories):
+                                categoryChoice = int(categoryChoice)-1
+                                break
+                            else:
+                                categoryChoice = ''
+                                print ('Wrong category choice')
+                    
+                    categoryId = categories[categoryChoice][0]
+                    categoryTitle = categories[categoryChoice][1]  
+                    childrenCategories = fetchCategories(parent_id=categoryId)
+                    childrenCategoriesNumber = len(childrenCategories)
+                
+                    print ("\nChosen category: {} {}".format(categoryId, categoryTitle))
+                    if childrenCategoriesNumber > 0:
+                        print ('\nIt has {} child categories:\n'.format(childrenCategoriesNumber))
+                        listCategories(childrenCategories)
+                        updateChildren = safe_input("\nEnter `Y` to update the category and all its child categories and articles. \n Or choose a category to browse (1 to {})".format(childrenCategoriesNumber)).lower()
+                    else: 
+                        print ('\nIt has no child categories')
+                        updateChildren = safe_input("\nEnter `Y` to update the category and all articles from this category.".format(categoryId, categoryTitle)).lower()
+                        if updateChildren !='y': 
+                            print('Updated nothing')
+                            break
+
+                else:
+                    if categories[categoryChoice]:
+                        updateCategoryChildren(categories[categoryChoice])
+    except KeyboardInterrupt:
+        # Connection cleanup handled in finally block
+        pass
+    finally:
+        # Always ensure connections are closed, even on interrupt
+        ensure_cleanup(CONNECTION, server)
        
 
 def getArticleContentById(article_id):
@@ -264,9 +293,11 @@ def getArticleContentById(article_id):
                                 removed_tag = tag_list.pop()
                                 print(f'Popping tag: {removed_tag}')
                                 tags = ','.join(tag_list)
+                        unlisted_flag = parse_kb_unlisted(content)
                         print(f'MkDocs title: {title}')
                         print(f'MkDocs tags:  {tags}')
-                        return content, title, tags
+                        print(f'MkDocs unlisted: {unlisted_flag}')
+                        return content, title, tags, unlisted_flag
                     else: content = None
 
     return None

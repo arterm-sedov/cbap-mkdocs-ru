@@ -168,7 +168,6 @@ _![Страница Swagger UI с разделами API Comindware Platform](h
 
 ```
 http://your-host/api/public/system/TeamNetwork/ObjectAppService/Create
-
 ```
 
 - Вместо `your-host` укажите адрес экземпляра **Comindware Platform**.

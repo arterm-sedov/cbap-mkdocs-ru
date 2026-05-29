@@ -128,7 +128,7 @@
     {% block extrahead %}{% endblock %}
   </head>
 
-  <!-- Set kbId and kbTitle, if defined -->
+  <!-- kbId, kbTitle, kbTags → PHPKB; kb-unlisted="1" only if YAML unlisted: true (optional) -->
   {% set global = namespace(kbId="", kbTitle="", kbTags="") %}
   {% if page and page.meta%}
     {% if page.meta.kbId %}
@@ -163,9 +163,16 @@
       kb-id="{{ global.kbId }}"
       kb-title="{{ global.kbTitle }}"
       kb-tags="{{ global.kbTags }}"
+      {%- if page and page.meta and page.meta.unlisted %} kb-unlisted="1"{% endif %}
     >
   {% else %}
-    <body dir="{{ direction }}" kb-id="{{ global.kbId }}" kb-title="{{ global.kbTitle }}">
+    <body
+      dir="{{ direction }}"
+      kb-id="{{ global.kbId }}"
+      kb-title="{{ global.kbTitle }}"
+      kb-tags="{{ global.kbTags }}"
+      {%- if page and page.meta and page.meta.unlisted %} kb-unlisted="1"{% endif %}
+    >
   {% endif %}
     {% set features = config.theme.features or [] %}
 

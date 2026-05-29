@@ -2,7 +2,7 @@
 title: 'Вычисление исполнителя текущей активной задачи'
 kbId: 4950
 url: 'https://kb.comindware.ru/article.php?id=4950'
-updated: '2025-07-01 16:04:14'
+updated: '2026-03-02 11:26:38'
 ---
 
 # Вычисление исполнителя текущей активной задачи
@@ -75,11 +75,11 @@ updated: '2025-07-01 16:04:14'
            # если он назначен через аккаунт.
            ?tasks cmw:assignee ?value.
        }
-       or{
+       or {
            # Возвращаем список возможных исполнителей,
            # если они назначены через группы и роли.
-           ?tasks cmw:possibleAssignee ?possibleRoles.
-           ?assigneeRoles role:roleMembers ?groupMembers.
+           ?tasks cmw:possibleAssignee ?possibleGroups.
+           ?possibleGroups role:roleMembers ?groupMembers.
            ?groupMembers account:groupUsers ?value.
        }
        or {
@@ -87,7 +87,7 @@ updated: '2025-07-01 16:04:14'
            # Возвращаем список возможных исполнителей,
            # если они назначены через роли.
            ?tasks cmw:possibleAssignee ?possibleRoles.
-           ?assigneeRoles role:roleMembers ?value.
+           ?possibleRoles role:roleMembers ?value.
        }
        or {
            # Возвращаем список возможных исполнителей,
@@ -99,7 +99,6 @@ updated: '2025-07-01 16:04:14'
        # Исключаем отключенные аккаунты.
        not {?value cmw:isDisabled true.}.
    }
-
    ```
 3. Создайте атрибут со следующими свойствами:
 
@@ -158,7 +157,6 @@ updated: '2025-07-01 16:04:14'
        # Возвращаем True, если у текущего пользователя есть задачи.
        ?true -> ?value
    }
-
    ```
 4. Поместите атрибуты *«Ответственные»* и *«У вас имеются задачи»* на форму шаблона *«Заявки»*.
 5. Установите для поля *«У вас имеются задачи»* на форме отображение в качестве **переключателя**.

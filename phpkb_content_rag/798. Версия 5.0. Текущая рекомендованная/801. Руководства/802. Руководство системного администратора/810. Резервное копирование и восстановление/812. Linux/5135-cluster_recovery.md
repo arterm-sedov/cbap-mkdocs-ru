@@ -160,7 +160,6 @@ updated: '2025-10-06 13:57:48'
 
   ```
   INFO Skipping rebalancing (nothing scheduled)
-
   ```
 - Проверьте результирующую топологию Apache Ignite с нескольких узлов.
 
@@ -201,7 +200,6 @@ updated: '2025-10-06 13:57:48'
 
    ```
    INFO Skipping rebalancing (nothing scheduled)
-
    ```
 8. Активируйте кластер.
 9. Проверьте подключение каждого узла к сервисам Apache Kafka и OpenSearch (Elasticsearch).
@@ -238,7 +236,6 @@ updated: '2025-10-06 13:57:48'
 
    ```
    INFO Skipping rebalancing (nothing scheduled)
-
    ```
 8. Проверьте подключение каждого узла к сервисам Apache Kafka, OpenSearch (Elasticsearch).
 9. Проверьте работоспособность кластера:
@@ -256,7 +253,6 @@ updated: '2025-10-06 13:57:48'
 
    ```
    bash /usr/share/ignite/bin/control.sh --baseline
-
    ```
 2. Удостоверьтесь, что топологии совпадают на всех узлах.
 
@@ -268,7 +264,6 @@ updated: '2025-10-06 13:57:48'
 ```
 INFO Skipping rebalancing (nothing scheduled)
 ```
-
 ```
 
 ### Блокировка запуска Comindware Platform до сборки кластера
@@ -326,25 +321,21 @@ INFO Skipping rebalancing (nothing scheduled)
 
   ```
   curl -X GET "http://<node-ip>/api/health"
-
   ```
 - **Проверка Apache Ignite:**
 
   ```
   bash /usr/share/ignite/bin/control.sh --baseline
-
   ```
 - **Проверка OpenSearch (Elasticsearch):**
 
   ```
   curl -X GET "localhost:9200/_cluster/health?pretty"
-
   ```
 - **Проверка Apache Kafka:**
 
   ```
   kafka-topics.sh --bootstrap-server localhost:9092 --list
-
   ```
 
 ### Практики, которых следует избегать
