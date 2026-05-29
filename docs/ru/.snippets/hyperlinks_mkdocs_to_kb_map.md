@@ -1203,6 +1203,8 @@
 
 [administration]: {{ kbArticleURLPrefix }}5608
 
+[ai_feature_guide]: {{ kbArticleURLPrefix }}5742
+
 [apps]: {{ kbArticleURLPrefix }}5643
 
 [global_configuration]: {{ kbArticleURLPrefix }}5619

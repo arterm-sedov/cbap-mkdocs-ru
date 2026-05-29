@@ -17,7 +17,7 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 | `utilities/phpkb_cloning/phpkb_clone_rollback.py` | Delete cloned PHPKB rows using the mapped target IDs from a clone mapping JSON. | Dry-run by default; deletes DB rows only with `--write --confirm-delete-cloned-content`. |
 | `utilities/phpkb_cloning/phpkb_clone_update_links.py` | Update PHPKB article/category links after cloning or migration using mapping JSON. Optional product/version replacements can be enabled explicitly. | Connects to DB; CLI mode is dry-run unless `--write` is passed. |
 | `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py` | Update local docs IDs using a clone mapping. Handles `kbId` frontmatter in `docs/ru` and article/category IDs in `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md`. | Dry-run by default; rewrites Markdown files only with `--write`. |
-| `phpkb_update_articles.py` | Publish rebuilt MkDocs HTML from `for_kb_import_ru` into existing PHPKB article rows by `kbId`. | Connects to DB; asks confirmation per article; updates title, content, tags, unlisted flag, status, and visibility. |
+| `phpkb_update_articles.py` | Publish rebuilt MkDocs HTML from `for_kb_import_ru` into existing PHPKB article rows by `kbId`. | Connects to DB; supports interactive menus or CLI flags `--profile`, `--article-id`, `--category-id`, and `--yes` for automated syncs. |
 
 ## References
 
@@ -78,8 +78,9 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 - If the article has or needs a reusable reference link, add its H1 anchor to `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md` with the new `kbId`.
 - Rebuild the PHPKB HTML export with the repo virtual environment:
   `.\\.venv\\Scripts\\python.exe -m mkdocs build -f mkdocs_for_kb_import_ru.yml`
-- Publish only the new article with `phpkb_update_articles.py`, answer `Y` to "Update specific articles?", enter the new article ID, confirm the update, then enter `E`.
-- `phpkb_update_articles.py` reads `for_kb_import_ru`, finds `<div ... kb-id="<new-article-id>" ...>`, and updates the PHPKB row with the MkDocs title, HTML content, tags, `unlisted`, `article_status='approved'`, and `article_show='yes'`.
+- Publish only the new article using the script's command-line flags:
+  `python phpkb_update_articles.py --profile cmw --article-id <new-article-id> --yes`
+- The script can also be run interactively by omitting `--article-id`. It reads `for_kb_import_ru`, finds `<div ... kb-id="<new-article-id>" ...>`, and updates the PHPKB row with the MkDocs title, HTML content, tags, `unlisted`, `article_status='approved'`, and `article_show='yes'`.
 - If the build dirties the tracked `for_kb_import_ru` export tree and those files were clean before the build, clean the generated output from Git after publishing; keep the source Markdown and one-off mapping if they are useful for audit.
 
 ### Verify A Completed Clone

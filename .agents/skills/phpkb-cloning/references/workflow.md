@@ -106,12 +106,10 @@ task is explicitly to update that existing PHPKB article.
 9. Publish only the new article:
 
    ``` powershell
-   python phpkb_update_articles.py
+   python phpkb_update_articles.py --profile cmw --article-id <new-article-id> --yes
    ```
 
-   Answer `Y` to "Update specific articles?", enter the new article ID, confirm
-   the update after checking the displayed title/tags/unlisted values, then
-   enter `E`.
+   The script can also be run interactively by omitting `--article-id`. When run interactively, answer `Y` to "Update specific articles?", enter the new article ID, confirm the update, then enter `E`.
 
 10. `phpkb_update_articles.py` updates the PHPKB row from the generated HTML
    whose body contains `kb-id="<new-article-id>"`. It updates title, content,
@@ -120,6 +118,30 @@ task is explicitly to update that existing PHPKB article.
     generated tree was clean before the build, remove those generated changes
     from Git after publishing. Keep the source Markdown `kbId` change and the
     one-off mapping if the mapping is useful for audit or rollback.
+
+### Real-world Example: Publishing "Работа с ИИ" (ai_features_guide.md)
+
+1. Identified category `976` (Разработка приложений) as the correct target category.
+2. Selected `5643` (Приложения. Определения и настройка) as an adjacent source article in category `976`.
+3. Performed dry run with a dedicated mapping file `.ai_features_guide_mapping.json`:
+   ``` powershell
+   python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .ai_features_guide_mapping.json --fresh --article-id 5643 --target-category-id 976 --suffix "" --dry-run
+   ```
+4. Ran the actual clone to produce the new article ID `5742`:
+   ``` powershell
+   python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .ai_features_guide_mapping.json --fresh --article-id 5643 --target-category-id 976 --suffix ""
+   ```
+5. Updated front matter of `docs/ru/business_apps/ai/ai_features_guide.md` with `kbId: 5742`.
+6. Added `[ai_feature_guide]: {{ kbArticleURLPrefix }}5742` to `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md`.
+7. Rebuilt `for_kb_import_ru/`:
+   ``` powershell
+   .venv\Scripts\python.exe -m mkdocs build -f mkdocs_for_kb_import_ru.yml
+   ```
+8. Published with:
+   ``` powershell
+   python phpkb_update_articles.py --profile cmw --article-id 5742 --yes
+   ```
+9. Discarded bulk changes in `for_kb_import_ru/` with `git restore for_kb_import_ru/` to keep Git history clean.
 
 The root-level `phpkb_replace_related_topics.py` is a post-import Markdown
 cleanup helper, not part of the PHPKB DB cloning scripts.
