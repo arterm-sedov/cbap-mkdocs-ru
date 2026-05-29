@@ -49,7 +49,7 @@ Keep clone and post-clone update scripts on the same profile.
 ## PHPKB HTML Export And Images
 
 - Build RU PHPKB HTML from the repository root:
-  `mkdocs build -f mkdocs_for_kb_import_ru.yml`
+  `.\\.venv\\Scripts\\python.exe -m mkdocs build -f mkdocs_for_kb_import_ru.yml`
 - On `platform_v6` branch, `mkdocs_for_kb_import_ru.yml` uses
   `site_url: https://kb.comindware.ru/platform/v6.0/` so exported HTML image
   paths point at the V6 web asset folder.
@@ -57,6 +57,69 @@ Keep clone and post-clone update scripts on the same profile.
 - Copy exported images into the PHPKB web tree with root-level
   `phpkb_copy_images.py` (`for_kb_import_ru/` →
   `kb.comindware.ru/platform/v6.0`; paths are fixed per branch).
+
+## Publish A New MkDocs Article By Cloning An Adjacent PHPKB Article
+
+Use this workflow when a local Markdown article has no PHPKB article yet and
+must be published as a new article. Do not reuse an existing `kbId` unless the
+task is explicitly to update that existing PHPKB article.
+
+1. Identify the target PHPKB category and an adjacent source article in that
+   category. For example, a new V6 changelog article can be cloned from an
+   adjacent changelog article into category `915`.
+2. Use a dedicated one-off mapping file. Do not write one-off article mappings
+   into `.v6mapping.json`, because that file represents the V5 to V6 clone.
+3. Run a dry-run first:
+
+   ``` powershell
+   python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .new_article_mapping.json --fresh --article-id <source-article-id> --target-category-id <target-category-id> --suffix "" --dry-run
+   ```
+
+4. If the dry-run scope is correct, run the real clone with the same command and
+   no `--dry-run`. Omit `--show`; one-off article clones stay hidden until the
+   publish step.
+5. Read the new PHPKB article ID from the clone output or from the one-off
+   mapping file, for example:
+
+   ``` json
+   {
+     "Articles": {
+       "5435": "5741"
+     }
+   }
+   ```
+
+6. Add the new ID to the local Markdown front matter:
+
+   ``` yaml
+   kbId: 5741
+   ```
+
+7. If the article has or needs a reusable reference link, add its H1 anchor to
+   `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md` with the new `kbId`.
+8. Rebuild `for_kb_import_ru/`:
+
+   ``` powershell
+   .\.venv\Scripts\python.exe -m mkdocs build -f mkdocs_for_kb_import_ru.yml
+   ```
+
+9. Publish only the new article:
+
+   ``` powershell
+   python phpkb_update_articles.py
+   ```
+
+   Answer `Y` to "Update specific articles?", enter the new article ID, confirm
+   the update after checking the displayed title/tags/unlisted values, then
+   enter `E`.
+
+10. `phpkb_update_articles.py` updates the PHPKB row from the generated HTML
+   whose body contains `kb-id="<new-article-id>"`. It updates title, content,
+   tags, `unlisted`, `article_status='approved'`, and `article_show='yes'`.
+11. If the MkDocs build dirties tracked files under `for_kb_import_ru/` and that
+    generated tree was clean before the build, remove those generated changes
+    from Git after publishing. Keep the source Markdown `kbId` change and the
+    one-off mapping if the mapping is useful for audit or rollback.
 
 The root-level `phpkb_replace_related_topics.py` is a post-import Markdown
 cleanup helper, not part of the PHPKB DB cloning scripts.
