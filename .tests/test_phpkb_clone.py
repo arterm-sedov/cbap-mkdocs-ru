@@ -73,12 +73,15 @@ def test_clone_article_child_rows_skips_empty_sources():
 
 def test_clone_article_clones_dependents_once_for_new_article(monkeypatch):
     cursor = FakeCursor(fetches=[(7,), (0,), (2,), (1,)], lastrowid=9001)
+    mapping_saves = []
     monkeypatch.setattr(phpkb_clone, "CONNECTION", FakeConnection(cursor))
     monkeypatch.setattr(phpkb_clone, "ARTICLE_MAPPING", {})
+    monkeypatch.setattr(phpkb_clone, "updateMappingJson", lambda: mapping_saves.append("saved"))
 
     new_article_id = phpkb_clone.cloneArticle("100", "200", "300")
 
     assert new_article_id == "9001"
+    assert mapping_saves == ["saved"]
     assert not any("SELECT MAX(article_id)" in sql for sql, _ in cursor.calls)
     assert (
         "INSERT INTO phpkb_relations (article_id, category_id, article_priority) VALUES (9001, 300, 7);",
@@ -122,13 +125,16 @@ def test_clone_article_skips_existing_relation_for_mapped_article(monkeypatch):
 
 def test_clone_category_uses_lastrowid_and_updates_mapping(monkeypatch):
     cursor = FakeCursor(lastrowid=8001)
+    mapping_saves = []
     monkeypatch.setattr(phpkb_clone, "CONNECTION", FakeConnection(cursor))
     monkeypatch.setattr(phpkb_clone, "CATEGORY_MAPPING", {})
+    monkeypatch.setattr(phpkb_clone, "updateMappingJson", lambda: mapping_saves.append("saved"))
 
     new_category_id = phpkb_clone.cloneCategory("700", "800")
 
     assert new_category_id == "8001"
     assert phpkb_clone.CATEGORY_MAPPING == {"700": "8001"}
+    assert mapping_saves == ["saved"]
     assert not any("SELECT MAX(category_id)" in sql for sql, _ in cursor.calls)
 
 
@@ -167,6 +173,35 @@ def test_initialize_mapping_fresh_refuses_existing_mapping(tmp_path):
         pass
     else:
         raise AssertionError("Expected FileExistsError for --fresh with an existing mapping")
+
+
+def test_update_mapping_json_prints_compact_summary(tmp_path, monkeypatch, capsys):
+    mapping_file = tmp_path / ".mapping.json"
+    monkeypatch.setattr(phpkb_clone, "MAPPING_FILE", str(mapping_file))
+    monkeypatch.setattr(phpkb_clone, "CATEGORY_MAPPING", {"798": "896"})
+    monkeypatch.setattr(phpkb_clone, "ARTICLE_MAPPING", {"4578": "5162", "4579": "5161"})
+    monkeypatch.setattr(phpkb_clone, "MAPPING", {})
+
+    phpkb_clone.updateMappingJson()
+
+    output = capsys.readouterr().out
+    assert "Saved mapping" in output
+    assert "categories=1" in output
+    assert "articles=2" in output
+    assert '"Articles"' not in output
+    assert mapping_file.exists()
+
+
+def test_category_child_where_defaults_to_public_visible_russian_categories():
+    assert phpkb_clone.category_child_where() == (
+        "category_show='yes' AND category_status = 'public' AND phpkb_categories.language_id = 2"
+    )
+
+
+def test_category_child_where_include_private_drops_public_only_filter():
+    assert phpkb_clone.category_child_where(include_private=True) == (
+        "category_show='yes' AND phpkb_categories.language_id = 2"
+    )
 
 
 def test_parse_args_accepts_scripted_article_clones():
@@ -226,11 +261,28 @@ def test_run_cli_clones_category_tree_with_target_parent(monkeypatch):
     monkeypatch.setattr(
         phpkb_clone,
         "cloneCategoryChildren",
-        lambda category, target_parent_id="": calls.append((category, target_parent_id)) or [],
+        lambda category, target_parent_id="", include_private=False: calls.append(
+            (category, target_parent_id, include_private)
+        ) or [],
     )
 
     assert phpkb_clone.run_cli(args) is True
-    assert calls == [(("798", "Version", "1"), "1000")]
+    assert calls == [(("798", "Version", "1"), "1000", False)]
+
+
+def test_run_cli_passes_include_private_to_category_clone(monkeypatch):
+    calls = []
+    args = phpkb_clone.parse_args(["--category-id", "798", "--include-private"])
+
+    monkeypatch.setattr(phpkb_clone, "fetchCategory", lambda category_id: (category_id, "Version", "1"))
+    monkeypatch.setattr(
+        phpkb_clone,
+        "cloneCategoryChildren",
+        lambda category, target_parent_id="", include_private=False: calls.append(include_private) or [],
+    )
+
+    assert phpkb_clone.run_cli(args) is True
+    assert calls == [True]
 
 
 def test_count_article_child_rows_counts_supported_backrefs():
@@ -293,7 +345,9 @@ def test_run_cli_dry_run_category_uses_plan_without_cloning(monkeypatch):
     monkeypatch.setattr(
         phpkb_clone,
         "planCategoryChildren",
-        lambda category, newParentId="": calls.append((category, newParentId)) or {
+        lambda category, newParentId="", include_private=False: calls.append(
+            (category, newParentId, include_private)
+        ) or {
             **phpkb_clone.empty_clone_plan(),
             "categories_seen": 1,
             "categories_would_clone": 1,
@@ -306,4 +360,4 @@ def test_run_cli_dry_run_category_uses_plan_without_cloning(monkeypatch):
     )
 
     assert phpkb_clone.run_cli(args) is True
-    assert calls == [(("798", "Version", "1"), "1000")]
+    assert calls == [(("798", "Version", "1"), "1000", False)]
