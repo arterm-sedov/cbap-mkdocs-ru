@@ -114,10 +114,7 @@ task is explicitly to update that existing PHPKB article.
 10. `phpkb_update_articles.py` updates the PHPKB row from the generated HTML
    whose body contains `kb-id="<new-article-id>"`. It updates title, content,
    tags, `unlisted`, `article_status='approved'`, and `article_show='yes'`.
-11. If the MkDocs build dirties tracked files under `for_kb_import_ru/` and that
-    generated tree was clean before the build, remove those generated changes
-    from Git after publishing. Keep the source Markdown `kbId` change and the
-    one-off mapping if the mapping is useful for audit or rollback.
+11. Always stage, commit, and keep modified HTML files under the `for_kb_import_ru/` tree tracked in Git alongside their source Markdown changes. Do not discard or ignore them.
 
 ### Real-world Example: Publishing "Работа с ИИ" (ai_features_guide.md)
 
@@ -141,7 +138,7 @@ task is explicitly to update that existing PHPKB article.
    ``` powershell
    python phpkb_update_articles.py --profile cmw --article-id 5742 --yes
    ```
-9. Discarded bulk changes in `for_kb_import_ru/` with `git restore for_kb_import_ru/` to keep Git history clean.
+9. Staged, committed, and tracked both the modified source `ai_features_guide.md` and the generated `for_kb_import_ru/` HTML output to keep Git history complete.
 
 The root-level `phpkb_replace_related_topics.py` is a post-import Markdown
 cleanup helper, not part of the PHPKB DB cloning scripts.

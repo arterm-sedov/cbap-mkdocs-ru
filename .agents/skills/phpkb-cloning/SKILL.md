@@ -81,7 +81,7 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 - Publish only the new article using the script's command-line flags:
   `python phpkb_update_articles.py --profile cmw --article-id <new-article-id> --yes`
 - The script can also be run interactively by omitting `--article-id`. It reads `for_kb_import_ru`, finds `<div ... kb-id="<new-article-id>" ...>`, and updates the PHPKB row with the MkDocs title, HTML content, tags, `unlisted`, `article_status='approved'`, and `article_show='yes'`.
-- If the build dirties the tracked `for_kb_import_ru` export tree and those files were clean before the build, clean the generated output from Git after publishing; keep the source Markdown and one-off mapping if they are useful for audit.
+- Always stage, commit, and keep modified HTML files under the `for_kb_import_ru/` tree tracked in Git alongside their source Markdown changes. Do not discard or ignore them.
 
 ### Verify A Completed Clone
 
