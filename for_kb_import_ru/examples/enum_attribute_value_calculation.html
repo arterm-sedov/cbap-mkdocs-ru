@@ -1,4 +1,4 @@
-<body data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="2624" kb-tags="N3,выражение на N3,формулы,формула,тройки,тройка,список значений" kb-title="Атрибут типа «Список значений». Вычисление с помощью N3 и формул">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -11,35 +11,45 @@
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#введение">
 <span class="md-ellipsis">
-      Введение
+      
+        Введение
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#прикладная-задача">
 <span class="md-ellipsis">
-      Прикладная задача
+      
+        Прикладная задача
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#распределение-заявок-по-значению-атрибута-список-значений">
 <span class="md-ellipsis">
-      Распределение заявок по значению атрибута список значений
+      
+        Распределение заявок по значению атрибута список значений
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#тестирование">
 <span class="md-ellipsis">
-      Тестирование
+      
+        Тестирование
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
 <span class="md-ellipsis">
-      Связанные статьи
+      
+        Связанные статьи
+      
     </span>
 </a>
 </li>
@@ -107,33 +117,7 @@
 </li>
 <li>
 <p>Добавьте следующее выражение N3:</p>
-<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы с записями, строками и базой данных</span></code><br/>
-<code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code><br/>
-<code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmw:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics#&gt;</span><span class="p">.</span></code><br/>
-<code><span class="k">@prefix</span><span class="w"> </span><span class="nn">l10n:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/l10n#&gt;</span><span class="p">.</span></code><br/>
-<code><span class="k">@prefix</span><span class="w"> </span><span class="nn">string:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/2000/10/swap/string#&gt;</span><span class="p">.</span></code><br/>
-<code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwentity:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/entity#&gt;</span><span class="p">.</span></code><br/>
-<code><span class="p">{</span></code><br/>
-<code>    <span class="c"># Находим атрибут TipTS  (Тип ТС) в шаблоне Zayavki (Заявка на перевозку).</span></code><br/>
-<code>    <span class="p">(</span><span class="s">"Zayavki"</span> <span class="s">"TipTS"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?TipTSAttribute</span><span class="p">.</span></code><br/>
-<code>    <span class="c"># Присваиваем переменной ?TipTSAttributeValues объект со списком значений атрибута «Тип автотранспорта».</span></code><br/>
-<code>    <span class="err">?item</span> <span class="err">?TipTSAttribute</span> <span class="err">?TipTSAttributeValues</span><span class="p">.</span></code><br/>
-<code>    <span class="c"># Присваиваем переменной ?SelectedValue объект с выбранным значением атрибута.</span></code><br/>
-<code>    <span class="err">?TipTSAttributeValues</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">variantName</span> <span class="err">?SelectedValue</span><span class="p">.</span></code><br/>
-<code>    <span class="c"># Присваиваем переменной ?names массив объектов с заполненными названиями значения атрибута на всех языках.</span></code><br/>
-<code>    <span class="err">?SelectedValue</span> <span class="nn">l10n</span><span class="p">:</span><span class="nt">text</span> <span class="err">?names</span><span class="p">.</span></code><br/>
-<code>    <span class="c"># Начинаем цикл по ?names</span></code><br/>
-<code>        <span class="c"># Присваиваем переменной ?langCodeStr код языка названия значения атрибута на текущей итерации цикла.</span></code><br/>
-<code>        <span class="err">?names</span> <span class="nn">l10n</span><span class="p">:</span><span class="nt">lang</span> <span class="err">?langCode</span><span class="p">.</span></code><br/>
-<code>        <span class="p">(</span><span class="s">"{0}"</span> <span class="err">?langCode</span><span class="p">)</span> <span class="nn">string</span><span class="p">:</span><span class="nt">format</span> <span class="err">?langCodeStr</span><span class="p">.</span></code><br/>
-<code>        <span class="c"># Сравниваем код языка для значения атрибута с желаемым.</span></code><br/>
-<code>        <span class="c"># "ru" — код русского языка, "en" — английского, "de" — немецкого.</span></code><br/>
-<code>        <span class="err">?langCodeStr</span> <span class="nn">cmwentity</span><span class="p">:</span><span class="nt">contains</span> <span class="s">"ru"</span><span class="p">.</span></code><br/>
-<code>            <span class="c"># Если предыдущее предложение возвращает true, записываем значение на русском языке в вычисляемый атрибут.     </span></code><br/>
-<code>            <span class="err">?names</span> <span class="nn">l10n</span><span class="p">:</span><span class="nt">data</span> <span class="err">?value</span><span class="p">.</span></code><br/>
-<code>    <span class="c"># переходим к следующей итерации по ?names.</span></code><br/>
-<code><span class="p">}</span></code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы с записями, строками и базой данных</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmw:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">l10n:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/l10n#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">string:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/2000/10/swap/string#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwentity:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/entity#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Находим атрибут TipTS  (Тип ТС) в шаблоне Zayavki (Заявка на перевозку).</span></code> <br/><code>    <span class="p">(</span><span class="s">"Zayavki"</span> <span class="s">"TipTS"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?TipTSAttribute</span><span class="p">.</span></code> <br/><code>    <span class="c"># Присваиваем переменной ?TipTSAttributeValues объект со списком значений атрибута «Тип автотранспорта».</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?TipTSAttribute</span> <span class="err">?TipTSAttributeValues</span><span class="p">.</span></code> <br/><code>    <span class="c"># Присваиваем переменной ?SelectedValue объект с выбранным значением атрибута.</span></code> <br/><code>    <span class="err">?TipTSAttributeValues</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">variantName</span> <span class="err">?SelectedValue</span><span class="p">.</span></code> <br/><code>    <span class="c"># Присваиваем переменной ?names массив объектов с заполненными названиями значения атрибута на всех языках.</span></code> <br/><code>    <span class="err">?SelectedValue</span> <span class="nn">l10n</span><span class="p">:</span><span class="nt">text</span> <span class="err">?names</span><span class="p">.</span></code> <br/><code>    <span class="c"># Начинаем цикл по ?names</span></code> <br/><code>        <span class="c"># Присваиваем переменной ?langCodeStr код языка названия значения атрибута на текущей итерации цикла.</span></code> <br/><code>        <span class="err">?names</span> <span class="nn">l10n</span><span class="p">:</span><span class="nt">lang</span> <span class="err">?langCode</span><span class="p">.</span></code> <br/><code>        <span class="p">(</span><span class="s">"{0}"</span> <span class="err">?langCode</span><span class="p">)</span> <span class="nn">string</span><span class="p">:</span><span class="nt">format</span> <span class="err">?langCodeStr</span><span class="p">.</span></code> <br/><code>        <span class="c"># Сравниваем код языка для значения атрибута с желаемым.</span></code> <br/><code>        <span class="c"># "ru" — код русского языка, "en" — английского, "de" — немецкого.</span></code> <br/><code>        <span class="err">?langCodeStr</span> <span class="nn">cmwentity</span><span class="p">:</span><span class="nt">contains</span> <span class="s">"ru"</span><span class="p">.</span></code> <br/><code>            <span class="c"># Если предыдущее предложение возвращает true, записываем значение на русском языке в вычисляемый атрибут.     </span></code> <br/><code>            <span class="err">?names</span> <span class="nn">l10n</span><span class="p">:</span><span class="nt">data</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code>    <span class="c"># переходим к следующей итерации по ?names.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Поместите атрибуты <em>«Тип ТС»</em> и <em>«Наименование типа ТС»</em> на форму начального события.</p>
@@ -142,8 +126,7 @@
 <li>Добавьте три потока управления и присоедините к ним <strong>пользовательские задачи</strong> <em>«Обработать заявку на автобус»</em>, <em>«Обработать заявку на легковой автомобиль»</em>, <em>«Обработать заявку на грузовой автомобиль»</em>.</li>
 <li>
 <p>В дополнительных свойствах всех задач задайте формулу для заголовка задачи:</p>
-<div class="highlight"><code><pre><span></span><code><span class="n">FORMAT</span><span class="p">(</span><span class="s">"Обработайте заявку на перевозку: {0}"</span><span class="p">,</span><span class="w"> </span><span class="n">LIST</span><span class="p">(</span><span class="err">$</span><span class="n">NaimenovanietipaTS</span><span class="p">))</span></code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="n">FORMAT</span><span class="p">(</span><span class="s">"Обработайте заявку на перевозку: {0}"</span><span class="p">,</span><span class="w"> </span><span class="n">LIST</span><span class="p">(</span><span class="err">$</span><span class="n">NaimenovanietipaTS</span><span class="p">))</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>После каждой пользовательской задачи добавьте <strong>конечное событие</strong>.</p>
@@ -182,7 +165,7 @@
 </li>
 </ol>
 <figure class="screenshot_with_caption">
-<p><img alt="Диаграмма процесса «Обработка заявок»" src="https://kb.comindware.ru/assets/enum_attribute_value_calculation_diagram.png"/><figcaption class="caption">Диаграмма процесса «Обработка заявок»</figcaption></p>
+<p><img alt="Диаграмма процесса «Обработка заявок»" src="/platform/v4.7/examples/img/enum_attribute_value_calculation_diagram.png"/></p><figcaption class="caption">Диаграмма процесса «Обработка заявок»</figcaption>
 </figure>
 <h2 id="тестирование">Тестирование</h2>
 <ol class="colored_numbers_list">
@@ -211,5 +194,5 @@
 </main>
 </div>
 <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
-document$.subscribe(() => { lightbox.reload() });
-</script></body>
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

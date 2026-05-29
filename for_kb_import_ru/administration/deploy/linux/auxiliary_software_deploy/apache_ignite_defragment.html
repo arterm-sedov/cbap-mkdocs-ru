@@ -1,4 +1,4 @@
-<body data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="2495" kb-tags="" kb-title="Дефрагментация данных Apache Ignite">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -11,14 +11,18 @@
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#решение-возможных-проблем">
 <span class="md-ellipsis">
-      Решение возможных проблем
+      
+        Решение возможных проблем
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
 <span class="md-ellipsis">
-      Связанные статьи
+      
+        Связанные статьи
+      
     </span>
 </a>
 </li>
@@ -37,57 +41,45 @@
 <li>Скачайте бинарный дистрибутив Apache Ignite, например <a class="mkdocs_imported_link" href="https://downloads.apache.org/ignite/2.16.0/apache-ignite-2.16.0-bin.zip">apache-ignite-2.16.0-bin.zip</a> или более новую версию.</li>
 <li>
 <p>Перейдите в режим суперпользователя:</p>
-<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>-s</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>-s</code> <br/></pre></code></div>
 <p>или</p>
-<div class="highlight"><code><pre><span></span><code>su<span class="w"> </span>-</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>su<span class="w"> </span>-</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Распакуйте дистрибутив Apache Ignite в домашнюю папку (здесь и далее <code>username</code> — имя текущего пользователя):</p>
-<div class="highlight"><code><pre><span></span><code>unzip apache-ignite-2.16.0-bin.zip -d /home/username/ignite</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>unzip apache-ignite-2.16.0-bin.zip -d /home/username/ignite</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Задайте переменную среды <code>IGNITE_HOME</code>:</p>
-<div class="highlight"><code><pre><span></span><code>export IGNITE_HOME=/home/username/ignite</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>export IGNITE_HOME=/home/username/ignite</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Скопируйте в папку <code>/home/username/ignite</code> файл <code>Ignite.config</code> из папки <code>/var/www/instancename</code> (где <code>instancename</code> — имя экземпляра ПО):</p>
-<div class="highlight"><code><pre><span></span><code>cp /var/www/instancename/Ignite.config /home/username/ignite/</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>cp /var/www/instancename/Ignite.config /home/username/ignite/</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Перейдите в папку <code>bin</code> Apache Ignite:</p>
-<div class="highlight"><code><pre><span></span><code>cd /home/username/ignite/bin</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>cd /home/username/ignite/bin</code> <br/></pre></code></div>
 </li>
 <li>
 <p>В файле <code>control.sh</code> измените директиву <code>DEFAULT_CONFIG</code>:</p>
-<div class="highlight"><code><pre><span></span><code>DEFAULT_CONFIG=config/Ignite.config</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>DEFAULT_CONFIG=config/Ignite.config</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Получите список узлов, зарегистрированных в базовой топологии:</p>
-<div class="highlight"><code><pre><span></span><code>sh control.sh --baseline</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>sh control.sh --baseline</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Назначьте дефрагментацию данных Apache Ignite при перезапуске экземпляра ПО, указав вместо <code>&lt;id&gt;</code> идентификаторы узлов, полученные на шаге 9:</p>
-<div class="highlight"><code><pre><span></span><code>sh control.sh --defragmentation schedule --nodes &lt;id&gt;</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>sh control.sh --defragmentation schedule --nodes &lt;id&gt;</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Деактивируйте кластер Apache Ignite:</p>
-<div class="highlight"><code><pre><span></span><code>sh control.sh --set-state INACTIVE --force</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>sh control.sh --set-state INACTIVE --force</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Остановите и запустите экземпляр ПО:</p>
-<div class="highlight"><code><pre><span></span><code>systemctl stop comindwareinstancename</code><br/>
-<code>systemctl start comindwareinstancename</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>systemctl stop comindwareinstancename</code> <br/><code>systemctl start comindwareinstancename</code> <br/></pre></code></div>
 <p>Здесь <code>instancename</code> — имя экземпляра ПО.</p>
 </li>
 <li>
@@ -95,8 +87,7 @@
 </li>
 <li>
 <p>Перезапустите экземпляр ПО, чтобы его снова можно было использовать.</p>
-<div class="highlight"><code><pre><span></span><code>systemctl restart comindwareinstancename</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>systemctl restart comindwareinstancename</code> <br/></pre></code></div>
 </li>
 </ol>
 <h2 class="pageBreakBefore" id="решение-возможных-проблем">Решение возможных проблем</h2>
@@ -104,47 +95,31 @@
 <ol class="colored_numbers_list">
 <li>
 <p>Добавьте в файл <code>/etc/security/limits.conf</code> строки:</p>
-<div class="highlight"><code><pre><span></span><code>* soft nproc 65535</code><br/>
-<code>* hard nproc 65535</code><br/>
-<code>* soft nofile 65535</code><br/>
-<code>* hard nofile 65535</code><br/>
-<code>www-data soft nproc 200000</code><br/>
-<code>www-data hard nproc 200000</code><br/>
-<code>www-data soft nofile 200000</code><br/>
-<code>www-data hard nofile 200000</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>* soft nproc 65535</code> <br/><code>* hard nproc 65535</code> <br/><code>* soft nofile 65535</code> <br/><code>* hard nofile 65535</code> <br/><code>www-data soft nproc 200000</code> <br/><code>www-data hard nproc 200000</code> <br/><code>www-data soft nofile 200000</code> <br/><code>www-data hard nofile 200000</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Добавьте в файл <code>/etc/pam.d/common-session</code> строку:</p>
-<div class="highlight"><code><pre><span></span><code>session required pam_limits.so</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>session required pam_limits.so</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Добавьте в файл <code>/etc/sysctl.conf</code> строку:</p>
-<div class="highlight"><code><pre><span></span><code>fs.file-max = 2097152</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>fs.file-max = 2097152</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Раскомментируйте строку и задайте значение в файле <code>/etc/systemd/user.conf</code>:</p>
-<div class="highlight"><code><pre><span></span><code>DefaultLimitNOFILE=65536</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>DefaultLimitNOFILE=65536</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Раскомментируйте строку и задайте значение в файле <code>/etc/systemd/system.conf</code>:</p>
-<div class="highlight"><code><pre><span></span><code>DefaultLimitNOFILE=65536</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>DefaultLimitNOFILE=65536</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Откройте для редактирования конфигурацию сервиса экземпляра ПО: </p>
-<div class="highlight"><code><pre><span></span><code>systemctl edit comindwareinstancename.service</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>systemctl edit comindwareinstancename.service</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Добавьте в него строки:</p>
-<div class="highlight"><code><pre><span></span><code>[Service]</code><br/>
-<code>LimitNOFILE=65536</code><br/>
-<code>LimitNOFILESoft=65536</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>[Service]</code> <br/><code>LimitNOFILE=65536</code> <br/><code>LimitNOFILESoft=65536</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Перезагрузите машину и экземпляр ПО.</p>
@@ -168,5 +143,5 @@
 </main>
 </div>
 <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
-document$.subscribe(() => { lightbox.reload() });
-</script></body>
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

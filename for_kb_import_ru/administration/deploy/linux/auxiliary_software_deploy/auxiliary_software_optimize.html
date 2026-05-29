@@ -1,4 +1,4 @@
-<body data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="2496" kb-tags="" kb-title="Настройка вспомогательного ПО для оптимизации работы {{ productName }}">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -11,14 +11,18 @@
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#введение">
 <span class="md-ellipsis">
-      Введение
+      
+        Введение
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#настройка-apache-ignite">
 <span class="md-ellipsis">
-      Настройка Apache Ignite
+      
+        Настройка Apache Ignite
+      
     </span>
 </a>
 <nav aria-label="Настройка Apache Ignite" class="md-nav">
@@ -26,21 +30,27 @@
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#изменение-размера-выделяемой-области-памяти">
 <span class="md-ellipsis">
-      Изменение размера выделяемой области памяти
+      
+        Изменение размера выделяемой области памяти
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#изменение-размера-кучи-jvm">
 <span class="md-ellipsis">
-      Изменение размера кучи JVM
+      
+        Изменение размера кучи JVM
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#материалы-по-теме">
 <span class="md-ellipsis">
-      Материалы по теме
+      
+        Материалы по теме
+      
     </span>
 </a>
 </li>
@@ -50,7 +60,9 @@
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#настройка-elasticsearch">
 <span class="md-ellipsis">
-      Настройка Elasticsearch
+      
+        Настройка Elasticsearch
+      
     </span>
 </a>
 <nav aria-label="Настройка Elasticsearch" class="md-nav">
@@ -58,21 +70,27 @@
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#изменение-количества-шардов">
 <span class="md-ellipsis">
-      Изменение количества шардов
+      
+        Изменение количества шардов
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#изменение-размера-кучи-jvm_1">
 <span class="md-ellipsis">
-      Изменение размера кучи JVM
+      
+        Изменение размера кучи JVM
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#материалы-по-теме_1">
 <span class="md-ellipsis">
-      Материалы по теме
+      
+        Материалы по теме
+      
     </span>
 </a>
 </li>
@@ -82,7 +100,9 @@
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#настройка-nginx">
 <span class="md-ellipsis">
-      Настройка NGINX
+      
+        Настройка NGINX
+      
     </span>
 </a>
 </li>
@@ -109,8 +129,7 @@
 <li>Внутри этого раздела найдите директиву <code>property name="maxSize"</code>.</li>
 <li>
 <p>Установите требуемый размер области памяти, например 8 ГБ:</p>
-<div class="highlight"><code><pre><span></span><code>&lt;property<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">"maxSize"</span><span class="w"> </span><span class="nv">value</span><span class="o">=</span><span class="s2">"#{8L * 1024 * 1024 * 1024}"</span><span class="w"> </span>/&gt;</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>&lt;property<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">"maxSize"</span><span class="w"> </span><span class="nv">value</span><span class="o">=</span><span class="s2">"#{8L * 1024 * 1024 * 1024}"</span><span class="w"> </span>/&gt;</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Перезапустите экземпляр ПО, чтобы изменения вступили в силу.</p>
@@ -128,25 +147,7 @@
 <ol class="colored_numbers_list">
 <li>
 <p>Установите переменную среды <code>JVM_OPTS</code>, указав в ней требуемый начальный и максимальный размер кучи, например <code>-Xms10m</code> (начальный. 10 МБ) и <code>-Xmx16g</code> (макс. 16 ГБ):</p>
-<div class="highlight"><code><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">JVM_OPTS</span><span class="o">=</span><span class="s2">"-Xms10m -Xmx16g</span></code><br/>
-<code><span class="s2">-XX:MaxDirectMemorySize=1g</span></code><br/>
-<code><span class="s2">-Djava.net.preferIPv4Stack=true</span></code><br/>
-<code><span class="s2">-XX:+AlwaysPreTouch -XX:+UseG1GC</span></code><br/>
-<code><span class="s2">-XX:+ScavengeBeforeFullGC -XX:+DisableExplicitGC</span></code><br/>
-<code><span class="s2">--add-opens=java.base/sun.nio.ch=ALL-UNNAMED</span></code><br/>
-<code><span class="s2">--add-opens=java.base/java.io=ALL-UNNAMED</span></code><br/>
-<code><span class="s2">--add-opens=java.base/java.nio=ALL-UNNAMED</span></code><br/>
-<code><span class="s2">--add-opens=java.base/java.util=ALL-UNNAMED</span></code><br/>
-<code><span class="s2">--add-opens=java.base/java.lang=ALL-UNNAMED</span></code><br/>
-<code><span class="s2">--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED</span></code><br/>
-<code><span class="s2">--add-exports=java.base/sun.nio.ch=ALL-UNNAMED</span></code><br/>
-<code><span class="s2">--add-exports=java.management/com.sun.jmx.mbeanserver=ALL-UNNAMED</span></code><br/>
-<code><span class="s2">--add-exports=jdk.internal.jvmstat/sun.jvmstat.monitor=ALL-UNNAMED</span></code><br/>
-<code><span class="s2">--add-exports=java.base/sun.reflect.generics.reflectiveObjects=ALL-UNNAMED</span></code><br/>
-<code><span class="s2">--add-opens=jdk.management/com.sun.management.internal=ALL-UNNAMED</span></code><br/>
-<code><span class="s2">-DIGNITE_QUIET=false</span></code><br/>
-<code><span class="s2">-DIGNITE_NO_ASCII=true"</span></code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">JVM_OPTS</span><span class="o">=</span><span class="s2">"-Xms10m -Xmx16g</span></code> <br/><code><span class="s2">-XX:MaxDirectMemorySize=1g</span></code> <br/><code><span class="s2">-Djava.net.preferIPv4Stack=true</span></code> <br/><code><span class="s2">-XX:+AlwaysPreTouch -XX:+UseG1GC</span></code> <br/><code><span class="s2">-XX:+ScavengeBeforeFullGC -XX:+DisableExplicitGC</span></code> <br/><code><span class="s2">--add-opens=java.base/sun.nio.ch=ALL-UNNAMED</span></code> <br/><code><span class="s2">--add-opens=java.base/java.io=ALL-UNNAMED</span></code> <br/><code><span class="s2">--add-opens=java.base/java.nio=ALL-UNNAMED</span></code> <br/><code><span class="s2">--add-opens=java.base/java.util=ALL-UNNAMED</span></code> <br/><code><span class="s2">--add-opens=java.base/java.lang=ALL-UNNAMED</span></code> <br/><code><span class="s2">--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED</span></code> <br/><code><span class="s2">--add-exports=java.base/sun.nio.ch=ALL-UNNAMED</span></code> <br/><code><span class="s2">--add-exports=java.management/com.sun.jmx.mbeanserver=ALL-UNNAMED</span></code> <br/><code><span class="s2">--add-exports=jdk.internal.jvmstat/sun.jvmstat.monitor=ALL-UNNAMED</span></code> <br/><code><span class="s2">--add-exports=java.base/sun.reflect.generics.reflectiveObjects=ALL-UNNAMED</span></code> <br/><code><span class="s2">--add-opens=jdk.management/com.sun.management.internal=ALL-UNNAMED</span></code> <br/><code><span class="s2">-DIGNITE_QUIET=false</span></code> <br/><code><span class="s2">-DIGNITE_NO_ASCII=true"</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Перезапустите экземпляр ПО, чтобы изменения вступили в силу.</p>
@@ -168,8 +169,7 @@
 <li>Откройте файл конфигурации Elasticsearch: <code>elasticsearch.yml</code></li>
 <li>
 <p>Установите требуемое количество шардов с помощью директивы <code>cluster.max_shards_per_node</code>:</p>
-<div class="highlight"><code><pre><span></span><code>сluster.max_shards_per_node:<span class="w"> </span><span class="m">3000</span></code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>сluster.max_shards_per_node:<span class="w"> </span><span class="m">3000</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Перезапустите службу Elasticsearch, чтобы изменения вступили в силу.</p>
@@ -191,9 +191,7 @@
 <li>Откройте файл конфигурации JVM Elasticsearch: <code>/etc/elasticsearch/jvm.options</code></li>
 <li>
 <p class="pageBreakBefore">Установите размер кучи начальный и максимальный размер кучи, например <code>-Xms4g</code> (начальный. 4 ГБ) и <code>-Xmx32g</code> (макс. 32 ГБ):</p>
-<div class="highlight"><code><pre><span></span><code>-Xms4g</code><br/>
-<code>-Xmx32g</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>-Xms4g</code> <br/><code>-Xmx32g</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Перезапустите службу Elasticsearch, чтобы изменения вступили в силу.</p>
@@ -216,27 +214,11 @@
 <li>Откройте для редактирования файл <code>/etc/nginx/nginx.conf</code></li>
 <li>
 <p>В разделе <code>events</code> задайте количество подключений с помощью директивы <code>worker_connections</code>:</p>
-<div class="highlight"><code><pre><span></span><code>events<span class="w"> </span><span class="o">{</span></code><br/>
-<code>...</code><br/>
-<code>worker_connections<span class="w"> </span><span class="m">768</span><span class="p">;</span></code><br/>
-<code>...</code><br/>
-<code><span class="o">}</span></code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>events<span class="w"> </span><span class="o">{</span></code> <br/><code>...</code> <br/><code>worker_connections<span class="w"> </span><span class="m">768</span><span class="p">;</span></code> <br/><code>...</code> <br/><code><span class="o">}</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>В разделе <code>http</code> включите и настройте сжатие:</p>
-<div class="highlight"><code><pre><span></span><code>http<span class="w"> </span><span class="o">{</span></code><br/>
-<code>...</code><br/>
-<code>gzip<span class="w"> </span>on<span class="p">;</span></code><br/>
-<code>gzip_vary<span class="w"> </span>on<span class="p">;</span></code><br/>
-<code>gzip_proxied<span class="w"> </span>any<span class="p">;</span></code><br/>
-<code>gzip_comp_level<span class="w"> </span><span class="m">6</span><span class="p">;</span></code><br/>
-<code>gzip_buffers<span class="w"> </span><span class="m">16</span><span class="w"> </span>8k<span class="p">;</span></code><br/>
-<code>gzip_http_version<span class="w"> </span><span class="m">1</span>.1<span class="p">;</span></code><br/>
-<code>gzip_types<span class="w"> </span>text/plain<span class="w"> </span>text/css<span class="w"> </span>application/json<span class="w"> </span>application/javascript<span class="w"> </span>text/xml<span class="w"> </span>application/xml<span class="w"> </span>application/xml+rss<span class="w"> </span>text/javascript<span class="p">;</span></code><br/>
-<code>...</code><br/>
-<code><span class="o">}</span></code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>http<span class="w"> </span><span class="o">{</span></code> <br/><code>...</code> <br/><code>gzip<span class="w"> </span>on<span class="p">;</span></code> <br/><code>gzip_vary<span class="w"> </span>on<span class="p">;</span></code> <br/><code>gzip_proxied<span class="w"> </span>any<span class="p">;</span></code> <br/><code>gzip_comp_level<span class="w"> </span><span class="m">6</span><span class="p">;</span></code> <br/><code>gzip_buffers<span class="w"> </span><span class="m">16</span><span class="w"> </span>8k<span class="p">;</span></code> <br/><code>gzip_http_version<span class="w"> </span><span class="m">1</span>.1<span class="p">;</span></code> <br/><code>gzip_types<span class="w"> </span>text/plain<span class="w"> </span>text/css<span class="w"> </span>application/json<span class="w"> </span>application/javascript<span class="w"> </span>text/xml<span class="w"> </span>application/xml<span class="w"> </span>application/xml+rss<span class="w"> </span>text/javascript<span class="p">;</span></code> <br/><code>...</code> <br/><code><span class="o">}</span></code> <br/></pre></code></div>
 </li>
 </ol>
 </article>
@@ -249,5 +231,5 @@
 </main>
 </div>
 <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
-document$.subscribe(() => { lightbox.reload() });
-</script></body>
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

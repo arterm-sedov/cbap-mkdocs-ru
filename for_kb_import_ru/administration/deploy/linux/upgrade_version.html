@@ -1,4 +1,4 @@
-<body data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="2499" kb-tags="" kb-title="Обновление версии экземпляра ПО">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -11,35 +11,45 @@
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#введение">
 <span class="md-ellipsis">
-      Введение
+      
+        Введение
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#порядок-обновления-версии-экземпляра-по">
 <span class="md-ellipsis">
-      Порядок обновления версии экземпляра ПО
+      
+        Порядок обновления версии экземпляра ПО
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#подготовка-экземпляра-по-к-обновлению">
 <span class="md-ellipsis">
-      Подготовка экземпляра ПО к обновлению
+      
+        Подготовка экземпляра ПО к обновлению
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#обновление-версии-по-для-экземпляра">
 <span class="md-ellipsis">
-      Обновление версии ПО для экземпляра
+      
+        Обновление версии ПО для экземпляра
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
 <span class="md-ellipsis">
-      Связанные статьи
+      
+        Связанные статьи
+      
     </span>
 </a>
 </li>
@@ -78,67 +88,47 @@
 <li>Создайте и перенесите во внешнее хранилище резервную копию базы данных экземпляра ПО. См. статью <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2190">Резервное копирование. Настройка и запуск, просмотр журнала сеансов</a>»</em>.</li>
 <li>
 <p>Перейдите в режим суперпользователя:</p>
-<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>-s</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>-s</code> <br/></pre></code></div>
 <p>или</p>
-<div class="highlight"><code><pre><span></span><code>su<span class="w"> </span>-</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>su<span class="w"> </span>-</code> <br/></pre></code></div>
 </li>
 <li>
 <p id="NginxBackup">Сохраните резервную копию конфигурационных файлов, например в директорию <code>/var/backups/config_tmp</code>:</p>
 <ul>
 <li><strong>Astra Linux</strong>, <strong>Ubuntu</strong>, <strong>Debian</strong> (DEB-based)</li>
 </ul>
-<div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>/var/backups/config_tmp/</code><br/>
-<code><span class="nb">cd</span><span class="w"> </span>/var/www/&lt;instanceName&gt;/</code><br/>
-<code>cp<span class="w"> </span>*.config<span class="w"> </span>apigateway.json<span class="w"> </span>/var/backups/config_tmp/</code><br/>
-<code>cp<span class="w"> </span>/etc/nginx/sites-available/comindware&lt;instanceName&gt;<span class="w"> </span>/var/backups/config_tmp/</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>/var/backups/config_tmp/</code> <br/><code><span class="nb">cd</span><span class="w"> </span>/var/www/&lt;instanceName&gt;/</code> <br/><code>cp<span class="w"> </span>*.config<span class="w"> </span>apigateway.json<span class="w"> </span>/var/backups/config_tmp/</code> <br/><code>cp<span class="w"> </span>/etc/nginx/sites-available/comindware&lt;instanceName&gt;<span class="w"> </span>/var/backups/config_tmp/</code> <br/></pre></code></div>
 <ul>
 <li><strong>РЕД ОС</strong>, <strong>Rocky</strong> (RPM-based)</li>
 </ul>
-<div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>/var/backups/config_tmp/</code><br/>
-<code><span class="nb">cd</span><span class="w"> </span>/var/www/&lt;instanceName&gt;/</code><br/>
-<code>cp<span class="w"> </span>*.config<span class="w"> </span>apigateway.json<span class="w"> </span>/var/backups/config_tmp/</code><br/>
-<code>cp<span class="w"> </span>/etc/nginx/conf.d/comindware&lt;instanceName&gt;<span class="w"> </span>/var/backups/config_tmp/</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>/var/backups/config_tmp/</code> <br/><code><span class="nb">cd</span><span class="w"> </span>/var/www/&lt;instanceName&gt;/</code> <br/><code>cp<span class="w"> </span>*.config<span class="w"> </span>apigateway.json<span class="w"> </span>/var/backups/config_tmp/</code> <br/><code>cp<span class="w"> </span>/etc/nginx/conf.d/comindware&lt;instanceName&gt;<span class="w"> </span>/var/backups/config_tmp/</code> <br/></pre></code></div>
 <ul>
 <li><strong>Альт Сервер</strong></li>
 </ul>
-<div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>/var/backups/config_tmp/</code><br/>
-<code><span class="nb">cd</span><span class="w"> </span>/var/www/&lt;instanceName&gt;/</code><br/>
-<code>cp<span class="w"> </span>*.config<span class="w"> </span>apigateway.json<span class="w"> </span>/var/backups/config_tmp/</code><br/>
-<code>cp<span class="w"> </span>/etc/nginx/sites-available.d/comindware&lt;instanceName&gt;<span class="w"> </span>/var/backups/config_tmp/</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>/var/backups/config_tmp/</code> <br/><code><span class="nb">cd</span><span class="w"> </span>/var/www/&lt;instanceName&gt;/</code> <br/><code>cp<span class="w"> </span>*.config<span class="w"> </span>apigateway.json<span class="w"> </span>/var/backups/config_tmp/</code> <br/><code>cp<span class="w"> </span>/etc/nginx/sites-available.d/comindware&lt;instanceName&gt;<span class="w"> </span>/var/backups/config_tmp/</code> <br/></pre></code></div>
 <p>Здесь <code>&lt;instanceName&gt;</code> — имя экземпляра ПО.</p>
 </li>
 <li>
 <p>Остановите экземпляр ПО и его вспомогательные службы и удостоверьтесь, что они остановлены:</p>
-<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>stop<span class="w"> </span>apigateway&lt;instanceName&gt;<span class="w"> </span>comindware&lt;instanceName&gt;</code><br/>
-<code>systemctl<span class="w"> </span>status<span class="w"> </span>apigateway&lt;instanceName&gt;<span class="w"> </span>comindware&lt;instanceName&gt;</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>stop<span class="w"> </span>apigateway&lt;instanceName&gt;<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/><code>systemctl<span class="w"> </span>status<span class="w"> </span>apigateway&lt;instanceName&gt;<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Проверьте, выполняется ли сервис <code>Comindware.Adapter.Agent.exe</code>:</p>
-<div class="highlight"><code><pre><span></span><code>ps<span class="w"> </span>fax<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Agent</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>ps<span class="w"> </span>fax<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Agent</code> <br/></pre></code></div>
 <ul>
 <li>
 <p>Если процесс <code>Comindware.Adapter.Agent.exe</code>, выполняется, завершите его по <code>PID</code>:</p>
-<div class="highlight"><code><pre><span></span><code><span class="nb">kill</span><span class="w"> </span>-9<span class="w"> </span>&lt;PID&gt;</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="nb">kill</span><span class="w"> </span>-9<span class="w"> </span>&lt;PID&gt;</code> <br/></pre></code></div>
 </li>
 </ul>
 </li>
 <li>
 <p>Проверьте имя и статус экземпляра:</p>
-<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>status<span class="w"> </span>comindware*</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>status<span class="w"> </span>comindware*</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Удалите (или переместите в резервное хранилище) неиспользуемые предыдущие дистрибутивы ПО (<code>&lt;distPath&gt;</code> — путь к директории с дистрибутивом, <code>&lt;osname&gt;</code> — название операционной системы):</p>
-<div class="highlight"><code><pre><span></span><code>rm<span class="w"> </span>-rf<span class="w"> </span>&lt;distPath&gt;/CMW_&lt;osname&gt;</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>rm<span class="w"> </span>-rf<span class="w"> </span>&lt;distPath&gt;/CMW_&lt;osname&gt;</code> <br/></pre></code></div>
 </li>
 </ol>
 <h2 class="pageBreakBefore" id="обновление-версии-по-для-экземпляра">Обновление версии ПО для экземпляра</h2>
@@ -146,33 +136,26 @@
 <ol class="colored_numbers_list">
 <li>
 <p>Скачайте и распакуйте дистрибутив с новой версией ПО (<code>X.X</code>, <code>&lt;versionNumber&gt;</code> — номер версии ПО):</p>
-<div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>&lt;distPath&gt;</code><br/>
-<code>tar<span class="w"> </span>-xf<span class="w"> </span>X.X-release-ru-&lt;versionNumber&gt;.&lt;osname&gt;.tar.gz</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>&lt;distPath&gt;</code> <br/><code>tar<span class="w"> </span>-xf<span class="w"> </span>X.X-release-ru-&lt;versionNumber&gt;.&lt;osname&gt;.tar.gz</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Перейдите в распакованную папку:</p>
-<div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>CMW_&lt;osname&gt;/scripts/cbap</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>CMW_&lt;osname&gt;/scripts/cbap</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Запустите установку распакованного дистрибутива ПО:</p>
-<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>install.sh</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>install.sh</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Проверьте наличие и имя директории установленной версии ПО:</p>
-<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>list.sh</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>list.sh</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Отобразится список установленных версий ПО на сервере.</p>
 </li>
 <li>
 <p>Перейдите в директорию скриптов для работы с экземпляром ПО и запустите его обновление до требуемой версии:</p>
-<div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>../instance/</code><br/>
-<code>bash<span class="w"> </span>upgrade.sh<span class="w"> </span>-n<span class="o">=</span>&lt;instanceName&gt;<span class="w"> </span>-vp<span class="o">=</span>/var/www/.cmw_version/&lt;versionNumber&gt;</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>../instance/</code> <br/><code>bash<span class="w"> </span>upgrade.sh<span class="w"> </span>-n<span class="o">=</span>&lt;instanceName&gt;<span class="w"> </span>-vp<span class="o">=</span>/var/www/.cmw_version/&lt;versionNumber&gt;</code> <br/></pre></code></div>
 <p>Здесь:</p>
 <ul>
 <li><code>-n=&lt;instanceName&gt;</code> — имя обновляемого экземпляра ПО;</li>
@@ -182,71 +165,39 @@
 <li>
 <p>По окончании обновления скрипт выведет информацию о компонентах экземпляра ПО. Удостоверьтесь, что компоненты успешно обновлены.</p>
 <p>Пример результата выполнения скрипта:</p>
-<div class="highlight"><code><pre><span></span><code>...</code><br/>
-<code><span class="o">[</span>Done<span class="o">]</span><span class="w"> </span>Creating<span class="w"> </span>Log<span class="w"> </span>Directories.</code><br/>
-<code>OK<span class="w">     </span>Instance<span class="w"> </span>folder<span class="w"> </span>created.</code><br/>
-<code>OK<span class="w">     </span>Instance<span class="w"> </span>Web<span class="w"> </span>config<span class="w"> </span>created.</code><br/>
-<code>OK<span class="w">     </span>Instance<span class="w"> </span>Ignite<span class="w"> </span>config<span class="w"> </span>created.</code><br/>
-<code>OK<span class="w">     </span>Instance<span class="w"> </span>binaries<span class="w"> </span>linked.</code><br/>
-<code>OK<span class="w">     </span>Instance<span class="w"> </span>config<span class="w"> </span>created.</code><br/>
-<code>OK<span class="w">     </span>Data<span class="w"> </span>folder<span class="w"> </span>created.</code><br/>
-<code>OK<span class="w">     </span>Database<span class="w"> </span>folder<span class="w"> </span>created:<span class="w"> </span>Yes</code><br/>
-<code>OK<span class="w">     </span>Streams<span class="w"> </span>folder<span class="w"> </span>created:<span class="w"> </span>No<span class="w"> </span></code><br/>
-<code>OK<span class="w">     </span>Logs<span class="w"> </span>folder<span class="w"> </span>created:<span class="w"> </span>Yes</code><br/>
-<code>OK<span class="w">     </span>Used<span class="w"> </span>version:<span class="w"> </span>&lt;versionNumber&gt;</code><br/>
-<code>OK<span class="w">     </span>Logs<span class="w"> </span>configured.</code><br/>
-<code>OK<span class="w">     </span>Sites<span class="w"> </span>created.</code><br/>
-<code>OK<span class="w">     </span>Sites<span class="w"> </span>enabled.</code><br/>
-<code>OK<span class="w">     </span>API<span class="w"> </span>Gateway<span class="w"> </span>configured.</code><br/>
-<code>OK<span class="w">     </span>Link<span class="w"> </span>to<span class="w"> </span>binaries<span class="w"> </span>is<span class="w"> </span>valid.</code><br/>
-<code>OK<span class="w">     </span>Instance<span class="w"> </span>service<span class="w"> </span>started.</code><br/>
-<code>FAILED<span class="w"> </span>Instance<span class="w"> </span>API<span class="w"> </span>gateway<span class="w"> </span>service<span class="w"> </span>started.</code><br/>
-<code>OK<span class="w">     </span>NGINX<span class="w"> </span>started.</code><br/>
-<code>FAILED<span class="w"> </span>Final<span class="w"> </span>status.</code><br/>
-<code><span class="o">[</span>Done<span class="o">]</span><span class="w"> </span>Upgrade<span class="w"> </span>CBAP<span class="w"> </span>instance.</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>...</code> <br/><code><span class="o">[</span>Done<span class="o">]</span><span class="w"> </span>Creating<span class="w"> </span>Log<span class="w"> </span>Directories.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>folder<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>Web<span class="w"> </span>config<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>Ignite<span class="w"> </span>config<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>binaries<span class="w"> </span>linked.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>config<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>Data<span class="w"> </span>folder<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>Database<span class="w"> </span>folder<span class="w"> </span>created:<span class="w"> </span>Yes</code> <br/><code>OK<span class="w">     </span>Streams<span class="w"> </span>folder<span class="w"> </span>created:<span class="w"> </span>No<span class="w"> </span></code> <br/><code>OK<span class="w">     </span>Logs<span class="w"> </span>folder<span class="w"> </span>created:<span class="w"> </span>Yes</code> <br/><code>OK<span class="w">     </span>Used<span class="w"> </span>version:<span class="w"> </span>&lt;versionNumber&gt;</code> <br/><code>OK<span class="w">     </span>Logs<span class="w"> </span>configured.</code> <br/><code>OK<span class="w">     </span>Sites<span class="w"> </span>created.</code> <br/><code>OK<span class="w">     </span>Sites<span class="w"> </span>enabled.</code> <br/><code>OK<span class="w">     </span>API<span class="w"> </span>Gateway<span class="w"> </span>configured.</code> <br/><code>OK<span class="w">     </span>Link<span class="w"> </span>to<span class="w"> </span>binaries<span class="w"> </span>is<span class="w"> </span>valid.</code> <br/><code>OK<span class="w">     </span>Instance<span class="w"> </span>service<span class="w"> </span>started.</code> <br/><code>FAILED<span class="w"> </span>Instance<span class="w"> </span>API<span class="w"> </span>gateway<span class="w"> </span>service<span class="w"> </span>started.</code> <br/><code>OK<span class="w">     </span>NGINX<span class="w"> </span>started.</code> <br/><code>FAILED<span class="w"> </span>Final<span class="w"> </span>status.</code> <br/><code><span class="o">[</span>Done<span class="o">]</span><span class="w"> </span>Upgrade<span class="w"> </span>CBAP<span class="w"> </span>instance.</code> <br/></pre></code></div>
 <p>Если какая-либо из служб имеет статус <code>FAILED</code>, перезапустите её (<code>&lt;serviceName&gt;</code> — имя службы):</p>
-<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>restart<span class="w"> </span>&lt;serviceName&gt;.service</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>restart<span class="w"> </span>&lt;serviceName&gt;.service</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Проверьте корректность конфигурации NGINX для экземпляра ПО:</p>
 <ul>
 <li>
 <p><strong>Astra Linux</strong>, <strong>Ubuntu</strong>, <strong>Debian</strong> (DEB-based)</p>
-<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/etc/nginx/sites-available/comindware&lt;instanceName&gt;</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/etc/nginx/sites-available/comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
 </li>
 <li>
 <p><strong>РЕД ОС</strong>, <strong>Rocky</strong> (RPM-based)</p>
-<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/etc/nginx/conf.d/comindware&lt;instanceName&gt;</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/etc/nginx/conf.d/comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
 </li>
 <li>
 <p><strong>Альт Сервер</strong></p>
-<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/etc/nginx/sites-available.d/comindware&lt;instanceName&gt;</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/etc/nginx/sites-available.d/comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
 </li>
 <li>
 <p>При необходимости восстановите конфигурацию NGINX, <a class="mkdocs_imported_link" href="#NginxBackup">сохранённую ранее</a>.</p>
 <ul>
 <li><strong>Astra Linux</strong>, <strong>Ubuntu</strong>, <strong>Debian</strong> (DEB-based)</li>
 </ul>
-<div class="highlight"><code><pre><span></span><code>cp<span class="w"> </span>/var/backups/config_tmp/comindware&lt;instanceName&gt;<span class="w"> </span>/etc/nginx/sites-available/</code><br/>
-<code>nginx<span class="w"> </span>-t<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>nginx<span class="w"> </span>-s<span class="w"> </span>reload</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>cp<span class="w"> </span>/var/backups/config_tmp/comindware&lt;instanceName&gt;<span class="w"> </span>/etc/nginx/sites-available/</code> <br/><code>nginx<span class="w"> </span>-t<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>nginx<span class="w"> </span>-s<span class="w"> </span>reload</code> <br/></pre></code></div>
 <ul>
 <li><strong>РЕД ОС</strong>, <strong>Rocky</strong> (RPM-based)</li>
 </ul>
-<div class="highlight"><code><pre><span></span><code>cp<span class="w"> </span>/var/backups/config_tmp/comindware&lt;instanceName&gt;<span class="w"> </span>/etc/nginx/conf.d/</code><br/>
-<code>nginx<span class="w"> </span>-t<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>nginx<span class="w"> </span>-s<span class="w"> </span>reload</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>cp<span class="w"> </span>/var/backups/config_tmp/comindware&lt;instanceName&gt;<span class="w"> </span>/etc/nginx/conf.d/</code> <br/><code>nginx<span class="w"> </span>-t<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>nginx<span class="w"> </span>-s<span class="w"> </span>reload</code> <br/></pre></code></div>
 <ul>
 <li><strong>Альт Сервер</strong></li>
 </ul>
-<div class="highlight"><code><pre><span></span><code>cp<span class="w"> </span>/var/backups/config_tmp/comindware&lt;instanceName&gt;<span class="w"> </span>/etc/nginx/sites-available.d/</code><br/>
-<code>nginx<span class="w"> </span>-t<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>nginx<span class="w"> </span>-s<span class="w"> </span>reload</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>cp<span class="w"> </span>/var/backups/config_tmp/comindware&lt;instanceName&gt;<span class="w"> </span>/etc/nginx/sites-available.d/</code> <br/><code>nginx<span class="w"> </span>-t<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>nginx<span class="w"> </span>-s<span class="w"> </span>reload</code> <br/></pre></code></div>
 </li>
 </ul>
 </li>
@@ -255,17 +206,7 @@
 <ul>
 <li>
 <p>Проверьте и при необходимости отредактируйте адрес сервера Kafka:</p>
-<div class="highlight"><code><pre><span></span><code><span class="s2">"Kafka"</span>:<span class="w"> </span><span class="o">{</span></code><br/>
-<code><span class="w">    </span><span class="c1"># Укажите адрес сервера Kafka</span></code><br/>
-<code><span class="w">    </span><span class="c1"># Должен совпадать с mq.server</span></code><br/>
-<code><span class="w">    </span><span class="c1"># в /usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</span></code><br/>
-<code><span class="w">    </span><span class="s2">"BootstrapServer"</span>:<span class="w"> </span><span class="s2">"&lt;KAFKAIP&gt;:9092"</span>,</code><br/>
-<code><span class="w">    </span><span class="c1"># Укажите имя экземпляра ПО</span></code><br/>
-<code><span class="w">    </span><span class="c1"># Должно совпадать с mq.group</span></code><br/>
-<code><span class="w">    </span><span class="c1"># в /usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</span></code><br/>
-<code><span class="w">    </span><span class="s2">"GroupId"</span>:<span class="w"> </span><span class="s2">"&lt;instanceName&gt;"</span></code><br/>
-<code><span class="o">}</span></code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="s2">"Kafka"</span>:<span class="w"> </span><span class="o">{</span></code> <br/><code><span class="w">    </span><span class="c1"># Укажите адрес сервера Kafka</span></code> <br/><code><span class="w">    </span><span class="c1"># Должен совпадать с mq.server</span></code> <br/><code><span class="w">    </span><span class="c1"># в /usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</span></code> <br/><code><span class="w">    </span><span class="s2">"BootstrapServer"</span>:<span class="w"> </span><span class="s2">"&lt;KAFKAIP&gt;:9092"</span>,</code> <br/><code><span class="w">    </span><span class="c1"># Укажите имя экземпляра ПО</span></code> <br/><code><span class="w">    </span><span class="c1"># Должно совпадать с mq.group</span></code> <br/><code><span class="w">    </span><span class="c1"># в /usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</span></code> <br/><code><span class="w">    </span><span class="s2">"GroupId"</span>:<span class="w"> </span><span class="s2">"&lt;instanceName&gt;"</span></code> <br/><code><span class="o">}</span></code> <br/></pre></code></div>
 </li>
 </ul>
 </li>
@@ -274,84 +215,25 @@
 <ul>
 <li>
 <p>Замените в конфигурации следующие директивы:</p>
-<div class="highlight"><code><pre><span></span><code><span class="c1"># исходная директива</span></code><br/>
-<code><span class="c1"># backupPath: /var/backups/&lt;instanceName&gt;</span></code><br/>
-<code><span class="c1"># заменить на:</span></code><br/>
-<code>backup.config.default.repository.type:<span class="w"> </span>LocalDisk</code><br/>
-<code>backup.config.default.repository.localDisk.path:<span class="w"> </span>/var/backups/&lt;instanceName&gt;<span class="w"> </span><span class="c1">## backupPath</span></code><br/>
-<code></code><br/>
-<code><span class="c1"># исходная директива</span></code><br/>
-<code><span class="c1"># tempPath: /var/lib/comindware/&lt;instanceName&gt;/Temp</span></code><br/>
-<code><span class="c1"># заменить на:</span></code><br/>
-<code>tempStorage.type:<span class="w"> </span>LocalDisk</code><br/>
-<code>tempStorage.localDisk.path:<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/Temp<span class="w"> </span><span class="c1">## tempPath</span></code><br/>
-<code></code><br/>
-<code><span class="c1"># исходная директива</span></code><br/>
-<code><span class="c1"># streamsPath: /var/streams/&lt;instanceName&gt;</span></code><br/>
-<code><span class="c1"># заменить на:</span></code><br/>
-<code>userStorage.type:<span class="w"> </span>LocalDisk</code><br/>
-<code>userStorage.localDisk.path:<span class="w"> </span>/var/streams/&lt;instanceName&gt;</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="c1"># исходная директива</span></code> <br/><code><span class="c1"># backupPath: /var/backups/&lt;instanceName&gt;</span></code> <br/><code><span class="c1"># заменить на:</span></code> <br/><code>backup.config.default.repository.type:<span class="w"> </span>LocalDisk</code> <br/><code>backup.config.default.repository.localDisk.path:<span class="w"> </span>/var/backups/&lt;instanceName&gt;<span class="w"> </span><span class="c1">## backupPath</span></code> <br/><code></code> <br/><code><span class="c1"># исходная директива</span></code> <br/><code><span class="c1"># tempPath: /var/lib/comindware/&lt;instanceName&gt;/Temp</span></code> <br/><code><span class="c1"># заменить на:</span></code> <br/><code>tempStorage.type:<span class="w"> </span>LocalDisk</code> <br/><code>tempStorage.localDisk.path:<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/Temp<span class="w"> </span><span class="c1">## tempPath</span></code> <br/><code></code> <br/><code><span class="c1"># исходная директива</span></code> <br/><code><span class="c1"># streamsPath: /var/streams/&lt;instanceName&gt;</span></code> <br/><code><span class="c1"># заменить на:</span></code> <br/><code>userStorage.type:<span class="w"> </span>LocalDisk</code> <br/><code>userStorage.localDisk.path:<span class="w"> </span>/var/streams/&lt;instanceName&gt;</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Добавьте в конфигурацию следующие директивы:</p>
-<div class="highlight"><code><pre><span></span><code><span class="c1"># Имя конфигурации</span></code><br/>
-<code>configName:<span class="w"> </span>&lt;instanceName&gt;</code><br/>
-<code></code><br/>
-<code><span class="c1"># Имя базы данных Apache Ignite</span></code><br/>
-<code>instanceName:<span class="w"> </span>&lt;instanceName&gt;</code><br/>
-<code></code><br/>
-<code>manageAdapterHost:<span class="w"> </span><span class="nb">true</span></code><br/>
-<code>useDataBusNumbers:</code><br/>
-<code><span class="w">    </span>-<span class="w"> </span><span class="m">0</span></code><br/>
-<code><span class="w">    </span>-<span class="w"> </span><span class="m">1</span></code><br/>
-<code><span class="w">    </span>-<span class="w"> </span><span class="m">2</span></code><br/>
-<code><span class="w">    </span>-<span class="w"> </span><span class="m">3</span></code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="c1"># Имя конфигурации</span></code> <br/><code>configName:<span class="w"> </span>&lt;instanceName&gt;</code> <br/><code></code> <br/><code><span class="c1"># Имя базы данных Apache Ignite</span></code> <br/><code>instanceName:<span class="w"> </span>&lt;instanceName&gt;</code> <br/><code></code> <br/><code>manageAdapterHost:<span class="w"> </span><span class="nb">true</span></code> <br/><code>useDataBusNumbers:</code> <br/><code><span class="w">    </span>-<span class="w"> </span><span class="m">0</span></code> <br/><code><span class="w">    </span>-<span class="w"> </span><span class="m">1</span></code> <br/><code><span class="w">    </span>-<span class="w"> </span><span class="m">2</span></code> <br/><code><span class="w">    </span>-<span class="w"> </span><span class="m">3</span></code> <br/></pre></code></div>
 </li>
 </ul>
 </li>
 <li>
 <p>Удостоверьтесь, что итоговый файл конфигурации <code>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code> выглядит аналогично следующему примеру:</p>
-<div class="highlight"><code><pre><span></span><code>databasePath:<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/Database/</code><br/>
-<code>configPath:<span class="w"> </span>/var/www/&lt;instanceName&gt;</code><br/>
-<code>backup.config.default.repository.type:<span class="w"> </span>LocalDisk</code><br/>
-<code>backup.config.default.repository.localDisk.path:<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/Backup</code><br/>
-<code>userStorage.type:<span class="w"> </span>LocalDisk</code><br/>
-<code>userStorage.localDisk.path:<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/Streams</code><br/>
-<code>tempStorage.type:<span class="w"> </span>LocalDisk</code><br/>
-<code>tempStorage.localDisk.path:<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/Temp</code><br/>
-<code>elasticsearchUri:<span class="w"> </span>XXX.XXX.XXX.XXX:9200<span class="w"> </span><span class="c1">#адрес сервера ElasticSearch</span></code><br/>
-<code>instanceName:<span class="w"> </span>&lt;instanceName&gt;</code><br/>
-<code>configName:<span class="w"> </span>&lt;instanceName&gt;</code><br/>
-<code>databaseName:<span class="w"> </span>&lt;instanceName&gt;</code><br/>
-<code>nodeName:<span class="w"> </span>prod_0</code><br/>
-<code>linuxAuthenticationType:<span class="w"> </span><span class="m">1</span></code><br/>
-<code>ldapAuthenticationType:<span class="w"> </span><span class="m">1</span></code><br/>
-<code>isFederationAuthEnabled:<span class="w"> </span><span class="m">0</span></code><br/>
-<code>manageAdapterHost:<span class="w"> </span><span class="nb">true</span></code><br/>
-<code>isTestEnvironment:<span class="w"> </span><span class="nb">false</span></code><br/>
-<code>mq.enabled:<span class="w"> </span><span class="nb">true</span></code><br/>
-<code>mq.server:<span class="w"> </span>XXX.XXX.XXX.XXX:9092<span class="w"> </span><span class="c1">#адрес сервера Kafka</span></code><br/>
-<code>mq.group:<span class="w"> </span>&lt;instanceName&gt;<span class="w"> </span><span class="c1">#имя группы в Kafka</span></code><br/>
-<code>mq.node:<span class="w"> </span>prod_0</code><br/>
-<code>mq.name:<span class="w"> </span>&lt;instanceName&gt;<span class="w"> </span><span class="c1">#имя очереди в Kafka</span></code><br/>
-<code>mq.adapter.0.enabled:<span class="w"> </span><span class="nb">true</span></code><br/>
-<code>mq.adapter.1.enabled:<span class="w"> </span><span class="nb">true</span></code><br/>
-<code>mq.adapter.2.enabled:<span class="w"> </span><span class="nb">true</span></code><br/>
-<code>mq.adapter.3.enabled:<span class="w"> </span><span class="nb">true</span></code><br/>
-<code>version:<span class="w"> </span>&lt;versionNumber&gt;</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>databasePath:<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/Database/</code> <br/><code>configPath:<span class="w"> </span>/var/www/&lt;instanceName&gt;</code> <br/><code>backup.config.default.repository.type:<span class="w"> </span>LocalDisk</code> <br/><code>backup.config.default.repository.localDisk.path:<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/Backup</code> <br/><code>userStorage.type:<span class="w"> </span>LocalDisk</code> <br/><code>userStorage.localDisk.path:<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/Streams</code> <br/><code>tempStorage.type:<span class="w"> </span>LocalDisk</code> <br/><code>tempStorage.localDisk.path:<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/Temp</code> <br/><code>elasticsearchUri:<span class="w"> </span>XXX.XXX.XXX.XXX:9200<span class="w"> </span><span class="c1">#адрес сервера ElasticSearch</span></code> <br/><code>instanceName:<span class="w"> </span>&lt;instanceName&gt;</code> <br/><code>configName:<span class="w"> </span>&lt;instanceName&gt;</code> <br/><code>databaseName:<span class="w"> </span>&lt;instanceName&gt;</code> <br/><code>nodeName:<span class="w"> </span>prod_0</code> <br/><code>linuxAuthenticationType:<span class="w"> </span><span class="m">1</span></code> <br/><code>ldapAuthenticationType:<span class="w"> </span><span class="m">1</span></code> <br/><code>isFederationAuthEnabled:<span class="w"> </span><span class="m">0</span></code> <br/><code>manageAdapterHost:<span class="w"> </span><span class="nb">true</span></code> <br/><code>isTestEnvironment:<span class="w"> </span><span class="nb">false</span></code> <br/><code>mq.enabled:<span class="w"> </span><span class="nb">true</span></code> <br/><code>mq.server:<span class="w"> </span>XXX.XXX.XXX.XXX:9092<span class="w"> </span><span class="c1">#адрес сервера Kafka</span></code> <br/><code>mq.group:<span class="w"> </span>&lt;instanceName&gt;<span class="w"> </span><span class="c1">#имя группы в Kafka</span></code> <br/><code>mq.node:<span class="w"> </span>prod_0</code> <br/><code>mq.name:<span class="w"> </span>&lt;instanceName&gt;<span class="w"> </span><span class="c1">#имя очереди в Kafka</span></code> <br/><code>mq.adapter.0.enabled:<span class="w"> </span><span class="nb">true</span></code> <br/><code>mq.adapter.1.enabled:<span class="w"> </span><span class="nb">true</span></code> <br/><code>mq.adapter.2.enabled:<span class="w"> </span><span class="nb">true</span></code> <br/><code>mq.adapter.3.enabled:<span class="w"> </span><span class="nb">true</span></code> <br/><code>version:<span class="w"> </span>&lt;versionNumber&gt;</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Перезапустите сервисы, настройки которых были изменены:</p>
-<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>restart<span class="w"> </span>apigateway&lt;instanceName&gt;<span class="w"> </span>comindware&lt;instanceName&gt;</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>restart<span class="w"> </span>apigateway&lt;instanceName&gt;<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Откройте сайт экземпляра ПО в браузере, дождитесь окончания загрузки, одновременно открыв выдачу журналов экземпляра в терминале:</p>
-<div class="highlight"><code><pre><span></span><code>tail<span class="w"> </span>-f<span class="w"> </span>/var/log/comindware/&lt;instanceName&gt;/Log/sys*</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>tail<span class="w"> </span>-f<span class="w"> </span>/var/log/comindware/&lt;instanceName&gt;/Log/sys*</code> <br/></pre></code></div>
 </li>
 <li>
 <p>После обновления всех экземпляров ПО, старую версию ПО можно удалить согласно инструкции <em>«<a class="autorefs autorefs-internal mkdocs_imported_link" href="deploy_guide.html#deploy_guide_linux_delete_version">Удаление версии ПО</a>»</em>.</p>
@@ -374,5 +256,5 @@
 </main>
 </div>
 <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
-document$.subscribe(() => { lightbox.reload() });
-</script></body>
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

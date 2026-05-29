@@ -1,4 +1,4 @@
-<body data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="" kb-tags="" kb-title="">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -6,23 +6,11 @@
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>cp<span class="w"> </span>yourdomain.com.crt<span class="w"> </span>/usr/share/ca-certificates/</code><br/>
-</pre></code></div>
-<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>update-ca-certificates</code><br/>
-</pre></code></div>
-<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>mkdir<span class="w"> </span>/etc/containerd/certs.d/</code><br/>
-</pre></code></div>
-<div class="highlight"><code><pre><span></span><code>cat<span class="w"> </span><span class="s">&lt;&lt;EOF | sudo tee /etc/containerd/certs.d/hosts.toml</span></code><br/>
-<code><span class="s">server = "https://docker.io"</span></code><br/>
-<code></code><br/>
-<code><span class="s">[host."https://10.9.0.118/v2/docker.io/"]</span></code><br/>
-<code><span class="s">  capabilities = ["pull", "resolve"]</span></code><br/>
-<code><span class="s">  ca = "/usr/share/ca-certificates/yourdomain.com.crt"</span></code><br/>
-<code><span class="s">  override_path = true</span></code><br/>
-<code><span class="s">EOF</span></code><br/>
-</pre></code></div>
-<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>containerd</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>cp<span class="w"> </span>yourdomain.com.crt<span class="w"> </span>/usr/share/ca-certificates/</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>update-ca-certificates</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>mkdir<span class="w"> </span>/etc/containerd/certs.d/</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>cat<span class="w"> </span><span class="s">&lt;&lt;EOF | sudo tee /etc/containerd/certs.d/hosts.toml</span></code> <br/><code><span class="s">server = "https://docker.io"</span></code> <br/><code></code> <br/><code><span class="s">[host."https://10.9.0.118/v2/docker.io/"]</span></code> <br/><code><span class="s">  capabilities = ["pull", "resolve"]</span></code> <br/><code><span class="s">  ca = "/usr/share/ca-certificates/yourdomain.com.crt"</span></code> <br/><code><span class="s">  override_path = true</span></code> <br/><code><span class="s">EOF</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>containerd</code> <br/></pre></code></div>
 </article>
 </div>
 </div>
@@ -33,5 +21,5 @@
 </main>
 </div>
 <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
-document$.subscribe(() => { lightbox.reload() });
-</script></body>
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

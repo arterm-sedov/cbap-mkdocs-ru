@@ -1,4 +1,4 @@
-<body data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="2606" kb-tags="" kb-title="Получение сообщений через Kafka. Настройка подключения, пути передачи данных и сценария">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -11,63 +11,81 @@
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#введение">
 <span class="md-ellipsis">
-      Введение
+      
+        Введение
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#прикладная-задача">
 <span class="md-ellipsis">
-      Прикладная задача
+      
+        Прикладная задача
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#исходные-данные">
 <span class="md-ellipsis">
-      Исходные данные
+      
+        Исходные данные
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#настройка-подключения-к-kafka">
 <span class="md-ellipsis">
-      Настройка подключения к Kafka
+      
+        Настройка подключения к Kafka
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#настройка-пути-передачи-данных-через-kafka">
 <span class="md-ellipsis">
-      Настройка пути передачи данных через Kafka
+      
+        Настройка пути передачи данных через Kafka
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#настройка-сценария">
 <span class="md-ellipsis">
-      Настройка сценария
+      
+        Настройка сценария
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#создание-топика-и-тестирование-работы-интеграции">
 <span class="md-ellipsis">
-      Создание топика и тестирование работы интеграции
+      
+        Создание топика и тестирование работы интеграции
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#просмотр-журнала-работы-сценария">
 <span class="md-ellipsis">
-      Просмотр журнала работы сценария
+      
+        Просмотр журнала работы сценария
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
 <span class="md-ellipsis">
-      Связанные статьи
+      
+        Связанные статьи
+      
     </span>
 </a>
 </li>
@@ -197,23 +215,7 @@
 <ul>
 <li>
 <p>Сообщение содержит массив объектов <code>orders</code> в формате JSON:</p>
-<div class="highlight"><code><pre><span></span><code>{</code><br/>
-<code>    "orders": [</code><br/>
-<code>        {</code><br/>
-<code>        "code": "12-A",</code><br/>
-<code>        "amount": 123</code><br/>
-<code>        },</code><br/>
-<code>        {</code><br/>
-<code>        "code": "34-B"</code><br/>
-<code>        "amount": 345</code><br/>
-<code>        },</code><br/>
-<code>        {</code><br/>
-<code>        "code": "56-C",</code><br/>
-<code>        "amount": 678</code><br/>
-<code>        }</code><br/>
-<code>    ]</code><br/>
-<code>}</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>{</code> <br/><code>    "orders": [</code> <br/><code>        {</code> <br/><code>        "code": "12-A",</code> <br/><code>        "amount": 123</code> <br/><code>        },</code> <br/><code>        {</code> <br/><code>        "code": "34-B"</code> <br/><code>        "amount": 345</code> <br/><code>        },</code> <br/><code>        {</code> <br/><code>        "code": "56-C",</code> <br/><code>        "amount": 678</code> <br/><code>        }</code> <br/><code>    ]</code> <br/><code>}</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Для получения данных из приведённого выше сообщения создайте следующие атрибуты:</p>
@@ -302,8 +304,7 @@
 <li><strong>Переменная:</strong> <em>order</em></li>
 <li>
 <p><strong>Атрибут или выражение для поиска объектов: формула</strong></p>
-<div class="highlight"><code><pre><span></span><code>$$kafka_message-&gt;orders</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>$$kafka_message-&gt;orders</code> <br/></pre></code></div>
 <p>На каждой итерации цикла в переменную <code>order</code> будет помещаться объект из полученного в сообщении от Kafka массива <code>orders</code>.</p>
 </li>
 </ul>
@@ -337,16 +338,13 @@
 </li>
 </ol>
 <figure class="screenshot_with_caption">
-<p><img alt="Настроенный сценарий для получения данных через шину Kafka" src="https://kb.comindware.ru/assets/kafka_connection_scenarios.png"/><figcaption class="caption">Настроенный сценарий для получения данных через шину Kafka</figcaption></p>
+<p><img alt="Настроенный сценарий для получения данных через шину Kafka" src="/platform/v4.7/administration/connections_communication_routes/message_queue_connections/../email_connections/img/kafka_connection_scenarios.png"/></p><figcaption class="caption">Настроенный сценарий для получения данных через шину Kafka</figcaption>
 </figure>
 <h2 class="pageBreakBefore" id="создание-топика-и-тестирование-работы-интеграции">Создание топика и тестирование работы интеграции</h2>
 <ol class="colored_numbers_list">
 <li>
 <p>С помощью скрипта продюсера Kafka инициализируйте топик, например <code>CLIENT_ORDERS</code>:</p>
-<div class="highlight"><code><pre><span></span><code>sudo -i</code><br/>
-<code>cd /usr/share/kafka/bin</code><br/>
-<code>bash kafka-console-producer.sh --bootstrap-server 12.34.56.78:9092 --topic CLIENT_ORDER</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>sudo -i</code> <br/><code>cd /usr/share/kafka/bin</code> <br/><code>bash kafka-console-producer.sh --bootstrap-server 12.34.56.78:9092 --topic CLIENT_ORDER</code> <br/></pre></code></div>
 <p>Здесь <code>12.34.56/78:9092</code> — IP-адрес сервера Kafka.</p>
 </li>
 <li>
@@ -355,8 +353,7 @@
 <li>Каждая введённая строка будет отправлена при нажатии клавиши <span class="keys"><kbd class="key-enter">Ввод</kbd></span>.</li>
 <li>
 <p>Отправьте в топик сообщение с данными заказов, например, в формате JSON:</p>
-<div class="highlight"><code><pre><span></span><code>{ "orders": [ { "code": "12-A", "amount": 123 }, { "code": "34-B" "amount": 345 }, { "code": "56-C", "amount": 678 } ] }</code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code>{ "orders": [ { "code": "12-A", "amount": 123 }, { "code": "34-B" "amount": 345 }, { "code": "56-C", "amount": 678 } ] }</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Продюсер отправит введённое сообщение в топик Kafka.</p>
@@ -389,5 +386,5 @@
 </main>
 </div>
 <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
-document$.subscribe(() => { lightbox.reload() });
-</script></body>
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

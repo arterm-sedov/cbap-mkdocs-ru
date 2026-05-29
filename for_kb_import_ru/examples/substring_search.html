@@ -1,4 +1,4 @@
-<body data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="2628" kb-tags="выражение N3,тройка,тройки,N3,поиск строки,подстрока" kb-title="Атрибут типа «Текст». Поиск подстроки с помощью N3">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -11,35 +11,45 @@
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#введение">
 <span class="md-ellipsis">
-      Введение
+      
+        Введение
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#прикладная-задача">
 <span class="md-ellipsis">
-      Прикладная задача
+      
+        Прикладная задача
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#поиск-слова-в-значении-текстового-атрибута">
 <span class="md-ellipsis">
-      Поиск слова в значении текстового атрибута
+      
+        Поиск слова в значении текстового атрибута
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#тестирование">
 <span class="md-ellipsis">
-      Тестирование
+      
+        Тестирование
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
 <span class="md-ellipsis">
-      Связанные статьи
+      
+        Связанные статьи
+      
     </span>
 </a>
 </li>
@@ -64,37 +74,7 @@
 <li><strong>Вычислять автоматически:</strong> флажок установлен</li>
 <li><strong>Вычисляемое выражение: N3</strong></li>
 </ul>
-<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы с записями и строками</span></code><br/>
-<code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code><br/>
-<code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwstring:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/string#&gt;</span><span class="p">.</span></code><br/>
-<code><span class="p">{</span></code><br/>
-<code>    <span class="c"># Находим атрибут Kommentariy (Комментарий) в шаблоне Zayavki (Заявки)</span></code><br/>
-<code>    <span class="c"># и помещаем его в переменную KommentariyAttribute</span></code><br/>
-<code>    <span class="p">(</span><span class="s">"Zayavki"</span> <span class="s">"Kommentariy"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?KommentariyAttribute</span><span class="p">.</span></code><br/>
-<code>    <span class="c"># Помещаем строку из атрибута «Комментарий»</span></code><br/>
-<code>    <span class="c"># текущей заявки ?item в переменную ?text</span></code><br/>
-<code>    <span class="err">?item</span> <span class="err">?KommentariyAttribute</span> <span class="err">?text</span><span class="p">.</span></code><br/>
-<code>    <span class="c"># Преобразуем комментарий в нижний регистр и помещаем в ?textLowerCase</span></code><br/>
-<code>    <span class="err">?text</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">toLower</span> <span class="err">?textLowerCase</span><span class="p">.</span></code><br/>
-<code>    <span class="c"># Помещаем значение атрибута Kod (Код) в переменную ?KodAttribute</span></code><br/>
-<code>    <span class="p">(</span><span class="s">"Reestrslov"</span> <span class="s">"Kod"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?KodAttribute</span><span class="p">.</span></code><br/>
-<code>    <span class="c"># Находим все записи в реестре слов с кодом urgent</span></code><br/>
-<code>    <span class="err">?urgentKeywords</span> <span class="err">?KodAttribute</span> <span class="s">"urgent"</span><span class="p">.</span></code><br/>
-<code>    <span class="p">(</span><span class="s">"Reestrslov"</span> <span class="s">"Slovo"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?SlovoAttribute</span><span class="p">.</span></code><br/>
-<code>    <span class="c"># Присваиваем переменной ?keywords массив объектов</span></code><br/>
-<code>    <span class="c"># с заполненными значениями атрибута «Слово»</span></code><br/>
-<code>    <span class="err">?urgentKeywords</span> <span class="err">?SlovoAttribute</span> <span class="err">?keywords</span><span class="p">.</span></code><br/>
-<code>    <span class="c"># Начинаем цикл по ?keywords</span></code><br/>
-<code>        <span class="c"># Преобразуем ключевое слово в нижний регистр</span></code><br/>
-<code>        <span class="err">?keywords</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">toLower</span> <span class="err">?keywordLowerCase</span><span class="p">.</span></code><br/>
-<code>        <span class="c"># Проверяем, содержит ли ?textLowerCase ключевое слово</span></code><br/>
-<code>        <span class="c"># из ?urgentKeywords</span></code><br/>
-<code>        <span class="err">?textLowerCase</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">contains</span> <span class="err">?keywordLowerCase</span><span class="p">.</span></code><br/>
-<code>        <span class="c"># Если строка была найдена в переменной ?textLowerCase,</span></code><br/>
-<code>        <span class="c"># то значение вычисляемого атрибута сменится на true</span></code><br/>
-<code>        <span class="l">true</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code><br/>
-<code><span class="p">}</span></code><br/>
-</pre></code></div>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы с записями и строками</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwstring:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/string#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Находим атрибут Kommentariy (Комментарий) в шаблоне Zayavki (Заявки)</span></code> <br/><code>    <span class="c"># и помещаем его в переменную KommentariyAttribute</span></code> <br/><code>    <span class="p">(</span><span class="s">"Zayavki"</span> <span class="s">"Kommentariy"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?KommentariyAttribute</span><span class="p">.</span></code> <br/><code>    <span class="c"># Помещаем строку из атрибута «Комментарий»</span></code> <br/><code>    <span class="c"># текущей заявки ?item в переменную ?text</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?KommentariyAttribute</span> <span class="err">?text</span><span class="p">.</span></code> <br/><code>    <span class="c"># Преобразуем комментарий в нижний регистр и помещаем в ?textLowerCase</span></code> <br/><code>    <span class="err">?text</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">toLower</span> <span class="err">?textLowerCase</span><span class="p">.</span></code> <br/><code>    <span class="c"># Помещаем значение атрибута Kod (Код) в переменную ?KodAttribute</span></code> <br/><code>    <span class="p">(</span><span class="s">"Reestrslov"</span> <span class="s">"Kod"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?KodAttribute</span><span class="p">.</span></code> <br/><code>    <span class="c"># Находим все записи в реестре слов с кодом urgent</span></code> <br/><code>    <span class="err">?urgentKeywords</span> <span class="err">?KodAttribute</span> <span class="s">"urgent"</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Reestrslov"</span> <span class="s">"Slovo"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?SlovoAttribute</span><span class="p">.</span></code> <br/><code>    <span class="c"># Присваиваем переменной ?keywords массив объектов</span></code> <br/><code>    <span class="c"># с заполненными значениями атрибута «Слово»</span></code> <br/><code>    <span class="err">?urgentKeywords</span> <span class="err">?SlovoAttribute</span> <span class="err">?keywords</span><span class="p">.</span></code> <br/><code>    <span class="c"># Начинаем цикл по ?keywords</span></code> <br/><code>        <span class="c"># Преобразуем ключевое слово в нижний регистр</span></code> <br/><code>        <span class="err">?keywords</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">toLower</span> <span class="err">?keywordLowerCase</span><span class="p">.</span></code> <br/><code>        <span class="c"># Проверяем, содержит ли ?textLowerCase ключевое слово</span></code> <br/><code>        <span class="c"># из ?urgentKeywords</span></code> <br/><code>        <span class="err">?textLowerCase</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">contains</span> <span class="err">?keywordLowerCase</span><span class="p">.</span></code> <br/><code>        <span class="c"># Если строка была найдена в переменной ?textLowerCase,</span></code> <br/><code>        <span class="c"># то значение вычисляемого атрибута сменится на true</span></code> <br/><code>        <span class="l">true</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Поместите атрибуты на форму и сохраните. У атрибута <em>«Важная заявка»</em> установите <strong>представление</strong> в виде <strong>флажка</strong>.</p>
@@ -167,5 +147,5 @@
 </main>
 </div>
 <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
-document$.subscribe(() => { lightbox.reload() });
-</script></body>
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>
