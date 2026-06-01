@@ -248,27 +248,27 @@ hide: tags
     - Содержимое этой директории будет скопировано в директорию `History` внутри файла `.CDBBZ` с резервной копией **{{ productName }}**.
 
 1. Перейдите к настройке машины, на которой развёрнута служба {{ openSearchVariants }}.
-2. Откройте для редактирования файл конфигурации {{ openSearchVariants }} `/etc/elasticsearch/elasticsearch.yml`.
+2. Откройте для редактирования файл конфигурации {{ openSearchVariants }} `/etc/opensearch/opensearch.yml`.
 3. Укажите путь к репозиторию резервных копий, например:
 
     ``` sh
     # Директория репозитория должна быть доступна {{ productName }}.
     # Внутри этой директории будет создана директория,
     # имя которой будет совпадать с префиксом индекса {{ openSearchVariants }}.
-    path.repo: /var/backups/elasticsearch
+    path.repo: /var/backups/opensearch
     ```
 
 4. Предоставьте доступ {{ openSearchVariants }} к репозиторию резервных копий:
 
     ``` sh
-    chmod -R 777 /var/backups/elasticsearch
-    chown -R elasticsearch:elasticsearch /var/backups/elasticsearch
+    chmod -R 777 /var/backups/opensearch
+    chown -R opensearch:opensearch /var/backups/opensearch
     ```
 
 5. Перезапустите службу {{ openSearchVariants }}:
 
     ``` sh
-    systemctl restart elasticsearch   
+    systemctl restart opensearch.service
     ```
 
 6. Перейдите к настройке машины с экземпляром ПО **{{ productName }}**.
@@ -279,18 +279,18 @@ hide: tags
     # Тип хранилища резервных копий {{ openSearchVariants }} (LocalDisk | S3)
     backup.journalRepository.type: LocalDisk
     # Путь к файлам резервных копий.
-    # Укажите директорию из директивы path.repo файла elasticsearch.yml
+    # Укажите директорию из директивы path.repo файла opensearch.yml
     # Репозиторий резервной копии {{ openSearchVariants }} из этой директории
     # будет скопирован в директорию History
     # внутри файла .CDBBZ резервной копии {{ productName }}
-    backup.journalRepository.localDisk.path: /var/backups/elasticsearch
+    backup.journalRepository.localDisk.path: /var/backups/opensearch
     ```
 
     !!! warning "Внимание!"
 
         - Если {{ openSearchVariants }} и **{{ productName }}** работают на одной машине, в директивах `path.repo` и `backup.journalRepository.localDisk.path` следует указать один и тот же путь.
         - Если {{ openSearchVariants }} и **{{ productName }}** работают на разных машинах, необходимо: 
-            1. Директорию, указанную в директиве `path.repo` в файле `elasticsearch.yml`, сделать доступной для **{{ productName }}** через сеть.
+            1. Директорию, указанную в директиве `path.repo` в файле `opensearch.yml`, сделать доступной для **{{ productName }}** через сеть.
             2. Примонтировать общую директорию на машине с **{{ productName }}**.
             3. Указать примонтированную директорию в директиве `backup.journalRepository.localDisk.path` в файле `<instanceName>.yml`.
 
@@ -316,11 +316,11 @@ hide: tags
 
     - Для корректного резервного копирования данных истории в хранилище S3 необходимо настроить конфигурацию службы {{ openSearchVariants }} и экземпляра ПО **{{ productName }}** так, чтобы они использовали общую корзину:
 
-    - В файлах конфигурации `elasticsearch.yml` и `<instanceName>.yml` необходимо настройте подключение одному и тому же хранилищу S3.
+    - В файлах конфигурации `opensearch.yml` и `<instanceName>.yml` необходимо настройте подключение одному и тому же хранилищу S3.
     - В директивах `path.repo` и `backup.journalRepository.localDisk.path` укажите одну и ту же корзину
 
 1. Перейдите к настройке машины, на которой развёрнута служба {{ openSearchVariants }}.
-2. Откройте для редактирования файл конфигурации {{ openSearchVariants }} `/etc/elasticsearch/elasticsearch.yml`.
+2. Откройте для редактирования файл конфигурации {{ openSearchVariants }} `/etc/opensearch/opensearch.yml`.
 3. Настройте подключение к хранилищу S3 для репозитория резервных копий, например:
 
     ``` yaml
@@ -337,7 +337,7 @@ hide: tags
 4. Перезапустите службу {{ openSearchVariants }}:
 
     ``` sh
-    systemctl restart elasticsearch   
+    systemctl restart opensearch.service
     ```
 
 5. Перейдите к настройке машины с экземпляром ПО **{{ productName }}**.

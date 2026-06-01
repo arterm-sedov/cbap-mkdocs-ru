@@ -248,7 +248,7 @@ kbId:
 8. Перезапустите **{{ productName }}**:
 
     ```
-    systemctl restart elasticsearch nginx comindware<instanceName>
+    systemctl restart opensearch.service nginx comindware<instanceName>
     ```
 
 {% endif %}

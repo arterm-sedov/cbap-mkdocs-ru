@@ -316,7 +316,7 @@ hide: tags
 
     ``` sh
     nano /usr/lib/systemd/system/kafka.service
-    nano /usr/lib/systemd/system/elasticsearch.service
+    nano /usr/lib/systemd/system/opensearch.service
     ```
 
 6. В каждом файле службы установите следующие директивы:

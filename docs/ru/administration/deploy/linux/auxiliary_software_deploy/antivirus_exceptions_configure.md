@@ -71,10 +71,10 @@ hide: tags
 
 Добавьте в исключения антивирусного ПО следующие объекты:
 
-- `elasticsearch.service` — служба ElasticSearch.
-- `/var/lib/elasticsearch` — БД ElasticSearch, см. директиву `path.data` в файле конфигурации `/etc/elasticsearch/elasticsearch.yml`;
-- `/var/backups/elasticsearch/logs` — журналы ElasticSearch, см. директиву `path.logs` в файле конфигурации `/etc/elasticsearch/elasticsearch.yml`;
-- `/var/log/elasticsearch/repo` — репозиторий ElasticSearch, см. директиву `path.repo` в файле конфигурации `/etc/elasticsearch/elasticsearch.yml`.
+- `opensearch.service` — служба {{ openSearchVariants }}.
+- `/var/lib/opensearch` — БД {{ openSearchVariants }}, см. директиву `path.data` в файле конфигурации `/etc/opensearch/opensearch.yml`;
+- `/var/log/opensearch` — журналы {{ openSearchVariants }}, см. директиву `path.logs` в файле конфигурации `/etc/opensearch/opensearch.yml`;
+- `/var/backups/opensearch` — репозиторий {{ openSearchVariants }}, см. директиву `path.repo` в файле конфигурации `/etc/opensearch/opensearch.yml`.
 
 {% endif %}
 
@@ -126,14 +126,15 @@ hide: tags
 
 Здесь `X:\kafka\_2.XX-X.X.X` — директория, в которой установлено ПО Kafka версии 2.XX-X.X.X.
 
-#### ElasticSearch {: #antivirus_exceptions_configure_objects_windows_elasticsearch }
+#### {{ openSearchVariants }} {: #antivirus_exceptions_configure_objects_windows_opensearch }
 
 Добавьте в исключения антивирусного ПО следующие объекты:
 
-- `C:\Program Files\Elastic\Elasticsearch\8.X.X` — директория с исполняемыми файлами ElasticSearch версии 8.X.X;
-- `C:\ProgramData\Elastic\Elasticsearch\data` — папка с БД, см. директиву `path.data` в файле конфигурации `X:\Program Files\Elastic\Elasticsearch\8.X.X\config\elasticsearch.yml`;
-- `C:\ProgramData\Elastic\Elasticsearch\repo` — папка с репозиторием, см. директиву `path.repo` в файле конфигурации `X:\Program Files\Elastic\Elasticsearch\8.X.X\config\elasticsearch.yml`;
-- `C:\ProgramData\Elastic\Elasticsearch\logs` — папка с журналами, см. директиву `path.logs` в файле конфигурации `X:\Program Files\Elastic\Elasticsearch\8.X.X\config\elasticsearch.yml`.
+- `OpenSearch` — служба {{ openSearchVariants }}.
+- `C:\Program Files\OpenSearch\` — исполняемые файлы {{ openSearchVariants }};
+- `C:\ProgramData\OpenSearch\data` — БД {{ openSearchVariants }}, см. директиву `path.data` в файле конфигурации `C:\Program Files\OpenSearch\config\opensearch.yml`;
+- `C:\ProgramData\OpenSearch\repo` — репозиторий {{ openSearchVariants }}, см. директиву `path.repo` в файле конфигурации `C:\Program Files\OpenSearch\config\opensearch.yml`;
+- `C:\ProgramData\OpenSearch\logs` — журналы {{ openSearchVariants }}, см. директиву `path.logs` в файле конфигурации `C:\Program Files\OpenSearch\config\opensearch.yml`.
 
 {% endif %}
 

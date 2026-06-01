@@ -206,7 +206,7 @@ hide: tags
 8. Перезапустите **{{ productName }}**:
 
     ```
-    systemctl restart elasticsearch nginx comindware<instanceName>
+    systemctl restart opensearch nginx comindware<instanceName>
     ```
 
 ## Инициализация {{ productName }} для входа через Keycloak {: #openid_connection_initialize .pageBreakBefore }

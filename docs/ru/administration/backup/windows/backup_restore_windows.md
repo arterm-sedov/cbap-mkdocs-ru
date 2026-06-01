@@ -32,7 +32,7 @@ hide: tags
 
 2. Подготовьте данные о конфигурации {{ openSearchVariants }}:
 
-    - Путь к файлу конфигурации {{ openSearchVariants }} `elasticsearch.yml` (например: `C:\ElasticsearchData\elasticsearch.yml`)
+    - Путь к файлу конфигурации {{ openSearchVariants }} `opensearch.yml` (например: `C:\Program Files\OpenSearch\config\opensearch.yml`)
     - Имя репозитория снимков {{ openSearchVariants }} — `<repository_name>` (например, `elastic_backup`).
     - Путь к репозиторию снимков {{ openSearchVariants }} — `<elastic_backup_path>`(например, `e:\elastic_backup`).
     - Имя снимка {{ openSearchVariants }} — `<snapshot_name>` (например, `<instanceName>01022022080800` — в формате `<instanceName><Date><Time>`).
@@ -59,7 +59,7 @@ hide: tags
 
     **Снимок** — набор данных, сохранённый на определённый момент времени.
 
-1. Настройте конфигурацию репозитория снимков сервера {{ openSearchVariants }} в файле `elasticsearch.yml`:
+1. Настройте конфигурацию репозитория снимков сервера {{ openSearchVariants }} в файле `opensearch.yml`:
 
     ``` yaml
     path.repo: <elastic_backup_path>
