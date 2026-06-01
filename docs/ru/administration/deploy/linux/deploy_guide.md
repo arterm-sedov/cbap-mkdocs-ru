@@ -98,7 +98,7 @@ hide: tags
 4. Установите ПО из дистрибутива:
 
     ``` sh
-    sh prerequisites_install.sh -p
+    bash prerequisites_install.sh -p
     ```
 
     Ключи скрипта `prerequisites_install.sh`:
@@ -123,7 +123,7 @@ hide: tags
         Для ознакомления с ключами и назначением любого скрипта используйте ключ `-h` без каких-либо других ключей, например:
 
         ``` sh
-        sh prerequisites_install.sh -h
+        bash prerequisites_install.sh -h
         ```
 
 5. По окончании установки скрипт выведет информацию об установленных компонентах. Удостоверьтесь, что компоненты успешно установлены (имеют статус `OK`).
@@ -156,7 +156,7 @@ hide: tags
 6. Удостоверьтесь, что компоненты установлены:
 
     ``` sh
-    sh prerequisites_list.sh
+    bash prerequisites_list.sh
     ```
 
 7. При необходимости установите недостающие необходимые компоненты, запустив скрипт с соответствующими флагами.
@@ -211,7 +211,7 @@ hide: tags
 4. Установите ПО из дистрибутива:
 
     ``` sh
-    sh version_install.sh
+    bash version_install.sh
     ```
 
     !!! note "Если отобразится запрос на перезагрузку ОС"
@@ -230,7 +230,7 @@ hide: tags
 6. Удостоверьтесь, что ПО установлено, просмотрев список установленных версий ПО:
 
     ``` sh
-    sh version_list.sh
+    bash version_list.sh
     ```
 
 ## Создание экземпляра ПО {: #deploy_guide_linux_instance_create .pageBreakBefore }
@@ -376,7 +376,7 @@ hide: tags
 3. Разверните экземпляр ПО:
 
     ``` sh
-    sh instance_create.sh -n=<instanceName> -v=<versionNumber> [-p=<portNumber>]
+    bash instance_create.sh -n=<instanceName> -v=<versionNumber> [-p=<portNumber>]
     ```
 
     Ключи скрипта `instance_create.sh`:
@@ -695,7 +695,7 @@ mmap(PROT_NONE) failed
 4. Запустите удаление экземпляра ПО:
 
     ``` sh
-    sh instance_delete.sh -n=<instanceName>
+    bash instance_delete.sh -n=<instanceName>
     ```
 
     Скрипт `delete.sh` поддерживает следующие ключи:
@@ -709,7 +709,7 @@ mmap(PROT_NONE) failed
 5. Удостоверьтесь, что экземпляр ПО был успешно удалён, просмотрев список установленных экземпляров ПО:
 
     ``` sh
-    sh instance_list.sh
+    bash instance_list.sh
     ```
 
 ### Удаление версии ПО {: #deploy_guide_linux_delete_version .pageBreakBefore }
@@ -721,7 +721,7 @@ mmap(PROT_NONE) failed
 2. Просмотрите список экземпляров ПО с указанием версий:
 
     ``` sh
-    sh instance_list.sh
+    bash instance_list.sh
     ```
 
 3. Удалите все экземпляры с версией ПО, которую требуется удалить, или обновите их до другой версии. Удалить версию ПО, которая используется в каких-либо экземплярах, не удастся. См. _«[Удаление экземпляра ПО](#удаление-экземпляра-по)»_.
@@ -734,13 +734,13 @@ mmap(PROT_NONE) failed
 5. Просмотрите список установленных версий ПО:
 
     ``` sh
-    sh version_list.sh
+    bash version_list.sh
     ```
 
 6. Удалите версию ПО:
 
     ``` sh
-    sh version_delete.sh -v=<versionNumber>
+    bash version_delete.sh -v=<versionNumber>
     ```
 
     Здесь: `-v=<versionNumber>` — укажите номер версии ПО вида `X.X.XXXX.X` (например: `5.0.0000.0`).
@@ -748,7 +748,7 @@ mmap(PROT_NONE) failed
 7. Проверьте, что версия ПО была удалена успешно:
 
     ``` sh
-    sh version_list.sh
+    bash version_list.sh
     ```
 
     или

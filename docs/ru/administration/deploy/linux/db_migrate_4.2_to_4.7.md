@@ -173,20 +173,20 @@ _![Запуск резервного копирования экземпляра
     **Astra Linux, Debian, DEB-дистрибутивы**
 
     ``` sh
-    sh install.sh -e -p -k -d=clear -u=www-data -g=www-data -i=<instanceName>
+    bash install.sh -e -p -k -d=clear -u=www-data -g=www-data -i=<instanceName>
 
     ```
 
     **РЕД ОС, RPM-дистрибутивы**
 
     ``` sh
-    sh install.sh -e -p -k -d=clear -u=nginx -g=nginx -i=<instanceName>
+    bash install.sh -e -p -k -d=clear -u=nginx -g=nginx -i=<instanceName>
     ```
 
     **Альт Сервер**
 
     ``` sh
-    sh install.sh -e -p -k -d=clear -u=_nginx -g=_nginx -i=<instanceName>
+    bash install.sh -e -p -k -d=clear -u=_nginx -g=_nginx -i=<instanceName>
     ```
 
     Здесь `<instanceName>` — имя экземпляра ПО. Если не указать этот параметр, будет задано стандартное имя экземпляра: `cmwdata`

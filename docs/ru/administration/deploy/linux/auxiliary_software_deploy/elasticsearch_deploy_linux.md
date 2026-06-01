@@ -77,7 +77,7 @@ Elasticsearch создает значительную нагрузку на вы
 4. Установите Elasticsearch из дистрибутива с помощью ключа `-e`:
 
     ``` sh
-    sh prerequisites_install.sh -e
+    bash prerequisites_install.sh -e
     ```
 
 5. После установки удостоверьтесь, что сервер Elasticsearch запущен и имеет статус `Active (running)`:

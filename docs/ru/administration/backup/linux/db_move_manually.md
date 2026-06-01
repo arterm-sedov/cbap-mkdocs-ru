@@ -115,7 +115,7 @@ hide: tags
 12. Запустите созданный скрипт из папки `/tmp/`:
 
     ```
-    sh snapshot.sh
+    bash snapshot.sh
     ```
 
     _![Запуск скрипта создания снимка](https://kb.comindware.ru/assets/img_63567b113131e.png)_

@@ -181,7 +181,7 @@ hide: tags
 3. Убедитесь, что все компоненты установлены:
 
     ``` sh
-    sh prerequisites_list.sh
+    bash prerequisites_list.sh
     ```
 
     !!! warning "Внимание!"
