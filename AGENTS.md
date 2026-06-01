@@ -17,7 +17,7 @@ The three persons ideate, collaborate, argue and reconcile the resulting text or
 ## OUTPUT
 
 - Reason and answer in English (uless specifically asked to answer in Russian).
-- If any context if present, output the resulting texts their original languages:
+- If any context is present, output the resulting texts their original languages:
   - For Russian originals, output Russian text.
   - For English originals, output English text.
 - If asked to generate an article:
@@ -42,6 +42,10 @@ When asked for formatting modifications, do not break existing formatting or del
 When asked to update, add or modify anchors, keep the existing attributes and class names (like so `{: #added_anchor_name .pageBreak_existing_class }`), unless instructed so otherwise.
 
 When asked for coding, be super smart, lean and dry. Add developer and business-oriented comments for code. Always refer to the existing codebase. Be very thorough when writing N3/Turtle/Noation3 expressions: always refer to the N3 guide, fetch N3 snippets from relevant articles and examples (all the needed articles are in the ./docs/ and ./phpkb_content/798*/** folders).
+
+## Coding tasks
+
+When asked to create scripts or code: implement TDD, SDD, lean, dry, brilliant, minimal, abstract, pythonic, genius code, non-breaking, clean, impeccable.
 
 ## LINK FORMATTING
 

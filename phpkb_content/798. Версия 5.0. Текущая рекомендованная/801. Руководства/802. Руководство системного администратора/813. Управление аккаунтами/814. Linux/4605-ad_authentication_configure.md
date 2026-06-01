@@ -2,7 +2,7 @@
 title: 'Аутентификация через Active Directory. Настройка контроллера домена и экземпляра ПО'
 kbId: 4605
 url: 'https://kb.comindware.ru/article.php?id=4605'
-updated: '2026-01-29 18:24:11'
+updated: '2026-03-16 11:16:32'
 ---
 
 # Аутентификация через Active Directory. Настройка контроллера домена и экземпляра ПО
@@ -72,7 +72,7 @@ updated: '2026-01-29 18:24:11'
 2. Откройте файл конфигурации Kerberos для редактирования:
 
    ```
-   vim /etc/krb5.conf
+   nano /etc/krb5.conf
    ```
 3. Отредактируйте файл `krb5.conf` согласно следующему примеру:
 
@@ -141,7 +141,7 @@ updated: '2026-01-29 18:24:11'
 2. Откройте файла конфигурации Kerberos для редактирования:
 
    ```
-   vim /etc/krb5.conf
+   nano /etc/krb5.conf
    ```
 3. Отредактируйте файл `krb5.conf` согласно следующему примеру:
 
@@ -170,7 +170,7 @@ updated: '2026-01-29 18:24:11'
 4. Откройте файл конфигурации `kcm_default_ccache` для редактирования:
 
    ```
-   vim /etc/krb5.conf.d/kcm_default_ccache
+   nano /etc/krb5.conf.d/kcm_default_ccache
    ```
 5. Отредактируйте файл `kcm_default_ccache` согласно следующему примеру:
 

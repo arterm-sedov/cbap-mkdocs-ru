@@ -3,6 +3,8 @@ name: n3_references
 description: Use when writing or answering about N3/Turtle/RDF/Notation3/Triples in Comindware Platform
 ---
 
+When writing content about Notation3/N3/Turtle/RDF/Triples use search-knowledge-base skill and the following sources to extract content and code samples.
+
 Use this skill when answering questions about:
 - N3 triples (триплеты) — structure, examples, business use cases
 - Running/starting processes via API

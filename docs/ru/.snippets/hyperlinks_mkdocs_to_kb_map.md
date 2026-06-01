@@ -78,6 +78,8 @@
 
 [vulnerability_policy]: {{ kbArticleURLPrefix }}5157
 
+[vulnerability_digest]: {{ kbArticleURLPrefix }}5159
+
 [vulnerability_pt_dec2025]: {{ kbArticleURLPrefix }}5158
 
 [apache_ignite_clustering]: https://ignite.apache.org/docs/latest/clustering/clustering
@@ -600,6 +602,10 @@
 [example_n3_periodic_task_notifications]: {{ kbArticleURLPrefix }}4905
 
 [example_task_hyperlink_n3_formula]: {{ kbArticleURLPrefix }}4879
+
+[example_list_color_indicator_formula]: {{ kbArticleURLPrefix }}4888
+
+[example_hyperlink_calculate_formula]: {{ kbArticleURLPrefix }}4918
 
 [example_task_accept_button_csharp]: {{ kbArticleURLPrefix }}5146
 

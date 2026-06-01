@@ -88,25 +88,28 @@ _![Жизненный цикл аккаунтов в системе](https://kb.
     - При использовании метода `api/public/system/Base/AccountService/Create` необходимо задать имя пользователя и адрес эл.&nbsp;почты, при этом ряд атрибутов аккаунта устанавливается автоматически:
 
     ``` json
+    {
     "account": {
         "Mbox": "address@example.ru",
         "Username": "example_login",
-        // Значение следующих атрибутов
-        // устанавливаются по умолчанию
         "isSystemAdministrator": false,
         "isActive": true,
         "isAnonymous": false,
         "authenticationMethod": "Builtin"
+        }
     }
     ```
 
+    -  Значения следующих атрибутов устанавливаются по умолчанию: `isSystemAdministrator`, `isActive`, `isAnonymous`, `authenticationMethod`.
     - При использовании метода `/Base/AccountService/Edit` необходимо задать ID аккаунта, имя пользователя и адрес эл.&nbsp;почты:
 
     ``` json
+    {
     "account": {
             "Id": "account.30",
             "Mbox": "address@example.ru",
             "Username": "example_login",
+        }
     }
     ```
 
