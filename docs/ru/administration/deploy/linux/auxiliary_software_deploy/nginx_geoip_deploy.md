@@ -1,6 +1,6 @@
 ---
 title: Модуль GeoIP для NGINX. Установка и настройка
-kbId: 4610
+kbId: 5461
 tags:
     - Linux
     - NGINX

@@ -1,6 +1,6 @@
 ---
 title: 'Урок 8. Экспорт данных'
-kbId: 5120
+kbId: 5403
 tags:
   # Common tutorial_hr tags
   - BPMS

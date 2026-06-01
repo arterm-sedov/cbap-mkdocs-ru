@@ -1,7 +1,7 @@
 ---
 title: 'NGINX. Настройка конфигурации для получения HTTP-запросов'
 kbTitle: 'NGINX. Настройка конфигурации для получения HTTP-запросов в Comindware Platform'
-kbId: 5143
+kbId: 5464
 tags:
     - HTTP-запросы
     - Linux

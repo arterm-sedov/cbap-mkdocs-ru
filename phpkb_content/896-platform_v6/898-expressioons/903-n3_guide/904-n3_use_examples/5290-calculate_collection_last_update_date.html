@@ -1,0 +1,20 @@
+<h1>Вычисление последней даты изменения записей в древовидной коллекции</h1><p>Для того, чтобы вывести последнюю дату изменения в рамках записей во вложенной коллекции (например, чтобы показать последнюю дату изменения работы или подработы, входящей в общий план), введите следующее выражение:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code"> 
+<p>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.<br/>@prefix math: &lt;http://comindware.com/logics/math#&gt;.<br/>@prefix cmw: &lt;http://comindware.com/logics#&gt;.<br/>{<br/>    ("Workitem" "WorkPlan") object:findProperty ?workPlanProperty.<br/>    ("Workitem" "ParentWorkitem") object:findProperty ?parentProperty.<br/>    ("Workitem" "_lastWriteDate") object:findProperty ?lastWriteDate.</p>
+<p>    from<br/>    {<br/>        ?WorkitemTemplate object:alias "Workitem".<br/>        ?WorkitemItems cmw:container ?WorkitemTemplate.<br/>        (?WorkitemItems ?parentProperty) object:getRootByParentProperty ?rootTask.<br/>        ?rootTask ?workPlanProperty ?item.<br/>        ?WorkitemItems ?lastWriteDate ?lastWriteDateVal.<br/>    } select ?lastWriteDateVal -&gt; ?lastWriteDateList.</p>
+<p>?lastWriteDateList math:max ?m.<br/>    ?m -&gt; ?value.<br/>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span style="text-decoration: underline;"><strong>где:</strong></span></p>
+<p><strong>Workitem</strong> – системное имя Шаблона записи с записями коллекции;</p>
+<p><strong>WorkPlan</strong> – системное имя атрибута типа "Ссылка" на текущий Шаблон записи;</p>
+<p><strong>ParentWorkitem</strong> – системное имя атрибута типа "Ссылка" на родительскую запись в Шаблоне записи <strong>Workitem</strong>;</p>
+<p><strong>_lastWriteDate</strong> – системное имя системного атрибута "Дата изменения".</p>
+<div class="blue_note"><strong>Примечание :</strong> в данном примере только родительский объект связан с текущей записью по ссылке.</div>

@@ -1,0 +1,329 @@
+<h1>Атрибут типа «Документ». Копирование записи вместе с прикреплённым документом с помощью сценария по нажатию кнопки</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4883">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<span class="md-ellipsis">
+      Введение
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#прикладная-задача">
+<span class="md-ellipsis">
+      Прикладная задача
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#исходные-данные">
+<span class="md-ellipsis">
+      Исходные данные
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-кнопки-копировать-пакет-документов">
+<span class="md-ellipsis">
+      Настройка кнопки «Копировать пакет документов»
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-сценария-копирование-пакета-документов">
+<span class="md-ellipsis">
+      Настройка сценария «Копирование пакета документов»
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#тестирование-работы-сценария">
+<span class="md-ellipsis">
+      Тестирование работы сценария
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      Связанные статьи
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Здесь представлены инструкции по настройке сценария для клонирования записи вместе с файлами, прикреплёнными к <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5716">атрибуту типа «<strong>Документ</strong>»</a>.</p>
+<p>Сценарий для копирования файлов, прикреплённых к атрибуту типа «<strong>Изображение</strong>», можно настроить аналогичным образом.</p>
+<p>См. также примеры работы с атрибутом типа «<strong>Документ</strong>»:</p>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5214">Скачивание архива с файлами из всех строк таблицы с прикреплением архива к атрибуту</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5204">Скачивание архива с файлами из выбранных строк таблицы или одной записи</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5205">Скачивание файлов в папку на сервере</a></em></li>
+</ul>
+<div class="notice notice-success">
+<p class="admonition-title">Структура атрибута типа «Документ»</p>
+<ul>
+<li>Атрибут типа «<strong>Документ</strong>» хранит одну или несколько ссылок на записи (<strong>документы</strong>) в системном шаблоне документа, к которым прикрепляются файлы (например, загруженные пользователями).</li>
+<li>В шаблоне документа имеется атрибут <code>currentRevision</code> (текущая <strong>версия</strong>), который хранит ссылку на запись в системном шаблоне версии.</li>
+<li>В шаблоне версии имеются атрибуты <code>title</code> (имя) и <code>content</code> (содержимое), которые хранят имя файла и ссылку на файл, физически хранящийся в папке <code>Streams</code> на сервере.</li>
+</ul>
+</div>
+<div class="notice notice-tip">
+<p class="admonition-title">Извлечение файлов из атрибута типа «Документ» с помощью N3</p>
+<p>Чтобы считать файл из атрибута типа «<strong>Документ</strong>» с помощью выражения N3, необходимо:</p>
+<ul>
+<li>
+<p>получить объект с атрибутом:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">(</span><span class="s">"TemplateSystemName"</span> <span class="s">"DocumentAttributeSystemName"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?DocumentAttribute</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>из объекта с атрибутом получить значение атрибута в текущей записи:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?item</span> <span class="err">documentAttribute</span> <span class="err">?documentAttributeValue</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>из значения атрибута получить текущую версию документа:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?documentAttributeValue</span> <span class="nn">document</span><span class="p">:</span><span class="nt">revision</span> <span class="err">?revision</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>из версии получить содержимое файла в формате <code>base64</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?revision</span> <span class="nn">document</span><span class="p">:</span><span class="nt">content</span> <span class="err">?content</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>из версии получить имя файла:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?revision</span> <span class="nn">document</span><span class="p">:</span><span class="nt">title</span> <span class="err">?title</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+</ul>
+</div>
+<div class="notice notice-tip">
+<p class="admonition-title">Добавление файлов в атрибут типа «Документ» с помощью N3</p>
+<p>Чтобы прикрепить к атрибуту типа «<strong>Документ</strong>» файл с помощью выражения N3, необходимо:</p>
+<ul>
+<li>
+<p>сформировать содержимое файла в формате <code>base64</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?documentContentSource</span> <span class="nn">document</span><span class="p">:</span><span class="nt">content</span> <span class="err">?content</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>сформировать имя файла:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">?documentTitleSource</span> <span class="nn">document</span><span class="p">:</span><span class="nt">title</span> <span class="err">?title</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>прикрепить полученный файл к атрибуту типа «<strong>Документ</strong>», т. е. поместить на него ссылку в версию:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">(</span><span class="err">?content</span> <span class="err">?title</span><span class="p">)</span> <span class="nn">document</span><span class="p">:</span><span class="nt">attach</span> <span class="err">?documentAttributeValue</span><span class="p">.</span></code> <br/></pre></code></div>
+</li>
+</ul>
+</div>
+<h2 id="прикладная-задача">Прикладная задача</h2>
+<p>Необходимо настроить кнопку, которая будет создавать дубликат текущей записи и прикреплять к ней дубликаты всех файлов, прикреплённых к исходной записи. Если к исходной записи не прикреплен ни один файл, то создавать её дубликат не требуется.</p>
+<h2 id="исходные-данные">Исходные данные</h2>
+<ol class="colored_numbers_list">
+<li>Создайте приложение <em>«Документооборот»</em>.</li>
+<li>
+<p>В приложении <em>«Документооборот»</em> создайте шаблон записи <em>«Пакеты документов»</em> с системным именем <code>DocumentPacks</code> и следующими атрибутами:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Название атрибута</th>
+<th>Системное имя</th>
+<th>Свойства</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Наименование пакета документов</em></td>
+<td><code>DocumentPackName</code></td>
+<td><strong>Тип данных: текст</strong></td>
+</tr>
+<tr>
+<td><em>Файлы документов</em></td>
+<td><code>AttachedFiles</code></td>
+<td><ul><li><strong>Тип данных: документ</strong></li><li> <strong>Хранить несколько значений:</strong> флажок установлен</li></ul></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Поместите атрибуты <em>«Наименование пакета документов»</em> и <em>«Файлы документов»</em> на основную форму шаблона <em>«Пакеты документов»</em>.</p>
+</li>
+</ol>
+<h2 id="настройка-кнопки-копировать-пакет-документов">Настройка кнопки «Копировать пакет документов»</h2>
+<ol class="colored_numbers_list">
+<li>Отройте шаблон записи <em>«Пакеты документов».</em></li>
+<li>Перейдите на вкладку «<strong>Кнопки</strong>».</li>
+<li>
+<p>Создайте кнопку «<strong>Копировать пакет документов</strong>»:</p>
+<ul>
+<li><strong>Контекст операции: запись</strong></li>
+<li><strong>Операция: вызвать событие «Нажата кнопка»</strong></li>
+<li><strong>Результат выполнения: навигация</strong></li>
+<li><strong>Переход к: предыдущая страница</strong></li>
+</ul>
+</li>
+<li>
+<p>Поместите кнопку <em>«Копировать документ»</em> на основную форму шаблона <em>«Пакеты документов».</em></p>
+</li>
+</ol>
+<h2 id="настройка-сценария-копирование-пакета-документов">Настройка сценария «Копирование пакета документов»</h2>
+<ol class="colored_numbers_list">
+<li>На странице <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5643">администрирования приложения</a> выберите пункт «<strong>Сценарии</strong>».</li>
+<li>
+<p>Создайте сценарий:</p>
+<ul>
+<li><strong>Название</strong>: <em>Копирование документа</em></li>
+<li><strong>Системное имя</strong>: заполняется автоматически.</li>
+<li><strong>Контекст выполнения</strong>: <strong>от имени системы</strong></li>
+</ul>
+</li>
+<li>
+<p>Отобразится конструктор сценария.</p>
+</li>
+<li>Нажмите заголовок события «<strong>Нажатие кнопки</strong>».</li>
+<li>
+<p>Настройте свойства события:</p>
+<ul>
+<li><strong>Тип: Нажатие кнопки</strong></li>
+<li><strong>Контекстный шаблон:</strong> <em>Пакеты документов</em></li>
+<li><strong>Кнопка:</strong> <em>Копировать пакет документов</em></li>
+</ul>
+</li>
+<li>
+<p>После действия «<strong>Нажата кнопка</strong>» создайте и настройте действие «<strong>Изменить значения переменных</strong>»:</p>
+<ul>
+<li><strong>Операция со значениями переменных: заменить</strong></li>
+<li><strong>Переменная:</strong> <em>originalRecord</em></li>
+<li>Настройте таблицу дочерних переменных.</li>
+</ul>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th width="50%">Имя переменной</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>id</em></td>
+<td><strong>Атрибут: ID</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>Это действие будет сохранять в переменную <code>originalRecord.id</code> идентификатор исходной записи в шаблоне <em>«Пакеты документов»</em> для использования в последующих действиях.</p>
+</div>
+</li>
+<li>
+<p>После события «<strong>Изменить значения переменных</strong>» создайте и настройте действие «<strong>Выполнить по условиям</strong>» следующим образом:</p>
+<ul>
+<li>Название условия: <em>Файл прикреплён</em></li>
+<li><strong>Выражение: N3</strong></li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы</span></code> <br/><code><span class="c"># с данными текущего сеанса, переменными и записями </span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">variable:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session/variable#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">session:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c">#Находим атрибут AttachedFiles (Файлы документов)</span></code> <br/><code>    <span class="c"># в шаблоне DocumentPacks (Пакеты документов) и помещаем ID атрибута</span></code> <br/><code>    <span class="c"># в локальную переменную ?AttachedFilesAttribute</span></code> <br/><code>    <span class="p">(</span><span class="s">"DocumentPacks"</span> <span class="s">"AttachedFiles"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?AttachedFilesAttribute</span><span class="p">.</span></code> <br/><code>    <span class="c">#Находим переменную originalRecord из предыдущего действия</span></code> <br/><code>    <span class="c">#и помещаем её в локальную переменную ?originalRecordVariable</span></code> <br/><code>    <span class="nn">session</span><span class="p">:</span><span class="nt">context</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">originalRecord</span> <span class="err">?originalRecordVariable</span><span class="p">.</span></code> <br/><code>    <span class="c">#Находим переменную originalRecord.id с ID исходной записи</span></code> <br/><code>    <span class="c"># в шаблоне «Пакеты документов» и помещаем ID записи</span></code> <br/><code>    <span class="c"># в локальную переменную ?docPackRecordId</span></code> <br/><code>    <span class="err">?originalRecordVariable</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">id</span> <span class="err">?docPackRecordId</span><span class="p">.</span></code> <br/><code>    <span class="c"># Считываем значение атрибута «Файлы документов» в исходной записи</span></code> <br/><code>    <span class="err">?docPackRecordId</span> <span class="err">?AttachedFilesAttribute</span> <span class="err">?</span><span class="p">.</span></code> <br/><code>    <span class="c"># Возвращаем true, если к атрибуту «Файлы документов»</span></code> <br/><code>    <span class="c"># прикреплён хотя бы один файл</span></code> <br/><code>    <span class="l">true</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>Это действие будет инициировать вложенные в него действия, если в текущей записи <em>«Пакеты документов»</em> к атрибуту <em>«Файлы документов»</em> (с системным именем <code>AttachedFiles</code>) прикреплён хотя бы один файл.</p>
+</div>
+</li>
+<li>
+<p>Внутри действия «<strong>Выполнить по условиям</strong>» создайте действие «<strong>Создать запись</strong>» с <strong>целевым шаблоном</strong> <em>«Пакеты документов»</em>.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>Это действие создаёт пустую запись в шаблоне <em>«Пакеты документов»</em>, в которую последующие действия скопируют значения атрибутов <em>«Наименование пакета документов»</em> и <em>«Файлы документов»</em>.</p>
+</div>
+</li>
+<li>
+<p>Внутри действия «<strong>Создать запись</strong>» создайте и настройте действие «<strong>Изменить значение атрибутов</strong>» следующим образом:</p>
+<ul>
+<li><strong>Атрибут:</strong> <em>Наименование пакета документов</em></li>
+<li><strong>Операция со значениями: заменить</strong></li>
+<li><strong>Значение:</strong><strong>N3</strong></li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы</span></code> <br/><code><span class="c"># с данными текущего сеанса, переменными и записями </span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">variable:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session/variable#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">session:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Находим атрибут DocumentPackName (Наименование пакета документов)</span></code> <br/><code>    <span class="c"># в шаблоне DocumentPacks (Пакеты документов)</span></code> <br/><code>    <span class="c"># и помещаем ID атрибута в локальную переменную ?PackNameAttribute</span></code> <br/><code>    <span class="p">(</span><span class="s">"DocumentPacks"</span> <span class="s">"DocumentPackName"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?PackNameAttribute</span><span class="p">.</span></code> <br/><code>    <span class="c"># Помещаем переменную originalRecord</span></code> <br/><code>    <span class="c"># в локальную переменную ?originalRecordVariable</span></code> <br/><code>    <span class="nn">session</span><span class="p">:</span><span class="nt">context</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">originalRecord</span> <span class="err">?originalRecordVariable</span><span class="p">.</span></code> <br/><code>    <span class="c"># Помещаем ID исходной записи в шаблоне «Пакеты документов»</span></code> <br/><code>    <span class="c"># в локальную переменную docPackRecordId</span></code> <br/><code>    <span class="err">?originalRecordVariable</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">id</span> <span class="err">?docPackRecordId</span><span class="p">.</span></code> <br/><code>    <span class="c"># Возвращаем значение атрибута «Наименование пакета документов» из исходной записи</span></code> <br/><code>    <span class="err">?docPackRecordId</span> <span class="err">?PackNameAttribute</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>Это действие копирует значение атрибута <em>«Наименование пакета документов»</em> из исходной записи в новую.</p>
+</div>
+</li>
+<li>
+<p>После действия «<strong>Изменить значение атрибутов</strong>» внутри действия «<strong>Создать запись</strong>» создайте и настройте действие «<strong>Повторять по количеству объектов</strong>» следующим образом:</p>
+<ul>
+<li><strong>Переменная:</strong> <em>document</em></li>
+<li><strong>Атрибут или выражение для поиска объектов: формула</strong></li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы</span></code> <br/><code><span class="c"># с данными текущего сеанса, переменными и записями </span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">variable:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session/variable#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">session:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c">#Находим атрибут AttachedFiles (Файлы документов)</span></code> <br/><code>    <span class="c"># в шаблоне DocumentPacks (Пакеты документов)</span></code> <br/><code>    <span class="c"># и помещаем ID атрибута в локальную переменную ?AttachedFilesAttribute  </span></code> <br/><code>    <span class="p">(</span><span class="s">"DocumentPacks"</span> <span class="s">"AttachedFiles"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?AttachedFilesAttribute</span><span class="p">.</span></code> <br/><code>    <span class="c"># Помещаем переменную originalRecord</span></code> <br/><code>    <span class="c"># в локальную переменную originalRecordVariable</span></code> <br/><code>    <span class="nn">session</span><span class="p">:</span><span class="nt">context</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">originalRecord</span> <span class="err">?originalRecordVariable</span><span class="p">.</span></code> <br/><code>    <span class="c"># Помещаем ID исходной записи в шаблоне «Пакеты документов»</span></code> <br/><code>    <span class="c"># в локальную переменную docPackRecordId</span></code> <br/><code>    <span class="err">?originalRecordVariable</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">id</span> <span class="err">?docPackRecordId</span><span class="p">.</span></code> <br/><code>    <span class="c"># Возвращаем значение атрибута «Файлы документов» из исходной записи</span></code> <br/><code>    <span class="err">?docPackRecordId</span> <span class="err">?AttachedFilesAttribute</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>На каждой итерации цикла в переменную <code>document</code> будет помещаться ссылка на запись в <em>системном</em> <strong>шаблоне документа</strong> с файлом, прикреплённым к атрибуту <em>«Файлы документов»</em> из исходной записи.</p>
+</div>
+</li>
+<li>
+<p>Внутри действия «<strong>Повторять по количеству объектов</strong>» создайте и настройте действие «<strong>Изменить значение атрибутов</strong>» следующим образом:</p>
+<ul>
+<li><strong>Атрибут:</strong> <em>Файлы документов</em></li>
+<li><strong>Операция со значениями: добавить</strong></li>
+<li><strong>Значение: N3</strong></li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы</span></code> <br/><code><span class="c"># с документами и данными текущего сеанса</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">document:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/document#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">variable:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session/variable#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">session:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Помещаем переменную document </span></code> <br/><code>    <span class="c"># из действия «Повторять по количеству объектов»</span></code> <br/><code>    <span class="c"># в локальную переменную ?doc</span></code> <br/><code>    <span class="nn">session</span><span class="p">:</span><span class="nt">context</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">document</span> <span class="err">?doc</span><span class="p">.</span></code> <br/><code>    <span class="c"># Помещаем ссылку на прикреплённый файл</span></code> <br/><code>    <span class="c"># в локальную переменную ?revision</span></code> <br/><code>    <span class="err">?doc</span> <span class="nn">document</span><span class="p">:</span><span class="nt">currentRevision</span> <span class="err">?revision</span><span class="p">.</span></code> <br/><code>    <span class="c"># Помещаем содержимое файла в формате Base64</span></code> <br/><code>    <span class="c"># в локальную переменную ?content</span></code> <br/><code>    <span class="err">?revision</span> <span class="nn">document</span><span class="p">:</span><span class="nt">content</span> <span class="err">?content</span><span class="p">.</span></code> <br/><code>    <span class="c"># Помещаем имя файла в локальную переменную ?filename</span></code> <br/><code>    <span class="err">?doc</span> <span class="nn">document</span><span class="p">:</span><span class="nt">title</span> <span class="err">?filename</span><span class="p">.</span></code> <br/><code>    <span class="c">#Собирем новый файл из имени и содержимого,</span></code> <br/><code>    <span class="c"># сохраняем его в папку Streams,</span></code> <br/><code>    <span class="c">#и возвращаем ID нового документа с прикреплённым файлом</span></code> <br/><code>    <span class="p">(</span><span class="err">?content</span> <span class="err">?filename</span><span class="p">)</span> <span class="nn">document</span><span class="p">:</span><span class="nt">attach</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>Это действие будет прикреплять к атрибуту <em>«Файлы документов»</em> в новой записи дубликат файла, прикреплённого к  атрибуту <em>«Файлы документов»</em> из исходной записи.</p>
+</div>
+</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Настроенный сценарий для дублирования записи вместе с прикреплёнными к ней файлами" src="/platform/v6.0/examples/img/document_clone_scenario_n3_scenario.png"/><figcaption class="caption">Настроенный сценарий для дублирования записи вместе с прикреплёнными к ней файлами</figcaption></p>
+</figure>
+<h2 id="тестирование-работы-сценария">Тестирование работы сценария</h2>
+<ol class="colored_numbers_list">
+<li>Откройте шаблон <em>«Пакеты документов»</em> и нажмите кнопку «<strong>Перейти к экземплярам</strong>».</li>
+<li>Отобразится список записей в шаблоне <em>«Пакеты документов».</em></li>
+<li>
+<p>Создайте запись и заполните форму:</p>
+<ul>
+<li>Введите <em>«Наименование пакета документов»</em>.</li>
+<li>Прикрепите к полю <em>«Файлы документов»</em> несколько файлов.</li>
+</ul>
+</li>
+<li>
+<p>Сохраните запись.</p>
+</li>
+<li>Нажмите кнопку <em>«Копировать пакет документов».</em></li>
+<li>Должен снова отобразиться список записей в шаблоне <em>«Пакеты документов».</em></li>
+<li>В списке записей должна появиться новая запись — дубликат исходной.</li>
+<li>Откройте новую запись и убедитесь, что содержимое полей <em>«Наименование пакета документов»</em> и <em>«Файлы документов»</em> совпадает с содержимым исходной записи.</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5561">Пути и содержимое папок экземпляра ПО</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5716">Атрибут типа «Документ»</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5728">Кнопки. Определение, настройка, удаление</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5655">Событие и действия сценария. Определения, типы, свойства, настройка</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5214">Атрибут типа «Документ». Скачивание архива с файлами из всех строк таблицы с прикреплением архива к атрибуту</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5205">Атрибут типа «Документ». Скачивание файлов в папку на сервере</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5204">Атрибут типа «Документ». Скачивание архива с файлами из выбранных строк таблицы и записи</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5339">Атрибут типа «Документ». Клонирование записи вместе с прикреплёнными файлами</a></em></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></div>

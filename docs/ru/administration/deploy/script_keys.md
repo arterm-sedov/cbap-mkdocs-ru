@@ -1,7 +1,7 @@
 ---
 title: 'Установочные скрипты. Назначение и ключи'
 kbTitle: 'Установочные скрипты. Назначение и ключи'
-kbId: 5122
+kbId: 5451
 tags:
   - Linux
   - Windows
@@ -110,7 +110,7 @@ bash prerequisites_install.sh -h
     **Пример:**
 
     ``` bash
-    sh prerequisites_install.sh -p -d -k
+    bash prerequisites_install.sh -p -d -k
     ```
 
 - **Windows**
@@ -326,7 +326,7 @@ bash instance_check.sh my_company_instance
     **Пример:**
 
     ``` bash
-    sh version_delete.sh -v=5.0.1234.0
+    bash version_delete.sh -v=5.0.1234.0
     ```
 
 - **Windows**

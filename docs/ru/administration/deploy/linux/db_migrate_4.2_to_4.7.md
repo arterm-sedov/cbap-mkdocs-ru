@@ -173,20 +173,20 @@ _![Запуск резервного копирования экземпляра
     **Astra Linux, Debian, DEB-дистрибутивы**
 
     ``` sh
-    sh install.sh -e -p -k -d=clear -u=www-data -g=www-data -i=<instanceName>
+    bash install.sh -e -p -k -d=clear -u=www-data -g=www-data -i=<instanceName>
 
     ```
 
     **РЕД ОС, RPM-дистрибутивы**
 
     ``` sh
-    sh install.sh -e -p -k -d=clear -u=nginx -g=nginx -i=<instanceName>
+    bash install.sh -e -p -k -d=clear -u=nginx -g=nginx -i=<instanceName>
     ```
 
     **Альт Сервер**
 
     ``` sh
-    sh install.sh -e -p -k -d=clear -u=_nginx -g=_nginx -i=<instanceName>
+    bash install.sh -e -p -k -d=clear -u=_nginx -g=_nginx -i=<instanceName>
     ```
 
     Здесь `<instanceName>` — имя экземпляра ПО. Если не указать этот параметр, будет задано стандартное имя экземпляра: `cmwdata`
@@ -194,16 +194,15 @@ _![Запуск резервного копирования экземпляра
 3. Остановите сервисы {{ openSearchVariants }}, {{ nginxVariants }}, comindwareinstanceName и Kafka и удостоверьтесь, что они остановлены:
 
     ``` sh
-    systemctl stop elasticsearch
+    systemctl stop opensearch
     systemctl stop nginx
     systemctl stop kafka
     systemctl stop comindware<instanceName>
 
-    systemctl status elasticsearch
+    systemctl status opensearch
     systemctl status nginx
     systemctl status kafka
     systemctl status comindware<instanceName>
-
     ```
 
 4. Поместите в папку `/var/lib/comindware/<instanceName>/Database/` содержимое папки с преобразованной базой данных. См. _«[Преобразование базы данных в Windows](#преобразование-базы-данных-в-windows)»_.
@@ -232,8 +231,8 @@ _![Запуск резервного копирования экземпляра
 1. Запустите необходимые службы и проверьте их статус:
 
     ``` sh
-    systemctl start elasticsearch kafka nginx comindware<instanceName>
-    systemctl status elasticsearch kafka nginx comindware<instanceName>
+    systemctl start opensearch kafka nginx comindware<instanceName>
+    systemctl status opensearch kafka nginx comindware<instanceName>
     ```
 
 2. Перезапустите систему:

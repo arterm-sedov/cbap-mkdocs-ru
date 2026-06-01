@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4647" kb-tags="CDBBZ,DevOps,Linux,sysadmin,администрирование,архив,база данных,восстановление,восстановление данных,восстановление индексов,инструкции,лицензирование,миграция,конфигурация,резервная копия,резервное копирование" kb-title="Восстановление базы данных из файла резервной копии в формате CDBBZ">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5576" kb-tags="CDBBZ,DevOps,Linux,sysadmin,администрирование,архив,база данных,восстановление,восстановление данных,восстановление индексов,инструкции,лицензирование,миграция,конфигурация,резервная копия,резервное копирование" kb-title="Восстановление базы данных из файла резервной копии в формате CDBBZ">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -72,7 +72,7 @@
 <ul>
 <li>используется ранее настроенный экземпляр ПО <strong>Comindware Platform</strong> под управлением ОС Linux;</li>
 <li>имеется файл резервной копии базы данных с расширением <code>.CDBBZ</code> (архив резервной копии);</li>
-<li>резервная копия создана с помощью встроенной в ПО функции «<strong>Резервное копирование</strong>» (см. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642">Резервное копирование. Настройка и запуск, просмотр журнала сеансов</a>»</em>);</li>
+<li>резервная копия создана с помощью встроенной в ПО функции «<strong>Резервное копирование</strong>» (см. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5566">Резервное копирование. Настройка и запуск, просмотр журнала сеансов</a>»</em>);</li>
 <li>индексы OpenSearch (Elasticsearch) восстанавливаются отдельно от восстановления базы данных экземпляра ПО.</li>
 </ul>
 <p>Прежде чем приступать к восстановлению экземпляра ПО <strong>Comindware Platform</strong> из резервной копии, ознакомьтесь с видеороликом и инструкциями, представленными ниже.</p>
@@ -96,7 +96,7 @@
 <li><code>&lt;serviceName&gt;</code> — имя службы, которую требуется проверить или остановить (например, <code>comindware&lt;instanceName&gt;</code>,<code>apigateway&lt;instanceName&gt;</code>, <code>adapterhost&lt;instanceName&gt;</code>);</li>
 <li><code>&lt;user&gt;</code> — имя пользователя, в домашней директории которого находится файл резервной копии;</li>
 </ul>
-<p>См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a>»</em>.</p>
+<p>См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5561">Пути и содержимое директорий экземпляра ПО</a>»</em>.</p>
 </div>
 <h2 class="pageBreakBefore" id="backup_restore_cdbbz_db_scripts">Восстановление базы данных и скриптов</h2>
 <ol class="colored_numbers_list">
@@ -222,9 +222,9 @@
 <li>
 <p>Откройте веб-сайт экземпляра ПО.</p>
 </li>
-<li>Дождитесь инициализации экземпляра ПО. Этот процесс может занять некоторое время. Может потребоваться обновить страницу браузера. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622#deploy_guide_linux_initialize">Инициализация Comindware Platform</a>»</em>.</li>
+<li>Дождитесь инициализации экземпляра ПО. Этот процесс может занять некоторое время. Может потребоваться обновить страницу браузера. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5558#deploy_guide_linux_initialize">Инициализация Comindware Platform</a>»</em>.</li>
 <li>Удостоверьтесь, что все данные из резервной копии восстановлены.</li>
-<li>Проверьте и исправьте конфигурацию экземпляра ПО. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4651">Проверка и настройка конфигурации экземпляра ПО Comindware Platform после восстановления из резервной копии</a>»</em>.</li>
+<li>Проверьте и исправьте конфигурацию экземпляра ПО. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5573">Проверка и настройка конфигурации экземпляра ПО Comindware Platform после восстановления из резервной копии</a>»</em>.</li>
 <li>
 <p>Удалите временную директорию с распакованной резервной копией:</p>
 <div class="highlight"><code><pre><span></span><code>rm<span class="w"> </span>-r<span class="w"> </span>/home/&lt;user&gt;/tmp</code> <br/></pre></code></div>
@@ -256,51 +256,51 @@
 <div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>restart<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Удостоверьтесь, что лицензионные ключи присутствуют на странице «<strong>Администрирование</strong>» — «<strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4670">Лицензирование</a></strong>».</p>
+<p>Удостоверьтесь, что лицензионные ключи присутствуют на странице «<strong>Администрирование</strong>» — «<strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5616">Лицензирование</a></strong>».</p>
 </li>
 <li>Назначьте лицензионные ключи аккаунтам и группам.</li>
 </ol>
 <h2 id="backup_restore_cdbbz_indexes">Восстановление индексов OpenSearch (Elasticsearch) из файла резервной копии репозитория</h2>
 <div class="notice notice-warning">
 <p class="admonition-title">Логика работы репозитория снимков OpenSearch (Elasticsearch)</p>
-<p>OpenSearch (Elasticsearch) сохраняет и восстанавливает резервные копии своих данных в виде снимков в директорию, заданную директивой <code>path.repo</code> в файле конфигурации <code>/etc/elasticsearch/elasticsearch.yml</code>.</p>
+<p>OpenSearch (Elasticsearch) сохраняет и восстанавливает резервные копии своих данных в виде снимков в директорию, заданную директивой <code>path.repo</code> в файле конфигурации <code>/etc/opensearch/opensearch.yml</code>.</p>
 <p>Эта директория служит как для сохранения резервных копий, так и для их восстановления.</p>
 </div>
 <ol class="colored_numbers_list">
 <li>
 <p>Остановите службу OpenSearch (Elasticsearch) и удостоверьтесь, что она остановлена:</p>
-<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>stop<span class="w"> </span>elasticsearch</code> <br/><code>systemctl<span class="w"> </span>status<span class="w"> </span>elasticsearch</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>stop<span class="w"> </span>opensearch</code> <br/><code>systemctl<span class="w"> </span>status<span class="w"> </span>opensearch</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Создайте папку репозитория OpenSearch (Elasticsearch) (например, <code>/var/backups/elasticsearch/</code>) и перенесите в неё файлы из каталога <code>History</code> ранее <a class="mkdocs_imported_link" href="#unpack_backup">распакованной резервной копии</a>:</p>
-<div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>/var/backups/elasticsearch/</code> <br/><code>mv<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/History/*<span class="w"> </span>/var/backups/elasticsearch/</code> <br/></pre></code></div>
+<p>Создайте папку репозитория OpenSearch (Elasticsearch) (например, <code>/var/backups/opensearch/</code>) и перенесите в неё файлы из каталога <code>History</code> ранее <a class="mkdocs_imported_link" href="#unpack_backup">распакованной резервной копии</a>:</p>
+<div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>/var/backups/opensearch/</code> <br/><code>mv<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/History/*<span class="w"> </span>/var/backups/opensearch/</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Назначьте папке репозитория и её содержимому полные права доступа:</p>
-<div class="highlight"><code><pre><span></span><code>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">777</span><span class="w"> </span>/var/backups/elasticsearch/</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">777</span><span class="w"> </span>/var/backups/opensearch/</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Назначьте владельца <code>elasticsearch</code> папке репозитория и её содержимому:</p>
-<div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>elasticsearch:elasticsearch<span class="w"> </span>/var/backups/elasticsearch/</code> <br/></pre></code></div>
+<p>Назначьте владельца <code>opensearch</code> папке репозитория и её содержимому:</p>
+<div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>opensearch:opensearch<span class="w"> </span>/var/backups/opensearch/</code> <br/></pre></code></div>
 </li>
 <li>
-<p>В файле конфигурации <code>/etc/elasticsearch/elasticsearch.yml</code> укажите путь к созданному репозиторию:</p>
-<div class="highlight"><code><pre><span></span><code><span class="nt">path.repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/backups/elasticsearch</span></code> <br/></pre></code></div>
+<p>В файле конфигурации <code>/etc/opensearch/opensearch.yml</code> укажите путь к созданному репозиторию:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nt">path.repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/backups/opensearch</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Запустите службу OpenSearch (Elasticsearch):</p>
-<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>start<span class="w"> </span>elasticsearch</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>start<span class="w"> </span>opensearch</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Зарегистрируйте репозиторий (например, <code>&lt;repository_backup&gt;</code>) с резервной копией снимка OpenSearch (Elasticsearch) (<code>&lt;openSearchHost&gt;</code> — адрес сервера OpenSearch (Elasticsearch)) :</p>
 <ul>
 <li>
 <p><strong>С авторизацией в OpenSearch (Elasticsearch):</strong></p>
-<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"https://&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/&lt;repository_backup&gt;?pretty"</span><span class="w"> </span><span class="se">\</span></code> <br/><code>-u<span class="w"> </span>&lt;username&gt;:&lt;password&gt;<span class="w"> </span><span class="se">\</span></code> <br/><code>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span><span class="se">\</span></code> <br/><code><span class="s1">'{</span></code> <br/><code><span class="s1">    "type": "fs",</span></code> <br/><code><span class="s1">    "settings": {</span></code> <br/><code><span class="s1">        "location": "/var/backups/elasticsearch"</span></code> <br/><code><span class="s1">    }</span></code> <br/><code><span class="s1">}'</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"https://&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/&lt;repository_backup&gt;?pretty"</span><span class="w"> </span><span class="se">\</span></code> <br/><code>-u<span class="w"> </span>&lt;username&gt;:&lt;password&gt;<span class="w"> </span><span class="se">\</span></code> <br/><code>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span><span class="se">\</span></code> <br/><code><span class="s1">'{</span></code> <br/><code><span class="s1">    "type": "fs",</span></code> <br/><code><span class="s1">    "settings": {</span></code> <br/><code><span class="s1">        "location": "/var/backups/opensearch"</span></code> <br/><code><span class="s1">    }</span></code> <br/><code><span class="s1">}'</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p><strong>Без авторизации в OpenSearch (Elasticsearch):</strong></p>
-<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"https://&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/&lt;repository_backup&gt;?verify=false&amp;pretty"</span><span class="w"> </span><span class="se">\</span></code> <br/><code>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span><span class="se">\</span></code> <br/><code><span class="s1">'{</span></code> <br/><code><span class="s1">    "type": "fs",</span></code> <br/><code><span class="s1">    "settings": {</span></code> <br/><code><span class="s1">        "location": "/var/backups/elasticsearch"</span></code> <br/><code><span class="s1">    }</span></code> <br/><code><span class="s1">}'</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"https://&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/&lt;repository_backup&gt;?verify=false&amp;pretty"</span><span class="w"> </span><span class="se">\</span></code> <br/><code>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span><span class="se">\</span></code> <br/><code><span class="s1">'{</span></code> <br/><code><span class="s1">    "type": "fs",</span></code> <br/><code><span class="s1">    "settings": {</span></code> <br/><code><span class="s1">        "location": "/var/backups/opensearch"</span></code> <br/><code><span class="s1">    }</span></code> <br/><code><span class="s1">}'</span></code> <br/></pre></code></div>
 </li>
 </ul>
 <p><a class="mkdocs_imported_link" id="s3_repository"></a></p>
@@ -332,15 +332,15 @@
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642">Резервное копирование. Настройка и запуск, просмотр журнала сеансов</a></li>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622">Установка, запуск, инициализация и остановка ПО</a></li>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a></li>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4651">Проверка и настройка конфигурации экземпляра ПО Comindware Platform после восстановления из резервной копии</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5566">Резервное копирование. Настройка и запуск, просмотр журнала сеансов</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5558">Установка, запуск, инициализация и остановка ПО</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5561">Пути и содержимое директорий экземпляра ПО</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5573">Проверка и настройка конфигурации экземпляра ПО Comindware Platform после восстановления из резервной копии</a></li>
 <li><a class="mkdocs_imported_link" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-filesystem-repository.html">Регистрация репозитория OpenSearch (Elasticsearch) (официальное руководство, английский язык)</a></li>
 <li><a class="mkdocs_imported_link" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/restore-snapshot-api.html">Восстановление снимка OpenSearch (Elasticsearch) (официальное руководство, английский язык)</a></li>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4650">Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО</a></li>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4648">Восстановление базы данных, вложенных файлов и журналов из полной резервной копии</a></li>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4670">Лицензирование. Активация, назначение, отзыв и продление лицензий</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5572">Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5575">Восстановление базы данных, вложенных файлов и журналов из полной резервной копии</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5616">Лицензирование. Активация, назначение, отзыв и продление лицензий</a></li>
 </ul>
 </div>
 </article>

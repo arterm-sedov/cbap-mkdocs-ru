@@ -1,6 +1,6 @@
 ---
 title: Рекомендации по настройке приложений
-kbId: 4716
+kbId: 5641
 ---
 
 # Рекомендации по настройке приложений {: #application_configure_recommendations }

@@ -1,6 +1,6 @@
 ---
 title: Zabbix Agent. Установка и настройка
-kbId: 4608
+kbId: 5463
 ---
 
 # Zabbix Agent. Установка и настройка {: #zabbix_agent_deploy}

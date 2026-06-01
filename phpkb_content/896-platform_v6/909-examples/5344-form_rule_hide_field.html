@@ -1,0 +1,55 @@
+<h1>Правила для формы. Пример: условное скрытие поля с помощью формулы</h1><p>В данной статье описан пример правила на скрытие поля «<em>Получатель</em>» на форме при условии, если это поле пустое и отмечен флаг «<em>Ввести данные нового клиента</em>».</p>
+<p>Системные имена шаблонов записи и атрибутов, задействованных в примере, приведены в таблице:</p>
+<table>
+<tbody>
+<tr>
+<th>Шаблон записи</th>
+<th>Атрибуты</th>
+</tr>
+<tr>
+<td>Request (Заявка) </td>
+<td>gp_name — получатель;<br/>create_flag — флаг «<em>Ввести данные нового клиента</em>»</td>
+</tr>
+</tbody>
+</table>
+<p>В выражении будут использованы следующие функции:</p>
+<ul>
+<li>функция «<em><strong>AND()</strong></em>» для выполнения логического сложения;</li>
+<li>функция «<em><strong>EMPTY()</strong></em>» для проверки значения на пустоту.</li>
+</ul>
+<p><br/><strong>Пошаговая инструкция:</strong></p>
+<p><strong>1.</strong> Создайте и настройте шаблоны записей и атрибуты.</p>
+<p><strong>2.</strong> В шаблоне записи «<em>Request</em>» перейдите в раздел «<em><strong>Формы</strong></em>».</p>
+<p><strong>3.</strong> Откройте форму и перейдите в раздел «<em><strong>Правила для формы</strong></em>».</p>
+<p><strong>4.</strong> Добавьте правило на скрытие поля «<em>gp_name</em>».</p>
+<p><strong>5.</strong> Введите выражение.</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">AND(EMPTY($gp_name),$create_flag == true)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>6.</strong> Нажмите кнопку «<em><strong>Сохранить</strong></em>».</p>
+<p> </p>
+<p><strong>Синтаксис</strong></p>
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%; height: 120px;">
+<tbody>
+<tr style="height: 40px;">
+<th style="width: 50%; height: 40px;">Элемент</th>
+<th style="width: 50%; height: 40px;">Описание</th>
+</tr>
+<tr style="height: 40px;">
+<td>AND()</td>
+<td>логическое сложение — поле «<em>Получатель</em>» пустое и флаг «<em>Ввести данные нового клиента</em>» активен</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;">$</td>
+<td style="width: 50%; height: 40px;">указывает на то, что атрибут находится в текущей записи</td>
+</tr>
+</tbody>
+</table>
+</div>

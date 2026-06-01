@@ -1,7 +1,7 @@
 ---
 title: 'Восстановление базы данных из файла резервной копии в формате CDBBZ'
 kbTitle: 'Восстановление базы данных из файла резервной копии в формате CDBBZ'
-kbId: 4647
+kbId: 5576
 tags: 
     - CDBBZ
     - DevOps
@@ -60,10 +60,10 @@ hide: tags
 
 <!-- ### Видеоинструкция
 
-Ссылка на видеоролик: <https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/restore_complete_backup_linux.mp4>
+Ссылка на видеоролик: <https://kb.comindware.ru/platform/v6.0/administration/deploy/linux/img/restore_complete_backup_linux.mp4>
 
 <video controls="controls" width="100%" height="100%">
-<source src="https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/restore_complete_backup_linux.mp4" type="video/mp4" />
+<source src="https://kb.comindware.ru/platform/v6.0/administration/deploy/linux/img/restore_complete_backup_linux.mp4" type="video/mp4" />
 </video> -->
 
 ## Восстановление базы данных и скриптов {: #backup_restore_cdbbz_db_scripts .pageBreakBefore }
@@ -279,46 +279,46 @@ hide: tags
 
 !!! warning "Логика работы репозитория снимков {{ openSearchVariants }}"
 
-    {{ openSearchVariants }} сохраняет и восстанавливает резервные копии своих данных в виде снимков в директорию, заданную директивой `path.repo` в файле конфигурации `/etc/elasticsearch/elasticsearch.yml`.
+    {{ openSearchVariants }} сохраняет и восстанавливает резервные копии своих данных в виде снимков в директорию, заданную директивой `path.repo` в файле конфигурации `/etc/opensearch/opensearch.yml`.
 
     Эта директория служит как для сохранения резервных копий, так и для их восстановления.
 
 1. Остановите службу {{ openSearchVariants }} и удостоверьтесь, что она остановлена:
 
     ``` sh
-    systemctl stop elasticsearch
-    systemctl status elasticsearch
+    systemctl stop opensearch
+    systemctl status opensearch
     ```
 
-2. Создайте папку репозитория {{ openSearchVariants }} (например, `/var/backups/elasticsearch/`) и перенесите в неё файлы из каталога `History` ранее [распакованной резервной копии](#unpack_backup):
+2. Создайте папку репозитория {{ openSearchVariants }} (например, `/var/backups/opensearch/`) и перенесите в неё файлы из каталога `History` ранее [распакованной резервной копии](#unpack_backup):
 
     ``` sh
-    mkdir /var/backups/elasticsearch/
-    mv /var/lib/comindware/<instanceName>/History/* /var/backups/elasticsearch/
+    mkdir /var/backups/opensearch/
+    mv /var/lib/comindware/<instanceName>/History/* /var/backups/opensearch/
     ```
 
 3. Назначьте папке репозитория и её содержимому полные права доступа:
 
     ``` sh
-    chmod -R 777 /var/backups/elasticsearch/
+    chmod -R 777 /var/backups/opensearch/
     ```
 
-4. Назначьте владельца `elasticsearch` папке репозитория и её содержимому:
+4. Назначьте владельца `opensearch` папке репозитория и её содержимому:
 
     ``` sh
-    chown -R elasticsearch:elasticsearch /var/backups/elasticsearch/
+    chown -R opensearch:opensearch /var/backups/opensearch/
     ```
 
-5. В файле конфигурации `/etc/elasticsearch/elasticsearch.yml` укажите путь к созданному репозиторию:
+5. В файле конфигурации `/etc/opensearch/opensearch.yml` укажите путь к созданному репозиторию:
 
     ``` yaml
-    path.repo: /var/backups/elasticsearch
+    path.repo: /var/backups/opensearch
     ```
 
 6. Запустите службу {{ openSearchVariants }}:
 
     ``` sh
-    systemctl start elasticsearch
+    systemctl start opensearch
     ```
 
     {% include-markdown ".snippets/pdfPageBreakHard.md" %}
@@ -334,7 +334,7 @@ hide: tags
         '{
             "type": "fs",
             "settings": {
-                "location": "/var/backups/elasticsearch"
+                "location": "/var/backups/opensearch"
             }
         }'
 
@@ -348,7 +348,7 @@ hide: tags
         '{
             "type": "fs",
             "settings": {
-                "location": "/var/backups/elasticsearch"
+                "location": "/var/backups/opensearch"
             }
         }'
 

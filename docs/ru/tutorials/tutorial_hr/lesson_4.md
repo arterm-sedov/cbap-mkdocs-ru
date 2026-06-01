@@ -1,6 +1,6 @@
 ---
 title: 'Урок 4. Связи и коллекции записей, документооборот'
-kbId: 5116
+kbId: 5399
 tags:
 # Common tutorial_hr tags
   - BPMS

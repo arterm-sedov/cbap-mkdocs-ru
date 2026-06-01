@@ -1,6 +1,6 @@
 ---
 title: Методы Web API
-kbId: 4861
+kbId: 5330
 tags:
     - API
     - REST

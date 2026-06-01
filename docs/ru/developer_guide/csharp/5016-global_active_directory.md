@@ -1,6 +1,6 @@
 ---
 title: Глобальная функция для обращения в Active Directory
-kbId: 5016
+kbId: 5195
 ---
 
 # Глобальная функция для обращения в Active Directory

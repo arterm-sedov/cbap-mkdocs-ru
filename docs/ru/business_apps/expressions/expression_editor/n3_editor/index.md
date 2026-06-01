@@ -1,6 +1,6 @@
 ---
 title: Предиктивный ввод в выражениях на языке N3
-kbId: 5039
+kbId: 5183
 tags:
   - N3
   - ObjectAlias

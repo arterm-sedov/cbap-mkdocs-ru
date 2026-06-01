@@ -19,7 +19,7 @@ tags:
     - вычисление
 hide:
     - tags
-kbId: 4905
+kbId: 5365
 ---
 
 # Периодические напоминания об открытых задачах. Настройка с помощью N3 {: #example_n3_periodic_task_notifications }

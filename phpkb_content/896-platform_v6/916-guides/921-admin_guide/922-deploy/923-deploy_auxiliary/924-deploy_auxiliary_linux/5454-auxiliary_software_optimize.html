@@ -1,0 +1,118 @@
+<h1>Настройка конфигурации вспомогательного ПО для оптимизации работы Comindware Platform</h1><div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1hamv802od">Введение</a></li>
+<li><a href="#mcetoc_1hamv802oe">Настройка Apache Ignite</a>
+<ul>
+<li><a href="#mcetoc_1haopu2344">Изменение размера выделяемой области памяти </a></li>
+<li><a href="#mcetoc_1hamv802of">Изменение размера кучи JVM</a></li>
+<li><a href="#mcetoc_1haort6i08">Связанные статьи</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1haooja5o1">Настройка Elasticsearch</a>
+<ul>
+<li><a href="#mcetoc_1haopn5v20">Изменение количества шардов</a></li>
+<li><a href="#mcetoc_1haopo4eh1">Изменение размера кучи JVM</a></li>
+<li><a href="#mcetoc_1haoruflo9">Связанные статьи</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1hau934m10">Настройка NGINX</a></li>
+</ul>
+</div>
+<h2 data-heading="Введение" id="mcetoc_1hamv802od">Введение</h2>
+<p><strong>Comindware Platform</strong> использует следующее вспомогательное ПО:</p>
+<ul>
+<li>Apache Ignite — распределенная база данных;</li>
+<li>JVM — виртуальная машина Java;</li>
+<li>Elasticsearch — поисковая система;</li>
+<li>NGINX — обратный прокси-сервер.</li>
+</ul>
+<p>Для повышения производительности и выделения дополнительных ресурсов <strong>Comindware Platform</strong> (далее «экземпляр ПО») можно изменить некоторые параметры конфигурации вспомогательного ПО.</p>
+<h2 data-heading="Настройка Apache Ignite" id="mcetoc_1hamv802oe">Настройка Apache Ignite</h2>
+<h3 id="mcetoc_1haopu2344">Изменение размера выделяемой области памяти </h3>
+<p>В Apache Ignite можно назначить максимальный размер области памяти с помощью директивы <code>maxSize</code>.</p>
+<ol>
+<li>Откройте файл <code>/var/www/instancename/Ignite.config</code>, где <code>instancename</code> — имя экземпляра ПО.</li>
+<li>Найдите раздел <code>&lt;bean class="org.apache.ignite.configuration.DataRegionConfiguration"&gt;</code> в разделе <code>dataRegionConfigurations</code>, содержащий директиву <code>&lt;property name="persistenceEnabled" value="true" /&gt;</code>.</li>
+<li>Внутри этого раздела найдите директиву <code>property name="maxSize"</code>.</li>
+<li>Установите требуемый размер области памяти, например 8 ГБ:
+<pre tabindex="0"><code>&lt;property name="maxSize" value="#{8L * 1024 * 1024 * 1024}" /&gt;        </code></pre>
+</li>
+<li>Перезапустите экземпляр ПО, чтобы изменения вступили в силу.</li>
+</ol>
+<h3 data-heading="Настройка JVM" id="mcetoc_1hamv802of">Изменение размера кучи JVM</h3>
+<p>Для JVM Apache Ignite можно назначить минимальный (начальный) и максимальный размер области памяти для кучи с помощью директив <code>Xms</code> и <code>Xmx</code>.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<ul>
+<li>JVM может фактически использовать больше памяти, чем размер кучи, заданный директивами и <code>Xms</code> и <code>Xmx</code>.</li>
+<li>Размер кучи можно задать в гигабайтах, мегабайтах, килобайтах: <code>-Xms&lt;size&gt;[g|G|m|M|k|K]</code>. Если не указать единицу измерения, то размер кучи будет задан в байтах.</li>
+</ul>
+</div>
+<ol>
+<li>Установите переменную среды <code>JVM_OPTS</code>, указав в ней требуемый начальный и максимальный размер кучи, например <code>-Xms10m</code> (начальный. 10 МБ) и <code>-Xmx16g</code> (макс. 16 ГБ):
+<pre tabindex="0"><code>export JVM_OPTS="-Xms10m -Xmx16g <br/>-XX:MaxDirectMemorySize=1g <br/>-Djava.net.preferIPv4Stack=true <br/>-XX:+AlwaysPreTouch -XX:+UseG1GC <br/>-XX:+ScavengeBeforeFullGC -XX:+DisableExplicitGC<br/>--add-opens=java.base/sun.nio.ch=ALL-UNNAMED <br/>--add-opens=java.base/java.io=ALL-UNNAMED<br/>--add-opens=java.base/java.nio=ALL-UNNAMED <br/>--add-opens=java.base/java.util=ALL-UNNAMED<br/>--add-opens=java.base/java.lang=ALL-UNNAMED <br/>--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED<br/>--add-exports=java.base/sun.nio.ch=ALL-UNNAMED <br/>--add-exports=java.management/com.sun.jmx.mbeanserver=ALL-UNNAMED<br/>--add-exports=jdk.internal.jvmstat/sun.jvmstat.monitor=ALL-UNNAMED <br/>--add-exports=java.base/sun.reflect.generics.reflectiveObjects=ALL-UNNAMED<br/>--add-opens=jdk.management/com.sun.management.internal=ALL-UNNAMED<br/>-DIGNITE_QUIET=false <br/>-DIGNITE_NO_ASCII=true"       </code></pre>
+</li>
+<li>Перезапустите экземпляр ПО, чтобы изменения вступили в силу.</li>
+</ol>
+<h3 id="mcetoc_1haort6i08">Связанные статьи</h3>
+<ul>
+<li><a href="https://ignite.apache.org/docs/latest/perf-and-troubleshooting/general-perf-tips">Общие рекомендации по оптимизации производительности Apache Ignite</a> (английский язык, официальное руководство Apache Ignite)</li>
+<li><a href="https://ignite.apache.org/docs/latest/perf-and-troubleshooting/memory-tuning">Настройка памяти и JVM</a> (английский язык, официальное руководство Apache Ignite)</li>
+</ul>
+<h2 data-heading="Настройка Apache Ignite" id="mcetoc_1haooja5o1">Настройка Elasticsearch</h2>
+<h3 id="mcetoc_1haopn5v20">Изменение количества шардов</h3>
+<p>Для Elasticsearch можно изменить максимальное количество шардов на каждый в кластере по следующему правилу:</p>
+<ul>
+<li>для повышения производительности Elasticsearch количество шардов следует уменьшить до минимально необходимого (от 100 шардов на одно приложение в экземпляре ПО);</li>
+<li>в случае нехватки ресурсов для Elasticsearch при большом объеме данных количество шардов следует увеличить (но при этом производительность может снизиться).</li>
+</ul>
+<ol>
+<li>Откройте файл конфигурации Elasticsearch: <code>elasticsearch.yml</code></li>
+<li>Установите требуемое количество шардов с помощью директивы <code>cluster.max_shards_per_node</code>:
+<pre class="source_code_container"><code>сluster.max_shards_per_node: 3000<br/></code><code></code><code></code></pre>
+</li>
+<li>Перезапустите службу Elasticsearch, чтобы изменения вступили в силу.</li>
+</ol>
+<h3 id="mcetoc_1haopo4eh1">Изменение размера кучи JVM</h3>
+<p>Для JVM Elasticsearch можно назначить минимальный (начальный) и максимальный размер области памяти для кучи с помощью директив <code>Xms</code> и <code>Xmx</code>.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<ul>
+<li>Для кучи JVM Elasticsearch рекомендуется выделять не более половины оперативной памяти машины, чтобы оставался достаточный объем ОЗУ для работы Lucene.</li>
+<li>Чем меньше размер кучи Elasticsearch, тем выше будет производительность Elasticsearch и Lucene.</li>
+<li>Не следует выделять для кучи JVM более 32 ГБ, так как это может привести к снижению производительности и перерасходу памяти.</li>
+<li>JVM может фактически использовать больше памяти, чем размер кучи, заданный директивами и <code>Xms</code> и <code>Xmx</code>.</li>
+<li>Размер кучи можно задать в гигабайтах, мегабайтах, килобайтах: <code>-Xms&lt;size&gt;[g|G|m|M|k|K]</code>. Если не указать единицу измерения, то размер кучи будет задан в байтах.</li>
+</ul>
+</div>
+<ol>
+<li>Откройте файл конфигурации JVM Elasticsearch: <code>/etc/elasticsearch/jvm.options</code></li>
+<li>Установите размер кучи начальный и максимальный размер кучи, например <code>-Xms4g</code> (начальный. 4 ГБ) и <code>-Xmx32g</code> (макс. 32 ГБ):
+<pre class="source_code_container"><code>-Xms4g</code> <br/><code>-Xmx32g</code></pre>
+</li>
+<li>Перезапустите службу Elasticsearch, чтобы изменения вступили в силу.</li>
+</ol>
+<h3 id="mcetoc_1haoruflo9">Связанные статьи</h3>
+<ul>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/tune-for-search-speed.html">Ускорение поиска</a> (английский язык, официальное руководство Elasticsearch)</li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/tune-for-indexing-speed.html">Ускорение индексации</a> (английский язык, официальное руководство Elasticsearch)</li>
+<li><a href="https://habr.com/ru/articles/224877/">Масштабирование кластера Elasticsearch</a></li>
+<li><a href="https://gals.software/blog/2022-12-08-elasticsearch-optimization?ysclid=lmrhkxl35g269901813">Оптимизация производительности кластера Elasticsearch</a></li>
+<li><a href="https://sergeymukhin.com/blog/kak-umensituvelicit-potreblenie-pamyati-elasticsearch">Как уменьшить/увеличить потребление памяти Elasticsearch</a></li>
+<li><a href="https://g-soft.info/articles/1679/elasticsearch-heap-razmer-i-svoping/">Elasticsearch Heap: Размер и Свопинг</a></li>
+<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.1/important-settings.html#heap-size-settings">Настройка размера кучи</a> (английский язык, официальное руководство Elasticsearch)</li>
+<li><a href="https://opster.com/guides/elasticsearch/capacity-planning/elasticsarch-java-heap-size">Оптимизация размера кучи Java для Elasticsearch</a> (английский язык)</li>
+</ul>
+<h2 id="mcetoc_1hau934m10">Настройка NGINX</h2>
+<p>В конфигурации NGINX для экономии трафика и уменьшения времени загрузки страниц можно включить сжатие, а также увеличить количество подключений.</p>
+<ol>
+<li>Откройте для редактирования файл <code>/etc/nginx/nginx.conf</code> </li>
+<li>В разделе <code>events</code> задайте количество подключений с помощью директивы <code>worker_connections</code>:
+<pre><code>events {</code> <br/><code>...</code><br/><code>worker_connections 768; </code><br/><code>...</code><br/><code>}</code></pre>
+</li>
+<li>В разделе <span style="color: #36464e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;"><span style="font-size: 13.125px; background-color: #f5f5f5;">http</span></span> включите и настройте сжатие:<br/>
+<pre class="source_code_container"><code></code><code>http {</code> <br/><code>...</code> <br/><code>gzip on;</code> <br/><code>gzip_vary on;</code> <br/><code>gzip_proxied any;</code> <br/><code>gzip_comp_level 6;</code> <br/><code>gzip_buffers 16 8k;</code> <br/><code>gzip_http_version 1.1;</code> <br/><code>gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;</code> <br/><code>...</code> <br/><code>}</code> <br/><br/></pre>
+</li>
+</ol>
+<p> </p>

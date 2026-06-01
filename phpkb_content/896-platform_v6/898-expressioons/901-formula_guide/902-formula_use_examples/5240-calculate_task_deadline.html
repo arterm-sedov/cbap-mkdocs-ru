@@ -1,0 +1,15 @@
+<h1>Вычисление крайнего срока задачи с учетом выходных и праздничных дней</h1><p>Для того чтобы вычислить срок выполнения задачи, учитывая выходные и праздничные дни (для этого в платформе должен быть создан справочник праздничных дней), введите следующее выражение:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">WORKHOURS(NOW(),18,DURATION("PT9H"),DURATION("PT9H"),LIST((from a in db-&gt;holliday_calendar select a-&gt;Data)))</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span style="text-decoration: underline;"><strong>где:</strong></span></p>
+<p><strong>18</strong> – количество рабочих часов, данных на выполнение задачи;</p>
+<p><strong>DURATION("PT9H")</strong> – в первом случае это – время начала рабочего дня, во втором – его продолжительность;</p>
+<p><strong>holliday_calendar</strong> – системное имя Шаблона записи с праздничными днями;</p>
+<p><strong>Data</strong> – системное имя атрибута типа «Дата/Время» в holliday_calendar.</p>

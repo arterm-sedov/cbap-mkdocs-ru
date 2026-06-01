@@ -15,7 +15,7 @@ tags:
     - тройки
 hide:
     - tags
-kbId: 4950
+kbId: 5277
 ---
 
 # Вычисление исполнителя активной задачи с помощью N3 {: #n3_calculate_active_task_assignee }

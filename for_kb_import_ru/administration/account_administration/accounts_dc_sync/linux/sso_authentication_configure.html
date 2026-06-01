@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4613" kb-tags="sso,аутентификация,единый вход,авторизация,active directory,linux,контроллер домена,логин" kb-title="Аутентификация через единый вход (SSO). Настройка контроллера домена, экземпляра ПО и компьютера конечного пользователя">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5378" kb-tags="sso,аутентификация,единый вход,авторизация,active directory,linux,контроллер домена,логин" kb-title="Аутентификация через единый вход (SSO). Настройка контроллера домена, экземпляра ПО и компьютера конечного пользователя">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -151,28 +151,6 @@
       
     </span>
 </a>
-<nav aria-label="Настройка параметров сети для разрешения DC FQDN" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#sso_authentication_configure_principal_hosts_file">
-<span class="md-ellipsis">
-      
-        Изменение файла hosts
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#sso_authentication_configure_principal_resolve_conf">
-<span class="md-ellipsis">
-      
-        Изменение файла resolv.conf
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#sso_authentication_configure_principal_network_verification">
@@ -200,28 +178,6 @@
       
     </span>
 </a>
-<nav aria-label="Настройка конфигурации Kerberos" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#sso_authentication_configure_kerberos_helpers_install">
-<span class="md-ellipsis">
-      
-        Установка вспомогательных пакетов
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#sso_authentication_configure_kerberos_auth">
-<span class="md-ellipsis">
-      
-        Настройка аутентификации Kerberos
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#sso_authentication_configure_product_installation">
@@ -330,7 +286,7 @@
 <ul>
 <li>Пользователи домена по умолчанию могут проходить аутентификацию в <strong>Comindware Platform</strong> через SSO без ввода имени пользователя и пароля (при корректной настройке браузера и групповых политик).</li>
 <li>Пользователи других доменов могут проходить аутентификацию по имени пользователя и паролю, указывая домен явно, например <code>NPS\user1</code> или <code>user1@NPS.COMPANY.LOCAL</code>.</li>
-<li>SSO одновременно из нескольких доменов следует реализовывать во внешней инфраструктуре (например, через федерацию удостоверений на базе Keycloak) с дальнейшей аутентификацией в <strong>Comindware Platform</strong> по протоколу OpenID Connect, см. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4685">Аутентификация через Keycloak и OpenID Connect. Настройка подключения и служб</a>»</em>.</li>
+<li>SSO одновременно из нескольких доменов следует реализовывать во внешней инфраструктуре (например, через федерацию удостоверений на базе Keycloak) с дальнейшей аутентификацией в <strong>Comindware Platform</strong> по протоколу OpenID Connect, см. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5318">Аутентификация через Keycloak и OpenID Connect. Настройка подключения и служб</a>»</em>.</li>
 </ul>
 </div>
 <div class="notice notice-success">
@@ -487,7 +443,7 @@
 <li>В отобразившемся окне добавьте в список надёжных узлов <code>&lt;principal&gt;</code>.</li>
 </ol>
 <figure class="screenshot_with_caption">
-<p><img alt="Добавление машины с экземпляром ПО в список доверенных узлов на контроллере домена" src="/platform/v5.0/administration/account_administration/accounts_dc_sync/linux/img/sso_authentication_configure_make_host_machine_trusted.png"/></p><figcaption class="caption">Добавление машины с экземпляром ПО в список доверенных узлов на контроллере домена</figcaption>
+<p><img alt="Добавление машины с экземпляром ПО в список доверенных узлов на контроллере домена" src="/platform/v6.0/administration/account_administration/accounts_dc_sync/linux/img/sso_authentication_configure_make_host_machine_trusted.png"/></p><figcaption class="caption">Добавление машины с экземпляром ПО в список доверенных узлов на контроллере домена</figcaption>
 </figure>
 <h3 class="pageBreakBefore" id="sso_authentication_configure_service_user">Сервисный пользователь домена</h3>
 <p>В домене должен существовать пользователь <code>&lt;authuser&gt;</code>, выступающий в роли сервисного аккаунта для модуля аутентификации <em>NGINX</em>, работающего на машине <code>&lt;principal&gt;</code> с экземпляром ПО.</p>
@@ -517,7 +473,7 @@
 <p>При создании пользователя <code>&lt;authuser&gt;</code> на вкладке «<strong>Учётная запись</strong>» (<strong>Account</strong>) в разделе «<strong>Свойства учётной записи</strong>» (<strong>Account option</strong>) необходимо установить флажки «<strong>Пользователь не может менять пароль</strong>» (<strong>User cannot change password</strong>) и «<strong>Срок действия пароля не истекает</strong>» (<strong>Password never expires</strong>), как показано на иллюстрации. 
 Также, при использовании отличного от MD5 метода шифрования он должен быть очевиднным образом указан в этом же разделе.</p>
 <figure class="screenshot_with_caption">
-<p><img alt="Настройка свойств сервисного аккаунта для NGINX" src="/platform/v5.0/administration/account_administration/accounts_dc_sync/linux/img/Kerberos_Rocky%2BAstra_authuser_account_config.png"/></p><figcaption class="caption">Настройка свойств сервисного аккаунта для NGINX</figcaption>
+<p><img alt="Настройка свойств сервисного аккаунта для NGINX" src="/platform/v6.0/administration/account_administration/accounts_dc_sync/linux/img/Kerberos_Rocky%2BAstra_authuser_account_config.png"/></p><figcaption class="caption">Настройка свойств сервисного аккаунта для NGINX</figcaption>
 </figure>
 <h3 id="sso_authentication_configure_test_users">Пользователи для проверки аутентификации</h3>
 <p>Для проверки работоспособности процедуры аутентификации здесь используются пользователи <code>user1</code> и <code>user2</code>, см. следующую таблицу:</p>
@@ -727,12 +683,12 @@
 </ol>
 <h3 class="pageBreakBefore" id="sso_authentication_configure_product_installation">Установка экземпляра ПО</h3>
 <ol class="colored_numbers_list">
-<li>Установите вспомогательне ПО для <strong>Comindware Platform</strong> согласно инструкциям в параграфе <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622#deploy_guide_linux_prerequisites_install_order">Порядок установки вспомогательного ПО</a>»</em>.</li>
+<li>Установите вспомогательне ПО для <strong>Comindware Platform</strong> согласно инструкциям в параграфе <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5558#deploy_guide_linux_prerequisites_install_order">Порядок установки вспомогательного ПО</a>»</em>.</li>
 <li>
-<p>Установите ПО <strong>Comindware Platform</strong> согласно инструкциям в параграфе <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622#deploy_guide_linux_install_order">Порядок установки ПО Comindware Platform</a>»</em>.</p>
+<p>Установите ПО <strong>Comindware Platform</strong> согласно инструкциям в параграфе <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5558#deploy_guide_linux_install_order">Порядок установки ПО Comindware Platform</a>»</em>.</p>
 </li>
 <li>
-<p>Создайте экземпляр ПО <strong>Comindware Platform</strong>, согласно инструкциям в параграфе <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622#deploy_guide_linux_instance_create">Создание экземпляра ПО Comindware Platform</a>»</em>. Далее <code>&lt;instanceName&gt;</code> — имя созданного экземпляра ПО.</p>
+<p>Создайте экземпляр ПО <strong>Comindware Platform</strong>, согласно инструкциям в параграфе <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5558#deploy_guide_linux_instance_create">Создание экземпляра ПО Comindware Platform</a>»</em>. Далее <code>&lt;instanceName&gt;</code> — имя созданного экземпляра ПО.</p>
 </li>
 </ol>
 <div class="notice notice-warning">
@@ -752,12 +708,12 @@
 </li>
 </ol>
 <figure class="screenshot_with_caption">
-<p><img alt="Пример файла &lt;instanceName&gt;.yml с директивой  isLinuxSSOAuthorization: true" src="/platform/v5.0/administration/account_administration/accounts_dc_sync/linux/img/sso_authentication_configure_yml_file_example.png"/></p><figcaption class="caption">Пример файла <instancename>.yml с директивой  isLinuxSSOAuthorization: true</instancename></figcaption>
+<p><img alt="Пример файла &lt;instanceName&gt;.yml с директивой  isLinuxSSOAuthorization: true" src="/platform/v6.0/administration/account_administration/accounts_dc_sync/linux/img/sso_authentication_configure_yml_file_example.png"/></p><figcaption class="caption">Пример файла <instancename>.yml с директивой  isLinuxSSOAuthorization: true</instancename></figcaption>
 </figure>
 <h3 class="pageBreakBefore" id="sso_authentication_configure_instance_configuration">Синхронизация аккаунтов экземпляра ПО с сервером каталогов</h3>
 <ol class="colored_numbers_list">
 <li>Войдите в экземпляр ПО с помощью браузера.</li>
-<li>Откройте свойства <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4687">подключения к серверу каталогов</a>, которое будет использоваться для синхронизации аккаунтов.</li>
+<li>Откройте свойства <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5319">подключения к серверу каталогов</a>, которое будет использоваться для синхронизации аккаунтов.</li>
 <li>На вкладке «<strong>Основные</strong>» установите флажок «<strong>Использовать по умолчанию</strong>».</li>
 <li>На вкладке «<strong>Сопоставление атрибутов</strong>» нажмите кнопку «<strong>Восстановить</strong>».</li>
 <li>Сохраните свойства подключения.</li>
@@ -859,8 +815,8 @@
 <h3 class="pageBreakBefore" id="sso_authentication_configure_client_setup">Запуск и инициализация экземпляра ПО</h3>
 <p>После настройки SSO необходимо запустить и инициализировать экземпляр ПО <strong>Comindware Platform</strong>:</p>
 <ol class="colored_numbers_list">
-<li>Запустите экземпляр ПО согласно инструкциям в параграфе «<em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622#deploy_guide_linux_instance_start">Запуск экземпляра ПО</a></em>».</li>
-<li>Запустите экземпляр ПО согласно инструкциям в параграфе «<em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622#deploy_guide_linux_initialize">Инициализация Comindware Platform</a></em>».</li>
+<li>Запустите экземпляр ПО согласно инструкциям в параграфе «<em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5558#deploy_guide_linux_instance_start">Запуск экземпляра ПО</a></em>».</li>
+<li>Запустите экземпляр ПО согласно инструкциям в параграфе «<em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5558#deploy_guide_linux_initialize">Инициализация Comindware Platform</a></em>».</li>
 </ol>
 <h2 class="pageBreakBefore" id="sso_authentication_configure_client_setup">Настройка клиента</h2>
 <p>По умолчанию SSO-авторизация работает в браузерах Edge и Google Chrome, но необходимо в параметрах безопасности браузера добавить сайт в зону местной интрасети и включить режим «<strong>Автоматический вход в сеть только в зоне интрасети</strong>». Сведения о настройке других браузеров см. в соответствующей документации.</p>
@@ -880,13 +836,13 @@
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4622">Установка, запуск, инициализация и остановка ПО</a></li>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4605">Аутентификация через Active Directory. Настройка контроллера домена и экземпляра ПО</a></li>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4685">Аутентификация через Keycloak и OpenID Connect. Настройка подключения и служб</a></li>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4655">Синхронизация с сервером каталогов (Active Directory)</a></li>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5067">Конфигурация экземпляра, компонентов ПО и служб. Настройка</a></li>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4611">Развёртывание веб-сервера NGINX в Linux</a></li>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4610">Модуль GeoIP для NGINX. Установка и настройка</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5558">Установка, запуск, инициализация и остановка ПО</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5345">Аутентификация через Active Directory. Настройка контроллера домена и экземпляра ПО</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5318">Аутентификация через Keycloak и OpenID Connect. Настройка подключения и служб</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5581">Синхронизация с сервером каталогов (Active Directory)</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5554">Конфигурация экземпляра, компонентов ПО и служб. Настройка</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5460">Развёртывание веб-сервера NGINX в Linux</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5461">Модуль GeoIP для NGINX. Установка и настройка</a></li>
 <li><a class="mkdocs_imported_link" href="https://github.com/stnoonan/spnego-http-auth-nginx-module">Документация модуля NGINX SPNEGO</a></li>
 </ul>
 </div>

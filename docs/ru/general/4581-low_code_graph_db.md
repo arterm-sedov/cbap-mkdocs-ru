@@ -1,6 +1,6 @@
 ---
 title: Low-code и графовая БД
-kbId: 4581
+kbId: 5426
 ---
 
 # Low-code и графовая БД

@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4602" kb-tags="антивирус,защита от вирусов" kb-title="Антивирусное ПО. Настройка сканирования и исключений">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5456" kb-tags="антивирус,защита от вирусов" kb-title="Антивирусное ПО. Настройка сканирования и исключений">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -35,46 +35,6 @@
       
     </span>
 </a>
-<nav aria-label="Linux" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#antivirus_exceptions_configure_objects_linux_product">
-<span class="md-ellipsis">
-      
-        ПО Comindware Platform
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#antivirus_exceptions_configure_objects_linux_ignite">
-<span class="md-ellipsis">
-      
-        Apache Ignite
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#antivirus_exceptions_configure_objects_linux_kafka">
-<span class="md-ellipsis">
-      
-        Apache Kafka
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#antivirus_exceptions_configure_objects_linux_elasticsearch">
-<span class="md-ellipsis">
-      
-        OpenSearch (Elasticsearch)
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#antivirus_exceptions_configure_objects_windows">
@@ -84,46 +44,6 @@
       
     </span>
 </a>
-<nav aria-label="Windows" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#antivirus_exceptions_configure_objects_windows_product">
-<span class="md-ellipsis">
-      
-        ПО Comindware Platform
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#antivirus_exceptions_configure_objects_windows_ignite">
-<span class="md-ellipsis">
-      
-        Apache Ignite
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#antivirus_exceptions_configure_objects_windows_kafka">
-<span class="md-ellipsis">
-      
-        Apache Kafka
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#antivirus_exceptions_configure_objects_windows_elasticsearch">
-<span class="md-ellipsis">
-      
-        ElasticSearch
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 </ul>
 </nav>
@@ -150,7 +70,7 @@
 <h3 id="antivirus_exceptions_configure_objects_linux">Linux</h3>
 <h4 id="antivirus_exceptions_configure_objects_linux_product">ПО Comindware Platform</h4>
 <p>По умолчанию файлы экземпляра ПО находятся в каталоге <code>/var/lib/comindware/&lt;instanceName&gt;</code>, где <code>&lt;instanceName&gt;</code> — имя экземпляра ПО.</p>
-<p><em>См. также статью «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое папок экземпляра ПО</a>».</em></p>
+<p><em>См. также статью «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5561">Пути и содержимое папок экземпляра ПО</a>».</em></p>
 <p>Обеспечьте сканирование с помощью антивирусного ПО содержимого следующих директорий:</p>
 <ul>
 <li><code>/var/lib/comindware/&lt;instanceName&gt;/Temp</code> — временное хранилище загруженных файлов и скомпилированных C#-скриптов;</li>
@@ -189,15 +109,15 @@
 <h4 id="antivirus_exceptions_configure_objects_linux_elasticsearch">OpenSearch (Elasticsearch)</h4>
 <p>Добавьте в исключения антивирусного ПО следующие объекты:</p>
 <ul>
-<li><code>elasticsearch.service</code> — служба ElasticSearch.</li>
-<li><code>/var/lib/elasticsearch</code> — БД ElasticSearch, см. директиву <code>path.data</code> в файле конфигурации <code>/etc/elasticsearch/elasticsearch.yml</code>;</li>
-<li><code>/var/backups/elasticsearch/logs</code> — журналы ElasticSearch, см. директиву <code>path.logs</code> в файле конфигурации <code>/etc/elasticsearch/elasticsearch.yml</code>;</li>
-<li><code>/var/log/elasticsearch/repo</code> — репозиторий ElasticSearch, см. директиву <code>path.repo</code> в файле конфигурации <code>/etc/elasticsearch/elasticsearch.yml</code>.</li>
+<li><code>opensearch.service</code> — служба OpenSearch (Elasticsearch).</li>
+<li><code>/var/lib/opensearch</code> — БД OpenSearch (Elasticsearch), см. директиву <code>path.data</code> в файле конфигурации <code>/etc/opensearch/opensearch.yml</code>;</li>
+<li><code>/var/log/opensearch</code> — журналы OpenSearch (Elasticsearch), см. директиву <code>path.logs</code> в файле конфигурации <code>/etc/opensearch/opensearch.yml</code>;</li>
+<li><code>/var/backups/opensearch</code> — репозиторий OpenSearch (Elasticsearch), см. директиву <code>path.repo</code> в файле конфигурации <code>/etc/opensearch/opensearch.yml</code>.</li>
 </ul>
 <h3 id="antivirus_exceptions_configure_objects_windows">Windows</h3>
 <h4 id="antivirus_exceptions_configure_objects_windows_product">ПО Comindware Platform</h4>
 <p>По умолчанию файлы экземпляра ПО находятся в каталоге <code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;</code>, где <code>&lt;instanceName&gt;</code> — имя экземпляра ПО.</p>
-<p><em>См. также статью «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое папок экземпляра ПО</a>».</em></p>
+<p><em>См. также статью «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5561">Пути и содержимое папок экземпляра ПО</a>».</em></p>
 <p>Обеспечьте сканирование с помощью антивирусного ПО содержимого следующих директорий:</p>
 <ul>
 <li><code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Temp</code> — временное хранилище загруженных файлов и скомпилированных C#-скриптов;</li>
@@ -233,19 +153,20 @@
 <li><code>C:\kafka_2.XX-X.X.X\kafka-logs</code> — журналы Kafka.</li>
 </ul>
 <p>Здесь <code>X:\kafka\_2.XX-X.X.X</code> — директория, в которой установлено ПО Kafka версии 2.XX-X.X.X.</p>
-<h4 id="antivirus_exceptions_configure_objects_windows_elasticsearch">ElasticSearch</h4>
+<h4 id="antivirus_exceptions_configure_objects_windows_opensearch">OpenSearch (Elasticsearch)</h4>
 <p>Добавьте в исключения антивирусного ПО следующие объекты:</p>
 <ul>
-<li><code>C:\Program Files\Elastic\Elasticsearch\8.X.X</code> — директория с исполняемыми файлами ElasticSearch версии 8.X.X;</li>
-<li><code>C:\ProgramData\Elastic\Elasticsearch\data</code> — папка с БД, см. директиву <code>path.data</code> в файле конфигурации <code>X:\Program Files\Elastic\Elasticsearch\8.X.X\config\elasticsearch.yml</code>;</li>
-<li><code>C:\ProgramData\Elastic\Elasticsearch\repo</code> — папка с репозиторием, см. директиву <code>path.repo</code> в файле конфигурации <code>X:\Program Files\Elastic\Elasticsearch\8.X.X\config\elasticsearch.yml</code>;</li>
-<li><code>C:\ProgramData\Elastic\Elasticsearch\logs</code> — папка с журналами, см. директиву <code>path.logs</code> в файле конфигурации <code>X:\Program Files\Elastic\Elasticsearch\8.X.X\config\elasticsearch.yml</code>.</li>
+<li><code>OpenSearch</code> — служба OpenSearch (Elasticsearch).</li>
+<li><code>C:\Program Files\OpenSearch\</code> — исполняемые файлы OpenSearch (Elasticsearch);</li>
+<li><code>C:\ProgramData\OpenSearch\data</code> — БД OpenSearch (Elasticsearch), см. директиву <code>path.data</code> в файле конфигурации <code>C:\Program Files\OpenSearch\config\opensearch.yml</code>;</li>
+<li><code>C:\ProgramData\OpenSearch\repo</code> — репозиторий OpenSearch (Elasticsearch), см. директиву <code>path.repo</code> в файле конфигурации <code>C:\Program Files\OpenSearch\config\opensearch.yml</code>;</li>
+<li><code>C:\ProgramData\OpenSearch\logs</code> — журналы OpenSearch (Elasticsearch), см. директиву <code>path.logs</code> в файле конфигурации <code>C:\Program Files\OpenSearch\config\opensearch.yml</code>.</li>
 </ul>
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое папок экземпляра ПО</a></li>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5067">Конфигурация экземпляра, компонентов ПО и служб</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5561">Пути и содержимое папок экземпляра ПО</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5554">Конфигурация экземпляра, компонентов ПО и служб</a></li>
 </ul>
 </div>
 </article>

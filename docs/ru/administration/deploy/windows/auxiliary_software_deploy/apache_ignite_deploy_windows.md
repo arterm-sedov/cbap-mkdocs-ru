@@ -1,6 +1,6 @@
 ---
 title: Apache Ignite. Установка и настройка в Windows
-kbId: 4616
+kbId: 5550
 tags:
     - Apache Ignite
     - Windows

@@ -194,11 +194,19 @@ The files will be compiled to the `for_kb_import_ru` or `for_kb_import_en` folde
 
 The `kb_html_cleanup_hook.py` does all the magic.
 
+On `platform_v6`, `mkdocs_for_kb_import_ru.yml` sets `site_url` to `https://kb.comindware.ru/platform/v6.0/` so exported HTML image paths match the V6 PHPKB web folder. Rebuild after doc changes:
+
 ``` shell
 mkdocs build -f mkdocs_for_kb_import_ru.yml
 ```
 
-or
+Copy exported images into the PHPKB web asset tree when needed:
+
+``` shell
+python phpkb_copy_images.py
+```
+
+For English PHPKB export:
 
 ``` shell
 mkdocs build -f mkdocs_for_kb_import_en.yml

@@ -1,22 +1,23 @@
 ---
 name: phpkb-cloning
-description: "Use when working on the PHPKB cloning and post-clone migration workflow in this repository: creating a new PHPKB section for a new product version, cloning PHPKB categories or articles, updating cloned PHPKB article/category links, migrating local docs IDs with clone mappings, fixing related topics after cloning, or analyzing/updating scripts in utilities/phpkb_cloning."
+description: "Use when working on the PHPKB cloning and post-clone migration workflow in this repository: creating a new PHPKB section for a new product version, publishing a new MkDocs article by cloning an adjacent PHPKB article, syncing changed for_kb_import_ru HTML back to PHPKB by kb-id (git diff batch), cloning PHPKB categories or articles, updating cloned PHPKB article/category links, migrating local docs IDs with clone mappings, fixing related topics after cloning, or analyzing/updating scripts in utilities/phpkb_cloning."
 ---
 
 # PHPKB Cloning
 
-Use this skill to work safely with the repository scripts that clone PHPKB content and clean up cloned IDs, links, and related-topic markup.
+Use this skill to work safely with the repository scripts that clone PHPKB content, publish new MkDocs articles into PHPKB, and clean up cloned IDs, links, and related-topic markup.
 
-Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root unless the script says otherwise.
+Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root unless the script says otherwise. Skill references live beside this file under `.agents/skills/phpkb-cloning/references/`; resolve `references/workflow.md` and `references/schema-notes.md` relative to the skill folder, not relative to `utilities/phpkb_cloning/`.
 
 ## Script Roster
 
 | Script | Purpose | Main side effects |
-|---|---|---|
+| --- | --- | --- |
 | `utilities/phpkb_cloning/phpkb_clone.py` | Clone PHPKB categories and articles inside the database. Can clone whole category trees or individual articles. | Inserts new DB rows; maintains article/category mapping; clones article attachment and custom data backrefs. |
 | `utilities/phpkb_cloning/phpkb_clone_rollback.py` | Delete cloned PHPKB rows using the mapped target IDs from a clone mapping JSON. | Dry-run by default; deletes DB rows only with `--write --confirm-delete-cloned-content`. |
 | `utilities/phpkb_cloning/phpkb_clone_update_links.py` | Update PHPKB article/category links after cloning or migration using mapping JSON. Optional product/version replacements can be enabled explicitly. | Connects to DB; CLI mode is dry-run unless `--write` is passed. |
 | `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py` | Update local docs IDs using a clone mapping. Handles `kbId` frontmatter in `docs/ru` and article/category IDs in `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md`. | Dry-run by default; rewrites Markdown files only with `--write`. |
+| `phpkb_update_articles.py` | Publish rebuilt MkDocs HTML from `for_kb_import_ru` into existing PHPKB article rows by `kbId`. | Connects to DB; supports interactive menus or CLI flags `--profile`, `--article-id`, `--category-id`, and `--yes` for automated syncs. |
 
 ## References
 
@@ -56,8 +57,77 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 - Use `--fresh` only when starting a new clone and refusing to reuse an existing mapping file.
 - Expect the script to maintain category/article mapping in JSON and insert rows into PHPKB tables.
 - Expect newly generated article/category IDs to be read from `cursor.lastrowid`, not from global `MAX(...)` queries.
+- Expect mapping saves to be compact progress lines, not full JSON dumps, during long production runs.
 - Expect cloned articles to receive copied `phpkb_attachments` and `phpkb_custom_data` rows remapped to the new `article_id`; attachment files are not duplicated.
 - Treat clone dry-run as a preflight/resume report. It cannot predict final new IDs because those are generated only by real inserts.
+- After a real clone, verify both unique mapped articles and article-category relations. A source tree can contain fewer unique article rows than article-category placements because one article can be linked under multiple categories.
+- Category-tree clones walk Russian child categories (`language_id=2`) that are visible (`category_show='yes'`) and public (`category_status='public'`) unless `--include-private` is set. Hidden categories and `article_show='no'` articles are never bulk-cloned.
+- PHPKB `unlisted` is copied with the article row and is not a clone filter. MkDocs `unlisted: true` in `docs/ru` is pushed to PHPKB only through root-level `phpkb_update_articles.py` and export HTML `kb-unlisted="1"`.
+- `--show` is only for `--article-id` clones. Without it, one-off clones default to `article_show='no'` so they stay hidden until reviewed.
+
+### Publish A New MkDocs Article To PHPKB
+
+- Use this when a local Markdown article has no `kbId` and must become a new PHPKB article, not an update of an existing article.
+- Pick an adjacent source PHPKB article in the same target category and clone it with `phpkb_clone.py --article-id`.
+- Use a dedicated one-off mapping file, for example `.release_notes_6_new_article_mapping.json`, not `.v6mapping.json`, so the release migration mapping stays clean.
+- Always run the clone dry-run first:
+  `python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping <one-off-mapping>.json --fresh --article-id <source-article-id> --target-category-id <target-category-id> --suffix "" --dry-run`
+- Run the real clone with the same arguments and no `--dry-run`; omit `--show` so the placeholder stays hidden until `phpkb_update_articles.py` publishes it.
+- Read the new article ID from the clone output or from `mapping["Articles"][source_article_id]`.
+- Add `kbId: <new-article-id>` to the local Markdown front matter.
+- If the article has or needs a reusable reference link, add its H1 anchor to `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md` with the new `kbId`.
+- Rebuild the PHPKB HTML export with the repo virtual environment:
+  `.\\.venv\\Scripts\\python.exe -m mkdocs build -f mkdocs_for_kb_import_ru.yml`
+- Publish only the new article using the script's command-line flags:
+  `python phpkb_update_articles.py --profile cmw --article-id <new-article-id> --yes`
+- The script can also be run interactively by omitting `--article-id`. It reads `for_kb_import_ru`, finds `<div ... kb-id="<new-article-id>" ...>`, and updates the PHPKB row with the MkDocs title, HTML content, tags, `unlisted`, `article_status='approved'`, and `article_show='yes'`.
+- If the build dirties the tracked `for_kb_import_ru` export tree and those files were clean before the build, clean the generated output from Git after publishing; keep the source Markdown and one-off mapping if they are useful for audit.
+
+### Sync Changed Articles To PHPKB (Git-Diff Batch)
+
+Use this when `docs/ru` Markdown was edited and existing PHPKB articles must be refreshed from the rebuilt HTML export—not when creating a new article (use **Publish A New MkDocs Article To PHPKB** above).
+
+1. Rebuild the export tree:
+
+   ```powershell
+   .\.venv\Scripts\python.exe -m mkdocs build -f mkdocs_for_kb_import_ru.yml
+   ```
+
+2. List changed HTML files (scope to the export folder or a subtree):
+
+   ```powershell
+   git diff --name-only for_kb_import_ru/
+   git status --short for_kb_import_ru/
+   ```
+
+3. Read `kb-id` from the first line of each changed `.html` file (`<div class="md-body" … kb-id="…" …>`). Skip files with `kb-id=""`—they have no PHPKB row yet; set `kbId:` in the source `.md` (or clone first) before publishing.
+
+   ```powershell
+   Select-String -Path for_kb_import_ru\administration\deploy\script_keys.html -Pattern 'kb-id="(\d+)"' | ForEach-Object { $_.Matches.Groups[1].Value }
+   ```
+
+4. Publish all numeric IDs in one non-interactive run (repeat `--article-id` per article):
+
+   ```powershell
+   .\.venv\Scripts\python.exe phpkb_update_articles.py --profile cmw -y `
+     --article-id 5451 --article-id 5558
+   ```
+
+   The script matches `for_kb_import_ru/**` by `kb-id`, then updates PHPKB `article_title`, `article_content`, `article_keywords` (from `kb-tags`, max 250 chars), and `unlisted` (from `kb-unlisted="1"` when present).
+
+5. Share direct article links: `https://kb.comindware.ru/article.php?id=<kb-id>` (same as `{{ kbArticleURLPrefix }}` in `mkdocs_ru.yml`).
+
+6. Optional Git commit for the source docs and/or export (only when the user asks to commit): stage `docs/ru/…` and, if you keep the export in the repo, the matching `for_kb_import_ru/…` paths.
+
+See `references/workflow.md` → **Sync changed articles (git-diff batch)** for the full checklist.
+
+### Verify A Completed Clone
+
+- Confirm the mapping counts: categories, articles, and source root mapping.
+- Confirm every mapped target category/article exists in PHPKB.
+- Confirm there are no unmapped rows in the new clone ID ranges. If interrupted attempts left duplicate rows outside the real mapping, put only those target IDs into a temporary orphan mapping and dry-run `phpkb_clone_rollback.py`.
+- Confirm article-category placement preservation by comparing source `(article_id, category_id)` pairs mapped through `.v6mapping.json` against actual target `phpkb_relations`.
+- For the V5 to V6 run, source category `798` cloned adjacent as category `896`; the verified clone had `84` mapped categories, `498` unique mapped articles, and `616` mapped article-category relations.
 
 ### Update Links After Cloning
 
@@ -82,6 +152,7 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
   `python utilities/phpkb_cloning/phpkb_clone_rollback.py --mapping .v6mapping.json`
 - Use `--write --confirm-delete-cloned-content` only after the reported counts match the intended rollback.
 - Expect deletes in dependency order: attachment/custom data rows, relations, articles, then categories.
+- For aborted-run orphan cleanup, use a separate temporary mapping that contains only orphan target IDs. Delete that temporary mapping after cleanup and verification.
 
 ### Migrate Local KB IDs
 

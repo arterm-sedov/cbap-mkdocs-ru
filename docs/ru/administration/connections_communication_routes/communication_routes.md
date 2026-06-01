@@ -11,7 +11,7 @@ tags:
   - шаблон сообщения
 hide:
   - tags
-kbId: 4676
+kbId: 5302
 ---
 
 # Пути передачи данных {: #communication_routes}

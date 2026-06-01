@@ -1,7 +1,7 @@
 ---
 title: 'Описание учебного курса'
 kbTitle: 'Описание учебного курса «Корпоративная архитектура. Ознакомительный»'
-kbId: 5124
+kbId: 5423
 tags:
   # Common tutorial_architect tags
   - Architect

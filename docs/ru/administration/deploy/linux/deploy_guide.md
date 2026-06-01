@@ -1,6 +1,6 @@
 ---
 title: 'Установка, запуск, инициализация и остановка ПО'
-kbId: 4622
+kbId: 5558
 tags:
   - linux
   - администрирование
@@ -53,20 +53,6 @@ hide: tags
 
 Прежде чем приступать к установке вспомогательного ПО, необходимого для работы **{{ productName }}**, ознакомьтесь с демонстрационным роликом и инструкциями, представленными ниже.
 
-### Видеоинструкция {: #deploy_guide_linux_prerequisites_install_video }
-
-!!! warning "Следуйте письменным инструкциям"
-
-    Видеоролик представлен исключительно в качестве общей иллюстрации процесса, а не конкретных инструкций.
-
-    Для установки вспомогательного ПО всегда следуйте письменным инструкциям, представленным ниже.
-
-[Ссылка на видеоролик](https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/deploy_guide_linux_auxiliary_software.mp4)
-
-<video controls="controls" width="100%" height="100%">
-<source src="https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/deploy_guide_linux_auxiliary_software.mp4" type="video/mp4" />
-</video>
-
 ### Порядок установки вспомогательного ПО {: #deploy_guide_linux_prerequisites_install_order }
 
 1. Перейдите в режим суперпользователя:
@@ -98,7 +84,7 @@ hide: tags
 4. Установите ПО из дистрибутива:
 
     ``` sh
-    sh prerequisites_install.sh -p
+    bash prerequisites_install.sh -p
     ```
 
     Ключи скрипта `prerequisites_install.sh`:
@@ -123,7 +109,7 @@ hide: tags
         Для ознакомления с ключами и назначением любого скрипта используйте ключ `-h` без каких-либо других ключей, например:
 
         ``` sh
-        sh prerequisites_install.sh -h
+        bash prerequisites_install.sh -h
         ```
 
 5. По окончании установки скрипт выведет информацию об установленных компонентах. Удостоверьтесь, что компоненты успешно установлены (имеют статус `OK`).
@@ -156,7 +142,7 @@ hide: tags
 6. Удостоверьтесь, что компоненты установлены:
 
     ``` sh
-    sh prerequisites_list.sh
+    bash prerequisites_list.sh
     ```
 
 7. При необходимости установите недостающие необходимые компоненты, запустив скрипт с соответствующими флагами.
@@ -164,20 +150,6 @@ hide: tags
 ## Установка ПО {{ productName }} {: #deploy_guide_linux_install_sw }
 
 Прежде чем приступать к установке ПО **{{ productName }}**, ознакомьтесь с видеороликом и инструкциями, представленными ниже.
-
-### Видеоинструкция {: #deploy_guide_linux_install_sw_video }
-
-!!! warning "Следуйте письменным инструкциям"
-
-    Видеоролик представлен исключительно в качестве общей иллюстрации процесса, а не конкретных инструкций.
-
-    Для установки ПО **{{ productName }}** всегда следуйте письменным инструкциям, представленным ниже.
-
-[Ссылка на видеоролик](https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/deploy_guide_linux_software.mp4)
-
-<video controls="controls" width="100%" height="100%">
-<source src="https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/deploy_guide_linux_software.mp4" type="video/mp4" />
-</video>
 
 ### Порядок установки ПО {{ productName }} {: #deploy_guide_linux_install_order }
 
@@ -211,7 +183,7 @@ hide: tags
 4. Установите ПО из дистрибутива:
 
     ``` sh
-    sh version_install.sh
+    bash version_install.sh
     ```
 
     !!! note "Если отобразится запрос на перезагрузку ОС"
@@ -230,26 +202,12 @@ hide: tags
 6. Удостоверьтесь, что ПО установлено, просмотрев список установленных версий ПО:
 
     ``` sh
-    sh version_list.sh
+    bash version_list.sh
     ```
 
 ## Создание экземпляра ПО {: #deploy_guide_linux_instance_create .pageBreakBefore }
 
 Прежде чем приступать к установке экземпляра ПО **{{ productName }}**, ознакомьтесь с видеороликом и инструкциями, представленными ниже.
-
-### Видеоинструкция
-
-!!! warning "Следуйте письменным инструкциям"
-
-    Видеоролик представлен исключительно в качестве общей иллюстрации процесса, а не конкретных инструкций.
-
-    Для создания экземпляра ПО **{{ productName }}** всегда следуйте письменным инструкциям, представленным ниже.
-
-[Ссылка на видеоролик](https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/deploy_guide_linux_instance.mp4)
-
-<video controls="controls" width="100%" height="100%">
-<source src="https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/deploy_guide_linux_instance.mp4" type="video/mp4" />
-</video>
 
 ### Подготовка к созданию экземпляра ПО {: #deploy_guide_linux_instance_create_prepare }
 
@@ -266,7 +224,7 @@ hide: tags
     nano /etc/security/limits.conf
     ```
 
-3. Установите следующие директивы:
+3. Установите следующие директивы, чтобы задать лимиты ресурсов для аккаунта сервера:
 
     - **Astra Linux, Debian, DEB-дистрибутивы**
 
@@ -301,7 +259,7 @@ hide: tags
     nano /etc/pam.d/common-session
     ```
 
-5. Установите следующую директиву:
+5. Установите следующую директиву, чтобы применить заданные лимиты:
 
     ``` systemd
     session required pam_limits.so
@@ -376,7 +334,7 @@ hide: tags
 3. Разверните экземпляр ПО:
 
     ``` sh
-    sh instance_create.sh -n=<instanceName> -v=<versionNumber> [-p=<portNumber>]
+    bash instance_create.sh -n=<instanceName> -v=<versionNumber> [-p=<portNumber>]
     ```
 
     Ключи скрипта `instance_create.sh`:
@@ -483,7 +441,7 @@ hide: tags
 
     ``` sh
     nano /usr/lib/systemd/system/kafka.service
-    nano /usr/lib/systemd/system/elasticsearch.service
+    nano /usr/lib/systemd/system/opensearch.service
     ```
 
 8. В каждом файле службы установите следующие директивы:
@@ -671,14 +629,6 @@ mmap(PROT_NONE) failed
 
 Прежде чем приступать к удалению версии и экземпляра ПО **{{ productName }}**, ознакомьтесь с видеороликом и инструкциями, представленными ниже.
 
-### Видеоинструкция
-
-[Ссылка на видеоролик](https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/deploy_guide_linux_delete_version_instance.mp4)
-
-<video controls="controls" width="100%" height="100%">
-<source src="https://kb.comindware.ru/platform/v5.0/administration/deploy/linux/img/deploy_guide_linux_delete_version_instance.mp4" type="video/mp4" />
-</video>
-
 ### Удаление экземпляра ПО {: .pageBreakBefore }
 
 1. Перейдите в режим суперпользователя:
@@ -695,7 +645,7 @@ mmap(PROT_NONE) failed
 4. Запустите удаление экземпляра ПО:
 
     ``` sh
-    sh instance_delete.sh -n=<instanceName>
+    bash instance_delete.sh -n=<instanceName>
     ```
 
     Скрипт `delete.sh` поддерживает следующие ключи:
@@ -709,7 +659,7 @@ mmap(PROT_NONE) failed
 5. Удостоверьтесь, что экземпляр ПО был успешно удалён, просмотрев список установленных экземпляров ПО:
 
     ``` sh
-    sh instance_list.sh
+    bash instance_list.sh
     ```
 
 ### Удаление версии ПО {: #deploy_guide_linux_delete_version .pageBreakBefore }
@@ -721,7 +671,7 @@ mmap(PROT_NONE) failed
 2. Просмотрите список экземпляров ПО с указанием версий:
 
     ``` sh
-    sh instance_list.sh
+    bash instance_list.sh
     ```
 
 3. Удалите все экземпляры с версией ПО, которую требуется удалить, или обновите их до другой версии. Удалить версию ПО, которая используется в каких-либо экземплярах, не удастся. См. _«[Удаление экземпляра ПО](#удаление-экземпляра-по)»_.
@@ -734,13 +684,13 @@ mmap(PROT_NONE) failed
 5. Просмотрите список установленных версий ПО:
 
     ``` sh
-    sh version_list.sh
+    bash version_list.sh
     ```
 
 6. Удалите версию ПО:
 
     ``` sh
-    sh version_delete.sh -v=<versionNumber>
+    bash version_delete.sh -v=<versionNumber>
     ```
 
     Здесь: `-v=<versionNumber>` — укажите номер версии ПО вида `X.X.XXXX.X` (например: `5.0.0000.0`).
@@ -748,7 +698,7 @@ mmap(PROT_NONE) failed
 7. Проверьте, что версия ПО была удалена успешно:
 
     ``` sh
-    sh version_list.sh
+    bash version_list.sh
     ```
 
     или

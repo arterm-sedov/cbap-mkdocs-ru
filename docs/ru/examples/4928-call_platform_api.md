@@ -1,6 +1,6 @@
 ---
 title: Вызов API Comindware Platform при помощи Postman
-kbId: 4928
+kbId: 5316
 ---
 
 # Вызов API {{ productName }} при помощи Postman

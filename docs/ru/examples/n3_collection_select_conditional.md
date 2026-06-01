@@ -25,7 +25,7 @@ tags:
     - запись
 hide:
     - tags
-kbId: 5106
+kbId: 5298
 ---
 
 # Записи и коллекции. Выборка элементов по условию с помощью N3 {: #n3_collection_select_conditional }

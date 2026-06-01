@@ -6,7 +6,7 @@ tags:
   - тип данных
 hide:
   - tags
-kbId: 4765
+kbId: 5713
 ---
 
 # Общие свойства атрибутов {: #attribute_common_properties }

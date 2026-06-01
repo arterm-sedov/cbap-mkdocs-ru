@@ -13,7 +13,7 @@ tags:
   - пользовательская задача
 hide:
   - tags
-kbId: 4730
+kbId: 5666
 ---
 
 # Пользовательская задача {: #process_diagram_elements_user_task }

@@ -1,6 +1,6 @@
 ---
 title: Elasticsearch. Развёртывание без сертификатов подлинности
-kbId: 4612
+kbId: 5459
 tags:
     - Elasticsearch
     - Linux

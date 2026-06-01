@@ -1,6 +1,6 @@
 ---
 title: Введение в вычисления
-kbId: 4930
+kbId: 5182
 tags:
 hide:
     - tags

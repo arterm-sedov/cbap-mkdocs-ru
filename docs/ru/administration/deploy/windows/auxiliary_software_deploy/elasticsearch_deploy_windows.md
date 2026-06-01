@@ -1,6 +1,6 @@
 ---
 title: 'Elasticsearch. Установка в базовой конфигурации для Windows'
-kbId: 4617
+kbId: 5549
 tags: 
     - elasticsearch
     - установка

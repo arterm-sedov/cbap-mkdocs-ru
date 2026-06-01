@@ -70,6 +70,24 @@ def test_write_updates_frontmatter_files(tmp_path):
     assert article.read_text(encoding="utf-8") == "---\nkbId: 6001\n---\n"
 
 
+def test_write_preserves_utf16_markdown_encoding(tmp_path):
+    docs_root = tmp_path / "docs" / "ru"
+    docs_root.mkdir(parents=True)
+    article = docs_root / "article.md"
+    article.write_text("---\nkbId: 4918\n---\n", encoding="utf-16-be")
+    article.write_bytes(b"\xfe\xff" + article.read_bytes())
+
+    result = update_mapped_ids.update_frontmatter_kbids(
+        docs_root,
+        {"Articles": {"4918": "6001"}},
+        write=True,
+    )
+
+    assert result == {"files_scanned": 1, "files_changed": 1, "replacements": 1}
+    assert article.read_bytes().startswith(b"\xfe\xff")
+    assert article.read_text(encoding="utf-16") == "---\nkbId: 6001\n---\n"
+
+
 def test_run_hyperlink_map_target_reads_mapping_and_writes(tmp_path, capsys):
     mapping_file = tmp_path / ".mapping.json"
     hyperlinks_file = tmp_path / "hyperlinks_mkdocs_to_kb_map.md"

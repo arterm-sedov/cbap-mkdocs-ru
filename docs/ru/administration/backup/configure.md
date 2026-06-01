@@ -1,6 +1,6 @@
 ---
 title: 'Резервное копирование. Настройка, запуск и просмотр журнала сеансов'
-kbId: 4642
+kbId: 5566
 tags:
     - резервная копия
     - S3
@@ -71,12 +71,16 @@ hide: tags
 
 Эти инструкции следует выполнять на машине (сервере) с экземпляром ПО **{{ productName }}**.
 
-1. Создайте директорию, в которой будут сохраняться резервные копии. Для этой директории предоставьте разрешения на полный доступ, чтобы система могла сохранять в неё резервные копии, например:
+1. Перейдите в режим суперпользователя:
+
+    --8<-- "linux_sudo.md"
+
+2. Создайте директорию, в которой будут сохраняться резервные копии. Для этой директории предоставьте разрешения на полный доступ, чтобы система могла сохранять в неё резервные копии, например:
 
     **Astra Linux, Debian, DEB-дистрибутивы**
 
     ``` sh
-    mkdir /var/backups/comindware/<instanceName>
+    mkdir -p /var/backups/comindware/<instanceName>
     chmod 777 /var/backups/comindware/<instanceName>
     chown -R www-data:www-data /var/backups/comindware/<instanceName>
     ```
@@ -84,7 +88,7 @@ hide: tags
     **РЕД ОС, RPM-дистрибутивы**
 
     ``` sh
-    mkdir /var/backups/comindware/<instanceName>
+    mkdir -p /var/backups/comindware/<instanceName>
     chmod 777 /var/backups/comindware/<instanceName>
     chown -R nginx:nginx /var/backups/comindware/<instanceName>
     ```
@@ -92,7 +96,7 @@ hide: tags
     **Альт Сервер**
 
     ``` sh
-    mkdir /var/backups/comindware/<instanceName>
+    mkdir -p /var/backups/comindware/<instanceName>
     chmod 777 /var/backups/comindware/<instanceName>
     chown -R _nginx:_nginx /var/backups/comindware/<instanceName>
     ```
@@ -103,8 +107,8 @@ hide: tags
 
     В Windows заранее создавать директорию для резервных копий и настраивать права доступа к ней не требуется. Экземпляр ПО сам создаст директорию, указанную в конфигурации резервного копирования. См. _«[Настройка конфигураций и запуск резервного копирования](#backup_configure_list_view)»_.
 
-2. Откройте для редактирования файл конфигурации экземпляра ПО (`<instanceName>.yml`). См. _«[Пути и содержимое директорий экземпляра ПО][paths]»_.
-3. Настройте используемые по умолчанию путь и имя файла резервной копии. Заданные в этих директивах параметры используются по умолчанию при создании конфигураций резервного копирования:
+3. Откройте для редактирования файл конфигурации экземпляра ПО (`<instanceName>.yml`). См. _«[Пути и содержимое директорий экземпляра ПО][paths]»_.
+4. Настройте используемые по умолчанию путь и имя файла резервной копии. Заданные в этих директивах параметры используются по умолчанию при создании конфигураций резервного копирования:
 
     ``` yaml
     #################### Конфигурация резервного копирования ####################
@@ -119,9 +123,9 @@ hide: tags
     backup.defaultFileName: Backup
     ```
 
-4. Перезапустите **{{ productName }}**.
-5. При необходимости настройте [резервное копирование данных {{ openSearchVariants }} на диск](#backup_configure_elasticsearch_s3).
-6. Настройте конфигурацию резервного копирования на диск c помощью _«[списка конфигураций резервного копирования](#backup_configure_list_view)»_.
+5. Перезапустите **{{ productName }}**.
+6. При необходимости настройте [резервное копирование данных {{ openSearchVariants }} на диск](#backup_configure_elasticsearch_s3).
+7. Настройте конфигурацию резервного копирования на диск c помощью _«[списка конфигураций резервного копирования](#backup_configure_list_view)»_.
 
 ### Настройка экземпляра ПО {{ productName }} для хранения резервных копий в S3 {: #backup_configure_instance_s3 .pageBreakBefore }
 
@@ -244,27 +248,27 @@ hide: tags
     - Содержимое этой директории будет скопировано в директорию `History` внутри файла `.CDBBZ` с резервной копией **{{ productName }}**.
 
 1. Перейдите к настройке машины, на которой развёрнута служба {{ openSearchVariants }}.
-2. Откройте для редактирования файл конфигурации {{ openSearchVariants }} `/etc/elasticsearch/elasticsearch.yml`.
+2. Откройте для редактирования файл конфигурации {{ openSearchVariants }} `/etc/opensearch/opensearch.yml`.
 3. Укажите путь к репозиторию резервных копий, например:
 
     ``` sh
     # Директория репозитория должна быть доступна {{ productName }}.
     # Внутри этой директории будет создана директория,
     # имя которой будет совпадать с префиксом индекса {{ openSearchVariants }}.
-    path.repo: /var/backups/elasticsearch
+    path.repo: /var/backups/opensearch
     ```
 
 4. Предоставьте доступ {{ openSearchVariants }} к репозиторию резервных копий:
 
     ``` sh
-    chmod -R 777 /var/backups/elasticsearch
-    chown -R elasticsearch:elasticsearch /var/backups/elasticsearch
+    chmod -R 777 /var/backups/opensearch
+    chown -R opensearch:opensearch /var/backups/opensearch
     ```
 
 5. Перезапустите службу {{ openSearchVariants }}:
 
     ``` sh
-    systemctl restart elasticsearch   
+    systemctl restart opensearch.service
     ```
 
 6. Перейдите к настройке машины с экземпляром ПО **{{ productName }}**.
@@ -275,18 +279,18 @@ hide: tags
     # Тип хранилища резервных копий {{ openSearchVariants }} (LocalDisk | S3)
     backup.journalRepository.type: LocalDisk
     # Путь к файлам резервных копий.
-    # Укажите директорию из директивы path.repo файла elasticsearch.yml
+    # Укажите директорию из директивы path.repo файла opensearch.yml
     # Репозиторий резервной копии {{ openSearchVariants }} из этой директории
     # будет скопирован в директорию History
     # внутри файла .CDBBZ резервной копии {{ productName }}
-    backup.journalRepository.localDisk.path: /var/backups/elasticsearch
+    backup.journalRepository.localDisk.path: /var/backups/opensearch
     ```
 
     !!! warning "Внимание!"
 
         - Если {{ openSearchVariants }} и **{{ productName }}** работают на одной машине, в директивах `path.repo` и `backup.journalRepository.localDisk.path` следует указать один и тот же путь.
         - Если {{ openSearchVariants }} и **{{ productName }}** работают на разных машинах, необходимо: 
-            1. Директорию, указанную в директиве `path.repo` в файле `elasticsearch.yml`, сделать доступной для **{{ productName }}** через сеть.
+            1. Директорию, указанную в директиве `path.repo` в файле `opensearch.yml`, сделать доступной для **{{ productName }}** через сеть.
             2. Примонтировать общую директорию на машине с **{{ productName }}**.
             3. Указать примонтированную директорию в директиве `backup.journalRepository.localDisk.path` в файле `<instanceName>.yml`.
 
@@ -312,11 +316,11 @@ hide: tags
 
     - Для корректного резервного копирования данных истории в хранилище S3 необходимо настроить конфигурацию службы {{ openSearchVariants }} и экземпляра ПО **{{ productName }}** так, чтобы они использовали общую корзину:
 
-    - В файлах конфигурации `elasticsearch.yml` и `<instanceName>.yml` необходимо настройте подключение одному и тому же хранилищу S3.
+    - В файлах конфигурации `opensearch.yml` и `<instanceName>.yml` необходимо настройте подключение одному и тому же хранилищу S3.
     - В директивах `path.repo` и `backup.journalRepository.localDisk.path` укажите одну и ту же корзину
 
 1. Перейдите к настройке машины, на которой развёрнута служба {{ openSearchVariants }}.
-2. Откройте для редактирования файл конфигурации {{ openSearchVariants }} `/etc/elasticsearch/elasticsearch.yml`.
+2. Откройте для редактирования файл конфигурации {{ openSearchVariants }} `/etc/opensearch/opensearch.yml`.
 3. Настройте подключение к хранилищу S3 для репозитория резервных копий, например:
 
     ``` yaml
@@ -333,7 +337,7 @@ hide: tags
 4. Перезапустите службу {{ openSearchVariants }}:
 
     ``` sh
-    systemctl restart elasticsearch   
+    systemctl restart opensearch.service
     ```
 
 5. Перейдите к настройке машины с экземпляром ПО **{{ productName }}**.

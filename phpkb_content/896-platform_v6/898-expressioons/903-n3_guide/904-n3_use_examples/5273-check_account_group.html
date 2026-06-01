@@ -1,0 +1,19 @@
+<h1>Проверка на принадлежность пользователя к определенной группе</h1><p>Для того, чтобы вывести <em>true</em>, если пользователь или хотя бы один из пользователей в указанном атрибуте типа "Пользователь" входит в обозначенную системную группу (например, для ограничения видимости полей на экранной форме), введите следующее выражение:</p>
+<div>
+<table class="source_code_container" width="1535">
+<tbody>
+<tr style="height: 58px;">
+<td class="source_code" style="height: 58px; width: 1534px;">
+<p>@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;. <br/>@prefix object: &lt;http://comindware.com/ontology/object#&gt;. <br/>@prefix group: &lt;http://comindware.com/ontology/group#&gt;. <br/>@prefix account: &lt;http://comindware.com/ontology/account#&gt;. <br/>@prefix assert: &lt;http://comindware.com/logics/assert#&gt;. <br/>{ <br/>    ("Works" "Performers") object:findProperty ?Performers.</p>
+<p>    false -&gt; ?value.</p>
+<p>    ?group rdf:type account:Group. <br/>    ?group account:groupName "Managers". <br/>    { <br/>        ?group account:groupUsers ?users. <br/>        ?item ?Performers ?PerformersVal. <br/>        ?PerformersVal == ?users. <br/>    } assert:count ?c. <br/>    if {not {?c == 0}} <br/>    then {true -&gt; ?value.} <br/>    else {}. <br/>     <br/>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span style="text-decoration: underline;"><strong>где:</strong></span></p>
+<p><strong>Works</strong> – системное имя текущего Шаблона записи;</p>
+<p><strong>Performers </strong>– системное имя атрибута типа "Пользователь";</p>
+<p><strong>Managers </strong>– название системной группы.</p>
+<div class="blue_note"><strong>Примечание :</strong> данная тройка не учитывает пользователей, входящих во вложенные группы.</div>

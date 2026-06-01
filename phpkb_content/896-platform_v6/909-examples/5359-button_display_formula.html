@@ -1,0 +1,62 @@
+<h1>Кнопка. Пример: настройка условия отображения с помощью формулы</h1><p>В данной статье описан пример настройки видимости кнопки «<em>Добавить новую позицию</em>» к заявке, если заявка находится в статусе «<em>Новая</em>», либо «<em>В</em> <em>корзине</em>».</p>
+<p>Системные имена шаблонов записи и атрибутов, задействованных в примере, приведены в таблице:</p>
+<table>
+<tbody>
+<tr>
+<th>Шаблон записи</th>
+<th>Атрибуты</th>
+</tr>
+<tr>
+<td>Request (Заявка) </td>
+<td>Stаtus — статус заявки </td>
+</tr>
+<tr>
+<td>Request_status (Статусы заявок)</td>
+<td>Status_code — код статуса </td>
+</tr>
+</tbody>
+</table>
+<p>В выражении будет использована следующая функция:</p>
+<ul>
+<li>функция «<em><strong>OR()</strong></em>» для выполнения логического сложения аргументов.</li>
+</ul>
+<p><br/><strong>Пошаговая инструкция: </strong></p>
+<p><strong>1. </strong>Создайте и настройте шаблоны записей и атрибуты.</p>
+<p><strong>2.</strong> В шаблоне записи «<em>Request</em>» перейдите в раздел «<em><strong>Кнопки</strong></em>».</p>
+<p><strong>3.</strong> Создайте кнопку.</p>
+<p><strong>4.</strong> Перейдите на вкладку «<em><strong>Условие отображения</strong></em>» и введите выражение.</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">OR($status-&gt;status_code == "new",$status-&gt;status_code == "cart")</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>5.</strong> Нажмите кнопку «<em><strong>Сохранить</strong></em>».</p>
+<p> </p>
+<p><strong>Синтаксис</strong></p>
+<p> </p>
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%; height: 160px;">
+<tbody>
+<tr style="height: 40px;">
+<th style="width: 50%; height: 40px;">Элемент</th>
+<th style="width: 50%; height: 40px;">Описание</th>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;">OR()</td>
+<td style="width: 50%; height: 40px;">условие выполняется при значении аргумента равном либо «<em>new</em>», либо «<em>cart</em>»</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;">$</td>
+<td>указывает на то, что атрибут находится в контексте текущей записи</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;">-&gt;</td>
+<td>используется для того, чтобы вызвать данные связанного шаблона записи «<em>Request_status</em>»</td>
+</tr>
+</tbody>
+</table>
+</div>

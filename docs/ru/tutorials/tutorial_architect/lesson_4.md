@@ -1,6 +1,6 @@
 ---
 title: 'Урок 4. Автоматизированные процессы, согласование и контроль изменений архитектурных моделей'
-kbId: 5128
+kbId: 5419
 tags:
   # Common tutorial_architect tags
   - Architect

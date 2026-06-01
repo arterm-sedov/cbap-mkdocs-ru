@@ -1,7 +1,7 @@
 ---
 title: 'Тесты для самопроверки'
 kbTitle: 'Вопросы для самопроверки. Курс «Корпоративная архитектура. Ознакомительный»'
-kbId: 5131
+kbId: 5416
 tags:
   # Common tutorial_architect tags
   - Architect

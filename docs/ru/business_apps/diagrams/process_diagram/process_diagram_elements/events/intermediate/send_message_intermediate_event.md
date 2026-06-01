@@ -12,7 +12,7 @@ tags:
   - путь передачи данных
 hide:
   - tags
-kbId: 4740
+kbId: 5676
 ---
 
 # Промежуточное событие-отправка сообщения {: #process_diagram_elements_send_message_intermediate_event}

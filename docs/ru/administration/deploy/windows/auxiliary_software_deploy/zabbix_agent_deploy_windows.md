@@ -1,6 +1,6 @@
 ---
 title: Zabbix Agent. Инструкции по установке для Windows
-kbId: 4615
+kbId: 5552
 ---
 
 # Zabbix Agent. Инструкции по установке для Windows {: #zabbix_agent_deploy_windows }

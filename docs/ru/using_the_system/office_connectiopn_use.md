@@ -1,6 +1,6 @@
 ---
 title: Р7 Офис и Collabora Online. Использование для работы с документами
-kbId: 4819
+kbId: 5320
 ---
 
 # Р7 Офис и Collabora Online. Использование для работы с документами {: #office_connection_use }

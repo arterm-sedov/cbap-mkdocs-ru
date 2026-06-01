@@ -11,7 +11,7 @@ tags:
   - вычислить цвет
 hide:
   - tags
-kbId: 4763
+kbId: 5715
 ---
 
 # Атрибут «Цвет» {: #attribute_color}

@@ -1,6 +1,6 @@
 ---
 title: 'Язык формул. Общие сведения'
-kbId: 4999
+kbId: 5215
 ---
 
 [](){: #formula_introduction }

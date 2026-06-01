@@ -1,0 +1,26 @@
+<h1>Импорт связанных данных из таблицы Excel</h1><p>Импорт данных — это стандартная операция в рамках <strong>Comindware Platform</strong>. Можно импортировать данные в любой из существующих шаблонов записи и даже устанавливать связи между записями из разных шаблонов. В данной статье мы рассмотрим как раз импорт связанных данных, а именно, заполнение таблицы в записи из excel файла.</p>
+<p>Таблица на форме записи — это, по сути, отфильтрованная таблица из связанного шаблона записи. Каждая строка таблицы, то есть, запись в шаблоне записи, ссылается на основной объект, где отображается таблица. Поэтому, для того чтобы данные из таблицы Excel перенеслись в таблицу на форме, нужно импортировать таблицу Excel в шаблон записи, на который ссылается таблица, и в отдельном столбце указать значение ссылки на главный объект (либо в виде ИД, либо значения в отображаемом атрибуте, который указан в системе). Таким образом, импортированные записи будут сразу привязаны к основному объекту, и таблица в нём заполнится автоматически, без лишних настроек.</p>
+<p> </p>
+<p><strong>Пример</strong></p>
+<p>В качестве примера, импортируем Excel таблицу заявок к каждому клиенту. Для этого в системе созданы шаблон записи «<em>Клиенты</em>» и шаблон записи «<em>Заказы</em>». В «<em>Заказах</em>» есть ссылка на «<em>Клиенты</em>», а в «<em>Клиентах</em>» — связанная ссылка с отмеченным флагом «<em><strong>Несколько значений</strong></em>» — <span style="color: #333333; font-family: 'Open Sans', sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 100; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">«</span><em>Заказы клиента</em><span style="color: #333333; font-family: 'Open Sans', sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 100; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">»</span>.</p>
+<p>Excel таблица для импорта выглядит примерно так:</p>
+<div class="screenshot_with_caption">
+<p><img align="" alt="Пример Excel таблицы" class="img-responsive" height="124" src="https://kb.comindware.ru/assets/excel_table_import.png" width="558"/></p>
+<p class="caption">Пример Excel таблицы</p>
+</div>
+<p>В столбце «<em>Клиент</em>» в данном случае указаны названия клиентов, заведенных в системе.</p>
+<p>В разделе<em><strong> «Импорт»</strong></em> шаблона записи «<em>Заказы</em>» загружаем данную таблицу Excel и настраиваем соответствие столбцов таблицы с атрибутами шаблона записи. Указываем формат <em><strong>name</strong></em> напротив «<em>Клиента</em>», соответствующий отображаемому атрибуту в данном шаблоне записи. Указываем напротив поля «<em>Сумма</em>» формат «<em><strong>Валюта</strong></em>».</p>
+<div class="screenshot_with_caption">
+<p><img align="" alt="Настройка импорта таблицы Excel" class="img-responsive" height="775" src="https://kb.comindware.ru/assets/2021-12-30_13h46_19.png" width="1350"/></p>
+<p class="caption">Настройка импорта таблицы Excel</p>
+</div>
+<p>В шаблоне записи «<em>Заказы</em>» появились новые записи, с проставленной связью к определенному клиенту.</p>
+<div class="screenshot_with_caption">
+<p><img align="" alt='Таблица в шаблоне записи "Заявки"' class="img-responsive" height="553" src="https://kb.comindware.ru/assets/2021-12-30_13h48_11.png" width="1350"/></p>
+<p class="caption">Таблица в шаблоне записи "Заявки"</p>
+</div>
+<p>В свою очередь, таблица «<em>Заявки клиента</em>» в «<em>Клиентах</em>» выглядит следующим образом:</p>
+<div class="screenshot_with_caption">
+<p><img align="" alt="Таблица заказов клиента" class="img-responsive" height="676" src="https://kb.comindware.ru/assets/2021-12-30_13h49_38.png" width="1350"/></p>
+<p class="caption">Таблица заказов клиента</p>
+</div>

@@ -1,6 +1,6 @@
 ---
 title: Шаблон записи
-kbId: 4759
+kbId: 5693
 ---
 
 # Шаблон записи {: #record_templates}

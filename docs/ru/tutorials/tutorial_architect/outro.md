@@ -1,7 +1,7 @@
 ---
 title: 'Заключение'
 kbTitle: 'Заключение. Курс «Корпоративная архитектура. Ознакомительный»'
-kbId: 5130
+kbId: 5418
 tags:
   # Common tutorial_architect tags
   - Architect

@@ -1,6 +1,6 @@
 ---
 title: Синхронизация с сервером каталогов (Active Directory)
-kbId: 4655
+kbId: 5581
 tags:
     - Active Directory
     - LDAP
