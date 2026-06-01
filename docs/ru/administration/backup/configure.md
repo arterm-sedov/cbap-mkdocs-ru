@@ -71,12 +71,16 @@ hide: tags
 
 Эти инструкции следует выполнять на машине (сервере) с экземпляром ПО **{{ productName }}**.
 
-1. Создайте директорию, в которой будут сохраняться резервные копии. Для этой директории предоставьте разрешения на полный доступ, чтобы система могла сохранять в неё резервные копии, например:
+1. Перейдите в режим суперпользователя:
+
+    --8<-- "linux_sudo.md"
+
+2. Создайте директорию, в которой будут сохраняться резервные копии. Для этой директории предоставьте разрешения на полный доступ, чтобы система могла сохранять в неё резервные копии, например:
 
     **Astra Linux, Debian, DEB-дистрибутивы**
 
     ``` sh
-    mkdir /var/backups/comindware/<instanceName>
+    mkdir -p /var/backups/comindware/<instanceName>
     chmod 777 /var/backups/comindware/<instanceName>
     chown -R www-data:www-data /var/backups/comindware/<instanceName>
     ```
@@ -84,7 +88,7 @@ hide: tags
     **РЕД ОС, RPM-дистрибутивы**
 
     ``` sh
-    mkdir /var/backups/comindware/<instanceName>
+    mkdir -p /var/backups/comindware/<instanceName>
     chmod 777 /var/backups/comindware/<instanceName>
     chown -R nginx:nginx /var/backups/comindware/<instanceName>
     ```
@@ -92,7 +96,7 @@ hide: tags
     **Альт Сервер**
 
     ``` sh
-    mkdir /var/backups/comindware/<instanceName>
+    mkdir -p /var/backups/comindware/<instanceName>
     chmod 777 /var/backups/comindware/<instanceName>
     chown -R _nginx:_nginx /var/backups/comindware/<instanceName>
     ```
@@ -103,8 +107,8 @@ hide: tags
 
     В Windows заранее создавать директорию для резервных копий и настраивать права доступа к ней не требуется. Экземпляр ПО сам создаст директорию, указанную в конфигурации резервного копирования. См. _«[Настройка конфигураций и запуск резервного копирования](#backup_configure_list_view)»_.
 
-2. Откройте для редактирования файл конфигурации экземпляра ПО (`<instanceName>.yml`). См. _«[Пути и содержимое директорий экземпляра ПО][paths]»_.
-3. Настройте используемые по умолчанию путь и имя файла резервной копии. Заданные в этих директивах параметры используются по умолчанию при создании конфигураций резервного копирования:
+3. Откройте для редактирования файл конфигурации экземпляра ПО (`<instanceName>.yml`). См. _«[Пути и содержимое директорий экземпляра ПО][paths]»_.
+4. Настройте используемые по умолчанию путь и имя файла резервной копии. Заданные в этих директивах параметры используются по умолчанию при создании конфигураций резервного копирования:
 
     ``` yaml
     #################### Конфигурация резервного копирования ####################
@@ -119,9 +123,9 @@ hide: tags
     backup.defaultFileName: Backup
     ```
 
-4. Перезапустите **{{ productName }}**.
-5. При необходимости настройте [резервное копирование данных {{ openSearchVariants }} на диск](#backup_configure_elasticsearch_s3).
-6. Настройте конфигурацию резервного копирования на диск c помощью _«[списка конфигураций резервного копирования](#backup_configure_list_view)»_.
+5. Перезапустите **{{ productName }}**.
+6. При необходимости настройте [резервное копирование данных {{ openSearchVariants }} на диск](#backup_configure_elasticsearch_s3).
+7. Настройте конфигурацию резервного копирования на диск c помощью _«[списка конфигураций резервного копирования](#backup_configure_list_view)»_.
 
 ### Настройка экземпляра ПО {{ productName }} для хранения резервных копий в S3 {: #backup_configure_instance_s3 .pageBreakBefore }
 
