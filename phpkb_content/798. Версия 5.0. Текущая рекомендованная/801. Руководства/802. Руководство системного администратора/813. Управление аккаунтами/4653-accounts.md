@@ -2,7 +2,7 @@
 title: 'Аккаунты. Администрирование, привязка к шаблону аккаунта, назначение лицензий'
 kbId: 4653
 url: 'https://kb.comindware.ru/article.php?id=4653'
-updated: '2025-10-07 17:20:46'
+updated: '2026-05-08 13:31:06'
 ---
 
 # Аккаунты. Администрирование, привязка к шаблону аккаунта, назначение лицензий
@@ -74,25 +74,28 @@ _![Жизненный цикл аккаунтов в системе](https://kb.
   - При использовании метода `api/public/system/Base/AccountService/Create` необходимо задать имя пользователя и адрес эл. почты, при этом ряд атрибутов аккаунта устанавливается автоматически:
 
   ```
+  {
   "account": {
       "Mbox": "address@example.ru",
       "Username": "example_login",
-      // Значение следующих атрибутов
-      // устанавливаются по умолчанию
       "isSystemAdministrator": false,
       "isActive": true,
       "isAnonymous": false,
       "authenticationMethod": "Builtin"
+      }
   }
   ```
 
+  - Значения следующих атрибутов устанавливаются по умолчанию: `isSystemAdministrator`, `isActive`, `isAnonymous`, `authenticationMethod`.
   - При использовании метода `/Base/AccountService/Edit` необходимо задать ID аккаунта, имя пользователя и адрес эл. почты:
 
   ```
+  {
   "account": {
           "Id": "account.30",
           "Mbox": "address@example.ru",
           "Username": "example_login",
+      }
   }
   ```
 

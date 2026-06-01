@@ -2,7 +2,7 @@
 title: 'Хранилище S3. Настройка экземпляра ПО и подключения'
 kbId: 4677
 url: 'https://kb.comindware.ru/article.php?id=4677'
-updated: '2025-10-06 14:48:01'
+updated: '2026-03-16 11:16:16'
 ---
 
 # Хранилище S3. Настройка экземпляра ПО и подключения
@@ -71,7 +71,7 @@ updated: '2025-10-06 14:48:01'
 2. Откройте для редактирования файл конфигурации экземпляра ПО:
 
    ```
-   vim /usr/share/comindware/configs/instance/<instanceName>.yml
+   nano /usr/share/comindware/configs/instance/<instanceName>.yml
    ```
 
    Здесь  `<instanceName>` — имя экземпляра ПО.

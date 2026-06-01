@@ -119,6 +119,14 @@ Use this when `docs/ru` Markdown was edited and existing PHPKB articles must be 
 
 6. Optional Git commit for the source docs and/or export (only when the user asks to commit): stage `docs/ru/…` and, if you keep the export in the repo, the matching `for_kb_import_ru/…` paths.
 
+### Copy PHPKB Image Assets
+
+- `phpkb_copy_images.py` copies every image from `for_kb_import_ru` to `kb.comindware.ru/platform/v6.0` with overwrite enabled; it is a broad asset sync, not an article-scoped helper.
+- In this workspace, `D:\Repo\CBAP_MKDOCS_RU\kb.comindware.ru\platform\v5.0` should point at `D:\Repo\kb.comindware.ru\platform\v5.0`, and `D:\Repo\CBAP_MKDOCS_RU\kb.comindware.ru\platform\v6.0` should point at `D:\Repo\kb.comindware.ru\platform\v6.0`. Verify `Get-Item ... | Format-List LinkType,Target` before copying images.
+- After copying images, inspect and commit from the PHPKB repo root `D:\Repo\kb.comindware.ru`, not from the MkDocs repo. Scope staging to the intended version folder, for example `git add -- platform/v6.0`.
+- If only one article's images should be published, do not run the broad copy script blindly; copy or stage only the exact image paths referenced by the generated article HTML.
+- Before committing, confirm there are no accidental `platform/v5.0` changes with `git status --short -- platform/v5.0` and `git diff --name-status -- platform/v5.0`.
+
 See `references/workflow.md` → **Sync changed articles (git-diff batch)** for the full checklist.
 
 ### Verify A Completed Clone
