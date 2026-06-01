@@ -1,6 +1,6 @@
 ---
 name: phpkb-cloning
-description: "Use when working on the PHPKB cloning and post-clone migration workflow in this repository: creating a new PHPKB section for a new product version, publishing a new MkDocs article by cloning an adjacent PHPKB article, cloning PHPKB categories or articles, updating cloned PHPKB article/category links, migrating local docs IDs with clone mappings, fixing related topics after cloning, or analyzing/updating scripts in utilities/phpkb_cloning."
+description: "Use when working on the PHPKB cloning and post-clone migration workflow in this repository: creating a new PHPKB section for a new product version, publishing a new MkDocs article by cloning an adjacent PHPKB article, syncing changed for_kb_import_ru HTML back to PHPKB by kb-id (git diff batch), cloning PHPKB categories or articles, updating cloned PHPKB article/category links, migrating local docs IDs with clone mappings, fixing related topics after cloning, or analyzing/updating scripts in utilities/phpkb_cloning."
 ---
 
 # PHPKB Cloning
@@ -82,6 +82,44 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
   `python phpkb_update_articles.py --profile cmw --article-id <new-article-id> --yes`
 - The script can also be run interactively by omitting `--article-id`. It reads `for_kb_import_ru`, finds `<div ... kb-id="<new-article-id>" ...>`, and updates the PHPKB row with the MkDocs title, HTML content, tags, `unlisted`, `article_status='approved'`, and `article_show='yes'`.
 - If the build dirties the tracked `for_kb_import_ru` export tree and those files were clean before the build, clean the generated output from Git after publishing; keep the source Markdown and one-off mapping if they are useful for audit.
+
+### Sync Changed Articles To PHPKB (Git-Diff Batch)
+
+Use this when `docs/ru` Markdown was edited and existing PHPKB articles must be refreshed from the rebuilt HTML export—not when creating a new article (use **Publish A New MkDocs Article To PHPKB** above).
+
+1. Rebuild the export tree:
+
+   ```powershell
+   .\.venv\Scripts\python.exe -m mkdocs build -f mkdocs_for_kb_import_ru.yml
+   ```
+
+2. List changed HTML files (scope to the export folder or a subtree):
+
+   ```powershell
+   git diff --name-only for_kb_import_ru/
+   git status --short for_kb_import_ru/
+   ```
+
+3. Read `kb-id` from the first line of each changed `.html` file (`<div class="md-body" … kb-id="…" …>`). Skip files with `kb-id=""`—they have no PHPKB row yet; set `kbId:` in the source `.md` (or clone first) before publishing.
+
+   ```powershell
+   Select-String -Path for_kb_import_ru\administration\deploy\script_keys.html -Pattern 'kb-id="(\d+)"' | ForEach-Object { $_.Matches.Groups[1].Value }
+   ```
+
+4. Publish all numeric IDs in one non-interactive run (repeat `--article-id` per article):
+
+   ```powershell
+   .\.venv\Scripts\python.exe phpkb_update_articles.py --profile cmw -y `
+     --article-id 5451 --article-id 5558
+   ```
+
+   The script matches `for_kb_import_ru/**` by `kb-id`, then updates PHPKB `article_title`, `article_content`, `article_keywords` (from `kb-tags`, max 250 chars), and `unlisted` (from `kb-unlisted="1"` when present).
+
+5. Share direct article links: `https://kb.comindware.ru/article.php?id=<kb-id>` (same as `{{ kbArticleURLPrefix }}` in `mkdocs_ru.yml`).
+
+6. Optional Git commit for the source docs and/or export (only when the user asks to commit): stage `docs/ru/…` and, if you keep the export in the repo, the matching `for_kb_import_ru/…` paths.
+
+See `references/workflow.md` → **Sync changed articles (git-diff batch)** for the full checklist.
 
 ### Verify A Completed Clone
 

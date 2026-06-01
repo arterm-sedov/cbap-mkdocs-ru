@@ -91,7 +91,7 @@
 </li>
 <li>
 <p>Перед тем как выполнять любые действия с файлами ПО и базы данных, остановите экземпляр ПО и его вспомогательные службы и удостоверьтесь, что они остановлены:</p>
-<div class="highlight"><code><pre><span></span><code>systemctl stop elasticsearch nginx kafka comindware&lt;instancename&gt;</code> <br/><code>systemctl status elasticsearch nginx kafka comindware&lt;instancename&gt;</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>systemctl stop opensearch nginx kafka comindware&lt;instancename&gt;</code> <br/><code>systemctl status opensearch nginx kafka comindware&lt;instancename&gt;</code> <br/></pre></code></div>
 <p>Здесь <code>&lt;instancename&gt;</code> — имя экземпляра ПО.</p>
 </li>
 <li>
@@ -159,36 +159,36 @@
 <ol class="colored_numbers_list">
 <li>
 <p>Создайте директорию репозитория OpenSearch (Elasticsearch) и перенесите в неё файлы из резервной копии:</p>
-<div class="highlight"><code><pre><span></span><code>mkdir /var/www/backups/elasticsearch/</code> <br/><code>mv elastic/* /var/www/backups/elasticsearch/</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>mkdir /var/www/backups/opensearch/</code> <br/><code>mv opensearch/* /var/www/backups/opensearch/</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Назначьте папке репозитория и её содержимому права <code>rwxr-xr-x</code>:</p>
 <div class="highlight"><code><pre><span></span><code>chmod -R 755 /var/www/backups/</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Назначьте владельца <code>elasticsearch</code> директории репозитория и её содержимому:</p>
-<div class="highlight"><code><pre><span></span><code>chown -R elasticsearch:elasticsearch /var/www/backups/</code> <br/></pre></code></div>
+<p>Назначьте владельца <code>opensearch</code> директории репозитория и её содержимому:</p>
+<div class="highlight"><code><pre><span></span><code>chown -R opensearch:opensearch /var/www/backups/</code> <br/></pre></code></div>
 </li>
 <li>
-<p>В файле конфигурации <code>elasticsearch.yml</code> с помощью директивы <code>path.repo: /var/www/backups/elasticsearch</code> укажите путь к созданному репозиторию (например, с помощью редактора <code>nano</code>):</p>
-<div class="highlight"><code><pre><span></span><code>nano /etc/elasticsearch/elasticsearch.yml</code> <br/></pre></code></div>
+<p>В файле конфигурации <code>opensearch.yml</code> с помощью директивы <code>path.repo: /var/www/backups/opensearch</code> укажите путь к созданному репозиторию (например, с помощью редактора <code>nano</code>):</p>
+<div class="highlight"><code><pre><span></span><code>nano /etc/opensearch/opensearch.yml</code> <br/></pre></code></div>
 <figure class="screenshot_with_caption" markdown=""><img alt="Путь к репозиторию в файле конфигурации OpenSearch (Elasticsearch)" src="https://kb.comindware.ru/assets/Pasted image 20230125204737.png"/><figcaption class="caption">Путь к репозиторию в файле конфигурации OpenSearch (Elasticsearch)</figcaption></figure>
 </li>
 <li>
 <p>Запустите службу OpenSearch (Elasticsearch):</p>
-<div class="highlight"><code><pre><span></span><code>systemctl start elasticsearch.service</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>systemctl start opensearch</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Зарегистрируйте новый репозиторий снимков OpenSearch (Elasticsearch):</p>
-<div class="highlight"><code><pre><span></span><code>curl -X PUT "&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/elastic_snap?pretty" -H 'Content-Type: application/json' -d' {"type": "fs", "settings": {"location": "/var/www/backups/elasticsearch"}}'</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl -X PUT "&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/opensearch_snap?pretty" -H 'Content-Type: application/json' -d' {"type": "fs", "settings": {"location": "/var/www/backups/opensearch"}}'</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Проверьте содержимое зарегистрированного репозитория:</p>
-<div class="highlight"><code><pre><span></span><code>curl -X GET "&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_cat/snapshots/elastic_snap?pretty"</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl -X GET "&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_cat/snapshots/opensearch_snap?pretty"</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Выберите необходимый снимок и восстановите состояние OpenSearch (Elasticsearch):</p>
-<div class="highlight"><code><pre><span></span><code>curl -X POST "&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/elastic_snap/snapshot2023_01_23_10_17/_restore?pretty"</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl -X POST "&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/opensearch_snap/snapshot2023_01_23_10_17/_restore?pretty"</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Проверьте наличие индексов в восстановленном каталоге:</p>
@@ -202,7 +202,7 @@
 <ol class="colored_numbers_list">
 <li>
 <p>Запустите необходимые службы и проверьте их статус:</p>
-<div class="highlight"><code><pre><span></span><code>systemctl start elasticsearch kafka nginx comindware&lt;instancename&gt;</code> <br/><code>systemctl status elasticsearch kafka nginx comindware&lt;instancename&gt;</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>systemctl start opensearch kafka nginx comindware&lt;instancename&gt;</code> <br/><code>systemctl status opensearch kafka nginx comindware&lt;instancename&gt;</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Откройте в браузере веб-сайт с экземпляром ПО.</p>

@@ -219,7 +219,7 @@
 </li>
 <li>
 <p>Убедитесь, что все компоненты установлены:</p>
-<div class="highlight"><code><pre><span></span><code>sh<span class="w"> </span>prerequisites_list.sh</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>prerequisites_list.sh</code> <br/></pre></code></div>
 <div class="notice notice-warning">
 <p class="admonition-title">Внимание!</p>
 <p>Если какой-то из компонентов не установлен или установлена старая версия, то установите вспомогательное ПО заново. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5558#deploy_guide_linux_prerequisites_install">Установка вспомогательного ПО</a>»</em>.</p>
@@ -304,7 +304,7 @@
 </li>
 <li>
 <p>Если используются локальные службы Kafka и OpenSearch (Elasticsearch), откройте их для редактирования:</p>
-<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/usr/lib/systemd/system/kafka.service</code> <br/><code>nano<span class="w"> </span>/usr/lib/systemd/system/elasticsearch.service</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/usr/lib/systemd/system/kafka.service</code> <br/><code>nano<span class="w"> </span>/usr/lib/systemd/system/opensearch.service</code> <br/></pre></code></div>
 </li>
 <li>
 <p>В каждом файле службы установите следующие директивы:</p>
@@ -333,7 +333,7 @@
 <div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/etc/security/limits.conf</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Установите следующие директивы:</p>
+<p>Установите следующие директивы, чтобы задать лимиты ресурсов для аккаунта сервера:</p>
 <ul>
 <li><strong>Astra Linux, Debian, DEB-дистрибутивы</strong></li>
 </ul>
@@ -352,7 +352,7 @@
 <div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/etc/pam.d/common-session</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Установите следующую директиву:</p>
+<p>Установите следующую директиву, чтобы применить заданные лимиты:</p>
 <div class="highlight"><code><pre><span></span><code><span class="err">session required pam_limits.so</span></code> <br/></pre></code></div>
 </li>
 <li>
