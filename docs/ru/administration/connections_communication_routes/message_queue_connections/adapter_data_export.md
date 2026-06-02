@@ -16,8 +16,6 @@ hide:
 
 # Адаптер для экспорта данных. Настройка подключения, пути передачи данных и сценария {: #adapter_data_export }
 
-{% include-markdown ".snippets/experimental_feature.md" %}
-
 ## Введение {: #adapter_data_export_intro }
 
 Адаптер для экспорта данных используется для отправки данных из шаблонов записи **{{ productName }}** во внешние системы через топики {{ apacheKafkaVariants }}.
