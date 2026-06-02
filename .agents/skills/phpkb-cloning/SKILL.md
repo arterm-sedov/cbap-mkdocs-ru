@@ -81,7 +81,9 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 - Publish only the new article using the script's command-line flags:
   `python phpkb_update_articles.py --profile cmw --article-id <new-article-id> --yes`
 - The script can also be run interactively by omitting `--article-id`. It reads `for_kb_import_ru`, finds `<div ... kb-id="<new-article-id>" ...>`, and updates the PHPKB row with the MkDocs title, HTML content, tags, `unlisted`, `article_status='approved'`, and `article_show='yes'`.
-- If the build dirties the tracked `for_kb_import_ru` export tree and those files were clean before the build, clean the generated output from Git after publishing; keep the source Markdown and one-off mapping if they are useful for audit.
+- After the new ID is written to the Markdown front matter, reusable hyperlink-map entries point to the new `{{ kbArticleURLPrefix }}` URL, and the article is successfully published, delete one-off mapping files such as `.release_notes_6_new_article_mapping.json` unless the user asks to keep them for audit. Keep durable migration mappings such as `.v6mapping.json`.
+- If several sibling articles are cloned from the same source article, use a separate one-off mapping file for each new target article. A mapping stores one source-to-target article pair, so reusing it for siblings would resume the first clone instead of creating another article.
+- In this repository, keep the generated `for_kb_import_ru` HTML for new and updated articles under version control. Clean generated export files only when they are accidental, unrelated to the requested publish scope, or the user explicitly asks not to keep them.
 
 ### Sync Changed Articles To PHPKB (Git-Diff Batch)
 

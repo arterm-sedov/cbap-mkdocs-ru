@@ -1337,6 +1337,10 @@
 
 [adapters]: {{ kbArticleURLPrefix }}5615
 
+[adapter_data_import]: {{ kbArticleURLPrefix }}5743
+
+[adapter_data_export]: {{ kbArticleURLPrefix }}5744
+
 [ad_authentication_configure]: {{ kbArticleURLPrefix }}5345
 
 [antivirus_exceptions_configure]: {{ kbArticleURLPrefix }}5456

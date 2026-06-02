@@ -1,0 +1,343 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5744" kb-tags="DataExport,JSON,XML,адаптеры,интеграции,подключения,пути передачи данных,экспорт данных" kb-title="Адаптер экспорта данных из платформы. Настройка подключения, пути передачи данных и сценария">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#adapter_data_export_intro">
+<span class="md-ellipsis">
+      
+        Введение
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#adapter_data_export_logic">
+<span class="md-ellipsis">
+      
+        Логика работы адаптера
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#adapter_data_export_prerequisites">
+<span class="md-ellipsis">
+      
+        Предварительные требования
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#adapter_data_export_connection">
+<span class="md-ellipsis">
+      
+        Настройка подключения к Apache Kafka
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#adapter_data_export_route">
+<span class="md-ellipsis">
+      
+        Настройка пути передачи данных через Apache Kafka
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#adapter_data_export_scenario">
+<span class="md-ellipsis">
+      
+        Настройка сценария отправки сообщения
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#adapter_data_export_test">
+<span class="md-ellipsis">
+      
+        Проверка работы экспорта
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#adapter_data_export_limitations">
+<span class="md-ellipsis">
+      
+        Ограничения
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#adapter_data_export_troubleshooting">
+<span class="md-ellipsis">
+      
+        Диагностика
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      
+        Связанные статьи
+      
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<div class="notice notice-error">
+<p class="admonition-title">Экспериментальная функция</p>
+<p>Представленная здесь функция находится на стадии разработки. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5161#experimental_feature_support">Поддержка экспериментальных функций</a>»</em>.</p>
+</div>
+<h2 id="adapter_data_export_intro">Введение</h2>
+<p>Адаптер экспорта данных из платформы используется для отправки данных из шаблонов записи <strong>Comindware Platform</strong> во внешние системы через топики Apache Kafka.</p>
+<p>В отличие от <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5635">получения сообщений через Apache Kafka</a>, где <strong>Comindware Platform</strong> считывает сообщения из топика, адаптер экспорта публикует сообщения в топик. В отличие от <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5743">адаптера для импорта данных</a>, который принимает прямые HTTP-запросы, этот адаптер использует брокер сообщений.</p>
+<h2 id="adapter_data_export_logic">Логика работы адаптера</h2>
+<ol class="colored_numbers_list">
+<li>В <strong>Comindware Platform</strong> настраивают подключение к Apache Kafka.</li>
+<li>В пути передачи данных выбирают приложение, шаблон записи, атрибуты для экспорта и топик Apache Kafka.</li>
+<li>Сценарий с действием отправки сообщения запускается по нажатию кнопки в записи или в процессе.</li>
+<li>Адаптер формирует сообщение на основе данных записи и публикует его в топик.</li>
+<li>Внешняя система считывает сообщение из топика Apache Kafka.</li>
+</ol>
+<h2 id="adapter_data_export_prerequisites">Предварительные требования</h2>
+<ul>
+<li>Сервер Apache Kafka доступен для сервера <strong>Comindware Platform</strong>.</li>
+<li>Адаптер экспорта данных из платформы установлен, опубликован и доступен в списке подключений к шинам сообщений.</li>
+<li>Если адаптер отсутствует в списке подключений или требуется доработать маппинг под внешний формат сообщения, запросите исходный код или образец адаптера у представителя <strong>Comindware</strong>.</li>
+<li>Подготовлен шаблон записи, данные из которого требуется экспортировать.</li>
+<li>У пользователя есть права на настройку подключений, путей передачи данных и сценариев.</li>
+<li>Известны топик Apache Kafka, формат сообщения и набор атрибутов, которые должна получить внешняя система.</li>
+</ul>
+<h2 class="pageBreakBefore" id="adapter_data_export_connection">Настройка подключения к Apache Kafka</h2>
+<ol class="colored_numbers_list">
+<li>Откройте страницу «<strong>Администрирование</strong>» — «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5303"><strong>Подключения</strong></a>».</li>
+<li>Создайте или настройте подключение к шине сообщений типа «<strong>Адаптер экспорта данных из платформы</strong>».</li>
+<li>
+<p>Настройте свойства подключения:</p>
+<ul>
+<li><strong>Системное имя</strong> — введите уникальное системное имя подключения, например <code>platform_send_messages_connection</code>.
+    Не должно начинаться с цифры. Разрешены английские и русские буквы, цифры и символ «_». Рекомендуется использовать английские буквы.</li>
+<li><strong>Отключить</strong> — установите этот флажок, если требуется временно отключить подключение.</li>
+<li><strong>Описание</strong> — введите наглядное описание подключения.</li>
+<li><strong>Запись в файловые журналы</strong> — выберите способ записи сведений о работе подключения:<ul>
+<li><strong>Полные сведения об обработке сообщения</strong>;</li>
+<li><strong>Только ошибки</strong>;</li>
+<li><strong>Отключить</strong>.</li>
+</ul>
+</li>
+<li><strong>Список пар хост/порт (разделённых запятой), используемых для подключения к кластеру Kafka</strong> — введите адреса одного или нескольких узлов кластера Apache Kafka, например <code>12.34.56.78:9092</code>.</li>
+<li><strong>Максимальный объем данных (в байтах), который брокеры должны возвращать по запросу сообщений</strong> — введите лимит для ответа каждого брокера.</li>
+<li><strong>Количество байтов, которые необходимо попытаться получить для каждого топика-партиции в каждом запросе сообщений</strong> — введите объём данных для получения от Apache Kafka, не меньше максимального размера сообщения, допустимого сервером Apache Kafka.</li>
+<li><strong>Тайм-аут (в миллисекундах) для запросов на стороне сервера Kafka</strong> — введите лимит времени обработки запроса сервером Apache Kafka.</li>
+<li><strong>Тайм-аут на стороне клиента (в миллисекундах)</strong> — введите лимит времени ожидания ответа от сервера Apache Kafka.</li>
+<li><strong>Временной интервал (в миллисекундах) для пакетной обработки сообщений, используемых при запросах сообщений</strong> — введите интервал опроса Apache Kafka.</li>
+<li><strong>Имя пользователя</strong> и <strong>Пароль</strong> — введите логин и пароль для подключения к серверу Apache Kafka.</li>
+</ul>
+</li>
+<li>
+<p>Сохраните подключение.</p>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="adapter_data_export_route">Настройка пути передачи данных через Apache Kafka</h2>
+<ol class="colored_numbers_list">
+<li>Откройте страницу «<strong>Администрирование</strong>» — «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5302"><strong>Пути передачи данных</strong></a>».</li>
+<li>Создайте или настройте путь передачи данных для подключения к шине сообщений типа «<strong>Адаптер экспорта данных из платформы</strong>».</li>
+<li>
+<p>На вкладке «<strong>Основные свойства</strong>» настройте параметры:</p>
+<ul>
+<li><strong>Подключение</strong> — выберите <a class="mkdocs_imported_link" href="#adapter_data_export_connection">подключение адаптера экспорта данных</a>, например <code>platform_send_messages_connection</code>.</li>
+<li><strong>Системное имя</strong> — введите уникальное системное имя пути передачи данных, например <code>platform_send_messages_route</code>.
+    Не должно начинаться с цифры. Разрешены английские и русские буквы, цифры и символ «_». Рекомендуется использовать английские буквы.</li>
+<li><strong>Отключить</strong> — установите этот флажок, если требуется временно отключить путь передачи данных.</li>
+<li><strong>Описание</strong> — введите наглядное описание пути передачи данных.</li>
+<li><strong>Номер шины данных</strong> — выберите номер от 0 до 3, если требуется распределить потоки данных нескольких путей для повышения производительности.</li>
+</ul>
+</li>
+<li>
+<p>На вкладке «<strong>Атрибуты сообщений</strong>» настройте параметры экспортируемых данных:</p>
+<ul>
+<li><strong>Тип сообщения</strong> — выберите тип «<strong>Адаптер экспорта данных из платформы</strong>».</li>
+<li><strong>Приложение</strong> — выберите приложение, из которого требуется экспортировать данные.</li>
+<li><strong>Шаблон</strong> — выберите шаблон записи, данные которого требуется экспортировать. После выбора шаблона в таблице отобразятся его атрибуты, включая атрибуты связей с другими шаблонами.</li>
+</ul>
+<div class="notice notice-info">
+<p class="admonition-title">Сопоставление атрибутов</p>
+<p>Если системные имена атрибутов шаблона совпадают с именами полей сообщения, <strong>Comindware Platform</strong> сопоставит их автоматически. Для переопределения имени поля в теле сообщения используйте столбец «<strong>Альтернативное название</strong>».</p>
+</div>
+</li>
+<li>
+<p>В таблице атрибутов проверьте и настройте столбцы:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Столбец</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Системное имя</strong></td>
+<td>Отображает системное имя атрибута</td>
+</tr>
+<tr>
+<td><strong>Название</strong></td>
+<td>Отображает название атрибута</td>
+</tr>
+<tr>
+<td><strong>Тип данных</strong></td>
+<td>Отображает тип данных атрибута из шаблона</td>
+</tr>
+<tr>
+<td><strong>Альтернативное название</strong></td>
+<td>Позволяет переопределить имя поля в теле сообщения</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>На вкладке «<strong>Интеграция</strong>» настройте параметры публикации сообщения:</p>
+<ul>
+<li><strong>Очередь</strong> — введите название топика Apache Kafka, в который требуется отправлять сообщения, например <code>CLIENT_ORDERS</code>.</li>
+<li><strong>Тип содержимого</strong> — выберите формат передачи данных:<ul>
+<li><strong>XML</strong>;</li>
+<li><strong>JSON</strong>.</li>
+</ul>
+</li>
+<li><strong>Имя атрибута для сообщения</strong> — оставьте пустым, если параметр не используется в вашей конфигурации.</li>
+<li><strong>Имя атрибута для заголовков</strong> — оставьте пустым, если параметр не используется в вашей конфигурации.</li>
+</ul>
+</li>
+<li>
+<p>Сохраните путь передачи данных.</p>
+</li>
+</ol>
+<div class="notice notice-info">
+<p class="admonition-title">Автоматическое создание топика</p>
+<p>При сохранении пути передачи данных топик Apache Kafka может быть создан автоматически, если это разрешено конфигурацией брокера.</p>
+</div>
+<h2 class="pageBreakBefore" id="adapter_data_export_scenario">Настройка сценария отправки сообщения</h2>
+<p>Для отправки данных настройте сценарий, срабатывающий по нажатию кнопки в записи или в процессе.</p>
+<ol class="colored_numbers_list">
+<li>На странице администрирования приложения выберите пункт «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5654"><strong>Сценарии</strong></a>».</li>
+<li>Создайте сценарий, например <em>«Экспорт данных из шаблона»</em>.</li>
+<li>
+<p>Настройте свойства сценария:</p>
+<ul>
+<li><strong>Системное имя</strong> — заполняется автоматически.</li>
+<li><strong>Контекст выполнения</strong> — выберите «<strong>От инициатора</strong>».</li>
+<li><strong>Статус</strong> — на время настройки выберите «<strong>Приостановлен</strong>», после проверки сценария выберите «<strong>Активен</strong>».</li>
+</ul>
+</li>
+<li>
+<p>В конструкторе сценария нажмите заголовок стартового события «<strong>Нажатие кнопки</strong>».</p>
+</li>
+<li>Выберите кнопку шаблона записи или процесса, по нажатию которой требуется экспортировать данные.</li>
+<li>Добавьте действие отправки сообщения.</li>
+<li>
+<p>Настройте свойства действия:</p>
+<ul>
+<li><strong>Подключение</strong> — выберите подключение адаптера экспорта данных, например <code>platform_send_messages_connection</code>.</li>
+<li><strong>Путь передачи данных</strong> — выберите путь передачи данных адаптера экспорта данных, например <code>platform_send_messages_route</code>.</li>
+</ul>
+</li>
+<li>
+<p>При необходимости настройте дополнительные действия постобработки.</p>
+</li>
+<li>Сохраните и активируйте сценарий.</li>
+</ol>
+<div class="notice notice-info">
+<p class="admonition-title">Переменные сообщения</p>
+<p>Для базового экспорта переменные сообщения можно не заполнять: адаптер сформирует сообщение на основе настроенного шаблона и атрибутов пути передачи данных.</p>
+</div>
+<h2 class="pageBreakBefore" id="adapter_data_export_test">Проверка работы экспорта</h2>
+<ol class="colored_numbers_list">
+<li>Откройте запись шаблона, выбранного в пути передачи данных.</li>
+<li>Нажмите кнопку, настроенную как стартовое событие сценария.</li>
+<li>Проверьте, что сценарий выполнился без ошибок.</li>
+<li>Проверьте, что сообщение появилось в топике Apache Kafka.</li>
+</ol>
+<p>Пример проверки топика с помощью консольного потребителя Apache Kafka:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>-i</code> <br/><code><span class="nb">cd</span><span class="w"> </span>/usr/share/kafka/bin</code> <br/><code>bash<span class="w"> </span>kafka-console-consumer.sh<span class="w"> </span>--bootstrap-server<span class="w"> </span><span class="m">12</span>.34.56.78:9092<span class="w"> </span>--topic<span class="w"> </span>CLIENT_ORDERS<span class="w"> </span>--from-beginning</code> <br/></pre></code></div>
+<h2 id="adapter_data_export_limitations">Ограничения</h2>
+<ul>
+<li>При первом запуске экспортируются все записи выбранного шаблона. При последующих запусках экспортируются записи, изменённые после предыдущей отправки.</li>
+<li>Сценарии со стартовым событием создания или изменения записи не запускают этот тип интеграции. Для постобработки используйте отдельный технический процесс, который по расписанию получает недавно созданные или обновлённые записи и обрабатывает их.</li>
+<li>Передача документов не поддерживается.</li>
+<li>Если путь передачи данных был создан или включён после появления сообщений во внешней системе, такие сообщения не обрабатываются в рамках импорта. Это ограничение важно учитывать при проектировании парных сценариев экспорта и импорта.</li>
+<li>Для интеграции с внешней системой и сопоставления нестандартной структуры сообщения со структурой шаблонов можно разработать пользовательский адаптер. На уровне адаптера можно разобрать входящее или исходящее сообщение, выполнить маппинг и использовать механизм DataImport или DataExport. Исходный код или образец адаптера запросите у представителя <strong>Comindware</strong>.</li>
+</ul>
+<p>Для использования механизма DataImport в пользовательском адаптере добавьте в файл <code>Adapter.cs</code> следующий метод:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="n">PerformerType</span><span class="w"> </span><span class="nf">GetPerformerType</span><span class="p">()</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">PerformerType</span><span class="p">.</span><span class="n">DataImport</span><span class="p">;</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<h2 id="adapter_data_export_troubleshooting">Диагностика</h2>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Симптом</th>
+<th>Возможная причина</th>
+<th>Решение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Сообщение не появляется в топике</td>
+<td>Неверно указан топик или подключение к Apache Kafka недоступно</td>
+<td>Проверьте поле «<strong>Очередь</strong>», параметры подключения и журналы адаптера</td>
+</tr>
+<tr>
+<td>Сценарий не запускается</td>
+<td>Не настроено стартовое событие «<strong>Нажатие кнопки</strong>» или сценарий приостановлен</td>
+<td>Проверьте кнопку, статус сценария и журнал выполнения</td>
+</tr>
+<tr>
+<td>Экспортируются не все данные</td>
+<td>Экспортируются только изменённые после предыдущей отправки записи</td>
+<td>Проверьте дату изменения записей и историю предыдущих запусков</td>
+</tr>
+<tr>
+<td>Поля сообщения названы неверно</td>
+<td>Не настроены альтернативные названия атрибутов</td>
+<td>Проверьте столбец «<strong>Альтернативное название</strong>» на вкладке «<strong>Атрибуты сообщений</strong>»</td>
+</tr>
+</tbody>
+</table>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5635">Получение сообщений через Apache Kafka</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5743">Адаптер для импорта данных. Настройка подключения, пути передачи данных и сценария</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5303">Подключения. Типы, создание, настройка, удаление</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5302">Пути передачи данных. Типы, создание, настройка, удаление</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5654">Сценарии</a></em></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

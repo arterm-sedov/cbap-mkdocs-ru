@@ -1,0 +1,359 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5743" kb-tags="DataImport,HTTP-запрос,XML,адаптеры,импорт данных,интеграции,подключения,получение запросов,пути передачи данных" kb-title="Адаптер для импорта данных. Настройка подключения, пути передачи данных и сценария">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#adapter_data_import_intro">
+<span class="md-ellipsis">
+      
+        Введение
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#adapter_data_import_kafka_connection">
+<span class="md-ellipsis">
+      
+        Связь с получением сообщений через Kafka
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#adapter_data_import_logic">
+<span class="md-ellipsis">
+      
+        Логика работы адаптера
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#adapter_data_import_prerequisites">
+<span class="md-ellipsis">
+      
+        Предварительные требования
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#adapter_data_import_xml_format">
+<span class="md-ellipsis">
+      
+        Формат входящего XML-запроса
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#adapter_data_import_connection">
+<span class="md-ellipsis">
+      
+        Настройка подключения
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#adapter_data_import_route">
+<span class="md-ellipsis">
+      
+        Настройка пути передачи данных
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#adapter_data_import_scenario">
+<span class="md-ellipsis">
+      
+        Настройка сценария
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#adapter_data_import_test">
+<span class="md-ellipsis">
+      
+        Проверка работы адаптера
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#adapter_data_import_limitations">
+<span class="md-ellipsis">
+      
+        Ограничения
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#adapter_data_import_troubleshooting">
+<span class="md-ellipsis">
+      
+        Диагностика
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      
+        Связанные статьи
+      
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="adapter_data_import_intro">Введение</h2>
+<p><strong>Comindware Platform</strong> может принимать HTTP-запросы от внешних систем с помощью адаптера импорта данных в платформу.</p>
+<p>Адаптер открывает HTTP-порт, принимает запросы по заданному пути URI, проверяет имя пользователя и пароль, преобразует XML-сообщение во внутреннюю структуру DataImport и передаёт данные в сценарий для создания или обновления записей.</p>
+<h2 id="adapter_data_import_kafka_connection">Связь с получением сообщений через Kafka</h2>
+<p>Адаптер для импорта данных решает ту же прикладную задачу, что и <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5635">получение сообщений через Apache Kafka</a>: принимает данные из внешней системы, преобразует их в сообщение <strong>Comindware Platform</strong> и запускает сценарий для создания или обновления записей.</p>
+<p>Различается способ доставки данных:</p>
+<ul>
+<li>при <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5635">получении сообщений через Apache Kafka</a> внешняя система отправляет сообщение в топик, а <strong>Comindware Platform</strong> считывает его через подключение к шине сообщений;</li>
+<li>при использовании адаптера импорта данных внешняя система отправляет HTTP-запрос напрямую на порт адаптера, а адаптер передаёт полученное XML-сообщение в механизм DataImport.</li>
+</ul>
+<p>Используйте подключение к Apache Kafka, если обмен должен идти через брокер сообщений. Используйте адаптер импорта данных, если внешняя система может отправлять HTTP-запросы и требуется обработать их через пользовательский адаптер с механизмом DataImport.</p>
+<h2 id="adapter_data_import_logic">Логика работы адаптера</h2>
+<ol class="colored_numbers_list">
+<li>Внешняя система отправляет HTTP-запрос на адрес адаптера.</li>
+<li>Адаптер проверяет Basic-аутентификацию.</li>
+<li>Адаптер проверяет метод запроса и путь URI.</li>
+<li>Тело XML-запроса преобразуется в сообщение типа <code>ImportDataPlatformMessage</code>.</li>
+<li><strong>Comindware Platform</strong> запускает сценарий с событием «<strong>Получение сообщения</strong>».</li>
+<li>Сценарий создаёт или обновляет записи в выбранном шаблоне.</li>
+</ol>
+<h2 id="adapter_data_import_prerequisites">Предварительные требования</h2>
+<ul>
+<li>Адаптер <code>ImportDataPlatformAdapter</code> установлен, опубликован и доступен в списке пользовательских подключений. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5615">Адаптеры. Определения, настройка, удаление</a>»</em>.</li>
+<li>Если адаптер отсутствует в списке пользовательских подключений или требуется доработать маппинг под внешний XML-контракт, запросите исходный код или образец адаптера у представителя <strong>Comindware</strong>.</li>
+<li>На сервере <strong>Comindware Platform</strong> разрешён входящий доступ к порту адаптера.</li>
+<li>Подготовлен шаблон записи для импортируемых данных.</li>
+<li>Известна структура XML-запроса внешней системы.</li>
+<li>У пользователя есть права на настройку подключений, путей передачи данных и сценариев.</li>
+</ul>
+<h2 id="adapter_data_import_xml_format">Формат входящего XML-запроса</h2>
+<p>Адаптер обрабатывает XML-запросы со структурой заявки.</p>
+<p>Согласуйте структуру XML-запроса с внешней системой и используйте понятные имена элементов, отражающие состав передаваемых данных.</p>
+<p>Пример входящего XML-запроса:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nt">&lt;Requests&gt;</span></code> <br/><code><span class="w">    </span><span class="nt">&lt;Request&gt;</span></code> <br/><code><span class="w">        </span><span class="nt">&lt;ContactName&gt;</span>Иванов<span class="w"> </span>Иван<span class="nt">&lt;/ContactName&gt;</span></code> <br/><code><span class="w">        </span><span class="nt">&lt;RequestSummary&gt;</span>Краткое<span class="w"> </span>описание<span class="w"> </span>заявки<span class="nt">&lt;/RequestSummary&gt;</span></code> <br/><code><span class="w">        </span><span class="nt">&lt;ResolutionActions&gt;</span>Необходимые<span class="w"> </span>действия<span class="nt">&lt;/ResolutionActions&gt;</span></code> <br/><code><span class="w">        </span><span class="nt">&lt;RequestCategory&gt;</span></code> <br/><code><span class="w">            </span><span class="nt">&lt;Code&gt;</span>SUPPORT<span class="nt">&lt;/Code&gt;</span></code> <br/><code><span class="w">        </span><span class="nt">&lt;/RequestCategory&gt;</span></code> <br/><code><span class="w">    </span><span class="nt">&lt;/Request&gt;</span></code> <br/><code><span class="nt">&lt;/Requests&gt;</span></code> <br/></pre></code></div>
+<p>Рекомендуемое сопоставление полей:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Поле XML</th>
+<th>Бизнес-поле сообщения</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ContactName</code></td>
+<td><code>ContactName</code></td>
+<td>Контактное лицо или источник заявки</td>
+</tr>
+<tr>
+<td><code>RequestSummary</code></td>
+<td><code>RequestSummary</code></td>
+<td>Краткое описание заявки</td>
+</tr>
+<tr>
+<td><code>ResolutionActions</code></td>
+<td><code>ResolutionActions</code></td>
+<td>Действия, необходимые для обработки заявки</td>
+</tr>
+<tr>
+<td><code>RequestCategory/Code</code></td>
+<td><code>RequestCategoryCode</code></td>
+<td>Код категории заявки</td>
+</tr>
+</tbody>
+</table>
+<div class="notice notice-info">
+<p class="admonition-title">Имена полей</p>
+<p>Имена полей в сообщении должны быть понятны администраторам приложения и специалистам, которые сопровождают интеграцию. Если внешняя система передаёт XML с другими именами элементов, настройте их сопоставление с атрибутами сообщения.</p>
+</div>
+<h2 class="pageBreakBefore" id="adapter_data_import_connection">Настройка подключения</h2>
+<ol class="colored_numbers_list">
+<li>Откройте страницу «<strong>Администрирование</strong>» — «<strong>Инфраструктура</strong>» — «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5303"><strong>Подключения</strong></a>».</li>
+<li>Создайте подключение типа «<strong>Пользовательские подключения</strong>» — «<strong>DataImport Platform Adapter</strong>».</li>
+<li>
+<p>Настройте свойства подключения:</p>
+<ul>
+<li><strong>Системное имя</strong> — введите уникальное системное имя подключения, например <code>platform_receive_requests_connection</code>.
+    Не должно начинаться с цифры. Разрешены английские и русские буквы, цифры и символ «_». Рекомендуется использовать английские буквы.</li>
+<li><strong>Отключить</strong> — установите этот флажок, если требуется временно отключить подключение.</li>
+<li><strong>Описание</strong> — введите наглядное описание подключения, например <em>«Получение заявок из внешней системы»</em>.</li>
+<li><strong>Запись в файловые журналы</strong> — выберите режим записи сведений о работе подключения:<ul>
+<li><strong>Полные сведения об обработке сообщения</strong>;</li>
+<li><strong>Только ошибки</strong>;</li>
+<li><strong>Отключить</strong>.</li>
+</ul>
+</li>
+<li><strong>Порт</strong> — укажите порт, на котором адаптер будет принимать HTTP-запросы, например <code>8085</code>.</li>
+<li><strong>Имя пользователя</strong> — укажите имя пользователя для Basic-аутентификации.</li>
+<li><strong>Пароль</strong> — укажите пароль для Basic-аутентификации.</li>
+</ul>
+</li>
+<li>
+<p>Сохраните подключение.</p>
+</li>
+<li>Нажмите кнопку «<strong>Проверить соединение</strong>».</li>
+</ol>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>Порт адаптера должен быть доступен для внешней системы и не должен совпадать с портом сервера <strong>Comindware Platform</strong>.</p>
+</div>
+<h2 class="pageBreakBefore" id="adapter_data_import_route">Настройка пути передачи данных</h2>
+<ol class="colored_numbers_list">
+<li>Откройте страницу «<strong>Администрирование</strong>» — «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5302"><strong>Пути передачи данных</strong></a>».</li>
+<li>Создайте путь передачи данных типа «<strong>Пользовательские подключения</strong>» — «<strong>DataImport Platform Adapter</strong>».</li>
+<li>
+<p>На вкладке «<strong>Основные свойства</strong>» настройте параметры:</p>
+<ul>
+<li><strong>Подключение</strong> — выберите <a class="mkdocs_imported_link" href="#adapter_data_import_connection">подключение адаптера импорта данных</a>.</li>
+<li><strong>Системное имя</strong> — введите уникальное системное имя пути передачи данных, например <code>platform_receive_requests_route</code>.
+    Не должно начинаться с цифры. Разрешены английские и русские буквы, цифры и символ «_». Рекомендуется использовать английские буквы.</li>
+<li><strong>Отключить</strong> — установите этот флажок, если требуется временно отключить путь передачи данных.</li>
+<li><strong>Описание</strong> — введите наглядное описание пути передачи данных, например <em>«Получение заявок по HTTP»</em>.</li>
+<li><strong>Номер шины данных</strong> — выберите номер от 0 до 3, если требуется распределить потоки данных нескольких путей для повышения производительности.</li>
+</ul>
+</li>
+<li>
+<p>На вкладке «<strong>Атрибуты сообщений</strong>» настройте сопоставление полей сообщения с атрибутами шаблона записи.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Если системные имена полей запроса совпадают с системными именами атрибутов шаблона, <strong>Comindware Platform</strong> сопоставит их автоматически. Для явного сопоставления используйте альтернативные названия атрибутов.</p>
+</div>
+</li>
+<li>
+<p>На вкладке «<strong>Интеграция</strong>» настройте параметры HTTP-запроса:</p>
+<ul>
+<li><strong>Шаблон пути запроса</strong> — укажите путь URI без начального слеша, например <code>requests</code>.</li>
+<li><strong>Метод запроса</strong> — укажите HTTP-метод, например <code>POST</code>.</li>
+</ul>
+</li>
+<li>
+<p>Сохраните путь передачи данных.</p>
+</li>
+</ol>
+<p>Итоговый адрес для внешней системы:</p>
+<div class="highlight"><code><pre><span></span><code>http://&lt;serverHost&gt;:&lt;port&gt;/&lt;requestPath&gt;</code> <br/></pre></code></div>
+<p>Например:</p>
+<div class="highlight"><code><pre><span></span><code>http://&lt;your-host&gt;:8085/requests</code> <br/></pre></code></div>
+<h2 class="pageBreakBefore" id="adapter_data_import_scenario">Настройка сценария</h2>
+<p>Для обработки полученных данных настройте сценарий со стартовым событием «<strong>Получение сообщения</strong>».</p>
+<ol class="colored_numbers_list">
+<li>Откройте страницу администрирования приложения.</li>
+<li>Выберите пункт «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5654"><strong>Сценарии</strong></a>».</li>
+<li>Создайте сценарий, например <em>«Импорт заявок»</em>.</li>
+<li>
+<p>Настройте свойства сценария:</p>
+<ul>
+<li><strong>Контекст выполнения</strong> — выберите подходящий контекст выполнения, например «<strong>От инициатора</strong>».</li>
+<li><strong>Статус</strong> — на время настройки выберите «<strong>Приостановлен</strong>», после проверки сценария выберите «<strong>Активен</strong>».</li>
+</ul>
+</li>
+<li>
+<p>В конструкторе сценария настройте стартовое событие:</p>
+<ul>
+<li><strong>Тип</strong> — «<strong>Получение сообщения</strong>».</li>
+<li><strong>Контекстный шаблон</strong> — выберите шаблон записи, в который требуется импортировать данные.</li>
+<li><strong>Подключение</strong> — выберите <a class="mkdocs_imported_link" href="#adapter_data_import_connection">подключение адаптера импорта данных</a>.</li>
+<li><strong>Путь передачи данных</strong> — выберите <a class="mkdocs_imported_link" href="#adapter_data_import_route">путь передачи данных адаптера импорта данных</a>.</li>
+<li><strong>Имя переменной</strong> — укажите переменную для полученного сообщения, например <code>importDataMessage</code>.</li>
+</ul>
+</li>
+<li>
+<p>Добавьте действия для создания или обновления записей на основе полученного сообщения.</p>
+</li>
+<li>Сохраните и активируйте сценарий.</li>
+</ol>
+<h2 class="pageBreakBefore" id="adapter_data_import_test">Проверка работы адаптера</h2>
+<p>Отправьте тестовый HTTP-запрос с Basic-аутентификацией:</p>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"http://&lt;your-host&gt;:8085/requests"</span><span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">    </span>-u<span class="w"> </span><span class="s2">"test_user:test_password"</span><span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">    </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/xml"</span><span class="w"> </span><span class="se">\</span></code> <br/><code><span class="w">    </span>--data-binary<span class="w"> </span><span class="s2">"@request.xml"</span></code> <br/></pre></code></div>
+<p>При успешном получении запроса адаптер вернёт ответ <code>202 Accepted</code>.</p>
+<h2 id="adapter_data_import_limitations">Ограничения</h2>
+<ul>
+<li>Адаптер начинает принимать и обрабатывать HTTP-запросы только после создания и включения подключения и пути передачи данных.</li>
+<li>HTTP-запросы, отправленные до запуска адаптера или во время отключения подключения либо пути передачи данных, не сохраняются и не обрабатываются после включения.</li>
+<li>Передача документов в описанном сценарии не поддерживается.</li>
+<li>Для интеграции с внешней системой и сопоставления нестандартной структуры XML со структурой шаблонов можно разработать пользовательский адаптер. На уровне адаптера можно разобрать входящий запрос, выполнить маппинг и использовать механизм DataImport.</li>
+</ul>
+<p>Для использования механизма DataImport в пользовательском адаптере добавьте в файл <code>Adapter.cs</code> следующий метод:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="n">PerformerType</span><span class="w"> </span><span class="nf">GetPerformerType</span><span class="p">()</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">PerformerType</span><span class="p">.</span><span class="n">DataImport</span><span class="p">;</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<h2 id="adapter_data_import_troubleshooting">Диагностика</h2>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Симптом</th>
+<th>Возможная причина</th>
+<th>Решение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>401 Unauthorized</code></td>
+<td>Неверные имя пользователя или пароль</td>
+<td>Проверьте учётные данные в подключении и HTTP-запросе</td>
+</tr>
+<tr>
+<td><code>405 Method Not Allowed</code></td>
+<td>Метод запроса не совпадает с настройкой пути передачи данных</td>
+<td>Проверьте поле «<strong>Метод запроса</strong>»</td>
+</tr>
+<tr>
+<td><code>404 Route not found</code></td>
+<td>Путь запроса не совпадает с настройкой пути передачи данных</td>
+<td>Проверьте поле «<strong>Шаблон пути запроса</strong>»</td>
+</tr>
+<tr>
+<td><code>400 Bad Request</code></td>
+<td>Пустое тело запроса или ошибка XML</td>
+<td>Проверьте XML-запрос и журнал адаптера</td>
+</tr>
+</tbody>
+</table>
+<p>Для подробной диагностики просмотрите журналы адаптера и события получения сообщений. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5614">Журналы событий. Типы, просмотр, цепочки событий</a>»</em>.</p>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5615">Адаптеры. Определения, настройка, удаление</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5303">Подключения. Определения, типы, создание, настройка, удаление</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5302">Пути передачи данных</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5654">Сценарии</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5614">Журналы событий. Типы, просмотр, цепочки событий</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5635">Получение сообщений через Apache Kafka</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5744">Адаптер экспорта данных из платформы. Настройка подключения, пути передачи данных и сценария</a></em></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>
