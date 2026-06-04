@@ -2,7 +2,7 @@
 title: 'Восстановление базы данных из полной резервной копии'
 kbId: 5575
 url: 'https://kb.comindware.ru/article.php?id=5575'
-updated: '2026-01-29 18:26:44'
+updated: '2026-06-01 13:42:35'
 ---
 
 # Восстановление базы данных из полной резервной копии
@@ -46,8 +46,8 @@ updated: '2026-01-29 18:26:44'
 2. Перед тем как выполнять любые действия с файлами ПО и базы данных, остановите экземпляр ПО и его вспомогательные службы и удостоверьтесь, что они остановлены:
 
    ```
-   systemctl stop elasticsearch nginx kafka comindware<instancename>
-   systemctl status elasticsearch nginx kafka comindware<instancename>
+   systemctl stop opensearch nginx kafka comindware<instancename>
+   systemctl status opensearch nginx kafka comindware<instancename>
    ```
 
    Здесь `<instancename>` — имя экземпляра ПО.
@@ -89,9 +89,7 @@ updated: '2026-01-29 18:26:44'
      - `snapshots` — снимок данных Apache Ignite.
      - `wal` — журнал предварительной записи.
      - `elastic` — копия репозитория OpenSearch (Elasticsearch).
-     - `Streams` — загруженные пользователями и сформированные системой файлы, которые прикреплены к соответствующим атрибутам.
-
-   ![Структура резервной копии](https://kb.comindware.ru/assets/Pasted image 20230125134843.png)
+     - `Streams` — загруженные пользователями и сформированные системой файлы, которые прикреплены к соответствующим атрибутам.![Структура резервной копии](https://kb.comindware.ru/assets/Pasted image 20230125134843.png)
 
    Структура резервной копии
 4. Перенесите снимок данных Apache Ignite (в примере — содержимое директории `/tmp/backup_2023_01_23_10_17/Database/snapshots/snapshot_2023_01_23_10_17/`) в рабочую директорию Apache Ignite (`/var/www/comindware/data/Database/`):
@@ -143,23 +141,23 @@ updated: '2026-01-29 18:26:44'
 1. Создайте директорию репозитория OpenSearch (Elasticsearch) и перенесите в неё файлы из резервной копии:
 
    ```
-   mkdir /var/www/backups/elasticsearch/
-   mv elastic/* /var/www/backups/elasticsearch/
+   mkdir /var/www/backups/opensearch/
+   mv opensearch/* /var/www/backups/opensearch/
    ```
 2. Назначьте папке репозитория и её содержимому права `rwxr-xr-x`:
 
    ```
    chmod -R 755 /var/www/backups/
    ```
-3. Назначьте владельца `elasticsearch` директории репозитория и её содержимому:
+3. Назначьте владельца `opensearch` директории репозитория и её содержимому:
 
    ```
-   chown -R elasticsearch:elasticsearch /var/www/backups/
+   chown -R opensearch:opensearch /var/www/backups/
    ```
-4. В файле конфигурации `elasticsearch.yml` с помощью директивы `path.repo: /var/www/backups/elasticsearch` укажите путь к созданному репозиторию (например, с помощью редактора `nano`):
+4. В файле конфигурации `opensearch.yml` с помощью директивы `path.repo: /var/www/backups/opensearch` укажите путь к созданному репозиторию (например, с помощью редактора `nano`):
 
    ```
-   nano /etc/elasticsearch/elasticsearch.yml
+   nano /etc/opensearch/opensearch.yml
    ```
 
    ![Путь к репозиторию в файле конфигурации OpenSearch (Elasticsearch)](https://kb.comindware.ru/assets/Pasted image 20230125204737.png)
@@ -168,22 +166,22 @@ updated: '2026-01-29 18:26:44'
 5. Запустите службу OpenSearch (Elasticsearch):
 
    ```
-   systemctl start elasticsearch.service
+   systemctl start opensearch
    ```
 6. Зарегистрируйте новый репозиторий снимков OpenSearch (Elasticsearch):
 
    ```
-   curl -X PUT "<openSearchHost>:<opeSearchPort>/_snapshot/elastic_snap?pretty" -H 'Content-Type: application/json' -d' {"type": "fs", "settings": {"location": "/var/www/backups/elasticsearch"}}'
+   curl -X PUT "<openSearchHost>:<opeSearchPort>/_snapshot/opensearch_snap?pretty" -H 'Content-Type: application/json' -d' {"type": "fs", "settings": {"location": "/var/www/backups/opensearch"}}'
    ```
 7. Проверьте содержимое зарегистрированного репозитория:
 
    ```
-   curl -X GET "<openSearchHost>:<opeSearchPort>/_cat/snapshots/elastic_snap?pretty"
+   curl -X GET "<openSearchHost>:<opeSearchPort>/_cat/snapshots/opensearch_snap?pretty"
    ```
 8. Выберите необходимый снимок и восстановите состояние OpenSearch (Elasticsearch):
 
    ```
-   curl -X POST "<openSearchHost>:<opeSearchPort>/_snapshot/elastic_snap/snapshot2023_01_23_10_17/_restore?pretty"
+   curl -X POST "<openSearchHost>:<opeSearchPort>/_snapshot/opensearch_snap/snapshot2023_01_23_10_17/_restore?pretty"
    ```
 9. Проверьте наличие индексов в восстановленном каталоге:
 
@@ -198,8 +196,8 @@ _![Отображение списка индексов OpenSearch (Elasticsearc
 1. Запустите необходимые службы и проверьте их статус:
 
    ```
-   systemctl start elasticsearch kafka nginx comindware<instancename>
-   systemctl status elasticsearch kafka nginx comindware<instancename>
+   systemctl start opensearch kafka nginx comindware<instancename>
+   systemctl status opensearch kafka nginx comindware<instancename>
    ```
 2. Откройте в браузере веб-сайт с экземпляром ПО.
 3. Дождитесь инициализации экземпляра ПО. Этот процесс может занять некоторое время. Может потребоваться обновить страницу браузера.

@@ -2,7 +2,7 @@
 title: 'Ручной перенос базы данных экземпляра ПО'
 kbId: 5574
 url: 'https://kb.comindware.ru/article.php?id=5574'
-updated: '2026-01-29 18:25:58'
+updated: '2026-06-01 13:42:33'
 ---
 
 # Ручной перенос базы данных экземпляра ПО
@@ -102,7 +102,7 @@ updated: '2026-01-29 18:25:58'
 12. Запустите созданный скрипт из папки `/tmp/`:
 
     ```
-    sh snapshot.sh
+    bash snapshot.sh
     ```
 
     ![Запуск скрипта создания снимка](https://kb.comindware.ru/assets/img_63567b113131e.png)
@@ -149,12 +149,12 @@ updated: '2026-01-29 18:25:58'
 4. Остановите сервисы:
 
    ```
-   systemctl stop elasticsearch.service comindware<instanceName>.service nginx.service kafka.service zookeeper.service
+   systemctl stop opensearch.service comindware<instanceName>.service nginx.service kafka.service zookeeper.service
    ```
 5. Убедитесь, что сервисы остановлены. Статус должен быть `Active: inactive (dead)`:
 
    ```
-   systemctl status zookeeper.service kafka.service nginx.service comindware<instanceName>.service elasticsearch.service
+   systemctl status zookeeper.service kafka.service nginx.service comindware<instanceName>.service opensearch.service
    ```
 
    ![Проверка остановки сервисов OpenSearch (Elasticsearch), comindware<instanceName>, NGINX, Kafka и Zookeeper](https://kb.comindware.ru/assets/img_63567da91a5c6.png)
@@ -237,8 +237,8 @@ updated: '2026-01-29 18:25:58'
 1. Запустите необходимые службы и проверьте их статус. Статус должен быть `Active: running`:
 
    ```
-   systemctl start elasticsearch kafka nginx comindware<instanceName>
-   systemctl status elasticsearch kafka nginx comindware<instanceName>
+   systemctl start opensearch kafka nginx comindware<instanceName>
+   systemctl status opensearch kafka nginx comindware<instanceName>
    ```
 
    ![Проверка активного состояния сервисов](https://kb.comindware.ru/assets/img_635680edb9d1d.png)

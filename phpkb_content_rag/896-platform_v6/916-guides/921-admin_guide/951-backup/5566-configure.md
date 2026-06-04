@@ -2,7 +2,7 @@
 title: 'Резервное копирование. Настройка, запуск и просмотр журнала сеансов'
 kbId: 5566
 url: 'https://kb.comindware.ru/article.php?id=5566'
-updated: '2026-01-29 18:28:05'
+updated: '2026-06-01 13:42:29'
 ---
 
 # Резервное копирование. Настройка, запуск и просмотр журнала сеансов
@@ -65,12 +65,23 @@ updated: '2026-01-29 18:28:05'
 
 Эти инструкции следует выполнять на машине (сервере) с экземпляром ПО **Comindware Platform**.
 
-1. Создайте директорию, в которой будут сохраняться резервные копии. Для этой директории предоставьте разрешения на полный доступ, чтобы система могла сохранять в неё резервные копии, например:
+1. Перейдите в режим суперпользователя:
+
+   ```
+   sudo -s
+   ```
+
+   или
+
+   ```
+   su -
+   ```
+2. Создайте директорию, в которой будут сохраняться резервные копии. Для этой директории предоставьте разрешения на полный доступ, чтобы система могла сохранять в неё резервные копии, например:
 
    **Astra Linux, Debian, DEB-дистрибутивы**
 
    ```
-   mkdir /var/backups/comindware/<instanceName>
+   mkdir -p /var/backups/comindware/<instanceName>
    chmod 777 /var/backups/comindware/<instanceName>
    chown -R www-data:www-data /var/backups/comindware/<instanceName>
    ```
@@ -78,7 +89,7 @@ updated: '2026-01-29 18:28:05'
    **РЕД ОС, RPM-дистрибутивы**
 
    ```
-   mkdir /var/backups/comindware/<instanceName>
+   mkdir -p /var/backups/comindware/<instanceName>
    chmod 777 /var/backups/comindware/<instanceName>
    chown -R nginx:nginx /var/backups/comindware/<instanceName>
    ```
@@ -86,7 +97,7 @@ updated: '2026-01-29 18:28:05'
    **Альт Сервер**
 
    ```
-   mkdir /var/backups/comindware/<instanceName>
+   mkdir -p /var/backups/comindware/<instanceName>
    chmod 777 /var/backups/comindware/<instanceName>
    chown -R _nginx:_nginx /var/backups/comindware/<instanceName>
    ```
@@ -96,8 +107,8 @@ updated: '2026-01-29 18:28:05'
    **Windows**
 
    В Windows заранее создавать директорию для резервных копий и настраивать права доступа к ней не требуется. Экземпляр ПО сам создаст директорию, указанную в конфигурации резервного копирования. См. *«[Настройка конфигураций и запуск резервного копирования](#backup_configure_list_view)»*.
-2. Откройте для редактирования файл конфигурации экземпляра ПО (`<instanceName>.yml`). См. *«[Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=5561)»*.
-3. Настройте используемые по умолчанию путь и имя файла резервной копии. Заданные в этих директивах параметры используются по умолчанию при создании конфигураций резервного копирования:
+3. Откройте для редактирования файл конфигурации экземпляра ПО (`<instanceName>.yml`). См. *«[Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=5561)»*.
+4. Настройте используемые по умолчанию путь и имя файла резервной копии. Заданные в этих директивах параметры используются по умолчанию при создании конфигураций резервного копирования:
 
    ```
    #################### Конфигурация резервного копирования ####################
@@ -111,9 +122,9 @@ updated: '2026-01-29 18:28:05'
    # Backup.202202161625.cdbbz
    backup.defaultFileName: Backup
    ```
-4. Перезапустите **Comindware Platform**.
-5. При необходимости настройте [резервное копирование данных OpenSearch (Elasticsearch) на диск](#backup_configure_elasticsearch_s3).
-6. Настройте конфигурацию резервного копирования на диск c помощью *«[списка конфигураций резервного копирования](#backup_configure_list_view)»*.
+5. Перезапустите **Comindware Platform**.
+6. При необходимости настройте [резервное копирование данных OpenSearch (Elasticsearch) на диск](#backup_configure_elasticsearch_s3).
+7. Настройте конфигурацию резервного копирования на диск c помощью *«[списка конфигураций резервного копирования](#backup_configure_list_view)»*.
 
 ### Настройка экземпляра ПО Comindware Platform для хранения резервных копий в S3
 
@@ -232,25 +243,25 @@ updated: '2026-01-29 18:28:05'
 - Содержимое этой директории будет скопировано в директорию `History` внутри файла `.CDBBZ` с резервной копией **Comindware Platform**.
 
 1. Перейдите к настройке машины, на которой развёрнута служба OpenSearch (Elasticsearch).
-2. Откройте для редактирования файл конфигурации OpenSearch (Elasticsearch) `/etc/elasticsearch/elasticsearch.yml`.
+2. Откройте для редактирования файл конфигурации OpenSearch (Elasticsearch) `/etc/opensearch/opensearch.yml`.
 3. Укажите путь к репозиторию резервных копий, например:
 
    ```
    # Директория репозитория должна быть доступна Comindware Platform.
    # Внутри этой директории будет создана директория,
    # имя которой будет совпадать с префиксом индекса OpenSearch (Elasticsearch).
-   path.repo: /var/backups/elasticsearch
+   path.repo: /var/backups/opensearch
    ```
 4. Предоставьте доступ OpenSearch (Elasticsearch) к репозиторию резервных копий:
 
    ```
-   chmod -R 777 /var/backups/elasticsearch
-   chown -R elasticsearch:elasticsearch /var/backups/elasticsearch
+   chmod -R 777 /var/backups/opensearch
+   chown -R opensearch:opensearch /var/backups/opensearch
    ```
 5. Перезапустите службу OpenSearch (Elasticsearch):
 
    ```
-   systemctl restart elasticsearch
+   systemctl restart opensearch.service
    ```
 6. Перейдите к настройке машины с экземпляром ПО **Comindware Platform**.
 7. Откройте для редактирования файл конфигурации `<instanceName>.yml`. См. *«[Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=5561)»*.
@@ -260,18 +271,18 @@ updated: '2026-01-29 18:28:05'
    # Тип хранилища резервных копий OpenSearch (Elasticsearch) (LocalDisk | S3)
    backup.journalRepository.type: LocalDisk
    # Путь к файлам резервных копий.
-   # Укажите директорию из директивы path.repo файла elasticsearch.yml
+   # Укажите директорию из директивы path.repo файла opensearch.yml
    # Репозиторий резервной копии OpenSearch (Elasticsearch) из этой директории
    # будет скопирован в директорию History
    # внутри файла .CDBBZ резервной копии Comindware Platform
-   backup.journalRepository.localDisk.path: /var/backups/elasticsearch
+   backup.journalRepository.localDisk.path: /var/backups/opensearch
    ```
 
    Внимание!
 
    - Если OpenSearch (Elasticsearch) и **Comindware Platform** работают на одной машине, в директивах `path.repo` и `backup.journalRepository.localDisk.path` следует указать один и тот же путь.
    - Если OpenSearch (Elasticsearch) и **Comindware Platform** работают на разных машинах, необходимо:
-     1. Директорию, указанную в директиве `path.repo` в файле `elasticsearch.yml`, сделать доступной для **Comindware Platform** через сеть.
+     1. Директорию, указанную в директиве `path.repo` в файле `opensearch.yml`, сделать доступной для **Comindware Platform** через сеть.
      2. Примонтировать общую директорию на машине с **Comindware Platform**.
      3. Указать примонтированную директорию в директиве `backup.journalRepository.localDisk.path` в файле `<instanceName>.yml`.
 9. Перезапустите экземпляр **Comindware Platform**:
@@ -301,11 +312,11 @@ updated: '2026-01-29 18:28:05'
 Внимание!
 
 - Для корректного резервного копирования данных истории в хранилище S3 необходимо настроить конфигурацию службы OpenSearch (Elasticsearch) и экземпляра ПО **Comindware Platform** так, чтобы они использовали общую корзину:
-- В файлах конфигурации `elasticsearch.yml` и `<instanceName>.yml` необходимо настройте подключение одному и тому же хранилищу S3.
+- В файлах конфигурации `opensearch.yml` и `<instanceName>.yml` необходимо настройте подключение одному и тому же хранилищу S3.
 - В директивах `path.repo` и `backup.journalRepository.localDisk.path` укажите одну и ту же корзину
 
 1. Перейдите к настройке машины, на которой развёрнута служба OpenSearch (Elasticsearch).
-2. Откройте для редактирования файл конфигурации OpenSearch (Elasticsearch) `/etc/elasticsearch/elasticsearch.yml`.
+2. Откройте для редактирования файл конфигурации OpenSearch (Elasticsearch) `/etc/opensearch/opensearch.yml`.
 3. Настройте подключение к хранилищу S3 для репозитория резервных копий, например:
 
    ```
@@ -321,7 +332,7 @@ updated: '2026-01-29 18:28:05'
 4. Перезапустите службу OpenSearch (Elasticsearch):
 
    ```
-   systemctl restart elasticsearch
+   systemctl restart opensearch.service
    ```
 5. Перейдите к настройке машины с экземпляром ПО **Comindware Platform**.
 6. Откройте для редактирования файл конфигурации `<instanceName>.yml`.

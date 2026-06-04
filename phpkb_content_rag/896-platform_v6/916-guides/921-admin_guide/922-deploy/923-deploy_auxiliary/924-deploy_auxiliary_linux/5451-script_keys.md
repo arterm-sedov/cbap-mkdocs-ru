@@ -2,7 +2,7 @@
 title: 'Установочные скрипты. Назначение и ключи'
 kbId: 5451
 url: 'https://kb.comindware.ru/article.php?id=5451'
-updated: '2025-07-29 13:07:47'
+updated: '2026-06-01 13:42:49'
 ---
 
 # Установочные скрипты. Назначение и ключи
@@ -42,7 +42,7 @@ bash prerequisites_install.sh -h
 ```
 
 ```
-.\instance_upgrade.ps1 -h
+.\\instance_upgrade.ps1 -h
 ```
 
 Далее ключ `-h` повторно не упоминается, так как он действует одинаково для всех скриптов.
@@ -69,7 +69,7 @@ bash prerequisites_install.sh -h
 Скрипты для установки вспомогательного ПО расположены в следующей директории распакованного дистрибутива вспомогательного ПО:
 
 - **Linux:** `X.X-release-ru-<versionNumber>.prerequisites.<osname>/CMW_<osname>/scripts`
-- **Windows:** `X.X-release-ru-<versionNumber>.prerequisites.Windows\CMW_Windows<versionNumber>\scripts`
+- **Windows:** `X.X-release-ru-<versionNumber>.prerequisites.Windows\\CMW_Windows<versionNumber>\\scripts`
 
 ### Скрипты для Linux и Windows
 
@@ -92,14 +92,14 @@ bash prerequisites_install.sh -h
   **Пример:**
 
   ```
-  sh prerequisites_install.sh -p -d -k
+  bash prerequisites_install.sh -p -d -k
   ```
 - **Windows**
 
   - Используйте скрипт без ключей:
 
   ```
-  .\prerequisites_install.ps1
+  .\\prerequisites_install.ps1
   ```
 
 #### `prerequisites_list`
@@ -135,7 +135,7 @@ bash prerequisites_install.sh -h
 **Пример:**
 
 ```
-.\files_unblock.ps1 -path С:\Downloads\prerequisites
+.\\files_unblock.ps1 -path С:\\Downloads\\prerequisites
 ```
 
 ### Скрипты только для Linux
@@ -163,7 +163,7 @@ bash prerequisites_uninstall.sh -d -j
 Скрипты для установки ПО **Comindware Platform** расположены в следующей директории с распакованным дистрибутивом **Comindware Platform**:
 
 - **Linux:** `X.X-release-ru-<versionNumber>.<osname>/CMW_<osname>_<versionNumber>/scripts`
-- **Windows:** `X.X-release-ru-<versionNumber>.Windows\CMW_Windows<versionNumber>\scripts`
+- **Windows:** `X.X-release-ru-<versionNumber>.Windows\\CMW_Windows<versionNumber>\\scripts`
 
 ### Кросс-платформенные скрипты
 
@@ -214,7 +214,7 @@ bash instance_check.sh my_company_instance
   **Пример:**
 
   ```
-  .\instance_create.ps1 -name my_company_instance -port 8080 -version 5.0.1234.0
+  .\\instance_create.ps1 -name my_company_instance -port 8080 -version 5.0.1234.0
   ```
 
 #### `instance_delete`
@@ -244,7 +244,7 @@ bash instance_check.sh my_company_instance
   **Пример:**
 
   ```
-  .\instance_delete.ps1 -name my_company_instance -clear
+  .\\instance_delete.ps1 -name my_company_instance -clear
   ```
 
 #### `instance_list`
@@ -267,7 +267,7 @@ bash instance_check.sh my_company_instance
   **Пример:**
 
   ```
-  bash instance_upgrade.sh -n=my_company_instance -vp=/comindware/6.0.1234.0
+  bash instance_upgrade.sh -n=my_company_instance -vp=/comindware/5.0.1234.0
   ```
 - **Windows**
 
@@ -278,7 +278,7 @@ bash instance_check.sh my_company_instance
   **Пример:**
 
   ```
-  .\instance_upgrade.ps1 -name my_company_instance -version 5.0.1234.0
+  .\\instance_upgrade.ps1 -name my_company_instance -version 5.0.1234.0
   ```
 
 #### `version_check`
@@ -304,7 +304,7 @@ bash instance_check.sh my_company_instance
   **Пример:**
 
   ```
-  sh version_delete.sh -v=5.0.1234.0
+  bash version_delete.sh -v=5.0.1234.0
   ```
 - **Windows**
 
@@ -313,7 +313,7 @@ bash instance_check.sh my_company_instance
   **Пример:**
 
   ```
-  .\version_delete.ps1 -version 5.0.1234.0
+  .\\version_delete.ps1 -version 5.0.1234.0
   ```
 
 #### `version_install`
@@ -347,7 +347,7 @@ bash instance_check.sh my_company_instance
 **Пример:**
 
 ```
-.\files_unblock.ps1 -path С:\Downloads\CMW
+.\\files_unblock.ps1 -path С:\\Downloads\\CMW
 ```
 
 #### `instance_restore_from_backup`
@@ -365,7 +365,7 @@ bash instance_check.sh my_company_instance
 **Пример:**
 
 ```
-.\instance_restore_from_backup.ps1 -zipPath C:\Documents\CMW_backup -dataPath C:\Documents\CMW\Database -streamsPath C:\Documents\CMW\Streams
+.\\instance_restore_from_backup.ps1 -zipPath C:\\Documents\\CMW_backup -dataPath C:\\Documents\\CMW\\Database -streamsPath C:\\Documents\\CMW\\Streams
 ```
 
 #### `instance_start`
@@ -379,7 +379,7 @@ bash instance_check.sh my_company_instance
 **Пример:**
 
 ```
-.\instance_start.ps1 -name my_company_instance
+.\\instance_start.ps1 -name my_company_instance
 ```
 
 #### `instance_stop`
@@ -393,7 +393,7 @@ bash instance_check.sh my_company_instance
 **Пример:**
 
 ```
-.\instance_stop.ps1 -name my_company_instance
+.\\instance_stop.ps1 -name my_company_instance
 ```
 
 ## Служебные скрипты

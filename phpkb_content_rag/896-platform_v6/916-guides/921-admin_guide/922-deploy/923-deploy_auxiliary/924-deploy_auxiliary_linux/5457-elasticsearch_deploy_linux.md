@@ -2,7 +2,7 @@
 title: 'Elasticsearch. Установка в базовой конфигурации'
 kbId: 5457
 url: 'https://kb.comindware.ru/article.php?id=5457'
-updated: '2026-01-26 18:43:50'
+updated: '2026-06-01 13:42:41'
 ---
 
 # Elasticsearch. Установка в базовой конфигурации
@@ -75,7 +75,7 @@ Elasticsearch создает значительную нагрузку на вы
 4. Установите Elasticsearch из дистрибутива с помощью ключа `-e`:
 
    ```
-   sh prerequisites_install.sh -e
+   bash prerequisites_install.sh -e
    ```
 5. После установки удостоверьтесь, что сервер Elasticsearch запущен и имеет статус `Active (running)`:
 

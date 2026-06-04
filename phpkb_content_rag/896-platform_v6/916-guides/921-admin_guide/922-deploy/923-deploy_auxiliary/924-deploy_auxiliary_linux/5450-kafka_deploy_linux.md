@@ -2,7 +2,7 @@
 title: 'Apache Kafka. Установка в базовой конфигурации'
 kbId: 5450
 url: 'https://kb.comindware.ru/article.php?id=5450'
-updated: '2025-10-27 17:56:56'
+updated: '2026-06-01 13:42:43'
 ---
 
 # Apache Kafka. Установка в базовой конфигурации
@@ -62,7 +62,7 @@ updated: '2025-10-27 17:56:56'
 4. Установите Kafka из дистрибутива с помощью ключа `-k`:
 
    ```
-   sh prerequisites_install.sh -k
+   bash prerequisites_install.sh -k
    ```
 5. Отредактируйте файл `/usr/share/kafka/config/kraft/server.properties` по следующему образцу:
 

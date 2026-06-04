@@ -2,7 +2,7 @@
 title: 'Установка, запуск, инициализация и остановка ПО'
 kbId: 5558
 url: 'https://kb.comindware.ru/article.php?id=5558'
-updated: '2026-01-29 18:11:31'
+updated: '2026-06-01 13:42:46'
 ---
 
 # Установка, запуск, инициализация и остановка ПО
@@ -43,14 +43,6 @@ updated: '2026-01-29 18:11:31'
 
 Прежде чем приступать к установке вспомогательного ПО, необходимого для работы **Comindware Platform**, ознакомьтесь с демонстрационным роликом и инструкциями, представленными ниже.
 
-### Видеоинструкция
-
-[Ссылка на видеоролик](https://kb.comindware.ru/platform/v6.0/administration/deploy/linux/img/deploy_guide_linux_auxiliary_software.mp4)
-
-[
-
-](https://kb.comindware.ru/platform/v6.0/administration/deploy/linux/img/deploy_guide_linux_auxiliary_software.mp4)
-
 ### Порядок установки вспомогательного ПО
 
 1. Перейдите в режим суперпользователя:
@@ -87,7 +79,7 @@ updated: '2026-01-29 18:11:31'
 4. Установите ПО из дистрибутива:
 
    ```
-   sh prerequisites_install.sh -p
+   bash prerequisites_install.sh -p
    ```
 
    Ключи скрипта `prerequisites_install.sh`:
@@ -111,7 +103,7 @@ updated: '2026-01-29 18:11:31'
    Для ознакомления с ключами и назначением любого скрипта используйте ключ `-h` без каких-либо других ключей, например:
 
    ```
-   sh prerequisites_install.sh -h
+   bash prerequisites_install.sh -h
    ```
 5. По окончании установки скрипт выведет информацию об установленных компонентах. Удостоверьтесь, что компоненты успешно установлены (имеют статус `OK`).
 
@@ -142,21 +134,13 @@ updated: '2026-01-29 18:11:31'
 6. Удостоверьтесь, что компоненты установлены:
 
    ```
-   sh prerequisites_list.sh
+   bash prerequisites_list.sh
    ```
 7. При необходимости установите недостающие необходимые компоненты, запустив скрипт с соответствующими флагами.
 
 ## Установка ПО Comindware Platform
 
 Прежде чем приступать к установке ПО **Comindware Platform**, ознакомьтесь с видеороликом и инструкциями, представленными ниже.
-
-### Видеоинструкция
-
-[Ссылка на видеоролик](https://kb.comindware.ru/platform/v6.0/administration/deploy/linux/img/deploy_guide_linux_software.mp4)
-
-[
-
-](https://kb.comindware.ru/platform/v6.0/administration/deploy/linux/img/deploy_guide_linux_software.mp4)
 
 ### Порядок установки ПО Comindware Platform
 
@@ -194,7 +178,7 @@ updated: '2026-01-29 18:11:31'
 4. Установите ПО из дистрибутива:
 
    ```
-   sh version_install.sh
+   bash version_install.sh
    ```
 
    Если отобразится запрос на перезагрузку ОС
@@ -212,20 +196,12 @@ updated: '2026-01-29 18:11:31'
 6. Удостоверьтесь, что ПО установлено, просмотрев список установленных версий ПО:
 
    ```
-   sh version_list.sh
+   bash version_list.sh
    ```
 
 ## Создание экземпляра ПО
 
 Прежде чем приступать к установке экземпляра ПО **Comindware Platform**, ознакомьтесь с видеороликом и инструкциями, представленными ниже.
-
-### Видеоинструкция
-
-[Ссылка на видеоролик](https://kb.comindware.ru/platform/v6.0/administration/deploy/linux/img/deploy_guide_linux_instance.mp4)
-
-[
-
-](https://kb.comindware.ru/platform/v6.0/administration/deploy/linux/img/deploy_guide_linux_instance.mp4)
 
 ### Подготовка к созданию экземпляра ПО
 
@@ -247,7 +223,7 @@ updated: '2026-01-29 18:11:31'
    ```
    nano /etc/security/limits.conf
    ```
-3. Установите следующие директивы:
+3. Установите следующие директивы, чтобы задать лимиты ресурсов для аккаунта сервера:
 
    - **Astra Linux, Debian, DEB-дистрибутивы**
 
@@ -280,7 +256,7 @@ updated: '2026-01-29 18:11:31'
    ```
    nano /etc/pam.d/common-session
    ```
-5. Установите следующую директиву:
+5. Установите следующую директиву, чтобы применить заданные лимиты:
 
    ```
    session required pam_limits.so
@@ -353,13 +329,13 @@ updated: '2026-01-29 18:11:31'
 3. Разверните экземпляр ПО:
 
    ```
-   sh instance_create.sh -n=<instanceName> -v=<versionNumber> [-p=<portNumber>]
+   bash instance_create.sh -n=<instanceName> -v=<versionNumber> [-p=<portNumber>]
    ```
 
    Ключи скрипта `instance_create.sh`:
 
    - `-n=<instanceName>` — имя экземпляра ПО (**обязательный** ключ).
-   - `-v=<versionNumber>` — номер версии ПО вида `X.X.XXXXX.X` (например: 6.0.00000.0, **обязательный** ключ). Версия должна быть установлена, см. *«[Установка Comindware Platform](#deploy_guide_linux_install_sw)»*.
+   - `-v=<versionNumber>` — номер версии ПО вида `X.X.XXXXX.X` (например: 5.0.00000.0, **обязательный** ключ). Версия должна быть установлена, см. *«[Установка Comindware Platform](#deploy_guide_linux_install_sw)»*.
    - `-p=<portNumber>` — порт для экземпляра ПО, по умолчанию: 80 (необязательный ключ).
    - `-fqdn=<hostName>` или `--instance-fqdn=<hostName>` — имя хоста для экземпляра ПО (необязательный ключ). По умолчанию: localhost.
    - `-el=<hostName>` или `--elasticsearch-url=<hostName>` — использовать указанный URL или IP-адрес для подключения к серверу OpenSearch (Elasticsearch).
@@ -397,19 +373,19 @@ updated: '2026-01-29 18:11:31'
    ```
    ls -lhF /var/www/<instanceName>/
    ```
-6. По выводу команды `ls` удостоверьтесь, что в путях указана корректная версия ПО, например `6.0.0000.0`:
+6. По выводу команды `ls` удостоверьтесь, что в путях указана корректная версия ПО, например `5.0.0000.0`:
 
    ```
-   lrwxrwxrwx. 1 nginx nginx   36 Oct 11 17:54 bin -> /var/www/.cmw_version/6.0.0000.0/bin/
-   lrwxrwxrwx. 1 nginx nginx   41 Oct 11 17:54 compiled -> /var/www/.cmw_version/6.0.0000.0/compiled/
-   lrwxrwxrwx. 1 nginx nginx   37 Oct 11 17:54 data -> /var/www/.cmw_version/6.0.0000.0/data/
-   lrwxrwxrwx. 1 nginx nginx   44 Oct 11 17:54 favicon.ico -> /var/www/.cmw_version/6.0.0000.0/favicon.ico
-   lrwxrwxrwx. 1 nginx nginx   44 Oct 11 17:54 Global.asax -> /var/www/.cmw_version/6.0.0000.0/Global.asax
-   lrwxrwxrwx. 1 nginx nginx   39 Oct 11 17:54 mobile -> /var/www/.cmw_version/6.0.0000.0/mobile/
-   lrwxrwxrwx. 1 nginx nginx   46 Oct 11 17:54 redirect.aspx -> /var/www/.cmw_version/6.0.0000.0/redirect.aspx
-   lrwxrwxrwx. 1 nginx nginx   42 Oct 11 17:54 resources -> /var/www/.cmw_version/6.0.0000.0/resources/
-   lrwxrwxrwx. 1 nginx nginx   43 Oct 11 17:54 robots.txt -> /var/www/.cmw_version/6.0.0000.0/robots.txt
-   lrwxrwxrwx. 1 nginx nginx   45 Oct 11 17:54 unauthorized -> /var/www/.cmw_version/6.0.0000.0/unauthorized/
+   lrwxrwxrwx. 1 nginx nginx   36 Oct 11 17:54 bin -> /var/www/.cmw_version/5.0.0000.0/bin/
+   lrwxrwxrwx. 1 nginx nginx   41 Oct 11 17:54 compiled -> /var/www/.cmw_version/5.0.0000.0/compiled/
+   lrwxrwxrwx. 1 nginx nginx   37 Oct 11 17:54 data -> /var/www/.cmw_version/5.0.0000.0/data/
+   lrwxrwxrwx. 1 nginx nginx   44 Oct 11 17:54 favicon.ico -> /var/www/.cmw_version/5.0.0000.0/favicon.ico
+   lrwxrwxrwx. 1 nginx nginx   44 Oct 11 17:54 Global.asax -> /var/www/.cmw_version/5.0.0000.0/Global.asax
+   lrwxrwxrwx. 1 nginx nginx   39 Oct 11 17:54 mobile -> /var/www/.cmw_version/5.0.0000.0/mobile/
+   lrwxrwxrwx. 1 nginx nginx   46 Oct 11 17:54 redirect.aspx -> /var/www/.cmw_version/5.0.0000.0/redirect.aspx
+   lrwxrwxrwx. 1 nginx nginx   42 Oct 11 17:54 resources -> /var/www/.cmw_version/5.0.0000.0/resources/
+   lrwxrwxrwx. 1 nginx nginx   43 Oct 11 17:54 robots.txt -> /var/www/.cmw_version/5.0.0000.0/robots.txt
+   lrwxrwxrwx. 1 nginx nginx   45 Oct 11 17:54 unauthorized -> /var/www/.cmw_version/5.0.0000.0/unauthorized/
    ```
 
 ### Создание дополнительного экземпляра ПО
@@ -460,7 +436,7 @@ updated: '2026-01-29 18:11:31'
 
    ```
    nano /usr/lib/systemd/system/kafka.service
-   nano /usr/lib/systemd/system/elasticsearch.service
+   nano /usr/lib/systemd/system/opensearch.service
    ```
 8. В каждом файле службы установите следующие директивы:
 
@@ -640,14 +616,6 @@ mmap(PROT_NONE) failed
 
 Прежде чем приступать к удалению версии и экземпляра ПО **Comindware Platform**, ознакомьтесь с видеороликом и инструкциями, представленными ниже.
 
-### Видеоинструкция
-
-[Ссылка на видеоролик](https://kb.comindware.ru/platform/v6.0/administration/deploy/linux/img/deploy_guide_linux_delete_version_instance.mp4)
-
-[
-
-](https://kb.comindware.ru/platform/v6.0/administration/deploy/linux/img/deploy_guide_linux_delete_version_instance.mp4)
-
 ### Удаление экземпляра ПО
 
 1. Перейдите в режим суперпользователя:
@@ -670,7 +638,7 @@ mmap(PROT_NONE) failed
 4. Запустите удаление экземпляра ПО:
 
    ```
-   sh instance_delete.sh -n=<instanceName>
+   bash instance_delete.sh -n=<instanceName>
    ```
 
    Скрипт `delete.sh` поддерживает следующие ключи:
@@ -683,7 +651,7 @@ mmap(PROT_NONE) failed
 5. Удостоверьтесь, что экземпляр ПО был успешно удалён, просмотрев список установленных экземпляров ПО:
 
    ```
-   sh instance_list.sh
+   bash instance_list.sh
    ```
 
 ### Удаление версии ПО
@@ -702,7 +670,7 @@ mmap(PROT_NONE) failed
 2. Просмотрите список экземпляров ПО с указанием версий:
 
    ```
-   sh instance_list.sh
+   bash instance_list.sh
    ```
 3. Удалите все экземпляры с версией ПО, которую требуется удалить, или обновите их до другой версии. Удалить версию ПО, которая используется в каких-либо экземплярах, не удастся. См. *«[Удаление экземпляра ПО](#удаление-экземпляра-по)»*.
 4. Перейдите в директорию со скриптами для развёртывания ПО **Comindware Platform**:
@@ -713,19 +681,19 @@ mmap(PROT_NONE) failed
 5. Просмотрите список установленных версий ПО:
 
    ```
-   sh version_list.sh
+   bash version_list.sh
    ```
 6. Удалите версию ПО:
 
    ```
-   sh version_delete.sh -v=<versionNumber>
+   bash version_delete.sh -v=<versionNumber>
    ```
 
-   Здесь: `-v=<versionNumber>` — укажите номер версии ПО вида `X.X.XXXX.X` (например: `6.0.0000.0`).
+   Здесь: `-v=<versionNumber>` — укажите номер версии ПО вида `X.X.XXXX.X` (например: `5.0.0000.0`).
 7. Проверьте, что версия ПО была удалена успешно:
 
    ```
-   sh version_list.sh
+   bash version_list.sh
    ```
 
    или
