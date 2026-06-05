@@ -1,0 +1,205 @@
+<h1>Дефрагментация данных Apache Ignite</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr">
+<div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#порядок-дефрагментации"> <span class="md-ellipsis"> Порядок дефрагментации </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#решение-возможных-проблем"> <span class="md-ellipsis"> Решение возможных проблем </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Здесь представлены инструкции по дефрагментации хранилища данных Apache Ignite для ПО <strong>Comindware Platform</strong> в Linux. Дефрагментация хранилища Apache Ignite позволяет повысить производительность работы ПО и сократить объем данных хранилища на диске.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>Во время дефрагментации хранилища Apache Ignite экземпляр ПО будет недоступен. Поэтому дефрагментацию следует выполнять в нерабочее время.</p>
+</div>
+<h2 id="порядок-дефрагментации">Порядок дефрагментации</h2>
+<ol class="colored_numbers_list">
+<li>Создайте резервную копию базы данных экземпляра ПО.</li>
+<li>Скачайте бинарный дистрибутив Apache Ignite, например <a class="mkdocs_imported_link" href="https://downloads.apache.org/ignite/2.16.0/apache-ignite-2.16.0-bin.zip">apache-ignite-2.16.0-bin.zip</a> или более новую версию.</li>
+<li>
+<p>Перейдите в режим суперпользователя:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>su -</code></pre>
+</div>
+<p>или</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>sudo -i</code></pre>
+</div>
+</li>
+<li>
+<p>Распакуйте дистрибутив Apache Ignite в домашнюю папку (здесь и далее <code>username</code> — имя текущего пользователя):</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>unzip apache-ignite-2.16.0-bin.zip -d /usr/share/ignite</code></pre>
+</div>
+</li>
+<li>
+<p>Задайте переменную среды <code>IGNITE_HOME</code>:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="nb">export</span> <span class="nv">IGNITE_HOME</span><span class="o">=</span>/usr/share/ignite</code></pre>
+</div>
+</li>
+<li>
+<p>Скопируйте в папку <code>/usr/share/ignite</code> файл <code>Ignite.config</code> из папки <code>/var/www/&lt;instanceName&gt;</code> (где <code>&lt;instanceName&gt;</code> — имя экземпляра ПО):</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>cp /var/www/&lt;instanceName&gt;/Ignite.config /usr/share/ignite/</code></pre>
+</div>
+</li>
+<li>
+<p>Перейдите в папку <code>bin</code> Apache Ignite:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="nb">cd</span> /usr/share/ignite/bin</code></pre>
+</div>
+</li>
+<li>
+<p>В файле <code>control.sh</code> измените директиву <code>DEFAULT_CONFIG</code>:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="nv">DEFAULT_CONFIG</span><span class="o">=</span>config/Ignite.config</code></pre>
+</div>
+</li>
+<li>
+<p>Получите список узлов, зарегистрированных в базовой топологии:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>bash control.sh --baseline</code></pre>
+</div>
+</li>
+<li>
+<p>Назначьте дефрагментацию данных Apache Ignite при перезапуске экземпляра ПО, указав вместо <code>&lt;id&gt;</code> идентификаторы узлов, полученные на шаге 9:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>bash control.sh --defragmentation schedule --nodes &lt;id&gt;</code></pre>
+</div>
+<p>11. Остановите и запустите экземпляр ПО:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>systemctl stop comindware&lt;instanceName&gt;</code> <br/><code>systemctl start comindware&lt;instanceName&gt;</code></pre>
+</div>
+<p>Здесь <code>&lt;instanceName&gt;</code> — имя экземпляра ПО.</p>
+</li>
+<li>
+<p>Инициируйте экземпляр ПО:</p>
+<ul>
+<li>
+<p>С помощью командной строки:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>curl localhost:&lt;port&gt;</code></pre>
+</div>
+<p>или</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>curl &lt;instance_fqdn&gt;</code></pre>
+</div>
+</li>
+<li>
+<p>Либо с помощью браузера, перейдя по адресу:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>&lt;ip&gt;:&lt;port&gt;</code></pre>
+</div>
+<p>или</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>&lt;instance_fqdn&gt;</code></pre>
+</div>
+</li>
+</ul>
+<p>Здесь:</p>
+<ul>
+<li><code>&lt;instance_ip&gt;, &lt;port&gt;</code> — IP-адрес и порт экземпляра ПО;</li>
+<li><code>&lt;instance_fqdn&gt;</code> — адрес веб-сайта с экземпляром ПО.</li>
+</ul>
+</li>
+<li>
+<p>Дождитесь завершения дефрагментации данных.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<ul>
+<li>В процессе дефрагментации для просмотра статуса используйте команду:</li>
+</ul>
+<div class="highlight"><code><code></code> </code>
+<pre><code>watch -cd bash control.sh --defragmentation status</code></pre>
+</div>
+<ul>
+<li>В процессе дефрагментации Apache Ignite будет вносить сведения в файл журнала вида <code>/var/lib/comindware/&lt;instanceName&gt;/Database/log/ignite-xxxxxxxx.0.log</code>.</li>
+<li>По завершении дефрагментации:
+<ul>
+<li>в журнале Apache Ignite должно появиться событие: <code>Defragmentation process complete</code>;</li>
+<li>команда  <code>watch -cd bash control.sh --defragmentation status</code> должна вывести сообщение <code>Defragmentation process complete</code>.</li>
+</ul>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Перезапустите экземпляр ПО, чтобы его снова можно было использовать.</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>systemctl restart comindware&lt;instanceName&gt;</code></pre>
+</div>
+</li>
+<li>
+<p>Инициируйте экземпляр ПО, также как на шаге 12.</p>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="решение-возможных-проблем">Решение возможных проблем</h2>
+<p>Если во время дефрагментации возникнет ошибка <em>«Слишком много открытых файлов»</em> ( <em>Too many open files</em>), выполните указанные ниже шаги (пример приведён для Astra Linux).</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Добавьте в файл <code>/etc/security/limits.conf</code> строки:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>* soft nproc <span class="m">65535</span></code> <br/><code>* hard nproc <span class="m">65535</span></code> <br/><code>* soft nofile <span class="m">65535</span></code> <br/><code>* hard nofile <span class="m">65535</span></code> <br/><code>www-data soft nproc <span class="m">200000</span></code> <br/><code>www-data hard nproc <span class="m">200000</span></code> <br/><code>www-data soft nofile <span class="m">200000</span></code> <br/><code>www-data hard nofile <span class="m">200000</span></code></pre>
+</div>
+</li>
+<li>
+<p>Добавьте в файл <code>/etc/pam.d/common-session</code> строку:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>session required pam_limits.so</code></pre>
+</div>
+</li>
+<li>
+<p>Добавьте в файл <code>/etc/sysctl.conf</code> строку:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>fs.file-max <span class="o">=</span> <span class="m">2097152</span></code></pre>
+</div>
+</li>
+<li>
+<p>Раскомментируйте строку и задайте значение в файле <code>/etc/systemd/user.conf</code>:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="nv">DefaultLimitNOFILE</span><span class="o">=</span><span class="m">65536</span></code></pre>
+</div>
+</li>
+<li>
+<p>Раскомментируйте строку и задайте значение в файле <code>/etc/systemd/system.conf</code>:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>DefaultLimitNOFILE=65536</code></pre>
+</div>
+</li>
+<li>
+<p>Откройте для редактирования конфигурацию сервиса экземпляра ПО:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>systemctl edit comindware&lt;instanceName&gt;.service</code></pre>
+</div>
+</li>
+<li>
+<p>Добавьте в него строки:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="o">[</span>Service<span class="o">]</span></code> <br/><code><span class="nv">LimitNOFILE</span><span class="o">=</span><span class="m">65536</span></code> <br/><code><span class="nv">LimitNOFILESoft</span><span class="o">=</span><span class="m">65536</span></code></pre>
+</div>
+</li>
+<li>
+<p>Перезагрузите машину и экземпляр ПО.</p>
+</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4642">Резервное копирование и восстановление</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://ignite.apache.org/docs/2.11.1/persistence/native-persistence-defragmentation">Дефрагментация персистентного хранилища</a></em> (руководство Apache Ignite, английский язык)</li>
+<li><em><a class="mkdocs_imported_link" href="https://ignite.apache.org/docs/2.11.1/tools/control-script#activation-deactivation-and-topology-management">Активация, деактивация и управление топологией</a></em> (руководство Apache Ignite, английский язык)</li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>
+</div>

@@ -111,7 +111,11 @@ if __name__ == "__main__":
     summary, tree, content = ingest(folder, exclude_patterns="*.html")
     ingestion_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     source_line = f"Source: https://kb.comindware.ru/category.php?id={category_id}"
-    platform_version = "V5" if str(category_id) == "798" or "_v5_" in output_filename else "V6"
+    platform_version = (
+        "V5" if str(category_id) == "798" or "_v5_" in output_filename
+        else "V4.7" if str(category_id) == "378" or "_v4.7" in output_filename or "_v4_7" in output_filename
+        else "V6"
+    )
     content = re.sub(r"(\[[^\]]*\])\(/([^)]+)\)", r"\1(https://kb.comindware.ru/\2)", content)
     print(source_line)
     content = content.replace(

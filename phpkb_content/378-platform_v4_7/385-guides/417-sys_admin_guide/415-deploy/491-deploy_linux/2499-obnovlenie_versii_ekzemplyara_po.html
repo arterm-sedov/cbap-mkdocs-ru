@@ -1,0 +1,265 @@
+<h1>Обновление версии экземпляра ПО</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#порядок-обновления-версии-экземпляра-по"> <span class="md-ellipsis"> Порядок обновления версии экземпляра ПО </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#подготовка-экземпляра-по-к-обновлению"> <span class="md-ellipsis"> Подготовка экземпляра ПО к обновлению </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#обновление-версии-по-для-экземпляра"> <span class="md-ellipsis"> Обновление версии ПО для экземпляра </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Здесь представлены краткие инструкции по обновлению до 4.7.XXXX версии экземпляра ПО <strong>Comindware Business Application Platform</strong> под управлением ОС Linux.</p>
+<h2 id="порядок-обновления-версии-экземпляра-по">Порядок обновления версии экземпляра ПО</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Подготовьте экземпляр ПО к обновлению:</p>
+<ul>
+<li>Сохраните резервную копию экземпляра ПО.</li>
+<li>Остановите экземпляр ПО.</li>
+<li>Сохраните конфигурацию экземпляра ПО и вспомогательных служб.</li>
+<li>Удалите компоненты старой версии ПО.</li>
+</ul>
+</li>
+<li>
+<p>Обновите версию экземпляра ПО:</p>
+<ul>
+<li>Скачайте и распакуйте дистрибутив новой версии ПО.</li>
+<li>Установите новую версию ПО.</li>
+<li>Обновите экземпляр ПО до новой версии.</li>
+<li>Обновите конфигурацию экземпляра ПО и вспомогательных служб.</li>
+<li>Перезапустите экземпляр ПО и вспомогательные службы.</li>
+</ul>
+</li>
+</ol>
+<h2 id="подготовка-экземпляра-по-к-обновлению">Подготовка экземпляра ПО к обновлению</h2>
+<p>Выполните подготовительные действия для каждого экземпляра ПО, версию которого требуется обновить.</p>
+<ol class="colored_numbers_list">
+<li>Создайте и перенесите во внешнее хранилище резервную копию базы данных экземпляра ПО. См. статью <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2190">Резервное копирование. Настройка и запуск, просмотр журнала сеансов</a>»</em>.</li>
+<li>
+<p>Перейдите в режим суперпользователя:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>sudo -s</code></pre>
+</div>
+<p>или</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>su<span class="w"> </span>-</code></pre>
+</div>
+</li>
+<li>
+<p id="NginxBackup">Сохраните резервную копию конфигурационных файлов, например в директорию <code>/var/backups/config_tmp</code>:</p>
+<ul>
+<li><strong>Astra Linux</strong>, <strong>Ubuntu</strong>, <strong>Debian</strong> (DEB-based)</li>
+</ul>
+<div class="highlight"><code><code></code></code>
+<pre><code>mkdir -p /var/backups/config_tmp/</code><br/><code><span class="nb">cd</span> /var/www/&lt;instanceName&gt;/</code><br/><code>cp *.config apigateway.json /var/backups/config_tmp/</code><br/><code>cp /etc/nginx/sites-available/comindware&lt;instanceName&gt; /var/backups/config_tmp/</code></pre>
+</div>
+<ul>
+<li><strong>РЕД ОС</strong>, <strong>Rocky</strong> (RPM-based)</li>
+</ul>
+<div class="highlight"><code><code></code></code>
+<pre><code>mkdir -p /var/backups/config_tmp/</code><br/><code><span class="nb">cd</span> /var/www/&lt;instanceName&gt;/</code><br/><code>cp *.config apigateway.json /var/backups/config_tmp/</code><br/><code>cp /etc/nginx/conf.d/comindware&lt;instanceName&gt; /var/backups/config_tmp/</code></pre>
+</div>
+<ul>
+<li><strong>Альт Сервер</strong></li>
+</ul>
+<div class="highlight"><code><code></code></code>
+<pre><code>mkdir -p /var/backups/config_tmp/</code><br/><code><span class="nb">cd</span> /var/www/&lt;instanceName&gt;/</code><br/><code>cp *.config apigateway.json /var/backups/config_tmp/</code><br/><code>cp /etc/nginx/sites-available.d/comindware&lt;instanceName&gt; /var/backups/config_tmp/</code></pre>
+</div>
+<p>Здесь <code>&lt;instanceName&gt;</code> — имя экземпляра ПО.</p>
+</li>
+<li>
+<p>Остановите экземпляр ПО и его вспомогательные службы и удостоверьтесь, что они остановлены:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>systemctl stop apigateway&lt;instanceName&gt; comindware&lt;instanceName&gt;</code><br/><code>systemctl status apigateway&lt;instanceName&gt; comindware&lt;instanceName&gt;</code></pre>
+</div>
+</li>
+<li>
+<p>Проверьте, выполняется ли сервис <code>Comindware.Adapter.Agent.exe</code>:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>ps fax <span class="p">|</span> grep Agent</code></pre>
+</div>
+<ul>
+<li>
+<p>Если процесс <code>Comindware.Adapter.Agent.exe</code>, выполняется, завершите его по <code>PID</code>:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="nb">kill</span> -9 &lt;PID&gt;</code></pre>
+</div>
+</li>
+</ul>
+</li>
+<li>
+<p>Проверьте имя и статус экземпляра:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>systemctl status comindware*</code></pre>
+</div>
+</li>
+<li>
+<p>Удалите (или переместите в резервное хранилище) неиспользуемые предыдущие дистрибутивы ПО (<code>&lt;distPath&gt;</code> — путь к директории с дистрибутивом, <code>&lt;osname&gt;</code> — название операционной системы):</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>rm -rf &lt;distPath&gt;/CMW_&lt;osname&gt;</code></pre>
+</div>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="обновление-версии-по-для-экземпляра">Обновление версии ПО для экземпляра</h2>
+<p>Выполните шаги 6–13 для каждого экземпляра ПО, версию которого требуется обновить, так как скрипт обновления выполняется отдельно для указанного экземпляра ПО.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Скачайте и распакуйте дистрибутив с новой версией ПО (<code>X.X</code>, <code>&lt;versionNumber&gt;</code> — номер версии ПО):</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="nb">cd</span> &lt;distPath&gt;</code><br/><code>tar -xf X.X-release-ru-&lt;versionNumber&gt;.&lt;osname&gt;.tar.gz</code></pre>
+</div>
+</li>
+<li>
+<p>Перейдите в распакованную папку:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="nb">cd</span> CMW_&lt;osname&gt;/scripts/cbap</code></pre>
+</div>
+</li>
+<li>
+<p>Запустите установку распакованного дистрибутива ПО:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>bash install.sh</code></pre>
+</div>
+</li>
+<li>
+<p>Проверьте наличие и имя директории установленной версии ПО:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>bash list.sh</code></pre>
+</div>
+</li>
+<li>
+<p>Отобразится список установленных версий ПО на сервере.</p>
+</li>
+<li>
+<p>Перейдите в директорию скриптов для работы с экземпляром ПО и запустите его обновление до требуемой версии:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="nb">cd</span> ../instance/</code><br/><code>bash upgrade.sh -n<span class="o">=</span>&lt;instanceName&gt; -vp<span class="o">=</span>/var/www/.cmw_version/&lt;versionNumber&gt;</code></pre>
+</div>
+<p>Здесь:</p>
+<ul>
+<li><code>-n=&lt;instanceName&gt;</code> — имя обновляемого экземпляра ПО;</li>
+<li><code>-vp=/var/www/.cmw_version/&lt;versionNumber&gt;</code> — укажите путь к папке с установленной версией ПО, где <code>&lt;versionNumber&gt;</code> — номер версии ПО.</li>
+</ul>
+</li>
+<li>
+<p>По окончании обновления скрипт выведет информацию о компонентах экземпляра ПО. Удостоверьтесь, что компоненты успешно обновлены.</p>
+<p>Пример результата выполнения скрипта:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>...</code><br/><code><span class="o">[</span>Done<span class="o">]</span> Creating Log Directories.</code><br/><code>OK     Instance folder created.</code><br/><code>OK     Instance Web config created.</code><br/><code>OK     Instance Ignite config created.</code><br/><code>OK     Instance binaries linked.</code><br/><code>OK     Instance config created.</code><br/><code>OK     Data folder created.</code><br/><code>OK     Database folder created: Yes</code><br/><code>OK     Streams folder created: No </code><br/><code>OK     Logs folder created: Yes</code><br/><code>OK     Used version: &lt;versionNumber&gt;</code><br/><code>OK     Logs configured.</code><br/><code>OK     Sites created.</code><br/><code>OK     Sites enabled.</code><br/><code>OK     API Gateway configured.</code><br/><code>OK     Link to binaries is valid.</code><br/><code>OK     Instance service started.</code><br/><code>FAILED Instance API gateway service started.</code><br/><code>OK     NGINX started.</code><br/><code>FAILED Final status.</code><br/><code><span class="o">[</span>Done<span class="o">]</span> Upgrade CBAP instance.</code></pre>
+</div>
+<p>Если какая-либо из служб имеет статус <code>FAILED</code>, перезапустите её (<code>&lt;serviceName&gt;</code> — имя службы):</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>systemctl restart &lt;serviceName&gt;.service</code></pre>
+</div>
+</li>
+<li>
+<p>Проверьте корректность конфигурации NGINX для экземпляра ПО:</p>
+<ul>
+<li>
+<p><strong>Astra Linux</strong>, <strong>Ubuntu</strong>, <strong>Debian</strong> (DEB-based)</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>nano /etc/nginx/sites-available/comindware&lt;instanceName&gt;</code></pre>
+</div>
+</li>
+<li>
+<p><strong>РЕД ОС</strong>, <strong>Rocky</strong> (RPM-based)</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>nano /etc/nginx/conf.d/comindware&lt;instanceName&gt;</code></pre>
+</div>
+</li>
+<li>
+<p><strong>Альт Сервер</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code>nano /etc/nginx/sites-available.d/comindware&lt;instanceName&gt;</code></pre>
+</div>
+</li>
+<li>
+<p>При необходимости восстановите конфигурацию NGINX, <a class="mkdocs_imported_link" href="#NginxBackup">сохранённую ранее</a>.</p>
+<ul>
+<li><strong>Astra Linux</strong>, <strong>Ubuntu</strong>, <strong>Debian</strong> (DEB-based)</li>
+</ul>
+<div class="highlight"><code><code></code></code>
+<pre><code>cp /var/backups/config_tmp/comindware&lt;instanceName&gt; /etc/nginx/sites-available/</code><br/><code>nginx -t <span class="o">&amp;&amp;</span> nginx -s reload</code></pre>
+</div>
+<ul>
+<li><strong>РЕД ОС</strong>, <strong>Rocky</strong> (RPM-based)</li>
+</ul>
+<div class="highlight"><code><code></code></code>
+<pre><code>cp /var/backups/config_tmp/comindware&lt;instanceName&gt; /etc/nginx/conf.d/</code><br/><code>nginx -t <span class="o">&amp;&amp;</span> nginx -s reload</code></pre>
+</div>
+<ul>
+<li><strong>Альт Сервер</strong></li>
+</ul>
+<div class="highlight"><code><code></code></code>
+<pre><code>cp /var/backups/config_tmp/comindware&lt;instanceName&gt; /etc/nginx/sites-available.d/</code><br/><code>nginx -t <span class="o">&amp;&amp;</span> nginx -s reload</code></pre>
+</div>
+</li>
+</ul>
+</li>
+<li>
+<p>Откройте для редактирования файл конфигурации <code>/var/www/&lt;instanceName&gt;/apigateway.json</code>.</p>
+<ul>
+<li>
+<p>Проверьте и при необходимости отредактируйте адрес сервера Kafka:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="s2">"Kafka"</span>: <span class="o">{</span></code><br/><code>    <span class="c1"># Укажите адрес сервера Kafka</span></code><br/><code>    <span class="c1"># Должен совпадать с mq.server</span></code><br/><code>    <span class="c1"># в /usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</span></code><br/><code>    <span class="s2">"BootstrapServer"</span>: <span class="s2">"&lt;KAFKAIP&gt;:9092"</span>,</code><br/><code>    <span class="c1"># Укажите имя экземпляра ПО</span></code><br/><code>    <span class="c1"># Должно совпадать с mq.group</span></code><br/><code>    <span class="c1"># в /usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</span></code><br/><code>    <span class="s2">"GroupId"</span>: <span class="s2">"&lt;instanceName&gt;"</span></code><br/><code><span class="o">}</span></code></pre>
+</div>
+</li>
+</ul>
+</li>
+<li>
+<p>Если выполняется обновление с версии ниже 4.6.1140.0, откройте для редактирования файл конфигурации экземпляра ПО <code>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code>.</p>
+<ul>
+<li>
+<p>Замените в конфигурации следующие директивы:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="c1"># исходная директива</span></code><br/><code><span class="c1"># backupPath: /var/backups/&lt;instanceName&gt;</span></code><br/><code><span class="c1"># заменить на:</span></code><br/><code>backup.config.default.repository.type: LocalDisk</code><br/><code>backup.config.default.repository.localDisk.path: /var/backups/&lt;instanceName&gt; <span class="c1">## backupPath</span></code><br/><code></code><br/><code><span class="c1"># исходная директива</span></code><br/><code><span class="c1"># tempPath: /var/lib/comindware/&lt;instanceName&gt;/Temp</span></code><br/><code><span class="c1"># заменить на:</span></code><br/><code>tempStorage.type: LocalDisk</code><br/><code>tempStorage.localDisk.path: /var/lib/comindware/&lt;instanceName&gt;/Temp <span class="c1">## tempPath</span></code><br/><code></code><br/><code><span class="c1"># исходная директива</span></code><br/><code><span class="c1"># streamsPath: /var/streams/&lt;instanceName&gt;</span></code><br/><code><span class="c1"># заменить на:</span></code><br/><code>userStorage.type: LocalDisk</code><br/><code>userStorage.localDisk.path: /var/streams/&lt;instanceName&gt;</code></pre>
+</div>
+</li>
+<li>
+<p>Добавьте в конфигурацию следующие директивы:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="c1"># Имя конфигурации</span></code><br/><code>configName: &lt;instanceName&gt;</code><br/><code></code><br/><code><span class="c1"># Имя базы данных Apache Ignite</span></code><br/><code>instanceName: &lt;instanceName&gt;</code><br/><code></code><br/><code>manageAdapterHost: <span class="nb">true</span></code><br/><code>useDataBusNumbers:</code><br/><code>    - <span class="m">0</span></code><br/><code>    - <span class="m">1</span></code><br/><code>    - <span class="m">2</span></code><br/><code>    - <span class="m">3</span></code></pre>
+</div>
+</li>
+</ul>
+</li>
+<li>
+<p>Удостоверьтесь, что итоговый файл конфигурации <code>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code> выглядит аналогично следующему примеру:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>databasePath: /var/lib/comindware/&lt;instanceName&gt;/Database/</code><br/><code>configPath: /var/www/&lt;instanceName&gt;</code><br/><code>backup.config.default.repository.type: LocalDisk</code><br/><code>backup.config.default.repository.localDisk.path: /var/lib/comindware/&lt;instanceName&gt;/Backup</code><br/><code>userStorage.type: LocalDisk</code><br/><code>userStorage.localDisk.path: /var/lib/comindware/&lt;instanceName&gt;/Streams</code><br/><code>tempStorage.type: LocalDisk</code><br/><code>tempStorage.localDisk.path: /var/lib/comindware/&lt;instanceName&gt;/Temp</code><br/><code>elasticsearchUri: XXX.XXX.XXX.XXX:9200 <span class="c1">#адрес сервера ElasticSearch</span></code><br/><code>instanceName: &lt;instanceName&gt;</code><br/><code>configName: &lt;instanceName&gt;</code><br/><code>databaseName: &lt;instanceName&gt;</code><br/><code>nodeName: prod_0</code><br/><code>linuxAuthenticationType: <span class="m">1</span></code><br/><code>ldapAuthenticationType: <span class="m">1</span></code><br/><code>isFederationAuthEnabled: <span class="m">0</span></code><br/><code>manageAdapterHost: <span class="nb">true</span></code><br/><code>isTestEnvironment: <span class="nb">false</span></code><br/><code>mq.enabled: <span class="nb">true</span></code><br/><code>mq.server: XXX.XXX.XXX.XXX:9092 <span class="c1">#адрес сервера Kafka</span></code><br/><code>mq.group: &lt;instanceName&gt; <span class="c1">#имя группы в Kafka</span></code><br/><code>mq.node: prod_0</code><br/><code>mq.name: &lt;instanceName&gt; <span class="c1">#имя очереди в Kafka</span></code><br/><code>mq.adapter.0.enabled: <span class="nb">true</span></code><br/><code>mq.adapter.1.enabled: <span class="nb">true</span></code><br/><code>mq.adapter.2.enabled: <span class="nb">true</span></code><br/><code>mq.adapter.3.enabled: <span class="nb">true</span></code><br/><code>version: &lt;versionNumber&gt;</code></pre>
+</div>
+</li>
+<li>
+<p>Перезапустите сервисы, настройки которых были изменены:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>systemctl restart apigateway&lt;instanceName&gt; comindware&lt;instanceName&gt;</code></pre>
+</div>
+</li>
+<li>
+<p>Откройте сайт экземпляра ПО в браузере, дождитесь окончания загрузки, одновременно открыв выдачу журналов экземпляра в терминале:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>tail -f /var/log/comindware/&lt;instanceName&gt;/Log/sys*</code></pre>
+</div>
+</li>
+<li>
+<p>После обновления всех экземпляров ПО, старую версию ПО можно удалить согласно инструкции <em>«<a class="autorefs autorefs-internal mkdocs_imported_link" href="deploy_guide.html#deploy_guide_linux_delete_version">Удаление версии ПО</a>»</em>.</p>
+</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2344">Установка, запуск, инициализация и остановка ПО</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2190">Резервное копирование. Настройка и запуск, просмотр журнала сеансов</a></em></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>
