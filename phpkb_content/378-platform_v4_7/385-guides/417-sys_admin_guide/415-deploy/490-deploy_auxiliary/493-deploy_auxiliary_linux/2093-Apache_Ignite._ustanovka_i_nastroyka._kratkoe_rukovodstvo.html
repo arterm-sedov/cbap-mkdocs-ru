@@ -1,0 +1,96 @@
+<h1>Apache Ignite. Установка и настройка. Краткое руководство</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr">
+<div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#установка-apache-ignite"> <span class="md-ellipsis"> Установка Apache Ignite </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#запуск-apache-ignite"> <span class="md-ellipsis"> Запуск Apache Ignite </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#пример-файла-конфигурации-ignite"> <span class="md-ellipsis"> Пример файла конфигурации Ignite </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Для работы <strong>Comindware Platform</strong> требуется программное обеспечение Apache Ignite.</p>
+<p>Apache Ignite в минимально необходимой конфигурации устанавливается автоматически при установке <strong>Comindware Platform</strong> с ключом <code>-e</code>.</p>
+<p>Для продвинутых конфигураций требуется развернуть Apache Ignite самостоятельно.</p>
+<p>Здесь представлены краткие инструкции по установке и настройке Apache Ignite 2.16.0 в ОС Linux для работы с <strong>Comindware Platform</strong>.</p>
+<p>Полное руководство по Apache Ignite 2.16.0 (на английском языке) представлено на веб-сайте: <a class="mkdocs_imported_link" href="https://ignite.apache.org/docs/2.16.0/">https://ignite.apache.org/docs/2.16.0/</a></p>
+<p>Краткое руководство на русском языке представлено на веб-сайте: <a class="mkdocs_imported_link" href="https://platform.digital.gov.ru/docs/data-management/platform-v-ignite-se/quick-start">https://platform.digital.gov.ru/docs/data-management/platform-v-ignite-se/quick-start</a></p>
+<h2 id="установка-apache-ignite">Установка Apache Ignite</h2>
+<ol class="colored_numbers_list">
+<li>Скачайте, распакуйте и установите Apache Ignite и задайте права:
+<div class="highlight"><code><code></code> </code>
+<pre><code>wget https://downloads.apache.org/ignite/2.16.0/apache-ignite-2.16.0-bin.zip</code> <br/><code>unzip -q apache-ignite-2.16.0-bin.zip</code> <br/><code>mv apache-ignite-2.16.0-bin /usr/share/ignite</code> <br/><code>chown -R www-data:www-data /usr/share/ignite</code></pre>
+</div>
+</li>
+<li>Установите переменную среды <code>IGNITE_HOME</code>, указав путь к папке Ignite без завершающего символа <code>/</code>: <code>export IGNITE_HOME=/usr/share/ignite</code></li>
+<li>Дополнительные модули для использования Ignite в сочетании с Comindware Platform не требуются.</li>
+<li>Скопируйте в папку <code>/usr/share/ignite</code> файл <code>Ignite.config</code> из папки <code>/var/www/&lt;instanceName&gt;</code> (где  <code>&lt;instanceName&gt;</code> — имя экземпляра ПО).</li>
+<li>Пример файла <code>Ignite.config</code> представлен в параграфе <a class="mkdocs_imported_link" href="#пример-файла-конфигурации-ignite">«Пример файла конфигурации Ignite»</a>.</li>
+<li>Откройте для редактирования скрипт запуска Ignite <code>ignite.sh</code>:
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="nb">cd</span> /usr/share/ignite/bin/</code> <br/><code>nano ignite.sh</code></pre>
+</div>
+</li>
+<li>Добавьте в начало скрипта <code>ignite.sh</code> следующие строки:
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="nb">export</span> <span class="s2">"JVM_OPTS=-Xms512m -Xmx4g -XX:MaxDirectMemorySize=1g -Djava.net.preferIPv4Stack=true -XX:+AlwaysPreTouch -XX:+UseG1GC -XX:+ScavengeBeforeFullGC -XX:+DisableExplicitGC -XX:MinHeapFreeRatio=1 -XX:MaxHeapFreeRatio=10 -DIGNITE_QUIET=false -DIGNITE_NO_ASCII=true--add-opens=java.base/jdk.internal.misc=ALL-UNNAMED --add-opens=java.base/sun.nio.ch=ALL-UNNAMED --add-opens=java.management/com.sun.jmx.mbeanserver=ALL-UNNAMED --add-opens=jdk.internal.jvmstat/sun.jvmstat.monitor=ALL-UNNAMED --add-opens=java.base/sun.reflect.generics.reflectiveObjects=ALL-UNNAMED --add-opens=jdk.management/com.sun.management.internal=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.nio=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.base/java.util.concurrent.locks=ALL-UNNAMED --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.invoke=ALL-UNNAMED --add-opens=java.base/java.math=ALL-UNNAMED --add-opens=java.sql/java.sql=ALL-UNNAMED"</span></code> <br/><code><span class="nb">export</span> <span class="nv">IGNITE_WORK_DIR</span><span class="o">=</span>/var/lib/comindware/&lt;instanceName&gt;/Database</code> <br/><code><span class="nb">export</span> <span class="nv">DEFAULT_CONFIG</span><span class="o">=</span>/usr/share/ignite/config/Ignite.config</code></pre>
+</div>
+</li>
+<li>
+<p>Откройте для редактирования скрипт <code>control.sh</code>:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>nano control.sh</code></pre>
+</div>
+<p>9. Добавьте в скрипт <code>control.sh</code> следующие строки:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="nv">DEFAULT_CONFIG</span><span class="o">=</span>config/Ignite.config</code></pre>
+</div>
+<p>10. Создайте и откройте для редактирования скрипт <code>ignite_service_create.sh</code>. Этот скрипт будет создавать и запускать службу Apache Ignite:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>nano ignite_service_create.sh</code></pre>
+</div>
+<p>11. Введите в скрипт <code>ignite_service_create.sh</code> следующие директивы:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="ch">#!/bin/bash</span></code> <br/><code><span class="c1"># create apache ignite daemon service</span></code> <br/><code><span class="c1"># ver 0.1</span></code> <br/><code><span class="c1">#</span></code> <br/><code>sudo cat <span class="s">&lt;&lt;EOF &gt;/lib/systemd/system/ignite.service</span></code> <br/><code><span class="s">[Unit]</span></code> <br/><code><span class="s">Description=Apache Ignite Service</span></code> <br/><code><span class="s">After=network.target</span></code> <br/><code><span class="s">[Service]</span></code> <br/><code><span class="s">WorkingDirectory=/usr/share/ignite</span></code> <br/><code><span class="s">User=www-data</span></code> <br/><code><span class="s">Group=www-data</span></code> <br/><code><span class="s">PrivateDevices=yes</span></code> <br/><code><span class="s">ProtectSystem=full</span></code> <br/><code><span class="s">Type=simple</span></code> <br/><code><span class="s">ExecReload=/bin/kill -HUP $MAINPID</span></code> <br/><code><span class="s">KillMode=mixed</span></code> <br/><code><span class="s">KillSignal=SIGTERM</span></code> <br/><code><span class="s">TimeoutStopSec=10</span></code> <br/><code><span class="s">ExecStart=/usr/share/ignite/bin/ignite.sh</span></code> <br/><code><span class="s">SyslogIdentifier=Ignite</span></code> <br/><code><span class="s">Restart=on-failure</span></code> <br/><code><span class="s">RestartSec=5s</span></code> <br/><code><span class="s">[Install]</span></code> <br/><code><span class="s">WantedBy=multi-user.target</span></code> <br/><code><span class="s">Alias=ignite.service</span></code> <br/><code><span class="s">EOF</span></code> <br/><code>systemctl daemon-reload</code> <br/><code>systemctl <span class="nb">enable</span> ignite.service</code></pre>
+</div>
+<p>12. Инициализируйте и запустите службу Apache Ignite с помощью скрипта <code>ignite_service_create.sh</code>:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>bash ignite_service_create.sh</code></pre>
+</div>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="запуск-apache-ignite">Запуск Apache Ignite</h2>
+<ol class="colored_numbers_list">
+<li>Запустите службу Apache Ignite:
+<div class="highlight"><code><code></code> </code>
+<pre><code>systemctl start ignite</code></pre>
+</div>
+</li>
+<li>Проверьте статус узла Apache Ignite:
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="nb">cd</span> /usr/share/ignite/bin/</code> <br/><code>bash control.sh --baseline</code></pre>
+</div>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="пример-файла-конфигурации-ignite">Пример файла конфигурации Ignite</h2>
+<p>Для стабильной работы Ignite вместе с <strong>Comindware Platform</strong> важны следующие директивы в данном примере:</p>
+<ul>
+<li><code>&lt;igniteConfiguration xmlns="http://ignite.apache.org/schema/dotnet/IgniteConfigurationSection" gridName="myGrid1"&gt;</code> — в параметре <code>gridName</code> укажите имя сервера узла Ignite. У узлов кластера должно быть одинаковое имя сервера.</li>
+<li><code>&lt;discoverySpi type="TcpDiscoverySpi"&gt;&lt;ipFinder type="TcpDiscoveryStaticIpFinder"&gt;&lt;endpoints&gt; &lt;string&gt;127.0.0.1&lt;/string&gt;&lt;/endpoints&gt;&lt;/ipFinder&gt;&lt;/discoverySpi&gt;</code> — в параметре <code>TcpDiscoveryStaticIpFinder</code> укажите адрес сервера.</li>
+<li><code>&lt;dataRegionConfigurations type="DataRegionConfiguration"&gt; &lt;dataRegionConfiguration&gt;&lt;name&gt;Persistent&lt;/name&gt;&lt;persistenceEnabled&gt;true&lt;/persistenceEnabled&gt;</code> — в директиве <code>dataRegionConfiguration</code> укажите <code>&lt;persistenceEnabled&gt;true&lt;/persistenceEnabled&gt;</code>.</li>
+<li><code>&lt;workDirectory&gt;/var/lib/ignite/&lt;/workDirectory&gt;&gt;</code> — укажите рабочую папку Ignite.</li>
+<li><code>&lt;igniteinstanceName&gt;Comindware_Instance2&lt;/igniteinstanceName&gt;</code> — укажите имя экземпляра Ignite.</li>
+</ul>
+<div class="pageBreakAfter highlight"><span class="filename">Пример файла конфигурации Ignite</span><code><code></code> </code>
+<pre><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></code> <br/><code><span class="nt">&lt;configuration&gt;</span></code> <br/><code>  <span class="nt">&lt;configSections&gt;</span></code> <br/><code>      <span class="nt">&lt;section</span> <span class="na">name=</span><span class="s">"igniteConfiguration"</span> <span class="na">type=</span><span class="s">"Apache.Ignite.Core.IgniteConfigurationSection, Apache.Ignite.Core"</span> <span class="nt">/&gt;</span></code> <br/><code>  <span class="nt">&lt;/configSections&gt;</span></code> <br/><code>  <span class="nt">&lt;runtime&gt;</span></code> <br/><code>      <span class="nt">&lt;gcServer</span> <span class="na">enabled=</span><span class="s">"true"</span><span class="nt">/&gt;</span></code> <br/><code>  <span class="nt">&lt;/runtime&gt;</span></code> <br/><code>  <span class="nt">&lt;igniteConfiguration</span> <span class="na">xmlns=</span><span class="s">"http://ignite.apache.org/schema/dotnet/IgniteConfigurationSection"</span> <span class="na">gridName=</span><span class="s">"myGrid1"</span><span class="nt">&gt;</span></code> <br/><code>      <span class="nt">&lt;localhost&gt;&lt;/localhost&gt;</span></code> <br/><code>      <span class="nt">&lt;networkTimeout&gt;</span>1000<span class="nt">&lt;/networkTimeout&gt;</span></code> <br/><code>      <span class="nt">&lt;networkSendRetryDelay&gt;</span>1000<span class="nt">&lt;/networkSendRetryDelay&gt;</span></code> <br/><code></code> <br/><code>      <span class="nt">&lt;jvmOptions&gt;</span></code> <br/><code>          <span class="nt">&lt;string&gt;</span>-Xms512m<span class="nt">&lt;/string&gt;</span></code> <br/><code>          <span class="nt">&lt;string&gt;</span>-Xmx3g<span class="nt">&lt;/string&gt;</span></code> <br/><code>          <span class="nt">&lt;string&gt;</span>--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED<span class="nt">&lt;/string&gt;</span></code> <br/><code>          <span class="nt">&lt;string&gt;</span>--add-exports=java.base/sun.nio.ch=ALL-UNNAMED<span class="nt">&lt;/string&gt;</span></code> <br/><code>          <span class="nt">&lt;string&gt;</span>--add-exports=java.management/com.sun.jmx.mbeanserver=ALL-UNNAMED<span class="nt">&lt;/string&gt;</span></code> <br/><code>          <span class="nt">&lt;string&gt;</span>--add-exports=jdk.internal.jvmstat/sun.jvmstat.monitor=ALL-UNNAMED<span class="nt">&lt;/string&gt;</span></code> <br/><code>          <span class="nt">&lt;string&gt;</span>--add-exports=java.base/sun.reflect.generics.reflectiveObjects=ALL-UNNAMED<span class="nt">&lt;/string&gt;</span></code> <br/><code>          <span class="nt">&lt;string&gt;</span>--add-opens=jdk.management/com.sun.management.internal=ALL-UNNAMED<span class="nt">&lt;/string&gt;</span></code> <br/><code>          <span class="nt">&lt;string&gt;</span>-Djava.net.preferIPv4Stack=true<span class="nt">&lt;/string&gt;</span></code> <br/><code>          <span class="nt">&lt;string&gt;</span>--illegal-access=warn<span class="nt">&lt;/string&gt;</span></code> <br/><code>      <span class="nt">&lt;/jvmOptions&gt;</span></code> <br/><code>      <span class="nt">&lt;discoverySpi</span> <span class="na">type=</span><span class="s">"TcpDiscoverySpi"</span><span class="nt">&gt;</span></code> <br/><code>          <span class="nt">&lt;ipFinder</span> <span class="na">type=</span><span class="s">"TcpDiscoveryStaticIpFinder"</span><span class="nt">&gt;</span></code> <br/><code>              <span class="nt">&lt;endpoints&gt;</span></code> <br/><code>                  <span class="nt">&lt;string&gt;</span>127.0.0.1<span class="nt">&lt;/string&gt;</span></code> <br/><code>              <span class="nt">&lt;/endpoints&gt;</span></code> <br/><code>          <span class="nt">&lt;/ipFinder&gt;</span></code> <br/><code>      <span class="nt">&lt;/discoverySpi&gt;</span></code> <br/><code>      <span class="nt">&lt;atomicConfiguration</span> <span class="na">type=</span><span class="s">"AtomicConfiguration"</span><span class="nt">&gt;</span></code> <br/><code>          <span class="nt">&lt;atomicSequenceReserveSize&gt;</span>1000<span class="nt">&lt;/atomicSequenceReserveSize&gt;</span></code> <br/><code>          <span class="nt">&lt;cacheMode&gt;</span>Partitioned<span class="nt">&lt;/cacheMode&gt;</span></code> <br/><code>          <span class="nt">&lt;backups&gt;</span>1<span class="nt">&lt;/backups&gt;</span></code> <br/><code>      <span class="nt">&lt;/atomicConfiguration&gt;</span></code> <br/><code>      <span class="nt">&lt;dataStorageConfiguration</span> <span class="na">type=</span><span class="s">"DataStorageConfiguration"</span><span class="nt">&gt;</span></code> <br/><code>          <span class="nt">&lt;walPath&gt;</span>wal/<span class="nt">&lt;/walPath&gt;</span></code> <br/><code>          <span class="nt">&lt;walArchivePath&gt;</span>wal/<span class="nt">&lt;/walArchivePath&gt;</span></code> <br/><code>          <span class="nt">&lt;defaultDataRegionConfiguration</span> <span class="na">type=</span><span class="s">"DataRegionConfiguration"</span><span class="nt">&gt;</span></code> <br/><code>              <span class="nt">&lt;name&gt;</span>Default_Region<span class="nt">&lt;/name&gt;</span></code> <br/><code>              <span class="nt">&lt;persistenceEnabled&gt;</span>false<span class="nt">&lt;/persistenceEnabled&gt;</span></code> <br/><code>              <span class="nt">&lt;initialSize&gt;</span>10485760<span class="nt">&lt;/initialSize&gt;</span></code> <br/><code>              <span class="nt">&lt;maxSize&gt;</span>20971520<span class="nt">&lt;/maxSize&gt;</span></code> <br/><code>          <span class="nt">&lt;/defaultDataRegionConfiguration&gt;</span></code> <br/><code>          <span class="nt">&lt;dataRegionConfigurations</span> <span class="na">type=</span><span class="s">"DataRegionConfiguration"</span><span class="nt">&gt;</span></code> <br/><code>                  <span class="nt">&lt;dataRegionConfiguration&gt;</span></code> <br/><code>                      <span class="nt">&lt;name&gt;</span>Persistent<span class="nt">&lt;/name&gt;</span></code> <br/><code>                      <span class="nt">&lt;persistenceEnabled&gt;</span>true<span class="nt">&lt;/persistenceEnabled&gt;</span></code> <br/><code>                      <span class="nt">&lt;initialSize&gt;</span>10485760<span class="nt">&lt;/initialSize&gt;</span></code> <br/><code>                      <span class="nt">&lt;maxSize&gt;</span>1147483648<span class="nt">&lt;/maxSize&gt;</span></code> <br/><code>                      <span class="nt">&lt;pageEvictionMode&gt;</span>RandomLru<span class="nt">&lt;/pageEvictionMode&gt;</span></code> <br/><code>                  <span class="nt">&lt;/dataRegionConfiguration&gt;</span></code> <br/><code>                  <span class="nt">&lt;dataRegionConfiguration&gt;</span></code> <br/><code>                      <span class="nt">&lt;name&gt;</span>InMemory<span class="nt">&lt;/name&gt;</span></code> <br/><code>                      <span class="nt">&lt;persistenceEnabled&gt;</span>false<span class="nt">&lt;/persistenceEnabled&gt;</span></code> <br/><code>                      <span class="nt">&lt;initialSize&gt;</span>10485760<span class="nt">&lt;/initialSize&gt;</span></code> <br/><code>                      <span class="nt">&lt;maxSize&gt;</span>50485760<span class="nt">&lt;/maxSize&gt;</span></code> <br/><code>                  <span class="nt">&lt;/dataRegionConfiguration&gt;</span></code> <br/><code>          <span class="nt">&lt;/dataRegionConfigurations&gt;</span></code> <br/><code>      <span class="nt">&lt;/dataStorageConfiguration&gt;</span></code> <br/><code>      <span class="nt">&lt;clientMode&gt;</span>false<span class="nt">&lt;/clientMode&gt;</span></code> <br/><code>      <span class="nt">&lt;includedEventTypes&gt;&lt;/includedEventTypes&gt;</span></code> <br/><code>      <span class="nt">&lt;workDirectory&gt;</span>/var/lib/ignite/<span class="nt">&lt;/workDirectory&gt;</span></code> <br/><code>      <span class="nt">&lt;jvmDllPath&gt;&lt;/jvmDllPath&gt;</span></code> <br/><code>      <span class="nt">&lt;igniteinstanceName&gt;</span>Comindware_Instance2<span class="nt">&lt;/igniteinstanceName&gt;</span></code> <br/><code>      <span class="nt">&lt;autoGenerateIgniteinstanceName&gt;</span>false<span class="nt">&lt;/autoGenerateIgniteinstanceName&gt;</span></code> <br/><code><span class="nt">&lt;/igniteConfiguration&gt;</span></code> <br/><code><span class="nt">&lt;/configuration&gt;</span></code></pre>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>
+</div>

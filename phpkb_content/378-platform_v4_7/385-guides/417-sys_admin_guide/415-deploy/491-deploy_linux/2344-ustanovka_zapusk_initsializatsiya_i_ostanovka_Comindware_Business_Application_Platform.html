@@ -1,0 +1,501 @@
+<h1>Установка, запуск, инициализация и остановка Comindware Business Application Platform</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#deploy_guide_linux_install_sw"> <span class="md-ellipsis"> Установка Comindware Business Application Platform </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#создание-экземпляра-по"> <span class="md-ellipsis"> Создание экземпляра ПО </span> </a><nav aria-label="Создание экземпляра ПО" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#подготовка-к-созданию-экземпляра-по"> <span class="md-ellipsis"> Подготовка к созданию экземпляра ПО </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#создание-единственного-экземпляра-по"> <span class="md-ellipsis"> Создание единственного экземпляра ПО </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#создание-дополнительного-экземпляра-по"> <span class="md-ellipsis"> Создание дополнительного экземпляра ПО </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#запуск-экземпляра-по"> <span class="md-ellipsis"> Запуск экземпляра ПО </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#deploy_guide_linux_initialize"> <span class="md-ellipsis"> Инициализация Comindware Business Application Platform </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#остановка-экземпляра-по"> <span class="md-ellipsis"> Остановка экземпляра ПО </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#удаление-экземпляра-по"> <span class="md-ellipsis"> Удаление экземпляра ПО </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#deploy_guide_linux_delete_version"> <span class="md-ellipsis"> Удаление версии ПО </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Для работы <strong>Comindware Business Application Platform</strong> требуются операционная система, сервер базы данных, веб-сервер, обратный прокси-сервер и сервер журналов.</p>
+<p>Для быстрого развёртывания <strong>Comindware Business Application Platform</strong> в Linux компания <strong>Comindware</strong> предоставляет дистрибутив с установщиком, настраивающим необходимое программное обеспечение. См. <em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2398">Comindware Business Application Platform 4.7. Перечень стороннего программного обеспечения для Linux</a></em>.</p>
+<p>Здесь представлены инструкции по развёртыванию и инициализации <strong>Comindware Business Application Platform</strong> из дистрибутива в ОС Linux.</p>
+<h2 id="deploy_guide_linux_install_sw">Установка Comindware Business Application Platform</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите в режим суперпользователя:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>sudo -s</code></pre>
+</div>
+<p>или</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>su<span class="w"> </span>-</code></pre>
+</div>
+</li>
+<li>
+<p>Скачайте и распакуйте дистрибутив <strong>Comindware Business Application Platform</strong>, полученный по ссылке от компании <strong>Comindware</strong> ( <code>X.X</code>, <code>&lt;versionNumber&gt;</code> — номер версии ПО, <code>&lt;osname&gt;</code> — название операционной системы):</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>tar -xf X.X-release-ru-&lt;versionNumber&gt;.&lt;osname&gt;.tar.gz</code></pre>
+</div>
+<div class="notice notice-tip">
+<p class="admonition-title">Совет</p>
+<p>По завершению распаковки архив можно удалить для экономии места:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>rm -f X.X-release-ru-&lt;versionNumber&gt;.&lt;osname&gt;.tar.gz</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Перейдите в распакованную директорию:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="nb">cd</span> &lt;distPath&gt;/CMW_&lt;osname&gt;/</code></pre>
+</div>
+<p>Здесь: <code>&lt;distPath&gt;/CMW_&lt;osname&gt;/</code> — путь к распакованному дистрибутиву ПО.</p>
+</li>
+<li>
+<p id="install.sh">Установите ПО из дистрибутива:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>sh install.sh -p <span class="o">[</span>-k<span class="o">]</span> <span class="o">[</span>-e<span class="o">]</span></code></pre>
+</div>
+<p class="pageBreakBefore">Скрипт <code>install.sh</code> поддерживает следующие ключи:</p>
+<ul>
+<li><code>p</code> — установить ПО Comindware Business Application Platform.</li>
+<li><code>k</code> — установить ПО Kafka (необязательный ключ).</li>
+<li><code>e</code> — установить ПО Elasticsearch (необязательный ключ).</li>
+<li><code>h</code> — вызов краткой справки по использованию скрипта (указывать только без остальных ключей).</li>
+</ul>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Скрипт <code>install.sh</code> устанавливает ПО Comindware Business Application Platform и необходимые для него компоненты, включая Java, .NET, Mono, NGINX.</p>
+</div>
+<div class="notice notice-tip">
+<p class="admonition-title">Вызов справки для скриптов</p>
+<p>Для ознакомления с ключами и назначением любого скрипта используйте ключ <code>-h</code> без каких-либо других ключей, например:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>sh install.sh -h</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>По окончании установки скрипт выведет информацию об установленных компонентах. Удостоверьтесь, что компоненты успешно установлены.</p>
+<p>Пример результата выполнения скрипта с ключом <code>-p</code> без установки Elasticsearch и Kafka:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>Environment details</code> <br/><code>Status     <span class="p">|</span> Software   <span class="p">|</span> Version   </code> <br/><code>-----------------------------------------</code> <br/><code>OK         <span class="p">|</span> mono       <span class="p">|</span> <span class="m">6</span>.12.0.182     </code> <br/><code>OK         <span class="p">|</span> dotnet     <span class="p">|</span> <span class="m">6</span>.0.417        </code> <br/><code>OK         <span class="p">|</span> java       <span class="p">|</span> <span class="m">17</span>.0.7         </code> <br/><code>OK     NGINX installed.</code> <br/><code>FAILED NGINX started.</code> <br/><code>OK     CBAP version folder created.</code> <br/><code>OK     CBAP configs folder created.</code> <br/><code>FAILED CBAP data folder created.</code> <br/><code>FAILED CBAP logs folder created.</code> <br/><code>OK     CBAP dotnet folder created.</code> <br/><code>OK     Local elasticsearch server installed: No </code> <br/><code>OK     Local elasticsearch server started: No </code> <br/><code>OK     Local kafka server installed: No </code> <br/><code>OK     Local kafka server started: No </code> <br/><code>FAILED Final status.</code></pre>
+</div>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>В примере выше для большинства пунктов указан статус <code>OK</code>.</p>
+<p>При этом указан статус <code>FAILED</code> для <code>NGINX started</code>, <code>CBAP data folder created</code>, <code>CBAP logs folder created</code> и <code>Final status</code>.</p>
+<p>Это означает, что установлены необходимые компоненты, но не создан экземпляр ПО, то есть установка ПО выполнена успешно.</p>
+<p>Экземпляр ПО следует создать отдельно согласно инструкциям в параграфе <em>«<a class="mkdocs_imported_link" href="#создание-экземпляра-по">Создание экземпляра ПО</a>»</em>.</p>
+</div>
+</li>
+<li>
+<p>Если отобразится запрос на перезагрузку ОС, выполните перезагрузку:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>reboot</code></pre>
+</div>
+<p>После перезагрузки ОС заново запустите <a class="mkdocs_imported_link" href="#install.sh">установку ПО из дистрибутива (шаг 4)</a>.</p>
+</li>
+<li>
+<p>После успешного завершения установки подождите 3–5 минут. Этого времени обычно достаточно для автоматического запуска и инициализации установленных служб (в зависимости от конфигурации машины).</p>
+</li>
+<li>
+<p>Удостоверьтесь, что ПО установлено, просмотрев список установленных версий ПО:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>ls /var/www/.cmw_version/</code></pre>
+</div>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="создание-экземпляра-по">Создание экземпляра ПО</h2>
+<h3 id="подготовка-к-созданию-экземпляра-по">Подготовка к созданию экземпляра ПО</h3>
+<p>Перед созданием экземпляра ПО необходимо проверить конфигурацию Linux и при необходимости внести в неё перечисленные ниже изменения.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите в режим суперпользователя:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>sudo -s</code></pre>
+</div>
+<p>или</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>su<span class="w"> </span>-</code></pre>
+</div>
+</li>
+<li>
+<p>Откройте для редактирования файл <code>limits.conf</code>:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>nano /etc/security/limits.conf</code></pre>
+</div>
+</li>
+<li>
+<p>Установите следующие директивы:</p>
+<ul>
+<li><strong>Astra Linux</strong>, <strong>Ubuntu</strong>, <strong>Debian</strong> (DEB-based)</li>
+</ul>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="err">www-data soft nproc 200000</span></code> <br/><code><span class="err">www-data hard nproc 200000</span></code> <br/><code><span class="err">www-data soft nofile 200000</span></code> <br/><code><span class="err">www-data hard nofile 200000</span></code></pre>
+</div>
+<ul>
+<li><strong>РЕД ОС</strong>, <strong>Rocky</strong> (RPM-based)</li>
+</ul>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="err">nginx soft nproc 200000</span></code> <br/><code><span class="err">nginx hard nproc 200000</span></code> <br/><code><span class="err">nginx soft nofile 200000</span></code> <br/><code><span class="err">nginx hard nofile 200000</span></code></pre>
+</div>
+<ul>
+<li><strong>Альт Сервер</strong></li>
+</ul>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="err">_nginx soft nproc 200000</span></code> <br/><code><span class="err">_nginx hard nproc 200000</span></code> <br/><code><span class="err">_nginx soft nofile 200000</span></code> <br/><code><span class="err">_nginx hard nofile 200000</span></code></pre>
+</div>
+</li>
+<li>
+<p>Откройте для редактирования файл <code>common-session</code>:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>nano /etc/pam.d/common-session</code></pre>
+</div>
+</li>
+<li>
+<p>Установите следующую директиву:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="err">session required pam_limits.so</span></code></pre>
+</div>
+</li>
+<li>
+<p>Откройте для редактирования файл <code>sysctl.conf</code>:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>nano /etc/sysctl.conf</code></pre>
+</div>
+</li>
+<li>
+<p>Установите следующие директивы:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="n">fs</span><span class="p">.</span><span class="n">file</span><span class="o">-</span><span class="n">max</span><span class="o">=</span><span class="mi">2097152</span></code> <br/><code><span class="n">vm</span><span class="p">.</span><span class="n">max_map_count</span><span class="o">=</span><span class="mi">262144</span></code> <br/><code><span class="n">fs</span><span class="p">.</span><span class="n">inotify</span><span class="p">.</span><span class="n">max_user_instances</span><span class="o">=</span><span class="mi">524288</span></code></pre>
+</div>
+</li>
+<li>
+<p>Откройте для редактирования файл <code>user.conf</code>:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>nano /etc/systemd/user.conf</code></pre>
+</div>
+</li>
+<li>
+<p>Установите следующую директиву:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="n">DefaultLimitNOFILE</span><span class="o">=</span><span class="mi">200000</span></code></pre>
+</div>
+</li>
+<li>
+<p>Откройте для редактирования файл <code>system.conf</code>:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>nano /etc/systemd/system.conf</code></pre>
+</div>
+</li>
+<li>
+<p>Установите следующую директиву:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="n">DefaultLimitNOFILE</span><span class="o">=</span><span class="mi">200000</span></code></pre>
+</div>
+</li>
+<li>
+<p>После внесения изменений перезапустите демоны:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>sysctl -p</code> <br/><code>systemctl daemon-reexec</code></pre>
+</div>
+</li>
+</ol>
+<h3 class="pageBreakBefore" id="создание-единственного-экземпляра-по">Создание единственного экземпляра ПО</h3>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите в режим суперпользователя:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>sudo -s</code></pre>
+</div>
+<p>или</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>su<span class="w"> </span>-</code></pre>
+</div>
+</li>
+<li>
+<p>Перейдите в директорию со скриптами для развёртывания ПО <strong>Comindware Business Application Platform</strong>:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="nb">cd</span> &lt;distPath&gt;/CMW_&lt;osname&gt;/scripts/instance</code></pre>
+</div>
+<p>Здесь: <code>&lt;distPath&gt;/CMW_&lt;osname&gt;/</code> — путь к распакованному дистрибутиву ПО.</p>
+</li>
+<li>
+<p>Разверните экземпляр ПО:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>sh create.sh -n<span class="o">=</span>&lt;instanceName&gt; -v<span class="o">=</span>&lt;versionNumber&gt; <span class="o">[</span>-p<span class="o">=</span>&lt;portNumber&gt;<span class="o">]</span></code></pre>
+</div>
+<p>Скрипт <code>create.sh</code> поддерживает следующие ключи:</p>
+<ul>
+<li><code>-n=&lt;instanceName&gt;</code> — имя экземпляра ПО (<strong>обязательный</strong> ключ).</li>
+<li><code>-v=&lt;versionNumber&gt;</code> — номер версии ПО вида <code>X.X.XXXX.X</code> (например: 4.7.2222.0, <strong>обязательный</strong> ключ). Версия должна быть установлена, см. <em>«<a class="mkdocs_imported_link" href="#deploy_guide_linux_install_sw">Установка Comindware Business Application Platform</a>»</em>.</li>
+<li><code>-p=&lt;portNumber&gt;</code> — порт для экземпляра ПО, по умолчанию: 80 (необязательный ключ).</li>
+<li><code>-h</code> — вызов краткой справки по использованию скрипта (указывать только без остальных ключей).</li>
+</ul>
+</li>
+<li>
+<p>Удостоверьтесь, что была создана директория с файлами конфигурации экземпляра ПО.</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>ls -lhF /var/www/&lt;instanceName&gt;/</code></pre>
+</div>
+</li>
+<li>
+<p>По ответу команды <code>ls</code> удостоверьтесь, что в путях указана верная версия ПО, например <code>4.7.3084.0</code>:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>lrwxrwxrwx. <span class="m">1</span> nginx nginx   <span class="m">36</span> Oct <span class="m">11</span> <span class="m">17</span>:54 bin -&gt; /var/www/.cmw_version/4.7.3084.0/bin/</code> <br/><code>lrwxrwxrwx. <span class="m">1</span> nginx nginx   <span class="m">41</span> Oct <span class="m">11</span> <span class="m">17</span>:54 compiled -&gt; /var/www/.cmw_version/4.7.3084.0/compiled/</code> <br/><code>lrwxrwxrwx. <span class="m">1</span> nginx nginx   <span class="m">37</span> Oct <span class="m">11</span> <span class="m">17</span>:54 data -&gt; /var/www/.cmw_version/4.7.3084.0/data/</code> <br/><code>lrwxrwxrwx. <span class="m">1</span> nginx nginx   <span class="m">44</span> Oct <span class="m">11</span> <span class="m">17</span>:54 favicon.ico -&gt; /var/www/.cmw_version/4.7.3084.0/favicon.ico</code> <br/><code>lrwxrwxrwx. <span class="m">1</span> nginx nginx   <span class="m">44</span> Oct <span class="m">11</span> <span class="m">17</span>:54 Global.asax -&gt; /var/www/.cmw_version/4.7.3084.0/Global.asax</code> <br/><code>lrwxrwxrwx. <span class="m">1</span> nginx nginx   <span class="m">39</span> Oct <span class="m">11</span> <span class="m">17</span>:54 mobile -&gt; /var/www/.cmw_version/4.7.3084.0/mobile/</code> <br/><code>lrwxrwxrwx. <span class="m">1</span> nginx nginx   <span class="m">46</span> Oct <span class="m">11</span> <span class="m">17</span>:54 redirect.aspx -&gt; /var/www/.cmw_version/4.7.3084.0/redirect.aspx</code> <br/><code>lrwxrwxrwx. <span class="m">1</span> nginx nginx   <span class="m">42</span> Oct <span class="m">11</span> <span class="m">17</span>:54 resources -&gt; /var/www/.cmw_version/4.7.3084.0/resources/</code> <br/><code>lrwxrwxrwx. <span class="m">1</span> nginx nginx   <span class="m">43</span> Oct <span class="m">11</span> <span class="m">17</span>:54 robots.txt -&gt; /var/www/.cmw_version/4.7.3084.0/robots.txt</code> <br/><code>lrwxrwxrwx. <span class="m">1</span> nginx nginx   <span class="m">45</span> Oct <span class="m">11</span> <span class="m">17</span>:54 unauthorized -&gt; /var/www/.cmw_version/4.7.3084.0/unauthorized/</code></pre>
+</div>
+</li>
+</ol>
+<h3 class="pageBreakBefore" id="создание-дополнительного-экземпляра-по">Создание дополнительного экземпляра ПО</h3>
+<p>На одном сервере можно развернуть несколько экземпляров ПО <strong>Comindware Business Application Platform</strong>.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите в режим суперпользователя:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>sudo -s</code></pre>
+</div>
+<p>или</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>su<span class="w"> </span>-</code></pre>
+</div>
+</li>
+<li>
+<p>Просмотрите список имеющихся экземпляров ПО <strong>Comindware Business Application Platform</strong>:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>cat /usr/share/comindware/configs/instance/* <span class="p">|</span> grep -E <span class="s1">'(configPath:)'</span></code></pre>
+</div>
+</li>
+<li>
+<p>Просмотрите список используемых портов:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>ss -tunlp</code></pre>
+</div>
+<p>Также можно узнать, используется ли определённый порт (<code>&lt;portNumber&gt;</code>):</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>ss -tunlp <span class="p">|</span> grep :&lt;portNumber&gt;</code></pre>
+</div>
+</li>
+<li>
+<p>Просмотрите список установленных версий ПО:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>ls /var/www/.cmw_version/</code></pre>
+</div>
+</li>
+<li>
+<p>Создайте новый экземпляр ПО согласно приведённым выше <a class="mkdocs_imported_link" href="#создание-экземпляра-по">инструкциям</a>, указав для него уникальные имя и порт.</p>
+</li>
+<li>
+<p>Откройте для редактирования три службы каждого из установленных экземпляров ПО (<code>&lt;instanceName&gt;</code>):</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>nano /usr/lib/systemd/system/comindware&lt;instanceName&gt;.service</code> <br/><code>nano /usr/lib/systemd/system/apigateway&lt;instanceName&gt;.service</code> <br/><code>nano /usr/lib/systemd/system/adapterhost&lt;instanceName&gt;.service</code></pre>
+</div>
+</li>
+<li>
+<p>Если используются локальные службы Kafka и Elasticsearch, откройте их для редактирования:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>nano /usr/lib/systemd/system/kafka.service</code> <br/><code>nano /usr/lib/systemd/system/elasticsearch.service</code></pre>
+</div>
+</li>
+<li>
+<p>В каждом файле службы установите следующие директивы:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="err">#</span> <span class="n">Макс</span><span class="p">.</span> <span class="n">количество</span> <span class="n">открытых</span> <span class="n">файлов</span></code> <br/><code><span class="n">LimitNOFILE</span><span class="o">=</span><span class="mi">200000</span></code> <br/><code><span class="err">#</span> <span class="n">Макс</span><span class="p">.</span> <span class="n">количество</span> <span class="n">процессов</span></code> <br/><code><span class="n">LimitNPROC</span><span class="o">=</span><span class="mi">8192</span></code></pre>
+</div>
+</li>
+</ol>
+<h2 id="запуск-экземпляра-по">Запуск экземпляра ПО</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите в режим суперпользователя:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>sudo -s</code></pre>
+</div>
+<p>или</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>su<span class="w"> </span>-</code></pre>
+</div>
+</li>
+<li>
+<p>Удостоверьтесь, что основные службы установлены, запущены и имеют статус <code>Active (running)</code>:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>systemctl status comindware&lt;instanceName&gt;</code> <br/><code>systemctl status kafka</code> <br/><code>systemctl status nginx</code> <br/><code>systemctl status elasticsearch</code></pre>
+</div>
+</li>
+<li>
+<p>Если какая-либо служба не работает, запустите её:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>systemctl start comindware&lt;instanceName&gt;</code> <br/><code>systemctl start kafka</code> <br/><code>systemctl start nginx</code> <br/><code>systemctl start elasticsearch</code></pre>
+</div>
+</li>
+<li>
+<p>Выполните инициализацию ПО.</p>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="deploy_guide_linux_initialize">Инициализация Comindware Business Application Platform</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Запустите веб-браузер и в адресной строке введите ссылку следующего вида, при необходимости указав порт, на котором был развёрнут экземпляр ПО:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>http://localhost:&lt;portNumber&gt;</code></pre>
+</div>
+</li>
+<li>
+<p>Дождитесь запуска и отображения веб-сайта <strong>Comindware Business Application Platform</strong>, что может занять примерно 5 минут.</p>
+</li>
+<li>
+<p>Откроется страница создания аккаунта администратора <strong>Comindware Business Application Platform</strong>.</p>
+<figure class="screenshot_with_caption"><img alt="Страница создания аккаунта администратора" src="https://kb.comindware.ru/assets/deploy_guide_admin_account_create.png"/>
+<figcaption class="caption">Страница создания аккаунта администратора</figcaption>
+</figure>
+</li>
+<li>
+<p>Введите учётные данные аккаунта администратора и нажмите кнопку «<strong>Создать аккаунт</strong>».</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<ul>
+<li>В экземпляре ПО всегда должен оставаться хотя бы один аккаунт администратора. Он может потребоваться для восстановления системы.</li>
+<li>Аккаунт администратора, созданный при инициализации экземпляра ПО, не следует удалять, даже если впоследствии аккаунты будут синхронизироваться с Active Directory.</li>
+</ul>
+</div>
+</li>
+<li>
+<p>При необходимости откроется страница инициализации служб. Выберите службы, которые должны быть запущены, и нажмите кнопку «<strong>Далее</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Страница инициализации служб" src="https://kb.comindware.ru/assets/deploy_guide_system_initialize.png"/>
+<figcaption class="caption">Страница инициализации служб</figcaption>
+</figure>
+</li>
+<li>
+<p>При необходимости откроется страница активации ПО. Выполните <strong>онлайн-</strong> или <strong>ручную активацию</strong> либо нажмите кнопку «<strong>Пропустить</strong>» для первоначального ознакомления с ПО без активации.</p>
+</li>
+<li>При необходимости откроется страница настройки подключения к службе Elasticsearch.</li>
+<li>В поле «<strong>URI</strong>» введите адрес сервера Elasticsearch, например: <code>http://localhost:9200</code></li>
+<li>Оставьте <strong>имя пользователя</strong> и <strong>пароль</strong> Elasticsearch пустыми. Или введите их, если в конфигурации Elasticsearch включена аутентификация.</li>
+<li>Установите уникальный <strong>префикс индекса</strong>, например <code>mycompanyprefix</code>. Он служит для идентификации в Elasticsearch данных экземпляра ПО. Поэтому во избежание конфликтов данных для каждого экземпляра ПО следует указывать собственный префикс индекса.</li>
+<li>Нажмите кнопку «<strong>Далее</strong>».</li>
+<li>
+<p>При необходимости откроется страница инициализации данных в Elasticsearch.</p>
+<figure class="screenshot_with_caption"><img alt="Страница инициализации данных в Elasticsearch" src="https://kb.comindware.ru/assets/deploy_guide_elasticsearch_initialize.png"/>
+<figcaption class="caption">Страница инициализации данных в Elasticsearch</figcaption>
+</figure>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Обновить</strong>».</p>
+</li>
+<li>
+<p>Дождитесь открытия начальной страницы <strong>Comindware Business Application Platform</strong>.</p>
+<figure class="screenshot_with_caption"><img alt="Начальная страница Comindware Business Application Platform" src="https://kb.comindware.ru/assets/deploy_guide_desktop.png"/>
+<figcaption class="caption">Начальная страница Comindware Business Application Platform</figcaption>
+</figure>
+</li>
+<li>
+<p>На этом этапе развертывание экземпляра <strong>Comindware Business Application Platform</strong> завершено и можно приступать к созданию и использованию приложений.</p>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="остановка-экземпляра-по">Остановка экземпляра ПО</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите в режим суперпользователя:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>sudo -s</code></pre>
+</div>
+<p>или</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>su<span class="w"> </span>-</code></pre>
+</div>
+</li>
+<li>
+<p>Перед тем как выполнять любые действия с файлами ПО и базы данных, остановите службы, поддерживающие работу ПО:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>systemctl stop comindware&lt;instanceName&gt;</code> <br/><code>systemctl stop kafka</code> <br/><code>systemctl stop nginx</code> <br/><code>systemctl stop elasticsearch</code></pre>
+</div>
+</li>
+<li>
+<p>Удостоверьтесь, что службы остановлены:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>systemctl status comindware&lt;instanceName&gt;</code> <br/><code>systemctl status kafka</code> <br/><code>systemctl status nginx</code> <br/><code>systemctl status elasticsearch</code></pre>
+</div>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="удаление-экземпляра-по">Удаление экземпляра ПО</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите в режим суперпользователя:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>sudo -s</code></pre>
+</div>
+<p>или</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>su<span class="w"> </span>-</code></pre>
+</div>
+</li>
+<li>
+<p>Остановите экземпляр ПО согласно <a class="mkdocs_imported_link" href="#остановка-экземпляра-по">инструкции</a>.</p>
+</li>
+<li>
+<p>Перейдите в директорию со скриптами для развёртывания ПО <strong>Comindware Business Application Platform</strong>:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="nb">cd</span> &lt;distPath&gt;/CMW_&lt;osname&gt;/scripts/instance</code></pre>
+</div>
+</li>
+<li>
+<p>Запустите удаление экземпляра ПО:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>sh delete.sh -n<span class="o">=</span>&lt;instanceName&gt;</code></pre>
+</div>
+<p>Скрипт <code>delete.sh</code> поддерживает следующие ключи:</p>
+<ul>
+<li><code>-n=&lt;instanceName&gt;</code> — создать экземпляр ПО с указанным именем (<strong>обязательный</strong> ключ).</li>
+<li><code>-h</code> — вызов краткой справки по использованию скрипта (указывать только без остальных ключей).</li>
+</ul>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="deploy_guide_linux_delete_version">Удаление версии ПО</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите в режим суперпользователя:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>sudo -s</code></pre>
+</div>
+<p>или</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>su<span class="w"> </span>-</code></pre>
+</div>
+</li>
+<li>
+<p>Просмотрите список экземпляров ПО с указанием версий:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>cat /usr/share/comindware/configs/instance/* <span class="p">|</span> grep -E <span class="s1">'(configPath:|version:)'</span></code></pre>
+</div>
+</li>
+<li>
+<p>Удалите все экземпляры с версией ПО, которую требуется удалить, или обновите их до другой версии. Удалить версию ПО, которая используется в каких-либо экземплярах, не удастся. См. <em>«<a class="mkdocs_imported_link" href="#удаление-экземпляра-по">Удаление экземпляра ПО</a>»</em>.</p>
+</li>
+<li>
+<p>Удалите версию ПО:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>rm -r /var/www/.cmw_version/&lt;versionNumber&gt;</code></pre>
+</div>
+<p>Здесь: <code>&lt;versionNumber&gt;</code> — номер версии ПО вида <code>X.X.XXXX.X</code> (например: <code>4.7.2222.0</code>).</p>
+</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2502">Пути и содержимое директорий экземпляра ПО</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5068">Конфигурация экземпляра, компонентов ПО и служб. Настройка</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5076">Развёртывание Comindware Business Application Platform в кластере</a></em></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

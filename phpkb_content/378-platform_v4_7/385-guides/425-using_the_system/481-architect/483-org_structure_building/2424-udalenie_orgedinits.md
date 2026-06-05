@@ -1,0 +1,44 @@
+---
+title: 'Удаление оргединиц'
+kbId: 2424
+url: 'https://kb.comindware.ru/article.php?id=2424'
+updated: '2023-09-29 11:36:24'
+---
+
+# Удаление оргединиц
+
+## Удаление с помощью реестра
+
+Внимание!
+
+Оргединицы удаляются безвозвратно вместе со всеми дочерними оргединицами.
+
+1. Установите для подлежащих удалению оргединиц флажки выбора в первом столбце [реестра оргединиц](https://kb.comindware.ru/article.php?id=2423#mcetoc_1h7vdoimt0).
+2. Нажмите кнопку «**Удалить**».
+3. Подтвердите удаление оргединиц.
+
+_![Удаление оргединиц с помощью реестра оргединиц](https://kb.comindware.ru/assets/deleting_organizational_unit_using_registry.png)_
+
+## Удаление с помощью реестра
+
+1. Щелкните правой кнопкой мыши подлежащую удалению оргединицу.
+2. Выберите пункт «**Удалить**».
+3. Подтвердите удаление оргединицы.
+
+_![Удаление оргединицы с помощью контекстного меню в реестре оргединиц](https://kb.comindware.ru/assets/deleting_organizational_unit_using_registry_context_menu.png)_
+
+## Удаление с помощью панели навигации
+
+1. Нажмите кнопку «**Действия**» *‌* у оргединицы, подлежащей удалению.
+2. В раскрывающемся меню выберите пункт «**Удалить**».
+3. Подтвердите удаление оргединиц.
+
+_![Удаление оргединицы с помощью панели навигации](https://kb.comindware.ru/assets/deleting_organizational_unit_using_navigation.png)_
+
+--8<-- "related_topics_heading.md"
+
+**[Просмотр реестра оргединиц](https://kb.comindware.ru/article.php?id=2423#mcetoc_1h7vdoimt0)**
+
+**[Использование панели навигации](https://kb.comindware.ru/article.php?id=2283)**
+
+{% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
