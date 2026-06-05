@@ -111,6 +111,7 @@ if __name__ == "__main__":
     summary, tree, content = ingest(folder, exclude_patterns="*.html")
     ingestion_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     source_line = f"Source: https://kb.comindware.ru/category.php?id={category_id}"
+    platform_version = "V5" if str(category_id) == "798" or "_v5_" in output_filename else "V6"
     content = re.sub(r"(\[[^\]]*\])\(/([^)]+)\)", r"\1(https://kb.comindware.ru/\2)", content)
     print(source_line)
     content = content.replace(
@@ -140,7 +141,7 @@ if __name__ == "__main__":
         f.write(
             f"\n----------------------\n\n"
             f"Ingestion date: {ingestion_date}\n"
-            f"Title: Comindware Platform V6 knowledge base for AI ingestion\n"
+            f"Title: Comindware Platform {platform_version} knowledge base for AI ingestion\n"
             f"Description: Provide this file to your AI agent. For better results, add the prompt below\n"
             f"{source_line}\n"
             f"{summary_short}\n\n"
