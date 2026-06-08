@@ -232,3 +232,11 @@ nav:
   - ... | administration/**
   - ... | using_the_system/**
 ```
+
+## Scratch Directory
+
+The `.scratch/` folder is a shared space for temporary and disposable files: script outputs, debug logs, extracted data, and other transient artifacts.
+
+- Contents are **git-ignored** — nothing inside `.scratch/` is tracked except `.gitkeep`.
+- Use it for one-off scripts, analysis results, or any data that should not pollute the repository.
+- Do not reference `.scratch/` files from documentation or production code.
