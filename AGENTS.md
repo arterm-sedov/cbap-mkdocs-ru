@@ -33,6 +33,14 @@ Comindware Platform Knowledge Base:
 - @/docs/
 - @/phpkb_content/
 
+## SCRATCH DIRECTORY
+
+Use `.scratch/` for all temporary, draft, and transactional files: script outputs, debug logs, extracted data, one-off analysis files, and any disposable artifacts.
+
+- Always place temporary files in `.scratch/`, never in the repo root or other tracked directories.
+- Contents of `.scratch/` are git-ignored (except `.gitkeep`).
+- Treat everything in `.scratch/` as disposable — do not reference it from documentation or production code.
+
 ## RULES
 
 When asked for writing, be creative and smart. See your ROLE above.
