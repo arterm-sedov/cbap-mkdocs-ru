@@ -1,0 +1,76 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5283" kb-tags="N3,Notation 3,RDF,аккаунты,вычисление,группы,пользователи,роли,тройки" kb-title="Вычисление аккаунтов, входящих в роль">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_calculate_role_accounts_use_case">
+<span class="md-ellipsis">
+      
+        Прикладная задача
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_calculate_role_accounts_configure">
+<span class="md-ellipsis">
+      
+        Настройка вычисления
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_calculate_role_accounts_details">
+<span class="md-ellipsis">
+      
+        Пояснения
+      
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="example_n3_calculate_role_accounts_use_case">Прикладная задача</h2>
+<p>Требуется получить список пользователей, входящих в определённую роль, например для автоматического назначения задачи.</p>
+<p>Результат вычисления необходимо поместить в атрибут типа «<strong>Аккаунт</strong>», в свойствах которого установлен флажок «<strong>Хранить несколько значений</strong>».</p>
+<h2 id="example_n3_calculate_role_accounts_configure">Настройка вычисления</h2>
+<ol class="colored_numbers_list">
+<li>Создайте или откройте атрибут типа «<strong>Аккаунт</strong>», в который требуется поместить список пользователей, входящих в роль.</li>
+<li>В свойствах атрибута установите флажки:<ul>
+<li>«<strong>Хранить несколько значений</strong>»</li>
+<li>«<strong>Вычислять автоматически</strong>»</li>
+</ul>
+</li>
+<li>
+<p>Введите следующее <strong>вычисляемое значение</strong> на языке <strong>N3</strong>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwui:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/ui#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">account:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/account#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">role:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/role#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Получаем роль по её ID.</span></code> <br/><code>    <span class="c"># Число после role. зависит от конкретного экземпляра Comindware Platform</span></code> <br/><code>    <span class="c"># и отображается в адресной строке браузера</span></code> <br/><code>    <span class="c"># при просмотре свойств роли.</span></code> <br/><code>    <span class="s">"role.1"</span> <span class="nn">cmwui</span><span class="p">:</span><span class="nt">toQName</span> <span class="err">?role</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получаем аккаунты и группы, входящие в роль.</span></code> <br/><code>    <span class="err">?role</span> <span class="nn">role</span><span class="p">:</span><span class="nt">roleMembers</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code>    <span class="c"># Возвращаем только пользователей в вычисляемый атрибут.</span></code> <br/><code>    <span class="c"># Чтобы вернуть группы, замените account:Account</span></code> <br/><code>    <span class="c"># на account:Group.</span></code> <br/><code>    <span class="err">?value</span> <span class="kt">a</span> <span class="nn">account</span><span class="p">:</span><span class="nt">Account</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+</ol>
+<h2 id="example_n3_calculate_role_accounts_details">Пояснения</h2>
+<p>С помощью данной тройки можно получить как аккаунты, так и группы:</p>
+<ul>
+<li><code>account:Account</code> — пользователи;</li>
+<li><code>account:Group</code> — группы.</li>
+</ul>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>
