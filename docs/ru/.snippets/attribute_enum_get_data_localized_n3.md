@@ -22,6 +22,6 @@
     ?langCodeStr cmwentity:contains "ru".
         # Если предыдущее предложение возвращает true,
         # записываем значение на русском языке в вычисляемый атрибут.
-        ?names l10n:data ?value.
+        ?enumValueLanguageVersions l10n:data ?value.
 # переходим к следующей итерации по ?enumValueLanguageVersions.
 ```
