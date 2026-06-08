@@ -3,7 +3,7 @@ title: OpenSearch. Настройка подключения
 kbId: 4678
 ---
 
-<!-- статья скрыта, она неактуальна для версии 5.0 от 10.10.2025 -->
+<!-- статья скрыта, она неактуальна для версии 6.0 -->
 
 # {{ openSearchVariantsUnquotedNominative }}. Настройка подключения {: #elasticsearch_connection}
 

@@ -1,0 +1,316 @@
+<h1>Установка, запуск, инициализация и остановка Comindware Business Application Platform</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr">
+<div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#deploy_guide_windows_install_sw"> <span class="md-ellipsis"> Установка Comindware Business Application Platform </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#создание-экземпляра-по"> <span class="md-ellipsis"> Создание экземпляра ПО </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#запуск-экземпляра-по"> <span class="md-ellipsis"> Запуск экземпляра ПО </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#остановка-экземпляра-по"> <span class="md-ellipsis"> Остановка экземпляра ПО </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#инициализация-comindware-platform"> <span class="md-ellipsis"> Инициализация Comindware Business Application Platform </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#обновление-экземпляра-по"> <span class="md-ellipsis"> Обновление экземпляра ПО </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#удаление-экземпляра-по"> <span class="md-ellipsis"> Удаление экземпляра ПО </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#удаление-версии-по"> <span class="md-ellipsis"> Удаление версии ПО </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Для работы <strong>Comindware Business Application Platform</strong> требуются операционная система, сервер базы данных, веб-сервер, обратный прокси-сервер и сервер журналирования.</p>
+<p>Для быстрого развёртывания <strong>Comindware Business Application Platform</strong> в Windows компания <strong>Comindware</strong> предоставляет дистрибутив с установщиком, настраивающим необходимое программное обеспечение.</p>
+<p>Здесь представлены инструкции по развёртыванию и инициализации <strong>Comindware Business Application Platform</strong> из дистрибутива в ОС Windows.</p>
+<h2 id="deploy_guide_windows_install_sw">Установка Comindware Business Application Platform</h2>
+<ol class="colored_numbers_list">
+<li>Скачайте и распакуйте архив с дистрибутивом <strong>Comindware Business Application Platform</strong>.</li>
+<li>Запустите <em>PowerShell</em> от имени администратора.</li>
+<li>
+<p>Установите неограниченную политику выполнения <em>PowerShell</em>:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="nb">Set-ExecutionPolicy</span> <span class="n">Unrestricted</span></code></pre>
+</div>
+</li>
+<li>
+<p>В запросе на изменение политики выберите вариант «<strong>Да для всех</strong>», введя букву <span class="keys"><kbd class="key-a">A</kbd></span>.</p>
+</li>
+<li>
+<p>Перейдите в папку со скриптами для развёртывания ПО:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="nb">cd </span><span class="s2">"X:\&lt;distPath&gt;\X.X-release-ru-X.X.XXXXX.X.windows\CMW_Windows\scripts\platform"</span></code></pre>
+</div>
+<p>Здесь: <code>X:\&lt;distPath&gt;\X.X-release-ru-X.X.XXXXX.X.windows</code> — путь к распакованному дистрибутиву продукта, а <code>X.X.XXXXX.X</code> — номер версии ПО.</p>
+</li>
+<li>
+<p>Разблокируйте доступ к скачанным из Интернета установочным файлам:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="p">.\</span><span class="n">files_unblock</span><span class="p">.</span><span class="n">ps1</span></code></pre>
+</div>
+<div class="notice notice-tip">
+<p class="admonition-title">Вызов справки для скриптов</p>
+<p>Для ознакомления с ключами и назначением любого скрипта используйте ключ <code>-h</code> без каких-либо других ключей, например:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="p">.\</span><span class="n">files_unblock</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-h</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Перейдите в папку со скриптами для развёртывания вспомогательного ПО:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="nb">cd </span><span class="s2">"X:\&lt;distPath&gt;\X.X-release-ru-X.X.XXXXX.X.windows\CMW_Windows\scripts\prerequisites"</span></code></pre>
+</div>
+</li>
+<li>
+<p>Установите необходимое вспомогательное ПО:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="p">.\</span><span class="n">prerequisites_install</span><span class="p">.</span><span class="n">ps1</span></code></pre>
+</div>
+</li>
+<li>
+<p>Перезагрузите машину.</p>
+</li>
+<li>Запустите <em>PowerShell</em> от имени администратора.</li>
+<li>
+<p>Перейдите в папку со скриптами для развёртывания вспомогательного ПО:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="nb">cd </span><span class="s2">"X:\&lt;distPath&gt;\X.X-release-ru-X.X.XXXXX.X.windows\CMW_Windows\scripts\prerequisites"</span></code></pre>
+</div>
+</li>
+<li>
+<p>Проверьте, что дополнительные компоненты установлены:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="p">.\</span><span class="n">prerequisites_list</span><span class="p">.</span><span class="n">ps1</span></code></pre>
+</div>
+<p>Если какие-либо дополнительные компоненты не были установлены, повторите шаги 8–12.</p>
+</li>
+<li>
+<p>Перейдите в папку со скриптами для развёртывания ПО <strong>Comindware Business Application Platform</strong>:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="nb">cd </span><span class="s2">"X:\&lt;distPath&gt;\X.X-release-ru-X.X.XXXXX.X.windows\CMW_Windows\scripts\platform"</span></code></pre>
+</div>
+</li>
+<li>
+<p>Установите ПО:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="p">.\</span><span class="n">version_install</span><span class="p">.</span><span class="n">ps1</span></code></pre>
+</div>
+</li>
+<li>
+<p>Удостоверьтесь, что ПО установлено, вызывав список установленных версий ПО:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="p">.\</span><span class="n">version_list</span><span class="p">.</span><span class="n">ps1</span></code></pre>
+</div>
+</li>
+</ol>
+<h2 id="создание-экземпляра-по">Создание экземпляра ПО</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите в папку со скриптами для развёртывания ПО <strong>Comindware Business Application Platform</strong>:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="nb">cd </span><span class="s2">"X:\&lt;distPath&gt;\X.X-release-ru-X.X.XXXXX.X.windows\CMW_Windows\scripts\platform"</span></code></pre>
+</div>
+</li>
+<li>
+<p>Разверните экземпляр ПО:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="p">.\</span><span class="n">instance_create</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span> <span class="n">-port</span> <span class="p">&lt;</span><span class="n">portNumber</span><span class="p">&gt;</span> <span class="n">-version</span> <span class="p">&lt;</span><span class="n">versionNumber</span><span class="p">&gt;</span> </code></pre>
+</div>
+<p>Скрипт <code>instance_create.ps1</code> поддерживает следующие ключи:</p>
+<ul>
+<li><code>name &lt;instanceName&gt;</code> — <strong>обязательный</strong> ключ с именем экземпляра ПО.</li>
+<li><code>port &lt;portNumber&gt;</code> — порт для экземпляра ПО, по умолчанию: 80 (необязательный ключ).</li>
+<li><code>version &lt;versionNumber&gt;</code> — развернуть ПО указанной версии вида <code>X.X.XXXXX.X</code> (например: <code>4.7.12345.0</code>) из папки вида <code>C:\Program Files\Comindware\CBAP\&lt;versionNumber&gt;</code>.</li>
+<li><code>versionPath &lt;versionPath&gt;</code> — развернуть ПО из указанной папки <code>&lt;versionPath&gt;</code> с версией ПО.</li>
+<li><code>demoDB</code> — создать экземпляр ПО <strong>Comindware Business Application Platform</strong> c демонстрационной базой данных.</li>
+<li><code>fqdn &lt;hostName&gt;</code> — имя хоста для экземпляра ПО (необязательный ключ). По умолчанию: <code>localhost</code>.</li>
+<li><code>h</code> — вызвать справку по использованию скрипта (этот ключ следует указывать только без остальных ключей).</li>
+</ul>
+<div class="notice notice-tip">
+<p class="admonition-title">Обязательные ключи для скриптов</p>
+<p>Если не указать обязательный ключ для любого скрипта, он запросит его после запуска.</p>
+</div>
+</li>
+</ol>
+<h2 id="запуск-экземпляра-по">Запуск экземпляра ПО</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите в папку со скриптами для развёртывания ПО <strong>Comindware Business Application Platform</strong>:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="nb">cd </span><span class="s2">"X:\&lt;distPath&gt;\X.X-release-ru-X.X.XXXXX.X.windows\CMW_Windows\scripts\platform"</span></code></pre>
+</div>
+</li>
+<li>
+<p>Запустите экземпляр ПО:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="p">.\</span><span class="n">instance_start</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span></code></pre>
+</div>
+<p>Здесь: <code>name &lt;instanceName&gt;</code> — <strong>обязательный</strong> ключ с именем экземпляра ПО.</p>
+</li>
+</ol>
+<h2 id="остановка-экземпляра-по">Остановка экземпляра ПО</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите в папку со скриптами для развёртывания ПО <strong>Comindware Business Application Platform</strong>:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="nb">cd </span><span class="s2">"X:\&lt;distPath&gt;\X.X-release-ru-X.X.XXXXX.X.windows\CMW_Windows\scripts\platform"</span></code></pre>
+</div>
+</li>
+<li>
+<p>Остановите экземпляр ПО:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="p">.\</span><span class="n">instance_stop</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span></code></pre>
+</div>
+<p>Здесь: <code>-name &lt;instanceName&gt;</code> — <strong>обязательный</strong> ключ с именем экземпляра ПО.</p>
+</li>
+</ol>
+<h2 id="инициализация-comindware-platform">Инициализация Comindware Business Application Platform</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Запустите веб-браузер и в адресной строке введите ссылку следующего вида, при необходимости указав порт, на котором был развёрнут экземпляр ПО:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code>http://localhost:&lt;portNumber&gt;</code></pre>
+</div>
+</li>
+<li>
+<p>Дождитесь запуска и отображения веб-сайта <strong>Comindware Business Application Platform</strong>, что может занять примерно 5 минут.</p>
+</li>
+<li>
+<p>Откроется страница создания аккаунта администратора <strong>Comindware Business Application Platform</strong>.</p>
+<figure class="screenshot_with_caption"><img alt="Страница создания аккаунта администратора" src="/platform/v5.0/administration/deploy/windows/../linux/img/deploy_guide_admin_account_create.png"/>
+<figcaption class="caption">Страница создания аккаунта администратора</figcaption>
+</figure>
+</li>
+<li>
+<p>Введите учётные данные аккаунта администратора и нажмите кнопку «<strong>Создать аккаунт</strong>».</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<ul>
+<li>В экземпляре ПО всегда должен оставаться хотя бы один аккаунт администратора. Он может потребоваться для восстановления системы.</li>
+<li>Аккаунт администратора, созданный при инициализации экземпляра ПО, не следует удалять, даже если впоследствии аккаунты будут синхронизироваться с Active Directory.</li>
+</ul>
+</div>
+</li>
+<li>
+<p>При необходимости откроется страница инициализации служб. Выберите службы, которые должны быть запущены, и нажмите кнопку «<strong>Далее</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Страница инициализации служб" src="/platform/v5.0/administration/deploy/windows/../linux/img/deploy_guide_system_initialize.png"/>
+<figcaption class="caption">Страница инициализации служб</figcaption>
+</figure>
+</li>
+<li>
+<p>При необходимости откроется страница активации ПО. Выполните <strong>онлайн-</strong> или <strong>ручную активацию</strong> либо нажмите кнопку «<strong>Пропустить</strong>» для первоначального ознакомления с ПО без активации.</p>
+</li>
+<li>При необходимости откроется страница настройки подключения к службе Elasticsearch.</li>
+<li>В поле «<strong>URI</strong>» введите адрес сервера Elasticsearch, например: <code>http://localhost:9200</code></li>
+<li>Оставьте <strong>имя пользователя</strong> и <strong>пароль</strong> Elasticsearch пустыми. Или введите их, если в конфигурации Elasticsearch включена аутентификация.</li>
+<li>Установите уникальный <strong>префикс индекса</strong>, например <code>mycompanyprefix</code>. Он служит для идентификации в Elasticsearch данных экземпляра ПО. Поэтому во избежание конфликтов данных для каждого экземпляра ПО следует указывать собственный префикс индекса.</li>
+<li>Нажмите кнопку «<strong>Далее</strong>».</li>
+<li>
+<p>При необходимости откроется страница инициализации данных в Elasticsearch.</p>
+<figure class="screenshot_with_caption"><img alt="Страница инициализации данных в Elasticsearch" src="/platform/v5.0/administration/deploy/windows/../linux/img/deploy_guide_elasticsearch_initialize.png"/>
+<figcaption class="caption">Страница инициализации данных в Elasticsearch</figcaption>
+</figure>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Обновить</strong>».</p>
+</li>
+<li>
+<p>Дождитесь открытия начальной страницы <strong>Comindware Business Application Platform</strong>.</p>
+<figure class="screenshot_with_caption"><img alt="Начальная страница Comindware Business Application Platform" src="/platform/v5.0/administration/deploy/windows/../linux/img/deploy_guide_desktop.png"/>
+<figcaption class="caption">Начальная страница Comindware Business Application Platform</figcaption>
+</figure>
+</li>
+<li>
+<p>На этом этапе развертывание экземпляра <strong>Comindware Business Application Platform</strong> завершено и можно приступать к созданию и использованию приложений.</p>
+</li>
+</ol>
+<h2 id="обновление-экземпляра-по">Обновление экземпляра ПО</h2>
+<ol class="colored_numbers_list">
+<li>Скачайте и установите ПО новой версии согласно инструкциям в параграфе <em>«<a class="mkdocs_imported_link" href="#deploy_guide_windows_install_sw">Установка Comindware Business Application Platform</a>»</em>.</li>
+<li>
+<p>Перейдите в папку со скриптами для развёртывания ПО <strong>Comindware Business Application Platform</strong>:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="nb">cd </span><span class="s2">"X:\&lt;distPath&gt;\X.X-release-ru-X.X.XXXXX.X.windows\CMW_Windows\scripts\platform"</span></code></pre>
+</div>
+</li>
+<li>
+<p>Запустите обновление экземпляра ПО:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="p">.\</span><span class="n">instance_upgrade</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span> <span class="n">-version</span> <span class="p">&lt;</span><span class="n">versionNumber</span><span class="p">&gt;</span> </code></pre>
+</div>
+<p>Скрипт <code>instance_upgrade.ps1</code> поддерживает следующие ключи:</p>
+<ul>
+<li><code>name &lt;instanceName&gt;</code> — <strong>обязательный</strong> ключ с именем экземпляра ПО.</li>
+<li><code>version &lt;versionNumber&gt;</code> — обновить экземпляр ПО до указанной версии вида <code>X.X.XXXXX.X</code> (например: <code>4.7.12345.0</code>) из папки вида <code>C:\Program Files\Comindware\CBAP\&lt;versionNumber&gt;</code>.</li>
+<li><code>versionPath &lt;versionPath&gt;</code> — обновить экземпляр ПО до версии из указанной папки <code>&lt;versionPath&gt;</code>.</li>
+<li><code>h</code> — вызвать справку по использованию скрипта (этот ключ следует указывать только без остальных ключей).</li>
+</ul>
+</li>
+<li>
+<p>Просмотрите список установленных экземпляров ПО:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="p">.\</span><span class="n">instance_list</span><span class="p">.</span><span class="n">ps1</span></code></pre>
+</div>
+</li>
+<li>
+<p>Рядом с именем экземпляра ПО отобразится номер версии.</p>
+</li>
+</ol>
+<h2 id="удаление-экземпляра-по">Удаление экземпляра ПО</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите в папку со скриптами для развёртывания ПО <strong>Comindware Business Application Platform</strong>:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="nb">cd </span><span class="s2">"X:\&lt;distPath&gt;\X.X-release-ru-X.X.XXXXX.X.windows\CMW_Windows\scripts\platform"</span></code></pre>
+</div>
+</li>
+<li>
+<p>Удалите экземпляр ПО:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="p">.\</span><span class="n">instance_delete</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-name</span> <span class="p">&lt;</span><span class="n">instanceName</span><span class="p">&gt;</span></code></pre>
+</div>
+<p>Скрипт <code>instance_delete.ps1</code> поддерживает следующие ключи:</p>
+<ul>
+<li><code>name &lt;instanceName&gt;</code> — <strong>обязательный</strong> ключ с именем экземпляра ПО. Если не указать другие ключи, будет удалена только служба <code>comindware&lt;instanceName&gt;</code>.</li>
+<li><code>deleteData</code> — удалить базу данных из папки вида <code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Data</code> и пользовательские файлы экземпляра ПО из папки вида <code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Streams</code>. Без указания этого ключа или ключа <code>clear</code> база данных экземпляра ПО не будет удалена.</li>
+<li><code>clear</code> — удалить все файлы, папки, базу данных и пользовательские файлы вместе с папкой вида <code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;</code>, а также службы экземпляра ПО, сайт и пул приложения из IIS.</li>
+</ul>
+</li>
+</ol>
+<h2 id="удаление-версии-по">Удаление версии ПО</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите в папку со скриптами для развёртывания ПО <strong>Comindware Business Application Platform</strong>:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="nb">cd </span><span class="s2">"X:\&lt;distPath&gt;\X.X-release-ru-X.X.XXXXX.X.windows\CMW_Windows\scripts\platform"</span></code></pre>
+</div>
+</li>
+<li>
+<p>Просмотрите список установленных экземпляров ПО:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="p">.\</span><span class="n">instance_list</span><span class="p">.</span><span class="n">ps1</span></code></pre>
+</div>
+</li>
+<li>
+<p>Удалите все экземпляры с версией ПО, которую требуется удалить, или обновите их до другой версии. Удалить версию ПО, которая используется в каких-либо экземплярах, не удастся. См. <em>«<a class="mkdocs_imported_link" href="#удаление-экземпляра-по">Удаление экземпляра ПО</a>»</em>.</p>
+</li>
+<li>
+<p>Удалите версию ПО:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="p">.\</span><span class="n">version_delete</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-version</span> <span class="p">&lt;</span><span class="n">versionNumber</span><span class="p">&gt;</span></code></pre>
+</div>
+<p>Здесь: <code>-version &lt;versionNumber&gt;</code> — указать номер версии ПО вида <code>X.X.XXXXX.X</code> (например: <code>4.7.12345.0</code>).</p>
+</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4620">Пути и содержимое директорий экземпляра ПО</a></em></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>
+</div>

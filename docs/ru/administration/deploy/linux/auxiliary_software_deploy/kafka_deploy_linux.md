@@ -1,6 +1,6 @@
 ---
 title: Apache Kafka. Установка в базовой конфигурации
-kbId: 5074
+kbId: 5450
 tags:
     - Kafka
     - Linux
@@ -64,7 +64,7 @@ hide: tags
 4. Установите Kafka из дистрибутива с помощью ключа `-k`:
 
     ``` sh
-    sh prerequisites_install.sh -k
+    bash prerequisites_install.sh -k
     ```
 
 5. Отредактируйте файл `/usr/share/kafka/config/kraft/server.properties` по следующему образцу:

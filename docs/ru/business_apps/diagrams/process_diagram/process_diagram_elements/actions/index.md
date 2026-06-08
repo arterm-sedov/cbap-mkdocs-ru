@@ -12,7 +12,7 @@ tags:
   - диаграмма
 hide:
   - tags
-kbId: 4732
+kbId: 5664
 ---
 
 # Действия. Определение и типы  {: #process_diagram_elements_actions}

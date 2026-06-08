@@ -1,0 +1,35 @@
+<h1>Вычисление объектов, удовлетворяющих условию</h1><p><strong>Пример задачи:</strong> на форме проекта отобразить в коллекции только тех сотрудников, которые обладают необходимыми для проекта навыками. Сотрудник отображается только в том случае, если все запрашиваемые навыки присутствуют.</p>
+<p>Проект «Космический туризм», необходимые навыки для работы в проекте: Астрономия, Иностранные языки, Логистика.</p>
+<p>Сотрудник №1 обладает навыками: Астрономия, Логистика, Программирование, Сетевые технологии.</p>
+<p>Сотрудник №2 обладает навыками: Веб-дизайн, "Астрономия, Иностранные языки, Логистика.</p>
+<p>У сотрудника №1 нет всех необходимых навыков для участия в проекте, его не нужно отображать в коллекции. А сотрудник №2 подходит, его нужно отобразить.  </p>
+<p><strong>Модель данных:</strong></p>
+<ul>
+<li>Шаблон записи «Проекты» (projects):
+<ul style="list-style-type: circle;">
+<li>Атрибут «Необходимые навыки» (required_skills), ссылающийся на справочник «Навыки» (несколько значений);</li>
+<li>Атрибут «Сотрудники, подходящие для проекта», ссылающийся на справочник «Сотрудники» (несколько значений).</li>
+</ul>
+</li>
+<li>Шаблон записи «Сотрудники» (employees):
+<ul style="list-style-type: circle;">
+<li>Атрибут «Навыки сотрудника» (available_skills), ссылающийся на справочник «Навыки» (несколько значений).</li>
+</ul>
+</li>
+<li>  Шаблон записи «Навыки».</li>
+</ul>
+<p>Для того, чтобы вычислить объекты, удовлетворяющие условию, заданному в основном объекте (в данном случае, сотрудников с необходимыми навыками), введите следующее выражение:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">
+<p>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.<br/>@prefix assert: &lt;http://comindware.com/logics/assert#&gt;.<br/>@prefix cmw: &lt;http://comindware.com/logics#&gt;.<br/>{<br/>    ("projects" "required_skills") object:findProperty ?PropertyLittle. <br/>    ("employees" "available_skills") object:findProperty ?PropertyBig.</p>
+<p><br/>    ?container object:alias "employees". <br/>    ?allObjs cmw:container ?container.</p>
+<p>    {<br/>        ?item ?PropertyLittle ?resultL.<br/>        ?allObjs ?PropertyBig ?resultL.<br/>    } assert:count ?c.</p>
+<p>    {<br/>        ?item ?PropertyLittle ?resultA.<br/>    } assert:count ?d.<br/>    <br/>    if {?c == ?d}<br/>    then {?allObjs -&gt; ?value.}<br/>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>

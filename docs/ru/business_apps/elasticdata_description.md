@@ -1,6 +1,6 @@
 ---
 title: Технология ElasticData
-kbId: 4584
+kbId: 5259
 ---
 
 # Технология {{ productNameElasticData}} {: #elasticdata_description}

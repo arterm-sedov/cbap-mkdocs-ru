@@ -1,5 +1,5 @@
 ---
-kbId: 4586
+kbId: 5430
 title: Описание ПО
 kbTitle: Описание Comindware Platform 5
 tags:

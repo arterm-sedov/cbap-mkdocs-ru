@@ -9,7 +9,7 @@ tags:
     - подстрока
 hide:
     - tags
-kbId: 4917
+kbId: 5385
 ---
 
 # Атрибут типа «Текст». Поиск строки в тексте с помощью N3 {: #attribute_text_substring_search_n3}

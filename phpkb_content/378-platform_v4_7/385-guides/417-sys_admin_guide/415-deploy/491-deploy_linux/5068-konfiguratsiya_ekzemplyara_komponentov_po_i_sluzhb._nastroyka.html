@@ -1,0 +1,250 @@
+<h1>Конфигурация экземпляра, компонентов ПО и служб. Настройка</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#конфигурация-экземпляра-по"> <span class="md-ellipsis"> Конфигурация экземпляра ПО </span> </a><nav aria-label="Конфигурация экземпляра ПО" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#пример-yml-файла-конфигурации-экземпляра-по"> <span class="md-ellipsis"> Пример YML-файла конфигурации экземпляра ПО </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#конфигурация-службы-apigateway"> <span class="md-ellipsis"> Конфигурация службы apigateway </span> </a><nav aria-label="Конфигурация службы apigateway" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#пример-конфигурации-службы-apigatewayjson"> <span class="md-ellipsis"> Пример конфигурации службы apigateway.json </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#конфигурация-службы-adapterhost"> <span class="md-ellipsis"> Конфигурация службы adapterhost </span> </a><nav aria-label="Конфигурация службы adapterhost" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#пример-файла-конфигурации-adapterhostconfig"> <span class="md-ellipsis"> Пример файла конфигурации adapterhost.config </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#конфигурация-apache-ignite"> <span class="md-ellipsis"> Конфигурация Apache Ignite </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#конфигурация-кучи-java"> <span class="md-ellipsis"> Конфигурация кучи Java </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#конфигурация-nginx"> <span class="md-ellipsis"> Конфигурация NGINX </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Здесь представлены инструкции по настройке файлов конфигурации после развёртывания и обновления ПО <strong>Comindware Business Application Platform</strong>, его компонентов и служб.</p>
+<h2 id="конфигурация-экземпляра-по">Конфигурация экземпляра ПО</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Откройте файл конфигурации экземпляра ПО (<code>&lt;instanceName&gt;</code> — имя экземпляра ПО) для редактирования:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>nano /usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code></pre>
+</div>
+</li>
+<li>
+<p>Измените необходимые параметры, например:</p>
+<ul>
+<li><code>databasePath</code> — путь к базе данных экземпляра ПО.</li>
+<li><code>backup.config.default.repository.localDisk.path</code> или <code>backup.defaultFolder</code> — директория для хранения резервных копий.</li>
+<li><code>userStorage.localDisk.path</code> — директория для хранения пользовательских файлов.</li>
+<li><code>mq.server</code> — адрес сервера Kafka.</li>
+</ul>
+</li>
+<li>
+<p>Сохраните файл конфигурации.</p>
+</li>
+<li>
+<p>Убедитесь, что директории, указанные в файле конфигурации, существуют. При необходимости создайте их и задайте права доступа:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>mkdir -p &lt;path/to/Database&gt;</code><br/><code>mkdir -p &lt;path/to/Streams&gt;</code><br/><code>mkdir -p &lt;path/to/Backup&gt;</code><br/><code>chmod -R <span class="m">766</span> &lt;path/to/Database&gt; &lt;path/to/Streams&gt; &lt;path/to/Backup&gt;</code><br/><code>chown -R &lt;User&gt;:&lt;Group&gt; &lt;path/to/Database&gt; &lt;path/to/Streams&gt; &lt;path/to/Backup&gt;</code></pre>
+</div>
+<p>Здесь значения <code>&lt;User&gt;</code> и <code>&lt;Group&gt;</code> должны совпадать с такими же параметрами в файле <code>/usr/lib/systemd/system/comindware&lt;instanceName&gt;.service</code></p>
+</li>
+<li>
+<p>Перезапустите службу экземпляра ПО:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>systemctl restart comindware&lt;instanceName&gt;</code></pre>
+</div>
+</li>
+</ol>
+<h3 id="пример-yml-файла-конфигурации-экземпляра-по">Пример YML-файла конфигурации экземпляра ПО</h3>
+<div class="highlight"><code><code></code></code>
+<pre><code># Федеративная аутентификация отключена (1 — вкл.)</code><br/><code>isFederationAuthEnabled: 0</code><br/><code># Путь к базе данных</code><br/><code>databasePath: /var/lib/comindware/&lt;instanceName&gt;/Database</code><br/><code># Путь к исполняемым и конфигурационным файлам экземпляра ПО</code><br/><code>configPath: /var/www/&lt;instanceName&gt;</code><br/><code># Тип хранилища резервных копий: LocalDisk или S3</code><br/><code>backup.config.default.repository.type: LocalDisk</code><br/><code># Путь к директории резервных копий</code><br/><code>backup.config.default.repository.localDisk.path: /var/backups/&lt;instanceName&gt;</code><br/><code># Тип хранилища пользовательских файлов: LocalDisk или S3</code><br/><code>userStorage.type: LocalDisk</code><br/><code># Путь к директории пользовательских файлов</code><br/><code>userStorage.localDisk.path: /var/lib/comindware/&lt;instanceName&gt;/Streams</code><br/><code># Тип хранилища временных файлов: LocalDisk или S3</code><br/><code>tempStorage.type: LocalDisk</code><br/><code># Путь к директории временных файлов</code><br/><code>tempStorage.localDisk.path: /var/lib/comindware/&lt;instanceName&gt;/Temp</code><br/><code># Адрес и порт сервера очереди сообщений (Kafka)</code><br/><code>mq.server: &lt;kafkaBrokerIP&gt;:&lt;kafkaBrokerPort&gt;</code><br/><code># Идентификатор группы очереди сообщений. Должно быть уникальным для каждого экземпляра</code><br/><code>mq.group: &lt;instanceName&gt;</code><br/><code># Управление службой adapterhost включено</code><br/><code>manageAdapterHost: true</code><br/><code># Адрес и порт сервера Elasticsearch</code><br/><code>elasticsearchUri: &lt;elasticsearchIP&gt;:&lt;elasticsearchPort&gt;</code><br/><code># Имя экземпляра ПО</code><br/><code>instanceName: &lt;instanceName&gt;</code><br/><code># Версия ПО</code><br/><code>version: &lt;versionNumber&gt;</code></pre>
+</div>
+<h2 id="конфигурация-службы-apigateway">Конфигурация службы apigateway</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Откройте файл конфигурации <code>apigateway.json</code> экземпляра ПО для редактирования:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>nano /var/www/&lt;instanceName&gt;/apigateway.json</code></pre>
+</div>
+</li>
+<li>
+<p>Измените необходимые параметры.</p>
+</li>
+<li>Удостоверьтесь, что значение параметра <code>BootstrapServer</code> (адрес и порт сервера очереди сообщений) совпадает с <code>mq.server</code>, а <code>GroupId</code> (идентификатор группы очереди сообщений) — с <code>mq.group</code> в <a class="mkdocs_imported_link" href="#пример-yml-файла-конфигурации-экземпляра-по">файле конфигурации экземпляра ПО</a>.</li>
+<li>Сохраните файл конфигурации.</li>
+<li>
+<p>Перезапустите службу apigateway:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>systemctl restart apigateway&lt;instanceName&gt;</code></pre>
+</div>
+</li>
+</ol>
+<h3 id="пример-конфигурации-службы-apigatewayjson">Пример конфигурации службы apigateway.json</h3>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="p">{</span></code><br/><code>   <span class="nt">"Instance"</span><span class="p">:{</span></code><br/><code>      <span class="nt">"Name"</span><span class="p">:</span><span class="s2">"&lt;instanceName&gt;"</span></code><br/><code>   <span class="p">},</span></code><br/><code>   <span class="nt">"Log"</span><span class="p">:{</span></code><br/><code>      <span class="nt">"Enabled"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span></code><br/><code>      <span class="nt">"ConfigurationFile"</span><span class="p">:</span><span class="s2">"/var/www/&lt;instanceName&gt;/logs.config"</span></code><br/><code>   <span class="p">},</span></code><br/><code>   <span class="nt">"Kata"</span><span class="p">:{</span></code><br/><code>      <span class="nt">"Enabled"</span><span class="p">:</span><span class="kc">false</span></code><br/><code>   <span class="p">},</span></code><br/><code>   <span class="nt">"Kafka"</span><span class="p">:{</span></code><br/><code>      <span class="nt">"BootstrapServer"</span><span class="p">:</span><span class="s2">"&lt;kafkaBrokerIP&gt;:&lt;kafkaBrokerPort&gt;"</span><span class="p">,</span></code><br/><code>      <span class="nt">"GroupId"</span><span class="p">:</span><span class="s2">"&lt;instanceName&gt;"</span></code><br/><code>   <span class="p">},</span></code><br/><code>   <span class="nt">"Grpc"</span><span class="p">:{</span></code><br/><code>      <span class="nt">"SocketPath"</span><span class="p">:</span><span class="s2">"/var/www/&lt;instanceName&gt;/App_Data/apigateway.socket"</span><span class="p">,</span></code><br/><code>      <span class="nt">"Protocol"</span><span class="p">:</span><span class="s2">"Http2"</span></code><br/><code>   <span class="p">}</span></code><br/><code><span class="p">}</span></code></pre>
+</div>
+<h2 id="конфигурация-службы-adapterhost">Конфигурация службы adapterhost</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Откройте файл конфигурации <code>adapterhost.config</code> экземпляра ПО для редактирования:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>nano /var/www/&lt;instanceName&gt;/adapterhost.config</code></pre>
+</div>
+</li>
+<li>
+<p>Отредактируйте необходимые параметры.</p>
+</li>
+<li>Удостоверьтесь, что значение параметра <code>BootstrapServers</code> совпадает с <code>mq.server</code>, а <code>groupId</code> — с <code>mq.group</code> в <a class="mkdocs_imported_link" href="#конфигурация-экземпляра-по">файле конфигурации экземпляра</a>.</li>
+<li>Сохраните файл конфигурации.</li>
+<li>
+<p>После внесения изменений перезапустите службу adapterhost:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="nb">kill</span> -9 <span class="k">$(</span>ps -eo pid,args <span class="p">|</span> grep $&lt;instanceName&gt; <span class="p">|</span> grep Agent <span class="p">|</span> awk <span class="o">{</span><span class="s1">'print $1'</span><span class="o">}</span><span class="k">)</span> <span class="o">&amp;&amp;</span> systemctl restart comindware&lt;instanceName&gt;</code></pre>
+</div>
+</li>
+</ol>
+<h3 id="пример-файла-конфигурации-adapterhostconfig">Пример файла конфигурации adapterhost.config</h3>
+<div class="highlight"><code><code></code></code>
+<pre><code>platformKey: &lt;instanceName&gt;</code><br/><code>loaderFolder: /var/log/comindware/.adapterhost/&lt;instanceName&gt;/LoadData</code><br/><code>deployRequestQueue: request_queue_&lt;hostname&gt;_&lt;instanceName&gt;_deploy_external</code><br/><code>deployReplyQueue: reply_queue_&lt;hostname&gt;_&lt;instanceName&gt;_deploy_external</code><br/><code>outgoingRequestQueue: request_queue_&lt;hostname&gt;_&lt;instanceName&gt;_outgoing_external</code><br/><code>outgoingReplyQueue: reply_queue_&lt;hostname&gt;_&lt;instanceName&gt;_outgoing_external</code><br/><code>incomingRequestQueue: request_queue_&lt;hostname&gt;_&lt;instanceName&gt;_incoming_external</code><br/><code>incomingReplyQueue: reply_queue_&lt;hostname&gt;_&lt;instanceName&gt;_incoming_external</code><br/><code>bootstrapServers: &lt;kafkaBrokerIP&gt;:&lt;kafkaBrokerPort&gt;</code><br/><code>groupId: &lt;instanceName&gt;</code><br/><code>exclusiveGroupId:</code><br/><code>serverLanguage: ru-RU</code><br/><code>securityProtocol: Plaintext</code><br/><code>caLocation:</code><br/><code>endpointIdentificationEnabled: true</code><br/><code>saslMechanism: None</code><br/><code>username:</code><br/><code>password:</code><br/><code>logFolder: /var/log/comindware/&lt;instanceName&gt;/Logs/</code><br/><code>archiveFolder: /var/log/comindware/&lt;instanceName&gt;/Logs/Archive/</code><br/><code>maxArchiveFiles: 30</code><br/><code>archiveAboveSize: 104857600</code></pre>
+</div>
+<h2 id="конфигурация-apache-ignite">Конфигурация Apache Ignite</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Откройте файл конфигурации Ignite для редактирования:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>nano /var/www/&lt;instanceName&gt;/Ignite.config</code></pre>
+</div>
+</li>
+<li>
+<p>В блоке <code>&lt;bean class="org.apache.ignite.configuration.DataRegionConfiguration"&gt;</code> задайте максимальный объём выделяемой памяти:</p>
+<ul>
+<li>
+<p>3 ГБ:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"maxSize"</span> <span class="na">value=</span><span class="s">"#{3L * 1024 * 1024 * 1024}"</span> <span class="nt">/&gt;</span></code></pre>
+</div>
+</li>
+<li>
+<p>8 ГБ:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"maxSize"</span> <span class="na">value=</span><span class="s">"#{8L * 1024 * 1024 * 1024}"</span> <span class="nt">/&gt;</span></code></pre>
+</div>
+</li>
+</ul>
+</li>
+<li>
+<p>В случае изменения максимального объёма выделяемой памяти отредактируйте параметр <code>checkpointPageBufferSize</code>. Чтобы рассчитать размер значения, разделите размер <code>maxSize</code> на четыре, при этом значение не должно в диапазоне 256 МБ — 2 ГБ. Для максимального объёма выделяемой памяти в 8 Гб, значение будет следующим:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">"checkpointPageBufferSize"</span> <span class="na">value=</span><span class="s">"#{2L * 1024 * 1024 * 1024}"</span> <span class="nt">/&gt;</span></code></pre>
+</div>
+</li>
+<li>
+<p>Перезапустите службу экземпляра ПО:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>systemctl restart comindware&lt;instanceName&gt;</code></pre>
+</div>
+</li>
+</ol>
+<h2 id="конфигурация-кучи-java">Конфигурация кучи Java</h2>
+<p>В зависимости от объёма оперативной памяти на сервере следует отредактировать конфигурацию области памяти для кучи Java.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Откройте файл конфигурации среды экземпляра ПО для редактирования:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>nano /etc/sysconfig/comindware&lt;instanceName&gt;-env</code></pre>
+</div>
+</li>
+<li>
+<p>Задайте объём памяти, который выделяется для кучи Java:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="na">JVM_OPTS</span><span class="o">=</span><span class="s">-Xms512m -Xmx16g -XX:MaxDirectMemorySize=1g ...</span></code></pre>
+</div>
+<p>Здесь:</p>
+<ul>
+<li><code>-Xms</code> — начальный размер кучи;</li>
+<li><code>-Xmx</code> — максимальный размер кучи.</li>
+</ul>
+</li>
+<li>
+<p>Сохраните файл конфигурации.</p>
+</li>
+<li>
+<p>Перезапустите службу экземпляра ПО:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>systemctl daemon-reload</code><br/><code>systemctl restart comindware&lt;instanceName&gt;</code></pre>
+</div>
+</li>
+</ol>
+<h2 id="конфигурация-nginx">Конфигурация NGINX</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Откройте файл конфигурации NGINX для редактирования:</p>
+<ul>
+<li>
+<p><strong>Astra Linux</strong>, <strong>Ubuntu</strong>, <strong>Debian</strong> (DEB-based)</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>nano /etc/nginx/sites-available/comindware&lt;instanceName&gt;</code></pre>
+</div>
+</li>
+<li>
+<p><strong>РЕД ОС</strong>, <strong>Rocky</strong> (RPM-based)</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>nano /etc/nginx/conf.d/comindware&lt;instanceName&gt;</code></pre>
+</div>
+</li>
+<li>
+<p><strong>Альт Сервер</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code>nano /etc/nginx/sites-available.d/comindware&lt;instanceName&gt;</code></pre>
+</div>
+</li>
+</ul>
+</li>
+<li>
+<p>В директиве <code>server</code> задайте номер порта и адрес сервера, по которым будет доступен экземпляр ПО:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>server <span class="o">{</span></code><br/><code>    <span class="c1"># Укажите адрес сервера для доступа к экземпляра ПО.</span></code><br/><code>    server_name &lt;host_name&gt;</code><br/><code>    <span class="c1"># Укажите номер порта для доступа к экземпляра ПО.</span></code><br/><code>    listen &lt;portNumber&gt;</code><br/><code><span class="o">}</span></code></pre>
+</div>
+</li>
+<li>
+<p>Для записи событий в отдельные журналы укажите их:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>    error_log /var/log/nginx/&lt;instanceName&gt;-error.log<span class="p">;</span></code><br/><code>    access_log /var/log/nginx/&lt;instanceName&gt;-access.log<span class="p">;</span></code></pre>
+</div>
+</li>
+<li>
+<p>Сохраните файл конфигурации.</p>
+</li>
+<li>
+<p>Проверьте, что изменения работают корректно:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>nginx -t</code></pre>
+</div>
+</li>
+<li>
+<p>При успешном вступлении изменений в силу перезагрузите NGINX:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>nginx -s reload</code></pre>
+</div>
+</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2502">Пути и содержимое директорий экземпляра ПО</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2496">Настройка конфигурации вспомогательного ПО для оптимизации работы Comindware Business Application Platform</a></em></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

@@ -1,6 +1,6 @@
 ---
 title: Онтология
-kbId: 4856
+kbId: 5254
 ---
 
 # Онтология {: #n3_guide_ontology }

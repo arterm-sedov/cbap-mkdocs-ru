@@ -10,7 +10,7 @@ tags:
   - синхронизация
 hide:
   - tags
-kbId: 4697
+kbId: 5308
 ---
 
 # Синхронизация с веб-сервисом. Интеграция по OData {: #odata_integration}

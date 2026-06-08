@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4704" kb-tags="" kb-title="Получение сообщений через Kafka. Настройка подключения, пути передачи данных и сценария">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5635" kb-tags="" kb-title="Получение сообщений через Kafka. Настройка подключения, пути передачи данных и сценария">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -9,7 +9,7 @@
       </h2>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<a class="md-nav__link mkdocs_imported_link" href="#kafka_connection_intro">
 <span class="md-ellipsis">
       
         Введение
@@ -18,7 +18,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#прикладная-задача">
+<a class="md-nav__link mkdocs_imported_link" href="#kafka_connection_use_case">
 <span class="md-ellipsis">
       
         Прикладная задача
@@ -27,7 +27,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#исходные-данные">
+<a class="md-nav__link mkdocs_imported_link" href="#kafka_connection_source_data">
 <span class="md-ellipsis">
       
         Исходные данные
@@ -54,7 +54,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#настройка-сценария">
+<a class="md-nav__link mkdocs_imported_link" href="#kafka_connection_scenario">
 <span class="md-ellipsis">
       
         Настройка сценария
@@ -63,7 +63,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#создание-топика-и-тестирование-работы-интеграции">
+<a class="md-nav__link mkdocs_imported_link" href="#kafka_connection_test">
 <span class="md-ellipsis">
       
         Создание топика и тестирование работы интеграции
@@ -72,7 +72,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#просмотр-журнала-работы-сценария">
+<a class="md-nav__link mkdocs_imported_link" href="#kafka_connection_scenario_log">
 <span class="md-ellipsis">
       
         Просмотр журнала работы сценария
@@ -96,10 +96,12 @@
 <article class="md-content__inner md-typeset">
 <div class="notice notice-error">
 <p class="admonition-title">Экспериментальная функция</p>
-<p>Представленная здесь функция находится на стадии разработки. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4579#experimental_feature_support">Поддержка экспериментальных функций</a>»</em>.</p>
+<p>Представленная здесь функция находится на стадии разработки. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5161#experimental_feature_support">Поддержка экспериментальных функций</a>»</em>.</p>
 </div>
-<h2 id="введение">Введение</h2>
+<h2 id="kafka_connection_intro">Введение</h2>
 <p>Здесь представлены инструкции по настройке подключения, пути передачи данных и сценария для обмена данными с внешней системой посредством шины сообщений Apache Kafka.</p>
+<p>Если требуется импортировать данные в шаблон записи с сопоставлением полей, поиском записей по ключевым атрибутам и созданием или обновлением записей, используйте <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5743">Адаптер импорта данных в платформу. Настройка подключения, пути передачи данных и сценария</a>»</em>. Этот адаптер преобразует входящее XML- или JSON-сообщение во внутреннюю структуру DataImport и запускает сценарий обработки сообщения.</p>
+<p>Если требуется отправлять данные из <strong>Comindware Platform</strong> в топик Apache Kafka, используйте <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5744">Адаптер экспорта данных из платформы. Настройка подключения, пути передачи данных и сценария</a>»</em>.</p>
 <p>Настройка обмена данными для шин MSMQ и RabbitMQ осуществляется аналогичным образом.</p>
 <div class="notice notice-success">
 <p class="admonition-title">Определения</p>
@@ -119,9 +121,9 @@
 <li>При получении сообщений через шину Apache Kafka <strong>Comindware Platform</strong> является <strong>потребителем</strong>, а при отправке — <strong>продюсером</strong>.</li>
 </ul>
 </div>
-<h2 id="прикладная-задача">Прикладная задача</h2>
+<h2 id="kafka_connection_use_case">Прикладная задача</h2>
 <p>Необходимо настроить интеграцию с шиной Apache Kafka, которая будет опрашивать топик <code>CLIENT_ORDERS</code>, извлекать из него данные о заказах клиентов и создавать для каждого полученного заказа запись в шаблоне <em>«Заказы»</em> с заполненными кодом и суммой заказа.</p>
-<h2 id="исходные-данные">Исходные данные</h2>
+<h2 id="kafka_connection_source_data">Исходные данные</h2>
 <ul>
 <li>Имеется приложение <em>«Обработка заказов»</em>.</li>
 <li>
@@ -151,7 +153,7 @@
 </ul>
 <h2 class="pageBreakBefore" id="kafka_connection_configure">Настройка подключения к Apache Kafka</h2>
 <ol class="colored_numbers_list">
-<li>Откройте страницу <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4661">«<strong>Администрирование</strong>» — «<strong>Подключения</strong>»</a>.</li>
+<li>Откройте страницу <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5608">«<strong>Администрирование</strong>» — «<strong>Подключения</strong>»</a>.</li>
 <li>
 <p>Создайте или настройте <strong>подключение к шине сообщений</strong> типа «<strong>Получение сообщений через Kafka</strong>»:</p>
 <ul>
@@ -180,7 +182,7 @@
 </ol>
 <h2 id="kafka_connection_communication_route_configure">Настройка пути передачи данных через Apache Kafka</h2>
 <ol class="colored_numbers_list">
-<li>Откройте страницу <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4661">«<strong>Администрирование</strong>» — «<strong>Пути передачи данных</strong>»</a>.</li>
+<li>Откройте страницу <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5608">«<strong>Администрирование</strong>» — «<strong>Пути передачи данных</strong>»</a>.</li>
 <li>Создайте или настройте путь передачи данных для <strong>подключения к шине сообщений</strong> типа «<strong>Получение сообщений через Kafka</strong>».</li>
 <li>
 <p>Настройте параметры на вкладке «<strong>Основные свойства</strong>»:</p>
@@ -197,7 +199,7 @@
 <ul>
 <li><strong>Тип сообщения</strong> — выберите тип «<strong>Получение сообщений через Kafka</strong>» (в соответствии с типом пути передачи данных).</li>
 <li>
-<p><strong>Запрос</strong> — с помощью кнопки «<strong>Добавить</strong>» сформируйте структуру атрибутов, соответствующую структуре сообщения в формате XML/JSON. Значения этих атрибутов будут помещены в переменную и обработаны с помощью <a class="mkdocs_imported_link" href="#настройка-сценария">сценария</a>, срабатывающего при наступлении события «<strong>Получение сообщения</strong>»:</p>
+<p><strong>Запрос</strong> — с помощью кнопки «<strong>Добавить</strong>» сформируйте структуру атрибутов, соответствующую структуре сообщения в формате XML/JSON. Значения этих атрибутов будут помещены в переменную и обработаны с помощью <a class="mkdocs_imported_link" href="#kafka_connection_scenario">сценария</a>, срабатывающего при наступлении события «<strong>Получение сообщения</strong>»:</p>
 <ul>
 <li><strong>Системное имя</strong> — введите имя, совпадающее с именем поля в XML/JSON с точностью до строчных и прописных букв.</li>
 <li><strong>Тип</strong> — выберите тип атрибута, соответствующий типу поля в XML/JSON.</li>
@@ -254,7 +256,7 @@
 </div>
 </li>
 <li>
-<p><strong>Ответ</strong> и <strong>Ответ с ошибкой</strong> — аналогично запросу, сформируйте структуру атрибутов для отправки серверу Apache Kafka ответа на полученный запрос. Значения этим атрибутам можно присвоить с помощью <a class="mkdocs_imported_link" href="#настройка-сценария">сценария</a>, срабатывающего при наступлении события «<strong>Получение сообщения</strong>».</p>
+<p><strong>Ответ</strong> и <strong>Ответ с ошибкой</strong> — аналогично запросу, сформируйте структуру атрибутов для отправки серверу Apache Kafka ответа на полученный запрос. Значения этим атрибутам можно присвоить с помощью <a class="mkdocs_imported_link" href="#kafka_connection_scenario">сценария</a>, срабатывающего при наступлении события «<strong>Получение сообщения</strong>».</p>
 </li>
 </ul>
 </li>
@@ -271,8 +273,8 @@
 </ul>
 </li>
 </ol>
-<h2 class="" id="настройка-сценария" pagebreakbefore="pageBreakBefore">Настройка сценария</h2>
-<p>Для получения сообщений через шину Apache Kafka и передачи данных в шаблон записи требуется настроить <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4717">сценарий</a>, срабатывающий при поступлении сообщения из Apache Kafka.</p>
+<h2 class="pageBreakBefore" id="kafka_connection_scenario">Настройка сценария</h2>
+<p>Для получения сообщений через шину Apache Kafka и передачи данных в шаблон записи требуется настроить <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5654">сценарий</a>, срабатывающий при поступлении сообщения из Apache Kafka.</p>
 <ol class="colored_numbers_list">
 <li>На странице <strong>администрирования приложения</strong> выберите пункт «<strong>Сценарии</strong>».</li>
 <li>
@@ -340,9 +342,9 @@
 </li>
 </ol>
 <figure class="screenshot_with_caption">
-<p><img alt="Настроенный сценарий для получения данных через шину Apache Kafka" src="/platform/v5.0/administration/connections_communication_routes/message_queue_connections/../email_connections/img/kafka_connection_scenarios.png"/></p><figcaption class="caption">Настроенный сценарий для получения данных через шину Apache Kafka</figcaption>
+<p><img alt="Настроенный сценарий для получения данных через шину Apache Kafka" src="/platform/v6.0/administration/connections_communication_routes/message_queue_connections/../email_connections/img/kafka_connection_scenarios.png"/></p><figcaption class="caption">Настроенный сценарий для получения данных через шину Apache Kafka</figcaption>
 </figure>
-<h2 class="pageBreakBefore" id="создание-топика-и-тестирование-работы-интеграции">Создание топика и тестирование работы интеграции</h2>
+<h2 class="pageBreakBefore" id="kafka_connection_test">Создание топика и тестирование работы интеграции</h2>
 <ol class="colored_numbers_list">
 <li>
 <p>С помощью скрипта продюсера Apache Kafka инициализируйте топик, например <code>CLIENT_ORDERS</code>:</p>
@@ -364,7 +366,7 @@
 <li>Откройте шаблон записи <em>«Заказы»</em> и нажмите кнопку «<strong>Перейти к экземплярам</strong>».</li>
 <li>В шаблоне должны быть созданы записи, заполненные данными заказов из сообщения Apache Kafka.</li>
 </ol>
-<h2 id="просмотр-журнала-работы-сценария">Просмотр журнала работы сценария</h2>
+<h2 id="kafka_connection_scenario_log">Просмотр журнала работы сценария</h2>
 <ol class="colored_numbers_list">
 <li>Откройте страницу «<strong>Журналы событий</strong>».</li>
 <li>Выберите вкладку «<strong>Трассировка событий</strong>».</li>
@@ -374,8 +376,10 @@
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4675">Подключения. Типы, создание, настройка, удаление</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4676">Пути передачи данных. Типы, создание, настройка, удаление</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5303">Подключения. Типы, создание, настройка, удаление</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5302">Пути передачи данных. Типы, создание, настройка, удаление</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5743">Адаптер импорта данных в платформу. Настройка подключения, пути передачи данных и сценария</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5744">Адаптер экспорта данных из платформы. Настройка подключения, пути передачи данных и сценария</a></em></li>
 </ul>
 </div>
 </article>

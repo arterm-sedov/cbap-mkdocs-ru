@@ -1,6 +1,6 @@
 ---
 title: Подсистема журналирования
-kbId: 4623
+kbId: 5557
 tags:
     - linux
     - windows

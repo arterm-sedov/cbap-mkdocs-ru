@@ -7,7 +7,7 @@ tags:
   - Active Directory
 hide:
   - tags
-kbId: 4687
+kbId: 5319
 ---
 
 # Сервер каталогов. Настройка подключения {: #ad_connection}

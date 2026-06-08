@@ -1,6 +1,8 @@
 from tools.ssh_kb_ru import establish_connection_interactive, close_connection
 from tools.graceful_interrupt import safe_input, ensure_cleanup
 import html
+import argparse
+import sys
 from html.parser import HTMLParser
 import bs4
 from markdownify import markdownify as md
@@ -31,7 +33,7 @@ def parse_kb_unlisted(html_content: str) -> int:
     return int(match.group(1))
 
 
-def updateCategoryChildren(parent):
+def updateCategoryChildren(parent, yes=False):
     c = CONNECTION.cursor(buffered=True)
     
     id = parent[0]
@@ -51,13 +53,13 @@ def updateCategoryChildren(parent):
     children = c.fetchall()
     print(f"\n-----\n\nCategory {id}. {title}. Children: {children}\n")
     print(f'Updating articles from Category {id}. {title}.')
-    updateArticlesInCategory(id)
+    updateArticlesInCategory(id, yes=yes)
     for child in children:
-        updateCategoryChildren(child)
+        updateCategoryChildren(child, yes=yes)
     return children
     
         
-def updateArticlesInCategory (category_id):
+def updateArticlesInCategory (category_id, yes=False):
     c = CONNECTION.cursor(buffered=True)
     c.execute(f"""
             SELECT DISTINCT (phpkb_articles.article_id), phpkb_articles.article_content, phpkb_articles.article_title 
@@ -77,13 +79,13 @@ def updateArticlesInCategory (category_id):
         filename = f"{id} - {sanitizedTitle}"
         print ('    Updating article: ' + filename)
         pages += 1
-        updateArticle(id)
+        updateArticle(id, yes=yes)
     TOTAL_PAGES_UPDATED += pages
     print(f"\nUpdated {pages} articles, total {TOTAL_PAGES_UPDATED}\n\n-----\n")
     return pages
 
 
-def updateArticle(article_id):
+def updateArticle(article_id, yes=False):
     
     contentFound = False
     article_content = None
@@ -108,7 +110,7 @@ def updateArticle(article_id):
     if content_result is None:
         print(f'Content for article {article_id} not found in files')
         return False
-        
+    
     article_content, mkdocs_title, mkdocs_tags, mkdocs_unlisted = content_result
     
     # Escape the HTML and backslashes for MySQL
@@ -118,12 +120,15 @@ def updateArticle(article_id):
     
     if contentFound:
         try:
-            update = input(
-                f"KB title:     {article_title}\n"
-                f"KB tags:      {article_keywords}\n"
-                f"KB unlisted:  {article_unlisted_db}\n"
-                f"Update article {article_id} content, title, tags and unlisted? Y/N\n"
-            ).lower() == 'y'
+            if yes:
+                update = True
+            else:
+                update = input(
+                    f"KB title:     {article_title}\n"
+                    f"KB tags:      {article_keywords}\n"
+                    f"KB unlisted:  {article_unlisted_db}\n"
+                    f"Update article {article_id} content, title, tags and unlisted? Y/N\n"
+                ).lower() == 'y'
             if update:
                 article_last_updation = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 c.execute("""
@@ -146,7 +151,7 @@ def updateArticle(article_id):
                     article_id,
                 ))
                 CONNECTION.commit()
-                print(f"Updated article {article_id} updated")
+                print(f"Updated article {article_id}")
                 return True
         except:
             print(f"Failed to update the article {article_id}")
@@ -183,9 +188,60 @@ def main():
     global CONNECTION
     server = None
     
+    parser = argparse.ArgumentParser(
+        description="Publish rebuilt MkDocs HTML from for_kb_import_ru into existing PHPKB article rows by kbId."
+    )
+    parser.add_argument(
+        "--profile",
+        choices=("cmw", "cmwlab"),
+        help="PHPKB server profile. Defaults to SERVER_PROFILE from .env."
+    )
+    parser.add_argument(
+        "--article-id",
+        action="append",
+        help="Numeric article ID to update. Can be specified multiple times."
+    )
+    parser.add_argument(
+        "--category-id",
+        help="Numeric category ID to update (walks this category and child categories)."
+    )
+    parser.add_argument(
+        "--yes",
+        "-y",
+        action="store_true",
+        help="Non-interactive mode: auto-confirm updates without prompting."
+    )
+    args = parser.parse_args()
+    
     try:
-        CONNECTION, server = establish_connection_interactive()
+        CONNECTION, server = establish_connection_interactive(args.profile)
         
+        # Programmatic CLI usage
+        if args.article_id or args.category_id:
+            if args.article_id:
+                for aid in args.article_id:
+                    if aid.isnumeric():
+                        updateArticle(aid, yes=args.yes)
+                    else:
+                        print(f"Error: Article ID '{aid}' is not a valid numeric ID")
+            
+            if args.category_id:
+                if args.category_id.isnumeric():
+                    c = CONNECTION.cursor()
+                    c.execute(
+                        "SELECT category_id, category_name, parent_id FROM phpkb_categories WHERE category_id = %s",
+                        (args.category_id,)
+                    )
+                    cat_row = c.fetchone()
+                    if not cat_row:
+                        print(f"Error: Category {args.category_id} not found in the database")
+                        sys.exit(1)
+                    updateCategoryChildren(cat_row, yes=args.yes)
+                else:
+                    print(f"Error: Category ID '{args.category_id}' is not a valid numeric ID")
+            return
+
+        # Traditional interactive prompts
         choice = safe_input('Update specific articles? Y/N').lower()
         
         if choice == 'y':
@@ -195,7 +251,7 @@ def main():
                 if article_id.lower() == 'e':
                     break
                 if article_id.isnumeric():
-                    success = updateArticle(article_id)
+                    success = updateArticle(article_id, yes=args.yes)
                     if not success:
                         print("Please try another article ID or press 'E' to exit")
                 else:
@@ -249,7 +305,7 @@ def main():
 
                 else:
                     if categories[categoryChoice]:
-                        updateCategoryChildren(categories[categoryChoice])
+                        updateCategoryChildren(categories[categoryChoice], yes=args.yes)
     except KeyboardInterrupt:
         # Connection cleanup handled in finally block
         pass

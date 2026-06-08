@@ -1,6 +1,6 @@
 ---
 title: Apache Ignite. Установка и настройка
-kbId: 4600
+kbId: 5452
 tags:
     - Apache Ignite
     - Linux

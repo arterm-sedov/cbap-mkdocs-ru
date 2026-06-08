@@ -1,7 +1,7 @@
 ---
 title: Push-уведомления в браузере. Включение
 kbTitle: Push-уведомления в браузере. Включение в Яндекс, Chrome, Edge, Firefox, Safari
-kbId: 5133
+kbId: 5596
 tags:
     - android
     - браузер

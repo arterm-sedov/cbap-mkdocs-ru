@@ -1,0 +1,88 @@
+<h1>Шаблон экспорта, Настройка с использованием C#</h1><p>В <strong>Comindware Platform</strong> помимо стандартной выгрузки отчётов предусмотрен экспорт данных с использованием скриптов на C#. Этот вариант позволяет более гибко настроить параметры экспортируемого файла, например, с дополнительной фильтрацией или заменой информации, либо с форматированным выводом атрибутов-коллекций.</p>
+<p><strong>Шаблон документа в формате .xls </strong></p>
+<p>Рассмотрим решение следующей задачи: написать скрипт, который формирует Excel-файл, в котором каждый элемент коллекции располагается в отдельной строчке (по умолчанию все элементы коллекции перечисляются в одной строчке через пробел).</p>
+<p><strong>1.</strong> Для начала создайте шаблон экспорта по типу:</p>
+<div class="screenshot_with_caption">
+<p><img align="" alt="Пример excel шаблона экспорта" class="img-responsive" height="265" src="https://kb.comindware.ru/assets/exp1.jpg" width="1121"/></p>
+<p class="caption">Пример excel шаблона экспорта</p>
+</div>
+<p><strong>&amp;=data.свойство_класса</strong> (Свойства класса — структура подготовки данных, которые определяются в С# скрипте)</p>
+<div class="blue_note"><strong>Примечание :</strong> в Excel-файле обязательно нужно указывать необходимый формат полей, иначе данные выгрузятся некорректно. Для числа — числовой, для даты и времени — дата, и т.д.</div>
+<p>Поля «Клиент», «Контактное лицо», «Телефон» и «Email» будут заполняться из атрибутов записей шаблона «Клиенты». Поле «Договор» — коллекция в шаблоне записей «Клиенты», поле «Статус» — справочник статусов в отдельном шаблоне.</p>
+<p><strong>2.</strong> Добавьте созданный шаблон экспорта в текущий шаблон записи (в данном случае, «Клиенты»):</p>
+<div class="screenshot_with_caption">
+<p><img align="" alt="Расположение раздела «Шаблоны экспорта»" class="img-responsive" height="684" src="https://kb.comindware.ru/assets/2.1_2021-12-13_114132.png" width="1036"/></p>
+<p class="caption">Расположение раздела «Шаблоны экспорта»</p>
+</div>
+<p><strong>3.</strong>В этом же шаблоне записи автоматически добавится кнопка с операцией «Экспорт записи»:</p>
+<div class="screenshot_with_caption">
+<p><img align="" alt="Автоматически созданная кнопка" class="img-responsive" height="424" src="https://kb.comindware.ru/assets/2.2_2021-12-13_124346.png" width="1036"/></p>
+<p class="caption">Автоматически созданная кнопка</p>
+</div>
+<p>Перейдите на вкладку «<strong><em>Скрипт</em></strong>» в свойствах этой кнопки и добавьте следующий код:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code"> 
+<p>using System;<br/>using System.Collections.Generic;<br/>using System.Linq;<br/>using System.Text.RegularExpressions;<br/>using Comindware.Data.Entity;<br/>using Comindware.TeamNetwork.Api.Data.UserCommands;<br/>using Aspose.Cells;<br/>using Aspose.Cells.Pivot;</p>
+<p>class Script<br/>{<br/>    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)<br/>    {<br/>var objectsData = Api.TeamNetwork.ObjectService.ListWithAlias("Clients"); // Системное имя ШЗ "Клиенты"<br/>var dataToExport = new List&lt;MainData&gt;();<br/>foreach (var objectDict in objectsData)<br/>{<br/>var ContractDataInIds = getterListSTR("Contracts_collection", objectDict); // Атрибут-коллекция в ШЗ "Клиенты" <br/>if(ContractDataInIds.Count == 0) {ContractDataInIds.Add("tempID");}<br/>var ContractDataInList = new List&lt;ContractData&gt;();<br/>foreach (var ContractDataInId in ContractDataInIds)<br/>{<br/>var ContractDataInData = GetData(ContractDataInId);<br/><br/>var Status_Id = getterSTR("Status", ContractDataInData); // Атрибут-ссылка в ШЗ "Договоры"<br/>var Status_Data = GetData(Status_Id);<br/><br/>var ContractDataInT = new ContractData<br/>{<br/>Name = getterSTR("Title", ContractDataInData), // Атрибут "Статус" в ШЗ "Договоры"<br/>Date = getterDT("Date", ContractDataInData), // Атрибут "Дата" в ШЗ "Договоры"<br/>Total = getterDC("Total", ContractDataInData), // Атрибут "Сумма" в ШЗ "Договоры"<br/>Status = getterSTR("Title", Status_Data) // Атрибут "Название" в ШЗ "Статусы договора"</p>
+<p>};<br/>ContractDataInList.Add(ContractDataInT);<br/>}<br/><br/>var Data_ = new MainData<br/>{<br/>Client = getterSTR("Title", objectDict), // Атрибут "Название" в ШЗ "Клиенты"<br/>Contact = getterSTR("Contact", objectDict), // Атрибут "Контактное лицо" в ШЗ "Клиенты"<br/>Phone = getterSTR("Phone", objectDict), // Атрибут "Телефон" в ШЗ "Клиенты"<br/>Email = getterSTR("Email", objectDict), // Атрибут "Email" в ШЗ "Клиенты"<br/>Contract = ContractDataInList<br/>};<br/>dataToExport.Add(Data_);<br/>}<br/><br/>var content = Api.TeamNetwork.ObjectAppExportService.ExecuteExcelExportTemplate(userCommandContext.DocumentTemplateId, dataToExport);<br/>var result = new UserCommandResult<br/>{<br/>Success = true,<br/>Commited = true,<br/>ResultType = UserCommandResultType.File,<br/>File = new UserCommandFileResult()<br/>{<br/>Name = "Excel_Data.xlsx",<br/>Type = "Excel",<br/>Content = content</p>
+<p>},<br/>Messages = new[]<br/>{<br/>new UserCommandMessage<br/>{<br/>Severity = SeverityLevel.Normal,<br/>Text = "Файл сформирован"<br/>}<br/>}<br/>};<br/>return result;<br/>    }<br/><br/>public static Decimal getterDC(string key, IDictionary&lt;string, object&gt; dictionary = null)<br/>{<br/>if (dictionary == null || key == null)<br/>{<br/>return 0;<br/>}<br/>var stringValue = getterSTR(key, dictionary);<br/>if (stringValue != null &amp;&amp; Decimal.TryParse(stringValue, out var result))<br/>{<br/>return result;<br/>}<br/>else<br/>{<br/>return 0;<br/>}<br/>}</p>
+<p>public static DateTime? getterDT(string key, IDictionary&lt;string, object&gt; dictionary = null)<br/>{<br/>if (dictionary == null || key == null)<br/>{<br/>return null;<br/>}<br/>var stringValue = getterSTR(key, dictionary);<br/>if (stringValue != null &amp;&amp; DateTime.TryParse(stringValue, out var result))<br/>{<br/>return result.AddHours(5);<br/>}<br/>else<br/>{<br/>return null;<br/>}<br/>}</p>
+<p>public static string getterSTR(string key, IDictionary&lt;string, object&gt; dictionary = null)<br/>{<br/>if (dictionary == null || key == null)<br/>{<br/>return null;<br/>}<br/>if (dictionary.TryGetValue(key, out var result))<br/>{<br/>if (result == null) return null;<br/>return result.ToString();<br/>}<br/>else<br/>{<br/>return null;<br/>}</p>
+<p>}</p>
+<p>public static IList&lt;string&gt; getterListSTR(string key, IDictionary&lt;string, object&gt; dictionary = null)<br/>{<br/>var result = new List&lt;string&gt;();<br/>if (dictionary != null &amp;&amp; key != null)<br/>{<br/>if (dictionary.TryGetValue(key, out var objectData))<br/>{<br/>var objectDataArray = objectData as object[];<br/>foreach (var singlObject in objectDataArray)<br/>{<br/>if (singlObject == null) continue;<br/>result.Add(singlObject.ToString());<br/>}<br/>}<br/>}<br/>return result;<br/>}</p>
+<p>public static IDictionary&lt;string, object&gt; GetData(string objectId = null)<br/>{<br/>if (objectId == null || objectId.Contains("account") || objectId == "tempID")<br/>{<br/>return null;<br/>}<br/>var container = Api.TeamNetwork.ObjectAppService.GetByObject(objectId);<br/>var result = Api.TeamNetwork.ObjectService.GetWithAlias(container.Alias, objectId);<br/>return result;<br/>}<br/>}</p>
+<p>[Serializable]<br/>public class MainData<br/>{<br/>public string Client { get; set; }<br/>public string Contact { get; set; }<br/>public string Phone { get; set; }<br/>public string Email { get; set; }<br/>public List&lt;ContractData&gt; Contract { get; set; }<br/>}</p>
+<p>[Serializable]<br/>public class ContractData<br/>{<br/>public string Name { get; set; }<br/>public decimal Total { get; set; }<br/>public DateTime? Date { get; set; }<br/>public string Status { get; set; }<br/>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>В коде скрипта комментариями помечены 11 мест, где при необходимости можно заменить системные имена своими.</p>
+<p>Как выглядят данные в продукте:</p>
+<div class="screenshot_with_caption">
+<p><img align="" alt="Список клиентов" class="img-responsive" height="496" src="https://kb.comindware.ru/assets/2.3_2021-12-13_141658.png" width="1033"/></p>
+<p class="caption">Список клиентов</p>
+</div>
+<p>Результат выгрузки:</p>
+<div class="screenshot_with_caption">
+<p><img align="" alt="Excel файл" class="img-responsive" height="402" src="https://kb.comindware.ru/assets/exp5.jpg" width="1145"/></p>
+<p class="caption">Excel файл</p>
+</div>
+<p><strong>Шаблон документа в формате .doc</strong></p>
+<p>По такой же логике настраиваем выгрузку  Шаблона экспорта в формате Word.</p>
+<p>Отличием здесь будет немного иное написание самого шаблона, а также C# скрипта. </p>
+<div class="screenshot_with_caption">
+<p><img align="" alt="Пример word шаблона экспорта" class="img-responsive" height="307" src="https://kb.comindware.ru/assets/exp6.jpg" width="1053"/></p>
+<p class="caption">Пример word шаблона экспорта</p>
+</div>
+<p>C# скрипт:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code"> 
+<p>using System;<br/>using System.Collections.Generic;<br/>using System.Diagnostics;<br/>using System.Linq;<br/>using System.Text.RegularExpressions;<br/>using Comindware.Data.Entity;<br/>using Comindware.Platform.Api.Data;<br/>using Comindware.TeamNetwork.Api.Data.UserCommands;<br/>using System.IO;<br/>using System.Data;</p>
+<p>class Script<br/>{<br/>    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)<br/>    {<br/>var objectsData = Api.TeamNetwork.ObjectService.ListWithAlias("Clients"); // Системное имя ШЗ "Клиенты"<br/>List&lt;MainData&gt; Data_ = new List&lt;MainData&gt;();<br/>foreach (var objectDict in objectsData)<br/>{<br/>var ContractDataInIds = getterListSTR("Contracts_collection", objectDict); // Атрибут-коллекция в ШЗ "Клиенты" <br/>if(ContractDataInIds.Count == 0) {ContractDataInIds.Add("tempID");}<br/>bool first_element = true;<br/>foreach (var ContractDataInId in ContractDataInIds)<br/>{<br/>var ContractDataInData = GetData(ContractDataInId);<br/><br/>var Status_Id = getterSTR("Status", ContractDataInData); // Атрибут-ссылка в ШЗ "Договоры"<br/>var Status_Data = GetData(Status_Id);</p>
+<p>if(first_element == true)<br/>{<br/>first_element = false;<br/>var temp = new MainData<br/>{<br/>Client = getterSTR("Title", objectDict), // Атрибут "Название" в ШЗ "Клиенты"<br/>Contact = getterSTR("Contact", objectDict), // Атрибут "Контактное лицо" в ШЗ "Клиенты"<br/>Phone = getterSTR("Phone", objectDict), // Атрибут "Телефон" в ШЗ "Клиенты"<br/>Email = getterSTR("Email", objectDict), // Атрибут "Email" в ШЗ "Клиенты"<br/><br/>Name = getterSTR("Title", ContractDataInData), // Атрибут "Статус" в ШЗ "Договоры"<br/>Date = getterDT("Date", ContractDataInData), // Атрибут "Дата" в ШЗ "Договоры"<br/>Total = getterDC("Total", ContractDataInData), // Атрибут "Сумма" в ШЗ "Договоры"<br/>Status = getterSTR("Title", Status_Data) // Атрибут "Название" в ШЗ "Статусы договора"<br/>};<br/>             Data_.Add(temp);<br/>}<br/>else<br/>{<br/>var temp = new MainData<br/>{<br/>Name = getterSTR("Title", ContractDataInData), // Атрибут "Статус" в ШЗ "Договоры"<br/>Date = getterDT("Date", ContractDataInData), // Атрибут "Дата" в ШЗ "Договоры"<br/>Total = getterDC("Total", ContractDataInData), // Атрибут "Сумма" в ШЗ "Договоры"<br/>Status = getterSTR("Title", Status_Data) // Атрибут "Название" в ШЗ "Статусы договора"<br/>};<br/>Data_.Add(temp);<br/>}<br/>}<br/>}</p>
+<p>var dataToExport = new RESULT<br/>{<br/>MainData_ = Data_<br/>};<br/><br/>        var content = Api.TeamNetwork.ObjectAppExportService.ExecuteWordExportTemplate(userCommandContext.DocumentTemplateId,dataToExport,false);</p>
+<p>var result = new UserCommandResult<br/>        {<br/>            Success = true,<br/>            Commited = true,<br/>            File=new UserCommandFileResult(){<br/>                Content = content,<br/>Name = "Word_Data.doc",<br/>Type = "Word"<br/>            },<br/>            ResultType = UserCommandResultType.Notificate,<br/>            Messages = new[]<br/>            {<br/>                new UserCommandMessage<br/>                {<br/>                    Severity = SeverityLevel.Normal,<br/>                    Text = "Документ сформирован"<br/>                }<br/>            }<br/>        };<br/>        return result;<br/>    }<br/><br/>public static Decimal getterDC(string key, IDictionary&lt;string, object&gt; dictionary = null)<br/>{<br/>if (dictionary == null || key == null)<br/>{<br/>return 0;<br/>}<br/>var stringValue = getterSTR(key, dictionary);<br/>if (stringValue != null &amp;&amp; Decimal.TryParse(stringValue, out var result))<br/>{<br/>return result;<br/>}<br/>else<br/>{<br/>return 0;<br/>}<br/>}</p>
+<p>public static DateTime? getterDT(string key, IDictionary&lt;string, object&gt; dictionary = null)<br/>{<br/>if (dictionary == null || key == null)<br/>{<br/>return null;<br/>}<br/>var stringValue = getterSTR(key, dictionary);<br/>if (stringValue != null &amp;&amp; DateTime.TryParse(stringValue, out var result))<br/>{<br/>return result.AddHours(5);<br/>}<br/>else<br/>{<br/>return null;<br/>}<br/>}</p>
+<p>public static string getterSTR(string key, IDictionary&lt;string, object&gt; dictionary = null)<br/>{<br/>if (dictionary == null || key == null)<br/>{<br/>return null;<br/>}<br/>if (dictionary.TryGetValue(key, out var result))<br/>{<br/>if (result == null) return null;<br/>return result.ToString();<br/>}<br/>else<br/>{<br/>return null;<br/>}<br/>}</p>
+<p>public static IList&lt;string&gt; getterListSTR(string key, IDictionary&lt;string, object&gt; dictionary = null)<br/>{<br/>var result = new List&lt;string&gt;();<br/>if (dictionary != null &amp;&amp; key != null)<br/>{<br/>if (dictionary.TryGetValue(key, out var objectData))<br/>{<br/>var objectDataArray = objectData as object[];<br/>foreach (var singlObject in objectDataArray)<br/>{<br/>if (singlObject == null) continue;<br/>result.Add(singlObject.ToString());<br/>}<br/>}<br/>}<br/>return result;<br/>}</p>
+<p>public static IDictionary&lt;string, object&gt; GetData(string objectId = null)<br/>{<br/>if (objectId == null || objectId.Contains("account") || objectId == "tempID")<br/>{<br/>return null;<br/>}<br/>var container = Api.TeamNetwork.ObjectAppService.GetByObject(objectId);<br/>var result = Api.TeamNetwork.ObjectService.GetWithAlias(container.Alias, objectId);<br/>return result;<br/>}<br/>}</p>
+<p>[Serializable]<br/>public class MainData<br/>{<br/>public string Client { get; set; }<br/>public string Contact { get; set; }<br/>public string Phone { get; set; }<br/>public string Email { get; set; }<br/>public string Name { get; set; }<br/>public decimal Total { get; set; }<br/>public DateTime? Date { get; set; }<br/>public string Status { get; set; }<br/>}</p>
+<p>public class RESULT<br/>{<br/>    public List&lt;MainData&gt; MainData_ { get; set; }<br/>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Результат выгрузки:</p>
+<div class="screenshot_with_caption">
+<p><img align="" alt="Word файл" class="img-responsive" height="795" src="https://kb.comindware.ru/assets/exp7.jpg" width="1106"/></p>
+<p class="caption">Word файл</p>
+</div>

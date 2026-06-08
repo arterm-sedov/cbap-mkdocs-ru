@@ -1,6 +1,6 @@
 ---
 title: Шаблон роли
-kbId: 4760
+kbId: 5692
 ---
 
 # Шаблон роли {: #role_templates}

@@ -10,7 +10,8 @@ Features:
     - Build progress tracking and summary reporting
 
 Usage:
-    python build_pdf_guides.py
+    From the repo root, with MkDocs installed in the active venv:
+    .venv/Scripts/python.exe pdf_build_guides.py
 
 """
 
@@ -45,6 +46,7 @@ class MkDocsBatchBuilder:
             "mkdocs_guide_admin_linux_ru_pdf.yml",
             "mkdocs_guide_admin_windows_ru_pdf.yml",
             "mkdocs_guide_api_ru_pdf.yml",
+            "mkdocs_guide_ai_ru_pdf.yml",
         ]
         self.results = []  # Store build results for summary
         self.start_time = datetime.now()  # Track total build time

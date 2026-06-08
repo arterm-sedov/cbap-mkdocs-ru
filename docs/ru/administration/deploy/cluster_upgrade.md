@@ -1,5 +1,5 @@
 ---
-kbId: 5134
+kbId: 5446
 title: 'Кластер. Обновление'
 kbTitle: 'Кластер Comindware Platform. Обновление ПО'
 tags:

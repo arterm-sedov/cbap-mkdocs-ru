@@ -1,6 +1,6 @@
 ---
 description: 'Настройка мониторинга с использованием Zabbix'
-kbId: 5160
+kbId: 5466
 tags:
   - linux
   - zabbix

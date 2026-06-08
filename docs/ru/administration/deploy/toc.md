@@ -1,6 +1,6 @@
 ---
 title: Развёртывание Comindware Platform. Содержание раздела
-kbId: 5101
+kbId: 5444
 hide: tags
 tags:
     - Linux

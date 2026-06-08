@@ -1,12 +1,13 @@
 # This file is used only to build RU help to import it in the kb.comindware.com
 # Run this build script:
 # buildhelp_for_kb_import_ru.ps1
+# Platform version: site_url must match the PHPKB web asset folder (v6.0).
 
 INHERIT: mkdocs_ru.yml
 
 docs_dir: docs/ru
 
-site_url: https://kb.comindware.ru/platform/v5.0/
+site_url: https://kb.comindware.ru/platform/v6.0/
 
 use_directory_urls: false
 
@@ -31,10 +32,14 @@ plugins:
 markdown_extensions:
   toc:
     title: Содержание
+    toc_depth: 2-3
     permalink: false
 
 extra:
     kbExport: true
+
+exclude_docs: |
+  **/AGENTS.md
 
 hooks:
   - kb_html_cleanup_hook.py

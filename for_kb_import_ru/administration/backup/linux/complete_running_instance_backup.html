@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4650" kb-tags="Linux,резервное копирование,бэкап,бекап,backup,резервная копия" kb-title="Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5572" kb-tags="Linux,резервное копирование,бэкап,бекап,backup,резервная копия" kb-title="Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -62,7 +62,7 @@
 <p class="admonition-title">Резервное копирование крупных баз данных</p>
 <p>Если размер базы данных превышает 10 ГБ, рекомендуется использовать скрипт резервного копирования на сервере для обеспечения оптимальной производительности резервного копирования и работы <strong>Comindware Platform</strong>.</p>
 <p>Это связано с тем, что резервное копирование больших баз данных встроенными средствами <strong>Comindware Platform</strong> создаёт значительную вычислительную нагрузку и может приводить к снижению производительности.</p>
-<p>См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5140">Настройка и использование скрипта для резервного копирования данных (Linux)</a>»</em>.</p>
+<p>См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5569">Настройка и использование скрипта для резервного копирования данных (Linux)</a>»</em>.</p>
 <p>Скрипт резервного копирования следует запросить у <a class="mkdocs_imported_link" href="https://www.comindware.ru/company/contact-us/#tab_support">службы поддержки Comindware</a>.</p>
 </div>
 <h2 id="введение">Введение</h2>
@@ -72,7 +72,7 @@
 <li>создать снимки состояния памяти Apache Ignite и OpenSearch (Elasticsearch);</li>
 <li>скопировать содержимое папок со скриптами и вложенными файлами.</li>
 </ul>
-<p>Сведения о последующем восстановлении данных см. в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4648">Восстановление базы данных, вложенных файлов и журналов из полной резервной копии</a>»</em>.</p>
+<p>Сведения о последующем восстановлении данных см. в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5575">Восстановление базы данных, вложенных файлов и журналов из полной резервной копии</a>»</em>.</p>
 <h2 id="сбор-данных-об-экземпляре-по">Сбор данных об экземпляре ПО</h2>
 <p>Для создания резервной копии соберите перечисленные ниже данные об экземпляре ПО.</p>
 <ol class="colored_numbers_list">
@@ -84,12 +84,12 @@
 <p>Директория с базой данных экземпляра ПО: <code>/var/lib/comindware/&lt;instanceName&gt;/Database</code>. Может быть задана другая директория с помощью директивы <code>&lt;workDirectory&gt;</code> в файле конфигурации <code>/var/www/comindware/Ignite.config</code>. Если в файле конфигурации директива <code>&lt;workDirectory&gt;</code> не содержит директории, используется директория по умолчанию.</p>
 </li>
 <li>Путь для сохранения снимков базы данных Apache Ignite, по умолчанию: <code>/var/lib/comindware/&lt;instanceName&gt;/Database/snapshots/</code></li>
-<li>Имя репозитория OpenSearch (Elasticsearch), заданное при его регистрации, например: <code>elastic_search_repo_name</code></li>
+<li>Имя репозитория OpenSearch (Elasticsearch), заданное при его регистрации, например: <code>opensearch_repo_name</code></li>
 <li>
 <p>Путь для сохранения резервных копий OpenSearch (Elasticsearch):</p>
 <ul>
-<li>например, <code>/var/www/backups/elasticsearch</code></li>
-<li>должен быть указан в директиве <code>path.repo</code> в файле <code>/etc/elasticsearch/elasticsearch.yml</code></li>
+<li>например, <code>/var/www/backups/opensearch</code></li>
+<li>должен быть указан в директиве <code>path.repo</code> в файле <code>/etc/opensearch/opensearch.yml</code></li>
 <li>должен ссылаться на существующий диск;</li>
 <li>должен находиться на отдельном диске, отдельно от базы данных.</li>
 </ul>
@@ -151,7 +151,7 @@
 </li>
 <li>
 <p>Создайте директорию репозитория OpenSearch (Elasticsearch):</p>
-<div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>/var/www/backups/elasticsearch</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>/var/www/backups/opensearch</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Присвойте директории <code>backups</code> права на чтение-запись <code>rwxrwxrwx</code>:</p>
@@ -182,20 +182,20 @@
 <div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>/var/www/apache-ignite/bin/control.sh<span class="w"> </span>--baseline</code> <br/><code>bash<span class="w"> </span>/var/www/apache-ignite/bin/control.sh<span class="w"> </span>--snapshot<span class="w"> </span>create<span class="w"> </span>snapshot_name_<span class="nv">$now</span><span class="w"> </span>--sync</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Зарегистрируйте репозиторий OpenSearch (Elasticsearch). Вместо <code>elasticsearch_repo_name</code> и <code>/var/www/backups/elasticsearch</code> подставьте своё имя репозитория и путь к его папке:</p>
-<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/elasticsearch_repo_name?pretty"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">'{"type": "fs", "settings": {"location": "/var/www/backups/elasticsearch"}}'</span></code> <br/></pre></code></div>
+<p>Зарегистрируйте репозиторий OpenSearch (Elasticsearch). Вместо <code>opensearch_repo_name</code> и <code>/var/www/backups/opensearch</code> подставьте своё имя репозитория и путь к его папке:</p>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/opensearch_repo_name?pretty"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">'{"type": "fs", "settings": {"location": "/var/www/backups/opensearch"}}'</span></code> <br/></pre></code></div>
 </li>
 <li>
-<p>Создайте снимок состояния OpenSearch (Elasticsearch), заменив <strong><em><code>elasticsearch_repo_name</code></em>*,</strong> <code>snapshot_name</code>* и <code>prefix_name</code>(префикс индекса, указанный в конфигурации экземпляра ПО) на свои значения:</p>
-<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/elasticsearch_repo_name/snapshot_name_</span><span class="nv">$now</span><span class="s2">?wait_for_completion=true&amp;pretty"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">'{"indices": "cmw_prefix_name*", "ignore_unavailable": true, "include_global_state": false}'</span></code> <br/></pre></code></div>
+<p>Создайте снимок состояния OpenSearch (Elasticsearch), заменив <strong><em><code>opensearch_repo_name</code></em>*,</strong> <code>snapshot_name</code>* и <code>prefix_name</code>(префикс индекса, указанный в конфигурации экземпляра ПО) на свои значения:</p>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/opensearch_repo_name/snapshot_name_</span><span class="nv">$now</span><span class="s2">?wait_for_completion=true&amp;pretty"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">'{"indices": "cmw_prefix_name*", "ignore_unavailable": true, "include_global_state": false}'</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Создайте директории для хранения компонентов резервной копии:</p>
-<div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span></code> <br/><code>mkdir<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/Database</code> <br/><code>mkdir<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/elastic</code> <br/><code>mkdir<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/Streams</code> <br/><code>mkdir<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/Scripts</code> <br/><code>mkdir<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/wal</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span></code> <br/><code>mkdir<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/Database</code> <br/><code>mkdir<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/opensearch</code> <br/><code>mkdir<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/Streams</code> <br/><code>mkdir<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/Scripts</code> <br/><code>mkdir<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/wal</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Перенесите и скопируйте компоненты в директорию резервной копии:</p>
-<div class="highlight"><code><pre><span></span><code>mv<span class="w"> </span>/var/www/comindware/data/Database/snapshots/snapshot_name_<span class="nv">$now</span><span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/Database</code> <br/><code>cp<span class="w"> </span>-r<span class="w"> </span>/var/www/backups/elasticsearch/*<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/elastic</code> <br/><code>cp<span class="w"> </span>-r<span class="w"> </span>/var/www/comindware/data/Database/wal/*<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/wal</code> <br/><code>cp<span class="w"> </span>-r<span class="w"> </span>/var/www/comindware/data/Database/Scripts/*<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/Scripts</code> <br/><code>cp<span class="w"> </span>-r<span class="w"> </span>/var/www/comindware/data/Streams/*<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/Streams</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>mv<span class="w"> </span>/var/www/comindware/data/Database/snapshots/snapshot_name_<span class="nv">$now</span><span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/Database</code> <br/><code>cp<span class="w"> </span>-r<span class="w"> </span>/var/www/backups/opensearch/*<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/opensearch</code> <br/><code>cp<span class="w"> </span>-r<span class="w"> </span>/var/www/comindware/data/Database/wal/*<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/wal</code> <br/><code>cp<span class="w"> </span>-r<span class="w"> </span>/var/www/comindware/data/Database/Scripts/*<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/Scripts</code> <br/><code>cp<span class="w"> </span>-r<span class="w"> </span>/var/www/comindware/data/Streams/*<span class="w"> </span>/var/www/backups/backup_<span class="nv">$now</span>/Streams</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Создайте архив с резервной копией:</p>
@@ -208,8 +208,8 @@
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5140">Настройка и использование скрипта для резервного копирования данных (Linux)</a></li>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4648">Восстановление базы данных, вложенных файлов и журналов из полной резервной копии</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5569">Настройка и использование скрипта для резервного копирования данных (Linux)</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5575">Восстановление базы данных, вложенных файлов и журналов из полной резервной копии</a></li>
 </ul>
 </div>
 </article>

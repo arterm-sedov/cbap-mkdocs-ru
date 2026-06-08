@@ -1,6 +1,6 @@
 ---
 title: 'Аутентификация через Keycloak и OpenID Connect. Настройка подключения и служб'
-kbId: 4685
+kbId: 5318
 tags:
     - OpenID
     - Keycloak
@@ -206,7 +206,7 @@ hide: tags
 8. Перезапустите **{{ productName }}**:
 
     ```
-    systemctl restart elasticsearch nginx comindware<instanceName>
+    systemctl restart opensearch nginx comindware<instanceName>
     ```
 
 ## Инициализация {{ productName }} для входа через Keycloak {: #openid_connection_initialize .pageBreakBefore }

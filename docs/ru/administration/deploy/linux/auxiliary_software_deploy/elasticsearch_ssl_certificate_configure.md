@@ -1,6 +1,6 @@
 ---
 title: Elasticsearch. Настройка SSL-сертификатов
-kbId: 4606
+kbId: 5453
 tags:
 tags:
     - Elasticsearch

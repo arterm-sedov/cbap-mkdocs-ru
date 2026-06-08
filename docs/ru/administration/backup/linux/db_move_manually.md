@@ -1,6 +1,6 @@
 ---
 title: Ручной перенос базы данных экземпляра ПО
-kbId: 4649
+kbId: 5574
 tags:
     - Apache Ignite
     - Linux
@@ -115,7 +115,7 @@ hide: tags
 12. Запустите созданный скрипт из папки `/tmp/`:
 
     ```
-    sh snapshot.sh
+    bash snapshot.sh
     ```
 
     _![Запуск скрипта создания снимка](https://kb.comindware.ru/assets/img_63567b113131e.png)_
@@ -154,13 +154,13 @@ hide: tags
 {: .pageBreakBefore }
 
     ```
-    systemctl stop elasticsearch.service comindware<instanceName>.service nginx.service kafka.service zookeeper.service
+    systemctl stop opensearch.service comindware<instanceName>.service nginx.service kafka.service zookeeper.service
     ```
 
 5. Убедитесь, что сервисы остановлены. Статус должен быть `Active: inactive (dead)`:
 
     ```
-    systemctl status zookeeper.service kafka.service nginx.service comindware<instanceName>.service elasticsearch.service
+    systemctl status zookeeper.service kafka.service nginx.service comindware<instanceName>.service opensearch.service
 
     ```
 
@@ -241,8 +241,8 @@ hide: tags
 1. Запустите необходимые службы и проверьте их статус. Статус должен быть `Active: running`:
 
     ```
-    systemctl start elasticsearch kafka nginx comindware<instanceName>
-    systemctl status elasticsearch kafka nginx comindware<instanceName>
+    systemctl start opensearch kafka nginx comindware<instanceName>
+    systemctl status opensearch kafka nginx comindware<instanceName>
     ```
 
     _![Проверка активного состояния сервисов](https://kb.comindware.ru/assets/img_635680edb9d1d.png)_

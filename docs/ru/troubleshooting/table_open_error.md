@@ -1,7 +1,7 @@
 ---
 title: 'Перестала открываться таблица (ошибка Object reference…)'
 kbTitle: 'Перестала открываться таблица (ошибка «Object reference not set to an instance of an object»)'
-kbId: 5049
+kbId: 5168
 tags:
   - API
   - конфигурация

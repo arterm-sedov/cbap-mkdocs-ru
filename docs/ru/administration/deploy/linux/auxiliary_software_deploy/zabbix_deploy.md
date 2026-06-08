@@ -1,6 +1,6 @@
 ---
 title: Zabbix. Установка и настройка
-kbId: 4609
+kbId: 5462
 ---
 
 # Zabbix. Установка и настройка {: #zabbix_deploy}

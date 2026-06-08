@@ -12,7 +12,7 @@ tags:
     - скачать файлы
     - скачать архив
 hide: tags
-kbId: 5081
+kbId: 5214
 ---
 
 # Атрибут типа «Документ». Получение архива файлов из связанных записей {: #example_document_download_archive_related_records_csharp }

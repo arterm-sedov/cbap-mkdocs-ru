@@ -1,6 +1,6 @@
 ---
 title: Написание выражений на языке N3
-kbId: 4852
+kbId: 5251
 tags:
   - notation 3
   - notation3

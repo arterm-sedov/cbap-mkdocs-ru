@@ -1,0 +1,79 @@
+<h1>Загрузка файла с компьютера в систему</h1><p>Для того, чтобы добавить файл из локальной папки на компьютере в атрибут с типом данных «Документ», введите следующее выражение:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">
+<p>using System;</p>
+<p>using System.Collections.Generic;</p>
+<p>using System.Linq;</p>
+<p>using Comindware.Data.Entity;</p>
+<p>using Comindware.TeamNetwork.Api.Data.UserCommands;</p>
+<p>using Comindware.TeamNetwork.Api.Data;</p>
+<p>using System.IO;</p>
+<p> </p>
+<p>class Script</p>
+<p>{</p>
+<p>    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)</p>
+<p>    {</p>
+<p>        try</p>
+<p>        {</p>
+<p>            var id = userCommandContext.ObjectIds[0];</p>
+<p>            var data = Api.TeamNetwork.ObjectService.GetPropertyValues(new []{id}, new []{"Putkfaylu"});</p>
+<p>            var path = data[id]["Putkfaylu"].ToString();</p>
+<p>            var fs = new FileStream(@path, FileMode.OpenOrCreate);</p>
+<p>            var arrayTitle = path.Split('\\','/');</p>
+<p>            var arrayExtension = path.Split('.');</p>
+<p>            var docData = new Document</p>
+<p>            {</p>
+<p>                Title = arrayTitle[arrayTitle.Length-1],</p>
+<p>                Extension = arrayExtension[arrayExtension.Length-1]</p>
+<p>                };</p>
+<p>            string doc = Api.TeamNetwork.DocumentService.CreateDocumentWithStream(docData, fs, "");</p>
+<p>            Api.TeamNetwork.ObjectService.EditWithAlias(id, new Dictionary&lt;string,object&gt;{{"test",doc}});</p>
+<p>        }</p>
+<p>        catch</p>
+<p>        {</p>
+<p>            var result1 = new UserCommandResult</p>
+<p>            {</p>
+<p>                Success = true,</p>
+<p>                Commited = true,</p>
+<p>                ResultType = UserCommandResultType.Notificate,</p>
+<p>                Messages = new[]</p>
+<p>                {</p>
+<p>                    new UserCommandMessage</p>
+<p>                    {</p>
+<p>                        Severity = SeverityLevel.Normal,</p>
+<p>                        Text = "Неуспешно"</p>
+<p>                        }</p>
+<p>                }</p>
+<p>            };</p>
+<p>            return result1;</p>
+<p>        }</p>
+<p>        var result = new UserCommandResult</p>
+<p>        {</p>
+<p>            Success = true,</p>
+<p>            Commited = true,</p>
+<p>            ResultType = UserCommandResultType.Notificate,</p>
+<p>            Messages = new[]</p>
+<p>            {</p>
+<p>                new UserCommandMessage</p>
+<p>                {</p>
+<p>                    Severity = SeverityLevel.Normal,</p>
+<p>                    Text = "Успешно"</p>
+<p>                    }</p>
+<p>            }</p>
+<p>        };</p>
+<p>        return result;</p>
+<p>    }</p>
+<p>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>
+<p><strong><span style="letter-spacing: 0.2px;">где:</span></strong></p>
+<p><span style="letter-spacing: 0.2px;"><em><strong>Putkfaylu</strong> </em>— системное имя атрибута с типом данных «Текст», который хранит путь к файлу, который нужно загрузить в систему (например, <em>C:\myfolder\1.cs</em>);</span></p>
+<p><span style="letter-spacing: 0.2px;"><em><strong>test</strong> </em>— системное имя атрибута с типом данных «Документ»,  куда нужно загрузить файл.</span></p>
+</div>

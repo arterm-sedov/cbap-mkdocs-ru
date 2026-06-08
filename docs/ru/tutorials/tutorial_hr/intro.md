@@ -1,7 +1,7 @@
 ---
 title: 'Описание учебного курса'
 kbTitle: 'Описание учебного курса «Аналитик. Ознакомительный»'
-kbId: 5112
+kbId: 5397
 tags:
   # Common tutorial_hr tags
   - BPMS

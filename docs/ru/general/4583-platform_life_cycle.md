@@ -1,6 +1,6 @@
 ---
 title: Comindware Platform. Описание жизненного цикла
-kbId: 4583
+kbId: 5432
 ---
 
 # {{ productName }}. Описание жизненного цикла

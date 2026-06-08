@@ -1,0 +1,13 @@
+<h1>Ограничение срока выполнения определенным периодом</h1><p>Для того, чтобы ограничить срок выполнения задачи/проекта определенным периодом (например, месяцем), введите следующее выражение в Правило на форме - Показать ошибку:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">AND(GREATEREQ($Srokvypolneniya,STARTOFMONTH($OtchetnyyperiodRef-&gt;Mesyats)),LESSEQ($Srokvypolneniya,ENDOFMONTH($OtchetnyyperiodRef-&gt;Mesyats)))</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span style="text-decoration: underline;"><strong>где:</strong></span></p>
+<p><strong>Srokvypolneniya</strong> - атрибут типа Дата / Время, который заполняется пользователем на форме;</p>
+<p><strong>OtchetnyyperiodRef-&gt;Mesyats</strong> - атрибут типа Дата / Время (формат - месяц).</p>

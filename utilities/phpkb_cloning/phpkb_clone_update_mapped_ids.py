@@ -38,6 +38,12 @@ HYPERLINK_PATTERNS = {
     "Categories": re.compile(r"(?P<prefix>{{\s*kbCategoryURLPrefix\s*}}\s*)(?P<id>\d+)"),
 }
 
+BOMS = (
+    (b"\xef\xbb\xbf", "utf-8"),
+    (b"\xff\xfe", "utf-16-le"),
+    (b"\xfe\xff", "utf-16-be"),
+)
+
 
 def parse_args(argv=None):
     parser = argparse.ArgumentParser(
@@ -117,14 +123,28 @@ def replace_hyperlink_map_ids(content, mapping):
     return content, changes_by_section
 
 
+def read_text_preserving_encoding(path):
+    path = Path(path)
+    raw = path.read_bytes()
+    for bom, encoding in BOMS:
+        if raw.startswith(bom):
+            return raw[len(bom):].decode(encoding), encoding, bom
+    return raw.decode("utf-8"), "utf-8", b""
+
+
+def write_text_preserving_encoding(path, content, encoding, bom):
+    path = Path(path)
+    path.write_bytes(bom + content.encode(encoding))
+
+
 def update_file(path, replacer, write):
     path = Path(path)
-    content = path.read_text(encoding="utf-8")
+    content, encoding, bom = read_text_preserving_encoding(path)
     updated_content, changes = replacer(content)
     has_changes = updated_content != content
 
     if write and has_changes:
-        path.write_text(updated_content, encoding="utf-8")
+        write_text_preserving_encoding(path, updated_content, encoding, bom)
 
     return has_changes, changes
 

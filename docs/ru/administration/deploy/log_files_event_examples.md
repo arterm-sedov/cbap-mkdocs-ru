@@ -1,6 +1,6 @@
 ---
 title: Примеры событий в файловых журналах
-kbId: 4618
+kbId: 5559
 tags: 
     - linux
     - windows
