@@ -2,7 +2,7 @@
 title: 'Антивирусное ПО. Настройка сканирования и исключений'
 kbId: 5456
 url: 'https://kb.comindware.ru/article.php?id=5456'
-updated: '2025-12-26 12:52:04'
+updated: '2026-06-01 13:42:39'
 ---
 
 # Антивирусное ПО. Настройка сканирования и исключений
@@ -66,10 +66,10 @@ updated: '2025-12-26 12:52:04'
 
 Добавьте в исключения антивирусного ПО следующие объекты:
 
-- `elasticsearch.service` — служба ElasticSearch.
-- `/var/lib/elasticsearch` — БД ElasticSearch, см. директиву `path.data` в файле конфигурации `/etc/elasticsearch/elasticsearch.yml`;
-- `/var/backups/elasticsearch/logs` — журналы ElasticSearch, см. директиву `path.logs` в файле конфигурации `/etc/elasticsearch/elasticsearch.yml`;
-- `/var/log/elasticsearch/repo` — репозиторий ElasticSearch, см. директиву `path.repo` в файле конфигурации `/etc/elasticsearch/elasticsearch.yml`.
+- `opensearch.service` — служба OpenSearch (Elasticsearch).
+- `/var/lib/opensearch` — БД OpenSearch (Elasticsearch), см. директиву `path.data` в файле конфигурации `/etc/opensearch/opensearch.yml`;
+- `/var/log/opensearch` — журналы OpenSearch (Elasticsearch), см. директиву `path.logs` в файле конфигурации `/etc/opensearch/opensearch.yml`;
+- `/var/backups/opensearch` — репозиторий OpenSearch (Elasticsearch), см. директиву `path.repo` в файле конфигурации `/etc/opensearch/opensearch.yml`.
 
 ### Windows
 
@@ -117,14 +117,15 @@ updated: '2025-12-26 12:52:04'
 
 Здесь `X:\\kafka\\_2.XX-X.X.X` — директория, в которой установлено ПО Kafka версии 2.XX-X.X.X.
 
-#### ElasticSearch
+#### OpenSearch (Elasticsearch)
 
 Добавьте в исключения антивирусного ПО следующие объекты:
 
-- `C:\\Program Files\\Elastic\\Elasticsearch\\8.X.X` — директория с исполняемыми файлами ElasticSearch версии 8.X.X;
-- `C:\\ProgramData\\Elastic\\Elasticsearch\\data` — папка с БД, см. директиву `path.data` в файле конфигурации `X:\\Program Files\\Elastic\\Elasticsearch\\8.X.X\\config\\elasticsearch.yml`;
-- `C:\\ProgramData\\Elastic\\Elasticsearch\\repo` — папка с репозиторием, см. директиву `path.repo` в файле конфигурации `X:\\Program Files\\Elastic\\Elasticsearch\\8.X.X\\config\\elasticsearch.yml`;
-- `C:\\ProgramData\\Elastic\\Elasticsearch\\logs` — папка с журналами, см. директиву `path.logs` в файле конфигурации `X:\\Program Files\\Elastic\\Elasticsearch\\8.X.X\\config\\elasticsearch.yml`.
+- `OpenSearch` — служба OpenSearch (Elasticsearch).
+- `C:\\Program Files\\OpenSearch\\` — исполняемые файлы OpenSearch (Elasticsearch);
+- `C:\\ProgramData\\OpenSearch\\data` — БД OpenSearch (Elasticsearch), см. директиву `path.data` в файле конфигурации `C:\\Program Files\\OpenSearch\\config\\opensearch.yml`;
+- `C:\\ProgramData\\OpenSearch\\repo` — репозиторий OpenSearch (Elasticsearch), см. директиву `path.repo` в файле конфигурации `C:\\Program Files\\OpenSearch\\config\\opensearch.yml`;
+- `C:\\ProgramData\\OpenSearch\\logs` — журналы OpenSearch (Elasticsearch), см. директиву `path.logs` в файле конфигурации `C:\\Program Files\\OpenSearch\\config\\opensearch.yml`.
 
 --8<-- "related_topics_heading.md"
 

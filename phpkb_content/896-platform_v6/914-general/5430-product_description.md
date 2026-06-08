@@ -1,11 +1,11 @@
 ---
-title: 'Описание Comindware Platform 5'
+title: 'Описание Comindware Platform 6'
 kbId: 5430
 url: 'https://kb.comindware.ru/article.php?id=5430'
-updated: '2025-08-04 14:40:41'
+updated: '2026-06-04 19:32:43'
 ---
 
-# Описание {{ productName }} 5
+# Описание {{ productName }} 6
 
 ## Введение
 

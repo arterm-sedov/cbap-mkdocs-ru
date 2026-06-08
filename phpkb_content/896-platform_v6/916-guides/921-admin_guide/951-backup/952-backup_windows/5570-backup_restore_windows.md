@@ -2,7 +2,7 @@
 title: 'Резервное копирование и восстановление в Windows'
 kbId: 5570
 url: 'https://kb.comindware.ru/article.php?id=5570'
-updated: '2026-01-16 17:25:02'
+updated: '2026-06-01 13:42:37'
 ---
 
 # Резервное копирование и восстановление в Windows
@@ -24,7 +24,7 @@ updated: '2026-01-16 17:25:02'
    - `<distPath>` — путь к распакованному дистрибутиву ПО **{{ productName }}**.
 2. Подготовьте данные о конфигурации OpenSearch (Elasticsearch):
 
-   - Путь к файлу конфигурации OpenSearch (Elasticsearch) `elasticsearch.yml` (например: `C:\\ElasticsearchData\\elasticsearch.yml`)
+   - Путь к файлу конфигурации OpenSearch (Elasticsearch) `opensearch.yml` (например: `C:\\Program Files\\OpenSearch\\config\\opensearch.yml`)
    - Имя репозитория снимков OpenSearch (Elasticsearch) — `<repository_name>` (например, `elastic_backup`).
    - Путь к репозиторию снимков OpenSearch (Elasticsearch) — `<elastic_backup_path>`(например, `e:\\elastic_backup`).
    - Имя снимка OpenSearch (Elasticsearch) — `<snapshot_name>` (например, `<instanceName>01022022080800` — в формате `<instanceName><Date><Time>`).
@@ -58,7 +58,7 @@ updated: '2026-01-16 17:25:02'
 
 **Снимок** — набор данных, сохранённый на определённый момент времени.
 
-1. Настройте конфигурацию репозитория снимков сервера OpenSearch (Elasticsearch) в файле `elasticsearch.yml`:
+1. Настройте конфигурацию репозитория снимков сервера OpenSearch (Elasticsearch) в файле `opensearch.yml`:
 
    ```
    path.repo: <elastic_backup_path>

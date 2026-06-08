@@ -1,4 +1,4 @@
-<h1>Восстановление базы данных из файла резервной копии в формате CDBBZ</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4647" kb-tags="CDBBZ,DevOps,Linux,sysadmin,администрирование,архив,база данных,восстановление,восстановление данных,восстановление индексов,инструкции,лицензирование,миграция,конфигурация,резервная копия,резервное копирование" kb-title="Восстановление базы данных из файла резервной копии в формате CDBBZ">
+<h1>Восстановление базы данных из файла резервной копии в формате CDBBZ</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5576" kb-tags="CDBBZ,DevOps,Linux,sysadmin,администрирование,архив,база данных,восстановление,восстановление данных,восстановление индексов,инструкции,лицензирование,миграция,конфигурация,резервная копия,резервное копирование" kb-title="Восстановление базы данных из файла резервной копии в формате CDBBZ">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -11,42 +11,54 @@
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#введение">
 <span class="md-ellipsis">
-      Введение
+      
+        Введение
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#порядок-восстановления">
 <span class="md-ellipsis">
-      Порядок восстановления
+      
+        Порядок восстановления
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#backup_restore_cdbbz_db_scripts">
 <span class="md-ellipsis">
-      Восстановление базы данных и скриптов
+      
+        Восстановление базы данных и скриптов
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#backup_restore_cdbbz_license_keys">
 <span class="md-ellipsis">
-      Восстановление лицензионных ключей
+      
+        Восстановление лицензионных ключей
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#backup_restore_cdbbz_indexes">
 <span class="md-ellipsis">
-      Восстановление индексов OpenSearch (Elasticsearch) из файла резервной копии репозитория
+      
+        Восстановление индексов OpenSearch (Elasticsearch) из файла резервной копии репозитория
+      
     </span>
 </a>
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
 <span class="md-ellipsis">
-      Связанные статьи
+      
+        Связанные статьи
+      
     </span>
 </a>
 </li>
@@ -251,44 +263,44 @@
 <h2 id="backup_restore_cdbbz_indexes">Восстановление индексов OpenSearch (Elasticsearch) из файла резервной копии репозитория</h2>
 <div class="notice notice-warning">
 <p class="admonition-title">Логика работы репозитория снимков OpenSearch (Elasticsearch)</p>
-<p>OpenSearch (Elasticsearch) сохраняет и восстанавливает резервные копии своих данных в виде снимков в директорию, заданную директивой <code>path.repo</code> в файле конфигурации <code>/etc/elasticsearch/elasticsearch.yml</code>.</p>
+<p>OpenSearch (Elasticsearch) сохраняет и восстанавливает резервные копии своих данных в виде снимков в директорию, заданную директивой <code>path.repo</code> в файле конфигурации <code>/etc/opensearch/opensearch.yml</code>.</p>
 <p>Эта директория служит как для сохранения резервных копий, так и для их восстановления.</p>
 </div>
 <ol class="colored_numbers_list">
 <li>
 <p>Остановите службу OpenSearch (Elasticsearch) и удостоверьтесь, что она остановлена:</p>
-<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>stop<span class="w"> </span>elasticsearch</code> <br/><code>systemctl<span class="w"> </span>status<span class="w"> </span>elasticsearch</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>stop<span class="w"> </span>opensearch</code> <br/><code>systemctl<span class="w"> </span>status<span class="w"> </span>opensearch</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Создайте папку репозитория OpenSearch (Elasticsearch) (например, <code>/var/backups/elasticsearch/</code>) и перенесите в неё файлы из каталога <code>History</code> ранее <a class="mkdocs_imported_link" href="#unpack_backup">распакованной резервной копии</a>:</p>
-<div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>/var/backups/elasticsearch/</code> <br/><code>mv<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/History/*<span class="w"> </span>/var/backups/elasticsearch/</code> <br/></pre></code></div>
+<p>Создайте папку репозитория OpenSearch (Elasticsearch) (например, <code>/var/backups/opensearch/</code>) и перенесите в неё файлы из каталога <code>History</code> ранее <a class="mkdocs_imported_link" href="#unpack_backup">распакованной резервной копии</a>:</p>
+<div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>/var/backups/opensearch/</code> <br/><code>mv<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/History/*<span class="w"> </span>/var/backups/opensearch/</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Назначьте папке репозитория и её содержимому полные права доступа:</p>
-<div class="highlight"><code><pre><span></span><code>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">777</span><span class="w"> </span>/var/backups/elasticsearch/</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">777</span><span class="w"> </span>/var/backups/opensearch/</code> <br/></pre></code></div>
 </li>
 <li>
-<p>Назначьте владельца <code>elasticsearch</code> папке репозитория и её содержимому:</p>
-<div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>elasticsearch:elasticsearch<span class="w"> </span>/var/backups/elasticsearch/</code> <br/></pre></code></div>
+<p>Назначьте владельца <code>opensearch</code> папке репозитория и её содержимому:</p>
+<div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>opensearch:opensearch<span class="w"> </span>/var/backups/opensearch/</code> <br/></pre></code></div>
 </li>
 <li>
-<p>В файле конфигурации <code>/etc/elasticsearch/elasticsearch.yml</code> укажите путь к созданному репозиторию:</p>
-<div class="highlight"><code><pre><span></span><code><span class="nt">path.repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/backups/elasticsearch</span></code> <br/></pre></code></div>
+<p>В файле конфигурации <code>/etc/opensearch/opensearch.yml</code> укажите путь к созданному репозиторию:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nt">path.repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/backups/opensearch</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p>Запустите службу OpenSearch (Elasticsearch):</p>
-<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>start<span class="w"> </span>elasticsearch</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>start<span class="w"> </span>opensearch</code> <br/></pre></code></div>
 </li>
 <li>
 <p>Зарегистрируйте репозиторий (например, <code>&lt;repository_backup&gt;</code>) с резервной копией снимка OpenSearch (Elasticsearch) (<code>&lt;openSearchHost&gt;</code> — адрес сервера OpenSearch (Elasticsearch)) :</p>
 <ul>
 <li>
 <p><strong>С авторизацией в OpenSearch (Elasticsearch):</strong></p>
-<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"https://&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/&lt;repository_backup&gt;?pretty"</span><span class="w"> </span><span class="se">\\</span></code> <br/><code>-u<span class="w"> </span>&lt;username&gt;:&lt;password&gt;<span class="w"> </span><span class="se">\\</span></code> <br/><code>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span><span class="se">\\</span></code> <br/><code><span class="s1">'{</span></code> <br/><code><span class="s1">    "type": "fs",</span></code> <br/><code><span class="s1">    "settings": {</span></code> <br/><code><span class="s1">        "location": "/var/backups/elasticsearch"</span></code> <br/><code><span class="s1">    }</span></code> <br/><code><span class="s1">}'</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"https://&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/&lt;repository_backup&gt;?pretty"</span><span class="w"> </span><span class="se">\\</span></code> <br/><code>-u<span class="w"> </span>&lt;username&gt;:&lt;password&gt;<span class="w"> </span><span class="se">\\</span></code> <br/><code>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span><span class="se">\\</span></code> <br/><code><span class="s1">'{</span></code> <br/><code><span class="s1">    "type": "fs",</span></code> <br/><code><span class="s1">    "settings": {</span></code> <br/><code><span class="s1">        "location": "/var/backups/opensearch"</span></code> <br/><code><span class="s1">    }</span></code> <br/><code><span class="s1">}'</span></code> <br/></pre></code></div>
 </li>
 <li>
 <p><strong>Без авторизации в OpenSearch (Elasticsearch):</strong></p>
-<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"https://&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/&lt;repository_backup&gt;?verify=false&amp;pretty"</span><span class="w"> </span><span class="se">\\</span></code> <br/><code>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span><span class="se">\\</span></code> <br/><code><span class="s1">'{</span></code> <br/><code><span class="s1">    "type": "fs",</span></code> <br/><code><span class="s1">    "settings": {</span></code> <br/><code><span class="s1">        "location": "/var/backups/elasticsearch"</span></code> <br/><code><span class="s1">    }</span></code> <br/><code><span class="s1">}'</span></code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"https://&lt;openSearchHost&gt;:&lt;opeSearchPort&gt;/_snapshot/&lt;repository_backup&gt;?verify=false&amp;pretty"</span><span class="w"> </span><span class="se">\\</span></code> <br/><code>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span><span class="se">\\</span></code> <br/><code><span class="s1">'{</span></code> <br/><code><span class="s1">    "type": "fs",</span></code> <br/><code><span class="s1">    "settings": {</span></code> <br/><code><span class="s1">        "location": "/var/backups/opensearch"</span></code> <br/><code><span class="s1">    }</span></code> <br/><code><span class="s1">}'</span></code> <br/></pre></code></div>
 </li>
 </ul>
 <p><a class="mkdocs_imported_link" id="s3_repository"></a></p>
@@ -341,5 +353,5 @@
 </main>
 </div>
 <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
-document$.subscribe(() => { lightbox.reload() });
+document$.subscribe(()=>{ lightbox.reload(); });
 </script></div>

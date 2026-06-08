@@ -2,7 +2,7 @@
 title: 'Восстановление базы данных из файла резервной копии в формате CDBBZ'
 kbId: 5576
 url: 'https://kb.comindware.ru/article.php?id=5576'
-updated: '2025-10-27 13:38:20'
+updated: '2026-06-01 13:42:34'
 ---
 
 # Восстановление базы данных из файла резервной копии в формате CDBBZ
@@ -236,41 +236,41 @@ updated: '2025-10-27 13:38:20'
 
 Логика работы репозитория снимков OpenSearch (Elasticsearch)
 
-OpenSearch (Elasticsearch) сохраняет и восстанавливает резервные копии своих данных в виде снимков в директорию, заданную директивой `path.repo` в файле конфигурации `/etc/elasticsearch/elasticsearch.yml`.
+OpenSearch (Elasticsearch) сохраняет и восстанавливает резервные копии своих данных в виде снимков в директорию, заданную директивой `path.repo` в файле конфигурации `/etc/opensearch/opensearch.yml`.
 
 Эта директория служит как для сохранения резервных копий, так и для их восстановления.
 
 1. Остановите службу OpenSearch (Elasticsearch) и удостоверьтесь, что она остановлена:
 
    ```
-   systemctl stop elasticsearch
-   systemctl status elasticsearch
+   systemctl stop opensearch
+   systemctl status opensearch
    ```
-2. Создайте папку репозитория OpenSearch (Elasticsearch) (например, `/var/backups/elasticsearch/`) и перенесите в неё файлы из каталога `History` ранее [распакованной резервной копии](#unpack_backup):
+2. Создайте папку репозитория OpenSearch (Elasticsearch) (например, `/var/backups/opensearch/`) и перенесите в неё файлы из каталога `History` ранее [распакованной резервной копии](#unpack_backup):
 
    ```
-   mkdir /var/backups/elasticsearch/
-   mv /var/lib/comindware/<instanceName>/History/* /var/backups/elasticsearch/
+   mkdir /var/backups/opensearch/
+   mv /var/lib/comindware/<instanceName>/History/* /var/backups/opensearch/
    ```
 3. Назначьте папке репозитория и её содержимому полные права доступа:
 
    ```
-   chmod -R 777 /var/backups/elasticsearch/
+   chmod -R 777 /var/backups/opensearch/
    ```
-4. Назначьте владельца `elasticsearch` папке репозитория и её содержимому:
+4. Назначьте владельца `opensearch` папке репозитория и её содержимому:
 
    ```
-   chown -R elasticsearch:elasticsearch /var/backups/elasticsearch/
+   chown -R opensearch:opensearch /var/backups/opensearch/
    ```
-5. В файле конфигурации `/etc/elasticsearch/elasticsearch.yml` укажите путь к созданному репозиторию:
+5. В файле конфигурации `/etc/opensearch/opensearch.yml` укажите путь к созданному репозиторию:
 
    ```
-   path.repo: /var/backups/elasticsearch
+   path.repo: /var/backups/opensearch
    ```
 6. Запустите службу OpenSearch (Elasticsearch):
 
    ```
-   systemctl start elasticsearch
+   systemctl start opensearch
    ```
 7. Зарегистрируйте репозиторий (например, `<repository_backup>`) с резервной копией снимка OpenSearch (Elasticsearch) (`<openSearchHost>` — адрес сервера OpenSearch (Elasticsearch)) :
 
@@ -283,7 +283,7 @@ OpenSearch (Elasticsearch) сохраняет и восстанавливает 
      '{
          "type": "fs",
          "settings": {
-             "location": "/var/backups/elasticsearch"
+             "location": "/var/backups/opensearch"
          }
      }'
      ```
@@ -295,7 +295,7 @@ OpenSearch (Elasticsearch) сохраняет и восстанавливает 
      '{
          "type": "fs",
          "settings": {
-             "location": "/var/backups/elasticsearch"
+             "location": "/var/backups/opensearch"
          }
      }'
      ```

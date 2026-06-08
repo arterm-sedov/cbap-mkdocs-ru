@@ -2,7 +2,7 @@
 title: 'Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО'
 kbId: 5572
 url: 'https://kb.comindware.ru/article.php?id=5572'
-updated: '2026-01-29 18:25:35'
+updated: '2026-06-01 13:42:32'
 ---
 
 # Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО
@@ -39,15 +39,13 @@ updated: '2026-01-29 18:25:35'
    Определение имени экземпляра ПО
 2. Директория с базой данных экземпляра ПО: `/var/lib/comindware/<instanceName>/Database`. Может быть задана другая директория с помощью директивы `<workDirectory>` в файле конфигурации `/var/www/comindware/Ignite.config`. Если в файле конфигурации директива `<workDirectory>` не содержит директории, используется директория по умолчанию.
 3. Путь для сохранения снимков базы данных Apache Ignite, по умолчанию: `/var/lib/comindware/<instanceName>/Database/snapshots/`
-4. Имя репозитория OpenSearch (Elasticsearch), заданное при его регистрации, например: `elastic_search_repo_name`
+4. Имя репозитория OpenSearch (Elasticsearch), заданное при его регистрации, например: `opensearch_repo_name`
 5. Путь для сохранения резервных копий OpenSearch (Elasticsearch):
 
-   - например, `/var/www/backups/elasticsearch`
-   - должен быть указан в директиве `path.repo` в файле `/etc/elasticsearch/elasticsearch.yml`
+   - например, `/var/www/backups/opensearch`
+   - должен быть указан в директиве `path.repo` в файле `/etc/opensearch/opensearch.yml`
    - должен ссылаться на существующий диск;
-   - должен находиться на отдельном диске, отдельно от базы данных.
-
-   ![Определение пути для резервных копий OpenSearch (Elasticsearch)](https://kb.comindware.ru/assets/Pasted%20image%2020221229181640.png)
+   - должен находиться на отдельном диске, отдельно от базы данных.![Определение пути для резервных копий OpenSearch (Elasticsearch)](https://kb.comindware.ru/assets/Pasted%20image%2020221229181640.png)
 
    Определение пути для резервных копий OpenSearch (Elasticsearch)
 6. Имя снимка, заданное администратором, например, в формате `<instanceName><Date><Time>`
@@ -129,7 +127,7 @@ updated: '2026-01-29 18:25:35'
 11. Создайте директорию репозитория OpenSearch (Elasticsearch):
 
     ```
-    mkdir /var/www/backups/elasticsearch
+    mkdir /var/www/backups/opensearch
     ```
 12. Присвойте директории `backups` права на чтение-запись `rwxrwxrwx`:
 
@@ -173,22 +171,22 @@ updated: '2026-01-29 18:25:35'
    bash /var/www/apache-ignite/bin/control.sh --baseline
    bash /var/www/apache-ignite/bin/control.sh --snapshot create snapshot_name_$now --sync
    ```
-3. Зарегистрируйте репозиторий OpenSearch (Elasticsearch). Вместо `elasticsearch_repo_name` и `/var/www/backups/elasticsearch` подставьте своё имя репозитория и путь к его папке:
+3. Зарегистрируйте репозиторий OpenSearch (Elasticsearch). Вместо `opensearch_repo_name` и `/var/www/backups/opensearch` подставьте своё имя репозитория и путь к его папке:
 
    ```
-   curl -X PUT "<openSearchHost>:<opeSearchPort>/_snapshot/elasticsearch_repo_name?pretty" -H 'Content-Type: application/json' -d '{"type": "fs", "settings": {"location": "/var/www/backups/elasticsearch"}}'
+   curl -X PUT "<openSearchHost>:<opeSearchPort>/_snapshot/opensearch_repo_name?pretty" -H 'Content-Type: application/json' -d '{"type": "fs", "settings": {"location": "/var/www/backups/opensearch"}}'
    ```
-4. Создайте снимок состояния OpenSearch (Elasticsearch), заменив ***`elasticsearch_repo_name`*\*,** `snapshot_name`\* и `prefix_name`(префикс индекса, указанный в конфигурации экземпляра ПО) на свои значения:
+4. Создайте снимок состояния OpenSearch (Elasticsearch), заменив ***`opensearch_repo_name`*\*,** `snapshot_name`\* и `prefix_name`(префикс индекса, указанный в конфигурации экземпляра ПО) на свои значения:
 
    ```
-   curl -X PUT "<openSearchHost>:<opeSearchPort>/_snapshot/elasticsearch_repo_name/snapshot_name_$now?wait_for_completion=true&pretty" -H 'Content-Type: application/json' -d '{"indices": "cmw_prefix_name*", "ignore_unavailable": true, "include_global_state": false}'
+   curl -X PUT "<openSearchHost>:<opeSearchPort>/_snapshot/opensearch_repo_name/snapshot_name_$now?wait_for_completion=true&pretty" -H 'Content-Type: application/json' -d '{"indices": "cmw_prefix_name*", "ignore_unavailable": true, "include_global_state": false}'
    ```
 5. Создайте директории для хранения компонентов резервной копии:
 
    ```
    mkdir /var/www/backups/backup_$now
    mkdir /var/www/backups/backup_$now/Database
-   mkdir /var/www/backups/backup_$now/elastic
+   mkdir /var/www/backups/backup_$now/opensearch
    mkdir /var/www/backups/backup_$now/Streams
    mkdir /var/www/backups/backup_$now/Scripts
    mkdir /var/www/backups/backup_$now/wal
@@ -197,7 +195,7 @@ updated: '2026-01-29 18:25:35'
 
    ```
    mv /var/www/comindware/data/Database/snapshots/snapshot_name_$now /var/www/backups/backup_$now/Database
-   cp -r /var/www/backups/elasticsearch/* /var/www/backups/backup_$now/elastic
+   cp -r /var/www/backups/opensearch/* /var/www/backups/backup_$now/opensearch
    cp -r /var/www/comindware/data/Database/wal/* /var/www/backups/backup_$now/wal
    cp -r /var/www/comindware/data/Database/Scripts/* /var/www/backups/backup_$now/Scripts
    cp -r /var/www/comindware/data/Streams/* /var/www/backups/backup_$now/Streams
