@@ -1,44 +1,15 @@
-from gitingest import ingest
-import subprocess
 import yaml
 from datetime import datetime
 import re
+from phpkb_ingest_utils import build_content, build_summary, build_tree, iter_markdown_files
 
-# def get_git_info():
-#     try:
-#         current_branch = subprocess.check_output(
-#             ["git", "rev-parse", "--abbrev-ref", "HEAD"], encoding="utf-8"
-#         ).strip()
-#     except Exception:
-#         current_branch = "unknown"
-
-#     try:
-#         repo_address = subprocess.check_output(
-#             ["git", "config", "--get", "remote.origin.url"], encoding="utf-8"
-#         ).strip()
-#     except Exception:
-#         # Try to get the first available remote
-#         try:
-#             remotes = subprocess.check_output(
-#                 ["git", "remote"], encoding="utf-8"
-#             ).strip().splitlines()
-#             if remotes:
-#                 repo_address = subprocess.check_output(
-#                     ["git", "config", "--get", f"remote.{remotes[0]}.url"], encoding="utf-8"
-#                 ).strip()
-#             else:
-#                 repo_address = "unknown"
-#         except Exception:
-#             repo_address = "unknown"
-
-#     return repo_address, current_branch
 
 if __name__ == "__main__":
     folder = "phpkb_content_cmw_lab/29. CMW Platform"
-    summary, tree, content = ingest(folder, exclude_patterns="*.html")
-    # repo_address, current_branch = get_git_info()
+    markdown_files = iter_markdown_files(folder)
+    tree = build_tree(folder, markdown_files)
+    content = build_content(folder, markdown_files)
     ingestion_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    #source_line = f"Source: {repo_address.strip('.git')}/tree/{current_branch}"
     source_line = "Source: https://kb.cmwlab.com/category.php?id=29"
     # Add 'https://kb.cmwlab.com' prefix to all image sources starting with '](/platform/' using simple replace
     content = re.sub(r'(\[[^\]]*\])\(/([^)]+)\)', r'\1(https://kb.cmwlab.com/\2)', content)
@@ -63,9 +34,7 @@ if __name__ == "__main__":
     snippet_content = re.sub(r'<!--.*?-->', '', snippet_content, flags=re.DOTALL)
     # Replace three or more newlines with just two newlines
     snippet_content = re.sub(r'\n{2,}', '\n', snippet_content)
-    # Extract only the 'Files analyzed' and 'Estimated tokens' lines from the summary using regex
-    matches = re.findall(r'^(Files analyzed:.*|Estimated tokens:.*)$', summary, re.MULTILINE)
-    summary_short = "\n".join([m.strip() for m in matches])# if len(matches) == 2 else summary
+    summary_short = build_summary(markdown_files, tree, content)
     with open("kb.cmwlab.com.platform_v4_for_llm_ingestion.md", "w", encoding="utf-8-sig", newline='\r\n') as f:
         f.write(
             f"\n----------------------\n\n"

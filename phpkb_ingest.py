@@ -5,13 +5,13 @@ Default: Platform 6.0 tree from `phpkb_import_for_rag.py` (`phpkb_content_rag/89
 Legacy V5: pass `--folder` and `--output` for the 798 tree and v5 bundle name.
 """
 
-from gitingest import ingest
 import argparse
 import yaml
 from datetime import datetime
 import re
 import os
 import shutil
+from phpkb_ingest_utils import build_content, build_summary, build_tree, iter_markdown_files
 
 # Defaults: V6 RAG export (markdown-only) and kb.comindware.ru platform v6.0 folder
 DEFAULT_FOLDER = os.path.join("phpkb_content_rag", "896-platform_v6")
@@ -61,7 +61,7 @@ PROMPTS_FOR_LLM_MD = """
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="Ingest PHPKB-export Markdown into one LLM-oriented file (gitingest)."
+        description="Ingest PHPKB-export Markdown into one LLM-oriented file."
     )
     parser.add_argument(
         "--folder",
@@ -108,7 +108,9 @@ if __name__ == "__main__":
     kb_target_dir = args.target_dir
     category_id = args.category_id
 
-    summary, tree, content = ingest(folder, exclude_patterns="*.html")
+    markdown_files = iter_markdown_files(folder)
+    tree = build_tree(folder, markdown_files)
+    content = build_content(folder, markdown_files)
     ingestion_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     source_line = f"Source: https://kb.comindware.ru/category.php?id={category_id}"
     platform_version = (
@@ -137,10 +139,7 @@ if __name__ == "__main__":
     snippet_content = re.sub(r"<!--.*?-->", "", snippet_content, flags=re.DOTALL)
     snippet_content = re.sub(r"\n{2,}", "\n", snippet_content)
 
-    matches = re.findall(
-        r"^(Files analyzed:.*|Estimated tokens:.*)$", summary, re.MULTILINE
-    )
-    summary_short = "\n".join([m.strip() for m in matches])
+    summary_short = build_summary(markdown_files, tree, content)
     with open(output_filename, "w", encoding="utf-8-sig", newline="\r\n") as f:
         f.write(
             f"\n----------------------\n\n"
