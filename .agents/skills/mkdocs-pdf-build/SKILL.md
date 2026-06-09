@@ -2,7 +2,6 @@
 name: mkdocs-pdf-build
 description: "Install GTK3 runtime and build PDF guides with mkdocs-with-pdf / WeasyPrint on Windows. Use when `import weasyprint` fails with `OSError: cannot load library`, when the user asks to build a PDF guide, when PDF output is 0-byte or silently drops pages, or when mkdocs builds succeed but the PDF renderer fails. Load `python-env-setup` first if the venv itself is broken."
 license: MIT
-compatibility: opencode
 metadata:
   source: hand-discovered
   applies_to: cbap-mkdocs-ru

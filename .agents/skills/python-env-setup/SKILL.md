@@ -2,7 +2,6 @@
 name: python-env-setup
 description: Set up and verify the cbap-mkdocs-ru Python virtual environment on Windows. Use when the venv appears broken, `pip --version` reports a non-venv interpreter, pip cannot reach PyPI (timeouts or blocked from RU IPs), or Python packages fail to import. Also use for smoke-testing mkdocs plugin imports before a build.
 license: MIT
-compatibility: opencode
 metadata:
   source: hand-discovered
   applies_to: cbap-mkdocs-ru
