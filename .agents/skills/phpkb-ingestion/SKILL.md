@@ -122,6 +122,29 @@ Legacy V5 bundle from the 798 tree:
 
 Adjust `--folder` to match the actual `798-*` directory name under `phpkb_content_rag/`.
 
+## Publishing the bundle
+
+After `phpkb_ingest.py` completes, the bundle is updated in **two locations** that are **separate git repos**:
+
+1. **Root repo** — `kb.comindware.ru.platform_v6_for_llm_ingestion.md` (tracked in this repo)
+2. **Junction target repo** — the external checkout linked via junction/symlink at `kb.comindware.ru/platform/v6.0/`
+
+Both repos need to be committed and pushed independently:
+
+```powershell
+# Root repo
+git add kb.comindware.ru.platform_v6_for_llm_ingestion.md
+git commit -m "chore: update platform v6 RAG ingestion bundle"
+git push
+
+# Junction target repo (verify the target path with Get-Item first)
+git -C "<junction-target-path>" add platform/v6.0/kb.comindware.ru.platform_v6_for_llm_ingestion.md
+git -C "<junction-target-path>" commit -m "chore: update platform v6 RAG ingestion bundle"
+git -C "<junction-target-path>" push
+```
+
+Do **not** force-add the gitignored junction folder to the root repo — commit in each repo separately.
+
 ## Verification
 
 After `phpkb_ingest.py` completes, check the bundle header:
