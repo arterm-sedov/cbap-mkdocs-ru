@@ -75,9 +75,10 @@ Linux/macOS:
 
 Dependencies are listed in `install/requirements.txt`.
 
-The venv and WeasyPrint/GTK3 PDF toolchain have several non-obvious pitfalls on Windows (portable-Python env pollution, pip mirror setup, GTK3 install path, plugin import-name quirks). Load the project skill for the full playbook:
+The venv and WeasyPrint/GTK3 PDF toolchain have several non-obvious pitfalls on Windows (portable-Python env pollution, pip mirror setup, GTK3 install path, plugin import-name quirks). Load the relevant project skill for the full playbook:
 
-- @.agents/skills/python-env-pdf-build/SKILL.md
+- @.agents/skills/python-env-setup/SKILL.md
+- @.agents/skills/mkdocs-pdf-build/SKILL.md
 
 ## LINK FORMATTING
 
