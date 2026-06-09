@@ -1,5 +1,5 @@
 ---
-name: cmwhelp_commit
+name: cmwhelp-commit
 description: Apply this rule to git commit messages.
 ---
 This rule applies to git commit messages in the version control pane and in the terminal.
@@ -29,8 +29,11 @@ git rev-parse --abbrev-ref HEAD
    - Check recent commit messages: `git log -n 20 --pretty=%B`
    - Look for the pattern `[#XXXXX]` in the most recent commits on this branch
    - Use the first matching issue number found
-4. Use the issue number in square brackets with a `#` at the start of the commit message (no spaces inside the brackets).
-5. Generate a concise description by analyzing the changes:
+4. If still no ticket id (e.g. ad-hoc branch with no history):
+   - Extract product version from the branch name: `platform_v6` → `6`, `platform_v5` → `5`.
+   - Otherwise **ask the user** for a ticket id. Do not commit without one.
+5. Use the issue number in square brackets with a `#` at the start of the commit message (no spaces inside the brackets).
+6. Generate a concise description by analyzing the changes:
    - **Check staging status**: Use `git status` to see what's staged vs unstaged
    - **Prefer staged files only**: If there are staged files AND there are also unstaged files, use `git diff --cached` to analyze only staged changes
    - **Fallback to whole diff**: Only if no files are staged OR all files are staged (no unstaged changes exist), then use `git diff` to analyze all changes
@@ -49,6 +52,9 @@ Commit message: `[#67890] Fix data processing bug`
 Branch name: `branch_name`
 Previous commit message: `[#67890] Previous bug fix`
 Commit message: `[#67890] Fix data processing bug`
+
+Branch name: `platform_v6`, no prior `[#X]`, user confirms `6`
+Commit message: `[#6] Set up PDF build toolchain`
 
 **Incorrect examples:**
 

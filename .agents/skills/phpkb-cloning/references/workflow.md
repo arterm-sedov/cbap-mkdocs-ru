@@ -46,6 +46,19 @@ Keep clone and post-clone update scripts on the same profile.
    - `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py --mapping .v6mapping.json --target all`
 8. Verify local file changes with `git status --short` and targeted diffs.
 
+## Sync Changed Articles (Git-Diff Batch)
+
+Use after editing existing articles in `docs/ru` that already have `kbId:` in front matter.
+
+1. `git status --short docs/ru/` — confirm which source articles changed.
+2. `.\.venv\Scripts\python.exe -m mkdocs build -f mkdocs_for_kb_import_ru.yml`
+3. `git diff --name-only for_kb_import_ru/` — list rebuilt HTML paths.
+4. For each path, read `kb-id` from line 1; collect only numeric IDs (omit empty `kb-id=""`).
+5. `.\.venv\Scripts\python.exe phpkb_update_articles.py --profile cmw -y --article-id <id> …` — one flag per article.
+6. Verify script output: `Found content for article <id>` and `Updated article <id>` for each ID.
+7. Article URL for reviewers: `https://kb.comindware.ru/article.php?id=<id>`
+8. Commit source (and export if tracked) only when requested.
+
 ## PHPKB HTML Export And Images
 
 - Build RU PHPKB HTML from the repository root:
@@ -105,16 +118,27 @@ task is explicitly to update that existing PHPKB article.
 
 9. Publish only the new article:
 
-   ``` powershell
-   python phpkb_update_articles.py --profile cmw --article-id <new-article-id> --yes
-   ```
+    ``` powershell
+    python phpkb_update_articles.py --profile cmw --article-id <new-article-id> --yes
+    ```
 
-   The script can also be run interactively by omitting `--article-id`. When run interactively, answer `Y` to "Update specific articles?", enter the new article ID, confirm the update, then enter `E`.
+    The script can also be run interactively by omitting `--article-id`. When run interactively, answer `Y` to "Update specific articles?", enter the new article ID, confirm the update, then enter `E`.
 
 10. `phpkb_update_articles.py` updates the PHPKB row from the generated HTML
-   whose body contains `kb-id="<new-article-id>"`. It updates title, content,
-   tags, `unlisted`, `article_status='approved'`, and `article_show='yes'`.
-11. Always stage, commit, and keep modified HTML files under the `for_kb_import_ru/` tree tracked in Git alongside their source Markdown changes. Do not discard or ignore them.
+    whose body contains `kb-id="<new-article-id>"`. It updates title, content,
+    tags, `unlisted`, `article_status='approved'`, and `article_show='yes'`.
+11. (Optional) Refresh RAG and AI ingestion so the new article appears in the LLM bundle:
+
+    ``` powershell
+    .\.venv\Scripts\python.exe phpkb_import_for_rag.py --category-id 896
+    .\.venv\Scripts\python.exe phpkb_ingest.py
+    ```
+
+    Then commit the RAG artifact and the updated bundle in both this repo and the sibling `kb.comindware.ru` repo.
+
+12. Commit the generated `for_kb_import_ru/` HTML alongside the source Markdown —
+     this repo tracks `for_kb_import_ru/` under version control. Keep the
+     one-off mapping if it is useful for audit or rollback.
 
 ### Real-world Example: Publishing "Работа с ИИ" (ai_features_guide.md)
 
@@ -135,10 +159,10 @@ task is explicitly to update that existing PHPKB article.
    .venv\Scripts\python.exe -m mkdocs build -f mkdocs_for_kb_import_ru.yml
    ```
 8. Published with:
-   ``` powershell
-   python phpkb_update_articles.py --profile cmw --article-id 5742 --yes
-   ```
-9. Staged, committed, and tracked both the modified source `ai_features_guide.md` and the generated `for_kb_import_ru/` HTML output to keep Git history complete.
+    ``` powershell
+    python phpkb_update_articles.py --profile cmw --article-id 5742 --yes
+    ```
+9. Committed the generated `for_kb_import_ru/` HTML along with source changes and pushed to all remotes.
 
 The root-level `phpkb_replace_related_topics.py` is a post-import Markdown
 cleanup helper, not part of the PHPKB DB cloning scripts.
