@@ -156,3 +156,36 @@ For H2-H6 generate a concise semantic anchors with H1 anchor as a prefix:
 ## Commit messages
 
 Follow the commit message rules given here: .cursor/rules/cmwhelp_commit.md
+
+---
+
+## SELF-EVOLUTION — Documenting Discoveries
+
+After completing a non-trivial task, review what was learned and capture it:
+
+### When to document
+
+- A pattern that took debugging to figure out (e.g., silent macro errors, missing anchor warnings).
+- A workflow step not covered by existing skills (e.g., which PHPKB category ID to use, which script signature fits which context).
+- A recurring gotcha that cost time and would cost again.
+
+### Where to document
+
+- **Process/skill gaps** → update the matching skill under `.agents/skills/<name>/SKILL.md`.
+- **Recurring authoring pitfalls** → add a concise rule to this AGENTS.md under the relevant heading.
+- **One-off context notes** (e.g., category IDs, naming conventions) → add to the relevant skill's `references/` folder.
+
+### How
+
+1. State the symptom and the fix in 1–2 lines.
+2. Add it to the most specific skill or rule file — prefer updating existing docs over creating new ones.
+3. Keep it agnostic: no absolute paths, no secrets, no machine-specific notes.
+
+### Discovery log (per session)
+
+<!-- Paste brief findings below; move durable ones to skills/rules periodically -->
+
+- **2026-06-09** — PHPKB examples category ID is `909` (used as `--target-category-id` when cloning new example articles). The end-to-end publication sequence is: clone → kbId in frontmatter → hyperlink map entry → `mkdocs build -f mkdocs_for_kb_import_ru.yml` → `phpkb_update_articles.py` → `phpkb_import_for_rag.py` → `phpkb_ingest.py` → commit+push sibling repo.
+- **2026-06-09** — `{{ product Name }}` with a space silently causes a macros syntax error. Only `{{ productName }}` and `{{ companyName }}` are valid macros from `mkdocs_common.yml`.
+- **2026-06-09** — `mkdocs_autorefs` emits `WARNING: Could not find cross-reference target` for links using anchors absent from `hyperlinks_mkdocs_to_kb_map.md`. Always verify all `[text][anchor]` references resolve against the map before publishing.
+- **2026-06-09** — Process-task scripts use `void Main(Comindware.Process.Api.Data.ScriptContext, Comindware.Entities)` — no return value. Button scripts use `UserCommandResult Main(UserCommandContext, Comindware.Entities)`. Scenario scripts use `string Main(string ObjectID, [Comindware.Entities])`. Match the script type to the automation context: process tasks for unattended data import/sync.

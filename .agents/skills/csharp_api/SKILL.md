@@ -240,3 +240,11 @@ Api.TeamNetwork.ObjectService.EditWithAlias("Template", context.BusinessObjectId
 - Check for null when querying datasets: `if (sessionsData == null) { return; }`
 - System names use `op.N` format for attributes, `pa.N` for processes, `lst.N` for lists
 - Return `UserCommandResult` from button scripts, `void` from process task scripts
+
+## Choosing the Right Script Type
+
+| Context | Signature | Use when |
+|---------|-----------|----------|
+| **Process task** | `void Main(ScriptContext, Entities)` | Unattended data import/sync, scheduled automation, background processing |
+| **Button** | `UserCommandResult Main(UserCommandContext, Entities)` | User-initiated action on a form or table — needs UI feedback, navigation, or data refresh |
+| **Scenario** | `string Main(string ObjectID, [Entities])` | Expression-like calculation, returning a single value to an attribute |

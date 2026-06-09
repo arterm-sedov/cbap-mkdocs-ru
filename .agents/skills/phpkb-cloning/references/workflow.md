@@ -118,19 +118,28 @@ task is explicitly to update that existing PHPKB article.
 
 9. Publish only the new article:
 
-   ``` powershell
-   python phpkb_update_articles.py --profile cmw --article-id <new-article-id> --yes
-   ```
+    ``` powershell
+    python phpkb_update_articles.py --profile cmw --article-id <new-article-id> --yes
+    ```
 
-   The script can also be run interactively by omitting `--article-id`. When run interactively, answer `Y` to "Update specific articles?", enter the new article ID, confirm the update, then enter `E`.
+    The script can also be run interactively by omitting `--article-id`. When run interactively, answer `Y` to "Update specific articles?", enter the new article ID, confirm the update, then enter `E`.
 
 10. `phpkb_update_articles.py` updates the PHPKB row from the generated HTML
-   whose body contains `kb-id="<new-article-id>"`. It updates title, content,
-   tags, `unlisted`, `article_status='approved'`, and `article_show='yes'`.
-11. If the MkDocs build dirties tracked files under `for_kb_import_ru/` and that
-    generated tree was clean before the build, remove those generated changes
-    from Git after publishing. Keep the source Markdown `kbId` change and the
-    one-off mapping if the mapping is useful for audit or rollback.
+    whose body contains `kb-id="<new-article-id>"`. It updates title, content,
+    tags, `unlisted`, `article_status='approved'`, and `article_show='yes'`.
+11. (Optional) Refresh RAG and AI ingestion so the new article appears in the LLM bundle:
+
+    ``` powershell
+    .\.venv\Scripts\python.exe phpkb_import_for_rag.py --category-id 896
+    .\.venv\Scripts\python.exe phpkb_ingest.py
+    ```
+
+    Then commit the RAG artifact and the updated bundle in both this repo and the sibling `kb.comindware.ru` repo.
+
+12. If the MkDocs build dirties tracked files under `for_kb_import_ru/` and that
+     generated tree was clean before the build, remove those generated changes
+     from Git after publishing. Keep the source Markdown `kbId` change and the
+     one-off mapping if the mapping is useful for audit or rollback.
 
 ### Real-world Example: Publishing "Работа с ИИ" (ai_features_guide.md)
 
