@@ -136,10 +136,9 @@ task is explicitly to update that existing PHPKB article.
 
     Then commit the RAG artifact and the updated bundle in both this repo and the sibling `kb.comindware.ru` repo.
 
-12. If the MkDocs build dirties tracked files under `for_kb_import_ru/` and that
-     generated tree was clean before the build, remove those generated changes
-     from Git after publishing. Keep the source Markdown `kbId` change and the
-     one-off mapping if the mapping is useful for audit or rollback.
+12. Commit the generated `for_kb_import_ru/` HTML alongside the source Markdown —
+     this repo tracks `for_kb_import_ru/` under version control. Keep the
+     one-off mapping if it is useful for audit or rollback.
 
 ### Real-world Example: Publishing "Работа с ИИ" (ai_features_guide.md)
 
@@ -160,10 +159,10 @@ task is explicitly to update that existing PHPKB article.
    .venv\Scripts\python.exe -m mkdocs build -f mkdocs_for_kb_import_ru.yml
    ```
 8. Published with:
-   ``` powershell
-   python phpkb_update_articles.py --profile cmw --article-id 5742 --yes
-   ```
-9. Discarded bulk changes in `for_kb_import_ru/` with `git restore for_kb_import_ru/` to keep Git history clean.
+    ``` powershell
+    python phpkb_update_articles.py --profile cmw --article-id 5742 --yes
+    ```
+9. Committed the generated `for_kb_import_ru/` HTML along with source changes and pushed to all remotes.
 
 The root-level `phpkb_replace_related_topics.py` is a post-import Markdown
 cleanup helper, not part of the PHPKB DB cloning scripts.
