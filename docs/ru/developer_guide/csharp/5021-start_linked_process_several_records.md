@@ -12,7 +12,7 @@ hide: tags
 
 # Старт связанного процесса по нескольким записям {: #start-linked-process-several-records }
 
-Для того, чтобы запустить связанный процесс по нескольким записям (которые будут добавлены в коллекцию), введите следующее выражение:
+Для того чтобы запустить связанный процесс по нескольким записям (которые будут добавлены в коллекцию), введите следующее выражение:
 
 ```cs
 using System;
@@ -74,16 +74,14 @@ public class Script
 }
 ```
 
-**где:**
+**Здесь:**
 
-**Protokolispytaniy** – системное имя текущего Шаблона записи;
-
-**OtpravkiprotokolavFGIS** – системное имя Шаблона записи (технического), связанного с текущим Шаблоном записи;
-
-**syncDataForProtocols** – системное имя атрибута Шаблона записи SinkhronizatsiisFGIS;
-
-**SinkhronizatsiisFGIS** – системное имя Шаблона записи, где хранится коллекция записей из Шаблона записи Protokolispytaniy;
-
-**SinkhronizatsiyasFGIS** – системное имя Шаблона процесса по Шаблону записи SinkhronizatsiisFGIS.
+| Значение | Описание |
+| -------- | -------- |
+| `Protokolispytaniy` | Системное имя текущего шаблона записи. |
+| `OtpravkiprotokolavFGIS` | Системное имя технического шаблона записи, связанного с текущим шаблоном записи. |
+| `syncDataForProtocols` | Системное имя атрибута шаблона записи `SinkhronizatsiisFGIS`. |
+| `SinkhronizatsiisFGIS` | Системное имя шаблона записи, в котором хранится коллекция записей из шаблона `Protokolispytaniy`. |
+| `SinkhronizatsiyasFGIS` | Системное имя шаблона процесса по шаблону записи `SinkhronizatsiisFGIS`. |
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
