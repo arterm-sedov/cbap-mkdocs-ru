@@ -1,16 +1,23 @@
 ---
 title: Назначение задачи на группу исполнителей, выбранную на форме. Пример настройки
-kbId: 4877
+kbId: 5335
+tags:
+    - N3
+    - атрибуты
+    - выражение на N3
+    - пример
+    - формулы
+hide: tags
 ---
 
-# Назначение задачи на группу исполнителей, выбранную на форме. Пример настройки
+# Назначение задачи на группу исполнителей, выбранную на форме. Пример настройки {: #assign_task_group_example }
 
-## Введение
+## Введение {: #assign_task_group_example_intro }
 
 При проектировании бизнес-процессов можно назначить исполнителями **[пользовательской задачи][process_diagram_elements_user_task]** аккаунты и (или) роли:
 
 - выбрать определённые аккаунты и роли;
-- указать атрибут типа «[**Аккаунт**][attribute_account]» или «[**Роль**][attribute_role]», содержащий ID исполнителей;
+- указать [атрибут типа «Аккаунт»][attribute_account] или [атрибут типа «Роль»][attribute_role], содержащий ID исполнителей;
 - вычислить ID аккаунтов или ролей при помощи **формулы** или выражения на **N3**.
 
 Однако на этапе проектирования бизнес-процесса нет возможности назначить исполнителем задачи конкретную группу без использования **формул** или языка **N3**.
@@ -19,13 +26,13 @@ kbId: 4877
 
 В этой статье представлен пример настройки приложения для назначения группы в качестве исполнителя задачи с помощью селектора группы на форме.
 
-## Прикладная задача
+## Прикладная задача {: #assign_task_group_example_use_case }
 
 - Имеется бизнес-процесс *«Оформление заявок»*, связанный с шаблоном записи *«Заявка»*.
 - Менеджер должен назначить группу исполнителей заявки на форме.
 - Участники группы исполнителей получат задачу *«Обработать заявку»*.
 
-## Настройка выбора группы исполнителей с помощью селектора на форме
+## Настройка выбора группы исполнителей с помощью селектора на форме {: #assign_task_group_example_nastroyka_vybora_gruppy_ispolniteley_s_pomoschyu }
 
 Алгоритм выбора группы исполнителей для задачи с помощью формы
 
@@ -48,38 +55,38 @@ kbId: 4877
    | *Исполнители задачи* | **Аккаунт** | **Хранить несколько значений:** флажок установлен  **Вычислять автоматически:** флажок установлен  **Вычисляемое выражение: N3** |
 6. В поле **«Вычисляемое выражение»** атрибута *«Исполнители задачи»* вставьте следующее выражение на **N3**:
 
-   ```
+   ```sql
    # Импортируем функции для работы с записями, аккаунтами и базой данных
    @prefix object: <http://comindware.com/ontology/object#>.
    @prefix account: <http://comindware.com/ontology/account#>.
    @prefix cmw: <http://comindware.com/logics#>.
    {
-   # Находим атрибут Nazvaniegruppy (Название группы) в шаблоне Spravochnikgrupp (Справочник групп)
-   # и помещаем его в переменную nazvaniegruppyAttribute
-   ("Spravochnikgrupp" "Nazvaniegruppy") object:findProperty ?nazvaniegruppyAttribute.
+      # Находим атрибут Nazvaniegruppy (Название группы) в шаблоне Spravochnikgrupp (Справочник групп)
+      # и помещаем его в переменную nazvaniegruppyAttribute
+      ("Spravochnikgrupp" "Nazvaniegruppy") object:findProperty ?nazvaniegruppyAttribute.
 
-   # Находим атрибут Zayavka (Заявка) в шаблоне Gruppaispolniteley (Группа исполнителей)
-   # и помещаем его в переменную gruppaispolniteleyAttribute
-   ("Gruppaispolniteley" "Zayavka") object:findProperty ?gruppaispolniteleyAttribute.
+      # Находим атрибут Zayavka (Заявка) в шаблоне Gruppaispolniteley (Группа исполнителей)
+      # и помещаем его в переменную gruppaispolniteleyAttribute
+      ("Gruppaispolniteley" "Zayavka") object:findProperty ?gruppaispolniteleyAttribute.
 
-   # Помещаем значение атрибута Gruppaispolniteley, то есть группу,
-   # выбранную в текущей заявке item,
-   # в переменную gruppaispolniteleyValue,
-   ?item ?gruppaispolniteleyAttribute ?gruppaispolniteleyValue.
+      # Помещаем значение атрибута Gruppaispolniteley, то есть группу,
+      # выбранную в текущей заявке item,
+      # в переменную gruppaispolniteleyValue,
+      ?item ?gruppaispolniteleyAttribute ?gruppaispolniteleyValue.
 
-   # Находим название выбранной группы шаблоне Spravochnikgrupp,
-   # то есть значение атрибута Nazvaniegruppy,
-   # и помещаем его в переменную nazvaniegruppy
-   ?gruppaispolniteleyValue ?nazvaniegruppyAttribute ?nazvaniegruppy.
+      # Находим название выбранной группы шаблоне Spravochnikgrupp,
+      # то есть значение атрибута Nazvaniegruppy,
+      # и помещаем его в переменную nazvaniegruppy
+      ?gruppaispolniteleyValue ?nazvaniegruppyAttribute ?nazvaniegruppy.
 
-   # Находим группу по названию из переменной nazvaniegruppy
-   # и помещаем группу в переменную gruppaispolniteley
-   ?gruppaispolniteley account:groupName ?nazvaniegruppy.
+      # Находим группу по названию из переменной nazvaniegruppy
+      # и помещаем группу в переменную gruppaispolniteley
+      ?gruppaispolniteley account:groupName ?nazvaniegruppy.
 
-   # Находим все аккаунты в группе из переменной gruppaispolniteley
-   # и помещаем их в переменную value,
-   # то есть заполняем значение атрибута «Исполнители задачи»
-   ?gruppaispolniteley account:groupUsers ?value.
+      # Находим все аккаунты в группе из переменной gruppaispolniteley
+      # и помещаем их в переменную value,
+      # то есть заполняем значение атрибута «Исполнители задачи»
+      ?gruppaispolniteley account:groupUsers ?value.
    }
    ```
 
@@ -90,7 +97,7 @@ kbId: 4877
 
    _![Диаграмма процесса «Оформление заявок»](https://kb.comindware.ru/assets/img_66867a9324c0c.png)_
 
-## Тестирование
+## Тестирование {: #assign_task_group_example_testirovanie }
 
 1. Создайте экземпляр процесса *«Оформление заявок»*.
 2. На стартовой форме выберите группу из раскрывающегося списка  *«Группа исполнителей»*.
@@ -100,15 +107,10 @@ kbId: 4877
 
 --8<-- "related_topics_heading.md"
 
-**[Группы. Создание, настройка, выбор участников, синхронизация с AD, удаление][groups]**
-
-**[Пользовательская задача][process_diagram_elements_user_task]**
-
-**[Атрибут типа «Аккаунт»][attribute_account]**
-
-**[Атрибут типа «Роль»][attribute_role]**
-
-**[Страница «Администрирование». Использование][administration]**
+- [Группы. Создание, настройка, выбор участников, синхронизация с AD, удаление][groups]
+- [Пользовательская задача][process_diagram_elements_user_task]
+- [Атрибут типа «Аккаунт»][attribute_account]
+- [Атрибут типа «Роль»][attribute_role]
+- [Страница «Администрирование». Использование][administration]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
-

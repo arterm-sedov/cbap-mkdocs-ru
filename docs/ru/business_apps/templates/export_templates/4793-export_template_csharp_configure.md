@@ -38,7 +38,7 @@ _![Расположение раздела «Шаблоны экспорта»](
 
 _![Автоматически созданная кнопка](https://kb.comindware.ru/assets/2.2_2021-12-13_124346.png)_
 
-Перейдите на вкладку «***Скрипт***» в свойствах этой кнопки и добавьте следующий код:
+Перейдите на вкладку «**Скрипт**» в свойствах этой кнопки и добавьте следующий код:
 
 ```cs
 using System;
@@ -439,8 +439,8 @@ public class RESULT
 }
 ```
 
-Результат выгрузки:
+**Результат выгрузки:**
 
-_![Word файл](https://kb.comindware.ru/assets/exp7.jpg)_
+_![Файл в формате Word](https://kb.comindware.ru/assets/exp7.jpg)_
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

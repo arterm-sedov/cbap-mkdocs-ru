@@ -1,104 +1,149 @@
 ---
 title: QR-код. Формирование с помощью C#-скрипта по нажатию кнопки
 kbId: 5340
-
 tags:
     - C#
-    - скрипт
     - C#-скрипт
+    - QR-код
+    - кнопки
     - пример скрипта
+    - скрипт
 hide: tags
 ---
 
 # QR-код. Формирование с помощью C#-скрипта по нажатию кнопки {: #qr-code-csharp-button }
 
-В процессе настройки решения может понадобиться генерация QR-кода по нажатию кнопки (например, для формирования внутреннего кода для сотрудников). В данной статье мы рассмотрим пошаговую настройку генерации QR-кода по кнопке на форме.
+Здесь приведён пример настройки кнопки, которая формирует QR-код для текущей записи с помощью C#-скрипта.
 
-**1.** В шаблоне записи, где вы планируете генерировать QR-код, создайте новый атрибут с типом данных «Текст» (***QRinbase***). Формат отображения не важен.
+Такую кнопку можно использовать, например, чтобы создать внутренний код сотрудника, пропуск, ссылку на карточку записи или другой QR-код, который должен генерироваться по запросу пользователя.
 
-**2.** В том же шаблоне записи создайте ещё один атрибут с типом данных «Текст» (***QRcode***) и форматом отображения «HTML-текст». Установите флаг «Вычисляемый» и в поле «Вычисляемое выражение» вставьте следующую строку:
+## Логика решения {: #qr-code-csharp-button_logic }
 
+Для отображения QR-кода используются два текстовых атрибута:
+
+- `QRinbase` — хранит QR-код в формате Base64;
+- `QRcode` — отображает QR-код как изображение на форме.
+
+Кнопка вызывает C#-скрипт, который:
+
+1. Формирует ссылку на текущую запись.
+2. Передаёт ссылку во внешний сервис генерации QR-кодов.
+3. Получает изображение QR-кода.
+4. Преобразует изображение в строку Base64.
+5. Записывает строку Base64 в атрибут `QRinbase`.
+
+Атрибут `QRcode` по формуле преобразует строку Base64 в HTML-изображение.
+
+## Настройка атрибутов {: #qr-code-csharp-button_attributes }
+
+1. В шаблоне записи, где требуется формировать QR-код, создайте атрибут типа «**Текст**» с системным именем `QRinbase`.
+2. Создайте ещё один атрибут типа «**Текст**» с системным именем `QRcode`.
+3. Для атрибута `QRcode` задайте формат отображения «**HTML-текст**».
+4. Установите для атрибута `QRcode` флажок «**Вычислять автоматически**».
+5. Введите для атрибута `QRcode` следующую формулу:
+
+``` cs
+FORMAT(
+    "<img align='center' src='data:image/png;base64,{0}' width='60' height='60' />",
+    LIST($QRinbase)
+)
 ```cs
+**Здесь**
 
-FORMAT("<img align='center'src='data:image/png;base64,{0}'width='60' height='60' frameborder='0'</img>",LIST($QRinbase))
+| Значение | Описание |
+| -------- | -------- |
+| `width='60'` | Ширина QR-кода на форме. |
+| `height='60'` | Высота QR-кода на форме. |
+| `QRinbase` | Системное имя атрибута, который хранит QR-код в формате Base64. |
 
-```
+## Настройка кнопки {: #qr-code-csharp-button_button }
 
-**где:**
+1. В том же шаблоне записи создайте кнопку _«Сформировать QR-код»_.
+2. Настройте кнопку:
 
-***width='60' / height='60'*** — значения ширины и высоты QR-кода на форме;
+    | Свойство | Значение |
+    | -------- | -------- |
+    | Тип кнопки | **C#-скрипт** |
+    | Контекст кнопки | **Запись** |
+    | Результат выполнения | **Обновить данные** |
 
-***QRinbase*** — системное имя атрибута, созданного в п.1.
+3. На вкладке «**Скрипт**» введите следующий C#-скрипт:
 
-Нам необходимо именно два атрибута, так как в первом будет храниться созданный QR-код в формате base64, а во втором — он же, но в формате изображения.
-
-**3.** В том же шаблоне записи создайте новую кнопку (***Сформировать QR-код***) со следующими параметрами:
-
-- Операция — C# скрипт;
-- Контекст операции — Запись;
-- Результат выполнения — Обновить данные.
-
-Во вкладке «Скрипт» вставьте следующее:
-
-```cs
-
+``` csharp
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Comindware.Data.Entity;
-using Comindware.TeamNetwork.Api.Data.UserCommands;
+using System.Net;
 using Comindware.TeamNetwork.Api.Data;
-using RestSharp;
- 
+using Comindware.TeamNetwork.Api.Data.UserCommands;
+
 class Script
 {
-    public static UserCommandResult Main(UserCommandContext userCommandContext)
-    {
-        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-        var link = Uri.EscapeDataString("https://yourinstance.comindware.net/#form/oa.1/form.2/" + userCommandContext.ObjectIds[0]);
-        byte[] AsBytes = new System.Net.WebClient().DownloadData
-            ("https://qrcode.tec-it.com/API/QRCode?size=small&data="+link);
-      string AsBase64String = Convert.ToBase64String(AsBytes);
-       
-        var data = new Dictionary<string, object>
-        {
-            { "QRinbase", AsBase64String }
-        };
-        Api.TeamNetwork.ObjectService.EditWithAlias("RecordTemplate", userCommandContext.ObjectIds[0], data);
-       
-    var result = new UserCommandResult
-    {
-      Success = true,
-      Commited = true,
-      Messages = new[]
-      {
-        new UserCommandMessage
-        {
-          Severity = SeverityLevel.Normal,
-          Text = "QR-код сформирован"
-        }
-      }
-    };
-    return result;
-    }
-}
+    public static UserCommandResult Main(UserCommandContext userCommandContext)
+    {
+        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
+        var objectId = userCommandContext.ObjectIds[0];
+        var recordUrl = "https://yourinstance.comindware.net/#form/oa.1/form.2/" + objectId;
+        var encodedUrl = Uri.EscapeDataString(recordUrl);
+        var qrCodeBytes = new WebClient().DownloadData(
+            "https://qrcode.tec-it.com/API/QRCode?size=small&data=" + encodedUrl);
+        var qrCodeBase64 = Convert.ToBase64String(qrCodeBytes);
+
+        var data = new Dictionary<string, object>
+        {
+            { "QRinbase", qrCodeBase64 }
+        };
+
+        Api.TeamNetwork.ObjectService.EditWithAlias("RecordTemplate", objectId, data);
+
+        return new UserCommandResult
+        {
+            Success = true,
+            Commited = true,
+            Messages = new[]
+            {
+                new UserCommandMessage
+                {
+                    Severity = SeverityLevel.Normal,
+                    Text = "QR-код сформирован"
+                }
+            }
+        };
+    }
+}
 ```
 
-**где:**
+**Здесь:**
 
-***https://yourinstance.comindware.net/#form/oa.1/form.2/*** — ссылка на форму в шаблоне записи, на которую пользователь должен попадать после сканирования QR-кода;
+| Значение | Описание |
+| -------- | -------- |
+| `https://yourinstance.comindware.net/#form/oa.1/form.2/` | Ссылка на форму записи, которая должна открываться после сканирования QR-кода. |
+| `QRinbase` | Системное имя атрибута, в который записывается QR-код в формате Base64. |
+| `RecordTemplate` | Системное имя текущего шаблона записи. |
+| `QR-код сформирован` | Текст сообщения, которое отобразится пользователю после успешного выполнения кнопки. |
 
-***QRinbase*** — системное имя атрибута в текущем шаблоне записи, созданного в п.1, куда записывается QR-код в формате base64;
+## Проверка результата {: #qr-code-csharp-button_result }
 
-***RecordTemplate*** — системное имя текущего шаблона записи;
+1. Вынесите атрибут `QRcode` на форму записи.
+2. Вынесите кнопку _«Сформировать QR-код»_ на форму или в область кнопок.
+3. Откройте запись.
+4. Нажмите кнопку _«Сформировать QR-код»_.
+5. Убедитесь, что на форме отобразился QR-код.
+6. Отсканируйте QR-код и проверьте, что он открывает нужную форму записи.
 
-***QR-код сформирован*** — текст сообщения для пользователя при успешном выполнении операции.
+!!! warning "Внимание!"
 
-**4.** В том же шаблоне записи вынесите атрибут, созданный в п.2, на нужную форму(ы).
+    В примере используется внешний сервис генерации QR-кодов. Перед применением решения в промышленной среде убедитесь, что использование внешнего сервиса соответствует требованиям безопасности вашей организации.
 
-**5.** Вынесите кнопку, созданную в п.3, в нужное место: на форму(ы) или на область кнопок для форм.
+<div class="relatedTopics" markdown="block">
 
-**6.** Протестируйте.
+--8<-- "related_topics_heading.md"
+
+- [C#-скрипты. Руководство по разработке][csharp_guide]
+- [Кнопки. Определения, настройка, удаление][buttons]
+- [Атрибут типа «Текст»][attribute_text]
+- [Язык формул][formula_guide]
+
+</div>
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
