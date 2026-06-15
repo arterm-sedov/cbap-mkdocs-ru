@@ -1,13 +1,20 @@
 ---
 title: Кнопка «Мой профиль»
 kbId: 5209
+
+tags:
+    - C#
+    - скрипт
+    - C#-скрипт
+    - пример скрипта
+hide: tags
 ---
 
-# Кнопка «Мой профиль»
+# Кнопка «Мой профиль» {: #example-csharp-my-profile-button }
 
 Для того чтобы разместить на боковую панель навигации ссылку на профиль пользователя, создайте кнопку c операцией C#-скрипт в шаблоне аккаунтов и введите следующее выражение:
 
-```
+```cs
 
 using System;
 using System.Collections.Generic;
@@ -18,7 +25,7 @@ using Comindware.TeamNetwork.Api.Data.UserCommands;
 public class Script
 {
 
-    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+    public static UserCommandResult Main(UserCommandContext userCommandContext)
     {
         var result = new UserCommandResult()
         {

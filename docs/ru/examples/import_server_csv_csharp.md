@@ -165,7 +165,7 @@ class Script
 
 ``` cs title="Скрипт импорта данных из локального CSV-файла — основная логика импорта"
 {% endif %}
-    public static void Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities)
+    public static void Main(Comindware.Process.Api.Data.ScriptContext context)
     {
         // Path to the CSV file on the server.
         // Use a UNC path for a shared network folder, e.g.:

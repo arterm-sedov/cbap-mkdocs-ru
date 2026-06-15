@@ -1,13 +1,20 @@
 ---
 title: Старт связанного процесса по нескольким записям
 kbId: 5200
+
+tags:
+    - C#
+    - скрипт
+    - C#-скрипт
+    - пример скрипта
+hide: tags
 ---
 
-# Старт связанного процесса по нескольким записям
+# Старт связанного процесса по нескольким записям {: #start-linked-process-several-records }
 
 Для того, чтобы запустить связанный процесс по нескольким записям (которые будут добавлены в коллекцию), введите следующее выражение:
 
-```
+```cs
  
 using System;
 using System.Collections.Generic;
@@ -18,7 +25,7 @@ using Comindware.TeamNetwork.Api.Data.UserCommands;
  
 public class Script
 {
-public static UserCommandResult Main(UserCommandContext ucContext, Comindware.Entities entities)
+public static UserCommandResult Main(UserCommandContext ucContext)
 {
 var ids = ucContext.ObjectIds;
 if (ids == null || ids.Count() == 0)

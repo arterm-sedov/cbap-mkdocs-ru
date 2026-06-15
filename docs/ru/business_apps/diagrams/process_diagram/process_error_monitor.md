@@ -69,7 +69,7 @@ hide:
 
     class Script
     {
-        public static string Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities)
+        public static string Main(Comindware.Process.Api.Data.ScriptContext context)
         {
             // Добавьте входные данные.
             int Result = 0;

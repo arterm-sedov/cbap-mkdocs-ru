@@ -190,7 +190,7 @@ hide:
 
     class Script
     {
-        public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+        public static UserCommandResult Main(UserCommandContext userCommandContext)
         {
             // Добавьте код, в котором не требуется обрабатывать исключения.
             string ResultDescription = "";
@@ -278,7 +278,7 @@ hide:
 
     class Script
     {
-        public static string Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities)
+        public static string Main(Comindware.Process.Api.Data.ScriptContext context)
         {
             // Добавьте код, в котором не требуется обрабатывать исключения.
             string ResultDescription = "";

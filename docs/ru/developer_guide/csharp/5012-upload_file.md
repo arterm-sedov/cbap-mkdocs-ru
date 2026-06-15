@@ -1,13 +1,20 @@
 ---
 title: Загрузка файла с компьютера в систему
 kbId: 5190
+
+tags:
+    - C#
+    - скрипт
+    - C#-скрипт
+    - пример скрипта
+hide: tags
 ---
 
-# Загрузка файла с компьютера в систему
+# Загрузка файла с компьютера в систему {: #upload-file }
 
 Для того, чтобы добавить файл из локальной папки на компьютере в атрибут с типом данных «Документ», введите следующее выражение:
 
-```
+```cs
 
 using System;
 using System.Collections.Generic;
@@ -19,7 +26,7 @@ using System.IO;
  
 class Script
 {
-    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+    public static UserCommandResult Main(UserCommandContext userCommandContext)
     {
         try
         {

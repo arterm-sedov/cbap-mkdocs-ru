@@ -100,7 +100,7 @@ kbId: 5376
 
     class Script
     {
-        public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+        public static UserCommandResult Main(UserCommandContext userCommandContext)
         {
             var data = userCommandContext.LocalVariables;
             string konkursId = "";

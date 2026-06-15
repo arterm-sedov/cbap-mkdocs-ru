@@ -1,13 +1,20 @@
 ---
 title: Изменение e-mail у всех пользователей в системе
 kbId: 5198
+
+tags:
+    - C#
+    - скрипт
+    - C#-скрипт
+    - пример скрипта
+hide: tags
 ---
 
-# Изменение e-mail у всех пользователей в системе
+# Изменение e-mail у всех пользователей в системе {: #change-all-account-emails }
 
 Для того, чтобы поменять e-mail у всех пользователей в системе, введите следующее выражение:
 
-```
+```cs
 
 using System; 
 using System.Collections.Generic; 
@@ -18,7 +25,7 @@ using Comindware.TeamNetwork.Api.Data.UserCommands;
 
 class Script 
 { 
-    public static UserCommandResult Main(UserCommandContext userCommandContext,        Comindware.Entities entities) 
+    public static UserCommandResult Main(UserCommandContext userCommandContext) 
     { 
         var accounts = Api.Base.AccountService.List(); 
             foreach (var account in accounts) 

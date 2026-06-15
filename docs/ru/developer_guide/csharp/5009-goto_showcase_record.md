@@ -1,13 +1,20 @@
 ---
 title: Переход в объект с витрины
 kbId: 5187
+
+tags:
+    - C#
+    - скрипт
+    - C#-скрипт
+    - пример скрипта
+hide: tags
 ---
 
-# Переход в объект с витрины
+# Переход в объект с витрины {: #goto-showcase-record }
 
 Для того, чтобы по кнопке можно было перейти из карточки товара на витрине на форму объекта, введите следующее выражение:
 
-```
+```cs
 
 using System; 
 using System.Collections.Generic;
@@ -18,7 +25,7 @@ using Comindware.TeamNetwork.Api.Data;
 
 class Script
 {
-    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+    public static UserCommandResult Main(UserCommandContext userCommandContext)
     { 
                     var objectid = userCommandContext.ObjectIds[0];
         var result = new UserCommandResult()

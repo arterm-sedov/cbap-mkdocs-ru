@@ -158,7 +158,7 @@ hide:
     using Comindware.Data;
     class Script
     {
-        public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+        public static UserCommandResult Main(UserCommandContext userCommandContext)
         { 
             // Получаем ID аккаунта текущего пользователя.
             var id = userCommandContext.ObjectIds[0];
@@ -221,7 +221,7 @@ hide:
     using Comindware.Data;
     class Script
     {
-        public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+        public static UserCommandResult Main(UserCommandContext userCommandContext)
         { 
             // Получаем ID аккаунта текущего пользователя.
             var id = userCommandContext.ObjectIds[0];

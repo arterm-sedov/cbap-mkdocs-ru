@@ -1,13 +1,20 @@
 ---
 title: Старт процесса по записям списка (кнопка)
 kbId: 5197
+
+tags:
+    - C#
+    - скрипт
+    - C#-скрипт
+    - пример скрипта
+hide: tags
 ---
 
-# Старт процесса по записям списка (кнопка)
+# Старт процесса по записям списка (кнопка) {: #start-process-button-for-list-records }
 
 Для того, чтобы на запустить процесс по каждой из записей определенного списка, введите следующее выражение:
 
-```
+```cs
 
 using System;
 using System.Collections.Generic;
@@ -18,7 +25,7 @@ using Comindware.TeamNetwork.Api.Data;
 
 class Script
 {
-public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+public static UserCommandResult Main(UserCommandContext userCommandContext)
 {
 string result_ = "Операция выполнена";
 var result = new UserCommandResult

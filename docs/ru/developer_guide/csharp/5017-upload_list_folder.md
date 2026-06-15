@@ -1,13 +1,20 @@
 ---
 title: Выгрузка списка в локальную папку
 kbId: 5196
+
+tags:
+    - C#
+    - скрипт
+    - C#-скрипт
+    - пример скрипта
+hide: tags
 ---
 
-# Выгрузка списка в локальную папку
+# Выгрузка списка в локальную папку {: #upload-list-folder }
 
 Для того, чтобы можно было в процессе экспортировать определенный список в excel и помещать файл в локальную папку, введите следующее выражение:
 
-```
+```cs
 
 using System;
 using System.Collections.Generic;
@@ -17,7 +24,7 @@ using Comindware.TeamNetwork.Api.Data;
 using System.IO;
 class Script
 {
-    public static void Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities)
+    public static void Main(Comindware.Process.Api.Data.ScriptContext context)
     {
         // get sessions object app
         var sessionsObjectAppId = Api.TeamNetwork.ObjectAppService.List().First(oa => oa.Alias == "Issue").Id;

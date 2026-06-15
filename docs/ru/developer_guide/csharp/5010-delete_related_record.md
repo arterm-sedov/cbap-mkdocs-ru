@@ -1,13 +1,20 @@
 ---
 title: Удаление связанного объекта при выполнении условия
 kbId: 5188
+
+tags:
+    - C#
+    - скрипт
+    - C#-скрипт
+    - пример скрипта
+hide: tags
 ---
 
-# Удаление связанного объекта при выполнении условия
+# Удаление связанного объекта при выполнении условия {: #delete-related-record }
 
 Для того, чтобы можно было в процессе удалять связанный объект/ы при определенном условии (в данной статье рассмотрено условие, если значение в атрибуте с типом данных «Число» в связанном объекте/ах равно нулю), введите следующее выражение:
 
-```
+```cs
 
 using System;
 using System.Collections.Generic;
@@ -18,7 +25,7 @@ using Comindware.TeamNetwork.Api.Data;
 
 class Script
 {
-    public static void Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities)
+    public static void Main(Comindware.Process.Api.Data.ScriptContext context)
     {
 try
 {

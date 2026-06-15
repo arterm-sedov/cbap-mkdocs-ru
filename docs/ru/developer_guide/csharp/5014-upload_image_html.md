@@ -1,13 +1,20 @@
 ---
 title: Загрузка картинки из атрибута типа документ в HTML поле
 kbId: 5192
+
+tags:
+    - C#
+    - скрипт
+    - C#-скрипт
+    - пример скрипта
+hide: tags
 ---
 
-# Загрузка картинки из атрибута типа документ в HTML поле
+# Загрузка картинки из атрибута типа документ в HTML поле {: #upload-image-html }
 
 Для того, чтобы выгрузить картинку в HTML поле, введите следующее выражение:
 
-```
+```cs
 
 using System;
 using System.Collections.Generic;
@@ -19,7 +26,7 @@ using Comindware.TeamNetwork.Api.Data;
 
 class Script
 {
-    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+    public static UserCommandResult Main(UserCommandContext userCommandContext)
     {
         var imagePropertyAlias = "Document";
         var currentObjectid = userCommandContext.ObjectIds[0];

@@ -89,7 +89,7 @@ kbId: 5204
     {% endif %}
     class Script
     {
-        public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+        public static UserCommandResult Main(UserCommandContext userCommandContext)
         {
             // ObjectIds — массив выбранных записей, полученный из контекста операции кнопки.
             var selected_Ids = userCommandContext.ObjectIds;

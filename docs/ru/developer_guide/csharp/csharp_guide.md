@@ -51,7 +51,7 @@ static class Api {
 
 ``` cs
 public class Script {
-  public static UserCommandResult Main (UserCommandContext userCommandContext, Comindware.Entities entities) {
+  public static UserCommandResult Main (UserCommandContext userCommandContext) {
     // Тело скрипта
   }
 }
@@ -73,7 +73,7 @@ UserCommandContext userCommandContext {
   string FileName, // имя файла при выгрузке данных по шаблону экспорта
   DatasetQuery Query // список, с которого произошел запуск операции
 },
-Comindware.Entities entities // используется для доступа к данным шаблонов записей
+
 ```
 
 **Выходные данные**
@@ -120,7 +120,7 @@ UserCommandResult {
 
 ``` cs
 public class Script {
-   public static void Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities) {
+   public static void Main(Comindware.Process.Api.Data.ScriptContext context) {
      // Тело скрипта
   }
 }
@@ -133,7 +133,7 @@ Comindware.Process.Api.Data.ScriptContext context {
    string ProcessID,  // ID экземпляра процесса
    string BusinessObjectID,  // ID записи, связанной с экземпляром процесса
 },
-Comindware.Entities entities // используется для доступа к данным шаблонов записей
+
 ```
 
 **Выходные данные**
@@ -149,7 +149,7 @@ void
 
 ``` cs
 public class Script {
-   public static string Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities) {
+   public static string Main(Comindware.Process.Api.Data.ScriptContext context) {
      // Тело скрипта
   }
 }
@@ -162,7 +162,7 @@ Comindware.Process.Api.Data.ScriptContext context {
   string ProcessID,  // ID экземпляра процесса
   string BusinessObjectID,  // ID записи, связанной с экземпляром процесса
 },
-Comindware.Entities entities // используется для доступа к данным шаблонов записей
+
 ```
 
 **Выходные данные**
@@ -178,7 +178,7 @@ string
 
 ``` cs
 public class Script {
-  public static IEnumerable<string> Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities) {
+  public static IEnumerable<string> Main(Comindware.Process.Api.Data.ScriptContext context) {
     // Тело скрипта
   }
 }
@@ -191,7 +191,7 @@ Comindware.Process.Api.Data.ScriptContext context {
   string ProcessID, // ID экземпляра процесса
   string BusinessObjectID // ID записи, связанной с экземпляром процесса
 },
-Comindware.Entities entities // используется для доступа к данным шаблонов записей
+
 ```
 
 **Выходные данные**
@@ -209,7 +209,7 @@ IEnumerable<string>
 
 ``` cs
 public class Script  {
-  public  static TimeSpan Main (Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities) {
+  public  static TimeSpan Main (Comindware.Process.Api.Data.ScriptContext context) {
     // Тело скрипта
   }
 }
@@ -239,7 +239,7 @@ TimeSpan
 ``` cs
 public class Script {
   public static string // string, int, decimal, dateTime, bool, TimeSpan или IEnumerable<string>
-    Main(string ObjectID, [Comindware.Entities entities]) {
+    Main(string ObjectID) {
     // Тело скрипта
   }
 }
@@ -250,7 +250,7 @@ public class Script {
 ``` cs
 string ProcessID, // ID экземпляра процесса,
 string ObjectID, // ID записи,
-Comindware.Entities entities // необязательный аргумент, используется для доступа к данным шаблонов записей
+
 ```
 
 **Выходные данные**
@@ -294,7 +294,7 @@ bool
 
 ``` cs
 public class Script {
-  public static bool Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities) {
+  public static bool Main(Comindware.Process.Api.Data.ScriptContext context) {
     // Тело скрипта
   }
 }
@@ -307,7 +307,7 @@ Comindware.Process.Api.Data.ScriptContext context {
   string ProcessID, // ID экземпляра процесса
   string BusinessObjectID, // ID записи, связанной с экземпляром процесса
 },
-Comindware.Entities entities // используется для доступа к данным шаблонов записей
+
 ```
 
 **Выходные данные**
@@ -323,7 +323,7 @@ bool
 
 ``` cs
 public class Script {
-  public static TimeSpan Main (Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities) {
+  public static TimeSpan Main (Comindware.Process.Api.Data.ScriptContext context) {
     // Тело скрипта
   }
 }
@@ -336,7 +336,7 @@ Comindware.Process.Api.Data.ScriptContext context {
   string ProcessID, // ID экземпляра процесса
   string BusinessObjectID, // ID записи, связанной с экземпляром процесса
 },
-Comindware.Entities entities // используется для доступа к данным шаблонов записей
+
 ```
 
 **Выходные данные**
@@ -352,7 +352,7 @@ TimeSpan
 
 ``` cs
 public class Script {
-  public static void Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities) {
+  public static void Main(Comindware.Process.Api.Data.ScriptContext context) {
   // Тело скрипта
   }
 }
@@ -365,7 +365,7 @@ Comindware.Process.Api.Data.ScriptContext context {
   string ProcessID, // ID экземпляра процесса
   string BusinessObjectID, // ID записи, связанной с экземпляром процесса
 },
-Comindware.Entities entities // используется для доступа к данным шаблонов записей
+
 ```
 
 **Выходные данные**
@@ -381,7 +381,7 @@ string
 
 ``` cs
 public class Script {
-  public static string Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities) {
+  public static string Main(Comindware.Process.Api.Data.ScriptContext context) {
     // Тело скрипта
   }
 }
@@ -394,7 +394,7 @@ Comindware.Process.Api.Data.ScriptContext context {
   string ProcessID, // ID экземпляра процесса
   string BusinessObjectID // ID записи, связанной с экземпляром процесса
 },
-Comindware.Entities entities // используется для доступа к данным шаблонов записей
+
 ```
 
 **Выходные данные**

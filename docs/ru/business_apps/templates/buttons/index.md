@@ -144,7 +144,7 @@ _![Конструктор диалогового окна операции с л
 
 ``` cs
 public class Script {
-  public static UserCommandResult Main (UserCommandContext userCommandContext, Comindware.Entities entities) {
+  public static UserCommandResult Main (UserCommandContext userCommandContext) {
     // Тело скрипта
   }
 }
@@ -168,7 +168,7 @@ UserCommandContext userCommandContext {
   string FileName, // имя файла при выгрузке данных по шаблону экспорта
   DatasetQuery Query // список, с которого произошел запуск операции
 },
-Comindware.Entities entities // используется для доступа к данным шаблонов записей
+
 ```
 
 #### Выходные данные {: .pageBreakBefore }

@@ -1,13 +1,20 @@
 ---
 title: Шаблон экспорта, Настройка с использованием C#
 kbId: 5336
+
+tags:
+    - C#
+    - скрипт
+    - C#-скрипт
+    - пример скрипта
+hide: tags
 ---
 
-# Шаблон экспорта, Настройка с использованием C#
+# Шаблон экспорта, Настройка с использованием C# {: #export-template-csharp-configure }
 
 В **{{ productName }}** помимо стандартной выгрузки отчётов предусмотрен экспорт данных с использованием скриптов на C#. Этот вариант позволяет более гибко настроить параметры экспортируемого файла, например, с дополнительной фильтрацией или заменой информации, либо с форматированным выводом атрибутов-коллекций.
 
-**Шаблон документа в формате .xls**
+## Шаблон документа в формате .xls {: #export-template-csharp-configure_1 }
 
 Рассмотрим решение следующей задачи: написать скрипт, который формирует Excel-файл, в котором каждый элемент коллекции располагается в отдельной строчке (по умолчанию все элементы коллекции перечисляются в одной строчке через пробел).
 
@@ -31,7 +38,7 @@ _![Автоматически созданная кнопка](https://kb.comind
 
 Перейдите на вкладку «***Скрипт***» в свойствах этой кнопки и добавьте следующий код:
 
-```
+```cs
 
 using System;
 using System.Collections.Generic;
@@ -44,7 +51,7 @@ using Aspose.Cells.Pivot;
 
 class Script
 {
-    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+    public static UserCommandResult Main(UserCommandContext userCommandContext)
     {
 var objectsData = Api.TeamNetwork.ObjectService.ListWithAlias("Clients"); // Системное имя ШЗ "Клиенты"
 var dataToExport = new List<MainData>();
@@ -220,7 +227,7 @@ _![Список клиентов](https://kb.comindware.ru/assets/2.3_2021-12-13
 
 _![Excel файл](https://kb.comindware.ru/assets/exp5.jpg)_
 
-**Шаблон документа в формате .doc**
+## Шаблон документа в формате .doc {: #export-template-csharp-configure_2 }
 
 По такой же логике настраиваем выгрузку  Шаблона экспорта в формате Word.
 
@@ -230,7 +237,7 @@ _![Пример word шаблона экспорта](https://kb.comindware.ru/a
 
 C# скрипт:
 
-```
+```cs
 
 using System;
 using System.Collections.Generic;

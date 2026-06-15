@@ -1,13 +1,20 @@
 ---
 title: Добавление пользователей в группу
 kbId: 5189
+
+tags:
+    - C#
+    - скрипт
+    - C#-скрипт
+    - пример скрипта
+hide: tags
 ---
 
-# Добавление пользователей в группу
+# Добавление пользователей в группу {: #add-group-accounts }
 
 Для того, чтобы в рамках процесса можно было добавить пользователя или пользователей в определенную системную группу (например, для управления ролевой моделью), введите следующее выражение:
 
-```
+```cs
 
 using System;
 using System.Collections.Generic;
@@ -18,7 +25,7 @@ using Comindware.TeamNetwork.Api.Data;
 
 class Script
 {
-public static void Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities)
+public static void Main(Comindware.Process.Api.Data.ScriptContext context)
 {
 string[] OA = new string[] {
 "Kontragenty"

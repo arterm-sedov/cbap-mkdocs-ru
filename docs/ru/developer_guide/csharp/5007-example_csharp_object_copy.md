@@ -1,13 +1,20 @@
 ---
 title: Копирование объекта
 kbId: 5210
+
+tags:
+    - C#
+    - скрипт
+    - C#-скрипт
+    - пример скрипта
+hide: tags
 ---
 
-# Копирование объекта
+# Копирование объекта {: #example-csharp-object-copy }
 
 Для того чтобы скопировать запись, создайте в текущем шаблоне записи кнопку с операцией C#-скрипт и введите следующее выражение:
 
-```
+```cs
 
 using System; 
 using System.Collections.Generic;
@@ -18,7 +25,7 @@ using Comindware.TeamNetwork.Api.Data;
 
 class Script
 {
-    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+    public static UserCommandResult Main(UserCommandContext userCommandContext)
     { 
  foreach (var objectId in userCommandContext.ObjectIds)
         {

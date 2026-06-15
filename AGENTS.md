@@ -31,7 +31,7 @@ The three persons ideate, collaborate, argue and reconcile the resulting text or
 Comindware Platform Knowledge Base:
 
 - @/docs/
-- @/phpkb_content/
+- @/phpkb_content/ (**do not manually edit** — auto-generated from PHPKB; use @/docs/ for all content changes)
 
 Platform source code (sibling repo, for verifying feature behavior):
 
