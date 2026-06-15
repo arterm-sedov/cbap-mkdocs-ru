@@ -15,7 +15,6 @@ hide: tags
 Для того, чтобы в рамках процесса можно было добавить пользователя или пользователей в определенную системную группу (например, для управления ролевой моделью), введите следующее выражение:
 
 ```cs
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,49 +24,48 @@ using Comindware.TeamNetwork.Api.Data;
 
 class Script
 {
-public static void Main(Comindware.Process.Api.Data.ScriptContext context)
-{
-string[] OA = new string[] {
-"Kontragenty"
-};
-string[] OP = new string[] {
-"Podpisant"
-};
-string[] GROUP = new string[] {
-"group.28"
-};
+    public static void Main(Comindware.Process.Api.Data.ScriptContext context)
+    {
+        string[] OA = new string[] {
+            "Kontragenty"
+        };
+        string[] OP = new string[] {
+            "Podpisant"
+        };
+        string[] GROUP = new string[] {
+            "group.28"
+        };
 
-for(int j = 0; j < GROUP.Length; j++)
-{
-var group = GROUP[j];
-var old_users = Api.Base.AccountGroupService.Get(group);
-Api.Base.AccountGroupService.ExcludeMembers(group, old_users.Users);
+        for (int j = 0; j < GROUP.Length; j++)
+        {
+            var group = GROUP[j];
+            var old_users = Api.Base.AccountGroupService.Get(group);
+            Api.Base.AccountGroupService.ExcludeMembers(group, old_users.Users);
 
-var my_list = Api.TeamNetwork.ObjectService.ListWithAlias(OA[j]);
-foreach (var i in my_list)
-{
-var data = i as Dictionary<string,object>;
-data.TryGetValue(OP[j], out object obj);
-if (obj == null)
-{
-continue;
-}
+            var my_list = Api.TeamNetwork.ObjectService.ListWithAlias(OA[j]);
+            foreach (var i in my_list)
+            {
+                var data = i as Dictionary<string, object>;
+                data.TryGetValue(OP[j], out object obj);
+                if (obj == null)
+                {
+                    continue;
+                }
 
-if (obj is string)
-{
-Api.Base.AccountGroupService.IncludeMembers(group, new List<string>(){ obj.ToString() }); ÿ
+                if (obj is string)
+                {
+                    Api.Base.AccountGroupService.IncludeMembers(group, new List<string>() { obj.ToString() });
+                }
+                else
+                {
+                    var accounts = obj as object[];
+                    var accountsIds = accounts.Select(x => x.ToString());
+                    Api.Base.AccountGroupService.IncludeMembers(group, accountsIds);
+                }
+            }
+        }
+    }
 }
-else
-{
-var accounts = obj as object[];
-var accountsIds = accounts.Select(x => x.ToString());
-Api.Base.AccountGroupService.IncludeMembers(group, accountsIds);
-}
-}
-}
-}
-}
-
 ```
 
 **где:**
