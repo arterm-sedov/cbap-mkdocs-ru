@@ -1,6 +1,7 @@
 ---
 title: Шаблон экспорта, Настройка с использованием C#
-kbId: 4793
+kbId: 5336
+
 tags:
     - C#
     - скрипт
@@ -38,6 +39,7 @@ _![Автоматически созданная кнопка](https://kb.comind
 Перейдите на вкладку «***Скрипт***» в свойствах этой кнопки и добавьте следующий код:
 
 ```cs
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,166 +51,170 @@ using Aspose.Cells.Pivot;
 
 class Script
 {
-    public static UserCommandResult Main(UserCommandContext userCommandContext)
-    {
-        var objectsData = Api.TeamNetwork.ObjectService.ListWithAlias("Clients"); // Системное имя ШЗ "Клиенты"
-        var dataToExport = new List<MainData>();
-        foreach (var objectDict in objectsData)
-        {
-            var ContractDataInIds = getterListSTR("Contracts_collection", objectDict); // Атрибут-коллекция в ШЗ "Клиенты"
-            if(ContractDataInIds.Count == 0) {ContractDataInIds.Add("tempID");}
-            var ContractDataInList = new List<ContractData>();
-            foreach (var ContractDataInId in ContractDataInIds)
-            {
-                var ContractDataInData = GetData(ContractDataInId);
+    public static UserCommandResult Main(UserCommandContext userCommandContext)
+    {
+var objectsData = Api.TeamNetwork.ObjectService.ListWithAlias("Clients"); // Системное имя ШЗ "Клиенты"
+var dataToExport = new List<MainData>();
+foreach (var objectDict in objectsData)
+{
+var ContractDataInIds = getterListSTR("Contracts_collection", objectDict); // Атрибут-коллекция в ШЗ "Клиенты"
+if(ContractDataInIds.Count == 0) {ContractDataInIds.Add("tempID");}
+var ContractDataInList = new List<ContractData>();
+foreach (var ContractDataInId in ContractDataInIds)
+{
+var ContractDataInData = GetData(ContractDataInId);
 
-                var Status_Id = getterSTR("Status", ContractDataInData); // Атрибут-ссылка в ШЗ "Договоры"
-                var Status_Data = GetData(Status_Id);
+var Status_Id = getterSTR("Status", ContractDataInData); // Атрибут-ссылка в ШЗ "Договоры"
+var Status_Data = GetData(Status_Id);
 
-                var ContractDataInT = new ContractData
-                {
-                    Name = getterSTR("Title", ContractDataInData), // Атрибут "Статус" в ШЗ "Договоры"
-                    Date = getterDT("Date", ContractDataInData), // Атрибут "Дата" в ШЗ "Договоры"
-                    Total = getterDC("Total", ContractDataInData), // Атрибут "Сумма" в ШЗ "Договоры"
-                    Status = getterSTR("Title", Status_Data) // Атрибут "Название" в ШЗ "Статусы договора"
-                };
-                ContractDataInList.Add(ContractDataInT);
-            }
+var ContractDataInT = new ContractData
+{
+Name = getterSTR("Title", ContractDataInData), // Атрибут "Статус" в ШЗ "Договоры"
+Date = getterDT("Date", ContractDataInData), // Атрибут "Дата" в ШЗ "Договоры"
+Total = getterDC("Total", ContractDataInData), // Атрибут "Сумма" в ШЗ "Договоры"
+Status = getterSTR("Title", Status_Data) // Атрибут "Название" в ШЗ "Статусы договора"
 
-            var Data_ = new MainData
-            {
-                Client = getterSTR("Title", objectDict), // Атрибут "Название" в ШЗ "Клиенты"
-                Contact = getterSTR("Contact", objectDict), // Атрибут "Контактное лицо" в ШЗ "Клиенты"
-                Phone = getterSTR("Phone", objectDict), // Атрибут "Телефон" в ШЗ "Клиенты"
-                Email = getterSTR("Email", objectDict), // Атрибут "Email" в ШЗ "Клиенты"
-                Contract = ContractDataInList
-            };
-            dataToExport.Add(Data_);
-        }
+};
+ContractDataInList.Add(ContractDataInT);
+}
 
-        var content = Api.TeamNetwork.ObjectAppExportService.ExecuteExcelExportTemplate(userCommandContext.DocumentTemplateId, dataToExport);
-        var result = new UserCommandResult
-        {
-            Success = true,
-            Commited = true,
-            ResultType = UserCommandResultType.File,
-            File = new UserCommandFileResult()
-            {
-                Name = "Excel_Data.xlsx",
-                Type = "Excel",
-                Content = content
-            },
-            Messages = new[]
-            {
-                new UserCommandMessage
-                {
-                    Severity = SeverityLevel.Normal,
-                    Text = "Файл сформирован"
-                }
-            }
-        };
-        return result;
-    }
+var Data_ = new MainData
+{
+Client = getterSTR("Title", objectDict), // Атрибут "Название" в ШЗ "Клиенты"
+Contact = getterSTR("Contact", objectDict), // Атрибут "Контактное лицо" в ШЗ "Клиенты"
+Phone = getterSTR("Phone", objectDict), // Атрибут "Телефон" в ШЗ "Клиенты"
+Email = getterSTR("Email", objectDict), // Атрибут "Email" в ШЗ "Клиенты"
+Contract = ContractDataInList
+};
+dataToExport.Add(Data_);
+}
 
-    public static Decimal getterDC(string key, IDictionary<string, object> dictionary = null)
-    {
-        if (dictionary == null || key == null)
-        {
-            return 0;
-        }
-        var stringValue = getterSTR(key, dictionary);
-        if (stringValue != null && Decimal.TryParse(stringValue, out var result))
-        {
-            return result;
-        }
-        else
-        {
-            return 0;
-        }
-    }
+var content = Api.TeamNetwork.ObjectAppExportService.ExecuteExcelExportTemplate(userCommandContext.DocumentTemplateId, dataToExport);
+var result = new UserCommandResult
+{
+Success = true,
+Commited = true,
+ResultType = UserCommandResultType.File,
+File = new UserCommandFileResult()
+{
+Name = "Excel_Data.xlsx",
+Type = "Excel",
+Content = content
 
-    public static DateTime? getterDT(string key, IDictionary<string, object> dictionary = null)
-    {
-        if (dictionary == null || key == null)
-        {
-            return null;
-        }
-        var stringValue = getterSTR(key, dictionary);
-        if (stringValue != null && DateTime.TryParse(stringValue, out var result))
-        {
-            return result.AddHours(5);
-        }
-        else
-        {
-            return null;
-        }
-    }
+},
+Messages = new[]
+{
+new UserCommandMessage
+{
+Severity = SeverityLevel.Normal,
+Text = "Файл сформирован"
+}
+}
+};
+return result;
+    }
 
-    public static string getterSTR(string key, IDictionary<string, object> dictionary = null)
-    {
-        if (dictionary == null || key == null)
-        {
-            return null;
-        }
-        if (dictionary.TryGetValue(key, out var result))
-        {
-            if (result == null) return null;
-            return result.ToString();
-        }
-        else
-        {
-            return null;
-        }
-    }
+public static Decimal getterDC(string key, IDictionary<string, object> dictionary = null)
+{
+if (dictionary == null || key == null)
+{
+return 0;
+}
+var stringValue = getterSTR(key, dictionary);
+if (stringValue != null && Decimal.TryParse(stringValue, out var result))
+{
+return result;
+}
+else
+{
+return 0;
+}
+}
 
-    public static IList<string> getterListSTR(string key, IDictionary<string, object> dictionary = null)
-    {
-        var result = new List<string>();
-        if (dictionary != null && key != null)
-        {
-            if (dictionary.TryGetValue(key, out var objectData))
-            {
-                var objectDataArray = objectData as object[];
-                foreach (var singlObject in objectDataArray)
-                {
-                    if (singlObject == null) continue;
-                    result.Add(singlObject.ToString());
-                }
-            }
-        }
-        return result;
-    }
+public static DateTime? getterDT(string key, IDictionary<string, object> dictionary = null)
+{
+if (dictionary == null || key == null)
+{
+return null;
+}
+var stringValue = getterSTR(key, dictionary);
+if (stringValue != null && DateTime.TryParse(stringValue, out var result))
+{
+return result.AddHours(5);
+}
+else
+{
+return null;
+}
+}
 
-    public static IDictionary<string, object> GetData(string objectId = null)
-    {
-        if (objectId == null || objectId.Contains("account") || objectId == "tempID")
-        {
-            return null;
-        }
-        var container = Api.TeamNetwork.ObjectAppService.GetByObject(objectId);
-        var result = Api.TeamNetwork.ObjectService.GetWithAlias(container.Alias, objectId);
-        return result;
-    }
+public static string getterSTR(string key, IDictionary<string, object> dictionary = null)
+{
+if (dictionary == null || key == null)
+{
+return null;
+}
+if (dictionary.TryGetValue(key, out var result))
+{
+if (result == null) return null;
+return result.ToString();
+}
+else
+{
+return null;
+}
+
+}
+
+public static IList<string> getterListSTR(string key, IDictionary<string, object> dictionary = null)
+{
+var result = new List<string>();
+if (dictionary != null && key != null)
+{
+if (dictionary.TryGetValue(key, out var objectData))
+{
+var objectDataArray = objectData as object[];
+foreach (var singlObject in objectDataArray)
+{
+if (singlObject == null) continue;
+result.Add(singlObject.ToString());
+}
+}
+}
+return result;
+}
+
+public static IDictionary<string, object> GetData(string objectId = null)
+{
+if (objectId == null || objectId.Contains("account") || objectId == "tempID")
+{
+return null;
+}
+var container = Api.TeamNetwork.ObjectAppService.GetByObject(objectId);
+var result = Api.TeamNetwork.ObjectService.GetWithAlias(container.Alias, objectId);
+return result;
+}
 }
 
 [Serializable]
 public class MainData
 {
-    public string Client { get; set; }
-    public string Contact { get; set; }
-    public string Phone { get; set; }
-    public string Email { get; set; }
-    public List<ContractData> Contract { get; set; }
+public string Client { get; set; }
+public string Contact { get; set; }
+public string Phone { get; set; }
+public string Email { get; set; }
+public List<ContractData> Contract { get; set; }
 }
 
 [Serializable]
 public class ContractData
 {
-    public string Name { get; set; }
-    public decimal Total { get; set; }
-    public DateTime? Date { get; set; }
-    public string Status { get; set; }
+public string Name { get; set; }
+public decimal Total { get; set; }
+public DateTime? Date { get; set; }
+public string Status { get; set; }
 }
+
 ```
 
 В коде скрипта комментариями помечены 11 мест, где при необходимости можно заменить системные имена своими.
@@ -232,6 +238,7 @@ _![Пример word шаблона экспорта](https://kb.comindware.ru/a
 C# скрипт:
 
 ```cs
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -243,183 +250,183 @@ using Comindware.TeamNetwork.Api.Data.UserCommands;
 using System.IO;
 using System.Data;
 
-class Script
+class Script
 {
-    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
-    {
-        var objectsData = Api.TeamNetwork.ObjectService.ListWithAlias("Clients"); // Системное имя ШЗ "Клиенты"
-        List<MainData> Data_ = new List<MainData>();
-        foreach (var objectDict in objectsData)
-        {
-            var ContractDataInIds = getterListSTR("Contracts_collection", objectDict); // Атрибут-коллекция в ШЗ "Клиенты"
-            if(ContractDataInIds.Count == 0) {ContractDataInIds.Add("tempID");}
-            bool first_element = true;
-            foreach (var ContractDataInId in ContractDataInIds)
-            {
-                var ContractDataInData = GetData(ContractDataInId);
+    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+    {
+var objectsData = Api.TeamNetwork.ObjectService.ListWithAlias("Clients"); // Системное имя ШЗ "Клиенты"
+List<MainData> Data_ = new List<MainData>();
+foreach (var objectDict in objectsData)
+{
+var ContractDataInIds = getterListSTR("Contracts_collection", objectDict); // Атрибут-коллекция в ШЗ "Клиенты"
+if(ContractDataInIds.Count == 0) {ContractDataInIds.Add("tempID");}
+bool first_element = true;
+foreach (var ContractDataInId in ContractDataInIds)
+{
+var ContractDataInData = GetData(ContractDataInId);
 
-                var Status_Id = getterSTR("Status", ContractDataInData); // Атрибут-ссылка в ШЗ "Договоры"
-                var Status_Data = GetData(Status_Id);
+var Status_Id = getterSTR("Status", ContractDataInData); // Атрибут-ссылка в ШЗ "Договоры"
+var Status_Data = GetData(Status_Id);
 
-                if(first_element == true)
-                {
-                    first_element = false;
-                    var temp = new MainData
-                    {
-                        Client = getterSTR("Title", objectDict), // Атрибут "Название" в ШЗ "Клиенты"
-                        Contact = getterSTR("Contact", objectDict), // Атрибут "Контактное лицо" в ШЗ "Клиенты"
-                        Phone = getterSTR("Phone", objectDict), // Атрибут "Телефон" в ШЗ "Клиенты"
-                        Email = getterSTR("Email", objectDict), // Атрибут "Email" в ШЗ "Клиенты"
+if(first_element == true)
+{
+first_element = false;
+var temp = new MainData
+{
+Client = getterSTR("Title", objectDict), // Атрибут "Название" в ШЗ "Клиенты"
+Contact = getterSTR("Contact", objectDict), // Атрибут "Контактное лицо" в ШЗ "Клиенты"
+Phone = getterSTR("Phone", objectDict), // Атрибут "Телефон" в ШЗ "Клиенты"
+Email = getterSTR("Email", objectDict), // Атрибут "Email" в ШЗ "Клиенты"
 
-                        Name = getterSTR("Title", ContractDataInData), // Атрибут "Статус" в ШЗ "Договоры"
-                        Date = getterDT("Date", ContractDataInData), // Атрибут "Дата" в ШЗ "Договоры"
-                        Total = getterDC("Total", ContractDataInData), // Атрибут "Сумма" в ШЗ "Договоры"
-                        Status = getterSTR("Title", Status_Data) // Атрибут "Название" в ШЗ "Статусы договора"
-                    };
-                    Data_.Add(temp);
-                }
-                else
-                {
-                    var temp = new MainData
-                    {
-                        Name = getterSTR("Title", ContractDataInData), // Атрибут "Статус" в ШЗ "Договоры"
-                        Date = getterDT("Date", ContractDataInData), // Атрибут "Дата" в ШЗ "Договоры"
-                        Total = getterDC("Total", ContractDataInData), // Атрибут "Сумма" в ШЗ "Договоры"
-                        Status = getterSTR("Title", Status_Data) // Атрибут "Название" в ШЗ "Статусы договора"
-                    };
-                    Data_.Add(temp);
-                }
-            }
-        }
+Name = getterSTR("Title", ContractDataInData), // Атрибут "Статус" в ШЗ "Договоры"
+Date = getterDT("Date", ContractDataInData), // Атрибут "Дата" в ШЗ "Договоры"
+Total = getterDC("Total", ContractDataInData), // Атрибут "Сумма" в ШЗ "Договоры"
+Status = getterSTR("Title", Status_Data) // Атрибут "Название" в ШЗ "Статусы договора"
+};
+             Data_.Add(temp);
+}
+else
+{
+var temp = new MainData
+{
+Name = getterSTR("Title", ContractDataInData), // Атрибут "Статус" в ШЗ "Договоры"
+Date = getterDT("Date", ContractDataInData), // Атрибут "Дата" в ШЗ "Договоры"
+Total = getterDC("Total", ContractDataInData), // Атрибут "Сумма" в ШЗ "Договоры"
+Status = getterSTR("Title", Status_Data) // Атрибут "Название" в ШЗ "Статусы договора"
+};
+Data_.Add(temp);
+}
+}
+}
 
-        var dataToExport = new RESULT
-        {
-            MainData_ = Data_
-        };
+var dataToExport = new RESULT
+{
+MainData_ = Data_
+};
 
-        var content = Api.TeamNetwork.ObjectAppExportService.ExecuteWordExportTemplate(userCommandContext.DocumentTemplateId,dataToExport,false);
+        var content = Api.TeamNetwork.ObjectAppExportService.ExecuteWordExportTemplate(userCommandContext.DocumentTemplateId,dataToExport,false);
 
-        var result = new UserCommandResult
-        {
-            Success = true,
-            Commited = true,
-            File = new UserCommandFileResult()
-            {
-                Content = content,
-                Name = "Word_Data.doc",
-                Type = "Word"
-            },
-            ResultType = UserCommandResultType.Notificate,
-            Messages = new[]
-            {
-                new UserCommandMessage
-                {
-                    Severity = SeverityLevel.Normal,
-                    Text = "Документ сформирован"
-                }
-            }
-        };
-        return result;
-    }
+var result = new UserCommandResult
+        {
+            Success = true,
+            Commited = true,
+            File=new UserCommandFileResult(){
+                Content = content,
+Name = "Word_Data.doc",
+Type = "Word"
+            },
+            ResultType = UserCommandResultType.Notificate,
+            Messages = new[]
+            {
+                new UserCommandMessage
+                {
+                    Severity = SeverityLevel.Normal,
+                    Text = "Документ сформирован"
+                }
+            }
+        };
+        return result;
+    }
 
-    public static Decimal getterDC(string key, IDictionary<string, object> dictionary = null)
-    {
-        if (dictionary == null || key == null)
-        {
-            return 0;
-        }
-        var stringValue = getterSTR(key, dictionary);
-        if (stringValue != null && Decimal.TryParse(stringValue, out var result))
-        {
-            return result;
-        }
-        else
-        {
-            return 0;
-        }
-    }
+public static Decimal getterDC(string key, IDictionary<string, object> dictionary = null)
+{
+if (dictionary == null || key == null)
+{
+return 0;
+}
+var stringValue = getterSTR(key, dictionary);
+if (stringValue != null && Decimal.TryParse(stringValue, out var result))
+{
+return result;
+}
+else
+{
+return 0;
+}
+}
 
-    public static DateTime? getterDT(string key, IDictionary<string, object> dictionary = null)
-    {
-        if (dictionary == null || key == null)
-        {
-            return null;
-        }
-        var stringValue = getterSTR(key, dictionary);
-        if (stringValue != null && DateTime.TryParse(stringValue, out var result))
-        {
-            return result.AddHours(5);
-        }
-        else
-        {
-            return null;
-        }
-    }
+public static DateTime? getterDT(string key, IDictionary<string, object> dictionary = null)
+{
+if (dictionary == null || key == null)
+{
+return null;
+}
+var stringValue = getterSTR(key, dictionary);
+if (stringValue != null && DateTime.TryParse(stringValue, out var result))
+{
+return result.AddHours(5);
+}
+else
+{
+return null;
+}
+}
 
-    public static string getterSTR(string key, IDictionary<string, object> dictionary = null)
-    {
-        if (dictionary == null || key == null)
-        {
-            return null;
-        }
-        if (dictionary.TryGetValue(key, out var result))
-        {
-            if (result == null) return null;
-            return result.ToString();
-        }
-        else
-        {
-            return null;
-        }
-    }
+public static string getterSTR(string key, IDictionary<string, object> dictionary = null)
+{
+if (dictionary == null || key == null)
+{
+return null;
+}
+if (dictionary.TryGetValue(key, out var result))
+{
+if (result == null) return null;
+return result.ToString();
+}
+else
+{
+return null;
+}
+}
 
-    public static IList<string> getterListSTR(string key, IDictionary<string, object> dictionary = null)
-    {
-        var result = new List<string>();
-        if (dictionary != null && key != null)
-        {
-            if (dictionary.TryGetValue(key, out var objectData))
-            {
-                var objectDataArray = objectData as object[];
-                foreach (var singlObject in objectDataArray)
-                {
-                    if (singlObject == null) continue;
-                    result.Add(singlObject.ToString());
-                }
-            }
-        }
-        return result;
-    }
+public static IList<string> getterListSTR(string key, IDictionary<string, object> dictionary = null)
+{
+var result = new List<string>();
+if (dictionary != null && key != null)
+{
+if (dictionary.TryGetValue(key, out var objectData))
+{
+var objectDataArray = objectData as object[];
+foreach (var singlObject in objectDataArray)
+{
+if (singlObject == null) continue;
+result.Add(singlObject.ToString());
+}
+}
+}
+return result;
+}
 
-    public static IDictionary<string, object> GetData(string objectId = null)
-    {
-        if (objectId == null || objectId.Contains("account") || objectId == "tempID")
-        {
-            return null;
-        }
-        var container = Api.TeamNetwork.ObjectAppService.GetByObject(objectId);
-        var result = Api.TeamNetwork.ObjectService.GetWithAlias(container.Alias, objectId);
-        return result;
-    }
+public static IDictionary<string, object> GetData(string objectId = null)
+{
+if (objectId == null || objectId.Contains("account") || objectId == "tempID")
+{
+return null;
+}
+var container = Api.TeamNetwork.ObjectAppService.GetByObject(objectId);
+var result = Api.TeamNetwork.ObjectService.GetWithAlias(container.Alias, objectId);
+return result;
+}
 }
 
 [Serializable]
 public class MainData
 {
-    public string Client { get; set; }
-    public string Contact { get; set; }
-    public string Phone { get; set; }
-    public string Email { get; set; }
-    public string Name { get; set; }
-    public decimal Total { get; set; }
-    public DateTime? Date { get; set; }
-    public string Status { get; set; }
+public string Client { get; set; }
+public string Contact { get; set; }
+public string Phone { get; set; }
+public string Email { get; set; }
+public string Name { get; set; }
+public decimal Total { get; set; }
+public DateTime? Date { get; set; }
+public string Status { get; set; }
 }
 
 public class RESULT
 {
-    public List<MainData> MainData_ { get; set; }
+    public List<MainData> MainData_ { get; set; }
 }
+
 ```
 
 Результат выгрузки:

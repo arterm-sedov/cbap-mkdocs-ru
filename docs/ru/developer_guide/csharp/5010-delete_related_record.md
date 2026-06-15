@@ -1,6 +1,7 @@
 ---
 title: Удаление связанного объекта при выполнении условия
-kbId: 5010
+kbId: 5188
+
 tags:
     - C#
     - скрипт
@@ -14,6 +15,7 @@ hide: tags
 Для того, чтобы можно было в процессе удалять связанный объект/ы при определенном условии (в данной статье рассмотрено условие, если значение в атрибуте с типом данных «Число» в связанном объекте/ах равно нулю), введите следующее выражение:
 
 ```cs
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,32 +25,34 @@ using Comindware.TeamNetwork.Api.Data;
 
 class Script
 {
-    public static void Main(Comindware.Process.Api.Data.ScriptContext context)
-    {
-        try
-        {
-            var id = context.BusinessObjectId;
-            var data = Api.TeamNetwork.ObjectService.GetPropertyValues(new[] { id }, new[] { "Link" });
-            var deletearray = data[id]["Link"] as object[];
+    public static void Main(Comindware.Process.Api.Data.ScriptContext context)
+    {
+try
+{
+var id = context.BusinessObjectId;
+var data = Api.TeamNetwork.ObjectService.GetPropertyValues(new []{id}, new[]{"Link"});
+var deletearray = data[id]["Link"] as object[];
 
-            foreach (var i in deletearray)
-            {
-                try
-                {
-                    var atr = Api.TeamNetwork.ObjectService.GetPropertyValues(new[] { i.ToString() }, new[] { "Qty " });
-                    var val = atr[i.ToString()]["Qty "];
+foreach(var i in deletearray)
+{
+try
+{
+var atr = Api.TeamNetwork.ObjectService.GetPropertyValues(new []{i.ToString()}, new[]{"Qty "});
+var val = atr[i.ToString()]["Qty "];
 
-                    if (int.Parse(val.ToString()) == 0)
-                    {
-                        Api.TeamNetwork.ObjectService.Delete(i.ToString());
-                    }
-                }
-                catch { }
-            }
-        }
-        catch { }
-    }
+if(int.Parse(val.ToString()) == 0)
+{
+Api.TeamNetwork.ObjectService.Delete(i.ToString());
 }
+}
+catch{}
+}
+}
+catch
+{}
+    }
+}
+
 ```
 
 **где:**
