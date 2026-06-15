@@ -11,27 +11,19 @@ Generate the commit message text, but do no add files, stage or push the commit.
 **Important requirement:**
 
 - Always start the commit message with the ticket/issue number.
-- Take the issue number from the current branch name (eg., `12345_branch_name`) or from the previous commit message if the branch name does not have the issue number.
+- **Always ask the user for the ticket number first.** Do not infer from branch names or previous commits unless the user explicitly asks you to.
 - Format:
   `[#XXXXX] Concise description of the change`
-  where `XXXXX` is the number at the start of the branch name (up to the first `_` or other separator).
+  where `XXXXX` is the ticket number provided by the user.
 
 **Algorithm:**
 
-1. Get current branch name, eg. `12345_branch_name`:
-
-``` sh
-git rev-parse --abbrev-ref HEAD
-```
-
-2. Extract the first sequence of digits (usually up to the `_` character), eg. `12345`.
-3. If branch name has no issue number, find it from previous commits:
-   - Check recent commit messages: `git log -n 20 --pretty=%B`
-   - Look for the pattern `[#XXXXX]` in the most recent commits on this branch
-   - Use the first matching issue number found
-4. If still no ticket id (e.g. ad-hoc branch with no history):
-   - Extract product version from the branch name: `platform_v6` → `6`, `platform_v5` → `5`.
-   - Otherwise **ask the user** for a ticket id. Do not commit without one.
+1. **Ask the user for the ticket number.** Branch names and previous commits can contain stale or irrelevant numbers, so always confirm with the user before committing. Do not commit without a ticket id.
+2. If the user provides a number, use it directly as `[#<number>]`.
+3. If the user says there is no ticket, fall back to inferring:
+   - Check if a previous commit in the current task/session already uses a `[#XXXXX]` pattern — reuse it.
+   - Otherwise extract from the branch name: `platform_v6` → `6`, `platform_v5` → `5`, `12345_branch_name` → `12345`.
+4. Only if the user explicitly asks you to infer without asking, use the fallback from step 3. Otherwise, always ask first.
 5. Use the issue number in square brackets with a `#` at the start of the commit message (no spaces inside the brackets).
 6. Generate a concise description by analyzing the changes:
    - **Check staging status**: Use `git status` to see what's staged vs unstaged
@@ -43,17 +35,10 @@ git rev-parse --abbrev-ref HEAD
 
 **Correct examples:**
 
-Branch name: `12345_branch_name`
-Commit message: `[#12345] Add new documentation section`
+User provides `10622680`:
+Commit message: `[#10622680] Add Funnel option to diagram widget docs`
 
-Branch name: `67890_branch_name`
-Commit message: `[#67890] Fix data processing bug`
-
-Branch name: `branch_name`
-Previous commit message: `[#67890] Previous bug fix`
-Commit message: `[#67890] Fix data processing bug`
-
-Branch name: `platform_v6`, no prior `[#X]`, user confirms `6`
+User says "no ticket, it's a repo-level change" on `platform_v6`:
 Commit message: `[#6] Set up PDF build toolchain`
 
 **Incorrect examples:**
@@ -61,6 +46,7 @@ Commit message: `[#6] Set up PDF build toolchain`
 - `Add new documentation section` — no issue number
 - `[12345] Fix bug` — no # symbol
 - `[ #12345 ] Fix bug in module X, add tests, update docs` — spaces inside brackets
+- Inferring from branch name without asking the user first
 
 **Requirements:**
 

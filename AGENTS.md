@@ -33,6 +33,10 @@ Comindware Platform Knowledge Base:
 - @/docs/
 - @/phpkb_content/
 
+Platform source code (sibling repo, for verifying feature behavior):
+
+- @../CBAP_MONO
+
 ## SCRATCH DIRECTORY
 
 Use `.scratch/` for all temporary, draft, and transactional files: script outputs, debug logs, extracted data, one-off analysis files, and any disposable artifacts.
@@ -79,6 +83,7 @@ The venv and WeasyPrint/GTK3 PDF toolchain have several non-obvious pitfalls on 
 
 - @.agents/skills/python-env-setup/SKILL.md
 - @.agents/skills/mkdocs-pdf-build/SKILL.md
+- @.agents/skills/kb-edit-publish/SKILL.md
 
 ## LINK FORMATTING
 
@@ -155,7 +160,7 @@ For H2-H6 generate a concise semantic anchors with H1 anchor as a prefix:
 
 ## Commit messages
 
-Follow the commit message rules given here: .cursor/rules/cmwhelp_commit.md
+Follow the commit message rules given here: .agents/skills/cmwhelp-commit/SKILL.md
 
 ---
 
