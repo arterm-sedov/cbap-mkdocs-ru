@@ -44,7 +44,7 @@ hide: tags
 --8<-- "related_topics_heading.md"
 
 - [Замещения. Создание, настройка, удаление][substitution]
-- [Фильтрация активных задач с помощью N3][n3_filter_active_tasks]
+- [Аккаунты и задачи. Вычисление пользователей с активными задачами с помощью N3 (с учетом замещений)][example_n3_calculate_active_task_accounts]
 - [Язык N3][n3_guide_cat]
 
 </div>

@@ -231,6 +231,8 @@
 
 [example_n3_button_local_variable]: {{ kbArticleURLPrefix }}5368
 
+[example_n3_calculate_active_task_accounts]: {{ kbArticleURLPrefix }}5292
+
 [example_n3_calculate_role_accounts]: {{ kbArticleURLPrefix }}5283
 
 [example_n3_list_by_creator_filter]: {{ kbArticleURLPrefix }}5296
@@ -356,6 +358,12 @@
 [buttons_not_shown]: {{ kbArticleURLPrefix }}5178
 
 [calculate_archive_records]: {{ kbArticleURLPrefix }}5167
+
+[calculate_group_accounts]: {{ kbArticleURLPrefix }}5263
+
+[calculate_group_subgroup_accounts]: {{ kbArticleURLPrefix }}5221
+
+[calculate_group_subgroup_members]: {{ kbArticleURLPrefix }}5265
 
 [extract_form_elements]: {{ kbArticleURLPrefix }}5166
 

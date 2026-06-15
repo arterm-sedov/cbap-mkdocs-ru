@@ -28,6 +28,6 @@ hide: tags
 | -------- | -------- |
 | "Менеджеры" | Название группы, пользователей которой требуется получить. |
 
-Альтернатива статье [Вычисление всех пользователей группы](https://kb.comindware.ru/article.php?id=1082).
+Альтернатива статье [Вычисление всех аккаунтов группы][example_formula_group_account_calculate].
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
