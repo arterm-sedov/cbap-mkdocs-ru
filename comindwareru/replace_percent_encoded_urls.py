@@ -1,10 +1,14 @@
 import re
+import os
 from urllib.parse import urlparse, urlunparse, unquote
 import requests
 from bs4 import BeautifulSoup
 
-MD_FILE = 'comindware_ru_for_llm_ingestion_dirty.md'
-MD_FILE_SANITIZED = 'comindware_ru_for_llm_ingestion_sanitized2.md'
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+SCRATCH_DIR = os.path.join(SCRIPT_DIR, '..', '.scratch')
+
+MD_FILE = os.path.join(SCRATCH_DIR, 'comindware_ru_for_llm_ingestion_dirty.md')
+MD_FILE_SANITIZED = os.path.join(SCRATCH_DIR, 'comindware_ru_for_llm_ingestion_sanitized2.md')
 
 # Pattern to match blocks with title and url
 BLOCK_PATTERN = re.compile(r'(title:\s*)(.*?)\n(url:\s*)(https?://[^\s]+)', re.DOTALL)

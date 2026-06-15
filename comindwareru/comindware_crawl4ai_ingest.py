@@ -6,8 +6,11 @@ from datetime import datetime
 import os
 import json
 
-OUTPUT_MD = "comindware_ru_for_llm_ingestion_dirty.md"
-PROGRESS_FILE = "comindware_ru_progress_dirty.json"
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+SCRATCH_DIR = os.path.join(SCRIPT_DIR, '..', '.scratch')
+
+OUTPUT_MD = os.path.join(SCRATCH_DIR, 'comindware_ru_for_llm_ingestion_dirty.md')
+PROGRESS_FILE = os.path.join(SCRATCH_DIR, 'comindware_ru_progress_dirty.json')
 START_URL = "https://www.comindware.ru/sitemap/"
 BATCH_SIZE = 5
 BATCH_TIMEOUT = 120  # seconds
