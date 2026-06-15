@@ -9,8 +9,9 @@ import json
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 SCRATCH_DIR = os.path.join(SCRIPT_DIR, '..', '.scratch')
 
-OUTPUT_MD = os.path.join(SCRATCH_DIR, 'comindware_ru_for_llm_ingestion_dirty.md')
-PROGRESS_FILE = os.path.join(SCRATCH_DIR, 'comindware_ru_progress_dirty.json')
+DATE_SUFFIX = datetime.now().strftime('%Y%b%d')
+OUTPUT_MD = os.path.join(SCRATCH_DIR, f'comindware_ru_for_llm_ingestion_dirty_{DATE_SUFFIX}.md')
+PROGRESS_FILE = os.path.join(SCRATCH_DIR, f'comindware_ru_progress_dirty_{DATE_SUFFIX}.json')
 START_URL = "https://www.comindware.ru/sitemap/"
 BATCH_SIZE = 5
 BATCH_TIMEOUT = 120  # seconds
