@@ -37,6 +37,10 @@ Platform source code (sibling repo, for verifying feature behavior):
 
 - @../CBAP_MONO
 
+Platform source code (sibling repo, for verifying feature behavior):
+
+- @../CBAP_MONO
+
 ## SCRATCH DIRECTORY
 
 Use `.scratch/` for all temporary, draft, and transactional files: script outputs, debug logs, extracted data, one-off analysis files, and any disposable artifacts.
