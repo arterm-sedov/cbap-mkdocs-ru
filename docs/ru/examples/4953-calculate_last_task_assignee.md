@@ -1,14 +1,19 @@
 ---
 title: Вычисление фактического исполнителя у последней завершенной задачи
 kbId: 5279
+tags:
+    - N3
+    - выражение на N3
+    - пример
+    - процессы
+hide: tags
 ---
 
-# Вычисление фактического исполнителя у последней завершенной задачи
+# Вычисление фактического исполнителя у последней завершенной задачи {: #calculate_last_task_assignee }
 
-Для того, чтобы вычислить пользователя, который завершил последнюю задачу из списка задач связанного с текущим объектом экземпляра процесса, введите следующее выражение:
+Для того чтобы вычислить пользователя, который завершил последнюю задачу из списка задач связанного с текущим объектом экземпляра процесса, введите следующее выражение:
 
-```
-
+```turtle
 @prefix cmw: <http://comindware.com/logics#>.
 @prefix task: <http://comindware.com/ontology/task#>.
 @prefix account: <http://comindware.com/ontology/account#>.
@@ -28,7 +33,6 @@ kbId: 5279
     ?taskmax cmw:scheduledEndDate ?max.
     ?taskmax cmw:completedBy ?value.
     }
-
 ```
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
