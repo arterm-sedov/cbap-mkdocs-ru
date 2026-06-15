@@ -1,13 +1,19 @@
 ---
 title: Очистка ссылки
 kbId: 5022
+tags:
+    - C#
+    - скрипт
+    - C#-скрипт
+    - пример скрипта
+hide: tags
 ---
 
-# Очистка ссылки
+# Очистка ссылки {: #clear-link }
 
 Для того, чтобы на входе на задачу очистить ссылку, введите следующее выражение:
 
-```
+```cs
 
  
 
@@ -20,7 +26,7 @@ using Comindware.TeamNetwork.Api.Data;
 
 class Script
 {
-    public static void Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities)
+    public static void Main(Comindware.Process.Api.Data.ScriptContext context)
     {
     
     Dictionary<string, object> d = new Dictionary<string, object>();

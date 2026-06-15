@@ -1,13 +1,19 @@
 ---
 title: Заполнение коллекции выбранным списком
 kbId: 5013
+tags:
+    - C#
+    - скрипт
+    - C#-скрипт
+    - пример скрипта
+hide: tags
 ---
 
-# Заполнение коллекции выбранным списком
+# Заполнение коллекции выбранным списком {: #fill-collection-selected-list }
 
 Для того, чтобы в рамках процесса заполнить коллекцию в текущем объекте каким-либо списком, введите следующее выражение:
 
-```
+```cs
 
 using System;
 using System.Collections.Generic;
@@ -18,7 +24,7 @@ using Comindware.TeamNetwork.Api.Data;
 
 class Script
 {
-    public static void Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities)
+    public static void Main(Comindware.Process.Api.Data.ScriptContext context)
     {     
         var query = new Comindware.TeamNetwork.Api.Data.DatasetQuery
         {

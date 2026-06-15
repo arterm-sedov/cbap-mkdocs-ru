@@ -1,13 +1,19 @@
 ---
 title: Очистка значений атрибутов типа Логический и Пользователь
 kbId: 5003
+tags:
+    - C#
+    - скрипт
+    - C#-скрипт
+    - пример скрипта
+hide: tags
 ---
 
-# Очистка значений атрибутов типа Логический и Пользователь
+# Очистка значений атрибутов типа Логический и Пользователь {: #clear-logical-account-attributes }
 
 Для того, чтобы по операции можно было очистить атрибуты типа Логический и Пользователь (например, очистить флаги и ответственных), введите следующее выражение:
 
-```
+```cs
 
 using System;
 using System.Collections.Generic;
@@ -17,7 +23,7 @@ using Comindware.TeamNetwork.Api.Data.UserCommands;
 
 public class Script
 {
-    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+    public static UserCommandResult Main(UserCommandContext userCommandContext)
     {
         foreach (var objectId in userCommandContext.ObjectIds)
         {

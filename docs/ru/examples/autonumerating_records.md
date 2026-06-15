@@ -106,7 +106,7 @@ kbId: 4895
     using Comindware.TeamNetwork.Api.Data;
     public class Script
     {
-        public static void Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities)
+        public static void Main(Comindware.Process.Api.Data.ScriptContext context)
         {
     // BusinessObjectId — запись, связанная с экземпляром процесса.
             var objectId = context.BusinessObjectId;

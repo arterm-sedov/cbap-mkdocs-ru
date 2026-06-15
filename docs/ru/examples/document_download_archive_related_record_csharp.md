@@ -99,7 +99,7 @@ kbId: 5081
     class Script
     {
         // Определяем конструктор скрипта, выполняющегося в контексте кнопки
-        public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+        public static UserCommandResult Main(UserCommandContext userCommandContext)
         { 
             // Получаем ID текущей записи шаблона «Заявки» из контекста операции кнопки.
             var reсordId = userCommandContext.ObjectIds[0];

@@ -1,13 +1,19 @@
 ---
 title: Создание записи и передача данных из выбранного объекта
 kbId: 5001
+tags:
+    - C#
+    - скрипт
+    - C#-скрипт
+    - пример скрипта
+hide: tags
 ---
 
-# Создание записи и передача данных из выбранного объекта
+# Создание записи и передача данных из выбранного объекта {: #create-entry-transfer-data }
 
 Для того, чтобы по кнопке можно было по выбранному объекту/ам создать запись в каком-либо Шаблоне записи и передать туда какие-либо данные, введите следующее выражение:
 
-```
+```cs
 
 using System;
 using System.IO;
@@ -18,7 +24,7 @@ using Comindware.TeamNetwork.Api.Data.UserCommands;
 
 public class Script
 {
-    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+    public static UserCommandResult Main(UserCommandContext userCommandContext)
     {
         var currentObjectid = userCommandContext.ObjectIds;
         foreach(var id in currentObjectid)

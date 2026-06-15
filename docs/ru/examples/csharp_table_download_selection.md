@@ -89,7 +89,7 @@ hide: tags
     class Script
     {
         // userCommandContext содержит данные контекста при нажатии кнопки.
-        public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+        public static UserCommandResult Main(UserCommandContext userCommandContext)
         {
             // Получаем ID выбранных записей (строк) в таблице при нажатии кнопки.
             var selectedTableRows = userCommandContext.ObjectIds as string[];

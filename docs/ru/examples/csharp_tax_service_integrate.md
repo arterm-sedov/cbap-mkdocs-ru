@@ -140,7 +140,7 @@ hide: tags
     {% endif %}
     {% raw %}
     class Script{
-        public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities) { 
+        public static UserCommandResult Main(UserCommandContext userCommandContext) { 
             // Получаем ID текущей записи контрагента.
             var contextObjectId = userCommandContext.ObjectIds[0];
             // Устанавливаем флаг успешного выполнения операции.

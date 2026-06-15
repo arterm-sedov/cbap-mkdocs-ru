@@ -1,9 +1,15 @@
 ---
 title: QR-код. Формирование с помощью C#-скрипта по нажатию кнопки
 kbId: 4882
+tags:
+    - C#
+    - скрипт
+    - C#-скрипт
+    - пример скрипта
+hide: tags
 ---
 
-# QR-код. Формирование с помощью C#-скрипта по нажатию кнопки
+# QR-код. Формирование с помощью C#-скрипта по нажатию кнопки {: #qr-code-csharp-button }
 
 В процессе настройки решения может понадобиться генерация QR-кода по нажатию кнопки (например, для формирования внутреннего кода для сотрудников). В данной статье мы рассмотрим пошаговую настройку генерации QR-кода по кнопке на форме.
 
@@ -11,7 +17,7 @@ kbId: 4882
 
 **2.** В том же шаблоне записи создайте ещё один атрибут с типом данных «Текст» (***QRcode***) и форматом отображения «HTML-текст». Установите флаг «Вычисляемый» и в поле «Вычисляемое выражение» вставьте следующую строку:
 
-```
+```cs
 
 FORMAT("<img align='center'src='data:image/png;base64,{0}'width='60' height='60' frameborder='0'</img>",LIST($QRinbase))
 
@@ -33,7 +39,7 @@ FORMAT("<img align='center'src='data:image/png;base64,{0}'width='60' height='60'
 
 Во вкладке «Скрипт» вставьте следующее:
 
-```
+```cs
 
 using System;
 using System.Collections.Generic;
@@ -45,7 +51,7 @@ using RestSharp;
  
 class Script
 {
-    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+    public static UserCommandResult Main(UserCommandContext userCommandContext)
     {
         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
         var link = Uri.EscapeDataString("https://yourinstance.comindware.net/#form/oa.1/form.2/" + userCommandContext.ObjectIds[0]);

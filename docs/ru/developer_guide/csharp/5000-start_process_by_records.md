@@ -1,20 +1,26 @@
 ---
 title: Старт процесса по записям списка
 kbId: 5000
+tags:
+    - C#
+    - скрипт
+    - C#-скрипт
+    - пример скрипта
+hide: tags
 ---
 
-# Старт процесса по записям списка
+# Старт процесса по записям списка {: #start-process-by-records }
 
 Для того, чтобы на запустить процесс по каждой из записей определенного списка, введите следующее выражение:
 
-```
+```cs
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Comindware.Data.Entity;
 class Script
 {
-    public static void Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities)
+    public static void Main(Comindware.Process.Api.Data.ScriptContext context)
     {
         var query = new Comindware.TeamNetwork.Api.Data.DatasetQuery
         {

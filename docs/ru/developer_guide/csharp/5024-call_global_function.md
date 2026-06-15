@@ -1,13 +1,19 @@
 ---
 title: Запуск глобальной функции из операции
 kbId: 5024
+tags:
+    - C#
+    - скрипт
+    - C#-скрипт
+    - пример скрипта
+hide: tags
 ---
 
-# Запуск глобальной функции из операции
+# Запуск глобальной функции из операции {: #call-global-function }
 
 Для того, чтобы запустить глобальную функцию по кнопке, введите следующее выражение:
 
-```
+```cs
 
 using System; 
 using System.Collections.Generic;
@@ -18,7 +24,7 @@ using Comindware.TeamNetwork.Api.Data;
 
 class Script
 {
-    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+    public static UserCommandResult Main(UserCommandContext userCommandContext)
     {     
           var CurrentObjectid = userCommandContext.ObjectIds[0];
         var CurrentObjectData = Api.TeamNetwork.ObjectService.Get(CurrentObjectid);

@@ -1,13 +1,19 @@
 ---
 title: Очистка атрибута типа Пользователь в процессе
 kbId: 5015
+tags:
+    - C#
+    - скрипт
+    - C#-скрипт
+    - пример скрипта
+hide: tags
 ---
 
-# Очистка атрибута типа Пользователь в процессе
+# Очистка атрибута типа Пользователь в процессе {: #clear-account-attribute }
 
 Для того, чтобы в рамках процесса можно было очистить атрибут типа Пользователь (например, очистить ответственного), введите следующее выражение:
 
-```
+```cs
 
 using System;
 using System.Collections.Generic;
@@ -18,7 +24,7 @@ using Comindware.TeamNetwork.Api.Data;
 
 class Script
 {
-public static void Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities)
+public static void Main(Comindware.Process.Api.Data.ScriptContext context)
 {
 var data = new Dictionary<string, object>
 {

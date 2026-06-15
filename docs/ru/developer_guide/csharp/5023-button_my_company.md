@@ -1,13 +1,19 @@
 ---
 title: Кнопка «Моя компания»
 kbId: 5023
+tags:
+    - C#
+    - скрипт
+    - C#-скрипт
+    - пример скрипта
+hide: tags
 ---
 
-# Кнопка «Моя компания»
+# Кнопка «Моя компания» {: #button-my-company }
 
 Для того, чтобы разместить на боковую панель навигации ссылку на компанию пользователя, создайте операцию типа Скрипт в текущем Шаблоне записи и введите следующее выражение:
 
-```
+```cs
 
 using System;
 using System.Collections.Generic;
@@ -18,7 +24,7 @@ using Comindware.TeamNetwork.Api.Data.UserCommands;
 public class Script
 {
 
-    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+    public static UserCommandResult Main(UserCommandContext userCommandContext)
     {
         var user = Api.TeamNetwork.ObjectService.GetWithAlias("Kontaktyklientov", userCommandContext.CurrentUserId);
         var error = user == null ? "У пользователя нет компании" : null;

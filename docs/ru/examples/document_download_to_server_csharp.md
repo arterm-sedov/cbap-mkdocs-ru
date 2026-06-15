@@ -32,7 +32,7 @@ using Comindware.TeamNetwork.Api.Data.UserCommands;
 using Comindware.TeamNetwork.Api.Data;
 using System.IO;
 class Script {
-    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities) {
+    public static UserCommandResult Main(UserCommandContext userCommandContext) {
         try {
             //<ServerDownloadPath> — путь для скачивания файлов на сервере
             var path = @ "<ServerDownloadPath>";

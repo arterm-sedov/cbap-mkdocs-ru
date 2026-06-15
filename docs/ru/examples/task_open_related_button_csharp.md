@@ -93,7 +93,7 @@ hide: tags
     class Script
     {
         // userCommandContext содержит данные контекста при нажатии кнопки.
-        public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+        public static UserCommandResult Main(UserCommandContext userCommandContext)
         {
             // Получаем ID текущего пользователя, нажавшего кнопку.
             var currentUser = userCommandContext.CurrentUserId;

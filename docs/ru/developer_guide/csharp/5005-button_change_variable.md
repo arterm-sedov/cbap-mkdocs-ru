@@ -1,13 +1,19 @@
 ---
 title: Изменение переиспользуемой переменной по операции
 kbId: 5005
+tags:
+    - C#
+    - скрипт
+    - C#-скрипт
+    - пример скрипта
+hide: tags
 ---
 
-# Изменение переиспользуемой переменной по операции
+# Изменение переиспользуемой переменной по операции {: #button-change-variable }
 
 Для того, чтобы можно было по кнопке изменять переиспользуемую переменную , создайте операцию типа Скрипт в текущем Шаблоне записи и введите следующее выражение:
 
-```
+```cs
  
 using System;
 using System.Collections.Generic;
@@ -17,7 +23,7 @@ using Comindware.TeamNetwork.Api.Data.UserCommands;
 using Comindware.TeamNetwork.Api.Data;
 public class Script
 {
-    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+    public static UserCommandResult Main(UserCommandContext userCommandContext)
     {
 var objectId = userCommandContext.ObjectIds.FirstOrDefault();    
 var temp = (decimal)Api.Solution.SolutionVariableService.GetValue("svar.1");
