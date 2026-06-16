@@ -1,18 +1,46 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5203" kb-tags="" kb-title="Запуск глобальной функции из операции">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5203" kb-tags="C#,скрипт,C#-скрипт,пример скрипта" kb-title="Запуск глобальной функции из кнопки">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<p>Для того, чтобы запустить глобальную функцию по кнопке, введите следующее выражение:</p>
-<div class="highlight"><code><pre><span></span><code>using System; </code> <br/><code>using System.Collections.Generic;</code> <br/><code>using System.Linq;</code> <br/><code>using Comindware.Data.Entity;</code> <br/><code>using Comindware.TeamNetwork.Api.Data.UserCommands;</code> <br/><code>using Comindware.TeamNetwork.Api.Data;</code> <br/><code></code> <br/><code>class Script</code> <br/><code>{</code> <br/><code>    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)</code> <br/><code>    {     </code> <br/><code>          var CurrentObjectid = userCommandContext.ObjectIds[0];</code> <br/><code>        var CurrentObjectData = Api.TeamNetwork.ObjectService.Get(CurrentObjectid);</code> <br/><code>        var Gosnomer = CurrentObjectData["op.11"].ToString();</code> <br/><code>    var bo = Api.TeamNetwork.GlobalFunctionService.ExecuteByAlias("Systemsolution", "Poisk", new Dictionary&lt;string, object&gt;()('Nomer', Undefined));</code> <br/><code>    Api.TeamNetwork.ObjectService.EditWithAlias("Kartochkivyzovov", userCommandContext.ObjectIds[0], bo);</code> <br/><code></code> <br/><code>    var result = new UserCommandResult</code> <br/><code>    {</code> <br/><code>      Success = true,</code> <br/><code>      Commited = true,</code> <br/><code>      ResultType = UserCommandResultType.DataChange,</code> <br/><code>      Messages = new[]</code> <br/><code>      {</code> <br/><code>        new UserCommandMessage</code> <br/><code>        {</code> <br/><code>          Severity = SeverityLevel.Normal,</code> <br/><code>          Text = "VIN найден успешно"</code> <br/><code>        }</code> <br/><code></code> <br/><code>      }</code> <br/><code>    };</code> <br/><code>    return result;</code> <br/><code>    </code> <br/><code>    }</code> <br/><code>}</code> <br/></pre></code></div>
-<p><strong>где:</strong></p>
-<p><strong>op.11 -</strong> ИД атрибута в текущем Шаблоне записи, которое передается на вход ГФ;</p>
-<p><strong>Systemsolution</strong> – системное имя текущего Бизнес-приложения;</p>
-<p><strong>Poisk</strong> – системное имя Глобальной функции;</p>
-<p><strong>Nomer</strong> - переменная в шаблоне сообщения на входе;</p>
-<p><strong>Kartochkivyzovov</strong> - имя текущего шаблона записи, откуда вызывается операция;</p>
-<p><strong>VIN найден успешно</strong> - текст сообщения, которое высветится пользователю в случае успешного исполнения скрипта.</p>
+<p>Для того чтобы запустить глобальную функцию по кнопке, введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span><span class="w"> </span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Collections.Generic</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Linq</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.Data.Entity</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.TeamNetwork.Api.Data.UserCommands</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.TeamNetwork.Api.Data</span><span class="p">;</span></code> <br/><code></code> <br/><code><span class="k">class</span><span class="w"> </span><span class="nc">Script</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">UserCommandResult</span><span class="w"> </span><span class="n">Main</span><span class="p">(</span><span class="n">UserCommandContext</span><span class="w"> </span><span class="n">userCommandContext</span><span class="p">)</span></code> <br/><code><span class="w">    </span><span class="p">{</span><span class="w">     </span></code> <br/><code><span class="w">          </span><span class="kt">var</span><span class="w"> </span><span class="n">CurrentObjectid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userCommandContext</span><span class="p">.</span><span class="n">ObjectIds</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">CurrentObjectData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">Get</span><span class="p">(</span><span class="n">CurrentObjectid</span><span class="p">);</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">Gosnomer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CurrentObjectData</span><span class="p">[</span><span class="s">"op.11"</span><span class="p">].</span><span class="n">ToString</span><span class="p">();</span></code> <br/><code><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">bo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">GlobalFunctionService</span><span class="p">.</span><span class="n">ExecuteByAlias</span><span class="p">(</span><span class="s">"Systemsolution"</span><span class="p">,</span><span class="w"> </span><span class="s">"Poisk"</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">object</span><span class="o">&gt;</span><span class="p">()(</span><span class="err">'</span><span class="n">Nomer</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="n">Undefined</span><span class="p">));</span></code> <br/><code><span class="w">    </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">EditWithAlias</span><span class="p">(</span><span class="s">"Kartochkivyzovov"</span><span class="p">,</span><span class="w"> </span><span class="n">userCommandContext</span><span class="p">.</span><span class="n">ObjectIds</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">bo</span><span class="p">);</span></code> <br/><code></code> <br/><code><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserCommandResult</span></code> <br/><code><span class="w">    </span><span class="p">{</span></code> <br/><code><span class="w">      </span><span class="n">Success</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">,</span></code> <br/><code><span class="w">      </span><span class="n">Commited</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">,</span></code> <br/><code><span class="w">      </span><span class="n">ResultType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UserCommandResultType</span><span class="p">.</span><span class="n">DataChange</span><span class="p">,</span></code> <br/><code><span class="w">      </span><span class="n">Messages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="p">[]</span></code> <br/><code><span class="w">      </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">UserCommandMessage</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">          </span><span class="n">Severity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SeverityLevel</span><span class="p">.</span><span class="n">Normal</span><span class="p">,</span></code> <br/><code><span class="w">          </span><span class="n">Text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"VIN найден успешно"</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code></code> <br/><code><span class="w">      </span><span class="p">}</span></code> <br/><code><span class="w">    </span><span class="p">};</span></code> <br/><code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span></code> <br/><code><span class="w">    </span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>op.11</code></td>
+<td>ID атрибута в текущем шаблоне записи, значение которого передаётся на вход глобальной функции.</td>
+</tr>
+<tr>
+<td><code>Systemsolution</code></td>
+<td>Системное имя текущего приложения.</td>
+</tr>
+<tr>
+<td><code>Poisk</code></td>
+<td>Системное имя глобальной функции.</td>
+</tr>
+<tr>
+<td><code>Nomer</code></td>
+<td>Переменная в шаблоне сообщения на входе.</td>
+</tr>
+<tr>
+<td><code>Kartochkivyzovov</code></td>
+<td>Системное имя текущего шаблона записи, из которого вызывается кнопка.</td>
+</tr>
+<tr>
+<td><code>VIN найден успешно</code></td>
+<td>Текст сообщения, которое отобразится пользователю при успешном выполнении скрипта.</td>
+</tr>
+</tbody>
+</table>
 </article>
 </div>
 </div>

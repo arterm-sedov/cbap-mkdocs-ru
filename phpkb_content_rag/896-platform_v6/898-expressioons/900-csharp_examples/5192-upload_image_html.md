@@ -2,16 +2,14 @@
 title: 'Загрузка картинки из атрибута типа документ в HTML поле'
 kbId: 5192
 url: 'https://kb.comindware.ru/article.php?id=5192'
-updated: '2022-02-18 06:27:36'
+updated: '2026-06-16 19:14:59'
 ---
 
 # Загрузка картинки из атрибута типа документ в HTML поле
 
-Для того, чтобы выгрузить картинку в HTML поле, введите следующее выражение:
+Для того чтобы выгрузить картинку в HTML поле, введите следующее выражение:
 
 ```
- 
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +20,7 @@ using Comindware.TeamNetwork.Api.Data;
 
 class Script
 {
-    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+    public static UserCommandResult Main(UserCommandContext userCommandContext)
     {
         var imagePropertyAlias = "Document";
         var currentObjectid = userCommandContext.ObjectIds[0];
@@ -35,7 +33,7 @@ class Script
         var documentId = documentsList.First();
         var content = (Api.TeamNetwork.DocumentService.GetContent((string)documentId)).Data;
 
-        var docHTML = $"<p><span style=\"font-size:11pt;\"><span><span style=\"font-family:Calibri,sans-serif;\"><img src=\"data:image/png;base64,{Convert.ToBase64String(content)}\" style=\"height:500px; width:1000px\" /></span></span></span></p><p>&nbsp;</p>";
+        var docHTML = $"<p><span style=\\"font-size:11pt;\\"><span><span style=\\"font-family:Calibri,sans-serif;\\"><img src=\\"data:image/png;base64,{Convert.ToBase64String(content)}\\" style=\\"height:500px; width:1000px\\" /></span></span></span></p><p>&nbsp;</p>";
 
         var data = new Dictionary<string, object>
         {
@@ -62,8 +60,9 @@ class Script
 }
 ```
 
-**где:**
+**Здесь:**
 
-**Document**   = Атрибут типа документ, куда загружается картинка
-
-**HTML**  = Атрибут типа текст в HTML формате
+| Значение | Описание |
+| --- | --- |
+| `Document` | Системное имя атрибута типа «**Документ**», в который загружается изображение. |
+| `HTML` | Системное имя атрибута типа «**Текст**» в формате HTML. |

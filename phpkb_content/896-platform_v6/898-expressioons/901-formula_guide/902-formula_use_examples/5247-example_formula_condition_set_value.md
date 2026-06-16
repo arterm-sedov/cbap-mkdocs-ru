@@ -2,7 +2,7 @@
 title: 'Установка значения атрибута по условию'
 kbId: 5247
 url: 'https://kb.comindware.ru/article.php?id=5247'
-updated: '2024-11-07 11:52:42'
+updated: '2026-06-16 19:18:17'
 ---
 
 # Установка значения атрибута по условию
@@ -17,10 +17,11 @@ updated: '2024-11-07 11:52:42'
   )
 ```
 
-**где:**
+**Здесь:**
 
-**StatusRef->Nazvanie == "In progress"** – условие (в данном случае, статус "In Progress");
-
-**1/2/3** – значения в зависимости от условий.
+| Значение | Описание |
+| --- | --- |
+| `$StatusRef->Nazvanie == "In progress"` | Условие: статус `In progress`. |
+| `1`, `2`, `3` | Значения, подставляемые в зависимости от условий. |
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

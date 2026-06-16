@@ -1,88 +1,59 @@
 ---
-title: 'Изменение переиспользуемой переменной по операции'
+title: 'Изменение переиспользуемой переменной по кнопке'
 kbId: 5208
 url: 'https://kb.comindware.ru/article.php?id=5208'
-updated: '2022-02-18 06:28:27'
+updated: '2026-06-16 19:14:50'
 ---
 
-# Изменение переиспользуемой переменной по операции
+# Изменение переиспользуемой переменной по кнопке
 
-Для того, чтобы можно было по кнопке изменять переиспользуемую переменную , создайте операцию типа Скрипт в текущем Шаблоне записи и введите следующее выражение:
+Для того чтобы можно было по кнопке изменять переиспользуемую переменную , создайте кнопку типа «Скрипт» в текущем Шаблоне записи и введите следующее выражение:
 
 ```
- 
-
+ 
 using System;
-
 using System.Collections.Generic;
-
 using System.Linq;
-
 using Comindware.Data.Entity;
-
 using Comindware.TeamNetwork.Api.Data.UserCommands;
-
 using Comindware.TeamNetwork.Api.Data;
-
 public class Script
-
 {
-
-    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
-
+    public static UserCommandResult Main(UserCommandContext userCommandContext)
     {
-
 var objectId = userCommandContext.ObjectIds.FirstOrDefault();    
-
 var temp = (decimal)Api.Solution.SolutionVariableService.GetValue("svar.1");
-
 Api.Solution.SolutionVariableService.SetValue("svar.1", temp+1);
-
 var result = new UserCommandResult
-
         {
-
             Success = true,
-
             Commited = true,
-
             ResultType = UserCommandResultType.DataChange,
-
             Messages = new[]
-
             {
-
                 new UserCommandMessage
-
                 {
-
                     Severity = SeverityLevel.Normal,
-
                     Text = "Переиспользуемая переменная инкрементирована"
-
                     }
-
             }
-
         };
-
         return result;
-
    
-
     }
-
 }
 ```
 
-**где:**
+**Здесь:**
 
-**svar.1** - ИД переиспользуемой переменной, которую будем изменять (в данном случае, это число);
+| Значение | Описание |
+| --- | --- |
+| `svar.1` | ID переиспользуемой переменной, которую нужно изменить. В данном примере это число. |
+| `+1` | Число, которое добавляется к значению переиспользуемой переменной. |
+| `Переиспользуемая переменная инкрементирована` | Сообщение, которое отобразится при успешном выполнении скрипта. |
 
-**+1** - к переиспользуемой переменной добавляем число;
+Обработка записей
 
-**"Переиспользуемая переменная инкрементирована"** - сообщение в случае успеха.
-
-**Примечание :** скрипт работает только с одной записью (выбирает первую запись, если на списке было выбрано несколько элементов). Для обработки нескольких записей скрипт нужно дописать.
+Скрипт работает только с одной записью. Если в таблице выбрано несколько записей, скрипт обработает первую из них. Для обработки нескольких записей доработайте скрипт.
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

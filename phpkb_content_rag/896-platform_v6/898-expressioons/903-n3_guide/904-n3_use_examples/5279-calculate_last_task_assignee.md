@@ -2,12 +2,12 @@
 title: 'Вычисление фактического исполнителя у последней завершенной задачи'
 kbId: 5279
 url: 'https://kb.comindware.ru/article.php?id=5279'
-updated: '2023-12-21 14:47:54'
+updated: '2026-06-16 19:17:09'
 ---
 
 # Вычисление фактического исполнителя у последней завершенной задачи
 
-Для того, чтобы вычислить пользователя, который завершил последнюю задачу из списка задач связанного с текущим объектом экземпляра процесса, введите следующее выражение:
+Для того чтобы вычислить пользователя, который завершил последнюю задачу из списка задач связанного с текущим объектом экземпляра процесса, введите следующее выражение:
 
 ```
 @prefix cmw: <http://comindware.com/logics#>.
@@ -23,10 +23,10 @@ updated: '2023-12-21 14:47:54'
      from {
     ?task task:objectId ?item.
     ?task cmw:taskStatus taskStatus:completed.
-    ?task cmw:scheduledEndDate ?taskDate.                
+    ?task cmw:scheduledEndDate ?taskDate.
      } select ?taskDate -> ?taskList.
-    ?taskList cmwmath:max ?max.    
-    ?taskmax cmw:scheduledEndDate ?max.          
+    ?taskList cmwmath:max ?max.
+    ?taskmax cmw:scheduledEndDate ?max.
     ?taskmax cmw:completedBy ?value.
     }
 ```

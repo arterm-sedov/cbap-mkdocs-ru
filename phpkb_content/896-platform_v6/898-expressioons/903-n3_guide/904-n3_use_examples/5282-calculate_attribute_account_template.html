@@ -1,18 +1,47 @@
-<h1>Вычисление значения атрибута из шаблона пользователя</h1><p>Для того чтобы получить значение какого-либо атрибута из Шаблона пользователя (через атрибут типа "Пользователь", ссылающийся на данный Шаблон пользователя), введите следующее выражение:</p>
-<div>
-<table class="source_code_container">
+<h1>Вычисление значения атрибута из шаблона пользователя</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5282" kb-tags="N3,атрибуты,выражение на N3,пример" kb-title="Вычисление значения атрибута из шаблона пользователя">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для того чтобы получить значение какого-либо атрибута из Шаблона пользователя (через атрибут типа «<strong>Пользователь</strong>», ссылающийся на данный Шаблон пользователя), введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">account:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/account#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">container:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/container#&gt;</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="p">(</span><span class="s">"RecordTemplate"</span> <span class="s">"assignee"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?assigneeProp</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Sotrudniki"</span> <span class="s">"LaborCosts"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?LaborCostsProp</span><span class="p">.</span></code> <br/><code><span class="err">?item</span> <span class="err">?assigneeProp</span> <span class="err">?assignee</span><span class="p">.</span></code> <br/><code>  <span class="err">?polz</span> <span class="nn">container</span><span class="p">:</span><span class="nt">alias</span> <span class="s">"Sotrudniki"</span><span class="p">.</span></code> <br/><code>  <span class="err">?assignee</span> <span class="nn">account</span><span class="p">:</span><span class="nt">extendedBy</span> <span class="err">?polz</span><span class="p">.</span></code> <br/><code><span class="err">?assignee</span> <span class="err">?LaborCostsProp</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="source_code">
-<p>@prefix account: &lt;http://comindware.com/ontology/account#&gt;.<br/>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.<br/>@prefix container: &lt;http://comindware.com/ontology/container#&gt;.</p>
-<p>{<br/>    ("RecordTemplate" "assignee") object:findProperty ?assigneeProp.<br/>    ("Sotrudniki" "LaborCosts") object:findProperty ?LaborCostsProp.<br/>?item ?assigneeProp ?assignee.<br/>  ?polz container:alias "Sotrudniki".<br/>  ?assignee account:extendedBy ?polz.<br/>?assignee ?LaborCostsProp ?value.<br/>}</p>
-</td>
+<td><code>RecordTemplate</code></td>
+<td>Системное имя текущего Шаблона записи.</td>
+</tr>
+<tr>
+<td><code>assignee</code></td>
+<td>Системное имя атрибута типа «<strong>Пользователь</strong>» в текущем Шаблоне записи.</td>
+</tr>
+<tr>
+<td><code>Sotrudniki</code></td>
+<td>Системное имя Шаблона пользователя, на который ссылается <strong>assignee</strong>.</td>
+</tr>
+<tr>
+<td><code>LaborCosts</code></td>
+<td>Системное имя атрибута типа «<strong>Длительность</strong>» в Шаблоне пользователя, значение которого нужно получить.</td>
 </tr>
 </tbody>
 </table>
+</article>
 </div>
-<p><span style="text-decoration: underline;"><strong>где:</strong></span></p>
-<p><strong>RecordTemplate</strong> – системное имя текущего Шаблона записи;</p>
-<p><strong>assignee</strong> – системное имя атрибута типа "Пользователь" в текущем Шаблоне записи;</p>
-<p><strong>Sotrudniki</strong> – системное имя Шаблона пользователя, на который ссылается <strong>assignee</strong>;</p>
-<p><strong>LaborCosts</strong> – системное имя атрибута типа "Длительность" в Шаблоне пользователя, значение которого нужно получить.</p>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

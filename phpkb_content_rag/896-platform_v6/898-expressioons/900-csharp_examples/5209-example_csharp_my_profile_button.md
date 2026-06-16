@@ -2,16 +2,14 @@
 title: 'Кнопка «Мой профиль»'
 kbId: 5209
 url: 'https://kb.comindware.ru/article.php?id=5209'
-updated: '2024-11-07 11:38:50'
+updated: '2026-06-16 19:14:51'
 ---
 
 # Кнопка «Мой профиль»
 
-Для того чтобы разместить на боковую панель навигации ссылку на профиль пользователя, создайте кнопку c операцией C#-скрипт в шаблоне аккаунтов и введите следующее выражение:
+Для того чтобы поместить на боковую панель навигации ссылку на профиль пользователя, создайте кнопку с операцией «**C#-скрипт**» в шаблоне аккаунтов и введите следующее выражение:
 
 ```
- 
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +19,7 @@ using Comindware.TeamNetwork.Api.Data.UserCommands;
 public class Script
 {
 
-    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+    public static UserCommandResult Main(UserCommandContext userCommandContext)
     {
         var result = new UserCommandResult()
         {
@@ -39,6 +37,8 @@ public class Script
 }
 ```
 
-**где:**
+**Здесь:**
 
-**aa.1**   = ID шаблона аккаунтов
+| Значение | Описание |
+| --- | --- |
+| `aa.1` | ID шаблона аккаунтов. |

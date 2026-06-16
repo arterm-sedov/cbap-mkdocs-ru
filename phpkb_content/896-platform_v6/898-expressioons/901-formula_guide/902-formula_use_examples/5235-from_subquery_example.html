@@ -1,16 +1,45 @@
-<h1>Пример подзапроса from</h1><p>Запрос типа<em><strong> from</strong></em> позволяет обращаться к любому Шаблону записи, связанному или несвязанному с текущим, и получать оттуда данные, или настраивать фильтр на основании определенных параметров <em><strong>where</strong></em>. Comindware Platform позволяет также писать подзапросы <em><strong>from</strong></em>, если, например, необходимо дополнительно сравнить определенный параметр с каким-то другим.</p>
-<p>Для того чтобы применить сразу несколько запросов типа <em><strong>from</strong> </em>(в данном примере выражение находит самый последний план (с самым большим номером), ссылающийся на текущий регламент), введите следующее выражение:</p>
-<div>
-<table class="source_code_container">
+<h1>Пример подзапроса from</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5235" kb-tags="атрибуты,пример" kb-title="Пример подзапроса from">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Запрос типа <strong><em>from</em></strong> позволяет обращаться к любому Шаблону записи, связанному или несвязанному с текущим, и получать оттуда данные, или настраивать фильтр на основании определенных параметров <strong><em>where</em></strong>. Comindware Platform позволяет также писать подзапросы <strong><em>from</em></strong>, если, например, необходимо дополнительно сравнить определенный параметр с каким-то другим.</p>
+<p>Для того чтобы применить сразу несколько запросов типа <strong><em>from</em></strong> (в данном примере выражение находит самый последний план (с самым большим номером), ссылающийся на текущий регламент), введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">db</span><span class="o">-&gt;</span><span class="n">Plan</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">Reglament</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="err">$</span><span class="n">id</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="k">EQUALS</span><span class="p">(</span><span class="k">MAX</span><span class="p">((</span><span class="k">from</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">db</span><span class="o">-&gt;</span><span class="n">Plan</span><span class="w">  </span><span class="k">where</span><span class="w"> </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">Reglament</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="err">$</span><span class="n">id</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">Nomer</span><span class="p">)),</span><span class="n">a</span><span class="o">-&gt;</span><span class="n">Nomer</span><span class="p">)</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">id</span></code> <br/></pre></code></div>
+<p><strong>Здесь</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="source_code">from a in db-&gt;Plan where a-&gt;Reglament == $id &amp;&amp; EQUALS(MAX((from b in db-&gt;Plan  where b-&gt;Reglament == $id select b-&gt;Nomer)),a-&gt;Nomer) select a-&gt;id</td>
+<td><code>Plan</code></td>
+<td>Системное имя шаблона записи.</td>
+</tr>
+<tr>
+<td><code>Reglament</code></td>
+<td>Системное имя атрибута типа «<strong>Ссылка</strong>» в шаблоне <code>Plan</code>, который ссылается на текущий шаблон записи.</td>
+</tr>
+<tr>
+<td><code>Nomer</code></td>
+<td>Системное имя атрибута типа «<strong>Число</strong>» в шаблоне <code>Plan</code>.</td>
 </tr>
 </tbody>
 </table>
+<p>Вложенных <code>from</code> может быть сколько угодно. Главное не путать параметры между собой.</p>
+</article>
 </div>
-<p><span style="text-decoration: underline;"><strong>где:</strong></span></p>
-<p><strong>Plan</strong> – системное имя Шаблона записи;</p>
-<p><strong>Reglament</strong> – системное имя атрибута типа «Ссылка» в Plan, ведущего на текущий Шаблон записи;</p>
-<p><strong>Nomer</strong> – системное имя атрибута типа «Число» в Plan.</p>
-<div class="blue_note">Вложенных<em><strong> from</strong></em> может быть сколько угодно. Главное не путать параметры между собой.</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

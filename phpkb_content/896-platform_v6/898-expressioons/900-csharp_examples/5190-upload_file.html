@@ -1,79 +1,39 @@
-<h1>Загрузка файла с компьютера в систему</h1><p>Для того, чтобы добавить файл из локальной папки на компьютере в атрибут с типом данных «Документ», введите следующее выражение:</p>
-<div>
-<table class="source_code_container">
+<h1>Загрузка файла с компьютера в систему</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5190" kb-tags="C#,скрипт,C#-скрипт,пример скрипта" kb-title="Загрузка файла с компьютера в систему">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для того чтобы добавить файл из локальной папки на компьютере в атрибут типа «<strong>Документ</strong>», введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Collections.Generic</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Linq</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.Data.Entity</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.TeamNetwork.Api.Data.UserCommands</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.TeamNetwork.Api.Data</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.IO</span><span class="p">;</span></code> <br/><code><span class="w"> </span></code> <br/><code><span class="k">class</span><span class="w"> </span><span class="nc">Script</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">UserCommandResult</span><span class="w"> </span><span class="n">Main</span><span class="p">(</span><span class="n">UserCommandContext</span><span class="w"> </span><span class="n">userCommandContext</span><span class="p">)</span></code> <br/><code><span class="w">    </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="k">try</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userCommandContext</span><span class="p">.</span><span class="n">ObjectIds</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span></code> <br/><code><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">GetPropertyValues</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="p">[]{</span><span class="n">id</span><span class="p">},</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="p">[]{</span><span class="s">"Putkfaylu"</span><span class="p">});</span></code> <br/><code><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">id</span><span class="p">][</span><span class="s">"Putkfaylu"</span><span class="p">].</span><span class="n">ToString</span><span class="p">();</span></code> <br/><code><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">FileStream</span><span class="p">(</span><span class="n">@path</span><span class="p">,</span><span class="w"> </span><span class="n">FileMode</span><span class="p">.</span><span class="n">OpenOrCreate</span><span class="p">);</span></code> <br/><code><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">arrayTitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">path</span><span class="p">.</span><span class="n">Split</span><span class="p">(</span><span class="sc">'\\\\'</span><span class="p">,</span><span class="sc">'/'</span><span class="p">);</span></code> <br/><code><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">arrayExtension</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">path</span><span class="p">.</span><span class="n">Split</span><span class="p">(</span><span class="sc">'.'</span><span class="p">);</span></code> <br/><code><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">docData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Document</span></code> <br/><code><span class="w">            </span><span class="p">{</span></code> <br/><code><span class="w">                </span><span class="n">Title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arrayTitle</span><span class="p">[</span><span class="n">arrayTitle</span><span class="p">.</span><span class="n">Length</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span></code> <br/><code><span class="w">                </span><span class="n">Extension</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arrayExtension</span><span class="p">[</span><span class="n">arrayExtension</span><span class="p">.</span><span class="n">Length</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></code> <br/><code><span class="w">                </span><span class="p">};</span></code> <br/><code><span class="w">            </span><span class="kt">string</span><span class="w"> </span><span class="n">doc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">DocumentService</span><span class="p">.</span><span class="n">CreateDocumentWithStream</span><span class="p">(</span><span class="n">docData</span><span class="p">,</span><span class="w"> </span><span class="n">fs</span><span class="p">,</span><span class="w"> </span><span class="s">""</span><span class="p">);</span></code> <br/><code><span class="w">            </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">EditWithAlias</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="kt">object</span><span class="o">&gt;</span><span class="p">(</span><span class="err">'</span><span class="n">test</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="n">Undefined</span><span class="p">));</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code><span class="w">        </span><span class="k">catch</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">result1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserCommandResult</span></code> <br/><code><span class="w">            </span><span class="p">{</span></code> <br/><code><span class="w">                </span><span class="n">Success</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">,</span></code> <br/><code><span class="w">                </span><span class="n">Commited</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">,</span></code> <br/><code><span class="w">                </span><span class="n">ResultType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UserCommandResultType</span><span class="p">.</span><span class="n">Notificate</span><span class="p">,</span></code> <br/><code><span class="w">                </span><span class="n">Messages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="p">[]</span></code> <br/><code><span class="w">                </span><span class="p">{</span></code> <br/><code><span class="w">                    </span><span class="k">new</span><span class="w"> </span><span class="n">UserCommandMessage</span></code> <br/><code><span class="w">                    </span><span class="p">{</span></code> <br/><code><span class="w">                        </span><span class="n">Severity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SeverityLevel</span><span class="p">.</span><span class="n">Normal</span><span class="p">,</span></code> <br/><code><span class="w">                        </span><span class="n">Text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Неуспешно"</span></code> <br/><code><span class="w">                        </span><span class="p">}</span></code> <br/><code><span class="w">                </span><span class="p">}</span></code> <br/><code><span class="w">            </span><span class="p">};</span></code> <br/><code><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">result1</span><span class="p">;</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserCommandResult</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="n">Success</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="n">Commited</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="n">ResultType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UserCommandResultType</span><span class="p">.</span><span class="n">Notificate</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="n">Messages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="p">[]</span></code> <br/><code><span class="w">            </span><span class="p">{</span></code> <br/><code><span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">UserCommandMessage</span></code> <br/><code><span class="w">                </span><span class="p">{</span></code> <br/><code><span class="w">                    </span><span class="n">Severity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SeverityLevel</span><span class="p">.</span><span class="n">Normal</span><span class="p">,</span></code> <br/><code><span class="w">                    </span><span class="n">Text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Успешно"</span></code> <br/><code><span class="w">                    </span><span class="p">}</span></code> <br/><code><span class="w">            </span><span class="p">}</span></code> <br/><code><span class="w">        </span><span class="p">};</span></code> <br/><code><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="source_code">
-<p>using System;</p>
-<p>using System.Collections.Generic;</p>
-<p>using System.Linq;</p>
-<p>using Comindware.Data.Entity;</p>
-<p>using Comindware.TeamNetwork.Api.Data.UserCommands;</p>
-<p>using Comindware.TeamNetwork.Api.Data;</p>
-<p>using System.IO;</p>
-<p> </p>
-<p>class Script</p>
-<p>{</p>
-<p>    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)</p>
-<p>    {</p>
-<p>        try</p>
-<p>        {</p>
-<p>            var id = userCommandContext.ObjectIds[0];</p>
-<p>            var data = Api.TeamNetwork.ObjectService.GetPropertyValues(new []{id}, new []{"Putkfaylu"});</p>
-<p>            var path = data[id]["Putkfaylu"].ToString();</p>
-<p>            var fs = new FileStream(@path, FileMode.OpenOrCreate);</p>
-<p>            var arrayTitle = path.Split('\\','/');</p>
-<p>            var arrayExtension = path.Split('.');</p>
-<p>            var docData = new Document</p>
-<p>            {</p>
-<p>                Title = arrayTitle[arrayTitle.Length-1],</p>
-<p>                Extension = arrayExtension[arrayExtension.Length-1]</p>
-<p>                };</p>
-<p>            string doc = Api.TeamNetwork.DocumentService.CreateDocumentWithStream(docData, fs, "");</p>
-<p>            Api.TeamNetwork.ObjectService.EditWithAlias(id, new Dictionary&lt;string,object&gt;{{"test",doc}});</p>
-<p>        }</p>
-<p>        catch</p>
-<p>        {</p>
-<p>            var result1 = new UserCommandResult</p>
-<p>            {</p>
-<p>                Success = true,</p>
-<p>                Commited = true,</p>
-<p>                ResultType = UserCommandResultType.Notificate,</p>
-<p>                Messages = new[]</p>
-<p>                {</p>
-<p>                    new UserCommandMessage</p>
-<p>                    {</p>
-<p>                        Severity = SeverityLevel.Normal,</p>
-<p>                        Text = "Неуспешно"</p>
-<p>                        }</p>
-<p>                }</p>
-<p>            };</p>
-<p>            return result1;</p>
-<p>        }</p>
-<p>        var result = new UserCommandResult</p>
-<p>        {</p>
-<p>            Success = true,</p>
-<p>            Commited = true,</p>
-<p>            ResultType = UserCommandResultType.Notificate,</p>
-<p>            Messages = new[]</p>
-<p>            {</p>
-<p>                new UserCommandMessage</p>
-<p>                {</p>
-<p>                    Severity = SeverityLevel.Normal,</p>
-<p>                    Text = "Успешно"</p>
-<p>                    }</p>
-<p>            }</p>
-<p>        };</p>
-<p>        return result;</p>
-<p>    }</p>
-<p>}</p>
-</td>
+<td><code>Putkfaylu</code></td>
+<td>Системное имя атрибута типа «<strong>Текст</strong>», в котором хранится путь к файлу для загрузки в систему, например <code>C:\\myfolder\\1.cs</code>.</td>
+</tr>
+<tr>
+<td><code>test</code></td>
+<td>Системное имя атрибута типа «<strong>Документ</strong>», в который нужно загрузить файл.</td>
 </tr>
 </tbody>
 </table>
+</article>
 </div>
-<div>
-<p><strong><span style="letter-spacing: 0.2px;">где:</span></strong></p>
-<p><span style="letter-spacing: 0.2px;"><em><strong>Putkfaylu</strong> </em>— системное имя атрибута с типом данных «Текст», который хранит путь к файлу, который нужно загрузить в систему (например, <em>C:\myfolder\1.cs</em>);</span></p>
-<p><span style="letter-spacing: 0.2px;"><em><strong>test</strong> </em>— системное имя атрибута с типом данных «Документ»,  куда нужно загрузить файл.</span></p>
 </div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

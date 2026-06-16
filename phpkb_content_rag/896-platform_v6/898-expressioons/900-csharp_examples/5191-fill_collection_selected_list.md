@@ -1,17 +1,15 @@
 ---
-title: 'Заполнение коллекции выбранным списком'
+title: 'Заполнение коллекции выбранной таблицей'
 kbId: 5191
 url: 'https://kb.comindware.ru/article.php?id=5191'
-updated: '2022-02-18 06:27:47'
+updated: '2026-06-16 19:14:58'
 ---
 
-# Заполнение коллекции выбранным списком
+# Заполнение коллекции выбранной таблицей
 
-Для того, чтобы в рамках процесса заполнить коллекцию в текущем объекте каким-либо списком, введите следующее выражение:
+Для того чтобы в рамках процесса заполнить коллекцию в текущем объекте какой-либо таблицей, введите следующее выражение:
 
 ```
- 
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,14 +19,14 @@ using Comindware.TeamNetwork.Api.Data;
 
 class Script
 {
-    public static void Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities)
+    public static void Main(Comindware.Process.Api.Data.ScriptContext context)
     {     
         var query = new Comindware.TeamNetwork.Api.Data.DatasetQuery
         {
             DatasetId = "lst.53"
         };
         var sessionsData = Api.TeamNetwork.DatasetService.QueryData(query).Rows;
-        if (sessionsData == null) { return; } //проверяем, что в списке есть записи
+        if (sessionsData == null) { return; } //проверяем, что в таблице есть записи
         
         var objectId = context.BusinessObjectId; //текущая запись
         List<string> ApplicationIds = new List<string>();
@@ -46,10 +44,10 @@ class Script
 }
 ```
 
-**где:**
+**Здесь:**
 
-**lst.53** - ИД списка, на основе которого будет заполняться коллекция;
-
-**Applications** - **системное имя атрибута типа Коллекция в текущем Шаблоне записи, которую нужно заполнить в текущем объекте;**
-
-**Register** - системное имя текущего Шаблона записи.
+| Значение | Описание |
+| --- | --- |
+| `lst.53` | ID таблицы, на основе которой будет заполняться коллекция. |
+| `Applications` | Системное имя атрибута типа «**Коллекция**» в текущем шаблоне записи. В этот атрибут нужно записать выбранные записи. |
+| `Register` | Системное имя текущего шаблона записи. |

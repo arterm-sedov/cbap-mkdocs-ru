@@ -2,16 +2,14 @@
 title: 'Очистка значений атрибутов типа Логический и Пользователь'
 kbId: 5206
 url: 'https://kb.comindware.ru/article.php?id=5206'
-updated: '2022-02-18 06:30:08'
+updated: '2026-06-16 19:14:37'
 ---
 
 # Очистка значений атрибутов типа Логический и Пользователь
 
-Для того, чтобы по операции можно было очистить атрибуты типа Логический и Пользователь (например, очистить флаги и ответственных), введите следующее выражение:
+Для того чтобы по кнопке можно было очистить атрибуты типа Логический и Пользователь (например, очистить флаги и ответственных), введите следующее выражение:
 
 ```
- 
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +18,7 @@ using Comindware.TeamNetwork.Api.Data.UserCommands;
 
 public class Script
 {
-    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+    public static UserCommandResult Main(UserCommandContext userCommandContext)
     {
         foreach (var objectId in userCommandContext.ObjectIds)
         {
@@ -55,10 +53,10 @@ public class Script
 }
 ```
 
-**где:**
+**Здесь:**
 
-**indsOwners** - системное имя текущего Шаблона записи;
-
-**noCoordinatorFlag, coordinator, substitutes, dateFrom, taskFlag, assigmentCoordinatorsLink, primaryAssignFlag** - системные имена атрибутов текущей записи, которые нужно очистить;
-
-**Данные успешно обновлены** - сообщение в случае успеха.
+| Значение | Описание |
+| --- | --- |
+| `indsOwners` | Системное имя текущего шаблона записи. |
+| `noCoordinatorFlag`, `coordinator`, `substitutes`, `dateFrom`, `taskFlag`, `assigmentCoordinatorsLink`, `primaryAssignFlag` | Системные имена атрибутов текущей записи, которые нужно очистить. |
+| `Данные успешно обновлены` | Сообщение, которое отобразится при успешном выполнении скрипта. |

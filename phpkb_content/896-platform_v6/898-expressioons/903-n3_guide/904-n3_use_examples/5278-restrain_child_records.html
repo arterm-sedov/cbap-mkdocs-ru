@@ -1,18 +1,39 @@
-<h1>Ограничение отображения дочерних записей в ссылке на родительскую запись</h1><p>Для того чтобы ограничить возможность выбора дочерних элементов какой-то конкретной записи в ссылке на родительскую запись (например, отфильтровывать дочерние работы в ссылке на родительскую работу данной работы), в частности, чтобы избежать зацикливания, введите следующее выражение:</p>
-<div>
-<table class="source_code_container">
+<h1>Ограничение отображения дочерних записей в ссылке на родительскую запись</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5278" kb-tags="N3,выражение на N3,пример" kb-title="Ограничение отображения дочерних записей в ссылке на родительскую запись">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для того чтобы ограничить возможность выбора дочерних элементов какой-то конкретной записи в ссылке на родительскую запись (например, отфильтровывать дочерние работы в ссылке на родительскую работу данной работы), в частности, чтобы избежать зацикливания, введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">assert:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/assert#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">log:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/2000/10/swap/log#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">list:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/2000/10/swap/list#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmw:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics#&gt;</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="p">{</span></code> <br/><code></code> <br/><code>    <span class="p">(</span><span class="s">"Raboty"</span> <span class="s">"Roditelskayarabota"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?refProp</span><span class="p">.</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?refProp</span> <span class="err">?parent</span><span class="p">.</span></code> <br/><code><span class="p">(</span></code> <br/><code>   <span class="p">{</span> <span class="err">?parent</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span>  <span class="p">}</span></code> <br/><code>   <span class="p">{</span> <span class="err">?parent</span> <span class="nn">object</span><span class="p">:</span><span class="nt">pt</span> <span class="err">?colValue</span><span class="p">.</span></code> <br/><code>    <span class="err">?colValue</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span> <span class="p">}</span></code> <br/><code>  <span class="p">)</span> <span class="nn">assert</span><span class="p">:</span><span class="nt">union</span> <span class="l">true</span><span class="p">.</span></code> <br/><code><span class="p">}</span><span class="err">=&gt;</span><span class="p">{</span> <span class="err">?item</span> <span class="nn">object</span><span class="p">:</span><span class="nt">pt</span> <span class="err">?value</span> <span class="p">}.</span></code> <br/><code></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="err">?template</span> <span class="nn">object</span><span class="p">:</span><span class="nt">alias</span> <span class="s">" Raboty "</span><span class="p">.</span></code> <br/><code>    <span class="err">?value</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">container</span> <span class="err">?template</span><span class="p">.</span></code> <br/><code>    <span class="err">not</span><span class="p">{</span> <span class="err">?value</span> <span class="nn">object</span><span class="p">:</span><span class="nt">pt</span> <span class="err">?item</span> <span class="p">}.</span></code> <br/><code>    <span class="err">not</span><span class="p">{</span> <span class="err">?value</span> <span class="err">==</span> <span class="err">?item</span> <span class="p">}.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="source_code">
-<p>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.<br/>@prefix assert: &lt;http://comindware.com/logics/assert#&gt;.<br/>@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt;.<br/>@prefix list: &lt;http://www.w3.org/2000/10/swap/list#&gt;.<br/>@prefix cmw: &lt;http://comindware.com/logics#&gt;.</p>
-<p>{</p>
-<p>    ("Raboty" "Roditelskayarabota") object:findProperty ?refProp.<br/>    ?item ?refProp ?parent.<br/>(<br/>   { ?parent -&gt; ?value.  }<br/>   { ?parent object:pt ?colValue.<br/>    ?colValue -&gt; ?value. } <br/>  ) assert:union true.<br/>}=&gt;{ ?item object:pt ?value }.</p>
-<p><br/>{<br/>    ?template object:alias " Raboty ".<br/>    ?value cmw:container ?template.<br/>    not{ ?value object:pt ?item }.<br/>    not{ ?value == ?item }.<br/>}</p>
-</td>
+<td><code>Raboty</code></td>
+<td>Системное имя текущего Шаблона записи.</td>
+</tr>
+<tr>
+<td><code>Roditelskayarabota</code></td>
+<td>Системное имя ссылки на текущий Шаблон записи (ссылка на родительскую запись).</td>
 </tr>
 </tbody>
 </table>
+</article>
 </div>
-<p><span style="text-decoration: underline;"><strong>где:</strong></span></p>
-<p><strong>Raboty </strong>– системное имя текущего Шаблона записи;</p>
-<p><strong>Roditelskayarabota</strong> – системное имя ссылки на текущий Шаблон записи (ссылка на родительскую запись).</p>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

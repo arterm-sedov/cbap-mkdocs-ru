@@ -1,29 +1,115 @@
-<h1>Календарь праздников. Настройка и использование</h1><p>Для контроля сроков исполнения задач, назначаемых на пользователей, в <strong>Comindware Platform</strong> существует встроенный функционал, который позволяет в настройках задачи указать количество времени, вплоть до секунд, за которое пользователь должен её выполнить. Но бывают случаи, когда сроки, в которые должна быть выполнена задача необходимо установить с учётом рабочих дней.</p>
-<p><span style="color: #000000;">Для этого существуют функции <em><strong>WORKDAYS() </strong></em>и <em><strong>WORKHOURS()</strong></em>, которые возвращают дату на основании количества рабочих дней или часов с определенной даты. </span><span style="color: #000000;">Однако, у этих функций есть ограничение: они учитывают только выходные и не учитывают праздничные дни. Поэтому в данных функциях есть возможность прописать список дат, которые являются нерабочими. Чтобы не прописывать все праздничные даты внутри функции, рекомендуем создать отдельный справочник с календарем выходных и праздничных дней, и при написании выражения с <em><strong>WORKDAYS() </strong></em>и <em><strong>WORKHOURS() </strong></em>ссылаться на него. </span></p>
-<p><span style="color: #000000;"><strong>1.</strong> Создайте шаблон записи «<em>Календарь выходных и праздничных дней</em>».</span></p>
-<p><span style="color: #000000;"><strong>2.</strong> Создайте атрибут с типом данных «Дата и время» и назовите его «<em>Дата</em>».</span></p>
-<p><span style="color: #000000;"><strong>3.</strong> Настройте форму и таблицу, вынеся на них созданный атрибут. </span></p>
-<p><span style="color: #000000;"><strong>4.</strong> Заполните шаблон записи. Перейдите на таблицу, нажмите кнопку «<strong><em>Создать</em></strong>» и в поле «<em>Дата</em>» выберите один из праздничных дней, например, 1 января текущего года. </span></p>
-<p><span style="color: #000000;"><strong>5.</strong> Далее аналогично создайте записи под все праздничные дни, которые есть в текущем году (для последующих лет также нужно будет создать отдельные записи в справочнике).</span></p>
-<p><strong>6.</strong> <span style="color: #000000;">Перейдите в настройки задачи, на которой необходимо установить срок выполнения с учетом рабочих дней. Перейдите на вкладку «<em><strong>Дополнительные</strong></em>», затем выберите в поле «<em><strong>Продолжительность выполнения</strong></em>» вариант «<em>Формула</em>», затем вставьте следующее:</span></p>
-<div>
-<table class="source_code_container">
+<h1>Календарь праздников. Настройка и использование</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5369" kb-tags="атрибуты,кнопки,пример,формулы" kb-title="Календарь праздников. Настройка и использование">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#holiday_calendar_setup">
+<span class="md-ellipsis">
+      
+        Порядок настройки
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#holiday_calendar_sintaksis">
+<span class="md-ellipsis">
+      
+        Синтаксис
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      
+        Связанные статьи
+      
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для контроля сроков исполнения задач, назначаемых на пользователей, в <strong>Comindware Platform</strong> существует встроенный функционал, который позволяет в настройках задачи указать количество времени, вплоть до секунд, за которое пользователь должен её выполнить. Но бывают случаи, когда сроки, в которые должна быть выполнена задача, необходимо установить с учётом рабочих дней.</p>
+<p>Для этого существуют функции <code>WORKDAYS()</code> и <code>WORKHOURS()</code>, которые возвращают дату на основании количества рабочих дней или часов с определённой даты. Однако у этих функций есть ограничение: они учитывают только выходные и не учитывают праздничные дни. Поэтому в данных функциях есть возможность прописать список дат, которые являются нерабочими. Чтобы не прописывать все праздничные даты внутри функции, рекомендуем создать отдельный справочник с календарём выходных и праздничных дней и при написании выражения с <code>WORKDAYS()</code> и <code>WORKHOURS()</code> ссылаться на него.</p>
+<h2 id="holiday_calendar_setup">Порядок настройки</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте шаблон записи <em>«Календарь выходных и праздничных дней»</em>.</p>
+</li>
+<li>
+<p>Создайте атрибут типа «<strong>Дата и время</strong>» и назовите его <em>«Дата»</em>.</p>
+</li>
+<li>
+<p>Настройте форму и таблицу, вынеся на них созданный атрибут.</p>
+</li>
+<li>
+<p>Заполните шаблон записи. Перейдите на таблицу, нажмите кнопку «<strong>Создать</strong>» и в поле <em>«Дата»</em> выберите один из праздничных дней, например, 1 января текущего года.</p>
+</li>
+<li>
+<p>Аналогично создайте записи под все праздничные дни, которые есть в текущем году (для последующих лет также нужно будет создать отдельные записи в справочнике).</p>
+</li>
+<li>
+<p>Перейдите в настройки задачи, на которой необходимо установить срок выполнения с учётом рабочих дней. Перейдите на вкладку «<strong>Дополнительные</strong>», затем выберите в поле «<strong>Продолжительность выполнения</strong>» вариант «<strong>Формула</strong>» и вставьте следующее:</p>
+</li>
+</ol>
+<div class="highlight"><code><pre><span></span><code><span class="n">WORKHOURS</span><span class="p">(</span><span class="n">NOW</span><span class="p">(),</span><span class="mi">18</span><span class="p">,</span><span class="n">DURATION</span><span class="p">(</span><span class="ss">"PT9H"</span><span class="p">),</span><span class="n">DURATION</span><span class="p">(</span><span class="ss">"PT9H"</span><span class="p">),</span><span class="n">LIST</span><span class="p">((</span><span class="k">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">db</span><span class="o">-&gt;</span><span class="n">holliday_calendar</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="k">Data</span><span class="p">)))</span></code> <br/></pre></code></div>
+<h2 id="holiday_calendar_sintaksis">Синтаксис</h2>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="source_code"><span style="color: #000000;">WORKHOURS(NOW(),18,DURATION("PT9H"),DURATION("PT9H"),LIST((from a in db-&gt;holliday_calendar select a-&gt;Data)))</span></td>
+<td><code>holliday_calendar</code></td>
+<td>Системное имя шаблона записи, созданного в п. 1.</td>
+</tr>
+<tr>
+<td><code>Data</code></td>
+<td>Системное имя атрибута, созданного в п. 2.</td>
 </tr>
 </tbody>
 </table>
-</div>
-<p><strong><span style="color: #000000;">где:</span></strong></p>
-<p><span style="color: #000000;"><em><strong>holiday_calendar</strong></em> — системное имя шаблона записи, созданного в п.1;</span></p>
-<p><span style="color: #000000;"><em><strong>Data</strong> </em>— системное имя атрибута, созданного в п.2.</span></p>
-<p><span style="color: #000000;">Данная формула расшифровывается следующим образом: начиная с текущего момента (когда процесс создал задачу), отсчитай 18 рабочих часов (продолжительность выполнения задачи), учитывая, что рабочий день стартует в 9 часов утра и длится 9 часов, и учитывая все исключения, указанные в календаре праздников.</span></p>
-<p><span style="color: #000000;">Т.е. если задача будет создана 22 февраля 2023 года в 09:00, то с учетом календаря праздников и выражения, которое указано в настройках задачи, крайний срок выполнения задачи будет указан 27 февраля 2023 года в 18:00.</span></p>
+<p>Данная формула расшифровывается следующим образом: начиная с текущего момента (когда процесс создал задачу), отсчитай 18 рабочих часов (продолжительность выполнения задачи), учитывая, что рабочий день стартует в 9 часов утра и длится 9 часов, и учитывая все исключения, указанные в календаре праздников.</p>
+<p>То есть если задача будет создана 22 февраля 2023 года в 09:00, то с учётом календаря праздников и выражения, указанного в настройках задачи, крайний срок выполнения задачи будет указан 27 февраля 2023 года в 18:00.</p>
 <div class="notice notice-info">
 <p class="admonition-title">Примечание</p>
 <ul>
-<li>Продолжительность рабочего дня, то есть сумма третьего и четвёртого аргументов функции <code>WORKHOURS()</code>, не может превышать 24 часа</li>
-<li><span style="color: #000000;">Если в календарь праздников добавить выходной день (субботу или воскресенье), то при вычислении выражения он будет рассматриваться как рабочий.</span></li>
+<li>Продолжительность рабочего дня, то есть сумма третьего и четвёртого аргументов функции <code>WORKHOURS()</code>, не может превышать 24 часа.</li>
+<li>Если в календарь праздников добавить выходной день (субботу или воскресенье), то при вычислении выражения он будет рассматриваться как рабочий.</li>
 </ul>
 </div>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/category.php?id=901">Язык формул</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5701">Атрибут типа «Дата и время»</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5666">Пользовательская задача</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

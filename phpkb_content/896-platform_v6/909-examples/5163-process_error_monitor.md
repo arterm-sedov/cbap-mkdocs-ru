@@ -2,7 +2,7 @@
 title: 'Ошибки в процессе. Отслеживание с помощью списка экземпляров и уведомлений'
 kbId: 5163
 url: 'https://kb.comindware.ru/article.php?id=5163'
-updated: '2025-08-06 18:41:21'
+updated: '2026-06-16 19:14:22'
 ---
 
 # Ошибки в процессе. Отслеживание с помощью списка экземпляров и уведомлений
@@ -62,7 +62,7 @@ updated: '2025-08-06 18:41:21'
 
    class Script
    {
-       public static string Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities)
+       public static string Main(Comindware.Process.Api.Data.ScriptContext context)
        {
            // Добавьте входные данные.
            int Result = 0;
@@ -102,11 +102,7 @@ updated: '2025-08-06 18:41:21'
    | Поток «иначе» | Конечная точка | Условие |
    | --- | --- | --- |
    | Флажок установлен | Пользовательская задача *«Ошибка выполнения скрипта»* |  |
-   |  | Следующий этап процесса | **Формула:** |
-
-   ```
-   $ErrorMonitoring == "Нет ошибок выполнения скрипта"
-   ```
+   |  | Следующий этап процесса | **Формула:** ``` $ErrorMonitoring == "Нет ошибок выполнения скрипта" ``` |
 8. Настройте остальные действия процесса согласно бизнес-логике.
 
 _![Диаграмма процесса с использованием задачи «Ошибка выполнения скрипта»](/platform/v6.0/business_apps/diagrams/process_diagram/img/process_debug_process_diagram.png)_

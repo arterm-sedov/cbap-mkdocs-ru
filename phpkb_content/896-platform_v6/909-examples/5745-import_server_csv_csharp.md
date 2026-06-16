@@ -2,7 +2,7 @@
 title: 'Импорт данных из CSV-файла на сервере'
 kbId: 5745
 url: 'https://kb.comindware.ru/article.php?id=5745'
-updated: '2026-06-09 16:48:57'
+updated: '2026-06-16 19:18:36'
 ---
 
 # Импорт данных из CSV-файла на сервере
@@ -140,7 +140,7 @@ class Script
         };
     }
 
-    public static void Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities)
+    public static void Main(Comindware.Process.Api.Data.ScriptContext context)
     {
         // Path to the CSV file on the server.
         // Use a UNC path for a shared network folder, e.g.:

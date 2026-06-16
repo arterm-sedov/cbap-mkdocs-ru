@@ -1,14 +1,30 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5278" kb-tags="" kb-title="Ограничение отображения дочерних записей в ссылке на родительскую запись">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5278" kb-tags="N3,выражение на N3,пример" kb-title="Ограничение отображения дочерних записей в ссылке на родительскую запись">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <p>Для того чтобы ограничить возможность выбора дочерних элементов какой-то конкретной записи в ссылке на родительскую запись (например, отфильтровывать дочерние работы в ссылке на родительскую работу данной работы), в частности, чтобы избежать зацикливания, введите следующее выражение:</p>
-<div class="highlight"><code><pre><span></span><code>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.</code> <br/><code>@prefix assert: &lt;http://comindware.com/logics/assert#&gt;.</code> <br/><code>@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt;.</code> <br/><code>@prefix list: &lt;http://www.w3.org/2000/10/swap/list#&gt;.</code> <br/><code>@prefix cmw: &lt;http://comindware.com/logics#&gt;.</code> <br/><code></code> <br/><code>{</code> <br/><code></code> <br/><code>    ("Raboty" "Roditelskayarabota") object:findProperty ?refProp.</code> <br/><code>    ?item ?refProp ?parent.</code> <br/><code>(</code> <br/><code>   { ?parent -&gt; ?value.  }</code> <br/><code>   { ?parent object:pt ?colValue.</code> <br/><code>    ?colValue -&gt; ?value. }</code> <br/><code>  ) assert:union true.</code> <br/><code>}=&gt;{ ?item object:pt ?value }.</code> <br/><code></code> <br/><code>{</code> <br/><code>    ?template object:alias " Raboty ".</code> <br/><code>    ?value cmw:container ?template.</code> <br/><code>    not{ ?value object:pt ?item }.</code> <br/><code>    not{ ?value == ?item }.</code> <br/><code>}</code> <br/></pre></code></div>
-<p><strong>где:</strong></p>
-<p><strong>Raboty</strong> – системное имя текущего Шаблона записи;</p>
-<p><strong>Roditelskayarabota</strong> – системное имя ссылки на текущий Шаблон записи (ссылка на родительскую запись).</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">assert:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/assert#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">log:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/2000/10/swap/log#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">list:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/2000/10/swap/list#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmw:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics#&gt;</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="p">{</span></code> <br/><code></code> <br/><code>    <span class="p">(</span><span class="s">"Raboty"</span> <span class="s">"Roditelskayarabota"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?refProp</span><span class="p">.</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?refProp</span> <span class="err">?parent</span><span class="p">.</span></code> <br/><code><span class="p">(</span></code> <br/><code>   <span class="p">{</span> <span class="err">?parent</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span>  <span class="p">}</span></code> <br/><code>   <span class="p">{</span> <span class="err">?parent</span> <span class="nn">object</span><span class="p">:</span><span class="nt">pt</span> <span class="err">?colValue</span><span class="p">.</span></code> <br/><code>    <span class="err">?colValue</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span> <span class="p">}</span></code> <br/><code>  <span class="p">)</span> <span class="nn">assert</span><span class="p">:</span><span class="nt">union</span> <span class="l">true</span><span class="p">.</span></code> <br/><code><span class="p">}</span><span class="err">=&gt;</span><span class="p">{</span> <span class="err">?item</span> <span class="nn">object</span><span class="p">:</span><span class="nt">pt</span> <span class="err">?value</span> <span class="p">}.</span></code> <br/><code></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="err">?template</span> <span class="nn">object</span><span class="p">:</span><span class="nt">alias</span> <span class="s">" Raboty "</span><span class="p">.</span></code> <br/><code>    <span class="err">?value</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">container</span> <span class="err">?template</span><span class="p">.</span></code> <br/><code>    <span class="err">not</span><span class="p">{</span> <span class="err">?value</span> <span class="nn">object</span><span class="p">:</span><span class="nt">pt</span> <span class="err">?item</span> <span class="p">}.</span></code> <br/><code>    <span class="err">not</span><span class="p">{</span> <span class="err">?value</span> <span class="err">==</span> <span class="err">?item</span> <span class="p">}.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Raboty</code></td>
+<td>Системное имя текущего Шаблона записи.</td>
+</tr>
+<tr>
+<td><code>Roditelskayarabota</code></td>
+<td>Системное имя ссылки на текущий Шаблон записи (ссылка на родительскую запись).</td>
+</tr>
+</tbody>
+</table>
 </article>
 </div>
 </div>

@@ -2,58 +2,66 @@
 title: 'Фильтр записей в коллекции по заданному параметру'
 kbId: 5270
 url: 'https://kb.comindware.ru/article.php?id=5270'
-updated: '2023-12-21 14:51:42'
+updated: '2026-06-16 19:16:48'
 ---
 
 # Фильтр записей в коллекции по заданному параметру
 
-В этой статье будет описано как с помощью языка запросов N3 можно фильтровать данные в коллекции по какому-либо параметру, определённому в текущей записи.
+Здесь приведён пример фильтрации записей в коллекции с помощью выражения N3 по параметру, заданному в текущей записи.
 
-Для начала рассмотрим модель данных:
+## Прикладная задача
 
-- Шаблон записи (в нашем примере «Organizatsii»), хранящий мастер-данные, со следующими атрибутами:
-  1. Атрибут (в нашем примере «Filtrpooblasti» с типом данных «Текст»), в котором будет определен параметр для поиска записей в коллекции;
-  2. Атрибут с типом данных «Коллекция» (в нашем примере «Adresaofisov\_col»), коллекция, записи в которой будут фильтроваться.
-- Шаблон записи (в нашем примере «Adresa»), хранящий записи в коллекции, со следующими атрибутами:
-  1. Атрибут (в нашем примере «Oblast» с типом данных «Текст»), по которому будет осуществляться фильтрация.
+Необходимо отобразить в коллекции только те адреса офисов, у которых область совпадает со значением, указанным в текущей записи организации.
 
-Далее, на конструкторе формы кликните на коллекцию и вставьте следующее выражение в «Фильтры записей: Для отображения»:
+## Модель данных
+
+| Шаблон записи | Атрибут | Назначение |
+| --- | --- | --- |
+| `Organizatsii` | `Filtrpooblasti` — атрибут типа «**Текст**» | Хранит область, по которой требуется отфильтровать коллекцию. |
+| `Organizatsii` | `Adresaofisov_col` — атрибут типа «**Запись**» с несколькими значениями | Хранит коллекцию адресов офисов. |
+| `Adresa` | `Oblast` — атрибут типа «**Текст**» | Хранит область, по которой фильтруются адреса. |
+
+## Настройка фильтра
+
+1. Откройте форму шаблона записи `Organizatsii` в конструкторе формы.
+2. Выберите коллекцию `Adresaofisov_col`.
+3. В поле «**Фильтр записей: для отображения**» вставьте следующее выражение:
 
 ```
 @prefix object: <http://comindware.com/ontology/object#>.
-
 {
+   ("Adresa" "Oblast") object:findProperty ?PropertyOblast.
+   ("Organizatsii" "Adresaofisov_col") object:findProperty ?PropertyAdresaofisov_col.
+   ("Organizatsii" "Filtrpooblasti") object:findProperty ?PropertyOblastFilter.
 
-   ("Adresa" "Oblast") object:findProperty ?PropertyOblast.
-
-   ("Organizatsii" "Adresaofisov_col") object:findProperty ?PropertyAdresaofisov_col.
-
-   ("Organizatsii" "Filtrpooblasti") object:findProperty ?PropertyOblastFilter.
-
- 
-
-   ?item ?PropertyOblastFilter ?filter.
-
-   ?item ?PropertyAdresaofisov_col ?result_A.
-
-   ?result_A ?PropertyOblast ?filter.
-
-   ?result_A -> ?value.
-
+   ?item ?PropertyOblastFilter ?filter.
+   ?item ?PropertyAdresaofisov_col ?result_A.
+   ?result_A ?PropertyOblast ?filter.
+   ?result_A -> ?value.
 }
 ```
 
-Теперь разберём выражение на N3 построчно:
+## Разбор выражения
 
-- ***@prefix object: <http://comindware.com/ontology/object#>*** — в первой строке подключаем библиотеку «object» для того, чтобы в последующем можно было использовать её свойство «findProperty».
-- ***("Adresa" "Oblast") object:findProperty ?PropertyOblast.*** — в строках 3-5 определяем переменные-предикаты, через которые будем получать значения атрибутов. Сначала указываем системное имя шаблона записи, затем системное имя атрибута, значение которого хотим получить: (***"Adresa" "Oblast"***). Затем используем свойство библиотеки «object:findProperty», чтобы получить ID атрибута в какую-либо переменную, например, «PropertyOblast» (названия переменных задаются произвольно).
-- ***?item ?PropertyOblastFilter ?filter.*** — в 7-ой строке происходит следующее: из текущей записи («item») по свойству «PropertyOblastFilter» получаем значение в переменную «filter» (название переменной также задаём произвольно).
+| Фрагмент | Описание |
+| --- | --- |
+| `@prefix object: <http://comindware.com/ontology/object#>.` | Подключает префикс `object`, чтобы использовать свойство `object:findProperty`. |
+| `("Adresa" "Oblast") object:findProperty ?PropertyOblast.` | Получает ID атрибута `Oblast` из шаблона `Adresa` и записывает его в переменную `PropertyOblast`. |
+| `("Organizatsii" "Adresaofisov_col") object:findProperty ?PropertyAdresaofisov_col.` | Получает ID атрибута `Adresaofisov_col` из шаблона `Organizatsii` и записывает его в переменную `PropertyAdresaofisov_col`. |
+| `("Organizatsii" "Filtrpooblasti") object:findProperty ?PropertyOblastFilter.` | Получает ID атрибута `Filtrpooblasti` из шаблона `Organizatsii` и записывает его в переменную `PropertyOblastFilter`. |
+| `?item ?PropertyOblastFilter ?filter.` | Получает из текущей записи значение атрибута `Filtrpooblasti` и записывает его в переменную `filter`. |
+| `?item ?PropertyAdresaofisov_col ?result_A.` | Получает из текущей записи значения атрибута `Adresaofisov_col` и записывает список записей коллекции в переменную `result_A`. |
+| `?result_A ?PropertyOblast ?filter.` | Оставляет в списке `result_A` только записи, у которых значение атрибута `Oblast` совпадает со значением переменной `filter`. |
+| `?result_A -> ?value.` | Передаёт отфильтрованные записи в переменную `value`, чтобы отобразить их в коллекции. |
 
-**Примечание :** в языке запросов N3 присутствуют зарезервированные переменные: «item» и «value». «item» — содержит в себе ID записи, в рамках которой отрабатывает выражение (изначальный контекст). «value» — используется для вывода результата тройки.
+Зарезервированные переменные N3
 
-- ***?item ?PropertyAdresaofisov\_col ?result\_A.*** — аналогичное действие происходит и в 8-ой строке: из текущей записи получаем значение атрибута «Adresaofisov\_col» в переменную «result\_A». Так как этот атрибут является коллекцией, то в «result\_A» у нас будет содержаться список записей в коллекции.
-- ***?result\_A ?PropertyOblast ?filter.*** — в 9-ой строке для всего списка записей «result\_A» мы получаем значения по свойству «PropertyOblast». Справа у нас уже определено значение («filter»), поэтому в списке останутся только те записи, у которых значение атрибута «Oblast» совпадает со значением в атрибуте «Filtrpooblasti».
-- ***?result\_A -> ?value.*** — в 10-ой строке выводим результат в «value», после чего можем наблюдать отфильтрованную коллекцию.
+В выражениях N3 используются зарезервированные переменные:
+
+- `item` — ID записи, в контексте которой выполняется выражение;
+- `value` — результат выражения.
+
+## Результат
 
 _![Пример фильтрации записей в коллекции](https://kb.comindware.ru/assets/N3_11.PNG)_
 

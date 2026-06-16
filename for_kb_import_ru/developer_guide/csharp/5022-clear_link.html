@@ -1,15 +1,34 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5201" kb-tags="" kb-title="Очистка ссылки">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5201" kb-tags="C#,скрипт,C#-скрипт,пример скрипта" kb-title="Очистка ссылки">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<p>Для того, чтобы на входе на задачу очистить ссылку, введите следующее выражение:</p>
-<div class="highlight"><code><pre><span></span><code> </code> <br/><code></code> <br/><code>using System;</code> <br/><code>using System.Collections.Generic;</code> <br/><code>using System.Linq;</code> <br/><code>using Comindware.Data.Entity;</code> <br/><code>using Comindware.TeamNetwork.Api.Data.UserCommands;</code> <br/><code>using Comindware.TeamNetwork.Api.Data;</code> <br/><code></code> <br/><code>class Script</code> <br/><code>{</code> <br/><code>    public static void Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities)</code> <br/><code>    {</code> <br/><code>    </code> <br/><code>    Dictionary&lt;string, object&gt; d = new Dictionary&lt;string, object&gt;();</code> <br/><code>    d["SoglasovanoLink"] = null;</code> <br/><code>    Api.TeamNetwork.ObjectService.EditWithAlias("StoreOpeningLocation", context.BusinessObjectId, d);</code> <br/><code>  }</code> <br/><code>}</code> <br/></pre></code></div>
-<p><strong>где:</strong></p>
-<p><strong>SoglasovanoLink</strong>  = системное имя атрибута-ссылка (при необходимости можно указать в столбец несколько ссылок);</p>
-<p><strong>Location</strong>  = системное имя текущего шаблона записи.</p>
-<p>Данное выражение не сделает ссылку EMPTY, а всего лишь заменит её на какое-то пустое значение. Если Вы хотите сделать ссылку полностью пустой, создайте в текущем шаблоне записи ссылку на любой из шаблонов и при входе на задачу заполните нужную Вам ссылку вновь созданной (которая всегда будет пустой).</p>
+<p>Для того чтобы на входе на задачу очистить ссылку, введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Collections.Generic</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Linq</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.Data.Entity</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.TeamNetwork.Api.Data.UserCommands</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.TeamNetwork.Api.Data</span><span class="p">;</span></code> <br/><code></code> <br/><code><span class="k">class</span><span class="w"> </span><span class="nc">Script</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="n">Main</span><span class="p">(</span><span class="n">Comindware</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">ScriptContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span></code> <br/><code><span class="w">    </span><span class="p">{</span></code> <br/><code><span class="w">    </span></code> <br/><code><span class="w">    </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">object</span><span class="o">&gt;</span><span class="p">();</span></code> <br/><code><span class="w">    </span><span class="n">d</span><span class="p">[</span><span class="s">"SoglasovanoLink"</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">;</span></code> <br/><code><span class="w">    </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">EditWithAlias</span><span class="p">(</span><span class="s">"StoreOpeningLocation"</span><span class="p">,</span><span class="w"> </span><span class="n">context</span><span class="p">.</span><span class="n">BusinessObjectId</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">);</span></code> <br/><code><span class="w">  </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SoglasovanoLink</code></td>
+<td>Системное имя атрибута типа «<strong>Запись</strong>». При необходимости можно указать несколько таких атрибутов в столбец.</td>
+</tr>
+<tr>
+<td><code>Location</code></td>
+<td>Системное имя текущего шаблона записи.</td>
+</tr>
+</tbody>
+</table>
+<div class="notice notice-info">
+<p class="admonition-title">Очистка ссылки</p>
+<p>Этот скрипт не делает ссылку <code>EMPTY</code>, а заменяет её на пустое значение. Если требуется сделать ссылку полностью пустой, создайте в текущем шаблоне записи ссылку на любой шаблон и при входе на задачу заполните нужную ссылку вновь созданной, которая всегда будет пустой.</p>
+</div>
 </article>
 </div>
 </div>

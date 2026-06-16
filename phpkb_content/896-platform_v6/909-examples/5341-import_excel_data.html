@@ -1,26 +1,147 @@
-<h1>Импорт связанных данных из таблицы Excel</h1><p>Импорт данных — это стандартная операция в рамках <strong>Comindware Platform</strong>. Можно импортировать данные в любой из существующих шаблонов записи и даже устанавливать связи между записями из разных шаблонов. В данной статье мы рассмотрим как раз импорт связанных данных, а именно, заполнение таблицы в записи из excel файла.</p>
-<p>Таблица на форме записи — это, по сути, отфильтрованная таблица из связанного шаблона записи. Каждая строка таблицы, то есть, запись в шаблоне записи, ссылается на основной объект, где отображается таблица. Поэтому, для того чтобы данные из таблицы Excel перенеслись в таблицу на форме, нужно импортировать таблицу Excel в шаблон записи, на который ссылается таблица, и в отдельном столбце указать значение ссылки на главный объект (либо в виде ИД, либо значения в отображаемом атрибуте, который указан в системе). Таким образом, импортированные записи будут сразу привязаны к основному объекту, и таблица в нём заполнится автоматически, без лишних настроек.</p>
-<p> </p>
-<p><strong>Пример</strong></p>
-<p>В качестве примера, импортируем Excel таблицу заявок к каждому клиенту. Для этого в системе созданы шаблон записи «<em>Клиенты</em>» и шаблон записи «<em>Заказы</em>». В «<em>Заказах</em>» есть ссылка на «<em>Клиенты</em>», а в «<em>Клиентах</em>» — связанная ссылка с отмеченным флагом «<em><strong>Несколько значений</strong></em>» — <span style="color: #333333; font-family: 'Open Sans', sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 100; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">«</span><em>Заказы клиента</em><span style="color: #333333; font-family: 'Open Sans', sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 100; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">»</span>.</p>
-<p>Excel таблица для импорта выглядит примерно так:</p>
-<div class="screenshot_with_caption">
-<p><img align="" alt="Пример Excel таблицы" class="img-responsive" height="124" src="https://kb.comindware.ru/assets/excel_table_import.png" width="558"/></p>
-<p class="caption">Пример Excel таблицы</p>
+<h1>Импорт связанных данных из таблицы Excel</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5341" kb-tags="Excel,импорт,связанные данные,таблицы,шаблоны записей" kb-title="Импорт связанных данных из таблицы Excel">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#import_excel_data_logic">
+<span class="md-ellipsis">
+      
+        Принцип работы
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#import_excel_data_example">
+<span class="md-ellipsis">
+      
+        Пример настройки
+      
+    </span>
+</a>
+<nav aria-label="Пример настройки" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#import_excel_data_prepare_file">
+<span class="md-ellipsis">
+      
+        Подготовка файла Excel
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#import_excel_data_import_orders">
+<span class="md-ellipsis">
+      
+        Импорт заказов
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#import_excel_data_result">
+<span class="md-ellipsis">
+      
+        Результат
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      
+        Связанные статьи
+      
+    </span>
+</a>
+</li>
+</ul>
 </div>
-<p>В столбце «<em>Клиент</em>» в данном случае указаны названия клиентов, заведенных в системе.</p>
-<p>В разделе<em><strong> «Импорт»</strong></em> шаблона записи «<em>Заказы</em>» загружаем данную таблицу Excel и настраиваем соответствие столбцов таблицы с атрибутами шаблона записи. Указываем формат <em><strong>name</strong></em> напротив «<em>Клиента</em>», соответствующий отображаемому атрибуту в данном шаблоне записи. Указываем напротив поля «<em>Сумма</em>» формат «<em><strong>Валюта</strong></em>».</p>
-<div class="screenshot_with_caption">
-<p><img align="" alt="Настройка импорта таблицы Excel" class="img-responsive" height="775" src="https://kb.comindware.ru/assets/2021-12-30_13h46_19.png" width="1350"/></p>
-<p class="caption">Настройка импорта таблицы Excel</p>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Здесь приведён пример импорта связанных данных из файла Excel в <strong>Comindware Platform</strong>.</p>
+<p>Такой импорт удобно использовать, когда требуется загрузить записи в связанный шаблон и сразу отобразить их в таблице на форме основной записи.</p>
+<h2 id="import_excel_data_logic">Принцип работы</h2>
+<p>Таблица на форме записи отображает записи из связанного шаблона. Каждая строка такой таблицы является отдельной записью, которая ссылается на основную запись.</p>
+<p>Чтобы заполнить таблицу на форме с помощью Excel:</p>
+<ol class="colored_numbers_list">
+<li>Импортируйте файл Excel в связанный шаблон записи.</li>
+<li>
+<p>Укажите в отдельном столбце файла значение для связи с основной записью:</p>
+<ul>
+<li><strong>ID</strong> основной записи;</li>
+<li>значение её <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5709">атрибута-заголовка</a>, если оно используется как формат сопоставления <strong>Name</strong>.</li>
+</ul>
+</li>
+</ol>
+<p>После импорта записи будут связаны с основной записью, а таблица на её форме заполнится автоматически.</p>
+<h2 id="import_excel_data_example">Пример настройки</h2>
+<p>В примере требуется импортировать заказы клиентов из Excel.</p>
+<p>В приложении созданы два шаблона записи:</p>
+<ul>
+<li><em>Клиенты</em> — основной шаблон записи;</li>
+<li><em>Заказы</em> — связанный шаблон записи.</li>
+</ul>
+<p>В шаблоне <em>«Заказы»</em> настроен атрибут типа «<strong>Запись</strong>», который ссылается на шаблон <em>«Клиенты»</em>. В шаблоне <em>«Клиенты»</em> настроен связанный атрибут <em>«Заказы клиента»</em> с включённым хранением нескольких значений.</p>
+<h3 id="import_excel_data_prepare_file">Подготовка файла Excel</h3>
+<p>Подготовьте файл Excel со столбцами заказов и отдельным столбцом для связи с клиентом.</p>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример таблицы Excel для импорта заказов" src="https://kb.comindware.ru/assets/excel_table_import.png"/></p><figcaption class="caption">Пример таблицы Excel для импорта заказов</figcaption>
+</figure>
+<p>В столбце <em>«Клиент»</em> укажите названия клиентов, уже созданных в <strong>Comindware Platform</strong>. Эти значения должны совпадать со значениями атрибута-заголовка записей в шаблоне <em>«Клиенты»</em>.</p>
+<h3 id="import_excel_data_import_orders">Импорт заказов</h3>
+<ol class="colored_numbers_list">
+<li>Откройте шаблон записи <em>«Заказы»</em>.</li>
+<li>Перейдите на вкладку «<strong>Импорт</strong>».</li>
+<li>Загрузите подготовленный файл Excel.</li>
+<li>Настройте сопоставление столбцов Excel с атрибутами шаблона <em>«Заказы»</em>.</li>
+<li>Для столбца <em>«Клиент»</em> выберите атрибут типа «<strong>Запись</strong>», который ссылается на шаблон <em>«Клиенты»</em>.</li>
+<li>В поле «<strong>Формат</strong>» для столбца <em>«Клиент»</em> выберите <strong>Name</strong>.</li>
+<li>Для столбца <em>«Сумма»</em> выберите формат «<strong>Валюта</strong>».</li>
+<li>Нажмите кнопку «<strong>Загрузить</strong>».</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Настройка импорта таблицы Excel" src="https://kb.comindware.ru/assets/2021-12-30_13h46_19.png"/></p><figcaption class="caption">Настройка импорта таблицы Excel</figcaption>
+</figure>
+<h2 id="import_excel_data_result">Результат</h2>
+<p>После импорта в шаблоне <em>«Заказы»</em> появятся новые записи со связью с соответствующими клиентами.</p>
+<figure class="screenshot_with_caption">
+<p><img alt="Импортированные записи в шаблоне «Заказы»" src="https://kb.comindware.ru/assets/2021-12-30_13h48_11.png"/></p><figcaption class="caption">Импортированные записи в шаблоне «Заказы»</figcaption>
+</figure>
+<p>Таблица <em>«Заказы клиента»</em> на форме записи в шаблоне <em>«Клиенты»</em> заполнится автоматически.</p>
+<figure class="screenshot_with_caption">
+<p><img alt="Таблица заказов клиента" src="https://kb.comindware.ru/assets/2021-12-30_13h49_38.png"/></p><figcaption class="caption">Таблица заказов клиента</figcaption>
+</figure>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5737">Импорт данных в шаблон</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5718">Атрибут типа «Запись»</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5709">Атрибут-заголовок записей шаблона</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5693">Шаблон записи</a></li>
+</ul>
 </div>
-<p>В шаблоне записи «<em>Заказы</em>» появились новые записи, с проставленной связью к определенному клиенту.</p>
-<div class="screenshot_with_caption">
-<p><img align="" alt='Таблица в шаблоне записи "Заявки"' class="img-responsive" height="553" src="https://kb.comindware.ru/assets/2021-12-30_13h48_11.png" width="1350"/></p>
-<p class="caption">Таблица в шаблоне записи "Заявки"</p>
+</article>
 </div>
-<p>В свою очередь, таблица «<em>Заявки клиента</em>» в «<em>Клиентах</em>» выглядит следующим образом:</p>
-<div class="screenshot_with_caption">
-<p><img align="" alt="Таблица заказов клиента" class="img-responsive" height="676" src="https://kb.comindware.ru/assets/2021-12-30_13h49_38.png" width="1350"/></p>
-<p class="caption">Таблица заказов клиента</p>
 </div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

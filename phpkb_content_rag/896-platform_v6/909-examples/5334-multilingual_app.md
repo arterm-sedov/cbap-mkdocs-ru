@@ -2,7 +2,7 @@
 title: 'Интерфейс на нескольких языках. Настройка приложения'
 kbId: 5334
 url: 'https://kb.comindware.ru/article.php?id=5334'
-updated: '2025-03-31 17:30:04'
+updated: '2026-06-16 19:18:37'
 ---
 
 # Интерфейс на нескольких языках. Настройка приложения
@@ -149,7 +149,7 @@ updated: '2025-03-31 17:30:04'
    using Comindware.Data;
    class Script
    {
-       public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+       public static UserCommandResult Main(UserCommandContext userCommandContext)
        {
            // Получаем ID аккаунта текущего пользователя.
            var id = userCommandContext.ObjectIds[0];
@@ -206,7 +206,7 @@ updated: '2025-03-31 17:30:04'
    using Comindware.Data;
    class Script
    {
-       public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+       public static UserCommandResult Main(UserCommandContext userCommandContext)
        {
            // Получаем ID аккаунта текущего пользователя.
            var id = userCommandContext.ObjectIds[0];

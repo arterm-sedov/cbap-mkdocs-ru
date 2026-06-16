@@ -2,7 +2,7 @@
 title: 'Локальная переменная в C#-скрипте и сценарии. Использование для копирования данных между шаблонами'
 kbId: 5376
 url: 'https://kb.comindware.ru/article.php?id=5376'
-updated: '2024-08-14 14:08:17'
+updated: '2026-06-16 19:18:41'
 ---
 
 # Локальная переменная в C#-скрипте и сценарии. Использование для копирования данных между шаблонами
@@ -76,7 +76,7 @@ updated: '2024-08-14 14:08:17'
 6. Вынесите локальную переменную *«Конкурс»* на форму диалогового окна и сохраните её.
 7. На вкладке «**Скрипт**» вставьте следующий код:
 
-   ```
+   Скрипт, использующий локальную переменную сценария```
    using System;
    using System.Collections.Generic;
    using System.Linq;
@@ -86,7 +86,7 @@ updated: '2024-08-14 14:08:17'
 
    class Script
    {
-       public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+       public static UserCommandResult Main(UserCommandContext userCommandContext)
        {
            var data = userCommandContext.LocalVariables;
            string konkursId = "";
@@ -132,6 +132,7 @@ updated: '2024-08-14 14:08:17'
                if (data_selectId[selectId].ContainsKey("Tsena"))
                                data_new.Add("Tsena", data_selectId[selectId]["Tsena"]);
                data_new.Add("Produktsiyanazakupku", data_selectId[selectId]["id"]);
+
                // Если конкурс выбран, проставляем ссылку на него в текущую позицию
                if (konkursId != "")
                {
@@ -206,22 +207,20 @@ updated: '2024-08-14 14:08:17'
     | *Единица измерения* | **Заменить** | **Атрибут:** *Исходная позиция→Единица измерения* |
     | *Цена* | **Заменить** | **Атрибут:** *Исходная позиция→Цена* |
 
-    ![Сценарий с использованием локальной переменной](https://kb.comindware.ru/assets/script_using_local_variable_scenario.png)
-
-    Сценарий с использованием локальной переменной
+_![Сценарий с использованием локальной переменной](/platform/v6.0/examples/img/script_using_local_variable_scenario.png)_
 
 ## Тестирование
 
 1. Создайте и заполните несколько записей в шаблоне *«Номенклатура продукции»*.
 
-   ![Добавление позиций из справочника продукции в конкурс](https://kb.comindware.ru/assets/script_using_local_variable_add_items_from_registry.png)
+   ![Добавление позиций из справочника продукции в конкурс](/platform/v6.0/examples/img/script_using_local_variable_add_items_from_registry.png)
 
    Добавление позиций из справочника продукции в конкурс
 2. Создайте запись в шаблоне *«Конкурсы»*, например *«Конкурс №1»*.
 3. Выберите одну или несколько позиций в таблице *«Номенклатура продукции»* и нажмите кнопку *«Добавить позиции в конкурс»*.
 4. Выберите *«Конкурс №1»* в раскрывающемся в списке и нажмите кнопку *«Добавить позиции в конкурс»*.
 
-   ![Выбор конкурса для добавления позиций](https://kb.comindware.ru/assets/script_using_local_variable_select_tender.png)
+   ![Выбор конкурса для добавления позиций](/platform/v6.0/examples/img/script_using_local_variable_select_tender.png)
 
    Выбор конкурса для добавления позиций
 5. Откройте запись *«Конкурс №1»*.
@@ -230,14 +229,11 @@ updated: '2024-08-14 14:08:17'
 8. Сохраните запись.
 9. Удостоверьтесь, что исходные цены в справочнике остались неизменными.
 
-   ![Отображение добавленных позиций в конкурсе](https://kb.comindware.ru/assets/script_using_local_variable_tender_positions.png)
-
-   Отображение добавленных позиций в конкурсе
+_![Отображение добавленных позиций в конкурсе](/platform/v6.0/examples/img/script_using_local_variable_tender_positions.png)_
 
 --8<-- "related_topics_heading.md"
 
-**[Кнопки. Определения, настройка, удаление][buttons]**
-
-**[Написание скриптов на языке C#][csharp_guide]**
+- *[Кнопки. Определения, настройка, удаление][buttons]*
+- *[Написание скриптов на языке C#][csharp_guide]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

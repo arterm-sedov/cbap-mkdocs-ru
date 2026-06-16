@@ -1,17 +1,39 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5207" kb-tags="" kb-title="Изменение статуса и завершение пользовательской задачи">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5207" kb-tags="C#,C#-скрипт,атрибуты,кнопки,скрипт" kb-title="Изменение статуса и завершение пользовательской задачи">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<p>Для того, чтобы по кнопке можно было менять статус записи и завершать связанную с ней пользовательскую задачу, введите следующее выражение:</p>
+<p>Для того чтобы по кнопке можно было менять статус записи и завершать связанную с ней пользовательскую задачу, введите следующее выражение:</p>
 <div class="highlight"><code><pre><span></span><code>using System;</code> <br/><code>using System.Collections.Generic;</code> <br/><code>using System.Linq;</code> <br/><code>using Comindware.Data.Entity;</code> <br/><code>using Comindware.TeamNetwork.Api.Data.UserCommands;</code> <br/><code>using Comindware.TeamNetwork.Api.Data;</code> <br/><code></code> <br/><code>public class Script</code> <br/><code>{</code> <br/><code>    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)</code> <br/><code>    {</code> <br/><code>        var objectId = userCommandContext.ObjectIds.FirstOrDefault();       </code> <br/><code>        var disapprovedStatus = entities.ApplicationStatus.Where(x =&gt; x.Name == "Отменена").Select(x =&gt; x.id).FirstOrDefault();</code> <br/><code>        var data = new Dictionary&lt;string, object&gt;</code> <br/><code>        {</code> <br/><code>            { "ApprovalStatus", disapprovedStatus }</code> <br/><code>        };</code> <br/><code>        Api.TeamNetwork.ObjectService.EditWithAlias("SingleApproval", objectId, data);</code> <br/><code>        var result = new UserCommandResult</code> <br/><code>        {</code> <br/><code>            Success = true,</code> <br/><code>            Commited = true,</code> <br/><code>            ResultType = UserCommandResultType.DataChange,</code> <br/><code>            Messages = new[]</code> <br/><code>            {</code> <br/><code>                new UserCommandMessage</code> <br/><code>                {</code> <br/><code>                    Severity = SeverityLevel.Normal,</code> <br/><code>                    Text = "Application disapproved"</code> <br/><code>                    }</code> <br/><code>            }</code> <br/><code>        };</code> <br/><code>        var activeTask = Api.Process.ProcessObjectService.GetReferencedTasks(objectId).Where(x =&gt; x.Status == UserTaskStatus.InProgress).FirstOrDefault().Id;</code> <br/><code>        Api.TeamNetwork.UserTaskService.Complete(activeTask, true);</code> <br/><code>        return result;</code> <br/><code>    }</code> <br/><code>}</code> <br/></pre></code></div>
-<p><strong>где:</strong></p>
-<p><strong>Отменена</strong> - значение, на которое нужно поменять статус;</p>
-<p><strong>ApprovalStatus</strong> - системное имя атрибута типа Ссылка в текущем Шаблоне записи на Шаблон записи, где хранятся значения статусов;</p>
-<p><strong>SingleApproval</strong> - системное имя текущего Шаблона записи;</p>
-<p><strong>Application disapproved</strong> - текст сообщения, которое высветится пользователю в случае успешного исполнения скрипта.</p>
-<p><strong>Примечание :</strong> скрипт работает только с одной записью (выбирает первую запись, если на списке было выбрано несколько элементов). Для обработки нескольких записей скрипт нужно дописать.</p>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Отменена</code></td>
+<td>Значение, на которое нужно поменять статус.</td>
+</tr>
+<tr>
+<td><code>ApprovalStatus</code></td>
+<td>Системное имя атрибута типа «<strong>Ссылка</strong>» в текущем шаблоне записи на шаблон записи, где хранятся значения статусов.</td>
+</tr>
+<tr>
+<td><code>SingleApproval</code></td>
+<td>Системное имя текущего шаблона записи.</td>
+</tr>
+<tr>
+<td><code>Application disapproved</code></td>
+<td>Текст сообщения, которое отобразится пользователю после успешного выполнения скрипта.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Примечание:</strong> скрипт работает только с одной записью (выбирает первую запись, если в таблице было выбрано несколько элементов). Для обработки нескольких записей скрипт нужно дописать.</p>
 </article>
 </div>
 </div>

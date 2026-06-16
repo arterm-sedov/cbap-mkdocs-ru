@@ -1,13 +1,13 @@
 ---
-title: 'Выгрузка списка в локальную папку'
+title: 'Выгрузка таблицы в локальную папку'
 kbId: 5196
 url: 'https://kb.comindware.ru/article.php?id=5196'
-updated: '2022-02-18 06:27:11'
+updated: '2026-06-16 19:15:12'
 ---
 
-# Выгрузка списка в локальную папку
+# Выгрузка таблицы в локальную папку
 
-Для того, чтобы можно было в процессе экспортировать определенный список в excel и помещать файл в локальную папку, введите следующее выражение:
+Для того чтобы можно было в процессе экспортировать определенную таблицу в Excel и помещать файл в локальную папку, введите следующее выражение:
 
 ```
 using System;
@@ -18,7 +18,7 @@ using Comindware.TeamNetwork.Api.Data;
 using System.IO;
 class Script
 {
-    public static void Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities)
+    public static void Main(Comindware.Process.Api.Data.ScriptContext context)
     {
         // get sessions object app
         var sessionsObjectAppId = Api.TeamNetwork.ObjectAppService.List().First(oa => oa.Alias == "Issue").Id;
@@ -37,7 +37,7 @@ class Script
         var exportData = Api.TeamNetwork.DatasetExportService.ExportToExcel(receptionQuery);
 
         // save document to current folder
-        using (var fs = new System.IO.FileStream(@"\\storage\Temp\4AP11\CurrentSprint.xlsx", System.IO.FileMode.Create))
+        using (var fs = new System.IO.FileStream(@"\\\\storage\\Temp\\4AP11\\CurrentSprint.xlsx", System.IO.FileMode.Create))
         {
             exportData.Stream.Position = 0;
             exportData.Stream.CopyTo(fs);
@@ -45,14 +45,12 @@ class Script
 
     }
 }
-
- 
 ```
 
-**где:**
+**Здесь:**
 
-**Issue** - системное имя Шаблона записи, где нужно взять список для выгрузки;
-
-**CurrentSprint** - системное имя списка для выгрузки;
-
-**\\storage\Temp\4AP11\CurrentSprint.xlsx** - путь для выгрузки и имя выгружаемого файла.
+| Значение | Описание |
+| --- | --- |
+| `Issue` | Системное имя шаблона записи, из которого нужно выгрузить таблицу. |
+| `CurrentSprint` | Системное имя таблицы для выгрузки. |
+| `\\\\storage\\Temp\\4AP11\\CurrentSprint.xlsx` | Путь для выгрузки и имя выгружаемого файла. |

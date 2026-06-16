@@ -1,26 +1,39 @@
-<h1>Вычисление значения из объекта, инициировавшего триггер</h1><p>Для того, чтобы вычислить какое-либо значение объекта, по которому был запущен текущий триггер (например, чтобы проставить значение из изначальной записи), введите следующее выражение:</p>
-<div>
-<table class="source_code_container">
+<h1>Вычисление значения из объекта, инициировавшего триггер</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5280" kb-tags="N3,атрибуты,выражение на N3,пример" kb-title="Вычисление значения из объекта, инициировавшего триггер">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для того чтобы вычислить какое-либо значение объекта, по которому был запущен текущий триггер (например, чтобы проставить значение из изначальной записи), введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwsession:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">var:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session/variable#&gt;</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="p">{</span></code> <br/><code>   <span class="p">(</span><span class="s">"TimesheetPlan"</span> <span class="s">"Performer"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?propTimesheetPerformer</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="nn">cmwsession</span><span class="p">:</span><span class="nt">context</span> <span class="nn">cmwsession</span><span class="p">:</span><span class="nt">origin</span> <span class="err">?planWork</span><span class="p">.</span></code> <br/><code>    <span class="err">?planWork</span> <span class="err">?propTimesheetPerformer</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="source_code">
-<p>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.</p>
-<p>@prefix cmwsession: &lt;http://comindware.com/ontology/session#&gt;.</p>
-<p>@prefix var: &lt;http://comindware.com/ontology/session/variable#&gt;.</p>
-<p> </p>
-<p>{</p>
-<p>   ("TimesheetPlan" "Performer") object:findProperty ?propTimesheetPerformer.</p>
-<p>    </p>
-<p>    cmwsession:context cmwsession:origin ?planWork. </p>
-<p>    ?planWork ?propTimesheetPerformer ?value.</p>
-<p>}</p>
-</td>
+<td><code>TimesheetPlan</code></td>
+<td>Системное имя Шаблона записи, в рамках которого было инициировано событие.</td>
+</tr>
+<tr>
+<td><code>Performer</code></td>
+<td>Системное имя атрибута в <strong>TimesheetPlan</strong>, значение которого нужно получить.</td>
 </tr>
 </tbody>
 </table>
+</article>
 </div>
-<div>
-<p><span style="text-decoration: underline;"><strong>где:</strong></span></p>
-<p><strong>TimesheetPlan</strong> – системное имя Шаблона записи, в рамках которого было инициировано событие;</p>
-<p><strong>Performer</strong> – системное имя атрибута в <strong>TimesheetPlan</strong>, значение которого нужно получить.</p>
 </div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>
