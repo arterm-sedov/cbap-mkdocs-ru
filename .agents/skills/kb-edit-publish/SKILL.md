@@ -65,6 +65,23 @@ git push
 
 Use the commit message format from the `cmwhelp-commit` skill. Extract the ticket number from the branch name or recent commits.
 
+### 6. Sync platform assets (optional)
+
+If the edited article includes new or updated images, sync them to the PHPKB static assets repo:
+
+```bash
+# Copy images and auto-commit-push to PHPKB repo
+python3 phpkb_copy_images.py --git
+
+# Also pull on production server after push
+python3 phpkb_copy_images.py --git --pull
+
+# Specify a different version (default: v6.0)
+python3 phpkb_copy_images.py --version v5.0 --git --pull
+```
+
+Requires `CMW_KB_REPO_PATH` and `CMW_SSH_*` set in `.env`. See `phpkb-ingestion` skill for details.
+
 ## Troubleshooting
 
 - **Build fails**: check `install/requirements.txt`, verify `.venv` with `.\.venv\Scripts\python.exe -c "import mkdocs"`.

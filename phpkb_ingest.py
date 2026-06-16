@@ -11,7 +11,18 @@ from datetime import datetime
 import re
 import os
 import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+from dotenv import load_dotenv
 from phpkb_ingest_utils import build_content, build_summary, build_tree, iter_markdown_files
+
+load_dotenv(Path(__file__).resolve().parent / ".env")
+
+SERVER_PROFILE = os.getenv("SERVER_PROFILE", "cmw").lower()
+PROFILE_PREFIX = {"cmw": "CMW_", "cmwlab": "CMWLAB_"}.get(SERVER_PROFILE, "CMW_")
+DEFAULT_KB_REPO_PATH = os.getenv(f"{PROFILE_PREFIX}KB_REPO_PATH", "/var/www/html")
 
 # Defaults: V6 RAG export (markdown-only) and kb.comindware.ru platform v6.0 folder
 DEFAULT_FOLDER = os.path.join("phpkb_content_rag", "896-platform_v6")
@@ -96,6 +107,31 @@ def parse_args():
         action="store_true",
         help="Do not copy the bundle to --target-dir (only write --output in repo root).",
     )
+    parser.add_argument(
+        "--git",
+        action="store_true",
+        help="Git add-commit-push the bundle in the PHPKB repo after copying",
+    )
+    parser.add_argument(
+        "--pull",
+        action="store_true",
+        help="SSH into production server and git pull after push",
+    )
+    parser.add_argument(
+        "--no-ask",
+        action="store_true",
+        help="Skip confirmation prompts for git and pull",
+    )
+    parser.add_argument(
+        "--kb-repo-path",
+        default=DEFAULT_KB_REPO_PATH,
+        help=f"PHPKB repo root path for git operations (default: {DEFAULT_KB_REPO_PATH})",
+    )
+    parser.add_argument(
+        "--version",
+        choices=["v4.7", "v5.0", "v6.0"],
+        help="Platform version for git commit message (derived from --target-dir if omitted)",
+    )
     return parser.parse_args()
 
 
@@ -159,6 +195,7 @@ if __name__ == "__main__":
         )
         f.write("## HYPERLINKS MAP\n" + snippet_content)
 
+    copy_done = False
     if not args.no_copy:
         try:
             os.makedirs(kb_target_dir, exist_ok=True)
@@ -166,5 +203,20 @@ if __name__ == "__main__":
             print(f"Copying {output_filename} to: {kb_target_dir}")
             shutil.copyfile(output_filename, target_path)
             print(f"File copied to: {target_path}")
+            copy_done = True
         except Exception as copy_error:
             print(f"Failed to copy {output_filename} to {kb_target_dir}: {copy_error}")
+
+    if args.git and copy_done:
+        version = args.version or os.path.basename(os.path.normpath(kb_target_dir))
+        subprocess.run([
+            sys.executable, str(Path(__file__).resolve().parent / "utilities/git_sync.py"),
+            "--repo-path", args.kb_repo_path,
+            "--patterns", f"platform/{version}/" + os.path.basename(output_filename),
+            "--message", f"Update platform {version} ingestion bundle",
+        ] + (["--no-ask"] if args.no_ask else []))
+
+    if args.pull and copy_done:
+        subprocess.run([
+            sys.executable, str(Path(__file__).resolve().parent / "utilities/ssh_pull.py"),
+        ] + (["--no-ask"] if args.no_ask else []))

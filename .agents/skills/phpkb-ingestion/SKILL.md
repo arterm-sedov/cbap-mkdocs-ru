@@ -32,9 +32,11 @@ Dependencies are listed in `install/requirements.txt` (`pyyaml`, `tiktoken`, and
 | Script | Purpose | Main side effects |
 | --- | --- | --- |
 | `phpkb_import_for_rag.py` | Pull PHPKB articles/categories from DB into `phpkb_content_rag/`. Markdown-only export; no MkDocs link/product transforms. | DB read via SSH tunnel; writes/updates `.md` files under `phpkb_content_rag/`. |
-| `phpkb_ingest.py` | Bundle the RAG tree into one LLM-oriented Markdown file by deterministically reading Markdown files as UTF-8 text. | Writes `kb.comindware.ru.platform_v6_for_llm_ingestion.md`; copies to `kb.comindware.ru/platform/v6.0/`. |
+| `phpkb_ingest.py` | Bundle the RAG tree into one LLM-oriented Markdown file. Supports `--git` and `--pull` for auto-sync. | Writes `kb.comindware.ru.platform_v6_for_llm_ingestion.md`; copies to `--target-dir`. |
 | `phpkb_ingest_cmw_lab.py` | Same bundling flow for CMW Lab / v4 content. | Writes `kb.cmwlab.com.platform_v4_for_llm_ingestion.md`. |
 | `phpkb_import.py` | Pull PHPKB articles/categories into the MkDocs-oriented `phpkb_content/` tree. | DB read via SSH tunnel; rewrites Markdown/HTML files under `phpkb_content/`. |
+| `utilities/git_sync.py` | Git add-commit-push assets in the PHPKB repo with interactive ticket prompt. Used by `--git` flag. | Commits and pushes staged files in `CMW_KB_REPO_PATH`. |
+| `utilities/ssh_pull.py` | SSH into production server and git pull the PHPKB repo. Used by `--pull` flag. | Connects via `CMW_SSH_*` credentials, runs `git pull` remotely. |
 
 ## Default V6 Workflow
 
@@ -77,10 +79,27 @@ Skip copying the bundle to `kb.comindware.ru/platform/v6.0/`:
 | `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md` | Appended to the bundle as `## HYPERLINKS MAP` |
 | `mkdocs_ru.yml` | Source for `kbArticleURLPrefix` / `kbCategoryURLPrefix` in the bundle |
 
-The `kb.comindware.ru/platform/v6.0` path is expected to be a local junction or
+Set `CMW_KB_REPO_PATH` in `.env` (e.g. `CMW_KB_REPO_PATH=/var/www/html`) to target
+the PHPKB repo directly instead of using a junction. Scripts then copy assets into
+`{CMW_KB_REPO_PATH}/platform/{version}/` and can auto-commit-push them.
+
+Alternatively, the `kb.comindware.ru/platform/v6.0` path can be a local junction or
 symlink to the external PHPKB web asset checkout. Do not commit machine-specific
 absolute targets; verify the link with `Get-Item ... | Format-List LinkType,Target`
 when troubleshooting copy/publish behavior.
+
+## .env Configuration
+
+Copy `.env.example` to `.env` and set at minimum:
+
+| Variable | Purpose |
+| --- | --- |
+| `CMW_KB_REPO_PATH` | Local PHPKB repo path (e.g. `/var/www/html`). Used by `--git` to commit/push assets. |
+| `CMW_SSH_HOST` | Production server hostname. |
+| `CMW_SSH_USERNAME` | SSH user for production server. |
+| `CMW_SSH_KB_REPO_PATH` | PHPKB repo path on the production server (e.g. `/var/www/html`). Used by `--pull`. |
+
+See `.env.example` for the full list (SQL, ports, cmwlab profile).
 
 ## Import CLI Notes
 
@@ -114,36 +133,70 @@ Token estimates intentionally mirror the previous `gitingest` behavior:
 `tiktoken.get_encoding("o200k_base")` over `tree + content`, formatted as raw
 tokens, `k`, or `M`.
 
+New flags in `phpkb_ingest.py`:
+
+- `--git` — auto-commit-push the copied bundle in `CMW_KB_REPO_PATH`.
+- `--pull` — SSH into production and git pull after push.
+- `--no-ask` — skip all confirmation prompts (for CI / fully automated runs).
+- `--kb-repo-path` — override `CMW_KB_REPO_PATH` from `.env`.
+- `--version` — version string for commit message (e.g. `v6.0`). Derived from `--target-dir` if omitted.
+
 Legacy V5 bundle from the 798 tree:
 
 ```powershell
-.\.venv\Scripts\python.exe phpkb_ingest.py --folder phpkb_content_rag/798-platform_v5 --output kb.comindware.ru.platform_v5_for_llm_ingestion.md --target-dir kb.comindware.ru/platform/v5.0 --category-id 798
+.\.venv\Scripts\python.exe phpkb_ingest.py --folder phpkb_content_rag/798-platform_v5 --output kb.comindware.ru.platform_v5_for_llm_ingestion.md --target-dir kb.comindware.ru/platform/v5.0 --category-id 798 --git
 ```
 
 Adjust `--folder` to match the actual `798-*` directory name under `phpkb_content_rag/`.
 
-## Publishing the bundle
+## Publishing the bundle with git auto-sync
 
 After `phpkb_ingest.py` completes, the bundle is updated in **two locations** that are **separate git repos**:
 
 1. **Root repo** — `kb.comindware.ru.platform_v6_for_llm_ingestion.md` (tracked in this repo)
-2. **Junction target repo** — the external checkout linked via junction/symlink at `kb.comindware.ru/platform/v6.0/`
+2. **PHPKB static assets repo** (`CMW_KB_REPO_PATH`) — copy at `platform/{version}/` (tracked in the PHPKB repo)
 
-Both repos need to be committed and pushed independently:
+### Automated workflow (recommended)
+
+Uses `phpkb_ingest.py --git` to auto-commit-push the bundle in the PHPKB repo after copy:
+
+```bash
+# Build bundle and git-sync the copy to PHPKB repo
+python3 phpkb_ingest.py --git
+
+# Also SSH into production and git pull after push
+python3 phpkb_ingest.py --git --pull
+
+# Skip ticket prompt for fully automated runs
+python3 phpkb_ingest.py --git --pull --no-ask
+```
+
+The `--git` flag runs `utilities/git_sync.py` which:
+1. Stages new/changed files in `CMW_KB_REPO_PATH/platform/{version}/`
+2. Shows a default commit message: `[#auto] Update platform v{version} ingestion bundle`
+3. Prompts: "Ticket number? (Enter to keep 'auto', or type a number)"
+4. Commits and pushes to the PHPKB remote
+
+The `--pull` flag runs `utilities/ssh_pull.py` which:
+1. Connects to the production server via `CMW_SSH_*` credentials
+2. Shows confirmation: "SSH into host and run: git -C {remote_path} pull? [Y/n]"
+3. On confirmation, executes the remote pull
+
+### Manual workflow (fallback)
 
 ```powershell
 # Root repo
 git add kb.comindware.ru.platform_v6_for_llm_ingestion.md
-git commit -m "chore: update platform v6 RAG ingestion bundle"
+git commit -m "[#ticket] Update platform v6 RAG ingestion bundle"
 git push
 
-# Junction target repo (verify the target path with Get-Item first)
-git -C "<junction-target-path>" add platform/v6.0/kb.comindware.ru.platform_v6_for_llm_ingestion.md
-git -C "<junction-target-path>" commit -m "chore: update platform v6 RAG ingestion bundle"
-git -C "<junction-target-path>" push
+# PHPKB assets repo
+git -C "$CMW_KB_REPO_PATH" add platform/v6.0/kb.comindware.ru.platform_v6_for_llm_ingestion.md
+git -C "$CMW_KB_REPO_PATH" commit -m "[#ticket] Update platform v6 RAG ingestion bundle"
+git -C "$CMW_KB_REPO_PATH" push
 ```
 
-Do **not** force-add the gitignored junction folder to the root repo — commit in each repo separately.
+Do **not** force-add the gitignored junction folder `kb.comindware.ru/` to the root repo — commit in each repo separately.
 
 ## Verification
 
