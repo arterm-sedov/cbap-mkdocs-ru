@@ -85,6 +85,27 @@ The venv and WeasyPrint/GTK3 PDF toolchain have several non-obvious pitfalls on 
 - @.agents/skills/mkdocs-pdf-build/SKILL.md
 - @.agents/skills/kb-edit-publish/SKILL.md
 
+## Skills Reference
+
+AGENTS.md defines writing and formatting rules. End-to-end workflows live in skills. Load the relevant skill when a task matches its description.
+
+| Task | Skill |
+|---|---|
+| Edit article, rebuild HTML, publish to PHPKB, commit | `kb-edit-publish` |
+| Refresh RAG corpus from PHPKB, build LLM ingestion bundle | `phpkb-ingestion` |
+| Install GTK3, build PDF guides on Windows | `mkdocs-pdf-build` |
+| Clone PHPKB categories/articles, sync IDs and links | `phpkb-cloning` |
+| Add an article to mkdocs YAML navigation | `mkdocs_add_file` |
+| Format git commit messages | `cmwhelp-commit` |
+| Fix broken venv, verify mkdocs plugin imports | `python-env-setup` |
+| Generate styled PDFs from Excel/CSV/JSON data | `generate-pdf-from-source` |
+| Search KB for N3/Turtle/C# references | `search-knowledge-base` |
+| Write N3/Turtle/RDF expressions | `n3_references` |
+| Write C# scripts for Comindware Platform | `csharp_api` |
+| Document discoveries after non-trivial tasks | `self-evolution` |
+
+Skills are under `.agents/skills/<name>/SKILL.md`. Do not duplicate skill content here — load the skill and follow its workflow.
+
 ## LINK FORMATTING
 
 **External links:** use `[link title][article_anchor]` not `[link title](article.md)` links. Where `article_anchor` is `h1 anchor` from `article.md`. Take the the anchors as named references from @hyperlinks_mkdocs_to_kb_map.md
