@@ -1,0 +1,35 @@
+<h1>Переход в объект с витрины</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5187" kb-tags="C#,скрипт,C#-скрипт,пример скрипта" kb-title="Переход в объект с витрины">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для того чтобы по кнопке можно было перейти из карточки товара на витрине на форму объекта, введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span><span class="w"> </span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Collections.Generic</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Linq</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.Data.Entity</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.TeamNetwork.Api.Data.UserCommands</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.TeamNetwork.Api.Data</span><span class="p">;</span></code> <br/><code></code> <br/><code><span class="k">class</span><span class="w"> </span><span class="nc">Script</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">UserCommandResult</span><span class="w"> </span><span class="n">Main</span><span class="p">(</span><span class="n">UserCommandContext</span><span class="w"> </span><span class="n">userCommandContext</span><span class="p">)</span></code> <br/><code><span class="w">    </span><span class="p">{</span><span class="w"> </span></code> <br/><code><span class="w">                    </span><span class="kt">var</span><span class="w"> </span><span class="n">objectid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userCommandContext</span><span class="p">.</span><span class="n">ObjectIds</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserCommandResult</span><span class="p">()</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code></code> <br/><code><span class="w">            </span><span class="n">Success</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="n">Messages</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="k">null</span><span class="p">,</span></code> <br/><code></code> <br/><code><span class="w">            </span><span class="n">ResultType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UserCommandResultType</span><span class="p">.</span><span class="n">Navigate</span><span class="w"> </span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="n">NavigationResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserCommandNavigationResult</span></code> <br/><code><span class="w">            </span><span class="p">{</span></code> <br/><code><span class="w">                </span><span class="n">ContainerId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"oa.8"</span><span class="p">,</span></code> <br/><code><span class="w">                </span><span class="n">ObjectId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">objectid</span><span class="p">,</span></code> <br/><code><span class="w">                </span><span class="n">Context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ContextType</span><span class="p">.</span><span class="n">Record</span></code> <br/><code><span class="w">            </span><span class="p">}</span></code> <br/><code><span class="w">        </span><span class="p">};</span></code> <br/><code><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>oa.8</code></td>
+<td>ID шаблона записи, в котором находятся объекты из витрины.</td>
+</tr>
+</tbody>
+</table>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

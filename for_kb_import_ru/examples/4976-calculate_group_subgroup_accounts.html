@@ -1,15 +1,26 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4976" kb-tags="" kb-title="Вычисление всех пользователей группы и её подгрупп">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5221" kb-tags="пример" kb-title="Вычисление всех пользователей группы и её подгрупп">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
-<nav aria-label="Содержание" class="md-nav md-nav--secondary">
-</nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<p>Для того, чтобы получить всех пользователей из определенной группы, включая пользователей подгрупп первого уровня, которые включены в состав указанной группы, введите следующее выражение:</p>
-<div class="highlight"><code><pre><span></span><code>UNION(from a in (from b in db-&gt;_AccountGroup where b-&gt;groupName == "Менеджеры" select b-&gt;subGroups-&gt;id) select a-&gt;cmw.account.groupUsers,</code> <br/><code>    (from b in db-&gt;_AccountGroup where b-&gt;groupName == "Менеджеры" select b-&gt;cmw.account.groupUsers))</code> <br/></pre></code></div>
-<p><strong>где:</strong></p>
-<p><strong>"Менеджеры"</strong> — название группы, пользователей которой требуется получить.</p>
+<p>Для того чтобы получить всех пользователей из определенной группы, включая пользователей подгрупп первого уровня, которые включены в состав указанной группы, введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">UNION</span><span class="p">(</span><span class="k">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="k">from</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">db</span><span class="o">-&gt;</span><span class="n">_AccountGroup</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">groupName</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">"Менеджеры"</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">subGroups</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">cmw</span><span class="p">.</span><span class="n">account</span><span class="p">.</span><span class="n">groupUsers</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="p">(</span><span class="k">from</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">db</span><span class="o">-&gt;</span><span class="n">_AccountGroup</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">groupName</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">"Менеджеры"</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">b</span><span class="o">-&gt;</span><span class="n">cmw</span><span class="p">.</span><span class="n">account</span><span class="p">.</span><span class="n">groupUsers</span><span class="p">))</span></code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"Менеджеры"</td>
+<td>Название группы, пользователей которой требуется получить.</td>
+</tr>
+</tbody>
+</table>
 <p>Альтернатива статье <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4938">Вычисление всех пользователей группы и её подгрупп</a>.</p>
 </article>
 </div>

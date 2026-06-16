@@ -1,0 +1,24 @@
+---
+title: 'Вычисление всех аккаунтов группы'
+kbId: 5246
+url: 'https://kb.comindware.ru/article.php?id=5246'
+updated: '2026-06-16 19:18:16'
+---
+
+# Вычисление всех аккаунтов группы
+
+Для вычисления аккаунтов, входящих в определённую группу без учёта подгрупп и их участников (в случае, если в группе нет вложенности), введите следующее выражение:
+
+```
+(from ag in db->_AccountGroup where OR (ag->groupName == "users",ag->groupName == "admins") select ag->groupUsers->id)
+```
+
+**Здесь:**
+
+| Значение | Описание |
+| --- | --- |
+| "users", "admins" | Названия групп. |
+
+Альтернатива статье [Вычисление всех пользователей группы](https://kb.comindware.ru/article.php?id=4936).
+
+{% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

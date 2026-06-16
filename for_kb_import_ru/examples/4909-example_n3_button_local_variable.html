@@ -1,41 +1,96 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4909" kb-tags="" kb-title="Локальная переменная. Использование для массовой обработки записей">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5368" kb-tags="N3,атрибуты,выражение на N3,кнопки,пример" kb-title="Локальная переменная. Использование для массовой обработки записей">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
 <nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_button_local_variable_ishodnye_dannye">
+<span class="md-ellipsis">
+      
+        Исходные данные
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#example_n3_button_local_variable_setup">
+<span class="md-ellipsis">
+      
+        Порядок настройки
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      
+        Связанные статьи
+      
+    </span>
+</a>
+</li>
+</ul>
+</div>
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<p>В Comindware Platform можно настроить возможность массовой обработки несколько записей в таблице, например, если нужно поменять статус у нескольких заявок одновременно, подтвердить оплату нескольких счетов и т. д. В данной статье рассмотрен пример массового назначения исполнителей по заявкам и последующий запуск процесса по каждой из заявок.</p>
+<p>В <strong>Comindware Platform</strong> можно настроить возможность массовой обработки нескольких записей в таблице, например, если нужно поменять статус у нескольких заявок одновременно, подтвердить оплату нескольких счетов и т. д. В данной статье рассмотрен пример массового назначения исполнителей по заявкам и последующего запуска процесса по каждой из заявок.</p>
 <p>Так как невозможно при выборе нескольких записей открывать какую-либо форму (форма показывает только атрибуты одной записи), предлагается использовать механизм локальных переменных. В локальную переменную можно поместить некоторое значение, которое потом можно применить или продублировать для всех выбранных записей.</p>
-<p><strong>Исходные данные:</strong></p>
+<h2 id="example_n3_button_local_variable_ishodnye_dannye">Исходные данные</h2>
 <ul>
-<li>Шаблон записи «Заявки».</li>
-<li>Атрибут «Ответственный» в шаблоне записи «Заявки» (тип данных — Аккаунт).</li>
-<li>Шаблон процесса «Исполнение заявки».</li>
+<li>Шаблон записи <em>«Заявки»</em>.</li>
+<li>Атрибут <em>«Ответственный»</em> в шаблоне записи <em>«Заявки»</em> (тип данных — «<strong>Аккаунт</strong>»).</li>
+<li>Шаблон процесса <em>«Исполнение заявки»</em>.</li>
 </ul>
-<p><strong>Настройка:</strong></p>
-<p><strong>1.</strong> В шаблоне записи «Заявки» создайте кнопку со следующими параметрами:</p>
+<h2 id="example_n3_button_local_variable_setup">Порядок настройки</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>В шаблоне записи <em>«Заявки»</em> создайте кнопку со следующими параметрами:</p>
 <ul>
-<li>Отображаемое название — Назначить исполнителя;</li>
-<li>Контекст операции — Запись;</li>
-<li>Операция — Сохранить;</li>
-<li>Результат выполнения — Обновить данные;</li>
-<li>Отображать диалоговое окно — отметьте чекбокс.</li>
+<li><strong>Отображаемое название</strong> — <em>Назначить исполнителя</em>;</li>
+<li><strong>Контекст кнопки</strong> — <strong>Запись</strong>;</li>
+<li><strong>Тип кнопки</strong> — <strong>Сохранить</strong>;</li>
+<li><strong>Результат выполнения</strong> — <strong>Обновить данные</strong>;</li>
+<li><strong>Отображать диалоговое окно</strong> — флажок установлен.</li>
 </ul>
-<p>Сохраните настройки кнопки и перейдите во вкладку «Локальные переменные». Создайте переменную «Исполнитель» (тип данных — Аккаунт).</p>
-<p>Перейдите во вкладку «Свойства» и нажмите на «Настроить диалоговое окно». Вынесите на центральную область созданную локальную переменную. Сохраните настройки и вынесите кнопку на область кнопок для таблиц.</p>
-<p><strong>2.</strong> Перейдите в настройки приложения и нажмите «Сценарии». Создайте новый сценарий со следующими параметрами:</p>
+<p>Сохраните настройки кнопки и перейдите на вкладку «<strong>Локальные переменные</strong>». Создайте переменную <em>«Исполнитель»</em> (тип данных — «<strong>Аккаунт</strong>»).</p>
+<p>Перейдите на вкладку «<strong>Свойства</strong>» и нажмите «<strong>Настроить диалоговое окно</strong>». Вынесите на центральную область созданную локальную переменную. Сохраните настройки и вынесите кнопку на область кнопок для таблиц.</p>
+</li>
+<li>
+<p>Перейдите в настройки приложения и нажмите «<strong>Сценарии</strong>». Создайте новый сценарий со следующими параметрами:</p>
 <ul>
-<li>Название — Назначение исполнителя по заявке</li>
-<li>Контекст выполнения — От инициатора;</li>
-<li>Статус — Активен.</li>
+<li><strong>Название</strong> — <em>Назначение исполнителя по заявке</em>;</li>
+<li><strong>Контекст выполнения</strong> — <strong>От инициатора</strong>;</li>
+<li><strong>Статус</strong> — <strong>Активен</strong>.</li>
 </ul>
-<p><strong>3.</strong> Настройте триггер на нажатие созданной в п. 1 кнопки, добавьте действие по изменению значения. Выберите атрибут «Ответственный», укажите операцию со значениями — Заменить и в поле «Значение», выберите N3 и вставьте следующее выражение:</p>
-<div class="highlight"><code><pre><span></span><code>@prefix cmwsession: &lt;http://comindware.com/ontology/session#&gt;.</code> <br/><code>@prefix user: &lt;http://comindware.com/ontology/user#&gt;.</code> <br/><code>@prefix variable: &lt;http://comindware.com/ontology/session/variable#&gt;.</code> <br/><code>@prefix debug: &lt;http://comindware.com/ontology/debug#&gt;.</code> <br/><code></code> <br/><code>{</code> <br/><code>    cmwsession:context variable:dialogVariables ?v1.</code> <br/><code>    ?v1 variable:Ispolnitel ?value.</code> <br/><code>}</code> <br/></pre></code></div>
-<p>Важно указать системное имя, прописанное в локальной переменной после «<strong><em>variable:</em></strong>».</p>
-<p>Затем добавьте действие «Запуск процесса», выберите процесс «Исполнение заявки». Перейдите во вкладку «Дополнительно» и отметьте галочки «Выполнять отдельно от сценария» и «Игнорировать все ошибки», если этого не сделать, процесс запустится не по каждой из записи, а только по одной.</p>
-<p><strong>4.</strong> Протестируйте. Выберите несколько заявок, нажмите на кнопку «Назначить исполнителей». Откроется диалоговое окно с локальной переменной «Исполнитель». Выберите пользователя, подтвердите операцию.</p>
+</li>
+<li>
+<p>Настройте триггер на нажатие созданной в п. 1 кнопки. Добавьте действие по изменению значения. Выберите атрибут <em>«Ответственный»</em>, укажите операцию со значениями — <strong>Заменить</strong> и в поле «<strong>Значение</strong>» выберите <strong>N3</strong>. Вставьте следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwsession:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">user:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/user#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">variable:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session/variable#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">debug:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/debug#&gt;</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="p">{</span></code> <br/><code>   <span class="nn">cmwsession</span><span class="p">:</span><span class="nt">context</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">dialogVariables</span> <span class="err">?v</span><span class="mi">1</span><span class="p">.</span></code> <br/><code>   <span class="err">?v</span><span class="mi">1</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">Ispolnitel</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Важно указать системное имя, прописанное в локальной переменной, после <code>variable:</code>.</p>
+</div>
+<p>Затем добавьте действие «<strong>Запуск процесса</strong>», выберите процесс <em>«Исполнение заявки»</em>. Перейдите на вкладку «<strong>Дополнительно</strong>» и отметьте флажки «<strong>Выполнять отдельно от сценария</strong>» и «<strong>Игнорировать все ошибки</strong>». Если этого не сделать, процесс запустится не по каждой из записей, а только по одной.</p>
+</li>
+<li>
+<p>Протестируйте. Выберите несколько заявок, нажмите кнопку <em>«Назначить исполнителя»</em>. Откроется диалоговое окно с локальной переменной <em>«Исполнитель»</em>. Выберите пользователя и подтвердите операцию.</p>
+</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5728">Кнопки. Определения, настройка, удаление</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5654">Сценарии. Определения, создание, настройка, использование</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/category.php?id=903">Язык N3</a></li>
+</ul>
+</div>
 </article>
 </div>
 </div>

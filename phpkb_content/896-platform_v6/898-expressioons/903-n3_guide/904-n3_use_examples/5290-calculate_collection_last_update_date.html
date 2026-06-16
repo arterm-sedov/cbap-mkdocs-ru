@@ -1,0 +1,51 @@
+<h1>Вычисление последней даты изменения записей в древовидной коллекции</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5290" kb-tags="N3,атрибуты,выражение на N3,пример" kb-title="Вычисление последней даты изменения записей в древовидной коллекции">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для того чтобы вывести последнюю дату изменения в рамках записей во вложенной коллекции (например, чтобы показать последнюю дату изменения работы или подработы, входящей в общий план), введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">math:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/math#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmw:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="p">(</span><span class="s">"Workitem"</span> <span class="s">"WorkPlan"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?workPlanProperty</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Workitem"</span> <span class="s">"ParentWorkitem"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?parentProperty</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Workitem"</span> <span class="s">"_lastWriteDate"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?lastWriteDate</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="err">from</span></code> <br/><code>    <span class="p">{</span></code> <br/><code>        <span class="err">?WorkitemTemplate</span> <span class="nn">object</span><span class="p">:</span><span class="nt">alias</span> <span class="s">"Workitem"</span><span class="p">.</span></code> <br/><code>        <span class="err">?WorkitemItems</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">container</span> <span class="err">?WorkitemTemplate</span><span class="p">.</span></code> <br/><code>        <span class="p">(</span><span class="err">?WorkitemItems</span> <span class="err">?parentProperty</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">getRootByParentProperty</span> <span class="err">?rootTask</span><span class="p">.</span></code> <br/><code>        <span class="err">?rootTask</span> <span class="err">?workPlanProperty</span> <span class="err">?item</span><span class="p">.</span></code> <br/><code>        <span class="err">?WorkitemItems</span> <span class="err">?lastWriteDate</span> <span class="err">?lastWriteDateVal</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span> <span class="err">select</span> <span class="err">?lastWriteDateVal</span> <span class="err">-&gt;</span> <span class="err">?lastWriteDateList</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="err">?lastWriteDateList</span> <span class="nn">math</span><span class="p">:</span><span class="nt">max</span> <span class="err">?m</span><span class="p">.</span></code> <br/><code>    <span class="err">?m</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Workitem</code></td>
+<td>Системное имя Шаблона записи с записями коллекции.</td>
+</tr>
+<tr>
+<td><code>WorkPlan</code></td>
+<td>Системное имя атрибута типа «<strong>Ссылка</strong>» на текущий Шаблон записи.</td>
+</tr>
+<tr>
+<td><code>ParentWorkitem</code></td>
+<td>Системное имя атрибута типа «<strong>Ссылка</strong>» на родительскую запись в Шаблоне записи <strong>Workitem</strong>.</td>
+</tr>
+<tr>
+<td><code>_lastWriteDate</code></td>
+<td>Системное имя системного атрибута "Дата изменения".</td>
+</tr>
+</tbody>
+</table>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>В данном примере только родительский объект связан с текущей записью по ссылке.</p>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

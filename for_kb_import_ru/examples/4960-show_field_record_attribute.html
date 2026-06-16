@@ -1,19 +1,42 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4960" kb-tags="" kb-title="Отображение поля при определенном значении ссылочного атрибута">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5286" kb-tags="N3,атрибуты,выражение на N3,пример" kb-title="Отображение поля при определенном значении ссылочного атрибута">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
-<nav aria-label="Содержание" class="md-nav md-nav--secondary">
-</nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<p>Для того, чтобы установить условие на отображение поля / вкладки / столбца и т.д., если в ссылочном поле стоит определенное значение, введите следующее выражение:</p>
-<div class="highlight"><code><pre><span></span><code>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.</code> <br/><code>@prefix math: &lt;http://www.w3.org/2000/10/swap/math#&gt;.</code> <br/><code>{</code> <br/><code>("Issue" "IssueTypeLink") object:findProperty ?IssueTypeProperty.</code> <br/><code>("IssueType" "Title") object:findProperty ?TitleProperty.</code> <br/><code></code> <br/><code> ?item ?IssueTypeProperty ?IssueType.</code> <br/><code> ?IssueType ?TitleProperty ?Title.</code> <br/><code></code> <br/><code>if{?Title math:equalTo "Task".}</code> <br/><code>then{true -&gt; ?value.}</code> <br/><code>else{false -&gt; ?value.}</code> <br/><code>       }</code> <br/></pre></code></div>
-<p><strong>где:</strong></p>
-<p><strong>Issue</strong> – системное имя текущего Шаблона записи;</p>
-<p><strong>IssueTypeLink</strong> – системное имя атрибута типа "Ссылка" в текущем Шаблоне записи;</p>
-<p><strong><em>*IssueType</em></strong><em>– системное имя Шаблона записи, на который ссылается </em><em>IssueTypeLink</em>* ;</p>
-<p><strong>Title</strong>– системное имя отображаемого атрибута в Шаблоне записи <strong>IssueType</strong>;</p>
-<p><strong>Task</strong> – нужное значение атрибута <strong>Title</strong>.</p>
+<p>Для того чтобы установить условие на отображение поля / вкладки / столбца и т.д., если в ссылочном поле стоит определенное значение, введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">math:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/2000/10/swap/math#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="p">(</span><span class="s">"Issue"</span> <span class="s">"IssueTypeLink"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?IssueTypeProperty</span><span class="p">.</span></code> <br/><code><span class="p">(</span><span class="s">"IssueType"</span> <span class="s">"Title"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?TitleProperty</span><span class="p">.</span></code> <br/><code></code> <br/><code> <span class="err">?item</span> <span class="err">?IssueTypeProperty</span> <span class="err">?IssueType</span><span class="p">.</span></code> <br/><code> <span class="err">?IssueType</span> <span class="err">?TitleProperty</span> <span class="err">?Title</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="err">if</span><span class="p">{</span><span class="err">?Title</span> <span class="nn">math</span><span class="p">:</span><span class="nt">equalTo</span> <span class="s">"Task"</span><span class="p">.}</span></code> <br/><code><span class="err">then</span><span class="p">{</span><span class="l">true</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.}</span></code> <br/><code><span class="err">else</span><span class="p">{</span><span class="l">false</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.}</span></code> <br/><code>       <span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Issue</code></td>
+<td>Системное имя текущего Шаблона записи.</td>
+</tr>
+<tr>
+<td><code>IssueTypeLink</code></td>
+<td>Системное имя атрибута типа «<strong>Ссылка</strong>» в текущем Шаблоне записи.</td>
+</tr>
+<tr>
+<td><code>IssueType</code></td>
+<td>Системное имя Шаблона записи, на который ссылается <strong>IssueTypeLink</strong>.</td>
+</tr>
+<tr>
+<td><code>Title</code></td>
+<td>Системное имя отображаемого атрибута в Шаблоне записи <strong>IssueType</strong>.</td>
+</tr>
+<tr>
+<td><code>Task</code></td>
+<td>Нужное значение атрибута <strong>Title</strong>.</td>
+</tr>
+</tbody>
+</table>
 </article>
 </div>
 </div>

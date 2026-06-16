@@ -1,15 +1,26 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5006" kb-tags="" kb-title="Кнопка «Мой профиль»">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5209" kb-tags="C#,скрипт,C#-скрипт,пример скрипта" kb-title="Кнопка «Мой профиль»">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
-<nav aria-label="Содержание" class="md-nav md-nav--secondary">
-</nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<p>Для того чтобы разместить на боковую панель навигации ссылку на профиль пользователя, создайте кнопку c операцией C#-скрипт в шаблоне аккаунтов и введите следующее выражение:</p>
-<div class="highlight"><code><pre><span></span><code>using System;</code> <br/><code>using System.Collections.Generic;</code> <br/><code>using System.Linq;</code> <br/><code>using Comindware.Data.Entity;</code> <br/><code>using Comindware.TeamNetwork.Api.Data.UserCommands;</code> <br/><code></code> <br/><code>public class Script</code> <br/><code>{</code> <br/><code></code> <br/><code>    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)</code> <br/><code>    {</code> <br/><code>        var result = new UserCommandResult()</code> <br/><code>        {</code> <br/><code>            Success = true,</code> <br/><code>            ResultType = UserCommandResultType.Navigate,</code> <br/><code>            NavigationResult = new UserCommandNavigationResult</code> <br/><code>            {</code> <br/><code>                ContainerId = "aa.1",</code> <br/><code>                ObjectId = userCommandContext.CurrentUserId,</code> <br/><code>                Context = ContextType.Record</code> <br/><code>            }</code> <br/><code>        };</code> <br/><code>        return result;</code> <br/><code>    }</code> <br/><code>}</code> <br/></pre></code></div>
-<p><strong>где:</strong></p>
-<p><strong>aa.1</strong>   = ID шаблона аккаунтов</p>
+<p>Для того чтобы поместить на боковую панель навигации ссылку на профиль пользователя, создайте кнопку с операцией «<strong>C#-скрипт</strong>» в шаблоне аккаунтов и введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Collections.Generic</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Linq</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.Data.Entity</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.TeamNetwork.Api.Data.UserCommands</span><span class="p">;</span></code> <br/><code></code> <br/><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Script</span></code> <br/><code><span class="p">{</span></code> <br/><code></code> <br/><code><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">UserCommandResult</span><span class="w"> </span><span class="n">Main</span><span class="p">(</span><span class="n">UserCommandContext</span><span class="w"> </span><span class="n">userCommandContext</span><span class="p">)</span></code> <br/><code><span class="w">    </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserCommandResult</span><span class="p">()</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="n">Success</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="n">ResultType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UserCommandResultType</span><span class="p">.</span><span class="n">Navigate</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="n">NavigationResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserCommandNavigationResult</span></code> <br/><code><span class="w">            </span><span class="p">{</span></code> <br/><code><span class="w">                </span><span class="n">ContainerId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"aa.1"</span><span class="p">,</span></code> <br/><code><span class="w">                </span><span class="n">ObjectId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userCommandContext</span><span class="p">.</span><span class="n">CurrentUserId</span><span class="p">,</span></code> <br/><code><span class="w">                </span><span class="n">Context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ContextType</span><span class="p">.</span><span class="n">Record</span></code> <br/><code><span class="w">            </span><span class="p">}</span></code> <br/><code><span class="w">        </span><span class="p">};</span></code> <br/><code><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>aa.1</code></td>
+<td>ID шаблона аккаунтов.</td>
+</tr>
+</tbody>
+</table>
 </article>
 </div>
 </div>

@@ -1,25 +1,86 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4939" kb-tags="" kb-title="Вычисление информации о замещении">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5266" kb-tags="N3,выражение на N3,замещения,пример,процессы" kb-title="Вычисление информации о замещении">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
 <nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#calculate_substitution_info_prefix">
+<span class="md-ellipsis">
+      
+        Префикс и параметры
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      
+        Связанные статьи
+      
+    </span>
+</a>
+</li>
+</ul>
+</div>
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<p>В <strong>Comindware Platform</strong> существует системный функционал замещения, доступный по умолчанию администраторам системы. Данный функционал позволяет назначать заместителей на период отсутствия определенного сотрудника с указанием передаваемых ролей. Заместители могут на период замещения завершать задачи за отсутствующего сотрудника и выполнять другие действия, исходя из передаваемых ролей. Т. к. раздел «Замещение» является частью администрирования системы, информация о наличии текущих замещений или информации о заместителях конкретного сотрудника по умолчанию недоступна для конечных пользователей. Если вам необходимо показывать какую-либо информацию о замещениях сотрудников или настраивать какие-либо вычисления, которые бы учитывали замещения, эта статья для вас. Ниже приведен префикс и список параметров, которые можно выводить о замещении.</p>
-<p>Для того, чтобы в выражении N3 можно было подключиться к библиотеке параметров замещения, необходимо использовать следующий префикс:</p>
-<p>@prefix substitution: &lt;<a class="mkdocs_imported_link" href="http://comindware.com/ontology/substitution">http://comindware.com/ontology/substitution</a>#&gt;.</p>
+<p>В <strong>Comindware Platform</strong> существует системный функционал замещения, доступный по умолчанию администраторам системы. Данный функционал позволяет назначать заместителей на период отсутствия определённого сотрудника с указанием передаваемых ролей. Заместители могут на период замещения завершать задачи за отсутствующего сотрудника и выполнять другие действия, исходя из передаваемых ролей.</p>
+<p>Так как раздел «<strong>Замещения</strong>» является частью администрирования системы, информация о наличии текущих замещений или о заместителях конкретного сотрудника по умолчанию недоступна для конечных пользователей. Если вам необходимо показывать информацию о замещениях сотрудников или настраивать вычисления, которые учитывают замещения, используйте параметры библиотеки замещения в выражениях N3.</p>
+<h2 id="calculate_substitution_info_prefix">Префикс и параметры</h2>
+<p>Для подключения к библиотеке параметров замещения в выражении N3 используйте следующий префикс:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">substitution:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/substitution#&gt;</span><span class="p">.</span></code> <br/></pre></code></div>
 <p>В данном префиксе хранятся следующие параметры замещения:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>Название замещения</td>
+</tr>
+<tr>
+<td><code>deputies</code></td>
+<td>Заместители</td>
+</tr>
+<tr>
+<td><code>absentee</code></td>
+<td>Отсутствующий</td>
+</tr>
+<tr>
+<td><code>roles</code></td>
+<td>Передаваемые роли</td>
+</tr>
+<tr>
+<td><code>startDate</code></td>
+<td>Начало замещения</td>
+</tr>
+<tr>
+<td><code>endDate</code></td>
+<td>Окончание замещения</td>
+</tr>
+</tbody>
+</table>
+<p>Чтобы получить значение определённого параметра, используйте конструкцию предиката <code>substitution:параметр</code>.</p>
+<p><strong>Пример:</strong> <code>substitution:name</code>, <code>substitution:deputies</code>.</p>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li>name — название замещения;</li>
-<li>deputies — заместители;</li>
-<li>absentee — отсутствующий;</li>
-<li>roles — передаваемые роли;</li>
-<li>startDate — начало замещения;</li>
-<li>endDate — окончание замещения.</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5609">Замещения. Создание, настройка, удаление</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5292">Аккаунты и задачи. Вычисление пользователей с активными задачами с помощью N3 (с учетом замещений)</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/category.php?id=903">Язык N3</a></li>
 </ul>
-<p>Для того, чтобы получить значение определенного параметра, нужно использовать следующую конструкцию предиката: <em>substitution:параметр</em>.</p>
-<p>См. также: <a class="mkdocs_imported_link" href="https://kb.comindware.ru/category/comindware-business-application-platform/%d0%92%d0%b5%d1%80%d1%81%d0%b8%d1%8f-3-5/%d0%a0%d1%83%d0%ba%d0%be%d0%b2%d0%be%d0%b4%d1%81%d1%82%d0%b2%d0%b0/%d0%a0%d1%83%d0%ba%d0%be%d0%b2%d0%be%d0%b4%d1%81%d1%82%d0%b2%d0%be-%d0%bf%d0%be-n3/331/">Руководство по N3</a>, <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4966">Аккаунты и задачи. Вычисление пользователей с активными задачами с помощью N3 (с учетом замещений)</a>.</p>
+</div>
 </article>
 </div>
 </div>

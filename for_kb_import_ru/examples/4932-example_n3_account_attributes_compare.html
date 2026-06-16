@@ -1,19 +1,42 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4932" kb-tags="" kb-title="Сравнение двух атрибутов типа «Аккаунт»">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5295" kb-tags="N3,атрибуты,выражение на N3,пример" kb-title="Сравнение двух атрибутов типа «Аккаунт»">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
-<nav aria-label="Содержание" class="md-nav md-nav--secondary">
-</nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <p>Для сравнения двух пользователей (например, менеджер проекта и руководитель сотрудника), введите следующее выражение:</p>
-<div class="highlight"><code><pre><span></span><code>#EQUALS($WorkPlanOriginalRef-&gt;Curator, $Manager)</code> <br/><code></code> <br/><code>@prefix sort: &lt;http://comindware.com/ontology/dataset/sort#&gt;.</code> <br/><code>@prefix assert: &lt;http://comindware.com/logics/assert#&gt;.</code> <br/><code>@prefix cmwstring: &lt;http://comindware.com/logics/string#&gt;.</code> <br/><code>@prefix ui: &lt;http://comindware.com/ontology/ui#&gt;.</code> <br/><code>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.</code> <br/><code>{</code> <br/><code>    ("WorkPlan" "Curator") object:findProperty ?curatorProperty.</code> <br/><code>    ("WorkPlanDuplicate" "WorkPlanOriginal") object:findProperty ?workPlanOriginalProperty.</code> <br/><code>    ("WorkPlanDuplicate" "Manager") object:findProperty ?managerProperty.</code> <br/><code>    from {</code> <br/><code>        ?item ?managerProperty ?manager1.</code> <br/><code>          ?manager1 ui:toClientString ?manager.</code> <br/><code>    } select ?manager -&gt; ?managerList.</code> <br/><code></code> <br/><code>    (?managerList sort:stringComparer) assert:sort ?managerSort.</code> <br/><code>    ("," ?managerSort) cmwstring:join ?managerStr.</code> <br/><code></code> <br/><code>    from {</code> <br/><code>    ?item ?workPlanOriginalProperty ?workPlan.</code> <br/><code>        ?workPlan ?curatorProperty ?curator1.</code> <br/><code>          ?curator1 ui:toClientString ?curatorStrg.</code> <br/><code>    } select ?curatorStrg -&gt; ?curatorList.</code> <br/><code></code> <br/><code>    (?curatorList sort:stringComparer) assert:sort ?curatorSort.</code> <br/><code>    ("," ?curatorSort) cmwstring:join ?curatorStr.</code> <br/><code></code> <br/><code>    if {?curatorDuplicateStr == ?curatorStr}</code> <br/><code>    then {true -&gt; ?value}</code> <br/><code>    else {false -&gt; ?value}.</code> <br/><code>}</code> <br/></pre></code></div>
-<p><strong>где:</strong></p>
-<p><strong>WorkPlan</strong> – системное имя шаблона записи, где хранится запись о менеджере проекта;</p>
-<p><strong>Curator</strong>– системное имя атрибута типа «Аккаунт» (менеджер проекта);</p>
-<p><strong>WorkPlanDuplicate</strong> – системное имя текущего шаблона записи, где производится сравнение;</p>
-<p><strong>WorkPlanOriginal</strong> – системное имя атрибут типа «Запись» в шаблоне записи <strong>WorkPlanDuplicate</strong>, ссылающийся на <strong>WorkPlan</strong><em>;</em></p>
-<p><strong>Manager</strong> – системное имя атрибута типа «Аккаунт» (руководитель сотрудника), с которым сравниваем.</p>
+<div class="highlight"><code><pre><span></span><code><span class="c">#EQUALS($WorkPlanOriginalRef-&gt;Curator, $Manager)</span></code> <br/><code></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">sort:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/dataset/sort#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">assert:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/assert#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwstring:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/string#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">ui:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/ui#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="p">(</span><span class="s">"WorkPlan"</span> <span class="s">"Curator"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?curatorProperty</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"WorkPlanDuplicate"</span> <span class="s">"WorkPlanOriginal"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?workPlanOriginalProperty</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"WorkPlanDuplicate"</span> <span class="s">"Manager"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?managerProperty</span><span class="p">.</span></code> <br/><code>    <span class="err">from</span> <span class="p">{</span></code> <br/><code>        <span class="err">?item</span> <span class="err">?managerProperty</span> <span class="err">?manager</span><span class="mi">1</span><span class="p">.</span></code> <br/><code>          <span class="err">?manager</span><span class="mi">1</span> <span class="nn">ui</span><span class="p">:</span><span class="nt">toClientString</span> <span class="err">?manager</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span> <span class="err">select</span> <span class="err">?manager</span> <span class="err">-&gt;</span> <span class="err">?managerList</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="p">(</span><span class="err">?managerList</span> <span class="nn">sort</span><span class="p">:</span><span class="nt">stringComparer</span><span class="p">)</span> <span class="nn">assert</span><span class="p">:</span><span class="nt">sort</span> <span class="err">?managerSort</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">","</span> <span class="err">?managerSort</span><span class="p">)</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">join</span> <span class="err">?managerStr</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="err">from</span> <span class="p">{</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?workPlanOriginalProperty</span> <span class="err">?workPlan</span><span class="p">.</span></code> <br/><code>        <span class="err">?workPlan</span> <span class="err">?curatorProperty</span> <span class="err">?curator</span><span class="mi">1</span><span class="p">.</span></code> <br/><code>          <span class="err">?curator</span><span class="mi">1</span> <span class="nn">ui</span><span class="p">:</span><span class="nt">toClientString</span> <span class="err">?curatorStrg</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span> <span class="err">select</span> <span class="err">?curatorStrg</span> <span class="err">-&gt;</span> <span class="err">?curatorList</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="p">(</span><span class="err">?curatorList</span> <span class="nn">sort</span><span class="p">:</span><span class="nt">stringComparer</span><span class="p">)</span> <span class="nn">assert</span><span class="p">:</span><span class="nt">sort</span> <span class="err">?curatorSort</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">","</span> <span class="err">?curatorSort</span><span class="p">)</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">join</span> <span class="err">?curatorStr</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="err">if</span> <span class="p">{</span><span class="err">?curatorDuplicateStr</span> <span class="err">==</span> <span class="err">?curatorStr</span><span class="p">}</span></code> <br/><code>    <span class="err">then</span> <span class="p">{</span><span class="l">true</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">}</span></code> <br/><code>    <span class="err">else</span> <span class="p">{</span><span class="l">false</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">}.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>WorkPlan</code></td>
+<td>Системное имя шаблона записи, где хранится запись о менеджере проекта.</td>
+</tr>
+<tr>
+<td><code>Curator</code></td>
+<td>Системное имя атрибута типа «<strong>Аккаунт</strong>» с менеджером проекта.</td>
+</tr>
+<tr>
+<td><code>WorkPlanDuplicate</code></td>
+<td>Системное имя текущего шаблона записи, где выполняется сравнение.</td>
+</tr>
+<tr>
+<td><code>WorkPlanOriginal</code></td>
+<td>Системное имя атрибута типа «<strong>Запись</strong>» в шаблоне записи <code>WorkPlanDuplicate</code>. Атрибут ссылается на шаблон <code>WorkPlan</code>.</td>
+</tr>
+<tr>
+<td><code>Manager</code></td>
+<td>Системное имя атрибута типа «<strong>Аккаунт</strong>» с руководителем сотрудника, с которым выполняется сравнение.</td>
+</tr>
+</tbody>
+</table>
 </article>
 </div>
 </div>

@@ -1,0 +1,48 @@
+---
+title: 'Вычисление последней даты изменения записей в древовидной коллекции'
+kbId: 5290
+url: 'https://kb.comindware.ru/article.php?id=5290'
+updated: '2026-06-16 19:17:30'
+---
+
+# Вычисление последней даты изменения записей в древовидной коллекции
+
+Для того чтобы вывести последнюю дату изменения в рамках записей во вложенной коллекции (например, чтобы показать последнюю дату изменения работы или подработы, входящей в общий план), введите следующее выражение:
+
+```
+@prefix object: <http://comindware.com/ontology/object#>.
+@prefix math: <http://comindware.com/logics/math#>.
+@prefix cmw: <http://comindware.com/logics#>.
+{
+    ("Workitem" "WorkPlan") object:findProperty ?workPlanProperty.
+    ("Workitem" "ParentWorkitem") object:findProperty ?parentProperty.
+    ("Workitem" "_lastWriteDate") object:findProperty ?lastWriteDate.
+
+    from
+    {
+        ?WorkitemTemplate object:alias "Workitem".
+        ?WorkitemItems cmw:container ?WorkitemTemplate.
+        (?WorkitemItems ?parentProperty) object:getRootByParentProperty ?rootTask.
+        ?rootTask ?workPlanProperty ?item.
+        ?WorkitemItems ?lastWriteDate ?lastWriteDateVal.
+    } select ?lastWriteDateVal -> ?lastWriteDateList.
+
+?lastWriteDateList math:max ?m.
+    ?m -> ?value.
+}
+```
+
+**Здесь:**
+
+| Значение | Описание |
+| --- | --- |
+| `Workitem` | Системное имя Шаблона записи с записями коллекции. |
+| `WorkPlan` | Системное имя атрибута типа «**Ссылка**» на текущий Шаблон записи. |
+| `ParentWorkitem` | Системное имя атрибута типа «**Ссылка**» на родительскую запись в Шаблоне записи **Workitem**. |
+| `_lastWriteDate` | Системное имя системного атрибута "Дата изменения". |
+
+Примечание
+
+В данном примере только родительский объект связан с текущей записью по ссылке.
+
+{% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

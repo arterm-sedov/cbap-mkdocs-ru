@@ -1,0 +1,43 @@
+<h1>Старт процесса по записям таблицы</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5212" kb-tags="C#,скрипт,C#-скрипт,пример скрипта" kb-title="Старт процесса по записям таблицы">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для того чтобы запустить процесс по каждой из записей определенной таблицы, введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Collections.Generic</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Linq</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.Data.Entity</span><span class="p">;</span></code> <br/><code><span class="k">class</span><span class="w"> </span><span class="nc">Script</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="n">Main</span><span class="p">(</span><span class="n">Comindware</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">ScriptContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span></code> <br/><code><span class="w">    </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Comindware</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">DatasetQuery</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="n">DatasetId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"lst.74"</span></code> <br/><code><span class="w">        </span><span class="p">};</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">sessionsData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">DatasetService</span><span class="p">.</span><span class="n">QueryData</span><span class="p">(</span><span class="n">query</span><span class="p">).</span><span class="n">Rows</span><span class="p">;</span></code> <br/><code><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sessionsData</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="p">}</span></code> <br/><code><span class="w">        </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">sessionsData</span><span class="p">)</span><span class="w"> </span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="n">Api</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">ProcessObjectService</span><span class="p">.</span><span class="n">CreateWithObjectId</span><span class="p">(</span><span class="s">"pa.2"</span><span class="p">,</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="n">row</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lst.74</code></td>
+<td>ID таблицы, по записям которой нужно запустить экземпляры процесса.</td>
+</tr>
+<tr>
+<td><code>pa.2</code></td>
+<td>ID шаблона процесса, экземпляры которого нужно создать по записям из выбранной таблицы.</td>
+</tr>
+</tbody>
+</table>
+<div class="notice notice-info">
+<p class="admonition-title">Фильтр таблицы</p>
+<p>Если для таблицы требуется фильтр, задайте его на языке N3. Иначе экземпляры процесса будут запущены по всем записям шаблона записи, в котором находится таблица.</p>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

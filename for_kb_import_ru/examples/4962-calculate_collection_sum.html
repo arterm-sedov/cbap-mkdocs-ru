@@ -1,19 +1,42 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4962" kb-tags="" kb-title="Вычисление суммы значений столбца коллекции">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5288" kb-tags="атрибуты,пример" kb-title="Вычисление суммы значений столбца коллекции">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
-<nav aria-label="Содержание" class="md-nav md-nav--secondary">
-</nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<p>Для того, чтобы рассчитать сумму значений определенного столбца коллекции, за исключением заархивированных записей, введите следующее выражение:</p>
-<div class="highlight"><code><pre><span></span><code>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.</code> <br/><code>@prefix math: &lt;http://www.w3.org/2000/10/swap/math#&gt;.</code> <br/><code>@prefix w3math: &lt;http://www.w3.org/2000/10/swap/math#&gt;.</code> <br/><code>@prefix cmwmath: &lt;http://comindware.com/logics/math#&gt;.</code> <br/><code></code> <br/><code>{</code> <br/><code>    ("Project" "ProjectPlans") object:findProperty ?ProjectPlansProperty.</code> <br/><code>    ("Plans" "Prodolzhitelnost") object:findProperty ?ProdolzhitelnostProperty.</code> <br/><code>    ("Plans" "_isDisabled") object:findProperty ?_isDisabled.</code> <br/><code></code> <br/><code>                from {</code> <br/><code>                ?item ?ProjectPlansProperty ?ProjectPlansVal.</code> <br/><code>                ?ProjectPlansVal ?ProdolzhitelnostProperty ?ProdolzhitelnostVal.</code> <br/><code>                not{?ProdolzhitelnostVal ?_isDisabled true.}.</code> <br/><code>                                         }select ?ProdolzhitelnostVal -&gt; ?durationList.</code> <br/><code>                ?durationList cmwmath:sum  ?value.</code> <br/><code>                }</code> <br/></pre></code></div>
-<p><strong>где:</strong></p>
-<p><strong>Project</strong> — системное имя текущего шаблона записи;</p>
-<p><strong>ProjectPlans</strong>— системное имя атрибута типа «Коллекция» в текущем шаблоне записи;</p>
-<p><strong>Plans</strong>— системное имя шаблона записи, на который ссылается <strong>ProjectPlans</strong>;</p>
-<p><strong>Prodolzhitelnost</strong>— системное имя атрибута для сложения в <strong>Plans</strong>;</p>
-<p><strong>_isDisabled</strong> — системное имя системного атрибута «В архиве» (для скрытия архивных записей).</p>
+<p>Для того чтобы рассчитать сумму значений определенного столбца коллекции, за исключением заархивированных записей, введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">math:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/2000/10/swap/math#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">w3math:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/2000/10/swap/math#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwmath:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/math#&gt;</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="p">(</span><span class="s">"Project"</span> <span class="s">"ProjectPlans"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?ProjectPlansProperty</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Plans"</span> <span class="s">"Prodolzhitelnost"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?ProdolzhitelnostProperty</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Plans"</span> <span class="s">"_isDisabled"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?_isDisabled</span><span class="p">.</span></code> <br/><code></code> <br/><code>                <span class="err">from</span> <span class="p">{</span></code> <br/><code>                <span class="err">?item</span> <span class="err">?ProjectPlansProperty</span> <span class="err">?ProjectPlansVal</span><span class="p">.</span></code> <br/><code>                <span class="err">?ProjectPlansVal</span> <span class="err">?ProdolzhitelnostProperty</span> <span class="err">?ProdolzhitelnostVal</span><span class="p">.</span></code> <br/><code>                <span class="err">not</span><span class="p">{</span><span class="err">?ProdolzhitelnostVal</span> <span class="err">?_isDisabled</span> <span class="l">true</span><span class="p">.}.</span></code> <br/><code>                                         <span class="p">}</span><span class="err">select</span> <span class="err">?ProdolzhitelnostVal</span> <span class="err">-&gt;</span> <span class="err">?durationList</span><span class="p">.</span></code> <br/><code>                <span class="err">?durationList</span> <span class="nn">cmwmath</span><span class="p">:</span><span class="nt">sum</span>  <span class="err">?value</span><span class="p">.</span></code> <br/><code>                <span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Project</code></td>
+<td>Системное имя текущего шаблона записи.</td>
+</tr>
+<tr>
+<td><code>ProjectPlans</code></td>
+<td>Системное имя атрибута типа «<strong>Коллекция</strong>» в текущем шаблоне записи.</td>
+</tr>
+<tr>
+<td><code>Plans</code></td>
+<td>Системное имя шаблона записи, на который ссылается <code>ProjectPlans</code>.</td>
+</tr>
+<tr>
+<td><code>Prodolzhitelnost</code></td>
+<td>Системное имя атрибута для сложения в шаблоне <code>Plans</code>.</td>
+</tr>
+<tr>
+<td><code>_isDisabled</code></td>
+<td>Системное имя системного атрибута «<strong>В архиве</strong>» для скрытия архивных записей.</td>
+</tr>
+</tbody>
+</table>
 </article>
 </div>
 </div>

@@ -1,17 +1,43 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4949" kb-tags="" kb-title="Вычисление объектов, удовлетворяющих условию">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5276" kb-tags="N3,атрибуты,выражение на N3,пример,процессы" kb-title="Вычисление объектов, удовлетворяющих условию">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
 <nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#calculate_objects_condition_use_case">
+<span class="md-ellipsis">
+      
+        Прикладная задача
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#calculate_objects_condition_data_model">
+<span class="md-ellipsis">
+      
+        Модель данных
+      
+    </span>
+</a>
+</li>
+</ul>
+</div>
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<p><strong>Пример задачи:</strong> на форме проекта отобразить в коллекции только тех сотрудников, которые обладают необходимыми для проекта навыками. Сотрудник отображается только в том случае, если все запрашиваемые навыки присутствуют.</p>
+<h2 id="calculate_objects_condition_use_case">Прикладная задача</h2>
+<p>На форме проекта отобразить в коллекции только тех сотрудников, которые обладают необходимыми для проекта навыками. Сотрудник отображается только в том случае, если все запрашиваемые навыки присутствуют.</p>
 <p>Проект «Космический туризм», необходимые навыки для работы в проекте: Астрономия, Иностранные языки, Логистика.</p>
 <p>Сотрудник №1 обладает навыками: Астрономия, Логистика, Программирование, Сетевые технологии.</p>
 <p>Сотрудник №2 обладает навыками: Веб-дизайн, "Астрономия, Иностранные языки, Логистика.</p>
 <p>У сотрудника №1 нет всех необходимых навыков для участия в проекте, его не нужно отображать в коллекции. А сотрудник №2 подходит, его нужно отобразить.</p>
-<p><strong>Модель данных:</strong></p>
+<h2 id="calculate_objects_condition_data_model">Модель данных</h2>
 <ul>
 <li>Шаблон записи «Проекты» (projects):</li>
 <li>Атрибут «Необходимые навыки» (required_skills), ссылающийся на справочник «Навыки» (несколько значений);</li>
@@ -20,8 +46,8 @@
 <li>Атрибут «Навыки сотрудника» (available_skills), ссылающийся на справочник «Навыки» (несколько значений).</li>
 <li>Шаблон записи «Навыки».</li>
 </ul>
-<p>Для того, чтобы вычислить объекты, удовлетворяющие условию, заданному в основном объекте (в данном случае, сотрудников с необходимыми навыками), введите следующее выражение:</p>
-<div class="highlight"><code><pre><span></span><code>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.</code> <br/><code>@prefix assert: &lt;http://comindware.com/logics/assert#&gt;.</code> <br/><code>@prefix cmw: &lt;http://comindware.com/logics#&gt;.</code> <br/><code>{</code> <br/><code>    ("projects" "required_skills") object:findProperty ?PropertyLittle.</code> <br/><code>    ("employees" "available_skills") object:findProperty ?PropertyBig.</code> <br/><code></code> <br/><code>    ?container object:alias "employees".</code> <br/><code>    ?allObjs cmw:container ?container.</code> <br/><code></code> <br/><code>    {</code> <br/><code>        ?item ?PropertyLittle ?resultL.</code> <br/><code>        ?allObjs ?PropertyBig ?resultL.</code> <br/><code>    } assert:count ?c.</code> <br/><code></code> <br/><code>    {</code> <br/><code>        ?item ?PropertyLittle ?resultA.</code> <br/><code>    } assert:count ?d.</code> <br/><code></code> <br/><code>    if {?c == ?d}</code> <br/><code>    then {?allObjs -&gt; ?value.}</code> <br/><code>}</code> <br/></pre></code></div>
+<p>Для того чтобы вычислить объекты, удовлетворяющие условию, заданному в основном объекте (в данном случае, сотрудников с необходимыми навыками), введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">assert:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/assert#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmw:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="p">(</span><span class="s">"projects"</span> <span class="s">"required_skills"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?PropertyLittle</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"employees"</span> <span class="s">"available_skills"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?PropertyBig</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="err">?container</span> <span class="nn">object</span><span class="p">:</span><span class="nt">alias</span> <span class="s">"employees"</span><span class="p">.</span></code> <br/><code>    <span class="err">?allObjs</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">container</span> <span class="err">?container</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="p">{</span></code> <br/><code>        <span class="err">?item</span> <span class="err">?PropertyLittle</span> <span class="err">?resultL</span><span class="p">.</span></code> <br/><code>        <span class="err">?allObjs</span> <span class="err">?PropertyBig</span> <span class="err">?resultL</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span> <span class="nn">assert</span><span class="p">:</span><span class="nt">count</span> <span class="err">?c</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="p">{</span></code> <br/><code>        <span class="err">?item</span> <span class="err">?PropertyLittle</span> <span class="err">?resultA</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span> <span class="nn">assert</span><span class="p">:</span><span class="nt">count</span> <span class="err">?d</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="err">if</span> <span class="p">{</span><span class="err">?c</span> <span class="err">==</span> <span class="err">?d</span><span class="p">}</span></code> <br/><code>    <span class="err">then</span> <span class="p">{</span><span class="err">?allObjs</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
 </article>
 </div>
 </div>

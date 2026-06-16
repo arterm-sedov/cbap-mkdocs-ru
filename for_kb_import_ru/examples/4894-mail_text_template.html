@@ -1,24 +1,156 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4894" kb-tags="" kb-title="Формирование текста письма по шаблону">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5360" kb-tags="атрибуты,пример,формулы" kb-title="Формирование текста письма по шаблону">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
 <nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#mail_text_template_initial_data">
+<span class="md-ellipsis">
+      
+        Исходные данные
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#mail_text_template_setup">
+<span class="md-ellipsis">
+      
+        Порядок настройки
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#mail_text_template_sintaksis">
+<span class="md-ellipsis">
+      
+        Синтаксис
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      
+        Связанные статьи
+      
+    </span>
+</a>
+</li>
+</ul>
+</div>
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<p>В ряде случаев может потребоваться необходимость формирования текста письма по определённому шаблону с возможностью автоматического добавления переменных в некоторых местах. Это может понадобиться, например, для настройки отправки уведомления пользователям о результатах выполнения работы или информировании клиентов об изменениях сроков.</p>
-<p>Ниже описана последовательность действий для настройки текста уведомления сотрудника в рамках процесса оформления отпуска. Данную последовательность можно применять и для настройки вашего сценария, видоизменив определенные переменные.</p>
-<p><strong>1.</strong> В текущем шаблоне записи (в данном примере — «Отпуска») создайте текстовый атрибут «Шаблон письма» (системное имя «template»), в котором будет содержаться текст шаблона с переменными, а также при необходимости с включенными в него дополнительными данными (графические изображения и т.д.).</p>
+<p>В ряде случаев может потребоваться формирование текста письма по определённому шаблону с возможностью автоматического добавления переменных в некоторых местах. Это может понадобиться, например, для настройки отправки уведомления пользователям о результатах выполнения работы или информирования клиентов об изменениях сроков.</p>
+<p>Ниже описана последовательность действий для настройки текста уведомления сотрудника в рамках процесса оформления отпуска. Данную последовательность можно применять и для настройки вашего сценария, видоизменив определённые переменные.</p>
+<h2 id="mail_text_template_initial_data">Исходные данные</h2>
+<p>Используется шаблон записи <em>«Отпуска»</em> со следующими атрибутами:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Название</th>
+<th>Системное имя</th>
+<th>Тип данных</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Шаблон письма</em></td>
+<td><code>template</code></td>
+<td>Текст</td>
+</tr>
+<tr>
+<td><em>ФИО сотрудника</em></td>
+<td><code>fiosotrudnika</code></td>
+<td>Текст</td>
+</tr>
+<tr>
+<td><em>Дата подписания</em></td>
+<td><code>date</code></td>
+<td>Дата и время</td>
+</tr>
+<tr>
+<td><em>ФИО специалиста</em></td>
+<td><code>managerfio</code></td>
+<td>Текст</td>
+</tr>
+<tr>
+<td><em>Текст письма</em></td>
+<td>—</td>
+<td>Текст (вычисляемый)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mail_text_template_setup">Порядок настройки</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>В шаблоне записи <em>«Отпуска»</em> создайте текстовый атрибут <em>«Шаблон письма»</em> (<code>template</code>), в котором будет содержаться текст шаблона с переменными, а также при необходимости дополнительные данные (графические изображения и т. д.).</p>
 <p>Пример шаблона:</p>
-<div class="highlight"><code><pre><span></span><code>Уважаемый [Сотрудник],</code> <br/><code>Просим вас явиться в кабинет директора по персоналу [Срок] для подписания документов на отпуск.</code> <br/><code>С уважением, специалист отдела кадров [ФИО специалиста]</code> <br/></pre></code></div>
-<p>В этом примере текст в квадратных скобках является переменной, вместо него будут подставлены данные с формы при заполнении: ФИО сотрудника, дата подписания, ФИО сотрудника кадрового отдела.</p>
-<p><strong>Примечание :</strong> Содержание шаблона может быть предварительно заполнено правилами для данных на форме или событием в процессе.</p>
-<p><strong>2.</strong> В текущем шаблоне записи (в данном примере — «Отпуска») создайте текстовый атрибут «ФИО сотрудника» (системное имя «fiosotrudnika»).</p>
-<p><strong>3.</strong> В текущем шаблоне записи (в данном примере — «Отпуска») создайте атрибут Дата / Время «Дата подписания» (системное имя «date»).</p>
-<p><strong>4.</strong> В текущем шаблоне записи (в данном примере — «Отпуска») создайте текстовый атрибут «ФИО специалиста» (системное имя «managerfio»).</p>
-<p><strong>5.</strong> В текущем шаблоне записи (в данном примере — «Отпуска») создайте текстовый атрибут «Текст письма», в котором будет содержаться итоговый текст для отправки. Сделайте этот атрибут вычисляемым и напишите выражение с помощью функции REPLACE:</p>
-<div class="highlight"><code><pre><span></span><code>REPLACE(</code> <br/><code>REPLACE(</code> <br/><code></code> <br/><code>REPLACE($template,"[Срок]", $date)",</code> <br/><code></code> <br/><code>"[Сотрудник]", $fiosotrudnika),</code> <br/><code></code> <br/><code>[ФИО специалиста]", $managerfio)</code> <br/></pre></code></div>
+<div class="highlight"><code><pre><span></span><code>Уважаемый [Сотрудник],</code> <br/><code></code> <br/><code>Просим вас явиться в кабинет директора по персоналу [Срок] для подписания документов на отпуск.</code> <br/><code></code> <br/><code>С уважением, специалист отдела кадров [ФИО специалиста]</code> <br/></pre></code></div>
+<p>В этом примере текст в квадратных скобках является переменной. Вместо него будут подставлены данные с формы при заполнении: Ф.И. О. сотрудника, дата подписания, Ф.И. О. специалиста отдела кадров.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Содержание шаблона может быть предварительно заполнено правилами для данных на форме или событием в процессе.</p>
+</div>
+</li>
+<li>
+<p>Создайте текстовый атрибут <em>«ФИО сотрудника»</em> (<code>fiosotrudnika</code>).</p>
+</li>
+<li>
+<p>Создайте атрибут типа «<strong>Дата и время</strong>» <em>«Дата подписания»</em> (<code>date</code>).</p>
+</li>
+<li>
+<p>Создайте текстовый атрибут <em>«ФИО специалиста»</em> (<code>managerfio</code>).</p>
+</li>
+<li>
+<p>Создайте текстовый атрибут <em>«Текст письма»</em>, в котором будет содержаться итоговый текст для отправки. Сделайте этот атрибут вычисляемым и введите выражение с помощью функции <code>REPLACE()</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">REPLACE</span><span class="p">(</span></code> <br/><code><span class="k">REPLACE</span><span class="p">(</span></code> <br/><code><span class="k">REPLACE</span><span class="p">(</span><span class="err">$</span><span class="k">template</span><span class="p">,</span><span class="w"> </span><span class="ss">"[Срок]"</span><span class="p">,</span><span class="w"> </span><span class="err">$</span><span class="nb">date</span><span class="p">),</span></code> <br/><code><span class="ss">"[Сотрудник]"</span><span class="p">,</span><span class="w"> </span><span class="err">$</span><span class="n">fiosotrudnika</span><span class="p">),</span></code> <br/><code><span class="ss">"[ФИО специалиста]"</span><span class="p">,</span><span class="w"> </span><span class="err">$</span><span class="n">managerfio</span><span class="p">)</span></code> <br/></pre></code></div>
+</li>
+</ol>
 <p>Полученный результат можно использовать для отправки на почту сотруднику в рамках процесса оформления отпуска.</p>
+<h2 id="mail_text_template_sintaksis">Синтаксис</h2>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Элемент</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>REPLACE()</code></td>
+<td>Заменяет в строке шаблона (<code>$template</code>) каждую переменную в квадратных скобках на значение соответствующего атрибута</td>
+</tr>
+<tr>
+<td><code>[Сотрудник]</code></td>
+<td>Подставляется значение атрибута <code>$fiosotrudnika</code></td>
+</tr>
+<tr>
+<td><code>[Срок]</code></td>
+<td>Подставляется значение атрибута <code>$date</code></td>
+</tr>
+<tr>
+<td><code>[ФИО специалиста]</code></td>
+<td>Подставляется значение атрибута <code>$managerfio</code></td>
+</tr>
+</tbody>
+</table>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5624">Уведомления о задачах. Настройка текста и отправки эл. почтой</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5710">Атрибут типа «Текст»</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/category.php?id=901">Язык формул</a></li>
+</ul>
+</div>
 </article>
 </div>
 </div>

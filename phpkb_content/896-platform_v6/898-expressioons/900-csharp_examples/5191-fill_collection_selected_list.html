@@ -1,0 +1,43 @@
+<h1>Заполнение коллекции выбранной таблицей</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5191" kb-tags="C#,скрипт,C#-скрипт,пример скрипта" kb-title="Заполнение коллекции выбранной таблицей">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для того чтобы в рамках процесса заполнить коллекцию в текущем объекте какой-либо таблицей, введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Collections.Generic</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Linq</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.Data.Entity</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.TeamNetwork.Api.Data.UserCommands</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.TeamNetwork.Api.Data</span><span class="p">;</span></code> <br/><code></code> <br/><code><span class="k">class</span><span class="w"> </span><span class="nc">Script</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="n">Main</span><span class="p">(</span><span class="n">Comindware</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">ScriptContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span></code> <br/><code><span class="w">    </span><span class="p">{</span><span class="w">     </span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Comindware</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">DatasetQuery</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="n">DatasetId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"lst.53"</span></code> <br/><code><span class="w">        </span><span class="p">};</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">sessionsData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">DatasetService</span><span class="p">.</span><span class="n">QueryData</span><span class="p">(</span><span class="n">query</span><span class="p">).</span><span class="n">Rows</span><span class="p">;</span></code> <br/><code><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sessionsData</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">//проверяем, что в таблице есть записи</span></code> <br/><code><span class="w">        </span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">objectId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">context</span><span class="p">.</span><span class="n">BusinessObjectId</span><span class="p">;</span><span class="w"> </span><span class="c1">//текущая запись</span></code> <br/><code><span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ApplicationIds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="p">();</span></code> <br/><code><span class="w">        </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">sessionsData</span><span class="p">)</span><span class="w"> </span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="n">ApplicationIds</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">row</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">object</span><span class="o">&gt;</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="p">{</span><span class="w"> </span><span class="s">"Applications"</span><span class="p">,</span><span class="w"> </span><span class="n">ApplicationIds</span><span class="p">}</span><span class="w"> </span><span class="c1">//вторым аргументом пишем лист idшников</span></code> <br/><code><span class="w">        </span><span class="p">};</span></code> <br/><code><span class="w">        </span></code> <br/><code><span class="w">        </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">EditWithAlias</span><span class="p">(</span><span class="s">"Register"</span><span class="p">,</span><span class="w"> </span><span class="n">objectId</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">);</span><span class="w"> </span><span class="c1">//записываем коллекцию в текущем объекте.</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lst.53</code></td>
+<td>ID таблицы, на основе которой будет заполняться коллекция.</td>
+</tr>
+<tr>
+<td><code>Applications</code></td>
+<td>Системное имя атрибута типа «<strong>Коллекция</strong>» в текущем шаблоне записи. В этот атрибут нужно записать выбранные записи.</td>
+</tr>
+<tr>
+<td><code>Register</code></td>
+<td>Системное имя текущего шаблона записи.</td>
+</tr>
+</tbody>
+</table>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

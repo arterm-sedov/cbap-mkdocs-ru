@@ -1,0 +1,36 @@
+<h1>Вычисление всех аккаунтов группы</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5246" kb-tags="пример,формулы" kb-title="Вычисление всех аккаунтов группы">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для вычисления аккаунтов, входящих в определённую группу без учёта подгрупп и их участников (в случае, если в группе нет вложенности), введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">(</span><span class="k">from</span><span class="w"> </span><span class="n">ag</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">db</span><span class="o">-&gt;</span><span class="n">_AccountGroup</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">ag</span><span class="o">-&gt;</span><span class="n">groupName</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">"users"</span><span class="p">,</span><span class="n">ag</span><span class="o">-&gt;</span><span class="n">groupName</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">"admins"</span><span class="p">)</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">ag</span><span class="o">-&gt;</span><span class="n">groupUsers</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">)</span></code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"users", "admins"</td>
+<td>Названия групп.</td>
+</tr>
+</tbody>
+</table>
+<p>Альтернатива статье <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4936">Вычисление всех пользователей группы</a>.</p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

@@ -1,16 +1,27 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4938" kb-tags="" kb-title="Вычисление всех пользователей группы и её подгрупп">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5265" kb-tags="N3,выражение на N3,пример" kb-title="Вычисление всех пользователей группы и её подгрупп">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
-<nav aria-label="Содержание" class="md-nav md-nav--secondary">
-</nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<p>Для того, чтобы получить всех пользователей из определенной группы, включая пользователей подгрупп первого уровня, которые включены в состав указанной группы, введите следующее выражение:</p>
-<div class="highlight"><code><pre><span></span><code>@prefix account: &lt;http://comindware.com/ontology/account#&gt;.</code> <br/><code>@prefix assert: &lt;http://comindware.com/logics/assert#&gt;.</code> <br/><code>{</code> <br/><code>    ?projectOffice account:groupName "Менеджеры".</code> <br/><code>    ?users account:userGroupMembership ?projectOffice.</code> <br/><code>    ?projectOffice account:subGroups ?subgroups.</code> <br/><code>    ?subusers account:userGroupMembership ?subgroups.</code> <br/><code>    (</code> <br/><code>        {?subusers account:fullName ?.</code> <br/><code>         ?subusers -&gt; ?value.}</code> <br/><code>        {?users account:fullName ?.</code> <br/><code>         ?users -&gt; ?value.}</code> <br/><code>    )assert:union true.</code> <br/><code>}</code> <br/></pre></code></div>
-<p><strong>где:</strong></p>
-<p><strong>"Менеджеры"</strong> — название группы, пользователей которой требуется получить.</p>
-<p>Альтернатива статье <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4976">Вычисление всех пользователей группы и её подгрупп</a>.</p>
+<p>Для того чтобы получить всех пользователей из определенной группы, включая пользователей подгрупп первого уровня, которые включены в состав указанной группы, введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">account:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/account#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">assert:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/assert#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="err">?projectOffice</span> <span class="nn">account</span><span class="p">:</span><span class="nt">groupName</span> <span class="s">"Менеджеры"</span><span class="p">.</span></code> <br/><code>    <span class="err">?users</span> <span class="nn">account</span><span class="p">:</span><span class="nt">userGroupMembership</span> <span class="err">?projectOffice</span><span class="p">.</span></code> <br/><code>    <span class="err">?projectOffice</span> <span class="nn">account</span><span class="p">:</span><span class="nt">subGroups</span> <span class="err">?subgroups</span><span class="p">.</span></code> <br/><code>    <span class="err">?subusers</span> <span class="nn">account</span><span class="p">:</span><span class="nt">userGroupMembership</span> <span class="err">?subgroups</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span></code> <br/><code>        <span class="p">{</span><span class="err">?subusers</span> <span class="nn">account</span><span class="p">:</span><span class="nt">fullName</span> <span class="err">?</span><span class="p">.</span></code> <br/><code>         <span class="err">?subusers</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.}</span></code> <br/><code>        <span class="p">{</span><span class="err">?users</span> <span class="nn">account</span><span class="p">:</span><span class="nt">fullName</span> <span class="err">?</span><span class="p">.</span></code> <br/><code>         <span class="err">?users</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.}</span></code> <br/><code>    <span class="p">)</span><span class="nn">assert</span><span class="p">:</span><span class="nt">union</span> <span class="l">true</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"Менеджеры"</td>
+<td>Название группы, пользователей которой требуется получить.</td>
+</tr>
+</tbody>
+</table>
+<p>Альтернатива статье <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5221">Вычисление всех пользователей группы и её подгрупп</a>.</p>
 </article>
 </div>
 </div>

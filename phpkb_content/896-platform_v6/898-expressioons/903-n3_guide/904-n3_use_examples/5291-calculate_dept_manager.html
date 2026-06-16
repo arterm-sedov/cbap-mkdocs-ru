@@ -1,0 +1,59 @@
+<h1>Вычисление руководителя подразделения из шаблона пользователя</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5291" kb-tags="N3,атрибуты,выражение на N3,пример,процессы" kb-title="Вычисление руководителя подразделения из шаблона пользователя">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для того чтобы вычислить руководителя подразделения из Шаблона пользователя ( в случае, если руководитель определяется именно там, а не в Шаблоне записи), например, для использования при назначении задач, введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmw:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">account:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/account#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code></code> <br/><code>    <span class="p">(</span><span class="s">"Sotrudniki"</span> <span class="s">"Rukovoditelbool"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?rukovoditel</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Sotrudniki"</span> <span class="s">"Podrazdelenie"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?userDiv</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Naryady"</span> <span class="s">"NaryadPodrazdelenie"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?divNar</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span><span class="s">"Divisions"</span> <span class="s">"Title"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?divID</span><span class="p">.</span></code> <br/><code></code> <br/><code>        <span class="err">?item</span> <span class="err">?divNar</span> <span class="err">?div</span><span class="p">.</span></code> <br/><code>        <span class="err">?div</span> <span class="err">?divID</span> <span class="err">?divtext</span><span class="p">.</span></code> <br/><code>        <span class="err">?user</span> <span class="kt">a</span> <span class="nn">account</span><span class="p">:</span><span class="nt">Account</span><span class="p">.</span></code> <br/><code>        <span class="err">?user</span> <span class="err">?userDiv</span> <span class="err">?userDivValue</span><span class="p">.</span></code> <br/><code>        <span class="err">?userDivValue</span> <span class="err">==</span> <span class="err">?divtext</span><span class="p">.</span></code> <br/><code>        <span class="err">?user</span> <span class="err">?userDiv</span> <span class="err">?divtext</span><span class="p">.</span></code> <br/><code>        <span class="err">?user</span> <span class="err">?rukovoditel</span> <span class="l">true</span><span class="p">.</span></code> <br/><code>        <span class="err">?user</span> <span class="nn">account</span><span class="p">:</span><span class="nt">active</span> <span class="l">true</span><span class="p">.</span></code> <br/><code>        <span class="err">?value</span> <span class="err">==</span> <span class="err">?user</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Sotrudniki</code></td>
+<td>Системное имя Шаблона пользователя.</td>
+</tr>
+<tr>
+<td><code>Rukovoditelbool</code></td>
+<td>Системное атрибута типа «<strong>Логический</strong>» в <strong>Sotrudniki</strong>, определяющий, является ли пользователь руководителем.</td>
+</tr>
+<tr>
+<td><code>Podrazdelenie</code></td>
+<td>Системное атрибута типа «<strong>Ссылка</strong>» в <strong>Sotrudniki</strong>, определяющий подразделение пользователя.</td>
+</tr>
+<tr>
+<td><code>Naryady</code></td>
+<td>Системное имя текущего Шаблона записи.</td>
+</tr>
+<tr>
+<td><code>NaryadPodrazdelenie</code></td>
+<td>Системное имя атрибута типа «<strong>Ссылка</strong>» в <strong>Naryady</strong>.</td>
+</tr>
+<tr>
+<td><code>Divisions</code></td>
+<td>Системное имя Шаблона записи, на который ссылаются <strong>Podrazdelenie</strong>и <strong>NaryadPodrazdelenie</strong>.</td>
+</tr>
+<tr>
+<td><code>Title</code></td>
+<td>Системное имя атрибута для поиска в <strong>Divisions</strong>.</td>
+</tr>
+</tbody>
+</table>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

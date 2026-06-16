@@ -1,0 +1,252 @@
+<h1>Написание скриптов на языке C#</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5211" kb-tags="" kb-title="Написание скриптов на языке C#">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#csharp_guide_intro">
+<span class="md-ellipsis">
+      
+        Введение
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#csharp_guide_use_cases">
+<span class="md-ellipsis">
+      
+        Возможности использования C#-скриптов
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#csharp_guide_input_output">
+<span class="md-ellipsis">
+      
+        Входные и выходные данные C#-скрипта
+      
+    </span>
+</a>
+<nav aria-label="Входные и выходные данные C#-скрипта" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#csharp_guide_script_descriptions">
+<span class="md-ellipsis">
+      
+        Описание скриптов для различных сущностей
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#csharp_guide_libraries">
+<span class="md-ellipsis">
+      
+        Пространство используемых библиотек
+      
+    </span>
+</a>
+<nav aria-label="Пространство используемых библиотек" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#csharp_guide_platform_api">
+<span class="md-ellipsis">
+      
+        API для взаимодействия с Comindware Platform
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#csharp_guide_dotnet_libraries">
+<span class="md-ellipsis">
+      
+        Системные библиотеки и классы .Net Framework
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#csharp_guide_helper_libraries">
+<span class="md-ellipsis">
+      
+        Вспомогательные библиотеки и классы
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="csharp_guide_intro">Введение</h2>
+<p>Для расширения функциональности в ПО  <strong>Comindware Platform</strong> предусмотрены инструменты написания и использования скриптов на языке C#. ПО позволяет внедрять C#-скрипты при настройке различных сущностей и функций приложения.</p>
+<h2 id="csharp_guide_use_cases">Возможности использования C#-скриптов</h2>
+<p>ПО позволяет использовать C#-скрипты при настройке следующих сущностей и функций:</p>
+<ul>
+<li>Шаблон любого типа → Кнопка → <a class="mkdocs_imported_link" href="#csharp_guide_button_script">Скрипт операции</a></li>
+<li>Шаблон процесса → Задача-выполнение сценария → <a class="mkdocs_imported_link" href="#csharp_guide_process_script_task">Скрипт задачи</a></li>
+<li>Шаблон процесса → Пользовательская задача → <a class="mkdocs_imported_link" href="#csharp_guide_process_user_task_title">Вычисление заголовка задачи</a></li>
+<li>Шаблон процесса → Пользовательская задача → <a class="mkdocs_imported_link" href="#csharp_guide_process_user_task_assignees">Вычисление исполнителей задачи</a></li>
+<li>Шаблон процесса → Пользовательская задача → <a class="mkdocs_imported_link" href="#csharp_guide_process_user_task_duration">Вычисление продолжительности задачи</a></li>
+<li>Сценарий → <a class="mkdocs_imported_link" href="#csharp_guide_scenario_attribute_value_script">Изменение значений атрибутов скриптом</a></li>
+<li>Сценарий → <a class="mkdocs_imported_link" href="#csharp_guide_scenario_script_result_validation">Проверка результата скрипта</a></li>
+<li>Шаблон процесса → Развилка «или/или» → <a class="mkdocs_imported_link" href="#csharp_guide_process_gateway_conditions">Вычисление условий выбора потоков</a></li>
+<li>Шаблон процесса → Конечное событие и промежуточное событие → <a class="mkdocs_imported_link" href="#csharp_guide_process_duration">Вычисление продолжительности процесса</a></li>
+<li>Шаблон процесса → Конечное событие-отправка сообщения и промежуточное событие-отправка сообщения → Тип сообщения → <a class="mkdocs_imported_link" href="#csharp_guide_process_message_target_process">Вычисление экземпляра процесса, в который отправляется сообщение сообщения</a></li>
+<li>Шаблон процесса → Конечное событие-отправка сообщения и промежуточное событие-отправка сообщения → <a class="mkdocs_imported_link" href="#csharp_guide_process_message_attribute_value">Вычисление значения атрибута сообщения</a></li>
+</ul>
+<h2 id="csharp_guide_input_output">Входные и выходные данные C#-скрипта</h2>
+<p>Скрипт оформляется как <code>public class</code> с предопределённым именем <code>Script</code>. При выполнении скрипта вызывается метод <code>public static Main</code> этого класса. Скрипт компилируется при сохранении настраиваемой сущности.</p>
+<p>Перед компиляцией тело скрипта помещается в уникальное пространство имён (<code>namespace</code>) во избежание интерференции между скриптами. Для удобства разработчика в том же пространстве имён автоматически создаётся вспомогательный класс коротких синонимов для обращения к API вида:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Api</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">Comindware</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">PublicServices</span><span class="w"> </span><span class="n">TeamNetwork</span><span class="p">;</span></code> <br/><code><span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">Comindware</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">IPublicServices</span><span class="w"> </span><span class="n">Process</span><span class="p">;</span></code> <br/><code><span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">Comindware</span><span class="p">.</span><span class="n">Platform</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">IPublicServices</span><span class="w"> </span><span class="n">Base</span><span class="p">;</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p>Если скомпилировать скрипт не удалось, выводятся предупреждение и детализированное описание ошибок компиляции в области «<strong>Журнал действий и ошибок</strong>» <i class="fal fa-flag">‌<!--icon--></i> в информационной панели.</p>
+<p>Перекомпиляция и проверка её успешности происходят каждый раз при сохранении, проверке или публикации сущности, в которую внедрён скрипт.</p>
+<h3 id="csharp_guide_script_descriptions">Описание скриптов для различных сущностей</h3>
+<h4 id="csharp_guide_button_script">Шаблон любого типа → Кнопка → Скрипт операции</h4>
+<p><strong>Заготовка скрипта</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Script</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">UserCommandResult</span><span class="w"> </span><span class="nf">Main</span><span class="w"> </span><span class="p">(</span><span class="n">UserCommandContext</span><span class="w"> </span><span class="n">userCommandContext</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="c1">// Тело скрипта</span></code> <br/><code><span class="w">  </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Входные данные</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="n">UserCommandContext</span><span class="w"> </span><span class="n">userCommandContext</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">ObjectIds</span><span class="p">,</span><span class="w"> </span><span class="c1">// массив ID выбранных записей в таблице</span></code> <br/><code><span class="w">           </span><span class="c1">// (пустой массив, если записи не выбраны)</span></code> <br/><code><span class="w">           </span><span class="c1">// или массив из одного элемента с ID записи на форме</span></code> <br/><code><span class="w">  </span><span class="kt">string</span><span class="p">[]</span><span class="w"> </span><span class="n">SelectedIds</span><span class="p">,</span><span class="w"> </span><span class="c1">// массив ID записей, выбранных в таблице на форме</span></code> <br/><code><span class="w">           </span><span class="c1">// (пустой массив, если записи не выбраны)</span></code> <br/><code><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">CurrentUserId</span><span class="p">,</span><span class="w"> </span><span class="c1">// ID аккаунта текущего пользователя</span></code> <br/><code><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">DocumentTemplateId</span><span class="p">,</span><span class="w"> </span><span class="c1">// ID шаблона, к которому относится команда</span></code> <br/><code><span class="w">  </span><span class="n">dateTime</span><span class="w"> </span><span class="n">CurrentRequestTime</span><span class="p">,</span><span class="w"> </span><span class="c1">// дата и время текущего запроса</span></code> <br/><code><span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">ExportAsPdf</span><span class="p">,</span><span class="w"> </span><span class="c1">// флаг экспорта в PDF</span></code> <br/><code><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">FileName</span><span class="p">,</span><span class="w"> </span><span class="c1">// имя файла при выгрузке данных по шаблону экспорта</span></code> <br/><code><span class="w">  </span><span class="n">DatasetQuery</span><span class="w"> </span><span class="n">Query</span><span class="w"> </span><span class="c1">// список, с которого произошел запуск операции</span></code> <br/><code><span class="p">},</span></code> <br/></pre></code></div>
+<p><strong>Выходные данные</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="n">UserCommandResult</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">Success</span><span class="p">,</span><span class="w"> </span><span class="c1">// флаг успешного завершения операции</span></code> <br/><code><span class="w">  </span><span class="kt">bool</span><span class="w"> </span><span class="n">Commited</span><span class="p">,</span><span class="w"> </span><span class="c1">// флаг необходимости коммита операции</span></code> <br/><code><span class="w">  </span><span class="k">enum</span><span class="w"> </span><span class="n">UserCommandResultType</span><span class="w"> </span><span class="n">ResultType</span><span class="p">,</span><span class="w"> </span><span class="c1">// тип возвращаемого результата.</span></code> <br/><code><span class="w">  </span><span class="c1">// В зависимости от значения производятся действия:</span></code> <br/><code><span class="w">      </span><span class="c1">// DataChange — обновление данных</span></code> <br/><code><span class="w">      </span><span class="c1">// Notificate — сообщение пользователю</span></code> <br/><code><span class="w">      </span><span class="c1">// Navigate — переход на страницу</span></code> <br/><code><span class="w">      </span><span class="c1">// File — скачивание файла</span></code> <br/><code></code> <br/><code><span class="w">  </span><span class="c1">// набор данных для перехода на другую страницу</span></code> <br/><code><span class="w">  </span><span class="n">UserCommandNavigationResult</span><span class="w"> </span><span class="n">NavigationResult</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">Title</span><span class="p">,</span><span class="w"> </span><span class="c1">// заголовок</span></code> <br/><code><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">ObjectId</span><span class="p">,</span><span class="w"> </span><span class="c1">// ID записи</span></code> <br/><code><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">ContainerId</span><span class="p">,</span><span class="w"> </span><span class="c1">// ID контейнера</span></code> <br/><code><span class="w">    </span><span class="n">ContextType</span><span class="w"> </span><span class="n">Context</span><span class="w"> </span><span class="c1">// тип отображения</span></code> <br/><code><span class="w">      </span><span class="c1">// Undefined, Void, Any, Task, Case, Record, Process, List, Form, Page, Container</span></code> <br/><code><span class="w">  </span><span class="p">},</span></code> <br/><code></code> <br/><code><span class="w">  </span><span class="c1">// объект выгружаемого файла</span></code> <br/><code><span class="w">  </span><span class="n">UserCommandFileResult</span><span class="w"> </span><span class="n">File</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">Name</span><span class="p">,</span><span class="w"> </span><span class="c1">// имя файла</span></code> <br/><code><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">Type</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="kt">byte</span><span class="p">[]</span><span class="w"> </span><span class="n">Content</span><span class="w"> </span><span class="c1">// тело файла</span></code> <br/><code><span class="w">  </span><span class="p">},</span></code> <br/><code></code> <br/><code><span class="w">  </span><span class="c1">// сообщение об окончании операции</span></code> <br/><code><span class="w">  </span><span class="n">UserCommandMessage</span><span class="p">[]</span><span class="w"> </span><span class="n">Messages</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="k">enum</span><span class="w"> </span><span class="n">Severity</span><span class="p">,</span><span class="w"> </span><span class="c1">// уровень важности сообщения</span></code> <br/><code><span class="w">      </span><span class="c1">// SeverityLevel (Critical, Fatal, Low, Major, None, Normal)</span></code> <br/><code><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">Text</span></code> <br/><code><span class="w">  </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<h4 id="csharp_guide_process_script_task">Шаблон процесса → Задача-выполнение сценария → Скрипт задачи</h4>
+<p><strong>Заготовка скрипта</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Script</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">   </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="n">Main</span><span class="p">(</span><span class="n">Comindware</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">ScriptContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">     </span><span class="c1">// Тело скрипта</span></code> <br/><code><span class="w">  </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Входные данные</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="n">Comindware</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">ScriptContext</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="n">ProcessID</span><span class="p">,</span><span class="w">  </span><span class="c1">// ID экземпляра процесса</span></code> <br/><code><span class="w">   </span><span class="kt">string</span><span class="w"> </span><span class="n">BusinessObjectID</span><span class="p">,</span><span class="w">  </span><span class="c1">// ID записи, связанной с экземпляром процесса</span></code> <br/><code><span class="p">},</span></code> <br/></pre></code></div>
+<p><strong>Выходные данные</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="k">void</span></code> <br/><code><span class="c1">// Возвращаемые параметры отсутствуют</span></code> <br/></pre></code></div>
+<h4 id="csharp_guide_process_user_task_title">Шаблон процесса → Пользовательская задача → Вычисление заголовка задачи</h4>
+<p><strong>Заготовка скрипта</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Script</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">   </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Main</span><span class="p">(</span><span class="n">Comindware</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">ScriptContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">     </span><span class="c1">// Тело скрипта</span></code> <br/><code><span class="w">  </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Входные данные</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="n">Comindware</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">ScriptContext</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">ProcessID</span><span class="p">,</span><span class="w">  </span><span class="c1">// ID экземпляра процесса</span></code> <br/><code><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">BusinessObjectID</span><span class="p">,</span><span class="w">  </span><span class="c1">// ID записи, связанной с экземпляром процесса</span></code> <br/><code><span class="p">},</span></code> <br/></pre></code></div>
+<p><strong>Выходные данные</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="kt">string</span></code> <br/><code><span class="c1">// Заголовку задачи присваивается возвращённое строковое значение</span></code> <br/></pre></code></div>
+<h4 id="csharp_guide_process_user_task_assignees">Шаблон процесса → Пользовательская задача → Вычисление исполнителей задачи</h4>
+<p><strong>Заготовка скрипта</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Script</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Main</span><span class="p">(</span><span class="n">Comindware</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">ScriptContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="c1">// Тело скрипта</span></code> <br/><code><span class="w">  </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Входные данные</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="n">Comindware</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">ScriptContext</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">ProcessID</span><span class="p">,</span><span class="w"> </span><span class="c1">// ID экземпляра процесса</span></code> <br/><code><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">BusinessObjectID</span><span class="w"> </span><span class="c1">// ID записи, связанной с экземпляром процесса</span></code> <br/><code><span class="p">},</span></code> <br/></pre></code></div>
+<p><strong>Выходные данные</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span></code> <br/><code><span class="c1">// Скрипт должен вернуть список ID аккаунтов</span></code> <br/></pre></code></div>
+<h4 id="csharp_guide_process_user_task_duration">Шаблон процесса → Пользовательская задача → Вычисление продолжительности задачи</h4>
+<p><strong>Заготовка скрипта</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Script</span><span class="w">  </span><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="k">public</span><span class="w">  </span><span class="k">static</span><span class="w"> </span><span class="n">TimeSpan</span><span class="w"> </span><span class="nf">Main</span><span class="w"> </span><span class="p">(</span><span class="n">Comindware</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">ScriptContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="c1">// Тело скрипта</span></code> <br/><code><span class="w">  </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Входные данные</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="n">Comindware</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">ScriptContext</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">ProcessID</span><span class="p">,</span><span class="w"> </span><span class="c1">// ID экземпляра процесса</span></code> <br/><code><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">BusinessObjectID</span><span class="p">,</span><span class="w"> </span><span class="c1">// ID записи, связанной с экземпляром процесса</span></code> <br/><code><span class="p">},</span></code> <br/><code><span class="n">Comindware</span><span class="p">.</span><span class="n">Entities</span><span class="p">,</span><span class="w"> </span><span class="c1">// используется для доступа к данным шаблонов записей</span></code> <br/></pre></code></div>
+<p><strong>Выходные данные</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="n">TimeSpan</span></code> <br/><code><span class="c1">// Продолжительности задачи присваивается возвращённое значение длительности</span></code> <br/></pre></code></div>
+<h4 id="csharp_guide_scenario_attribute_value_script">Сценарий → Изменение значений атрибутов скриптом</h4>
+<p><strong>Заготовка скрипта</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Script</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="c1">// string, int, decimal, dateTime, bool, TimeSpan или IEnumerable&lt;string&gt;</span></code> <br/><code><span class="w">    </span><span class="n">Main</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">ObjectID</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="c1">// Тело скрипта</span></code> <br/><code><span class="w">  </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Входные данные</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="kt">string</span><span class="w"> </span><span class="n">ProcessID</span><span class="p">,</span><span class="w"> </span><span class="c1">// ID экземпляра процесса,</span></code> <br/><code><span class="kt">string</span><span class="w"> </span><span class="n">ObjectID</span><span class="p">,</span><span class="w"> </span><span class="c1">// ID записи,</span></code> <br/></pre></code></div>
+<p><strong>Выходные данные</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">,</span><span class="w"> </span><span class="kt">decimal</span><span class="p">,</span><span class="w"> </span><span class="n">dateTime</span><span class="p">,</span><span class="w"> </span><span class="n">TimeSpan</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="n">IEnumerable</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span></code> <br/><code><span class="c1">// Атрибуту присваивается возвращённое значение соответствующего типа</span></code> <br/></pre></code></div>
+<h4 id="csharp_guide_scenario_script_result_validation">Сценарий → Проверка результата выполнения скрипта</h4>
+<p><strong>Заготовка скрипта</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Script</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">Main</span><span class="p">([</span><span class="n">Object</span><span class="w"> </span><span class="n">fullObjectID</span><span class="p">])</span></code> <br/><code><span class="w">    </span><span class="p">{</span><span class="w"> </span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">ObjectID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fullObjectID</span><span class="p">.</span><span class="n">ToString</span><span class="p">().</span><span class="n">Replace</span><span class="p">(</span><span class="s">"user."</span><span class="p">,</span><span class="w"> </span><span class="s">""</span><span class="p">);</span></code> <br/><code><span class="w">        </span><span class="c1">// Тело скрипта</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Входные данные</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="kt">string</span><span class="w"> </span><span class="n">fullObjectID</span><span class="w"> </span><span class="c1">// ID записи с префиксом, необязательный аргумент</span></code> <br/></pre></code></div>
+<p><strong>Выходные данные</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="kt">bool</span></code> <br/><code><span class="c1">// В зависимости от результата выполения возвращается true или false</span></code> <br/></pre></code></div>
+<h4 id="csharp_guide_process_gateway_conditions">Шаблон процесса → Развилка «или/или» → Вычисление условий выбора потоков</h4>
+<p><strong>Заготовка скрипта</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Script</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">Main</span><span class="p">(</span><span class="n">Comindware</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">ScriptContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="c1">// Тело скрипта</span></code> <br/><code><span class="w">  </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Входные данные</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="n">Comindware</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">ScriptContext</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">ProcessID</span><span class="p">,</span><span class="w"> </span><span class="c1">// ID экземпляра процесса</span></code> <br/><code><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">BusinessObjectID</span><span class="p">,</span><span class="w"> </span><span class="c1">// ID записи, связанной с экземпляром процесса</span></code> <br/><code><span class="p">},</span></code> <br/></pre></code></div>
+<p><strong>Выходные данные</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="kt">bool</span></code> <br/><code><span class="c1">// Если скрипт вернул true, токен идёт по этому потоку управления</span></code> <br/></pre></code></div>
+<h4 id="csharp_guide_process_duration">Шаблон процесса → Конечное событие и промежуточное событие → Вычисление продолжительности процесса</h4>
+<p><strong>Заготовка скрипта</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Script</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">TimeSpan</span><span class="w"> </span><span class="nf">Main</span><span class="w"> </span><span class="p">(</span><span class="n">Comindware</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">ScriptContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="c1">// Тело скрипта</span></code> <br/><code><span class="w">  </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Входные данные</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="n">Comindware</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">ScriptContext</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">ProcessID</span><span class="p">,</span><span class="w"> </span><span class="c1">// ID экземпляра процесса</span></code> <br/><code><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">BusinessObjectID</span><span class="p">,</span><span class="w"> </span><span class="c1">// ID записи, связанной с экземпляром процесса</span></code> <br/><code><span class="p">},</span></code> <br/></pre></code></div>
+<p><strong>Выходные данные</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="n">TimeSpan</span></code> <br/><code><span class="c1">// Продолжительности процесса присваивается возвращённое значение длительности</span></code> <br/></pre></code></div>
+<h4 id="csharp_guide_process_message_target_process">Шаблон процесса → Конечное событие-отправка сообщения и промежуточное событие-отправка сообщения → Тип сообщения → Вычисление экземпляра процесса, в который отправляется сообщение</h4>
+<p><strong>Заготовка скрипта</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Script</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="n">Main</span><span class="p">(</span><span class="n">Comindware</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">ScriptContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="c1">// Тело скрипта</span></code> <br/><code><span class="w">  </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Входные данные</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="n">Comindware</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">ScriptContext</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">ProcessID</span><span class="p">,</span><span class="w"> </span><span class="c1">// ID экземпляра процесса</span></code> <br/><code><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">BusinessObjectID</span><span class="p">,</span><span class="w"> </span><span class="c1">// ID записи, связанной с экземпляром процесса</span></code> <br/><code><span class="p">},</span></code> <br/></pre></code></div>
+<p><strong>Выходные данные</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="kt">string</span></code> <br/><code><span class="c1">// Скрипт должен вернуть ID экземпляра процесса</span></code> <br/></pre></code></div>
+<h4 id="csharp_guide_process_message_attribute_value">Шаблон процесса → Конечное событие-отправка сообщения и промежуточное событие-отправка сообщения → Вычисление значения атрибута сообщения</h4>
+<p><strong>Заготовка скрипта</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Script</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Main</span><span class="p">(</span><span class="n">Comindware</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">ScriptContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="c1">// Тело скрипта</span></code> <br/><code><span class="w">  </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Входные данные</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="n">Comindware</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">ScriptContext</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">ProcessID</span><span class="p">,</span><span class="w"> </span><span class="c1">// ID экземпляра процесса</span></code> <br/><code><span class="w">  </span><span class="kt">string</span><span class="w"> </span><span class="n">BusinessObjectID</span><span class="w"> </span><span class="c1">// ID записи, связанной с экземпляром процесса</span></code> <br/><code><span class="p">},</span></code> <br/></pre></code></div>
+<p><strong>Выходные данные</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p">,</span><span class="w"> </span><span class="n">dateTime</span><span class="p">,</span><span class="w"> </span><span class="n">TimeSpan</span><span class="p">,</span><span class="w"> </span><span class="kt">bool</span></code> <br/><code><span class="c1">// Атрибуту присваивается возвращённое строковое значение</span></code> <br/></pre></code></div>
+<h2 id="csharp_guide_libraries">Пространство используемых библиотек</h2>
+<p>Во всех пользовательских C#-скриптах ПО позволяет подключать перечисленные ниже библиотеки и использовать их публичные классы.</p>
+<h3 id="csharp_guide_platform_api">API для взаимодействия с Comindware Platform</h3>
+<ul>
+<li>Comindware.Logics.Transaction</li>
+<li>Comindware.Data.Entity.ITransaction</li>
+<li>Comindware.Data.Entity.IEntitySet</li>
+<li>Comindware.Platform.Common</li>
+<li>Comindware.Logics</li>
+<li>Comindware.Data.Entity</li>
+<li>Comindware.Data.Api</li>
+<li>Comindware.Teamnetwork.Api</li>
+<li>Comindware.Process.Api</li>
+<li>Comindware.Platform.Api</li>
+</ul>
+<h3 id="csharp_guide_dotnet_libraries">Системные библиотеки и классы .Net Framework</h3>
+<ul>
+<li>netstandard — API-интерфейс .NET</li>
+<li>System.Runtime — основные примитивы, классы и базовые классы .NET</li>
+<li>mscorlib — базовые классы .NET</li>
+<li>System.Core — базовые классы .NET</li>
+<li>System.Xml — обработка XML- документов</li>
+<li>System.Xml.Linq — обработка XML-документов посредством LINQ to XML</li>
+<li>System — базовые классы .NET</li>
+<li>System.object — исходный базовый класс .NET</li>
+<li>System.Linq.Enumerable — запросы к объектам с интерфейсом IEnumerable<t></t></li>
+</ul>
+<h3 id="csharp_guide_helper_libraries">Вспомогательные библиотеки и классы</h3>
+<ul>
+<li>System.Xml. XmlDocument — обработка XML- документов</li>
+<li>System.Xml.Linq. XDocument — обработка XML- документов</li>
+<li>System.Net. HttpWebRequest — формирование HTTP -запросов</li>
+<li>Newtonsoft.Json. JsonSerializerSettings — определение параметров объекта JsonSerializer</li>
+<li>System.IO.Compression.ZipArchive — обработка ZIP -архивов</li>
+<li>System.DirectoryServices. DirectoryEntry — взаимодействие с Active Directory</li>
+<li>System.Data.SqlClient. SqlConnection — взаимодействи с базой данных</li>
+<li>System.Drawing.Bitmap — обработка изображений</li>
+<li>RestSharp.RestRequest — формирование HTTP- запросов</li>
+<li>RestSharp.Authenticators.HttpBasicAuthenticator — аутентификация HTTP-запросов</li>
+<li>NLog.Logger — подсистема журналирования</li>
+<li>Aspose.BarCode — обработка штрихкодов</li>
+<li>Aspose.Cells — обработка файлов в формате Excel</li>
+<li>Aspose.Words — обработка файлов в формате Word</li>
+</ul>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

@@ -1,0 +1,164 @@
+<h1>Фильтр записей в коллекции по заданному параметру</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5270" kb-tags="N3,атрибуты,выражение на N3,пример" kb-title="Фильтр записей в коллекции по заданному параметру">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#filter_records_param_use_case">
+<span class="md-ellipsis">
+      
+        Прикладная задача
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#filter_records_param_data_model">
+<span class="md-ellipsis">
+      
+        Модель данных
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#filter_records_param_filter_setup">
+<span class="md-ellipsis">
+      
+        Настройка фильтра
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#filter_records_param_expression_explanation">
+<span class="md-ellipsis">
+      
+        Разбор выражения
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#filter_records_param_result">
+<span class="md-ellipsis">
+      
+        Результат
+      
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Здесь приведён пример фильтрации записей в коллекции с помощью выражения N3 по параметру, заданному в текущей записи.</p>
+<h2 id="filter_records_param_use_case">Прикладная задача</h2>
+<p>Необходимо отобразить в коллекции только те адреса офисов, у которых область совпадает со значением, указанным в текущей записи организации.</p>
+<h2 id="filter_records_param_data_model">Модель данных</h2>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Шаблон записи</th>
+<th>Атрибут</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Organizatsii</code></td>
+<td><code>Filtrpooblasti</code> — атрибут типа «<strong>Текст</strong>»</td>
+<td>Хранит область, по которой требуется отфильтровать коллекцию.</td>
+</tr>
+<tr>
+<td><code>Organizatsii</code></td>
+<td><code>Adresaofisov_col</code> — атрибут типа «<strong>Запись</strong>» с несколькими значениями</td>
+<td>Хранит коллекцию адресов офисов.</td>
+</tr>
+<tr>
+<td><code>Adresa</code></td>
+<td><code>Oblast</code> — атрибут типа «<strong>Текст</strong>»</td>
+<td>Хранит область, по которой фильтруются адреса.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="filter_records_param_filter_setup">Настройка фильтра</h2>
+<ol class="colored_numbers_list">
+<li>Откройте форму шаблона записи <code>Organizatsii</code> в конструкторе формы.</li>
+<li>Выберите коллекцию <code>Adresaofisov_col</code>.</li>
+<li>В поле «<strong>Фильтр записей: для отображения</strong>» вставьте следующее выражение:</li>
+</ol>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>   <span class="p">(</span><span class="s">"Adresa"</span> <span class="s">"Oblast"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?PropertyOblast</span><span class="p">.</span></code> <br/><code>   <span class="p">(</span><span class="s">"Organizatsii"</span> <span class="s">"Adresaofisov_col"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?PropertyAdresaofisov_col</span><span class="p">.</span></code> <br/><code>   <span class="p">(</span><span class="s">"Organizatsii"</span> <span class="s">"Filtrpooblasti"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?PropertyOblastFilter</span><span class="p">.</span></code> <br/><code></code> <br/><code>   <span class="err">?item</span> <span class="err">?PropertyOblastFilter</span> <span class="err">?filter</span><span class="p">.</span></code> <br/><code>   <span class="err">?item</span> <span class="err">?PropertyAdresaofisov_col</span> <span class="err">?result_A</span><span class="p">.</span></code> <br/><code>   <span class="err">?result_A</span> <span class="err">?PropertyOblast</span> <span class="err">?filter</span><span class="p">.</span></code> <br/><code>   <span class="err">?result_A</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<h2 id="filter_records_param_expression_explanation">Разбор выражения</h2>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Фрагмент</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.</code></td>
+<td>Подключает префикс <code>object</code>, чтобы использовать свойство <code>object:findProperty</code>.</td>
+</tr>
+<tr>
+<td><code>("Adresa" "Oblast") object:findProperty ?PropertyOblast.</code></td>
+<td>Получает ID атрибута <code>Oblast</code> из шаблона <code>Adresa</code> и записывает его в переменную <code>PropertyOblast</code>.</td>
+</tr>
+<tr>
+<td><code>("Organizatsii" "Adresaofisov_col") object:findProperty ?PropertyAdresaofisov_col.</code></td>
+<td>Получает ID атрибута <code>Adresaofisov_col</code> из шаблона <code>Organizatsii</code> и записывает его в переменную <code>PropertyAdresaofisov_col</code>.</td>
+</tr>
+<tr>
+<td><code>("Organizatsii" "Filtrpooblasti") object:findProperty ?PropertyOblastFilter.</code></td>
+<td>Получает ID атрибута <code>Filtrpooblasti</code> из шаблона <code>Organizatsii</code> и записывает его в переменную <code>PropertyOblastFilter</code>.</td>
+</tr>
+<tr>
+<td><code>?item ?PropertyOblastFilter ?filter.</code></td>
+<td>Получает из текущей записи значение атрибута <code>Filtrpooblasti</code> и записывает его в переменную <code>filter</code>.</td>
+</tr>
+<tr>
+<td><code>?item ?PropertyAdresaofisov_col ?result_A.</code></td>
+<td>Получает из текущей записи значения атрибута <code>Adresaofisov_col</code> и записывает список записей коллекции в переменную <code>result_A</code>.</td>
+</tr>
+<tr>
+<td><code>?result_A ?PropertyOblast ?filter.</code></td>
+<td>Оставляет в списке <code>result_A</code> только записи, у которых значение атрибута <code>Oblast</code> совпадает со значением переменной <code>filter</code>.</td>
+</tr>
+<tr>
+<td><code>?result_A -&gt; ?value.</code></td>
+<td>Передаёт отфильтрованные записи в переменную <code>value</code>, чтобы отобразить их в коллекции.</td>
+</tr>
+</tbody>
+</table>
+<div class="notice notice-info">
+<p class="admonition-title">Зарезервированные переменные N3</p>
+<p>В выражениях N3 используются зарезервированные переменные:</p>
+<ul>
+<li><code>item</code> — ID записи, в контексте которой выполняется выражение;</li>
+<li><code>value</code> — результат выражения.</li>
+</ul>
+</div>
+<h2 id="filter_records_param_result">Результат</h2>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример фильтрации записей в коллекции" src="https://kb.comindware.ru/assets/N3_11.PNG"/></p><figcaption class="caption">Пример фильтрации записей в коллекции</figcaption>
+</figure>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>
