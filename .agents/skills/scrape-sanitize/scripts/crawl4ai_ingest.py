@@ -60,7 +60,7 @@ async def main():
     cfg = SITES[args.site]
     paths = resolve_paths(args.site, args.date)
     if args.fresh:
-        fresh_start(paths)
+        fresh_start(paths, what=('dirty_output', 'progress'))
     output_md = paths['dirty_output']
     progress_file = paths['progress']
 
