@@ -27,7 +27,7 @@ SCRATCH = os.path.join(REPO_ROOT, '.scratch')
 INPUT_FILE = os.path.join(SCRATCH, 'comindware_ru_for_llm_ingestion_dirty_2026Jun15.md')
 OUTPUT_FILE = os.path.join(SCRATCH, 'comindware_ru_for_llm_ingestion_sanitized_2026Jun15.md')
 URL_CACHE_FILE = os.path.join(SCRATCH, 'ralph', 'url_titles.json')
-CHECKPOINT_FILE = os.path.join(SCRATCH, 'ralph', 'progress', 'sanitize_checkpoint.json')
+CHECKPOINT_FILE = os.path.join(SCRIPT_DIR, 'sanitize_checkpoint.json')
 FAILURES_LOG = os.path.join(SCRATCH, 'ralph', 'sanitize_failures.log')
 REPORT_FILE = os.path.join(SCRATCH, 'ralph', 'reports', 'wave_checkpoint.json')
 
