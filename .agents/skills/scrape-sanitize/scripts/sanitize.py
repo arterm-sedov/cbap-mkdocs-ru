@@ -3,8 +3,10 @@ Unified incremental sanitizer with Ralph-loop checkpointing.
 Usage:
   python sanitize.py --site comindware_ru --date 20260616
   python sanitize.py --site comindware_ru --date 20260616 --fresh
+
+Site-specific boilerplate patterns are in patterns_{site}.py.
 """
-import re, os, sys, time, argparse
+import re, os, sys, time, argparse, importlib
 from urllib.parse import urlparse, urlunparse, unquote
 from datetime import datetime
 
@@ -24,44 +26,18 @@ add_common_args(PARSER)
 BATCH_SIZE = 10
 HTTP_TIMEOUT = 8
 PATHS = {}
+PATTERNS = {}  # Set by load_patterns()
 
-# --- Boilerplate patterns ---
-BOILERPLATE = [
-    re.compile(r'(?i).*\b(cookie|куки|файлы\s*cookie).*'),
-    re.compile(r'(?i).*\b(политик[аи]\s*конфиденциальности|privacy\s*policy).*'),
-    re.compile(r'(?i).*\b(все\s*права\s*защищены|copyright\s*©).*'),
-    re.compile(r'(?i).*\b(карта\s*сайта|sitemap).*'),
-    re.compile(r'.*\+7\s?\(?\d{3}\)?\s?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}.*'),
-    re.compile(r'.*[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}.*'),
-    re.compile(r'(?i).*\b(facebook|linkedin|instagram|twitter|youtube|telegram|vkontakte|vk\.com)\b.*'),
-    re.compile(r'(?i).*\b(следите\s*за\s*нами|присоединяйтесь|наши\s*соцсети|мы\s*в\s*соц).*'),
-    re.compile(r'(?i).*\b(вебинар|подпи[сш]к[ау]|subscribe|popup|modal|закр[ыо]ть\s*окно).*'),
-    re.compile(r'(?i).*\b(получайте\s*новости|будьте\s*в\s*курсе|узнавайте\s*первыми).*'),
-    re.compile(r'^[-=_*]{20,}$'),
-    re.compile(r'^\*{2}(Поддержка|Пресса|Адрес|Время\s*работы|Реквизиты|Контакты):?\*{2}$'),
-    re.compile(r'(?i).*\b(Поделиться|Share|Tweet|Нравится|Комментари[ея]|обсудить).*'),
-    re.compile(r'(?i).*\[(Запросить\s*демо|Заказать\s*звонок|Оставить\s*заявку|Напишите\s*нам|Свяжитесь|Отправить\s*запрос|Получить\s*консультацию)\].*'),
-    re.compile(r'(?i).*\b\[Цены\]\(https?://.*\).*'),
-]
-SUSPECT_PHRASES = re.compile(
-    r'(?i)(заказать|заявк[уа]|demo|consult|консультаци[юя]|свяжитесь|позвоните|напишите|'
-    r'кейс[ыов]|casestud|отзыв[ыов]|истори[ия]\s*успеха|наши\s*проекты|'
-    r'bpm-систем|low.code|no.code|реестр.*ПО|импортозамещ|цен[ыа]|прайс|стоимость|тариф)'
-)
-CTA_BUTTON_RE = re.compile(r'(?i)\[ Заказать демо \]|\[ Заказать звонок \]|\[ Оставить заявку \]|\[ Напишите нам \]|\[ Свяжитесь с нами \]')
 
-FOOTER_FINGERPRINTS = [
-    re.compile(r'(?i).*\b(обработку\s*персональных|персональных\s*данных).*'),
-    re.compile(r'(?i).*\b(reCaptcha|re\.captcha|капч).*'),
-    re.compile(r'(?i).*\b(все\s*поля\s*требуют|форма\s*защищена|сообщите\s*нам).*'),
-    re.compile(r'(?i).*\b(privacy|data-consent|mail-consent|согласи[ею]|конфиденциальност).*'),
-    re.compile(r'(?i).*\b(подпи[сш]к[ау]|subscribe|подписаться|я\s*согласен|нажимая\s*кнопку).*'),
-    re.compile(r'(?i).*\b(8-800|\+7\s*800|бесплатный\s*звонок).*'),
-    re.compile(r'(?i).*\b(адрес:\s*\*{0,2}\d{6}|москва|долгопрудненское|офис\s*comindware|как\s*добраться).*'),
-    re.compile(r'(?i).*\b(время\s*работы|пресса|поддержка):\s*\*{0,2}.*'),
-    re.compile(r'(?i).*!\[.*\]\(.*/(search-icon|icon-|logo-|share-|rating).*\).*'),
-    re.compile(r'(?i).*!\[.*\]\(.*/(cta|banner|landing|cover|demo|consult).*\).*'),
-]
+def load_patterns(site):
+    """Load site-specific boilerplate patterns from patterns_{site}.py."""
+    mod = importlib.import_module(f'patterns_{site}')
+    PATTERNS.clear()
+    PATTERNS['boilerplate'] = mod.BOILERPLATE
+    PATTERNS['suspect'] = mod.SUSPECT_PHRASES
+    PATTERNS['cta_button'] = mod.CTA_BUTTON_RE
+    PATTERNS['footer'] = mod.FOOTER_FINGERPRINTS
+    return PATTERNS
 
 def log_failure(msg):
     os.makedirs(os.path.dirname(PATHS['failures']), exist_ok=True)
@@ -97,13 +73,13 @@ def is_boilerplate_line(line):
     stripped = line.strip()
     if not stripped:
         return False
-    for pat in BOILERPLATE:
+    for pat in PATTERNS['boilerplate']:
         if pat.match(stripped):
             return True
     return False
 
 def is_footer_line(line):
-    for fp in FOOTER_FINGERPRINTS:
+    for fp in PATTERNS['footer']:
         if fp.search(line.strip()):
             return True
     return False
@@ -150,7 +126,7 @@ def repair_body(body):
         if is_boilerplate_line(line):
             continue
         stripped = line.strip()
-        if CTA_BUTTON_RE.search(stripped) and len(stripped) < 120:
+        if PATTERNS['cta_button'].search(stripped) and len(stripped) < 120:
             continue
         if not stripped:
             blank_count += 1
@@ -159,7 +135,7 @@ def repair_body(body):
             result.append('')
             continue
         blank_count = 0
-        if SUSPECT_PHRASES.search(stripped):
+        if PATTERNS['suspect'].search(stripped):
             suspect_count += 1
             if suspect_count >= 3:
                 continue
@@ -201,8 +177,9 @@ def process_article(block, url_cache):
 def main():
     args = PARSER.parse_args()
     PATHS.update(resolve_paths(args.site, args.date))
+    load_patterns(args.site)
     if args.fresh:
-        fresh_start(PATHS)
+        fresh_start(PATHS, what=('checkpoint', 'sanitized'))
     input_file = PATHS['dirty_input']
     output_file = PATHS['sanitized']
     checkpoint_file = PATHS['checkpoint']
