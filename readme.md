@@ -1,92 +1,121 @@
 ## AI-Enabled Repo
 
-Chat with DeepWiki to get answers about the Comindware Plafrom from this repo:
+Chat with DeepWiki to get answers about the Comindware Platform from this repo:
 
 [Ask DeepWiki](https://deepwiki.com/arterm-sedov/cbap-mkdocs-ru)
 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/arterm-sedov/cbap-mkdocs-ru)
 
-# How to Initialize MkDocs Environment and Build Help Files
+# MkDocs Knowledge Base — Workflows
 
-This is the MkDocs repository with source files for the RU CMW knowledge base.
+This repository contains the MkDocs source for the **{{ productName }}** knowledge base.
+Markdown articles live under `docs/ru/`, PHPKB HTML export goes to `for_kb_import_ru/`, and RAG bundles are generated for LLM ingestion.
 
-## Initialize the Environment
+## Environment Setup
 
-1. Install Python:
+The repo uses a Python virtual environment (`.venv`) for all builds and scripts.
 
-   - Change dir to `Help` under the solution root directory.
+```powershell
+.\.venv\Scripts\python.exe -c "import mkdocs"  # smoke test
+```
 
-   - Run:
+If the venv is broken, load the `python-env-setup` skill for the full playbook.
 
-        ``` shell
-        ./install/installpy.ps1
-        ```
+Dependencies are listed in `install/requirements.txt`.
 
-        or
+## .env Configuration
 
-        ``` shell
-        sh install/install.sh
-        ```
+Copy `.env.example` to `.env` and fill in the profile values. Required for PHPKB publish, image sync, and RAG ingestion workflows. See `.env.example` for the full variable list.
 
-        - This script downloads and installs the latest Python from python.org (including the `pip` package manager).
-        - `install.sh` also installs GTK3 framework used for PDF output.
-        - In Windows, UAC request may pop-up during the silent installation.
+## Build PHPKB Import HTML
 
-> [!NOTE]
-> Python is not used in runtime, it is only used to build the static HTML site from the source .MD files.
+Converts Markdown articles to PHPKB-compatible HTML in `for_kb_import_ru/`:
 
-1. Initialize Python virtual environment, an install MkDocs with dependencies:
+```powershell
+.\.venv\Scripts\python.exe -m mkdocs build -f mkdocs_for_kb_import_ru.yml
+```
 
-    ``` shell
-    ./install/deploymkdocs.ps1
-    ```
+Verify the export changed:
 
-    or
+```powershell
+git diff --name-only for_kb_import_ru/
+```
 
-    ``` shell
-    sh install/deploy.sh
-    ```
+## Publish to PHPKB
 
-## Build Help
+Pushes local HTML back into the PHPKB database:
 
-1. Run:
+```powershell
+# Extract kb-id from the generated HTML
+Select-String -Path for_kb_import_ru\<path>.html -Pattern 'kb-id="(\d+)"' |
+  ForEach-Object { $_.Matches.Groups[1].Value } | Select-Object -First 1
 
-    ``` shell
-    ./buildhelp.ps1
-    ```
+# Publish
+.\.venv\Scripts\python.exe phpkb_update_articles.py --profile cmw --article-id <kb-id> --yes
+```
 
-    or
+## Sync Images to PHPKB Assets Repo
 
-    ``` shell
-    sh buildhelp.sh
-    ```
+Copies exported images into the PHPKB static assets repo and optionally commits/pushes:
 
-   - This script runs `buildhelp.py` in the virtual environment and builds languages help to `compiled_help`.
+```powershell
+# Copy images only
+.\.venv\Scripts\python.exe phpkb_copy_images.py
 
-   - The language list is set on the line 15 in `buildhelp.py`:
+# Copy + auto-commit-push to PHPKB repo
+.\.venv\Scripts\python.exe phpkb_copy_images.py --git
 
-        `LANGUAGE_LIST = ["en", "ru"]`
+# Copy + commit-push + SSH pull on production
+.\.venv\Scripts\python.exe phpkb_copy_images.py --git --pull
+```
 
-2. You should see the newly compiled help subdirectories in the `compiled_help` directory:
+Requires `CMW_KB_REPO_PATH` and `CMW_SSH_*` in `.env`.
 
-   - en
-   - ru
+## RAG / LLM Ingestion
 
-> [!NOTE]
->    * `buildhelp.py` will not run on it's own, instead execute `buildhelp.ps1` or `buildhelp.sh`.
+Refreshes the RAG corpus from PHPKB and builds a single-file LLM bundle:
 
-## Build PDF Manual
+```powershell
+# Full refresh: pull from DB + bundle
+.\.venv\Scripts\python.exe phpkb_import_for_rag.py --category-id 896
+.\.venv\Scripts\python.exe phpkb_ingest.py
 
-1. Install GTK3: `installgtk3.ps1` or `apt install -y libgtk-3-dev`. 
+# Bundle only (when RAG corpus is already current)
+.\.venv\Scripts\python.exe phpkb_ingest.py
 
-    > [!NOTE]
-    > In Windows, for GTK3 to work properly the PATH variable might need to be set (and put on top of the PATH list) to its installation directory.
+# Bundle + git-sync to PHPKB repo + SSH pull on production
+.\.venv\Scripts\python.exe phpkb_ingest.py --git --pull --no-ask
+```
 
-2. Build the PDF manual:
+## Build PDF Guides
 
-    ``` shell
-    mkdocs build -f mkdocs_ru_pdf.yml
-    ```
+PDF output requires GTK3 installed. Load the `mkdocs-pdf-build` skill for the full Windows playbook.
+
+```powershell
+mkdocs build -f mkdocs_ru_pdf.yml
+```
+
+Dated copies (with `YYYY.MM.DD` suffix):
+
+```powershell
+.\.venv\Scripts\python.exe pdf_duplicate_with_date.py
+```
+
+## Live Preview
+
+Serve the Russian docs locally at http://127.0.0.1:8000:
+
+```powershell
+.\.venv\Scripts\python.exe -m mkdocs serve
+```
+
+English version:
+
+```powershell
+.\.venv\Scripts\python.exe -m mkdocs serve -f mkdocs_en_local.yml
+```
+
+The server watches for edits in `docs/` and updates on the fly.
 
 ## Mermaid Diagram Support in PDF
 
@@ -101,7 +130,7 @@ PDF generation uses WeasyPrint which does not execute JavaScript, so Mermaid dia
    pip install mkdocs-mermaid-to-svg
    ```
 
-2. **Node.js** (required for `mmdc` — Mermaid CLI):
+2. **Node.js** (required for `mmdc`):
    - Install from https://nodejs.org/ or via package manager
    - Verify: `node --version` (tested with v18.20.7+)
 
@@ -125,107 +154,43 @@ plugins:
 
 #### How It Works
 
-1. `mkdocs-mermaid-to-svg` scans markdown files for ` ```mermaid ` code blocks
-2. Each diagram is rendered to SVG via `mmdc` (Node.js Mermaid CLI)
-3. SVG files are saved to `_mermaid_assets/` directory
+1. `mkdocs-mermaid-to-svg` scans markdown files for mermaid code blocks
+2. Each diagram is rendered to SVG via `mmdc`
+3. SVG files are saved to `_mermaid_assets/`
 4. Original mermaid blocks are replaced with `<img>` tags pointing to SVGs
-5. WeasyPrint includes the SVGs in the final PDF (vector quality, infinite scaling)
+5. WeasyPrint includes the SVGs in the final PDF
 
 ### Alternative: `render_js: true` (Does NOT Work)
 
-The `with-pdf` plugin has a `render_js: true` option that attempts to use Headless Chrome to execute JavaScript before PDF generation. **This does not work** with current versions due to a bug in `mkdocs-with-pdf` v0.9.3:
+The `with-pdf` plugin has a `render_js: true` option that attempts to use Headless Chrome. **This does not work** with current versions due to a bug in `mkdocs-with-pdf` v0.9.3:
 
 ```
 AttributeError: property 'text' of 'Tag' object has no setter
 ```
 
-The plugin (last updated 2021) is incompatible with newer BeautifulSoup versions. The `_render_js` method tries to set the read-only `.text` property of a BeautifulSoup `Tag` object.
-
 **Conclusion:** Use `mkdocs-mermaid-to-svg` + `mmdc` — it's the only working approach for Mermaid in PDF.
 
-## Serve Live Help Site
+## Agent Skills
 
-You can view the live MkDocs site without building it or compiling the product. The live server watches for changes in the `docs` folder and update accordingly.
+This repo includes AI agent skills under `.agents/skills/`. They provide end-to-end workflows for common tasks:
 
-Serve Russian docs locally at <http://127.0.0.1:8000>
+| Skill | When to use |
+|---|---|
+| `kb-edit-publish` | Edit an article, rebuild HTML, publish to PHPKB, commit |
+| `phpkb-ingestion` | Refresh RAG corpus from PHPKB, build LLM ingestion bundle |
+| `mkdocs-pdf-build` | Install GTK3, build PDF guides on Windows |
+| `phpkb-cloning` | Clone PHPKB categories/articles, sync IDs and links |
+| `mkdocs_add_file` | Add an article to mkdocs YAML navigation |
+| `cmwhelp-commit` | Format git commit messages |
+| `self-evolution` | Document discoveries after non-trivial tasks |
+| `python-env-setup` | Fix broken venv, verify mkdocs plugin imports |
+| `generate-pdf-from-source` | Generate styled PDFs from Excel/CSV/JSON data |
 
-1. Change dir to `Help` under the solution root directory.
+Skills are auto-discovered by AI agents. Refer to individual `SKILL.md` files for detailed workflows.
 
-2. Run:
+## Customize Navigation
 
-    ``` shell
-    ./install/deploymkdocs.ps1
-    ```
-
-    or
-
-    ``` shell
-    sh install/deploy.sh
-    ```
-
-    - This script deploys the Python virtual environment in `Help/venv` with MKDocs and its dependencies listed in the `requirements.txt` file. It does not build the help files.
-
-3. Run:
-
-    ``` shell
-    mkdocs serve
-    ```
-
-    or  
-
-    ``` shell
-    py -m mkdocs serve
-    ```
-
-   - For English version run:
-
-       ``` shell
-       mkdocs serve -f mkdocs_en_local.yml
-
-       ```
-
-> [!NOTE]
->  * The help is not build by `mkdocs serve`, it is only served locally to <http://127.0.0.1:8000>
->  * The server watches for edits in the `Help\docs` directory and updates the help on the fly. Any edits you make in the `docs` directory will be immediately reflected at <http://127.0.0.1:8000>
-
-## Build files to import into PHPKB
-
-The files will be compiled to the `for_kb_import_ru` or `for_kb_import_en` folder.
-
-The `kb_html_cleanup_hook.py` does all the magic.
-
-On `platform_v6`, `mkdocs_for_kb_import_ru.yml` sets `site_url` to `https://kb.comindware.ru/platform/v6.0/` so exported HTML image paths match the V6 PHPKB web folder. Rebuild after doc changes:
-
-``` shell
-mkdocs build -f mkdocs_for_kb_import_ru.yml
-```
-
-Copy exported images into the PHPKB web asset tree when needed:
-
-``` shell
-python phpkb_copy_images.py
-```
-
-For English PHPKB export:
-
-``` shell
-mkdocs build -f mkdocs_for_kb_import_en.yml
-```
-
-## Uninstall MkDocs
-
-- `install\uninstallmkdocs.ps1` — uninstalls installs all MKDocs dependencies listed in the `requirements.txt` config file.
-
-- `install\uninstallpy.ps1` — silently uninstalls Python, runs a single command: `.\python_latest.exe /uninstall /quiet`
-
-**The help is powered by the very popular and well-maintained MkDocs framework:**
-<https://squidfunk.github.io/mkdocs-material/>
-<https://github.com/squidfunk/mkdocs-material>
-<https://www.mkdocs.org/>
-
-## Customize navigation
-
-If awesome-pages plugin is enabled you can selectively enable only certain documentation folders in the mkdocs.yml, for instance:
+If awesome-pages plugin is enabled you can selectively enable only certain documentation folders in the mkdocs.yml:
 
 ```
 nav:
@@ -240,3 +205,7 @@ The `.scratch/` folder is a shared space for temporary and disposable files: scr
 - Contents are **git-ignored** — nothing inside `.scratch/` is tracked except `.gitkeep`.
 - Use it for one-off scripts, analysis results, or any data that should not pollute the repository.
 - Do not reference `.scratch/` files from documentation or production code.
+
+## Legacy Files
+
+Obsolete scripts and configs are archived in `.legacy/`. They are not used by the current workflows.
