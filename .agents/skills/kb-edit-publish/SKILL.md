@@ -11,6 +11,7 @@ End-to-end workflow for updating existing KB articles.
 
 - The article must already exist under `docs/ru/` and have a `kbId:` in its frontmatter.
 - The repo virtual environment `.venv` must be functional (load `python-env-setup` skill if not).
+- `.env` file configured (copy `.env.example` → `.env` and fill in the profile values). Required for all publish and image-sync steps — not just ingestion. See `.env.example` for the full variable list and `phpkb-ingestion` skill for details.
 
 ## Source code reference
 
@@ -67,7 +68,9 @@ Use the commit message format from the `cmwhelp-commit` skill. Extract the ticke
 
 ### 6. Sync platform assets (optional)
 
-If the edited article includes new or updated images, sync them to the PHPKB static assets repo:
+If the edited article includes new or updated images, sync them to the PHPKB static assets repo.
+
+**Requires `.env`** with `CMW_KB_REPO_PATH` and `CMW_SSH_*` configured (see Prerequisites above and `phpkb-ingestion` skill for details). Without `.env`, these scripts will fail.
 
 ```bash
 # Copy images and auto-commit-push to PHPKB repo
@@ -80,10 +83,9 @@ python3 phpkb_copy_images.py --git --pull
 python3 phpkb_copy_images.py --version v5.0 --git --pull
 ```
 
-Requires `CMW_KB_REPO_PATH` and `CMW_SSH_*` set in `.env`. See `phpkb-ingestion` skill for details.
-
 ## Troubleshooting
 
 - **Build fails**: check `install/requirements.txt`, verify `.venv` with `.\.venv\Scripts\python.exe -c "import mkdocs"`.
 - **Publish fails with "Found content for article" but no update**: verify `kbId:` in the Markdown frontmatter matches the expected PHPKB article.
 - **SSH connection refused**: check SSH config and key, or use `--profile cmw` which reads from the stored credentials.
+- **Image sync fails with "CMW_KB_REPO_PATH not set" or "SSH_HOST not set"**: `.env` is missing or incomplete. Copy `.env.example` → `.env` and fill in all variables for your profile. See Prerequisites above.
