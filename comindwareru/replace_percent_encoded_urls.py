@@ -168,34 +168,43 @@ def has_enough_footer_lines(window_lines):
     return count >= 3
 
 def strip_footer_block(lines):
-    """Find and strip footer block from the end of article body."""
-    # Scan from end backwards to find the footer start
-    footer_start = len(lines)
-    for i in range(len(lines) - 1, max(len(lines) - 80, 0), -1):
-        window = lines[max(0, i-10):min(len(lines), i+15)]
-        if has_enough_footer_lines(window):
-            footer_start = i - 10
-            break
-    # Also check for CTA section headings near the end
-    for i in range(max(0, len(lines) - 40), len(lines)):
+    """Strip only the trailing footer portion — stop at heading or significant content."""
+    if len(lines) < 20:
+        return lines
+    
+    # Scan from end to find where footer patterns become dense
+    # Only strip the last ~30% of lines, stop at any heading
+    scan_start = max(0, len(lines) - int(len(lines) * 0.3))
+    footer_cut = len(lines)
+    found_heading = False
+    
+    for i in range(len(lines) - 1, max(0, len(lines) - 60), -1):
         line = lines[i].strip()
-        if re.match(r'^#+\s*(Свяжитесь|Обратная|Остались|Консультаци|Заказать|Напишите|Заявка|Вопрос|Обсудить|Готовы)', line):
-            footer_start = min(footer_start, i)
+        if re.match(r'^#{1,4}\s+\S', line):  # Any heading
+            found_heading = True
+            footer_cut = i
             break
-    # Walk up to find the blank-line boundary (but not past 200 lines from end)
-    while footer_start > 0 and (lines[footer_start-1].strip() or footer_start > len(lines) - 200):
-        footer_start -= 1
-    return lines[:max(0, footer_start)]
+        if has_enough_footer_lines(lines[max(0, i-10):min(len(lines), i+10)]):
+            footer_cut = i - 5
+            break
+    
+    # If we found a heading within the scan zone, cut there
+    if found_heading:
+        return lines[:footer_cut]
+    
+    # Otherwise, only strip from the first confirmed footer line
+    for i in range(scan_start, len(lines)):
+        if has_enough_footer_lines(lines[i:min(len(lines), i+15)]):
+            # Walk up to blank line boundary (max 8 lines)
+            while i > scan_start and lines[i-1].strip() and (i - scan_start) < 8:
+                i -= 1
+            return lines[:i]
+    
+    return lines
 
 def is_stub_article(body, block_raw):
-    """Detect corrupted stub articles (YAML title = separator, near-empty body)."""
-    body_text = body.strip()
-    if len(body_text) < 200:
-        return True
-    if ARTICLE_SEP in block_raw.split('---')[0] if block_raw.startswith('---') else False:
-        if len(body_text) < 500:
-            return True
-    return False
+    """Detect truly empty pages — only flag literally empty bodies (< 30 chars)."""
+    return len(body.strip()) < 30
 
 def is_nav_link_cluster(lines, start, window=15):
     """Check if lines from start form a navigation link cluster."""
@@ -219,17 +228,25 @@ def is_nav_link_cluster(lines, start, window=15):
     return 0
 
 def strip_nav_blogs(lines):
-    """Remove nav link clusters and blog sidebar lists from body."""
-    result = []
-    i = 0
-    while i < len(lines):
-        strip_end = is_nav_link_cluster(lines, i)
-        if strip_end:
-            # Skip the entire nav/blog cluster
-            i = strip_end
+    """Remove nav/sidebar link clusters from body START only (header chrome)."""
+    result = list(lines)
+    nav_cut = 0
+    
+    # Find the first content heading or paragraph (not a link)
+    for i in range(min(50, len(lines))):
+        line = lines[i].strip()
+        if not line:
             continue
-        result.append(lines[i])
-        i += 1
+        if re.match(r'^#{1,4}\s+\S', line):  # Heading
+            nav_cut = max(0, i - 2)
+            break
+        if not re.match(r'^\* \[.*\]\(.*\)$', line) and len(line) > 30:
+            nav_cut = i
+            break
+    
+    if nav_cut > 0:
+        result = lines[nav_cut:]
+    
     return result
 
 def repair_body(body, block_raw=''):
@@ -278,8 +295,6 @@ def repair_body(body, block_raw=''):
         result.pop()
 
     text = '\n'.join(result)
-    if len(text) < 200:
-        return None  # Strip as stub
     return text
 
 def split_articles(content):
@@ -375,7 +390,19 @@ def main():
 
     for i in range(start_idx, total):
         article = articles[i]
-        cleaned = process_article(article, url_cache)
+        url_hint = ''
+        try:
+            ym = re.search(r'url:\s*(https?://[^\s]+)', article[:500])
+            url_hint = ym.group(1)[:80] if ym else 'no-url'
+        except:
+            pass
+        sys.stdout.write(f'  [{i+1}/{total}] {url_hint}\n')
+        sys.stdout.flush()
+        try:
+            cleaned = process_article(article, url_cache)
+        except Exception as e:
+            log_failure(f'ARTICLE_{i}_ERROR: {e}')
+            cleaned = article  # Keep original on error
 
         if cleaned is None:
             processed_this_wave += 1
