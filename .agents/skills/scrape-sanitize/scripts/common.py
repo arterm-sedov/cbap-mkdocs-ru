@@ -94,21 +94,19 @@ def append_output(text, filepath):
         os.fsync(f.fileno())
 
 
-def fresh_start(paths, labels=()):
-    """Delete files if --fresh: progress/checkpoint + outputs."""
+def fresh_start(paths, what=('checkpoint', 'dirty_output', 'progress', 'sanitized')):
+    """Delete files to start fresh. `what` limits which path keys to clear.
+    Sanitizer should use what=('checkpoint', 'sanitized') to avoid deleting crawl artifacts.
+    Crawler should use what=('dirty_output', 'progress', 'sanitized', 'checkpoint').
+    """
+    keys = set(what)
     deleted = []
-    files_to_check = [
-        paths.get('checkpoint'),
-        paths.get('progress'),
-        paths.get('sanitized'),
-        paths.get('dirty_output'),
-    ]
-    for f in files_to_check:
-        if f and os.path.exists(f):
-            os.remove(f)
-            deleted.append(os.path.basename(f))
+    for key, path in paths.items():
+        if key not in keys or not isinstance(path, str):
+            continue
+        if os.path.exists(path):
+            os.remove(path)
+            deleted.append(os.path.basename(path))
     if deleted:
         print(f'[FRESH] Deleted: {", ".join(deleted)}')
         print('[FRESH] Starting from black state.')
-    elif labels:
-        print(f'[{"|".join(labels)}] Starting.')
