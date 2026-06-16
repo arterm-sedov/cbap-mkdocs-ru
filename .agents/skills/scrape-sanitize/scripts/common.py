@@ -20,8 +20,8 @@ SITES = {
         'title': 'Comindware.ru knowledge base for AI ingestion',
     },
     'cmwlab_com': {
-        'start_url': 'https://kb.cmwlab.com/sitemap/',
-        'url_filter': 'https://kb.cmwlab.com',
+        'start_url': 'https://www.cmwlab.com/sitemap/',
+        'url_filter': 'https://www.cmwlab.com',
         'title': 'cmwlab.com knowledge base for AI ingestion',
     },
 }
