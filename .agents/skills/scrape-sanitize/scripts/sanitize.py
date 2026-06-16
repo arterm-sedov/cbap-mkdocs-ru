@@ -4,7 +4,7 @@ Usage:
   python sanitize.py --site comindware_ru --date 20260616
   python sanitize.py --site comindware_ru --date 20260616 --fresh
 """
-import re, os, sys, json, time, argparse
+import re, os, sys, time, argparse
 from urllib.parse import urlparse, urlunparse, unquote
 from datetime import datetime
 
@@ -13,31 +13,17 @@ try:
 except ImportError:
     requests = None
 
-# --- Paths (resolved per --site flag) ---
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(SCRIPT_DIR))))
-SCRATCH_DIR = os.path.join(REPO_ROOT, '.scratch')
+from common import (
+    SCRATCH_DIR, ARTICLE_SEP, resolve_paths, add_common_args,
+    load_json, save_json, append_output, fresh_start,
+)
 
-def resolve_paths(site, date_suffix):
-    return {
-        'input':    os.path.join(SCRATCH_DIR, f'{site}_dirty_{date_suffix}.md'),
-        'output_scratch': os.path.join(SCRATCH_DIR, f'{site}_sanitized_{date_suffix}.md'),
-        'output_tracked': os.path.join(REPO_ROOT, 'scraping', site, f'sanitized_{date_suffix}.md'),
-        'checkpoint': os.path.join(REPO_ROOT, 'scraping', site, 'sanitize_checkpoint.json'),
-        'url_cache': os.path.join(SCRATCH_DIR, 'ralph', 'url_titles.json'),
-        'failures':  os.path.join(SCRATCH_DIR, 'ralph', f'{site}_failures.log'),
-    }
-
-# --- CLI ---
 PARSER = argparse.ArgumentParser(description='Sanitize crawled website for LLM ingestion.')
-PARSER.add_argument('--site', required=True, help='Site key (comindware_ru, cmwlab_com, ...)')
-PARSER.add_argument('--date', type=str, default=datetime.now().strftime('%Y%m%d'),
-                    help='Date suffix YYYYMMDD for file lookup.')
-PARSER.add_argument('--fresh', action='store_true', help='Delete checkpoint and output, start from black state.')
+add_common_args(PARSER)
 
 BATCH_SIZE = 10
 HTTP_TIMEOUT = 8
-ARTICLE_SEP = '================================================'
+PATHS = {}
 
 # --- Boilerplate patterns ---
 BOILERPLATE = [
@@ -77,37 +63,9 @@ FOOTER_FINGERPRINTS = [
     re.compile(r'(?i).*!\[.*\]\(.*/(cta|banner|landing|cover|demo|consult).*\).*'),
 ]
 
-# --- Globals set in main() ---
-PATHS = {}
-CHECKPOINT_FILE = ''
-FAILURES_LOG = ''
-URL_CACHE_FILE = ''
-
-def load_checkpoint():
-    if os.path.exists(CHECKPOINT_FILE):
-        with open(CHECKPOINT_FILE, 'r', encoding='utf-8') as f:
-            return json.load(f)
-    return None
-
-def save_checkpoint(cp):
-    os.makedirs(os.path.dirname(CHECKPOINT_FILE), exist_ok=True)
-    with open(CHECKPOINT_FILE, 'w', encoding='utf-8') as f:
-        json.dump(cp, f, indent=2, ensure_ascii=False)
-
-def load_url_cache():
-    if os.path.exists(URL_CACHE_FILE):
-        with open(URL_CACHE_FILE, 'r', encoding='utf-8') as f:
-            return json.load(f)
-    return {}
-
-def save_url_cache(cache):
-    os.makedirs(os.path.dirname(URL_CACHE_FILE), exist_ok=True)
-    with open(URL_CACHE_FILE, 'w', encoding='utf-8') as f:
-        json.dump(cache, f, indent=2, ensure_ascii=False)
-
 def log_failure(msg):
-    os.makedirs(os.path.dirname(FAILURES_LOG), exist_ok=True)
-    with open(FAILURES_LOG, 'a', encoding='utf-8') as f:
+    os.makedirs(os.path.dirname(PATHS['failures']), exist_ok=True)
+    with open(PATHS['failures'], 'a', encoding='utf-8') as f:
         f.write(f'{datetime.now().isoformat()} {msg}\n')
         f.flush()
         os.fsync(f.fileno())
@@ -145,11 +103,8 @@ def is_boilerplate_line(line):
     return False
 
 def is_footer_line(line):
-    stripped = line.strip()
-    if not stripped:
-        return False
     for fp in FOOTER_FINGERPRINTS:
-        if fp.search(stripped):
+        if fp.search(line.strip()):
             return True
     return False
 
@@ -160,28 +115,17 @@ def strip_footer_block(lines):
     if len(lines) < 20:
         return lines
     scan_start = max(0, len(lines) - int(len(lines) * 0.3))
-    footer_cut = len(lines)
-    found_heading = False
     for i in range(len(lines) - 1, max(0, len(lines) - 60), -1):
-        line = lines[i].strip()
-        if re.match(r'^#{1,4}\s+\S', line):
-            found_heading = True
-            footer_cut = i
-            break
-        if has_enough_footer_lines(lines[max(0, i-10):min(len(lines), i+10)]):
-            footer_cut = i - 5
-            break
-    if found_heading:
-        return lines[:footer_cut]
-    for i in range(scan_start, len(lines)):
-        if has_enough_footer_lines(lines[i:min(len(lines), i+15)]):
-            while i > scan_start and lines[i-1].strip() and (i - scan_start) < 8:
-                i -= 1
+        if re.match(r'^#{1,4}\s+\S', lines[i].strip()):
             return lines[:i]
+        if has_enough_footer_lines(lines[max(0, i-10):min(len(lines), i+10)]):
+            j = i - 5
+            while j > scan_start and lines[j-1].strip() and (j - scan_start) < 8:
+                j -= 1
+            return lines[:j]
     return lines
 
 def strip_nav_blogs(lines):
-    result = list(lines)
     nav_cut = 0
     for i in range(min(50, len(lines))):
         line = lines[i].strip()
@@ -193,9 +137,7 @@ def strip_nav_blogs(lines):
         if not re.match(r'^\* \[.*\]\(.*\)$', line) and len(line) > 30:
             nav_cut = i
             break
-    if nav_cut > 0:
-        result = lines[nav_cut:]
-    return result
+    return lines[nav_cut:] if nav_cut > 0 else list(lines)
 
 def repair_body(body):
     if len(body.strip()) < 30:
@@ -203,9 +145,7 @@ def repair_body(body):
     lines = body.split('\n')
     lines = strip_nav_blogs(lines)
     lines = strip_footer_block(lines)
-    result = []
-    blank_count = 0
-    suspect_count = 0
+    result, blank_count, suspect_count = [], 0, 0
     for line in lines:
         if is_boilerplate_line(line):
             continue
@@ -234,62 +174,39 @@ def repair_body(body):
 
 def split_articles(content):
     parts = content.split(ARTICLE_SEP)
-    header = parts[0].rstrip()
-    articles = [p.lstrip() for p in parts[1:] if p.strip()]
-    return header, articles
+    return parts[0].rstrip(), [p.lstrip() for p in parts[1:] if p.strip()]
 
 def process_article(block, url_cache):
-    yaml_match = re.search(r'^---\n(.*?)\n---', block, re.DOTALL)
-    if not yaml_match:
+    ym = re.search(r'^---\n(.*?)\n---', block, re.DOTALL)
+    if not ym:
         return block
-    yaml_content = yaml_match.group(1)
-    after = block[yaml_match.end():]
-    url_match = re.search(r'url:\s*(https?://[^\s]+)', yaml_content)
-    url = url_match.group(1) if url_match else ''
-    decoded_url = decode_url(url) if url else ''
+    yaml, after = ym.group(1), block[ym.end():]
+    url_m = re.search(r'url:\s*(https?://[^\s]+)', yaml)
+    url = url_m.group(1) if url_m else ''
+    durl = decode_url(url) if url else ''
     title = ''
-    if decoded_url:
-        title = url_cache.get(decoded_url)
+    if durl:
+        title = url_cache.get(durl)
         if title is None:
-            title = fetch_title(decoded_url)
-            url_cache[decoded_url] = title or ''
-    updated_yaml = yaml_content
+            title = fetch_title(durl)
+            url_cache[durl] = title or ''
+    updated = yaml
     if url:
-        updated_yaml = updated_yaml.replace(url, decoded_url)
+        updated = updated.replace(url, durl)
     if title:
-        if 'title:' in updated_yaml:
-            updated_yaml = re.sub(r'title:\s*.*', f'title: {title}', updated_yaml)
-        else:
-            updated_yaml = f'title: {title}\n{updated_yaml}'
+        updated = re.sub(r'title:\s*.*', f'title: {title}', updated) if 'title:' in updated else f'title: {title}\n{updated}'
     body = repair_body(after)
-    if body is None:
-        return None
-    return f'---\n{updated_yaml}\n---\n\n{body}\n'
-
-def append_output(text, filepath):
-    os.makedirs(os.path.dirname(filepath), exist_ok=True)
-    mode = 'a' if os.path.exists(filepath) else 'w'
-    with open(filepath, mode, encoding='utf-8') as f:
-        f.write(text)
-        f.flush()
-        os.fsync(f.fileno())
+    return None if body is None else f'---\n{updated}\n---\n\n{body}\n'
 
 def main():
-    global CHECKPOINT_FILE, FAILURES_LOG, URL_CACHE_FILE
     args = PARSER.parse_args()
     PATHS.update(resolve_paths(args.site, args.date))
-    CHECKPOINT_FILE = PATHS['checkpoint']
-    FAILURES_LOG = PATHS['failures']
-    URL_CACHE_FILE = PATHS['url_cache']
-    input_file = PATHS['input']
-    output_file = PATHS['output_tracked']
-
     if args.fresh:
-        for f in [CHECKPOINT_FILE, output_file]:
-            if os.path.exists(f):
-                os.remove(f)
-                print(f'[FRESH] Deleted {os.path.basename(f)}')
-        print('[FRESH] Starting sanitize from black state.')
+        fresh_start(PATHS)
+    input_file = PATHS['dirty_input']
+    output_file = PATHS['sanitized']
+    checkpoint_file = PATHS['checkpoint']
+    url_cache_file = PATHS['url_cache']
 
     if not os.path.exists(input_file):
         print(f'ERROR: Input file not found: {input_file}')
@@ -297,76 +214,54 @@ def main():
 
     with open(input_file, 'r', encoding='utf-8') as f:
         content = f.read()
-
     header, articles = split_articles(content)
     total = len(articles)
     print(f'[{args.site}] {total} articles in dirty file')
 
-    cp = load_checkpoint()
-    url_cache = load_url_cache()
+    cp = load_json(checkpoint_file)
+    url_cache = load_json(url_cache_file) or {}
     start_idx = cp['meta']['articles_processed'] if cp else 0
 
     if os.path.exists(output_file) and start_idx == 0:
         os.remove(output_file)
-        print('[CLEAN] Removed previous output.')
-
     if start_idx > 0:
         print(f'[RESUME] Starting from article {start_idx + 1}/{total}')
-
     if start_idx == 0:
         append_output(f'{header}\n{ARTICLE_SEP}\n', output_file)
 
     batch_output = []
-    wave_start = time.time()
-
     for i in range(start_idx, total):
         article = articles[i]
-        url_hint = ''
+        uh = ''
         try:
-            ym = re.search(r'url:\s*(https?://[^\s]+)', article[:500])
-            url_hint = ym.group(1)[:80] if ym else 'no-url'
-        except:
-            pass
-        sys.stdout.write(f'  [{i+1}/{total}] {url_hint}\n')
-        sys.stdout.flush()
+            uh = re.search(r'url:\s*(https?://[^\s]+)', article[:500])
+            uh = uh.group(1)[:80] if uh else 'no-url'
+        except: pass
+        sys.stdout.write(f'  [{i+1}/{total}] {uh}\n'); sys.stdout.flush()
         try:
             cleaned = process_article(article, url_cache)
         except Exception as e:
             log_failure(f'ARTICLE_{i}_ERROR: {e}')
             cleaned = article
-
         if cleaned is None:
-            save_url_cache(url_cache)
-            save_checkpoint({'meta': {
-                'topic': f'{args.site}_sanitize', 'status': 'in_progress',
-                'articles_total': total, 'articles_processed': i + 1,
-                'last_flush': datetime.now().isoformat()
-            }})
+            save_json(url_cache, url_cache_file)
+            save_json({'meta': {'topic': f'{args.site}_sanitize', 'status': 'in_progress',
+                                'articles_total': total, 'articles_processed': i + 1}}, checkpoint_file)
             continue
-
         batch_output.append(f'{ARTICLE_SEP}\n{cleaned}{ARTICLE_SEP}\n')
-
         if len(batch_output) >= BATCH_SIZE:
             append_output(''.join(batch_output), output_file)
-            save_url_cache(url_cache)
-            save_checkpoint({'meta': {
-                'topic': f'{args.site}_sanitize', 'status': 'in_progress',
-                'articles_total': total, 'articles_processed': i + 1,
-                'last_flush': datetime.now().isoformat()
-            }})
-            elapsed = time.time() - wave_start
-            print(f'  [{i+1}/{total}] {100*(i+1)//total}% {elapsed:.0f}s — flushed')
+            save_json(url_cache, url_cache_file)
+            save_json({'meta': {'topic': f'{args.site}_sanitize', 'status': 'in_progress',
+                                'articles_total': total, 'articles_processed': i + 1}}, checkpoint_file)
+            print(f'  [{i+1}/{total}] {100*(i+1)//total}% — flushed')
             batch_output = []
 
     if batch_output:
         append_output(''.join(batch_output), output_file)
-
-    save_url_cache(url_cache)
-    save_checkpoint({'meta': {
-        'topic': f'{args.site}_sanitize', 'status': 'terminal',
-        'articles_total': total, 'articles_processed': total,
-        'completed': datetime.now().isoformat()
-    }})
+    save_json(url_cache, url_cache_file)
+    save_json({'meta': {'topic': f'{args.site}_sanitize', 'status': 'terminal',
+                        'articles_total': total, 'articles_processed': total}}, checkpoint_file)
     print(f'\n[DONE] {total} articles → {output_file}')
 
 if __name__ == '__main__':
