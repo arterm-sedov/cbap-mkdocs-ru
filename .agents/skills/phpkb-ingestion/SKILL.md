@@ -124,14 +124,16 @@ Flags in `phpkb_ingest.py`:
 **V5:**
 
 ```powershell
-.\.venv\Scripts\python.exe phpkb_import_for_rag.py --category-id 798
+.\.venv\Scripts\python.exe phpkb_import.py --category-id 798 --article-map .article_id_filename_map_v5.json
+.\.venv\Scripts\python.exe phpkb_import_for_rag.py --category-id 798 --article-map .article_id_filename_map_v5.json
 .\.venv\Scripts\python.exe phpkb_ingest.py --folder phpkb_content_rag/798-platform_v5 --output kb.comindware.ru.platform_v5_for_llm_ingestion.md --target-dir kb.comindware.ru/platform/v5.0 --category-id 798
 ```
 
 **V6:**
 
 ```powershell
-.\.venv\Scripts\python.exe phpkb_import_for_rag.py --category-id 896
+.\.venv\Scripts\python.exe phpkb_import.py --category-id 896 --article-map .article_id_filename_map_v6.json
+.\.venv\Scripts\python.exe phpkb_import_for_rag.py --category-id 896 --article-map .article_id_filename_map_v6.json
 .\.venv\Scripts\python.exe phpkb_ingest.py --folder phpkb_content_rag/896-platform_v6 --output kb.comindware.ru.platform_v6_for_llm_ingestion.md --target-dir kb.comindware.ru/platform/v6.0 --category-id 896
 ```
 
