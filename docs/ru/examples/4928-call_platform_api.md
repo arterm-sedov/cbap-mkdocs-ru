@@ -1,6 +1,6 @@
 ---
 title: Вызов API Comindware Platform при помощи Postman
-kbId: 5316
+kbId: 4928
 tags:
     - API
     - пример

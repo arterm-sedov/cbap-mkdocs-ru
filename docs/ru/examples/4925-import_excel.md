@@ -1,6 +1,6 @@
 ---
 title: Импорт данных в Excel
-kbId: 5310
+kbId: 4925
 tags:
     - API
     - атрибуты

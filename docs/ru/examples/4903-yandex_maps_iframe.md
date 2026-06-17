@@ -1,6 +1,6 @@
 ---
 title: Яндекс Карты. Настройка отображения в iframe
-kbId: 5353
+kbId: 4903
 tags:
     - HTML
     - iframe

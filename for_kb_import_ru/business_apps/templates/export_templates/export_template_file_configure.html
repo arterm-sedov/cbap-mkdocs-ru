@@ -53,28 +53,6 @@
       
     </span>
 </a>
-<nav aria-label="Синтаксис для экспорта с использованием C#" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#синтаксис-c-для-xlsx-файлов">
-<span class="md-ellipsis">
-      
-        Синтаксис C# для XLSX-файлов
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#синтаксис-c-для-docx-файлов">
-<span class="md-ellipsis">
-      
-        Синтаксис C# для DOCX-файлов
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 </ul>
 </nav>
@@ -106,28 +84,6 @@
       
     </span>
 </a>
-<nav aria-label="Решение для Excel" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#вариант-1-установка-шрифтов-на-сервер">
-<span class="md-ellipsis">
-      
-        Вариант 1. Установка шрифтов на сервер
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#вариант-2-использование-шрифтов-с-сервера-в-excel">
-<span class="md-ellipsis">
-      
-        Вариант 2. Использование шрифтов с сервера в Excel
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
 </li>
 </ul>
 </nav>
@@ -160,10 +116,10 @@
 <li>Введите в документ требуемые сведения.</li>
 <li>Отформатируйте документ обычным образом.</li>
 <li>Введите <a class="mkdocs_imported_link" href="#синтаксис-полей-шаблона-экспорта">поля</a> в те места документа, куда требуется экспортировать данные записи.</li>
-<li>Должен получиться документ следующего вида (см. <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4795">пример</a>):</li>
+<li>Должен получиться документ следующего вида (см. <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5731">пример</a>):</li>
 </ol>
 <figure class="screenshot_with_caption">
-<p><img alt="Пример простейшего файла шаблона экспорта" src="/platform/v5.0/business_apps/templates/export_templates/img/export_template_file_example.png"/></p><figcaption class="caption">Пример простейшего файла шаблона экспорта</figcaption>
+<p><img alt="Пример простейшего файла шаблона экспорта" src="/platform/v6.0/business_apps/templates/export_templates/img/export_template_file_example.png"/></p><figcaption class="caption">Пример простейшего файла шаблона экспорта</figcaption>
 </figure>
 <h2 class="pageBreakBefore" id="синтаксис-полей-шаблона-экспорта">Синтаксис полей шаблона экспорта</h2>
 <p>В файле шаблона экспорта используются поля-заполнители. При экспорте данных записи поля заменяются значениями атрибутов, а остальной текст остаётся без изменений.</p>
@@ -172,7 +128,7 @@
 <ul>
 <li>В документ введите поля вида <code>{AttributeSystemName}</code> (<em>без пробелов</em> в фигурных скобках), где <code>AttributeSystemName</code> — системное имя атрибута, значение которого необходимо экспортировать в файл. Значение атрибута будет экспортировано в формате отображения, заданном в свойствах атрибута.</li>
 <li><code>{RecordAttribute.LinkedTemplateAttribute}</code> — чтобы экспортировать значение атрибута связанного шаблона, укажите его системное имя через точку <em>без пробела</em> после системного имени атрибута типа «<strong>Запись</strong>».</li>
-<li><code>{#LinkedTemplateAttribute}</code> — чтобы экспортировать значение атрибута типа «<strong>Запись</strong>» в виде гиперссылки на запись связанного шаблона, укажите системное атрибута с префиксом <code>#</code>. Гиперссылка будет содержать идентификатор или заголовок записи (если в шаблоне указан <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4769">атрибут-заголовок</a>).</li>
+<li><code>{#LinkedTemplateAttribute}</code> — чтобы экспортировать значение атрибута типа «<strong>Запись</strong>» в виде гиперссылки на запись связанного шаблона, укажите системное атрибута с префиксом <code>#</code>. Гиперссылка будет содержать идентификатор или заголовок записи (если в шаблоне указан <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5709">атрибут-заголовок</a>).</li>
 <li>
 <p><code>{foreach:RecordAttribute} {#LinkedAttribute1} {LinkedAttribute2} {end:RecordAttribute}</code> —
 для экспорта данных из нескольких записей связанного шаблона используйте операторы <code>foreach</code> и <code>end</code> в строке таблицы:</p>
@@ -187,19 +143,19 @@
 <p><strong><code>{AttributeSystemName} полужирный текст</code></strong><em><code>{AttributeSystemName2} курсив</code></em> — между полями можно располагать произвольный текст. Текст и поля можно форматировать (курсивом, полужирным шрифтом и т. п.). Экспортируемые данные будут отформатированы соответствующим образом.</p>
 </li>
 <li>
-<p><code>{ImageAttributeSystemName}</code> — если в поле указано системное имя атрибута типа «<strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4771">Изображение</a></strong>», поле будет заменено на изображение, хранящееся в атрибуте.</p>
+<p><code>{ImageAttributeSystemName}</code> — если в поле указано системное имя атрибута типа «<strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5707">Изображение</a></strong>», поле будет заменено на изображение, хранящееся в атрибуте.</p>
 </li>
 <li>
-<p><code>{QRCodeAttributeSystemName:200:100}</code> — если в поле указано системное имя атрибута типа «<strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4764">Штрихкод</a></strong>», поле будет заменено на изображение штрихкода, сформированного по значению атрибута. Для штрихкода можно указать ширину и высоту через двоеточие после системного имени атрибута. Если указать только ширину, то штрихкод будет квадратным. Если не указывать ширину и высоту, то будет использоваться стандартный размер штрихкода.</p>
+<p><code>{QRCodeAttributeSystemName:200:100}</code> — если в поле указано системное имя атрибута типа «<strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5714">Штрихкод</a></strong>», поле будет заменено на изображение штрихкода, сформированного по значению атрибута. Для штрихкода можно указать ширину и высоту через двоеточие после системного имени атрибута. Если указать только ширину, то штрихкод будет квадратным. Если не указывать ширину и высоту, то будет использоваться стандартный размер штрихкода.</p>
 </li>
 </ul>
 <figure class="screenshot_with_caption">
-<p><img alt="Пример синтаксиса полей шаблона экспорта" src="/platform/v5.0/business_apps/templates/export_templates/img/export_template_file_advanced_syntax_example.png"/></p><figcaption class="caption">Пример синтаксиса полей шаблона экспорта</figcaption>
+<p><img alt="Пример синтаксиса полей шаблона экспорта" src="/platform/v6.0/business_apps/templates/export_templates/img/export_template_file_advanced_syntax_example.png"/></p><figcaption class="caption">Пример синтаксиса полей шаблона экспорта</figcaption>
 </figure>
 <h3 class="pageBreakBefore" id="синтаксис-для-экспорта-с-использованием-c">Синтаксис для экспорта с использованием C#</h3>
-<p>Экспортировать данные посредством шаблона экспорта можно с помощью скрипта C#. Это позволяет более гибко настроить параметры экспорта, например с дополнительной фильтрацией, заменой информации, форматированным выводом <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4780">атрибутов типа «<strong>Запись</strong>»</a> с несколькими значениями (коллекций).</p>
-<p>Скрипт C# для шаблона экспорта следует ввести на вкладке «<strong>Скрипт</strong>» <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4798">кнопки экспорта</a>, которая автоматически создаётся для каждого шаблона экспорта.</p>
-<p>Примеры скриптов C# для экспорта данных см. в статьях <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4793">Настройка шаблона экспорта с использованием C#</a>»</em>, и <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4792">Настройка выгрузки нескольких коллекций и изображений</a>»</em></p>
+<p>Экспортировать данные посредством шаблона экспорта можно с помощью скрипта C#. Это позволяет более гибко настроить параметры экспорта, например с дополнительной фильтрацией, заменой информации, форматированным выводом <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5718">атрибутов типа «<strong>Запись</strong>»</a> с несколькими значениями (коллекций).</p>
+<p>Скрипт C# для шаблона экспорта следует ввести на вкладке «<strong>Скрипт</strong>» <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5732">кнопки экспорта</a>, которая автоматически создаётся для каждого шаблона экспорта.</p>
+<p>Примеры скриптов C# для экспорта данных см. в статьях <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5336">Настройка шаблона экспорта с использованием C#</a>»</em>, и <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5338">Настройка выгрузки нескольких коллекций и изображений</a>»</em></p>
 <p>При экспорте данных с помощью С# синтаксис полей шаблона экспорта различается в зависимости от формата файла шаблона экспорта:</p>
 <h4 id="синтаксис-c-для-xlsx-файлов">Синтаксис C# для XLSX-файлов</h4>
 <ul>
@@ -239,7 +195,7 @@
 </li>
 </ul>
 <figure class="screenshot_with_caption">
-<p><img alt="Пример XSLX-файла шаблона экспорта для C#" src="/platform/v5.0/business_apps/templates/export_templates/img/export_template_file_c_syntax_example_xlsx.png"/></p><figcaption class="caption">Пример XSLX-файла шаблона экспорта для C#</figcaption>
+<p><img alt="Пример XSLX-файла шаблона экспорта для C#" src="/platform/v6.0/business_apps/templates/export_templates/img/export_template_file_c_syntax_example_xlsx.png"/></p><figcaption class="caption">Пример XSLX-файла шаблона экспорта для C#</figcaption>
 </figure>
 <h4 class="pageBreakBefore" id="синтаксис-c-для-docx-файлов">Синтаксис C# для DOCX-файлов</h4>
 <ul>
@@ -273,10 +229,10 @@
 </li>
 </ul>
 <figure class="screenshot_with_caption">
-<p><img alt="Пример DOCX-файла шаблона экспорта для C#" src="/platform/v5.0/business_apps/templates/export_templates/img/export_template_file_c_syntax_example_docx.png"/></p><figcaption class="caption">Пример DOCX-файла шаблона экспорта для C#</figcaption>
+<p><img alt="Пример DOCX-файла шаблона экспорта для C#" src="/platform/v6.0/business_apps/templates/export_templates/img/export_template_file_c_syntax_example_docx.png"/></p><figcaption class="caption">Пример DOCX-файла шаблона экспорта для C#</figcaption>
 </figure>
 <h2 class="pageBreakBefore" id="export_template_file_configure_fonts">Использование шрифтов в шаблонах экспорта в формате PDF</h2>
-<p>Если в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4797">свойствах шаблона экспорта</a> установлен флажок «<strong>Экспортировать как PDF</strong>», файлы PDF формируются с использованием шрифтов, установленных на сервере c экземпляром ПО <strong>Comindware Platform</strong> (далее «<strong>Сервер</strong>»).</p>
+<p>Если в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5733">свойствах шаблона экспорта</a> установлен флажок «<strong>Экспортировать как PDF</strong>», файлы PDF формируются с использованием шрифтов, установленных на сервере c экземпляром ПО <strong>Comindware Platform</strong> (далее «<strong>Сервер</strong>»).</p>
 <p>При формировании файлов PDF из шаблонов экспорта сервер может подставлять произвольные шрифты с другим начертанием, что может привести к некорректному форматированию файлов PDF.</p>
 <p>Это может быть связано с тем, что Сервере отсутствуют шрифты, которые используются в файле шаблона экспорта:</p>
 <ul>
@@ -343,11 +299,11 @@
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4795">Пример настройки и использования шаблона экспорта авансового отчёта</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4792">Настройка выгрузки нескольких коллекций и изображений</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4793">Настройка шаблона экспорта с использованием C#</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4797">Настройка шаблона экспорта</a></em></li>
-<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4798">Настройка кнопки экспорта</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5731">Пример настройки и использования шаблона экспорта авансового отчёта</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5338">Настройка выгрузки нескольких коллекций и изображений</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5336">Настройка шаблона экспорта с использованием C#</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5733">Настройка шаблона экспорта</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5732">Настройка кнопки экспорта</a></em></li>
 </ul>
 </div>
 </article>
