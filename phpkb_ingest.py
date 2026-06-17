@@ -3,6 +3,7 @@ Build a single Markdown bundle for LLM ingestion from PHPKB-exported Markdown.
 
 All version-specific paths are CLI-required; no hardcoded platform defaults.
 Example (v5): python phpkb_ingest.py --folder phpkb_content_rag/798-platform_v5 --output kb.comindware.ru.platform_v5_for_llm_ingestion.md --target-dir kb.comindware.ru/platform/v5.0 --category-id 798
+Example (v5): python phpkb_ingest.py --folder phpkb_content_rag/798-platform_v5 --output kb.comindware.ru.platform_v5_for_llm_ingestion.md --target-dir kb.comindware.ru/platform/v5.0 --category-id 798
 Example (v6): python phpkb_ingest.py --folder phpkb_content_rag/896-platform_v6 --output kb.comindware.ru.platform_v6_for_llm_ingestion.md --target-dir kb.comindware.ru/platform/v6.0 --category-id 896
 """
 
