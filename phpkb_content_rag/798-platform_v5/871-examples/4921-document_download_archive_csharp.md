@@ -1,11 +1,11 @@
 ---
-title: 'Атрибут типа «Документ». Скачивание архива с файлами из таблицы и записи'
+title: 'Атрибут типа «Документ». Скачивание архива с файлами из выбранных строк таблицы и записи'
 kbId: 4921
 url: 'https://kb.comindware.ru/article.php?id=4921'
-updated: '2025-04-01 13:39:39'
+updated: '2026-06-17 14:09:57'
 ---
 
-# Атрибут типа «Документ». Скачивание архива с файлами из таблицы и записи
+# Атрибут типа «Документ». Скачивание архива с файлами из выбранных строк таблицы и записи
 
 ## Введение
 
@@ -102,7 +102,7 @@ updated: '2025-04-01 13:39:39'
 
    class Script
    {
-       public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+       public static UserCommandResult Main(UserCommandContext userCommandContext)
        {
            // ObjectIds — массив выбранных записей, полученный из контекста операции кнопки.
            var selected_Ids = userCommandContext.ObjectIds;

@@ -53,7 +53,7 @@ COUNT(
 --8<-- "related_topics_heading.md"
 
 - [Язык формул](https://kb.comindware.ru/category.php?id=880)
-- [Список функций языка формул Comindware](https://kb.comindware.ru/article.php?id=4993)
-- [Атрибуты. Определения и настройка](https://kb.comindware.ru/article.php?id=4772)
+- [Список функций языка формул Comindware][formula_function_list]
+- [Атрибуты. Определения и настройка][attributes]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

@@ -30,8 +30,8 @@ updated: '2024-03-04 10:24:35'
 
 --8<-- "related_topics_heading.md"
 
-**[Шаблоны. Определения, создание, настройка, перенос между приложениями, архивирование, очистка, удаление](https://kb.comindware.ru/article.php?id=4709)**
+**[Шаблоны. Определения, создание, настройка, перенос между приложениями, архивирование, очистка, удаление][templates]**
 
-**[Роли в приложении](https://kb.comindware.ru/article.php?id=4803)**
+**[Роли в приложении][roles]**
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

@@ -2,7 +2,7 @@
 title: 'Выгрузка выбранных записей и столбцов из таблицы с помощью C#'
 kbId: 5008
 url: 'https://kb.comindware.ru/article.php?id=5008'
-updated: '2025-06-17 13:21:03'
+updated: '2026-06-17 14:09:57'
 ---
 
 # Выгрузка выбранных записей и столбцов из таблицы с помощью C#
@@ -82,7 +82,7 @@ updated: '2025-06-17 13:21:03'
    class Script
    {
        // userCommandContext содержит данные контекста при нажатии кнопки.
-       public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+       public static UserCommandResult Main(UserCommandContext userCommandContext)
        {
            // Получаем ID выбранных записей (строк) в таблице при нажатии кнопки.
            var selectedTableRows = userCommandContext.ObjectIds as string[];

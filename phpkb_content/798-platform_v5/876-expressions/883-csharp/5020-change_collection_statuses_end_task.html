@@ -1,27 +1,77 @@
-<h1>Изменение статусов в коллекции и завершение пользовательской задачи</h1><p>Для того, чтобы по кнопке можно было менять статус записей в коллекции в зависимости от определенного условия и завершать связанную с основной записью пользовательскую задачу, введите следующее выражение:</p>
-<div>
-<table class="source_code_container">
+<h1>Изменение статусов в коллекции и завершение пользовательской задачи</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5020" kb-tags="C#,C#-скрипт,кнопки,скрипт" kb-title="Изменение статусов в коллекции и завершение пользовательской задачи">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для того чтобы по кнопке можно было менять статус записей в коллекции в зависимости от определенного условия и завершать связанную с основной записью пользовательскую задачу, введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code>using System;</code> <br/><code>using System.Collections.Generic;</code> <br/><code>using System.Linq;</code> <br/><code>using Comindware.Data.Entity;</code> <br/><code>using Comindware.TeamNetwork.Api.Data.UserCommands;</code> <br/><code>using Comindware.TeamNetwork.Api.Data;</code> <br/><code>public class Script</code> <br/><code>{</code> <br/><code>    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)</code> <br/><code>    {</code> <br/><code>        var objectId = userCommandContext.ObjectIds.FirstOrDefault();</code> <br/><code>        var data = Api.TeamNetwork.ObjectService.GetWithAlias("Register", objectId);</code> <br/><code>        object[] Applications = data["Applications"] as object[];</code> <br/><code>        var allApplications = new List&lt;string&gt;();</code> <br/><code></code> <br/><code>        foreach (var app in Applications)</code> <br/><code>        {</code> <br/><code>            var apps = app as string;</code> <br/><code>            allApplications.Add(apps);</code> <br/><code>        }</code> <br/><code></code> <br/><code>        var LevelRef = data["RegisterLevel"];</code> <br/><code>        var Level = Api.TeamNetwork.ObjectService.GetWithAlias("RegisterLevels", LevelRef as string);</code> <br/><code>        var LevelNum = (decimal)Level["Level"];</code> <br/><code></code> <br/><code>        if (LevelNum == 1)</code> <br/><code>        {</code> <br/><code>            var approvedStatus = entities.ApplicationStatus.Where(x =&gt; x.Name == "Согласована в первом реестре").Select(x =&gt; x.id).FirstOrDefault();</code> <br/><code>            foreach(var a in allApplications) </code> <br/><code>            {</code> <br/><code>                var data1 = new Dictionary&lt;string, object&gt;</code> <br/><code>                {</code> <br/><code>                    { "Status", approvedStatus}</code> <br/><code>                };</code> <br/><code>                Api.TeamNetwork.ObjectService.EditWithAlias("Application", a, data1);</code> <br/><code>            }</code> <br/><code>        }</code> <br/><code>        else</code> <br/><code>        {</code> <br/><code>            var approvedStatus = entities.ApplicationStatus.Where(x =&gt; x.Name == "Согласована во втором реестре").Select(x =&gt; x.id).FirstOrDefault();</code> <br/><code>            foreach(var a in allApplications) </code> <br/><code>            {</code> <br/><code>                var data1 = new Dictionary&lt;string, object&gt;</code> <br/><code>                {</code> <br/><code>                    { "Status", approvedStatus}</code> <br/><code>                };</code> <br/><code>                Api.TeamNetwork.ObjectService.EditWithAlias("Application", a, data1);</code> <br/><code>            }</code> <br/><code>        }</code> <br/><code>        </code> <br/><code>        var result = new UserCommandResult</code> <br/><code>        {</code> <br/><code>            Success = true,</code> <br/><code>            Commited = true,</code> <br/><code>            ResultType = UserCommandResultType.Navigate,</code> <br/><code>            NavigationResult = new UserCommandNavigationResult</code> <br/><code>            {</code> <br/><code>                Title = "Register",</code> <br/><code>                ObjectId = objectId,</code> <br/><code>                ContainerId = "oa.13",</code> <br/><code>                Context = ContextType.Record </code> <br/><code>            },</code> <br/><code>            Messages = new[]</code> <br/><code>            {</code> <br/><code>                new UserCommandMessage</code> <br/><code>                {</code> <br/><code>                    Severity = SeverityLevel.Normal,</code> <br/><code>                    Text = "Register approved"</code> <br/><code>                    }</code> <br/><code>            }</code> <br/><code>        };</code> <br/><code>        var activeTask = Api.Process.ProcessObjectService.GetReferencedTasks(objectId).Where(x =&gt; x.Status == UserTaskStatus.InProgress).FirstOrDefault().Id;</code> <br/><code>        Api.TeamNetwork.UserTaskService.Complete(activeTask, true);</code> <br/><code>        return result;</code> <br/><code>    }</code> <br/><code>}</code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="source_code"> 
-<p>using System;<br/>using System.Collections.Generic;<br/>using System.Linq;<br/>using Comindware.Data.Entity;<br/>using Comindware.TeamNetwork.Api.Data.UserCommands;<br/>using Comindware.TeamNetwork.Api.Data;<br/>public class Script<br/>{<br/>    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)<br/>    {<br/>        var objectId = userCommandContext.ObjectIds.FirstOrDefault();<br/>        var data = Api.TeamNetwork.ObjectService.GetWithAlias("Register", objectId);<br/>        object[] Applications = data["Applications"] as object[];<br/>        var allApplications = new List&lt;string&gt;();</p>
-<p>        foreach (var app in Applications)<br/>        {<br/>            var apps = app as string;<br/>            allApplications.Add(apps);<br/>        }</p>
-<p>        var LevelRef = data["RegisterLevel"];<br/>        var Level = Api.TeamNetwork.ObjectService.GetWithAlias("RegisterLevels", LevelRef as string);<br/>        var LevelNum = (decimal)Level["Level"];</p>
-<p>        if (LevelNum == 1)<br/>        {<br/>            var approvedStatus = entities.ApplicationStatus.Where(x =&gt; x.Name == "Согласована в первом реестре").Select(x =&gt; x.id).FirstOrDefault();<br/>            foreach(var a in allApplications) <br/>            {<br/>                var data1 = new Dictionary&lt;string, object&gt;<br/>                {<br/>                    { "Status", approvedStatus}<br/>                };<br/>                Api.TeamNetwork.ObjectService.EditWithAlias("Application", a, data1);<br/>            }<br/>        }<br/>        else<br/>        {<br/>            var approvedStatus = entities.ApplicationStatus.Where(x =&gt; x.Name == "Согласована во втором реестре").Select(x =&gt; x.id).FirstOrDefault();<br/>            foreach(var a in allApplications) <br/>            {<br/>                var data1 = new Dictionary&lt;string, object&gt;<br/>                {<br/>                    { "Status", approvedStatus}<br/>                };<br/>                Api.TeamNetwork.ObjectService.EditWithAlias("Application", a, data1);<br/>            }<br/>        }<br/>        <br/>        var result = new UserCommandResult<br/>        {<br/>            Success = true,<br/>            Commited = true,<br/>            ResultType = UserCommandResultType.Navigate,<br/>            NavigationResult = new UserCommandNavigationResult<br/>            {<br/>                Title = "Register",<br/>                ObjectId = objectId,<br/>                ContainerId = "oa.13",<br/>                Context = ContextType.Record <br/>            },<br/>            Messages = new[]<br/>            {<br/>                new UserCommandMessage<br/>                {<br/>                    Severity = SeverityLevel.Normal,<br/>                    Text = "Register approved"<br/>                    }<br/>            }<br/>        };<br/>        var activeTask = Api.Process.ProcessObjectService.GetReferencedTasks(objectId).Where(x =&gt; x.Status == UserTaskStatus.InProgress).FirstOrDefault().Id;<br/>        Api.TeamNetwork.UserTaskService.Complete(activeTask, true);<br/>        return result;<br/>    }<br/>}</p>
-</td>
+<td><code>Register</code></td>
+<td>Системное имя текущего шаблона записи.</td>
+</tr>
+<tr>
+<td><code>Applications</code></td>
+<td>Системное имя атрибута типа «<strong>Коллекция</strong>» в текущем шаблоне записи.</td>
+</tr>
+<tr>
+<td><code>RegisterLevel</code></td>
+<td>Системное имя атрибута типа «<strong>Ссылка</strong>» в текущем шаблоне записи для условия.</td>
+</tr>
+<tr>
+<td><code>RegisterLevels</code></td>
+<td>Системное имя шаблона записи, на который ссылается <code>RegisterLevel</code>, для условия.</td>
+</tr>
+<tr>
+<td><code>Level</code></td>
+<td>Системное имя атрибута типа «<strong>Число</strong>» в шаблоне записи <code>RegisterLevels</code> для условия.</td>
+</tr>
+<tr>
+<td><code>Согласована в первом реестре</code> / <code>Согласована во втором реестре</code></td>
+<td>Значение статуса для записи в коллекции, на которое нужно поменять статус при выполнении условия.</td>
+</tr>
+<tr>
+<td><code>Application</code></td>
+<td>Системное имя шаблона записи, на который ссылается <code>Applications</code>.</td>
+</tr>
+<tr>
+<td><code>Status</code></td>
+<td>Системное имя атрибута типа «<strong>Ссылка</strong>» в шаблоне записи <code>Application</code>, значение которого нужно поменять.</td>
+</tr>
+<tr>
+<td><code>oa.13</code></td>
+<td>ID текущего шаблона записи для навигации.</td>
+</tr>
+<tr>
+<td><code>Register approved</code></td>
+<td>Текст сообщения при успешном выполнении кнопки.</td>
 </tr>
 </tbody>
 </table>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Скрипт работает только с одной записью (выбирает первую запись, если в таблице было выбрано несколько элементов). Для обработки нескольких записей скрипт нужно дописать.</p>
 </div>
-<p><span style="text-decoration: underline;"><strong>где:</strong></span></p>
-<p><strong>Register</strong> - системное имя текущего Шаблона записи;</p>
-<p><strong>Applications</strong> - системное имя атрибута типа Коллекция в текущем Шаблоне записи;</p>
-<p><strong>RegisterLevel</strong> - системное имя атрибута типа Ссылка в текущем Шаблоне записи (для условия);</p>
-<p><strong>RegisterLevels</strong> - системное имя Шаблона записи, на который ссылается RegisterLevel <span style="color: #333333; font-family: 'Open Sans', sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 100; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">(для условия)</span>;</p>
-<p><strong>Level</strong> - системное имя атрибута типа Число в Шаблоне записи RegisterLevels <span style="color: #333333; font-family: 'Open Sans', sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 100; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">(для условия);</span></p>
-<p><strong>Согласована в первом реестре / Согласована во втором реестре</strong> - значение статуса для записи в коллекции, на которое нужно поменять статус при выполнении условия;</p>
-<p><strong>Application</strong> - системное имя Шаблона записи, на который ссылается Applications;</p>
-<p><strong>Status</strong> - системное имя атрибута типа Ссылка в Шаблоне записи Application, значение которого нужно поменять;</p>
-<p><strong>oa.13</strong> - ИД текущего Шаблона записи для навигации;</p>
-<p><strong>Register approved</strong> - текст сообщения при успешном выполнении операции.</p>
-<div class="blue_note"><strong>Примечание :</strong> скрипт работает только с одной записью (выбирает первую запись, если на списке было выбрано несколько элементов). Для обработки нескольких записей скрипт нужно дописать.</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

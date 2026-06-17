@@ -2,12 +2,12 @@
 title: 'Вычисление суммы значений столбца коллекции'
 kbId: 4962
 url: 'https://kb.comindware.ru/article.php?id=4962'
-updated: '2023-12-21 14:47:41'
+updated: '2026-06-17 14:09:55'
 ---
 
 # Вычисление суммы значений столбца коллекции
 
-Для того, чтобы рассчитать сумму значений определенного столбца коллекции, за исключением заархивированных записей, введите следующее выражение:
+Для того чтобы рассчитать сумму значений определенного столбца коллекции, за исключением заархивированных записей, введите следующее выражение:
 
 ```
 @prefix object: <http://comindware.com/ontology/object#>.
@@ -20,24 +20,21 @@ updated: '2023-12-21 14:47:41'
     ("Plans" "Prodolzhitelnost") object:findProperty ?ProdolzhitelnostProperty.
     ("Plans" "_isDisabled") object:findProperty ?_isDisabled.
 
-   
                 from {
                 ?item ?ProjectPlansProperty ?ProjectPlansVal.
                 ?ProjectPlansVal ?ProdolzhitelnostProperty ?ProdolzhitelnostVal.
                 not{?ProdolzhitelnostVal ?_isDisabled true.}.
                                          }select ?ProdolzhitelnostVal -> ?durationList.
-                ?durationList cmwmath:sum  ?value.           
+                ?durationList cmwmath:sum  ?value.
                 }
 ```
 
-**где:**
+**Здесь:**
 
-**Project** — системное имя текущего шаблона записи;
-
-**ProjectPlans**— системное имя атрибута типа «Коллекция» в текущем шаблоне записи;
-
-**Plans**— системное имя шаблона записи, на который ссылается **ProjectPlans**;
-
-**Prodolzhitelnost**— системное имя атрибута для сложения в **Plans**;
-
-**\_isDisabled** — системное имя системного атрибута «В архиве» (для скрытия архивных записей).
+| Значение | Описание |
+| --- | --- |
+| `Project` | Системное имя текущего шаблона записи. |
+| `ProjectPlans` | Системное имя атрибута типа «**Коллекция**» в текущем шаблоне записи. |
+| `Plans` | Системное имя шаблона записи, на который ссылается `ProjectPlans`. |
+| `Prodolzhitelnost` | Системное имя атрибута для сложения в шаблоне `Plans`. |
+| `_isDisabled` | Системное имя системного атрибута «**В архиве**» для скрытия архивных записей. |

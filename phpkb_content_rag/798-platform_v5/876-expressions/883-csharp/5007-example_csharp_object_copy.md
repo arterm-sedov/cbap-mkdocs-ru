@@ -2,16 +2,14 @@
 title: 'Копирование объекта'
 kbId: 5007
 url: 'https://kb.comindware.ru/article.php?id=5007'
-updated: '2024-11-07 11:45:38'
+updated: '2026-06-17 14:09:49'
 ---
 
 # Копирование объекта
 
-Для того чтобы скопировать запись, создайте в текущем шаблоне записи кнопку с операцией C#-скрипт и введите следующее выражение:
+Для того чтобы скопировать запись, создайте в текущем шаблоне записи кнопку с операцией «**C#-скрипт**» и введите следующее выражение:
 
 ```
- 
-
 using System; 
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +19,7 @@ using Comindware.TeamNetwork.Api.Data;
 
 class Script
 {
-    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+    public static UserCommandResult Main(UserCommandContext userCommandContext)
     { 
  foreach (var objectId in userCommandContext.ObjectIds)
         {

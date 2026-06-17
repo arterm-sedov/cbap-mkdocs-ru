@@ -1,44 +1,101 @@
-<h1>Настройка вызова API</h1><p>В <strong>Comindware Platform</strong> есть возможность вызова из внешних систем веб-сервисов системы для обмена данными, например, создание объекта, запуск процесса или получение информации по документу. Полный перечень веб-сервисов и описание можно посмотреть <a href="https://kb.comindware.ru/article.php?id=4860">здесь</a>.</p>
-<p><strong>Сценарий: </strong>нужно запустить процесс по заявке на командировку с информацией: страна, город и аэропорт.</p>
-<p><strong>Описание: </strong>в системе созданы:</p>
+<h1>Настройка вызова API</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4927" kb-tags="API,атрибуты,пример,процессы,сценарии" kb-title="Настройка вызова API">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#api_call_config_scenariy">
+<span class="md-ellipsis">
+      
+        Сценарий
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#api_call_config_opisanie">
+<span class="md-ellipsis">
+      
+        Исходные данные
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#api_call_config_setup">
+<span class="md-ellipsis">
+      
+        Порядок настройки
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      
+        Связанные статьи
+      
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>В <strong>Comindware Platform</strong> есть возможность вызова из внешних систем веб-сервисов системы для обмена данными, например, создание объекта, запуск процесса или получение информации по документу. Полный перечень веб-сервисов и описание можно посмотреть <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4860">здесь</a>.</p>
+<h2 id="api_call_config_scenariy">Сценарий</h2>
+<p>Нужно запустить процесс по заявке на командировку с информацией: страна, город и аэропорт.</p>
+<h2 id="api_call_config_opisanie">Исходные данные</h2>
+<p>В системе созданы:</p>
 <ul>
-<li>шаблон записи «<em>Заявки на командировки</em>» с атрибутами:
-<ul style="list-style-type: circle;">
-<li>Страна (op.1);</li>
-<li>Город (op.2);</li>
-<li>Аэропорт (op.3).</li>
+<li>
+<p>шаблон записи <em>«Заявки на командировки»</em> с атрибутами:</p>
+<ul>
+<li><em>Страна</em> (<code>op.1</code>);</li>
+<li><em>Город</em> (<code>op.2</code>);</li>
+<li><em>Аэропорт</em> (<code>op.3</code>).</li>
 </ul>
 </li>
-<li>шаблон процесса «<em>Обработка заявки на командировки</em>» (pa.1), связанный с шаблоном записи «<em>Заявки на командировки</em>».</li>
+<li>
+<p>шаблон процесса <em>«Обработка заявки на командировки»</em> (<code>pa.1</code>), связанный с шаблоном записи <em>«Заявки на командировки»</em>.</p>
+</li>
 </ul>
-<p><strong>Настройка:</strong></p>
+<h2 id="api_call_config_setup">Порядок настройки</h2>
 <p>Для запуска процесса используйте веб-сервис:</p>
 <ul>
-<li>https://URL/api/public/system/Process/ProcessObjectService/Create1.</li>
-<li>Метод аутентификации — Basic. Большинство внешних систем обладают интерфейсом настройки метода аутентификации, при отсутствии такового добавьте в <em style="box-sizing: border-box;">Header</em><span style="letter-spacing: 0.2px;"> запроса параметр «</span><em style="box-sizing: border-box;">Authorization</em><span style="letter-spacing: 0.2px;">», равный зашифрованному в формате Base64 логину/паролю.</span></li>
-<li>Тело запроса (где укажите идентификатор процесса, который нужно запустить, а также идентификаторы и значения атрибутов, которые вы хотите передать):</li>
+<li><code>https://URL/api/public/system/Process/ProcessObjectService/Create1</code></li>
+<li><strong>Метод аутентификации</strong> — <code>Basic</code>. Большинство внешних систем обладают интерфейсом настройки метода аутентификации. При отсутствии такового добавьте в заголовок <code>Header</code> запроса параметр <code>Authorization</code>, равный зашифрованному в формате Base64 логину и паролю.</li>
+<li><strong>Тело запроса</strong> — укажите идентификатор процесса, который нужно запустить, а также идентификаторы и значения атрибутов, которые вы хотите передать:</li>
 </ul>
-<div>
-<table class="source_code_container">
-<tbody>
-<tr>
-<td class="source_code">
-<p>{</p>
-<p>  "processAppId": "pa.1",</p>
-<p>  "objectName": null,</p>
-<p>    "syncActivityQuantity": 2,</p>
-<p>  "objectData":</p>
-<p>  {</p>
-<p>     "op.1": "Россия",</p>
-<p>     "op.2": "Москва",</p>
-<p>     "op.3": "Шереметьево"</p>
-<p>  }</p>
-<p>}</p>
-</td>
-</tr>
-</tbody>
-</table>
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="w">  </span><span class="nt">"processAppId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pa.1"</span><span class="p">,</span></code> <br/><code><span class="w">  </span><span class="nt">"objectName"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span></code> <br/><code><span class="w">  </span><span class="nt">"syncActivityQuantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span></code> <br/><code><span class="w">  </span><span class="nt">"objectData"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"op.1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Россия"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"op.2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Москва"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"op.3"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Шереметьево"</span></code> <br/><code><span class="w">  </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>У пользователя, под которым выполняется запрос, должны быть соответствующие права.</p>
 </div>
-<div class="blue_note">
-<p><strong>Примечание :</strong> у пользователя, под которым выполняется запрос, должны быть соответствующие права.</p>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4860">Введение в API</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4863">Solution API</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4861">Web API</a></li>
+</ul>
 </div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

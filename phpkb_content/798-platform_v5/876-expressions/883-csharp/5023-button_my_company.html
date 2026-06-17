@@ -1,18 +1,45 @@
-<h1>Кнопка «Моя компания»</h1><p>Для того, чтобы разместить на боковую панель навигации ссылку на компанию пользователя, создайте операцию типа Скрипт в текущем Шаблоне записи и введите следующее выражение:</p>
-<div>
-<table class="source_code_container">
+<h1>Кнопка «Моя компания»</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5023" kb-tags="C#,скрипт,C#-скрипт,пример скрипта" kb-title="Кнопка «Моя компания»">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для того чтобы поместить на боковую панель навигации ссылку на компанию пользователя, создайте кнопку с операцией «<strong>C#-скрипт</strong>» в текущем Шаблоне записи и введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Collections.Generic</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Linq</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.Data.Entity</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.TeamNetwork.Api.Data.UserCommands</span><span class="p">;</span></code> <br/><code></code> <br/><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Script</span></code> <br/><code><span class="p">{</span></code> <br/><code></code> <br/><code><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">UserCommandResult</span><span class="w"> </span><span class="n">Main</span><span class="p">(</span><span class="n">UserCommandContext</span><span class="w"> </span><span class="n">userCommandContext</span><span class="p">)</span></code> <br/><code><span class="w">    </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">GetWithAlias</span><span class="p">(</span><span class="s">"Kontaktyklientov"</span><span class="p">,</span><span class="w"> </span><span class="n">userCommandContext</span><span class="p">.</span><span class="n">CurrentUserId</span><span class="p">);</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">"У пользователя нет компании"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">null</span><span class="p">;</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">companyId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">user</span><span class="p">[</span><span class="s">"company"</span><span class="p">]</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">null</span><span class="p">;</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserCommandResult</span><span class="p">()</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="n">Success</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">null</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="n">Messages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">new</span><span class="p">[]</span></code> <br/><code><span class="w">            </span><span class="p">{</span></code> <br/><code><span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">UserCommandMessage</span></code> <br/><code><span class="w">                </span><span class="p">{</span></code> <br/><code><span class="w">                    </span><span class="n">Severity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SeverityLevel</span><span class="p">.</span><span class="n">Normal</span><span class="p">,</span></code> <br/><code><span class="w">                    </span><span class="n">Text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">error</span></code> <br/><code><span class="w">                </span><span class="p">}</span></code> <br/><code><span class="w">            </span><span class="p">},</span></code> <br/><code><span class="w">            </span><span class="n">ResultType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">UserCommandResultType</span><span class="p">.</span><span class="n">Navigate</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">UserCommandResultType</span><span class="p">.</span><span class="n">Notificate</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="n">NavigationResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserCommandNavigationResult</span></code> <br/><code><span class="w">            </span><span class="p">{</span></code> <br/><code><span class="w">                </span><span class="n">ContainerId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"oa.4"</span><span class="p">,</span></code> <br/><code><span class="w">                </span><span class="n">ObjectId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">companyId</span><span class="p">,</span></code> <br/><code><span class="w">                </span><span class="n">Context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ContextType</span><span class="p">.</span><span class="n">Record</span></code> <br/><code><span class="w">            </span><span class="p">}</span></code> <br/><code><span class="w">        </span><span class="p">};</span></code> <br/><code><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="source_code"> 
-<p>using System;<br/>using System.Collections.Generic;<br/>using System.Linq;<br/>using Comindware.Data.Entity;<br/>using Comindware.TeamNetwork.Api.Data.UserCommands;</p>
-<p>public class Script<br/>{</p>
-<p>    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)<br/>    {<br/>        var user = Api.TeamNetwork.ObjectService.GetWithAlias("Kontaktyklientov", userCommandContext.CurrentUserId);<br/>        var error = user == null ? "У пользователя нет компании" : null;<br/>        var companyId = error == null ? user["company"] as string : null;<br/>        var result = new UserCommandResult()<br/>        {<br/>            Success = error == null,<br/>            Messages = error == null ? null : new[]<br/>            {<br/>                new UserCommandMessage<br/>                {<br/>                    Severity = SeverityLevel.Normal,<br/>                    Text = error<br/>                }<br/>            },<br/>            ResultType = error == null ? UserCommandResultType.Navigate : UserCommandResultType.Notificate,<br/>            NavigationResult = new UserCommandNavigationResult<br/>            {<br/>                ContainerId = "oa.4",<br/>                ObjectId = companyId,<br/>                Context = ContextType.Record<br/>            }<br/>        };<br/>        return result;<br/>    }<br/>}</p>
-</td>
+<td><code>Kontaktyklientov</code></td>
+<td>Системное имя шаблона аккаунта, в котором хранятся контактные лица клиентов.</td>
+</tr>
+<tr>
+<td><code>company</code></td>
+<td>Системное имя атрибута типа «<strong>Запись</strong>» в шаблоне аккаунта. Атрибут ссылается на текущий шаблон записи.</td>
+</tr>
+<tr>
+<td><code>oa.4</code></td>
+<td>ID текущего шаблона записи.</td>
 </tr>
 </tbody>
 </table>
+</article>
 </div>
-<p><span style="text-decoration: underline;"><strong>где:</strong></span></p>
-<p><strong>Kontaktyklientov</strong> - системное имя Шаблона пользователя, где хранятся все контактные лица клиентов в системе;</p>
-<p><strong>company</strong> - системное имя атрибута типа Ссылка в Шаблоне пользователя, ссылающийся на текущий Шаблон записи;</p>
-<p><strong>oa.4</strong> - ИД текущего Шаблона записи.</p>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

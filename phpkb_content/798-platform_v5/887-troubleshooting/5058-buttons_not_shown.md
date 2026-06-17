@@ -24,9 +24,9 @@ updated: '2025-10-24 17:17:33'
 
 --8<-- "related_topics_heading.md"
 
-- [Кнопки](https://kb.comindware.ru/article.php?id=4790)
-- [Таблицы](https://kb.comindware.ru/article.php?id=4800)
-- [Формы](https://kb.comindware.ru/article.php?id=4786)
-- [Роли в приложении](https://kb.comindware.ru/article.php?id=4803)
+- [Кнопки][buttons]
+- [Таблицы][table_configure]
+- [Формы][forms]
+- [Роли в приложении][roles]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

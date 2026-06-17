@@ -26,6 +26,6 @@ updated: '2025-10-24 17:34:29'
 
 --8<-- "related_topics_heading.md"
 
-- [Атрибут типа «Запись»](https://kb.comindware.ru/article.php?id=4780)
+- [Атрибут типа «Запись»][attribute_record]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

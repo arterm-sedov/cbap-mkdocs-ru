@@ -29,6 +29,6 @@ updated: '2025-10-24 17:28:14'
 
 --8<-- "related_topics_heading.md"
 
-- [Общие свойства атрибутов](https://kb.comindware.ru/article.php?id=4765)
+- [Общие свойства атрибутов][attribute_common_properties]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

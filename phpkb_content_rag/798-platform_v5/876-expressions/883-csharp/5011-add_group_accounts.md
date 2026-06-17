@@ -2,12 +2,12 @@
 title: 'Добавление пользователей в группу'
 kbId: 5011
 url: 'https://kb.comindware.ru/article.php?id=5011'
-updated: '2022-09-20 10:07:39'
+updated: '2026-06-17 14:09:49'
 ---
 
 # Добавление пользователей в группу
 
-Для того, чтобы в рамках процесса можно было добавить пользователя или пользователей в определенную системную группу (например, для управления ролевой моделью), введите следующее выражение:
+Для того чтобы в рамках процесса можно было добавить пользователя или пользователей в определенную системную группу (например, для управления ролевой моделью), введите следующее выражение:
 
 ```
 using System;
@@ -19,54 +19,58 @@ using Comindware.TeamNetwork.Api.Data;
 
 class Script
 {
-public static void Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities)
-{
-string[] OA = new string[] {
-"Kontragenty"
-};
-string[] OP = new string[] {
-"Podpisant"
-};
-string[] GROUP = new string[] {
-"group.28"
-};
-for(int j = 0; j < GROUP.Length; j++)
-{
-var group = GROUP[j];
-var old_users = Api.Base.AccountGroupService.Get(group);
-Api.Base.AccountGroupService.ExcludeMembers(group, old_users.Users);
-var my_list = Api.TeamNetwork.ObjectService.ListWithAlias(OA[j]);
-foreach (var i in my_list)
-{
-var data = i as Dictionary<string,object>;
-data.TryGetValue(OP[j], out object obj);
-if (obj == null)
-{
-continue;
-}
+    public static void Main(Comindware.Process.Api.Data.ScriptContext context)
+    {
+        string[] OA = new string[] {
+            "Kontragenty"
+        };
+        string[] OP = new string[] {
+            "Podpisant"
+        };
+        string[] GROUP = new string[] {
+            "group.28"
+        };
 
-if (obj is string)
-{
-Api.Base.AccountGroupService.IncludeMembers(group, new List<string>(){ obj.ToString() }); ÿ
-}
-else
-{
-var accounts = obj as object[];
-var accountsIds = accounts.Select(x => x.ToString());
-Api.Base.AccountGroupService.IncludeMembers(group, accountsIds);
-}
-}
-}
-}
+        for (int j = 0; j < GROUP.Length; j++)
+        {
+            var group = GROUP[j];
+            var old_users = Api.Base.AccountGroupService.Get(group);
+            Api.Base.AccountGroupService.ExcludeMembers(group, old_users.Users);
+
+            var my_list = Api.TeamNetwork.ObjectService.ListWithAlias(OA[j]);
+            foreach (var i in my_list)
+            {
+                var data = i as Dictionary<string, object>;
+                data.TryGetValue(OP[j], out object obj);
+                if (obj == null)
+                {
+                    continue;
+                }
+
+                if (obj is string)
+                {
+                    Api.Base.AccountGroupService.IncludeMembers(group, new List<string>() { obj.ToString() });
+                }
+                else
+                {
+                    var accounts = obj as object[];
+                    var accountsIds = accounts.Select(x => x.ToString());
+                    Api.Base.AccountGroupService.IncludeMembers(group, accountsIds);
+                }
+            }
+        }
+    }
 }
 ```
 
-**где:**
+**Здесь:**
 
-***Kontragenty*** — системное имя шаблона записи;
+| Значение | Описание |
+| --- | --- |
+| `Kontragenty` | Системное имя шаблона записи. |
+| `Podpisant` | Системное имя атрибута типа «**Аккаунт**» в шаблоне записи `Kontragenty`. В этом атрибуте хранится пользователь, которого нужно добавить в группу. |
+| `group.28` | ID системной группы, в которую нужно добавить пользователя из атрибута `Podpisant`. |
 
-***Podpisant*** — системное имя атрибута с типом данных «Аккаунт» из шаблона записи ***Kontragenty***, хранящее пользователя;
+## Логика работы скрипта
 
-***group.28*** — ИД системной группы, куда необходимо добавить пользователя из поля ***Podpisant***.
-
-Данный скрипт при вызове сначала удаляет всех пользователей из группы, а затем проходит по всем записям в указанном шаблоне записи и добавляет пользователей из указанного атрибута в группу, т. о., обновляя состав системной группы.
+При вызове скрипт сначала удаляет всех пользователей из группы, затем проходит по всем записям указанного шаблона записи и добавляет в группу пользователей из указанного атрибута. Так скрипт обновляет состав системной группы.

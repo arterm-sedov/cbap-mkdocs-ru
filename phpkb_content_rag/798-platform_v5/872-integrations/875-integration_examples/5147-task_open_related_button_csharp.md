@@ -2,7 +2,7 @@
 title: 'Кнопка «Перейти к активной задаче пользователя». Настройка на C#'
 kbId: 5147
 url: 'https://kb.comindware.ru/article.php?id=5147'
-updated: '2025-12-19 17:15:57'
+updated: '2026-06-17 14:09:58'
 ---
 
 # Кнопка «Перейти к активной задаче пользователя». Настройка на C#
@@ -79,7 +79,7 @@ updated: '2025-12-19 17:15:57'
    class Script
    {
        // userCommandContext содержит данные контекста при нажатии кнопки.
-       public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+       public static UserCommandResult Main(UserCommandContext userCommandContext)
        {
            // Получаем ID текущего пользователя, нажавшего кнопку.
            var currentUser = userCommandContext.CurrentUserId;

@@ -2,7 +2,7 @@
 title: 'Отображение кнопки при пустом исполнителе'
 kbId: 4951
 url: 'https://kb.comindware.ru/article.php?id=4951'
-updated: '2023-12-21 14:50:29'
+updated: '2026-06-17 14:09:54'
 ---
 
 # Отображение кнопки при пустом исполнителе
@@ -13,11 +13,10 @@ updated: '2023-12-21 14:50:29'
 
 ```
  EMPTY($assignee)
-```
-
+```turtle
 - на языке N3
 
-```
+```turtle
 @prefix cmw: <http://comindware.com/logics#>.
 {
 not{?item cmw:assignee ?.}.
