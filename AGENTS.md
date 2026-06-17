@@ -17,7 +17,7 @@ The three persons ideate, collaborate, argue and reconcile the resulting text or
 ## OUTPUT
 
 - Reason and answer in English (uless specifically asked to answer in Russian).
-- If any context if present, output the resulting texts their original languages:
+- If any context is present, output the resulting texts their original languages:
   - For Russian originals, output Russian text.
   - For English originals, output English text.
 - If asked to generate an article:
@@ -31,7 +31,19 @@ The three persons ideate, collaborate, argue and reconcile the resulting text or
 Comindware Platform Knowledge Base:
 
 - @/docs/
-- @/phpkb_content/
+- @/phpkb_content/ (**do not manually edit** — auto-generated from PHPKB; use @/docs/ for all content changes)
+
+Platform source code (sibling repo, for verifying feature behavior):
+
+- @../CBAP_MONO
+
+## SCRATCH DIRECTORY
+
+Use `.scratch/` for all temporary, draft, and transactional files: script outputs, debug logs, extracted data, one-off analysis files, and any disposable artifacts.
+
+- Always place temporary files in `.scratch/`, never in the repo root or other tracked directories.
+- Contents of `.scratch/` are git-ignored (except `.gitkeep`).
+- Treat everything in `.scratch/` as disposable — do not reference it from documentation or production code.
 
 ## RULES
 
@@ -43,9 +55,56 @@ When asked to update, add or modify anchors, keep the existing attributes and cl
 
 When asked for coding, be super smart, lean and dry. Add developer and business-oriented comments for code. Always refer to the existing codebase. Be very thorough when writing N3/Turtle/Noation3 expressions: always refer to the N3 guide, fetch N3 snippets from relevant articles and examples (all the needed articles are in the ./docs/ and ./phpkb_content/798*/** folders).
 
+Always save new project skills under `.agents/skills/<name>/SKILL.md`. Skill format: frontmatter with `name` and `description`, body in markdown. Validate with `quick_validate.py` from the global `skill-creator` skill before committing.
+
 ## Coding tasks
 
 When asked to create scripts or code: implement TDD, SDD, lean, dry, brilliant, minimal, abstract, pythonic, genius code, non-breaking, clean, impeccable.
+
+## Python environment
+
+Run Python scripts from the repository root with the repo virtual environment (`.venv`). Do not use the global interpreter or install packages outside `.venv`.
+
+Windows (PowerShell):
+
+```powershell
+.\.venv\Scripts\python.exe <script>.py
+```
+
+Linux/macOS:
+
+```bash
+.venv/bin/python <script>.py
+```
+
+Dependencies are listed in `install/requirements.txt`.
+
+The venv and WeasyPrint/GTK3 PDF toolchain have several non-obvious pitfalls on Windows (portable-Python env pollution, pip mirror setup, GTK3 install path, plugin import-name quirks). Load the relevant project skill for the full playbook:
+
+- @.agents/skills/python-env-setup/SKILL.md
+- @.agents/skills/mkdocs-pdf-build/SKILL.md
+- @.agents/skills/kb-edit-publish/SKILL.md
+
+## Skills Reference
+
+AGENTS.md defines writing and formatting rules. End-to-end workflows live in skills. Load the relevant skill when a task matches its description.
+
+| Task | Skill |
+|---|---|
+| Edit article, rebuild HTML, publish to PHPKB, commit | `kb-edit-publish` |
+| Refresh RAG corpus from PHPKB, build LLM ingestion bundle | `phpkb-ingestion` |
+| Install GTK3, build PDF guides on Windows | `mkdocs-pdf-build` |
+| Clone PHPKB categories/articles, sync IDs and links | `phpkb-cloning` |
+| Add an article to mkdocs YAML navigation | `mkdocs_add_file` |
+| Format git commit messages | `cmwhelp-commit` |
+| Fix broken venv, verify mkdocs plugin imports | `python-env-setup` |
+| Generate styled PDFs from Excel/CSV/JSON data | `generate-pdf-from-source` |
+| Search KB for N3/Turtle/C# references | `search-knowledge-base` |
+| Write N3/Turtle/RDF expressions | `n3_references` |
+| Write C# scripts for Comindware Platform | `csharp_api` |
+| Document discoveries after non-trivial tasks | `self-evolution` |
+
+Skills are under `.agents/skills/<name>/SKILL.md`. Do not duplicate skill content here — load the skill and follow its workflow.
 
 ## LINK FORMATTING
 
@@ -122,4 +181,10 @@ For H2-H6 generate a concise semantic anchors with H1 anchor as a prefix:
 
 ## Commit messages
 
-Follow the commit message rules given here: .cursor/rules/cmwhelp_commit.md
+Follow the commit message rules given here: .agents/skills/cmwhelp-commit/SKILL.md
+
+---
+
+## SELF-EVOLUTION — Documenting Discoveries
+
+After completing a non-trivial task, review what was learned and capture it. See the [self-evolution skill](.agents/skills/self-evolution/SKILL.md) for the full methodology.
