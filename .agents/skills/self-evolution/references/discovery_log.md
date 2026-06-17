@@ -17,3 +17,7 @@ Review before starting related work. Move to skills/rules when stable.
 - PHPKB-imported articles (KBID-prefixed filenames like `5000-*.md`) are raw imports missing H1 anchors, language-tagged code blocks (` ```cs `), and frontmatter tags. Format them to match non-KBID articles. Bold pseudo-headings like `**Section Title**` should be promoted to `## Section Title {: #anchor }`.
 - Never manually edit `phpkb_content/` — all changes go in `docs/`.
 - When applying the same logical changes across diverged branches (v5, v6), prefer running transformation scripts directly on each branch's files. Cherry-picking creates merge conflicts on every file because both branches receive identical diffs against different bases.
+
+## 2026-06-17
+
+- Zero git churn in `phpkb_content_rag/` after an import means the source articles are already current — that's a good control.
