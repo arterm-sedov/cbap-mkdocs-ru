@@ -1,68 +1,117 @@
-<h1>Вычисляемый атрибут. Пример: формула для вычисления связанных записей</h1><p>В данной статье описан пример автоматического назначения клиента для текущего пользователя. Существует база данных клиентов и менеджеров компании. Каждому менеджеру привязывается клиент.</p>
+<h1>Вычисляемый атрибут. Пример: формула для вычисления связанных записей</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4880" kb-tags="атрибуты,кнопки,пример,формулы" kb-title="Вычисляемый атрибут. Пример: формула для вычисления связанных записей">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#calculated_attribute_formula_setup">
+<span class="md-ellipsis">
+      
+        Порядок настройки
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#calculated_attribute_formula_sintaksis">
+<span class="md-ellipsis">
+      
+        Синтаксис
+      
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>В данной статье описан пример автоматического назначения клиента для текущего пользователя. Существует база данных клиентов и менеджеров компании. Каждому менеджеру привязывается клиент.</p>
 <p>Системные имена шаблонов записи и атрибутов, задействованных в примере, приведены в таблице:</p>
-<table>
-<tbody>
+<table style="width: 100%;">
+<thead>
 <tr>
 <th>Шаблон записи</th>
 <th>Атрибуты</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td>Request (Заявка)</td>
-<td>ClientForCurrentUser — клиент </td>
+<td><code>ClientForCurrentUser</code> — клиент</td>
 </tr>
 <tr>
-<td>Cp (Контактные лица) </td>
-<td>Cp — деловой партнер <br/>User — пользователь</td>
+<td>Cp (Контактные лица)</td>
+<td><code>Cp</code> — деловой партнер; <code>User</code> — пользователь</td>
 </tr>
 <tr>
-<td>Clients (Деловые партнеры) </td>
-<td>Name — наименование делового партнера (ФИО) </td>
+<td>Clients (Деловые партнеры)</td>
+<td><code>Name</code> — наименование делового партнера (ФИО)</td>
 </tr>
 </tbody>
 </table>
-<p>Атрибут «<em>ClientForCurrentUser</em>» шаблона записи «<em>Request</em>» вычисляется на основании данных, хранящихся в шаблоне записи «<em>Cp</em>».</p>
+<p>Атрибут <code>ClientForCurrentUser</code> шаблона записи <code>Request</code> вычисляется на основании данных, хранящихся в шаблоне записи <code>Cp</code>.</p>
 <p>В вычисляемом выражении будут использованы следующие функции и операторы:</p>
 <ul>
-<li>функция «<em><strong>EQUALS()</strong></em>» для выбора записи, которая соответствует текущему пользователю;</li>
-<li>функция «<em><strong>USER()</strong></em>» для определения текущего пользователя;</li>
-<li>оператор «<em><strong>from</strong></em>» для перечисления всех записей из шаблона записи «<em>Cp</em>»;</li>
-<li>оператор «<em><strong>where</strong></em>» для выбора записей, которые соответствуют текущему пользователю;</li>
-<li>оператор «<em><strong>select</strong></em>» для выбора значений атрибута «<em>Name</em>».</li>
+<li>функция <code>EQUALS()</code> для выбора записи, которая соответствует текущему пользователю;</li>
+<li>функция <code>USER()</code> для определения текущего пользователя;</li>
+<li>оператор <code>from</code> для перечисления всех записей из шаблона записи <code>Cp</code>;</li>
+<li>оператор <code>where</code> для выбора записей, которые соответствуют текущему пользователю;</li>
+<li>оператор <code>select</code> для выбора значений атрибута <code>Name</code>.</li>
 </ul>
-<p> </p>
-<p><strong>Пошаговая инструкция:</strong></p>
-<p><strong>1.</strong> Создайте и настройте шаблоны записей и атрибуты.</p>
-<p><strong>2.</strong> В шаблоне записи «<em>Request</em>» откройте созданный атрибут «<em>ClientForCurrentUser</em>».</p>
-<p><strong>3.</strong> Отметьте флаг «<em><strong>Вычисляемый</strong></em>» и в поле «<em><strong>Вычисляемое выражение</strong>» </em>введите следующее:</p>
-<div>
-<table class="source_code_container">
-<tbody>
-<tr>
-<td class="source_code">from a in db-&gt;cp where EQUALS(a-&gt;user,USER()) select a-&gt;cp-&gt;name</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><strong>4. </strong>Нажмите кнопку «<em><strong>Сохранить</strong></em>».</p>
-<p> </p>
-<p><strong>Синтаксис</strong></p>
-<table>
-<tbody>
+<h2 id="calculated_attribute_formula_setup">Порядок настройки</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте и настройте шаблоны записей и атрибуты.</p>
+</li>
+<li>
+<p>В шаблоне записи <code>Request</code> откройте созданный атрибут <code>ClientForCurrentUser</code>.</p>
+</li>
+<li>
+<p>Отметьте флаг «<strong>Вычисляемый</strong>» и в поле «<strong>Вычисляемое выражение</strong>» введите следующее:</p>
+</li>
+</ol>
+<div class="highlight"><code><pre><span></span><code><span class="k">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">db</span><span class="o">-&gt;</span><span class="n">cp</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="k">EQUALS</span><span class="p">(</span><span class="n">a</span><span class="o">-&gt;</span><span class="k">user</span><span class="p">,</span><span class="k">USER</span><span class="p">())</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">cp</span><span class="o">-&gt;</span><span class="n">name</span></code> <br/></pre></code></div>
+<ol class="colored_numbers_list" start="4">
+<li>Нажмите кнопку «<strong>Сохранить</strong>».</li>
+</ol>
+<h2 id="calculated_attribute_formula_sintaksis">Синтаксис</h2>
+<table style="width: 100%;">
+<thead>
 <tr>
 <th>Элемент</th>
-<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>from a in db-&gt;cp</code></td>
+<td>Объявление локальной переменной <code>a</code>. Объявление шаблона записи <code>Cp</code> в качестве источника данных: <code>db-&gt;cp</code>. Перечисление всех записей из шаблона записи <code>Cp</code>.</td>
 </tr>
 <tr>
-<td>from a in db-&gt;cp </td>
-<td>Объявление локальной переменной а. <br/>Объявление шаблона записи «<em>Cp</em>» в качестве источника данных: db-&gt;cp. <br/>Перечисление всех записей из шаблона записи «<em>Cp</em>».</td>
+<td><code>where EQUALS(a-&gt;user, USER())</code></td>
+<td>Выбор записи, значение <code>User</code> в которой соответствует текущему пользователю. Функция <code>USER()</code> возвращает текущего пользователя, если вычисляемый атрибут принадлежит типу «<strong>Пользователь</strong>».</td>
 </tr>
 <tr>
-<td>where EQUALS(a&gt;user,USER()) </td>
-<td>Выбор записи, значение «<em>User</em>» в которой соответствует текущему пользователю. <br/>Функция «<em><strong>User()</strong></em>» возвращает текущего пользователя, если вычисляемый атрибут принадлежит типу данных «Пользователь».</td>
-</tr>
-<tr>
-<td>select a-&gt;cp-&gt;Name </td>
-<td>Выбор значений атрибута «<em>Name</em>» в соответствующих записях и передача этих значений в качестве аргумента. <br/>Постфикс «<em><strong>-&gt;</strong></em>» в атрибуте «<em>Cp</em>» используется для того, чтобы вызвать данные связанного шаблона записи «<em>Name</em>».</td>
+<td><code>select a-&gt;cp-&gt;name</code></td>
+<td>Выбор значений атрибута <code>Name</code> в соответствующих записях и передача этих значений в качестве аргумента. Постфикс <code>-&gt;</code> в атрибуте <code>Cp</code> используется для того, чтобы вызвать данные связанного шаблона записи <code>Name</code>.</td>
 </tr>
 </tbody>
 </table>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

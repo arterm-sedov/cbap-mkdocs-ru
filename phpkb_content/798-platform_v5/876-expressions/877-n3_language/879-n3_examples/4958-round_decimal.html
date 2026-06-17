@@ -1,13 +1,41 @@
-<h1>Округление вверх десятичного числа до двух знаков после запятой</h1><p>Для того, чтобы округлить десятичное число до двух знаков после  запятой (например, 16.782 до 16.79), введите следующее выражение:</p>
-<div>
-<table class="source_code_container">
+<h1>Округление вверх десятичного числа до двух знаков после запятой</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4958" kb-tags="N3,атрибуты,выражение на N3,пример" kb-title="Округление вверх десятичного числа до двух знаков после запятой">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для того чтобы округлить десятичное число до двух знаков после  запятой (например, 16.782 до 16.79), введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">w3math:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/2000/10/swap/math#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwmath:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/math#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="p">(</span></code> <br/><code>        <span class="s">"Work"</span> <span class="s">"Desyatichnoe"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?DesyatichnoeProperty</span><span class="p">.</span></code> <br/><code>    <span class="err">?item</span> <span class="err">?DesyatichnoeProperty</span> <span class="err">?Desyatichnoe</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span></code> <br/><code>        <span class="err">?Desyatichnoe</span>  <span class="mi">100</span><span class="p">)</span> <span class="nn">w3math</span><span class="p">:</span><span class="nt">product</span> <span class="err">?number</span><span class="mi">1</span><span class="p">.</span></code> <br/><code>    <span class="err">?number</span><span class="mi">1</span> <span class="nn">cmwmath</span><span class="p">:</span><span class="nt">floor</span> <span class="err">?numberFloor</span><span class="p">.</span></code> <br/><code>    <span class="p">(</span></code> <br/><code>        <span class="err">?number</span><span class="mi">1</span>  <span class="err">?numberFloor</span> <span class="p">)</span> <span class="nn">cmwmath</span><span class="p">:</span><span class="nt">difference</span> <span class="err">?difference</span><span class="p">.</span></code> <br/><code>    <span class="err">if</span> <span class="p">{</span></code> <br/><code>        <span class="err">?difference</span> <span class="nn">w3math</span><span class="p">:</span><span class="nt">greaterThan</span> <span class="mi">0</span><span class="p">.}</span></code> <br/><code>    <span class="err">then</span> <span class="p">{</span></code> <br/><code>        <span class="p">(</span></code> <br/><code>            <span class="err">?numberFloor</span>  <span class="mi">1</span> <span class="p">)</span> <span class="nn">cmwmath</span><span class="p">:</span><span class="nt">sum</span>  <span class="err">?number</span><span class="mi">2</span><span class="p">.</span></code> <br/><code>        <span class="p">(</span></code> <br/><code>            <span class="err">?number</span><span class="mi">2</span> <span class="mi">100</span><span class="p">)</span> <span class="nn">w3math</span><span class="p">:</span><span class="nt">quotient</span> <span class="err">?value</span><span class="p">.}</span></code> <br/><code>    <span class="err">else</span><span class="p">{</span></code> <br/><code>        <span class="p">(</span></code> <br/><code>            <span class="err">?number</span><span class="mi">1</span> <span class="mi">100</span><span class="p">)</span> <span class="nn">w3math</span><span class="p">:</span><span class="nt">quotient</span> <span class="err">?value</span><span class="p">.}</span></code> <br/><code>    <span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="source_code">@prefix w3math: &lt;http://www.w3.org/2000/10/swap/math#&gt;.<br/>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.<br/>@prefix cmwmath: &lt;http://comindware.com/logics/math#&gt;.<br/>{<br/>    (<br/>        "Work" "Desyatichnoe") object:findProperty ?DesyatichnoeProperty.<br/>    ?item ?DesyatichnoeProperty ?Desyatichnoe.<br/>    (<br/>        ?Desyatichnoe  100) w3math:product ?number1.<br/>    ?number1 cmwmath:floor ?numberFloor.<br/>    (<br/>        ?number1  ?numberFloor ) cmwmath:difference ?difference.<br/>    if {<br/>        ?difference w3math:greaterThan 0.}<br/>    then {<br/>        (<br/>            ?numberFloor  1 ) cmwmath:sum  ?number2.<br/>        (<br/>            ?number2 100) w3math:quotient ?value.}<br/>    else{<br/>        (<br/>            ?number1 100) w3math:quotient ?value.}<br/>    }</td>
+<td><code>Work</code></td>
+<td>Системное имя текущего Шаблона записи.</td>
+</tr>
+<tr>
+<td><code>Desyatichnoe</code></td>
+<td>Системное имя атрибута типа «<strong>Число</strong>» (десятичное), который нужно округлить.</td>
 </tr>
 </tbody>
 </table>
+</article>
 </div>
-<p><span style="text-decoration: underline;"><strong>где:</strong></span></p>
-<p><strong>Work</strong> – системное имя текущего Шаблона записи;</p>
-<p><strong>Desyatichnoe</strong> – системное имя атрибута типа "Число" (десятичное), который нужно округлить.</p>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

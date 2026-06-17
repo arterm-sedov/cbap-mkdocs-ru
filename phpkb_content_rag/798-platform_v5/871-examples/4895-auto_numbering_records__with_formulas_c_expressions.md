@@ -2,7 +2,7 @@
 title: 'Автонумерация записей с помощью формулы, C#-скрипта или выражения N3'
 kbId: 4895
 url: 'https://kb.comindware.ru/article.php?id=4895'
-updated: '2025-12-05 17:14:15'
+updated: '2026-06-17 14:09:57'
 ---
 
 # Автонумерация записей с помощью формулы, C#-скрипта или выражения N3
@@ -94,7 +94,7 @@ updated: '2025-12-05 17:14:15'
    using Comindware.TeamNetwork.Api.Data;
    public class Script
    {
-       public static void Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities)
+       public static void Main(Comindware.Process.Api.Data.ScriptContext context)
        {
    // BusinessObjectId — запись, связанная с экземпляром процесса.
            var objectId = context.BusinessObjectId;

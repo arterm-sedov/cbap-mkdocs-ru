@@ -1,17 +1,15 @@
 ---
-title: 'Запуск глобальной функции из операции'
+title: 'Запуск глобальной функции из кнопки'
 kbId: 5024
 url: 'https://kb.comindware.ru/article.php?id=5024'
-updated: '2022-02-18 06:28:01'
+updated: '2026-06-17 14:09:50'
 ---
 
-# Запуск глобальной функции из операции
+# Запуск глобальной функции из кнопки
 
-Для того, чтобы запустить глобальную функцию по кнопке, введите следующее выражение:
+Для того чтобы запустить глобальную функцию по кнопке, введите следующее выражение:
 
 ```
- 
-
 using System; 
 using System.Collections.Generic;
 using System.Linq;
@@ -21,12 +19,12 @@ using Comindware.TeamNetwork.Api.Data;
 
 class Script
 {
-    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+    public static UserCommandResult Main(UserCommandContext userCommandContext)
     {     
           var CurrentObjectid = userCommandContext.ObjectIds[0];
         var CurrentObjectData = Api.TeamNetwork.ObjectService.Get(CurrentObjectid);
         var Gosnomer = CurrentObjectData["op.11"].ToString();
-    var bo = Api.TeamNetwork.GlobalFunctionService.ExecuteByAlias("Systemsolution", "Poisk", new Dictionary<string, object>(){{"Nomer", Gosnomer}});
+    var bo = Api.TeamNetwork.GlobalFunctionService.ExecuteByAlias("Systemsolution", "Poisk", new Dictionary<string, object>()('Nomer', Undefined));
     Api.TeamNetwork.ObjectService.EditWithAlias("Kartochkivyzovov", userCommandContext.ObjectIds[0], bo);
 
     var result = new UserCommandResult
@@ -50,18 +48,15 @@ class Script
 }
 ```
 
-**где:**
+**Здесь:**
 
-**op.11 -** ИД атрибута в текущем Шаблоне записи, которое передается на вход ГФ;
-
-**Systemsolution** – системное имя текущего Бизнес-приложения;
-
-**Poisk** – системное имя Глобальной функции;
-
-**Nomer** - переменная в шаблоне сообщения на входе;
-
-**Kartochkivyzovov** - имя текущего шаблона записи, откуда вызывается операция;
-
-**VIN найден успешно** - текст сообщения, которое высветится пользователю в случае успешного исполнения скрипта.
+| Значение | Описание |
+| --- | --- |
+| `op.11` | ID атрибута в текущем шаблоне записи, значение которого передаётся на вход глобальной функции. |
+| `Systemsolution` | Системное имя текущего приложения. |
+| `Poisk` | Системное имя глобальной функции. |
+| `Nomer` | Переменная в шаблоне сообщения на входе. |
+| `Kartochkivyzovov` | Системное имя текущего шаблона записи, из которого вызывается кнопка. |
+| `VIN найден успешно` | Текст сообщения, которое отобразится пользователю при успешном выполнении скрипта. |
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

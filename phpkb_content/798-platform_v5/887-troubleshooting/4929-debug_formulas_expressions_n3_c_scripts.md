@@ -2,7 +2,7 @@
 title: 'Отладка формул, выражений N3, сценариев и C#-скриптов'
 kbId: 4929
 url: 'https://kb.comindware.ru/article.php?id=4929'
-updated: '2025-02-11 14:20:54'
+updated: '2026-06-17 14:09:48'
 ---
 
 # Отладка формул, выражений N3, сценариев и C#-скриптов
@@ -175,7 +175,7 @@ try...catch
 
    class Script
    {
-       public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+       public static UserCommandResult Main(UserCommandContext userCommandContext)
        {
            // Добавьте код, в котором не требуется обрабатывать исключения.
            string ResultDescription = "";
@@ -256,7 +256,7 @@ try...catch
 
    class Script
    {
-       public static string Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities)
+       public static string Main(Comindware.Process.Api.Data.ScriptContext context)
        {
            // Добавьте код, в котором не требуется обрабатывать исключения.
            string ResultDescription = "";

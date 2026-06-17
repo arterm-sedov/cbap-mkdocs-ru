@@ -2,7 +2,7 @@
 title: 'Атрибут типа «Документ». Скачивание файлов в папку на сервере'
 kbId: 5002
 url: 'https://kb.comindware.ru/article.php?id=5002'
-updated: '2025-04-01 13:40:16'
+updated: '2026-06-17 14:09:57'
 ---
 
 # Атрибут типа «Документ». Скачивание файлов в папку на сервере
@@ -99,7 +99,7 @@ using Comindware.TeamNetwork.Api.Data.UserCommands;
 using Comindware.TeamNetwork.Api.Data;
 using System.IO;
 class Script {
-    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities) {
+    public static UserCommandResult Main(UserCommandContext userCommandContext) {
         try {
             //<ServerDownloadPath> — путь для скачивания файлов на сервере
             var path = @ "<ServerDownloadPath>";

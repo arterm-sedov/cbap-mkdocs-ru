@@ -2,7 +2,7 @@
 title: 'Интеграция с Telegram-ботом. Пример: настройка приложения, Telegram и кода бота'
 kbId: 4923
 url: 'https://kb.comindware.ru/article.php?id=4923'
-updated: '2024-07-03 18:16:10'
+updated: '2026-06-17 14:09:52'
 ---
 
 # Интеграция с Telegram-ботом. Пример: настройка приложения, Telegram и кода бота
@@ -23,11 +23,11 @@ Telegram-бот будет представлять собой проект в V
 
 Перед использованием бота пользователь должен пройти авторизацию следующим образом:
 
-- При первом обращении бот запрашивает в адрес эл. почты пользователя.
-- Бот ищет аккаунт с указанным адресом в **Comindware Platform**.
+- При первом обращении бот запрашивает адрес эл. почты пользователя.
+- Бот ищет аккаунт с указанным адресом в **Comindware Platform**.
 - Если аккаунт найден:
-  - бот высылает 4-значный код авторизации на эл. почту пользователя с помощью процесса в **Comindware Platform**;
-  - бот запрашивает код  авторизации у пользователя в чате
+- бот высылает 4-значный код авторизации на эл. почту пользователя с помощью процесса в **Comindware Platform**;
+- бот запрашивает код авторизации у пользователя в чате.
 - Если пользователь указывает верный код авторизации, авторизация считается пройденной.
 
 ## Алгоритм авторизации
@@ -36,31 +36,31 @@ Telegram-бот будет представлять собой проект в V
 - Пользователь пишет боту сообщение в Telegram.
 - Бот предлагает пользователю авторизоваться, указав адрес эл. почты, с которым пользователь зарегистрирован в **Comindware Platform**.
 - Пользователь сообщает боту свой адрес эл. почты.
-- Бот отправляет ***GET***-запрос в **Comindware Platform** для получения данных аккаунтов в Системе.
-- Бот получает ***JSON***-ответ с данными аккаунтов и ищет среди них аккаунт с указанным адресом эл. почты.
+- Бот отправляет `GET`-запрос в **Comindware Platform** для получения данных аккаунтов в системе.
+- Бот получает `JSON`-ответ с данными аккаунтов и ищет среди них аккаунт с указанным адресом эл. почты.
 - Если аккаунт найден, выполняется следующая процедура:
-  - Бот генерирует 4-значный код авторизации.
-  - Бот записывает код авторизации в атрибут аккаунта с помощью ***POST***-запроса.
-  - С помощью ***POST***-запроса бот отправляет эл. письмо пользователю с кодом авторизации.
-  - Пользователь указывает Telegram-боту код авторизации, полученный из эл. письма
+- бот генерирует 4-значный код авторизации;
+- бот записывает код авторизации в атрибут аккаунта с помощью `POST`-запроса;
+- с помощью `POST`-запроса бот отправляет эл. письмо пользователю с кодом авторизации;
+- пользователь указывает Telegram-боту код авторизации, полученный из эл. письма.
 - Если код, записанный в **Comindware Platform** и полученный ботом в последнем сообщении совпадают, авторизация считается пройденной.
 - После прохождения авторизации пользователь может посредством бота инициировать действия в  **Comindware Platform**.
 
 Примечание
 
-На основе созданного промежуточного ПО и примера настройки взаимодействия бота с **Comindware Platform** можно в дальнейшем реализовать различные сценарии: подача заявок, заявлений на отпуск, запрос какой-либо информации из системы и т.д.
+На основе созданного промежуточного ПО и примера настройки взаимодействия бота с **Comindware Platform** можно в дальнейшем реализовать различные сценарии: подача заявок, заявлений на отпуск, запрос информации из системы и т. д.
 
 ## Предварительная настройка со стороны Comindware Platform
 
-1. Создайте шаблон аккаунта *«Sotrudniki»* (с таким же системным именем). В этом шаблоне уже есть системные атрибуты, такие как имя, почта и т.д.
-2. Добавьте атрибут *«ChatID»* типа «**Текст**» (в нашем примере ID атрибута — *op.13*).
-3. Добавьте атрибут *«Proverochnyykod»* типа «**Текст**» (в нашем примере ID атрибута — *op.14*).
-4. Создайте и настройте шаблон процесса для отправки эл. почты пользователю (в нашем примере ID шаблона — *pa.3*).
+1. Создайте шаблон аккаунта *«Sotrudniki»* (с таким же системным именем). В этом шаблоне уже есть системные атрибуты, такие как имя, почта и т. д.
+2. Добавьте атрибут *«ChatID»* типа «**Текст**» (в примере ID атрибута — `op.13`).
+3. Добавьте атрибут *«Proverochnyykod»* типа «**Текст**» (в примере ID атрибута — `op.14`).
+4. Создайте и настройте шаблон процесса для отправки эл. почты пользователю (в примере ID шаблона — `pa.3`).
 
    - В связанном с шаблоном процесса шаблоне записи создайте два атрибута типа «**Текст**»:
 
-     - *Код* (в нашем примере ID атрибута — *op.23*) — значение этого атрибута процесс должен отправлять пользователю;
-     - *Кому* (в нашем примере ID атрибута — *op.24*) — адрес, на который процесс должен отправлять код.
+     - *Код* (в примере ID атрибута — `op.23`) — значение этого атрибута процесс должен отправлять пользователю;
+     - *Кому* (в примере ID атрибута — `op.24`) — адрес, на который процесс должен отправлять код.
 
 Примечание
 
@@ -75,34 +75,34 @@ Telegram-бот будет представлять собой проект в V
 5. Откройте файл `MainWindow.xaml` с формой приложения.
 6. Замените в разделе `Grid` значения атрибутов `Text` на фактические значения:
 
-   ```
-   <Grid>
-       <Grid.RowDefinitions>
-           <RowDefinition Height="0.5*"/>
-           <RowDefinition/>
-           <RowDefinition/>
-           <RowDefinition/>
-           <RowDefinition/>
-       </Grid.RowDefinitions>
-       <Button  Width="150" Height="30"  Click="Button_Click" Grid.Row="0">Старт</Button>
-       <StackPanel Grid.Row="1">
-           <Label Height="25" Margin="10,5,0,5">Токен API Telegram-бота</Label>
-           <TextBox x:Name="apitoken" Text="введите токен API своего Telegram-бота" Width="240" Height="25"/>
-       </StackPanel>
-       <StackPanel Grid.Row="2">
-           <Label Height="25" Margin="10,5,0,5">Путь к API Comindware Platform</Label>
-           <TextBox x:Name="Apipath" Text="http://yourinstance/api/public/" Width="240" Height="25" />
-       </StackPanel>
-       <StackPanel Grid.Row="3">
-           <Label Height="25" Margin="10,5,0,5">Имя пользователя</Label>
-           <TextBox x:Name="login" Text="введите имя пользователя, у которого есть доступ к API  Comindware Platform" Width="240" Height="25" />
-       </StackPanel>
-       <StackPanel Grid.Row="4">
-           <Label Height="25" Margin="10,5,0,5">Пароль</Label>
-           <PasswordBox x:Name="password" Password="введите пароль пользователя API  Comindware Platform" Width="240" Height="25" />
-       </StackPanel>
-   </Grid>
-   ```
+`xml
+<Grid>
+<Grid.RowDefinitions>
+<RowDefinition Height="0.5*"/>
+<RowDefinition/>
+<RowDefinition/>
+<RowDefinition/>
+<RowDefinition/>
+</Grid.RowDefinitions>
+<Button Width="150" Height="30" Click="Button_Click" Grid.Row="0">Старт</Button>
+<StackPanel Grid.Row="1">
+<Label Height="25" Margin="10,5,0,5">Токен API Telegram-бота</Label>
+<TextBox x:Name="apitoken" Text="введите токен API своего Telegram-бота" Width="240" Height="25"/>
+</StackPanel>
+<StackPanel Grid.Row="2">
+<Label Height="25" Margin="10,5,0,5">Путь к API Comindware Platform</Label>
+<TextBox x:Name="Apipath" Text="http://yourinstance/api/public/" Width="240" Height="25" />
+</StackPanel>
+<StackPanel Grid.Row="3">
+<Label Height="25" Margin="10,5,0,5">Имя пользователя</Label>
+<TextBox x:Name="login" Text="введите имя пользователя, у которого есть доступ к API Comindware Platform" Width="240" Height="25" />
+</StackPanel>
+<StackPanel Grid.Row="4">
+<Label Height="25" Margin="10,5,0,5">Пароль</Label>
+<PasswordBox x:Name="password" Password="введите пароль пользователя API Comindware Platform" Width="240" Height="25" />
+</StackPanel>
+</Grid>`
+
 7. Откройте файл `MainWindow.xaml.cs` с исходным кодом проекта и вставьте в него приведённый ниже код.
 
    ```
@@ -164,80 +164,79 @@ Telegram-бот будет представлять собой проект в V
 8. Сохраните файл.
 9. Скомпилируйте и запустите приложение.
 10. В окне приложения нажмите кнопку *«Старт»* и подтвердите запуск ПО.
-11. Напишите в Telegram-бот сообщение, например: «*Привет».*
-12. Бот должен ответить: «*Вы написали мне:* *Привет»*.
+11. Напишите в Telegram-бот сообщение, например: *Привет*.
+12. Бот должен ответить: *Вы написали мне: Привет*.
 
     Примечание
 
-    Вы можете воспользоваться аналогичным кодом простейшей реализации бота на языке Python из файла `TelegramBotPrimer.py` по ссылке: [TelegramBotComindwareIntegrationPython.zip](https://kb.comindware.ru/file.php?id=193)
+    Вы можете воспользоваться аналогичным кодом простейшей реализации бота на языке Python из файла `TelegramBotPrimer.py` по ссылке: [TelegramBotComindwareIntegrationPython.zip](https://kb.comindware.ru/file.php?id=193)
 
     ![Запуск бота](https://kb.comindware.ru/assets/img_664f1796168fe.png)
 
     Запуск бота
-13. Для взаимодействия с **Comindware Platform** воспользуемся **[Solution API](https://kb.comindware.ru/article.php?id=4863)**.
-14. Допишите `/Docs/SolutionApi/` в адресной строке браузера после адреса экземпляра **Comindware Platform**.
-15. Отобразится страница Swagger с перечнем доступных методов **Solution API**.
+
+    13. Для взаимодействия с **Comindware Platform** воспользуемся **[Solution API](https://kb.comindware.ru/article.php?id=4863)**.
+    14. Допишите `/Docs/SolutionApi/` в адресной строке браузера после адреса экземпляра **Comindware Platform**.
+    15. Отобразится страница Swagger с перечнем доступных методов **Solution API**.
 
     ![Переход в область SolutionApi](https://kb.comindware.ru/assets/telegram_bot1.png)
-
-    Переход в область SolutionApi
 
     Примечание
 
     На последующих шагах используйте готовый исходный код ([TelegramBotComindwareIntegration.zip](https://kb.comindware.ru/file.php?id=191)) или копируйте приведённые ниже фрагменты кода.
-16. Добавьте в файл `MainWindow.xaml.cs` две функции:
 
-    - `Get()` будет делать ***GET***-запрос для получения данных из шаблона аккаунта *«Sotrudniki»*. Результатом будет ***JSON***-ответ.
-    - `ValueFromJSON()` будет извлекать из этого ответа нужный атрибут. 
+    16. Добавьте в файл `MainWindow.xaml.cs` две функции:
+    - `Get()` будет делать `GET`-запрос для получения данных из шаблона аккаунта *«Sotrudniki»*. Результатом будет `JSON`-ответ.
+    - `ValueFromJSON()` будет извлекать из этого ответа нужный атрибут.
 
-      ```
-      private string Get(string  OA_system_name)
-      {
-          var client =   new   RestClient(Domain);
-          client.Authenticator = new HttpBasicAuthenticator(Login, Password);
-          var request =   new   RestRequest("solution/" + OA_system_name, Method.Get);
-          request.AddHeader("Accept",   "application/json"  );
-          var response = client.Execute(request);
-          return response.Content;
-      }
+    ```
+    private string Get(string  OA_system_name)
+    {
+        var client =   new   RestClient(Domain);
+        client.Authenticator = new HttpBasicAuthenticator(Login, Password);
+        var request =   new   RestRequest("solution/" + OA_system_name, Method.Get);
+        request.AddHeader("Accept",   "application/json"  );
+        var response = client.Execute(request);
+        return response.Content;
+    }
 
-      private string ValueFromJSON(string  data,  string attribute_name, string  chat_id)
-      {
-          var doc = JsonDocument.Parse(data);
-          JsonElement root = doc.RootElement;
-          var users = root.EnumerateArray();
-          while (users.MoveNext())
-          {
-              var user = users.Current;
-              var props = user.EnumerateObject();
-              string value_ =   ""  , chat_id_ = "";
-              while (props.MoveNext())
-              {
-                  var prop = props.Current;
-                  if (prop.Name.ToLower() == attribute_name.ToLower())
-                  {
-                      value_ = prop.Value.ToString();
-                  }
-                  if (prop.Name.ToLower() ==   "chatid"  )
-                  {
-                      chat_id_ = prop.Value.ToString();
-                  }
-              }
-              if (chat_id_ == chat_id)
-              {
-                  return value_;
-              }
-          }
-          return "";
-      }
-      ```
-17. Теперь при запуске промежуточного ПО Telegram-бот запросит авторизацию.
-18. Реализуем процесс авторизации следующим образом: если пользователь по ChatID не найден, то будем рассматривать 3 варианта:
+    private string ValueFromJSON(string  data,  string attribute_name, string  chat_id)
+    {
+        var doc = JsonDocument.Parse(data);
+        JsonElement root = doc.RootElement;
+        var users = root.EnumerateArray();
+        while (users.MoveNext())
+        {
+            var user = users.Current;
+            var props = user.EnumerateObject();
+            string value_ =   ""  , chat_id_ = "";
+            while (props.MoveNext())
+            {
+                var prop = props.Current;
+                if (prop.Name.ToLower() == attribute_name.ToLower())
+                {
+                    value_ = prop.Value.ToString();
+                }
+                if (prop.Name.ToLower() ==   "chatid"  )
+                {
+                    chat_id_ = prop.Value.ToString();
+                }
+            }
+            if (chat_id_ == chat_id)
+            {
+                return value_;
+            }
+        }
+        return "";
+    }
+    ```
+13. Теперь при запуске промежуточного ПО Telegram-бот запросит авторизацию.
+14. Реализуем процесс авторизации следующим образом: если пользователь по ChatID не найден, то будем рассматривать 3 варианта:
 
-    - сообщение содержит символ '@', следовательно в сообщении указат адрес эл. почты — запускаем процесс отправки 4-значного кода;
+    - сообщение содержит символ `@`, следовательно в сообщении указан адрес эл. почты — запускаем процесс отправки 4-значного кода;
     - длина сообщения — 4 символа — проверка отправленного кода на соответствие;
     - во всех остальных случаях бот отвечает: *«Укажите адрес эл. почты для авторизации»*.
-19. Добавьте в файл `MainWindow.xaml.cs` следующую функцию для обработки сообщений от пользователя.
+      19. Добавьте в файл `MainWindow.xaml.cs` следующую функцию для обработки сообщений от пользователя.
 
     ```
     public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
@@ -369,8 +368,14 @@ Telegram-бот будет представлять собой проект в V
                 MessageBox.Show("Ошибка " + exception.Message);
             }
     ```
-20. Протестируйте работу промежуточного ПО и Telegram-бота.
 
+    20. Протестируйте работу промежуточного ПО и Telegram-бота.
     ![Авторизация через бот](https://kb.comindware.ru/assets/img_664f17cea8721.png)
 
     Авторизация через бот
+
+## Связанные статьи
+
+- [Отправка уведомлений с помощью Telegram](https://kb.comindware.ru/article.php?id=4926)
+- [Solution API](https://kb.comindware.ru/article.php?id=4863)
+- [Настройка процесса для отправки эл. почты](https://kb.comindware.ru/article.php?id=4691)

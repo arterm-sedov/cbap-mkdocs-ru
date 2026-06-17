@@ -2,7 +2,7 @@
 title: 'Получение данных от API ФНС с помощью C#'
 kbId: 4924
 url: 'https://kb.comindware.ru/article.php?id=4924'
-updated: '2025-04-29 19:13:34'
+updated: '2026-06-17 14:09:57'
 ---
 
 # Получение данных от API ФНС с помощью C#
@@ -108,7 +108,7 @@ updated: '2025-04-29 19:13:34'
    - имя `Контрагенты` на фактическое системное имя вашего шаблона записи с данными контрагентов.
    - системные имена атрибутов на фактически используемые в вашем шаблоне контрагентов.
 
-   ```
+   Скрипт для получения данных от ФНС```
    // Импортируем базовые типы и функции .NET Framework.
    using System;
    // Импортируем классы коллекций и словарей для хранения данных.
@@ -127,7 +127,7 @@ updated: '2025-04-29 19:13:34'
    using Newtonsoft.Json.Linq;
 
    class Script{
-       public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities) {
+       public static UserCommandResult Main(UserCommandContext userCommandContext) {
            // Получаем ID текущей записи контрагента.
            var contextObjectId = userCommandContext.ObjectIds[0];
            // Устанавливаем флаг успешного выполнения операции.
@@ -164,6 +164,7 @@ updated: '2025-04-29 19:13:34'
                request.AddParameter("req", innAttributeDictionary["ИНН"].ToString());
                // 123 — полученный ключ API ФНС.
                request.AddParameter("key", "123");
+
                try{
                    // Выполняем запрос к API ФНС и сохраняем ответ.
                    response = client.Execute(request);
@@ -176,6 +177,7 @@ updated: '2025-04-29 19:13:34'
                        responseItems = responseItems[1].Split(':');
                        responseItems = responseItems[0].Split('"');
                        string companyType = responseItems[1];
+
                        // Обрабатываем данные для юридического лица.
                        if (companyType == "ЮЛ"){
                            // Извлекаем годовой доход (выручку) компании.
@@ -222,6 +224,7 @@ updated: '2025-04-29 19:13:34'
                            // Извлекаем и сохраняем ФИО ИП
                            // в атрибут с системным именем "ФИОРуководителя".
                            try{data.Add("ФИОРуководителя", jObject["items"][0]["ИП"]["ФИОПолн"].ToString());}catch{}
+
                            // Извлекаем и сохраняем ОГРНИП
                            // в атрибут с системным именем "ОГРН".
                            try{data.Add("ОГРН", jObject["items"][0]["ИП"]["ОГРНИП"].ToString());}catch{}
@@ -241,6 +244,7 @@ updated: '2025-04-29 19:13:34'
                            Api.TeamNetwork.ObjectService.EditWithAlias("Контрагенты", contextObjectId, data);
                        }
                    }
+
                    // Обрабатываем случай, когда компания не найдена по ИНН.
                    else if(response.Content.Length<15){
                        text = "Нет компании по такому ИНН";
@@ -262,6 +266,7 @@ updated: '2025-04-29 19:13:34'
                text = "Укажите ИНН";
                successFlag = false;
            }
+
            // Формируем результат выполнения скрипта с сообщением для пользователя.
            var result = new UserCommandResult{
                Success = successFlag,

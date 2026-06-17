@@ -2,7 +2,7 @@
 title: 'Вычисление всех аккаунтов группы'
 kbId: 4991
 url: 'https://kb.comindware.ru/article.php?id=4991'
-updated: '2024-11-07 12:12:09'
+updated: '2026-06-17 14:09:57'
 ---
 
 # Вычисление всех аккаунтов группы
@@ -13,8 +13,10 @@ updated: '2024-11-07 12:12:09'
 (from ag in db->_AccountGroup where OR (ag->groupName == "users",ag->groupName == "admins") select ag->groupUsers->id)
 ```
 
-**где:**
+**Здесь:**
 
-**"users", "admins"** — названия групп.
+| Значение | Описание |
+| --- | --- |
+| "users", "admins" | Названия групп. |
 
-Альтернатива статье `![](https://kb.comindware.ru/images/marker.png){Article-ID:4936}`.
+Альтернатива статье [Вычисление всех пользователей группы](https://kb.comindware.ru/article.php?id=4936).
