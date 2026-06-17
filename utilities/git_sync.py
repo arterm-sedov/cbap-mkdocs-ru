@@ -82,7 +82,7 @@ def parse_args():
         "--patterns",
         nargs="+",
         required=True,
-        help="File patterns to stage (e.g. platform/v6.0/ platform/v6.0/*.md)",
+        help="File patterns to stage (e.g. platform/v5.0/ platform/v5.0/*.md)",
     )
     parser.add_argument(
         "--message",

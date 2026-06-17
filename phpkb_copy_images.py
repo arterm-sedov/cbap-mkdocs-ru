@@ -82,9 +82,9 @@ def parse_args():
     )
     parser.add_argument(
         "--version",
-        default="v6.0",
+        required=True,
         choices=["v4.7", "v5.0", "v6.0"],
-        help="Platform version target directory (default: v6.0)",
+        help="Platform version target directory (required, e.g. v5.0)",
     )
     parser.add_argument(
         "--overwrite",

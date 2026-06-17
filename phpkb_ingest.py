@@ -1,8 +1,9 @@
 """
 Build a single Markdown bundle for LLM ingestion from PHPKB-exported Markdown.
 
-Default: Platform 6.0 tree from `phpkb_import_for_rag.py` (`phpkb_content_rag/896-platform_v6/`).
-Legacy V5: pass `--folder` and `--output` for the 798 tree and v5 bundle name.
+All version-specific paths are CLI-required; no hardcoded platform defaults.
+Example (v5): python phpkb_ingest.py --folder phpkb_content_rag/798-platform_v5 --output kb.comindware.ru.platform_v5_for_llm_ingestion.md --target-dir kb.comindware.ru/platform/v5.0 --category-id 798
+Example (v6): python phpkb_ingest.py --folder phpkb_content_rag/896-platform_v6 --output kb.comindware.ru.platform_v6_for_llm_ingestion.md --target-dir kb.comindware.ru/platform/v6.0 --category-id 896
 """
 
 import argparse
@@ -24,11 +25,7 @@ SERVER_PROFILE = os.getenv("SERVER_PROFILE", "cmw").lower()
 PROFILE_PREFIX = {"cmw": "CMW_", "cmwlab": "CMWLAB_"}.get(SERVER_PROFILE, "CMW_")
 DEFAULT_KB_REPO_PATH = os.getenv(f"{PROFILE_PREFIX}KB_REPO_PATH", "/var/www/html")
 
-# Defaults: V6 RAG export (markdown-only) and kb.comindware.ru platform v6.0 folder
-DEFAULT_FOLDER = os.path.join("phpkb_content_rag", "896-platform_v6")
-DEFAULT_OUTPUT_FILENAME = "kb.comindware.ru.platform_v6_for_llm_ingestion.md"
-DEFAULT_KB_TARGET_DIR = os.path.join("kb.comindware.ru", "platform", "v6.0")
-DEFAULT_CATEGORY_ID = "896"
+# No hardcoded version defaults — all version-specific paths are CLI-required.
 # Prefixes live under `extra` in mkdocs_ru.yml (INHERIT in other yml is not merged by PyYAML).
 DEFAULT_MKDOCS_YML = "mkdocs_ru.yml"
 
@@ -76,23 +73,23 @@ def parse_args():
     )
     parser.add_argument(
         "--folder",
-        default=DEFAULT_FOLDER,
-        help=f"Root folder to ingest (default: {DEFAULT_FOLDER})",
+        required=True,
+        help="Root folder to ingest (required, e.g. phpkb_content_rag/798-platform_v5)",
     )
     parser.add_argument(
         "--output",
-        default=DEFAULT_OUTPUT_FILENAME,
-        help=f"Output markdown filename (default: {DEFAULT_OUTPUT_FILENAME})",
+        required=True,
+        help="Output markdown filename (required, e.g. kb.comindware.ru.platform_v5_for_llm_ingestion.md)",
     )
     parser.add_argument(
         "--target-dir",
-        default=DEFAULT_KB_TARGET_DIR,
-        help=f"Copy output under this directory (default: {DEFAULT_KB_TARGET_DIR})",
+        required=True,
+        help="Copy output under this directory (required, e.g. kb.comindware.ru/platform/v5.0)",
     )
     parser.add_argument(
         "--category-id",
-        default=DEFAULT_CATEGORY_ID,
-        help=f"PHPKB category id for Source line (default: {DEFAULT_CATEGORY_ID})",
+        required=True,
+        help="PHPKB category id for Source line (required, e.g. 798)",
     )
     parser.add_argument(
         "--mkdocs-yml",
