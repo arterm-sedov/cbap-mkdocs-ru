@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5000" kb-tags="" kb-title="Старт процесса по записям списка">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5000" kb-tags="C#,скрипт,C#-скрипт,пример скрипта" kb-title="Старт процесса по записям таблицы">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -6,12 +6,31 @@
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<p>Для того, чтобы на запустить процесс по каждой из записей определенного списка, введите следующее выражение:</p>
-<div class="highlight"><code><pre><span></span><code>using System;</code> <br/><code>using System.Collections.Generic;</code> <br/><code>using System.Linq;</code> <br/><code>using Comindware.Data.Entity;</code> <br/><code>class Script</code> <br/><code>{</code> <br/><code>    public static void Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities)</code> <br/><code>    {</code> <br/><code>        var query = new Comindware.TeamNetwork.Api.Data.DatasetQuery</code> <br/><code>        {</code> <br/><code>            DatasetId = "lst.74"</code> <br/><code>        };</code> <br/><code>        var sessionsData = Api.TeamNetwork.DatasetService.QueryData(query).Rows;</code> <br/><code>        if (sessionsData == null) { return; }</code> <br/><code>        foreach (var row in sessionsData) </code> <br/><code>        {</code> <br/><code>            Api.Process.ProcessObjectService.CreateWithObjectId("pa.2", null, row.Id);</code> <br/><code>        }</code> <br/><code>    }</code> <br/><code>}</code> <br/></pre></code></div>
-<p><strong>где:</strong></p>
-<p><strong>lst.74</strong> - ИД списка, по записям которого нужно запустить экземпляры процесса;</p>
-<p><strong>pa.2</strong> - ИД Шаблона процесса, экземпляры которого нужно создать по записям из выбранного списка.</p>
-<p><strong>Примечание :</strong> фильтр на списке (при его необходимости) должен быть написан на языке N3. В противном случае, запустятся экземпляры процесса по всем записям в Шаблоне записи, где находится список.</p>
+<p>Для того чтобы запустить процесс по каждой из записей определенной таблицы, введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Collections.Generic</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Linq</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.Data.Entity</span><span class="p">;</span></code> <br/><code><span class="k">class</span><span class="w"> </span><span class="nc">Script</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="n">Main</span><span class="p">(</span><span class="n">Comindware</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">ScriptContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span></code> <br/><code><span class="w">    </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Comindware</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">DatasetQuery</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="n">DatasetId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"lst.74"</span></code> <br/><code><span class="w">        </span><span class="p">};</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">sessionsData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">DatasetService</span><span class="p">.</span><span class="n">QueryData</span><span class="p">(</span><span class="n">query</span><span class="p">).</span><span class="n">Rows</span><span class="p">;</span></code> <br/><code><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sessionsData</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w"> </span><span class="p">}</span></code> <br/><code><span class="w">        </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">sessionsData</span><span class="p">)</span><span class="w"> </span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="n">Api</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">ProcessObjectService</span><span class="p">.</span><span class="n">CreateWithObjectId</span><span class="p">(</span><span class="s">"pa.2"</span><span class="p">,</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="n">row</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lst.74</code></td>
+<td>ID таблицы, по записям которой нужно запустить экземпляры процесса.</td>
+</tr>
+<tr>
+<td><code>pa.2</code></td>
+<td>ID шаблона процесса, экземпляры которого нужно создать по записям из выбранной таблицы.</td>
+</tr>
+</tbody>
+</table>
+<div class="notice notice-info">
+<p class="admonition-title">Фильтр таблицы</p>
+<p>Если для таблицы требуется фильтр, задайте его на языке N3. Иначе экземпляры процесса будут запущены по всем записям шаблона записи, в котором находится таблица.</p>
+</div>
 </article>
 </div>
 </div>

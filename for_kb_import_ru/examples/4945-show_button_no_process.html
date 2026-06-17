@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4945" kb-tags="" kb-title="Отображение кнопки при отсутствии запущенных процессов по записи">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4945" kb-tags="N3,выражение на N3,кнопки,пример,процессы" kb-title="Отображение кнопки при отсутствии запущенных процессов по записи">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -6,9 +6,12 @@
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<p>Для того, чтобы отобразить кнопку при условии, что по текущей записи не запущен ни один процесс, введите следующее выражение:</p>
-<div class="highlight"><code><pre><span></span><code>@prefix task: &lt;http://comindware.com/ontology/task#&gt;.</code> <br/><code>@prefix process: &lt;http://comindware.com/ontology/process#&gt;.</code> <br/><code>{</code> <br/><code>if { ?processObject process:businessObject ?item.}</code> <br/><code>then {false -&gt; ?value.}</code> <br/><code>else {true -&gt; ?value.}.</code> <br/><code>}</code> <br/></pre></code></div>
-<p><strong>Примечание:</strong> данное условие не применимо только к процессам, запущенным по текущей записи (процессам, связанным с текущим шаблоном записи).</p>
+<p>Для того чтобы отобразить кнопку при условии, что по текущей записи не запущен ни один процесс, введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">task:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/task#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">process:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/process#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="err">if</span> <span class="p">{</span> <span class="err">?processObject</span> <span class="nn">process</span><span class="p">:</span><span class="nt">businessObject</span> <span class="err">?item</span><span class="p">.}</span></code> <br/><code><span class="err">then</span> <span class="p">{</span><span class="l">false</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.}</span></code> <br/><code><span class="err">else</span> <span class="p">{</span><span class="l">true</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.}.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Данное условие не применимо только к процессам, запущенным по текущей записи (процессам, связанным с текущим шаблоном записи).</p>
+</div>
 </article>
 </div>
 </div>

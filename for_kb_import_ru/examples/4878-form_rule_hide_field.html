@@ -1,8 +1,33 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="" kb-tags="" kb-title="">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4878" kb-tags="атрибуты,кнопки,пример,формулы" kb-title="Правила для формы. Пример: условное скрытие поля с помощью формулы">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
 <nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#form_rule_hide_field_setup">
+<span class="md-ellipsis">
+      
+        Порядок настройки
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#form_rule_hide_field_sintaksis">
+<span class="md-ellipsis">
+      
+        Синтаксис
+      
+    </span>
+</a>
+</li>
+</ul>
+</div>
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
@@ -24,18 +49,32 @@
 </table>
 <p>В выражении будут использованы следующие функции:</p>
 <ul>
-<li>функция «<strong><em>AND()</em></strong>» для выполнения логического сложения;</li>
-<li>функция «<strong><em>EMPTY()</em></strong>» для проверки значения на пустоту.</li>
+<li>функция «<strong>AND()</strong>» для выполнения логического сложения;</li>
+<li>функция «<strong>EMPTY()</strong>» для проверки значения на пустоту.</li>
 </ul>
-<p><strong>Пошаговая инструкция:</strong></p>
-<p><strong>1.</strong> Создайте и настройте шаблоны записей и атрибуты.</p>
-<p><strong>2.</strong> В шаблоне записи «<em>Request</em>» перейдите в раздел «<strong><em>Формы</em></strong>».</p>
-<p><strong>3.</strong> Откройте форму и перейдите в раздел «<strong><em>Правила для формы</em></strong>».</p>
-<p><strong>4.</strong> Добавьте правило на скрытие поля «<em>gp_name</em>».</p>
-<p><strong>5.</strong> Введите выражение.</p>
-<div class="highlight"><code><pre><span></span><code>AND(EMPTY($gp_name),$create_flag == true)</code> <br/></pre></code></div>
-<p><strong>6.</strong> Нажмите кнопку «<strong><em>Сохранить</em></strong>».</p>
-<p><strong>Синтаксис</strong></p>
+<h2 id="form_rule_hide_field_setup">Порядок настройки</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте и настройте шаблоны записей и атрибуты.</p>
+</li>
+<li>
+<p>В шаблоне записи «<em>Request</em>» перейдите в раздел «<strong>Формы</strong>».</p>
+</li>
+<li>
+<p>Откройте форму и перейдите в раздел «<strong>Правила для формы</strong>».</p>
+</li>
+<li>
+<p>Добавьте правило на скрытие поля «<em>gp_name</em>».</p>
+</li>
+<li>
+<p>Введите выражение.</p>
+</li>
+</ol>
+<div class="highlight"><code><pre><span></span><code><span class="k">AND</span><span class="p">(</span><span class="n">EMPTY</span><span class="p">(</span><span class="err">$</span><span class="n">gp_name</span><span class="p">),</span><span class="err">$</span><span class="n">create_flag</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">true</span><span class="p">)</span></code> <br/></pre></code></div>
+<ol class="colored_numbers_list" start="6">
+<li>Нажмите кнопку «<strong>Сохранить</strong>».</li>
+</ol>
+<h2 id="form_rule_hide_field_sintaksis">Синтаксис</h2>
 <table style="width: 100%;">
 <thead>
 <tr>
@@ -45,11 +84,11 @@
 </thead>
 <tbody>
 <tr>
-<td>AND()</td>
+<td><code>AND()</code></td>
 <td>логическое сложение — поле «<em>Получатель</em>» пустое и флаг «<em>Ввести данные нового клиента</em>» активен</td>
 </tr>
 <tr>
-<td>$</td>
+<td><code>$</code></td>
 <td>указывает на то, что атрибут находится в текущей записи</td>
 </tr>
 </tbody>

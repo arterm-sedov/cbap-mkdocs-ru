@@ -28,12 +28,12 @@ updated: '2025-10-24 17:35:30'
 
 --8<-- "related_topics_heading.md"
 
-- [Шаблон процесса](https://kb.comindware.ru/article.php?id=4758)
-- [Промежуточное событие-отправка сообщения](https://kb.comindware.ru/article.php?id=4740)
-- [Конечное событие-отправка сообщения](https://kb.comindware.ru/article.php?id=4745)
-- [Диаграмма процесса. Определения, редактирование, публикация](https://kb.comindware.ru/article.php?id=4721)
-- [Использование диаграммы экземпляра процесса](https://kb.comindware.ru/article.php?id=4723)
-- [Шаблон записи](https://kb.comindware.ru/article.php?id=4759)
-- [Пути передачи данных](https://kb.comindware.ru/article.php?id=4676)
+- [Шаблон процесса][process_templates]
+- [Промежуточное событие-отправка сообщения][process_diagram_elements_send_message_intermediate_event]
+- [Конечное событие-отправка сообщения][process_diagram_elements_send_message_end_event]
+- [Диаграмма процесса. Определения, редактирование, публикация][process_diagram]
+- [Использование диаграммы экземпляра процесса][process_diagram_view_instance]
+- [Шаблон записи][record_templates]
+- [Пути передачи данных][communication_routes]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

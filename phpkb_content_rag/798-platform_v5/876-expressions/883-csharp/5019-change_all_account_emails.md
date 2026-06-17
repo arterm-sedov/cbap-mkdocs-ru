@@ -2,16 +2,14 @@
 title: 'Изменение e-mail у всех пользователей в системе'
 kbId: 5019
 url: 'https://kb.comindware.ru/article.php?id=5019'
-updated: '2022-02-18 06:28:14'
+updated: '2026-06-17 14:09:49'
 ---
 
 # Изменение e-mail у всех пользователей в системе
 
-Для того, чтобы поменять e-mail у всех пользователей в системе, введите следующее выражение:
+Для того чтобы поменять e-mail у всех пользователей в системе, введите следующее выражение:
 
 ```
- 
-
 using System; 
 using System.Collections.Generic; 
 using System.Linq; 
@@ -21,7 +19,7 @@ using Comindware.TeamNetwork.Api.Data.UserCommands;
 
 class Script 
 { 
-    public static UserCommandResult Main(UserCommandContext userCommandContext,        Comindware.Entities entities) 
+    public static UserCommandResult Main(UserCommandContext userCommandContext) 
     { 
         var accounts = Api.Base.AccountService.List(); 
             foreach (var account in accounts) 

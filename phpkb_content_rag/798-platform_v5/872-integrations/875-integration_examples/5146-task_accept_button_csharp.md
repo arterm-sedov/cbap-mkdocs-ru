@@ -2,7 +2,7 @@
 title: 'Кнопка «Принять в работу» для задачи. Настройка на C#'
 kbId: 5146
 url: 'https://kb.comindware.ru/article.php?id=5146'
-updated: '2026-05-22 13:34:44'
+updated: '2026-06-17 14:09:58'
 ---
 
 # Кнопка «Принять в работу» для задачи. Настройка на C#
@@ -78,7 +78,7 @@ updated: '2026-05-22 13:34:44'
    class Script
    {
        // userCommandContext содержит данные контекста при нажатии кнопки.
-       public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)
+       public static UserCommandResult Main(UserCommandContext userCommandContext)
        {
            // Получаем ID текущего пользователя, нажавшего кнопку.
            var currentUser = userCommandContext.CurrentUserId;

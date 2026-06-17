@@ -22,7 +22,7 @@ updated: '2025-10-24 17:28:35'
 
 --8<-- "related_topics_heading.md"
 
-- [Кнопки](https://kb.comindware.ru/article.php?id=4790)
-- [Сценарии](https://kb.comindware.ru/article.php?id=4717)
+- [Кнопки][buttons]
+- [Сценарии][scenarios]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

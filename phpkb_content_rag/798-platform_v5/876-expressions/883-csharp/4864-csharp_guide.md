@@ -2,7 +2,7 @@
 title: 'Написание скриптов на языке C#'
 kbId: 4864
 url: 'https://kb.comindware.ru/article.php?id=4864'
-updated: '2025-03-21 14:13:04'
+updated: '2026-06-17 14:09:50'
 ---
 
 # Написание скриптов на языке C#
@@ -15,17 +15,17 @@ updated: '2025-03-21 14:13:04'
 
 ПО позволяет использовать C#-скрипты при настройке следующих сущностей и функций:
 
-- Шаблон любого типа → Кнопка → Скрипт операции
-- Шаблон процесса → Задача-выполнение сценария → Скрипт задачи
-- Шаблон процесса → Пользовательская задача → Вычисление заголовка задачи
-- Шаблон процесса → Пользовательская задача → Вычисление исполнителей задачи
-- Шаблон процесса → Пользовательская задача → Вычисление продолжительности задачи
-- Шаблон процесса → Развилка «или/или» → Вычисление условий выбора потоков
-- Шаблон процесса → Конечное событие и промежуточное событие → Вычисление продолжительности процесса
-- Шаблон процесса → Конечное событие-отправка сообщения и промежуточное событие-отправка сообщения → Тип сообщения → Вычисление экземпляра процесса, в который отправляется сообщение сообщения
-- Шаблон процесса → Конечное событие-отправка сообщения и промежуточное событие-отправка сообщения → Вычисление значения атрибута сообщения
-- Сценарий → Изменение значений атрибутов скриптом
-- Сценарий → Проверка результата скрипта
+- Шаблон любого типа → Кнопка → [Скрипт операции](#csharp_guide_button_script)
+- Шаблон процесса → Задача-выполнение сценария → [Скрипт задачи](#csharp_guide_process_script_task)
+- Шаблон процесса → Пользовательская задача → [Вычисление заголовка задачи](#csharp_guide_process_user_task_title)
+- Шаблон процесса → Пользовательская задача → [Вычисление исполнителей задачи](#csharp_guide_process_user_task_assignees)
+- Шаблон процесса → Пользовательская задача → [Вычисление продолжительности задачи](#csharp_guide_process_user_task_duration)
+- Сценарий → [Изменение значений атрибутов скриптом](#csharp_guide_scenario_attribute_value_script)
+- Сценарий → [Проверка результата скрипта](#csharp_guide_scenario_script_result_validation)
+- Шаблон процесса → Развилка «или/или» → [Вычисление условий выбора потоков](#csharp_guide_process_gateway_conditions)
+- Шаблон процесса → Конечное событие и промежуточное событие → [Вычисление продолжительности процесса](#csharp_guide_process_duration)
+- Шаблон процесса → Конечное событие-отправка сообщения и промежуточное событие-отправка сообщения → Тип сообщения → [Вычисление экземпляра процесса, в который отправляется сообщение сообщения](#csharp_guide_process_message_target_process)
+- Шаблон процесса → Конечное событие-отправка сообщения и промежуточное событие-отправка сообщения → [Вычисление значения атрибута сообщения](#csharp_guide_process_message_attribute_value)
 
 ## Входные и выходные данные C#-скрипта
 
@@ -53,7 +53,7 @@ static class Api {
 
 ```
 public class Script {
-  public static UserCommandResult Main (UserCommandContext userCommandContext, Comindware.Entities entities) {
+  public static UserCommandResult Main (UserCommandContext userCommandContext) {
     // Тело скрипта
   }
 }
@@ -63,7 +63,7 @@ public class Script {
 
 ```
 UserCommandContext userCommandContext {
-  string[] ObjectIds, // массив ID выбранных записей в списке
+  string[] ObjectIds, // массив ID выбранных записей в таблице
            // (пустой массив, если записи не выбраны)
            // или массив из одного элемента с ID записи на форме
   string[] SelectedIds, // массив ID записей, выбранных в таблице на форме
@@ -75,7 +75,6 @@ UserCommandContext userCommandContext {
   string FileName, // имя файла при выгрузке данных по шаблону экспорта
   DatasetQuery Query // список, с которого произошел запуск операции
 },
-Comindware.Entities entities // используется для доступа к данным шаблонов записей
 ```
 
 **Выходные данные**
@@ -94,7 +93,7 @@ UserCommandResult {
   // набор данных для перехода на другую страницу
   UserCommandNavigationResult NavigationResult {
     string Title, // заголовок
-    string ObjectId, // ID объекта
+    string ObjectId, // ID записи
     string ContainerId, // ID контейнера
     ContextType Context // тип отображения
       // Undefined, Void, Any, Task, Case, Record, Process, List, Form, Page, Container
@@ -122,7 +121,7 @@ UserCommandResult {
 
 ```
 public class Script {
-   public static void Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities) {
+   public static void Main(Comindware.Process.Api.Data.ScriptContext context) {
      // Тело скрипта
   }
 }
@@ -132,10 +131,9 @@ public class Script {
 
 ```
 Comindware.Process.Api.Data.ScriptContext context {
-   string ProcessID,  // ID процесса
-   string BusinessObjectID,  // ID объекта
+   string ProcessID,  // ID экземпляра процесса
+   string BusinessObjectID,  // ID записи, связанной с экземпляром процесса
 },
-Comindware.Entities entities // используется для доступа к данным шаблонов записей
 ```
 
 **Выходные данные**
@@ -151,7 +149,7 @@ void
 
 ```
 public class Script {
-   public static string Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities) {
+   public static string Main(Comindware.Process.Api.Data.ScriptContext context) {
      // Тело скрипта
   }
 }
@@ -161,10 +159,9 @@ public class Script {
 
 ```
 Comindware.Process.Api.Data.ScriptContext context {
-  string ProcessID,  // ID процесса
-  string BusinessObjectID,  // ID объекта
+  string ProcessID,  // ID экземпляра процесса
+  string BusinessObjectID,  // ID записи, связанной с экземпляром процесса
 },
-Comindware.Entities entities // используется для доступа к данным шаблонов записей
 ```
 
 **Выходные данные**
@@ -180,7 +177,7 @@ string
 
 ```
 public class Script {
-  public static IEnumerable<string> Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities) {
+  public static IEnumerable<string> Main(Comindware.Process.Api.Data.ScriptContext context) {
     // Тело скрипта
   }
 }
@@ -190,17 +187,16 @@ public class Script {
 
 ```
 Comindware.Process.Api.Data.ScriptContext context {
-  string ProcessID, // ID процесса
-  string BusinessObjectID // ID объекта
+  string ProcessID, // ID экземпляра процесса
+  string BusinessObjectID // ID записи, связанной с экземпляром процесса
 },
-Comindware.Entities entities // используется для доступа к данным шаблонов записей
 ```
 
 **Выходные данные**
 
 ```
 IEnumerable<string>
-// Скрипт должен вернуть список ID аккаунтов
+// Скрипт должен вернуть список ID аккаунтов
 ```
 
 #### Шаблон процесса → Пользовательская задача → Вычисление продолжительности задачи
@@ -209,7 +205,7 @@ IEnumerable<string>
 
 ```
 public class Script  {
-  public  static TimeSpan Main (Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities) {
+  public  static TimeSpan Main (Comindware.Process.Api.Data.ScriptContext context) {
     // Тело скрипта
   }
 }
@@ -219,8 +215,8 @@ public class Script  {
 
 ```
 Comindware.Process.Api.Data.ScriptContext context {
-  string ProcessID, // ID процесса
-  string BusinessObjectID, // ID объекта
+  string ProcessID, // ID экземпляра процесса
+  string BusinessObjectID, // ID записи, связанной с экземпляром процесса
 },
 Comindware.Entities, // используется для доступа к данным шаблонов записей
 ```
@@ -232,14 +228,14 @@ TimeSpan
 // Продолжительности задачи присваивается возвращённое значение длительности
 ```
 
-#### Шаблон процесса → Любой элемент диаграммы → Сценарии на входе и выходе → Изменение значений атрибутов скриптом
+#### Сценарий → Изменение значений атрибутов скриптом
 
 **Заготовка скрипта**
 
 ```
 public class Script {
   public static string // string, int, decimal, dateTime, bool, TimeSpan или IEnumerable<string>
-    Main(string ObjectID, [Comindware.Entities entities]) {
+    Main(string ObjectID) {
     // Тело скрипта
   }
 }
@@ -248,8 +244,8 @@ public class Script {
 **Входные данные**
 
 ```
-string ProcessID, // ID записи,
-Comindware.Entities entities // необязательный аргумент, используется для доступа к данным шаблонов записей
+string ProcessID, // ID экземпляра процесса,
+string ObjectID, // ID записи,
 ```
 
 **Выходные данные**
@@ -259,13 +255,41 @@ string, int, decimal, dateTime, TimeSpan, bool, IEnumerable<string>
 // Атрибуту присваивается возвращённое значение соответствующего типа
 ```
 
+#### Сценарий → Проверка результата выполнения скрипта
+
+**Заготовка скрипта**
+
+```
+public class Script
+{
+    public static bool Main([Object fullObjectID])
+    { 
+        var ObjectID = fullObjectID.ToString().Replace("user.", "");
+        // Тело скрипта
+    }
+}
+```
+
+**Входные данные**
+
+```
+string fullObjectID // ID записи с префиксом, необязательный аргумент
+```
+
+**Выходные данные**
+
+```
+bool
+// В зависимости от результата выполения возвращается true или false
+```
+
 #### Шаблон процесса → Развилка «или/или» → Вычисление условий выбора потоков
 
 **Заготовка скрипта**
 
 ```
 public class Script {
-  public static bool Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities) {
+  public static bool Main(Comindware.Process.Api.Data.ScriptContext context) {
     // Тело скрипта
   }
 }
@@ -275,10 +299,9 @@ public class Script {
 
 ```
 Comindware.Process.Api.Data.ScriptContext context {
-  string ProcessID, // ID процесса
-  string BusinessObjectID, // ID объекта
+  string ProcessID, // ID экземпляра процесса
+  string BusinessObjectID, // ID записи, связанной с экземпляром процесса
 },
-Comindware.Entities entities // используется для доступа к данным шаблонов записей
 ```
 
 **Выходные данные**
@@ -294,7 +317,7 @@ bool
 
 ```
 public class Script {
-  public static TimeSpan Main (Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities) {
+  public static TimeSpan Main (Comindware.Process.Api.Data.ScriptContext context) {
     // Тело скрипта
   }
 }
@@ -304,10 +327,9 @@ public class Script {
 
 ```
 Comindware.Process.Api.Data.ScriptContext context {
-  string ProcessID, // ID процесса
-  string BusinessObjectID, // ID объекта
+  string ProcessID, // ID экземпляра процесса
+  string BusinessObjectID, // ID записи, связанной с экземпляром процесса
 },
-Comindware.Entities entities // используется для доступа к данным шаблонов записей
 ```
 
 **Выходные данные**
@@ -323,7 +345,7 @@ TimeSpan
 
 ```
 public class Script {
-  public static void Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities) {
+  public static void Main(Comindware.Process.Api.Data.ScriptContext context) {
   // Тело скрипта
   }
 }
@@ -333,10 +355,9 @@ public class Script {
 
 ```
 Comindware.Process.Api.Data.ScriptContext context {
-  string ProcessID, // ID процесса
-  string BusinessObjectID, // ID объекта
+  string ProcessID, // ID экземпляра процесса
+  string BusinessObjectID, // ID записи, связанной с экземпляром процесса
 },
-Comindware.Entities entities // используется для доступа к данным шаблонов записей
 ```
 
 **Выходные данные**
@@ -352,7 +373,7 @@ string
 
 ```
 public class Script {
-  public static string Main(Comindware.Process.Api.Data.ScriptContext context, Comindware.Entities entities) {
+  public static string Main(Comindware.Process.Api.Data.ScriptContext context) {
     // Тело скрипта
   }
 }
@@ -362,10 +383,9 @@ public class Script {
 
 ```
 Comindware.Process.Api.Data.ScriptContext context {
-  string ProcessID, // ID процесса
-  string BusinessObjectID // ID объекта
+  string ProcessID, // ID экземпляра процесса
+  string BusinessObjectID // ID записи, связанной с экземпляром процесса
 },
-Comindware.Entities entities // используется для доступа к данным шаблонов записей
 ```
 
 **Выходные данные**
@@ -402,7 +422,7 @@ string, number, dateTime, TimeSpan, bool
 - System.Xml.Linq — обработка XML-документов посредством LINQ to XML
 - System — базовые классы .NET
 - System.object — исходный базовый класс .NET
-- System.Linq. Enumerable — запросы к объектам с интерфейсом IEnumerable<T>
+- System.Linq.Enumerable — запросы к объектам с интерфейсом IEnumerable
 
 ### Вспомогательные библиотеки и классы
 

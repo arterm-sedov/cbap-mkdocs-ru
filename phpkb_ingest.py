@@ -1,8 +1,10 @@
 """
 Build a single Markdown bundle for LLM ingestion from PHPKB-exported Markdown.
 
-Default: Platform 6.0 tree from `phpkb_import_for_rag.py` (`phpkb_content_rag/896-platform_v6/`).
-Legacy V5: pass `--folder` and `--output` for the 798 tree and v5 bundle name.
+All version-specific paths are CLI-required; no hardcoded platform defaults.
+Example (v5): python phpkb_ingest.py --folder phpkb_content_rag/798-platform_v5 --output kb.comindware.ru.platform_v5_for_llm_ingestion.md --target-dir kb.comindware.ru/platform/v5.0 --category-id 798
+Example (v5): python phpkb_ingest.py --folder phpkb_content_rag/798-platform_v5 --output kb.comindware.ru.platform_v5_for_llm_ingestion.md --target-dir kb.comindware.ru/platform/v5.0 --category-id 798
+Example (v6): python phpkb_ingest.py --folder phpkb_content_rag/896-platform_v6 --output kb.comindware.ru.platform_v6_for_llm_ingestion.md --target-dir kb.comindware.ru/platform/v6.0 --category-id 896
 """
 
 import argparse
@@ -11,13 +13,20 @@ from datetime import datetime
 import re
 import os
 import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+from dotenv import load_dotenv
 from phpkb_ingest_utils import build_content, build_summary, build_tree, iter_markdown_files
 
-# Defaults: V6 RAG export (markdown-only) and kb.comindware.ru platform v6.0 folder
-DEFAULT_FOLDER = os.path.join("phpkb_content_rag", "896-platform_v6")
-DEFAULT_OUTPUT_FILENAME = "kb.comindware.ru.platform_v6_for_llm_ingestion.md"
-DEFAULT_KB_TARGET_DIR = os.path.join("kb.comindware.ru", "platform", "v6.0")
-DEFAULT_CATEGORY_ID = "896"
+load_dotenv(Path(__file__).resolve().parent / ".env")
+
+SERVER_PROFILE = os.getenv("SERVER_PROFILE", "cmw").lower()
+PROFILE_PREFIX = {"cmw": "CMW_", "cmwlab": "CMWLAB_"}.get(SERVER_PROFILE, "CMW_")
+DEFAULT_KB_REPO_PATH = os.getenv(f"{PROFILE_PREFIX}KB_REPO_PATH", "/var/www/html")
+
+# No hardcoded version defaults — all version-specific paths are CLI-required.
 # Prefixes live under `extra` in mkdocs_ru.yml (INHERIT in other yml is not merged by PyYAML).
 DEFAULT_MKDOCS_YML = "mkdocs_ru.yml"
 
@@ -65,23 +74,23 @@ def parse_args():
     )
     parser.add_argument(
         "--folder",
-        default=DEFAULT_FOLDER,
-        help=f"Root folder to ingest (default: {DEFAULT_FOLDER})",
+        required=True,
+        help="Root folder to ingest (required, e.g. phpkb_content_rag/798-platform_v5)",
     )
     parser.add_argument(
         "--output",
-        default=DEFAULT_OUTPUT_FILENAME,
-        help=f"Output markdown filename (default: {DEFAULT_OUTPUT_FILENAME})",
+        required=True,
+        help="Output markdown filename (required, e.g. kb.comindware.ru.platform_v5_for_llm_ingestion.md)",
     )
     parser.add_argument(
         "--target-dir",
-        default=DEFAULT_KB_TARGET_DIR,
-        help=f"Copy output under this directory (default: {DEFAULT_KB_TARGET_DIR})",
+        required=True,
+        help="Copy output under this directory (required, e.g. kb.comindware.ru/platform/v5.0)",
     )
     parser.add_argument(
         "--category-id",
-        default=DEFAULT_CATEGORY_ID,
-        help=f"PHPKB category id for Source line (default: {DEFAULT_CATEGORY_ID})",
+        required=True,
+        help="PHPKB category id for Source line (required, e.g. 798)",
     )
     parser.add_argument(
         "--mkdocs-yml",
@@ -95,6 +104,31 @@ def parse_args():
         "--no-copy",
         action="store_true",
         help="Do not copy the bundle to --target-dir (only write --output in repo root).",
+    )
+    parser.add_argument(
+        "--git",
+        action="store_true",
+        help="Git add-commit-push the bundle in the PHPKB repo after copying",
+    )
+    parser.add_argument(
+        "--pull",
+        action="store_true",
+        help="SSH into production server and git pull after push",
+    )
+    parser.add_argument(
+        "--no-ask",
+        action="store_true",
+        help="Skip confirmation prompts for git and pull",
+    )
+    parser.add_argument(
+        "--kb-repo-path",
+        default=DEFAULT_KB_REPO_PATH,
+        help=f"PHPKB repo root path for git operations (default: {DEFAULT_KB_REPO_PATH})",
+    )
+    parser.add_argument(
+        "--version",
+        choices=["v4.7", "v5.0", "v6.0"],
+        help="Platform version for git commit message (derived from --target-dir if omitted)",
     )
     return parser.parse_args()
 
@@ -159,6 +193,7 @@ if __name__ == "__main__":
         )
         f.write("## HYPERLINKS MAP\n" + snippet_content)
 
+    copy_done = False
     if not args.no_copy:
         try:
             os.makedirs(kb_target_dir, exist_ok=True)
@@ -166,5 +201,20 @@ if __name__ == "__main__":
             print(f"Copying {output_filename} to: {kb_target_dir}")
             shutil.copyfile(output_filename, target_path)
             print(f"File copied to: {target_path}")
+            copy_done = True
         except Exception as copy_error:
             print(f"Failed to copy {output_filename} to {kb_target_dir}: {copy_error}")
+
+    if args.git and copy_done:
+        version = args.version or os.path.basename(os.path.normpath(kb_target_dir))
+        subprocess.run([
+            sys.executable, str(Path(__file__).resolve().parent / "utilities/git_sync.py"),
+            "--repo-path", args.kb_repo_path,
+            "--patterns", f"platform/{version}/" + os.path.basename(output_filename),
+            "--message", f"Update platform {version} ingestion bundle",
+        ] + (["--no-ask"] if args.no_ask else []))
+
+    if args.pull and copy_done:
+        subprocess.run([
+            sys.executable, str(Path(__file__).resolve().parent / "utilities/ssh_pull.py"),
+        ] + (["--no-ask"] if args.no_ask else []))

@@ -2,7 +2,7 @@
 title: 'Перестала открываться таблица (ошибка «Object reference not set to an instance of an object»)'
 kbId: 5049
 url: 'https://kb.comindware.ru/article.php?id=5049'
-updated: '2025-10-24 17:28:25'
+updated: '2026-06-17 14:09:58'
 ---
 
 # Перестала открываться таблица (ошибка «Object reference not set to an instance of an object»)
@@ -20,7 +20,7 @@ updated: '2025-10-24 17:28:25'
 1. Перейдите к API **{{ productName }}**, введя после доменного имени сайта `/docs`.
 2. Выберите пункт «**System Core Api**».
 3. Выберите метод «**Ontology**» — «**GetReferences**».
-4. В поле запроса введите идентификатор таблицы и нажмите кнопку «**Try it out!**\*».
+4. В поле запроса введите идентификатор таблицы и нажмите кнопку «**Try it out!**».
 5. Должен отобразиться список всех персональных конфигураций указанной таблицы.
 6. Найдите персональную конфигурацию таблицы, созданную пользователем, у которого возникла ошибка.
 7. Выберите метод «**Ontology**» — «**GetAxioms**».
@@ -32,7 +32,7 @@ updated: '2025-10-24 17:28:25'
 
 --8<-- "related_topics_heading.md"
 
-- [Общие сведения об API {{ productName }}](https://kb.comindware.ru/article.php?id=4860)
-- [Методы System Core API](https://kb.comindware.ru/article.php?id=4862)
+- [Общие сведения об API {{ productName }}][api_intro]
+- [Методы System Core API][api_system_core]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

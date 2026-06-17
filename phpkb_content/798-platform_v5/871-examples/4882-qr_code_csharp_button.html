@@ -1,83 +1,138 @@
-<h1>QR-код. Формирование с помощью C#-скрипта по нажатию кнопки</h1><p>В процессе настройки решения может понадобиться генерация QR-кода по нажатию кнопки (например, для формирования внутреннего кода для сотрудников). В данной статье мы рассмотрим пошаговую настройку генерации QR-кода по кнопке на форме.</p>
-<p><strong>1.</strong> В шаблоне записи, где вы планируете генерировать QR-код, создайте новый атрибут с типом данных «Текст» (<em><strong>QRinbase</strong></em>). Формат отображения не важен.</p>
-<p><strong>2.</strong> В том же шаблоне записи создайте ещё один атрибут с типом данных «Текст» (<strong><em>QRcode</em></strong>) и форматом отображения «HTML-текст». Установите флаг «Вычисляемый» и в поле «Вычисляемое выражение» вставьте следующую строку:</p>
-<div>
-<table class="source_code_container">
-<tbody>
-<tr>
-<td class="source_code">
-<p>FORMAT("&lt;img align='center'src='data:image/png;base64,{0}'width='60' height='60' frameborder='0'&lt;/img&gt;",LIST($QRinbase))</p>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><strong>где:</strong></p>
-<p><em><strong>width='60' / height='60'</strong> </em>— значения ширины и высоты QR-кода на форме;</p>
-<p><em><strong>QRinbase</strong> </em>— системное имя атрибута, созданного в п.1.</p>
-<div class="blue_note">Нам необходимо именно два атрибута, так как в первом будет храниться созданный QR-код в формате base64, а во втором — он же, но в формате изображения.</div>
-<p><strong>3.</strong> В том же шаблоне записи создайте новую кнопку (<em><strong>Сформировать QR-код</strong></em>) со следующими параметрами:</p>
-<ul>
-<li>Операция — C# скрипт;</li>
-<li>Контекст операции — Запись;</li>
-<li>Результат выполнения — Обновить данные.</li>
+<h1>QR-код. Формирование с помощью C#-скрипта по нажатию кнопки</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4882" kb-tags="C#,C#-скрипт,QR-код,кнопки,пример скрипта,скрипт" kb-title="QR-код. Формирование с помощью C#-скрипта по нажатию кнопки">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#qr-code-csharp-button_logic">
+<span class="md-ellipsis">
+      
+        Логика решения
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#qr-code-csharp-button_attributes">
+<span class="md-ellipsis">
+      
+        Настройка атрибутов
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#qr-code-csharp-button_result">
+<span class="md-ellipsis">
+      
+        Проверка результата
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      
+        Связанные статьи
+      
+    </span>
+</a>
+</li>
 </ul>
-<p>Во вкладке «Скрипт» вставьте следующее:</p>
-<div>
-<table class="source_code_container">
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Здесь приведён пример настройки кнопки, которая формирует QR-код для текущей записи с помощью C#-скрипта.</p>
+<p>Такую кнопку можно использовать, например, чтобы создать внутренний код сотрудника, пропуск, ссылку на карточку записи или другой QR-код, который должен генерироваться по запросу пользователя.</p>
+<h2 id="qr-code-csharp-button_logic">Логика решения</h2>
+<p>Для отображения QR-кода используются два текстовых атрибута:</p>
+<ul>
+<li><code>QRinbase</code> — хранит QR-код в формате Base64;</li>
+<li><code>QRcode</code> — отображает QR-код как изображение на форме.</li>
+</ul>
+<p>Кнопка вызывает C#-скрипт, который:</p>
+<ol class="colored_numbers_list">
+<li>Формирует ссылку на текущую запись.</li>
+<li>Передаёт ссылку во внешний сервис генерации QR-кодов.</li>
+<li>Получает изображение QR-кода.</li>
+<li>Преобразует изображение в строку Base64.</li>
+<li>Записывает строку Base64 в атрибут <code>QRinbase</code>.</li>
+</ol>
+<p>Атрибут <code>QRcode</code> по формуле преобразует строку Base64 в HTML-изображение.</p>
+<h2 id="qr-code-csharp-button_attributes">Настройка атрибутов</h2>
+<ol class="colored_numbers_list">
+<li>В шаблоне записи, где требуется формировать QR-код, создайте атрибут типа «<strong>Текст</strong>» с системным именем <code>QRinbase</code>.</li>
+<li>Создайте ещё один атрибут типа «<strong>Текст</strong>» с системным именем <code>QRcode</code>.</li>
+<li>Для атрибута <code>QRcode</code> задайте формат отображения «<strong>HTML-текст</strong>».</li>
+<li>Установите для атрибута <code>QRcode</code> флажок «<strong>Вычислять автоматически</strong>».</li>
+<li>Введите для атрибута <code>QRcode</code> следующую формулу:</li>
+</ol>
+<div class="highlight"><code><pre><span></span><code><span class="n">FORMAT</span><span class="p">(</span></code> <br/><code><span class="w">    </span><span class="s">"&lt;img align='center' src='data:image/png;base64,{0}' width='60' height='60' /&gt;"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="n">LIST</span><span class="p">(</span><span class="err">$</span><span class="n">QRinbase</span><span class="p">)</span></code> <br/><code><span class="p">)</span></code> <br/><code><span class="err">```</span><span class="n">cs</span></code> <br/><code><span class="o">**</span><span class="n">Здесь</span><span class="o">**</span></code> <br/><code></code> <br/><code><span class="o">|</span><span class="w"> </span><span class="n">Значение</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Описание</span><span class="w"> </span><span class="o">|</span></code> <br/><code><span class="o">|</span><span class="w"> </span><span class="o">--------</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">--------</span><span class="w"> </span><span class="o">|</span></code> <br/><code><span class="o">|</span><span class="w"> </span><span class="err">`</span><span class="n">width</span><span class="o">=</span><span class="err">'</span><span class="mi">60</span><span class="err">'`</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Ширина</span><span class="w"> </span><span class="n">QR</span><span class="o">-</span><span class="n">кода</span><span class="w"> </span><span class="n">на</span><span class="w"> </span><span class="n">форме</span><span class="p">.</span><span class="w"> </span><span class="o">|</span></code> <br/><code><span class="o">|</span><span class="w"> </span><span class="err">`</span><span class="n">height</span><span class="o">=</span><span class="err">'</span><span class="mi">60</span><span class="err">'`</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Высота</span><span class="w"> </span><span class="n">QR</span><span class="o">-</span><span class="n">кода</span><span class="w"> </span><span class="n">на</span><span class="w"> </span><span class="n">форме</span><span class="p">.</span><span class="w"> </span><span class="o">|</span></code> <br/><code><span class="o">|</span><span class="w"> </span><span class="err">`</span><span class="n">QRinbase</span><span class="err">`</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Системное</span><span class="w"> </span><span class="n">имя</span><span class="w"> </span><span class="n">атрибута</span><span class="p">,</span><span class="w"> </span><span class="n">который</span><span class="w"> </span><span class="n">хранит</span><span class="w"> </span><span class="n">QR</span><span class="o">-</span><span class="n">код</span><span class="w"> </span><span class="n">в</span><span class="w"> </span><span class="n">формате</span><span class="w"> </span><span class="n">Base64</span><span class="p">.</span><span class="w"> </span><span class="o">|</span></code> <br/><code></code> <br/><code><span class="err">##</span><span class="w"> </span><span class="n">Настройка</span><span class="w"> </span><span class="n">кнопки</span><span class="w"> </span><span class="p">{:</span><span class="w"> </span><span class="err">#</span><span class="n">qr</span><span class="o">-</span><span class="n">code</span><span class="o">-</span><span class="n">csharp</span><span class="o">-</span><span class="n">button_button</span><span class="w"> </span><span class="p">}</span></code> <br/><code></code> <br/><code><span class="mi">1</span><span class="p">.</span><span class="w"> </span><span class="n">В</span><span class="w"> </span><span class="n">том</span><span class="w"> </span><span class="n">же</span><span class="w"> </span><span class="n">шаблоне</span><span class="w"> </span><span class="n">записи</span><span class="w"> </span><span class="n">создайте</span><span class="w"> </span><span class="n">кнопку</span><span class="w"> </span><span class="n">_</span><span class="err">«</span><span class="n">Сформировать</span><span class="w"> </span><span class="n">QR</span><span class="o">-</span><span class="n">код</span><span class="err">»</span><span class="n">_</span><span class="p">.</span></code> <br/><code><span class="mi">2</span><span class="p">.</span><span class="w"> </span><span class="n">Настройте</span><span class="w"> </span><span class="n">кнопку</span><span class="p">:</span></code> <br/><code></code> <br/><code><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">Свойство</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Значение</span><span class="w"> </span><span class="o">|</span></code> <br/><code><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="o">--------</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">--------</span><span class="w"> </span><span class="o">|</span></code> <br/><code><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">Тип</span><span class="w"> </span><span class="n">кнопки</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">**</span><span class="n">C</span><span class="err">#</span><span class="o">-</span><span class="n">скрипт</span><span class="o">**</span><span class="w"> </span><span class="o">|</span></code> <br/><code><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">Контекст</span><span class="w"> </span><span class="n">кнопки</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">**</span><span class="n">Запись</span><span class="o">**</span><span class="w"> </span><span class="o">|</span></code> <br/><code><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">Результат</span><span class="w"> </span><span class="n">выполнения</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">**</span><span class="n">Обновить</span><span class="w"> </span><span class="n">данные</span><span class="o">**</span><span class="w"> </span><span class="o">|</span></code> <br/><code></code> <br/><code><span class="mi">3</span><span class="p">.</span><span class="w"> </span><span class="n">На</span><span class="w"> </span><span class="n">вкладке</span><span class="w"> </span><span class="err">«</span><span class="o">**</span><span class="n">Скрипт</span><span class="o">**</span><span class="err">»</span><span class="w"> </span><span class="n">введите</span><span class="w"> </span><span class="n">следующий</span><span class="w"> </span><span class="n">C</span><span class="err">#</span><span class="o">-</span><span class="n">скрипт</span><span class="p">:</span></code> <br/><code></code> <br/><code><span class="err">```</span><span class="w"> </span><span class="n">csharp</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Collections.Generic</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Net</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.TeamNetwork.Api.Data</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.TeamNetwork.Api.Data.UserCommands</span><span class="p">;</span></code> <br/><code></code> <br/><code><span class="k">class</span><span class="w"> </span><span class="nc">Script</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">UserCommandResult</span><span class="w"> </span><span class="nf">Main</span><span class="p">(</span><span class="n">UserCommandContext</span><span class="w"> </span><span class="n">userCommandContext</span><span class="p">)</span></code> <br/><code><span class="w">    </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="n">ServicePointManager</span><span class="p">.</span><span class="n">SecurityProtocol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SecurityProtocolType</span><span class="p">.</span><span class="n">Tls12</span><span class="p">;</span></code> <br/><code></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">objectId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">userCommandContext</span><span class="p">.</span><span class="n">ObjectIds</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">recordUrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"https://yourinstance.comindware.net/#form/oa.1/form.2/"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">objectId</span><span class="p">;</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">encodedUrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Uri</span><span class="p">.</span><span class="n">EscapeDataString</span><span class="p">(</span><span class="n">recordUrl</span><span class="p">);</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">qrCodeBytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">WebClient</span><span class="p">().</span><span class="n">DownloadData</span><span class="p">(</span></code> <br/><code><span class="w">            </span><span class="s">"https://qrcode.tec-it.com/API/QRCode?size=small&amp;data="</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">encodedUrl</span><span class="p">);</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">qrCodeBase64</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Convert</span><span class="p">.</span><span class="n">ToBase64String</span><span class="p">(</span><span class="n">qrCodeBytes</span><span class="p">);</span></code> <br/><code></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">object</span><span class="o">&gt;</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="p">{</span><span class="w"> </span><span class="s">"QRinbase"</span><span class="p">,</span><span class="w"> </span><span class="n">qrCodeBase64</span><span class="w"> </span><span class="p">}</span></code> <br/><code><span class="w">        </span><span class="p">};</span></code> <br/><code></code> <br/><code><span class="w">        </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">EditWithAlias</span><span class="p">(</span><span class="s">"RecordTemplate"</span><span class="p">,</span><span class="w"> </span><span class="n">objectId</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="p">);</span></code> <br/><code></code> <br/><code><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserCommandResult</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="n">Success</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="n">Commited</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="n">Messages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="p">[]</span></code> <br/><code><span class="w">            </span><span class="p">{</span></code> <br/><code><span class="w">                </span><span class="k">new</span><span class="w"> </span><span class="n">UserCommandMessage</span></code> <br/><code><span class="w">                </span><span class="p">{</span></code> <br/><code><span class="w">                    </span><span class="n">Severity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SeverityLevel</span><span class="p">.</span><span class="n">Normal</span><span class="p">,</span></code> <br/><code><span class="w">                    </span><span class="n">Text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"QR-код сформирован"</span></code> <br/><code><span class="w">                </span><span class="p">}</span></code> <br/><code><span class="w">            </span><span class="p">}</span></code> <br/><code><span class="w">        </span><span class="p">};</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="source_code">
-<p>using System;</p>
-<p>using System.Collections.Generic;</p>
-<p>using System.Linq;</p>
-<p>using Comindware.Data.Entity;</p>
-<p>using Comindware.TeamNetwork.Api.Data.UserCommands;</p>
-<p>using Comindware.TeamNetwork.Api.Data;</p>
-<p>using RestSharp;</p>
-<p> </p>
-<p>class Script</p>
-<p>{</p>
-<p>    public static UserCommandResult Main(UserCommandContext userCommandContext, Comindware.Entities entities)</p>
-<p>    {</p>
-<p>        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;</p>
-<p>        var link = Uri.EscapeDataString("https://yourinstance.comindware.net/#form/oa.1/form.2/" + userCommandContext.ObjectIds[0]);</p>
-<p>        byte[] AsBytes = new System.Net.WebClient().DownloadData</p>
-<p>            ("https://qrcode.tec-it.com/API/QRCode?size=small&amp;data="+link);</p>
-<p>      string AsBase64String = Convert.ToBase64String(AsBytes);</p>
-<p>       </p>
-<p>        var data = new Dictionary&lt;string, object&gt;</p>
-<p>        {</p>
-<p>            { "QRinbase", AsBase64String }</p>
-<p>        };</p>
-<p>        Api.TeamNetwork.ObjectService.EditWithAlias("RecordTemplate", userCommandContext.ObjectIds[0], data);</p>
-<p>       </p>
-<p>    var result = new UserCommandResult</p>
-<p>    {</p>
-<p>      Success = true,</p>
-<p>      Commited = true,</p>
-<p>      Messages = new[]</p>
-<p>      {</p>
-<p>        new UserCommandMessage</p>
-<p>        {</p>
-<p>          Severity = SeverityLevel.Normal,</p>
-<p>          Text = "QR-код сформирован"</p>
-<p>        }</p>
-<p>      }</p>
-<p>    };</p>
-<p>    return result;</p>
-<p>    }</p>
-<p>}</p>
-</td>
+<td><code>https://yourinstance.comindware.net/#form/oa.1/form.2/</code></td>
+<td>Ссылка на форму записи, которая должна открываться после сканирования QR-кода.</td>
+</tr>
+<tr>
+<td><code>QRinbase</code></td>
+<td>Системное имя атрибута, в который записывается QR-код в формате Base64.</td>
+</tr>
+<tr>
+<td><code>RecordTemplate</code></td>
+<td>Системное имя текущего шаблона записи.</td>
+</tr>
+<tr>
+<td><code>QR-код сформирован</code></td>
+<td>Текст сообщения, которое отобразится пользователю после успешного выполнения кнопки.</td>
 </tr>
 </tbody>
 </table>
+<h2 id="qr-code-csharp-button_result">Проверка результата</h2>
+<ol class="colored_numbers_list">
+<li>Вынесите атрибут <code>QRcode</code> на форму записи.</li>
+<li>Вынесите кнопку <em>«Сформировать QR-код»</em> на форму или в область кнопок.</li>
+<li>Откройте запись.</li>
+<li>Нажмите кнопку <em>«Сформировать QR-код»</em>.</li>
+<li>Убедитесь, что на форме отобразился QR-код.</li>
+<li>Отсканируйте QR-код и проверьте, что он открывает нужную форму записи.</li>
+</ol>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>В примере используется внешний сервис генерации QR-кодов. Перед применением решения в промышленной среде убедитесь, что использование внешнего сервиса соответствует требованиям безопасности вашей организации.</p>
 </div>
-<p><strong>где:</strong></p>
-<p><strong><em>https://yourinstance.comindware.net/#form/oa.1/form.2/ </em></strong>— ссылка на форму в шаблоне записи, на которую пользователь должен попадать после сканирования QR-кода;</p>
-<p><strong><em>QRinbase</em></strong> — системное имя атрибута в текущем шаблоне записи, созданного в п.1, куда записывается QR-код в формате base64;</p>
-<p><em><strong>RecordTemplate</strong></em> — системное имя текущего шаблона записи;</p>
-<p><em><strong>QR-код сформирован</strong></em> — текст сообщения для пользователя при успешном выполнении операции.</p>
-<p><strong>4.</strong> В том же шаблоне записи вынесите атрибут, созданный в п.2, на нужную форму(ы). </p>
-<p><strong>5.</strong> Вынесите кнопку, созданную в п.3, в нужное место: на форму(ы) или на область кнопок для форм.</p>
-<p><strong>6.</strong> Протестируйте.</p>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4864">C#-скрипты. Руководство по разработке</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4790">Кнопки. Определения, настройка, удаление</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4768">Атрибут типа «Текст»</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/category.php?id=880">Язык формул</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

@@ -39,11 +39,11 @@ updated: '2025-10-24 17:35:04'
 
 --8<-- "related_topics_heading.md"
 
-- [Факторы, влияющие на производительность. Рекомендации по оптимизации](https://kb.comindware.ru/article.php?id=4712)
-- [Сценарии](https://kb.comindware.ru/article.php?id=4717)
-- [Правилва для форм](https://kb.comindware.ru/article.php?id=4784)
+- [Факторы, влияющие на производительность. Рекомендации по оптимизации][performance_optimize]
+- [Сценарии][scenarios]
+- [Правилва для форм][form_rules]
 - [Справочник по языку N3][n3\_guide]
-- [Невозможно просмотреть историю значений вычисляемого атрибута](https://kb.comindware.ru/article.php?id=5053)
-- [Вычисляются архивные записи](https://kb.comindware.ru/article.php?id=5048)
+- [Невозможно просмотреть историю значений вычисляемого атрибута][view_calculate_attribute_history]
+- [Вычисляются архивные записи][calculate_archive_records]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

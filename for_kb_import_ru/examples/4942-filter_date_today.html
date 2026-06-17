@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4942" kb-tags="" kb-title="Фильтр списка по дате, равной сегодняшней">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4942" kb-tags="N3,атрибуты,выражение на N3,пример" kb-title="Фильтр списка по дате, равной сегодняшней">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -6,13 +6,35 @@
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<p>Для того, чтобы настроить фильтр отображения записей в списке, где какая-либо дата равна сегодняшней (например, для списка сегодняшних заявок) с учетом часового пояса (в данном примере - московского), введите следующее выражение:</p>
-<div class="highlight"><code><pre><span></span><code>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.</code> <br/><code>@prefix session: &lt;http://comindware.com/ontology/session#&gt;.</code> <br/><code>@prefix cmwtime: &lt;http://comindware.com/logics/time#&gt;.</code> <br/><code>{</code> <br/><code>  ("Zayavki" "Data") object:findProperty ?DateProperty.</code> <br/><code>  session:context session:requestTime ?nowUTC.</code> <br/><code></code> <br/><code>  (?nowUTC "Etc/GMT" "Europe/Moscow") cmwtime:fromTzToTz ?nowMoscow.</code> <br/><code>  ?nowMoscow cmwtime:startOfDay ?startOfToday.</code> <br/><code></code> <br/><code>  ?result ?DateProperty ?Dates.</code> <br/><code></code> <br/><code>  (?Dates "Etc/GMT" "Europe/Moscow") cmwtime:fromTzToTz ?Moscow.</code> <br/><code>  ?Moscow cmwtime:startOfDay ?startOfToday.</code> <br/><code></code> <br/><code>  ?result -&gt; ?item.</code> <br/><code>}</code> <br/></pre></code></div>
-<p><strong>где:</strong></p>
-<p><strong>Zayavki</strong> – системное имя текущего Шаблона записи;</p>
-<p><strong>Data</strong> – системное имя атрибута типа "Дата / Время", которое будет сравниваться с текущим днём;</p>
-<p><strong>Etc/GMT</strong> – определение смещения часового пояса;</p>
-<p><strong>Europe/Moscow</strong> – определение конкретного часового пояса.</p>
+<p>Для того чтобы настроить фильтр отображения записей в списке, где какая-либо дата равна сегодняшней (например, для списка сегодняшних заявок) с учетом часового пояса (в данном примере - московского), введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">session:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwtime:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/time#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>  <span class="p">(</span><span class="s">"Zayavki"</span> <span class="s">"Data"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?DateProperty</span><span class="p">.</span></code> <br/><code>  <span class="nn">session</span><span class="p">:</span><span class="nt">context</span> <span class="nn">session</span><span class="p">:</span><span class="nt">requestTime</span> <span class="err">?nowUTC</span><span class="p">.</span></code> <br/><code></code> <br/><code>  <span class="p">(</span><span class="err">?nowUTC</span> <span class="s">"Etc/GMT"</span> <span class="s">"Europe/Moscow"</span><span class="p">)</span> <span class="nn">cmwtime</span><span class="p">:</span><span class="nt">fromTzToTz</span> <span class="err">?nowMoscow</span><span class="p">.</span></code> <br/><code>  <span class="err">?nowMoscow</span> <span class="nn">cmwtime</span><span class="p">:</span><span class="nt">startOfDay</span> <span class="err">?startOfToday</span><span class="p">.</span></code> <br/><code></code> <br/><code>  <span class="err">?result</span> <span class="err">?DateProperty</span> <span class="err">?Dates</span><span class="p">.</span></code> <br/><code></code> <br/><code>  <span class="p">(</span><span class="err">?Dates</span> <span class="s">"Etc/GMT"</span> <span class="s">"Europe/Moscow"</span><span class="p">)</span> <span class="nn">cmwtime</span><span class="p">:</span><span class="nt">fromTzToTz</span> <span class="err">?Moscow</span><span class="p">.</span></code> <br/><code>  <span class="err">?Moscow</span> <span class="nn">cmwtime</span><span class="p">:</span><span class="nt">startOfDay</span> <span class="err">?startOfToday</span><span class="p">.</span></code> <br/><code></code> <br/><code>  <span class="err">?result</span> <span class="err">-&gt;</span> <span class="err">?item</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Zayavki</code></td>
+<td>Системное имя текущего Шаблона записи.</td>
+</tr>
+<tr>
+<td><code>Data</code></td>
+<td>Системное имя атрибута типа «<strong>Дата / Время</strong>», которое будет сравниваться с текущим днём.</td>
+</tr>
+<tr>
+<td><code>Etc/GMT</code></td>
+<td>Определение смещения часового пояса.</td>
+</tr>
+<tr>
+<td><code>Europe/Moscow</code></td>
+<td>Определение конкретного часового пояса.</td>
+</tr>
+</tbody>
+</table>
 </article>
 </div>
 </div>

@@ -2,7 +2,7 @@
 title: 'Сравнение двух атрибутов типа «Аккаунт»'
 kbId: 4932
 url: 'https://kb.comindware.ru/article.php?id=4932'
-updated: '2024-11-06 15:54:55'
+updated: '2026-06-17 14:09:53'
 ---
 
 # Сравнение двух атрибутов типа «Аккаунт»
@@ -10,8 +10,6 @@ updated: '2024-11-06 15:54:55'
 Для сравнения двух пользователей (например, менеджер проекта и руководитель сотрудника), введите следующее выражение:
 
 ```
- 
-
 #EQUALS($WorkPlanOriginalRef->Curator, $Manager)
 
 @prefix sort: <http://comindware.com/ontology/dataset/sort#>.
@@ -20,23 +18,23 @@ updated: '2024-11-06 15:54:55'
 @prefix ui: <http://comindware.com/ontology/ui#>.
 @prefix object: <http://comindware.com/ontology/object#>.
 {
-    ("WorkPlan" "Curator") object:findProperty ?curatorProperty.   
+    ("WorkPlan" "Curator") object:findProperty ?curatorProperty.
     ("WorkPlanDuplicate" "WorkPlanOriginal") object:findProperty ?workPlanOriginalProperty.
     ("WorkPlanDuplicate" "Manager") object:findProperty ?managerProperty.
     from {
         ?item ?managerProperty ?manager1.
           ?manager1 ui:toClientString ?manager.
     } select ?manager -> ?managerList.
-    
+
     (?managerList sort:stringComparer) assert:sort ?managerSort.
-    ("," ?managerSort) cmwstring:join ?managerStr.    
+    ("," ?managerSort) cmwstring:join ?managerStr.
 
     from {
     ?item ?workPlanOriginalProperty ?workPlan.
         ?workPlan ?curatorProperty ?curator1.
           ?curator1 ui:toClientString ?curatorStrg.
     } select ?curatorStrg -> ?curatorList.
-    
+
     (?curatorList sort:stringComparer) assert:sort ?curatorSort.
     ("," ?curatorSort) cmwstring:join ?curatorStr.
 
@@ -46,14 +44,12 @@ updated: '2024-11-06 15:54:55'
 }
 ```
 
-**где:**
+**Здесь:**
 
-**WorkPlan** – системное имя шаблона записи, где хранится запись о менеджере проекта;
-
-**Curator**– системное имя атрибута типа «Аккаунт» (менеджер проекта);
-
-**WorkPlanDuplicate** – системное имя текущего шаблона записи, где производится сравнение;
-
-**WorkPlanOriginal** – системное имя атрибут типа «Запись» в шаблоне записи **WorkPlanDuplicate**, ссылающийся на **WorkPlan***;*
-
-**Manager** – системное имя атрибута типа «Аккаунт» (руководитель сотрудника), с которым сравниваем.
+| Значение | Описание |
+| --- | --- |
+| `WorkPlan` | Системное имя шаблона записи, где хранится запись о менеджере проекта. |
+| `Curator` | Системное имя атрибута типа «**Аккаунт**» с менеджером проекта. |
+| `WorkPlanDuplicate` | Системное имя текущего шаблона записи, где выполняется сравнение. |
+| `WorkPlanOriginal` | Системное имя атрибута типа «**Запись**» в шаблоне записи `WorkPlanDuplicate`. Атрибут ссылается на шаблон `WorkPlan`. |
+| `Manager` | Системное имя атрибута типа «**Аккаунт**» с руководителем сотрудника, с которым выполняется сравнение. |

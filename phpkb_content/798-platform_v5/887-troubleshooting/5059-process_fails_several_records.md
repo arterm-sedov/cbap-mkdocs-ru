@@ -17,9 +17,9 @@ updated: '2025-10-24 17:35:15'
 
 --8<-- "related_topics_heading.md"
 
-- [Кнопки](https://kb.comindware.ru/article.php?id=4790)
-- [Шаблон процесса](https://kb.comindware.ru/article.php?id=4758)
-- [Сценарии](https://kb.comindware.ru/article.php?id=4717)
-- [Ошибка выполнения скриптовой операции](https://kb.comindware.ru/article.php?id=5057)
+- [Кнопки][buttons]
+- [Шаблон процесса][process_templates]
+- [Сценарии][scenarios]
+- [Ошибка выполнения скриптовой операции][script_operation_error]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

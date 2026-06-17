@@ -1,0 +1,415 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5745" kb-tags="C#,CSV,импорт данных,интеграция,сетевая папка,синхронизация данных,скрипт" kb-title="Импорт данных из CSV-файла на сервере">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#import_server_csv_csharp_intro">
+<span class="md-ellipsis">
+      
+        Введение
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#import_server_csv_csharp_use_case">
+<span class="md-ellipsis">
+      
+        Прикладная задача
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#import_server_csv_csharp_templates">
+<span class="md-ellipsis">
+      
+        Подготовка шаблонов записей
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#import_server_csv_csharp_csv_prep">
+<span class="md-ellipsis">
+      
+        Подготовка CSV-файла
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#import_server_csv_csharp_process">
+<span class="md-ellipsis">
+      
+        Создание процесса импорта
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#import_server_csv_csharp_script">
+<span class="md-ellipsis">
+      
+        C#-скрипт
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#import_server_csv_csharp_test">
+<span class="md-ellipsis">
+      
+        Тестирование
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#import_server_csv_csharp_automation">
+<span class="md-ellipsis">
+      
+        Автоматизация запуска
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      
+        Связанные статьи
+      
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="import_server_csv_csharp_intro">Введение</h2>
+<p>Здесь представлен способ программного импорта данных из CSV-файла, расположенного в папке на сервере <strong>Comindware Platform</strong>. C#-скрипт выполняется в задаче технического процесса, читает CSV-файл с диска сервера, разбирает его и создаёт или обновляет записи в шаблонах через API.</p>
+<p>Этот метод применяется, когда недоступна интеграция через OData или REST API, но есть возможность разместить CSV-файл в общей сетевой папке, доступной серверу <strong>Comindware Platform</strong>. Например:</p>
+<ul>
+<li>смежная система регулярно выгружает данные в общую папку в виде CSV;</li>
+<li>требуется периодическая синхронизация справочников из внешнего источника;</li>
+<li>файл формируется вручную и сохраняется в сетевую папку для последующего импорта.</li>
+</ul>
+<div class="notice notice-tip">
+<p class="admonition-title">Альтернативные способы импорта</p>
+<ul>
+<li>Встроенный <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4802">импорт данных из файлов XLSX и CSV</a> через интерфейс шаблона — для разовых загрузок через веб-интерфейс.</li>
+<li>[Адаптер импорта данных][adapter_data_import] через очереди сообщений — для автоматического приёма XML/JSON из внешних систем.</li>
+</ul>
+</div>
+<h2 id="import_server_csv_csharp_use_case">Прикладная задача</h2>
+<p>Имеется CSV-файл с данными клиентов и их договоров, который регулярно выгружается в сетевую папку <code>\\server\shared\import\clients_contracts.csv</code>. Требуется автоматически импортировать эти данные в шаблоны записей <strong>Comindware Platform</strong>: создавать новые записи клиентов и договоров, связывать их между собой и назначать статусы договоров.</p>
+<h2 id="import_server_csv_csharp_templates">Подготовка шаблонов записей</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте шаблон записи <em>«Статусы договора»</em> со следующими атрибутами:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Название</th>
+<th>Тип</th>
+<th>Свойства</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Название</em></td>
+<td><strong>Текст</strong></td>
+<td><strong>Использовать как заголовок записей:</strong> флажок установлен</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Создайте три записи в шаблоне <em>«Статусы договора»</em>: <em>В обработке</em>, <em>В работе</em>, <em>Завершён</em>.</p>
+</li>
+<li>
+<p>Создайте шаблон записи <em>«Договоры»</em> со следующими атрибутами:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Название</th>
+<th>Тип</th>
+<th>Свойства</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Название</em></td>
+<td><strong>Текст</strong></td>
+<td><strong>Использовать как заголовок записей:</strong> флажок установлен</td>
+</tr>
+<tr>
+<td><em>Сумма</em></td>
+<td><strong>Число</strong></td>
+<td><strong>Количество знаков после запятой: 2</strong></td>
+</tr>
+<tr>
+<td><em>Дата</em></td>
+<td><strong>Дата и время</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><em>Статус</em></td>
+<td><strong>Запись</strong></td>
+<td><strong>Связанный шаблон:</strong> <em>Статусы договора</em></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Создайте шаблон записи <em>«Клиенты»</em> со следующими атрибутами:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Название</th>
+<th>Тип</th>
+<th>Свойства</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Наименование</em></td>
+<td><strong>Текст</strong></td>
+<td><strong>Использовать как заголовок записей:</strong> флажок установлен</td>
+</tr>
+<tr>
+<td><em>Контактное лицо</em></td>
+<td><strong>Текст</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><em>Телефон</em></td>
+<td><strong>Текст</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><em>Email</em></td>
+<td><strong>Текст</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><em>Договор</em></td>
+<td><strong>Запись</strong></td>
+<td><strong>Связанный шаблон:</strong> <em>Договоры</em></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<h2 id="import_server_csv_csharp_csv_prep">Подготовка CSV-файла</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Сформируйте CSV-файл со следующими столбцами (в качестве разделителя используется точка с запятой):</p>
+<div class="highlight"><code><pre><span></span><code>Наименование клиента;Контактное лицо;Телефон;Email;Наименование договора;Статус;Дата;Сумма договора</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Сохраните файл в кодировке <strong>UTF-8</strong> — это исключит проблемы с отображением кириллических символов.</p>
+</li>
+<li>
+<p>Разместите файл в сетевой папке, доступной серверу <strong>Comindware Platform</strong>, например <code>\\server\shared\import\contracts.csv</code>.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Путь к файлу</p>
+<p>C#-скрипт выполняется на стороне сервера. Указывайте путь, доступный серверу, а не клиентскому компьютеру. Поддерживаются как локальные пути (<code>C:\import\file.csv</code>), так и сетевые (UNC) пути (<code>\\server\share\file.csv</code>).</p>
+</div>
+</li>
+<li>
+<p>Убедитесь, что учётная запись, под которой работает сервер приложений <strong>Comindware Platform</strong>, имеет права на чтение файлов в указанной папке.</p>
+</li>
+</ol>
+<h2 id="import_server_csv_csharp_process">Создание процесса импорта</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте новый процесс: на странице «<strong>Процессы</strong>» нажмите кнопку «<strong>Создать</strong>».</p>
+</li>
+<li>
+<p>Назовите процесс, например <em>«Импорт данных из CSV»</em>.</p>
+</li>
+<li>
+<p>Добавьте элемент «<strong>Задача-скрипт</strong>» на схему процесса и соедините его со стартовым и конечным событиями.</p>
+</li>
+<li>
+<p>Нажмите на задачу-скрипт и в открывшейся панели свойств выберите вкладку «<strong>Скрипт</strong>».</p>
+</li>
+<li>
+<p>Вставьте приведённый ниже C#-скрипт.</p>
+</li>
+<li>
+<p>Опубликуйте процесс.</p>
+</li>
+</ol>
+<h2 id="import_server_csv_csharp_script">C#-скрипт</h2>
+<div class="highlight"><span class="filename">Скрипт импорта данных из локального CSV-файла — объявление класса модели и чтение файла</span><code><pre><span></span><code><span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Collections.Generic</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Globalization</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.IO</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Linq</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">System.Text</span><span class="p">;</span></code> <br/><code><span class="k">using</span><span class="w"> </span><span class="nn">Comindware.Data.Entity</span><span class="p">;</span></code> <br/><code></code> <br/><code><span class="k">class</span><span class="w"> </span><span class="nc">Script</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="c1">// Data model matching the CSV file columns</span></code> <br/><code><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">CsvRow</span></code> <br/><code><span class="w">    </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">ClientName</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span></code> <br/><code><span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Contact</span><span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span></code> <br/><code><span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Phone</span><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span></code> <br/><code><span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">Email</span><span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span></code> <br/><code><span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">ContractName</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span></code> <br/><code><span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">StatusName</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span></code> <br/><code><span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="n">DateTime</span><span class="w"> </span><span class="n">Date</span><span class="w">       </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span></code> <br/><code><span class="w">        </span><span class="k">public</span><span class="w"> </span><span class="kt">decimal</span><span class="w"> </span><span class="n">Total</span><span class="w">       </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code></code> <br/><code><span class="w">    </span><span class="c1">// Maps a human-readable status name to the record ID in the "Статусы договора" template</span></code> <br/><code><span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nf">GetStatusId</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">statusName</span><span class="p">)</span></code> <br/><code><span class="w">    </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="c1">// Replace with actual record IDs from your "Статусы договора" template</span></code> <br/><code><span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">statusName</span><span class="p">.</span><span class="n">Trim</span><span class="p">())</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="s">"В обработке"</span><span class="p">:</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">"oa.1"</span><span class="p">;</span></code> <br/><code><span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="s">"В работе"</span><span class="p">:</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">"oa.2"</span><span class="p">;</span></code> <br/><code><span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="s">"Завершён"</span><span class="p">:</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="s">"oa.3"</span><span class="p">;</span></code> <br/><code><span class="w">            </span><span class="k">default</span><span class="p">:</span><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="s">""</span><span class="p">;</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code></code> <br/><code><span class="w">    </span><span class="c1">// Parses a single CSV line into a CsvRow object</span></code> <br/><code><span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">CsvRow</span><span class="w"> </span><span class="nf">ParseLine</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">delimiter</span><span class="p">)</span></code> <br/><code><span class="w">    </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">line</span><span class="p">.</span><span class="n">Split</span><span class="p">(</span><span class="n">delimiter</span><span class="p">);</span></code> <br/><code></code> <br/><code><span class="w">        </span><span class="n">DateTime</span><span class="w"> </span><span class="n">date</span><span class="p">;</span></code> <br/><code><span class="w">        </span><span class="n">DateTime</span><span class="p">.</span><span class="n">TryParse</span><span class="p">(</span><span class="n">columns</span><span class="p">[</span><span class="mi">6</span><span class="p">].</span><span class="n">Trim</span><span class="p">(),</span><span class="w"> </span><span class="n">CultureInfo</span><span class="p">.</span><span class="n">InvariantCulture</span><span class="p">,</span><span class="w"> </span><span class="n">DateTimeStyles</span><span class="p">.</span><span class="n">None</span><span class="p">,</span><span class="w"> </span><span class="k">out</span><span class="w"> </span><span class="n">date</span><span class="p">);</span></code> <br/><code><span class="w">        </span><span class="n">date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TimeZoneInfo</span><span class="p">.</span><span class="n">ConvertTime</span><span class="p">(</span><span class="n">date</span><span class="p">,</span><span class="w"> </span><span class="n">TimeZoneInfo</span><span class="p">.</span><span class="n">Utc</span><span class="p">,</span><span class="w"> </span><span class="n">TimeZoneInfo</span><span class="p">.</span><span class="n">Local</span><span class="p">);</span></code> <br/><code></code> <br/><code><span class="w">        </span><span class="kt">decimal</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span></code> <br/><code><span class="w">        </span><span class="n">Decimal</span><span class="p">.</span><span class="n">TryParse</span><span class="p">(</span><span class="n">columns</span><span class="p">[</span><span class="mi">7</span><span class="p">].</span><span class="n">Trim</span><span class="p">(),</span><span class="w"> </span><span class="n">NumberStyles</span><span class="p">.</span><span class="n">Any</span><span class="p">,</span><span class="w"> </span><span class="n">CultureInfo</span><span class="p">.</span><span class="n">InvariantCulture</span><span class="p">,</span><span class="w"> </span><span class="k">out</span><span class="w"> </span><span class="n">total</span><span class="p">);</span></code> <br/><code></code> <br/><code><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">CsvRow</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="n">ClientName</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">Trim</span><span class="p">(),</span></code> <br/><code><span class="w">            </span><span class="n">Contact</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">Trim</span><span class="p">(),</span></code> <br/><code><span class="w">            </span><span class="n">Phone</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="n">columns</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">Trim</span><span class="p">(),</span></code> <br/><code><span class="w">            </span><span class="n">Email</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="n">columns</span><span class="p">[</span><span class="mi">3</span><span class="p">].</span><span class="n">Trim</span><span class="p">(),</span></code> <br/><code><span class="w">            </span><span class="n">ContractName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">columns</span><span class="p">[</span><span class="mi">4</span><span class="p">].</span><span class="n">Trim</span><span class="p">(),</span></code> <br/><code><span class="w">            </span><span class="n">StatusName</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">columns</span><span class="p">[</span><span class="mi">5</span><span class="p">].</span><span class="n">Trim</span><span class="p">(),</span></code> <br/><code><span class="w">            </span><span class="n">Date</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="n">date</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="n">Total</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="n">total</span></code> <br/><code><span class="w">        </span><span class="p">};</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code></code> <br/><code></code> <br/><code><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Main</span><span class="p">(</span><span class="n">Comindware</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">ScriptContext</span><span class="w"> </span><span class="n">context</span><span class="p">)</span></code> <br/><code><span class="w">    </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="c1">// Path to the CSV file on the server.</span></code> <br/><code><span class="w">        </span><span class="c1">// Use a UNC path for a shared network folder, e.g.:</span></code> <br/><code><span class="w">        </span><span class="c1">//   @"\\server\shared\import\contracts.csv"</span></code> <br/><code><span class="w">        </span><span class="c1">// Or a local server path:</span></code> <br/><code><span class="w">        </span><span class="c1">//   @"C:\import\contracts.csv"</span></code> <br/><code><span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="n">filePath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">@"\\server\shared\import\contracts.csv"</span><span class="p">;</span></code> <br/><code></code> <br/><code><span class="w">        </span><span class="c1">// CSV delimiter (configure according to your file)</span></code> <br/><code><span class="w">        </span><span class="kt">char</span><span class="w"> </span><span class="n">delimiter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">';'</span><span class="p">;</span></code> <br/><code></code> <br/><code><span class="w">        </span><span class="c1">// Encoding of the CSV file — UTF-8 is recommended for Cyrillic text</span></code> <br/><code><span class="w">        </span><span class="n">Encoding</span><span class="w"> </span><span class="n">fileEncoding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">;</span></code> <br/><code></code> <br/><code><span class="w">        </span><span class="c1">// Read the entire file and parse each non-empty line</span></code> <br/><code><span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="n">fileContent</span><span class="p">;</span></code> <br/><code><span class="w">        </span><span class="k">using</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">reader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StreamReader</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span><span class="w"> </span><span class="n">fileEncoding</span><span class="p">))</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="n">fileContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reader</span><span class="p">.</span><span class="n">ReadToEnd</span><span class="p">();</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code></code> <br/><code><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">CsvRow</span><span class="o">&gt;</span><span class="p">();</span></code> <br/><code><span class="w">        </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">fileContent</span><span class="p">.</span><span class="n">Split</span><span class="p">(</span><span class="k">new</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="sc">'\r'</span><span class="p">,</span><span class="w"> </span><span class="sc">'\n'</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">StringSplitOptions</span><span class="p">.</span><span class="n">RemoveEmptyEntries</span><span class="p">))</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="c1">// Skip the header line by detecting a non-numeric value in the last column</span></code> <br/><code><span class="w">            </span><span class="kt">decimal</span><span class="w"> </span><span class="n">testTotal</span><span class="p">;</span></code> <br/><code><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">firstColumn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">line</span><span class="p">.</span><span class="n">Split</span><span class="p">(</span><span class="n">delimiter</span><span class="p">)[</span><span class="mi">7</span><span class="p">].</span><span class="n">Trim</span><span class="p">();</span></code> <br/><code><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">Decimal</span><span class="p">.</span><span class="n">TryParse</span><span class="p">(</span><span class="n">firstColumn</span><span class="p">,</span><span class="w"> </span><span class="n">NumberStyles</span><span class="p">.</span><span class="n">Any</span><span class="p">,</span><span class="w"> </span><span class="n">CultureInfo</span><span class="p">.</span><span class="n">InvariantCulture</span><span class="p">,</span><span class="w"> </span><span class="k">out</span><span class="w"> </span><span class="n">testTotal</span><span class="p">))</span></code> <br/><code><span class="w">            </span><span class="p">{</span></code> <br/><code><span class="w">                </span><span class="k">continue</span><span class="p">;</span><span class="w"> </span><span class="c1">// This is the header or a non-data line</span></code> <br/><code><span class="w">            </span><span class="p">}</span></code> <br/><code></code> <br/><code><span class="w">            </span><span class="n">rows</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">ParseLine</span><span class="p">(</span><span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="n">delimiter</span><span class="p">));</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code></code> <br/><code></code> <br/><code><span class="w">        </span><span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">rows</span><span class="p">)</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="c1">// Resolve the status ID from the status name in the CSV</span></code> <br/><code><span class="w">            </span><span class="kt">string</span><span class="w"> </span><span class="n">statusId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetStatusId</span><span class="p">(</span><span class="n">row</span><span class="p">.</span><span class="n">StatusName</span><span class="p">);</span></code> <br/><code></code> <br/><code><span class="w">            </span><span class="c1">// Create a "Договор" record</span></code> <br/><code><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">contractData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">object</span><span class="o">&gt;</span></code> <br/><code><span class="w">            </span><span class="p">{</span></code> <br/><code><span class="w">                </span><span class="c1">// Use system names of the attributes in the "Договоры" template</span></code> <br/><code><span class="w">                </span><span class="p">{</span><span class="w"> </span><span class="s">"Nazvanie"</span><span class="p">,</span><span class="w"> </span><span class="n">row</span><span class="p">.</span><span class="n">ContractName</span><span class="w"> </span><span class="p">},</span></code> <br/><code><span class="w">                </span><span class="p">{</span><span class="w"> </span><span class="s">"Summa"</span><span class="p">,</span><span class="w">    </span><span class="n">row</span><span class="p">.</span><span class="n">Total</span><span class="p">.</span><span class="n">ToString</span><span class="p">(</span><span class="n">CultureInfo</span><span class="p">.</span><span class="n">InvariantCulture</span><span class="p">)</span><span class="w"> </span><span class="p">},</span></code> <br/><code><span class="w">                </span><span class="p">{</span><span class="w"> </span><span class="s">"Data"</span><span class="p">,</span><span class="w">     </span><span class="n">row</span><span class="p">.</span><span class="n">Date</span><span class="w"> </span><span class="p">},</span></code> <br/><code><span class="w">                </span><span class="p">{</span><span class="w"> </span><span class="s">"Status"</span><span class="p">,</span><span class="w">   </span><span class="n">statusId</span><span class="w"> </span><span class="p">}</span></code> <br/><code><span class="w">            </span><span class="p">};</span></code> <br/><code></code> <br/><code><span class="w">            </span><span class="c1">// "Contracts" — system name of the "Договоры" template</span></code> <br/><code><span class="w">            </span><span class="kt">string</span><span class="w"> </span><span class="n">contractId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">CreateWithAlias</span><span class="p">(</span><span class="s">"Contracts"</span><span class="p">,</span><span class="w"> </span><span class="n">contractData</span><span class="p">);</span></code> <br/><code></code> <br/><code><span class="w">            </span><span class="c1">// Create a "Клиент" record linked to the newly created "Договор"</span></code> <br/><code><span class="w">            </span><span class="kt">var</span><span class="w"> </span><span class="n">clientData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="kt">object</span><span class="o">&gt;</span></code> <br/><code><span class="w">            </span><span class="p">{</span></code> <br/><code><span class="w">                </span><span class="c1">// Use system names of the attributes in the "Клиенты" template</span></code> <br/><code><span class="w">                </span><span class="p">{</span><span class="w"> </span><span class="s">"Naimenovanie"</span><span class="p">,</span><span class="w">    </span><span class="n">row</span><span class="p">.</span><span class="n">ClientName</span><span class="w"> </span><span class="p">},</span></code> <br/><code><span class="w">                </span><span class="p">{</span><span class="w"> </span><span class="s">"KontaktnoeLitso"</span><span class="p">,</span><span class="w"> </span><span class="n">row</span><span class="p">.</span><span class="n">Contact</span><span class="w"> </span><span class="p">},</span></code> <br/><code><span class="w">                </span><span class="p">{</span><span class="w"> </span><span class="s">"Telefon"</span><span class="p">,</span><span class="w">         </span><span class="n">row</span><span class="p">.</span><span class="n">Phone</span><span class="w"> </span><span class="p">},</span></code> <br/><code><span class="w">                </span><span class="p">{</span><span class="w"> </span><span class="s">"Email"</span><span class="p">,</span><span class="w">           </span><span class="n">row</span><span class="p">.</span><span class="n">Email</span><span class="w"> </span><span class="p">},</span></code> <br/><code><span class="w">                </span><span class="p">{</span><span class="w"> </span><span class="s">"Dogovor"</span><span class="p">,</span><span class="w">         </span><span class="n">contractId</span><span class="w"> </span><span class="p">}</span></code> <br/><code><span class="w">            </span><span class="p">};</span></code> <br/><code></code> <br/><code><span class="w">            </span><span class="c1">// "Clients" — system name of the "Клиенты" template</span></code> <br/><code><span class="w">            </span><span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">CreateWithAlias</span><span class="p">(</span><span class="s">"Clients"</span><span class="p">,</span><span class="w"> </span><span class="n">clientData</span><span class="p">);</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Пояснения к скрипту:</strong></p>
+<ul>
+<li>
+<p><strong>Строки 1–8</strong> — импортируются необходимые пространства имён. <code>System.IO</code> требуется для работы с файловой системой, <code>System.Globalization</code> — для корректного разбора чисел и дат, <code>System.Text</code> — для указания кодировки файла, <code>Comindware.Data.Entity</code> — для доступа к API платформы.</p>
+</li>
+<li>
+<p><strong>Класс <code>CsvRow</code> (строки 12–23)</strong> — модель данных, описывающая структуру одной строки CSV-файла. Свойства класса соответствуют столбцам файла.</p>
+</li>
+<li>
+<p><strong>Метод <code>GetStatusId</code> (строки 26–34)</strong> — сопоставляет человекочитаемое название статуса из CSV с идентификатором записи в шаблоне <em>«Статусы договора»</em>. Замените <code>"oa.1"</code>, <code>"oa.2"</code>, <code>"oa.3"</code> на фактические идентификаторы записей из вашего шаблона.</p>
+</li>
+<li>
+<p><strong>Метод <code>ParseLine</code> (строки 37–58)</strong> — разбирает строку CSV на объект <code>CsvRow</code>: разделяет по указанному разделителю, преобразует дату с учётом часового пояса, преобразует сумму в число.</p>
+</li>
+<li>
+<p><strong>Метод <code>Main</code></strong> — точка входа, вызывается при выполнении задачи-скрипта в процессе.</p>
+<ul>
+<li>
+<p><strong>Переменная <code>filePath</code></strong> — путь к CSV-файлу. Для сетевой папки укажите UNC-путь (например, <code>\\server\share\file.csv</code>). Для локальной папки сервера — локальный путь (<code>C:\import\file.csv</code>).</p>
+</li>
+<li>
+<p><strong>Переменная <code>delimiter</code></strong> — символ-разделитель столбцов. По умолчанию <code>;</code>.</p>
+</li>
+<li>
+<p><strong>Переменная <code>fileEncoding</code></strong> — кодировка файла. Рекомендуется <code>Encoding.UTF8</code>. При использовании других кодировок (например, <code>Encoding.GetEncoding("windows-1251")</code>) замените значение.</p>
+</li>
+<li>
+<p><strong>Чтение файла (строки 76–80)</strong> — файл читается целиком через <code>StreamReader</code> с указанием кодировки.</p>
+</li>
+<li>
+<p><strong>Разбор строк (строки 82–93)</strong> — содержимое файла разбивается на строки. Строка-заголовок пропускается по условию: последний столбец заголовка не является числом.</p>
+</li>
+<li>
+<p><strong>Цикл по строкам CSV (строки 100–127)</strong> — для каждой строки данных:</p>
+<ol class="colored_numbers_list">
+<li>Определяется идентификатор статуса через <code>GetStatusId</code>.</li>
+<li>Создаётся запись договора через <code>CreateWithAlias</code> — в словарь передаются системные имена атрибутов и их значения.</li>
+<li>Создаётся запись клиента через <code>CreateWithAlias</code> — в атрибут <code>Dogovor</code> передаётся идентификатор созданного договора, устанавливая связь между записями.</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Системные имена, которые необходимо заменить на ваши:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>В скрипте</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Contracts</code></td>
+<td>Системное имя шаблона записи <em>«Договоры»</em></td>
+</tr>
+<tr>
+<td><code>Clients</code></td>
+<td>Системное имя шаблона записи <em>«Клиенты»</em></td>
+</tr>
+<tr>
+<td><code>Nazvanie</code></td>
+<td>Системное имя атрибута <em>«Название»</em> в шаблоне <em>«Договоры»</em></td>
+</tr>
+<tr>
+<td><code>Summa</code></td>
+<td>Системное имя атрибута <em>«Сумма»</em> в шаблоне <em>«Договоры»</em></td>
+</tr>
+<tr>
+<td><code>Data</code></td>
+<td>Системное имя атрибута <em>«Дата»</em> в шаблоне <em>«Договоры»</em></td>
+</tr>
+<tr>
+<td><code>Status</code></td>
+<td>Системное имя атрибута <em>«Статус»</em> в шаблоне <em>«Договоры»</em></td>
+</tr>
+<tr>
+<td><code>Naimenovanie</code></td>
+<td>Системное имя атрибута <em>«Наименование»</em> в шаблоне <em>«Клиенты»</em></td>
+</tr>
+<tr>
+<td><code>KontaktnoeLitso</code></td>
+<td>Системное имя атрибута <em>«Контактное лицо»</em> в шаблоне <em>«Клиенты»</em></td>
+</tr>
+<tr>
+<td><code>Telefon</code></td>
+<td>Системное имя атрибута <em>«Телефон»</em> в шаблоне <em>«Клиенты»</em></td>
+</tr>
+<tr>
+<td><code>Email</code></td>
+<td>Системное имя атрибута <em>«Email»</em> в шаблоне <em>«Клиенты»</em></td>
+</tr>
+<tr>
+<td><code>Dogovor</code></td>
+<td>Системное имя атрибута <em>«Договор»</em> в шаблоне <em>«Клиенты»</em></td>
+</tr>
+</tbody>
+</table>
+<p>Системные имена шаблонов и атрибутов указаны на вкладке «<strong>Свойства</strong>» соответствующего шаблона или атрибута.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Обновление существующих записей</p>
+<p>В приведённом примере для каждой строки CSV создаются новые записи. Если требуется обновлять существующие записи при повторном импорте, необходимо добавить логику поиска записи по ключевому полю (например, по названию договора) и вызывать <code>Api.TeamNetwork.ObjectService.EditWithAlias(recordId, data)</code>, если запись найдена, либо <code>CreateWithAlias</code>, если запись отсутствует.</p>
+</div>
+<h2 class="pageBreakBefore" id="import_server_csv_csharp_test">Тестирование</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Убедитесь, что CSV-файл размещён в указанной сетевой папке и доступен для чтения с сервера.</p>
+</li>
+<li>
+<p>Запустите созданный процесс вручную со страницы «<strong>Процессы</strong>»: выберите процесс и нажмите кнопку «<strong>Запустить</strong>».</p>
+</li>
+<li>
+<p>Дождитесь завершения процесса.</p>
+</li>
+<li>
+<p>Перейдите в шаблон <em>«Клиенты»</em>, на вкладку «<strong>Свойства</strong>» и нажмите кнопку «<strong>Перейти к экземплярам</strong>» — в списке должны отобразиться записи клиентов с привязанными договорами.</p>
+</li>
+<li>
+<p>Перейдите в шаблон <em>«Договоры»</em> — в списке должны отобразиться записи договоров с указанными статусами.</p>
+</li>
+<li>
+<p>Если импорт не выполнился, проверьте:</p>
+<ul>
+<li>доступность сетевой папки с сервера <strong>Comindware Platform</strong>;</li>
+<li>права учётной записи сервера приложений на чтение файла;</li>
+<li>соответствие системных имён шаблонов и атрибутов в скрипте;</li>
+<li>кодировку CSV-файла (должна быть UTF-8);</li>
+<li>корректность идентификаторов статусов в методе <code>GetStatusId</code>.</li>
+</ul>
+</li>
+</ol>
+<h2 id="import_server_csv_csharp_automation">Автоматизация запуска</h2>
+<p>Для регулярной синхронизации данных процесс импорта можно запускать автоматически:</p>
+<ul>
+<li><strong>По расписанию</strong> — настройте <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4695">подключение для приёма сообщений</a>, которое будет запускать процесс по расписанию.</li>
+<li><strong>По событию</strong> — настройте сценарий, отслеживающий изменения в сетевой папке, и запускающий процесс импорта при появлении нового файла.</li>
+<li><strong>По HTTP-запросу</strong> — настройте <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4700">подключение для приёма HTTP-запросов</a>, которое будет запускать процесс импорта по внешнему сигналу (например, после завершения выгрузки данных смежной системой).</li>
+</ul>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4802">Импорт данных в шаблон</a></em></li>
+<li><em>[Адаптер импорта данных][adapter_data_import]</em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4864">Написание скриптов на языке C#</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5141">HTTP-запросы POST. Отправка JSON/XML из сценария с помощью C#</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4695">Подключения для приёма сообщений</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4728">Задача-скрипт</a></em></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

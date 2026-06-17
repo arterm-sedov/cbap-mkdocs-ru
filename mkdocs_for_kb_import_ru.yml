@@ -1,6 +1,5 @@
-# This file is used only to build RU help to import it in the kb.comindware.com
-# Run this build script:
-# buildhelp_for_kb_import_ru.ps1
+# This file builds RU help for PHPKB import.
+# Build command: .\.venv\Scripts\python.exe -m mkdocs build -f mkdocs_for_kb_import_ru.yml
 
 INHERIT: mkdocs_ru.yml
 
@@ -35,6 +34,9 @@ markdown_extensions:
 
 extra:
     kbExport: true
+
+exclude_docs: |
+  **/AGENTS.md
 
 hooks:
   - kb_html_cleanup_hook.py
