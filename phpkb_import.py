@@ -23,7 +23,7 @@ import json
 KB_ID_TO_FILENAME_MAP = None
 KB_ID_TO_TITLE_MAP = None
 KB_ID_TO_CATEGORY_FOLDER_MAP = None
-KB_ID_TO_TITLE_MAP_FILE = '.article_id_filename_map_v6.json'
+KB_ID_TO_TITLE_MAP_FILE = None
 THIS_FILE_DIR = os.path.dirname(os.path.realpath(__file__))
 IMPORT_PATH_DEFAULT = 'phpkb_content'
 KB_DIR = IMPORT_PATH_DEFAULT
@@ -403,13 +403,13 @@ def parse_args(argv=None):
     )
     parser.add_argument(
         "--article-map",
-        default=KB_ID_TO_TITLE_MAP_FILE,
-        help=f"Gap-fill article id to filename stem map. Default: {KB_ID_TO_TITLE_MAP_FILE}",
+        required=True,
+        help="Gap-fill article id to filename stem map (required, e.g. .article_id_filename_map_v5.json or .article_id_filename_map_v6.json)",
     )
     parser.add_argument(
         "--include-private",
         action="store_true",
-        help="Import private categories (e.g. V6 root category 896).",
+        help="Import private categories (e.g. 896 for V6 root / 798 for V5 root).",
     )
     return parser.parse_args(argv)
 
