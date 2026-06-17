@@ -79,7 +79,7 @@ python3 phpkb_copy_images.py --git
 # Also pull on production server after push
 python3 phpkb_copy_images.py --git --pull
 
-# Specify a different version (default: v6.0)
+# --version is required (e.g. v5.0 or v6.0)
 python3 phpkb_copy_images.py --version v5.0 --git --pull
 ```
 
