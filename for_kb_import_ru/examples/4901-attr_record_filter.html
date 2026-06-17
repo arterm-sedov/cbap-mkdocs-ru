@@ -1,43 +1,119 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4901" kb-tags="" kb-title="Атрибут типа «Запись». Настройка фильтра записей для раскрывающегося списка на форме">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4901" kb-tags="N3,атрибуты,выражение на N3,пример,формулы" kb-title="Атрибут типа «Запись». Настройка фильтра записей для раскрывающегося списка на форме">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
 <nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#attr_record_filter_scenariy">
+<span class="md-ellipsis">
+      
+        Сценарий
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#attr_record_filter_data_model">
+<span class="md-ellipsis">
+      
+        Исходные данные
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#attr_record_filter_setup">
+<span class="md-ellipsis">
+      
+        Порядок настройки
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      
+        Связанные статьи
+      
+    </span>
+</a>
+</li>
+</ul>
+</div>
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<p>В <strong>Comindware Platform</strong> для выбора значения из другого шаблона записи необходимо использовать атрибут с типом данных «<strong>Запись</strong>». По умолчанию в раскрывающемся списке отображаются все записи, но в некоторых сценариях необходимо показывать только определенные записи.</p>
-<p>Для ограничения отображения и выбора записей необходимо использовать функционал «<strong>Фильтр</strong>» в настройках конструктора конкретной формы, на которую вынесен данный атрибут.</p>
-<p><strong>Сценарий:</strong> при создании заявки на командировку сотруднику нужно выбрать город, в который ему необходимо прибыть. Выбирать из всех городов не совсем удобно, желательно отфильтровать города по выбранной стране командировки.</p>
-<p><strong>Настройка:</strong></p>
-<p><strong>1.</strong> Создайте:</p>
+<p>В <strong>Comindware Platform</strong> для выбора значения из другого шаблона записи необходимо использовать атрибут типа «<strong>Запись</strong>». По умолчанию в раскрывающемся списке отображаются все записи, но в некоторых сценариях необходимо показывать только определённые записи.</p>
+<p>Для ограничения отображения и выбора записей используйте функционал «<strong>Фильтр</strong>» в настройках конструктора формы, на которую вынесен данный атрибут.</p>
+<h2 id="attr_record_filter_scenariy">Сценарий</h2>
+<p>При создании заявки на командировку сотруднику нужно выбрать город, в который ему необходимо прибыть. Выбирать из всех городов не совсем удобно — желательно отфильтровать города по выбранной стране командировки.</p>
+<h2 id="attr_record_filter_data_model">Исходные данные</h2>
+<p>Создайте следующие шаблоны записи и атрибуты:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Шаблон записи</th>
+<th>Атрибуты</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Страны</em> (<code>countries</code>)</td>
+<td><code>title</code> — текст; <code>Gorodastrany</code> — запись с несколькими значениями</td>
+</tr>
+<tr>
+<td><em>Города</em> (<code>cities</code>)</td>
+<td><code>title</code> — текст; <code>country</code> — запись из шаблона <code>countries</code></td>
+</tr>
+<tr>
+<td><em>Заявки на командировки</em> (<code>Zayavkinakomandirovku</code>)</td>
+<td><code>title</code> — текст; <code>request_country</code> — запись из шаблона <code>countries</code>; <code>request_city</code> — запись из шаблона <code>cities</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="attr_record_filter_setup">Порядок настройки</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>В конструкторе формы шаблона <em>«Заявки на командировки»</em> для поля <em>«Город»</em> (<code>request_city</code>) в свойстве «<strong>Фильтр</strong>» выберите один из вариантов фильтрации:</p>
 <ul>
-<li>Шаблон записи «Страны» (countries) с атрибутами:</li>
-<li>Название (title) — текст;</li>
-<li>Города страны — запись с несколькими значениями.</li>
-<li>Шаблон записи «Города» (cities) с атрибутами:</li>
-<li>Название (title) — текст;</li>
-<li>Страна (country) — запись из шаблона «Страны».</li>
-<li>Шаблон записи «Заявки на командировки» (Zayavkinakomandirovku) с атрибутами:</li>
-<li>Название — текст;</li>
-<li>Страна (request_country) — запись из шаблона «Страны»;</li>
-<li>Город (request_city) — запись из шаблона «Города»;</li>
+<li><strong>Атрибут</strong> — выберите атрибут: <em>Страны</em> → <em>Города страны</em>;</li>
+<li>
+<p><strong>Формула</strong> — введите выражение на языке Comindware Expression Language:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">db</span><span class="o">-&gt;</span><span class="n">cities</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">country</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="err">$</span><span class="n">request_country</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">a</span><span class="o">-&gt;</span><span class="n">id</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p><strong>N3</strong> — введите выражение на языке N3:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">container:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/container#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">math:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/2000/10/swap/math#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>   <span class="p">(</span><span class="s">"cities"</span> <span class="s">"country"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?citiescountryProp</span><span class="p">.</span></code> <br/><code>   <span class="p">(</span><span class="s">"Zayavkinakomandirovku"</span> <span class="s">"request_country"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?Zayavkinakomandirovkurequest_countryProp</span><span class="p">.</span></code> <br/><code></code> <br/><code>   <span class="err">?item</span> <span class="err">?Zayavkinakomandirovkurequest_countryProp</span> <span class="err">?Zayavkinakomandirovkurequest_countryProperty</span><span class="p">.</span></code> <br/><code>   <span class="err">?value</span> <span class="kt">a</span> <span class="p">[</span><span class="nn">object</span><span class="p">:</span><span class="nt">alias</span> <span class="s">"cities"</span><span class="p">].</span></code> <br/><code>   <span class="err">?value</span> <span class="err">?citiescountryProp</span> <span class="err">?Zayavkinakomandirovkurequest_countryProperty</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p><strong>DMN</strong> — выберите источник данных <em>Города</em> и настройте таблицу по образцу:</p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Пример DMN-запроса" src="https://kb.comindware.ru/assets/dmn1.png"/><figcaption class="caption">Пример DMN-запроса</figcaption></figure>
+</li>
 </ul>
-<p><strong>2.</strong> В конструкторе формы шаблона «Заявка на командировку» для поля «Города» (request_city) в свойстве «Фильтр» предусмотрено несколько вариантов фильтрации:</p>
+</li>
+<li>
+<p>Проверьте работу фильтра: выберите сначала страну, затем город. В раскрывающемся списке показываются записи с учётом прав доступа согласно роли пользователя. При отсутствии записей для выбора проверьте права доступа.</p>
+</li>
+</ol>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>С помощью <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4784">правил для формы</a> можно настроить динамическое отображение полей для более удобного заполнения.</p>
+</div>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li>Атрибут — выберите из раскрывающего списка атрибут: <strong><em>«Страны» -&gt; «Города страны»</em></strong>;</li>
-<li>Формула — напишите выражение на языке Comindware Expression Language: <strong><em>(from a in db-&gt;cities where a-&gt; country == $request_country select a-&gt;id)</em></strong>;</li>
-<li>N3 — напишите выражение на языке N3:</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4784">Правила для формы</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4780">Атрибут типа «Запись»</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4785#form_dynamic_elements_dropdown">Динамические элементы формы. Раскрывающийся список</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/category.php?id=880">Язык формул</a></li>
 </ul>
-<div class="highlight"><code><pre><span></span><code>@prefix container: &lt;http://comindware.com/ontology/container#&gt;.</code> <br/><code>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.</code> <br/><code>@prefix math: &lt;http://www.w3.org/2000/10/swap/math#&gt;.</code> <br/><code>{</code> <br/><code>    ("cities" "country") object:findProperty ?citiescountryProp.</code> <br/><code>    ("Zayavkinakomandirovku" "request_country") object:findProperty ?Zayavkinakomandirovkurequest_countryProp.</code> <br/><code></code> <br/><code>    ?item ?Zayavkinakomandirovkurequest_countryProp ?Zayavkinakomandirovkurequest_countryProperty.</code> <br/><code>    ?value a [object:alias "cities"].</code> <br/><code>    ?value ?citiescountryProp ?Zayavkinakomandirovkurequest_countryProperty.</code> <br/><code></code> <br/><code>}</code> <br/></pre></code></div>
-<ul>
-<li>DMN — выберите источник данных Города и настройте в соответствии с информацией ниже:</li>
-</ul>
-<figure class="screenshot_with_caption">
-<p><img alt="Пример DMN запроса" src="https://kb.comindware.ru/assets/dmn1.png"/></p><figcaption class="caption">Пример DMN запроса</figcaption>
-</figure>
-<p><strong>3.</strong> Проверьте работу фильтра, выбрав сначала страну, потом город. В раскрывающемся списке показываются записи с учетом прав доступа согласно роли пользователя. При отсутствии записей для выбора проверьте права доступа.</p>
-<p><strong>Примечание :</strong> используя правила для формы можно настроить динамическое отображение полей для более удобного заполнения.</p>
+</div>
 </article>
 </div>
 </div>

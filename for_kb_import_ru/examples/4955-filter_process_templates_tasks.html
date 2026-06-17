@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4955" kb-tags="" kb-title="Фильтр списка по задачам из нескольких шаблонов процесса">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4955" kb-tags="N3,выражение на N3,пример,процессы" kb-title="Фильтр списка по задачам из нескольких шаблонов процесса">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -6,10 +6,23 @@
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<p>Для того, чтобы получить список всех задач из определенных Шаблонов процесса в настроенном Шаблоне записи, введите следующее выражение:</p>
-<div class="highlight"><code><pre><span></span><code>@prefix cmw: &lt;http://comindware.com/logics#&gt;.</code> <br/><code>@prefix container: &lt;http://comindware.com/ontology/container#&gt;.</code> <br/><code>@prefix assert: &lt;http://comindware.com/logics/assert#&gt;.</code> <br/><code>@prefix math: &lt;http://www.w3.org/2000/10/swap/math#&gt;.</code> <br/><code>@prefix taskStatus: &lt;http://comindware.com/ontology/taskStatus#&gt;.</code> <br/><code>@prefix session: &lt;http://comindware.com/ontology/session#&gt;.</code> <br/><code>{</code> <br/><code>  (</code> <br/><code>    {</code> <br/><code>      ?cont1 container:alias "Proverkadokumentov".</code> <br/><code>        ?item cmw:container ?cont1.</code> <br/><code>      ?item a cmw:UserTask.</code> <br/><code>    }</code> <br/><code>{</code> <br/><code>      ?cont2 container:alias "Podpisaniedogovora".</code> <br/><code>        ?item cmw:container ?cont2.</code> <br/><code>      ?item a cmw:UserTask.</code> <br/><code>    }</code> <br/><code>)</code> <br/><code>    assert:union true.</code> <br/><code></code> <br/><code>}</code> <br/></pre></code></div>
-<p><strong>где:</strong></p>
-<p><strong>Proverkadokumentov, Podpisaniedogovora</strong> – системные имена Шаблонов процесса.</p>
+<p>Для того чтобы получить список всех задач из определенных Шаблонов процесса в настроенном Шаблоне записи, введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmw:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">container:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/container#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">assert:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/assert#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">math:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/2000/10/swap/math#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">taskStatus:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/taskStatus#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">session:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>  <span class="p">(</span></code> <br/><code>    <span class="p">{</span></code> <br/><code>      <span class="err">?cont</span><span class="mi">1</span> <span class="nn">container</span><span class="p">:</span><span class="nt">alias</span> <span class="s">"Proverkadokumentov"</span><span class="p">.</span></code> <br/><code>        <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">container</span> <span class="err">?cont</span><span class="mi">1</span><span class="p">.</span></code> <br/><code>      <span class="err">?item</span> <span class="kt">a</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">UserTask</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code><span class="p">{</span></code> <br/><code>      <span class="err">?cont</span><span class="mi">2</span> <span class="nn">container</span><span class="p">:</span><span class="nt">alias</span> <span class="s">"Podpisaniedogovora"</span><span class="p">.</span></code> <br/><code>        <span class="err">?item</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">container</span> <span class="err">?cont</span><span class="mi">2</span><span class="p">.</span></code> <br/><code>      <span class="err">?item</span> <span class="kt">a</span> <span class="nn">cmw</span><span class="p">:</span><span class="nt">UserTask</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span></code> <br/><code><span class="p">)</span></code> <br/><code>    <span class="nn">assert</span><span class="p">:</span><span class="nt">union</span> <span class="l">true</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Proverkadokumentov, Podpisaniedogovora</code></td>
+<td>Системные имена Шаблонов процесса.</td>
+</tr>
+</tbody>
+</table>
 <p>В данном примере указано два Шаблона процесса для вывода задач, однако их может быть и больше.</p>
 </article>
 </div>

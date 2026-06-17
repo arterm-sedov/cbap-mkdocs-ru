@@ -1,4 +1,4 @@
-<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4946" kb-tags="" kb-title="Проверка на принадлежность пользователя к определенной группе">
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4946" kb-tags="N3,атрибуты,выражение на N3,пример" kb-title="Проверка на принадлежность пользователя к определенной группе">
 <div class="md-container" data-md-component="container">
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
@@ -6,13 +6,35 @@
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<p>Для того, чтобы вывести <em>true</em>, если пользователь или хотя бы один из пользователей в указанном атрибуте типа "Пользователь" входит в обозначенную системную группу (например, для ограничения видимости полей на экранной форме), введите следующее выражение:</p>
-<div class="highlight"><code><pre><span></span><code>@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;.</code> <br/><code>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.</code> <br/><code>@prefix group: &lt;http://comindware.com/ontology/group#&gt;.</code> <br/><code>@prefix account: &lt;http://comindware.com/ontology/account#&gt;.</code> <br/><code>@prefix assert: &lt;http://comindware.com/logics/assert#&gt;.</code> <br/><code>{</code> <br/><code>    ("Works" "Performers") object:findProperty ?Performers.</code> <br/><code></code> <br/><code>    false -&gt; ?value.</code> <br/><code></code> <br/><code>    ?group rdf:type account:Group.</code> <br/><code>    ?group account:groupName "Managers".</code> <br/><code>    {</code> <br/><code>        ?group account:groupUsers ?users.</code> <br/><code>        ?item ?Performers ?PerformersVal.</code> <br/><code>        ?PerformersVal == ?users.</code> <br/><code>    } assert:count ?c.</code> <br/><code>    if {not {?c == 0}}</code> <br/><code>    then {true -&gt; ?value.}</code> <br/><code>    else {}.</code> <br/><code></code> <br/><code>}</code> <br/></pre></code></div>
-<p><strong>где:</strong></p>
-<p><strong>Works</strong> – системное имя текущего Шаблона записи;</p>
-<p><strong>Performers</strong>– системное имя атрибута типа "Пользователь";</p>
-<p><strong>Managers</strong>– название системной группы.</p>
-<p><strong>Примечание :</strong> данная тройка не учитывает пользователей, входящих во вложенные группы.</p>
+<p>Для того чтобы вывести <em>true</em>, если пользователь или хотя бы один из пользователей в указанном атрибуте типа «<strong>Пользователь</strong>» входит в обозначенную системную группу (например, для ограничения видимости полей на экранной форме), введите следующее выражение:</p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">rdf:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">group:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/group#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">account:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/account#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">assert:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/assert#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="p">(</span><span class="s">"Works"</span> <span class="s">"Performers"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?Performers</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="l">false</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="err">?group</span> <span class="nn">rdf</span><span class="p">:</span><span class="nt">type</span> <span class="nn">account</span><span class="p">:</span><span class="nt">Group</span><span class="p">.</span></code> <br/><code>    <span class="err">?group</span> <span class="nn">account</span><span class="p">:</span><span class="nt">groupName</span> <span class="s">"Managers"</span><span class="p">.</span></code> <br/><code>    <span class="p">{</span></code> <br/><code>        <span class="err">?group</span> <span class="nn">account</span><span class="p">:</span><span class="nt">groupUsers</span> <span class="err">?users</span><span class="p">.</span></code> <br/><code>        <span class="err">?item</span> <span class="err">?Performers</span> <span class="err">?PerformersVal</span><span class="p">.</span></code> <br/><code>        <span class="err">?PerformersVal</span> <span class="err">==</span> <span class="err">?users</span><span class="p">.</span></code> <br/><code>    <span class="p">}</span> <span class="nn">assert</span><span class="p">:</span><span class="nt">count</span> <span class="err">?c</span><span class="p">.</span></code> <br/><code>    <span class="err">if</span> <span class="p">{</span><span class="err">not</span> <span class="p">{</span><span class="err">?c</span> <span class="err">==</span> <span class="mi">0</span><span class="p">}}</span></code> <br/><code>    <span class="err">then</span> <span class="p">{</span><span class="l">true</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.}</span></code> <br/><code>    <span class="err">else</span> <span class="p">{}.</span></code> <br/><code></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p><strong>Здесь:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Значение</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Works</code></td>
+<td>Системное имя текущего Шаблона записи.</td>
+</tr>
+<tr>
+<td><code>Performers</code></td>
+<td>Системное имя атрибута типа «<strong>Пользователь</strong>».</td>
+</tr>
+<tr>
+<td><code>Managers</code></td>
+<td>Название системной группы.</td>
+</tr>
+</tbody>
+</table>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Данная тройка не учитывает пользователей, входящих во вложенные группы.</p>
+</div>
 </article>
 </div>
 </div>
