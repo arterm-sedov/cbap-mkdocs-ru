@@ -3,6 +3,17 @@
 Session discoveries that haven't yet been migrated to durable skills or rules.
 Review before starting related work. Move to skills/rules when stable.
 
+## 2026-06-17
+
+- **Cherry-picking between platform_v5 and platform_v6: kbId contamination.** Cherry-picking commits from v6 into v5 brings v6 kbIds into article frontmatter. The `hyperlinks_mkdocs_to_kb_map.md` file also gets v6 anchor→kbId mappings. Always restore `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md` to v5 after cherry-picking, and run a script to restore all `kbId:` values in `docs/ru/**/*.md` to their v5 originals.
+- **mkdocs_for_kb_import_ru.yml site_url contamination.** The v6 version has `site_url: https://kb.comindware.ru/platform/v6.0/`. Cherry-picking this into v5 silently changes the output URL structure. Always verify `site_url` matches the target branch version after cherry-picking.
+- **toc_depth: 2-3 causes massive HTML churn.** Adding `toc_depth: 2-3` to `mkdocs_for_kb_import_ru.yml` changes the TOC sidebar structure in every generated HTML file (H1–H6 → H2–H3 only). This caused ~66 extra files to show as changed in `for_kb_import_ru/`. Keep v5 defaults unless explicitly required.
+- **Commit phpkb_content/ and phpkb_content_rag/ separately from article changes.** The commit `[#6] chore: publish 122 updated articles to PHPKB, refresh phpkb_content and phpkb_content_rag` mixed article HTML changes with RAG bundle regeneration. This creates unnecessary churn when cherry-picking. Keep article content changes and RAG/PHPKB export updates in separate commits.
+- **git rebase --onto to drop a contaminated commit.** When a cherry-picked commit contains unwanted contamination (e.g., v6 kbIds), use `git rebase --onto <commit-before-bad> <bad-commit> HEAD` to surgically remove it while preserving later commits.
+- **git checkout --theirs for cherry-pick conflicts.** When cherry-picking from v6 to v5 and you want the v6 content for a file, use `git checkout --theirs -- <file>` during conflict resolution. For bulk resolution: `git checkout --theirs -- $(git diff --name-only --diff-filter=U)`.
+- **PowerShell `git checkout --theirs` fails with `StandardErrorEncoding` error.** On Windows PowerShell, `git checkout --theirs -- .` or piping file lists to it can fail with `StandardErrorEncoding is only supported when standard error is redirected`. Workaround: `git checkout --theirs -- .` works directly without piping.
+- **`git diff --cached` shows staged changes, `git diff` shows unstaged.** After `git add`, use `git diff --cached` to verify what will be committed. After `git reset HEAD`, use `git diff` to see working tree changes.
+
 ## 2026-06-09
 
 - PHPKB examples category ID is `909` (used as `--target-category-id` when cloning new example articles). End-to-end publication sequence: clone → kbId in frontmatter → hyperlink map entry → `mkdocs build -f mkdocs_for_kb_import_ru.yml` → `phpkb_update_articles.py` → `phpkb_import_for_rag.py` → `phpkb_ingest.py` → commit+push sibling repo.

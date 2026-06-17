@@ -183,6 +183,17 @@ For H2-H6 generate a concise semantic anchors with H1 anchor as a prefix:
 
 Follow the commit message rules given here: .agents/skills/cmwhelp-commit/SKILL.md
 
+## Cherry-picking between platform versions
+
+When cherry-picking commits from one platform version branch to another (e.g., v6 → v5):
+
+- **Never bring v6 kbIds into v5 articles.** After cherry-picking, restore all `kbId:` values in `docs/ru/**/*.md` to their v5 originals using `git show platform_v5:<file>` as the source of truth.
+- **Restore `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md`** to the target branch version. This file maps article anchors to PHPKB article IDs — v6 mappings will break v5 links.
+- **Verify `mkdocs_for_kb_import_ru.yml` site_url** matches the target branch (e.g., `v5.0/` not `v6.0/`).
+- **Do not cherry-pick `phpkb_content/` or `phpkb_content_rag/` commits** between versions — they contain version-specific exports. Rebuild them locally on the target branch instead.
+- **Avoid `toc_depth` changes** unless explicitly required — they cause massive HTML churn across all generated files.
+- Use `git rebase --onto <before-bad> <bad-commit> HEAD` to surgically drop a contaminated commit while preserving later ones.
+
 ---
 
 ## SELF-EVOLUTION — Documenting Discoveries
