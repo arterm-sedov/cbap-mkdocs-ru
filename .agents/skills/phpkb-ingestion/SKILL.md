@@ -124,14 +124,14 @@ Flags in `phpkb_ingest.py`:
 **V5:**
 
 ```powershell
-.\.venv\Scripts\python.exe phpkb_import_for_rag.py --category-id 798
+.\.venv\Scripts\python.exe phpkb_import_for_rag.py --category-id 798 --article-map .article_id_filename_map_v5.json
 .\.venv\Scripts\python.exe phpkb_ingest.py --folder phpkb_content_rag/798-platform_v5 --output kb.comindware.ru.platform_v5_for_llm_ingestion.md --target-dir kb.comindware.ru/platform/v5.0 --category-id 798
 ```
 
 **V6:**
 
 ```powershell
-.\.venv\Scripts\python.exe phpkb_import_for_rag.py --category-id 896
+.\.venv\Scripts\python.exe phpkb_import_for_rag.py --category-id 896 --article-map .article_id_filename_map_v6.json
 .\.venv\Scripts\python.exe phpkb_ingest.py --folder phpkb_content_rag/896-platform_v6 --output kb.comindware.ru.platform_v6_for_llm_ingestion.md --target-dir kb.comindware.ru/platform/v6.0 --category-id 896
 ```
 
@@ -210,3 +210,6 @@ Use `git status --short` to review changed files under `phpkb_content_rag/`,
 - `phpkb_import_for_rag.py` is read-only against PHPKB (DB read + local file write).
 - `phpkb_ingest.py` only reads the RAG tree and writes the bundle; no DB access.
 - Do not confuse this workflow with `phpkb_import.py` (writes to `phpkb_content/` with MkDocs transforms) or `phpkb_update_articles.py` (writes back to PHPKB).
+- **`phpkb_content/` is git-tracked** — after running `phpkb_import.py`, stage and commit changes under `phpkb_content/` alongside `phpkb_content_rag/` and the root ingestion bundle.
+- **`--article-map` is required** for both `phpkb_import.py` and `phpkb_import_for_rag.py`. Both scripts will error without it. Do not omit `--article-map` in commands or skill examples.
+- **Full import takes 5-10+ minutes** for category 798 (606 articles). Set command timeout ≥600000ms when running via agent tooling.

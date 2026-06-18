@@ -3,6 +3,16 @@
 Session discoveries that haven't yet been migrated to durable skills or rules.
 Review before starting related work. Move to skills/rules when stable.
 
+## 2026-06-18
+
+- **`--article-map` is required for both `phpkb_import.py` and `phpkb_import_for_rag.py`.** The full-refresh examples in `phpkb-ingestion` skill (lines 127, 134) omit `--article-map`, which would cause the script to error. Always pass `--article-map .article_id_filename_map_v{version}.json`.
+- **Import scripts update the article-map file.** After import, new articles get their filename stems added to `.article_id_filename_map_v{version}.json`. This file is git-tracked and should be committed after import.
+- **`phpkb_content/` changes must be committed after `phpkb_import.py`.** Unlike `for_kb_import_ru/` which is the MkDocs build output, `phpkb_content/` is written directly by the import script and is git-tracked. Always `git add phpkb_content/` and commit after running the import.
+- **Two repos, two commits for the ingestion bundle.** `phpkb_ingest.py` copies the bundle to both the root repo (tracked) and `CMW_KB_REPO_PATH/platform/v5.0/` (KB assets repo). Both are separate git repos — each needs its own `git add + commit + push`.
+- **`phpkb_content/` and `phpkb_content_rag/` are generated from PHPKB DB, not from each other.** The RAG import does not read from `phpkb_content/` — it independently connects to PHPKB. One can be regenerated without the other.
+- **Multiple git remotes for cbap-mkdocs-ru.** `git push` sends to all configured origins — all must succeed for the push to complete.
+- **Full import timeout.** A full category-798 import (606 articles) takes 5-10 minutes. Agent tooling needs timeout ≥600000ms for these scripts.
+
 ## 2026-06-17
 
 - **Cherry-picking between platform_v5 and platform_v6: kbId contamination.** Cherry-picking commits from v6 into v5 brings v6 kbIds into article frontmatter. The `hyperlinks_mkdocs_to_kb_map.md` file also gets v6 anchor→kbId mappings. Always restore `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md` to v5 after cherry-picking, and run a script to restore all `kbId:` values in `docs/ru/**/*.md` to their v5 originals.
