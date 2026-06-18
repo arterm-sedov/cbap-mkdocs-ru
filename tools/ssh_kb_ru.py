@@ -909,6 +909,7 @@ def establish_connection_interactive(server_profile: str = None) -> Tuple[mysql.
                 port=server.local_bind_port,
                 database=sql_database,
                 connection_timeout=10,
+                ssl_disabled=True,
             )
             print("MySQL connection established successfully")
             return connection, server
