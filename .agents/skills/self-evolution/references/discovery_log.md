@@ -12,6 +12,8 @@ Review before starting related work. Move to skills/rules when stable.
 - **`phpkb_content/` and `phpkb_content_rag/` are generated from PHPKB DB, not from each other.** The RAG import does not read from `phpkb_content/` — it independently connects to PHPKB. One can be regenerated without the other.
 - **Multiple git remotes for cbap-mkdocs-ru.** `git push` sends to all configured origins — all must succeed for the push to complete.
 - **Full import timeout.** A full category-798 import (606 articles) takes 5-10 minutes. Agent tooling needs timeout ≥600000ms for these scripts.
+- **Empty cherry-pick is not harmful.** If a commit's content already exists on the target branch, `git cherry-pick` reports "empty, possibly due to conflict resolution" — `git cherry-pick --skip` discards nothing.
+- **Skill docs cherry-pick both ways safely.** `.agents/skills/*.md` and discovery_log.md auto-merge between v5/v6 without version-specific contamination.
 
 ## 2026-06-17
 
