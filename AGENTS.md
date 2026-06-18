@@ -187,12 +187,15 @@ Follow the commit message rules given here: .agents/skills/cmwhelp-commit/SKILL.
 
 ## Cherry-picking between platform versions
 
-When cherry-picking commits from one platform version branch to another (e.g., v6 → v5):
+When cherry-picking commits from one platform version branch to another (e.g., v6 → v5 or v5 → v6):
 
 - **Never bring v6 kbIds into v5 articles.** After cherry-picking, restore all `kbId:` values in `docs/ru/**/*.md` to their v5 originals using `git show platform_v5:<file>` as the source of truth.
 - **Keep `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md`** at the target branch version. This file maps article anchors to PHPKB article IDs — v6 mappings will break v5 links.
 - **Verify `mkdocs_for_kb_import_ru.yml` site_url** matches the target branch (e.g., `v5.0/` not `v6.0/`).
-- **Do not cherry-pick `phpkb_content/` or `phpkb_content_rag/` commits** between versions — they contain version-specific exports. Rebuild them locally on the target branch instead.
+- **Do not cherry-pick `phpkb_content/<current-version>/` or `phpkb_content_rag/<current-version>/` commits** between versions — they contain version-specific exports (e.g., v6 → v5 brings v6 kbIds into v5 article copies). Rebuild them locally on the target branch instead.
+- **It IS safe to cherry-pick `phpkb_content/<other-version>/` and `phpkb_content_rag/<other-version>/`** as cross-version artifacts (e.g., v5 content updates → v6's `phpkb_content/798-platform_v5/`). Both branches host all published versions.
+- **Skill and workflow files (`.agents/skills/*`, `AGENTS.md`, `discovery_log.md`) cherry-pick safely both ways.** They have no version-specific content. Auto-merge is reliable.
+- **Empty cherry-pick is not harmful.** If a commit's changes already exist on the target branch, `git cherry-pick` reports "empty" — use `git cherry-pick --skip`.
 - **Avoid `toc_depth` changes** unless explicitly required — they cause massive HTML churn across all generated files.
 - Use `git rebase --onto <before-bad> <bad-commit> HEAD` to surgically drop a contaminated commit while preserving later ones.
 
