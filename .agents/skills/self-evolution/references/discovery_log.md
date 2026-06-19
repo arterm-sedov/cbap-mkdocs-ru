@@ -26,7 +26,6 @@ Review before starting related work. Move to skills/rules when stable.
 - **PowerShell `git checkout --theirs` fails with `StandardErrorEncoding` error.** On Windows PowerShell, `git checkout --theirs -- .` or piping file lists to it can fail with `StandardErrorEncoding is only supported when standard error is redirected`. Workaround: `git checkout --theirs -- .` works directly without piping.
 - **`git diff --cached` shows staged changes, `git diff` shows unstaged.** After `git add`, use `git diff --cached` to verify what will be committed. After `git reset HEAD`, use `git diff` to see working tree changes.
 
->>>>>>> 35268074a ([#10622029] Document session discoveries: --article-map requirement, dual-repo commit, phpkb_content is git-tracked, import timeout)
 ## 2026-06-09
 
 - PHPKB examples category ID is `909` (used as `--target-category-id` when cloning new example articles). End-to-end publication sequence: clone → kbId in frontmatter → hyperlink map entry → `mkdocs build -f mkdocs_for_kb_import_ru.yml` → `phpkb_update_articles.py` → `phpkb_import_for_rag.py` → `phpkb_ingest.py` → commit+push sibling repo.
@@ -45,3 +44,14 @@ Review before starting related work. Move to skills/rules when stable.
 ## 2026-06-17
 
 - Zero git churn in `phpkb_content_rag/` after an import means the source articles are already current — that's a good control.
+
+## 2026-06-19
+
+- **SSH key auth setup for repo tunnel scripts.** Each dev generates `id_ed25519_{username}`, copies pubkey to `~/.ssh/authorized_keys` on both `kb.comindware.ru:8223` and `kb.cmwlab.com:22`. Add `IdentityFile` to `~/.ssh/config` (use absolute path — Windows OpenSSH doesn't support `~` in `IdentityFile`). The `ssh_kb_ru.py` `_detect_ssh_keys()` reads `IdentityFile` from SSH config, so config-based key setup works automatically.
+- **Python keyring for MySQL passwords.** `ssh_kb_ru.py` uses `keyring` library (service `ssh_kb_ru`, key format `ssh_kb_ru:{profile}:sql_password`). Each user stores their own MySQL password via `keyring.set_password("ssh_kb_ru", "ssh_kb_ru:cmw:sql_password", "their_pw")`. On Windows the backend is `WinVaultKeyring` (Windows Credential Manager).
+- **`ssl_disabled` for MySQL is now configurable per `.env`.** Added `CMW_SQL_SSL_DISABLED=true/false` and `CMWLAB_SQL_SSL_DISABLED=true/false`. Default is `false` (SSL on). Users with `mysql_native_password` auth plugin can set `true`. Users with `caching_sha2_password` need SSL (`false` or unset).
+- **MariaDB 10.3 `ALTER USER ... IDENTIFIED WITH mysql_native_password` (without `BY`) resets the password.** Use only with `BY 'password'` to preserve control. To change plugin without touching password on MariaDB 10.3, use `UPDATE mysql.user SET plugin='mysql_native_password' WHERE ...` via root/sudo access.
+- **`auth_socket` plugin users cannot authenticate through SSH tunnel (TCP).** Must change to `mysql_native_password` with a password.
+- **`sudo mysql` requires TTY on both servers.** Workaround: `echo 'password' | sudo -S mysql -e "SQL"` via paramiko `invoke_shell()`.
+- **Keychain key format reference:** `ssh_kb_ru:{cmw|cmwlab}:{ssh_password|sql_password}`. Two profiles: `cmw` (comindware.ru) and `cmwlab` (cmwlab.com).
+- **`ssh_kb_ru.py` doesn't use system SSH config for paramiko keys by default.** Must pass `key_filename` explicitly or rely on `IdentityFile` from `_parse_ssh_config()` → `_detect_ssh_keys()` flow.

@@ -342,6 +342,7 @@ def _load_server_credentials(server_profile: str = None) -> dict:
         "sql_username": f"{prefix}SQL_USERNAME",
         "sql_password": f"{prefix}SQL_PASSWORD",
         "sql_database": f"{prefix}SQL_DATABASE",
+        "sql_ssl_disabled": f"{prefix}SQL_SSL_DISABLED",
     }
     for key, env_var in env_var_map.items():
         value = os.getenv(env_var)
@@ -909,7 +910,7 @@ def establish_connection_interactive(server_profile: str = None) -> Tuple[mysql.
                 port=server.local_bind_port,
                 database=sql_database,
                 connection_timeout=10,
-                ssl_disabled=True,
+                ssl_disabled=server_credentials.get("sql_ssl_disabled", "false").lower() in ("true", "1", "yes"),
             )
             print("MySQL connection established successfully")
             return connection, server
