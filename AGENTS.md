@@ -187,12 +187,25 @@ Follow the commit message rules given here: .agents/skills/cmwhelp-commit/SKILL.
 
 When cherry-picking commits from one platform version branch to another (e.g., v6 → v5 or v5 → v6):
 
+### Commit separation pattern
+
+Structure changes into **three separate commits** to minimise noise during cross-version cherry-picking:
+
+| # | What | Files | Cherry-pick safe? |
+|---|------|-------|-------------------|
+| 1 | Source article | `docs/ru/**/*.md` | ✅ Yes — pure content |
+| 2 | Generated HTML | `for_kb_import_ru/**/*.html` | ✅ Yes — matches source article |
+| 3 | Re-imported artifacts | `phpkb_content/<version>/**/*`, `phpkb_content_rag/<version>/**/*`, `kb.comindware.ru.platform_v*_for_llm_ingestion.md` | ❌ No — rebuild locally on target branch |
+
+**Guidelines:**
+
+- **Commit 1 + 2** together form a minimal cherry-pickable unit for content changes.
+- **Commit 3** is version-specific noise. After cherry-picking commits 1-2 to the target branch, run the full regeneration cycle (mkdocs build → phpkb_update → phpkb_import → phpkb_ingest) on that branch to produce correct artifacts.
 - **Never bring v6 kbIds into v5 articles.** After cherry-picking, restore all `kbId:` values in `docs/ru/**/*.md` to their v5 originals using `git show platform_v5:<file>` as the source of truth.
 - **Keep `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md`** at the target branch version. This file maps article anchors to PHPKB article IDs — v6 mappings will break v5 links.
 - **Verify `mkdocs_for_kb_import_ru.yml` site_url** matches the target branch (e.g., `v5.0/` not `v6.0/`).
-- **Do not cherry-pick `phpkb_content/<current-version>/` or `phpkb_content_rag/<current-version>/` commits** between versions — they contain version-specific exports (e.g., v6 → v5 brings v6 kbIds into v5 article copies). Rebuild them locally on the target branch instead.
-- **It IS safe to cherry-pick `phpkb_content/<other-version>/` and `phpkb_content_rag/<other-version>/`** as cross-version artifacts (e.g., v5 content updates → v6's `phpkb_content/798-platform_v5/`). Both branches host all published versions.
-- **Skill and workflow files (`.agents/skills/*`, `AGENTS.md`, `discovery_log.md`) cherry-pick safely both ways.** They have no version-specific content. Auto-merge is reliable.
+- **Cross-version artifacts are safe** — `phpkb_content/<other-version>/` and `phpkb_content_rag/<other-version>/` (e.g., v5 content in v6's `phpkb_content/798-platform_v5/`) CAN be cherry-picked both ways. Both branches host all published versions, so these are not version-specific.
+- **Skill and workflow files** (`.agents/skills/*`, `AGENTS.md`, `discovery_log.md`) cherry-pick safely both ways. They have no version-specific content. Auto-merge is reliable.
 - **Empty cherry-pick is not harmful.** If a commit's changes already exist on the target branch, `git cherry-pick` reports "empty" — use `git cherry-pick --skip`.
 - **Avoid `toc_depth` changes** unless explicitly required — they cause massive HTML churn across all generated files.
 - Use `git rebase --onto <before-bad> <bad-commit> HEAD` to surgically drop a contaminated commit while preserving later ones.
