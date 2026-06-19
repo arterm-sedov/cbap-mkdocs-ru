@@ -11,12 +11,13 @@ nav:
     - index.md
     - product_description.md
     - general/glossary.md
+    - general/platform_features.md
+    - general/low_code_graph_db.md
+    - general/platform_life_cycle.md
+    - general/bpm_system_intro.md
     - Обзор версий:
       - general/changelog/changelog.md
-      - general/changelog/release_notes_5.0.20251231.md
-      - general/changelog/release_notes_5.0.20251010.md
-      - general/changelog/release_notes_5.0.13334.md
-      - general/changelog/release_notes_5.0.md
+      - general/changelog/release_notes_6.0.md
   - Использование ПО:
     - using_the_system/index.md
     - using_the_system/interface_use.md
@@ -104,6 +105,7 @@ nav:
         - Приложения: /business_apps/
         - Шаблоны: /business_apps/templates/
         - Диаграммы: /business_apps/diagrams/
+        - ИИ: /business_apps/ai/
         - Разделы навигации: /business_apps/navigation_sections/
         - administration/architecture/functions.md
       - Аккаунты и группы:
@@ -170,6 +172,8 @@ nav:
           - administration/connections_communication_routes/sql_connections/sql_receive_connection.md
         - Подключения к шинам сообщений:
           - administration/connections_communication_routes/message_queue_connections/kafka_connection.md
+          - administration/connections_communication_routes/message_queue_connections/adapter_data_import.md
+          - administration/connections_communication_routes/message_queue_connections/adapter_data_export.md
         - Пользовательские подключения:
           - administration/connections_communication_routes/custom_connections/esphere_receive_configure.md
           - administration/connections_communication_routes/custom_connections/esphere_send_configure.md
@@ -290,6 +294,8 @@ nav:
         - business_apps/templates/export_templates/export_template_button_configure.md
         - business_apps/templates/export_templates/export_template_file_example.md
         - business_apps/templates/export_templates/export_template_formula_format_values.md
+        - business_apps/templates/export_templates/export_template_csharp_configure.md
+        - business_apps/templates/export_templates/export_template_csharp_collection_download.md
     - business_apps/roles_in_application.md
     - Панель навигации. Настройка:
       - business_apps/navigation_sections/navigation_sections_setup.md
@@ -307,6 +313,8 @@ nav:
       - business_apps/scenarios/index.md
       - business_apps/scenarios/scenario_elements.md
       - business_apps/scenarios/scenario_variables.md
+    - Работа с ИИ:
+      - business_apps/ai/ai_features_guide.md
     - Вычисления и программирование:
       - business_apps/expressions/expression_intro.md
       - business_apps/expressions/expression_debug.md
@@ -315,6 +323,7 @@ nav:
       - Руководство по формулам: 
         - developer_guide/formulas/formula_guide.md
         - business_apps/expressions/expression_editor/formula_editor/index.md    
+        - business_apps/expressions/expression_editor/formula_editor/attribute_system_names.md
         - developer_guide/formulas/formula_reference.md
       - Руководство по N3: 
         - developer_guide/n3/n3_guide.md
@@ -349,64 +358,157 @@ nav:
       - developer_guide/api/api_system_core.md
       - developer_guide/api/api_solution.md
       - developer_guide/api/api_web.md
-    - Практические примеры:
-      - examples/creating_gantt_chart.md
-      - examples/using_gantt_chart.md
+      - developer_guide/api/integrations_toc.md
+    - N3. Вычисления и сравнения:
+      - examples/assign_task_group_example.md
+      - examples/calculate_account_template_accounts.md
+      - examples/calculate_accounts_conditions.md
+      - examples/calculate_attribute_account_template.md
+      - examples/calculate_date_attribute_elements.md
+      - examples/calculate_dept_manager.md
+      - examples/calculate_group_accounts.md
+      - examples/calculate_group_members.md
+      - examples/calculate_group_subgroup_members.md
+      - examples/calculate_last_task_assignee.md
+      - examples/calculate_scenario_object.md
+      - examples/calculate_scenario_value.md
+      - examples/calculate_substitution_info.md
+      - examples/calculate_task_object_value.md
+      - examples/check_account_group.md
+      - examples/example_n3_account_attributes_compare.md
+      - examples/example_n3_button_local_variable.md
+      - examples/round_decimal.md
+    - N3. Активные задачи и сценарии:
+      - examples/n3_calculate_active_task_accounts.md
+      - examples/n3_calculate_active_task_assignee.md
+      - examples/n3_filter_active_tasks.md
+      - examples/n3_task_list_custom.md
+      - examples/n3_periodic_task_notifications.md
+      - examples/task_reassign.md
+      - examples/task_hyperlink_n3_formula.md
+      - examples/scenario_verify_data.md
+    - N3. Запросы и фильтрация:
+      - examples/calculate_child_records.md
+      - examples/calculate_collection_last_update_date.md
+      - examples/calculate_collection_sum.md
+      - examples/calculate_objects_condition.md
+      - examples/collection_last_record.md
+      - examples/download_all_documents.md
+      - examples/example_n3_list_by_creator_filter.md
+      - examples/filter_date_today.md
+      - examples/filter_process_templates_tasks.md
+      - examples/filter_records_param.md
+      - examples/restrain_child_records.md
+      - examples/show_field_record_attribute.md
+      - examples/n3_collection_join_filter.md
+      - examples/n3_collection_select_conditional.md
+      - examples/n3_collection_join_string.md
+      - examples/n3_collection_join_filter_hierarchy.md
+      - examples/n3_collection_hierarchy_recursive_select.md
+      - examples/n3_collection_get_selected_ids.md
+      - examples/n3_attribute_get_value_by_system_name.md
+    - Формулы. Вычисления значений:
+      - examples/assign_project_manager.md
+      - examples/attr_value_color.md
+      - examples/attribute_date_time_display_config.md
+      - examples/calculate_account_photo.md
+      - examples/calculate_group_subgroup_accounts.md
+      - examples/calculate_notify_text.md
+      - examples/calculate_task_deadline.md
+      - examples/calculated_attribute_formula.md
+      - examples/check_field_empty_status.md
+      - examples/combine_values.md
+      - examples/example_field_filter.md
+      - examples/example_formula_condition_set_value.md
+      - examples/example_formula_group_account_calculate.md
+      - examples/filter_empty_records.md
+      - examples/from_subquery_example.md
+      - examples/holiday_calendar.md
+      - examples/show_field_for_account_group.md
+      - examples/attribute_enum_calculate_current_value.md
+      - examples/attribute_enum_calculate_registry.md
+      - examples/hyperlink_calculate_formula.md
+      - examples/count_records_no_archive.md
+      - examples/list_color_indicator_formula.md
+    - Формулы. Форматирование и проверки:
+      - examples/form_dynamic_display.md
+      - examples/form_rule_hide_field.md
+      - examples/restrain_checkbox.md
+      - examples/restrain_cyrillic.md
+      - examples/restrain_execution_time.md
+      - examples/restrain_field_digits.md
+      - examples/restrain_spaces.md
+    - Атрибуты. Настройка отображения и фильтрации:
+      - examples/attr_record_account_filter.md
+      - examples/attr_record_filter.md
+      - examples/text_attribute_mask.md
+      - examples/attribute_text_masks.md
+      - examples/attribute_text_substring_search.md
+      - examples/attribute_enum_value_calculation.md
+      - examples/attribute_enum_value_filter.md
+      - examples/attribute_date_time_value_format.md
+    - Кнопки. Условия видимости:
+      - examples/button_display_formula.md
+      - examples/restrain_button_empty_assignee.md
+      - examples/show_button_empty_assignee.md
+      - examples/show_button_no_process.md
+      - examples/show_button_task_owner.md
+      - examples/script_using_local_variable.md
+      - examples/task_accept_button_csharp.md
+      - examples/task_open_related_button_csharp.md
+    - Задачи и сценарии:
+      - examples/telegram_send_notification.md
+    - Эл. почта и документы:
+      - examples/document_digital_signature.md
+      - examples/mail_text_template.md
+      - examples/send_mail_notify.md
       - examples/process_email_configure.md
-      - examples/email_parse_process_id_from_subject.md
-      - examples/email_parse_address_before_at_sign.md
-      - examples/autonumerating_records.md
-      - examples/autonumerating_related_records.md
       - examples/document_clone_scenario_n3.md
       - examples/document_download_archive_csharp.md
       - examples/document_download_archive_related_record_csharp.md
       - examples/document_download_to_server_csharp.md
       - examples/document_get_uri.md
-      - examples/attribute_text_masks.md
-      - examples/attribute_text_substring_search.md
-      - examples/attribute_enum_value_calculation.md
-      - examples/attribute_enum_value_filter.md
-      - examples/attribute_enum_calculate_current_value.md
-      - examples/attribute_enum_calculate_registry.md
-      - examples/attribute_date_time_value_format.md
-      - examples/script_using_local_variable.md
-      - examples/scenario_verify_data.md
-      - examples/multilingual_app.md
-      - examples/n3_calculate_active_task_accounts.md
-      - examples/n3_calculate_active_task_assignee.md
-      - examples/n3_collection_join_filter.md
-      - examples/n3_filter_active_tasks.md
-      - examples/n3_task_list_custom.md
-      - examples/n3_periodic_task_notifications.md
-      - examples/n3_collection_select_conditional.md
-      - examples/n3_collection_join_string.md
-      - examples/n3_collection_join_filter.md
-      - examples/n3_collection_join_filter_hierarchy.md
-      - examples/n3_collection_hierarchy_recursive_select.md
+      - examples/email_parse_address_before_at_sign.md
+      - examples/email_parse_process_id_from_subject.md
+      - examples/image_gallery_on_form.md
+    - Интеграции. API и внешние системы:
+      - examples/api_call_config.md
+      - examples/call_platform_api.md
+      - examples/example_telegram_bot.md
+      - examples/import_excel.md
+      - examples/import_excel_data.md
+      - examples/qr_code_csharp_button.md
+      - examples/transfer_solution_settings.md
+      - examples/template_reference_data_api.md
+      - examples/csharp_table_download_selection.md
+      - examples/csharp_tax_service_integrate.md
+      - examples/import_server_csv_csharp.md
       - administration/connections_communication_routes/rest_odata_connections/1c_integrations.md
       - administration/connections_communication_routes/rest_odata_connections/send_http_example.md
       - administration/connections_communication_routes/rest_odata_connections/send_http_example_csharp.md
       - administration/connections_communication_routes/rest_odata_connections/http_send_post.md
       - administration/connections_communication_routes/rest_odata_connections/http_send_file.md
-      - administration/connections_communication_routes/rest_odata_connections/jpath_example.md      
+      - administration/connections_communication_routes/rest_odata_connections/jpath_example.md
       - administration/connections_communication_routes/rest_odata_connections/http_receive_file.md
-      - administration/connections_communication_routes/rest_odata_connections/receive_http_example_csharp.md
-      - examples/task_accept_button_csharp.md
-      - examples/task_open_related_button_csharp.md
-      - examples/task_reassign.md
-      - examples/task_hyperlink_n3_formula.md
-      - examples/n3_process_hyperlink_calculate.md
-      - examples/hyperlink_calculate_formula.md
-      - examples/template_reference_data_api.md
-      - examples/n3_collection_get_selected_ids.md
-      - examples/n3_attribute_get_value_by_system_name.md
-      - examples/csharp_table_download_selection.md
-      - examples/csharp_tax_service_integrate.md
-      - examples/process_end_button.md
-      - examples/count_records_no_archive.md
+    - Шаблоны записей. Связи и коллекции:
+      - examples/record_many_many.md
+      - examples/autonumerating_records.md
+      - examples/autonumerating_related_records.md
+    - Процессы:
+      - examples/business_approval_process.md
+      - examples/change_process_real_time.md
+      - examples/chevron_color_rules.md
+      - examples/filter_process_errors.md
       - examples/chevron_stage_render.md
-      - examples/list_color_indicator_formula.md
-      - examples/image_gallery_on_form.md
+      - examples/process_end_button.md
+      - examples/n3_process_hyperlink_calculate.md
+    - Прочее:
+      - examples/attribute_drawing_file_import.md
+      - examples/html_supported_tags.md
+      - examples/yandex_maps_iframe.md
+      - examples/multilingual_app.md
+      - examples/creating_gantt_chart.md
+      - examples/using_gantt_chart.md
   - Моделирование корпоративной архитектуры:
     - architect/architect_desktop.md
     - architect/process_architecture_modeling/index.md
@@ -470,6 +572,7 @@ nav:
     - troubleshooting/record_field_values_not_shown.md
 
 exclude_docs: |
+  general/changelog/release_notes_5.0*.md
   administration/connections_communication_routes/authentication/wsfederation_connection.md
   administration/deploy/windows/instance_stop_IIS.md
   administration/deploy/windows/instance_start_IIS.md
@@ -497,7 +600,6 @@ exclude_docs: |
   tutorials/tutorial_architect/taxonomies/**
   **/toc.md
   guides_toc.md
-  **/[0-9]*-*.md
   administration/connections_communication_routes/system_connections/elasticsearch_connection.md
   administration/connections_communication_routes/system_connections/notifications/system_notifications.md
   administration/deploy/toc_deploy_auxiliary_software.md
