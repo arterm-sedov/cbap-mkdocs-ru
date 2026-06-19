@@ -19,7 +19,7 @@ Use this skill when answering questions about:
 ### Common C# Script Examples
 - `docs/ru/developer_guide/csharp/5000-start_process_by_records.md` — Start process for list records
 - `docs/ru/developer_guide/csharp/5001-create_entry_transfer_data.md` — Create record with data transfer
-- `docs/ru/developer_guide/csharp/5004-change_task_status.md` — Change status and complete task
+- `docs/ru/developer_guide/csharp/change_task_status.md` — Change status and complete task
 - `docs/ru/developer_guide/csharp/5005-button_change_variable.md` — Modify reusable variable
 - `docs/ru/developer_guide/csharp/5007-example_csharp_object_copy.md` — Clone/clone object
 - `docs/ru/developer_guide/csharp/5009-goto_showcase_record.md` — Navigate to record
