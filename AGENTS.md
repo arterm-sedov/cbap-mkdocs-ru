@@ -202,6 +202,7 @@ Structure changes into **three separate commits** to minimise noise during cross
 - **Commit 1 + 2** together form a minimal cherry-pickable unit for content changes.
 - **Commit 3** is version-specific noise. After cherry-picking commits 1-2 to the target branch, run the full regeneration cycle (mkdocs build → phpkb_update → phpkb_import → phpkb_ingest) on that branch to produce correct artifacts.
 - **Never bring v6 kbIds into v5 articles.** After cherry-picking, restore all `kbId:` values in `docs/ru/**/*.md` to their v5 originals using `git show platform_v5:<file>` as the source of truth.
+- **Cherry-pick is unsafe if kbId changed or a new article was created.** PHPKB article IDs differ between v6, v5, v4.7, v3.5 etc. — same content has different `kbId:` in each version. Always verify `kbId:` after cherry-pick.
 - **Keep `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md`** at the target branch version. This file maps article anchors to PHPKB article IDs — v6 mappings will break v5 links.
 - **Verify `mkdocs_for_kb_import_ru.yml` site_url** matches the target branch (e.g., `v5.0/` not `v6.0/`).
 - **Cross-version artifacts are safe** — `phpkb_content/<other-version>/` and `phpkb_content_rag/<other-version>/` (e.g., v5 content in v6's `phpkb_content/798-platform_v5/`) CAN be cherry-picked both ways. Both branches host all published versions, so these are not version-specific.
