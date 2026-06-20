@@ -26,7 +26,7 @@ public class IMG
 public class TBL_1
 {
     public string Faktor { get; set; }
-    public string Parametr { get; set; }
+    public string Parameter { get; set; }
     public string Value { get; set; }
 }
 public class TBL_2
