@@ -49,7 +49,7 @@ hide: tags
 
 - [Атрибут типа «Текст»][attribute_text]
 - [Язык формул][formula_guide]
-- [Список функций языка формул Comindware][formula_function_list]
+- [Список функций языка формул **{{ productName }}**][formula_function_list]
 
 </div>
 

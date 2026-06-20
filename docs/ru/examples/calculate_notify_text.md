@@ -111,7 +111,7 @@ FORMAT(
 
 - [Уведомления о задачах. Настройка текста и отправки эл.&nbsp;почтой][task_notifications]
 - [Язык формул][formula_guide]
-- [Список функций языка формул Comindware][formula_function_list]
+- [Список функций языка формул **{{ productName }}**][formula_function_list]
 - [Атрибут типа «Текст»][attribute_text]
 
 </div>
