@@ -9,7 +9,7 @@
       </h2>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<a class="md-nav__link mkdocs_imported_link" href="#process_email_configure_intro">
 <span class="md-ellipsis">
       
         Введение
@@ -18,16 +18,16 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#сценарии-обработки-эл-почты-в-процессе">
+<a class="md-nav__link mkdocs_imported_link" href="#process_email_configure_scenarios">
 <span class="md-ellipsis">
       
-        Сценарии обработки эл. почты в процессе
+        Сценарии обработки эл. почты в процессе
       
     </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#прикладная-задача">
+<a class="md-nav__link mkdocs_imported_link" href="#process_email_configure_task">
 <span class="md-ellipsis">
       
         Прикладная задача
@@ -89,7 +89,7 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#настройка-подключений">
+<a class="md-nav__link mkdocs_imported_link" href="#process_email_configure_connections">
 <span class="md-ellipsis">
       
         Настройка подключений
@@ -120,7 +120,7 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#настройка-путей-передачи-данных">
+<a class="md-nav__link mkdocs_imported_link" href="#process_email_configure_routes">
 <span class="md-ellipsis">
       
         Настройка путей передачи данных
@@ -267,7 +267,7 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link mkdocs_imported_link" href="#тестирование-процесса-согласование-отпуска">
+<a class="md-nav__link mkdocs_imported_link" href="#process_email_configure_test">
 <span class="md-ellipsis">
       
         Тестирование процесса «Согласование отпуска»
@@ -289,7 +289,7 @@
 </nav>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h2 id="введение">Введение</h2>
+<h2 id="process_email_configure_intro">Введение</h2>
 <p><strong>Comindware Platform</strong> может отправлять и принимать электронные письма, а также передавать сообщения между процессами.</p>
 <p>Здесь представлены инструкции по настройке обмена данными посредством электронных писем и межпроцессного взаимодействия на примере процесса согласования отпуска:</p>
 <ul>
@@ -297,7 +297,7 @@
 <li>настройка процессов согласования отпуска и обработки эл. писем;</li>
 <li>настройка событий отправки и получения сообщений на диаграммах процессов.</li>
 </ul>
-<h2 id="сценарии-обработки-эл-почты-в-процессе">Сценарии обработки эл. почты в процессе</h2>
+<h2 id="process_email_configure_scenarios">Сценарии обработки эл. почты в процессе</h2>
 <p>В зависимости от бизнес-требований можно настроить различные сценарии обработки эл. почты:</p>
 <ul>
 <li><strong>Отправка почты:</strong><ul>
@@ -340,7 +340,7 @@
 <p>Это особенно актуально в случае использования одного адреса для обработки различных писем, но рекомендуется и в случае использования специализированных адресов с целью повышения безопасности.</p>
 <p><img alt="Пример технического процесса по обработке входящих писем" src="https://kb.comindware.ru/assets/incomingmail1.png"/></p>
 </div>
-<h2 class="pageBreakBefore" id="прикладная-задача">Прикладная задача</h2>
+<h2 class="pageBreakBefore" id="process_email_configure_task">Прикладная задача</h2>
 <p>Требуется настроить процесс согласования <em>Руководителем</em> заявлений на отпуск так, чтобы <em>Руководитель</em> мог согласовать отпуск или отказать в отпуске с помощью кнопки в эл. письме с заявлением, не покидая почтового ящика и не выполняя вход в <strong>Comindware Platform</strong>.</p>
 <p>Настроим процесс <em>«Согласование отпуска»</em> из следующих шагов:</p>
 <ol class="colored_numbers_list">
@@ -598,7 +598,7 @@
 <div class="highlight"><code><pre><span></span><code><span class="n">IF</span><span class="p">(</span></code> <br/><code><span class="w">   </span><span class="n">MATCHES</span><span class="p">(</span><span class="err">$</span><span class="n">ResponseEmailSubject</span><span class="p">,</span></code> <br/><code><span class="w">   </span><span class="s">".*Отпуск согласован\. Заявление № \[[0-9]+\].*"</span><span class="p">),</span></code> <br/><code><span class="w">   </span><span class="k">true</span><span class="p">,</span></code> <br/><code><span class="w">   </span><span class="k">false</span></code> <br/><code><span class="p">)</span></code> <br/></pre></code></div>
 <ul>
 <li><code>IF()</code> — эта функция принимает логическое выражение и два аргумента любого типа. Функция возвращает второй аргумент, если выражение возвращает <code>true</code>. В противном случае функция возвращает третий аргумент.</li>
-<li><code>MATCHES()</code> — эта функция принимает строку с темой письма в атрибуте <code>$ResponseEmailSubject</code> и регулярное выражение <code>.*Отпуск согласован\. Заявление № \[[0-9]+\].*</code>, ищет в строке регулярное выражение и возвращает <code>true</code>, если выражение найдено. В противном случае функция возвращает <code>false</code>.</li>
+<li><code>MATCHES()</code> — эта функция принимает строку с темой письма в атрибуте <code>$ResponseEmailSubject</code> и регулярное выражение <code>._Отпуск согласован\. Заявление № \[[0-9]+\]._</code>, ищет в строке регулярное выражение и возвращает <code>true</code>, если выражение найдено. В противном случае функция возвращает <code>false</code>.</li>
 <li><code>$</code> — ссылка на текущую запись в шаблоне <em>«Решения руководителя»</em>.</li>
 <li><code>ResponseEmailSubject</code> — атрибут <em>«Тема письма с ответом»</em>.</li>
 <li>Данная формула возвращает <code>true</code>, если тема письма содержит строку «<code>Отпуск согласован. Заявление № [X]</code>», где <code>X</code> — номер заявления, состоящий из произвольного количества цифр. В противном случае формула возвращает <code>false</code>.</li>
@@ -610,7 +610,7 @@
 <div class="notice notice-success">
 <p class="admonition-title">Синтаксис регулярного выражения</p>
 <ul>
-<li><code>.*</code> — ноль или более любых символов. Точка <code>.</code> обозначает любой одиночный символ, а звездочка <code>*</code> обозначает, что таких символов может быть ноль или больше. Этот фрагмент позволяет игнорировать любые символы, которые могут предшествовать искомой строке.</li>
+<li><code>._</code> — ноль или более любых символов. Точка <code>.</code> обозначает любой одиночный символ, а звездочка <code>_</code> обозначает, что таких символов может быть ноль или больше. Этот фрагмент позволяет игнорировать любые символы, которые могут предшествовать искомой строке.</li>
 <li><code>Отпуск согласован\. Заявление №</code> — фиксированная часть искомой строки. Регулярное выражение ищет именно этот текст в указанной последовательности <strong>с точным совпадением прописных и строчных букв</strong>.<ul>
 <li><code>\.</code> — экранированная точка. Точка в регулярном выражении означает любой одиночный символ, поэтому для поиска самой точки её необходимо экранировать с помощью косой черты <code>\</code>.</li>
 </ul>
@@ -634,7 +634,7 @@
 </ul>
 </div>
 </div>
-<h2 class="pageBreakBefore" id="настройка-подключений">Настройка подключений</h2>
+<h2 class="pageBreakBefore" id="process_email_configure_connections">Настройка подключений</h2>
 <h3 id="email_receive_process">Отправка эл. почты из процесса</h3>
 <p>Настроим подключение к SMTP-серверу для отправки эл. писем от имени <em>Отдела кадров</em>.</p>
 <ol class="colored_numbers_list">
@@ -688,7 +688,7 @@
 </ul>
 </li>
 </ol>
-<h2 class="pageBreakBefore" id="настройка-путей-передачи-данных">Настройка путей передачи данных</h2>
+<h2 class="pageBreakBefore" id="process_email_configure_routes">Настройка путей передачи данных</h2>
 <h3 id="notification_to_manager">Отправка уведомления Руководителю</h3>
 <div class="notice notice-warning">
 <p class="admonition-title">Бизнес-логика</p>
@@ -1717,7 +1717,7 @@
 </ul>
 </li>
 </ol>
-<h2 class="pageBreakBefore" id="тестирование-процесса-согласование-отпуска">Тестирование процесса «Согласование отпуска»</h2>
+<h2 class="pageBreakBefore" id="process_email_configure_test">Тестирование процесса «Согласование отпуска»</h2>
 <ol class="colored_numbers_list">
 <li>Откройте шаблон записи <em>«Согласование отпуска»</em>.</li>
 <li>На вкладке «<strong>Свойства</strong>» нажмите кнопку «<strong>Перейти к экземплярам</strong>».</li>
@@ -1732,7 +1732,7 @@
 <figure class="screenshot_with_caption" markdown=""><img alt="Письмо Руководителю с заявлением на отпуск и кнопками для согласования и отказа в отпуске" src="/platform/v6.0/examples/img/process_email_configure_manager_email_with_buttons.png"/><figcaption class="caption">Письмо Руководителю с заявлением на отпуск и кнопками для согласования и отказа в отпуске</figcaption></figure>
 </li>
 <li>
-<p>Нажмите кнопку «<em>Согласовать отпуск</em>» в письме.</p>
+<p>Нажмите кнопку <em>«Согласовать отпуск»</em> в письме.</p>
 </li>
 <li>
 <p>В почтовом клиенте будет создано новое письмо, показанное на следующей иллюстрации.</p>
