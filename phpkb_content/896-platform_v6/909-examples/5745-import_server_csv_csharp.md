@@ -2,7 +2,7 @@
 title: 'Импорт данных из CSV-файла на сервере'
 kbId: 5745
 url: 'https://kb.comindware.ru/article.php?id=5745'
-updated: '2026-06-17 14:09:58'
+updated: '2026-06-20 22:32:44'
 ---
 
 # Импорт данных из CSV-файла на сервере
@@ -20,7 +20,7 @@ updated: '2026-06-17 14:09:58'
 Альтернативные способы импорта
 
 - Встроенный [импорт данных из файлов XLSX и CSV](https://kb.comindware.ru/article.php?id=4802) через интерфейс шаблона — для разовых загрузок через веб-интерфейс.
-- [Адаптер импорта данных][adapter\_data\_import] через очереди сообщений — для автоматического приёма XML/JSON из внешних систем.
+- [Адаптер импорта данных](https://kb.comindware.ru/article.php?id=4672) через очереди сообщений — для автоматического приёма XML/JSON из внешних систем.
 
 ## Прикладная задача
 
@@ -279,7 +279,7 @@ class Script
 --8<-- "related_topics_heading.md"
 
 - *[Импорт данных в шаблон](https://kb.comindware.ru/article.php?id=4802)*
-- *[Адаптер импорта данных][adapter\_data\_import]*
+- *[Адаптер импорта данных](https://kb.comindware.ru/article.php?id=4672)*
 - *[Написание скриптов на языке C#](https://kb.comindware.ru/article.php?id=4864)*
 - *[HTTP-запросы POST. Отправка JSON/XML из сценария с помощью C#](https://kb.comindware.ru/article.php?id=5141)*
 - *[Подключения для приёма сообщений](https://kb.comindware.ru/article.php?id=4695)*

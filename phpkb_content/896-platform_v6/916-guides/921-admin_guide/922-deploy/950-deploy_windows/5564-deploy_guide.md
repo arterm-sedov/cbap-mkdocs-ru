@@ -2,7 +2,7 @@
 title: 'Установка, запуск, инициализация и остановка ПО в Windows'
 kbId: 5564
 url: 'https://kb.comindware.ru/article.php?id=5564'
-updated: '2025-10-13 17:05:49'
+updated: '2026-06-20 22:49:47'
 ---
 
 # Установка, запуск, инициализация и остановка ПО в Windows
@@ -95,7 +95,7 @@ updated: '2025-10-13 17:05:49'
 
 - `<instanceName>` — имя экземпляра ПО;
 - `<portNumber>` — номер порта;
-- `<versionNumber>` — номер версии ПО вида `X.X.XXXX.X` (например: `6.0.1234.0`);
+- `<versionNumber>` — номер версии ПО вида `X.X.XXXX.X` (например: `5.0.1234.0`);
 - `<prerequisitesDistPath>` — путь к распакованному дистрибутиву вспомогательного ПО;
 - `<distPath>` — путь к распакованному дистрибутиву ПО **{{ productName }}**.
 
@@ -439,12 +439,12 @@ updated: '2025-10-13 17:05:49'
 
    Ключ:
 
-   - `-version` — номер версии ПО (например: `6.0.1234.0`).
+   - `-version` — номер версии ПО (например: `5.0.1234.0`).
 
 --8<-- "related_topics_heading.md"
 
 - [Пути и содержимое директорий экземпляра ПО][paths]
-- [Обновление версии экземпляра ПО в Windows](upgrade_version.html#upgrade_version_windows)
+- [Обновление версии экземпляра ПО в Windows][upgrade_version_windows]
 - [Резервное копирование. Настройка, запуск и просмотр журнала сеансов][backup_configure]
 - [Отправка почты из процесса. Настройка подключения][process_sending_connection]
 - [Elasticsearch. Установка в Windows][elasticsearch_deploy_windows]
