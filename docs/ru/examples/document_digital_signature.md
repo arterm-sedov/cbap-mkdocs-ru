@@ -22,8 +22,8 @@ hide: tags
 
 ## Настройка ПК конечного пользователя {: #document_digital_signature_nastroyka_pk_konechnogo_polzovatelya }
 
-1. Установите расширение для браузера CryptoPro Extension for CAdES (КриптоПро ЭЦП Browser plug-in): <https://www.cryptopro.ru/products/cades/plugin>
-2. Установите ПО КриптоПро CSP: <https://cryptopro.ru/products/csp?csp=download>
+1. Установите расширение для браузера [CryptoPro Extension for CAdES][cryptopro_cades] (КриптоПро ЭЦП Browser plug-in).
+2. Установите ПО КриптоПро CSP: [cryptopro_csp].
 3. Получите и установите сертификат с расширением `.cer`, используя параметры по умолчанию:
 
     _![Установка сертификата в формате .cer](https://kb.comindware.ru/assets/img_63330916d0ee5.png)_

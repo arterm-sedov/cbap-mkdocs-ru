@@ -46,7 +46,7 @@ LIST($StatusRef->name))
 - [Атрибут типа «Текст»][attribute_text]
 - [Цветовой индикатор в таблице. Настройка отображения][example_list_color_indicator_formula]
 - [Язык формул][formula_guide]
-- [Справочник цветов HTML](https://colorscheme.ru/html-colors.html)
+- [Справочник цветов HTML][colorscheme_html]
 
 </div>
 

@@ -166,6 +166,40 @@
 
 [certification_training]: https://www.comindware.ru/company/certification/
 
+[cmw_platform]: https://www.comindware.ru/platform/
+
+[cmw_contact_us]: https://www.comindware.ru/company/contact-us/
+
+[cmw_support_portal]: https://support.comindware.ru
+
+[telegram_botfather]: https://t.me/BotFather
+
+[colorscheme_html]: https://colorscheme.ru/html-colors.html
+
+[regex101]: https://regex101.com/
+
+[yandex_map_constructor]: https://yandex.ru/map-constructor/
+
+[cryptopro_cades]: https://www.cryptopro.ru/products/cades/plugin
+
+[cryptopro_csp]: https://cryptopro.ru/products/csp?csp=download
+
+[telegram_core_api]: https://core.telegram.org/api
+
+[w3docs_html_symbols]: https://ru.w3docs.com/uchebnik-html/html-simvoly.html
+
+[symbl_html_entities]: https://symbl.cc/ru/html-entities/
+
+[ms_power_query]: https://support.microsoft.com/ru-ru/office/power-query-%D0%BE%D0%B1%D0%B7%D0%BE%D1%80-%D0%B8-%D0%BE%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-ed614c81-4b00-4291-bd3a-55d80767f81d
+
+[wikipedia_relational_algebra]: https://ru.wikipedia.org/wiki/%D0%A0%D0%B5%D0%BB%D1%8F%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D0%B0%D1%8F_%D0%B0%D0%BB%D0%B3%D0%B5%D0%B1%D1%80%D0%B0
+
+[wikipedia_rdf]: https://ru.wikipedia.org/wiki/Resource_Description_Framework
+
+[wikipedia_owl]: https://ru.wikipedia.org/wiki/Web_Ontology_Language
+
+[wikipedia_ntriples]: https://ru.wikipedia.org/wiki/N-Triples
+
 [vulnerability_policy]: {{ kbArticleURLPrefix }}5427
 
 [vulnerability_digest]: {{ kbArticleURLPrefix }}5434
