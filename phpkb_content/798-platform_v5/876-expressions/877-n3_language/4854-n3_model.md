@@ -2,7 +2,7 @@
 title: 'Моделирование на N3'
 kbId: 4854
 url: 'https://kb.comindware.ru/article.php?id=4854'
-updated: '2024-11-28 15:27:11'
+updated: '2026-06-20 18:06:04'
 ---
 
 # Моделирование на N3
@@ -15,7 +15,6 @@ updated: '2024-11-28 15:27:11'
 
 ```
 @prefix dc: <http://purl.oclc.org/dc/elements/1.1./>.
-
 < > dc:title “N3 Manual”. 
 ```
 
@@ -23,7 +22,6 @@ updated: '2024-11-28 15:27:11'
 
 ```
 @prefix : <#>.
-
 :Sam :age “26”.
 ```
 
@@ -31,9 +29,7 @@ updated: '2024-11-28 15:27:11'
 
 ```
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 ```
 
@@ -59,11 +55,8 @@ updated: '2024-11-28 15:27:11'
 
 ```
  rdfs:domain rdfs:domain rdf:Property;
-
           rdfs:range rdfs:Class.
-
 rdfs:range rdfs:domain rdf:Property;
-
           rdfs:range rdfs:Class. 
 ```
 
@@ -113,21 +106,13 @@ _![Диаграмма моделей классов (бизнес-процесс
 
 ```
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-
 @prefix : <#>.
-
 :Zayavka a rdfs:Class;
-
 rdfs:label "Класс заявок на командировку".
-
  
-
 :Komandiryemii a rdfs:Class;
-
 rdfs:label "Класс командируемых".
 
 :Komandirovka a rdfs:Class;
@@ -141,111 +126,78 @@ rdfs:label "Класс руководителей".
 :Name a rdfs:Property;
 
 rdfs:label "Имя";
-
 rdf:value [rdf:Datatype "string"];
-
 rdfs:domain :Komandiryemii;
-
 rdfs:range rdfs:Resource.
 
 :NameRuk a rdfs:Property;
 
 rdfs:label "Имя";
-
 rdf:value [rdf:Datatype "string"];
-
 rdfs:domain :Rukovoditel;
-
 rdfs:range rdfs:Resource.
 
 :Surname a rdfs:Property;
 
 rdfs:label "Фамилия";
-
 rdf:value [rdf:Datatype "string"];
-
 rdfs:domain :Komandiryemii;
-
 rdfs:range rdfs:Resource.
 
 :SurnameRuk a rdfs:Property;
 
 rdfs:label "Фамилия";
-
 rdf:value [rdf:Datatype "string"];
-
 rdfs:domain :Rukovoditel;
-
 rdfs:range rdfs:Resource.
 
 :SpisokZayavok a rdfs:Property;
 
 rdfs:label "Список заявок";
-
 rdf:value [rdf:Datatype "instance"];
-
 rdfs:domain :Komandiryemii;
-
 rdfs:range :Zayavka.
 
 :KomandirovkaRef a rdfs:Property;
 
 rdfs:label "Командировка";
-
 rdf:value [rdf:Datatype "instance"];
-
 rdfs:domain :Zayavka;
-
 rdfs:range :Komandirovka.
 
 :KomandiryemiiRef a rdfs:Property;
 
 rdfs:label "Командируемый";
-
 rdf:value [rdf:Datatype "instance"];
-
 rdfs:domain :Zayavka;
-
 rdfs:range :Komandiryemii.
 
 :Status a rdfs:Property;
 
 rdfs:label "Статус";
-
 rdf:value [rdf:Datatype "enumerated"];
-
 rdfs:domain :Zayavka;
-
 rdfs:range ("В работе" "Согласована руководителем" "Отклонена").
 
 :City a rdfs:Property;
 
 rdfs:label "Город командирования";
-
 rdf:value [rdf:Datatype "string"];
-
 rdfs:domain :Komandirovka;
-
 rdfs:range rdfs:Resource.
 
 :Resp a rdfs:Property;
 
 rdfs:label "Начальник отдела, согласующий командировку";
-
 rdf:value [rdf:Datatype "instance"];
-
 rdfs:domain :Komandirovka;
-
 rdfs:range :Rukovoditel.
 
 :Zayavki a rdfs:Property;
 
 rdfs:label "Поданные заявки на командировку";
-
 rdf:value [rdf:Datatype "instance"];
-
 rdfs:domain :Komandirovka;
-
 rdfs:range :Zayavka. 
 ```
 
@@ -259,7 +211,7 @@ _![Фрагмент RDF графа модели классов текущей п
 
 Существует два типа переменных : @forAll и @forSome:
 
-- ***@forAll***  – универсальная переменная, то есть выражение, которое написано с использованием данной переменной, будет верным для любого значения указанной переменной .
+- ***@forAll*** – универсальная переменная, то есть выражение, которое написано с использованием данной переменной, будет верным для любого значения указанной переменной .
 
 this log:forAll :x.
 
@@ -267,7 +219,7 @@ this log:forAll :x.
 
 В данном случае мы определили переменную :x, потом записали, что для любого :x верно, что :name – “Jack”.
 
-- ***@forSome***  – при таком объявлении переменной мы говорим только, о существовании удовлетворяющего условия значения.
+- ***@forSome*** – при таком объявлении переменной мы говорим только, о существовании удовлетворяющего условия значения.
 
 this log:forSome :x.
 
@@ -303,7 +255,6 @@ this log:forSome :x.
 
 ```
 @prefix log:<http://www.w3.org/2000/10/swap/log#>.
-
 {?pers1 :father [:brother :pers2]}=>{:pers1 :uncle :pers2}.
 ```
 
@@ -321,7 +272,7 @@ this log:forSome :x.
 
 rdf:rest [ rdf:first “Sam”;
 
-                   rdf:rest [ rdf:first “Anna”;
+rdf:rest [ rdf:first “Anna”;
 
 rdf:rest rdf:nil ]]]
 

@@ -2,7 +2,7 @@
 title: 'Аудит разрешений аккаунтов'
 kbId: 4664
 url: 'https://kb.comindware.ru/article.php?id=4664'
-updated: '2024-10-08 17:10:39'
+updated: '2026-06-20 18:04:43'
 ---
 
 # Аудит разрешений аккаунтов
@@ -24,28 +24,28 @@ updated: '2024-10-08 17:10:39'
 
 На этой вкладке отображаются разрешения на доступ к ресурсам приложений. См. разделы «**[Роли в приложении][roles]**», «**[Разработка приложений][apps]**», «**[Аккаунты][accounts]**».
 
-_![Список разрешений для приложений](https://kb.comindware.ru/assets/accounts_permission_audit_business_app.png)_
+_![Список разрешений для приложений](/platform/v5.0/administration/account_administration/img/accounts_permission_audit_business_app.png)_
 
 ### Системные разрешения
 
 На этой вкладке отображаются разрешения на доступ к ресурсам системы. См. разделы «**[Системные роли][system_roles]**» и «**[Аккаунты][accounts]**».
 
-_![Список системных разрешений](https://kb.comindware.ru/assets/account_permission_audit_system.png)_
+_![Список системных разрешений](/platform/v5.0/administration/account_administration/img/account_permission_audit_system.png)_
 
 ### Члены групп
 
 На этой вкладке отображается список всех аккаунтов и дочерних групп с указанием групп, в которые они входят. См. раздел «**[Группы][groups]**» и «[**Аккаунты**][accounts]».
 
-_![Список членов групп](https://kb.comindware.ru/assets/account_permission_audit_group_members.png)_
+_![Список членов групп](/platform/v5.0/administration/account_administration/img/account_permission_audit_group_members.png)_
 
 ### Члены ролей
 
 На этой вкладке отображается список всех аккаунтов и групп с указанием ролей, которые им назначены. См. разделы «[**Роли**][roles]», «[**Системные роли**][system_roles]» и «[**Аккаунты**][accounts]».
 
-_![Список членов ролей](https://kb.comindware.ru/assets/account_permission_audit_role_members.png)_
+_![Список членов ролей](/platform/v5.0/administration/account_administration/img/account_permission_audit_role_members.png)_
 
 --8<-- "related_topics_heading.md"
 
-**[Аккаунты. Создание, настройка, замещение, привязка к шаблону аккаунта, назначение лицензий, удаление][accounts]**
+- *[Аккаунты. Создание, настройка, замещение, привязка к шаблону аккаунта, назначение лицензий, удаление][accounts]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

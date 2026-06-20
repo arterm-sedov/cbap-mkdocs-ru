@@ -2,7 +2,7 @@
 title: 'Атрибут типа «Текст»'
 kbId: 4768
 url: 'https://kb.comindware.ru/article.php?id=4768'
-updated: '2025-08-08 17:16:51'
+updated: '2026-06-20 18:05:03'
 ---
 
 # Атрибут типа «Текст»

@@ -2,7 +2,7 @@
 title: 'Задача-вызов сервиса'
 kbId: 4729
 url: 'https://kb.comindware.ru/article.php?id=4729'
-updated: '2025-04-10 16:34:26'
+updated: '2026-06-20 18:04:58'
 ---
 
 # Задача-вызов сервиса

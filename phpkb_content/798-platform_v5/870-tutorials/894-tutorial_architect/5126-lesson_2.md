@@ -2,7 +2,7 @@
 title: 'Урок 2. Вход в систему, рабочий стол, навигация, роли, оргструктура'
 kbId: 5126
 url: 'https://kb.comindware.ru/article.php?id=5126'
-updated: '2025-08-12 18:26:53'
+updated: '2026-06-20 18:05:34'
 ---
 
 # Урок 2. Вход в систему, рабочий стол, навигация, роли, оргструктура
@@ -194,9 +194,7 @@ _![Страница входа в {{ productName }} Enterprise](/platform/v5.0/t
     - В панели свойств раздела навигации нажмите ссылку «**0 ролей**».
     - Отобразится окно выбора ролей.
     - В левом списке ролей дважды нажмите роль *«Архитектор»*, чтобы переместить её в правый список.
-    - Нажмите кнопку «**Применить**».
-
-    ![Назначение роли разделу навигации](/platform/v5.0/tutorials/tutorial_architect/img/lesson_2_navigation_secttion_role_assign.png)
+    - Нажмите кнопку «**Применить**».![Назначение роли разделу навигации](/platform/v5.0/tutorials/tutorial_architect/img/lesson_2_navigation_secttion_role_assign.png)
 
     Назначение роли разделу навигации
 12. Сохраните раздел навигации.
@@ -415,7 +413,7 @@ _![Отображение атрибута «Отдел» в свойствах 
 - [Атрибуты. Настройка][attributes]
 - [Формы. Настройка][forms]
 - [Правила для форм. Настройка][form_rules]
-- [Язык формул. Использование](https://kb.comindware.ru/category.php?id=880)
+- [Язык формул. Использование](https://kb.comindware.ru/category.php?id=901)
 - [Язык N3. Использование][n3_guide_toc]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

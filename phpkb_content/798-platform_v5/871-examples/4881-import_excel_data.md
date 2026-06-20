@@ -2,7 +2,7 @@
 title: 'Импорт связанных данных из таблицы Excel'
 kbId: 4881
 url: 'https://kb.comindware.ru/article.php?id=4881'
-updated: '2026-06-17 14:09:50'
+updated: '2026-06-20 18:05:45'
 ---
 
 # Импорт связанных данных из таблицы Excel

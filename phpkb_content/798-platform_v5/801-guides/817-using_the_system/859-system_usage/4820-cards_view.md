@@ -2,7 +2,7 @@
 title: 'Карточки. Использование'
 kbId: 4820
 url: 'https://kb.comindware.ru/article.php?id=4820'
-updated: '2025-04-04 14:40:18'
+updated: '2026-06-20 18:05:13'
 ---
 
 # Карточки. Использование

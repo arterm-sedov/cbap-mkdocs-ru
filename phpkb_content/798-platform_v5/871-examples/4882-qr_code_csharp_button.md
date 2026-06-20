@@ -2,7 +2,7 @@
 title: 'QR-код. Формирование с помощью C#-скрипта по нажатию кнопки'
 kbId: 4882
 url: 'https://kb.comindware.ru/article.php?id=4882'
-updated: '2026-06-17 14:09:50'
+updated: '2026-06-20 18:05:45'
 ---
 
 # QR-код. Формирование с помощью C#-скрипта по нажатию кнопки
@@ -134,6 +134,6 @@ class Script
 - [C#-скрипты. Руководство по разработке][csharp_guide]
 - [Кнопки. Определения, настройка, удаление][buttons]
 - [Атрибут типа «Текст»][attribute_text]
-- [Язык формул](https://kb.comindware.ru/category.php?id=880)
+- [Язык формул](https://kb.comindware.ru/category.php?id=901)
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

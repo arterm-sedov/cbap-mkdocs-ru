@@ -1,89 +1,183 @@
-<h1>Zabbix Agent. Инструкции по установке</h1><p>Программное обеспечение <em>Zabbix Agent</em> позволяет осуществлять мониторинг устройств, на которые оно установлено. Для сбора и отображения данных мониторинга используется ПО <em>Zabbix Server</em>. См. в статью «<samp data-name="aid" data-title="" data-value="4607"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Zabbix Server, Zabbix Agent, Zabbix Frontend и MySQL. Инструкции по установке {Article-ID:4607}</span></samp> ».</p>
-<p>В настоящей статье представлены инструкции по установке и настройке Zabbix Agent в ОС Linux на примере Ubuntu 22.04.</p>
-<h2 data-heading="1. Добавление репозитория и установка Zabbix Agent" id="mcetoc_1glf1v4nb5">1. Добавление репозитория и установка Zabbix Agent</h2>
+<h1>Zabbix Agent. Установка и настройка</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4608" kb-tags="" kb-title="Zabbix Agent. Установка и настройка">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#добавление-репозитория-и-установка-zabbix-agent">
+<span class="md-ellipsis">
+      
+        Добавление репозитория и установка Zabbix Agent
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-сервиса-zabbix-agent">
+<span class="md-ellipsis">
+      
+        Настройка сервиса Zabbix Agent
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#запуск-сервиса-zabbix-agent">
+<span class="md-ellipsis">
+      
+        Запуск сервиса Zabbix Agent
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#добавление-linux-хоста-в-сеть-мониторинга">
+<span class="md-ellipsis">
+      
+        Добавление Linux-хоста в сеть мониторинга
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#использованные-ресурсы">
+<span class="md-ellipsis">
+      
+        Использованные ресурсы
+      
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Программное обеспечение <em>Zabbix Agent</em> позволяет осуществлять мониторинг устройств, на которые оно установлено. Для сбора и отображения данных мониторинга используется ПО <em>Zabbix Server</em>. См. статью <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5458">Zabbix Server, Zabbix Agent, Zabbix Frontend и MySQL. Инструкции по установке</a>»</em>.</p>
+<p>Здесь представлены инструкции по установке и настройке Zabbix Agent в ОС Linux (на примере Ubuntu 22.04).</p>
+<h2 id="добавление-репозитория-и-установка-zabbix-agent">Добавление репозитория и установка Zabbix Agent</h2>
 <p>Основная часть операций выполняется с правами обычного пользователя <code>username</code>. Некоторые операции необходимо выполнять с правами суперпользователя <code>root</code>.</p>
-<p>1.1. Перейдите в папку пользователя <code>username</code>:</p>
-<pre tabindex="0"><code>cd /home/username
-</code></pre>
-<p>1.2. Для добавления репозитория Zabbix загрузите его deb-пакет:</p>
-<pre tabindex="0"><code>wget https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.0-4%2Bubuntu22.04_all.deb
-</code></pre>
-<p>1.3. Распакуйте deb-пакет:</p>
-<pre tabindex="0"><code>sudo dpkg -i zabbix-release_6.0-4+ubuntu22.04_all.deb
-</code></pre>
-<p>1.4. Обновите базу данных пакетов в операционной системе:</p>
-<pre tabindex="0"><code>sudo apt update
-</code></pre>
-<p>1.5. Установите <em>Zabbix Agent</em>:</p>
-<pre tabindex="0"><code>sudo apt install --yes zabbix-agent
-</code></pre>
-<h2 data-heading="2. Настройка сервиса Zabbix Agent" id="mcetoc_1glf1v4nb6">2. Настройка сервиса Zabbix Agent</h2>
-<p>2.1. На каждой из машин с <em>Zabbix Agent</em> отредактируйте файл конфигурации: <code>/etc/zabbix/zabbix_agentd.conf</code>:</p>
-<pre tabindex="0"><code>sudo nano /etc/zabbix/zabbix_agentd.conf
-</code></pre>
-<p>2.2. В файле конфигурации укажите IP-адрес <em>Zabbix Server</em> — в подключениях с неизвестных IP-адресов будет отказано:</p>
-<pre tabindex="0"><code>Server=your.server.ip.address
-</code></pre>
-<p>2.3. Отредактируйте директиву <code>ServerActive</code>:</p>
-<pre tabindex="0"><code>ServerActive=your.server.ip.address
-</code></pre>
-<h2 data-heading="3.  Запуск сервиса Zabbix Agent" id="mcetoc_1glf1v4nb7">3. Запуск сервиса Zabbix Agent</h2>
-<p>3.1. Разрешите в сетевом экране обращения через порт <code>10050</code>:</p>
-<pre tabindex="0"><code>sudo ufw allow 10050/tcp
-</code></pre>
-<p>3.2. Примените изменения:</p>
-<pre tabindex="0"><code>sudo systemctl daemon-reload
-sudo ufw reload
-</code></pre>
-<p>3.3. Запустите службу <em>Zabbix Agent</em> и добавьте его в список автозагрузки:</p>
-<pre tabindex="0"><code>sudo systemctl enable --now zabbix-agent
-</code></pre>
-<p>3.4. Удостоверьтесь, что служба работает:</p>
-<pre tabindex="0"><code>systemctl status zabbix-agent </code></pre>
-<div class="screenshot_with_caption" style="font-size: 15px !important;">
-<p><img class="img-responsive" src="https://kb.comindware.ru/assets/img_63ad99c681d0a.png"/></p>
-<p>Ожидаемый статус сервиса <em>Zabbix Agent</em></p>
-</div>
-<h2 data-heading="4. Добавление Linux-хоста в сеть мониторинга" id="mcetoc_1glf1v4nb8">4. Добавление Linux-хоста в сеть мониторинга</h2>
-<p>4.1. Откройте <em>Zabbix Frontend</em> (см. статью «<samp data-name="aid" data-title="" data-value="4607"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Zabbix Server, Zabbix Agent, Zabbix Frontend и MySQL. Инструкции по установке {Article-ID:4607}</span></samp>».). Для э того в адресной строке браузера наберите: <code>http://zabbix-server-ip-address:8080</code></p>
-<p>4.2. Откройте раздел «<strong>Monitoring</strong>» &gt; «<strong>Hosts</strong>» и нажмите кнопку «<strong>Create host</strong>».</p>
-<div class="screenshot_with_caption" style="font-size: 15px !important;">
-<p><img class="img-responsive" src="https://kb.comindware.ru/assets/img_63ad9a5b84655.png"/></p>
-<p class="caption" style="font-size: 15px !important;">Кнопка создания хоста Zabbix Agent</p>
-</div>
-<p>4.3. Задайте имя хоста в поле «<strong>Host name</strong>».</p>
-<p>4.4. Выберите шаблон «<strong>Template OS Linux by Zabbix agent</strong>».</p>
-<p>4.5. Создайте группу мониторинга для хоста или добавьте его к существующей группе.</p>
-<p>4.6. Под полем «<strong>Interfaces</strong>» нажмите кнопку «<strong>Add</strong>» и в раскрывающемся меню выберите пункт «<strong>Agent</strong>».</p>
-<div class="screenshot_with_caption" style="font-size: 15px !important;">
-<p><img class="img-responsive" src="https://kb.comindware.ru/assets/img_63ad9b483a473.png"/></p>
-<p class="caption" style="font-size: 15px !important;">Настройка свойств хоста <em>Zabbix Agent</em></p>
-</div>
-<p>4.7. В поле «<strong>Agent</strong>» задайте IP-адрес или доменное имя компьютера, на котором установлен <em>Zabbix Agent</em>.</p>
-<p>Если при установке <em>Zabbix Agent</em> был указан сетевой порт, отличный от 10050, укажите соответствующий порт.</p>
-<p>4.8. Нажмите кнопку «<strong>Add</strong>».</p>
-<div class="screenshot_with_caption" style="font-size: 15px !important;">
-<p><img class="img-responsive" src="https://kb.comindware.ru/assets/img_63ad9b9235b26.png"/></p>
-<p class="caption" style="font-size: 15px !important;">Настройка IP-адреса хоста Zabbix Agent</p>
-</div>
-<p>4.9. Перейдите в раздел «<strong>Monitoring</strong>» &gt; «<strong>Hosts</strong>».</p>
-<p>4.10. В списке хостов должна появиться новая запись.</p>
-<p>4.11. Подождите приблизительно 2 минуты, пока индикатор статуса доступности <mark>ZBX</mark> не станет зелёным.</p>
-<div class="screenshot_with_caption" style="font-size: 15px !important;">
-<p><img class="img-responsive" src="https://kb.comindware.ru/assets/img_63ad999c17b2e.png"/></p>
-<p class="caption" style="font-size: 15px !important;">Статус хоста Zabbix Agent</p>
-</div>
-<p>4.12. Если индикатор красный, удостоверьтесь, что:</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите в папку пользователя <code>username</code>:</p>
+<div class="highlight"><code><pre><span></span><code>cd /home/username</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Для добавления репозитория Zabbix загрузите его deb-пакет:</p>
+<div class="highlight"><code><pre><span></span><code>wget https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_6.0-4%2Bubuntu22.04_all.deb</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Распакуйте deb-пакет:</p>
+<div class="highlight"><code><pre><span></span><code>sudo dpkg -i zabbix-release_6.0-4+ubuntu22.04_all.deb</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Обновите базу данных пакетов в операционной системе:</p>
+<div class="highlight"><code><pre><span></span><code>sudo apt update</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Установите <em>Zabbix Agent</em>:</p>
+<div class="highlight"><code><pre><span></span><code>sudo apt install --yes zabbix-agent</code> <br/></pre></code></div>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="настройка-сервиса-zabbix-agent">Настройка сервиса Zabbix Agent</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>На каждой из машин с <em>Zabbix Agent</em> отредактируйте файл конфигурации: <code>/etc/zabbix/zabbix_agentd.conf</code>:</p>
+<div class="highlight"><code><pre><span></span><code>sudo nano /etc/zabbix/zabbix_agentd.conf</code> <br/></pre></code></div>
+</li>
+<li>
+<p>В файле конфигурации укажите IP-адрес <em>Zabbix Server</em> — в подключениях с неизвестных IP-адресов будет отказано:</p>
+<div class="highlight"><code><pre><span></span><code>Server=your.server.ip.address</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Отредактируйте директиву <code>ServerActive</code>:</p>
+<div class="highlight"><code><pre><span></span><code>ServerActive=your.server.ip.address</code> <br/></pre></code></div>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="запуск-сервиса-zabbix-agent">Запуск сервиса Zabbix Agent</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Разрешите в сетевом экране обращения через порт <code>10050</code>:</p>
+<div class="highlight"><code><pre><span></span><code>sudo ufw allow 10050/tcp</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Примените изменения:</p>
+<div class="highlight"><code><pre><span></span><code>sudo systemctl daemon-reload</code> <br/><code></code> <br/><code>sudo ufw reload</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Запустите службу <em>Zabbix Agent</em> и добавьте его в список автозагрузки:</p>
+<div class="highlight"><code><pre><span></span><code>sudo systemctl enable --now zabbix-agent</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Удостоверьтесь, что служба работает:</p>
+<div class="highlight"><code><pre><span></span><code>systemctl status zabbix-agent </code> <br/></pre></code></div>
+<figure class="screenshot_with_caption" markdown=""><img alt="Ожидаемый статус сервиса Zabbix Agent" src="https://kb.comindware.ru/assets/img_63ad99c681d0a.png"/><figcaption class="caption">Ожидаемый статус сервиса Zabbix Agent</figcaption></figure>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="добавление-linux-хоста-в-сеть-мониторинга">Добавление Linux-хоста в сеть мониторинга</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Откройте <em>Zabbix Frontend</em> (см. «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5458">Zabbix Server, Zabbix Agent, Zabbix Frontend и MySQL. Инструкции по установке</a>). Для э того в адресной строке браузера наберите: <code>http://zabbix-server-ip-address:8080</code></p>
+</li>
+<li>
+<p>Откройте раздел «<strong>Monitoring</strong>» &gt; «<strong>Hosts</strong>» и нажмите кнопку «<strong>Create host</strong>».</p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Кнопка создания хоста Zabbix Agent" src="https://kb.comindware.ru/assets/img_63ad9a5b84655.png"/><figcaption class="caption">Кнопка создания хоста Zabbix Agent</figcaption></figure>
+</li>
+<li>
+<p>Задайте имя хоста в поле «<strong>Host name</strong>».</p>
+</li>
+<li>Выберите шаблон «<strong>Template OS Linux by Zabbix agent</strong>».</li>
+<li>Создайте группу мониторинга для хоста или добавьте его к существующей группе.</li>
+<li>
+<p>Под полем «<strong>Interfaces</strong>» нажмите кнопку «<strong>Add</strong>» и в раскрывающемся меню выберите пункт «<strong>Agent</strong>».</p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Настройка свойств хоста Zabbix Agent" src="https://kb.comindware.ru/assets/img_63ad9b483a473.png"/><figcaption class="caption">Настройка свойств хоста Zabbix Agent</figcaption></figure>
+</li>
+<li>
+<p>В поле «<strong>Agent</strong>» задайте IP-адрес или доменное имя компьютера, на котором установлен <em>Zabbix Agent</em>. Если при установке <em>Zabbix Agent</em> был указан сетевой порт, отличный от 10050, укажите соответствующий порт.</p>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Add</strong>».</p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Настройка IP-адреса хоста Zabbix Agent" src="https://kb.comindware.ru/assets/img_63ad9b9235b26.png"/><figcaption class="caption">Настройка IP-адреса хоста Zabbix Agent</figcaption></figure>
+</li>
+<li>
+<p>Перейдите в раздел «<strong>Monitoring</strong>» &gt; «<strong>Hosts</strong>».</p>
+</li>
+<li>В списке хостов должна появиться новая запись.</li>
+<li>
+<p>Подождите приблизительно 2 минуты, пока индикатор статуса доступности ZBX не станет зелёным.</p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Статус хоста Zabbix Agent" src="https://kb.comindware.ru/assets/img_63ad999c17b2e.png"/><figcaption class="caption">Статус хоста Zabbix Agent</figcaption></figure>
+</li>
+<li>
+<p class="" pagebreakinsideavoid="pageBreakInsideAvoid">Если индикатор красный, удостоверьтесь, что:</p>
 <ul>
 <li>сетевой экран на машине, где развернут <em>Zabbix Server</em>, разрешает обмен данными через порт 10051;</li>
 <li>сетевой экран на машине, где развернут <em>Zabbix Agent</em>, разрешает обмен данными через порт 10050;</li>
 <li>значения <code>Server</code> и <code>ServerActive</code> в файле конфигурации <em>Zabbix Agent</em> <code>/etc/zabbix/zabbix_agentd.conf</code> соответствуют IP-адресу <em>Zabbix Server</em>:</li>
 </ul>
-<pre tabindex="0"><code>Server=192.168.0.1 # ip-адрес приведён как пример
-</code></pre>
-<pre tabindex="0"><code>ServerActive=192.168.0.1 # ip-адрес приведён как пример
-</code></pre>
-<div class="blue_note"><strong>Примечание</strong><br/>При любых изменениях в файле конфигурации необходимо остановить и снова запустить (при перезапуске используется конфигурация из памяти) сервис Zabbix Agent или перезагрузить компьютер.</div>
-<h2 data-heading="Использованные ресурсы" id="mcetoc_1glf1v4nb9">Использованные ресурсы</h2>
-<p><a aria-label="https://www.zabbix.com/documentation/current/en/manual/installation/install#installing-zabbix-daemons" aria-label-position="top" href="https://www.zabbix.com/documentation/current/en/manual/installation/install#installing-zabbix-daemons" rel="noopener" target="_blank">Официальная инструкция по установке Zabbix (на английском языке)</a></p>
-<p><a aria-label="https://subscription.packtpub.com/book/networking-and-servers/9781784397586/1/ch01lvl1sec09/agent-installation-and-configuration" aria-label-position="top" href="https://subscription.packtpub.com/book/networking-and-servers/9781784397586/1/ch01lvl1sec09/agent-installation-and-configuration" rel="noopener" target="_blank">Инструкция по установке Zabbix (на английском языке)</a></p>
+<div class="highlight"><code><pre><span></span><code>Server=192.168.0.1 # ip-адрес приведён как пример</code> <br/><code>ServerActive=192.168.0.1 # ip-адрес приведён как пример</code> <br/></pre></code></div>
+</li>
+</ol>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>При любых изменениях в файле конфигурации необходимо остановить и снова запустить (при перезапуске используется конфигурация из памяти) сервис Zabbix Agent или перезагрузить компьютер.</p>
+</div>
+<h2 id="использованные-ресурсы">Использованные ресурсы</h2>
+<p><em><a class="mkdocs_imported_link" href="https://www.zabbix.com/documentation/current/en/manual/installation/install#installing-zabbix-daemons">Официальная инструкция по установке Zabbix (на английском языке)</a></em></p>
+<p><em><a class="mkdocs_imported_link" href="https://subscription.packtpub.com/book/networking-and-servers/9781784397586/1/ch01lvl1sec09/agent-installation-and-configuration">Инструкция по установке Zabbix (на английском языке)</a></em></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

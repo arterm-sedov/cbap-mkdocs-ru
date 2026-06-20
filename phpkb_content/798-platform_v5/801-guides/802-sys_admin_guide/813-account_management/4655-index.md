@@ -2,7 +2,7 @@
 title: 'Синхронизация с сервером каталогов (Active Directory)'
 kbId: 4655
 url: 'https://kb.comindware.ru/article.php?id=4655'
-updated: '2025-09-08 17:17:30'
+updated: '2026-06-20 18:04:40'
 ---
 
 # Синхронизация с сервером каталогов (Active Directory)

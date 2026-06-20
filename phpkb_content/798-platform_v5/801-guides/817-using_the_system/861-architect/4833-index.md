@@ -2,7 +2,7 @@
 title: 'Построение процессной архитектуры'
 kbId: 4833
 url: 'https://kb.comindware.ru/article.php?id=4833'
-updated: '2025-08-04 14:39:57'
+updated: '2026-06-20 18:05:15'
 ---
 
 # Построение процессной архитектуры
@@ -42,7 +42,7 @@ updated: '2025-08-04 14:39:57'
   - [изменение типа или модификатора](#architect_process_architecture_design_entity_type_modifier_change);
   - [изменение свойств](#architect_process_architecture_design_entity_properties_configure);
   - [редактирование формы и атрибутов](#architect_process_architecture_design_entity_form_attributes_configure);
-  - [изменение цвета и размера на диаграмме ОФС](#architect_process_architecture_design_color_change_resize);
+  - [изменение цвета и размера на организационно-функциональной диаграмме](#architect_process_architecture_design_color_change_resize);
   - [перемещение в иерархии](#architect_process_architecture_design_hierarchy_change);
   - [дублирование](#architect_process_architecture_design_entity_clone);
   - [удаление](#architect_process_architecture_design_entity_delete).
@@ -93,9 +93,7 @@ _![Создание элемента на диаграмме](/platform/v5.0/arc
    - **Группа процессов**
    - **Процесс**
    - **Ссылка на группу процессов**
-   - **Создать ссылку на процесс**
-
-   ![Создание элемента на верхнем уровне реестра процессов](/platform/v5.0/architect/process_architecture_modeling/img/process_architecture_modeling_create_entity_from_registry.png)
+   - **Создать ссылку на процесс**![Создание элемента на верхнем уровне реестра процессов](/platform/v5.0/architect/process_architecture_modeling/img/process_architecture_modeling_create_entity_from_registry.png)
 
    Создание элемента на верхнем уровне реестра процессов
 3. Будет создан элемент процессной архитектуры на верхнем уровне иерархии.
@@ -110,9 +108,7 @@ _![Создание элемента на диаграмме](/platform/v5.0/arc
    - **Группа процессов**
    - **Процесс**
    - **Ссылка на группу процессов**
-   - **Ссылку на процесс**
-
-   ![Создание дочернего элемента с помощью контекстного меню в реестре процессов](/platform/v5.0/architect/process_architecture_modeling/img/process_architecture_modeling_create_entity_from_context_menu.png)
+   - **Ссылку на процесс**![Создание дочернего элемента с помощью контекстного меню в реестре процессов](/platform/v5.0/architect/process_architecture_modeling/img/process_architecture_modeling_create_entity_from_context_menu.png)
 
    Создание дочернего элемента с помощью контекстного меню в реестре процессов
 4. Будет создан дочерний элемент внутри элемента, выбранного на шаге 1.

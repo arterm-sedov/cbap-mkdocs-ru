@@ -2,7 +2,7 @@
 title: 'Кнопка. Пример: настройка условия отображения с помощью формулы'
 kbId: 4896
 url: 'https://kb.comindware.ru/article.php?id=4896'
-updated: '2026-06-17 14:09:51'
+updated: '2026-06-20 18:05:47'
 ---
 
 # Кнопка. Пример: настройка условия отображения с помощью формулы
@@ -44,7 +44,7 @@ OR($status->status_code == "new",$status->status_code == "cart")
 --8<-- "related_topics_heading.md"
 
 - [Кнопки. Определения, настройка, удаление][buttons]
-- [Язык формул](https://kb.comindware.ru/category.php?id=880)
+- [Язык формул](https://kb.comindware.ru/category.php?id=901)
 - [Атрибут типа «Запись»][attribute_record]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

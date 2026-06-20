@@ -2,7 +2,7 @@
 title: 'NGINX. Установка и настройка'
 kbId: 4611
 url: 'https://kb.comindware.ru/article.php?id=4611'
-updated: '2025-04-04 18:14:16'
+updated: '2026-06-20 18:04:29'
 ---
 
 # NGINX. Установка и настройка
@@ -48,8 +48,13 @@ server {
     server_name  domain.com;
     reset_timedout_connection  on;
     listen 80;
-    location /robots.txt { root /var/www/html; }
-    return 301 https://$host$request_uri;
+    location /robots.txt {
+        root /var/www/html;
+    }
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
 }
 
 server {

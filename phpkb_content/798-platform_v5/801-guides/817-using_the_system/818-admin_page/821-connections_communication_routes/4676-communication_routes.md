@@ -2,7 +2,7 @@
 title: 'Пути передачи данных. Определения, типы, создание, настройка, удаление'
 kbId: 4676
 url: 'https://kb.comindware.ru/article.php?id=4676'
-updated: '2025-07-10 13:58:33'
+updated: '2026-06-20 18:05:53'
 ---
 
 # Пути передачи данных. Определения, типы, создание, настройка, удаление
@@ -15,7 +15,7 @@ updated: '2025-07-10 13:58:33'
 
 См. также:
 
-- [Примеры интеграций](https://kb.comindware.ru/category.php?id=875)
+- [Примеры интеграций](https://kb.comindware.ru/category.php?id=906)
 - [Интеграция с внешними системами. Общие рекомендации][integration_recomendations]
 - [Интеграция с внешними системами. Общие рекомендации][integration_recomendations]
 
@@ -88,6 +88,6 @@ _![Список путей передачи данных](/platform/v5.0/adminis
 --8<-- "related_topics_heading.md"
 
 - *[Подключения. Определения, типы, создание, настройка, удаление][connections]*
-- *[Примеры интеграций](https://kb.comindware.ru/category.php?id=875)*
+- *[Примеры интеграций](https://kb.comindware.ru/category.php?id=906)*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

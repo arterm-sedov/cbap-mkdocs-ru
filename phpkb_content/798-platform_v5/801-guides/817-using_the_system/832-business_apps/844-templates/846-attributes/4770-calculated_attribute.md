@@ -2,7 +2,7 @@
 title: 'Вычисляемые атрибуты'
 kbId: 4770
 url: 'https://kb.comindware.ru/article.php?id=4770'
-updated: '2025-04-01 16:19:51'
+updated: '2026-06-20 18:05:03'
 ---
 
 # Вычисляемые атрибуты
@@ -21,6 +21,7 @@ updated: '2025-04-01 16:19:51'
   - [Роль][attribute_role]
   - [Атрибут типа «Список значений»][attribute_enum]
   - [Текст][attribute_text]
+  - [Часовой пояс][attribute_timezone]
   - [Число][attribute_number]
 - Значение вычисляемого атрибута не хранится в базе данных и недоступно для изменения конечным пользователем приложения.
 - Значение вычисляется в момент отображения в интерфейсе пользователя и при обращении к нему.
@@ -36,9 +37,9 @@ updated: '2025-04-01 16:19:51'
 Примечание
 
 - Вычисляемое выражение должно возвращать результат, соответствующий [типу атрибута][attributes].
-- Если снять флажок «**Вычислять по выражению**» и сохранить атрибут, то атрибут перестанет быть вычисляемым и выражение для вычисления значения будет утрачено.
+- Если снять флажок «**Вычислять автоматически**» и сохранить атрибут, то атрибут перестанет быть вычисляемым и выражение для вычисления значения будет утрачено.
 
-1. Установите флажок «**Вычислять по выражению**» в [свойствах атрибута][attributes].
+1. Установите флажок «**Вычислять автоматически**» в [свойствах атрибута][attributes].
 2. В отобразившемся поле «**Вычисляемое значение**» выберите способ вычисления значения: «**Формула**», «**DMN**», «**N3**» или «**Атрибут**».
 
    ![Поле «Вычисляемое значение»](/platform/v5.0/business_apps/templates/attributes/img/calculated_attribute_calculated_expression.png)
@@ -63,17 +64,17 @@ _![Полный редактор выражений](/platform/v5.0/business_app
 
 См. подробные описание формул и языка N3 с примерами:
 
-- [Руководстве по языку формул](https://kb.comindware.ru/category.php?id=880)
-- [Руководстве по языку N3](https://kb.comindware.ru/category.php?id=877)
-- [Примеры использования формул](https://kb.comindware.ru/category.php?id=881)
-- [Примеры использования языка N3](https://kb.comindware.ru/category.php?id=879)
+- [Руководстве по языку формул](https://kb.comindware.ru/category.php?id=901)
+- [Руководстве по языку N3](https://kb.comindware.ru/category.php?id=903)
+- [Примеры использования формул](https://kb.comindware.ru/category.php?id=902)
+- [Примеры использования языка N3](https://kb.comindware.ru/category.php?id=904)
 
 --8<-- "related_topics_heading.md"
 
 - *[Атрибуты. Определения, типы, настройка, архивирование, удаление][attributes]*
-- *[Руководстве по языку формул](https://kb.comindware.ru/category.php?id=880)*
-- *[Руководстве по языку N3](https://kb.comindware.ru/category.php?id=877)*
-- *[Примеры использования формул](https://kb.comindware.ru/category.php?id=881)*
-- *[Примеры использования языка N3](https://kb.comindware.ru/category.php?id=879)*
+- *[Руководстве по языку формул](https://kb.comindware.ru/category.php?id=901)*
+- *[Руководстве по языку N3](https://kb.comindware.ru/category.php?id=903)*
+- *[Примеры использования формул](https://kb.comindware.ru/category.php?id=902)*
+- *[Примеры использования языка N3](https://kb.comindware.ru/category.php?id=904)*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

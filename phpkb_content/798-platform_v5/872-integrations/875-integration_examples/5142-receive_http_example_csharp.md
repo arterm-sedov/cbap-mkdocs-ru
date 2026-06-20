@@ -2,7 +2,7 @@
 title: 'HTTP-запросы. Получение JSON-данных с помощью C#-скрипта. Настройка подключения, пути передачи данных и сценария'
 kbId: 5142
 url: 'https://kb.comindware.ru/article.php?id=5142'
-updated: '2025-12-26 12:34:06'
+updated: '2026-06-20 18:06:01'
 ---
 
 # HTTP-запросы. Получение JSON-данных с помощью C#-скрипта. Настройка подключения, пути передачи данных и сценария
@@ -186,9 +186,7 @@ _![Настройка основных свойств пути для получ
    - Установите флажок «**Массив**» — атрибут `items` будет содержать массив статусов позиций.
    - Установите флажок слева от атрибута `items` и добавьте в него дочерние атрибуты:
      - `product` типа «**Строка**» — название товара.
-     - `status` типа «**Строка**» — статус позиции.
-
-   ![Настройка атрибутов сообщения](/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/receive_http_example_csharp_route_message_attributes.png)
+     - `status` типа «**Строка**» — статус позиции.![Настройка атрибутов сообщения](/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/receive_http_example_csharp_route_message_attributes.png)
 
    Настройка атрибутов сообщения
 4. При необходимости настройте **ответ с ошибкой** — структуру атрибутов для ответа на запрос, при обработке которого произошла ошибка.
@@ -225,9 +223,7 @@ _![Настройка основных свойств пути для получ
    - **Контекстный шаблон:** *Заказы*
    - **Подключение:** [подключение для получения HTTP-запросов](#http_receive_example_csharp_connection)
    - **Путь передачи данных:** [путь передачи данных для получения HTTP-запросов](#http_receive_example_csharp_route)
-   - **Имя переменной:** *IncomingMessage*
-
-   ![Настройка действия «Получение сообщения»](/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/receive_http_example_csharp_scenario_receive_message.png)
+   - **Имя переменной:** *IncomingMessage*![Настройка действия «Получение сообщения»](/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/receive_http_example_csharp_scenario_receive_message.png)
 
    Настройка действия «Получение сообщения»
 3. После события «**Получение сообщения**» добавьте действие «**Проверить результат скрипта**» для обработки входящего сообщения и подготовки ответа с помощью C#-скрипта:

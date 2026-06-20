@@ -2,7 +2,7 @@
 title: 'Apache Ignite. Установка и настройка'
 kbId: 4600
 url: 'https://kb.comindware.ru/article.php?id=4600'
-updated: '2026-01-29 18:02:55'
+updated: '2026-06-20 18:04:28'
 ---
 
 # Apache Ignite. Установка и настройка

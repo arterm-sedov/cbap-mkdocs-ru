@@ -2,7 +2,7 @@
 title: 'Шаблон. Переключение флажка «Является справочником» с помощью API'
 kbId: 5088
 url: 'https://kb.comindware.ru/article.php?id=5088'
-updated: '2025-02-25 15:37:39'
+updated: '2026-06-20 18:05:51'
 ---
 
 # Шаблон. Переключение флажка «Является справочником» с помощью API
@@ -29,8 +29,8 @@ updated: '2025-02-25 15:37:39'
 Выполните следующий запрос:
 
 ```
-curl -X POST "https://your-host/api/public/system/Base/OntologyService/AddStatement" \
--H "Content-Type: application/json" -d \
+curl -X POST "https://your-host/api/public/system/Base/OntologyService/AddStatement" \\
+-H "Content-Type: application/json" -d \\
 '{
   "subject": "template.id",
   "predicate": "cmw.object.specialization",
@@ -48,8 +48,8 @@ curl -X POST "https://your-host/api/public/system/Base/OntologyService/AddStatem
 Выполните следующий запрос:
 
 ```
-curl -X POST "https://your-host/api/public/system/Base/OntologyService/AddStatement" \
--H "Content-Type: application/json" -d \
+curl -X POST "https://your-host/api/public/system/Base/OntologyService/AddStatement" \\
+-H "Content-Type: application/json" -d \\
 '{
   "subject": "template.id",
   "predicate": "cmw.object.specialization",

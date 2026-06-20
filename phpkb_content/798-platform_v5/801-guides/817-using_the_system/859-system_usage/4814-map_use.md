@@ -2,7 +2,7 @@
 title: 'Карты. Использование'
 kbId: 4814
 url: 'https://kb.comindware.ru/article.php?id=4814'
-updated: '2024-09-11 12:38:56'
+updated: '2026-06-20 18:05:12'
 ---
 
 # Карты. Использование
@@ -62,12 +62,11 @@ updated: '2024-09-11 12:38:56'
 4. Чтобы просмотреть данные всех заполненных полей метки, выберите её на карте.
 5. Чтобы настроенные метки остались на карте и в таблице, сохраните запись.
 
-_![Пример карты и таблицы меток на карте](https://kb.comindware.ru/assets/map_use_example.png)_
+_![Пример карты и таблицы меток на карте](/platform/v5.0/using_the_system/img/map_use_example.png)_
 
 --8<-- "related_topics_heading.md"
 
-**[Карты. Настройка][map_configure]**
-
-**[Динамические элементы формы. Настройка карты][form_dynamic_elements]**
+- *[Карты. Настройка][map_configure]*
+- *[Динамические элементы формы. Настройка карты][form_dynamic_elements]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

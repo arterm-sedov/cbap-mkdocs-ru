@@ -2,7 +2,7 @@
 title: 'Литералы и функции в формулах. Справочник, описания, примеры'
 kbId: 4993
 url: 'https://kb.comindware.ru/article.php?id=4993'
-updated: '2025-12-23 19:30:50'
+updated: '2026-06-20 18:06:13'
 ---
 
 # Литералы и функции в формулах. Справочник, описания, примеры
@@ -1470,7 +1470,7 @@ updated: '2025-12-23 19:30:50'
 --8<-- "related_topics_heading.md"
 
 - [Редактор выражений][expression_editor]
-- [Введение в язык формул Comindware](https://kb.comindware.ru/category.php?id=880)
+- [Введение в язык формул Comindware](https://kb.comindware.ru/category.php?id=901)
 - [Форматирование значений в шаблонах экспорта и формулах][export_template_file_formula_format_values]
 - [Глобальная конфигурация][global_configuration]
 

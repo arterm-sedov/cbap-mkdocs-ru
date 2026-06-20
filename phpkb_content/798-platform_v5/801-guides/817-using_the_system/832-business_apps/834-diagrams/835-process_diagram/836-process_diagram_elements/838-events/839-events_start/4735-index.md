@@ -2,7 +2,7 @@
 title: 'Начальные события'
 kbId: 4735
 url: 'https://kb.comindware.ru/article.php?id=4735'
-updated: '2025-04-10 16:50:44'
+updated: '2026-06-20 18:04:58'
 ---
 
 # Начальные события

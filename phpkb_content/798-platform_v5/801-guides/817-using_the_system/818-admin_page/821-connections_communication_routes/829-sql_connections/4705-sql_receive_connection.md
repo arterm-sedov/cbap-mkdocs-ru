@@ -2,7 +2,7 @@
 title: 'Внешняя СУБД (MySQL, MSSQL, Oracle, PostgreSQL). Получение данных по таймеру. Настройка подключения, пути передачи данных и сценария'
 kbId: 4705
 url: 'https://kb.comindware.ru/article.php?id=4705'
-updated: '2024-12-02 18:12:36'
+updated: '2026-06-20 18:05:46'
 ---
 
 # Внешняя СУБД (MySQL, MSSQL, Oracle, PostgreSQL). Получение данных по таймеру. Настройка подключения, пути передачи данных и сценария
@@ -55,7 +55,7 @@ updated: '2024-12-02 18:12:36'
    - В ОС Windows путь к файлу по умолчанию:
 
      ```
-     C:\ProgramData\PostgreSQL\X.X\data\postgresql.conf
+     C:\\ProgramData\\PostgreSQL\\X.X\\data\\postgresql.conf
      ```
 
      Здесь `X.X` — номер версии PostgreSQL.
@@ -225,6 +225,7 @@ updated: '2024-12-02 18:12:36'
        }
        ```
      - Здесь:
+
        - `CityRecords` — **имя переменной**, указанное в свойствах свойствах события «[**Получение сообщения**](#start_event)».
        - `City` — системное имя атрибута-массива, созданного [на вкладке «**Атрибуты сообщений**»](#message_attributes) в свойствах пути передачи данных.
    - Сохраните действие «**Повторять по количеству объектов**».![Настройка цикла по количеству объектов в сценарии](/platform/v5.0/administration/connections_communication_routes/sql_connections/img/sql_receive_connection_scenario_cycle_settings.png)

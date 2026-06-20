@@ -2,7 +2,7 @@
 title: 'Развилка «и»'
 kbId: 4749
 url: 'https://kb.comindware.ru/article.php?id=4749'
-updated: '2025-04-10 17:00:02'
+updated: '2026-06-20 18:04:59'
 ---
 
 # Развилка «и»

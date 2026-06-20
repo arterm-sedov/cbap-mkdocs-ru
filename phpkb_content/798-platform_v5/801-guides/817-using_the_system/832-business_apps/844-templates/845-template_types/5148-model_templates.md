@@ -2,7 +2,7 @@
 title: 'Шаблоны моделей'
 kbId: 5148
 url: 'https://kb.comindware.ru/article.php?id=5148'
-updated: '2025-12-22 19:22:10'
+updated: '2026-06-20 18:05:01'
 ---
 
 # Шаблоны моделей

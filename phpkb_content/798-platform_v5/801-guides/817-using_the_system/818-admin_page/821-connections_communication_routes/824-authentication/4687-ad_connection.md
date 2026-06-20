@@ -2,7 +2,7 @@
 title: 'Active Directory'
 kbId: 4687
 url: 'https://kb.comindware.ru/article.php?id=4687'
-updated: '2026-03-23 12:51:13'
+updated: '2026-06-20 18:06:00'
 ---
 
 # Active Directory

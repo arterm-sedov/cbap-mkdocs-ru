@@ -2,7 +2,7 @@
 title: 'Максимальный размер загружаемых файлов. Настройка для экземпляра ПО'
 kbId: 4619
 url: 'https://kb.comindware.ru/article.php?id=4619'
-updated: '2024-12-09 15:11:56'
+updated: '2026-06-20 18:04:34'
 ---
 
 # Максимальный размер загружаемых файлов. Настройка для экземпляра ПО
@@ -18,11 +18,11 @@ updated: '2024-12-09 15:11:56'
 По умолчанию файлы, загружаемые конечными пользователями и формируемые автоматически, хранятся в следующем каталоге:
 
 - `/var/lib/comindware/<instanceName>/Streams` — Linux
-- `C:\ProgramData\Comindware\` `Instances\<instanceName>\Streams` — Windows
+- `C:\\ProgramData\\Comindware\\` `Instances\\<instanceName>\\Streams` — Windows
 
 `/var/lib/comindware/<instanceName>/Streams`
 
-`C:\ProgramData\Comindware\` `Instances\<instanceName>\Streams`
+`C:\\ProgramData\\Comindware\\` `Instances\\<instanceName>\\Streams`
 
 Здесь и далее `<instanceName>` — имя экземпляра ПО.
 
@@ -101,7 +101,7 @@ updated: '2024-12-09 15:11:56'
 
 Для изменения лимита на размер загружаемых файлов в ОС Windows необходимо отредактировать конфигурацию экземпляра ПО.
 
-1. Откройте для редактирования файл `C:\ProgramData\Comindware\Instances\<instanceName>\Config\Web.config`.
+1. Откройте для редактирования файл `C:\\ProgramData\\Comindware\\Instances\\<instanceName>\\Config\\Web.config`.
 2. Установите лимит (например, 1 ГБ) с помощью директив `httpRuntime maxRequestLength` (в килобайтах) и `requestLimits maxAllowedContentLength` (в байтах):
 
    ```

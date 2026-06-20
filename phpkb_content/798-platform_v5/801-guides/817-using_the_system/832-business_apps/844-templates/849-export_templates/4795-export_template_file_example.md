@@ -1,11 +1,11 @@
 ---
-title: 'Пример настройки и использования шаблона экспорта авансового отчёта'
+title: 'Пример использования шаблона экспорта'
 kbId: 4795
 url: 'https://kb.comindware.ru/article.php?id=4795'
-updated: '2024-10-16 17:40:01'
+updated: '2026-06-20 18:05:08'
 ---
 
-# Пример настройки и использования шаблона экспорта авансового отчёта
+# Пример использования шаблона экспорта
 
 ## Порядок настройки
 
@@ -52,30 +52,26 @@ updated: '2024-10-16 17:40:01'
    - заявки с указанием затрат.
 7. Создайте файл шаблона экспорта `advance_report.xlsx`, показанный на иллюстрации:
 
-   ![Файл шаблона экспорта «Авансовый отчёт»](https://kb.comindware.ru/assets/export_template_file_example_advance_report.png)
+   ![Файл шаблона экспорта «Авансовый отчёт»](/platform/v5.0/business_apps/templates/export_templates/img/export_template_file_example_advance_report.png)
 
    Файл шаблона экспорта «Авансовый отчёт»
-8. Создайте в шаблоне записи «*Заявки*» [шаблон экспорта][export_templates] «*Авансовый отчёт*» с файлом `advance_report.xslx`.
-9. Вместе с шаблоном экспорта будет автоматически создана [кнопка экспорта записи][export_template_button_configure] «*Авансовый отчёт*».
-10. Вынесите кнопку «*Авансовый отчёт*» на форму шаблона записи «*Заявки*».
-11. Откройте любую запись шаблона «*Заявки*».
-12. Нажмите кнопку «*Авансовый отчёт*».
+8. Создайте в шаблоне записи *«Заявки»* [шаблон экспорта][export_templates] *«Авансовый отчёт»* с файлом `advance_report.xslx`.
+9. Вместе с шаблоном экспорта будет автоматически создана [кнопка экспорта записи][export_template_button_configure] *«Авансовый отчёт»*.
+10. Вынесите кнопку *«Авансовый отчёт»* на форму шаблона записи *«Заявки»*.
+11. Откройте любую запись шаблона *«Заявки»*.
+12. Нажмите кнопку *«Авансовый отчёт»*.
 13. Браузер скачает файл следующего вида (с именем, заданным в [свойствах шаблона экспорта][export_templates]):
 
-    ![Файл, сформированный по шаблону экспорта](https://kb.comindware.ru/assets/export_template_file_result.png)
+    ![Файл, сформированный по шаблону экспорта](/platform/v5.0/business_apps/templates/export_templates/img/export_template_file_result.png)
 
     Файл, сформированный по шаблону экспорта
 
 --8<-- "related_topics_heading.md"
 
-**[Настройка шаблона экспорта с использованием C#][export_template_csharp_configure]**
-
-**[Настройка выгрузки нескольких коллекций и изображений][export_template_csharp_collection_download]**
-
-**[Настройка шаблона экспорта][export_templates]**
-
-**[Подготовка файла шаблона экспорта][export_template_file_configure]**
-
-**[Настройка кнопки экспорта][export_template_button_configure]**
+- *[Настройка шаблона экспорта с использованием C#][export_template_csharp_configure]*
+- *[Настройка выгрузки нескольких коллекций и изображений][export_template_csharp_collection_download]*
+- *[Настройка шаблона экспорта][export_templates]*
+- *[Подготовка файла шаблона экспорта][export_template_file_configure]*
+- *[Настройка кнопки экспорта][export_template_button_configure]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

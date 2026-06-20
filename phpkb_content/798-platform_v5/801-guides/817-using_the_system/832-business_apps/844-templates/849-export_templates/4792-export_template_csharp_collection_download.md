@@ -2,7 +2,7 @@
 title: 'Шаблон экспорта. Выгрузка нескольких коллекций и изображений с помощью C#'
 kbId: 4792
 url: 'https://kb.comindware.ru/article.php?id=4792'
-updated: '2026-06-17 14:09:48'
+updated: '2026-06-20 18:05:45'
 ---
 
 # Шаблон экспорта. Выгрузка нескольких коллекций и изображений с помощью C#
@@ -27,7 +27,7 @@ public class IMG
 public class TBL_1
 {
     public string Faktor { get; set; }
-    public string Parametr { get; set; }
+    public string Parameter { get; set; }
     public string Value { get; set; }
 }
 public class TBL_2

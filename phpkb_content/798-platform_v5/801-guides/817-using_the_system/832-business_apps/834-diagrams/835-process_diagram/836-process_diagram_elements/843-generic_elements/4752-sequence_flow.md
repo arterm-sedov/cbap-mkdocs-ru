@@ -2,7 +2,7 @@
 title: 'Поток управления'
 kbId: 4752
 url: 'https://kb.comindware.ru/article.php?id=4752'
-updated: '2025-04-10 17:01:09'
+updated: '2026-06-20 18:05:00'
 ---
 
 # Поток управления

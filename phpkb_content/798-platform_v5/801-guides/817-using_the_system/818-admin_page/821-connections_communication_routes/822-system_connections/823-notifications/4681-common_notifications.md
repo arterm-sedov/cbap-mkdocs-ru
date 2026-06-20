@@ -2,7 +2,7 @@
 title: 'Общие уведомления. Настройка'
 kbId: 4681
 url: 'https://kb.comindware.ru/article.php?id=4681'
-updated: '2025-04-21 12:16:13'
+updated: '2026-06-20 18:04:46'
 ---
 
 # Общие уведомления. Настройка
@@ -160,9 +160,7 @@ _![Настройка свойств сообщения для общего ув
       - **Заголовок:** `{subject}`
       - **Текст сообщения:** `{body}`
       - **Длительность: 5 минут**
-      - **Важность: Критический**
-
-    ![Настройка свойств сообщения пути передачи общих уведомлений](/platform/v5.0/administration/connections_communication_routes/system_connections/notifications/img/common_notifications_message_routes_setting.png)
+      - **Важность: Критический**![Настройка свойств сообщения пути передачи общих уведомлений](/platform/v5.0/administration/connections_communication_routes/system_connections/notifications/img/common_notifications_message_routes_setting.png)
 
     Настройка свойств сообщения пути передачи общих уведомлений
 13. Задайте значения атрибутов на вкладке «**Данные сообщения**». См. параграфы *«[Настройка пути передачи данных](#communication_routes_setting)»*.

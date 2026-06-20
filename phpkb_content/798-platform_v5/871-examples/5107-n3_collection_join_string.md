@@ -2,7 +2,7 @@
 title: 'Записи и коллекции. Объединение значений из коллекции в строку'
 kbId: 5107
 url: 'https://kb.comindware.ru/article.php?id=5107'
-updated: '2025-07-01 16:04:53'
+updated: '2026-06-20 18:05:51'
 ---
 
 # Записи и коллекции. Объединение значений из коллекции в строку
@@ -78,6 +78,6 @@ updated: '2025-07-01 16:04:53'
 - [Таблицы на форме. Настройка][form_dynamic_elements]
 - [Атрибут типа «Запись»][attribute_record]
 - [Атрибут типа «Текст»][attribute_text]
-- [Язык N3](https://kb.comindware.ru/category.php?id=877)
+- [Язык N3](https://kb.comindware.ru/category.php?id=903)
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

@@ -2,7 +2,7 @@
 title: 'Глобальная конфигурация'
 kbId: 4668
 url: 'https://kb.comindware.ru/article.php?id=4668'
-updated: '2025-04-18 18:11:51'
+updated: '2026-06-20 18:04:45'
 ---
 
 # Глобальная конфигурация

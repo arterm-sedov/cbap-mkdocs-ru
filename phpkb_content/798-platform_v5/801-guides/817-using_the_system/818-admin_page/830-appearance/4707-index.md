@@ -2,7 +2,7 @@
 title: 'Дизайн страниц входа и регистрации'
 kbId: 4707
 url: 'https://kb.comindware.ru/article.php?id=4707'
-updated: '2024-10-22 18:09:35'
+updated: '2026-06-20 18:04:54'
 ---
 
 # Дизайн страниц входа и регистрации
@@ -26,7 +26,7 @@ updated: '2024-10-22 18:09:35'
 5. Опубликуйте сохраненную конфигурацию страниц входа и регистрации, нажав кнопку «**Опубликовать**» (*несохраненная конфигурация опубликована не будет*).
 6. После публикации для пользователей будут отображаться страницы входа и регистрации с сохраненной конфигурацией.
 
-_![Пример опубликованной страницы входа](https://kb.comindware.ru/assets/published_login_page_example.png)_
+_![Пример опубликованной страницы входа](/platform/v5.0/administration/appearance/login_and_registration_page_design/img/published_login_page_example.png)_
 
 ### Области конструктора страниц входа и регистрации
 
@@ -39,7 +39,7 @@ _![Пример опубликованной страницы входа](https:
 3. **Макет страницы** — позволяет выбирать блоки страницы и показывает её предварительное представление;
 4. **Панель свойств** — позволяет настроить конфигурацию выбранного элемента.
 
-_![Области конструктора страниц входа и регистрации](https://kb.comindware.ru/assets/login_page_design.png)_
+_![Области конструктора страниц входа и регистрации](/platform/v5.0/administration/appearance/login_and_registration_page_design/img/login_page_design.png)_
 
 ## Настройка страницы входа
 
@@ -54,7 +54,7 @@ _![Области конструктора страниц входа и реги
    - [Ссылки](#ссылки)
    - [Фон](#фон)
 
-_![Настройка страницы входа](https://kb.comindware.ru/assets/login_page_heading.png)_
+_![Настройка страницы входа](/platform/v5.0/administration/appearance/login_and_registration_page_design/img/login_page_heading.png)_
 
 ### Информационный блок
 
@@ -75,7 +75,7 @@ _![Настройка страницы входа](https://kb.comindware.ru/asse
    - **Текст кнопки** — подпись гиперссылки, расположенной внизу информационного блока;
    - **Ссылка для перехода** — указанная ссылка откроется в новой вкладке браузера при нажатии гиперссылки в информационном блоке.
 
-_![Настройка информационного блока страницы входа](https://kb.comindware.ru/assets/information_block_properties.png)_
+_![Настройка информационного блока страницы входа](/platform/v5.0/administration/appearance/login_and_registration_page_design/img/information_block_properties.png)_
 
 ## Настройка страницы регистрации
 
@@ -89,7 +89,7 @@ _![Настройка информационного блока страницы
    - [Ссылки](#ссылки)
    - [Фон](#фон)
 
-_![Настройка заголовка страницы регистрации](https://kb.comindware.ru/assets/registration_page_designer.png)_
+_![Настройка заголовка страницы регистрации](/platform/v5.0/administration/appearance/login_and_registration_page_design/img/registration_page_designer.png)_
 
 ## Настройка общих блоков страниц входа и регистрации
 
@@ -100,7 +100,7 @@ _![Настройка заголовка страницы регистрации
 - [Ссылки](#ссылки)
 - [Фон](#фон)
 
-_![Общие блоки страниц входа и регистрации](https://kb.comindware.ru/assets/login_and_registration_page_blocks.png)_
+_![Общие блоки страниц входа и регистрации](/platform/v5.0/administration/appearance/login_and_registration_page_design/img/login_and_registration_page_blocks.png)_
 
 ### Логотип
 
@@ -116,7 +116,7 @@ _![Общие блоки страниц входа и регистрации](ht
 4. Введите **текст под логотипом**. Если **изображение** логотипа не выбрано, то в блоке логотипа будет отображаться только текст.
 5. Задайте **цвет текста** под логотипом. Если не задать цвет, то будет использоваться **цвет текста**, заданный в разделе «**[Цвета основных элементов][themes]**» текущей темы.
 
-_![Настройка логотипа](https://kb.comindware.ru/assets/logo_properties.png)_
+_![Настройка логотипа](/platform/v5.0/administration/appearance/login_and_registration_page_design/img/logo_properties.png)_
 
 ### Социальные сети
 
@@ -125,14 +125,14 @@ _![Настройка логотипа](https://kb.comindware.ru/assets/logo_pro
 1. В панели элементов установите флажок «**Социальные сети**», чтобы включить этот блок.
 2. Отобразится панель «**Свойства блока «Социальные сети**».
 3. Введите заголовок блока, который будет отображаться над значками соцсетей.
-4. Добавьте или удалите значки соцсетей с помощью кнопок «**Добавить**» ![Кнопка добавления](https://kb.comindware.ru/assets/add_button.png) и «**Удалить**» ![Кнопка удаления](https://kb.comindware.ru/assets/delete_button.png).
+4. Добавьте или удалите значки соцсетей с помощью кнопок «**Добавить**» ![Кнопка добавления](/platform/v5.0/administration/appearance/login_and_registration_page_design/img/add_button.png) и «**Удалить**» ![Кнопка удаления](/platform/v5.0/administration/appearance/login_and_registration_page_design/img/delete_button.png).
 5. Настройте ссылки на соцсети:
 
    - **Значок** — дважды нажмите значок, чтобы сменить его;
    - **Ссылка для перехода** — введите адрес веб-сайта соцсети;
    - **Текст при наведении** — введите текст, который будет отображаться при наведении мыши на значок.
 
-_![Настройка блока «Социальные сети»](https://kb.comindware.ru/assets/social_network_properties.png)_
+_![Настройка блока «Социальные сети»](/platform/v5.0/administration/appearance/login_and_registration_page_design/img/social_network_properties.png)_
 
 ### Ссылки
 
@@ -141,13 +141,13 @@ _![Настройка блока «Социальные сети»](https://kb.c
 - ссылки для скачивания файлов;
 - простой текст;
 - ссылки на веб-сайты;
-- ссылки на адреса эл. почты.
+- ссылки на адреса эл. почты.
 
 Этот блок отображается справа в нижней части страниц входа и регистрации.
 
 1. В панели элементов установите флажок «**Ссылки**», чтобы включить этот блок.
 2. Отобразится панель «**Свойства блока ссылок**».
-3. Добавьте или удалите элементы в блоке ссылок с помощью кнопок «**Добавить**» ![Кнопка добавления](https://kb.comindware.ru/assets/add_button.png) и «**Удалить**» ![Кнопка удаления](https://kb.comindware.ru/assets/delete_button.png).
+3. Добавьте или удалите элементы в блоке ссылок с помощью кнопок «**Добавить**» ![Кнопка добавления](/platform/v5.0/administration/appearance/login_and_registration_page_design/img/add_button.png) и «**Удалить**» ![Кнопка удаления](/platform/v5.0/administration/appearance/login_and_registration_page_design/img/delete_button.png).
 4. Выберите **тип элемента** и настройте его.
 
    - **Файл**
@@ -161,11 +161,11 @@ _![Настройка блока «Социальные сети»](https://kb.c
 
      - **Отображаемый текст** — введите подпись гиперссылки.
      - **Ссылка для перехода** — введите URL-адрес веб-сайта.
-   - **Адрес эл. почты**
+   - **Адрес эл. почты**
 
-     - **Отображаемый текст** — введите адрес эл. почты, который будет отображаться как гиперссылка. Не вводите префикс `mailto:`, он будет добавлен в гиперссылку автоматически.
+     - **Отображаемый текст** — введите адрес эл. почты, который будет отображаться как гиперссылка. Не вводите префикс `mailto:`, он будет добавлен в гиперссылку автоматически.
 
-_![Настройка блока «Ссылки»](https://kb.comindware.ru/assets/link_properties_email.png)_
+_![Настройка блока «Ссылки»](/platform/v5.0/administration/appearance/login_and_registration_page_design/img/link_properties_email.png)_
 
 ### Фон
 
@@ -179,10 +179,10 @@ _![Настройка блока «Ссылки»](https://kb.comindware.ru/asse
    - **Новое изображение** — выберите любой файл типа JPG, GIF, PNG или SVG в соответствии с указанными требованиями к размеру;
    - **Без изображения** — укажите **цвет фона** страниц входа и регистрации.
 
-_![Настройка фона страниц входа и регистрации](https://kb.comindware.ru/assets/background_properties_new_image.png)_
+_![Настройка фона страниц входа и регистрации](/platform/v5.0/administration/appearance/login_and_registration_page_design/img/background_properties_new_image.png)_
 
 --8<-- "related_topics_heading.md"
 
-**[Темы. Настройка, применение, предпросмотр][themes]**
+- *[Темы. Настройка, применение, предпросмотр][themes]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

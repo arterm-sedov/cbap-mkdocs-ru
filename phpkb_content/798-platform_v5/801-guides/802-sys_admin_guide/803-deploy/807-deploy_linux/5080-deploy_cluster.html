@@ -1,0 +1,638 @@
+<h1>Развёртывание Comindware Platform в кластере</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5080" kb-tags="отказоустойчивость,доступность,кластеризация,кластер" kb-title="Развёртывание Comindware Platform в кластере">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<span class="md-ellipsis">
+      
+        Введение
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#кластеризация-comindware-platform">
+<span class="md-ellipsis">
+      
+        Кластеризация Comindware Platform
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#преимущества-использования-apache-ignite-в-comindware-platform">
+<span class="md-ellipsis">
+      
+        Преимущества использования Apache Ignite в Comindware Platform
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#преимущества-использования-apache-ignite-в-comindware-platform_1">
+<span class="md-ellipsis">
+      
+        Преимущества использования Apache Ignite в Comindware Platform
+      
+    </span>
+</a>
+<nav aria-label="Преимущества использования Apache Ignite в Comindware Platform" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#рекомендации-по-повышению-доступности-и-отказоустойчивости-кластера">
+<span class="md-ellipsis">
+      
+        Рекомендации по повышению доступности и отказоустойчивости кластера
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#конфигурация-кластера">
+<span class="md-ellipsis">
+      
+        Конфигурация кластера
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#порядок-развёртывания-кластера-comindware-platform">
+<span class="md-ellipsis">
+      
+        Порядок развёртывания кластера Comindware Platform
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-сервера-хранения-данных-nfs">
+<span class="md-ellipsis">
+      
+        Настройка сервера хранения данных (NFS)
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#развёртывание-узлов-кластера">
+<span class="md-ellipsis">
+      
+        Развёртывание узлов кластера
+      
+    </span>
+</a>
+<nav aria-label="Развёртывание узлов кластера" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#установка-по-comindware-platform-и-бинарных-пакетов-apache-ignite">
+<span class="md-ellipsis">
+      
+        Установка ПО Comindware Platform и бинарных пакетов Apache Ignite
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#установка-nfs-клиента">
+<span class="md-ellipsis">
+      
+        Установка NFS-клиента
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-и-запуск-первого-узла-кластера">
+<span class="md-ellipsis">
+      
+        Настройка и запуск первого узла кластера
+      
+    </span>
+</a>
+<nav aria-label="Настройка и запуск первого узла кластера" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#перенос-базы-данных-на-nfs-сервер">
+<span class="md-ellipsis">
+      
+        Перенос базы данных на NFS-сервер
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-экземпляра-по">
+<span class="md-ellipsis">
+      
+        Настройка экземпляра ПО
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-и-запуск-второго-и-последующих-узлов-кластера">
+<span class="md-ellipsis">
+      
+        Настройка и запуск второго и последующих узлов кластера
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-директории-localtemp-после-запуска-узлов-кластера">
+<span class="md-ellipsis">
+      
+        Настройка директории LocalTemp после запуска узлов кластера
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      
+        Связанные статьи
+      
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<div class="notice notice-error">
+<p class="admonition-title">Экспериментальная функция</p>
+<p>Представленная здесь функция находится на стадии разработки. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5161#experimental_feature_support">Поддержка экспериментальных функций</a>»</em>.</p>
+</div>
+<h2 id="введение">Введение</h2>
+<p><strong>Comindware Platform</strong> можно развернуть в кластере для увеличения производительности, улучшения отказоустойчивости и обеспечения бесперебойного функционирования ПО.</p>
+<p>Кластерная конфигурация позволяет минимизировать время простоя системы и обеспечить непрерывность бизнес-процессов в случае отказа отдельных компонентов.</p>
+<p>Здесь представлены инструкции по развёртыванию кластера <strong>Comindware Platform</strong> в простейшей минимальной конфигурации.</p>
+<p>Инструкции по настройке стороннего ПО, такого как серверы журналирования, мониторинга и балансировки нагрузки, см. в документации к соответствующему ПО.</p>
+<p>См. также общие рекомендации в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5445">Обеспечение высокой доступности и отказоустойчивости Comindware Platform</a>»</em>.</p>
+<h2 id="кластеризация-comindware-platform">Кластеризация Comindware Platform</h2>
+<p><strong>Comindware Platform</strong> использует в качестве распределённого хранилища данных ПО Apache Ignite.</p>
+<p>В кластерной конфигурации Apache Ignite поддерживает автоматическое обнаружение узлов, распределение данных и вычислений, а также репликацию и резервирование данных. Это обеспечивает равномерное распределение нагрузки и доступность при отказе отдельных узлов.</p>
+<p>Важными аспектами кластеризации Apache Ignite являются настройка топологии кластера, выбор подходящего алгоритма консенсуса для управления состоянием кластера и использование механизмов автоматического восстановления для минимизации времени простоя.</p>
+<p>См. <em><a class="mkdocs_imported_link" href="https://ignite.apache.org/docs/latest/clustering/clustering">рекомендации по кластеризации в документации Apache Ignite (на английском языке)</a></em>.</p>
+<h2 id="преимущества-использования-apache-ignite-в-comindware-platform">Преимущества использования Apache Ignite в Comindware Platform</h2>
+<p>Apache Ignite является высокопроизводительной платформой для распределённого хранения и обработки данных и обладает следующими преимуществами:</p>
+<ul>
+<li><strong>Высокая производительность</strong>: ускорение доступа к данным благодаря поддержке хранения данных в оперативной памяти и кэширования.</li>
+<li><strong>Масштабируемость</strong>: возможность горизонтального масштабирования позволяет эффективно справляться с увеличением нагрузки и объёма данных.</li>
+<li><strong>Отказоустойчивость</strong>: репликация данных и поддержка автоматического восстановления обеспечивают надёжность даже в случае отказа узлов.</li>
+<li><strong>Поддержка ACID-транзакций</strong>: возможность работы с критически важными данными.</li>
+<li><strong>Гибкость интеграции</strong>: наличие клиентских API для Java, .NET, Python и других языков позволяет легко интегрировать Apache Ignite в существующую инфраструктуру.</li>
+</ul>
+<h2 id="преимущества-использования-apache-ignite-в-comindware-platform_1">Преимущества использования Apache Ignite в Comindware Platform</h2>
+<p>Apache Ignite является высокопроизводительной платформой для распределённого хранения и обработки данных и обладает следующими преимуществами:</p>
+<ul>
+<li><strong>Высокая производительность</strong>: ускорение доступа к данным благодаря поддержке хранения данных в оперативной памяти и кэширования.</li>
+<li><strong>Масштабируемость</strong>: возможность горизонтального масштабирования позволяет эффективно справляться с увеличением нагрузки и объёма данных.</li>
+<li><strong>Отказоустойчивость</strong>: репликация данных и поддержка автоматического восстановления обеспечивают надёжность даже в случае отказа узлов.</li>
+<li><strong>Поддержка ACID-транзакций</strong>: возможность работы с критически важными данными.</li>
+<li><strong>Гибкость интеграции</strong>: наличие клиентских API для Java, .NET, Python и других языков позволяет легко интегрировать Apache Ignite в существующую инфраструктуру.</li>
+</ul>
+<h3 id="рекомендации-по-повышению-доступности-и-отказоустойчивости-кластера">Рекомендации по повышению доступности и отказоустойчивости кластера</h3>
+<p>Применение следующих рекомендаций позволит улучшить производительность <strong>Comindware Platform</strong> и обеспечить стабильность работы системы даже при увеличении нагрузки или сбоях отдельных компонентов.</p>
+<ul>
+<li><strong>Репликация данных</strong>: задайте количество резервных копий данных на нескольких узлах. См. <em>«<a class="mkdocs_imported_link" href="https://ignite.apache.org/docs/latest/configuring-caches/partition-loss-policy">Настройка резервного копирования. Документация Apache Ignite»</a></em>».</li>
+<li><strong>Стратегии восстановления данных</strong>: настройте политику поведения при выпадении разделов. См. <em>«<a class="mkdocs_imported_link" href="https://ignite.apache.org/docs/latest/configuring-caches/partition-loss-policy">Настройка восстановления разделов. Документация Apache Ignite»</a></em>».</li>
+<li><strong>Мониторинг состояния кластера</strong>:<ul>
+<li>Настройте мониторинг производительности и нагрузки на узлы с помощью встроенных инструментов Apache Ignite или сторонних решений, таких как Zabbix.</li>
+<li>Настройте интеграцию с инструментами мониторинга (например, Prometheus или Grafana) для сбора метрик по работе кластера и своевременного реагирования на инциденты.</li>
+<li>Включите уведомления для критичных событий (например, падение узла или превышение времени отклика).</li>
+</ul>
+</li>
+<li><strong>Резервное копирование</strong>: настройте регулярное резервное копирование с использованием возможностей Apache Ignite Native Persistence.</li>
+<li><strong>Оптимизация конфигурации</strong>: используйте оптимальные параметры хранения и обработки данных для минимизации задержек и повышения производительности.</li>
+<li><strong>Географическая изоляция</strong>: для критически важных систем рекомендуется распределить узлы кластера по разным географическим регионам.</li>
+<li><strong>Топология и консистентность</strong>: настройте базовую топологию кластера, чтобы минимизировать риски при добавлении новых узлов и восстановлении после сбоев. См. <em>«<a class="mkdocs_imported_link" href="https://ignite.apache.org/docs/latest/clustering/baseline-topology">Настройка базовой топологии. Документация Apache Ignite</a>»</em>.</li>
+<li><strong>Управление обнаружением узлов</strong> — чтобы повысить надёжности в кластере с большим количеством узлов, можно использовать Zookeeper Discovery SPI для уменьшения рисков, связанных с сетевой фрагментацией. См. <em>«<a class="mkdocs_imported_link" href="https://ignite.apache.org/docs/latest/clustering/zookeeper-discovery">Настройка ZooKeeper Discovery. Документация Apache Ignite</a>»</em>.</li>
+</ul>
+<h2 id="конфигурация-кластера">Конфигурация кластера</h2>
+<p>В минимальной конфигурации для распределения нагрузки (горизонтального масштабирования) кластер <strong>Comindware Platform</strong> может включать:</p>
+<ul>
+<li><strong>сервер хранения данных</strong> на отдельной машине, к которому будут обращаться узлы кластера (для этого сервера необходимо обеспечить отказоустойчивость и высокую доступность);</li>
+<li><strong>узлы кластера</strong>, на каждом из которых установлено ПО <strong>Comindware Platform</strong> одинаковой версии и развёрнут экземпляр ПО с одинаковым именем (<code>&lt;instanceName&gt;</code>);</li>
+<li><strong>сервер OpenSearch (Elasticsearch)</strong> на отдельной машине;</li>
+<li><strong>сервер Apache Kafka</strong> на отдельной машине;</li>
+<li><strong>балансировщик нагрузки</strong> на отдельной машине (при необходимости).</li>
+</ul>
+<h2 id="порядок-развёртывания-кластера-comindware-platform">Порядок развёртывания кластера Comindware Platform</h2>
+<ol class="colored_numbers_list">
+<li><strong>Подготовьте серверы</strong>: убедитесь, что все машины, на которых будет развёрнут кластер, соответствуют системным требованиям, установите необходимое программное обеспечение. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5429">Системные требования Comindware Platform</a>».</em></li>
+<li><strong>Установите и настройте компоненты</strong>: установите и настройте все необходимые компоненты, включая серверы приложений, базы данных, серверы журналов и балансировщики нагрузки.</li>
+<li><strong>Конфигурация кластерного окружения</strong>: настройте кластерное окружение, включая конфигурацию балансировки нагрузки, резервирования компонентов и мониторинга.</li>
+<li><strong>Тестирование и проверка</strong>: проведите тестирование развёрнутого кластера, чтобы убедиться в его работоспособности и отказоустойчивости.</li>
+<li><strong>Документирование и обучение</strong>: задокументируйте все шаги и настройки, а также проведите обучение для администраторов кластера по его конфигурированию и поддержанию работоспособности.</li>
+</ol>
+<h2 id="настройка-сервера-хранения-данных-nfs">Настройка сервера хранения данных (NFS)</h2>
+<p>Настройте сервер хранения данных для кластера <strong>Comindware Platform</strong>.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите в режим суперпользователя:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>-s</code> <br/></pre></code></div>
+<p>или</p>
+<div class="highlight"><code><pre><span></span><code>su<span class="w"> </span>-</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Создайте директорию для хранения файлов экземпляра ПО:</p>
+<div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>/share</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Установите NFS-сервер:</p>
+<div class="highlight"><code><pre><span></span><code>apt<span class="w"> </span>install<span class="w"> </span>nfs-kernel-server</code> <br/><code>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>nfs-kernel-server.service</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Откройте файл <code>exports</code> для редактирования:</p>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/etc/exports</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Добавьте в файл <code>exports</code> директиву, открывающую доступ к директории <code>/share</code> для узлов кластера:</p>
+<div class="highlight"><code><pre><span></span><code>/share<span class="w"> </span>&lt;nodeIP&gt;/&lt;netMask&gt;<span class="o">(</span>rw,sync,no_subtree_check<span class="o">)</span></code> <br/></pre></code></div>
+<p>Здесь:</p>
+<ul>
+<li><code>/share</code> — директория, к которой предоставляется общий доступ;</li>
+<li><code>&lt;nodeIP&gt;</code> — неизменная часть IP-адресов узлов кластера;</li>
+<li><code>&lt;netMask&gt;</code> — маска подсети.</li>
+</ul>
+<p>Например:</p>
+<ul>
+<li><code>192.168.1.100/32</code> (маска подсети <code>255.255.255.255</code>): один компьютер с IP-адресом <code>192.168.1.100</code>.</li>
+<li><code>192.168.1.0/24</code> (маска подсети <code>255.255.255.0</code>): все компьютеры с IP-адресами от <code>192.168.1.1</code> до <code>192.168.1.254</code>.</li>
+</ul>
+</li>
+<li>
+<p>Чтобы применить изменения, выполните следующую команду:</p>
+<div class="highlight"><code><pre><span></span><code>exportfs<span class="w"> </span>-a</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Запустите NFS-сервер:</p>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>start<span class="w"> </span>nfs-kernel-server.service</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Создайте директории для хранения данных экземпляра ПО:</p>
+<div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>/share/&lt;instanceName&gt;/Streams</code> <br/><code>mkdir<span class="w"> </span>-p<span class="w"> </span>/share/&lt;instanceName&gt;/Scripts</code> <br/><code>mkdir<span class="w"> </span>-p<span class="w"> </span>/share/&lt;instanceName&gt;/Temp</code> <br/><code>mkdir<span class="w"> </span>-p<span class="w"> </span>/share/&lt;instanceName&gt;/Localtemp</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Настройте права доступа к созданным директориям:</p>
+<div class="highlight"><code><pre><span></span><code>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">777</span><span class="w"> </span>/share/&lt;instanceName&gt;</code> <br/><code>chown<span class="w"> </span>-R<span class="w"> </span>nobody:nogroup<span class="w"> </span>/share</code> <br/></pre></code></div>
+</li>
+</ol>
+<h2 id="развёртывание-узлов-кластера">Развёртывание узлов кластера</h2>
+<p>На каждом узле кластера установите ПО <strong>Comindware Platform</strong>, разверните экземпляр ПО и установите бинарные пакеты Apache Ignite.</p>
+<h3 id="установка-по-comindware-platform-и-бинарных-пакетов-apache-ignite">Установка ПО Comindware Platform и бинарных пакетов Apache Ignite</h3>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите в режим суперпользователя:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>-s</code> <br/></pre></code></div>
+<p>или</p>
+<div class="highlight"><code><pre><span></span><code>su<span class="w"> </span>-</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Установите ПО и разверните экземпляр <strong>Comindware Platform</strong> одинаковой версии. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5558">Установка, запуск, инициализация и остановка ПО</a>»</em>.</p>
+</li>
+<li>Скачайте дистрибутив <a class="mkdocs_imported_link" href="https://downloads.apache.org/ignite/2.17.0/apache-ignite-2.17.0-bin.zip">Apache Ignite</a>.</li>
+<li>
+<p>Распакуйте дистрибутив (например, в директорию <code>/usr/share/ignite</code>):</p>
+<div class="highlight"><code><pre><span></span><code>unzip<span class="w"> </span>apache-ignite-2.17.0-bin.zip<span class="w"> </span>-d<span class="w"> </span>/usr/share/</code> <br/><code>mv<span class="w"> </span>/usr/share/apache-ignite*<span class="w"> </span>/usr/share/ignite</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Задайте переменную среды <code>IGNITE_HOME</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">IGNITE_HOME</span><span class="o">=</span>/usr/share/ignite</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Скопируйте файл <code>Ignite.config</code> из директории экземпляра ПО в директорию <code>/usr/share/ignite</code>:</p>
+<div class="highlight"><code><pre><span></span><code>cp<span class="w"> </span>/var/www/&lt;instanceName&gt;/Ignite.config<span class="w"> </span>/usr/share/ignite/</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Перейдите в следующую директорию:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/usr/share/ignite/bin</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Откройте файл <code>control.sh</code> для редактирования:</p>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>control.sh</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Измените директиву <code>DEFAULT_CONFIG</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="na">DEFAULT_CONFIG</span><span class="o">=</span><span class="s">config/Ignite.config</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Проверьте получение списка узлов, зарегистрированных в базовой топологии:</p>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>control.sh<span class="w"> </span>--baseline</code> <br/></pre></code></div>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Если работа экземпляра ПО приостановлена, запрос должен вернуть пустую топологию.</p>
+</div>
+</li>
+</ol>
+<h3 id="установка-nfs-клиента">Установка NFS-клиента</h3>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите в режим суперпользователя:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>-s</code> <br/></pre></code></div>
+<p>или</p>
+<div class="highlight"><code><pre><span></span><code>su<span class="w"> </span>-</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Установите службу NFS-клиента:</p>
+<div class="highlight"><code><pre><span></span><code>apt<span class="w"> </span>install<span class="w"> </span>nfs-common</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Откройте файл <code>fstab</code> для редактирования:</p>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/etc/fstab</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Добавьте в файл <code>fstab</code> следующую директиву (<code>&lt;serverIP&gt;</code> — адрес <a class="mkdocs_imported_link" href="#настройка-сервера-хранения-данных-nfs">NFS-сервера</a>):</p>
+<div class="highlight"><code><pre><span></span><code><span class="na">&lt;serverIP&gt;</span><span class="o">:</span><span class="s">/share /mnt/share nfs auto 0 0</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Смонтируйте диски и просмотрите содержимое директории NFS-сервера:</p>
+<div class="highlight"><code><pre><span></span><code>mount<span class="w"> </span>-a</code> <br/><code>ls<span class="w"> </span>-lh<span class="w"> </span>/mnt/share</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Удостоверьтесь, что существует директория <code>/var/lib/comindware/&lt;instanceName&gt;</code>, и задайте её владельца:</p>
+<ul>
+<li>
+<p><strong>Astra Linux, Debian, DEB-дистрибутивы</strong></p>
+<div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>www-data:<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;</code> <br/></pre></code></div>
+</li>
+<li>
+<p><strong>РЕД ОС, RPM-дистрибутивы</strong></p>
+<div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>nginx:<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;</code> <br/></pre></code></div>
+</li>
+<li>
+<p><strong>Альт Сервер</strong></p>
+<div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>_nginx:<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;</code> <br/></pre></code></div>
+</li>
+</ul>
+</li>
+<li>
+<p>Создайте символическую ссылку на директорию со скомпилированными скриптами на NFS-сервере:</p>
+<div class="highlight"><code><pre><span></span><code>ln<span class="w"> </span>-s<span class="w"> </span>/mnt/share/&lt;instanceName&gt;/Scripts<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/Database/Scripts</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Откройте файл <code>comindware&lt;instanceName&gt;-env</code> для редактирования:</p>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/etc/sysconfig/comindware&lt;instanceName&gt;-env</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Проверьте и при необходимости измените лимиты памяти в директиве <code>JVM_OPTS</code> — начальный и максимальный размер кучи и максимальный объём области прямого доступа к памяти, например:</p>
+<div class="highlight"><code><pre><span></span><code><span class="na">-Xms512m -Xmx4g -XX</span><span class="o">:</span><span class="s">MaxDirectMemorySize=1g</span></code> <br/></pre></code></div>
+</li>
+</ol>
+<h2 id="настройка-и-запуск-первого-узла-кластера">Настройка и запуск первого узла кластера</h2>
+<p>На машине с первым узлом кластера настройте доступ к файлам базы данных и экземпляр ПО.</p>
+<h3 id="перенос-базы-данных-на-nfs-сервер">Перенос базы данных на NFS-сервер</h3>
+<p>Если на первом узле был развёрнут экземпляр ПО с базой данных, перенесите её на NFS-сервер.</p>
+<p><strong>Для чистого экземпляра ПО данный этап не требуется.</strong></p>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите в режим суперпользователя:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>-s</code> <br/></pre></code></div>
+<p>или</p>
+<div class="highlight"><code><pre><span></span><code>su<span class="w"> </span>-</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Создайте <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5572">резервную копию</a> экземпляра ПО.</p>
+</li>
+<li>
+<p>Скопируйте резервную копию в директорию <code>/home/&lt;username&gt;</code> (<code>&lt;username&gt;</code> — имя пользователя, <code>&lt;backupName&gt;</code> — имя архива резервной копии, <code>&lt;pathToBackup&gt;</code> — путь к архиву резервной копии):</p>
+<div class="highlight"><code><pre><span></span><code>cp<span class="w"> </span>/&lt;pathToBackup&gt;/&lt;backupName&gt;.cdbbz<span class="w"> </span>/home/&lt;username&gt;</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Перейдите в директорию <code>/home/&lt;username&gt;</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/home/&lt;username&gt;</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Распакуйте архив резервной копии:</p>
+<div class="highlight"><code><pre><span></span><code>unzip<span class="w"> </span>-q<span class="w"> </span>&lt;backupName&gt;.cdbbz</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Перенесите данные экземпляра ПО на NFS-сервер:</p>
+<div class="highlight"><code><pre><span></span><code>cp<span class="w"> </span>-r<span class="w"> </span>Scripts/*<span class="w"> </span>/mnt/share/&lt;instanceName&gt;/Scripts/</code> <br/><code>cp<span class="w"> </span>-r<span class="w"> </span>Streams/*<span class="w"> </span>/mnt/share/&lt;instanceName&gt;/Streams/</code> <br/><code>mv<span class="w"> </span>Database/*<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/Database/</code> <br/><code>rm<span class="w"> </span>-rf<span class="w"> </span>Database<span class="w"> </span>Scripts<span class="w"> </span>Streams</code> <br/></pre></code></div>
+</li>
+</ol>
+<h3 id="настройка-экземпляра-по">Настройка экземпляра ПО</h3>
+<ol class="colored_numbers_list">
+<li>
+<p>Откройте файл <code>Ignite.config</code> для редактирования:</p>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/var/www/&lt;instanceName&gt;/Ignite.config</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Отредактируйте файл <code>Ignite.config</code> по следующему образцу:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"discoverySpi"</span><span class="nt">&gt;</span></code> <br/><code><span class="w">  </span><span class="nt">&lt;bean</span><span class="w"> </span><span class="na">class=</span><span class="s">"org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi"</span><span class="nt">&gt;</span></code> <br/><code><span class="w">    </span><span class="cm">&lt;!-- Укажите IP-адрес, порт и диапазон портов первого узла --&gt;</span></code> <br/><code><span class="w">    </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"localAddress"</span><span class="w"> </span><span class="na">value=</span><span class="s">"&lt;node_1_IP&gt;"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code><span class="w">    </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"localPort"</span><span class="w"> </span><span class="na">value=</span><span class="s">"47510"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code><span class="w">    </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"localPortRange"</span><span class="w"> </span><span class="na">value=</span><span class="s">"9"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code><span class="w">    </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"ipFinder"</span><span class="nt">&gt;</span></code> <br/><code><span class="w">      </span><span class="nt">&lt;bean</span><span class="w"> </span><span class="na">class=</span><span class="s">"org.apache.ignite.spi.discovery.tcp.ipfinder.vm.TcpDiscoveryVmIpFinder"</span><span class="nt">&gt;</span></code> <br/><code><span class="w">        </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"addresses"</span><span class="nt">&gt;</span></code> <br/><code><span class="w">          </span><span class="nt">&lt;list&gt;</span></code> <br/><code><span class="w">            </span><span class="cm">&lt;!-- Укажите IP-адреса всех узлов кластера --&gt;</span></code> <br/><code><span class="w">            </span><span class="nt">&lt;value&gt;&lt;node_1_IP&gt;</span>:47510..47519<span class="nt">&lt;/value&gt;</span></code> <br/><code><span class="w">            </span><span class="nt">&lt;value&gt;&lt;node_2_IP&gt;</span>:47510..47519<span class="nt">&lt;/value&gt;</span></code> <br/><code><span class="w">            </span>...</code> <br/><code><span class="w">            </span><span class="nt">&lt;value&gt;&lt;node_N_IP&gt;</span>:47510..47519<span class="nt">&lt;/value&gt;</span></code> <br/><code><span class="w">          </span><span class="nt">&lt;/list&gt;</span></code> <br/><code><span class="w">        </span><span class="nt">&lt;/property&gt;</span></code> <br/><code><span class="w">      </span><span class="nt">&lt;/bean&gt;</span></code> <br/><code><span class="w">    </span><span class="nt">&lt;/property&gt;</span></code> <br/><code><span class="w">  </span><span class="nt">&lt;/bean&gt;</span></code> <br/><code><span class="nt">&lt;/property&gt;</span></code> <br/><code><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"communicationSpi"</span><span class="nt">&gt;</span></code> <br/><code><span class="w">  </span><span class="nt">&lt;bean</span><span class="w"> </span><span class="na">class=</span><span class="s">"org.apache.ignite.spi.communication.tcp.TcpCommunicationSpi"</span><span class="nt">&gt;</span></code> <br/><code><span class="w">    </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"localPort"</span><span class="w"> </span><span class="na">value=</span><span class="s">"47101"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code><span class="w">    </span><span class="cm">&lt;!-- Укажите IP-адрес первого узла --&gt;</span></code> <br/><code><span class="w">    </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"localAddress"</span><span class="w"> </span><span class="na">value=</span><span class="s">"&lt;node_1_IP&gt;"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code><span class="w">    </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"messageQueueLimit"</span><span class="w"> </span><span class="na">value=</span><span class="s">"1024"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code><span class="w">  </span><span class="nt">&lt;/bean&gt;</span></code> <br/><code><span class="nt">&lt;/property&gt;</span></code> <br/><code></code> <br/><code>...</code> <br/><code></code> <br/><code><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"dataRegionConfigurations"</span><span class="nt">&gt;</span></code> <br/><code><span class="w">  </span><span class="nt">&lt;list&gt;</span></code> <br/><code><span class="w">    </span><span class="nt">&lt;bean</span><span class="w"> </span><span class="na">class=</span><span class="s">"org.apache.ignite.configuration.DataRegionConfiguration"</span><span class="nt">&gt;</span></code> <br/><code><span class="w">      </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"warmUpConfiguration"</span><span class="nt">&gt;</span></code> <br/><code><span class="w">        </span><span class="nt">&lt;bean</span><span class="w"> </span><span class="na">class=</span><span class="s">"org.apache.ignite.configuration.NoOpWarmUpConfiguration"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code><span class="w">      </span><span class="nt">&lt;/property&gt;</span></code> <br/><code><span class="w">      </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"name"</span><span class="w"> </span><span class="na">value=</span><span class="s">"Persistent"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code><span class="w">      </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"persistenceEnabled"</span><span class="w"> </span><span class="na">value=</span><span class="s">"true"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code><span class="w">        </span><span class="cm">&lt;!-- Проверьте и при необходимости отредактируйте объём выделяемой памяти --&gt;</span></code> <br/><code><span class="w">      </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"initialSize"</span><span class="w"> </span><span class="na">value=</span><span class="s">"#{1024L * 1024 * 1024}"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code><span class="w">      </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"maxSize"</span><span class="w"> </span><span class="na">value=</span><span class="s">"#{4L * 1024 * 1024 * 1024}"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code><span class="w">      </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"pageEvictionMode"</span><span class="w"> </span><span class="na">value=</span><span class="s">"RANDOM_2_LRU"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code><span class="w">      </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"checkpointPageBufferSize"</span><span class="w"> </span><span class="na">value=</span><span class="s">"#{1024L * 1024 * 1024}"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code><span class="w">    </span><span class="nt">&lt;/bean&gt;</span></code> <br/><code><span class="w">    </span><span class="nt">&lt;bean</span><span class="w"> </span><span class="na">class=</span><span class="s">"org.apache.ignite.configuration.DataRegionConfiguration"</span><span class="nt">&gt;</span></code> <br/><code><span class="w">      </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"name"</span><span class="w"> </span><span class="na">value=</span><span class="s">"InMemory"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code><span class="w">      </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"persistenceEnabled"</span><span class="w"> </span><span class="na">value=</span><span class="s">"false"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code><span class="w">        </span><span class="cm">&lt;!-- Проверьте и при необходимости отредактируйте объём выделяемой памяти --&gt;</span></code> <br/><code><span class="w">      </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"initialSize"</span><span class="w"> </span><span class="na">value=</span><span class="s">"#{10 * 1024 * 1024}"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code><span class="w">      </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"maxSize"</span><span class="w"> </span><span class="na">value=</span><span class="s">"#{256 * 1024 * 1024}"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code><span class="w">    </span><span class="nt">&lt;/bean&gt;</span></code> <br/><code><span class="w">  </span><span class="nt">&lt;/list&gt;</span></code> <br/><code><span class="nt">&lt;/property&gt;</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Откройте файл конфигурации экземпляра ПО для редактирования:</p>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Отредактируйте файл конфигурации экземпляра ПО по следующему образцу (см. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5554">Конфигурация экземпляра, компонентов ПО и служб. Настройка</a>»</em>):</p>
+<div class="highlight"><code><pre><span></span><code><span class="nt">isFederationAuthEnabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span></code> <br/><code><span class="nt">databasePath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/comindware/&lt;instanceName&gt;/Database</span></code> <br/><code><span class="nt">configPath</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/www/&lt;instanceName&gt;</span></code> <br/><code><span class="c1"># Укажите примонтированные директории NFS-сервера с файлами экземпляра ПО</span></code> <br/><code><span class="nt">backup.config.default.repository.type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LocalDisk</span></code> <br/><code><span class="nt">backup.config.default.repository.localDisk.path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/mnt/share/comindware/Backup</span></code> <br/><code><span class="nt">userStorage.type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LocalDisk</span></code> <br/><code><span class="nt">userStorage.localDisk.path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/mnt/share/&lt;instanceName&gt;/Streams</span></code> <br/><code><span class="nt">tempStorage.type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LocalDisk</span></code> <br/><code><span class="nt">tempStorage.localDisk.path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/mnt/share/&lt;instanceName&gt;/Temp</span></code> <br/><code></code> <br/><code><span class="nt">instanceName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/><code><span class="nt">databaseName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/><code><span class="nt">configName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/><code><span class="c1"># Укажите для каждого узла уникальное имя, например общее имя и номер узла</span></code> <br/><code><span class="nt">nodeName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;&lt;nodeNumber&gt;</span></code> <br/><code></code> <br/><code><span class="nt">mq.server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;kafkaBrokerIP&gt;:&lt;kafkaBrokerPort&gt;</span></code> <br/><code><span class="nt">mq.group</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;</span></code> <br/><code><span class="nt">manageAdapterHost</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span></code> <br/><code><span class="nt">elasticsearchUri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;elasticsearchIP&gt;:&lt;elasticsearchPort&gt;</span></code> <br/><code><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;versionNumber&gt;</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Перейдите в режим суперпользователя:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>-s</code> <br/></pre></code></div>
+<p>или</p>
+<div class="highlight"><code><pre><span></span><code>su<span class="w"> </span>-</code> <br/></pre></code></div>
+</li>
+<li>
+<p>При наличии файла <code>Workers.config</code> удалите его:</p>
+<div class="highlight"><code><pre><span></span><code>rm<span class="w"> </span>-f<span class="w"> </span>/var/www/&lt;instanceName&gt;/Workers.config</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Запустите службу экземпляра ПО:</p>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>start<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
+</li>
+<li>
+<p>В веб-браузере запустите сайт экземпляра ПО и выполните вход.</p>
+</li>
+<li>
+<p>Откройте файл <code>Workers.config</code> для редактирования:</p>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/var/www/&lt;instanceName&gt;/Workers.config</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Отредактируйте файл <code>Workers.config</code> по следующему образцу:</p>
+<div class="highlight"><code><pre><span></span><code><span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></code> <br/><code><span class="nt">&lt;WorkerEngine</span><span class="w"> </span><span class="na">xmlns:xsd=</span><span class="s">"http://www.w3.org/2001/XMLSchema"</span><span class="w"> </span><span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-i</span><span class="nt">&gt;</span></code> <br/><code><span class="w">  </span><span class="nt">&lt;RebuildThreadWorker&gt;</span>false<span class="nt">&lt;/RebuildThreadWorker&gt;</span></code> <br/><code><span class="w">  </span><span class="nt">&lt;BackupSessionsQueue&gt;</span>true<span class="nt">&lt;/BackupSessionsQueue&gt;</span></code> <br/><code><span class="w">  </span><span class="nt">&lt;SessionManagerWorker&gt;</span>false<span class="nt">&lt;/SessionManagerWorker&gt;</span></code> <br/><code><span class="w">  </span><span class="nt">&lt;NotificationWorker&gt;</span>false<span class="nt">&lt;/NotificationWorker&gt;</span></code> <br/><code><span class="w">  </span><span class="nt">&lt;EmailListener&gt;</span>false<span class="nt">&lt;/EmailListener&gt;</span></code> <br/><code><span class="w">  </span><span class="nt">&lt;IndexTasksQueue&gt;</span>false<span class="nt">&lt;/IndexTasksQueue&gt;</span></code> <br/><code><span class="w">  </span><span class="nt">&lt;ProcessEngineQueueProcessing&gt;</span>false<span class="nt">&lt;/ProcessEngineQueueProcessing&gt;</span></code> <br/><code><span class="w">  </span><span class="nt">&lt;ProcessEngineTimerProcessing&gt;</span>false<span class="nt">&lt;/ProcessEngineTimerProcessing&gt;</span></code> <br/><code><span class="w">  </span><span class="nt">&lt;SyncThread&gt;</span>false<span class="nt">&lt;/SyncThread&gt;</span></code> <br/><code><span class="w">  </span><span class="nt">&lt;SwitchOnFullTextSearch&gt;</span>false<span class="nt">&lt;/SwitchOnFullTextSearch&gt;</span></code> <br/><code><span class="w">  </span><span class="nt">&lt;PerformanceMonitoring&gt;</span>false<span class="nt">&lt;/PerformanceMonitoring&gt;</span></code> <br/><code><span class="w">  </span><span class="cm">&lt;!-- Значение ConfigurationId должно совпадать на всех узлах --&gt;</span></code> <br/><code><span class="w">  </span><span class="nt">&lt;ConfigurationId&gt;</span>XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX<span class="nt">&lt;/ConfigurationId&gt;</span></code> <br/><code><span class="nt">&lt;/WorkerEngine&gt;</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Задайте владельца файла <code>Workers.config</code>:</p>
+<ul>
+<li>
+<p><strong>Astra Linux, Debian, DEB-дистрибутивы</strong></p>
+<div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>www-data:<span class="w"> </span>/var/www/&lt;instanceName&gt;/Workers.config</code> <br/></pre></code></div>
+</li>
+<li>
+<p><strong>РЕД ОС, RPM-дистрибутивы</strong></p>
+<div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>nginx:<span class="w"> </span>/var/www/&lt;instanceName&gt;/Workers.config</code> <br/></pre></code></div>
+</li>
+<li>
+<p><strong>Альт Сервер</strong></p>
+<div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>_nginx:<span class="w"> </span>/var/www/&lt;instanceName&gt;/Workers.config</code> <br/></pre></code></div>
+</li>
+</ul>
+</li>
+<li>
+<p>Перезапустите экземпляр ПО:</p>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>restart<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Настройте директорию <code>LocalTemp</code>. См. <em>«<a class="mkdocs_imported_link" href="#настройка-директории-localtemp-после-запуска-узлов-кластера">Настройка директории LocalTemp после запуска узлов кластера</a>»</em>.</p>
+</li>
+</ol>
+<h2 id="настройка-и-запуск-второго-и-последующих-узлов-кластера">Настройка и запуск второго и последующих узлов кластера</h2>
+<p>На машине со вторым и последующими узлами кластера настройте конфигурацию экземпляра ПО.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите в режим суперпользователя:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>-s</code> <br/></pre></code></div>
+<p>или</p>
+<div class="highlight"><code><pre><span></span><code>su<span class="w"> </span>-</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Откройте файл <code>Ignite.config</code> для редактирования:</p>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/var/www/&lt;instanceName&gt;/Ignite.config</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Скопируйте содержимое файла <code>Ignite.config</code> с первого узла.</p>
+</li>
+<li>
+<p>Укажите в директивах <code>localAddress</code> IP-адрес узла N (остальные директивы оставьте без изменений):</p>
+<div class="highlight"><code><pre><span></span><code><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"discoverySpi"</span><span class="nt">&gt;</span></code> <br/><code><span class="w">  </span><span class="nt">&lt;bean</span><span class="w"> </span><span class="na">class=</span><span class="s">"org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi"</span><span class="nt">&gt;</span></code> <br/><code><span class="w">    </span><span class="cm">&lt;!-- укажите IP-адрес узла N --&gt;</span></code> <br/><code><span class="w">    </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"localAddress"</span><span class="w"> </span><span class="na">value=</span><span class="s">"&lt;node_N_IP&gt;"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code></code> <br/><code><span class="w">    </span>...</code> <br/><code></code> <br/><code><span class="w">  </span><span class="nt">&lt;/bean&gt;</span></code> <br/><code><span class="nt">&lt;/property&gt;</span></code> <br/><code><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"communicationSpi"</span><span class="nt">&gt;</span></code> <br/><code><span class="w">  </span><span class="nt">&lt;bean</span><span class="w"> </span><span class="na">class=</span><span class="s">"org.apache.ignite.spi.communication.tcp.TcpCommunicationSpi"</span><span class="nt">&gt;</span></code> <br/><code><span class="w">    </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"localPort"</span><span class="w"> </span><span class="na">value=</span><span class="s">"47101"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code><span class="w">    </span><span class="cm">&lt;!-- укажите IP-адрес узла N --&gt;</span></code> <br/><code><span class="w">    </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"localAddress"</span><span class="w"> </span><span class="na">value=</span><span class="s">"&lt;node_N_IP&gt;"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code><span class="w">    </span><span class="nt">&lt;property</span><span class="w"> </span><span class="na">name=</span><span class="s">"messageQueueLimit"</span><span class="w"> </span><span class="na">value=</span><span class="s">"1024"</span><span class="w"> </span><span class="nt">/&gt;</span></code> <br/><code><span class="w">  </span><span class="nt">&lt;/bean&gt;</span></code> <br/><code><span class="nt">&lt;/property&gt;</span></code> <br/><code>...</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Откройте файл конфигурации экземпляра ПО для редактирования:</p>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Скопируйте содержимое файла <code>&lt;instanceName&gt;.yml</code> с первого узла.</p>
+</li>
+<li>
+<p>В директиве <code>nodeName</code> укажите уникальное имя узла (например общее имя и номер узла):</p>
+<div class="highlight"><code><pre><span></span><code><span class="nt">nodeName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;instanceName&gt;&lt;nodeNumber&gt;</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Откройте файл <code>Workers.config</code> для редактирования:</p>
+<div class="highlight"><code><pre><span></span><code>nano<span class="w"> </span>/var/www/&lt;instanceName&gt;/Workers.config</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Скопируйте содержимое файла <code>Workers.config</code> c первого узла.</p>
+</li>
+<li>Удостоверьтесь, что значение директивы <code>&lt;ConfigurationId&gt;</code> совпадает на всех узлах.</li>
+<li>
+<p>Запустите экземпляр ПО:</p>
+<div class="highlight"><code><pre><span></span><code>systemctl<span class="w"> </span>start<span class="w"> </span>comindware&lt;instanceName&gt;</code> <br/></pre></code></div>
+</li>
+<li>
+<p>В браузере запустите сайт экземпляра ПО.</p>
+</li>
+<li>
+<p>На машине, на которой развёрнут первый узел, перейдите в директорию со скриптами Apache Ignite:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/home/username/ignite/bin</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Выполняйте запрос топологии до тех пор, пока не отобразится сообщение о наличии стороннего узла:</p>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>control.sh<span class="w"> </span>--baseline</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Выполните запрос на включение узла N в топологию (<code>&lt;nodeNConsistenceId&gt;</code> — идентификатор узла N в Ignite):</p>
+<div class="highlight"><code><pre><span></span><code>bash<span class="w"> </span>control.sh<span class="w"> </span>--baseline<span class="w"> </span>add<span class="w"> </span>&lt;nodeNConsistenceId&gt;<span class="w"> </span>-y</code> <br/></pre></code></div>
+</li>
+<li>
+<p>На машине с узлом N кластера перейдите в директорию со скриптами Apache Ignite:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/home/username/ignite/bin</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Выполните запрос топологии:</p>
+<div class="highlight"><code><pre><span></span><code>watch<span class="w"> </span>bash<span class="w"> </span>control.sh<span class="w"> </span>--baseline</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Дождитесь включения узла N в топологию.</p>
+</li>
+<li>Дождитесь отображения страницы входа в экземпляр ПО в браузере.</li>
+</ol>
+<h2 id="настройка-директории-localtemp-после-запуска-узлов-кластера">Настройка директории LocalTemp после запуска узлов кластера</h2>
+<p>При каждом запуске экземпляра ПО заново создаётся локальная папка <code>/var/lib/comindware/&lt;instanceName&gt;/LocalTemp</code> и удаляется символьная ссылка на неё на NFS-сервере. После этого необходимо удалить директорию <code>/var/lib/comindware/&lt;instanceName&gt;/LocalTemp</code> и пересоздавать символьную ссылку на директорию <code>LocalTemp</code> на NFS-сервере.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>На каждом узле удалите локальную директорию <code>LocalTemp</code>:</p>
+<div class="highlight"><code><pre><span></span><code>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/LocalTemp</code> <br/></pre></code></div>
+</li>
+<li>
+<p>С любого узла создайте директорию <code>LocalTemp</code> на NFS-сервере:</p>
+<div class="highlight"><code><pre><span></span><code>mkdir<span class="w"> </span>/mnt/share/&lt;instanceName&gt;/LocalTemp</code> <br/></pre></code></div>
+</li>
+<li>
+<p>На каждом узле назначьте владельца директории <code>LocalTemp</code> на NFS-сервере:</p>
+<ul>
+<li>
+<p><strong>Astra Linux, Debian, DEB-дистрибутивы</strong></p>
+<div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>www-data:www-data<span class="w"> </span>/mnt/share/&lt;instanceName&gt;/LocalTemp</code> <br/></pre></code></div>
+</li>
+<li>
+<p><strong>РЕД ОС, RPM-дистрибутивы</strong></p>
+<div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>nginx:nginx<span class="w"> </span>/mnt/share/&lt;instanceName&gt;/LocalTemp</code> <br/></pre></code></div>
+</li>
+<li>
+<p><strong>Альт Сервер</strong></p>
+<div class="highlight"><code><pre><span></span><code>chown<span class="w"> </span>-R<span class="w"> </span>_nginx:_nginx<span class="w"> </span>/mnt/share/&lt;instanceName&gt;/LocalTemp</code> <br/></pre></code></div>
+</li>
+</ul>
+</li>
+<li>
+<p>На каждом узле создайте символьную ссылку на директорию <code>LocalTemp</code> с NFS-сервера:</p>
+<div class="highlight"><code><pre><span></span><code>ln<span class="w"> </span>-s<span class="w"> </span>/mnt/share/&lt;instanceName&gt;/LocalTemp<span class="w"> </span>/var/lib/comindware/&lt;instanceName&gt;/LocalTemp</code> <br/></pre></code></div>
+</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5558">Установка, запуск, инициализация и остановка ПО</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5561">Пути и содержимое директорий экземпляра ПО</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5554">Конфигурация экземпляра, компонентов ПО и служб. Настройка</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5429">Системные требования Comindware Platform</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5566">Резервное копирование. Настройка и запуск, просмотр журнала сеансов</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5445">Обеспечение высокой доступности и отказоустойчивости Comindware Platform</a></em></li>
+<li>
+<p><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5452">Apache Ignite. Установка и настройка</a></em></p>
+</li>
+<li>
+<p><em><a class="mkdocs_imported_link" href="https://ignite.apache.org/docs/latest/clustering/clustering">Рекомендации по кластеризации. Документация Apache Ignite (на английском языке)</a></em></p>
+</li>
+<li><em><a class="mkdocs_imported_link" href="https://ignite.apache.org/docs/latest/clustering/baseline-topology">Настройка базовой топологии. Документация Apache Ignite</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://ignite.apache.org/docs/latest/clustering/zookeeper-discovery">Настройка ZooKeeper Discovery. Документация Apache Ignite</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://ignite.apache.org/docs/latest/configuring-caches/partition-loss-policy">Настройка резервного копирования. Документация Apache Ignite»</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://ignite.apache.org/docs/latest/configuring-caches/partition-loss-policy">Настройка восстановления разделов. Документация Apache Ignite»</a></em></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

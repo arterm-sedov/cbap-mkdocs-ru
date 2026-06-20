@@ -2,7 +2,7 @@
 title: 'Кнопки'
 kbId: 4790
 url: 'https://kb.comindware.ru/article.php?id=4790'
-updated: '2026-06-17 14:09:48'
+updated: '2026-06-20 18:05:06'
 ---
 
 # Кнопки

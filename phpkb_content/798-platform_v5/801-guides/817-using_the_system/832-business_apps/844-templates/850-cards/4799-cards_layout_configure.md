@@ -2,7 +2,7 @@
 title: 'Карточки. Настройка'
 kbId: 4799
 url: 'https://kb.comindware.ru/article.php?id=4799'
-updated: '2025-04-04 14:39:49'
+updated: '2026-06-20 18:05:08'
 ---
 
 # Карточки. Настройка

@@ -2,7 +2,7 @@
 title: 'Elasticsearch. Установка в базовой конфигурации для Windows'
 kbId: 4617
 url: 'https://kb.comindware.ru/article.php?id=4617'
-updated: '2026-01-26 18:43:57'
+updated: '2026-06-20 18:04:30'
 ---
 
 # Elasticsearch. Установка в базовой конфигурации для Windows

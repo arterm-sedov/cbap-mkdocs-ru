@@ -1,43 +1,227 @@
-<h1>Управление версиями приложений через Git. Методология и рекомендации</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr">
+<h1>Управление версиями приложений через Git. Методология и рекомендации</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5155" kb-tags="dev,git,main,master,pull-request,push,ветка,коммиты,методология,откат,продуктив,релиз,трансфер,управление версиями" kb-title="Управление версиями приложений через Git. Методология и рекомендации">
 <div class="md-container" data-md-component="container">
-<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
 <div class="mce-toc">
-<h2 class="toc-heading">Содержание</h2>
+<h2 class="toc-heading">
+      Содержание
+      </h2>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_intro"> <span class="md-ellipsis"> Введение </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_envs_branches"> <span class="md-ellipsis"> Среды и ветки </span> </a><nav aria-label="Среды и ветки" class="md-nav">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_intro">
+<span class="md-ellipsis">
+      
+        Введение
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_envs_branches">
+<span class="md-ellipsis">
+      
+        Среды и ветки
+      
+    </span>
+</a>
+<nav aria-label="Среды и ветки" class="md-nav">
 <ul class="md-nav__list">
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_envs_recommended_envs"> <span class="md-ellipsis"> Рекомендуемые среды </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_envs_branches_scheme"> <span class="md-ellipsis"> Рекомендуемая схема веток </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_envs_prod_no_direct_changes"> <span class="md-ellipsis"> Запрет прямых изменений в продуктивной среде </span> </a></li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_envs_recommended_envs">
+<span class="md-ellipsis">
+      
+        Рекомендуемые среды
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_envs_branches_scheme">
+<span class="md-ellipsis">
+      
+        Рекомендуемая схема веток
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_envs_prod_no_direct_changes">
+<span class="md-ellipsis">
+      
+        Запрет прямых изменений в продуктивной среде
+      
+    </span>
+</a>
+</li>
 </ul>
-</nav></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_cycle"> <span class="md-ellipsis"> Цикл настройки приложения </span> </a><nav aria-label="Цикл настройки приложения" class="md-nav">
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_cycle">
+<span class="md-ellipsis">
+      
+        Цикл настройки приложения
+      
+    </span>
+</a>
+<nav aria-label="Цикл настройки приложения" class="md-nav">
 <ul class="md-nav__list">
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_cycle_allowed_changes"> <span class="md-ellipsis"> Допустимые типы изменений </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_cycle_logical_changes"> <span class="md-ellipsis"> Логически завершённые изменения </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_cycle_dev_check"> <span class="md-ellipsis"> Проверка изменений в среде разработки </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_commits"> <span class="md-ellipsis"> Фиксация изменений (коммиты) </span> </a></li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_cycle_allowed_changes">
+<span class="md-ellipsis">
+      
+        Допустимые типы изменений
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_cycle_logical_changes">
+<span class="md-ellipsis">
+      
+        Логически завершённые изменения
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_cycle_dev_check">
+<span class="md-ellipsis">
+      
+        Проверка изменений в среде разработки
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_commits">
+<span class="md-ellipsis">
+      
+        Фиксация изменений (коммиты)
+      
+    </span>
+</a>
+</li>
 </ul>
-</nav></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_transfer_to_prod"> <span class="md-ellipsis"> Подготовка и перенос изменений в продуктивную среду </span> </a><nav aria-label="Подготовка и перенос изменений в продуктивную среду" class="md-nav">
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_transfer_to_prod">
+<span class="md-ellipsis">
+      
+        Подготовка и перенос изменений в продуктивную среду
+      
+    </span>
+</a>
+<nav aria-label="Подготовка и перенос изменений в продуктивную среду" class="md-nav">
 <ul class="md-nav__list">
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_transfer_prepare_release"> <span class="md-ellipsis"> Подготовка к релизу </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_transfer_merge_release"> <span class="md-ellipsis"> Слияние веток для формирования релиза </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_transfer_update_prod"> <span class="md-ellipsis"> Обновление продуктивной среды </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_checklists"> <span class="md-ellipsis"> Контрольные списки релиза и отката </span> </a></li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_transfer_prepare_release">
+<span class="md-ellipsis">
+      
+        Подготовка к релизу
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_transfer_merge_release">
+<span class="md-ellipsis">
+      
+        Слияние веток для формирования релиза
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_transfer_update_prod">
+<span class="md-ellipsis">
+      
+        Обновление продуктивной среды
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_checklists">
+<span class="md-ellipsis">
+      
+        Контрольные списки релиза и отката
+      
+    </span>
+</a>
+</li>
 </ul>
-</nav></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_versions"> <span class="md-ellipsis"> Версионирование и откат </span> </a><nav aria-label="Версионирование и откат" class="md-nav">
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_versions">
+<span class="md-ellipsis">
+      
+        Версионирование и откат
+      
+    </span>
+</a>
+<nav aria-label="Версионирование и откат" class="md-nav">
 <ul class="md-nav__list">
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_versions_fixing"> <span class="md-ellipsis"> Фиксация версий приложения </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_versions_rollback"> <span class="md-ellipsis"> Откат к предыдущей версии </span> </a></li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_versions_fixing">
+<span class="md-ellipsis">
+      
+        Фиксация версий приложения
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_versions_rollback">
+<span class="md-ellipsis">
+      
+        Откат к предыдущей версии
+      
+    </span>
+</a>
+</li>
 </ul>
-</nav></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_transfer_behavior"> <span class="md-ellipsis"> Особенности и ограничения импорта и экспорта версий приложения </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_common_errors"> <span class="md-ellipsis"> Типовые ошибки и рекомендации по их предотвращению </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_existing_prod"> <span class="md-ellipsis"> Подключение управления версиями к уже работающему продуктиву </span> </a></li>
-<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_transfer_behavior">
+<span class="md-ellipsis">
+      
+        Особенности и ограничения импорта и экспорта версий приложения
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_common_errors">
+<span class="md-ellipsis">
+      
+        Типовые ошибки и рекомендации по их предотвращению
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#version_control_methodology_existing_prod">
+<span class="md-ellipsis">
+      
+        Подключение управления версиями к уже работающему продуктиву
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      
+        Связанные статьи
+      
+    </span>
+</a>
+</li>
 </ul>
 </div>
 </nav>
@@ -49,10 +233,10 @@
 <p>Методология дополняет функциональные инструкции из статей:</p>
 <div class="relatedTopics">
 <ul>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4808">Управление версиями приложения. Экспорт и импорт</a></li>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4806">Экспорт и импорт версий приложения с помощью Git</a></li>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4807">Экспорт и импорт версий приложения вручную</a></li>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5071">Экспорт и импорт версий приложения с помощью Excel</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5652">Управление версиями приложения. Экспорт и импорт</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5649">Экспорт и импорт версий приложения с помощью Git</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5653">Экспорт и импорт версий приложения вручную</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5651">Экспорт и импорт версий приложения с помощью Excel</a></li>
 </ul>
 </div>
 <p>Подробные пошаговые инструкции по экспорту и импорту версий приложений в <strong>Comindware Platform</strong> см. в соответствующих статьях.</p>
@@ -87,8 +271,7 @@
 <li>Импорт в продуктивную среду выполняется из стабильной ветки.</li>
 </ol>
 <figure class="screenshot_with_caption">
-<p><img alt="Пример схемы веток репозитория для среды разработки и продуктивной среды" src="/platform/v5.0/business_apps/version_control/img/version_control_git_flow.png"/></p>
-<figcaption class="caption">Пример схемы веток репозитория для среды разработки и продуктивной среды</figcaption>
+<p><img alt="Пример схемы веток репозитория для среды разработки и продуктивной среды" src="/platform/v5.0/business_apps/version_control/img/version_control_git_flow.png"/></p><figcaption class="caption">Пример схемы веток репозитория для среды разработки и продуктивной среды</figcaption>
 </figure>
 <h3 id="version_control_methodology_envs_prod_no_direct_changes">Запрет прямых изменений в продуктивной среде</h3>
 <p>Придерживайтесь следующих правил:</p>
@@ -162,8 +345,7 @@
 <li>Сопоставьте изменения в конфигурации приложения с выбранными коммитами и убедитесь, что в релиз не попадают изменения, не относящиеся к задачам этого релиза.</li>
 </ol>
 <figure class="screenshot_with_caption">
-<p><img alt="Пример сравнения двух версий конфигурации при подготовке релиза" src="/platform/v5.0/business_apps/version_control/img/version_control_release_diff.png"/></p>
-<figcaption class="caption">Пример сравнения двух версий конфигурации при подготовке релиза</figcaption>
+<p><img alt="Пример сравнения двух версий конфигурации при подготовке релиза" src="/platform/v5.0/business_apps/version_control/img/version_control_release_diff.png"/></p><figcaption class="caption">Пример сравнения двух версий конфигурации при подготовке релиза</figcaption>
 </figure>
 <h3 id="version_control_methodology_transfer_merge_release">Слияние веток для формирования релиза</h3>
 <p>Типовой порядок действий:</p>
@@ -175,14 +357,13 @@
 <li>Установите тег версии в стабильной ветке (см. раздел «Версионирование и откат»).</li>
 </ol>
 <figure class="screenshot_with_caption">
-<p><img alt="Пример запроса на слияние (pull request) из рабочей ветки в стабильную ветку перед релизом" src="/platform/v5.0/business_apps/version_control/img/version_control_release_pr.png"/></p>
-<figcaption class="caption">Пример запроса на слияние (pull request) из рабочей ветки в стабильную ветку перед релизом</figcaption>
+<p><img alt="Пример запроса на слияние (pull request) из рабочей ветки в стабильную ветку перед релизом" src="/platform/v5.0/business_apps/version_control/img/version_control_release_pr.png"/></p><figcaption class="caption">Пример запроса на слияние (pull request) из рабочей ветки в стабильную ветку перед релизом</figcaption>
 </figure>
 <h3 id="version_control_methodology_transfer_update_prod">Обновление продуктивной среды</h3>
 <ol class="colored_numbers_list">
-<li>Убедитесь, что для продуктивной среды настроено и выполняется регулярное резервное копирование, и перед обновлением создана наиболее актуальная резервная копия. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5082">Резервное копирование и восстановление. Рекомендации по организации и оптимизации</a>»</em>.</li>
+<li>Убедитесь, что для продуктивной среды настроено и выполняется регулярное резервное копирование, и перед обновлением создана наиболее актуальная резервная копия. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5568">Резервное копирование и восстановление. Рекомендации по организации и оптимизации</a>»</em>.</li>
 <li>Сформируйте новую версию приложения в среде разработки.</li>
-<li>Выполните шаги, указанные в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4808#version_control_app_prepare">Подготовка приложения к экспорту</a>»</em>.</li>
+<li>Выполните шаги, указанные в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5652#version_control_app_prepare">Подготовка приложения к экспорту</a>»</em>.</li>
 <li>Перенесите новую версию приложения в продуктивную среду.</li>
 <li>Выполните проверки по заранее подготовленным тест-кейсам или контрольным спискам.</li>
 </ol>
@@ -230,11 +411,10 @@
 <li>Снимите или пересмотрите временные ограничения и временные меры, введённые на время инцидента.</li>
 </ol>
 <figure class="screenshot_with_caption">
-<p><img alt="Пример тега версии приложения в стабильной ветке репозитория" src="/platform/v5.0/business_apps/version_control/img/version_control_release_tag.png"/></p>
-<figcaption class="caption">Пример тега версии приложения в стабильной ветке репозитория</figcaption>
+<p><img alt="Пример тега версии приложения в стабильной ветке репозитория" src="/platform/v5.0/business_apps/version_control/img/version_control_release_tag.png"/></p><figcaption class="caption">Пример тега версии приложения в стабильной ветке репозитория</figcaption>
 </figure>
 <h2 id="version_control_methodology_transfer_behavior">Особенности и ограничения импорта и экспорта версий приложения</h2>
-<p>Общие особенности поведения при экспорте и импорте, а также перечень сущностей, которые переносятся или не переносятся, подробно описаны в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4808">Управление версиями приложения. Экспорт и импорт</a>»</em>.</p>
+<p>Общие особенности поведения при экспорте и импорте, а также перечень сущностей, которые переносятся или не переносятся, подробно описаны в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5652">Управление версиями приложения. Экспорт и импорт</a>»</em>.</p>
 <p>При планировании релизов и анализе последствий импорта версии приложения учитывайте, что:</p>
 <ul>
 <li>шаблоны, отсутствующие в импортируемой версии, но присутствующие в текущем приложении, могут быть признаны неактуальными и удалены вместе с записями;</li>
@@ -243,7 +423,7 @@
 <li>обсуждения и часть истории могут не переноситься.</li>
 </ul>
 <p>Перед каждым импортом версии приложения рекомендуется предварительно оценить влияние операции на связанные приложения и внешние интеграции.</p>
-<p>Подробную информацию о влиянии экспорта и импорта на идентификаторы и системные имена см. в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4713">Идентификаторы и системные имена</a>»</em>.</p>
+<p>Подробную информацию о влиянии экспорта и импорта на идентификаторы и системные имена см. в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5181">Идентификаторы и системные имена</a>»</em>.</p>
 <h2 id="version_control_methodology_common_errors">Типовые ошибки и рекомендации по их предотвращению</h2>
 <p>В процессе управления версиями приложений часто встречаются следующие ситуации:</p>
 <ul>
@@ -256,7 +436,7 @@
 </ul>
 <p>Чтобы снизить риски:</p>
 <ul>
-<li>заранее готовьте приложения к экспорту согласно разделу «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4808#version_control_app_prepare">Подготовка приложения к экспорту</a>»;</li>
+<li>заранее готовьте приложения к экспорту согласно разделу «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5652#version_control_app_prepare">Подготовка приложения к экспорту</a>»;</li>
 <li>используйте системные имена вместо идентификаторов в выражениях, когда это возможно;</li>
 <li>разбивайте крупные изменения на несколько версий с промежуточными проверками;</li>
 <li>избегайте выполнения настройки непосредственно на продуктивной среде;</li>
@@ -269,10 +449,10 @@
 </ol>
 <ul>
 <li>создайте резервную копию продуктивного экземпляра <strong>Comindware Platform</strong>;</li>
-<li>разверните копию на отдельном сервере или в отдельном экземпляре, руководствуясь <em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5082">рекомендациями по резервному копированию и восстановлению</a></em>.</li>
+<li>разверните копию на отдельном сервере или в отдельном экземпляре, руководствуясь <em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5568">рекомендациями по резервному копированию и восстановлению</a></em>.</li>
 </ul>
 <ol class="colored_numbers_list" start="2">
-<li>Настройте подключение к репозиторию Git, если планируется использование Git. См. статью <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4680">Управление версиями через Git. Настройка подключения</a>»</em>.</li>
+<li>Настройте подключение к репозиторию Git, если планируется использование Git. См. статью <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5623">Управление версиями через Git. Настройка подключения</a>»</em>.</li>
 <li>Попробуйте выполнить экспорт приложения.</li>
 <li>Устраните в среде разработки ошибки и несоответствия, препятствующие экспорту приложения.</li>
 <li>Включите управление версиями для приложения и выполните первый экспорт в репозиторий или в файл версии.</li>
@@ -282,17 +462,24 @@
 <div class="relatedTopics">
 <h2 id="связанные-статьи">Связанные статьи</h2>
 <ul>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4808">Управление версиями приложения. Экспорт и импорт</a></li>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4806">Экспорт и импорт версий приложения с помощью Git</a></li>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4807">Экспорт и импорт версий приложения вручную</a></li>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5071">Экспорт и импорт версий приложения с помощью Excel</a></li>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4680">Управление версиями через Git. Настройка подключения</a></li>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4713">Идентификаторы и системные имена</a></li>
-<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5082">Резервное копирование и восстановление. Рекомендации по организации и оптимизации</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5652">Управление версиями приложения. Экспорт и импорт</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5649">Экспорт и импорт версий приложения с помощью Git</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5653">Экспорт и импорт версий приложения вручную</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5651">Экспорт и импорт версий приложения с помощью Excel</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5623">Управление версиями через Git. Настройка подключения</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5181">Идентификаторы и системные имена</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5568">Резервное копирование и восстановление. Рекомендации по организации и оптимизации</a></li>
 </ul>
 </div>
 </article>
 </div>
 </div>
-<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
 </div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

@@ -2,7 +2,7 @@
 title: 'Настройка кнопки экспорта записи'
 kbId: 4798
 url: 'https://kb.comindware.ru/article.php?id=4798'
-updated: '2024-10-16 17:38:50'
+updated: '2026-06-20 18:05:08'
 ---
 
 # Настройка кнопки экспорта записи
@@ -27,7 +27,7 @@ updated: '2024-10-16 17:38:50'
    - **Шаблон экспорта** — укажите ранее созданный [шаблон экспорта][export_templates].
 5. Сохраните кнопку.
 
-_![Свойства кнопки экспорта документа, сформированному по шаблону экспорта](https://kb.comindware.ru/assets/export_template_button_properties.png)_
+_![Свойства кнопки экспорта документа, сформированному по шаблону экспорта](/platform/v5.0/business_apps/templates/export_templates/img/export_template_button_properties.png)_
 
 ## Размещение кнопки на форме
 
@@ -37,7 +37,7 @@ _![Свойства кнопки экспорта документа, сформ
 4. Из панели элементов перетащите кнопку экспорта на область кнопок.
 5. Сохраните форму.
 
-_![Перетаскивание кнопки экспорта на форму](https://kb.comindware.ru/assets/export_template_button_form_placement.png)_
+_![Перетаскивание кнопки экспорта на форму](/platform/v5.0/business_apps/templates/export_templates/img/export_template_button_form_placement.png)_
 
 ## Настройка разрешения на использование кнопки
 
@@ -48,14 +48,12 @@ _![Перетаскивание кнопки экспорта на форму](h
 5. Установите для кнопки экспорта флажок в столбце «**Использование кнопки**».
 6. Сохраните роль.
 
-_![Добавление разрешения на использование кнопки экспорта для роли](https://kb.comindware.ru/assets/export_template_button_configure_permission.png)_
+_![Добавление разрешения на использование кнопки экспорта для роли](/platform/v5.0/business_apps/templates/export_templates/img/export_template_button_configure_permission.png)_
 
 --8<-- "related_topics_heading.md"
 
-**[Настройка шаблона экспорта][export_templates]**
-
-**[Подготовка файла шаблона экспорта][export_template_file_configure]**
-
-**[Кнопки. Определение, настройка, удаление][buttons]**
+- *[Настройка шаблона экспорта][export_templates]*
+- *[Подготовка файла шаблона экспорта][export_template_file_configure]*
+- *[Кнопки. Определение, настройка, удаление][buttons]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

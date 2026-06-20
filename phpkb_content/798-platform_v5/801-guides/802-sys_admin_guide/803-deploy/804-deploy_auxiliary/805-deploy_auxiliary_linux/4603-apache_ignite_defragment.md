@@ -2,7 +2,7 @@
 title: 'Apache Ignite. Дефрагментация данных'
 kbId: 4603
 url: 'https://kb.comindware.ru/article.php?id=4603'
-updated: '2025-12-22 12:20:20'
+updated: '2026-06-20 18:04:28'
 ---
 
 # Apache Ignite. Дефрагментация данных

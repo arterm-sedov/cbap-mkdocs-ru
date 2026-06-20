@@ -1,0 +1,16 @@
+---
+title: 'Остановка экземпляра системы с помощью Диспетчера служб IIS'
+kbId: 4628
+url: 'https://kb.comindware.ru/article.php?id=4628'
+updated: '2026-06-20 18:04:36'
+---
+
+# Остановка экземпляра системы с помощью Диспетчера служб IIS
+
+1. Откройте Диспетчер служб IIS.
+2. Выберите сайт в левом дереве.
+3. Нажмите кнопку «**Остановить**» в правой панели.
+
+_![Остановка сайта с помощью Диспетчера служб IIS](https://kb.comindware.ru/assets/administration_tool12.png)_
+
+{% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

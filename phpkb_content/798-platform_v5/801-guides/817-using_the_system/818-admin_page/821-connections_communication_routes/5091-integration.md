@@ -2,7 +2,7 @@
 title: 'Интеграция Comindware Platform с внешними системами. Общие рекомендации'
 kbId: 5091
 url: 'https://kb.comindware.ru/article.php?id=5091'
-updated: '2025-12-11 13:14:25'
+updated: '2026-06-20 18:05:53'
 ---
 
 # Интеграция {{ productName }} с внешними системами. Общие рекомендации

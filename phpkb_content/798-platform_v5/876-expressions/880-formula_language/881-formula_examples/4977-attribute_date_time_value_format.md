@@ -2,7 +2,7 @@
 title: 'Атрибут «Дата и время». Форматирование значений с помощью формул и N3'
 kbId: 4977
 url: 'https://kb.comindware.ru/article.php?id=4977'
-updated: '2025-06-30 10:19:48'
+updated: '2026-06-20 18:06:19'
 ---
 
 # Атрибут «Дата и время». Форматирование значений с помощью формул и N3
@@ -145,8 +145,8 @@ updated: '2025-06-30 10:19:48'
 - [Атрибут типа «Дата и время»][attribute_date_time]
 - [Настройка поля атрибута типа «Дата и время» на форме][form_dynamic_elements]
 - [Атрибут типа «Часовой пояс»][attribute_timezone]
-- [Язык формул](https://kb.comindware.ru/category.php?id=880)
-- [Язык N3](https://kb.comindware.ru/category.php?id=877)
+- [Язык формул](https://kb.comindware.ru/category.php?id=901)
+- [Язык N3](https://kb.comindware.ru/category.php?id=903)
 - [HTTP-запросы типа GET. Отправка запроса и обработка ответа в формате JSON][http_send_example]
 - [HTTP-запросы типа POST. Отправка и получение ответа][http_send_post]
 

@@ -2,7 +2,7 @@
 title: 'Конечные события'
 kbId: 4744
 url: 'https://kb.comindware.ru/article.php?id=4744'
-updated: '2025-04-10 16:27:45'
+updated: '2026-06-20 18:04:59'
 ---
 
 # Конечные события

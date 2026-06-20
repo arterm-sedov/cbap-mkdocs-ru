@@ -2,7 +2,7 @@
 title: 'OpenSearch. Настройка разрешений'
 kbId: 5152
 url: 'https://kb.comindware.ru/article.php?id=5152'
-updated: '2026-01-27 18:41:10'
+updated: '2026-06-20 18:04:29'
 ---
 
 # OpenSearch. Настройка разрешений

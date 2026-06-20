@@ -2,7 +2,7 @@
 title: 'Введение'
 kbId: 4579
 url: 'https://kb.comindware.ru/article.php?id=4579'
-updated: '2026-05-29 15:07:20'
+updated: '2026-06-20 18:04:20'
 ---
 
 # Введение

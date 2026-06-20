@@ -2,7 +2,7 @@
 title: 'Атрибут типа «Штрихкод»'
 kbId: 4764
 url: 'https://kb.comindware.ru/article.php?id=4764'
-updated: '2024-07-01 14:33:45'
+updated: '2026-06-20 18:05:04'
 ---
 
 # Атрибут типа «Штрихкод»
@@ -12,13 +12,12 @@ updated: '2024-07-01 14:33:45'
 Помимо **[общих свойств][attribute_common_properties]** для атрибута типа «**Штрихкод**» предусмотрены перечисленные ниже свойства.
 
 - «**Формат отображения**»:
-
   - QR-код
   - штрихкод типа Code39
   - штрихкод типа GS1\_128
-- «**Вычислять автоматически**» — установите этот флажок, чтобы значение атрибута вычислялось во время работы приложения. См. раздел «**[Вычисляемый атрибут][attribute_calculated]**».
+- «**Вычислять автоматически**» — установите этот флажок, чтобы значение атрибута вычислялось во время работы приложения. См. «**[Вычисляемые атрибуты][attribute_calculated]**».
 
-_![Свойства атрибута типа «Штрихкод»](https://kb.comindware.ru/assets/attribute_qrcode_properties.png)_
+_![Свойства атрибута типа «Штрихкод»](/platform/v5.0/business_apps/templates/attributes/img/attribute_qrcode_properties.png)_
 
 ## Пример использования
 
@@ -40,12 +39,11 @@ _![Свойства атрибута типа «Штрихкод»](https://kb.c
 4. Нажмите кнопку «**Сохранить**».
 5. Проверьте сформированный QR-код, отсканировав его с помощью смартфона.
 
-_![Редактирование QR-кода на форме](https://kb.comindware.ru/assets/attribute_qrcode_example.png)_
+_![Редактирование QR-кода на форме](/platform/v5.0/business_apps/templates/attributes/img/attribute_qrcode_example.png)_
 
 --8<-- "related_topics_heading.md"
 
-**[Общие свойства атрибутов][attribute_common_properties]**
-
-**[Атрибуты. Определения, типы, настройка, архивирование, удаление][attributes]**
+- *[Общие свойства атрибутов][attribute_common_properties]*
+- *[Атрибуты. Определения, типы, настройка, архивирование, удаление][attributes]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

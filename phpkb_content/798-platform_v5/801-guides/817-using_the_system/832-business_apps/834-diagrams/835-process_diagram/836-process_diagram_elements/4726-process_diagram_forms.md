@@ -2,7 +2,7 @@
 title: 'Стартовая форма и форма пользовательской задачи'
 kbId: 4726
 url: 'https://kb.comindware.ru/article.php?id=4726'
-updated: '2024-10-18 16:04:11'
+updated: '2026-06-20 18:04:57'
 ---
 
 # Стартовая форма и форма пользовательской задачи
@@ -62,16 +62,11 @@ updated: '2024-10-18 16:04:11'
 
 --8<-- "related_topics_heading.md"
 
-**[Редактирование формы][forms]**
-
-**[Использование вложенной формы][forms]**
-
-**[Простое начальное событие][process_diagram_elements_none_start_event]**
-
-**[Пользовательская задача][process_diagram_elements_user_task]**
-
-**[Элементы диаграммы процесса][process_diagram_elements]**
-
-**[Редактирование диаграммы процесса][process_diagram]**
+- *[Редактирование формы][forms]*
+- *[Использование вложенной формы][forms]*
+- *[Простое начальное событие][process_diagram_elements_none_start_event]*
+- *[Пользовательская задача][process_diagram_elements_user_task]*
+- *[Элементы диаграммы процесса][process_diagram_elements]*
+- *[Редактирование диаграммы процесса][process_diagram]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

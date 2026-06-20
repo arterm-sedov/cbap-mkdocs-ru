@@ -2,7 +2,7 @@
 title: 'Предиктивный ввод в формулах'
 kbId: 5035
 url: 'https://kb.comindware.ru/article.php?id=5035'
-updated: '2025-05-30 18:02:03'
+updated: '2026-06-20 18:06:25'
 ---
 
 # Предиктивный ввод в формулах
@@ -417,7 +417,7 @@ ADDDAYS($$requestTime, 1)
 --8<-- "related_topics_heading.md"
 
 - [Редактор выражений][expression_editor]
-- [Примеры использования формул](https://kb.comindware.ru/category.php?id=881)
+- [Примеры использования формул](https://kb.comindware.ru/category.php?id=902)
 - [Справочник по функциям][expression_editor]
 - [Атрибут типа «Запись»][attribute_record]
 - [Атрибут типа «Список значений»][attribute_enum]
