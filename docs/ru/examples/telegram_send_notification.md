@@ -18,7 +18,7 @@ hide: tags
 
 Требуется отправлять пользователю сообщение в Telegram с текстом из поля _«Сообщение»_ на форме по нажатию кнопки _«Отправить в Telegram»_.
 
-## Настройка приложения {: #telegram_send_notification_nastroyka_prilozheniya }
+## Настройка приложения {: #telegram_send_notification_app_config }
 
 1. Создайте приложение _«Интеграция с Telegram»_.
 2. Создайте шаблон записи _«Уведомления»_ в приложении _«Интеграция с Telegram»_.
@@ -31,7 +31,7 @@ hide: tags
 
 5. Поместите на основную форму шаблона _«Уведомления»_ атрибуты _«ID чата»_ и _«Сообщение»_ и кнопку _«Отправить в Telegram»_.
 
-## Инициализация бота в Telegram {: #telegram_send_notification_inicializaciya_bota_v_telegram }
+## Инициализация бота в Telegram {: #telegram_send_notification_bot_init }
 
 1. В мессенджере Telegram откройте чат [@BotFather][telegram_botfather].
 2. В чате введите команду `/start`.
@@ -47,10 +47,10 @@ hide: tags
     {"ok":true,"result":[{"update_id":XXXXXXXX, "message":{"message_id":4,"from":{"id":1234567890,"is_bot":false,"first_name":"User Name","username":"username","language_code":"en"},"chat":{"id":1234567890,"first_name":"User Name","username":"username","type":"private"},"date":1717687196,"text":"chatid"}}]}
     ```
 
-10. Найдите в этом сообщении идентификатор чата вида `"from":{"id":1234567890` или `"chat":{"id":1234567890`, где цифры — это идентификатор чата вашего бота {: #telegram_send_notification_chat_id }.
+10. <a id="telegram_send_notification_chat_id"></a>Найдите в этом сообщении идентификатор чата вида `"from":{"id":1234567890` или `"chat":{"id":1234567890`, где цифры — это идентификатор чата вашего бота.
 11. Настройте подключение к Telegram с использованием полученных ключа и ID чата.
 
-## Настройка подключения к Telegram и пути передачи данных {: #telegram_send_notification_nastroyka_podklyucheniya_k_telegram_i_puti_pered }
+## Настройка подключения к Telegram и пути передачи данных {: #telegram_send_notification_connection_config }
 
 1. Откройте страницу «**Администрирование**» – «**Инфраструктура**» – «**Подключения**».
 2. В меню «**Создать**» выберите пункт «**Подключения REST и OData**» – «**Отправка HTTP-запросов**».
@@ -105,7 +105,7 @@ hide: tags
 
     Остальные свойства оставьте без изменений.
 
-## Настройка сценария {: #telegram_send_notification_nastroyka_scenariya }
+## Настройка сценария {: #telegram_send_notification_scenario_config }
 
 1. В приложении _«Интеграция с Telegram»_ создайте сценарий _«Отправка уведомления»_, выбрав **контекст выполнения** «**От имени системы**».
 2. В конструкторе сценария настройте событие _«Нажатие кнопки»_ следующим образом:
@@ -132,7 +132,7 @@ hide: tags
     - **Переменная для успешного ответа:** `response`
     - **Переменная для ответа с ошибкой:** `error_response`
 
-## Тестирование бота {: #telegram_send_notification_testirovanie_bota }
+## Тестирование бота {: #telegram_send_notification_testing }
 
 1. Создайте запись в шаблоне _«Уведомления»_.
 2. В поле _«ID чата»_ введите [ID чата своего бота](#telegram_send_notification_chat_id).
