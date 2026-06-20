@@ -2,7 +2,7 @@
 title: 'Импорт данных в шаблон'
 kbId: 4802
 url: 'https://kb.comindware.ru/article.php?id=4802'
-updated: '2026-06-20 18:05:09'
+updated: '2026-06-20 20:25:21'
 ---
 
 # Импорт данных в шаблон

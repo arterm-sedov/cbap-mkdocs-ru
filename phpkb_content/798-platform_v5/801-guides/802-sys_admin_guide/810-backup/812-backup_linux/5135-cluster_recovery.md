@@ -2,7 +2,7 @@
 title: 'Кластер Comindware Platform. Восстановление после аварий'
 kbId: 5135
 url: 'https://kb.comindware.ru/article.php?id=5135'
-updated: '2026-06-20 18:04:39'
+updated: '2026-06-20 20:24:52'
 ---
 
 # Кластер {{ productName }}. Восстановление после аварий

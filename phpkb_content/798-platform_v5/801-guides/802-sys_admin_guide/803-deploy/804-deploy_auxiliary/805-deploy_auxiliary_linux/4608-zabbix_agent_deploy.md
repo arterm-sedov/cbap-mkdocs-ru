@@ -2,7 +2,7 @@
 title: 'Zabbix Agent. Установка и настройка'
 kbId: 4608
 url: 'https://kb.comindware.ru/article.php?id=4608'
-updated: '2026-06-20 18:04:29'
+updated: '2026-06-20 20:24:42'
 ---
 
 # Zabbix Agent. Установка и настройка

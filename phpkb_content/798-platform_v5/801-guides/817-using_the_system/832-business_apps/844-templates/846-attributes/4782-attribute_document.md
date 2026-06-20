@@ -2,7 +2,7 @@
 title: 'Атрибут типа «Документ»'
 kbId: 4782
 url: 'https://kb.comindware.ru/article.php?id=4782'
-updated: '2026-06-20 18:05:04'
+updated: '2026-06-20 20:25:16'
 ---
 
 # Атрибут типа «Документ»

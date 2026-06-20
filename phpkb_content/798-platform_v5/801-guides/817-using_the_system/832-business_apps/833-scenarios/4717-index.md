@@ -2,7 +2,7 @@
 title: 'Сценарии'
 kbId: 4717
 url: 'https://kb.comindware.ru/article.php?id=4717'
-updated: '2026-06-20 18:04:56'
+updated: '2026-06-20 20:25:08'
 ---
 
 # Сценарии

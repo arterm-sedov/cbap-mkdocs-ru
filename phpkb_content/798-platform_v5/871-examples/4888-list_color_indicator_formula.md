@@ -2,7 +2,7 @@
 title: 'Цветовой индикатор в таблице. Настройка отображения'
 kbId: 4888
 url: 'https://kb.comindware.ru/article.php?id=4888'
-updated: '2026-06-20 18:05:46'
+updated: '2026-06-20 20:25:56'
 ---
 
 # Цветовой индикатор в таблице. Настройка отображения
@@ -73,7 +73,7 @@ updated: '2026-06-20 18:05:46'
 
 - [Атрибут типа «Текст»][attribute_text]
 - [Атрибут типа «Дата и время»][attribute_date_time]
-- [Язык формул](https://kb.comindware.ru/category.php?id=901)
+- [Язык формул](https://kb.comindware.ru/category.php?id=880)
 - [Динамические элементы формы][form_dynamic_elements]
 - [Справочник цветов HTML](https://colorscheme.ru/html-colors.html)
 

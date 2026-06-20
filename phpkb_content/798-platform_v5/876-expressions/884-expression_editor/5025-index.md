@@ -2,7 +2,7 @@
 title: 'Редактор выражений. Использование'
 kbId: 5025
 url: 'https://kb.comindware.ru/article.php?id=5025'
-updated: '2026-06-20 18:06:25'
+updated: '2026-06-20 20:26:33'
 ---
 
 # Редактор выражений. Использование
@@ -102,8 +102,8 @@ _![Поиск текста в выражении](/platform/v5.0/business_apps/e
 
 - [Предиктивный ввод в формулах][formula_editor_autocomplete]
 - [Предиктивный ввод в выражениях на языке N3][n3_editor_autocomplete]
-- [Примеры использования формул](https://kb.comindware.ru/category.php?id=902)
-- [Примеры использования языка N3](https://kb.comindware.ru/category.php?id=904)
+- [Примеры использования формул](https://kb.comindware.ru/category.php?id=881)
+- [Примеры использования языка N3](https://kb.comindware.ru/category.php?id=879)
 - [Вычисляемые атрибуты][attribute_calculated]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

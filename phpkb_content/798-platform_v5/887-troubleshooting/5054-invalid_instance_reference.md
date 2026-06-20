@@ -2,7 +2,7 @@
 title: 'Неверная ссылка на инстанс'
 kbId: 5054
 url: 'https://kb.comindware.ru/article.php?id=5054'
-updated: '2026-06-20 18:06:29'
+updated: '2026-06-20 20:26:37'
 ---
 
 # Неверная ссылка на инстанс

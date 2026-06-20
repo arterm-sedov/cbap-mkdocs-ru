@@ -2,7 +2,7 @@
 title: 'Р7 Офис'
 kbId: 4689
 url: 'https://kb.comindware.ru/article.php?id=4689'
-updated: '2026-06-20 18:06:00'
+updated: '2026-06-20 20:26:09'
 ---
 
 # Р7 Офис

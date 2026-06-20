@@ -2,7 +2,7 @@
 title: 'Вызов процесса'
 kbId: 4727
 url: 'https://kb.comindware.ru/article.php?id=4727'
-updated: '2026-06-20 18:04:57'
+updated: '2026-06-20 20:25:10'
 ---
 
 # Вызов процесса

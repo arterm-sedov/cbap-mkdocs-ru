@@ -2,7 +2,7 @@
 title: 'Правила для формы'
 kbId: 4784
 url: 'https://kb.comindware.ru/article.php?id=4784'
-updated: '2026-06-20 18:05:05'
+updated: '2026-06-20 20:25:17'
 ---
 
 # Правила для формы

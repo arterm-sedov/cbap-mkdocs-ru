@@ -2,7 +2,7 @@
 title: 'Отправка HTTP-запросов'
 kbId: 4703
 url: 'https://kb.comindware.ru/article.php?id=4703'
-updated: '2026-06-20 18:04:52'
+updated: '2026-06-20 20:25:04'
 ---
 
 # Отправка HTTP-запросов

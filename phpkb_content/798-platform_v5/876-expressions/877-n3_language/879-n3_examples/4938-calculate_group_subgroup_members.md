@@ -2,7 +2,7 @@
 title: 'Вычисление всех пользователей группы и её подгрупп'
 kbId: 4938
 url: 'https://kb.comindware.ru/article.php?id=4938'
-updated: '2026-06-20 18:06:09'
+updated: '2026-06-20 20:26:18'
 ---
 
 # Вычисление всех пользователей группы и её подгрупп
@@ -32,6 +32,6 @@ updated: '2026-06-20 18:06:09'
 | --- | --- |
 | "Менеджеры" | Название группы, пользователей которой требуется получить. |
 
-Альтернатива статье [Вычисление всех пользователей группы и её подгрупп][calculate_group_subgroup_accounts].
+Альтернатива статье [Вычисление всех пользователей группы и её подгрупп](calculate_group_subgroup_accounts.html#calculate_group_subgroup_accounts).
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

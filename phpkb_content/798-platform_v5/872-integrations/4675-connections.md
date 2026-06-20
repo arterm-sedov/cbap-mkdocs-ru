@@ -2,7 +2,7 @@
 title: 'Подключения. Определения, типы, создание, настройка, удаление'
 kbId: 4675
 url: 'https://kb.comindware.ru/article.php?id=4675'
-updated: '2026-06-20 18:05:53'
+updated: '2026-06-20 20:26:02'
 ---
 
 # Подключения. Определения, типы, создание, настройка, удаление
@@ -16,7 +16,7 @@ updated: '2026-06-20 18:05:53'
 
 См. также:
 
-- *[Примеры интеграций](https://kb.comindware.ru/category.php?id=906)*
+- *[Примеры интеграций](https://kb.comindware.ru/category.php?id=875)*
 - *[Интеграция с внешними системами. Общие рекомендации][integration_recomendations]*
 
 ## Ответственность за использование сервисов третьих сторон
@@ -115,7 +115,7 @@ _![Список подключений](/platform/v5.0/administration/connection
 --8<-- "related_topics_heading.md"
 
 - [Пути передачи данных. Определения, типы, создание, настройка, удаление][communication_routes]
-- [Примеры интеграций](https://kb.comindware.ru/category.php?id=906)
+- [Примеры интеграций](https://kb.comindware.ru/category.php?id=875)
 - [Интеграция с внешними системами. Общие рекомендации][integration_recomendations]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

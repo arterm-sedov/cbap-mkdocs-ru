@@ -2,7 +2,7 @@
 title: 'Ручной перенос базы данных экземпляра ПО в ОС Windows'
 kbId: 4646
 url: 'https://kb.comindware.ru/article.php?id=4646'
-updated: '2026-06-20 18:04:38'
+updated: '2026-06-20 20:24:51'
 ---
 
 # Ручной перенос базы данных экземпляра ПО в ОС Windows

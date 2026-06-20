@@ -2,7 +2,7 @@
 title: 'Области кнопок'
 kbId: 4791
 url: 'https://kb.comindware.ru/article.php?id=4791'
-updated: '2026-06-20 18:05:06'
+updated: '2026-06-20 20:25:18'
 ---
 
 # Области кнопок

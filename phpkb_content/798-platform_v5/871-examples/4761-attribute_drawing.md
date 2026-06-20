@@ -2,7 +2,7 @@
 title: 'Атрибут типа «Чертёж»'
 kbId: 4761
 url: 'https://kb.comindware.ru/article.php?id=4761'
-updated: '2026-06-20 18:05:49'
+updated: '2026-06-20 20:25:59'
 ---
 
 # Атрибут типа «Чертёж»

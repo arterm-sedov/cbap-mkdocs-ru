@@ -2,7 +2,7 @@
 title: 'Атрибут типа «Число»'
 kbId: 4773
 url: 'https://kb.comindware.ru/article.php?id=4773'
-updated: '2026-06-20 18:05:03'
+updated: '2026-06-20 20:25:15'
 ---
 
 # Атрибут типа «Число»

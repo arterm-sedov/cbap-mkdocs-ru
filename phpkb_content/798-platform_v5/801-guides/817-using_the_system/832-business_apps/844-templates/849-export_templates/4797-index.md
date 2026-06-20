@@ -2,7 +2,7 @@
 title: 'Шаблоны экспорта'
 kbId: 4797
 url: 'https://kb.comindware.ru/article.php?id=4797'
-updated: '2026-06-20 18:05:08'
+updated: '2026-06-20 20:25:20'
 ---
 
 # Шаблоны экспорта

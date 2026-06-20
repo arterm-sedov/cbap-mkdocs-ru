@@ -2,7 +2,7 @@
 title: 'Чертёж. Подготовка и импорт файла DWG'
 kbId: 4906
 url: 'https://kb.comindware.ru/article.php?id=4906'
-updated: '2026-06-20 18:05:49'
+updated: '2026-06-20 20:25:58'
 ---
 
 # Чертёж. Подготовка и импорт файла DWG

@@ -2,7 +2,7 @@
 title: 'Панель и разделы навигации'
 kbId: 4809
 url: 'https://kb.comindware.ru/article.php?id=4809'
-updated: '2026-06-20 18:05:11'
+updated: '2026-06-20 20:25:22'
 ---
 
 # Панель и разделы навигации

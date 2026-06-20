@@ -2,7 +2,7 @@
 title: 'Zabbix Server, Zabbix Agent, Zabbix Frontend и MySQL. Установка и настройка'
 kbId: 4607
 url: 'https://kb.comindware.ru/article.php?id=4607'
-updated: '2026-06-20 18:04:28'
+updated: '2026-06-20 20:24:42'
 ---
 
 # Zabbix Server, Zabbix Agent, Zabbix Frontend и MySQL. Установка и настройка

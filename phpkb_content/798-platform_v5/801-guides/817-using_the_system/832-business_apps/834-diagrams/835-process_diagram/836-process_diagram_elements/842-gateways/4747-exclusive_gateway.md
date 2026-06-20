@@ -2,7 +2,7 @@
 title: 'Развилка «или/или»'
 kbId: 4747
 url: 'https://kb.comindware.ru/article.php?id=4747'
-updated: '2026-06-20 18:04:59'
+updated: '2026-06-20 20:25:12'
 ---
 
 # Развилка «или/или»

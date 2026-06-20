@@ -2,7 +2,7 @@
 title: 'Пример подзапроса from'
 kbId: 4989
 url: 'https://kb.comindware.ru/article.php?id=4989'
-updated: '2026-06-20 18:06:17'
+updated: '2026-06-20 20:26:26'
 ---
 
 # Пример подзапроса from

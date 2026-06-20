@@ -2,7 +2,7 @@
 title: 'Промежуточные события'
 kbId: 4742
 url: 'https://kb.comindware.ru/article.php?id=4742'
-updated: '2026-06-20 18:04:59'
+updated: '2026-06-20 20:25:11'
 ---
 
 # Промежуточные события

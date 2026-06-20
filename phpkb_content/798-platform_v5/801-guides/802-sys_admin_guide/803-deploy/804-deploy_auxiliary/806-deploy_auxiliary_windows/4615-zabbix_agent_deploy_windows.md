@@ -2,7 +2,7 @@
 title: 'Zabbix Agent. Инструкции по установке для Windows'
 kbId: 4615
 url: 'https://kb.comindware.ru/article.php?id=4615'
-updated: '2026-06-20 18:04:30'
+updated: '2026-06-20 20:24:43'
 ---
 
 # Zabbix Agent. Инструкции по установке для Windows

@@ -2,7 +2,7 @@
 title: 'Системные роли'
 kbId: 4662
 url: 'https://kb.comindware.ru/article.php?id=4662'
-updated: '2026-06-20 18:04:43'
+updated: '2026-06-20 20:24:56'
 ---
 
 # Системные роли

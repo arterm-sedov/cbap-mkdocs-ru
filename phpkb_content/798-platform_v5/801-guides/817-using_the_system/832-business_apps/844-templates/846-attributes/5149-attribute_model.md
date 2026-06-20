@@ -2,7 +2,7 @@
 title: 'Атрибут типа «Модель»'
 kbId: 5149
 url: 'https://kb.comindware.ru/article.php?id=5149'
-updated: '2026-06-20 18:05:04'
+updated: '2026-06-20 20:25:16'
 ---
 
 # Атрибут типа «Модель»

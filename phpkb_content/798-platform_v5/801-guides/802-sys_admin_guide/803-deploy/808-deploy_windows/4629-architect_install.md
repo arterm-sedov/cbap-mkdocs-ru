@@ -2,7 +2,7 @@
 title: 'Comindware Enterprise. Инструкции по установке экземпляра ПО в ОС Windows'
 kbId: 4629
 url: 'https://kb.comindware.ru/article.php?id=4629'
-updated: '2026-06-20 18:04:36'
+updated: '2026-06-20 20:24:49'
 ---
 
 # Comindware Enterprise. Инструкции по установке экземпляра ПО в ОС Windows

@@ -2,7 +2,7 @@
 title: 'Методы Web API'
 kbId: 4861
 url: 'https://kb.comindware.ru/article.php?id=4861'
-updated: '2026-06-20 18:05:55'
+updated: '2026-06-20 20:26:04'
 ---
 
 # Методы Web API

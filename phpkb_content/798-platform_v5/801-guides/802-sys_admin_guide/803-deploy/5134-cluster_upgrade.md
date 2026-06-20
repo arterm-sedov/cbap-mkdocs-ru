@@ -2,7 +2,7 @@
 title: 'Кластер Comindware Platform. Обновление ПО'
 kbId: 5134
 url: 'https://kb.comindware.ru/article.php?id=5134'
-updated: '2026-06-20 18:04:42'
+updated: '2026-06-20 20:24:55'
 ---
 
 # Кластер {{ productName }}. Обновление ПО

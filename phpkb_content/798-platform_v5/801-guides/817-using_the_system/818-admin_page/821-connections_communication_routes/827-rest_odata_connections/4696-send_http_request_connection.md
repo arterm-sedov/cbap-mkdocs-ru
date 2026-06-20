@@ -2,7 +2,7 @@
 title: 'Отправка веб-запросов'
 kbId: 4696
 url: 'https://kb.comindware.ru/article.php?id=4696'
-updated: '2026-06-20 18:04:51'
+updated: '2026-06-20 20:25:04'
 ---
 
 # Отправка веб-запросов

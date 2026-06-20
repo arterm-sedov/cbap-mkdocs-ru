@@ -2,7 +2,7 @@
 title: 'Атрибут типа «Аккаунт»'
 kbId: 4774
 url: 'https://kb.comindware.ru/article.php?id=4774'
-updated: '2026-06-20 18:05:03'
+updated: '2026-06-20 20:25:15'
 ---
 
 # Атрибут типа «Аккаунт»

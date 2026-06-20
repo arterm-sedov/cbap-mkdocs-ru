@@ -2,7 +2,7 @@
 title: 'Роли в приложении'
 kbId: 4803
 url: 'https://kb.comindware.ru/article.php?id=4803'
-updated: '2026-06-20 18:05:09'
+updated: '2026-06-20 20:25:21'
 ---
 
 # Роли в приложении

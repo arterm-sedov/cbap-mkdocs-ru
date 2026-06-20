@@ -2,7 +2,7 @@
 title: 'Рабочий стол. Настройка'
 kbId: 4813
 url: 'https://kb.comindware.ru/article.php?id=4813'
-updated: '2026-06-20 18:05:11'
+updated: '2026-06-20 20:25:22'
 ---
 
 # Рабочий стол. Настройка

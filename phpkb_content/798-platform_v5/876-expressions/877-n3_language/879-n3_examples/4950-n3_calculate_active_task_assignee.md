@@ -2,7 +2,7 @@
 title: 'Вычисление исполнителя текущей активной задачи'
 kbId: 4950
 url: 'https://kb.comindware.ru/article.php?id=4950'
-updated: '2026-06-20 18:06:08'
+updated: '2026-06-20 20:26:17'
 ---
 
 # Вычисление исполнителя текущей активной задачи
@@ -170,7 +170,7 @@ updated: '2026-06-20 18:06:08'
 
 --8<-- "related_topics_heading.md"
 
-- [Вычисление пользователей с активными задачами][example_n3_calculate_active_task_accounts]
+- [Вычисление пользователей с активными задачами](n3_calculate_active_task_accounts.html#example_n3_calculate_active_task_accounts "Аккаунты и задачи. Вычисление пользователей с активными задачами с помощью N3")
 - [Периодические напоминания об открытых задачах][example_n3_periodic_task_notifications]
 - [Уведомления. Типы, назначение, настройка, использование][notification_types]
 

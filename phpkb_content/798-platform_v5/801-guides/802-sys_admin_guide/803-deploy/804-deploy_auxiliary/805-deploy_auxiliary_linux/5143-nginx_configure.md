@@ -2,7 +2,7 @@
 title: 'NGINX. Настройка конфигурации для получения HTTP-запросов в Comindware Platform'
 kbId: 5143
 url: 'https://kb.comindware.ru/article.php?id=5143'
-updated: '2026-06-20 18:04:29'
+updated: '2026-06-20 20:24:42'
 ---
 
 # NGINX. Настройка конфигурации для получения HTTP-запросов в {{ productName }}

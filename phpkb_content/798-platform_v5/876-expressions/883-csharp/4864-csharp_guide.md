@@ -2,7 +2,7 @@
 title: 'Написание скриптов на языке C#'
 kbId: 4864
 url: 'https://kb.comindware.ru/article.php?id=4864'
-updated: '2026-06-20 18:06:22'
+updated: '2026-06-20 20:26:31'
 ---
 
 # Написание скриптов на языке C#

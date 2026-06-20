@@ -2,7 +2,7 @@
 title: 'Формирование текста письма по шаблону'
 kbId: 4894
 url: 'https://kb.comindware.ru/article.php?id=4894'
-updated: '2026-06-20 18:05:47'
+updated: '2026-06-20 20:25:57'
 ---
 
 # Формирование текста письма по шаблону
@@ -70,6 +70,6 @@ updated: '2026-06-20 18:05:47'
 
 - [Уведомления о задачах. Настройка текста и отправки эл. почтой][task_notifications]
 - [Атрибут типа «Текст»][attribute_text]
-- [Язык формул](https://kb.comindware.ru/category.php?id=901)
+- [Язык формул](https://kb.comindware.ru/category.php?id=880)
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

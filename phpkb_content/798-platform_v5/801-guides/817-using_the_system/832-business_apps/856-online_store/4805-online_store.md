@@ -2,7 +2,7 @@
 title: 'Интернет-магазин'
 kbId: 4805
 url: 'https://kb.comindware.ru/article.php?id=4805'
-updated: '2026-06-20 18:05:09'
+updated: '2026-06-20 20:25:21'
 ---
 
 # Интернет-магазин

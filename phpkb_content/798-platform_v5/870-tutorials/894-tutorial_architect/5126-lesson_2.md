@@ -2,7 +2,7 @@
 title: 'Урок 2. Вход в систему, рабочий стол, навигация, роли, оргструктура'
 kbId: 5126
 url: 'https://kb.comindware.ru/article.php?id=5126'
-updated: '2026-06-20 18:05:34'
+updated: '2026-06-20 20:25:44'
 ---
 
 # Урок 2. Вход в систему, рабочий стол, навигация, роли, оргструктура
@@ -413,7 +413,7 @@ _![Отображение атрибута «Отдел» в свойствах 
 - [Атрибуты. Настройка][attributes]
 - [Формы. Настройка][forms]
 - [Правила для форм. Настройка][form_rules]
-- [Язык формул. Использование](https://kb.comindware.ru/category.php?id=901)
+- [Язык формул. Использование](https://kb.comindware.ru/category.php?id=880)
 - [Язык N3. Использование][n3_guide_toc]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

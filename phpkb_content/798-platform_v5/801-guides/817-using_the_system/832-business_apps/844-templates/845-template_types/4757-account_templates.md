@@ -2,7 +2,7 @@
 title: 'Шаблон аккаунта'
 kbId: 4757
 url: 'https://kb.comindware.ru/article.php?id=4757'
-updated: '2026-06-20 18:05:01'
+updated: '2026-06-20 20:25:13'
 ---
 
 # Шаблон аккаунта

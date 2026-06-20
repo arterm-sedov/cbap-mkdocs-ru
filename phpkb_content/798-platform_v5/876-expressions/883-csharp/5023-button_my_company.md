@@ -2,7 +2,7 @@
 title: 'Кнопка «Моя компания»'
 kbId: 5023
 url: 'https://kb.comindware.ru/article.php?id=5023'
-updated: '2026-06-20 18:06:24'
+updated: '2026-06-20 20:26:33'
 ---
 
 # Кнопка «Моя компания»

@@ -2,7 +2,7 @@
 title: 'Предиктивный ввод в выражениях на языке N3'
 kbId: 5039
 url: 'https://kb.comindware.ru/article.php?id=5039'
-updated: '2026-06-20 18:06:25'
+updated: '2026-06-20 20:26:33'
 ---
 
 # Предиктивный ввод в выражениях на языке N3
@@ -345,7 +345,7 @@ _![Список доступных типов литералов](/platform/v5.0
 --8<-- "related_topics_heading.md"
 
 - [Редактор выражений][expression_editor]
-- [Примеры использования языка N3](https://kb.comindware.ru/category.php?id=904)
+- [Примеры использования языка N3](https://kb.comindware.ru/category.php?id=879)
 - [Атрибут типа «Список значений»][attribute_enum]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

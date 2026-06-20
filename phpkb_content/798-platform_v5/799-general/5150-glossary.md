@@ -2,7 +2,7 @@
 title: 'Сущности Comindware Platform. Определения и термины'
 kbId: 5150
 url: 'https://kb.comindware.ru/article.php?id=5150'
-updated: '2026-06-20 18:05:18'
+updated: '2026-06-20 20:25:30'
 ---
 
 # Сущности {{ productName }}. Определения и термины
@@ -78,7 +78,7 @@ updated: '2026-06-20 18:05:18'
 
 - *[Редактор выражений. Использование][expression_editor]*
 - *[Язык N3. Справочник][n3_guide_reference]*
-- *[Язык формул. Справочник](https://kb.comindware.ru/category.php?id=901)*
+- *[Язык формул. Справочник](https://kb.comindware.ru/category.php?id=880)*
 - *[Скрипты на C#. Справочник][csharp_guide]*
 
 ## Д

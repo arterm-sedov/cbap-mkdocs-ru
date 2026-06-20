@@ -2,7 +2,7 @@
 title: 'Шаблон процесса'
 kbId: 4758
 url: 'https://kb.comindware.ru/article.php?id=4758'
-updated: '2026-06-20 18:05:01'
+updated: '2026-06-20 20:25:13'
 ---
 
 # Шаблон процесса

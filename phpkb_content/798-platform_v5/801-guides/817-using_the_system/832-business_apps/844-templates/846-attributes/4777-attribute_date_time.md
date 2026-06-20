@@ -2,7 +2,7 @@
 title: 'Атрибут типа «Дата и время»'
 kbId: 4777
 url: 'https://kb.comindware.ru/article.php?id=4777'
-updated: '2026-06-20 18:05:03'
+updated: '2026-06-20 20:25:15'
 ---
 
 # Атрибут типа «Дата и время»

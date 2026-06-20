@@ -2,7 +2,7 @@
 title: 'OpenSearch. Настройка подключения'
 kbId: 4678
 url: 'https://kb.comindware.ru/article.php?id=4678'
-updated: '2026-06-20 18:04:46'
+updated: '2026-06-20 20:24:59'
 ---
 
 # OpenSearch. Настройка подключения

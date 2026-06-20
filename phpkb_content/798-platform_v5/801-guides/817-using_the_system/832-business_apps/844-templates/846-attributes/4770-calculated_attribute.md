@@ -2,7 +2,7 @@
 title: 'Вычисляемые атрибуты'
 kbId: 4770
 url: 'https://kb.comindware.ru/article.php?id=4770'
-updated: '2026-06-20 18:05:03'
+updated: '2026-06-20 20:25:15'
 ---
 
 # Вычисляемые атрибуты
@@ -64,17 +64,17 @@ _![Полный редактор выражений](/platform/v5.0/business_app
 
 См. подробные описание формул и языка N3 с примерами:
 
-- [Руководстве по языку формул](https://kb.comindware.ru/category.php?id=901)
-- [Руководстве по языку N3](https://kb.comindware.ru/category.php?id=903)
-- [Примеры использования формул](https://kb.comindware.ru/category.php?id=902)
-- [Примеры использования языка N3](https://kb.comindware.ru/category.php?id=904)
+- [Руководстве по языку формул](https://kb.comindware.ru/category.php?id=880)
+- [Руководстве по языку N3](https://kb.comindware.ru/category.php?id=877)
+- [Примеры использования формул](https://kb.comindware.ru/category.php?id=881)
+- [Примеры использования языка N3](https://kb.comindware.ru/category.php?id=879)
 
 --8<-- "related_topics_heading.md"
 
 - *[Атрибуты. Определения, типы, настройка, архивирование, удаление][attributes]*
-- *[Руководстве по языку формул](https://kb.comindware.ru/category.php?id=901)*
-- *[Руководстве по языку N3](https://kb.comindware.ru/category.php?id=903)*
-- *[Примеры использования формул](https://kb.comindware.ru/category.php?id=902)*
-- *[Примеры использования языка N3](https://kb.comindware.ru/category.php?id=904)*
+- *[Руководстве по языку формул](https://kb.comindware.ru/category.php?id=880)*
+- *[Руководстве по языку N3](https://kb.comindware.ru/category.php?id=877)*
+- *[Примеры использования формул](https://kb.comindware.ru/category.php?id=881)*
+- *[Примеры использования языка N3](https://kb.comindware.ru/category.php?id=879)*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

@@ -2,7 +2,7 @@
 title: 'Обеспечение высокой доступности и отказоустойчивости Comindware Platform'
 kbId: 5079
 url: 'https://kb.comindware.ru/article.php?id=5079'
-updated: '2026-06-20 18:04:42'
+updated: '2026-06-20 20:24:55'
 ---
 
 # Обеспечение высокой доступности и отказоустойчивости {{ productName }}

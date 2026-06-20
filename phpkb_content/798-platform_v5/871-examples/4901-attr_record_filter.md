@@ -2,7 +2,7 @@
 title: 'Атрибут типа «Запись». Настройка фильтра записей для раскрывающегося списка на форме'
 kbId: 4901
 url: 'https://kb.comindware.ru/article.php?id=4901'
-updated: '2026-06-20 18:05:46'
+updated: '2026-06-20 20:25:56'
 ---
 
 # Атрибут типа «Запись». Настройка фильтра записей для раскрывающегося списка на форме
@@ -66,6 +66,6 @@ updated: '2026-06-20 18:05:46'
 - [Правила для формы][form_rules]
 - [Атрибут типа «Запись»][attribute_record]
 - [Динамические элементы формы. Раскрывающийся список][form_dynamic_elements]
-- [Язык формул](https://kb.comindware.ru/category.php?id=901)
+- [Язык формул](https://kb.comindware.ru/category.php?id=880)
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
