@@ -3,7 +3,7 @@ title: Low-code и графовая БД
 kbId: 4581
 ---
 
-# Low-code и графовая БД
+# Low-code и графовая БД {: #low_code_graph_db }
 
 **Что такое настоящий Low-code**
 

@@ -62,7 +62,7 @@ _![Интерфейс Swagger для метода Solution API, создающе
 
 ## Описание методов Solution API {: #api_solution_methods }
 
-### TemplateSystemName — записи в шаблоне с системным именем TemplateSystemName
+### TemplateSystemName — записи в шаблоне с системным именем TemplateSystemName {: #api_solution_template_system_name }
 
 | GET {: .api-method .get } | /TemplateSystemName/{id}                                |
 | ------------------------- | ------------------------------------------------------- |

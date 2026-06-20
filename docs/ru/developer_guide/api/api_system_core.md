@@ -1461,7 +1461,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 | **Параметры** | Идентификатор атрибута, выражение, тип проверки. |
 | **Ответ** | Статус. |
 
-### ObjectAppExport — шаблоны экспорта
+### ObjectAppExport — шаблоны экспорта {: #api_system_core_object_app_export }
 
 | POST {: .api-method .post } | /TeamNetwork/ObjectAppExportService/ListExportTemplates |
 | --- | --- |
