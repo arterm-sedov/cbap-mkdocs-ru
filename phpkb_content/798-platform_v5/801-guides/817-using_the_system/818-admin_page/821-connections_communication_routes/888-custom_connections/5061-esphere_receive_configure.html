@@ -1,0 +1,570 @@
+<h1>Получение документов из «СФЕРА Курьер». Настройка подключения, пути передачи данных и сценария</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5061" kb-tags="СФЕРА Курьер,электронный документооборот,получение документов,сценарий" kb-title="Получение документов из «СФЕРА Курьер». Настройка подключения, пути передачи данных и сценария">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<span class="md-ellipsis">
+      
+        Введение
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#прикладная-задача">
+<span class="md-ellipsis">
+      
+        Прикладная задача
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#порядок-настройки">
+<span class="md-ellipsis">
+      
+        Порядок настройки
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-подключения-для-получения-id-документов">
+<span class="md-ellipsis">
+      
+        Настройка подключения для получения ID документов
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-пути-передачи-данных-для-получения-id-документов">
+<span class="md-ellipsis">
+      
+        Настройка пути передачи данных для получения ID документов
+      
+    </span>
+</a>
+<nav aria-label="Настройка пути передачи данных для получения ID документов" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#основные-свойства">
+<span class="md-ellipsis">
+      
+        Основные свойства
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#атрибуты-сообщений">
+<span class="md-ellipsis">
+      
+        Атрибуты сообщений
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#интеграция">
+<span class="md-ellipsis">
+      
+        Интеграция
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#configure_connection_send_request">
+<span class="md-ellipsis">
+      
+        Настройка подключения для запроса документов из «СФЕРА Курьер»
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-пути-передачи-данных-для-запроса-документов-из-сфера-курьер">
+<span class="md-ellipsis">
+      
+        Настройка пути передачи данных для запроса документов из «СФЕРА Курьер»
+      
+    </span>
+</a>
+<nav aria-label="Настройка пути передачи данных для запроса документов из «СФЕРА Курьер»" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#configure_communication_route_send_request_main_properties">
+<span class="md-ellipsis">
+      
+        Основные свойства
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#configure_communication_route_send_request_message_attributes">
+<span class="md-ellipsis">
+      
+        Атрибуты сообщений
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-шаблона-записи">
+<span class="md-ellipsis">
+      
+        Настройка шаблона записи
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-сценария">
+<span class="md-ellipsis">
+      
+        Настройка сценария
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#тестирование">
+<span class="md-ellipsis">
+      
+        Тестирование
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      
+        Связанные статьи
+      
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>В <strong>Comindware Platform</strong> можно настроить подключение к системе электронного документооборота «СФЕРА Курьер». Интеграция с этой системой позволяет:</p>
+<ul>
+<li>осуществлять поиск контрагентов по реквизитам и проверять корректность реквизитов;</li>
+<li>осуществлять обмен документами с контрагентами;</li>
+<li>производить с документами и квитанциями различные действия:<ul>
+<li>создавать,</li>
+<li>отправлять,</li>
+<li>подписывать,</li>
+<li>принимать,</li>
+<li>отзывать,</li>
+<li>аннулировать,</li>
+<li>отклонять;</li>
+</ul>
+</li>
+<li>подписывать документы квалифицированной электронной подписью;</li>
+<li>контролировать сроки подписания документов.</li>
+</ul>
+<h2 id="прикладная-задача">Прикладная задача</h2>
+<p>Здесь приведён пример настройки подключения, пути передачи данных, шаблона записи и сценария для получения документов из системы «СФЕРА Курьер».</p>
+<p>Имеется шаблон <em>«Реестр документов из СФЕРА Курьер»</em>, в котором хранятся сведения о документах, полученных через «СФЕРА Курьер».</p>
+<p>Требуется настроить автоматизированное получение новых документов.</p>
+<h2 id="порядок-настройки">Порядок настройки</h2>
+<ol class="colored_numbers_list">
+<li>Настройте <a class="mkdocs_imported_link" href="#настройка-подключения-для-получения-id-документов">подключение</a> типа «<strong>Получение сообщений из системы «СФЕРА Курьер</strong>».</li>
+<li>Настройте <a class="mkdocs_imported_link" href="#настройка-пути-передачи-данных-для-получения-id-документов">путь передачи данных</a> «<strong>Приём сообщений из «СФЕРА Курьер</strong>», использующий созданное подключение.</li>
+<li>Настройте <a class="mkdocs_imported_link" href="#configure_connection_send_request">подключение</a> типа «<strong>Отправка сообщений в систему «СФЕРА Курьер</strong>».</li>
+<li>Настройте <a class="mkdocs_imported_link" href="#настройка-пути-передачи-данных-для-запроса-документов-из-сфера-курьер">путь передачи данных</a> «<strong>Отправка сообщений в «СФЕРА Курьер</strong>» типа «<strong>Получить документ</strong>», использующий созданное подключение.</li>
+<li>Настройте <a class="mkdocs_imported_link" href="#настройка-шаблона-записи">шаблон записи</a> для хранения данных электронных документов.</li>
+<li>Настройте <a class="mkdocs_imported_link" href="#настройка-сценария">сценарий</a> для получения данных о контрагенте из системы «СФЕРА Курьер».</li>
+</ol>
+<div class="notice notice-tip">
+<p class="admonition-title">Совет</p>
+<p>Из-за особенностей API «СФЕРА Курьер» при получении сообщений могут приходить не все атрибуты электронного документа. Чтобы получить недостающие атрибуты, отправьте дополнительный запрос с ID требуемого документа в «СФЕРА Курьер». Пример такого запроса приведён ниже в инструкциях по <a class="mkdocs_imported_link" href="#настройка-сценария">настройке сценария</a>.</p>
+</div>
+<h2 id="настройка-подключения-для-получения-id-документов">Настройка подключения для получения ID документов</h2>
+<ol class="colored_numbers_list">
+<li>Откройте страницу «<strong>Администрирование</strong>» — «<strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4675">Подключения</a></strong>».</li>
+<li>
+<p>В списке подключений откройте или создайте подключение типа «<strong>Пользовательские подключения</strong>» — «<strong>Получение сообщений из системы «СФЕРА Курьер</strong>».</p>
+</li>
+<li>
+<p>Настройте свойства подключения:</p>
+<ul>
+<li><strong>Системное имя</strong> — введите уникальное имя подключения.</li>
+<li><strong>Отключить</strong> — установите этот флажок, если требуется временно деактивировать данное подключение.</li>
+<li><strong>Описание</strong> — введите наглядное описание подключения.</li>
+<li><strong>Запись в файловые журналы</strong> — выберите, какие события следует записывать в журналы:<ul>
+<li><strong>Полные сведения об обработке сообщения</strong>;</li>
+<li><strong>Только ошибки</strong>;</li>
+<li><strong>Отключить</strong> — не регистрировать в журнале события отправки сообщений.</li>
+</ul>
+</li>
+<li><strong>Тестовый сервер</strong> — установите этот флажок, чтобы настроить подключение к тестовому серверу.</li>
+<li><strong>Интервал запроса данных, в минутах</strong> — укажите интервал запроса к серверу.</li>
+<li><strong>ApiKey</strong> — введите ключ API для подключения к «СФЕРА Курьер».</li>
+<li><strong>Имя пользователя</strong> — укажите учётную запись для подключения к «СФЕРА Курьер».</li>
+<li><strong>Пароль</strong> — введите пароль для подключения к «СФЕРА Курьер».</li>
+<li><strong>Идентификатор участника ЭДО получателя документа</strong> — укажите идентификатор, присвоенный участнику «СФЕРА Курьер».</li>
+</ul>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Проверить соединение</strong>» и удостоверьтесь, что соединение установлено.</p>
+</li>
+<li>Чтобы просмотреть журнал событий отправки сообщений, нажмите кнопку «<strong>Скачать журнал</strong>».</li>
+<li>Сохраните подключение.</li>
+</ol>
+<h2 id="настройка-пути-передачи-данных-для-получения-id-документов">Настройка пути передачи данных для получения ID документов</h2>
+<ol class="colored_numbers_list">
+<li>Откройте страницу «<strong>Администрирование</strong>» — «<strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4676">Пути передачи данных</a></strong>».</li>
+<li>Откройте двойным нажатием в списке или создайте путь передачи данных типа «<strong>Пользовательские подключения</strong>» — «<strong>Приём сообщений из «СФЕРА Курьер</strong>».</li>
+<li>
+<p>Настройте свойства пути передачи данных на следующих вкладках:</p>
+<ul>
+<li><a class="mkdocs_imported_link" href="#основные-свойства"><strong>Основные свойства</strong></a></li>
+<li><a class="mkdocs_imported_link" href="#атрибуты-сообщений"><strong>Атрибуты сообщений</strong></a></li>
+<li><a class="mkdocs_imported_link" href="#интеграция"><strong>Интеграция</strong></a></li>
+</ul>
+</li>
+<li>
+<p>Сохраните путь передачи данных.</p>
+</li>
+</ol>
+<h3 id="основные-свойства">Основные свойства</h3>
+<p>На вкладке «<strong>Основные свойства</strong>» настройте параметры использования пути передачи данных.</p>
+<ul>
+<li><strong>Подключение</strong> — выберите <a class="mkdocs_imported_link" href="#configure_connection_send_request">подключение для отправки сообщений в систему «СФЕРА Курьер»</a>.</li>
+<li><strong>Системное имя</strong> — введите уникальное имя пути передачи данных.</li>
+<li><strong>Отключить</strong> — установите этот флажок, если требуется временно деактивировать данный путь передачи данных.</li>
+<li><strong>Описание</strong> — введите наглядное описание пути передачи данных.</li>
+<li><strong>Номер шины данных</strong> — выберите номер от 0 до 3, если требуется распределить потоки данных нескольких путей для повышения производительности.</li>
+</ul>
+<h3 id="атрибуты-сообщений">Атрибуты сообщений</h3>
+<p>На вкладке «<strong>Атрибуты сообщения</strong>» настройте атрибуты, значения которых будут подставляться в содержимое сообщений в зависимости от его типа.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Выберите <strong>тип сообщения</strong>:</p>
+<ul>
+<li><strong>Найти документы</strong>;</li>
+<li><strong>Перечислить компании по ИНН</strong>.</li>
+</ul>
+<p>В примере используется тип сообщения «<strong>"Найти документы</strong>».</p>
+</li>
+<li>
+<p>В таблицах «<strong>Запрос</strong>», «<strong>Ответ</strong>» и «<strong>Ответ с ошибкой</strong>» отобразятся готовые атрибуты, соответствующие выбранному <strong>типу сообщения</strong>.</p>
+</li>
+</ol>
+<p>Подробные сведения об атрибутах, которые используются при обмене сообщениями с системой «СФЕРА Курьер», см. в <em><a class="mkdocs_imported_link" href="https://www.esphere.ru/assets/download/integration/ws-courier.pdf">Справочном руководстве API СФЕРА Курьер</a></em>.</p>
+<h3 id="интеграция">Интеграция</h3>
+<p>На вкладке «<strong>Интеграция</strong>» задайте статические параметры запроса к системе «СФЕРА Курьер»:</p>
+<ul>
+<li>Для типа сообщения «<strong>"Найти документы</strong>»:<ul>
+<li><strong>Папка документов</strong> — укажите название папки в «СФЕРА Курьер» для поиска документов.</li>
+<li><strong>Количество строк</strong> — укажите максимальное количество документов, которые могут быть получены в одном запросе.</li>
+<li><strong>Идентификатор статуса</strong> — укажите идентификатор статуса искомого документа в «СФЕРА Курьер».</li>
+<li><strong>Признак завершённости документооборота</strong> — установите флажок для поиска документа с этим признаком.</li>
+<li><strong>Признак того, что документ назначен текущему пользователю</strong> — установите флажок для поиска документа с этим признаком.</li>
+<li><strong>Номер договора</strong> — укажите номер договора для поиска документа в «СФЕРА Курьер».</li>
+<li><strong>Имя файла</strong> — укажите имя файла для поиска документа в «СФЕРА Курьер».</li>
+<li><strong>Идентификатор участника маршрута</strong> — укажите уникальный идентификатор участника системы электронного документооборота (ЭДО).</li>
+<li><strong>Идентификатор группы участников маршрута</strong> — укажите уникальный идентификатор группы участников системы электронного документооборота (ЭДО).</li>
+<li>Укажите <strong>даты</strong> для поиска документа в «СФЕРА Курьер».</li>
+</ul>
+</li>
+<li>Для типа сообщения «<strong>Перечислить компании по ИНН</strong>»:<ul>
+<li><strong>ИНН клиента</strong> — укажите ИНН клиента для поиска в «СФЕРА Курьер».</li>
+<li><strong>ОГРН клиента</strong> — укажите ОГРН клиента для поиска в «СФЕРА Курьер».</li>
+<li><strong>КПП клиента</strong> — укажите КПП клиента для поиска в «СФЕРА Курьер».</li>
+</ul>
+</li>
+</ul>
+<h2 id="configure_connection_send_request">Настройка подключения для запроса документов из «СФЕРА Курьер»</h2>
+<ol class="colored_numbers_list">
+<li>Откройте страницу «<strong>Администрирование</strong>» — «<strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4675">Подключения</a></strong>».</li>
+<li>В списке подключений откройте или создайте подключение типа «<strong>Пользовательские подключения</strong>» — «<strong>Отправка сообщений в систему «СФЕРА Курьер</strong>».</li>
+<li>
+<p>Настройте свойства подключения:</p>
+<ul>
+<li><strong>Системное имя</strong> — введите уникальное имя подключения.</li>
+<li><strong>Отключить</strong> — установите этот флажок, если требуется временно деактивировать данное подключение.</li>
+<li><strong>Описание</strong> — введите наглядное описание подключения.</li>
+<li><strong>Запись в файловые журналы</strong> — выберите, какие события следует записывать в журналы:<ul>
+<li><strong>Полные сведения об обработке сообщения</strong>;</li>
+<li><strong>Только ошибки</strong>;</li>
+<li><strong>Отключить</strong> — не регистрировать в журнале события отправки сообщений.</li>
+</ul>
+</li>
+<li><strong>Тестовый сервер</strong> — установите этот флажок, чтобы настроить подключение к тестовому серверу.</li>
+<li><strong>Интервал запроса данных, в минутах</strong> — укажите интервал запроса к серверу.</li>
+<li><strong>ApiKey</strong> — введите ключ API для подключения к «СФЕРА Курьер».</li>
+<li><strong>Имя пользователя</strong> — укажите учётную запись для подключения к «СФЕРА Курьер».</li>
+<li><strong>Пароль</strong> — введите пароль для подключения к «СФЕРА Курьер».</li>
+<li><strong>Идентификатор участника ЭДО получателя документа</strong> — укажите идентификатор, присвоенный участнику «СФЕРА Курьер».</li>
+</ul>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Проверить соединение</strong>» и удостоверьтесь, что соединение установлено.</p>
+</li>
+<li>Чтобы просмотреть журнал событий отправки сообщений, нажмите кнопку «<strong>Скачать журнал</strong>».</li>
+<li>Сохраните подключение.</li>
+</ol>
+<h2 id="настройка-пути-передачи-данных-для-запроса-документов-из-сфера-курьер">Настройка пути передачи данных для запроса документов из «СФЕРА Курьер»</h2>
+<ol class="colored_numbers_list">
+<li>Откройте страницу «<strong>Администрирование</strong>» — «<strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4676">Пути передачи данных</a></strong>».</li>
+<li>Откройте двойным нажатием в списке или путь передачи данных типа «<strong>Пользовательские подключения</strong>» — «<strong>Отправка сообщений в «СФЕРА Курьер</strong>» типа «<strong>Зачитывает данные об организации</strong>.</li>
+<li>
+<p>Настройте свойства пути передачи данных на следующих вкладках:</p>
+<ul>
+<li><a class="mkdocs_imported_link" href="#configure_communication_route_send_request_main_properties"><strong>Основные свойства</strong></a></li>
+<li><a class="mkdocs_imported_link" href="#configure_communication_route_send_request_message_attributes"><strong>Атрибуты сообщения</strong></a></li>
+</ul>
+</li>
+<li>
+<p>Сохраните путь передачи данных.</p>
+</li>
+</ol>
+<h3 id="configure_communication_route_send_request_main_properties">Основные свойства</h3>
+<p>На вкладке «<strong>Основные свойства</strong>» настройте параметры использования пути передачи данных.</p>
+<ul>
+<li><strong>Подключение</strong> — выберите <a class="mkdocs_imported_link" href="#configure_connection_send_request">подключение для отправки сообщений в систему «СФЕРА Курьер»</a>.</li>
+<li><strong>Системное имя</strong> — введите уникальное имя пути передачи данных.</li>
+<li><strong>Отключить</strong> — установите этот флажок, если требуется временно деактивировать данный путь передачи данных.</li>
+<li><strong>Описание</strong> — введите наглядное описание пути передачи данных.</li>
+<li><strong>Номер шины данных</strong> — выберите номер от 0 до 3, если требуется распределить потоки данных нескольких путей для повышения производительности.</li>
+</ul>
+<h3 id="configure_communication_route_send_request_message_attributes">Атрибуты сообщений</h3>
+<p>На вкладке «<strong>Атрибуты сообщения</strong>» настройте атрибуты, значения которых будут подставляться в содержимое сообщений в зависимости от его типа.</p>
+<ol class="colored_numbers_list">
+<li>Выберите <strong>тип сообщения</strong> «<strong>Получить документ</strong>»:</li>
+<li>В таблицах «<strong>Запрос</strong>», «<strong>Ответ</strong>» и «<strong>Ответ с ошибкой</strong>» отобразятся готовые атрибуты, соответствующие выбранному <strong>типу сообщения</strong>.</li>
+</ol>
+<p>Подробные сведения об атрибутах, которые используются при обмене сообщениями с системой «СФЕРА Курьер», см. в <em><a class="mkdocs_imported_link" href="https://www.esphere.ru/assets/download/integration/ws-courier.pdf">Справочном руководстве API СФЕРА Курьер</a></em>.</p>
+<h2 id="настройка-шаблона-записи">Настройка шаблона записи</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте шаблон записи <em>«Реестр документов из СФЕРА Курьер»</em> со следующими атрибутами:</p>
+<ul>
+<li><em>Идентификатор документа «СФЕРА Курьер»</em> типа «<strong>Текст</strong>»;</li>
+<li><em>Электронный договор</em> типа «<strong>Логический</strong>»;</li>
+<li><em>Сумма документа</em> типа «<strong>Число</strong>»;</li>
+<li><em>Сумма НДС</em> типа «<strong>Число</strong>»;</li>
+<li><em>Номер документа контрагента</em> типа «<strong>Текст</strong>»;</li>
+<li><em>Дата документа контрагента</em> типа «<strong>Дата и время</strong>»;</li>
+<li><em>Документ</em> типа «<strong>Документ</strong>».</li>
+</ul>
+</li>
+<li>
+<p>Поместите атрибуты на <strong>основную форму</strong>.</p>
+</li>
+</ol>
+<h2 id="настройка-сценария">Настройка сценария</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте сценарий:</p>
+<ul>
+<li><strong>Название:</strong> <em>Получение документов из СФЕРА Курьер</em></li>
+<li><strong>Контекст выполнения: от инициатора</strong></li>
+</ul>
+</li>
+<li>
+<p>Настройте событие сценария:</p>
+<ul>
+<li><strong>Тип: получение сообщения</strong></li>
+<li><strong>Контекстный шаблон:</strong> <em>Реестр документов из СФЕРА Курьер</em></li>
+<li><strong>Подключение:</strong> выберите <a class="mkdocs_imported_link" href="#настройка-подключения-для-получения-id-документов">подключение для получения сообщения из системы «СФЕРА Курьер»</a></li>
+<li><strong>Путь передачи данных:</strong> выберите <a class="mkdocs_imported_link" href="#настройка-пути-передачи-данных-для-получения-id-документов">путь передачи данных для получения сообщений из системы «СФЕРА Курьер» типа «<strong>"Найти документы</strong>»</a></li>
+<li><strong>Имя переменной:</strong> <em>Message</em></li>
+</ul>
+</li>
+<li>
+<p>Добавьте действие «<strong>Изменить значения переменных</strong>»:</p>
+<ul>
+<li><strong>Операция со значениями переменных: добавить</strong></li>
+<li><strong>Набор переменных:</strong> <em>Request</em></li>
+<li>Добавьте переменную <em>DocumentId</em> со <strong>значением</strong> на <strong>N3</strong>:</li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы с переменными</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">session:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">variable:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session/variable#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Получаем значение локальной переменной Message и помещаем в ?message</span></code> <br/><code>    <span class="nn">session</span><span class="p">:</span><span class="nt">context</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">Message</span> <span class="err">?message</span><span class="p">.</span></code> <br/><code>    <span class="c"># Из ?message получаем ID документа и возвращаем его</span></code> <br/><code>    <span class="err">?message</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">Id</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Добавьте действие «<strong>Отправить сообщение</strong>» со следующими свойствами:</p>
+<ul>
+<li><strong>Подключение:</strong> выберите <a class="mkdocs_imported_link" href="#configure_connection_send_request">подключение для запроса документов из «СФЕРА Курьер»</a></li>
+<li><strong>Путь передачи данных:</strong> выберите <a class="mkdocs_imported_link" href="#настройка-пути-передачи-данных-для-запроса-документов-из-сфера-курьер">путь передачи данных для для запроса документов из «СФЕРА Курьер» типа «<strong>Получить документ</strong>»</a></li>
+<li><strong>Переменная с сообщением:</strong> <em>Request</em></li>
+<li><strong>Переменная для успешного ответа:</strong> <em>Response</em></li>
+<li><strong>Переменная для ответа с ошибкой:</strong> <em>Error</em></li>
+</ul>
+</li>
+<li>
+<p>Добавьте действие «<strong>Изменить значения переменных</strong>» со следующими свойствами:</p>
+<ul>
+<li><strong>Операция со значениями переменных: добавить</strong></li>
+<li><strong>Набор переменных:</strong> <em>Document</em></li>
+<li>
+<p>добавьте следующие переменные:</p>
+<ul>
+<li>
+<p><em>Content</em> со <strong>значением</strong> на <strong>N3</strong>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы с переменными</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">session:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">variable:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session/variable#&gt;</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Получаем значение локальной переменной Response и помещаем в ?response</span></code> <br/><code>    <span class="nn">session</span><span class="p">:</span><span class="nt">context</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">Response</span> <span class="err">?response</span><span class="p">.</span></code> <br/><code>    <span class="c"># Из ?response получаем документ и помещаем в ?document</span></code> <br/><code>    <span class="err">?response</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">Content</span> <span class="err">?document</span><span class="p">.</span></code> <br/><code>    <span class="c"># Из ?document получаем содержимое документа и возвращаем его</span></code> <br/><code>    <span class="err">?document</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">Content</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p><em>Name</em> со <strong>значением</strong> на <strong>N3</strong>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы с переменными</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">session:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">var:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session/variable#&gt;</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Получаем значение локальной переменной Response и помещаем в ?response</span></code> <br/><code>    <span class="nn">session</span><span class="p">:</span><span class="nt">context</span> <span class="nn">var</span><span class="p">:</span><span class="nt">Response</span> <span class="err">?response</span><span class="p">.</span></code> <br/><code>    <span class="c"># Из ?response получаем документ и помещаем в ?document</span></code> <br/><code>    <span class="err">?response</span> <span class="nn">var</span><span class="p">:</span><span class="nt">Content</span> <span class="err">?document</span><span class="p">.</span></code> <br/><code>    <span class="c"># Из ?document получаем имя файла документа и возвращаем его</span></code> <br/><code>    <span class="err">?document</span> <span class="nn">var</span><span class="p">:</span><span class="nt">Filename</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Добавьте действие «<strong>Выполнить по условиям</strong>» со следующими свойствами:</p>
+<ul>
+<li><strong>Название условия:</strong> <em>Документ отсутствует</em></li>
+<li><strong>Выражение: N3</strong></li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы с переменными и атрибутами</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">object:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">variable:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session/variable#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">session:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">cmwui:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/ui#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">assert:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/logics/assert#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Получаем значение локальной переменной Response и помещаем в ?response</span></code> <br/><code>    <span class="nn">session</span><span class="p">:</span><span class="nt">context</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">Response</span> <span class="err">?response</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получаем из ?response ID документа и помещаем его в ?docId</span></code> <br/><code>    <span class="err">?response</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">Id</span> <span class="err">?docId</span><span class="p">.</span></code> <br/><code>    <span class="c"># Приводим ?docId к строковому типу и помещаем в ?docIdStr</span></code> <br/><code>    <span class="err">?docId</span> <span class="nn">cmwui</span><span class="p">:</span><span class="nt">toClientString</span> <span class="err">?docIdStr</span><span class="p">.</span></code> <br/><code>    <span class="c"># Находим атрибут idDokumentaEDO (Идентификатор документа «СФЕРА Курьер»)</span></code> <br/><code>    <span class="c"># в шаблоне Reestrdokumentov (Реестр документов из СФЕРА Курьер)</span></code> <br/><code>    <span class="p">(</span><span class="s">"Reestrdokumentov"</span> <span class="s">"idDokumentaEDO"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?foundIds</span><span class="p">.</span></code> <br/><code></code> <br/><code>    <span class="c"># Сравниваем ?foundIds и ?docIdStr на предмет совпадений</span></code> <br/><code>    <span class="p">{</span><span class="err">?coincidence</span> <span class="err">?foundIds</span> <span class="err">?docIdStr</span><span class="p">.}</span> <span class="nn">assert</span><span class="p">:</span><span class="nt">count</span> <span class="err">?countCoincidence</span><span class="p">.</span></code> <br/><code>    <span class="c"># Если совпадений нет (т.е. ID документа из полученного сообщения</span></code> <br/><code>    <span class="c"># не встречается в шаблоне «Реестр документов из СФЕРА Курьер»)</span></code> <br/><code>    <span class="err">if</span> <span class="p">{</span><span class="err">?countCoincidence</span> <span class="err">==</span> <span class="mi">0</span><span class="p">}</span></code> <br/><code>    <span class="c"># возвращаем значение true</span></code> <br/><code>    <span class="err">then</span> <span class="p">{</span><span class="l">true</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.}.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Внутрь действия «<strong>Выполнить по условиям</strong>» поместите действие «<strong>Создать запись</strong>» и выберите <strong>целевой шаблон</strong> <em>«Реестр документов из СФЕРА Курьер»</em>.</p>
+</li>
+<li>
+<p>Внутрь действия «<strong>Создать запись</strong>» поместите действие «<strong>Прикрепить документ к атрибуту</strong>» со следующими свойствами:</p>
+<ul>
+<li><strong>Атрибут:</strong> <em>Документ</em></li>
+<li><strong>Операция со значениями: добавить</strong></li>
+<li><strong>Значение: формула</strong></li>
+</ul>
+<div class="highlight"><code><pre><span></span><code><span class="err">$$</span><span class="n">Document</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Внутрь действия «<strong>Создать запись</strong>» поместите действие «<strong>Изменить значения атрибутов</strong>» со следующими свойствами:</p>
+</li>
+</ol>
+<table style="width: 100%;">
+<tbody>
+<tr>
+<th>
+<p>Атрибут
+</p>
+</th><th>
+<p>Операция со значениями
+</p>
+</th><th>
+<p>Значение
+</p>
+</th>
+</tr>
+<tr>
+<td>
+<p><em>Идентификатор документа «СФЕРА Курьер»</em></p>
+</td>
+<td>
+<p><strong>Заменить</strong></p>
+</td>
+<td>
+<p><strong>N3:</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="c"># Импортируем функции для работы с переменными</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">variable:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session/variable#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">session:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">ui:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/ui#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="c"># Получаем значение локальной переменной Response</span></code> <br/><code>    <span class="c"># и помещаем в ?response</span></code> <br/><code>    <span class="nn">session</span><span class="p">:</span><span class="nt">context</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">Response</span> <span class="err">?response</span><span class="p">.</span></code> <br/><code>    <span class="c"># Получаем из ?response ID документа и помещаем его в ?docId</span></code> <br/><code>    <span class="err">?response</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">Id</span> <span class="err">?docId</span><span class="p">.</span></code> <br/><code>    <span class="c"># Приводим ?docId к строковому типу и возвращаем значение ID</span></code> <br/><code>    <span class="err">?docId</span> <span class="nn">ui</span><span class="p">:</span><span class="nt">toClientString</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</td>
+</tr>
+<tr>
+<td>
+<p><em>Электронный договор</em></p>
+</td>
+<td>
+<p><strong>Заменить</strong></p>
+</td>
+<td>
+<p><strong>Формула:</strong> <code>true</code></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><em>Сумма документа</em></p>
+</td>
+<td>
+<p><strong>Заменить</strong></p>
+</td>
+<td>
+<p><strong>Формула:</strong> <code>$$Response-&gt;TotalSum</code></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><em>Сумма НДС</em></p>
+</td>
+<td>
+<p><strong>Заменить</strong></p>
+</td>
+<td>
+<p><strong>Формула:</strong> <code>$$Response-&gt;VatSum</code></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><em>Номер документа контрагента</em></p>
+</td>
+<td>
+<p><strong>Заменить</strong></p>
+</td>
+<td>
+<p><strong>Формула:</strong> <code>$$Response-&gt;Number</code></p>
+</td>
+</tr>
+<tr>
+<td>
+<p><em>Дата документа контрагента</em></p>
+</td>
+<td>
+<p><strong>Заменить</strong></p>
+</td>
+<td>
+<p><strong>Формула:</strong> <code>$$Response-&gt;Date</code></p>
+</td>
+</tr>
+</tbody>
+</table>
+<figure class="screenshot_with_caption">
+<p><img alt="Сценарий получения документов из «СФЕРА Курьер»" src="/platform/v5.0/administration/connections_communication_routes/custom_connections/img/esphere_receive_configure_scenario.png"/></p><figcaption class="caption">Сценарий получения документов из «СФЕРА Курьер»</figcaption>
+</figure>
+<h2 id="тестирование">Тестирование</h2>
+<ol class="colored_numbers_list">
+<li>С помощью системы «СФЕРА Курьер» отправьте документ пользователю, API-ключ которого используется для <a class="mkdocs_imported_link" href="#порядок-настройки">интеграции со «СФЕРА Курьер»</a>.</li>
+<li>Перейдите к записям шаблона <em>«Реестр документов из СФЕРА Курьер»</em>.</li>
+<li>В списке должна отобразиться новая запись.</li>
+<li>Перейдите к новой записи и посмотрите полученные данные. К записи должен быть прикреплён документ и должны быть заполнены поля атрибутов.</li>
+</ol>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5062">Отправка документов через «СФЕРА Курьер»</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4675">Подключения. Определения, типы, создание, настройка, удаление</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4676">Пути передачи данных</a></em></li>
+</ul>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

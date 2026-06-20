@@ -2,7 +2,7 @@
 title: 'Не отправляется информация в процессном уведомлении'
 kbId: 5051
 url: 'https://kb.comindware.ru/article.php?id=5051'
-updated: '2026-06-20 18:06:30'
+updated: '2026-06-20 20:26:37'
 ---
 
 # Не отправляется информация в процессном уведомлении
@@ -28,10 +28,10 @@ updated: '2026-06-20 18:06:30'
 
 ## Связанные статьи
 
-- [Шаблон процесса](https://kb.comindware.ru/article.php?id=5694)
-- [Промежуточное событие-отправка сообщения](https://kb.comindware.ru/article.php?id=5676)
-- [Конечное событие-отправка сообщения](https://kb.comindware.ru/article.php?id=5680)
-- [Диаграмма процесса. Определения, редактирование, публикация](https://kb.comindware.ru/article.php?id=5657)
-- [Использование диаграммы экземпляра процесса](https://kb.comindware.ru/article.php?id=5658)
-- [Шаблон записи](https://kb.comindware.ru/article.php?id=5693)
-- [Пути передачи данных](https://kb.comindware.ru/article.php?id=5302)
+- [Шаблон процесса](https://kb.comindware.ru/article.php?id=4758)
+- [Промежуточное событие-отправка сообщения](https://kb.comindware.ru/article.php?id=4740)
+- [Конечное событие-отправка сообщения](https://kb.comindware.ru/article.php?id=4745)
+- [Диаграмма процесса. Определения, редактирование, публикация](https://kb.comindware.ru/article.php?id=4721)
+- [Использование диаграммы экземпляра процесса](https://kb.comindware.ru/article.php?id=4723)
+- [Шаблон записи](https://kb.comindware.ru/article.php?id=4759)
+- [Пути передачи данных](https://kb.comindware.ru/article.php?id=4676)

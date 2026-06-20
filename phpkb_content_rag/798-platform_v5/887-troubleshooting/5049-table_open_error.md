@@ -2,7 +2,7 @@
 title: 'Перестала открываться таблица (ошибка «Object reference not set to an instance of an object»)'
 kbId: 5049
 url: 'https://kb.comindware.ru/article.php?id=5049'
-updated: '2026-06-20 18:06:30'
+updated: '2026-06-20 20:26:38'
 ---
 
 # Перестала открываться таблица (ошибка «Object reference not set to an instance of an object»)
@@ -32,5 +32,5 @@ updated: '2026-06-20 18:06:30'
 
 ## Связанные статьи
 
-- [Общие сведения об API Comindware Platform](https://kb.comindware.ru/article.php?id=5332)
-- [Методы System Core API](https://kb.comindware.ru/article.php?id=5331)
+- [Общие сведения об API Comindware Platform](https://kb.comindware.ru/article.php?id=4860)
+- [Методы System Core API](https://kb.comindware.ru/article.php?id=4862)

@@ -2,7 +2,7 @@
 title: 'Вызов API Comindware Platform при помощи Postman'
 kbId: 4928
 url: 'https://kb.comindware.ru/article.php?id=4928'
-updated: '2026-06-20 18:06:00'
+updated: '2026-06-20 20:26:09'
 ---
 
 # Вызов API Comindware Platform при помощи Postman
@@ -75,6 +75,6 @@ _![Слева — ответ на запрос в Postman, справа — от
 
 ## Связанные статьи
 
-- [Введение в API](https://kb.comindware.ru/article.php?id=5332)
-- [Solution API](https://kb.comindware.ru/article.php?id=5333)
-- [Web API](https://kb.comindware.ru/article.php?id=5330)
+- [Введение в API](https://kb.comindware.ru/article.php?id=4860)
+- [Solution API](https://kb.comindware.ru/article.php?id=4863)
+- [Web API](https://kb.comindware.ru/article.php?id=4861)

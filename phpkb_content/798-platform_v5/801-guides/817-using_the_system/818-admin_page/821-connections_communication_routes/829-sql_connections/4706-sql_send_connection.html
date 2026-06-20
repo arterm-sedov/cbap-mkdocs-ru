@@ -1,0 +1,520 @@
+<h1>Внешняя СУБД (MySQL, MSSQL, Oracle, PostgreSQL). Отправка SQL-запроса. Настройка подключения, пути передачи данных и сценария</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4706" kb-tags="путь передачи данных,пути,подключения,подключение,mysql,сценарий,sql,postgres" kb-title="Внешняя СУБД (MySQL, MSSQL, Oracle, PostgreSQL). Отправка SQL-запроса. Настройка подключения, пути передачи данных и сценария">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#sql_send_connection_introduction">
+<span class="md-ellipsis">
+      
+        Введение
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#sql_send_connection_applied_task">
+<span class="md-ellipsis">
+      
+        Прикладная задача
+      
+    </span>
+</a>
+<nav aria-label="Прикладная задача" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#sql_send_connection_initial_data">
+<span class="md-ellipsis">
+      
+        Исходные данные
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#sql_send_connection_db_server_preparation">
+<span class="md-ellipsis">
+      
+        Подготовка сервера СУБД
+      
+    </span>
+</a>
+<nav aria-label="Подготовка сервера СУБД" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#sql_send_connection_postgresql_server_configuration">
+<span class="md-ellipsis">
+      
+        Настройка конфигурации сервера PostgreSQL
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#sql_send_connection_create_db_connection">
+<span class="md-ellipsis">
+      
+        Создание подключения к СУБД
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#sql_send_connection_create_communication_route">
+<span class="md-ellipsis">
+      
+        Создание пути для обмена данными с СУБД
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#sql_send_connection_create_button">
+<span class="md-ellipsis">
+      
+        Создание кнопки для отправки SQL-запроса в СУБД
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#sql_send_connection_create_scenario">
+<span class="md-ellipsis">
+      
+        Создание сценария для отправки SQL-запроса и получения данных из СУБД
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#sql_send_connection_scenario_testing">
+<span class="md-ellipsis">
+      
+        Тестирование сценария
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      
+        Связанные статьи
+      
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="sql_send_connection_introduction">Введение</h2>
+<p>Здесь представлены инструкции по настройке подключения, пути передачи данных и сценария для отправки SQL-запросов во внешнюю систему управления базами данных (СУБД) с целью получения данных из внешней базы данных (БД) в приложение на основе <strong>Comindware Platform</strong> (далее «Приложение»).</p>
+<p>Для обмена данными с СУБД поддерживаются следующие SQL-запросы:</p>
+<ul>
+<li><code>SELECT</code><ul>
+<li>задайте таблицу для выборки записей из СУБД;</li>
+<li>задайте условие <code>WHERE</code> (необязательно) для выборки записей из СУБД;</li>
+<li>задайте атрибут для хранения полученных записей из СУБД;</li>
+</ul>
+</li>
+<li><code>UPDATE</code><ul>
+<li>задайте таблицу для выборки записей из СУБД;</li>
+<li>задайте условие <code>WHERE</code> (необязательно) для выборки записей из СУБД;</li>
+<li>задайте атрибуты (поля) записей, которые требуется изменить в СУБД;</li>
+</ul>
+</li>
+<li><code>INSERT</code><ul>
+<li>задайте таблицу для выборки записей из СУБД;</li>
+<li>задайте атрибуты (поля) записей, которые требуется создать в СУБД;</li>
+</ul>
+</li>
+<li><code>DELETE</code><ul>
+<li>задайте таблицу для выборки записей из СУБД;</li>
+<li>задайте условие <code>WHERE</code> (обязательно) для выборки записей, которые требуется удалить из СУБД;</li>
+</ul>
+</li>
+<li class="pageBreakBefore">пользовательский запрос:<ul>
+<li>задайте собственный шаблон запроса, в который можно подставить значения <strong>атрибутов сообщения</strong>, например:
+  <div class="highlight"><code><pre><span></span><code><span class="c1">-- {my_id} — заполнитель с системным именем атрибута сообщения,</span></code> <br/><code><span class="c1">-- значение которого будет подставлено в запрос</span></code> <br/><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">TableName</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Id</span><span class="o">=</span><span class="err">{</span><span class="n">my_id</span><span class="err">}</span></code> <br/></pre></code></div></li>
+<li>задайте атрибут для хранения полученного результата;</li>
+<li>задайте тип возвращаемого результата:<ul>
+<li><strong>без результата</strong>;</li>
+<li><strong>набор записей</strong>;</li>
+<li><strong>скалярное значение</strong> (возвращаемое скалярной функцией SQL).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Настройка приложения для обмена данными с СУБД MySQL, MSSQL, Oracle и PostgreSQL осуществляется аналогичным образом.</p>
+<p>См. также статью <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4705">Внешняя СУБД (MySQL, MSSQL, Oracle, PostgreSQL). Получение данных по таймеру. Настройка подключения, пути передачи данных и сценария</a>».</em></p>
+<h2 class="pageBreakBefore" id="sql_send_connection_applied_task">Прикладная задача</h2>
+<p>Посредством запроса <code>SELECT</code> к внешней СУБД необходимо получать из таблицы <code>cities</code> названия городов, находящихся в стране, по трехбуквенному коду страны в формате ISO 3166-1.</p>
+<h3 id="sql_send_connection_initial_data">Исходные данные</h3>
+<p>Внешняя БД содержит таблицу <code>cities</code> со следующими столбцами:</p>
+<ul>
+<li><code>countryCode</code> типа <code>CHAR(3)</code> — трехбуквенный код страны, в которой находится город;</li>
+<li><code>cityName</code> типа <code>TINYTEXT</code> — название города.</li>
+</ul>
+<p>В приложении имеется шаблон записи <em>«Страны»</em> с атрибутами:</p>
+<ul>
+<li><em>Код страны</em> (системное имя <em>CountryCode</em>):<ul>
+<li><strong>Тип данных: текст</strong></li>
+</ul>
+</li>
+<li><em>Города страны</em><ul>
+<li><strong>Системное имя:</strong> <em>Cities</em></li>
+<li><strong>Тип данных: запись</strong></li>
+<li><strong>Связанный шаблон</strong>: <em>Города</em></li>
+<li><strong>Хранить несколько значений</strong>: флажок установлен</li>
+</ul>
+</li>
+</ul>
+<p>В приложении имеется шаблон записи <em>«Города»</em> с атрибутом:</p>
+<ul>
+<li><em>Название города</em><ul>
+<li><strong>Системное имя</strong>: <em>cityName</em></li>
+<li><strong>Тип данных: текст</strong></li>
+<li><strong>Использовать как заголовок записей</strong>: флажок установлен</li>
+</ul>
+</li>
+</ul>
+<p>В шаблоне записи <em>«Страны»</em> на основную форму вынесены следующие атрибуты:</p>
+<ul>
+<li><em>Код страны</em> — текстовое поле;</li>
+<li><em>Города страны</em> — таблица со столбцом <em>«Название города».</em></li>
+</ul>
+<h2 class="pageBreakBefore" id="sql_send_connection_db_server_preparation">Подготовка сервера СУБД</h2>
+<p>Перед подключением из <strong>Comindware Platform</strong> необходимо подготовить конфигурацию сервера СУБД, как указано ниже.</p>
+<h3 id="sql_send_connection_postgresql_server_configuration">Настройка конфигурации сервера PostgreSQL</h3>
+<p>Настройка серверов MySQL, MSSQL и Oracle осуществляется аналогично.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Откройте для редактирования файл <code>postgresql.conf</code>.</p>
+<ul>
+<li>
+<p>В ОС Linux путь к этому файлу можно узнать с помощью следующей команды:</p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>-u<span class="w"> </span>postgres<span class="w"> </span>psql<span class="w"> </span>-c<span class="w"> </span><span class="s1">'SHOW config_file'</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>В ОС Windows путь к файлу по умолчанию:</p>
+<div class="highlight"><code><pre><span></span><code><span class="n">C</span><span class="p">:\\</span><span class="n">ProgramData</span><span class="p">\\</span><span class="n">PostgreSQL</span><span class="p">\\</span><span class="n">X</span><span class="p">.</span><span class="n">X</span><span class="p">\\</span><span class="n">data</span><span class="p">\\</span><span class="n">postgresql</span><span class="p">.</span><span class="n">conf</span></code> <br/></pre></code></div>
+<p>Здесь <code>X.X</code> — номер версии PostgreSQL.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>В файле <code>postgresql.conf</code> добавьте следующие директивы:</p>
+<ul>
+<li>
+<p>Разрешите подключение со всех IP адресов:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nv">listen_addresses</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'*'</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Задайте локаль для вывода сообщений об ошибках:</p>
+<div class="highlight"><code><pre><span></span><code><span class="nv">lc_messages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'en_EN.utf-8'</span></code> <br/></pre></code></div>
+</li>
+</ul>
+</li>
+<li>
+<p>Откройте для редактирования конфигурационный файл <code>pg_hba.conf</code> (в той же директории, что файло <code>postgresql.conf</code>).</p>
+</li>
+<li>
+<p>В файле <code>pg_hba.conf</code> разрешите подключение с адреса сервера <strong>Comindware Platform</strong> (например, <code>123.45.67.89</code>):</p>
+<div class="highlight"><code><pre><span></span><code><span class="na">host    all    all    123.45.67.89    md5</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Перезапустите службу <code>postgresql</code>:</p>
+<p><strong>Linux</strong></p>
+<div class="highlight"><code><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>postgresql</code> <br/></pre></code></div>
+<p><strong>Windows</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="n">net</span> <span class="n">stop</span> <span class="n">postgresql-x64</span><span class="p">-&lt;</span><span class="n">номер_версии</span><span class="p">&gt;</span></code> <br/></pre></code></div>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="sql_send_connection_create_db_connection">Создание подключения к СУБД</h2>
+<ol class="colored_numbers_list">
+<li>Откройте страницу «<strong>Администрирование</strong>» — «<strong>Подключения</strong>».</li>
+<li>
+<p>Создайте <strong>SQL-подключение</strong> типа «<strong>Отправки запросов в СУБД</strong>».</p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Меню создания подключения для отправки запросов в СУБД" src="/platform/v5.0/administration/connections_communication_routes/sql_connections/img/sql_send_connection_menu.png"/><figcaption class="caption">Меню создания подключения для отправки запросов в СУБД</figcaption></figure>
+</li>
+<li>
+<p>В поле «<strong>Системное имя</strong>» введите уникальное имя подключения, например <code>SendRquestToDBConnection</code>.</p>
+</li>
+<li>В поле «<strong>Описание</strong>» введите наглядное описание назначения подключения, например <em>«Подключение для отправки запросов в СУБД»</em>.</li>
+<li>
+<p>В поле «<strong>Запись в файловые журналы</strong>» укажите, какие события при обмене данными с сервером СУБД следует регистрировать в журнале:</p>
+<ul>
+<li><strong>Полные сведения об обработке сообщения</strong></li>
+<li><strong>Только ошибки</strong></li>
+<li><strong>Отключить</strong></li>
+</ul>
+</li>
+<li>
+<p>В поле «<strong>Строка подключения</strong>» введите адрес сервера, имя базы данных, имя пользователя и пароль для подключения к СУБД:</p>
+<p><strong>MySQL</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="nv">Server</span><span class="o">=</span>ServerAddress<span class="p">;</span><span class="nv">Database</span><span class="o">=</span>DataBaseName<span class="p">;</span><span class="nv">Uid</span><span class="o">=</span>Username<span class="p">;</span><span class="nv">Pwd</span><span class="o">=</span>Password<span class="p">;</span></code> <br/></pre></code></div>
+<p><strong>MSSQL</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="nv">Server</span><span class="o">=</span>ServerAddress<span class="p">;</span><span class="nv">Database</span><span class="o">=</span>DataBaseName<span class="p">;</span>User<span class="w"> </span><span class="nv">Id</span><span class="o">=</span>Username<span class="p">;</span><span class="nv">Pwd</span><span class="o">=</span>Password<span class="p">;</span></code> <br/></pre></code></div>
+<p><strong>Oracle</strong></p>
+<div class="highlight"><code><pre><span></span><code>Data<span class="w"> </span><span class="nv">Source</span><span class="o">=</span>DataBaseName<span class="p">;</span>User<span class="w"> </span><span class="nv">Id</span><span class="o">=</span>Username<span class="p">;</span><span class="nv">Password</span><span class="o">=</span>Password<span class="p">;</span>Integrated<span class="w"> </span><span class="nv">Security</span><span class="o">=</span>no<span class="p">;</span></code> <br/></pre></code></div>
+<p><strong>PostgreSQL</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="nv">Host</span><span class="o">=</span>ServerAddress<span class="p">;</span><span class="nv">Database</span><span class="o">=</span>DataBaseName<span class="p">;</span>User<span class="w"> </span><span class="nv">ID</span><span class="o">=</span>Username<span class="p">;</span><span class="nv">Password</span><span class="o">=</span>Password<span class="p">;</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>В поле «<strong>Система управления базами данных</strong>» выберите тип СУБД:</p>
+<ul>
+<li><strong>MySQL</strong></li>
+<li><strong>MSSQL</strong></li>
+<li><strong>Oracle</strong></li>
+<li><strong>PostgreSQL</strong></li>
+</ul>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Создать</strong>».</p>
+</li>
+<li>В списке подключений дважды нажмите строку созданного подключения.</li>
+<li>В окне свойств подключения нажмите кнопку «<strong>Проверить соединение</strong>».</li>
+<li>Если проверка соединения не выдала ошибок, нажмите кнопку «<strong>Сохранить</strong>».</li>
+</ol>
+<h2 class="pageBreakBefore" id="sql_send_connection_create_communication_route">Создание пути для обмена данными с СУБД</h2>
+<ol class="colored_numbers_list">
+<li>Со страницы «<strong>Администрирование</strong>» приложения перейдите в раздел «<strong>Пути передачи данных</strong>».</li>
+<li>
+<p>Создайте <strong>путь передачи данных</strong> типа «<strong>SQL-подключения — Отправка запросов в СУБД</strong>».</p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Меню создания пути передачи данных для отправки запросов в СУБД" src="/platform/v5.0/administration/connections_communication_routes/sql_connections/img/sql_send_connection_menu_paths.png"/><figcaption class="caption">Меню создания пути передачи данных для отправки запросов в СУБД</figcaption></figure>
+</li>
+<li>
+<p>В поле «<strong>Подключение</strong>» выберите ранее созданное подключение для отправки запросов в СУБД, например <em>«Отправка запросов в СУБД»</em>.</p>
+</li>
+<li>В поле «<strong>Системное имя</strong>» введите уникальное имя пути передачи данных, например <code>SendRequestToDBCommunicationRoute</code>.</li>
+<li>В поле «<strong>Описание</strong>» введите наглядное описание пути передачи данных, например <em>«Путь для отправки данных в СУБД»</em>.</li>
+<li>Откройте вкладку «<strong>Атрибуты сообщений</strong>».</li>
+<li>В поле «<strong>Тип сообщения</strong>» выберите пункт «<strong>Выполнить запрос SELECT</strong>».</li>
+<li id="message_attributes">В таблице «<strong>Запрос</strong>» оставьте созданные автоматически атрибуты, они будут использоваться в сценарии для формирования SQL-запроса.</li>
+<li>
+<p>В области «<strong>Ответ</strong>» нажмите кнопку «<strong>Добавить</strong>», чтобы создать:</p>
+<ul>
+<li>атрибут <code>Cities</code> типа «<strong>Объект</strong>» с установленным флажком «<strong>Массив</strong>» — этот атрибут будет содержать массив названий городов, полученных из внешней БД (системное имя этого атрибута может быть любым);</li>
+</ul>
+</li>
+<li>
+<p>В таблице атрибутов установите флажок у атрибута <code>Cities</code> и нажмите кнопку «<strong>Добавить</strong>», чтобы создать:</p>
+<ul>
+<li>вложенный атрибут <code>cityName</code> типа «<strong>Строка</strong>» — этот атрибут будет содержать название города, и его системное имя должно совпадать с именем столбца с названиями городов в таблице, полученной из внешней БД;</li>
+<li>вложенный атрибут <code>countryCode</code> типа «<strong>Строка</strong>» — этот атрибут будет содержать код страны, и его системное имя должно совпадать с именем столбца с кодами стран в таблице, полученной из внешней БД.</li>
+</ul>
+<figure class="screenshot_with_caption" markdown=""><img alt="Настройка атрибутов для отправки SQL-запроса SELECT и получения ответа от СУБД" src="/platform/v5.0/administration/connections_communication_routes/sql_connections/img/sql_send_connection_attributes_settings.png"/><figcaption class="caption">Настройка атрибутов для отправки SQL-запроса SELECT и получения ответа от СУБД</figcaption></figure>
+</li>
+<li>
+<p>Откройте вкладку «<strong>Интеграция</strong>».</p>
+</li>
+<li>В поле «<strong>Таблица</strong>» укажите имя таблицы в базе данных, из которой требуется получать данные, например <code>cities</code>.</li>
+<li>В поле «<strong>Атрибут для хранения полученных записей</strong>» укажите системное имя атрибута <code>Cities</code>, созданного на вкладке «<strong><a class="mkdocs_imported_link" href="#message_attributes">Атрибуты сообщений</a></strong>».</li>
+<li>Поле «<strong>SQL-запрос</strong>» оставьте пустым. Если его заполнить, то будет проигнорирован запрос, сформированный с помощью сценария и атрибутов на вкладке «<a class="mkdocs_imported_link" href="#message_attributes"><strong>Атрибуты сообщений</strong></a>».</li>
+<li>
+<p>Сохраните настроенный путь для обмена данными с СУБД.</p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Настройка параметров интеграции для отправки запроса в СУБД" src="/platform/v5.0/administration/connections_communication_routes/sql_connections/img/sql_send_connection_parametres_settings.png"/><figcaption class="caption">Настройка параметров интеграции для отправки запроса в СУБД</figcaption></figure>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="sql_send_connection_create_button">Создание кнопки для отправки SQL-запроса в СУБД</h2>
+<ol class="colored_numbers_list">
+<li>Откройте вкладку «<strong>Кнопки</strong>» шаблона записи <em>«Страны»</em>.</li>
+<li>
+<p>Создайте кнопку <em>«Получить города из СУБД»</em> со следующими свойствами:</p>
+<ul>
+<li><strong>Контекст операции: запись</strong></li>
+<li><strong>Операция: вызвать событие «Нажата кнопка»</strong></li>
+<li><strong>Результат выполнения: обновить данные</strong></li>
+</ul>
+<figure class="screenshot_with_caption" markdown=""><img alt="Настройка кнопки «Получить города из СУБД»" src="/platform/v5.0/administration/connections_communication_routes/sql_connections/img/sql_send_connection_receive_cities.png"/><figcaption class="caption">Настройка кнопки «Получить города из СУБД»</figcaption></figure>
+</li>
+<li>
+<p>Добавьте кнопку <em>«Получить города из СУБД»</em> на основную форму шаблона <em>«Страны»</em>.</p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Добавление кнопки «Получить города из СУБД» на основную форму шаблона «Страны»" src="/platform/v5.0/administration/connections_communication_routes/sql_connections/img/sql_send_connection_country_button.png"/><figcaption class="caption">Добавление кнопки «Получить города из СУБД» на основную форму шаблона «Страны»</figcaption></figure>
+</li>
+</ol>
+<h2 class="pageBreakBefore" id="sql_send_connection_create_scenario">Создание сценария для отправки SQL-запроса и получения данных из СУБД</h2>
+<ol class="colored_numbers_list">
+<li>Со страницы «<strong>Администрирование</strong>» приложения перейдите в раздел «<strong>Сценарии</strong>».</li>
+<li>Создайте новый сценарий, нажав кнопку «<strong>Создать</strong>».</li>
+<li>
+<p>Настройте свойства сценария:</p>
+<ul>
+<li><strong>Название</strong> — введите наглядное название сценария, например <em>«Запрос городов из СУБД»</em>.</li>
+<li><strong>Системное имя</strong> — введите уникальное имя сценария, например <code>getCitiesFromDB</code>.</li>
+<li><strong>Контекст выполнения</strong> — выберите пункт «<strong>От имени системы</strong>».</li>
+</ul>
+</li>
+<li>
+<p>Сохраните сценарий.</p>
+</li>
+<li>Откройте конструктор сценария, дважды нажав строку созданного сценария в списке сценариев.</li>
+<li>
+<p>В отобразившемся конструкторе сценария нажмите кнопку изменить на элементе «<strong>Нажатие кнопки</strong>».</p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Переход к свойствам элемента сценария" src="/platform/v5.0/administration/connections_communication_routes/sql_connections/img/sql_send_connection_scenario_properties_transfer.png"/><figcaption class="caption">Переход к свойствам элемента сценария</figcaption></figure>
+</li>
+<li>
+<p>Настройте свойства события:</p>
+<ul>
+<li><strong>Контекстный шаблон</strong> — выберите шаблон записи <em>«Страны»</em>;</li>
+<li><strong>Кнопка</strong> — выберите ранее созданную кнопку <em>«Получить города из СУБД»</em>.</li>
+</ul>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Настройка события получения сообщения из СУБД в сценарии" src="/platform/v5.0/administration/connections_communication_routes/sql_connections/img/sql_send_connection_scenario_receive_cities.png"/><figcaption class="caption">Настройка события получения сообщения из СУБД в сценарии</figcaption></figure>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Добавить действие</strong>» под элементом «<strong>Нажата кнопка</strong>».</p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Добавление действия «Изменить значение переменных» в сценарий" src="/platform/v5.0/administration/connections_communication_routes/sql_connections/img/sql_send_connection_scenario_change.png"/><figcaption class="caption">Добавление действия «Изменить значение переменных» в сценарий</figcaption></figure>
+</li>
+<li>
+<p>Добавьте действие «<strong>Изменить значения переменных</strong>» и настройте его свойства:</p>
+<ul>
+<li><strong>Набор переменных</strong> — укажите наглядное имя, например <code>SqlRequestBody</code>, оно будет использоваться в последующих действиях сценария.</li>
+<li>
+<p>Нажимайте кнопку «<strong>Создать</strong>» над таблицей переменных и добавьте переменные:</p>
+<ul>
+<li><code>Filter</code> — не указывайте <strong>значение</strong> (объявление объекта). Установите флажок рядом c этой переменной и создайте дочерние переменные:<ul>
+<li><code>Name</code> — в поле «<strong>Значение</strong>» введите <strong>формулу</strong>: <code>"countryCode"</code> — имя столбца из таблицы <code>cities</code> во внешней БД.</li>
+<li><code>Value</code> — в поле «<strong>Значение</strong>» выберите <strong>атрибут</strong> <em>«Код страны»</em>.</li>
+<li>Из этих переменных в последующем действии «<strong>Отправить сообщение</strong>» в SQL-запросе будет сформировано предложение <code>WHERE Name=Value</code> (например, <code>WHERE countryCode='RUS'</code>).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Сохраните действие «<strong>Изменить значения переменных</strong>».</p>
+</li>
+</ul>
+<figure class="screenshot_with_caption" markdown=""><img alt="Настройка свойств действия «Изменить значения переменных»" src="/platform/v5.0/administration/connections_communication_routes/sql_connections/img/sql_send_connection_scenario_change_settings.png"/><figcaption class="caption">Настройка свойств действия «Изменить значения переменных»</figcaption></figure>
+</li>
+<li>
+<p id="send_message">После действия «<strong>Изменить значения переменных</strong>» добавьте действие «<strong>Отправить сообщение</strong>» и настройте его свойства:</p>
+<ul>
+<li><strong>Подключение</strong> — выберите ранее созданное <em>Подключение для отправки запросов в СУБД</em>.</li>
+<li><strong>Путь передачи данных</strong> — выберите ранее созданный <em>Путь для отправки данных в СУБД</em>.</li>
+<li><strong>Переменная с сообщением</strong> — введите наглядное имя <strong>набора переменных</strong> <code>SqlRequestBody</code>, заданное в предшествующем действии «<strong>Изменить значения переменных</strong>».</li>
+<li><strong>Переменная для успешного ответа</strong> — введите наглядное имя переменной для хранения записей, полученных из внешней БД, например <code>SqlResponse</code>.</li>
+<li>введите имя переменной для хранения ответа сервера об успешной операции.</li>
+<li><strong>Переменная для ответа с ошибкой</strong> — введите имя переменной для хранения ответа сервера об операции, которую не удалось выполнить.</li>
+<li>Сохраните действие «<strong>Отправить сообщение</strong>».</li>
+</ul>
+<figure class="screenshot_with_caption" markdown=""><img alt="Настройка свойств действия «Отправить сообщение»" src="/platform/v5.0/administration/connections_communication_routes/sql_connections/img/sql_send_connection_send_message_settings.png"/><figcaption class="caption">Настройка свойств действия «Отправить сообщение»</figcaption></figure>
+</li>
+<li>
+<p id="object_cycle">За действием «<strong>Отправить сообщение</strong>» добавьте действие «<strong>Повторять по количеству объектов</strong>» и настройте его свойства:</p>
+<ul>
+<li>В поле «<strong>Переменная</strong>» введите наглядное имя переменной для итераций в цикле, например <code>currentRecord</code>;</li>
+<li>
+<p>В поле «<strong>Атрибут или выражение для поиска объектов</strong>» введите следующее выражение:</p>
+<ul>
+<li>
+<p><strong>Формула</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="err">$$</span><span class="n">SqlResponse</span><span class="o">-&gt;</span><span class="n">City</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p><strong>N3</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">session:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session#&gt;</span><span class="p">.</span></code> <br/><code><span class="k">@prefix</span><span class="w"> </span><span class="nn">var:</span><span class="w"> </span><span class="nv">&lt;http://comindware.com/ontology/session/variable#&gt;</span><span class="p">.</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="nn">session</span><span class="p">:</span><span class="nt">context</span> <span class="nn">var</span><span class="p">:</span><span class="nt">SqlResponse</span> <span class="err">?message</span><span class="p">.</span></code> <br/><code>    <span class="err">?message</span> <span class="nn">var</span><span class="p">:</span><span class="nt">City</span> <span class="err">?value</span><span class="p">.</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Здесь:</p>
+<ul>
+<li><code>SqlResponse</code> — имя <strong>переменной для успешного ответа</strong>, указанное в свойствах свойствах события «<strong><a class="mkdocs_imported_link" href="#send_message">Отправить сообщение</a></strong>».</li>
+<li><code>City</code> — системное имя атрибута-массива, созданного <a class="mkdocs_imported_link" href="#message_attributes">на вкладке «<strong>Атрибуты сообщений</strong>»</a> в свойствах пути передачи данных.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Сохраните действие «<strong>Повторять по количеству объектов</strong>».</p>
+</li>
+</ul>
+<figure class="screenshot_with_caption" markdown=""><img alt="Настройка цикла по количеству объектрв в сценарии" src="/platform/v5.0/administration/connections_communication_routes/sql_connections/img/sql_send_connection_scenario_cycle_settings.png"/><figcaption class="caption">Настройка цикла по количеству объектрв в сценарии</figcaption></figure>
+</li>
+<li>
+<p id="create_record">Внутри действия «<strong>Повторять по количеству объектов</strong>» добавьте действие «<strong>Создать запись</strong>» и настройте его свойства:</p>
+<ul>
+<li>В поле «<strong>Целевой шаблон записи</strong>» выберите шаблон <em>«Города»</em>, в котором будут создаваться записи с данными, полученными из внешней БД.</li>
+</ul>
+<figure class="screenshot_with_caption" markdown=""><img alt="Настройка действия «Создать запись» в сценарии" src="/platform/v5.0/administration/connections_communication_routes/sql_connections/img/sql_send_connection_create_record_settings.png"/><figcaption class="caption">Настройка действия «Создать запись» в сценарии</figcaption></figure>
+</li>
+<li>
+<p>Внутри действия «<strong>Создать запись</strong>» добавьте действие «<strong>Изменить значения атрибутов</strong>».</p>
+</li>
+<li>В действии «<strong>Изменить значения атрибутов</strong>» на вкладке «<strong>Дополнительно</strong>» установите флажок «<strong>Сбрасывать кэш значений</strong>».</li>
+<li>
+<p>На вкладке «<strong>Основные</strong>»:</p>
+<ul>
+<li>Нажмите кнопку «<strong>Создать</strong>».</li>
+<li>В столбце «<strong>Атрибут</strong>» выберите атрибут шаблона, указанного <a class="mkdocs_imported_link" href="#create_record">в свойствах действия «<strong>Создать запись</strong>»</a>, в который будут помещаться названия городов, полученные из внешней БД.</li>
+<li>В столбце «<strong>Операция со значениями</strong>» выберите пункт «<strong>Заменить</strong>».</li>
+<li>
+<p>В Столбце «<strong>Значение</strong>» введите следующее выражение:</p>
+<ul>
+<li>
+<p><strong>Формула</strong></p>
+<div class="highlight"><code><pre><span></span><code>$$currentRecord-&gt;cityName</code> <br/></pre></code></div>
+</li>
+<li>
+<p><strong>N3</strong></p>
+<div class="highlight"><code><pre><span></span><code>@prefix session: &lt;http://comindware.com/ontology/session#&gt;.</code> <br/><code>@prefix var: &lt;http://comindware.com/ontology/session/variable#&gt;.</code> <br/><code>{</code> <br/><code>    session:context var:currentRecord ?record.</code> <br/><code>    ?record var:cityName ?value.</code> <br/><code>}</code> <br/></pre></code></div>
+</li>
+<li>
+<p>Здесь:</p>
+<ul>
+<li><code>currentRecord</code> — имя переменной, заданное <a class="mkdocs_imported_link" href="#object_cycle">в свойствах действия «<strong>Повторять по количеству объектов</strong>»</a>.</li>
+<li><code>cityName</code> — системное имя строкового атрибута (в массиве <code>City</code>), созданного <a class="mkdocs_imported_link" href="#message_attributes">на вкладке «<strong>Атрибуты сообщений</strong>»</a> в свойствах пути передачи данных.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Сохраните действие «<strong>Изменить значения атрибутов</strong>».</p>
+</li>
+</ul>
+<figure class="screenshot_with_caption" markdown=""><img alt="Настройка действия «Изменить значения атрибутов» в сценарии" src="/platform/v5.0/administration/connections_communication_routes/sql_connections/img/sql_send_connection_change_attributes_settings.png"/><figcaption class="caption">Настройка действия «Изменить значения атрибутов» в сценарии</figcaption></figure>
+</li>
+<li>
+<p>Должен получиться показанный на следующей иллюстрации сценарий.</p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Сценарий для сохранения данных из внешней БД в шаблон записи" src="/platform/v5.0/administration/connections_communication_routes/sql_connections/img/sql_send_connection_scenario.png"/><figcaption class="caption">Сценарий для сохранения данных из внешней БД в шаблон записи</figcaption></figure>
+</li>
+</ol>
+<h2 id="sql_send_connection_scenario_testing">Тестирование сценария</h2>
+<ol class="colored_numbers_list">
+<li>Создайте запись в шаблоне <em>«Страны»</em> и заполните поле <em>«Код страны».</em></li>
+<li>Нажмите кнопку <em>«Получить города из СУБД»</em>.</li>
+<li><a class="mkdocs_imported_link" href="#sql_send_connection_create_scenario">Настроенный для кнопки сценарий</a> должен создать в шаблоне записи <em>«Города»</em> записи с названиями городов, полученных из внешней БД по указанному коду страны.</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4705">Внешняя СУБД (MySQL, MSSQL, Oracle, PostgreSQL). Получение данных по таймеру. Настройка подключения, пути передачи данных и сценария</a></em></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

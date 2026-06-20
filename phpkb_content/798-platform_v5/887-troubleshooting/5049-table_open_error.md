@@ -2,7 +2,7 @@
 title: 'Перестала открываться таблица (ошибка «Object reference not set to an instance of an object»)'
 kbId: 5049
 url: 'https://kb.comindware.ru/article.php?id=5049'
-updated: '2026-06-17 14:09:58'
+updated: '2026-06-20 20:26:38'
 ---
 
 # Перестала открываться таблица (ошибка «Object reference not set to an instance of an object»)
@@ -32,7 +32,7 @@ updated: '2026-06-17 14:09:58'
 
 --8<-- "related_topics_heading.md"
 
-- [Общие сведения об API {{ productName }}](https://kb.comindware.ru/article.php?id=4860)
-- [Методы System Core API](https://kb.comindware.ru/article.php?id=4862)
+- [Общие сведения об API {{ productName }}][api_intro]
+- [Методы System Core API][api_system_core]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

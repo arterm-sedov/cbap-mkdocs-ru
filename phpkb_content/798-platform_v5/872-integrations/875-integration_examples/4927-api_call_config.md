@@ -2,12 +2,12 @@
 title: 'Настройка вызова API'
 kbId: 4927
 url: 'https://kb.comindware.ru/article.php?id=4927'
-updated: '2026-06-17 14:09:52'
+updated: '2026-06-20 20:26:10'
 ---
 
 # Настройка вызова API
 
-В **{{ productName }}** есть возможность вызова из внешних систем веб-сервисов системы для обмена данными, например, создание объекта, запуск процесса или получение информации по документу. Полный перечень веб-сервисов и описание можно посмотреть [здесь](https://kb.comindware.ru/article.php?id=4860).
+В **{{ productName }}** есть возможность вызова из внешних систем веб-сервисов системы для обмена данными, например, создание объекта, запуск процесса или получение информации по документу. Полный перечень веб-сервисов и описание можно посмотреть [здесь][api_intro].
 
 ## Сценарий
 
@@ -51,8 +51,8 @@ updated: '2026-06-17 14:09:52'
 
 --8<-- "related_topics_heading.md"
 
-- [Введение в API](https://kb.comindware.ru/article.php?id=4860)
-- [Solution API](https://kb.comindware.ru/article.php?id=4863)
-- [Web API](https://kb.comindware.ru/article.php?id=4861)
+- [Введение в API][api_intro]
+- [Solution API][api_solution]
+- [Web API][api_web]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

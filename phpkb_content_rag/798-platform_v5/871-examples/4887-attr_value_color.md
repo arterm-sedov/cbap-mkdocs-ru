@@ -2,7 +2,7 @@
 title: 'Атрибут типа «Текст». Настройка цвета отображения значения'
 kbId: 4887
 url: 'https://kb.comindware.ru/article.php?id=4887'
-updated: '2026-06-20 18:05:46'
+updated: '2026-06-20 20:25:56'
 ---
 
 # Атрибут типа «Текст». Настройка цвета отображения значения
@@ -36,7 +36,7 @@ LIST($StatusRef->name))
 
 ## Связанные статьи
 
-- [Атрибут типа «Текст»](https://kb.comindware.ru/article.php?id=5710)
-- [Цветовой индикатор в таблице. Настройка отображения](https://kb.comindware.ru/article.php?id=5349)
-- [Язык формул](https://kb.comindware.ru/category.php?id=901)
+- [Атрибут типа «Текст»](https://kb.comindware.ru/article.php?id=4768)
+- [Цветовой индикатор в таблице. Настройка отображения](https://kb.comindware.ru/article.php?id=4888)
+- [Язык формул](https://kb.comindware.ru/category.php?id=880)
 - [Справочник цветов HTML](https://colorscheme.ru/html-colors.html)

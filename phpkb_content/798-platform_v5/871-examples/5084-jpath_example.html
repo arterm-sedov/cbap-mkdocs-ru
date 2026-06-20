@@ -1,0 +1,445 @@
+<h1>HTTP-запросы. Получение и обработка данных с помощью JSONPath. Настройка подключения, пути передачи данных и сценария</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5084" kb-tags="JSON,JSONPath,JPath,интеграции,HTTP-запрос" kb-title="HTTP-запросы. Получение и обработка данных с помощью JSONPath. Настройка подключения, пути передачи данных и сценария">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<span class="md-ellipsis">
+      
+        Введение
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#прикладная-задача">
+<span class="md-ellipsis">
+      
+        Прикладная задача
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#порядок-настройки-отправки-и-обработки-http-запросов-с-помощью-сценария">
+<span class="md-ellipsis">
+      
+        Порядок настройки отправки и обработки HTTP-запросов с помощью сценария
+      
+    </span>
+</a>
+<nav aria-label="Порядок настройки отправки и обработки HTTP-запросов с помощью сценария" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-шаблона-записи">
+<span class="md-ellipsis">
+      
+        Настройка шаблона записи
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-подключения">
+<span class="md-ellipsis">
+      
+        Настройка подключения
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-пути-передачи-данных">
+<span class="md-ellipsis">
+      
+        Настройка пути передачи данных
+      
+    </span>
+</a>
+<nav aria-label="Настройка пути передачи данных" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#основные-свойства">
+<span class="md-ellipsis">
+      
+        Основные свойства
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#атрибуты-сообщений">
+<span class="md-ellipsis">
+      
+        Атрибуты сообщений
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#интеграция">
+<span class="md-ellipsis">
+      
+        Интеграция
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-сценария">
+<span class="md-ellipsis">
+      
+        Настройка сценария
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#тестирование">
+<span class="md-ellipsis">
+      
+        Тестирование
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      
+        Связанные статьи
+      
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p><strong>Comindware Platform</strong> позволяет использовать JSONPath и XPath для обработки полученных HTTP-запросов в соответствующем формате.</p>
+<p>JSONPath — язык запросов к базам данных и информационно-поисковым системам для работы с данными в формате JSON. Аналогичен XPath для работы с данными в формате XML.</p>
+<p>Здесь представлен пример настройки подключения, пути передачи данных и сценария для обработки ответа на HTTP-запрос с помощью JSONPath и записи данных в атрибуты шаблона записи.</p>
+<p>Настройка с использованием XPath будет аналогичной.</p>
+<h2 id="прикладная-задача">Прикладная задача</h2>
+<ul>
+<li>Имеется шаблон записи <em>«Картотека»</em>, в котором хранятся данные о книгах.</li>
+<li>
+<p>Имеется внешний сервер, выдающий в ответ на HTTP-запрос данные о книгах в формате JSON, например:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"Date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.10.2024"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"Books"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="nt">"Author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Толстой Л. Н."</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"Title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Война и мир"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mi">895</span></code> <br/><code><span class="w">        </span><span class="p">},</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="nt">"Author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Пушкин А. С."</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"Title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Капитанская дочка"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mi">499</span></code> <br/><code><span class="w">        </span><span class="p">},</span></code> <br/><code><span class="w">        </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="nt">"Author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Лермонтов М. Ю."</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"Title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Мцыри"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mi">372</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code><span class="w">    </span><span class="p">]</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Требуется настроить кнопку, загружающую данные о книгах с внешнего сервера посредством HTTP-запроса.</p>
+</li>
+<li>При получении ответа на HTTP-запрос требуется создать записи с данными книг в <em>Картотеке</em>.</li>
+</ul>
+<h2 id="порядок-настройки-отправки-и-обработки-http-запросов-с-помощью-сценария">Порядок настройки отправки и обработки HTTP-запросов с помощью сценария</h2>
+<ol class="colored_numbers_list">
+<li>Настройте <a class="mkdocs_imported_link" href="#настройка-шаблона-записи">шаблон записи</a> для хранения данных из HTTP-запросов.</li>
+<li>Создайте и настройте <a class="mkdocs_imported_link" href="#настройка-подключения">подключение для отправки HTTP-запросов</a>.</li>
+<li>Создайте и настройте <a class="mkdocs_imported_link" href="#настройка-пути-передачи-данных">путь передачи данных для отправки HTTP-запросов</a>.</li>
+<li>Настройте <a class="mkdocs_imported_link" href="#настройка-сценария">сценарий</a>, который будет обрабатывать данные из HTTP-запросов, полученных посредством настроенных подключения и пути передачи данных, и помещать их в записи шаблона.</li>
+</ol>
+<h3 id="настройка-шаблона-записи">Настройка шаблона записи</h3>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте шаблон записи <em>«Картотека»</em> со следующими атрибутами:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Название</th>
+<th>Тип данных</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Автор</em></td>
+<td><strong>Текст</strong></td>
+</tr>
+<tr>
+<td><em>Название</em></td>
+<td><strong>Текст</strong></td>
+</tr>
+<tr>
+<td><em>Цена</em></td>
+<td><strong>Число</strong></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Создайте кнопку <em>«Получить данные о книгах»</em> со следующими свойствами:</p>
+<ul>
+<li><strong>Контекст операции: запись</strong></li>
+<li><strong>Операция: вызвать событие «Нажата кнопка»</strong></li>
+<li><strong>Результат выполнения: обновить данные</strong></li>
+</ul>
+</li>
+<li>
+<p>Поместите созданные атрибуты и кнопку на форму.</p>
+</li>
+</ol>
+<h2 id="настройка-подключения">Настройка подключения</h2>
+<ol class="colored_numbers_list">
+<li>На странице <strong>Администрирование</strong>» выберите пункт «<strong>Инфраструктура</strong>» — «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4675"><strong>Подключения</strong></a>» <i class="fal fa-exchange-alt">‌<!--icon--></i>.</li>
+<li>Откройте или создайте подключение типа «<strong>Подключения REST и OData</strong>» — «<strong>Отправка HTTP-запросов</strong>».</li>
+<li>
+<p>Настройте подключение к серверу:</p>
+<ul>
+<li><strong>Системное имя</strong> — введите уникальное имя подключения.
+Не должно начинаться с цифры. Разрешены английские и русские буквы, цифры и символ «_». Рекомендуется использовать английские буквы.</li>
+<li><strong>Отключить</strong> — установите этот флажок, если требуется временно деактивировать данное подключение.</li>
+<li><strong>Описание</strong> — введите наглядное описание подключения, например <em>«Подключение для отправки HTTP-запросов»</em>.</li>
+<li><strong>Запись в файловые журналы</strong> — выберите, какие события следует записывать в журналы:<ul>
+<li><strong>Полные сведения об обработке сообщения</strong>;</li>
+<li><strong>Только ошибки</strong>;</li>
+<li><strong>Отключить</strong> — не регистрировать в журнале события отправки запросов.</li>
+</ul>
+</li>
+<li><strong>URI</strong> — введите URL-адрес сервера, принимающего HTTP-запросы, например <code>http://&lt;hostname&gt;/api</code>. Символ <code>/</code> в конце URL не требуется.</li>
+<li><strong>Формат данных</strong> — выберите представление данных:<ul>
+<li><strong>JSON</strong> — используется в данном примере;</li>
+<li><strong>XML</strong>;</li>
+<li><strong>Простой текст</strong>.</li>
+</ul>
+</li>
+<li><strong>Кодировка данных</strong> — укажите формат кодировки данных, используемый сервером, по умолчанию: <strong>UTF-8</strong>.</li>
+<li><strong>Тип аутентификации</strong> — выберите способ проверки подлинности, используемый сервером:<ul>
+<li><strong>Отсутствует</strong>;</li>
+<li><strong>Базовая</strong>;</li>
+<li><strong>Аутентификация Windows</strong>.</li>
+</ul>
+</li>
+<li><strong>Имя пользователя</strong> — укажите учётную запись для подключения к серверу.</li>
+<li><strong>Пароль</strong> — введите пароль к учётной записи для подключения к серверу.</li>
+<li><strong>Домен</strong> — укажите домен пользователя сервера.</li>
+</ul>
+</li>
+<li>
+<p>Проверьте соединение с сервером, нажав соответствующую кнопку.</p>
+</li>
+<li>При необходимости нажмите кнопку «<strong>Скачать журнал</strong>», чтобы просмотреть журнал событий отправки запросов.</li>
+<li>Сохраните подключение.</li>
+</ol>
+<h2 id="настройка-пути-передачи-данных">Настройка пути передачи данных</h2>
+<ol class="colored_numbers_list">
+<li>Откройте страницу «<strong>Администрирование</strong>» — «<strong>Архитектура</strong>» или страницу «<strong>Администрирование</strong>» приложения.</li>
+<li>Выберите пункт «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4676"><strong>Пути передачи данных</strong></a>» <i aria-hidden="true" class="fa-light fa-route">‌<!--icon--></i>.</li>
+<li>Откройте двойным нажатием в списке или создайте путь передачи данных типа «<strong>Подключения REST и OData</strong>» — «<strong>Отправка HTTP-запросов</strong>».</li>
+<li>
+<p>Настройте свойства пути передачи данных на следующих вкладках:</p>
+<ul>
+<li><a class="mkdocs_imported_link" href="#основные-свойства"><strong>Основные свойства</strong></a></li>
+<li><a class="mkdocs_imported_link" href="#атрибуты-сообщений"><strong>Атрибуты сообщений</strong></a></li>
+<li><a class="mkdocs_imported_link" href="#интеграция"><strong>Интеграция</strong></a></li>
+</ul>
+</li>
+<li>
+<p>Сохраните путь передачи данных.</p>
+</li>
+</ol>
+<h3 id="основные-свойства">Основные свойства</h3>
+<p>На вкладке «<strong>Основные свойства</strong>» настройте параметры использования пути передачи данных.</p>
+<ul>
+<li><strong>Подключение</strong> — выберите ранее созданное <a class="mkdocs_imported_link" href="#настройка-подключения">подключение для отправки HTTP-запросов</a>.</li>
+<li><strong>Системное имя</strong> — введите уникальное имя пути передачи данных.
+    Не должно начинаться с цифры. Разрешены английские и русские буквы, цифры и символ «_». Рекомендуется использовать английские буквы.</li>
+<li><strong>Отключить</strong> — установите этот флажок, если требуется временно деактивировать путь передачи данных.</li>
+<li><strong>Описание</strong> — введите наглядное описание назначения пути передачи данных, например <em>«Получение файлов по HTTP»</em>.</li>
+<li><strong>Номер шины данных</strong> — выберите номер от 0 до 3, если требуется распределить потоки данных нескольких путей для повышения производительности.</li>
+</ul>
+<h3 id="атрибуты-сообщений">Атрибуты сообщений</h3>
+<p>На вкладке «<strong>Атрибуты сообщения</strong>» настройте атрибуты, значения которых требуется извлечь из полученных данных в формате JSON.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Составление атрибута сообщения типа «Объект»</p>
+<p>Чтобы составить <strong>атрибут сообщения</strong> типа «<strong>Объект</strong>» для хранения имени и содержимого файла, необходимо создать структуру из родительского и дочерних атрибутов:</p>
+<ul>
+<li>Создайте атрибут типа «<strong>Объект</strong>», задайте его имя, но оставьте значение пустым.</li>
+<li>Установите флажок у имени родительского атрибута в таблице и нажмите кнопку «<strong>Добавить</strong>».</li>
+<li>Дважды нажмите значок <i class="fa-light fa-angle-down anchor">‌<!--icon--></i> рядом с родительским атрибутом.</li>
+<li>В таблице отобразится строка дочернего атрибута.</li>
+<li>Задайте системное имя и тип дочернего атрибута.</li>
+</ul>
+</div>
+<ol class="colored_numbers_list">
+<li>Укажите <strong>тип сообщения</strong> «<strong>Отправка HTTP-запросов</strong>».</li>
+<li>
+<p>В таблице «<strong>Ответ</strong>» добавьте атрибут</p>
+<ul>
+<li><strong>Системное имя:</strong> <em>Books</em> — должно совпадать с именем соответствующего поля HTTP-запроса.</li>
+<li><strong>Тип: объект</strong></li>
+<li><strong>Массив:</strong> флажок установлен</li>
+</ul>
+</li>
+<li>
+<p>К атрибуту <em>Books</em> добавьте следующие дочерние атрибуты:</p>
+<ul>
+<li><em>Author</em> типа <strong>строка</strong>;</li>
+<li><em>Title</em> типа <strong>строка</strong>;</li>
+<li><em>Price</em> типа <strong>число</strong>.</li>
+</ul>
+<p>Системные имена атрибутов должны совпадать с именами соответствующих полей HTTP-запроса.</p>
+</li>
+</ol>
+<h3 id="интеграция">Интеграция</h3>
+<p>На вкладке «<strong>Интеграция</strong>» укажите <strong>атрибут для десериализации ответа без ошибки</strong>:</p>
+<ul>
+<li><strong>Путь к атрибуту:</strong> <em>Books</em> — системное имя атрибута с вкладки «<strong>Атрибуты сообщения</strong>».</li>
+<li>
+<p><strong>Выражение на языке запросов:</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="nx">$</span><span class="p">.</span><span class="nx">Books</span><span class="p">[</span><span class="o">*</span><span class="p">]</span></code> <br/></pre></code></div>
+</li>
+</ul>
+<div class="notice notice-tip">
+<p class="admonition-title">Обращение к данным с помощью JSONPath</p>
+<p>Чтобы обратиться к определённым сегментам данных, полученных из JSON, требуется составить соответствующий запрос на языке JSONPath:</p>
+<ul>
+<li><code>$</code> — обращение ко всему JSON.</li>
+<li><code>$.object</code> — обращение к объекту <code>object</code>.</li>
+<li><code>$.array[X, Y]</code> — обращение к элементам массива <code>array</code> под номерами <code>X</code> и <code>Y</code> (<strong>отсчёт начинается с <code>0</code></strong>).</li>
+<li><code>$.array[X:Y]</code> — обращение к элементам массива <code>array</code> под номерами от <code>X</code> до <code>Y-1</code>.</li>
+<li><code>$.array[*]</code> — обращение ко всем элементам массива <code>array</code>.</li>
+</ul>
+<p>Примеры запросов на JSONPath и возвращаемых значений:</p>
+<table style="width: 100%;">
+<tbody>
+<tr markdown="block">
+<td markdown="block"><strong>Запрос</strong></td>
+<td markdown="block"><strong>Возвращаемое значение</strong></td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+<div class="highlight"><code><pre><span></span><code><span class="nx">$</span></code> <br/></pre></code></div>
+</td>
+<td markdown="block">
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="nt">"Date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.10.2024"</span><span class="p">,</span></code> <br/><code><span class="nt">"Books"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span></code> <br/><code><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"Author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Толстой Л. Н."</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"Title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Война и мир"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mi">895</span></code> <br/><code><span class="w">    </span><span class="p">},</span></code> <br/><code><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"Author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Пушкин А. С."</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"Title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Капитанская дочка"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mi">499</span></code> <br/><code><span class="w">    </span><span class="p">},</span></code> <br/><code><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">"Author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Лермонтов М. Ю."</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"Title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Мцыри"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mi">372</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="w">    </span><span class="p">]</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+<div class="highlight"><code><pre><span></span><code><span class="nx">$</span><span class="p">.</span><span class="nb">Date</span></code> <br/></pre></code></div>
+</td>
+<td markdown="block">
+<div class="highlight"><code><pre><span></span><code><span class="s2">"17.10.2024"</span></code> <br/></pre></code></div>
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+<div class="highlight"><code><pre><span></span><code><span class="nx">$</span><span class="p">.</span><span class="nx">Books</span><span class="p">[</span><span class="mf">0</span><span class="p">,</span><span class="mf">2</span><span class="p">]</span></code> <br/></pre></code></div>
+</td>
+<td markdown="block">
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"Author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Толстой Л. Н."</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"Title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Война и мир"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mi">895</span></code> <br/><code><span class="p">},</span></code> <br/><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"Author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Лермонтов М. Ю."</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"Title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Мцыри"</span><span class="p">,</span></code> <br/><code><span class="w">    </span><span class="nt">"Price"</span><span class="p">:</span><span class="w"> </span><span class="mi">372</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</td>
+</tr>
+<tr markdown="block">
+<td markdown="block">
+<div class="highlight"><code><pre><span></span><code><span class="nx">$</span><span class="p">.</span><span class="nx">Books</span><span class="p">[</span><span class="mf">1</span><span class="p">].</span><span class="nx">Title</span></code> <br/></pre></code></div>
+</td>
+<td markdown="block">
+<div class="highlight"><code><pre><span></span><code><span class="s2">"Капитанская дочка"</span></code> <br/></pre></code></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="настройка-сценария">Настройка сценария</h3>
+<ol class="colored_numbers_list">
+<li>Создайте сценарий <em>«Получение данных о книгах»</em>.</li>
+<li>В свойствах события «<strong>Нажатие кнопки</strong>» выберите <strong>контекстный шаблон</strong> <em>«Картотека»</em> и <strong>кнопку</strong> <em>«Получить данные о книгах»</em>.</li>
+<li>
+<p>Добавьте действие «<strong>Отправить сообщение</strong>» со следующими свойствами:</p>
+<ul>
+<li><strong>Подключение:</strong> выберите <a class="mkdocs_imported_link" href="#настройка-подключения">подключение для отправки HTTP-запросов</a>.</li>
+<li><strong>Путь передачи данных:</strong> выберите <a class="mkdocs_imported_link" href="#настройка-пути-передачи-данных">путь передачи данных для отправки HTTP-запросов</a>.</li>
+<li><strong>Переменная для успешного ответа</strong>: <em>Response</em></li>
+</ul>
+</li>
+<li>
+<p>Добавьте и настройте действие «<strong>Повторять по количеству объектов</strong>»:</p>
+<ul>
+<li><strong>Переменная</strong>: <em>Book</em></li>
+<li>
+<p><strong>Атрибут или выражение для поиска объектов</strong>: формула</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">$$</span><span class="n">Response</span><span class="o">-&gt;</span><span class="n">Books</span></code> <br/></pre></code></div>
+<p>Здесь <code>Books</code> — системное имя <strong>атрибута сообщения</strong>, настроенного в <a class="mkdocs_imported_link" href="#настройка-пути-передачи-данных">пути передачи данных</a>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Внутри действия «<strong>Повторять по количеству объектов</strong>» добавьте действие «<strong>Создать запись</strong>».</p>
+</li>
+<li>Внутри действия «<strong>Создать запись</strong>» добавьте действие «<strong>Изменить значения атрибутов</strong>».</li>
+<li>В действии «<strong>Изменить значения атрибутов</strong>» на вкладке «<strong>Дополнительно</strong>» установите флажок «<strong>Сбрасывать кэш значений</strong>».</li>
+<li>
+<p>На вкладке «<strong>Основные</strong>» добавьте атрибуты, значения которых требуется заполнить из ответа на HTTP-запрос:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Атрибут</th>
+<th>Операция со значениями</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Автор</em></td>
+<td><strong>Заменить</strong></td>
+<td><strong>Формула:</strong> <code>$$Book-&gt;Author</code></td>
+</tr>
+<tr>
+<td><em>Название</em></td>
+<td><strong>Заменить</strong></td>
+<td><strong>Формула:</strong> <code>$$Book-&gt;Title</code></td>
+</tr>
+<tr>
+<td><em>Цена</em></td>
+<td><strong>Заменить</strong></td>
+<td><strong>Формула:</strong> <code>$$Book-&gt;Price</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Сценарий обработки данных из запроса с помощью JSONPath" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/jpath_example_scenario.png"/></p><figcaption class="caption">Сценарий обработки данных из запроса с помощью JSONPath</figcaption>
+</figure>
+<h3 id="тестирование">Тестирование</h3>
+<ol class="colored_numbers_list">
+<li>Настройте внешний сервер на отправку ответа на HTTP-запросы с данными в формате JSON, соответствующем <a class="mkdocs_imported_link" href="#прикладная-задача">прикладной задаче</a>.</li>
+<li>В <strong>Comindware Platform</strong> нажмите кнопку <em>«Получить данные о книгах»</em>.</li>
+<li>Через некоторое время в шаблоне <em>«Картотека»</em> должны появиться новые записи с данными, полученными с сервера.</li>
+<li>Просмотрите новые записи.</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4703">Отправка HTTP-запросов. Настройка подключения</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4699">Отправка HTTP-запросов типа GET. Пример: настройка подключения, пути передачи данных и сценария для обработки запросов в формате JSON</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4718">Событие и действия сценария. Определения, типы, свойства, настройка</a></em></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

@@ -2,7 +2,7 @@
 title: 'Вычисление текста сообщения в стиле системного уведомления о задаче'
 kbId: 4971
 url: 'https://kb.comindware.ru/article.php?id=4971'
-updated: '2026-06-17 14:09:55'
+updated: '2026-06-20 20:26:25'
 ---
 
 # Вычисление текста сообщения в стиле системного уведомления о задаче
@@ -101,9 +101,9 @@ FORMAT(
 
 --8<-- "related_topics_heading.md"
 
-- [Уведомления о задачах. Настройка текста и отправки эл. почтой](https://kb.comindware.ru/article.php?id=4684)
+- [Уведомления о задачах. Настройка текста и отправки эл. почтой][task_notifications]
 - [Язык формул](https://kb.comindware.ru/category.php?id=880)
-- [Список функций языка формул Comindware](https://kb.comindware.ru/article.php?id=4993)
-- [Атрибут типа «Текст»](https://kb.comindware.ru/article.php?id=4768)
+- [Список функций языка формул **{{ productName }}**][formula_function_list]
+- [Атрибут типа «Текст»][attribute_text]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

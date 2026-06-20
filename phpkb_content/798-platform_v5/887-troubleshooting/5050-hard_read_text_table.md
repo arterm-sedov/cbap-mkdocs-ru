@@ -2,7 +2,7 @@
 title: 'Неудобно читать текстовые поля в таблице на форме'
 kbId: 5050
 url: 'https://kb.comindware.ru/article.php?id=5050'
-updated: '2025-10-24 17:34:38'
+updated: '2026-06-20 20:26:38'
 ---
 
 # Неудобно читать текстовые поля в таблице на форме
@@ -28,9 +28,9 @@ updated: '2025-10-24 17:34:38'
 
 --8<-- "related_topics_heading.md"
 
-- [Кнопки](https://kb.comindware.ru/article.php?id=4790)
-- [Формы](https://kb.comindware.ru/article.php?id=4786)
-- [Таблицы. Настройка](https://kb.comindware.ru/article.php?id=4800)
-- [Не отображаются кнопки](https://kb.comindware.ru/article.php?id=5058)
+- [Кнопки][buttons]
+- [Формы][forms]
+- [Таблицы. Настройка][table_configure]
+- [Не отображаются кнопки][buttons_not_shown]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

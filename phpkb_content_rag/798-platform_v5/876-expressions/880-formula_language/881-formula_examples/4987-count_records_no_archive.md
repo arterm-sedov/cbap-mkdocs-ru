@@ -2,7 +2,7 @@
 title: 'Подсчет количества записей без учета архивированных'
 kbId: 4987
 url: 'https://kb.comindware.ru/article.php?id=4987'
-updated: '2026-06-20 18:06:18'
+updated: '2026-06-20 20:26:26'
 ---
 
 # Подсчет количества записей без учета архивированных
@@ -52,6 +52,6 @@ COUNT(
 
 ## Связанные статьи
 
-- [Язык формул](https://kb.comindware.ru/category.php?id=901)
-- [Список функций языка формул Comindware](https://kb.comindware.ru/article.php?id=5218)
-- [Атрибуты. Определения и настройка](https://kb.comindware.ru/article.php?id=5706)
+- [Язык формул](https://kb.comindware.ru/category.php?id=880)
+- [Список функций языка формул Comindware](https://kb.comindware.ru/article.php?id=4993)
+- [Атрибуты. Определения и настройка](https://kb.comindware.ru/article.php?id=4772)

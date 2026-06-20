@@ -2,7 +2,7 @@
 title: 'Атрибут типа «Текст». Настройка пользовательской маски'
 kbId: 4893
 url: 'https://kb.comindware.ru/article.php?id=4893'
-updated: '2026-06-17 14:09:51'
+updated: '2026-06-20 20:25:57'
 ---
 
 # Атрибут типа «Текст». Настройка пользовательской маски
@@ -37,8 +37,8 @@ updated: '2026-06-17 14:09:51'
 
 --8<-- "related_topics_heading.md"
 
-- [Атрибут типа «Текст»](https://kb.comindware.ru/article.php?id=4768)
-- [Атрибут типа «Текст». Контроль и форматирование значений с помощью масок](https://kb.comindware.ru/article.php?id=5089)
+- [Атрибут типа «Текст»][attribute_text]
+- [Атрибут типа «Текст». Контроль и форматирование значений с помощью масок][attribute_text_masks]
 - [Regex101 — сайт для отладки регулярных выражений](https://regex101.com/)
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

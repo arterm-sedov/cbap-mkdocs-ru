@@ -2,7 +2,7 @@
 title: 'Аутентификация через WS-Federation. Настройка подключения, федеративного сервера и глобальной конфигурации'
 kbId: 4686
 url: 'https://kb.comindware.ru/article.php?id=4686'
-updated: '2026-06-20 18:06:00'
+updated: '2026-06-20 20:26:09'
 ---
 
 # Аутентификация через WS-Federation. Настройка подключения, федеративного сервера и глобальной конфигурации
@@ -40,7 +40,7 @@ updated: '2026-06-20 18:06:00'
    **Windows**
 
    В файле `C:\\ProgramData\\Comindware\\Instances\\<instanceName>\\Config\\<instanceName>.yml` измените директиву `IsFederationAuthEnabled: 0` на `IsFederationAuthEnabled: 1`
-3. В экземпляре ПО откройте раздел [«**Администрирование**» — «**Подключения**»](https://kb.comindware.ru/article.php?id=5608) и создайте подключение типа «**Аутентификация через WS-Federation**».
+3. В экземпляре ПО откройте раздел [«**Администрирование**» — «**Подключения**»](https://kb.comindware.ru/article.php?id=4661) и создайте подключение типа «**Аутентификация через WS-Federation**».
 
    ![Создание подключения к службе федеративной аутентификации](/platform/v5.0/administration/connections_communication_routes/authentication/img/wsfederation_connection_creation.png)
 
@@ -56,13 +56,13 @@ updated: '2026-06-20 18:06:00'
    - **Группа** — выберите группу, для аккаунтов в которой будет действовать аутентификация через WS-Federation.![Создание канала связи для федеративной аутентификации](/platform/v5.0/administration/connections_communication_routes/authentication/img/wsfederation_connection_new_channel.png)
 
    Создание канала связи для федеративной аутентификации
-5. На странице «[**Администрирование**](https://kb.comindware.ru/article.php?id=5608)» в разделе — «**Администрирование аккаунтов**» выберите пункт «**Аккаунты**» *‌*.
+5. На странице «[**Администрирование**](https://kb.comindware.ru/article.php?id=4661)» в разделе — «**Администрирование аккаунтов**» выберите пункт «**Аккаунты**» *‌*.
 6. Установите для соответствующих аккаунтов способ аутентификации «**Федеративная аутентификация**».
 
    ![Установка метода проверки подлинности «Федеративная аутентификация» в настройках пользователя](/platform/v5.0/administration/connections_communication_routes/authentication/img/wsfederation_connection_account_settings.png)
 
    Установка метода проверки подлинности «Федеративная аутентификация» в настройках пользователя
-7. На странице [«**Администрирование**» — «**Глобальная конфигурация**»](https://kb.comindware.ru/article.php?id=5608) установите «**URL-адрес сервера**», совпадающий с идентификатор проверяющей стороны, см. [пункт 1](#порядок-настройки).
+7. На странице [«**Администрирование**» — «**Глобальная конфигурация**»](https://kb.comindware.ru/article.php?id=4661) установите «**URL-адрес сервера**», совпадающий с идентификатор проверяющей стороны, см. [пункт 1](#порядок-настройки).
 
    ![Установка внешнего адреса сервера в глобальной конфигурации](/platform/v5.0/administration/connections_communication_routes/authentication/img/wsfederation_connection_external_server.png)
 
@@ -82,11 +82,11 @@ updated: '2026-06-20 18:06:00'
 
 Примечание
 
-Основные шаги аутентификации регистрируются в [журнале аудита](https://kb.comindware.ru/article.php?id=5557#logging_engine_audit_log).
+Основные шаги аутентификации регистрируются в [журнале аудита](https://kb.comindware.ru/article.php?id=4623#logging_engine_audit_log).
 
 ## Связанные статьи
 
-- *[Глобальная конфигурация](https://kb.comindware.ru/article.php?id=5619)*
-- *[Пути и содержимое папок экземпляра ПО](https://kb.comindware.ru/article.php?id=5561)*
-- *[Подсистема журналирования](https://kb.comindware.ru/article.php?id=5557)*
+- *[Глобальная конфигурация](https://kb.comindware.ru/article.php?id=4668)*
+- *[Пути и содержимое папок экземпляра ПО](https://kb.comindware.ru/article.php?id=4620)*
+- *[Подсистема журналирования](https://kb.comindware.ru/article.php?id=4623)*
 - *[Создание отношений доверия с проверяющей стороной](https://learn.microsoft.com/ru-ru/windows-server/identity/ad-fs/operations/create-a-relying-party-trust)* (документация Microsoft)

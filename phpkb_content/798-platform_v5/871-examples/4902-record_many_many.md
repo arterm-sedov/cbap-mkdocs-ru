@@ -2,7 +2,7 @@
 title: 'Атрибут типа «Запись». Настройка связи многие ко многим'
 kbId: 4902
 url: 'https://kb.comindware.ru/article.php?id=4902'
-updated: '2026-06-17 14:09:51'
+updated: '2026-06-20 20:25:56'
 ---
 
 # Атрибут типа «Запись». Настройка связи многие ко многим
@@ -37,8 +37,8 @@ _![Настройка выбора нескольких значений в сс
 
 --8<-- "related_topics_heading.md"
 
-- [Атрибут типа «Запись»](https://kb.comindware.ru/article.php?id=4780)
-- [Общие свойства атрибутов](https://kb.comindware.ru/article.php?id=4765)
-- [Динамические элементы формы. Таблица](https://kb.comindware.ru/article.php?id=4785#form_dynamic_elements_table)
+- [Атрибут типа «Запись»][attribute_record]
+- [Общие свойства атрибутов][attribute_common_properties]
+- [Динамические элементы формы. Таблица][form_dynamic_elements]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

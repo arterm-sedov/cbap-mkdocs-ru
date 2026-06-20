@@ -2,7 +2,7 @@
 title: 'Оптимизация работы вычисляемых атрибутов'
 kbId: 5055
 url: 'https://kb.comindware.ru/article.php?id=5055'
-updated: '2026-06-20 18:06:29'
+updated: '2026-06-20 20:26:37'
 ---
 
 # Оптимизация работы вычисляемых атрибутов
@@ -30,7 +30,7 @@ updated: '2026-06-20 18:06:29'
 
 2. **Используйте выражения на N3**
 
-Вместо формул рекомендуем использовать язык N3. См. [справочник по языку N3](https://kb.comindware.ru/article.php?id=5251).
+Вместо формул рекомендуем использовать язык N3. См. [справочник по языку N3](https://kb.comindware.ru/article.php?id=4852).
 
 3. **Используйте альтернативные способы вычисления**
 
@@ -39,9 +39,9 @@ updated: '2026-06-20 18:06:29'
 
 ## Связанные статьи
 
-- [Факторы, влияющие на производительность. Рекомендации по оптимизации](https://kb.comindware.ru/article.php?id=5165)
-- [Сценарии](https://kb.comindware.ru/article.php?id=5654)
-- [Правилва для форм](https://kb.comindware.ru/article.php?id=5721)
-- [Справочник по языку N3](https://kb.comindware.ru/article.php?id=5251)
-- [Невозможно просмотреть историю значений вычисляемого атрибута](https://kb.comindware.ru/article.php?id=5173)
-- [Вычисляются архивные записи](https://kb.comindware.ru/article.php?id=5167)
+- [Факторы, влияющие на производительность. Рекомендации по оптимизации](https://kb.comindware.ru/article.php?id=4712)
+- [Сценарии](https://kb.comindware.ru/article.php?id=4717)
+- [Правилва для форм](https://kb.comindware.ru/article.php?id=4784)
+- [Справочник по языку N3](https://kb.comindware.ru/article.php?id=4852)
+- [Невозможно просмотреть историю значений вычисляемого атрибута](https://kb.comindware.ru/article.php?id=5053)
+- [Вычисляются архивные записи](https://kb.comindware.ru/article.php?id=5048)

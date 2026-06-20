@@ -2,7 +2,7 @@
 title: 'Ошибка выполнения скриптовой операции'
 kbId: 5057
 url: 'https://kb.comindware.ru/article.php?id=5057'
-updated: '2025-10-24 17:28:35'
+updated: '2026-06-20 20:26:37'
 ---
 
 # Ошибка выполнения скриптовой операции
@@ -22,7 +22,7 @@ updated: '2025-10-24 17:28:35'
 
 --8<-- "related_topics_heading.md"
 
-- [Кнопки](https://kb.comindware.ru/article.php?id=4790)
-- [Сценарии](https://kb.comindware.ru/article.php?id=4717)
+- [Кнопки][buttons]
+- [Сценарии][scenarios]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

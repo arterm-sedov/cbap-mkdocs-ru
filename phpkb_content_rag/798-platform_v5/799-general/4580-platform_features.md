@@ -2,7 +2,7 @@
 title: 'Функции и возможности Comindware Platform. Краткое описание'
 kbId: 4580
 url: 'https://kb.comindware.ru/article.php?id=4580'
-updated: '2026-06-20 18:04:21'
+updated: '2026-06-20 20:24:35'
 ---
 
 # Функции и возможности Comindware Platform. Краткое описание
@@ -316,7 +316,7 @@ updated: '2026-06-20 18:04:21'
 
 _![Диаграмма архитектуры Comindware Platform](https://kb.comindware.ru/assets/Picture1.png)_
 
-Подробные сведения см. в статье [Развёртывание Comindware Platform. Архитектура, ландшафт, программное и техническое обеспечение](https://kb.comindware.ru/article.php?id=5443).
+Подробные сведения см. в статье [Развёртывание Comindware Platform. Архитектура, ландшафт, программное и техническое обеспечение](https://kb.comindware.ru/article.php?id=4596).
 
 ## Возможности слоя бизнес-логики Comindware Platform
 
