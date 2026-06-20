@@ -158,6 +158,12 @@
 
 [supportUrl]: https://www.comindware.ru/company/contact-us/#tab_support
 
+[bpmn_process_basics]: https://www.comindware.ru/blog-bpmn-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%D1%8B-%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D1%8B-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F/
+
+[top10_bpm]: https://top10-bpm.ru/
+
+[architecture_landscape_external]: https://www.comindware.ru/platform/architecture/
+
 [certification_training]: https://www.comindware.ru/company/certification/
 
 [vulnerability_policy]: {{ kbArticleURLPrefix }}5427
