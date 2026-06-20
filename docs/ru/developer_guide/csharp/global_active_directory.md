@@ -15,31 +15,31 @@ using System.Collections.Generic;
 // class name should remain "Script"
 public static partial class Script {
 
-    // method name should remain "Main"
-    public static Dictionary<string, object> begaemvAD(string tekst)
-    {
+  // запрашивает данные пользователя из Active Directory по адресу эл. почты
+  public static Dictionary<string, object> QueryAD(string text)
+  {
 
- 
 
-//создаём подключение к ад
-        System.DirectoryServices.DirectoryEntry entry = new System.DirectoryServices.DirectoryEntry("LDAP://сервер ад", "логин", "пароль");
 
-//создаём серчер
-            System.DirectoryServices.DirectorySearcher mySearcher = new System.DirectoryServices.DirectorySearcher(entry);
+         //создаём подключение к Active Directory
+         System.DirectoryServices.DirectoryEntry entry = new System.DirectoryServices.DirectoryEntry("LDAP://сервер адреса", "логин", "пароль");
 
-//фильтруем по нужному параметру
-            mySearcher.Filter = ($"(MAIL={tekst})");
-            var result = new Dictionary<string, object>();
+             //создаём поисковый запрос
+             System.DirectoryServices.DirectorySearcher mySearcher = new System.DirectoryServices.DirectorySearcher(entry);
 
-//выбираем проперти, которые хотим вернуть
-            mySearcher.PropertiesToLoad.Add("mail");
-            mySearcher.PropertiesToLoad.Add("cn");
-            var temp = mySearcher.FindOne();
+      //фильтруем по нужному параметру
+      mySearcher.Filter = ($"(MAIL={text})");
+      var result = new Dictionary<string, object>();
 
-//добавляем в словарь результата
-            result.Add("name", temp.GetDirectoryEntry().InvokeGet("cn"));
-            return result;
-    }
+      //выбираем атрибуты, которые требуется вернуть
+      mySearcher.PropertiesToLoad.Add("mail");
+      mySearcher.PropertiesToLoad.Add("cn");
+      var temp = mySearcher.FindOne();
+
+      //добавляем в словарь результата
+      result.Add("name", temp.GetDirectoryEntry().InvokeGet("cn"));
+      return result;
+  }
 }
 
 ```
