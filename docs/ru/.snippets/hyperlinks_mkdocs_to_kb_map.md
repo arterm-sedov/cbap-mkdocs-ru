@@ -236,6 +236,8 @@
 
 [example_n3_process_hyperlink_calculate]: {{ kbArticleURLPrefix }}5285
 
+[n3_calculate_active_task_assignee]: {{ kbArticleURLPrefix }}5277
+
 [experessions_intro]: {{ kbArticleURLPrefix }}5182
 
 [export_template_csharp_configure]: {{ kbArticleURLPrefix }}5336
@@ -293,6 +295,8 @@
 [backup_configure]: {{ kbArticleURLPrefix }}5566
 
 [backup_configure_list_view]: {{ kbArticleURLPrefix }}5566#backup_configure_list_view
+
+[backup_configure_sessions_list]: {{ kbArticleURLPrefix }}5566#backup_configure_sessions_list
 
 [backup_recommendations]: {{ kbArticleURLPrefix }}5568
 
@@ -463,6 +467,8 @@
 [version_control_git]: {{ kbArticleURLPrefix }}5649
 
 [version_control_methodology]: {{ kbArticleURLPrefix }}5650
+
+[troubleshooting_history_not_written]: {{ kbArticleURLPrefix }}5139
 
 {% endif %}
 
@@ -872,6 +878,8 @@
 
 [online_store]: {{ kbArticleURLPrefix }}5740
 
+[page_access_control]: {{ kbArticleURLPrefix }}5648
+
 [pages]: {{ kbArticleURLPrefix }}5607
 
 [pages_setup]: {{ kbArticleURLPrefix }}5645
@@ -880,13 +888,19 @@
 
 [process_diagram]: {{ kbArticleURLPrefix }}5657
 
+[process_diagram_build_advice]: {{ kbArticleURLPrefix }}5383
+
 [process_diagram_call_element_menu]: {{ kbArticleURLPrefix }}5657#process_diagram_call_element_menu
 
 [process_diagram_designer]: {{ kbArticleURLPrefix }}5657#process_diagram_designer
 
 [process_diagram_view_instance]: {{ kbArticleURLPrefix }}5658
 
+[events_chain_view]: {{ kbArticleURLPrefix }}5658#events_chain_view
+
 [process_diagram_version_control]: {{ kbArticleURLPrefix }}5659
+
+[diagram_version_list_view]: {{ kbArticleURLPrefix }}5659#diagram_version_list_view
 
 [process_diagram_element_common_properties]: {{ kbArticleURLPrefix }}5661
 
@@ -899,6 +913,8 @@
 [process_diagram_elements_none_intermediate_event_milestone_duration]: {{ kbArticleURLPrefix }}5675#process_diagram_elements_none_intermediate_event_milestone_duration
 
 [process_diagram_elements_none_end_event]: {{ kbArticleURLPrefix }}5682
+
+[process-duration]: {{ kbArticleURLPrefix }}5682#process-duration
 
 [process_diagram_elements_none_start_event]: {{ kbArticleURLPrefix }}5673
 
@@ -1059,6 +1075,8 @@
 [sso_authentication_configure_windows]: {{ kbArticleURLPrefix }}5583
 
 [zabbix_agent_deploy_windows]: {{ kbArticleURLPrefix }}5552
+
+[upgrade_version_windows]: {{ kbArticleURLPrefix }}5565
 
 {% endif %}
 
