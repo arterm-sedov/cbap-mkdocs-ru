@@ -26,7 +26,7 @@ kbId: 4798
 
 5. Сохраните кнопку.
 
-*![Свойства кнопки экспорта документа, сформированному по шаблону экспорта](export_template_button_properties.png)*
+_![Свойства кнопки экспорта документа, сформированному по шаблону экспорта](export_template_button_properties.png)_
 
 ## Размещение кнопки на форме {: #export_template_button_configure_placement }
 
@@ -36,7 +36,7 @@ kbId: 4798
 4. Из панели элементов перетащите кнопку экспорта на область кнопок.
 5. Сохраните форму.
 
-*![Перетаскивание кнопки экспорта на форму](export_template_button_form_placement.png)*
+_![Перетаскивание кнопки экспорта на форму](export_template_button_form_placement.png)_
 
 ## Настройка разрешения на использование кнопки {: #export_template_button_configure_permission .pageBreakBefore }
 
@@ -47,7 +47,7 @@ kbId: 4798
 5. Установите для кнопки экспорта флажок в столбце «**Использование кнопки**».
 6. Сохраните роль.
 
-*![Добавление разрешения на использование кнопки экспорта для роли](export_template_button_configure_permission.png)*
+_![Добавление разрешения на использование кнопки экспорта для роли](export_template_button_configure_permission.png)_
 
 <div class="relatedTopics" markdown="block">
 

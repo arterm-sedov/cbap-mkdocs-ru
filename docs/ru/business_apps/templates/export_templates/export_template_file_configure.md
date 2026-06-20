@@ -43,7 +43,7 @@ hide:
 4. Введите [поля](#синтаксис-полей-шаблона-экспорта) в те места документа, куда требуется экспортировать данные записи.
 5. Должен получиться документ следующего вида (см. [пример][export_template_file_example]):
 
-*![Пример простейшего файла шаблона экспорта](img/export_template_file_example.png)*
+_![Пример простейшего файла шаблона экспорта](img/export_template_file_example.png)_
 
 ## Синтаксис полей шаблона экспорта {: #export_template_file_configure_syntax .pageBreakBefore }
 
@@ -73,7 +73,7 @@ hide:
 
 {% endraw %}
 
-*![Пример синтаксиса полей шаблона экспорта](img/export_template_file_advanced_syntax_example.png)*
+_![Пример синтаксиса полей шаблона экспорта](img/export_template_file_advanced_syntax_example.png)_
 {% include-markdown ".snippets/pdfEndOfBlockHack.md" %}
 
 ### Синтаксис для экспорта с использованием C\# {: #export_template_file_configure_syntax_with_csharp .pageBreakBefore }
@@ -114,7 +114,7 @@ hide:
 
         * Например, если `&=data.Contract` имеет тип `LIST<T>`, то у каждого объекта в массиве `data` должно быть объявлено свойство `Contract`.
 
-*![Пример XSLX-файла шаблона экспорта для C#](export_template_file_c_syntax_example_xlsx.png)*
+_![Пример XSLX-файла шаблона экспорта для C#](export_template_file_c_syntax_example_xlsx.png)_
 
 #### Синтаксис C# для DOCX-файлов {: #export_template_file_configure_csharp_docx .pageBreakBefore }
 
@@ -151,7 +151,7 @@ hide:
 
 * Чтобы экспортировать изображение, введите поле вида `<<image [imageData]>>`, где `imageData` — имя массива типа `byte` с данными изображения, переданного в объекте `dataToExport`.
 
-*![Пример DOCX-файла шаблона экспорта для C#](img/export_template_file_c_syntax_example_docx.png)*
+_![Пример DOCX-файла шаблона экспорта для C#](img/export_template_file_c_syntax_example_docx.png)_
 
 ## Использование шрифтов в шаблонах экспорта в формате PDF {: #export_template_file_configure_fonts .pageBreakBefore }
 

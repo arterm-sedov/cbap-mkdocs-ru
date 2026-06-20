@@ -17,7 +17,7 @@ kbTitle: Пользовательская задача. Переназначен
 
     Для этого используйте метод `/TeamNetwork/UserTaskService/Reassign`.
 
-    См. «_[Методы System Core API — UserTask — пользовательские задачи][api_system_core_user_task]_».
+    См. _«[Методы System Core API — UserTask — пользовательские задачи][api_system_core_user_task]»_.
 
 ## Прикладная задача
 
