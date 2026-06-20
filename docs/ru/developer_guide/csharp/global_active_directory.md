@@ -7,7 +7,7 @@ kbId: 5016
 
 Для того чтобы обратиться в Active Directory и получить оттуда какую-либо информацию, введите следующее выражение:
 
-```
+```cs
 
 using System;
 using System.Collections.Generic;
