@@ -55,3 +55,23 @@ Review before starting related work. Move to skills/rules when stable.
 - **`sudo mysql` requires TTY on both servers.** Workaround: `echo 'password' | sudo -S mysql -e "SQL"` via paramiko `invoke_shell()`.
 - **Keychain key format reference:** `ssh_kb_ru:{cmw|cmwlab}:{ssh_password|sql_password}`. Two profiles: `cmw` (comindware.ru) and `cmwlab` (cmwlab.com).
 - **`ssh_kb_ru.py` doesn't use system SSH config for paramiko keys by default.** Must pass `key_filename` explicitly or rely on `IdentityFile` from `_parse_ssh_config()` → `_detect_ssh_keys()` flow.
+
+## 2026-06-19
+
+- **`docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md` is the single source for ALL external hyperlinks.** Never use bare inline URLs in articles. The map provides portability (multi-KB-instance), versionability (one update point), localizability (conditional `{% if kbExport %}` blocks), and maintainability.
+- **Internal cross-references use `(#anchor)` format**, not the hyperlinks map. The hyperlinks map is for external links (other KB articles via `{{ kbArticleURLPrefix }}` and absolute URLs like wikipedia, telegram, etc.).
+- **Bold and italic markers go OUTSIDE hyperlinks, not inside.** `**[text][anchor]**` not `[**text**][anchor]`. Same for guillemets: `**«text»**` not `«**text**»` — bold wraps the guillemets.
+- **C# classes and methods imported from PHPKB may have translit identifiers** (`Parametr`→`Parameter`, `tekst`→`text`, `begaemvAD`→`QueryAD`). These require manual verification of each reference in the code block — no cascading cross-file impact since code blocks are self-contained.
+- **C# code blocks use 4-space indentation consistently.** Imported blocks may have `\xa0` (nbsp) or mixed tabs. Normalize to spaces.
+- **Russian comments in C# code blocks are intentional** — the audience is Russian-speaking developers. Comments should be in legible Russian, not pseudo-English translit (`серчер`→`поисковый запрос`, `проперти`→`атрибуты`).
+- **`***bold-italic***` is not used in the codebase.** SQL keywords get `` `backticks` ``, key terms get `**bold**`, standalone section headers get `## H2 {: #anchor }`.
+- **Heading numbering (`1.`, `1.1.`, etc.) is removed from all headings.** Numbers are not used in H1-H6 text; semantic numbering is implied by the heading level hierarchy.
+- **Anchors are always lowercase, underscore-separated, English-only.** No Cyrillic in anchors. Run-on CamelCase (`templatesystemname`) is split with underscores (`template_system_name`).
+- **Opening code fence is labeled with language** (` ```cs `, ` ```sql `, ` ```turtle `). Unlabeled fence is a bug. ` ```text ` is not used — bare fences suffice for URL examples.
+- **`hide: tags` has two forms in frontmatter:** simple `hide: tags` or list `hide:\n  - tags`. Only one should exist. Never add the simple form if the list form is already present.
+- **Cherry-picking YAML commits between version branches silently overwrites version-specific content.** The YAML nav files contain version-specific entries (release notes, feature sections like AI, version numbers). When cherry-picking YAML commits from v6 to v5, always:
+  1. Accept `--theirs` for the formatting changes (themed subsections, exclude patterns)
+  2. Then manually restore v5-specific entries (release notes: `5.0.*.md` not `6.0.md`, remove v6-only feature sections like `Работа с ИИ`)
+  3. Also check the hyperlinks map for `kbArticleURLPrefix` entries — they are version-specific and should NOT be cherry-picked between branches
+  4. Verify with `git diff HEAD -- docs/ru/ | Select-String "^[+-]kbId:"` after every batch
+- **Hyperlinks map `kbArticleURLPrefix` entries differ per version branch.** Only absolute external URLs (wikipedia, telegram, etc.) are safe to cherry-pick between v5 and v6. Internal KB article references use different `kbId` values on each branch.
