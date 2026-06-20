@@ -35,7 +35,7 @@ hide: tags
 1. В конструкторе формы шаблона _«Заявки на командировки»_ для поля _«Город»_ (`request_city`) в свойстве «**Фильтр**» выберите один из вариантов фильтрации:
 
     - **Атрибут** — выберите атрибут: _Страны_ → _Города страны_;
-    - **Формула** — введите выражение на языке Comindware Expression Language:
+    - **Формула** — введите выражение на языке **{{ productName }}** Expression Language:
 
         ```sql
         from a in db->cities where a->country == $request_country select a->id
