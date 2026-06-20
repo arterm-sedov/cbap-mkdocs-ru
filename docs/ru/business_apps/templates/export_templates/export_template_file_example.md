@@ -21,7 +21,7 @@ hide:
 
 # Пример настройки и использования шаблона экспорта авансового отчёта {: #export_template_file_example}
 
-## Порядок настройки
+## Порядок настройки {: #export_template_file_example_setup }
 
 1. Создайте три **[шаблона записи][record_templates]**:
 
