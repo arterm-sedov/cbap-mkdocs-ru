@@ -22,7 +22,7 @@ public static partial class Script {
 
 
          //создаём подключение к Active Directory
-         System.DirectoryServices.DirectoryEntry entry = new System.DirectoryServices.DirectoryEntry("LDAP://сервер AD", "логин", "пароль");
+         System.DirectoryServices.DirectoryEntry entry = new System.DirectoryServices.DirectoryEntry("LDAP://url_сервера_AD", "логин", "пароль");
 
              //создаём поисковый запрос
              System.DirectoryServices.DirectorySearcher mySearcher = new System.DirectoryServices.DirectorySearcher(entry);
