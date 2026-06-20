@@ -88,8 +88,8 @@ kbId: 4583
 #### Каналы доставки заявок на техническую поддержку {: #platform_life_cycle_2_2_1 }
 
 - Электронная почта: [support@comindware.ru](mailto:support@comindware.ru)
-- Форма подачи заявки: [comindware.ru/company/contact-us/](https://www.comindware.ru/company/contact-us/)
-- Портал поддержки: [support.comindware.ru](https://support.comindware.ru)
+- Форма подачи заявки: [comindware.ru/company/contact-us/][cmw_contact_us]
+- Портал поддержки: [support.comindware.ru][cmw_support_portal]
 - База знаний: [kb.comindware.ru](https://kb.comindware.ru/)
 
 #### Требования к заявкам на техническую поддержку {: #platform_life_cycle_2_2_2 }

@@ -76,7 +76,7 @@ Telegram-бот будет представлять собой проект в V
 
 ## Настройка интеграции {: #example_telegram_bot_nastroyka_integracii }
 
-1. В Telegram найдите BotFather (<https://t.me/BotFather>) и запросите у него создание бота. Подробные инструкции см. в [официальной документации Telegram](https://core.telegram.org/api).
+1. В Telegram найдите [BotFather][telegram_botfather] и запросите у него создание бота. Подробные инструкции см. в [официальной документации Telegram][telegram_core_api].
 2. Скачайте и распакуйте проект для Visual Studio с промежуточным ПО по ссылке: [TelegramBotComindwareIntegration.zip](https://kb.comindware.ru/file.php?id=191)
 3. Восстановите библиотеки с помощью команды Restore NuGet Packages: Newtonsoft.Json, RestSharp, Telegram.Bot и Telegram.bot.Extensions.Polling.
 4. При необходимости установите пакет .Net SDK 3.1.

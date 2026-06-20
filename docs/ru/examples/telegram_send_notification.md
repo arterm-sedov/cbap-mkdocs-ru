@@ -33,7 +33,7 @@ hide: tags
 
 ## Инициализация бота в Telegram {: #telegram_send_notification_inicializaciya_bota_v_telegram }
 
-1. В мессенджере Telegram откройте чат [@BotFather](https://t.me/BotFather).
+1. В мессенджере Telegram откройте чат [@BotFather][telegram_botfather].
 2. В чате введите команду `/start`.
 3. Введите команду `/newbot`.
 4. Введите имя нового бота. Имя бота должно заканчиваться на слово `bot`, например: `example_bot`.
