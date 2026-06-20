@@ -6,6 +6,7 @@ Review before starting related work. Move to skills/rules when stable.
 ## 2026-06-20
 
 - **Generic/infra commits without a customer ticket default to `#6` (v6) or `#5` (v5).** The `cmwhelp-commit` skill already handles this via branch name fallback, but the convention should be explicit: non-feature, repo-level tasks (tooling, CI, formatting, refactoring) use the version number as ticket reference. Always ask the user for the session ticket number first — only fall back to `#6`/`#5` when the user confirms there is no customer ticket.
+- **`platform_v6` branch hosts `phpkb_content_rag/` for ALL versions — consumed by RAG engine.** The RAG ingestion pipeline fetches the corpus from the `platform_v6` branch. Both v5 (`798-platform_v5`) and v6 (`896-platform_v6`) category folders live there. Other repos pull RAG corpora from this branch. This is why v5 phpkb_content/phpkb_content_rag/ingestion bundle changes are cherry-picked to v6 — they must be available at a single source of truth.
 
 ## 2026-06-18
 
