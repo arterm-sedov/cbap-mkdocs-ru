@@ -124,7 +124,7 @@ hide: tags
         | `text` | **Атрибут:** _Сообщение_ |
         | `chat_id` | **Атрибут:** _ID чата_ |
 
-4. Добавьте и настройте действие «**Отправить сообщение**» {: #telegram_send_notification_send_message_action }:
+4. <a id="telegram_send_notification_send_message_action"></a>Добавьте и настройте действие «**Отправить сообщение**»:
 
     - **Подключение:** `telegram_send_connection`
     - **Путь передачи данных:** `telegram_send_route`
