@@ -1,0 +1,273 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4890" kb-tags="атрибуты,кнопки,пример,процессы,формулы" kb-title="Шевроны. Правила окрашивания. Пример настройки">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#chevron_color_rules_intro">
+<span class="md-ellipsis">
+      
+        Введение
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#chevron_color_rules_definitions">
+<span class="md-ellipsis">
+      
+        Определения
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#chevron_color_rules_use_case">
+<span class="md-ellipsis">
+      
+        Прикладная задача
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#chevron_color_rules_ishodnye_dannye">
+<span class="md-ellipsis">
+      
+        Исходные данные
+      
+    </span>
+</a>
+<nav aria-label="Исходные данные" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#chevron_color_rules_shablon_zapisi_etapy_zayavok">
+<span class="md-ellipsis">
+      
+        Шаблон записи «Этапы»
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#chevron_color_rules_shablon_zapisi_zayavki">
+<span class="md-ellipsis">
+      
+        Шаблон записи «Заявки»
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#chevron_color_rules_proverka_raboty_prilozheniya">
+<span class="md-ellipsis">
+      
+        Проверка работы приложения
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      
+        Связанные статьи
+      
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="chevron_color_rules_intro">Введение</h2>
+<p>В этой статье представлен пример настройки правил окраски шевронов в зависимости от статуса их выполнения.</p>
+<div class="notice notice-success">
+<h2 class="admonition-title" id="chevron_color_rules_definitions">Определения</h2>
+<ul>
+<li><strong>Шевроны</strong> служат для визуального отображения этапов.</li>
+<li>Шевроны являются представлением атрибута типа «<strong>Запись</strong>», хранящего несколько значений.</li>
+<li>Шевроны отображаются как последовательность цветных плашек с заголовками записей связанного шаблона.</li>
+<li>Цвет шеврона можно задать двумя способами:<ul>
+<li>с помощью системного атрибута «<strong>Цвет</strong>» связанной записи;</li>
+<li>с помощью <strong>правил окраски</strong> шевронов.</li>
+</ul>
+</li>
+<li>Если не настроены правила окраски шевронов или не сработает ни одно правило, они будут окрашиваться цветом, указанным в системном атрибуте «<strong>Цвет</strong>» в соответствующих записях. Если при этом для записи атрибут «<strong>Цвет</strong>» не задан, то шеврон будет окрашен в зелёный цвет.</li>
+<li>Если для одной записи одновременно сработают несколько правил, возвращающих разные цвета, то шеврон будет окрашен в цвет, заданный последним сработавшим правилом.</li>
+<li>Правил окраски шевронов может быть неограниченное количество, но для оптимальной работы платформы рекомендуется задавать не более 8 условий.</li>
+<li>При составлении правил окраски рекомендуется использовать атрибуты из связанного шаблона, хранящего данные этапов, а не атрибуты шаблона, на форме которого настраиваются шевроны.</li>
+<li>Подробные сведения о настройке шевронов см. в параграфе <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5723">Динамические элементы формы. Настройка шевронов</a>»</em>.</li>
+</ul>
+</div>
+<h2 id="chevron_color_rules_use_case">Прикладная задача</h2>
+<p>Имеется приложение оформления заявок. Требуется окрашивать шевроны в соответствии со статусом этапов выполнения заявки:</p>
+<ul>
+<li>оранжевый <code>#efbb3a</code> — этап начался, если указана дата начала, но не указана дата завершения;</li>
+<li>зелёный <code>#338320</code> — этап завершился, если указаны даты начала и завершения;</li>
+<li>серый <code>#a8a8a8</code> — этап не начался, если не указаны ни дата начала, ни дата завершения.</li>
+</ul>
+<h2 id="chevron_color_rules_ishodnye_dannye">Исходные данные</h2>
+<p>Создайте приложение <em>«Управление заявками»</em> и настройте в нём перечисленные ниже шаблоны.</p>
+<h3 id="chevron_color_rules_shablon_zapisi_etapy_zayavok">Шаблон записи «Этапы»</h3>
+<ol class="colored_numbers_list">
+<li>Создайте <strong>шаблон записи</strong> <em>«Этапы»</em>.</li>
+<li>
+<p>Создайте следующие атрибуты в этом шаблоне:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Название атрибута</th>
+<th>Свойства</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Номер этапа</em></td>
+<td><strong>Тип данных: число</strong><br/><strong>Количество знаков после запятой: 0</strong></td>
+</tr>
+<tr>
+<td><em>Название этапа</em></td>
+<td><strong>Тип данных: текст</strong><br/><strong>Формат отображения:</strong> <strong>обычный текст</strong><br/><strong>Использовать как заголовок записей:</strong> флажок установлен</td>
+</tr>
+<tr>
+<td><em>Дата начала</em></td>
+<td><strong>Тип данных: дата и время</strong></td>
+</tr>
+<tr>
+<td><em>Дата завершения</em></td>
+<td><strong>Тип данных: дата и время</strong></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<h3 id="chevron_color_rules_shablon_zapisi_zayavki">Шаблон записи «Заявки»</h3>
+<ol class="colored_numbers_list">
+<li>Создайте в нём <strong>шаблон записи</strong> <em>«Заявки»</em>.</li>
+<li>
+<p>В шаблоне записи <em>«Заявки»</em> создайте следующие атрибуты:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Название атрибута</th>
+<th>Свойства</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Этапы</em></td>
+<td><strong>Тип данных: запись</strong><br/><strong>Связанный шаблон:</strong> <em>Этапы</em><br/><strong>Хранить несколько значений:</strong> флажок установлен<br/><strong>Взаимная связь с атрибутом:</strong> <strong>с новым</strong><br/><strong>Свойства нового атрибута:</strong><br/>- <strong>Название:</strong> <em>Заявка</em><br/>- <strong>Хранить несколько значений:</strong> флажок снят</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Откройте конструктор основной формы шаблона <em>«Заявки»</em>.</p>
+</li>
+<li>Вынесите на форму атрибут <em>«Название заявки»</em>.</li>
+<li>Вынесите на форму атрибут <em>«Этапы»</em>.</li>
+<li>На панели «<strong>Свойства поля</strong>» выберите <strong>представление</strong> «<strong>Таблица</strong>».</li>
+<li>В поле «<strong>Сортировка</strong>» на панели «<strong>Свойства таблицы</strong>» выберите атрибут <em>«Номер этапа»</em>.</li>
+<li>
+<p>Поместите в таблицу <em>«Этапы»</em> атрибуты из шаблона <em>«Этапы»</em> в качестве столбцов:</p>
+<ul>
+<li><em>Номер этапа</em></li>
+<li><em>Название этапа</em></li>
+<li><em>Дата начала</em></li>
+<li><em>Дата завершения</em></li>
+</ul>
+</li>
+<li>
+<p>Добавьте на область кнопок таблицы <em>«Этапы»</em> кнопку <strong>«Создать»</strong>.</p>
+</li>
+<li>Снова вынесите на форму шаблона <em>«Заявки»</em> атрибут <em>«Этапы»</em>.</li>
+<li>В панели «<strong>Свойства поля</strong>» выберите <strong>представление</strong> «<strong>Шевроны</strong>».</li>
+<li>
+<p>Настройте свойства шевронов:</p>
+<ul>
+<li><strong>Упорядочивание:</strong> <em>ID</em></li>
+<li><strong>Правила окраски записей:</strong> нажимайте <strong>«Создать»</strong> и настройте следующие правила:</li>
+</ul>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Цвет</th>
+<th>Условие: формула</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span style="background-color: #efbb3a; color: #000000;">Оранжевый #efbb3a</span></td>
+<td><code>AND(NOT(EMPTY($Datanachala)),EMPTY($Datazaversheniya))</code></td>
+</tr>
+<tr>
+<td><span style="background-color: #338320; color: #ffffff;">Зелёный #338320</span></td>
+<td><code>AND(NOT(EMPTY($Datazaversheniya)),NOT(EMPTY($Datanachala)))</code></td>
+</tr>
+<tr>
+<td><span style="background-color: #a8a8a8; color: #000000;">Серый #a8a8a8</span></td>
+<td><code>AND(EMPTY($Datanachala),EMPTY($Datazaversheniya))</code></td>
+</tr>
+</tbody>
+</table>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Условие окрашивания шеврона вычисляется в контексте шаблона, связанного с текущим шаблоном посредством атрибута типа «<strong>Запись</strong>». Поэтому обратиться к атрибутам текущего шаблона, на форме которого размещены шевроны, можно только посредством обратной ссылки. Например, к атрибуту <strong>ID</strong> заявки можно обратиться посредством атрибута <em>«Заявка»</em> из связанного шаблона, который ссылается на текущий шаблон:</p>
+<div class="highlight"><code><pre><span></span><code><span class="err">$</span><span class="n">Zayavka</span><span class="o">-&gt;</span><span class="n">id</span></code> <br/></pre></code></div>
+</div>
+</li>
+<li>
+<p>Сохраните форму.</p>
+</li>
+</ol>
+<h2 id="chevron_color_rules_proverka_raboty_prilozheniya">Проверка работы приложения</h2>
+<ol class="colored_numbers_list">
+<li>Откройте шаблон процесса <em>«Заявки»</em>.</li>
+<li>Нажмите кнопку «<strong>Перейти к экземплярам</strong>».</li>
+<li>Отобразится таблица «<strong>Все записи</strong>» со списком заявок.</li>
+<li>
+<p>Создайте и заполните несколько строк в таблице <em>«Этапы»</em> на форме заявки:</p>
+<ul>
+<li>введите <em>название этапа</em>;</li>
+<li>у некоторых этапов введите только <em>дату начала</em> или только <em>дату завершения</em>;</li>
+<li>у некоторых этапов не указывайте ни одну из дат.</li>
+</ul>
+</li>
+<li>
+<p>После заполнения каждой строки в таблице <em>«Этапы»</em> сохраняйте запись, чтобы применить изменения.</p>
+</li>
+<li>Для каждой строки в таблице <em>«Этапы»</em> должен появляться шеврон с <em>названием этапа</em>.</li>
+<li>Цвета шевронов должны меняться в зависимости от значений в столбцах <em>«Дата начала»</em> и <em>«Дата завершения»</em> таблицы <em>«Этапы»</em>.</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Прогресс выполнения заявки в виде шевронов" src="https://kb.comindware.ru/assets/img_660a9e23f3b6c.png"/></p><figcaption class="caption">Прогресс выполнения заявки в виде шевронов</figcaption>
+</figure>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5379">Шевроны. Визуализация этапов процесса. Пример настройки</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5723">Динамические элементы формы. Настройка шевронов</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

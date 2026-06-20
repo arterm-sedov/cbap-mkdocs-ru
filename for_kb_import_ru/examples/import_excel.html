@@ -1,0 +1,104 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="4925" kb-tags="API,атрибуты,импорт,кнопки,пример" kb-title="Импорт данных в Excel">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#import_excel_request_url">
+<span class="md-ellipsis">
+      
+        Получение URL запроса
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#import_excel_setup">
+<span class="md-ellipsis">
+      
+        Порядок импорта в Excel
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      
+        Связанные статьи
+      
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для использования данных <strong>Comindware Platform</strong>, например, в Excel (Power Query) или BI-системах, существует возможность их выгрузки через API.</p>
+<h2 id="import_excel_request_url">Получение URL запроса</h2>
+<p>Для просмотра перечня справочников перейдите в область API, введя после доменного имени системы <code>/docs</code>, затем перейдите в раздел <strong>Solution API</strong>. Найдите нужный справочник по системному имени, нажмите на него и выберите метод <code>GET</code> (без <code>{id}</code>) для получения всех данных шаблона записи. Нажмите кнопку «<strong>Try it out</strong>». Скопируйте значение в поле <strong>Request URL</strong>.</p>
+<p>Пример: <code>https://yourinstance/api/public/solution/Languages</code></p>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример запроса в API" src="https://kb.comindware.ru/assets/bi_excel_0.jpg"/></p><figcaption class="caption">Пример запроса в API</figcaption>
+</figure>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Формат предоставления данных — JSON.</p>
+</div>
+<h2 id="import_excel_setup">Порядок импорта в Excel</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Выберите закладку <strong>Power Query</strong> → «<strong>Из Интернета</strong>» и в адресе запроса укажите ссылку, скопированную из <strong>Request URL</strong>.</p>
+<p>Надстройка Power Query встроена в Excel 2016 и выше. Для более ранних версий Excel требуется <a class="mkdocs_imported_link" href="https://support.microsoft.com/ru-ru/office/power-query-%D0%BE%D0%B1%D0%B7%D0%BE%D1%80-%D0%B8-%D0%BE%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-ed614c81-4b00-4291-bd3a-55d80767f81d">установка</a>.</p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Пример запроса в Excel" src="https://kb.comindware.ru/assets/bi_excel_2.jpg"/><figcaption class="caption">Пример запроса в Excel</figcaption></figure>
+</li>
+<li>
+<p>В окне «<strong>Доступ к веб-содержимому</strong>» выберите вариант «<strong>Базовый</strong>» и введите логин и пароль пользователя, который имеет доступ к данному шаблону записи. Нажмите кнопку «<strong>Подключение</strong>».</p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Окно «Доступ к веб-содержимому»" src="https://kb.comindware.ru/assets/bi_excel_3.jpg"/><figcaption class="caption">Окно «Доступ к веб-содержимому»</figcaption></figure>
+</li>
+<li>
+<p>В открывшемся окне отобразятся полученные данные.</p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Окно редактора Power Query" src="https://kb.comindware.ru/assets/bi_excel_4.jpg"/><figcaption class="caption">Окно редактора Power Query</figcaption></figure>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>В таблицу</strong>», а затем «<strong>ОК</strong>».</p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Настройка таблицы" src="https://kb.comindware.ru/assets/bi_excel_5.jpg"/><figcaption class="caption">Настройка таблицы</figcaption></figure>
+</li>
+<li>
+<p>Разверните список всех атрибутов данного шаблона записи и выберите необходимые для отображения в таблице.</p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Настройка столбцов таблицы" src="https://kb.comindware.ru/assets/bi_excel_6.jpg"/><figcaption class="caption">Настройка столбцов таблицы</figcaption></figure>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Закрыть и загрузить</strong>» для отображения данных в стандартном интерфейсе Excel.</p>
+<figure class="screenshot_with_caption" markdown=""><img alt="Перенос настройки таблицы в интерфейс Excel" src="https://kb.comindware.ru/assets/bi_excel_7.jpg"/><figcaption class="caption">Перенос настройки таблицы в интерфейс Excel</figcaption></figure>
+</li>
+</ol>
+<p>Пример полученной таблицы Excel:</p>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример полученной таблицы Excel" src="https://kb.comindware.ru/assets/bi_excel_8.jpg"/></p><figcaption class="caption">Пример полученной таблицы Excel</figcaption>
+</figure>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5333">Solution API</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5693">Шаблоны записей</a></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>
