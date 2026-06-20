@@ -2,7 +2,7 @@
 title: 'Пути передачи данных. Определения, типы, создание, настройка, удаление'
 kbId: 4676
 url: 'https://kb.comindware.ru/article.php?id=4676'
-updated: '2025-07-10 13:58:33'
+updated: '2026-06-20 18:05:53'
 ---
 
 # Пути передачи данных. Определения, типы, создание, настройка, удаление
@@ -11,39 +11,39 @@ updated: '2025-07-10 13:58:33'
 
 - **Путь передачи данных** служит для преобразования форматов и фильтрации данных, передаваемых между **Comindware Platform** и внешними системами.
 - **Путь передачи** данных представляет собой шаблон для обработки передаваемых данных.
-- Для работы **пути передачи** данных требуется **подключение**, которое обеспечивает собственно передачу данных. См. *«[Подключения. Определения, типы, создание, настройка, удаление](https://kb.comindware.ru/article.php?id=4676)»*.
+- Для работы **пути передачи** данных требуется **подключение**, которое обеспечивает собственно передачу данных. См. *«[Подключения. Определения, типы, создание, настройка, удаление](https://kb.comindware.ru/article.php?id=5302)»*.
 
 См. также:
 
-- [Примеры интеграций](https://kb.comindware.ru/category.php?id=875)
-- [Интеграция с внешними системами. Общие рекомендации](https://kb.comindware.ru/article.php?id=5091)
-- [Интеграция с внешними системами. Общие рекомендации](https://kb.comindware.ru/article.php?id=5091)
+- [Примеры интеграций](https://kb.comindware.ru/category.php?id=906)
+- [Интеграция с внешними системами. Общие рекомендации](https://kb.comindware.ru/article.php?id=5300)
+- [Интеграция с внешними системами. Общие рекомендации](https://kb.comindware.ru/article.php?id=5300)
 
 ## Типы путей передачи данных
 
 ### Системные подключения
 
-- [Общие уведомления](https://kb.comindware.ru/article.php?id=4681)
-- [Уведомления о задачах](https://kb.comindware.ru/article.php?id=4684)
+- [Общие уведомления](https://kb.comindware.ru/article.php?id=5625)
+- [Уведомления о задачах](https://kb.comindware.ru/article.php?id=5624)
 
 ### Подключения к электронной почте
 
-- [Получение эл. почты в процессе](https://kb.comindware.ru/article.php?id=4695)
-- [Отправка эл. почты из процесса](https://kb.comindware.ru/article.php?id=4690)
-- [Получение эл. почты через Exchange](https://kb.comindware.ru/article.php?id=4693)
-- [Отправка эл. почты через Exchange](https://kb.comindware.ru/article.php?id=4692)
-- [Получение эл. почты через IMAP](https://kb.comindware.ru/article.php?id=4693)
-- [Отправка почты через SMTP](https://kb.comindware.ru/article.php?id=4692)
+- [Получение эл. почты в процессе](https://kb.comindware.ru/article.php?id=5628)
+- [Отправка эл. почты из процесса](https://kb.comindware.ru/article.php?id=5366)
+- [Получение эл. почты через Exchange](https://kb.comindware.ru/article.php?id=5629)
+- [Отправка эл. почты через Exchange](https://kb.comindware.ru/article.php?id=5630)
+- [Получение эл. почты через IMAP](https://kb.comindware.ru/article.php?id=5629)
+- [Отправка почты через SMTP](https://kb.comindware.ru/article.php?id=5630)
 
 ### Подключения REST и OData
 
-- [Отправка HTTP-запросов](https://kb.comindware.ru/article.php?id=4699)
-- [Получение HTTP-запросов](https://kb.comindware.ru/article.php?id=4700)
+- [Отправка HTTP-запросов](https://kb.comindware.ru/article.php?id=5312)
+- [Получение HTTP-запросов](https://kb.comindware.ru/article.php?id=5311)
 
 ### Подключения к шине сообщений
 
 - Отправка сообщений через Apache Kafka
-- [Получение сообщений через Apache Kafka](https://kb.comindware.ru/article.php?id=4704)
+- [Получение сообщений через Apache Kafka](https://kb.comindware.ru/article.php?id=5635)
 - Отправка сообщений через MSMQ
 - Получение сообщений через MSMQ
 - Отправка сообщений через RabbitMQ
@@ -51,21 +51,21 @@ updated: '2025-07-10 13:58:33'
 
 ### SQL-подключения
 
-- [Отправка запросов в СУБД](https://kb.comindware.ru/article.php?id=4706)
-- [Получение данных из СУБД](https://kb.comindware.ru/article.php?id=4705)
+- [Отправка запросов в СУБД](https://kb.comindware.ru/article.php?id=5374)
+- [Получение данных из СУБД](https://kb.comindware.ru/article.php?id=5347)
 
 ### Пользовательские подключения
 
-- [Отправка сообщений в «СФЕРА Курьер»](https://kb.comindware.ru/article.php?id=5062)
-- [Получение сообщений из «СФЕРА Курьер»](https://kb.comindware.ru/article.php?id=5061)
+- [Отправка сообщений в «СФЕРА Курьер»](https://kb.comindware.ru/article.php?id=5621)
+- [Получение сообщений из «СФЕРА Курьер»](https://kb.comindware.ru/article.php?id=5622)
 
 Примечание
 
-В разделе «**Пользовательские подключения**» также отображаются пути передачи данных для [адаптеров](https://kb.comindware.ru/article.php?id=4672).
+В разделе «**Пользовательские подключения**» также отображаются пути передачи данных для [адаптеров](https://kb.comindware.ru/article.php?id=5615).
 
 ## Просмотр списка путей передачи данных и настройка пути
 
-1. На странице [«Администрирование» — «Архитектура»](https://kb.comindware.ru/article.php?id=4661) выберите пункт «Пути передачи данных» ‌.
+1. На странице [«Администрирование» — «Архитектура»](https://kb.comindware.ru/article.php?id=5608) выберите пункт «Пути передачи данных» ‌.
 2. Отобразится  список путей передачи данных со следующими сведениями:
 
    - **Системное имя** — уникальное имя пути передачи данных.
@@ -87,5 +87,5 @@ _![Список путей передачи данных](/platform/v5.0/adminis
 
 ## Связанные статьи
 
-- *[Подключения. Определения, типы, создание, настройка, удаление](https://kb.comindware.ru/article.php?id=4675)*
-- *[Примеры интеграций](https://kb.comindware.ru/category.php?id=875)*
+- *[Подключения. Определения, типы, создание, настройка, удаление](https://kb.comindware.ru/article.php?id=5303)*
+- *[Примеры интеграций](https://kb.comindware.ru/category.php?id=906)*

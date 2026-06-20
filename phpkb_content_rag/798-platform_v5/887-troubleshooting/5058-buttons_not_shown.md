@@ -2,10 +2,12 @@
 title: 'Не отображаются кнопки'
 kbId: 5058
 url: 'https://kb.comindware.ru/article.php?id=5058'
-updated: '2025-10-24 17:17:33'
+updated: '2026-06-20 18:06:29'
 ---
 
 # Не отображаются кнопки
+
+## Описание проблемы
 
 При разработке приложения обычно настраиваются кнопки, с помощью которых пользователи могут выполнять те или иные действия (сохранять запись, экспортировать запись в настроенный шаблон, запускать процесс и т.д.).
 
@@ -24,7 +26,7 @@ updated: '2025-10-24 17:17:33'
 
 ## Связанные статьи
 
-- [Кнопки](https://kb.comindware.ru/article.php?id=4790)
-- [Таблицы](https://kb.comindware.ru/article.php?id=4800)
-- [Формы](https://kb.comindware.ru/article.php?id=4786)
-- [Роли в приложении](https://kb.comindware.ru/article.php?id=4803)
+- [Кнопки](https://kb.comindware.ru/article.php?id=5728)
+- [Таблицы](https://kb.comindware.ru/article.php?id=5735)
+- [Формы](https://kb.comindware.ru/article.php?id=5724)
+- [Роли в приложении](https://kb.comindware.ru/article.php?id=5738)

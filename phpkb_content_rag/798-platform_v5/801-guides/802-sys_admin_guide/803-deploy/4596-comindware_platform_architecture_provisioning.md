@@ -2,7 +2,7 @@
 title: 'Развёртывание Comindware Platform. Архитектура, ландшафт, программное и техническое обеспечение'
 kbId: 4596
 url: 'https://kb.comindware.ru/article.php?id=4596'
-updated: '2025-12-09 12:04:33'
+updated: '2026-06-20 18:04:41'
 ---
 
 # Развёртывание Comindware Platform. Архитектура, ландшафт, программное и техническое обеспечение
@@ -42,7 +42,7 @@ updated: '2025-12-09 12:04:33'
 
 Если продуктовый контур **Comindware Platform** изолирован внешним межсетевым экраном, необходимо настроить правила фильтрации для разрешения входящего трафика HTTP/HTTPS и WS/WSS в контур **Comindware Platform**.
 
-См. *[Перечень стороннего ПО, входящего в состав и необходимого для работы Системы](https://kb.comindware.ru/article.php?id=4582)*.
+См. *[Перечень стороннего ПО, входящего в состав и необходимого для работы Системы](https://kb.comindware.ru/article.php?id=5425)*.
 
 _![Диаграмма архитектуры Comindware Platform](https://kb.comindware.ru/assets/Picture1.png)_
 
@@ -58,7 +58,7 @@ _![Диаграмма архитектуры Comindware Platform](https://kb.com
 - Отказоустойчивость — реализуется посредством использованием резервных серверов и дополнительных узлов хранения и обработки данных.
 - Масштабируемость — реализуется посредством увеличения количества серверов, обрабатывающих запросы.
 
-См. *«[Безопасность](https://kb.comindware.ru/article.php?id=4660)»*.
+См. *«[Безопасность](https://kb.comindware.ru/article.php?id=5447)»*.
 
 ### Интеграция с внешними системами
 
@@ -70,7 +70,7 @@ _![Диаграмма архитектуры Comindware Platform](https://kb.com
 - SMTP/IMAP/Exchange — получение и отправка электронных писем.
 - ESB (Apache Kafka / RabbitMQ / MSMQ) — обмен сообщениями с внешними системами в распределенных и федеративных конфигурациях.
 
-См. *«[Подключения](https://kb.comindware.ru/article.php?id=4675)»*.
+См. *«[Подключения](https://kb.comindware.ru/article.php?id=5303)»*.
 
 ## Ландшафт развертывания Системы
 
@@ -133,11 +133,11 @@ _![Типовой ландшафт сервисов в составе Систе
 
 **Требования к конфигурации**
 
-- *[Apache Ignite. Установка и настройка. Краткое руководство](https://kb.comindware.ru/article.php?id=4600)*.
+- *[Apache Ignite. Установка и настройка. Краткое руководство](https://kb.comindware.ru/article.php?id=5452)*.
 
 **Примеры конфигураций**
 
-- *[Apache Ignite. Установка и настройка. Краткое руководство](https://kb.comindware.ru/article.php?id=4600)*.
+- *[Apache Ignite. Установка и настройка. Краткое руководство](https://kb.comindware.ru/article.php?id=5452)*.
 
 ### Конфигурация сервера журналирования транзакций
 
@@ -152,8 +152,8 @@ _![Типовой ландшафт сервисов в составе Систе
 
 **Примеры конфигураций**
 
-- *[Установка и настройка Elasticsearch без сертификатов подлинности](https://kb.comindware.ru/article.php?id=4612)*
-- *[Установка Elasticsearch. Краткое руководство для Windows](https://kb.comindware.ru/article.php?id=4617)*
+- *[Установка и настройка Elasticsearch без сертификатов подлинности](https://kb.comindware.ru/article.php?id=5459)*
+- *[Установка Elasticsearch. Краткое руководство для Windows](https://kb.comindware.ru/article.php?id=5549)*
 
 ### Конфигурация обратного прокси-сервера
 
@@ -167,8 +167,8 @@ _![Типовой ландшафт сервисов в составе Систе
 
 **Примеры конфигураций**
 
-- *[NGINX. Установка и настройка](https://kb.comindware.ru/article.php?id=4611)»*
-- *[Модуль GeoIP для NGINX. Установка и настройка](https://kb.comindware.ru/article.php?id=4610)*.
+- *[NGINX. Установка и настройка](https://kb.comindware.ru/article.php?id=5460)»*
+- *[Модуль GeoIP для NGINX. Установка и настройка](https://kb.comindware.ru/article.php?id=5461)*.
 
 ### Конфигурация сервера Zabbix
 
@@ -192,9 +192,9 @@ _![Типовой ландшафт сервисов в составе Систе
 
 **Примеры конфигураций**
 
-- *[Zabbix. Установка и настройка. Краткое руководство](https://kb.comindware.ru/article.php?id=4609)*.
+- *[Zabbix. Установка и настройка. Краткое руководство](https://kb.comindware.ru/article.php?id=5462)*.
 
 ## Связанные статьи
 
-- [Системные требования Comindware Platform](https://kb.comindware.ru/article.php?id=4659)
-- [Обеспечение высокой доступности и отказоустойчивости](https://kb.comindware.ru/article.php?id=5079)
+- [Системные требования Comindware Platform](https://kb.comindware.ru/article.php?id=5429)
+- [Обеспечение высокой доступности и отказоустойчивости](https://kb.comindware.ru/article.php?id=5445)

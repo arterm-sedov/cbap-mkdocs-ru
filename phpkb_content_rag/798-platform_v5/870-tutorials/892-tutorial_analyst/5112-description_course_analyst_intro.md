@@ -2,7 +2,7 @@
 title: 'Описание учебного курса «Аналитик. Ознакомительный»'
 kbId: 5112
 url: 'https://kb.comindware.ru/article.php?id=5112'
-updated: '2025-08-12 18:24:36'
+updated: '2026-06-20 18:05:29'
 ---
 
 # Описание учебного курса «Аналитик. Ознакомительный»
@@ -74,23 +74,23 @@ updated: '2025-08-12 18:24:36'
 
 ## Содержание курса
 
-*[Урок 1. Обзор возможностей Comindware Platform и понятий BPMS](https://kb.comindware.ru/article.php?id=5113)*
+*[Урок 1. Обзор возможностей Comindware Platform и понятий BPMS](https://kb.comindware.ru/article.php?id=5396)*
 
-*[Урок 2. Создание реестра данных](https://kb.comindware.ru/article.php?id=5114)*
+*[Урок 2. Создание реестра данных](https://kb.comindware.ru/article.php?id=5395)*
 
-*[Урок 3. Создание бизнес-процесса](https://kb.comindware.ru/article.php?id=5115)*
+*[Урок 3. Создание бизнес-процесса](https://kb.comindware.ru/article.php?id=5398)*
 
-*[Урок 4. Связи и коллекции записей, документооборот](https://kb.comindware.ru/article.php?id=5116)*
+*[Урок 4. Связи и коллекции записей, документооборот](https://kb.comindware.ru/article.php?id=5399)*
 
-*[Урок 5. Автоматизация: сценарии, вычисления, условия и проверки](https://kb.comindware.ru/article.php?id=5117)*
+*[Урок 5. Автоматизация: сценарии, вычисления, условия и проверки](https://kb.comindware.ru/article.php?id=5400)*
 
-*[Урок 6. Управление доступом: аккаунты, роли, навигация](https://kb.comindware.ru/article.php?id=5118)*
+*[Урок 6. Управление доступом: аккаунты, роли, навигация](https://kb.comindware.ru/article.php?id=5401)*
 
-*[Урок 7. Аналитика и мониторинг: диаграммы, дашборды, фильтры](https://kb.comindware.ru/article.php?id=5119)*
+*[Урок 7. Аналитика и мониторинг: диаграммы, дашборды, фильтры](https://kb.comindware.ru/article.php?id=5402)*
 
-*[Урок 8. Экспорт данных](https://kb.comindware.ru/article.php?id=5120)*
+*[Урок 8. Экспорт данных](https://kb.comindware.ru/article.php?id=5403)*
 
-*[Заключение](https://kb.comindware.ru/article.php?id=5121)*
+*[Заключение](https://kb.comindware.ru/article.php?id=5404)*
 
 ## Ключевые понятия и сущности Comindware Platform
 
@@ -116,4 +116,4 @@ updated: '2025-08-12 18:24:36'
 
 Вы ознакомились с составом и целями курса, сквозным бизнес-сценарием и основными понятиями, а также получили представление о том, как следует проходить уроки.
 
-Теперь переходите [к первому уроку](https://kb.comindware.ru/article.php?id=5113), чтобы ознакомиться с основами BPMS и возможностями **Comindware Platform**.
+Теперь переходите [к первому уроку](https://kb.comindware.ru/article.php?id=5396), чтобы ознакомиться с основами BPMS и возможностями **Comindware Platform**.

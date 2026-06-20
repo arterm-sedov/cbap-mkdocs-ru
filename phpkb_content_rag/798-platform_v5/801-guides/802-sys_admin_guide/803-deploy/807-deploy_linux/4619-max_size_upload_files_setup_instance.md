@@ -2,7 +2,7 @@
 title: 'Максимальный размер загружаемых файлов. Настройка для экземпляра ПО'
 kbId: 4619
 url: 'https://kb.comindware.ru/article.php?id=4619'
-updated: '2024-12-09 15:11:56'
+updated: '2026-06-20 18:04:34'
 ---
 
 # Максимальный размер загружаемых файлов. Настройка для экземпляра ПО
@@ -11,22 +11,22 @@ updated: '2024-12-09 15:11:56'
 
 Здесь представлены инструкции по настройке максимально допустимого размера загружаемых файлов для экземпляра ПО **Comindware Platform**.
 
-К загружаемым файлам относятся документы и изображения, прикреплённые к атрибутам типов «[**Документ**](https://kb.comindware.ru/article.php?id=4782)», «[**Изображение**](https://kb.comindware.ru/article.php?id=4771)» и «**Чертёж**», изображения загруженные на страницах «[**Темы**](https://kb.comindware.ru/article.php?id=4708)» и «[**Дизайн страниц входа и регистрации**](https://kb.comindware.ru/article.php?id=4707)», а также [изображения **аккаунтов**](https://kb.comindware.ru/article.php?id=4653).
+К загружаемым файлам относятся документы и изображения, прикреплённые к атрибутам типов «[**Документ**](https://kb.comindware.ru/article.php?id=5716)», «[**Изображение**](https://kb.comindware.ru/article.php?id=5707)» и «**Чертёж**», изображения загруженные на страницах «[**Темы**](https://kb.comindware.ru/article.php?id=5637)» и «[**Дизайн страниц входа и регистрации**](https://kb.comindware.ru/article.php?id=5636)», а также [изображения **аккаунтов**](https://kb.comindware.ru/article.php?id=5579).
 
 ## Расположение загруженных файлов
 
 По умолчанию файлы, загружаемые конечными пользователями и формируемые автоматически, хранятся в следующем каталоге:
 
 - `/var/lib/comindware/<instanceName>/Streams` — Linux
-- `C:\ProgramData\Comindware\` `Instances\<instanceName>\Streams` — Windows
+- `C:\\ProgramData\\Comindware\\` `Instances\\<instanceName>\\Streams` — Windows
 
 `/var/lib/comindware/<instanceName>/Streams`
 
-`C:\ProgramData\Comindware\` `Instances\<instanceName>\Streams`
+`C:\\ProgramData\\Comindware\\` `Instances\\<instanceName>\\Streams`
 
 Здесь и далее `<instanceName>` — имя экземпляра ПО.
 
-Подробные сведения о расположении загружаемых файлов см. в статье *«[Пути и содержимое папок экземпляра ПО](https://kb.comindware.ru/article.php?id=4620)».*
+Подробные сведения о расположении загружаемых файлов см. в статье *«[Пути и содержимое папок экземпляра ПО](https://kb.comindware.ru/article.php?id=5561)».*
 
 ## Настройка лимита на объем загружаемых файлов
 
@@ -101,7 +101,7 @@ updated: '2024-12-09 15:11:56'
 
 Для изменения лимита на размер загружаемых файлов в ОС Windows необходимо отредактировать конфигурацию экземпляра ПО.
 
-1. Откройте для редактирования файл `C:\ProgramData\Comindware\Instances\<instanceName>\Config\Web.config`.
+1. Откройте для редактирования файл `C:\\ProgramData\\Comindware\\Instances\\<instanceName>\\Config\\Web.config`.
 2. Установите лимит (например, 1 ГБ) с помощью директив `httpRuntime maxRequestLength` (в килобайтах) и `requestLimits maxAllowedContentLength` (в байтах):
 
    ```
@@ -114,4 +114,4 @@ updated: '2024-12-09 15:11:56'
 
 ## Связанные статьи
 
-- *[Пути и содержимое папок экземпляра ПО](https://kb.comindware.ru/article.php?id=4620)*
+- *[Пути и содержимое папок экземпляра ПО](https://kb.comindware.ru/article.php?id=5561)*

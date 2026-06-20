@@ -2,7 +2,7 @@
 title: 'Написание выражений на языке N3'
 kbId: 4852
 url: 'https://kb.comindware.ru/article.php?id=4852'
-updated: '2026-03-10 16:54:31'
+updated: '2026-06-20 18:06:04'
 ---
 
 # Написание выражений на языке N3

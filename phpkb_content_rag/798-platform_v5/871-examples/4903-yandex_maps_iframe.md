@@ -2,7 +2,7 @@
 title: 'Яндекс Карты. Настройка отображения в iframe'
 kbId: 4903
 url: 'https://kb.comindware.ru/article.php?id=4903'
-updated: '2026-06-17 14:09:51'
+updated: '2026-06-20 18:05:48'
 ---
 
 # Яндекс Карты. Настройка отображения в iframe
@@ -40,6 +40,6 @@ updated: '2026-06-17 14:09:51'
 
 ## Связанные статьи
 
-- [Атрибут типа «Текст»](https://kb.comindware.ru/article.php?id=4768)
-- [Язык формул](https://kb.comindware.ru/category.php?id=880)
-- [Список функций языка формул Comindware](https://kb.comindware.ru/article.php?id=4993)
+- [Атрибут типа «Текст»](https://kb.comindware.ru/article.php?id=5710)
+- [Язык формул](https://kb.comindware.ru/category.php?id=901)
+- [Список функций языка формул **Comindware Platform**](https://kb.comindware.ru/article.php?id=5218)

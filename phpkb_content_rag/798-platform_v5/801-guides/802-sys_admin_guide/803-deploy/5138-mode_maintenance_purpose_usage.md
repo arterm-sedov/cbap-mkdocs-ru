@@ -2,7 +2,7 @@
 title: 'Режим обслуживания. Назначение и использование'
 kbId: 5138
 url: 'https://kb.comindware.ru/article.php?id=5138'
-updated: '2025-10-22 12:46:46'
+updated: '2026-06-20 18:04:25'
 ---
 
 # Режим обслуживания. Назначение и использование
@@ -44,8 +44,8 @@ updated: '2025-10-22 12:46:46'
 
 ## Связанные статьи
 
-- [Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=4620)
-- [Конфигурация экземпляра, компонентов ПО и служб. Настройка](https://kb.comindware.ru/article.php?id=5067)
-- [Установка, запуск, инициализация и остановка ПО (Linux)](https://kb.comindware.ru/article.php?id=4622)
-- [Установка, запуск, инициализация и остановка ПО (Windows)](https://kb.comindware.ru/article.php?id=5063)
-- [Лицензирование. Активация, назначение, отзыв и продление лицензий](https://kb.comindware.ru/article.php?id=4670)
+- [Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=5561)
+- [Конфигурация экземпляра, компонентов ПО и служб. Настройка](https://kb.comindware.ru/article.php?id=5554)
+- [Установка, запуск, инициализация и остановка ПО (Linux)](https://kb.comindware.ru/article.php?id=5558)
+- [Установка, запуск, инициализация и остановка ПО (Windows)](https://kb.comindware.ru/article.php?id=5564)
+- [Лицензирование. Активация, назначение, отзыв и продление лицензий](https://kb.comindware.ru/article.php?id=5616)

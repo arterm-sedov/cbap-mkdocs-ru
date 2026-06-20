@@ -1,11 +1,11 @@
 ---
-title: 'Zabbix. Установка и настройка. Краткое руководство'
+title: 'Zabbix. Установка и настройка'
 kbId: 4609
 url: 'https://kb.comindware.ru/article.php?id=4609'
-updated: '2024-06-14 12:26:59'
+updated: '2026-06-20 18:04:29'
 ---
 
-# Zabbix. Установка и настройка. Краткое руководство
+# Zabbix. Установка и настройка
 
 ## Введение
 
@@ -13,9 +13,9 @@ updated: '2024-06-14 12:26:59'
 
 Для мониторинга работоспособности системы и необходимых ей служб рекомендуется использовать программное обеспечение Zabbix.
 
-В настоящем руководстве представлены краткие инструкции по установке и настройке Zabbix.
+Здесь представлены краткие инструкции по установке и настройке Zabbix.
 
-## 1. Основные задачи мониторинга работоспособности
+## Основные задачи мониторинга работоспособности
 
 Мониторинг работоспособности системы и служб необходим для устойчивой и бесперебойной работы системы, а также для заблаговременного предотвращения возможных проблем, таких как нехватка места на диске и т. п. Мониторинг работоспособности позволяет решать три основные задачи:
 
@@ -23,7 +23,7 @@ updated: '2024-06-14 12:26:59'
 - контроль наличия необходимого свободного места на дисках;
 - контроль журналов на предмет наличия ошибок.
 
-## 2. Установка и настройка
+## Установка и настройка
 
 Zabbix состоит из сервера и агентов:
 
@@ -33,9 +33,9 @@ Zabbix состоит из сервера и агентов:
 
 Подробные инструкции по установке настройке сервера и агентов Zabbix представлены в следующих статьях:
 
-- `![](https://kb.comindware.ru/images/marker.png)Zabbix Server, Zabbix Agent, Zabbix Frontend и MySQL. Инструкции по установке {Article-ID:4607}`
-- `![](https://kb.comindware.ru/images/marker.png)Zabbix Agent. Инструкции по установке для Ubuntu 22.04 {Article-ID:4608}`
-- `![](https://kb.comindware.ru/images/marker.png)Zabbix Agent. Инструкции по установке для MS Windows {Article-ID:4615}`
+- [Zabbix Server, Zabbix Agent, Zabbix Frontend и MySQL. Инструкции по установке](https://kb.comindware.ru/article.php?id=5458)
+- [Zabbix Agent. Инструкции по установке](https://kb.comindware.ru/article.php?id=5463)
+- [Zabbix Agent. Инструкции по установке для Windows](https://kb.comindware.ru/article.php?id=5552)
 - [Официальная инструкция по установке Zabbix (на английском языке)](https://www.zabbix.com/documentation/5.4/ru/manual/appendix/install)
 - [Установка и настройка Zabbix 5.0 (на русском языке, serveradmin.ru)](https://serveradmin.ru/ustanovka-i-nastrojka-zabbix-5-0/)
 - [Мониторинг web сайта в Zabbix (на русском языке, serveradmin.ru)](https://serveradmin.ru/monitoring-web-sayta-v-zabbix/)

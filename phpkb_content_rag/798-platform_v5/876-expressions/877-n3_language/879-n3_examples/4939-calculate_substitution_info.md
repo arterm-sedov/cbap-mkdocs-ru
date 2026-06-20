@@ -2,7 +2,7 @@
 title: 'Вычисление информации о замещении'
 kbId: 4939
 url: 'https://kb.comindware.ru/article.php?id=4939'
-updated: '2026-06-17 14:09:53'
+updated: '2026-06-20 18:06:09'
 ---
 
 # Вычисление информации о замещении
@@ -36,6 +36,6 @@ updated: '2026-06-17 14:09:53'
 
 ## Связанные статьи
 
-- [Замещения. Создание, настройка, удаление](https://kb.comindware.ru/article.php?id=4665)
-- [Аккаунты и задачи. Вычисление пользователей с активными задачами с помощью N3 (с учетом замещений)](n3_calculate_active_task_accounts.html#example_n3_calculate_active_task_accounts)
-- [Язык N3](https://kb.comindware.ru/category.php?id=877)
+- [Замещения. Создание, настройка, удаление](https://kb.comindware.ru/article.php?id=5609)
+- [Аккаунты и задачи. Вычисление пользователей с активными задачами с помощью N3 (с учетом замещений)](https://kb.comindware.ru/article.php?id=5292)
+- [Язык N3](https://kb.comindware.ru/category.php?id=903)

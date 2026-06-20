@@ -2,7 +2,7 @@
 title: 'Публичные и внутренние формы. Контроль доступа'
 kbId: 4789
 url: 'https://kb.comindware.ru/article.php?id=4789'
-updated: '2026-05-21 13:14:17'
+updated: '2026-06-20 18:05:06'
 ---
 
 # Публичные и внутренние формы. Контроль доступа
@@ -11,7 +11,7 @@ updated: '2026-05-21 13:14:17'
 
 Для любого шаблона (кроме шаблона процесса) можно создать неограниченное число форм. На них можно поместить разные атрибуты, и каждая форма может предназначаться для отдельной категории пользователей.
 
-Доступ пользователей к форме определяется с помощью **[ролей](https://kb.comindware.ru/article.php?id=4803)** и **типа формы**.
+Доступ пользователей к форме определяется с помощью **[ролей](https://kb.comindware.ru/article.php?id=5738)** и **типа формы**.
 
 Здесь представлены инструкции по контролю доступа к формам посредством **типа формы**, а также по созданию ссылок на формы для внешних пользователей.
 
@@ -40,7 +40,7 @@ updated: '2026-05-21 13:14:17'
 
 В **начальном событии** и **пользовательской задаче** отображается только определённая форма связанного шаблона записи и **селектор форм недоступен**.
 
-[**Стартовая форма** и **форма пользовательской задачи**](https://kb.comindware.ru/article.php?id=4726) всегда являются **публичными**.
+[**Стартовая форма** и **форма пользовательской задачи**](https://kb.comindware.ru/article.php?id=5660) всегда являются **публичными**.
 
 Стартовые формы и формы пользовательских задач **не могут быть внешними**.
 
@@ -84,8 +84,8 @@ updated: '2026-05-21 13:14:17'
    Здесь:
 
    - `http://<your-host>/` — адрес сервера **Comindware Platform**;
-   - `<oa.XX>` — ID шаблона записи *«Заявки»* (его видно в [списке шаблонов](https://kb.comindware.ru/article.php?id=4709#templates_view_in_app));
-   - `<form.XX>` — ID формы *«Диспетчер»* (его видно в адресной строке браузера в [конструкторе формы](https://kb.comindware.ru/article.php?id=4786));
+   - `<oa.XX>` — ID шаблона записи *«Заявки»* (его видно в [списке шаблонов](https://kb.comindware.ru/article.php?id=5638#templates_view_in_app));
+   - `<form.XX>` — ID формы *«Диспетчер»* (его видно в адресной строке браузера в [конструкторе формы](https://kb.comindware.ru/article.php?id=5724));
    - `<RecordID>` — ID записи *«Заявки»*.
 
 ## Пример создания ссылки на внешнюю форму
@@ -137,7 +137,7 @@ updated: '2026-05-21 13:14:17'
 
 Для формирования ссылки на внешнюю форму используется метод System Core API `/Base/EncryptedNavigationReferenceService/Generate`, поэтому **вам потребуется доступ к API Comindware Platform**.
 
-См. *«[Аутентификация для доступа к API](https://kb.comindware.ru/article.php?id=4860#api_intro_authentication)»* и *«[Методы System Core API](https://kb.comindware.ru/article.php?id=4862#api_system_core_encrypted_navigation_reference)»*.
+См. *«[Аутентификация для доступа к API](https://kb.comindware.ru/article.php?id=5332#api_intro_authentication)»* и *«[Методы System Core API](https://kb.comindware.ru/article.php?id=5331#api_system_core_encrypted_navigation_reference)»*.
 
 1. Соберите следующие данные для формирования ссылки:
 
@@ -205,8 +205,8 @@ updated: '2026-05-21 13:14:17'
 
 ## Связанные статьи
 
-- [Формы. Определения, редактирование, удаление, использование списка форм](https://kb.comindware.ru/article.php?id=4786)
-- [Стартовая форма и форма пользовательской задачи](https://kb.comindware.ru/article.php?id=4726)
-- [Роли в приложении. Определения, настройка, объединение, удаление](https://kb.comindware.ru/article.php?id=4803)
-- [Аутентификация для доступа к API](https://kb.comindware.ru/article.php?id=4860#api_intro_authentication)
-- [Методы System Core API](https://kb.comindware.ru/article.php?id=4862#api_system_core_encrypted_navigation_reference)
+- [Формы. Определения, редактирование, удаление, использование списка форм](https://kb.comindware.ru/article.php?id=5724)
+- [Стартовая форма и форма пользовательской задачи](https://kb.comindware.ru/article.php?id=5660)
+- [Роли в приложении. Определения, настройка, объединение, удаление](https://kb.comindware.ru/article.php?id=5738)
+- [Аутентификация для доступа к API](https://kb.comindware.ru/article.php?id=5332#api_intro_authentication)
+- [Методы System Core API](https://kb.comindware.ru/article.php?id=5331#api_system_core_encrypted_navigation_reference)

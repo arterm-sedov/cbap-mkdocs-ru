@@ -2,7 +2,7 @@
 title: 'Не получается запустить процесс по нескольким записям'
 kbId: 5059
 url: 'https://kb.comindware.ru/article.php?id=5059'
-updated: '2025-10-24 17:35:15'
+updated: '2026-06-20 18:06:29'
 ---
 
 # Не получается запустить процесс по нескольким записям
@@ -17,7 +17,7 @@ updated: '2025-10-24 17:35:15'
 
 ## Связанные статьи
 
-- [Кнопки](https://kb.comindware.ru/article.php?id=4790)
-- [Шаблон процесса](https://kb.comindware.ru/article.php?id=4758)
-- [Сценарии](https://kb.comindware.ru/article.php?id=4717)
-- [Ошибка выполнения скриптовой операции](https://kb.comindware.ru/article.php?id=5057)
+- [Кнопки](https://kb.comindware.ru/article.php?id=5728)
+- [Шаблон процесса](https://kb.comindware.ru/article.php?id=5694)
+- [Сценарии](https://kb.comindware.ru/article.php?id=5654)
+- [Ошибка выполнения скриптовой операции](https://kb.comindware.ru/article.php?id=5177)

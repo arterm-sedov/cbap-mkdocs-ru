@@ -2,7 +2,7 @@
 title: 'Методы System Core API'
 kbId: 4862
 url: 'https://kb.comindware.ru/article.php?id=4862'
-updated: '2025-11-12 16:11:13'
+updated: '2026-06-20 18:05:55'
 ---
 
 # Методы System Core API
@@ -665,7 +665,7 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 
 ### EncryptedNavigationReference — ссылки на внешние формы
 
-См. *[Пример создания ссылки на внешнюю форму](https://kb.comindware.ru/article.php?id=4789#form_access_control_external_link)*.
+См. *[Пример создания ссылки на внешнюю форму](https://kb.comindware.ru/article.php?id=5726#form_access_control_external_link)*.
 
 | POST | /Base/EncryptedNavigationReferenceService/Generate |
 | --- | --- |
@@ -3070,6 +3070,6 @@ _![Интерфейс Swagger для System Core API](https://kb.comindware.ru/a
 
 ## Связанные статьи
 
-- *[Общие сведения об API Comindware Platform](https://kb.comindware.ru/article.php?id=4860)*
-- *[Методы Solution API](https://kb.comindware.ru/article.php?id=4863)*
-- *[Методы Web API](https://kb.comindware.ru/article.php?id=4861)*
+- *[Общие сведения об API Comindware Platform](https://kb.comindware.ru/article.php?id=5332)*
+- *[Методы Solution API](https://kb.comindware.ru/article.php?id=5333)*
+- *[Методы Web API](https://kb.comindware.ru/article.php?id=5330)*

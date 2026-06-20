@@ -2,7 +2,7 @@
 title: 'Аудит разрешений аккаунтов'
 kbId: 4664
 url: 'https://kb.comindware.ru/article.php?id=4664'
-updated: '2024-10-08 17:10:39'
+updated: '2026-06-20 18:04:43'
 ---
 
 # Аудит разрешений аккаунтов
@@ -11,7 +11,7 @@ updated: '2024-10-08 17:10:39'
 
 Страница «**Аудит разрешений аккаунтов**» позволяет просмотреть разрешения, предоставленные каждому аккаунту, а также списки аккаунтов, входящие в каждую группу и каждую роль.
 
-1. На странице «[**Администрирование**](https://kb.comindware.ru/article.php?id=4661)» в разделе — «**Администрирование аккаунтов**» выберите пункт «**Аудит разрешений аккаунтов**» *‌*.
+1. На странице «[**Администрирование**](https://kb.comindware.ru/article.php?id=5608)» в разделе — «**Администрирование аккаунтов**» выберите пункт «**Аудит разрешений аккаунтов**» *‌*.
 2. Отобразится страница «**Аудит разрешений аккаунтов**» со списком аккаунтов.
 
 ## Экспорт списка разрешений
@@ -22,28 +22,28 @@ updated: '2024-10-08 17:10:39'
 
 ### Разрешения в приложениях
 
-На этой вкладке отображаются разрешения на доступ к ресурсам приложений. См. разделы «**[Роли в приложении](https://kb.comindware.ru/article.php?id=4803)**», «**[Разработка приложений](https://kb.comindware.ru/article.php?id=4714)**», «**[Аккаунты](https://kb.comindware.ru/article.php?id=4653)**».
+На этой вкладке отображаются разрешения на доступ к ресурсам приложений. См. разделы «**[Роли в приложении](https://kb.comindware.ru/article.php?id=5738)**», «**[Разработка приложений](https://kb.comindware.ru/article.php?id=5643)**», «**[Аккаунты](https://kb.comindware.ru/article.php?id=5579)**».
 
-_![Список разрешений для приложений](https://kb.comindware.ru/assets/accounts_permission_audit_business_app.png)_
+_![Список разрешений для приложений](/platform/v5.0/administration/account_administration/img/accounts_permission_audit_business_app.png)_
 
 ### Системные разрешения
 
-На этой вкладке отображаются разрешения на доступ к ресурсам системы. См. разделы «**[Системные роли](https://kb.comindware.ru/article.php?id=4662)**» и «**[Аккаунты](https://kb.comindware.ru/article.php?id=4653)**».
+На этой вкладке отображаются разрешения на доступ к ресурсам системы. См. разделы «**[Системные роли](https://kb.comindware.ru/article.php?id=5610)**» и «**[Аккаунты](https://kb.comindware.ru/article.php?id=5579)**».
 
-_![Список системных разрешений](https://kb.comindware.ru/assets/account_permission_audit_system.png)_
+_![Список системных разрешений](/platform/v5.0/administration/account_administration/img/account_permission_audit_system.png)_
 
 ### Члены групп
 
-На этой вкладке отображается список всех аккаунтов и дочерних групп с указанием групп, в которые они входят. См. раздел «**[Группы](https://kb.comindware.ru/article.php?id=4654)**» и «[**Аккаунты**](https://kb.comindware.ru/article.php?id=4653)».
+На этой вкладке отображается список всех аккаунтов и дочерних групп с указанием групп, в которые они входят. См. раздел «**[Группы](https://kb.comindware.ru/article.php?id=5580)**» и «[**Аккаунты**](https://kb.comindware.ru/article.php?id=5579)».
 
-_![Список членов групп](https://kb.comindware.ru/assets/account_permission_audit_group_members.png)_
+_![Список членов групп](/platform/v5.0/administration/account_administration/img/account_permission_audit_group_members.png)_
 
 ### Члены ролей
 
-На этой вкладке отображается список всех аккаунтов и групп с указанием ролей, которые им назначены. См. разделы «[**Роли**](https://kb.comindware.ru/article.php?id=4803)», «[**Системные роли**](https://kb.comindware.ru/article.php?id=4662)» и «[**Аккаунты**](https://kb.comindware.ru/article.php?id=4653)».
+На этой вкладке отображается список всех аккаунтов и групп с указанием ролей, которые им назначены. См. разделы «[**Роли**](https://kb.comindware.ru/article.php?id=5738)», «[**Системные роли**](https://kb.comindware.ru/article.php?id=5610)» и «[**Аккаунты**](https://kb.comindware.ru/article.php?id=5579)».
 
-_![Список членов ролей](https://kb.comindware.ru/assets/account_permission_audit_role_members.png)_
+_![Список членов ролей](/platform/v5.0/administration/account_administration/img/account_permission_audit_role_members.png)_
 
 ## Связанные статьи
 
-**[Аккаунты. Создание, настройка, замещение, привязка к шаблону аккаунта, назначение лицензий, удаление](https://kb.comindware.ru/article.php?id=4653)**
+- *[Аккаунты. Создание, настройка, замещение, привязка к шаблону аккаунта, назначение лицензий, удаление](https://kb.comindware.ru/article.php?id=5579)*

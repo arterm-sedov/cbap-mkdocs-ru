@@ -2,7 +2,7 @@
 title: 'Записи и коллекции. Получение ID выбранных записей с помощью N3'
 kbId: 5100
 url: 'https://kb.comindware.ru/article.php?id=5100'
-updated: '2025-07-01 16:04:25'
+updated: '2026-06-20 18:05:51'
 ---
 
 # Записи и коллекции. Получение ID выбранных записей с помощью N3
@@ -145,8 +145,8 @@ updated: '2025-07-01 16:04:25'
 
 ## Связанные статьи
 
-- [Атрибут типа «Запись»](https://kb.comindware.ru/article.php?id=4780)
-- [Формы](https://kb.comindware.ru/article.php?id=4786)
-- [Правила для формы](https://kb.comindware.ru/article.php?id=4784)
-- [Кнопки](https://kb.comindware.ru/article.php?id=4790)
-- [Сценарии](https://kb.comindware.ru/article.php?id=4717)
+- [Атрибут типа «Запись»](https://kb.comindware.ru/article.php?id=5718)
+- [Формы](https://kb.comindware.ru/article.php?id=5724)
+- [Правила для формы](https://kb.comindware.ru/article.php?id=5721)
+- [Кнопки](https://kb.comindware.ru/article.php?id=5728)
+- [Сценарии](https://kb.comindware.ru/article.php?id=5654)

@@ -2,7 +2,7 @@
 title: 'Обсуждение элементов корпоративной архитектуры'
 kbId: 4827
 url: 'https://kb.comindware.ru/article.php?id=4827'
-updated: '2025-03-04 13:33:16'
+updated: '2026-06-20 18:05:15'
 ---
 
 # Обсуждение элементов корпоративной архитектуры
@@ -46,5 +46,5 @@ _![Просмотр списка обсуждений процессов](/platf
 
 ## Связанные статьи
 
-- *[Просмотр диаграммы](https://kb.comindware.ru/article.php?id=4835#architect_process_architecture_diagram_view)*
-- *[Просмотр реестра оргединиц](https://kb.comindware.ru/article.php?id=4850)*
+- *[Просмотр диаграммы](https://kb.comindware.ru/article.php?id=5590#architect_process_architecture_diagram_view)*
+- *[Просмотр реестра оргединиц](https://kb.comindware.ru/article.php?id=5592)*

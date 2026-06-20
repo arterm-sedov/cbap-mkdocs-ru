@@ -1,37 +1,37 @@
 ---
-title: 'Шаблоны экспорта. Определения, настройка, удаление'
+title: 'Шаблоны экспорта'
 kbId: 4797
 url: 'https://kb.comindware.ru/article.php?id=4797'
-updated: '2024-10-31 11:09:17'
+updated: '2026-06-20 18:05:08'
 ---
 
-# Шаблоны экспорта. Определения, настройка, удаление
+# Шаблоны экспорта
 
 ## Определения
 
 - **Шаблон экспорта** позволяет выгружать данные отдельной записи в формате `DOC`, `XLSX` или `PDF` с требуемым визуальным оформлением.
-- Экспортируемые данные подставляются в поля-заполнители в [файле шаблона](https://kb.comindware.ru/article.php?id=4796).
-- Сформированный файл с экспортируемыми данными можно скачать по [нажатию кнопки](https://kb.comindware.ru/article.php?id=4798) или поместить в [атрибут типа «**Документ**»](https://kb.comindware.ru/article.php?id=4782) с помощью [сценария](https://kb.comindware.ru/article.php?id=4718#scenario_actions).
-- Шаблоны экспорта можно создавать для [шаблонов записей](https://kb.comindware.ru/article.php?id=4759), [шаблонов аккаунтов](https://kb.comindware.ru/article.php?id=4757), [шаблонов оргединиц](https://kb.comindware.ru/article.php?id=4755) и [шаблонов ролей](https://kb.comindware.ru/article.php?id=4760).
+- Экспортируемые данные подставляются в поля-заполнители в [файле шаблона](https://kb.comindware.ru/article.php?id=5730).
+- Сформированный файл с экспортируемыми данными можно скачать по [нажатию кнопки](https://kb.comindware.ru/article.php?id=5732) или поместить в [атрибут типа «**Документ**»](https://kb.comindware.ru/article.php?id=5716) с помощью [сценария](https://kb.comindware.ru/article.php?id=5655#scenario_actions).
+- Шаблоны экспорта можно создавать для [шаблонов записей](https://kb.comindware.ru/article.php?id=5693), [шаблонов аккаунтов](https://kb.comindware.ru/article.php?id=5695), [шаблонов оргединиц](https://kb.comindware.ru/article.php?id=5697) и [шаблонов ролей](https://kb.comindware.ru/article.php?id=5692).
 
 ## Просмотр списка и настройка шаблона экспорта
 
-1. Откройте [шаблон записи](https://kb.comindware.ru/article.php?id=4759), [аккаунта](https://kb.comindware.ru/article.php?id=4757), [оргединицы](https://kb.comindware.ru/article.php?id=4755) или [роли](https://kb.comindware.ru/article.php?id=4760).
+1. Откройте [шаблон записи](https://kb.comindware.ru/article.php?id=5693), [аккаунта](https://kb.comindware.ru/article.php?id=5695), [оргединицы](https://kb.comindware.ru/article.php?id=5697) или [роли](https://kb.comindware.ru/article.php?id=5692).
 2. Откройте вкладку «**Шаблоны экспорта**».
 3. Отобразится список шаблонов экспорта с их свойствами.
 
-   ![Список шаблонов экспорта](https://kb.comindware.ru/assets/export_template_list.png)
+   ![Список шаблонов экспорта](/platform/v5.0/business_apps/templates/export_templates/img/export_template_list.png)
 
    Список шаблонов экспорта
 4. Нажмите кнопку «**Создать**» или дважды нажмите строку шаблона в списке.
 
    Примечание
 
-   При создании шаблона экспорта будет создана соответствующая [кнопка экспорта](https://kb.comindware.ru/article.php?id=4798).
+   При создании шаблона экспорта будет создана соответствующая [кнопка экспорта](https://kb.comindware.ru/article.php?id=5732).
 5. Отобразится окно свойств шаблон экспорта.
 6. Укажите **название шаблона** экспорта.
 7. При необходимости измените **системное имя** шаблона экспорта, сформированное автоматически.
-8. В поле «**Файл шаблона**» укажите файл формата `DOCX` или `XLSX`, в который будут выгружаться данные (см. «*[Подготовка файла шаблона экспорта](https://kb.comindware.ru/article.php?id=4796)*):
+8. В поле «**Файл шаблона**» укажите файл формата `DOCX` или `XLSX`, в который будут выгружаться данные (см. *«[Подготовка файла шаблона экспорта](https://kb.comindware.ru/article.php?id=5730)*):
 
    - **Значение** — выберите файл шаблона на компьютере.
    - **Атрибут** — укажите атрибут типа «**Документ**» текущего или связанного шаблона, в котором хранится ссылка на файл шаблона.
@@ -41,14 +41,14 @@ updated: '2024-10-31 11:09:17'
    - **Значение** — введите имя экспортируемого файла *без расширения файла*. Экспортируемый файл будет иметь такое же расширение, как **файл шаблона** или расширение `PDF`, если установлен флажок «**Экспортировать как PDF**».
    - **Атрибут** — укажите атрибут типа «**Текст**» текущего или связанного шаблона, содержащий имя экспортируемого файла.
    - **Формула**, **N3** — ведите формулу или выражение, возвращающие имя экспортируемого файла.
-10. При необходимости установите флажок «**Экспортировать как PDF**». См. «[Использование шрифтов в шаблонах экспорта в формате PDF](https://kb.comindware.ru/article.php?id=4796#export_template_file_configure_fonts)».
+10. При необходимости установите флажок «**Экспортировать как PDF**». См. «[Использование шрифтов в шаблонах экспорта в формате PDF](https://kb.comindware.ru/article.php?id=5730#export_template_file_configure_fonts)».
 11. Сохраните шаблон экспорта.
 
-_![Настройка свойств шаблона экспорта](https://kb.comindware.ru/assets/export_template_configure.png)_
+_![Настройка свойств шаблона экспорта](/platform/v5.0/business_apps/templates/export_templates/img/export_template_configure.png)_
 
 ## Удаление шаблона экспорта
 
-1. Откройте [шаблон записи](https://kb.comindware.ru/article.php?id=4759), [аккаунта](https://kb.comindware.ru/article.php?id=4757), [оргединицы](https://kb.comindware.ru/article.php?id=4755) или [роли](https://kb.comindware.ru/article.php?id=4760).
+1. Откройте [шаблон записи](https://kb.comindware.ru/article.php?id=5693), [аккаунта](https://kb.comindware.ru/article.php?id=5695), [оргединицы](https://kb.comindware.ru/article.php?id=5697) или [роли](https://kb.comindware.ru/article.php?id=5692).
 2. Откройте вкладку «**Шаблоны экспорта**».
 3. Выберите подлежащие удалению шаблоны с помощью флажков в первом столбце списка.
 4. Нажмите кнопку «**Удалить**».
@@ -56,16 +56,10 @@ _![Настройка свойств шаблона экспорта](https://kb
 
 ## Связанные статьи
 
-**[Подготовка файла шаблона экспорта](https://kb.comindware.ru/article.php?id=4796)**
-
-**[Настройка кнопки экспорта записи](https://kb.comindware.ru/article.php?id=4798)**
-
-**[Настройка шаблона экспорта](https://kb.comindware.ru/article.php?id=4797)**
-
-**[Пример настройки и использования шаблона экспорта авансового отчёта](https://kb.comindware.ru/article.php?id=4795)**
-
-**[Действие «Создать документ по шаблону» в сценарии](https://kb.comindware.ru/article.php?id=4718#scenario_actions)**
-
-**[Шаблон экспорта. Настройка с использованием C#](https://kb.comindware.ru/article.php?id=4793)**
-
-**[Шаблон экспорта. Выгрузка нескольких коллекций и изображений с помощью C#](https://kb.comindware.ru/article.php?id=4792)**
+- *[Подготовка файла шаблона экспорта](https://kb.comindware.ru/article.php?id=5730)*
+- *[Настройка кнопки экспорта записи](https://kb.comindware.ru/article.php?id=5732)*
+- *[Настройка шаблона экспорта](https://kb.comindware.ru/article.php?id=5733)*
+- *[Пример настройки и использования шаблона экспорта авансового отчёта](https://kb.comindware.ru/article.php?id=5731)*
+- *[Действие «Создать документ по шаблону» в сценарии](https://kb.comindware.ru/article.php?id=5655#scenario_actions)*
+- *[Шаблон экспорта. Настройка с использованием C#](https://kb.comindware.ru/article.php?id=5336)*
+- *[Шаблон экспорта. Выгрузка нескольких коллекций и изображений с помощью C#](https://kb.comindware.ru/article.php?id=5338)*

@@ -2,7 +2,7 @@
 title: 'Подключения. Определения, типы, создание, настройка, удаление'
 kbId: 4675
 url: 'https://kb.comindware.ru/article.php?id=4675'
-updated: '2025-12-11 13:14:33'
+updated: '2026-06-20 18:05:53'
 ---
 
 # Подключения. Определения, типы, создание, настройка, удаление
@@ -11,13 +11,13 @@ updated: '2025-12-11 13:14:33'
 
 - **Подключения** используются для интеграции и обмена данными между **Comindware Platform** и внешними системами.
 - **Подключение** обеспечивает физическую передачу данных между системами.
-- Для обмена данными требуется настроить **подключение** и **путь передачи данных**, который обеспечивает преобразование данных между системами. См. *«[Пути передачи данных. Определения, типы, создание, настройка, удаление](https://kb.comindware.ru/article.php?id=4676)».*
+- Для обмена данными требуется настроить **подключение** и **путь передачи данных**, который обеспечивает преобразование данных между системами. См. *«[Пути передачи данных. Определения, типы, создание, настройка, удаление](https://kb.comindware.ru/article.php?id=5302)».*
 - Одно **подключение** можно использовать для нескольких **путей передачи данных**, чтобы не настраивать общие параметры, такие как URL-адрес, учетные данные, ключ API и т. п.
 
 См. также:
 
-- *[Примеры интеграций](https://kb.comindware.ru/category.php?id=875)*
-- *[Интеграция с внешними системами. Общие рекомендации](https://kb.comindware.ru/article.php?id=5091)*
+- *[Примеры интеграций](https://kb.comindware.ru/category.php?id=906)*
+- *[Интеграция с внешними системами. Общие рекомендации](https://kb.comindware.ru/article.php?id=5300)*
 
 ## Ответственность за использование сервисов третьих сторон
 
@@ -29,48 +29,48 @@ updated: '2025-12-11 13:14:33'
 
 Подробные сведения об ответственности сторон см. в ***[Лицензионном соглашении конечного пользователя ПО Comindware](https://www.comindware.ru/policy/)***.
 
-См. также *«[Интеграция с внешними системами. Общие рекомендации](https://kb.comindware.ru/article.php?id=5091)»*.
+См. также *«[Интеграция с внешними системами. Общие рекомендации](https://kb.comindware.ru/article.php?id=5300)»*.
 
 ## Типы подключений
 
 ### Системные подключения
 
-- [Управление версиями через Git](https://kb.comindware.ru/article.php?id=4680)
+- [Управление версиями через Git](https://kb.comindware.ru/article.php?id=5623)
 - Абстрактное подключение
-- [Карты](https://kb.comindware.ru/article.php?id=4679)
-- [Хранилище S3](https://kb.comindware.ru/article.php?id=4677)
+- [Карты](https://kb.comindware.ru/article.php?id=5314)
+- [Хранилище S3](https://kb.comindware.ru/article.php?id=5317)
 
 ### Аутентификация
 
-- [Аутентификация через OpenID Connect](https://kb.comindware.ru/article.php?id=4685)
-- [Active Directory](https://kb.comindware.ru/article.php?id=4687)
+- [Аутентификация через OpenID Connect](https://kb.comindware.ru/article.php?id=5318)
+- [Active Directory](https://kb.comindware.ru/article.php?id=5319)
 
 ### Подключения к офисным приложениям
 
-- [Р7 Офис](https://kb.comindware.ru/article.php?id=4689)
-- [Collabora Online](https://kb.comindware.ru/article.php?id=4688)
+- [Р7 Офис](https://kb.comindware.ru/article.php?id=5322)
+- [Collabora Online](https://kb.comindware.ru/article.php?id=5627)
 
 ### Подключения к электронной почте
 
-- [Получение эл. почты в процессе](https://kb.comindware.ru/article.php?id=4695)
-- [Отправка эл. почты из процесса](https://kb.comindware.ru/article.php?id=4690)
-- [Получение эл. почты через Exchange](https://kb.comindware.ru/article.php?id=4693)
-- [Отправка эл. почты через Exchange](https://kb.comindware.ru/article.php?id=4692)
-- [Получение эл. почты через IMAP](https://kb.comindware.ru/article.php?id=4693)
-- [Отправка почты через SMTP](https://kb.comindware.ru/article.php?id=4692)
+- [Получение эл. почты в процессе](https://kb.comindware.ru/article.php?id=5628)
+- [Отправка эл. почты из процесса](https://kb.comindware.ru/article.php?id=5366)
+- [Получение эл. почты через Exchange](https://kb.comindware.ru/article.php?id=5629)
+- [Отправка эл. почты через Exchange](https://kb.comindware.ru/article.php?id=5630)
+- [Получение эл. почты через IMAP](https://kb.comindware.ru/article.php?id=5629)
+- [Отправка почты через SMTP](https://kb.comindware.ru/article.php?id=5630)
 
 ### Подключения REST и OData
 
-- [Получение веб-запросов](https://kb.comindware.ru/article.php?id=4701)
-- [Отправка веб-запросов](https://kb.comindware.ru/article.php?id=4696)
-- [Синхронизация с веб-сервисом](https://kb.comindware.ru/article.php?id=4702)
-- [Отправка HTTP-запросов](https://kb.comindware.ru/article.php?id=4703)
-- [Получение HTTP-запросов](https://kb.comindware.ru/article.php?id=4700)
+- [Получение веб-запросов](https://kb.comindware.ru/article.php?id=5631)
+- [Отправка веб-запросов](https://kb.comindware.ru/article.php?id=5634)
+- [Синхронизация с веб-сервисом](https://kb.comindware.ru/article.php?id=5632)
+- [Отправка HTTP-запросов](https://kb.comindware.ru/article.php?id=5633)
+- [Получение HTTP-запросов](https://kb.comindware.ru/article.php?id=5311)
 
 ### Подключения к шине сообщений
 
 - Отправка сообщений через Apache Kafka
-- [Получение сообщений через Apache Kafka](https://kb.comindware.ru/article.php?id=4704)
+- [Получение сообщений через Apache Kafka](https://kb.comindware.ru/article.php?id=5635)
 - Отправка сообщений через MSMQ
 - Получение сообщений через MSMQ
 - Отправка сообщений через RabbitMQ
@@ -78,22 +78,22 @@ updated: '2025-12-11 13:14:33'
 
 ### SQL-подключения
 
-- [Отправка запросов в СУБД](https://kb.comindware.ru/article.php?id=4706)
-- [Получение данных из СУБД](https://kb.comindware.ru/article.php?id=4705)
+- [Отправка запросов в СУБД](https://kb.comindware.ru/article.php?id=5374)
+- [Получение данных из СУБД](https://kb.comindware.ru/article.php?id=5347)
 
 ### Пользовательские подключения
 
-- [Отправка сообщений в «СФЕРА Курьер»](https://kb.comindware.ru/article.php?id=5062)
-- [Получение сообщений из «СФЕРА Курьер»](https://kb.comindware.ru/article.php?id=5061)
+- [Отправка сообщений в «СФЕРА Курьер»](https://kb.comindware.ru/article.php?id=5621)
+- [Получение сообщений из «СФЕРА Курьер»](https://kb.comindware.ru/article.php?id=5622)
 
 Примечание
 
-В разделе «**Пользовательские подключения**» также отображаются подключения для [адаптеров](https://kb.comindware.ru/article.php?id=4672).
+В разделе «**Пользовательские подключения**» также отображаются подключения для [адаптеров](https://kb.comindware.ru/article.php?id=5615).
 
 ## Просмотр списка подключений и настройка подключения
 
-1. На странице [«**Администрирование**» – «**Инфраструктура**»](https://kb.comindware.ru/article.php?id=4661) выберите пункт «**Подключения**» *‌*.
-2. Отобразится [список подключений](https://kb.comindware.ru/article.php?id=4675) со следующими сведениями:
+1. На странице [«**Администрирование**» – «**Инфраструктура**»](https://kb.comindware.ru/article.php?id=5608) выберите пункт «**Подключения**» *‌*.
+2. Отобразится [список подключений](https://kb.comindware.ru/article.php?id=5303) со следующими сведениями:
 
    - **ID** — уникальный идентификатор подключения, формируется автоматически.
    - **Системное имя** — уникальное имя подключения.
@@ -114,6 +114,6 @@ _![Список подключений](/platform/v5.0/administration/connection
 
 ## Связанные статьи
 
-- [Пути передачи данных. Определения, типы, создание, настройка, удаление](https://kb.comindware.ru/article.php?id=4676)
-- [Примеры интеграций](https://kb.comindware.ru/category.php?id=875)
-- [Интеграция с внешними системами. Общие рекомендации](https://kb.comindware.ru/article.php?id=5091)
+- [Пути передачи данных. Определения, типы, создание, настройка, удаление](https://kb.comindware.ru/article.php?id=5302)
+- [Примеры интеграций](https://kb.comindware.ru/category.php?id=906)
+- [Интеграция с внешними системами. Общие рекомендации](https://kb.comindware.ru/article.php?id=5300)

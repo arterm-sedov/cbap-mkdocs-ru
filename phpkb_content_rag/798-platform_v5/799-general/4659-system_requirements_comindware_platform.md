@@ -2,7 +2,7 @@
 title: 'Системные требования Comindware Platform'
 kbId: 4659
 url: 'https://kb.comindware.ru/article.php?id=4659'
-updated: '2026-04-03 12:15:29'
+updated: '2026-06-20 18:04:42'
 ---
 
 # Системные требования Comindware Platform
@@ -249,5 +249,5 @@ updated: '2026-04-03 12:15:29'
 
 ## Связанные статьи
 
-- [Развёртывание ПО. Архитектура и ИТ-ландшафт](https://kb.comindware.ru/article.php?id=4596)
-- [Обеспечение высокой доступности и отказоустойчивости](https://kb.comindware.ru/article.php?id=5079)
+- [Развёртывание ПО. Архитектура и ИТ-ландшафт](https://kb.comindware.ru/article.php?id=5443)
+- [Обеспечение высокой доступности и отказоустойчивости](https://kb.comindware.ru/article.php?id=5445)

@@ -2,7 +2,7 @@
 title: 'Эл. почта. Парсинг адреса. Извлечение имени пользователя'
 kbId: 4983
 url: 'https://kb.comindware.ru/article.php?id=4983'
-updated: '2025-10-03 13:02:08'
+updated: '2026-06-20 18:06:18'
 ---
 
 # Эл. почта. Парсинг адреса. Извлечение имени пользователя
@@ -39,8 +39,8 @@ SUBSTRING($Адрес, 0, INDEXOF($Адрес, "@"))
 
 ## Связанные статьи
 
-- [Парсинг ИД процесса из темы письма](https://kb.comindware.ru/article.php?id=4978)
-- [Эл. почта в процессе. Отправка, получение и обработка](https://kb.comindware.ru/article.php?id=4691)
-- [Получение эл. почты и веб-запросов в процессе](https://kb.comindware.ru/article.php?id=4695)
-- [Список функций языка формул Comindware](https://kb.comindware.ru/article.php?id=4993)
-- [Сценарии](https://kb.comindware.ru/article.php?id=4717)
+- [Парсинг ИД процесса из темы письма](https://kb.comindware.ru/article.php?id=5223)
+- [Эл. почта в процессе. Отправка, получение и обработка](https://kb.comindware.ru/article.php?id=5375)
+- [Получение эл. почты и веб-запросов в процессе](https://kb.comindware.ru/article.php?id=5628)
+- [Список функций языка формул Comindware](https://kb.comindware.ru/article.php?id=5218)
+- [Сценарии](https://kb.comindware.ru/article.php?id=5654)

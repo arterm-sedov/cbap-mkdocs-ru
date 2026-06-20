@@ -2,7 +2,7 @@
 title: 'Apache Ignite. Дефрагментация данных'
 kbId: 4603
 url: 'https://kb.comindware.ru/article.php?id=4603'
-updated: '2025-12-22 12:20:20'
+updated: '2026-06-20 18:04:28'
 ---
 
 # Apache Ignite. Дефрагментация данных
@@ -201,6 +201,6 @@ updated: '2025-12-22 12:20:20'
 
 ## Связанные статьи
 
-- [Резервное копирование и восстановление](https://kb.comindware.ru/article.php?id=4642)
+- [Резервное копирование и восстановление](https://kb.comindware.ru/article.php?id=5566)
 - [Дефрагментация персистентного хранилища (руководство Apache Ignite, английский язык)](https://ignite.apache.org/docs/2.11.1/persistence/native-persistence-defragmentation)
 - [Активация, деактивация и управление топологией (руководство Apache Ignite, английский язык)](https://ignite.apache.org/docs/2.11.1/tools/control-script#activation-deactivation-and-topology-management)

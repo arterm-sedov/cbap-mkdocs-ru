@@ -2,7 +2,7 @@
 title: 'Атрибут «Дата и время». Форматирование значений с помощью формул и N3'
 kbId: 4977
 url: 'https://kb.comindware.ru/article.php?id=4977'
-updated: '2025-06-30 10:19:48'
+updated: '2026-06-20 18:06:19'
 ---
 
 # Атрибут «Дата и время». Форматирование значений с помощью формул и N3
@@ -26,14 +26,14 @@ updated: '2025-06-30 10:19:48'
   ```
 - Значение даты и времени отображается в соответствии с настройками часового пояса. См.:
 
-  - *[Атрибут типа «Часовой пояс»](https://kb.comindware.ru/article.php?id=5098)*
-  - *[Настройка поля атрибута типа «**Дата и время**» на форме](https://kb.comindware.ru/article.php?id=4785#form_dynamic_elements_date_time)*
+  - *[Атрибут типа «Часовой пояс»](https://kb.comindware.ru/article.php?id=5698)*
+  - *[Настройка поля атрибута типа «**Дата и время**» на форме](https://kb.comindware.ru/article.php?id=5723#form_dynamic_elements_date_time)*
 - Исходный формат отображения даты и времени задаётся в свойствах атрибута из готового перечня. Этот формат используется при отображении даты и времени на формах, в таблицах и карточках, а также при выгрузке данных с помощью шаблонов экспорта. См.:
-  - *[Свойства атрибута](https://kb.comindware.ru/article.php?id=4777#attribute_date_time_properties)*
-  - *[Импорт и экспорт значений даты и времени](https://kb.comindware.ru/article.php?id=4777#attribute_date_time_import_export)*
+  - *[Свойства атрибута](https://kb.comindware.ru/article.php?id=5701#attribute_date_time_properties)*
+  - *[Импорт и экспорт значений даты и времени](https://kb.comindware.ru/article.php?id=5701#attribute_date_time_import_export)*
 - Значение даты и времени можно форматировать при объявлении, вычислении и экспорте. См.:
-  - *[Символы форматирования дат и времени](https://kb.comindware.ru/article.php?id=4794#export_template_file_formula_format_values_date_time_formatting_symbols)*
-  - *[Атрибут «Дата и время». Форматирование значений с помощью формул и N3](https://kb.comindware.ru/article.php?id=4977)*
+  - *[Символы форматирования дат и времени](https://kb.comindware.ru/article.php?id=5217#export_template_file_formula_format_values_date_time_formatting_symbols)*
+  - *[Атрибут «Дата и время». Форматирование значений с помощью формул и N3](https://kb.comindware.ru/article.php?id=5222)*
 
 ## Прикладная задача
 
@@ -127,8 +127,8 @@ updated: '2025-06-30 10:19:48'
 
    Подробные примеры передачи данных с помощью HTTP см. в статьях:
 
-   - *[HTTP-запросы типа GET. Отправка запроса и обработка ответа в формате JSON](https://kb.comindware.ru/article.php?id=4699)*
-   - *[HTTP-запросы типа POST. Отправка и получение ответа](https://kb.comindware.ru/article.php?id=5075)*
+   - *[HTTP-запросы типа GET. Отправка запроса и обработка ответа в формате JSON](https://kb.comindware.ru/article.php?id=5312)*
+   - *[HTTP-запросы типа POST. Отправка и получение ответа](https://kb.comindware.ru/article.php?id=5304)*
 
 ## Тестирование
 
@@ -142,10 +142,10 @@ updated: '2025-06-30 10:19:48'
 
 ## Связанные статьи
 
-- [Атрибут типа «Дата и время»](https://kb.comindware.ru/article.php?id=4777)
-- [Настройка поля атрибута типа «Дата и время» на форме](https://kb.comindware.ru/article.php?id=4785#form_dynamic_elements_date_time)
-- [Атрибут типа «Часовой пояс»](https://kb.comindware.ru/article.php?id=5098)
-- [Язык формул](https://kb.comindware.ru/category.php?id=880)
-- [Язык N3](https://kb.comindware.ru/category.php?id=877)
-- [HTTP-запросы типа GET. Отправка запроса и обработка ответа в формате JSON](https://kb.comindware.ru/article.php?id=4699)
-- [HTTP-запросы типа POST. Отправка и получение ответа](https://kb.comindware.ru/article.php?id=5075)
+- [Атрибут типа «Дата и время»](https://kb.comindware.ru/article.php?id=5701)
+- [Настройка поля атрибута типа «Дата и время» на форме](https://kb.comindware.ru/article.php?id=5723#form_dynamic_elements_date_time)
+- [Атрибут типа «Часовой пояс»](https://kb.comindware.ru/article.php?id=5698)
+- [Язык формул](https://kb.comindware.ru/category.php?id=901)
+- [Язык N3](https://kb.comindware.ru/category.php?id=903)
+- [HTTP-запросы типа GET. Отправка запроса и обработка ответа в формате JSON](https://kb.comindware.ru/article.php?id=5312)
+- [HTTP-запросы типа POST. Отправка и получение ответа](https://kb.comindware.ru/article.php?id=5304)

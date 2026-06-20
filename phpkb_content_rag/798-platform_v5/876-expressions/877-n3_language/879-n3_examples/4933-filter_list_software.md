@@ -2,7 +2,7 @@
 title: 'Фильтр списка по создателю'
 kbId: 4933
 url: 'https://kb.comindware.ru/article.php?id=4933'
-updated: '2026-06-17 14:09:53'
+updated: '2026-06-20 18:06:07'
 ---
 
 # Фильтр списка по создателю

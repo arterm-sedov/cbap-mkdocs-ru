@@ -2,7 +2,7 @@
 title: 'Факторы, влияющие на производительность. Рекомендации по оптимизации'
 kbId: 4712
 url: 'https://kb.comindware.ru/article.php?id=4712'
-updated: '2025-10-24 17:45:26'
+updated: '2026-06-20 18:06:29'
 ---
 
 # Факторы, влияющие на производительность. Рекомендации по оптимизации
@@ -153,10 +153,10 @@ updated: '2025-10-24 17:45:26'
 1. **Мониторинг и трассировка**
 
    - Используйте инструменты трассировки мониторинга работы **Comindware Platform**для выявления узких мест:
-   - страницу «[Производительность](https://kb.comindware.ru/article.php?id=4669)»;
-   - страницу «[Журналы событий](https://kb.comindware.ru/article.php?id=4673)»;
-   - страницу «[Мониторинг](https://kb.comindware.ru/article.php?id=4666)»;
-   - [файловые журналы](https://kb.comindware.ru/article.php?id=4623);
+   - страницу «[Производительность](https://kb.comindware.ru/article.php?id=5620)»;
+   - страницу «[Журналы событий](https://kb.comindware.ru/article.php?id=5614)»;
+   - страницу «[Мониторинг](https://kb.comindware.ru/article.php?id=5617)»;
+   - [файловые журналы](https://kb.comindware.ru/article.php?id=5557);
    - тайминги запросов браузера;
    - Используйте инструменты профилирования производительности вебсайта, например Webpagetest, профайлер JavaScript в Chrome;
    - Используйте инструменты мониторинга производительности сервера, например Zabbix, Prometheus, Grafana, VmStat (`sysstat`), `top`, `htop`, `perf` и `flamegraph.pl`, .

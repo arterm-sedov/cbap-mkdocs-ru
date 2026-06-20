@@ -2,7 +2,7 @@
 title: 'Перечень поддерживаемых тегов и элементов HTML'
 kbId: 4912
 url: 'https://kb.comindware.ru/article.php?id=4912'
-updated: '2026-06-17 14:09:52'
+updated: '2026-06-20 18:05:49'
 ---
 
 # Перечень поддерживаемых тегов и элементов HTML
@@ -61,6 +61,6 @@ updated: '2026-06-17 14:09:52'
 
 ## Связанные статьи
 
-- [Атрибут типа «Текст»](https://kb.comindware.ru/article.php?id=4768)
-- [Цветовой индикатор в таблице. Настройка отображения](https://kb.comindware.ru/article.php?id=4888)
-- [Язык формул](https://kb.comindware.ru/category.php?id=880)
+- [Атрибут типа «Текст»](https://kb.comindware.ru/article.php?id=5710)
+- [Цветовой индикатор в таблице. Настройка отображения](https://kb.comindware.ru/article.php?id=5349)
+- [Язык формул](https://kb.comindware.ru/category.php?id=901)

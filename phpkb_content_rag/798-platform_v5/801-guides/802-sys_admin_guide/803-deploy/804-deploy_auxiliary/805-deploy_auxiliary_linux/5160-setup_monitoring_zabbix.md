@@ -2,7 +2,7 @@
 title: 'Настройка мониторинга с использованием Zabbix'
 kbId: 5160
 url: 'https://kb.comindware.ru/article.php?id=5160'
-updated: '2026-04-24 16:50:26'
+updated: '2026-06-20 18:04:29'
 ---
 
 # Настройка мониторинга с использованием Zabbix

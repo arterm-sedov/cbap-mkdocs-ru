@@ -2,7 +2,7 @@
 title: 'Аутентификация, авторизация и сеансы пользователей'
 kbId: 4656
 url: 'https://kb.comindware.ru/article.php?id=4656'
-updated: '2025-09-08 17:17:42'
+updated: '2026-06-20 18:04:40'
 ---
 
 # Аутентификация, авторизация и сеансы пользователей
@@ -36,9 +36,9 @@ updated: '2025-09-08 17:17:42'
 
 ## Связанные статьи
 
-- [Самостоятельная регистрация и вход через сервер каталогов. Настройка](https://kb.comindware.ru/article.php?id=4663)
-- [Ключи аутентификации API. Определения, настройка, удаление](https://kb.comindware.ru/article.php?id=4674)
-- [Сервер каталогов. Настройка подключения](https://kb.comindware.ru/article.php?id=4687)
-- [Linux. Аутентификация через Active Directory. Настройка контроллера домена и экземпляра ПО](https://kb.comindware.ru/article.php?id=4605)
-- [Linux. Аутентификация через единый вход (SSO). Настройка контроллера домена, экземпляра ПО и компьютера конечного пользователя](https://kb.comindware.ru/article.php?id=4613)
-- [Windows. Настройка единого входа (SSO-аутентификации) в ОС Windows](https://kb.comindware.ru/article.php?id=4657)
+- [Самостоятельная регистрация и вход через сервер каталогов. Настройка](https://kb.comindware.ru/article.php?id=5611)
+- [Ключи аутентификации API. Определения, настройка, удаление](https://kb.comindware.ru/article.php?id=5613)
+- [Сервер каталогов. Настройка подключения](https://kb.comindware.ru/article.php?id=5319)
+- [Linux. Аутентификация через Active Directory. Настройка контроллера домена и экземпляра ПО](https://kb.comindware.ru/article.php?id=5345)
+- [Linux. Аутентификация через единый вход (SSO). Настройка контроллера домена, экземпляра ПО и компьютера конечного пользователя](https://kb.comindware.ru/article.php?id=5378)
+- [Windows. Настройка единого входа (SSO-аутентификации) в ОС Windows](https://kb.comindware.ru/article.php?id=5583)

@@ -2,7 +2,7 @@
 title: 'Общие свойства элементов диаграммы процесса'
 kbId: 4725
 url: 'https://kb.comindware.ru/article.php?id=4725'
-updated: '2025-11-11 17:04:20'
+updated: '2026-06-20 18:04:57'
 ---
 
 # Общие свойства элементов диаграммы процесса
@@ -40,6 +40,6 @@ updated: '2025-11-11 17:04:20'
 
 ## Связанные статьи
 
-- *[Элементы диаграммы процесса](https://kb.comindware.ru/article.php?id=4724)*
-- *[Диаграмма процесса](https://kb.comindware.ru/article.php?id=4721)*
-- *[Конструктор диаграммы процесса](https://kb.comindware.ru/article.php?id=4721#process_diagram_designer)*
+- *[Элементы диаграммы процесса](https://kb.comindware.ru/article.php?id=5662)*
+- *[Диаграмма процесса](https://kb.comindware.ru/article.php?id=5657)*
+- *[Конструктор диаграммы процесса](https://kb.comindware.ru/article.php?id=5657#process_diagram_designer)*

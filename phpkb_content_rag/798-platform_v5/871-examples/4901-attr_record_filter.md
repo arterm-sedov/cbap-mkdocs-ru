@@ -2,7 +2,7 @@
 title: 'Атрибут типа «Запись». Настройка фильтра записей для раскрывающегося списка на форме'
 kbId: 4901
 url: 'https://kb.comindware.ru/article.php?id=4901'
-updated: '2026-06-17 14:09:51'
+updated: '2026-06-20 18:05:46'
 ---
 
 # Атрибут типа «Запись». Настройка фильтра записей для раскрывающегося списка на форме
@@ -30,7 +30,7 @@ updated: '2026-06-17 14:09:51'
 1. В конструкторе формы шаблона *«Заявки на командировки»* для поля *«Город»* (`request_city`) в свойстве «**Фильтр**» выберите один из вариантов фильтрации:
 
    - **Атрибут** — выберите атрибут: *Страны* → *Города страны*;
-   - **Формула** — введите выражение на языке Comindware Expression Language:
+   - **Формула** — введите выражение на языке **Comindware Platform** Expression Language:
 
      ```
      from a in db->cities where a->country == $request_country select a->id
@@ -59,11 +59,11 @@ updated: '2026-06-17 14:09:51'
 
 Примечание
 
-С помощью [правил для формы](https://kb.comindware.ru/article.php?id=4784) можно настроить динамическое отображение полей для более удобного заполнения.
+С помощью [правил для формы](https://kb.comindware.ru/article.php?id=5721) можно настроить динамическое отображение полей для более удобного заполнения.
 
 ## Связанные статьи
 
-- [Правила для формы](https://kb.comindware.ru/article.php?id=4784)
-- [Атрибут типа «Запись»](https://kb.comindware.ru/article.php?id=4780)
-- [Динамические элементы формы. Раскрывающийся список](https://kb.comindware.ru/article.php?id=4785#form_dynamic_elements_dropdown)
-- [Язык формул](https://kb.comindware.ru/category.php?id=880)
+- [Правила для формы](https://kb.comindware.ru/article.php?id=5721)
+- [Атрибут типа «Запись»](https://kb.comindware.ru/article.php?id=5718)
+- [Динамические элементы формы. Раскрывающийся список](https://kb.comindware.ru/article.php?id=5723#form_dynamic_elements_dropdown)
+- [Язык формул](https://kb.comindware.ru/category.php?id=901)

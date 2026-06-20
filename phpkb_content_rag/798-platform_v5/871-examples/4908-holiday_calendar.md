@@ -2,7 +2,7 @@
 title: 'Календарь праздников. Настройка и использование'
 kbId: 4908
 url: 'https://kb.comindware.ru/article.php?id=4908'
-updated: '2026-06-17 14:09:52'
+updated: '2026-06-20 18:05:48'
 ---
 
 # Календарь праздников. Настройка и использование
@@ -44,6 +44,6 @@ WORKHOURS(NOW(),18,DURATION("PT9H"),DURATION("PT9H"),LIST((from a in db->hollida
 
 ## Связанные статьи
 
-- [Язык формул](https://kb.comindware.ru/category.php?id=880)
-- [Атрибут типа «Дата и время»](https://kb.comindware.ru/article.php?id=4777)
-- [Пользовательская задача](https://kb.comindware.ru/article.php?id=4730)
+- [Язык формул](https://kb.comindware.ru/category.php?id=901)
+- [Атрибут типа «Дата и время»](https://kb.comindware.ru/article.php?id=5701)
+- [Пользовательская задача](https://kb.comindware.ru/article.php?id=5666)
