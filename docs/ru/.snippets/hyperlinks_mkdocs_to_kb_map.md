@@ -93,7 +93,77 @@
 
 [csharp_developer_guide_cat]: {{ kbCategoryURLPrefix }}919
 
+[platform_v35_cat]: {{ kbCategoryURLPrefix }}377
 
+[platform_v35_examples_cat]: {{ kbCategoryURLPrefix }}381
+
+[platform_v35_formulas_cat]: {{ kbCategoryURLPrefix }}23
+
+[platform_v35_general_cat]: {{ kbCategoryURLPrefix }}380
+
+[platform_v35_troubleshooting_cat]: {{ kbCategoryURLPrefix }}382
+
+[platform_v35_tutorials_cat]: {{ kbCategoryURLPrefix }}19
+
+[platform_v35_user_guide_cat]: {{ kbCategoryURLPrefix }}345
+
+[platform_v47_admin_guide_cat]: {{ kbCategoryURLPrefix }}417
+
+[platform_v47_api_developer_guide_cat]: {{ kbCategoryURLPrefix }}513
+
+[platform_v47_architect_cat]: {{ kbCategoryURLPrefix }}481
+
+[platform_v47_cat]: {{ kbCategoryURLPrefix }}378
+
+[platform_v47_csharp_developer_guide_cat]: {{ kbCategoryURLPrefix }}514
+
+[platform_v47_examples_cat]: {{ kbCategoryURLPrefix }}387
+
+[platform_v47_expressions_cat]: {{ kbCategoryURLPrefix }}389
+
+[platform_v47_general_cat]: {{ kbCategoryURLPrefix }}384
+
+[platform_v47_n3_developer_guide_cat]: {{ kbCategoryURLPrefix }}503
+
+[platform_v47_product_administration_cat]: {{ kbCategoryURLPrefix }}434
+
+[platform_v47_troubleshooting_cat]: {{ kbCategoryURLPrefix }}390
+
+[platform_v47_tutorials_cat]: {{ kbCategoryURLPrefix }}386
+
+[platform_v47_user_guide_cat]: {{ kbCategoryURLPrefix }}425
+
+[platform_v47_developer_guide_toc]: {{ kbArticleURLPrefix }}2580
+
+[platform_v5_admin_guide_cat]: {{ kbCategoryURLPrefix }}802
+
+[platform_v5_api_developer_guide_cat]: {{ kbCategoryURLPrefix }}868
+
+[platform_v5_architect_cat]: {{ kbCategoryURLPrefix }}861
+
+[platform_v5_cat]: {{ kbCategoryURLPrefix }}798
+
+[platform_v5_csharp_developer_guide_cat]: {{ kbCategoryURLPrefix }}869
+
+[platform_v5_examples_cat]: {{ kbCategoryURLPrefix }}871
+
+[platform_v5_expressions_cat]: {{ kbCategoryURLPrefix }}876
+
+[platform_v5_general_cat]: {{ kbCategoryURLPrefix }}799
+
+[platform_v5_integrations_cat]: {{ kbCategoryURLPrefix }}872
+
+[platform_v5_n3_developer_guide_cat]: {{ kbCategoryURLPrefix }}867
+
+[platform_v5_product_administration_cat]: {{ kbCategoryURLPrefix }}818
+
+[platform_v5_troubleshooting_cat]: {{ kbCategoryURLPrefix }}887
+
+[platform_v5_tutorials_cat]: {{ kbCategoryURLPrefix }}870
+
+[platform_v5_user_guide_cat]: {{ kbCategoryURLPrefix }}817
+
+[platform_v5_developer_guide_toc]: {{ kbArticleURLPrefix }}4851
 
 [platform_v6_cat]: {{ kbCategoryURLPrefix }}896
 
