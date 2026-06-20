@@ -3,6 +3,10 @@
 Session discoveries that haven't yet been migrated to durable skills or rules.
 Review before starting related work. Move to skills/rules when stable.
 
+## 2026-06-20
+
+- **Generic/infra commits without a customer ticket default to `#6` (v6) or `#5` (v5).** The `cmwhelp-commit` skill already handles this via branch name fallback, but the convention should be explicit: non-feature, repo-level tasks (tooling, CI, formatting, refactoring) use the version number as ticket reference. Always ask the user for the session ticket number first — only fall back to `#6`/`#5` when the user confirms there is no customer ticket.
+
 ## 2026-06-18
 
 - **`--article-map` is required for both `phpkb_import.py` and `phpkb_import_for_rag.py`.** The full-refresh examples in `phpkb-ingestion` skill (lines 127, 134) omit `--article-map`, which would cause the script to error. Always pass `--article-map .article_id_filename_map_v{version}.json`.
