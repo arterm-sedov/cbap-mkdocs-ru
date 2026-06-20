@@ -69,3 +69,9 @@ Review before starting related work. Move to skills/rules when stable.
 - **Anchors are always lowercase, underscore-separated, English-only.** No Cyrillic in anchors. Run-on CamelCase (`templatesystemname`) is split with underscores (`template_system_name`).
 - **Opening code fence is labeled with language** (` ```cs `, ` ```sql `, ` ```turtle `). Unlabeled fence is a bug. ` ```text ` is not used — bare fences suffice for URL examples.
 - **`hide: tags` has two forms in frontmatter:** simple `hide: tags` or list `hide:\n  - tags`. Only one should exist. Never add the simple form if the list form is already present.
+- **Cherry-picking YAML commits between version branches silently overwrites version-specific content.** The YAML nav files contain version-specific entries (release notes, feature sections like AI, version numbers). When cherry-picking YAML commits from v6 to v5, always:
+  1. Accept `--theirs` for the formatting changes (themed subsections, exclude patterns)
+  2. Then manually restore v5-specific entries (release notes: `5.0.*.md` not `6.0.md`, remove v6-only feature sections like `Работа с ИИ`)
+  3. Also check the hyperlinks map for `kbArticleURLPrefix` entries — they are version-specific and should NOT be cherry-picked between branches
+  4. Verify with `git diff HEAD -- docs/ru/ | Select-String "^[+-]kbId:"` after every batch
+- **Hyperlinks map `kbArticleURLPrefix` entries differ per version branch.** Only absolute external URLs (wikipedia, telegram, etc.) are safe to cherry-pick between v5 and v6. Internal KB article references use different `kbId` values on each branch.
