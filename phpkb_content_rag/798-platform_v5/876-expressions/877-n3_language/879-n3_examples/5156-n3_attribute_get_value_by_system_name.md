@@ -2,7 +2,7 @@
 title: 'Получение значения из атрибута по системному имени, хранящемуся в другом шаблоне с помощью N3'
 kbId: 5156
 url: 'https://kb.comindware.ru/article.php?id=5156'
-updated: '2026-03-11 17:27:13'
+updated: '2026-06-20 18:06:09'
 ---
 
 # Получение значения из атрибута по системному имени, хранящемуся в другом шаблоне с помощью N3
@@ -141,7 +141,7 @@ updated: '2026-03-11 17:27:13'
 
 ## Связанные статьи
 
-- [Язык N3](https://kb.comindware.ru/article.php?id=4931)
-- [Вычисляемые атрибуты](https://kb.comindware.ru/article.php?id=4770)
-- [Атрибут типа «Запись»](https://kb.comindware.ru/article.php?id=4780)
-- [Атрибут типа «Текст»](https://kb.comindware.ru/article.php?id=4768)
+- [Язык N3](https://kb.comindware.ru/article.php?id=5260)
+- [Вычисляемые атрибуты](https://kb.comindware.ru/article.php?id=5708)
+- [Атрибут типа «Запись»](https://kb.comindware.ru/article.php?id=5718)
+- [Атрибут типа «Текст»](https://kb.comindware.ru/article.php?id=5710)

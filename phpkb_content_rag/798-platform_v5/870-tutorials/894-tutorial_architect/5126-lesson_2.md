@@ -2,7 +2,7 @@
 title: 'Урок 2. Вход в систему, рабочий стол, навигация, роли, оргструктура'
 kbId: 5126
 url: 'https://kb.comindware.ru/article.php?id=5126'
-updated: '2025-08-12 18:26:53'
+updated: '2026-06-20 18:05:34'
 ---
 
 # Урок 2. Вход в систему, рабочий стол, навигация, роли, оргструктура
@@ -16,10 +16,10 @@ updated: '2025-08-12 18:26:53'
 **Предусловия:**
 
 - Имеется доступ к веб-сайту с **Comindware Platform Enterprise**.
-- Пройден *[урок 1 «Обзор возможностей Comindware Platform Enterprise и понятий BPMS»](https://kb.comindware.ru/article.php?id=5125)*
+- Пройден *[урок 1 «Обзор возможностей Comindware Platform Enterprise и понятий BPMS»](https://kb.comindware.ru/article.php?id=5422)*
 - **Рекомендуется** ознакомиться со следующими материалами, чтобы получить базовые навыки работы с **Comindware Platform Enterprise**:
-  - *[Спаравочник по модулю «Корпоративная архитектура»](https://kb.comindware.ru/article.php?id=4828#architect_description)*
-  - *Курс «[Аналитик. Ознакомительный](https://kb.comindware.ru/article.php?id=5112)»*
+  - *[Спаравочник по модулю «Корпоративная архитектура»](https://kb.comindware.ru/article.php?id=5588#architect_description)*
+  - *Курс «[Аналитик. Ознакомительный](https://kb.comindware.ru/article.php?id=5397)»*
 
 **Расчётная продолжительность:** 45 мин.
 
@@ -173,7 +173,7 @@ _![Страница входа в Comindware Platform Enterprise](/platform/v5.0
 
 Для каждого приложения в **Comindware Platform Enterprise** настраивается отдельный рабочий стол.
 
-См. *«[Рабочий стол «Корпоративная архитектура»](https://kb.comindware.ru/article.php?id=4828#architect_desktop_operations)»*.
+См. *«[Рабочий стол «Корпоративная архитектура»](https://kb.comindware.ru/article.php?id=5588#architect_desktop_operations)»*.
 
 1. Откройте приложение *«Архитектура компании»*.
 2. На странице администрирования приложения выберите пункт «**Разделы навигации**» *‌*.
@@ -194,9 +194,7 @@ _![Страница входа в Comindware Platform Enterprise](/platform/v5.0
     - В панели свойств раздела навигации нажмите ссылку «**0 ролей**».
     - Отобразится окно выбора ролей.
     - В левом списке ролей дважды нажмите роль *«Архитектор»*, чтобы переместить её в правый список.
-    - Нажмите кнопку «**Применить**».
-
-    ![Назначение роли разделу навигации](/platform/v5.0/tutorials/tutorial_architect/img/lesson_2_navigation_secttion_role_assign.png)
+    - Нажмите кнопку «**Применить**».![Назначение роли разделу навигации](/platform/v5.0/tutorials/tutorial_architect/img/lesson_2_navigation_secttion_role_assign.png)
 
     Назначение роли разделу навигации
 12. Сохраните раздел навигации.
@@ -399,21 +397,21 @@ _![Отображение атрибута «Отдел» в свойствах 
 
 Теперь у вас есть основа для дальнейшего моделирования архитектуры компании.
 
-В ходе [следующего урока](https://kb.comindware.ru/article.php?id=5127) вы освоите моделирование процессной архитектуры, построение диаграмм бизнес-способностей и BPMN-диаграмм, импорт диаграмм и экспорт регламентов процессов.
+В ходе [следующего урока](https://kb.comindware.ru/article.php?id=5420) вы освоите моделирование процессной архитектуры, построение диаграмм бизнес-способностей и BPMN-диаграмм, импорт диаграмм и экспорт регламентов процессов.
 
 ## Связанные статьи
 
 Подробные сведения о настройке **Comindware Platform Enterprise** представлены в руководстве пользователя:
 
-- [Использование интерфейса Comindware Platform Enterprise](https://kb.comindware.ru/article.php?id=5105)
-- [Приложения. Настройка](https://kb.comindware.ru/article.php?id=4714)
-- [Панель навигации. Настройка](https://kb.comindware.ru/article.php?id=4809)
-- [Рабочий стол. Настройка](https://kb.comindware.ru/article.php?id=4813)
-- [Роли. Настройка](https://kb.comindware.ru/article.php?id=4803)
-- [Построение организационной структуры](https://kb.comindware.ru/article.php?id=4850)
-- [Просмотр и редактирование организационно-функциональной диаграммы](https://kb.comindware.ru/article.php?id=4848)
-- [Атрибуты. Настройка](https://kb.comindware.ru/article.php?id=4772)
-- [Формы. Настройка](https://kb.comindware.ru/article.php?id=4786)
-- [Правила для форм. Настройка](https://kb.comindware.ru/article.php?id=4784)
-- [Язык формул. Использование](https://kb.comindware.ru/category.php?id=880)
-- [Язык N3. Использование](https://kb.comindware.ru/article.php?id=4931)
+- [Использование интерфейса Comindware Platform Enterprise](https://kb.comindware.ru/article.php?id=5599)
+- [Приложения. Настройка](https://kb.comindware.ru/article.php?id=5643)
+- [Панель навигации. Настройка](https://kb.comindware.ru/article.php?id=5644)
+- [Рабочий стол. Настройка](https://kb.comindware.ru/article.php?id=5646)
+- [Роли. Настройка](https://kb.comindware.ru/article.php?id=5738)
+- [Построение организационной структуры](https://kb.comindware.ru/article.php?id=5592)
+- [Просмотр и редактирование организационно-функциональной диаграммы](https://kb.comindware.ru/article.php?id=5591)
+- [Атрибуты. Настройка](https://kb.comindware.ru/article.php?id=5706)
+- [Формы. Настройка](https://kb.comindware.ru/article.php?id=5724)
+- [Правила для форм. Настройка](https://kb.comindware.ru/article.php?id=5721)
+- [Язык формул. Использование](https://kb.comindware.ru/category.php?id=901)
+- [Язык N3. Использование](https://kb.comindware.ru/article.php?id=5260)

@@ -2,7 +2,7 @@
 title: 'Импорт связанных данных из таблицы Excel'
 kbId: 4881
 url: 'https://kb.comindware.ru/article.php?id=4881'
-updated: '2026-06-17 14:09:50'
+updated: '2026-06-20 18:05:45'
 ---
 
 # Импорт связанных данных из таблицы Excel
@@ -21,7 +21,7 @@ updated: '2026-06-17 14:09:50'
 2. Укажите в отдельном столбце файла значение для связи с основной записью:
 
    - **ID** основной записи;
-   - значение её [атрибута-заголовка](https://kb.comindware.ru/article.php?id=4769), если оно используется как формат сопоставления **Name**.
+   - значение её [атрибута-заголовка](https://kb.comindware.ru/article.php?id=5709), если оно используется как формат сопоставления **Name**.
 
 После импорта записи будут связаны с основной записью, а таблица на её форме заполнится автоматически.
 
@@ -69,7 +69,7 @@ _![Таблица заказов клиента](https://kb.comindware.ru/assets
 
 ## Связанные статьи
 
-- [Импорт данных в шаблон](https://kb.comindware.ru/article.php?id=4802)
-- [Атрибут типа «Запись»](https://kb.comindware.ru/article.php?id=4780)
-- [Атрибут-заголовок записей шаблона](https://kb.comindware.ru/article.php?id=4769)
-- [Шаблон записи](https://kb.comindware.ru/article.php?id=4759)
+- [Импорт данных в шаблон](https://kb.comindware.ru/article.php?id=5737)
+- [Атрибут типа «Запись»](https://kb.comindware.ru/article.php?id=5718)
+- [Атрибут-заголовок записей шаблона](https://kb.comindware.ru/article.php?id=5709)
+- [Шаблон записи](https://kb.comindware.ru/article.php?id=5693)

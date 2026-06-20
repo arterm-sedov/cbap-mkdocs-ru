@@ -2,7 +2,7 @@
 title: 'Отправка уведомлений с помощью Telegram. Пример: настройка подключения, пути передачи данных, сценария, приложения и Telegram-бота'
 kbId: 4926
 url: 'https://kb.comindware.ru/article.php?id=4926'
-updated: '2026-06-17 14:09:52'
+updated: '2026-06-20 18:06:00'
 ---
 
 # Отправка уведомлений с помощью Telegram. Пример: настройка подключения, пути передачи данных, сценария, приложения и Telegram-бота
@@ -134,8 +134,8 @@ updated: '2026-06-17 14:09:52'
 
 ## Связанные статьи
 
-- [Solution API](https://kb.comindware.ru/article.php?id=4863)
-- [Кнопки. Определения, настройка, удаление](https://kb.comindware.ru/article.php?id=4790)
-- [Подключения. Определения, типы, создание, настройка, удаление](https://kb.comindware.ru/article.php?id=4675)
-- [Пути передачи данных. Определения, типы, создание, настройка, удаление](https://kb.comindware.ru/article.php?id=4676)
-- [Сценарии. Определения, создание, настройка, использование](https://kb.comindware.ru/article.php?id=4717)
+- [Solution API](https://kb.comindware.ru/article.php?id=5333)
+- [Кнопки. Определения, настройка, удаление](https://kb.comindware.ru/article.php?id=5728)
+- [Подключения. Определения, типы, создание, настройка, удаление](https://kb.comindware.ru/article.php?id=5303)
+- [Пути передачи данных. Определения, типы, создание, настройка, удаление](https://kb.comindware.ru/article.php?id=5302)
+- [Сценарии. Определения, создание, настройка, использование](https://kb.comindware.ru/article.php?id=5654)

@@ -2,7 +2,7 @@
 title: 'Ошибка «Идентификатор «XXX» не найден» на диаграмме процесса'
 kbId: 5052
 url: 'https://kb.comindware.ru/article.php?id=5052'
-updated: '2025-10-24 17:35:22'
+updated: '2026-06-20 18:06:30'
 ---
 
 # Ошибка «Идентификатор «XXX» не найден» на диаграмме процесса
@@ -22,6 +22,6 @@ updated: '2025-10-24 17:35:22'
 
 ## Связанные статьи
 
-- [Язык формул. Общие сведения](https://kb.comindware.ru/category.php?id=880)
-- [Написание выражений на языке N3](https://kb.comindware.ru/article.php?id=4852)
-- [Отладка формул, выражений N3, сценариев и C#-скриптов](https://kb.comindware.ru/article.php?id=4929)
+- [Язык формул. Общие сведения](https://kb.comindware.ru/category.php?id=901)
+- [Написание выражений на языке N3](https://kb.comindware.ru/article.php?id=5251)
+- [Отладка формул, выражений N3, сценариев и C#-скриптов](https://kb.comindware.ru/article.php?id=5164)

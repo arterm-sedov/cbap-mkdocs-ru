@@ -2,7 +2,7 @@
 title: 'Примеры событий в файловых журналах'
 kbId: 4618
 url: 'https://kb.comindware.ru/article.php?id=4618'
-updated: '2026-01-29 18:12:58'
+updated: '2026-06-20 18:04:33'
 ---
 
 # Примеры событий в файловых журналах
@@ -1404,4 +1404,4 @@ archiveAboveSize: 1048576000
 
 ## Связанные статьи
 
-- *[Подсистема журналирования](https://kb.comindware.ru/article.php?id=4623)*
+- *[Подсистема журналирования](https://kb.comindware.ru/article.php?id=5557)*

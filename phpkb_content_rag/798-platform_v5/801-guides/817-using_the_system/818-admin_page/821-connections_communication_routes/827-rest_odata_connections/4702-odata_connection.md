@@ -1,11 +1,11 @@
 ---
-title: 'Синхронизация с веб-сервисом. Настройка подключения'
+title: 'Синхронизация с веб-сервисом'
 kbId: 4702
 url: 'https://kb.comindware.ru/article.php?id=4702'
-updated: '2025-02-21 17:39:49'
+updated: '2026-06-20 18:04:52'
 ---
 
-# Синхронизация с веб-сервисом. Настройка подключения
+# Синхронизация с веб-сервисом
 
 ## Настройка подключения к OData-сервису
 
@@ -13,10 +13,10 @@ updated: '2025-02-21 17:39:49'
 
 После настройки подключения к OData-сервису настройте синхронизацию данных между ним и **Comindware Platform**. См.:
 
-- *[Синхронизация с веб-сервисом. Интеграция по OData](https://kb.comindware.ru/article.php?id=4697)*
-- *[Интеграция с 1С по OData. Настройка для импорта данных](https://kb.comindware.ru/article.php?id=4698)*
+- *[Синхронизация с веб-сервисом. Интеграция по OData](https://kb.comindware.ru/article.php?id=5308)*
+- *[Интеграция с 1С по OData. Настройка для импорта данных](https://kb.comindware.ru/article.php?id=5309)*
 
-1. На странице «**Администрирование**» выберите пункт «**Инфраструктура**» — «[**Подключения**](https://kb.comindware.ru/article.php?id=4675)» *‌*.
+1. На странице «**Администрирование**» выберите пункт «**Инфраструктура**» — «[**Подключения**](https://kb.comindware.ru/article.php?id=5303)» *‌*.
 2. Откройте или создайте подключение типа «**Подключения REST и OData**» — «**Синхронизация с веб-сервисом**».
 
    ![Создание подключения для синхронизации с веб-сервисом](/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/../img/odata_integration_connection_create.png)
@@ -62,9 +62,9 @@ updated: '2025-02-21 17:39:49'
    ![Настройка свойств подключения для синхронизации с веб-сервисом](/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/../img/odata_integration_connection_properties.png)
 
    Настройка свойств подключения для синхронизации с веб-сервисом
-6. Настройте синхронизацию данных между OData-сервисом и **Comindware Platform**. См. *«[Синхронизация с веб-сервисом. Интеграция по OData](https://kb.comindware.ru/article.php?id=4697)»*.
+6. Настройте синхронизацию данных между OData-сервисом и **Comindware Platform**. См. *«[Синхронизация с веб-сервисом. Интеграция по OData](https://kb.comindware.ru/article.php?id=5308)»*.
 
 ## Связанные статьи
 
-- *[Синхронизация с веб-сервисом. Интеграция по OData](https://kb.comindware.ru/article.php?id=4697)*
-- *[Интеграция с 1С по OData. Настройка для импорта данных](https://kb.comindware.ru/article.php?id=4698)*
+- *[Синхронизация с веб-сервисом. Интеграция по OData](https://kb.comindware.ru/article.php?id=5308)*
+- *[Интеграция с 1С по OData. Настройка для импорта данных](https://kb.comindware.ru/article.php?id=5309)*

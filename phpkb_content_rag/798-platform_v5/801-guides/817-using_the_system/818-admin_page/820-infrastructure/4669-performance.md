@@ -2,7 +2,7 @@
 title: 'Производительность. Просмотр и сброс показателей'
 kbId: 4669
 url: 'https://kb.comindware.ru/article.php?id=4669'
-updated: '2026-01-14 15:09:30'
+updated: '2026-06-20 18:04:45'
 ---
 
 # Производительность. Просмотр и сброс показателей
@@ -21,7 +21,7 @@ updated: '2026-01-14 15:09:30'
 
 ## Просмотр показателей производительности
 
-1. В разделе «[**Администрирование**» — «**Инфраструктура**](https://kb.comindware.ru/article.php?id=4661)» выберите пункт «**Производительность**» *‌*:
+1. В разделе «[**Администрирование**» — «**Инфраструктура**](https://kb.comindware.ru/article.php?id=5608)» выберите пункт «**Производительность**» *‌*:
 2. Отобразится страница «**Производительность**»:
 
    ![Страница «Производительность»](/platform/v5.0/administration/infrastructure/img/performance_page.png)
@@ -100,6 +100,6 @@ _![Показатели производительности сеансов вы
 
 ## Связанные статьи
 
-- *[Мониторинг](https://kb.comindware.ru/article.php?id=4666)*
-- *[Журналы событий](https://kb.comindware.ru/article.php?id=4673)*
-- *[Подсистема журналирования](https://kb.comindware.ru/article.php?id=4623)*
+- *[Мониторинг](https://kb.comindware.ru/article.php?id=5617)*
+- *[Журналы событий](https://kb.comindware.ru/article.php?id=5614)*
+- *[Подсистема журналирования](https://kb.comindware.ru/article.php?id=5557)*

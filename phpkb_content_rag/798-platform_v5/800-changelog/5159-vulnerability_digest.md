@@ -2,7 +2,7 @@
 title: 'Устранённые уязвимости'
 kbId: 5159
 url: 'https://kb.comindware.ru/article.php?id=5159'
-updated: '2026-04-10 12:36:28'
+updated: '2026-06-20 18:04:23'
 ---
 
 # Устранённые уязвимости
@@ -13,5 +13,5 @@ updated: '2026-04-10 12:36:28'
 
 ## Связанные статьи
 
-- *[Политика в отношении уязвимостей](https://kb.comindware.ru/article.php?id=5157)*
-- *[Обзор версий](https://kb.comindware.ru/article.php?id=4589)*
+- *[Политика в отношении уязвимостей](https://kb.comindware.ru/article.php?id=5427)*
+- *[Обзор версий](https://kb.comindware.ru/article.php?id=5438)*

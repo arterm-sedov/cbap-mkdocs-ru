@@ -2,7 +2,7 @@
 title: 'Начальные события'
 kbId: 4735
 url: 'https://kb.comindware.ru/article.php?id=4735'
-updated: '2025-04-10 16:50:44'
+updated: '2026-06-20 18:04:58'
 ---
 
 # Начальные события
@@ -13,18 +13,18 @@ updated: '2025-04-10 16:50:44'
 
 ## Типы начальных событий
 
-- **[Простое начальное событие](https://kb.comindware.ru/article.php?id=4734)**
-- **[Начальное событие-таймер](https://kb.comindware.ru/article.php?id=4737)**
-- **[Начальное событие-получение сообщения](https://kb.comindware.ru/article.php?id=4736)**
+- **[Простое начальное событие](https://kb.comindware.ru/article.php?id=5673)**
+- **[Начальное событие-таймер](https://kb.comindware.ru/article.php?id=5670)**
+- **[Начальное событие-получение сообщения](https://kb.comindware.ru/article.php?id=5671)**
 
 ## Создание начального события на диаграмме
 
 1. Перетащите начальное событие с панели элементов на поток управления или пустое место диаграммы.
 2. Будет создано **простое начальное событие**.
-3. При необходимости смените [тип события](#типы-начальных-событий) с помощью [меню элемента](https://kb.comindware.ru/article.php?id=4721#process_diagram_call_element_menu).
+3. При необходимости смените [тип события](#типы-начальных-событий) с помощью [меню элемента](https://kb.comindware.ru/article.php?id=5657#process_diagram_call_element_menu).
 
 ## Связанные статьи
 
-- *[События](https://kb.comindware.ru/article.php?id=4733)*
-- *[Элементы диаграммы процесса](https://kb.comindware.ru/article.php?id=4724)*
-- *[Редактирование диаграммы процесса](https://kb.comindware.ru/article.php?id=4721#process_diagram_designer)*
+- *[События](https://kb.comindware.ru/article.php?id=5669)*
+- *[Элементы диаграммы процесса](https://kb.comindware.ru/article.php?id=5662)*
+- *[Редактирование диаграммы процесса](https://kb.comindware.ru/article.php?id=5657#process_diagram_designer)*

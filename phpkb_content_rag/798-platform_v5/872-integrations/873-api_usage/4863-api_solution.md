@@ -2,7 +2,7 @@
 title: 'Методы Solution API'
 kbId: 4863
 url: 'https://kb.comindware.ru/article.php?id=4863'
-updated: '2025-09-03 16:24:33'
+updated: '2026-06-20 18:05:55'
 ---
 
 # Методы Solution API
@@ -88,6 +88,6 @@ _![Интерфейс Swagger для метода Solution API, создающе
 
 ## Связанные статьи
 
-- *[Общие сведения об API Comindware Platform](https://kb.comindware.ru/article.php?id=4860)*
-- *[Методы System Core API](https://kb.comindware.ru/article.php?id=4862)*
-- *[Методы Web API](https://kb.comindware.ru/article.php?id=4861)*
+- *[Общие сведения об API Comindware Platform](https://kb.comindware.ru/article.php?id=5332)*
+- *[Методы System Core API](https://kb.comindware.ru/article.php?id=5331)*
+- *[Методы Web API](https://kb.comindware.ru/article.php?id=5330)*

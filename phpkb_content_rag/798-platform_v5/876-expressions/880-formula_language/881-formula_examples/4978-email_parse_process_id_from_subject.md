@@ -2,7 +2,7 @@
 title: 'Эл. почта. Парсинг темы. Извлечение идентификатора процесса'
 kbId: 4978
 url: 'https://kb.comindware.ru/article.php?id=4978'
-updated: '2025-10-03 13:02:32'
+updated: '2026-06-20 18:06:19'
 ---
 
 # Эл. почта. Парсинг темы. Извлечение идентификатора процесса
@@ -43,8 +43,8 @@ SUBSTRING(
 
 ## Связанные статьи
 
-- [Парсинг Email до знака @](https://kb.comindware.ru/article.php?id=4983)
-- [Эл. почта в процессе. Отправка, получение и обработка](https://kb.comindware.ru/article.php?id=4691)
-- [Получение эл. почты и веб-запросов в процессе](https://kb.comindware.ru/article.php?id=4695)
-- [Список функций языка формул Comindware](https://kb.comindware.ru/article.php?id=4993)
-- [Сценарии](https://kb.comindware.ru/article.php?id=4717)
+- [Парсинг Email до знака @](https://kb.comindware.ru/article.php?id=5228)
+- [Эл. почта в процессе. Отправка, получение и обработка](https://kb.comindware.ru/article.php?id=5375)
+- [Получение эл. почты и веб-запросов в процессе](https://kb.comindware.ru/article.php?id=5628)
+- [Список функций языка формул Comindware](https://kb.comindware.ru/article.php?id=5218)
+- [Сценарии](https://kb.comindware.ru/article.php?id=5654)

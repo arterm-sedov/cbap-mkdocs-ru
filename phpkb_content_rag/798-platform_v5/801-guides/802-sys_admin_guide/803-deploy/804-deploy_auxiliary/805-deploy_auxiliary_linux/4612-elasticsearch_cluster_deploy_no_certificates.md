@@ -2,7 +2,7 @@
 title: 'Elasticsearch. Развёртывание без сертификатов подлинности'
 kbId: 4612
 url: 'https://kb.comindware.ru/article.php?id=4612'
-updated: '2025-12-03 10:40:03'
+updated: '2026-06-20 18:04:29'
 ---
 
 # Elasticsearch. Развёртывание без сертификатов подлинности
@@ -346,7 +346,7 @@ cluster.initial_master_nodes:
 
 - [Официальная документация Elasticsearch (английский язык)](https://www.elastic.co/docs/deploy-manage)
 - [Официальная документация OpenSearch (английский язык)](https://docs.opensearch.org/latest/)
-- [Elasticsearch. Настройка SSL-сертификатов](https://kb.comindware.ru/article.php?id=4606)
-- [Elasticsearch. Установка в базовой конфигурации](https://kb.comindware.ru/article.php?id=4601)
-- [Установка, запуск, инициализация и остановка ПО Comindware Platform](https://kb.comindware.ru/article.php?id=4622)
-- [Конфигурация экземпляра, компонентов ПО и служб. Настройка](https://kb.comindware.ru/article.php?id=5067)
+- [Elasticsearch. Настройка SSL-сертификатов](https://kb.comindware.ru/article.php?id=5453)
+- [Elasticsearch. Установка в базовой конфигурации](https://kb.comindware.ru/article.php?id=5457)
+- [Установка, запуск, инициализация и остановка ПО Comindware Platform](https://kb.comindware.ru/article.php?id=5558)
+- [Конфигурация экземпляра, компонентов ПО и служб. Настройка](https://kb.comindware.ru/article.php?id=5554)

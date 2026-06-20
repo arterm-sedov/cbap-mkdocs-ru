@@ -2,7 +2,7 @@
 title: 'Интеграция с Telegram-ботом. Пример: настройка приложения, Telegram и кода бота'
 kbId: 4923
 url: 'https://kb.comindware.ru/article.php?id=4923'
-updated: '2026-06-17 14:09:52'
+updated: '2026-06-20 18:05:59'
 ---
 
 # Интеграция с Telegram-ботом. Пример: настройка приложения, Telegram и кода бота
@@ -68,7 +68,7 @@ Telegram-бот будет представлять собой проект в V
 
 ## Настройка интеграции
 
-1. В Telegram найдите BotFather (<https://t.me/BotFather>) и запросите у него создание бота. Подробные инструкции см. в [официальной документации Telegram](https://core.telegram.org/api).
+1. В Telegram найдите [BotFather](https://t.me/BotFather) и запросите у него создание бота. Подробные инструкции см. в [официальной документации Telegram](https://core.telegram.org/api).
 2. Скачайте и распакуйте проект для Visual Studio с промежуточным ПО по ссылке: [TelegramBotComindwareIntegration.zip](https://kb.comindware.ru/file.php?id=191)
 3. Восстановите библиотеки с помощью команды Restore NuGet Packages: Newtonsoft.Json, RestSharp, Telegram.Bot и Telegram.bot.Extensions.Polling.
 4. При необходимости установите пакет .Net SDK 3.1.
@@ -175,7 +175,7 @@ Telegram-бот будет представлять собой проект в V
 
     Запуск бота
 
-    13. Для взаимодействия с **Comindware Platform** воспользуемся **[Solution API](https://kb.comindware.ru/article.php?id=4863)**.
+    13. Для взаимодействия с **Comindware Platform** воспользуемся **[Solution API](https://kb.comindware.ru/article.php?id=5333)**.
     14. Допишите `/Docs/SolutionApi/` в адресной строке браузера после адреса экземпляра **Comindware Platform**.
     15. Отобразится страница Swagger с перечнем доступных методов **Solution API**.
 
@@ -376,6 +376,6 @@ Telegram-бот будет представлять собой проект в V
 
 ## Связанные статьи
 
-- [Отправка уведомлений с помощью Telegram](https://kb.comindware.ru/article.php?id=4926)
-- [Solution API](https://kb.comindware.ru/article.php?id=4863)
-- [Настройка процесса для отправки эл. почты](https://kb.comindware.ru/article.php?id=4691)
+- [Отправка уведомлений с помощью Telegram](https://kb.comindware.ru/article.php?id=5321)
+- [Solution API](https://kb.comindware.ru/article.php?id=5333)
+- [Настройка процесса для отправки эл. почты](https://kb.comindware.ru/article.php?id=5375)

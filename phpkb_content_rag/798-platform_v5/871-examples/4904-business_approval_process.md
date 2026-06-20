@@ -2,7 +2,7 @@
 title: 'Универсальный процесс согласования. Настройка шаблонов, процессов и сценария'
 kbId: 4904
 url: 'https://kb.comindware.ru/article.php?id=4904'
-updated: '2026-06-17 14:09:52'
+updated: '2026-06-20 18:05:48'
 ---
 
 # Универсальный процесс согласования. Настройка шаблонов, процессов и сценария
@@ -171,7 +171,7 @@ from a in db->Istoriyasoglasovanij where (a->idobektsoglasovaniya == $idobektsog
 
 ## Связанные статьи
 
-- [Вызов процесса](https://kb.comindware.ru/article.php?id=4727)
-- [Сценарии. Элементы и действия](https://kb.comindware.ru/article.php?id=4718)
-- [Пользовательская задача](https://kb.comindware.ru/article.php?id=4730)
-- [Диаграмма процесса](https://kb.comindware.ru/article.php?id=4721)
+- [Вызов процесса](https://kb.comindware.ru/article.php?id=5663)
+- [Сценарии. Элементы и действия](https://kb.comindware.ru/article.php?id=5655)
+- [Пользовательская задача](https://kb.comindware.ru/article.php?id=5666)
+- [Диаграмма процесса](https://kb.comindware.ru/article.php?id=5657)

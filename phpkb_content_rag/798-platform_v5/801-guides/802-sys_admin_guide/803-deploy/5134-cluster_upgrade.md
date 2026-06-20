@@ -2,14 +2,14 @@
 title: 'Кластер Comindware Platform. Обновление ПО'
 kbId: 5134
 url: 'https://kb.comindware.ru/article.php?id=5134'
-updated: '2025-10-08 17:40:32'
+updated: '2026-06-20 18:04:42'
 ---
 
 # Кластер Comindware Platform. Обновление ПО
 
 Экспериментальная функция
 
-Представленная здесь функция находится на стадии разработки. См. *«[Поддержка экспериментальных функций](https://kb.comindware.ru/article.php?id=4579#experimental_feature_support)»*.
+Представленная здесь функция находится на стадии разработки. См. *«[Поддержка экспериментальных функций](https://kb.comindware.ru/article.php?id=5161#experimental_feature_support)»*.
 
 ## Введение
 
@@ -106,7 +106,7 @@ _![Пример конфигурации кластера](/platform/v5.0/admini
 - **Core** — экземпляр ПО **Comindware Platform**.
 - **Adapters** — адаптеры для интеграции с внешними системами.
 - **Async** — асинхронные обработчики, которые выполняют фоновые задачи.
-- **Apache Ignite** — распределённое хранилище данных. Отдельный кластер, см. *«[Инфраструктура данных](#cluster_upgrade_data_infrastructure)»*.
+- **Apache Ignite** — распределённое хранилище данных. Отдельный кластер.
 - **NGINX** — обратный прокси-сервер, который обрабатывает HTTP-запросы.
 - **Apache Kafka** — брокер сообщений, который обеспечивает межсервисное взаимодействие. Отдельный кластер или облачный сервис.
 
@@ -142,7 +142,7 @@ _![Состав кластера](/platform/v5.0/administration/deploy/img/clust
 - `<path/to>` — путь к директории или файлу в вашей системе; замените на фактический путь согласно своей структуре каталогов.
 - `<serviceName>` — имя службы, которую требуется проверить или остановить (например, `comindware<instanceName>`,`apigateway<instanceName>`, `adapterhost<instanceName>`);
 
-См. *«[Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=4620)»*.
+См. *«[Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=5561)»*.
 
 Обновим ПО на выведенном из эксплуатации узле `cmw-node0` без влияния на работу системы.
 
@@ -274,9 +274,9 @@ _![Состав кластера](/platform/v5.0/administration/deploy/img/clust
 
 ## Связанные статьи
 
-- [Установка, запуск, инициализация и остановка ПО](https://kb.comindware.ru/article.php?id=4622)
-- [Системные требования Comindware Platform](https://kb.comindware.ru/article.php?id=4659)
-- [Резервное копирование. Настройка и запуск, просмотр журнала сеансов](https://kb.comindware.ru/article.php?id=4642)
-- [Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=4620)
-- [Кластер Comindware Platform. Восстановление после аварий](https://kb.comindware.ru/article.php?id=5135)
-- [Обеспечение высокой доступности и отказоустойчивости Comindware Platform](https://kb.comindware.ru/article.php?id=5079)
+- [Установка, запуск, инициализация и остановка ПО](https://kb.comindware.ru/article.php?id=5558)
+- [Системные требования Comindware Platform](https://kb.comindware.ru/article.php?id=5429)
+- [Резервное копирование. Настройка и запуск, просмотр журнала сеансов](https://kb.comindware.ru/article.php?id=5566)
+- [Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=5561)
+- [Кластер Comindware Platform. Восстановление после аварий](https://kb.comindware.ru/article.php?id=5577)
+- [Обеспечение высокой доступности и отказоустойчивости Comindware Platform](https://kb.comindware.ru/article.php?id=5445)

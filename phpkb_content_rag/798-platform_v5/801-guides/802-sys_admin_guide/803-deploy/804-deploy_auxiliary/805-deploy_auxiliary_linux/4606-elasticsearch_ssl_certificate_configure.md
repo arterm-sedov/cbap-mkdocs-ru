@@ -2,7 +2,7 @@
 title: 'Elasticsearch. Настройка SSL-сертификатов'
 kbId: 4606
 url: 'https://kb.comindware.ru/article.php?id=4606'
-updated: '2025-12-03 10:40:08'
+updated: '2026-06-20 18:04:28'
 ---
 
 # Elasticsearch. Настройка SSL-сертификатов
@@ -15,7 +15,7 @@ updated: '2025-12-03 10:40:08'
 
 Перед выполнением этих инструкций необходимо развернуть Elasticsearch без сертификатов подлинности.
 
-Дальнейшие инструкции предполагают, что кластер и служба Elasticsearch развёрнуты согласно инструкциям в статье «**[Elasticsearch. Развёртывание без сертификатов подлинности](https://kb.comindware.ru/article.php?id=4612)**» на виртуальных машинах с Linux.
+Дальнейшие инструкции предполагают, что кластер и служба Elasticsearch развёрнуты согласно инструкциям в статье «**[Elasticsearch. Развёртывание без сертификатов подлинности](https://kb.comindware.ru/article.php?id=5459)**» на виртуальных машинах с Linux.
 
 Настройка OpenSearch
 
@@ -382,7 +382,7 @@ updated: '2025-12-03 10:40:08'
 
 - [Официальная документация Elasticsearch (английский язык)](https://www.elastic.co/docs/deploy-manage)
 - [Официальная документация OpenSearch (английский язык)](https://docs.opensearch.org/latest/)
-- [Elasticsearch. Развёртывание без сертификатов подлинности](https://kb.comindware.ru/article.php?id=4612)
-- [Elasticsearch. Установка в базовой конфигурации](https://kb.comindware.ru/article.php?id=4601)
-- [Установка, запуск, инициализация и остановка ПО Comindware Platform](https://kb.comindware.ru/article.php?id=4622)
-- [Конфигурация экземпляра, компонентов ПО и служб. Настройка](https://kb.comindware.ru/article.php?id=5067)
+- [Elasticsearch. Развёртывание без сертификатов подлинности](https://kb.comindware.ru/article.php?id=5459)
+- [Elasticsearch. Установка в базовой конфигурации](https://kb.comindware.ru/article.php?id=5457)
+- [Установка, запуск, инициализация и остановка ПО Comindware Platform](https://kb.comindware.ru/article.php?id=5558)
+- [Конфигурация экземпляра, компонентов ПО и служб. Настройка](https://kb.comindware.ru/article.php?id=5554)

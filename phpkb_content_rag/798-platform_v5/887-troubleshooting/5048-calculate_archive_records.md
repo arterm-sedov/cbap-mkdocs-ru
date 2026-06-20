@@ -2,7 +2,7 @@
 title: 'Вычисляются архивные записи'
 kbId: 5048
 url: 'https://kb.comindware.ru/article.php?id=5048'
-updated: '2025-10-24 17:34:16'
+updated: '2026-06-20 18:06:30'
 ---
 
 # Вычисляются архивные записи
@@ -33,8 +33,8 @@ EQUALS(a->_isDisabled, false)
 
 ## Связанные статьи
 
-- [Подсчет количества записей без учета архивированных](https://kb.comindware.ru/article.php?id=4987)
-- [Язык формул](https://kb.comindware.ru/category.php?id=880)
-- [Список функций языка формул Comindware](https://kb.comindware.ru/article.php?id=4993)
-- [Атрибуты. Определения и настройка](https://kb.comindware.ru/article.php?id=4772)
-- [Таблицы. Настройка](https://kb.comindware.ru/article.php?id=4800)
+- [Подсчет количества записей без учета архивированных](https://kb.comindware.ru/article.php?id=5233)
+- [Язык формул](https://kb.comindware.ru/category.php?id=901)
+- [Список функций языка формул Comindware](https://kb.comindware.ru/article.php?id=5218)
+- [Атрибуты. Определения и настройка](https://kb.comindware.ru/article.php?id=5706)
+- [Таблицы. Настройка](https://kb.comindware.ru/article.php?id=5735)

@@ -2,24 +2,24 @@
 title: 'Использование системы'
 kbId: 4821
 url: 'https://kb.comindware.ru/article.php?id=4821'
-updated: '2025-07-10 18:17:16'
+updated: '2026-06-20 18:05:12'
 ---
 
 # Использование системы
 
 В данном разделе представлены сведения об интерфейсе пользователя **Comindware Platform** и готовых приложений для конечных пользователей.
 
-- [Интерфейс Comindware Platform. Использование](https://kb.comindware.ru/article.php?id=5105)
-- [Панель навигации. Использование](https://kb.comindware.ru/article.php?id=4824)
-- [Рабочий стол. Использование](https://kb.comindware.ru/article.php?id=4823)
-- [Страница «Мои задачи». Использование](https://kb.comindware.ru/article.php?id=4825)
-- [Информационные страницы. Использование](https://kb.comindware.ru/article.php?id=4822)
-- [Формы. Использование](https://kb.comindware.ru/article.php?id=4816)
-- [Таблицы. Использование и персональная настройка](https://kb.comindware.ru/article.php?id=4815)
-- [Карточки. Использование в браузере и мобильном приложении](https://kb.comindware.ru/article.php?id=4820)
-- [Диаграмма Ганта. Использование](https://kb.comindware.ru/article.php?id=4817)
-- [Р7 Офис и Collabora Online. Использование для работы с документами](https://kb.comindware.ru/article.php?id=4819)
-- [Карты. Использование](https://kb.comindware.ru/article.php?id=4814)
-- [Обсуждения. Использование](https://kb.comindware.ru/article.php?id=4818)
-- [Мобильное приложение. Использование](https://kb.comindware.ru/article.php?id=5090)
-- [Восстановление пароля](https://kb.comindware.ru/article.php?id=5099)
+- [Интерфейс Comindware Platform. Использование](https://kb.comindware.ru/article.php?id=5599)
+- [Панель навигации. Использование](https://kb.comindware.ru/article.php?id=5605)
+- [Рабочий стол. Использование](https://kb.comindware.ru/article.php?id=5606)
+- [Страница «Мои задачи». Использование](https://kb.comindware.ru/article.php?id=5604)
+- [Информационные страницы. Использование](https://kb.comindware.ru/article.php?id=5607)
+- [Формы. Использование](https://kb.comindware.ru/article.php?id=5603)
+- [Таблицы. Использование и персональная настройка](https://kb.comindware.ru/article.php?id=5594)
+- [Карточки. Использование в браузере и мобильном приложении](https://kb.comindware.ru/article.php?id=5601)
+- [Диаграмма Ганта. Использование](https://kb.comindware.ru/article.php?id=5363)
+- [Р7 Офис и Collabora Online. Использование для работы с документами](https://kb.comindware.ru/article.php?id=5320)
+- [Карты. Использование](https://kb.comindware.ru/article.php?id=5595)
+- [Обсуждения. Использование](https://kb.comindware.ru/article.php?id=5602)
+- [Мобильное приложение. Использование](https://kb.comindware.ru/article.php?id=5598)
+- [Восстановление пароля](https://kb.comindware.ru/article.php?id=5597)

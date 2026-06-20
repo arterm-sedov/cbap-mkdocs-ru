@@ -2,18 +2,18 @@
 title: 'Elasticsearch. Установка в базовой конфигурации для Windows'
 kbId: 4617
 url: 'https://kb.comindware.ru/article.php?id=4617'
-updated: '2026-01-26 18:43:57'
+updated: '2026-06-20 18:04:30'
 ---
 
 # Elasticsearch. Установка в базовой конфигурации для Windows
 
 ## Введение
 
-Для работы **Comindware Platform** требуется сервер Elasticsearch. См. [системные требования](https://kb.comindware.ru/article.php?id=4659).
+Для работы **Comindware Platform** требуется сервер Elasticsearch. См. [системные требования](https://kb.comindware.ru/article.php?id=5429).
 
 Установщик **Comindware Platform** в Windows позволяет установить службу Elasticsearch в базовой конфигурации: без аутентификации и с одним узлом по адресу `localhost:9200`.
 
-См. *«[Установка, запуск, инициализация и остановка ПО в Windows](https://kb.comindware.ru/article.php?id=5063)»*.
+См. *«[Установка, запуск, инициализация и остановка ПО в Windows](https://kb.comindware.ru/article.php?id=5564)»*.
 
 Кроме того, вы можете использовать уже имеющуюся у вас службу Elasticsearch или развернуть её на отдельном сервере.
 
@@ -182,6 +182,6 @@ ingest.geoip.downloader.enabled: false
 
 ## Связанные статьи
 
-- [Установка, запуск, инициализация и остановка ПО в Windows](https://kb.comindware.ru/article.php?id=5063)
-- [Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=4620#paths_windows)
-- [OpenSearch (Elasticsearch). Настройка разрешений](https://kb.comindware.ru/article.php?id=5152)
+- [Установка, запуск, инициализация и остановка ПО в Windows](https://kb.comindware.ru/article.php?id=5564)
+- [Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=5561#paths_windows)
+- [OpenSearch (Elasticsearch). Настройка разрешений](https://kb.comindware.ru/article.php?id=5465)

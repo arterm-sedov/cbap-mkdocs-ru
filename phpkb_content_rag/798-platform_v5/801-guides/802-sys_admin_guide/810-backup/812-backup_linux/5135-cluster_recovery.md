@@ -2,14 +2,14 @@
 title: 'Кластер Comindware Platform. Восстановление после аварий'
 kbId: 5135
 url: 'https://kb.comindware.ru/article.php?id=5135'
-updated: '2025-10-06 13:57:48'
+updated: '2026-06-20 18:04:39'
 ---
 
 # Кластер Comindware Platform. Восстановление после аварий
 
 Экспериментальная функция
 
-Представленная здесь функция находится на стадии разработки. См. *«[Поддержка экспериментальных функций](https://kb.comindware.ru/article.php?id=4579#experimental_feature_support)»*.
+Представленная здесь функция находится на стадии разработки. См. *«[Поддержка экспериментальных функций](https://kb.comindware.ru/article.php?id=5161#experimental_feature_support)»*.
 
 ## Введение
 
@@ -116,7 +116,7 @@ updated: '2025-10-06 13:57:48'
 - `<instanceName>` — имя экземпляра ПО;
 - `<node-ip>` — IP-адрес узла.
 
-См. *«[Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=4620)»*.
+См. *«[Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=5561)»*.
 
 ### Общий порядок восстановления
 
@@ -349,9 +349,9 @@ INFO Skipping rebalancing (nothing scheduled)
 
 ## Связанные статьи
 
-- [Установка, запуск, инициализация и остановка ПО](https://kb.comindware.ru/article.php?id=4622)
-- [Кластер Comindware Platform. Обновление ПО](https://kb.comindware.ru/article.php?id=5134)
-- [Системные требования Comindware Platform](https://kb.comindware.ru/article.php?id=4659)
-- [Резервное копирование. Настройка и запуск, просмотр журнала сеансов](https://kb.comindware.ru/article.php?id=4642)
-- [Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=4620)
-- [Обеспечение высокой доступности и отказоустойчивости Comindware Platform](https://kb.comindware.ru/article.php?id=5079)
+- [Установка, запуск, инициализация и остановка ПО](https://kb.comindware.ru/article.php?id=5558)
+- [Кластер Comindware Platform. Обновление ПО](https://kb.comindware.ru/article.php?id=5446)
+- [Системные требования Comindware Platform](https://kb.comindware.ru/article.php?id=5429)
+- [Резервное копирование. Настройка и запуск, просмотр журнала сеансов](https://kb.comindware.ru/article.php?id=5566)
+- [Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=5561)
+- [Обеспечение высокой доступности и отказоустойчивости Comindware Platform](https://kb.comindware.ru/article.php?id=5445)
