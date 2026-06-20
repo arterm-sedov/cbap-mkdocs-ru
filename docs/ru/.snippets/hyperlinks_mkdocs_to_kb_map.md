@@ -1,3 +1,30 @@
+<!--
+================================================================================
+ HYPERLINKS MAP — Purpose and usage
+================================================================================
+
+ This file provides portable, versionable, localizable, conditionable hyperlinks
+ for the entire knowledge base. It is the SINGLE SOURCE for all cross-references:
+
+  - When exporting to PHPKB: all {{ kbArticleURLPrefix }} references resolve to
+    the current KB instance URLs.
+  - When building a PDF guide: articles NOT included in the guide retain their
+    KB URLs (reader follows the link to the KB). Articles included in the guide
+    resolve to internal anchor links.
+  - All external URLs (e.g. wikipedia, cryptopro, telegram) are centralized here
+    for easy maintenance and consistency.
+  - The entire block is wrapped in {% if kbExport %} ... {% endif %} to avoid
+    polluting the generated PHPKB HTML with double URL resolution.
+
+ Naming convention:
+  - For KB articles: use an English semantic anchor matching the article's H1
+    anchor (e.g. [forms]: {{ kbArticleURLPrefix }}5724).
+  - For external URLs: use a short descriptive name (e.g. [telegram_botfather]).
+  - For category links: use the _cat suffix (e.g. [deploy_cat]).
+
+ Always add new links here instead of using bare inline URLs in articles.
+-->
+
 <!-- Любые руководства -->
 
 <!-- Страницы оглавлений в БЗ. Начало -->

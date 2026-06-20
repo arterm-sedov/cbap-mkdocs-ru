@@ -112,6 +112,16 @@ Skills are under `.agents/skills/<name>/SKILL.md`. Do not duplicate skill conten
 
 **External links:** use `[link title][article_anchor]` not `[link title](article.md)` links. Where `article_anchor` is `h1 anchor` from `article.md`. Take the the anchors as named references from @hyperlinks_mkdocs_to_kb_map.md
 
+**All absolute URLs must go through `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md`** — never use bare inline URLs in articles. The hyperlinks map is the single source of truth:
+
+- Portable: maps resolve to correct KB instance per environment
+- Versionable: link targets can be updated in one place
+- Localizable: supports conditional `{% if kbExport %}` blocks
+- Conditionable: PDF builds can distinguish internal vs external links
+- Maintainable: one file to update when URLs change
+
+When adding a new link, always add its target to the map first, then reference it by anchor name in articles.
+
 **Internal links:** use `[link title](#article_anchor)` format.
 
 ## LIST FORMATTING
