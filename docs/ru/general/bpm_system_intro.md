@@ -1,6 +1,6 @@
 ---
 title: Как работает BPM-система
-kbId: 5431
+kbId: 4585
 tags:
     - BPM
     - BPM-система
