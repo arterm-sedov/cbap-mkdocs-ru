@@ -2,7 +2,7 @@
 title: 'Приложения. Определения и настройка'
 kbId: 4714
 url: 'https://kb.comindware.ru/article.php?id=4714'
-updated: '2026-06-20 18:04:55'
+updated: '2026-06-20 20:25:07'
 ---
 
 # Приложения. Определения и настройка
@@ -15,12 +15,12 @@ updated: '2026-06-20 18:04:55'
 
 Прежде чем создавать своё приложение для бизнеса, прочтите:
 
-- [Рекомендации по настройке приложений](https://kb.comindware.ru/article.php?id=5641)
-- [Учебные материалы](https://kb.comindware.ru/article.php?id=5394)
+- [Рекомендации по настройке приложений](https://kb.comindware.ru/article.php?id=4716)
+- [Учебные материалы](https://kb.comindware.ru/article.php?id=5123)
 
 ## Просмотр списка приложений, создание и настройка свойств приложения
 
-1. На странице [«**Администрирование**»](https://kb.comindware.ru/article.php?id=5608) в разделе «**Архитектура**» выберите пункт «**Приложения**» *‌*.
+1. На странице [«**Администрирование**»](https://kb.comindware.ru/article.php?id=4661) в разделе «**Архитектура**» выберите пункт «**Приложения**» *‌*.
 2. Отобразится список приложений.
 3. Нажмите кнопку «**Создать**» или установите для приложения в списке флажок выбора и нажмите кнопку «**Свойства**».
 4. Настройте свойства приложения и сохраните его:
@@ -42,20 +42,20 @@ _![Настройка свойств нового приложения](/platfor
 2. Отобразится страница «**Администрирование**» приложения.
 3. Перейдите к требуемому разделу настройки приложения:
 
-   - [Диаграммы](https://kb.comindware.ru/article.php?id=5639)
-   - [Шаблоны](https://kb.comindware.ru/article.php?id=5638)
-   - [Роли](https://kb.comindware.ru/article.php?id=5738)
-   - [Разделы навигации](https://kb.comindware.ru/article.php?id=5644)
-   - [Функции](https://kb.comindware.ru/article.php?id=5640)
-   - [Переменные](https://kb.comindware.ru/article.php?id=5739)
-   - [Сценарии](https://kb.comindware.ru/article.php?id=5654)
-   - [Интернет-магазин](https://kb.comindware.ru/article.php?id=5740)
-   - [Интеграции](https://kb.comindware.ru/article.php?id=5308)
-   - [Пути передачи данных](https://kb.comindware.ru/article.php?id=5302)
-   - [Сервер каталогов](https://kb.comindware.ru/article.php?id=5581)
-   - [Аудит разрешений аккаунтов](https://kb.comindware.ru/article.php?id=5612)
+   - [Диаграммы](https://kb.comindware.ru/article.php?id=4710)
+   - [Шаблоны](https://kb.comindware.ru/article.php?id=4709)
+   - [Роли](https://kb.comindware.ru/article.php?id=4803)
+   - [Разделы навигации](https://kb.comindware.ru/article.php?id=4809)
+   - [Функции](https://kb.comindware.ru/article.php?id=4711)
+   - [Переменные](https://kb.comindware.ru/article.php?id=4804)
+   - [Сценарии](https://kb.comindware.ru/article.php?id=4717)
+   - [Интернет-магазин](https://kb.comindware.ru/article.php?id=4805)
+   - [Интеграции](https://kb.comindware.ru/article.php?id=4697)
+   - [Пути передачи данных](https://kb.comindware.ru/article.php?id=4676)
+   - [Сервер каталогов](https://kb.comindware.ru/article.php?id=4655)
+   - [Аудит разрешений аккаунтов](https://kb.comindware.ru/article.php?id=4664)
    - Активность компонентов
-   - [Управление версиями](https://kb.comindware.ru/article.php?id=5652)
+   - [Управление версиями](https://kb.comindware.ru/article.php?id=4808)
 
 ## Удаление приложения
 
@@ -81,7 +81,7 @@ _![Настройка свойств нового приложения](/platfor
 
 Во избежание потери данных, прежде чем удалять приложение, сохраните резервную копию экземпляра ПО или экспортируйте конфигурацию приложения с помощью управления версиями.
 
-См. *«[Управление версиями приложения. Экспорт и импорт](https://kb.comindware.ru/article.php?id=5652)»*.
+См. *«[Управление версиями приложения. Экспорт и импорт](https://kb.comindware.ru/article.php?id=4808)»*.
 
 Удалить приложение может потребоваться в таких случаях, как:
 
@@ -89,7 +89,7 @@ _![Настройка свойств нового приложения](/platfor
 - создано новое приложение, заменяющее имеющееся, например, в результате рефакторинга;
 - во время знакомства с **Comindware Platform** были созданы экспериментальные приложения, которые более не требуются.
 
-Удалить приложение можно с помощью *[Web API](https://kb.comindware.ru/article.php?id=5330)*. См. также *[Введение в API](https://kb.comindware.ru/article.php?id=5332)*.
+Удалить приложение можно с помощью *[Web API](https://kb.comindware.ru/article.php?id=4861)*. См. также *[Введение в API](https://kb.comindware.ru/article.php?id=4860)*.
 
 1. В адресной строке браузера введите:
 
@@ -109,5 +109,5 @@ _![Удаление приложения с помощью API](/platform/v5.0/b
 
 ## Связанные статьи
 
-- *[Введение в API](https://kb.comindware.ru/article.php?id=5332)*
-- *[Web API](https://kb.comindware.ru/article.php?id=5330)*
+- *[Введение в API](https://kb.comindware.ru/article.php?id=4860)*
+- *[Web API](https://kb.comindware.ru/article.php?id=4861)*

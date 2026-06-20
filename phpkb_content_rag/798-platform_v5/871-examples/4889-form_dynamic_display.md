@@ -2,7 +2,7 @@
 title: 'Правила для формы. Настройка динамического отображения полей атрибутов'
 kbId: 4889
 url: 'https://kb.comindware.ru/article.php?id=4889'
-updated: '2026-06-20 18:05:46'
+updated: '2026-06-20 20:25:56'
 ---
 
 # Правила для формы. Настройка динамического отображения полей атрибутов
@@ -48,6 +48,6 @@ updated: '2026-06-20 18:05:46'
 
 ## Связанные статьи
 
-- [Правила для формы](https://kb.comindware.ru/article.php?id=5721)
-- [Динамические элементы формы](https://kb.comindware.ru/article.php?id=5723)
-- [Атрибут типа «Запись»](https://kb.comindware.ru/article.php?id=5718)
+- [Правила для формы](https://kb.comindware.ru/article.php?id=4784)
+- [Динамические элементы формы](https://kb.comindware.ru/article.php?id=4785)
+- [Атрибут типа «Запись»](https://kb.comindware.ru/article.php?id=4780)

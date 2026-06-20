@@ -2,7 +2,7 @@
 title: 'Шаблон. Переключение флажка «Является справочником» с помощью API'
 kbId: 5088
 url: 'https://kb.comindware.ru/article.php?id=5088'
-updated: '2026-06-20 18:05:51'
+updated: '2026-06-20 20:26:01'
 ---
 
 # Шаблон. Переключение флажка «Является справочником» с помощью API
@@ -19,7 +19,7 @@ updated: '2026-06-20 18:05:51'
 
 В некоторых конфигурациях переключить этот флажок вручную не представляется возможным, например для шаблонов оргединиц и ролей.
 
-В таком случае его можно переключить с помощью следующих методов [System Core API](https://kb.comindware.ru/article.php?id=5331):
+В таком случае его можно переключить с помощью следующих методов [System Core API](https://kb.comindware.ru/article.php?id=4862):
 
 - `/Base/OntologyService/RemoveStatement` — снять флажок;
 - `/Base/OntologyService/AddStatement` — установить флажок.
@@ -64,5 +64,5 @@ curl -X POST "https://your-host/api/public/system/Base/OntologyService/AddStatem
 
 ## Связанные статьи
 
-- *[Методы System Core API](https://kb.comindware.ru/article.php?id=5331)*
-- *[Шаблоны. Определения, настройка, перенос, архивирование, очистка](https://kb.comindware.ru/article.php?id=5638)*
+- *[Методы System Core API](https://kb.comindware.ru/article.php?id=4862)*
+- *[Шаблоны. Определения, настройка, перенос, архивирование, очистка](https://kb.comindware.ru/article.php?id=4709)*

@@ -2,7 +2,7 @@
 title: 'Collabora Online'
 kbId: 4688
 url: 'https://kb.comindware.ru/article.php?id=4688'
-updated: '2026-06-20 18:04:47'
+updated: '2026-06-20 20:25:00'
 ---
 
 # Collabora Online
@@ -11,17 +11,17 @@ updated: '2026-06-20 18:04:47'
 
 Экспериментальная функция
 
-Представленная здесь функция находится на стадии разработки. См. *«[Поддержка экспериментальных функций](https://kb.comindware.ru/article.php?id=5161#experimental_feature_support)»*.
+Представленная здесь функция находится на стадии разработки. См. *«[Поддержка экспериментальных функций](https://kb.comindware.ru/article.php?id=4579#experimental_feature_support)»*.
 
 **Comindware Platform** позволяет просматривать и редактировать прикреплённые к формам документы, электронные таблицы и презентации с помощью ПО **Collabora Online**.
 
 Здесь представлены инструкции по настройке подключения к серверу **Collabora Online**.
 
-См. также статью *«[Р7 Офис и Collabora Online. Использование для работы с документами](https://kb.comindware.ru/article.php?id=5320)».*
+См. также статью *«[Р7 Офис и Collabora Online. Использование для работы с документами](https://kb.comindware.ru/article.php?id=4819)».*
 
 ## Настройка подключения к Collabora Online
 
-1. Перейдите в раздел [«**Администрирование**» — «**Подключения**»](https://kb.comindware.ru/article.php?id=5608).
+1. Перейдите в раздел [«**Администрирование**» — «**Подключения**»](https://kb.comindware.ru/article.php?id=4661).
 2. Откройте двойным нажатием в списке или создайте подключение типа «**Подключения к офисным приложениям**» — «**Collabora Online**».
 3. Настройте подключение к Collabora Online:
 
@@ -36,4 +36,4 @@ _![Настройка подключения к Collabora Online](/platform/v5.0
 
 ## Связанные статьи
 
-- *[Р7 Офис и Collabora Online. Использование для работы с документами](https://kb.comindware.ru/article.php?id=5320)*
+- *[Р7 Офис и Collabora Online. Использование для работы с документами](https://kb.comindware.ru/article.php?id=4819)*

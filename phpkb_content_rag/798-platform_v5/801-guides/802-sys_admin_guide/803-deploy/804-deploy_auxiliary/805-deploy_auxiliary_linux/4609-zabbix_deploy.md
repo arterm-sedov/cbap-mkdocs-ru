@@ -2,7 +2,7 @@
 title: 'Zabbix. Установка и настройка'
 kbId: 4609
 url: 'https://kb.comindware.ru/article.php?id=4609'
-updated: '2026-06-20 18:04:29'
+updated: '2026-06-20 20:24:42'
 ---
 
 # Zabbix. Установка и настройка
@@ -33,9 +33,9 @@ Zabbix состоит из сервера и агентов:
 
 Подробные инструкции по установке настройке сервера и агентов Zabbix представлены в следующих статьях:
 
-- [Zabbix Server, Zabbix Agent, Zabbix Frontend и MySQL. Инструкции по установке](https://kb.comindware.ru/article.php?id=5458)
-- [Zabbix Agent. Инструкции по установке](https://kb.comindware.ru/article.php?id=5463)
-- [Zabbix Agent. Инструкции по установке для Windows](https://kb.comindware.ru/article.php?id=5552)
+- [Zabbix Server, Zabbix Agent, Zabbix Frontend и MySQL. Инструкции по установке](https://kb.comindware.ru/article.php?id=4607)
+- [Zabbix Agent. Инструкции по установке](https://kb.comindware.ru/article.php?id=4608)
+- [Zabbix Agent. Инструкции по установке для Windows](https://kb.comindware.ru/article.php?id=4615)
 - [Официальная инструкция по установке Zabbix (на английском языке)](https://www.zabbix.com/documentation/5.4/ru/manual/appendix/install)
 - [Установка и настройка Zabbix 5.0 (на русском языке, serveradmin.ru)](https://serveradmin.ru/ustanovka-i-nastrojka-zabbix-5-0/)
 - [Мониторинг web сайта в Zabbix (на русском языке, serveradmin.ru)](https://serveradmin.ru/monitoring-web-sayta-v-zabbix/)

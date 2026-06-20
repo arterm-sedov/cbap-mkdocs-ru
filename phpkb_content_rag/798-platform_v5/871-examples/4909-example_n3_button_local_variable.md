@@ -2,7 +2,7 @@
 title: 'Локальная переменная. Использование для массовой обработки записей'
 kbId: 4909
 url: 'https://kb.comindware.ru/article.php?id=4909'
-updated: '2026-06-20 18:05:48'
+updated: '2026-06-20 20:25:58'
 ---
 
 # Локальная переменная. Использование для массовой обработки записей
@@ -58,6 +58,6 @@ updated: '2026-06-20 18:05:48'
 
 ## Связанные статьи
 
-- [Кнопки. Определения, настройка, удаление](https://kb.comindware.ru/article.php?id=5728)
-- [Сценарии. Определения, создание, настройка, использование](https://kb.comindware.ru/article.php?id=5654)
-- [Язык N3](https://kb.comindware.ru/category.php?id=903)
+- [Кнопки. Определения, настройка, удаление](https://kb.comindware.ru/article.php?id=4790)
+- [Сценарии. Определения, создание, настройка, использование](https://kb.comindware.ru/article.php?id=4717)
+- [Язык N3](https://kb.comindware.ru/category.php?id=877)

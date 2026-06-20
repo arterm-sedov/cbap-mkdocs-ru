@@ -2,12 +2,12 @@
 title: 'Настройка вызова API'
 kbId: 4927
 url: 'https://kb.comindware.ru/article.php?id=4927'
-updated: '2026-06-20 18:06:00'
+updated: '2026-06-20 20:26:10'
 ---
 
 # Настройка вызова API
 
-В **Comindware Platform** есть возможность вызова из внешних систем веб-сервисов системы для обмена данными, например, создание объекта, запуск процесса или получение информации по документу. Полный перечень веб-сервисов и описание можно посмотреть [здесь](https://kb.comindware.ru/article.php?id=5332).
+В **Comindware Platform** есть возможность вызова из внешних систем веб-сервисов системы для обмена данными, например, создание объекта, запуск процесса или получение информации по документу. Полный перечень веб-сервисов и описание можно посмотреть [здесь](https://kb.comindware.ru/article.php?id=4860).
 
 ## Сценарий
 
@@ -51,6 +51,6 @@ updated: '2026-06-20 18:06:00'
 
 ## Связанные статьи
 
-- [Введение в API](https://kb.comindware.ru/article.php?id=5332)
-- [Solution API](https://kb.comindware.ru/article.php?id=5333)
-- [Web API](https://kb.comindware.ru/article.php?id=5330)
+- [Введение в API](https://kb.comindware.ru/article.php?id=4860)
+- [Solution API](https://kb.comindware.ru/article.php?id=4863)
+- [Web API](https://kb.comindware.ru/article.php?id=4861)

@@ -2,7 +2,7 @@
 title: 'Кнопка «Принять в работу» для задачи. Настройка на C#'
 kbId: 5146
 url: 'https://kb.comindware.ru/article.php?id=5146'
-updated: '2026-06-20 18:06:01'
+updated: '2026-06-20 20:26:10'
 ---
 
 # Кнопка «Принять в работу» для задачи. Настройка на C#
@@ -128,9 +128,9 @@ updated: '2026-06-20 18:06:01'
 
 ## Связанные статьи
 
-- [Справочник по скриптам на языке C#](https://kb.comindware.ru/article.php?id=5211)
-- [Пользовательская задача](https://kb.comindware.ru/article.php?id=5666)
-- [Пользовательская задача. Переназначение исполнителя](https://kb.comindware.ru/article.php?id=5391)
-- [Кнопки. Определение, настройка, удаление](https://kb.comindware.ru/article.php?id=5728)
-- [Атрибут типа «Дата и время»](https://kb.comindware.ru/article.php?id=5701)
-- [Диаграмма процесса. Определения, просмотр, редактирование, публикация](https://kb.comindware.ru/article.php?id=5657)
+- [Справочник по скриптам на языке C#](https://kb.comindware.ru/article.php?id=4864)
+- [Пользовательская задача](https://kb.comindware.ru/article.php?id=4730)
+- [Пользовательская задача. Переназначение исполнителя](https://kb.comindware.ru/article.php?id=5087)
+- [Кнопки. Определение, настройка, удаление](https://kb.comindware.ru/article.php?id=4790)
+- [Атрибут типа «Дата и время»](https://kb.comindware.ru/article.php?id=4777)
+- [Диаграмма процесса. Определения, просмотр, редактирование, публикация](https://kb.comindware.ru/article.php?id=4721)

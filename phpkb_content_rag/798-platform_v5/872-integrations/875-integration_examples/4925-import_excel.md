@@ -2,7 +2,7 @@
 title: 'Импорт данных в Excel'
 kbId: 4925
 url: 'https://kb.comindware.ru/article.php?id=4925'
-updated: '2026-06-20 18:06:00'
+updated: '2026-06-20 20:26:09'
 ---
 
 # Импорт данных в Excel
@@ -62,5 +62,5 @@ _![Пример полученной таблицы Excel](https://kb.comindware
 
 ## Связанные статьи
 
-- [Solution API](https://kb.comindware.ru/article.php?id=5333)
-- [Шаблоны записей](https://kb.comindware.ru/article.php?id=5693)
+- [Solution API](https://kb.comindware.ru/article.php?id=4863)
+- [Шаблоны записей](https://kb.comindware.ru/article.php?id=4759)

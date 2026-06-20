@@ -2,7 +2,7 @@
 title: 'Комментарий'
 kbId: 4753
 url: 'https://kb.comindware.ru/article.php?id=4753'
-updated: '2026-06-20 18:05:00'
+updated: '2026-06-20 20:25:12'
 ---
 
 # Комментарий
@@ -21,12 +21,12 @@ _![Комментарий и его меню элемента](/platform/v5.0/bu
 
 ## Свойства комментария
 
-В окне свойств **комментария** можно настроить [общие свойства элемента диаграммы процесса](https://kb.comindware.ru/article.php?id=5661).
+В окне свойств **комментария** можно настроить [общие свойства элемента диаграммы процесса](https://kb.comindware.ru/article.php?id=4725).
 
 _![Свойства комментария](/platform/v5.0/business_apps/diagrams/process_diagram/process_diagram_elements/generic/img/text_annotation_general_properties.png)_
 
 ## Связанные статьи
 
-- *[Общие свойства элементов диаграммы процесса](https://kb.comindware.ru/article.php?id=5661)*
-- *[Элементы диаграммы процесса](https://kb.comindware.ru/article.php?id=5662)*
-- *[Редактирование диаграммы процесса](https://kb.comindware.ru/article.php?id=5657#process_diagram_designer)*
+- *[Общие свойства элементов диаграммы процесса](https://kb.comindware.ru/article.php?id=4725)*
+- *[Элементы диаграммы процесса](https://kb.comindware.ru/article.php?id=4724)*
+- *[Редактирование диаграммы процесса](https://kb.comindware.ru/article.php?id=4721#process_diagram_designer)*

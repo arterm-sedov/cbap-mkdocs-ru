@@ -2,7 +2,7 @@
 title: 'Фильтрация списка по активным задачам текущего пользователя с помощью N3: по всем процессам, по конкретному процессу'
 kbId: 4935
 url: 'https://kb.comindware.ru/article.php?id=4935'
-updated: '2026-06-20 20:26:16'
+updated: '2026-06-20 22:32:44'
 ---
 
 # Фильтрация списка по активным задачам текущего пользователя с помощью N3: по всем процессам, по конкретному процессу
@@ -168,8 +168,8 @@ updated: '2026-06-20 20:26:16'
 
 - [Таблицы. Определения, настройка, клонирование, удаление][table_configure]
 - [Создание таблицы со списком задач][table_configure]
-- [Вычисление пользователей с активными задачами](n3_calculate_active_task_accounts.html#example_n3_calculate_active_task_accounts "Аккаунты и задачи. Вычисление пользователей с активными задачами с помощью N3")
-- [Вычисление исполнителя активной задачи](n3_calculate_active_task_assignee.html#n3_calculate_active_task_assignee "Вычисление исполнителя активной задачи с помощью N3")
+- [Вычисление пользователей с активными задачами][example_n3_calculate_active_task_accounts]
+- [Вычисление исполнителя активной задачи][n3_calculate_active_task_assignee]
 - [Периодические напоминания об открытых задачах][example_n3_periodic_task_notifications]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

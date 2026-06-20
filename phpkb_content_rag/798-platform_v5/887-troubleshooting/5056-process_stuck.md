@@ -2,7 +2,7 @@
 title: 'Зациклился процесс — что делать?'
 kbId: 5056
 url: 'https://kb.comindware.ru/article.php?id=5056'
-updated: '2026-06-20 18:06:29'
+updated: '2026-06-20 20:26:37'
 ---
 
 # Зациклился процесс — что делать?
@@ -44,9 +44,9 @@ updated: '2026-06-20 18:06:29'
 
 ## Связанные статьи
 
-- [Шаблон процесса](https://kb.comindware.ru/article.php?id=5694)
-- [Использование диаграммы экземпляра процесса](https://kb.comindware.ru/article.php?id=5658)
-- [Диаграмма процесса. Определения, редактирование, публикация](https://kb.comindware.ru/article.php?id=5657)
-- [Шаблон записи](https://kb.comindware.ru/article.php?id=5693)
-- [Таблицы. Настройка](https://kb.comindware.ru/article.php?id=5735)
-- [Отладка формул, выражений N3, сценариев и C#-скриптов](https://kb.comindware.ru/article.php?id=5164)
+- [Шаблон процесса](https://kb.comindware.ru/article.php?id=4758)
+- [Использование диаграммы экземпляра процесса](https://kb.comindware.ru/article.php?id=4723)
+- [Диаграмма процесса. Определения, редактирование, публикация](https://kb.comindware.ru/article.php?id=4721)
+- [Шаблон записи](https://kb.comindware.ru/article.php?id=4759)
+- [Таблицы. Настройка](https://kb.comindware.ru/article.php?id=4800)
+- [Отладка формул, выражений N3, сценариев и C#-скриптов](https://kb.comindware.ru/article.php?id=4929)

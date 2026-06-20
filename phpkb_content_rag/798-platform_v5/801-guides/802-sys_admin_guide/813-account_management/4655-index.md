@@ -2,7 +2,7 @@
 title: 'Синхронизация с сервером каталогов (Active Directory)'
 kbId: 4655
 url: 'https://kb.comindware.ru/article.php?id=4655'
-updated: '2026-06-20 18:04:40'
+updated: '2026-06-20 20:24:53'
 ---
 
 # Синхронизация с сервером каталогов (Active Directory)
@@ -27,7 +27,7 @@ updated: '2026-06-20 18:04:40'
 
 Примечание
 
-- После смены домена Active Directory во время синхронизации обновятся данные аккаунтов, при этом сохранится привязка аккаунтов к [ролям в приложении](https://kb.comindware.ru/article.php?id=5738) и [системным ролям](https://kb.comindware.ru/article.php?id=5610).
+- После смены домена Active Directory во время синхронизации обновятся данные аккаунтов, при этом сохранится привязка аккаунтов к [ролям в приложении](https://kb.comindware.ru/article.php?id=4803) и [системным ролям](https://kb.comindware.ru/article.php?id=4662).
 - Если на стороне Active Directory у аккаунта сменилось имя пользователя, в Системе будет создан новый аккаунт.
 
 Система хранит данные о версии загружаемого объекта. При создании повторного соединения, система запрашивает данные, проверяет версию каждого объекта, если она изменилась, то данные синхронизируются.
@@ -50,7 +50,7 @@ updated: '2026-06-20 18:04:40'
 - **`uSNChanged`** (Версия объекта);
 - **`distinguishedName`** (Уникальное имя).
 
-См. также *«[Обязательные атрибуты и уникальность аккаунтов](https://kb.comindware.ru/article.php?id=5579#accounts_required_unique)»*.
+См. также *«[Обязательные атрибуты и уникальность аккаунтов](https://kb.comindware.ru/article.php?id=4653#accounts_required_unique)»*.
 
 | Comindware Platform | Active Directory |
 | --- | --- |
@@ -84,23 +84,23 @@ updated: '2026-06-20 18:04:40'
 
 **Comindware Platform**
 
-- [Сервер каталогов. Настройка подключения](https://kb.comindware.ru/article.php?id=5319)
+- [Сервер каталогов. Настройка подключения](https://kb.comindware.ru/article.php?id=4687)
 
 **Linux**
 
-- [Аутентификация через Active Directory. Настройка контроллера домена и экземпляра ПО](https://kb.comindware.ru/article.php?id=5345)
-- [Аутентификация через единый вход (SSO). Настройка контроллера домена, экземпляра ПО и компьютера конечного пользователя](https://kb.comindware.ru/article.php?id=5378)
+- [Аутентификация через Active Directory. Настройка контроллера домена и экземпляра ПО](https://kb.comindware.ru/article.php?id=4605)
+- [Аутентификация через единый вход (SSO). Настройка контроллера домена, экземпляра ПО и компьютера конечного пользователя](https://kb.comindware.ru/article.php?id=4613)
 
 **Windows**
 
-- [Настройка единого входа (SSO-аутентификации) в ОС Windows](https://kb.comindware.ru/article.php?id=5583)
+- [Настройка единого входа (SSO-аутентификации) в ОС Windows](https://kb.comindware.ru/article.php?id=4657)
 
 ## Связанные статьи
 
-- [Подключения. Определения, типы, создание, настройка, удаление](https://kb.comindware.ru/article.php?id=5303)
-- [Аккаунты. Администрирование, назначение лицензий](https://kb.comindware.ru/article.php?id=5579)
-- [Обязательные атрибуты и уникальность аккаунтов](https://kb.comindware.ru/article.php?id=5579#accounts_required_unique)
-- [Аудит разрешений аккаунтов](https://kb.comindware.ru/article.php?id=5612)
-- [Шаблон аккаунта](https://kb.comindware.ru/article.php?id=5695)
-- [Группы. Создание, настройка, выбор участников, синхронизация с AD, удаление](https://kb.comindware.ru/article.php?id=5580)
-- [Аутентификация, авторизация и сеансы пользователей](https://kb.comindware.ru/article.php?id=5582)
+- [Подключения. Определения, типы, создание, настройка, удаление](https://kb.comindware.ru/article.php?id=4675)
+- [Аккаунты. Администрирование, назначение лицензий](https://kb.comindware.ru/article.php?id=4653)
+- [Обязательные атрибуты и уникальность аккаунтов](https://kb.comindware.ru/article.php?id=4653#accounts_required_unique)
+- [Аудит разрешений аккаунтов](https://kb.comindware.ru/article.php?id=4664)
+- [Шаблон аккаунта](https://kb.comindware.ru/article.php?id=4757)
+- [Группы. Создание, настройка, выбор участников, синхронизация с AD, удаление](https://kb.comindware.ru/article.php?id=4654)
+- [Аутентификация, авторизация и сеансы пользователей](https://kb.comindware.ru/article.php?id=4656)

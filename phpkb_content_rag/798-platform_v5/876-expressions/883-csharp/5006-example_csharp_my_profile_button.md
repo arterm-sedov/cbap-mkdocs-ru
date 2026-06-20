@@ -2,7 +2,7 @@
 title: 'Кнопка «Мой профиль»'
 kbId: 5006
 url: 'https://kb.comindware.ru/article.php?id=5006'
-updated: '2026-06-20 18:06:23'
+updated: '2026-06-20 20:26:31'
 ---
 
 # Кнопка «Мой профиль»

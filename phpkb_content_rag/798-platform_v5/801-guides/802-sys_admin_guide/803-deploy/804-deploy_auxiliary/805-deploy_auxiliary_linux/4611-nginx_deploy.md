@@ -2,7 +2,7 @@
 title: 'NGINX. Установка и настройка'
 kbId: 4611
 url: 'https://kb.comindware.ru/article.php?id=4611'
-updated: '2026-06-20 18:04:29'
+updated: '2026-06-20 20:24:42'
 ---
 
 # NGINX. Установка и настройка

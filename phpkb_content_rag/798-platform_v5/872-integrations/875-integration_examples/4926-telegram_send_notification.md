@@ -2,7 +2,7 @@
 title: 'Отправка уведомлений с помощью Telegram. Пример: настройка подключения, пути передачи данных, сценария, приложения и Telegram-бота'
 kbId: 4926
 url: 'https://kb.comindware.ru/article.php?id=4926'
-updated: '2026-06-20 18:06:00'
+updated: '2026-06-20 22:32:44'
 ---
 
 # Отправка уведомлений с помощью Telegram. Пример: настройка подключения, пути передачи данных, сценария, приложения и Telegram-бота
@@ -42,7 +42,7 @@ updated: '2026-06-20 18:06:00'
    ```
    {"ok":true,"result":[{"update_id":XXXXXXXX, "message":{"message_id":4,"from":{"id":1234567890,"is_bot":false,"first_name":"User Name","username":"username","language_code":"en"},"chat":{"id":1234567890,"first_name":"User Name","username":"username","type":"private"},"date":1717687196,"text":"chatid"}}]}
    ```
-10. Найдите в этом сообщении идентификатор чата вида `"from":{"id":1234567890` или `"chat":{"id":1234567890`, где цифры — это идентификатор чата вашего бота {: #telegram\_send\_notification\_chat\_id }.
+10. Найдите в этом сообщении идентификатор чата вида `"from":{"id":1234567890` или `"chat":{"id":1234567890`, где цифры — это идентификатор чата вашего бота.
 11. Настройте подключение к Telegram с использованием полученных ключа и ID чата.
 
 ## Настройка подключения к Telegram и пути передачи данных
@@ -115,7 +115,7 @@ updated: '2026-06-20 18:06:00'
      | --- | --- |
      | `text` | **Атрибут:** *Сообщение* |
      | `chat_id` | **Атрибут:** *ID чата* |
-4. Добавьте и настройте действие «**Отправить сообщение**» {: #telegram\_send\_notification\_send\_message\_action }:
+4. Добавьте и настройте действие «**Отправить сообщение**»:
 
    - **Подключение:** `telegram_send_connection`
    - **Путь передачи данных:** `telegram_send_route`
@@ -134,8 +134,8 @@ updated: '2026-06-20 18:06:00'
 
 ## Связанные статьи
 
-- [Solution API](https://kb.comindware.ru/article.php?id=5333)
-- [Кнопки. Определения, настройка, удаление](https://kb.comindware.ru/article.php?id=5728)
-- [Подключения. Определения, типы, создание, настройка, удаление](https://kb.comindware.ru/article.php?id=5303)
-- [Пути передачи данных. Определения, типы, создание, настройка, удаление](https://kb.comindware.ru/article.php?id=5302)
-- [Сценарии. Определения, создание, настройка, использование](https://kb.comindware.ru/article.php?id=5654)
+- [Solution API](https://kb.comindware.ru/article.php?id=4863)
+- [Кнопки. Определения, настройка, удаление](https://kb.comindware.ru/article.php?id=4790)
+- [Подключения. Определения, типы, создание, настройка, удаление](https://kb.comindware.ru/article.php?id=4675)
+- [Пути передачи данных. Определения, типы, создание, настройка, удаление](https://kb.comindware.ru/article.php?id=4676)
+- [Сценарии. Определения, создание, настройка, использование](https://kb.comindware.ru/article.php?id=4717)

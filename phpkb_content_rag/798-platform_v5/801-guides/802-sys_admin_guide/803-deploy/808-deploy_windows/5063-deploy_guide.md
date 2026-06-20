@@ -2,7 +2,7 @@
 title: 'Установка, запуск, инициализация и остановка ПО в Windows'
 kbId: 5063
 url: 'https://kb.comindware.ru/article.php?id=5063'
-updated: '2026-06-20 18:04:36'
+updated: '2026-06-20 22:32:43'
 ---
 
 # Установка, запуск, инициализация и остановка ПО в Windows
@@ -62,16 +62,16 @@ updated: '2026-06-20 18:04:36'
 
 Установите и настройте это ПО согласно следующим инструкциям:
 
-- *[Elasticsearch. Установка в Windows](https://kb.comindware.ru/article.php?id=5549)*
-- *[Elasticsearch. Установка в Linux](https://kb.comindware.ru/article.php?id=5457)*
-- *[Apache Kafka. Установка в Windows](https://kb.comindware.ru/article.php?id=5551)*
-- *[Apache Kafka. Установка в Linux](https://kb.comindware.ru/article.php?id=5450)*
+- *[Elasticsearch. Установка в Windows](https://kb.comindware.ru/article.php?id=4617)*
+- *[Elasticsearch. Установка в Linux](https://kb.comindware.ru/article.php?id=4601)*
+- *[Apache Kafka. Установка в Windows](https://kb.comindware.ru/article.php?id=4614)*
+- *[Apache Kafka. Установка в Linux](https://kb.comindware.ru/article.php?id=5074)*
 
 ## Примечания по установке
 
 Пути к файлам и директориям
 
-Используемые по умолчанию пути к файлам ПО **Comindware Platform** см. в статье *«[Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=5561)»*.
+Используемые по умолчанию пути к файлам ПО **Comindware Platform** см. в статье *«[Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=4620)»*.
 
 В вашей конфигурации могут использоваться другие пути, поэтому внимательно подставляйте фактические пути в команды при выполнении инструкций.
 
@@ -336,8 +336,8 @@ updated: '2026-06-20 18:04:36'
 
 1. Удостоверьтесь, что корректно настроен файл конфигурации экземпляра ПО. См.:
 
-   - *[Конфигурация экземпляра, компонентов ПО и служб. Настройка](https://kb.comindware.ru/article.php?id=5554)*
-   - *[Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=5561)*
+   - *[Конфигурация экземпляра, компонентов ПО и служб. Настройка](https://kb.comindware.ru/article.php?id=5067)*
+   - *[Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=4620)*
 2. Запустите веб-браузер и в адресной строке введите URL-адрес, на котором был развёрнут экземпляр ПО:
 
    ```
@@ -369,7 +369,7 @@ updated: '2026-06-20 18:04:36'
    - Создайте конфигурацию резервного копирования по расписанию.
    - Запустите резервное копирование вручную, чтобы создать первую резервную копию чистого экземпляра ПО.
 
-   См. *«[Резервное копирование. Настройка, запуск и просмотр журнала сеансов](https://kb.comindware.ru/article.php?id=5566)»*.
+   См. *«[Резервное копирование. Настройка, запуск и просмотр журнала сеансов](https://kb.comindware.ru/article.php?id=4642)»*.
 2. Настройте подключение к почтовому серверу для отправки писем для сброса пароля и двухфакторной аутентификации:
 
    - Создайте подключение типа «**Отправка эл. почты из процесса**».
@@ -377,7 +377,7 @@ updated: '2026-06-20 18:04:36'
    - **Отправьте тестовое сообщение**, чтобы удостовериться в работоспособности подключения.
    - Не настраивайте путь передачи данных и процесс. Это не требуется для отправки уведомлений.
 
-   См. *«[Отправка почты из процесса. Настройка подключения](https://kb.comindware.ru/article.php?id=5366)»*.
+   См. *«[Отправка почты из процесса. Настройка подключения](https://kb.comindware.ru/article.php?id=4690)»*.
 3. Снова запустите резервное копирование вручную, чтобы создать резервную копию работоспособного экземпляра ПО.
 4. Теперь можно приступать к созданию приложений на основе **Comindware Platform**.
 
@@ -443,11 +443,11 @@ updated: '2026-06-20 18:04:36'
 
 ## Связанные статьи
 
-- [Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=5561)
-- [Обновление версии экземпляра ПО в Windows](upgrade_version.html#upgrade_version_windows)
-- [Резервное копирование. Настройка, запуск и просмотр журнала сеансов](https://kb.comindware.ru/article.php?id=5566)
-- [Отправка почты из процесса. Настройка подключения](https://kb.comindware.ru/article.php?id=5366)
-- [Elasticsearch. Установка в Windows](https://kb.comindware.ru/article.php?id=5549)
-- [Elasticsearch. Установка в Linux](https://kb.comindware.ru/article.php?id=5457)
-- [Apache Kafka. Установка в Windows](https://kb.comindware.ru/article.php?id=5551)
-- [Apache Kafka. Установка в Linux](https://kb.comindware.ru/article.php?id=5450)
+- [Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=4620)
+- [Обновление версии экземпляра ПО в Windows](https://kb.comindware.ru/article.php?id=5102)
+- [Резервное копирование. Настройка, запуск и просмотр журнала сеансов](https://kb.comindware.ru/article.php?id=4642)
+- [Отправка почты из процесса. Настройка подключения](https://kb.comindware.ru/article.php?id=4690)
+- [Elasticsearch. Установка в Windows](https://kb.comindware.ru/article.php?id=4617)
+- [Elasticsearch. Установка в Linux](https://kb.comindware.ru/article.php?id=4601)
+- [Apache Kafka. Установка в Windows](https://kb.comindware.ru/article.php?id=4614)
+- [Apache Kafka. Установка в Linux](https://kb.comindware.ru/article.php?id=5074)

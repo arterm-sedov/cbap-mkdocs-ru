@@ -2,14 +2,14 @@
 title: 'Пример использования шаблона экспорта'
 kbId: 4795
 url: 'https://kb.comindware.ru/article.php?id=4795'
-updated: '2026-06-20 18:05:08'
+updated: '2026-06-20 20:25:20'
 ---
 
 # Пример использования шаблона экспорта
 
 ## Порядок настройки
 
-1. Создайте три **[шаблона записи](https://kb.comindware.ru/article.php?id=5693)**:
+1. Создайте три **[шаблона записи](https://kb.comindware.ru/article.php?id=4759)**:
 
    - *Заявки*
    - *Затраты*
@@ -55,12 +55,12 @@ updated: '2026-06-20 18:05:08'
    ![Файл шаблона экспорта «Авансовый отчёт»](/platform/v5.0/business_apps/templates/export_templates/img/export_template_file_example_advance_report.png)
 
    Файл шаблона экспорта «Авансовый отчёт»
-8. Создайте в шаблоне записи *«Заявки»* [шаблон экспорта](https://kb.comindware.ru/article.php?id=5733) *«Авансовый отчёт»* с файлом `advance_report.xslx`.
-9. Вместе с шаблоном экспорта будет автоматически создана [кнопка экспорта записи](https://kb.comindware.ru/article.php?id=5732) *«Авансовый отчёт»*.
+8. Создайте в шаблоне записи *«Заявки»* [шаблон экспорта](https://kb.comindware.ru/article.php?id=4797) *«Авансовый отчёт»* с файлом `advance_report.xslx`.
+9. Вместе с шаблоном экспорта будет автоматически создана [кнопка экспорта записи](https://kb.comindware.ru/article.php?id=4798) *«Авансовый отчёт»*.
 10. Вынесите кнопку *«Авансовый отчёт»* на форму шаблона записи *«Заявки»*.
 11. Откройте любую запись шаблона *«Заявки»*.
 12. Нажмите кнопку *«Авансовый отчёт»*.
-13. Браузер скачает файл следующего вида (с именем, заданным в [свойствах шаблона экспорта](https://kb.comindware.ru/article.php?id=5733)):
+13. Браузер скачает файл следующего вида (с именем, заданным в [свойствах шаблона экспорта](https://kb.comindware.ru/article.php?id=4797)):
 
     ![Файл, сформированный по шаблону экспорта](/platform/v5.0/business_apps/templates/export_templates/img/export_template_file_result.png)
 
@@ -68,8 +68,8 @@ updated: '2026-06-20 18:05:08'
 
 ## Связанные статьи
 
-- *[Настройка шаблона экспорта с использованием C#](https://kb.comindware.ru/article.php?id=5336)*
-- *[Настройка выгрузки нескольких коллекций и изображений](https://kb.comindware.ru/article.php?id=5338)*
-- *[Настройка шаблона экспорта](https://kb.comindware.ru/article.php?id=5733)*
-- *[Подготовка файла шаблона экспорта](https://kb.comindware.ru/article.php?id=5730)*
-- *[Настройка кнопки экспорта](https://kb.comindware.ru/article.php?id=5732)*
+- *[Настройка шаблона экспорта с использованием C#](https://kb.comindware.ru/article.php?id=4793)*
+- *[Настройка выгрузки нескольких коллекций и изображений](https://kb.comindware.ru/article.php?id=4792)*
+- *[Настройка шаблона экспорта](https://kb.comindware.ru/article.php?id=4797)*
+- *[Подготовка файла шаблона экспорта](https://kb.comindware.ru/article.php?id=4796)*
+- *[Настройка кнопки экспорта](https://kb.comindware.ru/article.php?id=4798)*

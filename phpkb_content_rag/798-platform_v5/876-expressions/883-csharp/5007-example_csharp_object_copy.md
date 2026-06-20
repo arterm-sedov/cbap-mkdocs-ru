@@ -2,7 +2,7 @@
 title: 'Копирование объекта'
 kbId: 5007
 url: 'https://kb.comindware.ru/article.php?id=5007'
-updated: '2026-06-20 18:06:23'
+updated: '2026-06-20 20:26:31'
 ---
 
 # Копирование объекта

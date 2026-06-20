@@ -2,7 +2,7 @@
 title: 'Атрибуты типа «Изображение» и «Документ». Вывод изображения на форме'
 kbId: 4975
 url: 'https://kb.comindware.ru/article.php?id=4975'
-updated: '2026-06-20 18:06:16'
+updated: '2026-06-20 20:26:25'
 ---
 
 # Атрибуты типа «Изображение» и «Документ». Вывод изображения на форме
@@ -287,6 +287,6 @@ updated: '2026-06-20 18:06:16'
 
 ## Связанные статьи
 
-- *[Атрибут типа «Документ»](https://kb.comindware.ru/article.php?id=5716)*
-- *[Атрибут типа «Изображение»](https://kb.comindware.ru/article.php?id=5707)*
-- *[Атрибут «Документ». Формирование ссылки на файл](https://kb.comindware.ru/article.php?id=5329)*
+- *[Атрибут типа «Документ»](https://kb.comindware.ru/article.php?id=4782)*
+- *[Атрибут типа «Изображение»](https://kb.comindware.ru/article.php?id=4771)*
+- *[Атрибут «Документ». Формирование ссылки на файл](https://kb.comindware.ru/article.php?id=5151)*

@@ -2,7 +2,7 @@
 title: 'Введение в вычисления'
 kbId: 4930
 url: 'https://kb.comindware.ru/article.php?id=4930'
-updated: '2026-06-20 18:06:01'
+updated: '2026-06-20 20:26:11'
 ---
 
 # Введение в вычисления
@@ -13,28 +13,28 @@ updated: '2026-06-20 18:06:01'
 
 - **Формулы** — встроенный в платформу язык программирования, по синтаксису схожий с формулами Excel.
 
-  Узнайте больше о языке формул Comindware в *[Руководстве по языку формул](https://kb.comindware.ru/category.php?id=901)*.
+  Узнайте больше о языке формул Comindware в *[Руководстве по языку формул](https://kb.comindware.ru/category.php?id=880)*.
 
   Примеры:
 
-  - *[Установка значения атрибута по условию](https://kb.comindware.ru/article.php?id=5247)*;
-  - *[Вычисление всех аккаунтов группы](https://kb.comindware.ru/article.php?id=5246)*;
-  - больше примеров: *[Примеры формул](https://kb.comindware.ru/category.php?id=902)*.
+  - *[Установка значения атрибута по условию](https://kb.comindware.ru/article.php?id=4992)*;
+  - *[Вычисление всех аккаунтов группы](https://kb.comindware.ru/article.php?id=4991)*;
+  - больше примеров: *[Примеры формул](https://kb.comindware.ru/category.php?id=881)*.
 - **C#** — объектно-ориентированный язык программирования, который используется для обращения к API **Comindware Platform**, API внешних систем и типовым библиотекам C#.
 
-  Узнайте больше о написании C#-скриптов в *[Руководстве по написанию скриптов на языке C#](https://kb.comindware.ru/article.php?id=5211)*.
+  Узнайте больше о написании C#-скриптов в *[Руководстве по написанию скриптов на языке C#](https://kb.comindware.ru/article.php?id=4864)*.
 
   Примеры:
 
-  - *[Копирование объекта](https://kb.comindware.ru/article.php?id=5210)*;
-  - *[Кнопка «Мой профиль»](https://kb.comindware.ru/article.php?id=5209)*;
-  - больше примеров: *[Примеры на C#](https://kb.comindware.ru/category.php?id=900)*.
+  - *[Копирование объекта](https://kb.comindware.ru/article.php?id=5007)*;
+  - *[Кнопка «Мой профиль»](https://kb.comindware.ru/article.php?id=5006)*;
+  - больше примеров: *[Примеры на C#](https://kb.comindware.ru/category.php?id=883)*.
 - **N3** — это язык описания, базирующийся на триплетах вида «субъект-предикат-объект». В отличие от формул язык N3 позволяет производить более сложные вычисления.
 
-  Узнайте больше о языке N3 Comindware в *[Руководстве по языку N3](https://kb.comindware.ru/category.php?id=903)*.
+  Узнайте больше о языке N3 Comindware в *[Руководстве по языку N3](https://kb.comindware.ru/category.php?id=877)*.
 
   Примеры:
 
-  - *[Фильтр списка по создателю](https://kb.comindware.ru/article.php?id=5296)*;
-  - *[Сравнение двух атрибутов типа «Аккаунт»](https://kb.comindware.ru/article.php?id=5295)*;
-  - больше примеров: *[Примеры на N3](https://kb.comindware.ru/category.php?id=904)*.
+  - *[Фильтр списка по создателю](https://kb.comindware.ru/article.php?id=4933)*;
+  - *[Сравнение двух атрибутов типа «Аккаунт»](https://kb.comindware.ru/article.php?id=4932)*;
+  - больше примеров: *[Примеры на N3](https://kb.comindware.ru/category.php?id=879)*.

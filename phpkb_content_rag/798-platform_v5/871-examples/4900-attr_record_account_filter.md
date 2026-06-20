@@ -2,7 +2,7 @@
 title: 'Атрибут типа «Запись» / «Аккаунт». Настройка фильтра для раскрывающегося списка на форме'
 kbId: 4900
 url: 'https://kb.comindware.ru/article.php?id=4900'
-updated: '2026-06-20 18:05:46'
+updated: '2026-06-20 20:25:57'
 ---
 
 # Атрибут типа «Запись» / «Аккаунт». Настройка фильтра для раскрывающегося списка на форме
@@ -35,7 +35,7 @@ updated: '2026-06-20 18:05:46'
 
 ## Связанные статьи
 
-- [Атрибут типа «Запись»](https://kb.comindware.ru/article.php?id=5718)
-- [Атрибут типа «Аккаунт»](https://kb.comindware.ru/article.php?id=5704)
-- [Динамические элементы формы](https://kb.comindware.ru/article.php?id=5723)
-- [Динамические элементы формы. Раскрывающийся список](https://kb.comindware.ru/article.php?id=5723#form_dynamic_elements_dropdown)
+- [Атрибут типа «Запись»](https://kb.comindware.ru/article.php?id=4780)
+- [Атрибут типа «Аккаунт»](https://kb.comindware.ru/article.php?id=4774)
+- [Динамические элементы формы](https://kb.comindware.ru/article.php?id=4785)
+- [Динамические элементы формы. Раскрывающийся список](https://kb.comindware.ru/article.php?id=4785#form_dynamic_elements_dropdown)

@@ -2,7 +2,7 @@
 title: 'Редактор выражений. Использование'
 kbId: 5025
 url: 'https://kb.comindware.ru/article.php?id=5025'
-updated: '2026-06-20 18:06:25'
+updated: '2026-06-20 20:26:33'
 ---
 
 # Редактор выражений. Использование
@@ -11,7 +11,7 @@ updated: '2026-06-20 18:06:25'
 
 Определение
 
-Выражения используются для [вычисления](https://kb.comindware.ru/article.php?id=5708) и проверки значений атрибутов и переменных, в правилах для форм, сценариях и скриптах, а также для выборки и обработки данных.
+Выражения используются для [вычисления](https://kb.comindware.ru/article.php?id=4770) и проверки значений атрибутов и переменных, в правилах для форм, сценариях и скриптах, а также для выборки и обработки данных.
 
 В Comindware Platform предусмотрен удобный редактор выражений в следующих нотациях:
 
@@ -32,8 +32,8 @@ updated: '2026-06-20 18:06:25'
 
 См. подробные сведения о предиктивном вводе и подсказках:
 
-- *[Предиктивный ввод в формулах](https://kb.comindware.ru/article.php?id=5184)*
-- *[Предиктивный ввод в выражениях на языке N3](https://kb.comindware.ru/article.php?id=5183)*
+- *[Предиктивный ввод в формулах](https://kb.comindware.ru/article.php?id=5035)*
+- *[Предиктивный ввод в выражениях на языке N3](https://kb.comindware.ru/article.php?id=5039)*
 
 В полном редакторе предусмотрены дополнительные функции:
 
@@ -100,8 +100,8 @@ _![Поиск текста в выражении](/platform/v5.0/business_apps/e
 
 ## Связанные статьи
 
-- [Предиктивный ввод в формулах](https://kb.comindware.ru/article.php?id=5184)
-- [Предиктивный ввод в выражениях на языке N3](https://kb.comindware.ru/article.php?id=5183)
-- [Примеры использования формул](https://kb.comindware.ru/category.php?id=902)
-- [Примеры использования языка N3](https://kb.comindware.ru/category.php?id=904)
-- [Вычисляемые атрибуты](https://kb.comindware.ru/article.php?id=5708)
+- [Предиктивный ввод в формулах](https://kb.comindware.ru/article.php?id=5035)
+- [Предиктивный ввод в выражениях на языке N3](https://kb.comindware.ru/article.php?id=5039)
+- [Примеры использования формул](https://kb.comindware.ru/category.php?id=881)
+- [Примеры использования языка N3](https://kb.comindware.ru/category.php?id=879)
+- [Вычисляемые атрибуты](https://kb.comindware.ru/article.php?id=4770)

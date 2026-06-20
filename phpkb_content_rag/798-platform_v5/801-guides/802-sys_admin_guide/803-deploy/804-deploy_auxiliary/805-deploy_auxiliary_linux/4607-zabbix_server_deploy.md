@@ -2,7 +2,7 @@
 title: 'Zabbix Server, Zabbix Agent, Zabbix Frontend и MySQL. Установка и настройка'
 kbId: 4607
 url: 'https://kb.comindware.ru/article.php?id=4607'
-updated: '2026-06-20 18:04:28'
+updated: '2026-06-20 20:24:42'
 ---
 
 # Zabbix Server, Zabbix Agent, Zabbix Frontend и MySQL. Установка и настройка
@@ -13,7 +13,7 @@ updated: '2026-06-20 18:04:28'
 
 *Zabbix Server* можно развернуть только на Linux-машине, здесь приведён пример установки и конфигурирования на Ubuntu 22.04 LTS. В работе *Zabbix Server* использует СУБД MySQL, либо PostgreSQL. Здесь представлены настройки для MySQL.
 
-*Zabbix Agent* можно установить на машину под управлением ОС Windows или Linux. Здесь представлены краткие инструкции по установке и настройке агента на машине с Ubuntu 22.04 LTS и установленным сервером Zabbix. Инструкции по установке Zabbix Agent на отдельной машине см. в статье «[Zabbix Agent. Инструкции по установке](https://kb.comindware.ru/article.php?id=5463)».
+*Zabbix Agent* можно установить на машину под управлением ОС Windows или Linux. Здесь представлены краткие инструкции по установке и настройке агента на машине с Ubuntu 22.04 LTS и установленным сервером Zabbix. Инструкции по установке Zabbix Agent на отдельной машине см. в статье «[Zabbix Agent. Инструкции по установке](https://kb.comindware.ru/article.php?id=4608)».
 
 ## Установка  Zabbix Server
 
@@ -223,7 +223,7 @@ updated: '2026-06-20 18:04:28'
 
 Следующие шаги предназначены исключительно для настройки мониторинга ресурсов машины с установленным Zabbix Server.
 
-Для установки и настройки Zabbix Agent на сторонние машины используйте соответствующие инструкции. См. статью «[Zabbix Agent. Инструкции по установке](https://kb.comindware.ru/article.php?id=5463)».
+Для установки и настройки Zabbix Agent на сторонние машины используйте соответствующие инструкции. См. статью «[Zabbix Agent. Инструкции по установке](https://kb.comindware.ru/article.php?id=4608)».
 
 1. Отредактируйте файл конфигурации `/etc/zabbix/zabbix_agentd.conf`:
 

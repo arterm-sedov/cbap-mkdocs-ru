@@ -2,7 +2,7 @@
 title: 'Установка, запуск, инициализация и остановка ПО в Windows'
 kbId: 5063
 url: 'https://kb.comindware.ru/article.php?id=5063'
-updated: '2026-06-20 20:24:49'
+updated: '2026-06-20 22:32:43'
 ---
 
 # Установка, запуск, инициализация и остановка ПО в Windows
@@ -444,7 +444,7 @@ updated: '2026-06-20 20:24:49'
 --8<-- "related_topics_heading.md"
 
 - [Пути и содержимое директорий экземпляра ПО][paths]
-- [Обновление версии экземпляра ПО в Windows](upgrade_version.html#upgrade_version_windows)
+- [Обновление версии экземпляра ПО в Windows][upgrade_version_windows]
 - [Резервное копирование. Настройка, запуск и просмотр журнала сеансов][backup_configure]
 - [Отправка почты из процесса. Настройка подключения][process_sending_connection]
 - [Elasticsearch. Установка в Windows][elasticsearch_deploy_windows]

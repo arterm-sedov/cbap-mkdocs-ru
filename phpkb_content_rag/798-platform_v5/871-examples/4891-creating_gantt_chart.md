@@ -2,7 +2,7 @@
 title: 'Диаграмма Ганта. Настройка'
 kbId: 4891
 url: 'https://kb.comindware.ru/article.php?id=4891'
-updated: '2026-06-20 18:05:47'
+updated: '2026-06-20 20:25:57'
 ---
 
 # Диаграмма Ганта. Настройка
@@ -13,15 +13,15 @@ updated: '2026-06-20 18:05:47'
 
 Для формирования диаграммы Ганта требуется настроить несколько шаблонов и атрибутов строго определённых типов.
 
-Инструкции по работе с диаграммой Ганта см. в параграфе *«[Диаграмма Ганта. Использование](https://kb.comindware.ru/article.php?id=5363)»*.
+Инструкции по работе с диаграммой Ганта см. в параграфе *«[Диаграмма Ганта. Использование](https://kb.comindware.ru/article.php?id=4817)»*.
 
-См. также инструкции по настройке и использованию диаграммы Ганта на дашбордах: *[Временная шкала на рабочем столе. Настройка и использование](https://kb.comindware.ru/article.php?id=5645#pages_setup_timeline)*.
+См. также инструкции по настройке и использованию диаграммы Ганта на дашбордах: *[Временная шкала на рабочем столе. Настройка и использование](https://kb.comindware.ru/article.php?id=4810#pages_setup_timeline)*.
 
 _![Пример диаграммы Ганта](/platform/v5.0/examples/img/gantt_chart_example.png)_
 
 ## Настройка шаблонов и форм
 
-1. Создайте три **[шаблона записи](https://kb.comindware.ru/article.php?id=5693)**:
+1. Создайте три **[шаблона записи](https://kb.comindware.ru/article.php?id=4759)**:
 
    - *Работы*
    - *План работ*
@@ -156,7 +156,7 @@ _![Пример диаграммы Ганта](/platform/v5.0/examples/img/gantt
 
 ## Связанные статьи
 
-- [Диаграмма Ганта. Использование](https://kb.comindware.ru/article.php?id=5363)
-- [Шаблон записи](https://kb.comindware.ru/article.php?id=5693)
-- [Атрибуты. Определения, типы, настройка, архивирование, удаление](https://kb.comindware.ru/article.php?id=5706)
-- [Временная шкала на рабочем столе. Настройка и использование](https://kb.comindware.ru/article.php?id=5645#pages_setup_timeline)
+- [Диаграмма Ганта. Использование](https://kb.comindware.ru/article.php?id=4817)
+- [Шаблон записи](https://kb.comindware.ru/article.php?id=4759)
+- [Атрибуты. Определения, типы, настройка, архивирование, удаление](https://kb.comindware.ru/article.php?id=4772)
+- [Временная шкала на рабочем столе. Настройка и использование](https://kb.comindware.ru/article.php?id=4810#pages_setup_timeline)

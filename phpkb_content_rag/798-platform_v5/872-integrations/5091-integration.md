@@ -2,7 +2,7 @@
 title: 'Интеграция Comindware Platform с внешними системами. Общие рекомендации'
 kbId: 5091
 url: 'https://kb.comindware.ru/article.php?id=5091'
-updated: '2026-06-20 18:05:53'
+updated: '2026-06-20 20:26:02'
 ---
 
 # Интеграция Comindware Platform с внешними системами. Общие рекомендации
@@ -179,7 +179,7 @@ updated: '2026-06-20 18:05:53'
 
 Получение данных посредством запроса во внешние системы можно осуществлять по таймеру.
 
-Для доступа к API и внесения изменений в данные **Comindware Platform** внешняя система должна быть авторизована через аккаунт, которому предоставлены соответствующие права. См. *«[Системные роли. Определения, настройка, объединение, удаление](https://kb.comindware.ru/article.php?id=5610)»*.
+Для доступа к API и внесения изменений в данные **Comindware Platform** внешняя система должна быть авторизована через аккаунт, которому предоставлены соответствующие права. См. *«[Системные роли. Определения, настройка, объединение, удаление](https://kb.comindware.ru/article.php?id=4662)»*.
 
 ### Отправка запросов во внешние системы
 
@@ -278,14 +278,14 @@ updated: '2026-06-20 18:05:53'
      - Настройте подключение типа «**Подключения REST и OData**» — «**Синхронизация с веб-сервисом**».
      - Настройте синхронизацию данных с OData-сервисом на странице «**Интеграции**» *‌* приложения.
 
-     См. *«[Синхронизация с веб-сервисом. Интеграция по OData](https://kb.comindware.ru/article.php?id=5308)»*.
+     См. *«[Синхронизация с веб-сервисом. Интеграция по OData](https://kb.comindware.ru/article.php?id=4697)»*.
    - **Для HTTP-запросов, эл. почты и других встроенных адаптеров**
 
      - Настройте **подключение** к внешней системе.
      - Настройте **путь передачи данных** для сопоставления данных между **Comindware Platform** и внешней системой.
      - Настройте **сценарий** или **бизнес-процесс** для обработки и преобразования данных.
 
-     См. *«[Подключения. Определения, типы, создание, настройка, удаление](https://kb.comindware.ru/article.php?id=5303)»*, *[Пути передачи данных](https://kb.comindware.ru/article.php?id=5302)*, *«[Сценарии. Определение, создание, настройка, использование](https://kb.comindware.ru/article.php?id=5654)»*, *«[Диаграмма процесса. Определения, просмотр, редактирование, публикация](https://kb.comindware.ru/article.php?id=5657)»*.
+     См. *«[Подключения. Определения, типы, создание, настройка, удаление](https://kb.comindware.ru/article.php?id=4675)»*, *[Пути передачи данных](https://kb.comindware.ru/article.php?id=4676)*, *«[Сценарии. Определение, создание, настройка, использование](https://kb.comindware.ru/article.php?id=4717)»*, *«[Диаграмма процесса. Определения, просмотр, редактирование, публикация](https://kb.comindware.ru/article.php?id=4721)»*.
    - **Для заказных адаптеров**
 
      - Создайте решение Visual Studio с исходным кодом адаптера.
@@ -294,23 +294,23 @@ updated: '2026-06-20 18:05:53'
      - Настройте путь передачи данных для сопоставления данных между **Comindware Platform** и адаптером.
      - Настройте **сценарий** или **бизнес-процесс** для обработки и преобразования данных.
 
-     См. *«[Адаптеры. Определения, настройка, удаление](https://kb.comindware.ru/article.php?id=5615)»*.
+     См. *«[Адаптеры. Определения, настройка, удаление](https://kb.comindware.ru/article.php?id=4672)»*.
    - **Для REST API Comindware Platform**
 
      - Настройте в **Comindware Platform** аккаунт, который внешняя система будет использовать для доступа к API.
      - Настройте во внешней системе использование необходимых заголовков аутентификации.
      - Настройте во внешней системе вызов методов API **Comindware Platform**.
 
-     См. *«[Введение в API](https://kb.comindware.ru/article.php?id=5332)»*.
+     См. *«[Введение в API](https://kb.comindware.ru/article.php?id=4860)»*.
 
 ### Логика использования подключений и путей передачи данных
 
-Для использования встроенного или заказного адаптера, например для обработки HTTP-запросов или эл. почты, в **Comindware Platform** необходимо настроить **[подключение](https://kb.comindware.ru/article.php?id=5303)** к внешней системе и **[путь передачи данных](https://kb.comindware.ru/article.php?id=5302)**.
+Для использования встроенного или заказного адаптера, например для обработки HTTP-запросов или эл. почты, в **Comindware Platform** необходимо настроить **[подключение](https://kb.comindware.ru/article.php?id=4675)** к внешней системе и **[путь передачи данных](https://kb.comindware.ru/article.php?id=4676)**.
 
 - **Подключение** представляет собой канал передачи данных между **Comindware Platform** и внешней системой.
 - **Путь передачи данных** представляет собой модель сопоставления данных с внешней системой. Для одного подключения можно настроить несколько путей передачи данных для реализации разной логики сопоставления и преобразования данных.
 
-См. *«[Подключения. Определения, типы, создание, настройка, удаление](https://kb.comindware.ru/article.php?id=5303)»*, *[Пути передачи данных](https://kb.comindware.ru/article.php?id=5302)*.
+См. *«[Подключения. Определения, типы, создание, настройка, удаление](https://kb.comindware.ru/article.php?id=4675)»*, *[Пути передачи данных](https://kb.comindware.ru/article.php?id=4676)*.
 
 ### Доступ к API Comindware Platform
 
@@ -326,7 +326,7 @@ http://your-host/docs
 
 Для доступа к интерфейсу Swagger требуется авторизация с соответствующими правами.
 
-Подробные сведения см. в *[Справочнике по API](https://kb.comindware.ru/article.php?id=5332)*.
+Подробные сведения см. в *[Справочнике по API](https://kb.comindware.ru/article.php?id=4860)*.
 
 ### Отладка HTTP-интеграций
 
@@ -344,34 +344,34 @@ http://your-host/docs
 
 ### Для работы с электронной почтой
 
-- *[Отправка эл. почты из сценариев по SMTP/Exchange](https://kb.comindware.ru/article.php?id=5630)*
-- *[Получение эл. почты с помощью сценариев через IMAP и Exchange](https://kb.comindware.ru/article.php?id=5629)*
-- *[Отправка почты из процесса](https://kb.comindware.ru/article.php?id=5366)*
-- *[Получение эл. почты и веб-запросов в процессе](https://kb.comindware.ru/article.php?id=5628)*
+- *[Отправка эл. почты из сценариев по SMTP/Exchange](https://kb.comindware.ru/article.php?id=4692)*
+- *[Получение эл. почты с помощью сценариев через IMAP и Exchange](https://kb.comindware.ru/article.php?id=4693)*
+- *[Отправка почты из процесса](https://kb.comindware.ru/article.php?id=4690)*
+- *[Получение эл. почты и веб-запросов в процессе](https://kb.comindware.ru/article.php?id=4695)*
 
 ### Для работы с HTTP-запросами
 
-- *[HTTP-запросы типа GET. Отправка запроса и обработка ответа в формате JSON](https://kb.comindware.ru/article.php?id=5312)*
-- *[HTTP-запросы. Получение JSON-данных в сценарии](https://kb.comindware.ru/article.php?id=5311)*
-- *[HTTP-запросы. Получение и обработка данных с помощью JSONPath](https://kb.comindware.ru/article.php?id=5323)*
-- *[HTTP-запросы типа POST. Отправка и получение ответа](https://kb.comindware.ru/article.php?id=5304)*
-- *[HTTP-запросы типа POST. Отправка составного содержимого и файлов](https://kb.comindware.ru/article.php?id=5305)*
-- *[HTTP-запросы с составным содержимым. Получение файлов в сценарии](https://kb.comindware.ru/article.php?id=5313)*
+- *[HTTP-запросы типа GET. Отправка запроса и обработка ответа в формате JSON](https://kb.comindware.ru/article.php?id=4699)*
+- *[HTTP-запросы. Получение JSON-данных в сценарии](https://kb.comindware.ru/article.php?id=4700)*
+- *[HTTP-запросы. Получение и обработка данных с помощью JSONPath](https://kb.comindware.ru/article.php?id=5084)*
+- *[HTTP-запросы типа POST. Отправка и получение ответа](https://kb.comindware.ru/article.php?id=5075)*
+- *[HTTP-запросы типа POST. Отправка составного содержимого и файлов](https://kb.comindware.ru/article.php?id=5066)*
+- *[HTTP-запросы с составным содержимым. Получение файлов в сценарии](https://kb.comindware.ru/article.php?id=5083)*
 
 ### Для работы с СУБД
 
-- *[Внешняя СУБД (MySQL, MSSQL, Oracle, PostgreSQL). Отправка SQL-запроса. Настройка подключения, пути передачи данных и сценария](https://kb.comindware.ru/article.php?id=5374)*
-- *[Внешняя СУБД (MySQL, MSSQL, Oracle, PostgreSQL). Получение данных по таймеру. Настройка подключения, пути передачи данных и сценария](https://kb.comindware.ru/article.php?id=5347)*
+- *[Внешняя СУБД (MySQL, MSSQL, Oracle, PostgreSQL). Отправка SQL-запроса. Настройка подключения, пути передачи данных и сценария](https://kb.comindware.ru/article.php?id=4706)*
+- *[Внешняя СУБД (MySQL, MSSQL, Oracle, PostgreSQL). Получение данных по таймеру. Настройка подключения, пути передачи данных и сценария](https://kb.comindware.ru/article.php?id=4705)*
 
 ### Для работы с различными сервисами
 
-- *[Синхронизация с веб-сервисом. Интеграция по OData](https://kb.comindware.ru/article.php?id=5308)*
-- *[Интеграция с 1С по OData. Настройка для импорта данных](https://kb.comindware.ru/article.php?id=5309)*
-- *[Collabora Online. Настройка подключения](https://kb.comindware.ru/article.php?id=5627)*
-- *[Р7 Офис. Настройка сервера и подключения](https://kb.comindware.ru/article.php?id=5322)*
-- *[Отправка запросов данных в «СФЕРА Курьер»](https://kb.comindware.ru/article.php?id=5621)*
-- *[Получение документов из «СФЕРА Курьер»](https://kb.comindware.ru/article.php?id=5622)*
-- *[Отправка уведомлений с помощью Telegram-бота](https://kb.comindware.ru/article.php?id=5321)*
+- *[Синхронизация с веб-сервисом. Интеграция по OData](https://kb.comindware.ru/article.php?id=4697)*
+- *[Интеграция с 1С по OData. Настройка для импорта данных](https://kb.comindware.ru/article.php?id=4698)*
+- *[Collabora Online. Настройка подключения](https://kb.comindware.ru/article.php?id=4688)*
+- *[Р7 Офис. Настройка сервера и подключения](https://kb.comindware.ru/article.php?id=4689)*
+- *[Отправка запросов данных в «СФЕРА Курьер»](https://kb.comindware.ru/article.php?id=5062)*
+- *[Получение документов из «СФЕРА Курьер»](https://kb.comindware.ru/article.php?id=5061)*
+- *[Отправка уведомлений с помощью Telegram-бота](https://kb.comindware.ru/article.php?id=4926)*
 
 ## Типичные проблемы и их решения
 
@@ -411,11 +411,11 @@ http://your-host/docs
 
 ## Связанные статьи
 
-- *[Введение в API](https://kb.comindware.ru/article.php?id=5332)*
-- *[Адаптеры. Определения, настройка, удаление](https://kb.comindware.ru/article.php?id=5615)*
-- *[Подключения. Определения, типы, создание, настройка, удаление](https://kb.comindware.ru/article.php?id=5303)*
-- *[Пути передачи данных](https://kb.comindware.ru/article.php?id=5302)*
-- *[Синхронизация с веб-сервисом. Интеграция по OData](https://kb.comindware.ru/article.php?id=5308)*
-- *[Системные роли](https://kb.comindware.ru/article.php?id=5610)*
-- *[Отладка формул, выражений N3, сценариев и C#-скриптов](https://kb.comindware.ru/article.php?id=5164)*
-- *[Подсистема журналирования](https://kb.comindware.ru/article.php?id=5557)*
+- *[Введение в API](https://kb.comindware.ru/article.php?id=4860)*
+- *[Адаптеры. Определения, настройка, удаление](https://kb.comindware.ru/article.php?id=4672)*
+- *[Подключения. Определения, типы, создание, настройка, удаление](https://kb.comindware.ru/article.php?id=4675)*
+- *[Пути передачи данных](https://kb.comindware.ru/article.php?id=4676)*
+- *[Синхронизация с веб-сервисом. Интеграция по OData](https://kb.comindware.ru/article.php?id=4697)*
+- *[Системные роли](https://kb.comindware.ru/article.php?id=4662)*
+- *[Отладка формул, выражений N3, сценариев и C#-скриптов](https://kb.comindware.ru/article.php?id=4929)*
+- *[Подсистема журналирования](https://kb.comindware.ru/article.php?id=4623)*

@@ -2,14 +2,14 @@
 title: 'Форматирование значений в шаблонах экспорта и формулах'
 kbId: 4794
 url: 'https://kb.comindware.ru/article.php?id=4794'
-updated: '2026-06-20 18:06:14'
+updated: '2026-06-20 20:26:23'
 ---
 
 # Форматирование значений в шаблонах экспорта и формулах
 
 ## Введение
 
-В **Comindware Platform** предусмотрена возможность выгрузки данных записи в шаблон Word, Excel или PDF. Cм. «[Подготовка файла шаблона экспорта](https://kb.comindware.ru/article.php?id=5730)».
+В **Comindware Platform** предусмотрена возможность выгрузки данных записи в шаблон Word, Excel или PDF. Cм. «[Подготовка файла шаблона экспорта](https://kb.comindware.ru/article.php?id=4796)».
 
 В файле шаблона экспорта используются заполнители в фигурных скобках вида `{attributeSystemName}`, где `attributeSystemName` — системное имя атрибута.
 
@@ -186,7 +186,7 @@ FORMAT("{0}",LIST(IF($attributeSystemName == true,"Согласовано","Не
 - `{accountAttributeSystemName.birthday:dd MMMM yyyy 'г.'}` — дата рождения в формате: *29 мая 2024 г.*;
 - `{accountAttributeSystemName.title}` — должность.
 
-См. также [список стандартных атрибутов аккаунта](https://kb.comindware.ru/article.php?id=5695#account_template_attribute_system_names).
+См. также [список стандартных атрибутов аккаунта](https://kb.comindware.ru/article.php?id=4757#account_template_attribute_system_names).
 
 ## Форматирование атрибутов связанных записей
 
@@ -229,6 +229,6 @@ FORMAT("{0}",LIST(IF($attributeSystemName == true,"Согласовано","Не
 
 ## Связанные статьи
 
-- *[Системные атрибуты шаблона аккаунта](https://kb.comindware.ru/article.php?id=5695#account_template_attribute_system_names)*
-- *[Подготовка файла шаблона экспорта](https://kb.comindware.ru/article.php?id=5730)*
-- *[Список функций языка формул Comindware](https://kb.comindware.ru/article.php?id=5218)*
+- *[Системные атрибуты шаблона аккаунта](https://kb.comindware.ru/article.php?id=4757#account_template_attribute_system_names)*
+- *[Подготовка файла шаблона экспорта](https://kb.comindware.ru/article.php?id=4796)*
+- *[Список функций языка формул Comindware](https://kb.comindware.ru/article.php?id=4993)*

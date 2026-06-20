@@ -2,7 +2,7 @@
 title: 'OpenSearch. Настройка разрешений'
 kbId: 5152
 url: 'https://kb.comindware.ru/article.php?id=5152'
-updated: '2026-06-20 20:24:42'
+updated: '2026-06-20 22:32:43'
 ---
 
 # OpenSearch. Настройка разрешений
@@ -267,6 +267,6 @@ updated: '2026-06-20 20:24:42'
 
 - [OpenSearch (Elasticsearch). Настройка подключения][elasticsearch_connection]
 - [Конфигурация экземпляра ПО][configuration_files_linux]
-- [Журнал изменений не записывается. Диагностика и исправление](../../../../troubleshooting/history_not_logged.html#troubleshooting_history_not_written)
+- [Журнал изменений не записывается. Диагностика и исправление][troubleshooting_history_not_written]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

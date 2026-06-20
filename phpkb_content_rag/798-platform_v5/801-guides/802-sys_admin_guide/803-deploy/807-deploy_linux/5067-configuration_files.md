@@ -2,7 +2,7 @@
 title: 'Конфигурация экземпляра, компонентов ПО и служб. Настройка'
 kbId: 5067
 url: 'https://kb.comindware.ru/article.php?id=5067'
-updated: '2026-06-20 18:04:34'
+updated: '2026-06-20 20:24:47'
 ---
 
 # Конфигурация экземпляра, компонентов ПО и служб. Настройка
@@ -22,7 +22,7 @@ updated: '2026-06-20 18:04:34'
 
 Обновление конфигурации системных служб с версии 4.7
 
-Инструкции по обновлению конфигурации с версий 4.7.x на версию 5.0 см. в статье *«[Обновление версии экземпляра ПО с его остановкой](https://kb.comindware.ru/article.php?id=5556)»*.
+Инструкции по обновлению конфигурации с версий 4.7.x на версию 5.0 см. в статье *«[Обновление версии экземпляра ПО с его остановкой](https://kb.comindware.ru/article.php?id=4624)»*.
 
 Ниже перечислены системные службы и соответствующие параметры конфигурации. См. *[Пример файла конфигурации экземпляра ПО](#configuration_files_linux_instance_example)*.
 
@@ -714,6 +714,6 @@ log.folder: /var/log/comindware/<instanceName>/Logs/
 
 ## Связанные статьи
 
-- [Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=5561)
-- [Настройка конфигурации вспомогательного ПО для оптимизации работы Comindware Platform](https://kb.comindware.ru/article.php?id=5454)
-- [OpenSearch (Elasticsearch). Настройка разрешений](https://kb.comindware.ru/article.php?id=5465)
+- [Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=4620)
+- [Настройка конфигурации вспомогательного ПО для оптимизации работы Comindware Platform](https://kb.comindware.ru/article.php?id=4604)
+- [OpenSearch (Elasticsearch). Настройка разрешений](https://kb.comindware.ru/article.php?id=5152)

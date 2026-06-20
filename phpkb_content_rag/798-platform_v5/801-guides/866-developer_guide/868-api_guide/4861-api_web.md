@@ -2,7 +2,7 @@
 title: 'Методы Web API'
 kbId: 4861
 url: 'https://kb.comindware.ru/article.php?id=4861'
-updated: '2026-06-20 18:05:55'
+updated: '2026-06-20 20:26:04'
 ---
 
 # Методы Web API
@@ -993,6 +993,6 @@ _![Интерфейс Swagger для метода Web API, создающего 
 
 ## Связанные статьи
 
-- *[Общие сведения об API Comindware Platform](https://kb.comindware.ru/article.php?id=5332)*
-- *[Методы Solution API](https://kb.comindware.ru/article.php?id=5333)*
-- *[Методы System Core API](https://kb.comindware.ru/article.php?id=5331)*
+- *[Общие сведения об API Comindware Platform](https://kb.comindware.ru/article.php?id=4860)*
+- *[Методы Solution API](https://kb.comindware.ru/article.php?id=4863)*
+- *[Методы System Core API](https://kb.comindware.ru/article.php?id=4862)*

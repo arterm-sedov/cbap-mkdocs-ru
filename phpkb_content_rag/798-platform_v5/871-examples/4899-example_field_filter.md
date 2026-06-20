@@ -2,7 +2,7 @@
 title: 'Фильтр для ссылочного поля. Пример настройки'
 kbId: 4899
 url: 'https://kb.comindware.ru/article.php?id=4899'
-updated: '2026-06-20 18:05:47'
+updated: '2026-06-20 20:25:57'
 ---
 
 # Фильтр для ссылочного поля. Пример настройки
@@ -44,6 +44,6 @@ from a in db->Contracts where EQUALS($client_requestor,a->client) select a->id
 
 ## Связанные статьи
 
-- [Атрибут типа «Запись»](https://kb.comindware.ru/article.php?id=5718)
-- [Динамические элементы формы. Раскрывающийся список](https://kb.comindware.ru/article.php?id=5723#form_dynamic_elements_dropdown)
-- [Язык формул](https://kb.comindware.ru/category.php?id=901)
+- [Атрибут типа «Запись»](https://kb.comindware.ru/article.php?id=4780)
+- [Динамические элементы формы. Раскрывающийся список](https://kb.comindware.ru/article.php?id=4785#form_dynamic_elements_dropdown)
+- [Язык формул](https://kb.comindware.ru/category.php?id=880)

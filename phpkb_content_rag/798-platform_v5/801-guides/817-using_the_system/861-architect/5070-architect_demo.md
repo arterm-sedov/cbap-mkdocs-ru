@@ -2,7 +2,7 @@
 title: 'Построение корпоративной архитектуры. Работа с демонстрационным стендом'
 kbId: 5070
 url: 'https://kb.comindware.ru/article.php?id=5070'
-updated: '2026-06-20 18:05:15'
+updated: '2026-06-20 20:25:27'
 ---
 
 # Построение корпоративной архитектуры. Работа с демонстрационным стендом
@@ -90,32 +90,32 @@ updated: '2026-06-20 18:05:15'
 При работе с модулем «**Корпоративная архитектура**» руководствуйтесь инструкциями в следующих статьях:
 
 - **Моделирование корпоративной архитектуры**
-  - *[Построение процессной архитектуры](https://kb.comindware.ru/article.php?id=5585)*
-    - *[Конструктор диаграмм](https://kb.comindware.ru/article.php?id=5590)*
-    - *[Редактирование диаграммы](https://kb.comindware.ru/article.php?id=5590)*
-  - *[Построение организационной структуры](https://kb.comindware.ru/article.php?id=5592)*
-    - *[Создание оргединицы](https://kb.comindware.ru/article.php?id=5592#architect_organizational_structure_design_unit_create)*
-    - *[Редактирование формы и атрибутов оргединицы](https://kb.comindware.ru/article.php?id=5592#architect_organizational_structure_design_unit_configure_form_and_attributes)*
-    - *[Изменение иерархии оргединиц](https://kb.comindware.ru/article.php?id=5592#architect_organizational_structure_design_hierarchy_change)*
+  - *[Построение процессной архитектуры](https://kb.comindware.ru/article.php?id=4833)*
+    - *[Конструктор диаграмм](https://kb.comindware.ru/article.php?id=4835)*
+    - *[Редактирование диаграммы](https://kb.comindware.ru/article.php?id=4835)*
+  - *[Построение организационной структуры](https://kb.comindware.ru/article.php?id=4850)*
+    - *[Создание оргединицы](https://kb.comindware.ru/article.php?id=4850#architect_organizational_structure_design_unit_create)*
+    - *[Редактирование формы и атрибутов оргединицы](https://kb.comindware.ru/article.php?id=4850#architect_organizational_structure_design_unit_configure_form_and_attributes)*
+    - *[Изменение иерархии оргединиц](https://kb.comindware.ru/article.php?id=4850#architect_organizational_structure_design_hierarchy_change)*
 - **Использование Comindware Platform**
-  - *[Рабочий стол. Использование](https://kb.comindware.ru/article.php?id=5606)*
-  - *[Панель навигации. Использование](https://kb.comindware.ru/article.php?id=5605)*
-  - *[Панель и разделы навигации. Определения, настройка, удаление](https://kb.comindware.ru/article.php?id=5644)*
-  - *[Приложения. Определения, создание, настройка, администрирование, удаление](https://kb.comindware.ru/article.php?id=5643)*
-  - *[Шаблоны. Определения, создание, настройка, перенос между приложениями, архивирование, очистка, удаление](https://kb.comindware.ru/article.php?id=5638)*
-    - *[Шаблон записи](https://kb.comindware.ru/article.php?id=5693)*
-    - *[Шаблон организационной единицы](https://kb.comindware.ru/article.php?id=5697)*
-    - *[Импорт данных в шаблон](https://kb.comindware.ru/article.php?id=5737)*
-    - *[Шаблоны экспорта. Определения и настройка](https://kb.comindware.ru/article.php?id=5733)*
-    - *[Подготовка файла шаблона экспорта](https://kb.comindware.ru/article.php?id=5730)*
-  - *[Атрибуты. Определения, типы, настройка, архивирование, удаление](https://kb.comindware.ru/article.php?id=5706)*
-    - *[Вычисляемые атрибуты](https://kb.comindware.ru/article.php?id=5708)*
-  - *[Формы. Определения, редактирование, удаление, использование списка форм](https://kb.comindware.ru/article.php?id=5724)*
-    - *[Правила для формы. Определения, логика работы и настройка](https://kb.comindware.ru/article.php?id=5721)*
-  - *[Диаграмма автоматизированного процесса. Определения, просмотр, редактирование, публикация](https://kb.comindware.ru/article.php?id=5657)*
-  - *[Роли. Определения и настройка](https://kb.comindware.ru/article.php?id=5738)*
-  - *[Аккаунты. Создание и настройка](https://kb.comindware.ru/article.php?id=5579)*
-  - *[Группы. Создание и настройка](https://kb.comindware.ru/article.php?id=5580)*
+  - *[Рабочий стол. Использование](https://kb.comindware.ru/article.php?id=4823)*
+  - *[Панель навигации. Использование](https://kb.comindware.ru/article.php?id=4824)*
+  - *[Панель и разделы навигации. Определения, настройка, удаление](https://kb.comindware.ru/article.php?id=4809)*
+  - *[Приложения. Определения, создание, настройка, администрирование, удаление](https://kb.comindware.ru/article.php?id=4714)*
+  - *[Шаблоны. Определения, создание, настройка, перенос между приложениями, архивирование, очистка, удаление](https://kb.comindware.ru/article.php?id=4709)*
+    - *[Шаблон записи](https://kb.comindware.ru/article.php?id=4759)*
+    - *[Шаблон организационной единицы](https://kb.comindware.ru/article.php?id=4755)*
+    - *[Импорт данных в шаблон](https://kb.comindware.ru/article.php?id=4802)*
+    - *[Шаблоны экспорта. Определения и настройка](https://kb.comindware.ru/article.php?id=4797)*
+    - *[Подготовка файла шаблона экспорта](https://kb.comindware.ru/article.php?id=4796)*
+  - *[Атрибуты. Определения, типы, настройка, архивирование, удаление](https://kb.comindware.ru/article.php?id=4772)*
+    - *[Вычисляемые атрибуты](https://kb.comindware.ru/article.php?id=4770)*
+  - *[Формы. Определения, редактирование, удаление, использование списка форм](https://kb.comindware.ru/article.php?id=4786)*
+    - *[Правила для формы. Определения, логика работы и настройка](https://kb.comindware.ru/article.php?id=4784)*
+  - *[Диаграмма автоматизированного процесса. Определения, просмотр, редактирование, публикация](https://kb.comindware.ru/article.php?id=4721)*
+  - *[Роли. Определения и настройка](https://kb.comindware.ru/article.php?id=4803)*
+  - *[Аккаунты. Создание и настройка](https://kb.comindware.ru/article.php?id=4653)*
+  - *[Группы. Создание и настройка](https://kb.comindware.ru/article.php?id=4654)*
 
 ## Роль Архитектора
 
@@ -258,7 +258,7 @@ updated: '2026-06-20 18:05:15'
 
     Логику отображения любых полей и областей можно настроить с помощью простых правил для форм.
 
-    См. *«[Правила для формы. Определения, логика работы и настройка](https://kb.comindware.ru/article.php?id=5721)»*.
+    См. *«[Правила для формы. Определения, логика работы и настройка](https://kb.comindware.ru/article.php?id=4784)»*.
 17. В разделе «**Управление архитектурой**» нажмите кнопку «**Мой профиль**».
 
     Важно!
@@ -362,7 +362,7 @@ updated: '2026-06-20 18:05:15'
     - В файле шаблона экспорта указываются системные имена атрибутов процесса и элементов процесса.
     - Система подставляет значения по указанным системным именам.
 
-    Инструкции по настройке шаблона экспорта см. в статьях *«[Шаблоны экспорта. Определения и настройка](https://kb.comindware.ru/article.php?id=5733)»* и *«[Подготовка файла шаблона экспорта](https://kb.comindware.ru/article.php?id=5730)»*.
+    Инструкции по настройке шаблона экспорта см. в статьях *«[Шаблоны экспорта. Определения и настройка](https://kb.comindware.ru/article.php?id=4797)»* и *«[Подготовка файла шаблона экспорта](https://kb.comindware.ru/article.php?id=4796)»*.
 
     ![Скачивание файла шаблона экспорта](/platform/v5.0/architect/img/architect_demo_export_template_download.png)
 
@@ -597,28 +597,28 @@ updated: '2026-06-20 18:05:15'
 
 ## Связанные статьи
 
-- *[Построение процессной архитектуры](https://kb.comindware.ru/article.php?id=5585)*
-- *[Конструктор диаграмм](https://kb.comindware.ru/article.php?id=5590)*
-- *[Редактирование диаграммы](https://kb.comindware.ru/article.php?id=5590)*
-- *[Построение организационной структуры](https://kb.comindware.ru/article.php?id=5592)*
-- *[Создание оргединицы](https://kb.comindware.ru/article.php?id=5592#architect_organizational_structure_design_unit_create)*
-- *[Редактирование формы и атрибутов оргединицы](https://kb.comindware.ru/article.php?id=5592#architect_organizational_structure_design_unit_configure_form_and_attributes)*
-- *[Изменение иерархии оргединиц](https://kb.comindware.ru/article.php?id=5592#architect_organizational_structure_design_hierarchy_change)*
-- *[Рабочий стол. Использование](https://kb.comindware.ru/article.php?id=5606)*
-- *[Панель навигации. Использование](https://kb.comindware.ru/article.php?id=5605)*
-- *[Панель и разделы навигации. Определения, настройка, удаление](https://kb.comindware.ru/article.php?id=5644)*
-- *[Приложения. Определения, создание, настройка, администрирование, удаление](https://kb.comindware.ru/article.php?id=5643)*
-- *[Шаблоны. Определения, создание, настройка, перенос между приложениями, архивирование, очистка, удаление](https://kb.comindware.ru/article.php?id=5638)*
-- *[Шаблон записи](https://kb.comindware.ru/article.php?id=5693)*
-- *[Шаблон организационной единицы](https://kb.comindware.ru/article.php?id=5697)*
-- *[Импорт данных в шаблон](https://kb.comindware.ru/article.php?id=5737)*
-- *[Шаблоны экспорта. Определения и настройка](https://kb.comindware.ru/article.php?id=5733)*
-- *[Подготовка файла шаблона экспорта](https://kb.comindware.ru/article.php?id=5730)*
-- *[Атрибуты. Определения, типы, настройка, архивирование, удаление](https://kb.comindware.ru/article.php?id=5706)*
-- *[Вычисляемые атрибуты](https://kb.comindware.ru/article.php?id=5708)*
-- *[Формы. Определения, редактирование, удаление, использование списка форм](https://kb.comindware.ru/article.php?id=5724)*
-- *[Правила для формы. Определения, логика работы и настройка](https://kb.comindware.ru/article.php?id=5721)*
-- *[Диаграмма автоматизированного процесса. Определения, просмотр, редактирование, публикация](https://kb.comindware.ru/article.php?id=5657)*
-- *[Роли. Определения и настройка](https://kb.comindware.ru/article.php?id=5738)*
-- *[Аккаунты. Создание и настройка](https://kb.comindware.ru/article.php?id=5579)*
-- *[Группы. Создание и настройка](https://kb.comindware.ru/article.php?id=5580)*
+- *[Построение процессной архитектуры](https://kb.comindware.ru/article.php?id=4833)*
+- *[Конструктор диаграмм](https://kb.comindware.ru/article.php?id=4835)*
+- *[Редактирование диаграммы](https://kb.comindware.ru/article.php?id=4835)*
+- *[Построение организационной структуры](https://kb.comindware.ru/article.php?id=4850)*
+- *[Создание оргединицы](https://kb.comindware.ru/article.php?id=4850#architect_organizational_structure_design_unit_create)*
+- *[Редактирование формы и атрибутов оргединицы](https://kb.comindware.ru/article.php?id=4850#architect_organizational_structure_design_unit_configure_form_and_attributes)*
+- *[Изменение иерархии оргединиц](https://kb.comindware.ru/article.php?id=4850#architect_organizational_structure_design_hierarchy_change)*
+- *[Рабочий стол. Использование](https://kb.comindware.ru/article.php?id=4823)*
+- *[Панель навигации. Использование](https://kb.comindware.ru/article.php?id=4824)*
+- *[Панель и разделы навигации. Определения, настройка, удаление](https://kb.comindware.ru/article.php?id=4809)*
+- *[Приложения. Определения, создание, настройка, администрирование, удаление](https://kb.comindware.ru/article.php?id=4714)*
+- *[Шаблоны. Определения, создание, настройка, перенос между приложениями, архивирование, очистка, удаление](https://kb.comindware.ru/article.php?id=4709)*
+- *[Шаблон записи](https://kb.comindware.ru/article.php?id=4759)*
+- *[Шаблон организационной единицы](https://kb.comindware.ru/article.php?id=4755)*
+- *[Импорт данных в шаблон](https://kb.comindware.ru/article.php?id=4802)*
+- *[Шаблоны экспорта. Определения и настройка](https://kb.comindware.ru/article.php?id=4797)*
+- *[Подготовка файла шаблона экспорта](https://kb.comindware.ru/article.php?id=4796)*
+- *[Атрибуты. Определения, типы, настройка, архивирование, удаление](https://kb.comindware.ru/article.php?id=4772)*
+- *[Вычисляемые атрибуты](https://kb.comindware.ru/article.php?id=4770)*
+- *[Формы. Определения, редактирование, удаление, использование списка форм](https://kb.comindware.ru/article.php?id=4786)*
+- *[Правила для формы. Определения, логика работы и настройка](https://kb.comindware.ru/article.php?id=4784)*
+- *[Диаграмма автоматизированного процесса. Определения, просмотр, редактирование, публикация](https://kb.comindware.ru/article.php?id=4721)*
+- *[Роли. Определения и настройка](https://kb.comindware.ru/article.php?id=4803)*
+- *[Аккаунты. Создание и настройка](https://kb.comindware.ru/article.php?id=4653)*
+- *[Группы. Создание и настройка](https://kb.comindware.ru/article.php?id=4654)*

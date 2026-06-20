@@ -2,7 +2,7 @@
 title: 'Неверная ссылка на инстанс'
 kbId: 5054
 url: 'https://kb.comindware.ru/article.php?id=5054'
-updated: '2026-06-20 18:06:29'
+updated: '2026-06-20 20:26:37'
 ---
 
 # Неверная ссылка на инстанс
@@ -18,8 +18,8 @@ updated: '2026-06-20 18:06:29'
 
 ## Связанные статьи
 
-- [Уведомления. Типы, назначение, настройка, использование](https://kb.comindware.ru/article.php?id=5626)
-- [Глобальная конфигурация](https://kb.comindware.ru/article.php?id=5619)
-- [Не отправляется информация в процессном уведомлении](https://kb.comindware.ru/article.php?id=5171)
-- [Отправка почты из процесса. Настройка подключения](https://kb.comindware.ru/article.php?id=5366)
-- [Пути передачи данных](https://kb.comindware.ru/article.php?id=5302)
+- [Уведомления. Типы, назначение, настройка, использование](https://kb.comindware.ru/article.php?id=4682)
+- [Глобальная конфигурация](https://kb.comindware.ru/article.php?id=4668)
+- [Не отправляется информация в процессном уведомлении](https://kb.comindware.ru/article.php?id=5051)
+- [Отправка почты из процесса. Настройка подключения](https://kb.comindware.ru/article.php?id=4690)
+- [Пути передачи данных](https://kb.comindware.ru/article.php?id=4676)

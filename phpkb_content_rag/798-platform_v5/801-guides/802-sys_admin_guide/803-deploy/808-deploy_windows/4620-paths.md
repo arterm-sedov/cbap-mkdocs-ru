@@ -2,7 +2,7 @@
 title: 'Пути и содержимое директорий экземпляра ПО'
 kbId: 4620
 url: 'https://kb.comindware.ru/article.php?id=4620'
-updated: '2026-06-20 18:04:36'
+updated: '2026-06-20 20:24:49'
 ---
 
 # Пути и содержимое директорий экземпляра ПО
@@ -30,7 +30,7 @@ updated: '2026-06-20 18:04:36'
 - `/usr/share/comindware/configs/instance/<instanceName>.yml` — файл конфигурации. В этом файле задаются все остальные пути, перечисленные ниже.
 - `/var/www/<instanceName>` — исполняемые и конфигурационные файлы экземпляра ПО:
 
-  - `logs.config` — конфигурация журналов, см. *«[Подсистема журналирования](https://kb.comindware.ru/article.php?id=5557)»*;
+  - `logs.config` — конфигурация журналов, см. *«[Подсистема журналирования](https://kb.comindware.ru/article.php?id=4623)»*;
   - `adapterhost.yml` — конфигурация службы Adapterhost;
   - `apigateway.yml` — конфигурация службы Apigateway;
   - `Ignite.config` — конфигурация Apache Ignite.
@@ -67,7 +67,7 @@ C:\\ProgramData\\сomindware\\configs\\instance\\<instanceName>.yml
 - `C:\\ProgramData\\сomindware\\Instances` — папка с экземплярами ПО.
 - `C:\\ProgramData\\сomindware\\Instances\\<instanceName>` — экземпляр ПО.
 - `C:\\ProgramData\\сomindware\\Instances\\<instanceName>\\config` — исполняемые и конфигурационные файлы экземпляра ПО.:
-  - `logs.config` — конфигурация журналов, см. *«[Подсистема журналирования](https://kb.comindware.ru/article.php?id=5557)»*;
+  - `logs.config` — конфигурация журналов, см. *«[Подсистема журналирования](https://kb.comindware.ru/article.php?id=4623)»*;
   - `adapterhost.yml` — конфигурация службы Adapterhost;
   - `apigateway.yml` — конфигурация службы Apigateway;
   - `Ignite.config` — конфигурация Apache Ignite.
@@ -108,13 +108,13 @@ C:\\ProgramData\\сomindware\\configs\\instance\\<instanceName>.yml
 
   Для директорий в этм хранилище с настроить проверку с помощью антивирусного ПО.
 
-  См. *«[Антивирусное ПО. Настройка сканирования и исключений](https://kb.comindware.ru/article.php?id=5456)»*.
+  См. *«[Антивирусное ПО. Настройка сканирования и исключений](https://kb.comindware.ru/article.php?id=4602)»*.
 
-Технические требования к хранилищам данных описаны в статье *[«Архитектура, ландшафт, программное и техническое обеспечение»](https://kb.comindware.ru/article.php?id=5443)*.
+Технические требования к хранилищам данных описаны в статье *[«Архитектура, ландшафт, программное и техническое обеспечение»](https://kb.comindware.ru/article.php?id=4596)*.
 
 ## Связанные статьи
 
-- [Конфигурация экземпляра, компонентов ПО и служб. Настройка в Linux](https://kb.comindware.ru/article.php?id=5554)
-- [Развёртывание Comindware Platform. Архитектура, ландшафт, программное и техническое обеспечение](https://kb.comindware.ru/article.php?id=5443)
-- [Антивирусное ПО. Настройка сканирования и исключений](https://kb.comindware.ru/article.php?id=5456)
-- [Подсистема журналирования](https://kb.comindware.ru/article.php?id=5557)
+- [Конфигурация экземпляра, компонентов ПО и служб. Настройка в Linux](https://kb.comindware.ru/article.php?id=5067)
+- [Развёртывание Comindware Platform. Архитектура, ландшафт, программное и техническое обеспечение](https://kb.comindware.ru/article.php?id=4596)
+- [Антивирусное ПО. Настройка сканирования и исключений](https://kb.comindware.ru/article.php?id=4602)
+- [Подсистема журналирования](https://kb.comindware.ru/article.php?id=4623)

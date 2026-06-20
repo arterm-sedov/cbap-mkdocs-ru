@@ -2,7 +2,7 @@
 title: 'Действия. Определение и типы'
 kbId: 4732
 url: 'https://kb.comindware.ru/article.php?id=4732'
-updated: '2026-06-20 18:04:57'
+updated: '2026-06-20 20:25:10'
 ---
 
 # Действия. Определение и типы
@@ -14,13 +14,13 @@ updated: '2026-06-20 18:04:57'
 ## Типы действий
 
 - **Задачи** — определяют действие, выполняемое человеком или системой.
-  - **[Пользовательская задача](https://kb.comindware.ru/article.php?id=5666)**
-  - **[Задача-выполнение сценария](https://kb.comindware.ru/article.php?id=5668)**
+  - **[Пользовательская задача](https://kb.comindware.ru/article.php?id=4730)**
+  - **[Задача-выполнение сценария](https://kb.comindware.ru/article.php?id=4728)**
 - **Подпроцессы** — запускают другие процессы в контексте текущего процесса.
-  - **[Вызов процесса](https://kb.comindware.ru/article.php?id=5663)**
-  - **[Встроенный подпроцесс](https://kb.comindware.ru/article.php?id=5665)**
+  - **[Вызов процесса](https://kb.comindware.ru/article.php?id=4727)**
+  - **[Встроенный подпроцесс](https://kb.comindware.ru/article.php?id=4731)**
 
 ## Связанные статьи
 
-- [Элементы диаграммы процесса](https://kb.comindware.ru/article.php?id=5662)
-- [Редактирование диаграммы процесса](https://kb.comindware.ru/article.php?id=5657#process_diagram_designer)
+- [Элементы диаграммы процесса](https://kb.comindware.ru/article.php?id=4724)
+- [Редактирование диаграммы процесса](https://kb.comindware.ru/article.php?id=4721#process_diagram_designer)

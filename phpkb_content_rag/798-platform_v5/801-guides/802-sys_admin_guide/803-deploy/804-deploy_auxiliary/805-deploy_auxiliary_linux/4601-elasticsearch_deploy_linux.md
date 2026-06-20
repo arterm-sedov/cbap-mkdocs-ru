@@ -2,23 +2,23 @@
 title: 'Elasticsearch. Установка в базовой конфигурации'
 kbId: 4601
 url: 'https://kb.comindware.ru/article.php?id=4601'
-updated: '2026-06-20 18:04:28'
+updated: '2026-06-20 20:24:42'
 ---
 
 # Elasticsearch. Установка в базовой конфигурации
 
 ## Введение
 
-Для работы **Comindware Platform** требуется сервер Elasticsearch. См. [системные требования](https://kb.comindware.ru/article.php?id=5429).
+Для работы **Comindware Platform** требуется сервер Elasticsearch. См. [системные требования](https://kb.comindware.ru/article.php?id=4659).
 
 Здесь представлены инструкции по установке Elasticsearch с помощью дистрибутива **Comindware Platform** в простейшей базовой конфигурации.
 
 Инструкции по установке Elasticsearch в иных конфигурациях:
 
 - *[Официальный сайт Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/targz.html)* (английский язык)
-- *[Установка и настройка Elasticsearch без сертификатов подлинности](https://kb.comindware.ru/article.php?id=5459)*
+- *[Установка и настройка Elasticsearch без сертификатов подлинности](https://kb.comindware.ru/article.php?id=4612)*
 
-С помощью дистрибутива **Comindware Platform** можно развернуть сервер Elasticsearch вместе с экземпляром ПО или на отдельном сервере. Для этого укажите ключ `-e` при запуске скрипта `prerequisites_install.sh`. См. *«[Установка, запуск, инициализация и остановка ПО Comindware Platform](https://kb.comindware.ru/article.php?id=5558)»*.
+С помощью дистрибутива **Comindware Platform** можно развернуть сервер Elasticsearch вместе с экземпляром ПО или на отдельном сервере. Для этого укажите ключ `-e` при запуске скрипта `prerequisites_install.sh`. См. *«[Установка, запуск, инициализация и остановка ПО Comindware Platform](https://kb.comindware.ru/article.php?id=4622)»*.
 
 Установленная таким образом сервер Elasticsearch имеет базовую конфигурацию: без аутентификации и с одним узлом. Он доступна по адресу `localhost:9200`.
 
@@ -154,6 +154,6 @@ xpack.security.transport.ssl:
 ## Связанные статьи
 
 - [Официальный сайт Elasticsearch](https://www.elastic.co/guide/en/elasticsearch/reference/current/targz.html) (английский язык)
-- [Установка и настройка Elasticsearch без сертификатов подлинности](https://kb.comindware.ru/article.php?id=5459)
-- [OpenSearch (Elasticsearch). Настройка разрешений](https://kb.comindware.ru/article.php?id=5465)
-- [Установка, запуск, инициализация и остановка ПО Comindware Platform](https://kb.comindware.ru/article.php?id=5558)
+- [Установка и настройка Elasticsearch без сертификатов подлинности](https://kb.comindware.ru/article.php?id=4612)
+- [OpenSearch (Elasticsearch). Настройка разрешений](https://kb.comindware.ru/article.php?id=5152)
+- [Установка, запуск, инициализация и остановка ПО Comindware Platform](https://kb.comindware.ru/article.php?id=4622)

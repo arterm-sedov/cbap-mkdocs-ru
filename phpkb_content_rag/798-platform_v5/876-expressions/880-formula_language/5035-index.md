@@ -2,7 +2,7 @@
 title: 'Предиктивный ввод в формулах'
 kbId: 5035
 url: 'https://kb.comindware.ru/article.php?id=5035'
-updated: '2026-06-20 18:06:25'
+updated: '2026-06-20 20:26:33'
 ---
 
 # Предиктивный ввод в формулах
@@ -20,7 +20,7 @@ updated: '2026-06-20 18:06:25'
 2. Отобразится список подходящих функций, введённые буквы будут выделены в именах функций.
 3. Выберите функцию в списке.
 4. Для выбранной функции отобразится подсказка с описанием функции, её параметров и возвращаемого значения.
-5. Чтобы просмотреть подробное описание функции [в справочнике](https://kb.comindware.ru/article.php?id=5185#expression_editor_reference) нажмите пункт «**Показать в справочнике**» в подсказке.
+5. Чтобы просмотреть подробное описание функции [в справочнике](https://kb.comindware.ru/article.php?id=5025#expression_editor_reference) нажмите пункт «**Показать в справочнике**» в подсказке.
 6. Чтобы вставить выбранную функцию в формулу, дважды нажмите её имя в списке.
 
 _![Подсказка при предиктивном вводе имени функции](/platform/v5.0/business_apps/expressions/expression_editor/formula_editor/img/formula_editor_function_autocomplete.png)_
@@ -98,7 +98,7 @@ from a in $Costs where a->TotalAmount > $PlannedCosts select a->id
    ![Список атрибутов, вызванный посредством переменной-селектора](/platform/v5.0/business_apps/expressions/expression_editor/formula_editor/img/formula_editor_linked_record_attributes_selector_autocomplete.png)
 
    Список атрибутов, вызванный посредством переменной-селектора
-3. Дважды нажмите системное имя атрибута `_creator`, чтобы вставить его в формулу. `_creator` — это **[системный атрибут](https://kb.comindware.ru/article.php?id=5717)**, в котором хранится ID аккаунта, создавшего запись.
+3. Дважды нажмите системное имя атрибута `_creator`, чтобы вставить его в формулу. `_creator` — это **[системный атрибут](https://kb.comindware.ru/article.php?id=4781)**, в котором хранится ID аккаунта, создавшего запись.
 4. Введите строку:
 
    ```
@@ -118,7 +118,7 @@ COUNT(from a in $RequestedCars where a->_creator == USER() select a->id)
    ```
    from a in $$RequestedCars where b->_creator->
    ```
-2. После ввода символов `_creator->` отобразится список атрибутов системного **[шаблона аккаунта](https://kb.comindware.ru/article.php?id=5704)**, с которым связан системный атрибут `_creator`. Этот список также можно вызвать, нажав клавиши `Ctrl`+`Пробел` в позиции после оператора `->`.
+2. После ввода символов `_creator->` отобразится список атрибутов системного **[шаблона аккаунта](https://kb.comindware.ru/article.php?id=4774)**, с которым связан системный атрибут `_creator`. Этот список также можно вызвать, нажав клавиши `Ctrl`+`Пробел` в позиции после оператора `->`.
 
    ![Список атрибутов, вызванный по цепочке связанных шаблонов](/platform/v5.0/business_apps/expressions/expression_editor/formula_editor/img/formula_editor_linked_record_attributes_selector_nested_autocomplete.png)
 
@@ -197,7 +197,7 @@ COUNT(from a in $RequestedCars where a->Make == "Лада" select a->id)
 
 ## Ввод заголовка записи связанного шаблона
 
-Если в шаблоне указан [атрибут-заголовок записей](https://kb.comindware.ru/article.php?id=5709), то при нажатии клавиш `Ctrl`+`Пробел` в позиции после системного имени [атрибута типа «**Запись**»](https://kb.comindware.ru/article.php?id=5718), связанного с этим шаблоном, отобразится список записей связанного шаблона с соответствующими заголовками.
+Если в шаблоне указан [атрибут-заголовок записей](https://kb.comindware.ru/article.php?id=4769), то при нажатии клавиш `Ctrl`+`Пробел` в позиции после системного имени [атрибута типа «**Запись**»](https://kb.comindware.ru/article.php?id=4780), связанного с этим шаблоном, отобразится список записей связанного шаблона с соответствующими заголовками.
 
 ### Практический пример: подсчёт количества выполняющихся заявок
 
@@ -287,7 +287,7 @@ OBJECT("Upravlenieavtoparkom", "Avtomobil", "Marka", "Лада")
 
 ## Ввод системного имени значения атрибута типа «Список значений»
 
-Редактор выражений может подсказывать системное имя **значения** [атрибута типа «**Список значений**»](https://kb.comindware.ru/article.php?id=5699).
+Редактор выражений может подсказывать системное имя **значения** [атрибута типа «**Список значений**»](https://kb.comindware.ru/article.php?id=4779).
 
 ### Ввод системного имени значения после оператора сравнения
 
@@ -308,7 +308,7 @@ OBJECT("Upravlenieavtoparkom", "Avtomobil", "Marka", "Лада")
 ### Ввод системного имени значения в качестве аргумента функции
 
 1. Введите функцию `EQUALS()` (возвращает `true`, если её аргументы равны).
-2. В позицию первого аргумента введите символ `$` и системное имя **[атрибута типа «Список значений»](https://kb.comindware.ru/article.php?id=5699)**.
+2. В позицию первого аргумента введите символ `$` и системное имя **[атрибута типа «Список значений»](https://kb.comindware.ru/article.php?id=4779)**.
 3. В позиции второго аргумента нажмите клавиши `Ctrl`+`Пробел`.
 4. Отобразится список значений атрибута.
    ![Список значений атрибута при вводе аргумента функции](/platform/v5.0/business_apps/expressions/expression_editor/formula_editor/img/formula_editor_enum_function_autocomplete.png)
@@ -335,7 +335,7 @@ INT($Passazhiry)
 
 ## Ввод системного имени атрибута связанного шаблона
 
-1. Введите символ `$` и системное имя [атрибута типа «**Запись**»](https://kb.comindware.ru/article.php?id=5718) текущего шаблона.
+1. Введите символ `$` и системное имя [атрибута типа «**Запись**»](https://kb.comindware.ru/article.php?id=4780) текущего шаблона.
 2. Введите оператор `->`.
 3. Отобразится список атрибутов шаблона, связанного с указанным на шаге 1 атрибутом. Этот список также можно вызвать, нажав клавиши `Ctrl`+`Пробел` в позиции после оператора `->`.
    ![Список атрибутов связанного шаблона](/platform/v5.0/business_apps/expressions/expression_editor/formula_editor/img/formula_editor_linked_record_attributes_autocomplete.png)
@@ -405,7 +405,7 @@ COUNT($Car<-Requests:Car)
 При редактировании формул в сценариях предиктивный ввод подсказывает имена локальных переменных в текущем сценарии.
 
 1. Введите символы `$$`.
-2. Отобразится список системных и локальных переменных, доступных в текущем сценарии. См. *«[Использование переменных в сценарии](https://kb.comindware.ru/article.php?id=5656)»*.
+2. Отобразится список системных и локальных переменных, доступных в текущем сценарии. См. *«[Использование переменных в сценарии](https://kb.comindware.ru/article.php?id=4719)»*.
 3. Дважды нажмите имя переменной, чтобы вставить его в формулу.
 
 _![Список локальных переменных в сценарии](/platform/v5.0/business_apps/expressions/expression_editor/formula_editor/img/formula_editor_local_variables.png)_
@@ -416,9 +416,9 @@ ADDDAYS($$requestTime, 1)
 
 ## Связанные статьи
 
-- [Редактор выражений](https://kb.comindware.ru/article.php?id=5185)
-- [Примеры использования формул](https://kb.comindware.ru/category.php?id=902)
-- [Справочник по функциям](https://kb.comindware.ru/article.php?id=5185#expression_editor_reference)
-- [Атрибут типа «Запись»](https://kb.comindware.ru/article.php?id=5718)
-- [Атрибут типа «Список значений»](https://kb.comindware.ru/article.php?id=5699)
-- [Использование переменных в сценарии](https://kb.comindware.ru/article.php?id=5656)
+- [Редактор выражений](https://kb.comindware.ru/article.php?id=5025)
+- [Примеры использования формул](https://kb.comindware.ru/category.php?id=881)
+- [Справочник по функциям](https://kb.comindware.ru/article.php?id=5025#expression_editor_reference)
+- [Атрибут типа «Запись»](https://kb.comindware.ru/article.php?id=4780)
+- [Атрибут типа «Список значений»](https://kb.comindware.ru/article.php?id=4779)
+- [Использование переменных в сценарии](https://kb.comindware.ru/article.php?id=4719)

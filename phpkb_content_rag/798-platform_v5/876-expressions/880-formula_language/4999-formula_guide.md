@@ -2,7 +2,7 @@
 title: 'Язык формул. Общие сведения'
 kbId: 4999
 url: 'https://kb.comindware.ru/article.php?id=4999'
-updated: '2026-06-20 18:06:13'
+updated: '2026-06-20 20:26:22'
 ---
 
 # Язык формул. Общие сведения
@@ -28,10 +28,10 @@ updated: '2026-06-20 18:06:13'
 
 См. также:
 
-- [Литералы и функции в формулах. Справочник, описания, примеры](https://kb.comindware.ru/article.php?id=5218)
-- [Форматирование значений атрибутов в файле шаблона экспорта и формулах](https://kb.comindware.ru/article.php?id=5217)
-- [Системные атрибуты шаблона аккаунта](https://kb.comindware.ru/article.php?id=5695#account_template_attribute_system_names)
-- [Примеры формул](https://kb.comindware.ru/category.php?id=902)
+- [Литералы и функции в формулах. Справочник, описания, примеры](https://kb.comindware.ru/article.php?id=4993)
+- [Форматирование значений атрибутов в файле шаблона экспорта и формулах](https://kb.comindware.ru/article.php?id=4794)
+- [Системные атрибуты шаблона аккаунта](https://kb.comindware.ru/article.php?id=4757#account_template_attribute_system_names)
+- [Примеры формул](https://kb.comindware.ru/category.php?id=881)
 
 ## Контекст вычисления формул. Понятие и изменение
 
@@ -136,7 +136,7 @@ $Driver->Name
 
 - `and`, `ascending`, `between`, `by`, `db`, `descending`, `equals`, `from`, `group`, `in`, `into`, `item`, `join`, `let`, `on`, `orderby`, `select`, `source`, `where`;
 - слова, начинающиеся с символа подчеркивания (`_`);
-- имена [функций и литералов](https://kb.comindware.ru/article.php?id=5218);
+- имена [функций и литералов](https://kb.comindware.ru/article.php?id=4993);
 
 ### Синтаксис запроса from where select
 
@@ -193,7 +193,7 @@ $Driver->Name
 
 ## Связанные статьи
 
-- [Литералы и функции в формулах. Справочник, описания, примеры](https://kb.comindware.ru/article.php?id=5218)
-- [Форматирование значений атрибутов в файле шаблона экспорта и формулах](https://kb.comindware.ru/article.php?id=5217)
-- [Системные атрибуты шаблона аккаунта](https://kb.comindware.ru/article.php?id=5695#account_template_attribute_system_names)
-- [Примеры формул](https://kb.comindware.ru/category.php?id=902)
+- [Литералы и функции в формулах. Справочник, описания, примеры](https://kb.comindware.ru/article.php?id=4993)
+- [Форматирование значений атрибутов в файле шаблона экспорта и формулах](https://kb.comindware.ru/article.php?id=4794)
+- [Системные атрибуты шаблона аккаунта](https://kb.comindware.ru/article.php?id=4757#account_template_attribute_system_names)
+- [Примеры формул](https://kb.comindware.ru/category.php?id=881)

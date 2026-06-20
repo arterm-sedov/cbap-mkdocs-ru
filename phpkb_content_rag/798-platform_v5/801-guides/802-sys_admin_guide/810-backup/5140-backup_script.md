@@ -2,14 +2,14 @@
 title: 'Резервное копирование. Настройка и запуск с помощью скриптов (Linux)'
 kbId: 5140
 url: 'https://kb.comindware.ru/article.php?id=5140'
-updated: '2026-06-20 18:04:38'
+updated: '2026-06-20 20:24:51'
 ---
 
 # Резервное копирование. Настройка и запуск с помощью скриптов (Linux)
 
 Экспериментальная функция
 
-Представленная здесь функция находится на стадии разработки. См. *«[Поддержка экспериментальных функций](https://kb.comindware.ru/article.php?id=5161#experimental_feature_support)»*.
+Представленная здесь функция находится на стадии разработки. См. *«[Поддержка экспериментальных функций](https://kb.comindware.ru/article.php?id=4579#experimental_feature_support)»*.
 
 ## Введение
 
@@ -38,13 +38,13 @@ updated: '2026-06-20 18:04:38'
 - Создание снимка и сохранение архива могут занимать значительное время в зависимости от размера данных.
 - Требуется достаточное место на диске для временного хранения снимков и архивов.
 
-См. *«[Рекомендации по резервному копированию](https://kb.comindware.ru/article.php?id=5568)»* и *«[Развёртывание ПО. Архитектура и ИТ-ландшафт](https://kb.comindware.ru/article.php?id=5443)»*.
+См. *«[Рекомендации по резервному копированию](https://kb.comindware.ru/article.php?id=5082)»* и *«[Развёртывание ПО. Архитектура и ИТ-ландшафт](https://kb.comindware.ru/article.php?id=4596)»*.
 
 ## Подготовка и настройка Apache Ignite
 
 1. Проверьте наличие в директории `/usr/share/ignite` распакованных скриптов Apache Ignite актуальной версии.
 
-   Если скрипты отсутствуют, скачайте и распакуйте их в указанную директорию либо переустановите Apache Ignite из дистрибутива вспомогательного ПО **Comindware Platform**. См. *«[Установка, запуск, инициализация и остановка ПО](https://kb.comindware.ru/article.php?id=5558)»* и *«[Пути и содержимое директорий (Linux)](https://kb.comindware.ru/article.php?id=5561#paths_linux)»*.
+   Если скрипты отсутствуют, скачайте и распакуйте их в указанную директорию либо переустановите Apache Ignite из дистрибутива вспомогательного ПО **Comindware Platform**. См. *«[Установка, запуск, инициализация и остановка ПО](https://kb.comindware.ru/article.php?id=4622)»* и *«[Пути и содержимое директорий (Linux)](https://kb.comindware.ru/article.php?id=4620#paths_linux)»*.
 
    Расположение скриптов
 
@@ -185,8 +185,8 @@ updated: '2026-06-20 18:04:38'
 
 ## Связанные статьи
 
-- [Настройка конфигурации экземпляра ПО](https://kb.comindware.ru/article.php?id=5554)
-- [Рекомендации по резервному копированию](https://kb.comindware.ru/article.php?id=5568)
-- [Пути и содержимое директорий (Linux)](https://kb.comindware.ru/article.php?id=5561#paths_linux)
-- [Установка, запуск, инициализация и остановка ПО](https://kb.comindware.ru/article.php?id=5558)
-- [Развёртывание ПО. Архитектура и ИТ-ландшафт](https://kb.comindware.ru/article.php?id=5443)
+- [Настройка конфигурации экземпляра ПО](https://kb.comindware.ru/article.php?id=5067)
+- [Рекомендации по резервному копированию](https://kb.comindware.ru/article.php?id=5082)
+- [Пути и содержимое директорий (Linux)](https://kb.comindware.ru/article.php?id=4620#paths_linux)
+- [Установка, запуск, инициализация и остановка ПО](https://kb.comindware.ru/article.php?id=4622)
+- [Развёртывание ПО. Архитектура и ИТ-ландшафт](https://kb.comindware.ru/article.php?id=4596)

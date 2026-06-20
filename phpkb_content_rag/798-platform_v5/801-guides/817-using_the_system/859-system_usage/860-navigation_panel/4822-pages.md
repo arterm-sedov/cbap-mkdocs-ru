@@ -2,7 +2,7 @@
 title: 'Информационные страницы. Использование'
 kbId: 4822
 url: 'https://kb.comindware.ru/article.php?id=4822'
-updated: '2026-06-20 18:05:14'
+updated: '2026-06-20 20:25:25'
 ---
 
 # Информационные страницы. Использование
@@ -55,5 +55,5 @@ _![Выбор и упорядочивание разделов страницы]
 
 ## Связанные статьи
 
-- *[Использование рабочего стола](https://kb.comindware.ru/article.php?id=5606)*
-- *[Использование панели навигации](https://kb.comindware.ru/article.php?id=5605)*
+- *[Использование рабочего стола](https://kb.comindware.ru/article.php?id=4823)*
+- *[Использование панели навигации](https://kb.comindware.ru/article.php?id=4824)*

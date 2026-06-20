@@ -2,7 +2,7 @@
 title: 'Резервное копирование и восстановление в Windows'
 kbId: 4644
 url: 'https://kb.comindware.ru/article.php?id=4644'
-updated: '2026-06-20 18:04:38'
+updated: '2026-06-20 20:24:51'
 ---
 
 # Резервное копирование и восстановление в Windows
@@ -11,7 +11,7 @@ updated: '2026-06-20 18:04:38'
 
 Здесь представлены инструкции по резервному копированию и восстановлению данных **Comindware Platform** в ОС Windows.
 
-См. также «*[Резервное копирование. Настройка и запуск, просмотр журнала сеансов](https://kb.comindware.ru/article.php?id=5566)»*.
+См. также «*[Резервное копирование. Настройка и запуск, просмотр журнала сеансов](https://kb.comindware.ru/article.php?id=4642)»*.
 
 ## Подготовка к резервному копированию и восстановлению данных
 
@@ -20,7 +20,7 @@ updated: '2026-06-20 18:04:38'
 1. Подготовьте данные о конфигурации экземпляра ПО:
 
    - Имя экземпляра ПО — `<instanceName>`.
-   - Путь к папке резервных копий базы данных — `<DatabaseBackupPath>` (например, `X:\\DatabaseBackups`). См. *«[Настройка конфигураций и запуск резервного копирования](https://kb.comindware.ru/article.php?id=5566#backup_configure_list_view)»*.
+   - Путь к папке резервных копий базы данных — `<DatabaseBackupPath>` (например, `X:\\DatabaseBackups`). См. *«[Настройка конфигураций и запуск резервного копирования](https://kb.comindware.ru/article.php?id=4642#backup_configure_list_view)»*.
    - `<distPath>` — путь к распакованному дистрибутиву ПО **Comindware Platform**.
 2. Подготовьте данные о конфигурации OpenSearch (Elasticsearch):
 
@@ -37,7 +37,7 @@ updated: '2026-06-20 18:04:38'
 
 Здесь представлен следующий порядок резервного копирования:
 
-1. [Сохраните резервную копию базы данных экземпляра продукта](https://kb.comindware.ru/article.php?id=5566#backup_configure_list_view).
+1. [Сохраните резервную копию базы данных экземпляра продукта](https://kb.comindware.ru/article.php?id=4642#backup_configure_list_view).
 
    Резервное копирование крупных баз данных
 
@@ -45,7 +45,7 @@ updated: '2026-06-20 18:04:38'
 
    Это связано с тем, что резервное копирование больших баз данных встроенными средствами **Comindware Platform** создаёт значительную вычислительную нагрузку и может приводить к снижению производительности.
 
-   См. *«[Настройка и использование скрипта для резервного копирования данных (Linux)](https://kb.comindware.ru/article.php?id=5569)»*.
+   См. *«[Настройка и использование скрипта для резервного копирования данных (Linux)](https://kb.comindware.ru/article.php?id=5140)»*.
 
    Скрипт резервного копирования следует запросить у [службы поддержки Comindware](https://www.comindware.ru/company/contact-us/#tab_support).
 2. [Создайте снимок сервера OpenSearch (Elasticsearch)](#backup_restore_windows_registry_snapshot). Этот шаг может не потребоваться в зависимости от вашей конфигурации OpenSearch (Elasticsearch).
@@ -84,7 +84,7 @@ updated: '2026-06-20 18:04:38'
 
 Перед восстановлением данных остановите экземпляр ПО.
 
-См. *«[Установка, запуск, инициализация и остановка Comindware Platform в Windows](https://kb.comindware.ru/article.php?id=5564)»*.
+См. *«[Установка, запуск, инициализация и остановка Comindware Platform в Windows](https://kb.comindware.ru/article.php?id=5063)»*.
 
 1. [Восстановите базу данных экземпляра ПО](#backup_restore_windows_instance).
 2. [Восстановите снимок данных OpenSearch (Elasticsearch)](#backup_restore_windows_opensearch). Этот шаг может не потребоваться в зависимости от вашей конфигурации OpenSearch (Elasticsearch).
@@ -125,7 +125,7 @@ updated: '2026-06-20 18:04:38'
    ```
    Get-Content "C:\\ProgramData\\comindware\\Instances\\<instanceName>\\Logs\\heartbeat_<ГГГГ-ММ-ДД>.log" -Wait
    ```
-9. Проверьте и при необходимости исправьте конфигурацию экземпляра ПО. См. *«[Проверка и настройка конфигурации экземпляра ПО Comindware Platform после восстановления из резервной копии](https://kb.comindware.ru/article.php?id=5573)»*.
+9. Проверьте и при необходимости исправьте конфигурацию экземпляра ПО. См. *«[Проверка и настройка конфигурации экземпляра ПО Comindware Platform после восстановления из резервной копии](https://kb.comindware.ru/article.php?id=4651)»*.
 10. Проверьте и работоспособность экземпляра ПО.
 11. Создайте резервную копию работоспособного экземпляра **Comindware Platform**.
 
@@ -141,11 +141,11 @@ curl -X POST "<openSearchHost>:<opeSearchPort>/_snapshot/<repository_name>/<snap
 
 ## Связанные статьи
 
-- [Резервное копирование. Настройка и запуск, просмотр журнала сеансов](https://kb.comindware.ru/article.php?id=5566)
-- [Настройка и использование скрипта для резервного копирования данных (Linux)](https://kb.comindware.ru/article.php?id=5569)
-- [Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=5561)
-- [Установка, запуск, инициализация и остановка Comindware Platform в Windows](https://kb.comindware.ru/article.php?id=5564)
-- [Проверка и настройка конфигурации экземпляра ПО Comindware Platform после восстановления из резервной копии](https://kb.comindware.ru/article.php?id=5573)
+- [Резервное копирование. Настройка и запуск, просмотр журнала сеансов](https://kb.comindware.ru/article.php?id=4642)
+- [Настройка и использование скрипта для резервного копирования данных (Linux)](https://kb.comindware.ru/article.php?id=5140)
+- [Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=4620)
+- [Установка, запуск, инициализация и остановка Comindware Platform в Windows](https://kb.comindware.ru/article.php?id=5063)
+- [Проверка и настройка конфигурации экземпляра ПО Comindware Platform после восстановления из резервной копии](https://kb.comindware.ru/article.php?id=4651)
 - [Документация OpenSearch (Elasticsearch) по формированию снимков (на английском языке)](https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html#api-date-math-index-names)
 - [Документация OpenSearch (Elasticsearch) по регистрации репозитория (на английском языке)](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html)
 - [Документация OpenSearch (Elasticsearch) по созданию снимков (на английском языке)](https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-take-snapshot.html)

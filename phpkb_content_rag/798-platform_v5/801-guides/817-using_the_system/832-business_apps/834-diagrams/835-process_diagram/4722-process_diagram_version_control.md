@@ -2,7 +2,7 @@
 title: 'Управление версиями диаграммы процесса'
 kbId: 4722
 url: 'https://kb.comindware.ru/article.php?id=4722'
-updated: '2026-06-20 18:04:57'
+updated: '2026-06-20 20:25:09'
 ---
 
 # Управление версиями диаграммы процесса
@@ -25,7 +25,7 @@ updated: '2026-06-20 18:04:57'
 
 Просмотреть список версий диаграммы процесса можно двумя способами:
 
-- В **[списке диаграмм](https://kb.comindware.ru/article.php?id=5639#diagram_list)** нажмите кнопку «**Показать все версии**» в столбце «**Версии**» рядом с количеством версий. Отобразится список версий диаграммы со следующими сведениями:
+- В **[списке диаграмм](https://kb.comindware.ru/article.php?id=4710#diagram_list)** нажмите кнопку «**Показать все версии**» в столбце «**Версии**» рядом с количеством версий. Отобразится список версий диаграммы со следующими сведениями:
 - номер версии диаграммы;
 - дата публикации версии;
 - общее количество экземпляров процесса, запущенных по данной версии диаграммы;
@@ -34,7 +34,7 @@ updated: '2026-06-20 18:04:57'
   ![Просмотр списка версий диаграммы процесса с помощью списка диаграмм](/platform/v5.0/business_apps/diagrams/process_diagram/img/process_diagram_list_versions.png)
 
   Просмотр списка версий диаграммы процесса с помощью списка диаграмм
-- На **[странице «**Диаграмма**»](https://kb.comindware.ru/article.php?id=5657#process_diagram_view)** шаблона процесса или в [конструкторе диаграммы](https://kb.comindware.ru/article.php?id=5657#process_diagram_designer) нажмите кнопку «**Версия**» *‌*. Отобразится список версий диаграммы со следующими сведениями:
+- На **[странице «**Диаграмма**»](https://kb.comindware.ru/article.php?id=4721#process_diagram_view)** шаблона процесса или в [конструкторе диаграммы](https://kb.comindware.ru/article.php?id=4721#process_diagram_designer) нажмите кнопку «**Версия**» *‌*. Отобразится список версий диаграммы со следующими сведениями:
 
   - номер версии диаграммы;
   - создатель диаграммы;
@@ -48,12 +48,12 @@ updated: '2026-06-20 18:04:57'
 2. Откройте [список версий](#process_diagram_version_list) диаграммы.
 3. Выберите требуемую версию.
 4. Выбранная версия будет открыта для просмотра.
-5. При необходимости нажмите кнопку «**Редактировать**» *‌*, чтобы [изменить](https://kb.comindware.ru/article.php?id=5657#process_diagram_designer) и опубликовать новую версию диаграммы на основе **текущей** черновой.
+5. При необходимости нажмите кнопку «**Редактировать**» *‌*, чтобы [изменить](https://kb.comindware.ru/article.php?id=4721#process_diagram_designer) и опубликовать новую версию диаграммы на основе **текущей** черновой.
 
 Примечание
 
-- При [редактировании](https://kb.comindware.ru/article.php?id=5657#process_diagram_designer) диаграммы будет создан её черновик с названием «**Текущая версия**».
-- До тех пор, пока **текущая версия** диаграммы не будет [опубликована](https://kb.comindware.ru/article.php?id=5657#process_diagram_publish), она будет открываться для редактирования независимо от того, какая версия выбрана в списке.
+- При [редактировании](https://kb.comindware.ru/article.php?id=4721#process_diagram_designer) диаграммы будет создан её черновик с названием «**Текущая версия**».
+- До тех пор, пока **текущая версия** диаграммы не будет [опубликована](https://kb.comindware.ru/article.php?id=4721#process_diagram_publish), она будет открываться для редактирования независимо от того, какая версия выбрана в списке.
 
 _![Переход к редактированию требуемой версии диаграммы](/platform/v5.0/business_apps/diagrams/process_diagram/img/process_diagram_version_control_edit.png)_
 
@@ -86,7 +86,7 @@ _![Сообщение при попытке удаления версии диа
 
 ## Связанные статьи
 
-- *[Публикация диаграммы процесса](https://kb.comindware.ru/article.php?id=5657#process_diagram_publish)*
-- *[Просмотр диаграммы процесса](https://kb.comindware.ru/article.php?id=5657#process_diagram_view)*
-- *[Конструктор диаграммы процесса](https://kb.comindware.ru/article.php?id=5657#process_diagram_designer)*
-- *[Использование диаграммы экземпляра процесса](https://kb.comindware.ru/article.php?id=5658)*
+- *[Публикация диаграммы процесса](https://kb.comindware.ru/article.php?id=4721#process_diagram_publish)*
+- *[Просмотр диаграммы процесса](https://kb.comindware.ru/article.php?id=4721#process_diagram_view)*
+- *[Конструктор диаграммы процесса](https://kb.comindware.ru/article.php?id=4721#process_diagram_designer)*
+- *[Использование диаграммы экземпляра процесса](https://kb.comindware.ru/article.php?id=4723)*

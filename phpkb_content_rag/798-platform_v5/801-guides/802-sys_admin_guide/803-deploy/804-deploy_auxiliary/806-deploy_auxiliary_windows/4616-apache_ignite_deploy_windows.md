@@ -2,14 +2,14 @@
 title: 'Apache Ignite. Установка и настройка в Windows'
 kbId: 4616
 url: 'https://kb.comindware.ru/article.php?id=4616'
-updated: '2026-06-20 18:04:30'
+updated: '2026-06-20 20:24:43'
 ---
 
 # Apache Ignite. Установка и настройка в Windows
 
 Экспериментальная функция
 
-Представленная здесь функция находится на стадии разработки. См. *«[Поддержка экспериментальных функций](https://kb.comindware.ru/article.php?id=5161#experimental_feature_support)»*.
+Представленная здесь функция находится на стадии разработки. См. *«[Поддержка экспериментальных функций](https://kb.comindware.ru/article.php?id=4579#experimental_feature_support)»*.
 
 ## Введение
 

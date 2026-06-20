@@ -2,7 +2,7 @@
 title: 'Low-code и графовая БД'
 kbId: 4581
 url: 'https://kb.comindware.ru/article.php?id=4581'
-updated: '2026-06-20 18:04:21'
+updated: '2026-06-20 20:24:35'
 ---
 
 # Low-code и графовая БД

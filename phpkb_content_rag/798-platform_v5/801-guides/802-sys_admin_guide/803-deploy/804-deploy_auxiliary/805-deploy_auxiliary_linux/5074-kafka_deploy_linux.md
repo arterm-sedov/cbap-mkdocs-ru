@@ -2,20 +2,20 @@
 title: 'Apache Kafka. Установка в базовой конфигурации'
 kbId: 5074
 url: 'https://kb.comindware.ru/article.php?id=5074'
-updated: '2026-06-20 18:04:29'
+updated: '2026-06-20 20:24:42'
 ---
 
 # Apache Kafka. Установка в базовой конфигурации
 
 ## Введение
 
-Для работы **Comindware Platform** требуется сервер Apache Kafka. См. [системные требования](https://kb.comindware.ru/article.php?id=5429).
+Для работы **Comindware Platform** требуется сервер Apache Kafka. См. [системные требования](https://kb.comindware.ru/article.php?id=4659).
 
 Здесь представлены инструкции по установке Kafka в простейшей базовой конфигурации с помощью дистрибутива **Comindware Platform** для ОС Linux.
 
 Инструкции по установке Kafka в иных конфигурациях представлены на *[официальном сайте Apache Kafka](https://kafka.apache.org/quickstart)*.
 
-С помощью дистрибутива **Comindware Platform** можно развернуть сервер Kafka вместе с экземпляром ПО или на отдельном сервере. Для этого укажите ключ `-k` при запуске скрипта `prerequisites_install.sh`. См. *«[Установка, запуск, инициализация и остановка ПО Comindware Platform](https://kb.comindware.ru/article.php?id=5558)»*.
+С помощью дистрибутива **Comindware Platform** можно развернуть сервер Kafka вместе с экземпляром ПО или на отдельном сервере. Для этого укажите ключ `-k` при запуске скрипта `prerequisites_install.sh`. См. *«[Установка, запуск, инициализация и остановка ПО Comindware Platform](https://kb.comindware.ru/article.php?id=4622)»*.
 
 Здесь представлены требования к техническому обеспечению и инструкции по развёртыванию сервера Kafka в ОС Linux, а также приведён пример типового файла конфигурации. Инструкции представлены для версии Kafka 3.2.0, для других версий содержимое файлов конфигурации и порядок установки могут быть иными.
 
@@ -216,6 +216,6 @@ updated: '2026-06-20 18:04:29'
 
 ## Связанные статьи
 
-- [Настройка конфигурации вспомогательного ПО для оптимизации работы Comindware Platform](https://kb.comindware.ru/article.php?id=5454)
-- [Конфигурация экземпляра, компонентов ПО и служб. Настройка](https://kb.comindware.ru/article.php?id=5554)
-- [Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=5561#paths_windows)
+- [Настройка конфигурации вспомогательного ПО для оптимизации работы Comindware Platform](https://kb.comindware.ru/article.php?id=4604)
+- [Конфигурация экземпляра, компонентов ПО и служб. Настройка](https://kb.comindware.ru/article.php?id=5067)
+- [Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=4620#paths_windows)

@@ -2,7 +2,7 @@
 title: 'Вызов процесса'
 kbId: 4727
 url: 'https://kb.comindware.ru/article.php?id=4727'
-updated: '2026-06-20 18:04:57'
+updated: '2026-06-20 20:25:10'
 ---
 
 # Вызов процесса
@@ -32,7 +32,7 @@ _![Вызов процесса и его меню элемента](/platform/v5
 
 ### Основные
 
-Помимо [общих свойств элемента диаграммы процесса](https://kb.comindware.ru/article.php?id=5661) на этой вкладке можно настроить перечисленные ниже свойства вызова процесса.
+Помимо [общих свойств элемента диаграммы процесса](https://kb.comindware.ru/article.php?id=4725) на этой вкладке можно настроить перечисленные ниже свойства вызова процесса.
 
 #### Базовые настройки
 
@@ -128,7 +128,7 @@ _![Настройка передачи данных в текущий проце
 
 ## Связанные статьи
 
-- *[Встроенный подпроцесс](https://kb.comindware.ru/article.php?id=5665)*
-- *[Общие свойства элементов диаграммы процесса](https://kb.comindware.ru/article.php?id=5661)*
-- *[Элементы диаграммы процесса](https://kb.comindware.ru/article.php?id=5662)*
-- *[Редактирование диаграммы процесса](https://kb.comindware.ru/article.php?id=5657#process_diagram_designer)*
+- *[Встроенный подпроцесс](https://kb.comindware.ru/article.php?id=4731)*
+- *[Общие свойства элементов диаграммы процесса](https://kb.comindware.ru/article.php?id=4725)*
+- *[Элементы диаграммы процесса](https://kb.comindware.ru/article.php?id=4724)*
+- *[Редактирование диаграммы процесса](https://kb.comindware.ru/article.php?id=4721#process_diagram_designer)*

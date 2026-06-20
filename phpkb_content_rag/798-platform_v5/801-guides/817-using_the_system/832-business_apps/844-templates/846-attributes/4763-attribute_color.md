@@ -2,7 +2,7 @@
 title: 'Атрибут типа «Цвет»'
 kbId: 4763
 url: 'https://kb.comindware.ru/article.php?id=4763'
-updated: '2026-06-20 18:05:04'
+updated: '2026-06-20 20:25:15'
 ---
 
 # Атрибут типа «Цвет»
@@ -32,10 +32,10 @@ updated: '2026-06-20 18:05:04'
   - [по справочнику](#table_reference_color_example)
   - [по списку значений](#table_enum_color_example)
 - См. также:
-  - [Пример окрашивания секторов диаграммы](https://kb.comindware.ru/article.php?id=5723#form_dynamic_elements_color)
-  - [Правила окрашивания шевронов](https://kb.comindware.ru/article.php?id=5723#form_dynamic_elements_chevron)
-  - [Пример настройки окрашивания шевронов](https://kb.comindware.ru/article.php?id=5364)
-  - [Пример окрашивания секторов диаграммы](https://kb.comindware.ru/article.php?id=5723#form_dynamic_elements_color_diagram_example)
+  - [Пример окрашивания секторов диаграммы](https://kb.comindware.ru/article.php?id=4785#form_dynamic_elements_color)
+  - [Правила окрашивания шевронов](https://kb.comindware.ru/article.php?id=4785#form_dynamic_elements_chevron)
+  - [Пример настройки окрашивания шевронов](https://kb.comindware.ru/article.php?id=4890)
+  - [Пример окрашивания секторов диаграммы](https://kb.comindware.ru/article.php?id=4785#form_dynamic_elements_color_diagram_example)
 
 ### Условное окрашивание строк таблицы
 
@@ -193,11 +193,11 @@ _![Окрашивание строк таблицы по списку значе
 
 ## Связанные статьи
 
-- [Пример окрашивания секторов диаграммы](https://kb.comindware.ru/article.php?id=5723#form_dynamic_elements_color)
-- [Правила окрашивания шевронов](https://kb.comindware.ru/article.php?id=5723#form_dynamic_elements_chevron)
-- [Пример настройки окрашивания шевронов](https://kb.comindware.ru/article.php?id=5364)
-- [Пример окрашивания секторов диаграммы](https://kb.comindware.ru/article.php?id=5723#form_dynamic_elements_color_diagram_example)
-- [Таблица. Настройка в шаблоне](https://kb.comindware.ru/article.php?id=5735#table_configure_template)
-- [Таблица. Настройка на форме](https://kb.comindware.ru/article.php?id=5723#form_dynamic_elements_table)
-- [Системные атрибуты](https://kb.comindware.ru/article.php?id=5717)
-- [Атрибуты. Определения, типы, настройка, архивирование, удаление](https://kb.comindware.ru/article.php?id=5706)
+- [Пример окрашивания секторов диаграммы](https://kb.comindware.ru/article.php?id=4785#form_dynamic_elements_color)
+- [Правила окрашивания шевронов](https://kb.comindware.ru/article.php?id=4785#form_dynamic_elements_chevron)
+- [Пример настройки окрашивания шевронов](https://kb.comindware.ru/article.php?id=4890)
+- [Пример окрашивания секторов диаграммы](https://kb.comindware.ru/article.php?id=4785#form_dynamic_elements_color_diagram_example)
+- [Таблица. Настройка в шаблоне](https://kb.comindware.ru/article.php?id=4800#table_configure_template)
+- [Таблица. Настройка на форме](https://kb.comindware.ru/article.php?id=4785#form_dynamic_elements_table)
+- [Системные атрибуты](https://kb.comindware.ru/article.php?id=4781)
+- [Атрибуты. Определения, типы, настройка, архивирование, удаление](https://kb.comindware.ru/article.php?id=4772)

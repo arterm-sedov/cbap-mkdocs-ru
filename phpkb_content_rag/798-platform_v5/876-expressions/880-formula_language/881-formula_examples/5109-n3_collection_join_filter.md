@@ -2,7 +2,7 @@
 title: 'Записи и коллекции. Объединение и фильтрация коллекций с помощью N3'
 kbId: 5109
 url: 'https://kb.comindware.ru/article.php?id=5109'
-updated: '2026-06-20 18:06:19'
+updated: '2026-06-20 20:26:27'
 ---
 
 # Записи и коллекции. Объединение и фильтрация коллекций с помощью N3
@@ -137,7 +137,7 @@ updated: '2026-06-20 18:06:19'
 
 ## Связанные статьи
 
-- [Атрибут типа «Запись»](https://kb.comindware.ru/article.php?id=5718)
-- [Атрибут типа «Аккаунт»](https://kb.comindware.ru/article.php?id=5704)
-- [Атрибут типа «Логический»](https://kb.comindware.ru/article.php?id=5700)
-- [Язык N3](https://kb.comindware.ru/category.php?id=903)
+- [Атрибут типа «Запись»](https://kb.comindware.ru/article.php?id=4780)
+- [Атрибут типа «Аккаунт»](https://kb.comindware.ru/article.php?id=4774)
+- [Атрибут типа «Логический»](https://kb.comindware.ru/article.php?id=4778)
+- [Язык N3](https://kb.comindware.ru/category.php?id=877)

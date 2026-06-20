@@ -2,7 +2,7 @@
 title: 'NGINX. Настройка конфигурации для получения HTTP-запросов в Comindware Platform'
 kbId: 5143
 url: 'https://kb.comindware.ru/article.php?id=5143'
-updated: '2026-06-20 18:04:29'
+updated: '2026-06-20 20:24:42'
 ---
 
 # NGINX. Настройка конфигурации для получения HTTP-запросов в Comindware Platform
@@ -18,8 +18,8 @@ updated: '2026-06-20 18:04:29'
 - <https://webdevblog.ru/bezopasnost-nginx-kak-uluchshit-konfiguraciju-vashego-servera/>
 
 См. также:
-- *[NGINX. Установка и настройка](https://kb.comindware.ru/article.php?id=5460)*
-- *[Установка, запуск, инициализация и остановка ПО](https://kb.comindware.ru/article.php?id=5558)*
+- *[NGINX. Установка и настройка](https://kb.comindware.ru/article.php?id=4611)*
+- *[Установка, запуск, инициализация и остановка ПО](https://kb.comindware.ru/article.php?id=4622)*
 
 ## Прикладная задача
 
@@ -99,7 +99,7 @@ updated: '2026-06-20 18:04:29'
 
 ## Настройка подключения в Comindware Platform
 
-1. На странице «**Администрирование**» выберите пункт «**Инфраструктура**» — «[**Подключения**](https://kb.comindware.ru/article.php?id=5303)» .
+1. На странице «**Администрирование**» выберите пункт «**Инфраструктура**» — «[**Подключения**](https://kb.comindware.ru/article.php?id=4675)» .
 2. Создайте или откройте подключение типа «**Подключения REST и OData**» — «**Получение HTTP-запросов**».
 3. Настройте подключение:
 
@@ -114,7 +114,7 @@ updated: '2026-06-20 18:04:29'
 
 ## Настройка пути передачи данных
 
-1. На странице «**Администрирование**» выберите пункт «[**Пути передачи данных**](https://kb.comindware.ru/article.php?id=5302)» *‌*.
+1. На странице «**Администрирование**» выберите пункт «[**Пути передачи данных**](https://kb.comindware.ru/article.php?id=4676)» *‌*.
 2. Создайте или откройте путь передачи данных типа «**Подключения REST и OData**» — «**Получение HTTP-запросов**».
 3. На вкладке «**Основные свойства**» настройте:
 
@@ -215,7 +215,7 @@ updated: '2026-06-20 18:04:29'
 
 ## Связанные статьи
 
-- [HTTP-запросы. Получение JSON-данных в сценарии](https://kb.comindware.ru/article.php?id=5311)
-- [NGINX. Установка и настройка](https://kb.comindware.ru/article.php?id=5460)
-- [Установка, запуск, инициализация и остановка ПО](https://kb.comindware.ru/article.php?id=5558)
-- [Сценарии. Настройка](https://kb.comindware.ru/article.php?id=5654)
+- [HTTP-запросы. Получение JSON-данных в сценарии](https://kb.comindware.ru/article.php?id=4700)
+- [NGINX. Установка и настройка](https://kb.comindware.ru/article.php?id=4611)
+- [Установка, запуск, инициализация и остановка ПО](https://kb.comindware.ru/article.php?id=4622)
+- [Сценарии. Настройка](https://kb.comindware.ru/article.php?id=4717)

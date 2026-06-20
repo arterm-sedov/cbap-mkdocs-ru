@@ -2,7 +2,7 @@
 title: 'Глобальная функция для обращения в Active Directory'
 kbId: 5016
 url: 'https://kb.comindware.ru/article.php?id=5016'
-updated: '2026-06-20 18:06:23'
+updated: '2026-06-20 20:26:31'
 ---
 
 # Глобальная функция для обращения в Active Directory

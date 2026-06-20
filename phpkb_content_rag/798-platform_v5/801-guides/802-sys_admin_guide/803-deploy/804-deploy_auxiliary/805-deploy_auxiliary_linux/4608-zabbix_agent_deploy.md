@@ -2,12 +2,12 @@
 title: 'Zabbix Agent. Установка и настройка'
 kbId: 4608
 url: 'https://kb.comindware.ru/article.php?id=4608'
-updated: '2026-06-20 18:04:29'
+updated: '2026-06-20 20:24:42'
 ---
 
 # Zabbix Agent. Установка и настройка
 
-Программное обеспечение *Zabbix Agent* позволяет осуществлять мониторинг устройств, на которые оно установлено. Для сбора и отображения данных мониторинга используется ПО *Zabbix Server*. См. статью *«[Zabbix Server, Zabbix Agent, Zabbix Frontend и MySQL. Инструкции по установке](https://kb.comindware.ru/article.php?id=5458)»*.
+Программное обеспечение *Zabbix Agent* позволяет осуществлять мониторинг устройств, на которые оно установлено. Для сбора и отображения данных мониторинга используется ПО *Zabbix Server*. См. статью *«[Zabbix Server, Zabbix Agent, Zabbix Frontend и MySQL. Инструкции по установке](https://kb.comindware.ru/article.php?id=4607)»*.
 
 Здесь представлены инструкции по установке и настройке Zabbix Agent в ОС Linux (на примере Ubuntu 22.04).
 
@@ -90,7 +90,7 @@ updated: '2026-06-20 18:04:29'
 
 ## Добавление Linux-хоста в сеть мониторинга
 
-1. Откройте *Zabbix Frontend* (см. «[Zabbix Server, Zabbix Agent, Zabbix Frontend и MySQL. Инструкции по установке](https://kb.comindware.ru/article.php?id=5458)). Для э того в адресной строке браузера наберите: `http://zabbix-server-ip-address:8080`
+1. Откройте *Zabbix Frontend* (см. «[Zabbix Server, Zabbix Agent, Zabbix Frontend и MySQL. Инструкции по установке](https://kb.comindware.ru/article.php?id=4607)). Для э того в адресной строке браузера наберите: `http://zabbix-server-ip-address:8080`
 2. Откройте раздел «**Monitoring**» > «**Hosts**» и нажмите кнопку «**Create host**».
 
    ![Кнопка создания хоста Zabbix Agent](https://kb.comindware.ru/assets/img_63ad9a5b84655.png)

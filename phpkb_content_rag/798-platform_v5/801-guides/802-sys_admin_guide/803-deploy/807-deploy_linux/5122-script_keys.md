@@ -2,7 +2,7 @@
 title: 'Установочные скрипты. Назначение и ключи'
 kbId: 5122
 url: 'https://kb.comindware.ru/article.php?id=5122'
-updated: '2026-06-20 18:04:36'
+updated: '2026-06-20 20:24:49'
 ---
 
 # Установочные скрипты. Назначение и ключи
@@ -15,7 +15,7 @@ updated: '2026-06-20 18:04:36'
 
 Пути к файлам и директориям
 
-Используемые по умолчанию пути к файлам **Comindware Platform** см. в статье *«[Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=5561)»*.
+Используемые по умолчанию пути к файлам **Comindware Platform** см. в статье *«[Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=4620)»*.
 
 В вашей конфигурации могут использоваться другие пути, поэтому внимательно подставляйте фактические пути в команды при выполнении инструкций.
 
@@ -432,8 +432,8 @@ bash instance_check.sh my_company_instance
 
 ## Связанные статьи
 
-- [Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=5561)
-- [Развёртывание ПО в ОС Linux](https://kb.comindware.ru/article.php?id=5558)
-- [Резервное копирование и восстановление в ОС Linux](https://kb.comindware.ru/article.php?id=5576)
-- [Развёртывание ПО в ОС Windows](https://kb.comindware.ru/article.php?id=5564)
-- [Резервное копирование и восстановление в ОС Windows](https://kb.comindware.ru/article.php?id=5570)
+- [Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=4620)
+- [Развёртывание ПО в ОС Linux](https://kb.comindware.ru/article.php?id=4622)
+- [Резервное копирование и восстановление в ОС Linux](https://kb.comindware.ru/article.php?id=4647)
+- [Развёртывание ПО в ОС Windows](https://kb.comindware.ru/article.php?id=5063)
+- [Резервное копирование и восстановление в ОС Windows](https://kb.comindware.ru/article.php?id=4644)

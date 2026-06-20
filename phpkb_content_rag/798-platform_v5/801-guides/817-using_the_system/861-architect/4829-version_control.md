@@ -2,14 +2,14 @@
 title: 'Управление версиями корпоративной архитектуры'
 kbId: 4829
 url: 'https://kb.comindware.ru/article.php?id=4829'
-updated: '2026-06-20 18:05:15'
+updated: '2026-06-20 20:25:27'
 ---
 
 # Управление версиями корпоративной архитектуры
 
 **Comindware Platform Enterprise** позволяет сохранять версии корпоративной архитектуры, включающей в себя процессную архитектуру и организационную структуру.
 
-Помимо управления версиями на этой странице также настраиваются шаблоны экспорта регламентов процессов. См. *[Пример экспорта регламента процессов](https://kb.comindware.ru/article.php?id=5584#architect_demo_organizational_structure_processes_export)*.
+Помимо управления версиями на этой странице также настраиваются шаблоны экспорта регламентов процессов. См. *[Пример экспорта регламента процессов](https://kb.comindware.ru/article.php?id=4826#architect_demo_organizational_structure_processes_export)*.
 
 ## Создание новой версии корпоративной архитектуры
 
@@ -56,11 +56,11 @@ updated: '2026-06-20 18:05:15'
 
 Примечание
 
-[Редактировать](https://kb.comindware.ru/article.php?id=5590) можно только текущую версию диаграммы.
+[Редактировать](https://kb.comindware.ru/article.php?id=4835) можно только текущую версию диаграммы.
 
 ## Связанные статьи
 
-- *[Построение процессной архитектуры](https://kb.comindware.ru/article.php?id=5585)*
-- *[Построение организационной структуры](https://kb.comindware.ru/article.php?id=5592)*
-- *[Экспорт регламента процессов](https://kb.comindware.ru/article.php?id=5584#architect_demo_organizational_structure_processes_export)*
-- *[Панель навигации. Использование](https://kb.comindware.ru/article.php?id=5605)*
+- *[Построение процессной архитектуры](https://kb.comindware.ru/article.php?id=4833)*
+- *[Построение организационной структуры](https://kb.comindware.ru/article.php?id=4850)*
+- *[Экспорт регламента процессов](https://kb.comindware.ru/article.php?id=4826#architect_demo_organizational_structure_processes_export)*
+- *[Панель навигации. Использование](https://kb.comindware.ru/article.php?id=4824)*

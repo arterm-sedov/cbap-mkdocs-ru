@@ -2,22 +2,22 @@
 title: 'OpenSearch. Настройка подключения'
 kbId: 4678
 url: 'https://kb.comindware.ru/article.php?id=4678'
-updated: '2026-06-20 18:04:46'
+updated: '2026-06-20 20:24:59'
 ---
 
 # OpenSearch. Настройка подключения
 
 ## Введение
 
-**Comindware Platform** использует службу OpenSearch (Elasticsearch) для записи истории всех транзакций, таких как журнал изменений записей и [экземпляров процессов](https://kb.comindware.ru/article.php?id=5658), [цепочка событий](https://kb.comindware.ru/article.php?id=5614#logs_event_chain_view) и т. п.
+**Comindware Platform** использует службу OpenSearch (Elasticsearch) для записи истории всех транзакций, таких как журнал изменений записей и [экземпляров процессов](https://kb.comindware.ru/article.php?id=4723), [цепочка событий](https://kb.comindware.ru/article.php?id=4673#logs_event_chain_view) и т. п.
 
-Подключение к OpenSearch (Elasticsearch) автоматически создаётся при [развёртывании](https://kb.comindware.ru/article.php?id=5558#deploy_guide_linux_initialize) **Comindware Platform**.
+Подключение к OpenSearch (Elasticsearch) автоматически создаётся при [развёртывании](https://kb.comindware.ru/article.php?id=4622#deploy_guide_linux_initialize) **Comindware Platform**.
 
 Здесь представлены инструкции по настройке подключения к серверу OpenSearch (Elasticsearch).
 
 ## Настройка подключения
 
-1. Перейдите в [список подключений](https://kb.comindware.ru/article.php?id=5303).
+1. Перейдите в [список подключений](https://kb.comindware.ru/article.php?id=4675).
 2. Дважды нажмите в списке подключение *«ElasticsearchChannel»* или создайте подключение типа «**Системные подключения**» — «**Elasticsearch**».
 3. Настройте свойства подключения:
 
@@ -44,5 +44,5 @@ _![Настройка подключения к OpenSearch (Elasticsearch)](/pla
 
 ## Связанные статьи
 
-- *[OpenSearch (Elasticsearch). Настройка разрешений](https://kb.comindware.ru/article.php?id=5465)*
-- *[Инициализация Comindware Platform](https://kb.comindware.ru/article.php?id=5558#deploy_guide_linux_initialize)*
+- *[OpenSearch (Elasticsearch). Настройка разрешений](https://kb.comindware.ru/article.php?id=5152)*
+- *[Инициализация Comindware Platform](https://kb.comindware.ru/article.php?id=4622#deploy_guide_linux_initialize)*

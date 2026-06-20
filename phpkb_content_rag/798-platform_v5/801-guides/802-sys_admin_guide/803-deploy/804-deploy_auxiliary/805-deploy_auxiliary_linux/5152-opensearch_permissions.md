@@ -2,14 +2,14 @@
 title: 'OpenSearch. Настройка разрешений'
 kbId: 5152
 url: 'https://kb.comindware.ru/article.php?id=5152'
-updated: '2026-06-20 18:04:29'
+updated: '2026-06-20 22:32:43'
 ---
 
 # OpenSearch. Настройка разрешений
 
 ## Введение
 
-**Comindware Platform** использует службу OpenSearch (Elasticsearch) для журналирования транзакций (истории изменений записей и [экземпляров процессов](https://kb.comindware.ru/article.php?id=5658), [цепочки событий](https://kb.comindware.ru/article.php?id=5614#logs_event_chain_view) и т. п.).
+**Comindware Platform** использует службу OpenSearch (Elasticsearch) для журналирования транзакций (истории изменений записей и [экземпляров процессов](https://kb.comindware.ru/article.php?id=4723), [цепочки событий](https://kb.comindware.ru/article.php?id=4673#logs_event_chain_view) и т. п.).
 
 Для корректной работы журнала транзакций пользователь **Comindware Platform** в OpenSearch (Elasticsearch) должен иметь необходимые разрешения на создание индексов, запись и чтение данных.
 
@@ -266,5 +266,5 @@ updated: '2026-06-20 18:04:29'
 ## Связанные статьи
 
 - [OpenSearch (Elasticsearch). Настройка подключения](https://kb.comindware.ru/article.php?id=4678)
-- [Конфигурация экземпляра ПО](https://kb.comindware.ru/article.php?id=5554)
-- [Журнал изменений не записывается. Диагностика и исправление](../../../../troubleshooting/history_not_logged.html#troubleshooting_history_not_written)
+- [Конфигурация экземпляра ПО](https://kb.comindware.ru/article.php?id=5067)
+- [Журнал изменений не записывается. Диагностика и исправление](https://kb.comindware.ru/article.php?id=5139)
