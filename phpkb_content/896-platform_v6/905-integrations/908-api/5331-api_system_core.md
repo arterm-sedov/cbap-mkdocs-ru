@@ -2,7 +2,7 @@
 title: 'Методы System Core API'
 kbId: 5331
 url: 'https://kb.comindware.ru/article.php?id=5331'
-updated: '2025-11-12 16:11:13'
+updated: '2026-06-20 17:33:08'
 ---
 
 # Методы System Core API

@@ -2,7 +2,7 @@
 title: 'Вычисление текста сообщения в стиле системного уведомления о задаче'
 kbId: 5239
 url: 'https://kb.comindware.ru/article.php?id=5239'
-updated: '2026-06-16 19:17:36'
+updated: '2026-06-20 17:34:03'
 ---
 
 # Вычисление текста сообщения в стиле системного уведомления о задаче
@@ -103,5 +103,5 @@ FORMAT(
 
 - [Уведомления о задачах. Настройка текста и отправки эл. почтой](https://kb.comindware.ru/article.php?id=5624)
 - [Язык формул](https://kb.comindware.ru/category.php?id=901)
-- [Список функций языка формул Comindware](https://kb.comindware.ru/article.php?id=5218)
+- [Список функций языка формул **Comindware Platform**](https://kb.comindware.ru/article.php?id=5218)
 - [Атрибут типа «Текст»](https://kb.comindware.ru/article.php?id=5710)
