@@ -74,4 +74,4 @@ Review before starting related work. Move to skills/rules when stable.
   2. Then manually restore v5-specific entries (release notes: `5.0.*.md` not `6.0.md`, remove v6-only feature sections like `Работа с ИИ`)
   3. Also check the hyperlinks map for `kbArticleURLPrefix` entries — they are version-specific and should NOT be cherry-picked between branches
   4. Verify with `git diff HEAD -- docs/ru/ | Select-String "^[+-]kbId:"` after every batch
-- **Hyperlinks map `kbArticleURLPrefix` entries differ per version branch.** Only absolute external URLs (wikipedia, telegram, etc.) are safe to cherry-pick between v5 and v6. Internal KB article references use different `kbId` values on each branch.
+- **Hyperlinks map `kbArticleURLPrefix` and `kbCategoryURLPrefix` entries differ per version branch.** Both article IDs and category IDs in PHPKB differ between v5 and v6. Only absolute external URLs (wikipedia, telegram, etc.) are safe to cherry-pick between v5 and v6.
