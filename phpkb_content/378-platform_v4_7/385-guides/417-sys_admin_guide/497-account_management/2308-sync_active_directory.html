@@ -1,0 +1,149 @@
+<h1>Синхронизация с сервером каталогов (Active Directory)</h1><div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1gmbcbmq30">Механизм синхронизации с сервером каталогов (Active Directory)</a></li>
+<li><a href="#mcetoc_1gmbcu35v1">Механизм авторизации через Active Directory</a></li>
+<li><a href="#mcetoc_1gmbd45ra2">Настройка подключения к серверу каталогов (Active Directory)</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1gmbcbmq30">Механизм синхронизации с сервером каталогов (Active Directory)</h2>
+<p>Для подключения к серверу каталогов (например, Active Directory (AD)) используется заданное имя или IP адрес сервера. При необходимости возможно указать номер порта через двоеточие в строке адреса сервера. <strong style="letter-spacing: 0.2px;">Comindware Business Application Platform </strong>(далее  «Система») задаёт авторизованные (IANA) порты для безопасного и небезопасного соединения. Если сервер поддерживает безопасную передачу данных, укажите LDAPS (LDAP с шифрованием по SSL или TLS) порт 636 для установления данного соединения, в противном случае сервером будет выбран LDAP порт 389. Так же необходимо указать базовое имя (DN) – запись в директории, из которой будут выполняться поисковые запросы. Базовое DN LDAP похоже на путь в файловой системе, но указывается в следующем порядке: первым – относительное отличительное имя (RDN) и далее поднимается по дереву слева направо. Например, базовое имя (DN) может выглядеть следующим образом: «<em>CN=Иван Иванов, OU=Users, DC=example, DC=com</em>». Базовое имя ограничивает доступ к системе Active Directory.</p>
+<p>Предусмотрены следующие режимы синхронизации:</p>
+<ul>
+<li>принудительный — режим, при котором краткосрочные соединения создаются пользователем при нажатии кнопок «<strong>Проверить соединение</strong>», «<strong>Синхронизировать</strong>», «<strong>Получить перечень групп из AD</strong>»;</li>
+<li>событийный — режим, при котором фоновое соединение создаётся один раз при нажатии кнопки «<strong>Сохранить</strong>» и остаётся открытым до следующего изменения настроек. Любое изменение группы на сервере AD (то есть событие) приводит к синхронизации с Системой.</li>
+<li>по расписанию — режим, при котором соединение создаётся каждый раз согласно указанному расписанию.</li>
+</ul>
+<p>Все изменения пользователей на сервере AD синхронизируются с Системой только принудительно или по расписанию.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<ul>
+<li>После смены домена Active Directory во время синхронизации обновятся данные аккаунтов, при этом сохранится привязка аккаунтов к <a href="https://kb.comindware.ru/article.php?id=2208">ролям в приложении</a> и <a href="https://kb.comindware.ru/article.php?id=2175">системным ролям</a>.</li>
+<li>Если на стороне Active Directory у аккаунта сменилось имя пользователя, в Системе<span style="letter-spacing: 0.2px;"> будет создан новый аккаунт.</span></li>
+</ul>
+</div>
+<p>Система хранит данные о версии загружаемого объекта. При создании повторного соединения, система запрашивает данные, проверяет версию каждого объекта, если она изменилась, то данные синхронизируются.</p>
+<p>Типы синхронизации:</p>
+<ul>
+<li>синхронизация всех пользователей — в Системе создаются все пользователи, которые состоят в RDN;</li>
+<li>выбор групп для синхронизации — можно выбрать группы, которые состоят в RDN; в Системе создаются группы, подгруппы и аккаунты, состоящие в выбранных группах; в Системе не отображается, что подгруппа состоит в группе.</li>
+</ul>
+<p>Определение соответствия данных группы производится следующим образом:</p>
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%;">
+<tbody>
+<tr>
+<th colspan="2" style="width: 33.3333%;">Comindware Business Application Platform</th>
+<th style="width: 33.3333%;">Active Directory</th>
+</tr>
+<tr>
+<th style="width: 33.3333%;">Системное имя</th>
+<th style="width: 33.3333%;">Отображаемое название</th>
+<th style="width: 33.3333%;">Системное имя</th>
+</tr>
+<tr>
+<td style="width: 33.3333%;">Name</td>
+<td style="width: 33.3333%;">Название</td>
+<td style="width: 33.3333%;">CN</td>
+</tr>
+<tr>
+<td style="width: 33.3333%;">Description</td>
+<td style="width: 33.3333%;">Описание</td>
+<td style="width: 33.3333%;">Description</td>
+</tr>
+<tr>
+<td style="width: 33.3333%;">members</td>
+<td style="width: 33.3333%;">Участники группы</td>
+<td style="width: 33.3333%;">Member</td>
+</tr>
+<tr>
+<td style="width: 33.3333%;">parentGroups</td>
+<td style="width: 33.3333%;">Входит в группы</td>
+<td style="width: 33.3333%;">MemberOf</td>
+</tr>
+<tr>
+<td style="width: 33.3333%;">Username</td>
+<td style="width: 33.3333%;">Имя пользователя</td>
+<td style="width: 33.3333%;">SamAccountName</td>
+</tr>
+<tr>
+<td style="width: 33.3333%;">IsActive</td>
+<td style="width: 33.3333%;">Активен (логический атрибут)</td>
+<td style="width: 33.3333%;">IsEnabled</td>
+</tr>
+<tr>
+<td style="width: 33.3333%;">Mbox</td>
+<td style="width: 33.3333%;">Адрес эл.почты</td>
+<td style="width: 33.3333%;">Mail</td>
+</tr>
+<tr>
+<td style="width: 33.3333%;">FullName</td>
+<td style="width: 33.3333%;">Имя</td>
+<td style="width: 33.3333%;">FullName</td>
+</tr>
+<tr>
+<td style="width: 33.3333%;">Title</td>
+<td style="width: 33.3333%;">Должность</td>
+<td style="width: 33.3333%;">Title</td>
+</tr>
+<tr>
+<td style="width: 33.3333%;">Department</td>
+<td style="width: 33.3333%;">Отдел</td>
+<td style="width: 33.3333%;">Department</td>
+</tr>
+<tr>
+<td style="width: 33.3333%;">Office</td>
+<td style="width: 33.3333%;">Офис</td>
+<td style="width: 33.3333%;">PhysucakDeliveryOfficeName</td>
+</tr>
+<tr>
+<td style="width: 33.3333%;">Skype</td>
+<td style="width: 33.3333%;">Skype</td>
+<td style="width: 33.3333%;">Pager</td>
+</tr>
+<tr>
+<td style="width: 33.3333%;">Manager</td>
+<td style="width: 33.3333%;">Руководитель</td>
+<td style="width: 33.3333%;">ManagerID</td>
+</tr>
+<tr>
+<td style="width: 33.3333%;">Phone</td>
+<td style="width: 33.3333%;">Телефон</td>
+<td style="width: 33.3333%;">TelephoneNumber, Mobile</td>
+</tr>
+<tr>
+<td style="width: 33.3333%;">Authentification=LDAP</td>
+<td style="width: 33.3333%;">Метод проверки подлинности</td>
+<td style="width: 33.3333%;"> </td>
+</tr>
+<tr>
+<td style="width: 33.3333%;">Picture</td>
+<td style="width: 33.3333%;">Аватар</td>
+<td style="width: 33.3333%;"> </td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="mcetoc_1gmbcu35v1">Механизм авторизации через сервер каталогов (Active Directory)</h2>
+<p>После ввода адреса эл. почты или имени пользователя и пароля на начальной странице Система идентифицирует аккаунт в собственной базе данных. Если аккаунт существует в базе данных Системы и у него указана проверка подлинности по LDAP или по федеративной аутентификации, то Система посылает запрос в Active Directory или Active Directory Federation Services для аутентификации имени пользователя и пароля. В случае успеха создаётся токен сеанса, который при последующих веб-запросах автоматически передаётся в Систему и позволяет ей получить информацию о текущем пользователе для авторизации запроса. В собственной базе данных Система пароль не хранит.</p>
+<p>Если в свойствах аккаунта изменить <strong>Способ аутентификации</strong> на <strong>Локальную аутентификацию</strong>, то авторизация пользователя будет проходить локально. Администратор может сменить пароль аккаунта непосредственно в Системе, в таком случае при последующей синхронизации с Active Directory пароль не будет перезаписан. Пароль хранится в базе данных Системы.</p>
+<h2 id="mcetoc_1gmbd45ra2">Настройка подключения к серверу каталогов (Active Directory)</h2>
+<p>Инструкции по настройке подключения к серверу каталогов см. в следующих статьях:</p>
+<ul>
+<li><strong>Comindware Business Application Platform</strong>
+<ul>
+<li><strong><samp data-name="aid" data-title="" data-value="2206"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Active Directory. Настройка подключения {Article-ID:2206}</span></samp> </strong></li>
+</ul>
+</li>
+<li><strong>Linux</strong>
+<ul>
+<li><strong><samp data-name="aid" data-title="" data-value="2517"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Аутентификация через Active Directory. Настройка контроллера домена и экземпляра ПО (Linux) {Article-ID:2517}</span></samp> </strong></li>
+<li><strong><samp data-name="aid" data-title="" data-value="2583"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Аутентификация через единый вход (SSO). Настройка контроллера домена, экземпляра ПО и компьютера конечного пользователя (Linux) {Article-ID:2583}</span></samp> </strong></li>
+</ul>
+</li>
+<li><strong>Windows</strong>
+<ul>
+<li><strong><samp data-name="aid" data-title="" data-value="2309"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Настройка единого входа (SSO-аутентификации) (Windows) {Article-ID:2309}</span></samp></strong></li>
+</ul>
+</li>
+</ul>

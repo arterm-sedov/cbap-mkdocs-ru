@@ -1,0 +1,223 @@
+<h1>Сценарии. Определения, создание, настройка, использование</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#definitions"> <span class="md-ellipsis"> Определения </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#особенности-работы-сценариев"> <span class="md-ellipsis"> Особенности работы сценариев </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#примеры-использования-сценариев"> <span class="md-ellipsis"> Примеры использования сценариев </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#использование-списка-сценариев-и-создание-сценария"> <span class="md-ellipsis"> Использование списка сценариев и создание сценария </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-свойств-сценария"> <span class="md-ellipsis"> Настройка свойств сценария </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-события-и-действий-сценария"> <span class="md-ellipsis"> Настройка события и действий сценария </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-элемента-сценария"> <span class="md-ellipsis"> Настройка элемента сценария </span> </a><nav aria-label="Настройка элемента сценария" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#создание-действия"> <span class="md-ellipsis"> Создание действия </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#удаление-действия"> <span class="md-ellipsis"> Удаление действия </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<div class="notice notice-success">
+<h2 class="admonition-title" id="definitions">Определения</h2>
+<p><strong>Сценарий</strong> представляет собой алгоритм автоматизации операций, проверки, обработки и передачи данных, который запускается при наступлении заданного <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2346#scenario_event"><strong>события</strong></a> и выполняет настроенную последовательность <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2346#scenario_actions"><strong>действий</strong></a>.</p>
+<p>Помимо обработки данных внутри <strong>Comindware Business Application Platform</strong> сценарии позволяют обмениваться данными с внешними системами.</p>
+<p>Сценарии дополняют бизнес-процессы, однако не являются их альтернативой, так как не позволяют реализовать логику BPMN. Сценарии можно использовать как таковые в тех случаях, когда не требуется создавать бизнес-процесс.</p>
+<p>Сценарий составляется из блоков с помощью <a class="mkdocs_imported_link" href="#настройка-элемента-сценария">визуального конструктора</a>.</p>
+<p>См. <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2346"><em>«Событие и действия сценария. Определения, типы, свойства, настройка»</em></a> и <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2399"><em>«Использование переменных в сценарии»</em></a>.</p>
+</div>
+<h2 id="особенности-работы-сценариев">Особенности работы сценариев</h2>
+<p>Сценарии являются инструментом автоматизации в приложениях.</p>
+<p>Они имеют ряд особенностей:</p>
+<ul>
+<li>Сценарий выполняется один раз при каждом наступлении заданного события.</li>
+<li>Сценарий выполняется в контексте определённого шаблона записи. При этом <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2346#scenario_actions">действия</a> «<strong>Сменить контекст</strong>», «<strong>Создать запись</strong>», «<strong>Дублировать запись</strong>» позволяют переключаться между шаблонами и манипулировать данными в них.</li>
+<li>При запуске для нескольких записей (например, выбранных в таблице) сценарий выполняется отдельно по каждой записи. То есть в контексте сценария доступна только одна запись, по которой он запущен.</li>
+<li>Если при выполнении действия сценария происходит ошибка и в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2346#scenario_actions_common_properties">свойствах этого действия</a> не установлен флажок «<strong>Игнорировать все ошибки</strong>», то его действия отменяются полностью, как если бы сценарий не запускался вообще. Если ошибка сценария произошла в процессе, то процесс будет остановлен.</li>
+</ul>
+<h2 id="примеры-использования-сценариев">Примеры использования сценариев</h2>
+<p>Сценарии позволяют решать различные задачи, например:</p>
+<ul>
+<li>Изменение данных без учёта роли и разрешений текущего пользователя:
+<ul>
+<li><a class="mkdocs_imported_link" href="#scenario_context">Выполнение сценария от имени системы</a></li>
+</ul>
+</li>
+<li>Использование электронной подписи и подготовка документов по образцу
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2139">Обработка документов с электронной подписью</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2349">Экспорт документов по шаблонам</a></em></li>
+</ul>
+</li>
+<li>Настройка бизнес-процессов
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2582">Визуализация этапов процесса с помощью шевронов</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2320">Настройка универсального процесса согласования</a></em></li>
+</ul>
+</li>
+<li>Обмен данными с внешними системами
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2498">Отправка SQL-запроса SELECT во внешнюю СУБД</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2135">Получение данных по таймеру из внешней СУБД</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2606">Получение сообщений через Kafka</a></em></li>
+</ul>
+</li>
+<li>Получение и отправка HTTP-запросов
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2610">Отправка уведомлений с помощью Telegram-бота</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2509">Отправка HTTP-запросов типа GET и обработка запросов в формате JSON</a></em></li>
+</ul>
+</li>
+<li>Получение и отправка электронной почты
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2584">Отправка эл. почты из сценариев через SMTP и Exchange</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2585">Получение эл. почты из сценариев через SMTP и Exchange</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2515">Согласование заявлений по эл. почте</a></em></li>
+</ul>
+</li>
+<li>Принудительная остановка бизнес-процессов и запрет на внесение изменений в записи
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2346#scenario_actions_validate_expression">Проверка результата выражения в сценарии</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2346#scenario_actions_validate_csharp">Проверка результата скрипта в сценарии</a></em></li>
+</ul>
+</li>
+<li>Создание, дублирование и изменение записей
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2608">Копирование записи вместе с прикреплённым документом</a></em></li>
+</ul>
+</li>
+</ul>
+<h2 id="использование-списка-сценариев-и-создание-сценария">Использование списка сценариев и создание сценария</h2>
+<ol class="colored_numbers_list">
+<li>Откройте страницу <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2191">«<strong>Администрирование</strong>» — «<strong>Сценарии</strong>»</a>.</li>
+<li>Отобразится список сценариев.</li>
+<li>
+<p>Выполните требуемые действия со сценариями:</p>
+<ul>
+<li><strong>Создать</strong> — чтобы <a class="mkdocs_imported_link" href="#настройка-свойств-сценария">настроить свойства</a> нового сценария и перейти к настройке <a class="mkdocs_imported_link" href="#настройка-события-и-действий-сценария">его события и действий</a>, нажмите кнопку «<strong>Создать</strong>».</li>
+<li><strong>Настроить свойства</strong> — выберите сценарий с помощью флажка и нажмите кнопку «<strong>Свойства</strong>», чтобы <a class="mkdocs_imported_link" href="#настройка-свойств-сценария">настроить его свойства</a>.</li>
+<li><strong>Открыть</strong> — дважды нажмите строку сценария, чтобы настроить <a class="mkdocs_imported_link" href="#настройка-события-и-действий-сценария">его событие и действия</a>.</li>
+<li><strong>Удалить</strong> — установите флажки выбора для сценариев, нажмите кнопку «<strong>Удалить</strong>» и подтвердите удаление.</li>
+</ul>
+</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Список сценариев в приложении" src="https://kb.comindware.ru/assets/scenarios_list.png"/></p>
+<figcaption class="caption">Список сценариев в приложении</figcaption>
+</figure>
+<h2 id="настройка-свойств-сценария">Настройка свойств сценария</h2>
+<ol class="colored_numbers_list">
+<li>Откройте список сценариев.</li>
+<li>Нажмите кнопку «<strong>Создать</strong>». Либо выберите или откройте сценарий и нажмите кнопку «<strong>Свойства</strong>».</li>
+<li>
+<p>Настройте и сохраните свойства сценария:</p>
+<ul>
+<li><strong>Название</strong> — наглядное наименование сценария.</li>
+<li><strong>Системное имя</strong> — уникальное имя. Не должно начинаться с цифры. Рекомендуется использовать буквы латинского алфавита, цифры и символ «_». Заполняется автоматически по названию.</li>
+</ul>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Для сценариев на входе и выходе из элементов диаграммы процесса название и системное имя сценария формируются автоматически.</p>
+</div>
+<ul>
+<li id="scenario_context"><strong>Контекст выполнения</strong> — аккаунт, от имени которого должен выполняться сценарий:
+<ul>
+<li><strong>От имени системы</strong> — сценарий будет выполняться с полными правами аккаунта «<strong>Система</strong>», без учёта роли и разрешений пользователя, инициировавшего событие, по которому запускается сценарий. То есть сценарий сможет выполнять <em>любые действия</em>.</li>
+<li><strong>От инициатора</strong> — сценарий будет выполняться при наличии необходимых разрешений у пользователя, инициировавшего событие, по которому выполняется сценарий. В случае отсутствия у пользователя разрешений система выдаст ошибку.</li>
+</ul>
+</li>
+<li><strong>Статус</strong>:
+<ul>
+<li><strong>Активен</strong> — сценарий будет выполняться при каждом наступлении заданного события.</li>
+<li><strong>Приостановлен</strong> — сценарий не будет выполняться при наступлении заданного события.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Если вы создали сценарий, откроется его конструктор. <a class="mkdocs_imported_link" href="#настройка-события-и-действий-сценария">Настройте событие и действия сценария</a>.</p>
+</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Настройка свойств нового сценария" src="https://kb.comindware.ru/assets/scenario_create_properties.png"/></p>
+<figcaption class="caption">Настройка свойств нового сценария</figcaption>
+</figure>
+<h2 id="настройка-события-и-действий-сценария">Настройка события и действий сценария</h2>
+<p>Для настройки сценария предусмотрен удобный визуальный конструктор.</p>
+<p>Перейти к конструктору сценария можно двумя способами:</p>
+<ul>
+<li>Дважды нажмите строку сценария в <a class="mkdocs_imported_link" href="#использование-списка-сценариев-и-создание-сценария">списке сценариев</a>.</li>
+<li>Нажмите кнопку «<strong>Сценарий на входе</strong>» <em class="fa-light fa-arrow-right-to-bracket">‌<!--icon--></em> или «<strong>Сценарий на выходе</strong>» <em class="fa-light fa-arrow-right-from-bracket">‌<!--icon--></em> в меню элемента <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2360">диаграммы бизнес-процесса</a>.</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Кнопки создания сценария на входе и выходе из элемента диаграммы процесса" src="https://kb.comindware.ru/assets/scenario_exit_enter_process_element.png"/></p>
+<figcaption class="caption">Кнопки создания сценария на входе и выходе из элемента диаграммы процесса</figcaption>
+</figure>
+<p>В конструкторе сценария предусмотрены следующие кнопки:</p>
+<ul>
+<li><strong>Свойства</strong> — настройка <a class="mkdocs_imported_link" href="#настройка-свойств-сценария">свойств сценария</a>.</li>
+<li><strong>Очистить</strong> — безвозвратное удаление всех элементов сценария. После нажатия этой кнопки в сценарий будет помещено пустое начальное событие «<strong>Нажатие кнопки</strong>», как если бы сценарий был создан заново. Требуется подтверждение.</li>
+<li><strong>Удалить</strong> — удаление сценария. Требуется подтверждение.</li>
+<li><strong>Проверить</strong> — проверка целостности и работоспособности сценария. При нажатии этой кнопки отобразится панель «<strong>Результат проверки</strong>» с перечнем выявленных ошибок в сценарии. Элементы сценария с ошибкой будут выделены красным цветом.</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Конструктор сценария" src="https://kb.comindware.ru/assets/scenario_designer.png"/></p>
+<figcaption class="caption">Конструктор сценария</figcaption>
+</figure>
+<h2 id="настройка-элемента-сценария">Настройка элемента сценария</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>При настройке сценария изменения сохраняются и применяются автоматически.</p>
+</div>
+<ol class="colored_numbers_list">
+<li>Наведите указателя мыши на элемент сценария или выберите его.</li>
+<li>Отобразятся кнопки настройки:</li>
+</ol>
+<ul>
+<li><strong>Название элемента сценария</strong> — нажмите, чтобы перейти к настройке свойств элемента.</li>
+<li><strong>Изменить</strong> — нажмите <em class="fa-light fa-edit">‌<!--icon--></em>, чтобы перейти к настройке свойств элемента.</li>
+<li><strong>Перейти к контекстному шаблону</strong> — нажмите кнопку <em class="fa-light fa-external-link">‌<!--icon--></em>, чтобы перейти к <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2219">шаблону</a>, в контексте которого выполняется элемент сценария.</li>
+<li><strong>Удалить</strong> — нажмите кнопку <em class="fa-light fa-trash-alt">‌<!--icon--></em>, чтобы безвозвратно <a class="mkdocs_imported_link" href="#удаление-действия">удалить действие сценария</a>. Подтвердите удаление.</li>
+<li><strong>Добавить действие</strong> — нажмите кнопку <em class="fa-light fa-plus-circle">‌<!--icon--></em>, чтобы <a class="mkdocs_imported_link" href="#создание-действия">создать действия</a> после текущего элемента или внутри него.</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Кнопки настройки элемента сценария" src="https://kb.comindware.ru/assets/scenario_element_buttons.png"/></p>
+<figcaption class="caption">Кнопки настройки элемента сценария</figcaption>
+</figure>
+<h3 id="создание-действия">Создание действия</h3>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Внутрь действий «<strong>Создать запись</strong>», «<strong>Дублировать запись</strong>», «<strong>Сменить контекст</strong>», «<strong>Выполнить по условиям</strong>», «<strong>Повторять по числовому счётчику</strong>», «<strong>Повторять по количеству объектов</strong>» можно поместить другие действия.</p>
+</div>
+<ol class="colored_numbers_list">
+<li>Наведите указатель мыши на элемент сценария, после или внутрь которого требуется добавить действие.</li>
+<li>Нажмите кнопку «<strong>Добавить действие</strong>» <em class="fa-light fa-plus-circle">‌<!--icon--></em>.</li>
+<li>Выберите необходимое действие в раскрывающемся меню.</li>
+<li>В конструкторе сценария появится новое действие.</li>
+<li>
+<p><a class="mkdocs_imported_link" href="#настройка-элемента-сценария">Настройте действие</a>.</p>
+<figure class="screenshot_with_caption"><img alt="Создание действия в сценарии" src="https://kb.comindware.ru/assets/scenario_create_action.png"/>
+<figcaption class="caption">Создание действия в сценарии</figcaption>
+</figure>
+</li>
+</ol>
+<h3 id="удаление-действия">Удаление действия</h3>
+<ol class="colored_numbers_list">
+<li>Наведите указатель мыши на подлежащее удалению действие.</li>
+<li>Нажмите кнопку «<strong>Удалить</strong>» <em class="fa-light fa-trash-alt">‌<!--icon--></em>.</li>
+<li>Подтвердите удаление.</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Удаление действия из сценария" src="https://kb.comindware.ru/assets/scenario_delete_action.png"/></p>
+<figcaption class="caption">Удаление действия из сценария</figcaption>
+</figure>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2346">Событие и действия сценария. Определения, типы, свойства, настройка</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2399">Использование переменных в сценарии</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

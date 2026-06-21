@@ -1,0 +1,82 @@
+<h1>Атрибут типа «Аккаунт»</h1><div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1gk2vkcnn1">Свойства атрибута</a></li>
+<li><a href="#mcetoc_1gk2vkcnn2">Пример использования</a></li>
+<li><a href="#mcetoc_1gk2vkcnn3">Связанные статьи</a></li>
+</ul>
+</div>
+<div class="md-content">
+<h2 id="mcetoc_1gk2vkcnn1">Свойства атрибута</h2>
+<p>Атрибут типа «<strong>Аккаунт</strong>» содержит одну или несколько ссылок на записи в связанном <strong><a href="https://kb.comindware.ru/article.php?id=2223">шаблоне аккаунта</a></strong>. Ссылка представляет собой уникальный идентификатор записи.</p>
+<p>Помимо <strong><a href="https://kb.comindware.ru/article.php?id=2260">общих свойств</a></strong> для атрибута типа «<strong>Аккаунт</strong>» предусмотрены перечисленные ниже свойства.</p>
+<ul>
+<li>
+<p>«<strong>Связанный шаблон</strong>» (необязательное поле) — укажите <a href="https://kb.comindware.ru/article.php?id=2223">шаблон аккаунта</a>, на который будет ссылаться данный атрибут. Если связанный шаблон аккаунта не указан, то атрибут будет ссылаться на системный шаблон аккаунта.</p>
+</li>
+<li>
+<p>«<strong>Взаимная связь с атрибутом</strong>» — при необходимости выберите или создайте <strong>в связанном шаблоне</strong> атрибут, в котором будут автоматически сохраняться ссылки на связанные записи из текущего шаблона (этот раскрывающийся список отображается после выбора связанного шаблона).</p>
+<ul>
+<li>«<strong>Не используется</strong>» — взаимная связь атрибутов не установлена (этот пункт выбран по умолчанию).</li>
+<li>«<strong>С имеющимся</strong>» — выберите атрибут, связанный с текущим шаблоном, но не используемый в других взаимных связях.</li>
+<li>«<strong>С новым</strong>» — создайте новый атрибут, указав его <strong>название</strong> и <strong>системное имя</strong>. Чтобы новый атрибут мог ссылаться на несколько записей из текущего шаблона, установите для него флажок «<strong>Хранить несколько значений</strong>».</li>
+</ul>
+<div class="blue_note">
+<p>Атрибут для взаимной связи имеет такой же тип, что текущий шаблон: «<strong><a href="https://kb.comindware.ru/article.php?id=2243">Запись</a></strong>», «<strong><a href="https://kb.comindware.ru/article.php?id=2249">Аккаунт</a></strong>», «<strong><a href="https://kb.comindware.ru/article.php?id=2240">Роль</a></strong>» или «<strong><a href="https://kb.comindware.ru/article.php?id=2258">Организационная единица</a></strong>».</p>
+<p>Взаимная связь атрибутов позволяет в записях связанного шаблона обращаться к записям из текущего шаблона. См. <a href="https://kb.comindware.ru/article.php?id=2249#mcetoc_1gk2vkcnn2">пример использования</a>.</p>
+</div>
+</li>
+<li>
+<p>«<strong>Вычисляемое допустимое значение</strong>» — задайте фильтр допустимых значений атрибута с помощью формулы или выражения на языке N3.</p>
+</li>
+<li>«<strong>Хранить несколько значений</strong>» — установите этот флажок, чтобы в атрибуте можно было хранить ссылки на несколько аккаунтов (сформируется связь «один ко многим»).</li>
+<li>
+<p>«<strong>Использовать как заголовок записей</strong>» — установите этот флажок, чтобы значение атрибута отображалось в тексте ссылок на шаблон. См. раздел «<strong><a href="https://kb.comindware.ru/article.php?id=2255">Атрибут-заголовок записей шаблона</a></strong>».</p>
+</li>
+<li>
+<p>«<strong>Вычислять по выражению</strong>» — установите этот флажок, чтобы значение атрибута вычислялось во время работы приложения. См. раздел «<strong><a href="https://kb.comindware.ru/article.php?id=2254">Вычисляемый атрибут</a></strong>».</p>
+</li>
+</ul>
+<div class="screenshot_with_caption">
+<p><img alt="Свойства атрибута типа «Аккаунт»" src="https://kb.comindware.ru/assets/attribute_account_properties.png"/></p>
+<p class="caption">Свойства атрибута типа «Аккаунт»</p>
+</div>
+<h2 id="mcetoc_1gk2vkcnn2">Пример использования</h2>
+<div class="admonition tip">
+<p class="admonition-title">Учёт заказов и заказчиков с помощью взаимосвязанных атрибутов</p>
+<p><strong>Конфигурация приложения</strong></p>
+<ul>
+<li>Атрибут <em>«Заказчик»</em> в шаблоне записи <em>«Заказы»</em>
+<ul>
+<li><strong>Тип данных</strong>: <strong>Аккаунт</strong>.</li>
+<li><strong>Связанный шаблон</strong>: <em>Заказчики</em>.</li>
+<li><strong>Взаимная связь с атрибутом</strong>: <em>Все заказы</em>.</li>
+</ul>
+</li>
+<li>Атрибут <em>«Все заказы»</em> в шаблоне аккаунта <em>«Заказчики»</em>
+<ul>
+<li><strong>Тип данных</strong>: <strong>Запись</strong>.</li>
+<li><strong>Хранить несколько значений</strong>: флажок установлен.</li>
+<li><strong>Удалять связанные записи</strong>: флажок установлен.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Результирующее поведение</strong></p>
+<ol class="colored_numbers_list">
+<li>В шаблоне <em>«Заказы»</em> созданы записи <code>«Заказ №2»</code> и <code>«Заказ №23»</code>.</li>
+<li>В записях <code>«Заказ №2»</code> и <code>«Заказ №23»</code> в атрибуте <em>«Заказчик»</em> указан аккаунт <code>«Иванов И. И.»</code>.</li>
+<li>Так как атрибуты <em>«Все заказы»</em> и <em>«Заказчик»</em> взаимосвязаны, в атрибуте <em>«Все заказы»</em> аккаунта <code>«Иванов И. И.»</code> будут автоматически сохранены ссылки на записи <code>«Заказ №2»</code> и <code>«Заказ №23»</code>.</li>
+<li>При удалении аккаунта <code>«Иванов И. И.»</code> из шаблона <em>«Заказчики»</em> будут также удалены записи <code>«Заказ №2»</code> и <code>«Заказ №23»</code> из шаблона <em>«Заказы»</em>.</li>
+</ol>
+</div>
+<h2 id="mcetoc_1gk2vkcnn3">Связанные статьи</h2>
+<p><strong><a href="https://kb.comindware.ru/article.php?id=2260">Общие свойства атрибутов</a></strong></p>
+<p><strong><samp data-name="aid" data-title="" data-value="2252"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Атрибуты. Определения, типы, настройка, архивирование, удаление {Article-ID:2252}</span></samp> </strong></p>
+<p><strong><a href="https://kb.comindware.ru/article.php?id=2223">Шаблон аккаунта</a></strong></p>
+<p><strong><a href="https://kb.comindware.ru/article.php?id=2243">Атрибут типа «Запись»</a></strong></p>
+</div>
+</div>
+<p><a class="md-top md-icon mkdocs_imported_link" href="#"> <em class="fa-light fa-arrow-up">‌</em> К началу</a></p>
+</div>

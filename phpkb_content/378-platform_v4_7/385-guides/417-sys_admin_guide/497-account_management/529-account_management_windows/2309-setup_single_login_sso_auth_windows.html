@@ -1,0 +1,45 @@
+<h1>Настройка единого входа (SSO-аутентификации) в ОС Windows</h1><div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1hpdmokj20">Введение</a></li>
+<li><a href="#mcetoc_1gmbd85lv0">Настройка экземпляра ПО</a></li>
+<li><a href="#mcetoc_1gmcvo1cl0">Настройка клиента</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1hpdmokj20">Введение</h2>
+<p>В этой статье представлены инструкции по настройке экземпляра ПО <strong>Comindware Business Application Platform </strong>под управлением Windows, служб IIS и браузера конечного пользователя для аутентификации посредством технологии единого входа через Active Directory.</p>
+<h2 id="mcetoc_1gmbd85lv0">Настройка экземпляра ПО</h2>
+<p><strong>1.</strong> Настройте подключение к Active Directory, см. статью <samp data-name="aid" data-title="" data-value="2206"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2206}</span></samp>.</p>
+<p><strong>2.</strong> На сервере с экземпляром ПО создайте доменного пользователя, под которым будет запускаться пул приложений экземпляра ПО в Internet Information Services (IIS).</p>
+<p><strong>3.</strong> Добавьте пользователя, созданного на шаге 2, в локальную группу <em>Backup </em><em>operators.</em></p>
+<p><strong>4.</strong> Предоставьте созданному пользователю права локального администратора на сервере с экземпляром ПО .</p>
+<p><strong>5.</strong> Обновите локальные групповые политики с помощью командной строки: <code>gpupdate</code></p>
+<p><strong>6.</strong> Откройте созданного пользователя в оснастке «<strong>Пользователи и компьютеры Active Directory</strong>» и на вкладке «<strong>Редактор атрибутов</strong>» присвойте значение <code>HTTP/sitename</code> атрибуту <code>servicePrincipalName</code>, где <code>sitename</code> — имя хоста, по которому осуществляется доступ к экземпляру ПО.</p>
+<p><strong>7.</strong> Перейдите в Диспетчер служб IIS и настройте пул приложений экземпляра ПО, указав в поле «<strong>Удостоверение</strong>» пользователя, созданного на шаге 2. Пул приложений будет запускаться от имени указанного пользователя.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Настройка пользователя для запуска пула приложений" class="img-responsive" height="751" src="https://kb.comindware.ru/assets/img_63bceabdd2790.png" width="1010"/></p>
+<p class="caption" style="font-size: 15px !important;">Настройка пользователя для запуска пула приложений</p>
+</div>
+<p><strong>8.</strong> Предоставьте созданному пользователю полные права на каталоги исполняемых файлов ПО и базы данных экземпляра ПО.</p>
+<p><strong>9.</strong> Откройте для редактирования файл <code>web.config</code> в папке файлов конфигурации экземпляра ПО. См. статью «<samp data-name="aid" data-title="" data-value="2301"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2301}</span></samp>».</p>
+<p><strong>10.</strong> В строке <code>&lt;authentication mode="None" /&gt;</code> измените значение <code>None</code> на значение <code>Windows</code>: <code>&lt;authentication
+mode="Windows"/&gt;</code></p>
+<p><strong>11.</strong> В Диспетчере служб IIS выберите сайт экземпляра ПО в разделе «<strong><em>Сайты</em></strong>».</p>
+<p><strong>12.</strong> Откройте пункт «<strong>Проверка подлинности</strong>».</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Пункт «Проверка подлинности» в диспетчере служб IIS" class="img-responsive" height="473" src="https://kb.comindware.ru/assets/img_63bcebb6e9a0b.png" width="1010"/></p>
+<p class="caption" style="font-size: 15px !important;">Пункт «Проверка подлинности» в диспетчере служб IIS</p>
+</div>
+<p><strong>13.</strong> Переведите все пункты в разделе «<strong>Проверка подлинности</strong>» в состояние «<strong>Отключен</strong>», кроме «<strong>Проверка подлинности Windows</strong>», этот пункт должен быть в состоянии «<strong>Включен</strong>».</p>
+<p><strong>14.</strong> Если веб-сервер был установлен вручную, перейдите в Панель управления Windows; в разделе «<strong>Программы и компоненты</strong>» выберите пункт «<strong>Включение или отключение компонентов Windows</strong>». В открывшемся окне нажимайте далее, до этапа «<strong>Server roles</strong>». На этом этапе необходимо проверить, чтобы в «<strong>Web Server (IIS)</strong>» были установлены 27 из 43 компонентов. Для удобства ниже приведён весь список компонентов, которые обязательно должны быть установлены.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img class="img-responsive" src="https://kb.comindware.ru/assets/img_64f5e2332ad53.png"/></p>
+<p class="caption" style="font-size: 15px !important;">Необходимые компоненты веб-сервера</p>
+</div>
+<p><strong>15.</strong> Перезапустите пул приложения и экземпляр ПО.</p>
+<h2 id="mcetoc_1gmcvo1cl0">Настройка клиента</h2>
+<p>По умолчанию SSO-авторизация работает в браузерах Edge и Google Chrome, но необходимо в параметрах безопасности браузера добавить сайт в зону местной интрасети и включить режим «<strong>Автоматический вход в сеть только в зоне интрасети</strong>». Сведения о настройке других браузеров см. в соответствующей документации.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Окно настройки параметров безопасности браузера" class="img-responsive" height="479" src="https://kb.comindware.ru/assets/img_63bcecc1b498f.png" width="413"/></p>
+<p class="caption" style="font-size: 15px !important;">Окно настройки параметров безопасности браузера</p>
+</div>

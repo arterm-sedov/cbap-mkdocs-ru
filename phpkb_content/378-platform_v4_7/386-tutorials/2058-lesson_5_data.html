@@ -1,0 +1,387 @@
+<h1>Урок 5. Структуры данных</h1><div class="mce-toc">
+<h2 class="toc-heading">Содержание урока</h2>
+<ul>
+<li><a href="#l51"> Диаграмма «сущность-связь» </a></li>
+<li><a href="#l52"> Справочник «Тип автомобиля» </a></li>
+<li><a href="#l53"> Мастер-данные «Автомобиль» </a></li>
+<li><a href="#l54"> Тестирование: справочники и мастер-данные </a></li>
+<li><a href="#l55"> Атрибуты типа «Запись»</a></li>
+<li><a href="#l56"> Транзакционные данные: затраты </a></li>
+<li><a href="#mcetoc_1gbl72ihe0"> Результаты </a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1hv7073d70">Введение</h2>
+<p>В этом уроке вы научитесь создавать реестры данных различных типов (справочники, мастер-данные, транзакционные данные), устанавливать между ними связи и наглядно отображать данные и связи между ними на диаграмме «сущность-связь».</p>
+<p><strong>Предусловия: </strong><span style="letter-spacing: 0.2px;">пройден </span><samp data-name="aid" data-title="" data-value="2054" style="font-size: 15px; letter-spacing: 0.2px;"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png"/>{Article-ID:2054}</span></samp><span style="letter-spacing: 0.2px;">, создан и настроен реестр данных </span><em style="letter-spacing: 0.2px;">«Заявка на автомобиль»</em><span style="letter-spacing: 0.2px;">.</span></p>
+<p><strong>Расчетная продолжительность:</strong> 30 мин.</p>
+<p><strong>Примечание:</strong> в данном уроке представлен продукт <strong>Comindware Business Application Platform</strong> версии <span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">4.2.219.0</span>, внешний вид страниц и меню в других версиях продукта может отличаться.</p>
+<h2 id="l51">Диаграмма «сущность-связь»</h2>
+<div class="notice notice-success">
+<p><strong>Определение</strong></p>
+<ul>
+<li>Диаграмма «сущность-связь» наглядно показывает атрибуты реестров данных и их связи друг с другом.</li>
+<li><span style="letter-spacing: 0.2px;">Непосредственно в ходе создания и редактирования диаграммы можно создавать и настраивать новые реестры данных (шаблоны записей), добавлять атрибуты.</span></li>
+<li><span style="letter-spacing: 0.2px;">Это позволяет настраивать бизнес-приложение и при этом видеть всю картину в целом.</span></li>
+</ul>
+</div>
+<p><strong> 1. </strong> В панели навигации слева выберите пункты «<strong>Настройки</strong>» — «<strong>Диаграммы</strong>». Отобразится список диаграмм всех приложений.</p>
+<div class="notice notice-info">
+<p><strong>Примечание</strong></p>
+<ul>
+<li>По умолчанию список диаграмм содержит диаграммы бизнес-процессов (графические схемы процессов) и диаграммы моделей классов.</li>
+<li>Диаграмма модели классов создается автоматически для каждого приложения, а для каждого создаваемого шаблона процесса создается диаграмма процесса. </li>
+</ul>
+</div>
+<p><strong> 2. </strong> Нажмите кнопку «<strong>Создать</strong>», чтобы создать новую диаграмму.</p>
+<p><strong>3. </strong>В окне «<strong>Новая диаграмма</strong>» укажите <strong> название</strong> <em>«Модель данных — заказ автотранспорта»</em>, <strong>тип </strong> « <strong>Диаграмма модели данных</strong>» и <strong>приложение </strong> <em>«Управление автопарком». </em></p>
+<p><strong>4. </strong>Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Создание новой диаграммы модели данных" class="img-responsive" height="432" src="https://kb.comindware.ru/assets/img_62433315d3acc.png" width="1075"/></p>
+<p class="caption" style="font-size: 11pt !important;">Создание новой диаграммы модели данных</p>
+</div>
+<p>Отобразится конструктор диаграммы.</p>
+<div class="notice notice-success">
+<p><strong>Определение</strong></p>
+<strong>Конструктор диаграммы</strong> позволяет создавать и редактировать модель данных приложения.
+<div>Конструктор диаграммы содержит:</div>
+<div style="padding-left: 30px;">(1) панель элементов, которая содержит уже созданные шаблоны и кнопки для создания новых;</div>
+<div style="padding-left: 30px;">(2) область диаграммы;</div>
+<div style="padding-left: 30px;">(3) кнопки для работы с диаграммой. </div>
+</div>
+<div class="screenshot_with_caption">
+<p><img alt="Конструктор диаграммы" class="img-responsive" height="432" src="https://kb.comindware.ru/assets/img_624333f52be92.png" width="1075"/></p>
+<p class="caption" style="font-size: 11pt !important;">Конструктор диаграммы</p>
+</div>
+<p><strong>5. </strong> Перетащите на диаграмму шаблон записи <em>«Заявка на автомобиль»</em> с левой панели.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Добавление шаблона на диаграмму модели данных" class="img-responsive" height="432" src="https://kb.comindware.ru/assets/img_624334607fe65.png" width="1075"/></p>
+<p class="caption" style="font-size: 11pt !important;">Добавление шаблона на диаграмму модели данных</p>
+</div>
+<p>Диаграмма модели данных сохраняется автоматически.</p>
+<h2 id="l52">Справочник «Тип автомобиля»</h2>
+<div class="notice notice-info">
+<p><strong>Примечание</strong></p>
+Добавим справочник типов автомобилей, чтобы <em>Заказчик</em> мог указать тип автомобиля в заявке. 
+<div>Сначала мы создадим реестр данных (<strong>шаблон записи</strong>) <em>«Тип автомобиля»</em>, затем настроим для него экранную форму, список и заполним его значениями.</div>
+Создавать и настраивать реестр данных мы будем с помощью конструктора диаграмм. </div>
+<p>Добавим справочник типов автомобилей…</p>
+<p><strong> 1. </strong> Перетащите на диаграмму элемент «<strong>Новый шаблон записи</strong>» с панели элементов.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Элемент для создания шаблона записи на диаграмме модели данных" class="img-responsive" height="432" src="https://kb.comindware.ru/assets/img_624334b3e271d.png" width="1075"/></p>
+<p class="caption" style="font-size: 11pt !important;">Элемент для создания шаблона записи на диаграмме модели данных</p>
+</div>
+<p><strong> 2. </strong>В окне «<strong>Новый шаблон</strong>» введите <em> <strong> название </strong> </em> шаблона — <em>«Тип автомобиля»</em> и нажмите кнопку «<strong>Создать</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Создание нового шаблона записи" class="img-responsive" height="304" src="https://kb.comindware.ru/assets/img_6243355e063a0.png" width="1075"/></p>
+<p class="caption" style="font-size: 11pt !important;">Создание нового шаблона записи</p>
+</div>
+<p>Создадим атрибут текстового типа для реестра данных<em> «Тип автомобиля»…</em></p>
+<p><strong> 1. </strong> Выберите шаблон «Тип автомобиля» на диаграмме. В меню элемента нажмите кнопку «<strong>Добавить новый атрибут</strong>» <em class="fa-light fa-plus">‌</em>.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Переход к созданию атрибута шаблона записи на диаграмме модели данных" class="img-responsive" height="401" src="https://kb.comindware.ru/assets/img_624335a2049c9.png" width="1075"/></p>
+<p class="caption" style="font-size: 11pt !important;">Переход к созданию атрибута шаблона записи на диаграмме модели данных</p>
+</div>
+<p>Отобразится форма создания атрибута.</p>
+<p><strong> 2. </strong> Укажите <strong>тип данных </strong>«<strong>Текст</strong>» и <strong> название</strong> атрибута <em>«Тип автомобиля».</em></p>
+<p><strong> 3. </strong> Установите флажок «<strong>Использовать как заголовок записей</strong>».</p>
+<p><strong> 4. </strong> Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Окно свойств нового атрибута" class="img-responsive" height="541" src="https://kb.comindware.ru/assets/img_63107f7da1fdd.png" width="1264"/></p>
+<p class="caption" style="font-size: 11pt !important;">Окно свойств нового атрибута</p>
+</div>
+<div class="notice notice-info">
+<p><strong>Примечание</strong></p>
+Когда установлен флажок «<strong>Использовать как заголовок записей</strong>», что значение этого атрибута будет отображаться как заголовок записей этого шаблона на формах и в таблицах. Если в качестве заголовка записей не выбран ни один атрибут, заголовком будет ID записи — служебный числовой идентификатор. Это будет неинформативно, поэтому атрибут-заголовок записей следует задать. </div>
+<p>Настроим форму, с помощью которой мы будем заполнять справочник типов автомобилей…</p>
+<p><strong> 1. </strong> Выберите шаблон «Тип автомобиля» на диаграмме. В меню элемента выберите пункт «<strong>Перейти к шаблону</strong>» — «<strong>Формы</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Переход к вкладке «Формы» шаблона записи с диаграммы модели данных" class="img-responsive" height="370" src="https://kb.comindware.ru/assets/img_6243374d6f32e.png" width="1075"/></p>
+<p class="caption" style="font-size: 11pt !important;">Переход к вкладке «Формы» шаблона записи с диаграммы модели данных</p>
+</div>
+<p><strong> 2. </strong> В отобразившемся списке форм дважды нажмите форму «Тип автомобиля — Основная форма», чтобы открыть её.</p>
+<p><strong> 3. </strong>Перетащите на форму новую <strong>область</strong> и переименуйте её в <em>«Тип автомобиля».</em></p>
+<p><strong> 4. </strong> Перетащите атрибут <em>«Тип автомобиля»</em> с панели элементов на область <em>«Тип автомобиля».</em></p>
+<p><strong> 5. </strong> Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<p><strong> 6. </strong> Нажмите кнопку «<strong>Настроить шаблон</strong>» <em class="fa-light fa-gear">‌</em>.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Добавление атрибута на форму" class="img-responsive" height="483" src="https://kb.comindware.ru/assets/img_6243382e160d6.png" width="1075"/></p>
+<p class="caption" style="font-size: 11pt !important;">Добавление атрибута на форму</p>
+</div>
+<p>Создадим таблицу <em>«Тип автомобиля»…</em></p>
+<p><strong> 1. </strong> Перейдите на вкладку «<strong>Таблицы</strong>» шаблона записи <em>«Тип автомобиля» .</em></p>
+<p><strong> 2.  </strong> Дважды нажмите строку «<strong>Все записи</strong>», чтобы перейти к конструктору таблицы.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Вкладка «Таблицы» шаблона записи" class="img-responsive" height="314" src="https://kb.comindware.ru/assets/img_6243389f77110.png" width="1075"/></p>
+<p class="caption" style="font-size: 11pt !important;">Вкладка «<strong>Таблицы</strong>» шаблона записи</p>
+</div>
+<p><strong> 3. </strong> В конструкторе таблицы нажмите кнопку «<strong>Очистить</strong>», чтобы удалить все атрибуты из макета таблицы. В отобразившемся диалоговом окне подтвердите очистку.</p>
+<p><strong> 4. </strong> Перетащите атрибут <em>«Тип автомобиля»</em> на форму.</p>
+<p><strong>5. </strong>Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<p><strong> 6. </strong> Нажмите кнопку «<strong>Настроить шаблон</strong>» для возврата к вкладке «<strong>Свойства</strong>» шаблона записи <em>«Тип автомобиля».</em></p>
+<div class="screenshot_with_caption">
+<p><img alt="Добавление в список атрибута «Тип автомобиля»" class="img-responsive" height="318" src="https://kb.comindware.ru/assets/img_631085eb1eff4.png" width="1264"/></p>
+<p class="caption" style="font-size: 11pt !important;">Добавление в список атрибута «Тип автомобиля»</p>
+</div>
+<p>Заполним справочник типов автомобилей…</p>
+<p><strong> 1. </strong> На вкладке «<strong>Свойства</strong>» шаблона записи <em>«Тип автомобиля»</em> нажмите кнопку «<strong>Перейти к экземплярам</strong>».</p>
+<p><strong> 2. </strong>  В списке записей «Тип автомобиля» нажмите кнопку «<strong>Создать</strong>».</p>
+<p><strong> 3. </strong> В поле «Тип автомобиля» укажите значение <em>«Легковой»</em> и нажмите кнопку «<strong>Сохранить</strong>».</p>
+<p><strong> 4. </strong> Нажмите ссылку «<em>Тип автомобиля</em>» над формой, чтобы вернуться к списку записей <em>«Тип автомобиля».</em></p>
+<p><strong> 5. </strong> Аналогичным образом создайте ещё два типа автомобилей — <em>«Представительский» и «Автобус».</em></p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Создание записи с типом автомобиля и переход к списку записей" class="img-responsive" height="248" src="https://kb.comindware.ru/assets/img_631081080a0bd.png" style="letter-spacing: 0.2px;" width="1264"/></p>
+<p class="caption" style="font-size: 15px !important;">Создание записи с типом автомобиля и переход к списку записей</p>
+</div>
+<p>Справочник типов автомобилей готов:</p>
+<div class="screenshot_with_caption">
+<p><img alt="Справочник «Тип автомобиля»" class="img-responsive" height="407" src="https://kb.comindware.ru/assets/img_62433b6f93a3a.png" width="1075"/></p>
+<p class="caption" style="font-size: 11pt !important;">Справочник «Тип автомобиля»</p>
+</div>
+<p>Теперь следует добавить на экранную форму заявки поле <em>«Тип автомобиля»</em>, в котором <em>Заказчик</em> будет выбирать значение из справочника. Для этого установим связь между реестром данных заявок и справочником типов автомобилей с помощью атрибута типа «<strong>Запись</strong>».</p>
+<div class="notice notice-success">
+<p><strong>Определение</strong></p>
+<ul>
+<li><span style="letter-spacing: 0.2px; font-weight: 700 !important;">Атрибут типа «Запись»</span><span style="letter-spacing: 0.2px;"> используется для создания связи между реестрами вида M:1 (многие к одному).</span></li>
+<li><span style="letter-spacing: 0.2px;">Это означает, что несколько записей реестра могут ссылаться на одну запись реестра. </span></li>
+<li><span style="letter-spacing: 0.2px;">Такой реестр называется </span><span style="letter-spacing: 0.2px; font-weight: 700 !important;">связанным шаблоном</span><span style="letter-spacing: 0.2px;">. </span></li>
+<li><span style="letter-spacing: 0.2px;">Связанный шаблон всегда указывается при создании атрибута типа «<strong>Запись</strong>».</span></li>
+</ul>
+</div>
+<p><strong> 1. </strong> В модели данных заказа автотранспорта выберите шаблон <em>«Заявка на автомобиль»</em> и в меню элемента нажмите кнопку «<strong>Добавить новый атрибут</strong>» <em class="fa-light fa-plus">‌</em>.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Добавление атрибута шаблона записи с помощью диаграммы модели данных" class="img-responsive" height="405" src="https://kb.comindware.ru/assets/img_62433e63da67b.png" width="1082"/></p>
+<p class="caption" style="font-size: 11pt !important;">Добавление атрибута шаблона записи с помощью диаграммы модели данных</p>
+</div>
+<p><strong> 2. </strong>В окне «<strong>Новый атрибут</strong>» выберите <strong>тип данных</strong> «<strong>Запись</strong>» и укажите <strong>название</strong> <em>«Тип автомобиля».</em></p>
+<p><strong> 3. </strong> Выберите <strong>связанный шаблон </strong><em>«Тип автомобиля».</em></p>
+<p><strong>4. </strong>Остальные поля оставьте неизменными.</p>
+<p><strong>5. </strong> Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Настройка атрибута типа «Запись»" class="img-responsive" height="302" src="https://kb.comindware.ru/assets/img_631082a57bf73.png" width="1264"/></p>
+<p class="caption" style="font-size: 11pt !important;">Настройка атрибута типа «Запись»</p>
+</div>
+<p><strong> 6. </strong>На диаграмме отобразится связь между шаблонами. </p>
+<div class="screenshot_with_caption">
+<p><img alt="Отображение связи между шаблонами" class="img-responsive" height="435" src="https://kb.comindware.ru/assets/img_624340bfb62f1.png" width="1082"/></p>
+<p class="caption" style="font-size: 11pt !important;">Отображение связи между шаблонами</p>
+</div>
+<div class="notice notice-info">
+<p><strong>Примечание</strong></p>
+Соединительная линия показывает, что для одной заявки на автомобиль может быть указан только один тип автомобиля, и разные заявки могут ссылаться на один и тот же тип автомобиля. </div>
+<div class="notice notice-info">
+<p><strong>Примечание</strong></p>
+Если связь не отобразилась автоматически, выберите любой шаблон и нажмите кнопку «<strong>Показать связанные элементы</strong>».</div>
+<h2 id="l53">Мастер-данные «Автомобиль»</h2>
+<div class="notice notice-success">
+<p><strong>Определение</strong></p>
+<strong>Мастер-данные</strong> — это объекты учета, например автомобили, клиенты, товарная номенклатура.</div>
+<p><em>Сотрудникам Гаража</em> необходимо вести учет автомобилей и видеть, какие автомобили на данный момент свободны. Для этого создадим реестр данных (шаблон записи), где будут храниться данные конкретного автомобиля. </p>
+<p><strong>1. </strong> В модели данных заказа автотранспорта перетащите на диаграмму элемент «<strong>Новый шаблон</strong> <strong>записи</strong>». В окне свойств нового шаблона введите <strong>название</strong> <em>«Автомобиль»</em> и сохраните шаблон.</p>
+<p><strong> 2. </strong> Выберите добавленный шаблон и перейдите на его вкладку «<strong>Атрибуты</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Добавление нового шаблона записи с помощью диаграммы модели данных" class="img-responsive" height="435" src="https://kb.comindware.ru/assets/img_624341506920c.png" width="1082"/></p>
+<p class="caption" style="font-size: 11pt !important;">Добавление нового шаблона записи с помощью диаграммы модели данных</p>
+</div>
+<p><strong> 3. </strong> Добавьте три атрибута <strong>типа «Текст»</strong>:</p>
+<ul>
+<li><em>Марка</em></li>
+<li><em>Модель</em></li>
+<li><em>Регистрационный номер</em> — для этого атрибута выберите  <strong>формат отображения</strong> «<strong>Регистрационный номер ТС (РФ)</strong>» и установите флажок «<strong>Использовать как заголовок записей</strong>»</li>
+</ul>
+<p><strong> 4. </strong> Добавьте атрибут типа «<strong>Запись</strong>» — <em>«Тип»</em> и укажите <strong>связанный шаблон</strong> — <em>«Тип автомобиля».</em></p>
+<div class="screenshot_with_caption">
+<p><img alt="Атрибуты шаблона записи «Автомобиль»" class="img-responsive" height="410" src="https://kb.comindware.ru/assets/img_6243425951e2b.png" width="1082"/></p>
+<p class="caption" style="font-size: 11pt !important;">Атрибуты шаблона записи «Автомобиль»</p>
+</div>
+<p><strong> 5. </strong> Перейдите на вкладку «<strong>Формы</strong>» и откройте конструктор формы <em>«Автомобиль — Основная форма».</em></p>
+<p><strong> 6 </strong> . Для <em>новой</em> <strong>области </strong>на макете формы укажите <strong>отображаемое название</strong> <em>«Автомобиль».</em></p>
+<p><strong>7. </strong> Перетащите только что созданные атрибуты на область<em> «Автомобиль»</em> в конструкторе формы.</p>
+<div class="notice notice-info">
+<p><strong>Примечание</strong></p>
+Для удобства конечного пользователя можно использовать элементы «<strong>Колонки</strong>» и «<strong>Вкладки</strong>»,  позволяющие упорядочить поля формы. Вы можете поэкспериментировать с макетом формы.</div>
+<p><strong>8. </strong>Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Создание основной формы «Автомобиль»" class="img-responsive" height="521" src="https://kb.comindware.ru/assets/img_6243433a2469b.png" width="1082"/></p>
+<p class="caption" style="font-size: 11pt !important;">Создание основной формы «Автомобиль»</p>
+</div>
+<p>Настроим таблицу, чтобы в ней отображались нужные нам атрибуты…</p>
+<p><strong> 1. </strong> Нажмите кнопку «<strong>Настроить шаблон</strong>» <em class="fa-light fa-gear">‌</em> и перейдите на вкладку «<strong>Таблицы</strong>».</p>
+<p><strong> 2. </strong> Откройте конструктор таблицы «<strong>Все записи</strong>».</p>
+<p><strong> 3. </strong> Нажмите кнопку «<strong>Очистить</strong>».</p>
+<p><strong> 4. </strong> Перетащите на макет таблицы атрибуты: <em>«Марка», «Модель», «Регистрационный номер» </em>и<em> «Тип».</em></p>
+<p><strong> 5. </strong> Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<p><strong> 6. </strong> Нажмите кнопку «<strong>Настроить шаблон</strong>», чтобы перейти к свойствам шаблона записи <em>«Автомобиль». </em></p>
+<div class="screenshot_with_caption">
+<p><img alt="Создание списка" class="img-responsive" height="388" src="https://kb.comindware.ru/assets/img_6310853815a6a.png" width="1264"/></p>
+<p class="caption" style="font-size: 11pt !important;">Создание списка</p>
+</div>
+<h2 id="l54">Тестирование: справочники и мастер-данные</h2>
+<p>Протестируем созданные справочники и мастер-данные:</p>
+<p><strong> 1. </strong> На вкладке «<strong>Свойства</strong>» шаблона записи <em>«Автомобиль»</em> нажмите кнопку «<strong>Перейти к экземплярам</strong>».</p>
+<p><strong> 2. </strong> Нажмите кнопку «<strong>Создать</strong>». Отобразится форма «Автомобиль».</p>
+<p><strong> 3. </strong> Заполните экранную форму, в поле<em> «Тип»</em> выберите тип автомобиля.</p>
+<p><strong> 4. </strong> Нажмите кнопку «<strong>Сохранить</strong>»</p>
+<p><strong> 5. </strong> Нажмите ссылку «<em>Автомобиль</em>» над формой, чтобы вернуться к списку записей.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Заполнение формы новой записи «Автомобиль»" class="img-responsive" height="318" src="https://kb.comindware.ru/assets/img_631086cee50f6.png" width="1264"/></p>
+<p class="caption" style="font-size: 11pt !important;">Заполнение формы новой записи «Автомобиль»</p>
+</div>
+<p><strong> 6. </strong> Создайте ещё несколько записей в реестре <em>«Автомобиль»</em>, указав при этом разные типы автомобилей, как показано на следующей иллюстрации.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Список записей «Автомобиль»" class="img-responsive" height="470" src="https://kb.comindware.ru/assets/img_62434925df356.png" width="1073"/></p>
+<p class="caption" style="font-size: 11pt !important;">Список записей «Автомобиль»</p>
+</div>
+<p>Теперь настроим список с группировкой по типу автомобиля…</p>
+<p><strong> 1. </strong> Щелкните значок воронки в столбце <em>«Тип».</em></p>
+<p><strong> 2. </strong> Установите флажок «<strong>Группировать</strong>» в раскрывшемся меню.</p>
+<p><strong> 3. </strong> Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<p>Пункты в списке будут сгруппированы по значению атрибута <em>«Тип».</em></p>
+<div class="screenshot_with_caption">
+<p><img alt="Группировка записей по значению атрибута «Тип»" class="img-responsive" height="588" src="https://kb.comindware.ru/assets/img_62434abbc53b0.png" width="1073"/></p>
+<p class="caption" style="font-size: 11pt !important;">Группировка записей по значению атрибута «Тип»</p>
+</div>
+<h2 id="l55">Атрибуты типа «Запись»</h2>
+<p>Добавим в реестр данных <em>«Автомобиль»</em> информацию о выполненных заявках, в которых использовался этот автомобиль.</p>
+<p>Нам понадобится атрибут, который свяжет реестры <em>«Автомобиль»</em> и <em>«Заявка на автомобиль»</em> связью вида 1:M (один к многим) — когда на один автомобиль может быть несколько заявок. Такую связь позволяет установить атрибут типа «<strong>Запись</strong>» с <strong>взаимной связью и несколькими значениями</strong>.</p>
+<div class="notice notice-success">
+<p><strong>Определение</strong></p>
+<ul>
+<li><span style="letter-spacing: 0.2px; font-weight: 700 !important;">Атрибут типа «Запись» с взаимной связью</span><span style="letter-spacing: 0.2px;"> позволяет хранить, отображать и изменять набор связанных записей в другом реестре данных.</span></li>
+<li><span style="letter-spacing: 0.2px;">При изменении значения в любом из взаимосвязанных атрибутов во второй атрибут автоматически записывается обратная ссылка на запись в связанном шаблоне. </span></li>
+<li><strong><span style="letter-spacing: 0.2px;">Пример</span></strong>
+<ul>
+<li><span style="letter-spacing: 0.2px;"> В реестре автомобилей атрибут <em>«Заявки на автомобиль»</em> взаимосвязан с атрибутом <em>«Автомобиль»</em> из реестра заявок.</span></li>
+<li><span style="letter-spacing: 0.2px;">При выборе в заявке автомобиля в соответствующей записи из реестра автомобилей автоматически появится обратная ссылка на заявку.</span></li>
+</ul>
+</li>
+</ul>
+</div>
+<p><strong> 1. </strong> Создайте атрибут типа «<strong>Запись</strong>» в шаблоне <em>«Автомобиль»:</em></p>
+<ul>
+<li>укажите <strong>название</strong> <em>«Заявки на автомобиль»;</em></li>
+<li>выберите<strong> связанный шаблон</strong> <em>«Заявка на автомобиль»;</em></li>
+<li>в списке «<strong>Взаимная связь с атрибутом</strong>» выберите пункт «<strong>С новым</strong>»;</li>
+<li>введите <strong>название нового атрибута</strong> <em>«Автомобиль»;</em></li>
+<li>для атрибута <em>«Заявки на автомобиль»</em> установите флажок «<strong>Хранить несколько значений</strong>»;</li>
+<li>нажмите кнопку «<strong>Сохранить</strong>».</li>
+</ul>
+<div class="screenshot_with_caption">
+<p><img alt="Создание атрибута «Заявки на автомобиль», взаимосвязанного с атрибутом «Автомобиль»" class="img-responsive" height="650" src="https://kb.comindware.ru/assets/img_6310a144096fe.png" width="1264"/></p>
+<p class="caption" style="font-size: 11pt !important;">Создание атрибута «Заявки на автомобиль», взаимосвязанного с атрибутом «Автомобиль»</p>
+</div>
+<p><strong> 2. </strong> Откройте конструктор формы <em>«Автомобиль — Основная форма»</em> и перетащите атрибут <em>«Заявки на автомобиль»</em> на область <em>«Автомобиль».</em></p>
+<p><strong>3. </strong>Выберите <strong>представление </strong>«<strong>Таблица</strong>» с помощью панели свойств.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Добавление коллекции в форму" class="img-responsive" height="716" src="https://kb.comindware.ru/assets/img_62434eceb082c.png" width="1073"/></p>
+<p class="caption" style="font-size: 11pt !important;">Добавление коллекции в форму</p>
+</div>
+<div class="notice notice-info">
+<p><strong>Примечание</strong></p>
+На форме атрибут типа «<strong>Запись</strong>» может отображаться в виде таблицы, в столбцах которой расположены атрибуты связанного реестра (шаблона). Какие именно атрибуты должны отображаться, мы указываем с помощью конструктора формы. </div>
+<p><strong>4. </strong> Раскройте атрибут <em>«Заявки на автомобиль»</em> на панели элементов и перетащите в таблицу на форме атрибуты<em> «Время подачи», «Маршрут» </em>и <em>«Создатель».</em></p>
+<div class="screenshot_with_caption">
+<p><img alt="Добавление в форму столбцов коллекции" class="img-responsive" height="716" src="https://kb.comindware.ru/assets/img_6243504618b3b.png" width="1073"/></p>
+<p class="caption" style="font-size: 11pt !important;">Добавление в форму столбцов коллекции</p>
+</div>
+<p><strong>5. </strong> Выберите область кнопок таблицы и перетащите на нее кнопки «<strong>Добавить</strong>» и «<strong>Перейти</strong>». Это позволит привязывать имеющиеся заявки к автомобилю и переходить к связанным с ним заявкам.</p>
+<p><strong> 6. </strong> Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Настройка кнопок для работы с записями в связанном шаблоне" class="img-responsive" height="716" src="https://kb.comindware.ru/assets/img_624351615fe96.png" width="1073"/></p>
+<p class="caption" style="font-size: 11pt !important;">Настройка кнопок для работы с записями в связанном шаблоне</p>
+</div>
+<h2 id="l56"><strong> Транзакционные данные: затраты </strong></h2>
+<p>Мы научились работать со справочниками и мастер-данными. Помимо этого, нам могут понадобиться транзакционные данные, дополняющие исходные данные нашего процесса (заявку на автомобиль).</p>
+<p>Например, мы можем захотеть сохранить список пассажиров или список точек маршрута, помимо конечного пункта назначения.</p>
+<p>Или можно дать возможность водителю отчитаться о затратах, сделанных в ходе рейса.</p>
+<p>Для этого нам потребуются два новых реестра данных (шаблона записей): затраты на поездку (транзакционные данные) и типы затрат (справочник). Эти реестры мы свяжем с заявкой: заявки — с затратами, а затраты — с типами затрат.</p>
+<p>Сначала создадим справочник типов затрат. Для этого вернемся к диаграмме модели данных…</p>
+<p><strong> 1. </strong> Выберите на панели навигации слева раздел «<strong>Настройки</strong>» — «<strong>Приложения</strong>».</p>
+<p><strong> 2. </strong> Перейдите в приложение — <em>«Управление автопарком»</em>.</p>
+<p><strong> 3. </strong> Выберите раздел «<strong>Диаграммы</strong>» и перейдите к диаграмме <em>«Модель данных — Заказ автотранспорта».</em></p>
+<p><strong> 4. </strong> Создайте новый шаблон записи <em>«Тип затрат».</em></p>
+<p><strong>5. </strong> Выберите созданный шаблон и в меню элемента нажмите кнопку «<strong>Добавить новый атрибут</strong>» <em class="fa-light fa-plus">‌</em>.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Создание нового шаблона записи и создание атрибута на диаграмме модели данных" class="img-responsive" height="556" src="https://kb.comindware.ru/assets/img_6243552de3c5a.png" width="1073"/></p>
+<p class="caption" style="font-size: 11pt !important;">Создание нового шаблона записи и создание атрибута на диаграмме модели данных</p>
+</div>
+<p><strong> 6. </strong> Создайте текстовый атрибут<em> «Название»</em> и установите в его свойствах флажок «<strong>Использовать как заголовок записей</strong>».</p>
+<p><strong> 7. </strong> С помощью меню элемента перейдите на вкладку «<strong>Формы</strong>» шаблона записи «<strong>Тип затрат</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Переход на вкладку «Формы» шаблона записи с диаграммы модели данных" class="img-responsive" height="556" src="https://kb.comindware.ru/assets/img_624355c4c23ee.png" width="1073"/></p>
+<p class="caption" style="font-size: 11pt !important;">Переход на вкладку «Формы» шаблона записи с диаграммы модели данных</p>
+</div>
+<p><strong> 8. </strong> Откройте форму <em>«Тип затрат — Основная форма».</em></p>
+<p><strong>9.</strong> Создайте область <em>«Укажите тип затрат»</em> и перетащите на нее атрибут <em>«Название».</em></p>
+<p><strong>10.</strong> Нажмите кнопку «<strong>Сохранить</strong>» и кнопку «<strong>Настроить шаблон</strong>» <em class="fa-light fa-gear">‌</em>, чтобы перейти к свойствам шаблона.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Настройка формы «Тип затрат»" class="img-responsive" height="462" src="https://kb.comindware.ru/assets/img_624356bc20331.png" width="1073"/></p>
+<p class="caption" style="font-size: 11pt !important;">Настройка формы «Тип затрат»</p>
+</div>
+<p><strong>11. </strong> Перейдите на вкладку «<strong>Таблицы</strong>» шаблона<em> «Типы затрат»</em> и настройте таблицу <em>«Все записи»</em> так, чтобы в ней отображался только атрибут <em>«Название»</em>. Нажмите кнопку «<strong>Сохранить</strong>» и кнопку «<strong>Настроить шаблон</strong>», чтобы перейти к свойствам шаблона.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Настройка списка «Тип затрат»" class="img-responsive" height="312" src="https://kb.comindware.ru/assets/img_63109faf6b2d6.png" width="1264"/></p>
+<p class="caption" style="font-size: 11pt !important;">Настройка списка «Тип затрат»</p>
+</div>
+<p><strong> 12. </strong> Перейдите к списку экземпляров шаблона записи <em>«Тип затрат»</em> и создайте следующие типы затрат:<em> «Топливо», «Сервис», «Прочее».</em></p>
+<div class="screenshot_with_caption">
+<p><img alt="Экземпляры шаблона записи «Тип затрат»" class="img-responsive" height="415" src="https://kb.comindware.ru/assets/img_6243578c96194.png" width="1073"/></p>
+<p class="caption" style="font-size: 11pt !important;">Экземпляры шаблона записи «Тип затрат»</p>
+</div>
+<p>Теперь создадим реестр данных (шаблон записи) для затрат…</p>
+<p><strong> 1. </strong> Вернитесь к диаграмме модели данных и создайте шаблон записи<em> «Затраты».</em></p>
+<p><strong> 2. </strong> Выберите созданный шаблон и создайте следующие атрибуты:</p>
+<ul>
+<li><strong>название</strong> <em>— Сумма</em>, <strong>тип данных</strong> — <strong>Число</strong>, <strong>количество знаков после запятой </strong>— <strong>2</strong>;</li>
+<li><strong>название</strong> <em>— </em><em>Тип затрат</em>, <strong>тип данных </strong>— <strong>Запись</strong>, <strong>связанный шаблон</strong> — <em>Тип затрат.</em></li>
+</ul>
+<p><strong> 3. </strong> Перейдите на вкладку «<strong>Формы</strong>» через меню элемента <em>«Затраты».</em></p>
+<p><strong>4. </strong>Откройте конструктор формы <em>«Затраты — Основная форма».</em></p>
+<p><strong>5. </strong>Создайте на форме <strong>область</strong> «Затраты».</p>
+<p><strong>6. </strong>Перетащите на область<em> «Затраты» атрибуты «Сумма» </em>и <em>«Тип затрат».</em></p>
+<p><strong>7. </strong>Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Настройка формы «Затраты»" class="img-responsive" height="505" src="https://kb.comindware.ru/assets/img_624359690fd4c.png" width="1073"/></p>
+<p class="caption" style="font-size: 11pt !important;">Настройка формы «Затраты»</p>
+</div>
+<p><strong> 8. </strong> Вернитесь к диаграмме модели данных. На диаграмме должна отображаться связь между шаблонами <em>«Тип затрат» </em>и <em>«Затраты»</em>. Если связь не отображается, в меню элемента нажмите кнопку «<strong>Показать связанные элементы</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Отображение связей шаблона «Тип затрат»" class="img-responsive" height="505" src="https://kb.comindware.ru/assets/img_62435a3fbe0a2.png" width="1073"/></p>
+<p class="caption" style="font-size: 11pt !important;">Отображение связей шаблона «Тип затрат»</p>
+</div>
+<p>Теперь свяжем реестр данных <em>«Заявка на автомобиль»</em> с <em>«Затратами»</em> с помощью взаимной связи атрибутов типа «<strong>Запись</strong>»…</p>
+<p><strong>1. </strong> Выберите шаблон <em>«Заявка на автомобиль»</em> и нажмите кнопку <em class="fa-light fa-plus">‌</em> ( <strong>Добавить новый атрибут</strong>) в меню элемента.</p>
+<p><strong>2. </strong> Создайте атрибут со следующими свойствами:</p>
+<ul>
+<li><strong>тип данных </strong>— <strong>Запись</strong>;</li>
+<li><strong>название </strong>— <em>Затраты</em>;</li>
+<li><strong>связанный шаблон </strong>— <em>Затраты</em>;</li>
+<li><strong>в</strong><strong style="font-style: italic;">заимная связь с атрибутом</strong><span style="font-style: italic;"> — </span><strong>С новым</strong>;</li>
+<li><strong>название нового атрибута </strong>— <em>Заявка</em>;</li>
+<li><strong>хранить несколько значений </strong>— флажок установлен для атрибута <em>«Затраты»</em>.</li>
+</ul>
+<div class="screenshot_with_caption">
+<p><img alt="Создание атрибута «Затраты» типа «Запись» для шаблона «Заявка на автомобиль», взаимно связанного с шаблоном «Затраты»" class="img-responsive" height="656" src="https://kb.comindware.ru/assets/img_6310a11c1a8ce.png" width="1264"/></p>
+<p class="caption" style="font-size: 11pt !important;">Создание атрибута «Затраты» типа «<strong>Запись</strong>» для шаблона «Заявка на автомобиль», взаимно связанного с шаблоном «Затраты»</p>
+</div>
+<p><strong>3. </strong>На диаграмме должна отображаться связь между шаблонами <em>«Заявка на автомобиль» </em>и <em>«Затраты»</em>. Если связь не отображается, в меню элемента нажмите кнопку «<strong>Показать связанные элементы</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Отображение связей шаблона записи «Заявка на автомобиль»" class="img-responsive" height="589" src="https://kb.comindware.ru/assets/img_62435dabb2301.png" width="1073"/></p>
+<p class="caption" style="font-size: 11pt !important;">Отображение связей шаблона записи «Заявка на автомобиль»</p>
+</div>
+<p>Настроим отображение реестра данных…</p>
+<p><strong>4. </strong> Перейдите на вкладку «<strong>Таблицы</strong>» шаблона <em>«Затраты»</em>, нажав кнопку «<strong>Таблицы</strong>» в его меню элемента.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Переход к таблицам шаблона записи «Затраты» с диаграммы модели данных" class="img-responsive" height="326" src="https://kb.comindware.ru/assets/img_62435e603ac71.png" width="1073"/></p>
+<p class="caption" style="font-size: 11pt !important;">Переход к таблицам шаблона записи «Затраты» с диаграммы модели данных</p>
+</div>
+<p><strong> 5. </strong> Настройте таблицу «<strong>Все записи</strong>» шаблона<em> «Затраты»</em> так, чтобы в ней отображались атрибуты: <em>«Заявка», «Тип затрат», «Сумма».</em></p>
+<p><strong>6. </strong>Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Настройка таблицы «Все записи» шаблона «Затраты»" class="img-responsive" height="345" src="https://kb.comindware.ru/assets/img_6310a2677c532.png" width="1264"/></p>
+<p class="caption" style="font-size: 11pt !important;">Настройка таблицы «Все записи» шаблона «Затраты»</p>
+</div>
+<h2 id="mcetoc_1gbl72ihe0"><strong> Результаты </strong></h2>
+<p>В этом уроке вы познакомились с новым типом атрибутов — «<strong>Запись</strong>» и узнали, как с его помощью установить связь между реестрами.</p>
+<p>Мы улучшили наше приложение — добавили в него справочник <em>«Тип автомобиля»</em> и мастер-данные для учета автомобилей.</p>
+<p>В <a href="https://kb.comindware.ru/article.php?id=2059"> следующем уроке </a> мы усовершенствуем наш процесс — используем созданный справочник, мастер-данные и транзакционные данные.</p>
+<p> </p>

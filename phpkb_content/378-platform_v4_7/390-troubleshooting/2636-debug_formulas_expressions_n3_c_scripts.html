@@ -1,0 +1,310 @@
+<h1>Отладка формул, выражений N3, сценариев и C#-скриптов</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#проверка-с-помощью-редактора-выражений"> <span class="md-ellipsis"> Проверка с помощью редактора выражений </span> </a><nav aria-label="Проверка с помощью редактора выражений" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#порядок-проверки"> <span class="md-ellipsis"> Порядок проверки </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#отладка-формул-и-n3-с-помощью-вспомогательного-атрибута"> <span class="md-ellipsis"> Отладка формул и N3 с помощью вспомогательного атрибута </span> </a><nav aria-label="Отладка формул и N3 с помощью вспомогательного атрибута" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#порядок-отладки"> <span class="md-ellipsis"> Порядок отладки </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#приведение-типов-данных"> <span class="md-ellipsis"> Приведение типов данных </span> </a><nav aria-label="Приведение типов данных" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#пример"> <span class="md-ellipsis"> Пример </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#отладка-формул-с-помощью-функции-value"> <span class="md-ellipsis"> Отладка формул с помощью функции VALUE() </span> </a><nav aria-label="Отладка формул с помощью функции VALUE()" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#пример_1"> <span class="md-ellipsis"> Пример </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#отладка-выборок"> <span class="md-ellipsis"> Отладка выборок </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#отладка-c-скриптов"> <span class="md-ellipsis"> Отладка C#-скриптов </span> </a><nav aria-label="Отладка C#-скриптов" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#отладка-c-скрипта-для-кнопки"> <span class="md-ellipsis"> Отладка C#-скрипта для кнопки </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#отладка-c-скрипта-для-задачи-выполнения-сценария"> <span class="md-ellipsis"> Отладка C#-скрипта для задачи-выполнения сценария </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#отладка-сценариев"> <span class="md-ellipsis"> Отладка сценариев </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#порядок-отладки_1"> <span class="md-ellipsis"> Порядок отладки </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Атрибуты, сценарии, вызов процессов, задачи, фильтры, кнопки и правила на форме можно настроить c помощью формул, выражений N3 и C#-скриптов. Однако при их составлении могут возникнуть различные проблемы, например:</p>
+<ul>
+<li>ошибки в именах функций, атрибутов, шаблонов и переменных;</li>
+<li>синтаксические ошибки;</li>
+<li>бесконечные циклы в процессах, сценариях, выражениях и скриптах;</li>
+<li>ошибки в логике построения формулы, выражения N3 или скрипта;</li>
+<li>неправильный тип данных вычисляемого атрибута, аргументов или возвращаемых значений.</li>
+</ul>
+<p>Здесь представлены методы проверки и отладки, позволяющие обнаружить и исправить ошибки в формулах, выражениях N3 и скриптах.</p>
+<h2 id="проверка-с-помощью-редактора-выражений">Проверка с помощью редактора выражений</h2>
+<p>Чтобы выявить ошибки в именах функций, атрибутов, шаблонов и переменных, а также в синтаксисе формулы, выражения N3 или скрипта, используйте функцию проверки в <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2463">редакторе выражений</a></strong>.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>Компактный редактор выражений не проверяет формулы, выражения N3 и скрипты и сохраняет их даже при наличии ошибок.</p>
+</div>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Полный редактор выражений перед сохранением выполняет проверку формул, выражений N3 и скриптов и позволяет сохранить их только без ошибок.</p>
+</div>
+<h3 id="порядок-проверки">Порядок проверки</h3>
+<ol class="colored_numbers_list">
+<li>Откройте формулу, выражение N3 или скрипт в полном редакторе выражений и нажмите кнопку «<strong>Проверить</strong>».</li>
+<li>На вкладке «<strong>Ошибки</strong>» отобразятся выявленные синтаксические ошибки и ошибки в именах функций, атрибутов, шаблонов или переменных. На вкладках «<strong>Предупреждения</strong>» и «<strong>Информация</strong>» отобразятся сведения, позволяющие оптимизировать выражение или скрипт.</li>
+<li>Устраните ошибки и снова выполните проверку.</li>
+<li>Сохраните формулу, выражение N3 или скрипт, если ошибки отсутствуют.</li>
+</ol>
+<h2 id="отладка-формул-и-n3-с-помощью-вспомогательного-атрибута">Отладка формул и N3 с помощью вспомогательного атрибута</h2>
+<p>Если редактор выражений не выявляет ошибки в формуле или выражении N3, а результат вычисления не соответствует ожидаемому, протестируйте формулу или выражение N3 посредством вспомогательного атрибута.</p>
+<p>Это особенно актуально для правил на форме, фильтров таблиц, вычислений в шаблонах процессов и сценариях, результат выполнения которых визуально не отображается. Вспомогательный отладочный атрибут позволяет проверить результат вычисления формулы или выражения N3, не обновляя диаграммы процессов, сценарии, правила и фильтры, что ускоряет поиск ошибок.</p>
+<h3 id="порядок-отладки">Порядок отладки</h3>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте отладочный <strong>вычисляемый атрибут</strong> с типом данных, который соответствует результату вычисления проверяемой формулы или выражения N3.</p>
+<div class="notice notice-tip">
+<p class="admonition-title">Совет</p>
+<p>Если вы не уверены, какой тип данных подходит, создайте текстовый атрибут. Это позволит в большинстве случаев увидеть на форме значение, возвращаемое формулой или выражением N3, и определить его фактический тип.</p>
+</div>
+</li>
+<li>
+<p>Введите формулу или выражение N3 в поле «<strong>Вычисляемое значение</strong>».</p>
+</li>
+<li>Поместите атрибут на форму.</li>
+<li>Создайте запись или экземпляр процесса и посмотрите, какие данные отобразятся в поле атрибута.</li>
+<li>Чтобы получить ожидаемое значение атрибута, скорректируйте формулу или выражение N3.</li>
+<li>Чтобы удостовериться в работоспособности формулы или выражения N3, попробуйте заменить некоторые части выражения на литералы.</li>
+<li>Чтобы быстрее найти ошибки, по возможности разбейте формулу или выражение N3 на самостоятельные части и протестируйте их по очереди. После отладки отдельных частей попробуйте снова объединить, внеся необходимые исправления.</li>
+<li>
+<p>Если самостоятельные части формулы или выражения N3 вычисляются правильно, но при объединении отрабатывают некорректно (например, из-за ошибок приведения типов данных, использовании конструкций с локальной областью действия переменных (<code>if</code>, <code>or</code>, <code>for</code>, <code>assert</code> и т. п.) или неожиданном поведении комбинированного выражения), можно воспользоваться следующим подходом:</p>
+<ul>
+<li>создайте промежуточные атрибуты требуемых типов, вычисляемые по корректным частям формулы или выражения N3;</li>
+<li>используйте значения промежуточных атрибутов в итоговой формуле или выражении N3.</li>
+</ul>
+<p>Это позволит не только декомпозировать сложные вычисления, но и комбинировать формулы и выражения N3 оптимальным образом.</p>
+</li>
+</ol>
+<h2 id="приведение-типов-данных">Приведение типов данных</h2>
+<p>Для преобразования текстовых значений в логические и числовые в формулах можно использовать функции <code>BOOL()</code> и <code>DECIMAL()</code>.</p>
+<p>Это может потребоваться, например, если при импорте данных из Excel (или других внешних систем) числовые и логические значения были помещены в текстовые атрибуты, которые необходимо использовать в вычислениях.</p>
+<div class="notice notice-success">
+<p class="admonition-title">BOOL()</p>
+<ul>
+<li><code>BOOL(string)</code> преобразует строку в логическое значение.</li>
+<li>В качестве аргумента <code>BOOL()</code> принимает текстовый атрибут или строку со значением <code>true</code> или <code>false</code> (без учёта регистра). При неподходящих значениях атрибута (0, 1, истина, ложь и т. п.) функция возвращает пустое значение.</li>
+</ul>
+</div>
+<div class="notice notice-success">
+<p class="admonition-title">DECIMAL()</p>
+<ul>
+<li><code>DECIMAL(string)</code> преобразует строку в число.</li>
+<li>В качестве аргумента <code>DECIMAL()</code> принимает текстовый атрибут или строку с числовым значением (например, 10, 10,5, 10 000 для русского языка или 10, 10.5, 10,000 — для английского, т. е. значение интерпретируется в соответствии с языком текущего пользователя). При неподходящих значениях атрибута (1 р., $50 и т. п.) функция возвращает пустое значение.</li>
+</ul>
+</div>
+<h3 id="пример">Пример</h3>
+<ol class="colored_numbers_list">
+<li>Создайте атрибут <em>AmountText</em> типа «<strong>Текст</strong>».</li>
+<li>
+<p>Создайте атрибут <em>AmountNumber</em>:</p>
+<ul>
+<li><strong>Тип данных: число</strong></li>
+<li><strong>Вычислять автоматически:</strong> флажок установлен</li>
+<li><strong>Вычисляемое значение: формула</strong></li>
+</ul>
+<div class="highlight"><code><code></code></code>
+<pre><code>DECIMAL($AmountText)</code></pre>
+</div>
+</li>
+<li>
+<p>Поместите атрибуты на форму.</p>
+</li>
+<li>Введите в поле <em>AmountText</em> значение <code>10500</code>, в поле <em>AmountNumber</em> должно отобразиться значение <code>10 500</code>.</li>
+<li>Введите в поле <em>AmountText</em> значение <code>10,500</code>, в поле <em>AmountNumber</em> должно отобразиться значение <code>10,5</code>.</li>
+<li>Введите в поле <em>AmountText</em> значение <code>10.500</code>, в поле <em>AmountNumber</em> должно отобразиться <code>-</code>.</li>
+</ol>
+<h2 id="отладка-формул-с-помощью-функции-value">Отладка формул с помощью функции VALUE()</h2>
+<p>Обычно функцию <code>VALUE()</code> используют для присвоения значений по умолчанию, чтобы предотвратить выборку пустых значений.</p>
+<p><code>VALUE()</code> также можно использовать для отладки формул, возвращая отладочное значение (например, сообщение об ошибке), если проверяемая формула не выдаёт требуемый результат.</p>
+<div class="notice notice-success">
+<p class="admonition-title">VALUE()</p>
+<ul>
+<li><code>VALUE(argument, [defaultValue])</code> принимает два аргумента: проверяемое выражение и значение по умолчанию.</li>
+<li><code>VALUE()</code> возвращает значение первого аргумента, если оно не пустое и не равно <code>NULL</code>, в противном случае возвращает значение второго аргумента.</li>
+</ul>
+</div>
+<h3 id="пример_1">Пример</h3>
+<ol class="colored_numbers_list">
+<li>Создайте атрибут <em>Amount</em> типа «<strong>Число</strong>».</li>
+<li>
+<p>Создайте атрибут <em>AmountValidation</em>:</p>
+<ul>
+<li><strong>Тип данных: текст</strong></li>
+<li><strong>Вычислять автоматически:</strong> флажок установлен</li>
+<li><strong>Вычисляемое значение: формула</strong></li>
+</ul>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="n">VALUE</span><span class="p">(</span><span class="err">$</span><span class="n">Amount</span><span class="p">,</span> <span class="s">"Не заполнено поле Amount"</span><span class="p">)</span></code></pre>
+</div>
+</li>
+<li>
+<p>Поместите атрибуты на форму.</p>
+</li>
+<li>Если в поле <em>Amount</em> не ввести значение, то в поле <em>AmountValidation</em> отобразится текст <em>«Не заполнено поле Amount»</em>.</li>
+</ol>
+<h2 id="отладка-выборок">Отладка выборок</h2>
+<div class="notice notice-success">
+<p class="admonition-title">Выборка</p>
+<p>Выборка — это список значений, отвечающих некоторым условиям. Часто выборки формируются с помощью запросов <code>from...select</code>.</p>
+</div>
+<p>Если в формуле или выражении N3 используется выборка, которая должна возвращать один элемент, используйте функции <code>FIRST()</code> (в формулах) или <code>once{}.</code> (в выражениях N3), чтобы предотвратить ошибки, когда выборка вернет несколько элементов.</p>
+<p>Если после ограничения выборки выражение возвращает ожидаемый результат, попробуйте конкретизировать выборку с помощью условий, например, <code>where</code> (в запросах <code>from...select</code>).</p>
+<div class="notice notice-success">
+<p class="admonition-title">FIRST()</p>
+<ul>
+<li><code>FIRST(list)</code> принимает в качестве аргумента список значений.</li>
+<li><code>FIRST()</code> возвращает первый элемент из списка. При отсутствии элементов в списке FIRST() возвращает пустое значение.</li>
+</ul>
+</div>
+<div class="notice notice-success">
+<p class="admonition-title">once{}.</p>
+<p><code>once{}.</code> — конструкция в выражениях N3, которая завершает вложенный в неё цикл после первой успешной итерации.</p>
+</div>
+<p>Если конструкция <code>from...select</code> не возвращает ожидаемую выборку, её следует заключить в функцию LIST().</p>
+<div class="notice notice-success">
+<p class="admonition-title">LIST()</p>
+<ul>
+<li><code>LIST()</code> принимает в качестве перечень однородных значений.</li>
+<li><code>LIST()</code> возвращает список, состоящий из этих значений.</li>
+</ul>
+</div>
+<h2 id="отладка-c-скриптов">Отладка C#-скриптов</h2>
+<p>Для поиска ошибок в C#-скриптах можно воспользоваться конструкцией <code>try..catch</code>, которая позволяет перехватить исключения.</p>
+<div class="notice notice-success">
+<p class="admonition-title">try...catch</p>
+<p><code>try...catch</code> — конструкция, которая используется для обработки исключений (ошибок), возникающих при исполнении кода.</p>
+<ul>
+<li>Поместите в блок <code>try</code> код, в котором требуется обрабатывать исключения.</li>
+<li>Поместите в блок <code>catch</code> код, который должен выполняться, если при выполнении блока <code>try</code> произошла ошибка.</li>
+</ul>
+</div>
+<h3 id="отладка-c-скрипта-для-кнопки">Отладка C#-скрипта для кнопки</h3>
+<ol class="colored_numbers_list">
+<li>Откройте кнопку с операцией «<strong>C#-скрипт</strong>».</li>
+<li>
+<p>Чтобы выводить определённое сообщение об ошибке, если возникло исключение при нажатии кнопки, воспользуйтесь следующим образцом кода:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="k">using</span> <span class="nn">System</span><span class="p">;</span> </code><br/><code><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span></code><br/><code><span class="k">using</span> <span class="nn">System.Linq</span><span class="p">;</span></code><br/><code><span class="k">using</span> <span class="nn">Comindware.Data.Entity</span><span class="p">;</span></code><br/><code><span class="k">using</span> <span class="nn">Comindware.TeamNetwork.Api.Data.UserCommands</span><span class="p">;</span></code><br/><code><span class="k">using</span> <span class="nn">Comindware.TeamNetwork.Api.Data</span><span class="p">;</span></code><br/><code></code><br/><code><span class="k">class</span> <span class="nc">Script</span></code><br/><code><span class="p">{</span></code><br/><code><span class="w">    </span><span class="k">public</span> <span class="k">static</span> <span class="n">UserCommandResult</span> <span class="n">Main</span><span class="p">(</span><span class="n">UserCommandContext</span> <span class="n">userCommandContext</span><span class="p">,</span> <span class="n">Comindware</span><span class="p">.</span><span class="n">Entities</span> <span class="n">entities</span><span class="p">)</span></code><br/><code><span class="w">    </span><span class="p">{</span> </code><br/><code>        <span class="c1">// Добавьте код, в котором не требуется обрабатывать исключения.</span></code><br/><code>        <span class="kt">string</span> <span class="n">ResultDescription</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span></code><br/><code>        <span class="k">try</span></code><br/><code>        <span class="p">{</span></code><br/><code>            <span class="c1">// Добавьте код, который должен отработать в штатном режиме.</span></code><br/><code>            <span class="n">ResultDescription</span> <span class="o">=</span> <span class="s">"Успех"</span><span class="p">;</span></code><br/><code>        <span class="p">}</span></code><br/><code>        <span class="k">catch</span></code><br/><code>        <span class="p">{</span></code><br/><code>            <span class="c1">// Добавьте код, который должен отработать в случае ошибки.</span></code><br/><code>            <span class="n">ResultDescription</span> <span class="o">=</span> <span class="s">"Ошибка"</span><span class="p">;</span></code><br/><code></code><br/><code>            <span class="kt">var</span> <span class="n">resultError</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UserCommandResult</span></code><br/><code>            <span class="p">{</span></code><br/><code>                <span class="c1">// Указываем, что скрипт завершился с ошибкой, </span></code><br/><code>                <span class="c1">// и формируем об этом уведомление</span></code><br/><code>                <span class="n">Success</span> <span class="o">=</span> <span class="k">false</span><span class="p">,</span></code><br/><code>                <span class="c1">// Ставим флаг необходимости сохранения </span></code><br/><code>                <span class="c1">// результирующей записи в базу данных.</span></code><br/><code>                <span class="n">Commited</span> <span class="o">=</span> <span class="k">true</span><span class="p">,</span></code><br/><code>                <span class="c1">// Указываем, что следует </span></code><br/><code>                <span class="c1">// вывести уведомление.</span></code><br/><code>                <span class="n">ResultType</span> <span class="o">=</span> <span class="n">UserCommandResultType</span><span class="p">.</span><span class="n">Notificate</span><span class="p">,</span></code><br/><code>                <span class="c1">// Формируем уведомление.</span></code><br/><code>                <span class="n">Messages</span> <span class="o">=</span> <span class="k">new</span><span class="p">[]</span></code><br/><code>                <span class="p">{</span></code><br/><code>                    <span class="k">new</span> <span class="n">UserCommandMessage</span></code><br/><code>                    <span class="p">{</span></code><br/><code>                        <span class="c1">// Указываем уровень важности уведомления: </span></code><br/><code>                        <span class="c1">// Critical, Fatal, Low, Major, None, Normal</span></code><br/><code>                        <span class="n">Severity</span> <span class="o">=</span> <span class="n">SeverityLevel</span><span class="p">.</span><span class="n">Normal</span><span class="p">,</span></code><br/><code>                        <span class="c1">// Этот текст будет выведен в уведомлении и </span></code><br/><code>                        <span class="c1">// журнале действий и ошибок </span></code><br/><code>                        <span class="c1">// в случае срабатывания исключения.</span></code><br/><code>                        <span class="n">Text</span> <span class="o">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">"Результат: {0}"</span><span class="p">,</span> <span class="n">ResultDescription</span><span class="p">)</span></code><br/><code>                    <span class="p">}</span></code><br/><code>                <span class="p">}</span></code><br/><code>            <span class="p">};</span></code><br/><code>            <span class="k">return</span> <span class="n">resultError</span><span class="p">;</span></code><br/><code>        <span class="p">}</span></code><br/><code>        <span class="kt">var</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UserCommandResult</span></code><br/><code>            <span class="p">{</span></code><br/><code>                <span class="c1">// Указываем, что скрипт выполнен успешно,</span></code><br/><code>                <span class="c1">// и формируем об этом уведомление</span></code><br/><code>                <span class="n">Success</span> <span class="o">=</span> <span class="k">true</span><span class="p">,</span></code><br/><code>                <span class="n">Commited</span> <span class="o">=</span> <span class="k">true</span><span class="p">,</span></code><br/><code>                <span class="n">ResultType</span> <span class="o">=</span> <span class="n">UserCommandResultType</span><span class="p">.</span><span class="n">Notificate</span><span class="p">,</span></code><br/><code>                <span class="n">Messages</span> <span class="o">=</span> <span class="k">new</span><span class="p">[]</span></code><br/><code>                <span class="p">{</span></code><br/><code>                    <span class="k">new</span> <span class="n">UserCommandMessage</span></code><br/><code>                    <span class="p">{</span></code><br/><code>                        <span class="n">Severity</span> <span class="o">=</span> <span class="n">SeverityLevel</span><span class="p">.</span><span class="n">Normal</span><span class="p">,</span></code><br/><code>                        <span class="c1">// Этот текст будет выведен в уведомлении и </span></code><br/><code>                        <span class="c1">// журнале действий и ошибок </span></code><br/><code>                        <span class="c1">// в случае штатного завершения работы скрипта.</span></code><br/><code>                        <span class="n">Text</span> <span class="o">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">"Результат: {0}"</span><span class="p">,</span> <span class="n">ResultDescription</span><span class="p">)</span></code><br/><code>                    <span class="p">}</span></code><br/><code>                <span class="p">}</span>        </code><br/><code>            <span class="p">};</span></code><br/><code>            <span class="k">return</span> <span class="n">result</span><span class="p">;</span><span class="w">    </span></code><br/><code>    <span class="p">}</span></code><br/><code><span class="p">}</span></code></pre>
+</div>
+</li>
+<li>
+<p>После нажатия кнопки уведомление об успешном выполнении скрипта (или ошибке) отобразится во всплывающем сообщении в браузере и в <strong>журнале действий и ошибок</strong> <em class="fal fa-flag">‌<!--icon--></em> на информационной панели.</p>
+</li>
+</ol>
+<h3 id="отладка-c-скрипта-для-задачи-выполнения-сценария">Отладка C#-скрипта для задачи-выполнения сценария</h3>
+<ol class="colored_numbers_list">
+<li>Откройте на диаграмме процесса задачу-выполнение сценария.</li>
+<li>
+<p>Чтобы выводить определённое сообщение об ошибке, если возникло исключение при выполнении задачи, воспользуйтесь следующим образцом кода:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="k">using</span> <span class="nn">System</span><span class="p">;</span></code><br/><code><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span></code><br/><code><span class="k">using</span> <span class="nn">System.Linq</span><span class="p">;</span></code><br/><code><span class="k">using</span> <span class="nn">Comindware.Data.Entity</span><span class="p">;</span></code><br/><code><span class="k">using</span> <span class="nn">Comindware.TeamNetwork.Api.Data.UserCommands</span><span class="p">;</span></code><br/><code><span class="k">using</span> <span class="nn">Comindware.TeamNetwork.Api.Data</span><span class="p">;</span></code><br/><code></code><br/><code><span class="k">class</span> <span class="nc">Script</span></code><br/><code><span class="p">{</span></code><br/><code>    <span class="k">public</span> <span class="k">static</span> <span class="kt">string</span> <span class="nf">Main</span><span class="p">(</span><span class="n">Comindware</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">ScriptContext</span> <span class="n">context</span><span class="p">,</span> <span class="n">Comindware</span><span class="p">.</span><span class="n">Entities</span> <span class="n">entities</span><span class="p">)</span></code><br/><code>    <span class="p">{</span></code><br/><code>        <span class="c1">// Добавьте код, в котором не требуется обрабатывать исключения.</span></code><br/><code>        <span class="kt">string</span> <span class="n">ResultDescription</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span></code><br/><code>        <span class="k">try</span></code><br/><code>        <span class="p">{</span></code><br/><code>            <span class="c1">// Добавьте код, который должен работать в штатном режиме.</span></code><br/><code>            <span class="n">ResultDescription</span> <span class="o">=</span> <span class="s">"Успех"</span><span class="p">;</span></code><br/><code>        <span class="p">}</span></code><br/><code>        <span class="k">catch</span></code><br/><code>        <span class="p">{</span></code><br/><code>            <span class="c1">// Добавьте код, который должен отработать в случае ошибки.</span></code><br/><code>            <span class="n">ResultDescription</span> <span class="o">=</span> <span class="s">"Ошибка"</span><span class="p">;</span></code><br/><code>        <span class="p">}</span></code><br/><code>        <span class="c1">// Эта строка отобразится в поле «Выходные данные» </span></code><br/><code>        <span class="c1">// для события «Скрипт выполнен» в цепочке событий </span></code><br/><code>        <span class="c1">// для задачи-выполнения сценария.</span></code><br/><code>        <span class="k">return</span> <span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">"Результат: {0}"</span><span class="p">,</span> <span class="n">ResultDescription</span><span class="p">);</span></code><br/><code>    <span class="p">}</span></code><br/><code><span class="p">}</span></code></pre>
+</div>
+</li>
+<li>
+<p>Опубликуйте диаграмму процесса.</p>
+</li>
+<li>Создайте экземпляр процесса и перейдите к его диаграмме.</li>
+<li>Откройте <strong>журнал изменений</strong>.</li>
+<li>Нажмите значок <img alt="Кнопка перехода к цепочке событий скрипта" src="https://kb.comindware.ru/assets/expression_debug_script_button.png" width="20px"/> рядом с названием задачи-выполнения сценария.</li>
+<li>Отобразится цепочка событий.</li>
+<li>Выберите событие «<strong>Скрипт выполнен</strong>».</li>
+<li>
+<p>Справа отобразится информация о выполнении скрипта, в том числе:</p>
+<ul>
+<li><strong>Контекстные объекты</strong> — ID экземпляра процесса, в котором был запущен скрипт;</li>
+<li><strong>Код</strong> — скрипт задачи-выполнения сценария;</li>
+<li><strong>Входные данные</strong> — данные, которые использовались в скрипте;</li>
+<li><strong>Выходные данные</strong> — результат выполнения скрипта.</li>
+</ul>
+</li>
+</ol>
+<h2 id="отладка-сценариев">Отладка сценариев</h2>
+<p>Чтобы выявить проблемы и определить действия в сценарии, которые выполняются с ошибкой, можно воспользоваться действием «<strong>Проверить результат выражения</strong>».</p>
+<div class="notice notice-success">
+<p class="admonition-title">Действие «Проверить результат выражения»</p>
+<p>Это действие проверяет выполнение заданного условия в контекстном шаблоне. Если условие не выполняется, в цепочке событий выводится сообщение об ошибке с заданным текстом. При этом выполнение сценария полностью останавливается, как если бы он не выполнялся вообще.</p>
+</div>
+<div class="notice notice-warning">
+<p class="admonition-title">Контекст вычисления</p>
+<p>При использовании формул и выражений N3 в сценарии важно обратить внимание на контекст, в котором они вычисляются. Смена контекста может привести к тому, что формулы и выражения N3 перестанут работать.</p>
+<p>Следующие действия в сценарии меняют контекст вычисления на заданный шаблон:</p>
+<ul>
+<li><strong>Создать запись</strong></li>
+<li><strong>Дублировать запись</strong></li>
+<li><strong>Сменить контекст</strong></li>
+</ul>
+</div>
+<h2 id="порядок-отладки_1">Порядок отладки</h2>
+<ol class="colored_numbers_list">
+<li>После элемента сценария, работу которого требуется проверить, добавьте действие «<strong>Проверить результат выражения</strong>» и настройте его.</li>
+<li>
+<p>В поле «<strong>Выражение</strong>» введите формулу:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="k">false</span></code></pre>
+</div>
+</li>
+<li>
+<p>В поле «<strong>Сообщение об ошибке</strong>» введите отладочное сообщение, например:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="n">Сценарий</span> <span class="n">отработал</span> <span class="n">корректно</span> <span class="n">до</span> <span class="n">элемента</span> <span class="err">«</span><span class="o">&lt;</span><span class="n">название</span> <span class="n">действия</span><span class="o">&gt;</span><span class="err">»</span> <span class="n">включительно</span><span class="p">.</span></code></pre>
+</div>
+</li>
+<li>
+<p>Запустите сценарий.</p>
+</li>
+<li>
+<p>Если все элементы до действия «<strong>Проверить результат выражения</strong>» выполнены успешно, отобразится отладочное сообщение:</p>
+<ul>
+<li>Для сценария по любым событиям, кроме входа и выхода токена, сообщение об ошибке отобразится во всплывающем уведомлении в браузере, в <strong>журнале действий и ошибок</strong> <em class="fal fa-flag">‌<!--icon--></em> на информационной панели и в <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2180">журналах событий</a></strong> на вкладке «<strong>Операции</strong>».</li>
+<li>Для сценария на входе или выходе токена сообщение об ошибке отобразится в цепочке событий, которую можно просмотреть следующим образом:
+<ul>
+<li>Перейдите к диаграмме экземпляра процесса.</li>
+<li>Откройте <strong>журнал изменений</strong>.</li>
+<li>Нажмите значок <em class="fa-light fa-circle-exclamation">‌<!--icon--></em> рядом с названием сценария.</li>
+<li>Отобразится цепочка событий.</li>
+<li>Справа от цепочки событий в пункте «<strong>Уведомления</strong>» отобразится сообщение об ошибке.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Если какой-либо элемент до действия «<strong>Проверить результат выражения</strong>» не был выполнен, отладочное сообщение не отобразится.</p>
+<ul>
+<li>Исправляйте ошибки в сценарии до тех пор, пока не отобразится отладочное сообщение.</li>
+</ul>
+</li>
+<li>
+<p>Переместите действие «<strong>Проверить результат выражения</strong>» ниже по сценарию и укажите в отладочном сообщении название проверяемого элемента.</p>
+</li>
+<li>Снова запустите сценарий и проверьте его выполнение.</li>
+<li>Проверьте весь сценарий, последовательно перемещая отладочное действие «<strong>Проверить результат выражения</strong>».</li>
+</ol>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2463">Редактор выражений</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2490">Введение в язык формул Comindware</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2492">Список функций языка формул Comindware</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2346">Настройка действий сценария</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

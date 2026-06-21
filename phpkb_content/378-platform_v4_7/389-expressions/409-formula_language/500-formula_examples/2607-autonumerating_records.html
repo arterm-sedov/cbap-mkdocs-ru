@@ -1,0 +1,253 @@
+<h1>Автонумерация записей с помощью формулы, C#-скрипта или выражения N3</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#прикладная-задача"> <span class="md-ellipsis"> Прикладная задача </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#автонумерация-с-помощью-формулы"> <span class="md-ellipsis"> Автонумерация с помощью формулы </span> </a><nav aria-label="Автонумерация с помощью формулы" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#тестирование"> <span class="md-ellipsis"> Тестирование </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#автонумерация-с-помощью-c-скрипта-в-процессе"> <span class="md-ellipsis"> Автонумерация с помощью C#-скрипта в процессе </span> </a><nav aria-label="Автонумерация с помощью C#-скрипта в процессе" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#тестирование_1"> <span class="md-ellipsis"> Тестирование </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#автонумерация-с-помощью-c-скрипта-в-сценарии"> <span class="md-ellipsis"> Автонумерация с помощью C#-скрипта в сценарии </span> </a><nav aria-label="Автонумерация с помощью C#-скрипта в сценарии" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#тестирование_2"> <span class="md-ellipsis"> Тестирование </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#автонумерация-с-помощью-выражения-n3"> <span class="md-ellipsis"> Автонумерация с помощью выражения N3 </span> </a><nav aria-label="Автонумерация с помощью выражения N3" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#тестирование_3"> <span class="md-ellipsis"> Тестирование </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Каждой записи, пользовательской задаче, форме и экземпляру процесса присваивается уникальный ID. В рамках сервера <strong>Comindware Business Application Platform</strong> ID не повторяются.</p>
+<p>Чтобы автоматически нумеровать новые записи в шаблоне, создайте атрибут и настройте его заполнение порядковыми номерами одним из способов:</p>
+<ul>
+<li>с помощью <a class="mkdocs_imported_link" href="#автонумерация-с-помощью-формулы">формулы</a>;</li>
+<li>с помощью <a class="mkdocs_imported_link" href="#автонумерация-с-помощью-c-скрипта-в-процессе">C#-скрипта в процессе</a>;</li>
+<li>с помощью <a class="mkdocs_imported_link" href="#автонумерация-с-помощью-c-скрипта-в-сценарии">C#-скрипта в сценарии</a>;</li>
+<li>с помощью <a class="mkdocs_imported_link" href="#автонумерация-с-помощью-выражения-n3">выражения N3</a>.</li>
+</ul>
+<p>Здесь даны примеры настройки автонумерации записей этими способами.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<ul>
+<li>
+<p>Алгоритмы, представленные в примерах, не присваивают порядковые номера уже существующим записям в шаблоне.</p>
+</li>
+<li>
+<p>Для нумерации имеющихся записей потребуется обработать их с помощью цикла в сценарии, например, с использованием C#-скрипта.</p>
+</li>
+</ul>
+</div>
+<h2 id="прикладная-задача">Прикладная задача</h2>
+<p>Необходимо настроить нумерацию заявок, создаваемых в шаблоне <em>«Заявки»</em> при запуске процесса <em>«Оформление заявки»</em>, связанного с шаблоном записи <em>«Заявки»</em>.</p>
+<p>Нумерация заявок будет отличаться от ID записей, которые им присваиваются автоматически: порядковые номера будут присваиваться только записям этого шаблона, а ID имеют сквозную нумерацию для всех шаблонов и приложений.</p>
+<h2 class="pageBreakBefore" id="автонумерация-с-помощью-формулы">Автонумерация с помощью формулы</h2>
+<p>Для шаблонов с небольшим количеством записей можно использовать автонумерацию с помощью формулы.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<ul>
+<li>
+<p>Так как данный способ не учитывает возможность удаления записей, при удалении записей порядковые номера могут дублироваться.</p>
+</li>
+<li>
+<p>Так как этот способ учитывает количество существующих записей, новой записи будет присвоен такой порядковый номер, как если бы все предыдущие записи были тоже пронумерованы.</p>
+</li>
+</ul>
+</div>
+<ol class="colored_numbers_list">
+<li>В шаблоне записи <em>«Заявки»</em> создайте и поместите на форму атрибут <em>«Номер заявки»</em> типа «<strong>Текст</strong>».</li>
+<li>
+<p>Откройте <strong>сценарий на выходе</strong> из начального события процесса <em>«Оформление заявки»</em> и добавьте в него действие «<strong>Изменить значения атрибутов</strong>» со следующими свойствами:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Атрибут</th>
+<th>Операция со значениями</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Номер заявки</em></td>
+<td><strong>Заменить</strong></td>
+<td><strong>Формула:</strong>
+<p><code>FORMAT("{0}",LIST(COUNT((from a in db-&gt;Zayavki select a-&gt;id))))</code></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="notice notice-success">
+<p class="admonition-title">Синтаксис формулы</p>
+<ul>
+<li>
+<p><code>FORMAT()</code> — эта функция принимает строку с заполнителями вида <code>{0}</code>…<code>{N}</code> и список значений. Функция подставляет значения из списка в соответствующие заполнители и возвращает результирующую строку.</p>
+</li>
+<li>
+<p><code>LIST()</code> — эта функция принимает перечень значений и возвращает список, состоящий из этих значений.</p>
+</li>
+<li>
+<p><code>COUNT()</code> — эта функция подсчитывает количество записей в шаблоне записи, возвращённых в запросом <code>from a in db</code>.</p>
+</li>
+<li>
+<p><code>from a in db-&gt;Zayavki select a-&gt;id</code> — запрос всех записей из шаблона <em>«Заявки»</em>.</p>
+</li>
+<li>
+<p><code>Zayavki</code> — системное имя шаблона записи <em>«Заявки»</em>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Опубликуйте диаграмму процесса.</p>
+</li>
+</ol>
+<h3 id="тестирование">Тестирование</h3>
+<ol class="colored_numbers_list">
+<li>Создайте экземпляр процесса <em>«Оформление заявки»</em>.</li>
+<li>При запуске процесса будет создана новая запись в шаблоне <em>«Заявки»</em>.</li>
+<li>Новой заявке должен быть присвоен <em>Номер заявки</em> на 1 больше количества существующих записей в шаблоне <em>«Заявки»</em>.</li>
+</ol>
+<h2 class="pageBreakBefore" id="автонумерация-с-помощью-c-скрипта-в-процессе">Автонумерация с помощью C#-скрипта в процессе</h2>
+<p>Если в шаблоне будет много записей, то рекомендуется использовать автонумерацию с помощью C#-скрипта для повышения производительности.</p>
+<p>Кроме того, при автонумерации с помощью C#-скрипта удаление записей не повлияет на присваиваемые порядковые номера.</p>
+<ol class="colored_numbers_list">
+<li>На странице администрирования приложения выберите пункт «<strong>Переменные</strong>».</li>
+<li>
+<p>Создайте переменную со следующими свойствами:</p>
+<ul>
+<li><strong>Название</strong> — <em>Порядковый номер</em></li>
+<li><strong>Тип</strong> — <strong>число</strong></li>
+<li><strong>Значение</strong> — <em>1</em></li>
+</ul>
+</li>
+<li>
+<p>В шаблоне записи <em>«Заявки»</em> создайте и поместите на форму <strong>атрибут</strong> <em>«Номер заявки»</em> типа «<strong>Число</strong>».</p>
+</li>
+<li>В шаблоне процесса <em>«Оформление заявки»</em> добавьте <strong>задачу-выполнение сценария</strong> сразу после начального события.</li>
+<li>
+<p>В свойствах задачи-выполнения сценария на вкладке «<strong>Дополнительные</strong>» добавьте следующий <strong>C#-скрипт</strong>:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="k">using</span> <span class="nn">System</span><span class="p">;</span></code><br/><code><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span></code><br/><code><span class="k">using</span> <span class="nn">System.Linq</span><span class="p">;</span></code><br/><code><span class="k">using</span> <span class="nn">Comindware.Data.Entity</span><span class="p">;</span></code><br/><code><span class="k">using</span> <span class="nn">Comindware.TeamNetwork.Api.Data.UserCommands</span><span class="p">;</span></code><br/><code><span class="k">using</span> <span class="nn">Comindware.TeamNetwork.Api.Data</span><span class="p">;</span></code><br/><code><span class="k">public</span> <span class="k">class</span> <span class="nc">Script</span></code><br/><code><span class="p">{</span></code><br/><code>    <span class="k">public</span> <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="n">Comindware</span><span class="p">.</span><span class="n">Process</span><span class="p">.</span><span class="n">Api</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">ScriptContext</span> <span class="n">context</span><span class="p">,</span> <span class="n">Comindware</span><span class="p">.</span><span class="n">Entities</span> <span class="n">entities</span><span class="p">)</span></code><br/><code>    <span class="p">{</span></code><br/><code><span class="c1">// BusinessObjectId — запись, связанная с экземпляром процесса.</span></code><br/><code>        <span class="kt">var</span> <span class="n">objectId</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">BusinessObjectId</span><span class="p">;</span></code><br/><code><span class="c1">// Получаем значение переменной «Порядковый номер» по её ID — svar.1.</span></code><br/><code><span class="c1">// Присваиваем полученное значение переменной sequenceNumber.</span></code><br/><code>        <span class="kt">var</span> <span class="n">sequenceNumber</span> <span class="o">=</span> <span class="p">(</span><span class="kt">decimal</span><span class="p">)</span><span class="n">Api</span><span class="p">.</span><span class="n">Solution</span><span class="p">.</span><span class="n">SolutionVariableService</span><span class="p">.</span><span class="n">GetValue</span><span class="p">(</span><span class="s">"svar.1"</span><span class="p">);</span></code><br/><code><span class="c1">// Nomerzayavki — системное имя атрибута «Номер заявки».</span></code><br/><code><span class="c1">// Создаём словарь data со значением атрибута «Номер заявки»,</span></code><br/><code><span class="c1">// равным значению переменной «Порядковый номер».</span></code><br/><code>        <span class="kt">var</span> <span class="n">data</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">object</span><span class="o">&gt;</span></code><br/><code>        <span class="p">{</span></code><br/><code>            <span class="p">{</span><span class="s">"Nomerzayavki"</span><span class="p">,</span> <span class="n">sequenceNumber</span><span class="p">}</span></code><br/><code>        <span class="p">};</span></code><br/><code><span class="c1">// Zayavki — системное имя шаблона записи «Заявки».</span></code><br/><code><span class="c1">// Записываем значение атрибута «Порядковый номер» в текущей Заявке</span></code><br/><code>        <span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">EditWithAlias</span><span class="p">(</span><span class="s">"Zayavki"</span><span class="p">,</span> <span class="n">objectId</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span></code><br/><code><span class="c1">// Приращиваем на 1 значение переменной «Порядковый номер»</span></code><br/><code>        <span class="n">Api</span><span class="p">.</span><span class="n">Solution</span><span class="p">.</span><span class="n">SolutionVariableService</span><span class="p">.</span><span class="n">SetValue</span><span class="p">(</span><span class="s">"svar.1"</span><span class="p">,</span> <span class="n">sequenceNumber</span><span class="o">+</span><span class="m">1</span><span class="p">);</span></code><br/><code>    <span class="p">}</span></code><br/><code><span class="p">}</span></code></pre>
+</div>
+</li>
+<li>
+<p>Опубликуйте диаграмму.</p>
+</li>
+</ol>
+<h3 id="тестирование_1">Тестирование</h3>
+<ol class="colored_numbers_list">
+<li>Создайте экземпляр процесса.</li>
+<li>В поле атрибута <em>«Номер заявки»</em> должен отобразиться её порядковый номер.</li>
+<li>В свойствах переменной <em>«Порядковый номер»</em> значение должно увеличиться на 1.</li>
+</ol>
+<h2 class="pageBreakBefore" id="автонумерация-с-помощью-c-скрипта-в-сценарии">Автонумерация с помощью C#-скрипта в сценарии</h2>
+<p>C#-скрипт также можно применять для автонумерации в сценариях.</p>
+<p>При автонумерации с помощью C#-скрипта удаление записей не повлияет на присваиваемые порядковые номера.</p>
+<ol class="colored_numbers_list">
+<li>На странице администрирования приложения выберите пункт «<strong>Переменные</strong>».</li>
+<li>
+<p>Создайте переменную со следующими свойствами:</p>
+<ul>
+<li><strong>Название</strong> — <em>Порядковый номер</em></li>
+<li><strong>Тип</strong> — <strong>число</strong></li>
+<li><strong>Значение</strong> — <em>1</em></li>
+</ul>
+</li>
+<li>
+<p>В шаблоне записи <em>«Заявки»</em> создайте и поместите на форму <strong>атрибут</strong> <em>«Номер заявки»</em> типа «<strong>Число</strong>».</p>
+</li>
+<li>
+<p>Создайте новый сценарий <em>«Автонумерация»</em> и настройте его событие:</p>
+<ul>
+<li><strong>Тип: создание записи</strong>;</li>
+<li><strong>Контекстный шаблон записи:</strong> <em>Заявки</em>.</li>
+</ul>
+</li>
+<li>
+<p>Добавьте действие «<strong>Изменить значения скриптом</strong>» со следующими свойствами:</p>
+<ul>
+<li><strong>Атрибут:</strong> <em>Номер заявки</em></li>
+<li><strong>Операция со значениями: заменить</strong></li>
+<li>
+<p><strong>Значение: C#</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="k">public</span> <span class="k">class</span> <span class="nc">Script</span></code><br/><code><span class="p">{</span></code><br/><code><span class="c1">// ObjectID — запись, в контексте которой выполняется скрипт.</span></code><br/><code>    <span class="k">public</span> <span class="k">static</span> <span class="kt">decimal</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span> <span class="n">ObjectID</span><span class="p">)</span></code><br/><code>    <span class="p">{</span></code><br/><code><span class="c1">// Получаем значение переменной «Порядковый номер» по её ID — svar.1.</span></code><br/><code><span class="c1">// Присваиваем полученное значение переменной sequenceNumber.</span></code><br/><code>        <span class="kt">var</span> <span class="n">sequenceNumber</span> <span class="o">=</span> <span class="p">(</span><span class="kt">decimal</span><span class="p">)</span><span class="n">Api</span><span class="p">.</span><span class="n">Solution</span><span class="p">.</span><span class="n">SolutionVariableService</span><span class="p">.</span><span class="n">GetValue</span><span class="p">(</span><span class="s">"svar.1"</span><span class="p">);</span></code><br/><code><span class="c1">// Приращиваем на 1 значение переменной «Порядковый номер»</span></code><br/><code>        <span class="n">Api</span><span class="p">.</span><span class="n">Solution</span><span class="p">.</span><span class="n">SolutionVariableService</span><span class="p">.</span><span class="n">SetValue</span><span class="p">(</span><span class="s">"svar.1"</span><span class="p">,</span> <span class="n">sequenceNumber</span><span class="o">+</span><span class="m">1</span><span class="p">);</span></code><br/><code><span class="c1">// Возвращаем значение sequenceNumber в указанный атрибут.</span></code><br/><code>        <span class="k">return</span> <span class="n">sequenceNumber</span><span class="p">;</span></code><br/><code>    <span class="p">}</span></code><br/><code><span class="p">}</span></code></pre>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="тестирование_2">Тестирование</h3>
+<ol class="colored_numbers_list">
+<li>Создайте экземпляр записи в шаблоне <em>«Заявки»</em>.</li>
+<li>В поле атрибута <em>«Номер заявки»</em> должен отобразиться её порядковый номер.</li>
+<li>В свойствах переменной <em>«Порядковый номер»</em> значение должно увеличиться на 1.</li>
+</ol>
+<h2 id="автонумерация-с-помощью-выражения-n3">Автонумерация с помощью выражения N3</h2>
+<p>Для автонумерации записей также можно использовать выражение N3. При этом удаление записей не повлияет на присваиваемые порядковые номера.</p>
+<ol class="colored_numbers_list">
+<li>На странице администрирования приложения выберите пункт «<strong>Переменные</strong>».</li>
+<li>
+<p>Создайте переменную со следующими свойствами:</p>
+<ul>
+<li><strong>Название</strong> — <em>Порядковый номер</em></li>
+<li><strong>Тип</strong> — <strong>число</strong></li>
+<li><strong>Значение</strong> — <em>1</em></li>
+</ul>
+</li>
+<li>
+<p>В шаблоне записи <em>«Заявки»</em> создайте и поместите на форму <strong>атрибут</strong> <em>«Номер заявки»</em> типа «<strong>Число</strong>».</p>
+</li>
+<li>
+<p>Создайте новый сценарий <em>«Автонумерация»</em> и настройте его событие:</p>
+<ul>
+<li><strong>Тип: создание записи</strong></li>
+<li><strong>Контекстный шаблон записи:</strong> <em>Заявки</em></li>
+</ul>
+</li>
+<li>
+<p>Добавьте действие «<strong>Изменить значения атрибутов</strong>» со следующими свойствами:</p>
+<ul>
+<li><strong>Атрибут:</strong> <em>Номер заявки</em></li>
+<li><strong>Операция со значениями: заменить</strong></li>
+<li>
+<p><strong>Значение: N3</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="c"># Импортируем функции для работы с переменными</span></code><br/><code><span class="k">@prefix</span> <span class="nn">globalvariable:</span> <span class="nv">&lt;http://comindware.com/ontology/variable#&gt;</span><span class="p">.</span></code><br/><code><span class="k">@prefix</span> <span class="nn">cmwnullable:</span> <span class="nv">&lt;http://comindware.com/ontology/entity/nullable#&gt;</span><span class="p">.</span></code><br/><code></code><br/><code><span class="p">{</span></code><br/><code>    <span class="c"># Получаем значение переменной «Порядковый номер»</span></code><br/><code>    <span class="c"># по её ID — svar.1 и помещаем в ?globalVar.</span></code><br/><code>    <span class="s">"svar.1"</span> <span class="nn">globalvariable</span><span class="p">:</span><span class="nt">getValueById</span> <span class="err">?globalVar</span><span class="p">.</span></code><br/><code>    <span class="c"># Увеличиваем значение переменной «Порядковый номер»</span></code><br/><code>    <span class="c"># на 1 и сохраняем в ?resultSum.</span></code><br/><code>    <span class="p">(</span><span class="err">?globalVar</span> <span class="mi">1</span><span class="p">)</span> <span class="nn">cmwnullable</span><span class="p">:</span><span class="nt">sum</span> <span class="err">?resultSum</span><span class="p">.</span></code><br/><code>    <span class="c"># Присваиваем переменной значение ?resultSum.</span></code><br/><code>    <span class="s">"svar.1"</span> <span class="nn">globalvariable</span><span class="p">:</span><span class="nt">setValue</span> <span class="err">?resultSum</span><span class="p">.</span></code><br/><code>    <span class="c"># Передаем в атрибут значение ?globalVar (переменной до её увеличения).</span></code><br/><code>    <span class="err">?globalVar</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span></code><br/><code><span class="p">}</span></code></pre>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="тестирование_3">Тестирование</h3>
+<ol class="colored_numbers_list">
+<li>Создайте экземпляр записи в шаблоне <em>«Заявки»</em>.</li>
+<li>В поле атрибута <em>«Номер заявки»</em> должен отобразиться её порядковый номер.</li>
+<li>В свойствах переменной <em>«Порядковый номер»</em> значение должно увеличиться на 1.</li>
+</ol>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2492">Список функций языка формул Comindware</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2207">Переменные приложения. Просмотр списка, настройка и использование</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2400">Написание скриптов на языке C#</a></em></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

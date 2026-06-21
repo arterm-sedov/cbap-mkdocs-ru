@@ -1,0 +1,22 @@
+<h1>Вычисление исполнителя текущей активной задачи</h1><p>Для того, чтобы вычислить ответственного за текущую задачу по конкретной записи, введите следующее выражение:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">
+<p>@prefix cmw: &lt;http://comindware.com/logics#&gt;.</p>
+<p>@prefix task: &lt;http://comindware.com/ontology/task#&gt;.</p>
+<p>@prefix taskStatus: &lt;http://comindware.com/ontology/taskStatus#&gt;.</p>
+<p> </p>
+<p>{</p>
+<p>  ?task task:objectId ?item.</p>
+<p>  ?task cmw:taskStatus taskStatus:inProgress.</p>
+<p>  </p>
+<p>  or {?task cmw:assignee ?value.}</p>
+<p>  or {?task cmw:possibleAssignee ?value.}.</p>
+<p>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>

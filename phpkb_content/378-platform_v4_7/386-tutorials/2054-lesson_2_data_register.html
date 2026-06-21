@@ -1,0 +1,358 @@
+<h1>Урок 2. Мой первый реестр данных</h1><div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1hv7021650">Введение</a></li>
+<li><a href="#l21">Создание приложения</a></li>
+<li><a href="#l22">Создание реестра данных</a></li>
+<li><a href="#l23">Добавление атрибутов реестра данных</a></li>
+<li><a href="#l24">Создание экранной формы реестра данных</a></li>
+<li><a href="#mcetoc_1gbk4gtlu1">Тестирование: ввод и редактирование заявок</a></li>
+<li><a href="#l26">Доработка экранной формы: статус согласования заявки секретарем</a></li>
+<li><a href="#l27">Настройка списка записей</a></li>
+<li><a href="#l28">Поиск и фильтрация записей в списке</a>
+<ul>
+<li><a href="#mcetoc_1hobtacqb0">Настройка и сохранение параметров фильтрации, сортировки и группировки записей списка для текущего пользователя</a></li>
+<li><a href="#mcetoc_1gbk531pf2">Настройка и сохранение параметров сортировки, группировки, подсчета итогов и фильтрации данных в таблице для всех пользователей</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1gbk57a6t3">Результаты</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1hv7021650">Введение</h2>
+<p>Следуя указаниям в этом уроке, вы создадите реестр данных (<strong>шаблон записи</strong>) для заявки на автомобиль, настроите атрибуты, их отображение в виде таблицы и экранной формы, а затем в роли <em>Заказчика</em> создадите несколько заявок.</p>
+<p><strong>Предусловия:</strong> выполнена авторизация, пройден <samp data-name="aid" data-title="" data-value="2052"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2052}</span></samp>.</p>
+<p><strong>Расчетная продолжительность:</strong> 15 мин.</p>
+<p><strong>Примечание:</strong> в данном уроке представлен продукт <strong>Comindware Business Application Platform</strong> версии 4.2.219.0, внешний вид страниц и меню в других версиях продукта может отличаться.</p>
+<h2 id="l21">Создание приложения</h2>
+<p><span style="letter-spacing: 0.2px;">Подробные сведения о приложениях в <strong>Comindware Business Application Platform</strong> см. в разделе «<a href="https://kb.comindware.ru/category.php?id=440">Разработка приложений</a>».</span></p>
+<p><strong>Создадим приложение для автоматизации заявок на корпоративный автотранспорт…</strong></p>
+<p><span style="font-weight: 700 !important;">1. </span>В панели навигации слева выберите раздел «<span style="font-weight: 700 !important;">Настройка</span>» — «<span style="font-weight: 700 !important;">Приложения</span>».</p>
+<p><span style="letter-spacing: 0.2px; font-weight: 700 !important;">2. </span><span style="letter-spacing: 0.2px;">Нажмите кнопку «</span><span style="font-weight: 700 !important;">Создать</span> <span style="letter-spacing: 0.2px;"> » на панели инструментов </span> .</p>
+<div class="screenshot_with_caption">
+<p><img alt="Добавление приложения" class="img-responsive" height="349" src="https://kb.comindware.ru/assets/img_6308c45854715.png" width="1185"/></p>
+<p class="caption" style="font-size: 11pt !important;">Добавление приложения</p>
+</div>
+<p><strong> 3. </strong> Введите название (отображаемое на экране название) приложения, например, «Управление автопарком». После заполнения имени поле «<strong>Системное имя</strong>» заполнится автоматически, при желании вы можете ввести собственное системное имя.</p>
+<div class="notice notice-success">
+<p><strong>Определение</strong></p>
+<ul>
+<li><strong>Системное имя</strong> используется в качестве идентификатора переменной (атрибута) при разработке скриптов, правил и выражений.</li>
+<li>Системное имя может состоять из латинских букв (A–Z, a–z), цифр (0–9) и символов подчеркивания (_). Системное имя не должно начинаться с цифры.</li>
+<li>Для <strong>названий</strong> приложений и шаблонов и <strong>отображаемых </strong><strong>названий</strong> атрибутов и полей никаких ограничений нет — они могут быть любыми, в идеале — лаконичными и в то же время понятными пользователям приложения.</li>
+<li>Пару «<em>название – системное имя</em>» мы встретим еще неоднократно. </li>
+</ul>
+</div>
+<p><strong> 4. </strong> Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Сохранение нового приложения" class="img-responsive" height="327" src="https://kb.comindware.ru/assets/img_63093c3306c35.png" width="1187"/></p>
+<p class="caption" style="font-size: 11pt !important;">Сохранение нового приложения</p>
+</div>
+<p><strong> 5. </strong> Дважды нажмите строку созданного приложения в списке, чтобы перейти к его настройке.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Список приложений" class="img-responsive" height="349" src="https://kb.comindware.ru/assets/img_6308c4fde97b1.png" width="1187"/></p>
+<p class="caption" style="font-size: 11pt !important;">Список приложений</p>
+</div>
+<h2 id="l22">Создание реестра данных</h2>
+<p><strong>Определим, какие данные участвуют в процессе заказа автотранспорта…</strong></p>
+<p><em>Заказчик</em> создает заявку, которую затем согласовывает <em>Секретарь</em> — одобряет либо отклоняет.</p>
+<p>Заявки будут храниться в реестре данных.</p>
+<p>Реестр данных создается и настраивается с помощью <strong>шаблона записи</strong>.</p>
+<div class="notice notice-success">
+<p><strong>Определение</strong></p>
+<ul>
+<li>Реестр данных — это аналог листа Excel или таблицы в реляционной базе данных. В <strong>Comindware Business Application Platform</strong> реестр данных называется <strong>ш</strong><span style="font-weight: 700 !important;">аблоном записи</span>. Реестр данных может быть представлен сжато — в виде списка записей, или развернуто — в виде экранной формы.</li>
+<li><span style="font-weight: 700 !important;">Запись</span> — это набор данных (атрибутов) об одном объекте, значении справочника, транзакции и т.п.</li>
+<li><span style="font-weight: 700 !important;">Атрибут</span> — это простейший элемент данных об объекте: место подачи (строка), количество пассажиров (число), время подачи (дата/время), автомобиль (ссылка) и т.п. </li>
+<li><span style="font-weight: 700 !important;">Список</span> записей — это представление реестра на экране в виде таблицы с определенным расположением атрибутов (столбцов) и настроенными фильтрами, определяющими, какие записи (строки) должны отображаться. </li>
+<li>В отличие от списка, экранная <span style="font-weight: 700 !important;">форма</span> отображает одну запись. Форма содержит экранные поля, предназначенные для отображения и ввода данных реестра.</li>
+</ul>
+</div>
+<p><strong>Создадим шаблон записи для заявки на автомобиль…</strong></p>
+<p><strong>1. </strong> Перейдите в раздел «<strong>Шаблоны</strong>» приложения <em>«Управление автопарком».</em></p>
+<div class="screenshot_with_caption">
+<p><img alt="Переход в раздел «Шаблоны»" class="img-responsive" height="380" src="https://kb.comindware.ru/assets/img_6308c56696b07.png" width="1187"/></p>
+<p class="caption" style="font-size: 11pt !important;">Переход в раздел «<strong>Шаблоны</strong>»</p>
+</div>
+<p><strong>2. </strong>Выберите вкладку «<strong>Шаблоны записей</strong>».</p>
+<p><strong>3. </strong> Нажмите кнопку «<strong>Создать</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Создание шаблона записи" class="img-responsive" height="370" src="https://kb.comindware.ru/assets/img_63093c587ae09.png" width="1187"/></p>
+<p class="caption" style="font-size: 11pt !important;">Создание шаблона записи</p>
+</div>
+<p><strong>4. </strong> В поле «<strong>Название</strong>» укажите <em>«Заявка на автомобиль»</em>. Это <strong>отображаемое название</strong> шаблона.</p>
+<p><strong>5. </strong> В поле «<strong>Тип шаблона</strong>» должно быть автоматически выбрано значение «<strong>Шаблон записи</strong>».</p>
+<p><strong>6. </strong>Остальные поля оставьте без изменений.</p>
+<p><strong>7. </strong> Нажмите кнопку «<strong>Создать</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Ввод имени и создание шаблона записи" class="img-responsive" height="395" src="https://kb.comindware.ru/assets/img_63093c6a3f4de.png" width="1187"/></p>
+<p class="caption" style="font-size: 11pt !important;">Ввод имени и создание шаблона записи</p>
+</div>
+<h2 id="l23">Добавление атрибутов реестра данных</h2>
+<p>Добавим атрибуты для реестра данных <em>«Заявка на автомобиль».</em></p>
+<p><strong> 1. </strong> Перейдите на вкладку «<strong>Атрибуты</strong>».</p>
+<p><strong> 2. </strong> Нажмите кнопку «<strong>Создать</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Вкладка «Атрибуты» шаблона записи" class="img-responsive" height="343" src="https://kb.comindware.ru/assets/img_63093c8616448.png" width="1187"/></p>
+<p class="caption" style="font-size: 11pt !important;">Вкладка «<strong>Атрибуты</strong>» шаблона записи</p>
+</div>
+<p><strong> 3. </strong> Выберите <strong>тип данных</strong> « <strong>Текст</strong>», укажите <strong>название </strong>атрибута <em>«Место подачи»</em>. Как обычно, системное имя заполнится автоматически.</p>
+<p><strong>4. </strong>Остальные поля оставьте без изменений.</p>
+<p><strong> 5. </strong> Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Создание и сохранение атрибута" class="img-responsive" height="713" src="https://kb.comindware.ru/assets/img_630c588aca1e0.png" width="1187"/></p>
+<p class="caption" style="font-size: 11pt !important;">Создание и сохранение атрибута</p>
+</div>
+<p><strong> 6. </strong> Аналогично создайте следующие атрибуты:</p>
+<ul>
+<li><strong>тип данных </strong>— «<strong>Дата и время</strong>», <strong>название </strong>— <em>«Время подачи»;</em></li>
+<li><strong>тип данных </strong>— «<strong>Текст</strong>», <strong>название </strong>— <em>«Маршрут»;</em></li>
+<li><strong>тип данных </strong>— «<strong>Число</strong>», <strong>название </strong>— <em>«Пассажиры».</em></li>
+</ul>
+<p>Мы создали минимальный набор атрибутов, необходимый для подачи и обработки заявки на корпоративный автомобиль.</p>
+<div class="notice notice-success">
+<p><strong>Определение</strong></p>
+<div><strong> Основные типы атрибутов </strong></div>
+<div> </div>
+<div>● <strong>Текст</strong> — для него доступны следующие ф<span style="font-size: 11pt; letter-spacing: 0.2px;">орматы отображения: </span></div>
+<ul style="list-style-type: square;">
+<li><strong>Обычный текст</strong> — значение атрибута отображается без форматирования;</li>
+<li><span style="font-size: 11pt; letter-spacing: 0.2px;"><strong>Размеченный текст</strong> — значение атрибута отображается в виде текста с форматированием. </span></li>
+<li><span style="font-size: 11pt; letter-spacing: 0.2px;"><strong>HTML-текст</strong> — значение атрибута отображается в виде текста с форматированием, при этом набор настроек для работы с текстом расширен.</span></li>
+<li><span style="font-size: 11pt; letter-spacing: 0.2px;"><strong>Телефон (РФ)</strong>, <strong>Адрес эл. почты</strong>, <strong>Паспорт (РФ)</strong>, <strong>Индекс (РФ)</strong>, <strong>ИНН юрлица</strong><strong>, </strong><strong>ИНН физлица</strong>, <strong>ОГРН (РФ)</strong>, <strong>Регистрационный номер ТС (РФ)</strong>, </span><strong><span style="font-size: 11pt; letter-spacing: 0.2px;">Особая маска</span></strong><span style="font-size: 11pt; letter-spacing: 0.2px;"> — маски, задающие формат отображения значения атрибута с помощью регулярных выражений.</span></li>
+</ul>
+<div>● <strong>Число</strong> — для него можно выбрать количество знаков, отображающихся после запятой:</div>
+<ul style="list-style-type: square;">
+<li><span style="font-size: 11pt; letter-spacing: 0.2px;"><strong>Не преобразовывать</strong> — значение атрибута отображается в том же формате, что его ввел пользователь;</span></li>
+<li><span style="font-size: 11pt; letter-spacing: 0.2px;"><strong>0</strong> — значение атрибута отображается в продукте в виде целого числа; </span></li>
+<li><strong>1–6</strong> — значение атрибута отображается в виде десятичной дроби с указанным количеством знаков после запятой;</li>
+</ul>
+<p>● <strong>Дата и время</strong> — атрибут содержит данные о дате и времени. Для него доступно несколько форматов отображения. В зависимости от выбранного формата отображения этот атрибут отображает либо только дату, либо дату и время.</p>
+<p>● <strong>Документ </strong>— атрибут, содержащий, например, файлы Word или PDF с компьютера.</p>
+<p>● <strong>Изображение </strong>— атрибут, содержащий, например, сканы изображений или фотографии со смартфона.</p>
+<p><span style="font-size: 11pt; letter-spacing: 0.2px;">Кроме того, <strong>Comindware Business Application Platform</strong> поддерживает атрибуты следующих типов: <strong>Аккаунт</strong>, <strong>Гиперссылка</strong>, <strong>Длительность</strong>, <strong>Запись</strong>, <strong>Логический</strong>, <strong>Организационная единица</strong>, <strong>Роль</strong>, <strong>Список значений</strong>. С некоторыми из них мы познакомимся позже.</span></p>
+</div>
+<div class="notice notice-info">
+<p><strong>Примечание</strong></p>
+Следуя методологии аджайл, на начальном этапе мы не стремимся охватить все атрибуты, а ограничиваемся минимально необходимыми. Наша цель — как можно быстрее сделать работоспособное приложение, которое можно показать первым пользователям. Потом, получив от них обратную связь, мы будем добавлять в нашу таблицу новые атрибуты и вносить другие доработки по их пожеланиям. </div>
+<h2 id="l24">Создание экранной формы реестра данных</h2>
+<p>Теперь можно создать экранную форму, с помощью которой мы будем вводить и редактировать данные реестра.</p>
+<p><strong> 1. </strong> Перейдите на вкладку «<strong>Формы</strong>».</p>
+<p>Созданный ранее шаблон записи <em>«Заявка на автомобиль»</em> уже содержит одну <em>пустую</em> форму <em>«Заявка на автомобиль — Основная форма»</em>, которую мы теперь настроим.</p>
+<p><strong> 2. </strong> Дважды щелкните пункт <em>«Заявка на автомобиль — Основная форма».</em></p>
+<div class="screenshot_with_caption">
+<p><img alt="Вкладка «Формы»" class="img-responsive" height="349" src="https://kb.comindware.ru/assets/img_63093f2933944.png" width="1187"/></p>
+<p class="caption" style="font-size: 11pt !important;">Вкладка «<strong>Формы</strong>»</p>
+</div>
+<p><strong>3. </strong>Отобразится конструктор формы:</p>
+<div class="screenshot_with_caption">
+<p><img alt="Конструктор формы" class="img-responsive" height="567" src="https://kb.comindware.ru/assets/img_6241dcbe727e8.png" width="1069"/></p>
+<p class="caption" style="font-size: 11pt !important;">Конструктор формы</p>
+</div>
+<div class="notice notice-success">
+<p><strong>Определение</strong></p>
+<strong>Конструктор формы</strong> разбит на четыре области:
+<p>(1) <strong>панель элементов</strong> — палитра элементов, которые можно перетащить на форму: атрибуты и вспомогательные визуальные элементы (<strong>Область</strong>, <strong>Вкладки</strong>, <strong>Группа кнопок</strong>, <strong>Разделитель кнопок</strong>, <strong>Колонки</strong>, <strong>Статичный текст</strong>);</p>
+<p>(2) <strong>макет формы </strong>— это эскиз экранной формы;</p>
+<p>(3) <strong>панель свойств </strong>— позволяет просмотреть и изменить свойства выбранного элемента. </p>
+<p>(4) <strong>кнопки </strong>— <strong>Сохранить</strong>, <strong>Очистить</strong>, <strong>Клонировать</strong>, <strong>Настроить шаблон</strong> <em class="fa-light fa-gear">‌</em>, <strong>Связи</strong> (со значком клубка).  </p>
+</div>
+<p><strong>4. </strong> Перетащите на макет формы элемент «<strong>Область</strong>» с панели элементов.</p>
+<p><strong>5. </strong> Перетащите на макет формы атрибут <em>«Время подачи»</em> с панели элементов.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Перетаскивание атрибута на форму" class="img-responsive" height="567" src="https://kb.comindware.ru/assets/img_6241deb173c3e.png" width="1069"/></p>
+<p class="caption" style="font-size: 11pt !important;">Перетаскивание атрибута на форму</p>
+</div>
+<p><strong>6. </strong> Аналогичным образом перетащите на макет формы атрибуты <em>«Место подачи», «Маршрут», «Пассажиры».</em></p>
+<p>При заполнении <em>«Времени подачи» Заказчик</em> должен вводить не только дату, но и часы и минуты. По умолчанию же отображается только дата. Измените формат отображения атрибута…</p>
+<p><strong> 7. </strong> На панели элементов щелкните значок карандаша у атрибута <em>«Время подачи».</em></p>
+<div class="screenshot_with_caption">
+<p><img alt="Значок редактирования атрибута в панели элементов" class="img-responsive" height="625" src="https://kb.comindware.ru/assets/img_6241df515f950.png" width="1069"/></p>
+<p class="caption" style="font-size: 11pt !important;">Значок редактирования атрибута в панели элементов</p>
+</div>
+<p><strong>8. </strong> Отобразится окно свойств атрибута. Выберите подходящий формат, например, «<strong>4 сент. 1986 г. 07:30</strong>», и нажмите кнопку «<strong>Сохранить</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Выбор формата отображения атрибута типа «Дата / время»" class="img-responsive" height="330" src="https://kb.comindware.ru/assets/img_630c5c0b6d295.png" width="1264"/></p>
+<p class="caption" style="font-size: 11pt !important;">Выбор формата отображения атрибута типа «Дата / время»</p>
+</div>
+<p><strong>Укажем обязательные для заполнения поля...</strong></p>
+<p><strong>9. </strong> Выберите на форме поле <em>«Время подачи»</em>. В поле «<strong>Доступ</strong>» на панели свойств поля выберите режим «<strong>Требовать ввод</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Выбор режима доступа к полю в форме" class="img-responsive" height="588" src="https://kb.comindware.ru/assets/img_6241e3289601c.png" width="1069"/></p>
+<p class="caption" style="font-size: 11pt !important;">Выбор режима доступа к полю в форме</p>
+</div>
+<p><strong>10. </strong> Аналогично сделайте обязательным поле <em>«Место подачи».</em></p>
+<div class="notice notice-info">
+<p><strong>Примечание</strong></p>
+Форму можно сделать визуально более привлекательной, используя дополнительные элементы дизайна.
+<ul>
+<li><strong>Область</strong> — позволяет объединить поля в отдельную группу и указать её заголовок. На форме необходимо создать как минимум одну область.</li>
+<li><strong>Статичный </strong><strong>текст</strong> — предназначена для отображения статичного текста на экранной форме.</li>
+<li><strong>Вкладки</strong> — позволяет распределить поля по вкладкам, между которыми можно переключаться.</li>
+<li><strong>Колонки</strong> — позволяет расположить поля в несколько столбцов.</li>
+</ul>
+</div>
+<p><strong>11. </strong> Перетащите на форму элемент «<strong>Колонки</strong>» с панели элементов.</p>
+<p><strong> 12. </strong> Перетащите поля <em>«Время подачи»</em> и <em>«Место подачи»</em> соответственно в левый и правый столбцы формы.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Перетаскивание элементов в столбцы в форме" class="img-responsive" height="665" src="https://kb.comindware.ru/assets/img_6241e23921c23.png" width="1069"/></p>
+<p class="caption" style="font-size: 11pt !important;">Перетаскивание элементов в столбцы в форме</p>
+</div>
+<p><strong> 13. </strong> Присвойте «<strong>Новой области</strong>» формы наглядное название: выберите заголовок «<strong>Новая область</strong>» и в поле «<strong>Отображаемое название</strong>» на панели свойств введите <em>«Форма заявки на автомобиль»</em>.</p>
+<p><strong>14. </strong> Для сохранения формы нажмите кнопку «<strong>Сохранить</strong>» на панели инструментов конструктора форм.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Переименование области формы и сохранение формы" class="img-responsive" height="543" src="https://kb.comindware.ru/assets/img_6241e2b794dd5.png" width="1069"/></p>
+<p class="caption" style="font-size: 11pt !important;">Переименование области формы и сохранение формы</p>
+</div>
+<p>В конструкторе форм предусмотрено много других функций, на которых мы останавливаться не будем. Вы можете самостоятельно поэкспериментировать с другими элементами и настройками экранной формы.</p>
+<h2 id="mcetoc_1gbk4gtlu1">Тестирование: ввод и редактирование заявок</h2>
+<p>Мы создали экранную форму для заявки на автомобиль. Теперь мы выйдем из роли аналитика и протестируем созданную форму — посмотрим на нее глазами пользователя.</p>
+<p><strong> 1. </strong> Нажмите кнопку «<strong>Настроить шаблон</strong>» <em class="fa-light fa-gear">‌</em>.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Переход к настройкам шаблона записи" class="img-responsive" height="181" src="https://kb.comindware.ru/assets/img_6241e867635c9.png" width="1069"/></p>
+<p class="caption" style="font-size: 11pt !important;">Переход к настройкам шаблона записи</p>
+</div>
+<p><strong> 2. </strong> Нажмите кнопку «<strong>Перейти к экземплярам</strong>», чтобы перейти к списку записей.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Переход к списку записей шаблона" class="img-responsive" height="329" src="https://kb.comindware.ru/assets/img_6241e413bc912.png" width="1069"/></p>
+<p class="caption" style="font-size: 11pt !important;">Переход к списку записей шаблона</p>
+</div>
+<p><strong> 3. </strong> Нажмите кнопку «<strong>Создать</strong>», чтобы создать новую запись — заявку на автомобиль.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Кнопка создания записи в списке записей" class="img-responsive" height="329" src="https://kb.comindware.ru/assets/img_6241e433e893f.png" width="1069"/></p>
+<p class="caption" style="font-size: 11pt !important;">Кнопка создания записи в списке записей</p>
+</div>
+<p><strong> 4. </strong> Откроется экранная форма заявки. Заполните все поля и нажмите кнопку «<strong>Сохранить</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Экранная форма заявки" class="img-responsive" height="350" src="https://kb.comindware.ru/assets/img_630c5dc8edf1b.png" width="1264"/></p>
+<p class="caption" style="font-size: 11pt !important;">Экранная форма заявки</p>
+</div>
+<p><strong> 5. </strong> Нажмите ссылку «<strong>Заявка на автомобиль</strong>», чтобы вернуться к списку заявок.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Возвращение к списку записей с помощью кнопки «Назад» в браузере" class="img-responsive" height="185" src="https://kb.comindware.ru/assets/img_630c5debc35d1.png" width="1264"/></p>
+<p class="caption" style="font-size: 11pt !important;">Возвращение к списку записей с помощью кнопки «Назад» в браузере</p>
+</div>
+<p><strong> 6. </strong> Создайте несколько заявок на автомобиль таким же образом. Созданные записи будут отображаться в списке.</p>
+<p><strong> 7. </strong> Двойным щелчком в списке записей откройте созданную запись и измените данные заявки.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Открытие записи из списка двойным щелчком" class="img-responsive" height="419" src="https://kb.comindware.ru/assets/img_6241e676a4ca3.png" width="1069"/></p>
+<p class="caption" style="font-size: 11pt !important;">Открытие записи из списка двойным щелчком</p>
+</div>
+<h2 id="l26">Доработка экранной формы: статус согласования заявки секретарем</h2>
+<p>Созданная заявка будет рассматриваться секретарем, но в нашем реестре (шаблоне записи) не хватает атрибута для результата одобрения. Добавим этот атрибут…</p>
+<p><strong> 1. </strong>Перейдите к конфигурации шаблона записи. Для этого нажмите кнопку «<strong>Мои настройки</strong>» <em class="fa-light fa-edit">‌</em> в списке «<strong>Все записи</strong>» и выберите пункт «<strong>Настроить шаблон</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Переход к настройкам шаблона из списка записей" class="img-responsive" height="443" src="https://kb.comindware.ru/assets/img_6309450bb2c9c.png" width="1264"/></p>
+<p class="caption" style="font-size: 11pt !important;">Переход к настройкам шаблона из списка записей</p>
+</div>
+<p><strong> 2.  </strong> Выберите вкладку «<strong>Атрибуты</strong>». Нажмите кнопку «<strong>Создать</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Добавление атрибута шаблона" class="img-responsive" height="397" src="https://kb.comindware.ru/assets/img_6241e9cd3c5a3.png" width="1069"/></p>
+<p class="caption" style="font-size: 11pt !important;">Добавление атрибута шаблона</p>
+</div>
+<p><strong> 3. </strong> Введите название <em>«Одобрено»</em>, выберите <strong>тип данных «Логический»</strong>, нажмите кнопку «<strong>Сохранить</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Создание атрибута «Одобрено» типа «Логический»" class="img-responsive" height="399" src="https://kb.comindware.ru/assets/img_63094161a08d5.png" width="1187"/></p>
+<p class="caption" style="font-size: 11pt !important;">Создание атрибута «Одобрено» типа «<strong>Логический</strong>»</p>
+</div>
+<h2 id="l27">Настройка списка записей</h2>
+<p>Список созданных нами заявок отображаются в виде таблицы, но он не информативен — по умолчанию в таблице отображаются только служебные столбцы: номер, создатель заявки, дата создания. Список следует доработать…</p>
+<p><strong> 1. </strong> Перейдите на вкладку «<strong>Таблицы</strong>» шаблона записи и дважды нажмите строку «<strong>Все записи</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Переход к конструктору списка" class="img-responsive" height="312" src="https://kb.comindware.ru/assets/img_6241eac23e443.png" width="1069"/></p>
+<p class="caption" style="font-size: 11pt !important;">Переход к конструктору списка</p>
+</div>
+<p>Отобразится конструктор таблицы со списком записей.</p>
+<p>Конструктор таблицы позволяет настроить набор и порядок отображения столбцов.</p>
+<p><strong>Для начала удалим столбцы, которые пользователю не интересны...</strong></p>
+<p><strong> 2. </strong> Выберите элемент «<strong>ИД</strong>» в макете таблицы и перетащите его на панель элементов. Таким же образом уберите из таблицы столбцы «<strong>Дата создания</strong>», «<strong>В архиве</strong>» и <em>«<strong>Используется в процессе</strong>»</em>. Должны остаться столбцы «<strong>Создатель</strong>» и «<strong>Дата изменения</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Конструктор списка — удаление атрибутов из списка с помощью перетаскивания на панель элементов" class="img-responsive" height="420" src="https://kb.comindware.ru/assets/img_6241ed520ef21.png" width="1069"/></p>
+<p class="caption" style="font-size: 11pt !important;">Конструктор списка — удаление атрибутов из списка с помощью перетаскивания на панель элементов</p>
+</div>
+<p><strong>Теперь добавим в таблицу необходимые столбцы...</strong></p>
+<div class="notice notice-info">
+<p><strong>Примечание</strong></p>
+Последовательность, в которой элементы расположены в конструкторе таблицы, определит последовательность столбцов при ее отображении. Т. е. элемент, который расположен вверху в конструкторе списка, отобразится первым (слева) в таблице. </div>
+<p><strong> 3. </strong> Перетащите следующие атрибуты с панели элементов на макет таблицы: «Время подачи», «Место подачи», «Маршрут», «Пассажиры».</p>
+<p><strong> 4. </strong> Нажмите кнопку «<strong>Сохранить</strong>». Будут сохранены настройки отображения атрибутов в таблице по умолчанию для всех пользователей.</p>
+<p><strong> 5. </strong>В меню <em class="fa-light fa-edit">‌</em> нажмите кнопку «<strong>Настроить шаблон</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Перетаскивание требуемых элементов в список и сохранение списка" class="img-responsive" height="536" src="https://kb.comindware.ru/assets/img_6474a15e75f1f.png" width="1264"/></p>
+<p class="caption" style="font-size: 11pt !important;">Перетаскивание требуемых элементов в список и сохранение списка</p>
+</div>
+<p><strong> 6. </strong>Отобразится вкладка <strong>«<em>Свойства</em>»</strong> шаблона.</p>
+<p><strong>7. </strong>Нажмите кнопку «<strong>Перейти к экземплярам</strong>», чтобы открыть список заявок в виде таблицы с настроенными столбцами.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Список записей в виде таблицы с настроенными столбцами" class="img-responsive" height="408" src="https://kb.comindware.ru/assets/img_6241efdb08f28.png" width="1069"/></p>
+<p class="caption" style="font-size: 11pt !important;">Список записей в виде таблицы с настроенными столбцами</p>
+</div>
+<h2 id="l28">Поиск и фильтрация записей в списке</h2>
+<p>Используем дополнительные настройки отображения записей в списке — отфильтруем и отсортируем записи в нужном нам порядке, затем настроим группировку и подсчет итогов. </p>
+<h3 id="mcetoc_1hobtacqb0">Настройка и сохранение параметров фильтрации, сортировки и группировки записей списка для текущего пользователя</h3>
+<div class="notice notice-info">
+<p><strong>Примечание</strong></p>
+<ul>
+<li>В этом параграфе представлены инструкции по настройке параметров отображения столбцов таблицы для <strong>текущего пользователя</strong>. Эти настройки хранятся в платформе индивидуально для каждого пользователя.</li>
+<li>Помимо этого, в конструкторе списка можно настроить параметры отображения столбцов, которые будут использоваться <strong> для всех пользователей по умолчанию</strong>. Соответствующие инструкции представлены в следующем параграфе.</li>
+</ul>
+</div>
+<p><strong> 1. </strong> Нажимайте заголовок столбца <em>«Время подачи»</em> для циклического переключения режимов сортировки данных в таблице по данному столбцу: по возрастанию, по убыванию, по умолчанию. Режим сортировки указывает стрелка вниз (по убыванию), стрелка вверх (по возрастанию) или отсутствие стрелки (по умолчанию) в заголовке столбца.</p>
+<div class="screenshot_with_caption">
+<p><img alt=" Сортировка списка щелчком по заголовку столбца " class="img-responsive" height="437" src="https://kb.comindware.ru/assets/img_6241f0df1fb27.png" width="1069"/></p>
+<p><span style="font-size: 11pt; color: #666666; font-style: italic; letter-spacing: 0.2px;"> Сортировка списка щелчком по заголовку столбца </span></p>
+</div>
+<p>Для поиска записи можно использовать фильтр «<strong>Равно</strong>» или «<strong>Содержит строку</strong>». Для этого следует ввести значение в меню фильтра… </p>
+<p>Меню с настройками отображается при нажатии значка воронки в заголовке столбца списка.</p>
+<p><strong>2. </strong> Нажмите значок воронки в столбце <em>«Маршрут»</em>. В раскрывшемся меню установите флажок «<strong>Фильтровать данные</strong>», выберите тип фильтра «<strong>Содержит строку</strong>» и укажите искомое значение для фильтра в поле «<strong>Введите текст</strong>».</p>
+<p><strong>3. </strong> Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt=" Применение фильтра записей по содержимому столбца " class="img-responsive" height="478" src="https://kb.comindware.ru/assets/img_6241f1e9707d2.png" width="1069"/></p>
+<p><span style="font-size: 14.6667px; color: #666666; font-style: italic; letter-spacing: 0.2px;"> Применение фильтра записей по содержимому столбца </span></p>
+</div>
+<p>В списке отобразятся записи, соответствующие указанному фильтру…</p>
+<p><strong>4. </strong> Чтобы отменить фильтрацию записей, щелкните значок воронки в столбце <em>«Маршрут»</em>, в раскрывшемся меню снимите флажок «<strong>Фильтровать данные</strong>» и нажмите кнопку «<strong>Сохранить</strong>». </p>
+<div class="screenshot_with_caption">
+<p><img alt="Отключение фильтрации записей в списке" class="img-responsive" height="395" src="https://kb.comindware.ru/assets/img_6241f1da7b80e.png" width="1069"/></p>
+<p class="caption" style="font-size: 11pt !important;">Отключение фильтрации записей в списке</p>
+</div>
+<p><strong>5. </strong> Чтобы сгруппировать заявки с одинаковым маршрутом, щелкните значок воронки в столбце «Маршрут» и в раскрывшемся меню установите флажок «<strong>Группировать</strong>» и нажмите кнопку «<strong>Сохранить</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt=" Группировка записей в списке " class="img-responsive" height="466" src="https://kb.comindware.ru/assets/img_6241f31110572.png" width="1069"/></p>
+<p class="caption" style="font-size: 11pt !important;"><span style="font-size: 14.6667px;"> Группировка записей в списке </span></p>
+</div>
+<p><strong>Скроем столбец «Дата изменения»…</strong></p>
+<p><strong>6. </strong> Нажмите кнопку <em class="fa-light fa-edit">‌</em> и в раскрывшемся меню выберите пункт «<strong>Настроить внешний вид</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Переход к странице пользовательской настройки отображения столбцов списка" class="img-responsive" height="443" src="https://kb.comindware.ru/assets/img_6309447b73510.png" width="1264"/></p>
+<p class="caption" style="font-size: 11pt !important;">Переход к странице пользовательской настройки отображения столбцов списка</p>
+</div>
+<p><strong>7. </strong>Отобразится страница настройки внешнего вида таблицы. Снимите флажок «<strong>Дата изменения</strong>», чтобы скрыть из таблицы соответствующий столбец.</p>
+<p><strong>8. </strong>Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<p>Кнопка «<strong>Сбросить</strong>» позволяет восстановить исходную конфигурацию отображения таблицы.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Страница пользовательской настройки внешнего вида таблицы" class="img-responsive" height="515" src="https://kb.comindware.ru/assets/img_6241f644afe4f.png" width="1069"/></p>
+<p class="caption" style="font-size: 11pt !important;">Страница пользовательской настройки внешнего вида таблицы</p>
+</div>
+<h3 id="mcetoc_1gbk531pf2">Настройка и сохранение параметров сортировки, группировки, подсчета итогов и фильтрации данных в таблице для всех пользователей</h3>
+<div class="notice notice-info">
+<p><strong>Примечание</strong></p>
+<ul>
+<li>В этом параграфе представлены инструкции по настройке параметров отображения столбцов таблицы, которые будут использоваться <strong> для всех пользователей по умолчанию</strong>. </li>
+<li>Помимо этого, каждый пользователь может настроить отображение столбцов индивидуально в соответствии со своими потребностями. См. предыдущий параграф.</li>
+</ul>
+</div>
+<p><strong> 1.  </strong> Нажмите кнопку <em class="fa-light fa-edit">‌</em> и в раскрывшемся меню выберите пункт «<strong>Редактировать таблицу</strong>». Отобразится конструктор списка.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Переход к конструктору списка" class="img-responsive" height="465" src="https://kb.comindware.ru/assets/img_630c5f0fe5c73.png" width="1264"/></p>
+<p class="caption" style="font-size: 11pt !important;">Переход к конструктору списка</p>
+</div>
+<p class="caption" style="text-align: left;"><strong> 2.  </strong> Выберите вкладку «<strong>Дополнительные</strong>» в панели «<strong>Свойства таблицы</strong>». </p>
+<p class="caption" style="text-align: left;"><strong>3.</strong> Перетащите в области «<strong>Сортировка</strong>», «<strong>Группировка</strong>» и «<strong>Фильтрация</strong>» элементы списка и настройте параметры сортировки, группировки и фильтрации данных в таблице для всех пользователей.</p>
+<p class="caption" style="text-align: left;"><strong>4. </strong>Нажмите кнопку <em>«</em><strong>Сохранить</strong><em>»</em><strong>.</strong></p>
+<div class="screenshot_with_caption">
+<p><img alt="Настройка параметров сортировки, группировки и фильтрации списка по умолчанию для всех пользователей " class="img-responsive" height="870" src="https://kb.comindware.ru/assets/img_624206ff1c830.png" width="1073"/></p>
+<p class="caption" style="font-size: 11pt !important;">Настройка параметров сортировки, группировки и фильтрации списка по умолчанию для всех пользователей </p>
+</div>
+<h2 id="mcetoc_1gbk57a6t3">Результаты</h2>
+<p>Поздравляем! Вы создали свой первый реестр данных, сконструировали экранную форму, научились вводить через нее данные и настраивать таблицы со списками записей.</p>
+<p>В <a href="https://kb.comindware.ru/article.php?id=2055"> следующем уроке </a> вы узнаете, как спроектировать и запустить бизнес-процесс.</p>

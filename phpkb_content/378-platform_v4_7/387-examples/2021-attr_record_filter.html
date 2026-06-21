@@ -1,0 +1,65 @@
+<h1>Атрибут типа «Запись». Настройка фильтра записей для раскрывающегося списка на форме</h1><p>В Comindware Business Application Platform для выбора значения из другого шаблона записи необходимо использовать атрибут с типом данных «Запись». По умолчанию в раскрывающемся списке отображаются все записи, но в некоторых сценариях необходимо показывать только определенные записи.</p>
+<p>Для ограничения отображения и выбора записей необходимо использовать функционал «Фильтр» в настройках конструктора конкретной формы, на которую вынесен данный атрибут.</p>
+<p> </p>
+<p><strong>Сценарий: </strong>при создании заявки на командировку сотруднику нужно выбрать город, в который ему необходимо прибыть. Выбирать из всех городов не совсем удобно, желательно отфильтровать города по выбранной стране командировки.</p>
+<p> </p>
+<p><strong>Настройка:</strong></p>
+<p><strong>1.</strong> Создайте:</p>
+<ul>
+<li>Шаблон записи «Страны» (countries) с атрибутами:
+<ul style="list-style-type: circle;">
+<li>Название (title) — текст;</li>
+<li>Города страны — запись с несколькими значениями.</li>
+</ul>
+</li>
+<li>Шаблон записи «Города» (cities) с атрибутами:
+<ul style="list-style-type: circle;">
+<li>Название (title) — текст;</li>
+<li>Страна (country) — запись из шаблона «Страны».</li>
+</ul>
+</li>
+<li>Шаблон записи «Заявки на командировки» (Zayavkinakomandirovku) с атрибутами:
+<ul style="list-style-type: circle;">
+<li>Название — текст;</li>
+<li>Страна (request_country) — запись из шаблона «Страны»;</li>
+<li>Город (request_city) — запись из шаблона «Города»;</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. </strong> В конструкторе формы шаблона «Заявка на командировку» для поля «Города» (request_city) в свойстве «Фильтр» предусмотрено несколько вариантов фильтрации:</p>
+<ul>
+<li>Атрибут — выберите из раскрывающего списка атрибут: <em><strong>«Страны» -&gt; «Города страны»</strong></em>;</li>
+<li>Формула — напишите выражение на языке Comindware Expression Language: <em><strong>(from a in db-&gt;cities where a-&gt; country == $request_country select a-&gt;id)</strong></em>;</li>
+<li>N3 — напишите выражение на языке N3:</li>
+</ul>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">
+<p>@prefix container: &lt;http://comindware.com/ontology/container#&gt;.</p>
+<p>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.</p>
+<p>@prefix math: &lt;http://www.w3.org/2000/10/swap/math#&gt;.</p>
+<p>{</p>
+<p>    ("cities" "country") object:findProperty ?citiescountryProp.</p>
+<p>    ("Zayavkinakomandirovku" "request_country") object:findProperty ?Zayavkinakomandirovkurequest_countryProp.</p>
+<p> </p>
+<p>    ?item ?Zayavkinakomandirovkurequest_countryProp ?Zayavkinakomandirovkurequest_countryProperty.</p>
+<p>    ?value a [object:alias "cities"].</p>
+<p>    ?value ?citiescountryProp? Zayavkinakomandirovkurequest_countryProperty.</p>
+<p>    </p>
+<p>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>DMN — выберите источник данных Города и настройте в соответствии с информацией ниже:</li>
+</ul>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Пример DMN запроса" class="img-responsive" height="734" src="https://kb.comindware.ru/assets/dmn1.png" width="1493"/></p>
+<p class="caption" style="font-size: 15px !important;">Пример DMN запроса</p>
+</div>
+<p><strong>3.</strong> Проверьте работу фильтра, выбрав сначала страну, потом город. В раскрывающемся списке показываются записи с учетом прав доступа согласно роли пользователя. При отсутствии записей для выбора проверьте права доступа.</p>
+<div class="blue_note"><strong>Примечание :</strong> используя правила для формы можно настроить динамическое отображение полей для более удобного заполнения.</div>

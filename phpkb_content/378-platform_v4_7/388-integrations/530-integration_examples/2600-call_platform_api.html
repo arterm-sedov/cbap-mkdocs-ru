@@ -1,0 +1,58 @@
+<h1>Вызов API Comindware Business Application Platform при помощи Postman</h1><p><strong>Содержание статьи</strong></p>
+<ul>
+<li><a href="#postman1">Введение</a></li>
+<li><a href="#postman2">Начало работы в Postman</a></li>
+<li><a href="#postman3">Формирование запроса</a></li>
+</ul>
+<p> </p>
+<p id="postman1"><strong>Введение</strong></p>
+<p>Вы можете протестировать созданное решение с помощью разных инструментов. Например, вы можете сделать это «вручную» и посмотреть, как работает система при различных бизнес-сценариях. Конечно, вы можете автоматизировать этот процесс. Самым простым и удобным способом является создание запросов с помощью Postman.</p>
+<p>Кроме того, Postman можно использовать для тестирования интеграций других систем с <strong>Comindware Business Application Platform</strong>.</p>
+<p>Почему Postman? Во-первых, Postman является полностью бесплатным. Во-вторых, что играет большую роль, Postman обладает интуитивно понятным интерфейсом и пользователь после первых минут работы сможет написать свой первый запрос к тестируемой системе. И в-третьих, если разработчик или тестировщик, который раньше не сталкивался с продуктом, просмотрит коллекцию запросов в Postman к системе, то у него сложится правильное видение того, как данная система работает.</p>
+<p> </p>
+<p id="postman2"><strong>Начало работы в Postman</strong></p>
+<p>В Postman можно работать как с официального сайта продукта, пройдя необходимую регистрацию, так и с помощью скачиваемого приложения. Продукт достаточно интуитивно понятный, с помощью него можно создавать как отдельные запросы, так и коллекции запросов. Коллекции удобны тем, что можно один раз указать данные для авторизации для всех запросов внутри коллекции. </p>
+<p>Основная рабочая область — область формирования запроса к необходимой системе, содержит все необходимые основные параметры для составления запроса: </p>
+<ul>
+<li>Выбор метода (для <strong>Comindware Business Application Platform</strong> актуальны методы <em><strong>GET</strong></em>, <em><strong>POST</strong></em>, <em><strong>PUT</strong></em>,<em><strong> DELETE</strong></em>);</li>
+<li>URL запроса (ссылка для определения адреса запроса);</li>
+<li>Кнопка «<em><strong>Send</strong></em>» для отправки запроса;</li>
+<li>Вкладка «<em><strong>Authorization</strong></em>», где указывается тип авторизации к тестируемой системе. В случае с <strong>Comindware Business Application Platform</strong> авторизация всегда <em><strong>Basic</strong></em>, с использованием логина и пароля пользователя для доступа к данным в системе;</li>
+<li>Вкладка «<em><strong>Body</strong></em>» (актуально для методов, где предполагается передача параметров в теле запроса);</li>
+<li>Поле «<em><strong>Response</strong></em>» для вывода ответа на запрос к системе.</li>
+</ul>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Интерфейс приложения Postman" class="img-responsive" height="793" src="https://kb.comindware.ru/assets/2021-11-29_14h28_10.png" width="1266"/></p>
+<p class="caption" style="font-size: 15px !important;">Интерфейс приложения Postman</p>
+</div>
+<p> </p>
+<p id="postman3"><strong>Формирование запроса</strong></p>
+<p>В первую очередь, для формирования запроса к системе необходим URL. Чтобы его получить:</p>
+<p><strong>1.</strong> Перейдите на страницу <strong>Comindware Application Platform</strong> API. Для этого введите после вашего доменного имени «<em><strong>/docs</strong></em>».</p>
+<p>Если вы проделали это успешно, то вы должны перейти на страницу, содержащую следующие разделы:</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Область API Comindware Business Application Platform" class="img-responsive" height="426" src="https://kb.comindware.ru/assets/123.png" width="790"/></p>
+<p class="caption" style="font-size: 15px !important;">Область API Comindware Business Application Platform</p>
+</div>
+<p><strong>2.</strong> Перейдите в «<em><strong>Solution Api</strong></em>» и в полученном списке выберите нужный вам шаблон записи. Выберите метод и нажмите кнопку «<em><strong>Try it out</strong></em>». Скопируйте значение, которое будет получено в поле «<em><strong>Request URL</strong></em>»:</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Пример полученного URL" class="img-responsive" height="80" src="https://kb.comindware.ru/assets/1234.png" width="512"/></p>
+<p class="caption" style="font-size: 15px !important;">Пример полученного URL</p>
+</div>
+<p>Во-вторых, если вам необходимо передать какие-либо данные, например, создать запись в определенном шаблоне записи с указанными значениями атрибутов, или изменить запись, то вам нужно тело запроса. Для этого в той же области API <strong>Comindware Business Application Platform</strong> выберите нужный метод и скопируйте значение в поле «<em><strong>Example Value</strong></em>».</p>
+<p>Далее переходим непосредственно в саму программу Postman и формируем запрос:</p>
+<p><strong>1.</strong> Нажмите на кнопку «<em><strong>New</strong></em>» и создайте новый запрос.</p>
+<p><strong>2.</strong> Выберите тип применяемого метода и вставьте скопированный URL в поле.</p>
+<p><strong>3.</strong> Перейдите на вкладку «<em><strong>Authorization</strong></em>», укажите тип «<strong><em>Basic</em></strong>», и укажите логин и пароль пользователя, у которого есть доступ к системе.</p>
+<p><strong>4.</strong> Перейдите на вкладку «<em><strong>Body</strong></em>» и вставьте скопированный шаблон тела запроса, при необходимости указав конкретные данные.</p>
+<p><strong>5.</strong> Нажмите «<em><strong>Send</strong></em>»:</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Пример запроса GET" class="img-responsive" height="793" src="https://kb.comindware.ru/assets/2021-11-29_14h45_49.png" width="1266"/></p>
+<p class="caption" style="font-size: 15px !important;">Пример запроса GET</p>
+</div>
+<p>После отправки запроса в нижней части экрана вы получите ответ от вашей системы. На вкладке «<strong><em>/docs</em></strong>» вы можете увидеть, что вы должны получить при проведении данного метода, так вы сможете проверить корректность полученного ответа от системы.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Слева — ответ на запрос в Postman, справа — ответ в области API системы" class="img-responsive" height="439" src="https://kb.comindware.ru/assets/postman2.jpeg" width="810"/></p>
+<p class="caption" style="font-size: 15px !important;">Слева — ответ на запрос в Postman, справа — ответ в области API системы</p>
+</div>
+<div class="blue_note">Если не все данные отображены в ответе, убедитесь, что у пользователя, логин и пароль которого вы использовали при авторизации, есть доступ к указанному в ссылке шаблону, а также что корректно составлено тело запроса.</div>

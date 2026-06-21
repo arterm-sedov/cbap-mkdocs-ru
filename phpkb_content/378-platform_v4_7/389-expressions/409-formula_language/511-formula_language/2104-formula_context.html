@@ -1,0 +1,52 @@
+<h1>Контекст вычисления формул. Понятие и изменение</h1><p>Понятие контекста всегда используется для настройки бизнес-логики и вычислений в Comindware Business Application Platform. В первую очередь, у любой информационной системы есть база данных, и чтобы получить какие-то данные из нее, нужно написать запрос к базе. </p>
+<p><strong>Контекст</strong> — это отправная точка запроса к базе данных. Границами контекста являются шаблоны записи, шаблоны процессов и пользовательские задачи, в которых пишется запрос (в форме вычисляемых атрибутов, правил на форме, фильтров и т.д.), и их нужно различать для правильного написания формулы.</p>
+<p><strong>$</strong> — обозначение изначального контекста.</p>
+<p>Для смены контекста используются атрибуты с типом данных «Запись» или выражения типа «<em><strong>from a in db</strong></em>». Чтобы поменять контекст на связанную запись, используются системные имена атрибутов с типом данных «Запись» после «<em><strong>$</strong></em>» и символы «<em><strong>-&gt;</strong></em>» после системного имени атрибута. В сценариях можно менять контекст по самим атрибутам с типом данных «Запись» или по выражению типа «<em><strong>from a in db</strong></em>».</p>
+<p> </p>
+<p><strong>Примеры смены контекста</strong></p>
+<p><strong>Пример 1:</strong> искомый атрибут находится в другом шаблоне записи, и в текущем контексте (шаблоне записи) есть ссылка на другой шаблон записи.</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">$link-&gt;atribut</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>где <em>link</em> — системное имя атрибута с типом данных «Запись», а <em>atribut</em> — системное имя атрибута в связанной записи.</p>
+<div class="blue_note">Больше о вызове связанных данных читайте в статье <samp data-name="aid" data-title="" data-value="2105"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2105}</span></samp>.</div>
+<p><strong> Пример 2:</strong> искомый атрибут находится в другом шаблоне записи, но в текущем контексте (шаблоне записи) нет ссылки на другой шаблон записи.</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">from a in db-&gt;sistemnoe_imya_shablona_zapisi where EQUALS(a-&gt;atirbut1, $atribut2) select a-&gt;id</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>где <em>sistemnoe_imya_shablona_zapisi</em>— системное имя искомого шаблона записи, <em>atribut1</em> — системное имя атрибута в искомом шаблоне записи, а <em>atribut2 </em>— системное имя атрибута в текущем шаблоне записи, с которым нужно сравнить <em>atribut1</em>.</p>
+<div class="blue_note">Больше о настройке выражения типа select читайте в статье <samp data-name="aid" data-title="" data-value="1863"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>{Article-ID:1863}</span></samp>.</div>
+<p><strong>Пример 3:</strong> текущий контекст — это контекст задачи, а искомый атрибут находится в связанном с шаблоном процесса шаблоне записи.</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">$cmw.task.objectId-&gt;op.11</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>где <em>op.11</em> — ИД атрибута в связанном шаблоне записи.</p>
+<p><strong>Пример 4:</strong> текущий контекст — это контекст процесса, а искомый атрибут находится в связанном шаблоне записи.</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">$$BusinessObject-&gt;atribut</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>где atribut — системное имя атрибута в связанном шаблоне записи.</p>

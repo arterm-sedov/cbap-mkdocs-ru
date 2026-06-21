@@ -1,0 +1,59 @@
+<h1>Гиперссылка на задачу. Вычисление с помощью N3 и формулы</h1><p>В ходе настройки вашего бизнес-решения может понадобиться передавать в сообщение ссылку на задачу. Или же, например, вы хотите изменить формат системных уведомлений о задачах (см. также: <samp data-name="aid" data-title="" data-value="1957"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>{Article-ID:1957}</span></samp>) и вам нужно вычислить ссылку на задачу. В данной статье мы рассмотрим настройку динамичной гиперссылки на задачу.</p>
+<p><strong>1.</strong> В текущем шаблоне записи создайте два атрибута: один будет отвечать за вычисление ссылки на языке N3,  а другой будет отвечать за вычленение из этой ссылки ИД задачи. Сам первый атрибут использовать в ссылке на задачу мы не можем, так как он вычисляет не конечную ссылку на задачу, но помогает нам получить ссылку для определения ИД задачи.</p>
+<ul>
+<li>Создайте текстовый атрибут «Номер задачи», сделайте его вычисляемым. В поле «Вычисляемое выражение» вставьте следующее выражение на языке N3:</li>
+</ul>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">
+<p>@prefix cmw: &lt;http://comindware.com/logics#&gt;.</p>
+<p>@prefix process: &lt;http://comindware.com/ontology/process#&gt;.</p>
+<p>@prefix string: &lt;http://www.w3.org/2000/10/swap/string#&gt;.</p>
+<p>@prefix configuration: &lt;http://comindware.com/ontology/configuration#&gt;.</p>
+<p>{</p>
+<p>    once</p>
+<p>          {</p>
+<p>        ?processObject process:businessObject ?item.</p>
+<p>        ?taskId cmw:parent ?processObject.</p>
+<p>        ?taskId a cmw:UserTask.</p>
+<p>        ("#task/{0}" ?taskId) string:format ?tempLink2.  </p>
+<p>        ?configObject a configuration:Configuration.</p>
+<p>        ?configObject configuration:baseUri ?addressLink.</p>
+<p>        ("{0}" ?addressLink) string:format ?tempLink1.   </p>
+<p>        (?tempLink1 "" ?tempLink2) string:concatenation ?resultLink.</p>
+<p>        ?resultLink == ?value.</p>
+<p>    }</p>
+<p>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>Создайте второй текстовый атрибут «ИД задачи», сделайте его вычисляемым. В поле «Вычисляемое выражение» вставьте следующую формулу:</li>
+</ul>
+<div>
+<table class="source_code_container" style="height: 58px;">
+<tbody>
+<tr style="height: 58px;">
+<td class="source_code" style="height: 58px; width: 1233px;">SUBSTRING($Nomerzadachi, 28)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="blue_note"><strong>Примечание :</strong> позиция (число) зависит от длины вашего доменного имени.</div>
+<p><strong>2.</strong> В настройках передачи ссылки на задачу введите следующее выражение:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code"><span style="color: #545764; font-family: monospace; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #fafafa; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">FORMAT("&lt;p&gt;&lt;a href='https://comindware.com/#task/{0}'&gt;Ссылка на задачу&lt;/a&gt;&lt;/p&gt;",LIST($IDzadachi))</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; font-size: 15px; font-weight: 300; letter-spacing: 0.2px; line-height: 25px; color: #545764; font-family: 'Open Sans', sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><span style="box-sizing: border-box; text-decoration: underline;"><strong style="box-sizing: border-box; font-weight: 700 !important;">где:</strong></span></p>
+<p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; font-size: 15px; font-weight: 300; letter-spacing: 0.2px; line-height: 25px; color: #545764; font-family: 'Open Sans', sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><strong style="box-sizing: border-box; font-weight: 700 !important;">https://comindware.com</strong> — ссылка на текущий инстанс;</p>
+<p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; font-size: 15px; font-weight: 300; letter-spacing: 0.2px; line-height: 25px; color: #545764; font-family: 'Open Sans', sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><strong>IDzadachi </strong>—<span style="font-weight: 300;"> системное имя атрибута, где хранится/вычисляется ИД задачи.</span></p>

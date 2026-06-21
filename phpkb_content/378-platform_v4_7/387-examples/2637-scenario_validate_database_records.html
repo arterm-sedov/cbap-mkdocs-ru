@@ -1,0 +1,58 @@
+<h1>Сценарий. Проверка данных записи перед сохранением</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#практический-пример"> <span class="md-ellipsis"> Практический пример </span> </a><nav aria-label="Практический пример" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#исходные-данные"> <span class="md-ellipsis"> Исходные данные </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-сценария"> <span class="md-ellipsis"> Настройка сценария </span> </a><nav aria-label="Настройка сценария" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#тестирование-сценария"> <span class="md-ellipsis"> Тестирование сценария </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<p>Для проверки данных перед сохранением записи обычно используется действие «<strong>Показать ошибку</strong>» в правилах для формы. Однако с помощью этого действия может быть затруднительно реализовать сложную логику проверки, либо проверочное выражение будет неудобочитаемым. К тому же чрезмерно сложные правила для формы могут замедлять ввод данных в форму.</p>
+<p>В таких случаях для проверки данных перед сохранением записи можно использовать действие «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2346#scenario_actions_validate_expression"><strong>Проверить результат выражения</strong></a>» в сценарии по событию «<strong>Создание записи</strong>», «<strong>Изменение записи</strong>» или «<strong>Нажата кнопка</strong>». Сценарий позволяет наглядно реализовать логику проверки данных произвольной сложности. Кроме того, сценарий срабатывает только при сохранении записи, благодаря чему повышается производительность.</p>
+<h2 id="практический-пример">Практический пример</h2>
+<p>Настроим сценарий, который будет запрещать сохранение заявки на поездку, если не указана её длительность.</p>
+<h3 id="исходные-данные">Исходные данные</h3>
+<p>В шаблоне <em>«Заявки»</em> имеется атрибут <em>«Длительность поездки»</em> (<code>TripDuration</code>) типа «<strong>Число</strong>», этот атрибут вынесен на форму заявки.</p>
+<h2 id="настройка-сценария">Настройка сценария</h2>
+<ol class="colored_numbers_list">
+<li>Создайте сценарий.</li>
+<li>В начальном событии «<strong>Нажата кнопка</strong>» выберите контекстный шаблон <em>«Заявки»</em> и кнопку «<strong>Сохранить</strong>».</li>
+<li>Добавьте действие: - <strong>Проверить результат выражения</strong>
+<ul>
+<li><strong>Сообщение об ошибке:</strong> <em>Длительность поездки не может быть нулевой</em></li>
+<li>
+<p><strong>Выражение: формула</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="c1">// Введите выражение, которое будет возвращать</span></code><br/><code><span class="c1">// false, когда сохранение записи запрещено, и</span></code><br/><code><span class="c1">// true, когда сохранение записи разрешено.</span></code><br/><code><span class="n">GREATER</span><span class="p">(</span><span class="err">$</span><span class="n">TripDuration</span><span class="p">,</span><span class="m">0</span><span class="p">)</span></code></pre>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="тестирование-сценария">Тестирование сценария</h3>
+<ol class="colored_numbers_list">
+<li>Создайте заявку и не заполняйте поле <em>«Длительность поездки»</em>.</li>
+<li>Нажмите кнопку «<strong>Сохранить</strong>».</li>
+<li>На экране отобразится сообщение <em>«Длительность поездки не может быть нулевой»</em>.</li>
+<li>Заполните поле <em>«Длительность поездки»</em> и нажмите кнопку «<strong>Сохранить</strong>».</li>
+<li>Отобразится сообщение об успешном сохранении записи.</li>
+</ol>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2346">Событие и действия сценария. Определения, типы, свойства, настройка</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2636">Отладка формул, выражений N3, сценариев и C#-скриптов</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

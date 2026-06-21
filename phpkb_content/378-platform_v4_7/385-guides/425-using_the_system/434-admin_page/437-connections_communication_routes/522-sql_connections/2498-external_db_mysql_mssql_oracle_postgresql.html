@@ -1,0 +1,400 @@
+<h1>Внешняя СУБД (MySQL, MSSQL, Oracle, PostgreSQL). Отправка SQL-запроса. Настройка подключения, пути передачи данных и сценария</h1><div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1i69kpsv20">Введение</a></li>
+<li><a href="#mcetoc_1i69kpsv21">Прикладная задача</a>
+<ul>
+<li><a href="#mcetoc_1i69kpsv22">Исходные данные</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1i69kpsv23">Подготовка сервера СУБД</a>
+<ul>
+<li><a href="#mcetoc_1i69kpsv24">Настройка конфигурации сервера PostgreSQL</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1i69kpsv25">Создание подключения к СУБД</a></li>
+<li><a href="#mcetoc_1i69kpsv26">Создание пути получения данных из СУБД</a></li>
+<li><a href="#mcetoc_1i69kpsv27">Создание сценария для получения данных из СУБД</a></li>
+<li><a href="#mcetoc_1i69kpsv28">Тестирование сценария</a></li>
+<li><a href="#mcetoc_1i69kpsv29">Связанные статьи</a></li>
+</ul>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="mcetoc_1i69kpsv20">Введение</h2>
+<p>В настоящей статье представлены инструкции по настройке подключения, пути передачи данных и сценария для отправки SQL-запросов во внешнюю систему управления базами данных (СУБД) по таймеру и получения данных в приложении на основе <strong>Comindware Business Application Platform</strong> (далее «Приложение»).</p>
+<p>Для обмена данными с СУБД поддерживаются следующие SQL-запросы:</p>
+<ul>
+<li><code>SELECT</code>
+<ul>
+<li>задайте таблицу для выборки записей из СУБД;</li>
+<li>задайте условие <code>WHERE</code> (необязательно) для выборки записей из СУБД;</li>
+<li>задайте атрибут для хранения полученных записей из СУБД;</li>
+</ul>
+</li>
+<li><code>UPDATE</code>
+<ul>
+<li>задайте таблицу для выборки записей из СУБД;</li>
+<li>задайте условие <code>WHERE</code> (необязательно) для выборки записей из СУБД;</li>
+<li>задайте атрибуты (поля) записей, которые требуется изменить в СУБД;</li>
+</ul>
+</li>
+<li><code>INSERT</code>
+<ul>
+<li>задайте таблицу для выборки записей из СУБД;</li>
+<li>задайте атрибуты (поля) записей, которые требуется создать в СУБД;</li>
+</ul>
+</li>
+<li><code>DELETE</code>
+<ul>
+<li>задайте таблицу для выборки записей из СУБД;</li>
+<li>задайте условие <code>WHERE</code> (обязательно) для выборки записей, которые требуется удалить из СУБД;</li>
+</ul>
+</li>
+<li>пользовательский запрос:
+<ul>
+<li>задайте собственный шаблон запроса, в который можно подставить значения <strong>атрибутов сообщения</strong>, например:
+<div class="highlight"><code></code>
+<pre><code><span class="c1">-- {my_id} — заполнитель с системным именем атрибута сообщения,</span></code> <br/><code><span class="c1">-- значение которого будет подставлено в запрос</span></code> <br/><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">TableName</span> <span class="k">WHERE</span> <span class="n">Id</span><span class="o">=</span><span class="err">{</span><span class="n">my_id</span><span class="err">}</span></code></pre>
+</div>
+</li>
+<li>задайте атрибут для хранения полученного результата;</li>
+<li>задайте тип возвращаемого результата:
+<ul>
+<li><strong>без результата</strong>;</li>
+<li><strong>набор записей</strong>;</li>
+<li><strong>скалярное значение</strong> (возвращаемое скалярной функцией SQL).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Настройка приложения для обмена данными с СУБД MySQL, MSSQL, Oracle и PostgreSQL осуществляется аналогичным образом.</p>
+<p>См. также статью <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2498">Внешняя СУБД (MySQL, MSSQL, Oracle, Postgres). Отправка SQL-запроса. Настройка подключения, пути передачи данных и сценария</a>».</em></p>
+<h2 id="mcetoc_1i69kpsv21">Прикладная задача</h2>
+<p>При наступлении заданного таймера <strong>Comindware Business Application Platform</strong> должна отправлять запрос <code>SELECT</code> во внешнюю СУБД и помещать полученные из таблицы <code>cities</code> записи с названиями городов в шаблон записи <em>«Города»</em> в приложении.</p>
+<h3 id="mcetoc_1i69kpsv22">Исходные данные</h3>
+<p>Внешняя БД содержит таблицу <code>cities</code> с одним столбцом:</p>
+<ul>
+<li><code>Name</code> типа <code>TINYTEXT</code> — название города.</li>
+</ul>
+<p>В приложении имеется шаблон записи <em>«Города»</em> с атрибутом:</p>
+<ul>
+<li><em>Город</em>
+<ul>
+<li><strong>Тип данных: текст</strong>:</li>
+<li><strong>Использовать как заголовок записей</strong>: флажок установлен</li>
+</ul>
+</li>
+</ul>
+<h2 id="mcetoc_1i69kpsv23">Подготовка сервера СУБД</h2>
+<p>Перед подключением из <strong>Comindware Business Application Platform</strong> необходимо подготовить конфигурацию сервера СУБД, как указано ниже.</p>
+<p>Настройка серверов MySQL, MSSQL и Oracle осуществляется аналогично.</p>
+<h3 id="mcetoc_1i69kpsv24">Настройка конфигурации сервера PostgreSQL</h3>
+<ol class="colored_numbers_list">
+<li>
+<p>Откройте для редактирования файл <code>postgresql.conf</code>.</p>
+<ul>
+<li>
+<p>В ОС Linux путь к этому файлу можно узнать с помощью следующей команды:</p>
+<div class="highlight"><code></code>
+<pre><code>sudo -u postgres psql -c <span class="s1">'SHOW config_file'</span></code></pre>
+</div>
+</li>
+<li>
+<p>В ОС Windows путь к файлу по умолчанию:</p>
+<div class="highlight"><code></code>
+<pre><code><span class="n">C</span><span class="p">:\</span><span class="n">ProgramData</span><span class="p">\</span><span class="n">PostgreSQL</span><span class="p">\</span><span class="n">X</span><span class="p">.</span><span class="n">X</span><span class="p">\</span><span class="n">data</span><span class="p">\</span><span class="n">postgresql</span><span class="p">.</span><span class="n">conf</span></code></pre>
+</div>
+<p>Здесь <code>X.X</code> — номер версии PostgreSQL.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>В файле <code>postgresql.conf</code> добавьте следующие директивы:</p>
+<ul>
+<li>
+<p>Разрешите подключение со всех IP адресов:</p>
+<div class="highlight"><code></code>
+<pre><code><span class="nv">listen_addresses</span> <span class="o">=</span> <span class="s1">'*'</span></code></pre>
+</div>
+</li>
+<li>
+<p>Задайте локаль для вывода сообщений об ошибках:</p>
+<div class="highlight"><code></code>
+<pre><code><span class="nv">lc_messages</span> <span class="o">=</span> <span class="s1">'en_EN.utf-8'</span></code></pre>
+</div>
+</li>
+</ul>
+</li>
+<li>
+<p>Откройте для редактирования конфигурационный файл <code>pg_hba.conf</code> (в той же директории, что файло <code>postgresql.conf</code>).</p>
+</li>
+<li>
+<p>В файле <code>pg_hba.conf</code> разрешите подключение с адреса сервера <strong>Comindware Business Application Platform</strong> (например, <code>123.45.67.89</code>):</p>
+<div class="highlight"><code></code>
+<pre><code><span class="n">host</span>    <span class="n">all</span>    <span class="n">all</span>    <span class="m">123.45</span><span class="p">.</span><span class="m">67.89</span>    <span class="n">md5</span></code></pre>
+</div>
+</li>
+<li>
+<p>Перезапустите службу <code>postgresql</code>: <br/><strong>Linux</strong></p>
+<div class="highlight"><code></code>
+<pre><code>sudo systemctl<span class="w"> </span>restart<span class="w"> </span>postgresql</code></pre>
+</div>
+<p><strong>Windows</strong></p>
+<div class="highlight"><code></code>
+<pre><code><span class="n">net</span> <span class="n">stop</span> <span class="n">postgresql-x64</span><span class="p">-&lt;</span><span class="n">номер_версии</span><span class="p">&gt;</span></code> <br/><code><span class="n">net</span> <span class="nb">start </span><span class="n">postgresql-x64</span><span class="p">-&lt;</span><span class="n">номер_версии</span><span class="p">&gt;</span></code></pre>
+</div>
+</li>
+</ol>
+<h2 id="mcetoc_1i69kpsv25">Создание подключения к СУБД</h2>
+<ol class="colored_numbers_list">
+<li>Откройте страницу «<strong>Администрирование</strong>» – «<strong>Подключения</strong>».</li>
+<li>
+<p>Создайте <strong>SQL-подключение</strong> типа «<strong>Получение данных из СУБД</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Меню создания подключения для получения данных из СУБД" src="https://kb.comindware.ru/assets/sql_receive_connection_menu.png"/>
+<figcaption class="caption">Меню создания подключения для получения данных из СУБД</figcaption>
+</figure>
+</li>
+<li>
+<p>В поле «<strong>Системное имя</strong>» введите уникальное имя подключения, например <code>RequestDataFromDBConnection</code>.</p>
+</li>
+<li>В поле «<strong>Описание</strong>» введите наглядное описание назначения подключения, например <em>«Подключение для запроса данных из СУБД»</em>.</li>
+<li>В поле «<strong>Запись в файловые журналы</strong>» укажите, какие события при обмене данными с сервером СУБД следует регистрировать в журнале:
+<ul>
+<li><strong>Полные сведения об обработке сообщения</strong></li>
+<li><strong>Только ошибки</strong></li>
+<li><strong>Отключить</strong></li>
+</ul>
+</li>
+<li>
+<p>В поле «<strong>Строка подключения</strong>» введите адрес сервера, имя базы данных, имя пользователя и пароль для подключения к СУБД: <br/><strong>MySQL</strong></p>
+<div class="highlight"><code></code>
+<pre><code><span class="nv">Server</span><span class="o">=</span>ServerAddress<span class="p">;</span><span class="nv">Database</span><span class="o">=</span>DataBaseName<span class="p">;</span><span class="nv">Uid</span><span class="o">=</span>Username<span class="p">;</span><span class="nv">Pwd</span><span class="o">=</span>Password<span class="p">;</span></code></pre>
+</div>
+<p><strong>MSSQL</strong></p>
+<div class="highlight"><code></code>
+<pre><code><span class="nv">Server</span><span class="o">=</span>ServerAddress<span class="p">;</span><span class="nv">Database</span><span class="o">=</span>DataBaseName<span class="p">;</span>User <span class="nv">Id</span><span class="o">=</span>Username<span class="p">;</span><span class="nv">Pwd</span><span class="o">=</span>Password<span class="p">;</span></code></pre>
+</div>
+<p><strong>Oracle</strong></p>
+<div class="highlight"><code></code>
+<pre><code>Data <span class="nv">Source</span><span class="o">=</span>DataBaseName<span class="p">;</span>User <span class="nv">Id</span><span class="o">=</span>Username<span class="p">;</span><span class="nv">Password</span><span class="o">=</span>Password<span class="p">;</span>Integrated <span class="nv">Security</span><span class="o">=</span>no<span class="p">;</span></code></pre>
+</div>
+<p><strong>PostgreSQL</strong></p>
+<div class="highlight"><code></code>
+<pre><code><span class="nv">Host</span><span class="o">=</span>ServerAddress<span class="p">;</span><span class="nv">Database</span><span class="o">=</span>DataBaseName<span class="p">;</span>User <span class="nv">ID</span><span class="o">=</span>Username<span class="p">;</span><span class="nv">Password</span><span class="o">=</span>Password<span class="p">;</span></code></pre>
+</div>
+</li>
+<li>
+<p>В поле «<strong>Интервал опроса</strong>» укажите периодичность автоматической отправки SQL-запросов в СУБД для получения из неё данных. Интервал опроса необходимо указать, чтобы настроить сценарий на срабатывание по событию «<strong>Получение сообщения</strong>».</p>
+</li>
+<li>
+<p>В поле «<strong>Система управления базами данных</strong>» выберите тип СУБД:</p>
+<ul>
+<li><strong>MySQL</strong></li>
+<li><strong>MSSQL</strong></li>
+<li><strong>Oracle</strong></li>
+<li><strong>PostgreSQL</strong></li>
+</ul>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Проверить соединение</strong>».</p>
+</li>
+<li>
+<p>Если проверка соединения не выдала ошибок, нажмите кнопку «<strong>Создать</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Сообщение об успешной проверке соединения" src="https://kb.comindware.ru/assets/sql_receive_connection_check.png"/>
+<figcaption class="caption">Сообщение об успешной проверке соединения</figcaption>
+</figure>
+</li>
+</ol>
+<h2 id="mcetoc_1i69kpsv26">Создание пути получения данных из СУБД</h2>
+<ol class="colored_numbers_list">
+<li>Со страницы «<strong>Администрирование</strong>» приложения перейдите в раздел «<strong>Пути передачи данных</strong>».</li>
+<li>
+<p>Создайте <strong>путь передачи данных</strong> типа «<strong>SQL-подключение — Получение данных из СУБД</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Меню создания пути передачи данных СУБД" src="https://kb.comindware.ru/assets/sql_receive_connection_menu_creation.png"/>
+<figcaption class="caption">Меню создания пути передачи данных СУБД</figcaption>
+</figure>
+</li>
+<li>
+<p>В поле «<strong>Подключение</strong>» выберите ранее созданное подключение к СУБД, например <em>«Подключение для запроса данных из СУБД»</em>.</p>
+</li>
+<li>В поле «<strong>Системное имя</strong>» введите уникальное имя пути передачи данных, например <code>RequestDataFromDBCommunicationRoute</code>.</li>
+<li>В поле «<strong>Описание</strong>» введите наглядное описание пути передачи данных, например <em>«Путь для запроса данных из СУБД»</em>.</li>
+<li>Откройте вкладку «<strong>Атрибуты сообщений</strong>».</li>
+<li>В поле «<strong>Тип сообщения</strong>» выберите пункт «<strong>Выполнить запрос SELECT</strong>».</li>
+<li id="message_attributes">В области «<strong>Запрос</strong>» нажмите кнопку «<strong>Добавить</strong>», чтобы создать:
+<ul>
+<li>атрибут <code>City</code> типа «<strong>Объект</strong>» с установленным флажком «<strong>Массив</strong>» — этот атрибут будет содержать массив названий городов, полученных из внешней БД (системное имя этого атрибута может быть любым).</li>
+</ul>
+</li>
+<li>
+<p>В таблице атрибутов установите флажок у атрибута <code>City</code> и нажмите кнопку «<strong>Добавить</strong>», чтобы создать:</p>
+<ul>
+<li>вложенный атрибут <code>Name</code> типа «<strong>Строка</strong>» — этот атрибут будет содержать название города, и его системное имя должно совпадать с именем столбца с названиями городов в таблице, полученной из внешней БД.</li>
+</ul>
+<figure class="screenshot_with_caption"><img alt="Настройка атрибутов сообщений для пути передачи данных" src="https://kb.comindware.ru/assets/sql_receive_connection_attributes_settings.png"/>
+<figcaption class="caption">Настройка атрибутов сообщений для пути передачи данных</figcaption>
+</figure>
+</li>
+<li>
+<p>Откройте вкладку «<strong>Интеграция</strong>».</p>
+</li>
+<li>В поле «<strong>Атрибут для хранения полученных записей</strong>» укажите системное имя  атрибута <code>City</code>, созданного на вкладке «<strong><a class="mkdocs_imported_link" href="#message_attributes">Атрибуты сообщений</a></strong>».</li>
+<li>
+<p>В поле «<strong>SQL-запрос</strong>» введите запрос для получения записей с названиями городов из внешней БД, указав имя таблицы с названиями городов, которые будут помещены в атрибут <code>Name</code>, созданный на <a class="mkdocs_imported_link" href="#message_attributes">шаге 8</a>. Например:</p>
+<div class="highlight"><code></code>
+<pre><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">cities</span></code></pre>
+</div>
+</li>
+<li>
+<p>Сохраните путь для получения данных из СУБД.</p>
+<figure class="screenshot_with_caption"><img alt="Настройка параметров интеграции пути получения данных из СУБД" src="https://kb.comindware.ru/assets/sql_receive_connection_parametres_settings.png"/>
+<figcaption class="caption">Настройка параметров интеграции пути получения данных из СУБД</figcaption>
+</figure>
+</li>
+</ol>
+<h2 id="mcetoc_1i69kpsv27">Создание сценария для получения данных из СУБД</h2>
+<ol class="colored_numbers_list">
+<li>Со страницы «<strong>Администрирование</strong>» приложения перейдите в раздел «<strong>Сценарии</strong>».</li>
+<li>Создайте новый сценарий, нажав кнопку «<strong>Создать</strong>».</li>
+<li>
+<p>Настройте свойства сценария:</p>
+<ul>
+<li><strong>Название</strong> — введите наглядное название сценария, например <em>«Получение названий городов из СУБД»</em>.</li>
+<li><strong>Системное имя</strong> — введите уникальное имя сценария, например <code>getCityNamesFromDB</code>.</li>
+<li><strong>Контекст выполнения</strong> — выберите пункт «<strong>От имени системы</strong>».</li>
+</ul>
+</li>
+<li>
+<p>Сохраните сценарий.</p>
+</li>
+<li>Откройте конструктор сценария, дважды нажав строку созданного сценария в списке сценариев.</li>
+<li>
+<p>В отобразившемся конструкторе сценария нажмите кнопку изменить на элемент «<strong>Нажатие кнопки</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Переход к свойствам элемент сценария" src="https://kb.comindware.ru/assets/sql_receive_connection_scenario_properties_transfer.png"/>
+<figcaption class="caption">Переход к свойствам элемент сценария</figcaption>
+</figure>
+</li>
+<li>
+<p id="start_event">Настройте свойства события:</p>
+<ul>
+<li>Смените «<strong>Тип</strong>» на «<strong>Получение сообщения</strong>».</li>
+<li><strong>Контекстный шаблон</strong> — укажите шаблон записи <em>«Города»</em>, в который необходимо записать названия городов, полученные из внешней БД.</li>
+<li><strong>Подключение</strong> — выберите ранее созданное <em>Подключение для запроса данных из СУБД</em>.</li>
+<li><strong>Путь передачи данных</strong> — выберите ранее созданный <em>Путь для запроса данных из СУБД</em>.</li>
+<li><strong>Имя переменной</strong> — введите имя переменной (это имя может быть любым), в которую будут передаваться данные, полученные из внешней БД, например <code>CityRecords</code>.</li>
+</ul>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Добавить действие</strong>» под элементом «<strong>Получение сообщения</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Добавление действия в сценарий" src="https://kb.comindware.ru/assets/sql_receive_connection_scenario_add.png"/>
+<figcaption class="caption">Добавление действия в сценарий</figcaption>
+</figure>
+</li>
+<li>
+<p id="object_cycle">Добавьте действие «<strong>Повторять по количеству объектов</strong>» и настройте его:</p>
+<ul>
+<li>В поле «<strong>Переменная</strong>» введите наглядное имя переменной для итераций в цикле, например <code>record</code>;</li>
+<li>
+<p>В поле «<strong>Атрибут или выражение для поиска объектов</strong>» введите следующее выражение:</p>
+<ul>
+<li>
+<p><strong>Формула</strong></p>
+<div class="highlight"><code></code>
+<pre><code><span class="err">$$</span><span class="n">CityRecords</span><span class="o">-&gt;</span><span class="n">City</span></code></pre>
+</div>
+</li>
+<li>
+<p><strong>N3</strong></p>
+<div class="highlight"><code></code>
+<pre><code><span class="k">@prefix</span> <span class="nn">session:</span> <span class="nv">&lt;http://comindware.com/ontology/session#&gt;</span><span class="p">.</span> </code> <br/><code><span class="k">@prefix</span> <span class="nn">var:</span> <span class="nv">&lt;http://comindware.com/ontology/session/variable#&gt;</span><span class="p">.</span> </code> <br/><code><span class="p">{</span> </code> <br/><code>    <span class="nn">session</span><span class="p">:</span><span class="nt">context</span> <span class="nn">var</span><span class="p">:</span><span class="nt">CityRecords</span> <span class="err">?message</span><span class="p">.</span> </code> <br/><code>    <span class="err">?message</span> <span class="nn">var</span><span class="p">:</span><span class="nt">City</span> <span class="err">?value</span><span class="p">.</span> </code> <br/><code><span class="p">}</span></code></pre>
+</div>
+</li>
+<li>
+<p>Здесь:</p>
+<ul>
+<li><code>CityRecords</code> — <strong>имя переменной</strong>, указанное в свойствах свойствах события «<a class="mkdocs_imported_link" href="#start_event"><strong>Получение сообщения</strong></a>».</li>
+<li><code>City</code> — системное имя атрибута-массива, созданного <a class="mkdocs_imported_link" href="#message_attributes">на вкладке «<strong>Атрибуты сообщений</strong>»</a> в свойствах пути передачи данных.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Сохраните действие «<strong>Повторять по количеству объектов</strong>».</p>
+</li>
+</ul>
+<figure class="screenshot_with_caption"><img alt="Настройка цикла по количеству объектов в сценарии" src="https://kb.comindware.ru/assets/sql_receive_connection_scenario_cycle_settings.png"/>
+<figcaption class="caption">Настройка цикла по количеству объектов в сценарии</figcaption>
+</figure>
+</li>
+<li>
+<p id="create_record">Добавьте в действие «<strong>Повторять по количеству объектов</strong>» вложенное действие «<strong>Создать запись</strong>» и настройте его:</p>
+<ul>
+<li>В поле «<strong>Целевой шаблон записи</strong>» выберите шаблон, в котором требуется создавать записи с данными, полученными из внешней БД.</li>
+<li>Сохраните действие «<strong>Создать запись</strong>».</li>
+</ul>
+<figure class="screenshot_with_caption"><img alt="Настройка действия «Создать запись» в сценарии" src="https://kb.comindware.ru/assets/sql_receive_connection_scenario_create_record_settings.png"/>
+<figcaption class="caption">Настройка действия «Создать запись» в сценарии</figcaption>
+</figure>
+</li>
+<li>
+<p>Добавьте в действие «<strong>Создать запись</strong>» вложенное действие «<strong>Изменить значения атрибутов</strong>» и настройте его.</p>
+<ul>
+<li>Нажмите кнопку «<strong>Создать</strong>».</li>
+<li>В столбце «<strong>Атрибут</strong>» выберите атрибут указанного в <a class="mkdocs_imported_link" href="#create_record">действии «Создать запись»</a> шаблона, в который будут помещаться названия городов, полученные из внешней БД.</li>
+<li>В столбце «<strong>Операция со значениями</strong>» выберите пункт «<strong>Заменить</strong>».</li>
+<li>
+<p>В поле «<strong>Значение</strong>» введите следующее выражение:</p>
+<ul>
+<li>
+<p><strong>Формула</strong></p>
+<div class="highlight"><code></code>
+<pre><code><span class="err">$$</span><span class="n">record</span><span class="o">-&gt;</span><span class="n">Name</span></code></pre>
+</div>
+</li>
+<li>
+<p><strong>N3</strong></p>
+<div class="highlight"><code></code>
+<pre><code><span class="k">@prefix</span> <span class="nn">session:</span> <span class="nv">&lt;http://comindware.com/ontology/session#&gt;</span><span class="p">.</span> </code> <br/><code><span class="k">@prefix</span> <span class="nn">variable:</span> <span class="nv">&lt;http://comindware.com/ontology/session/variable#&gt;</span><span class="p">.</span> </code> <br/><code><span class="p">{</span> </code> <br/><code>    <span class="nn">session</span><span class="p">:</span><span class="nt">context</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">record</span> <span class="err">?records</span><span class="p">.</span> </code> <br/><code>    <span class="err">?records</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">Name</span> <span class="err">?value</span><span class="p">.</span> </code> <br/><code><span class="p">}</span></code></pre>
+</div>
+</li>
+<li>
+<p>Здесь:</p>
+<ul>
+<li>
+<p><code>record</code>  — имя переменной, заданное на <a class="mkdocs_imported_link" href="#object_cycle">в свойствах действия «<strong>Повторять по количеству объектов</strong>»</a>.</p>
+</li>
+<li>
+<p><code>Name</code> — системное имя строкового атрибута (в массиве <code>City</code> ), созданного <a class="mkdocs_imported_link" href="#message_attributes">на вкладке «<strong>Атрибуты сообщений</strong>»</a> в свойствах пути передачи данных.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Сохраните действие «<strong>Изменить значения атрибутов</strong>».</p>
+</li>
+</ul>
+<figure class="screenshot_with_caption"><img alt="Настройка действия «Изменить значения атрибутов» в сценарии" src="https://kb.comindware.ru/assets/sql_receive_connection_change_attributes_settings.png"/>
+<figcaption class="caption">Настройка действия «Изменить значения атрибутов» в сценарии</figcaption>
+</figure>
+</li>
+<li>
+<p>Должен получиться показанный на следующей иллюстрации сценарий.</p>
+<figure class="screenshot_with_caption"><img alt="Сценарий для сохранения данных из СУБД в шаблон записи" src="https://kb.comindware.ru/assets/sql_receive_connection_scenario.png"/>
+<figcaption class="caption">Сценарий для сохранения данных из СУБД в шаблон записи</figcaption>
+</figure>
+</li>
+</ol>
+<h2 id="mcetoc_1i69kpsv28">Тестирование сценария</h2>
+<ol class="colored_numbers_list">
+<li>Дождитесь срабатывания таймера, заданного в поле «<strong>Интервал опроса</strong>» <a class="mkdocs_imported_link" href="#создание-пути-получения-данных-из-субд">пути для получения данных из СУБД</a>.</li>
+<li>При срабатывании таймера должен сработать <a class="mkdocs_imported_link" href="#создание-сценария-для-получения-данных-из-субд">настроенный сценарий</a>.</li>
+<li>Сценарий должен создавать в шаблоне записи <em>«Города»</em> записи с названиями городов, полученных из внешней БД.</li>
+</ol>
+<h2 id="mcetoc_1i69kpsv29">Связанные статьи</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2498">Внешняя СУБД (MySQL, MSSQL, Oracle, Postgres). Отправка SQL-запроса. Настройка подключения, пути передачи данных и сценария</a></strong></p>
+</article>
+</div>
+<p><a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу</a></p>

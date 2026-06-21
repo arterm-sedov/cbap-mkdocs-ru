@@ -1,0 +1,13 @@
+<h1>Ограничение отображения кнопки при пустом исполнителе</h1><p>Для того, чтобы скрыть кнопку в Шаблоне процесса, если пустой исполнитель (например, для кнопки <em><strong>"Завершить задачу"</strong></em>), введите следующее выражение в условии:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code"> AND(NOT(EMPTY($assignee)),$cmw.taskStatus == "cmw.taskStatus.inProgress")</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span style="text-decoration: underline;"><strong>где:</strong></span></p>
+<p><strong>assignee</strong> – системное имя системного атрибута, хранящего исполнителя задачи;</p>
+<p><strong>cmw.taskStatus</strong> – системное имя системного атрибута – статуса задачи.</p>

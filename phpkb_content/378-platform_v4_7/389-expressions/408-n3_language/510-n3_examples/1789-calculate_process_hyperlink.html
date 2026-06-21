@@ -1,0 +1,12 @@
+<h1>Вычисление гиперссылки на историю процесса</h1><p>Для того, чтобы вычислить ссылку на историю текущего процесса, введите следующее выражение:</p>
+<div>
+<table class="source_code_container" style="height: 93px;" width="1548">
+<tbody>
+<tr style="height: 58px;">
+<td class="source_code" style="height: 58px; width: 1551px;">@prefix cmw: &lt;http://comindware.com/logics#&gt;.<br/>@prefix process: &lt;http://comindware.com/ontology/process#&gt;.<br/>@prefix string: &lt;http://www.w3.org/2000/10/swap/string#&gt;.<br/>@prefix configuration: &lt;http://comindware.com/ontology/configuration#&gt;.<br/>@prefix cmwlist: &lt;http://comindware.com/logics/list#&gt;.<br/>@prefix cmwstring: &lt;http://comindware.com/logics/string#&gt;.<br/>@prefix task: &lt;http://comindware.com/ontology/task#&gt;.<br/>{<br/>    once <br/>    {<br/>        ?task task:objectId ?item.<br/>        ?task cmw:parent ?proc.<br/>        ("{0}" ?proc) string:format ?s.<br/>        ("." ?s) cmwstring:split ?resultlist.<br/>        (?resultlist 1) cmwlist:at ?resultString.<br/>        ("#process/{0}/map'&gt;Ссылка на процесс&lt;/a&gt;" ?resultString) string:format ?tempLink2.   <br/>        ?configObject a configuration:Configuration.<br/>        ?configObject configuration:baseUri ?addressLink.<br/>        ("&lt;a href='{0}" ?addressLink) string:format ?tempLink1.    <br/>        (?tempLink1 ?tempLink2) string:concatenation ?resultLink.<br/>        ?resultLink == ?value.<br/>    }<br/>}</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span style="text-decoration: underline;"><strong>где:</strong></span></p>
+<p><strong>Ссылка на процесс</strong> <span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">– название для отображаемой ссылки.</span></p>

@@ -1,0 +1,242 @@
+<h1>Отправка HTTP-запросов типа GET. Пример: настройка подключения, пути передачи данных и сценария для обработки запросов в формате JSON</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#прикладная-задача"> <span class="md-ellipsis"> Прикладная задача </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-подключения"> <span class="md-ellipsis"> Настройка подключения </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-пути-передачи-данных"> <span class="md-ellipsis"> Настройка пути передачи данных </span> </a><nav aria-label="Настройка пути передачи данных" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#основные-свойства"> <span class="md-ellipsis"> Основные свойства </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#атрибуты-сообщений"> <span class="md-ellipsis"> Атрибуты сообщений </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#интеграция"> <span class="md-ellipsis"> Интеграция </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-сценария-отправки-http-запроса"> <span class="md-ellipsis"> Настройка сценария отправки HTTP-запроса </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p><strong>Comindware Business Application Platform</strong> позволяет отправлять HTTP-запросы типов <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code> для взаимодействия с внешними системами.</p>
+<p>Здесь представлен пример настройки подключения, пути передачи данных и <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2151">сценария</a> для отправки HTTP-запросов типа <code>GET</code> в формате JSON и записи данных из ответа сервера в атрибуты шаблона записи.</p>
+<p>Настройка для обработки данных в формате XML и простого текста будет аналогичной.</p>
+<h2 id="прикладная-задача">Прикладная задача</h2>
+<p>Здесь мы рассмотрим настройку отправки GET-запросов на сервер <em>http://example.com</em>.</p>
+<p>Во всех примерах подставьте реальный адрес своего сервера вместо <code>http://example.com/api</code></p>
+<ul>
+<li>Базовый URL для HTTP-запросов: <code>http://example.com/api</code></li>
+<li>Путь для запроса данных заказов: <code>http://example.com/api/orders</code></li>
+<li><a class="mkdocs_imported_link" href="#настройка-сценария-отправки-http-запроса">Сценарий</a> формирует и отправляет HTTP-запрос на сервер и записывает полученные данные в атрибуты.</li>
+<li>Запрос содержит параметры <code>orderDate</code> с датой создания заказов и <code>clientName</code> с идентификатором клиента.</li>
+<li>В ответ на запрос сервер возвращает JSON-ответ с массивом данных заказов следующего вида:</li>
+</ul>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="p">{</span></code><br/><code>    <span class="s2">"error"</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span></code><br/><code>    <span class="s2">"status"</span><span class="o">:</span> <span class="s2">"ok"</span><span class="p">,</span></code><br/><code>    <span class="s2">"statusCode"</span><span class="o">:</span> <span class="mf">200</span><span class="p">,</span></code><br/><code>    <span class="s2">"orders"</span><span class="o">:</span> <span class="p">[</span></code><br/><code>        <span class="p">{</span></code><br/><code>         <span class="s2">"orderAmount"</span><span class="o">:</span> <span class="mf">1000</span><span class="p">,</span></code><br/><code>         <span class="s2">"orderNumber"</span><span class="o">:</span> <span class="s2">"Order-1"</span><span class="p">,</span></code><br/><code>         <span class="s2">"orderStatus"</span><span class="o">:</span> <span class="s2">"Fulfilled"</span></code><br/><code>        <span class="p">},</span></code><br/><code>        <span class="p">{</span></code><br/><code>         <span class="s2">"orderAmount"</span><span class="o">:</span> <span class="mf">5000</span><span class="p">,</span></code><br/><code>         <span class="s2">"orderNumber"</span><span class="o">:</span> <span class="s2">"Order-2"</span><span class="p">,</span></code><br/><code>         <span class="s2">"orderStatus"</span><span class="o">:</span> <span class="s2">"Canceled"</span></code><br/><code>        <span class="p">},</span></code><br/><code>     <span class="p">]</span></code><br/><code><span class="p">}</span></code></pre>
+</div>
+<h2 id="настройка-подключения">Настройка подключения</h2>
+<ol class="colored_numbers_list">
+<li>Откройте раздел «<strong>Администрирование</strong>» — «<strong>Подключения</strong>».</li>
+<li>
+<p>В меню «<strong>Создать</strong>» выберите пункт «<strong>Подключения REST и OData</strong>» — «<strong>Отправка HTTP-запросов</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Создание подключения для отправки HTTP-запросов" src="https://kb.comindware.ru/assets/send_http_example_create.png"/>
+<figcaption class="caption">Создание подключения для отправки HTTP-запросов</figcaption>
+</figure>
+</li>
+<li>
+<p>Настройте подключение для отправки HTTP-запросов со следующими параметрами:</p>
+<ul>
+<li><strong>URI</strong> — http://example.com/api. Символ <code>/</code> в конце URI не требуется.</li>
+<li><strong>Формат данных</strong> — <strong>JSON</strong>. Также поддерживаются <strong>XML</strong> и <strong>простой текст</strong>, но здесь рассматривается обработка данных в формате JSON.</li>
+</ul>
+</li>
+<li>
+<p>Остальные параметры подключения настройте в соответствии с используемым сервером. См. статью «<em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2508">Отправка HTTP-запросов. Настройка подключения</a></em>».</p>
+</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Настройка подключения для отправки HTTP-запросов" src="https://kb.comindware.ru/assets/send_http_example_settings.png"/></p>
+<figcaption class="caption">Настройка подключения для отправки HTTP-запросов</figcaption>
+</figure>
+<h2 id="настройка-пути-передачи-данных">Настройка пути передачи данных</h2>
+<ol class="colored_numbers_list">
+<li>Откройте раздел «<strong>Администрирование</strong>» — «<strong>Пути передачи данных</strong>».</li>
+<li>
+<p>В меню «<strong>Создать</strong>» выберите пункт «<strong>Подключения REST и OData</strong>» — «<strong>Отправка HTTP-запросов</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Создание пути передачи данных для отправки HTTP-запросов" src="https://kb.comindware.ru/assets/send_http_example_path_create.png"/>
+<figcaption class="caption">Создание пути передачи данных для отправки HTTP-запросов</figcaption>
+</figure>
+</li>
+<li>
+<p>Настройте путь передачи данных для отправки HTTP-запросов на вкладках «<strong>Основные свойства</strong>», «<strong>Атрибуты сообщений</strong>», «<strong>Интеграция</strong>».</p>
+</li>
+</ol>
+<h3 id="основные-свойства">Основные свойства</h3>
+<ul>
+<li><strong>Подключение</strong> — выберите ранее созданное <a class="mkdocs_imported_link" href="#настройка-подключения">подключение для отправки HTTP-запросов</a>.</li>
+<li><strong>Системное имя</strong> — введите системное имя пути передачи данных латинскими буквами.</li>
+<li><strong>Отключить</strong> — установите этот флажок, если требуется деактивировать путь передачи данных.</li>
+<li><strong>Описание</strong> — введите наглядное описание назначения пути передачи данных.</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Настройка подключения для отправки HTTP-запросов" src="https://kb.comindware.ru/assets/send_http_example_new_path.png"/></p>
+<figcaption class="caption">Настройка подключения для отправки HTTP-запросов</figcaption>
+</figure>
+<h3 id="атрибуты-сообщений">Атрибуты сообщений</h3>
+<ul>
+<li><strong>Тип сообщения</strong> — выберите пункт «<strong>Отправка HTTP-запросов</strong>».</li>
+<li>
+<p><strong>Запрос</strong> — добавьте атрибут <code>queryParams</code> (произвольное системное имя, которое будет указано в поле «<strong>Атрибут для параметров запроса</strong>» на вкладке «<a class="mkdocs_imported_link" href="#интеграция"><strong>Интеграция</strong></a>» и в действии сценария «<strong>Изменить значения переменных</strong>») типа «<strong>Объект</strong>».</p>
+<ul>
+<li>Установите флажок «<strong>Массив</strong>».</li>
+<li>
+<p>Установите флажок у атрибута <code>queryParams</code> и добавьте его дочерние атрибуты:</p>
+<ul>
+<li><code>name</code> (предопределённое системное имя) типа «<strong>Строка</strong>» — этот атрибут будет содержать имена параметров запроса.</li>
+<li>value (предопределённое системное имя) типа «<strong>Строка</strong>» — этот атрибут будет содержать значения параметров запроса.</li>
+</ul>
+<p>В эти атрибуты будут передаваться пары ключ-значение параметров запроса.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Ответ</strong> — добавьте атрибут с системным именем <code>orders</code> (совпадает с именем массива данных заказов в ответе сервера на HTTP-запрос) типа «<strong>Объект</strong>».</p>
+<ul>
+<li>Установите флажок «<strong>Массив</strong>»</li>
+<li>
+<p>Установите флажок у атрибута <code>orders</code> и добавьте его дочерние атрибуты:</p>
+<ul>
+<li>orderAmount (совпадает с именем параметра из ответа сервера) типа «<strong>Число</strong>» — этот атрибут будет содержать сумму заказа.</li>
+<li>orderNumber  (совпадает с именем параметра из ответа сервера) типа «<strong>Строка</strong>» — этот атрибут будет содержать номер заказа.</li>
+<li>orderStatus (совпадает с именем параметра из ответа сервера) типа «<strong>Строка</strong>» — этот атрибут будет содержать статус заказа. В эти атрибуты будут записываться значения из ответа сервера на запрос.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Ответ с ошибкой</strong> — настройте атрибуты для получения ответа сервера с ошибкой аналогично атрибутам <strong>запроса</strong> и <strong>ответа</strong>.</p>
+</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Настройка атрибутов сообщения в свойствах пути передачи данных для отправки HTTP-запросов" src="https://kb.comindware.ru/assets/send_http_example_attribute_settings.png"/></p>
+<figcaption class="caption">Настройка атрибутов сообщения в свойствах пути передачи данных для отправки HTTP-запросов</figcaption>
+</figure>
+<h3 id="интеграция">Интеграция</h3>
+<ul>
+<li><strong>Метод запроса</strong> — выберите пункт «<strong>GET</strong>».</li>
+<li><strong>Шаблон пути запроса</strong> — введите <code>orders</code> (фактический путь к HTTP-запросу на сервере), этот суффикс будет добавлен к <strong>URI</strong>, указанному в <a class="mkdocs_imported_link" href="send_http_connection.html">свойствах подключения для отправки HTTP-запросов</a>. Например, для <strong>URI</strong> <code>http://example.com/api</code> результирующий путь запроса будет <code>http://example.com/api/orders</code>.</li>
+<li><strong>Атрибут для сериализации в тело запроса</strong> — этот атрибут используется для методов <code>POST</code> и <code>PUT</code>, в него следует вводить через запятую системные имена атрибутов из таблицы «<strong>Запрос</strong>» на вкладке «<strong>Атрибуты сообщений</strong>». В данной статье это поле не используется.</li>
+<li>
+<p><strong>Атрибут для параметров запроса</strong> — введите системное имя атрибута из таблицы «<strong>Запрос</strong>» на вкладке «<strong>Атрибуты сообщений</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Настройка интеграции в свойствах пути передачи данных для отправки HTTP-запросов" src="https://kb.comindware.ru/assets/send_http_example_integration_settings.png"/>
+<figcaption class="caption">Настройка интеграции в свойствах пути передачи данных для отправки HTTP-запросов</figcaption>
+</figure>
+</li>
+<li>
+<p><strong>Атрибуты для десериализации ответа без ошибки</strong> и  <strong>Атрибуты для десериализации ответа с ошибкой</strong> </p>
+<ul>
+<li>
+<p>Создайте одну строку в каждой таблице и введите символ <code>$</code> в столбцы «<strong>Путь к атрибуту</strong>» и «<strong>Выражение на языке запросов</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Настройка атрибутов для десериализации ответа в пути передачи данных для отправки HTTP-запросов" src="https://kb.comindware.ru/assets/send_http_example_attribute_serialization_settings.png"/>
+<figcaption class="caption">Настройка атрибутов для десериализации ответа в пути передачи данных для отправки HTTP-запросов</figcaption>
+</figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="настройка-сценария-отправки-http-запроса">Настройка сценария отправки HTTP-запроса</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2151">сценарий</a>, например, выполняющийся по нажатию кнопки.</p>
+<figure class="screenshot_with_caption"><img alt="Исходный сценарий, выполняющийся по нажатию кнопки" src="https://kb.comindware.ru/assets/send_http_example_scenario.png"/>
+<figcaption class="caption">Исходный сценарий, выполняющийся по нажатию кнопки</figcaption>
+</figure>
+</li>
+<li>
+<p>В свойствах автоматически созданного действия «<strong>Сменить контекст</strong>» укажите <strong>целевой шаблон записи</strong>, содержащий атрибуты для HTTP-запроса и ответа.</p>
+<figure class="screenshot_with_caption"><img alt="Настройка контекстного шаблона для отправки HTTP-запроса" src="https://kb.comindware.ru/assets/send_http_example_template_settings.png"/>
+<figcaption class="caption">Настройка контекстного шаблона для отправки HTTP-запроса</figcaption>
+</figure>
+</li>
+<li>
+<p>Добавьте и настройте действие «<strong>Изменить значения переменных</strong>».</p>
+<ul>
+<li><strong>Операция со значениями переменных</strong> — <strong>Добавить.</strong></li>
+<li><strong>Набор переменных</strong> — <code>queryParamsContainer</code> (произвольное системное имя), из этого массива последующее действие «<strong>Отправить сообщение</strong>» передаст параметры в HTTP-запрос.</li>
+<li>
+<p>В таблице атрибутов создайте два атрибута <code>queryParams</code> (это системное имя массива атрибутов <strong>запроса</strong>, указанное на вкладке «<a class="mkdocs_imported_link" href="#атрибуты-сообщений"><strong>Атрибуты сообщений</strong></a>» в свойствах пути передачи данных), которые будут содержать пары ключ-значение для параметров HTTP-запроса в двух дочерних атрибутах:</p>
+<ul>
+<li><code>name</code> — введите формулу с именем параметра HTTP-запроса (например, <code>"orderDate"</code>, <code>"clientName"</code>).</li>
+<li>
+<p><code>value</code> — введите <strong>формулу</strong>, выражение на <strong>N3</strong> или выберите <strong>атрибут</strong> с необходимым значением параметра HTTP-запроса.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Чтобы передать в HTTP-запрос несколько параметров, создайте необходимое количество атрибутов с одинаковым системным именем и настройте их дочерние атрибуты.</p>
+</div>
+<figure class="screenshot_with_caption"><img alt="Настройка переменных для передачи в качестве параметров HTTP-запроса" src="https://kb.comindware.ru/assets/send_http_example_scenario_settings.png"/>
+<figcaption class="caption">Настройка переменных для передачи в качестве параметров HTTP-запроса</figcaption>
+</figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Добавьте и настройте действие «<strong>Отправить сообщение</strong>».</p>
+<ul>
+<li><strong>Подключение</strong> — выберите <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2508">подключение для отправки HTTP-запросов</a>.</li>
+<li><strong>Путь передачи данных</strong> — выберите ранее настроенный <a class="mkdocs_imported_link" href="#настройка-пути-передачи-данных">путь для передачи данных</a> HTTP-запроса.</li>
+<li><strong>Переменная с сообщением</strong> — введите системное имя <strong>набора переменных</strong>, указанное в предшествующем действии «<strong>Изменить значения переменных</strong>».</li>
+<li><strong>Переменная для успешного ответа</strong> — введите системное имя переменной, в которую будет помещён ответ сервера на HTTP-запрос, эта переменная будет использоваться в последующем действии «<strong>Повторять по количеству объектов</strong>».</li>
+<li>
+<p><strong>Переменная для ответа с ошибкой</strong> — введите системное имя переменной, в которую будет помещён ответ сервера в случае ошибки.</p>
+<figure class="screenshot_with_caption"><img alt="Настройка действия сценария для отправки HTTP-запроса" src="https://kb.comindware.ru/assets/send_http_example_scenario_settings1.png"/>
+<figcaption class="caption">Настройка действия сценария для отправки HTTP-запроса</figcaption>
+</figure>
+</li>
+</ul>
+</li>
+<li>
+<p>Добавьте и настройте действие «<strong>Повторять по количеству объектов</strong>».</p>
+<ul>
+<li><strong>Переменная</strong> — введите имя переменной, в которую будут помещены объекты, полученные из ответа на HTTP-запрос. Эта переменная будет использоваться для обращения к объектам в ответе от сервера в последующем действии «<strong>Изменить значения атрибутов</strong>».</li>
+<li>
+<p><strong>Атрибут или выражение для поиска объектов</strong> — введите <strong>формулу</strong> вида <code>$$response-&gt;orders</code>, где <code>response</code> — имя <strong>переменной для успешного ответа</strong>, указанное в свойствах действия «<strong>Отправить сообщение</strong>», <code>orders</code> — системное имя атрибута <strong>ответа</strong>, указанное на вкладке «<a class="mkdocs_imported_link" href="#атрибуты-сообщений"><strong>Атрибуты сообщений</strong></a>» в свойствах пути передачи данных.</p>
+<figure class="screenshot_with_caption"><img alt="Настройка цикла в сценарии для получения данных из ответа на HTTP-запрос" src="https://kb.comindware.ru/assets/send_http_example_scenario_cycle_settings.png"/>
+<figcaption class="caption">Настройка цикла в сценарии для получения данных из ответа на HTTP-запрос</figcaption>
+</figure>
+</li>
+</ul>
+</li>
+<li>
+<p>Внутри действия «<strong>Повторять по количеству объектов</strong>» добавьте и настройте действие «<strong>Изменить значения атрибутов</strong>».</p>
+<ul>
+<li>В таблице атрибутов добавьте атрибуты, значения которых следует заполнить из полученного ответа от сервера.</li>
+<li>
+<p>В столбце «<strong>Значение</strong>» для каждого атрибута введите <strong>формулу</strong> вида <code>$$loopiterator-&gt;objectName</code>, где <code>loopiterator</code> — имя <strong>переменной</strong>, заданное в действии «<strong>Повторять по количеству объектов</strong>», а <code>objectName</code> — имя объекта в ответе от сервера (см. <a class="mkdocs_imported_link" href="#прикладная-задача">пример ответа сервера</a>).</p>
+<figure class="screenshot_with_caption"><img alt="Настройка действия в сценарии для передачи данных из ответа на HTTP-запроса в атрибуты шаблона записи" src="https://kb.comindware.ru/assets/send_http_example_scenario_send_settings.png"/>
+<figcaption class="caption">Настройка действия в сценарии для передачи данных из ответа на HTTP-запроса в атрибуты шаблона записи</figcaption>
+</figure>
+</li>
+</ul>
+</li>
+<li>
+<p>Результирующий сценарий должен выглядеть, как показано на следующей иллюстрации.</p>
+<figure class="screenshot_with_caption"><img alt="Сценарий для отправки HTTP-запроса и получения данных из ответа сервера" src="https://kb.comindware.ru/assets/send_http_example_scenario_send.png"/>
+<figcaption class="caption">Сценарий для отправки HTTP-запроса и получения данных из ответа сервера</figcaption>
+</figure>
+</li>
+<li>
+<p>Проверьте работу приложения: сценарий должен отправлять HTTP-запрос и записывать данные из ответа сервера в атрибуты шаблона.</p>
+</li>
+</ol>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2508">Отправка HTTP-запросов. Настройка подключения</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2346">Событие и действия сценария. Определения, типы, свойства, настройка</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

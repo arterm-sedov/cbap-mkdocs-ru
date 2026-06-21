@@ -1,0 +1,74 @@
+<h1>Старт связанного процесса по нескольким записям</h1><p>Для того, чтобы запустить связанный процесс по нескольким записям (которые будут добавлены в коллекцию), введите следующее выражение:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code"> 
+<p>using System;</p>
+<p>using System.Collections.Generic;</p>
+<p>using System.Linq;</p>
+<p>using Comindware.Data.Entity;</p>
+<p>using Comindware.TeamNetwork.Api.Data;</p>
+<p>using Comindware.TeamNetwork.Api.Data.UserCommands;</p>
+<p> </p>
+<p>public class Script</p>
+<p>{</p>
+<p>public static UserCommandResult Main(UserCommandContext ucContext, Comindware.Entities entities)</p>
+<p>{</p>
+<p>var ids = ucContext.ObjectIds;</p>
+<p>if (ids == null || ids.Count() == 0)</p>
+<p>{</p>
+<p>return new UserCommandResult</p>
+<p>{</p>
+<p>Success = false,</p>
+<p>Commited = false,</p>
+<p>ResultType = UserCommandResultType.DataChange,</p>
+<p>Messages = new[]</p>
+<p>{</p>
+<p>new UserCommandMessage</p>
+<p>{</p>
+<p>Severity = SeverityLevel.Major,</p>
+<p>Text = "Протоколы не выбраны для отправки!"</p>
+<p>}</p>
+<p>}</p>
+<p>};</p>
+<p>}</p>
+<p>var protocolDataIds = new List&lt;string&gt;();</p>
+<p>foreach (var id in ids)</p>
+<p>{</p>
+<p>// if id подходит</p>
+<p>var dataFromProtocol = new Dictionary&lt;string, object&gt;{ { "Protokolispytaniy", id } };</p>
+<p>protocolDataIds.Add(Api.TeamNetwork.ObjectService.CreateWithAlias("OtpravkiprotokolavFGIS", dataFromProtocol));</p>
+<p>}</p>
+<p>var protocolDataCollection = new Dictionary&lt;string, object&gt; { { "syncDataForProtocols", protocolDataIds } };</p>
+<p>var packageId = Api.TeamNetwork.ObjectService.CreateWithAlias("SinkhronizatsiisFGIS", protocolDataCollection); // Создаем пакет по выбранным объектам</p>
+<p>var processAppId = Api.Process.ProcessAppService.GetProcessAppIdByAlias("SinkhronizatsiyasFGIS");</p>
+<p>var processInstanceId = Api.Process.ProcessObjectService.CreateWithObjectId(processAppId, null, packageId);</p>
+<p>var result = new UserCommandResult</p>
+<p>{</p>
+<p>Success = true,</p>
+<p>Commited = true,</p>
+<p>ResultType = UserCommandResultType.DataChange,</p>
+<p>Messages = new[]</p>
+<p>{</p>
+<p>new UserCommandMessage</p>
+<p>{</p>
+<p>Severity = SeverityLevel.Normal,</p>
+<p>Text = "По выбранным протоколам начата отправка"</p>
+<p>}</p>
+<p>}</p>
+<p>};</p>
+<p>return result;</p>
+<p>}</p>
+<p>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span style="text-decoration: underline;"><strong>где:</strong></span></p>
+<p><strong>Protokolispytaniy</strong> – системное имя текущего Шаблона записи;</p>
+<p><strong>OtpravkiprotokolavFGIS</strong> – системное имя Шаблона записи (технического), связанного с текущим Шаблоном записи;</p>
+<p><strong>syncDataForProtocols</strong> – системное имя атрибута Шаблона записи SinkhronizatsiisFGIS;</p>
+<p><strong>SinkhronizatsiisFGIS</strong> – системное имя Шаблона записи, где хранится коллекция записей из Шаблона записи Protokolispytaniy;</p>
+<p><strong>SinkhronizatsiyasFGIS</strong> – системное имя Шаблона процесса по Шаблону записи SinkhronizatsiisFGIS.</p>

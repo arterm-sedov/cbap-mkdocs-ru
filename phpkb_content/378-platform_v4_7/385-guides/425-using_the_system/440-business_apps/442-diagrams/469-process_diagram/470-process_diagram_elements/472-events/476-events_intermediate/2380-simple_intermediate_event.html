@@ -1,0 +1,73 @@
+<h1>Простое промежуточное событие</h1><div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1h28c0q0p0">Операции в меню элемента «Простое начальное событие»</a></li>
+<li><a href="#mcetoc_1h28c0q0p1">Свойства простого промежуточного события</a>
+<ul>
+<li><a href="#mcetoc_1h28c0q0p2">Основные</a></li>
+<li><a href="#mcetoc_1h28c0q0p3">Дополнительные</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1h28c0q0p4">Связанные статьи</a></li>
+</ul>
+</div>
+<div class="md-content">
+<p><strong>Простые промежуточные события</strong> задают вехи процесса и позволяют обнулять время жизни экземпляра процесса. Время жизни и вехи процесса используются для контроля выполнения процесса в срок и формирования соответствующих бизнес-отчетов. Токен не останавливается на этом элементе и переходит на следующий.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Простое промежуточное событие и его меню элемента" src="https://kb.comindware.ru/assets/none_intermediate_event.png"/></p>
+<p class="caption">Простое промежуточное событие и его меню элемента</p>
+</div>
+<h2 id="mcetoc_1h28c0q0p0">Операции в меню элемента «Простое начальное событие»</h2>
+<ul>
+<li><strong>Действия</strong>
+<ul>
+<li><strong>Свойства</strong> <em class="fa-light fa-gear">‌</em> — переход к окну <a class="mkdocs_imported_link" href="#mcetoc_1h28c0q0p1">свойств простого промежуточного события</a>.</li>
+<li><strong>Сценарий на выходе</strong> <em class="fa-light fa-arrow-right-from-bracket">‌</em> — переход к конструктору сценария на выходе из данного элемента.</li>
+<li><strong>Удалить</strong> <em class="fa-light fa-trash-can">‌</em> — удаление данного элемента из диаграммы процесса.</li>
+</ul>
+</li>
+<li><strong>Изменить тип</strong> — смена типа события.</li>
+<li><strong>Быстрое создание</strong> — добавление связанного элемента на диаграмму процесса.</li>
+</ul>
+<h2 id="mcetoc_1h28c0q0p1">Свойства простого промежуточного события</h2>
+<p>В окне свойств <strong>простого промежуточного события</strong> предусмотрены перечисленные ниже вкладки.</p>
+<h3 id="mcetoc_1h28c0q0p2">Основные</h3>
+<p>На этой вкладке можно настроить <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2364">общие свойства элемента диаграммы процесса</a>.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Основные свойства простого промежуточного события" src="https://kb.comindware.ru/assets/none_intermediate_event_general_properties.png"/></p>
+<p class="caption">Основные свойства простого промежуточного события</p>
+</div>
+<h3 id="mcetoc_1h28c0q0p3">Дополнительные</h3>
+<p>На этой вкладке можно настроить специфические свойства <strong>простого промежуточного события</strong>.</p>
+<ul>
+<li><strong><a id="milestone-duration"></a>Временная веха</strong> — задайте время после запуска экземпляра процесса, за которое токен должен дойти до данного события.
+<ul>
+<li>Введите фиксированное <strong>значение</strong> либо <strong>формулу</strong> или скрипт <strong>C#</strong>, возвращающие значение типа «<strong>Длительность</strong>».</li>
+<li>Это значение влияет на <strong>текущее состояние процесса</strong>, отображающееся в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2219#mcetoc_1hptfeeid6">списке его экземпляров</a>.
+<ul>
+<li>Если при наступлении данного события время жизни процесса не превышает временную веху, процесс выполняется <strong>в срок</strong>.</li>
+<li>В противном случае процесс выполняется <strong>с риском задержки</strong>.</li>
+<li>Если превышена <a class="autorefs autorefs-internal mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2387#process-duration">продолжительность выполнения процесса</a>, заданная в каком-либо <strong><a class="autorefs autorefs-internal mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2386">конечном событии</a></strong>, процесс выполняется <strong>с опозданием</strong>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><a id="instance-lifetime"></a>Обнулять время жизни процесса</strong> — установите этот флажок, чтобы при наступлении данного события обнулялся счётчик продолжительности выполнения процесса. После обнуления отсчёт всех временных вех начнётся заново.</li>
+<li><strong>Условие обнуления времени жизни процесса</strong> — введите <strong>формулу</strong> или скрипт <strong>C#</strong>, возвращающие <code>true</code>, когда требуется обнулить время жизни процесса. Если установлен флажок «<strong>Обнулять время жизни процесса</strong>» и не задано условие обнуления, то время жизни процесса будет обнуляться каждый раз при наступлении данного события.</li>
+</ul>
+<div class="screenshot_with_caption">
+<p><img alt="Дополнительные свойства простого промежуточного события" src="https://kb.comindware.ru/assets/none_intermediate_event_advanced_properties.png"/></p>
+<p class="caption">Дополнительные свойства простого промежуточного события</p>
+</div>
+<h2 id="mcetoc_1h28c0q0p4">Связанные статьи</h2>
+<p><strong><a class="autorefs autorefs-internal mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2374">События</a></strong></p>
+<p><strong><a class="autorefs autorefs-internal mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2386">Типы конечных событий</a></strong></p>
+<p><strong><a class="autorefs autorefs-internal mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2379">Типы промежуточных событий</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2364">Общие свойства элементов диаграммы процесса</a></strong></p>
+<p><strong><a class="autorefs autorefs-internal mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2365">Элементы диаграммы процесса</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2360">Редактирование диаграммы процесса</a></strong></p>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" href="#"> <em class="fa-light fa-arrow-up">‌</em> К началу </a></div>

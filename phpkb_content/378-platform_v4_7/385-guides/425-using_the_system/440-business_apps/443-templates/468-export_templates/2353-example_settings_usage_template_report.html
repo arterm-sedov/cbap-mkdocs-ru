@@ -1,0 +1,123 @@
+<h1>Пример настройки и использования шаблона экспорта авансового отчёта</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#порядок-настройки"> <span class="md-ellipsis"> Порядок настройки </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="порядок-настройки">Порядок настройки</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте три <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2221">шаблона записи</a></strong>:</p>
+<ul>
+<li><em>Заявки</em></li>
+<li><em>Затраты</em></li>
+<li><em>Тип затрат</em></li>
+</ul>
+</li>
+<li>
+<p>В шаблоне <em>«Заявки»</em> создайте атрибуты:</p>
+<ul>
+<li><em>Номер заявки</em>
+<ul>
+<li><strong>Системное имя</strong>: <code>Nomerzayavki</code></li>
+<li><strong>Тип данных</strong>: <strong>текст</strong></li>
+</ul>
+</li>
+<li><em>Время подачи</em>
+<ul>
+<li><strong>Системное имя</strong>: <code>Datapodachi</code></li>
+<li><strong>Тип данных</strong>: <strong>дата и время</strong></li>
+</ul>
+</li>
+<li><em>Затраты</em>
+<ul>
+<li><strong>Системное имя</strong>: <code>Zatraty</code></li>
+<li><strong>Тип данных</strong>: <strong>запись</strong></li>
+<li><strong>Связанный шаблон</strong>: <em>Затраты</em></li>
+<li><strong>Хранить несколько значений</strong>: флажок установлен</li>
+</ul>
+</li>
+<li><em>Итоговая сумма затрат</em>
+<ul>
+<li><strong>Системное имя</strong>: <code>Itogovayasummazatrat</code></li>
+<li><strong>Тип данных</strong>: <strong>число</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>В шаблоне <em>«Затраты»</em> создайте атрибуты:</p>
+<ul>
+<li><em>Тип затрат</em>
+<ul>
+<li><strong>Системное имя</strong>: <code>Tipzatrat</code></li>
+<li><strong>Тип данных</strong>: <strong>запись</strong></li>
+<li><strong>Связанный шаблон</strong>: <em>Тип затрат</em></li>
+</ul>
+</li>
+<li><em>Сумма</em>
+<ul>
+<li><strong>Системное имя</strong>: <code>Summa</code></li>
+<li><strong>Тип данных</strong>: <strong>число</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>В шаблоне <em>«Тип затрат»</em> создайте атрибуты:</p>
+<ul>
+<li><em>Название</em>
+<ul>
+<li><strong>Системное имя</strong>: <code>Nazvanie</code></li>
+<li><strong>Тип данных</strong>: <strong>текст</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Вынесите созданные атрибуты на формы в шаблонах.</p>
+</li>
+<li>
+<p>Создайте несколько наглядных записей:</p>
+<ul>
+<li>справочник типов затрат;</li>
+<li>затраты с указанием их типа;</li>
+<li>заявки с указанием затрат.</li>
+</ul>
+</li>
+<li>
+<p>Создайте файл шаблона экспорта <code>advance_report.xlsx</code>, показанный на иллюстрации:</p>
+<figure class="screenshot_with_caption"><img alt="Файл шаблона экспорта «Авансовый отчёт»" src="https://kb.comindware.ru/assets/export_template_file_example_advance_report.png"/>
+<figcaption class="caption">Файл шаблона экспорта «Авансовый отчёт»</figcaption>
+</figure>
+</li>
+<li>
+<p>Создайте в шаблоне записи «<em>Заявки</em>» <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2349">шаблон экспорта</a> «<em>Авансовый отчёт</em>» с файлом <code>advance_report.xslx</code>.</p>
+</li>
+<li>Вместе с шаблоном экспорта будет автоматически создана <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2348">кнопка экспорта записи</a> «<em>Авансовый отчёт</em>».</li>
+<li>Вынесите кнопку «<em>Авансовый отчёт</em>» на форму шаблона записи «<em>Заявки</em>».</li>
+<li>Откройте любую запись шаблона «<em>Заявки</em>».</li>
+<li>Нажмите кнопку «<em>Авансовый отчёт</em>».</li>
+<li>
+<p>Браузер скачает файл следующего вида (с именем, заданным в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2349">свойствах шаблона экспорта</a>):</p>
+<figure class="screenshot_with_caption"><img alt="Файл, сформированный по шаблону экспорта" src="https://kb.comindware.ru/assets/export_template_file_result.png"/>
+<figcaption class="caption">Файл, сформированный по шаблону экспорта</figcaption>
+</figure>
+</li>
+</ol>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=1942">Настройка шаблона экспорта с использованием C#</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=1944">Настройка выгрузки нескольких коллекций и изображений</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2349">Настройка шаблона экспорта</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2352">Подготовка файла шаблона экспорта</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2348">Настройка кнопки экспорта</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

@@ -1,0 +1,57 @@
+<h1>Шаблон экспорта. Выгрузка нескольких коллекций и изображений с помощью C#</h1><p>Данная статья ориентирована на разработчиков С# скриптов. См. также: <samp data-name="aid" data-title="" data-value="1942"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>{Article-ID:1942}</span></samp>.</p>
+<p>Рассмотрим выгрузку записи в формате PDF. Будут выгружены две коллекции (в виде таблиц) и атрибут с типом данных «Изображение», содержащий изображение (изображения).</p>
+<p><strong>1.</strong> Сформируйте шаблон экспорта по примеру (приведённый образец шаблона можно найти во вложении к статье):</p>
+<div class="screenshot_with_caption">
+<p><img alt="Пример настроенного шаблона экспорта C#" class="img-responsive" height="688" src="https://kb.comindware.ru/assets/ctemplate.PNG" width="993"/></p>
+<p class="caption">Пример настроенного шаблона экспорта C#</p>
+</div>
+<p>В шаблоне поле под картинку помещено внутрь таблицы на случай, если в атрибуте будет содержаться несколько изображений.</p>
+<p><strong>2.</strong> Настройте модель данных в скрипте по примеру:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">
+<p>public class IMG</p>
+<p>{</p>
+<p>    public byte[] Image_data { get; set; }</p>
+<p>}</p>
+<p>public class TBL_1</p>
+<p>{</p>
+<p>    public string Faktor { get; set; }</p>
+<p>    public string Parametr { get; set; }</p>
+<p>    public string Value { get; set; }</p>
+<p>}</p>
+<p>public class TBL_2</p>
+<p>{</p>
+<p>    public string Destination { get; set; }</p>
+<p>    public string Order { get; set; }</p>
+<p>    public string Date { get; set; }</p>
+<p>    public string Responsible { get; set; }</p>
+<p>}</p>
+<p>public class RESULT</p>
+<p>{</p>
+<p>    public List&lt;IMG&gt; Photo_1 { get; set; }</p>
+<p>    public List&lt;TBL_1&gt; Table_1 { get; set; }</p>
+<p>    public List&lt;TBL_2&gt; Table_2 { get; set; }</p>
+<p>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Обратите внимание, что под каждую таблицу должен быть определён свой уникальный класс. </p>
+<p><strong>3.</strong> Напишите весь скрипт (пример скрипта во вложении).</p>
+<p>Комментарии к скрипту:</p>
+<ul>
+<li>Для получения данных используется API-функция GetPropertyValues, которая позволяет запрашивать из базы данных значения только необходимых атрибутов, что ускоряет работу скрипта при большом количестве данных (строки 17-23).</li>
+<li>
+<p>В строках 38-39 приведены примеры получения данных из ссылочных атрибутов.</p>
+</li>
+<li>
+<p>В строках 54, 65 приведён пример получения ФИО из атрибута с типом данных «Аккаунт».</p>
+</li>
+<li>
+<p>В строках 172, 184 реализована проверка на формат изображения (можете задать свои параметры).</p>
+</li>
+</ul>

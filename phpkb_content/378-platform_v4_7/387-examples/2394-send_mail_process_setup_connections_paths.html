@@ -1,0 +1,279 @@
+<h1>Отправка эл. почты из процесса. Настройка подключения, пути передачи данных и события на диаграмме процесса</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#порядок-настройки-отправки-эл-писем"> <span class="md-ellipsis"> Порядок настройки отправки эл. писем </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-подключения-типа-отправка-эл-почты-из-процесса"> <span class="md-ellipsis"> Настройка подключения типа «Отправка эл. почты из процесса» </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-пути-передачи-данных-типа-отправка-эл-почты-из-процесса"> <span class="md-ellipsis"> Настройка пути передачи данных типа «Отправка эл. почты из процесса» </span> </a><nav aria-label="Настройка пути передачи данных типа «Отправка эл. почты из процесса»" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#основные-свойства"> <span class="md-ellipsis"> Основные свойства </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#атрибуты-сообщения"> <span class="md-ellipsis"> Атрибуты сообщения </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#свойства-сообщения"> <span class="md-ellipsis"> Свойства сообщения </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-события-отправки-сообщения"> <span class="md-ellipsis"> Настройка события-отправки сообщения </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>На диаграмме процесса можно использовать <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2381">промежуточные</a> и <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2385">конечные</a> события для отправки электронных писем с данными бизнес-процесса.</p>
+<p>Такие письма могут содержать произвольные бизнес-данные, в отличие от системных уведомлений о пользовательских задачах.</p>
+<p>Здесь представлены инструкции по настройке подключения, пути передачи данных и события на диаграмме для отправки эл. писем из процесса.</p>
+<p>Подробный пример настройки приложения для обмена данными посредством эл. почты см. в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2515">Пример: согласование заявлений по эл. почте. Настройка подключений, путей передачи данных и диаграммы процесса</a>»</em>.</p>
+<h2 id="порядок-настройки-отправки-эл-писем">Порядок настройки отправки эл. писем</h2>
+<ol class="colored_numbers_list">
+<li><a class="mkdocs_imported_link" href="#настройка-подключения-типа-отправка-эл-почты-из-процесса">Настройте подключение</a> типа «<strong>Отправка эл. почты из процесса</strong>».</li>
+<li>
+<p>Для отправки писем из события на диаграмме процесса:</p>
+<ul>
+<li><a class="mkdocs_imported_link" href="#настройка-пути-передачи-данных-типа-отправка-эл-почты-из-процесса">Настройте путь передачи данных</a> типа «<strong>Отправка эл. почты из процесса</strong>».</li>
+<li><a class="mkdocs_imported_link" href="#настройка-события-отправки-сообщения">Настройте событие-отправку сообщения</a> на диаграмме процесса.</li>
+</ul>
+</li>
+<li>
+<p>Для отправки писем с уведомлениями о пользовательских задачах:</p>
+<ul>
+<li>В свойствах подключения «<strong>Отправка эл. почты из процесса</strong>» установите флажок «<strong>Использовать по умолчанию</strong>».</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2567">Настройте путь передачи данных</a> типа «<strong>Уведомления о задачах</strong>».</li>
+</ul>
+</li>
+</ol>
+<h2 id="настройка-подключения-типа-отправка-эл-почты-из-процесса">Настройка подключения типа «Отправка эл. почты из процесса»</h2>
+<p>Подключения типа «<strong>Отправка эл. почты из процесса</strong>» используются в <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2381">промежуточных событиях-отправки сообщений</a></strong>, <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2385">конечных событиях-отправки сообщений</a></strong>.</p>
+<ol class="colored_numbers_list">
+<li>На странице <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2191">«Администрирование» — «Подключения»</a></strong> создайте или откройте подключение типа «<strong>Отправка эл. почты из процесса</strong>».</li>
+<li>
+<p>Настройте свойства подключения:</p>
+<ul>
+<li><strong>Отключить</strong> — установите этот флажок, чтобы временно деактивировать подключение.</li>
+<li><strong>Использовать по умолчанию</strong> — установите этот флажок, чтобы использовать подключение для отправки <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2567"><strong>уведомлений о пользовательских задачах</strong></a>.</li>
+<li><strong>Название</strong> — введите наименование подключения.</li>
+<li>
+<p><strong>Протокол</strong> — выберите протокол и параметры соединения с почтовым сервером:</p>
+<ul>
+<li>
+<p><strong>SMTP</strong></p>
+<ul>
+<li><strong>Порт</strong> — введите номер порта.</li>
+<li>
+<p><strong>Защита данных</strong> — выберите протокол шифрования, который поддерживает почтовый сервер:</p>
+<ul>
+<li><strong>Нет</strong> — не использовать шифрование;</li>
+<li><strong>SSL</strong>;</li>
+<li><strong>TLS</strong>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Microsoft Exchange</strong></p>
+<ul>
+<li><strong>Домен</strong> — укажите домен для доступа к серверу Exchange.</li>
+<li><strong>Версия</strong> — выберите версию сервера Exchange.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Адрес почтового сервера</strong> — введите адрес почтового сервера.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<ul>
+<li>Для <strong>SMTP не</strong> указывайте протокол (<code>SMTP</code>, <code>HTTPS</code>, <code>HTTP</code>).</li>
+<li>Для <strong>Exchange укажите</strong> протокол (<code>HTTPS</code>, <code>HTTP</code>).</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Имя пользователя</strong> — укажите учётную запись для подключения к почтовому серверу.</p>
+</li>
+<li><strong>Пароль</strong> — введите пароль для подключения к почтовому серверу.</li>
+<li><strong>Адрес отправителя</strong> — введите адрес, от которого будут отправляться письма.</li>
+<li>
+<p><strong>Имя отправителя</strong> — введите имя, от которого будут отправляться письма.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Если <strong>адрес</strong> или <strong>имя отправителя</strong> не совпадает с адресом и именем, указанным в учётной записи, используемой для подключения к почтовому серверу, сервер должен поддерживать замену данных отправителя. В противном случае, почта не будет отправляться.</p>
+</div>
+</li>
+<li>
+<p><strong>Подтверждать адрес эл. почты</strong> — установите этот флажок, чтобы почтовый сервер проверял существование адресов получателей эл. писем перед их отправкой. Сервер должен поддерживать эту функцию, в противном случае подключение не будет работать, если установлен данный флажок.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>При необходимости проверьте соединение с сервером.</p>
+<ul>
+<li>В разделе «<strong>Тестовое соединение</strong>» в поле «<strong>Получатели</strong>» введите адреса эл. почты через запятую.</li>
+<li>Нажмите кнопку «<strong>Отправить тестовое сообщение</strong>».</li>
+<li>Удостоверьтесь, что получателям пришло тестовое сообщение от настроенного отправителя.</li>
+</ul>
+</li>
+<li>
+<p>Сохраните подключение.</p>
+<figure class="screenshot_with_caption"><img alt="Свойства подключения для отправки эл. почты" src="https://kb.comindware.ru/assets/outgoing_email_configure_connection.png"/>
+<figcaption class="caption">Свойства подключения для отправки эл. почты</figcaption>
+</figure>
+</li>
+</ol>
+<h2 id="настройка-пути-передачи-данных-типа-отправка-эл-почты-из-процесса">Настройка пути передачи данных типа «Отправка эл. почты из процесса»</h2>
+<p>Пути передачи данных типа «<strong>Отправка эл. почты из процесса</strong>» используются в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2381">промежуточных событиях-отправки сообщений</a> и <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2385">конечных событиях-отправки сообщений</a>.</p>
+<p>Путь передачи данных для отправки эл. почты служит для преобразования и передачи данных из <strong>Comindware Business Application Platform</strong> в эл. письмо.</p>
+<ol class="colored_numbers_list">
+<li>Откройте страницу «<strong>Администрирование</strong>»  — «<strong>Архитектура</strong>» или страницу «<strong>Администрирование</strong>» приложения.</li>
+<li>Выберите пункт «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2201"><strong>Пути передачи данных</strong></a>» <em aria-hidden="true" class="fa-light fa-route">‌<!--icon--></em>.</li>
+<li>Откройте двойным нажатием в списке или создайте путь передачи данных типа «<strong>Отправка эл. почты из процесса</strong>».</li>
+<li>Настройте свойства пути передачи данных.</li>
+<li>Сохраните путь передачи данных.</li>
+</ol>
+<h3 id="основные-свойства">Основные свойства</h3>
+<p>На вкладке «<strong>Основные свойства</strong>» настройте параметры использования пути передачи данных.</p>
+<ul>
+<li><strong>Отключить</strong> — установите этот флажок, чтобы временно деактивировать путь передачи данных.</li>
+<li><strong>Название</strong> — введите наименование пути передачи данных.</li>
+<li><strong>Подключение</strong> — выберите подключение для отправки почты.</li>
+<li><strong>Имя сообщения</strong> — введите <em>уникальный</em> идентификатор сообщения, проходящего по данному пути передачи данных.</li>
+<li><strong>Приложение</strong> — выберите приложение, в котором будет использоваться данный путь передачи данных.</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Настройка основных свойств пути передачи данных для отправки эл. почты из процесса" src="https://kb.comindware.ru/assets/outgoing_email_configure.png"/></p>
+<figcaption class="caption">Настройка основных свойств пути передачи данных для отправки эл. почты из процесса</figcaption>
+</figure>
+<h3 id="атрибуты-сообщения">Атрибуты сообщения</h3>
+<p>На вкладке «<strong>Атрибуты сообщения</strong>» настройте атрибуты, которые будут использоваться для передачи данных из процесса в эл. письмо. Эти атрибуты необходимо указать на вкладке «<strong><a class="mkdocs_imported_link" href="#свойства-сообщения">Свойства сообщения</a></strong>» пути передачи данных, а также необходимо присвоить им значения на вкладке «<strong>Данные сообщения</strong>» в свойствах <a class="mkdocs_imported_link" href="#настройка-события-отправки-сообщения">события-отправки сообщения</a>.</p>
+<ul>
+<li>Нажмите кнопку «<strong>Создать</strong>», чтобы добавить атрибут.</li>
+<li>Введите наглядное <strong>название</strong> атрибута.</li>
+<li>Введите <strong>системное имя</strong> атрибута, оно будет использоваться в шаблоне эл. письма на вкладке «<strong>Свойства сообщения</strong>».</li>
+<li>Укажите <strong>тип данных</strong> атрибута в соответствии с данными, которые в него будут передаваться из процесса.</li>
+<li>Чтобы удалить атрибут, установите рядом с ним флажок и нажмите кнопку «<strong>Удалить</strong>».</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Атрибуты сообщения — путь передачи данных для отправки эл. почты из процесса" src="https://kb.comindware.ru/assets/outgoing_email_configure_message_attributes.png"/></p>
+<figcaption class="caption">Атрибуты сообщения — путь передачи данных для отправки эл. почты из процесса</figcaption>
+</figure>
+<p>Атрибуты сообщения — путь передачи данных для отправки эл. почты из процесса</p>
+<h3 id="свойства-сообщения">Свойства сообщения</h3>
+<p>На вкладке «<strong>Свойства сообщения</strong>» настройте шаблон эл. письма с использованием атрибутов с вкладки «<strong>Атрибуты сообщения</strong>».</p>
+<ul>
+<li>
+<p><strong>Список атрибутов, которые можно использовать при написании эл. письма</strong>, содержит атрибуты с вкладки «<strong><a class="mkdocs_imported_link" href="#атрибуты-сообщения">Атрибуты сообщения</a></strong>».</p>
+<div class="notice notice-tip">
+<p class="admonition-title">Совет</p>
+<ul>
+<li>Чтобы поместить значение атрибута сообщения в эл. письмо, введите его системное имя в фигурных скобках <code>{ }</code> в соответствующее поле письма.</li>
+<li>В текстовые поля письма (адреса и имена отправителей и получателей, тема, текст сообщения, место встречи) можно вводить произвольный текст и несколько <strong>атрибутов сообщений</strong>.</li>
+<li>
+<p>Например, в поле «<strong>Тема</strong>» можно ввести строку:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>Уведомление «{Title}» от {Date} </code></pre>
+</div>
+<p>Здесь: <code>{Title}</code> — атрибут сообщения, содержащий название уведомления, а <code>{Date}</code> — дата формирования уведомления.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Электронное письмо</strong> содержит шаблон, в полях которого можно ввести статические значения и системные имена <strong>атрибутов сообщения</strong>. В шаблоне эл. письма предусмотрены перечисленные ниже поля.</p>
+<ul>
+<li><strong>Адрес отправителя</strong> — в этом поле можно указать адрес эл. почты отправителя, отличный от адреса отправителя, указанного в <a class="mkdocs_imported_link" href="#настройка-подключения-типа-отправка-эл-почты-из-процесса">свойствах подключения</a>. Если оставить это поле пустым, то будет использоваться адрес отправителя, указанный в свойствах подключения.</li>
+<li>
+<p><strong>Имя отправителя</strong> — в этом поле можно указать имя отправителя, отличный от адреса отправителя, указанного в <a class="mkdocs_imported_link" href="#настройка-подключения-типа-отправка-эл-почты-из-процесса">свойствах подключения</a>.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Если <strong>адрес</strong> или <strong>имя отправителя</strong> не совпадает с адресом и именем, указанным в учётной записи, используемой на <a class="mkdocs_imported_link" href="#настройка-подключения-типа-отправка-эл-почты-из-процесса">почтовом сервере для отправки почты</a>, сервер должен поддерживать замену данных отправителя. В противном случае, почта не будет отправляться.</p>
+</div>
+</li>
+<li>
+<p><strong>Кому</strong> — нажмите кнопку «<strong>Создать</strong>», чтобы добавить получателя письма.</p>
+<ul>
+<li><strong>Для пользователя</strong> — выберите <strong>атрибут сообщения</strong> типа «<strong>Аккаунт</strong>» или аккаунт получателя письма. Если заполнено поле «<strong>Для пользователя</strong>», <strong>адрес получателя</strong> и <strong>имя получателя</strong> заполняются автоматически.</li>
+<li><strong>Адрес получателя</strong> — введите адрес электронной почты или укажите <strong>атрибут сообщения</strong> типа «<strong>Текст</strong>», содержащий адрес эл. почты.</li>
+<li><strong>Имя получателя</strong> — введите имя получателя или укажите <strong>атрибут сообщения</strong> типа «<strong>Текст</strong>», содержащий имя получателя.</li>
+<li><strong>Адрес для отправки копии</strong>, <strong>Адрес для отправки скрытой копии</strong> — введите через точку с запятой адреса эл. почты получателей или укажите <strong>атрибуты сообщения</strong> типа «<strong>Текст</strong>», содержащие адреса эл. почты.</li>
+<li><strong>Имя для отправки копии</strong>, <strong>Имя для отправки скрытой копии</strong> — введите через точку с запятой имена получателей или укажите <strong>атрибуты сообщения</strong> типа «<strong>Текст</strong>», содержащие имена получателей.</li>
+<li><strong>Тема</strong> — введите тему письма или укажите <strong>атрибут сообщения</strong> типа «<strong>Текст</strong>», содержащий тему письма.</li>
+<li>
+<p><strong>Формат сообщения</strong> — выберите формат тела эл. письма:</p>
+<ul>
+<li><strong>Простой</strong> — текст без форматирования (<code>Content-Type: text/plain</code>);</li>
+<li><strong>Размеченный</strong> — текст с HTML-разметкой (<code>Content-Type: text/html</code>);</li>
+<li><strong>Простой и размеченный</strong> — в тело письма будут включены и простой, и размеченный текст (<code>Content-Type: multipart/alternative</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Сообщение</strong> — введите текст письма или укажите <strong>атрибут сообщения</strong> типа «<strong>Текст</strong>», содержащий текст письма.</p>
+</li>
+<li><strong>Прикрепленные файлы</strong> — выберите <strong>атрибут сообщения</strong> типа «<strong>Документ</strong>», содержащий вложения в эл. письмо.</li>
+<li><strong>Отправлять встречу</strong> — установите этот флажок, чтобы отправлять вместе с эл. письмом встречу Outlook.
+<ul>
+<li><strong>Начало встречи</strong> — выберите <strong>атрибут сообщения</strong> типа «<strong>Дата и время</strong>», содержащий дату и время начала встречи.</li>
+<li><strong>Окончание встречи</strong> — выберите <strong>атрибут сообщения</strong> типа «<strong>Дата и время</strong>», содержащий дату и время окончания встречи.</li>
+<li><strong>Место встречи</strong> — введите текст или укажите <strong>атрибут сообщения</strong> типа «<strong>Текст</strong>», содержащий название или, например, адрес места встречи.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Свойства сообщения — путь передачи данных для отправки эл. почты из процесса" src="https://kb.comindware.ru/assets/outgoing_email_configure_message_properties.png"/></p>
+<figcaption class="caption">Свойства сообщения — путь передачи данных для отправки эл. почты из процесса</figcaption>
+</figure>
+<h2 id="настройка-события-отправки-сообщения">Настройка события-отправки сообщения</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Поместите на диаграмму процесса <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2381">промежуточное</a> или <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2385">конечное</a> событие-отправку сообщения.</p>
+<figure class="screenshot_with_caption"><img alt="События отправки сообщения на диаграмме процесса" src="https://kb.comindware.ru/assets/outgoing_email_configure_send_message_event.png"/>
+<figcaption class="caption">События отправки сообщения на диаграмме процесса</figcaption>
+</figure>
+</li>
+<li>
+<p>В <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2360#mcetoc_1h28cr6421">меню элемента</a> события нажмите кнопку «<strong>Свойства</strong>» <em class="fa-light fa-gear">‌<!--icon--></em>.</p>
+</li>
+<li>На вкладке «<strong>Основные</strong>» настройте <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2364">общие свойства элемента</a>.</li>
+<li>
+<p>На вкладке «<strong>Дополнительные</strong>» выберите путь передачи данных.</p>
+<ul>
+<li>В разделе «<strong>Место назначения</strong>» выберите пункт «<strong>Внешний сокет</strong>».</li>
+<li>С помощью раскрывающегося списка «<strong>Использовать путь передачи данных</strong>» выберите или создайте <strong><a class="mkdocs_imported_link" href="#настройка-пути-передачи-данных-типа-отправка-эл-почты-из-процесса">путь передачи данных</a></strong> типа «<strong>Отправка эл. почты из процесса</strong>».</li>
+</ul>
+<figure class="screenshot_with_caption"><img alt="Выбор пути передачи данных для события-отправки сообщения" src="https://kb.comindware.ru/assets/outgoing_email_configure_send_message_event_advanced_properties.png"/>
+<figcaption class="caption">Выбор пути передачи данных для события-отправки сообщения</figcaption>
+</figure>
+</li>
+<li>
+<p>На вкладке «<strong>Данные сообщения</strong>» сопоставьте <strong><a class="mkdocs_imported_link" href="#атрибуты-сообщения">атрибуты сообщения</a></strong> с атрибутами <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2221">шаблона записи</a></strong>, связанного с шаблоном процесса, к которому относится диаграмма.</p>
+<ul>
+<li>В столбце «<strong>Значение</strong>» укажите атрибут такого же типа, как <strong>атрибут сообщения</strong>, либо формулу, возвращающую значение соответствующего типа.</li>
+<li>Значения указанных атрибутов <strong>шаблона записи</strong> будут присвоены <strong>атрибутам сообщения</strong> и переданы в <a class="mkdocs_imported_link" href="#свойства-сообщения">эл. письмо</a>.</li>
+</ul>
+<figure class="screenshot_with_caption"><img alt="Сопоставление атрибутов сообщения из пути передачи данных с данными процесса" src="https://kb.comindware.ru/assets/outgoing_email_configure_send_message_event_message_data.png"/>
+<figcaption class="caption">Сопоставление атрибутов сообщения из пути передачи данных с данными процесса</figcaption>
+</figure>
+</li>
+<li>
+<p>Опубликуйте процесс.</p>
+</li>
+</ol>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2205">Подключения. Типы, создание, настройка, удаление</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2201">Пути передачи данных. Типы, создание, настройка, удаление</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2360">Диаграмма процесса</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2381">Промежуточное событие-отправка сообщения</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2385">Конечное событие-отправка сообщения</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2566">Общие уведомления. Настройка пути передачи данных, диаграммы процесса и глобальной конфигурации</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2567">Уведомления о задачах. Настройка пути передачи данных</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2515">Пример: согласование заявлений по эл. почте. Настройка подключений, путей передачи данных и диаграммы процесса</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2585">Получение эл. почты с помощью сценариев через IMAP и Exchange. Настройка подключения, пути передачи данных и сценария </a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2584">Отправка эл. почты из сценариев через SMTP и Exchange. Настройка подключения, пути передачи данных и сценария</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

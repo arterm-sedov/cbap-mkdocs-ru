@@ -1,0 +1,166 @@
+<h1>Чертёж. Подготовка и импорт файла DWG</h1><div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1hlsq55m15">Введение</a></li>
+<li><a href="#mcetoc_1hlspkjds0">Подготовка чертежа</a>
+<ul>
+<li><a href="#mcetoc_1hlspkjds1">Обязательные требования к чертежу</a></li>
+<li><a href="#mcetoc_1hlspkjds2">Подготовка чертежа в AutoCAD</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1hlspkjds4">Импорт чертежа</a></li>
+<li><a href="#mcetoc_1hmovkldb0">Связанные статьи</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1hlsq55m15">Введение</h2>
+<p>На форме можно разместить чертёж с планом помещений, на котором будут отображаться данные из шаблонов записей с привязкой к объектам на чертеже.</p>
+<p>Для использования чертежа в <strong>Comindware Business Application Platform</strong> потребуется <a href="#mcetoc_1hlspkjds0">подготовить файл DWG</a>, создать несколько шаблонов и атрибутов определённых типов, поместить поле атрибута типа «<strong>Чертёж</strong>» на форму и привязать его к шаблонам записей. Конечный пользователь, в свою очередь, должен импортировать файл чертежа в формате DWG и привязать слои полигонов и маркеров к атрибутам, заданным при настройке поля.</p>
+<p>См. также статью <em>«<a href="https://kb.comindware.ru/article.php?id=2575">Чертёж. Настройка шаблонов, атрибутов, форм и полей</a>».</em></p>
+<h2 dir="ltr" id="mcetoc_1hlspkjds0">Подготовка чертежа</h2>
+<h3 dir="ltr" id="mcetoc_1hlspkjds1">Обязательные требования к чертежу</h3>
+<p dir="ltr">Перед импортом в систему чертеж необходимо подготовить согласно следующим требованиям, в противном случае процедура импорта будет неудачной либо чертеж будет отображаться некорректно:</p>
+<ul>
+<li dir="ltr" role="presentation">Контур каждого объекта должен быть построен в одним единым замкнутым полигоном (например, одно помещение — один полигон).</li>
+<li dir="ltr" role="presentation">Полигоны должны быть построены инструментом «Полилиния» и должны состоять из прямых отрезков. Кривые не поддерживаются, поэтому для построения криволинейных полигонов следует использовать несколько прямых отрезков.</li>
+<li dir="ltr" role="presentation">Внутри каждого полигона должно находиться его текстовое наименование (например, ID помещения), соответствующее значению текстового атрибута записи в <strong>Comindware Business Application Platform</strong>.</li>
+<li dir="ltr" role="presentation">Полигоны не должны пересекаться ни одной своей частью с другим замкнутым полигоном.</li>
+<li dir="ltr" role="presentation">Полигоны должны находится на отдельном слое, на котором кроме замкнутых полигонов не должно быть никаких других объектов.</li>
+<li dir="ltr" role="presentation">Вложенные полигоны должны находиться на разных слоях.</li>
+<li dir="ltr" role="presentation">Текстовые блоки с наименованиями полигонов должны находится на отдельном слое, на котором кроме текстов с наименованиями полигонов не должно быть никаких других объектов.</li>
+<li dir="ltr" role="presentation">Текстовые блоки должны быть однострочными, типа ТЕКСТ.</li>
+<li>Текстовый блок с наименованием полигона должен находиться внутри соответствующего замкнутого полигона.</li>
+<li>На каждый слой полигонов должен быть отдельный слой с текстовыми наименованиями.</li>
+<li dir="ltr" role="presentation">Полигоны и текстовые наименования должны находиться на любом слое, кроме <em>Слоя 0</em>.</li>
+<li dir="ltr" role="presentation"><em>Слой 0</em> должен быть пустым.</li>
+</ul>
+<figure class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Пример чертежа в AutoCAD" class="img-responsive" height="865" src="https://kb.comindware.ru/assets/img_65c6415e30a02.png" width="1600"/></p>
+<figcaption class="caption" style="font-size: 15px !important;">Пример чертежа в AutoCAD</figcaption>
+</figure>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Определения инструментов и сущностей, такие как <em>«полилиния»</em>,  <em>«слой»</em>, взяты из программе AutoCAD и относятся к данной программе.</p>
+</div>
+<p dir="ltr"> </p>
+<h3 dir="ltr" id="mcetoc_1hlspkjds2">Подготовка чертежа в AutoCAD</h3>
+<ol class="colored_numbers_list">
+<li>
+<p dir="ltr">Откройте Диспетчер слоев и создайте новый слой.</p>
+<figure class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Диспетчер слоев AutoCAD" class="img-responsive" height="861" src="https://kb.comindware.ru/assets/img_65c64171d5529.png" width="1600"/></p>
+<figcaption class="caption" style="font-size: 15px !important;">Диспетчер слоев AutoCAD</figcaption>
+</figure>
+</li>
+<li>
+<p dir="ltr">Назовите новый слой, например, cmw_room.</p>
+</li>
+<li>
+<p dir="ltr">Задайте для линий, например, синий цвет и вес 0,3 мм.</p>
+<figure class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Диспетчер слоев AutoCAD" class="img-responsive" height="388" src="https://kb.comindware.ru/assets/img_65c6418a2a3a4.png" width="1137"/></p>
+<figcaption class="caption" style="font-size: 15px !important;">Диспетчер слоев AutoCAD</figcaption>
+</figure>
+</li>
+<li>
+<p dir="ltr">Также создадим отдельный слой для точек с текстом наименований полигонов аналогичным способом, в нашем примере это «cmw_room_attribute». Приступим к отрисовке полигонов для объектов.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<ul>
+<li aria-level="1" dir="ltr" style="list-style-type: disc;">
+<p dir="ltr" role="presentation">Каждый объект должен быть отрисован в AutoCAD одним единым замкнутым <em>полигоном из прямых полилиний</em> (например, одно помещение = один полигон).</p>
+</li>
+<li aria-level="1" dir="ltr" style="list-style-type: disc;">
+<p dir="ltr" role="presentation">На каждый полигон должен быть выведен текст с наименованием полигона (например, ID помещения) в соответствии с загруженным реестром.</p>
+</li>
+<li aria-level="1" dir="ltr" style="list-style-type: disc;">
+<p dir="ltr" role="presentation">Текст с наименованием полигона должен находится внутри замкнутого полигона.</p>
+</li>
+<li aria-level="1" dir="ltr" style="list-style-type: disc;">
+<p dir="ltr" role="presentation">На каждый слой полигонов иметься отдельный слой с текстовыми наименованиями.</p>
+</li>
+<li aria-level="1" dir="ltr" style="list-style-type: disc;">
+<p dir="ltr" role="presentation">Полигоны и точки с текстовыми наименованиями должны находиться на любом слое, кроме <em>Слоя 0.</em></p>
+</li>
+</ul>
+</div>
+ </li>
+<li>Полигон можно создать инструментом «Полилиния»  <img class="img-responsive" height="26" src="https://kb.comindware.ru/assets/img_65c63bc4cb8aa.png" style="letter-spacing: 0.2px;" width="25"/>  на активном слое с полигонами, в нашем примере это <em>cmw_room</em>.
+<figure class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Создание контура помещения AutoCAD" class="img-responsive" height="777" src="https://kb.comindware.ru/assets/img_65c63baf8d99c.png" width="1435"/></p>
+<figcaption class="caption" style="font-size: 15px !important;">Создание контура помещения AutoCAD</figcaption>
+</figure>
+</li>
+<li> Прорисовку следует выполнять по контуру объекта чертежа.
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Полилиния замыкается командой «Замкнуть» по щелчку правой кнопкой мыши.</p>
+</div>
+</li>
+<li> После создания всех полигонов необходимо перейти к созданию точек с текстом наименований полигонов. Сначала выберем активный слой, на который будут наноситься точки, в нашем случае это <em>cmw_room_attribute</em>, и используем инструмент «Текст» с вкладки ленточного меню «Главная».
+<figure class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Создание точки с текстом" class="img-responsive" height="734" src="https://kb.comindware.ru/assets/img_65c63c07f16dd.png" width="1435"/></p>
+<figcaption class="caption" style="font-size: 15px !important;">Создание точки с текстом</figcaption>
+</figure>
+</li>
+<li>Если необходимо импортировать несколько уровней полигонов, для каждого из уровней необходимо выполнить вышеуказанные действия, возможно создание максимум трех уровней. В нашем примере были созданы:
+<ul>
+<li aria-level="1" dir="ltr" style="list-style-type: disc;">
+<p dir="ltr" role="presentation">слой полигонов <em>cmw_room</em>, на котором находятся полигоны помещений;</p>
+</li>
+<li aria-level="1" dir="ltr" style="list-style-type: disc;">
+<p dir="ltr" role="presentation">слой точек с наименованиями полигонов <em>cmw_room_attribute</em>, на котором находятся наименования помещений;</p>
+</li>
+<li aria-level="1" dir="ltr" style="list-style-type: disc;">
+<p dir="ltr" role="presentation">слой полигонов <em>cmw_workspace</em>, на котором находятся полигоны рабочих мест;</p>
+</li>
+<li aria-level="1" dir="ltr" style="list-style-type: disc;">
+<p dir="ltr" role="presentation">слой точек с наименованиями полигонов <em>cmw_workspace_attribute</em>, на котором находятся наименования рабочих мест.</p>
+</li>
+</ul>
+</li>
+<li>По окончании подготовки чертежа можно переходить к импорту подготовленного DWG-файла в <strong>Comindware Business Application Platform</strong> для установления связей объектов чертежа с объектами системы.</li>
+</ol>
+<h2 dir="ltr" id="mcetoc_1hlspkjds4">Импорт чертежа</h2>
+<p dir="ltr">Предусловие: должны быть созданы экземпляры шаблонов записей, которые необходимо связать с полигонами на чертеже, должен быть создан и вынесен на форму атрибут «Чертеж». </p>
+<p dir="ltr">Примечание: для каждого уровня связи должен быть создан отдельный ШЗ.</p>
+<ol class="colored_numbers_list">
+<li style="box-sizing: border-box; list-style: decimal; text-indent: 0px !important; counter-increment: my-counter 1; position: relative; margin-bottom: 10px;"><span style="box-sizing: border-box; letter-spacing: 0.2px;"><span style="box-sizing: border-box; letter-spacing: 0.2px;"><span style="box-sizing: border-box; letter-spacing: 0.2px;"><span style="box-sizing: border-box; letter-spacing: 0.2px;">В поле атрибута типа <em style="box-sizing: border-box;">«</em><strong>Чертёж</strong><em style="box-sizing: border-box;">»</em> на форме нажмите кнопку «<strong style="box-sizing: border-box; font-weight: 700 !important;">Загрузка файла</strong>».</span></span></span></span></li>
+<li>
+<p dir="ltr">На шаге 1 «<strong>Загрузка файла</strong>» в мастере «<strong>Настройка плана</strong>» выберите подготовленный DWG-файл.</p>
+<figure class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img class="img-responsive" src="https://kb.comindware.ru/assets/img_65c640abd145d.png"/></p>
+<p>Шаг 1. Загрузка файла</p>
+</figure>
+</li>
+<li>
+<p>В случае ошибочной загрузки файла его можно удалить и загрузить другой DWG-файл.</p>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Далее</strong>» для перехода к следующему шагу.</p>
+</li>
+<li>
+<p><span style="letter-spacing: 0.2px;">На шаге 2 «<strong>Настройка связей</strong>» установите связи слоев DWG-файла с записями в приложении. Первыми привязывайте слои наружных полигонов — следуйте от больших областей к меньшим (вложенным).</span></p>
+<ul>
+<li aria-level="1" dir="ltr" style="list-style-type: disc;">
+<p dir="ltr" role="presentation">В поле «<strong>Слой полигонов</strong>» выберите слой с полигонами.</p>
+</li>
+<li aria-level="1" dir="ltr" style="list-style-type: disc;">
+<p dir="ltr" role="presentation">В поле «<strong>Слой наименований</strong>» выберите слой, на котором находятся текстовые наименования полигонов.</p>
+</li>
+<li aria-level="1" dir="ltr" style="list-style-type: disc;">
+<p dir="ltr" role="presentation">В поле «<strong>Шаблон записи</strong>» будет указан шаблон записи, заданный для уровня связи в свойствах поля атрибута «<strong>Чертёж</strong>». В этом шаблоне будут храниться записи, связанные с полигонами на чертеже.</p>
+</li>
+<li aria-level="1" dir="ltr" style="list-style-type: disc;">
+<p dir="ltr" role="presentation">В поле «<strong>Атрибут</strong>» будет указан ключевой атрибут имен объектов, заданный для уровня связи в свойствах поля атрибута «<strong>Чертёж</strong>». Этот атрибут будет использоваться для привязки полигонов по их наименованиям к записям в указанном шаблоне.</p>
+<figure class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Шаг 2. Привязка слоёв чертежа к шаблонам и атрибутам" class="img-responsive" height="493" src="https://kb.comindware.ru/assets/img_65c640914bb78.png" width="902"/></p>
+<figcaption class="caption" style="font-size: 15px !important;">Шаг 2. Привязка слоёв чертежа к шаблонам и атрибутам</figcaption>
+</figure>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="mcetoc_1hmovkldb0">Связанные статьи</h2>
+<p><strong><a href="https://kb.comindware.ru/article.php?id=2575">Чертёж. Настройка шаблонов, атрибутов, форм и полей</a></strong></p>
+<p><strong><a href="https://kb.comindware.ru/article.php?id=2531#mcetoc_1hmjdrtgh1">Чертёж. Настройка поля на форме</a></strong></p>
+<p><a class="md-top md-icon mkdocs_imported_link" href="#"> <em class="fa-light fa-arrow-up">‌</em> К началу</a></p>

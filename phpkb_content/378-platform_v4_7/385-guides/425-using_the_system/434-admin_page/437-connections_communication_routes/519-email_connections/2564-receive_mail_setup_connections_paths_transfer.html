@@ -1,0 +1,207 @@
+<h1>Получение эл. почты и веб-запросов в процессе. Настройка подключения и пути передачи данных</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#порядок-настройки-получения-эл-писем"> <span class="md-ellipsis"> Порядок настройки получения эл. писем </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-подключения"> <span class="md-ellipsis"> Настройка подключения </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-пути-передачи-данных"> <span class="md-ellipsis"> Настройка пути передачи данных </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#основные-свойства"> <span class="md-ellipsis"> Основные свойства </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#атрибуты-сообщения"> <span class="md-ellipsis"> Атрибуты сообщения </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Здесь представлены инструкции по настройке подключения и пути передачи передачи данных из эл. писем и веб-запросов в бизнес-процессе.</p>
+<p>Кроме того, потребуется настроить <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2376">начальное</a></strong> или <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2382">промежуточное</a> событие-получение сообщения</strong> на диаграмме процесса.</p>
+<p>Подробный пример настройки приложения для обмена данными посредством эл. почты см. в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2515">Пример: согласование заявлений по эл. почте. Настройка подключений, путей передачи данных и диаграммы процесса</a>»</em>.</p>
+<h2 id="порядок-настройки-получения-эл-писем">Порядок настройки получения эл. писем</h2>
+<ol class="colored_numbers_list">
+<li><a class="mkdocs_imported_link" href="#настройка-подключения">Настройте подключение</a> типа «<strong>Получение эл. почты в процессе</strong>».</li>
+<li><a class="mkdocs_imported_link" href="#настройка-пути-передачи-данных">Настройте путь передачи данных</a> типа «<strong>Получение эл. почты в процессе</strong>».</li>
+<li>
+<p>Настройте <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2376">начальное</a></strong> или <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2382"><strong>промежуточное</strong></a> <strong>событие-получение сообщения</strong> на диаграмме процесса:</p>
+<ul>
+<li>укажите настроенный <strong>путь передачи данных</strong>;</li>
+<li>настройте сопоставление <strong>данных сообщения</strong>.</li>
+</ul>
+</li>
+</ol>
+<h2 id="настройка-подключения">Настройка подключения</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Логика чтения писем на почтовом сервере</p>
+<p>При подключении к почтовому серверу для получения эл. почты <strong>Comindware Business Application Platform</strong> выступает как почтовый клиент, который регулярно проверяет наличие новых писем.</p>
+<p>При каждой проверке почтового ящика <strong>Comindware Business Application Platform</strong>:</p>
+<ul>
+<li>обрабатывает новые письма;</li>
+<li>отмечает новые письма как прочтённые.</li>
+</ul>
+<p>Поэтому для автоматической обработки входящих писем рекомендуется использовать отдельный ящик эл. почты.</p>
+<p>Если использовать ящик, на который поступают прочие письма, они тоже будут отмечены как прочитанные.</p>
+</div>
+<ol class="colored_numbers_list">
+<li>Откройте страницу <strong>«Администрирование» – «Подключения»</strong>.</li>
+<li>Откройте двойным нажатием или создайте создайте <strong>подключение к электронной почте</strong> типа «<strong>Получение эл. почты в процессе</strong>».</li>
+<li>
+<p>Настройте подключение к IMAP-серверу:</p>
+<ul>
+<li><strong>Отключить</strong> — установите этот флажок, если требуется временно деактивировать данное подключение.</li>
+<li><strong>Название</strong> — наименование подключения.</li>
+<li>
+<p><strong>Протокол</strong> — выберите почтовый протокол:</p>
+<ul>
+<li><strong>IMAP</strong>;</li>
+<li><strong>Microsoft Exchange</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Адрес почтового сервера</strong> — укажите URL почтового сервера.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<ul>
+<li>Для <strong>SMTP не</strong> указывайте протокол (<code>SMTP</code>, <code>HTTPS</code>, <code>HTTP</code>).</li>
+<li>Для <strong>Exchange укажите</strong> протокол (<code>HTTPS</code>, <code>HTTP</code>).</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Порт</strong> — укажите порт для подключения к почтовому серверу.</p>
+</li>
+<li><strong>Имя пользователя</strong> — укажите учётную запись для подключения к почтовому серверу.</li>
+<li><strong>Пароль</strong> — введите пароль к учётной записи для подключения к почтовому серверу.</li>
+<li><strong>Интервал опроса</strong> — укажите интервал, с которым <strong>Comindware Business Application Platform</strong> будет проверять наличие новых писем.</li>
+<li>
+<p><strong>Защита данных</strong> — выберите протокол шифрования:</p>
+<ul>
+<li><strong>Нет</strong>;</li>
+<li><strong>SSL</strong>;</li>
+<li><strong>TLS</strong>.
+<ul>
+<li><strong>Проверить соединение</strong> — нажмите эту кнопку, чтобы проверить соединение с почтовым сервером.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Нажмите кнопку «Создать».</p>
+</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Настройка свойств подключения для получения эл. почты в процессе" src="https://kb.comindware.ru/assets/process_receiving_connection_settings.png"/></p>
+<figcaption class="caption">Настройка свойств подключения для получения эл. почты в процессе</figcaption>
+</figure>
+<h2 id="настройка-пути-передачи-данных">Настройка пути передачи данных</h2>
+<p>Путь передачи данных для получения эл. почты служит для преобразования и передачи данных из эл. письма в <strong>Comindware Business Application Platform</strong>.</p>
+<ol class="colored_numbers_list">
+<li>Откройте страницу «<strong>Администрирование</strong>» — «<strong>Архитектура</strong>» или страницу «<strong>Администрирование</strong>» приложения.</li>
+<li>Выберите пункт «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2201"><strong>Пути передачи данных</strong></a>» <em aria-hidden="true" class="fa-light fa-route">‌<!--icon--></em>.</li>
+<li>Откройте двойным нажатием в списке или создайте путь передачи данных типа «<strong>Подключения к электронной почте</strong>» – «<strong>Получение эл. почты в процессе</strong>».</li>
+<li>Настройте свойства пути передачи данных на следующих вкладках:</li>
+</ol>
+<ul>
+<li><a class="mkdocs_imported_link" href="#основные-свойства"><strong>Основные свойства</strong></a></li>
+<li><a class="mkdocs_imported_link" href="#атрибуты-сообщения"><strong>Атрибуты сообщения</strong></a></li>
+</ul>
+<ol class="colored_numbers_list" start="6">
+<li>Сохраните путь передачи данных.</li>
+</ol>
+<h2 id="основные-свойства">Основные свойства</h2>
+<p>На вкладке «<strong>Основные свойства</strong>» настройте базовые параметры пути передачи данных:</p>
+<ul>
+<li><strong>Отключить</strong> — установите этот флажок, чтобы временно деактивировать путь передачи данных.</li>
+<li><strong>Название</strong> — введите наглядное наименование пути передачи данных.</li>
+<li><strong>Подключение</strong> — выберите подключение типа «<strong>Получение эл. почты в процессе</strong>».</li>
+<li><strong>Имя сообщения</strong> — введите <em>уникальный</em> идентификатор сообщения, проходящего по данному пути передачи данных.</li>
+<li><strong>Приложение</strong> — выберите бизнес-приложение, в котором будет использоваться путь передачи данных.</li>
+<li><strong>Процесс</strong> — выберите процесс из приложения, в котором будет использоваться путь передачи данных;</li>
+<li>
+<p><strong>Назначение</strong> — укажите полученным сообщением:</p>
+<ul>
+<li><strong>Новый экземпляр процесса</strong> — полученное сообщение будет создавать новый экземпляр указанного процесса;</li>
+<li><strong>Существующий экземпляр процесса</strong> — полученное сообщение будет отправлено в определенный экземпляр указанного процесса.</li>
+</ul>
+</li>
+<li>
+<p><strong>Ключевое поле</strong> — атрибут для поиска существующего экземпляра процесса. Доступно при указании «<strong>Существующий экземпляр процесса</strong>» в «<strong>Назначении</strong>».</p>
+</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Настройка основных свойств пути передачи данных для получения эл. почты в процессе" src="https://kb.comindware.ru/assets/process_receiving_connection_settings_properties.png"/></p>
+<figcaption class="caption">Настройка основных свойств пути передачи данных для получения эл. почты в процессе</figcaption>
+</figure>
+<h2 id="атрибуты-сообщения">Атрибуты сообщения</h2>
+<p>На вкладке «<strong>Атрибуты сообщения</strong>» заполните таблицу соответствия атрибутов сообщения с атрибутами электронного письма.</p>
+<div class="notice notice-tip">
+<p class="admonition-title">Извлечение значений атрибутов из эл. письма</p>
+<p>Путь передачи данных для получения эл. почты служит для передачи данных из эл. письма в <strong>Comindware Business Application Platform</strong>.</p>
+<ul>
+<li>
+<p>На вкладке «<strong>Атрибуты сообщения</strong>» пути передачи данных задайте набор атрибутов, значения которых требуется извлечь из письма. Для этого создайте атрибуты и сопоставьте их с полями эл. письма.</p>
+<ul>
+<li>
+<p>Например, поместите текст эл. письма в атрибут <em>EmailBody</em>:</p>
+<ul>
+<li><strong>Название:</strong> <em>Текст письма</em></li>
+<li><strong>Системное имя:</strong> <em>Email__Body</em></li>
+<li><strong>Тип данных: текст</strong></li>
+<li><strong>Поместить тело ответа в этот атрибут:</strong> <em>Сообщение</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Передайте значения атрибутов сообщения в атрибуты записи с помощью вкладки «<strong>Данные сообщения</strong>» в свойствах <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2376"><strong>события-получения сообщения</strong></a>, использующего этот путь передачи данных.</p>
+</li>
+</ul>
+</div>
+<p>Чтобы создать атрибут сообщения и сопоставить его с полем письма, нажмите кнопку «<strong>Создать</strong>» и заполните строку таблицы сопоставления:</p>
+<ul>
+<li><strong>Название</strong> — введите наглядное название атрибута.</li>
+<li><strong>Системное имя</strong> — введите уникальное имя атрибута.</li>
+<li>
+<p><strong>Тип данных</strong> — выберите тип данных:</p>
+<ul>
+<li><strong>Текст</strong></li>
+<li><strong>Число</strong></li>
+<li><strong>Длительность</strong></li>
+<li><strong>Дата и время</strong></li>
+<li><strong>Логический</strong></li>
+<li><strong>Документ</strong></li>
+<li><strong>Аккаунт</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Поместить тело ответа в атрибут</strong> — выберите поле электронного письма, значение которого требуется присвоить атрибуту сообщения:</p>
+<ul>
+<li><strong>Адрес отправителя</strong></li>
+<li><strong>Имя отправителя</strong></li>
+<li><strong>Адрес получателя</strong></li>
+<li><strong>Тема</strong></li>
+<li><strong>Сообщение</strong></li>
+<li><strong>Адрес для отправки копии</strong></li>
+<li><strong>Адрес для отправки скрытой копии</strong></li>
+<li><strong>Прикрепленные файлы</strong></li>
+</ul>
+</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Настройка атрибутов сообщения в пути передачи данных для получения эл. почты в процессе" src="https://kb.comindware.ru/assets/process_receiving_connection_attributes_settings.png"/></p>
+<figcaption class="caption">Настройка атрибутов сообщения в пути передачи данных для получения эл. почты в процессе</figcaption>
+</figure>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2376">Начальное событие-получение сообщения</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2382">Промежуточное событие-получение сообщения</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2515">Отправка, получение и обработка эл. почты в процессе. Пример: настройка подключений, путей передачи данных, диаграммы процесса и сценария</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2394">Отправка эл. почты из процесса. Настройка подключения, пути передачи данных и события на диаграмме процесса</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2585">Получение эл. почты с помощью сценария через Exchange и IMAP. Настройка подключения, пути передачи данных и сценария</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2584">Отправка эл. почты из сценариев через SMTP и Exchange. Настройка подключения, пути передачи данных и сценария</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

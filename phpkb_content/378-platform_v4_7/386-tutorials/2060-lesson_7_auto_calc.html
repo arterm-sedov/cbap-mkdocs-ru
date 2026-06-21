@@ -1,0 +1,350 @@
+<h1>Урок 7. Автоматические вычисления</h1><div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1hv70q1fm0">Введение</a></li>
+<li><a href="#mcetoc_1gbl79pcm0">Автоматическое вычисление значений атрибутов</a></li>
+<li><a href="#l71">Отображение Ф. И. О. заказчика и даты создания заявки</a></li>
+<li><a href="#l72">Вычисление суммы затрат</a></li>
+<li><a href="#mcetoc_1gbl7a9ke1">Тестирование вычисления суммы затрат</a></li>
+<li><a href="#l74">Формирование номера заявки</a></li>
+<li><a href="#l75">Настройка отображения номера заявки</a></li>
+<li><a href="#mcetoc_1gbl7b8172">Тестирование формирования номера заявки</a></li>
+<li><a href="#l76">Статус заявки</a></li>
+<li><a href="#l77">Настройка отображения статуса и номера заявки</a></li>
+<li><a href="#mcetoc_1gbl7c0713">Тестирование изменения статуса заявки</a></li>
+<li><a href="#l78">Настройка заголовка задачи</a></li>
+<li><a href="#l79">Тестирование</a></li>
+<li><a href="#mcetoc_1gbl7cmia4">Результаты</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1hv70q1fm0">Введение</h2>
+<p><span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">Следуя указаниям в этом уроке, </span>вы научитесь настраивать вычисляемые атрибуты и использовать язык формул, чтобы сделать данные в заявках более наглядными и повысить эффективность бизнес-процессов.</p>
+<p><strong>Предусловие:</strong> пройден <samp data-name="aid" data-title="" data-value="2059"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2059}</span></samp>. <br/><br/><strong>Расчетная продолжительность:</strong> 20 мин.</p>
+<p><strong>Примечание:</strong> в данном уроке представлен продукт <strong>Comindware Business Application Platform</strong> версии <span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">4.2.219.0</span>, внешний вид страниц и меню в других версиях продукта может отличаться.</p>
+<h2 id="mcetoc_1gbl79pcm0">Автоматическое вычисление значений атрибутов</h2>
+<p>У заявок обычно есть номер и дата. Также в ходе рассмотрения заявки интересно знать, кто является <em>Заказчиком</em> — в том числе исходя из этого будет приниматься решение, выделять машину или нет. Дата заявки — это дата запуска процесса, системный атрибут, значение которому присваивается автоматически. Имя <em>Заказчика</em> также является системным атрибутом, нам надо только вынести эти атрибуты на форму. Для номера же заявки мы определим шаблон, по которому он будет формироваться автоматически.</p>
+<h2 id="l71">Отображение Ф. И. О. заказчика и даты создания заявки</h2>
+<p>Участникам процесса было бы полезно знать, кто является <em>Заказчиком</em> и когда была подана заявка. Эта информация сохраняется автоматически при создании заявки в системных атрибутах «<strong>Создатель</strong>» и «<strong>Дата создания</strong>».</p>
+<p><strong> 1. </strong>Перейдите на вкладку «<strong>Формы</strong>» шаблона записи <em>«Заявка на автомобиль».</em></p>
+<p><strong>2. </strong> Откройте конструктор формы <em>«Заявка на автомобиль - Основная форма».</em></p>
+<p><strong> 3. </strong> Разверните атрибут «<strong>Создатель</strong>» на панели элементов и перетащите на макет формы атрибут «<strong>Ф. И. О.</strong>».</p>
+<p><strong> 4. </strong> Перетащите на макет формы атрибут «<strong>Дата создания</strong>».</p>
+<p><strong>5. </strong>Сохраните форму.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Добавление атрибутов на форму заявки на автомобиль" class="img-responsive" height="563" src="https://kb.comindware.ru/assets/img_624451d18750c.png" width="1074"/></p>
+<p class="caption" style="font-size: 11pt !important;">Добавление атрибутов на форму заявки на автомобиль</p>
+</div>
+<h2 id="l72">Вычисление суммы затрат</h2>
+<p>Настроим автоматическое вычисление итоговой суммы затрат. Для этого мы изменим свойства атрибута «Итоговая сумма затрат», установив флажок «<strong>Вычислять по выражению</strong>», затем добавим формулу для автоматического вычисления значения атрибута. Для составления формулы мы воспользуемся редактором выражений и предиктивным вводом…</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>В формулах необходимо указывать те системные имена, которые вы фактически использовали в своём приложении.</p>
+<p>Например, если вы присвоили шаблону <em>«Затраты» </em>системное имя <code>Zatraty123</code>, то именно это имя следует использовать в формуле.</p>
+<p>То есть, если системные имена, приведённые в уроках, не совпадают с фактическими системными именами в вашем приложении, используйте фактические системные имена, а не копируйте их из текста уроков.</p>
+</div>
+<p><strong>1. </strong>Перейдите к диаграмме бизнес-процесса <em>«Заказ автотранспорта»</em> и нажмите кнопку «<strong>Редактировать</strong>».</p>
+<p><strong>2. </strong>Выберите задачу <em>«Выполнить рейс».</em></p>
+<p><strong> 3. </strong> В меню элемента нажмите кнопку «<strong>Форма</strong>» <em class="fa-light fa-newspaper">‌</em>.</p>
+<p><strong> 4. </strong>В конструкторе формы разверните элемент <em>«Заявка на автомобиль»</em> на панели элементов.</p>
+<p><strong> 5. </strong>Нажмите кнопку «<strong>Редактировать</strong>» <em class="fa-light fa-pencil js-edit-action" title="Редактировать">‌</em> у атрибута <em>«Итоговая сумма затрат».</em></p>
+<p><strong> 6. </strong>В окне свойств атрибута установите флажок «<strong>Вычислять по автоматически</strong>».</p>
+<p><strong>7. </strong>В поле «<strong>Вычисляемое выражение</strong>» нажмите кнопку «<strong>Открыть в редакторе</strong>» <em class="fa-light fa-share"> ‌ </em> .</p>
+<p><strong>8. </strong>В редакторе выражений введите функцию: <code>SUM()</code>.</p>
+<p><strong>9. </strong>Установив курсор внутри скобок функции <code>SUM()</code>, нажмите клавиши <kbd>Ctrl+Пробел</kbd> (Windows и Linux) или <kbd>⌘+Пробел</kbd> (macOS).</p>
+<p><strong>10.</strong> В отобразившемся раскрывающемся списке дважды нажмите пункт <code>Zatraty</code> со значком <em class="fa-light fa-list-alt">‌ </em><span style="letter-spacing: 0.2px; text-align: center;">.</span></p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Вставка заготовки запроса from-where-select для шаблона «Затраты» в качестве аргумента функции SUM()" class="img-responsive" height="485" src="https://kb.comindware.ru/assets/img_6475bdea9fe53.png" width="1266"/></p>
+<p class="caption" style="font-size: 15px !important;">Вставка заготовки запроса from-where-select для шаблона «Затраты» в качестве аргумента функции SUM()</p>
+</div>
+<p><strong>11. </strong>в формулу будет вставлена заготовка запроса записей из шаблона<em> «Затраты»</em>: <code>from a in db-&gt;Zatraty where <strong>Ваше условие</strong> select a-&gt;id</code>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Заготовки запроса from-where-select для шаблона «Затраты»" class="img-responsive" height="285" src="https://kb.comindware.ru/assets/img_6475be3fe5eb3.png" width="1266"/></p>
+<p class="caption" style="font-size: 15px !important;">Заготовки запроса from-where-select для шаблона «Затраты»</p>
+</div>
+<p class="caption" style="font-size: 15px !important;"><strong>12.</strong> Замените строку <code>Ваше условие</code> на <code>a-&gt;</code> и нажмите клавиши <kbd>Ctrl+Пробел</kbd> (Windows и Linux) или <kbd>⌘+Пробел</kbd> (macOS).</p>
+<p class="caption" style="font-size: 15px !important;"><strong>13.</strong> В отобразившемся раскрывающемся списке дважды нажмите пункт <code>Zayavka</code>. в формулу будет вставлено системное имя <code>Zayavka</code> атрибута <em>«Заявка»</em> шаблона <em>«Затраты».</em></p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Вставка в выражение системного имени атрибута «Заявка» шаблона «Затраты»" class="img-responsive" height="487" src="https://kb.comindware.ru/assets/img_6475c309be5f9.png" width="1266"/></p>
+<p class="caption" style="font-size: 15px !important;">Вставка в формулу системного имени атрибута «Заявка» шаблона «Затраты»</p>
+</div>
+<p class="caption" style="font-size: 15px !important;"><strong>14.</strong> После системного имени <code>Zayavka</code> введите строку <code>== $</code>.</p>
+<p class="caption" style="font-size: 15px !important;"><strong>15.</strong> В отобразившемся раскрывающемся списке дважды нажмите пункт <code>id</code>. в формулу будет вставлено системное имя <code>id</code> атрибута <em>«ID»</em> текущего шаблона <em>«Заявка на автомобиль».</em></p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Вставка в выражение системного имени атрибута «ID» шаблона «Заявка на автомобиль»" class="img-responsive" height="313" src="https://kb.comindware.ru/assets/img_6475c34222af8.png" width="1266"/></p>
+<p class="caption" style="font-size: 15px !important;">Вставка в формулу системного имени атрибута «ID» шаблона «Заявка на автомобиль»</p>
+</div>
+<p class="caption" style="font-size: 15px !important;"><strong>16.</strong> Удалите строку <code>id</code> после оператора <code>a-&gt;</code> и нажмите клавиши <kbd> Ctr+Пробел</kbd>.</p>
+<p class="caption" style="font-size: 15px !important;"><strong>17.</strong> В отобразившемся раскрывающемся списке дважды нажмите пункт <code>Summa</code>. в формулу будет вставлено системное имя <code>Summa</code> атрибута <em>«Сумма»</em> шаблона <em>«Затраты»</em>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Вставка в выражение системного имени атрибута «Сумма» шаблона «Затраты»" class="img-responsive" height="449" src="https://kb.comindware.ru/assets/img_6475c37aca216.png" width="1266"/></p>
+<p> </p>
+<p> </p>
+<p class="caption" style="font-size: 15px !important;">Вставка в формулу системного имени атрибута «Сумма» шаблона «Затраты»</p>
+</div>
+<p class="caption" style="font-size: 15px !important;"><strong>18.</strong> Получится формула <code>SUM(from a in db-&gt;Zatraty where a-&gt;Zayavka == $id select a-&gt;Summa)</code>.</p>
+<p>Здесь <code>Zatraty</code> — шаблон записи «Затраты»; <code>Zayavka</code> — атрибут «Заявка» типа «<strong>Запись</strong>» шаблона «Затраты», <code>$id</code> — идентификатор заявки, <code>Summa</code> — атрибут «Сумма» шаблона «Затраты».</p>
+<p><strong>19. </strong> Нажмите кнопку «<strong>Применить</strong>» и кнопку <span class="fa-light fa-times">‌</span>.</p>
+<div class="screenshot_with_caption">
+<p><img class="img-responsive" src="https://kb.comindware.ru/assets/img_6475c4ba0c537.png"/></p>
+<p class="caption" style="font-size: 11pt !important;">Формула для вычисляемого числового атрибута</p>
+</div>
+<p><strong>20. </strong>В окне свойств атрибута <em>«Итоговая сумма затрат»</em> нажмите кнопку «<strong>Сохранить</strong>».</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Сохранение атрибута «Итоговая сумма затрат»" class="img-responsive" height="281" src="https://kb.comindware.ru/assets/img_6475c693a645c.png" width="1266"/></p>
+<p class="caption" style="font-size: 15px !important;">Сохранение атрибута «Итоговая сумма затрат»</p>
+</div>
+<p><strong>21. </strong> Вернитесь к диаграмме бизнес-процесса и нажмите кнопку «<strong>Опубликовать</strong>». </p>
+<div class="notice notice-success">
+<p><strong>Определения</strong></p>
+<ul>
+<li>Для вычисления итоговой суммы затрат мы использовали функцию — <code>SUM()</code>: 
+<div><code></code></div>
+<ul>
+<li>
+<div><code>SUM(from a in db-&gt;Zatraty where b-&gt;Zayavka == $id select a-&gt;Summa)</code></div>
+<div> </div>
+</li>
+<li>
+<div>Функция <code>SUM()</code> принимает в качестве аргумента список значений и возвращает сумму их значений (число).<code></code></div>
+</li>
+</ul>
+</li>
+<li><span style="letter-spacing: 0.2px;">В функцию <code>SUM()</code> мы передаём список значений атрибута <em>«Сумма»</em> шаблона записи <em>«Затраты»</em>, сформированный с помощью следующего запроса:</span>
+<ul>
+<li><code>from a in</code> — объявление локальной переменной <code>a</code>;</li>
+<li><code>db-&gt;Zatraty</code> — объявление шаблона записи «Затраты» в качестве источника данных;</li>
+<li><code>where a-&gt;Zayavka == $id</code> — выбор записи, у которой значение атрибута «Заявка» типа «<strong>Запись</strong>» равно идентификатору текущей заявки, то есть выбор только тех затрат, которые относятся к данной заявке;</li>
+<li><code>select a-&gt;Summa</code> — выбор значений атрибута «Сумма»<code></code>.</li>
+</ul>
+</li>
+<li>Данную формулу можно составить двумя другими способами:
+<ul>
+<li><code>SUM(from a in $Zatraty select a-&gt;Summa)</code> — здесь в качестве источника данных запроса указан атрибут «Затраты» типа «<strong>Запись</strong>», который содержит идентификаторы записей шаблона <em>«Затраты»</em>, связанные с текущей заявкой;</li>
+<li><code>SUM($Zatraty-&gt;Summa)</code> — здесь мы напрямую передаем в <span style="letter-spacing: 0.2px;">функцию <code>SUM()</code> значения атрибута <em>«Сумма»</em>, записей шаблона <em>«Затраты»</em>, связанных с текущей заявкой.</span></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="notice notice-info">
+<p><strong>Примечание</strong></p>
+<p>Подробные сведения о составлении формул см. в разделе <em>«<a href="https://kb.comindware.ru/category.php?id=409">Язык формул</a>».</em></p>
+</div>
+<h2 id="mcetoc_1gbl7a9ke1">Тестирование вычисления суммы затрат</h2>
+<p><strong> 1. </strong> Перейдите к списку экземпляров шаблона процесса <em>«Заказ автотранспорта»</em> и нажмите кнопку «<strong>Создать</strong>». <strong> <br/></strong></p>
+<p><strong> 2. </strong> Пройдите процесс до задачи <em>«Выполнить рейс»</em>.</p>
+<p><strong> 3. </strong> Откройте задачу <em>«Заказ автотранспорта — Выполнить рейс»</em> и заполните таблицу затрат — укажите различные суммы и типы затрат.</p>
+<p>Поле «Итоговая сумма затрат» должно вычисляться автоматически: </p>
+<div class="screenshot_with_caption">
+<p><img alt="Автоматическое вычисление итоговой суммы затрат" class="img-responsive" height="530" src="https://kb.comindware.ru/assets/img_62445bc9bea52.png" width="1077"/></p>
+<p class="caption" style="font-size: 11pt !important;">Автоматическое вычисление итоговой суммы затрат</p>
+</div>
+<h2 id="l74">Формирование номера заявки</h2>
+<p>Настроим автоматическую нумерацию заявок…</p>
+<p><strong> 1. </strong> Перейдите на вкладку «<strong>Атрибуты</strong>» шаблона записи <em>«Заявка на автомобиль».</em></p>
+<p><strong>2.</strong> Добавьте новый текстовый атрибут <em>«Номер заявки»</em>. Установите флажок «<strong>Использовать как заголовок записей</strong>». Сохраните атрибут.</p>
+<p><strong>3. </strong> Перейдите к диаграмме процесса<em> «Заказ автотранспорта»</em> и нажмите кнопку «<strong>Редактировать</strong>».</p>
+<p><strong> 4. </strong> Выберите начальное событие и с помощью меню элемента откройте «<strong>Сценарий на выходе</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Переход к сценарию на выходе начального события с диаграммы бизнес-процесса" class="img-responsive" height="511" src="https://kb.comindware.ru/assets/img_6311e7a1f306c.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Переход к сценарию на выходе начального события с диаграммы бизнес-процесса</p>
+</div>
+<p><strong> 5. </strong>Отобразится конструктор сценария.</p>
+<p><strong>6. <a id="Step6ChangeAttributeValues"></a></strong>Внутри действия «<strong>Сменить контекст</strong>» нажмите кнопку «<span style="letter-spacing: 0.2px; font-weight: 700 !important;">Добавить действие</span><span style="letter-spacing: 0.2px;">»</span><span style="letter-spacing: 0.2px;"> </span><em class="fa-light fa-plus" style="letter-spacing: 0.2px;">‌</em> <span style="letter-spacing: 0.2px;"> и в раскрывающемся меню выберите пункт «</span><strong style="letter-spacing: 0.2px;">Изменить значения атрибутов</strong><span style="letter-spacing: 0.2px;">». </span></p>
+<div class="screenshot_with_caption">
+<p><img alt="Создание действия «Изменить значения» в сценарии" class="img-responsive" height="424" src="https://kb.comindware.ru/assets/img_6311e89d84bc5.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Создание действия «<strong>Изменить значения</strong>» в сценарии</p>
+</div>
+<p><strong> 7. </strong>Внутри действия «<strong>Сменить контекст</strong>» будет создано действие «<strong>Изменить значения атрибутов</strong>».</p>
+<p><strong>8. </strong>В правой части заголовка элемента «<strong>Изменить значения атрибутов</strong>» нажмите кнопку «<strong>Изменить</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Переход к настройке действия «Изменить значения атрибутов»" class="img-responsive" height="358" src="https://kb.comindware.ru/assets/img_63ff0a6613aae.png" width="1254"/></p>
+<p><span style="color: #666666; font-size: 11pt; font-style: italic; letter-spacing: 0.2px;">Переход к настройке действия «</span><strong style="color: #666666; font-size: 11pt; font-style: italic; letter-spacing: 0.2px;">Изменить значения атрибутов</strong> <span style="color: #666666; font-size: 11pt; font-style: italic; letter-spacing: 0.2px;"> » </span></p>
+</div>
+<p><strong>9. </strong>Отобразится окно «<strong>Действие: Изменить значения атрибутов</strong>».</p>
+<p><strong>10. </strong>Нажмите кнопку «<strong>Создать</strong>».</p>
+<p><strong>11. </strong>В столбце «<strong>Атрибут</strong>» выберите атрибут «<strong>Номер заявки».</strong></p>
+<p><strong>12. </strong> В столбце «<strong>Операция со значениями</strong>» выберите пункт «<strong>Заменить</strong>».</p>
+<p><strong>13. </strong> В столбце «<strong>Значение</strong>» выберите пункт «<strong>Формула</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Добавление операции с атрибутом для действия «Изменить значения»" class="img-responsive" height="501" src="https://kb.comindware.ru/assets/img_6311e9c30eab5.png" width="1254"/></p>
+<p><span style="color: #666666; font-size: 11pt; font-style: italic; letter-spacing: 0.2px;">Добавление операции с атрибутом для действия «</span><strong style="color: #666666; font-size: 11pt; font-style: italic; letter-spacing: 0.2px;">Изменить значения</strong> <span style="color: #666666; font-size: 11pt; font-style: italic; letter-spacing: 0.2px;"> » </span></p>
+</div>
+<p><strong>14. </strong> Нажмите поле в столбце «<strong>Значение</strong>». Отобразится компактный редактор формулы.</p>
+<p><strong>15. </strong> Ведите формулу: <code>FORMAT("ЗA-{0}",LIST(COUNT(from b in db-&gt;Zayavkanaavtomobil select b-&gt;id)))</code>. Нажмите кнопку с зеленым флажком.</p>
+<p>Здесь:</p>
+<ul>
+<li><code>FORMAT()</code> — функция, которая принимает в качестве аргументов строку и список, подставляет в первый аргумент значения из второго аргумента и возвращает строку.</li>
+<li><code>COUNT()</code> — функция, которая принимает аргумент-список и возвращает количество элементов в нём.</li>
+<li><code>Zayavkanaavtomobil</code> — это системное имя шаблона записи <em>«Заявка на автомобиль».</em></li>
+</ul>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Формула для вычисления номера заявки" class="img-responsive" height="287" src="https://kb.comindware.ru/assets/img_6311eaa77ae77.png" width="1254"/></p>
+<p class="caption" style="font-size: 15px !important;">Формула для вычисления номера заявки</p>
+</div>
+<p><strong>16. </strong> Нажмите кнопку «<strong>Сохранить</strong>», чтобы сохранить действие  «<strong>Изменить значения атрибута</strong>».</p>
+<p><strong>17. </strong> Вернитесь к диаграмме процесса и опубликуйте её.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Добавление выражения для изменения значения атрибута «Номер заявки» при выходе из начального события" class="img-responsive" height="287" src="https://kb.comindware.ru/assets/img_6311ea7e9db00.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Добавление выражения для изменения значения атрибута «Номер заявки» при выходе из начального события</p>
+</div>
+<h2 id="l75">Настройка отображения номера заявки</h2>
+<p>Настроим отображение номера заявки на форме заявки…</p>
+<p><strong> 1. </strong> Перейдите на вкладку «<strong>Формы</strong>» шаблона записи <em>«Заявка на автомобиль».</em></p>
+<p><strong> 2. </strong> Откройте конструктор формы <em>«Заявка на автомобиль — Основная форма»</em> и добавьте на нее поле «Номер заявки».</p>
+<p><strong> 3. </strong> Укажите для этого поля режим <strong>доступа</strong> «<strong>Только чтение</strong>» и сохраните форму.</p>
+<div class="screenshot_with_caption" style="font-size: 11pt !important;">
+<p><img alt="Добавление атрибута «Номер заявки» только для чтения на форму заявки на автомобиль" class="img-responsive" height="482" src="https://kb.comindware.ru/assets/img_6311edd5e3b9f.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Добавление атрибута «Номер заявки» только для чтения на форму заявки на автомобиль</p>
+</div>
+<h2 id="mcetoc_1gbl7b8172">Тестирование формирования номера заявки</h2>
+<p><strong> 1. </strong> Перейдите к списку экземпляров шаблона процесса <em>«Заказ автотранспорта».</em></p>
+<p><strong>2.</strong> Создайте новую заявку на автомобиль.</p>
+<p><strong> 3. </strong> Перейдите в раздел «<strong>Мои задачи</strong>» и откройте форму задачи <em>«Заказ автотранспорта — Согласовать заявку»</em>. Поле <em>«Номер заявки»</em> должно быть заполнено автоматически:</p>
+<div class="screenshot_with_caption">
+<p><img alt="Автоматически сформированный с помощью выражения номер заявки" class="img-responsive" height="305" src="https://kb.comindware.ru/assets/img_6311fce3e2454.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Автоматически сформированный с помощью выражения номер заявки</p>
+</div>
+<h2 id="l76">Статус заявки</h2>
+<p>Настроим автоматическое изменение статуса заявки. Статусы заявок будут храниться в справочнике, поэтому сначала мы создадим справочник статусов заявок…</p>
+<p><strong> 1. </strong> На панели навигации выберите пункты «<strong>Настройки</strong>» — <span style="letter-spacing: 0.2px;">«<strong>Диаграммы</strong>».</span></p>
+<p><span style="letter-spacing: 0.2px;"><strong>2.</strong> Откройте диаграмму <em>«Модель данных — Заказ автотранспорта».</em></span></p>
+<p><strong> 3. </strong> Перетащите на диаграмму элемент «<strong>Новый шаблон записи</strong>» и создайте шаблон записи <em>«Статус заявки».</em></p>
+<p><strong> 4. </strong> Выберите созданный шаблон <em>«Статус заявки»</em> и добавьте атрибут <em>«Название»</em> с установленным флажком <em>«<strong>Использовать как заголовок записей</strong>»</em>.</p>
+<p><strong>5.</strong> С помощью меню элемента перейдите на вкладку «<strong>Таблицы</strong>» шаблона <em>«Статус заявки».</em></p>
+<div class="screenshot_with_caption">
+<p><img alt="Диаграмма модели данных — создание нового шаблона записи, добавление в него атрибута и переход к настройке таблиц" class="img-responsive" height="354" src="https://kb.comindware.ru/assets/img_6244771f73e47.png" width="1071"/></p>
+<p class="caption" style="font-size: 11pt !important;">Диаграмма модели данных — создание нового шаблона записи, добавление в него атрибута и переход к настройке таблиц</p>
+</div>
+<p><strong> 6. </strong>Откройте конструктор таблицы «<strong>Все записи</strong>» и настройте отображение в ней только столбца <em>«Название».</em></p>
+<p><strong>7. </strong>Сохраните таблицу.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Настройка отображения справочника «Статус заявки»" class="img-responsive" height="319" src="https://kb.comindware.ru/assets/img_6311ee3a25a37.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Настройка отображения справочника «Статус заявки»</p>
+</div>
+<p><strong>8. </strong>Откройте конструктор формы шаблона <em>«Статус заявки»</em> и настройте её так, чтобы она содержала поле <em>«Название».</em></p>
+<div class="screenshot_with_caption" style="font-size: 11pt !important;">
+<p><img alt="Настройка формы «Статус заявки»" class="img-responsive" height="462" src="https://kb.comindware.ru/assets/img_6311ee9f0a26c.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Настройка формы «Статус заявки»</p>
+</div>
+<p><strong>9. </strong> Перейдите к списку экземпляров шаблона <em>«Статус заявки»</em> и создайте записи со следующими названиями: <em>«Создана», «На рассмотрении», «Завершена», «Отклонена», «Выполняется».</em></p>
+<div class="screenshot_with_caption">
+<p><img alt="Заполненный справочник «Статус заявки»" class="img-responsive" height="466" src="https://kb.comindware.ru/assets/img_6244792133664.png" width="1071"/></p>
+<p class="caption" style="font-size: 11pt !important;">Заполненный справочник «Статус заявки»</p>
+</div>
+<p><strong>10. </strong> Вернитесь к диаграмме модели данных и выберите шаблон <em>«Заявка на автомобиль».</em></p>
+<p><strong> 11. </strong> С помощью меню элемента создайте атрибут <em>«Статус»</em> типа «<strong>Запись</strong>», укажите <strong>связанный шаблон</strong> <em>«Статус заявки»</em>. Сохраните атрибут.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Представление связей на диаграмме модели данных" class="img-responsive" height="587" src="https://kb.comindware.ru/assets/img_62447a31402e8.png" width="1071"/></p>
+<p class="caption" style="font-size: 11pt !important;">Представление связей на диаграмме модели данных</p>
+</div>
+<p><strong>Теперь настроим автоматическое изменение статуса заявки…</strong></p>
+<p><strong> 1. </strong> Перейдите к диаграмме бизнес-процесса <em>«Заказ автотранспорта»</em> и нажмите кнопку «<strong>Редактировать</strong>».</p>
+<p><strong> 2. </strong> Выберите начальное событие и с помощью меню элемента откройте «<strong>Сценарий на выходе</strong>».</p>
+<p><strong> 3. </strong> Внутри действия «<strong>Сменить контекст</strong><em>»</em> нажмите кнопку «<strong>Изменить</strong>» в заголовке действия «<strong>Изменить значения атрибутов</strong>», <a href="#Step6ChangeAttributeValues"> созданного ранее</a>.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img class="img-responsive" src="https://kb.comindware.ru/assets/img_63ff0873b8edd.png" style="letter-spacing: 0.2px;"/></p>
+<p class="caption" style="font-size: 15px !important;"><span style="color: #666666; font-size: 11pt; font-style: italic; letter-spacing: 0.2px;">Переход к настройке действия «</span><span style="color: #666666; font-size: 11pt; font-style: italic; letter-spacing: 0.2px;">Изменить значения атрибутов</span> <span style="color: #666666; font-size: 11pt; font-style: italic; letter-spacing: 0.2px;"> » </span></p>
+</div>
+<p><strong>4.</strong> Создайте операцию «<strong>Заменить</strong>» с атрибутом <em>«Статус»</em>.</p>
+<p><strong>5.</strong> В столбце «<strong>Значение</strong>» выберите пункт «<strong>Формула</strong>».</p>
+<p><strong>6. </strong> Нажмите поле в столбце «<strong>Выражение</strong>». Отобразится компактный редактор формулы.</p>
+<p><strong>7.</strong> Введите формулу: <code>OBJECT("Upravlenieavtoparkom","Statuszayavki","Nazvanie","Создана")</code>. Нажмите кнопку с зеленым флажком.</p>
+<p>Здесь:</p>
+<ul>
+<li><code>OBJECT() </code>— функция, возвращающая ID записи по указанному пути к ней.</li>
+<li><code>Upravlenieavtoparkom </code>— системное имя приложения <em>«Управление автопарком».</em></li>
+<li><code>Statuszayavki </code>— системное имя шаблона записи <em>«Статус заявки».</em></li>
+<li><code>Nazvanie </code>— это системное имя атрибута <em>«Название»</em> в шаблоне записи <em>«Статус заявки».</em></li>
+<li><code>Создана </code>— искомое значение атрибута <em>«Название»</em> в шаблоне записи <em>«Статус заявки».</em></li>
+</ul>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Настройка операции изменения атрибута «Статус» при выходе из начального события" class="img-responsive" height="554" src="https://kb.comindware.ru/assets/img_6311f70a13643.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Настройка операции изменения атрибута «Статус» при выходе из начального события</p>
+</div>
+<p><strong>8. </strong> Нажмите кнопку «<strong>Сохранить</strong>», чтобы сохранить действие  «<strong>Изменить значения атрибутов</strong>».</p>
+<p><strong>9. </strong> Вернитесь к диаграмме процесса, но не публикуйте её.</p>
+<p>Теперь после создания заявки она получит статус <em>«Создана». </em></p>
+<p> </p>
+<p><strong>Аналогичным образом настройте автоматическое изменение статуса для других элементов процесса…</strong></p>
+<p>Если диаграмма бизнес-процесса открыта не в режиме редактирования нажмите кнопку «<strong>Редактировать</strong>».</p>
+<p><strong>1. </strong> Выберите задачу <em>«Согласовать заявку»</em> и с помощью меню элемента откройте «<strong>Сценарий на выходе</strong>».</p>
+<p><strong> 2. </strong> Добавьте действие «<strong>Изменить значения атрибутов</strong>» внутри действия «<strong>Сменить контекст</strong>».</p>
+<p><strong> 3. </strong>В действии «<strong>Изменить значения атрибутов</strong>» создайте операцию «<strong>Заменить</strong>» для атрибута «Статус» и формулой: <strong><code>OBJECT("Upravlenieavtoparkom","Statuszayavki","Nazvanie","На рассмотрении")</code>. </strong></p>
+<p><strong> 4. </strong> Выберите задачу «Вам отказано» и с помощью меню элемента откройте «<strong>Сценарий на входе</strong>».</p>
+<p><strong>5. </strong>Добавьте действие «<strong>Изменить значения атрибутов</strong>» внутри действия «<strong>Сменить контекст</strong>»  <span style="letter-spacing: 0.2px;"> с операцией « </span> <strong style="letter-spacing: 0.2px;"><em>Заменить</em></strong><span style="letter-spacing: 0.2px;">» для атрибута «Статус» и формулой: </span><strong style="letter-spacing: 0.2px;"><code>OBJECT("Upravlenieavtoparkom","Statuszayavki","Nazvanie","Отклонена")</code>. </strong></p>
+<p><strong> 6. </strong> Выберите <strong>развилку «и»</strong> перед событиями<em> «Машина выделена» </em>и <em>«Выполнить рейс»</em> и настройте для нее «<strong>Сценарий на выходе</strong>»: статус заявки должен принимать значение <em>«Выполняется».</em></p>
+<p><strong> 7. </strong> Настройте «<strong>Сценарий на входе</strong>» для конечного события после выполнения рейса так, чтобы статус заявки принимал значение <em>«Завершена».</em></p>
+<p><strong> 8. </strong> Опубликуйте диаграмму бизнес-процесса, чтобы изменения вступили в силу.</p>
+<h2 id="l77">Настройка отображения статуса и номера заявки</h2>
+<p>Мы добавили новый атрибут <em>«Статус»,</em> теперь необходимо настроить его отображение в списке записей и на экранной форме…</p>
+<p><strong> 1. </strong> Перейдите на вкладку «<strong>Формы</strong>» шаблона записи <em>«Заявка на автомобиль».</em></p>
+<p><strong> 2. </strong> Откройте конструктор формы <em>«Заявка на автомобиль — Основная форма».</em></p>
+<p><strong>3.</strong> Упорядочьте поля на форме с помощью столбцов.</p>
+<p><strong> 4. </strong> Перетащите на форму поле <em>«Статус»</em> и укажите <strong>режим доступа</strong> « <strong>Только чтение</strong>».</p>
+<p><strong>5.</strong> Сохраните форму.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Добавление атрибута «Статус» на форму заявки на автомобиль" class="img-responsive" height="532" src="https://kb.comindware.ru/assets/img_6244b24153def.png" width="1064"/></p>
+<p class="caption" style="font-size: 11pt !important;">Добавление атрибута «Статус» на форму заявки на автомобиль</p>
+</div>
+<p>Настроим отображение реестра (шаблона записи) <em>«Заявка на автомобиль»</em>…</p>
+<p><strong> 1. </strong> Перейдите на вкладку «<strong>Таблицы</strong>» шаблона «Заявка на автомобиль» и добавьте в таблицу «<strong>Все записи</strong>» столбцы <em>«Номер заявки»</em> и <em>«Статус»</em>.</p>
+<p><strong>2. </strong> Сохраните таблицу.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Добавление в таблицу столбцов с атрибутами шаблона записи" class="img-responsive" height="554" src="https://kb.comindware.ru/assets/img_6311f7d4466fd.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Добавление в таблицу столбцов с атрибутами шаблона записи</p>
+</div>
+<h2 id="mcetoc_1gbl7c0713">Тестирование изменения статуса заявки</h2>
+<p><strong> 1. </strong> Перейдите к списку экземпляров шаблона процесса <em>«Заказ автотранспорта»</em> и создайте новую заявку на автомобиль.</p>
+<p><strong> 2. </strong> Перейдите в раздел «<strong>Мои задачи</strong>» и откройте форму задачи <em>«Заказ автотранспорта — Согласовать заявку»</em>. Поле <em>«Статус»</em> должно быть заполнено автоматически.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Автоматическое заполненное с помощью справочника поле статуса заявки" class="img-responsive" height="248" src="https://kb.comindware.ru/assets/img_6311fa07dd4e7.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Автоматическое заполненное с помощью справочника поле статуса заявки</p>
+</div>
+<h2 id="l78">Настройка заголовка задачи</h2>
+<p>По умолчанию заголовки задач недостаточно информативны — они содержат только названия процесса и задачи, но никакой конкретной информации по заявке:</p>
+<div class="screenshot_with_caption">
+<p><img alt="Представление списка задач по умолчанию" class="img-responsive" height="437" src="https://kb.comindware.ru/assets/img_6244b8f8f059a.png" width="1058"/></p>
+<p class="caption" style="font-size: 11pt !important;">Представление списка задач по умолчанию</p>
+</div>
+<p>Настроим заголовки задач, чтобы в списке задач отображались не названия процессов, а содержательная информация — маршрут и Ф. И. О. создателя.</p>
+<p><strong> 1. </strong> Перейдите к диаграмме бизнес-процесса и нажмите кнопку «<strong>Редактировать</strong>».</p>
+<p><strong>2. </strong>Выберите задачу <em>«Согласовать заявку».</em></p>
+<p><strong> 3. </strong> В меню элемента нажмите кнопку «<strong>Свойства</strong>» <em class="fa-light fa-gear">‌</em>.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Переход к свойствам задачи с диаграммы бизнес-процесса" class="img-responsive" height="502" src="https://kb.comindware.ru/assets/img_6244b9fae6bf1.png" width="1058"/></p>
+<p class="caption" style="font-size: 11pt !important;">Переход к свойствам задачи с диаграммы бизнес-процесса</p>
+</div>
+<p><strong>4. </strong>В окне «<strong>Свойства пользовательской задачи</strong>» на вкладке «<strong>Дополнительные</strong>» выберите пункт «<strong>Формула</strong>» в поле «<strong>Заголовок задачи</strong>».</p>
+<p><strong> 5. </strong> Введите формулу: <code>FORMAT("Согласовать заявку ({0} — {1})",LIST($Marshrut,$_creatorRef-&gt;fullName))</code>.</p>
+<p>Здесь:</p>
+<ul>
+<li><code>$Marshrut</code> — системное имя атрибута <em>«Маршрут».</em><code></code></li>
+<li><code>$_creatorRef-&gt;fullName</code> — имя пользователя, создавшего заявку. </li>
+<li> <code>$FORMAT</code> — функция, подставляющая в строку в первом параметре значения из последующих параметров. </li>
+<li> <code>$LIST </code>— функция, возвращающая массив значений атрибутов, указанных во входных параметрах.</li>
+</ul>
+<p><strong>6. </strong> Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<div class="screenshot_with_caption" style="font-size: 11pt !important;">
+<p><img alt="Ввод выражения для вычисляемого заголовка задачи" class="img-responsive" height="296" src="https://kb.comindware.ru/assets/img_6475d2aaba009.png" width="1266"/></p>
+<p class="caption" style="font-size: 11pt !important;">Ввод выражения для вычисляемого заголовка задачи</p>
+</div>
+<p><strong>7. </strong> Аналогичным образом введите формулы для остальных задач процесса, указав в выражении соответствующие имена задач:</p>
+<ul>
+<li><code>FORMAT("Принять заявку ({0} — {1})",LIST($Marshrut,$_creatorRef-&gt;fullName))</code></li>
+<li><code>FORMAT("Вам отказано ({0} — {1})",LIST($Marshrut,$_creatorRef-&gt;fullName))</code></li>
+<li><code>FORMAT("Выполнить рейс ({0} — {1})",LIST($Marshrut,$_creatorRef-&gt;fullName))</code></li>
+<li><code>FORMAT("Машина выделена ({0} — {1})",LIST($Marshrut,$_creatorRef-&gt;fullName))</code></li>
+</ul>
+<p><strong>8. </strong> Опубликуйте диаграмму бизнес-процесса.</p>
+<h2 id="l79">Тестирование</h2>
+<p>Посмотрим, как теперь задачи отображаются в списке…</p>
+<p><strong> 1. </strong> Перейдите к экземплярам шаблона процесса <em>«Заказ автотранспорта»</em> и запустите процесс, создав новую заявку на автомобиль и заполнив стартовую форму.</p>
+<p><strong> 2. </strong> Перейдите в раздел «<strong>Мои задачи</strong>» и откройте задачу <em>«Согласовать заявку».</em> Теперь заголовок задачи в списке и в форме содержит название маршрута и Ф. И. О. создателя заявки:</p>
+<div class="screenshot_with_caption">
+<p><img alt="Сформированный с помощью выражения наглядный заголовок задачи" class="img-responsive" height="346" src="https://kb.comindware.ru/assets/img_631205abbb1d4.png" width="1254"/></p>
+<p><img alt="Сформированный с помощью выражения наглядный заголовок задачи" class="img-responsive" height="239" src="https://kb.comindware.ru/assets/img_6312052ae43a9.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Сформированный с помощью выражения наглядный заголовок задачи</p>
+</div>
+<h2 id="mcetoc_1gbl7cmia4">Результаты</h2>
+<p>Поздравляем! Вы научились делать автоматические вычисления в ходе процесса.</p>
+<p>В <a href="https://kb.comindware.ru/article.php?id=2063"> следующем уроке </a> вы настроите пользователей, роли и права доступа для вашего бизнес-приложения.</p>

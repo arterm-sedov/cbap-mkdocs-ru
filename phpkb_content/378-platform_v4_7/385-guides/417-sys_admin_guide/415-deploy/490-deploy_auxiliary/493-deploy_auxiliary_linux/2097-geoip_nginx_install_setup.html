@@ -1,0 +1,78 @@
+<h1>Модуль GeoIP для NGINX. Установка и настройка. Краткое руководство</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#установка"> <span class="md-ellipsis"> Установка </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#ограничение-доступа-для-пользователей-из-определенных-стран"> <span class="md-ellipsis"> Ограничение доступа для пользователей из определенных стран </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#пример-скрипта-автоматического-обновления"> <span class="md-ellipsis"> Пример скрипта автоматического обновления </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Для ограничения доступа к сайту пользователей из определенных стран с помощью веб-сервера NGINX, можно использовать модуль GeoIP.</p>
+<p>Здесь представлена краткая инструкция по установке и настройке конфигурации модуля GeoIP в ОС Linux для работы с <strong>Comindware Business Application Platform</strong>.</p>
+<p>Подробные сведения по установке и настройке модуля GeoIP представлены на следующих сайтах:</p>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://dev.maxmind.com/geoip/updating-databases?lang=en">https://dev.maxmind.com/geoip/updating-databases?lang=en</a></li>
+<li><a class="mkdocs_imported_link" href="https://itsecforu.ru/2018/08/29/как-установить-mod_geoip-для-apache-в-rhel-и-centos/">https://itsecforu.ru/2018/08/29/как-установить-mod_geoip-для-apache-в-rhel-и-centos/</a></li>
+</ul>
+<h2 id="установка">Установка</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Для установки необходимых пакетов в операционной системе выполните указанные ниже команды.</p>
+<ul>
+<li><strong>Astra/Debian/Ubuntu</strong>: <code>sudo apt-get install nginx-module-geoip</code></li>
+<li><strong>Alt</strong>: <code>sudo apt-get install nginx-geoip</code></li>
+<li><strong>CentOS</strong>: <code>yum install nginx-module-geoip</code></li>
+</ul>
+</li>
+<li>
+<p>Обновите базы GeoIP до актуальной версии с помощью команд:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>mv /usr/share/GeoIP/GeoIP.dat /usr/share/GeoIP/GeoIP.dat_bak   </code><br/><code><span class="nb">cd</span> /usr/share/GeoIP/   </code><br/><code>wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz   </code><br/><code>gunzip GeoIP.dat.gz</code></pre>
+</div>
+</li>
+<li>
+<p>С помощью команды <code>nginx -V</code> убедитесь, что веб-сервер собран с параметром <code>--with-http_geoip_module</code>. В противном случае необходимо самостоятельно собрать модуль NGINX. Исходные коды GeoIP находятся в открытом доступе.</p>
+</li>
+</ol>
+<h2 id="ограничение-доступа-для-пользователей-из-определенных-стран">Ограничение доступа для пользователей из определенных стран</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Чтобы запретить доступ к сайту пользователям из Украины и США, в папке с файлами конфигурации веб-сервера NGINX создайте файл <code>block.map.include</code> со следующими директивами:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>geoip_country /usr/share/GeoIP/GeoIP.dat<span class="p">;</span><span class="w">    </span></code><br/><code><span class="w">    </span>map <span class="nv">$geoip_country_code</span> <span class="nv">$allowed_country</span> <span class="o">{</span><span class="w">    </span></code><br/><code><span class="w">            </span>default yes<span class="p">;</span>   </code><br/><code><span class="w">            </span>UA no<span class="p">;</span>   </code><br/><code><span class="w">            </span>US no<span class="p">;</span>   </code><br/><code><span class="w">    </span><span class="o">}</span></code></pre>
+</div>
+</li>
+<li>
+<p>Чтобы разрешить использование сайта только пользователям из России, Китая и Тайваня, используйте в файле конфигурации следующие директивы:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>geoip_country /usr/share/GeoIP/GeoIP.dat<span class="p">;</span><span class="w">    </span></code><br/><code><span class="w">    </span>map <span class="nv">$geoip_country_code</span> <span class="nv">$allowed_country</span> <span class="o">{</span>   </code><br/><code><span class="w">        </span>default no<span class="p">;</span>   </code><br/><code><span class="w">        </span>RU yes<span class="p">;</span>   </code><br/><code><span class="w">        </span>CN yes<span class="p">;</span>   </code><br/><code><span class="w">        </span>TW yes<span class="p">;</span>   </code><br/><code><span class="w">    </span><span class="o">}</span></code></pre>
+</div>
+</li>
+<li>
+<p>В файле конфигурации <code>/etc/nginx/nginx.conf</code> в разделе <code>http</code> добавьте следующую директиву: <code>include include/block.map.include;</code></p>
+</li>
+<li>
+<p>В настройках хоста (раздел <code>server</code>) добавьте следующую директиву:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="k">if</span> <span class="o">(</span><span class="nv">$allowed_country</span> <span class="o">=</span> no<span class="o">)</span> <span class="o">{</span>   </code><br/><code><span class="w">    </span><span class="k">return</span> <span class="m">404</span><span class="p">;</span>   </code><br/><code><span class="o">}</span></code></pre>
+</div>
+</li>
+<li>
+<p>Примените изменения: <code># nginx -s reload</code></p>
+</li>
+</ol>
+<h2 id="пример-скрипта-автоматического-обновления">Пример скрипта автоматического обновления</h2>
+<p>Приведенный ниже скрипт загружает последнюю версию базы данных GeoIP каждый месяц. Добавьте его в файл <code>/etc/cron.monthly</code>.</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="ch">#!/bin/sh   </span></code><br/><code><span class="nv">GEOIP_MIRROR</span><span class="o">=</span><span class="s2">"http://geolite.maxmind.com/download/geoip/database"</span>   </code><br/><code><span class="nv">GEOIPDIR</span><span class="o">=</span>/usr/share/GeoIP   </code><br/><code><span class="nv">TMPDIR</span><span class="o">=</span>   </code><br/><code><span class="nv">DATABASES</span><span class="o">=</span><span class="s2">"GeoLiteCity GeoLiteCountry/GeoIP asnum/GeoIPASNum GeoIPv6"</span>   </code><br/><code><span class="k">if</span> <span class="o">[</span> -d <span class="s2">"</span><span class="si">${</span><span class="nv">GEOIPDIR</span><span class="si">}</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>   </code><br/><code><span class="nb">cd</span> <span class="nv">$GEOIPDIR</span>   </code><br/><code><span class="k">if</span> <span class="o">[</span> -n <span class="s2">"</span><span class="si">${</span><span class="nv">DATABASES</span><span class="si">}</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>   </code><br/><code><span class="nv">TMPDIR</span><span class="o">=</span><span class="k">$(</span>mktemp -d geoipupdate.XXXXXXXXXX<span class="k">)</span>   </code><br/><code><span class="nb">echo</span> <span class="s2">"Updating GeoIP databases..."</span>   </code><br/><code><span class="k">for</span> db <span class="k">in</span> <span class="nv">$DATABASES</span><span class="p">;</span> <span class="k">do</span>   </code><br/><code><span class="nv">fname</span><span class="o">=</span><span class="k">$(</span>basename <span class="nv">$db</span><span class="k">)</span>   </code><br/><code>wget --no-verbose -t <span class="m">3</span> -T <span class="m">60</span> <span class="s2">"</span><span class="si">${</span><span class="nv">GEOIP_MIRROR</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">db</span><span class="si">}</span><span class="s2">.dat.gz"</span> -O <span class="s2">"</span><span class="si">${</span><span class="nv">TMPDIR</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">fname</span><span class="si">}</span><span class="s2">.dat.gz"</span>   </code><br/><code>gunzip -fdc <span class="s2">"</span><span class="si">${</span><span class="nv">TMPDIR</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">fname</span><span class="si">}</span><span class="s2">.dat.gz"</span> &gt; <span class="s2">"</span><span class="si">${</span><span class="nv">TMPDIR</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">fname</span><span class="si">}</span><span class="s2">.dat"</span>   </code><br/><code>mv <span class="s2">"</span><span class="si">${</span><span class="nv">TMPDIR</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">fname</span><span class="si">}</span><span class="s2">.dat"</span> <span class="s2">"</span><span class="si">${</span><span class="nv">GEOIPDIR</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">fname</span><span class="si">}</span><span class="s2">.dat"</span>   </code><br/><code>chmod <span class="m">0644</span> <span class="s2">"</span><span class="si">${</span><span class="nv">GEOIPDIR</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">fname</span><span class="si">}</span><span class="s2">.dat"</span>   </code><br/><code><span class="k">done</span>   </code><br/><code><span class="o">[</span> -d <span class="s2">"</span><span class="si">${</span><span class="nv">TMPDIR</span><span class="si">}</span><span class="s2">"</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> rm -rf <span class="nv">$TMPDIR</span>   </code><br/><code><span class="k">fi</span>   </code><br/><code><span class="k">fi</span></code></pre>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

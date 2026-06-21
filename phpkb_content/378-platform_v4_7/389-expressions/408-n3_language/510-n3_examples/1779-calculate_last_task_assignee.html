@@ -1,0 +1,13 @@
+<h1>Вычисление фактического исполнителя у последней завершенной задачи</h1><p>Для того, чтобы вычислить пользователя, который завершил последнюю задачу из списка задач связанного с текущим объектом экземпляра процесса, введите следующее выражение:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">
+<p>@prefix cmw: &lt;http://comindware.com/logics#&gt;.<br/>@prefix task: &lt;http://comindware.com/ontology/task#&gt;.<br/>@prefix account: &lt;http://comindware.com/ontology/account#&gt;.<br/>@prefix taskStatus: &lt;http://comindware.com/ontology/taskStatus#&gt;.<br/>@prefix cmwmath: &lt;http://comindware.com/logics/math#&gt;.<br/>@prefix ui: &lt;http://comindware.com/ontology/ui#&gt;.<br/>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.<br/>@prefix cmwstring: &lt;http://comindware.com/logics/string#&gt;.</p>
+<p>{<br/>     from {<br/>    ?task task:objectId ?item.<br/>    ?task cmw:taskStatus taskStatus:completed.<br/>    ?task cmw:scheduledEndDate ?taskDate.                <br/>     } select ?taskDate -&gt; ?taskList.<br/>    ?taskList cmwmath:max ?max.    <br/>    ?taskmax cmw:scheduledEndDate ?max.          <br/>    ?taskmax cmw:completedBy ?value.<br/>    }</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>

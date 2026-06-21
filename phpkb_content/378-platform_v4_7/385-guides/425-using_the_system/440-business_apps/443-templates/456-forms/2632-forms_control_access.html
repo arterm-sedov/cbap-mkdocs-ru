@@ -1,0 +1,123 @@
+<h1>Публичные и внутренние формы. Контроль доступа</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#пример-настройки-внутренней-формы-для-ограничения-доступа-к-ней"> <span class="md-ellipsis"> Пример настройки внутренней формы для ограничения доступа к ней </span> </a><nav aria-label="Пример настройки внутренней формы для ограничения доступа к ней" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-форм"> <span class="md-ellipsis"> Настройка форм </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#тестирование"> <span class="md-ellipsis"> Тестирование </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Для любого шаблона (кроме шаблона процесса) можно создать неограниченное число форм. На них можно поместить разные атрибуты, и каждая форма может предназначаться для отдельной категории пользователей.</p>
+<p>Доступ пользователей к форме определяется с помощью <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2208">ролей</a></strong> и <strong>типа формы</strong>.</p>
+<p>Здесь рассматривается контроль доступа к формам посредством <strong>типа формы</strong>.</p>
+<div class="notice notice-success">
+<p class="admonition-title">Определения</p>
+<p>Предусмотрено два <strong>типа форм</strong>: <strong>публичная</strong> и <strong>внутренняя</strong>.</p>
+<ul>
+<li>К <strong>публичной</strong> форме можно перейти с помощью селектора форм <em class="fa-light fa-angle-down anchor">‌<!--icon--></em> рядом с заголовком записи.</li>
+<li><strong>Внутренняя</strong> форма не отображается в селекторе форм.
+<ul>
+<li><strong>Внутренняя</strong> форма отображается, только если она вложена в другую форму или указана в качестве формы для записей (например, при запуске процесса, при создании записи, в диалоговых окнах).</li>
+<li>К <strong>внутренней</strong> форме можно перейти по прямой ссылке.</li>
+</ul>
+</li>
+<li>Вложенная форма отображается в составе родительской формы независимо от того, является ли она <strong>внутренней</strong> или <strong>публичной</strong>, и независимо от разрешения на просмотр вложенной формы в роли пользователя.</li>
+<li>Ни <strong>внутренняя</strong>, ни <strong>публичная</strong> форма не отображается, если роль пользователя не разрешает просмотр данной формы.</li>
+<li>По умолчанию формы являются <strong>публичными</strong>. Чтобы ограничить доступ к форме через селектор форм, необходимо сменить тип формы на <strong>внутреннюю</strong>.</li>
+</ul>
+</div>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>В <strong>начальном событии</strong> и <strong>пользовательской задаче</strong> отображается только определённая форма связанного шаблона записи и селектор форм недоступен.</p>
+<p><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2363"><strong>Стартовая форма</strong> и <strong>форма пользовательской задачи</strong></a> всегда являются <strong>публичными</strong>.</p>
+</div>
+<h2 id="пример-настройки-внутренней-формы-для-ограничения-доступа-к-ней">Пример настройки внутренней формы для ограничения доступа к ней</h2>
+<p>В качестве примера создадим в шаблоне записи две формы и разграничим доступ к ним:</p>
+<ul>
+<li><em>Клиент</em> — <strong>публичная</strong> форма, будет доступна через селектор форм <em class="fa-light fa-angle-down anchor">‌<!--icon--></em> наряду с <strong>основной формой</strong> шаблона.</li>
+<li><em>Диспетчер</em> — <strong>внутренняя</strong> форма, не будет доступна через селектор форм. Пользователь сможет перейти к этой форме только по прямой ссылке, например, отправленной в эл. письме.</li>
+</ul>
+<h3 id="настройка-форм">Настройка форм</h3>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте шаблон записи <em>«Заявки»</em> со следующими атрибутами:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Название</th>
+<th>Тип</th>
+<th>Свойства</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Тип ТС</em></td>
+<td><strong>Список значений</strong></td>
+<td>Добавьте значения <em>«легковой автомобиль»</em>, <em>«автобус»</em>, <em>«грузовой автомобиль»</em></td>
+</tr>
+<tr>
+<td><em>Количество пассажиров</em></td>
+<td><strong>Число</strong></td>
+<td><strong>Количество знаков после запятой: 0</strong></td>
+</tr>
+<tr>
+<td><em>Водитель</em></td>
+<td><strong>Аккаунт</strong></td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Поместите на <strong>основную форму</strong> шаблона атрибуты <em>«Тип ТС»</em> и <em>«Количество пассажиров»</em>.</p>
+</li>
+<li>Создайте форму <em>«Клиент»</em> и поместите на неё атрибут <em>«Количество пассажиров»</em>.</li>
+<li>Создайте форму <em>«Диспетчер»</em> и поместите на неё атрибуты <em>«Тип ТС»</em>, <em>«Количество пассажиров»</em>, <em>«Водитель»</em>.</li>
+<li>В свойствах формы <em>«Диспетчер»</em> выберите <strong>тип</strong> «<strong>Внутренняя</strong>».</li>
+</ol>
+<h3 id="тестирование">Тестирование</h3>
+<ol class="colored_numbers_list">
+<li>Создайте новую запись в шаблоне <em>«Заявки»</em>.</li>
+<li>Откроется основная форма шаблона.</li>
+<li>
+<p>Нажмите селектор форм <em class="fa-light fa-angle-down anchor">‌<!--icon--></em> рядом с заголовком записи:</p>
+<ul>
+<li>В раскрывающемся списке под селектором будут отображаться <strong>основная форма</strong> шаблона и форма <em>«Клиент»</em>.</li>
+<li>Форма <em>«Диспетчер»</em> в списке отображаться не будет.</li>
+</ul>
+</li>
+<li>
+<p>Выберите и просмотрите форму <em>«Клиент»</em>.</p>
+</li>
+<li>
+<p>Перейдите к форме <em>«Диспетчер»</em>, используя ссылку вида:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>http://example.com/#form/<span class="p">&lt;</span><span class="nt">oa.XX</span><span class="p">&gt;</span>/<span class="p">&lt;</span><span class="nt">form.XX</span><span class="p">&gt;</span>/<span class="p">&lt;</span><span class="nt">RecordID</span><span class="p">&gt;</span></code></pre>
+</div>
+<p>Здесь:</p>
+<ul>
+<li><code>http://example.com/</code> — адрес сервера <strong>Comindware Business Application Platform</strong>;</li>
+<li><code>&lt;oa.XX&gt;</code> — ID шаблона записи <em>«Заявки»</em> (его видно в <a class="autorefs autorefs-internal mkdocs_imported_link" href="../index.html#просмотр-списка-шаблонов-приложения">списке шаблонов</a>);</li>
+<li><code>&lt;form.XX&gt;</code> — ID формы <em>«Диспетчер»</em> (его видно в адресной строке браузера в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2271">конструкторе формы</a>);</li>
+<li><code>&lt;RecordID&gt;</code> — ID записи <em>«Заявки»</em>.</li>
+</ul>
+</li>
+</ol>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2271">Формы. Определения, редактирование, удаление, использование списка форм</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2363">Стартовая форма и форма пользовательской задачи</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2208">Роли в приложении. Определения, настройка, объединение, удаление</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

@@ -1,0 +1,14 @@
+<h1>Вычисление пользователей, у которых есть активные задачи (с учетом замещений)</h1><p>Для того, чтобы вычислить всех пользователей у которых на данный момент есть активные задачи, учитывая все замещения (чтобы, например, запустить по ним подпроцесс отправки уведомления по задачам (см. <a href="https://kb.comindware.ru/article/%d0%9d%d0%b0%d1%81%d1%82%d1%80%d0%be%d0%b9%d0%ba%d0%b0-%d0%bf%d0%b5%d1%80%d0%b8%d0%be%d0%b4%d0%b8%d1%87%d0%b5%d1%81%d0%ba%d0%b8%d1%85-%d0%bd%d0%b0%d0%bf%d0%be%d0%bc%d0%b8%d0%bd%d0%b0%d0%bd%d0%b8%d0%b9-%d0%be%d0%b1-%d0%be%d1%82%d0%ba%d1%80%d1%8b%d1%82%d1%8b%d1%85-%d0%b7%d0%b0%d0%b4%d0%b0%d1%87%d0%b0%d1%85-1355.html">эту статью</a>), введите следующее выражение:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">
+<p>@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;.<br/>@prefix log: &lt;http://www.w3.org/2000/10/swap/log#&gt;.<br/>@prefix cmw:  &lt;http://comindware.com/logics#&gt;.<br/>@prefix substitution: &lt;http://comindware.com/ontology/substitution#&gt;.<br/>@prefix assert: &lt;http://comindware.com/logics/assert#&gt;.<br/>@prefix session: &lt;http://comindware.com/ontology/session#&gt;.<br/>@prefix timelocal: &lt;http://comindware.com/logics/time/local#&gt;.<br/>@prefix taskStatus: &lt;http://comindware.com/ontology/taskStatus#&gt;.<br/>@prefix account: &lt;http://comindware.com/ontology/account#&gt;.<br/>{<br/>    ?class cmw:className "Account".<br/>    ?value a ?class.<br/>    ?value account:active true.<br/>    cmw:securityContext cmw:currentUser ?user.<br/>    session:context session:requestTime ?now.<br/>    ?task a cmw:UserTask.<br/>    not {?value cmw:isDisabled true.}.<br/>    <br/>   or<br/>    {<br/>      ?task cmw:assignee ?value.<br/>    }<br/>    or<br/>    {<br/>       ?task cmw:possibleAssignee ?value.<br/>    }<br/>    or<br/>    {<br/>        ?substitut a substitution:Substitution.<br/>        ?substitut substitution:startDate ?startDate.<br/>        ?substitut substitution:endDate ?endDate. <br/>        ?now timelocal:between (?startDate ?endDate).<br/>        ?substitut substitution:deputies ?value.<br/>        ?substitut substitution:absentee ?abs.<br/>          ?task cmw:assignee ?abs.<br/>    }<br/>    or<br/>    {<br/>        ?substitut a substitution:Substitution.<br/>        ?substitut substitution:startDate ?startDate.<br/>        ?substitut substitution:endDate ?endDate. <br/>        ?now timelocal:between (?startDate ?endDate).<br/>        ?substitut substitution:deputies ?value.<br/>        ?substitut substitution:absentee ?abs.<br/>       ?task cmw:possibleAssignee ?abs.<br/>    }.<br/>?task cmw:taskStatus taskStatus:inProgress.</p>
+<p>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p> </p>

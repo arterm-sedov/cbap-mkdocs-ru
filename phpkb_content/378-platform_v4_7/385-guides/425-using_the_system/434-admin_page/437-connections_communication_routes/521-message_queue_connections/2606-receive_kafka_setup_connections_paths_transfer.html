@@ -1,0 +1,283 @@
+<h1>Получение сообщений через Kafka. Настройка подключения, пути передачи данных и сценария</h1><div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1hsvhrhjid">Введение</a>
+<ul>
+<li><a href="#mcetoc_1hphddodm0">Определения</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1hsvhrhjif">Прикладная задача</a></li>
+<li><a href="#mcetoc_1hsvhhkrg9">Исходные данные</a></li>
+<li><a href="#mcetoc_1htc82v2l2">Настройка подключения к Kafka</a></li>
+<li><a href="#mcetoc_1htc8spju6">Настройка пути передачи данных через Kafka</a></li>
+<li><a href="#mcetoc_1htc8mrcc3">Настройка сценария</a></li>
+<li><a href="#mcetoc_1htc8n24r4">Создание топика и тестирование работы интеграции</a></li>
+<li><a href="#mcetoc_1htc8n7aj5">Просмотр журнала работы сценария</a></li>
+<li><a href="#mcetoc_1htcbkgki7">Связанные статьи</a></li>
+</ul>
+</div>
+<div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="md-content">
+<div class="notice notice-error">
+<p class="admonition-title">Экспериментальная функция</p>
+<p>Представленная здесь функция находится на стадии разработки. См. <em>«<a href="https://kb.comindware.ru/article.php?id=1339#mcetoc_1hsfq7ksu2">Поддержка экспериментальных функций</a>»</em>.</p>
+</div>
+<h2 class="md-dialog" id="mcetoc_1hsvhrhjid">Введение</h2>
+<p>В этой статье представлены инструкции по настройке подключения, пути передачи данных и сценария для обмена данными с внешней системой посредством шины сообщений Kafka.</p>
+<p>Настройка обмена данными для шин MSMQ и RabbitMQ осуществляется аналогичным образом.</p>
+<div class="md-content">
+<div class="notice notice-success">
+<h3 class="admonition-title" id="mcetoc_1hphddodm0">Определения</h3>
+<ul>
+<li><strong>Подключения</strong> <strong>к шинам сообщений </strong>Kafka, MSMQ и RabbitMQ используются для обмена данными между  и с внешними системами. </li>
+<li>Для обмена данными требуется настроить <strong>подключение</strong> и <strong>путь передачи данных</strong>, который обеспечивает преобразование данных между системами.</li>
+<li><strong>Kafka</strong> — это распределённая система обмена сообщениями с высокой пропускной способностью.</li>
+<li><strong>Продюсер</strong> — это сервис, который записывает сообщения в топик Kafka для передачи потребителям.</li>
+<li><strong>Брокер</strong> — это сервис, который хранит и обрабатывает сообщения в топиках Kafka. Брокеры объединены в кластер.</li>
+<li><strong>Потребитель</strong>, <strong>консюмер</strong> — это сервис, который получает сообщения из топиков Kafka.</li>
+<li><strong>Топик</strong> Kafka — это хранилище сообщений, объединённых общей бизнес-логикой. Например, в одном топике можно объединить сообщения о заказах, а в другом сообщения о бухгалтерских проводках. К одному топику могут обращаться несколько продюсеров и потребителей. Топик может быть разбит на <strong>разделы</strong>.</li>
+<li><strong>Раздел</strong>, <strong>партиция</strong> — составная часть <strong>топика</strong>. Раздел состоит из <strong>сегментов</strong> — файловых журналов сообщений. Сообщения нумеруются последовательно, записываются в конец сегмента и хранятся неизменными. Разделы могут находиться в разных <strong>брокерах</strong>.</li>
+<li>При получении сообщений через шину Kafka <strong>Comindware Business Application Platform </strong>является <strong>потребителем</strong>, а при отправке — <strong>продюсером</strong>.</li>
+</ul>
+</div>
+<h2 class="md-dialog" id="mcetoc_1hsvhrhjif">Прикладная задача</h2>
+</div>
+</div>
+</div>
+<div class="md-dialog">
+<p>Необходимо настроить интеграцию с шиной Kafka, которая будет опрашивать топик <code>CLIENT_ORDERS</code>, извлекать из него данные о заказах клиентов и создавать для каждого полученного заказа запись в шаблоне <em>«Заказы» </em>с заполненными кодом и суммой заказа.</p>
+<h2 id="mcetoc_1hsvhhkrg9">Исходные данные</h2>
+<ul>
+<li>Имеется приложение <em>«Обработка заказов»</em><em style="letter-spacing: 0.2px;">.</em></li>
+<li>В приложении имеется шаблон записи <em>«Заказы»</em> со следующими атрибутами:</li>
+<li class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%;">
+<tbody>
+<tr>
+<th style="width: 50%;">Название атрибута</th>
+<th style="width: 50%;">Тип данных</th>
+</tr>
+<tr>
+<td style="width: 50%;"><em>Код заказа</em></td>
+<td style="width: 50%;"><strong>Текст</strong></td>
+</tr>
+<tr>
+<td style="width: 50%;"><em>Сумма заказа</em></td>
+<td style="width: 50%;"><strong>Число</strong></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>Имеется сервер Kafka, доступный по адресу <code>12.34.56.78:9092</code></li>
+</ul>
+<h2 id="mcetoc_1htc82v2l2">Настройка подключения к Kafka</h2>
+<ol class="colored_numbers_list">
+<li>Откройте страницу <a href="https://kb.comindware.ru/article.php?id=2205">«<strong>Администрирование</strong>» — «<strong>Подключения</strong>»</a>.</li>
+<li>Создайте или настройте <strong>подключение к шине сообщений</strong> типа «<strong>Получение сообщений через Kafka</strong>»:
+<ul>
+<li><strong>Системное имя</strong> — введите уникальное имя из латинских букв и цифр, например <code>kafka_receive_messages_connection</code></li>
+<li><strong>Отключить</strong> — установите этот флажок, если требуется деактивировать подключение.</li>
+<li><strong>Описание</strong> — введите наглядное описание подключения.</li>
+<li><strong>Запись в файловые журналы </strong>— выберите способ записи сведений о работе подключения:
+<ul>
+<li><strong>Полные сведения об обработке сообщения</strong></li>
+<li><strong>Только ошибки</strong></li>
+<li><strong>Отключить</strong></li>
+</ul>
+</li>
+<li><strong>Список пар хост/порт (разделённых запятой), используемых для подключения к кластеру Kafka </strong>— введите адреса одного или нескольких узлов кластера Kafka, например <code>123.45.67.89:9092</code>.</li>
+<li><strong>Максимальный объем данных (в байтах), который брокеры должны возвращать по запросу сообщений </strong>— введите лимит для ответа каждого брокера, при превышении которого ответ будет содержать только первые сообщения, поместившиеся в лимит, а остальные сообщения будут отброшены.</li>
+<li><strong>Количество байтов, которые необходимо попытаться получить для каждого топика-партиции в каждом запросе сообщений </strong>— введите объём данных для получения от Kafka, не меньше максимального размера сообщения, допустимого сервером Kafka. При превышении лимита сообщения не будут переданы.</li>
+<li><strong>Тайм-аут (в миллисекундах) для запросов на стороне сервера Kafka </strong>— введите лимит времени обработки запроса сервером Kafka. При превышении лимита обмен данными будет прерван.</li>
+<li><strong>Тайм-аут на стороне клиента (в миллисекундах) </strong>— введите лимит времени ожидания ответа от сервера Kafka. При превышении лимита сообщения не будут переданы.</li>
+<li><strong>Временной интервал (в миллисекундах) для пакетной обработки сообщений, используемых при запросах сообщений</strong> — введите интервал опроса Kafka.</li>
+<li><strong>Имя пользователя </strong>и<strong> пароль </strong>— введите логин и пароль для подключения к серверу Kafka.</li>
+</ul>
+</li>
+</ol>
+<h2 id="mcetoc_1htc8spju6">Настройка пути передачи данных через Kafka</h2>
+<ol class="colored_numbers_list">
+<li>Откройте страницу <a href="https://kb.comindware.ru/article.php?id=2205">«<strong>Администрирование</strong>» — «<strong>Пути передачи данных</strong>»</a>.</li>
+<li>Создайте или настройте путь передачи данных для <strong>подключения к шине сообщений</strong> типа «<strong>Получение сообщений через Kafka</strong>».</li>
+<li>Настройте параметры на вкладке «<strong>Основные свойства</strong>»:
+<ul>
+<li><strong>Подключение </strong>— выберите ранее настроенное <a href="#mcetoc_1hsvhhkrg8">подключение к шине Kafka</a>: <code>kafka_receive_messages_connection</code></li>
+<li><strong>Системное имя</strong> — введите уникальное имя из латинских букв и цифр, например <code>kafka_receive_messages_route</code></li>
+<li><strong>Отключить</strong> — установите этот флажок, если требуется деактивировать путь передачи данных.</li>
+<li><strong>Описание</strong> — введите наглядное описание пути передачи данных.</li>
+<li><strong>Номер шины данных </strong>— выберите номер потока обработки сообщений, например <strong>0</strong>. Если одновременно используется много путей передачи данных через Kafka, для распределения нагрузки может потребоваться выбрать для них разные номера шины данных.</li>
+</ul>
+</li>
+<li>Настройте параметры на вкладке «<strong>Атрибуты сообщений</strong>»:
+<ul>
+<li><strong>Тип сообщения </strong>— выберите тип «<strong>Получение сообщений через Kafka</strong>» (в соответствии с типом пути передачи данных).</li>
+<li><strong>Запрос </strong>— с помощью кнопки «<strong>Добавить</strong>» сформируйте структуру атрибутов, соответствующую структуре сообщения в формате XML/JSON. Значения этих атрибутов будут помещены в переменную и обработаны с помощью <a href="#mcetoc_1hsvhhkrga">сценария</a>, срабатывающего при наступлении события «<strong>Получение сообщения</strong>»: <br/>
+<ul>
+<li><strong>Системное имя</strong> — введите имя, совпадающее с именем поля в XML/JSON с точностью до строчных и прописных букв.</li>
+<li><strong>Тип</strong> — выберите тип атрибута, соответствующий типу поля в XML/JSON.</li>
+<li><strong>Описание</strong> — введите наглядное описание атрибута.</li>
+<li><strong>Обязательный</strong> — установите этот флажок, если атрибут должен присутствовать в сообщении.</li>
+<li><strong>Не пустой</strong> — установите этот флажок, если атрибут должен иметь значение.</li>
+<li><strong>Массив</strong> — установите этот флажок, если атрибут может содержать список значений.
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Чтобы добавить дочерний атрибут, установите флажок в первом столбце таблицы у родительского атрибута и нажмите кнопку «<strong>Добавить</strong>».</p>
+</div>
+<div class="notice notice-success">
+<p class="admonition-title">Пример передачи массива объектов</p>
+<ul>
+<li>Сообщение содержит массив объектов <code>orders</code> в формате JSON:
+<pre><code>{ </code> <br/><code>    "orders": [ </code> <br/><code>        { </code> <br/><code>        "code": "12-A", </code> <br/><code>        "amount": 123 </code> <br/><code>        }, </code> <br/><code>        { </code> <br/><code>        "code": "34-B" </code> <br/><code>        "amount": 345 </code> <br/><code>        }, </code> <br/><code>        { </code> <br/><code>        "code": "56-C", </code> <br/><code>        "amount": 678  </code> <br/><code>        } </code> <br/><code>    ] </code> <br/><code>}</code></pre>
+</li>
+<li>Для получения данных из приведённого выше сообщения создайте следующие атрибуты:
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%;">
+<tbody>
+<tr>
+<th style="width: 25%;">Родительский атрибут</th>
+<th style="width: 25%;">Системное имя</th>
+<th style="width: 25%;">Тип данных</th>
+<th style="width: 25%;">Массив</th>
+</tr>
+<tr>
+<td style="width: 25%;"> </td>
+<td style="width: 25%;"><em>orders</em></td>
+<td style="width: 25%;"><strong>Объект</strong></td>
+<td style="width: 25%;">Флажок установлен</td>
+</tr>
+<tr>
+<td style="width: 25%;"><em>orders</em></td>
+<td style="width: 25%;"><em>code</em></td>
+<td style="width: 25%;"><strong>Строка</strong></td>
+<td style="width: 25%;"> </td>
+</tr>
+<tr>
+<td style="width: 25%;"><em>orders</em></td>
+<td style="width: 25%;"><em>amount</em></td>
+<td style="width: 25%;"><strong>Число</strong></td>
+<td style="width: 25%;"> </td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</li>
+<li><strong>Ответ </strong>и <strong>Ответ с ошибкой </strong>— аналогично запросу, сформируйте структуру атрибутов для отправки серверу Kafka ответа на полученный запрос. Значения этим атрибутам можно присвоить с помощью <a href="#mcetoc_1hsvhhkrga">сценария</a>, срабатывающего при наступлении события «<strong>Получение сообщения</strong>».</li>
+</ul>
+</li>
+<li>Настройте параметры на вкладке «<strong>Интеграция</strong>»:
+<ul>
+<li><strong>Очередь </strong>— введите название топика Kafka, который необходимо прослушивать, например <code>CLIENT_ORDERS</code>.</li>
+<li><strong>Тип содержимого </strong>— выберите формат передачи данных:
+<ul>
+<li><strong>XML</strong></li>
+<li><strong>JSON</strong></li>
+</ul>
+</li>
+<li><strong>Уникальная текстовая строка</strong> — укажите название группы потребителей. Например, введите имя экземпляра ПО <strong>Comindware Business Application Platform</strong>. Название группы потребителей служит для отслеживания новых сообщений в топике. Не назначайте это название группы другим потребителям, в противном случае будет утрачен прогресс считывания сообщений из топика.</li>
+</ul>
+</li>
+</ol>
+<h2 id="mcetoc_1htc8mrcc3">Настройка сценария</h2>
+<p>Для получения сообщений через шину Kafka и передачи данных в шаблон записи требуется настроить <a href="https://kb.comindware.ru/category.php?id=427">сценарий</a>, срабатывающий при поступлении сообщения из Kafka.</p>
+<ol class="colored_numbers_list">
+<li>На странице <a href="https://kb.comindware.ru/article.php?id=2209#mcetoc_1gjrm25045">администрирования приложения</a> выберите пункт «<strong>Сценарии</strong>».</li>
+<li>Создайте сценарий:
+<ul>
+<li><strong>Название</strong>: <em>Получение данных из Kafka</em></li>
+<li><strong>Системное имя</strong>: заполняется автоматически.</li>
+<li><strong>Контекст выполнения</strong>: <strong>От инициатора</strong></li>
+<li><strong>Статус</strong>: на время настройки триггера можно выбрать «<strong>Приостановлен</strong>», чтобы сценарий не срабатывал без необходимости. После настройки сценария, установите статус «<strong>Активен</strong>», чтобы сценарий обрабатывал сообщения, появляющиеся в топике Kafka.</li>
+</ul>
+</li>
+<li>Отобразится конструктор сценария.</li>
+<li>Нажмите заголовок события «<strong>Нажатие кнопки</strong>».</li>
+<li>Настройте свойства события:
+<ul>
+<li><strong>Тип: Получение сообщения</strong></li>
+<li><strong>Контекстный шаблон: </strong><em>Заказы</em></li>
+<li><strong>Подключение: </strong><em>kafka_receive_messages_connection</em></li>
+<li><strong>Путь передачи данных:</strong><em> kafka_receive_messages_connection</em></li>
+<li><strong>Имя переменной: </strong><em>kafka_message — </em>в этой переменной будет храниться полученное сообщение.</li>
+</ul>
+</li>
+<li>После события «<strong>Получение сообщения</strong>» создайте и настройте действие «<strong>Повторять по количеству объектов</strong>»:
+<ul>
+<li><strong>Переменная:</strong> <em>order</em></li>
+<li><strong>Атрибут или выражение для поиска объектов:</strong> <strong><strong>формула<br/></strong> </strong>
+<pre class="source_code_container"><code>$$kafka_message-&gt;orders</code></pre>
+На каждой итерации цикла в переменную <code>order</code> будет помещаться объект из полученного в сообщении от Kafka массива <code>orders</code>.</li>
+</ul>
+</li>
+<li>Внутри действия «<strong>Повторять по количеству объектов</strong>» создайте действие «<strong>Создать запись</strong>» с целевым шаблоном <em>«Заказы»</em>.</li>
+<li>Внутри действия «<strong>Создать запись</strong>» создайте и настройте действие «<strong>Изменить значение атрибутов</strong>» следующим образом:
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%; height: 80px;">
+<tbody>
+<tr style="height: 40px;">
+<th style="width: 33.3333%; height: 40px;">Атрибут</th>
+<th style="width: 33.3333%; height: 40px;">Операция со значениями</th>
+<th style="width: 33.3333%; height: 40px;">Значение</th>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 33.3333%; height: 40px;"><em>Код заказа</em></td>
+<td style="width: 33.3333%; height: 40px;"><strong>Заменить</strong></td>
+<td style="width: 33.3333%; height: 40px;"><strong>Формула: </strong><code>$$order-&gt;code</code></td>
+</tr>
+<tr>
+<td style="width: 33.3333%;"><em>Сумма заказа</em></td>
+<td style="width: 33.3333%;"><strong>Заменить</strong></td>
+<td style="width: 33.3333%;"><strong>Формула: <code>$$order-&gt;amount</code></strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ol>
+<figure class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Настроенный сценарий для получения данных через шину Kafka" class="img-responsive" height="568" src="https://kb.comindware.ru/assets/img_66420c72c85f9.png" width="993"/></p>
+<figcaption class="caption" style="font-size: 15px !important;">Настроенный сценарий для получения данных через шину Kafka</figcaption>
+</figure>
+<h2 id="mcetoc_1htc8n24r4">Создание топика и тестирование работы интеграции</h2>
+<ol class="colored_numbers_list">
+<li><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0.2px;">С помощью скрипта продюсера </span></span><span style="letter-spacing: 0.2px;">Kafka </span>инициализируйте топик, например <code>CLIENT_ORDERS</code><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0.2px;">:</span> </span>
+<pre class="source_code_container"><code>sudo -i<br/>cd /usr/share/kafka/bin<br/>bash kafka-console-producer.sh --bootstrap-server 12.34.56.78:9092 --topic CLIENT_ORDER</code></pre>
+Здесь <code>12.34.56/78:9092</code> — IP-адрес сервера Kafka.</li>
+<li><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0.2px;">В терминале отобразится запрос сообщения.</span> </span></li>
+<li><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0.2px;">Каждая введённая строка будет отправлена при нажатии </span></span>клавиши <kbd>Enter</kbd>.</li>
+<li><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0.2px;">Отправьте в топик сообщение с данными заказов, например, в формате JSON:</span> </span>
+<pre class="source_code_container"><code>{ "orders": [ { "code": "12-A", "amount": 123 }, { "code": "34-B" "amount": 345 }, { "code": "56-C", "amount": 678 } ] }</code></pre>
+</li>
+<li>Продюсер отправит введённое сообщение в топик Kafka.</li>
+<li>Чтобы завершить работу продюсера нажмите в терминале клавиши <kbd>Ctrl</kbd>+<kbd>C</kbd>.</li>
+<li>Откройте шаблон записи <em>«Заказы» </em>и нажмите кнопку «<strong>Перейти к экземплярам</strong>».</li>
+<li>В шаблоне должны быть созданы записи, заполненные данными заказов из сообщения Kafka.</li>
+</ol>
+<h2 id="mcetoc_1htc8n7aj5">Просмотр журнала работы сценария</h2>
+<ol class="colored_numbers_list">
+<li>Откройте страницу «<strong>Журналы событий</strong>».</li>
+<li>Выберите вкладку «<strong>Трассировка событий</strong>».</li>
+<li>Дважды нажмите событие сценария <em>«Получение данных из Kafka»</em>.</li>
+<li>Отобразится цепочка событий со сведениями обо всех шагах сценария.</li>
+</ol>
+<h2 id="mcetoc_1htcbkgki7">Связанные статьи</h2>
+<ul>
+<li><strong><samp data-name="aid" data-title="" data-value="2205"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Подключения. Типы, создание, настройка, удаление {Article-ID:2205}</span></samp> </strong></li>
+<li><strong><samp data-name="aid" data-title="" data-value="2201"><img src="https://kb.comindware.ru/images/marker.png"/>Пути передачи данных. Типы, создание, настройка, удаление {Article-ID:2201}</samp> </strong></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="md-dialog">
+<div class="md-dialog__inner md-typeset">
+<p><a class="md-top md-icon mkdocs_imported_link" href="#"> <em class="fa-light fa-arrow-up">‌</em> К началу </a></p>
+</div>
+</div>

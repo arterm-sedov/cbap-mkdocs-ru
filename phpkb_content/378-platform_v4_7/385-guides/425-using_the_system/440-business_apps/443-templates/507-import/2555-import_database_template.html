@@ -1,0 +1,409 @@
+<h1>Импорт данных в шаблон</h1><div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1hnlin5jl2">Введение</a></li>
+<li><a href="#mcetoc_1hnlimsid1">Порядок импорта данных</a></li>
+<li><a href="#mcetoc_1hnnhtvne1">Подготовка импортируемого файла</a></li>
+<li><a href="#mcetoc_1hno7o9in0">Практический пример</a>
+<ul>
+<li><a href="#mcetoc_1hnq0fp940">Подготовка исходных данных</a></li>
+<li><a href="#mcetoc_1hnq0gd7p1">Импорт данных в шаблоны</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1hnq4ha760">Связанные статьи</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1hnlin5jl2">Введение</h2>
+<p>Функция импорта данных предусмотрена для шаблонов записей, шаблонов аккаунтов, шаблонов оргединиц и шаблонов ролей.</p>
+<p>Поддерживается импорт данных из файлов Excel и CSV.</p>
+<h2 id="mcetoc_1hnlimsid1">Порядок импорта данных</h2>
+<ol class="colored_numbers_list">
+<li>Откройте шаблон записи и выберите вкладку «<strong>Импорт</strong>».</li>
+<li>Прикрепите файл XLSX или CSV в поле «<strong>Файл с данными</strong>».</li>
+<li>Откроется форма настройки импорта данных.</li>
+<li>Настройте параметры импорта данных.
+<ul>
+<li><strong>Кодировка</strong> — выберите кодировку импортируемого файла.</li>
+<li><strong>Разделитель столбцов </strong>— выберите разделитель, используемый в импортируемом файле. Это поле отображается файлов формата CSV.</li>
+<li><strong>Часовой пояс</strong> — выберите часовой пояс загружаемых дат.</li>
+<li><strong>Игнорировать ошибки парсинга</strong> — установите этот флажок, чтобы загружать данные, даже если в процессе импорта возникли ошибки.</li>
+<li><strong>Обновить существующие записи данными из файла </strong>— установите этот флажок, чтобы обновить имеющиеся записи данными из соответствующих строк импортируемого файла и создать отсутствующие записи. Если этот флажок не установлен, для каждой строки в импортируемом файле будет создана новая запись.
+<ul>
+<li><strong>Столбец</strong> — выберите ключевой столбец импортируемой таблицы. Ячейки в этом столбце должны содержать уникальные <strong>текстовые</strong> значения, совпадающие (с учётом регистра) со значениями ключевого атрибута в имеющихся записях. Имеющиеся записи будут обновлены импортированными данными из соответствующих строк. Для остальных строк будут созданы новые записи с импортированными данными.</li>
+<li><strong>Ключевой атрибут</strong> — выберите атрибут, по значениям которого импортируемые строки будут сопоставляться с имеющимися записями в шаблоне. </li>
+</ul>
+</li>
+<li><strong>Сопоставление данных</strong> — настройте соответствие столбцов импортируемого файла атрибутам шаблона.
+<ul style="list-style-type: circle;">
+<li><strong>Столбец</strong> — заголовок столбца импортируемой таблицы.</li>
+<li><strong>Атрибут</strong> — выберите атрибут, в который требуется импортировать значения из столбца. Если оставить это поле пустым, то соответствующий столбец не будет импортирован.</li>
+<li><strong>Формат</strong> — выберите формат импортируемой ячейки в соответствии с типом атрибута. См. <a href="#mcetoc_1hnnhtvne1">требования к импортируемому файлу</a>.
+<ul style="list-style-type: circle;">
+<li>Для атрибута типа «<strong>Дата и время</strong>» выберите пункт «<strong>Не задано</strong>» (автоматическое преобразование данных) или формат, соответствующий представлению данных в импортируемом файле.</li>
+<li>Для атрибута типа «<strong>Число</strong>» или «<strong>Длительность</strong>» выберите формат, соответствующий представлению данных в импортируемом файле.</li>
+<li>Для атрибута типа «<strong>Запись</strong>», «<strong>Роль</strong>» или «<strong>Организационная единица</strong>» выберите атрибут связанного шаблона <strong>ID</strong> или атрибут <strong>Name</strong> — это <a href="https://kb.comindware.ru/article.php?id=2255">атрибут-заголовок записей</a> связанного шаблона. Выбранный атрибут будет использоваться в качестве ключевого для привязки импортированных записей к связанному шаблону.</li>
+<li>Для атрибута типа «<strong>Аккаунт</strong>» выберите атрибут шаблона аккаунта: <strong>ID</strong>, <strong>Адрес эл. почты</strong>, <strong>Имя пользователя</strong> или <strong>Ф. И. О.</strong> Выбранный атрибут будет использоваться в качестве ключевого для привязки импортированных записей к аккаунтам.</li>
+<li>Для атрибутов остальных типов формат данных выбирать не требуется, данные будут преобразованы автоматически.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Загрузить</strong>».</p>
+</li>
+<li>В случае успешного импорта отобразится сообщение «<strong>Данные импортированы</strong>».</li>
+</ol>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Настройка импорта данных из файла CSV" class="img-responsive" height="786" src="https://kb.comindware.ru/assets/img_65de03c80f5d9.png" width="987"/></p>
+<p class="caption" style="font-size: 15px !important;">Настройка импорта данных из файла CSV</p>
+</div>
+<h2 id="mcetoc_1hnnhtvne1">Подготовка импортируемого файла</h2>
+<p class="caption" style="font-size: 15px !important;">Для корректного импорта данных в шаблон файл в формате XLSX следует подготовить, как указано ниже.</p>
+<ul>
+<li class="caption" style="font-size: 15px !important;">Все импортируемые данные должны находиться на первом листе. Остальные листы при импорте будут пропущены.</li>
+<li>Первая строка листа должна содержать текстовые заголовки для всех столбцов.</li>
+<li class="caption" style="font-size: 15px !important;">По возможности удалите столбцы, которые не требуется импортировать.</li>
+<li class="caption" style="font-size: 15px !important;">Для импорта значений атрибута типа «<strong>Число</strong>» задайте формат ячеек «<strong>Числовой</strong>».</li>
+<li>Для импорта значений атрибута типа «<strong>Дата и время</strong>» задайте формат ячеек  «<strong>Дата</strong>» или «<strong>Время</strong>».</li>
+<li>Для импорта значений атрибута типа «<strong>Длительность</strong>» задайте формат ячеек «<strong>Время</strong>».</li>
+<li>Для импорта значений атрибута типа «<strong>Логический</strong>» задайте формат ячеек «<strong>Общий</strong>» или «<strong>Текстовый</strong>».
+<ul>
+<li>Ячейки должны содержать значения <code>ИСТИНА</code> или <span style="color: #36464e; font-family: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;"><span style="font-size: 13.125px; background-color: #f5f5f5;">ЛОЖЬ</span> </span>(либо <code>TRUE</code> или <code>FALSE</code>). Пустое значение в ячейке будет преобразовано в значение <code>ложь</code>.</li>
+</ul>
+</li>
+<li>Для импорта значений атрибута типа «<strong>Запись</strong>», «<strong>Аккаунт</strong>», «<strong>Роль</strong>» или «<strong>Организационная единица</strong>» задайте формат ячеек «<strong>Общий</strong>» или «<strong>Текстовый</strong>».
+<ul>
+<li>Эти ячейки должны содержать уникальные значения, совпадающие (с учётом регистра) со значениями ключевого атрибута в имеющихся записях из связанного шаблона.</li>
+<li>По совпадающим значениям будет сформирована связь между импортируемыми записями и имеющимися записями в связанном шаблоне.</li>
+<li>Для остальных импортированных строк в данном атрибуте будет установлено пустое значение. </li>
+<li>Для привязки нескольких записей импортируемые ячейки должны содержать ключевые значения, разделённые точками с запятыми без пробелов.</li>
+</ul>
+</li>
+<li>Для остальных ячеек задайте формат «<strong>Общий</strong>» или «<strong>Текстовый</strong>».</li>
+</ul>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Если в ячейке Excel находится формула, то будет импортировано результирующее значение, вычисленное по формуле, с учётом формата ячейки.</p>
+</div>
+<h2 id="mcetoc_1hno7o9in0">Практический пример</h2>
+<p>Рассмотрим пример импорта заявлений на отпуск и решений по ним из файлов формата XLSX в два связанных между собой шаблона: <em>Заявления на отпуск</em> и <em>Решения по заявлениям на отпуск</em>. В примере воспользуемся функциями обновления имеющихся записей и установления связей между записями по ключевым атрибутам.</p>
+<h3 id="mcetoc_1hnq0fp940">Подготовка исходных данных</h3>
+<ol class="colored_numbers_list">
+<li>Создайте <a href="https://kb.comindware.ru/article.php?id=2194" title="Аккаунты. Создание, настройка">аккаунты</a> с перечисленными ниже <strong>Ф. И. О.</strong>: <em style="letter-spacing: 0.2px;">Иванов И. И., Кулагина А. Н., Филиппов К. В., Журавлёва Т. С., Игнатьев А. Б. </em>Остальные свойства аккаунтов заполните произвольными сведениями.</li>
+<li>Создайте шаблон записи <em style="letter-spacing: 0.2px;">«Заявления на отпуск»</em><span style="letter-spacing: 0.2px;"> </span><span style="letter-spacing: 0.2px;">с указанными ниже атрибутами.</span>
+<div class="table-responsive">
+<table border="1">
+<tbody>
+<tr>
+<th>Название атрибута</th>
+<th>Тип данных</th>
+<th>Свойства атрибута</th>
+</tr>
+<tr>
+<td><em>№ заявления</em></td>
+<td><span style="font-weight: 700 !important;">Текст</span></td>
+<td>
+<p><strong>Использовать как заголовок записей:</strong> флажок установлен</p>
+<p><strong>Контролировать уникальность значений:</strong> флажок установлен</p>
+</td>
+</tr>
+<tr>
+<td><em>Заявитель</em></td>
+<td><span style="font-weight: 700 !important;">Аккаунт</span></td>
+<td><span style="font-weight: 700 !important;"> </span></td>
+</tr>
+<tr>
+<td><em>Дата начала</em></td>
+<td><span style="font-weight: 700 !important;">Дата и время</span></td>
+<td><span style="font-weight: 700 !important;"> </span></td>
+</tr>
+<tr>
+<td><em>Длительность отпуска</em></td>
+<td><span style="font-weight: 700 !important;">Число</span></td>
+<td><strong>Количество знаков после запятой:</strong> <strong>0</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li><span style="letter-spacing: 0.2px;"> Вынесите созданные атрибуты на <em>основную форму</em> и в таблицу «<em>Все записи</em>» шаблона </span><em style="letter-spacing: 0.2px;">«Заявления на отпуск».</em></li>
+<li>Создайте шаблон записи <em style="letter-spacing: 0.2px;">«Решения по заявлениям на отпуск»</em><span style="letter-spacing: 0.2px;"> </span> <span style="letter-spacing: 0.2px;"> с указанными ниже атрибутами. </span>
+<div class="table-responsive">
+<table border="1">
+<tbody>
+<tr>
+<th>Название атрибута</th>
+<th>Тип данных</th>
+<th>Свойства атрибута</th>
+</tr>
+<tr>
+<td><em>Заявления</em></td>
+<td><span style="font-weight: 700 !important;">Запись</span></td>
+<td>
+<p><strong>Связанный шаблон:</strong> <em>Заявления на отпуск</em></p>
+<p><strong>Хранить несколько значений: </strong>флажок установлен</p>
+</td>
+</tr>
+<tr>
+<td><em>Руководитель</em></td>
+<td><span style="font-weight: 700 !important;">Аккаунт</span></td>
+<td><span style="font-weight: 700 !important;"> </span></td>
+</tr>
+<tr>
+<td><em>Решение</em></td>
+<td><span style="font-weight: 700 !important;">Логический</span></td>
+<td><span style="font-weight: 700 !important;"> </span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li><span style="letter-spacing: 0.2px;">Вынесите созданные атрибуты на <em>основную форму</em> и в таблицу «<em>Все записи</em>» шаблона </span><em style="letter-spacing: 0.2px;">«Решения по заявлениям на отпуск».</em></li>
+<li>Создайте файл <code><em>Заявления_на_отпуск.XLSX</em></code> и заполните его приведёнными ниже данными (можно скопировать и вставить таблицу).
+<div class="table-responsive">
+<table border="1">
+<tbody>
+<tr>
+<th>№ заявления</th>
+<th>Ф. И. О. заявителя</th>
+<th>Дата заявления</th>
+<th>Длительность </th>
+</tr>
+<tr>
+<td><em>1</em></td>
+<td><em>Иванов И. И.</em></td>
+<td>16.02.2024</td>
+<td><em>5</em></td>
+</tr>
+<tr>
+<td><em>2</em></td>
+<td><em>Кулагина А. Н.</em></td>
+<td>25.03.2024</td>
+<td><em>20</em></td>
+</tr>
+<tr>
+<td><em>3</em></td>
+<td><em>Филиппов К. В.</em></td>
+<td>01.08.2024</td>
+<td><em>15</em></td>
+</tr>
+<tr>
+<td><em>4</em></td>
+<td><em>Журавлёва Т. С.</em></td>
+<td>15.05.2024</td>
+<td><em>30</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li>Задайте формат ячеек в файле <code><em>Заявления_на_отпуск.XLSX</em></code>, как указано ниже.
+<table border="1">
+<tbody>
+<tr>
+<th>Столбец</th>
+<th>Формат ячеек</th>
+</tr>
+<tr>
+<td>№ заявления</td>
+<td><strong>Общий</strong></td>
+</tr>
+<tr>
+<td>Ф. И. О. заявителя</td>
+<td><strong>Текстовый</strong></td>
+</tr>
+<tr>
+<td>Дата начала</td>
+<td><strong>Дата</strong></td>
+</tr>
+<tr>
+<td>Длительность </td>
+<td><strong>Числовой<br/>Число десятичных знаков: 0</strong></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>Создайте файл <code><em>Решения_по_заявлениям_на_отпуск.XLSX</em></code> и заполните его приведёнными ниже данными (можно скопировать и вставить таблицу).
+<div class="table-responsive">
+<table border="1">
+<tbody>
+<tr>
+<th>№ заявления</th>
+<th>Руководитель</th>
+<th>Решение</th>
+</tr>
+<tr>
+<td><em>1;2</em></td>
+<td><em>Игнатьев А. Б.</em></td>
+<td><em>ЛОЖЬ</em></td>
+</tr>
+<tr>
+<td><em>3;4</em></td>
+<td><em>Игнатьев А. Б.</em></td>
+<td><em>TRUE</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li>Задайте формат ячеек в файле <code><em>Решения_по_заявлениям_на_отпуск.XLSX</em></code>, как указано ниже.
+<table border="1">
+<tbody>
+<tr>
+<th>Столбец</th>
+<th>Формат ячеек</th>
+</tr>
+<tr>
+<td>№ заявления</td>
+<td><strong>Общий</strong></td>
+</tr>
+<tr>
+<td>Руководитель</td>
+<td><strong>Текстовый</strong></td>
+</tr>
+<tr>
+<td>Решение</td>
+<td><strong>Общий</strong></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>Создайте в шаблоне записи <em style="letter-spacing: 0.2px;">«Заявления на отпуск»</em><span style="letter-spacing: 0.2px;"> одну запись и заполните её поля следующими данными:</span> <br/>
+<table border="1">
+<tbody>
+<tr>
+<th>Поле</th>
+<th>Значение</th>
+</tr>
+<tr>
+<td>№ заявления</td>
+<td><em>1</em></td>
+</tr>
+<tr>
+<td>Заявитель</td>
+<td><em>Филиппов К. В.</em></td>
+</tr>
+<tr>
+<td>Дата начала</td>
+<td><em>25.03.2024</em></td>
+</tr>
+<tr>
+<td>Длительность отпуска</td>
+<td><em>30</em></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<h3 id="mcetoc_1hnq0gd7p1">Импорт данных в шаблоны</h3>
+<ol class="colored_numbers_list">
+<li>Откройте шаблон <em style="letter-spacing: 0.2px;">«Заявления на отпуск»</em><span style="letter-spacing: 0.2px;"> и выберите вкладку «<strong>Импорт</strong>».</span></li>
+<li><span style="letter-spacing: 0.2px;">В поле «<strong>Файл с данными</strong>» выберите файл <em>Заявления_на_отпуск.XLSX.</em></span></li>
+<li><span style="letter-spacing: 0.2px;">Установите флажок «<strong>Обновить существующие записи данными из файла</strong>» и настройте обновление:</span>
+<ul>
+<li><span style="letter-spacing: 0.2px;"><strong>Столбец: </strong><em>№ заявления </em></span></li>
+<li><span style="letter-spacing: 0.2px;"><strong>Ключевой атрибут: </strong><em>№ заявления </em></span></li>
+</ul>
+</li>
+<li><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0.2px;">Настройте <strong>сопоставление данных </strong>следующим образом:</span> </span>
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse;">
+<tbody>
+<tr>
+<th>Столбец</th>
+<th>Атрибут</th>
+<th>Формат</th>
+</tr>
+<tr>
+<td><em>№ заявления </em></td>
+<td><em>№ заявления</em></td>
+<td> </td>
+</tr>
+<tr>
+<td><em>Дата начала</em></td>
+<td><em>Дата начала</em></td>
+<td><strong>Не задано</strong></td>
+</tr>
+<tr>
+<td><em>Длительность </em></td>
+<td><em>Длительность отпуска</em></td>
+<td><strong>Целое число</strong></td>
+</tr>
+<tr>
+<td><em>Ф. И. О. заявителя </em></td>
+<td><em>Заявитель</em></td>
+<td><strong>Ф. И. О.</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li>Нажмите кнопку «<strong>Загрузить</strong>».
+<figure class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Настройка импорта данных в шаблон «Заявления на отпуск»" class="img-responsive" height="813" src="https://kb.comindware.ru/assets/img_65e048fd831f9.png" width="973"/></p>
+<figcaption class="caption" style="font-size: 15px !important;">Настройка импорта данных в шаблон «Заявления на отпуск»</figcaption>
+</figure>
+</li>
+<li>Перейдите на вкладку «<strong>Свойства</strong>» шаблона <em style="letter-spacing: 0.2px;">«Заявления на отпуск»</em><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0.2px;"> и нажмите кнопку «<strong>Перейти к экземплярам</strong>»</span> </span></li>
+<li><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0.2px;">Отобразится список всех заявлений на отпуск.</span> </span></li>
+<li><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0.2px;">Заявление № 1 должно быть обновлено и должны появиться три новых заявления в соответствии с импортированными данными.</span> </span>
+<figure class="screenshot_with_caption" style="font-size: 15px !important;">
+<p>  <img class="img-responsive" src="https://kb.comindware.ru/assets/img_65e04dee07c09.png"/></p>
+<p> <span style="color: #666666; font-style: italic; letter-spacing: 0.2px;">Импортированные заявления на отпуск</span></p>
+</figure>
+</li>
+<li>Откройте шаблон <em style="letter-spacing: 0.2px;">«Решения по заявлениям на отпуск»</em><span style="letter-spacing: 0.2px;"> и выберите вкладку «<strong>Импорт</strong>».</span></li>
+<li><span style="letter-spacing: 0.2px;">В поле «<strong>Файл с данными</strong>» выберите файл <em>Заявления_на_отпуск.XLSX.</em></span></li>
+<li><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0.2px;">Настройте <strong>сопоставление данных </strong>следующим образом:</span> </span>
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse;">
+<tbody>
+<tr>
+<th>Столбец</th>
+<th>Атрибут</th>
+<th>Формат</th>
+</tr>
+<tr>
+<td><em>№ заявления </em></td>
+<td><em>Заявления</em></td>
+<td><strong>Name</strong></td>
+</tr>
+<tr>
+<td><em style="letter-spacing: 0.2px;">Решение</em></td>
+<td><em>Решение</em></td>
+<td> </td>
+</tr>
+<tr>
+<td><em><em style="letter-spacing: 0.2px;">Руководитель</em> <br/></em></td>
+<td><em><em style="letter-spacing: 0.2px;">Дата начала</em> <br/></em></td>
+<td><strong><span style="letter-spacing: 0.2px;">Ф. И. О.</span><br/></strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li>Нажмите кнопку «<strong>Загрузить</strong>».
+<figure class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Настройка импорта данных в шаблон «Решения по заявлениям на отпуск»" class="img-responsive" height="745" src="https://kb.comindware.ru/assets/img_65e053cb83ffd.png" width="977"/></p>
+<figcaption class="caption" style="font-size: 15px !important;">Настройка импорта данных в шаблон «Решения по заявлениям на отпуск»</figcaption>
+</figure>
+</li>
+<li> Перейдите на вкладку «<strong>Свойства</strong>» шаблона <em style="letter-spacing: 0.2px;">«Решения по заявлениям на отпуск»</em><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0.2px;"> и нажмите кнопку «<strong>Перейти к экземплярам</strong>»</span> </span></li>
+<li><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0.2px;">Отобразится список всех решений по заявлениям.</span> </span></li>
+<li><span style="letter-spacing: 0.2px;"><span style="letter-spacing: 0.2px;">В списке должно быть два решения, каждое по двум заявлениям на отпуск.</span> </span></li>
+<li style="counter-increment: my-counter 1; position: relative; margin-bottom: 10px;">Перейдите на вкладку «<span style="font-weight: 700 !important;">Свойства</span>» шаблона <em style="letter-spacing: 0.2px;">«Заявления на отпуск»</em> <span style="letter-spacing: 0.2px;">  и нажмите кнопку «<span style="font-weight: 700 !important;">Перейти к экземплярам</span>» </span></li>
+<li style="counter-increment: my-counter 1; position: relative; margin-bottom: 10px;"><span style="letter-spacing: 0.2px;">Отобразится два решения, каждое по двум заявлениям на отпуск.</span> <br/>
+<figure class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img class="img-responsive" src="https://kb.comindware.ru/assets/img_65e050a379460.png"/></p>
+<figcaption class="caption" style="font-size: 15px !important;">Импортированные решения по заявлениям на отпуск</figcaption>
+</figure>
+</li>
+</ol>
+<h2 id="mcetoc_1hnq4ha760">Связанные статьи</h2>
+<p><strong><samp data-name="aid" data-title="" data-value="2219"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Шаблоны в приложении {Article-ID:2219}</span></samp> </strong></p>
+<p><strong><samp data-name="aid" data-title="" data-value="2255"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Атрибут-заголовок записей шаблона {Article-ID:2255}</span></samp> </strong></p>
+<p><strong><samp data-name="aid" data-title="" data-value="2194"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Аккаунты. Создание, настройка, привязка к шаблону аккаунта, назначение лицензий, удаление {Article-ID:2194}</span></samp> </strong></p>
+<p><a class="md-top md-icon mkdocs_imported_link" href="#"> <em class="fa-light fa-arrow-up">‌</em> К началу </a></p>
+<p> </p>

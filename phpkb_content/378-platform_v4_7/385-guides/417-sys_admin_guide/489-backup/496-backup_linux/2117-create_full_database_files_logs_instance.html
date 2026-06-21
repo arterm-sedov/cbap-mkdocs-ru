@@ -1,0 +1,159 @@
+<h1>Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО</h1><div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1grg4sonu1">Введение</a></li>
+<li><a href="#mcetoc_1grg4sonu3">1. Сбор данных об экземпляре ПО</a></li>
+<li><a href="#mcetoc_1grg4sonu4">2. Установка и настройка исполняемых скриптов Apache Ignite</a></li>
+<li><a href="#mcetoc_1grg4sonu5">3. Создание резервной копии</a></li>
+<li><a href="#mcetoc_1i2j929jq0">Связанные статьи</a></li>
+</ul>
+</div>
+<div class="md-content">
+<h2 id="mcetoc_1grg4sonu1">Введение</h2>
+<p>В этой статье представлены инструкции по созданию резервной копии базы данных экземпляра ПО <strong>Comindware Business Application Platform</strong> версии 4.7 (далее — ПО, экземпляр ПО), развёрнутого в среде ОС Linux.</p>
+<p>Для создания полной резервной копии базы данных в ОС Linux необходимо с помощью терминала выполнить следующие действия:</p>
+<ul>
+<li>создать снимки состояния памяти Apache Ignite и Elasticsearch;</li>
+<li>скопировать содержимое папок со скриптами и вложенными файлами.</li>
+</ul>
+<p>Сведения о последующем восстановлении данных см. в статье <em>«<samp data-name="aid" data-title="" data-value="2335"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Восстановление базы данных, вложенных файлов и журналов из полной резервной копии {Article-ID:2335}</span></samp>»</em>.</p>
+<h2 id="mcetoc_1grg4sonu3">1. Сбор данных об экземпляре ПО</h2>
+<p>Для создания резервной копии соберите перечисленные ниже данные об экземпляре ПО.</p>
+<p>1.1.  <span style="font-size: 12.0pt; line-height: 107%; font-family: ’Arial’,sans-serif;">Имя экземпляра ПО: </span><code><strong><em><span style="font-size: 10.0pt; line-height: 107%;">&lt;instanceName&gt;</span></em></strong></code><span style="font-size: 12.0pt; line-height: 107%; font-family: ’Arial’,sans-serif;">. </span><span style="font-size: 12.0pt; line-height: 107%; font-family: ’Arial’,sans-serif;">Можно получить в ответе на запрос </span><span style="font-size: 10.0pt; line-height: 107%;">localhost:9200/_cat/indices</span><span style="font-size: 12.0pt; line-height: 107%; font-family: ’Arial’,sans-serif;">, например </span><code><span style="font-size: 10.0pt; line-height: 107%;">cmw_cmw-study</span></code><span style="font-size: 12.0pt; line-height: 107%; font-family: ’Arial’,sans-serif;">, как показано на следующей иллюстрации.</span></p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Определение имени экземпляра ПО" src="https://kb.comindware.ru/assets/Pasted image 20221229181253.png" style="letter-spacing: 0.2px;"/></p>
+<p class="caption" style="font-size: 15px !important;"><span style="color: #222222; font-family: ’??’, ’??’, ’??’, ’??’, ’??’, ui-sans-serif, -apple-system, BlinkMacSystemFont, ’Segoe UI’, Roboto, Inter, ’Apple Color Emoji’, ’Segoe UI Emoji’, ’Segoe UI Symbol’, ’Microsoft YaHei Light’, sans-serif; font-size: 19px; font-style: italic; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; caret-color: #222222; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">Определение имени экземпляра ПО</span></p>
+</div>
+<p>1.2. Директория с базой данных экземпляра ПО: <span style="font-size: 10.0pt; line-height: 107%;"><code>/var/lib/comindware/<strong><em>&lt;instanceName&gt;</em></strong>/Database</code>.</span> Может быть задана другая директория с помощью директивы <code>&lt;workDirectory&gt;</code> в файле конфигурации <code>/var/www/comindware/Ignite.config</code>. Если в файле конфигурации директива <code>&lt;workDirectory&gt;</code> не содержит директории, используется директория по умолчанию.</p>
+<p>1.3. Путь для сохранения снимков базы данных Apache Ignite, по умолчанию: <code>/var/lib/comindware/<strong><em>&lt;instanceName&gt;</em></strong>/Database/snapshots/</code></p>
+<p>1.4. Имя репозитория Elasticsearch, заданное при его регистрации, например: <code>elastic_search_repo_name</code></p>
+<p><code></code>1.5. <span style="letter-spacing: 0.2px;">Путь для сохранения резервных копий Elasticsearch:</span></p>
+<ul>
+<li>например,<code> /var/www/backups/elasticsearch</code></li>
+<li>должен быть указан в директиве <code>path.repo</code> в файле <code>/etc/elasticsearch/<a name="_Hlk138343885"></a>elasticsearch.yml</code></li>
+<li>должен ссылаться на существующий диск;</li>
+<li>должен находиться на отдельном диске, отдельно от базы данных.</li>
+</ul>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Определение пути для резервных копий Elasticsearch" src="https://kb.comindware.ru/assets/Pasted image 20221229181640.png" style="letter-spacing: 0.2px;"/></p>
+<p class="caption" style="font-size: 15px !important;"><span style="color: #222222; font-family: ’??’, ’??’, ’??’, ’??’, ’??’, ui-sans-serif, -apple-system, BlinkMacSystemFont, ’Segoe UI’, Roboto, Inter, ’Apple Color Emoji’, ’Segoe UI Emoji’, ’Segoe UI Symbol’, ’Microsoft YaHei Light’, sans-serif; font-size: 19px; font-style: italic; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; caret-color: #222222; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">Определение пути для резервных копий Elasticsearch</span></p>
+</div>
+<p>1.6. Имя снимка, заданное администратором, например, в формате <code>&lt;<strong><em>instanceName</em></strong>&gt;&lt;Date&gt;&lt;Time&gt;</code></p>
+<h2 id="mcetoc_1grg4sonu4">2. Установка и настройка исполняемых скриптов Apache Ignite</h2>
+<p>2.1. Для установки исполняемых скриптов перейдите в режим суперпользователя <code>root</code>:</p>
+<div class="highlight">
+<pre><code>sudo -i </code></pre>
+</div>
+<p>или</p>
+<pre><code>su - </code></pre>
+<p>2.2. Проверьте наличие пакета <code>apache-ignite</code> на машине:</p>
+<div class="highlight">
+<pre><code>dpkg -s apache-ignite </code></pre>
+</div>
+<p>Если пакет имеется, пропустите шаги 2.3–2.7.</p>
+<p>2.3. Если пакета нет, загрузите zip-архив со скриптами:</p>
+<div class="highlight">
+<pre><code>wget -P /tmp/ https://archive.apache.org/dist/ignite/2.16.0/apache-ignite-2.16.0-bin.zip </code></pre>
+</div>
+<p>2.4. Если на машине ранее не был установлен пакет <code>zip</code>, установите его:</p>
+<div class="highlight">
+<pre><code>apt install zip </code></pre>
+</div>
+<p>2.5. Разархивируйте пакет в директорию <code>/var/www/</code>:</p>
+<div class="highlight">
+<pre><code>unzip /tmp/apache-ignite-2.16.0-bin.zip -d /var/www </code></pre>
+</div>
+<p>2.6. Переименуйте получившуюся директорию со скриптами <code>Apache Ignite</code> в <code>apache-ignite</code>:</p>
+<div class="highlight">
+<pre><code>mv /var/www/apache-ignite-2.16.0-bin /var/www/apache-ignite </code></pre>
+</div>
+<p>2.7. Прейдите в директорию <code>/var/www/</code>:</p>
+<div class="highlight">
+<pre><code><span class="nb">cd</span> /var/www/ </code></pre>
+</div>
+<p>2.8. Назначьте папке <code>apache-ignite</code> права на чтение-запись <code>rwxrwxrwx</code>:</p>
+<div class="highlight">
+<pre><code>chmod -R <span class="m">777</span> apache-ignite/ </code></pre>
+</div>
+<p>2.9. Смените владельца директории <code>apache-ignite</code>:</p>
+<p><em style="box-sizing: border-box; color: #545764; font-family: ’Open Sans’, sans-serif; font-size: 15px; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">Astra Linux, Ubuntu, Rocky</em></p>
+</div>
+</div>
+</div>
+<pre><code>chown -R www-data:www-data apache-ignite/ <br/></code></pre>
+<p><em style="box-sizing: border-box; color: #545764; font-family: ’Open Sans’, sans-serif; font-size: 15px; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">Альт Сервер</em></p>
+<p><code></code></p>
+<div class="highlight">
+<pre><code>chown -R _nginx:_nginx apache-ignite/ </code></pre>
+</div>
+<div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="md-content">
+<p>2.10. Создайте директории для сохранения резервных копий:</p>
+<div class="highlight">
+<pre><code>mkdir /var/www/backups/ </code></pre>
+</div>
+<p>2.11. Создайте директорию репозитория Elasticsearch:</p>
+<div class="highlight">
+<pre><code>mkdir /var/www/backups/elasticsearch </code></pre>
+</div>
+<p>2.12. Присвойте директории <code>backups</code> права на чтение-запись <code>rwxrwxrwx</code>:</p>
+<div class="highlight">
+<pre><code>chmod -R <span class="m">777</span> backups/ </code></pre>
+</div>
+<p>2.13. Смените владельца директории <code>backups</code>:</p>
+<div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="md-content">
+<p><em style="box-sizing: border-box; color: #545764; font-family: ’Open Sans’, sans-serif; font-size: 15px; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">Astra Linux, Ubuntu, Rocky</em></p>
+</div>
+</div>
+</div>
+<pre><code>chown -R www-data:www-data backups/<br/></code></pre>
+<p><em style="box-sizing: border-box; color: #545764; font-family: ’Open Sans’, sans-serif; font-size: 15px; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">Альт Сервер</em></p>
+<p><code></code></p>
+<div class="highlight">
+<pre><code>chown -R _nginx:_nginx backups/</code></pre>
+</div>
+<h2 id="mcetoc_1grg4sonu5">3. Создание резервной копии</h2>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>При создании снимка после перезагрузки машины необходимо убедиться в том, что экземпляр ПО запущен и Apache Ignite работает. Для этого достаточно в браузере открыть веб-сайт с экземпляром ПО.</p>
+</div>
+<p>3.1. Задайте переменную <code>now</code>:</p>
+<div class="highlight">
+<pre><code><span class="nv">now</span><span class="o">=</span><span class="k">$(</span>date  %Y_%m_%d_%H_%M<span class="k">)</span></code></pre>
+</div>
+<p>3.2. Проверьте окружение и создайте снимок состояния Apache Ignite:</p>
+<div class="highlight">
+<pre><code>bash /var/www/apache-ignite/bin/control.sh --baseline <br/>bash /var/www/apache-ignite/bin/control.sh --snapshot create snapshot_name_$now --sync<br/></code></pre>
+</div>
+<p>3.3. Зарегистрируйте репозиторий Elasticsearch. Вместо <code>elasticsearch_repo_name</code> и <code>/var/www/backups/elasticsearch</code> подставьте своё имя репозитория и путь к его папке:</p>
+<div class="highlight">
+<pre><code>curl -X PUT <span class="s2">"localhost:9200/_snapshot/elasticsearch_repo_name?pretty"</span> -H <span class="s1">’Content-Type: application/json’</span> -d<span class="s1">’ {"type": "fs", "settings": {"location": "/var/www/backups/elasticsearch"}}’</span></code></pre>
+</div>
+<p>3.4. Создайте снимок состояния Elasticsearch, заменив <em><strong><code>elasticsearch_repo_name</code></strong><strong>, </strong><code>snapshot_name</code></em> и <code><em>prefix_name</em></code><strong><em> </em></strong>(префикс индекса, указанный в конфигурации экземпляра ПО) на свои значения:</p>
+<div class="highlight">
+<pre><code>curl -X PUT <span class="s2">"localhost:9200/_snapshot/<em><strong>elasticsearch_repo_name</strong></em>/<strong><em>snapshot_name</em></strong>_</span><span class="nv">$now</span><span class="s2">?wait_for_completion=true&amp;pretty"</span> -H <span class="s1">’Content-Type: application/json’</span> -d<span class="s1">’ {"indices": "cmw_<em><strong>prefix_name</strong></em>*", "ignore_unavailable": true, "include_global_state": false}’</span></code></pre>
+</div>
+<p>3.5. Создайте директории для хранения компонентов резервной копии:</p>
+<div class="highlight">
+<pre><code>mkdir /var/www/backups/backup_<span class="nv">$now</span><br/>mkdir /var/www/backups/backup_<span class="nv">$now</span>/Database <br/>mkdir /var/www/backups/backup_<span class="nv">$now</span>/elastic <br/>mkdir /var/www/backups/backup_<span class="nv">$now</span>/Streams <br/>mkdir /var/www/backups/backup_<span class="nv">$now</span>/Scripts <br/>mkdir /var/www/backups/backup_<span class="nv">$now</span>/wal</code></pre>
+</div>
+<p>3.6. Перенесите и скопируйте компоненты в директорию резервной копии:</p>
+<div class="highlight">
+<pre><code>mv /var/www/comindware/data/Database/snapshots/snapshot_name_<span class="nv">$now</span> /var/www/backups/backup_<span class="nv">$now</span>/Database <br/>cp -r /var/www/backups/elasticsearch/* /var/www/backups/backup_<span class="nv">$now</span>/elastic <br/>cp -r /var/www/comindware/data/Database/wal/* /var/www/backups/backup_<span class="nv">$now</span>/wal <br/>cp -r /var/www/comindware/data/Database/Scripts/* /var/www/backups/backup_<span class="nv">$now</span>/Scripts <br/>cp -r /var/www/comindware/data/Streams/* /var/www/backups/backup_<span class="nv">$now</span>/Streams </code></pre>
+</div>
+<p>3.7. Создайте архив с резервной копией:</p>
+<div class="highlight">
+<pre><code>tar -cvjf backup_<span class="nv">$now</span>.tar.bz2 /var/www/backups/backup_<span class="nv">$now</span></code></pre>
+</div>
+<p>3.8. Перенесите архив с резервной копией во внешнее хранилище.</p>
+<h2 id="mcetoc_1i2j929jq0">Связанные статьи</h2>
+<p><strong><em><samp data-name="aid" data-title="" data-value="2335"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Восстановление базы данных, вложенных файлов и журналов из полной резервной копии {Article-ID:2335}</span></samp></em></strong></p>
+</div>
+</div>
+<p><a class="md-top md-icon mkdocs_imported_link" href="#"> <em class="fa-light fa-arrow-up">‌</em> К началу </a></p>
+</div>

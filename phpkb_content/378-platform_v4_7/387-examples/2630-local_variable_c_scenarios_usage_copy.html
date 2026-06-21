@@ -1,0 +1,315 @@
+<h1>Локальная переменная в C#-скрипте и сценарии. Использование для копирования данных между шаблонами</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#прикладная-задача"> <span class="md-ellipsis"> Прикладная задача </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-шаблонов-записей"> <span class="md-ellipsis"> Настройка шаблонов записей </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-кнопки-для-копирования-данных"> <span class="md-ellipsis"> Настройка кнопки для копирования данных </span> </a><nav aria-label="Настройка кнопки для копирования данных" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-кнопки-с-использованием-c-скрипта"> <span class="md-ellipsis"> Настройка кнопки с использованием C#-скрипта </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-кнопки-с-использованием-сценария"> <span class="md-ellipsis"> Настройка кнопки с использованием сценария </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#тестирование"> <span class="md-ellipsis"> Тестирование </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Локальные переменные для кнопки позволяют передавать введённые пользователем значения из диалогового окна кнопки в сценарий или C#-скрипт. Например, можно передать идентификатор выбранной пользователем записи для её последующей обработки.</p>
+<p>Здесь представлена инструкция по настройке копирования данных из одного шаблона записи в другой с использованием локальной переменной и C#-скрипта или сценария по нажатию кнопки.</p>
+<h2 id="прикладная-задача">Прикладная задача</h2>
+<p>Требуется копировать справочные данные (мастер-данные) в транзакционные данные, чтобы их можно было изменять в целевой записи, не влияя на исходный справочник.</p>
+<p>Справочник (шаблон записи) <em>«Номенклатура продукции»</em> содержит наименования, единицы измерения и стандартную цену товаров.</p>
+<p>Шаблон записи <em>«Конкурсы»</em> содержит информацию о проводимых конкурсах на закупку.</p>
+<p>С конкурсами связан шаблон <em>«Позиции в конкурсе»</em>, в котором хранятся сведения о товарах, добавленных в конкурс на закупку, включая, например, количество и сумму закупки.</p>
+<p>Требуется настроить кнопку, которая будет добавлять позиции из справочника, выбранные в таблице, в конкурс на закупку. При этом сведения о выбранных товарах должны копироваться из справочника в шаблон <em>«Позиции в конкурсе»</em>. В скопированных позициях можно будет изменять сведения для конкретного конкурса (например, цену), а сведения о товарах в справочнике должны оставаться неизменными.</p>
+<h2 id="настройка-шаблонов-записей">Настройка шаблонов записей</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте шаблон записи <em>«Номенклатура продукции»</em> со следующими <strong>атрибутами</strong>:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Название</th>
+<th>Тип</th>
+<th>Свойства</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Наименование</em></td>
+<td><strong>Текст</strong></td>
+<td><strong>Использовать как заголовок записей:</strong> флажок установлен</td>
+</tr>
+<tr>
+<td><em>Единица измерения</em></td>
+<td><strong>Текст</strong></td>
+<td> </td>
+</tr>
+<tr>
+<td><em>Цена</em></td>
+<td><strong>Число</strong></td>
+<td><strong>Количество знаков после запятой: 2</strong></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Добавьте созданные атрибуты на <strong>форму</strong> и в таблицу <em>«Все записи»</em>.</p>
+</li>
+<li>
+<p>Создайте шаблон записи <em>«Позиции в конкурсе»</em> с <strong>атрибутами</strong>:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Название</th>
+<th>Тип</th>
+<th>Свойства</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Наименование</em></td>
+<td><strong>Текст</strong></td>
+<td><strong>Использовать как заголовок записей:</strong> флажок установлен</td>
+</tr>
+<tr>
+<td><em>Единица измерения</em></td>
+<td><strong>Текст</strong></td>
+<td> </td>
+</tr>
+<tr>
+<td><em>Цена</em></td>
+<td><strong>Число</strong></td>
+<td><strong>Количество знаков после запятой: 2</strong></td>
+</tr>
+<tr>
+<td><em>Количество</em></td>
+<td><strong>Число</strong></td>
+<td><strong>Количество знаков после запятой: 0</strong></td>
+</tr>
+<tr>
+<td><em>Сумма</em></td>
+<td><strong>Число</strong></td>
+<td>
+<p><strong>Количество знаков после запятой: 2</strong></p>
+<p><strong>Вычислять автоматически:</strong> флажок установлен</p>
+<p><strong>Вычисляемое значение: формула</strong></p>
+<pre><code class="highlight"><span class="n">PRODUCT</span><span class="p">(</span><span class="err">$</span><span class="n">Tsena</span><span class="p">,</span> <span class="err">$</span><span class="n">Kolichestvo</span><span class="p">)</span></code></pre>
+<p><strong>Здесь:</strong></p>
+<p><code>PRODUCT()</code> — вычисляет произведение двух чисел.</p>
+<p><code>Tsena</code> — системное имя атрибута <em>«Цена»</em>.</p>
+<p><code>Kolichestvo</code> — системное имя атрибута <em>«Количество»</em>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Создайте шаблон записи <em>«Конкурсы»</em> с <strong>атрибутами</strong>:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Название</th>
+<th>Тип</th>
+<th>Свойства</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Название</em></td>
+<td><strong>Текст</strong></td>
+<td><strong>Использовать как заголовок записей:</strong> флажок установлен</td>
+</tr>
+<tr>
+<td><em>Позиции конкурса</em></td>
+<td><strong>Запись</strong></td>
+<td>
+<p><strong>Связанный шаблон:</strong> <em>Позиции в конкурсе</em></p>
+<p><strong>Хранить несколько значений:</strong> флажок установлен</p>
+<p><strong>Взаимная связь с атрибутом:</strong> <strong>с новым</strong></p>
+<p><strong>Название:</strong> <em>Конкурс</em></p>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Добавьте атрибуты <em>«Название»</em> и <em>«Позиции конкурса»</em> на <strong>форму</strong>.</p>
+</li>
+<li>Выберите для атрибута <em>«Позиции конкурса»</em> отображение в виде таблицы и добавьте в неё созданные атрибуты.</li>
+</ol>
+<h2 id="настройка-кнопки-для-копирования-данных">Настройка кнопки для копирования данных</h2>
+<h3 id="настройка-кнопки-с-использованием-c-скрипта">Настройка кнопки с использованием C#-скрипта</h3>
+<ol class="colored_numbers_list">
+<li>Создайте кнопку <em>«Добавить позиции в конкурс»</em> в шаблоне <em>«Номенклатура продукции»</em>.</li>
+<li>
+<p>На вкладке «<strong>Локальные переменные</strong>» создайте переменную со следующими свойствами:</p>
+<ul>
+<li><strong>Отображаемое название:</strong> <em>Конкурс</em></li>
+<li><strong>Тип данных: запись</strong></li>
+<li><strong>Системное имя:</strong> <em>konkurs</em></li>
+<li><strong>Шаблон:</strong> <em>Конкурсы</em></li>
+</ul>
+</li>
+<li>
+<p>На вкладке «<strong>Основные</strong>» настройте свойства кнопки:</p>
+<ul>
+<li><strong>Отображаемое название:</strong> <em>Добавить позиции в конкурс</em></li>
+<li><strong>Контекст операции: запись</strong></li>
+<li><strong>Операция: C# скрипт</strong></li>
+<li><strong>Результат выполнения: обновить данные</strong></li>
+<li><strong>Отображать диалоговое окно:</strong> флажок установлен</li>
+</ul>
+</li>
+<li>
+<p>Сохраните кнопку.</p>
+</li>
+<li>Нажмите гиперссылку «<strong>Настроить диалоговое окно</strong>».</li>
+<li>Вынесите локальную переменную <em>«Конкурс»</em> на форму диалогового окна и сохраните её.</li>
+<li>
+<p>На вкладке «<strong>Скрипт</strong>» вставьте следующий код:</p>
+<div class="highlight"><code><code></code> </code>
+<pre><code><span class="k">using</span> <span class="nn">System</span><span class="p">;</span> </code> <br/><code><span class="k">using</span> <span class="nn">System.Collections.Generic</span><span class="p">;</span></code> <br/><code><span class="k">using</span> <span class="nn">System.Linq</span><span class="p">;</span></code> <br/><code><span class="k">using</span> <span class="nn">Comindware.Data.Entity</span><span class="p">;</span></code> <br/><code><span class="k">using</span> <span class="nn">Comindware.TeamNetwork.Api.Data.UserCommands</span><span class="p">;</span></code> <br/><code><span class="k">using</span> <span class="nn">Comindware.TeamNetwork.Api.Data</span><span class="p">;</span></code> <br/><code></code> <br/><code><span class="k">class</span> <span class="nc">Script</span></code> <br/><code><span class="p">{</span></code> <br/><code>    <span class="k">public</span> <span class="k">static</span> <span class="n">UserCommandResult</span> <span class="nf">Main</span><span class="p">(</span><span class="n">UserCommandContext</span> <span class="n">userCommandContext</span><span class="p">,</span> <span class="n">Comindware</span><span class="p">.</span><span class="n">Entities</span> <span class="n">entities</span><span class="p">)</span></code> <br/><code>    <span class="p">{</span></code> <br/><code>        <span class="kt">var</span> <span class="n">data</span> <span class="o">=</span> <span class="n">userCommandContext</span><span class="p">.</span><span class="n">LocalVariables</span><span class="p">;</span></code> <br/><code>        <span class="kt">string</span> <span class="n">konkursId</span> <span class="o">=</span> <span class="s">""</span><span class="p">;</span></code> <br/><code>        <span class="kt">string</span> <span class="n">notify</span> <span class="o">=</span> <span class="s">"Позиции добавлены в выбранный конкурс"</span><span class="p">;</span></code> <br/><code>        <span class="c1">// Получаем ID конкурса из локальной переменной с системным именем konkurs</span></code> <br/><code>        <span class="n">data</span><span class="p">.</span><span class="n">TryGetValue</span><span class="p">(</span><span class="s">"konkurs"</span><span class="p">,</span> <span class="k">out</span> <span class="kt">object</span> <span class="n">obj_</span><span class="p">);</span></code> <br/><code>        <span class="k">if</span> <span class="p">(</span><span class="n">obj_</span> <span class="o">!=</span> <span class="k">null</span><span class="p">)</span></code> <br/><code>        <span class="p">{</span></code> <br/><code>            <span class="n">konkursId</span> <span class="o">=</span> <span class="p">(</span><span class="n">obj_</span> <span class="k">as</span> <span class="kt">object</span><span class="p">[]).</span><span class="n">FirstOrDefault</span><span class="p">().</span><span class="n">ToString</span><span class="p">();</span></code> <br/><code>        <span class="p">}</span></code> <br/><code>        <span class="c1">// Проверяем, что в таблице выбрана хотя бы одна строка</span></code> <br/><code>        <span class="k">if</span> <span class="p">(</span><span class="n">userCommandContext</span><span class="p">.</span><span class="n">ObjectIds</span><span class="p">.</span><span class="n">Count</span><span class="p">()</span> <span class="o">==</span> <span class="m">0</span><span class="p">)</span></code> <br/><code>        <span class="p">{</span></code> <br/><code>            <span class="kt">var</span> <span class="n">resultBad0</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UserCommandResult</span></code> <br/><code>            <span class="p">{</span></code> <br/><code>        <span class="n">Success</span> <span class="o">=</span> <span class="k">false</span><span class="p">,</span></code> <br/><code>        <span class="n">Commited</span> <span class="o">=</span> <span class="k">false</span><span class="p">,</span></code> <br/><code>        <span class="n">ResultType</span> <span class="o">=</span> <span class="n">UserCommandResultType</span><span class="p">.</span><span class="n">Notificate</span><span class="p">,</span></code> <br/><code>        <span class="n">Messages</span> <span class="o">=</span> <span class="k">new</span><span class="p">[]</span></code> <br/><code>        <span class="p">{</span></code> <br/><code>        <span class="k">new</span> <span class="n">UserCommandMessage</span></code> <br/><code>        <span class="p">{</span></code> <br/><code>            <span class="n">Severity</span> <span class="o">=</span> <span class="n">SeverityLevel</span><span class="p">.</span><span class="n">Normal</span><span class="p">,</span></code> <br/><code>            <span class="n">Text</span> <span class="o">=</span> <span class="s">"Ни одной позиции не выбрано"</span></code> <br/><code>        <span class="p">}</span></code> <br/><code>        <span class="p">}</span></code> <br/><code>    <span class="p">};</span></code> <br/><code>    <span class="k">return</span> <span class="n">resultBad0</span><span class="p">;</span></code> <br/><code>        <span class="p">}</span></code> <br/><code></code> <br/><code>        <span class="n">Decimal</span> <span class="n">posNum</span> <span class="o">=</span> <span class="m">0</span><span class="p">;</span></code> <br/><code>        <span class="k">foreach</span> <span class="p">(</span><span class="kt">string</span> <span class="n">selectId</span> <span class="k">in</span> <span class="n">userCommandContext</span><span class="p">.</span><span class="n">ObjectIds</span><span class="p">)</span></code> <br/><code>        <span class="p">{</span></code> <br/><code>            <span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="kt">object</span><span class="o">&gt;</span> <span class="n">data_new</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Dictionary</span><span class="o">&lt;</span><span class="kt">string</span><span class="p">,</span><span class="kt">object</span><span class="o">&gt;</span><span class="p">();</span></code> <br/><code></code> <br/><code>            <span class="c1">// Собираем данные из шаблона записи «Номенклатура продукции»</span></code> <br/><code>            <span class="kt">var</span> <span class="n">data_selectId</span> <span class="o">=</span> <span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">GetPropertyValues</span><span class="p">(</span><span class="k">new</span> <span class="n">String</span><span class="p">[]{</span><span class="n">selectId</span><span class="p">},</span> <span class="k">new</span> <span class="n">String</span><span class="p">[]{</span><span class="s">"Naimenovanie"</span><span class="p">,</span> <span class="s">"Edinitsaizmereniya"</span><span class="p">,</span> <span class="s">"Tsena"</span><span class="p">});</span></code> <br/><code>            <span class="c1">// Копируем значения атрибутов шаблона «Номенклатура продукции» в атрибуты позиции в конкурсе</span></code> <br/><code>            <span class="k">if</span> <span class="p">(</span><span class="n">data_selectId</span><span class="p">[</span><span class="n">selectId</span><span class="p">].</span><span class="n">ContainsKey</span><span class="p">(</span><span class="s">"Naimenovanie"</span><span class="p">))</span></code> <br/><code>                <span class="n">data_new</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"Naimenovanie"</span><span class="p">,</span> <span class="n">data_selectId</span><span class="p">[</span><span class="n">selectId</span><span class="p">][</span><span class="s">"Naimenovanie"</span><span class="p">]);</span></code> <br/><code>            <span class="k">if</span> <span class="p">(</span><span class="n">data_selectId</span><span class="p">[</span><span class="n">selectId</span><span class="p">].</span><span class="n">ContainsKey</span><span class="p">(</span><span class="s">"Edinitsaizmereniya"</span><span class="p">))</span></code> <br/><code>                <span class="n">data_new</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"Edinitsaizmereniya"</span><span class="p">,</span> <span class="n">data_selectId</span><span class="p">[</span><span class="n">selectId</span><span class="p">][</span><span class="s">"Edinitsaizmereniya"</span><span class="p">]);</span></code> <br/><code>            <span class="k">if</span> <span class="p">(</span><span class="n">data_selectId</span><span class="p">[</span><span class="n">selectId</span><span class="p">].</span><span class="n">ContainsKey</span><span class="p">(</span><span class="s">"Tsena"</span><span class="p">))</span></code> <br/><code>                            <span class="n">data_new</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"Tsena"</span><span class="p">,</span> <span class="n">data_selectId</span><span class="p">[</span><span class="n">selectId</span><span class="p">][</span><span class="s">"Tsena"</span><span class="p">]);</span></code> <br/><code>            <span class="n">data_new</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"Produktsiyanazakupku"</span><span class="p">,</span> <span class="n">data_selectId</span><span class="p">[</span><span class="n">selectId</span><span class="p">][</span><span class="s">"id"</span><span class="p">]);</span></code> <br/><code>            <span class="c1">// Если конкурс выбран, проставляем ссылку на него в текущую позицию</span></code> <br/><code>            <span class="k">if</span> <span class="p">(</span><span class="n">konkursId</span> <span class="o">!=</span> <span class="s">""</span><span class="p">)</span> </code> <br/><code>            <span class="p">{</span></code> <br/><code>                <span class="c1">// Konkurs — системное имя атрибута «Конкурс» шаблона записи «Позиции в конкурсе»</span></code> <br/><code>                <span class="n">data_new</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"Konkurs"</span><span class="p">,</span> <span class="n">konkursId</span><span class="p">);</span></code> <br/><code>            <span class="p">}</span></code> <br/><code>            <span class="n">posNum</span><span class="o">++</span><span class="p">;</span></code> <br/><code></code> <br/><code>            <span class="c1">// Создаём запись в шаблоне Pozitsiivkonkurse (Позиции в конкурсе) со скопированными данными</span></code> <br/><code>            <span class="n">Api</span><span class="p">.</span><span class="n">TeamNetwork</span><span class="p">.</span><span class="n">ObjectService</span><span class="p">.</span><span class="n">CreateWithAlias</span><span class="p">(</span><span class="s">"Pozitsiivkonkurse"</span><span class="p">,</span> <span class="n">data_new</span><span class="p">);</span></code> <br/><code>        <span class="p">}</span></code> <br/><code></code> <br/><code>    <span class="c1">// Завершаем работу скрипта    </span></code> <br/><code>    <span class="kt">var</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UserCommandResult</span></code> <br/><code>    <span class="p">{</span></code> <br/><code>            <span class="n">Success</span> <span class="o">=</span> <span class="k">true</span><span class="p">,</span></code> <br/><code>            <span class="n">Commited</span> <span class="o">=</span> <span class="k">true</span><span class="p">,</span></code> <br/><code>            <span class="n">ResultType</span> <span class="o">=</span> <span class="n">UserCommandResultType</span><span class="p">.</span><span class="n">Navigate</span><span class="p">,</span></code> <br/><code>            <span class="n">NavigationResult</span> <span class="o">=</span> <span class="k">new</span> <span class="n">UserCommandNavigationResult</span></code> <br/><code>            <span class="p">{</span></code> <br/><code>                <span class="n">Context</span> <span class="o">=</span> <span class="n">ContextType</span><span class="p">.</span><span class="n">Task</span><span class="p">,</span></code> <br/><code>            <span class="p">},</span></code> <br/><code>            <span class="n">Messages</span> <span class="o">=</span> <span class="k">new</span><span class="p">[]</span></code> <br/><code>    <span class="p">{</span></code> <br/><code>        <span class="k">new</span> <span class="n">UserCommandMessage</span></code> <br/><code>        <span class="p">{</span></code> <br/><code>            <span class="n">Severity</span> <span class="o">=</span> <span class="n">SeverityLevel</span><span class="p">.</span><span class="n">Normal</span><span class="p">,</span></code> <br/><code>            <span class="n">Text</span> <span class="o">=</span> <span class="n">notify</span></code> <br/><code>        <span class="p">}</span></code> <br/><code>    <span class="p">}</span></code> <br/><code>    <span class="p">};</span></code> <br/><code>    <span class="k">return</span> <span class="n">result</span><span class="p">;</span></code> <br/><code>    <span class="p">}</span></code> <br/><code><span class="p">}</span></code></pre>
+</div>
+</li>
+<li>
+<p>Сохраните С#-скрипт.</p>
+</li>
+<li>Сохраните кнопку.</li>
+<li>Вынесите кнопку <em>«Добавить позиции в конкурс»</em> на область кнопок таблицы <em>«Все записи»</em> шаблона <em>«Номенклатура продукции»</em>.</li>
+</ol>
+<h3 id="настройка-кнопки-с-использованием-сценария">Настройка кнопки с использованием сценария</h3>
+<ol class="colored_numbers_list">
+<li>Создайте в шаблоне <em>«Позиции в конкурсе»</em> атрибут типа «<strong>Запись</strong>» <em>«Исходная позиция»</em>, связанный с шаблоном <em>«Номенклатура продукции»</em>.</li>
+<li>Создайте кнопку <em>«Добавить позиции в конкурс»</em> в шаблоне <em>«Номенклатура продукции»</em>.</li>
+<li>
+<p>На вкладке «<strong>Локальные переменные</strong>» создайте переменную со следующими свойствами:</p>
+<ul>
+<li><strong>Отображаемое название:</strong> <em>Конкурс</em></li>
+<li><strong>Тип данных: запись</strong></li>
+<li><strong>Системное имя:</strong> <em>konkurs</em></li>
+<li><strong>Шаблон:</strong> <em>Конкурсы</em></li>
+</ul>
+</li>
+<li>
+<p>На вкладке «<strong>Основные</strong>» настройте свойства кнопки:</p>
+<ul>
+<li><strong>Отображаемое название:</strong> <em>Добавить позиции в конкурс</em></li>
+<li><strong>Контекст операции: запись</strong></li>
+<li><strong>Операция: вызвать событие «Нажата кнопка»</strong></li>
+<li><strong>Результат выполнения: обновить данные</strong></li>
+<li><strong>Отображать диалоговое окно:</strong> флажок установлен</li>
+</ul>
+</li>
+<li>
+<p>Сохраните кнопку.</p>
+</li>
+<li>Нажмите гиперссылку «<strong>Настроить диалоговое окно</strong>».</li>
+<li>Вынесите локальную переменную <em>«Конкурс»</em> на форму диалогового окна и сохраните её.</li>
+<li>Вынесите кнопку <em>«Добавить позиции в конкурс»</em> на форму таблицы записей шаблона <em>«Номенклатура продукции»</em>.</li>
+<li>Создайте новый сценарий <em>«Добавить позиции в конкурс»</em>.</li>
+<li>В начальном событии «<strong>Нажата кнопка</strong>» выберите контекстный шаблон <em>«Номенклатура продукции»</em> и кнопку <em>«Добавить позиции в конкурс»</em>.</li>
+<li>Добавьте новое событие «<strong>Создать запись</strong>» с целевым шаблоном <em>«Позиции в конкурсе»</em>.</li>
+<li>Внутри события «<strong>Создать запись</strong>» добавьте событие «<strong>Изменить значения атрибутов</strong>».</li>
+<li>
+<p>Добавьте следующие атрибуты для изменения:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Атрибут</th>
+<th>Операция со значениями</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Конкурс</em></td>
+<td><strong>Заменить</strong></td>
+<td>
+<p><strong>Формула:</strong> <code>$$dialogVariables-&gt;konkurs</code></p>
+<p><strong>Здесь:</strong></p>
+<p><code>dialogVariables</code> — объект с локальными переменными кнопки, которая вызвала сценарий по событию «<strong>Нажатие кнопки</strong>»</p>
+<p><code>konkurs</code> — системное имя локальной переменной <em>«Конкурс»</em>.</p>
+</td>
+</tr>
+<tr>
+<td><em>Исходная позиция</em></td>
+<td><strong>Заменить</strong></td>
+<td>
+<p><strong>Формула:</strong> <code>$$origin</code></p>
+<p><strong>Здесь:</strong></p>
+<p><code>origin</code> — системная переменная, хранящая ID записи, для которой была нажата кнопка.</p>
+</td>
+</tr>
+<tr>
+<td><em>Наименование</em></td>
+<td><strong>Заменить</strong></td>
+<td>
+<p><strong>Атрибут:</strong> <em>Исходная позиция→Наименование</em></p>
+</td>
+</tr>
+<tr>
+<td><em>Единица измерения</em></td>
+<td><strong>Заменить</strong></td>
+<td>
+<p><strong>Атрибут:</strong> <em>Исходная позиция→Единица измерения</em></p>
+</td>
+</tr>
+<tr>
+<td><em>Цена</em></td>
+<td><strong>Заменить</strong></td>
+<td>
+<p><strong>Атрибут:</strong> <em>Исходная позиция→Цена</em></p>
+</td>
+</tr>
+</tbody>
+</table>
+<figure class="screenshot_with_caption"><img alt="Сценарий с использованием локальной переменной" src="https://kb.comindware.ru/assets/script_using_local_variable_scenario.png"/>
+<figcaption class="caption">Сценарий с использованием локальной переменной</figcaption>
+</figure>
+</li>
+</ol>
+<h2 id="тестирование">Тестирование</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте и заполните несколько записей в шаблоне <em>«Номенклатура продукции»</em>.</p>
+<figure class="screenshot_with_caption"><img alt="Добавление позиций из справочника продукции в конкурс" src="https://kb.comindware.ru/assets/script_using_local_variable_add_items_from_registry.png"/>
+<figcaption class="caption">Добавление позиций из справочника продукции в конкурс</figcaption>
+</figure>
+</li>
+<li>
+<p>Создайте запись в шаблоне <em>«Конкурсы»</em>, например <em>«Конкурс №1»</em>.</p>
+</li>
+<li>Выберите одну или несколько позиций в таблице <em>«Номенклатура продукции»</em> и нажмите кнопку <em>«Добавить позиции в конкурс»</em>.</li>
+<li>
+<p>Выберите <em>«Конкурс №1»</em> в раскрывающемся в списке и нажмите кнопку <em>«Добавить позиции в конкурс»</em>.</p>
+<figure class="screenshot_with_caption"><img alt="Выбор конкурса для добавления позиций" src="https://kb.comindware.ru/assets/script_using_local_variable_select_tender.png"/>
+<figcaption class="caption">Выбор конкурса для добавления позиций</figcaption>
+</figure>
+</li>
+<li>
+<p>Откройте запись <em>«Конкурс №1»</em>.</p>
+</li>
+<li>В таблице <em>«Позиции в конкурсе»</em> должны отобразиться выбранные товары с единицей измерения и ценой из справочника.</li>
+<li>Отредактируйте цену продукции в любых позициях.</li>
+<li>Сохраните запись.</li>
+<li>
+<p>Удостоверьтесь, что исходные цены в справочнике остались неизменными.</p>
+<figure class="screenshot_with_caption"><img alt="Отображение добавленных позиций в конкурсе" src="https://kb.comindware.ru/assets/script_using_local_variable_tender_positions.png"/>
+<figcaption class="caption">Отображение добавленных позиций в конкурсе</figcaption>
+</figure>
+</li>
+</ol>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2276">Кнопки. Определения, настройка, удаление</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2400">Написание скриптов на языке C#</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

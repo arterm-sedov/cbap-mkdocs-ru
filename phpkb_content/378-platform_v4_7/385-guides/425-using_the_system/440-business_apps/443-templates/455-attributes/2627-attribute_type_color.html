@@ -1,0 +1,226 @@
+<h1>Атрибут типа «Цвет»</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#примеры-использования"> <span class="md-ellipsis"> Примеры использования </span> </a><nav aria-label="Примеры использования" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#table_conditional_color_example"> <span class="md-ellipsis"> Условное окрашивание строк таблицы </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#table_reference_color_example"> <span class="md-ellipsis"> Окрашивание строк таблицы по справочнику статусов </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Атрибут «<strong>Цвет</strong>» является системным, он задаёт цвет отображения записи в таблицах, шевронах и диаграммах:</p>
+<ul>
+<li>если для записи задано значение атрибута «<strong>Цвет</strong>», строки этой записи в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2550">таблицах шаблона</a>, <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2531#form_dynamic_elements_table">таблицах на форме</a>, <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2531#form_dynamic_elements_chevron">шевроны</a> и <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2531#form_dynamic_elements_color_diagram_example">сектора диаграмм</a> для неё будут отображаться с заливкой заданным цветом.</li>
+</ul>
+<p>Значение атрибута «<strong>Цвет</strong>» можно изменять вручную на форме (<strong>в шестнадцатеричном формате</strong>) или с помощью <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2151">сценариев</a></strong> и <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2400">C#-скриптов</a></strong> (<strong>в десятичном формате</strong>).</p>
+<p>Для поиска кодов цветов и их преобразования из шестнадцатеричной в десятичную форму можно воспользоваться, например, сайтом <a class="mkdocs_imported_link" href="https://convertingcolors.com/">convertingcolors.com</a></p>
+<p>Свойства системного атрибута типа «<strong>Цвет</strong>» не подлежат изменению.</p>
+<p>Сведения о настройке поля атрибута «<strong>Цвет</strong>» на формах и в таблицах см. в параграфе «<em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2531#form_dynamic_elements_color">Динамические элементы формы. Цвет</a></em>».</p>
+<h2 id="примеры-использования">Примеры использования</h2>
+<div class="notice notice-example">
+<h3 class="admonition-title" id="table_conditional_color_example">Условное окрашивание строк таблицы</h3>
+<p><strong>Конфигурация приложения</strong></p>
+<ul>
+<li>Шаблон записи <em>«Этапы заявки»</em>
+<ul>
+<li>Атрибут <em>«Процент выполнения»</em>
+<ul>
+<li><strong>Тип данных: число</strong></li>
+<li><strong>Количество знаков после запятой</strong>: <strong>не преобразовывать</strong></li>
+</ul>
+</li>
+<li>Поля на форме:
+<ul>
+<li><em>Процент выполнения</em>
+<ul>
+<li><strong>Доступ: разрешить ввод</strong></li>
+</ul>
+</li>
+<li><em>Цвет</em>
+<ul>
+<li><strong>Доступ: только чтение</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Столбцы в таблице <em>«Все записи»</em>:
+<ul>
+<li><em>ID</em></li>
+<li><em>Дата создания</em></li>
+<li><em>Процент выполнения</em></li>
+<li><em>Цвет</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Сценарий
+<ul>
+<li><strong>Событие</strong>
+<ul>
+<li><strong>Тип: создание записи</strong></li>
+<li><strong>Целевой шаблон:</strong> <em>Этапы заявки</em></li>
+</ul>
+</li>
+<li><strong>Действие: изменить значения атрибутов</strong>
+<ul>
+<li><strong>Атрибут:</strong> <em>Цвет</em></li>
+<li><strong>Операция со значениями: заменить</strong></li>
+<li><strong>Значение: формула</strong>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="c"># 16711680 — десятичный код красного цвета,</span></code><br/><code><span class="c"># 16776960 — жёлтого, 65280 — зелёного.</span></code><br/><code><span class="err">IF</span><span class="p">(</span><span class="err">$Protsentvypolneniya</span> <span class="err">&lt;</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">16711680</span><span class="p">,</span> </code><br/><code>    <span class="err">IF</span><span class="p">(</span><span class="err">$Protsentvypolneniya</span> <span class="err">&lt;</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">16776960</span><span class="p">,</span> </code><br/><code>        <span class="mi">65280</span><span class="p">))</span></code></pre>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Результирующее поведение</strong></p>
+<ol class="colored_numbers_list">
+<li>Создайте запись в шаблоне <em>«Этапы заявки»</em>.</li>
+<li>Введите <em>процент выполнения: 15</em>.</li>
+<li>Сохраните запись.</li>
+<li>Поле <em>«Цвет»</em> должно отобразиться красным цветом.</li>
+<li>Создайте ещё несколько записей с разными значениями <em>процента выполнения</em>.</li>
+<li>Откройте таблицу <em>«Все записи»</em> шаблона шаблоне <em>«Этапы заявки»</em>.</li>
+<li>Строки таблицы должны отобразиться цветами, соответствующими <em>проценту выполнения</em>.</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Окрашивание строк таблицы с помощью формулы" src="https://kb.comindware.ru/assets/attribute_color_table_example.png"/></p>
+<figcaption class="caption">Окрашивание строк таблицы с помощью формулы</figcaption>
+</figure>
+</div>
+<div class="notice notice-example">
+<h3 class="admonition-title" id="table_reference_color_example">Окрашивание строк таблицы по справочнику статусов</h3>
+<p><strong>Конфигурация приложения</strong></p>
+<ul>
+<li>Шаблон записи <em>«Статусы заявок»</em>
+<ul>
+<li>Атрибут <em>«Статус»</em>
+<ul>
+<li><strong>Тип данных: текст</strong></li>
+<li><strong>Формат отображения: обычный текст</strong></li>
+<li><strong>Использовать как заголовок записей:</strong> флажок установлен</li>
+</ul>
+</li>
+<li>Поля на форме:
+<ul>
+<li><em>Цвет</em></li>
+<li><em>Статус</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Шаблон записи <em>«Этапы заявки»</em>
+<ul>
+<li>Атрибут <em>«Статус заявки»</em>
+<ul>
+<li><strong>Тип данных: запись</strong></li>
+<li><strong>Связанный шаблон:</strong> <em>Статусы заявок</em></li>
+<li><strong>Хранить несколько значений:</strong> флажок снят</li>
+</ul>
+</li>
+<li>Поля на форме:
+<ul>
+<li><em>Статус заявки</em>
+<ul>
+<li><strong>Представление: раскрывающийся список</strong></li>
+</ul>
+</li>
+<li><em>Цвет</em>
+<ul>
+<li><strong>Доступ: только чтение</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Столбцы в таблице <em>«Все записи»</em>:
+<ul>
+<li><em>ID</em></li>
+<li><em>Дата создания</em></li>
+<li><em>Статус заявки</em></li>
+<li><em>Цвет</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Сценарий
+<ul>
+<li><strong>Событие</strong>
+<ul>
+<li><strong>Тип: изменение записи</strong></li>
+<li><strong>Целевой шаблон:</strong> <em>Этапы заявки</em></li>
+</ul>
+</li>
+<li><strong>Действие: изменить значения атрибутов</strong>
+<ul>
+<li><strong>Атрибут:</strong> <em>Цвет</em></li>
+<li><strong>Операция со значениями: заменить</strong></li>
+<li><strong>Значение: атрибут</strong> <em>Статус заявки → Цвет</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Результирующее поведение</strong></p>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте записи в шаблоне «Статусы заявок»:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th><strong>Статус</strong></th>
+<th><strong>Цвет</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Выполнена</em></td>
+<td style="background-color: green; color: white;"><code>#00ff00</code> (зелёный)</td>
+</tr>
+<tr>
+<td><em>Выполняется</em></td>
+<td style="background-color: yellow; color: black;"><code>#ffff00</code> (жёлтый)</td>
+</tr>
+<tr>
+<td><em>Просрочена</em></td>
+<td style="background-color: red; color: white;"><code>#ff0000</code> (красный)</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Создайте запись в шаблоне <em>«Этапы заявки»</em>.</p>
+</li>
+<li>Выберите <em>статус заявки</em> <em>«Просрочена»</em>.</li>
+<li>Сохраните запись.</li>
+<li>Поле <em>«Цвет»</em> должно отобразиться красным цветом.</li>
+<li>Создайте ещё несколько записей с разными <em>статусами заявок</em>.</li>
+<li>Откройте таблицу <em>«Все записи»</em> шаблона шаблоне <em>«Этапы заявки»</em>.</li>
+<li>Строки таблицы должны отобразиться цветами, соответствующими <em>статусам заявок</em>.</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Окрашивание строк таблицы по справочнику" src="https://kb.comindware.ru/assets/attribute_color_table_example2.png"/></p>
+<figcaption class="caption">Окрашивание строк таблицы по справочнику</figcaption>
+</figure>
+</div>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2550">Таблица. Настройка в шаблоне</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2531#form_dynamic_elements_table">Таблица. Настройка на форме</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2531#form_dynamic_elements_chevron">Шевроны. Настройка представления</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2531#form_dynamic_elements_color_diagram_example">Сектора диаграмм. Окрашивание по атрибуту «Цвет»</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2242">Системные атрибуты</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2252">Атрибуты. Определения, типы, настройка, архивирование, удаление</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

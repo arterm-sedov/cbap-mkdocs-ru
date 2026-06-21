@@ -1,0 +1,95 @@
+<h1>Ввод запроса записей с совпадающими значениями атрибутов</h1><div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1h81vi8n22">Инструкции</a></li>
+<li><a href="#mcetoc_1h81vhaac0">Практические примеры</a>
+<ul>
+<li><a href="#mcetoc_1h843g0ci0">Запрос списка автомобилей такого же типа, как указан в текущей заявке</a></li>
+<li><a href="#mcetoc_1h843g90u1">Запрос количества заявок на такой же автомобиль, как в текущей заявке</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1h81vhaac1">Связанные статьи</a></li>
+</ul>
+</div>
+<div class="md-content">
+<h2 id="mcetoc_1h81vi8n22">Инструкции</h2>
+<p>Оператор <code>&lt;-</code> (обратная стрелка) возвращает список записей из связанного шаблона, у которых значение атрибута типа «<strong>Запись</strong>», указанного после стрелки, совпадает со значением указанного перед стрелкой атрибута типа «<strong>Запись</strong>» текущего шаблона.</p>
+<ol>
+<li>Введите символ <code>$</code> и системное имя атрибута типа «<strong>Запись</strong>» текущего шаблона.</li>
+<li>Введите оператор <code>&lt;-</code>. Этот список также можно вызвать, нажав клавиши <span class="keys"><kbd class="key-control">Ctrl</kbd> <kbd class="key-space">Пробел</kbd></span> в позиции после оператора <code>&lt;-</code>.</li>
+<li>Отобразится список системных имён шаблонов, связанных с указанным атрибутом.
+<div class="screenshot_with_caption"><img alt="Подсказка системных имён шаблонов, связанных с атрибутом" src="https://kb.comindware.ru/assets/formula_editor_templates_linked_with_attribute_autocomplete.png"/>
+<p class="caption">Подсказка системных имён шаблонов, связанных с атрибутом</p>
+</div>
+</li>
+<li>Дважды нажмите системное имя шаблона, чтобы вставить его в формулу.</li>
+<li>После двоеточия введите системное имя атрибута типа «<strong>Запись</strong>», связанного с текущим шаблоном.</li>
+</ol>
+<h2 id="mcetoc_1h81vhaac0">Практические примеры</h2>
+<div class="notice notice-success">
+<h3 class="admonition-title" id="mcetoc_1h843g0ci0">Запрос списка автомобилей такого же типа, как указан в текущей заявке</h3>
+<p><strong>Конфигурация приложения</strong></p>
+<ul>
+<li>Шаблон <em>«Типы автомобилей»</em> — содержит записи с типами автомобилей.</li>
+<li>Шаблон <em>«Заявки на автомобили»</em> — содержит заявки с указанием типа автомобиля.
+<ul>
+<li>Атрибут <em>«Тип автомобиля»</em>
+<ul>
+<li><strong>Системное имя</strong>: <em>CarType</em></li>
+<li><strong>Тип данных</strong>: <strong>запись</strong></li>
+<li><strong>Связанный шаблон</strong>: <em>Типы автомобилей</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Шаблон <em>«Автомобили»</em> — содержит записи об автомобилях различных типов.
+<ul>
+<li><strong>Системное имя</strong>: <em>Cars</em></li>
+<li>Атрибут «Тип»
+<ul>
+<li><strong>Системное имя</strong>: <em>Type</em></li>
+<li><strong>Тип данных</strong>: <strong>запись</strong></li>
+<li><strong>Связанный шаблон</strong>: <em>Типы автомобилей</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><span class="filename">Формула в шаблоне «Заявки на автомобили», возвращающая список записей в шаблоне Cars с таким же значением атрибута Type, как у атрибута CarType в текущей записи</span>
+<pre><code><span class="n">$CarType</span><span class="o">&lt;-</span><span class="n">Cars</span><span class="o">:</span><span class="k">Type</span> </code></pre>
+</div>
+</div>
+<div class="notice notice-success">
+<h3 class="admonition-title" id="mcetoc_1h843g90u1">Запрос количества заявок на такой же автомобиль, как в текущей заявке</h3>
+<p><strong>Конфигурация приложения</strong></p>
+<ul>
+<li>Шаблон <em>«Автомобили»</em> — содержит записи о различных автомобилях.
+<ul>
+<li><strong>Системное имя</strong>: <em>Cars</em></li>
+</ul>
+</li>
+<li>Шаблон <em>«Заявки на автомобили»</em>
+<ul>
+<li><strong>Системное имя</strong>: <em>Requests</em></li>
+<li>Атрибут <em>«Автомобиль»</em>
+<ul>
+<li><strong>Системное имя</strong>: <em>Car</em></li>
+<li><strong>Тип данных</strong>: <strong>запись</strong></li>
+<li><strong>Связанный шаблон</strong>: <em>Автомобили</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><strong><span class="filename">Формула в шаблоне Requests, возвращающая количество записей с таким же значением атрибута Car, как в текущей записи.</span></strong>
+<pre><code><span class="nf">COUNT</span><span class="p">(</span><span class="n">$Car</span><span class="o">&lt;-</span><span class="n">Requests</span><span class="o">:</span><span class="n">Car</span><span class="p">)</span> </code></pre>
+</div>
+</div>
+<h2 id="mcetoc_1h81vhaac1">Связанные статьи</h2>
+<p><strong><a class="autorefs autorefs-internal mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2463">Редактор выражений</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/category.php?id=409">Примеры использования формул</a></strong></p>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" href="#"> <em class="fa-light fa-arrow-up">‌</em> К началу </a></div>

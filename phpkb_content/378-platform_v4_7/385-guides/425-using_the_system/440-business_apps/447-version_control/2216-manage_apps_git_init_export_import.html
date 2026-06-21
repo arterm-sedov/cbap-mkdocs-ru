@@ -1,0 +1,244 @@
+<h1>Управление версиями  приложения через Git. Инициализация репозитория, экспорт и импорт</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#переход-к-странице-управления-версиями-через-git"> <span class="md-ellipsis"> Переход к странице управления версиями через Git </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#инициализация-репозитория"> <span class="md-ellipsis"> Инициализация репозитория </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-аккаунта-git"> <span class="md-ellipsis"> Настройка аккаунта Git </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#использование-ветвей-в-репозитории-git"> <span class="md-ellipsis"> Использование ветвей в репозитории Git </span> </a><nav aria-label="Использование ветвей в репозитории Git" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#создание-новой-ветви-в-репозитории-git"> <span class="md-ellipsis"> Создание новой ветви в репозитории Git </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#экспорт-приложения-в-репозиторий-git"> <span class="md-ellipsis"> Экспорт приложения в репозиторий Git </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#импорт-приложения-из-репозитория-git"> <span class="md-ellipsis"> Импорт приложения из репозитория Git </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<div class="notice notice-error">
+<p class="admonition-title">Экспериментальная функция</p>
+<p>Представленная здесь функция находится на стадии разработки. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=1339#experimental_feature_support">Поддержка экспериментальных функций</a>»</em>.</p>
+</div>
+<h2 id="введение">Введение</h2>
+<p>В <strong>Comindware Business Application Platform</strong> предусмотрены импорт и экспорт версий приложения посредством системы контроля версий Git.</p>
+<p>Для работы этой функции требуется настроить подключение к репозиторию. См. статью <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2204">Управление версиями через Git. Настройка подключения</a>»</em>.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>По умолчанию в репозитории хранится только конфигурация приложения, записи сохраняются только для шаблонов, у которых установлен флажок «<strong>Переносить данные при трансфере</strong>» на вкладке <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2221#record_template_properties">«<strong>Свойства</strong>»</a>.</p>
+</div>
+<div class="notice notice-success">
+<p class="admonition-title">Определения</p>
+<ul>
+<li><strong>Ветвь</strong> — отдельное хранилище данных в репозитории Git. Ветви позволяют упорядочить версии приложения. Например, можно создать две ветви: одну для тестовых версий приложения, а другую — для рабочих.</li>
+<li><strong>Коммит</strong>— версия приложения, хранящаяся в ветви репозитория Git.</li>
+<li>Процесс управления версиями приложения также называется трансфером.</li>
+</ul>
+</div>
+<h2 id="переход-к-странице-управления-версиями-через-git">Переход к странице управления версиями через Git</h2>
+<ol class="colored_numbers_list">
+<li>На странице <strong>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2209">Администрирование</a>»</strong> приложения выберите пункт «<strong>Управление версиями</strong>» <em class="fa-light fa-code-branch">‌<!--icon--></em>.</li>
+<li>
+<p>Если отображается страница ручного управления версиями, нажмите заголовок «<strong>Ручное управление версиями</strong>» и в раскрывающемся меню выберите пункт «<strong>Управление версиями через Git</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Переход к управлению версиями через Git" src="https://kb.comindware.ru/assets/verstion_control_switch_to_git.png"/>
+<figcaption class="caption">Переход к управлению версиями через Git</figcaption>
+</figure>
+</li>
+<li>
+<p>Отобразится страница «<strong>Управление версиями через Git</strong>».</p>
+</li>
+<li>
+<p>Выполните необходимую операцию:</p>
+<ul>
+<li><strong>Инициализация</strong> — <a class="mkdocs_imported_link" href="#инициализация-репозитория">выбор репозитория</a>, <a class="mkdocs_imported_link" href="#настройка-аккаунта-git">настройка аккаунта</a> для создания коммитов и <a class="mkdocs_imported_link" href="#использование-ветвей-в-репозитории-git">выбор или создание ветви</a> в репозитории для управления версиями приложения.</li>
+<li><strong>Импортировать из Git</strong> — <a class="mkdocs_imported_link" href="#импорт-приложения-из-репозитория-git">импорт</a> последней версии приложения из ветви, выбранной при <a class="mkdocs_imported_link" href="#инициализация-репозитория">инициализации</a> репозитория Git.</li>
+<li><strong>Экспортировать в Git</strong> — <a class="mkdocs_imported_link" href="#экспорт-приложения-в-репозиторий-git">экспорт</a> текущей версии приложения ветвь, выбранную при <a class="mkdocs_imported_link" href="#инициализация-репозитория">инициализации</a> репозитория Git.</li>
+</ul>
+<figure class="screenshot_with_caption"><img alt="Операции на странице «Управление версиями через Git»" src="https://kb.comindware.ru/assets/version_control_git.png"/>
+<figcaption class="caption">Операции на странице «Управление версиями через Git»</figcaption>
+</figure>
+</li>
+</ol>
+<h2 id="инициализация-репозитория">Инициализация репозитория</h2>
+<p>Чтобы использовать функцию управления версиями через Git, сначала инициализируйте репозиторий.</p>
+<p>Параметры, настроенные при инициализации репозитория, будут использоваться по умолчанию при <a class="mkdocs_imported_link" href="#экспорт-приложения-в-репозиторий-git">экспорте</a> и <a class="mkdocs_imported_link" href="#импорт-приложения-из-репозитория-git">импорте</a> версий приложения.</p>
+<p>Перед этим необходимо <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2204">настроить подключение к репозиторию</a>.</p>
+<ol class="colored_numbers_list">
+<li>Нажмите кнопку «<strong>Инициализация</strong>» на странице «<strong>Управление версиями через Git</strong>».</li>
+<li>В окне «<strong>Инициализация репозитория</strong>» выберите репозиторий Git — одно из настроенных <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2204">подключений к Git</a>.</li>
+<li>
+<p>Нажмите кнопку «<strong>Далее</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Выбор репозитория Git для инициализации" src="https://kb.comindware.ru/assets/git_initialize.png"/>
+<figcaption class="caption">Выбор репозитория Git для инициализации</figcaption>
+</figure>
+</li>
+<li>
+<p>Отобразится окно «<strong>Настройка аккаунта Git</strong>».</p>
+</li>
+</ol>
+<h2 id="настройка-аккаунта-git">Настройка аккаунта Git</h2>
+<p>При настройке аккаунта Git укажите учётные данные пользователя, от имени которого будут создаваться коммиты (версии приложения) в репозитории.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>В окне «<strong>Настройка аккаунта Git</strong>» заполните перечисленные ниже поля:</p>
+<ul>
+<li><strong>Имя пользователя</strong> — укажите логин для подключения к репозиторию.</li>
+<li><strong>Пароль</strong> — укажите пароль для подключения к репозиторию.</li>
+<li><strong>Ф. И. О</strong> — укажите имя, которое будет отображаться в качестве имени автора коммитов.</li>
+<li><strong>Адрес эл. почты</strong> — укажите адрес электронной почты, который храниться в репозитории в качестве адреса автора коммитов.</li>
+</ul>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Подключиться к Git</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Настройка аккаунта Git" src="https://kb.comindware.ru/assets/git_account_setup.png"/>
+<figcaption class="caption">Настройка аккаунта Git</figcaption>
+</figure>
+</li>
+<li>
+<p>Должно отобразиться сообщение «<strong>Соединение установлено</strong>» на зеленом фоне в правом нижнем углу страницы.</p>
+<figure class="screenshot_with_caption"><img alt="Сообщение об успешном подключении к репозиторию Git" src="https://kb.comindware.ru/assets/connection_established.png"/>
+<figcaption class="caption">Сообщение об успешном подключении к репозиторию Git</figcaption>
+</figure>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Далее</strong>».</p>
+</li>
+<li>Отобразится окно «<strong>Ветви в репозитории Git</strong>».</li>
+</ol>
+<h2 id="использование-ветвей-в-репозитории-git">Использование ветвей в репозитории Git</h2>
+<p>В окне «<strong>Ветви в репозитории Git</strong>» отображаются список ветвей репозитория и список версий приложения хранящихся в выбранной ветви.</p>
+<ol class="colored_numbers_list">
+<li>В раскрывающемся списке «<strong>Ветвь</strong>», выберите ветвь репозитория Git для импорта и экспорта версий приложения.</li>
+<li>
+<p>Отобразится список хранящихся в ветви версий приложения (коммитов) со следующими сведениями:</p>
+<ul>
+<li><strong>Описание</strong> — автоматически сгенерированное наименование версии приложения, хранящейся в репозитории.</li>
+<li><strong>Дата</strong> — дата сохранения версии приложения в репозитории.</li>
+<li><strong>Автор</strong> — пользователь, под именем которого была сохранена версия приложения.</li>
+<li><strong>Коммит</strong> — уникальный идентификатор версии приложения в репозитории.</li>
+</ul>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Создать новую ветвь</strong>», чтобы <a class="mkdocs_imported_link" href="#создание-новой-ветви-в-репозитории-git">создать в репозитории Git новую ветвь</a> для хранения версий приложения.</p>
+</li>
+<li>Нажмите кнопку «<strong>Импортировать из Git</strong>», чтобы загрузить <em>выбранную версию</em> приложения из <em>выбранной ветви</em> репозитория.</li>
+<li>Нажмите кнопку «<strong>Экспортировать в Git</strong>», чтобы сохранить <em>последнюю версию</em> приложения в <em>выбранную ветвь</em> репозитория.</li>
+<li>
+<p>Нажмите кнопку «<strong>Назад</strong>», если требуется вернуться к предыдущему шагу инициализации репозитория.</p>
+<figure class="screenshot_with_caption"><img alt="Список версий приложения в выбранной ветви репозитория Git" src="https://kb.comindware.ru/assets/git_commit_list.png"/>
+<figcaption class="caption">Список версий приложения в выбранной ветви репозитория Git</figcaption>
+</figure>
+</li>
+</ol>
+<h3 id="создание-новой-ветви-в-репозитории-git">Создание новой ветви в репозитории Git</h3>
+<ol class="colored_numbers_list">
+<li>Нажмите кнопку «<strong>Создать новую ветвь</strong>» в окне «<strong>Ветви в репозитории Git</strong>».</li>
+<li>
+<p>Отобразится окно «<strong>Новая ветвь в репозитории Git</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Создание новой ветви в репозитории Git" src="https://kb.comindware.ru/assets/git_new_branch.png"/>
+<figcaption class="caption">Создание новой ветви в репозитории Git</figcaption>
+</figure>
+</li>
+<li>
+<p>Введите <strong>название новой ветви</strong> — оно может содержать латинские буквы (A–Z, a–z) и цифры (0–9).</p>
+</li>
+<li>Нажмите кнопку «<strong>Сохранить</strong>».</li>
+</ol>
+<h2 id="экспорт-приложения-в-репозиторий-git">Экспорт приложения в репозиторий Git</h2>
+<p>При экспорте в репозиторий Git в репозитории будет создан коммит с текущей версией приложения из <strong>Comindware Business Application Platform</strong>.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>Перед экспортом приложения подготовьте его, как указано в параграфе <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2217#version_control_app_prepare">Подготовка приложения к экспорту</a>».</em></p>
+</div>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите на страницу «<a class="mkdocs_imported_link" href="#переход-к-странице-управления-версиями-через-git"><strong>Управление версиями через Git</strong></a>».</p>
+<ul>
+<li>Чтобы экспортировать <em>текущую версию</em> приложения в <a class="mkdocs_imported_link" href="#инициализация-репозитория">ветвь, выбранную при инициализации репозитория</a>, нажмите кнопку «<strong>Экспортировать в Git</strong>».</li>
+<li>
+<p>Чтобы экспортировать <em>текущую версию</em> приложения в <em>конкретную ветвь</em> репозитория:</p>
+<ol class="colored_numbers_list">
+<li>Нажмите кнопку «<strong>Инициализация</strong>».</li>
+<li>Отобразится окно «<strong>Инициализация репозитория</strong>».</li>
+<li>Пройдите шаги <a class="mkdocs_imported_link" href="#инициализация-репозитория">инициализации репозитория</a> до шага «<a class="mkdocs_imported_link" href="#использование-ветвей-в-репозитории-git"><strong>Ветви в репозитории Git</strong></a>».</li>
+<li>Выберите ветвь приложения.</li>
+<li>Нажмите кнопку «<strong>Экспортировать в Git</strong>».</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p>Отобразится окно «<strong>Экспортировать в Git</strong>».</p>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Выполнить</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Запуск экспорта версии приложения в репозиторий" src="https://kb.comindware.ru/assets/git_version_export.png"/>
+<figcaption class="caption">Запуск экспорта версии приложения в репозиторий</figcaption>
+</figure>
+</li>
+<li>
+<p>После успешного экспорта версии приложения в репозиторий должно отобразиться сообщение «<strong>Экспорт в Git выполнен</strong>» на зелёном фоне в правом нижнем углу страницы.</p>
+<figure class="screenshot_with_caption"><img alt="Сообщение об успешном экспорте версии приложения в репозиторий Git" src="https://kb.comindware.ru/assets/git_export_completed.png"/>
+<figcaption class="caption">Сообщение об успешном экспорте версии приложения в репозиторий Git</figcaption>
+</figure>
+</li>
+<li>
+<p>Если экспорт не удалось выполнить, устраните обнаруженные проблемы в приложении и экспортируйте его заново.</p>
+</li>
+</ol>
+<h2 id="импорт-приложения-из-репозитория-git">Импорт приложения из репозитория Git</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<ul>
+<li>
+<p>После импорта версии приложения из репозитория Git свойства имеющегося приложения, его шаблоны, атрибуты и другие сущности будут заменены импортированными. При этом имеющиеся записи и экземпляры процессов, а также значения атрибутов изменены не будут.</p>
+</li>
+<li>
+<p>При импорте и экспорте <strong>системное имя</strong> приложения следует оставлять неизменным во избежание неполадок. То есть системное имя приложения, в которое вы импортируете версию из репозитория Git, должно совпадать с системным именем импортируемой версии приложения.</p>
+</li>
+</ul>
+</div>
+<ol class="colored_numbers_list">
+<li>
+<p>Перейдите на страницу «<a class="mkdocs_imported_link" href="#переход-к-странице-управления-версиями-через-git"><strong>Управление версиями через Git</strong></a>».</p>
+<ul>
+<li>Чтобы импортировать <em>последнюю версию</em> приложения из  <a class="mkdocs_imported_link" href="#использование-ветвей-в-репозитории-git">ветви, выбранной при инициализации репозитория</a>, нажмите кнопку «<strong>Импортировать из Git</strong>».</li>
+<li>
+<p>Чтобы импортировать <em>конкретную версию</em> приложения из <em>конкретной ветви</em> репозитория:</p>
+<ol class="colored_numbers_list">
+<li>Нажмите кнопку «<strong>Инициализация</strong>».</li>
+<li>Пройдите шаги <a class="mkdocs_imported_link" href="#инициализация-репозитория">инициализации репозитория</a> до шага «<a class="mkdocs_imported_link" href="#использование-ветвей-в-репозитории-git"><strong>Ветви в репозитории Git</strong></a>».</li>
+<li>Выберите ветвь и версию приложения.</li>
+<li>Нажмите кнопку «<strong>Импортировать из Git</strong>».</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p>Отобразится окно «<strong>Импортировать из Git</strong>».</p>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Выполнить</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Запуск импорта версии приложения из репозитория" src="https://kb.comindware.ru/assets/git_version_import.png"/>
+<figcaption class="caption">Запуск импорта версии приложения из репозитория</figcaption>
+</figure>
+</li>
+<li>
+<p>После импорта версии приложения в репозиторий должно отобразиться сообщение «<strong>Импорт выполнен</strong>» на зелёном фоне в правом нижнем углу страницы.</p>
+<figure class="screenshot_with_caption"><img alt="Сообщение об успешном экспорте версии приложения в репозиторий Git" src="https://kb.comindware.ru/assets/git_import_completed.png"/>
+<figcaption class="caption">Сообщение об успешном экспорте версии приложения в репозиторий Git</figcaption>
+</figure>
+</li>
+<li>
+<p>Если импорт версии приложения не удалось выполнить, устраните обнаруженные проблемы и конфликты в исходном и целевом приложениях, экспортируйте исходное приложение заново и повторите импорт.</p>
+</li>
+</ol>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2217">Управление версиями приложения</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2218">Ручное управление версиями</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

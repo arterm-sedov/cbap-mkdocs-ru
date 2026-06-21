@@ -1,0 +1,190 @@
+<h1>Переменные в сценарии. Определения, настройка и использование</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#definitions"> <span class="md-ellipsis"> Определения </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#системные-переменные"> <span class="md-ellipsis"> Системные переменные </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#локальные-переменные-сценария"> <span class="md-ellipsis"> Локальные переменные сценария </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#использование-переменных-в-формулах-и-выражениях-n3"> <span class="md-ellipsis"> Использование переменных в формулах и выражениях N3 </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#практический-пример"> <span class="md-ellipsis"> Практический пример </span> </a><nav aria-label="Практический пример" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#тестирование"> <span class="md-ellipsis"> Тестирование </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<div class="notice notice-success">
+<h2 class="admonition-title" id="definitions">Определения</h2>
+<p><strong>Переменные</strong> — это именованные объекты, с помощью которых можно манипулировать данными.</p>
+<p>Переменные можно использовать для передачи данных между сценарием, записями, процессами и внешними системами.</p>
+<p>Переменные в сценарии аналогичны атрибутам, но не привязаны к какому-либо шаблону.</p>
+<p>В сценариях можно обращаться к <a class="mkdocs_imported_link" href="#системные-переменные">системным переменным</a>, <a class="mkdocs_imported_link" href="#локальные-переменные-сценария">локальным переменным сценария</a> и <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2207">переменным приложения</a>.</p>
+</div>
+<h2 id="системные-переменные">Системные переменные</h2>
+<p>Системные переменные в сценарии инициализируются при его срабатывании.</p>
+<p>Вне сценария системные переменные могут иметь другие значения и могут быть недоступны.</p>
+<p>Предусмотрены следующие системные переменные:</p>
+<ul>
+<li><code>BusinessObject</code> — ID записи, связанной с текущим экземпляром шаблона процесса в сценариях по событиям «<strong>Вход токена</strong>» и «<strong>Выход токена</strong>».</li>
+<li><code>origin</code> — значение зависит от типа события, вызвавшего сценарий:
+<ul>
+<li>событие «<strong>Нажатие кнопки</strong>» — ID записи, экземпляра процесса, задачи или аккаунта, для которого была нажата кнопка;</li>
+<li>события «<strong>Создание записи</strong>», «<strong>Изменение записи</strong>» — ID записи;</li>
+<li>события «<strong>Запуск процесса</strong>», «<strong>Вход токена</strong>», «<strong>Выход токена</strong>» — ID экземпляра процесса.</li>
+</ul>
+</li>
+<li><code>ProcessObject</code> — ID экземпляра процесса в сценариях по событиям «<strong>Запуск процесса</strong>», «<strong>Вход токена</strong>», «<strong>Выход токена</strong>».</li>
+<li><code>dialogVariables</code> — <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2276#button_local_variables">локальные переменные кнопки</a>, которая вызвала сценарий по событию «<strong>Нажатие кнопки</strong>». Значения локальных переменных кнопки задаются в диалоговом окне для кнопки. См. <a class="mkdocs_imported_link" href="#практический-пример">пример</a>.</li>
+<li><code>IncomingMessage</code> — в эту переменную можно поместить значения атрибутов ответа на HTTP-запрос в сценариях по событию «<strong>Получено сообщение</strong>».
+<ul>
+<li>Атрибуты ответа настраиваются в свойствах пути передачи данных «<strong>Получение HTTP-запросов</strong>».</li>
+<li>Чтобы изменить значения атрибутов ответа, используйте действие «<strong>Изменить значения переменных</strong>»: в поле «<strong>Набор переменных</strong>» укажите <code>IncomingMessage</code>, добавьте переменные в таблицу и задайте их значения.</li>
+</ul>
+</li>
+<li><code>timeZoneOffset</code> — смещение часового пояса сервера в минутах, тип данных — «<strong>Длительность</strong>».</li>
+<li><code>requestTime</code> — текущее время, тип данных «<strong>Дата и время</strong>».</li>
+</ul>
+<h2 id="локальные-переменные-сценария">Локальные переменные сценария</h2>
+<p>Локальные переменные сценария инициализируются с помощью действий сценария.</p>
+<p>Локальные переменные сценария доступны только во время его работы, обратиться к ним вне сценария нельзя.</p>
+<p>В сценариях предусмотрены следующие локальные переменные:</p>
+<ul>
+<li>Переменная, хранящая ID объекта, используемого для текущей итерации, в действии «<strong>Повторять по количеству объектов</strong>».</li>
+<li>Переменная, хранящая номер текущей итерации в действии «<strong>Повторять по числовому счётчику</strong>».</li>
+<li>Набор переменных, заданных в действии «<strong>Изменить значения переменных</strong>».</li>
+<li>Переменные для успешного ответа и ответа с ошибкой в действии «<strong>Отправить сообщение</strong>».</li>
+<li>Переменная, хранящая ID документа, в действии «<strong>Создать документ по шаблону</strong>».</li>
+</ul>
+<div class="notice notice-warning">
+<p class="admonition-title">Переменные типа «Объект»</p>
+<p>С помощью действия «<strong>Изменить значения переменных</strong>» можно передавать переменные типа «<strong>Объект</strong>». Для этого необходимо создать родительскую переменную и добавить к ней дочерние:</p>
+<ul>
+<li>Создайте переменную, оставив её значение пустым.</li>
+<li>Установите флажок у имени родительской переменной в списке и нажмите кнопку «<strong>Создать</strong>».</li>
+<li>Дважды нажмите значок <em class="fa-light fa-angle-down anchor">‌<!--icon--></em> рядом с родительской переменной.</li>
+<li>В таблице отобразится дочерняя переменная.</li>
+</ul>
+</div>
+<h2 id="использование-переменных-в-формулах-и-выражениях-n3">Использование переменных в формулах и выражениях N3</h2>
+<p>Чтобы обратиться к переменной в формуле, укажите её системное имя с префиксом <code>$$</code>.</p>
+<p>Например, чтобы присвоить атрибуту значение ID процесса, связанного с шаблоном записи, используйте формулу:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="n">FORMAT</span><span class="p">(</span><span class="s">"{0}"</span><span class="p">,</span> <span class="n">LIST</span><span class="p">(</span><span class="err">$$</span><span class="n">ProcessObject</span><span class="p">))</span></code></pre>
+</div>
+<p>В выражениях N3 с переменными следует работать как с атрибутами. Чтобы обратиться к переменной, требуется импортировать функции для работы с ними.</p>
+<p>Например, чтобы присвоить атрибуту значение ID процесса, связанного с шаблоном записи, используйте выражение:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="c"># Импортируем функции для работы с переменными</span></code><br/><code><span class="k">@prefix</span> <span class="nn">variable:</span> <span class="nv">&lt;http://comindware.com/ontology/session/variable#&gt;</span><span class="p">.</span></code><br/><code><span class="k">@prefix</span> <span class="nn">session:</span> <span class="nv">&lt;http://comindware.com/ontology/session#&gt;</span><span class="p">.</span></code><br/><code><span class="k">@prefix</span> <span class="nn">string:</span> <span class="nv">&lt;http://www.w3.org/2000/10/swap/string#&gt;</span><span class="p">.</span></code><br/><code><span class="k">@prefix</span> <span class="nn">cmwstring:</span> <span class="nv">&lt;http://comindware.com/logics/string#&gt;</span><span class="p">.</span></code><br/><code></code><br/><code><span class="p">{</span></code><br/><code>    <span class="c"># Находим значение системной переменной ProcessObject</span></code><br/><code>    <span class="c"># и помещаем его в ?ProcessObject.</span></code><br/><code>    <span class="nn">session</span><span class="p">:</span><span class="nt">context</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">ProcessObject</span> <span class="err">?ProcessObject</span><span class="p">.</span></code><br/><code>    <span class="c"># Форматируем ?ProcessObject в строку и помещаем в ?FullId.</span></code><br/><code>    <span class="p">(</span><span class="s">"{0}"</span> <span class="err">?ProcessObject</span><span class="p">)</span> <span class="nn">string</span><span class="p">:</span><span class="nt">format</span> <span class="err">?FullId</span><span class="p">.</span></code><br/><code>    <span class="c"># Обрезаем префикс "user." и помещаем ID процесса в атрибут.</span></code><br/><code>    <span class="p">(</span><span class="err">?FullId</span> <span class="mi">5</span><span class="p">)</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">substring</span> <span class="err">?value</span><span class="p">.</span></code><br/><code><span class="p">}</span></code></pre>
+</div>
+<h2 id="практический-пример">Практический пример</h2>
+<p>Настроим сценарий для массовой корректировки записей в табеле трудозатрат с использованием локальных переменных кнопки.</p>
+<ol class="colored_numbers_list">
+<li>Создайте шаблон записи <em>«Трудозатраты»</em> с атрибутом <em>«Затраченное время»</em> типа <strong>«Длительность»</strong>.</li>
+<li>
+<p>Создайте шаблон записи <em>«Табели трудозатрат»</em> и добавьте в него атрибут <em>«Записи трудозатрат»</em> со следующими свойствами:</p>
+<ul>
+<li><strong>Тип данных: запись</strong></li>
+<li><strong>Связанный шаблон:</strong> <em>Трудозатраты</em></li>
+<li><strong>Хранить несколько значений</strong>: флажок установлен</li>
+</ul>
+</li>
+<li>
+<p>В шаблоне <em>«Табели трудозатрат»</em> создайте кнопку <em>«Скорректировать время»</em> со следующими свойствами:</p>
+<ul>
+<li><strong>Контекст операции: запись</strong></li>
+<li><strong>Операция: вызвать событие «Нажата кнопка»</strong></li>
+<li><strong>Сохранять запись после выполнения:</strong> флажок установлен</li>
+<li><strong>Результат выполнения</strong>: <strong>обновить данные</strong></li>
+</ul>
+</li>
+<li>
+<p>На вкладке «<strong>Локальные переменные</strong>» добавьте локальную переменную <em>«Новое время»</em> со следующими свойствами:</p>
+<ul>
+<li><strong>Тип данных: длительность</strong></li>
+<li><strong>Системное имя</strong>: <code>newTime</code></li>
+</ul>
+</li>
+<li>
+<p>На вкладке «<strong>Свойства</strong>» установите флажок «<strong>Отображать диалоговое окно</strong>» и настройте диалоговое окно:</p>
+<ul>
+<li><strong>Отображаемое название:</strong> <em>Введите затраченное время</em>.</li>
+<li>Поместите на форму переменную <em>«Новое время»</em>.</li>
+</ul>
+</li>
+<li>
+<p>Настройте форму для шаблона записи <em>«Табели трудозатрат»</em>:</p>
+<ul>
+<li>Поместите на форму атрибут <em>«Записи трудозатрат»</em> как таблицу.</li>
+<li>Поместите кнопку <em>«Скорректировать время»</em> в область кнопок таблицы <em>«Записи трудозатрат»</em>.</li>
+<li>В таблицу <em>«Записи трудозатрат»</em> поместите столбцы <em>«ID»</em> и <em>«Затраченное время»</em>.</li>
+</ul>
+</li>
+<li>
+<p>Настройте сценарий со следующим событием:</p>
+<ul>
+<li><strong>Тип: нажатие кнопки</strong></li>
+<li><strong>Контекстный шаблон:</strong> <em>Табели трудозатрат</em></li>
+<li><strong>Кнопка:</strong> <em>Скорректировать время</em></li>
+</ul>
+</li>
+<li>
+<p>Добавьте действие «<strong>Повторять по количеству объектов</strong>» со следующими свойствами:</p>
+<ul>
+<li><strong>Переменная</strong> — <code>rec</code></li>
+<li><strong>Атрибут или выражение для поиска объектов</strong>: <strong>атрибут</strong> <em>«Записи трудозатрат»</em></li>
+</ul>
+</li>
+<li>
+<p>Добавьте действие «<strong>Сменить контекст</strong>» внутрь действия «<strong>Повторять по количеству объектов</strong>» со следующими свойствами:</p>
+<ul>
+<li><strong>Целевой шаблон записи:</strong> <em>Трудозатраты</em></li>
+<li><strong>Атрибут или выражение для поиска объектов: формула</strong> <code>$$rec</code></li>
+</ul>
+</li>
+<li>
+<p>Добавьте действие «<strong>Изменить значения атрибутов</strong>» внутрь действия «<strong>Сменить контекст</strong>» со следующими свойствами:</p>
+<ul>
+<li><strong>Атрибут</strong> <em>«Затраченное время»</em></li>
+<li><strong>Операция со значениями</strong>: <strong>Заменить</strong>.</li>
+<li>
+<p><strong>Значение:</strong></p>
+<ul>
+<li><strong>Формула:</strong> <code>$$dialogVariables-&gt;newTime</code></li>
+</ul>
+<p><strong>или</strong></p>
+<ul>
+<li><strong>N3:</strong></li>
+</ul>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="c"># Импортируем функции для работы с переменными</span></code><br/><code><span class="k">@prefix</span> <span class="nn">variable:</span> <span class="nv">&lt;http://comindware.com/ontology/session/variable#&gt;</span><span class="p">.</span></code><br/><code><span class="k">@prefix</span> <span class="nn">session:</span> <span class="nv">&lt;http://comindware.com/ontology/session#&gt;</span><span class="p">.</span></code><br/><code></code><br/><code><span class="p">{</span></code><br/><code>    <span class="c"># Помещаем системную переменную dialogVariables в ?dialogVariables.</span></code><br/><code>    <span class="nn">session</span><span class="p">:</span><span class="nt">context</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">dialogVariables</span> <span class="err">?dialogVariables</span><span class="p">.</span></code><br/><code>    <span class="c"># Находим в ?dialogVariables значение переменной newTime.</span></code><br/><code>    <span class="err">?dialogVariables</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">newTime</span> <span class="err">?value</span><span class="p">.</span></code><br/><code><span class="p">}</span></code></pre>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример сценария с использованием переменных" src="https://kb.comindware.ru/assets/scenario_with_variables.png"/></p>
+<figcaption class="caption">Пример сценария с использованием переменных</figcaption>
+</figure>
+<h3 id="тестирование">Тестирование</h3>
+<ol class="colored_numbers_list">
+<li>Создайте запись в шаблоне <em>«Табели трудозатрат»</em>.</li>
+<li>На форме <em>«Табель»</em> создайте несколько записей в таблице <em>«Записи трудозатрат»</em> и не заполняйте поле <em>«Затраченное время»</em>.</li>
+<li>Сохраните запись.</li>
+<li>Нажмите кнопку <em>«Скорректировать время»</em>.</li>
+<li>Отобразится диалоговое окно <em>«Введите затраченное время»</em>.</li>
+<li>В поле <em>«Новое время»</em> введите желаемое значение.</li>
+<li>Во всех записях в таблице <em>«Записи трудозатрат»</em> будет установлено затраченное время, которое вы ввели в диалоговом окне.</li>
+</ol>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2151">Сценарии. Определение, создание, настройка, использование</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2346">Настройка действий сценария</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

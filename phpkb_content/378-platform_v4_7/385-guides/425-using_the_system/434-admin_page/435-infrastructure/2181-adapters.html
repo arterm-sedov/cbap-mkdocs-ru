@@ -1,0 +1,94 @@
+<h1>Адаптеры. Определения, настройка, удаление</h1><div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1hrjoag3a0">Определения</a></li>
+<li><a href="#mcetoc_1gjrhsm392">Просмотр списка адаптеров и настройка адаптера</a></li>
+<li><a href="#mcetoc_1gjrhsm394">Удаление адаптера</a></li>
+<li><a href="#mcetoc_1gjrhsm395">Связанные статьи</a></li>
+</ul>
+</div>
+<div class="notice notice-success">
+<h3 class="admonition-title" id="mcetoc_1hrjoag3a0">Определения</h3>
+<ul>
+<li><strong>Адаптеры </strong>— это заказные модули для подключения <strong>Comindware Business Application Platform</strong> к внешним системам.</li>
+<li>Для использования адаптера необходимо загрузить и скомпилировать его исходный код на стороне сервера. </li>
+<li>После компиляции адаптера для него можно будет создать соответствующие подключения и пути передачи данных.</li>
+</ul>
+</div>
+<h2 id="mcetoc_1gjrhsm392">Просмотр списка адаптеров и настройка адаптера</h2>
+<ol class="colored_numbers_list">
+<li>На странице <a href="https://kb.comindware.ru/article.php?id=2191.html">«<strong>Администрирование</strong>» — «<strong>Инфраструктура</strong>»</a> выберите пункт «<strong>Адаптеры</strong>» <em class="fa-light fa-puzzle-piece-simple">‌</em>.</li>
+<li>Отобразится список адаптеров.
+<div class="screenshot_with_caption">
+<p><img alt="Список адаптеров" src="https://kb.comindware.ru/assets/adapter_list.png"/></p>
+<p class="caption">Список адаптеров</p>
+</div>
+</li>
+<li>Нажмите кнопку «<strong>Создать</strong>» или дважды нажмите строку имеющегося адаптера.</li>
+<li>Отобразится страница свойств адаптера.
+<div class="screenshot_with_caption">
+<p><img alt="Страница свойств адаптера" src="https://kb.comindware.ru/assets/adapter_properties.png"/></p>
+<p class="caption">Страница свойств адаптера</p>
+</div>
+</li>
+<li>В поле «<strong>Исходный код адаптера</strong>» загрузите ZIP-архив с исходным кодом адаптера. Архив должен содержать решение Visual Studio:
+<ul>
+<li>проект с исходным кодом адаптера;</li>
+<li>проекты, содержащие интерфейсы для разработки и последующей компиляции адаптера;</li>
+<li>необходимые дополнительные проекты для адаптера, например проект локализации;</li>
+<li>папку с подключаемыми библиотеками;</li>
+<li>файл решения (.sln) в одном экземпляре в корневой папке архива.
+<div class="screenshot_with_caption">
+<p><img alt="Пример содержимого архива с исходным кодом адаптера" src="https://kb.comindware.ru/assets/adapter_archive_content.png"/></p>
+<p class="caption">Пример содержимого архива с исходным кодом адаптера</p>
+</div>
+</li>
+</ul>
+</li>
+<li>Нажмите кнопку «<strong>Сохранить</strong>».</li>
+<li>Нажмите кнопку «<strong>Опубликовать</strong>», чтобы скомпилировать адаптер.</li>
+<li>В случае успешной компиляции адаптера его название отобразится в списке адаптеров и свойствах адаптера.</li>
+<li>После компиляции просмотрите <strong>журнал компиляции</strong>.
+<div class="screenshot_with_caption">
+<p><img alt="Пример журнала компиляции" src="https://kb.comindware.ru/assets/adapter_compilation_log.png"/></p>
+<p class="caption">Пример журнала компиляции</p>
+</div>
+</li>
+<li>При необходимости скачайте архив с журналами работы адаптера (вида <code><em>CBAP.adapters.20221026.logs.zip</em></code>), нажав кнопку «<strong>Скачать журнал работы</strong>».
+<div class="screenshot_with_caption">
+<p><img alt="Пример журнала работы адаптера" src="https://kb.comindware.ru/assets/adapter_execution_log.png"/></p>
+<p class="caption">Пример журнала работы адаптера</p>
+</div>
+</li>
+<li>Пункт с названием подключения для скомпилированного адаптера будет отображаться в подменю «<strong>Пользовательские подключения</strong>» при создании подключения и пути передачи данных.</li>
+</ol>
+<div class="screenshot_with_caption">
+<p><img alt="Создание подключения с использованием адаптера" src="https://kb.comindware.ru/assets/adapter_custom_connection_create_menu.png"/></p>
+<p class="caption">Создание подключения с использованием адаптера</p>
+</div>
+<div class="screenshot_with_caption">
+<p><img alt="Создание пути передачи данных с использованием адаптера" src="https://kb.comindware.ru/assets/adapters_custom_communication_route_create_menu.png"/></p>
+<p class="caption">Создание пути передачи данных с использованием адаптера</p>
+</div>
+<h2 id="mcetoc_1gjrhsm394">Удаление адаптера</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>Пути передачи данных и подключения, сгенерированные для удаленного адаптера, станут неактивны и перестанут работать.</p>
+</div>
+<ol class="colored_numbers_list">
+<li>Откройте <a href="https://kb.comindware.ru/secure/%d0%90%d0%b4%d0%b0%d0%bf%d1%82%d0%b5%d1%80%d1%8b-2181.html#mcetoc_1gjrhsm391">список адаптеров</a>.</li>
+<li>Установите флажок в первом столбце для адаптера, подлежащего удалению.</li>
+<li>Нажмите кнопку «<strong>Удалить</strong>».</li>
+<li>Подтвердите удаление адаптера.</li>
+</ol>
+<h2 id="mcetoc_1gjrhsm395">Связанные статьи</h2>
+<p><strong><a class="autorefs autorefs-internal" href="https://kb.comindware.ru/article.php?id=2205">Подключения</a></strong></p>
+<p><strong><a class="autorefs autorefs-internal" href="https://kb.comindware.ru/article.php?id=2205#mcetoc_1gjrlqi4l4">Настройка подключения</a></strong></p>
+</div>
+<p><a class="md-top md-icon mkdocs_imported_link" href="#"> <em class="fa-light fa-arrow-up">‌</em> К началу </a></p>
+</div>
+<div class="md-dialog">
+<div class="md-dialog__inner md-typeset"> </div>
+</div>

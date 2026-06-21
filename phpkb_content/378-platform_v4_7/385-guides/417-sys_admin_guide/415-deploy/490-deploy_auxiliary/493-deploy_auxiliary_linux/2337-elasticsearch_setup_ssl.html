@@ -1,0 +1,260 @@
+<h1>Формирование SSL-сертификатов и настройка кластера Elasticsearch для их использования</h1><div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1grild3p51">Введение</a></li>
+<li><a href="#mcetoc_1grild3p52">1. Формирование SSL-сертификатов</a>
+<ul>
+<li><a href="#mcetoc_1grild3p53">1.1 Установка Open SSL</a></li>
+<li><a href="#mcetoc_1grild3p54">1.2. Формирование сертификата СА</a></li>
+<li><a href="#mcetoc_1grild3p55">1.3. Формирование ключей и сертификатов для узлов кластера Elasticsearch</a></li>
+<li><a href="#mcetoc_1grild3p56">1.4. Отправка созданных сертификатов на узлы кластера.</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1grild3p57">2. Настройка кластера Elasticsearch</a>
+<ul>
+<li><a href="#mcetoc_1grild3p58">2.1. Добавление пароля SSL-сертификата в хранилище ключей Elasticsearch</a></li>
+<li><a href="#mcetoc_1grild3p59">2.2. Настройка узла кластера для работы с SSL-сертификатами</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1grild3p5a">3. Запуск Elasticsearch</a></li>
+<li><a href="#mcetoc_1grild3p5b">4. Присвоение сертификату статуса доверенного</a></li>
+<li><a href="#mcetoc_1grild3p5c">5. Проверка состояния кластера</a></li>
+</ul>
+</div>
+<div class="md-content">
+<h2 id="mcetoc_1grild3p51">Введение</h2>
+<p>Для работы ПО <strong>Comindware Business Application Platform</strong> требуется сервер Elasticsearch версии не ниже 8.1.0.</p>
+<p>В этой статье представлены инструкции по формированию SSL-сертификатов подлинности узлов и настройке кластера Elasticsearch с проверкой сертификатов подлинности для кластера и службы Elasticsearch.</p>
+<p>Перед выполнением нижеприведённых инструкций необходимо развернуть кластер Elasticsearch без сертификатов подлинности.</p>
+<p>Дальнейшие инструкции предполагают, что кластер и служба Elasticsearch развёрнуты согласно инструкциям в статье «<strong><a href="https://kb.comindware.ru/article.php?id=2095">Установка Elasticsearch и настройка кластера Elasticsearch без сертификатов подлинности</a></strong>» на виртуальных машинах с ОС Ubuntu 22.04.4 LTS.</p>
+<h2 id="mcetoc_1grild3p52">1. Формирование SSL-сертификатов</h2>
+<h3 id="mcetoc_1grild3p53">1.1 Установка Open SSL</h3>
+<p>1.1.1 Перед установкой OpenSSL обновите ПО:</p>
+<div class="highlight">
+<pre><code>sudo apt update <br/>sudo apt upgrade </code></pre>
+</div>
+<p>1.1.2. Установите OpenSSL:</p>
+<div class="highlight">
+<pre><code> sudo apt install openssl </code></pre>
+</div>
+<h3 id="mcetoc_1grild3p54">1.2. Формирование сертификата СА</h3>
+<p>1.2.1. В домашней папке пользователя <code>username</code> создайте папку, в которой предстоит работать:</p>
+<div class="highlight">
+<pre><code>mkdir certsGen </code></pre>
+</div>
+<p>1.2.2. Перейдите в папку <code>certsGen</code>:</p>
+<div class="highlight">
+<pre><code>cd certsGen/ </code></pre>
+</div>
+<p>1.2.3. <a id="P1_2_3"></a>Создайте ключи для СА:</p>
+<div class="highlight">
+<pre><code>sudo openssl genrsa -aes256 -out ExampleRootCA.key 4096 </code></pre>
+</div>
+<p>1.2.4. Придумайте, запишите и введите пароль для формирования ключа.</p>
+<p>1.2.5. В результате вы получите ключ <code>ExampleRootCA.key</code> для CA.</p>
+<p>1.2.6. Создайте сертификат СА:</p>
+<div class="highlight">
+<pre><code>sudo openssl req -x509 -new -nodes -key ExampleRootCA.key -sha256 -days 10000 -out ExampleRootCA.crt -subj '/CN=Xmpl Root CA/C=RU/ST=Moscow/O=Xmpl' </code></pre>
+</div>
+<p>1.2.6. В результате вы получите файл <code>ExampleRootCA.crt</code> — сертификат СА.</p>
+<h3 id="mcetoc_1grild3p55">1.3. Формирование ключей и сертификатов для узлов кластера Elasticsearch</h3>
+<p>Для примера используется следующая схема именования сертификатов  узлов: <code>es1</code>, <code>es2</code>, <code>es3</code> и т. д.</p>
+<p>1.3.1. <a id="P1_3_1"></a>Создайте ключ и сертификат для узла <code>es1</code>:</p>
+<div class="highlight">
+<pre><code>sudo openssl req -new -nodes -out es1.csr -newkey rsa:4096 -keyout es1.key -subj '/CN=Elasticsearch 1/C=RU/ST=Moscow/O=Xmpl/OU=Xmpl Cloud' </code></pre>
+</div>
+<p>1.3.2. Аналогично <a href="#P1_3_1">шагу 1.3.1</a> создайте сертификат для каждого узла, подставляя вместо <code>es1.csr</code> и <code>es1.key</code> соответствующие значения.</p>
+<p>1.3.3. Для каждого из узлов создайте <code>ext</code>-файл, описывающий узел. Подставьте свои значения напротив <code>DNS.1</code>, <code>DNS.2</code> и <code>IP.1</code>.</p>
+<div class="highlight">
+<pre><code>sudo cat &gt; es1.ext &lt;&lt; EOF
+authorityKeyIdentifier=keyid
+basicConstraints=CA:FALSE
+keyUsage = critical, digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+extendedKeyUsage = critical, serverAuth, clientAuth
+subjectAltName = @alt_names
+[alt_names]
+DNS.1 = yourClusterName
+DNS.2 = elasticsearch1
+IP.1 = 192.168.XXX.1
+EOF</code></pre>
+</div>
+<p>1.3.4. <a id="P1_3_4"></a>Для узла <code>es1</code> создайте подписанный СА сертификат и сохраните его в файл <code>es1.crt</code>:</p>
+<div class="highlight">
+<pre><code>sudo openssl x509 -req -in es1.csr -CA ExampleRootCA.crt -CAkey ExampleRootCA.key -CAcreateserial -out es1.crt -days 10000 -sha256 -extfile es1.ext
+Enter pass phrase for ExampleRootCA.key: <strong>ВВЕДИТЕ ПАРОЛЬ</strong></code></pre>
+</div>
+<p>1.3.5. Используйте придуманный на <a href="#P1_2_3">шаге 1.2.3</a> пароль.</p>
+<p>1.3.6. Аналогично <a href="#P1_3_4">шагу 1.3.4</a> создайте подписанные сертификаты для остальных узлов.</p>
+<p>1.3.7. <a id="P1_3_7"></a>Для узла <code>es1</code> создайте p12-пакет с ключом, сертификатом и сертификатом СА:</p>
+<div class="highlight">
+<pre><code>sudo openssl pkcs12 -export -certfile ExampleRootCA.crt -in es1.crt -inkey es1.key -out es1.p12
+Enter Export Password: <strong>ВВЕДИТЕ ПАРОЛЬ</strong>
+Verifying - Enter Export Password: <strong>ВВЕДИТЕ ПАРОЛЬ
+
+</strong></code></pre>
+</div>
+<p>1.3.8. Используйте придуманный на <a href="#P1_2_3">шаге 1.2.3</a> пароль.</p>
+<p>1.3.9. Аналогично <a href="#P1_3_7">шагу 1.3.7</a> создайте <code>p12</code>-пакеты для остальных узлов.</p>
+<h3 id="mcetoc_1grild3p56">1.4. Отправка созданных сертификатов на узлы кластера.</h3>
+<p>1.4.1. Отправьте созданные сертификаты с помощью <code>SSH</code> (подставьте свои имена файлов, имя пользователя и IP-адрес):</p>
+<div class="highlight">
+<pre><code>sudo scp es2.crt username@192.168.0.1:/home/username/
+sudo scp es2.key username@192.168.0.1:/home/username/
+sudo scp es2.p12 username@192.168.0.1:/home/username/
+</code></pre>
+</div>
+<p>1.4.2. В каждом из узлов перенесите сгенерированные файлы (подставьте фактическое имя файла вместо <code>esX</code>)  в папку <code>/etc/elasticsearch/certs</code>:</p>
+<div class="highlight">
+<pre><code>sudo mv /home/username/esX.* /etc/elasticsearch/certs </code></pre>
+</div>
+<p>1.4.3. Измените пользователя для директории и настройте права доступа:</p>
+<div class="highlight">
+<pre><code>sudo chown elasticsearch:elasticsearch --recursive /etc/elasticsearch/certs/
+sudo chmod 764 --recursive /etc/elasticsearch/certs/
+</code></pre>
+</div>
+<h2 id="mcetoc_1grild3p57">2. Настройка кластера Elasticsearch</h2>
+<h3 id="mcetoc_1grild3p58">2.1. Добавление пароля SSL-сертификата в хранилище ключей Elasticsearch</h3>
+<p>2.1.1. Вызовите инструмент <code>elasticsearch-keystore</code> и добавьте в него пароль от сформированных сертификатов (см. <a href="#P1_2_3">параграф 1.2.3</a>):</p>
+<div class="highlight">
+<pre><code>sudo /usr/share/elasticsearch/bin/elasticsearch-keystore add xpack.security.http.ssl.keystore.secure_password
+Setting xpack.security.http.ssl.keystore.secure_password already exists. Overwrite? [y/N]y 
+Enter value for xpack.security.http.ssl.keystore.secure_password: <strong>ВВЕДИТЕ ПАРОЛЬ</strong>
+
+sudo /usr/share/elasticsearch/bin/elasticsearch-keystore add xpack.security.http.ssl.truststore.secure_password
+Enter value for xpack.security.http.ssl.truststore.secure_password: <strong>ВВЕДИТЕ ПАРОЛЬ</strong>
+
+sudo /usr/share/elasticsearch/bin/elasticsearch-keystore add xpack.security.transport.ssl.keystore.secure_password
+Setting xpack.security.transport.ssl.keystore.secure_password already exists. Overwrite? [y/N]y
+Enter value for xpack.security.transport.ssl.keystore.secure_password: <strong>ВВЕДИТЕ ПАРОЛЬ</strong>
+
+sudo /usr/share/elasticsearch/bin/elasticsearch-keystore add xpack.security.transport.ssl.truststore.secure_password
+Setting xpack.security.transport.ssl.truststore.secure_password already exists. Overwrite? [y/N]y
+Enter value for xpack.security.transport.ssl.truststore.secure_password: <strong>ВВЕДИТЕ ПАРОЛЬ
+</strong></code></pre>
+</div>
+<h3 id="mcetoc_1grild3p59">2.2. Настройка узла кластера для работы с SSL-сертификатами</h3>
+<p>2.2.1. Для каждого узла кластера Elasticsearch отредактируйте <code>yml</code>-файл конфигурации Elasticsearch, как показано в примерах ниже. Внимательно следите за сохранением отступов. Воспользуйтесь редактором текстовым редактором Nano:</p>
+<div class="highlight">
+<pre><code>sudo nano /etc/elasticsearch/elasticsearch.yml </code></pre>
+</div>
+<p>Исходный файл конфигурации Elasticsearch:</p>
+<div class="highlight">
+<pre><code>xpack.security.enabled: false
+xpack.security.http.ssl:
+    enabled: false
+#   keystore.path: certs/es1.p12    # [&lt;-] specify path to signedNodeCert.p12 here
+xpack.security.transport.ssl:
+    enabled: false
+#   key: certs/es1.key    # [&lt;-] specify path to nodecert.key here
+#   certificate: certs/es1.crt    # [&lt;-] specify path to nodeCert.crt here
+#   certificate_authorities: [ "certs/ExampleRootCA.crt" ]    # [&lt;-] specify path to CACert.crt here
+</code></pre>
+</div>
+<p>Пример изменённого файла конфигурации, где сертификат узла — <code>es1.crt</code>, ключ — <code>es1.key</code>, <code>pem</code>-пакет с сертификатом и ключом — <code>es1.p12</code>:</p>
+<div class="highlight">
+<pre><code>xpack.security.enabled: true
+xpack.security.http.ssl:
+    enabled: true
+    keystore.path: certs/<strong>es1.p12</strong>    # [&lt;-] specify path to signedNodeCert.p12 here
+xpack.security.transport.ssl:
+    enabled: true
+    key: certs/<strong>es1.key</strong>    # [&lt;-] specify path to nodecert.key here
+    certificate: certs/<strong>es1.crt</strong>    # [&lt;-] specify path to nodeCert.crt here
+    certificate_authorities: [ "certs/<strong>ExampleRootCA.crt</strong>" ]    # [&lt;-] specify path to CACert.crt here
+</code></pre>
+</div>
+<p>Пример изменённого файла конфигурации, где сертификат узла — <code>es2.crt</code>, ключ — <code>es2.key</code>, <code>pem</code>-пакет с сертификатом и ключом — <code>es2.p12</code>:</p>
+<div class="highlight">
+<pre><code>xpack.security.enabled: true
+xpack.security.http.ssl:
+    enabled: true
+    keystore.path: certs/<strong>es2.p12</strong>    # [&lt;-] specify path to signedNodeCert.p12 here
+xpack.security.transport.ssl:
+    enabled: true
+    key: certs/<strong>es2.key</strong>    # [&lt;-] specify path to nodecert.key here
+    certificate: certs/<strong>es2.crt</strong>    # [&lt;-] specify path to nodeCert.crt here
+    certificate_authorities: [ "certs/<strong>ExampleRootCA.crt</strong>" ]    # [&lt;-] specify path to CACert.crt here
+</code></pre>
+</div>
+<p>2.2.2. Сохраните изменения и закройте текстовый редактор Nano, нажав клавиши: <code>Ctrl O, Ввод, Ctrl X</code>.</p>
+<p>2.2.3. Повторите шаги 2.2.1–2.2.2 для каждого из узлов Elasticsearch.</p>
+<h2 id="mcetoc_1grild3p5a">3. Запуск Elasticsearch</h2>
+<p>Выполните нижеприведённые шаги для каждого узла Elasticsearch.</p>
+<p>3.1. Перезагрузите конфигурацию <code>systemd</code>:</p>
+<div class="highlight">
+<pre><code>sudo systemctl daemon-reload </code></pre>
+</div>
+<p>3.2. Перезапустите процесс <code>elasticsearch.service</code>:</p>
+<div class="highlight">
+<pre><code>sudo systemctl restart elasticsearch.service </code></pre>
+</div>
+<p>3.3. Убедитесь, что процесс <code>elasticsearch.service</code> запустился:</p>
+<div class="highlight">
+<pre><code>sudo systemctl status elasticsearch.service </code></pre>
+</div>
+<div class="highlight">
+<pre><code>elasticsearch.service - Elasticsearch
+    Loaded: loaded (/lib/systemd/system/elasticsearch.service; enabled; vendor preset: enabled)
+    Active: active (running) since Thu 2022-12-01 10:12:27 UTC; 6s ago
+        Docs: &lt;https://www.elastic.co&gt;
+    Main PID: 3597 (java)
+        Tasks: 63 (limit: 4575)
+        Memory: 629.9M
+        CPU: 44.422s
+        CGroup: /system.slice/elasticsearch.service
+            ├─3597 /usr/share/elasticsearch/jdk/bin/java -Xms4m -Xmx64m -XX:+UseSerialGC -Dcli.name=server -Dcli.scri&gt;
+            ├─3656 /usr/share/elasticsearch/jdk/bin/java -Des.networkaddress.cache.ttl=60 -Des.networkaddress.cache.n&gt;
+            └─3676 /usr/share/elasticsearch/modules/x-pack-ml/platform/linux-x86_64/bin/controller
+Dec 01 10:11:12 penguin-02 systemd[1]: Starting Elasticsearch...
+Dec 01 10:12:27 penguin-02 systemd[1]: Started Elasticsearch.
+
+</code></pre>
+</div>
+<div class="blue_note">
+<p class="admonition-title"><strong>Примечание</strong></p>
+<p>В случае ошибок с запуском процесса <code>elasticsearch.service</code> рекомендуется изучить файл журнала:</p>
+<div class="highlight">
+<pre><code>sudo less /var/elasticsearch/logs/yourClusterName.log </code></pre>
+</div>
+</div>
+<p>3.4. Повторите шаги, описанные в этом разделе, для каждого из узлов Elasticsearch.</p>
+<h2 id="mcetoc_1grild3p5b">4. Присвоение сертификату статуса доверенного</h2>
+<p>Перед проверкой состояния кластера необходимо присвоить новому источнику сертификата статус доверенного. Инструкции в данном разделе приведены для среды Windows 10.</p>
+<p>4.1. Откройте в файловом менеджере папку с сертификатом.</p>
+<p>4.2. Откройте файл сертификата <code>CA.crt</code>.</p>
+<p>4.3. В отобразившемся окне нажмите кнопку «<strong>Установить сертификат</strong>».</p>
+<p>4.4. Выберите, следует ли хранить сертификат на уровне пользователя или на уровне машины.</p>
+<p>4.5. Нажмите кнопку «<strong>Далее</strong>».</p>
+<p>4.6. Выберите пункт «<strong>Разместить все сертификаты в следующем хранилище</strong>».</p>
+<p>4.7. Нажмите кнопку «<strong>Обзор</strong>».</p>
+<p>4.8. Выберите «<strong>Доверенные корневые источники сертификатов</strong>».</p>
+<p>4.9. Нажмите кнопку «<strong>ОК</strong>».</p>
+<p>4.10. Нажмите кнопку «<strong>Далее</strong>».</p>
+<p>4.11 Нажмите кнопку «<strong>Завершить</strong>».</p>
+<p>4.12 Если отобразится запрос, нажмите кнопку «<strong>Да</strong>».</p>
+<h2 id="mcetoc_1grild3p5c">5. Проверка состояния кластера</h2>
+<p>5.1. После того как для каждого из узлов кластера Elasticsearch были выполнены шаги, описанные в предыдущих разделах, с любого из узлов выполните <code>GET</code>-запрос в веб-браузере:</p>
+<div class="highlight">
+<pre><code>https://192.168.XXX.XX1:9200/_cluster/health?pretty </code></pre>
+</div>
+<p>5.2. Браузер отобразит форму для ввода учётных данных.</p>
+<p>5.3. Введите имя встроенного суперпользователя <code>elastic</code> и один из автоматически сгенерированных паролей, которые были созданы при развёртывании Elasticsearch.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Ввод учётных данных для доступа к кластеру Elasticsearch" src="https://kb.comindware.ru/assets/image2.png"/></p>
+<p class="caption">Ввод учётных данных для доступа к кластеру Elasticsearch</p>
+</div>
+<p>5.4. Браузер отобразит данные <code>REST API</code> кластера Elasticsearch.</p>
+<p>5.5. Убедитесь, что значение параметра <code>number_of_nodes</code> равно количеству узлов кластера.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Данные REST API кластера Elasticsearch" src="https://kb.comindware.ru/assets/image1.png"/></p>
+<p class="caption">Данные REST API кластера Elasticsearch</p>
+</div>
+</div>
+</div>
+<a class="md-top md-icon" href="#"> К началу </a></div>
+<div class="md-dialog">
+<div class="md-dialog__inner md-typeset"> </div>
+</div>

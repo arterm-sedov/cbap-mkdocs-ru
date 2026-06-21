@@ -1,0 +1,88 @@
+<h1>Управление версиями приложения. Экспорт и импорт</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#version_control_app_prepare"> <span class="md-ellipsis"> Подготовка приложения к экспорту </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#переход-к-управлению-версиями"> <span class="md-ellipsis"> Переход к управлению версиями </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<div class="notice notice-error">
+<p class="admonition-title">Экспериментальная функция</p>
+<p>Представленная здесь функция находится на стадии разработки. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=1339#experimental_feature_support">Поддержка экспериментальных функций</a>»</em>.</p>
+</div>
+<h2 id="введение">Введение</h2>
+<p>В <strong>Comindware Business Application Platform</strong> предусмотрена возможность управления версиями приложения с помощью репозиториев Git и вручную.</p>
+<p>Управление версиями позволяет с помощью экспорта и импорта переносить приложения между серверами. Например, можно настроить и отладить приложение на сервере разработки и тестирования, экспортировать его, а затем импортировать на продуктивный сервер.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<ul>
+<li>
+<p>После импорта версии приложения из файла CTF или репозитория Git свойства имеющегося приложения, его шаблоны, атрибуты и другие сущности будут заменены импортированными. При этом имеющиеся записи и экземпляры процессов, а также значения атрибутов изменены не будут.</p>
+</li>
+<li>
+<p>При экспорте и импорте <strong>системное имя</strong> приложения следует оставлять неизменным во избежание неполадок. То есть системное имя приложения, в которое вы импортируете версию из файла CTF или репозитория Git, должно совпадать с системным именем импортируемой версии приложения.</p>
+</li>
+</ul>
+</div>
+<p>Вы можете экспортировать и импортировать следующие сущности одного приложения:</p>
+<ul>
+<li>свойства приложения;</li>
+<li>шаблоны:
+<ul>
+<li>атрибуты;</li>
+<li>формы;</li>
+<li>кнопки и области кнопок;</li>
+<li>таблицы и карточки;</li>
+<li>шаблоны экспорта;</li>
+</ul>
+</li>
+<li>диаграммы;</li>
+<li>роли;</li>
+<li>настройки интеграции;</li>
+<li>пути передачи данных;</li>
+<li>сценарии;</li>
+<li>настройки сервера каталогов;</li>
+<li>записи из шаблонов-справочников (у которых установлен флажок «<strong>Переносить данные при трансфере</strong>» на вкладке <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2221#record_template_properties">«<strong>Свойства</strong>»</a>).</li>
+</ul>
+<h2 id="version_control_app_prepare">Подготовка приложения к экспорту</h2>
+<p>Перед тем как экспортировать приложения, рекомендуется проверить его на предмет отсутствия ошибок и настроек, которые могут препятствовать его последующему импорту.</p>
+<ol class="colored_numbers_list">
+<li>Если какие-либо шаблоны были перенесены в другие приложения, перенесите их обратно в экспортируемое приложение. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2219#templates_move">Использование шаблона в нескольких приложениях</a>»</em>.</li>
+<li>Перенесите в экспортируемое приложение шаблоны из других приложений, связанные с шаблонами, перенесёнными на <strong>шаге 1</strong>.</li>
+<li>По возможности устраните ошибки, указанные в журналах ошибок, исправности, процессов и системном журнале. <em>См. «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2501">Подсистема журналирования</a>».</em></li>
+<li>
+<p>Воссоздайте в целевом экземпляре ПО следующие сущности из экспортируемого приложения:</p>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2193">группы аккаунтов</a>, которым назначены <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2208">роли</a>;</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2205">подключения</a>, используемые в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2201">путях передачи данных</a>.</li>
+</ul>
+</li>
+</ol>
+<h2 id="переход-к-управлению-версиями">Переход к управлению версиями</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Чтобы перейти к <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2216">управлению версиями приложения через Git</a>, на странице <strong>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2209">Администрирование</a>»</strong> приложения выберите пункт «<strong>Управление версиями</strong>» <em class="fa-light fa-code-branch">‌<!--icon--></em>.</p>
+<figure class="screenshot_with_caption"><img alt="Страница «Управление версиями через Git»" src="https://kb.comindware.ru/assets/version_control_git.png"/>
+<figcaption class="caption">Страница «Управление версиями через Git»</figcaption>
+</figure>
+</li>
+<li>
+<p>Чтобы перейти к <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2218">управлению версиями приложения вручную</a>, нажмите заголовок «<strong>Управление версиями через Git</strong>» и в раскрывающемся меню выберите пункт «<strong>Ручное управление версиями</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Переход к ручному управлению версиями" src="https://kb.comindware.ru/assets/verstion_control_switch_to_manual.png"/>
+<figcaption class="caption">Переход к ручному управлению версиями</figcaption>
+</figure>
+</li>
+</ol>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2216">Управление версиями через Git</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2218">Ручное управление версиями</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

@@ -1,0 +1,227 @@
+<h1>Атрибут типа «Документ». Копирование записи вместе с прикреплённым документом с помощью сценария по нажатию кнопки</h1><div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1hsvhrhjid">Введение</a>
+<ul>
+<li><a href="#mcetoc_1hphddodm0">Определения</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1hsvhrhjif">Прикладная задача</a></li>
+<li><a href="#mcetoc_1hsvhhkrg9">Исходные данные</a></li>
+<li><a href="#mcetoc_1htc82v2l2">Настройка кнопки «Копировать пакет документов»</a></li>
+<li><a href="#mcetoc_1htc8mrcc3">Настройка сценария «Копирование пакета документов»</a></li>
+<li><a href="#mcetoc_1htc8n24r4">Тестирование работы сценария</a></li>
+<li><a href="#mcetoc_1htcbkgki7">Связанные статьи</a></li>
+</ul>
+</div>
+<div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="md-content">
+<h2 class="md-dialog" id="mcetoc_1hsvhrhjid">Введение</h2>
+<p>В этой статье представлены инструкции по настройке сценария для копирования записи, в которой имеется <a href="https://kb.comindware.ru/article.php?id=2241">атрибут типа «<strong>Документ</strong>»</a>, вместе с файлами, прикреплёнными к этому атрибуту.</p>
+<p>Сценарий для копирования файлов, прикреплённых к атрибуту типа «<strong>Изображение</strong>», настраивается аналогичным образом.</p>
+<div class="md-content">
+<div class="notice notice-success">
+<h3 class="admonition-title" id="mcetoc_1hphddodm0">Определения</h3>
+<ul>
+<li>Атрибут типа «<strong>Документ</strong>» хранит одну или несколько ссылок на записи (<strong>документы</strong>) в <em>системном</em> <strong>шаблоне документа</strong>, к которым прикрепляются файлы.</li>
+<li>В <strong>шаблоне документа </strong>имеется атрибут <strong>currentRevision</strong>, который хранит ссылку на запись (<strong>ревизию</strong>) в <em>системном</em> <strong>шаблоне ревизии</strong>.</li>
+<li>В <strong>шаблоне ревизии </strong>имеются атрибуты <strong>title </strong>и <strong>content</strong>, которые хранят имя файла и ссылку на файл, физически хранящийся в папке <code>Streams</code> на сервере <strong>Comindware Business Application Platform</strong>.</li>
+<li>Для того чтобы прикрепить к атрибуту типа «<strong>Документ</strong>» дубликат файла (а не ссылку на имеющийся файл), необходимо:
+<ul>
+<li>считать из атрибута типа «<strong>Документ</strong>» ссылку на <strong>документ</strong>, хранящийся в <strong>шаблоне документа</strong>;</li>
+<li>считать из <strong>документа </strong>ссылку на <strong>ревизию</strong>, хранящуюся в <strong>шаблоне ревизии </strong>(из атрибута <strong>currentRevision</strong>);</li>
+<li>считать из <strong>ревизии </strong>содержимое и имя файла (из атрибутов <strong style="letter-spacing: 0.2px;">content </strong><span style="letter-spacing: 0.2px;">и </span><strong style="letter-spacing: 0.2px;">title)</strong><span style="letter-spacing: 0.2px;">;</span></li>
+<li>прикрепить полученный файл к атрибуту типа «<strong>Документ</strong>», т. е. поместить на него ссылку в <strong>ревизию</strong>.</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 class="md-dialog" id="mcetoc_1hsvhrhjif">Прикладная задача</h2>
+</div>
+</div>
+</div>
+<div class="md-dialog">
+<p>Необходимо настроить сценарий по нажатию кнопки на форме записи, который будет создавать дубликат текущей записи и прикреплять к ней дубликаты всех файлов, прикреплённых к исходной записи. Если к исходной записи не прикреплен ни один файл, то создавать её дубликат не требуется.</p>
+<h2 id="mcetoc_1hsvhhkrg9">Исходные данные</h2>
+<ol class="colored_numbers_list">
+<li>Создайте приложение <em>«Документооборот»</em><em style="letter-spacing: 0.2px;">.</em></li>
+<li>В приложении <em>«Документооборот» </em>создайте шаблон записи <em>«</em><em>Пакеты д</em><em>окументов</em><em>»</em> с системным именем <code>DocumentPacks</code> и следующими атрибутами:</li>
+<li class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%; height: 120px;">
+<tbody>
+<tr style="height: 40px;">
+<th style="width: 25%; height: 40px;">Название атрибута</th>
+<th style="width: 25%; height: 40px;">Системное имя</th>
+<th style="width: 50%; height: 40px;">Свойства</th>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 25%; height: 40px;"><em>Наименование пакета документов</em></td>
+<td style="width: 25%; height: 40px;"><code>DocumentPackName</code></td>
+<td style="width: 50%; height: 40px;"><strong>Тип данных: текст</strong></td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 25%; height: 40px;"><em>Файлы документов</em></td>
+<td style="width: 25%; height: 40px;"><code>AttachedFiles</code></td>
+<td style="width: 50%; height: 40px;">
+<p><strong>Тип данных: документ</strong></p>
+<p><strong>Хранить несколько значений: </strong>флажок установлен</p>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>Вынесите на атрибуты <em>«Наименование пакета документов»</em> и <em>«Файлы документов»</em> вынесены на основную форму шаблона <em>«</em><em>Пакеты д</em><em>окументов</em><em>».</em></li>
+</ol>
+<h2 id="mcetoc_1htc82v2l2">Настройка кнопки «Копировать пакет документов»</h2>
+<ol class="colored_numbers_list">
+<li>Отройте шаблон записи <em>«Пакеты документов».</em></li>
+<li>Перейдите на вкладку «<strong>Кнопки</strong>».</li>
+<li>Создайте кнопку «<strong><strong>Копировать пакет документов</strong> </strong> »:
+<ul>
+<li><strong>Контекст операции: запись</strong></li>
+<li><strong>Операция: вызвать событие «Нажата кнопка»</strong></li>
+<li><strong>Результат выполнения: навигация</strong></li>
+<li><strong>Переход к: предыдущая страница</strong></li>
+</ul>
+</li>
+<li>Поместите кнопку «<strong>Копировать документ</strong>» на основную форму шаблона <em>«Пакеты документов».</em></li>
+</ol>
+<h2 id="mcetoc_1htc8mrcc3">Настройка сценария «Копирование пакета документов»</h2>
+<ol class="colored_numbers_list">
+<li>На странице <a href="https://kb.comindware.ru/article.php?id=2209#mcetoc_1gjrm25045">администрирования приложения</a> выберите пункт «<strong>Сценарии</strong>».</li>
+<li>Создайте сценарий:
+<ul>
+<li><strong>Название</strong>: <em>Копирование документа</em></li>
+<li><strong>Системное имя</strong>: заполняется автоматически.</li>
+<li><strong>Контекст выполнения</strong>: <strong>от имени системы</strong></li>
+</ul>
+</li>
+<li>Отобразится конструктор сценария.</li>
+<li>Нажмите заголовок события «<strong>Нажатие кнопки</strong>».</li>
+<li>Настройте свойства события:
+<ul>
+<li><strong>Тип: Нажатие кнопки</strong></li>
+<li><strong>Контекстный шаблон: </strong><em>Пакеты д</em><em>окументов</em></li>
+<li><strong>Кнопка: </strong><em>Копировать пакет документов</em></li>
+</ul>
+</li>
+<li>После действия «<strong>Нажата кнопка</strong>» создайте и настройте действие «<strong>Изменить значения переменных</strong>»:
+<ul>
+<li><strong>Операция со значениями переменных: заменить</strong></li>
+<li><strong>Переменная:</strong> originalRecord</li>
+<li><span style="letter-spacing: 0.2px;">Настройте таблицу дочерних переменных.</span>
+<table border="1" style="height: 80px; width: 100%; border-collapse: collapse;">
+<tbody>
+<tr style="height: 40px;">
+<th style="width: 33.3333%; height: 40px;">Имя переменной</th>
+<th style="width: 33.3333%; height: 40px;">Значение</th>
+</tr>
+<tr>
+<td style="width: 33.3333%;"><em>id</em></td>
+<td style="width: 33.3333%;">
+<p><strong>Атрибут: ID</strong><code></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>Это действие будет сохранять в переменную <code>originalRecord.id</code> идентификатор исходной записи в шаблоне <em>«Пакеты документов»</em> для использования в последующих действиях.</p>
+</div>
+</li>
+<li>После события «<strong>Изменить значения переменных</strong>» создайте и настройте действие «<strong>Выполнить по условиям</strong>» следующим образом: <br/>
+<ul>
+<li><span style="letter-spacing: 0.2px; font-weight: 700 !important;">Название условия: </span><em style="letter-spacing: 0.2px;">Файл прикреплён</em></li>
+<li><strong>Выражение:</strong> <strong style="letter-spacing: 0.2px;">N3</strong>
+<pre class="source_code_container"><code># Импортируем функции для работы с данными текущего сеанса, переменными и записями <br/>@prefix variable: &lt;http://comindware.com/ontology/session/variable#&gt;.</code> <br/><code>@prefix session: &lt;http://comindware.com/ontology/session#&gt;.</code> <br/><code>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.</code> <br/><code>{</code> <br/><code></code><code>    #Находим атрибут «Файлы документов» в шаблоне <em>«Пакеты документов» <br/></em>    #и помещаем ID атрибута в локальную переменную AttachedFilesAttribute </code> <br/><code>    ("DocumentPacks" "AttachedFiles") object:findProperty ?AttachedFilesAttribute.  <br/>    #Находим переменную originalRecord из предыдущего действия<br/>    #и помещаем её в локальную переменную originalRecordVariable<br/>    session:context variable:originalRecord ?originalRecordVariable. </code> <br/><code></code><code>    #Находим переменную originalRecord.id с ID исходной записи в шаблоне «Пакеты документов»<br/>    #и помещаем ID записи в локальную переменную docPackRecordId<br/>    ?originalRecordVariable variable:id ?docPackRecordId. </code> <br/><code>    #Считываем значение атрибута «Файлы документов» в исходной записи</code> <br/><code>    ?docPackRecordId ?AttachedFilesAttribute ?.   </code> <br/><code>    #Возвращаем true, если к атрибуту «Файлы документов» прикреплён хотя бы один файл</code> <br/><code>    true -&gt; ?value. </code> <br/><code>}</code></pre>
+</li>
+</ul>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>Это действие будет инициировать вложенные в него действия, если в текущей записи <em>«Пакеты документов»</em> к атрибуту <em>«Файлы документов» (</em>с системным именем <code>AttachedFiles</code>) прикреплён хотя бы один файл.</p>
+</div>
+</li>
+<li>Внутри действия «<strong>Выполнить по условиям</strong>» создайте действие «<strong>Создать запись</strong>» с<strong> целевым шаблоном</strong> <em>«Пакеты документов»</em>.
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>Это действие создаёт пустую запись в шаблоне <em>«Пакеты документов»</em>, в которую последующие действия скопируют значения атрибутов <em>«Наименование пакета документов»</em> и <em>«Файлы документов»</em>.</p>
+</div>
+</li>
+<li>Внутри действия «<strong>Создать запись</strong>» создайте и настройте действие «<strong>Изменить значение атрибутов</strong>» следующим образом: <br/>
+<ul>
+<li><strong>Атрибут: </strong><em>Наименование пакета документов</em></li>
+<li><strong>Операция со значениями: заменить</strong></li>
+<li><strong>Значение: </strong><strong style="letter-spacing: 0.2px;">N3</strong>
+<pre><code># Импортируем функции для работы с данными текущего сеанса, переменными и записями <br/>@prefix variable: &lt;http://comindware.com/ontology/session/variable#&gt;. </code> <br/><code>@prefix session: &lt;http://comindware.com/ontology/session#&gt;. </code> <br/><code>@prefix object: &lt;http://comindware.com/ontology/object#&gt;. </code> <br/><code>{ </code> <br/><code>    #Находим атрибут «Наименование пакета документов» в шаблоне <em>«Пакеты документов» <br/></em>    #и помещаем ID атрибута в локальную переменную PackNameAttribute<br/>    ("DocumentPacks" "DocumentPackName") object:findProperty ?PackNameAttribute.  </code> <br/><code>    #Помещаем переменную originalRecord в локальную переменную originalRecordVariable </code><br/><code>    session:context variable:originalRecord ?originalRecordVariable.<br/>    #Помещаем ID исходной записи в шаблоне «Пакеты документов»  <br/>    #в локальную переменную docPackRecordId</code> <br/><code>    ?originalRecordVariable variable:id ?docPackRecordId. <br/>    #Возвращшаем значение атрибута «Наименование пакета документов» из исходной записи</code> <br/><code>    ?docPackRecordId ?PackNameAttribute ?value.</code> <br/><code>}</code></pre>
+</li>
+</ul>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>Это действие копирует значение атрибута <em>«Наименование пакета документов» </em>из исходной записи в новую.</p>
+</div>
+</li>
+<li>После действия «<strong>Изменить значение атрибутов</strong>» внутри действия «<strong>Создать запись</strong>» создайте и настройте действие «<strong>Повторять по количеству объектов</strong>» следующим образом:
+<ul>
+<li><strong>Переменная:</strong> <em>document</em></li>
+<li><strong>Атрибут или выражение для поиска объектов:</strong> <strong><strong><strong>формула</strong> </strong> </strong>
+<pre class="source_code_container"><code># Импортируем функции для работы с данными текущего сеанса, переменными и записями <br/>@prefix variable: &lt;http://comindware.com/ontology/session/variable#&gt;. </code> <br/><code>@prefix session: &lt;http://comindware.com/ontology/session#&gt;. </code> <br/><code>@prefix object: &lt;http://comindware.com/ontology/object#&gt;. </code> <br/><code>{  </code><br/><code>    #Находим атрибут «Файлы документов» в шаблоне <em>«Пакеты документов» <br/></em>    #и помещаем ID атрибута в локальную переменную AttachedFilesAttribute  </code><br/><code>    ("DocumentPacks" "AttachedFiles") object:findProperty ?AttachedFilesAttribute.  </code><br/><code>    #Помещаем переменную originalRecord в локальную переменную originalRecordVariable </code><br/><code>    session:context variable:originalRecord ?originalRecordVariable. </code><br/><code>    #Помещаем ID исходной записи в шаблоне «Пакеты документов»  </code><br/><code>    #в локальную переменную docPackRecordId </code><br/><code>    ?originalRecordVariable variable:id ?docPackRecordId. </code><br/><code>    #Возвращшаем значение атрибута «Файлы документов» из исходной записи </code><br/><code>    ?docPackRecordId ?AttachedFilesAttribute ?value. </code><br/><code>}</code></pre>
+</li>
+</ul>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>На каждой итерации цикла в переменную <code>document</code> будет помещаться ссылка на запись в <em>системном</em> <strong>шаблоне документа</strong> с файлом, прикреплённым к атрибуту <em>«Файлы документов» </em>из исходной записи.</p>
+</div>
+</li>
+<li>Внутри действия «<strong>Повторять по количеству объектов</strong>» создайте и настройте действие «<strong>Изменить значение атрибутов</strong>» следующим образом: <br/>
+<ul>
+<li><strong>Атрибут:</strong> <em>Файлы документов</em></li>
+<li><strong>Операция со значениями: добавить</strong></li>
+<li><strong><strong>Значение: </strong> </strong> <strong style="letter-spacing: 0.2px;">N3</strong>
+<pre><code># Импортируем функции для работы с документами и данными текущего сеанса<br/>@prefix document: &lt;http://comindware.com/ontology/document#&gt;.<br/>@prefix variable: &lt;http://comindware.com/ontology/session/variable#&gt;. </code> <br/><code>@prefix session: &lt;http://comindware.com/ontology/session#&gt;. </code> <br/><code>{ </code> <br/><code>    #Помещаем переменную document из действия «Повторять по количеству объектов»<br/>    #в локальную переменную doc<br/>    session:context variable:document ?doc. <br/>    #Помещаем ссылку на прикреплённый файл в локальную переменную revision<br/>    ?doc document:currentRevision ?revision.<br/>    #Помещаем содержимое файла в формате Base64 в локальную переменную content<br/>    ?revision document:content ?content.<br/>    #Помещаем имя файла в локальную переменную filename<br/>    ?doc document:title ?filename.<br/>    #Собирем новый файл из имени и содержимого, сохраняем его в папку Streams,<br/>    #и возвращаем ID нового документа с прикреплённым файлом<br/>    (?content ?filename) document:attach ?value.</code> <br/><code>}</code></pre>
+</li>
+</ul>
+<div class="notice notice-warning">
+<p class="admonition-title">Бизнес-логика</p>
+<p>Это действие будет прикреплять к атрибуту <em>«Файлы документов»</em> в новой записи дубликат файла, прикреплённого к  атрибуту <em>«Файлы документов» </em>из исходной записи.</p>
+</div>
+</li>
+</ol>
+<figure class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Настроенный сценарий для дублирования записи вместе с прикреплёнными к ней файлами" class="img-responsive" height="573" src="https://kb.comindware.ru/assets/img_66476d15e078c.png" width="996"/></p>
+<p><span style="color: #666666; font-style: italic; letter-spacing: 0.2px;">Настроенный сценарий для дублирования записи вместе с прикреплёнными к ней файлами</span></p>
+</figure>
+<h2 id="mcetoc_1htc8n24r4">Тестирование работы сценария</h2>
+<ol class="colored_numbers_list">
+<li>Откройте шаблон <em>«Пакеты документов»</em> и нажмите кнопку «<strong>Перейти к экземплярам</strong>».</li>
+<li>Отобразится список записей в шаблоне <em>«Пакеты документов».</em></li>
+<li>Создайте запись и заполните форму:
+<ul>
+<li>Введите <em>«Наименование пакета документов»</em>.</li>
+<li>Прикрепите к полю <em>«Файлы документов»</em> несколько файлов.</li>
+</ul>
+</li>
+<li>Сохраните запись.</li>
+<li>Нажмите кнопку <em>«Копировать пакет документов».</em></li>
+<li>Должен снова отобразиться список записей в шаблоне <em>«Пакеты документов».</em></li>
+<li>В списке записей должна появиться новая запись — дубликат исходной.</li>
+<li>Откройте новую запись и убедитесь, что содержимое полей <em style="letter-spacing: 0.2px;">«Наименование пакета документов» </em>и <em>«Файлы документов» </em>совпадает с содержимым исходной записи<em>.</em></li>
+</ol>
+<h2 id="mcetoc_1htcbkgki7">Связанные статьи</h2>
+<p><strong><samp data-name="aid" data-title="" data-value="2502"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Пути и содержимое папок экземпляра ПО {Article-ID:2502}</span></samp> </strong></p>
+<p><strong><samp data-name="aid" data-title="" data-value="2241"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/> Атрибут типа «Документ» {Article-ID:2241}</span></samp> </strong></p>
+<p><strong><samp data-name="aid" data-title="" data-value="2276"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Кнопки. Определение, настройка, удаление {Article-ID:2276}</span></samp> </strong></p>
+<p><strong><samp data-name="aid" data-title="" data-value="2149"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Настройка действий сценария {Article-ID:2149}</span></samp> </strong></p>
+</div>
+</div>
+</div>
+</div>
+<div class="md-dialog">
+<div class="md-dialog__inner md-typeset">
+<p><a class="md-top md-icon mkdocs_imported_link" href="#"> <em class="fa-light fa-arrow-up">‌</em> К началу </a></p>
+</div>
+</div>

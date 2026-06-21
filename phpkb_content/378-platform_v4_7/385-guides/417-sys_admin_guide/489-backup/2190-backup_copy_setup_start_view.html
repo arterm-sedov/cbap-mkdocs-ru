@@ -1,0 +1,199 @@
+<h1>Резервное копирование. Настройка и запуск, просмотр журнала сеансов</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#рекомендации-по-резервному-копированию"> <span class="md-ellipsis"> Рекомендации по резервному копированию </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#просмотр-списка-и-настройка-конфигураций-резервного-копирования"> <span class="md-ellipsis"> Просмотр списка и настройка конфигураций резервного копирования </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-резервного-копирования-данных-elasticsearch"> <span class="md-ellipsis"> Настройка резервного копирования данных Elasticsearch </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#запуск-резервного-копирования"> <span class="md-ellipsis"> Запуск резервного копирования </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#просмотр-списка-сеансов-резервного-копирования"> <span class="md-ellipsis"> Просмотр списка сеансов резервного копирования </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#удаление-конфигурации-резервного-копирования"> <span class="md-ellipsis"> Удаление конфигурации резервного копирования </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#удаление-сеанса-резервного-копирования-и-резервной-копии"> <span class="md-ellipsis"> Удаление сеанса резервного копирования и резервной копии </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>В <strong>Comindware Business Application Platform</strong> предусмотрена функция резервного копирования полного образа экземпляра ПО в формате файла с расширением <code>.CDBBZ</code>.</p>
+<p>При резервном копировании сохраняются все данные всех приложений и все системные настройки экземпляра ПО <strong>Comindware Business Application Platform</strong>.</p>
+<p>Резервные копии могут храниться как в файловой системе сервера <strong>Comindware Business Application Platform</strong>, так и в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2594">хранилище S3</a>.</p>
+<p>Резервное копирование можно настраивать и запускать с помощью веб-интерфейса <strong>Comindware Business Application Platform</strong>.</p>
+<p>Восстановление данных осуществляется на стороне сервера <strong>Comindware Business Application Platform</strong>. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2500">Восстановление базы данных из файла резервной копии в формате .CDBBZ</a>»</em>.</p>
+<h2 id="рекомендации-по-резервному-копированию">Рекомендации по резервному копированию</h2>
+<p>Для обеспечения оперативного восстановления данных рекомендуется применять следующие способы резервного копирования:</p>
+<ul>
+<li>Непрерывно — репликация средствами ПО Ignite, Elasticsearch, Kafka и файловой системы NFS, развёрнутых в конфигурации отказоустойчивого кластера master/slave (с зеркалированием).</li>
+<li>Раз в час — быстрое резервное копирование только базы данных встроенными средствами ПО, срок хранения резервных копий: не менее трех суток</li>
+<li>Раз в сутки — полное резервное копирование базы данных, скриптов, файлов и истории операций встроенными средствами ПО, срок хранения резервных копий: не менее двух недель.</li>
+<li>Раз в неделю — резервное копирование всего образа развёрнутого ПО средствами виртуализации, срок хранения резервных копий: не менее трех месяцев.</li>
+</ul>
+<p>Инструкции по резервному копированию и восстановлению данных встроенными и внешними средствами см. в разделе <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2579">Резервное копирование и восстановление</a>»</em> базы знаний Comindware.</p>
+<h2 id="просмотр-списка-и-настройка-конфигураций-резервного-копирования">Просмотр списка и настройка конфигураций резервного копирования</h2>
+<ol class="colored_numbers_list">
+<li>В разделе <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2191">«<strong>Администрирование</strong>» — «<strong>Инфраструктура</strong>»</a> выберите пункт «<strong>Резервное копирование</strong>» <em class="fa-light fa-coins">‌<!--icon--></em>.</li>
+<li>Отобразится список конфигураций резервного копирования.</li>
+<li>Нажмите кнопку «<strong>Создать</strong>» или дважды нажмите строку конфигурации в списке.</li>
+<li>
+<p>Настройте и сохраните конфигурацию резервного копирования:</p>
+<ul>
+<li><strong>Отключить резервное копирование</strong> — установите этот флажок, чтобы прекратить резервное копирование с использованием данной конфигурации.</li>
+<li><strong>Название</strong> — введите наглядное наименование конфигурации резервного копирования.</li>
+<li><strong>Имя файла</strong> — введите имя файла резервных копий. В процессе резервного копирования к этому имени будут добавляться метка времени в формате <code>ГГГГММДДЧЧММ</code> и расширение <code>CDBBZ</code>, например для имени файла Backup: <code>Backup.202202161625.cdbbz</code>.</li>
+<li>
+<p><strong>Репозиторий для резервных копий</strong> — выберите хранилище для резервных копий:</p>
+<ul>
+<li><strong>Не определено</strong> — не использовать репозиторий для хранения резервных копий.</li>
+<li>
+<p><strong>Файловая система</strong> — сохранять резервные копии в файловой системе сервера <strong>Comindware Business Application Platform</strong>.</p>
+<ul>
+<li>
+<p><strong>Путь к папке</strong> — путь к директории на сервере, в которой будут сохраняться резервные копии, например <code>/var/lib/comindware/&lt;instanceName&gt;/Backups</code> (здесь <code>&lt;instanceName&gt;</code> — имя экземпляра ПО). Для этой директории предоставьте разрешения на полный доступ, чтобы система могла сохранять в неё резервные копии, например:</p>
+<p><strong>Astra Linux, Ubuntu, Rocky</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code>chmod <span class="m">777</span> /var/lib/comindware/&lt;instanceName&gt;chown -R www-data:www-data /var/lib/comindware/&lt;instanceName&gt;</code><br/><code>chown -R www-data:www-data /var/lib/comindware/&lt;instanceName&gt;</code></pre>
+</div>
+<p><strong>Альт Сервер</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code>chmod <span class="m">777</span> /var/lib/comindware/&lt;instanceName&gt;chown -R _nginx:_nginx /var/lib/comindware/&lt;instanceName&gt;</code><br/><code>chown -R _nginx:_nginx /var/lib/comindware/&lt;instanceName&gt;</code></pre>
+</div>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Хранилище S3</strong> — сохранять резервные копии во <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2594">внешнем сервисе S3</a>.</p>
+<ul>
+<li><strong>Имя корзины</strong> — введите имя контейнера в хранилище S3, к котором будут сохраняться резервные копии.</li>
+</ul>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>Для резервного копирования в основной и дополнительный репозитории будет использоваться только подключение к S3, заданное в файле конфигурации экземпляра ПО (<code>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code>) с помощью директивы <code>s3Connection.default</code></p>
+</div>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Дополнительный репозиторий для резервных копий</strong> — выберите хранилище, в которое будут сохраняться дубликаты резервных копий.</p>
+</li>
+<li><strong>С файлами</strong> — установите этот флажок, чтобы включить в состав резервной копии загруженные файлы.</li>
+<li><strong>Со скриптами</strong> — установите этот флажок, чтобы включить в состав резервной копии скрипты.</li>
+<li><strong>С историей</strong> — установите этот флажок, чтобы включить в состав резервной копии данные Elasticsearch. См. <em>«<a class="mkdocs_imported_link" href="#настройка-резервного-копирования-данных-elasticsearch">Настройка резервного копирования данных Elasticsearch</a>»</em>.</li>
+<li>
+<p><strong>Режим запуска</strong></p>
+<ul>
+<li><strong>Вручную</strong> — для запуска резервного копирования потребуется нажимать кнопку «<strong>Запустить копирование</strong>» в <a class="mkdocs_imported_link" href="#запуск-резервного-копирования">списке конфигураций резервного копирования</a>.</li>
+<li>
+<p><strong>По расписанию</strong> — резервное копирование будет выполняться по расписанию со следующими параметрами:</p>
+<ul>
+<li><strong>Максимум копий</strong> — максимальное количество резервных копий, которые будут храниться в папке на сервере. Укажите значение 0, чтобы хранить все резервные копии.</li>
+<li><strong>Периодичность</strong> — частота, с которой будет выполняться копирование.</li>
+<li>
+<p><strong>Интервал</strong></p>
+<ul>
+<li><strong>С</strong> — время суток, начиная с которого может выполняться копирование в указанные дни недели.</li>
+<li><strong>До</strong> — время суток, вплоть до которого может выполняться копирование в указанные дни недели.</li>
+</ul>
+</li>
+<li>
+<p><strong>Дни запуска</strong> — дни недели, по которым будет выполняться копирование с указанной периодичностью.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Настройка свойств резервного копирования" src="https://kb.comindware.ru/assets/backup_create_config.png"/></p>
+<figcaption class="caption">Настройка свойств резервного копирования</figcaption>
+</figure>
+<h2 id="настройка-резервного-копирования-данных-elasticsearch">Настройка резервного копирования данных Elasticsearch</h2>
+<p>Для корректного резервного копирования данных истории необходимо настроить конфигурацию службы Elasticsearch и экземпляра ПО <strong>Comindware Business Application Platform</strong>:</p>
+<ul>
+<li>
+<p>В файле конфигурации Elasticsearch (<code>/etc/elasticsearch/elasticsearch.yml</code>) должен быть указан путь к репозиторию резервных копий, например:</p>
+<p><strong>Для репозитория на локальном диске</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="c1"># Директория репозитория должна быть доступна экземпляру ПО</span></code><br/><code><span class="c1"># Comindware Business Application Platform</span></code><br/><code><span class="c1"># При необходимости установите доступ с помощью команды chmod 777</span></code><br/><code>path.repo: /var/www/backups/elasticsearch</code></pre>
+</div>
+<p><strong>Для репозитория в хранилище S3</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code>s3.client.default.endpoint: localhost:9000</code><br/><code>s3.client.default.protocol: http</code><br/><code>s3.client.default.path_style_access: <span class="nb">true</span></code></pre>
+</div>
+</li>
+<li>
+<p>В файле конфигурации экземпляра ПО (<code>/usr/share/comindware/configs/instance/&lt;instanceName&gt;.yml</code>) необходимо указать тип репозитория резервных копий Elasticsearch (<code>LocalDisk</code> или <code>S3</code>) и путь к репозиторию, например:</p>
+<p><strong>Для репозитория на локальном диске</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code>backup.elasticRepository.type: LocalDisk</code><br/><code><span class="c1"># В данном примере Elasticsearch и Comindware Business Application Platform </span></code><br/><code><span class="c1"># работают на одной машине. </span></code><br/><code><span class="c1"># В противном случае следует примонтировать папку репозитория Elasticsearch </span></code><br/><code><span class="c1"># на машине с Comindware Business Application Platform и указать её в директиве ниже</span></code><br/><code>backup.elasticRepository.localDisk.path: /var/www/backups/elasticsearch</code></pre>
+</div>
+<p><strong>Для репозитория в хранилище S3</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="c1"># Конфигурация подключения к хранилищу S3, используемого по умолчанию </span></code><br/><code>s3Connection.default.endpointURL: http://localhost:9000 </code><br/><code>s3Connection.default.accessKey: xxxxx </code><br/><code>s3Connection.default.secretKey: xxxxx </code><br/><code>s3Connection.default.pathStyleAccess: <span class="nb">true</span> </code><br/><code>s3Connection.default.description: Подключение к S3 по умолчанию </code><br/><code></code><br/><code><span class="c1"># Конфигурация репозитория резервных копий Elasticsearch в хранилище S3 </span></code><br/><code>backup.elasticRepository.type: S3 </code><br/><code><span class="c1"># Имя корзины в хранилище S3 для хранения резервных копий данных Elasticsearch</span></code><br/><code>backup.elasticRepository.s3.bucket: &lt;instanceName&gt;-backups</code><br/><code><span class="c1"># Имя подключения к хранилищу S3, используемому по умолчанию</span></code><br/><code><span class="c1"># на стороне Comindware Business Application Platform  </span></code><br/><code>backup.elasticRepository.s3.platformConnection: default</code><br/><code><span class="c1"># Имя подключения к хранилищу S3, используемому по умолчанию на стороне Elasticsearch  </span></code><br/><code>backup.elasticRepository.s3.elasticConnection: default </code></pre>
+</div>
+</li>
+</ul>
+<h2 id="запуск-резервного-копирования">Запуск резервного копирования</h2>
+<ol class="colored_numbers_list">
+<li>С помощью флажка выбора выберите одну конфигурацию резервного копирования в списке конфигураций.</li>
+<li>Нажмите кнопку «<strong>Запустить копирование</strong>». Эта кнопка отображается, только если выбрана одна конфигурация.</li>
+<li>В фоновом режиме начнется процесс резервного копирования.</li>
+<li>Прогресс и результат резервного копирования можно просмотреть <a class="mkdocs_imported_link" href="#просмотр-списка-сеансов-резервного-копирования">в журнале резервного копирования</a>.</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Запуск резервного копирования" src="https://kb.comindware.ru/assets/backup_start.png"/></p>
+<figcaption class="caption">Запуск резервного копирования</figcaption>
+</figure>
+<h2 id="просмотр-списка-сеансов-резервного-копирования">Просмотр списка сеансов резервного копирования</h2>
+<ol class="colored_numbers_list">
+<li>В разделе <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2191">«<strong>Администрирование</strong>» — «<strong>Инфраструктура</strong>»</a> выберите пункт «<strong>Резервное копирование</strong>» <em class="fal fa-coins">‌<!--icon--></em>.</li>
+<li>Отобразится список конфигураций резервного копирования.</li>
+<li>Выберите вкладку «<strong>Журнал</strong>».</li>
+<li>
+<p>Отобразится список сеансов резервного копирования со следующими сведениями:</p>
+<ul>
+<li><strong>ID</strong> — уникальный идентификатор резервной копии.</li>
+<li><strong>Конфигурация</strong> — название конфигурации резервного копирования.</li>
+<li><strong>Добавлено в очередь</strong> — дата и время постановки резервной копии в очередь резервного копирования.</li>
+<li><strong>Время запуска</strong> — дата и время фактического начала резервного копирования.</li>
+<li><strong>Время окончания</strong> — дата и время окончания резервного копирования.</li>
+<li><strong>Статус</strong> — текущее состояние резервного копирования.</li>
+<li><strong>Размер архива</strong> — размер сохраненной резервной копии.</li>
+</ul>
+</li>
+<li>
+<p>Если отображаются не все ожидаемые сеансы, нажмите кнопку «<strong>Обновить</strong>», чтобы загрузить в список данные о текущих сеансах резервного копирования.</p>
+</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Список сеансов резервного копирования" src="https://kb.comindware.ru/assets/backup_log.png"/></p>
+<figcaption class="caption">Список сеансов резервного копирования</figcaption>
+</figure>
+<h2 id="удаление-конфигурации-резервного-копирования">Удаление конфигурации резервного копирования</h2>
+<ol class="colored_numbers_list">
+<li>Выберите подлежащие удалению конфигурации резервного копирования в <a class="mkdocs_imported_link" href="#просмотр-списка-и-настройка-конфигураций-резервного-копирования">списке конфигураций</a>.</li>
+<li>Нажмите кнопку «<strong>Удалить</strong>».</li>
+<li>Подтвердите удаление резервных копий.</li>
+<li>Конфигурация резервного копирования будет удалена из списка.</li>
+<li>Будут безвозвратно удалены сохранённые файлы резервных копий и соответствующие записи <a class="mkdocs_imported_link" href="#просмотр-списка-сеансов-резервного-копирования">в журнале резервного копирования</a>.</li>
+</ol>
+<h2 id="удаление-сеанса-резервного-копирования-и-резервной-копии">Удаление сеанса резервного копирования и резервной копии</h2>
+<ol class="colored_numbers_list">
+<li>Выберите один или несколько сеансов в <a class="mkdocs_imported_link" href="#просмотр-списка-сеансов-резервного-копирования">списке сеансов резервного копирования</a>.</li>
+<li>Нажмите кнопку «<strong>Удалить</strong>».</li>
+<li>Подтвердите удаление сеансов резервного копирования.</li>
+<li>Выбранные сеансы резервного копирования будут удалены из журнала резервного копирования.</li>
+<li>Соответствующие файлы резервных копий будут удалены из хранилища.</li>
+</ol>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2594">Хранилище S3. Настройка экземпляра ПО и подключения</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2500">Восстановление базы данных из файла резервной копии в формате .CDBBZ</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2579">Резервное копирование и восстановление</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

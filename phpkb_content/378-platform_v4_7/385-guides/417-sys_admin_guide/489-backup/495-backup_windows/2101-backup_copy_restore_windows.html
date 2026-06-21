@@ -1,0 +1,166 @@
+<h1>Резервное копирование и восстановление Comindware Business Application Platform. Краткое руководство для ОС Windows</h1><div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1g7ecocq81">Введение</a>
+<ul>
+<li><a href="#mcetoc_1i0b2dchl0">Определения</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1g7ecr4ce3">1. Подготовка к резервному копированию и восстановлению данных</a></li>
+<li><a href="#mcetoc_1g7ed2arp4">2. Порядок резервного копирования данных экземпляра продукта</a></li>
+<li><a href="#mcetoc_1g7ed5stp6">3. Выполнение резервного копирования</a>
+<ul>
+<li><a href="#mcetoc_1g7edvirt0">3.1. Регистрация репозитория и создание снимка Elasticsearch</a></li>
+<li><a href="#mcetoc_1g7ee4cdh1">3.2. Сохранение резервной копии базы данных экземпляра продукта</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1g7ee638b2">4. Порядок восстановления данных экземпляра продукта</a></li>
+<li><a href="#mcetoc_1g7ee84rd3">5. Выполнение восстановления</a>
+<ul>
+<li><a href="#mcetoc_1g7eehk6m6">5.2. Восстановление снимка Elasticsearch</a></li>
+<li><a href="#mcetoc_1g7eej4fc7">5.3. Восстановление базы данных экземпляра продукта</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1h77gnkc00">6. Проверка конфигурации экземпляра ПО</a></li>
+</ul>
+</div>
+<div class="table-responsive">
+<h2 id="mcetoc_1g7ecocq81">Введение</h2>
+<p>В этой статье представлены инструкции по резервномму копированию и восстановлению данных <strong>Comindware Business Application Platform</strong> в ОС Windows.</p>
+<h3 id="mcetoc_1i0b2dchl0">Определения</h3>
+<p><strong>Продукт</strong> — программное обеспечение <strong>Comindware Business Application Platform</strong>.</p>
+<p><strong>Экземпляр продукта</strong> — развернутый сервер с продуктом <strong>Comindware Business Application Platform</strong>.</p>
+<p><strong>Elasticsearch</strong> — система журналирования в составе <strong>Comindware Business Application Platform</strong>.</p>
+<p><strong>Снимок</strong> — набор данных, сохранённый на определённый момент времени.</p>
+<h2 id="mcetoc_1g7ecr4ce3">1. Подготовка к резервному копированию и восстановлению данных</h2>
+<p>Для создания резервных копий и восстановления из них данных Comindware Business Application Platform необходимо подготовить конфигурацию резервного копирования, как указано ниже.</p>
+<p><strong><a id="P1.1"></a>1.1.</strong> Подготовьте следующие данные о конфигурации экземпляра продукта:</p>
+<ul>
+<li>Название экземпляра продукта — <code><strong><em>InstanceId</em> </strong></code>(например, <code>CBAP4.2</code>).</li>
+<li>Путь к папке с базой данных экземпляра продукта, например <code><em><strong>DatabasePath</strong></em></code> (по умолчанию: <code style="background-color: #ffffff; letter-spacing: 0.2px;">C:\ProgramData\Comindware\Instances\InstanceId\Data</code>).</li>
+<li>Путь к папке резервных копий базы данных — <code><em><strong>DatabaseBackupPath</strong></em></code> (например, <code>С:\DatabaseBackups</code>).</li>
+<li>Имя репозитория снимков Elasticsearch — <em><code><strong>repository_name</strong></code></em> (например, <code>elastic_backup</code>).</li>
+<li>Путь к репозиторию снимков Elasticsearch — <code><strong><em>elastic_backup_path</em></strong> </code>(например, <code>e:\elastic_backup</code>).</li>
+<li>Имя снимка Elasticsearch — <code><strong><em>snapshot_name</em></strong></code> (например, <code>InstanceId01022022080800</code> — в формате <code>&lt;InstanceId&gt;&lt;Date&gt;&lt;Time&gt;</code>). См. инструкции Elasticsearch по формированию имён снимков с использованием текущей даты  (на английском языке): <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html#api-date-math-index-names">https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html#api-date-math-index-names</a>.</li>
+</ul>
+<p><strong><a id="P1.1"></a>1.2.</strong> Настройте конфигурацию репозитория снимков сервера Elasticseach.</p>
+<p><strong>1.2.1.</strong> Откройте файл <code>elasticsearch.yml</code> в папке с данными конфигурации Elasticseach (например: <code>C:\ElasticsearchData</code>)</p>
+<p><strong><a id="P1.2.2"></a>1.2.2.</strong> В файле <code>elasticsearch.yml</code> и добавьте директиву <code>path.repo</code> и через двоеточие укажите путь к репозиторию снимков (папке с резервными копиями), например: </p>
+<p><code>path.repo: <em><strong>elastic_backup_path</strong></em></code></p>
+<h2 id="mcetoc_1g7ed2arp4">2. Порядок резервного копирования данных экземпляра продукта</h2>
+<p>Данные экземпляра продукта хранятся в двух независимых друг от друга хранилищах: на сервере Elasticsearch и в папке с базой данных экземпляра продукта — <code><em><strong>DatabasePath</strong></em></code> <span style="letter-spacing: 0.2px;">(</span><a href="#P1.1" style="letter-spacing: 0.2px; color: #ff6600; background-color: #ffffff;">см. параграф 1.1</a><span style="letter-spacing: 0.2px;">).</span></p>
+<p>Так как осуществить одновременное резервное копирование двух хранилищ не представляется возможным, резервное копирование данных из каждого хранилища выполняется отдельно в два этапа и в отдельные папки:</p>
+<ol>
+<li><a href="#mcetoc_1g7edvirt0">Создание снимка сервера Elasticsearch</a> — данные истории и мониторинга копируются в отдельную папку.</li>
+<li><a href="#mcetoc_1g7ee4cdh1">Сохранение резервной копии базы данных экземпляра продукта</a> в папку <em><code><strong>DatabaseBackupPath</strong></code></em> (<a href="#P1.1">см. параграф 1.1</a>).</li>
+</ol>
+<h2 id="mcetoc_1g7ed5stp6">3. Выполнение резервного копирования</h2>
+<h3 id="mcetoc_1g7edvirt0">3.1. Регистрация репозитория и создание снимка Elasticsearch</h3>
+<p><strong>3.1.1.</strong> Чтобы зарегистрировать репозиторий, выполните следующую команду, указав в URL имя репозитория <code><em><strong>repository_name</strong></em></code><span style="letter-spacing: 0.2px;"> (<a href="#P1.1">см. параграф 1.1</a>), а в параметре </span><code style="letter-spacing: 0.2px; background-color: #ffffff;">location</code><span style="letter-spacing: 0.2px;"> — путь к репозиторию из директивы </span><code style="letter-spacing: 0.2px; background-color: #ffffff;">path.repo</code><span style="letter-spacing: 0.2px;"> в файле конфигурации сервера Elasticsearch <a href="#P1.2.2">(см. параграф 1.2.2</a>):</span></p>
+<p><code>curl -X PUT "localhost:9200/_snapshot/<strong><em>repository_name</em></strong>?pretty" -H 'Content-Type: application/json' -d' {"type": "fs", "settings": {"location": "<strong><em>elastic_backup_path</em></strong>"}}'</code></p>
+<p>Подробные сведения о регистрации репозитория Elasticsearch см. в официальной документации (на английском языке): <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-register-repository.html</a></p>
+<p><strong>3.1.2.</strong> Чтобы создать снимок Elasticsearch, выполните следующую команду, указав имя снимка <code>snapshot_name</code> (<a href="#P1.1">см. параграф 1.1</a>), а в параметре <code>indices</code> — индексы, которые требуется включить в снимок (индексы Comindware Business Application Platform имеют префикс, например, <code>cmw_<em><strong>&lt;InstanceId&gt;</strong></em>_</code>):</p>
+<p><code>curl -X PUT "localhost:9200/_snapshot/<strong><em>repository_name/snapshot_name</em></strong>?wait_for_completion=true&amp;pretty" -H 'Content-Type: application/json' -d' {"indices": "cmw_<strong><em>&lt;InstanceId&gt;</em></strong>_*", "ignore_unavailable": true, "include_global_state": false}'</code></p>
+<p>Подробные сведения о создании снимка Elasticsearch см. в официальной документации (на английском языке): <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-take-snapshot.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-take-snapshot.html</a></p>
+<h3 id="mcetoc_1g7ee4cdh1">3.2. Сохранение резервной копии базы данных экземпляра продукта</h3>
+<p><strong>3.2.1.</strong> В экземпляре продукта откройте раздел «<strong>Администрирование</strong>» — «<strong>Инфраструктура</strong>» — «<strong>Резервное копирование</strong>».</p>
+<p><strong>3.2.2.</strong> Нажмите кнопку «<strong>Создать</strong>» в списке конфигураций резервного копирования.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Создание новой конфигурации резервного копирования" class="img-responsive" height="169" src="https://kb.comindware.ru/assets/img_6321d80a2b32d.png" width="261"/></p>
+<p class="caption" style="font-size: 15px !important;">Создание новой конфигурации резервного копирования</p>
+</div>
+<p><strong><a id="P3.2.3"></a>3.2.3.</strong> В окне «<strong>Новая конфигурация резервного копирования</strong>»:</p>
+<ol>
+<li>В поле «<strong>Название</strong>» укажите наглядное название конфигурации (например, «<code>Резервная копия <em><strong>InstanceId</strong></em></code>»).</li>
+<li>В поле «<strong>Путь к файлу</strong>» укажите путь к файлу резервной копии в папке <code><strong><em>DatabaseBackupPath</em></strong></code> на сервере (<a href="#P1.1">см. параграф 1.1</a>).</li>
+<li><a id="P3.2.3.3"></a>В поле «<strong>Имя файла</strong>» укажите имя файла резервной копии (например, <code>Backup</code>).</li>
+<li>Установите флажки «<strong>С файлами</strong>» и «<strong>Со скриптами</strong>».</li>
+<li>Нажмите кнопку «<strong>Сохранить</strong>».</li>
+</ol>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Настройка новой конфигурации резервного копирования" class="img-responsive" height="444" src="https://kb.comindware.ru/assets/img_6321d7573245a.png" width="896"/></p>
+<p class="caption" style="font-size: 15px !important;">Настройка новой конфигурации резервного копирования</p>
+</div>
+<p><strong>3.2.4.</strong> Запустите резервное копирование:</p>
+<ol>
+<li>В списке конфигураций резервного копирования с помощью флажка выбора выберите созданную на <a href="#P3.2.3">шаге 3.2.3</a> конфигурацию.</li>
+<li>Нажмите кнопку «<strong>Запустить копирование</strong>».
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Запуск резервного копирования" class="img-responsive" height="234" src="https://kb.comindware.ru/assets/img_6321d902288c2.png" width="437"/></p>
+<p class="caption" style="font-size: 15px !important;">Запуск резервного копирования</p>
+</div>
+</li>
+<li>В фоновом режиме начнется процесс резервного копирования.</li>
+<li>Прогресс и результат резервного копирования можно просмотреть в журнале резервного копирования, выбрав вкладку «<strong>Журнал</strong>» над списком конфигураций резервного копирования.</li>
+<li>В процессе резервного копирования к имени файла, указанному <a href="#P3.2.3.3">на шаге 3.2.3.3</a> будут добавлена метка времени в формате <code>ГГГГММДДЧЧММ</code> и расширение <code>CDBBZ</code>, например для имени файла <code>Backup</code>: <code>Backup</code><code>.202202161625.cdbbz</code><code></code></li>
+</ol>
+<p style="text-align: center;"><code></code></p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Переход к журналу резервного копирования" class="img-responsive" height="115" src="https://kb.comindware.ru/assets/img_6321dbd1da164.png" width="250"/></p>
+<p class="caption" style="font-size: 15px !important;"><em style="color: #545764; letter-spacing: 0.2px;">Переход к журналу резервного копирования</em></p>
+</div>
+<p style="text-align: center;"><code></code></p>
+<h2 id="mcetoc_1g7ee638b2">4. Порядок восстановления данных экземпляра продукта</h2>
+<p>Данные экземпляра продукта хранятся в трех независимых друг от друга хранилищах:  сервере Apache Ignite, сервере Elasticsearch и папке <code><strong><em>DatabaseBackupPath</em></strong></code> (<a href="#P1.1">см. параграф 1.1</a>). Поэтому восстановление осуществляется последовательно для каждого хранилища.</p>
+<p><strong>ВАЖНО</strong>! Восстановление следует выполнять при остановленном экземпляре продукта.</p>
+<p>Восстановление данных из резервных копий выполняется в два этапа:</p>
+<ol>
+<li><a href="#mcetoc_1g7eehk6m6">Восстановление снимка сервера Elasticsearch</a>.</li>
+<li><a href="#mcetoc_1g7eej4fc7">Восстановление базы данных экземпляра продукта</a> из папки <code><strong><em>DatabaseBackupPath</em></strong></code> (<a href="#P1.1">см. параграф 1.1</a>).</li>
+</ol>
+<h2 id="mcetoc_1g7ee84rd3">5. Выполнение восстановления</h2>
+<h3 id="mcetoc_1g7eehk6m6">5.2. Восстановление снимка Elasticsearch</h3>
+<p><strong>5.2.1.</strong> Выполните следующую команду, указав имя репозитораия <code><strong><em>repository_name</em></strong></code> и имя снимка <code><em><strong>snapshot_name</strong></em></code> (<a href="#P1.1">см. параграф 1.1</a>):</p>
+<p><code>curl -X POST "localhost:9200/_snapshot/<strong><em>repository_name/snapshot_name/</em></strong>_restore?pretty"</code></p>
+<p>Подробные сведения о восстановлении снимков Elasticsearch см. в официальной документации (на английском языке): <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-restore-snapshot.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/snapshots-restore-snapshot.html</a></p>
+<h3 id="mcetoc_1g7eej4fc7">5.3. Восстановление базы данных экземпляра продукта</h3>
+<p><strong>5.3.1.</strong> Восстановите базу данных экземпляра продукта согласно инструкциям в статье «<a href="https://kb.comindware.ru/article.php?id=2038">Восстановление экземпляра продукта из резервной копии</a>».</p>
+<h2 id="mcetoc_1h77gnkc00">6. Проверка конфигурации экземпляра ПО</h2>
+<p><span style="letter-spacing: 0.2px;">6.1.</span><span style="letter-spacing: 0.2px;"> Запустите </span><span style="letter-spacing: 0.2px;">экземпл</span><span style="letter-spacing: 0.2px;">яр ПО.</span></p>
+<p><span style="letter-spacing: 0.2px;">6.2.</span><span style="letter-spacing: 0.2px;"> </span>При необходимости откроется страница настройки подключения к службе Elasticsearch.</p>
+<p><span style="color: #545764; font-style: normal; letter-spacing: 0.2px;"><span style="letter-spacing: 0.2px;">6.3.</span><span style="letter-spacing: 0.2px;"> </span>В поле «</span><span style="box-sizing: border-box; font-weight: 700 !important;">URI</span><span style="color: #545764; font-style: normal; letter-spacing: 0.2px;">» введите адрес автоматически своего сервера Elasticsearch.</span></p>
+<p><span style="letter-spacing: 0.2px;">6.4.</span><span style="letter-spacing: 0.2px;"> </span>Введите <strong>префикс индекса</strong>, <strong>имя пользователя </strong>и <strong>пароль <span style="color: #545764; font-style: normal; letter-spacing: 0.2px;">сервера Elasticsearch</span></strong>. .</p>
+<p><span style="letter-spacing: 0.2px;">6.5.</span><span style="letter-spacing: 0.2px;"> </span>Нажмите кнопку «<strong>Далее</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Настройка подключения к Elasticsearch" class="img-responsive" height="634" src="https://kb.comindware.ru/assets/Picture16.png" width="1269"/></p>
+<p class="caption">Настройка подключения к Elasticsearch</p>
+</div>
+<p><span style="letter-spacing: 0.2px;">6.6.</span><span style="letter-spacing: 0.2px;"> </span>При необходимости откроется страница инициализации данных в Elasticsearch.</p>
+<p><span style="letter-spacing: 0.2px;">6.7. Нажмите кнопку «</span><strong style="letter-spacing: 0.2px;">Обновить</strong><span style="letter-spacing: 0.2px;">».</span></p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Страница инициализации данных в Elasticsearch" class="img-responsive" height="493" src="https://kb.comindware.ru/assets/Picture17.png" width="1684"/></p>
+<p class="caption" style="font-size: 15px !important;">Страница инициализации данных в Elasticsearch</p>
+</div>
+<p><span style="letter-spacing: 0.2px;">6.8. Дождитесь открытия начальной страницы <strong>Comindware Business Application Platform</strong>.</span></p>
+<p><span style="letter-spacing: 0.2px;">6.9. Откройте страницу «<strong>Администрирование</strong>» — «<strong>Подключения</strong>».</span></p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Переход к свойства подключения к Elasticsearch" class="img-responsive" height="231" src="https://kb.comindware.ru/assets/img_64d09fd6ec3ba.png" width="998"/></p>
+<p class="caption" style="font-size: 15px !important;">Переход к свойства подключения к Elasticsearch</p>
+</div>
+<p><span style="letter-spacing: 0.2px;">6.10. Откройте подключение к серверу Elasticsearch.</span></p>
+<p><span style="letter-spacing: 0.2px;">6.11. Удостоверьтесь, что корректно указаны <strong>префикс индекса</strong> и <strong>URL подключения</strong> к серверу Elasticsearch.</span></p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Свойства подключения к серверу Elasticsearch" class="img-responsive" height="435" src="https://kb.comindware.ru/assets/img_64d0a41fc5e0b.png" width="857"/></p>
+<p class="caption" style="font-size: 15px !important;">Свойства подключения к серверу Elasticsearch</p>
+</div>
+<p><span style="letter-spacing: 0.2px;">6.12. Откройте страницу «<strong>Администрирование</strong>» — «<strong>Глобальная конфигурация</strong>».</span></p>
+<p><span style="letter-spacing: 0.2px;">6.13. Удостоверьтесь, что указан корректный <strong>URL-адрес сервера</strong>.</span></p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="URL-адрес сервера в глобальной конфигурации" class="img-responsive" height="499" src="https://kb.comindware.ru/assets/img_64d0a4feebc80.png" width="1008"/></p>
+<p class="caption" style="font-size: 15px !important;">URL-адрес сервера в глобальной конфигурации</p>
+</div>
+<p><span style="letter-spacing: 0.2px;">6.14. Откройте страницу «<strong>Администрирование</strong>» — «<strong>Резервное копирование</strong>».</span></p>
+<p><span style="letter-spacing: 0.2px;">6.15. Удостоверьтесь, что в конфигурациях резервного копирования правильно указаны пути для сохранения резервных копий.</span></p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Путь к папке резервных копий в конфигурации резервного копирования" src="https://kb.comindware.ru/assets/img_64d0a5817d06a.png"/></p>
+<p class="caption" style="font-size: 15px !important;">Путь к папке резервных копий в конфигурации резервного копирования</p>
+</div>
+<p><span style="letter-spacing: 0.2px;">6.16. При необходимости измените конфигурации резервного копирования, указав корректные пути к файлам.</span></p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Настройка пути к файлам резервной копии" src="https://kb.comindware.ru/assets/img_64d0a5f075838.png"/></p>
+<p class="caption" style="font-size: 15px !important;">Настройка пути к файлам резервной копии</p>
+</div>
+<div class="table-responsive">
+<p><a class="md-top md-icon mkdocs_imported_link" href="#"> <em class="fa-light fa-arrow-up">‌</em> К началу </a></p>
+</div>
+</div>

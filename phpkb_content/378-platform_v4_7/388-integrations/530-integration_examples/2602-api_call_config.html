@@ -1,0 +1,44 @@
+<h1>Настройка вызова API</h1><p>В <strong>Comindware Business Application Platform</strong> есть возможность вызова из внешних систем веб-сервисов системы для обмена данными, например, создание объекта, запуск процесса или получение информации по документу. Полный перечень веб-сервисов и описание можно посмотреть <a href="https://kb.comindware.ru/article.php?id=2080">здесь</a>.</p>
+<p><strong>Сценарий: </strong>нужно запустить процесс по заявке на командировку с информацией: страна, город и аэропорт.</p>
+<p><strong>Описание: </strong>в системе созданы:</p>
+<ul>
+<li>шаблон записи «<em>Заявки на командировки</em>» с атрибутами:
+<ul style="list-style-type: circle;">
+<li>Страна (op.1);</li>
+<li>Город (op.2);</li>
+<li>Аэропорт (op.3).</li>
+</ul>
+</li>
+<li>шаблон процесса «<em>Обработка заявки на командировки</em>» (pa.1), связанный с шаблоном записи «<em>Заявки на командировки</em>».</li>
+</ul>
+<p><strong>Настройка:</strong></p>
+<p>Для запуска процесса используйте веб-сервис:</p>
+<ul>
+<li>https://URL/api/public/system/Process/ProcessObjectService/Create1.</li>
+<li>Метод аутентификации — Basic. Большинство внешних систем обладают интерфейсом настройки метода аутентификации, при отсутствии такового добавьте в <em style="box-sizing: border-box;">Header</em><span style="letter-spacing: 0.2px;"> запроса параметр «</span><em style="box-sizing: border-box;">Authorization</em><span style="letter-spacing: 0.2px;">», равный зашифрованному в формате Base64 логину/паролю.</span></li>
+<li>Тело запроса (где укажите идентификатор процесса, который нужно запустить, а также идентификаторы и значения атрибутов, которые вы хотите передать):</li>
+</ul>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">
+<p>{</p>
+<p>  "processAppId": "pa.1",</p>
+<p>  "objectName": null,</p>
+<p>    "syncActivityQuantity": 2,</p>
+<p>  "objectData":</p>
+<p>  {</p>
+<p>     "op.1": "Россия",</p>
+<p>     "op.2": "Москва",</p>
+<p>     "op.3": "Шереметьево"</p>
+<p>  }</p>
+<p>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="blue_note">
+<p><strong>Примечание :</strong> у пользователя, под которым выполняется запрос, должны быть соответствующие права.</p>
+</div>

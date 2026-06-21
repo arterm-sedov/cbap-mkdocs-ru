@@ -1,0 +1,168 @@
+<h1>Документы с электронной подписью. Настройка сертификатов, приложения и использование</h1><div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1hpgc8inu2">Введение</a></li>
+<li><a href="#mcetoc_1hpgc8b6v1">Настройка ПК конечного пользователя</a></li>
+<li><a href="#mcetoc_1hpgbm68v0">Настройка приложения</a></li>
+<li><a href="#mcetoc_1ge1obknp0">Подписание документа</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1hpgc8inu2">Введение</h2>
+<p>В этой статье представлены инструкции по настройке браузера конечного пользователя и приложения для подписания документов электронной подписью (ЭП) и по подписанию документов.</p>
+<p>Для работы с ЭП необходимо:</p>
+<ul>
+<li><a href="#mcetoc_1hpgc8b6v1">настроить ПК конечного пользователя</a> — установить ПО КриптоПро CSPT, расширение КриптоПро для браузера и сертификаты для цифровых подписей;</li>
+<li><a href="#mcetoc_1hpgbm68v0">настроить приложение</a> в Comindware Business Application Platform для использования ЭП.</li>
+</ul>
+<p>В статье представлен пример настройки приложения таким образом, чтобы текущий пользователь мог подписывать документы с помощью ЭП.</p>
+<h2 id="mcetoc_1hpgc8b6v1">Настройка ПК конечного пользователя</h2>
+<ol class="colored_numbers_list">
+<li>Установите расширение для браузера CryptoPro Extension for CAdES (КриптоПро ЭЦП Browser plug-in): <br/><a href="https://www.cryptopro.ru/products/cades/plugin">https://www.cryptopro.ru/products/cades/plugin</a></li>
+<li>Установите ПО КриптоПро CSPT: <br/><a href="https://cryptopro.ru/products/csp?csp=download">https://cryptopro.ru/products/csp?csp=download</a> </li>
+<li>Получите и установите сертификат с расширением <code>.cer</code>, используя параметры по умолчанию: <br/>
+<div class="screenshot_with_caption">
+<p><img alt="Установка сертификата в формате .cer" class="img-responsive" height="515" src="https://kb.comindware.ru/assets/img_63330916d0ee5.png" width="405"/></p>
+<p class="caption">Установка сертификата в формате .cer</p>
+</div>
+</li>
+<li>Получите и установите закрытый сертификат с расширением <code>.pfx</code>, используя параметры по умолчанию: <br/>
+<div class="screenshot_with_caption">
+<p><img alt="Установка закрытого сертификата в формате .pfx" class="img-responsive" height="523" src="https://kb.comindware.ru/assets/img_63341c8bd0462.png" width="535"/></p>
+<p class="caption">Установка закрытого сертификата в формате .pfx</p>
+</div>
+</li>
+</ol>
+<h2 id="mcetoc_1hpgbm68v0">Настройка приложения</h2>
+<ol class="colored_numbers_list">
+<li>В шаблоне записи для хранения подписанных документов (например, «<em>Документы</em>») создайте атрибут «<em>Подписанные договоры</em>» типа «<strong>Документ</strong>» с форматом отображения «<strong>Документ с цифровой подписью</strong>». <br/>
+<div class="screenshot_with_caption">
+<p><img alt="Создание атрибута типа «Документ» с цифровой подписью" class="img-responsive" height="318" src="https://kb.comindware.ru/assets/img_63330abedcb02.png" width="972"/></p>
+<p class="caption">Создание атрибута типа «Документ» с цифровой подписью</p>
+</div>
+</li>
+<li>Поместите атрибут «<em>Подписанные договоры</em>» на форму, которая будет служить для загрузки и подписания документов ЭП.</li>
+<li>В разделе «<strong>Роли</strong>» приложения откройте свойства роли, которая будет давать доступ на подписание документа.</li>
+<li>На вкладке «<strong>Разрешения</strong>» перетащите атрибут «<em>Подписанные договоры</em>» в список ресурсов и установите для него флажок «<strong>Использование кнопок</strong>». <br/>
+<div class="screenshot_with_caption">
+<p><img alt="Настройка роли для использования документов с ЭП" class="img-responsive" height="386" src="https://kb.comindware.ru/assets/img_63330e18f1d29.png" width="1311"/></p>
+<p class="caption">Настройка роли для использования документов с ЭП</p>
+</div>
+</li>
+<li><a id="step9"></a>В шаблоне «<em>Договоры</em>» создайте кнопку «<em>Добавить подписанта</em>»:
+<ul>
+<li>в поле «<strong>Контекст операции</strong>» выберите пункт «<strong>Запись</strong>»;</li>
+<li>в поле «<strong>Операция</strong>» выберите пункт «<strong>Пользовательское событие</strong>»;</li>
+<li>в поле «<strong>Результат выполнения</strong>» выберите пункт «<strong>Обновить данные</strong>». <br/>
+<div class="screenshot_with_caption">
+<p><img alt="Создание кнопки «Добавить подписанта»" class="img-responsive" height="375" src="https://kb.comindware.ru/assets/img_63342330ef3e3.png" width="775"/></p>
+<p class="caption">Создание кнопки «Добавить подписанта»</p>
+</div>
+</li>
+</ul>
+</li>
+<li>Поместите кнопку «<em>Добавить подписанта</em>» на ту же форму, на которую поместили атрибут «<em>Подписанные договоры</em>». <br/>
+<div class="screenshot_with_caption">
+<p><img alt="Кнопка «Добавить подписанта» и атрибут «Подписанные договоры» на форме" class="img-responsive" height="396" src="https://kb.comindware.ru/assets/img_6334242d7e090.png" width="776"/></p>
+<p class="caption">Кнопка «Добавить подписанта» и атрибут «Подписанные договоры» на форме</p>
+</div>
+</li>
+<li>В разделе приложения «<strong>Сценарии</strong>» создайте сценарий «<em>Добавить подписанта</em>».
+<div class="notice notice-warning">
+<p class="admonition-title">Логика работы сценария</p>
+<p>Сценарий для кнопки подписания документа требуется для того, чтобы назначить подписантом документа текущего пользователя.</p>
+<p>Список разрешённых подписантов хранится в атрибуте <em>«Подписанты» </em>системного шаблона документа.</p>
+<p>Файл, прикреплённый к атрибуту типа «<strong>Документ</strong>» представляет собой запись в шаблоне документа.</p>
+<p>Соответственно, для подписания документа в данном примере сценарий записывать в атрибут <em>«Подписанты» </em>текущего документа идентификатор аккаунта текущего пользователя (вычисляемый с помощью функции <code>USER()</code>).</p>
+</div>
+</li>
+<li>Настройте свойства начального события сценария «<strong>Нажать кнопку</strong>»:
+<ul>
+<li>в поле «<strong>Контекстный шаблон выберите</strong>» выберите шаблон «<em>Документы</em>»;</li>
+<li>в поле «<strong>Кнопка</strong>» выберите созданную на <a href="#step9">шаге 9</a> кнопку «<em>Добавить подписанта</em>».
+<div class="screenshot_with_caption">
+<p><img alt="Настройка свойств события «Нажатие кнопки» в сценарии" class="img-responsive" height="319" src="https://kb.comindware.ru/assets/img_633424ef7f1a5.png" width="602"/></p>
+<p class="caption">Настройка свойств события «Нажатие кнопки» в сценарии</p>
+</div>
+</li>
+</ul>
+</li>
+<li>Добавьте в сценарий действие «<strong>Сменить контекст</strong>».</li>
+<li>В свойствах блока «<strong>Сменить контекст</strong>» в поле «<strong>Целевой шаблон</strong>» выберите пункт «<strong>Шаблон документа</strong>» и атрибут «<em>Подписанные договоры</em>».
+<div class="screenshot_with_caption">
+<p><img alt="Настройка свойств события «Сменить контекст» в сценарии" class="img-responsive" height="398" src="https://kb.comindware.ru/assets/img_6334252026f9c.png" width="601"/></p>
+<p class="caption">Настройка свойств события «Сменить контекст» в сценарии</p>
+</div>
+</li>
+<li>Добавьте внутрь действия «<strong>Сменить контекст</strong>» действие «<strong>Изменить значения атрибутов</strong>».</li>
+<li>Настройте свойства блока «<strong>Изменить значения атрибутов</strong>»:
+<ul>
+<li>нажмите кнопку «<strong>Создать</strong>»;</li>
+<li>в столбце «<strong>Атрибут</strong>» выберите атрибут «<strong>Подписанты</strong>»;</li>
+<li>в столбце «<strong>Операция со значениями</strong>» выберите пункт «<strong>Заменить</strong>»;</li>
+<li>в столбце «<strong>Значение</strong>» выберите пункт «<strong>Формула</strong>» и введите формулу: <code>USER()</code> <br/>
+<div class="screenshot_with_caption">
+<p><img alt="Настройка свойств события «Изменить значения атрибутов» в сценарии" class="img-responsive" height="375" src="https://kb.comindware.ru/assets/img_633424a369e98.png" width="600"/></p>
+<p class="caption">Настройка свойств события «Изменить значения атрибутов» в сценарии</p>
+</div>
+</li>
+</ul>
+</li>
+<li>Должен получиться показанный ниже сценарий:
+<div class="screenshot_with_caption">
+<p><img alt="Сценарий для подписания документа ЭП по нажатию кнопки" class="img-responsive" height="399" src="https://kb.comindware.ru/assets/img_63342583e522c.png" width="556"/></p>
+<p class="caption">Сценарий для подписания документа ЭП по нажатию кнопки</p>
+</div>
+</li>
+<li>На этом настройка приложения для использования документов с ЭП завершена.</li>
+</ol>
+<h2 id="mcetoc_1ge1obknp0">Подписание документа</h2>
+<ol class="colored_numbers_list">
+<li>Создайте новую запись в шаблоне «<em>Документы</em>».</li>
+<li>Добавьте документ для подписания, нажав кнопку «<strong>Добавить документ</strong>».
+<div class="screenshot_with_caption">
+<p><img alt="Добавление документа для подписания" class="img-responsive" height="344" src="https://kb.comindware.ru/assets/img_63342801ce457.png" width="792"/></p>
+<p class="caption">Добавление документа для подписания</p>
+</div>
+</li>
+<li>Нажмите кнопку «<em>Поставить подписанта</em>».</li>
+<li>Сохраните запись, нажав кнопку «<strong>Сохранить</strong>».</li>
+<li>Обновите страницу в браузере.</li>
+<li>Рядом с названием документа появится кнопка «<strong>Подписать</strong>».
+<div class="screenshot_with_caption">
+<p><img alt="Добавление подписанта для документа" class="img-responsive" height="344" src="https://kb.comindware.ru/assets/img_633429e15bc05.png" width="792"/></p>
+<p class="caption">Добавление подписанта для документа</p>
+</div>
+</li>
+<li>Нажмите кнопку «<strong>Подписать</strong>».</li>
+<li>Отобразится окно «<strong>Подписание</strong>».</li>
+<li>Выберите сертификат.</li>
+<li>Нажмите кнопку «<strong>Подписать</strong>».
+<div class="screenshot_with_caption">
+<p><img alt="Выбор сертификата для подписания документа" class="img-responsive" height="536" src="https://kb.comindware.ru/assets/img_65fc25f9d781a.png" width="598"/></p>
+<p class="caption">Выбор сертификата для подписания документа</p>
+</div>
+</li>
+<li>Подтвердите операцию с ЭП для веб-сайта и при необходимости введите пароль.
+<div class="screenshot_with_caption">
+<p><img alt="Подтверждение операции с ЭП" class="img-responsive" height="297" src="https://kb.comindware.ru/assets/img_63342cf0954aa.png" width="413"/></p>
+<p class="caption">Подтверждение операции с ЭП</p>
+</div>
+</li>
+<li>Документ будет подписан ЭП и рядом с его названием отобразятся статус «<strong>Документ подписан</strong>» и дата подписания.
+<figure class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Представление подписанного документа" class="img-responsive" height="136" src="https://kb.comindware.ru/assets/img_65fc271adfbdb.png" width="977"/></p>
+<figcaption class="caption" style="font-size: 15px !important;">Представление подписанного документа</figcaption>
+</figure>
+</li>
+<li>Чтобы подписать документ с помощью другого сертификата, нажмите кнопку «<strong>Отозвать подпись</strong>» и подпишите документ заново.</li>
+<li>При необходимости загрузите подпись в виде файла формата SIGN, нажав кнопку «<strong>Скачать подпись</strong>».</li>
+<li>Чтобы просмотреть подробную информацию о документе и подписи, нажмите кнопку «<strong>Перейти к форме</strong>».</li>
+<li>
+<p>Отобразится форма с информацией о документе и подписях для него, также содержащая сам подписанный документ.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Форма со сведениями о документе, подписанном ЭП" class="img-responsive" height="693" src="https://kb.comindware.ru/assets/img_63342e3a80378.png" width="789"/></p>
+<p class="caption">Форма со сведениями о документе, подписанном ЭП</p>
+</div>
+<p><a class="md-top md-icon mkdocs_imported_link" href="#"> <em class="fa-light fa-arrow-up">‌</em> К началу </a></p>
+</li>
+</ol>

@@ -1,0 +1,600 @@
+<h1>Построение ОШС и архитектуры процессов организации. Практический пример</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#прикладная-задача"> <span class="md-ellipsis"> Прикладная задача </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#исходные-данные"> <span class="md-ellipsis"> Исходные данные </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-навигации-для-модуля-architect"> <span class="md-ellipsis"> Настройка навигации для модуля Architect </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#создание-реестра-оргединиц"> <span class="md-ellipsis"> Создание реестра оргединиц </span> </a><nav aria-label="Создание реестра оргединиц" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#создание-справочника-юридических-лиц"> <span class="md-ellipsis"> Создание справочника юридических лиц </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-шаблона-оргединиц-и-импорт-оргединиц-из-файла-excel"> <span class="md-ellipsis"> Настройка шаблона оргединиц и импорт оргединиц из файла Excel </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#просмотр-реестра-и-диаграммы-оргструктуры"> <span class="md-ellipsis"> Просмотр реестра и диаграммы оргструктуры </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-атрибута-отдел-для-оргединицы"> <span class="md-ellipsis"> Настройка атрибута «Отдел» для оргединицы </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#создание-реестра-процессов"> <span class="md-ellipsis"> Создание реестра процессов </span> </a><nav aria-label="Создание реестра процессов" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#создание-групп-процессов"> <span class="md-ellipsis"> Создание групп процессов </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#создание-процессной-карты"> <span class="md-ellipsis"> Создание процессной карты </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#импорт-bpmn-диаграмм"> <span class="md-ellipsis"> Импорт BPMN-диаграмм </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#экспорт-документов"> <span class="md-ellipsis"> Экспорт документов </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Следуя инструкциям в этой статье, вы сможете научиться использовать базовые функции модуля <strong>Architect</strong> для моделирования бизнес-архитектуры, который входит в состав <strong>Comindware Business Application Platform</strong>.</p>
+<p>Для работы вам потребуется доступ к веб-сайту с <strong>Comindware Business Application Platform</strong> с модулем <strong>Architect</strong>. Если ваша организация уже приобрела соответствующий лицензионный ключ, то доступ вам предоставит системный администратор. Если же вы хотите знакомиться с нашим продуктом, то обратитесь с запросом по любому из контактов на <a class="mkdocs_imported_link" href="https://www.comindware.ru/company/contact-us/">нашем сайте</a>.</p>
+<h2 id="прикладная-задача">Прикладная задача</h2>
+<p>Требуется составить модель организационно-штатной структуры и бизнес-процессов в компании:</p>
+<ul>
+<li>сформировать структуру должностей, отделов и подразделений;
+<ul>
+<li>в том числе сформировать справочник юридических лиц;</li>
+</ul>
+</li>
+<li>сформировать карту процессов — описать бизнес-способности организации;</li>
+<li>составить диаграммы основных процессов;</li>
+<li>загрузить готовые диаграммы процессов;</li>
+<li>сформировать печатные документы:
+<ul>
+<li>регламент процессов;</li>
+<li>шаблон требований к вакансии;</li>
+<li>шаблон должностной инструкции;</li>
+<li>руководство пользователя бизнес-процесса;</li>
+</ul>
+</li>
+<li>привязать элементы ОШС к справочникам, управляющим и обрабатываемым данным.</li>
+</ul>
+<h2 id="исходные-данные">Исходные данные</h2>
+<p>После входа в систему отобразится начальная страница <strong>Comindware Business Application Platform</strong>.</p>
+<p>Слева отображается панель навигации, дающая доступ к различным функциями системы.</p>
+<p>Для прохождения этого урока мы будем использовать уже имеющееся <em>Первое приложение</em> с системным именем <em><code>systemSolution</code></em>.</p>
+<p>Прежде чем проходить этот урок, ознакомьтесь со следующими статьями:</p>
+<ul>
+<li><strong>Использование Comindware Architect</strong>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2426">Построение процессной архитектуры</a></em>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2429">Конструктор диаграмм</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2431">Редактирование диаграммы</a></em></li>
+</ul>
+</li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2423">Построение организационной структуры</a></em>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2420">Создание оргединицы</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2422">Редактирование формы и атрибутов оргединицы</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2419">Изменение иерархии оргединиц</a></em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Использование Comindware Business Application Platform</strong>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2283">Панель навигации. Использование</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2209">Приложения. Определения, создание, настройка, администрирование, удаление</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2212">Панель и разделы навигации. Определения, настройка, удаление</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2219">Шаблоны. Определения, создание, настройка, перенос между приложениями, архивирование, очистка, удаление</a></em>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2221">Шаблон записи</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2226">Шаблон организационной единицы</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2555">Импорт данных в шаблон</a></em></li>
+</ul>
+</li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2252">Атрибуты. Определения, типы, настройка, архивирование, удаление</a></em>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2254">Вычисляемые атрибуты</a></em></li>
+</ul>
+</li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2271">Формы. Определения, редактирование, удаление, использование списка форм</a></em>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2537">Правила для формы. Определения, логика работы и настройка</a></em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="настройка-навигации-для-модуля-architect">Настройка навигации для модуля Architect</h2>
+<p>Для использования модуля <strong>Architect</strong> необходимо вынести на панель навигации относящиеся к нему разделы навигации:</p>
+<ul>
+<li><strong>Оргструктура</strong> и <strong>Процессы</strong> — в этих разделах отображаются реестры оргединиц и процессов соответственно;</li>
+<li><strong>Управление версиями</strong> — в этом разделе отображаются функции для сохранения и восстановления версий бизнес-архитектуры, а также для настройки шаблонов экспорта регламентов процессов.</li>
+</ul>
+<p>Реестр оргединиц и реестр процессов относятся к тому приложению, в которое входит раздел навигации с пунктами «<strong>Оргструктура</strong>» и «<strong>Процессы</strong>». Таким образом, в каждом приложении хранятся <strong>собственные реестры оргединиц и процессов</strong>.</p>
+<p>Следуя инструкциям в этом разделе, вы научитесь настраивать доступ к функциям модуля <strong>Architect</strong> через панель навигации.</p>
+<p>Подробные сведения о настройке приложений и панели навигации см. в следующих статьях:</p>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2209">Приложения. Определения, создание, настройка, администрирование, удаление</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2283">Панель навигации. Использование</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2212">Панель и разделы навигации. Определения, настройка, удаление</a></em></li>
+</ul>
+<ol class="colored_numbers_list">
+<li>В панели навигации выберите пункт «<strong>Приложения</strong>».</li>
+<li>Откройте <em>Первое приложение</em> в списке приложений.</li>
+<li>На странице администрирования приложения выберите пункт «<strong>Разделы навигации</strong>».</li>
+<li>Откройте <em>Системный раздел навигации</em>, дважды щелкнув его в списке разделов навигации</li>
+<li>Отобразится конструктор раздела навигации.</li>
+<li>Перетащите с расположенной слева панели элементов пункты «<strong>Оргструктура</strong>» и «<strong>Процессы</strong>» на макет раздела навигации.</li>
+<li>Раскройте в панели элементов пункт «<strong>Настройки</strong>» и перетащите из него пункт «<strong>Управление версиями</strong>» на макет раздела навигации.</li>
+<li>Нажмите кнопку «<strong>Сохранить</strong>».</li>
+<li>Обновите страницу в браузере.</li>
+<li>В панели навигации отобразятся пункты «<strong>Оргструктура</strong>», «<strong>Процессы</strong>» и «<strong>Управление версиями</strong>».</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Настройка раздела навигации для использования модуля Architect" src="https://kb.comindware.ru/assets/architect_example_navigation_configure.png"/></p>
+<figcaption class="caption">Настройка раздела навигации для использования модуля Architect</figcaption>
+</figure>
+<h2 id="создание-реестра-оргединиц">Создание реестра оргединиц</h2>
+<p>Модуль <strong>Architect</strong> позволяет сформировать иерархический реестр подразделений и должностей в организации — организационно-штатной структуры. Кроме того, данные оргединиц можно расширять с использованием произвольного набора атрибутов, а также привязывать их к справочникам.</p>
+<p>Следуя инструкциям в этом разделе, вы научитесь создавать иерархический реестр оргединиц и должностей в организации:</p>
+<ul>
+<li>создавать и заполнять справочник (шаблон записи);</li>
+<li>импортировать данные оргединиц из файла Excel;</li>
+<li>устанавливать взаимосвязи между импортируемыми оргединицами;</li>
+<li>привязывать оргединицы к справочникам;</li>
+<li>создавать для оргединицы произвольные атрибуты и выносить их на форму оргединицы.</li>
+</ul>
+<h3 id="создание-справочника-юридических-лиц">Создание справочника юридических лиц</h3>
+<p>В этом разделе вы научитесь создавать шаблон записи (справочник) и заполнять его бизнес-данными, которые впоследствии будут привязаны к оргединицам.</p>
+<p>Подробные сведения о настройке шаблонов записей, атрибутов и форм см. в следующих статьях</p>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2221">Шаблон записи</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2252">Атрибуты. Определения, типы, настройка, архивирование, удаление</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2271">Формы. Определения, редактирование, удаление, использование списка форм</a></em></li>
+</ul>
+<ol class="colored_numbers_list">
+<li>В панели навигации выберите пункт «<strong>Приложения</strong>».</li>
+<li>Откройте <em>Первое приложение</em> в списке приложений.</li>
+<li>На странице администрирования приложения выберите пункт «<strong>Шаблоны</strong>».</li>
+<li>Выберите вкладку «<strong>Шаблоны записи</strong>».</li>
+<li>Создайте шаблон записи <em>«Юридические лица»</em>.</li>
+<li>
+<p>В шаблоне записи <em>«Юридические лица»</em> создайте и вынесите на основную форму атрибут со следующими свойствами:</p>
+<ul>
+<li><strong>Название:</strong> <em>Наименование</em></li>
+<li><strong>Тип данных: текст</strong></li>
+<li><strong>Использовать как заголовок записей</strong>: флажок установлен</li>
+</ul>
+</li>
+<li>
+<p>Создайте три записи в шаблоне записи <em>«Юридические лица»</em>, заполнив поле <em>«Наименование»</em>:</p>
+<ul>
+<li><em>ЗАО "Гранит"</em></li>
+<li><em>ООО "КОЛЛОВЭАР"</em></li>
+<li><em>АО "Корпатов"</em></li>
+</ul>
+</li>
+</ol>
+<h3 id="настройка-шаблона-оргединиц-и-импорт-оргединиц-из-файла-excel">Настройка шаблона оргединиц и импорт оргединиц из файла Excel</h3>
+<p>Следуя инструкциям в этом разделе, вы научитесь:</p>
+<ul>
+<li>создавать дополнительные атрибуты в шаблоне оргединиц;</li>
+<li>импортировать в шаблон оргединиц данные из файла Excel;</li>
+<li>устанавливать связи между импортируемыми оргединицами;</li>
+<li>привязывать импортируемые оргединицы к записям в справочнике (шаблоне записи).</li>
+</ul>
+<p>Подробные сведения о настройке шаблона и импорте в него данных см. в статьях:</p>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2226">Шаблон организационной единицы</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2252">Атрибуты. Определения, типы, настройка, архивирование, удаление</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2555">Импорт данных в шаблон</a></em></li>
+</ul>
+<ol class="colored_numbers_list">
+<li>Скачайте файл <code>Демо ОШС.xlsx</code> <a class="mkdocs_imported_link" href="https://kb.comindware.ru/file.php?id=196">по этой ссылке</a>. Этот файл содержит демонстрационные данные оргединиц.</li>
+<li>Откройте список шаблонов <em>Первого приложения</em>.</li>
+<li>Выберите вкладку «<strong>Шаблоны оргединиц</strong>» и откройте системный <strong>Шаблон организационной единицы</strong>.</li>
+<li>
+<p>В <strong>шаблоне организационной единицы</strong> создайте создайте атрибут со следующими свойствами:</p>
+<ul>
+<li><strong>Название:</strong> <em>Юридическое лицо</em></li>
+<li><strong>Тип данных: запись</strong></li>
+<li><strong>Формат отображения: гиперссылка</strong></li>
+<li><strong>Связанный шаблон</strong>: <em>Юридические лица</em></li>
+</ul>
+</li>
+<li>
+<p>Выберите вкладку «<strong>Импорт</strong>» и загрузите файл <code>Демо ОШС.xlsx</code>.</p>
+</li>
+<li>
+<p>Настройте сопоставление импортируемых столбцов с атрибутами шаблона оргединицы следующим образом:</p>
+<ul>
+<li><strong>Обновить существующие записи данными из файла:</strong> флажок снят</li>
+<li><strong>Сопоставление данных</strong></li>
+</ul>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Столбец</th>
+<th>Атрибут</th>
+<th>Формат</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Название</em></td>
+<td><em>Название</em></td>
+<td> </td>
+</tr>
+<tr>
+<td><em>Системное имя</em></td>
+<td><em>Системное имя</em></td>
+<td> </td>
+</tr>
+<tr>
+<td><em>Тип организационной единицы</em></td>
+<td><em>Тип организационной единицы</em></td>
+<td> </td>
+</tr>
+<tr>
+<td><em>ЮЛ</em></td>
+<td><em>Юридическое лицо</em></td>
+<td><strong>name</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="notice notice-warning">
+<p class="admonition-title">Логика привязки импортируемых записей к записям в справочнике</p>
+<p>Привязка импортируемых оргединиц к справочнику <em>«Юридические лица»</em> осуществляется посредством сопоставления значения в столбце <em>«ЮЛ»</em> файла Excel со значением атрибута <em>«Наименование»</em> в записях шаблона <em>«Юридические лица»</em>, который связан с атрибутом <em>«Юридическое лицо» шаблона организационной единицы</em>. Для этого в столбце «<strong>Формат</strong>» указывается значение «<strong>name</strong>», которое означает привязку по атрибуту-заголовку записей в связанном шаблоне. В шаблоне <em>«Юридические атрибуты»</em> атрибут-заголовок записей — это <em>«Наименование»</em>.</p>
+<p>Например, если в импортируемой строке в столбце <em>«ЮЛ»</em> указано значение <em>«ООО "КОЛЛОВЭАР"»</em>, то атрибут <em>«Юридическое лицо»</em> импортированной оргединицы, будет привязан к записи с <em>наименованием «ООО "КОЛЛОВЭАР"»</em> в шаблоне <em>«Юридические лица»</em>.</p>
+</div>
+</li>
+<li>
+<p>Запустите импорт.</p>
+<figure class="screenshot_with_caption"><img alt="Сопоставление атрибутов для импорта данных оргединиц из файла Excel" src="https://kb.comindware.ru/assets/architect_example_attributes_compare.png"/>
+<figcaption class="caption">Сопоставление атрибутов для импорта данных оргединиц из файла Excel</figcaption>
+</figure>
+</li>
+<li>
+<p>Снова выберите вкладку «<strong>Импорт</strong>» и загрузите файл <code>Демо ОШС.xlsx</code>.</p>
+</li>
+<li>
+<p>Настройте импорт для установления взаимосвязей между импортированными оргединицами следующим образом:</p>
+<ul>
+<li><strong>Обновить существующие записи данными из файла:</strong> флажок установлен</li>
+<li><strong>Столбец</strong>: <em>Системное имя</em></li>
+<li><strong>Ключевой атрибут:</strong> <em>Системное имя</em></li>
+<li><strong>Сопоставление данных</strong></li>
+</ul>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Столбец</th>
+<th>Атрибут</th>
+<th>Формат</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Вышестоящая организационная единица</em></td>
+<td><em>Вышестоящая организационная единица</em></td>
+<td><strong>name</strong></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Запустите импорт.</p>
+</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Сопоставление атрибутов для установления взаимосвязей между оргединицами, импортированными из файла Excel" src="https://kb.comindware.ru/assets/architect_example_attributes_compare_connection.png"/></p>
+<figcaption class="caption">Сопоставление атрибутов для установления взаимосвязей между оргединицами, импортированными из файла Excel</figcaption>
+</figure>
+<h3 id="просмотр-реестра-и-диаграммы-оргструктуры">Просмотр реестра и диаграммы оргструктуры</h3>
+<p>Следуя инструкциям в этом разделе, вы научитесь просматривать реестр и диаграмму организационной структуры.</p>
+<p>Подробные сведения о построении и редактировании реестра оргединиц см. в статьях:</p>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2423">Построение организационной структуры</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2420">Создание оргединицы</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2422">Редактирование формы и атрибутов оргединицы</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2419">Изменение иерархии оргединиц</a></em></li>
+</ul>
+<ol class="colored_numbers_list">
+<li>Перейдите на вкладку «<strong>Свойства</strong>» шаблона оргединицы и нажмите кнопку «<strong>Перейти к экземплярам</strong>».</li>
+<li>В списке оргединиц должны отобразиться записи, импортированные из файла <code>Демо ОШС.xlsx</code>.</li>
+<li>В панели навигации в разделе «<strong>Оргструктура</strong>» должно отобразится дерево импортированных организационных единиц.</li>
+<li>В панели навигации в разделе «<strong>Оргструктура</strong>» выберите пункт «<strong>Реестр</strong>».</li>
+<li>Отобразится реестр оргединиц.</li>
+<li>Выберите в реестре пункт «<strong>Генеральный директор</strong>».</li>
+<li>Отобразится диаграмма оргструктуры с должностями и подразделениями.</li>
+<li>Выбирайте оргединицы на диаграмме для просмотра сведений о них в панели свойств справа от диаграммы.</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Диаграмма оргструктуры" src="https://kb.comindware.ru/assets/architect_example_organizational_structure_diagram.png"/></p>
+<figcaption class="caption">Диаграмма оргструктуры</figcaption>
+</figure>
+<h3 id="настройка-атрибута-отдел-для-оргединицы">Настройка атрибута «Отдел» для оргединицы</h3>
+<p>На форме оргединицы для наглядности можно отображать наименование отдела, к которому она относится. Форма оргединицы отображается в панели «<strong>Свойства должности</strong>» при выборе оргединицы на диаграмме оргструктуры.</p>
+<p>Следуя инструкциям в этом разделе, вы научитесь настраивать вычисляемые атрибуты и форму оргединицы.</p>
+<p>Подробные сведения по настройке атрибутов, форм и правил для форм см. в статьях:</p>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2252">Атрибуты. Определения, типы, настройка, архивирование, удаление</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2254">Вычисляемые атрибуты</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2271">Формы. Определения, редактирование, удаление, использование списка форм</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2537">Правила для формы. Определения, логика работы и настройка</a></em></li>
+</ul>
+<ol class="colored_numbers_list">
+<li>
+<p>В <strong>шаблоне оргединицы</strong> создайте следующие атрибуты:</p>
+<table style="width: 100%;">
+<tbody>
+<tr>
+<th>Название</th>
+<th>Системное имя</th>
+<th>Свойства</th>
+</tr>
+<tr>
+<td><em>Тип служебный</em></td>
+<td><em>Tipsluzhebnyy</em></td>
+<td>
+<ul>
+<li><strong>Тип данных: текст</strong></li>
+<li><strong>Вычислять автоматически:</strong> флажок установлен</li>
+<li><strong>Вычисляемое выражение: формула</strong>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="n">FORMAT</span><span class="p">(</span><span class="s">"{0}"</span><span class="p">,</span><span class="n">LIST</span><span class="p">(</span><span class="err">$</span><span class="n">unitType</span><span class="p">))</span></code></pre>
+</div>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td><em>Отдел</em></td>
+<td><em>Otdel</em></td>
+<td>
+<ul>
+<li><strong>Тип данных: текст</strong></li>
+<li><strong>Вычислять автоматически:</strong> флажок установлен</li>
+<li><strong>Вычисляемое выражение: N3</strong>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="k">@prefix</span> <span class="nn">object:</span> <span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code><br/><code><span class="p">{</span></code><br/><code>    <span class="p">(</span><span class="s">"systemSolution"</span> <span class="s">"Tipsluzhebnyy"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?foundProperty</span><span class="p">.</span></code><br/><code>    <span class="p">(</span><span class="s">"systemSolution"</span> <span class="s">"superiorUnit"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?superiorUnitProp</span><span class="p">.</span></code><br/><code>    <span class="p">(</span><span class="s">"systemSolution"</span> <span class="s">"Otdel"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?Otdel</span><span class="p">.</span></code><br/><code>    <span class="p">(</span><span class="s">"systemSolution"</span> <span class="s">"unitName"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?name</span><span class="p">.</span></code><br/><code>    <span class="err">if</span> <span class="p">{</span><span class="err">?item</span> <span class="err">?foundProperty</span> <span class="s">"Department"</span><span class="p">.</span> <span class="p">}</span></code><br/><code>    <span class="err">then</span> <span class="p">{</span> <span class="err">?item</span> <span class="err">?name</span> <span class="err">?value</span><span class="p">.}</span></code><br/><code>    <span class="err">else</span> <span class="p">{</span></code><br/><code>    <span class="err">?item</span> <span class="err">?superiorUnitProp</span> <span class="err">?superiorUnit</span><span class="p">.</span></code><br/><code>        <span class="err">?superiorUnit</span> <span class="err">?Otdel</span> <span class="err">?value</span><span class="p">.</span></code><br/><code>    <span class="p">}.</span></code><br/><code><span class="p">}</span></code></pre>
+</div>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Вынесите на основную форму <strong>шаблона оргединицы</strong> созданный атрибут <em>«Отдел»</em>.</p>
+</li>
+<li>
+<p>В правилах для формы добавьте действие для элемента <em>«Отдел»</em> со следующими свойствами:</p>
+<ul>
+<li><strong>Действие: изменить доступ</strong></li>
+<li><strong>Новое значение: скрыть</strong></li>
+<li>
+<p><strong>Условие выполнения: формула</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="err">$</span><span class="n">Otdel</span> <span class="o">==</span> <span class="err">$</span><span class="n">unitName</span></code></pre>
+</div>
+</li>
+</ul>
+</li>
+<li>
+<p>После этого при выборе оргединицы типа «<strong>Должность</strong>» на диаграмме оргструктуры в панели «<strong>Свойства должности</strong>» будет отображаться название отдела, к которому она относится.</p>
+</li>
+</ol>
+<h2 id="создание-реестра-процессов">Создание реестра процессов</h2>
+<p>Модуль <strong>Architect</strong> позволяет создавать процессные карты, диаграммы бизнес-способностей и диаграммы BPMN для построения модели бизнес-процессов в организации. Кроме того, элементы процессной архитектуры можно расширять с использованием произвольного набора атрибутов, а также привязывать их к справочникам.</p>
+<p>Следуя инструкциям в этом разделе, вы научитесь:</p>
+<ul>
+<li>создавать и связывать группы процессов;</li>
+<li>строить диаграмму бизнес-способностей и процессную карту;</li>
+<li>строить диаграмму процесса в нотации BPMN 2.0;</li>
+<li>импортировать готовые диаграммы;</li>
+<li>экспортировать регламент процессной архитектуры.</li>
+</ul>
+<p>Подробные сведения о построении процессной архитектуры и диаграмм см. в статьях:</p>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2426">Построение процессной архитектуры</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2429">Конструктор диаграмм</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2431">Редактирование диаграммы</a></em></li>
+</ul>
+<h3 id="создание-групп-процессов">Создание групп процессов</h3>
+<ol class="colored_numbers_list">
+<li>В панели навигации выберите пункт «<strong>Процессы</strong>» – «<strong>Реестр</strong>».</li>
+<li>Отобразится страница «<strong>Реестр процессов</strong>».</li>
+<li>Нажмите кнопку «<strong>Создать</strong>» и создайте <strong>группу процессов</strong>.</li>
+<li>Созданная группа отобразится в панели навигации под названием «<strong>Новая группа</strong>».</li>
+<li>Наведите указатель мыши на <strong>новую группу</strong> в панели навигации и нажмите значок троеточия.</li>
+<li>В отобразившемся меню выберите пункт «<strong>Переименовать</strong>» и присвойте группе процессов название «<em>Рабочие процессы»</em>.</li>
+<li>В панели навигации выберите пункт <em>«Рабочие процессы»</em>.</li>
+<li>Отобразится диаграмма бизнес-способностей <em>«Рабочие процессы»</em>.</li>
+<li>Нажмите кнопку «<strong>Редактировать</strong>», чтобы перейти к конструктору диаграммы.</li>
+<li>С панели элементов перетащите на диаграмму <strong>группу процессов</strong>.</li>
+<li>В панели «<strong>Свойства группы процессов</strong>» измените <strong>наименование</strong> на <em>«Разработка видения и стратегии»</em>.</li>
+<li>Выберите на диаграмме <strong>группу процессов</strong> <em>«Разработка видения и стратегии»</em>.</li>
+<li>В отобразившемся меню элемента выберите пункт «<strong>Быстрое создание</strong>» – «<strong>Группа процессов</strong>».</li>
+<li>Будет создана новая <strong>группа процессов</strong>, соединённая потоком с предыдущей.</li>
+<li>Переименуйте новую группу в <em>«Создание и управление продуктами и услугами»</em>.</li>
+<li>
+<p>Повторив шаги <strong>11–14</strong>, создайте следующие группы процессов, связанные с предыдущими:</p>
+<ul>
+<li><em>Продвижение и продажа продуктов и услуг</em></li>
+<li><em>Поставка продуктов</em></li>
+<li><em>Оказание услуг</em></li>
+<li><em>Управление послепродажным обслуживанием</em></li>
+</ul>
+<div class="notice notice-tip">
+<p class="admonition-title">Совет</p>
+<p>Чтобы отменить или повторить выполненное действие нажимайте кнопки «<strong>Отменить</strong>» <em class="fa-light fa-arrow-rotate-left">‌<!--icon--></em> и «<strong>Повторить</strong>» <em class="fa-light fa-arrow-rotate-right">‌<!--icon--></em> или клавиши <span class="keys"><kbd class="key-control">Ctrl</kbd>+<kbd class="key-z">Z</kbd></span> и <span class="keys"><kbd class="key-control">Ctrl</kbd>+<kbd class="key-y">Y</kbd></span> соответственно.</p>
+</div>
+</li>
+<li>
+<p>Повторив шаги <strong>1–11</strong>, создайте группу <em>«Управление и сопровождение»</em>, а в ней — следующие группы процессов (<em>расположите их друг под другом и не соединяйте между собой</em>):</p>
+<ul>
+<li><em>Развитие и управление человеческим ресурсом</em></li>
+<li><em>Управление информационными технологиями</em></li>
+<li><em>Управление финансовыми ресурсами</em></li>
+<li><em>Приобретение, сооружение и управление основными ресурсами</em></li>
+<li><em>Управление рисками, комплаенсом и восстановлением</em></li>
+<li><em>Управление внешними связями</em></li>
+<li><em>Развитие и управление компетенциями предприятия</em></li>
+</ul>
+</li>
+<li>
+<p>Созданные группы процессов будут появляться в панели навигации.</p>
+</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Создание и настройка группы процессов на диаграмме бизнес-способностей" src="https://kb.comindware.ru/assets/architect_example_process_group_configure.png"/></p>
+<figcaption class="caption">Создание и настройка группы процессов на диаграмме бизнес-способностей</figcaption>
+</figure>
+<h3 id="создание-процессной-карты">Создание процессной карты</h3>
+<ol class="colored_numbers_list">
+<li>В панели навигации снова выберите пункт «<strong>Процессы</strong>» – «<strong>Реестр</strong>».</li>
+<li>Создайте <strong>группу процессов</strong> <em>«Процессная карта»</em>.</li>
+<li>На диаграмме бизнес-способностей <em>«Процессная карта»</em> нажмите кнопку «<strong>Редактировать</strong>».</li>
+<li>С панели элементов перетащите на диаграмму <strong>ссылку на группу процессов</strong>, расположив её под <strong>надписью</strong> <em>«РАБОЧИЕ ПРОЦЕССЫ»</em>.</li>
+<li>Во всплывающем окне <strong>выберите связываемую группу процессов</strong> <em>«Разработка видения и стратегии»</em>.</li>
+<li>Выберите на диаграмме <strong>ссылку на группу процессов</strong> <em>«Разработка видения и стратегии»</em>.</li>
+<li>В отобразившемся меню элемента выберите пункт «<strong>Быстрое создание</strong>» – «<strong>Ссылка на группу процессов</strong>».</li>
+<li>Во всплывающем окне <strong>выберите связываемую группу процессов</strong> <em>«Разработка видения и стратегии»</em>.</li>
+<li>Будет создана новая <strong>ссылка на группу процессов</strong>, соединённая потоком с предыдущей.</li>
+<li>
+<p>Повторив шаги <strong>6–9</strong>, создайте ссылки на следующие группы процессов, связанные с предыдущими:</p>
+<ul>
+<li><em>Продвижение и продажа продуктов и услуг</em></li>
+<li><em>Поставка продуктов</em></li>
+<li><em>Оказание услуг</em></li>
+<li><em>Управление послепродажным обслуживанием</em></li>
+</ul>
+</li>
+<li>
+<p>С панели элементов перетащите на диаграмму <strong>надпись</strong>, расположив её над созданными <strong>ссылками на группы процессов</strong>.</p>
+</li>
+<li>В панели «<strong>Свойства надписи</strong>» измените <strong>наименование</strong> на <em>«РАБОЧИЕ ПРОЦЕССЫ»</em>.</li>
+<li>Выберите <strong>надпись</strong> <em>«РАБОЧИЕ ПРОЦЕССЫ»</em> на диаграмме.</li>
+<li>В меню элемента выберите <strong>оранжевый цвет</strong>.</li>
+<li>Наведите указатель мыши на границу <strong>надписи</strong> и растяните её по ширине созданных <strong>ссылок на группы процессов</strong>.</li>
+<li>
+<p>Под ссылками на группы процессов создайте <strong>надпись</strong> <em>«УПРАВЛЕНИЕ СОПРОВОЖДЕНИЕ»</em>:</p>
+<ul>
+<li>выберите для надписи синий цвет;</li>
+<li>растяните её по ширине <strong>ссылок на группы процессов</strong>.</li>
+</ul>
+</li>
+<li>
+<p>Повторив шаги <strong>4–5</strong>, создайте <strong>ссылки на</strong> следующие <strong>группы процессов</strong> (<em>расположите их друг под другом и не соединяйте между собой</em>):</p>
+<ul>
+<li><em>Развитие и управление человеческим ресурсом</em></li>
+<li><em>Управление информационными технологиями</em></li>
+<li><em>Управление финансовыми ресурсами</em></li>
+<li><em>Приобретение, сооружение и управление основными ресурсами</em></li>
+<li><em>Управление рисками, комплаенсом и восстановлением</em></li>
+<li><em>Управление внешними связями</em></li>
+<li><em>Развитие и управление компетенциями предприятия</em></li>
+</ul>
+</li>
+<li>
+<p>Задайте для созданных <strong>ссылок на группы процессов</strong> синий цвет и растяните их по ширине надписи <em>«УПРАВЛЕНИЕ СОПРОВОЖДЕНИЕ»</em>.</p>
+</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Процессная карта со ссылками на группы процессов" src="https://kb.comindware.ru/assets/architect_example_process_map.png"/></p>
+<figcaption class="caption">Процессная карта со ссылками на группы процессов</figcaption>
+</figure>
+<h3 id="импорт-bpmn-диаграмм">Импорт BPMN-диаграмм</h3>
+<p><strong>Architect</strong> позволяет <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2425">импортировать</a> готовые диаграммы процессов в формате BPMN, редактировать и использовать их для моделирования архитектуры своего предприятия.</p>
+<ol class="colored_numbers_list">
+<li>
+<p>Скачайте файлы готовых диаграмм BPMN по следующим ссылкам:</p>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/file.php?id=199">Поиск найм кандидатов.bpmn</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/file.php?id=200">Просмотр и отбор кандидатов.bpmn</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/file.php?id=201">Управление заявками на найм персонала.bpmn</a></li>
+</ul>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Действия</strong>» ‌<em class="fa-light fa-ellipsis-vertical">‌<!--icon--></em> у раздела «<strong>Реестр</strong>» в панели навигации и выберите пункт «<strong>Импорт</strong>». Либо перейдите в реестр процессов и нажмите кнопку «<strong>Импорт</strong>».</p>
+</li>
+<li>Выберите пункт «<strong>Загрузить файлы BPMN</strong>».</li>
+<li>Загрузите диаграммы <code>Поиск найм кандидатов.bpmn</code>, <code>Просмотр и отбор кандидатов.bpmn</code> и <code>Управление заявками на найм персонала.bpmn</code>.</li>
+<li>
+<p>Нажмите кнопку «<strong>Продолжить</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Выбор источника импорта" src="https://kb.comindware.ru/assets/architect_example_import_files.png"/>
+<figcaption class="caption">Выбор источника импорта</figcaption>
+</figure>
+</li>
+<li>
+<p>Выберите процессы, которые хотите добавить.</p>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Импортировать</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Выбор процессов для импорта" src="https://kb.comindware.ru/assets/architect_example_import_choice.png"/>
+<figcaption class="caption">Выбор процессов для импорта</figcaption>
+</figure>
+</li>
+<li>
+<p>Готовые диаграммы будут добавлены в реестр процессов.</p>
+</li>
+<li>В журнале действий и ошибок должно отобразиться сообщение об успешном импорте диаграмм.</li>
+<li>
+<p>Поэкспериментируйте с готовыми диаграммами: <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2431">отредактируйте</a>, используйте их в новой или имеющейся <a class="mkdocs_imported_link" href="#создание-групп-процессов">группе процессов</a>.</p>
+<figure class="screenshot_with_caption"><img alt="Импортированные процессы в реестре процессов" src="https://kb.comindware.ru/assets/architect_example_process_registry.png"/>
+<figcaption class="caption">Импортированные процессы в реестре процессов</figcaption>
+</figure>
+</li>
+</ol>
+<h2 id="экспорт-документов">Экспорт документов</h2>
+<p>Модуль <strong>Architect</strong> позволяет сформировать на основе реестра процессов печатный документ со спецификацией процессной архитектуры — регламент процессов.</p>
+<p>Регламент процессов формируется на основе шаблона экспорта — файла в формате DOCX, который можно настроить в соответствии с вашими потребностями.</p>
+<p>Шаблон экспорта регламента процессов загружается на странице «<strong>Управление версиями</strong>».</p>
+<p>Следуя инструкциям в этом разделе, вы научитесь экспортировать регламент процессов, используя готовый шаблон экспорта, который прикреплён к этой статье.</p>
+<ol class="colored_numbers_list">
+<li>Скачайте файл <code>Шаблон экспорта регламента процессов.docx</code> <a class="mkdocs_imported_link" href="https://kb.comindware.ru/file.php?id=198">по этой ссылке</a>.</li>
+<li>В панели навигации выберите пункт «<strong>Управление версиями</strong>».</li>
+<li>
+<p>На странице «<strong>Управление версиями</strong>» настройте экспорт регламента процессов в разделе «<strong>Новый шаблон экспорта</strong>»:</p>
+<ul>
+<li><strong>Название:</strong> введите наглядное наименование шаблона экспорта.</li>
+<li><strong>Системное имя:</strong> введите уникальное имя из английских букв и цифр.</li>
+<li><strong>Файл шаблона:</strong> загрузите файл <code>Шаблон экспорта регламента процессов.docx</code>.</li>
+<li><strong>Имя выходного файла:</strong> введите желаемое имя экспортируемого регламента.</li>
+<li><strong>Экспортировать как PDF:</strong> установите этот флажок, чтобы экспортировать регламент в формате PDF.</li>
+</ul>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Сохранить</strong>» в разделе «<strong>Новый шаблон экспорта</strong>».</p>
+</li>
+<li>В панели навигации выберите пункт «<strong>Процессы</strong>» – «<strong>Реестр</strong>».</li>
+<li>Наведите указатель мыши на пункт «<strong>Реестр</strong>» в панели навигации и нажмите значок троеточия.</li>
+<li>В отобразившемся меню выберите пункт «<strong>Экспорт регламента</strong>».</li>
+<li>Через несколько секунд браузер предложит сохранить файл <code>Процессы.docx</code>.</li>
+<li>Выберите место сохранения файла и нажмите кнопку «<strong>Сохранить</strong>».</li>
+<li>Дождитесь скачивания файла.</li>
+<li>Откройте скачанный файл и ознакомьтесь с его содержимым.</li>
+</ol>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2426">Построение процессной архитектуры</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2429">Конструктор диаграмм</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2431">Редактирование диаграммы</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2423">Построение организационной структуры</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2420">Создание оргединицы</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2422">Редактирование формы и атрибутов оргединицы</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2419">Изменение иерархии оргединиц</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2425">Импорт диаграмм процессов</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2283">Панель навигации. Использование</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2209">Приложения. Определения, создание, настройка, администрирование, удаление</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2212">Панель и разделы навигации. Определения, настройка, удаление</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2219">Шаблоны. Определения, создание, настройка, перенос между приложениями, архивирование, очистка, удаление</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2221">Шаблон записи</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2226">Шаблон организационной единицы</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2555">Импорт данных в шаблон</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2252">Атрибуты. Определения, типы, настройка, архивирование, удаление</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2254">Вычисляемые атрибуты</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2271">Формы. Определения, редактирование, удаление, использование списка форм</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2537">Правила для формы. Определения, логика работы и настройка</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

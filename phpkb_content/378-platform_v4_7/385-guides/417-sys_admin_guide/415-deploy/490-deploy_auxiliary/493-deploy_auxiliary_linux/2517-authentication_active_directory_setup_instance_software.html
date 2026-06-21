@@ -1,0 +1,263 @@
+<h1>Аутентификация через Active Directory. Настройка контроллера домена и экземпляра ПО</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#определения"> <span class="md-ellipsis"> Определения </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#примеры-значений-параметров"> <span class="md-ellipsis"> Примеры значений параметров </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#конфигурация-машины-linuxhost-с-экземпляром-по-comindware-business-application-platform"> <span class="md-ellipsis"> Конфигурация машины linuxHost с экземпляром ПО Comindware Business Application Platform </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#ad_authentication_configure_dc_instance"> <span class="md-ellipsis"> Конфигурация машины DCName с контроллером домена </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-машины-linuxhost-с-экземпляром-по-для-astra-linux-и-ubuntu"> <span class="md-ellipsis"> Настройка машины linuxHost с экземпляром ПО для Astra Linux и Ubuntu </span> </a><nav aria-label="Настройка машины linuxHost с экземпляром ПО для Astra Linux и Ubuntu" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-конфигурации-kerberos"> <span class="md-ellipsis"> Настройка конфигурации Kerberos </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-конфигурации-экземпляра-по"> <span class="md-ellipsis"> Настройка конфигурации экземпляра ПО </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#проверка-вывода-трассировщика-ошибок-в-shell"> <span class="md-ellipsis"> Проверка вывода трассировщика ошибок в Shell </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-машины-linuxhost-с-экземпляром-по-для-rocky-linux"> <span class="md-ellipsis"> Настройка машины linuxHost с экземпляром ПО для Rocky Linux </span> </a><nav aria-label="Настройка машины linuxHost с экземпляром ПО для Rocky Linux" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-конфигурации-kerberos_1"> <span class="md-ellipsis"> Настройка конфигурации Kerberos </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-конфигурации-экземпляра-по_1"> <span class="md-ellipsis"> Настройка конфигурации экземпляра ПО </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#проверка-вывода-трассировщика-ошибок-в-shell_1"> <span class="md-ellipsis"> Проверка вывода трассировщика ошибок в Shell </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>Представленные здесь инструкции зависят от конфигурации сторонних систем и окружения, в котором развёрнут экземпляр ПО <strong>Comindware Business Application Platform</strong> (далее «экземпляр ПО»).</p>
+<p>Описать все возможные варианты и сочетания конфигураций сторонних систем не представляется возможным, поэтому данные инструкции могут не подойти для вашего случая.</p>
+<p>Для корректной настройки конфигурации контроллера домена, экземпляра ПО и компьютеров конечных пользователей следует обратиться за консультацией в службу поддержки <strong>Comindware</strong> по адресу:</p>
+<p><a class="mkdocs_imported_link" href="https://www.comindware.ru/company/contact-us/#tab_support">https://www.comindware.ru/company/contact-us/#tab_support</a></p>
+</div>
+<h2 id="введение">Введение</h2>
+<p>Здесь представлены инструкции по настройке контроллера домена и экземпляра ПО <strong>Comindware Business Application Platform</strong> для аутентификации пользователей через Active Directory. Инструкции приведены для контроллера домена под управлением ОС Windows и экземпляра ПО под управлением ОС Linux.</p>
+<h2 id="определения">Определения</h2>
+<ul>
+<li><strong>Контроллер домена</strong> — машина с развёрнутыми доменными службами Active Directory.</li>
+<li><strong>Домен Active Directory</strong> — группа объектов в сети.</li>
+</ul>
+<h2 id="примеры-значений-параметров">Примеры значений параметров</h2>
+<p>Здесь примеры значений параметров заключены в угловые скобки <code>&lt; &gt;</code>. При настройке конфигурации заменяйте их на фактические значения, как показано в следующей таблице.</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Пример параметра</th>
+<th>Пример фактического значения</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;DCName&gt;</code></td>
+<td><code>DC</code></td>
+</tr>
+<tr>
+<td><code>&lt;DCName&gt;.&lt;domain.name&gt;</code></td>
+<td><code>DC.example.com</code></td>
+</tr>
+<tr>
+<td><code>HTTP/&lt;DCName&gt;.&lt;domain.name&gt;@&lt;DOMAIN.NAME&gt;</code></td>
+<td><code>HTTP/DC.example.com@EXAMPLE.COM</code></td>
+</tr>
+<tr>
+<td><code>&lt;linuxHost&gt;</code></td>
+<td><code>server-host-name</code></td>
+</tr>
+<tr>
+<td><code>&lt;domain.controller.ip.address&gt;</code></td>
+<td><code>192.168.0.254</code></td>
+</tr>
+</tbody>
+</table>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Протокол аутентификации Kerberos учитывает регистр символов — там, где в инструкциях даны примеры параметров в верхнем регистре, следует подставлять фактические значения также в верхнем регистре.</p>
+</div>
+<h2 id="конфигурация-машины-linuxhost-с-экземпляром-по-comindware-business-application-platform">Конфигурация машины linuxHost с экземпляром ПО Comindware Business Application Platform</h2>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Операционная система</td>
+<td>Linux</td>
+</tr>
+<tr>
+<td>Имя хоста</td>
+<td><code>&lt;linuxHost&gt;</code></td>
+</tr>
+<tr>
+<td>IP-адрес хоста</td>
+<td><code>&lt;linux.host.ip.address&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="ad_authentication_configure_dc_instance">Конфигурация машины DCName с контроллером домена</h2>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Операционная система</td>
+<td>Windows Server 2016</td>
+</tr>
+<tr>
+<td>Имя хоста</td>
+<td><code>&lt;DCName&gt;</code></td>
+</tr>
+<tr>
+<td>FQDN контроллера домена</td>
+<td><code>&lt;DCName&gt;.&lt;domain.name&gt;</code></td>
+</tr>
+<tr>
+<td>Доменное имя</td>
+<td><code>&lt;domain.name&gt;</code></td>
+</tr>
+<tr>
+<td>IP-адрес контроллера домена</td>
+<td><code>&lt;domain.controller.ip.address&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="настройка-машины-linuxhost-с-экземпляром-по-для-astra-linux-и-ubuntu">Настройка машины linuxHost с экземпляром ПО для Astra Linux и Ubuntu</h2>
+<h3 id="настройка-конфигурации-kerberos">Настройка конфигурации Kerberos</h3>
+<ol class="colored_numbers_list">
+<li>
+<p>Установите пакеты <code>krb5-user</code>, <code>krb5-config</code> и зависимости для них:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>apt install krb5-user krb5-config</code></pre>
+</div>
+</li>
+<li>
+<p>Откройте файл конфигурации Kerberos для редактирования:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>vim /etc/krb5.conf</code></pre>
+</div>
+</li>
+<li>
+<p>Отредактируйте файл <code>krb5.conf</code> согласно следующему примеру:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="c1">#astra-winbind</span></code><br/><code><span class="o">[</span>libdefaults<span class="o">]</span></code><br/><code>    <span class="nv">default_realm</span> <span class="o">=</span> &lt;DOMAIN.NAME&gt;</code><br/><code>    <span class="nv">kdc_timesync</span> <span class="o">=</span> <span class="m">1</span></code><br/><code>    <span class="nv">ccache_type</span> <span class="o">=</span> <span class="m">2</span></code><br/><code>    <span class="nv">forwardable</span> <span class="o">=</span> <span class="nb">true</span></code><br/><code>    <span class="nv">proxiable</span> <span class="o">=</span> <span class="nb">true</span></code><br/><code>    fcc-mit-ticketflags <span class="o">=</span> <span class="nb">true</span></code><br/><code>    <span class="nv">dns_lookup_realm</span> <span class="o">=</span> <span class="nb">false</span></code><br/><code><span class="w">    </span><span class="nv">default_ccache_name</span> <span class="o">=</span> DIR:/tmp</code><br/><code><span class="o">[</span>realms<span class="o">]</span></code><br/><code>    &lt;DOMAIN.NAME&gt; <span class="o">=</span> <span class="o">{</span></code><br/><code>        <span class="nv">kdc</span> <span class="o">=</span> &lt;DCName&gt;.&lt;domain.name&gt;</code><br/><code>        <span class="nv">admin_server</span> <span class="o">=</span> &lt;DCName&gt;.&lt;domain.name&gt;</code><br/><code>        <span class="nv">default_domain</span> <span class="o">=</span> &lt;domain.name&gt;</code><br/><code>    <span class="o">}</span></code><br/><code><span class="o">[</span>domain_realm<span class="o">]</span></code><br/><code>    .&lt;domain.name&gt; <span class="o">=</span> &lt;DOMAIN.NAME&gt;</code><br/><code>    &lt;domain.name&gt; <span class="o">=</span> &lt;DOMAIN.NAME&gt;</code><br/><code><span class="o">[</span>login<span class="o">]</span></code><br/><code>    <span class="nv">krb4_convert</span> <span class="o">=</span> <span class="nb">false</span></code><br/><code>    <span class="nv">krb4_get_tickets</span> <span class="o">=</span> <span class="nb">false</span></code></pre>
+</div>
+</li>
+</ol>
+<h3 id="настройка-конфигурации-экземпляра-по">Настройка конфигурации экземпляра ПО</h3>
+<ol class="colored_numbers_list">
+<li>Войдите в экземпляр ПО с помощью браузера.</li>
+<li>Настройте <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2206">подключение к серверу каталогов</a>, которое будет использоваться для синхронизации аккаунтов.</li>
+<li>
+<p>На вкладке «<strong>Основные</strong>»:</p>
+<ul>
+<li>установите флажок «<strong>Использовать по умолчанию</strong>»;</li>
+<li>в поле «<strong>Аутентификация пользователей</strong>» — выберите протокол проверки подлинности <strong>Kerberos</strong>.</li>
+</ul>
+</li>
+<li>
+<p>Остальные параметры настройте согласно конфигурации сервера каталогов.</p>
+</li>
+<li>Сохраните свойства подключения.</li>
+<li>
+<p>Перезапустите экземпляр ПО:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>systemctl restart comindware&lt;instance_name&gt;</code></pre>
+</div>
+<p>Здесь <code>&lt;instance_name&gt;</code> — имя экземпляра ПО.</p>
+</li>
+</ol>
+<h3 id="проверка-вывода-трассировщика-ошибок-в-shell">Проверка вывода трассировщика ошибок в Shell</h3>
+<ol class="colored_numbers_list">
+<li>
+<p>Выполните команду, чтобы проверить работоспособность Kerberos:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="nv">KRB5_TRACE</span><span class="o">=</span>/dev/stdout kinit &lt;username&gt;</code></pre>
+</div>
+<p>Здесь <code>&lt;username&gt;</code> — любой пользователь домена, для которого известен пароль.</p>
+</li>
+</ol>
+<h2 id="настройка-машины-linuxhost-с-экземпляром-по-для-rocky-linux">Настройка машины linuxHost с экземпляром ПО для Rocky Linux</h2>
+<h3 id="настройка-конфигурации-kerberos_1">Настройка конфигурации Kerberos</h3>
+<ol class="colored_numbers_list">
+<li>
+<p>Установите пакеты <code>krb5-user</code>, <code>krb5-config</code> и зависимости для них:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>yum install krb5-workstation</code></pre>
+</div>
+</li>
+<li>
+<p>Откройте файла конфигурации Kerberos для редактирования:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>vim /etc/krb5.conf</code></pre>
+</div>
+</li>
+<li>
+<p>Отредактируйте файл <code>krb5.conf</code> согласно следующему примеру:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">[</span>libdefaults<span class="o">]</span></code><br/><code>    <span class="nv">default_realm</span> <span class="o">=</span> &lt;DOMAIN.NAME&gt;</code><br/><code>    <span class="nv">kdc_timesync</span> <span class="o">=</span> <span class="m">1</span></code><br/><code>    <span class="nv">ccache_type</span> <span class="o">=</span> <span class="m">2</span></code><br/><code>    <span class="nv">forwardable</span> <span class="o">=</span> <span class="nb">true</span></code><br/><code>    <span class="nv">proxiable</span> <span class="o">=</span> <span class="nb">true</span></code><br/><code>    fcc-mit-ticketflags <span class="o">=</span> <span class="nb">true</span></code><br/><code>    <span class="nv">dns_lookup_realm</span> <span class="o">=</span> <span class="nb">false</span></code><br/><code><span class="o">[</span>realms<span class="o">]</span></code><br/><code>    &lt;DOMAIN.NAME&gt; <span class="o">=</span> <span class="o">{</span></code><br/><code>        <span class="nv">kdc</span> <span class="o">=</span> &lt;DCName&gt;.&lt;domain.name&gt;</code><br/><code>        <span class="nv">admin_server</span> <span class="o">=</span> &lt;DCName&gt;.&lt;domain.name&gt;</code><br/><code>        <span class="nv">default_domain</span> <span class="o">=</span> &lt;domain.name&gt;</code><br/><code>    <span class="o">}</span></code><br/><code><span class="o">[</span>domain_realm<span class="o">]</span></code><br/><code>    .&lt;domain.name&gt; <span class="o">=</span> &lt;DOMAIN.NAME&gt;</code><br/><code>    &lt;domain.name&gt; <span class="o">=</span> &lt;DOMAIN.NAME&gt;</code><br/><code><span class="o">[</span>login<span class="o">]</span></code><br/><code>    <span class="nv">krb4_convert</span> <span class="o">=</span> <span class="nb">false</span></code><br/><code>    <span class="nv">krb4_get_tickets</span> <span class="o">=</span> <span class="nb">false</span></code></pre>
+</div>
+</li>
+<li>
+<p>Откройте файл конфигурации <code>kcm_default_ccache</code> для редактирования:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>vim /etc/krb5.conf.d/kcm_default_ccache</code></pre>
+</div>
+</li>
+<li>
+<p>Отредактируйте файл <code>kcm_default_ccache</code> согласно следующему примеру:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">[</span>libdefaults<span class="o">]</span></code><br/><code><span class="nv">default_ccache_name</span> <span class="o">=</span> DIR:/tmp</code></pre>
+</div>
+</li>
+</ol>
+<h3 id="настройка-конфигурации-экземпляра-по_1">Настройка конфигурации экземпляра ПО</h3>
+<ol class="colored_numbers_list">
+<li>Войдите в экземпляр ПО с помощью браузера.</li>
+<li>Настройте <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2206">подключение к серверу каталогов</a>, которое будет использоваться для синхронизации аккаунтов.</li>
+<li>
+<p>На вкладке «<strong>Основные</strong>»:</p>
+<ul>
+<li>установите флажок «<strong>Использовать по умолчанию</strong>»;</li>
+<li>в поле «<strong>Аутентификация пользователей</strong>» — выберите протокол проверки подлинности <strong>Kerberos</strong>.</li>
+</ul>
+</li>
+<li>
+<p>Остальные параметры настройте согласно конфигурации сервера каталогов.</p>
+</li>
+<li>Сохраните свойства подключения.</li>
+<li>
+<p>Перезапустите экземпляр ПО:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>systemctl restart comindware&lt;instance_name&gt;</code></pre>
+</div>
+</li>
+</ol>
+<h3 id="проверка-вывода-трассировщика-ошибок-в-shell_1">Проверка вывода трассировщика ошибок в Shell</h3>
+<ol class="colored_numbers_list">
+<li>
+<p>Выполните команду, чтобы проверить работоспособность Kerberos:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="nv">KRB5_TRACE</span><span class="o">=</span>/dev/stdout kinit &lt;username&gt;</code></pre>
+</div>
+<p>Здесь <code>&lt;username&gt;</code> — имя любого пользователя домена, для которого известен пароль.</p>
+</li>
+</ol>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2206">Сервер каталогов. Настройка подключения</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2308">Синхронизация с сервером каталогов (Active Directory)</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2583">Аутентификация через единый вход (SSO). Настройка контроллера домена, экземпляра ПО и компьютера конечного пользователя</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

@@ -1,0 +1,393 @@
+<h1>Урок 3. Мой первый бизнес-процесс</h1><div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1hv703ne10">Введение</a></li>
+<li><a href="#l31">Создание шаблона процесса</a></li>
+<li><a href="#l32">Диаграмма бизнес-процесса</a></li>
+<li><a href="#mcetoc_1gbl97spq2">Построение диаграммы бизнес-процесса</a></li>
+<li><a href="#l33"> Настройка форм пользовательских задач </a></li>
+<li><a href="#l34"> Настройка развилок </a></li>
+<li><a href="#l35"> Настройка исполнителей задач </a></li>
+<li><a href="#l36"> Проверка и публикация процесса </a></li>
+<li><a href="#l37">Тестирование: запуск бизнес-процесса и «Мои задачи»</a></li>
+<li><a href="#mcetoc_1gbl6ko7r0">Результаты</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1hv703ne10">Введение</h2>
+<p>Усовершенствуем приложение, созданное в предыдущем уроке, — создадим автоматизированный процесс заказа корпоративного автотранспорта: <em>Заказчик</em> создает заявку, <em>Секретарь</em> согласовывает заявку, после чего одобренная заявка переходит к <em>сотруднику Гаража</em>, который принимает заявку и, в зависимости от наличия автомобилей в гараже, либо выполняет рейс, либо отказывает в заявке.</p>
+<p><strong>Предусловия:</strong></p>
+<ul>
+<li>Пройден <samp data-name="aid" data-title="" data-value="2054"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2054}</span></samp>:
+<ul>
+<li>создан реестр данных (<strong>шаблон записи</strong>) <em>«Заявка на автомобиль»</em>;</li>
+<li>создана экранная форма.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Расчетная продолжительность:</strong> 20 мин.</p>
+<p style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; font-size: 15px; font-weight: 300; letter-spacing: 0.2px; line-height: 25px; color: #545764; font-family: 'Open Sans', sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"><strong>Примечание:</strong> в данном уроке представлен продукт <strong>Comindware Business Application Platform</strong> версии <span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">4.2.219.0</span>, внешний вид страниц и меню в других версиях продукта может отличаться.</p>
+<div class="notice notice-success">
+<p><strong>Определение</strong></p>
+<ul>
+<li><span style="letter-spacing: 0.2px; font-weight: 700 !important;">Исполняемый бизнес-процесс</span><span style="letter-spacing: 0.2px;"> — это процесс, автоматизированный с помощью специализированного программного обеспечения — процессного «движка» или системы управления бизнес-процессами (BPMS), например, <strong>Comindware Business Application Platform</strong>.</span></li>
+<li><span style="letter-spacing: 0.2px;">Исполняемый бизнес-процесс определяет кто, что и в какой последовательности должен сделать, а также обеспечивает мгновенную передачу дела между подразделениями. Таким образом, система берет на себя контроль за всем процессом от заявки до закрытия «дела». Процессы в <strong>Comindware Business Application Platform</strong> могут взаимодействовать друг с другом, а также с внешними ресурсами, такими как серверы электронной почты и веб-сервисы. Исполняемый бизнес-процесс служит заменой электронной почты и Excel, позволяет упростить и автоматизировать документооборот, а также автоматически формировать документы по шаблонам.</span></li>
+<li><span style="letter-spacing: 0.2px;">Исполняемый бизнес-процесс можно назвать «интерактивным регламентом». Традиционный регламент-документ предназначен для того, чтобы сотрудники периодически в него заглядывали, чтобы понять, что делать дальше. В случае исполняемого бизнес-процесса координацией занимается компьютер. Диаграмма (схема) бизнес-процесса в нотации BPMN загружается в BPMS, и система следует ей, раздавая задания людям и вызывая функции информационных систем.</span></li>
+<li><span style="letter-spacing: 0.2px;">Исполняемый процесс позволяет повысить эффективность работы:</span>
+<ul style="margin-bottom: 1rem; letter-spacing: 0.2px;">
+<li>дело передается от одного сотрудника другому мгновенно, безошибочно, вместе со всеми относящимися к нему данными;</li>
+<li>процесс гарантированно выполняется по утвержденной схеме, контролировать это не требуется;</li>
+<li>показатели процесса автоматически измеряются и выводятся на экран менеджера в наглядном виде. </li>
+</ul>
+</li>
+<li>Исполняемый бизнес-процесс имеет некоторое сходство с документооборотом, но это более совершенная форма автоматизации:
+<ul style="margin-bottom: 1rem; letter-spacing: 0.2px;">
+<li>информация здесь хранится не в документах Word или PDF, а в виде структурированных данных (числа, даты, текстовые данные);</li>
+<li>маршрут процесса можно прописать более точно, чем это позволяют системы документооборота.</li>
+</ul>
+</li>
+<li><span style="letter-spacing: 0.2px;">Настройка исполняемого бизнес-процесса в<strong> Comindware Business Application Platform</strong> выполняется с помощью шаблона процесса. </span></li>
+<li><span style="letter-spacing: 0.2px; font-weight: 700 !important;">Шаблон процесса</span><span style="letter-spacing: 0.2px;"> состоит из диаграммы (схемы), данных и других свойств, определяющих, как должны выполняться все процессы определенного вида. Каждый шаблон процесса имеет связанный с ним шаблон записи.</span></li>
+</ul>
+</div>
+<h2 id="l31">Создание шаблона процесса</h2>
+<p>Перейдем к созданию шаблона процесса…</p>
+<p><strong> 1. </strong> На панели навигации слева выберите пункты «<strong>Настройки</strong>» — «<strong>Шаблоны</strong>».</p>
+<p><strong> 2. </strong> Перейдите на вкладку «<strong>Шаблоны процессов</strong>».</p>
+<p><strong> 3. </strong> Нажмите кнопку «<strong>Создать</strong>».</p>
+<p><strong> 4. </strong> Введите название шаблона — <em>«Заказ автотранспорта»</em>.</p>
+<p><strong> 5. </strong> Укажите приложение — <em>«Управление автопарком».</em></p>
+<p><strong> 6. </strong> В поле «<strong>Связанный шаблон</strong>» выберите шаблон <em>«Заявка на автомобиль».</em></p>
+<p><strong> 7. </strong> Нажмите кнопку «<strong>Создать</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Создание шаблона бизнес-процесса" class="img-responsive" height="785" src="https://kb.comindware.ru/assets/img_624211d191c96.png" width="1077"/></p>
+<p class="caption" style="font-size: 11pt !important;">Создание шаблона бизнес-процесса</p>
+</div>
+<h2 id="l32">Диаграмма бизнес-процесса</h2>
+<div class="notice notice-info">
+<p><strong>Примечание</strong></p>
+При создании <strong>диаграммы </strong>(схемы) <strong>бизнес-процесса</strong> используется <strong>нотация BPMN 2.0</strong>.
+<div>Выбор BPMN объясняется достаточной простотой и понятностью для бизнеса, а однозначная интерпретация применяемых символов обеспечивает одинаковое понимание процесса бизнесом, аналитиком и ИТ-специалистами.</div>
+</div>
+<p>Перейдите на вкладку «<strong>Диаграмма</strong>». На этой вкладке отображается конструктор диаграммы бизнес-процесса.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Конструктор диаграммы бизнес-процесса" class="img-responsive" height="646" src="https://kb.comindware.ru/assets/img_6474b4fe24021.png" width="1266"/></p>
+<p class="caption" style="font-size: 11pt !important;">Конструктор диаграммы бизнес-процесса</p>
+</div>
+<div class="notice notice-success">
+<p><strong>Определение</strong></p>
+Конструктор диаграммы бизнес-процесса состоит из трех частей, показанных на иллюстрации.
+<div>(1) Панель элементов, которые можно добавить на схему: </div>
+● <strong>Действия</strong> — задачи и подпроцессы:
+<ul style="list-style-type: circle;">
+<li><strong>задачи</strong> — <strong>пользовательские</strong> (ввод данных участником процесса через экранную форму) и автоматические (выполнение сценария, вызов сервиса); </li>
+<li><strong>подпроцессы</strong> — <strong>вызов процесса</strong> и <strong>встроенный подпроцесс</strong>;</li>
+</ul>
+<p>● <strong>События</strong> — <strong>начальное, промежуточное и конечное</strong>; <br/><span style="letter-spacing: 0.2px;"> ● <strong>Развилки </strong>— «<strong>или/или</strong>», «<strong>и</strong>» (параллельная); <br/>● <strong>Общие элементы</strong> — <strong>дорожка</strong>, <strong>поток управления</strong>, <strong>комментарий</strong>.</span></p>
+<p>(2) <strong>Диаграмма</strong> (графическая схема) бизнес-процесса.</p>
+<div>(3) Кнопки: <strong>Выбрать версию</strong>, <strong>Очистить</strong>, <strong>Восстановить</strong>, <strong>Опубликовать</strong>, <strong>Проверить</strong>, <strong>Экспортировать</strong>. </div>
+</div>
+<h2 id="mcetoc_1gbl97spq2">Построение диаграммы бизнес-процесса</h2>
+<p>Перетащите элементы с левой панели на диаграмму.</p>
+<p>Для начала добавим дорожки…</p>
+<p><strong> 1. </strong> Перетащите три дорожки на схему процесса. Элемент «<strong>Дорожка</strong>» расположен в группе «<strong>Общие элементы</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Перетаскивание дорожек на диаграмму бизнес-процесса" class="img-responsive" height="719" src="https://kb.comindware.ru/assets/img_6474b5d703bee.png" width="1266"/></p>
+<p class="caption" style="font-size: 11pt !important;">Перетаскивание дорожек на диаграмму бизнес-процесса</p>
+</div>
+<p><strong> 2. </strong> Присвойте дорожкам названия: <em>Заказчик, Секретарь, Гараж.</em></p>
+<p><strong>3.</strong> Для переименования дорожки выберите дорожку и в раскрывающемся меню элемента нажмите кнопку «<strong>Свойства</strong>» <em class="fal fa-gear">‌</em>.</p>
+<div class="screenshot_with_caption">
+<p><img alt=" Переименование дорожек" class="img-responsive" height="719" src="https://kb.comindware.ru/assets/img_6474b60ff00c9.png" width="1266"/></p>
+<p> Переименование дорожек</p>
+<p style="text-align: left;"><strong>4.</strong> В отобразившемся окне «<strong>Свойства дорожки</strong>» введите новое название и нажмите кнопку «<strong>Сохранить</strong>».</p>
+<p><img alt="Свойства дорожки" class="img-responsive" height="423" src="https://kb.comindware.ru/assets/img_630cf6afe2115.png" width="1264"/></p>
+<p class="caption" style="font-size: 11pt !important;">Свойства дорожки</p>
+</div>
+<div class="notice notice-success">
+<p><strong>Определение</strong></p>
+<strong>Дорожка</strong> используется для визуального представления участников процесса. Дорожки могут настраиваться произвольным образом по усмотрению проектировщика процесса, но чаще всего это либо подразделение, либо должность, либо роль. Например, в нашем процессе <em>Заказчик</em> — это роль (заказчик может быть из любого подразделения), <em>Гараж</em> — подразделение, <em>Секретарь</em> — должность. </div>
+<p><strong>5. </strong> Удалите конечное событие. Для этого выберите его и в меню элемента нажмите кнопку «<strong>Удалить</strong>» <em class="fa-light fa-trash-can">‌</em>.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Удаление элементов диаграммы" class="img-responsive" height="477" src="https://kb.comindware.ru/assets/img_6474bb4fe8bcb.png" width="1266"/></p>
+<p class="caption" style="font-size: 11pt !important;">Удаление элементов диаграммы</p>
+</div>
+<p><em><strong>6. </strong> Перетащите элемент «<strong>Пользовательская задача</strong>» из раздела «<strong>Действия</strong>» с левой панели на дорожку «Секретарь».</em></p>
+<div class="notice notice-success">
+<p><strong>Определение</strong></p>
+<strong>Пользовательская задача</strong> представляет собой задачу, выполняемую человеком. При переходе процесса на этот шаг задача автоматически назначается исполнителю или становится доступной для нескольких исполнителей. </div>
+<p><strong>7. </strong> Укажите название задачи — <em>«Согласовать заявку»</em>. Для этого дважды щелкните имя задачи.</p>
+<p><strong> 8. </strong> Присоедините поток управления от начального события к пользовательской задаче <em>«Согласовать заявку».</em></p>
+<p><strong> 9. </strong> Перетащите элемент «<strong>Развилка </strong>«<strong>или/или</strong>» на диаграмму и соедините его с задачей <em>«Согласовать заявку».</em></p>
+<p><strong>10. </strong>Присоедините к развилке два потока управления.</p>
+<p><strong> 11. </strong> Присвойте развилке название — <em>«Одобрена?»</em>. Для этого дважды щелкните развилку и введите ее название или нажмите кнопку «<strong>Свойства</strong>» <em class="fal fa-gear">‌ </em>в меню элемента.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Диаграмма бизнес-процесса — развилка «или/или»" class="img-responsive" height="710" src="https://kb.comindware.ru/assets/img_6474bc1892f2b.png" width="1266"/></p>
+<p class="caption" style="font-size: 11pt !important;">Диаграмма бизнес-процесса — развилка «или/или»</p>
+</div>
+<div class="notice notice-success">
+<p><strong>Определение</strong></p>
+<strong>Развилка «или/или»</strong> используется для описания альтернативных потоков процесса, когда может быть выбран только один из путей. <br/>Для каждого потока, выходящего из развилки, (для каждой стрелки) указывается условие (логическое выражение), определяющее, когда по нему пойдет процесс. <br/>Кроме того, можно выбрать поток «<strong>иначе</strong>» (по умолчанию), по которому процесс пойдет в том случае, если ни одно из условий на стрелках не выполнено. </div>
+<p>Если <em>Секретарь</em> отказал в заявке, то <em>Заказчик</em> получает уведомление об этом, после чего процесс завершится. Если заявка одобрена <em>Секретарем</em>, то дальше её согласовывает <em>сотрудник Гаража</em>.</p>
+<p><strong>Покажем это на схеме...</strong></p>
+<p><strong>12. </strong> От развилки «Одобрена?» добавьте две пользовательских задачи: <em>«Вам отказано»</em> на дорожку <em>«Заказчик»</em> и <em>«Принять заявку»</em> на дорожку <em>«Гараж»</em>.</p>
+<p><strong>13. </strong> Выберите развилку и в меню элемента нажмите кнопку «<strong>Свойства</strong>» <em class="fal fa-gear">‌</em>. Отобразится окно «<strong>Свойства развилки </strong>«<strong>или/или</strong>».</p>
+<p><strong> 1</strong><strong>4. </strong>На вкладке «<strong>Дополнительные</strong>» укажите названия исходящих потоков — <em>«Да»</em> и <em>«Нет»</em>, дважды щелкнув соответствующие поля. Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Дополнительные свойства развилки" class="img-responsive" height="392" src="https://kb.comindware.ru/assets/img_62421ddb915ae.png" width="1077"/></p>
+<p class="caption" style="font-size: 11pt !important;">Дополнительные свойства развилки</p>
+</div>
+<p><strong>15. </strong> От задачи <em>«Вам отказано»</em> добавьте конечное событие.</p>
+<p><strong> 16. </strong> Введите название конечного события — <em>«Отказ»</em>.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Диаграмма бизнес-процесса с задачами «Согласовать заявку», «Принять заявку», «Вам отказано» и конечным событием «Отказ»" class="img-responsive" height="787" src="https://kb.comindware.ru/assets/img_630cfa4f951d0.png" width="1264"/></p>
+<p class="caption" style="font-size: 11pt !important;">Диаграмма бизнес-процесса с задачами «Согласовать заявку», «Принять заявку», «Вам отказано» и конечным событием «Отказ»</p>
+</div>
+<div class="notice notice-success">
+<p><strong>Определение</strong></p>
+<strong>События в BPMN</strong> можно трактовать как статусы процесса — старт, промежуточные вехи, варианты завершения. Начальное событие у процесса, как правило, один, а конечных событий несколько — процесс может завершиться как успехом, так и неудачей. </div>
+<p>После принятия заявки сотрудник <em>Гаража</em> проверяет наличие автомобиля для выполнения заявки — при отсутствии автомобиля заявка возвратится <em>Секретарю</em>.</p>
+<p><strong> 17. </strong> От задачи <em>«Принять заявку»</em> добавьте элемент «<strong>Развилка </strong>«<strong>или/или</strong>».</p>
+<p><strong> 18. </strong> Добавьте соединительную линию от развилки к задаче <em>«Согласовать заявку».</em></p>
+<p><strong> 19. </strong> Укажите имя развилки — <em>«Есть машина?».</em></p>
+<div class="screenshot_with_caption">
+<p><img alt="Развилка «Есть машина?»" class="img-responsive" height="787" src="https://kb.comindware.ru/assets/img_630cfacf012e3.png" width="1264"/></p>
+<p class="caption" style="font-size: 11pt !important;">Развилка «Есть машина?»</p>
+</div>
+<p>При наличии машины <em>Заказчик</em> получит уведомление <em>«Машина выделена»</em>, а <em>сотрудники Гаража</em> приступят к выполнению рейса.</p>
+<p><strong> 20. </strong> Добавьте элемент «<strong>Развилка </strong>«<strong>и</strong>» от развилки <em>«Есть машина?»</em>.</p>
+<div class="notice notice-success">
+<p><strong>Определение</strong></p>
+<strong>Развилка «и»</strong> (параллельная) используется для разделения потока на несколько путей, которые будут выполняться одновременно. </div>
+<p><strong> 21. </strong> От <em><strong>развилки «и»</strong></em> добавьте две пользовательских задачи: для <em>Заказчика</em> — <em>«Машина выделена»</em> и для сотрудника <em>Гаража</em> — <em>«Выполнить рейс»</em>.</p>
+<p><strong> 22. </strong> Укажите названия для исходящих потоков от развилки <em>«Есть машина?» — «Да»</em> и <em>«Нет»</em>.</p>
+<p><strong> 23. </strong> Добавьте еще одну <strong>развилку «и» </strong>и соедините с ней задачи <em>«Машина выделена»</em> и <em>«Выполнить рейс»</em>.</p>
+<p><strong> 24. </strong> Добавьте конечное событие и назовите его <em>«Успех».</em></p>
+<p>В итоге должна получиться следующая диаграмма:</p>
+<div class="screenshot_with_caption">
+<p><img alt="Диаграмма бизнес-процесса заказа автотранспорта" class="img-responsive" height="787" src="https://kb.comindware.ru/assets/img_630cf4c1ba376.png" width="1264"/></p>
+<p class="caption" style="font-size: 11pt !important;">Диаграмма бизнес-процесса заказа автотранспорта</p>
+</div>
+<div class="notice notice-info">
+<p><strong>Примечание</strong></p>
+<p>Чтобы закрепить пройденный материал, опишем диаграмму бизнес-процесса словами.</p>
+<div>1. <em>Заказчик</em> создает заявку.</div>
+<p>2. <em>Секретарь</em> согласовывает заявку:</p>
+<div style="padding-left: 30px;">a) если <em>Секретарь</em> одобрил заявку, то выполняется шаг 4;</div>
+<p style="padding-left: 30px;">b) если <em>Секретарь</em> отклонил заявку, то выполняется шаг 3.</p>
+<div>3. Заказчик получает уведомление о том, что ему отказано в заявке. Процесс заказа автотранспорта завершается отказом.</div>
+<p>4. Сотрудник <em>Гаража</em> принимает заявку:</p>
+<div style="padding-left: 30px;">a) в случае наличия машины он передает заявку на выполнение <em>Водителю</em> — выполняется шаг 5;</div>
+<p style="padding-left: 30px;">b) в случае отсутствия машины заявка возвращается <em>Секретарю</em> — на шаг 2.</p>
+<div>5. <em>Заказчик</em> получает уведомление о том, что машина выделена, а <em>Водитель</em> приступает к выполнению рейса.</div>
+<p>6. Процесс завершается успехом. </p>
+</div>
+<h2 id="l33"><strong> Настройка форм пользовательских задач </strong></h2>
+<p>Для начала нам настроим стартовую форму, которая будет отображаться для <em>Заказчика</em> при запуске процесса.</p>
+<p><strong> 1. </strong> Выберите на диаграмме «<strong>Начальное событие</strong>» и в раскрывшемся меню элемента нажмите кнопку «<strong>Стартовая форма</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Настройка стартовой формы" class="img-responsive" height="414" src="https://kb.comindware.ru/assets/img_6242c88d61712.png" width="1071"/></p>
+<p class="caption" style="font-size: 11pt !important;">Настройка стартовой формы</p>
+</div>
+<p>Откроется конструктор стартовой формы. </p>
+<p>Для формы задачи используем созданную ранее форму для согласования заявки.</p>
+<p><strong> 2. </strong> Перетащите с панели элементов форму <em>«Заявка на автомобиль — Основная форма»</em> на макет формы. Нажмите кнопку «<strong>Сохранить</strong>». Вернитесь к диаграмме процесса, нажав кнопку «<strong>Назад</strong>» в браузере.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Настройка и сохранение стартовой формы" class="img-responsive" height="646" src="https://kb.comindware.ru/assets/img_6242c79bcc30c.png" width="1071"/></p>
+<p class="caption" style="font-size: 15px !important;">Настройка и сохранение стартовой формы</p>
+</div>
+<p>Теперь настроим форму пользовательской задачи, которая будет отображаться исполнителю — <em>Секретарю</em>.</p>
+<p><strong> 3. </strong> Выберите задачу <em>«Согласовать заявку»</em> и в меню элемента нажмите кнопку «<strong>Форма</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Настройка формы задачи" class="img-responsive" height="787" src="https://kb.comindware.ru/assets/img_630dd9be8f57a.png" width="1264"/></p>
+<p class="caption" style="font-size: 11pt !important;">Настройка формы задачи</p>
+</div>
+<p>Отобразится конструктор формы задачи.</p>
+<p><strong> 4. </strong> Разверните элемент <em>«Заявка на автомобиль»</em> на панели элементов слева и перетащите форму <em>«Заявка на автомобиль — Основная форма»</em> на макет формы.</p>
+<p>Поля формы заявки должны быть недоступны для редактирования, поэтому изменим режим доступа к ним.</p>
+<p><strong> 5. </strong> Выберите добавленную форму заявки и на панели свойств укажите режим <strong>доступа </strong>«<strong>Только чтение</strong>».</p>
+<p><strong> 6. </strong> Перетащите на макет формы под форму заявки на автомобиль элемент «<strong>Область</strong>» и присвойте ей название <em>«Одобрение»</em> с помощью панели свойств.</p>
+<p><strong>7.</strong> Перетащите в область <em>«Одобрение»</em> атрибут <em>«Одобрено»</em> из панели элементов.</p>
+<p><strong> 8. </strong> Сохраните форму и вернитесь к схеме процесса, нажав кнопку «<strong>Назад</strong>» в браузере.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Создание формы для задачи «Согласование заявки»" class="img-responsive" height="869" src="https://kb.comindware.ru/assets/img_6242ca5762591.png" width="1071"/></p>
+<p class="caption" style="font-size: 11pt !important;">Создание формы для задачи «Согласование заявки»</p>
+</div>
+<p><strong>Перейдем к настройке формы задачи, которую будет выполнять сотрудник гаража...</strong></p>
+<p><strong> 1. </strong> Выберите задачу <em>«Принять заявку»</em> на диаграмме процесса и в меню элемента нажмите кнопку «<strong>Форма</strong>». Отобразится конструктор формы.</p>
+<p><strong> 2. </strong> Перетащите форму <em>«Заявка на автомобиль — Основная форма» </em>на макет формы.</p>
+<p><strong> 3. </strong> Укажите для дочерней формы режим <strong>доступа</strong> « <strong>Только чтение</strong>», чтобы сотрудник гаража не мог редактировать заявку.</p>
+<div class="notice notice-info">
+<p><strong>Примечание</strong></p>
+Вы можете добавлять атрибуты «на лету», например во время создания экранной формы.</div>
+<p>Сотрудник <em>Гаража</em> должен принять или отклонить заявку в зависимости от наличия автомобилей в гараже. Поэтому добавим соответствующий атрибут.</p>
+<p><strong> 4. </strong> Нажмите кнопку «<strong>Добавить атрибут</strong>» <em class="fa-light fa-plus">‌</em> рядом с пунктом <em>«Заявка на автомобиль».</em></p>
+<div class="screenshot_with_caption">
+<p><img alt="Добавление атрибута на лету" class="img-responsive" height="151" src="https://kb.comindware.ru/assets/img_6242cf399e118.png" width="1071"/></p>
+<p class="caption" style="font-size: 11pt !important;">Добавление атрибута на лету</p>
+</div>
+<p><strong> 5. </strong> В отобразившемся окне свойств атрибута выберите <strong>тип данных</strong> «<strong>Логический</strong>» и укажите название <em>«Принято»</em>.</p>
+<p><strong> 6. </strong> Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Создание и сохранение нового логического атрибута" class="img-responsive" height="437" src="https://kb.comindware.ru/assets/img_6242d05396bea.png" width="1071"/></p>
+<p class="caption" style="font-size: 11pt !important;">Создание и сохранение нового логического атрибута</p>
+</div>
+<p><strong> 7. </strong> Перетащите на макет формы элемент «<strong>Область</strong>» и переименуйте её в<em> «Принятие заявки»</em> с помощью панели свойств.</p>
+<p><strong> 8. </strong> Перетащите созданный атрибут <em>«Принято»</em> на область <em>«Принятие заявки».</em></p>
+<p><strong> 9. </strong> Выберите поле <em>«Принято»</em> и на панели свойств укажите способ отображения: «<strong>Отображать как</strong>» — «<strong>Переключатель</strong>».</p>
+<p><strong> 10. </strong> Нажмите кнопку «<strong>Сохранить</strong>» и вернитесь к схеме процесса с помощью кнопки «<strong>Назад</strong>» браузера.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Добавление на форму логического элемента и настройка способа его отображения" class="img-responsive" height="875" src="https://kb.comindware.ru/assets/img_6242ea7cef096.png" width="1071"/></p>
+<p class="caption" style="font-size: 11pt !important;">Добавление на форму логического элемента и настройка способа его отображения</p>
+</div>
+<p>Если заявка не была одобрена, <em>Заказчик</em> должен быть проинформирован об этом, поэтому форма пользовательской задачи в этом случае содержит только текст <em>«Вам отказано»</em> и данные заявки.</p>
+<p><strong> 1. </strong> Выберите на диаграмме процесса задачу<em> «Вам отказано»</em> и в меню элемента нажмите кнопку «<strong>Форма</strong>». Отобразится конструктор формы.</p>
+<p><strong> 2. </strong>Перетащите на макет формы новую <strong>область</strong> и переименуйте её в «Вам отказано» с помощью панели свойств.</p>
+<p><strong> 3. </strong>На левой панели разверните элемент <em>«Заявка на автомобиль»</em> и перетащите форму <em>«Заявка на автомобиль — Основная форма»</em> под область <em>«Вам отказано».</em></p>
+<p><strong> 4. </strong> На панели свойств формы укажите режим <strong>доступа </strong>«<strong>Только чтение</strong>».</p>
+<p><strong> 5. </strong> Сохраните форму и вернитесь к диаграмме процесса.</p>
+<div class="screenshot_with_caption">
+<div class="screenshot_with_caption">
+<p><img alt=" Установка для формы режима доступа «Только чтение» " class="img-responsive" height="885" src="https://kb.comindware.ru/assets/img_6242eb4550d79.png" width="1079"/></p>
+<p class="caption" style="font-size: 11pt !important;"><em> Установка для формы режима доступа «Только чтение» </em></p>
+</div>
+</div>
+<p><strong> 6. </strong> Аналогичным образом настройте форму для задачи <em>«Машина выделена»</em> — добавьте на форму область <em>«Машина выделена»</em> и дочернюю форму <em>«Заявка на автомобиль — Основная форма»</em>. Установите для дочерней формы режим <strong>доступа </strong>«<strong>Только для чтения</strong>». Сохраните форму и вернитесь к диаграмме процесса.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Настройка формы задачи «Машина выделена»" class="img-responsive" height="780" src="https://kb.comindware.ru/assets/img_6242eda939124.png" width="1079"/></p>
+<p class="caption" style="font-size: 11pt !important;">Настройка формы задачи «Машина выделена»</p>
+</div>
+<p><strong> 7. </strong> Настройте форму для задачи <em>«Выполнить рейс»</em> — добавьте на форму область <em>«Выполнить рейс»</em> и  и дочернюю форму <em>«Заявка на автомобиль — Основная форма»</em>. Установите для дочерней формы режим <strong>доступа </strong>«<strong>Только для чтения</strong>». Сохраните форму и вернитесь к диаграмме процесса.</p>
+<p> </p>
+<h2 id="l34"><strong> Настройка развилок </strong></h2>
+<p>Перейдем к настройке потоков управления после развилок. На нашей диаграмме есть две развилки — <em>«Одобрена?»</em> и <em>«Есть машина?»</em>.</p>
+<p><strong> 1. </strong> Выберите развилку <em>«Одобрена» </em>и в меню элемента нажмите кнопку «<strong>Свойства</strong>» <em class="fal fa-gear">‌</em>. Откроется страница свойств развилки.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Переход к свойствам развилки" class="img-responsive" height="787" src="https://kb.comindware.ru/assets/img_630ddb236ffb9.png" width="1264"/></p>
+<p class="caption" style="font-size: 11pt !important;">Переход к свойствам развилки</p>
+</div>
+<p><strong> 2. </strong> На вкладке «<strong>Дополнительные</strong>» для потока к задаче <em>«Вам отказано»</em> установите флажок «<strong>Поток </strong>«<strong>иначе</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Выбор потока «иначе»" class="img-responsive" height="384" src="https://kb.comindware.ru/assets/img_630ddbdd6ba96.png" width="1264"/></p>
+<p class="caption" style="font-size: 11pt !important;"><em>Выбор потока «иначе»</em></p>
+</div>
+<div class="notice notice-success">
+<p><strong>Определение</strong></p>
+<strong>Поток управления</strong> «<strong>иначе</strong>» (по умолчанию) — это тот поток, по которому пойдет процесс в том случае, если условия на всех остальных потоках не выполняются (значение логического выражения — «ложь»). </div>
+<p>Поток, по которому пойдёт процесс после развилки <em>«Одобрена?»</em>, задаёт логический атрибут <em>«Одобрено»</em>, который <em>Секретарь</em> заполняет при согласовании заявки.</p>
+<p>Составим выражение для условия, при выполнении которого процесс пойдет дальше. Для этого нам потребуется системное имя атрибута <em>«Одобрено».</em></p>
+<p><strong> 3. </strong> На вкладке «<strong>Дополнительные</strong>»  нажмите ячейку «<strong>Условие</strong>» <span style="letter-spacing: 0.2px;">в строке потока к задаче <em>«Принять заявку»</em>. Отобразится компактный редактор выражения.</span></p>
+<div class="screenshot_with_caption">
+<p><img alt="Переход к настройке выражение для потока управления" class="img-responsive" height="313" src="https://kb.comindware.ru/assets/img_630ddd385695f.png" width="1264"/></p>
+<p>Переход к настройке выражение для потока управления</p>
+</div>
+<p>Так как атрибут <em>«Одобрено»</em> логического типа, то при составлении выражения необходимо обратиться к его системному имени…</p>
+<p><strong> 4. </strong> Введите символ <code>$</code> и в отобразившемся раскрывающемся списке дважды нажмите системное имя атрибута <em>«Одобрено»</em> — <code>Odobreno</code>.</p>
+<p><strong>5. </strong> Нажмите кнопку с зелёным флажком.</p>
+<p><strong>6. </strong> Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Ввод и сохранение выражения для доступа к атрибуту «Одобрено» в потоке управления" class="img-responsive" height="378" src="https://kb.comindware.ru/assets/img_6242f148ce947.png" width="1079"/></p>
+<p class="caption" style="font-size: 11pt !important;">Ввод и сохранение выражения для доступа к атрибуту «Одобрено» в потоке управления</p>
+</div>
+<div class="notice notice-info">
+<p><strong>Примечание</strong></p>
+Символ <code>$</code> используется, чтобы обратиться к тому или иному атрибуту текущего объекта. В данном случае мы сможем получить информацию о значении атрибута «Одобрено» — ложь или истина (true или false). </div>
+<p>Поток, по которому пойдёт процесс после развилки <em>«Есть машина?»</em>, задаёт логический атрибут <em>«Принято»</em>, который указывает сотрудник гаража.</p>
+<p><strong>1. </strong> Выберите развилку <em>«Есть машина?»</em> и в меню элемента нажмите кнопку «<strong>Свойства</strong>»<strong>.</strong></p>
+<p><strong>2. </strong> Перейдите на вкладку «<strong>Дополнительные</strong>».</p>
+<p><strong> 3. </strong> Введите для потока <em>«Да»</em> выражение с системным именем атрибута <em>«Принято»</em>. Нажмите кнопку с зелёным флажком.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Ввод и сохранение выражения для доступа к атрибуту «Принято» в потоке управления" class="img-responsive" height="380" src="https://kb.comindware.ru/assets/img_6242f3cfe1d9e.png" width="1079"/></p>
+<p class="caption" style="font-size: 11pt !important;">Ввод и сохранение выражения для доступа к атрибуту «Принято» в потоке управления</p>
+</div>
+<p><strong> 4. </strong>Установите для потока к задаче «Согласовать заявку» флажок «<strong>Поток </strong>«<strong>иначе</strong>».</p>
+<p><strong> 5. </strong> Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Выбор потока управления по умолчанию и сохранение свойств развилки" class="img-responsive" height="373" src="https://kb.comindware.ru/assets/img_6245cae9309b2.png" width="1073"/></p>
+<p class="caption" style="font-size: 11pt !important;">Выбор потока управления по умолчанию и сохранение свойств развилки</p>
+</div>
+<h2 id="l35"><strong> Настройка исполнителей задач </strong></h2>
+<p>Укажем исполнителей для пользовательских задач…</p>
+<p><strong> 1. </strong> Выберите пользовательскую задачу «Согласовать заявку» и в меню элемента нажмите кнопку «<strong>Свойства</strong>» ‌.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Переход к странице настройки свойств задачи" class="img-responsive" height="380" src="https://kb.comindware.ru/assets/img_6245ca5d8ec98.png" width="1079"/></p>
+<p class="caption" style="font-size: 11pt !important;">Переход к странице настройки свойств задачи</p>
+</div>
+<p><strong> 2. </strong> На вкладке «<strong>Дополнительные</strong>» выберите исполнителя в раскрывающемся списке «<strong>Исполнители</strong>».</p>
+<p><strong>3. </strong>Введите заголовок задачи <em>«Заказ автотранспорта — Согласовать заявку».</em></p>
+<div class="screenshot_with_caption">
+<p><img alt="Выбор исполнителя задачи" class="img-responsive" height="495" src="https://kb.comindware.ru/assets/img_624307517bd57.png" width="1077"/></p>
+<p class="caption" style="font-size: 11pt !important;">Выбор исполнителя задачи</p>
+</div>
+<p><strong> 4. </strong> Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<p>Аналогично укажите <strong>исполнителей</strong> и <strong>заголовки задач</strong>: <em>«Принять заявку», «Выполнить рейс»</em> (для упрощения на этапе отладки процесса укажем исполнителем этих задач одного и того же пользователя).</p>
+<p>Для задач <em>«Вам отказано»</em> и <em>«Машина выделена»</em> сделаем исполнителя вычисляемым — это должен быть пользователь, который инициировал процесс, то есть <em>Заказчик</em>.</p>
+<p><strong> 1. </strong> Выберите задачу <em>«Вам отказано»</em> и в меню элемента нажмите кнопку «<strong>Свойства</strong>» ‌. Отобразится окно «<strong>Свойства пользовательской задачи</strong>».</p>
+<p><strong> 2. </strong> На вкладке «<strong>Дополнительные</strong>» в поле «<strong>Исполнители</strong>» выберите пункт «<strong>Атрибут</strong>».</p>
+<p><strong> 3. </strong> Нажмите стрелку вниз в поле «<strong>Исполнители</strong>».</p>
+<p><strong> 4. </strong> Выберите атрибут «<strong>Создатель</strong>» (<code>_creator</code>).</p>
+<p><strong>5. </strong>Введите <strong>заголовок задачи</strong> <em>«Заказ автотранспорта — Вам отказано».</em></p>
+<p><strong>6. </strong> Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Назначение исполнителя задачи по атрибуту _creator " class="img-responsive" height="495" src="https://kb.comindware.ru/assets/img_6243086d0f8e3.png" width="1077"/></p>
+<p class="caption" style="font-size: 11pt !important;">Назначение исполнителя задачи по атрибуту <strong>_creator </strong></p>
+</div>
+<p>Мы использовали <strong>системный атрибут</strong> создателя шаблона процесса —  «<strong>Создатель</strong>» (<code>_creator</code>), чтобы указать в качестве исполнителя задачи пользователя, инициировавшего процесс.</p>
+<p><strong>7. </strong> Аналогичным образом задайте заголовок задачи и назначьте исполнителем инициатора процесса для задачи <em>«Машина выделена».</em></p>
+<h2 id="l36"><strong> Проверка и публикация процесса </strong></h2>
+<p>Мы настроили шаблон бизнес-процесса. Чтобы изменения вступили в силу, его необходимо опубликовать. Диаграммы бизнес-процессов рекомендуется публиковать каждый раз после внесения изменений.</p>
+<p>Перед публикацией следует проверить корректность диаграммы…</p>
+<p><strong>1. </strong> Нажмите кнопку «<strong>Проверить</strong>» в конструкторе диаграммы процесса.</p>
+<div class="notice notice-info">
+<p><strong>Примечание</strong></p>
+При возникновении ошибок элемент, в котором присутствует ошибка, подсвечивается красным цветом. Если диаграмма настроена правильно, то отобразится сообщение «<strong>Ошибок нет</strong>», после чего диаграмму можно публиковать. </div>
+<p><strong> 2. </strong> Нажмите кнопку «<strong>Опубликовать</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Проверка и публикация диаграммы " class="img-responsive" height="749" src="https://kb.comindware.ru/assets/img_6474bda89ce1d.png" width="1266"/></p>
+<p class="caption" style="font-size: 11pt !important;">Проверка и публикация диаграммы<strong> </strong></p>
+</div>
+<h2 id="l37">Тестирование: запуск бизнес-процесса и «Мои задачи»</h2>
+<p>Мы настроили и опубликовали бизнес-процесс, теперь можем перейти к его тестированию в роли пользователя.</p>
+<p><strong> 1. </strong> Перейдите на вкладку «<strong>Свойства</strong>» шаблона процесса.</p>
+<p><strong> 2. </strong> Нажмите кнопку «<strong>Перейти к экземплярам</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Переход к списку экземпляров бизнес-процесса" class="img-responsive" height="339" src="https://kb.comindware.ru/assets/img_62430417c72be.png" width="1077"/></p>
+<p class="caption" style="font-size: 11pt !important;">Переход к списку экземпляров бизнес-процесса</p>
+</div>
+<p><strong> 3. </strong> В отобразившемся списке «<strong>Все записи</strong>» нажмите кнопку «<strong>Создать</strong>». Отобразится стартовая форма процесса.</p>
+<p><strong> 4. </strong> Заполните форму и нажмите кнопку «<strong>Создать</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Создание новой заявки на автомобиль" class="img-responsive" height="387" src="https://kb.comindware.ru/assets/img_6243047d6c516.png" width="1077"/></p>
+<p class="caption" style="font-size: 11pt !important;">Создание новой заявки на автомобиль</p>
+</div>
+<p>Созданный бизнес-процесс отобразится в списке.</p>
+<p>Проверим наличие задачи «Согласовать заявку», в которой мы указали своего текущего пользователя исполнителем.</p>
+<p><strong>5. </strong> Перейдите в «<strong>Мои задачи</strong>» в панели навигации слева. </p>
+<div class="screenshot_with_caption">
+<p><img alt="Переход в раздел «Мои задачи» из списка процессов" class="img-responsive" height="361" src="https://kb.comindware.ru/assets/img_6243051dcd1ab.png" width="1077"/></p>
+<p class="caption" style="font-size: 11pt !important;">Переход в раздел «Мои задачи» из списка процессов</p>
+</div>
+<p>Отобразится список назначенных вам активных задач.</p>
+<p><strong>6. </strong> Откройте задачу из списка, дважды нажав ее в списке.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Список активных задач пользователя" class="img-responsive" height="361" src="https://kb.comindware.ru/assets/img_624305b30669d.png" width="1077"/></p>
+<p class="caption" style="font-size: 11pt !important;">Список активных задач пользователя</p>
+</div>
+<p>Отобразится форма согласования заявки на автомобиль.</p>
+<p><strong>7. </strong> Установите флажок<em> «Одобрено»</em> и нажмите кнопку «<strong>Завершить задачу</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Одобрение заявки на автомобиль и завершение задачи" class="img-responsive" height="433" src="https://kb.comindware.ru/assets/img_624309b31d192.png" width="1077"/></p>
+<p class="caption" style="font-size: 11pt !important;">Одобрение заявки на автомобиль и завершение задачи</p>
+</div>
+<p><strong>8. </strong> Перейдите в раздел «<strong>Мои задачи</strong>». В списке появится задача <em>«Заказ автотранспорта — Принять заявку».</em></p>
+<p><strong> 9. </strong> Для атрибута<em> «Принято»</em> укажите значение<em> «Нет»</em> и завершите задачу.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Отклонение заявки на автомобиль и ее возврат Секретарю" class="img-responsive" height="487" src="https://kb.comindware.ru/assets/img_6243067199fb0.png" width="1077"/></p>
+<p class="caption" style="font-size: 11pt !important;">Отклонение заявки на автомобиль и ее возврат Секретарю</p>
+</div>
+<p><strong> 10. </strong> Вернитесь к списку своих задач — в списке появится задача <em>«Заказ автотранспорта — Согласовать заявку»</em>.</p>
+<p><strong> 11. </strong> Откройте задачу и снимите флажок <em>«Одобрено»</em>.</p>
+<p><strong> 12. </strong> Завершите задачу.</p>
+<p><strong> 13. </strong> Перейдите в раздел «<strong>Мои задачи</strong>». В списке задач появится задача <em>«Заказ автотранспорта — Вам отказано»</em>. Завершите задачу. Бизнес-процесс будет завершен.</p>
+<h2 id="mcetoc_1gbl6ko7r0">Результаты</h2>
+<p>Поздравляем! Вы создали свой первый бизнес-процесс, настроили для него формы задач и протестировали запуск и исполнение задач процесса.</p>
+<p>В <a href="https://kb.comindware.ru/article.php?id=2057"> следующем уроке </a> вы узнаете, как отследить историю запущенного процесса, и настроите информационные страницы с диаграммами для просмотра статистики за период.</p>

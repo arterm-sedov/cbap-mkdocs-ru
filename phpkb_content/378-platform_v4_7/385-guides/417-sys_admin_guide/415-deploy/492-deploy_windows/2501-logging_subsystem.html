@@ -1,0 +1,468 @@
+<h1>Подсистема журналирования</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#описание-подсистемы-журналирования"> <span class="md-ellipsis"> Описание подсистемы журналирования </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#файловые-журналы"> <span class="md-ellipsis"> Файловые журналы </span> </a><nav aria-label="Файловые журналы" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#logging_engine_rules"> <span class="md-ellipsis"> Правила формирования и архивирования файлов журналов </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#типы-событий-в-журналах"> <span class="md-ellipsis"> Типы событий в журналах </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#logging_engine_audit_log"> <span class="md-ellipsis"> Журнал аудита </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#журнал-интеграции"> <span class="md-ellipsis"> Журнал интеграции </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#журнал-интеграции-с-сырыми-данными"> <span class="md-ellipsis"> Журнал интеграции с сырыми данными </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#журнал-исправности"> <span class="md-ellipsis"> Журнал исправности </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#журнал-обновления"> <span class="md-ellipsis"> Журнал обновления </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#журнал-ошибок"> <span class="md-ellipsis"> Журнал ошибок </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#журнал-процессов"> <span class="md-ellipsis"> Журнал процессов </span> </a><nav aria-label="Журнал процессов" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#рекомендации-по-чтению-журнала-процессов"> <span class="md-ellipsis"> Рекомендации по чтению журнала процессов </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#журнал-резервного-копирования"> <span class="md-ellipsis"> Журнал резервного копирования </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#журнал-сценариев"> <span class="md-ellipsis"> Журнал сценариев </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#системный-журнал"> <span class="md-ellipsis"> Системный журнал </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#журналы-адаптеров"> <span class="md-ellipsis"> Журналы адаптеров </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#перенаправление-сообщений-из-файлов-журналов-в-журнал-событий-windows"> <span class="md-ellipsis"> Перенаправление сообщений из файлов журналов в журнал событий Windows </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>Здесь представлено описание работы подсистемы журналирования ПО <strong>Comindware Business Application Platform</strong> для операционных систем Linux.</p>
+<h2 id="описание-подсистемы-журналирования">Описание подсистемы журналирования</h2>
+<p>Подсистема журналирования ПО использует библиотеку <em>NLog</em> (с открытым исходным кодом), которая записывает данные в файлы журналов.</p>
+<p>Полная документация по настройке <em>NLog</em> для журналирования в файлы представлена по адресу: <em><a class="mkdocs_imported_link" href="https://github.com/NLog/NLog/wiki/File-target">https://github.com/NLog/NLog/wiki/File-target</a></em></p>
+<p>ПО позволяет настроить уровень журналирования, правила формирования событий в журналах, место хранения журналов, порядок и набор параметров именования файлов журналов, а также ограничения по размеру и предельному количеству файлов журналов, с помощью конфигурационных файлов:</p>
+<ul>
+<li>Linux
+<ul>
+<li><code>/var/www/&lt;instanceName&gt;/logs.config</code> — конфигурация всех журналов экземпляра ПО, включая журналы встроенных адаптеров;</li>
+<li><code>/var/www/&lt;instanceName&gt;/data/Plugins/Agent/logs.config</code> — конфигурация журналов пользовательских адаптеров.</li>
+</ul>
+</li>
+<li>Windows
+<ul>
+<li><code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Config\logs.config</code> — конфигурация всех журналов экземпляра ПО, включая журналы встроенных адаптеров;</li>
+<li><code>C:\ProgramData\Comindware\Instances\&lt;instanceName&gt;\Config\data\Plugins\Agent\logs.config</code> — конфигурация журналов пользовательских адаптеров.</li>
+</ul>
+</li>
+</ul>
+<p>Здесь и далее <em><code>&lt;instanceName&gt;</code></em> — имя экземпляра ПО.</p>
+<p>Подробное описание структуры конфигурационного файла см. в документации <em>NLog</em> по адресу: <em><a class="mkdocs_imported_link" href="https://github.com/NLog/NLog/wiki/Tutorial">https://github.com/NLog/NLog/wiki/Tutorial</a></em></p>
+<p>По умолчанию файлы журналов хранятся на сервере с экземпляром ПО в следующей директории:</p>
+<ul>
+<li>Linux
+<ul>
+<li><code>/var/log/comindware/&lt;instanceName&gt;/Logs</code></li>
+</ul>
+</li>
+<li>Windows
+<ul>
+<li><code>C:\ProgramData\comindware\Instances\&lt;instanceName&gt;\Logs</code></li>
+</ul>
+</li>
+</ul>
+<p>Сведения о фактическом расположении файлов см. в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2502">Пути и содержимое папок экземпляра ПО</a>»</em>.</p>
+<h2 id="файловые-журналы">Файловые журналы</h2>
+<p>ПО поддерживает следующие файловые журналы:</p>
+<ul>
+<li><a class="mkdocs_imported_link" href="#журналы-адаптеров">Адаптеры</a></li>
+<li><a class="mkdocs_imported_link" href="#logging_engine_audit_log">Аудит</a></li>
+<li><a class="mkdocs_imported_link" href="#журнал-интеграции">Интеграция</a></li>
+<li><a class="mkdocs_imported_link" href="#журнал-интеграции-с-сырыми-данными">Интеграция — сырые данные</a></li>
+<li><a class="mkdocs_imported_link" href="#журнал-исправности">Исправность ПО</a></li>
+<li><a class="mkdocs_imported_link" href="#журнал-обновления">Обновление</a></li>
+<li><a class="mkdocs_imported_link" href="#журнал-ошибок">Ошибки</a></li>
+<li><a class="mkdocs_imported_link" href="#журнал-процессов">Процессы</a></li>
+<li><a class="mkdocs_imported_link" href="#системный-журнал">Системный журнал</a></li>
+<li><a class="mkdocs_imported_link" href="#журнал-резервного-копирования">Резервное копирование</a></li>
+<li>Трансфер — в составе журнала <a class="mkdocs_imported_link" href="#журнал-ошибок">ошибок</a></li>
+</ul>
+<p>Каждый из перечисленных журналов представляет собой структурированный текстовый файл с пробелами в качестве разделителей.</p>
+<p>В качестве инструментов чтения и анализа файлов журналов можно использовать любой инструмент, представленный на рынке. Например, есть мощный инструмент Kibana <em><a class="mkdocs_imported_link" href="https://www.elastic.co/products/kibana">https://www.elastic.co/products/kibana</a></em>, который обладает широким спектром функций по сбору журналов с различных ресурсов и их глубокому анализу с различными визуальными представлениями, в том числе в виде графиков.</p>
+<h4 id="logging_engine_rules">Правила формирования и архивирования файлов журналов</h4>
+<p>Каждый журнал (кроме журнала обновления) формируется как один файл на каждый день.</p>
+<p>Журнал обновления формируется при выполнении обновления версии ПО и заменяет предыдущий файл журнала обновления.</p>
+<p>В конце дня файлы журналов архивируются в папку <code>\Archive</code> в архивы вида <code>CBAP_ГГГГ-ММ-ДД</code>.</p>
+<p>По умолчанию ПО сохраняет в архиве до 5 файлов журнала каждого типа (кроме журнала интеграции с сырыми данными, см. <em><a class="mkdocs_imported_link" href="#журнал-интеграции-с-сырыми-данными">«Журнал интеграции с сырыми данными»</a></em>), т. е. за день в архиве будет храниться не более 5 файлов каждого журнала, а остальные будут удаляться в очерёдности их создания.</p>
+<h4 id="типы-событий-в-журналах">Типы событий в журналах</h4>
+<p>В журналах предусмотрены следующие типы событий:</p>
+<ul>
+<li><code>Fatal</code> — критическая ошибка в работе ПО;</li>
+<li><code>Error</code> — ошибка в работе ПО;</li>
+<li><code>Warn</code> — некорректное поведение, но ПО продолжает свою работу;</li>
+<li><code>Info</code> — обычное событие, например отправка письма, обновление данных аккаунта;</li>
+<li><code>Debug</code> — выполнение запросов, аутентификация пользователей;</li>
+<li><code>Trace</code> — запуск методов, завершение методов.</li>
+</ul>
+<h4 id="logging_engine_audit_log">Журнал аудита</h4>
+<p>Журнал аудита содержит перечисленные ниже события:</p>
+<ul>
+<li>Неуспешные попытки входа в Систему.</li>
+<li>Успешный вход в Систему.</li>
+<li>Выход из Системы.</li>
+<li>Веб-запросы клиента, отправляемые пользователями на сервер (запрос данных или сохранение данных).</li>
+<li>Изменения системных ролей и ролей в приложениях.</li>
+<li>Попытки несанкционированного доступа для просмотра, создания, редактирования и удаления данных в следующих разделах:
+<ul>
+<li>API</li>
+<li>Записи, экземпляры процессов, аккаунты</li>
+<li>Прикреплённые к записям файлы</li>
+<li>Страницы:
+<ul>
+<li>Администрирование системы
+<ul>
+<li>Темы</li>
+<li>Дизайн страницы входа и регистрации</li>
+<li>Приложения</li>
+<li>Разделы навигации</li>
+<li>Шаблоны</li>
+<li>Функции</li>
+<li>Пути передачи данных</li>
+<li>Аккаунты</li>
+<li>Группы</li>
+<li>Системные роли</li>
+<li>Аудит разрешений аккаунтов</li>
+<li>Замещение</li>
+<li>Регистрация и вход</li>
+<li>Мониторинг</li>
+<li>Журналы событий</li>
+<li>Лицензирование</li>
+<li>Резервное копирование</li>
+<li>Управление системными службами</li>
+<li>Подключения</li>
+<li>Производительность</li>
+<li>Конфигурация журналирования</li>
+<li>Глобальная конфигурация</li>
+</ul>
+</li>
+<li>Администрирование приложения
+<ul>
+<li>Шаблоны</li>
+<li>Роли</li>
+<li>Разделы навигации</li>
+<li>Функции</li>
+<li>Переменные</li>
+<li>Сценарии</li>
+<li>Интернет-магазин</li>
+<li>Интеграции</li>
+<li>Пути передачи данных</li>
+<li>Active Directory</li>
+<li>Аудит разрешений аккаунтов</li>
+<li>Активность компонентов</li>
+<li>Управление версиями</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Стандартное имя файла журнала аудита: <code>audit_ГГГГ-ММ-ДД.log</code></p>
+<p>Журнал сообщений аудита содержит следующие сведения:</p>
+<ul>
+<li>дата события;</li>
+<li>время события;</li>
+<li>тип сообщения;</li>
+<li>ID сеанса;</li>
+<li>имя аккаунта, инициировавшего событие;</li>
+<li>IP-адрес клиента;</li>
+<li>адрес сервера;</li>
+<li>статус обработки запроса;</li>
+<li>длительность обработки запроса;</li>
+<li>запрос или текст сообщения;</li>
+<li>сведения об изменении роли.</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример журнала аудита" src="https://kb.comindware.ru/assets/logging_engine_audit_log.png"/></p>
+<figcaption class="caption">Пример журнала аудита</figcaption>
+</figure>
+<h4 id="журнал-интеграции">Журнал интеграции</h4>
+<p>Журнал интеграции содержит информационные сообщения по событиям, возникающим в ходе работы интеграционных сервисов ПО (таких, как подключения и адаптеры).</p>
+<p>Стандартное имя файла журнала ошибок: <code>integration_ГГГГ-ММ-ДД.log</code></p>
+<p>Журнал интеграции содержит следующие сведения:</p>
+<ul>
+<li>дата события;</li>
+<li>время события;</li>
+<li>тип сообщения;</li>
+<li>ID сеанса;</li>
+<li>имя аккаунта, инициировавшего событие;</li>
+<li>имя сервера;</li>
+<li>порт сервера</li>
+<li>IP-адрес клиента;</li>
+<li>идентификатор интеграции;</li>
+<li>идентификатор подключения;</li>
+<li>текст сообщения.</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример журнала интеграции" src="https://kb.comindware.ru/assets/logging_engine_integration_log.png"/></p>
+<figcaption class="caption">Пример журнала интеграции</figcaption>
+</figure>
+<h4 id="журнал-интеграции-с-сырыми-данными">Журнал интеграции с сырыми данными</h4>
+<p>Журнал интеграции с сырыми данными содержит те же сведения, что журнал интеграции, но с полным содержимым сообщений от внешних систем.</p>
+<p>Стандартное имя файла журнала с сырыми данными: <code>integration_raw_ГГГГ-ММ-ДД.log</code></p>
+<p>По умолчанию для файла журнала интеграции с сырыми данными установлено ограничение на размер в 100 МБ. В случае превышения заданного размера, имя файла меняется на <code>имяжурнала_ГГГГ-ММ-ДД.&lt;порядковый номер файла&gt;.log</code>, а в каталоге журналов создаётся новый файл журнала со стандартным именем.</p>
+<p>По умолчанию в архивах хранится максимум 50 файлов журнала интеграции с сырыми данными, т. е. за день в архиве будет храниться не более 50 файлов каждого журнала, а остальные будут удаляться в очерёдности их создания.</p>
+<p>Журнал интеграции с сырыми данными содержит следующие сведения:</p>
+<ul>
+<li>дата события;</li>
+<li>время события;</li>
+<li>тип сообщения;</li>
+<li>ID сеанса;</li>
+<li>имя аккаунта, инициировавшего событие;</li>
+<li>адрес сервера;</li>
+<li>порт сервера;</li>
+<li>IP-адрес клиента;</li>
+<li>текст сообщения.</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример журнала интеграции с сырыми данными" src="https://kb.comindware.ru/assets/logging_engine_integration_raw.png"/></p>
+<figcaption class="caption">Пример журнала интеграции с сырыми данными</figcaption>
+</figure>
+<h4 id="журнал-исправности">Журнал исправности</h4>
+<p>Журнал исправности содержит сведения о состоянии экземпляра ПО: дисковом пространстве, использовании подключений, работе сервиса Elasticsearch, работе подсистем, выполнении экземпляров процессов.</p>
+<p>Стандартное имя файла журнала исправности: <code>heartbeat_ГГГГ-ММ-ДД.log</code></p>
+<p>Журнал исправности ПО содержит следующие сведения:</p>
+<ul>
+<li>дата события;</li>
+<li>время события;</li>
+<li>тип сообщения;</li>
+<li>ID сеанса;</li>
+<li>имя аккаунта, инициировавшего событие;</li>
+<li>адрес сервера;</li>
+<li>порт сервера;</li>
+<li>IP-адрес клиента;</li>
+<li>текст сообщения.</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример журнала исправности" src="https://kb.comindware.ru/assets/logging_engine_heartbeat_log.png"/></p>
+<figcaption class="caption">Пример журнала исправности</figcaption>
+</figure>
+<h4 id="журнал-обновления">Журнал обновления</h4>
+<p>Журнал обновления содержит сведения о результатах обновления версий ПО.</p>
+<p>Стандартное имя файла журнала обновления: <code>update_ГГГГ-ММ-ДД.log</code></p>
+<p>Журнал обновления содержит следующие сведения:</p>
+<ul>
+<li>дата события;</li>
+<li>время события;</li>
+<li>тип сообщения;</li>
+<li>ID сеанса;</li>
+<li>имя аккаунта, инициировавшего событие;</li>
+<li>адрес сервера;</li>
+<li>порт сервера;</li>
+<li>IP-адрес клиента;</li>
+<li>текст сообщения.</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример журнала обновления" src="https://kb.comindware.ru/assets/logging_engine_update_log.png"/></p>
+<figcaption class="caption">Пример журнала обновления</figcaption>
+</figure>
+<h4 id="журнал-ошибок">Журнал ошибок</h4>
+<p>Журнал ошибок содержит данные обо всех ошибках, возникающих в ходе работы экземпляра ПО, а также об <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2217">импорте и экспорте версий приложений</a>.</p>
+<p>Стандартное имя файла журнала ошибок: <code>error_ГГГГ-ММ-ДД.log</code></p>
+<p>Журнал ошибок содержит следующие сведения:</p>
+<ul>
+<li>дата события;</li>
+<li>время события;</li>
+<li>тип сообщения;</li>
+<li>ID сеанса;</li>
+<li>имя аккаунта, инициировавшего событие;</li>
+<li>имя сервера;</li>
+<li>порт сервера;</li>
+<li>IP-адрес клиента;</li>
+<li>идентификатор события;</li>
+<li>имя подсистемы, в которой произошло событие;</li>
+<li>длительность обработки запроса;</li>
+<li>версия ПО;</li>
+<li>идентификатор интеграции;</li>
+<li>идентификатор подключения;</li>
+<li>сообщение об ошибке.</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример журнала ошибок" src="https://kb.comindware.ru/assets/logging_engine_errror_log.png"/></p>
+<figcaption class="caption">Пример журнала ошибок</figcaption>
+</figure>
+<h4 id="журнал-процессов">Журнал процессов</h4>
+<p>Журнал процессов содержит сведения о движении токенов по элементам экземпляров процессов.</p>
+<p>Стандартное имя файла журнала процессов: <code>process_ГГГГ-ММ-ДД.log</code></p>
+<p>Журнал процессов содержит следующие сведения:</p>
+<ul>
+<li>дата события;</li>
+<li>время события;</li>
+<li>тип сообщения;</li>
+<li>идентификатор экземпляра процесса;</li>
+<li>идентификатор токена;</li>
+<li>идентификатор элемента экземпляра процесса;</li>
+<li>текст сообщения;</li>
+<li>длительность выполнения.</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример журнала процессов" src="https://kb.comindware.ru/assets/logging_engine_process_log.png"/></p>
+<figcaption class="caption">Пример журнала процессов</figcaption>
+</figure>
+<h5 id="рекомендации-по-чтению-журнала-процессов">Рекомендации по чтению журнала процессов</h5>
+<ul>
+<li>В журнале процессов отражается факт создания экземпляра процесса с указанием его идентификатора.</li>
+<li>Чтобы журнал процессов содержал более наглядные сведения, при настройке диаграммы процесса давайте элементам понятные системные имена.</li>
+<li>Для элемента диаграммы процесса указываются сведения о трёх событиях:
+<ul>
+<li>создание токена или вход токена в элемент — строка с идентификатором элемента вида <code>Enter(psa.XXX) by Flow:psf.XXX</code> (при создании токена не указывается идентификатор потока);</li>
+<li>выполнение элемента — строка с идентификатором элемента вида <code>Execute</code> или <code>ContinueExecute</code>;</li>
+<li>выход токена из элемента — строка с идентификатором потока вида <code>Exit by Flow:psf.XXX</code>.</li>
+</ul>
+</li>
+<li>В строке события могут быть указаны следующие сведения:
+<ul>
+<li>идентификатор экземпляра процесса вида <code>PID:XXX</code>;</li>
+<li>идентификатор токена вида <code>TID:ptkn.XX</code>;</li>
+<li>системное имя и идентификатор элемента вида <code>(elementSystemName)psa.XXX</code>;</li>
+<li>системное имя и идентификатор потока вида <code>psf.XXX</code>;</li>
+<li>идентификатор потока с идентификатором потока вида <code>Flow:psf.XXX</code>;</li>
+<li>перечень последующих элементов, начинающийся с ключевого слова <code>NextActions</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="журнал-резервного-копирования">Журнал резервного копирования</h4>
+<p>Журнал резервного копирования содержит информационные сообщения по результатам резервного копирования экземпляра ПО.</p>
+<p>Стандартное имя файла журнала резервного копирования: <code>backup_ГГГГ-ММ-ДД.log</code></p>
+<p>Журнал резервного копирования содержит следующие сведения:</p>
+<ul>
+<li>дата события;</li>
+<li>время события;</li>
+<li>тип сообщения;</li>
+<li>ID сеанса;</li>
+<li>имя аккаунта, инициировавшего событие;</li>
+<li>адрес сервера;</li>
+<li>порт сервера;</li>
+<li>IP-адрес клиента;</li>
+<li>текст сообщения.</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример журнала резервного копирования" src="https://kb.comindware.ru/assets/logging_engine_backup_log.png"/></p>
+<figcaption class="caption">Пример журнала резервного копирования</figcaption>
+</figure>
+<h4 id="журнал-сценариев">Журнал сценариев</h4>
+<p>Журнал сценариев содержит сведения о ходе выполнения сценариев.</p>
+<p>Стандартное имя файла журнала сценариев: <code>trigger_ГГГГ-ММ-ДД.log</code></p>
+<p>Журнал сценариев содержит следующие сведения:</p>
+<ul>
+<li>дата события;</li>
+<li>время события;</li>
+<li>тип сообщения;</li>
+<li>инициатор вызова сценария;</li>
+<li>идентификатор сценария;</li>
+<li>тип события, запустившего сценарий;</li>
+<li>идентификатор шаблона записи;</li>
+<li>идентификатор записи;</li>
+<li>длительность выполнения;</li>
+<li>сведения о действиях, исполненных в ходе сценария:
+<ul>
+<li>идентификатор действия сценария;</li>
+<li>тип действия;</li>
+<li>идентификатор шаблона записи;</li>
+<li>идентификатор записи;</li>
+<li>длительность выполнения.</li>
+</ul>
+</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример журнала сценариев" src="https://kb.comindware.ru/assets/logging_engine_trigger_log.png"/></p>
+<figcaption class="caption">Пример журнала сценариев</figcaption>
+</figure>
+<h4 id="системный-журнал">Системный журнал</h4>
+<p>Системный журнал содержит данные о событиях системного уровня в экземпляре ПО.</p>
+<p>Стандартное имя файла системного журнала: <code>system_ГГГГ-ММ-ДД.log</code></p>
+<p>Системный журнал содержит следующие сведения:</p>
+<ul>
+<li>дата события;</li>
+<li>время события;</li>
+<li>тип сообщения;</li>
+<li>ID сеанса;</li>
+<li>имя аккаунта, инициировавшего событие;</li>
+<li>адрес сервера;</li>
+<li>порт сервера;</li>
+<li>IP-адрес клиента;</li>
+<li>текст сообщения.</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример системного журнала" src="https://kb.comindware.ru/assets/logging_engine_system_log.png"/></p>
+<figcaption class="caption">Пример системного журнала</figcaption>
+</figure>
+<h4 id="журналы-адаптеров">Журналы адаптеров</h4>
+<p>Журналы адаптеров содержат данные о событиях подключений и путей передачи данных, относящихся к <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2181">адаптерам</a> в экземпляре ПО.</p>
+<p>Имена файлов журналов адаптеров формируются следующим образом:</p>
+<ul>
+<li>сервис встроенных адаптеров: <code>adapter_internal_ГГГГ-ММ-ДД.log</code></li>
+<li>сервис пользовательских адаптеров: <code>adapter_external_ГГГГ-ММ-ДД.log</code></li>
+<li>подключение встроенного адаптера: <code>adapter_internal_&lt;имя_подключения&gt;_ГГГГ-ММ-ДД.log</code></li>
+<li>подключение пользовательского адаптера: <code>adapter_external_&lt;имя_подключения&gt;_ГГГГ-ММ-ДД.log</code></li>
+</ul>
+<p>Журнал адаптера содержит следующие сведения:</p>
+<ul>
+<li>дата события;</li>
+<li>время события;</li>
+<li>тип сообщения;</li>
+<li>описание события;</li>
+<li>контекст события;</li>
+<li>описание исключения (необязательно);</li>
+<li>текст сообщения (необязательно).</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример журнала аудита" src="https://kb.comindware.ru/assets/logging_engine_adapter_log.png"/></p>
+<figcaption class="caption">Пример журнала аудита</figcaption>
+</figure>
+<h2 id="перенаправление-сообщений-из-файлов-журналов-в-журнал-событий-windows">Перенаправление сообщений из файлов журналов в журнал событий Windows</h2>
+<p>Библиотека NLog позволяет записывать журналы помимо файлов в другие хранилища, например в службу «Журнал событий Windows» (EventLog), который можно просмотреть с помощью приложения <strong>Просмотр событий</strong>.</p>
+<p>Полная документация по настройке журналирования в журнал событий Windows представлена по адресу:</p>
+<p><em><a class="mkdocs_imported_link" href="https://github.com/NLog/NLog/wiki/EventLog-target">https://github.com/NLog/NLog/wiki/EventLog-target</a></em></p>
+<p>В данном разделе представлены инструкции по перенаправлению сообщений из файла журнала ошибок экземпляра ПО в журнал событий Windows.</p>
+<ol class="colored_numbers_list">
+<li>Создайте в журнале событий Windows новый источник событий (<code>EventSource</code>), если его ещё нет.</li>
+<li>
+<p>Создайте скрипт по приведённому ниже образцу на языке VisualBasic и сохраните его в файл с расширением .VBS (например, <code>CreateEventSource.vbs</code>):</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>Set <span class="nv">Args</span> <span class="o">=</span> WScript.Arguments   </code><br/><code>If Args.Count &lt; <span class="m">1</span> <span class="k">then</span> WScript.Echo <span class="s2">"USAGE: CreateEventSource.vbs &lt;EventSourceName&gt;"</span>   </code><br/><code><span class="w">    </span>WScript.Quit   </code><br/><code>End If   </code><br/><code><span class="nv">EventSourceName</span> <span class="o">=</span> Args<span class="o">(</span><span class="m">0</span><span class="o">)</span>   </code><br/><code>Set <span class="nv">WshShell</span> <span class="o">=</span> WScript.CreateObject<span class="o">(</span><span class="s2">"WScript.Shell"</span><span class="o">)</span>   </code><br/><code><span class="s1">'Create event source   </span></code><br/><code><span class="s1">KeyName = "HKLM\SYSTEM\CurrentControlSet\Services\Eventlog\Application\" &amp; EventSourceName &amp; "\EventMessageFile"   </span></code><br/><code><span class="s1">'</span>Change path to .NET Framework version used   </code><br/><code>WshShell.RegWrite KeyName,<span class="s2">"%windir%\Microsoft.NET\Framework64\v2.0.50727\EventLogMessages.dll"</span>, <span class="s2">"REG_EXPAND_SZ"</span></code></pre>
+</div>
+</li>
+<li>
+<p>Запустите скрипт, который создаст источник событий (<code>EventSource</code>) в журнале событий Windows.</p>
+<p>В качестве параметра передайте название источника событий, которое будет отображаться в разделе «Журналы Windows / Приложение» (Windows Logs / Application) приложения приложении «Просмотр событий».</p>
+<p>Пример команды запуска скрипта:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>CreateEventSource.vbs <span class="s2">"CBAP"</span></code></pre>
+</div>
+</li>
+<li>
+<p>Создайте в файле <code>logs.config</code> в подразделе <code>nlog.targets</code> (с конфигурацией файловых журналов) подраздел <code>target</code> с параметрами записи данных в журнал событий Windows:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>&lt;target xsi:type="EventLogCBAPErrors" name="eventlog" layout="${message}"   </code><br/><code>log="Application" source="CBAP"/&gt;</code></pre>
+</div>
+</li>
+<li>
+<p>Создайте в файле <code>logs.config</code> правило (подраздел <code>logger</code> в разделе <code>nlog.rules</code>), которое будет определять сообщения, подлежащие записи в журнал событий Windows:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>&lt;logger name="*" minlevel="Warn" maxlevel="Fatal"   </code><br/><code>writeTo="errorsFile,EventLogCBAPErrors"/&gt;</code></pre>
+</div>
+</li>
+<li>
+<p>Перезагрузите экземпляр ПО, чтобы изменения вступили в силу. См. раздел <em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2029">«Настройка конфигурации Утилиты администрирования Comindware»</a></em>.</p>
+</li>
+</ol>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2516">Примеры событий в файловых журналах</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2502">Пути и содержимое папок экземпляра ПО</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2181">Адаптеры</a></strong></p>
+<p><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2187"><strong>Просмотр показателей мониторинга с помощью страницы «Администрирование»</strong></a></p>
+<p><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2180"><strong>Просмотр журналов событий с помощью страницы «Администрирование»</strong></a></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2184">Просмотр показателей производительности с помощью страницы «Администрирование»</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2186">Конфигурация журналирования. Настройка, скачивание журналов</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

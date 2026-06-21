@@ -1,0 +1,283 @@
+<h1>Обновление версии экземпляра ПО с 3.5 на 4.2. Инструкции, подготовка базы данных, устранение проблем</h1><div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1gdi310il3">Введение</a></li>
+<li><a href="#mcetoc_1gdi33u2e7">Требования для обновления</a></li>
+<li><a href="#mcetoc_1gdi33u2e8">Порядок обновления ПО</a></li>
+<li><a href="#mcetoc_1h7q8jj0i2">Возможные проблемы после обновления и способы их устранения</a>
+<ul>
+<li><a href="#mcetoc_1h7q70f041">Использование выражения CONST(" ") и пустых значений в сценариях</a></li>
+<li><a href="#mcetoc_1h7q7k04i0">Выделение памяти для Elasticsearch</a></li>
+<li><a href="#mcetoc_1h7q7qo301">Перекомпиляция скриптов на C#</a></li>
+<li><a href="#mcetoc_1h7s22p8h0">Преобразование глобальных функций</a></li>
+<li><a href="#mcetoc_1h7s4dhc71">Использование специальных символов в имени пользователя</a></li>
+<li><a href="#mcetoc_1h7s4dhc72">Преобразование повторно используемых подпроцессов</a></li>
+<li><a href="#mcetoc_1h7s4dhc73">Преобразование правил для данных у промежуточных событий</a></li>
+<li><a href="#mcetoc_1h7s4dhc74">Преобразование формул</a></li>
+<li><a href="#mcetoc_1h7s4dhc75">Настройка разрешений для шаблонов процессов</a></li>
+<li><a href="#mcetoc_1h7ul49nl0">Настройка кнопок и разрешений для таблиц на формах</a></li>
+<li><a href="#mcetoc_1h7ul4l4r1">Публикация диаграмм процессов</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="mcetoc_1gdi310il3">Введение</h2>
+<p>В данной статье представлены инструкции по обновлению экземпляра ПО <strong>Comindware Business Application Platform</strong> (далее «ПО») с версии 3.5 на версию 4.2 для Windows, включая устранение ошибок, которые могут возникнуть при обновлении.</p>
+<h2 id="mcetoc_1gdi33u2e7">Требования для обновления</h2>
+<p>Для обновления версии экземпляра ПО требуется заранее подготовить:</p>
+<ol>
+<li>Резервную копию экземпляра ПО версии 3.5 в формате <code>.CDBBZ</code>.</li>
+<li>Работающий экземпляр ПО версии 3.5.</li>
+<li>Дистрибутив ПО версии 3.5.1058 или выше: <code>ComindwarePlatform_3.5.1058.0.msi</code>.</li>
+<li>Дистрибутив ПО версии 3.5.1076 или выше: <code>ComindwarePlatform_3.5.1076.0.msi</code>.</li>
+<li>Дистрибутив ПО версии 3.5.1100 или выше: <code>ComindwarePlatform_3.5.1100.0.msi</code>.</li>
+<li>Дистрибутив ПО версии 4.2, например, <code>ComindwarePlatform_4.2.278.0.msi</code>.</li>
+<li>Развернутый сервер Elasticsearch, см. статью «<samp data-name="aid" data-title="" data-value="2094"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Установка Elasticsearch. Краткое руководство для Windows {Article-ID:2094}</span></samp>».</li>
+</ol>
+<h2 id="mcetoc_1gdi33u2e8">Порядок обновления ПО</h2>
+<ol>
+<li>Установите ПО версии 3.5.1058 с помощью файла <code>ComindwarePlatform_3.5.1058.0.msi</code> и Утилиты администрирования. См. статью «<samp data-name="aid" data-title="" data-value="2028"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2028}</span></samp>».</li>
+<li>С помощью Утилиты администрирования обновите экземпляр ПО версии 3.5 до версии 3.5.1058. См. статью «<samp data-name="aid" data-title="" data-value="2031" style="font-size: 15px; letter-spacing: 0.2px;"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png"/>{Article-ID:2031}</span></samp><span style="letter-spacing: 0.2px;">»</span>.</li>
+<li>Запустите экземпляр ПО.</li>
+<li>Выполните вход в экземпляр ПО с аккаунтом системного администратора.</li>
+<li>При отображении запросов на обновление базы данных и инициализацию экземпляра ПО, нажимайте кнопку «<strong>Далее</strong>».</li>
+<li>Дождитесь отображения начальной страницы экземпляра ПО.</li>
+<li>Проверьте работоспособность экземпляра ПО, устраните возможные ошибки и при необходимости проведите дополнительную настройку экземпляра ПО, чтобы обеспечить его штатную работу.</li>
+<li><a id="Step7"></a>Создайте резервную копию экземпляра ПО в формате <code>.CDBBZ</code> с помощью раздела «<strong>Администрирование</strong>» — «<strong>Инфраструктура</strong>» — «<strong>Резервное копирование</strong>» в экземпляре ПО.</li>
+<li>Повторите шаги 1–8 для ПО версии 3.5.1076 или выше, а затем для версии 3.5.1100 или выше. В результате у вас должен быть работоспособный экземпляр ПО версии 3.5.1100 (или выше) и его резервная копия.</li>
+<li>С помощью Утилиты администрирования обновите версию экземпляра ПО до версии 4.2. См. статью «<samp data-name="aid" data-title="" data-value="2031"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2031}</span></samp>».</li>
+<li>При отображении запросов на обновление базы данных, индексов Elasticsearch и инициализацию экземпляра ПО, нажимайте кнопку «<strong>Далее</strong>».</li>
+<li>Дождитесь отображения начальной страницы экземпляра ПО.</li>
+<li>В процессе обновления версии экземпляра ПО в папке журналов экземпляров ПО будет создан файл <code>upgrade.log</code>.</li>
+<li>Откройте папку журналов экземпляра ПО. Путь к этой папке указан в Утилите администрирования в поле «<strong>Журнал системы</strong>» на вкладке «<strong>Пути к файлам</strong>» в окне «<strong>Конфигурация</strong> <strong>экземпляра системы</strong>». См. «<samp data-name="aid" data-title="" data-value="2301"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Просмотр фактических путей к папкам экземпляра системы {Article-ID:2301}</span></samp>».
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Путь к папке журналов экземпляра ПО в Утилите администрирования" class="img-responsive" height="500" src="https://kb.comindware.ru/assets/img_632c16a5d2547.png" width="700"/></p>
+<em><span style="letter-spacing: 0.2px; text-align: left; color: #545764;">Путь к папке журналов экземпляра ПО в Утилите администрирования</span></em></div>
+</li>
+<li>Откройте файл <code>upgrade.log</code> в папке журналов экземпляра ПО <br/>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Файл upgrade.log в папке журналов экземпляра ПО" class="img-responsive" height="406" src="https://kb.comindware.ru/assets/img_632c1702b0dcb.png" width="644"/></p>
+<p class="caption" style="font-size: 15px !important;">Файл upgrade.log в папке журналов экземпляра ПО</p>
+</div>
+</li>
+<li>В файле <code>upgrade.log</code> найдите все ошибки по ключевым словам <code>ERROR</code> и <code>ошиб</code>.
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Пример ошибок в журнале обновления экземпляра ПО" class="img-responsive" height="213" src="https://kb.comindware.ru/assets/img_632c16c77cf4f.png" width="1251"/></p>
+<p class="caption" style="font-size: 15px !important;"><span style="letter-spacing: 0.2px; text-align: left; color: #545764;">Пример ошибок в журнале обновления экземпляра ПО</span></p>
+</div>
+</li>
+<li>Если в файле <code>upgrade.log</code> ошибки отсутствуют, обновление версии экземпляра ПО выполнено успешно и его можно эксплуатировать в штатном режиме. Шаги 18–25 выполнять не требуется.</li>
+<li>Если в файле <code>upgrade.log </code>имеются ошибки, переходите к шагам 19–25.</li>
+<li>С помощью Утилиты администрирования смените версию экземпляра ПО на версию 3.5.1058. См. статью «<samp data-name="aid" data-title="" data-value="2031" style="font-size: 15px; letter-spacing: 0.2px;"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png"/>{Article-ID:2031}</span></samp> <span style="letter-spacing: 0.2px;"> » </span> .</li>
+<li>С помощью Утилиты администрирования восстановите экземпляр ПО из резервной копии версии 3.5 в формате <code>.CDBBZ</code>, созданной на шаге 8 или 23.</li>
+<li>Запустите экземпляр ПО.</li>
+<li>Выполните вход в экземпляр ПО с аккаунтом системного администратора.</li>
+<li>Устраните все ошибки, указанные в файле <code>upgrade.log</code>.</li>
+<li>Создайте резервную копию экземпляра ПО.</li>
+<li>Снова обновите экземпляр ПО до версии 4.2.</li>
+<li>Повторяйте шаги 9–25 до тех пор, пока не удастся запустить экземпляр ПО в штатном режиме.</li>
+<li>Переходите к <a href="#mcetoc_1h7q8jj0i2">устранению возможных проблем в работоспособном экземпляре версии 4.2</a>.</li>
+</ol>
+<h2 id="mcetoc_1h7q8jj0i2">Возможные проблемы после обновления и способы их устранения</h2>
+<p>После того как экземпляр ПО версии 4.2 будет запущен, проверьте наличие перечисленных ниже потенциальных проблем и устраните их при необходимости.</p>
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%; height: 1320px;">
+<tbody>
+<tr style="height: 40px;">
+<td colspan="2" style="width: 50%; height: 40px;">
+<h3 id="mcetoc_1h7q70f041" style="letter-spacing: 0.2px;">Использование выражения CONST(" ") и пустых значений в сценариях</h3>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;"><strong>Проблема</strong></td>
+<td style="width: 50%; height: 40px;"><strong>Решение</strong></td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;"><span style="font-size: 15px; letter-spacing: 0.2px;">В сценариях в действии «</span><strong><span style="font-size: 15px; letter-spacing: 0.2px;">Изменить значение атрибутов</span></strong><span style="font-size: 15px; letter-spacing: 0.2px;">» </span> <span style="font-size: 15px; letter-spacing: 0.2px;"> в версии 3.5 для установки в атрибуте пустого значения в него записывалось пустое значение или использовалось выражение </span> <code style="font-size: 13.125px; letter-spacing: 0.2px;">CONST(" ")</code><span style="font-size: 15px; letter-spacing: 0.2px;">.</span></td>
+<td style="width: 50%; height: 40px;"><span style="font-size: 15px; letter-spacing: 0.2px;">Чтобы установить в атрибуте пустое значение, укажите </span><span style="font-size: 15px; letter-spacing: 0.2px; font-weight: 700 !important;">операцию со значением</span><span style="font-size: 15px; letter-spacing: 0.2px;"> «<strong>Удалить</strong>»</span> <span style="font-size: 15px; letter-spacing: 0.2px;"> . </span></td>
+</tr>
+<tr style="height: 40px;">
+<td colspan="2" style="width: 50%; height: 40px;">
+<h3 id="mcetoc_1h7q7k04i0" style="letter-spacing: 0.2px;">Выделение памяти для Elasticsearch</h3>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;"><strong>Проблема</strong></td>
+<td style="width: 50%; height: 40px;"><strong>Решение</strong></td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;"><span style="font-size: 15px;">Сервис Elasticsearch работает некорректно или не работает. В информационной панели экземпляра ПО отображаются сообщения об ошибках Elasticsearch.</span></td>
+<td style="width: 50%; height: 40px;">
+<p><span style="font-size: 15px;">Проверьте конфигурацию сервера Elasticsearch: выделите достаточный объем памяти и необходимое количество шардов в соответствии с объемом исторических данных.</span></p>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td colspan="2" style="width: 50%; height: 40px;">
+<h3 id="mcetoc_1h7q7qo301" style="letter-spacing: 0.2px;">Перекомпиляция скриптов на C#</h3>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;"><strong>Проблема</strong></td>
+<td style="width: 50%; height: 40px;"><strong>Решение</strong></td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;">
+<p><span style="font-size: 15px;">Не все скрипты на C# из версии 3.5 могут без изменений работать в версии 4.2.</span></p>
+<p><span style="font-size: 15px;">Например, в функции <code>Api.Process.ProcessObjectService.CreateWithObjectId()</code> было четыре параметра, а в версии 4.2 а стало три.</span></p>
+<p>В некоторых случаях после обновления с версии 3.5 на версию 4.2 может отображаться сообщение об ошибке «Could not find a part of the path».</p>
+</td>
+<td style="width: 50%; height: 40px;">
+<ol>
+<li>Перекомпилируйте скрипты, нажав кнопку «<strong>Перекомпилировать библиотеки скриптов</strong>» на странице «<strong>Администрирование</strong>» — «<strong>Глобальная конфигурация</strong>».</li>
+<li>Ознакомьтесь с журналом компиляции скриптов.</li>
+<li>Исправьте выявленные ошибки в скриптах.</li>
+</ol>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td colspan="2" style="width: 50%; height: 40px;">
+<h3 id="mcetoc_1h7s22p8h0" style="letter-spacing: 0.2px;">Преобразование глобальных функций</h3>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;"><strong>Проблема</strong></td>
+<td style="width: 50%; height: 40px;"><strong>Решение</strong></td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;"><span style="font-size: 15px;">Глобальные функции из версии 3.5 не поддерживаются в версии 4.2.</span></td>
+<td style="width: 50%; height: 40px;">
+<p>Вместо глобальных функций следует создать аналогичные сценарии или скрипты на C#.</p>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td colspan="2" style="width: 50%; height: 40px;">
+<h3 id="mcetoc_1h7s4dhc71" style="letter-spacing: 0.2px;">Использование специальных символов в имени пользователя</h3>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;"><strong>Проблема</strong></td>
+<td style="width: 50%; height: 40px;"><strong>Решение</strong></td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;">
+<p><span style="font-size: 15px;">В версии 3.5 в имени пользователя можно было указать специальные символы.</span></p>
+<p>В версии 4.2 в имени пользователя разрешено использовать только буквы латинского алфавита (строчные и прописные), цифры, символ подчеркивания, точку и дефис: a-z A-Z 0-9 _ . -</p>
+<p>Все остальные символы недопустимы.</p>
+</td>
+<td style="width: 50%; height: 40px;">
+<ol>
+<li>Исправьте имена пользователей, содержащие недопустимые символы, на странице «<strong>Администрирование</strong>» — «<strong>Аккаунты</strong>».</li>
+<li>Исправьте выражения и скрипты на C#, в которых могут присваиваться имена пользователей с недопустимыми символами.</li>
+</ol>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td colspan="2" style="width: 50%; height: 40px;">
+<h3 id="mcetoc_1h7s4dhc72" style="letter-spacing: 0.2px;">Преобразование повторно используемых подпроцессов</h3>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;"><strong>Проблема</strong></td>
+<td style="width: 50%; height: 40px;"><strong>Решение</strong></td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;"><span style="font-size: 15px;">Элемент диаграммы процесса «<strong>Повторно используемый подпроцесс</strong>» из версии 3.5 в версии 4.2 переименован в «<strong>Вызов под процесса</strong>». В версии 4.2 вызов процесса настраивается и может работать несколько иначе, чем в версии 3.5.</span></td>
+<td style="width: 50%; height: 40px;">
+<p>Проверьте конфигурацию и работоспособность элементов <span style="font-size: 15px;">«<strong>Вызов под процесса</strong>» на всех диаграммах процессов. Исправьте конфигурацию при необходимости.</span></p>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td colspan="2" style="width: 50%; height: 40px;">
+<h3 id="mcetoc_1h7s4dhc73" style="letter-spacing: 0.2px;">Преобразование правил для данных у промежуточных событий</h3>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;"><strong>Проблема</strong></td>
+<td style="width: 50%; height: 40px;"><strong>Решение</strong></td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;"><span style="font-size: 15px;">Правила для данных <em>на входе и выходе</em> промежуточных событий из версии 3.5 при обновлении до версии 4.2 преобразуются в сценарии <em>на выходе</em>. В результирующем сценарии на выходе из промежуточного события все действия выстраиваются последовательно — сначала идут действия из правил на входе, затем — из правил на выходе.</span></td>
+<td style="width: 50%; height: 40px;">
+<ol>
+<li>Если требуется полностью сохранить прежнюю логику работы правил для данных на входе в промежуточное событие:
+<ul>
+<li>Создайте дополнительное промежуточное событие перед имеющимся.</li>
+<li>Перенесите на его выход действия из правил на входе исходного события.</li>
+</ul>
+</li>
+<li>Проверьте сценарии на выходе из промежуточных событий на всех диаграммах процессов на предмет корректной работы. Исправьте сценарии при необходимости.</li>
+</ol>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td colspan="2" style="width: 50%; height: 40px;">
+<h3 id="mcetoc_1h7s4dhc74" style="letter-spacing: 0.2px;">Преобразование формул</h3>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;"><strong>Проблема</strong></td>
+<td style="width: 50%; height: 40px;"><strong>Решение</strong></td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;"><span style="font-size: 15px;">В версии 3.5 в формулах можно было не выполнять проверку на пустое значение атрибутов. В версии 4.2 такая проверка необходима во избежание деления на 0 и других неполадок, в противном случае будет возникать ошибка.</span></td>
+<td style="width: 50%; height: 40px;">
+<p>В формулах необходимо проверять наличие значений у атрибутов с помощью функции <code>NOT(EMPTY())</code> либо обеспечивать ненулевое значение с помощью функции <code>VALUE()</code>.</p>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td colspan="2" style="width: 50%; height: 40px;">
+<h3 id="mcetoc_1h7s4dhc75" style="letter-spacing: 0.2px;">Настройка разрешений для шаблонов процессов</h3>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;"><strong>Проблема</strong></td>
+<td style="width: 50%; height: 40px;"><strong>Решение</strong></td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;"><span style="font-size: 15px;">В версии 3.5 не требовалось разрешение на создание экземпляра процесса. В версии 4.2 для создания экземпляра процесса у аккаунта должно быть разрешение.</span></td>
+<td style="width: 50%; height: 40px;">
+<p>В свойствах ролей добавьте разрешение «<strong>Создание</strong>» для соответствующих шаблонов процессов.</p>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td colspan="2" style="width: 50%; height: 40px;">
+<h3 id="mcetoc_1h7ul49nl0" style="letter-spacing: 0.2px;">Настройка кнопок и разрешений для таблиц на формах</h3>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;"><strong>Проблема</strong></td>
+<td style="width: 50%; height: 40px;"><strong>Решение</strong></td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;">
+<p><span style="font-size: 15px;">В версии 3.5 для коллекции (таблицы) на форме кнопки операций с записями создавались автоматически в соответствии с разрешениями на соответствующие операции, заданными в свойствах коллекции (таблицы) на форме.</span></p>
+<p><span style="font-size: 15px;">В версии 4.2 кнопки операций с записями в таблице на форме требуется выносить на область кнопок таблицы. При этом вынесенные кнопки определяют разрешения на соответствующие операции с записями в таблице.</span></p>
+</td>
+<td style="width: 50%; height: 40px;">
+<p>Если у таблицы на форме не отображаются или не работают должным образом кнопки операций с записями в таблице, например «<strong>Редактировать</strong>», «<strong>Создать</strong>», «<strong>Сохранить</strong>», «<strong>Удалить</strong>»:</p>
+<ul>
+<li>в конструкторе формы выберите область кнопок таблицы;</li>
+<li>перетащите на область кнопок требуемые кнопки, при этом будут разрешены соответствующие операции с записями в таблице;</li>
+<li>проверьте и настройте свойства таблицы на форме.</li>
+</ul>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td colspan="2" style="width: 50%; height: 40px;">
+<h3 id="mcetoc_1h7ul4l4r1" style="letter-spacing: 0.2px;">Публикация диаграмм процессов</h3>
+</td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;"><strong>Проблема</strong></td>
+<td style="width: 50%; height: 40px;"><strong>Решение</strong></td>
+</tr>
+<tr style="height: 40px;">
+<td style="width: 50%; height: 40px;"><span style="font-size: 15px;">При обновлении с версии 3.5 на версию 4.2 некоторые процессы могут перестать выполняться.</span></td>
+<td style="width: 50%; height: 40px;">
+<p>Откройте диаграмму процесса, который не выполняется должным образом или выдаёт ошибку. Опубликуйте её заново, выбрав способ «<strong>Создать новую версию</strong>».</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><a class="md-top md-icon mkdocs_imported_link" href="#"> <em class="fa-light fa-arrow-up">‌</em> К началу </a></p>

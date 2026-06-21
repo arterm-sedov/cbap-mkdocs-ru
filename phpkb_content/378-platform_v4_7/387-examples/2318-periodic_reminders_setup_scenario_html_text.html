@@ -1,0 +1,174 @@
+<h1>Периодические напоминания об открытых задачах. Настройка процессов, сценария и HTML-текста письма</h1><p><strong>Comindware Business Application Platform</strong> поддерживает в базовой конфигурации отправку системных уведомлений пользователю по поставленной задаче или процессного уведомления с информацией из бизнес-процесса.</p>
+<p>Иногда возникает необходимость настроить напоминания сотруднику об его открытых задачах, например, ежедневно в определенное время.</p>
+<p>Для данной настройки создайте 2 бизнес-процесса:</p>
+<ul>
+<li>Поиск сотрудников для отправки напоминания;</li>
+<li>Отправка ежедневного напоминания.</li>
+</ul>
+<p>Первый процесс будет запускаться по таймеру ежедневно, например, в 7:00 и искать сотрудников, у которых есть открытые задачи в этот момент времени, и по каждому запускать параллельно в цикле подпроцесс «<em>Отправка ежедневного напоминания</em>», который в свою очередь будет формировать и отправлять перечень открытых задач сотрудника на эл. почту в виде таблицы.</p>
+<p> </p>
+<p><strong>Настройка процесса «Отправка ежедневного напоминания»</strong></p>
+<p><strong>1.</strong> Создайте новый шаблон процесса «Отправка ежедневного напоминания».</p>
+<div class="screenshot_with_caption">
+<p><img align="" alt="Создание шаблона процесса" class="img-responsive" height="555" src="https://kb.comindware.ru/assets/timenotif6.jpg" width="707"/></p>
+<p class="caption">Создание шаблона процесса</p>
+</div>
+<p><strong>2.</strong> В связанном с процессом шаблоне записи создайте атрибуты:</p>
+<ul>
+<li><em><strong>Сотрудник</strong> </em>(Sotrudnik) — атрибут с типом данных «Аккаунт», кому будет отправляться напоминание;</li>
+<li><em><strong>Тело письма</strong></em> (body) — атрибут с типом данных «Текст» и форматом отображения «HTML-текст» с таблицей задач. Проставьте галочку «Вычислять по выражению». В поле «Вычисляемое выражение» укажите N3 и вставьте следующее:</li>
+</ul>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code"> 
+<p>@prefix cmw: &lt;http://comindware.com/logics#&gt;.</p>
+<p>@prefix string: &lt;http://www.w3.org/2000/10/swap/string#&gt;.</p>
+<p>@prefix cmwstring: &lt;http://comindware.com/logics/string#&gt;.</p>
+<p>@prefix object: &lt;http://comindware.com/ontology/object#&gt;.</p>
+<p>@prefix configuration: &lt;http://comindware.com/ontology/configuration#&gt;.</p>
+<p>@prefix taskStatus: &lt;http://comindware.com/ontology/taskStatus#&gt;.</p>
+<p> </p>
+<p>{</p>
+<p>           ?confid a configuration:Configuration.</p>
+<p>           ?confid configuration:baseUri ?baseUri.</p>
+<p>           ("Poiskisotrudnikovdlyaotpravkinapominaniya" "Sotrudnik") object:findProperty ?Sotrudnik.</p>
+<p> </p>
+<p>           ?item ?Sotrudnik ?SotrudnikVal.</p>
+<p>                      </p>
+<p>    #First table</p>
+<p>    ("&lt;p style='font-size: 100%' &gt;Перечень задач на исполнение&lt;/p&gt;" "&lt;table border='1' style='width: 60%; border-collapse: collapse; border: 1px solid black' &gt;&lt;tbody&gt; &lt;tr&gt;&lt;td style='padding: 2px; width: 200px; border: 1px solid black'&gt;Задача&lt;/td&gt; &lt;td style='width: 200px; padding: 2px; border: 1px solid black'&gt;Срок&lt;/td&gt;&lt;/tr&gt;") string:concatenation ?firstHeaderRow.</p>
+<p> </p>
+<p>    from {</p>
+<p>                       ?tasks a cmw:UserTask.</p>
+<p>                       or {?tasks cmw:assignee ?SotrudnikVal.}</p>
+<p>                       or {?tasks cmw:possibleAssignee ?SotrudnikVal.}.</p>
+<p>                       ?tasks cmw:taskStatus taskStatus:inProgress.</p>
+<p>                       ?tasks cmw:title ?title.</p>
+<p>                       ?tasks cmw:id ?id.</p>
+<p>        ("{0}" ?title) string:format ?titleVal.</p>
+<p>        ("{0}" ?id) string:format ?idVal.</p>
+<p>                      </p>
+<p>                       or {?tasks cmw:dueDate ?dueDate.}</p>
+<p>                       or {"" -&gt; ?dueDate.}.</p>
+<p>                      </p>
+<p>        ("{0}" ?dueDate) string:format ?dueDateVal.</p>
+<p>                      </p>
+<p>        ("&lt;tr&gt;&lt;td class='A' style='padding: 2px; border: 1px solid black; '&gt;&lt;a href='" ?baseUri "#task/" ?idVal "'&gt;" ?titleVal "&lt;/a&gt;&lt;/td&gt;&lt;td align='right' style='padding: 2px; border: 1px solid black; text-align: right'&gt;" ?dueDateVal "&lt;/td&gt;&lt;/tr&gt;") string:concatenation ?firstRow.</p>
+<p>    } select ?firstRow -&gt; ?firstFactrow.</p>
+<p>    (" " ?firstFactrow) cmwstring:join ?firstFact.</p>
+<p>    (?firstHeaderRow ?firstFact "&lt;/tbody&gt;&lt;/table&gt; &lt;br/&gt;") string:concatenation ?first.</p>
+<p>    ?first  -&gt; ?value.</p>
+<p>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><em><strong>Кому</strong></em> (to) — атрибут с типом данных «Текст» с адресом эл. почты сотрудника. Проставьте галочку «Вычислять по выражению». В поле «Вычисляемое выражение» укажите «Формула» и вставьте следующее:</li>
+</ul>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">$Sotrudnik-&gt;cmw.account.mbox</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>3.</strong> Нарисуйте схему процесса по типу:</p>
+<div class="screenshot_with_caption">
+<p><img align="" alt="Типовая схема процесса" class="img-responsive" height="201" src="https://kb.comindware.ru/assets/timenotif7.jpg" width="323"/></p>
+<p class="caption">Типовая схема процесса</p>
+</div>
+<p><strong>4.</strong> Настройте событие-отправку сообщения.</p>
+<p><strong>5.</strong> Опубликуйте процесс.</p>
+<p> </p>
+<p><strong> Настройка процесса «Поиск сотрудников для отправки напоминания» </strong></p>
+<p><strong> 1. </strong> Создайте новый шаблон процесса «Поиск сотрудников для отправки напоминания».</p>
+<div class="screenshot_with_caption">
+<p><img align="" alt="Создание шаблона процесса" class="img-responsive" height="554" src="https://kb.comindware.ru/assets/timenotif1.jpg" width="701"/></p>
+<p class="caption">Создание шаблона процесса</p>
+</div>
+<p><strong>2. </strong> В связанном с процессом «Поиск сотрудников для отправки напоминания» шаблоне записи создайте атрибуты:</p>
+<ul>
+<li><em> <strong> Сотрудники </strong> </em> (Sotrudniki) — вычисляемый атрибут с типом данных «Аккаунт». Проставьте галочки «Хранить несколько значений» и «Вычислять по выражению». В поле «Вычисляемое выражение» укажите N3 и вставьте следующее:</li>
+</ul>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code"> 
+<p>@prefix cmw: &lt;http://comindware.com/logics#&gt;.</p>
+<p>@prefix container: &lt;http://comindware.com/ontology/container#&gt;.</p>
+<p>@prefix account: &lt;http://comindware.com/ontology/account#&gt;.</p>
+<p>@prefix taskStatus: &lt;http://comindware.com/ontology/taskStatus#&gt;.</p>
+<p> </p>
+<p>{</p>
+<p>           ?class cmw:className "Account".</p>
+<p>           ?value a ?class.</p>
+<p>           ?value account:active true.</p>
+<p>           not {?value cmw:isDisabled true.}.</p>
+<p>           or {?tasks cmw:assignee ?value.}</p>
+<p>           or {?tasks cmw:possibleAssignee ?value.}.</p>
+<p>           ?tasks cmw:taskStatus taskStatus:inProgress.</p>
+<p>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><em><strong>Отправки напоминания</strong> </em>(Otpravkinapominaniya) — атрибут с типом данных «Запись», связанный шаблон — «Отправки ежедневного напоминания». Установите взаимную связь с новым атрибутом — Поиск (Poisk). Проставьте галочкe «Хранить несколько значений».</li>
+</ul>
+<p><strong>3.</strong> Нарисуйте схему процесса по типу:</p>
+<div class="screenshot_with_caption">
+<p><img align="" alt="Типовая схема процесса" class="img-responsive" height="208" src="https://kb.comindware.ru/assets/timenotif2.jpg" width="470"/></p>
+<p class="caption">Типовая схема процесса</p>
+</div>
+<p><strong>4.</strong> Настройте стартовое событие-таймер.</p>
+<div class="screenshot_with_caption">
+<p><img align="" alt="Настройка таймера" class="img-responsive" height="569" src="https://kb.comindware.ru/assets/timenotif3.jpg" width="983"/></p>
+<p class="caption">Настройка таймера</p>
+</div>
+<div class="blue_note"><strong>Примечание :</strong> если нужно, предусмотрите также простое стартовое событие для запуска процесса вручную без необходимости ожидания нового рабочего дня.</div>
+<p><strong>5. </strong>Настройте сценарий на входе в повторно используемый подпроцесс для создания записей, по которым затем будет запущен подпроцесс.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Действия сценария на входе" class="img-responsive" height="714" src="https://kb.comindware.ru/assets/trigger1.jpg" width="717"/></p>
+<p class="caption" style="font-size: 15px !important;">Действия сценария на входе</p>
+</div>
+<p><strong>5.1.</strong> Первые два блока являются системными, поэтому начните с добавления действия «Цикл по объектам» и его настройки.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Добавление действия «Цикл по объектам»" class="img-responsive" height="664" src="https://kb.comindware.ru/assets/trigger2.jpg" width="854"/></p>
+<p class="caption" style="font-size: 15px !important;">Добавление действия «Цикл по объектам»</p>
+</div>
+<p>Переменная «<em>local</em>» хранит в себе поочередно по одному экземпляру из указанной выборки. Внизу укажите атрибут «Сотрудники», в котором вычисляются сотрудники с активными задачами.</p>
+<p><span style="font-size: 11.5pt; line-height: 115%; font-family: 'Arial',sans-serif; color: #545764; letter-spacing: .15pt;"><strong>5.2. </strong></span>Добавьте действие «Создать запись» и настройте его. </p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Добавление действия «Создать запись»" class="img-responsive" height="651" src="https://kb.comindware.ru/assets/trigger3.jpg" width="854"/></p>
+<p class="caption" style="font-size: 15px !important;">Добавление действия «Создать запись»</p>
+</div>
+<ul>
+<li>Целевой шаблон записи — укажите шаблон записи «Отправка ежедневного напоминания»</li>
+<li>Ссылка на новую запись — укажите атрибут «Отправки напоминания», созданный в п.3.</li>
+<li>Операция со значениями — укажите «Добавить».</li>
+</ul>
+<p><strong>5.3. </strong>Добавьте действие «Изменить значения атрибутов» и настройте его.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Добавление действия «Изменить значения атрибутов»" class="img-responsive" height="640" src="https://kb.comindware.ru/assets/trigger4.jpg" width="844"/></p>
+<p class="caption" style="font-size: 15px !important;">Добавление действия «Изменить значения атрибутов»</p>
+</div>
+<p>Нажмите «Создать», выберите атрибут «Сотрудник», укажите «Заменить» в «Операция со значениями» и вставьте формулу $$local в последнем столбце.</p>
+<p><strong>6.</strong> Настройте запуск повторно-используемого подпроцесса.</p>
+<div class="screenshot_with_caption">
+<p><img align="" alt="Настройка подпроцесса" class="img-responsive" height="697" src="https://kb.comindware.ru/assets/trigger5.jpg" width="975"/></p>
+<p class="caption">Настройка подпроцесса</p>
+</div>
+<p>В «Записи для запуска процесса» укажите атрибут «Отправки напоминания», а в «Шаблоне вызываемого процесса» — «Отправка ежедневного напоминания».</p>
+<p><strong>7. </strong>Опубликуйте процесс и протестируйте.</p>
+<p>Перед началом тестирования проверьте работоспособность подключения для отправки почты и правильность настройки исходящего пути передачи данных.</p>
+<div class="blue_note">
+<p><strong>Примечание :</strong> для корректной работы вычисляемых полей и формулы запуска подпроцесса проверьте точное соответствие системного имени каждого шаблона записи и атрибутов, а также шаблонов процессов.</p>
+</div>

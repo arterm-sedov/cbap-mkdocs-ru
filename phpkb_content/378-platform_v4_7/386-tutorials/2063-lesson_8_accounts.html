@@ -1,0 +1,310 @@
+<h1>Урок 8. Аккаунты</h1><div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1hv71kg5g0">Введение</a></li>
+<li><a href="#toc1">Роли</a></li>
+<li><a href="#toc2">Группы аккаунтов</a></li>
+<li><a href="#mcetoc_1gbl7l07k1">Привязка групп к ролям</a></li>
+<li><a href="#mcetoc_1gbl7laj82">Назначение исполнителей</a></li>
+<li><a href="#toc4">Создание аккаунтов</a></li>
+<li><a href="#mcetoc_1gbl7n2av3">Список аккаунтов</a></li>
+<li><a href="#mcetoc_1gbl7n2av4">Назначение аккаунтам групп</a></li>
+<li><a href="#toc5">Разделы навигации  </a></li>
+<li><a href="#toc6">Тестирование</a></li>
+<li><a href="#mcetoc_1gbl7olq85">Результаты</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1hv71kg5g0">Введение</h2>
+<p>Из этого урока вы узнаете, как спроектировать оргструктуру, создать аккаунты для пользователей и управлять ими: назначать роли, выдавать и ограничивать права доступа, настраивать разделы навигации и назначать исполнителей задач.</p>
+<p>Сначала мы создадим роли и настроим права доступа к шаблонам, которые используются в процессе заказа автотранспорта. Затем создадим группы аккаунтов и привяжем их к ролям. После этого укажем исполнителей для задач — выберем в качестве исполнителей созданные группы. Прежде чем тестировать процесс, мы создадим несколько аккаунтов и добавим их в группы.</p>
+<p><strong>Предусловие:</strong> пройдены <samp data-name="aid" data-title="" data-value="2055"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2055}</span></samp> и  <samp data-name="aid" data-title="" data-value="2057"> <span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2057}</span></samp>.</p>
+<p><strong>Расчетная продолжительность:</strong> 15 мин.</p>
+<p><strong>Примечание:</strong> в данном уроке представлен продукт <strong>Comindware Business Application Platform</strong> версии <span style="color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">4.2.219.0</span>, внешний вид страниц и меню в других версиях продукта может отличаться.</p>
+<h2 id="toc1">Роли</h2>
+<p>Определим роли пользователей нашего приложения:</p>
+<ul>
+<li><em>Заказчик</em> — сотрудник компании, который должен иметь возможность создавать заявку и просматривать обработанную заявку;</li>
+<li><em>Секретарь</em> — согласует заявку, должен иметь доступ к редактированию и просмотру заявок;</li>
+<li><em>Диспетчер гаража </em>— принимает заявку и выделяет машину; должен иметь возможность редактировать заявку и формировать отчеты.</li>
+<li><em>Водитель </em>— выполняет рейс и фиксирует затраты.</li>
+</ul>
+<div class="notice notice-success">
+<p><strong>Определение</strong></p>
+<strong>Роли</strong> задают разрешения на доступ к ресурсам приложения: реестрам данных (шаблонам записей), спискам, кнопкам, формам, задачам бизнес-процесса и др. 
+<div>Настройка роли включает в себя:</div>
+<ul>
+<li>настройку разрешений на доступ к ресурсам приложения;</li>
+<li>выбор пунктов раздела навигации, который будет отображаться для пользователей, относящихся к этой роли;</li>
+<li>назначение роли пользователям и (или) группам пользователей.</li>
+</ul>
+</div>
+<p>Создадим роли и настроим для них разрешения…</p>
+<p><strong>1. </strong> С помощью боковой панели навигации прейдите в раздел «<strong>Настройки</strong>» — «<strong>Приложения</strong>» и откройте приложение <em>«Управление автопарком».</em></p>
+<p><strong> 2. </strong> Перейдите к разделу «<strong>Роли</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Переход к разделу настройки ролей пользователей бизнес-приложения" class="img-responsive" height="344" src="https://kb.comindware.ru/assets/img_6315de9b6cd0a.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Переход к разделу настройки ролей пользователей бизнес-приложения</p>
+</div>
+<p><strong> 3. </strong>В списке ролей нажмите кнопку «<strong>Создать</strong>». Отобразится страница свойств новой роли.</p>
+<p><strong> 4. </strong> Укажите <strong>название</strong> роли — <em>«Заказчик». </em></p>
+<div class="screenshot_with_caption">
+<p><img alt="Создание роли «Заказчик»" class="img-responsive" height="344" src="https://kb.comindware.ru/assets/img_6315defc20625.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Создание роли «Заказчик»</p>
+</div>
+<p>Определим разрешения для роли<em> «Заказчик»</em>. <em>Заказчик</em> должен иметь возможность создавать заявки (т. е. инициировать процесс заказа автотранспорта) и завершать задачи. Поэтому настроим разрешения на доступ к шаблону процесса…</p>
+<p><strong> 5. </strong> Перейдите на вкладку «<strong>Разрешения</strong>». </p>
+<p><strong> 6. </strong> В списке слева разверните процесс<em> «Заказ автотранспорта»</em> и перетащите в таблицу разрешений кнопки «<strong>Создать</strong>» и «<strong>Завершить задачу</strong>».</p>
+<p><strong>7. </strong>Установите флажок (разрешение) в столбце «<strong>Просмотр</strong>» для приложения <em>«Управление автопарком».</em></p>
+<p><strong>8. </strong>Установите флажки (разрешения) в столбце «<strong>Создание</strong>» и «<strong>Просмотр</strong>» для шаблона процесса <em>«Заказ автотранспорта».</em></p>
+<p><strong>9. </strong>Для кнопок «<strong>Создать</strong>» и «<strong>Завершить задачу</strong>» установите разрешения «<strong>Использование кнопки</strong>», как показано на иллюстрации.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Настройка разрешений для приложения, шаблона процесса и кнопок «Создать» и «Завершить задачу»" class="img-responsive" height="563" src="https://kb.comindware.ru/assets/img_6315e22c82b48.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Настройка разрешений для приложения, шаблона процесса и кнопок «Создать» и «Завершить задачу»</p>
+</div>
+<p>Чтобы заказчик смог выбрать тип автомобиля при подаче заявки, он должен иметь возможность просмотра данных из справочника типов автомобилей…</p>
+<p><strong> 10. </strong> Перетащите на таблицу разрешений справочник <em>«Тип автомобиля»</em> и установите для него разрешение «<strong>Просмотр</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Назначение разрешения «Просмотр» для справочника «Тип автомобиля»" class="img-responsive" height="595" src="https://kb.comindware.ru/assets/img_6475e0b50cece.png" width="1266"/></p>
+<p class="caption" style="font-size: 11pt !important;">Назначение разрешения «<strong>Просмотр</strong>» для справочника «Тип автомобиля»</p>
+</div>
+<p>Теперь настроим доступ <em>Заказчика</em> к созданию заявок на автомобиль и просмотра списка заявок и формы заявки…</p>
+<p><strong> 11. </strong> Раскройте список <em>«Заявка на автомобиль»</em> на панели элементов слева и перетащите список «<strong>Все записи</strong>» в таблицу разрешений.</p>
+<p><strong> 12. </strong> Перетащите в таблицу разрешений форму <em>«Заявка на автомобиль — Основная форма».</em></p>
+<p><strong> 13. </strong> Установите разрешения «<strong>Создание</strong>» и «<strong>Просмотр</strong>» для шаблона записи <em>«Заявка на автомобиль».</em></p>
+<p><strong>14. </strong> Установите разрешение «<strong>Просмотр</strong>» для основной формы и таблицы «<strong>Все записи</strong>» шаблона <em>«Заявка на автомобиль».</em></p>
+<p><strong>15. </strong> Сохраните роль <em>«Заказчик».</em></p>
+<div class="screenshot_with_caption">
+<p><img alt="Настройка разрешений роли «Заказчик» для создания и просмотра заявок на автомобиль" class="img-responsive" height="674" src="https://kb.comindware.ru/assets/img_6315e4ba725ab.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Настройка разрешений роли «Заказчик» для создания и просмотра заявок на автомобиль</p>
+</div>
+<p>Аналогичным образом создайте роль <em>«Секретарь»</em> и назначьте ей разрешения…</p>
+<p><strong> 1. </strong> На вкладке «<strong>Разрешения</strong>» перетащите в таблицу разрешений процесс <em>«Заказ автотранспорта»</em> и установите разрешения «<strong>Просмотр</strong>» и «<strong>Ввод данных</strong>».</p>
+<p><strong> 2. </strong> Разверните процесс <em>«Заказ автотранспорта»</em> и перетащите в таблицу разрешений кнопки «<strong>Завершить задачу</strong>» и «<strong>Сохранить</strong>».</p>
+<p><strong> 3. </strong> Установите для кнопок «<strong>Завершить задачу</strong>» и «<strong>Сохранить</strong>» разрешение «<strong>Использование кнопки</strong>». </p>
+<p><strong> 4. </strong> Перетащите в таблицу разрешений шаблон <em>«Заявка на автомобиль»</em> и установите для него разрешение «<strong>Полный доступ</strong>».</p>
+<p><strong> 5. </strong> Перетащите в таблицу разрешений шаблоны<em> «Тип автомобиля»</em> и <em>«Статус заявки»</em> и установите для них разрешение «<strong>Просмотр</strong>».</p>
+<p><strong>6.</strong> Сохраните роль <em>«Секретарь»</em>.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Настройка разрешений роли «Секретарь»" class="img-responsive" height="674" src="https://kb.comindware.ru/assets/img_6315e50c0a809.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Настройка разрешений роли «Секретарь»</p>
+</div>
+<p>Создайте роль <em>«Диспетчер гаража»</em> и назначьте ей разрешения…</p>
+<p><strong>1. </strong> Перейдите на вкладку «<strong>Разрешения</strong>».</p>
+<p><strong>2. </strong> Перетащите в таблицу разрешений шаблоны <em>«Заказ автотранспорта», «Заявка на автомобиль», «Затраты», «Тип затрат», «Автомобиль», «Тип автомобиля», «Статус заявки»</em> и установите для них разрешение «<strong>Полный доступ</strong>».</p>
+<p><strong>3.</strong> Сохраните роль <em>«Диспетчер гаража».</em></p>
+<div class="screenshot_with_caption">
+<p><img alt="Настройка разрешений роли «Диспетчер гаража»" class="img-responsive" height="674" src="https://kb.comindware.ru/assets/img_6315e533518af.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Настройка разрешений роли «Диспетчер гаража»</p>
+</div>
+<p>Создайте роль <em>«Водитель»</em> и назначьте ей разрешения…</p>
+<p><strong>1. </strong> На вкладке «<strong>Разрешения</strong>» добавьте следующие шаблоны:<em> «Тип затрат», «Тип автомобиля», «Статус заявки»</em> и установите для них разрешение «<strong>Просмотр</strong>».</p>
+<p><strong>2. </strong>Для шаблона «Автомобиль» установите разрешения «<strong>Просмотр</strong>».</p>
+<p><strong>3. </strong> Перетащите в таблицу разрешений шаблон <em>«Заявка на автомобиль»</em> и установите для него разрешения «<strong>Просмотр</strong>» и «<strong>Ввод данных</strong>».</p>
+<p><strong>4. </strong> Разверните процесс <em>«Заказ автотранспорта»</em> и перетащите в таблицу разрешений операции «<strong>Сохранить</strong>» и «<strong>Завершить задачу</strong>». Укажите для них разрешение «<strong>Использование кнопки</strong>».</p>
+<p><strong> 5. </strong> Для процесса <em>«Заказ автотранспорта»</em> установите разрешения «<strong>Просмотр</strong>» и «<strong>Ввод данных</strong>».</p>
+<p><strong> 6. </strong> Перетащите в таблицу разрешений шаблон <em>«Затраты»</em> и установите для него разрешения «<strong>Создание</strong>», «<strong>Просмотр</strong>» и «<strong>Ввод данных</strong>».</p>
+<p><strong>7. </strong>Разверните шаблон <em>«Затраты»</em>, перетащите из него в таблицу разрешений таблицу «<strong>Все записи</strong>» и установите для неё разрешение «<strong>Просмотр</strong>»</p>
+<p><strong>9. </strong>Из шаблона<em> «Затраты»</em> перетащите в таблицу разрешений кнопку «<strong>Создать</strong>» и установите для нее разрешение «<strong>Использование кнопки</strong>».</p>
+<p><strong>10.</strong> Сохраните роль <em>«Водитель».</em></p>
+<div class="screenshot_with_caption">
+<p><img alt="Настройка разрешений роли «Водитель»" class="img-responsive" height="800" src="https://kb.comindware.ru/assets/img_648059ae643fc.png" width="1264"/></p>
+<p class="caption" style="font-size: 11pt !important;">Настройка разрешений роли «Водитель»</p>
+</div>
+<h2 id="toc2">Группы аккаунтов</h2>
+<p>Мы создали роли <em>«Заказчик», «Секретарь», «Водитель» </em>и <em>«Диспетчер гаража»</em> и определили для них разрешения на доступ к ресурсам приложения. Теперь создадим группы аккаунтов и назначим им роли…</p>
+<p><strong> 1. </strong> На боковой панели навигации выберите пункты «<strong>Настройки</strong>» — «<strong>Группы</strong>».</p>
+<p><strong> 2. </strong>В списке групп нажмите кнопку «<strong>Создать</strong>». Укажите название группы — <em>«Секретари»</em> и нажмите кнопку «<strong>Создать</strong>», чтобы сохранить группу.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Создание новой группы аккаунтов" class="img-responsive" height="313" src="https://kb.comindware.ru/assets/img_631650825585e.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Создание новой группы аккаунтов</p>
+</div>
+<p><strong> 3. </strong> Аналогичным образом создайте группы <em>«Диспетчеры» </em>и <em>«Водители».</em></p>
+<p>Создадим еще одну группу, которая будет включать в себя всех сотрудников…</p>
+<p><strong> 4. </strong> Создайте группу <em>«Сотрудники».</em></p>
+<p><strong> 5. </strong> На вкладке «<strong>Участники</strong>» нажмите в левом столбце группы <em>«Диспетчеры», «Водители» </em>и <em>«Секретари»</em>. Они отобразятся в правом столбце будут добавлены в группу <em>«Сотрудники».</em></p>
+<p><strong>6. </strong> Нажмите кнопку «<strong>Создать</strong>», чтобы сохранить группу.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Участники группы «Сотрудники»" class="img-responsive" height="464" src="https://kb.comindware.ru/assets/img_6316513a2b40c.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Участники группы «Сотрудники»</p>
+</div>
+<div class="screenshot_with_caption">
+<p><img alt="Список групп аккаунтов" class="img-responsive" height="385" src="https://kb.comindware.ru/assets/img_631651524e957.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Список групп аккаунтов</p>
+</div>
+<h2 id="mcetoc_1gbl7l07k1">Привязка групп к ролям</h2>
+<p><strong> 1. </strong> На боковой панели выберите пункт «<strong>Настройки</strong>» — «<strong>Роли</strong>». </p>
+<p><strong>2. </strong>В отобразившемся списке ролей откройте роль <em>«Заказчик»</em>, дважды нажав её.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Список ролей" class="img-responsive" height="353" src="https://kb.comindware.ru/assets/img_631651930c1b4.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Список ролей</p>
+</div>
+<p>Заказчиком может являться любой сотрудник, поэтому укажем для него группу <em>«Сотрудники»…</em></p>
+<p><strong> 3. </strong> На вкладке «<strong>Свойства роли</strong>» в области «<strong>Выберите участников роли</strong>» нажмите группу «Сотрудники», чтобы перенести ее в список «<strong>Выбранные аккаунты и группы</strong>».</p>
+<p><strong>4. </strong> Сохраните роль <em>«Заказчик».</em></p>
+<div class="screenshot_with_caption">
+<p><img alt="Выбор группы аккаунтов для роли «Заказчик»" class="img-responsive" height="752" src="https://kb.comindware.ru/assets/img_65f0713fde15a.png" width="996"/></p>
+<p class="caption" style="font-size: 11pt !important;">Выбор группы аккаунтов для роли «Заказчик»</p>
+</div>
+<p><strong> 5. </strong> Вернитесь к списку ролей и откройте роль <em>«Секретарь».</em></p>
+<p><strong> 6. </strong> Укажите для роли <em>«Секретарь»</em> группу <em>«Секретари»</em> и сохраните роль.</p>
+<p><strong> 7. </strong> В списке ролей откройте роль <em>«Диспетчер гаража»</em> и укажите для неё группу <em>«Диспетчеры».</em></p>
+<p><strong> 8. </strong> Для роли <em>«Водитель»</em> укажите группу <em>«Водители».</em></p>
+<h2 id="mcetoc_1gbl7laj82">Назначение исполнителей</h2>
+<p>Мы создали роли, указали для них группы аккаунтов и права доступа. Теперь определим исполнителей для задач процесса <em>«Заказ автотранспорта» </em>— укажем созданные группы в качестве исполнителей…</p>
+<p><strong> 1. </strong> В панели навигации выберите пункт «<strong>Настройки</strong>» — «<strong>Приложения</strong>» и перейдите к приложению <em>«Управление автопарком».</em></p>
+<p><strong> 2. </strong> Откройте раздел «<strong>Шаблоны</strong>» и перейдите к <span style="letter-spacing: 0.2px;">шаблону процесса <em>«Заказ автотранспорта».</em></span></p>
+<p><span style="letter-spacing: 0.2px;"><strong>3. </strong>Перейдите на вкладку «</span><em style="letter-spacing: 0.2px;"><strong>Диаграмма</strong><span style="letter-spacing: 0.2px;">» и нажмите кнопку «<strong>Редактировать</strong>».</span> </em></p>
+<p><strong> 4. </strong> Выберите пользовательскую задачу <em>«Согласовать заявку»</em> и в меню элемента нажмите кнопку «<strong>Свойства</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Переход к настройке свойств задачи с диаграммы бизнес-процесса" class="img-responsive" height="590" src="https://kb.comindware.ru/assets/img_631653d993314.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Переход к настройке свойств задачи с диаграммы бизнес-процесса</p>
+</div>
+<p>Ранее в качестве исполнителя был указан наш аккаунт, а теперь укажем исполнителями созданные группы…</p>
+<p><strong>5. </strong> Перейдите на вкладку «<strong>Дополнительные</strong>». </p>
+<p><strong>6. </strong> В поле «<strong>Исполнители</strong>» снимите флажок со своего аккаунта и установите флажок <em>«Секретарь». </em></p>
+<p><strong>7. </strong> Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Назначение исполнителей задачи" class="img-responsive" height="489" src="https://kb.comindware.ru/assets/img_6244de6eaa5af.png" width="1079"/></p>
+<p class="caption" style="font-size: 11pt !important;">Назначение исполнителей задачи</p>
+</div>
+<p>Аналогичным образом настроим исполнителей для других задач…</p>
+<p><strong> 8. </strong> Для задачи<em> «Принять заявку»</em> укажите в качестве исполнителя группу <em>«Диспетчер гаража».</em></p>
+<p><strong> 9. </strong> Для задачи <em>«Выполнить рейс»</em> укажите в качестве исполнителя группу <em>«Водитель».</em></p>
+<p><strong> 10. </strong> Опубликуйте диаграмму бизнес-процесса. </p>
+<p>Исполнитель задач <em>«Вам отказано» </em>и <em>«Машина выделена»</em> будет назначаться автоматически по атрибуту, указанному в их дополнительных свойствах — им будет назначен создатель процесса.</p>
+<h2 id="toc4">Создание аккаунтов</h2>
+<p>Создадим новые аккаунты и определим их в группы…</p>
+<p><strong> 1. </strong> В боковой навигации перейдите выберите пункт «<strong>Настройки</strong>» — «<strong>Аккаунты</strong>».</p>
+<p><strong> 2. </strong>В списке аккаунтов нажмите кнопку «<strong>Создать</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Список аккаунтов" class="img-responsive" height="259" src="https://kb.comindware.ru/assets/img_6316549a3a880.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Список аккаунтов</p>
+</div>
+<p><strong>3. </strong> В поле «<strong>Язык</strong>» укажите «<strong>Русский</strong>».</p>
+<p><strong>4. </strong> В поле «<strong>Ф. И. О.</strong>» укажите полное имя пользователя аккаунта.</p>
+<p><strong>5. </strong>В поле «<strong>Имя пользователя</strong>» — логин, под которым пользователь будет входить в аккаунт.</p>
+<p><strong> 6. </strong> Укажите <strong>пароль</strong> и адрес <strong>эл. почты</strong>.</p>
+<p><strong> 7. </strong> Укажите <strong>должность</strong> <em>«Диспетчер»</em> и <strong>отдел</strong> <em>«Гараж». </em></p>
+<p><strong>8. </strong> Нажмите кнопку «<strong>Создать</strong>», чтобы сохранить аккаунт. </p>
+<div class="screenshot_with_caption">
+<p><img alt="Создание аккаунта" class="img-responsive" height="853" src="https://kb.comindware.ru/assets/img_6316553102f6d.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Создание аккаунта</p>
+</div>
+<p><strong>9. </strong> Вернитесь к списку аккаунтов и создайте ещё один аккаунт, укажите для него <strong>должность</strong> <em>«Водитель»</em> и <strong>отдел</strong> <em>«Гараж».</em></p>
+<p><strong> 10. </strong>Создайте два аккаунта с <strong>должностью</strong> <em>«Секретарь».</em></p>
+<p><strong>11. </strong>Создайте аккаунт <em>Заказчика</em> с любой должностью, пользователь которого будет создавать заявку. </p>
+<div class="screenshot_with_caption">
+<p><img alt="Список аккаунтов" class="img-responsive" height="416" src="https://kb.comindware.ru/assets/img_6244e46e12ca4.png" width="1079"/></p>
+<h2 class="caption" id="mcetoc_1gbl7n2av3" style="font-size: 11pt !important;">Список аккаунтов</h2>
+</div>
+<h2 id="mcetoc_1gbl7n2av4">Назначение аккаунтам групп</h2>
+<p><strong> 1. </strong> На панели навигации выберите пункт «<strong>Настройки</strong>» — «<strong>Группы</strong>».</p>
+<p><strong> 2. </strong> Выберите группу <em>«Водители»</em> и перейдите на вкладку «<strong>Участники</strong>».</p>
+<p><strong> 3. </strong> Укажите участника группы — аккаунт водителя.</p>
+<p><strong>4. </strong> Нажмите кнопку «<strong>Сохранить</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Выбор участников группы" class="img-responsive" height="405" src="https://kb.comindware.ru/assets/img_6316560011972.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Выбор участников группы</p>
+</div>
+<p><strong> 5. </strong> Аналогичным образом добавьте аккаунт диспетчера в группу <em>«Диспетчеры»</em>, а аккаунты секретарей — в группу <em>«Секретари».</em></p>
+<p>Добавим пользователя в группу <em>«Сотрудники»…</em></p>
+<p><strong>6. </strong> Выберите группу <em>«Сотрудники»</em> и добавьте в нее аккаунт, пользователь которого будет создавать заявку, в нашем случае это <em>«Евгений З.».</em></p>
+<div class="screenshot_with_caption">
+<p><img alt="Добавление аккаунта заказчика в группу «Сотрудники»" class="img-responsive" height="457" src="https://kb.comindware.ru/assets/img_6316568089c12.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Добавление аккаунта заказчика в группу «Сотрудники»</p>
+</div>
+<h2 id="toc5">Разделы навигации  </h2>
+<div class="notice notice-success">
+<p><strong>Определение</strong></p>
+Разделы навигации отображаются в панели навигации слева и позволяют быстро переходить к различным страницам <strong>Comindware Business Application Platform</strong>.</div>
+<p>До этого момента мы использовали системный раздел навигации, теперь настроим раздел навигации для каждой роли. </p>
+<p><strong>1. </strong> Выберите на боковой панели навигации пункт «<strong>Настройки</strong>» — «<strong>Приложения</strong>».</p>
+<p><strong>2. </strong> В списке приложений выберите <em>«Управление автопарком».</em></p>
+<p><strong>3. </strong> Перейдите к странице «<strong>Разделы навигации</strong>».</p>
+<p><strong> 4. </strong>В отобразившемся списке разделов навигации нажмите кнопку «<strong>Создать</strong>».</p>
+<p><strong> 5. </strong> С помощью панели свойств укажите <strong>отображаемое название</strong> раздела навигации «Заказчик» и удостоверьтесь, что выбрано <strong>приложение</strong> <em>«Управление автопарком».</em></p>
+<p>Определим роли, для которых будет настроена боковая панель навигации…</p>
+<p><strong>6. </strong> Нажмите надпись «<strong>0 ролей</strong>» на панели свойств, чтобы назначить роль, для пользователей которой будет отображаться раздел навигации.</p>
+<p><strong>7. </strong> В окне <em>«Роли»</em> укажите роль <em>«Заказчик»</em> и нажмите кнопку «<strong>Применить</strong>».</p>
+<div class="screenshot_with_caption">
+<p><img alt="Выбор роли для раздела навигации" class="img-responsive" height="690" src="https://kb.comindware.ru/assets/img_63165b279ddbd.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Выбор роли для раздела навигации</p>
+</div>
+<p>Теперь определим, какие пункты должны отображаться на боковой панели для <em>Заказчика</em>…</p>
+<p><strong>8. </strong> Перетащите элемент «<strong>Мои задачи</strong>» с левой панели на макет раздела навигации.</p>
+<p><strong> 9. </strong> Разверните пункты «<strong>Шаблоны процессов</strong>», <em>«Заказ автотранспорта» </em>и «<strong>Кнопки</strong>» и перетащите кнопку «<strong>Создать</strong>» на макет раздела навигации.</p>
+<p><strong>10. </strong> Сохраните раздел навигации.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Настройка раздела навигации для роли «Заказчик»" class="img-responsive" height="509" src="https://kb.comindware.ru/assets/img_63165cc598f78.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Настройка раздела навигации для роли «Заказчик»</p>
+</div>
+<p><strong>Аналогичным образом создадим раздел навигации для роли<em> «Секретарь»…</em></strong></p>
+<p><strong> 1. </strong> В списке разделов навигации приложения <em>«Управление автопарком»</em> нажмите кнопку «<strong>Создать</strong>».</p>
+<p><strong> 2. </strong> Укажите <strong>отображаемое <em>название</em> </strong>раздела навигации<em> «Секретарь».</em></p>
+<p><strong> 3. </strong> Назначьте роль <em>«Секретарь».</em></p>
+<p><strong> 4. </strong> Перетащите пункт «<strong>Мои задачи</strong>» на макет раздела навигации.</p>
+<p><strong> 5. </strong> Разверните пункты «<strong>Шаблоны записей</strong>» → <em>«Заявка на автомобиль»</em> → «<strong>Таблицы</strong>».</p>
+<p><strong>6. </strong>Перетащите таблицу «<strong>Все записи</strong>» на макет раздела навигации.</p>
+<p><strong> 7. </strong> С помощью панели свойств переименуйте пункт «<strong>Все записи</strong>» в <em>«Заявки на автомобиль».</em></p>
+<p><strong>8. </strong> Сохраните раздел навигации.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Настройка раздела навигации для роли «Секретарь»" class="img-responsive" height="620" src="https://kb.comindware.ru/assets/img_63165c5dab942.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Настройка раздела навигации для роли «Секретарь»</p>
+</div>
+<p><strong>Настроим раздел навигации для сотрудников гаража — водителей и диспетчеров, чтобы они могли обрабатывать заявки и  просматривать <span style="letter-spacing: 0.2px;">сводку заявок по месяцам…</span></strong></p>
+<p><strong> 1. </strong>В списке разделов навигации приложения «Управление автопарком» откройте созданный на <a href="https://kb.comindware.ru/article.php?id=2057">Уроке 4</a> раздел навигации <em>«Сводки».</em></p>
+<p><strong> 2. </strong>Измените <strong>отображаемое название</strong> раздела навигации на <em>«Сотрудник гаража».</em></p>
+<p><strong> 3. </strong> Назначьте две роли: <em>«Диспетчер гаража»</em> и <em>«Водитель».</em></p>
+<p><strong> 4. </strong> Перетащите на макет раздела навигации элемент «<strong>Мои задачи</strong>».</p>
+<p><strong> 5. </strong> Разверните шаблон <em>«Заявка на автомобиль»,</em> перетащите на макет раздела навигации таблицу «<strong>Все записи</strong>» и переименуйте её в <em>«Заявки на автомобиль».</em></p>
+<p><strong> 6. </strong> Перетащите на макет раздела навигации таблицу «<strong>Все записи</strong>» шаблона <em>«Затраты»</em> и переименуйте её в <em>«Затраты».</em></p>
+<p><strong> 7. </strong> Сохраните раздел навигации.</p>
+<div class="screenshot_with_caption" style="font-size: 11pt !important;">
+<p><img alt="Настройка раздела навигации для роли «Диспетчер гаража»" class="img-responsive" height="574" src="https://kb.comindware.ru/assets/img_63165d425dc49.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Настройка раздела навигации для роли «Диспетчер гаража»</p>
+</div>
+<div class="screenshot_with_caption">
+<p><img alt="Список разделов навигации приложения «Управление автопарком»" class="img-responsive" height="327" src="https://kb.comindware.ru/assets/img_63165d790da30.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Список разделов навигации приложения «Управление автопарком»</p>
+</div>
+<h2 id="toc6">Тестирование</h2>
+<p>Для тестирования настроенных ролей и исполнителей вам понадобится несколько раз войти в созданные аккаунты с различными ролями — <em>«Заказчик», «Секретарь», «Диспетчер гаража» </em>и <em>«Водитель»</em>. Посмотреть имя пользователя аккаунта можно в разделе «<strong>Настройки</strong>» — «<strong>Аккаунты</strong>». Для удобства проводите тестирование новом окне в режиме <em>«Инкогнито»</em> или разных браузерах.</p>
+<p><strong> 1. </strong> Войдите в аккаунт заказчика.</p>
+<p><strong> 2. </strong> Нажмите кнопку «<strong>Создать</strong>» на боковой панели навигации и заполните поля стартовой формы, чтобы создать заявку на автомобиль и запустить бизнес-процесс.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Боковая панель навигации Заказчика и стартовая форма заявки на автомобиль" class="img-responsive" height="429" src="https://kb.comindware.ru/assets/img_63165e06bcbf7.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Боковая панель навигации Заказчика и стартовая форма заявки на автомобиль</p>
+</div>
+<p><strong> 3. </strong> Выйдите из системы: для этого нажмите значок пользователя в правом верхнем углу страницы и выберите пункт «<strong>Выход</strong>».</p>
+<div class="screenshot_with_caption" style="font-size: 11pt !important;">
+<p><img alt="Выход из системы" class="img-responsive" height="209" src="https://kb.comindware.ru/assets/img_63165e4ce6a95.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Выход из системы</p>
+</div>
+<p><strong> 4. </strong> Войдите в аккаунт секретаря.</p>
+<p><strong> 5. </strong> Перейдите в раздел «<strong>Мои задачи</strong>» с помощью боковой панели навигации. </p>
+<p><strong>6. </strong> Откройте задачу <em>«Согласовать заявку»</em>, дважды нажав её.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Представление раздела «Мои задачи» для Секретаря" class="img-responsive" height="346" src="https://kb.comindware.ru/assets/img_63165ea864bbd.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Представление раздела «<strong>Мои задачи</strong>» для Секретаря</p>
+</div>
+<p><strong> 7. </strong> Установите флажок<em> «Одобрено»</em> и завершите задачу.</p>
+<p><strong> 8. </strong> Выйдите из системы.</p>
+<p><strong>9. </strong>Войдите в аккаунт диспетчера гаража. </p>
+<p><strong> 10. </strong> Перейдите в раздел «<strong>Мои задачи</strong>» и откройте задачу <em>«Принять заявку».</em></p>
+<p><strong> 11. </strong>Выберите автомобиль, установите флажок <em>«Принято»</em> и завершите задачу.</p>
+<p><strong>12. </strong>Выйдите из системы.</p>
+<div class="screenshot_with_caption" style="font-size: 11pt !important;">
+<p><img alt="Боковая панель навигации и форма заявки на автомобиль для Диспетчера гаража" class="img-responsive" height="623" src="https://kb.comindware.ru/assets/img_6316638d89f46.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Боковая панель навигации и форма заявки на автомобиль для Диспетчера гаража</p>
+</div>
+<p><strong> 13. </strong> Войдите в аккаунт водителя.</p>
+<p><strong>14. </strong>Откройте задачу <em>«Выполнить рейс»</em> и заполните данные по затратам.</p>
+<p><strong> 15. </strong> Завершите задачу.</p>
+<div class="screenshot_with_caption" style="font-size: 11pt !important;">
+<p><img alt="Боковая панель навигации и форма заявки на автомобиль для Водителя" class="img-responsive" height="782" src="https://kb.comindware.ru/assets/img_63166425945bd.png" width="1254"/></p>
+<p class="caption" style="font-size: 11pt !important;">Боковая панель навигации и форма заявки на автомобиль для Водителя</p>
+</div>
+<p><strong>16. </strong>Снова войдите в аккаунт заказчика и завершите задачу <em>«Машина выделена».</em></p>
+<h2 id="mcetoc_1gbl7olq85">Результаты</h2>
+<p>Поздравляем! Вы научились настраивать роли и определять права доступа, создавать аккаунты и группы, а также настраивать разделы навигации. Вы улучшили процесс: теперь выполнением задач процесса занимаются разные пользователи, имеющие разные роли, а в целях безопасности и удобства использования платформы каждый из них имеет доступ только к тем ресурсам, которые им предназначены.</p>
+<p>В <a href="https://kb.comindware.ru/article.php?id=2064"> следующем уроке </a> вы познакомитесь с формированием документов с помощью Comindware Business Application Platform.</p>

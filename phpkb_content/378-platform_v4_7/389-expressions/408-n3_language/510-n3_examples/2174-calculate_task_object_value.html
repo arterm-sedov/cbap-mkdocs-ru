@@ -1,0 +1,15 @@
+<h1>Вычисление отображаемого значения связанного с задачей объекта</h1><p>В <strong>Comindware</strong> <strong>Business</strong> <strong>Application</strong> <strong>Platform</strong> существует возможность вычисления таблицы системных задач в отдельном шаблоне записи для отображения большего количества параметров задачи и настройки более удобной группировки (например, по связанному объекту). При этом, каждый из параметров-атрибутов должен быть создан в таком шаблоне записи, и в каждом из них должно быть настроено вычисляемое выражение на языке N3. В данной статье дан пример выражения для вычисления отображаемого названия записи, с которой связана задача.</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">
+<p>@prefix task: &lt;http://comindware.com/ontology/task#&gt;.<br/>@prefix cmwui: &lt;http://comindware.com/ontology/ui#&gt;.<br/>@prefix cmw: &lt;http://comindware.com/logics#&gt;.</p>
+<p><br/>{</p>
+<p><br/>?item task:objectId ?objectId. <br/>?objectId cmw:container ?cmwcontainer.<br/>?cmwcontainer cmwui:displayNamePredicate ?cmwuidisplayNamePredicate.<br/>?objectId ?cmwuidisplayNamePredicate ?value.</p>
+<p><br/>}</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>

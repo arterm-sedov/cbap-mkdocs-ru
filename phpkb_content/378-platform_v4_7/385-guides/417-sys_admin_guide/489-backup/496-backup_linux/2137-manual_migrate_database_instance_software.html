@@ -1,0 +1,211 @@
+<h1>Ручной перенос базы данных экземпляра ПО</h1><div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1gg4oo8u47">Введение</a></li>
+<li><a href="#mcetoc_1gg4oo8u48">Создание снимка базы данных</a></li>
+<li><a href="#mcetoc_1gg4oo8u49">Восстановление базы данных экземпляра ПО из снимка на новой машине</a></li>
+<li><a href="#mcetoc_1i1poltsp3">Запуск и проверка конфигурации экземпляра ПО</a></li>
+<li><a href="#mcetoc_1i1pp7vbl0">Связанные статьи</a></li>
+</ul>
+</div>
+<h2 dir="ltr" id="mcetoc_1gg4oo8u47">Введение</h2>
+<p dir="ltr">В настоящей статье представлена инструкция по переносу копии кэша всего кластера Apache Ignite (далее «Снимки») в новый экземпляр ПО <strong>Comindware Business Application Platform</strong> (далее «экземпляр ПО», «ПО») под управлением ОС Linux. Снимки можно создавать онлайн, на активном кластере под пользовательской нагрузкой.</p>
+<p dir="ltr">Для примера мы рассмотрим перенос базы данных из снимка, созданного на одной машине, в экземпляр ПО, развёрнутый на другой машине.</p>
+<p dir="ltr">На обеих машинах ПО установлено по умолчанию в папке <code>/var/www/comindware/</code></p>
+<p dir="ltr">Снимок базы данных Apache Ignite будет создан в папке <code>/var/lib/ignite/snapshots/</code></p>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>Перенос базы данных можно осуществить только посредством создания снимка Apache Ignite! Не пытайтесь создавать копию базы данных на файловом уровне — это приведёт к утрате её работоспособности.</p>
+</div>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Рекомендуется предварительно прочесть всю инструкцию для понимания процедуры в целом.</p>
+</div>
+<h2 dir="ltr" id="mcetoc_1gg4oo8u48" role="presentation">Создание снимка базы данных</h2>
+<ol class="colored_numbers_list">
+<li aria-level="1" dir="ltr">
+<p dir="ltr" role="presentation">Все последующие команды следует выполнять от имени суперпользователя <code>root</code>. Для этого введите команду:</p>
+<pre class="source_code_container"><code>sudo -i</code></pre>
+</li>
+<li aria-level="1" dir="ltr">
+<p dir="ltr" role="presentation">Перейдите в папку ПО:</p>
+<pre class="source_code_container"><code>cd /var/www/comindware/<br/></code></pre>
+</li>
+<li aria-level="1" dir="ltr">
+<p dir="ltr" role="presentation">Откройте файл <code>Ignite.config</code> в текстовом редакторе nano:</p>
+<pre class="source_code_container"><code>nano -v Ignite.config</code></pre>
+<p dir="ltr" role="presentation"> </p>
+</li>
+<li aria-level="1" dir="ltr">
+<p dir="ltr" role="presentation"><span style="letter-spacing: 0.2px;">Проверьте содержимое директивы </span><code style="letter-spacing: 0.2px;">&lt;workDirectory&gt;</code><span style="letter-spacing: 0.2px;">:</span></p>
+<pre class="source_code_container"><code>&lt;workDirectory&gt;/path/to/WorkDir&lt;/workDirectory&gt;</code></pre>
+<div class="screenshot_with_caption">
+<p><img alt="Путь к рабочей папке в файле конфигурации Apache Ignite" class="img-responsive" height="94" src="https://kb.comindware.ru/assets/img_63567910ececd.png" width="641"/></p>
+<p class="caption">Путь к рабочей папке в файле конфигурации Apache Ignite</p>
+</div>
+<p dir="ltr"><code>
+</code></p>
+<p dir="ltr" style="padding-left: 30px;">Если директива <code>&lt;workDirectory&gt; </code>имеется, она содержит путь к рабочей папке базы данных экземпляра ПО.</p>
+<p dir="ltr" style="padding-left: 30px;">Если директива <code>&lt;workDirectory&gt; </code>отсутствует, база данных экземпляра ПО хранится в папке <code>var/www/comindware/data/Database/</code></p>
+<p dir="ltr" style="padding-left: 30px;">В ПО версии 4.0.8 по умолчанию задан путь к базе данных экземпляра ПО <code>/var/lib/ignite/</code>. В настоящей инструкции используется этот путь.</p>
+</li>
+<li aria-level="1" dir="ltr">
+<p dir="ltr" role="presentation">Закройте nano:</p>
+<pre class="source_code_container"><code>ctrl+X</code></pre>
+</li>
+<li aria-level="1" dir="ltr">
+<p dir="ltr" role="presentation">Перейдите в папку с базой данных экземпляра ПО в рабочей папке и выведите на экран её содержимое:</p>
+<pre class="source_code_container"><code>cd /var/lib/ignite/db/ &amp;&amp; ll<br/></code></pre>
+<div class="screenshot_with_caption">
+<p><img alt="Просмотр содержимого папки с базой данных экземпляра ПО" class="img-responsive" height="157" src="https://kb.comindware.ru/assets/img_635679e668157.png" width="644"/></p>
+<p class="caption">Просмотр содержимого папки с базой данных экземпляра ПО </p>
+</div>
+</li>
+<li aria-level="1" dir="ltr">
+<p dir="ltr" role="presentation">Проверьте актуальность данных по дате последней записи — она должна совпадать с датой последней активности платформы. В примере на иллюстрации видно, что содержимое папок <code>/marshaller</code> и <code>/node-29690-2969e7d-e435-43b4-983a-7979ccec12c7/</code> изменялось 21 октября.</p>
+</li>
+<li aria-level="1" dir="ltr">
+<p dir="ltr" role="presentation">Перейдите в папку<code> /tmp/</code>:</p>
+<pre class="source_code_container"><code>cd /tmp/</code></pre>
+</li>
+<li aria-level="1" dir="ltr">
+<p dir="ltr" role="presentation"> Создайте с помощью nano скрипт <code>snapshot.sh</code>:</p>
+<pre class="source_code_container"><code>nano snapshot.sh<br/></code></pre>
+<div class="screenshot_with_caption">
+<p><img alt="Создание скрипта с помощью nano" class="img-responsive" height="437" src="https://kb.comindware.ru/assets/img_63567a89286c4.png" width="643"/></p>
+<p class="caption">Создание скрипта с помощью nano<code></code></p>
+</div>
+</li>
+<li aria-level="1" dir="ltr">Введите скрипт создания снимка, например:
+<pre class="source_code_container"><code>now=$(date +%Y_%m_%d)</code> <br/><code>/usr/share/ignite/bin/control.sh --snapshot create snapshot_$now</code></pre>
+</li>
+<li aria-level="1" dir="ltr">Сохраните скрипт: <code>ctrl+O </code>и закройте nano:<code> ctrl+X</code>.</li>
+<li aria-level="1" dir="ltr">
+<p dir="ltr" role="presentation">Запустите созданный скрипт из папки <code>/tmp/</code>:</p>
+<pre class="source_code_container"><code>sh snapshot.sh</code></pre>
+<div class="screenshot_with_caption">
+<p><img alt="Запуск скрипта создания снимка" class="img-responsive" height="304" src="https://kb.comindware.ru/assets/img_63567b113131e.png" width="645"/></p>
+<p class="caption">Запуск скрипта создания снимка</p>
+</div>
+</li>
+<li aria-level="1" dir="ltr">
+<p dir="ltr" role="presentation">Просмотрите содержимое папки со снимками Apache Ignite:</p>
+<pre class="source_code_container"><code>cd /var/lib/ignite/snapshots/ &amp;&amp; ll </code></pre>
+<div class="screenshot_with_caption">
+<p><img alt="Содержимое папки со снимками Apache Ignite" class="img-responsive" height="113" src="https://kb.comindware.ru/assets/img_63567d1f7a888.png" width="645"/></p>
+<p class="caption">Содержимое папки со снимками Apache Ignite</p>
+</div>
+</li>
+<li aria-level="1" dir="ltr">
+<p dir="ltr" role="presentation">Создайте архив папки снимка, например, /snapshot_2022_10_21/, и перенесите его на внешнее хранилище.</p>
+</li>
+</ol>
+<div class="blue_note"><strong>Важно!</strong> При перезапуске ОС содержимое папки<code> /tmp/</code> удаляется. Поэтому при необходимости перенесите созданный скрипт в личную папку пользователя.</div>
+<h2 dir="ltr" id="mcetoc_1gg4oo8u49">Восстановление базы данных экземпляра ПО из снимка на новой машине</h2>
+<ol class="colored_numbers_list">
+<li dir="ltr" role="presentation">На чистой машине установите ОС Ubuntu Server 22.04 LTS и ПО Comindware Business Application Platform последней версии согласно инструкции в статье «<samp data-name="aid" data-title="" data-value="2102"><img src="https://kb.comindware.ru/images/marker.png"/>{Article-ID:2102}</samp>».</li>
+<li aria-level="1" dir="ltr">
+<p dir="ltr" role="presentation">Все последующие команды следует выполнять от имени суперпользователя <code>root</code>. Для этого введите команду:</p>
+<pre class="source_code_container"><code>sudo -i</code></pre>
+</li>
+<li dir="ltr" role="presentation">Создайте папку для базы данных экземпляра ПО (например, <code>/cmw-db/</code>):
+<pre class="source_code_container"><code>mkdir /var/www/cmw-db/</code></pre>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Любые операции копирования в папку базы данных экземпляра ПО и из неё следует выполнять только после отключения сервисов Elasticsearch, comindware<em><strong>instancename</strong></em> (где  <code>instancename</code> — имя экземпляра ПО), NGINX, Kafka и Zookeeper.</p>
+</div>
+</li>
+<li aria-level="1" dir="ltr">
+<p dir="ltr" role="presentation">Остановите сервисы:</p>
+<pre class="source_code_container"><code>systemctl stop elasticsearch.service comindware<em><strong>instancename</strong></em>.service nginx.service kafka.service zookeeper.service</code></pre>
+</li>
+<li aria-level="1" dir="ltr">
+<p dir="ltr" role="presentation">Убедитесь, что сервисы остановлены. Статус должен быть<code> Active: inactive (dead)</code>:</p>
+<pre class="source_code_container"><code>systemctl status zookeeper.service kafka.service nginx.service comindwareinstancename.service elasticsearch.service<br/></code></pre>
+<div class="screenshot_with_caption">
+<p><img alt="Проверка остановки сервисов Elasticsearch, comindwareinstancename, NGINX, Kafka и Zookeeper" class="img-responsive" height="599" src="https://kb.comindware.ru/assets/img_63567da91a5c6.png" width="641"/></p>
+<p class="caption">Проверка остановки сервисов Elasticsearch, comindwareinstancename, NGINX, Kafka и Zookeeper</p>
+</div>
+<p dir="ltr" role="presentation"><code>
+</code></p>
+</li>
+<li aria-level="1" dir="ltr">
+<p dir="ltr" role="presentation">Скопируйте архив со снимком базы данных экземпляра ПО в папку <code>/tmp/</code>.</p>
+</li>
+<li aria-level="1" dir="ltr">
+<p dir="ltr" role="presentation">Распакуйте архив в текущую папку.</p>
+</li>
+<li aria-level="1" dir="ltr">
+<p dir="ltr" role="presentation">Перенесите содержимое папки снимка (например, <code>/tmp/snapshot_2022_10_21</code>) в папку базы данных экземпляра ПО: <code>/var/www/cmw-db/</code></p>
+<div class="screenshot_with_caption">
+<p><img alt="Содержимое папки снимка" class="img-responsive" height="138" src="https://kb.comindware.ru/assets/img_63567e41566e4.png" width="647"/></p>
+<p class="caption">Содержимое папки снимка</p>
+</div>
+</li>
+<li aria-level="1" dir="ltr">
+<p dir="ltr" role="presentation">Перейдите в папку с ПО:</p>
+<pre class="source_code_container"><code> cd /var/www/comindware/</code></pre>
+</li>
+<li aria-level="1" dir="ltr">
+<p dir="ltr" role="presentation">Откройте файл <code>Ignite.config</code> в текстовом редакторе nano:</p>
+<pre class="source_code_container"><code>nano Ignite.config</code></pre>
+</li>
+<li aria-level="1" dir="ltr">
+<p dir="ltr" role="presentation"> Найдите директиву <code>&lt;workDirectory&gt;</code> и укажите в ней путь папке базы данных экземпляра ПО: <br/><code>&lt;workDirectory&gt;/var/www/cmw-db&lt;/workDirectory&gt;</code></p>
+<div class="screenshot_with_caption">
+<p><img alt="Путь к новой папке базы данных в файле конфигурации Apache Ignite" class="img-responsive" height="303" src="https://kb.comindware.ru/assets/img_63567eabb2a14.png" width="645"/></p>
+<p class="caption">Путь к новой папке базы данных в файле конфигурации Apache Ignite</p>
+</div>
+</li>
+<li aria-level="1" dir="ltr">
+<p dir="ltr" role="presentation">Проверьте наличие, а также дату и время создания файлов и папок в папке с базой данных экземпляра ПО:</p>
+<pre class="source_code_container"><code>cd /var/www/cmw-db/ &amp;&amp; ll<br/>cd /var/www/cmw-db/db/ &amp;&amp; ll</code></pre>
+<p dir="ltr" style="padding-left: 30px;">Должны быть указаны дата и время создания снимка, если дата и время не совпадают с временем создания снимка, необходимо повторить перенос базы данных.</p>
+<div class="screenshot_with_caption">
+<p><img alt="Проверка наличия, даты и времени создания файлов и папок в папке базы данных экземпляра ПО" class="img-responsive" src="https://kb.comindware.ru/assets/img_63567efdbf883.png"/></p>
+<p class="caption">Проверка наличия, даты и времени создания файлов и папок в папке базы данных экземпляра ПО</p>
+</div>
+</li>
+<li aria-level="1" dir="ltr">
+<p dir="ltr" role="presentation">Замените права доступа и владельцев папок:</p>
+<pre class="source_code_container"><code>cd /var/www/<br/>chmod -R 777 cmw-db/<br/></code><code>sudo chown -R www-data:www-data cmw-db/</code></pre>
+</li>
+<li aria-level="1" dir="ltr">
+<p dir="ltr" role="presentation">Проверьте права доступа и владельцев папок:</p>
+<pre class="source_code_container"><code>ll</code></pre>
+<div class="screenshot_with_caption">
+<p><img alt="Проверка прав доступа и владельцев папок" class="img-responsive" height="186" src="https://kb.comindware.ru/assets/img_635680c397312.png" width="646"/></p>
+<p class="caption">Проверка прав доступа и владельцев папок</p>
+</div>
+</li>
+</ol>
+<h2 id="mcetoc_1i1poltsp3">Запуск и проверка конфигурации экземпляра ПО</h2>
+<ol class="colored_numbers_list">
+<li aria-level="1" dir="ltr">
+<p>Запустите необходимые службы и проверьте их статус. Статус должен быть <code>Active: running</code>:</p>
+<div class="highlight">
+<pre><code>systemctl start elasticsearch kafka nginx comindware<em><strong>instancename</strong></em><br/>systemctl status elasticsearch kafka nginx comindware<em><strong>instancename</strong></em></code></pre>
+</div>
+<div class="screenshot_with_caption">
+<p><img alt="Проверка активного состояния сервисов" class="img-responsive" height="592" src="https://kb.comindware.ru/assets/img_635680edb9d1d.png" width="646"/></p>
+<p class="caption">Проверка активного состояния сервисов</p>
+</div>
+</li>
+<li aria-level="1" dir="ltr">
+<p dir="ltr" role="presentation">Перезапустите машину.</p>
+</li>
+<li aria-level="1" dir="ltr">
+<p dir="ltr" role="presentation">Откройте в браузере веб-сайт с экземпляром ПО, например <code>localhost</code>.</p>
+</li>
+<li aria-level="1" dir="ltr">Дождитесь инициализации экземпляра ПО после перезапуска. Этот процесс может занять некоторое время. Может потребоваться обновить страницу браузера.
+<ul>
+<li aria-level="1" dir="ltr">Если загрузка веб-страницы экземпляра ПО завершается ошибкой, заново выполните перенос базы данных с полным удалением всего содержимого папки базы данных экземпляра ПО и использованием предыдущей резервной копии.<code></code></li>
+</ul>
+</li>
+<li aria-level="1" dir="ltr">Проверьте и исправьте конфигурацию экземпляра ПО, как указано в статье<em style="letter-spacing: 0.2px;"> «<samp data-name="aid" data-title="" data-value="2618"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png"/>Проверка и настройка конфигурации экземпляра ПО после восстановления из резервной копии {Article-ID:2618}</span></samp>».</em></li>
+</ol>
+<h2 id="mcetoc_1i1pp7vbl0">Связанные статьи</h2>
+<p><strong><samp data-name="aid" data-title="" data-value="2618"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png"/>Проверка и настройка конфигурации экземпляра ПО после восстановления из резервной копии {Article-ID:2618}</span></samp></strong></p>
+<div class="table-responsive">
+<p><a class="md-top md-icon mkdocs_imported_link" href="#"> <em class="fa-light fa-arrow-up">‌</em> К началу </a></p>
+</div>

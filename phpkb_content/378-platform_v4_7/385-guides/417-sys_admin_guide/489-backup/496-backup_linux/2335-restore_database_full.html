@@ -1,0 +1,310 @@
+<h1>Восстановление базы данных, вложенных файлов и журналов из полной резервной копии</h1><div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1grg5gft81">Введение</a></li>
+<li><a href="#mcetoc_1grg5gft84">Подготовка к восстановлению из резервной копии</a></li>
+<li><a href="#mcetoc_1i1po85o31">Восстановление базы данных и загруженных файлов из резервной копии</a></li>
+<li><a href="#mcetoc_1grg5gft87">Восстановление индексов Elasticsearch из резервной копии репозитория</a></li>
+<li><a href="#mcetoc_1i1poltsp3">Запуск и проверка конфигурации экземпляра ПО</a></li>
+<li><a href="#mcetoc_1i1po14qc0">Связанные статьи</a></li>
+</ul>
+</div>
+</div>
+</div>
+<h2 id="mcetoc_1grg5gft81">Введение</h2>
+<p>В этой статье представлены инструкции по восстановлению базы данных экземпляра ПО <strong>Comindware Business Application Platform </strong>(далее «экземпляр ПО»), развёрнутого в среде Linux.</p>
+<p>Данные инструкции подходят для восстановления из резервной копии, созданной по инструкциям в статье <em>«<span style="letter-spacing: 0.2px;"><samp data-name="aid" data-title="" data-value="2618"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО {Article-ID:2117}</span></samp></span>»</em>.</p>
+<p>В данных инструкциях используются только стандартные средства операционной системы и Elasticsearch.</p>
+<p>В статье рассмотрены два сценария:</p>
+<ul>
+<li>восстановление базы данных при её переносе на новую машину;</li>
+<li>восстановление базы данных на ранее работавшей системе c имеющейся базой данных.</li>
+</ul>
+<p>Для восстановления базы данных экземпляра ПО из файла резервной копии необходимо распаковать архив резерва в пользовательскую или временную директорию, откуда уже перенести файлы и директории в целевые директории.</p>
+<p>Для восстановления журнала операций требуется зарегистрировать репозиторий в Elasticsearch и из зарегистрированного репозитория восстановить данные.</p>
+<p><span style="font-size: 2rem; letter-spacing: 0.2px;">Исходные данные</span></p>
+<p>Для восстановления данных перейдите в директорию с резервной копией базы данных экземпляра ПО, созданной по инструкции в статье <em>«<span style="letter-spacing: 0.2px;"><samp data-name="aid" data-title="" data-value="2618"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО {Article-ID:2117}</span></samp></span>»</em>.</p>
+<p>В настоящей статье предполагается, что архив резервной копии находится папке <code>/tmp/</code>.</p>
+<h2 id="mcetoc_1grg5gft84">Подготовка к восстановлению из резервной копии</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Для выполнения всех операций перейдите в режим суперпользователя <code>root</code>:</p>
+<pre><code>sudo -s</code></pre>
+<p>или</p>
+<pre><code>su - </code></pre>
+</li>
+<li>
+<p>Перед тем как выполнять любые действия с файлами ПО и базы данных, остановите экземпляр ПО и его вспомогательные службы и удостоверьтесь, что они остановлены:</p>
+<pre><code>systemctl stop elasticsearch nginx kafka comindware<strong><em>&lt;instancename</em></strong></code><strong><em>&gt; </em></strong> <br/><code>systemctl status elasticsearch nginx kafka comindware<strong><em>&lt;instancename</em></strong><strong><em>&gt;</em></strong></code></pre>
+<div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="md-content">
+<p>Здесь <code><strong><em>&lt;instancename&gt;</em></strong></code> — имя экземпляра ПО.</p>
+</div>
+</div>
+</div>
+</li>
+<li>
+<div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="md-content">
+<p>Если восстановление из резервной копии производится в рамках переноса продукта на чистый экземпляр ПО без базы данных, переходите к <a href="#mcetoc_1grg5gft85">этапу 3</a>.</p>
+</div>
+</div>
+</div>
+</li>
+<li>
+<div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="md-content">
+<p> Для сохранения целостности данных перед восстановлением из резервной копии требуется очистить директории c базой данных и загруженными файлами:</p>
+</div>
+</div>
+</div>
+<pre><code>rm -rf /var/lib/comindware/<strong><em>&lt;instancename&gt;</em></strong>/Database/* </code> <br/><code>rm -rf /var/lib/comindware/<strong><em>&lt;instancename&gt;</em></strong>/Streams/* </code></pre>
+</li>
+</ol>
+<div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="md-content">
+<h2 id="mcetoc_1i1po85o31">Восстановление базы данных и загруженных файлов из резервной копии</h2>
+<ol class="colored_numbers_list">
+<li>
+<div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="md-content">
+<p>Перейдите в директорию с загруженным архивом резервной копии (например, <code>tmp)</code>:</p>
+</div>
+</div>
+</div>
+<pre><code><span class="nb">cd</span> /tmp/ </code></pre>
+<div class="md-container"> </div>
+</li>
+<li>
+<div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="md-content">
+<p>Распакуйте архив с резервной копией (например, <code>backup_2023_01_23_10_17.tar.bz2</code>):</p>
+<div class="highlight">
+<pre><code>tar -xf backup_2023_01_23_10_17.tar.bz2 </code></pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="md-content">
+<p>Войдите в директорию резервной копии и просмотрите её содержимое:</p>
+<div class="highlight">
+<pre><code><span class="nb">cd</span> backup_2023_01_23_10_17/ <br/>ll </code></pre>
+</div>
+<div class="screenshot_with_caption">
+<p><img alt="Содержимое папки резервной копии" class="img-responsive" height="163" src="https://kb.comindware.ru/assets/Pasted image 20230125133846.png" width="636"/></p>
+<p class="caption">Содержимое директории резервной копии</p>
+</div>
+<p>Распакованная директория резервной копии должна иметь следующую структуру:</p>
+<ul>
+<li style="list-style-type: none;">
+<ul style="margin-bottom: 0cm; margin-top: 0px;">
+<li style="break-after: avoid; margin: 0cm 0cm 8pt 14.2px; line-height: 107%; font-size: 12pt; font-family: Arial, sans-serif;"><code style="font-family: Consolas; color: #262626; background: #f2f2f2;"><span style="font-size: 10.0pt; line-height: 107%;">Database</span></code> — файлы базы данных.</li>
+</ul>
+<ul style="list-style-type: circle; margin-bottom: 0cm; margin-top: 0px;">
+<li style="break-after: avoid; margin: 0cm 0cm 8pt 37.4667px; line-height: 107%; font-size: 12pt; font-family: Arial, sans-serif; text-indent: 0.4px;"><code style="font-family: Consolas; color: #262626; background: #f2f2f2;"><span style="font-size: 10.0pt; line-height: 107%;">Scripts</span></code> — скомпилированные библиотеки для скриптов на языке C#.</li>
+<li style="break-after: avoid; margin: 0cm 0cm 8pt 37.4667px; line-height: 107%; font-size: 12pt; font-family: Arial, sans-serif; text-indent: 0.4px;"><code style="font-family: Consolas; color: #262626; background: #f2f2f2;"><span style="font-size: 10.0pt; line-height: 107%;">snapshots</span></code> — снимок данных Apache Ignite Ignite.</li>
+<li style="margin: 0cm 0cm 8pt 37.4667px; line-height: 107%; font-size: 12pt; font-family: Arial, sans-serif; text-indent: 0.4px;"><code style="font-family: Consolas; color: #262626; background: #f2f2f2;"><span style="font-size: 10.0pt; line-height: 107%;">wal</span></code> — журнал предварительной записи.</li>
+</ul>
+<ul style="margin-bottom: 0cm; margin-top: 0px;">
+<li style="margin: 0cm 0cm 8pt 14.2px; line-height: 107%; font-size: 12pt; font-family: Arial, sans-serif;"><code style="font-family: Consolas; color: #262626; background: #f2f2f2;"><span style="font-size: 10.0pt; line-height: 107%;">elastic</span></code><span style="font-size: 11.5pt; line-height: 107%; font-family: 'Open Sans', sans-serif; color: #545764;"> </span>— копия репозитория Elasticsearch.</li>
+<li style="margin: 0cm 0cm 8pt 14.2px; line-height: 107%; font-size: 12pt; font-family: Arial, sans-serif;"><code style="font-family: Consolas; color: #262626; background: #f2f2f2;"><span style="font-size: 10.0pt; line-height: 107%;">Streams</span></code><span style="font-size: 11.5pt; line-height: 107%; font-family: 'Open Sans', sans-serif; color: #545764;"> </span>— загруженные пользователями и сформированные системой файлы, которые прикреплены к соответствующим атрибутам.</li>
+</ul>
+</li>
+</ul>
+<div class="screenshot_with_caption">
+<p><img alt="Структура резервной копии" class="img-responsive" height="379" src="https://kb.comindware.ru/assets/Pasted image 20230125134843.png" width="631"/></p>
+<p class="caption">Структура резервной копии</p>
+</div>
+</div>
+</div>
+<code></code></div>
+</li>
+<li>
+<div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="md-content">
+<p>Перенесите снимок данных Apache Ignite (в примере — содержимое директории <code>/tmp/backup_2023_01_23_10_17/Database/snapshots/snapshot_2023_01_23_10_17/</code>) в рабочую директорию Apache Ignite (<code>/var/www/comindware/data/Database/</code>):</p>
+</div>
+</div>
+</div>
+<pre><code>mv Database/snapshots/snapshot_2023_01_23_10_17/* /var/lib/comindware/<strong><em>&lt;instancename&gt;</em></strong>/Database/</code></pre>
+</li>
+<li>
+<div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="md-content">
+<p>Перенесите директорию со скриптами из резервной копии в рабочую директорию Apache Ignite:</p>
+</div>
+</div>
+</div>
+<pre><code>mv Database/Scripts /var/lib/comindware/<strong><em>&lt;instancename&gt;</em></strong>/Database/ </code><code></code></pre>
+<div class="md-container"> </div>
+</li>
+<li>
+<div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="md-content">
+<p>Перенесите директорию с загруженными файлами из резервной копии в целевую директорию:</p>
+</div>
+</div>
+</div>
+<pre><code>mv Streams /var/lib/comindware/<strong><em>&lt;instancename&gt;</em></strong>/Database/ </code><code></code></pre>
+<div class="md-container"> </div>
+</li>
+<li>
+<div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="md-content">
+<p>Назначьте перенесённым папкам права <code>rwxr-xr-x</code>:</p>
+</div>
+</div>
+</div>
+<pre><code>chmod -R <span class="m">755</span> /var/lib/comindware/<strong><em>&lt;instancename&gt;</em></strong>/Database/Streams/ <br/>chmod -R <span class="m">755</span> /var/lib/comindware/<strong><em>&lt;instancename&gt;</em></strong>/Database/ </code><code></code></pre>
+<div class="md-container"> </div>
+</li>
+<li>
+<div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="md-content">
+<p>Назначьте перенесенным папкам владельца <code>www-data</code>:</p>
+</div>
+</div>
+</div>
+<pre><code>chown -R www-data:www-data /var/lib/comindware/<strong><em>&lt;instancename&gt;</em></strong>/Database/Streams/ <br/>chown -R www-data:www-data /var/lib/comindware/<strong><em>&lt;instancename&gt;</em></strong>/Database/ </code></pre>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="md-content">
+<h2 id="mcetoc_1grg5gft87">Восстановление индексов Elasticsearch из резервной копии репозитория</h2>
+<ol class="colored_numbers_list">
+<li>
+<div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="md-content">
+<p>4.1. Создайте директорию репозитория Elasticsearch и перенесите в неё файлы из резервной копии:</p>
+</div>
+</div>
+</div>
+<pre><code>mkdir /var/www/backups/elasticsearch/ <br/>mv elastic/* /var/www/backups/elasticsearch/ </code></pre>
+<div class="md-container"> </div>
+</li>
+<li>
+<div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="md-content">
+<p>Назначьте папке репозитория и её содержимому права <code>rwxr-xr-x</code>:</p>
+</div>
+</div>
+</div>
+<pre><code>chmod -R <span class="m">755</span> /var/www/backups/ </code></pre>
+<div class="md-container"> </div>
+</li>
+<li>
+<div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="md-content">
+<p>Назначьте владельца <code>elasticsearch</code> директории репозитория и её содержимому:</p>
+<div class="highlight">
+<pre><code>chown -R elasticsearch:elasticsearch /var/www/backups/ </code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="md-container"> </div>
+</li>
+<li>
+<div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="md-content">
+<p>В файле конфигурации <code>elasticsearch.yml</code> с помощью директивы <code>path.repo: /var/www/backups/elasticsearch</code> укажите путь к созданному репозиторию (например, с помощью редактора <code>nano</code>):</p>
+</div>
+</div>
+</div>
+<pre><code>nano /etc/elasticsearch/elasticsearch.yml </code></pre>
+<div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="md-content">
+<div class="screenshot_with_caption">
+<p><img alt="Путь к репозиторию в файле конфигурации Elasticsearch" class="img-responsive" height="242" src="https://kb.comindware.ru/assets/Pasted image 20230125204737.png" width="667"/></p>
+<p class="caption">Путь к репозиторию в файле конфигурации Elasticsearch</p>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Запустите службу Elasticsearch:</p>
+<div class="highlight">
+<pre><code>systemctl start elasticsearch.service </code></pre>
+</div>
+</li>
+<li>
+<p>Зарегистрируйте новый репозиторий снимков Elasticsearch:</p>
+<div class="highlight">
+<pre><code>curl -X PUT <span class="s2">"localhost:9200/_snapshot/elastic_snap?pretty"</span> -H <span class="s1">'Content-Type: application/json'</span> -d<span class="s1">' {"type": "fs", "settings": {"location": "/var/www/backups/elasticsearch"}}'</span></code></pre>
+</div>
+</li>
+<li>
+<p>Проверьте содержимое зарегистрированного репозитория:</p>
+<div class="highlight">
+<pre><code>curl -X GET <span class="s2">"localhost:9200/_cat/snapshots/elastic_snap?pretty"</span></code></pre>
+</div>
+</li>
+<li>
+<p>Выберите необходимый снимок и восстановите состояние Elasticsearch:</p>
+<div class="highlight">
+<pre><code>curl -X POST "localhost:9200/_snapshot/elastic_snap/snapshot2023_01_23_10_17/_restore?pretty" </code></pre>
+</div>
+</li>
+<li>
+<p>Проверьте наличие индексов в восстановленном каталоге:</p>
+<div class="highlight">
+<pre><code>curl -X GET "localhost:9200/_cat/indices?pretty" </code></pre>
+</div>
+<div class="screenshot_with_caption">
+<p><img alt="Отображение списка индексов Elasticsearch" class="img-responsive" height="197" src="https://kb.comindware.ru/assets/Pasted image 20230127153756.png" width="697"/></p>
+<p class="caption">Отображение списка индексов Elasticsearch</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="md-content">
+<h2 id="mcetoc_1i1poltsp3">Запуск и проверка конфигурации экземпляра ПО</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>Запустите необходимые службы и проверьте их статус:</p>
+<div class="highlight">
+<pre><code>systemctl start elasticsearch kafka nginx comindware<strong><em>&lt;instancename&gt;</em></strong><br/>systemctl status elasticsearch kafka nginx comindware<strong><em>&lt;instancename&gt;</em></strong></code></pre>
+</div>
+</li>
+<li>Откройте в браузере веб-сайт с экземпляром ПО.</li>
+<li>Дождитесь инициализации экземпляра ПО. Этот процесс может занять некоторое время. Может потребоваться обновить страницу браузера.</li>
+<li>Проверьте и исправьте конфигурацию экземпляра. См. <em style="letter-spacing: 0.2px;">«<samp data-name="aid" data-title="" data-value="2618"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png"/>Проверка и настройка конфигурации экземпляра ПО после восстановления из резервной копии {Article-ID:2618}</span></samp>».</em></li>
+</ol>
+</div>
+<h2 id="mcetoc_1i1po14qc0"><span style="letter-spacing: 0.2px;">Связанные статьи</span></h2>
+<p><strong><span style="letter-spacing: 0.2px;"><samp data-name="aid" data-title="" data-value="2618"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Проверка и настройка конфигурации экземпляра ПО после восстановления из резервной копии {Article-ID:2618}</span></samp></span></strong></p>
+<p><strong><span style="letter-spacing: 0.2px;"><samp data-name="aid" data-title="" data-value="2618"><samp data-name="aid" data-title="" data-value="2117"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО {Article-ID:2117}</span></samp> </samp></span></strong></p>
+</div>
+<p><a class="md-top md-icon mkdocs_imported_link" href="#"> <em class="fa-light fa-arrow-up">‌</em> К началу</a></p>
+</div>

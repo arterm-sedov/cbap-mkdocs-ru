@@ -1,0 +1,62 @@
+<h1>Фильтр для ссылочного поля. Пример настройки</h1><p>В данной статье описан пример фильтра договоров клиента на форме заявки.</p>
+<p>Системные имена шаблонов записи и атрибутов, задействованных в примере, приведены в таблице:</p>
+<table>
+<tbody>
+<tr>
+<th>Шаблон записи</th>
+<th>Атрибуты</th>
+</tr>
+<tr>
+<td>Requests (Заявки) </td>
+<td>contract — контракт<br/>client_requestor — клиент</td>
+</tr>
+<tr>
+<td>Contracts (Контракты) </td>
+<td>client — клиент </td>
+</tr>
+</tbody>
+</table>
+<p>В выражении будут использованы следующие функции и операторы:</p>
+<ul>
+<li>функция «<em><strong>EQUALS()</strong></em>» для выбора записи, которая соответствует клиенту в заявке;</li>
+<li>оператор «<em><strong>from</strong></em>» для перечисления всех записей из шаблона записи «<em>Contracts</em>»;</li>
+<li>оператор «<em><strong>where</strong></em>» для выбора записей, которые соответствуют условию;</li>
+<li>оператор «<em><strong>select</strong></em>» для выбора значений атрибута.</li>
+</ul>
+<p> </p>
+<p><strong>Пошаговая инструкция</strong>:</p>
+<p><strong>1.</strong> Создайте и настройте шаблоны записей и атрибуты.</p>
+<p><strong>2.</strong> В шаблоне записи «<em>Requests</em>» откройте «<em><strong>Формы</strong></em>».</p>
+<p><strong>3.</strong> Добавьте атрибут «<em>contract</em>» на форму.</p>
+<p><strong>4.</strong> Введите выражение в поле для фильтра.</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">from a in db-&gt;Contracts where EQUALS($client_requestor,a-&gt;client) select a-&gt;id</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p> </p>
+<p><strong>Синтаксис</strong></p>
+<table>
+<tbody>
+<tr>
+<th>Элемент</th>
+<th>Значение</th>
+</tr>
+<tr>
+<td>from a in db-&gt;Contracts </td>
+<td>Объявление локальной переменной а. <br/>Объявление шаблона записи «<em>Contracts</em>» в качестве источника данных: db-&gt;Contracts. <br/>Перечисление всех записей из шаблона записи «<em>Contracts</em>».</td>
+</tr>
+<tr>
+<td>where EQUALS($client_requestor, a&gt;client) </td>
+<td>Выбор записи, в которой значение «<em>сlient_requestor</em>» текущей записи соответствует значению атрибута «<em>client</em>» в справочнике контрактов. </td>
+</tr>
+<tr>
+<td>select a-&gt;id </td>
+<td>Выбор идентификаторов необходимых учетных записей. </td>
+</tr>
+</tbody>
+</table>

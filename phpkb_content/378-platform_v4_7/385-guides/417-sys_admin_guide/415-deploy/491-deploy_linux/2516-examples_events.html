@@ -1,0 +1,1108 @@
+<h1>Примеры событий в файловых журналах</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#перечень-событий"> <span class="md-ellipsis"> Перечень событий </span> </a><nav aria-label="Перечень событий" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#вход-пользователя-в-систему"> <span class="md-ellipsis"> Вход пользователя в систему </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#выход-пользователя-из-системы"> <span class="md-ellipsis"> Выход пользователя из системы </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#неуспешный-вход-пользователя-в-систему"> <span class="md-ellipsis"> Неуспешный вход пользователя в систему </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#неверное-имя-при-входе-в-систему"> <span class="md-ellipsis"> Неверное имя при входе в систему </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#неверный-пароль-при-входе-в-систему"> <span class="md-ellipsis"> Неверный пароль при входе в систему </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#создание-учетной-записи"> <span class="md-ellipsis"> Создание учетной записи </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#удаление-учетной-записи"> <span class="md-ellipsis"> Удаление учетной записи </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#неуспешное-создание-учетной-записи"> <span class="md-ellipsis"> Неуспешное создание учетной записи </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#неуспешное-удаление-учетной-записи"> <span class="md-ellipsis"> Неуспешное удаление учетной записи </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#блокировка-отключение-учетной-записи"> <span class="md-ellipsis"> Блокировка (отключение) учетной записи </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#разблокировка-включение-учетной-записи"> <span class="md-ellipsis"> Разблокировка (включение) учетной записи </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#смена-пароля-учетной-записи"> <span class="md-ellipsis"> Смена пароля учетной записи </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#создание-роли"> <span class="md-ellipsis"> Создание роли </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#создание-группы-пользователей"> <span class="md-ellipsis"> Создание группы пользователей </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#удаление-роли"> <span class="md-ellipsis"> Удаление роли </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#удаление-группы-пользователей"> <span class="md-ellipsis"> Удаление группы пользователей </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#изменение-прав-группы-роли-пользователей"> <span class="md-ellipsis"> Изменение прав группы (роли) пользователей </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#включение-пользователя-в-состав-группы-роли"> <span class="md-ellipsis"> Включение пользователя в состав группы (роли) </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#исключение-пользователя-из-состава-группы-удаление-роли"> <span class="md-ellipsis"> Исключение пользователя из состава группы (удаление роли) </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#создание-объекта"> <span class="md-ellipsis"> Создание объекта </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#чтение-объекта"> <span class="md-ellipsis"> Чтение объекта </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#копирование-объекта"> <span class="md-ellipsis"> Копирование объекта </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#изменение-объекта"> <span class="md-ellipsis"> Изменение объекта </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#удаление-объекта"> <span class="md-ellipsis"> Удаление объекта </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#установка-прав-доступа-на-объект"> <span class="md-ellipsis"> Установка прав доступа на объект </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#изменение-прав-доступа-на-объект"> <span class="md-ellipsis"> Изменение прав доступа на объект </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#начало-работы-запуск-системы"> <span class="md-ellipsis"> Начало работы (запуск) системы </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#окончание-остановка-работы-системы"> <span class="md-ellipsis"> Окончание (остановка) работы системы </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#запуск-сервисаслужбымодуля"> <span class="md-ellipsis"> Запуск сервиса/службы/модуля </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#остановкасбой-системы-компонент-сервисов-инстансов"> <span class="md-ellipsis"> Остановка\сбой системы (компонент, сервисов, инстансов) </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#успешный-результат-выполнения-процесса"> <span class="md-ellipsis"> Успешный результат выполнения процесса </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#успешный-результат-выполнения-сервиса"> <span class="md-ellipsis"> Успешный результат выполнения сервиса </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#событие-в-адаптере"> <span class="md-ellipsis"> Событие в адаптере </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>В настоящей статье представлены примеры событий и данных, которые регистрируются в файловых журналах экземпляра ПО <strong>Comindware Business Application Platform</strong>. Названия событий даны согласно тре­бованиям по информацион­ной безопасно­сти, предъяв­ляемых к Авто­матизирован­ным системам.</p>
+<h2 id="перечень-событий">Перечень событий</h2>
+<h3 id="вход-пользователя-в-систему">Вход пользователя в систему</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span><span class="w">  </span><span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">Home</span><span class="o">/</span><span class="n">Login</span><span class="o">/?</span><span class="n">returnUrl</span><span class="o">=/</span> <span class="n">OK</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">.</span><span class="n">SSS</span> <span class="s1">'Builtin: user logged in'</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>username</code> – имя пользователя</li>
+<li><code>XXX.XXX.XXX.XXX</code> — IP-адрес сервера</li>
+<li><code>http://SERVER_URL/Home/Login/?returnUrl=/</code> – адрес страницы входа</li>
+<li><code>OK</code> — статус обработки запроса</li>
+<li><code>hh:mm:ss.SSS</code> — длительность обработки запроса</li>
+<li><code>Builtin: user logged in</code> — описание события: «Способ аутентификации: Встроенная. Пользователь вошёл в систему»</li>
+</ul>
+<h3 id="выход-пользователя-из-системы">Выход пользователя из системы</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span><span class="w">  </span><span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="w">  </span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">Home</span><span class="o">/</span><span class="n">Logout</span><span class="o">/</span> <span class="n">OK</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">.</span><span class="n">SSS</span> <span class="s1">'User logout success'</span> <span class="s1">''</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>username</code> — имя пользователя</li>
+<li><code>XXX.XXX.XXX.XXX</code> — IP-адрес сервера</li>
+<li><code>http://SERVER_URL/Home/Login/?returnUrl=/</code> — адрес страницы выхода</li>
+<li><code>OK</code> — статус обработки запроса</li>
+<li><code>hh:mm:ss.SSS</code> — длительность обработки запроса</li>
+<li><code>User logout success</code> — описание события: «Пользователь вышел из системы»</li>
+</ul>
+<h3 id="неуспешный-вход-пользователя-в-систему">Неуспешный вход пользователя в систему</h3>
+<h3 id="неверное-имя-при-входе-в-систему">Неверное имя при входе в систему</h3>
+<h3 id="неверный-пароль-при-входе-в-систему">Неверный пароль при входе в систему</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">Home</span><span class="o">/</span><span class="n">Login</span><span class="o">/?</span><span class="n">returnUrl</span><span class="o">=/</span><span class="n">Resolve</span> <span class="n">OK</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">.</span><span class="n">SSS</span> <span class="s1">'"Builtin": user login failed for "username"'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span><span class="w">  </span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">Home</span><span class="o">/</span><span class="n">Login</span><span class="o">/?</span><span class="n">failedLogin</span><span class="o">=</span><span class="n">InvalidLoginAndPassword</span><span class="o">&amp;</span><span class="n">inputID</span><span class="o">=&amp;</span><span class="n">returnUrl</span><span class="o">==%</span><span class="mi">2</span><span class="n">fResolve</span><span class="w">   </span><span class="s1">'GET'</span> <span class="s1">''</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>username</code> — имя пользователя</li>
+<li><code>XXX.XXX.XXX.XXX</code> — IP-адрес сервера</li>
+<li><code>http://SERVER_URL/Home/Login/?returnUrl=/</code> — адрес страницы выхода</li>
+<li><code>OK</code> — статус обработки запроса</li>
+<li><code>hh:mm:ss.SSS</code> — длительность обработки запроса</li>
+<li><code>"Builtin": user login failed for "username"'</code> — описание события: «Способ аутентификации: Встроенная. Пользователь username не смог войти в систему»</li>
+<li><code>http://SERVER_URL/Home/Login/?failedLogin=InvalidLoginAndPassword&amp;inputID=&amp;returnUrl==%2fResolve</code> — адрес страницы, отображающейся после неудачной попытки входа</li>
+<li><code>GET</code> — метод запроса</li>
+</ul>
+<h3 id="создание-учетной-записи">Создание учетной записи</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">UserApi</span><span class="o">/</span><span class="n">SetSystemInfo</span><span class="w">   </span><span class="s1">'POST: "{"accountFormChanges":{"PasswordHash":"XXXXXX","OldPasswordHash":null,"DataformChanges":{"WidgetChanges":[{"ObjId":null,"TempId":"cmw.temp.21","TypeId":"cmw.account.Account","Changes":{"cmw.account.form.group0text1":{"Origin":4,"Literal":"FULL\_NAME","Clean":null,"Time":1698153500360,"Add":null,"Rem":null,"StreamName":null,"StreamId":null,"Parent":null,"ClearParent":null,"Number":null,"Order":null,"ComplexValues":null},"cmw.account.form.group0text2":{"Origin":4,"Literal":"USER\_NAME","Clean":null,"Time":1698153505344,"Add":null,"Rem":null,"StreamName":null,","StreamId":null,"Parent":null,"ClearParent":null,"Number":null,"Order":null,"ComplexValues":null},"cmw.account.form.group0text3":{"Origin":4,"Literal":"EMAIL","Clean":null,"Time":1698153518245,"Add":null,"Rem":null,"StreamName":null,"StreamId":null,"Parent":null,"ClearParent":null,"Number":null,"Order":null,"ComplexValues":null}},"CommandId":null,"CommandKind":2,"CommandContextChanges":null}],"ComplexObjectChanges":[]},"Id":"cmw.temp.21","IsActive":null,"IsAnonymous":null,"IsDisabled":null,"Language:"ru","AuthenticationMethod":0,"PasswordValidationParameters":null,"ProfilePhoto":null}}"'</span> <span class="s1">''</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>username</code> — имя пользователя, создавшего учётную запись</li>
+<li><code>XXX.XXX.XXX.XXX</code> — IP-адрес сервера</li>
+<li><code>http://SERVER_URL/api/UserApi/SetSystemInfo</code> — путь к методу API для создания учётной записи</li>
+<li><code>POST</code> — тип запроса</li>
+<li><code>accountFormChanges</code> — тело запроса с данными учётной записи:
+<ul>
+<li><code>"PasswordHash":"XXXXXX"</code> — хэш пароля</li>
+<li><code>"DataformChanges":{"WidgetChanges":[{}]}</code> — поля формы учётной записи
+<ul>
+<li><code>"ObjId":"null"</code> — идентификатор временной записи</li>
+<li><code>"TempId":"cmw.temp.ID"</code> — идентификатор временной записи</li>
+<li><code>"TypeId":"cmw.account.Account"</code> — тип создаваемого объекта: учётная запись</li>
+<li><code>"Changes":{}</code> — данные учетной записи
+<ul>
+<li><code>FULL_NAME</code> — Ф. И. О. пользователя</li>
+<li><code>USER_NAME</code> — имя пользователя</li>
+<li><code>EMAIL</code> — адрес эл. почты пользователя</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="удаление-учетной-записи">Удаление учетной записи</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">UserApi</span><span class="o">/</span><span class="n">SetSystemInfo</span><span class="w">   </span><span class="s1">'DELETE: "{"accountIds":["account.1", "account.2"]}"'</span> <span class="s1">''</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>username</code> — имя пользователя, удалившего учётную запись</li>
+<li><code>XXX.XXX.XXX.XXX</code> — IP-адрес сервера</li>
+<li><code>http://SERVER_URL/api/UserApi/DeleteAccounts</code> — путь к методу API для удаления учётной записи</li>
+<li><code>DELETE</code> — тип запроса</li>
+<li><code>{"accountIds":["account.1", "account.2"]}</code> – тело запроса:
+<ul>
+<li><code>accountIds</code> — массив идентификаторов удалённых аккаунтов</li>
+<li><code>account.1</code>, <code>account.2</code>  — идентификаторы аккаунтов</li>
+</ul>
+</li>
+</ul>
+<h3 id="неуспешное-создание-учетной-записи">Неуспешное создание учетной записи</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">ERROR</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span> <span class="n">PORT</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="w">  </span><span class="n">Core</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">.</span><span class="n">SSS</span> <span class="n">X</span><span class="p">.</span><span class="n">X</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">X</span><span class="w">  </span><span class="s1">'   Транзакция нарушает уникальность триплета:  cmw.account.mbox – email@example.com</span></code><br/><code></code><br/><code><span class="s1">Service name:</span></code><br/><code></code><br/><code><span class="s1">   "DataformService"</span></code><br/><code></code><br/><code><span class="s1">Method name:</span></code><br/><code></code><br/><code><span class="s1">   "ApplyChangesAndQueryData"</span></code><br/><code></code><br/><code><span class="s1">Parameters list:</span></code><br/><code></code><br/><code><span class="s1">   [0]: {"Changes":{"WidgetChanges":[{"ObjId":"cmw.temp.150","TempId":"cmw.temp.150","TypeId":"cmw.account.Account","Changes":{"cmw.account.form.group0text1":{"Origin":4,"Literal":"FULL\_NAME","Time":1700833720019},"cmw.account.form.group0text2":{"Origin":4,"Literal":"USER\_NAME","Time":1700833724427},"cmw.account.form.group0text3":{"Origin":4,"Literal":"EMAIL","Time":1700833711581}},"CommandKind":2}],"ComplexObjectChanges":[]},"Queries":[{"WiId":"cmw.account.form.root","QueryChildWidgets":true,"Widgets":[],"QueryObjectTitle":true,"QueryObjectToolbar":true,"TempId":"cmw.temp.150","RootTempId":"cmw.temp.150"}]}</span></code><br/><code></code><br/><code><span class="s1">Stack:</span></code><br/><code></code><br/><code><span class="s1">  at Comindware.LogicsStorage.Core.Managers.StatementManagers.StatementManagerOneToOneOneToOneUnique.ReplaceStatement[TSubject,TValue] (Comindware.LogicsStorage.Api.Transaction transaction, TSubject subject, Comindware.LogicsStorage.Api.Predicate predicate, TValue value) [0x00093] in &lt;7d85b33b773e45b1b9d638b93301c0e9&gt;:0</span></code><br/><code></code><br/><code><span class="s1">  at Comindware.LogicsStorage.Core.Managers.StatementManagers.TransactionStatementManager.ReplaceStatement[TSubject,TValue] (Comindware.LogicsStorage.Api.Transaction transaction, TSubject subject, Comindware.LogicsStorage.Api.Predicate predicate, TValue value) [0x00011] in &lt;7d85b33b773e45b1b9d638b93301c0e9&gt;:0</span></code><br/><code></code><br/><code><span class="s1">  at Comindware.LogicsStorage.Core.Managers.StatementManager.ReplaceStatement[TSubject,TValue] (Comindware.LogicsStorage.Api.Transaction transaction, TSubject subject, Comindware.LogicsStorage.Api.Predicate predicate, TValue value) [0x00000] in &lt;7d85b33b773e45b1b9d638b93301c0e9&gt;:0</span></code><br/><code></code><br/><code><span class="s1">  at Comindware.LogicsStorage.Api.TransactionExtensions.ReplaceStatement[TValue] (Comindware.LogicsStorage.Api.Transaction transaction, Comindware.LogicsStorage.Api.Identity subject, Comindware.LogicsStorage.Api.Identity predicate, TValue value) [0x0001f] in &lt;7d85b33b773e45b1b9d638b93301c0e9&gt;:0</span></code><br/><code></code><br/><code><span class="s1">  at Comindware.TeamNetwork.Core.Services.PropertyPathWriter.WriteValue[TData] (Comindware.LogicsStorage.Api.Identity qContextObject, System.String[] path, System.Object value, System.String qWidget) [0x00199] in &lt;8025f5369894426089cefdaa59a4c743&gt;:0</span></code><br/><code></code><br/><code><span class="s1">  at Comindware.TeamNetwork.Core.Services.WidgetsDataWriter.WriteLiteral (Comindware.LogicsStorage.Api.Identity qObject, Comindware.TeamNetwork.Core.Services.PropertyPathWriter writer, Comindware.TeamNetwork.Api.Data.DataSourceInfo ds, System.Object value, System.String widget) [0x000c8] in &lt;8025f5369894426089cefdaa59a4c743&gt;:0</span></code><br/><code></code><br/><code><span class="s1">  at Comindware.TeamNetwork.Core.Services.WidgetsDataWriter.ApplyWidgetValueChange (Comindware.TeamNetwork.Core.Services.PropertyPathWriter writer, Comindware.LogicsStorage.Api.Identity qObject, Comindware.LogicsStorage.Api.Identity qWidget, Comindware.TeamNetwork.Api.Data.Forms.WidgetValueChange wChange) [0x00185] in &lt;8025f5369894426089cefdaa59a4c743&gt;:0</span></code><br/><code></code><br/><code><span class="s1">  at Comindware.TeamNetwork.Core.Services.WidgetsDataWriter.ApplyWidgetChanges (Comindware.TeamNetwork.Core.Services.PropertyPathWriter writer, System.Collections.Generic.IList\`1[T] changes) [0x00170] in &lt;8025f5369894426089cefdaa59a4c743&gt;:0</span></code><br/><code></code><br/><code><span class="s1">  at Comindware.TeamNetwork.Core.Services.WidgetsDataWriter.ApplyChanges (Comindware.TeamNetwork.Api.Data.Forms.DataformChanges changes) [0x0023e] in &lt;8025f5369894426089cefdaa59a4c743&gt;:0</span></code><br/><code></code><br/><code><span class="s1">  at Comindware.TeamNetwork.Core.Services.DataformService.ApplyChangesAndQueryData (Comindware.TeamNetwork.Api.Data.Forms.DataformWidgetsQuery fQuery) [0x0002c] in &lt;8025f5369894426089cefdaa59a4c743&gt;:0</span></code><br/><code></code><br/><code><span class="s1">  at Castle.Proxies.Invocations.IDataformService\_ApplyChangesAndQueryData.InvokeMethodOnTarget () [0x00018] in &lt;9d46134a505745cbb2aa4c1a7704bca1&gt;:0</span></code><br/><code></code><br/><code><span class="s1">  at Castle.DynamicProxy.AbstractInvocation.Proceed () [0x0002d] in &lt;99e1b17afc2a44c5b97e5af224da0ae2&gt;:0</span></code><br/><code></code><br/><code><span class="s1">  at Comindware.Platform.Core.Logging.ExceptionsInterceptor.Intercept (Castle.DynamicProxy.IInvocation invocation) [0x00000] in &lt;13c6df997e3e467ca2451c9fd9f35e67&gt;:0</span></code><br/><code></code><br/><code><span class="s1"> '</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>ERROR</code> — тип события: ошибка</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>username</code> — имя пользователя, создающего учётную запись</li>
+<li><code>SERVER_URL</code> — адрес сервера</li>
+<li><code>PORT</code> — порт сервера</li>
+<li><code>XXX.XXX.XXX.XXX</code> — IP-адрес сервера</li>
+<li><code>Core</code> — наименование модуля, в котором произошло событие</li>
+<li><code>hh:mm:ss.SSS</code> — длительность обработки запроса</li>
+<li><code>X.X.XXX.X</code> — версия ПО Comindware Business Application Platform</li>
+<li><code>Транзакция нарушает уникальность триплета:  cmw.account.mbox - email@example.com</code> — описание события: неуникальный адрес эл. почты</li>
+<li><code>Service name: "DataformService"</code> — наименование службы, обрабатывавшей веб-запрос</li>
+<li><code>Method name: "ApplyChangesAndQueryData"</code> — наименование метода запроса</li>
+<li><code>Parameters list</code> — массив параметров запроса
+<ul>
+<li><code>"Changes":{}</code> — данные учётной записи
+<ul>
+<li><code>"WidgetChanges":[{}]</code> — массив полей формы учётной записи</li>
+<li><code>"ObjId":"cmw.temp.ID"</code> — идентификатор временной записи</li>
+<li><code>"TempId":"cmw.temp.150"</code> — идентификатор временной записи</li>
+<li><code>"TypeId":"cmw.account.Account"</code> — тип создаваемого объекта: учётная запись</li>
+<li><code>FULL_NAME</code> — Ф. И. О. пользователя</li>
+<li><code>USER_NAME</code> — имя пользователя</li>
+<li><code>EMAIL</code> — адрес эл. почты пользователя</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Stack</code> — данные функций, обрабатывавших веб-запрос</li>
+</ul>
+<h3 id="неуспешное-удаление-учетной-записи">Неуспешное удаление учетной записи</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">ERROR</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span> <span class="n">PORT</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="w">  </span><span class="n">Core</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">.</span><span class="n">SSS</span> <span class="n">X</span><span class="p">.</span><span class="n">X</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">X</span><span class="w">  </span><span class="s1">'   Вы не можете удалить свой аккаунт</span></code><br/><code></code><br/><code><span class="s1">Service name:</span></code><br/><code></code><br/><code><span class="s1">   "AccountService"</span></code><br/><code></code><br/><code><span class="s1">Method name:</span></code><br/><code></code><br/><code><span class="s1">   "Delete"</span></code><br/><code></code><br/><code><span class="s1">Parameters list:</span></code><br/><code></code><br/><code><span class="s1">   [0]: ["account.1", "account.2"]</span></code><br/><code></code><br/><code><span class="s1">Stack:</span></code><br/><code></code><br/><code><span class="s1">  at Comindware.Platform.Core.Services.AccountService.Delete (System.String[] accountsIds) [0x00104] in &lt;13c6df997e3e467ca2451c9fd9f35e67&gt;:0</span></code><br/><code></code><br/><code><span class="s1">  at Castle.Proxies.Invocations.IAccountService\_Delete.InvokeMethodOnTarget () [0x00018] in &lt;9d46134a505745cbb2aa4c1a7704bca1&gt;:0</span></code><br/><code></code><br/><code><span class="s1">  at Castle.DynamicProxy.AbstractInvocation.Proceed () [0x0002d] in &lt;99e1b17afc2a44c5b97e5af224da0ae2&gt;:0</span></code><br/><code></code><br/><code><span class="s1">  at Comindware.Platform.Core.Logging.ExceptionsInterceptor.Intercept (Castle.DynamicProxy.IInvocation invocation) [0x00000] in &lt;13c6df997e3e467ca2451c9fd9f35e67&gt;:0</span></code><br/><code></code><br/><code><span class="s1"> '</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>ERROR</code> — тип события: ошибка</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>username</code> — имя пользователя, удаляющего учётную запись</li>
+<li><code>SERVER_URL</code> — адрес сервера</li>
+<li><code>PORT</code> — порт сервера</li>
+<li><code>XXX.XXX.XXX.XXX</code> — IP-адрес сервера</li>
+<li><code>Core</code> — наименование модуля, в котором произошло событие</li>
+<li><code>hh:mm:ss.SSS</code> — длительность обработки запроса</li>
+<li><code>X.X.XXX.X</code> — версия ПО Comindware Business Application Platform</li>
+<li><code>Вы не можете удалить свой аккаунт</code> — описание события</li>
+<li><code>Service name: "AccountService"</code> — наименование службы, обрабатывавшей веб-запрос</li>
+<li><code>Method name:</code> " <code>Delete</code>" — наименование метода запроса</li>
+<li><code>Parameters list</code> — массив параметров запроса
+<ul>
+<li><code>["account.1", "account.2"]</code> — массив идентификаторов аккаунтов, выбранных для удаления</li>
+</ul>
+</li>
+<li><code>Stack</code> — данные функций, обрабатывавших веб-запрос</li>
+</ul>
+<h3 id="блокировка-отключение-учетной-записи">Блокировка (отключение) учетной записи</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">Dataform</span><span class="o">/</span><span class="n">QueryData</span><span class="w">   </span><span class="s1">'POST: "{"query":{"Changes":{"WidgetChanges":[{"ObjId":"account.ID","TypeId":"cmw.account.Account","Changes":{"cmw.account.form.group2flag1":{"Origin":4,"Literal":false,"Time":1698244978684}},"CommandKind":3}],"ComplexObjectChanges":[]},"Queries":[{"WiId":"cmw.account.form.root","QueryChildWidgets":true,"Widgets":[],"QueryObjectTitle":true,"QueryObjectToolbar":true,"ObjId":"account.ID","RootObjId":"account.ID"}]}}"'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">Dataform</span><span class="o">/</span><span class="n">QueryData</span> <span class="n">OK</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">.</span><span class="n">SSS</span> <span class="s1">'POST completed'</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>username</code> — имя пользователя</li>
+<li><code>XXX.XXX.XXX.XXX</code> — IP-адрес сервера</li>
+<li><code>http://SERVER_URL/api/Dataform/QueryData</code>  — путь к методу API для изменения данных учётной записи</li>
+<li><code>POST</code> — тип запроса</li>
+<li><code>query</code> — тело запроса с данными учётной записи
+<ul>
+<li><code>"ObjId":"account.ID"</code> — идентификатор учётной записи</li>
+<li><code>"TypeId":"cmw.account.Account"</code> — тип объекта: учётная записи</li>
+<li><code>"Changes":{"cmw.account.form.group2flag1":{"Origin":4,"Literal":false,"Time":1698244978684}}</code> — отключение учётной записи: <code>"Literal":false</code></li>
+<li><code>"ObjId":"account.ID"</code> — идентификатор временной записи</li>
+<li><code>"RootObjId":"account.ID"</code> — идентификатор временной записи</li>
+</ul>
+</li>
+<li><code>OK</code> — статус обработки запроса</li>
+<li><code>hh:mm:ss.SSS</code> — длительность обработки запроса</li>
+<li><code>POST completed</code> — результат обработки запроса: выполнен</li>
+</ul>
+<h3 id="разблокировка-включение-учетной-записи">Разблокировка (включение) учетной записи</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">Dataform</span><span class="o">/</span><span class="n">QueryData</span><span class="w">   </span><span class="s1">'POST: "{"query":{"Changes":{"WidgetChanges":[{"ObjId":"account.ID","TypeId":"cmw.account.Account","Changes":{"cmw.account.form.group2flag1":{"Origin":4,"Literal":true,"Time":1698245267640}},"CommandKind":3}],"ComplexObjectChanges":[]},"Queries":[{"WiId":"cmw.account.form.root","QueryChildWidgets":true,"Widgets":[],"QueryObjectTitle":true,"QueryObjectToolbar":true,"ObjId":"account.ID","RootObjId":"account.ID"}]}}"'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">Dataform</span><span class="o">/</span><span class="n">QueryData</span> <span class="n">OK</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">.</span><span class="n">SSS</span> <span class="s1">'POST completed'</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>username</code> — имя пользователя</li>
+<li><code>XXX.XXX.XXX.XXX</code> — IP-адрес сервера</li>
+<li><code>http://SERVER_URL/api/Dataform/QueryData</code>  — путь к методу API для изменения данных учётной записи</li>
+<li><code>POST</code> — тип запроса</li>
+<li><code>query</code> — тело запроса с данными учётной записи
+<ul>
+<li><code>"WidgetChanges":[{}]</code> — поля формы учётной записи</li>
+<li><code>"ObjId":"account.ID"</code> — идентификатор учётной записи</li>
+<li><code>"TypeId":"cmw.account.Account"</code> — тип объекта: учётная запись</li>
+<li><code>"Changes":{"cmw.account.form.group2flag1":{"Origin":4,"Literal":true,"Time":1698245267640}}</code> — включение учётной записи: <code>"Literal":true</code></li>
+<li><code>"RootObjId":"account.ID"</code> — идентификатор временной записи</li>
+</ul>
+</li>
+<li><code>OK</code> — статус обработки запроса</li>
+<li><code>hh:mm:ss.SSS</code> — длительность обработки запроса</li>
+<li><code>POST completed</code> — результат обработки запроса: выполнен</li>
+</ul>
+<h3 id="смена-пароля-учетной-записи">Смена пароля учетной записи</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">UserApi</span><span class="o">/</span><span class="n">SetSystemInfo</span><span class="w">   </span><span class="s1">'POST: "{"accountFormChanges":{"PasswordHash":"XXXXXXX","OldPasswordHash":null,"DataformChanges":{"WidgetChanges":[{"ObjId":"account.ID","TempId":null,"TypeId":"cmw.account.Account","Changes":{"cmw.account.form.group2flag1":{"Origin":4,"Literal":true,"Clean":null,"Time":1698245267640,"Add":null,"Rem":null,"StreamName":null,"StreamId":null,"Parent":null,"ClearParent":null,"Number":null,"Order":null,"ComplexValues":null}},"CommandId":null,"CommandKind":3,"CommandContextChanges":null}],"ComplexObjectChanges":[]},"Id":"account.ID","IsActive":null,"IsAnonymous":null,"IsDisabled":null,"Language":null,"AuthenticationMethod":0,"PasswordValidationParameters":null,"ProfilePhoto":null}}"'</span> <span class="s1">''</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>username</code> — имя пользователя, создавшего учётную запись</li>
+<li><code>XXX.XXX.XXX.XXX</code> — IP-адрес сервера</li>
+<li><code>http://SERVER_URL/api/UserApi/SetSystemInfo</code> — путь к методу API для создания учётной записи</li>
+<li><code>POST</code> — тип запроса</li>
+<li><code>accountFormChanges</code> — тело запроса с данными учётной записи:
+<ul>
+<li><code>"PasswordHash":"XXXXXXX"</code> — хэш нового пароля</li>
+<li><code>"DataformChanges":{"WidgetChanges":[{}]}</code> — поля формы учётной записи</li>
+<li><code>"TypeId":"cmw.account.Account"</code> — тип объекта: учётная запись</li>
+<li><code>"Changes":{}</code> — данные учётной записи
+<ul>
+<li><code>"ObjId":"account.ID"</code> — идентификатор учётной записи</li>
+<li><code>"Id":"account.ID"</code> — идентификатор учётной записи</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="создание-роли">Создание роли</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">Members</span><span class="o">/</span><span class="n">GetMembersData</span> <span class="mi">200</span> <span class="mi">03</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span> <span class="s1">'POST completed'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Post</span><span class="w">   </span><span class="s1">'POST: "{"role":{"Name":"Role Name","Alias":"RoleSystemName","Solution":"sln.1","Members":[],"IsActive":true,"RoleType":0}}"'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Post</span> <span class="n">OK</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">.</span><span class="n">SSS</span> <span class="s1">'POST completed'</span> <span class="s1">''</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>username</code> — имя пользователя, создавшего роль</li>
+<li><code>XXX.XXX.XXX.XXX</code> — IP-адрес сервера</li>
+<li><code>http://SERVER_URL/api/RolesCollectionApi/Post</code> — путь к методу API для создания роли</li>
+<li><code>POST</code> — тип запроса</li>
+<li><code>role</code> — тело запроса с данными роли
+<ul>
+<li><code>"Name":"Role Name"</code> — название роли</li>
+<li><code>"Alias":"RoleSystemName"</code> — системное имя роли</li>
+<li><code>"Solution":"sln.1"</code> — идентификатор приложения, в котором создана роль</li>
+</ul>
+</li>
+<li><code>OK</code> — статус обработки запроса</li>
+<li><code>hh:mm:ss.SSS</code> — длительность обработки запроса</li>
+<li><code>POST</code> completed — результат обработки запроса: выполнен</li>
+</ul>
+<h3 id="создание-группы-пользователей">Создание группы  пользователей</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">GroupApi</span><span class="o">/</span><span class="n">Post</span><span class="w">   </span><span class="s1">'POST: "{"group":{"HoldMembersActive":false,"HoldMembersEnabled":false,"Users":[],"MemberOf":[],"Name":"Group Name","Origin":1}}"'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">GroupApi</span><span class="o">/</span><span class="n">Post</span> <span class="n">OK</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">.</span><span class="n">SSS</span> <span class="s1">'POST completed'</span> <span class="s1">''</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>username</code> — имя пользователя, создавшего группу</li>
+<li><code>XXX.XXX.XXX.XXX</code> — IP-адрес сервера</li>
+<li><code>http://SERVER_URL/api/GroupApi/Post</code> — путь к методу API для создания группы</li>
+<li><code>POST</code> — тип запроса</li>
+<li><code>group</code> — тело запроса с данными группы
+<ul>
+<li><code>"Name":"Group Name"</code> — название группы</li>
+<li><code>"MemberOf":[]</code> — массив идентификаторов родительских групп</li>
+<li><code>"Users":[]</code> — массив идентификаторов учётных записей, входящих в группу</li>
+</ul>
+</li>
+<li><code>OK</code> — статус обработки запроса</li>
+<li><code>hh:mm:ss.SSS</code> — длительность обработки запроса</li>
+<li><code>POST</code> completed — результат обработки запроса: выполнен</li>
+</ul>
+<h3 id="удаление-роли">Удаление роли</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="k">Delete</span><span class="w">   </span><span class="s1">'DELETE: "{"rolesIds":["role.1","role.2"]}"'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="k">Delete</span> <span class="n">NoContent</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">.</span><span class="n">SSS</span> <span class="s1">'DELETE completed'</span> <span class="s1">''</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>username</code> — имя пользователя, удалившего роль</li>
+<li><code>XXX.XXX.XXX.XXX</code> — IP-адрес сервера</li>
+<li><code>http://SERVER_URL/api/RolesCollectionApi/Delete</code> — путь к методу API для удаления роли</li>
+<li><code>DELETE</code> — тип запроса</li>
+<li><code>{"rolesIds":["role.1","role.2"]}</code> — тело запроса:
+<ul>
+<li><code>"rolesIds"</code> — массив идентификаторов ролей, подлежащих удалению</li>
+<li><code>"role.1","role.2"</code> — идентификаторы ролей</li>
+</ul>
+</li>
+<li><code>NoContent</code> — статус обработки запроса</li>
+<li><code>hh:mm:ss.SSS</code> — длительность обработки запроса</li>
+<li><code>DELETE completed</code> — результат обработки запроса: выполнен</li>
+</ul>
+<h3 id="удаление-группы-пользователей">Удаление  группы пользователей</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">GroupApi</span><span class="o">/</span><span class="k">Delete</span><span class="w">   </span><span class="s1">'DELETE: "{"ids":["group.1","group.2"]}"'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">GroupApi</span><span class="o">/</span><span class="k">Delete</span> <span class="n">NoContent</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">.</span><span class="n">SSS</span> <span class="s1">'DELETE completed'</span> <span class="s1">''</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>username</code> — имя пользователя, удалившего группу</li>
+<li><code>XXX.XXX.XXX.XXX</code> — IP-адрес сервера</li>
+<li>http://<code>SERVER_URL</code>/api/GroupApi/<code>Delete</code> — путь к методу API для удаления группы</li>
+<li><code>DELETE</code> — тип запроса</li>
+<li><code>{"ids":["group.1","group.2"]}</code> — тело запроса
+<ul>
+<li><code>"ids"</code> — массив идентификаторов групп, подлежащих удалению</li>
+<li><code>"group.1","group.2"</code> —идентификаторы групп</li>
+</ul>
+</li>
+<li><code>NoContent</code> — статус обработки запроса</li>
+<li><code>hh:mm:ss.SSS</code> — длительность обработки запроса</li>
+<li><code>DELETE completed</code> — результат обработки запроса: выполнен</li>
+</ul>
+<h3 id="изменение-прав-группы-роли-пользователей">Изменение прав группы (роли) пользователей</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Put</span><span class="w">   </span><span class="s1">'PUT: "{"role":{"Id":"role.ID","Name":"Role Name","Alias":"RoleSystemName","Workspace":{"Id":"workspace.1","Name":"Workspace Name"},"Solution":"sln.1","Creator":"account.6","CreationDate":"2023-10-25T17:58:03+00:00","LastWriteDate":"2023-10-25T17:58:03+00:00","Members":["account.ID","account.ID"],"IsActive":true,"IsPredefined":false,"RoleType":1,"RootResource":{"Name":"Системное приложение","Description":"","Children":[{"Name":"Organizational unit template","Children":[{"Name":"All records","Children":[],"Target":"lst.13","TargetType":14,"Privileges":4,"AvailablePrivileges":4}],"Target":"os.1","TargetType":22,"Privileges":132,"AvailablePrivileges":204}],"Target":"sln.1","TargetType":4,"Privileges":204,"AvailablePrivileges":716},"CreatorName":"Full Name"}}"'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Put</span><span class="w">   </span><span class="s1">'Разрешение добавлено в роль'</span> <span class="s1">'{"Privilege":"Read","Role":"[ApplicationSystemName] RoleSystemName","RoleType":"BusinessApp","Resource":"systemSolution","ResourceType":"BusinessApp"}'</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Put</span><span class="w">   </span><span class="s1">'Разрешение добавлено в роль'</span> <span class="s1">'{"Privilege":"Create","Role":"[ApplicationSystemName] RoleSystemName","RoleType":"BusinessApp","Resource":"systemSolution","ResourceType":"BusinessApp"}'</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Put</span><span class="w">   </span><span class="s1">'Разрешение добавлено в роль'</span> <span class="s1">'{"Privilege":"Update","Role":"[ApplicationSystemName] RoleSystemName","RoleType":"BusinessApp","Resource":"[systemSolution] RecordTemplateName","ResourceType":"RecordTemplate"}'</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Put</span><span class="w">   </span><span class="s1">'Разрешение добавлено в роль'</span> <span class="s1">'{"Privilege":"Delete","Role":"[ApplicationSystemName] RoleSystemName","RoleType":"BusinessApp","Resource":"systemSolution","ResourceType":"BusinessApp"}'</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Put</span><span class="w">   </span><span class="s1">'Разрешение добавлено в роль'</span> <span class="s1">'{"Privilege":"Read","Role":"[ApplicationSystemName] RoleSystemName","RoleType":"BusinessApp","Resource":"[systemSolution] systemSolution\_OrganizationalStructure","ResourceType":"OrgStructureTemplate"}'</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Put</span><span class="w">   </span><span class="s1">'Разрешение добавлено в роль'</span> <span class="s1">'{"Privilege":"Delete","Role":"[ApplicationSystemName] RoleSystemName","RoleType":"BusinessApp","Resource":"[systemSolution] systemSolution\_OrganizationalStructure","ResourceType":"OrgStructureTemplate"}'</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Put</span><span class="w">   </span><span class="s1">'Разрешение добавлено в роль'</span> <span class="s1">'{"Privilege":"Read","Role":"[ApplicationSystemName] RoleSystemName","RoleType":"BusinessApp","Resource":"[systemSolution] systemSolution\_OrganizationalStructure","ResourceType":"OrgStructureTemplate"}'</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Put</span><span class="w">   </span><span class="s1">'Разрешение добавлено в роль'</span> <span class="s1">'{"Privilege":"Delete","Role":"[ApplicationSystemName] RoleSystemName","RoleType":"BusinessApp","Resource":"[systemSolution] systemSolution\_OrganizationalStructure","ResourceType":"OrgStructureTemplate"}'</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Put</span><span class="w">   </span><span class="s1">'Разрешение добавлено в роль'</span> <span class="s1">'{"Privilege":"Read","Role":"[ApplicationSystemName] RoleSystemName","RoleType":"BusinessApp","Resource":"[systemSolution\_OrganizationalStructure] defaultList","ResourceType":"List"}'</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Put</span> <span class="n">OK</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">.</span><span class="n">SSS</span> <span class="s1">'PUT completed'</span> <span class="s1">''</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>username</code> — имя пользователя, изменившего роль</li>
+<li><code>XXX.XXX.XXX.XXX</code> — IP-адрес сервера</li>
+<li><code>http://SERVER_URL/api/RolesCollectionApi/Put</code> — путь к методу API для изменения роли</li>
+<li><code>PUT</code> — тип запроса</li>
+<li><code>role</code> — тело запроса:
+<ul>
+<li><code>"Id":"role.ID"</code> — идентификатор роли</li>
+<li><code>"Name":"Role Name"</code> — название роли</li>
+<li><code>"Alias":"RoleSystemName"</code> — системное имя роли</li>
+<li><code>"Workspace":{"Id":"workspace.ID","Name":"Workspace Name"}</code> — свойства раздела навигации, к которому привязана системная роль</li>
+<li><code>"Solution":"sln.ID"</code> — идентификатор приложения</li>
+<li><code>"IsPredefined":false</code> — непредустановленная роль</li>
+<li><code>"RoleType":1</code> — тип роли:
+<ul>
+<li>0 — системная стандартная</li>
+<li>1 — роль в приложении</li>
+<li>2 — системная пользовательская</li>
+<li><code>"Members":[]</code> — массив идентификаторов учётных записей и групп, входящих в роль</li>
+</ul>
+</li>
+<li><code>"RootResource":{}</code> — приложение, к ресурсам которого роль задаёт разрешения</li>
+<li><code>"Children":[{"Name":"Resource name","Children":[],"Target":"resource.ID","TargetType":XX,"Privileges":XXX,"AvailablePrivileges":XXX}]</code>— массив ресурсов, к которым роль задаёт разрешения
+<ul>
+<li><code>"Target":"resource.ID"</code> — идентификатор ресурса</li>
+<li><code>"TargetType":XX</code> — код типа ресурса</li>
+<li><code>"Privileges":XXX</code> — код установленных разрешений</li>
+<li><code>"AvailablePrivileges":XXX</code> — код доступных разрешений</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Разрешение добавлено в роль</code> — описание события</li>
+<li><code>'{"Privilege":"Read","Role":"[applicationSystemName] RoleSystemName","RoleType":"BusinessApp","Resource":"[ParentSystemName] ResourceSystemName","ResourceType":"RecordTemplate"}'</code> — тело запроса:
+<ul>
+<li><code>"Privilege":"Read"</code> — тип добавленного разрешения:
+<ul>
+<li><code>Create</code> — создание</li>
+<li><code>Delete</code> — удаление</li>
+<li><code>Read</code> — чтение</li>
+<li><code>Update</code> — запись</li>
+</ul>
+</li>
+<li><code>"Role":"[ApplicationSystemName] RoleSystemName"</code> — свойства роли:
+<ul>
+<li><code>ApplicationSystemName</code> — системное имя приложения</li>
+<li><code>RoleSystemName</code> — системное имя роли</li>
+</ul>
+</li>
+<li><code>"RoleType":"BusinessApp"</code> — тип роли:
+<ul>
+<li><code>BusinessApp</code> — роль в приложении</li>
+<li><code>System</code> — системная</li>
+</ul>
+</li>
+<li><code>"Resource":"[ParentSystemName] ResourceSystemName"</code> путь к ресурсу, на доступ к которому предоставлено разрешение:
+<ul>
+<li><code>parentSystemName</code> — системное имя родительского ресурса</li>
+<li><code>ResourceSystemName</code> — системное имя ресурса</li>
+</ul>
+</li>
+<li><code>"ResourceType":"RecordTemplate"</code> — тип ресурса, на доступ к которому предоставлено разрешение:
+<ul>
+<li><code>BusinessApp</code> — приложение</li>
+<li><code>ChangeJournal</code> — журнал изменений</li>
+<li><code>From</code> — форма</li>
+<li><code>List</code> — таблица</li>
+<li><code>OrgStructureTemplate</code> — шаблон оргединицы</li>
+<li><code>Operation</code> — кнопка</li>
+<li><code>ProcessTemplate</code> — шаблон процесса</li>
+<li><code>RecordTemplate</code> — шаблон записи</li>
+<li><code>RoleTemplate</code> — шаблон роли</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>OK</code> — статус обработки запроса</li>
+<li><code>hh:mm:ss.SSS</code> — длительность обработки запроса</li>
+<li><code>PUT completed</code> — результат обработки запроса: выполнен</li>
+</ul>
+<h3 id="включение-пользователя-в-состав-группы-роли">Включение пользователя в состав группы (роли)</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Put</span><span class="w">   </span><span class="s1">'PUT: "{"role":{"Id":"role.ID","Name":"Role Name","Alias":"RoleSystemName","Workspace":{"Id":"workspace.1","Name":"Workspace Name"},"Solution":"sln.1","Creator":"account.6","CreationDate":"2023-10-25T17:58:03+00:00","LastWriteDate":"2023-10-25T17:58:03+00:00","Members":["account.ID","account.ID"],"IsActive":true,"IsPredefined":false,"RoleType":1,"RootResource":{"Name":"Системное приложение","Description":"","Children":[{"Name":"Organizational unit template","Children":[{"Name":"All records","Children":[],"Target":"lst.13","TargetType":14,"Privileges":4,"AvailablePrivileges":4}],"Target":"os.1","TargetType":22,"Privileges":132,"AvailablePrivileges":204}],"Target":"sln.1","TargetType":4,"Privileges":204,"AvailablePrivileges":716},"CreatorName":"Full Name"}}"'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Put</span></code></pre>
+</div>
+<p>'Аккаунт добавлен в роль' '{"User":"username","Role":"[ApplicationSystemName] RoleSystemName","RoleType":"BusinessApp"}'</p>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Put</span> <span class="n">OK</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">.</span><span class="n">SSS</span> <span class="s1">'PUT completed'</span> <span class="s1">''</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>username</code> — имя пользователя, изменившего роль</li>
+<li><code>XXX.XXX.XXX.XXX</code> — IP-адрес сервера</li>
+<li>http://<code>SERVER_URL</code>/api/<code>Role</code>sCollectionApi/Put — путь к методу API для изменения роли</li>
+<li><code>PUT</code> — тип запроса</li>
+<li><code>Role</code> — тело запроса:
+<ul>
+<li><code>"Id":"role.ID"</code> — идентификатор роли</li>
+<li><code>"Name":"Role Name"</code> — название роли</li>
+<li><code>"Alias":"RoleSystemName"</code> — системное имя роли</li>
+<li><code>"Workspace":{"Id":"workspace.ID","Name":"Workspace Name"}</code> — свойства раздела навигации, к которому</li>
+<li><code>"Solution":"sln.ID"</code> — идентификатор приложения</li>
+<li><code>"IsPredefined":false</code> — непредустановленная роль</li>
+<li><code>"RoleType":1</code> — тип роли:
+<ul>
+<li>0 — системная предустановленная</li>
+<li>1 — роль в приложении</li>
+<li>2 — системная непредустановленная</li>
+<li><code>"Members":["account.ID","account.ID"]</code> — массив идентификаторов учётных записей и групп, входящих в роль</li>
+</ul>
+</li>
+<li><code>"RootResource":{}</code> — объект корневого ресурса, к которому роль задаёт разрешения: приложение</li>
+<li><code>"Children":[{}]</code> — массив объектов с ресурсами, к которым роль задаёт разрешения</li>
+</ul>
+</li>
+<li>Аккаунт добавлен в роль — описание события</li>
+<li><code>'{"User":"username","Role":"[ApplicationSystemName] RoleSystemName","RoleType":"BusinessApp"}'</code> — тело запроса:
+<ul>
+<li>
+<ul>
+<li><code>"User":"username"</code> — имя пользователя</li>
+<li><code>"Role":"[ApplicationSystemName] RoleSystemName"</code> — свойства роли:
+<ul>
+<li><code>systemSolution</code> — системное имя приложения</li>
+<li><code>RoleSystemName</code> — системное имя роли</li>
+</ul>
+</li>
+<li><code>"RoleType":"BusinessApp"</code> — тип роли:
+<ul>
+<li><code>BusinessApp</code> — роль в приложении</li>
+<li><code>System</code> — системная роль</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>OK</code> — статус обработки запроса</li>
+<li><code>hh:mm:ss.SSS</code> — длительность обработки запроса</li>
+<li><code>PUT completed</code> — результат обработки запроса: выполнен</li>
+</ul>
+<h3 id="исключение-пользователя-из-состава-группы-удаление-роли">Исключение пользователя из состава группы (удаление роли)</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">Members</span><span class="o">/</span><span class="n">GetMembersData</span><span class="w">   </span><span class="s1">'POST: "{"model":{"FilterType":3,"Selected":["account.ID"]}}"'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">Members</span><span class="o">/</span><span class="n">GetMembersData</span> <span class="mi">200</span> <span class="mi">03</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span> <span class="s1">'POST completed'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Put</span><span class="w">   </span><span class="s1">'PUT: "{"role":{"Id":"role.ID","Name":"Role Name","Alias":"RoleSystemName","Workspace":{"Id":"workspace.1","Name":"Workspace Name"},"Solution":"sln.1","Creator":"account.6","CreationDate":"2023-10-25T17:58:03+00:00","LastWriteDate":"2023-10-25T17:58:03+00:00","Members":["account.ID","account.ID"],"IsActive":true,"IsPredefined":false,"RoleType":1,"RootResource":{"Name":"Системное приложение","Description":"","Children":[{"Name":"Organizational unit template","Children":[{"Name":"All records","Children":[],"Target":"lst.13","TargetType":14,"Privileges":4,"AvailablePrivileges":4}],"Target":"os.1","TargetType":22,"Privileges":132,"AvailablePrivileges":204}],"Target":"sln.1","TargetType":4,"Privileges":204,"AvailablePrivileges":716},"CreatorName":"Full Name"}}"'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Put</span><span class="w">   </span><span class="s1">'Аккаунт удален из роли'</span> <span class="s1">'{"User":"username","Role":"[ApplicationSystemName] RoleSystemName","RoleType":"BusinessApp"}'</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Put</span> <span class="n">OK</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">.</span><span class="n">SSS</span> <span class="s1">'PUT completed'</span> <span class="s1">''</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>username</code> — имя пользователя, изменившего роль</li>
+<li><code>XXX.XXX.XXX.XXX</code> — IP-адрес сервера</li>
+<li><code>http://SERVER_URL/Members/GetMembersData</code>— путь к методу API для получения идентификатора учётной записи участника роли</li>
+<li><code>POST</code> — тип запроса</li>
+<li><code>{"model":{"FilterType":3,"Selected":["account.ID"]}}</code> — тело запроса:
+<ul>
+<li><code>"FilterType":3</code> — тип фильтра учётных записей:
+<ul>
+<li>1 — только учётные записи</li>
+<li>2 — только группы</li>
+<li>3 — учётные записи и группы</li>
+</ul>
+</li>
+<li><code>"Selected":["account.ID"]</code> — массив идентификаторов исключённых учётных записей</li>
+</ul>
+</li>
+<li><code>http://SERVER_URL/api/RolesCollectionApi/Put</code> — путь к методу API для изменения роли</li>
+<li><code>PUT</code> — тип запроса</li>
+<li><code>Role</code> — тело запроса:
+<ul>
+<li><code>"Id":"role.ID"</code> — идентификатор роли</li>
+<li><code>"Name":"Role Name"</code> — название роли</li>
+<li><code>"Alias":"RoleSystemName"</code> — системное имя роли</li>
+<li><code>"Workspace":{"Id":"workspace.ID","Name":"Workspace Name"}</code> — свойства раздела навигации, к которому</li>
+<li><code>"Solution":"sln.ID"</code> — идентификатор приложения</li>
+<li><code>"IsPredefined":false</code> — непредустановленная роль</li>
+<li><code>"RoleType":1</code> — тип роли:
+<ul>
+<li>0 — системная предустановленная</li>
+<li>1 — роль в приложении</li>
+<li>2 — системная непредустановленная</li>
+<li><code>"Members":["account.ID","account.ID"]</code> — массив идентификаторов учётных записей и групп, входящих в роль</li>
+</ul>
+</li>
+<li><code>"RootResource":{}</code> — объект корневого ресурса, к которому роль задаёт разрешения: приложение</li>
+<li><code>"Children":[{}]</code> — массив объектов с ресурсами, к которым роль задаёт разрешения</li>
+</ul>
+</li>
+<li>Аккаунт удален из роли — описание события</li>
+<li><code>'{"User":"username","Role":"[ApplicationSystemName] RoleSystemName","RoleType":"BusinessApp"}'</code> — тело запроса:
+<ul>
+<li><code>"User":"username"</code> — имя пользователя</li>
+<li><code>"Role":"[ApplicationSystemName] RoleSystemName"</code> — свойства роли:
+<ul>
+<li><code>ApplicationSystemName</code> — системное имя приложения</li>
+<li><code>RoleSystemName</code> — системное имя роли</li>
+</ul>
+</li>
+<li><code>"RoleType":"BusinessApp"</code> — тип роли:
+<ul>
+<li><code>BusinessApp</code> — роль в приложении</li>
+<li><code>System</code> — системная роль</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>OK</code> — статус обработки запроса</li>
+<li><code>hh:mm:ss.SSS</code> — длительность обработки запроса</li>
+<li><code>PUT</code> completed — результат обработки запроса: выполнен</li>
+</ul>
+<h3 id="создание-объекта">Создание объекта</h3>
+<p><strong>Создание шаблона</strong></p>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">TemplatesApi</span><span class="o">/</span><span class="k">Create</span><span class="w">   </span><span class="s1">'POST: "{"template":{"Alias":"TemplateSystemName","Name":"Template Name","IsDisabled":false,"Type":4,"Solution":"sln.ID","CreationDate":"0001-01-01T00:00:00","IsReferenceData":false,"IsTransferable":false,"ConversationDisplayConfig":{"DisableSidePanelConversations":true,"DisableWidgetConversations":true,"ProhibitedReferenceTypes":[],"HideArchivedMessages":false}}}"'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">TemplatesApi</span><span class="o">/</span><span class="k">Create</span> <span class="n">OK</span> <span class="mi">03</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">.</span><span class="mi">296</span> <span class="s1">'POST completed'</span> <span class="s1">''</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>username</code> — имя пользователя, изменившего роль</li>
+<li><code>XXX.XXX.XXX.XXX</code> — IP-адрес сервера</li>
+<li><code>http://SERVER_URL/api/TemplatesApi/Create</code> — путь к методу API для создания шаблона</li>
+<li><code>POST</code> — тип запроса</li>
+<li><code>"template":{}</code> — тело запроса с данными шаблона:
+<ul>
+<li><code>"Alias":"TemplateSystemName"</code> — системное имя шаблона</li>
+<li><code>"Name":"Template Name"</code> — название шаблона</li>
+<li><code>"IsDisabled":false</code> — статус шаблона: включен (false) / отключен (true)</li>
+<li><code>"Type":4</code> — тип шаблона
+<ul>
+<li>3 — шаблон процесса</li>
+<li>4 — шаблон записи</li>
+<li>5 — шаблон аккаунта</li>
+</ul>
+</li>
+<li><code>"Solution":"sln.ID"</code> — идентификатор приложения, в котором создан шаблон</li>
+<li><code>"CreationDate":"0001-01-01T00:00:00"</code> — дата создания шаблона</li>
+<li><code>"IsReferenceData":false</code> — флаг «Шаблон является справочником»</li>
+<li><code>"IsTransferable":false</code> — флаг «Переносить данные шаблона при трансфере»</li>
+<li><code>"ConversationDisplayConfig":{}</code> — конфигурация обсуждений в шаблоне</li>
+</ul>
+</li>
+</ul>
+<h3 id="чтение-объекта">Чтение объекта</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">TemplatesApi</span><span class="o">/</span><span class="k">Get</span><span class="o">/</span><span class="n">oa</span><span class="p">.</span><span class="mi">91</span><span class="w">   </span><span class="s1">'GET: "{"id":"oa.91"}"'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">TemplatesApi</span><span class="o">/</span><span class="k">Get</span><span class="o">/</span><span class="n">oa</span><span class="p">.</span><span class="mi">91</span> <span class="n">OK</span> <span class="mi">03</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span> <span class="s1">'GET completed'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">SolutionConfigurationApi</span><span class="o">/</span><span class="n">List</span><span class="w">   </span><span class="s1">'GET'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">SolutionConfigurationApi</span><span class="o">/</span><span class="n">List</span> <span class="n">OK</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">.</span><span class="n">SSS</span> <span class="s1">'GET completed'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RecordTypeContextApi</span><span class="o">?</span><span class="n">recordTypeId</span><span class="o">=</span><span class="n">oa</span><span class="p">.</span><span class="mi">91</span><span class="w">   </span><span class="s1">'GET: "{"recordTypeId":"oa.91"}"'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">TemplatesApi</span><span class="o">/</span><span class="n">GetUsages</span><span class="o">/</span><span class="n">oa</span><span class="p">.</span><span class="mi">91</span><span class="w">   </span><span class="s1">'GET: "{"id":"oa.91"}"'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">TemplatesApi</span><span class="o">/</span><span class="n">List</span><span class="w">   </span><span class="s1">'POST: "{"filter":{"Type":0,"OnlyEnabled":true,"OnlyAdmin":false,"IncludeDocumentTemplates":false}}"'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">TemplatesApi</span><span class="o">/</span><span class="n">GetUsages</span><span class="o">/</span><span class="n">oa</span><span class="p">.</span><span class="mi">91</span> <span class="n">OK</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">.</span><span class="n">SSS</span> <span class="s1">'GET completed'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RecordTypeContextApi</span><span class="o">?</span><span class="n">recordTypeId</span><span class="o">=</span><span class="n">oa</span><span class="p">.</span><span class="mi">91</span> <span class="n">OK</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">.</span><span class="n">SSS</span> <span class="s1">'GET completed'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">TemplatesApi</span><span class="o">/</span><span class="n">List</span> <span class="n">OK</span> <span class="mi">03</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">.</span><span class="mi">046</span> <span class="s1">'POST completed'</span> <span class="s1">''</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>username</code> — имя пользователя, изменившего роль</li>
+<li><code>XXX.XXX.XXX.XXX</code> — IP-адрес сервера</li>
+</ul>
+<p><strong>Чтение свойств шаблона записи</strong></p>
+<ul>
+<li><code>http://SERVER_URL/api/TemplatesApi/Get/oa.ID</code> — путь к методу API для чтения шаблона записи</li>
+<li><code>http://SERVER_URL/api/RecordTypeContextApi?recordTypeId=oa.ID</code> — путь к методу API для чтения свойств шаблона записи</li>
+<li><code>oa.ID</code> — идентификатор шаблона записи</li>
+<li><code>GET</code> — тип запроса</li>
+<li><code>"{"id":"oa.ID"}"</code> — тело запроса с идентификатором шаблона</li>
+<li><code>OK</code> — статус обработки запроса</li>
+<li><code>hh:mm:ss</code> — длительность обработки запроса</li>
+<li><code>GET completed</code> — результат обработки запроса: выполнен</li>
+</ul>
+<p><strong>Чтение списка приложений</strong></p>
+<ul>
+<li><code>http://SERVER_URL/api/SolutionConfigurationApi/List</code> — путь к методу API для чтения списка приложений на сервере</li>
+<li><code>GET</code> — тип запроса</li>
+<li><code>OK</code> — статус обработки запроса</li>
+<li><code>hh:mm:ss</code> — длительность обработки запроса</li>
+<li><code>GET completed</code> — результат обработки запроса: выполнен</li>
+</ul>
+<p><strong>Чтение списка шаблонов</strong></p>
+<ul>
+<li><code>http://SERVER_URL/api/TemplatesApi/List</code> — путь к методу API для чтения списка шаблонов приложений</li>
+<li><code>POST</code> — тип запроса</li>
+<li><code>"filter":{}</code> — фильтр шаблонов</li>
+<li><code>OK</code> — статус обработки запроса</li>
+<li><code>hh:mm:ss</code> — длительность обработки запроса</li>
+<li><code>POST completed</code> — результат обработки запроса: выполнен</li>
+</ul>
+<p><strong>Чтение списка связанных шаблонов</strong></p>
+<ul>
+<li><code>http://SERVER_URL/api/TemplatesApi/GetUsages/oa.ID</code>— путь к методу API для чтения списка шаблонов, связанных с указанным шаблоном</li>
+<li><code>GET</code>— тип запроса</li>
+<li><code>{"id":"oa.ID"}</code> — тело запроса с идентификатором шаблона</li>
+<li><code>OK</code> — статус обработки запроса</li>
+<li><code>hh:mm:ss</code> — длительность обработки запроса</li>
+<li><code>GET completed</code> — результат обработки запроса: выполнен</li>
+</ul>
+<h3 id="копирование-объекта">Копирование объекта</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">FormDesigner</span><span class="o">/</span><span class="n">CloneRecordForm</span><span class="w">   </span><span class="s1">'POST: "{"recordTypeId":"oa.91","cloningFormId":"form.3355","newName":"New Form Name","newAlias":"NewFormSystemName"}"'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">FormDesigner</span><span class="o">/</span><span class="n">CloneRecordForm</span> <span class="mi">200</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">.</span><span class="n">SSS</span> <span class="s1">'POST completed'</span> <span class="s1">''</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>username</code> — имя пользователя, изменившего роль</li>
+<li><code>XXX.XXX.XXX.XXX</code> — IP-адрес сервера</li>
+<li><code>http://SERVER_URL/FormDesigner/CloneRecordForm</code> — путь к методу API для копирования формы</li>
+<li><code>POST</code> — тип запроса</li>
+<li><code>{"recordTypeId":"oa.ID","cloningFormId":"form.ID","newName":"New Form Name","newAlias":"NewFormSystemName"}</code> — тело запроса:</li>
+<li><code>"recordTypeId":"oa.ID"</code> — идентификатор шаблона записи
+<ul>
+<li><code>"cloningFormId":"form.ID"</code> — идентификатор исходной формы</li>
+<li><code>"newName":"New Form Name"</code> — название новой формы</li>
+<li><code>"newAlias":"NewFormSystemName"</code> — системное имя новой формы</li>
+</ul>
+</li>
+<li><code>200</code> — статус обработки запроса</li>
+<li><code>hh:mm:ss.SSS</code> — длительность обработки запроса</li>
+<li><code>POST completed</code> — результат обработки запроса: выполнен</li>
+</ul>
+<h3 id="изменение-объекта">Изменение объекта</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RecordTypeContextApi</span><span class="w">   </span><span class="s1">'POST: "{"property":{"Unique":false,"Obsolete":false,"Indexed":true,"Tracked":true,"DigitGrouping":true,"Calculated":false,"CalculateExpression":"","RecordTypeId":"oa.91","DisplayAttribute":false,"IgnoreUniqueErrors":false,"Type":0,"Format":29,"Name":"Attribute Name","Alias":"AttributeSystemName","IsSystem":false,"IsMultiValue":false,"IsMandatory":false,"IsOwnership":false,"PossibleValueExpression":""}}"'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RecordTypeContextApi</span> <span class="n">OK</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">.</span><span class="n">SSS</span> <span class="s1">'POST completed'</span> <span class="s1">''</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>username</code> — имя пользователя, изменившего роль</li>
+<li><code>XXX.XXX.XXX.XXX</code> — IP-адрес сервера</li>
+<li><code>http://SERVER_URL/api/RecordTypeContextApi</code> — путь к методу API для изменения атрибута шаблона</li>
+<li><code>POST</code> — тип запроса</li>
+<li><code>"property":{}</code> — тело запроса со свойствами атрибута:
+<ul>
+<li><code>"RecordTypeId":"oa.ID"</code>— идентификатор шаблона записи, атрибут которого требуется изменить</li>
+<li><code>"Name":"Attribute Name"</code> — название атрибута</li>
+<li><code>"Alias":"AttributeSystemName"</code> — системное имя атрибута</li>
+</ul>
+</li>
+<li><code>OK</code> — статус обработки запроса</li>
+<li><code>hh:mm:ss.SSS</code> — длительность обработки запроса</li>
+</ul>
+<p><code>POST completed</code> — результат обработки запроса: выполнен</p>
+<h3 id="удаление-объекта">Удаление объекта</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">RecordTypeContextApi</span><span class="o">/</span><span class="k">Delete</span><span class="o">/</span><span class="n">op</span><span class="p">.</span><span class="mi">941</span><span class="w">   </span><span class="s1">'DELETE: "{"id":"op.941"}"'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">RecordTypeContextApi</span><span class="o">/</span><span class="k">Delete</span><span class="o">/</span><span class="n">op</span><span class="p">.</span><span class="mi">941</span> <span class="n">OK</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">.</span><span class="n">SSS</span> <span class="s1">'DELETE completed'</span> <span class="s1">''</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>username</code> — имя пользователя, изменившего роль</li>
+<li><code>XXX.XXX.XXX.XXX</code> — IP-адрес сервера</li>
+<li><code>http://SERVER_URL/RecordTypeContextApi/Delete/op.ID</code> — путь к методу API для удаления шаблона</li>
+<li><code>DELETE</code> — тип запроса</li>
+<li><code>{"id":"op.ID"}"</code> — тело запроса: идентификатор шаблона, подлежащего удалению</li>
+<li><code>OK</code> — статус обработки запроса</li>
+<li><code>hh:mm:ss.SSS</code> — длительность обработки запроса</li>
+<li><code>DELETE completed</code> — результат обработки запроса: выполнен</li>
+</ul>
+<h3 id="установка-прав-доступа-на-объект">Установка прав доступа на объект</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Put</span><span class="w">   </span><span class="s1">'PUT: "{"role":{"Id":"role.26","Name":"Role Name","Alias":"RoleSystemName","Workspace":{"Id":"workspace.1","Name":"Workspace Name"},"Solution":"sln.1","Creator":"account.6","CreationDate":"2023-10-25T17:58:03+00:00","LastWriteDate":"2023-10-25T20:15:39+00:00","Members":["account.194"],"IsActive":true,"IsPredefined":false,"RoleType":1,"RootResource":{"Id":"rrpd.2329","Name":"Application Name","Role":"role.26","Children":[{"Name":"Resource name","Children":[],"Target":"oa.89","TargetType":20,"Privileges":204,"AvailablePrivileges":719},{"Id":"rrpd.2330","Name":"Organizational unit template","Role":"role.26","Children":[{"Id":"rrpd.2331","Name":"All records","Role":"role.26","Children":[],"Target":"lst.13","TargetType":14,"Privileges":4,"AvailablePrivileges":4}],"Target":"os.1","TargetType":22,"Privileges":132,"AvailablePrivileges":204}],"Target":"sln.1","TargetType":4,"Privileges":204,"AvailablePrivileges":716},"CreatorName":"Full Name"}}"'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Put</span><span class="w">   </span><span class="s1">'Разрешение добавлено в роль'</span> <span class="s1">'{"Privilege":"Read","Role":"[ApplicationSystemName] RoleSystemName","RoleType":"BusinessApp","Resource":"[ParentSystemName] ResourceSystemName","ResourceType":"RecordTemplate"}'</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Put</span><span class="w">   </span><span class="s1">'Разрешение добавлено в роль'</span> <span class="s1">'{"Privilege":"Create","Role":"[ApplicationSystemName] RoleSystemName","RoleType":"BusinessApp","Resource":"[ParentSystemName] ResourceSystemName","ResourceType":"RecordTemplate"}'</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Put</span><span class="w">   </span><span class="s1">'Разрешение добавлено в роль'</span> <span class="s1">'{"Privilege":"Update","Role":"[ApplicationSystemName] RoleSystemName","RoleType":"BusinessApp","Resource":"[ParentSystemName] ResourceSystemName","ResourceType":"RecordTemplate"}'</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Put</span><span class="w">   </span><span class="s1">'Разрешение добавлено в роль'</span> <span class="s1">'{"Privilege":"Delete","Role":"[ApplicationSystemName] RoleSystemName","RoleType":"BusinessApp","Resource":"[ParentSystemName] ResourceSystemName","ResourceType":"RecordTemplate"}'</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Put</span> <span class="n">OK</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">.</span><span class="n">SSS</span> <span class="s1">'PUT completed'</span> <span class="s1">''</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>username</code> — имя пользователя, изменившего роль</li>
+<li><code>XXX.XXX.XXX.XXX</code> — IP-адрес сервера</li>
+<li><code>http://SERVER_URL/api/RolesCollectionApi/Put</code> — путь к методу API для изменения роли</li>
+<li><code>PUT</code> — тип запроса</li>
+<li><code>role</code> — тело запроса:
+<ul>
+<li><code>"Id":"role.ID"</code> — идентификатор роли</li>
+<li><code>"Name":"Role Name"</code> — название роли</li>
+<li><code>"Alias":"RoleSystemName"</code> — системное имя роли</li>
+<li><code>"Workspace":{"Id":"workspace.ID","Name":"Workspace Name"}</code> — свойства раздела навигации, к которому привязана системная роль</li>
+<li><code>"Solution":"sln.ID"</code> — идентификатор приложения</li>
+<li><code>"IsPredefined":false</code> — непредустановленная роль</li>
+<li><code>"RoleType":1</code> — тип роли:
+<ul>
+<li>0 — системная стандартная</li>
+<li>1 — роль в приложении</li>
+<li>2 — системная пользовательская</li>
+<li><code>"Members":[]</code> — массив идентификаторов учётных записей и групп, входящих в роль</li>
+</ul>
+</li>
+<li><code>"RootResource":{}</code> — приложение, к ресурсам которого роль задаёт разрешения</li>
+<li><code>"Children":[{"Name":"Resource name","Children":[],"Target":"resource.ID","TargetType":XX,"Privileges":XXX,"AvailablePrivileges":XXX}]</code>— массив ресурсов, к которым роль задаёт разрешения
+<ul>
+<li><code>"Target":"resource.ID"</code> — идентификатор ресурса</li>
+<li><code>"TargetType":XX</code> — код типа ресурса</li>
+<li><code>"Privileges":XXX</code> — код установленных разрешений</li>
+<li><code>"AvailablePrivileges":XXX</code> — код доступных разрешений</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Разрешение добавлено в роль</code> — описание события</li>
+<li><code>'{"Privilege":"Read","Role":"[applicationSystemName] RoleSystemName","RoleType":"BusinessApp","Resource":"[ParentSystemName] ResourceSystemName","ResourceType":"RecordTemplate"}'</code> — тело запроса:
+<ul>
+<li><code>"Privilege":"Read"</code> — тип добавленного разрешения:
+<ul>
+<li><code>Create</code> — создание</li>
+<li><code>Delete</code> — удаление</li>
+<li><code>Read</code> — чтение</li>
+<li><code>Update</code> — запись</li>
+</ul>
+</li>
+<li><code>"Role":"[ApplicationSystemName] RoleSystemName"</code> — свойства роли:
+<ul>
+<li><code>ApplicationSystemName</code> — системное имя приложения</li>
+<li><code>RoleSystemName</code> — системное имя роли</li>
+</ul>
+</li>
+<li><code>"RoleType":"BusinessApp"</code> — тип роли:
+<ul>
+<li><code>BusinessApp</code> — роль в приложении</li>
+<li><code>System</code> — системная</li>
+</ul>
+</li>
+<li><code>"Resource":"[ParentSystemName] ResourceSystemName"</code> путь к ресурсу, на доступ к которому предоставлено разрешение:
+<ul>
+<li><code>parentSystemName</code> — системное имя родительского ресурса</li>
+<li><code>ResourceSystemName</code> — системное имя ресурса</li>
+</ul>
+</li>
+<li><code>"ResourceType":"RecordTemplate"</code> — тип ресурса, на доступ к которому предоставлено разрешение:
+<ul>
+<li><code>BusinessApp</code> — приложение</li>
+<li><code>ChangeJournal</code> — журнал изменений</li>
+<li><code>From</code> — форма</li>
+<li><code>List</code> — таблица</li>
+<li><code>OrgStructureTemplate</code> — шаблон оргединицы</li>
+<li><code>Operation</code> — кнопка</li>
+<li><code>ProcessTemplate</code> — шаблон процесса</li>
+<li><code>RecordTemplate</code> — шаблон записи</li>
+<li><code>RoleTemplate</code> — шаблон роли</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>OK</code> — статус обработки запроса</li>
+<li><code>hh:mm:ss.SSS</code> — длительность обработки запроса</li>
+<li><code>PUT completed</code> — результат обработки запроса: выполнен</li>
+</ul>
+<h3 id="изменение-прав-доступа-на-объект">Изменение прав доступа на объект</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Put</span><span class="w">   </span><span class="s1">'PUT: "{"role":{"Id":"role.26","Name":"ТЕст","Alias":"TEst","Workspace":{"Id":"workspace.1","Name":"Workspace Name"},"Solution":"sln.1","Creator":"account.6","CreationDate":"2023-10-25T17:58:03+00:00","LastWriteDate":"2023-10-25T20:15:39+00:00","Members":["account.194"],"IsActive":true,"IsPredefined":false,"RoleType":1,"RootResource":{"Id":"rrpd.2329","Name":"Application name","Role":"role.26","Children":[{"Name":"Resource name","Children":[],"Target":"oa.89","TargetType":20,"Privileges":76,"AvailablePrivileges":719},{"Id":"rrpd.2330","Name":"Organizational unit template","Role":"role.26","Children":[{"Id":"rrpd.2331","Name":"All records","Role":"role.26","Children":[],"Target":"lst.13","TargetType":14,"Privileges":4,"AvailablePrivileges":4}],"Target":"os.1","TargetType":22,"Privileges":132,"AvailablePrivileges":204}],"Target":"sln.1","TargetType":4,"Privileges":204,"AvailablePrivileges":716},"CreatorName":"Full Name"}}"'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Put</span><span class="w">   </span><span class="s1">'Разрешение удалено из роли'</span> <span class="s1">'{"Privilege":"Delete","Role":"[ApplicationSystemName] RoleSystemName","RoleType":"BusinessApp","Resource":"[ParentSystemName] ResourceSystemName","ResourceType":"RecordTemplate"}'</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">RolesCollectionApi</span><span class="o">/</span><span class="n">Put</span> <span class="n">OK</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">.</span><span class="n">SSS</span> <span class="s1">'PUT completed'</span> <span class="s1">''</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>username</code> — имя пользователя, изменившего роль</li>
+<li><code>XXX.XXX.XXX.XXX</code> — IP-адрес сервера</li>
+<li><code>http://SERVER_URL/api/RolesCollectionApi/Put</code> — путь к методу API для изменения роли</li>
+<li><code>PUT</code> — тип запроса</li>
+<li><code>role</code> — тело запроса:
+<ul>
+<li><code>"Id":"role.ID"</code> — идентификатор роли</li>
+<li><code>"Name":"Role Name"</code> — название роли</li>
+<li><code>"Alias":"RoleSystemName"</code> — системное имя роли</li>
+<li><code>"Workspace":{"Id":"workspace.ID","Name":"Workspace Name"}</code> — свойства раздела навигации, к которому привязана системная роль</li>
+<li><code>"Solution":"sln.ID"</code> — идентификатор приложения</li>
+<li><code>"IsPredefined":false</code> — непредустановленная роль</li>
+<li><code>"RoleType":1</code> — тип роли:
+<ul>
+<li>0 — системная стандартная</li>
+<li>1 — роль в приложении</li>
+<li>2 — системная пользовательская</li>
+<li><code>"Members":[]</code> — массив идентификаторов учётных записей и групп, входящих в роль</li>
+</ul>
+</li>
+<li><code>"RootResource":{}</code> — приложение, к ресурсам которого роль задаёт разрешения</li>
+<li><code>"Children":[{"Name":"Resource name","Children":[],"Target":"resource.ID","TargetType":XX,"Privileges":XXX,"AvailablePrivileges":XXX}]</code>— массив ресурсов, к которым роль задаёт разрешения
+<ul>
+<li><code>"Target":"resource.ID"</code> — идентификатор ресурса</li>
+<li><code>"TargetType":XX</code> — код типа ресурса</li>
+<li><code>"Privileges":XXX</code> — код установленных разрешений</li>
+<li><code>"AvailablePrivileges":XXX</code> — код доступных разрешений</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Разрешение удалено из роли</code> — описание события</li>
+<li><code>'{"Privilege":"Read","Role":"[applicationSystemName] RoleSystemName","RoleType":"BusinessApp","Resource":"[ParentSystemName] ResourceSystemName","ResourceType":"RecordTemplate"}'</code> — тело запроса:
+<ul>
+<li><code>"Privilege":"Read"</code> — тип добавленного разрешения:
+<ul>
+<li><code>Create</code> — создание</li>
+<li><code>Delete</code> — удаление</li>
+<li><code>Read</code> — чтение</li>
+<li><code>Update</code> — запись</li>
+</ul>
+</li>
+<li><code>"Role":"[ApplicationSystemName] RoleSystemName"</code> — свойства роли:
+<ul>
+<li><code>ApplicationSystemName</code> — системное имя приложения</li>
+<li><code>RoleSystemName</code> — системное имя роли</li>
+</ul>
+</li>
+<li><code>"RoleType":"BusinessApp"</code> — тип роли:
+<ul>
+<li><code>BusinessApp</code> — роль в приложении</li>
+<li><code>System</code> — системная</li>
+</ul>
+</li>
+<li><code>"Resource":"[ParentSystemName] ResourceSystemName"</code> путь к ресурсу, на доступ к которому предоставлено разрешение:
+<ul>
+<li><code>parentSystemName</code> — системное имя родительского ресурса</li>
+<li><code>ResourceSystemName</code> — системное имя ресурса</li>
+</ul>
+</li>
+<li><code>"ResourceType":"RecordTemplate"</code> — тип ресурса, на доступ к которому предоставлено разрешение:
+<ul>
+<li><code>BusinessApp</code> — приложение</li>
+<li><code>ChangeJournal</code> — журнал изменений</li>
+<li><code>From</code> — форма</li>
+<li><code>List</code> — таблица</li>
+<li><code>OrgStructureTemplate</code> — шаблон оргединицы</li>
+<li><code>Operation</code> — кнопка</li>
+<li><code>ProcessTemplate</code> — шаблон процесса</li>
+<li><code>RecordTemplate</code> — шаблон записи</li>
+<li><code>RoleTemplate</code> — шаблон роли</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>OK</code> — статус обработки запроса</li>
+<li><code>hh:mm:ss.SSS</code> — длительность обработки запроса</li>
+<li><code>PUT completed</code> — результат обработки запроса: выполнен</li>
+</ul>
+<h3 id="начало-работы-запуск-системы">Начало работы (запуск) системы</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">systemAccount</span> <span class="p">::</span><span class="mi">1</span><span class="w">   </span><span class="err">Экземпляр</span> <span class="n">Comindware</span> <span class="n">Business</span> <span class="n">Application</span> <span class="n">Platform</span> <span class="err">запущен</span><span class="p">.</span></code><br/><code></code><br/><code><span class="err">Системная</span> <span class="err">информация</span><span class="p">:</span></code><br/><code></code><br/><code><span class="w">  </span><span class="err">Сервер</span><span class="p">:</span> <span class="n">ubuntu</span><span class="o">-</span><span class="n">vm</span><span class="o">-</span><span class="n">server</span><span class="o">-</span><span class="n">gen2</span></code><br/><code></code><br/><code><span class="w">  </span><span class="err">База</span> <span class="err">данных</span><span class="p">:</span> <span class="n">xxxxxxxx</span><span class="o">-</span><span class="n">xxxx</span><span class="o">-</span><span class="n">xxxx</span><span class="o">-</span><span class="n">xxxx</span><span class="o">-</span><span class="n">xxxxxxxxxxxx</span></code><br/><code></code><br/><code><span class="w">  </span><span class="err">Операционная</span> <span class="err">система</span><span class="p">:</span> <span class="n">Unix</span> <span class="mi">5</span><span class="p">.</span><span class="mi">15</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">89</span></code><br/><code></code><br/><code><span class="w">  </span><span class="err">Версия</span><span class="p">:</span> <span class="n">X</span><span class="p">.</span><span class="n">X</span><span class="p">.</span><span class="n">XXXX</span><span class="p">.</span><span class="n">X</span></code><br/><code></code><br/><code><span class="w">  </span><span class="err">Часовой</span> <span class="err">пояс</span><span class="p">:</span> <span class="n">Europe</span><span class="o">/</span><span class="n">Moscow</span></code><br/><code></code><br/><code><span class="w">  </span><span class="err">Язык</span><span class="p">:</span> <span class="n">ru</span></code><br/><code></code><br/><code><span class="w">  </span><span class="err">Путь</span> <span class="err">к</span> <span class="err">конфигурации</span><span class="p">:</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">instancename</span></code><br/><code></code><br/><code><span class="w">  </span><span class="err">Путь</span> <span class="err">к</span> <span class="err">базе</span> <span class="err">данных</span><span class="p">:</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">comindware</span><span class="o">/</span><span class="n">instancename</span><span class="o">/</span><span class="k">Database</span></code><br/><code></code><br/><code><span class="w">  </span><span class="err">Путь</span> <span class="err">к</span> <span class="err">загруженным</span> <span class="err">файлам</span><span class="p">:</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">comindware</span><span class="o">/</span><span class="n">instancename</span><span class="o">/</span><span class="n">Streams</span></code><br/><code></code><br/><code><span class="err">Аутентификация</span> <span class="n">IIS</span><span class="p">:</span> <span class="n">Anonymous</span></code><br/><code></code><br/><code><span class="w">  </span><span class="err">Аутентификация</span> <span class="err">приложения</span><span class="p">:</span> <span class="n">Ldap</span> <span class="o">|</span> <span class="n">Builtin</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">systemAccount</span><span class="w">    </span><span class="n">PerformanceHelper</span><span class="p">.</span><span class="n">Perform</span><span class="p">:</span> <span class="n">FullTextSearchService</span><span class="p">.</span><span class="n">RebuildThreadWorker</span><span class="p">()</span> <span class="n">succeed</span> <span class="k">Time</span><span class="p">:</span><span class="mi">59184</span><span class="n">ms</span> <span class="n">TotalGCMemory</span><span class="p">:</span><span class="mi">472</span><span class="n">MB</span> <span class="n">DeltaGCMemory</span><span class="p">:</span><span class="o">-</span><span class="mi">146</span><span class="n">MB</span> <span class="n">TotalProcessMemory</span><span class="p">:</span><span class="mi">462</span><span class="n">MB</span> <span class="n">DeltaProcessMemory</span><span class="p">:</span><span class="mi">0</span><span class="n">MB</span></code></pre>
+</div>
+<p><strong>Версия 4.2 (Windows)</strong></p>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">systemAccount</span><span class="w">    </span><span class="n">Comindware</span> <span class="n">Business</span> <span class="n">Application</span> <span class="n">Platform</span> <span class="n">has</span> <span class="n">started</span><span class="p">.</span></code><br/><code></code><br/><code><span class="k">System</span> <span class="n">information</span><span class="p">:</span></code><br/><code></code><br/><code><span class="w"> </span><span class="n">Server</span><span class="p">:</span> <span class="n">SERVERNAME</span></code><br/><code></code><br/><code><span class="w"> </span><span class="k">Database</span><span class="p">:</span> <span class="n">xxxxxxxx</span><span class="o">-</span><span class="n">xxxx</span><span class="o">-</span><span class="n">xxxx</span><span class="o">-</span><span class="n">xxxx</span><span class="o">-</span><span class="n">xxxxxxxxxxxx</span></code><br/><code></code><br/><code><span class="w"> </span><span class="n">OperatingSystem</span><span class="p">:</span> <span class="n">Microsoft</span> <span class="n">Windows</span> <span class="n">NT</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span></code><br/><code></code><br/><code><span class="w"> </span><span class="k">Version</span><span class="p">:</span> <span class="n">X</span><span class="p">.</span><span class="n">X</span><span class="p">.</span><span class="n">XXXX</span><span class="p">.</span><span class="n">X</span></code><br/><code></code><br/><code><span class="w"> </span><span class="n">Timezone</span><span class="p">:</span> <span class="n">Europe</span><span class="o">/</span><span class="n">Moscow</span></code><br/><code></code><br/><code><span class="w"> </span><span class="k">Language</span><span class="p">:</span> <span class="n">ru</span></code><br/><code></code><br/><code><span class="w"> </span><span class="n">Config</span> <span class="n">path</span><span class="p">:</span> <span class="n">E</span><span class="p">:</span><span class="err">\\</span><span class="n">instancename</span><span class="err">\\</span><span class="n">Config</span></code><br/><code></code><br/><code><span class="w"> </span><span class="k">Database</span> <span class="n">path</span><span class="p">:</span> <span class="n">E</span><span class="p">:</span><span class="err">\\</span><span class="n">instancename</span><span class="err">\\</span><span class="k">Data</span></code><br/><code></code><br/><code><span class="w"> </span><span class="n">Streams</span> <span class="n">path</span><span class="p">:</span> <span class="n">F</span><span class="p">:</span><span class="err">\\</span><span class="n">instancename</span><span class="err">\\</span><span class="n">Streams</span></code><br/><code></code><br/><code><span class="n">IIS</span> <span class="n">authentication</span><span class="p">:</span> <span class="n">Anonymous</span></code><br/><code></code><br/><code><span class="w"> </span><span class="n">Application</span> <span class="n">authentication</span><span class="p">:</span> <span class="n">Anonymous</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>systemAccount</code> — учётная запись, запустившая систему</li>
+<li><code>::1</code> — идентификатор локального хоста вместо IP-адреса</li>
+<li><code>Comindware Business Application Platform has started</code> — описание события: система запущена</li>
+<li><code>System information</code> — сведения о системе
+<ul>
+<li><code>Server: SERVERNAME</code> — имя сервера</li>
+<li><code>Database: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</code> — идентификатор базы данных экземпляра ПО</li>
+<li><code>OperatingSystem: Microsoft Windows NT XXX.XXX.XXX.XXX</code> — наименование и номер версии операционной системы сервера</li>
+<li><code>Version: X.X.XXXX.X</code> — версия ПО Comindware Business Application Platform</li>
+<li><code>Timezone: Europe/Moscow</code> — часовой пояс экземпляра ПО</li>
+<li><code>Language: ru</code> — язык экземпляра ПО</li>
+<li><code>Config path: E:\npd\Config</code> — путь к конфигурации</li>
+<li><code>Database path: E:\xxx\Data</code> — путь к базе данных</li>
+<li><code>Streams path: F:\xxx\Streams</code> — путь к загруженным файлам</li>
+<li><code>IIS authentication: Anonimous | Ldap | Builtin</code> — способ Windows-аутентификации экземпляра ПО</li>
+<li><code>Application authentication: Anonimous | Ldap | Builtin</code> — способ аутентификации экземпляра ПО</li>
+</ul>
+</li>
+<li><code>PerformanceHelper.Perform: FullTextSearchService.RebuildThreadWorker() succeed</code> —запущена системная служба полнотекстового поиска</li>
+<li><code>Time:59184ms</code> — длительность запуска службы</li>
+<li><code>TotalGCMemory:XXXMB</code> — память, выделенная сборщику мусора</li>
+<li><code>DeltaGCMemory:-XXXMB</code> — изменение памяти, выделенной сборщику мусора</li>
+<li><code>TotalProcessMemory:XXXMB</code> — память, выделенная системе</li>
+<li><code>DeltaProcessMemory:XXXMB</code> — изменение памяти, выделенной системе</li>
+</ul>
+<h3 id="окончание-остановка-работы-системы">Окончание (остановка) работы системы</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">systemAccount</span><span class="w">    </span><span class="n">Comindware</span> <span class="n">Business</span> <span class="n">Application</span> <span class="n">Platform</span> <span class="n">has</span> <span class="n">stopped</span><span class="p">.</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>systemAccount</code> — учётная запись, запустившая систему</li>
+<li><code>Comindware Business Application Platform has started</code> — описание события: система остановлена</li>
+</ul>
+<h3 id="запуск-сервисаслужбымодуля">Запуск сервиса/службы/модуля</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="mi">2023</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">30</span> <span class="mi">14</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mi">23</span><span class="p">,</span><span class="mi">448</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">systemAccount</span><span class="w">    </span><span class="n">Core</span> <span class="k">is</span> <span class="n">loading</span></code><br/><code></code><br/><code><span class="mi">2023</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">30</span> <span class="mi">14</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mi">25</span><span class="p">,</span><span class="mi">586</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">systemAccount</span><span class="w">    </span><span class="k">Initialize</span> <span class="n">account</span> <span class="k">cache</span><span class="p">:</span> <span class="mi">425</span><span class="n">ms</span></code><br/><code></code><br/><code><span class="mi">2023</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">30</span> <span class="mi">14</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mi">34</span><span class="p">,</span><span class="mi">407</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">systemAccount</span><span class="w">    </span><span class="n">Restore</span> <span class="n">Sessions</span><span class="p">:</span> <span class="mi">8821</span><span class="n">ms</span></code><br/><code></code><br/><code><span class="mi">2023</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">30</span> <span class="mi">14</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mi">34</span><span class="p">,</span><span class="mi">491</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">systemAccount</span><span class="w">    </span><span class="k">Initialize</span> <span class="n">license</span> <span class="n">service</span><span class="p">:</span> <span class="mi">83</span><span class="n">ms</span></code><br/><code></code><br/><code><span class="mi">2023</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">30</span> <span class="mi">14</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mi">34</span><span class="p">,</span><span class="mi">533</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">systemAccount</span><span class="w">    </span><span class="k">Initialize</span> <span class="n">routers</span><span class="p">:</span> <span class="mi">0</span><span class="n">ms</span></code><br/><code></code><br/><code><span class="mi">2023</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">30</span> <span class="mi">14</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mi">35</span><span class="p">,</span><span class="mi">113</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">systemAccount</span><span class="w">    </span><span class="k">Initialize</span> <span class="n">document</span> <span class="n">converters</span><span class="p">:</span> <span class="mi">501</span><span class="n">ms</span></code><br/><code></code><br/><code><span class="mi">2023</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">30</span> <span class="mi">14</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mi">35</span><span class="p">,</span><span class="mi">116</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">systemAccount</span><span class="w">    </span><span class="n">Synchronization</span> <span class="k">with</span> <span class="n">platform</span> <span class="n">configuration</span> <span class="mi">2</span><span class="n">ms</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>systemAccount</code> — учётная запись, запустившая сервис</li>
+<li><code>Core is loading</code> — запуск сервиса Core</li>
+<li><code>Initialize account cache: 425ms</code> — запущен сервис Core</li>
+<li><code>Restore Sessions: 8821ms</code> — запущен сервис Core</li>
+<li><code>Initialize license service: 83ms</code> — запущен сервис Core</li>
+<li><code>Initialize routers: 0ms</code> — запущен сервис Core</li>
+<li><code>Initialize document converters: 501ms</code> — запущен сервис Core</li>
+</ul>
+<h3 id="остановкасбой-системы-компонент-сервисов-инстансов">Остановка\сбой системы (компонент, сервисов, инстансов)</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">systemAccount</span><span class="w">    </span><span class="n">Comindware</span> <span class="n">Business</span> <span class="n">Application</span> <span class="n">Platform</span> <span class="n">has</span> <span class="n">stopped</span><span class="p">.</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>systemAccount</code> — учётная запись, остановившая систему</li>
+<li><code>Comindware Business Application Platform has started</code> — описание события: система остановлена</li>
+</ul>
+<h3 id="успешный-результат-выполнения-процесса">Успешный результат выполнения процесса</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">UserCommandExecution</span><span class="o">/</span><span class="k">Prepare</span><span class="w">   </span><span class="s1">'POST: "{"contextChanges":{"CommandId":"event.ID","ContextObjects":[]}}"'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">username</span> <span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span><span class="p">.</span><span class="n">XXX</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">SERVER</span><span class="err">\</span><span class="n">_URL</span><span class="o">/</span><span class="n">UserCommandExecution</span><span class="o">/</span><span class="k">Prepare</span> <span class="mi">200</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">.</span><span class="n">SSS</span> <span class="s1">'POST completed'</span> <span class="s1">''</span></code><br/><code></code><br/><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span> <span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">systemAccount</span><span class="w">    </span><span class="n">Process</span> <span class="n">runned</span> <span class="k">count</span><span class="o">=</span><span class="mi">11</span> <span class="p">(</span><span class="n">completed</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="n">lastRunTime</span><span class="o">=</span><span class="ss">"DD.MM.YYYY HH:mm:ss"</span><span class="p">;</span> <span class="n">scripts</span> <span class="n">started</span><span class="o">=</span><span class="mi">1</span> <span class="p">(</span><span class="n">failed</span><span class="o">=</span><span class="mi">0</span><span class="p">);</span> <span class="n">worker</span> <span class="n">threads</span> <span class="n">started</span><span class="o">=</span><span class="mi">7</span> <span class="p">(</span><span class="n">failed</span><span class="o">=</span><span class="mi">0</span><span class="p">);</span> <span class="n">messages</span> <span class="n">total</span><span class="o">=</span><span class="mi">0</span> <span class="p">(</span><span class="n">failed</span><span class="o">=</span><span class="mi">0</span><span class="p">).</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>username</code> — учётная запись, запустившая процесс</li>
+<li><code>XXX.XXX.XXX.XXX</code> — IP-адрес сервера</li>
+<li><code>http://SERVER_URL/api/TemplatesApi/Create</code> — путь к методу API для создания шаблона</li>
+<li><code>POST</code> — тип запроса</li>
+<li>
+<p><code>"contextChanges":{}</code> — данные для запуска процесса:</p>
+<ul>
+<li><code>"CommandId":"event.ID"</code> — идентификатор кнопки, по нажатию которой был запущен процесс</li>
+<li><code>"ContextObjects":[]</code> — массив идентификаторов записей, по которым был запущен процесс</li>
+</ul>
+</li>
+<li>
+<p><code>systemAccount</code> — учётная запись, запустившая службу</p>
+</li>
+<li><code>Process runned count=11 (completed=3)</code> — количество запущенных экземпляров процесса (количество завершённых экземпляров процесса)</li>
+<li><code>lastRunTime="DD.MM.YYYY hh:mm:ss"</code> — время последнего выполнения процесса</li>
+<li><code>scripts started=1 (failed=0)</code> — количество запущенных сценариев (количество завершившихся с ошибкой сценариев)</li>
+<li><code>worker threads started=7 (failed=0)</code> — количество запущенных потоков системных служб (количество завершившихся с ошибкой системных служб)</li>
+<li><code>messages total=0 (failed=0)</code> — количество переданных сообщений (количество сообщений, переданных с ошибкой)</li>
+</ul>
+<h3 id="успешный-результат-выполнения-сервиса">Успешный результат выполнения сервиса</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span><span class="w"> </span><span class="n">INFO</span> <span class="mi">00000000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">0000</span><span class="o">-</span><span class="mi">000000000000</span> <span class="n">systemAccount</span><span class="w">    </span><span class="n">Core</span> <span class="n">Loaded</span></code></pre>
+</div>
+<p><strong>Поля события</strong></p>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>00000000-0000-0000-0000-000000000000</code> — идентификатор сеанса</li>
+<li><code>systemAccount</code> — учётная запись, запустившая сервис</li>
+<li><code>Core Loaded</code> — запущен сервис Core</li>
+</ul>
+<h3 id="событие-в-адаптере">Событие в адаптере</h3>
+<p><strong>Пример события</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="p">[</span><span class="n">yyy</span><span class="o">-</span><span class="n">MM</span><span class="o">-</span><span class="n">dd</span> <span class="n">HH</span><span class="p">:</span><span class="n">mm</span><span class="p">:</span><span class="n">ss</span><span class="p">,</span><span class="n">SSS</span><span class="p">][</span><span class="n">INFO</span><span class="p">][</span><span class="n">Getting</span> <span class="n">meta</span> <span class="k">for</span> <span class="n">plugin</span> <span class="n">XxxSenderAdapter</span><span class="p">.]</span> <span class="n">Platform</span> <span class="k">key</span><span class="p">:</span> <span class="n">XXX</span><span class="err">\</span><span class="n">_AdapterAgent5b28ad88a4cb4d4f8078c4deef1ee08b</span><span class="p">;</span> <span class="n">Service</span> <span class="n">name</span><span class="p">:</span> <span class="n">ServiceName</span><span class="p">;</span> <span class="n">Runtime</span><span class="p">:</span> <span class="p">.</span><span class="n">NET</span> <span class="mi">6</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">21</span>  </code><br/><code></code><br/><code><span class="p">[</span><span class="mi">2023</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">08</span> <span class="mi">00</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="mi">667</span><span class="p">][</span><span class="n">INFO</span><span class="p">][</span><span class="n">Meta</span> <span class="k">is</span> <span class="n">ready</span> <span class="k">for</span> <span class="n">XxxSenderAdapter</span><span class="p">.]</span> <span class="n">Platform</span> <span class="k">key</span><span class="p">:</span> <span class="n">XXX</span><span class="err">\</span><span class="n">_AdapterAgent5b28ad88a4cb4d4f8078c4deef1ee08b</span><span class="p">;</span> <span class="n">Service</span> <span class="n">name</span><span class="p">:</span> <span class="n">ServiceName</span><span class="p">;</span> <span class="n">Runtime</span><span class="p">:</span> <span class="p">.</span><span class="n">NET</span> <span class="mi">6</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">21</span>  </code><br/><code><span class="k">data</span><span class="p">:</span> <span class="err">{</span><span class="ss">"Name"</span><span class="p">:</span><span class="ss">"XxxSenderAdapter"</span><span class="p">,</span><span class="ss">"Description"</span><span class="p">:</span><span class="ss">"Адаптер для связи с системой «XXX»"</span><span class="p">,</span><span class="ss">"Direction"</span><span class="p">:</span><span class="ss">"Outgoing"</span><span class="p">,</span><span class="ss">"EndpointDefinitionJson"</span><span class="p">:</span><span class="err">"{}}</span></code></pre>
+</div>
+<ul>
+<li><code>yyyy-MM-dd HH:mm:ss,SSS</code> — дата и время события</li>
+<li><code>INFO</code> — тип события: информационное</li>
+<li><code>Getting meta for plugin XxxSenderAdapter</code> — описание события</li>
+<li><code>Platform key: XXX_AdapterAgent5b28ad88a4cb4d4f8078c4deef1ee08b; Service name: ServiceName; Runtime: .NET 6.0.21</code> — контекст события</li>
+<li><code>data: {}</code> — содержимое сообщения</li>
+</ul>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<p><strong><a class="autorefs autorefs-internal mkdocs_imported_link" href="logging_engine.html#logging_engine">Подсистема журналирования</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

@@ -1,0 +1,13 @@
+<h1>Вычисление всех аккаунтов группы</h1><p>Для вычисления аккаунтов, входящих в определённую группу без учёта подгрупп и их участников (в случае, если в группе нет вложенности), введите следующее выражение:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">(from ag in db-&gt;_AccountGroup where OR (ag-&gt;groupName == "users",ag-&gt;groupName == "admins") select ag-&gt;groupUsers-&gt;id)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span style="text-decoration: underline;"><strong>где:</strong></span></p>
+<p><strong>"users", "admins"</strong> — названия групп.</p>
+<p>Альтернатива статье <samp data-name="aid" data-title="" data-value="2488"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>{Article-ID:2488}</span></samp>.</p>

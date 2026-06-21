@@ -1,0 +1,96 @@
+<h1>Атрибут типа «Текст». Поиск строки в тексте с помощью N3</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#прикладная-задача"> <span class="md-ellipsis"> Прикладная задача </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#поиск-слова-в-значении-текстового-атрибута"> <span class="md-ellipsis"> Поиск слова в значении текстового атрибута </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#тестирование"> <span class="md-ellipsis"> Тестирование </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2257">Текстовый атрибут</a></strong> может содержать неограниченное количество символов, например письмо или заявку. Чтобы найти в тексте ключевые слова, например запрещённые или обозначающие срочность, важность и т. п., можно использовать выражение на N3.</p>
+<p>Здесь представлен пример настройки логического атрибута, который реагирует на наличие слов из реестра ключевых слов в тексте, с помощью выражения на N3.</p>
+<h2 id="прикладная-задача">Прикладная задача</h2>
+<p>Имеется шаблон <em>«Заявки»</em>. Если в комментарии клиент пишет слово <em>«срочно»</em>, <em>«важно»</em> или подобное слово, указывающее на важность заявки, то такую заявку необходимо отметить флажком <em>«Важная заявка»</em> с помощью логического атрибута.</p>
+<h2 id="поиск-слова-в-значении-текстового-атрибута">Поиск слова в значении текстового атрибута</h2>
+<ol class="colored_numbers_list">
+<li>Создайте шаблон <em>«Реестр слов»</em> с <strong>текстовыми</strong> атрибутами <em>«Код»</em> и <em>«Слово»</em>.</li>
+<li>Создайте шаблон <em>«Заявки»</em>.</li>
+<li>Создайте <strong>текстовый</strong> атрибут <em>«Комментарий»</em>.</li>
+<li>
+<p>Создайте <strong>логический</strong> атрибут <em>«Важная заявка»</em>:</p>
+<ul>
+<li><strong>Вычислять автоматически:</strong> флажок установлен</li>
+<li><strong>Вычисляемое выражение: N3</strong></li>
+</ul>
+<div class="highlight">
+<pre><code><code><span class="c"># Импортируем функции для работы с записями и строками</span></code><br/><code><span class="k">@prefix</span> <span class="nn">object:</span> <span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span>  </code><br/><code><span class="k">@prefix</span> <span class="nn">cmwstring:</span> <span class="nv">&lt;http://comindware.com/logics/string#&gt;</span><span class="p">.</span>  </code><br/><code><span class="p">{</span>  </code><br/><code>    <span class="c"># Находим атрибут Kommentariy (Комментарий) в шаблоне Zayavki (Заявки)</span></code><br/><code>    <span class="c"># и помещаем его в переменную KommentariyAttribute</span></code><br/><code>    <span class="p">(</span><span class="s">"Zayavki"</span> <span class="s">"Kommentariy"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?KommentariyAttribute</span><span class="p">.</span></code><br/><code>    <span class="c"># Помещаем строку из атрибута «Комментарий»</span></code><br/><code>    <span class="c"># текущей заявки ?item в переменную ?text</span></code><br/><code>    <span class="err">?item</span> <span class="err">?KommentariyAttribute</span> <span class="err">?text</span><span class="p">.</span></code><br/><code>    <span class="c"># Преобразуем комментарий в нижний регистр и помещаем в ?textLowerCase</span></code><br/><code>    <span class="err">?text</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">toLower</span> <span class="err">?textLowerCase</span><span class="p">.</span></code><br/><code>    <span class="c"># Помещаем значение атрибута Kod (Код) в переменную ?KodAttribute</span></code><br/><code>    <span class="p">(</span><span class="s">"Reestrslov"</span> <span class="s">"Kod"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?KodAttribute</span><span class="p">.</span></code><br/><code>    <span class="c"># Находим все записи в реестре слов с кодом urgent</span></code><br/><code>    <span class="err">?urgentKeywords</span> <span class="err">?KodAttribute</span> <span class="s">"urgent"</span><span class="p">.</span></code><br/><code>    <span class="p">(</span><span class="s">"Reestrslov"</span> <span class="s">"Slovo"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?SlovoAttribute</span><span class="p">.</span></code><br/><code>    <span class="c"># Присваиваем переменной ?keywords массив объектов</span></code><br/><code>    <span class="c"># с заполненными значениями атрибута «Слово»</span></code><br/><code>    <span class="err">?urgentKeywords</span> <span class="err">?SlovoAttribute</span> <span class="err">?keywords</span><span class="p">.</span></code><br/><code>    <span class="c"># Начинаем цикл по ?keywords</span></code><br/><code>        <span class="c"># Преобразуем ключевое слово в нижний регистр</span></code><br/><code>        <span class="err">?keywords</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">toLower</span> <span class="err">?keywordLowerCase</span><span class="p">.</span></code><br/><code>        <span class="c"># Проверяем, содержит ли ?textLowerCase ключевое слово</span></code><br/><code>        <span class="c"># из ?urgentKeywords</span></code><br/><code>        <span class="err">?textLowerCase</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">contains</span> <span class="err">?keywordLowerCase</span><span class="p">.</span></code><br/><code>        <span class="c"># Если строка была найдена в переменной ?textLowerCase,</span></code><br/><code>        <span class="c"># то значение вычисляемого атрибута сменится на true</span></code><br/><code>        <span class="l">true</span> <span class="err">-&gt;</span> <span class="err">?value</span><span class="p">.</span>  </code><br/><code><span class="p">}</span></code><br/></code></pre>
+</div>
+</li>
+<li>
+<p>Поместите атрибуты на форму и сохраните. У атрибута <em>«Важная заявка»</em> установите <strong>представление</strong> в виде <strong>флажка</strong>.</p>
+</li>
+</ol>
+<h2 id="тестирование">Тестирование</h2>
+<ol class="colored_numbers_list">
+<li>
+<p>В реестре слов создайте записи с ключевыми словами, обозначающими важную заявку, например:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Код</th>
+<th>Слово</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>urgent</em></td>
+<td><em>срочн</em></td>
+</tr>
+<tr>
+<td><em>urgent</em></td>
+<td><em>важн</em></td>
+</tr>
+<tr>
+<td><em>urgent</em></td>
+<td><em>скор</em></td>
+</tr>
+<tr>
+<td><em>urgent</em></td>
+<td><em>АСАП</em></td>
+</tr>
+<tr>
+<td><em>urgent</em></td>
+<td><em>ASAP</em></td>
+</tr>
+<tr>
+<td><em>urgent</em></td>
+<td><em>important</em></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Создайте новую заявку.</p>
+</li>
+<li>В комментарии укажите любой текст и напишите слово <em>«Срочно!»</em>, <em>«ВАЖНО»</em>, <em>«скорее»</em> или любое слово с кодом <em>urgent</em> из реестра слов.</li>
+<li>Сохраните запись.</li>
+<li>В поле <em>«Важная заявка»</em> будет установлен флажок.</li>
+<li>Удалите из комментария все слова с кодом <em>urgent</em>.</li>
+<li>Сохраните запись.</li>
+<li>В поле <em>«Важная заявка»</em> флажок будет снят.</li>
+<li>Поэкспериментируйте с регистром и формами слов из реестра, чтобы понять, как работает выражение на N3.</li>
+</ol>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2257">Атрибут типа «Текст»</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2401">Написание выражений на языке N3</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

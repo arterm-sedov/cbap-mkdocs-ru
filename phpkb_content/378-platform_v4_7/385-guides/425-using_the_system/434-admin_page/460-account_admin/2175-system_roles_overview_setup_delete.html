@@ -1,0 +1,269 @@
+<h1>Системные роли. Определения, настройка, объединение, удаление</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#definitions"> <span class="md-ellipsis"> Определения </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#стандартные-системные-роли"> <span class="md-ellipsis"> Стандартные системные роли </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#просмотр-списка-системных-ролей-и-настройка-роли"> <span class="md-ellipsis"> Просмотр списка системных ролей и настройка роли </span> </a><nav aria-label="Просмотр списка системных ролей и настройка роли" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-свойств-роли"> <span class="md-ellipsis"> Настройка свойств роли </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-разрешений-для-ресурсов"> <span class="md-ellipsis"> Настройка разрешений для ресурсов </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#удаление-разрешений-для-ресурсов"> <span class="md-ellipsis"> Удаление разрешений для ресурсов </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#восстановление-исходных-разрешений-системной-роли"> <span class="md-ellipsis"> Восстановление исходных разрешений системной роли </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#объединение-системных-ролей"> <span class="md-ellipsis"> Объединение системных ролей </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#объединение-ролей"> <span class="md-ellipsis"> Объединение ролей </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#клонирование-системной-роли"> <span class="md-ellipsis"> Клонирование системной роли </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#удаление-системной-роли"> <span class="md-ellipsis"> Удаление системной роли </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<div class="notice notice-success">
+<h2 class="admonition-title" id="definitions">Определения</h2>
+<p>В <strong>Comindware Business Application Platform</strong> предусмотрена возможность контроля доступа к различным ресурсам посредством ролей, разрешений и прав доступа.</p>
+<p>Для контроля доступа к системным ресурсам используются <strong>системные роли.</strong></p>
+<p><strong>Системные роли</strong> определяют политику безопасности для:</p>
+<ul>
+<li>пользователей, настраивающих систему и приложения;</li>
+<li>служебных аккаунтов, используемых для интеграции с внешними системами посредством API и LDAP.</li>
+</ul>
+<p>Можно создать <strong>особые системные</strong> <strong>роли</strong> со специальными свойствами и разрешениями или <a class="mkdocs_imported_link" href="#объединение-системных-ролей">объединить</a> стандартные системные роли для создания особой роли.</p>
+<p>Для контроля доступа конечных пользователей к ресурсам приложения используются <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2208">роли в приложении</a></strong>. <strong>Роли в приложении</strong> не дают доступа к настройке приложений или системы и использованию API.</p>
+<ul>
+<li><strong>Роль</strong> — это совокупность разрешений, назначенная аккаунту или группе аккаунтов.</li>
+<li><strong>Разрешение</strong> — это полномочие на совершение определенного действия с объектом: полный доступ, создание, просмотр, изменение, удаление и т. п.</li>
+<li><strong>Права доступа</strong> — это совокупность всех разрешений, предоставленных аккаунту или группе аккаунтов. Права доступа формируются посредством: ролей, правил для форм, выражений, языка запросов и скриптов.</li>
+<li><strong>Ресурс</strong> — любая сущность в системе, к которой осуществляет доступ пользователь или внешний сервис.</li>
+</ul>
+</div>
+<h2 id="стандартные-системные-роли">Стандартные системные роли</h2>
+<p>В <strong>Comindware Business Application Platform</strong> предусмотрены перечисленные ниже стандартные системные роли с заранее заданными разрешениями на доступ к ресурсам системы.</p>
+<ul>
+<li><strong>Системные администраторы</strong> — могут изменять все параметры на странице «<strong>Администрирование</strong>» и во всех приложениях, а также использовать все методы API, настраивать, создавать, редактировать и удалять все шаблоны, записи, экземпляры процессов, аккаунты, диаграммы и любые другие сущности в системе.
+<ul>
+<li><strong><em>Полный доступ</em></strong>
+<ul>
+<li><strong>Система</strong>— доступ ко всем ресурсам системы.</li>
+<li>Функции администрирования на страницах:
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2181"><strong>Адаптеры</strong></a> — настройка особых адаптеров для интеграции с внешними сервисами.</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2194"><strong>Аккаунты</strong></a> — настройка пользователей.</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2185"><strong>Глобальная конфигурация</strong></a> — настройка параметров сервера.</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2180"><strong>Журналы событий</strong></a> — просмотр журналов работы системы и взаимодействия с внешними сервисами.</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2205"><strong>Подключения</strong></a> — настройка подключений к внешним сервисам и путей передачи данных.</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2209"><strong>Приложения</strong></a> — настройка приложений.</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2184"><strong>Производительность</strong></a> — просмотр показателей производительности системы.</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2190"><strong>Резервное копирование</strong></a> — настройка конфигураций резервного копирования.</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2175"><strong>Системные роли</strong></a> — настройка системных ролей.</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2199"><strong>Темы</strong></a> — настройка тем визуального оформления системы.</li>
+</ul>
+</li>
+<li>
+<p>Системные ресурсы:</p>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2281"><strong>Веб-интерфейс</strong></a> — использование интерфейса конечного пользователя приложений.</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/category.php?id=513"><strong>Вызовы API</strong></a> — использование всех методов API.</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2308"><strong>Системный LDAP</strong></a> — настройка синхронизации аккаунтов посредством протокола LDAP.</li>
+<li><strong>Администраторы безопасности</strong> — могут настраивать параметры безопасности системы, но не могут настраивать приложения и подключения к внешним службам, а также изменять данные в шаблонах.
+<ul>
+<li><strong><em>Полный доступ</em></strong>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2194"><strong>Аккаунты</strong></a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2175"><strong>Системные роли</strong></a></li>
+</ul>
+</li>
+<li><strong><em>Просмотр</em></strong>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2180"><strong>Журналы событий</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Администраторы инфраструктуры</strong> — могут настраивать подключения к внешним службам и резервное копирование, но не могут настраивать параметры безопасности системы и приложения, а также изменять данные в шаблонах.
+<ul>
+<li><strong><em>Полный доступ</em></strong>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2181"><strong>Адаптеры</strong></a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2205"><strong>Подключения</strong></a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2190"><strong>Резервное копирование</strong></a></li>
+</ul>
+</li>
+<li><strong><em>Просмотр</em></strong>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2180"><strong>Журналы событий</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Системные архитекторы</strong> — могут только настраивать приложения и изменять данные в шаблонах.
+<ul>
+<li><strong><em>Полный доступ</em></strong>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2209"><strong>Приложения</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="просмотр-списка-системных-ролей-и-настройка-роли">Просмотр списка системных ролей и настройка роли</h2>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<ul>
+<li>Настроить <a class="mkdocs_imported_link" href="#настройка-свойств-роли">свойства</a> и <a class="mkdocs_imported_link" href="#настройка-разрешений-для-ресурсов">разрешения</a> можно только у системных ролей, созданных пользователями, т. е. ролей, у которых в списке указан создатель.</li>
+<li>Если выбрать системную роль, созданную системой (у которой в списке не указан создатель), у неё можно настроить только <a class="mkdocs_imported_link" href="#role_members">участников роли</a>.</li>
+</ul>
+</div>
+<ol class="colored_numbers_list">
+<li>На странице «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2191"><strong>Администрирование</strong></a>» в разделе — «<strong>Администрирование аккаунтов</strong>» выберите пункт «<strong>Системные роли</strong>» <em class="fa-light fa-user-shield">‌<!--icon--></em>.</li>
+<li>Отобразится список системных ролей.</li>
+<li>Нажмите кнопку «<strong>Создать</strong>» или дважды нажмите строку роли в списке.</li>
+<li>Отобразится страница системной роли с вкладками <strong>«Свойства роли»</strong> и <strong>«Разрешения».</strong></li>
+<li>Настройте <a class="mkdocs_imported_link" href="#настройка-свойств-роли">свойства роли</a>.</li>
+<li>Настройте <a class="mkdocs_imported_link" href="#настройка-разрешений-для-ресурсов">разрешения</a> на доступ к ресурсам.</li>
+<li>Сохраните роль.</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Список системных ролей" src="https://kb.comindware.ru/assets/system_role_list.png"/></p>
+<figcaption class="caption">Список системных ролей</figcaption>
+</figure>
+<h3 id="настройка-свойств-роли">Настройка свойств роли</h3>
+<p>Заполните перечисленные ниже поля на вкладке «<strong>Свойства роли</strong>» и перейдите к вкладке «<a class="mkdocs_imported_link" href="#настройка-разрешений-для-ресурсов"><strong>Разрешения</strong></a>» для настройки доступа к ресурсам.</p>
+<ul>
+<li><strong>Название</strong> — наименование роли. <strong>Обязательное поле</strong>.</li>
+<li><strong>Системное имя</strong> — уникальное имя роли. Не должно начинаться с цифры. Рекомендуется использовать буквы латинского алфавита, цифры и символ «_». Заполняется автоматически по названию.</li>
+<li><strong>Описание</strong> — дополнительный комментарий относительно назначения роли.</li>
+<li><strong>Создатель</strong> — аккаунт, создавший роль.</li>
+<li><strong>Дата создания</strong> — дата и время создания роли.</li>
+<li><strong>Изменил(а)</strong> — аккаунт, последним изменивший роль.</li>
+<li><strong>Дата изменения</strong> — дата и время последнего изменения роли.</li>
+</ul>
+<ul>
+<li><strong>Активная</strong> — установите или снимите этот флажок, чтобы использовать или отключить данную роль. Данный флажок нельзя снять для ролей, созданных системой (у которых не указан создатель).</li>
+</ul>
+<ul>
+<li id="role_members"><strong>Выберите участников роли</strong>
+<ul>
+<li><strong>Доступные аккаунты и группы</strong> — в этом списке отображаются аккаунты и группы, которым можно назначить данную роль.
+<ul>
+<li>Чтобы назначить роль аккаунту или группе, дважды нажмите соответствующую строку.</li>
+<li>Чтобы назначить роль всем аккаунтам и группам, отображающимся в списке, нажмите кнопку «<strong>Выбрать все</strong>» <em aria-hidden="true" class="fa-light fa-check-double">‌<!--icon--></em>.</li>
+</ul>
+</li>
+<li><strong>Выбранные аккаунты и группы</strong> — в этом списке отображаются аккаунты и группы, которым назначена данная роль. Чтобы снять назначение роли аккаунту или группе, дважды нажмите соответствующую строку.</li>
+<li>Содержимое обоих списков можно отфильтровать:
+<ul>
+<li>начните вводить текст в поле «<strong>Поиск</strong>» <em class="fa-light fa-search">‌<!--icon--></em>, в списке отобразятся подходящие аккаунты и группы;</li>
+<li>установите или снимите флажок «<strong>Аккаунты</strong>» <em class="fa-light fa-address-card">‌<!--icon--></em> , чтобы показать или скрыть отдельные аккаунты;</li>
+<li>установите или снимите флажок «<strong>Группы</strong>» <em class="fa-light fa-users">‌<!--icon--></em>, чтобы показать или скрыть группы аккаунтов.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Настройка свойств системной роли" src="https://kb.comindware.ru/assets/system_role_settings.png"/></p>
+<figcaption class="caption">Настройка свойств системной роли</figcaption>
+</figure>
+<h3 id="настройка-разрешений-для-ресурсов">Настройка разрешений для ресурсов</h3>
+<ol class="colored_numbers_list">
+<li>
+<p>Откройте вкладку «<strong>Разрешения</strong>», на которой предусмотрены следующие области:</p>
+<p><strong>(1)</strong> <strong>Список системных ресурсов</strong> — содержит ресурсы, к которым можно предоставить доступ участникам данной роли.</p>
+<p><strong>(2)</strong> <strong>Список разрешений</strong> — показывает ресурсы и назначенные для них разрешения для данной роли. Каждая строка задаёт набор разрешений для одного ресурса.</p>
+<figure class="screenshot_with_caption"><img alt="Настройка разрешений системной роли" src="https://kb.comindware.ru/assets/system_role_permission_list.png"/>
+<figcaption class="caption">Настройка разрешений системной роли</figcaption>
+</figure>
+</li>
+<li>
+<p>Перетаскивайте ресурсы из <strong>списка ресурсов</strong> в <strong>список разрешений</strong>, чтобы настроить полномочия на действия с ресурсами в рамках системной роли:</p>
+<ul>
+<li><strong>Система</strong>— доступ ко всем ресурсам системы.</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2181"><strong>Адаптеры</strong></a> — настройка особых адаптеров для интеграции с внешними сервисами.</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2194"><strong>Аккаунты</strong></a> — настройка пользователей.</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2281"><strong>Веб-интерфейс</strong></a> — использование интерфейса конечного пользователя приложений.</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/category.php?id=513"><strong>Вызовы API</strong></a> — использование всех методов API.</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2185"><strong>Глобальная конфигурация</strong></a> — настройка параметров сервера.</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2180"><strong>Журналы событий</strong></a> — просмотр журналов работы системы и взаимодействия с внешними сервисами.</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2205"><strong>Подключения</strong></a> — настройка подключений к внешним сервисам и путей передачи данных.</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2209"><strong>Приложения</strong></a> — настройка и использование приложений.</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2184"><strong>Производительность</strong></a> — просмотр показателей производительности системы.</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2190"><strong>Резервное копирование</strong></a> — настройка конфигураций резервного копирования.</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2175"><strong>Системные роли</strong></a> — настройка системных ролей.</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2308"><strong>Системный LDAP</strong></a> — настройка синхронизации посредством протокола LDAP.</li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2199"><strong>Темы</strong></a> — настройка тем визуального оформления системы.</li>
+</ul>
+</li>
+<li>
+<p>Разворачивайте и сворачивайте пункты в списке ресурсов, чтобы просмотреть дочерние и родительские ресурсы.</p>
+</li>
+<li>Чтобы отфильтровать список ресурсов, начните вводить название ресурса в поле «<strong>Поиск</strong>» <em class="fa-light fa-search">‌<!--icon--></em>. В списке ресурсов отобразятся искомые ресурсы.</li>
+<li>
+<p>Устанавливайте флажки в следующих столбцах, чтобы настроить разрешения для ресурсов:</p>
+<ul>
+<li><strong>Просмотр</strong> — разрешение на просмотр данных ресурса.</li>
+<li><strong>Полный доступ</strong> — предоставление доступа ко всем функциям администрирования ресурса.</li>
+</ul>
+</li>
+</ol>
+<h3 id="удаление-разрешений-для-ресурсов">Удаление разрешений для ресурсов</h3>
+<ol class="colored_numbers_list">
+<li>На вкладке «<strong>Разрешения</strong>» в списке разрешений выберите один или несколько ресурсов, разрешения для которых требуется удалить.</li>
+<li>Нажмите кнопку «<strong>Удалить</strong>».</li>
+<li>Подтвердите удаление разрешений.</li>
+<li>Будут удалены выбранные строки разрешений.</li>
+</ol>
+<h2 id="восстановление-исходных-разрешений-системной-роли">Восстановление исходных разрешений системной роли</h2>
+<ol class="colored_numbers_list">
+<li>Откройте роль.</li>
+<li>Нажмите кнопку «<strong>Очистить</strong>».</li>
+<li>Будут восстановлены исходные разрешения роли на момент её последнего сохранения.</li>
+</ol>
+<h2 id="объединение-системных-ролей">Объединение системных ролей</h2>
+<h2 id="объединение-ролей">Объединение ролей</h2>
+<p>Можно создать новую роль, объединив в ней свойства нескольких других ролей. Для этого выполните указанные ниже действия.</p>
+<ol class="colored_numbers_list">
+<li>Выберите несколько ролей в списке ролей.</li>
+<li>Нажмите кнопку «<strong>Объединить в новую роль</strong>».</li>
+<li>В отобразившемся окне «<strong>Клонирование</strong>» введите <strong>название</strong> и <strong>системное имя</strong> новой роли.</li>
+<li>Нажмите кнопку «<strong>Сохранить</strong>».</li>
+<li>Объединённая роль отобразится в списке ролей.</li>
+</ol>
+<h2 id="клонирование-системной-роли">Клонирование системной роли</h2>
+<p>Можно создать новую роль, скопировав текущую. Для этого выполните указанные ниже действия.</p>
+<ol class="colored_numbers_list">
+<li>Откройте роль в приложении.</li>
+<li>Нажмите кнопку «<strong>Клонировать</strong>».</li>
+<li>В отобразившемся окне «<strong>Клонирование</strong>» введите <strong>название</strong> и <strong>системное имя</strong> новой роли.</li>
+<li>Нажмите кнопку «<strong>Сохранить</strong>».</li>
+</ol>
+<h2 id="удаление-системной-роли">Удаление системной роли</h2>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<ul>
+<li>Удалить можно только системные роли, созданные пользователями, т. е. роли, у которых в списке указан создатель.</li>
+<li>Если выбрать системную роль, созданную системой (у которой в списке не указан создатель), то кнопка «<strong>Удалить</strong>» не будет отображаться.</li>
+</ul>
+</div>
+<ol class="colored_numbers_list">
+<li>Выберите подлежащие удалению роли в списке ролей.</li>
+<li>Нажмите кнопку «<strong>Удалить</strong>».</li>
+<li>Подтвердите удаление роли.</li>
+</ol>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2208">Роли в приложении</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2220">Шаблон роли</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

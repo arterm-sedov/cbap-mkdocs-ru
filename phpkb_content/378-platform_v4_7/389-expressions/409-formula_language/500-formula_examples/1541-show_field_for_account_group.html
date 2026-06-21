@@ -1,0 +1,12 @@
+<h1>Отображение поля, если текущий пользователь входит в определенную группу</h1><p>Для того, чтобы установить условие на отображение поля, если текущий пользователь входит в определенную группу (например, для возможности редактирования определенных полей записи только некоторым группам пользователей), введите следующее выражение:</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code"> EQUALS(USER(),(from a in db-&gt;_AccountGroup where a-&gt;groupName == "Admins" select a-&gt;groupUsers-&gt;id))</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span style="text-decoration: underline;"><strong>где:</strong></span></p>
+<p><strong>Admins</strong> — системное имя необходимой группы.</p>

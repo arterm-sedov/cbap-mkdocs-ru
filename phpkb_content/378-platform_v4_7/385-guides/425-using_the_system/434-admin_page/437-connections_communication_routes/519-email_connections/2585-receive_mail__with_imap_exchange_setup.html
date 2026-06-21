@@ -1,0 +1,402 @@
+<h1>Получение эл. почты с помощью сценариев через IMAP и Exchange. Настройка подключения, пути передачи данных и сценария</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#порядок-настройки-получения-эл-писем-из-сценария"> <span class="md-ellipsis"> Порядок настройки получения эл. писем из сценария </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-подключения-к-почтовому-серверу-для-получения-почты-с-помощью-сценария"> <span class="md-ellipsis"> Настройка подключения к почтовому серверу для получения почты с помощью сценария </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-пути-передачи-данных-для-получения-почты-с-помощью-сценария"> <span class="md-ellipsis"> Настройка пути передачи данных для получения почты с помощью сценария </span> </a><nav aria-label="Настройка пути передачи данных для получения почты с помощью сценария" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#основные-свойства"> <span class="md-ellipsis"> Основные свойства </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#атрибуты-сообщений"> <span class="md-ellipsis"> Атрибуты сообщений </span> </a><nav aria-label="Атрибуты сообщений" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#атрибуты-для-получения-эл-почты-через-imap-и-exchange"> <span class="md-ellipsis"> Атрибуты для получения эл. почты через IMAP и Exchange </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#атрибуты-для-получения-событий-календаря-через-exchange"> <span class="md-ellipsis"> Атрибуты для получения событий календаря через Exchange </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#атрибуты-для-ответа-почтовому-серверу"> <span class="md-ellipsis"> Атрибуты для ответа почтовому серверу </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-собственного-атрибута-сообщения"> <span class="md-ellipsis"> Настройка собственного атрибута сообщения </span> </a></li>
+</ul>
+</nav></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-шаблона-записи-и-сценария-для-получения-эл-писем"> <span class="md-ellipsis"> Настройка шаблона записи и сценария для получения эл. писем </span> </a><nav aria-label="Настройка шаблона записи и сценария для получения эл. писем" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-шаблона-записи"> <span class="md-ellipsis"> Настройка шаблона записи </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-сценария"> <span class="md-ellipsis"> Настройка сценария </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#тестирование"> <span class="md-ellipsis"> Тестирование </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p><strong>Comindware Business Application Platform</strong> может получать эл. почту и обрабатывать данные из писем: помещать их в атрибуты, передавать в сценарии и процессы и т. д.</p>
+<p>Подключения типа «<strong>Получение эл. почты через IMAP</strong>» и «<strong>Получение сообщений через Exchange</strong>» используются в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2151">сценариях</a>. В процессах используются подключения типа «<strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2564">Получение эл. почты в процессе</a></strong>».</p>
+<p>Здесь представлены инструкции по настройке подключения к почтовому серверу по протоколу IMAP или Exchange, пути передачи данных и сценария для получения эл. писем.</p>
+<h2 id="порядок-настройки-получения-эл-писем-из-сценария">Порядок настройки получения эл. писем из сценария</h2>
+<ol class="colored_numbers_list">
+<li>Настройте <a class="mkdocs_imported_link" href="#настройка-подключения-к-почтовому-серверу-для-получения-почты-с-помощью-сценария">подключение</a> к почтовому серверу типа «<strong>Получение эл. почты через IMAP</strong>» или «<strong>Получение сообщений через Exchange</strong>».</li>
+<li>Настройте <a class="mkdocs_imported_link" href="#настройка-пути-передачи-данных-для-получения-почты-с-помощью-сценария">путь передачи данных</a> типа «<strong>Получение эл. почты через IMAP</strong>» или «<strong>Получение сообщений через Exchange</strong>», использующий созданное подключение.</li>
+<li>Настройте <a class="mkdocs_imported_link" href="#настройка-шаблона-записи">шаблон записи</a> для хранения данных из эл. писем.</li>
+<li>Настройте <a class="mkdocs_imported_link" href="#настройка-сценария">сценарий</a>, который будет обрабатывать и помещать в шаблон записи данные из писем, полученных посредством настроенных подключения и пути передачи данных.</li>
+</ol>
+<h2 id="настройка-подключения-к-почтовому-серверу-для-получения-почты-с-помощью-сценария">Настройка подключения к почтовому серверу для получения почты с помощью сценария</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Логика чтения писем на почтовом сервере</p>
+<p>При подключении к почтовому серверу для получения эл. почты <strong>Comindware Business Application Platform</strong> выступает как почтовый клиент, который регулярно проверяет наличие новых писем.</p>
+<p>При каждой проверке почтового ящика <strong>Comindware Business Application Platform</strong>:</p>
+<ul>
+<li>обрабатывает новые письма;</li>
+<li>отмечает новые письма как прочтённые.</li>
+</ul>
+<p>Поэтому для автоматической обработки входящих писем рекомендуется использовать отдельный ящик эл. почты.</p>
+<p>Если использовать ящик, на который поступают прочие письма, они тоже будут отмечены как прочитанные.</p>
+</div>
+<ol class="colored_numbers_list">
+<li>Откройте страницу «<strong>Администрирование</strong>» — «<strong>Подключения</strong>».</li>
+<li>Откройте двойным нажатием или создайте <strong>подключение к электронной почте</strong> типа «<strong>Получение эл. почты через IMAP</strong>» или «<strong>Получение сообщений через Exchange</strong>».</li>
+<li>
+<p>Настройте подключение к серверу:</p>
+<ul>
+<li><strong>Системное имя</strong> — введите уникальное имя подключения. Рекомендуются буквы латинского алфавита, цифры и символ «_».</li>
+<li><strong>Отключить</strong> — установите этот флажок, если требуется временно деактивировать данное подключение.</li>
+<li><strong>Описание</strong> — введите наглядное описание подключения.</li>
+<li><strong>Запись в файловые журналы</strong> — выберите, какие события следует записывать в журналы:
+<ul>
+<li><strong>Полные сведения об обработке сообщения</strong>;</li>
+<li><strong>Только ошибки</strong>;</li>
+<li><strong>Отключить</strong> — не регистрировать в журнале события получения писем.</li>
+</ul>
+</li>
+<li><strong>IMAP</strong>
+<ul>
+<li><strong>Адрес почтового сервера</strong> — введите адрес IMAP-сервера <u>без указания протокола (IMAP, HTTPS, HTTP)</u>.</li>
+<li><strong>Порт</strong> — введите номер порта IMAP-сервера.</li>
+<li><strong>Шифрование</strong> — выберите протокол шифрования, который поддерживает IMAP-сервер:
+<ul>
+<li><strong>Отсутствует</strong> — не использовать шифрование;</li>
+<li><strong>SSL</strong>;</li>
+<li><strong>TLS</strong>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Exchange</strong>
+<ul>
+<li><strong>URL веб-сервера Exchange</strong> — введите адрес почтового сервера <u>c указанием протокола (HTTPS, HTTP)</u>.</li>
+<li><strong>Версия Exchange</strong> — выберите версию сервера Exchange.</li>
+</ul>
+</li>
+<li><strong>Тип аутентификации</strong> — выберите способ проверки подлинности, используемый сервером:
+<ul>
+<li><strong>Отсутствует</strong>;</li>
+<li><strong>Базовая</strong>;</li>
+<li><strong>Аутентификация Windows</strong>.</li>
+</ul>
+</li>
+<li><strong>Имя пользователя</strong> — укажите учётную запись для подключения к серверу.</li>
+<li><strong>Пароль</strong> — введите пароль к учётной записи для подключения к серверу.</li>
+<li><strong>Домен</strong> — укажите домен пользователя сервера.</li>
+<li><strong>Шифрование</strong> — выберите протокол шифрования, который поддерживает сервер:
+<ul>
+<li><strong>Отсутствует</strong> — не использовать шифрование;</li>
+<li><strong>SSL</strong>;</li>
+<li><strong>TLS</strong>.</li>
+</ul>
+</li>
+<li><strong>Интервал опроса</strong> — укажите интервал, с которым <strong>Comindware Business Application Platform</strong> будет проверять наличие новых писем.</li>
+</ul>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Проверить соединение</strong>», чтобы проверить соединение с сервером.</p>
+</li>
+<li>При необходимости нажмите кнопку «<strong>Скачать журнал</strong>», чтобы просмотреть журнал событий получения писем.</li>
+<li>Сохраните подключение.</li>
+</ol>
+<h2 id="настройка-пути-передачи-данных-для-получения-почты-с-помощью-сценария">Настройка пути передачи данных для получения почты с помощью сценария</h2>
+<p>Путь передачи данных для получения эл. почты служит для преобразования и передачи данных из эл. письма в <strong>Comindware Business Application Platform</strong>.</p>
+<ol class="colored_numbers_list">
+<li>Откройте страницу «<strong>Администрирование</strong>» — «<strong>Архитектура</strong>» или страницу «<strong>Администрирование</strong>» приложения.</li>
+<li>Выберите пункт «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2201"><strong>Пути передачи данных</strong></a>» <em aria-hidden="true" class="fa-light fa-route">‌<!--icon--></em>.</li>
+<li>Откройте двойным нажатием в списке или создайте путь передачи данных типа «<strong>Подключения к электронной почте</strong>» — «<strong>Получение эл. почты через IMAP</strong>» или «<strong>Получение сообщений через Exchange</strong>».</li>
+<li>
+<p>Настройте свойства пути передачи данных на следующих вкладках:</p>
+<ul>
+<li><a class="mkdocs_imported_link" href="#основные-свойства"><strong>Основные свойства</strong></a></li>
+<li><a class="mkdocs_imported_link" href="#атрибуты-сообщений"><strong>Атрибуты сообщений</strong></a></li>
+</ul>
+</li>
+<li>
+<p>Сохраните путь передачи данных.</p>
+</li>
+</ol>
+<h3 id="основные-свойства">Основные свойства</h3>
+<p>На вкладке «<strong>Основные свойства</strong>» настройте параметры использования пути передачи данных:</p>
+<ul>
+<li><strong>Подключение</strong> — выберите <a class="mkdocs_imported_link" href="#настройка-подключения-к-почтовому-серверу-для-получения-почты-с-помощью-сценария">подключение для получения эл. почты из сценариев через SMTP или Exchange</a>.</li>
+<li><strong>Системное имя</strong> — введите уникальное имя пути передачи данных. Рекомендуются буквы латинского алфавита, цифры и символ «_».</li>
+<li><strong>Отключить</strong> — установите этот флажок, если требуется временно деактивировать путь передачи данных.</li>
+<li><strong>Описание</strong> — введите наглядное описание пути передачи данных, например <em>«Путь для получения писем»</em>.</li>
+<li><strong>Номер шины данных</strong> — выберите номер от 0 до 3, если требуется распределить потоки данных нескольких путей для повышения производительности.</li>
+</ul>
+<h3 id="атрибуты-сообщений">Атрибуты сообщений</h3>
+<p>На вкладке «<strong>Атрибуты сообщений</strong>» настройте атрибуты, в которые будут подставляться значения полей эл. письма.</p>
+<div class="notice notice-tip">
+<p class="admonition-title">Извлечение значений атрибутов из эл. письма</p>
+<ul>
+<li>На вкладке «<a class="mkdocs_imported_link" href="#атрибуты-сообщений"><strong>Атрибуты сообщений</strong></a>» пути передачи данных настройте набор атрибутов, значения которых требуется извлечь из письма.</li>
+<li>При необходимости настройте атрибуты, которые требуется передать на почтовый сервер в качестве <strong>ответа</strong> и <strong>ответа с ошибкой</strong>. Значения этим атрибутам необходимо присвоить с помощью действия «<strong>Изменить значения переменных</strong>» в сценарии.</li>
+<li>С помощью <a class="mkdocs_imported_link" href="#настройка-сценария">сценария</a> передайте значения атрибутов сообщения, содержащие данные из эл. письма, в шаблон записи. Например, передайте текст и тему письма из атрибутов сообщения <em>HtmlBody</em> и <em>Subject</em> в атрибуты шаблона записи <em>«Текст письма»</em> и <em>«Тема письма»</em>.</li>
+</ul>
+</div>
+<ol class="colored_numbers_list">
+<li>
+<p>Выберите <strong>тип сообщения</strong>:</p>
+<ul>
+<li><strong>Получение эл. почты</strong> — для <a class="mkdocs_imported_link" href="#атрибуты-для-получения-эл-почты-через-imap-и-exchange">IMAP и Exchange</a>;</li>
+<li><strong>Получение события календаря</strong> — для <a class="mkdocs_imported_link" href="#атрибуты-для-получения-событий-календаря-через-exchange">Exchange</a>.</li>
+</ul>
+</li>
+<li>
+<p>В таблицах «<strong>Запрос</strong>», «<strong>Ответ</strong>» и «<strong>Ответ с ошибкой</strong>» отобразятся готовые атрибуты сообщений, соответствующие выбранному <strong>типу сообщения</strong>:</p>
+<ul>
+<li><a class="mkdocs_imported_link" href="#атрибуты-для-получения-эл-почты-через-imap-и-exchange">получение эл. почты через IMAP и Exchange</a>;</li>
+<li><a class="mkdocs_imported_link" href="#атрибуты-для-получения-событий-календаря-через-exchange">получение событий календаря через Exchange</a>;</li>
+<li><a class="mkdocs_imported_link" href="#атрибуты-для-ответа-почтовому-серверу">ответ почтовому серверу</a>.</li>
+</ul>
+</li>
+<li>
+<p>При необходимости <a class="mkdocs_imported_link" href="#настройка-собственного-атрибута-сообщения">настройте собственные атрибуты сообщений</a></p>
+</li>
+</ol>
+<h4 id="атрибуты-для-получения-эл-почты-через-imap-и-exchange">Атрибуты для получения эл. почты через IMAP и Exchange</h4>
+<ul>
+<li><strong>To</strong> — получатели письма (массив объектов).
+<ul>
+<li><strong>Name</strong> — имя получателя (строка).</li>
+<li><strong>Address</strong> — адрес эл. почты (строка).</li>
+</ul>
+</li>
+<li><strong>From</strong> — отправитель письма (строка).
+<ul>
+<li><strong>Name</strong> — имя отправителя (строка).</li>
+<li><strong>Address</strong> — адрес эл. почты (строка).</li>
+</ul>
+</li>
+<li><strong>Subject</strong> — тема письма (строка).</li>
+<li><strong>HtmlBody</strong> (для IMAP) / <strong>RawBody</strong> (для Exchange) — текст письма (строка).</li>
+<li><strong>Attachments</strong> — прикреплённые файлы (массив объектов).
+<ul>
+<li><strong>Name</strong> — имя файла.</li>
+<li><strong>Extension</strong> — расширение файла (строка).</li>
+<li><strong>Content</strong> — содержимое файла (строка).</li>
+</ul>
+</li>
+<li><strong>Cc</strong> — копии (массив объектов).
+<ul>
+<li><strong>Name</strong> — имя получателя (строка).</li>
+<li><strong>Address</strong> — адрес эл. почты (строка).</li>
+</ul>
+</li>
+<li><strong>Bcc</strong> — скрытые копии (массив объектов).
+<ul>
+<li><strong>Name</strong> — имя получателя (строка).</li>
+<li><strong>Address</strong> — адрес эл. почты (строка).</li>
+</ul>
+</li>
+<li><strong>Headers</strong> — дополнительные заголовки (массив объектов).
+<ul>
+<li><strong>Name</strong> — имя заголовка (строка).</li>
+<li><strong>Value</strong> — значение заголовка (строка).</li>
+</ul>
+</li>
+<li><strong>GlobalMessageId</strong> — ID сообщения (строка).</li>
+<li><strong>ReceivedDate</strong> — Дата получения сообщения (дата и время).</li>
+</ul>
+<h4 id="атрибуты-для-получения-событий-календаря-через-exchange">Атрибуты для получения событий календаря через Exchange</h4>
+<ul>
+<li><strong>To</strong> — получатели письма (массив объектов).
+<ul>
+<li><strong>Name</strong> — имя получателя (строка).</li>
+<li><strong>Address</strong> — адрес эл. почты (строка).</li>
+</ul>
+</li>
+<li><strong>From</strong> — отправитель письма (объект).
+<ul>
+<li><strong>Name</strong> — имя получателя (строка).</li>
+<li><strong>Address</strong> — адрес эл. почты (строка).</li>
+</ul>
+</li>
+<li><strong>Subject</strong> — тема письма (строка).</li>
+<li><strong>RawBody</strong> — текст письма (строка).</li>
+<li><strong>Attachments</strong> — прикреплённые файлы (массив объектов).
+<ul>
+<li><strong>Name</strong> — название файла (строка).</li>
+<li><strong>Extension</strong> — расширение файла (строка)</li>
+<li><strong>Content</strong> — содержимое файла (строка).</li>
+</ul>
+</li>
+<li><strong>Location</strong> — место встречи (строка).</li>
+<li><strong>Start</strong> — время начала встречи (дата и время).</li>
+<li><strong>End</strong> — время завершения встречи (дата и время).</li>
+</ul>
+<h4 id="атрибуты-для-ответа-почтовому-серверу">Атрибуты для ответа почтовому серверу</h4>
+<p>В таблицах «<strong>Ответ</strong>» и «<strong>Ответ с ошибкой</strong>» можно настроить атрибуты, которые <strong>Comindware Business Application Platform</strong> будет отправлять почтовому серверу после получения нового письма:</p>
+<ul>
+<li><strong>ответ</strong> отправляется, если <strong>Comindware Business Application Platform</strong> удалось прочитать письмо.</li>
+<li><strong>ответ с ошибкой</strong> отправляется, если <strong>Comindware Business Application Platform</strong> не удалось прочитать письмо.</li>
+</ul>
+<p>Таким образом, например, можно сообщить почтовому серверу, что письмо получено и прочитано.</p>
+<p>Значения атрибутам <strong>ответа</strong> и <strong>ответа с ошибкой</strong> необходимо присвоить с помощью действия «<strong>Изменить значения переменных</strong>» в <a class="mkdocs_imported_link" href="#настройка-сценария">сценарии</a>.</p>
+<p>В таблице «<strong>Ответ</strong>» для получения событий из календаря через Exchange предусмотрены готовые атрибуты:</p>
+<ul>
+<li><strong>IsDeclined</strong> — собрание отклонено (логический).</li>
+<li><strong>IsTentative</strong> — собрание под вопросом (логический).</li>
+<li><strong>HasMessage</strong> — ответ содержит сообщение (логический).</li>
+</ul>
+<h4 id="настройка-собственного-атрибута-сообщения">Настройка собственного атрибута сообщения</h4>
+<p>Чтобы создать атрибут сообщения, нажмите кнопку «<strong>Добавить</strong>» над таблицей «<strong>Запрос</strong>», «<strong>Ответ</strong>» или «<strong>Ответ с ошибкой</strong>» и заполните свойства атрибута:</p>
+<ul>
+<li><strong>Системное имя</strong> — введите уникальное имя атрибута, по которому вы будете обращаться к нему в сценарии.</li>
+<li><strong>Тип</strong> — выберите тип атрибута:
+<ul>
+<li><strong>Строка</strong></li>
+<li><strong>Число</strong></li>
+<li><strong>Длительность</strong></li>
+<li><strong>Дата и время</strong></li>
+<li><strong>Временной период</strong></li>
+<li><strong>Логический</strong></li>
+<li><strong>Объект</strong></li>
+<li><strong>Ключ-значение</strong></li>
+</ul>
+</li>
+<li><strong>Описание</strong> — введите наглядное название атрибута.</li>
+<li><strong>Обязательный</strong>, <strong>Не пустой</strong>, <strong>Массив</strong> — установите флажки согласно назначению атрибута.</li>
+</ul>
+<h2 id="настройка-шаблона-записи-и-сценария-для-получения-эл-писем">Настройка шаблона записи и сценария для получения эл. писем</h2>
+<p>В качестве примера настроим шаблон и сценарий для получения писем и сохранения имени и адреса отправителя в атрибут типа «<strong>Текст</strong>», а вложений — в атрибут типа «<strong>Документ</strong>».</p>
+<p>Аналогичным образом вы можете настроить получение любых данных из эл. писем согласно требуемой бизнес-логике.</p>
+<h3 id="настройка-шаблона-записи">Настройка шаблона записи</h3>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте шаблон записи <em>«Реестр документов»</em> со следующими атрибутами:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Атрибут</th>
+<th>Тип</th>
+<th>Свойства</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Отправитель</em></td>
+<td><strong>Текст</strong></td>
+<td> </td>
+</tr>
+<tr>
+<td><em>Вложения</em></td>
+<td><strong>Документ</strong></td>
+<td><strong>Хранить несколько значений:</strong> флажок установлен</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Поместите созданные атрибуты на форму.</p>
+</li>
+</ol>
+<h3 id="настройка-сценария">Настройка сценария</h3>
+<div class="notice notice-tip">
+<p class="admonition-title">Сценарий для получения почты</p>
+<p>Сценарий для получения почты может запускаться только по <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2346#scenario_event">событию</a></strong> «<strong>Получение сообщения</strong>».</p>
+<p>При получении сообщения с помощью сценария можно сохранить данные из письма в атрибутах шаблона записи, а также отправить отклик почтовому серверу, например, указав, что письмо прочитано.</p>
+</div>
+<ol class="colored_numbers_list">
+<li>Создайте сценарий <em>«Получение эл. почты»</em> с <strong>контекстом выполнения</strong> «<strong>От инициатора</strong>».</li>
+<li>
+<p>Откройте автоматически созданное событие «<strong>Нажатие кнопки</strong>» и настройте его следующим образом:</p>
+<ul>
+<li><strong>Тип: получение сообщения</strong>;</li>
+<li><strong>Контекстный шаблон:</strong> <em>Реестр документов</em>;</li>
+<li><strong>Подключение:</strong> выберите <a class="mkdocs_imported_link" href="#настройка-подключения-к-почтовому-серверу-для-получения-почты-с-помощью-сценария">подключение для получения эл. почты с помощью сценария</a>;</li>
+<li><strong>Путь передачи данных:</strong> выберите <a class="mkdocs_imported_link" href="#настройка-пути-передачи-данных-для-получения-почты-с-помощью-сценария">путь передачи данных эл. почты с помощью сценария</a>;</li>
+<li><strong>Имя переменной:</strong> <em>message</em> — в эту переменную будет сохраняться объект с данными полученного письма.</li>
+</ul>
+</li>
+<li>
+<p>Добавьте действие «<strong>Создать запись</strong>», указав <strong>целевой шаблон</strong> <em>«Реестр документов»</em>.</p>
+</li>
+<li>Внутри действия «<strong>Создать запись</strong>» добавьте действие «<strong>Изменить значения атрибутов</strong>».</li>
+<li>В действии «<strong>Изменить значения атрибутов</strong>» добавьте в таблицу атрибут <em>«Отправитель»</em>:</li>
+</ol>
+<ul>
+<li><strong>Операция со значениями: заменить</strong></li>
+<li>
+<p><strong>Значение: формула</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="n">FORMAT</span> <span class="p">(</span><span class="s">"{0} &lt;1&gt;"</span> <span class="n">LIST</span><span class="p">(</span><span class="err">$$</span><span class="n">message</span><span class="o">-&gt;</span><span class="n">From</span><span class="o">-&gt;</span><span class="n">Name</span><span class="p">,</span> <span class="err">$$</span><span class="n">message</span><span class="o">-&gt;</span><span class="n">From</span><span class="o">-&gt;</span><span class="n">Address</span><span class="p">))</span></code></pre>
+</div>
+<p>Эта формула берёт данные отправителя из переменной <code>message</code> и возвращает имя и адрес отправителя письма в следующем формате: <code>Имя &lt;address@example.com&gt;</code></p>
+</li>
+</ul>
+<ol class="colored_numbers_list" start="6">
+<li>
+<p>Внутри действия «<strong>Создать запись</strong>» добавьте действие «<strong>Повторять по количеству объектов</strong>» со следующими свойствами:</p>
+<ul>
+<li><strong>Переменная:</strong> <em>attachment</em> — в эту переменную на каждой итерации цикла будет помещаться объект с прикреплённым к письму файлом.</li>
+<li><strong>Атрибут или выражение для поиска объектов: формула</strong></li>
+</ul>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="err">$$</span><span class="n">message</span><span class="o">-&gt;</span><span class="n">Attachments</span></code></pre>
+</div>
+<p>Эта формула берет из переменной <code>message</code> и возвращает массив объектов с прикреплёнными к письму файлами.</p>
+</li>
+<li>
+<p>Внутри действия «<strong>Повторять по количеству объектов</strong>» создайте действие «<strong>Изменить значения атрибутов</strong>».</p>
+</li>
+<li>В действии «<strong>Изменить значения атрибутов</strong>» добавьте в таблицу атрибут <em>«Вложения»</em>:</li>
+</ol>
+<ul>
+<li><strong>Операция со значениями: добавить</strong></li>
+<li>
+<p><strong>Значение: N3</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="c"># Импортируем функции для работы с документами и данными текущего сеанса.</span></code><br/><code><span class="k">@prefix</span> <span class="nn">session:</span> <span class="nv">&lt;http://comindware.com/ontology/session#&gt;</span><span class="p">.</span></code><br/><code><span class="k">@prefix</span> <span class="nn">variable:</span> <span class="nv">&lt;http://comindware.com/ontology/session/variable#&gt;</span><span class="p">.</span></code><br/><code><span class="k">@prefix</span> <span class="nn">document:</span> <span class="nv">&lt;http://comindware.com/ontology/document#&gt;</span><span class="p">.</span></code><br/><code><span class="k">@prefix</span> <span class="nn">cmwstring:</span> <span class="nv">&lt;http://comindware.com/logics/string#&gt;</span><span class="p">.</span></code><br/><code><span class="p">{</span></code><br/><code>    <span class="c"># Помещаем переменную attachment </span></code><br/><code>    <span class="c"># из действия «Повторять по количеству объектов»</span></code><br/><code>    <span class="c"># в локальную переменную ?attachment.</span></code><br/><code>    <span class="nn">session</span><span class="p">:</span><span class="nt">context</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">attachment</span> <span class="err">?attachment</span><span class="p">.</span></code><br/><code>    <span class="c"># Помещаем содержимое файла в переменную ?contentValue.</span></code><br/><code>    <span class="err">?attachment</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">Content</span> <span class="err">?contentValue</span><span class="p">.</span></code><br/><code>    <span class="c"># Помещаем расширение файла в переменную ?extension.</span></code><br/><code>    <span class="err">?attachment</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">Extension</span> <span class="err">?extension</span><span class="p">.</span></code><br/><code>    <span class="c"># Помещаем имя файла в переменную ?filename.</span></code><br/><code>    <span class="err">?attachment</span> <span class="nn">variable</span><span class="p">:</span><span class="nt">Name</span> <span class="err">?filename</span><span class="p">.</span></code><br/><code>    <span class="c"># Соединяем имя файла и расширение в переменную ?filenameValue.</span></code><br/><code>    <span class="p">(</span><span class="err">?filename</span> <span class="err">?extension</span><span class="p">)</span> <span class="nn">cmwstring</span><span class="p">:</span><span class="nt">concatenation</span> <span class="err">?filenameValue</span><span class="p">.</span></code><br/><code>    <span class="c"># Собираем новый файл из имени и содержимого, </span></code><br/><code>    <span class="c"># сохраняем его в папку Streams</span></code><br/><code>    <span class="c"># и возвращаем ID нового документа с прикреплённым файлом.</span></code><br/><code>    <span class="p">(</span><span class="err">?contentValue</span> <span class="err">?filenameValue</span><span class="p">)</span> <span class="nn">document</span><span class="p">:</span><span class="nt">attach</span> <span class="err">?value</span><span class="p">.</span></code><br/><code><span class="p">}</span></code></pre>
+</div>
+</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Сценарий для получения электронной почты" src="https://kb.comindware.ru/assets/scenario_receive_email_scenario.png"/></p>
+<figcaption class="caption">Сценарий для получения электронной почты</figcaption>
+</figure>
+<h2 id="тестирование">Тестирование</h2>
+<ol class="colored_numbers_list">
+<li>В почтовом клиенте создайте письмо с вложениями и отправьте его на адрес эл. почты, указанный в <a class="mkdocs_imported_link" href="#настройка-подключения-к-почтовому-серверу-для-получения-почты-с-помощью-сценария">подключении</a>.</li>
+<li>Перейдите к списку экземпляров <a class="mkdocs_imported_link" href="#настройка-шаблона-записи">шаблона <em>«Реестр документов»</em></a>.</li>
+<li>
+<p>В списке экземпляров откройте новую запись с временем создания несколько позже отправки письма на шаге 1.</p>
+<div class="notice notice-tip">
+<p class="admonition-title">Совет</p>
+<p>Если запись для отправленного письма не отображается, подождите некоторое время, пока <strong>Comindware Business Application Platform</strong> получит и обработает письмо, и обновите страницу.</p>
+<p>Время обработки входящих писем зависит от <strong>интервала опроса</strong>, заданного в <a class="mkdocs_imported_link" href="#настройка-подключения-к-почтовому-серверу-для-получения-почты-с-помощью-сценария">свойствах подключения к почтовому серверу</a>, а также от загруженности почтового сервера и <strong>Comindware Business Application Platform</strong>.</p>
+</div>
+</li>
+<li>
+<p>В поле <em>«Отправитель»</em> должны отображаться имя и адрес отправителя письма.</p>
+</li>
+<li>В поле <em>«Вложения»</em> должны отображаться файлы, которые были прикреплены к письму.</li>
+</ol>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2564">Получение эл. почты в процессе. Настройка подключения и пути передачи данных</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2584">Отправка эл. почты из сценариев через SMTP и Exchange. Настройка подключения, пути передачи данных и сценария</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2394">Отправка эл. почты из процесса. Настройка подключения</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2205">Подключения. Типы, создание, настройка, удаление</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2201">Пути передачи данных. Типы, создание, настройка, удаление</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

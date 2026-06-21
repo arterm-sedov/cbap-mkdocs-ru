@@ -1,0 +1,1259 @@
+<h1>Динамические элементы формы: поля атрибутов и вложенные формы. Настройка представления</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#definitions"> <span class="md-ellipsis"> Определения </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-полей-атрибутов"> <span class="md-ellipsis"> Настройка полей атрибутов </span> </a><nav aria-label="Настройка полей атрибутов" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#общие-свойства-полей"> <span class="md-ellipsis"> Общие свойства полей </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#form_dynamic_elements_account"> <span class="md-ellipsis"> Аккаунт </span> </a><nav aria-label="Аккаунт" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#примеры-отображения"> <span class="md-ellipsis"> Примеры отображения </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-представления"> <span class="md-ellipsis"> Настройка представления </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#добавление-на-форму-атрибутов-шаблона-аккаунта"> <span class="md-ellipsis"> Добавление на форму атрибутов шаблона аккаунта </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#form_dynamic_elements_hyperlink"> <span class="md-ellipsis"> Гиперссылка </span> </a><nav aria-label="Гиперссылка" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#пример-использования"> <span class="md-ellipsis"> Пример использования </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#дата-и-время"> <span class="md-ellipsis"> Дата и время </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#длительность"> <span class="md-ellipsis"> Длительность </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#документ"> <span class="md-ellipsis"> Документ </span> </a><nav aria-label="Документ" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#пример-использования_1"> <span class="md-ellipsis"> Пример использования </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#form_dynamic_elements_image"> <span class="md-ellipsis"> Изображение </span> </a><nav aria-label="Изображение" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#пример-использования_2"> <span class="md-ellipsis"> Пример использования </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#логический"> <span class="md-ellipsis"> Логический </span> </a><nav aria-label="Логический" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#пример-использования_3"> <span class="md-ellipsis"> Пример использования </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#запись"> <span class="md-ellipsis"> Запись </span> </a><nav aria-label="Запись" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-представления_1"> <span class="md-ellipsis"> Настройка представления </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#добавление-на-форму-атрибутов-связанного-шаблона-записи"> <span class="md-ellipsis"> Добавление на форму атрибутов связанного шаблона записи </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-раскрывающегося-списка"> <span class="md-ellipsis"> Настройка раскрывающегося списка </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#form_dynamic_elements_table"> <span class="md-ellipsis"> Настройка таблицы </span> </a><nav aria-label="Настройка таблицы" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#пример-настройки-древовидной-таблицы-с-иерархической-нумерацией"> <span class="md-ellipsis"> Пример настройки древовидной таблицы с иерархической нумерацией </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#form_dynamic_elements_chevron"> <span class="md-ellipsis"> Настройка шевронов </span> </a><nav aria-label="Настройка шевронов" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-правил-окрашивания-шевронов"> <span class="md-ellipsis"> Настройка правил окрашивания шевронов </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-диаграммы-ганта"> <span class="md-ellipsis"> Настройка диаграммы Ганта </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#form_dynamic_elements_map"> <span class="md-ellipsis"> Настройка карты </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#обсуждение"> <span class="md-ellipsis"> Обсуждение </span> </a><nav aria-label="Обсуждение" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#пример-использования_4"> <span class="md-ellipsis"> Пример использования </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#организационная-единица"> <span class="md-ellipsis"> Организационная единица </span> </a><nav aria-label="Организационная единица" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#примеры-отображения_1"> <span class="md-ellipsis"> Примеры отображения </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-представления_2"> <span class="md-ellipsis"> Настройка представления </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#добавление-на-форму-атрибутов-шаблона-оргединицы"> <span class="md-ellipsis"> Добавление на форму атрибутов шаблона оргединицы </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#form_dynamic_elements_linked_processes"> <span class="md-ellipsis"> Связанные процессы </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#список-значений"> <span class="md-ellipsis"> Список значений </span> </a><nav aria-label="Список значений" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#пример-использования_5"> <span class="md-ellipsis"> Пример использования </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#роль"> <span class="md-ellipsis"> Роль </span> </a><nav aria-label="Роль" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#примеры-отображения_2"> <span class="md-ellipsis"> Примеры отображения </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-представления_3"> <span class="md-ellipsis"> Настройка представления </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#добавление-на-форму-атрибутов-шаблона-роли"> <span class="md-ellipsis"> Добавление на форму атрибутов шаблона роли </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#текст"> <span class="md-ellipsis"> Текст </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#form_dynamic_elements_color"> <span class="md-ellipsis"> Цвет </span> </a><nav aria-label="Цвет" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#form_dynamic_elements_color_diagram_example"> <span class="md-ellipsis"> Пример использования </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#form_dynamic_elements_drawing"> <span class="md-ellipsis"> Чертёж </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#число"> <span class="md-ellipsis"> Число </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#штрихкод"> <span class="md-ellipsis"> Штрихкод </span> </a><nav aria-label="Штрихкод" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#пример-использования_6"> <span class="md-ellipsis"> Пример использования </span> </a></li>
+</ul>
+</nav></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#form_dynamic_elements_embedded_form"> <span class="md-ellipsis"> Настройка вложенной формы </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<div class="notice notice-success">
+<h2 class="admonition-title" id="definitions">Определения</h2>
+<p><strong>Динамические элементы</strong> формы — это поля атрибутов, кнопки и вложенные формы, вынесенные на форму. Их представление настраивается с помощью <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2271">конструктора формы</a> и <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2537">правил для формы</a> и формируется для пользователя на основе данных, отображающихся в форме.</p>
+<ul>
+<li><strong><a class="mkdocs_imported_link" href="#настройка-полей-атрибутов">Поля атрибутов</a></strong> — при перетаскивании атрибута на форму создаётся поле, представление которого зависит от <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2252">типа атрибута</a>.</li>
+<li><a class="mkdocs_imported_link" href="#form_dynamic_elements_embedded_form"><strong>Вложенные формы</strong></a> — вложенные формы можно поместить на форму и на <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2530#form_static_elements_tabs">вкладки</a></strong>. Это позволяет повторно использовать формы в качестве стандартных блоков.  </li>
+<li><strong>Кнопки</strong> — кнопки можно поместить в области кнопок, которые предусмотрены у формы, областей формы, таблиц и вкладок. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2545#button_area_configure">Настройка области кнопок</a>»</em> и <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2276">Настройка кнопки</a>».</em></li>
+</ul>
+</div>
+<h2 id="настройка-полей-атрибутов">Настройка полей атрибутов</h2>
+<ol class="colored_numbers_list">
+<li>Откройте <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2271">конструктор формы</a>.</li>
+<li>Выберите атрибут на макете формы или перетащите атрибут из панели элементов внутрь <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2530#form_static_elements_area">области</a>, <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2530#form_static_elements_tabs">вкладки</a> или <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2530#form_static_elements_columns">колонки</a>.</li>
+<li>Отобразится панель «<strong>Свойства поля</strong>».</li>
+<li>Настройте <a class="mkdocs_imported_link" href="#общие-свойства-полей">общие свойства</a> и представление поля в соответствии с его типом:
+<ul>
+<li><a class="mkdocs_imported_link" href="#form_dynamic_elements_account">Аккаунт</a></li>
+<li><a class="mkdocs_imported_link" href="#form_dynamic_elements_hyperlink">Гиперссылка</a></li>
+<li><a class="mkdocs_imported_link" href="#дата-и-время">Дата и время</a></li>
+<li><a class="mkdocs_imported_link" href="#длительность">Длительность</a></li>
+<li><a class="mkdocs_imported_link" href="#документ">Документ</a></li>
+<li><a class="mkdocs_imported_link" href="#запись">Запись</a>
+<ul>
+<li><a class="mkdocs_imported_link" href="#настройка-раскрывающегося-списка">Раскрывающийся список</a></li>
+<li><a class="mkdocs_imported_link" href="#form_dynamic_elements_table">Таблица</a></li>
+<li><a class="mkdocs_imported_link" href="#form_dynamic_elements_chevron">Шевроны</a></li>
+<li><a class="mkdocs_imported_link" href="#настройка-диаграммы-ганта">Диаграмма Ганта</a></li>
+<li><a class="mkdocs_imported_link" href="#form_dynamic_elements_map">Карта</a></li>
+</ul>
+</li>
+<li><a class="mkdocs_imported_link" href="#form_dynamic_elements_image">Изображение</a></li>
+<li><a class="mkdocs_imported_link" href="#логический">Логический</a></li>
+<li><a class="mkdocs_imported_link" href="#обсуждение">Обсуждение</a></li>
+<li><a class="mkdocs_imported_link" href="#организационная-единица">Организационная единица</a></li>
+<li><a class="mkdocs_imported_link" href="#роль">Роль</a></li>
+<li><a class="mkdocs_imported_link" href="#form_dynamic_elements_linked_processes">Связанные процессы</a></li>
+<li><a class="mkdocs_imported_link" href="#список-значений">Список значений</a></li>
+<li><a class="mkdocs_imported_link" href="#текст">Текст</a></li>
+<li><a class="mkdocs_imported_link" href="#form_dynamic_elements_color">Цвет</a></li>
+<li><a class="mkdocs_imported_link" href="#form_dynamic_elements_drawing">Чертёж</a></li>
+<li><a class="mkdocs_imported_link" href="#число">Число</a></li>
+<li><a class="mkdocs_imported_link" href="#штрихкод">Штрихкод</a></li>
+</ul>
+</li>
+</ol>
+<h3 id="общие-свойства-полей">Общие свойства полей</h3>
+<p>Для большинства полей на форме предусмотрены перечисленные ниже свойства.</p>
+<ul>
+<li>
+<p><strong>Отображаемое название</strong> / <strong>Заголовок</strong> — отображаемая для пользователя подпись поля. Названия полей также отображаются в правилах для формы.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<ul>
+<li>Отображаемое название поля изначально совпадает с названием атрибута, связанного с полем.</li>
+<li>Поле на форме можно переименовать, и это не повлияет на название связанного с ним атрибута.</li>
+<li>Чтобы у поля не было подписи, введите в качестве отображаемого названия пробел.</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Системное имя</strong> — уникальное имя поля в рамках текущей формы, используемое для настройки <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2537">правил для формы</a>. Не должно начинаться с цифры. Рекомендуется использовать буквы латинского алфавита, цифры и символ «_». Заполняется автоматически по названию.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<ul>
+<li>Системное имя поля на форме изначально совпадает с системным именем атрибута, связанного с полем.</li>
+<li>Если вынести на поле один и тот же атрибут несколько раз, системные имена его полей будут автоматически пронумерованы по порядку добавления на форму.</li>
+<li>Системное имя поля может не совпадать с системным именем атрибута, связанного с полем.</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Путь к атрибуту</strong> — полный путь к атрибуту, с которым связано поле:</p>
+<ul>
+<li>для атрибута текущего шаблона отображается системное имя атрибута;</li>
+<li>для из связанной записи отображается полны путь к атрибуту в виде цепочки системных имён атрибутов.</li>
+</ul>
+</li>
+<li>
+<p><strong>Доступ</strong> — режим доступа к данным атрибута и отображения поля:</p>
+<ul>
+<li><strong>Требовать ввод</strong> — пользователь обязательно должен ввести данные в поле.</li>
+<li><strong>Разрешить ввод</strong> — пользователь сможет вводить данные в поле, но может оставить его пустым.</li>
+<li><strong>Только чтение</strong> — данные в поле можно будет только просматривать.</li>
+<li><strong>Скрыть</strong> — поле не будет отображаться на форме. Показать скрытое поле можно с помощью <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2537">правил для формы</a>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Подсказка</strong> — текст, который отображается пользователю при нажатии знака вопроса, расположенного рядом с подписью поля.</p>
+</li>
+<li><strong>Свойства атрибута</strong> — сведения об атрибуте, с которым связано поле.</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Добавление поля атрибута на форму и настройка его свойств" src="https://kb.comindware.ru/assets/form_dynamic_elements_attribute_field_add.png"/></p>
+<figcaption class="caption">Добавление поля атрибута на форму и настройка его свойств</figcaption>
+</figure>
+<h3 id="form_dynamic_elements_account">Аккаунт</h3>
+<p>Для поля атрибута типа «<strong>Аккаунт</strong>» предусмотрены следующие варианты отображения (см. иллюстрации ниже):</p>
+<ul>
+<li>
+<p>Если атрибут хранит одно значение:</p>
+<ul>
+<li>название аккаунта (если поле доступно только для чтения);</li>
+<li>раскрывающийся список (если в поле разрешён ввод, возможно выбирать аккаунты).</li>
+</ul>
+</li>
+<li>
+<p>Если атрибут хранит несколько значений:</p>
+<ul>
+<li>список аккаунтов (если поле доступно только для чтения);</li>
+<li>раскрывающийся список (если в поле разрешён ввод, возможно выбирать аккаунты);</li>
+<li>таблица (если в поле разрешён ввод, возможно добавлять, исключать, удалять и редактировать аккаунты).</li>
+</ul>
+</li>
+</ul>
+<h4 id="примеры-отображения">Примеры отображения</h4>
+<figure class="screenshot_with_caption">
+<p><img alt="Поле атрибута типа «Аккаунт»: несколько значений, только чтение" src="https://kb.comindware.ru/assets/form_dynamic_elements_account_multiple_values_read_only.png"/></p>
+<figcaption class="caption">Поле атрибута типа «Аккаунт»: несколько значений, только чтение</figcaption>
+</figure>
+<figure class="screenshot_with_caption">
+<p><img alt="Поле атрибута типа «Аккаунт»: несколько значений, раскрывающийся список" src="https://kb.comindware.ru/assets/form_dynamic_elements_account_multiple_values_dropdown_list.png"/></p>
+<figcaption class="caption">Поле атрибута типа «Аккаунт»: несколько значений, раскрывающийся список</figcaption>
+</figure>
+<figure class="screenshot_with_caption">
+<p><img alt="Поле атрибута типа «Аккаунт»: несколько значений, таблица" src="https://kb.comindware.ru/assets/form_dynamic_elements_account_multiple_values_table.png"/></p>
+<figcaption class="caption">Поле атрибута типа «Аккаунт»: несколько значений, таблица</figcaption>
+</figure>
+<h4 id="настройка-представления">Настройка представления</h4>
+<p>Представление поля атрибута типа «<strong>Аккаунт</strong>» на форме определяется свойствами поля.</p>
+<p>Помимо <a class="mkdocs_imported_link" href="#общие-свойства-полей">общих свойств</a> у этого поля предусмотрены следующие свойства:</p>
+<ul>
+<li><strong>Представление</strong> — выберите представление поля на форме:
+<ul>
+<li><strong>Раскрывающийся список</strong> — пользователь может выбрать один или несколько аккаунтов. В раскрывающийся список выводятся первые 50 аккаунтов, отсортированных по алфавиту. Если аккаунтов больше 50, то отобразится предупреждение — <em>«Отображены не все значения, уточните поиск»</em>.
+<ul>
+<li><strong>Максимум аккаунтов</strong> — укажите максимальное количество аккаунтов, которые ID которых можно выбрать в раскрывающемся списке (то есть добавить в атрибут). Остальные аккаунты будут отображаться в списке, но выбрать их будет нельзя.</li>
+<li><strong>Фильтр</strong> — задайте список ID аккаунтов, которые должны отображаться в раскрывающемся списке. Для этого укажите <strong>атрибут</strong> типа «<strong>Аккаунт</strong>» либо введите <strong>формулу</strong> или выражение на языке <strong>N3</strong>.</li>
+</ul>
+</li>
+<li><strong>Таблица</strong> — настройте таблицу аналогично <a class="mkdocs_imported_link" href="#form_dynamic_elements_table">таблице для атрибута типа «Запись»</a>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="добавление-на-форму-атрибутов-шаблона-аккаунта">Добавление на форму атрибутов шаблона аккаунта</h4>
+<p>Так как атрибут типа «<strong>Аккаунт</strong>» связан с шаблоном аккаунта (системным или пользовательским), на формы и в таблицы можно добавить атрибуты шаблона аккаунта, а также связанных с ним шаблонов любого уровня вложенности.</p>
+<ol class="colored_numbers_list">
+<li>В панели элементов конструктора формы разверните атрибут типа «<strong>Аккаунт</strong>», нажав стрелку вниз <em>‌</em> справа от названия атрибута.</li>
+<li>Отобразится список атрибутов шаблона аккаунта, связанного с атрибутом.</li>
+<li>Перетащите на макет формы или в таблицу требуемый атрибут аккаунта.</li>
+<li>Настройте поле или столбец атрибута с помощью панели «<strong>Свойства поля</strong>» или «<strong>Свойства столбца таблицы</strong>».</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Список атрибутов шаблона аккаунта в панели элементов конструктора форм" src="https://kb.comindware.ru/assets/form_dynamic_elements_account_attribute_list.png"/></p>
+<figcaption class="caption">Список атрибутов шаблона аккаунта в панели элементов конструктора форм</figcaption>
+</figure>
+<h3 id="form_dynamic_elements_hyperlink">Гиперссылка</h3>
+<p>Представление этого поля на форме определяется свойствами поля и <strong>допустимыми схемами URI</strong>, заданными в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2259">свойствах атрибута</a>.</p>
+<p>Помимо <a class="mkdocs_imported_link" href="#общие-свойства-полей">общих свойств</a> у этого поля предусмотрено одно свойство:</p>
+<ul>
+<li><strong>Замещающий текст</strong> — введите наглядный образец гиперссылки, которую следует вводить пользователю. Этот текст будет отображаться в пустом поле</li>
+</ul>
+<h4 id="пример-использования">Пример использования</h4>
+<ol class="colored_numbers_list">
+<li>Создайте и поместите на форму атрибут <em>«Веб-сайт магазина»</em>:
+<ul>
+<li><strong>Тип данных: Гиперссылка</strong></li>
+<li><strong>Допустимые схемы URI:</strong> <strong>HTTPS</strong> и <strong>HTTP</strong></li>
+</ul>
+</li>
+<li>Откройте форму.</li>
+<li>Введите в поле <em>«Веб-сайт магазина»</em> адрес  <code>https://company.ru</code></li>
+<li>
+<p>Адрес должен отобразиться в виде гиперссылки.</p>
+<figure class="screenshot_with_caption"><img alt="Гиперссылка типа **HTTPS** на форме" src="https://kb.comindware.ru/assets/attribute_hyperlink_example_valid.png"/>
+<figcaption class="caption">Гиперссылка типа <strong>HTTPS</strong> на форме</figcaption>
+</figure>
+</li>
+<li>
+<p>Введите в поле <em>«Веб-сайт магазина»</em> адрес  <code>company.ru</code> без префикса <code>https://</code></p>
+</li>
+<li>
+<p>Над полем должно отобразиться сообщение об ошибке «<strong>Не соответствует формату HTTPS-ссылки</strong>». </p>
+<figure class="screenshot_with_caption"><img alt="Проверка формата гиперссылки" src="https://kb.comindware.ru/assets/attribute_hyperlink_example_invalid.png"/>
+<figcaption class="caption">Проверка формата гиперссылки</figcaption>
+</figure>
+</li>
+</ol>
+<h3 id="дата-и-время">Дата и время</h3>
+<p>Представление поля атрибута типа «<strong>Дата и время</strong>» на форме определяется свойствами поля и <strong>форматом отображения</strong>, заданным в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2246">свойствах атрибута</a>.</p>
+<p>У этого поля предусмотрены только <a class="mkdocs_imported_link" href="#общие-свойства-полей">общие свойства</a>.</p>
+<p>См. также статью <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2004"><em>«Работа с атрибутом типа «Дата и время»</em></a>.</p>
+<h3 id="длительность">Длительность</h3>
+<p>Представление поля атрибута типа «<strong>Длительность</strong>» на форме определяется свойствами поля и <strong>форматом отображения</strong>, заданным в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2248">свойствах атрибута</a>.</p>
+<p>Помимо <a class="mkdocs_imported_link" href="#общие-свойства-полей">общих свойств</a> у этого поля предусмотрены следующие свойства:</p>
+<ul>
+<li>
+<p><strong>Показать незаполненные части</strong> — установите этот флажок, чтобы в поле отображались разряды значения длительности, даже если они равны нулю:</p>
+<ul>
+<li>флажок установлен: значение <code>2 минуты</code> будет отображаться как  <code>0 д 0 ч 2 м 0 с</code></li>
+<li>флажок снят: значение <code>2 минуты</code> будет отображаться как  <code>2 м</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Минимальное значение</strong> — укажите минимально допустимое значение, которое может вести в поле пользователь.</p>
+</li>
+<li>
+<p><strong>Максимальное значение</strong> — укажите максимально допустимое значение, которое может вести в поле пользователь.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Логика корректировки значения</p>
+<p>При вводе значения за пределами указанных лимитов значение будет автоматически скорректировано.</p>
+<p>Например, если минимальное значение — <code>2 ч</code>, максимальное — <code>3 ч</code>, то при вводе значения <code>4 ч 5 м</code> оно будет преобразовано в <code>3 ч</code>.</p>
+</div>
+</li>
+</ul>
+<h3 id="документ">Документ</h3>
+<p>Представление поля атрибута типа «<strong>Документ</strong>» на форме определяется свойствами поля и <strong>форматом отображения</strong>, заданным в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2241">свойствах атрибута</a>, см. примеры на иллюстрациях ниже.</p>
+<p>Помимо <a class="mkdocs_imported_link" href="#общие-свойства-полей">общих свойств</a> у этого поля предусмотрено следующие свойства:</p>
+<ul>
+<li><strong>Максимальное количество файлов</strong> — укажите, сколько файлов пользователям разрешено прикреплять к атрибуту. Значение по умолчанию 0 означает неограниченное количество файлов.</li>
+<li><strong>Разрешить удаление</strong> — установите этот флажок, чтобы пользователи могли удалять прикреплённые к атрибуту файлы.</li>
+</ul>
+<h4 id="пример-использования_1">Пример использования</h4>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте и поместите на форму следующие атрибуты:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Атрибут</th>
+<th>Формат отображения</th>
+<th>Хранить несколько значений</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Акты</td>
+<td>Без предпросмотра</td>
+<td>Флажок установлен</td>
+</tr>
+<tr>
+<td>Приложение</td>
+<td>С предпросмотром</td>
+<td>Флажок снят</td>
+</tr>
+<tr>
+<td>Документы на подпись</td>
+<td>Документ с цифровой подписью</td>
+<td>Флажок установлен</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>В конструкторе формы установите для любого из созданных полей флажок «<strong>Разрешить удаление</strong>».</p>
+</li>
+<li>Откройте форму и прикрепите документы к созданным полям.</li>
+<li>Попробуйте скачать и удалить документы, просмотреть их историю и предпросмотр.</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Поле «Акты»: документы без предпросмотра" src="https://kb.comindware.ru/assets/attribute_document_example_no_preview.png"/></p>
+<figcaption class="caption">Поле «Акты»: документы без предпросмотра</figcaption>
+</figure>
+<figure class="screenshot_with_caption">
+<p><img alt="Поле «Приложение»: документ с предпросмотром" src="https://kb.comindware.ru/assets/attribute_document_example_preview.png"/></p>
+<figcaption class="caption">Поле «Приложение»: документ с предпросмотром</figcaption>
+</figure>
+<figure class="screenshot_with_caption">
+<p><img alt="Поле «Документы на подпись»: документы с цифровой подписью" src="https://kb.comindware.ru/assets/attribute_document_example_digital_signature.png"/></p>
+<figcaption class="caption">Поле «Документы на подпись»: документы с цифровой подписью</figcaption>
+</figure>
+<h3 id="form_dynamic_elements_image">Изображение</h3>
+<p>Представление поля атрибута типа «<strong>Изображение</strong>» на форме определяется сочетанием свойств поля и <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2253">свойств атрибута</a>.</p>
+<p>Помимо <a class="mkdocs_imported_link" href="#общие-свойства-полей">общих свойств</a> у этого поля предусмотрены следующие свойства:</p>
+<ul>
+<li>
+<p><strong>Формат отображения</strong> — выберите внешний вид поля с изображениями, прикреплёнными к атрибуту, на форме:</p>
+<ul>
+<li><strong>Карточки</strong> — изображения будут отображаться друг под другом в один столбец с прокруткой;</li>
+<li><strong>Картинка</strong> — изображения будут отображаться друг под другом в два столбца с прокруткой.</li>
+</ul>
+</li>
+<li>
+<p><strong>Максимальное количество файлов</strong> — укажите, сколько файлов пользователям разрешено прикреплять к атрибуту.</p>
+</li>
+<li><strong>Разрешить удаление</strong> — установите этот флажок, чтобы пользователи могли удалять прикреплённые к атрибуту файлы.</li>
+</ul>
+<h4 id="пример-использования_2">Пример использования</h4>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте и поместите на форму атрибут «<em>Фотографии</em>» типа «<strong>Изображение</strong>»:</p>
+<ul>
+<li><strong>Тип данных: Изображение</strong></li>
+<li><strong>Хранить несколько значений:</strong> флажок установлен</li>
+</ul>
+</li>
+<li>
+<p>Ещё раз поместите атрибут «<em>Фотографии</em>» на форму.</p>
+</li>
+<li>
+<p>В конструкторе формы настройте свойства полей «<em>Фотографии</em>»:</p>
+<ul>
+<li>установите флажок «<strong>Разрешить удаление</strong>» для одного из полей;</li>
+<li>выберите для одного поля <strong>формат отображения</strong> «<strong>Карточки</strong>», а для другого «<strong>Картинки</strong>».</li>
+</ul>
+</li>
+<li>
+<p>Откройте форму и прикрепите несколько файлов к любому из полей «<em>Фотографии</em>».</p>
+</li>
+<li>
+<p>При загрузке каждого изображения будет отображаться окно «<strong>Кадрирование изображения</strong>»:</p>
+<ul>
+<li>если кадрировать изображение не требуется, нажмите кнопку «<strong>Отменить обрезку</strong>»;</li>
+<li>чтобы кадрировать изображение, выберите его фрагмент и нажмите кнопку «<strong>Обрезать</strong>».</li>
+</ul>
+</li>
+<li>
+<p>Попробуйте скачать, просмотреть и удалить изображения:</p>
+<ul>
+<li>чтобы скачать или удалить изображение, наведите на него указатель мыши и в меню с троеточием выберите команду;</li>
+<li>чтобы просмотреть изображение на весь экран, нажмите на него — отобразится галерея прикреплённых к атрибуту изображений;</li>
+<li>чтобы просмотреть все изображения в списке, нажмите кнопку «<strong>Показать ещё</strong>».</li>
+</ul>
+</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Поля с несколькими изображениями в виде карточек и в виде картинок" src="https://kb.comindware.ru/assets/form_dynamic_elements_image_cards_fields.png"/></p>
+<figcaption class="caption">Поля с несколькими изображениями в виде карточек и в виде картинок</figcaption>
+</figure>
+<h3 id="логический">Логический</h3>
+<p>Представление поля атрибута типа «<strong>Логический</strong>» на форме определяется свойствами поля.</p>
+<p>Помимо <a class="mkdocs_imported_link" href="#общие-свойства-полей">общих свойств</a> у этого поля предусмотрены следующие свойства:</p>
+<ul>
+<li>
+<p><strong>Представление</strong> — выберите внешний вид поля на форме:</p>
+<ul>
+<li><strong>Флажок</strong> — поле будет отображаться в виде флажка, который может быть в снят или установлен;</li>
+<li>
+<p><strong>Переключатель</strong> — поле будет отображаться как в виде двух пунктов, по умолчанию — «<strong>Да</strong>» и «<strong>Нет</strong>».</p>
+<ul>
+<li>
+<p><strong>Изменить названия вариантов</strong> — установите этот флажок, чтобы изменить подписи пунктов переключателя.</p>
+<ul>
+<li><strong>Истина</strong> — введите подпись для значения <code>true</code>;</li>
+<li><strong>Ложь</strong> —  введите подпись для значения <code>false</code>;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="пример-использования_3">Пример использования</h4>
+<ol class="colored_numbers_list">
+<li>Создайте и поместите на форму атрибут <em>«Решение по заявлению на отпуск»</em> типа «<strong>Логический</strong>».</li>
+<li>Ещё раз поместите атрибут <em>«Решение по заявлению на отпуск»</em> на форму.</li>
+<li>Для первого поля оставьте <strong>представление</strong> по умолчанию «<strong>Флажок</strong>».</li>
+<li>
+<p>Для второго поля выберите представление «<strong>Переключатель</strong>», установите флажок «<strong>Изменить названия вариантов</strong>» и переименуйте пункты переключателя:</p>
+<ul>
+<li><strong>Истина</strong> — <em>Согласовать отпуск</em>;</li>
+<li><strong>Ложь</strong> — <em>Отказать в отпуске</em>.</li>
+</ul>
+</li>
+<li>
+<p>Откройте форму и выбирайте пункты переключателя, а также снимите и установите флажок.</p>
+</li>
+<li>Значения полей должны меняться, как показано на иллюстрации.</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Поля атрибута с типа «Логический» в виде флажка и в виде переключателя на форме" src="https://kb.comindware.ru/assets/Boolean_field_form_appearance.gif"/></p>
+<figcaption class="caption">Поля атрибута с типа «Логический» в виде флажка и в виде переключателя на форме</figcaption>
+</figure>
+<h3 id="запись">Запись</h3>
+<p>Атрибут типа «<strong>Запись</strong>» содержит одну или несколько ссылок на связанный шаблон записи, что позволяет выносить на форму данные из связанных шаблонов.</p>
+<p>Для поля атрибута типа «<strong>Запись</strong>» предусмотрены перечисленные ниже варианты отображения (см. иллюстрации).</p>
+<ul>
+<li>
+<p>Если атрибут хранит одно значение:</p>
+<ul>
+<li>заголовок записи — гиперссылка на запись или простой текст в зависимости от формата отображения атрибута (если поле доступно только для чтения);</li>
+<li>раскрывающийся список (если в поле разрешён ввод, возможно выбирать, создавать и редактировать записи).</li>
+</ul>
+</li>
+<li>
+<p>Если атрибут хранит несколько значений:</p>
+<ul>
+<li>список записей — гиперссылки на записи или простой текст в зависимости от формата отображения атрибута (если поле доступно только для чтения);</li>
+<li>раскрывающийся список (если в поле разрешён ввод, возможно выбирать, создавать и редактировать записи);</li>
+<li>таблица (если в поле разрешён ввод, возможно создавать, редактировать, добавлять, дублировать, исключать, архивировать и удалять записи);</li>
+<li>шевроны;</li>
+<li>диаграмма Ганта;</li>
+<li>карта (возможно создавать, удалять и редактировать записи).</li>
+</ul>
+</li>
+</ul>
+<h4 id="настройка-представления_1">Настройка представления</h4>
+<p>Представление поля атрибута типа «<strong>Запись</strong>» на форме определяется сочетанием свойств поля и <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2243">свойств атрибута</a>.</p>
+<p>Помимо <a class="mkdocs_imported_link" href="#общие-свойства-полей">общих свойств</a> у этого поля предусмотрены следующие свойства:</p>
+<ul>
+<li>
+<p><strong>Представление</strong> — выберите представление поля на форме:</p>
+<ul>
+<li><strong>Раскрывающийся список</strong> — <a class="mkdocs_imported_link" href="#настройка-раскрывающегося-списка">настройте раскрывающийся список</a>;</li>
+<li><strong>Таблица</strong> — <a class="mkdocs_imported_link" href="#form_dynamic_elements_table">настройте таблицу</a>;</li>
+<li><strong>Шевроны</strong> — <a class="mkdocs_imported_link" href="#form_dynamic_elements_chevron">настройте шевроны</a>;</li>
+<li><strong>Диаграмма Ганта</strong> — <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2107">настройте диаграмму Ганта</a>;</li>
+<li><strong>Карта</strong> — настройте представление карты.</li>
+</ul>
+</li>
+</ul>
+<h4 id="добавление-на-форму-атрибутов-связанного-шаблона-записи">Добавление на форму атрибутов связанного шаблона записи</h4>
+<p>Так как атрибут типа «<strong>Запись</strong>» связан с шаблоном записи, на формы и в таблицы можно добавить атрибуты связанного шаблона, а также связанных с ним шаблонов любого уровня вложенности.</p>
+<ol class="colored_numbers_list">
+<li>В панели элементов конструктора формы разверните атрибут типа «<strong>Запись</strong>», нажав стрелку вниз <em class="fa-light fa-angle-down">‌<!--icon--></em> справа от названия атрибута.</li>
+<li>Отобразится список атрибутов шаблона аккаунта, связанного с атрибутом.</li>
+<li>Перетащите на макет формы или в таблицу требуемый атрибут аккаунта.</li>
+<li>Настройте поле или столбец атрибута с помощью панели «<strong>Свойства поля</strong>» или «<strong>Свойства столбца таблицы</strong>».</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Список атрибутов связанного шаблона записи в панели элементов конструктора форм" src="https://kb.comindware.ru/assets/form_dynamic_elements_record_attribute_list.png"/></p>
+<figcaption class="caption">Список атрибутов связанного шаблона записи в панели элементов конструктора форм</figcaption>
+</figure>
+<h4 id="настройка-раскрывающегося-списка">Настройка раскрывающегося списка</h4>
+<p>Если для поля атрибута типа «<strong>Запись</strong>» выбрано <strong>представление</strong> «<strong>Раскрывающийся список</strong>», в нём будут отображаться заголовки записей связанного шаблона. При нажатии поля пользователь сможет выбрать одну или несколько записей.</p>
+<p>В раскрывающийся список выводятся первые 50 записей, отсортированных по алфавиту. Если записей больше 50, то отобразится предупреждение — <em>«Отображены не все значения, уточните поиск»</em>.</p>
+<figure class="screenshot_with_caption">
+<p><img alt="Поле атрибута типа «Запись»: несколько значений, только чтение" src="https://kb.comindware.ru/assets/form_dynamic_elements_record_attribute_field_multiple_values_read_only.png"/></p>
+<figcaption class="caption">Поле атрибута типа «Запись»: несколько значений, только чтение</figcaption>
+</figure>
+<figure class="screenshot_with_caption">
+<p><img alt="Поле атрибута типа «Запись»: раскрывающийся список" src="https://kb.comindware.ru/assets/form_dynamic_elements_record_attribute_field_multiple_values_dropdown_list.png"/></p>
+<figcaption class="caption">Поле атрибута типа «Запись»: раскрывающийся список</figcaption>
+</figure>
+<p>Помимо <a class="mkdocs_imported_link" href="#общие-свойства-полей">общих свойств</a> поля для раскрывающегося списка можно настроить следующие свойства:</p>
+<ul>
+<li><strong>Создание записей</strong> — установите этот флажок, чтобы пользователь мог создавать записи в связанном шаблоне, нажав кнопку в раскрывающемся списке. Для этого отобразится всплывающее окно с формой связанного шаблона.</li>
+<li><strong>Редактирование записей</strong> — установите этот флажок, чтобы пользователь мог редактировать записи в связанном шаблоне, нажав кнопку в раскрывающемся списке. Для этого отобразится всплывающее окно с формой связанного шаблона.</li>
+<li><strong>Форма</strong> — выберите форму, которая будет использоваться для создания и редактирования записей. Если форма не указана, используется основная форма связанного шаблона.</li>
+<li><strong>Фильтр</strong> — задайте список ID записей из связанного шаблона, которые должны отображаться в раскрывающемся списке. Для этого укажите <strong>атрибут</strong> типа «<strong>Запись</strong>» либо введите <strong>формулу</strong> или выражение на языке <strong>N3</strong>.</li>
+</ul>
+<h4 id="form_dynamic_elements_table">Настройка таблицы</h4>
+<p>Если для поля атрибута типа «<strong>Запись</strong>» выбрано <strong>представление</strong> «<strong>Таблица</strong>», то в поле будет отображаться список записей связанного шаблона. В зависимости от настроек таблицы на форме пользователь сможет создавать, добавлять, исключать, редактировать и удалять записи. Кроме того, таблица может отображаться в виде иерархического дерева записей с возможностью изменения их порядка и вложенности.</p>
+<figure class="screenshot_with_caption">
+<p><img alt="Поле атрибута типа «Запись»: иерархическая таблица" src="https://kb.comindware.ru/assets/hierarchical_table.gif"/></p>
+<figcaption class="caption">Поле атрибута типа «Запись»: иерархическая таблица</figcaption>
+</figure>
+<p>Помимо <a class="mkdocs_imported_link" href="#общие-свойства-полей">общих свойств</a> поля для таблиц можно настроить следующие свойства:</p>
+<ul>
+<li><strong>Дочерние записи</strong> — используется для построения иерархического дерева записей в таблице. Укажите атрибут типа «<strong>Запись</strong>», связанный с шаблоном, по которому формируется таблица. Этот атрибут должен хранить несколько значений, а также иметь взаимную связь с атрибутом в том же шаблоне (ссылка на родительские записи).</li>
+<li><strong>Упорядочивание</strong> — чтобы сохранять и изменять порядок следования строк в таблице, укажите атрибут типа «<strong>Число</strong>». Порядковый номер строки будет автоматически меняться при её перемещении в таблице.</li>
+<li><strong>Иерархическая нумерация</strong> — укажите атрибут типа «<strong>Текст</strong>», который будет хранить иерархические номера строк древовидной таблицы (1, 1.1, 1.2, 1.2.1 и т. д.). Номера строк будут автоматически меняться при перемещении строк в таблице..</li>
+<li><strong>Сортировка</strong> — укажите столбец для первоначальной сортировки строк таблицы.</li>
+<li>
+<p><strong>Направление сортировки</strong> — укажите направление сортировки строк таблицы по выбранному столбцу.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Для древовидной таблицы сортировка будет работать только в ручном режиме</p>
+</div>
+</li>
+<li>
+<p><strong>Закрепить столбцы</strong> — укажите количество столбцов, которые следует закрепить в левой части таблицы. Эти столбцы не будут прокручиваться по горизонтали.</p>
+</li>
+<li><strong>Карточки</strong> — выберите <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2402">представление карточек</a>, которое требуется использовать для таблицы.</li>
+<li>
+<p><strong>Фильтр</strong></p>
+<ul>
+<li><strong>Отображаемые записи</strong> — задайте список ID записей из связанного шаблона, которые должны отображаться в виде шевронов. Для этого укажите <strong>атрибут</strong> либо введите <strong>формулу</strong> или выражение на языке <strong>N3</strong>.</li>
+<li><strong>Добавляемые записи</strong> — задайте список ID записей из связанного шаблона, которые должны отображаться в списке при нажатии кнопки «<strong>Добавить</strong>» в таблице. Для этого укажите <strong>атрибут</strong> типа «<strong>Запись</strong>» либо введите <strong>формулу</strong> или выражение на языке <strong>N3</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Отключить выбор записей</strong> — установите этот флажок, чтобы отключить возможность выбора записей в таблице. При этом в таблице не будет отображаться столбец с флажками выбора строк.</p>
+</li>
+<li><strong>Показывать архивные записи</strong> — установите этот флажок, чтобы в таблице отображались архивные записи из связанного шаблона.</li>
+</ul>
+<h5 id="пример-настройки-древовидной-таблицы-с-иерархической-нумерацией">Пример настройки древовидной таблицы с иерархической нумерацией</h5>
+<p>Обычно в таблице на форме шаблона отображаются записи из другого шаблона записи посредством связи «один ко многим». Например, на форме <em>«Заявка»</em> отображается таблица <em>«Позиции заявки»</em>.</p>
+<p>Но можно построить древовидную таблицу из взаимосвязанных записей одного и того же шаблона. Например, в таблице могут отображаться задачи и подзадачи, проекты и подпроекты, подразделения и дочерние подразделения.</p>
+<p>Рассмотрим пример настройки шаблона и таблицы для отображения дочерних работ на форме текущей работы:</p>
+<ul>
+<li>каждая работа может быть связана с несколькими дочерними работами, у каждой работы может быть только одна родительская работа.</li>
+</ul>
+<ol class="colored_numbers_list">
+<li>Создайте шаблон записи «Работы».</li>
+<li>
+<p>В шаблоне «Работы» создайте следующие атрибуты:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Название атрибута</th>
+<th>Тип данных</th>
+<th>Свойства</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Дочерние работы</em></td>
+<td><strong>Запись</strong></td>
+<td>
+<p><strong>Связанный шаблон:</strong> <em>Работы</em></p>
+<p><strong>Формат отображения:</strong> <strong>гиперссылка</strong></p>
+<p><strong>Хранить несколько значений:</strong> флажок установлен</p>
+<p><strong>Взаимная связь с атрибутом:</strong> <strong>с новым</strong></p>
+<p><strong>Свойства нового атрибута</strong></p>
+<ul>
+<li><strong>Название:</strong> <em>Родительская работа</em></li>
+<li><strong>Хранить несколько значений:</strong> флажок снят</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td><em>Порядковый номер</em></td>
+<td><strong>Число</strong></td>
+<td><strong>Количество знаков после запятой: не преобразовывать</strong></td>
+</tr>
+<tr>
+<td><em>Иерархический номер</em></td>
+<td><strong>Текст</strong></td>
+<td><strong>Формат отображения: обычный текст</strong></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Вынесите на основную форму шаблона <em>«Работы»</em> атрибут <em>«Дочерние работы»</em>.</p>
+</li>
+<li>В свойствах поля <em>«Дочерние работы»</em> на форме выберите <strong>представление</strong> «<strong>Таблица</strong>».</li>
+<li>
+<p>Настройте <strong>свойства таблицы</strong> <em>«Дочерние работы»</em>:</p>
+<ul>
+<li><strong>Дочерние записи:</strong> <em>Дочерние работы</em></li>
+<li><strong>Упорядочивание:</strong> <em>Порядковый номер</em></li>
+<li><strong>Иерархическая нумерация:</strong> <em>Иерархический номер</em></li>
+<li><strong>Сортировка:</strong> <em>Иерархический номер</em></li>
+<li><strong>Направление сортировки:</strong> <em>По возрастанию</em></li>
+</ul>
+</li>
+<li>
+<p>В панели элементов конструктора формы раскройте атрибут <em>«Дочерние работы».</em></p>
+</li>
+<li>Из раскрытого списка <em>«Дочерние работы»</em> вынесите в таблицу атрибуты <em>«Иерархический номер»</em>, <em>«Порядковый номер»</em> и <em>«Родительская работа»</em>.</li>
+<li>Выберите область кнопок таблицы <em>«Дочерние работы»</em> и добавьте на неё кнопки «<em class="fal fa-plus">‌<!--icon--></em> <strong>Создать</strong>», «<em class="fal fa-plus-square">‌<!--icon--></em> <strong>Добавить</strong>», «<em class="fal fa-times">‌<!--icon--></em> <strong>Исключить</strong>».</li>
+<li>Сохраните форму.</li>
+<li>Перейдите к странице свойств шаблона <em>«Работы»</em>.</li>
+<li>Создайте запись в шаблоне <em>«Работы»</em>.</li>
+<li>Протестируйте работу древовидной таблицы:
+<ul>
+<li>На форме текущей работы создайте несколько записей в таблице <em>«Дочерние работы»</em>.</li>
+<li>Сохраните запись текущей работы. </li>
+<li>Переместите одну работу внутрь другой, взявшись за вертикальное многоточие <em class="fa-light fa-ellipsis-vertical">‌<!--icon--></em> в первом столбце таблицы.</li>
+<li>Переместите любую работу между уровнями иерархии:
+<ul>
+<li>выберите работу с помощью флажка в первом столбце таблицы;</li>
+<li>нажмите кнопку <em class="fa-light fa-arrow-alt-from-left">‌<!--icon--></em>, чтобы переместить работу на один уровень иерархии вниз;</li>
+<li>нажмите кнопку <em class="fa-light fa-arrow-alt-from-right">‌<!--icon--></em>, чтобы переместить работу на один уровень иерархии вверх.</li>
+</ul>
+</li>
+<li>Изменяйте порядковые номера работ, чтобы переместить их на новые позиции в таблице.</li>
+</ul>
+</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Пример работы с древовидной таблицей с иерархической нумерацией" src="https://kb.comindware.ru/assets/HierarchicalTable-optimized.gif"/></p>
+<figcaption class="caption">Пример работы с древовидной таблицей с иерархической нумерацией</figcaption>
+</figure>
+<h4 id="form_dynamic_elements_chevron">Настройка шевронов</h4>
+<p>Если для поля атрибута типа «<strong>Запись</strong>» выбрано <strong>представление</strong> «<strong>Шевроны</strong>», то в поле будет отображаться последовательность цветных плашек с заголовками записей связанного шаблона.</p>
+<ul>
+<li>Каждый шеврон содержит заголовок связанной с ним записи в виде гиперссылки на запись.</li>
+<li>Пользователь может нажимать шевроны для просмотра связанных с ними записей во всплывающем окне.</li>
+<li>Цвет шеврона можно задать двумя способами:
+<ul>
+<li>с помощью системного атрибута «<strong>Цвет</strong>» связанной записи;</li>
+<li>с помощью <strong>правил окраски записей</strong>.</li>
+</ul>
+</li>
+</ul>
+<p>См. также статьи <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2119">Шевроны. Правила окрашивания. Пример настройки</a>»</em> и <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2582">Шевроны. Визуализация этапов процесса. Пример настройки</a>»</em>.</p>
+<figure class="screenshot_with_caption">
+<p><img alt="Поле атрибута типа «Запись»: шевроны и таблица исходных записей для них" src="https://kb.comindware.ru/assets/form_dynamic_elements_record_chevron_table.png"/></p>
+<figcaption class="caption">Поле атрибута типа «Запись»: шевроны и таблица исходных записей для них</figcaption>
+</figure>
+<p>Помимо <a class="mkdocs_imported_link" href="#общие-свойства-полей">общих свойств</a> поля для шевронов можно настроить следующие свойства:</p>
+<ul>
+<li><strong>Упорядочивание</strong> — укажите атрибут типа «<strong>Число</strong>», по значению которого будет выстраиваться последовательность записей в виде шевронов.</li>
+<li><strong>Фильтр</strong> — задайте список ID записей из связанного шаблона, которые должны отображаться в виде шевронов. Для этого укажите <strong>атрибут</strong> либо введите <strong>формулу</strong> или выражение на языке <strong>N3</strong>.</li>
+<li><strong>Форма</strong> — выберите форму связанного шаблона записи, которая должна открываться при нажатии по шеврону.</li>
+<li>
+<p><strong>Правила окраски записей</strong> — <a class="mkdocs_imported_link" href="#настройка-правил-окрашивания-шевронов">настройте правила окрашивания шевронов</a> на форме.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<ul>
+<li>Если не настроены правила окраски шевронов или не сработает ни одно правило, они будут окрашиваться цветом, указанным в системном атрибуте «<a class="mkdocs_imported_link" href="#form_dynamic_elements_color"><strong>Цвет</strong></a>» в соответствующих записях. Если при этом для записи атрибут «<strong>Цвет</strong>» не задан, то шеврон будет окрашен в зелёный цвет.</li>
+<li>Правил окраски шевронов может быть неограниченное количество, но для оптимальной работы платформы рекомендуется задавать не более 8 условий.</li>
+<li>Если для одной записи одновременно сработают несколько правил, возвращающих разные цвета, то шеврон будет окрашен в цвет, заданный последним сработавшим правилом.</li>
+<li>Следует помнить, что условие окрашивания шеврона вычисляется в контексте шаблона, связанного с текущим шаблоном посредством с атрибута типа «<strong>Запись</strong>». Поэтому обратиться к атрибутам текущего шаблона, на форме которого размещены шевроны, можно только посредством обратной ссылки. Например, к атрибуту <em>«Название магазина»</em> текущего шаблона можно обратиться посредством атрибута <em>«Магазин»</em> из связанного шаблона, который ссылается на текущий шаблон: <code>$Magazin-&gt;Nazvaniemagazina</code>.</li>
+</ul>
+</div>
+</li>
+</ul>
+<h5 id="настройка-правил-окрашивания-шевронов">Настройка правил окрашивания шевронов</h5>
+<ol class="colored_numbers_list">
+<li>Нажмите кнопку «<strong>Создать</strong>» в области «<strong>Правила окраски записей</strong>» свойств элемента «<strong>Шевроны</strong>».</li>
+<li>В таблице правил окраски появится новое правило.</li>
+<li>Задайте <strong>цвет</strong>, указав его код или выбрав с помощью палитры.</li>
+<li>Задайте <strong>условие</strong>, при котором шеврон должен окрашиваться в заданный цвет. Правило должно возвращать <code>true</code> для записей, которые должны быть окрашены в выбранный цвет. Для этого укажите атрибут типа «<strong>Логический</strong>» либо введите <strong>формулу</strong> или выражение на <strong>N3</strong>.</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Настройка цвета и условия окраски шевронов" src="https://kb.comindware.ru/assets/form_dynamic_elements_chevron_color_configure.png"/></p>
+<figcaption class="caption">Настройка цвета и условия окраски шевронов</figcaption>
+</figure>
+<h4 id="настройка-диаграммы-ганта">Настройка диаграммы Ганта</h4>
+<p>Если для поля атрибута типа «<strong>Запись</strong>» выбрано <strong>представление</strong> «<strong>Диаграмма Ганта</strong>», то поле будет представлять собой диаграмму, отображающую записи из связанного шаблона — <em>работы</em>. Пользователь сможет выбирать интервал отображения данных на диаграмме, просматривать сведения о работах, их связях и зависимостях во всплывающей форме, а также показывать и скрывать ожидаемый ход работ.</p>
+<p>Подробные сведения см. в статьях <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2107">Диаграмма Ганта. Настройка</a>»</em> и <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2108">Диаграмма Ганта. Использование</a>»</em>.</p>
+<figure class="screenshot_with_caption">
+<p><img alt="Поле атрибута типа «Запись»: диаграмма Ганта и таблица исходных записей для диаграммы" src="https://kb.comindware.ru/assets/gantt_chart_example2.png"/></p>
+<figcaption class="caption">Поле атрибута типа «Запись»: диаграмма Ганта и таблица исходных записей для диаграммы</figcaption>
+</figure>
+<h4 id="form_dynamic_elements_map">Настройка карты</h4>
+<p>Если для поля атрибута типа «<strong>Запись</strong>» выбрано <strong>представление</strong> «<strong>Карта</strong>», то в поле будет отображаться карта с географическими метками, сформированными по записям связанного шаблона. Пользователь сможет искать адреса, добавлять метки на карту, убирать их с карты и задавать им свои данные. Для отображения карт на форме требуется настроить <strong>системное подключение</strong> типа «<strong>Карты</strong>», шаблон записи, на форме которого будет отображаться карта и шаблон записи, в котором будут храниться данные меток на карте.</p>
+<p>Подробные сведения см. в статьях <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2572">Карты. Настройка</a>»</em> и <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2635">Карты. Использование</a>»</em>.</p>
+<p>Помимо <a class="mkdocs_imported_link" href="#общие-свойства-полей">общих свойств</a> поля для карты можно настроить следующие свойства:</p>
+<ul>
+<li><strong>Высота</strong> — задайте высоту карты на форме от 200 до 480 пикселей.</li>
+<li>
+<p><strong>Атрибуты адреса</strong> — выберите атрибуты типа «<strong>Текст</strong>» (из связанного шаблона), в которых будут храниться данные адреса меток на карте:</p>
+<ul>
+<li><strong>Страна</strong></li>
+<li><strong>Регион</strong></li>
+<li><strong>Населённый пункт</strong></li>
+<li><strong>Улица</strong></li>
+<li><strong>Дом, строение</strong></li>
+<li><strong>Индекс</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Атрибуты координат</strong> — выберите из связанного шаблона атрибуты типа «<strong>Число</strong>» (из связанного шаблона) для хранения географических координат меток на карте:</p>
+<ul>
+<li><strong>Широта</strong></li>
+<li><strong>Долгота</strong></li>
+</ul>
+</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Поле атрибута типа «Запись»: карта" src="https://kb.comindware.ru/assets/form_dynamic_elements_record_field_map.png"/></p>
+<figcaption class="caption">Поле атрибута типа «Запись»: карта</figcaption>
+</figure>
+<h3 id="обсуждение">Обсуждение</h3>
+<p>Представление поля «<strong>Обсуждения</strong>» на формах определяется сочетанием свойств поля и <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2406#mcetoc_1h7hu3akn4">свойств шаблона</a>.  См. статью <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2406">Настройка обсуждений</a>»</em>.</p>
+<p>Помимо <a class="mkdocs_imported_link" href="#общие-свойства-полей">общих свойств</a> у этого поля предусмотрено одно свойство:</p>
+<ul>
+<li><strong>Высота</strong> — введите высоту области чата на форме в пикселях.</li>
+</ul>
+<h4 id="пример-использования_4">Пример использования</h4>
+<p>Подробные сведения см. в статье <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2407">Использование обсуждения</a>»</em>.</p>
+<ol class="colored_numbers_list">
+<li>Поместите на неё поле «<strong>Обсуждение</strong>».</li>
+<li>Откройте форму, отправляйте и отвечайте на сообщения в чате, архивируйте их и прикрепляйте к ним файлы.</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Обсуждение записи на форме" src="https://kb.comindware.ru/assets/form_dynamic_elements_record_form_discussion.png"/></p>
+<figcaption class="caption">Обсуждение записи на форме</figcaption>
+</figure>
+<h3 id="организационная-единица">Организационная единица</h3>
+<p>Для поля атрибута типа «<strong>Организационная единица</strong>» предусмотрены следующие варианты отображения (см. иллюстрации ниже):</p>
+<ul>
+<li>
+<p>Если атрибут хранит одно значение:</p>
+<ul>
+<li>название оргединицы (если поле доступно только для чтения);</li>
+<li>раскрывающийся список (если в поле разрешён ввод, возможно выбирать оргединицы).</li>
+</ul>
+</li>
+<li>
+<p>Если атрибут хранит несколько значений:</p>
+<ul>
+<li>список оргединиц (если поле доступно только для чтения);</li>
+<li>раскрывающийся список (если в поле разрешён ввод, возможно выбирать оргединицы);</li>
+<li>таблица (если в поле разрешён ввод, возможно добавлять, исключать, удалять и редактировать оргединицы).</li>
+</ul>
+</li>
+</ul>
+<h4 id="примеры-отображения_1">Примеры отображения</h4>
+<figure class="screenshot_with_caption">
+<p><img alt="Поле атрибута типа «Организационная единица»: несколько значений, только чтение" src="https://kb.comindware.ru/assets/form_dynamic_elements_attribute_organizational_unit_multiple_values_read_only.png"/></p>
+<figcaption class="caption">Поле атрибута типа «Организационная единица»: несколько значений, только чтение</figcaption>
+</figure>
+<figure class="screenshot_with_caption">
+<p><img alt="Поле атрибута типа «Организационная единица»: несколько значений, раскрывающийся список" src="https://kb.comindware.ru/assets/form_dynamic_elements_attribute_organizational_unit_multiple_values_dropdown_list.png"/></p>
+<figcaption class="caption">Поле атрибута типа «Организационная единица»: несколько значений, раскрывающийся список</figcaption>
+</figure>
+<figure class="screenshot_with_caption">
+<p><img alt="Поле атрибута типа «Организационная единица»: несколько значений, таблица" src="https://kb.comindware.ru/assets/form_dynamic_elements_attribute_organizational_unit_multiple_values_table.png"/></p>
+<figcaption class="caption">Поле атрибута типа «Организационная единица»: несколько значений, таблица</figcaption>
+</figure>
+<h4 id="настройка-представления_2">Настройка представления</h4>
+<p>Представление поля атрибута типа «<strong>Организационная единица</strong>» на форме определяется свойствами поля.</p>
+<p>Помимо <a class="mkdocs_imported_link" href="#общие-свойства-полей">общих свойств</a> у этого поля предусмотрены следующие свойства:</p>
+<ul>
+<li>
+<p><strong>Представление</strong> — выберите представление поля на форме:</p>
+<ul>
+<li>
+<p><strong>Раскрывающийся список</strong> — пользователь может выбрать одну или несколько оргединиц. В раскрывающийся список выводятся первые 50 оргединиц, отсортированных по алфавиту. Если аккаунтов больше 50, то отобразится предупреждение — <em>«Отображены не все значения, уточните поиск»</em>.</p>
+<ul>
+<li><strong>Создание записей</strong> — установите этот флажок, чтобы пользователь мог создавать оргединицы, нажав кнопку в раскрывающемся списке. Для этого отобразится всплывающее окно с формой шаблона оргединицы.</li>
+<li><strong>Редактирование записей</strong> — установите этот флажок, чтобы пользователь мог редактировать оргединицы, нажав кнопку в раскрывающемся списке. Для этого отобразится всплывающее окно с формой шаблона оргединицы.</li>
+<li><strong>Форма</strong> — выберите форму, которая будет использоваться для создания и редактирования оргединиц. Если форма не указана, используется основная форма шаблона оргединиц.</li>
+<li><strong>Фильтр</strong> — задайте список ID оргединиц, которые должны отображаться в раскрывающемся списке. Для этого укажите <strong>атрибут</strong> типа «<strong>Оргединица</strong>» либо введите <strong>формулу</strong> или выражение на языке <strong>N3</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Таблица</strong> — настройте таблицу аналогично <a class="mkdocs_imported_link" href="#form_dynamic_elements_table">таблице для атрибута типа «Запись»</a>.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="добавление-на-форму-атрибутов-шаблона-оргединицы">Добавление на форму атрибутов шаблона оргединицы</h4>
+<p>Так как атрибут типа «<strong>Организационная единица</strong>» связан с шаблоном оргединицы, на формы и в таблицы можно добавить атрибуты этого шаблона, а также связанных с ним шаблонов любого уровня вложенности.</p>
+<ol class="colored_numbers_list">
+<li>В панели элементов конструктора формы разверните атрибут типа «<strong>Организационная единица</strong>», нажав стрелку вниз <em class="fa-light fa-angle-down">‌<!--icon--></em> справа от названия атрибута.</li>
+<li>Отобразится список атрибутов шаблона аккаунта, связанного с атрибутом.</li>
+<li>Перетащите на макет формы или в таблицу требуемый атрибут аккаунта.</li>
+<li>Настройте поле или столбец атрибута с помощью панели «<strong>Свойства поля</strong>» или «<strong>Свойства столбца таблицы</strong>».</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Список атрибутов шаблона оргединицы в панели элементов конструктора форм" src="https://kb.comindware.ru/assets/form_dynamic_elements_organizational_unit_attribute_list.png"/></p>
+<figcaption class="caption">Список атрибутов шаблона оргединицы в панели элементов конструктора форм</figcaption>
+</figure>
+<h3 id="form_dynamic_elements_linked_processes">Связанные процессы</h3>
+<p>Представление связанных процессов на формах определяется свойствами поля.</p>
+<p>Помимо <a class="mkdocs_imported_link" href="#общие-свойства-полей">общих свойств</a> у поля «<strong>Связанные процессы</strong>» на форме предусмотрены следующие свойства:</p>
+<ul>
+<li>
+<p><strong>Представление</strong> — выберите способ отображения поля на форме:</p>
+<ul>
+<li><strong>Диаграмма</strong> — поле будет отображаться в виде диаграммы экземпляра процесса, связанного с текущей записью (если не задан <strong>фильтр</strong>), или экземпляра процесса, ID которого вернул <strong>фильтр</strong>. См. статью <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2360">Просмотр диаграммы процесса</a>»</em>.</li>
+<li>
+<p><strong>Таблица</strong> — поле будет отображаться в виде таблицы со списком экземпляров процесса, связанных с текущей записью (если не задан <strong>фильтр</strong>), или экземпляров процесса, ID которых вернул <strong>фильтр</strong>. В таблице связанных процессов предусмотрены следующие столбцы:</p>
+<ul>
+<li><strong>Название экземпляра процесса</strong> — гиперссылка на экземпляр процесса, см. статью <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2355">Использование диаграммы экземпляра процесса</a>»</em>;</li>
+<li><strong>Версия</strong> — номер версии диаграммы экземпляра процесса;</li>
+<li><strong>Дата создания</strong> — дата и время создания экземпляра процесса;</li>
+<li><strong>Позиции токенов</strong> — ID элементов диаграммы экземпляра процесса, на которых находятся токены.</li>
+<li><strong>Ошибки</strong> — при наличии ошибок при выполнении экземпляра процесса в этом столбце отображается флажок.</li>
+<li><strong>Задачи</strong> — гиперссылки на <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2392">пользовательские задачи</a> по процессу, назначенные исполнителям.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Фильтр</strong> — введите <strong>формулу</strong> или выражение на языке <strong>N3</strong>, возвращающие один или несколько ID экземпляров процесса, которые должны отображаться на диаграмме или в таблице.</p>
+</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Поле «Связанные процессы» в виде таблицы и диаграммы" src="https://kb.comindware.ru/assets/form_dynamic_elements_linked_process_field.png"/></p>
+<figcaption class="caption">Поле «Связанные процессы» в виде таблицы и диаграммы</figcaption>
+</figure>
+<h3 id="список-значений">Список значений</h3>
+<p>Представление поля атрибута типа «<strong>Список значений</strong>» на форме определяется свойствами поля и <strong>форматом отображения</strong>, заданным в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2244">свойствах атрибута</a>.</p>
+<p>У этого поля предусмотрены только <a class="mkdocs_imported_link" href="#общие-свойства-полей">общие свойства</a>.</p>
+<p>См. также статьи <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2571">Атрибут типа «Список значений». Вычисление значения по справочнику</a>» и «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2497">Атрибут типа «Список значений». Вычисление текущего значения</a>»</em> .</p>
+<h4 id="пример-использования_5">Пример использования</h4>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте и поместите на форму и в таблицу атрибут <em>«Тип транспортного средства»</em>:</p>
+<ul>
+<li><strong>Тип данных:</strong> <strong>Список значений</strong></li>
+<li><strong>Формат отображения:</strong> <strong>Бейдж</strong></li>
+<li>
+<p><strong>Список значений:</strong></p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Системное имя</th>
+<th>EN</th>
+<th>RU</th>
+<th>Цвет</th>
+<th>Значок</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bus</td>
+<td>Bus</td>
+<td>Автобус</td>
+<td><span style="background-color: #ff0000; color: #ffffff;">#ff0000</span></td>
+<td><em class="fa-light fa-bus">‌<!--icon--></em> bus</td>
+</tr>
+<tr>
+<td>passengerCar</td>
+<td>Car</td>
+<td>Легковой автомобиль</td>
+<td><span style="background-color: #0000ff; color: #ffffff;">#0000ff</span></td>
+<td><em class="fa-light fa-car">‌<!--icon--></em> car</td>
+</tr>
+<tr>
+<td>truck</td>
+<td>Truck</td>
+<td>Пикап</td>
+<td><span style="background-color: #00ff00;">#00ff00</span></td>
+<td><em class="fa-light fa-truck">‌<!--icon--></em> truck</td>
+</tr>
+<tr>
+<td>van</td>
+<td>Minivan</td>
+<td>Микроавтобус</td>
+<td><span style="background-color: #ffff00;">#ffff00</span></td>
+<td><em class="fa-light fa-van-shuttle">‌<!--icon--></em> van-shuttle</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<p>Откройте форму и нажмите поле <em>«Тип транспортного средства»</em>.</p>
+</li>
+<li>
+<p>Отобразится раскрывающийся список с названиями и значками автомобилей, пункты списка будут окрашены указанными цветами.</p>
+<figure class="screenshot_with_caption"><img alt="Раскрывающийся список значений на форме" src="https://kb.comindware.ru/assets/form_dynamic_elements_form_enum_dropdown_list.png"/>
+<figcaption class="caption">Раскрывающийся список значений на форме</figcaption>
+</figure>
+</li>
+<li>
+<p>Откройте таблицу с записями шаблона.</p>
+</li>
+<li>
+<p>Столбец <em>«Тип транспортного средства»</em> должен выглядеть как показано на иллюстрации.</p>
+<figure class="screenshot_with_caption"><img alt="Представление атрибута типа «Список значений» в таблице" src="https://kb.comindware.ru/assets/form_dynamic_elements_attribute_enum_table.png"/>
+<figcaption class="caption">Представление атрибута типа «Список значений» в таблице</figcaption>
+</figure>
+</li>
+</ol>
+<h3 id="роль">Роль</h3>
+<p>Для поля атрибута типа «<strong>Роль</strong>» предусмотрены следующие варианты отображения (см. иллюстрации ниже):</p>
+<ul>
+<li>
+<p>Если атрибут хранит одно значение:</p>
+<ul>
+<li>название роли (если поле доступно только для чтения);</li>
+<li>раскрывающийся список (если в поле разрешён ввод, возможно выбирать, создавать и редактировать роли).</li>
+</ul>
+</li>
+<li>
+<p>Если атрибут хранит несколько значений:</p>
+<ul>
+<li>список ролей (если поле доступно только для чтения);</li>
+<li>раскрывающийся список (если в поле разрешён ввод, возможно выбирать, создавать и редактировать роли);</li>
+<li>таблица (если в поле разрешён ввод, возможно создавать, редактировать, добавлять, исключать и удалять роли).</li>
+</ul>
+</li>
+</ul>
+<h4 id="примеры-отображения_2">Примеры отображения</h4>
+<figure class="screenshot_with_caption">
+<p><img alt="Поле атрибута типа «Роль»: несколько значений, только чтение" src="https://kb.comindware.ru/assets/form_dynamic_elements_attribute_role_field_multiple_values_read_only.png"/></p>
+<figcaption class="caption">Поле атрибута типа «Роль»: несколько значений, только чтение</figcaption>
+</figure>
+<figure class="screenshot_with_caption">
+<p><img alt="Поле атрибута типа «Роль»: несколько значений, раскрывающийся список" src="https://kb.comindware.ru/assets/form_dynamic_elements_attribute_role_field_multiple_values_dropdown_list.png"/></p>
+<figcaption class="caption">Поле атрибута типа «Роль»: несколько значений, раскрывающийся список</figcaption>
+</figure>
+<figure class="screenshot_with_caption">
+<p><img alt="Поле атрибута типа «Роль»: несколько значений, таблица" src="https://kb.comindware.ru/assets/form_dynamic_elements_attribute_role_field_multiple_values_table.png"/></p>
+<figcaption class="caption">Поле атрибута типа «Роль»: несколько значений, таблица</figcaption>
+</figure>
+<h4 id="настройка-представления_3">Настройка представления</h4>
+<p>Представление поля атрибута типа «<strong>Роль</strong>» на форме определяется сочетанием свойств поля и <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2240">свойств атрибута</a>.</p>
+<p>Помимо <a class="mkdocs_imported_link" href="#общие-свойства-полей">общих свойств</a> у этого поля предусмотрены следующие свойства:</p>
+<ul>
+<li>
+<p><strong>Представление</strong> — выберите представление поля на форме:</p>
+<ul>
+<li>
+<p><strong>Раскрывающийся список</strong> — пользователь может выбрать одну или несколько ролей. В раскрывающийся список выводятся первые 50 ролей, отсортированных по алфавиту. Если ролей больше 50, то отобразится предупреждение — <em>«Отображены не все значения, уточните поиск»</em>.</p>
+<ul>
+<li><strong>Создание записей</strong> — установите этот флажок, чтобы пользователь мог создавать роли, нажав кнопку в раскрывающемся списке. Для этого отобразится всплывающее окно с формой шаблона роли.</li>
+<li><strong>Редактирование записей</strong> — установите этот флажок, чтобы пользователь мог редактировать роли, нажав кнопку в раскрывающемся списке. Для этого отобразится всплывающее окно с формой шаблона роли.</li>
+<li><strong>Форма</strong> — выберите форму, которая будет использоваться для создания и редактирования ролей. Если форма не указана, используется основная форма шаблона роли.</li>
+<li><strong>Фильтр</strong> — задайте список ID ролей, которые должны отображаться в раскрывающемся списке. Для этого укажите <strong>атрибут</strong> типа «<strong>Роль</strong>» либо введите <strong>формулу</strong> или выражение на языке <strong>N3</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Таблица</strong> — настройте таблицу аналогично <a class="mkdocs_imported_link" href="#form_dynamic_elements_table">таблице для атрибута типа «Запись»</a>.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="добавление-на-форму-атрибутов-шаблона-роли">Добавление на форму атрибутов шаблона роли</h4>
+<p>Так как атрибут типа «<strong>Роль</strong>» связан с шаблоном роли, на формы и в таблицы можно добавить атрибуты этого шаблона, а также связанных с ним шаблонов любого уровня вложенности.</p>
+<ol class="colored_numbers_list">
+<li>В панели элементов конструктора формы разверните атрибут типа «<strong>Организационная единица</strong>», нажав стрелку вниз <em class="fa-light fa-angle-down">‌<!--icon--></em> справа от названия атрибута.</li>
+<li>Отобразится список атрибутов шаблона роли, связанного с атрибутом.</li>
+<li>Перетащите на макет формы или в таблицу требуемый атрибут роли.</li>
+<li>Настройте поле или столбец атрибута с помощью панели «<strong>Свойства поля</strong>» или «<strong>Свойства столбца таблицы</strong>».</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Список атрибутов шаблона роли в панели элементов конструктора формы" src="https://kb.comindware.ru/assets/form_dynamic_elements_template_role_attributes_list.png"/></p>
+<figcaption class="caption">Список атрибутов шаблона роли в панели элементов конструктора формы</figcaption>
+</figure>
+<h3 id="текст">Текст</h3>
+<p>Представление поля атрибута типа «<strong>Текст</strong>» на форме определяется свойствами поля и <strong>форматом отображения</strong>, заданным в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2257">свойствах атрибута</a>.</p>
+<p>Помимо <a class="mkdocs_imported_link" href="#общие-свойства-полей">общих свойств</a> у этого поля предусмотрены следующие свойства:</p>
+<ul>
+<li><strong>Замещающий текст</strong> — введите наглядный образец текста, которые следует вводить пользователю. Этот текст будет отображаться в пустом поле.</li>
+<li>
+<p><strong>Макс. длина</strong> — укажите максимально допустимое количество символов, которое может вести в поле пользователь:</p>
+<ul>
+<li>0 — неограниченная длина текста;</li>
+<li>если имеющееся значение атрибута длиннее макс. длины, значение не будет обрезано, и пользователь сможет изменять текст в поле, но не сможет добавить символы сверх макс. длины;</li>
+<li>при попытке ввести больше символов, ввод прекратится.</li>
+</ul>
+</li>
+<li>
+<p><strong>Отображать</strong> — укажите, как следует отображать поле (для атрибута с <strong>форматом отображения</strong> « <strong>Обычный текст</strong>», «<strong>HTML-текст</strong>» или «<strong>Размеченный</strong> <strong>текст</strong>»):</p>
+<ul>
+<li>
+<p><strong>В одну строку</strong> — поле будет иметь высоту в одну строку текста:</p>
+<ul>
+<li>для атрибута с <strong>форматом отображения</strong> «<strong>Обычный текст</strong>» в поле возможно будет ввести любое количество строк;</li>
+<li>для атрибута с <strong>форматом отображения</strong> «<strong>HTML-текст</strong>», «<strong>Размеченный</strong> <strong>текст</strong>» или <strong>маской ввода</strong> в поле возможно будет ввести одну строку;</li>
+</ul>
+</li>
+<li>
+<p><strong>В несколько строк</strong> — поле будет иметь указанную <strong>высоту текста в строках</strong>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Высота текста в строках</strong> — укажите максимальную высоту поля в строках:</p>
+<ul>
+<li><strong>Авто</strong> — высота поля будет соответствовать количеству строк текста;</li>
+<li><strong>5, 10, 20</strong> — поле будет иметь указанную высоту, не поместившийся в поле текст будет отображаться с помощью прокрутки.</li>
+</ul>
+</li>
+</ul>
+<p>Сведения о настройке и пример использования <strong>форматов отображения</strong> с <strong>масками ввода</strong> см. в статье <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2257"><em>«Атрибут типа «Текст»</em></a>.</p>
+<p>В поле атрибута с <strong>форматом отображения</strong> « <strong>HTML текст</strong>» или «<strong>Размеченный текст</strong>» предусмотрена панель инструментов для форматированием текста.</p>
+<figure class="screenshot_with_caption">
+<p><img alt="Редактирование значения в поле с HTML-текстом на форме" src="https://kb.comindware.ru/assets/form_dynamic_elements_html_text_field_edit.png"/></p>
+<figcaption class="caption">Редактирование значения в поле с HTML-текстом на форме</figcaption>
+</figure>
+<h3 id="form_dynamic_elements_color">Цвет</h3>
+<p>Представление поля системного <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2627">атрибута «<strong>Цвет</strong>»</a> на форме определяется свойствами поля.</p>
+<p>Для пользователя в этом поле будут отображаться образец и шестнадцатеричный код цвета (например, красный <code>#ff0000</code>). Если в поле разрешён ввод, при нажатии образца цвета отобразится с палитра для визуального выбора или ввода кода цвета.</p>
+<p>Если для записи задано значение системного атрибута «<strong>Цвет</strong>», строки этой записи в <a class="mkdocs_imported_link" href="#form_dynamic_elements_table">таблицах</a>, <a class="mkdocs_imported_link" href="#form_dynamic_elements_chevron">шевроны</a> и сектора диаграмм для неё будут отображаться с заливкой заданным цветом.</p>
+<p>У этого поля предусмотрены только <a class="mkdocs_imported_link" href="#общие-свойства-полей">общие свойства</a>.</p>
+<figure class="screenshot_with_caption">
+<p><img alt="Поле атрибута «Цвет» с палитрой для выбора цвета" src="https://kb.comindware.ru/assets/form_dynamic_elements_attribute_color_field_palette.png"/></p>
+<figcaption class="caption">Поле атрибута «Цвет» с палитрой для выбора цвета</figcaption>
+</figure>
+<figure class="screenshot_with_caption">
+<p><img alt="Отображение атрибута «Цвет» в таблице" src="https://kb.comindware.ru/assets/form_dynamic_elements_attribute_color_table.png"/></p>
+<figcaption class="caption">Отображение атрибута «Цвет» в таблице</figcaption>
+</figure>
+<h4 id="form_dynamic_elements_color_diagram_example">Пример использования</h4>
+<p>Атрибут «<strong>Цвет</strong>» можно использовать для окрашивания секторов диаграмм.</p>
+<p>В этом примере представлены инструкции по окрашиванию секторов диаграммы цветами, заданными в шаблоне со справочными данными.</p>
+<p>По умолчанию сектора диаграмм окрашиваются цветами, заданными в разделе «<strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2199#mcetoc_1gjriujcbf">Цвета графиков и диаграмм</a></strong>» в текущей <strong>теме</strong>.</p>
+<p>Если в свойствах диаграммы в поле «<strong>Категории</strong>» выбран атрибут типа «<strong>Запись</strong>», то сектора диаграммы будут окрашиваться цветами из атрибута «<strong>Цвет</strong>» связанных записей.</p>
+<p>Если в свойствах диаграммы в поле «<strong>Категории</strong>» выбран атрибут типа «<strong>Список значений</strong>», то сектора диаграммы будут окрашиваться цветами, заданными для значений списка.</p>
+<ol class="colored_numbers_list">
+<li>Создайте шаблон записи «<strong>Заявки на перевозку</strong>».</li>
+<li>Создайте шаблон записи «<strong>Типы транспортных средств</strong>».</li>
+<li>
+<p>В шаблоне <em>«Типы транспортных средств»</em> создайте атрибут <em>«Название»</em>:</p>
+<ul>
+<li><strong>Тип данных: текст</strong></li>
+<li><strong>Использовать как заголовок записей:</strong> флажок установлен</li>
+</ul>
+</li>
+<li>
+<p>В шаблоне <em>«Заявки на перевозку»</em> создайте и вынесите на форму атрибут <em>«Тип транспортного средства»</em>:</p>
+<ul>
+<li><strong>Тип данных: запись</strong></li>
+<li><strong>Связанный шаблон:</strong> <em>Типы транспортных средств</em></li>
+</ul>
+</li>
+<li>
+<p>В шаблоне <em>«Типы транспортных средств»</em> вынесите на форму атрибут <em>«Название»</em> и системный атрибут «<strong>Цвет</strong>».</p>
+</li>
+<li>
+<p>В шаблоне записи <em>«Типы транспортных средств»</em>  создайте записи со следующими данными:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th><em>Название</em></th>
+<th><em>Цвет</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Автобус</em></td>
+<td>#ff0000</td>
+</tr>
+<tr>
+<td><em>Легковой автомобиль</em></td>
+<td>#0000ff</td>
+</tr>
+<tr>
+<td><em>Грузовик</em></td>
+<td>#00ff00</td>
+</tr>
+<tr>
+<td><em>Микроавтобус</em></td>
+<td>#ffff00</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>В шаблоне <em>«Заявки на перевозку»</em> создайте несколько записей и выберите в них разные <em>типы транспортных средств</em>.</p>
+</li>
+<li>
+<p>В разделе навигации приложения создайте страницу <em>«Статистика заявок»</em>.</p>
+</li>
+<li>
+<p>На странице <em>«Статистика заявок»</em> создайте диаграмму <em>«Заявки по типу»</em> со следующими свойствами:</p>
+<ul>
+<li><strong>Отображаемое название:</strong> <em>Заявки по типу</em></li>
+<li><strong>Тип: круговая</strong></li>
+<li><strong>Данные</strong>
+<ul>
+<li><strong>Шаблон:</strong> <em>Заявки на перевозку</em></li>
+<li><strong>Категории</strong>: <em>Тип транспортного средства</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>На диаграмме <em>«Заявки по типу»</em> должны отобразиться четыре сектора: красный, синий, зелёный и жёлтый, показывающие количество заявок на перевозку соответствующими типами ТС. См. пример на следующей иллюстрации.</p>
+<figure class="screenshot_with_caption"><img alt="Диаграмма с секторами, окрашенными с помощью атрибута «Цвет» связанных записей" src="https://kb.comindware.ru/assets/form_dynamic_elements_attribute_color_sector_diagram.png"/>
+<figcaption class="caption">Диаграмма с секторами, окрашенными с помощью атрибута «Цвет» связанных записей</figcaption>
+</figure>
+</li>
+</ol>
+<h3 id="form_dynamic_elements_drawing">Чертёж</h3>
+<p>Представление поля атрибута типа «<strong>Чертёж</strong>» на форме определяется свойствами поля, загруженным чертежом в формате DWG и привязанными к нему данными.</p>
+<p>Для пользователя в этом поле будет отображаться мастер для загрузки файла чертежа и привязки слоёв и маркеров к шаблонам записей, после чего отобразятся элементы для работы загруженным планом, маркеры и помещения. Пользователь сможет выбирать помещения, этажи и маркеры, раскрашивать объекты на плане, добавлять заявки по объектам.</p>
+<p>Полигоны и маркеры на чертеже привязываются к записям в шаблонах.</p>
+<p>Подробные сведения см. в статьях <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2574">Чертёж. Подготовка и импорт файла DWG</a>»</em> и <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2575">Чертёж. Настройка</a>»</em>.</p>
+<p>Помимо <a class="mkdocs_imported_link" href="#общие-свойства-полей">общих свойств</a> у этого поля предусмотрены следующие свойства:</p>
+<ul>
+<li><strong>Разрешить удаление</strong> — установите этот флажок, чтобы пользователь мог удалять связанные с чертежом записи.</li>
+<li><strong>Связи</strong> — настройте связи между слоями чертежа и шаблонами записей:
+<ul>
+<li><strong>Шаблон записи</strong> — выберите шаблон записи, с которым будет связан указанный слой чертежа. В этом шаблоне будут храниться записи, связанные с полигонами на чертеже.</li>
+<li><strong>Атрибут</strong> — выберите ключевой атрибут типа «<strong>Текст</strong>». Этот атрибут будет использоваться для привязки полигонов к записям в указанном шаблоне путём сопоставления по наименований полигонов на текстовом слое чертежа со значениями атрибута.</li>
+<li><strong>Форма для перехода</strong>  — выберите форму, которая будет отображаться в информационной панели для объекта, выбранного на чертеже.</li>
+<li><strong>Форма на чертеже</strong> — выберите форму, которая будет отображаться при нажатии кнопки «<strong>Перейти к записи</strong>» в информационной панели для объекта, выбранного на чертеже.</li>
+<li><strong>Создать уровень связи</strong> — нажмите эту кнопку, чтобы связать ещё один слой чертежа с шаблоном записи.</li>
+</ul>
+</li>
+<li><strong>Маркеры</strong>
+<ul>
+<li><strong>Шаблон записи</strong> — выберите шаблон, записи которого будут отображаться как маркеры на плане.</li>
+<li><strong>Форма для перехода</strong> — выберите форму, которая будет отображаться в информационной панели для маркера, выбранного на чертеже.</li>
+<li><strong>Форма на чертеже</strong> — выберите форму, которая будет отображаться при нажатии кнопки «<strong>Перейти к записи</strong>» в информационной панели на чертеже.</li>
+<li><strong>Таблица</strong> — выберите таблицу, которая будет отображаться на вкладке «<strong>Заявки</strong>» слева от плана. Если для таблицы назначено <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2402">представление карточек</a>, то оно будет отображаться вместо таблицы.</li>
+<li><strong>Привязка к слоям</strong> — укажите для каждого уровня связи атрибут типа «<strong>Запись</strong>» из шаблона маркеров, ссылающийся на шаблон записи, заданный в <strong>свойствах связей</strong>. Маркеры будут привязаны к соответствующим слоям.</li>
+</ul>
+</li>
+<li><strong>Метаданные</strong>
+<ul>
+<li><strong>Цвет объектов</strong> — выберите атрибуты типа «<strong>Список значений</strong>» из шаблонов, привязанных к слоям в <strong>свойствах связей</strong>. Цвет полигонов на плане будет соответствовать значениям выбранных атрибутов. Кроме того, с помощью вкладки «<strong>Цвета</strong>» слева от плана пользователь сможет отфильтровать полигоны по значениям выбранных атрибутов.</li>
+</ul>
+</li>
+</ul>
+<p>Для того чтобы настроить свойства поля атрибута типа «<strong>Чертёж</strong>», выберите поле и нажимайте блоки «<strong>Связи</strong>», «<strong>Маркеры</strong>» и «<strong>Метаданные</strong>», как показано на иллюстрации.</p>
+<figure class="screenshot_with_caption">
+<p><img alt="Настройка свойств связей для поля атрибута типа «Чертёж»" src="https://kb.comindware.ru/assets/form_dynamic_elements_attribute_drawing_links_configure.png"/></p>
+<figcaption class="caption">Настройка свойств связей для поля атрибута типа «Чертёж»</figcaption>
+</figure>
+<figure class="screenshot_with_caption">
+<p><img alt="Поле атрибута типа «Чертёж»: загруженный план и привязанные к нему данные" src="https://kb.comindware.ru/assets/drawing_on_form.png"/></p>
+<figcaption class="caption">Поле атрибута типа «Чертёж»: загруженный план и привязанные к нему данные</figcaption>
+</figure>
+<h3 id="число">Число</h3>
+<p>Представление поля атрибута типа «<strong>Число</strong>» на форме определяется свойствами поля и <strong>форматом отображения</strong>, заданным в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2251">свойствах атрибута</a>.</p>
+<p>Помимо <a class="mkdocs_imported_link" href="#общие-свойства-полей">общих свойств</a> у этого поля предусмотрены следующие свойства:</p>
+<ul>
+<li><strong>Минимум</strong> — укажите минимально допустимое значение, которое может вести в поле пользователь.</li>
+<li>
+<p><strong>Максимум</strong> — укажите максимально допустимое значение, которое может вести в поле пользователь.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Логика корректировки значения</p>
+<p>При вводе значения за пределами указанных лимитов значение будет автоматически скорректировано.</p>
+<p>Например, если минимальное значение — <code>50,0</code>, максимальное — <code>50,5</code>, то при вводе значения <code>50,9</code> оно будет преобразовано в <code>50,5</code>.</p>
+</div>
+</li>
+</ul>
+<h3 id="штрихкод">Штрихкод</h3>
+<p>Представление поля атрибута типа «<strong>Штрихкод</strong>» на форме определяется свойствами поля и <strong>форматом отображения</strong>, заданным в <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2393">свойствах атрибута</a>.</p>
+<p>У этого поля предусмотрены только <a class="mkdocs_imported_link" href="#общие-свойства-полей">общие свойства</a>.</p>
+<h4 id="пример-использования_6">Пример использования</h4>
+<ol class="colored_numbers_list">
+<li>
+<p>Создайте и поместите на форму атрибут <em>«Веб-сайт магазина»</em>:</p>
+<ul>
+<li><strong>Тип данных:</strong> <strong>Штрихкод</strong></li>
+<li><strong>Формат отображения:</strong> <strong>QR-код</strong></li>
+</ul>
+</li>
+<li>
+<p>Откройте форму и нажмите кнопку «<strong>Изменить</strong>» под QR-кодом.</p>
+</li>
+<li>Отобразится окно ввода данных QR-кода.</li>
+<li>Введите гиперссылку, например <code>https://mycompany.ru/store</code></li>
+<li>Нажмите кнопку «<strong>Сохранить</strong>».</li>
+<li>Проверьте сформированный QR-код, отсканировав его с помощью смартфона.</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Отображение и редактирование QR-кода на форме" src="https://kb.comindware.ru/assets/form_dynamic_elements_attribute_barcode_appearance.png"/></p>
+<figcaption class="caption">Отображение и редактирование QR-кода на форме</figcaption>
+</figure>
+<h2 id="form_dynamic_elements_embedded_form">Настройка вложенной формы</h2>
+<p>На форму можно добавлять вложенные формы текущего шаблона записи и формы связанных с ним шаблонов.</p>
+<p>Формы, которые можно добавить как вложенные, отображаются в панели элементов конструктора формы. Формы связанного шаблона отображаются в списке элементов соответствующего атрибута типа «<strong>Запись</strong>».</p>
+<p>На форму можно добавить вложенные формы неограниченного уровня вложенности. Если вложенная форма уже содержит в себе другую вложенную форму, то на итоговой форме для пользователя будут отображены все вложенные формы.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Нельзя создавать бесконечные циклы из вложенных друг в друга форм. Например, если на форму №1 добавлена форма №2 в качестве вложенной, то в конструкторе формы №2 форма №1 будет недоступна в панели элементов. Это правило действует при любом уровне вложенности форм.</p>
+</div>
+<p>Операции для кнопок на вложенной форме выполняются в контексте записи, отображенной на вложенной форме.</p>
+<p>Для вложенной формы предусмотрены следующие свойства:</p>
+<ul>
+<li><strong>Отображаемое название</strong> — наглядное название вложенной формы, не отображается для пользователя;</li>
+<li><strong>Системное имя</strong> — уникальное имя вложенной формы в рамках текущей формы, используемое для настройки <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2537">правил для формы</a>. Не должно начинаться с цифры. Рекомендуется использовать буквы латинского алфавита, цифры и символ «_». Заполняется автоматически по названию.</li>
+<li><strong>Путь к атрибуту</strong> — показывает полный путь к форме:
+<ul>
+<li>для формы текущего шаблона отображается системное имя исходной формы;</li>
+<li>для формы из связанного шаблона отображается цепочка системных имён атрибутов и системное имя исходной формы.</li>
+</ul>
+</li>
+<li><strong>Доступ</strong> — режим доступа к данным на вложенной форме и её отображения:
+<ul>
+<li><strong>Разрешить ввод</strong> — пользователь сможет вводить данные в поля вложенной формы.</li>
+<li><strong>Только чтение</strong> — данные на вложенной можно будет только просматривать.</li>
+<li><strong>Скрыть</strong> — вложенная форма не будет отображаться на текущей форме. Показать скрытую вложенную форму можно с помощью <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2537">правил для формы</a>.</li>
+</ul>
+</li>
+<li><strong>Редактировать форму</strong> — нажмите эту кнопку, чтобы перейти к конструктору исходной формы.</li>
+</ul>
+<figure class="screenshot_with_caption">
+<p><img alt="Добавление вложенной формы и настройка её свойств" src="https://kb.comindware.ru/assets/form_dynamic_elements_embedded_form_configure.png"/></p>
+<figcaption class="caption">Добавление вложенной формы и настройка её свойств</figcaption>
+</figure>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2271">Формы. Определения, редактирование, удаление, использование списка форм</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2530">Статические элементы формы: области, вкладки, колонки, статичный текст. Настройка представления</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2252">Атрибуты. Определения, типы, настройка, архивирование, удаление</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

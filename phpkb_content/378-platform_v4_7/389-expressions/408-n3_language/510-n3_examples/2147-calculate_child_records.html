@@ -1,0 +1,28 @@
+<h1>Вычисление дочерних записей всех уровней вложенности</h1><p>В <strong>Comindware</strong> <strong>Business</strong> <strong>Application</strong> <strong>Platform</strong> существует возможность построения взаимных связей как между шаблонами записи, так и внутри одного шаблона записи, например, для выстраивания древовидной структуры (работы, подразделения и т. д.). Данная статья применима как раз в случае реализации древовидной структуры связей и предоставляет пример выражения для получения всех дочерних записей какой-либо записи с учетом всех уровней вложенности.</p>
+<div>
+<table class="source_code_container">
+<tbody>
+<tr>
+<td class="source_code">
+<p style="margin-bottom: 0in;">@prefix object: &lt;http://comindware.com/ontology/object#&gt;.</p>
+<p style="margin-bottom: 0in;">@prefix assert: &lt;http://comindware.com/logics/assert#&gt;.</p>
+<p style="margin-bottom: 0in;">{</p>
+<p style="margin-bottom: 0in;">    ("Rabotypoproektu" "Dochernieraboty") object:findProperty ?dochprop.</p>
+<p style="margin-bottom: 0in;">    ("Rabotypoproektu" "Vsedochernie") object:findProperty ?vsedochprop.</p>
+<p style="margin-bottom: 0in;">   </p>
+<p style="margin-bottom: 0in;">    (</p>
+<p style="margin-bottom: 0in;">               {?item ?dochprop ?value.}</p>
+<p style="margin-bottom: 0in;">        {</p>
+<p style="margin-bottom: 0in;">            ?item ?dochprop ?docki.</p>
+<p style="margin-bottom: 0in;">            ?docki ?vsedochprop ?value.</p>
+<p style="margin-bottom: 0in;">        }</p>
+<p style="margin-bottom: 0in;">    )assert:union true</p>
+<span style="font-size: 11.0pt; line-height: 115%; font-family: 'Calibri',sans-serif;">}</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>где:</strong></p>
+<p><strong><em>Rabotypoproektu</em></strong> — системное имя шаблона записи, где реализована древовидная структура связей (в данном примере это «Работы по проекту»);</p>
+<p><strong><em>Dochernieraboty</em></strong> — системное имя атрибута с типом данных «Запись», который находится в указанном шаблоне записи, ссылается на него же, и который хранит связь для дочерних записей;</p>
+<p><strong><em>Vsedochernie</em></strong> — системное имя атрибута с типом данных «Запись», который находится в указанном шаблоне записи, и в котором происходит данное вычисление (т. е. переиспользуем вычисляемый атрибут, в котором происходит данное вычисление).</p>

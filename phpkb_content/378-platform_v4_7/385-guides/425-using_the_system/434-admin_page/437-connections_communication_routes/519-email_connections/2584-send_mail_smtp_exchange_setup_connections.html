@@ -1,0 +1,446 @@
+<h1>Отправка эл. почты из сценариев через SMTP и Exchange. Настройка подключения, пути передачи данных и сценария</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#порядок-настройки-отправки-эл-писем-из-сценария"> <span class="md-ellipsis"> Порядок настройки отправки эл. писем из сценария </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-подключения-к-почтовому-серверу-для-отправки-почты-из-сценария"> <span class="md-ellipsis"> Настройка подключения к почтовому серверу для отправки почты из сценария </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-пути-передачи-данных-для-отправки-эл-почты-из-сценария"> <span class="md-ellipsis"> Настройка пути передачи данных для отправки эл. почты из сценария </span> </a><nav aria-label="Настройка пути передачи данных для отправки эл. почты из сценария" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#основные-свойства"> <span class="md-ellipsis"> Основные свойства </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#атрибуты-сообщения"> <span class="md-ellipsis"> Атрибуты сообщения </span> </a><nav aria-label="Атрибуты сообщения" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#создание-собственного-атрибута-сообщения"> <span class="md-ellipsis"> Создание собственного атрибута сообщения </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#интеграция"> <span class="md-ellipsis"> Интеграция </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-шаблона-записи-и-сценария-для-отправки-эл-почты"> <span class="md-ellipsis"> Настройка шаблона записи и сценария для отправки эл. почты </span> </a><nav aria-label="Настройка шаблона записи и сценария для отправки эл. почты" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-шаблона-записи"> <span class="md-ellipsis"> Настройка шаблона записи </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#настройка-сценария"> <span class="md-ellipsis"> Настройка сценария </span> </a></li>
+</ul>
+</nav></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#тестирование"> <span class="md-ellipsis"> Тестирование </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p>В <strong>Comindware Business Application Platform</strong> можно настроить отправку эл. почты из <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2151">сценариев</a>. При этом письма могут содержать данные из шаблонов, в том числе вложенные файлы.</p>
+<p>Для отправки эл. почты с помощью сценариев используются подключения типов «<strong>Отправка эл. почты через SMTP</strong>» и «<strong>Отправка эл. почты через Exchange</strong>». В <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2360">процессах</a> используются подключения типа «<strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2394">Отправка эл. почты из процесса</a></strong>».</p>
+<p>Здесь представлены общие инструкции по настройке подключения к почтовому серверу по протоколу SMTP или Exchange, пути передачи данных и сценария для отправки эл. писем.</p>
+<h2 id="порядок-настройки-отправки-эл-писем-из-сценария">Порядок настройки отправки эл. писем из сценария</h2>
+<ol class="colored_numbers_list">
+<li>Настройте <a class="mkdocs_imported_link" href="#настройка-подключения-к-почтовому-серверу-для-отправки-почты-из-сценария">подключение</a> к почтовому серверу типа «<strong>Отправка почты через SMTP</strong>» или «<strong>Отправка эл. почты через Exchange</strong>».</li>
+<li>Настройте <a class="mkdocs_imported_link" href="#настройка-пути-передачи-данных-для-отправки-эл-почты-из-сценария">путь передачи данных</a> типа «<strong>Отправка эл. почты через SMTP</strong>» или «<strong>Отправка эл. почты через Exchange</strong>», использующий созданное подключение.</li>
+<li>Настройте <a class="mkdocs_imported_link" href="#настройка-шаблона-записи">шаблон</a> с данными для эл. писем.</li>
+<li>Настройте <a class="mkdocs_imported_link" href="#настройка-сценария">сценарий</a>, который будет отправлять письма с данными из шаблона записи посредством настроенных подключения и пути передачи данных.</li>
+</ol>
+<h2 id="настройка-подключения-к-почтовому-серверу-для-отправки-почты-из-сценария">Настройка подключения к почтовому серверу для отправки почты из сценария</h2>
+<ol class="colored_numbers_list">
+<li>Откройте страницу «<strong>Администрирование</strong>» — «<strong>Подключения</strong>».</li>
+<li>Откройте двойным нажатием в списке или создайте создайте <strong>подключение к электронной почте</strong> типа «<strong>Отправка почты через SMTP</strong>» или «<strong>Отправка эл. почты через Exchange</strong>».</li>
+<li>
+<p>Настройте свойства подключения:</p>
+<ul>
+<li><strong>Системное имя</strong> — введите уникальное имя подключения. Рекомендуется использовать буквы латинского алфавита, цифры и символ «_».</li>
+<li><strong>Отключить</strong> — установите этот флажок, если требуется временно деактивировать данное подключение.</li>
+<li><strong>Описание</strong> — введите наглядное описание подключения, например <em>«Подключение для отправки писем из сценариев»</em>.</li>
+<li><strong>Запись в файловые журналы</strong> — выберите, какие события следует записывать в журналы:
+<ul>
+<li><strong>Полные сведения об обработке сообщения</strong>;</li>
+<li><strong>Только ошибки</strong>;</li>
+<li><strong>Отключить</strong> — не регистрировать в журнале события отправки писем.</li>
+</ul>
+</li>
+<li><strong>Для SMTP-сервера</strong>
+<ul>
+<li><strong>Адрес почтового сервера</strong> — введите адрес SMTP-сервера <u>без указания протокола (<code>SMTP</code>, <code>HTTPS</code>, <code>HTTP</code>)</u>.</li>
+<li><strong>Порт</strong> — введите номер порта SMTP-сервера.</li>
+<li><strong>Шифрование</strong> — выберите протокол шифрования, который поддерживает SMTP-сервер:
+<ul>
+<li><strong>Отсутствует</strong> — не использовать шифрование;</li>
+<li><strong>SSL</strong>;</li>
+<li><strong>TLS</strong>.</li>
+</ul>
+</li>
+<li><strong>Проверять соединение без отправки сообщения</strong> — установите этот флажок, чтобы проверить соединение без указания получателей тестового письма.</li>
+<li><strong>Адреса получателей для проверки работоспособности подключения</strong> — укажите один или несколько (через запятую) адресов эл. почты для проверки соединения.</li>
+</ul>
+</li>
+<li><strong>Для сервера Exchange</strong>
+<ul>
+<li><strong>URL веб-сервера Exchange</strong> — введите адрес почтового сервера <u>с указанием протокола (<code>HTTPS</code>, <code>HTTP</code>)</u>.</li>
+<li><strong>Версия Exchange</strong> — выберите версию сервера Exchange.</li>
+</ul>
+</li>
+<li><strong>Тип аутентификации</strong> — выберите способ проверки подлинности, используемый сервером:
+<ul>
+<li><strong>Отсутствует</strong>;</li>
+<li><strong>Базовая</strong>;</li>
+<li><strong>Аутентификация Windows</strong>.</li>
+</ul>
+</li>
+<li><strong>Имя пользователя</strong> — укажите учетную запись для подключения к почтовому серверу.</li>
+<li><strong>Пароль</strong> — введите пароль для подключения к почтовому серверу.</li>
+<li><strong>Домен</strong> — укажите домен пользователя почтового сервера.</li>
+<li><strong>Имя отправителя</strong> — укажите имя, которое будет указано в отправляемых письмах.</li>
+<li>
+<p><strong>Адрес эл. почты отправителя</strong> — укажите адрес эл. почты, который будет указан в отправляемых письмах. Почтовый сервер может проверять соответствие адреса отправителя и <strong>имени пользователя</strong>, отправляющего почту.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Если <strong>адрес</strong> или <strong>имя отправителя</strong> не совпадает с адресом и именем, указанным в учётной записи, используемой для подключения к почтовому серверу, сервер должен поддерживать замену данных отправителя. В противном случае, почта не будет отправляться.</p>
+</div>
+</li>
+</ul>
+</li>
+<li>
+<p>Нажмите кнопку «<strong>Проверить соединение</strong>».</p>
+</li>
+<li>Если используется SMTP-сервер, удостоверьтесь, что получателям пришло тестовое письмо от настроенного отправителя.</li>
+<li>Чтобы просмотреть журнал событий отправки писем, нажмите кнопку «<strong>Скачать журнал</strong>».</li>
+<li>Сохраните подключение.</li>
+</ol>
+<h2 id="настройка-пути-передачи-данных-для-отправки-эл-почты-из-сценария">Настройка пути передачи данных для отправки эл. почты из сценария</h2>
+<p>Путь передачи данных для отправки эл. почты служит для преобразования и передачи данных из <strong>Comindware Business Application Platform</strong> в эл. письмо.</p>
+<ol class="colored_numbers_list">
+<li>Откройте страницу «<strong>Администрирование</strong>» — «<strong>Архитектура</strong>» или страницу «<strong>Администрирование</strong>» приложения.</li>
+<li>Выберите пункт «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2201"><strong>Пути передачи данных</strong></a>» <em aria-hidden="true" class="fa-light fa-route">‌<!--icon--></em>.</li>
+<li>Откройте двойным нажатием в списке или создайте создайте <strong>подключение к электронной почте</strong> типа «<strong>Отправка почты через SMTP</strong>» или «<strong>Отправка эл. почты через Exchange</strong>».</li>
+<li>
+<p>Настройте свойства пути передачи данных на следующих вкладках:</p>
+<ul>
+<li><a class="mkdocs_imported_link" href="#основные-свойства"><strong>Основные свойства</strong></a></li>
+<li><a class="mkdocs_imported_link" href="#атрибуты-сообщения"><strong>Атрибуты сообщения</strong></a></li>
+<li><a class="mkdocs_imported_link" href="#интеграция"><strong>Интеграция</strong></a></li>
+</ul>
+</li>
+<li>
+<p>Сохраните путь передачи данных.</p>
+</li>
+</ol>
+<h3 id="основные-свойства">Основные свойства</h3>
+<p>На вкладке «<strong>Основные свойства</strong>» настройте параметры использования пути передачи данных.</p>
+<ul>
+<li><strong>Подключение</strong> — выберите <a class="mkdocs_imported_link" href="#настройка-подключения-к-почтовому-серверу-для-отправки-почты-из-сценария">подключение для отправки эл. почты из сценариев через SMTP или Exchange</a>.</li>
+<li><strong>Системное имя</strong> — введите уникальное имя пути передачи данных. Рекомендуются буквы латинского алфавита, цифры и символ «_».</li>
+<li><strong>Отключить</strong> — установите этот флажок, если требуется временно деактивировать путь передачи данных.</li>
+<li><strong>Описание</strong> — введите наглядное описание пути передачи данных, например <em>«Путь для отправки писем из сценариев»</em>.</li>
+<li><strong>Номер шины данных</strong> — выберите номер от 0 до 3, если требуется распределить потоки данных нескольких путей для повышения производительности.</li>
+</ul>
+<h3 id="атрибуты-сообщения">Атрибуты сообщения</h3>
+<p>На вкладке «<strong>Атрибуты сообщения</strong>» настройте атрибуты, значения которых будут подставляться в содержимое в эл. письма с помощью вкладки <a class="mkdocs_imported_link" href="#интеграция">«<strong>Интеграция</strong>»</a>.</p>
+<p>Значения атрибутам сообщения необходимо присвоить в <a class="mkdocs_imported_link" href="#настройка-сценария">сценарии</a> с помощью действия «<strong>Изменить значения переменных</strong>». Затем в сценарии следует выполнить действие «<strong>Отправить сообщение</strong>».</p>
+<ol class="colored_numbers_list">
+<li>В таблице «<strong>Запрос</strong>» настройте готовые атрибуты сообщения:</li>
+</ol>
+<ul>
+<li><strong>To</strong> — получатели письма (массив объектов).
+<ul>
+<li><strong>Name</strong> — имя получателя (строка).</li>
+<li><strong>Address</strong> — адрес эл. почты (строка).</li>
+</ul>
+</li>
+<li><strong>Attachments</strong> — прикреплённые файлы (массив объектов).
+<ul>
+<li><strong>Name</strong> — название файла (строка).</li>
+<li><strong>Extension</strong> — расширение файла (строка).</li>
+<li><strong>Content</strong> — содержимое файла (строка).</li>
+</ul>
+</li>
+<li><strong>Cc</strong> — копии (массив объектов).
+<ul>
+<li><strong>Name</strong> — имя получателя (строка).</li>
+<li><strong>Address</strong> — адрес эл. почты (строка).</li>
+</ul>
+</li>
+<li><strong>Bcc</strong> — скрытые копии (массив объектов).
+<ul>
+<li><strong>Name</strong> — имя получателя (строка).</li>
+<li><strong>Address</strong> — адрес эл. почты (строка).</li>
+</ul>
+</li>
+<li><strong>CustomHeaders</strong> — дополнительные заголовки (массив объектов).
+<ul>
+<li><strong>Name</strong> — имя заголовка (строка).</li>
+<li><strong>Value</strong> — значение заголовка (строка).</li>
+<li><strong>ListValues</strong> — массив неименованных значений.</li>
+</ul>
+</li>
+</ul>
+<ol class="colored_numbers_list" start="2">
+<li>При необходимости в таблицах «<strong>Ответ</strong>» и «<strong>Ответ</strong>» настройте атрибуты, в которые будет помещаться отклик SMTP-сервера после отправки письма.</li>
+</ol>
+<h4 id="создание-собственного-атрибута-сообщения">Создание собственного атрибута сообщения</h4>
+<p>В качестве примера (для выполнения дальнейших шагов данной инструкции) создайте следующие атрибуты сообщения:</p>
+<ul>
+<li><em>FullName</em> типа «<strong>Строка</strong>» для Ф. И. О. получателя;</li>
+<li><em>Filename</em> типа «<strong>Строка</strong>» для имени прикрепляемого файла;</li>
+<li><em>RecepientEmail</em> типа «<strong>Строка</strong>» для эл. почты получателя;</li>
+<li><em>Subject</em> типа «<strong>Строка</strong>» для темы письма;</li>
+<li><em>Body</em> типа «<strong>Строка</strong>» для темы письма;</li>
+<li><em>ReplyAddress</em> типа «<strong>Строка</strong>» для выбора электронной почты, на которую должны приходить ответные письма.</li>
+</ul>
+<p>Чтобы создать атрибут сообщения, нажмите кнопку «<strong>Добавить</strong>» над таблицей с атрибутами и заполните свойства атрибута:</p>
+<ul>
+<li><strong>Системное имя</strong> — введите уникальное имя атрибута, по которому вы будете обращаться к нему в сценарии.</li>
+<li><strong>Тип</strong> — выберите тип атрибута:
+<ul>
+<li><strong>Строка</strong></li>
+<li><strong>Число</strong></li>
+<li><strong>Длительность</strong></li>
+<li><strong>Дата и время</strong></li>
+<li><strong>Временной период</strong></li>
+<li><strong>Логический</strong></li>
+<li><strong>Объект</strong></li>
+<li><strong>Ключ-значение</strong></li>
+</ul>
+</li>
+<li><strong>Описание</strong> — введите наглядное название атрибута.</li>
+<li><strong>Обязательный</strong>, <strong>Не пустой</strong>, <strong>Массив</strong> — установите флажки согласно назначению атрибута.</li>
+</ul>
+<h3 id="интеграция">Интеграция</h3>
+<p>На вкладке «<strong>Интеграция</strong>» настройте дополнительные свойства эл. письма, заполнив их статическими значениями или заполнителями <a class="mkdocs_imported_link" href="#атрибуты-сообщения"><strong>атрибутов сообщения</strong></a>.</p>
+<div class="notice notice-error">
+<p class="admonition-title">Внимание!</p>
+<p>Прежде чем подставлять в письмо заполнители атрибутов сообщения, их необходимо добавить в таблицу «<strong>Запрос</strong>» на вкладке «<strong><a class="mkdocs_imported_link" href="#атрибуты-сообщения">Атрибуты сообщения</a></strong>». В противном случае путь передачи данных будет автоматически отключён.</p>
+</div>
+<div class="notice notice-warning">
+<p class="admonition-title">Подстановка значений атрибутов сообщения в эл. письмо</p>
+<ul>
+<li>Чтобы поместить значение <strong>атрибута сообщения</strong> в эл. письмо, введите его системное имя в фигурных скобках <code>{ }</code> — <strong>заполнитель</strong> — в соответствующее поле письма на вкладке «<strong>Интеграция</strong>».</li>
+<li>В текстовые поля (шаблон темы, шаблон текста сообщения, получатели, копия, скрытая копия) можно вводить произвольный текст и подставлять <strong>заполнители атрибутов сообщения</strong>.</li>
+<li>
+<p>Например, в поле «<strong>Шаблон темы</strong>» можно ввести строку:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>Уведомление «{Title}» от {Date} </code></pre>
+</div>
+<p>Здесь: <code>{Title}</code> и <code>{Date}</code> — заполнители атрибутов сообщения, содержащее название и дату уведомления.</p>
+</li>
+</ul>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Атрибуты сообщения типа «<strong>Объект</strong>» нельзя подставить в письмо посредством заполнителей.</p>
+</div>
+</div>
+<ul>
+<li>
+<p><strong>Шаблон темы</strong> — введите заголовок письма, например:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="n">Документ</span> <span class="p">{</span><span class="n">Filename</span><span class="p">}</span> <span class="n">к</span> <span class="n">рассмотрению</span><span class="p">.</span></code></pre>
+</div>
+</li>
+<li>
+<p><strong>Шаблон текста сообщения</strong> — введите текст письма, например:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="n">Здравствуйте</span><span class="p">,</span> <span class="p">{</span><span class="n">FullName</span><span class="p">}</span><span class="o">!</span></code><br/><code></code><br/><code><span class="n">Рассмотрите</span> <span class="n">документ</span> <span class="p">{</span><span class="n">Filename</span><span class="p">}.</span></code></pre>
+</div>
+</li>
+<li>
+<p><strong>Дополнительные заголовки</strong> — введите служебные заголовки письма с помощью строковых литералов или заполнителей:</p>
+<ul>
+<li>
+<p>Имя заголовка — строка (заполнители не поддерживаются), например:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="err">#</span> <span class="n">Заголовок</span> <span class="n">адреса</span> <span class="n">для</span> <span class="n">ответа</span></code><br/><code><span class="n">Reply</span><span class="o">-</span><span class="n">To</span></code></pre>
+</div>
+</li>
+<li>
+<p>Значение заголовка — строка или заполнитель, например:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="err">#</span> <span class="n">Адрес</span> <span class="n">для</span> <span class="n">ответа</span> <span class="n">на</span> <span class="n">письмо</span></code><br/><code><span class="p">{</span><span class="n">ReplyAddress</span><span class="p">}</span></code></pre>
+</div>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Получатели</strong>, <strong>Копия</strong>, <strong>Скрытая копия</strong> — укажите адресатов письма с помощью строковых литералов или заполнителей, например:</p>
+<ul>
+<li>
+<p><strong>Ф. И. О.</strong>:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="p">{</span><span class="n">FullName</span><span class="p">}</span></code></pre>
+</div>
+</li>
+<li>
+<p><strong>Адрес</strong>:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="p">{</span><span class="n">RecepientEmail</span><span class="p">}</span></code></pre>
+</div>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Прикреплённые файлы</strong></p>
+<ul>
+<li><strong>Название документа</strong> — введите строковый литерал с именем файла, включая расширение (заполнители не поддерживаются). Например:</li>
+</ul>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="n">example</span><span class="p">.</span><span class="n">txt</span></code></pre>
+</div>
+<ul>
+<li><strong>Содержимое документа</strong> — введите строку с содержимым файла в формате Base64 (заполнители не поддерживаются). Например:</li>
+</ul>
+<div class="highlight"><code><code></code></code>
+<pre><code>0K3RgtC+INC/0YDQuNC80LXRgCDRgdGC0YDQvtC60Lgg0LIg0LrQvtC00LjRgNC+0LLQutC1IEJhc2U2NC4=</code></pre>
+</div>
+<div class="notice notice-success">
+<p class="admonition-title">Формат Base64</p>
+<p><strong>Base64</strong> — это формат кодирования двоичных данных при помощи 64 символов ASCII. Он широко используется для представления файлов в содержимом письма.</p>
+<p>Например, строка:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="n">Это</span> <span class="n">пример</span> <span class="n">строки</span> <span class="n">в</span> <span class="n">кодировке</span> <span class="n">Base64</span><span class="p">.</span></code></pre>
+</div>
+<p>в формате Base64 будет выглядеть следующим образом:</p>
+<div class="highlight"><code><code></code></code>
+<pre><code>0K3RgtC+INC/0YDQuNC80LXRgCDRgdGC0YDQvtC60Lgg0LIg0LrQvtC00LjRgNC+0LLQutC1IEJhc2U2NC4=</code></pre>
+</div>
+</div>
+</li>
+</ul>
+<h2 id="настройка-шаблона-записи-и-сценария-для-отправки-эл-почты">Настройка шаблона записи и сценария для отправки эл. почты</h2>
+<p>В качестве примера настроим шаблон и сценарий для отправки эл. писем получателю из атрибута типа «<strong>Аккаунт</strong>» с вложенными файлами из атрибута типа «<strong>Документ</strong>».</p>
+<p>Аналогичным образом вы можете настроить формирование эл. писем из любых данных согласно требуемой бизнес-логике.</p>
+<h3 id="настройка-шаблона-записи">Настройка шаблона записи</h3>
+<ol class="colored_numbers_list">
+<li>Создайте шаблон записи <em>«Эл. письма»</em>.</li>
+<li>
+<p>Создайте следующие атрибуты:</p>
+<ul>
+<li><em>Получатель</em> типа «<strong>Аккаунт</strong>»;</li>
+<li><em>Вложение</em> типа «<strong>Документ</strong>».</li>
+</ul>
+</li>
+<li>
+<p>Создайте кнопку <em>«Отправить письмо»</em> со следующими свойствами:</p>
+<ul>
+<li><strong>Контекст операции: запись</strong></li>
+<li><strong>Операция: вызвать событие «Нажата кнопка»</strong></li>
+<li><strong>Результат выполнения: обновить данные</strong></li>
+</ul>
+</li>
+<li>
+<p>Поместите атрибуты <em>«Получатель»</em> и <em>«Вложение»</em> на форму.</p>
+</li>
+<li>Поместите кнопку <em>«Отправить письмо»</em> на форму.</li>
+</ol>
+<h3 id="настройка-сценария">Настройка сценария</h3>
+<div class="notice notice-tip">
+<p class="admonition-title">Сценарий для отправки почты</p>
+<p>Сценарий для отправки почты можно запускать по любому <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2346">событию</a></strong>:</p>
+<ul>
+<li>нажатие кнопки;</li>
+<li>создание записи;</li>
+<li>изменение записи;</li>
+<li>запуск процесса;</li>
+<li>получение сообщения;</li>
+<li>вход токена в элемент диаграммы;</li>
+<li>выход токена из элемента диаграммы.</li>
+</ul>
+</div>
+<ol class="colored_numbers_list">
+<li>Создайте сценарий <em>«Отправка писем»</em>.</li>
+<li>В свойствах события «<strong>Нажатие кнопки</strong>» выберите <strong>контекстный шаблон</strong> <em>«Эл. письма»</em> и <strong>кнопку</strong> <em>«Отправить письмо»</em>.</li>
+<li>
+<p>Создайте действие «<strong>Изменить значения переменных</strong>» со следующими свойствами:</p>
+<ul>
+<li><strong>Операция со значениями переменных: заменить</strong></li>
+<li><strong>Набор переменных:</strong> <em>mail</em></li>
+</ul>
+</li>
+<li>
+<p>В свойствах действия «<strong>Изменить значения переменных</strong>» настройте перечисленные ниже переменные.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Сопоставление переменных-объектов с атрибутами сообщения</p>
+<p>Имена переменных, значения которых передаются в <a class="mkdocs_imported_link" href="#атрибуты-сообщения"><strong>атрибуты сообщения</strong></a> с помощью действия сценария «<strong>Отправить сообщение</strong>», должны совпадать с системными именами атрибутов сообщения.</p>
+<p>Для передачи значения переменной в атрибут сообщения типа «<strong>Объект</strong>», необходимо создать переменную с такой же структурой, как у атрибута сообщения, создав дочерние переменные:</p>
+<ul>
+<li>Создайте переменную, оставив её значение пустым.</li>
+<li>Установите флажок у имени родительской переменной в списке и нажмите кнопку «<strong>Создать</strong>».</li>
+<li>Дважды нажмите значок <em class="fa-light fa-angle-down anchor">‌<!--icon--></em> рядом с родительской переменной.</li>
+<li>В таблице отобразится дочерняя переменная.</li>
+</ul>
+</div>
+<ul>
+<li>
+<p><em>To</em> — с дочерними переменными:</p>
+<ul>
+<li><em>Address</em> — <strong>значение: формула</strong></li>
+</ul>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="err">$</span><span class="n">Poluchatel</span><span class="o">-&gt;</span><span class="n">mbox</span></code></pre>
+</div>
+<ul>
+<li><em>Name</em> — <strong>значение: формула</strong></li>
+</ul>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="err">$</span><span class="n">Poluchatel</span><span class="o">-&gt;</span><span class="n">fullName</span></code></pre>
+</div>
+</li>
+<li>
+<p><em>FullName</em> — <strong>значение: формула</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="err">$</span><span class="n">Poluchatel</span><span class="o">-&gt;</span><span class="n">fullName</span></code></pre>
+</div>
+</li>
+<li>
+<p><em>Filename</em> — <strong>значение: N3</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="c"># Импортируем функции для работы с записями и документами</span></code><br/><code><span class="k">@prefix</span> <span class="nn">object:</span> <span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code><br/><code><span class="k">@prefix</span> <span class="nn">document:</span> <span class="nv">&lt;http://comindware.com/ontology/document#&gt;</span><span class="p">.</span></code><br/><code></code><br/><code><span class="p">{</span></code><br/><code>    <span class="c"># Находим атрибут Vlozhenie (Вложение) в шаблоне Elpisma (Эл. письма).</span></code><br/><code>    <span class="p">(</span><span class="s">"Elpisma"</span> <span class="s">"Vlozhenie"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?VlozhenieAttribute</span><span class="p">.</span></code><br/><code>    <span class="c"># Присваиваем переменной ?Vlozhenie объект из атрибута «Вложение».</span></code><br/><code>    <span class="err">?item</span> <span class="err">?VlozhenieAttribute</span> <span class="err">?Vlozhenie</span><span class="p">.</span></code><br/><code>    <span class="c"># В переменную ?currentDocument помещаем</span></code><br/><code>    <span class="c"># последнюю добавленную версию документа.</span></code><br/><code>    <span class="err">?Vlozhenie</span> <span class="nn">document</span><span class="p">:</span><span class="nt">currentRevision</span> <span class="err">?currentDocument</span><span class="p">.</span></code><br/><code>    <span class="c"># Возвращаем имя текущего файла.</span></code><br/><code>    <span class="err">?currentDocument</span> <span class="nn">document</span><span class="p">:</span><span class="nt">name</span> <span class="err">?value</span><span class="p">.</span></code><br/><code><span class="p">}</span></code></pre>
+</div>
+</li>
+<li>
+<p><em>Attachments</em> — с дочерними переменными:</p>
+<ul>
+<li><em>Name</em> — <strong>значение: N3</strong></li>
+</ul>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="c"># Импортируем функции для работы с записями и документами</span></code><br/><code><span class="k">@prefix</span> <span class="nn">object:</span> <span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code><br/><code><span class="k">@prefix</span> <span class="nn">document:</span> <span class="nv">&lt;http://comindware.com/ontology/document#&gt;</span><span class="p">.</span></code><br/><code></code><br/><code><span class="p">{</span></code><br/><code>    <span class="c"># Находим атрибут Vlozhenie (Вложение) в шаблоне Elpisma (Эл. письма).</span></code><br/><code>    <span class="p">(</span><span class="s">"Elpisma"</span> <span class="s">"Vlozhenie"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?VlozhenieAttribute</span><span class="p">.</span></code><br/><code>    <span class="c"># Присваиваем переменной ?Vlozhenie объект из атрибута «Вложение».</span></code><br/><code>    <span class="err">?item</span> <span class="err">?VlozhenieAttribute</span> <span class="err">?Vlozhenie</span><span class="p">.</span></code><br/><code>    <span class="c"># В переменную ?currentDocument помещаем</span></code><br/><code>    <span class="c"># последнюю добавленную версию документа.</span></code><br/><code>    <span class="err">?Vlozhenie</span> <span class="nn">document</span><span class="p">:</span><span class="nt">currentRevision</span> <span class="err">?currentDocument</span><span class="p">.</span></code><br/><code>    <span class="c"># Возвращаем имя текущего файла.</span></code><br/><code>    <span class="err">?currentDocument</span> <span class="nn">document</span><span class="p">:</span><span class="nt">name</span> <span class="err">?value</span><span class="p">.</span></code><br/><code><span class="p">}</span></code></pre>
+</div>
+<ul>
+<li><em>Extension</em> — <strong>значение: N3</strong></li>
+</ul>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="c"># Импортируем функции для работы с записями и документами</span></code><br/><code><span class="k">@prefix</span> <span class="nn">object:</span> <span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code><br/><code><span class="k">@prefix</span> <span class="nn">document:</span> <span class="nv">&lt;http://comindware.com/ontology/document#&gt;</span><span class="p">.</span></code><br/><code></code><br/><code><span class="p">{</span></code><br/><code>    <span class="c"># Находим атрибут Vlozhenie (Вложение) в шаблоне Elpisma (Эл. письма).</span></code><br/><code>    <span class="p">(</span><span class="s">"Elpisma"</span> <span class="s">"Vlozhenie"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?VlozhenieAttribute</span><span class="p">.</span></code><br/><code>    <span class="c"># Присваиваем переменной ?Vlozhenie объект из атрибута «Вложение».</span></code><br/><code>    <span class="err">?item</span> <span class="err">?VlozhenieAttribute</span> <span class="err">?Vlozhenie</span><span class="p">.</span></code><br/><code>    <span class="c"># В переменную ?currentDocument помещаем</span></code><br/><code>    <span class="c"># последнюю добавленную версию документа.</span></code><br/><code>    <span class="err">?Vlozhenie</span> <span class="nn">document</span><span class="p">:</span><span class="nt">currentRevision</span> <span class="err">?currentDocument</span><span class="p">.</span></code><br/><code>    <span class="c"># Возвращаем расширение текущего файла.</span></code><br/><code>    <span class="err">?currentDocument</span> <span class="nn">document</span><span class="p">:</span><span class="nt">revisionExtension</span> <span class="err">?value</span><span class="p">.</span></code><br/><code><span class="p">}</span></code></pre>
+</div>
+<ul>
+<li><em>Content</em> — <strong>значение: N3</strong></li>
+</ul>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="c"># Импортируем функции для работы с записями и документами</span></code><br/><code><span class="k">@prefix</span> <span class="nn">object:</span> <span class="nv">&lt;http://comindware.com/ontology/object#&gt;</span><span class="p">.</span></code><br/><code><span class="k">@prefix</span> <span class="nn">document:</span> <span class="nv">&lt;http://comindware.com/ontology/document#&gt;</span><span class="p">.</span></code><br/><code></code><br/><code><span class="p">{</span></code><br/><code>    <span class="c"># Находим атрибут Vlozhenie (Вложение) в шаблоне Elpisma (Эл. письма).</span></code><br/><code>    <span class="p">(</span><span class="s">"Elpisma"</span> <span class="s">"Vlozhenie"</span><span class="p">)</span> <span class="nn">object</span><span class="p">:</span><span class="nt">findProperty</span> <span class="err">?VlozhenieAttribute</span><span class="p">.</span></code><br/><code>    <span class="c"># Присваиваем переменной ?Vlozhenie объект из атрибута «Вложение».</span></code><br/><code>    <span class="err">?item</span> <span class="err">?VlozhenieAttribute</span> <span class="err">?Vlozhenie</span><span class="p">.</span></code><br/><code>    <span class="c"># В переменную ?currentDocument помещаем</span></code><br/><code>    <span class="c"># последнюю добавленную версию документа.</span></code><br/><code>    <span class="err">?Vlozhenie</span> <span class="nn">document</span><span class="p">:</span><span class="nt">currentRevision</span> <span class="err">?currentDocument</span><span class="p">.</span></code><br/><code>    <span class="c"># Возвращаем содержимое текущего документа.</span></code><br/><code>    <span class="err">?currentDocument</span> <span class="nn">document</span><span class="p">:</span><span class="nt">content</span> <span class="err">?value</span><span class="p">.</span></code><br/><code><span class="p">}</span></code></pre>
+</div>
+</li>
+</ul>
+</li>
+<li>
+<p>Создайте действие «<strong>Отправить сообщение</strong>» со следующими свойствами:</p>
+<ul>
+<li><strong>Подключение:</strong> выберите <a class="mkdocs_imported_link" href="#настройка-подключения-к-почтовому-серверу-для-отправки-почты-из-сценария">подключение для отправки эл. почты из сценариев через SMTP или Exchange</a>.</li>
+<li><strong>Путь передачи данных:</strong> выберите <a class="mkdocs_imported_link" href="#настройка-пути-передачи-данных-для-отправки-эл-почты-из-сценария">путь передачи данных эл. почты из сценариев через SMTP или Exchange</a>.</li>
+<li><strong>Переменная с сообщением:</strong> <em>mail</em></li>
+</ul>
+</li>
+</ol>
+<h2 id="тестирование">Тестирование</h2>
+<ol class="colored_numbers_list">
+<li>Создайте запись в шаблоне <em>«Эл. письма»</em>.</li>
+<li>Выберите аккаунт, на эл. почту которого требуется отправить письмо.</li>
+<li>Загрузите файл в поле <em>«Вложение»</em>.</li>
+<li>Сохраните запись.</li>
+<li>Нажмите кнопку <em>«Отправить письмо»</em>.</li>
+<li>На эл. почту, выбранного аккаунта, придёт письмо с прикреплённым вложением.</li>
+</ol>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2585">Получение эл. почты с помощью сценариев через IMAP и Exchange. Настройка подключения, пути передачи данных и сценария </a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2394">Отправка эл. почты из процесса. Настройка подключения</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2205">Подключения. Типы, создание, настройка, удаление</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2201">Пути передачи данных. Типы, создание, настройка, удаление</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

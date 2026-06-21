@@ -1,0 +1,144 @@
+<h1>Ручное управление версиями приложения. Экспорт и импорт</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#введение"> <span class="md-ellipsis"> Введение </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#переход-к-ручному-управлению-версиями"> <span class="md-ellipsis"> Переход к ручному управлению версиями </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#экспорт-версии-приложения"> <span class="md-ellipsis"> Экспорт версии приложения </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#импорт-версии-приложения"> <span class="md-ellipsis"> Импорт версии приложения </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<div class="notice notice-error">
+<p class="admonition-title">Экспериментальная функция</p>
+<p>Представленная здесь функция находится на стадии разработки. См. <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=1339#experimental_feature_support">Поддержка экспериментальных функций</a>»</em>.</p>
+</div>
+<h2 id="введение">Введение</h2>
+<p>В <strong>Comindware Business Application Platform</strong> предусмотрены импорт и экспорт версий приложения посредством файлов с расширением <code>CTF</code>.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>В файле <code>CTF</code> по умолчанию сохраняется только конфигурация приложения, записи сохраняются только для шаблонов, у которых установлен флажок «<strong>Переносить данные при трансфере</strong>» на вкладке <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2221#record_template_properties">«<strong>Свойства</strong>»</a>.</p>
+</div>
+<h2 id="переход-к-ручному-управлению-версиями">Переход к ручному управлению версиями</h2>
+<ol class="colored_numbers_list">
+<li>В разделе <strong>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2209">Администрирование</a>»</strong> приложения выберите пункт «<strong>Управление версиями</strong>».</li>
+<li>
+<p>Нажмите заголовок страницы «<strong>Управление версиями через Git</strong>» и в раскрывающемся меню выберите пункт «<strong>Ручное управление версиями</strong>».</p>
+<figure class="screenshot_with_caption"><img alt="Переход к ручному управлению версиями" src="https://kb.comindware.ru/assets/verstion_control_switch_to_manual.png"/>
+<figcaption class="caption">Переход к ручному управлению версиями</figcaption>
+</figure>
+</li>
+<li>
+<p>Отобразится раздел «<strong>Ручное управление версиями</strong>» с двумя подразделами:</p>
+<ul>
+<li><strong>Экспорт</strong> — настройка аккаунта для подключения к Git и выбор или создание ветви в репозитории для хранения версий приложения.</li>
+<li><strong>Импорт</strong> — импорт версии приложения из репозитория Git.</li>
+</ul>
+<figure class="screenshot_with_caption"><img alt="Страница «Ручное управление версиями»" src="https://kb.comindware.ru/assets/manual_version_control.png"/>
+<figcaption class="caption">Страница «Ручное управление версиями»</figcaption>
+</figure>
+</li>
+</ol>
+<h2 id="экспорт-версии-приложения">Экспорт версии приложения</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>Перед экспортом приложения подготовьте его, как указано в параграфе <em>«<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2217#version_control_app_prepare">Подготовка приложения к экспорту</a>».</em></p>
+</div>
+<ol class="colored_numbers_list">
+<li>В подразделе «<strong>Экспорт</strong>» нажмите кнопку «<strong>Экспортировать</strong>».</li>
+<li>
+<p>Если при экспорте не будет выявлено ошибок, браузер скачает файл с системным именем приложения и расширением <code>.CTF</code> вида: <code>businessApplicationSystemName.ctf</code>.</p>
+<ul>
+<li>Импортируйте этот файл в целевое приложение.</li>
+</ul>
+</li>
+<li>
+<p>Если будут обнаружены ошибки, в браузере откроется вкладка с журналом ошибок в формате JSON.</p>
+<ul>
+<li>Устраните ошибки и повторите экспорт.</li>
+</ul>
+</li>
+</ol>
+<h2 id="импорт-версии-приложения">Импорт версии приложения</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<ul>
+<li>
+<p>После импорта версии приложения свойства имеющегося приложения, его шаблоны, атрибуты и другие сущности будут заменены импортированными. При этом имеющиеся записи и экземпляры процессов, а также значения атрибутов изменены не будут.</p>
+</li>
+<li>
+<p>При импорте и экспорте <strong>системное имя</strong> приложения следует оставлять неизменным во избежание неполадок. То есть системное имя приложения, в которое вы импортируете версию из файла <code>CTF</code>, должно совпадать с системным именем импортируемой версии приложения.</p>
+</li>
+</ul>
+</div>
+<ol class="colored_numbers_list">
+<li>В подразделе «<strong>Импорт</strong>» загрузите файл <code>CTF</code> в поле «<strong>Выберите файл .CTF с импортируемым приложением</strong>».</li>
+<li>
+<p>Отобразятся <strong>сведения об импортируемом приложении</strong> и параметры импорта:</p>
+<ul>
+<li><strong>Название</strong> — наименование приложения.</li>
+<li><strong>Системное имя</strong> — уникальное имя приложения.</li>
+<li><strong>Описание</strong> — комментарий относительно назначения приложения.</li>
+<li><strong>Дата экспорта</strong> — дата, когда приложение было экспортировано в файл CTF.</li>
+<li><strong>Сервер</strong> — адрес сервера, с которого было экспортировано приложение.</li>
+<li><strong>Версия</strong> — номер экспортированной версии приложения.</li>
+</ul>
+</li>
+<li>
+<p>Проверьте целостность приложения, нажав кнопку «<strong>Проверить</strong>».</p>
+</li>
+<li>
+<p>Отобразится окно с результатом проверки:</p>
+<figure class="screenshot_with_caption"><img alt="Результат проверки без ошибок" src="https://kb.comindware.ru/assets/manual_version_import_check_no_errors.png"/>
+<figcaption class="caption">Результат проверки без ошибок</figcaption>
+</figure>
+<figure class="screenshot_with_caption"><img alt="Результат проверки с ошибками" src="https://kb.comindware.ru/assets/manual_version_import_check_errors.png"/>
+<figcaption class="caption">Результат проверки с ошибками</figcaption>
+</figure>
+</li>
+<li>
+<p>При необходимости нажмите кнопку «<strong>Скачать результат проверки</strong>».</p>
+<ul>
+<li>Браузер скачает текстовый файл в формате JSON с именем <code>import validation.log</code>.</li>
+</ul>
+</li>
+<li>
+<p>Устраните обнаруженные проблемы и конфликты в исходном и целевом приложениях, экспортируйте исходное приложение заново, загрузите исправленный файл CTF и повторите проверку.</p>
+</li>
+<li>
+<p>После устранения всех проблем настройте <strong>параметры импорта</strong>:</p>
+<ul>
+<li><strong>Опубликовать диаграммы процессов после импорта</strong> — установите этот флажок, чтобы опубликовать все импортированные диаграммы процессов.</li>
+<li><strong>Состояния компонентов приложения после импорта</strong> — выберите состояние, в которое следует привести компоненты приложения после импорта.
+<ul>
+<li><strong>Импортировать состояния</strong> — будут активированы и приостановлены компоненты приложения, которые были активны и приостановлены в импортируемой версии.</li>
+<li><strong>Оставить текущие состояния</strong> — останутся активны те компоненты, которые активны в текущей версии приложения.</li>
+<li><strong>Активировать все компоненты</strong> — будут активированы все компоненты приложения.</li>
+<li><strong>Приостановить все компоненты</strong> — будут приостановлены все компоненты приложения.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<div class="notice notice-success">
+<p class="admonition-title">Определение</p>
+<p><strong>Компоненты приложения</strong> — это задачи и элементы бизнес-процессов, интеграции, подключения и прочие сервисы приложения. Список и состояния компонентов приложения отображаются на странице «<strong>Активность компонентов</strong>».</p>
+</div>
+<ol class="colored_numbers_list" start="8">
+<li>Нажмите кнопку «<strong>Импортировать</strong>».</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Настройка импорта приложения из файла CTF" src="https://kb.comindware.ru/assets/manual_version_import_properties.png"/></p>
+<figcaption class="caption">Настройка импорта приложения из файла CTF</figcaption>
+</figure>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2217">Управление версиями приложения</a></strong></p>
+<p><strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2216">Управление версиями через Git</a></strong></p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

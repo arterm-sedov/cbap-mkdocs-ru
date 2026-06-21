@@ -1,0 +1,101 @@
+<h1>Переменные приложения. Просмотр списка, настройка и использование</h1><div class="md-container" data-md-component="container">
+<div class="md-main__inner md-grid"><nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#definitions"> <span class="md-ellipsis"> Определения </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#использование-переменных-приложения-в-выражениях-n3-и-c-скриптах"> <span class="md-ellipsis"> Использование переменных приложения в выражениях N3 и C#-скриптах </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#просмотр-списка-и-настройка-переменных-приложения"> <span class="md-ellipsis"> Просмотр списка и настройка переменных приложения </span> </a></li>
+<li class="md-nav__item"><a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи"> <span class="md-ellipsis"> Связанные статьи </span> </a></li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<div class="notice notice-success">
+<h2 class="admonition-title" id="definitions">Определения</h2>
+<p><strong>Переменные приложения</strong> — это атрибуты с заданным значением, которые не привязаны к какому-либо шаблону. Их можно использовать в C#-скриптах и выражениях на языке N3 в любом шаблоне или сценарии.</p>
+<p>Переменные одного приложения доступны во всех остальных приложениях.</p>
+<p>Переменные приложения подходят для хранения данных, которые требуется использовать в нескольких шаблонах записи или приложениях.</p>
+<p>Например, с их помощью можно настроить автонумерацию записей, см. <em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2607">«Автонумерация записей с помощью формулы, C#-скрипта или выражения N3»</a></em>.</p>
+<p>Помимо переменных приложения в <strong>Comindware Business Application Platform</strong> имеются системные и локальные переменные, которые применяются в сценариях, см. подробнее <em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2399">«Использование переменных в сценарии»</a></em>.</p>
+</div>
+<h2 class="pageBreakBefore" id="использование-переменных-приложения-в-выражениях-n3-и-c-скриптах">Использование переменных приложения в выражениях N3 и C#-скриптах</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Внимание!</p>
+<p>Для корректного присвоения атрибуту значения переменной приложения их типы должны совпадать.</p>
+</div>
+<ul>
+<li>
+<p>Чтобы получить значение переменной приложения с помощью N3, используйте следующее выражение:</p>
+<p><strong>По системному имени переменной</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="c"># Импортируем функции для работы с переменными</span></code><br/><code><span class="k">@prefix</span> <span class="nn">globalvariable:</span> <span class="nv">&lt;http://comindware.com/ontology/variable#&gt;</span><span class="p">.</span></code><br/><code></code><br/><code><span class="p">{</span></code><br/><code>    <span class="c"># Находим переменную VariableSystemName в приложении SolutionSystemName</span></code><br/><code>    <span class="c"># по их системным именам</span></code><br/><code>    <span class="c"># и возвращаем значение переменной.</span></code><br/><code>    <span class="p">(</span><span class="s">"SolutionSystemName"</span> <span class="s">"VariableSystemName"</span><span class="p">)</span> <span class="nn">globalvariable</span><span class="p">:</span><span class="nt">getValueByAlias</span> <span class="err">?value</span><span class="p">.</span></code><br/><code><span class="p">}</span></code></pre>
+</div>
+<p><strong>По ID переменной</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="c"># Импортируем функции для работы с переменными</span></code><br/><code><span class="k">@prefix</span> <span class="nn">globalvariable:</span> <span class="nv">&lt;http://comindware.com/ontology/variable#&gt;</span><span class="p">.</span></code><br/><code></code><br/><code><span class="p">{</span></code><br/><code>    <span class="c"># Получаем значение переменной приложения</span></code><br/><code>    <span class="c"># по её ID (svar.1) и возвращаем её значение.</span></code><br/><code>    <span class="s">"svar.1"</span> <span class="nn">globalvariable</span><span class="p">:</span><span class="nt">getValueById</span> <span class="err">?value</span><span class="p">.</span></code><br/><code><span class="p">}</span></code></pre>
+</div>
+</li>
+<li>
+<p>Чтобы присвоить атрибуту значение переменной приложения с помощью C#-скрипта в сценарии, используйте действие «<strong>Изменить значения скриптом</strong>» со следующими свойствами:</p>
+<ul>
+<li><strong>Атрибут:</strong> укажите атрибут, которому требуется присвоить значение переменной приложения.</li>
+<li><strong>Операция со значениями: заменить</strong></li>
+<li>
+<p><strong>Значение:</strong></p>
+<div class="highlight"><code><code></code></code>
+<pre><code><span class="k">public</span> <span class="k">class</span> <span class="nc">Script</span> <span class="p">{</span></code><br/><code>    <span class="c1">// Задайте тип метода Main(),</span></code><br/><code>    <span class="c1">// соответствующий типу атрибута и переменной приложения:</span></code><br/><code>    <span class="c1">// string — Текст, int, decimal — Число, dateTime — Дата и время,</span></code><br/><code>    <span class="c1">// bool — Логический, TimeSpan — Длительность,</span></code><br/><code>    <span class="c1">// IEnumerable&lt;string&gt; — Список значений.</span></code><br/><code>    <span class="c1">// ObjectID — переменная, в которой хранится</span></code><br/><code>    <span class="c1">// ID экземпляра шаблона записи,</span></code><br/><code>    <span class="c1">// в контексте которого выполняется скрипт.</span></code><br/><code>    <span class="c1">// Чтобы просмотреть доступные методы</span></code><br/><code>    <span class="c1">// в пространстве имён Comindware,</span></code><br/><code>    <span class="c1">// введите Comindware и точку</span></code><br/><code></code><br/><code>    <span class="k">public</span> <span class="k">static</span> <span class="kt">decimal</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span> <span class="n">ObjectID</span><span class="p">)</span> <span class="p">{</span></code><br/><code>        <span class="kt">var</span> <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="kt">decimal</span><span class="p">)</span><span class="n">Api</span><span class="p">.</span><span class="n">Solution</span><span class="p">.</span><span class="n">SolutionVariableService</span><span class="p">.</span><span class="n">GetValue</span><span class="p">(</span><span class="s">"svar.1"</span><span class="p">);</span></code><br/><code>        <span class="k">return</span> <span class="n">result</span><span class="p">;</span></code><br/><code>    <span class="p">}</span></code><br/><code><span class="p">}</span></code></pre>
+</div>
+</li>
+</ul>
+</li>
+<li>
+<p>Чтобы использовать значение переменной приложения в <strong>Задаче-вызове сценария</strong> используйте образец C#-скрипта из статьи <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2607"><em>«Автонумерация записей с помощью формулы, C#-скрипта или выражения N3»</em></a>.</p>
+</li>
+</ul>
+<h2 class="pageBreakBefore" id="просмотр-списка-и-настройка-переменных-приложения">Просмотр списка и настройка переменных приложения</h2>
+<ol class="colored_numbers_list">
+<li>На странице «<strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2209">Администрирование</a></strong>» приложения выберите пункт «<strong>Переменные</strong>» <em class="fa-light fa-dice-five">‌<!--icon--></em>.</li>
+<li>
+<p>Отобразится список переменных приложения со свойствами переменных:</p>
+<ul>
+<li><strong>ID</strong> — уникальный идентификатор переменной, который используется для обращения к ней.</li>
+<li><strong>Название</strong> — наименование переменной.</li>
+<li><strong>Системное имя</strong> — уникальное имя переменной.</li>
+<li><strong>Тип</strong> — тип значения переменной: <strong>Текст</strong> — текстовая строка;
+<ul>
+<li><strong>Число</strong> — числовое значение;</li>
+<li><strong>Длительность</strong> — длительность в днях, часах, минутах, секундах;</li>
+<li><strong>Дата и время</strong> — дата по календарю и время в днях, часах, минутах, секундах;</li>
+<li><strong>Логический</strong> — <code>true</code> или <code>false</code>.</li>
+</ul>
+</li>
+<li><strong>Описание</strong> — комментарий относительно назначения переменной.</li>
+</ul>
+</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Список переменных приложения" src="https://kb.comindware.ru/assets/variable_list.png"/></p>
+<figcaption class="caption">Список переменных приложения</figcaption>
+</figure>
+<ol class="colored_numbers_list" start="3">
+<li>Нажмите кнопку «<strong>Создать</strong>» или дважды нажмите строку переменной в списке.</li>
+<li>Настройте свойства переменной приложения.</li>
+<li>Сохраните переменную.</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Настройка переменной приложения" src="https://kb.comindware.ru/assets/variable_properties.png"/></p>
+<figcaption class="caption">Настройка переменной приложения</figcaption>
+</figure>
+<div class="relatedTopics">
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2399">Использование переменных в сценарии</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=2607">Автонумерация записей с помощью формулы, C#-скрипта или выражения N3</a></em></li>
+</ul>
+</div>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#"> <em class="fa-light fa-arrow-up">‌<!--icon--></em> К началу </a></div>

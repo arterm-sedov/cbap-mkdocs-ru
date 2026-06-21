@@ -1,0 +1,462 @@
+<h1>Шевроны. Визуализация этапов процесса. Пример настройки</h1><div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1hp0n3ass0">Введение</a></li>
+<li><a href="#mcetoc_1hp0o4io33">Прикладная задача</a></li>
+<li><a href="#mcetoc_1hp0o4fhl2">Исходные данные</a>
+<ul>
+<li><a href="#mcetoc_1hp157j4m3">Справочник этапов</a></li>
+<li><a href="#mcetoc_1hp14rrqp1">Вспомогательные шаблоны</a>
+<ul>
+<li><a href="#mcetoc_1hq4e4r7d0">Шаблон записи «Этапы»</a></li>
+<li><a href="#mcetoc_1hq4e55u71">Шаблон процесса «Копирование этапов из справочника»</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1hq4eo04a3">Шаблон записи «Магазины»</a></li>
+<li><a href="#mcetoc_1hp1433l60">Шаблон процесса «Открытие магазина»</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1hq4erth25">Настройка шаблона процесса «Открытие магазина»</a></li>
+<li><a href="#mcetoc_1hq4eel292">Настройка шевронов на форме этапа</a></li>
+<li><a href="#mcetoc_1hp15hpsk4">Связанные статьи</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1hp0n3ass0">Введение</h2>
+<p>В <strong>Comindware Business Application Platform</strong> можно настроить визуальное отображение этапов процесса с помощью шевронов.</p>
+<p>В этой статье представлен пример настройки приложения для отображения прогресса открытия магазина в виде цветных шевронов пройденных этапов.</p>
+<div class="notice notice-success">
+<p class="admonition-title">Определения</p>
+<ul>
+<li><strong>Шевроны</strong> — это представление атрибута типа «<strong>Запись</strong>», хранящего несколько значений, в виде последовательности цветных плашек с заголовками записей связанного шаблона.</li>
+<li>Каждый шеврон содержит заголовок связанной с ним записи в виде гиперссылки на запись.</li>
+<li>Конечный пользователь может нажимать шевроны для просмотра связанных с ними записей во всплывающем окне.</li>
+<li>Цвет шеврона можно задать двумя способами:
+<ul>
+<li>с помощью системного атрибута «<strong>Цвет</strong>» связанной записи;</li>
+<li>с помощью <strong>правил окраски</strong> шевронов.</li>
+</ul>
+</li>
+<li>Подробные сведения о настройке шевронов см. в параграфе <em>«<a href="https://kb.comindware.ru/article.php?id=2531#mcetoc_1hld927ho2">Динамические элементы формы. Настройка шевронов</a>»</em>.</li>
+</ul>
+</div>
+<div class="screenshot_with_caption">
+<p><img alt="Пример отображения шевронов" class="img-responsive" height="77" src="https://kb.comindware.ru/assets/img_6606b8aa257d2.png" width="966"/></p>
+<p class="caption">Пример отображения шевронов</p>
+</div>
+<h2 id="mcetoc_1hp0o4io33">Прикладная задача</h2>
+<p>Имеется процесс открытия магазина, состоящий из семи этапов.</p>
+<p>Требуется настроить на форме магазина отображение прогресса пройденных этапов открытия в виде цветных шевронов.</p>
+<p>Цвет шевронов должен зависеть от статуса прохождения этапа:</p>
+<ul>
+<li>этап пройден с задержкой — красный;</li>
+<li>этап пройден вовремя — зелёный;</li>
+<li>этап начат — оранжевый;</li>
+<li>этап не начат — серый.</li>
+</ul>
+<div class="notice notice-warning">
+<p class="admonition-title">Логика работы приложения</p>
+<ul>
+<li>Для реализации прикладной задачи мы создадим следующие сущности (см. «<a href="#mcetoc_1hp0o4fhl2">Исходные данные</a>»):
+<ul>
+<li>шаблон записи <em>«Магазины»</em>, в котором будут храниться сведения о магазинах;</li>
+<li>справочник этапов открытия магазинов — шаблон записи, который будет хранить записи с названиями и номерами этапов;</li>
+<li>шаблон записи<em> «Этапы»</em>, в котором будут храниться данные о прогрессе открытия каждого магазина:
+<ul>
+<li>при запуске процесса <em>«Открытие магазина» </em>магазина стандартный набор этапов открытия магазина заполняется автоматически с помощью процесса <em>«Копирование этапов из справочника»</em>;</li>
+<li>этапы открытия конкретного магазина можно переименовать, добавить или удалить.</li>
+</ul>
+</li>
+<li>шаблон процесса <em>«Копирование этапов из справочника»</em>, который будет создавать запись в шаблоне <em>«Этапы»</em> и копировать в неё название и номер этапа из справочника этапов;</li>
+<li>шаблон процесса <em>«Открытие магазина»</em>, который будет вызывать процесс <em>«Копирование этапов из справочника» </em>для каждого этапа из справочника, чтобы скопировать названия и номера этапов в список этапов открытия конкретного магазина<em>. </em>Кроме того, в каждый этап открытия магазина процесс поместит ссылку на соответствующий этап в справочнике.</li>
+</ul>
+</li>
+<li>На форме <em>«Прогресс открытия магазина» </em>в шаблоне <em>«Магазины» </em>мы разместим шевроны, связанные с шаблоном записи<em> «Этапы»</em>.</li>
+<li>Пользователь может указать прогресс выполнения каждого этапа с помощью формы <em>«Прогресс открытия магазина»</em>.</li>
+<li>Шевроны на форме <em>«Прогресс открытия магазина»</em> будут окрашиваться в соответствии с прогрессом выполнения соответствующих этапов.</li>
+</ul>
+</div>
+<h2 id="mcetoc_1hp0o4fhl2">Исходные данные</h2>
+<p>Создайте приложение <em>«Управление магазинами» </em>и настройте перечисленные ниже шаблоны.</p>
+<h3 id="mcetoc_1hp157j4m3">Справочник этапов</h3>
+<ol class="colored_numbers_list">
+<li>Создайте<strong> шаблон записи</strong> <em>«Справочник этапов» </em>с <strong>системным именем</strong> <code>Spravochniketapov</code>.</li>
+<li>Создайте следующие атрибуты в этом шаблоне:
+<div class="table-responsive">
+<table border="1" style="width: 100%; border-collapse: collapse;">
+<tbody>
+<tr>
+<th style="width: 50%;">Название атрибута</th>
+<th style="width: 50%;">Свойства</th>
+</tr>
+<tr>
+<td style="width: 33.3333%;"><em>Название этапа</em></td>
+<td style="width: 33.3333%;">
+<p><strong>Тип данных: текст</strong></p>
+<p><strong>Формат отображения:</strong> <strong>обычный текст</strong></p>
+<p><strong>Использовать как заголовок записей:</strong> флажок установлен</p>
+</td>
+</tr>
+<tr>
+<td style="width: 33.3333%;"><em>Номер этапа</em></td>
+<td style="width: 33.3333%;">
+<p><strong>Тип данных: число</strong></p>
+<p><strong>Количество знаков после запятой: 0</strong></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li>В шаблоне создайте записи со следующими данными:
+<table style="width: 100%;">
+<tbody>
+<tr>
+<th style="width: 50%;">Название этапа</th>
+<th style="width: 50%;">Номер этапа</th>
+</tr>
+<tr>
+<td><em>Оценка</em></td>
+<td><em>1</em></td>
+</tr>
+<tr>
+<td><em>ИК 1</em></td>
+<td><em>2</em></td>
+</tr>
+<tr>
+<td><em>ИК 2</em></td>
+<td><em>3</em></td>
+</tr>
+<tr>
+<td><em>Договор</em></td>
+<td><em>4</em></td>
+</tr>
+<tr>
+<td><em>УФРС</em></td>
+<td><em>5</em></td>
+</tr>
+<tr>
+<td><em>Предв. подготов. к откр.</em></td>
+<td><em>6</em></td>
+</tr>
+<tr>
+<td><em>АПП</em></td>
+<td><em>7</em></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<h3 id="mcetoc_1hq4e4r7d0">Шаблон записи «Этапы»</h3>
+<p>В этом вспомогательном шаблоне будут хранится скопированные из <a href="#mcetoc_1hp157j4m3"><em>Справочника этапов</em></a> данные об этапах для каждой записи в шаблоне <em>«<a href="#mcetoc_1hq4eo04a3">Магазины</a>»</em>.</p>
+<ol class="colored_numbers_list">
+<li>Создайте <strong>шаблон записи</strong> <em>«Этапы»</em>. </li>
+<li>Создайте в шаблоне <em>«Этапы» </em>следующие атрибуты:
+<div class="table-responsive">
+<table border="1" style="width: 100%; border-collapse: collapse;">
+<tbody>
+<tr>
+<th style="width: 50%;">Название атрибута</th>
+<th style="width: 50%;">Свойства</th>
+</tr>
+<tr>
+<td style="width: 50%;"><em>Название этапа</em></td>
+<td style="width: 50%;">
+<p><strong>Тип данных: текст</strong></p>
+<p><strong>Формат отображения:</strong> <strong>обычный текст</strong></p>
+<p><strong>Использовать как заголовок записей:</strong> флажок установлен</p>
+</td>
+</tr>
+<tr>
+<td style="width: 50%;"><em>Номер этапа</em></td>
+<td style="width: 50%;">
+<p><strong>Тип данных: число</strong></p>
+<p><strong>Количество знаков после запятой: 0</strong></p>
+</td>
+</tr>
+<tr>
+<td style="width: 50%;"><em>Этап начат</em></td>
+<td style="width: 50%;">
+<p><strong>Тип данных: логический</strong></p>
+<p><strong>Системное имя:</strong> <code>Etapnachat</code></p>
+</td>
+</tr>
+<tr>
+<td style="width: 50%;"><em>Этап пройден</em></td>
+<td style="width: 50%;">
+<p><strong>Тип данных: логический</strong></p>
+<p><strong>Системное имя:</strong> <code>Etapproyden</code></p>
+</td>
+</tr>
+<tr>
+<td style="width: 50%;"><em>Этап пройден вовремя</em></td>
+<td style="width: 50%;">
+<p><strong>Тип данных: логический</strong></p>
+<p><strong>Системное имя:</strong> <code>Etapproydenvovremya</code></p>
+</td>
+</tr>
+<tr>
+<td style="width: 50%;"><em>Этап из справочника</em></td>
+<td style="width: 50%;">
+<p><strong>Тип данных: запись</strong></p>
+<p><strong>Формат отображения:</strong> <strong>гиперссылка</strong></p>
+<p><strong>Связанный шаблон: </strong><em>Справочник этапов</em></p>
+<p><strong>Хранить несколько значений:</strong> флажок снят</p>
+<p><strong>Взаимная связь с атрибутом:</strong>  <strong>не используется</strong></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ol>
+<h3 id="mcetoc_1hq4e55u71">Шаблон процесса «Копирование этапов из справочника»</h3>
+<p>Этот вспомогательный шаблон будет служить для передачи данных из шаблона <em>«<a href="#mcetoc_1hq4e4r7d0">Этапы</a>» </em>в процесс <em>«<a href="#mcetoc_1hq4erth25">Открытие магазина</a>».</em></p>
+<ol class="colored_numbers_list">
+<li>Создайте <strong>шаблон процесса</strong> со следующими свойствами:
+<ul>
+<li><strong>Название:</strong><em> Копирование этапов из справочника</em></li>
+<li><strong>Связь с шаблоном записи</strong>: <strong>с имеющимся</strong></li>
+<li><strong>Связанный шаблон: </strong><em>Этапы</em></li>
+</ul>
+</li>
+<li>Откройте вкладку «<strong>Диаграмма</strong>»</li>
+<li>Постройте простой процесс, состоящий из двух элементов: <strong>начального события</strong> и <strong>конечного события</strong>.</li>
+<li>В меню элемента начального события выберите пункт «<strong>Сценарий на выходе</strong>».
+<figure class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Создание сценария на выходе из начального события процесса «Копирование этапов из справочника»" class="img-responsive" height="473" src="https://kb.comindware.ru/assets/img_65f469f19c250.png" width="993"/></p>
+<figcaption class="caption" style="font-size: 15px !important;">Создание сценария на выходе из начального события процесса «Копирование этапов из справочника»</figcaption>
+</figure>
+</li>
+<li>Отобразится конструктор сценария.</li>
+<li>Внутри действия «<strong>Сменить контекст</strong>» добавьте действие «<strong>Изменить значения атрибутов</strong>». См. <em>«<a href="https://kb.comindware.ru/article.php?id=2153">Сценарии. Создание вложенных действий</a>».</em></li>
+<li>В  свойствах действия «<strong>Изменить значения атрибутов</strong>» настройте таблицу изменения значений атрибутов следующим образом:
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%;">
+<tbody>
+<tr>
+<th style="width: 33.3333%;">Атрибут</th>
+<th style="width: 33.3333%;">Операция со значениями</th>
+<th style="width: 33.3333%;">Значение</th>
+</tr>
+<tr>
+<td style="width: 33.3333%;"><em>Название этапа</em></td>
+<td style="width: 33.3333%;"><strong>Заменить</strong></td>
+<td style="width: 33.3333%;"><em>Этапы → Название этапа</em></td>
+</tr>
+<tr>
+<td style="width: 33.3333%;"><em>Номер этапа</em></td>
+<td style="width: 33.3333%;"><strong>Заменить</strong></td>
+<td style="width: 33.3333%;"><em>Этапы → Номер этапа</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li>Должен получиться сценарий, показанный на следующей иллюстрации:
+<div class="screenshot_with_caption">
+<p><img alt="Сценарий для изменения значений атрибутов на выходе из начального события процесса «Копирование этапов из справочника»" class="img-responsive" height="473" src="https://kb.comindware.ru/assets/img_65f46a2d2135e.png" width="993"/></p>
+<p class="caption">Сценарий для изменения значений атрибутов на выходе из начального события процесса «Копирование этапов из справочника»</p>
+</div>
+</li>
+<li>Чтобы вернуться из конструктора сценария к конструктору диаграммы процесса, нажмите кнопку «<strong>Назад</strong>» в браузере.</li>
+<li>Проверьте и опубликуйте диаграмму процесса <em>«Копирование этапов из справочника».</em></li>
+</ol>
+<h3 id="mcetoc_1hq4eo04a3">Шаблон записи «Магазины»</h3>
+<ol class="colored_numbers_list">
+<li>Создайте <strong>шаблон записи</strong> <em>«Магазины».</em></li>
+<li>Создайте в шаблоне <em>«</em><em>Магазины» следующие </em>атрибуты:
+<div class="table-responsive">
+<table border="1" style="width: 100%; border-collapse: collapse;">
+<tbody>
+<tr>
+<th style="width: 50%;">Название атрибута</th>
+<th style="width: 50%;">Свойства</th>
+</tr>
+<tr>
+<td style="width: 50%;"><em>Название магазина</em></td>
+<td style="width: 50%;">
+<p><strong>Тип данных: текст</strong></p>
+<p><strong>Формат отображения:</strong> <strong>обычный текст</strong></p>
+</td>
+</tr>
+<tr>
+<td style="width: 50%;"><em><em>Этапы открытия магазина</em> </em></td>
+<td style="width: 50%;">
+<p><strong>Тип данных: запись</strong></p>
+<p><strong>Формат отображения:</strong> <strong>гиперссылка</strong></p>
+<p><strong>Связанный шаблон: </strong><em>Этапы</em></p>
+<p><strong>Хранить несколько значений:</strong> флажок установлен</p>
+<p><strong>Взаимная связь с атрибутом:</strong>  <strong>с новым</strong></p>
+<p><strong>Свойства нового атрибута: </strong></p>
+<ul>
+<li><strong>Название</strong>: <em>Магазин</em></li>
+<li><strong>Хранить несколько значений</strong><em><em><strong>: </strong></em> </em> флажок снят</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ol>
+<h3 id="mcetoc_1hp1433l60">Шаблон процесса «Открытие магазина»</h3>
+<ol class="colored_numbers_list">
+<li>Создайте <strong>шаблон процесса</strong> со следующими свойствами:
+<ul>
+<li><strong>Название:</strong><em> Открытие магазина</em></li>
+<li><strong>Связь с шаблоном записи</strong>: <strong>Связать с существующим</strong></li>
+<li><strong>Связанный шаблон: </strong><em>Магазины</em></li>
+</ul>
+</li>
+</ol>
+<h2 id="mcetoc_1hq4erth25">Настройка шаблона процесса «Открытие магазина»</h2>
+<p>Мы настроили заполнение данных по этапам, и теперь необходимо настроить вызов нашего процесса копирования</p>
+<ol class="colored_numbers_list">
+<li>Откройте шаблон процесса <em>«Открытие магазина</em>».</li>
+<li>Откройте вкладку «<strong>Диаграмма</strong>».</li>
+<li>Перетащите на диаграмму элемент «<strong>Вызов процесса</strong>» (рекомендуется сразу после начального события).</li>
+<li>В меню элемента выберите пункт «<strong>Свойства</strong>» <em class="fa-light fa-gear">‌</em>.</li>
+<li>Отобразится окно «<strong>Свойства вызова процесса</strong>»</li>
+<li>На вкладке «<strong>Основные</strong>» настройте параметры следующим образом:
+<ul>
+<li><strong>Экспертные настройки:</strong> установите флажок</li>
+<li><strong>Шаблон для выборки объектов:</strong> <em>Справочник этапов</em></li>
+<li><strong>Выражение для выборки объектов:</strong> <code>from a in db-&gt;Spravochniketapov select a-&gt;id</code> (выражение вернёт <strong>ID</strong> записей в <a href="#mcetoc_1hp157j4m3">справочнике этапов</a>, по количеству которых будет запущен подпроцесс)</li>
+<li><strong>Режим выполнения</strong>: <strong>параллельный</strong></li>
+<li><strong>Связь шаблона записи с процессом:</strong> <strong>через атрибут</strong></li>
+<li><strong>Шаблон процесса:</strong> <em>Копирование этапов из справочника</em></li>
+<li><strong>Записи, связанные с процессом: создавать новые</strong></li>
+<li><strong>Атрибут связи:</strong> <em>Этапы открытия магазина → Этап из справочника </em>(в этот атрибут будет записываться <strong>ID</strong> <a href="спра">этапа из справочника</a>, возвращённый <strong>выражением для выборки объектов</strong>, для каждой созданной записи в шаблоне <em>«<a href="#mcetoc_1hq4e4r7d0">Этапы</a>»)</em>.</li>
+</ul>
+<div class="screenshot_with_caption">
+<p><img alt="Настройка вызова процесса «Копирование этапов из справочника»" class="img-responsive" height="695" src="https://kb.comindware.ru/assets/img_660a6ed14aa42.png" width="976"/></p>
+<p class="caption">Настройка вызова процесса «Копирование этапов из справочника»</p>
+</div>
+</li>
+<li>Выберите вкладку «<strong>Данные на входе</strong>».</li>
+<li>Нажмите на кнопку «<strong>Добавить</strong>» и настройте сопоставление атрибутов подпроцесса и текущего процесса:
+<ul>
+<li><strong>Атрибут шаблона записи подпроцесса: </strong><em>Магазин</em></li>
+<li><strong>Значение: </strong><em>ID</em></li>
+</ul>
+<p>В результате каждая запись, созданная процессом <em>«Копирование этапов из справочника»</em> будет связана с записью в шаблоне <em>«<a href="#mcetoc_1hq4eo04a3">Магазин</a>»</em>, и благодаря взаимной связи в атрибуте <em>«Этапы открытия магазина» </em>  будет записан набор идентификаторов записей из шаблона «<a href="#mcetoc_1hq4e4r7d0"><em>Этапы</em></a>».</p>
+</li>
+<li>Сохраните свойства элемента «<strong>Вызов процесса</strong>».</li>
+<li>Проверьте и опубликуйте диаграмму процесса.</li>
+</ol>
+<h2 id="mcetoc_1hq4eel292">Настройка шевронов на форме «Прогресс открытия магазина»</h2>
+<ol class="colored_numbers_list">
+<li>Откройте шаблон <em>«<a href="#mcetoc_1hq4eo04a3">Магазины</a>»</em>.</li>
+<li>Выберите вкладку «<strong>Формы</strong>».</li>
+<li>Откройте основную форму шаблона.</li>
+<li>Присвойте области на форме название <em>«Прогресс открытия магазина».</em></li>
+<li>Перетащите атрибут «<em>Этапы открытия магазина</em>» в область <em>«Прогресс открытия магазина». </em></li>
+<li>На панели «<strong>Свойства поля</strong>» выберите <strong>представление </strong>«<strong>Шевроны</strong>».</li>
+<li>Настройте свойства шевронов:
+<ul>
+<li><strong>Упорядочивание:</strong> <em>Номер этапа</em></li>
+<li><strong>Правила окраски записей:</strong> нажимайте <strong>«Создать» </strong> и настройте следующие правила:
+<div class="table-responsive">
+<table border="1" style="border-collapse: collapse; width: 100%;">
+<tbody>
+<tr>
+<th style="width: 8.7792%;">Цвет</th>
+<th style="width: 91.2208%;">Условие: формула</th>
+</tr>
+<tr>
+<td style="width: 8.7792%; vertical-align: middle;">
+<p><span style="background-color: #31ff00;">Зелёный </span></p>
+<p><span style="background-color: #31ff00;">#31ff00</span></p>
+</td>
+<td style="width: 91.2208%; vertical-align: middle;">
+<pre><code>AND($Etapnachat, $Etapproydenvovremya)</code></pre>
+</td>
+</tr>
+<tr>
+<td style="width: 8.7792%; vertical-align: middle;">
+<p><span style="background-color: #ff0000; color: #ffffff;">Красный </span></p>
+<p><span style="background-color: #ff0000; color: #ffffff;">#ff0000</span></p>
+</td>
+<td style="width: 91.2208%; vertical-align: middle;">
+<pre><code>NOT($Etapproydenvovremya)</code></pre>
+</td>
+</tr>
+<tr>
+<td style="width: 8.7792%; vertical-align: middle;">
+<p><span style="background-color: #c0c0c0; color: #ffffff;">Серый </span></p>
+<p><span style="background-color: #c0c0c0; color: #ffffff;">#c0c0c0</span></p>
+</td>
+<td style="width: 91.2208%; vertical-align: middle;">
+<pre><code>NOT($Etapnachat)AND($Etapnachat, $Etapproydenvovremya)</code></pre>
+</td>
+</tr>
+<tr>
+<td style="width: 8.7792%; vertical-align: middle;">
+<p><span style="background-color: #ff9800; color: #ffffff;">Оранжевый </span></p>
+<p><span style="background-color: #ff9800; color: #ffffff;">#ff9800</span></p>
+</td>
+<td style="width: 91.2208%; vertical-align: middle;">
+<pre><code>AND($Etapnachat, NOT($Etapproyden))</code></pre>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<ul>
+<li>Если для одной записи одновременно сработают несколько правил, возвращающих разные цвета, то шеврон будет окрашен в цвет, заданный последним сработавшим правилом.</li>
+<li>Правил окраски шевронов может быть неограниченное количество, но для оптимальной работы платформы рекомендуется задавать не более 8 условий.</li>
+<li>Следует помнить, что условие окрашивания шеврона вычисляется в контексте шаблона, связанного с текущим шаблоном посредством с атрибута типа «<strong>Запись</strong>». Поэтому обратиться к атрибутам текущего шаблона, на форме которого размещены шевроны, можно только посредством обратной ссылки. Например, к атрибуту <em>«Название магазина»</em> можно обратиться посредством атрибута <em>«Магазин»</em> из шаблона <em>«<a href="#mcetoc_1hq4e4r7d0">Этапы</a>»:</em> <code>$Magazin-&gt;Nazvaniemagazina</code>.</li>
+</ul>
+</div>
+</li>
+</ul>
+</li>
+<li>Снова перетащите атрибут «<em>Этапы открытия магазина</em>» в область <em>«Прогресс открытия магазина». </em></li>
+<li>На панели «<strong>Свойства поля</strong>» выберите <strong>представление </strong>«<strong>Таблица</strong>».</li>
+<li>В поле «<strong>Сортировка</strong>» на панели «<strong>Свойства таблицы</strong>» выберите атрибут <em>«Номер этапа»</em>.</li>
+<li>Вынесите в таблицу «<em>Этапы открытия магазина</em>» следующие атрибуты шаблона <em> «<a href="#mcetoc_1hq4e4r7d0">Этапы</a>» </em> в качестве столбцов:
+<ul>
+<li><em>Магазин</em></li>
+<li><em>Номер этапа</em></li>
+<li><em>Название этапа</em></li>
+<li><em>Этап начат</em></li>
+<li><em>Этап пройден</em></li>
+<li><em>Этап вовремя</em></li>
+</ul>
+</li>
+<li>Сохраните форму.</li>
+</ol>
+<figure class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Настроенная форма «Прогресс открытия магазина»" class="img-responsive" height="587" src="https://kb.comindware.ru/assets/img_6606b0a3e5043.png" width="1110"/></p>
+<p>Настроенная форма «Прогресс открытия магазина»</p>
+</figure>
+<h2 id="mcetoc_1hq52rmcg0">Проверка работы приложения</h2>
+<ol class="colored_numbers_list">
+<li>Откройте шаблон процесса <em>«Открытие магазина»</em>.</li>
+<li>Нажмите кнопку «<strong>Перейти к экземплярам</strong>».</li>
+<li>Отобразится таблица «<strong>Все записи</strong>» со списком экземпляров процесса.</li>
+<li>Создайте новый экземпляр процесса.</li>
+<li>Подождите некоторое время, чтобы процесс выполнился.</li>
+<li>Обновите список экземпляров, нажав кнопку «<strong>Обновить список</strong>» <em aria-hidden="true" class="fal fa-sync-alt">‌</em>.</li>
+<li>Статус процесса должен смениться на «<strong>Завершен</strong>».</li>
+<li>Из списка экземпляров процесса перейдите к связанной записи шаблона <em>«Магазины»</em> по ссылке в столбце «<strong>Запись</strong>».</li>
+<li>Отобразится настроенная форма <em>«Прогресс открытия магазина»</em>.</li>
+<li>Расставьте флажки в таблице «Этапы <em>открытия магазина»</em>.</li>
+<li>Цвета шевронов должны меняться в зависимости от состояния флажков <em>«Этап начат», «Этап пройден», «Этап пройден вовремя»:</em>
+<ul>
+<li>серый цвет — установлен флажок <em>«Этап начат»;</em></li>
+<li>зелёный цвет — установлены все три флажка;</li>
+<li>красный цвет — установлены флажки <em>«Этап начат» </em>и <em>«Этап пройден».</em></li>
+</ul>
+</li>
+</ol>
+<figure class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Проверка отображения шевронов на форме" class="img-responsive" height="640" src="https://kb.comindware.ru/assets/img_6606b888ea7b7.png" width="994"/></p>
+<p>Проверка отображения шевронов на форме</p>
+</figure>
+<h2 id="mcetoc_1hp15hpsk4">Связанные статьи</h2>
+<p><strong><a href="https://kb.comindware.ru/article.php?id=2531#mcetoc_1hld927ho2">Динамические элементы формы. Настройка шевронов</a></strong></p>
+<p><strong><samp data-name="aid" data-title="" data-value="2119"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/> Шевроны: настройка правил окрашивания {Article-ID:2119}</span></samp> </strong></p>
+<p><a class="md-top md-icon mkdocs_imported_link" href="#"> <em class="fa-light fa-arrow-up">‌</em> К началу </a></p>

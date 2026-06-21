@@ -1,0 +1,533 @@
+<h1>Полное удаление вспомогательных компонентов ПО</h1><div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1hbg2uqhb0">Введение</a></li>
+<li><a href="#mcetoc_1gs760qqh2">Определения</a></li>
+<li><a href="#mcetoc_1hpc0esj03">Остановка экземпляров ПО — все ОС Linux</a></li>
+<li><a href="#mcetoc_1hpc5mvg396">Удаление компонентов ПО — Альт Сервер</a>
+<ul>
+<li><a href="#mcetoc_1hpc6v1ri9h">Удаление JRE</a></li>
+<li><a href="#mcetoc_1hpc591vi88">Удаление Kafka</a></li>
+<li><a href="#mcetoc_1hpc591vi89">Удаление Mono</a></li>
+<li><a href="#mcetoc_1hpc591vi8a">Удаление .NET 6.0</a></li>
+<li><a href="#mcetoc_1hpc591vi8b">Удаление NGINX</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1hpc6sk3h9d">Удаление компонентов ПО — Astra Linux</a>
+<ul>
+<li><a href="#mcetoc_1hqv57frd0">Удаление JRE</a></li>
+<li><a href="#mcetoc_1hpc591vi8d">Удаление Kafka</a></li>
+<li><a href="#mcetoc_1hpc591vi8e">Удаление Mono</a></li>
+<li><a href="#mcetoc_1hpc591vi8f">Удаление .NET 6.0</a></li>
+<li><a href="#mcetoc_1hpc591vi8g">Удаление NGINX</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1hpc6211s97">Удаление компонентов ПО — Debian</a>
+<ul>
+<li><a href="#mcetoc_1hpc6tuo59g">Удаление JRE</a></li>
+<li><a href="#mcetoc_1hpc591vi8i">Удаление Kafka</a></li>
+<li><a href="#mcetoc_1hpc591vi8j">Удаление Mono</a></li>
+<li><a href="#mcetoc_1hpc591vi8k">Удаление .NET 6.0</a></li>
+<li><a href="#mcetoc_1hpc591vi8l">Удаление NGINX</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1hpc6613r99">Удаление компонентов ПО — РЕД ОС</a>
+<ul>
+<li><a href="#mcetoc_1hpc591vi8m">Удаление JRE</a></li>
+<li><a href="#mcetoc_1hpc591vi8n">Удаление Kafka</a></li>
+<li><a href="#mcetoc_1hpc591vi8o">Удаление Mono</a></li>
+<li><a href="#mcetoc_1hpc591vi8p">Удаление .NET 6.0</a></li>
+<li><a href="#mcetoc_1hpc591vi8q">Удаление NGINX</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1hpc6cpu39b">Удаление компонентов ПО — Rocky Linux</a>
+<ul>
+<li><a href="#mcetoc_1hpc591vi8r">Удаление JRE</a></li>
+<li><a href="#mcetoc_1hpc591vi8s">Удаление Kafka</a></li>
+<li><a href="#mcetoc_1hpc591vi8t">Удаление Mono</a></li>
+<li><a href="#mcetoc_1hpc591vi8u">Удаление .NET 6.0</a></li>
+<li><a href="#mcetoc_1hpc591vi8v">Удаление NGINX</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1hpc518s313">Удаление компонентов ПО — Ubuntu</a>
+<ul>
+<li><a href="#mcetoc_1hpc591vj90">Удаление JRE</a></li>
+<li><a href="#mcetoc_1hpc591vj91">Удаление Kafka</a></li>
+<li><a href="#mcetoc_1hpc591vj92">Удаление Mono</a></li>
+<li><a href="#mcetoc_1hpc591vj93">Удаление .NET 6.0</a></li>
+<li><a href="#mcetoc_1hpc591vj94">Удаление NGINX</a></li>
+</ul>
+</li>
+<li><a href="#mcetoc_1hpc0mfc74">Связанные статьи</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1hbg2uqhb0">Введение</h2>
+<p>В этой статье представлены инструкции по полному удалению вспомогательных компонентов ПО <strong>Comindware Business Application Platform</strong>:</p>
+<ul>
+<li>среды исполнения Java Runtime Environment (JRE);</li>
+<li>брокера сообщений Kafka;</li>
+<li>платформы Mono;</li>
+<li>платформы .NET 6.0;</li>
+<li>обратного прокси-сервера NGINX.</li>
+</ul>
+<p>Удаление вспомогательных компонентов ПО может потребоваться, например, в следующих случаях:</p>
+<ul>
+<li>для устранения возможных конфликтов файлов перед установкой его новой версии;</li>
+<li>для переустановки ПО после аварийных сбоев.</li>
+</ul>
+<p>Инструкции представлены для следующих ОС: Альт Сервер, Astra Linux, Debian, РЕД ОС, Rocky Linux и Ubuntu.</p>
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Удаление ПО <strong>Comindware Business Application Platform</strong> по инструкциям в этой статье не приведёт к удалению установленных версий ПО и развёрнутых экземпляров ПО.</p>
+<p>Сведения о расположении файлов экземпляров ПО см. в статье <em>«<samp data-name="aid" data-title="" data-value="2502"><img src="https://kb.comindware.ru/images/marker.png"/>Пути и содержимое папок экземпляра ПО (Linux) {Article-ID:2502}</samp>»</em>.</p>
+</div>
+<h2 id="mcetoc_1gs760qqh2">Определения</h2>
+<ul>
+<li><strong>ПО</strong> — программное обеспечение <strong>Comindware Business Application Platform</strong>.</li>
+<li><strong>Экземпляр ПО</strong> — развёрнутый веб-сервер на основе ПО.</li>
+</ul>
+<h2 id="mcetoc_1hpc0esj03">Остановка экземпляров ПО — все ОС Linux</h2>
+<p>Перед удалением вспомогательных компонентов ПО, остановите все работающие экземпляры ПО.</p>
+<ol class="colored_numbers_list">
+<li>Перейдите в режим суперпользователя:
+<pre class="source_code_container"><code>sudo -i</code></pre>
+<code></code></li>
+<li>Остановите экземпляр ПО (<em><code><strong>&lt;instancename&gt;</strong></code></em><em><code></code></em> — имя экземпляра ) и удостоверьтесь, что он остановлен:
+<pre class="source_code_container"><code>systemctl stop comindware<em><strong>&lt;</strong></em><em><strong>instancename&gt;</strong></em><br/>systemctl status comindware<em><strong>&lt;instancename&gt;</strong></em> </code></pre>
+</li>
+<li>Если развёрнуто несколько экземпляров ПО, повторите шаг 2 для остальных экземпляров.</li>
+</ol>
+<h2 id="mcetoc_1hpc5mvg396">Удаление компонентов ПО — Альт Сервер</h2>
+<ol class="colored_numbers_list">
+<li>Перед выполнением последующих инструкций перейдите в режим суперпользователя:
+<pre><code>sudo -i</code></pre>
+</li>
+</ol>
+<h3 id="mcetoc_1hpc6v1ri9h">Удаление JRE</h3>
+<ol class="colored_numbers_list">
+<li>
+<p data-line="18" dir="auto">Удалите бинарные файлы <code>bellsoft-java17-runtime</code>:</p>
+<pre><code data-line="20" dir="auto">rm -rf /usr/lib/jvm/bellsoft-java17-runtime-amd64/</code></pre>
+</li>
+<li>
+<p data-line="18" dir="auto">Удалите ссылку на исполняемые файлы:</p>
+<pre><code data-line="20" dir="auto">rm /usr/bin/java</code><code data-line="20" dir="auto"></code></pre>
+</li>
+<li>Удалите конфигурацию JRE:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/java</code></pre>
+</li>
+</ol>
+<h3 data-line="57" dir="auto" id="mcetoc_1hpc591vi88">Удаление Kafka</h3>
+<ol class="colored_numbers_list">
+<li>
+<p data-line="59" dir="auto">Удалите службу Kafka:</p>
+<pre><code data-line="61" dir="auto">systemctl stop kafka.service<br/>systemctl disable kafka.service<br/>rm /usr/lib/systemd/system/kafka.service<br/>systemctl daemon-reload<br/>systemctl reset-failed</code></pre>
+</li>
+<li>
+<p data-line="69" dir="auto">Удалите бинарные файлы Kafka:</p>
+<pre><code data-line="71" dir="auto">rm -rf /usr/share/kafka</code></pre>
+</li>
+<li>
+<p data-line="75" dir="auto">Удалите журналы Kafka:</p>
+<pre><code data-line="77" dir="auto">rm -rf /var/log/comindware/.kafka</code><code data-line="77" dir="auto"></code></pre>
+</li>
+<li>Удалите конфигурацию Kafka:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/kafka</code></pre>
+</li>
+</ol>
+<h3 data-line="24" dir="auto" id="mcetoc_1hpc591vi89">Удаление Mono</h3>
+<ol class="colored_numbers_list">
+<li>Удалите пакеты <code>mono-core</code> и <code>mono-devel</code> вместе с их зависимостями:
+<pre><code>apt-get remove --purge -y mono-devel mono-core</code><code></code></pre>
+<code data-line="51" dir="auto"></code></li>
+<li>Удалите конфигурацию Mono:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/mono</code></pre>
+</li>
+</ol>
+<h3 data-line="2" dir="auto" id="mcetoc_1hpc591vi8a">Удаление .NET 6.0</h3>
+<ol class="colored_numbers_list">
+<li>Удалите бинарные файлы .NET: <br/>
+<pre><code data-line="6" dir="auto">rm -rf /usr/share/dotnet/</code></pre>
+</li>
+<li>
+<p data-line="10" dir="auto">Удалите ссылку на исполняемые файлы .NET:</p>
+<pre><code data-line="12" dir="auto">rm /usr/bin/dotnet</code><code data-line="12" dir="auto"></code></pre>
+</li>
+<li>Удалите конфигурацию .NET:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/dotnet</code></pre>
+</li>
+</ol>
+<h3 data-line="81" dir="auto" id="mcetoc_1hpc591vi8b">Удаление NGINX</h3>
+<ol class="colored_numbers_list">
+<li>При необходимости сохраните резервную копию файла конфигурации NGINX: <code>/etc/nginx/sites-available</code></li>
+<li>
+<p data-line="83" dir="auto">Удалите пакет <code>nginx</code> и его зависимости:</p>
+<pre><code>apt-get remove --purge -y nginx</code><code></code></pre>
+</li>
+<li>Удалите конфигурацию NGINX:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/nginx</code></pre>
+</li>
+</ol>
+<h2 id="mcetoc_1hpc6sk3h9d">Удаление компонентов ПО — Astra Linux</h2>
+<ol class="colored_numbers_list">
+<li>Перед выполнением последующих инструкций перейдите в режим суперпользователя:
+<pre><code>sudo -i</code></pre>
+</li>
+</ol>
+<h3 id="mcetoc_1hqv57frd0">Удаление JRE</h3>
+<ol class="colored_numbers_list">
+<li>
+<p data-line="18" dir="auto">Удалите пакет <code>bellsoft-java17-runtime</code>:</p>
+<pre><code data-line="20" dir="auto">apt-get remove --purge -y bellsoft-java17-runtime</code><code data-line="20" dir="auto"></code><code data-line="20" dir="auto"></code></pre>
+<code></code></li>
+<li>Удалите конфигурацию JRE:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/java</code></pre>
+</li>
+</ol>
+<h3 data-line="57" dir="auto" id="mcetoc_1hpc591vi8d">Удаление Kafka</h3>
+<ol class="colored_numbers_list">
+<li>
+<p data-line="59" dir="auto">Удалите службу Kafka:</p>
+<pre><code data-line="61" dir="auto">systemctl stop kafka.service<br/>systemctl disable kafka.service<br/>rm /usr/lib/systemd/system/kafka.service<br/>systemctl daemon-reload<br/>systemctl reset-failed</code></pre>
+</li>
+<li>
+<p data-line="69" dir="auto">Удалите бинарные файлы Kafka:</p>
+<pre><code data-line="71" dir="auto">rm -rf /usr/share/kafka</code></pre>
+</li>
+<li>
+<p data-line="75" dir="auto">Удалите журналы Kafka:</p>
+<pre><code data-line="77" dir="auto">rm -rf /var/log/comindware/.kafka</code><code data-line="77" dir="auto"></code></pre>
+</li>
+<li>Удалите конфигурацию Kafka:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/kafka</code></pre>
+</li>
+</ol>
+<h3 data-line="24" dir="auto" id="mcetoc_1hpc591vi8e">Удаление Mono</h3>
+<ol class="colored_numbers_list">
+<li>Удалите бинарные файлы Mono:
+<pre><code data-line="28" dir="auto">rm -rf /etc/mono/ \<br/>    /usr/lib/libmono* \<br/>    /usr/lib/libMono* \<br/>    /usr/lib/mono/ \<br/>    /usr/lib/mono-source-libs</code></pre>
+</li>
+<li>
+<p data-line="36" dir="auto">Удалите ссылки на исполняемые файлы:</p>
+<pre><code data-line="38" dir="auto">rm -rf /usr/bin/mono \<br/>    /usr/bin/mono-* \<br/>    /usr/bin/monop \<br/>    /usr/bin/monop2 \<br/>    /usr/bin/monolinker \<br/>    /usr/bin/mcs \<br/>    /usr/bin/dmcs \<br/>    /usr/bin/fastcgi-mono-server4</code></pre>
+</li>
+<li>
+<p data-line="49" dir="auto">Удалите справочные файлы (man-страницы):</p>
+<pre><code data-line="51" dir="auto">rm -rf /usr/share/man/man1/xsp4.1.gz \<br/>    /usr/share/man/man1/mono.1.gz \<br/>    /usr/share/man/man1/fastcgi-mono-server4.1.gz</code><code data-line="51" dir="auto"><br/></code></pre>
+</li>
+<li>Удалите конфигурацию Mono:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/mono</code></pre>
+</li>
+</ol>
+<h3 data-line="2" dir="auto" id="mcetoc_1hpc591vi8f">Удаление .NET 6.0</h3>
+<ol class="colored_numbers_list">
+<li>Удалите бинарные файлы .NET: <br/>
+<pre><code data-line="6" dir="auto">rm -rf /usr/share/dotnet/</code></pre>
+</li>
+<li>
+<p data-line="10" dir="auto">Удалите ссылку на исполняемые файлы .NET:</p>
+<pre><code data-line="12" dir="auto">rm /usr/bin/dotnet</code><code data-line="12" dir="auto"></code></pre>
+</li>
+<li>Удалите конфигурацию .NET:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/dotnet</code></pre>
+</li>
+</ol>
+<h3 data-line="81" dir="auto" id="mcetoc_1hpc591vi8g">Удаление NGINX</h3>
+<ol class="colored_numbers_list">
+<li>При необходимости сохраните резервную копию файла конфигурации NGINX: <code>/etc/nginx/sites-available</code></li>
+<li>
+<p data-line="83" dir="auto">Удалите пакеты <code>nginx</code>, <code>nginx-core</code> и  <code>nginx-common</code> вместе с их зависимостями:</p>
+<pre><code data-line="85" dir="auto">apt-get remove --purge -y nginx nginx-core nginx-common</code><code data-line="85" dir="auto"></code></pre>
+<code></code></li>
+<li>Удалите конфигурацию NGINX:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/nginx</code></pre>
+</li>
+</ol>
+<h2 id="mcetoc_1hpc6211s97">Удаление компонентов ПО — Debian</h2>
+<ol class="colored_numbers_list">
+<li>Перед выполнением последующих инструкций перейдите в режим суперпользователя:
+<pre><code>sudo -i</code></pre>
+</li>
+</ol>
+<h3 data-line="16" dir="auto" id="mcetoc_1hpc6tuo59g">Удаление JRE</h3>
+<ol class="colored_numbers_list">
+<li>
+<p data-line="18" dir="auto">Удалите пакет <code>axiomjdk-java17-runtime-pro</code>:</p>
+<pre><code class="code-line language-shell code-active-line" data-line="20" dir="auto">apt-get remove --purge -y axiomjdk-java17-runtime-pro</code><code class="code-line language-shell code-active-line" data-line="20" dir="auto"></code></pre>
+</li>
+<li>
+<p data-line="18" dir="auto">Удалите ссылку на исполняемые файлы:</p>
+<pre><code data-line="20" dir="auto">rm /usr/bin/java</code><code data-line="20" dir="auto"></code></pre>
+</li>
+<li>Удалите конфигурацию JRE:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/java</code></pre>
+</li>
+</ol>
+<h3 data-line="57" dir="auto" id="mcetoc_1hpc591vi8i">Удаление Kafka</h3>
+<ol class="colored_numbers_list">
+<li>
+<p data-line="59" dir="auto">Удалите службу Kafka:</p>
+<pre><code data-line="61" dir="auto">systemctl stop kafka.service<br/>systemctl disable kafka.service<br/>rm /usr/lib/systemd/system/kafka.service<br/>systemctl daemon-reload<br/>systemctl reset-failed</code></pre>
+</li>
+<li>
+<p data-line="69" dir="auto">Удалите бинарные файлы Kafka:</p>
+<pre><code data-line="71" dir="auto">rm -rf /usr/share/kafka</code></pre>
+</li>
+<li>
+<p data-line="75" dir="auto">Удалите журналы Kafka:</p>
+<pre><code data-line="77" dir="auto">rm -rf /var/log/comindware/.kafka</code><code data-line="77" dir="auto"></code></pre>
+</li>
+<li>Удалите конфигурацию Kafka:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/kafka</code></pre>
+</li>
+</ol>
+<h3 data-line="24" dir="auto" id="mcetoc_1hpc591vi8j">Удаление Mono</h3>
+<ol class="colored_numbers_list">
+<li>Удалите пакет Mono <code>mono-runtime</code> и его зависимости:
+<pre><code>apt-get remove --purge -y mono-runtime</code><code></code></pre>
+</li>
+<li>Удалите конфигурацию Mono:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/mono</code></pre>
+</li>
+</ol>
+<p data-line="36" dir="auto"><code data-line="51" dir="auto"> </code></p>
+<h3 data-line="2" dir="auto" id="mcetoc_1hpc591vi8k">Удаление .NET 6.0</h3>
+<ol class="colored_numbers_list">
+<li>Удалите бинарные файлы .NET: <br/>
+<pre><code data-line="6" dir="auto">rm -rf /usr/share/dotnet/</code></pre>
+</li>
+<li>
+<p data-line="10" dir="auto">Удалите ссылку на исполняемые файлы .NET:</p>
+<pre><code data-line="12" dir="auto">rm /usr/bin/dotnet</code><code data-line="12" dir="auto"></code></pre>
+</li>
+<li>Удалите конфигурацию .NET:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/dotnet</code></pre>
+</li>
+</ol>
+<h3 data-line="81" dir="auto" id="mcetoc_1hpc591vi8l">Удаление NGINX</h3>
+<ol class="colored_numbers_list">
+<li>При необходимости сохраните резервную копию файла конфигурации NGINX: <code>/etc/nginx/sites-available</code></li>
+<li>
+<p data-line="83" dir="auto">Удалите пакет <code>nginx-common</code> и его зависимости:</p>
+<pre><code>apt-get remove --purge -y nginx-common</code><code><br/></code></pre>
+<code></code></li>
+<li>Удалите конфигурацию NGINX:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/nginx</code></pre>
+</li>
+</ol>
+<h2 id="mcetoc_1hpc6613r99">Удаление компонентов ПО — РЕД ОС</h2>
+<h3 data-line="16" dir="auto" id="mcetoc_1hpc591vi8m">Удаление JRE</h3>
+<ol class="colored_numbers_list">
+<li>
+<p data-line="18" dir="auto">Удалите пакет <code>bellsoft-java17-runtime</code>:</p>
+<pre><code>yum autoremove -y bellsoft-java17-runtime</code><code></code></pre>
+<code></code></li>
+<li>
+<p data-line="18" dir="auto">Удалите ссылку на исполняемые файлы:</p>
+<pre><code data-line="20" dir="auto">rm /usr/bin/java</code><code data-line="20" dir="auto"></code></pre>
+</li>
+<li>Удалите конфигурацию JRE:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/java</code></pre>
+</li>
+</ol>
+<h3 data-line="57" dir="auto" id="mcetoc_1hpc591vi8n">Удаление Kafka</h3>
+<ol class="colored_numbers_list">
+<li>
+<p data-line="59" dir="auto">Удалите службу Kafka:</p>
+<pre><code data-line="61" dir="auto">systemctl stop kafka.service<br/>systemctl disable kafka.service<br/>rm /usr/lib/systemd/system/kafka.service<br/>systemctl daemon-reload<br/>systemctl reset-failed</code></pre>
+</li>
+<li>
+<p data-line="69" dir="auto">Удалите бинарные файлы Kafka:</p>
+<pre><code data-line="71" dir="auto">rm -rf /usr/share/kafka</code></pre>
+</li>
+<li>
+<p data-line="75" dir="auto">Удалите журналы Kafka:</p>
+<pre><code data-line="77" dir="auto">rm -rf /var/log/comindware/.kafka</code><code data-line="77" dir="auto"></code></pre>
+</li>
+<li>Удалите конфигурацию Kafka:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/kafka</code></pre>
+</li>
+</ol>
+<h3 data-line="24" dir="auto" id="mcetoc_1hpc591vi8o">Удаление Mono</h3>
+<ol class="colored_numbers_list">
+<li>Удалите бинарные файлы Mono:
+<pre><code data-line="28" dir="auto">rm -rf /etc/mono/ \<br/>    /usr/share/pkgconfig \<br/>    /usr/share/mono-2.0 \<br/>    /usr/share/locale \<br/>    /usr/share/gdb \ <br/>    /usr/share/aclocal \<br/>    /usr/lib64/pkgconfig \<br/>    /usr/lib64/mono \<br/>    /usr/lib64/libMono* \<br/>    /usr/lib64/libmono* \<br/>    /usr/lib64/libcairo* \<br/>    /usr/lib64/libgdiplus* \<br/>    /usr/lib/xsp \<br/>    /usr/lib/monodoc \<br/>    /usr/lib/mono-source-libs \<br/>    /usr/lib/mono \<br/>    /usr/include/mono-2.0</code></pre>
+</li>
+<li>
+<p data-line="36" dir="auto">Удалите ссылки на исполняемые файлы:</p>
+<pre><code data-line="50" dir="auto">rm -rf /usr/bin/xsp* \<br/>    /usr/bin/xbuild \<br/>    /usr/bin/x86_64-redhat-linux-gnu-pkg-config \<br/>    /usr/bin/wsdl* \<br/>    /usr/bin/svcutil \<br/>    /usr/bin/sqlmetal \<br/>    /usr/bin/sgen* \<br/>    /usr/bin/setreg \<br/>    /usr/bin/resgen* \<br/>    /usr/bin/pkgconf \<br/>    /usr/bin/pkg-config \<br/>    /usr/bin/mozroots \<br/>    /usr/bin/peverify \<br/>    /usr/bin/permview \<br/>    /usr/bin/pedumb \<br/>    /usr/bin/pdb2mdb \<br/>    /usr/bin/pcre-config \<br/>    /usr/bin/mprof-report \<br/>    /usr/bin/monop* \<br/>    /usr/bin/monolinker \<br/>    /usr/bin/monodoc* \<br/>    /usr/bin/monodis \<br/>    /usr/bin/mono-* \<br/>    /usr/bin/mono \<br/>    /usr/bin/mod-mono* \<br/>    /usr/bin/mkbundle \<br/>    /usr/bin/mcs \<br/>    /usr/bin/ilasm \<br/>    /usr/bin/ikdasm \<br/>    /usr/bin/fastcgi* \<br/>    /usr/bin/csharp \<br/>    /usr/bin/asp-*</code><code data-line="50" dir="auto"></code></pre>
+<code></code></li>
+<li>Удалите конфигурацию Mono:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/mono</code></pre>
+</li>
+</ol>
+<h3 data-line="2" dir="auto" id="mcetoc_1hpc591vi8p">Удаление .NET 6.0</h3>
+<ol class="colored_numbers_list">
+<li>Удалите бинарные файлы .NET: <br/>
+<pre><code data-line="6" dir="auto">rm -rf /usr/share/dotnet/</code></pre>
+</li>
+<li>
+<p data-line="10" dir="auto">Удалите ссылку на исполняемые файлы .NET:</p>
+<pre><code data-line="12" dir="auto">rm /usr/bin/dotnet</code><code data-line="12" dir="auto"></code></pre>
+</li>
+<li>Удалите конфигурацию .NET:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/dotnet</code></pre>
+</li>
+</ol>
+<h3 data-line="81" dir="auto" id="mcetoc_1hpc591vi8q">Удаление NGINX</h3>
+<ol class="colored_numbers_list">
+<li>При необходимости сохраните резервную копию файла конфигурации NGINX: <code>/etc/nginx/conf.d</code></li>
+<li>
+<p data-line="83" dir="auto">Удалите пакет <code>nginx</code> и его зависимости:</p>
+<pre><code>yum autoremove -y nginx</code><code></code></pre>
+<code></code></li>
+<li>Удалите конфигурацию NGINX:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/nginx</code></pre>
+</li>
+</ol>
+<h2 id="mcetoc_1hpc6cpu39b">Удаление компонентов ПО — Rocky Linux</h2>
+<ol class="colored_numbers_list">
+<li>Перед выполнением последующих инструкций перейдите в режим суперпользователя:
+<pre><code>sudo -i</code></pre>
+</li>
+</ol>
+<h3 data-line="16" dir="auto" id="mcetoc_1hpc591vi8r">Удаление JRE</h3>
+<ol class="colored_numbers_list">
+<li>
+<p data-line="18" dir="auto">Удалите пакет <code>bellsoft-java17-runtime</code>:</p>
+<pre><code>yum autoremove -y bellsoft-java17-runtime</code><code></code></pre>
+<code></code></li>
+<li>
+<p data-line="18" dir="auto">Удалите ссылку на исполняемые файлы:</p>
+<pre><code data-line="20" dir="auto">rm /usr/bin/java</code><code data-line="20" dir="auto"></code></pre>
+</li>
+<li>Удалите конфигурацию JRE:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/java</code></pre>
+</li>
+</ol>
+<h3 data-line="57" dir="auto" id="mcetoc_1hpc591vi8s">Удаление Kafka</h3>
+<ol class="colored_numbers_list">
+<li>
+<p data-line="59" dir="auto">Удалите службу Kafka:</p>
+<pre><code data-line="61" dir="auto">systemctl stop kafka.service<br/>systemctl disable kafka.service<br/>rm /usr/lib/systemd/system/kafka.service<br/>systemctl daemon-reload<br/>systemctl reset-failed</code></pre>
+</li>
+<li>
+<p data-line="69" dir="auto">Удалите бинарные файлы Kafka:</p>
+<pre><code data-line="71" dir="auto">rm -rf /usr/share/kafka</code></pre>
+</li>
+<li>
+<p data-line="75" dir="auto">Удалите журналы Kafka:</p>
+<pre><code data-line="77" dir="auto">rm -rf /var/log/comindware/.kafka</code><code data-line="77" dir="auto"></code></pre>
+</li>
+<li>Удалите конфигурацию Kafka:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/kafka</code></pre>
+</li>
+</ol>
+<h3 data-line="24" dir="auto" id="mcetoc_1hpc591vi8t">Удаление Mono</h3>
+<ol class="colored_numbers_list">
+<li>Удалите бинарные файлы Mono:
+<pre><code data-line="28" dir="auto">rm -rf /etc/mono/ \<br/>    /usr/share/pkgconfig \<br/>    /usr/share/mono-2.0 \<br/>    /usr/share/locale \<br/>    /usr/share/gdb \ <br/>    /usr/share/aclocal \<br/>    /usr/lib64/pkgconfig \<br/>    /usr/lib64/mono \<br/>    /usr/lib64/libMono* \<br/>    /usr/lib64/libmono* \<br/>    /usr/lib64/libcairo* \<br/>    /usr/lib64/libgdiplus* \<br/>    /usr/lib/xsp \<br/>    /usr/lib/monodoc \<br/>    /usr/lib/mono-source-libs \<br/>    /usr/lib/mono \<br/>    /usr/include/mono-2.0</code></pre>
+</li>
+<li>
+<p data-line="36" dir="auto">Удалите ссылки на исполняемые файлы:</p>
+<pre><code data-line="50" dir="auto">rm -rf /usr/bin/xsp* \<br/>    /usr/bin/xbuild \<br/>    /usr/bin/x86_64-redhat-linux-gnu-pkg-config \<br/>    /usr/bin/wsdl* \<br/>    /usr/bin/svcutil \<br/>    /usr/bin/sqlmetal \<br/>    /usr/bin/sgen* \<br/>    /usr/bin/setreg \<br/>    /usr/bin/resgen* \<br/>    /usr/bin/pkgconf \<br/>    /usr/bin/pkg-config \<br/>    /usr/bin/mozroots \<br/>    /usr/bin/peverify \<br/>    /usr/bin/permview \<br/>    /usr/bin/pedumb \<br/>    /usr/bin/pdb2mdb \<br/>    /usr/bin/pcre-config \<br/>    /usr/bin/mprof-report \<br/>    /usr/bin/monop* \<br/>    /usr/bin/monolinker \<br/>    /usr/bin/monodoc* \<br/>    /usr/bin/monodis \<br/>    /usr/bin/mono-* \<br/>    /usr/bin/mono \<br/>    /usr/bin/mod-mono* \<br/>    /usr/bin/mkbundle \<br/>    /usr/bin/mcs \<br/>    /usr/bin/ilasm \<br/>    /usr/bin/ikdasm \<br/>    /usr/bin/fastcgi* \<br/>    /usr/bin/csharp \<br/>    /usr/bin/asp-*</code><code data-line="50" dir="auto"></code></pre>
+<code></code></li>
+<li>Удалите конфигурацию Mono:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/mono</code></pre>
+</li>
+</ol>
+<h3 data-line="2" dir="auto" id="mcetoc_1hpc591vi8u">Удаление .NET 6.0</h3>
+<ol class="colored_numbers_list">
+<li>Удалите бинарные файлы .NET: <br/>
+<pre><code>rm -rf /usr/share/dotnet/Rocky</code></pre>
+</li>
+<li>
+<p data-line="10" dir="auto">Удалите ссылку на исполняемые файлы .NET:</p>
+<pre><code data-line="12" dir="auto">rm /usr/bin/dotnet</code><code data-line="12" dir="auto"></code></pre>
+</li>
+<li>Удалите конфигурацию .NET:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/dotnet</code></pre>
+</li>
+</ol>
+<h3 data-line="81" dir="auto" id="mcetoc_1hpc591vi8v">Удаление NGINX</h3>
+<ol class="colored_numbers_list">
+<li>При необходимости сохраните резервную копию файла конфигурации NGINX: <code>/etc/nginx/conf.d</code></li>
+<li>
+<p data-line="83" dir="auto">Удалите пакеты <code>nginx</code>, <code>nginx-core</code> и  <code>nginx-filesystem</code> вместе с их зависимостями:</p>
+<pre><code>yum autoremove -y nginx nginx-core nginx-filesystem</code><code></code></pre>
+</li>
+<li>Удалите конфигурацию NGINX:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/nginx</code></pre>
+</li>
+</ol>
+<h2 id="mcetoc_1hpc518s313">Удаление компонентов ПО — Ubuntu</h2>
+<ol class="colored_numbers_list">
+<li>Перед выполнением последующих инструкций перейдите в режим суперпользователя:
+<pre><code>sudo -i</code></pre>
+</li>
+</ol>
+<h3 data-line="16" dir="auto" id="mcetoc_1hpc591vj90">Удаление JRE</h3>
+<ol class="colored_numbers_list">
+<li>
+<p data-line="18" dir="auto">Удалите пакет <code>bellsoft-java17-runtime</code>:</p>
+<pre><code>apt-get remove --purge -y bellsoft-java17-runtime</code><code></code></pre>
+</li>
+<li>
+<p data-line="18" dir="auto">Удалите ссылку на исполняемые файлы:</p>
+<pre><code data-line="20" dir="auto">rm /usr/bin/java</code><code data-line="20" dir="auto"></code></pre>
+</li>
+<li>Удалите конфигурацию JRE:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/java</code></pre>
+</li>
+</ol>
+<h3 data-line="57" dir="auto" id="mcetoc_1hpc591vj91">Удаление Kafka</h3>
+<ol class="colored_numbers_list">
+<li>
+<p data-line="59" dir="auto">Удалите службу Kafka:</p>
+<pre><code data-line="61" dir="auto">systemctl stop kafka.service<br/>systemctl disable kafka.service<br/>rm /usr/lib/systemd/system/kafka.service<br/>systemctl daemon-reload<br/>systemctl reset-failed</code></pre>
+</li>
+<li>
+<p data-line="69" dir="auto">Удалите бинарные файлы Kafka:</p>
+<pre><code data-line="71" dir="auto">rm -rf /usr/share/kafka</code></pre>
+</li>
+<li>
+<p data-line="75" dir="auto">Удалите журналы Kafka:</p>
+<pre><code data-line="77" dir="auto">rm -rf /var/log/comindware/.kafka</code><code data-line="77" dir="auto"></code></pre>
+</li>
+<li>Удалите конфигурацию Kafka:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/kafka</code></pre>
+</li>
+</ol>
+<h3 data-line="24" dir="auto" id="mcetoc_1hpc591vj92">Удаление Mono</h3>
+<ol class="colored_numbers_list">
+<li>Удалите пакеты Mono <code>mono-devel</code> и <code>mono-runtime-common</code> вместе с их зависимостями:
+<pre><code>apt-get remove --purge -y mono-devel mono-runtime-common</code><code></code></pre>
+</li>
+<li>Удалите конфигурацию Mono:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/mono</code></pre>
+</li>
+</ol>
+<h3 data-line="2" dir="auto" id="mcetoc_1hpc591vj93">Удаление .NET 6.0</h3>
+<ol class="colored_numbers_list">
+<li>Удалите пакеты .NET: <br/>
+<pre><code class="code-line language-shell" data-line="6" dir="auto">apt-get remove --purge -y dotnet-sdk-6.0 \<br/>    dotnet-runtime-6.0 \<br/>    dotnet-targeting-pack-6.0 \<br/>    aspnetcore-targeting-pack-6.0 \<br/>    netstandard-targeting-pack-2.1 \<br/>    dotnet-templates-6.0 \<br/>    dotnet-host \<br/>    dotnet-apphost-pack-6.0</code><code class="code-line language-shell" data-line="6" dir="auto"></code></pre>
+</li>
+<li>Удалите конфигурацию .NET:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/dotnet</code></pre>
+</li>
+</ol>
+<h3 data-line="81" dir="auto" id="mcetoc_1hpc591vj94">Удаление NGINX</h3>
+<ol class="colored_numbers_list">
+<li>При необходимости сохраните резервную копию файла конфигурации NGINX: <code>/etc/nginx/sites-available</code></li>
+<li>
+<p data-line="83" dir="auto">Удалите пакет <code>nginx-common</code> и его зависимости:</p>
+<pre><code>apt-get remove --purge -y nginx-common</code><code></code></pre>
+<code></code></li>
+<li>Удалите конфигурацию NGINX:
+<pre class="source_code_container"><code>rm /var/www/.cmw_environment/nginx</code></pre>
+</li>
+</ol>
+<h2 id="mcetoc_1hpc0mfc74">Связанные статьи</h2>
+<p><strong><samp data-name="aid" data-title="" data-value="2502"><img src="https://kb.comindware.ru/images/marker.png"/>Пути и содержимое папок экземпляра ПО {Article-ID:2502}</samp> </strong></p>
+<p><a class="md-top md-icon mkdocs_imported_link" href="#"><em class="fa-light fa-arrow-up">‌</em> К началу</a></p>
+<p> </p>

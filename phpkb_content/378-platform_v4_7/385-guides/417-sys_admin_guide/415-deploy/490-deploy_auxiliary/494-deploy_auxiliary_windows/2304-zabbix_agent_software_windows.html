@@ -1,0 +1,89 @@
+<h1>Zabbix Agent. Инструкции по установке для Windows</h1><div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1i0qi21i20">Введение</a></li>
+<li><a href="#mcetoc_1gmb5iufr0">1. Установка Zabbix Agent из MSI-пакета</a></li>
+<li><a href="#mcetoc_1gmb5iufr1">2. Проверка установки Zabbix Agent</a></li>
+<li><a href="#mcetoc_1gmb5iufr2">3. Добавление Windows-хоста в сеть мониторинга</a></li>
+<li><a href="#mcetoc_1gmb5iufr3">Использованные ресурсы</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1i0qi21i20">Введение</h2>
+<p>Программное обеспечение <em>Zabbix Agent</em> позволяет осуществлять мониторинг устройств, на которые оно установлено. Для сбора и отображения данных мониторинга используется ПО <em>Zabbix Server</em>. См. статью «<samp data-name="aid" data-title="" data-value="2292"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Zabbix Server, Zabbix Agent, Zabbix Frontend и MySQL. Инструкции по установке {Article-ID:2292}</span></samp>».</p>
+<p>В настоящей статье представлены инструкции по установке и настройке Zabbix Agent в операционной системе MS Windows.</p>
+<h2 data-heading="1. Установка Zabbix Agent из MSI-пакета" id="mcetoc_1gmb5iufr0">1. Установка Zabbix Agent из MSI-пакета</h2>
+<p>1.1. Скачайте MSI-пакет <em>Zabbix Agent</em> по ссылке <a href="https://www.zabbix.com/download_agents" rel="noopener" target="_blank">https://www.zabbix.com/download_agents</a></p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Скачивание MSI-пакета Zabbix Agent" class="img-responsive" height="917" src="https://kb.comindware.ru/assets/img_63bbfec30de92.png" style="letter-spacing: 0.2px; text-align: center;" width="1383"/></p>
+<p class="caption" style="font-size: 15px !important;"><em style="color: #545764; letter-spacing: 0.2px; text-align: left;">Скачивание MSI-пакета Zabbix Agent</em></p>
+</div>
+<p>1.2. Запустите установку MSI-пакета.</p>
+<p>1.3. В процессе установки выберите папку для установки Zabbix Agent.</p>
+<p>1.4. Настройте конфигурацию службы <em>Zabbix Agent</em>:</p>
+<ul>
+<li><strong>Host name</strong> — имя хоста;</li>
+<li><strong>Zabbix server IP/DNS</strong> — IP-адрес <em>Zabbix Server</em> (в запросах с неизвестных адресов будет отказано);</li>
+<li><strong>Agent listen port</strong> — номер сетевого порта <em>Zabbix Agent</em> (10050 по-умолчанию);</li>
+<li><strong>Server or Proxy for active checks</strong> — IP-адрес сервера для активных проверок агента Zabbix;</li>
+<li><strong>Enable PSK</strong> — установите этот флажок, чтобы впоследствии настроить зашифрованный канал связи между <em>Zabbix Agent</em> и <em>Zabbix Server</em>;</li>
+<li><strong>Add agent location to the PATH</strong> — установите этот флажок, чтобы добавить путь к агенту в переменную среды PATH.</li>
+</ul>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Настройка конфигурации службы Zabbix Agent" class="img-responsive" height="1155" src="https://kb.comindware.ru/assets/img_63bbfef9ee8a0.png" width="1373"/></p>
+<p class="caption" style="font-size: 15px !important;"><em>Настройка конфигурации службы </em>Zabbix Agent</p>
+</div>
+<h2 data-heading="2. Проверка установки Zabbix Agent" id="mcetoc_1gmb5iufr1">2. Проверка установки Zabbix Agent</h2>
+<p>2.1. Откройте <em>Брандмауэр Защитника Windows</em> в режиме администратора.<br/>2.2. Перейдите на вкладку «<strong>Правила для входящих подключений</strong>».<br/>2.3. Удостоверьтесь, что установщик <em>Zabbix Agent</em> создал правило, разрешающее входящие запросы по сетевому порту 10050.<br/>2.4. Если правила нет, создайте его и перезагрузите компьютер.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Проверка наличия правила для входящих подключений Zabbix Agent" class="img-responsive" height="756" src="https://kb.comindware.ru/assets/img_63bbff2a30cfd.png" width="1373"/></p>
+<p class="caption" style="font-size: 15px !important;"><em>Проверка наличия правила для входящих подключений Zabbix Agent</em></p>
+</div>
+<p>2.5. Откройте приложение «<em>Службы</em>».<br/>2.6. Удостоверьтесь, что служба <em>Zabbix Agent</em> находится в состоянии «<strong>Выполняется</strong>».<br/>2.7. Если состояние службы <em>Zabbix Agent</em> отличается от «<strong>Выполняется</strong>», установите состояние «<strong>Выполняется</strong>» и перезагрузите компьютер.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img class="img-responsive" src="https://kb.comindware.ru/assets/img_63bbff44016eb.png" style="letter-spacing: 0.2px;"/></p>
+<p class="caption" style="font-size: 15px !important;"><em>Проверка состояния Zabbix Agent в диспетчере служб</em></p>
+</div>
+</div>
+<h2 data-heading="3. Добавление Windows-хоста в сеть мониторинга" id="mcetoc_1gmb5iufr2">3. Добавление Windows-хоста в сеть мониторинга</h2>
+<p>3.1. Откройте <em>Zabbix Frontend</em> (см. статью «<a data-href="Zabbix Server, Zabbix Agent, Zabbix Frontend и MySQL. Инструкции по установке" href="app://obsidian.md/Zabbix%20Server,%20Zabbix%20Agent,%20Zabbix%20Frontend%20%D0%B8%20MySQL.%20%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D0%B8%20%D0%BF%D0%BE%20%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B5" rel="noopener" target="_blank">Zabbix Server, Zabbix Agent, Zabbix Frontend и MySQL. Инструкции по установке</a>».). Для э того в адресной строке браузера наберите: <code><a href="http://zabbix-server-ip-address:8080">http://zabbix-server-ip-address:8080</a></code><br/>3.2. Откройте раздел «<strong>Monitoring</strong>» &gt; «<strong>Hosts</strong>» и нажмите кнопку «<strong>Create host</strong>».</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Создание хоста" class="img-responsive" height="890" src="https://kb.comindware.ru/assets/img_63bc000e92138.png" width="1373"/></p>
+<p class="caption" style="font-size: 15px !important;"><em>Создание хоста</em></p>
+</div>
+<p>3.3. Задайте имя хоста в поле «<strong>Host name</strong>».<br/>3.4. Выберите шаблон «<strong>Template OS Linux by Zabbix agent</strong>».<br/>3.5. Создайте группу мониторинга для хоста или добавьте его в существующую группу.<br/>3.6. Под полем «<strong>Interfaces</strong>» нажмите кнопку «<strong>Add</strong>» и в раскрывающемся меню выберите пункт «<strong>Agent</strong>».</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Настройка свойств хоста Zabbix Agent" class="img-responsive" height="780" src="https://kb.comindware.ru/assets/img_63bbffd613538.png" width="1373"/></p>
+<div class="screenshot_with_caption" style="box-sizing: border-box; margin: 2.5rem auto; text-align: center !important; color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px !important; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">
+<p class="caption" style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; font-size: 15px !important; font-weight: 300; letter-spacing: 0.2px; line-height: 25px; font-style: italic; color: #666666 !important;">Настройка свойств хоста <em style="box-sizing: border-box;">Zabbix Agent</em></p>
+</div>
+</div>
+<p>3.7. В поле «<strong>Agent</strong>» задайте IP-адрес или доменное имя компьютера, на котором установлен <em>Zabbix Agent</em>.</p>
+<p>3.8. Если при установке <em>Zabbix Agent</em> был указан сетевой порт, отличный от 10050, укажите используемый порт</p>
+<p>3.9. Нажмите кнопку «<strong>Add</strong>».</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Настройка IP-адреса хоста Zabbix Agent" class="img-responsive" height="814" src="https://kb.comindware.ru/assets/img_63bbffb0a5b4a.png" width="1373"/></p>
+<p><span style="color: #666666; font-style: italic; letter-spacing: 0.2px;">Настройка IP-адреса хоста Zabbix Agent</span></p>
+</div>
+<p>3.10. Перейдите в раздел «<strong>Monitoring</strong>» &gt; «<strong>Hosts</strong>».</p>
+<p>3.11. В списке хостов должна появиться новая запись.</p>
+<p>3.12. Подождите приблизительно 2 минуты, пока индикатор статуса доступности <mark>ZBX</mark> не станет зелёным.</p>
+<div class="screenshot_with_caption" style="font-size: 15px !important;">
+<p><img alt="Статус хоста Zabbix Agent" class="img-responsive" src="https://kb.comindware.ru/assets/img_63bbfe8013410.png"/></p>
+<div class="screenshot_with_caption" style="box-sizing: border-box; margin: 2.5rem auto; text-align: center !important; color: #545764; font-family: 'Open Sans', sans-serif; font-size: 15px !important; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: 0.2px; orphans: 2; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">
+<p class="caption" style="box-sizing: border-box; margin-top: 0px; margin-bottom: 1rem; font-size: 15px !important; font-weight: 300; letter-spacing: 0.2px; line-height: 25px; font-style: italic; color: #666666 !important;">Статус хоста Zabbix Agent</p>
+</div>
+</div>
+<p>3.13. Если индикатор красный, удостоверьтесь, что:</p>
+<ul>
+<li>сетевой экран на машине, где развернут <em>Zabbix Server</em>, разрешает обмен данными через порт 10051;</li>
+<li>сетевой экран и (или) <em>Брандмауэр Защитника Windows</em> на машине, где развернут <em>Zabbix Agent</em>, разрешает обмен данными через порт 10050;</li>
+<li>значения <code>Server</code> и <code>ServerActive</code> в файле конфигурации <em>Zabbix Agent</em> <code>/etc/zabbix/zabbix_agentd.conf</code> соответствуют IP-адресу <em>Zabbix Server</em>:</li>
+</ul>
+<pre tabindex="0"><code>Server=192.168.0.1 # ip-адрес приведён как пример
+</code></pre>
+<pre tabindex="0"><code>ServerActive=192.168.0.1 # ip-адрес приведён как пример
+</code></pre>
+<p><strong>Примечание</strong><br/>При любых изменениях в файле конфигурации необходимо остановить и снова запустить (при перезапуске используется конфигурация из памяти) сервис <em>Zabbix Agent</em> или перезагрузить компьютер.</p>
+<h2 data-heading="Использованные ресурсы" id="mcetoc_1gmb5iufr3">Использованные ресурсы</h2>
+<p><a aria-label="https://www.zabbix.com/documentation/current/en/manual/installation/install_from_packages/win_msi" aria-label-position="top" href="https://www.zabbix.com/documentation/current/en/manual/installation/install_from_packages/win_msi" rel="noopener" target="_blank">Официальная инструкция по установке Zabbix Agent в Windows из MSI-пакета (на английском языке)</a></p>

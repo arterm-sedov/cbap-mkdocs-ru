@@ -1,0 +1,92 @@
+<h1>Шаблон записи</h1><div class="md-container">
+<div class="md-main__inner md-grid">
+<div class="mce-toc">
+<h2 class="toc-heading">Содержание</h2>
+<ul>
+<li><a href="#mcetoc_1hpspt69p1">Определения</a></li>
+<li><a href="#mcetoc_1hpilrg5k0">Пример использования шаблона записи</a></li>
+<li><a href="#record_template_properties">Свойства шаблона записи</a></li>
+<li><a href="#mcetoc_1gk2t220u2">Связанные статьи</a></li>
+</ul>
+</div>
+<div class="md-content">
+<div class="notice notice-success">
+<h3 class="admonition-title" id="mcetoc_1hpspt69p1">Определения</h3>
+<ul>
+<li><strong>Шаблоны записей </strong>используются для построения модели, хранения и обработки данных, описывающих бизнес-сущности.</li>
+<li><strong>Шаблон записи </strong>служит для настройки свойств шаблона, <a href="https://kb.comindware.ru/article.php?id=2252">атрибутов</a> и записей, а также для хранения записей. Он представляет собой аналог таблицы в реляционной базе данных.</li>
+<li><strong> Запись </strong>— это набор данных (атрибутов) об одной бизнес-сущности и представляет собой аналог строки в реляционной базе данных. </li>
+<li><strong>Записи</strong> могут быть представлены в виде таблиц и форм.</li>
+<li><span style="box-sizing: border-box; font-weight: 700 !important;">Атрибут</span> — это простейший элемент данных об объекте: наименование товара (<a href="https://kb.comindware.ru/article.php?id=2257">текст</a>), количество товара (<a href="https://kb.comindware.ru/article.php?id=2251">число</a>), время доставки (<a href="https://kb.comindware.ru/article.php?id=2246">дата и время</a>), товар (<a href="https://kb.comindware.ru/article.php?id=2243">запись</a>) и т.п. Атрибут представляет собой аналог поля в реляционной базе данных.</li>
+</ul>
+</div>
+<div class="admonition question">
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<p>Шаблоны следующих типов аналогичны шаблону записи, но предназначены для описания специальных сущностей <strong>Comindware Business Application Platform</strong>:</p>
+<ul>
+<li><a href="https://kb.comindware.ru/article.php?id=2223">Шаблон аккаунта</a></li>
+<li><a href="https://kb.comindware.ru/article.php?id=2220">Шаблон роли</a></li>
+<li><a href="https://kb.comindware.ru/article.php?id=2226">Шаблон организационной единицы</a></li>
+</ul>
+</div>
+<h2 id="mcetoc_1hpilrg5k0">Пример использования шаблона записи</h2>
+<table style="width: 100%;">
+<tbody>
+<tr>
+<th>Сущность</th>
+<th>Описание</th>
+</tr>
+<tr>
+<td>Шаблон записи </td>
+<td>Пассажиры рейсов</td>
+</tr>
+<tr>
+<td>Атрибуты шаблона записи </td>
+<td>Ф. И. О., Номер паспорта, Номер билета, Рейс </td>
+</tr>
+<tr>
+<td>Работа с записями</td>
+<td>Сотрудник авиакомпании вводит значения атрибутов шаблона записи в форме для каждого пассажира во время регистрации на рейс.</td>
+</tr>
+<tr>
+<td>Данные на выходе</td>
+<td>Таблица со списком пассажиров рейсов с их именами, номерами паспортов и билетов. </td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="record_template_properties">Свойства шаблона записи</h2>
+<p>Помимо <a href="https://kb.comindware.ru/article.php?id=2225">общих свойств</a> на странице «<strong>Свойства</strong>» шаблона записи отображаются перечисленные ниже поля.</p>
+<ul>
+<li><strong>Является справочником</strong> — установите этот флажок, если шаблон является хранилищем справочных данных, например названий городов, стран, марок автомобилей и т. п. Если установлен этот флажок, отображаются следующие два пункта:
+<ul>
+<li><strong>Переносить данные при трансфере</strong> — установите этот флажок, чтобы записи из этого шаблона переносились вместе с шаблоном при экспорте и импорте приложения с помощью <a href="https://kb.comindware.ru/article.php?id=2217">управления версиями</a>.</li>
+<li><strong>Ключевой атрибут</strong> — выберите атрибут, который будет использоваться в качестве ключевого при переносе записей.
+<div class="notice notice-info">
+<p class="admonition-title">Примечание</p>
+<ul>
+<li>В шаблоне-справочнике атрибуты типа «<strong><a href="https://kb.comindware.ru/article.php?id=2243">Запись</a></strong>» могут ссылаться только на шаблоны-справочники.</li>
+<li>В качестве ключевого можно выбрать только атрибут типа «<strong><a href="https://kb.comindware.ru/article.php?id=2257">Текст</a></strong>» или «<strong><a href="https://kb.comindware.ru/article.php?id=2251">Число</a></strong>» с установленным флажком «<strong>Контролировать уникальность значений</strong>».</li>
+<li>Если у записи ключевой атрибут не имеет значения, то при импорте приложения запись не переносится.</li>
+</ul>
+</div>
+</li>
+</ul>
+</li>
+<li><strong>Используется в шаблонах</strong> — список всех шаблонов процессов, в которых задействован данный шаблон записи.</li>
+<li><strong>Связанные процессы</strong> — список шаблонов процессов, связанных с данным шаблоном записи.</li>
+</ul>
+<div class="screenshot_with_caption">
+<p><img alt="Свойства шаблона записи" src="https://kb.comindware.ru/assets/record_templates_properties.png"/></p>
+<p class="caption">Свойства шаблона записи</p>
+</div>
+<h2 id="mcetoc_1gk2t220u2">Связанные статьи</h2>
+<p><strong><samp data-name="aid" data-title="" data-value="2225"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Общие свойства шаблонов {Article-ID:2225}</span></samp> </strong></p>
+<p><strong><samp data-name="aid" data-title="" data-value="2219"><span style="color: #0066bc; font-family: Tahoma;"><img src="https://kb.comindware.ru/images/marker.png" style="vertical-align: middle;"/>Шаблоны в приложении. Определения, создание, настройка, перенос, архивирование, очистка, удаление {Article-ID:2219}</span></samp></strong></p>
+</div>
+</div>
+<a class="md-top md-icon" href="#"> К началу </a></div>
+<div class="md-dialog">
+<div class="md-dialog__inner md-typeset"> </div>
+</div>
