@@ -254,6 +254,6 @@ updated: '2024-12-23 15:41:28'
 
 --8<-- "related_topics_heading.md"
 
-- *[Пути и содержимое директорий экземпляра ПО](https://kb.comindware.ru/article.php?id=4620)*
+- *[Пути и содержимое директорий экземпляра ПО][paths]*
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

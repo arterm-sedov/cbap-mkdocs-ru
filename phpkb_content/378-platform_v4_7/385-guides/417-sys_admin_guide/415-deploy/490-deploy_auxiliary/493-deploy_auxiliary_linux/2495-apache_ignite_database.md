@@ -176,7 +176,7 @@ updated: '2024-11-26 19:05:57'
 
 --8<-- "related_topics_heading.md"
 
-- *[Резервное копирование и восстановление](https://kb.comindware.ru/article.php?id=4642)*
+- *[Резервное копирование и восстановление][backup_configure]*
 - *[Дефрагментация персистентного хранилища](https://ignite.apache.org/docs/2.11.1/persistence/native-persistence-defragmentation)* (руководство Apache Ignite, английский язык)
 - *[Активация, деактивация и управление топологией](https://ignite.apache.org/docs/2.11.1/tools/control-script#activation-deactivation-and-topology-management)* (руководство Apache Ignite, английский язык)
 
