@@ -12,15 +12,16 @@ from typing import Optional
 
 from google import genai
 
+SKILL_DIR = Path(__file__).resolve().parents[1]
+REPO_ROOT = Path(__file__).resolve().parents[4]
+
 try:
     from dotenv import load_dotenv
 
-    load_dotenv()
+    load_dotenv(REPO_ROOT / ".env")
 except ImportError:
     pass
 
-SKILL_DIR = Path(__file__).resolve().parents[1]
-REPO_ROOT = Path(__file__).resolve().parents[4]
 DEFAULT_PROMPT = SKILL_DIR / "prompts" / "video_transcription_prompt.md"
 DEFAULT_SCRATCH = REPO_ROOT / ".scratch"
 
