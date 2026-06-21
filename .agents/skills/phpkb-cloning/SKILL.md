@@ -41,11 +41,15 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 
 | Use case | Path | Git |
 | --- | --- | --- |
-| V5→V6 (or similar) version migration | `.v6mapping.json`, `.v5mapping.json` | tracked |
-| One-off article clone / publish | `.scratch/<purpose>_mapping.json` | gitignored |
+| Per-release version migration | repo root: `.v6mapping.json`, `.v7mapping.json`, `.v6.5mapping.json`, … | tracked, kept for years |
+| One-off article clone / publish | `.scratch/<purpose>_mapping.json` | gitignored, disposable |
 | Post-clone link/ID updates | same file as the clone run | — |
 
-After a one-off publish, delete the `.scratch/` mapping unless audit is needed. Never write one-off article mappings into `.v6mapping.json`.
+Per-release migration mappings are **repository-root artifacts**. Commit them to git and keep them for years alongside older maps such as `.v5mapping.json` and `.v6mapping.json`. They are not `.scratch/` files and must not be placed under `.scratch/`.
+
+One-off article clone mappings are the opposite: write them only under `.scratch/`, delete after publish unless audit is needed, and never mix them into a per-release migration file.
+
+**Post-clone scripts** (`phpkb_clone_update_links.py`, `phpkb_clone_update_mapped_ids.py`, `phpkb_clone_rollback.py`) default to `.mapping.json` when `--mapping` is omitted. That file is gitignored and meant for local/ad-hoc runs (copy or symlink a map there for experiments). **Per-release migrations must still pass the same explicit `--mapping .vNmapping.json` on every step** — clone, link update, local ID migration, and rollback — end to end. Do not rely on the post-clone default for production migration work.
 
 4. Treat file-rewriting helpers as batch migrations.
    `phpkb_clone_update_mapped_ids.py --write` rewrites Markdown files in place. Before running it, check `git status --short`, inspect the search scope, and confirm it matches the requested files.
@@ -65,7 +69,7 @@ After a one-off publish, delete the `.scratch/` mapping unless audit is needed. 
 - Confirm the target category ID when cloning individual articles.
 - Use `--dry-run` first for scripted clones to get a preflight scope report without inserts or mapping writes.
 - Pass `--mapping` explicitly on every run (required). No default path.
-- For V5 to V6 migrations, use `--mapping .v6mapping.json` and pass that same file to post-clone update scripts.
+- For a new release migration, create a dedicated **repo-root** mapping for that target version, for example `--mapping .v7mapping.json` or `--mapping .v6.5mapping.json`. Track it in git and pass the same file to post-clone update scripts for years.
 - For one-off article clones, use `--mapping .scratch/<purpose>_mapping.json` (gitignored).
 - Use `--fresh` only when starting a new clone and refusing to reuse an existing mapping file.
 - Expect the script to maintain category/article mapping in JSON and insert rows into PHPKB tables.
@@ -82,7 +86,7 @@ After a one-off publish, delete the `.scratch/` mapping unless audit is needed. 
 
 - Use this when a local Markdown article has no `kbId` and must become a new PHPKB article, not an update of an existing article.
 - Pick an adjacent source PHPKB article in the same target category and clone it with `phpkb_clone.py --article-id`.
-- Use a dedicated one-off mapping under `.scratch/`, for example `.scratch/import_server_csv_mapping.json`, not `.v6mapping.json`.
+- Use a dedicated one-off mapping under `.scratch/`, for example `.scratch/import_server_csv_mapping.json`, not a per-release migration mapping such as `.v7mapping.json`.
 - Always run the clone dry-run first:
   `python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .scratch/<purpose>_mapping.json --fresh --article-id <source-article-id> --target-category-id <target-category-id> --suffix "" --dry-run`
 - Run the real clone with the same arguments and no `--dry-run`; omit `--show` so the placeholder stays hidden until `phpkb_update_articles.py` publishes it.
@@ -94,7 +98,7 @@ After a one-off publish, delete the `.scratch/` mapping unless audit is needed. 
 - Publish only the new article using the script's command-line flags:
   `python phpkb_update_articles.py --profile cmw --article-id <new-article-id> --yes`
 - The script can also be run interactively by omitting `--article-id`. It reads `for_kb_import_ru`, finds `<div ... kb-id="<new-article-id>" ...>`, and updates the PHPKB row with the MkDocs title, HTML content, tags, `unlisted`, `article_status='approved'`, and `article_show='yes'`.
-- After the new ID is written to the Markdown front matter, reusable hyperlink-map entries point to the new `{{ kbArticleURLPrefix }}` URL, and the article is successfully published, delete the `.scratch/` one-off mapping unless the user asks to keep it for audit. Keep durable migration mappings such as `.v6mapping.json`.
+- After the new ID is written to the Markdown front matter, reusable hyperlink-map entries point to the new `{{ kbArticleURLPrefix }}` URL, and the article is successfully published, delete the `.scratch/` one-off mapping unless the user asks to keep it for audit. Per-release migration mappings stay at the repo root and remain in version control.
 - If several sibling articles are cloned from the same source article, use a separate `.scratch/<purpose>_mapping.json` for each new target article. A mapping stores one source-to-target article pair, so reusing it for siblings would resume the first clone instead of creating another article.
 - In this repository, keep the generated `for_kb_import_ru` HTML for new and updated articles under version control. Clean generated export files only when they are accidental, unrelated to the requested publish scope, or the user explicitly asks not to keep them.
 
@@ -149,7 +153,7 @@ See `references/workflow.md` → **Sync changed articles (git-diff batch)** for 
 - Confirm the mapping counts: categories, articles, and source root mapping.
 - Confirm every mapped target category/article exists in PHPKB.
 - Confirm there are no unmapped rows in the new clone ID ranges. If interrupted attempts left duplicate rows outside the real mapping, put only those target IDs into a temporary orphan mapping and dry-run `phpkb_clone_rollback.py`.
-- Confirm article-category placement preservation by comparing source `(article_id, category_id)` pairs mapped through `.v6mapping.json` against actual target `phpkb_relations`.
+- Confirm article-category placement preservation by comparing source `(article_id, category_id)` pairs mapped through the selected migration file against actual target `phpkb_relations`.
 - For the V5 to V6 run, source category `798` cloned adjacent as category `896`; the verified clone had `84` mapped categories, `498` unique mapped articles, and `616` mapped article-category relations.
 
 ### Update Links After Cloning
@@ -160,7 +164,7 @@ See `references/workflow.md` → **Sync changed articles (git-diff batch)** for 
 - `--article-id` can be repeated to update selected cloned articles.
 - Expect replacements for article IDs, category IDs, product names, and selected version strings.
 - In CLI mode, run dry-run first:
-  `python utilities/phpkb_cloning/phpkb_clone_update_links.py --mapping .v6mapping.json --category-id <cloned-category-id>`
+  `python utilities/phpkb_cloning/phpkb_clone_update_links.py --mapping .v7mapping.json --category-id <cloned-category-id>`
 - Use `--write` only after the dry-run output looks correct.
 - Product-name replacements are optional via `--replace-product-names`.
 - Version replacements are optional and parameterized, for example `--old-version 5.0 --new-version 6.0`.
@@ -172,7 +176,7 @@ See `references/workflow.md` → **Sync changed articles (git-diff batch)** for 
 - Confirm the selected mapping JSON contains only the clone run that should be removed.
 - The script deletes only mapped target IDs, that is, mapping values, never source IDs from mapping keys.
 - Run dry-run first:
-  `python utilities/phpkb_cloning/phpkb_clone_rollback.py --mapping .v6mapping.json`
+  `python utilities/phpkb_cloning/phpkb_clone_rollback.py --mapping .v7mapping.json`
 - Use `--write --confirm-delete-cloned-content` only after the reported counts match the intended rollback.
 - Expect deletes in dependency order: attachment/custom data rows, relations, articles, then categories.
 - For aborted-run orphan cleanup, use a separate temporary mapping that contains only orphan target IDs. Delete that temporary mapping after cleanup and verification.
@@ -182,7 +186,7 @@ See `references/workflow.md` → **Sync changed articles (git-diff batch)** for 
 - Review `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py`.
 - Confirm the selected mapping JSON contains the intended `Articles` and `Categories` sections.
 - Run dry-run first:
-  `python utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py --mapping .v6mapping.json --target all`
+  `python utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py --mapping .v7mapping.json --target all`
 - Use `--write` only after the report looks correct.
 - `frontmatter-kbids` updates `kbId:` values in Markdown files under `docs/ru` using `Articles`.
 - `hyperlink-map` updates only `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md`, using `Articles` for `{{ kbArticleURLPrefix }}` IDs and `Categories` for `{{ kbCategoryURLPrefix }}` IDs.
