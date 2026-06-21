@@ -78,11 +78,21 @@ def test_version_replacement_is_parameterized_for_v5_to_v6():
 
 
 def test_cli_defaults_to_dry_run():
-    args = update_links.parse_args(["--article-id", "100"])
+    args = update_links.parse_args(["--mapping", ".mapping.json", "--article-id", "100"])
 
     assert update_links.has_cli_action(args)
+    assert args.mapping == ".mapping.json"
     assert args.write is False
     assert args.replace_product_names is False
+
+
+def test_parse_args_requires_mapping():
+    try:
+        update_links.parse_args(["--article-id", "100"])
+    except SystemExit:
+        pass
+    else:
+        raise AssertionError("Expected SystemExit when --mapping is omitted")
 
 
 def test_cli_accepts_programmatic_v5_to_v6_update_options():

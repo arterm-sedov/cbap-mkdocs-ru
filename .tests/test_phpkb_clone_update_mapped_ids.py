@@ -118,3 +118,12 @@ def test_run_hyperlink_map_target_reads_mapping_and_writes(tmp_path, capsys):
         "[article]: {{ kbArticleURLPrefix }}6001\n[category]: {{ kbCategoryURLPrefix }}940\n"
     )
     assert "Hyperlink map:" in capsys.readouterr().out
+
+
+def test_parse_args_requires_mapping():
+    try:
+        update_mapped_ids.parse_args(["--target", "hyperlink-map"])
+    except SystemExit:
+        pass
+    else:
+        raise AssertionError("Expected SystemExit when --mapping is omitted")

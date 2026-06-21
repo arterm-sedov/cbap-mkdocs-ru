@@ -6,6 +6,7 @@ target IDs, that is, values from `mapping["Articles"]` and
 `mapping["Categories"]`. It never deletes source IDs from the mapping keys.
 
 Safety model:
+- `--mapping` is required; pass the same file used for `phpkb_clone.py`;
 - dry-run by default;
 - `--write` is required for DB deletes;
 - `--confirm-delete-cloned-content` is also required with `--write`;
@@ -35,9 +36,6 @@ from tools.graceful_interrupt import ensure_cleanup
 from tools.ssh_kb_ru import establish_connection_interactive
 
 
-DEFAULT_MAPPING_FILE = ".mapping.json"
-
-
 @dataclass(frozen=True)
 class DeleteStep:
     label: str
@@ -57,8 +55,8 @@ def parse_args(argv=None):
     )
     parser.add_argument(
         "--mapping",
-        default=DEFAULT_MAPPING_FILE,
-        help=f"Clone mapping JSON. Default: {DEFAULT_MAPPING_FILE}",
+        required=True,
+        help="Clone mapping JSON (required). Use the same file as phpkb_clone.py.",
     )
     parser.add_argument(
         "--write",
