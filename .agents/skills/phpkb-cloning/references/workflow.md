@@ -25,9 +25,8 @@ Keep clone and post-clone update scripts on the same profile.
 1. Set and verify `.env` `SERVER_PROFILE`.
 2. Create and verify a complete `phpkbv9` database backup on the PHPKB server.
 3. Run `utilities/phpkb_cloning/phpkb_clone.py` to clone the source category tree or selected articles.
-   The script resumes from `.mapping.json` by default. Use `--mapping <path>` for a different mapping file.
+   `--mapping` is required on every run. Version migrations: `.v6mapping.json`. One-off clones: `.scratch/<purpose>_mapping.json`.
    Use `--fresh` only when starting a new clone and refusing to continue from an existing mapping file.
-   For V5 to V6 migrations, prefer an explicit versioned file such as `.v6mapping.json`.
    Use `--dry-run` first for a preflight/resume report with no inserts and no mapping writes.
 4. Keep the generated mapping JSON; it maps old category/article IDs to new IDs.
 5. Verify the completed clone before post-clone rewrites.
@@ -80,12 +79,12 @@ task is explicitly to update that existing PHPKB article.
 1. Identify the target PHPKB category and an adjacent source article in that
    category. For example, a new V6 changelog article can be cloned from an
    adjacent changelog article into category `915`.
-2. Use a dedicated one-off mapping file. Do not write one-off article mappings
+2. Use a dedicated one-off mapping under `.scratch/`. Do not write one-off article mappings
    into `.v6mapping.json`, because that file represents the V5 to V6 clone.
 3. Run a dry-run first:
 
    ``` powershell
-   python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .new_article_mapping.json --fresh --article-id <source-article-id> --target-category-id <target-category-id> --suffix "" --dry-run
+   python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .scratch/new_article_mapping.json --fresh --article-id <source-article-id> --target-category-id <target-category-id> --suffix "" --dry-run
    ```
 
 4. If the dry-run scope is correct, run the real clone with the same command and
@@ -137,20 +136,20 @@ task is explicitly to update that existing PHPKB article.
     Then commit the RAG artifact and the updated bundle in both this repo and the sibling `kb.comindware.ru` repo.
 
 12. Commit the generated `for_kb_import_ru/` HTML alongside the source Markdown —
-     this repo tracks `for_kb_import_ru/` under version control. Keep the
-     one-off mapping if it is useful for audit or rollback.
+     this repo tracks `for_kb_import_ru/` under version control. Delete the
+     `.scratch/` one-off mapping after publish unless audit is needed.
 
 ### Real-world Example: Publishing "Работа с ИИ" (ai_features_guide.md)
 
 1. Identified category `976` (Разработка приложений) as the correct target category.
 2. Selected `5643` (Приложения. Определения и настройка) as an adjacent source article in category `976`.
-3. Performed dry run with a dedicated mapping file `.ai_features_guide_mapping.json`:
+3. Performed dry run with a dedicated mapping file `.scratch/ai_features_guide_mapping.json`:
    ``` powershell
-   python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .ai_features_guide_mapping.json --fresh --article-id 5643 --target-category-id 976 --suffix "" --dry-run
+   python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .scratch/ai_features_guide_mapping.json --fresh --article-id 5643 --target-category-id 976 --suffix "" --dry-run
    ```
 4. Ran the actual clone to produce the new article ID `5742`:
    ``` powershell
-   python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .ai_features_guide_mapping.json --fresh --article-id 5643 --target-category-id 976 --suffix ""
+   python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .scratch/ai_features_guide_mapping.json --fresh --article-id 5643 --target-category-id 976 --suffix ""
    ```
 5. Updated front matter of `docs/ru/business_apps/ai/ai_features_guide.md` with `kbId: 5742`.
 6. Added `[ai_feature_guide]: {{ kbArticleURLPrefix }}5742` to `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md`.

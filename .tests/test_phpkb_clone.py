@@ -204,6 +204,15 @@ def test_category_child_where_include_private_drops_public_only_filter():
     )
 
 
+def test_parse_args_requires_mapping():
+    try:
+        phpkb_clone.parse_args(["--category-id", "798"])
+    except SystemExit:
+        pass
+    else:
+        raise AssertionError("Expected SystemExit when --mapping is omitted")
+
+
 def test_parse_args_accepts_scripted_article_clones():
     args = phpkb_clone.parse_args([
         "--profile", "cmwlab",
@@ -231,6 +240,7 @@ def test_parse_args_accepts_scripted_article_clones():
 def test_run_cli_clones_articles_without_prompting(monkeypatch):
     calls = []
     args = phpkb_clone.parse_args([
+        "--mapping", ".scratch/test_mapping.json",
         "--article-id", "100",
         "--article-id", "101",
         "--target-category-id", "900",
@@ -255,7 +265,7 @@ def test_run_cli_clones_articles_without_prompting(monkeypatch):
 
 def test_run_cli_clones_category_tree_with_target_parent(monkeypatch):
     calls = []
-    args = phpkb_clone.parse_args(["--category-id", "798", "--target-parent-id", "1000"])
+    args = phpkb_clone.parse_args(["--mapping", ".v6mapping.json", "--category-id", "798", "--target-parent-id", "1000"])
 
     monkeypatch.setattr(phpkb_clone, "fetchCategory", lambda category_id: (category_id, "Version", "1"))
     monkeypatch.setattr(
@@ -272,7 +282,7 @@ def test_run_cli_clones_category_tree_with_target_parent(monkeypatch):
 
 def test_run_cli_passes_include_private_to_category_clone(monkeypatch):
     calls = []
-    args = phpkb_clone.parse_args(["--category-id", "798", "--include-private"])
+    args = phpkb_clone.parse_args(["--mapping", ".v6mapping.json", "--category-id", "798", "--include-private"])
 
     monkeypatch.setattr(phpkb_clone, "fetchCategory", lambda category_id: (category_id, "Version", "1"))
     monkeypatch.setattr(
@@ -338,7 +348,7 @@ def test_plan_specific_article_counts_backrefs_for_unmapped_article(monkeypatch)
 
 
 def test_run_cli_dry_run_category_uses_plan_without_cloning(monkeypatch):
-    args = phpkb_clone.parse_args(["--category-id", "798", "--target-parent-id", "1000", "--dry-run"])
+    args = phpkb_clone.parse_args(["--mapping", ".v6mapping.json", "--category-id", "798", "--target-parent-id", "1000", "--dry-run"])
     calls = []
 
     monkeypatch.setattr(phpkb_clone, "fetchCategory", lambda category_id: (category_id, "Version", "1"))
