@@ -104,6 +104,7 @@ AGENTS.md defines writing and formatting rules. End-to-end workflows live in ski
 | Search KB for N3/Turtle/C# references | `search-knowledge-base` |
 | Write N3/Turtle/RDF expressions | `n3_references` |
 | Write C# scripts for Comindware Platform | `csharp_api` |
+| Transcribe meeting recordings for documentation prep | `video-transcription` |
 | Document discoveries after non-trivial tasks | `self-evolution` |
 
 Skills are under `.agents/skills/<name>/SKILL.md`. Do not duplicate skill content here — load the skill and follow its workflow.
