@@ -33,7 +33,19 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
    `phpkb_clone.py` and `phpkb_clone_update_links.py` connect to PHPKB through `tools.ssh_kb_ru` and can insert or update production-like database records. Do not run them unless the user explicitly asks to execute the DB operation and understands the target.
 
 3. Verify mapping files before link or ID migration.
-   Check `.mapping.json` or another explicit mapping file before using `phpkb_clone_update_links.py` or `phpkb_clone_update_mapped_ids.py`.
+   Check the explicit clone mapping (`--mapping` path) before using `phpkb_clone_update_links.py` or `phpkb_clone_update_mapped_ids.py`.
+
+## Mapping files
+
+`phpkb_clone.py` requires `--mapping` (no default). Pick the path deliberately:
+
+| Use case | Path | Git |
+| --- | --- | --- |
+| V5→V6 (or similar) version migration | `.v6mapping.json`, `.v5mapping.json` | tracked |
+| One-off article clone / publish | `.scratch/<purpose>_mapping.json` | gitignored |
+| Post-clone link/ID updates | same file as the clone run | — |
+
+After a one-off publish, delete the `.scratch/` mapping unless audit is needed. Never write one-off article mappings into `.v6mapping.json`.
 
 4. Treat file-rewriting helpers as batch migrations.
    `phpkb_clone_update_mapped_ids.py --write` rewrites Markdown files in place. Before running it, check `git status --short`, inspect the search scope, and confirm it matches the requested files.
@@ -52,8 +64,9 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 - If `--target-parent-id` is omitted, the cloned root category uses the source category's parent, so it is created adjacent to the source category.
 - Confirm the target category ID when cloning individual articles.
 - Use `--dry-run` first for scripted clones to get a preflight scope report without inserts or mapping writes.
-- Expect the script to load an existing mapping JSON and resume by default.
-- For V5 to V6 migrations, prefer `--mapping .v6mapping.json` and pass that same file to post-clone update scripts.
+- Pass `--mapping` explicitly on every run (required). No default path.
+- For V5 to V6 migrations, use `--mapping .v6mapping.json` and pass that same file to post-clone update scripts.
+- For one-off article clones, use `--mapping .scratch/<purpose>_mapping.json` (gitignored).
 - Use `--fresh` only when starting a new clone and refusing to reuse an existing mapping file.
 - Expect the script to maintain category/article mapping in JSON and insert rows into PHPKB tables.
 - Expect newly generated article/category IDs to be read from `cursor.lastrowid`, not from global `MAX(...)` queries.
@@ -69,9 +82,9 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 
 - Use this when a local Markdown article has no `kbId` and must become a new PHPKB article, not an update of an existing article.
 - Pick an adjacent source PHPKB article in the same target category and clone it with `phpkb_clone.py --article-id`.
-- Use a dedicated one-off mapping file, for example `.release_notes_6_new_article_mapping.json`, not `.v6mapping.json`, so the release migration mapping stays clean.
+- Use a dedicated one-off mapping under `.scratch/`, for example `.scratch/import_server_csv_mapping.json`, not `.v6mapping.json`.
 - Always run the clone dry-run first:
-  `python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping <one-off-mapping>.json --fresh --article-id <source-article-id> --target-category-id <target-category-id> --suffix "" --dry-run`
+  `python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .scratch/<purpose>_mapping.json --fresh --article-id <source-article-id> --target-category-id <target-category-id> --suffix "" --dry-run`
 - Run the real clone with the same arguments and no `--dry-run`; omit `--show` so the placeholder stays hidden until `phpkb_update_articles.py` publishes it.
 - Read the new article ID from the clone output or from `mapping["Articles"][source_article_id]`.
 - Add `kbId: <new-article-id>` to the local Markdown front matter.
@@ -81,8 +94,8 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 - Publish only the new article using the script's command-line flags:
   `python phpkb_update_articles.py --profile cmw --article-id <new-article-id> --yes`
 - The script can also be run interactively by omitting `--article-id`. It reads `for_kb_import_ru`, finds `<div ... kb-id="<new-article-id>" ...>`, and updates the PHPKB row with the MkDocs title, HTML content, tags, `unlisted`, `article_status='approved'`, and `article_show='yes'`.
-- After the new ID is written to the Markdown front matter, reusable hyperlink-map entries point to the new `{{ kbArticleURLPrefix }}` URL, and the article is successfully published, delete one-off mapping files such as `.release_notes_6_new_article_mapping.json` unless the user asks to keep them for audit. Keep durable migration mappings such as `.v6mapping.json`.
-- If several sibling articles are cloned from the same source article, use a separate one-off mapping file for each new target article. A mapping stores one source-to-target article pair, so reusing it for siblings would resume the first clone instead of creating another article.
+- After the new ID is written to the Markdown front matter, reusable hyperlink-map entries point to the new `{{ kbArticleURLPrefix }}` URL, and the article is successfully published, delete the `.scratch/` one-off mapping unless the user asks to keep it for audit. Keep durable migration mappings such as `.v6mapping.json`.
+- If several sibling articles are cloned from the same source article, use a separate `.scratch/<purpose>_mapping.json` for each new target article. A mapping stores one source-to-target article pair, so reusing it for siblings would resume the first clone instead of creating another article.
 - In this repository, keep the generated `for_kb_import_ru` HTML for new and updated articles under version control. Clean generated export files only when they are accidental, unrelated to the requested publish scope, or the user explicitly asks not to keep them.
 
 ### Sync Changed Articles To PHPKB (Git-Diff Batch)
