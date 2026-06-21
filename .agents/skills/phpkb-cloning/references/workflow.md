@@ -28,7 +28,7 @@ Keep clone and post-clone update scripts on the same profile.
    `--mapping` is required on every run.
    **Version migrations:** repo-root tracked files such as `.v7mapping.json` or `.v6.5mapping.json` — durable artifacts like `.v5mapping.json` / `.v6mapping.json`, not under `.scratch/`.
    **One-off clones:** `.scratch/<purpose>_mapping.json` only.
-   Post-clone scripts (`phpkb_clone_update_links.py`, `phpkb_clone_update_mapped_ids.py`, `phpkb_clone_rollback.py`) default to gitignored `.mapping.json` when `--mapping` is omitted; per-release work still passes the same `.vNmapping.json` explicitly on every step.
+   All cloning scripts require `--mapping`; pass the same `.vNmapping.json` (or explicit `.mapping.json` for local scratch) on clone, link update, ID migration, and rollback.
    Use `--fresh` only when starting a new clone and refusing to continue from an existing mapping file.
    Use `--dry-run` first for a preflight/resume report with no inserts and no mapping writes.
 4. Keep the generated mapping JSON; it maps old category/article IDs to new IDs.
@@ -283,7 +283,12 @@ category and want it live right away. Omit it for test copies and staged migrati
 
 ## CLI Usage
 
-Without arguments, `phpkb_clone.py` keeps the historical interactive flow.
+All cloning scripts require `--mapping`. Interactive category browsing still works when you pass `--mapping` and omit `--category-id` / `--article-id`:
+
+``` powershell
+python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .v7mapping.json
+python utilities/phpkb_cloning/phpkb_clone_update_links.py --profile cmw --mapping .v7mapping.json
+```
 
 Scripted category tree clone:
 

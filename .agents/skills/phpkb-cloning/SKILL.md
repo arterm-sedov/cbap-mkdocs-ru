@@ -37,7 +37,7 @@ Scripts live in `utilities/phpkb_cloning/`. Run them from the repository root un
 
 ## Mapping files
 
-`phpkb_clone.py` requires `--mapping` (no default). Pick the path deliberately:
+`phpkb_clone.py` and all post-clone scripts require `--mapping` (no default). Pick the path deliberately:
 
 | Use case | Path | Git |
 | --- | --- | --- |
@@ -49,7 +49,7 @@ Per-release migration mappings are **repository-root artifacts**. Commit them to
 
 One-off article clone mappings are the opposite: write them only under `.scratch/`, delete after publish unless audit is needed, and never mix them into a per-release migration file.
 
-**Post-clone scripts** (`phpkb_clone_update_links.py`, `phpkb_clone_update_mapped_ids.py`, `phpkb_clone_rollback.py`) default to `.mapping.json` when `--mapping` is omitted. That file is gitignored and meant for local/ad-hoc runs (copy or symlink a map there for experiments). **Per-release migrations must still pass the same explicit `--mapping .vNmapping.json` on every step** — clone, link update, local ID migration, and rollback — end to end. Do not rely on the post-clone default for production migration work.
+Pass the **same** `--mapping` path on every cloning step — `phpkb_clone.py`, `phpkb_clone_update_links.py`, `phpkb_clone_update_mapped_ids.py`, and `phpkb_clone_rollback.py`. For local scratch work you may pass gitignored `.mapping.json` explicitly; per-release migrations use repo-root `.vNmapping.json`.
 
 4. Treat file-rewriting helpers as batch migrations.
    `phpkb_clone_update_mapped_ids.py --write` rewrites Markdown files in place. Before running it, check `git status --short`, inspect the search scope, and confirm it matches the requested files.
