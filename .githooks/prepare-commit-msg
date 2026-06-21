@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Usage: prepare-commit-msg <commit-msg-file> [<commit-source>] [<sha1>]
+MSG_FILE="$1"
+COMMIT_SOURCE="${2-}"
+SHA1="${3-}"
+
+# Skip for merge commits
+if git rev-parse -q --verify MERGE_HEAD >/dev/null 2>&1; then
+  exit 0
+fi
+
+# Read the first line of the message
+first_line="$(head -n1 "$MSG_FILE" || true)"
+
+# If message already starts with [#XXXXX] or is Merge/Revert, do nothing
+if printf '%s' "$first_line" | grep -qE '^\[\#[0-9]+\] '; then
+  exit 0
+fi
+if printf '%s' "$first_line" | grep -qE '^(Merge|Revert) ' ; then
+  exit 0
+fi
+
+# Try to extract issue number from branch name
+branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || true)"
+issue="$(printf '%s' "$branch" | grep -oE '[0-9]+' | head -1 || true)"
+
+# Fallback: reuse latest commit's [#XXXXX] token if present
+if [ -z "$issue" ]; then
+  issue="$(git log -n 20 --pretty=%B | sed -n 's/^\[\#\([0-9][0-9]*\)\].*/\1/p' | head -1 || true)"
+fi
+
+# Prepend token if we found one
+if [ -n "$issue" ]; then
+  rest="$(tail -n +2 "$MSG_FILE" || true)"
+  printf '[#%s] %s\n%s' "$issue" "$first_line" "$rest" > "$MSG_FILE"
+fi
+
+exit 0
+
+
