@@ -16,6 +16,7 @@ Hyperlink-map updates are prefix-aware:
 - `{{ kbCategoryURLPrefix }}...` uses `mapping["Categories"]`.
 
 The CLI is dry-run by default. Pass `--write` to rewrite local files.
+`--mapping` is required; pass the same file used for `phpkb_clone.py`.
 """
 
 import argparse
@@ -24,7 +25,6 @@ import re
 from pathlib import Path
 
 
-DEFAULT_MAPPING_FILE = ".mapping.json"
 DEFAULT_DOCS_ROOT = Path("docs/ru")
 DEFAULT_HYPERLINKS_FILE = DEFAULT_DOCS_ROOT / ".snippets/hyperlinks_mkdocs_to_kb_map.md"
 
@@ -51,8 +51,8 @@ def parse_args(argv=None):
     )
     parser.add_argument(
         "--mapping",
-        default=DEFAULT_MAPPING_FILE,
-        help=f"Mapping JSON with Articles/Categories sections. Default: {DEFAULT_MAPPING_FILE}",
+        required=True,
+        help="Mapping JSON with Articles/Categories sections (required). Use the same file as phpkb_clone.py.",
     )
     parser.add_argument(
         "--target",

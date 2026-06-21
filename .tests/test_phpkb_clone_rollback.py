@@ -97,6 +97,15 @@ def test_run_rollback_write_deletes_in_safe_order_and_commits():
     assert connection.committed is True
 
 
+def test_parse_args_requires_mapping():
+    try:
+        rollback.parse_args(["--write"])
+    except SystemExit:
+        pass
+    else:
+        raise AssertionError("Expected SystemExit when --mapping is omitted")
+
+
 def test_write_requires_explicit_delete_confirmation():
     try:
         rollback.main(["--mapping", ".mapping.json", "--write"])
