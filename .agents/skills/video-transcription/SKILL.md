@@ -22,7 +22,7 @@ Run from repository root with the repo venv:
 
 ## Setup
 
-1. Install deps (once): `google-genai` is listed in `install/requirements.txt`; run `python-env-setup` if the venv is missing packages.
+1. Install deps (once): packages are in `install/requirements.txt` (see also `requirements.txt` in this skill folder); run `python-env-setup` if the venv is missing packages.
 2. Set `GEMINI_API_KEY` in repo `.env`, or pass `--api-key`.
 
 ## Output
