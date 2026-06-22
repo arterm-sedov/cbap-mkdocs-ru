@@ -21,3 +21,7 @@ Review before starting related work. Move to skills/rules when stable.
 ## 2026-06-17
 
 - Zero git churn in `phpkb_content_rag/` after an import means the source articles are already current — that's a good control.
+
+## 2026-06-22
+
+- N3 triples: account templates (ША) cannot be iterated via `object:alias`/`cmw:container` (those work for record templates only) — use `?x a account:Account` + filter by `account:fullName`. Triples fail **silently** (unbound triplet → empty/`false`, no error); debug by binary search: wrap subsets in `{...} assert:count ?c. if {?c != 0} then {true -> ?value} else {false -> ?value}`. Also: triples can't reach records of a template in another **solution**; `object:findProperty`/`object:alias` fail silently on system-name mismatch (Cyrillic vs Latin, case).
