@@ -33,11 +33,11 @@ Comindware Platform Knowledge Base:
 - @/docs/
 - @/phpkb_content/ (**do not manually edit** — auto-generated from PHPKB; use @/docs/ for all content changes)
 
-Platform source code (sibling repo, for verifying feature behavior and content against implementation):
+Platform source code (see `PLATFORM_SOURCE_CODE` in `.env`; sibling repo, for verifying feature behavior):
 
 - `@../CBAP_MONO` — for file references in chat sessions
-- `CBAP_REPO_PATH ` in `.env` — local absolute path
-- Use `git -C "$env:CBAP_REPO_PATH "` in scripts, or provide path manually
+- `PLATFORM_SOURCE_CODE` in `.env` — local absolute path
+- Use `git -C "$env:PLATFORM_SOURCE_CODE"` in scripts, or provide path manually
 
 ## SCRATCH DIRECTORY
 
