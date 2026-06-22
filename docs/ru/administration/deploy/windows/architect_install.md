@@ -1,6 +1,6 @@
 ---
 title: Comindware Enterprise. Инструкции по установке экземпляра ПО в ОС Windows
-kbId: 4629
+#kbId: 4629
 ---
 
 # {{ productNameEnterprise }}. Инструкции по установке экземпляра ПО в ОС Windows {: #architect_install_windows }

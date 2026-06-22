@@ -1,5 +1,5 @@
 ---
-kbId: 5562
+#kbId: 5562
 title: Развёртывание Comindware Platform в кластере
 tags:
     - отказоустойчивость
