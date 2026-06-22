@@ -3,6 +3,16 @@
 Session discoveries that haven't yet been migrated to durable skills or rules.
 Review before starting related work. Move to skills/rules when stable.
 
+## 2026-06-22
+
+- **Standalone PDF generation from external documents.** Created `generate-pdf-from-source` skill for converting DOCX/text into Comindware-styled PDFs outside the docs/ru tree. Target folder structure: `build.ps1` + `mkdocs.yml` + `docs/` (markdown + img) + `.site/` (build output) + output PDF. YAML uses `INHERIT: !ENV [MKDOCS_COMMON, <relative_fallback>]` with env vars set by build script. `docs_dir` and `site_dir` must be siblings (not parent-child). `output_path` in `with-pdf` is relative to `site_dir`; use `../` to place PDF in folder root. `exclude_docs: | *.md !<article>.md` builds only the target article.
+- **Image auto-figcaption via italic wrapping.** `_![alt](path)_` triggers `mkdocs-em-img2fig-plugin` to generate `<figure>` + `<figcaption>` from alt text. No manual `*Рис. N.*` lines needed.
+- **DOCX conversion with python-docx.** Images extracted via `rel.target_part.blob` to `docs/img/`. List paragraphs have `style.name == "List Paragraph"`. Headings detected by bold + font size ≥ 14pt. Runs preserve bold/italic/underline via `run.font` properties.
+- **KB article references by ID.** `kbId:` in frontmatter maps to `https://kb.comindware.ru/article.php?id=XXXX`. Use grep to find relevant articles, extract kbIds, group by category.
+- **Build script path navigation.** `$reposRoot = $scriptDir; for ($i=0; $i -lt N; $i++) { $reposRoot = $reposRoot.Parent }; $cbapRoot = Join-Path $reposRoot.FullName "Documents\cbap-mkdocs-ru"`. Loop count depends on folder depth relative to user's home.
+- **UTF-8 for mkdocs on Windows.** Must set `$env:PYTHONIOENCODING="utf-8"` and `$env:PYTHONUTF8="1"` (User-level env vars + PowerShell profile). Without this, colorama crashes on Unicode box-drawing characters in mkdocs-material output.
+- **`git config core.longpaths true`** required globally on Windows for repos with long Russian filenames in paths (phpkb_content/, phpkb_content_rag/).
+
 ## 2026-06-20
 
 - **Generic/infra commits without a customer ticket default to `#6` (v6) or `#5` (v5).** The `cmwhelp-commit` skill already handles this via branch name fallback, but the convention should be explicit: non-feature, repo-level tasks (tooling, CI, formatting, refactoring) use the version number as ticket reference. Always ask the user for the session ticket number first — only fall back to `#6`/`#5` when the user confirms there is no customer ticket.
