@@ -31,9 +31,9 @@ end="<!-- apache-ignite-deploy-use-case-end -->"
 
 ## Установка {{ apacheIgniteVariants }} {: #apache_ignite_deploy_windows_installation .pageBreakBefore }
 
-1. Скачайте ZIP файл `apache-ignite-2.17.0-bin.zip` по ссылке: <https://ignite.apache.org/download.cgi#binaries>
-2. Распакуйте ZIP-файл в папку, например: `C:\apache-ignite-2.17.0-bin`
-3. Установите переменную среды Windows: `set IGNITE_HOME=C:\apache-ignite-2.17.0-bin`
+1. Скачайте ZIP файл `apache-ignite-2.18.0-bin.zip` по ссылке: <https://ignite.apache.org/download.cgi#binaries>
+2. Распакуйте ZIP-файл в папку, например: `C:\apache-ignite-2.18.0-bin`
+3. Установите переменную среды Windows: `set IGNITE_HOME=C:\apache-ignite-2.18.0-bin`
 4. Настройте конфигурацию Ignite, изменив файл `Apache.Ignite.exe.config`: `%IGNITE_HOME%\platforms\dotnet\bin\Apache.Ignite.exe.config`
 
 ## Запуск {{ apacheIgniteVariants }} {: #apache_ignite_deploy_windows_startup }
@@ -51,7 +51,7 @@ end="<!-- apache-ignite-deploy-use-case-end -->"
 - `<igniteConfiguration xmlns="http://ignite.apache.org/schema/dotnet/IgniteConfigurationSection" gridName="myGrid1">` — в параметре `gridName` укажите имя сервера узла Ignite. У узлов кластера должно быть одинаковое имя сервера.
 - `<discoverySpi type="TcpDiscoverySpi"><ipFinder type="TcpDiscoveryStaticIpFinder"><endpoints> <string>127.0.0.1</string></endpoints></ipFinder></discoverySpi>` — в параметре `TcpDiscoveryStaticIpFinder` укажите адрес сервера.
 - `<dataRegionConfigurations type="DataRegionConfiguration"> <dataRegionConfiguration><name>Persistent</name><persistenceEnabled>true</persistenceEnabled>` — в директиве `dataRegionConfiguration` укажите `<persistenceEnabled>true</persistenceEnabled>`.
-- `<workDirectory>C:\apache-ignite-2.17.0-bin\</workDirectory>>` — укажите рабочую папку Ignite.
+- `<workDirectory>C:\apache-ignite-2.18.0-bin\</workDirectory>>` — укажите рабочую папку Ignite.
 - `<igniteInstanceName>Comindware_Instance2</igniteInstanceName>` — укажите имя экземпляра Ignite.
 {% include-markdown ".snippets/pdfPageBreakHard.md" %}
 
@@ -125,7 +125,7 @@ end="<!-- apache-ignite-deploy-use-case-end -->"
         </dataStorageConfiguration>
         <clientMode>false</clientMode>
         <includedEventTypes></includedEventTypes>
-        <workDirectory>C:\apache-ignite-2.17.0-bin\</workDirectory>
+        <workDirectory>C:\apache-ignite-2.18.0-bin\</workDirectory>
         <jvmDllPath></jvmDllPath>
         <igniteInstanceName>Comindware_Instance2</igniteInstanceName>
         <autoGenerateIgniteInstanceName>false</autoGenerateIgniteInstanceName>

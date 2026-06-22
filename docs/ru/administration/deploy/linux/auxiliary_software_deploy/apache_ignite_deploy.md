@@ -36,7 +36,7 @@ hide: tags
 
 Например, можно развернуть кластер {{ apacheIgniteVariants }} из нескольких узлов, если это необходимо для вашего бизнеса.
 
-Здесь представлены краткие инструкции по установке и настройке {{ apacheIgniteVariants }} 2.17.0 в ОС Linux для работы с **{{ productName }}** в простейшей конфигурации.
+Здесь представлены краткие инструкции по установке и настройке {{ apacheIgniteVariants }} 2.18.0 в ОС Linux для работы с **{{ productName }}** в простейшей конфигурации.
 
 Вам может потребоваться адаптировать конфигурацию {{ apacheIgniteVariants }} в соответствии со своими бизнес-потребностями.
 
@@ -51,9 +51,9 @@ hide: tags
 1. Скачайте, распакуйте и установите {{ apacheIgniteVariants }}:
 
     ``` sh
-    wget https://downloads.apache.org/ignite/2.17.0/apache-ignite-2.17.0-bin.zip
-    unzip -q apache-ignite-2.17.0-bin.zip
-    mv apache-ignite-2.17.0-bin /usr/share/ignite
+    wget https://downloads.apache.org/ignite/2.18.0/apache-ignite-2.18.0-bin.zip
+    unzip -q apache-ignite-2.18.0-bin.zip
+    mv apache-ignite-2.18.0-bin /usr/share/ignite
     ```
 
 2. Назначьте владельца каталога `/usr/share/ignite`:

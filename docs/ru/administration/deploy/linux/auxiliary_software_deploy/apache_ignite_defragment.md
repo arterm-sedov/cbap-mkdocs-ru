@@ -23,7 +23,7 @@ hide: tags
 ## Порядок дефрагментации
 
 1. Создайте резервную копию базы данных экземпляра ПО.
-2. Скачайте бинарный дистрибутив {{ apacheIgniteVariants }}, например [apache-ignite-2.17.0-bin.zip](https://downloads.apache.org/ignite/2.17.0/apache-ignite-2.17.0-bin.zip) или более новую версию.
+2. Скачайте бинарный дистрибутив {{ apacheIgniteVariants }}, например [apache-ignite-2.18.0-bin.zip](https://downloads.apache.org/ignite/2.18.0/apache-ignite-2.18.0-bin.zip) или более новую версию.
 3. Перейдите в режим суперпользователя:
 
     --8<-- "linux_sudo.md"
@@ -31,13 +31,13 @@ hide: tags
 4. Распакуйте дистрибутив {{ apacheIgniteVariants }} в домашнюю директорию (здесь и далее `username` — имя текущего пользователя):
 
     ``` sh
-    unzip -q apache-ignite-2.17.0-bin.zip -d /usr/share/ignite
+    unzip -q apache-ignite-2.18.0-bin.zip -d /usr/share/ignite
     ```
 
 5. Задайте переменную среды `IGNITE_HOME`:
 
     ``` sh
-    export IGNITE_HOME=/usr/share/ignite/apache-ignite-2.17.0-bin
+    export IGNITE_HOME=/usr/share/ignite/apache-ignite-2.18.0-bin
     ```
 
 6. Задайте переменную среды `IGNITE_CONTROL_UTILITY_USE_CONNECTOR_CONNECTION`:
@@ -49,7 +49,7 @@ hide: tags
 7. Перейдите в директорию `bin` {{ apacheIgniteVariants }}:
 
     ``` sh
-    cd /usr/share/ignite/apache-ignite-2.17.0-bin/bin
+    cd /usr/share/ignite/apache-ignite-2.18.0-bin/bin
     ```
 
 8. Получите список узлов, зарегистрированных в базовой топологии:
@@ -59,10 +59,10 @@ hide: tags
     ```
 
     ``` sh title="Пример списка узлов в базовой конфигурации"
-    root@NODE1:/usr/share/ignite/apache-ignite-slim-2.17.0-bin/bin# export IGNITE_HOME=/usr/share/ignite/apache-ignite-slim-2.17.0-bin/
-    root@NODE1:/usr/share/ignite/apache-ignite-slim-2.17.0-bin/bin# cd apache-ignite-slim-2.17.0-bin/bin/
-    root@NODE1:/usr/share/ignite/apache-ignite-slim-2.17.0-bin/bin# bash control.sh --baseline
-    Control utility [2.17.0]
+    root@NODE1:/usr/share/ignite/apache-ignite-slim-2.18.0-bin/bin# export IGNITE_HOME=/usr/share/ignite/apache-ignite-slim-2.18.0-bin/
+    root@NODE1:/usr/share/ignite/apache-ignite-slim-2.18.0-bin/bin# cd apache-ignite-slim-2.18.0-bin/bin/
+    root@NODE1:/usr/share/ignite/apache-ignite-slim-2.18.0-bin/bin# bash control.sh --baseline
+    Control utility [2.18.0]
     User: root
     Time: 2025-12-04T11:43:07.505
 
