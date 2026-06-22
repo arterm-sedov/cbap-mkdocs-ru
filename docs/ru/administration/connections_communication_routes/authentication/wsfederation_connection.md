@@ -1,7 +1,7 @@
 ---
 title: Аутентификация через WS-Federation
 kbTitle: Аутентификация через WS-Federation. Настройка подключения, федеративного сервера и глобальной конфигурации
-kbId: 4686
+#kbId: 4686
 ## IMPORTANT! THE ARTICLE IS HIDDEN FROM KB UNTIL IT IS UPDATED FOR V5 IMPLEMENTATION
 ---
 
