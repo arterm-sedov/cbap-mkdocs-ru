@@ -2,7 +2,7 @@
 title: 'Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО'
 kbId: 5572
 url: 'https://kb.comindware.ru/article.php?id=5572'
-updated: '2026-06-01 13:42:32'
+updated: '2026-06-22 14:15:15'
 ---
 
 # Создание полной резервной копии (базы данных, вложенных файлов и журналов) без остановки экземпляра ПО
@@ -73,7 +73,7 @@ updated: '2026-06-01 13:42:32'
 3. Если пакета нет, загрузите zip-архив со скриптами:
 
    ```
-   wget -P /tmp/ https://archive.apache.org/dist/ignite/2.17.0/apache-ignite-2.17.0-bin.zip
+   wget -P /tmp/ https://archive.apache.org/dist/ignite/2.18.0/apache-ignite-2.18.0-bin.zip
    ```
 4. Если на машине ранее не был установлен пакет `zip`, установите его:
 
@@ -83,12 +83,12 @@ updated: '2026-06-01 13:42:32'
 5. Разархивируйте пакет в директорию `/var/www/`:
 
    ```
-   unzip /tmp/apache-ignite-2.17.0-bin.zip -d /var/www
+   unzip /tmp/apache-ignite-2.18.0-bin.zip -d /var/www
    ```
 6. Переименуйте получившуюся директорию со скриптами `Apache Ignite` в `apache-ignite`:
 
    ```
-   mv /var/www/apache-ignite-2.17.0-bin /var/www/apache-ignite
+   mv /var/www/apache-ignite-2.18.0-bin /var/www/apache-ignite
    ```
 7. Перейдите в директорию `/var/www/`:
 
