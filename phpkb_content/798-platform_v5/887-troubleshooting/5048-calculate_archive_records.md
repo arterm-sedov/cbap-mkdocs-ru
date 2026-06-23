@@ -2,7 +2,7 @@
 title: 'Вычисляются архивные записи'
 kbId: 5048
 url: 'https://kb.comindware.ru/article.php?id=5048'
-updated: '2025-10-24 17:34:16'
+updated: '2026-06-20 20:26:38'
 ---
 
 # Вычисляются архивные записи
@@ -33,10 +33,10 @@ EQUALS(a->_isDisabled, false)
 
 --8<-- "related_topics_heading.md"
 
-- [Подсчет количества записей без учета архивированных](https://kb.comindware.ru/article.php?id=4987)
+- [Подсчет количества записей без учета архивированных][example_formula_count_records_no_archive]
 - [Язык формул](https://kb.comindware.ru/category.php?id=880)
-- [Список функций языка формул Comindware](https://kb.comindware.ru/article.php?id=4993)
-- [Атрибуты. Определения и настройка](https://kb.comindware.ru/article.php?id=4772)
-- [Таблицы. Настройка](https://kb.comindware.ru/article.php?id=4800)
+- [Список функций языка формул Comindware][formula_function_list]
+- [Атрибуты. Определения и настройка][attributes]
+- [Таблицы. Настройка][table_configure]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

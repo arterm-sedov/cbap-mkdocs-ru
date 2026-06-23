@@ -12,6 +12,7 @@ Core behavior:
   changes are found.
 
 CLI mode is designed for scripted per-release migrations:
+- `--mapping` is required; pass the same file used for `phpkb_clone.py`;
 - dry-run by default;
 - pass `--write` to update PHPKB rows;
 - pass `--category-id` to update a category tree, or repeat `--article-id`
@@ -49,7 +50,6 @@ except ImportError:
 TOTAL_PAGES_UPDATED = 0
 CONNECTION = None
 MAPPING = {}
-DEFAULT_MAPPING_FILE = ".mapping.json"
 
 
 @dataclass
@@ -80,8 +80,8 @@ def parse_args(argv=None):
     )
     parser.add_argument(
         "--mapping",
-        default=DEFAULT_MAPPING_FILE,
-        help=f"Mapping JSON with Articles/Categories sections. Default: {DEFAULT_MAPPING_FILE}",
+        required=True,
+        help="Mapping JSON with Articles/Categories sections (required). Use the same file as phpkb_clone.py.",
     )
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--category-id", type=numeric_id, help="Update this category and all descendants.")
@@ -105,7 +105,7 @@ def has_cli_action(args):
     return bool(args.category_id or args.article_id)
 
 
-def load_mapping_json(mapping_file=DEFAULT_MAPPING_FILE):
+def load_mapping_json(mapping_file):
     with open(mapping_file, "r", encoding="utf-8") as mapping_json_file:
         mapping_json_file_content = mapping_json_file.read()
         return json.loads(mapping_json_file_content) if mapping_json_file_content else {}

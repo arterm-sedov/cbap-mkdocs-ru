@@ -2,7 +2,7 @@
 title: 'Не отображаются значения в ссылочном поле'
 kbId: 5060
 url: 'https://kb.comindware.ru/article.php?id=5060'
-updated: '2025-10-24 17:28:53'
+updated: '2026-06-20 20:26:37'
 ---
 
 # Не отображаются значения в ссылочном поле
@@ -31,8 +31,8 @@ updated: '2025-10-24 17:28:53'
 
 --8<-- "related_topics_heading.md"
 
-- [Атрибут типа «Запись»](https://kb.comindware.ru/article.php?id=4780)
-- [Атрибут типа «Текст»](https://kb.comindware.ru/article.php?id=4768)
-- [Роли в приложении](https://kb.comindware.ru/article.php?id=4803)
+- [Атрибут типа «Запись»][attribute_record]
+- [Атрибут типа «Текст»][attribute_text]
+- [Роли в приложении][roles]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

@@ -1,0 +1,44 @@
+---
+title: Глобальная функция для обращения в Active Directory
+kbId: 5195
+---
+
+# Глобальная функция для обращения в Active Directory {: #global_active_directory }
+
+Для того чтобы обратиться в Active Directory и получить оттуда какую-либо информацию, введите следующее выражение:
+
+```cs
+
+using System;
+using System.Collections.Generic;
+
+// class name should remain "Script"
+public static partial class Script {
+
+    // запрашивает данные пользователя из Active Directory по адресу эл. почты
+    public static Dictionary<string, object> QueryAD(string text)
+    {
+        //создаём подключение к Active Directory
+        System.DirectoryServices.DirectoryEntry entry = new System.DirectoryServices.DirectoryEntry("LDAP://url_сервера_AD", "логин", "пароль");
+
+        //создаём поисковый запрос
+        System.DirectoryServices.DirectorySearcher mySearcher = new System.DirectoryServices.DirectorySearcher(entry);
+
+        //фильтруем по нужному параметру
+        mySearcher.Filter = ($"(MAIL={text})");
+        var result = new Dictionary<string, object>();
+
+        //выбираем атрибуты, которые требуется вернуть
+        mySearcher.PropertiesToLoad.Add("mail");
+        mySearcher.PropertiesToLoad.Add("cn");
+        var temp = mySearcher.FindOne();
+
+        //добавляем в словарь результата
+        result.Add("name", temp.GetDirectoryEntry().InvokeGet("cn"));
+        return result;
+}
+}
+
+```
+
+{% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

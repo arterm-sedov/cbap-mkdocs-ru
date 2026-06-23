@@ -2,7 +2,7 @@
 title: 'Вычисление всех пользователей группы'
 kbId: 4936
 url: 'https://kb.comindware.ru/article.php?id=4936'
-updated: '2026-06-17 14:09:53'
+updated: '2026-06-20 20:26:18'
 ---
 
 # Вычисление всех пользователей группы
@@ -25,6 +25,6 @@ updated: '2026-06-17 14:09:53'
 | --- | --- |
 | "Менеджеры" | Название группы, пользователей которой требуется получить. |
 
-Альтернатива статье [Вычисление всех аккаунтов группы](https://kb.comindware.ru/article.php?id=4991).
+Альтернатива статье [Вычисление всех аккаунтов группы][example_formula_group_account_calculate].
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

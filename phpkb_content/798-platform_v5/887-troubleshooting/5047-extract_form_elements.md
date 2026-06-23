@@ -2,7 +2,7 @@
 title: 'Невозможно вынести из ссылки на форму ряд элементов'
 kbId: 5047
 url: 'https://kb.comindware.ru/article.php?id=5047'
-updated: '2025-10-24 17:34:29'
+updated: '2026-06-20 20:26:38'
 ---
 
 # Невозможно вынести из ссылки на форму ряд элементов
@@ -26,6 +26,6 @@ updated: '2025-10-24 17:34:29'
 
 --8<-- "related_topics_heading.md"
 
-- [Атрибут типа «Запись»](https://kb.comindware.ru/article.php?id=4780)
+- [Атрибут типа «Запись»][attribute_record]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

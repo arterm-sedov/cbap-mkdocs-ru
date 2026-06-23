@@ -16,7 +16,10 @@ Core behavior:
   sections.
 
 Resume behavior:
-- `--mapping` selects the mapping file, default `.mapping.json`;
+- `--mapping` is required; pass an explicit path (no default);
+- version migrations: durable tracked root artifacts such as `.v6mapping.json`,
+  `.v7mapping.json`, or `.v6.5mapping.json` (not under `.scratch/`);
+- one-off article clones: `.scratch/<purpose>_mapping.json` (gitignored, disposable);
 - existing mappings are loaded by default, so interrupted clone runs can be
   resumed without recloning already mapped categories/articles;
 - `--fresh` refuses to run when the selected mapping file already exists;
@@ -93,8 +96,7 @@ import json
 
 TOTAL_PAGES_CLONED = 0
 CONNECTION = None
-DEFAULT_MAPPING_FILE = ".mapping.json"
-MAPPING_FILE = DEFAULT_MAPPING_FILE
+MAPPING_FILE = None
 
 MAPPING = dict()
 CATEGORY_MAPPING = dict()
@@ -121,10 +123,14 @@ def numeric_id(value):
 
 def parse_args(argv=None):
     parser = argparse.ArgumentParser(
-        description="Clone PHPKB categories or articles and write .mapping.json.",
+        description="Clone PHPKB categories or articles and write a mapping JSON.",
     )
     parser.add_argument("--profile", choices=("cmw", "cmwlab"), help="PHPKB server profile. Defaults to SERVER_PROFILE from .env.")
-    parser.add_argument("--mapping", default=DEFAULT_MAPPING_FILE, help=f"Mapping JSON to read/write. Default: {DEFAULT_MAPPING_FILE}")
+    parser.add_argument(
+        "--mapping",
+        required=True,
+        help="Mapping JSON to read/write (required). Migrations: repo-root .v7mapping.json; one-off clones: .scratch/<name>_mapping.json",
+    )
     parser.add_argument("--fresh", action="store_true", help="Start a fresh clone and refuse to run if the mapping file already exists.")
     parser.add_argument("--dry-run", action="store_true", help="Report what would be cloned or reused without inserting rows or writing the mapping file.")
     mode = parser.add_mutually_exclusive_group()
@@ -172,7 +178,7 @@ def loadMappingJson(mapping_file):
         "Articles": normalize_mapping(mappingJson.get("Articles")),
     }
 
-def initializeMapping(mapping_file=DEFAULT_MAPPING_FILE, fresh=False):
+def initializeMapping(mapping_file, fresh=False):
     global MAPPING_FILE, MAPPING, CATEGORY_MAPPING, ARTICLE_MAPPING
 
     MAPPING_FILE = mapping_file

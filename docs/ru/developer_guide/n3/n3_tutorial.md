@@ -1,6 +1,6 @@
 ﻿---
 title: Учебник по N3
-kbId: 5261
+#kbId: 5261
 tags:
     - Notation 3
     - N3

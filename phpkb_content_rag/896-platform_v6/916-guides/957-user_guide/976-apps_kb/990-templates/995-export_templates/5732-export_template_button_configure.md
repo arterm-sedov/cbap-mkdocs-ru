@@ -2,7 +2,7 @@
 title: 'Настройка кнопки экспорта записи'
 kbId: 5732
 url: 'https://kb.comindware.ru/article.php?id=5732'
-updated: '2024-10-16 17:38:50'
+updated: '2026-06-20 17:34:12'
 ---
 
 # Настройка кнопки экспорта записи
@@ -27,7 +27,7 @@ updated: '2024-10-16 17:38:50'
    - **Шаблон экспорта** — укажите ранее созданный [шаблон экспорта](https://kb.comindware.ru/article.php?id=5733).
 5. Сохраните кнопку.
 
-_![Свойства кнопки экспорта документа, сформированному по шаблону экспорта](https://kb.comindware.ru/assets/export_template_button_properties.png)_
+_![Свойства кнопки экспорта документа, сформированному по шаблону экспорта](/platform/v6.0/business_apps/templates/export_templates/img/export_template_button_properties.png)_
 
 ## Размещение кнопки на форме
 
@@ -37,7 +37,7 @@ _![Свойства кнопки экспорта документа, сформ
 4. Из панели элементов перетащите кнопку экспорта на область кнопок.
 5. Сохраните форму.
 
-_![Перетаскивание кнопки экспорта на форму](https://kb.comindware.ru/assets/export_template_button_form_placement.png)_
+_![Перетаскивание кнопки экспорта на форму](/platform/v6.0/business_apps/templates/export_templates/img/export_template_button_form_placement.png)_
 
 ## Настройка разрешения на использование кнопки
 
@@ -48,12 +48,10 @@ _![Перетаскивание кнопки экспорта на форму](h
 5. Установите для кнопки экспорта флажок в столбце «**Использование кнопки**».
 6. Сохраните роль.
 
-_![Добавление разрешения на использование кнопки экспорта для роли](https://kb.comindware.ru/assets/export_template_button_configure_permission.png)_
+_![Добавление разрешения на использование кнопки экспорта для роли](/platform/v6.0/business_apps/templates/export_templates/img/export_template_button_configure_permission.png)_
 
 ## Связанные статьи
 
-**[Настройка шаблона экспорта](https://kb.comindware.ru/article.php?id=5733)**
-
-**[Подготовка файла шаблона экспорта](https://kb.comindware.ru/article.php?id=5730)**
-
-**[Кнопки. Определение, настройка, удаление](https://kb.comindware.ru/article.php?id=5728)**
+- *[Настройка шаблона экспорта](https://kb.comindware.ru/article.php?id=5733)*
+- *[Подготовка файла шаблона экспорта](https://kb.comindware.ru/article.php?id=5730)*
+- *[Кнопки. Определение, настройка, удаление](https://kb.comindware.ru/article.php?id=5728)*

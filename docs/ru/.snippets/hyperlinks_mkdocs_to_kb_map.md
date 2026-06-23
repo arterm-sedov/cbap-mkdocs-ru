@@ -1,3 +1,30 @@
+<!--
+================================================================================
+ HYPERLINKS MAP — Purpose and usage
+================================================================================
+
+ This file provides portable, versionable, localizable, conditionable hyperlinks
+ for the entire knowledge base. It is the SINGLE SOURCE for all cross-references:
+
+  - When exporting to PHPKB: all {{ kbArticleURLPrefix }} references resolve to
+    the current KB instance URLs.
+  - When building a PDF guide: articles NOT included in the guide retain their
+    KB URLs (reader follows the link to the KB). Articles included in the guide
+    resolve to internal anchor links.
+  - All external URLs (e.g. wikipedia, cryptopro, telegram) are centralized here
+    for easy maintenance and consistency.
+  - The entire block is wrapped in {% if kbExport %} ... {% endif %} to avoid
+    polluting the generated PHPKB HTML with double URL resolution.
+
+ Naming convention:
+  - For KB articles: use an English semantic anchor matching the article's H1
+    anchor (e.g. [forms]: {{ kbArticleURLPrefix }}5724).
+  - For external URLs: use a short descriptive name (e.g. [telegram_botfather]).
+  - For category links: use the _cat suffix (e.g. [deploy_cat]).
+
+ Always add new links here instead of using bare inline URLs in articles.
+-->
+
 <!-- Любые руководства -->
 
 <!-- Страницы оглавлений в БЗ. Начало -->
@@ -158,7 +185,47 @@
 
 [supportUrl]: https://www.comindware.ru/company/contact-us/#tab_support
 
+[bpmn_process_basics]: https://www.comindware.ru/blog-bpmn-%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81%D1%8B-%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D1%8B-%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F/
+
+[top10_bpm]: https://top10-bpm.ru/
+
+[architecture_landscape_external]: https://www.comindware.ru/platform/architecture/
+
 [certification_training]: https://www.comindware.ru/company/certification/
+
+[cmw_platform]: https://www.comindware.ru/platform/
+
+[cmw_contact_us]: https://www.comindware.ru/company/contact-us/
+
+[cmw_support_portal]: https://support.comindware.ru
+
+[telegram_botfather]: https://t.me/BotFather
+
+[colorscheme_html]: https://colorscheme.ru/html-colors.html
+
+[regex101]: https://regex101.com/
+
+[yandex_map_constructor]: https://yandex.ru/map-constructor/
+
+[cryptopro_cades]: https://www.cryptopro.ru/products/cades/plugin
+
+[cryptopro_csp]: https://cryptopro.ru/products/csp?csp=download
+
+[telegram_core_api]: https://core.telegram.org/api
+
+[w3docs_html_symbols]: https://ru.w3docs.com/uchebnik-html/html-simvoly.html
+
+[symbl_html_entities]: https://symbl.cc/ru/html-entities/
+
+[ms_power_query]: https://support.microsoft.com/ru-ru/office/power-query-%D0%BE%D0%B1%D0%B7%D0%BE%D1%80-%D0%B8-%D0%BE%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-ed614c81-4b00-4291-bd3a-55d80767f81d
+
+[wikipedia_relational_algebra]: https://ru.wikipedia.org/wiki/%D0%A0%D0%B5%D0%BB%D1%8F%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D0%B0%D1%8F_%D0%B0%D0%BB%D0%B3%D0%B5%D0%B1%D1%80%D0%B0
+
+[wikipedia_rdf]: https://ru.wikipedia.org/wiki/Resource_Description_Framework
+
+[wikipedia_owl]: https://ru.wikipedia.org/wiki/Web_Ontology_Language
+
+[wikipedia_ntriples]: https://ru.wikipedia.org/wiki/N-Triples
 
 [vulnerability_policy]: {{ kbArticleURLPrefix }}5427
 
@@ -239,6 +306,8 @@
 
 [example_n3_process_hyperlink_calculate]: {{ kbArticleURLPrefix }}5285
 
+[n3_calculate_active_task_assignee]: {{ kbArticleURLPrefix }}5277
+
 [experessions_intro]: {{ kbArticleURLPrefix }}5182
 
 [export_template_csharp_configure]: {{ kbArticleURLPrefix }}5336
@@ -296,6 +365,8 @@
 [backup_configure]: {{ kbArticleURLPrefix }}5566
 
 [backup_configure_list_view]: {{ kbArticleURLPrefix }}5566#backup_configure_list_view
+
+[backup_configure_sessions_list]: {{ kbArticleURLPrefix }}5566#backup_configure_sessions_list
 
 [backup_recommendations]: {{ kbArticleURLPrefix }}5568
 
@@ -466,6 +537,8 @@
 [version_control_git]: {{ kbArticleURLPrefix }}5649
 
 [version_control_methodology]: {{ kbArticleURLPrefix }}5650
+
+[troubleshooting_history_not_written]: {{ kbArticleURLPrefix }}5139
 
 {% endif %}
 
@@ -875,6 +948,8 @@
 
 [online_store]: {{ kbArticleURLPrefix }}5740
 
+[page_access_control]: {{ kbArticleURLPrefix }}5648
+
 [pages]: {{ kbArticleURLPrefix }}5607
 
 [pages_setup]: {{ kbArticleURLPrefix }}5645
@@ -883,13 +958,19 @@
 
 [process_diagram]: {{ kbArticleURLPrefix }}5657
 
+[process_diagram_build_advice]: {{ kbArticleURLPrefix }}5383
+
 [process_diagram_call_element_menu]: {{ kbArticleURLPrefix }}5657#process_diagram_call_element_menu
 
 [process_diagram_designer]: {{ kbArticleURLPrefix }}5657#process_diagram_designer
 
 [process_diagram_view_instance]: {{ kbArticleURLPrefix }}5658
 
+[events_chain_view]: {{ kbArticleURLPrefix }}5658#events_chain_view
+
 [process_diagram_version_control]: {{ kbArticleURLPrefix }}5659
+
+[diagram_version_list_view]: {{ kbArticleURLPrefix }}5659#diagram_version_list_view
 
 [process_diagram_element_common_properties]: {{ kbArticleURLPrefix }}5661
 
@@ -902,6 +983,8 @@
 [process_diagram_elements_none_intermediate_event_milestone_duration]: {{ kbArticleURLPrefix }}5675#process_diagram_elements_none_intermediate_event_milestone_duration
 
 [process_diagram_elements_none_end_event]: {{ kbArticleURLPrefix }}5682
+
+[process-duration]: {{ kbArticleURLPrefix }}5682#process-duration
 
 [process_diagram_elements_none_start_event]: {{ kbArticleURLPrefix }}5673
 
@@ -1062,6 +1145,8 @@
 [sso_authentication_configure_windows]: {{ kbArticleURLPrefix }}5583
 
 [zabbix_agent_deploy_windows]: {{ kbArticleURLPrefix }}5552
+
+[upgrade_version_windows]: {{ kbArticleURLPrefix }}5565
 
 {% endif %}
 

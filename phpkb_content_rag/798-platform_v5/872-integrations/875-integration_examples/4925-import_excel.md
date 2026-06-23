@@ -2,7 +2,7 @@
 title: 'Импорт данных в Excel'
 kbId: 4925
 url: 'https://kb.comindware.ru/article.php?id=4925'
-updated: '2026-06-17 14:09:52'
+updated: '2026-06-20 20:26:09'
 ---
 
 # Импорт данных в Excel
@@ -25,7 +25,7 @@ _![Пример запроса в API](https://kb.comindware.ru/assets/bi_excel_
 
 1. Выберите закладку **Power Query** → «**Из Интернета**» и в адресе запроса укажите ссылку, скопированную из **Request URL**.
 
-   Надстройка Power Query встроена в Excel 2016 и выше. Для более ранних версий Excel требуется [установка](https://support.microsoft.com/ru-ru/office/power-query-%E2%80%94-%D0%BE%D0%B1%D0%B7%D0%BE%D1%80-%D0%B8-%D0%BE%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-ed614c81-4b00-4291-bd3a-55d80767f81d).
+   Надстройка Power Query встроена в Excel 2016 и выше. Для более ранних версий Excel требуется [установка](https://support.microsoft.com/ru-ru/office/power-query-%D0%BE%D0%B1%D0%B7%D0%BE%D1%80-%D0%B8-%D0%BE%D0%B1%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-ed614c81-4b00-4291-bd3a-55d80767f81d).
 
    ![Пример запроса в Excel](https://kb.comindware.ru/assets/bi_excel_2.jpg)
 

@@ -25,9 +25,11 @@ Keep clone and post-clone update scripts on the same profile.
 1. Set and verify `.env` `SERVER_PROFILE`.
 2. Create and verify a complete `phpkbv9` database backup on the PHPKB server.
 3. Run `utilities/phpkb_cloning/phpkb_clone.py` to clone the source category tree or selected articles.
-   The script resumes from `.mapping.json` by default. Use `--mapping <path>` for a different mapping file.
+   `--mapping` is required on every run.
+   **Version migrations:** repo-root tracked files such as `.v7mapping.json` or `.v6.5mapping.json` — durable artifacts like `.v5mapping.json` / `.v6mapping.json`, not under `.scratch/`.
+   **One-off clones:** `.scratch/<purpose>_mapping.json` only.
+   All cloning scripts require `--mapping`; pass the same `.vNmapping.json` (or explicit `.mapping.json` for local scratch) on clone, link update, ID migration, and rollback.
    Use `--fresh` only when starting a new clone and refusing to continue from an existing mapping file.
-   For V5 to V6 migrations, prefer an explicit versioned file such as `.v6mapping.json`.
    Use `--dry-run` first for a preflight/resume report with no inserts and no mapping writes.
 4. Keep the generated mapping JSON; it maps old category/article IDs to new IDs.
 5. Verify the completed clone before post-clone rewrites.
@@ -37,13 +39,13 @@ Keep clone and post-clone update scripts on the same profile.
    one article can be linked under multiple categories.
 6. Run `utilities/phpkb_cloning/phpkb_clone_update_links.py` to rewrite article/category links in cloned PHPKB content.
    Start with dry-run CLI mode, for example:
-   `python utilities/phpkb_cloning/phpkb_clone_update_links.py --mapping .v6mapping.json --category-id 900`
+   `python utilities/phpkb_cloning/phpkb_clone_update_links.py --mapping .v7mapping.json --category-id 900`
    Here `--category-id` is the cloned category tree to update, not the original source category.
-   For a V5 to V6 text migration, add `--old-version 5.0 --new-version 6.0`.
+   For a version-string rewrite, add `--old-version <source> --new-version <target>`, for example `--old-version 6.0 --new-version 6.5`.
    Add `--replace-product-names` only when legacy product-name replacements are still required.
    Add `--write` only after the dry-run output looks correct.
 7. Run local Markdown migration helpers only if the workflow includes local docs updates:
-   - `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py --mapping .v6mapping.json --target all`
+   - `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py --mapping .v7mapping.json --target all`
 8. Verify local file changes with `git status --short` and targeted diffs.
 
 ## Sync Changed Articles (Git-Diff Batch)
@@ -80,12 +82,12 @@ task is explicitly to update that existing PHPKB article.
 1. Identify the target PHPKB category and an adjacent source article in that
    category. For example, a new V6 changelog article can be cloned from an
    adjacent changelog article into category `915`.
-2. Use a dedicated one-off mapping file. Do not write one-off article mappings
-   into `.v6mapping.json`, because that file represents the V5 to V6 clone.
+2. Use a dedicated one-off mapping under `.scratch/`. Do not write one-off article mappings
+   into a repo-root per-release migration file such as `.v7mapping.json` or `.v6mapping.json`.
 3. Run a dry-run first:
 
    ``` powershell
-   python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .new_article_mapping.json --fresh --article-id <source-article-id> --target-category-id <target-category-id> --suffix "" --dry-run
+   python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .scratch/new_article_mapping.json --fresh --article-id <source-article-id> --target-category-id <target-category-id> --suffix "" --dry-run
    ```
 
 4. If the dry-run scope is correct, run the real clone with the same command and
@@ -137,20 +139,20 @@ task is explicitly to update that existing PHPKB article.
     Then commit the RAG artifact and the updated bundle in both this repo and the sibling `kb.comindware.ru` repo.
 
 12. Commit the generated `for_kb_import_ru/` HTML alongside the source Markdown —
-     this repo tracks `for_kb_import_ru/` under version control. Keep the
-     one-off mapping if it is useful for audit or rollback.
+     this repo tracks `for_kb_import_ru/` under version control. Delete the
+     `.scratch/` one-off mapping after publish unless audit is needed.
 
 ### Real-world Example: Publishing "Работа с ИИ" (ai_features_guide.md)
 
 1. Identified category `976` (Разработка приложений) as the correct target category.
 2. Selected `5643` (Приложения. Определения и настройка) as an adjacent source article in category `976`.
-3. Performed dry run with a dedicated mapping file `.ai_features_guide_mapping.json`:
+3. Performed dry run with a dedicated mapping file `.scratch/ai_features_guide_mapping.json`:
    ``` powershell
-   python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .ai_features_guide_mapping.json --fresh --article-id 5643 --target-category-id 976 --suffix "" --dry-run
+   python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .scratch/ai_features_guide_mapping.json --fresh --article-id 5643 --target-category-id 976 --suffix "" --dry-run
    ```
 4. Ran the actual clone to produce the new article ID `5742`:
    ``` powershell
-   python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .ai_features_guide_mapping.json --fresh --article-id 5643 --target-category-id 976 --suffix ""
+   python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .scratch/ai_features_guide_mapping.json --fresh --article-id 5643 --target-category-id 976 --suffix ""
    ```
 5. Updated front matter of `docs/ru/business_apps/ai/ai_features_guide.md` with `kbId: 5742`.
 6. Added `[ai_feature_guide]: {{ kbArticleURLPrefix }}5742` to `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md`.
@@ -175,7 +177,7 @@ lookup prototype, not part of the PHPKB DB cloning scripts.
 - Treat `phpkb_clone_rollback.py --write` as destructive; run it only for a deliberate cleanup of cloned rows.
 - Do not run DB-mutating scripts as a test.
 - Create and verify a full DB backup before any production clone or rollback run.
-- Confirm the selected mapping JSON, for example `.v6mapping.json`, before running link updates.
+- Confirm the selected mapping JSON, for example `.v7mapping.json`, before running link updates.
 
 ## Database Backup
 
@@ -215,13 +217,13 @@ Expected sanity checks:
 If a clone run must be removed, start with a dry-run report:
 
 ``` powershell
-python utilities/phpkb_cloning/phpkb_clone_rollback.py --profile cmw --mapping .v6mapping.json
+python utilities/phpkb_cloning/phpkb_clone_rollback.py --profile cmw --mapping .v7mapping.json
 ```
 
 Delete cloned rows only after checking the counts:
 
 ``` powershell
-python utilities/phpkb_cloning/phpkb_clone_rollback.py --profile cmw --mapping .v6mapping.json --write --confirm-delete-cloned-content
+python utilities/phpkb_cloning/phpkb_clone_rollback.py --profile cmw --mapping .v7mapping.json --write --confirm-delete-cloned-content
 ```
 
 The rollback deletes only mapped target IDs from the mapping values. It cleans
@@ -281,12 +283,17 @@ category and want it live right away. Omit it for test copies and staged migrati
 
 ## CLI Usage
 
-Without arguments, `phpkb_clone.py` keeps the historical interactive flow.
+All cloning scripts require `--mapping`. Interactive category browsing still works when you pass `--mapping` and omit `--category-id` / `--article-id`:
+
+``` powershell
+python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .v7mapping.json
+python utilities/phpkb_cloning/phpkb_clone_update_links.py --profile cmw --mapping .v7mapping.json
+```
 
 Scripted category tree clone:
 
 ``` powershell
-python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --category-id 798 --target-parent-id 1000
+python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .v7mapping.json --category-id 896 --target-parent-id 1000
 ```
 
 `--category-id` is the source category tree to clone. `--target-parent-id` is
@@ -297,13 +304,13 @@ category's parent ID, so the clone is created adjacent to the source category.
 Preflight category tree clone:
 
 ``` powershell
-python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .v6mapping.json --category-id 798 --target-parent-id 1000 --dry-run
+python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .v7mapping.json --category-id 896 --target-parent-id 1000 --dry-run
 ```
 
 Private category subtrees (still skips hidden categories and articles):
 
 ``` powershell
-python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .v6mapping.json --category-id 798 --include-private --dry-run
+python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .v7mapping.json --category-id 896 --include-private --dry-run
 ```
 
 Scripted article clone:
@@ -319,9 +326,9 @@ first category. Use `--article-id` multiple times to clone several articles
 into one target category. Add `--show` only when the cloned article should be
 visible immediately.
 
-Use a separate mapping file when testing or preparing a new per-release migration.
-For V5 to V6, prefer `.v6mapping.json`:
+Use a separate repo-root mapping file when starting a new per-release migration.
+For the next release, pick a dedicated tracked name at the repository root such as `.v7mapping.json` or `.v6.5mapping.json`:
 
 ``` powershell
-python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .v6mapping.json --fresh --category-id 798 --target-parent-id 1000
+python utilities/phpkb_cloning/phpkb_clone.py --profile cmw --mapping .v7mapping.json --fresh --category-id 896 --target-parent-id 1000
 ```

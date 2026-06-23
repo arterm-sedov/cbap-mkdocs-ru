@@ -212,3 +212,6 @@ Use `git status --short` to review changed files under `phpkb_content_rag/`,
 - `phpkb_import_for_rag.py` is read-only against PHPKB (DB read + local file write).
 - `phpkb_ingest.py` only reads the RAG tree and writes the bundle; no DB access.
 - Do not confuse this workflow with `phpkb_import.py` (writes to `phpkb_content/` with MkDocs transforms) or `phpkb_update_articles.py` (writes back to PHPKB).
+- **`phpkb_content/` is git-tracked** — after running `phpkb_import.py`, stage and commit changes under `phpkb_content/` alongside `phpkb_content_rag/` and the root ingestion bundle.
+- **`--article-map` is required** for both `phpkb_import.py` and `phpkb_import_for_rag.py`. Both scripts will error without it. Do not omit `--article-map` in commands or skill examples.
+- **Full import takes 5-10+ minutes** for category 798 (606 articles). Set command timeout ≥600000ms when running via agent tooling.

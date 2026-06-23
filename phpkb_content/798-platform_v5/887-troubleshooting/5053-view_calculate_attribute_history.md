@@ -2,7 +2,7 @@
 title: 'Невозможно просмотреть историю значений вычисляемого атрибута'
 kbId: 5053
 url: 'https://kb.comindware.ru/article.php?id=5053'
-updated: '2025-10-24 17:28:14'
+updated: '2026-06-20 20:26:37'
 ---
 
 # Невозможно просмотреть историю значений вычисляемого атрибута
@@ -29,6 +29,6 @@ updated: '2025-10-24 17:28:14'
 
 --8<-- "related_topics_heading.md"
 
-- [Общие свойства атрибутов](https://kb.comindware.ru/article.php?id=4765)
+- [Общие свойства атрибутов][attribute_common_properties]
 
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}

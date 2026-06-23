@@ -1,0 +1,154 @@
+<div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5335" kb-tags="N3,атрибуты,выражение на N3,пример,формулы" kb-title="Назначение задачи на группу исполнителей, выбранную на форме. Пример настройки">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#assign_task_group_example_intro">
+<span class="md-ellipsis">
+      
+        Введение
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#assign_task_group_example_use_case">
+<span class="md-ellipsis">
+      
+        Прикладная задача
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#assign_task_group_example_nastroyka_vybora_gruppy_ispolniteley_s_pomoschyu">
+<span class="md-ellipsis">
+      
+        Настройка выбора группы исполнителей с помощью селектора на форме
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#assign_task_group_example_testirovanie">
+<span class="md-ellipsis">
+      
+        Тестирование
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      
+        Связанные статьи
+      
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="assign_task_group_example_intro">Введение</h2>
+<p>При проектировании бизнес-процессов можно назначить исполнителями <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5666">пользовательской задачи</a></strong> аккаунты и (или) роли:</p>
+<ul>
+<li>выбрать определённые аккаунты и роли;</li>
+<li>указать <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5704">атрибут типа «Аккаунт»</a> или <a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5720">атрибут типа «Роль»</a>, содержащий ID исполнителей;</li>
+<li>вычислить ID аккаунтов или ролей при помощи <strong>формулы</strong> или выражения на <strong>N3</strong>.</li>
+</ul>
+<p>Однако на этапе проектирования бизнес-процесса нет возможности назначить исполнителем задачи конкретную группу без использования <strong>формул</strong> или языка <strong>N3</strong>.</p>
+<p>Кроме того, в некоторых случаях необходимо дать возможность бизнес-пользователю выбрать группу, на которую будут назначены задачи, не предоставляя ему доступ к ролевой модели приложения.</p>
+<p>В этой статье представлен пример настройки приложения для назначения группы в качестве исполнителя задачи с помощью селектора группы на форме.</p>
+<h2 id="assign_task_group_example_use_case">Прикладная задача</h2>
+<ul>
+<li>Имеется бизнес-процесс <em>«Оформление заявок»</em>, связанный с шаблоном записи <em>«Заявка»</em>.</li>
+<li>Менеджер должен назначить группу исполнителей заявки на форме.</li>
+<li>Участники группы исполнителей получат задачу <em>«Обработать заявку»</em>.</li>
+</ul>
+<h2 id="assign_task_group_example_nastroyka_vybora_gruppy_ispolniteley_s_pomoschyu">Настройка выбора группы исполнителей с помощью селектора на форме</h2>
+<p>Алгоритм выбора группы исполнителей для задачи с помощью формы</p>
+<p>Так как в <strong>Comindware Platform</strong> не предусмотрен атрибут типа «<strong>Группа</strong>», по значению которого можно было бы назначить исполнителей пользовательской задачи, мы настроим приложение следующим образом:</p>
+<ul>
+<li>Создадим вспомогательный шаблон <em>«Справочник групп»</em> и скопируем в него названия имеющихся групп.</li>
+<li>Создадим атрибут <em>«Группа исполнителей»_типа «<strong>Запись</strong>», ссылающийся на _Справочник групп</em>.</li>
+<li>Создадим вычисляемый атрибут <em>«Исполнители задачи»</em> и укажем его в качестве исполнителей в свойствах задачи.</li>
+<li>Когда пользователь выберет на форме <em>Группу исполнителей_из _Справочника групп</em>, значение атрибута <em>«Исполнители задачи»</em> будет заполнено ID аккаунтов исполнителей, входящих в группу с таким же названием, как у выбранной <em>Группы исполнителей**.</em></li>
+</ul>
+<ol class="colored_numbers_list">
+<li>Создайте группы на странице <strong><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5580">«Администрирование» — «Администрирование аккаунтов» — «Группы»</a></strong>и добавьте в них аккаунты.</li>
+<li>Создайте <strong>шаблон записи</strong> <em>«Справочник групп»</em>.</li>
+<li>Создайте атрибут <em>«Название группы»</em> типа «<strong>Текст</strong>» и установите у него флажок <strong>«Использовать как заголовок записей»</strong>.</li>
+<li>Создайте несколько записей и в поле <em>«Название группы»</em> введите названия групп, указанные на странице «<strong>Группы</strong>», с точностью до прописных и строчных букв.</li>
+<li>В шаблоне записи <em>«Заявка»</em> создайте следующие атрибуты:</li>
+</ol>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Название</th>
+<th>Тип данных</th>
+<th>Свойства</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Группа исполнителей</em></td>
+<td><strong>Запись</strong></td>
+<td><strong>Связанный шаблон:</strong> <em>Справочник групп</em></td>
+</tr>
+<tr>
+<td><em>Исполнители задачи</em></td>
+<td><strong>Аккаунт</strong></td>
+<td><strong>Хранить несколько значений:</strong> флажок установлен  <strong>Вычислять автоматически:</strong> флажок установлен  <strong>Вычисляемое выражение: N3</strong></td>
+</tr>
+<tr>
+<td>6. В поле <strong>«Вычисляемое выражение»</strong> атрибута <em>«Исполнители задачи»</em> вставьте следующее выражение на <strong>N3</strong>:</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><code><pre><span></span><code><span class="o">#</span><span class="w"> </span><span class="err">Импортируем</span><span class="w"> </span><span class="err">функции</span><span class="w"> </span><span class="err">для</span><span class="w"> </span><span class="err">работы</span><span class="w"> </span><span class="err">с</span><span class="w"> </span><span class="err">записями</span><span class="p">,</span><span class="w"> </span><span class="err">аккаунтами</span><span class="w"> </span><span class="err">и</span><span class="w"> </span><span class="err">базой</span><span class="w"> </span><span class="err">данных</span></code> <br/><code><span class="o">@</span><span class="k">prefix</span><span class="w"> </span><span class="k">object</span><span class="p">:</span><span class="w"> </span><span class="o">&lt;</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">comindware</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">ontology</span><span class="o">/</span><span class="k">object</span><span class="o">#&gt;</span><span class="p">.</span></code> <br/><code><span class="o">@</span><span class="k">prefix</span><span class="w"> </span><span class="n">account</span><span class="p">:</span><span class="w"> </span><span class="o">&lt;</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">comindware</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">ontology</span><span class="o">/</span><span class="n">account</span><span class="o">#&gt;</span><span class="p">.</span></code> <br/><code><span class="o">@</span><span class="k">prefix</span><span class="w"> </span><span class="n">cmw</span><span class="p">:</span><span class="w"> </span><span class="o">&lt;</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">comindware</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">logics</span><span class="o">#&gt;</span><span class="p">.</span></code> <br/><code><span class="err">{</span></code> <br/><code><span class="w">   </span><span class="o">#</span><span class="w"> </span><span class="err">Находим</span><span class="w"> </span><span class="err">атрибут</span><span class="w"> </span><span class="n">Nazvaniegruppy</span><span class="w"> </span><span class="p">(</span><span class="err">Название</span><span class="w"> </span><span class="err">группы</span><span class="p">)</span><span class="w"> </span><span class="err">в</span><span class="w"> </span><span class="err">шаблоне</span><span class="w"> </span><span class="n">Spravochnikgrupp</span><span class="w"> </span><span class="p">(</span><span class="err">Справочник</span><span class="w"> </span><span class="err">групп</span><span class="p">)</span></code> <br/><code><span class="w">   </span><span class="o">#</span><span class="w"> </span><span class="err">и</span><span class="w"> </span><span class="err">помещаем</span><span class="w"> </span><span class="err">его</span><span class="w"> </span><span class="err">в</span><span class="w"> </span><span class="err">переменную</span><span class="w"> </span><span class="n">nazvaniegruppyAttribute</span></code> <br/><code><span class="w">   </span><span class="p">(</span><span class="ss">"Spravochnikgrupp"</span><span class="w"> </span><span class="ss">"Nazvaniegruppy"</span><span class="p">)</span><span class="w"> </span><span class="k">object</span><span class="p">:</span><span class="n">findProperty</span><span class="w"> </span><span class="o">?</span><span class="n">nazvaniegruppyAttribute</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="w">   </span><span class="o">#</span><span class="w"> </span><span class="err">Находим</span><span class="w"> </span><span class="err">атрибут</span><span class="w"> </span><span class="n">Zayavka</span><span class="w"> </span><span class="p">(</span><span class="err">Заявка</span><span class="p">)</span><span class="w"> </span><span class="err">в</span><span class="w"> </span><span class="err">шаблоне</span><span class="w"> </span><span class="n">Gruppaispolniteley</span><span class="w"> </span><span class="p">(</span><span class="err">Группа</span><span class="w"> </span><span class="err">исполнителей</span><span class="p">)</span></code> <br/><code><span class="w">   </span><span class="o">#</span><span class="w"> </span><span class="err">и</span><span class="w"> </span><span class="err">помещаем</span><span class="w"> </span><span class="err">его</span><span class="w"> </span><span class="err">в</span><span class="w"> </span><span class="err">переменную</span><span class="w"> </span><span class="n">gruppaispolniteleyAttribute</span></code> <br/><code><span class="w">   </span><span class="p">(</span><span class="ss">"Gruppaispolniteley"</span><span class="w"> </span><span class="ss">"Zayavka"</span><span class="p">)</span><span class="w"> </span><span class="k">object</span><span class="p">:</span><span class="n">findProperty</span><span class="w"> </span><span class="o">?</span><span class="n">gruppaispolniteleyAttribute</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="w">   </span><span class="o">#</span><span class="w"> </span><span class="err">Помещаем</span><span class="w"> </span><span class="err">значение</span><span class="w"> </span><span class="err">атрибута</span><span class="w"> </span><span class="n">Gruppaispolniteley</span><span class="p">,</span><span class="w"> </span><span class="err">то</span><span class="w"> </span><span class="err">есть</span><span class="w"> </span><span class="err">группу</span><span class="p">,</span></code> <br/><code><span class="w">   </span><span class="o">#</span><span class="w"> </span><span class="err">выбранную</span><span class="w"> </span><span class="err">в</span><span class="w"> </span><span class="err">текущей</span><span class="w"> </span><span class="err">заявке</span><span class="w"> </span><span class="n">item</span><span class="p">,</span></code> <br/><code><span class="w">   </span><span class="o">#</span><span class="w"> </span><span class="err">в</span><span class="w"> </span><span class="err">переменную</span><span class="w"> </span><span class="n">gruppaispolniteleyValue</span><span class="p">,</span></code> <br/><code><span class="w">   </span><span class="o">?</span><span class="n">item</span><span class="w"> </span><span class="o">?</span><span class="n">gruppaispolniteleyAttribute</span><span class="w"> </span><span class="o">?</span><span class="n">gruppaispolniteleyValue</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="w">   </span><span class="o">#</span><span class="w"> </span><span class="err">Находим</span><span class="w"> </span><span class="err">название</span><span class="w"> </span><span class="err">выбранной</span><span class="w"> </span><span class="err">группы</span><span class="w"> </span><span class="err">шаблоне</span><span class="w"> </span><span class="n">Spravochnikgrupp</span><span class="p">,</span></code> <br/><code><span class="w">   </span><span class="o">#</span><span class="w"> </span><span class="err">то</span><span class="w"> </span><span class="err">есть</span><span class="w"> </span><span class="err">значение</span><span class="w"> </span><span class="err">атрибута</span><span class="w"> </span><span class="n">Nazvaniegruppy</span><span class="p">,</span></code> <br/><code><span class="w">   </span><span class="o">#</span><span class="w"> </span><span class="err">и</span><span class="w"> </span><span class="err">помещаем</span><span class="w"> </span><span class="err">его</span><span class="w"> </span><span class="err">в</span><span class="w"> </span><span class="err">переменную</span><span class="w"> </span><span class="n">nazvaniegruppy</span></code> <br/><code><span class="w">   </span><span class="o">?</span><span class="n">gruppaispolniteleyValue</span><span class="w"> </span><span class="o">?</span><span class="n">nazvaniegruppyAttribute</span><span class="w"> </span><span class="o">?</span><span class="n">nazvaniegruppy</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="w">   </span><span class="o">#</span><span class="w"> </span><span class="err">Находим</span><span class="w"> </span><span class="err">группу</span><span class="w"> </span><span class="err">по</span><span class="w"> </span><span class="err">названию</span><span class="w"> </span><span class="err">из</span><span class="w"> </span><span class="err">переменной</span><span class="w"> </span><span class="n">nazvaniegruppy</span></code> <br/><code><span class="w">   </span><span class="o">#</span><span class="w"> </span><span class="err">и</span><span class="w"> </span><span class="err">помещаем</span><span class="w"> </span><span class="err">группу</span><span class="w"> </span><span class="err">в</span><span class="w"> </span><span class="err">переменную</span><span class="w"> </span><span class="n">gruppaispolniteley</span></code> <br/><code><span class="w">   </span><span class="o">?</span><span class="n">gruppaispolniteley</span><span class="w"> </span><span class="n">account</span><span class="p">:</span><span class="n">groupName</span><span class="w"> </span><span class="o">?</span><span class="n">nazvaniegruppy</span><span class="p">.</span></code> <br/><code></code> <br/><code><span class="w">   </span><span class="o">#</span><span class="w"> </span><span class="err">Находим</span><span class="w"> </span><span class="err">все</span><span class="w"> </span><span class="err">аккаунты</span><span class="w"> </span><span class="err">в</span><span class="w"> </span><span class="err">группе</span><span class="w"> </span><span class="err">из</span><span class="w"> </span><span class="err">переменной</span><span class="w"> </span><span class="n">gruppaispolniteley</span></code> <br/><code><span class="w">   </span><span class="o">#</span><span class="w"> </span><span class="err">и</span><span class="w"> </span><span class="err">помещаем</span><span class="w"> </span><span class="err">их</span><span class="w"> </span><span class="err">в</span><span class="w"> </span><span class="err">переменную</span><span class="w"> </span><span class="n">value</span><span class="p">,</span></code> <br/><code><span class="w">   </span><span class="o">#</span><span class="w"> </span><span class="err">то</span><span class="w"> </span><span class="err">есть</span><span class="w"> </span><span class="err">заполняем</span><span class="w"> </span><span class="err">значение</span><span class="w"> </span><span class="err">атрибута</span><span class="w"> </span><span class="err">«Исполнители</span><span class="w"> </span><span class="err">задачи»</span></code> <br/><code><span class="w">   </span><span class="o">?</span><span class="n">gruppaispolniteley</span><span class="w"> </span><span class="n">account</span><span class="p">:</span><span class="n">groupUsers</span><span class="w"> </span><span class="o">?</span><span class="n">value</span><span class="p">.</span></code> <br/><code><span class="err">}</span></code> <br/></pre></code></div>
+<ol class="colored_numbers_list" start="7">
+<li>Создайте процесс <em>«Оформление заявок»</em> и добавьте на диаграмму <strong>пользовательскую задачу</strong> <em>«Обработать заявку»</em>.</li>
+<li>На <strong>стартовую форму</strong> процесса добавьте атрибуты <em>«Группа исполнителей»</em> и <em>«Исполнители задачи»</em> шаблона записи <em>«Заявка»</em>.</li>
+<li>В свойствах пользовательской задачи <em>«Обработать заявку»</em> выберите в поле «<strong>Исполнители</strong>» <strong>атрибут</strong> <em>«Исполнители задачи»</em>.</li>
+<li>Опубликуйте диаграмму процесса <em>«Оформление заявок»</em>.</li>
+</ol>
+<figure class="screenshot_with_caption" markdown="block">![Диаграмма процесса «Оформление заявок»](https://kb.comindware.ru/assets/img_66867a9324c0c.png)&lt;figcaption&gt;Диаграмма процесса «Оформление заявок»&lt;/figcaption&gt;</figure>
+<h2 id="assign_task_group_example_testirovanie">Тестирование</h2>
+<ol class="colored_numbers_list">
+<li>Создайте экземпляр процесса <em>«Оформление заявок»</em>.</li>
+<li>На стартовой форме выберите группу из раскрывающегося списка  <em>«Группа исполнителей»</em>.</li>
+<li>В поле <em>«Исполнители задачи»</em> отобразятся аккаунты, которые входят в выбранную группу.</li>
+<li>Нажмите кнопку «<strong>Создать</strong>».</li>
+<li>Задача <em>«Обработать заявку»</em> отобразится только у аккаунтов, которые входят в выбранную группу. У других аккаунтов задача отображаться не будет.</li>
+</ol>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5580">Группы. Создание, настройка, выбор участников, синхронизация с AD, удаление</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5666">Пользовательская задача</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5704">Атрибут типа «Аккаунт»</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5720">Атрибут типа «Роль»</a></li>
+<li><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5608">Страница «Администрирование». Использование</a></li>
+</ul>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">&zwnj;<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

@@ -2,7 +2,7 @@
 title: 'Документы с электронной подписью. Настройка сертификатов, приложения и использование'
 kbId: 5367
 url: 'https://kb.comindware.ru/article.php?id=5367'
-updated: '2026-06-16 19:16:20'
+updated: '2026-06-20 17:34:08'
 ---
 
 # Документы с электронной подписью. Настройка сертификатов, приложения и использование
@@ -20,8 +20,8 @@ updated: '2026-06-16 19:16:20'
 
 ## Настройка ПК конечного пользователя
 
-1. Установите расширение для браузера CryptoPro Extension for CAdES (КриптоПро ЭЦП Browser plug-in): <https://www.cryptopro.ru/products/cades/plugin>
-2. Установите ПО КриптоПро CSP: <https://cryptopro.ru/products/csp?csp=download>
+1. Установите расширение для браузера [CryptoPro Extension for CAdES](https://www.cryptopro.ru/products/cades/plugin) (КриптоПро ЭЦП Browser plug-in).
+2. Установите ПО КриптоПро CSP: [cryptopro\_csp](https://cryptopro.ru/products/csp?csp=download).
 3. Получите и установите сертификат с расширением `.cer`, используя параметры по умолчанию:
 
    ![Установка сертификата в формате .cer](https://kb.comindware.ru/assets/img_63330916d0ee5.png)

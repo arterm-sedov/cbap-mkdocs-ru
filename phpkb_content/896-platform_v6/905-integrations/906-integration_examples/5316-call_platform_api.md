@@ -2,7 +2,7 @@
 title: 'Вызов API Comindware Platform при помощи Postman'
 kbId: 5316
 url: 'https://kb.comindware.ru/article.php?id=5316'
-updated: '2026-06-16 19:16:24'
+updated: '2026-06-20 17:34:07'
 ---
 
 # Вызов API {{ productName }} при помощи Postman

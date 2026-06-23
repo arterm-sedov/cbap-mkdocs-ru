@@ -23,18 +23,18 @@ When writing content about Notation3/N3/Turtle/RDF/Triples use the following sou
 ### N3 Examples (business-oriented)
 - `docs/ru/examples/n3_calculate_active_task_accounts.md` — Active tasks & accounts (business: who has open tasks)
 - `docs/ru/examples/n3_calculate_active_task_assignee.md` — Task assignee calculation
-- `docs/ru/examples/4932-example_n3_account_attributes_compare.md` — Comparing two attributes
+- `docs/ru/examples/example_n3_account_attributes_compare.md` — Comparing two attributes
 - `docs/ru/examples/n3_filter_active_tasks.md` — Filtering active tasks
 
 ### Process API & API Calls
-- `docs/ru/examples/4927-api_call_config.md` — **Main reference for running process via API**
-- `docs/ru/examples/4928-call_platform_api.md` — Calling API with Postman
+- `docs/ru/examples/api_call_config.md` — **Main reference for running process via API**
+- `docs/ru/examples/call_platform_api.md` — Calling API with Postman
 - `docs/ru/developer_guide/api/api_web.md` — Web API methods (outline, use line numbers)
 - `docs/ru/developer_guide/api/api_system_core.md` — System Core API (OntologyService AddStatement/RemoveStatement)
 
 ### Process Scenarios
 - `docs/ru/business_apps/scenarios/scenario_elements.md` — Scenario actions including "Запустить процесс" (lines 141-145, 393-394)
-- `docs/ru/examples/4904-business_approval_process.md` — Full business process example
+- `docs/ru/examples/business_approval_process.md` — Full business process example
 
 ### Auxiliary reference Files
 

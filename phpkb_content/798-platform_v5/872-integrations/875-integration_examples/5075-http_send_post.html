@@ -1,0 +1,401 @@
+<h1>HTTP-запросы типа POST. Отправка и получение ответа. Пример: настройка подключения, пути передачи данных и сценария</h1><div class="md-body" data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="comindware" dir="ltr" kb-id="5075" kb-tags="" kb-title="HTTP-запросы типа POST. Отправка и получение ответа. Пример: настройка подключения, пути передачи данных и сценария">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<nav aria-label="Содержание" class="md-nav md-nav--secondary">
+<div class="mce-toc">
+<h2 class="toc-heading">
+      Содержание
+      </h2>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#введение">
+<span class="md-ellipsis">
+      
+        Введение
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#прикладная-задача">
+<span class="md-ellipsis">
+      
+        Прикладная задача
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-подключения">
+<span class="md-ellipsis">
+      
+        Настройка подключения
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-пути-передачи-данных">
+<span class="md-ellipsis">
+      
+        Настройка пути передачи данных
+      
+    </span>
+</a>
+<nav aria-label="Настройка пути передачи данных" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#основные-свойства">
+<span class="md-ellipsis">
+      
+        Основные свойства
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#атрибуты-сообщений">
+<span class="md-ellipsis">
+      
+        Атрибуты сообщений
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#интеграция">
+<span class="md-ellipsis">
+      
+        Интеграция
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-шаблона-записи">
+<span class="md-ellipsis">
+      
+        Настройка шаблона записи
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#настройка-сценария">
+<span class="md-ellipsis">
+      
+        Настройка сценария
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#тестирование">
+<span class="md-ellipsis">
+      
+        Тестирование
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link mkdocs_imported_link" href="#связанные-статьи">
+<span class="md-ellipsis">
+      
+        Связанные статьи
+      
+    </span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h2 id="введение">Введение</h2>
+<p><strong>Comindware Platform</strong> позволяет отправлять HTTP-запросы типа <code>POST</code> для взаимодействия с внешними системами.</p>
+<p>Здесь представлен пример настройки подключения, пути передачи данных, шаблона записи и сценария для отправки HTTP-запросов типа <code>POST</code> на внешний сервер и записи данных из ответа сервера в атрибуты шаблона записи.</p>
+<h2 id="прикладная-задача">Прикладная задача</h2>
+<p>Имеется внешний сервер, на котором хранятся данные контактов:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">[</span><span class="w"> </span></code> <br/><code><span class="w">    </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="nt">"Contact"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="nt">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STRING"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"FullName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STRING"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"PhoneNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STRING"</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">]</span></code> <br/></pre></code></div>
+<p>В ответ на HTTP-запрос с данными контакта внешний сервер отправляет ответ со значением <code>true</code>, если данные на сервере были обновлены:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"Success"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BOOL"</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<p>В <strong>Comindware Platform</strong> имеется шаблон записи <em>«Контакты клиентов»</em>.</p>
+<p>Требуется:</p>
+<ul>
+<li>настроить кнопку, которая будет обновлять данные на внешнем сервере данными из шаблона <em>«Контакты клиентов»</em>.</li>
+<li>получить ответ сервера;</li>
+<li>в случае успешного обновления данных установить для логического атрибута <em>«Данные обработаны»</em> значение <code>true</code>.</li>
+</ul>
+<h2 id="настройка-подключения">Настройка подключения</h2>
+<ol class="colored_numbers_list">
+<li>На странице <strong>Администрирование</strong>» выберите пункт «<strong>Инфраструктура</strong>» — «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4675"><strong>Подключения</strong></a>» <i class="fal fa-exchange-alt">‌<!--icon--></i>.</li>
+<li>Откройте или создайте подключение типа «<strong>Подключения REST и OData</strong>» — «<strong>Отправка HTTP-запросов</strong>».</li>
+<li>
+<p>Настройте подключение к серверу:</p>
+<ul>
+<li><strong>Системное имя</strong> — введите уникальное имя подключения.
+Не должно начинаться с цифры. Разрешены английские и русские буквы, цифры и символ «_». Рекомендуется использовать английские буквы.</li>
+<li><strong>Отключить</strong> — установите этот флажок, если требуется временно деактивировать данное подключение.</li>
+<li><strong>Описание</strong> — введите наглядное описание подключения, например <em>«Подключение для отправки HTTP-запросов»</em>.</li>
+<li><strong>Запись в файловые журналы</strong> — выберите, какие события следует записывать в журналы:<ul>
+<li><strong>Полные сведения об обработке сообщения</strong>;</li>
+<li><strong>Только ошибки</strong>;</li>
+<li><strong>Отключить</strong> — не регистрировать в журнале события отправки запросов.</li>
+</ul>
+</li>
+<li><strong>URI</strong> — введите URL-адрес сервера, принимающего HTTP-запросы, например <code>http://&lt;hostname&gt;/api</code>. Символ <code>/</code> в конце URL не требуется.</li>
+<li><strong>Формат данных</strong> — выберите представление данных:<ul>
+<li><strong>JSON</strong> — используется в данном примере;</li>
+<li><strong>XML</strong>;</li>
+<li><strong>Простой текст</strong>.</li>
+</ul>
+</li>
+<li><strong>Кодировка данных</strong> — укажите формат кодировки данных, используемый сервером, по умолчанию: <strong>UTF-8</strong>.</li>
+<li><strong>Тип аутентификации</strong> — выберите способ проверки подлинности, используемый сервером:<ul>
+<li><strong>Отсутствует</strong>;</li>
+<li><strong>Базовая</strong>;</li>
+<li><strong>Аутентификация Windows</strong>.</li>
+</ul>
+</li>
+<li><strong>Имя пользователя</strong> — укажите учётную запись для подключения к серверу.</li>
+<li><strong>Пароль</strong> — введите пароль к учётной записи для подключения к серверу.</li>
+<li><strong>Домен</strong> — укажите домен пользователя сервера.</li>
+</ul>
+</li>
+<li>
+<p>Проверьте соединение с сервером, нажав соответствующую кнопку.</p>
+</li>
+<li>При необходимости нажмите кнопку «<strong>Скачать журнал</strong>», чтобы просмотреть журнал событий отправки запросов.</li>
+<li>Сохраните подключение.</li>
+</ol>
+<h2 id="настройка-пути-передачи-данных">Настройка пути передачи данных</h2>
+<ol class="colored_numbers_list">
+<li>Откройте страницу «<strong>Администрирование</strong>» — «<strong>Архитектура</strong>» или страницу «<strong>Администрирование</strong>» приложения.</li>
+<li>Выберите пункт «<a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4676"><strong>Пути передачи данных</strong></a>» <i aria-hidden="true" class="fa-light fa-route">‌<!--icon--></i>.</li>
+<li>Откройте двойным нажатием в списке или создайте путь передачи данных типа «<strong>Подключения REST и OData</strong>» — «<strong>Отправка HTTP-запросов</strong>».</li>
+<li>
+<p>Настройте свойства пути передачи данных на следующих вкладках:</p>
+<ul>
+<li><a class="mkdocs_imported_link" href="#основные-свойства"><strong>Основные свойства</strong></a></li>
+<li><a class="mkdocs_imported_link" href="#атрибуты-сообщений"><strong>Атрибуты сообщений</strong></a></li>
+<li><a class="mkdocs_imported_link" href="#интеграция"><strong>Интеграция</strong></a></li>
+</ul>
+</li>
+<li>
+<p>Сохраните путь передачи данных.</p>
+</li>
+</ol>
+<h3 id="основные-свойства">Основные свойства</h3>
+<p>На вкладке «<strong>Основные свойства</strong>» настройте параметры использования пути передачи данных:</p>
+<ul>
+<li><strong>Подключение</strong> — выберите <a class="mkdocs_imported_link" href="#настройка-подключения">подключение для отправки HTTP-запросов</a>.</li>
+<li><strong>Системное имя</strong> — введите уникальное имя пути передачи данных.
+Не должно начинаться с цифры. Разрешены английские и русские буквы, цифры и символ «_». Рекомендуется использовать английские буквы.</li>
+<li><strong>Отключить</strong> — установите этот флажок, если требуется временно деактивировать путь передачи данных.</li>
+<li><strong>Описание</strong> — введите наглядное описание пути передачи данных, например <em>«Путь передачи данных для отправки файлов по HTTP»</em>.</li>
+<li><strong>Номер шины данных</strong> — выберите номер от 0 до 3, если требуется распределить потоки данных нескольких путей для повышения производительности.</li>
+</ul>
+<h3 id="атрибуты-сообщений">Атрибуты сообщений</h3>
+<div class="notice notice-warning">
+<p class="admonition-title">Составление атрибута сообщения типа «Объект»</p>
+<p>Чтобы составить <strong>атрибут сообщения</strong> типа «<strong>Объект</strong>» для хранения структурированных данных, необходимо создать структуру из родительского и дочерних атрибутов:</p>
+<ul>
+<li>Создайте атрибут типа «<strong>Объект</strong>», задайте его имя, но оставьте значение пустым.</li>
+<li>Установите флажок у имени родительского атрибута в таблице и нажмите кнопку «<strong>Добавить</strong>».</li>
+<li>Дважды нажмите значок <i class="fa-light fa-angle-down anchor">‌<!--icon--></i> рядом с родительским атрибутом.</li>
+<li>В таблице отобразится строка дочернего атрибута.</li>
+<li>Задайте системное имя и тип дочернего атрибута.</li>
+</ul>
+</div>
+<ol class="colored_numbers_list">
+<li>Выберите тип сообщения «<strong>Отправка HTTP-запросов</strong>».</li>
+<li>В таблицу «<strong>Запрос</strong>» добавьте атрибут типа «<strong>Строка</strong>», например <em>ID</em> — системное имя должно совпадать с именем соответствующего поля на внешнем сервере.</li>
+<li>В таблицу «<strong>Запрос</strong>» добавьте атрибут типа «<strong>Объект</strong>», например <em>Contact</em> — системное имя должно совпадать с именем соответствующего поля на внешнем сервере.</li>
+<li>Добавьте дочерние атрибуты типа «<strong>Строка</strong>», например <em>FullName</em> и <em>PhoneNumber</em> — системные имена должны совпадать с именами соответствующих полей на внешнем сервере.</li>
+<li>В таблицу «<strong>Ответ</strong>» добавьте атрибут типа «<strong>Логический</strong>», например <em>Success</em> — это системное имя может быть произвольным.</li>
+</ol>
+<h3 id="интеграция">Интеграция</h3>
+<ol class="colored_numbers_list">
+<li>Выберите <strong>метод запроса POST</strong>.</li>
+<li>В поле «<strong>Атрибуты для сериализации в тело запроса</strong>» укажите <em>ID, Contact</em>.</li>
+<li>
+<p>Заполните таблицы «<strong>Укажите атрибуты для десериализации ответа без ошибки</strong>» и «<strong>Укажите атрибуты для десериализации ответа с ошибкой</strong>»:</p>
+<ul>
+<li><strong>Путь к атрибуту:</strong> <em>$</em></li>
+<li><strong>Выражение на языке запросов:</strong> <em>$</em></li>
+</ul>
+</li>
+</ol>
+<h2 id="настройка-шаблона-записи">Настройка шаблона записи</h2>
+<ol class="colored_numbers_list">
+<li>Создайте шаблон <em>«Контакты клиентов»</em>.</li>
+<li>
+<p>Создайте следующие атрибуты:</p>
+<table style="width: 100%;">
+<thead>
+<tr>
+<th>Название</th>
+<th>Системное имя</th>
+<th>Тип</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>ID на сервере</em></td>
+<td><em>ID</em></td>
+<td><strong>Текст</strong></td>
+</tr>
+<tr>
+<td><em>Ф. И. О.</em></td>
+<td><em>FullName</em></td>
+<td><strong>Текст</strong></td>
+</tr>
+<tr>
+<td><em>Телефон</em></td>
+<td><em>PhoneNumber</em></td>
+<td><strong>Текст</strong></td>
+</tr>
+<tr>
+<td><em>Данные обновлены</em></td>
+<td><em>DataUpdated</em></td>
+<td><strong>Логический</strong></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Создайте кнопку <em>«Отправить контакт на сервер»</em> со следующими свойствами:</p>
+<ul>
+<li><strong>Контекст операции: запись</strong></li>
+<li><strong>Операция: вызвать событие «Нажата кнопка»</strong></li>
+<li><strong>Результат выполнения: обновить данные</strong></li>
+</ul>
+</li>
+<li>
+<p>Поместите атрибуты <em>«ID на сервере»</em>, <em>«Ф. И. О.»</em>, <em>«Телефон»</em>, <em>«Данные обновлены»</em> и кнопку <em>«Отправить контакт на сервер»</em> на форму.</p>
+</li>
+</ol>
+<h2 id="настройка-сценария">Настройка сценария</h2>
+<div class="notice notice-warning">
+<p class="admonition-title">Логика работы сценария отправки файлов</p>
+<ul>
+<li>Сценарий срабатывает при нажатии кнопки <em>«Отправить контакт на сервер»</em> на форме записи с прикреплёнными файлами.</li>
+<li>
+<p>Формируется переменная-объект с данными контакта, содержащие значения соответствующих атрибутов шаблона <em>«Контакты клиентов»</em>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"Message"</span><span class="p">:{</span></code> <br/><code><span class="w">        </span><span class="nt">"Contact"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">            </span><span class="nt">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STRING"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"FullName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STRING"</span><span class="p">,</span></code> <br/><code><span class="w">            </span><span class="nt">"PhoneNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STRING"</span></code> <br/><code><span class="w">        </span><span class="p">}</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+<ul>
+<li><code>$$Message-&gt;Contact-&gt;ID</code> — значение атрибута <code>$ID</code>.</li>
+<li><code>$$Message-&gt;Contact-&gt;FullName</code> — значение атрибута <code>$FullName</code>.</li>
+<li><code>$$Message-&gt;Contact-&gt;PhoneNumber</code> — значение атрибута <code>$PhoneNumber</code>.</li>
+</ul>
+</li>
+<li>
+<p>Формируется и отправляется HTTP-запрос, содержащий данные контакта в формате JSON из переменной <code>$$Message</code>:</p>
+<div class="highlight"><code><pre><span></span><code><span class="p">{</span></code> <br/><code><span class="w">    </span><span class="nt">"Contact"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></code> <br/><code><span class="w">        </span><span class="nt">"ID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STRING"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"FullName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STRING"</span><span class="p">,</span></code> <br/><code><span class="w">        </span><span class="nt">"PhoneNumber"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STRING"</span></code> <br/><code><span class="w">    </span><span class="p">}</span></code> <br/><code><span class="p">}</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p>Ответ сервера помещается в <strong>логический</strong> атрибут <em>«Данные обновлены»</em>.</p>
+</li>
+</ul>
+</div>
+<ol class="colored_numbers_list">
+<li>Создайте сценарий <em>«Отправка контакта на сервер»</em>.</li>
+<li>В свойствах события «<strong>Нажатие кнопки</strong>» выберите <strong>контекстный шаблон</strong> <em>«Контакты клиентов»</em> и <strong>кнопку</strong> <em>«Отправить контакт на сервер»</em>.</li>
+<li>
+<p>После события «<strong>Нажатие кнопки</strong>» создайте действие «<strong>Изменить значение переменных</strong>» со следующими свойствами:</p>
+<ul>
+<li><strong>Операция со значениями переменных: заменить</strong></li>
+<li><strong>Набор переменных:</strong> <em>Message</em></li>
+</ul>
+</li>
+<li>
+<p>В свойствах действия «<strong>Изменить значения переменных</strong>» настройте переменные, как указано ниже.</p>
+<div class="notice notice-warning">
+<p class="admonition-title">Сопоставление переменных и объектов с атрибутами сообщения</p>
+<p>Для передачи значения переменной в атрибут сообщения типа «<strong>Объект</strong>», необходимо создать родительскую и дочерние переменные с такой же структурой, как у атрибута сообщения:</p>
+<ul>
+<li>Создайте родительскую переменную, присвойте ей <strong>имя</strong>, но оставьте <strong>значение</strong> пустым.</li>
+<li>Установите флажок у имени родительской переменной в таблице и нажмите кнопку «<strong>Создать</strong>».</li>
+<li>Дважды нажмите значок <i class="fa-light fa-angle-down anchor">‌<!--icon--></i> рядом с родительской переменной.</li>
+<li>В таблице отобразится строка дочерней переменной.</li>
+<li>Присвойте дочерней переменной <strong>имя</strong> и <strong>значение</strong>.</li>
+</ul>
+<p>Имена переменных, значения которых передаются в <a class="mkdocs_imported_link" href="#атрибуты-сообщений"><strong>атрибуты сообщений</strong></a> с помощью действия сценария «<strong>Отправить сообщение</strong>», должны совпадать с системными именами атрибутов сообщения.</p>
+</div>
+<ul>
+<li>
+<p><em>Contact</em> — с дочерними переменными:</p>
+<ul>
+<li>
+<p><em>ID</em> — <strong>значение: формула</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="err">$</span><span class="n">ID</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p><em>FullName</em> — <strong>значение: формула</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="err">$</span><span class="n">FullName</span></code> <br/></pre></code></div>
+</li>
+<li>
+<p><em>PhoneNumber</em> — <strong>значение: формула</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="err">$</span><span class="n">PhoneNumber</span></code> <br/></pre></code></div>
+</li>
+</ul>
+<p>Здесь <code>$ID</code>, <code>$FullName</code> и <code>$PhoneNumber</code> — атрибуты шаблона записи <em>«Контакты клиентов»</em>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Создайте действие «<strong>Отправить сообщение</strong>» со следующими свойствами:</p>
+<ul>
+<li><strong>Подключение:</strong> выберите <a class="mkdocs_imported_link" href="#настройка-подключения">подключение для отправки HTTP-запросов</a>.</li>
+<li><strong>Путь передачи данных:</strong> выберите <a class="mkdocs_imported_link" href="#настройка-пути-передачи-данных">путь передачи данных для отправки HTTP-запросов</a>.</li>
+<li><strong>Переменная с сообщением:</strong> <em>Message</em></li>
+<li><strong>Переменная для успешного ответа:</strong> <em>Response</em></li>
+</ul>
+</li>
+<li>
+<p>Создайте действие «<strong>Изменить значения атрибутов</strong>» со следующими свойствами:</p>
+<ul>
+<li><strong>Атрибут:</strong> <em>Данные обновлены</em></li>
+<li><strong>Операция со значениями: заменить</strong></li>
+<li>
+<p><strong>Значение: формула</strong></p>
+<div class="highlight"><code><pre><span></span><code><span class="err">$$</span><span class="n">Response</span><span class="o">-&gt;</span><span class="n">Success</span></code> <br/></pre></code></div>
+</li>
+</ul>
+</li>
+</ol>
+<figure class="screenshot_with_caption">
+<p><img alt="Сценарий отправки HTTP-запроса методом POST" src="/platform/v5.0/administration/connections_communication_routes/rest_odata_connections/img/http_send_post.png"/></p><figcaption class="caption">Сценарий отправки HTTP-запроса методом POST</figcaption>
+</figure>
+<h2 id="тестирование">Тестирование</h2>
+<ol class="colored_numbers_list">
+<li>Создайте запись в шаблоне <em>«Контакты клиентов»</em>.</li>
+<li>Заполните поля контакта и нажмите кнопку «<strong>Сохранить</strong>».</li>
+<li>Нажмите кнопку <em>«Отправить контакт на сервер»</em>.</li>
+<li>При успешном обновлении данных контакта на внешнем сервере у атрибута <em>«Данные обновлены»</em> будет установлен флажок.</li>
+</ol>
+<h2 id="связанные-статьи">Связанные статьи</h2>
+<ul>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=5066">HTTP-запросы типа POST. Отправка составного содержимого и файлов</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4703">Отправка HTTP-запросов. Настройка подключения</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4699">Отправка HTTP-запросов типа GET. Пример: настройка подключения, пути передачи данных и сценария для обработки запросов в формате JSON</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4675">Подключения. Типы, создание, настройка, удаление</a></em></li>
+<li><em><a class="mkdocs_imported_link" href="https://kb.comindware.ru/article.php?id=4676">Пути передачи данных. Типы, создание, настройка, удаление</a></em></li>
+</ul>
+</article>
+</div>
+</div>
+<a class="md-top md-icon mkdocs_imported_link" data-md-component="top" href="#">
+<i class="fa-light fa-arrow-up">‌<!--icon--></i>
+            К началу
+          </a>
+</main>
+</div>
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": true, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></div>

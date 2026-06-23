@@ -17,18 +17,18 @@ Use this skill when answering questions about:
   - Scenario scripts with `ObjectID`
 
 ### Common C# Script Examples
-- `docs/ru/developer_guide/csharp/5000-start_process_by_records.md` — Start process for list records
-- `docs/ru/developer_guide/csharp/5001-create_entry_transfer_data.md` — Create record with data transfer
-- `docs/ru/developer_guide/csharp/5004-change_task_status.md` — Change status and complete task
-- `docs/ru/developer_guide/csharp/5005-button_change_variable.md` — Modify reusable variable
-- `docs/ru/developer_guide/csharp/5007-example_csharp_object_copy.md` — Clone/clone object
-- `docs/ru/developer_guide/csharp/5009-goto_showcase_record.md` — Navigate to record
-- `docs/ru/developer_guide/csharp/5010-delete_related_record.md` — Delete related objects
-- `docs/ru/developer_guide/csharp/5013-fill_collection_selected_list.md` — Fill collection from list
-- `docs/ru/developer_guide/csharp/5016-global_active_directory.md` — Active Directory integration
-- `docs/ru/developer_guide/csharp/5018-start_process_button_for_list_records.md` — Start process from button
-- `docs/ru/developer_guide/csharp/5019-change_all_account_emails.md` — Modify all accounts
-- `docs/ru/developer_guide/csharp/5022-clear_link.md` — Clear link attribute
+- `docs/ru/developer_guide/csharp/start_process_by_records.md` — Start process for list records
+- `docs/ru/developer_guide/csharp/create_entry_transfer_data.md` — Create record with data transfer
+- `docs/ru/developer_guide/csharp/change_task_status.md` — Change status and complete task
+- `docs/ru/developer_guide/csharp/button_change_variable.md` — Modify reusable variable
+- `docs/ru/developer_guide/csharp/example_csharp_object_copy.md` — Clone/clone object
+- `docs/ru/developer_guide/csharp/goto_showcase_record.md` — Navigate to record
+- `docs/ru/developer_guide/csharp/delete_related_record.md` — Delete related objects
+- `docs/ru/developer_guide/csharp/fill_collection_selected_list.md` — Fill collection from list
+- `docs/ru/developer_guide/csharp/global_active_directory.md` — Active Directory integration
+- `docs/ru/developer_guide/csharp/start_process_button_for_list_records.md` — Start process from button
+- `docs/ru/developer_guide/csharp/change_all_account_emails.md` — Modify all accounts
+- `docs/ru/developer_guide/csharp/clear_link.md` — Clear link attribute
 
 ## Script Templates by Context
 
