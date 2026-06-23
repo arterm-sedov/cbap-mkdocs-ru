@@ -98,7 +98,7 @@ AGENTS.md defines writing and formatting rules. End-to-end workflows live in ski
 | Add an article to mkdocs YAML navigation | `mkdocs_add_file` |
 | Format git commit messages | `cmwhelp-commit` |
 | Fix broken venv, verify mkdocs plugin imports | `python-env-setup` |
-| Generate styled PDFs from Excel/CSV/JSON data | `generate-pdf-from-source` |
+| Generate styled PDFs from external sources (DOCX, text, data) | `generate-pdf-from-source` |
 | Search KB for N3/Turtle/C# references | `search-knowledge-base` |
 | Write N3/Turtle/RDF expressions | `n3_references` |
 | Write C# scripts for Comindware Platform | `csharp_api` |
