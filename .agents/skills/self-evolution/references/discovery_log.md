@@ -63,8 +63,8 @@ Review before starting related work. Move to skills/rules when stable.
 
 ## 2026-06-19
 
-- **`docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md` is the single source for ALL external hyperlinks.** Never use bare inline URLs in articles. The map provides portability (multi-KB-instance), versionability (one update point), localizability (conditional `{% if kbExport %}` blocks), and maintainability.
-- **Internal cross-references use `(#anchor)` format**, not the hyperlinks map. The hyperlinks map is for external links (other KB articles via `{{ kbArticleURLPrefix }}` and absolute URLs like wikipedia, telegram, etc.).
+- **`docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md` is the central hub for named anchor URL targets** — articles use `[title][anchor_name]` only; URLs live in the map. Benefits: portability across language versions, deduplication, product versioning via `{{ kbArticleURLPrefix }}` / conditionals. **`mkdocs-autorefs`** resolves in-build `[title][anchor]` to internal cross-refs when both pages are in `nav:` and no map definition applies.
+- **Same-article links:** `[title](#anchor_name)` only (not in map). **Cross-article:** `[title][anchor_name]` — map and/or autorefs; not `path.md` or inline URL literals in article prose. **Map include** at end of every `docs/` article so refs resolve via autorefs or map as appropriate.
 - **Bold and italic markers go OUTSIDE hyperlinks, not inside.** `**[text][anchor]**` not `[**text**][anchor]`. Same for guillemets: `**«text»**` not `«**text**»` — bold wraps the guillemets.
 - **C# classes and methods imported from PHPKB may have translit identifiers** (`Parametr`→`Parameter`, `tekst`→`text`, `begaemvAD`→`QueryAD`). These require manual verification of each reference in the code block — no cascading cross-file impact since code blocks are self-contained.
 - **C# code blocks use 4-space indentation consistently.** Imported blocks may have `\xa0` (nbsp) or mixed tabs. Normalize to spaces.
