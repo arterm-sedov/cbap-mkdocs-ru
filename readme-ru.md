@@ -1609,7 +1609,7 @@ git config core.hooksPath .githooks
 
 | Хук | Когда | Действие |
 | --- | --- | --- |
-| `prepare-commit-msg` | Перед редактором сообщения | Добавляет `[#XXXXX]` из ветки или прошлых коммитов |
+| `prepare-commit-msg` | Перед редактором сообщения | **Подсказывает** `[#XXXXX] …` в stderr по ветке или прошлым коммитам (сообщение не меняет) |
 | `commit-msg` | После ввода сообщения | Предупреждение о формате (не блокирует) |
 | `pre-push` | Перед *push* | Git LFS pre-push |
 | `post-commit` | После коммита | Git LFS post-commit |
@@ -1738,9 +1738,9 @@ git remote show origin
 | `platform_v5` | v5.0 | `798` | `site_url` …/v5.0/ в YAML импорта |
 | `platform_v6` | v6.0 | `896` | `site_url` …/v6.0/ |
 | `master` | — | — | Интеграция / default на части remotes |
-| `<ticket>_<topic>` | — | — | Короткоживущие ветки от `platform_v5` или `platform_v6` |
+| `<YYYYMMDD>_<ticket>_<topic>` | — | — | Короткоживущие ветки от `platform_v5` или `platform_v6` |
 
-Ветки тикетов (например `10291999_scripts_keys`) обычно сливаются в соответствующую platform-ветку через pull request.
+Ветки тикетов (например `20260624_10291999_scripts_keys`) обычно сливаются в соответствующую platform-ветку через pull request.
 
 **Не коммитьте:** `.env`, SSH-ключи, пароли, абсолютные пути вашей машины. Пути вроде `CMW_KB_REPO_PATH` — только в `.env` (gitignore).
 
@@ -1774,7 +1774,7 @@ git pull origin platform_v5
 ```bash
 git switch platform_v6
 git pull origin platform_v6
-git switch -c 10291999_scripts_keys
+git switch -c 20260624_10291999_scripts_keys
 
 # … правка docs/ru/, сборка, публикация …
 
