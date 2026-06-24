@@ -4,8 +4,6 @@ Session discoveries that haven't yet been migrated to durable skills or rules.
 
 **Order: newest first** — agents read from the top; put today's `## YYYY-MM-DD` block directly below this intro (one heading per day). Review before starting related work. Move stable items to skills/rules and prune absorbed entries.
 
-<<<<<<< HEAD
-=======
 ## 2026-06-22
 
 - **Standalone PDF generation from external documents.** Created `generate-pdf-from-source` skill for converting DOCX/text into Comindware-styled PDFs outside the docs/ru tree. Target folder structure: `build.ps1` + `mkdocs.yml` + `docs/` (markdown + img) + `.site/` (build output) + output PDF. YAML uses `INHERIT: !ENV [MKDOCS_COMMON, <relative_fallback>]` with env vars set by build script. `docs_dir` and `site_dir` must be siblings (not parent-child). `output_path` in `with-pdf` is relative to `site_dir`; use `../` to place PDF in folder root. `exclude_docs: | *.md !<article>.md` builds only the target article.
@@ -16,7 +14,6 @@ Session discoveries that haven't yet been migrated to durable skills or rules.
 - **UTF-8 for mkdocs on Windows.** Must set `$env:PYTHONIOENCODING="utf-8"` and `$env:PYTHONUTF8="1"` (User-level env vars + PowerShell profile). Without this, colorama crashes on Unicode box-drawing characters in mkdocs-material output.
 - **`git config core.longpaths true`** required globally on Windows for repos with long Russian filenames in paths (phpkb_content/, phpkb_content_rag/).
 
->>>>>>> 74c982cfe ([#6] Restructure discovery log and expand self-evolution skill)
 ## 2026-06-20
 
 - **Generic/infra commits without a customer ticket default to `#6` (v6) or `#5` (v5).** The `cmwhelp-commit` skill already handles this via branch name fallback, but the convention should be explicit: non-feature, repo-level tasks (tooling, CI, formatting, refactoring) use the version number as ticket reference. Always ask the user for the session ticket number first — only fall back to `#6`/`#5` when the user confirms there is no customer ticket.
