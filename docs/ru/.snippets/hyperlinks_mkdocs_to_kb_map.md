@@ -7,24 +7,24 @@
  Articles reference anchors only — `[title][anchor_name]` or in-page `[title](#anchor_name)`.
 
  Why hub (see AGENTS.md): portability across language versions; deduplication;
- product versioning via {{ kbArticleURLPrefix }} / {{ kbCategoryURLPrefix }}.
+ product versioning via kbArticleURLPrefix / kbCategoryURLPrefix placeholders.
 
  Cross-article: `[title][anchor]`.  Same article: `[title](#anchor_name)` only.
 
  Map URL forms:
-  - Article top:  [anchor]: {{ kbArticleURLPrefix }}5724
-  - Section:      [anchor]: {{ kbArticleURLPrefix }}5566#backup_configure_list_view
-    (#fragment = heading id {: #… } on the target article)
+  - Article top:  [anchor]: kbArticleURLPrefix + article id
+  - Section:      [anchor]: kbArticleURLPrefix + article id + #section_anchor
+    (#fragment = heading id on the target article)
 
  Resolution (see AGENTS.md → Link formatting):
   - mkdocs-autorefs: target in current build nav → internal HTML/PDF cross-reference.
   - This map (via include at end of article): external URLs; KB site URLs for targets
-    outside the current guide/PDF when the matching {% if %} block is active.
+    outside the current guide/PDF when the matching conditional map block is active.
 
- Map {% if %} blocks use the same extra: guide flags as mkdocs*.yml (userGuide,
+ Map conditional blocks use the same extra: guide flags as mkdocs*.yml (userGuide,
  adminGuideLinux, kbExport, …).
  Include at end of **every** article under docs/ (snippet fragments in .snippets/ — not articles).
-   {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
+   See AGENTS.md → Link formatting (hyperlink-map include).
  So any existing or future [title][anchor] resolves: autorefs or map, whichever applies.
 
  Naming: English semantic anchor names; categories — _cat suffix.
