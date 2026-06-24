@@ -13,7 +13,7 @@ import os, argparse
 
 from common import (
     SITES, DATE_SUFFIX, ARTICLE_SEP, resolve_paths, add_common_args,
-    load_json_set, save_json_set, append_output, fresh_start,
+    load_json_set, save_json_set, append_output, fresh_start, write_output,
 )
 
 BATCH_SIZE = 5
@@ -131,8 +131,7 @@ async def main():
               f"Total articles: {total_articles}\n"
               "----------------------\n\n")
         content = nh + content[h2 + 22:]
-        with open(output_md, 'w', encoding='utf-8') as f:
-            f.write(content)
+        write_output(output_md, content)
 
     print(f"Done. {total_articles} articles, {total_tokens} tokens.")
 

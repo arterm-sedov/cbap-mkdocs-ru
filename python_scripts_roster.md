@@ -1,45 +1,76 @@
 # Root Python Scripts Roster
 
-This report lists the Python scripts found in the repository root of `D:\Repo\CBAP_MKDOCS_RU`.
+Python scripts at the repository root and shared `tools/` helpers. Operator workflows: `readme.md` / `readme-ru.md`. Obsolete scripts: `.legacy/`.
+
+**Line endings:** tracked text from generators uses LF via `tools/text_io.py` (`.gitattributes` `eol=lf`; Git normalizes on `git add`). No per-run verifier in operator workflows.
+
+## Root scripts
 
 | Script | Role | Main side effects / outputs |
 |---|---|---|
-| `buildhelp.py` | Legacy MkDocs build wrapper for `LANGUAGE_LIST = ["ru"]`. Checks venv and MkDocs, then runs `mkdocs build`. | Deletes/recreates `compiled_help`. |
-| `pdf_build_guides.py` | Batch builder for six PDF-oriented MkDocs configs. Streams logs and writes summary. | Writes `build_log.txt`; builds PDF guide sites. |
-| `pdf_duplicate_with_date.py` | Copies PDFs modified today with a `YYYY.MM.DD` suffix. Optional `.env` target via `PDF_DATED_DIR`. | Creates dated PDF copies. |
-| `kb_html_cleanup_hook.py` | MkDocs `on_post_page` hook that converts generated HTML into PHPKB-compatible HTML. | Used by MkDocs build pipeline; modifies output HTML in memory. |
-| `kb_html_cleanup_hook_v4.7.py` | Older v4.7 variant of the PHPKB cleanup hook. Uses fixed `https://kb.comindware.ru/assets/` image URLs. | Used by legacy v4.7 build configs. |
-| `phpkb_import.py` | Imports Russian PHPKB articles/categories from DB into Markdown/HTML files under `phpkb_content` by default. | Connects to PHPKB DB; writes imported `.md` and `.html`; updates `.article_id_filename_map_v5.json`. |
-| `phpkb_import_for_rag.py` | Same import pipeline as `phpkb_import.py`, but default target is `phpkb_content_rag`. | DB read plus local file export for RAG-oriented corpus. |
-| `phpkb_import_cmw_lab.py` | CMW Lab/v4 import variant. Uses `phpkb_content_cmw_lab`, language ID `1`, and `.article_id_filename_map_v4_cmw_lab.json`. | DB read plus local export of CMW Lab KB content. |
-| `phpkb_update_articles.py` | Pushes local Markdown/HTML content from `for_kb_import_ru` back into PHPKB articles. Also updates title, tags, `unlisted`. | Connects to DB; asks confirmation per article; updates PHPKB rows. |
-| `phpkb_copy_images.py` | Copies image assets from `for_kb_import_ru/` into `kb.comindware.ru/platform/v5.0`. | Copies `.png`, `.svg`, `.jpg`, `.jpeg`, `.gif`; overwrites by default. |
-| `phpkb_ingest.py` | Builds a single LLM-ingestion Markdown bundle for v5 KB content using `gitingest`. | Writes `kb.comindware.ru.platform_v5_for_llm_ingestion.md` and copies it to `kb.comindware.ru/platform/v5.0/`. |
-| `phpkb_ingest_cmw_lab.py` | Builds a single LLM-ingestion Markdown bundle for CMW Lab/v4 content. | Writes `kb.cmwlab.com.platform_v4_for_llm_ingestion.md`. |
-| `phpkb_replace_related_topics.py` | Post-import local Markdown cleanup for related-topic sections under `docs/ru/using_the_system`. Converts bold reference links into italic bullet links inside a wrapper div. | Rewrites matching Markdown files in place. |
-| `phpkb_update_article_ids.py` | Post-import prototype for finding direct KB article URLs in a hardcoded Markdown file and resolving them to labels in the shared hyperlinks snippet. | Prints matching labels; currently runs immediately on hardcoded `article-2198.md`; no `__main__` guard. |
+| `pdf_build_guides.py` | Batch builder for six PDF-oriented MkDocs configs. Streams logs and writes summary. | Writes gitignored `build_log.txt`; builds PDF guide sites. |
+| `pdf_duplicate_with_date.py` | Copies PDFs modified today with a `YYYY.MM.DD` suffix. Optional `.env` target via `PDF_DATED_DIR`. | Binary PDF copies only. |
+| `kb_html_cleanup_hook.py` | MkDocs `on_post_page` hook — PHPKB-compatible HTML in memory (`\n` normalized before return). | Does not write files; MkDocs writes `for_kb_import_ru/`. |
+| `kb_html_cleanup_hook_v4.7.py` | v4.7 variant; fixed `https://kb.comindware.ru/assets/` image URLs. | Legacy v4.7 build configs only. |
+| `phpkb_import.py` | Imports PHPKB articles/categories from DB into `phpkb_content/` (default). | DB read; writes `.md`/`.html`/mapping JSON via `tools/text_io`; updates `.article_id_filename_map_v5.json`. |
+| `phpkb_import_for_rag.py` | Same CLI as `phpkb_import.py`; default `phpkb_content_rag/`, markdown-only RAG export. | DB read; local corpus export via `tools/text_io`. |
+| `phpkb_import_cmw_lab.py` | CMW Lab/v4 import into `phpkb_content_cmw_lab/`. | DB read; local export via `tools/text_io`; `.article_id_filename_map_v4_cmw_lab.json`. |
+| `phpkb_ingest.py` | Builds v5 LLM bundle using `gitingest` (v6 line uses `phpkb_ingest_utils`). | Writes `kb.comindware.ru.platform_v5_for_llm_ingestion.md` via `tools/text_io`; copies to `kb.comindware.ru/platform/v5.0/`. |
+| `phpkb_ingest_cmw_lab.py` | CMW Lab/v4 LLM bundle builder (`gitingest`). | Writes `kb.cmwlab.com.platform_v4_for_llm_ingestion.md` via `tools/text_io`. |
+| `phpkb_update_articles.py` | Pushes `for_kb_import_ru/` HTML into PHPKB (`article_content`, title, tags, `unlisted`). | DB writes only; reads local HTML. |
+| `phpkb_copy_images.py` | Copies images from `for_kb_import_ru/` into PHPKB assets repo (`platform/v5.0`). | Binary image copies; optional `utilities/git_sync.py` / `utilities/ssh_pull.py`. |
+| `phpkb_replace_related_topics.py` | Post-import cleanup for related-topic blocks under `docs/ru/using_the_system`. | Rewrites matching Markdown via `tools/text_io`. |
+| `phpkb_update_article_ids.py` | Read-only prototype: resolve hardcoded KB URLs to hyperlink-map labels. | Prints only; hardcoded `article-2198.md` input. |
 
-## PHPKB Cloning
-
-These scripts support cloning PHPKB category/article trees and then cleaning up the cloned content, IDs, and links.
+## `tools/`
 
 | Script | Role | Main side effects / outputs |
 |---|---|---|
-| `utilities/phpkb_cloning/phpkb_clone.py` | Clones PHPKB categories and articles inside the DB. Can clone whole category trees or individual articles, resume from a mapping JSON, and produce a dry-run preflight report. | `--mapping` required. Inserts new DB rows unless `--dry-run`; maintains article/category mapping. |
-| `utilities/phpkb_cloning/phpkb_clone_rollback.py` | Deletes cloned PHPKB rows by reading mapped target IDs from a clone mapping JSON. | `--mapping` required. Dry-run by default; deletes DB rows only with `--write --confirm-delete-cloned-content`. |
-| `utilities/phpkb_cloning/phpkb_clone_update_links.py` | Updates article/category links in PHPKB after cloning/migration using mapping JSON. Optional product/version replacements can be enabled explicitly. | `--mapping` required. Connects to DB; CLI mode is dry-run unless `--write` is passed. |
-| `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py` | Updates local docs IDs using a clone mapping. Handles `kbId` frontmatter in `docs/ru` and article/category IDs in `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md`. | `--mapping` required. Dry-run by default; rewrites Markdown files only with `--write`. |
+| `tools/text_io.py` | Canonical LF text I/O (`open_text_write`, `write_text`, `open_text_append`). | Imported by generators; not run directly. |
+| `tools/ssh_kb_ru.py` | SSH tunnel + MySQL connection to PHPKB. | Used by import/update/clone scripts. |
+| `tools/graceful_interrupt.py` | Safe interrupt handling for long DB sessions. | Library module. |
+| `tools/phpkb_sync.py` | Sync export-tree Markdown into `docs/ru/` by `kbId` (copy missing only). | CSV log via `tools/text_io`. |
+| `tools/combine_n3_references.py` | Merge N3 reference Markdown files into one document. | Writes combined `.md` via `tools/text_io`. |
 
-## Script Clusters
+## PHPKB cloning (`utilities/phpkb_cloning/`)
 
-- **Build utilities:** `buildhelp.py`, `pdf_build_guides.py`, `pdf_duplicate_with_date.py`.
-- **MkDocs-to-PHPKB HTML hooks:** `kb_html_cleanup_hook.py`, `kb_html_cleanup_hook_v4.7.py`.
+| Script | Role | Main side effects / outputs |
+|---|---|---|
+| `phpkb_clone.py` | Clone PHPKB categories/articles in DB; resume from mapping JSON; `--dry-run` preflight. | `--mapping` required; DB inserts unless `--dry-run`; mapping via `tools/text_io`. |
+| `phpkb_clone_rollback.py` | Delete cloned rows from mapping JSON. | `--write --confirm-delete-cloned-content` deletes DB rows. |
+| `phpkb_clone_update_links.py` | Rewrite article/category links in PHPKB after cloning. | DB updates with `--write`. |
+| `phpkb_clone_update_mapped_ids.py` | Update `kbId` in `docs/ru/` and hyperlink map from mapping JSON. | `--write` rewrites Markdown via `tools/text_io` (encoding preserved). |
+
+## Other utilities
+
+| Script | Role |
+|---|---|
+| `utilities/git_sync.py` | Git add/commit/push in PHPKB assets repo (`--git` flags). |
+| `utilities/ssh_pull.py` | Remote `git pull` on production (`--pull` flags). |
+| `utilities/build_article_id_filename_map_v6.py` | Build V6 article-id → filename gap map JSON. |
+| `utilities/remove_entities_param.py` | Strip `Comindware.Entities entities` from `docs/ru/` (writes via `tools/text_io`). |
+
+## Web scraping (`.agents/skills/scrape-sanitize/scripts/`)
+
+| Script | Role |
+|---|---|
+| `crawl4ai_ingest.py` | Async crawl → dirty Markdown in `.scratch/`. |
+| `http_bs4_ingest.py` | BS4 crawl variant for cmwlab.com. |
+| `sanitize.py` | Dirty → sanitized bundle under `scraping/`. |
+| `common.py` | Shared paths/config; delegates writes to `tools/text_io`. |
+
+Skill: `.agents/skills/scrape-sanitize/SKILL.md`.
+
+## Script clusters
+
+- **Build utilities:** `pdf_build_guides.py`, `pdf_duplicate_with_date.py` (legacy: `.legacy/buildhelp.py`).
+- **MkDocs → PHPKB HTML hooks:** `kb_html_cleanup_hook.py`, `kb_html_cleanup_hook_v4.7.py`.
 - **PHPKB DB tools:** `phpkb_import*.py`, `phpkb_update_articles.py`.
-- **PHPKB cloning:** scripts under `utilities/phpkb_cloning/`.
-- **Post-import Markdown cleanup:** `phpkb_replace_related_topics.py`, `phpkb_update_article_ids.py`.
-- **RAG/LLM bundle builders:** `phpkb_ingest.py`, `phpkb_ingest_cmw_lab.py`.
+- **PHPKB cloning:** `utilities/phpkb_cloning/`.
+- **Post-import Markdown cleanup:** `phpkb_replace_related_topics.py`, `phpkb_update_article_ids.py` (read-only prototype).
+- **RAG / LLM bundles:** `phpkb_import_for_rag.py`, `phpkb_ingest.py`, `phpkb_ingest_cmw_lab.py`. Skill: `.agents/skills/phpkb-ingestion/SKILL.md`.
 
-## Risk Notes
+## Risk notes
 
-- Highest-risk DB-mutating scripts: `utilities/phpkb_cloning/phpkb_clone.py`, `utilities/phpkb_cloning/phpkb_clone_rollback.py --write`, `phpkb_update_articles.py`, and `utilities/phpkb_cloning/phpkb_clone_update_links.py`.
-- Highest-risk local file rewriters: `phpkb_replace_related_topics.py` and `utilities/phpkb_cloning/phpkb_clone_update_mapped_ids.py --write`.
+- **Highest-risk DB mutators:** `phpkb_clone.py`, `phpkb_clone_rollback.py --write`, `phpkb_update_articles.py`, `phpkb_clone_update_links.py --write`.
+- **Highest-risk local rewriters:** `phpkb_replace_related_topics.py`, `phpkb_clone_update_mapped_ids.py --write`, `phpkb_import*.py` (large generated trees).

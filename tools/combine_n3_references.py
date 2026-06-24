@@ -28,7 +28,14 @@ import os
 import re
 import sys
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Iterable, List, Tuple
+
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
+from tools.text_io import write_text as write_repo_text
 
 
 # Default ordered list of source Markdown files (relative to repo root)
@@ -60,9 +67,7 @@ def read_text_file(path: str) -> str:
 
 
 def write_text_file(path: str, content: str) -> None:
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, "w", encoding="utf-8", newline="\n") as f:
-        f.write(content)
+    write_repo_text(path, content)
 
 
 def slugify_for_anchor(text: str) -> str:

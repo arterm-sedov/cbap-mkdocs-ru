@@ -1,8 +1,15 @@
 import re
 import os
 import sys
+from pathlib import Path
 
-DOCS_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'docs', 'ru')
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
+from tools.text_io import open_text_write
+
+DOCS_DIR = os.path.join(_REPO_ROOT, 'docs', 'ru')
 
 FILES_TO_SKIP = {
     '5020-change_collection_statuses_end_task.md',
@@ -62,7 +69,7 @@ def main():
             relpath = os.path.relpath(filepath, DOCS_DIR)
             issues = validate_text(modified, relpath)
 
-            with open(filepath, 'w', encoding='utf-8') as f:
+            with open_text_write(filepath) as f:
                 f.write(modified)
 
             total_files += 1

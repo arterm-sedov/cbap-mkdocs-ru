@@ -3,6 +3,7 @@ import subprocess
 import yaml
 from datetime import datetime
 import re
+from tools.text_io import open_text_write
 
 # def get_git_info():
 #     try:
@@ -63,10 +64,9 @@ if __name__ == "__main__":
     snippet_content = re.sub(r'<!--.*?-->', '', snippet_content, flags=re.DOTALL)
     # Replace three or more newlines with just two newlines
     snippet_content = re.sub(r'\n{2,}', '\n', snippet_content)
-    # Extract only the 'Files analyzed' and 'Estimated tokens' lines from the summary using regex
     matches = re.findall(r'^(Files analyzed:.*|Estimated tokens:.*)$', summary, re.MULTILINE)
-    summary_short = "\n".join([m.strip() for m in matches])# if len(matches) == 2 else summary
-    with open("kb.cmwlab.com.platform_v4_for_llm_ingestion.md", "w", encoding="utf-8-sig", newline='\r\n') as f:
+    summary_short = "\n".join([m.strip() for m in matches])
+    with open_text_write("kb.cmwlab.com.platform_v4_for_llm_ingestion.md", sig=True) as f:
         f.write(
             f"\n----------------------\n\n"
             f"Ingestion date: {ingestion_date}\n"

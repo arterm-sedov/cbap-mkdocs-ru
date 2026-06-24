@@ -19,6 +19,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 from phpkb_ingest_utils import build_content, build_summary, build_tree, iter_markdown_files
+from tools.text_io import open_text_write
 
 load_dotenv(Path(__file__).resolve().parent / ".env")
 
@@ -174,7 +175,7 @@ if __name__ == "__main__":
     snippet_content = re.sub(r"\n{2,}", "\n", snippet_content)
 
     summary_short = build_summary(markdown_files, tree, content)
-    with open(output_filename, "w", encoding="utf-8-sig", newline="\r\n") as f:
+    with open_text_write(output_filename, sig=True) as f:
         f.write(
             f"\n----------------------\n\n"
             f"Ingestion date: {ingestion_date}\n"
