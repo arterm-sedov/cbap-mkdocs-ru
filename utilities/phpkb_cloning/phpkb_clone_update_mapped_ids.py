@@ -134,7 +134,8 @@ def read_text_preserving_encoding(path):
 
 def write_text_preserving_encoding(path, content, encoding, bom):
     path = Path(path)
-    path.write_bytes(bom + content.encode(encoding))
+    normalized = content.replace("\r\n", "\n").replace("\r", "\n")
+    path.write_bytes(bom + normalized.encode(encoding))
 
 
 def update_file(path, replacer, write):

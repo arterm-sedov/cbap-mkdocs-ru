@@ -17,7 +17,7 @@ except ImportError:
 
 from common import (
     SCRATCH_DIR, ARTICLE_SEP, resolve_paths, add_common_args,
-    load_json, save_json, append_output, fresh_start,
+    load_json, save_json, append_output, fresh_start, open_text_append,
 )
 
 PARSER = argparse.ArgumentParser(description='Sanitize crawled website for LLM ingestion.')
@@ -41,10 +41,10 @@ def load_patterns(site):
 
 def log_failure(msg):
     os.makedirs(os.path.dirname(PATHS['failures']), exist_ok=True)
-    with open(PATHS['failures'], 'a', encoding='utf-8') as f:
-        f.write(f'{datetime.now().isoformat()} {msg}\n')
-        f.flush()
-        os.fsync(f.fileno())
+    with open_text_append(PATHS['failures']) as handle:
+        handle.write(f'{datetime.now().isoformat()} {msg}\n')
+        handle.flush()
+        os.fsync(handle.fileno())
 
 def decode_url(url):
     parsed = urlparse(url)

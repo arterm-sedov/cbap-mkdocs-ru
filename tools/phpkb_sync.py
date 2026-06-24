@@ -39,6 +39,12 @@ from pathlib import Path
 import shutil
 from typing import Dict, List, Optional, Set, Tuple
 
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
+from tools.text_io import open_text_write
+
 
 try:
     import frontmatter  # type: ignore
@@ -227,7 +233,7 @@ def main() -> int:
 
     # Prepare logging
     log_path.parent.mkdir(parents=True, exist_ok=True)
-    log_file = log_path.open("w", newline="", encoding="utf-8")
+    log_file = open_text_write(log_path)
     writer = csv.writer(log_file)
     writer.writerow(["level", "action", "kbId", "src", "dst", "reason"])  # header
 

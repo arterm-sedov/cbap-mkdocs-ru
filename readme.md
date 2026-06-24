@@ -194,6 +194,25 @@ Workflow sections below use **full paths** so they work in a fresh shell without
 
 If the venv is broken (wrong `pip` path, missing plugins), re-run `install/deploy_venv.py` or see `.agents/skills/python-env-setup/SKILL.md`.
 
+### Git line endings
+
+Text files in this repository use **LF** (`\n`) in Git and on disk. `.gitattributes` enforces `eol=lf`; Python generators write through `tools/text_io.py`. Git normalizes text on `git add` — no per-run verifier is required.
+
+On Windows, if `git status` shows mass changes that vanish after `git add`, disable global CRLF conversion so it does not fight `.gitattributes`:
+
+```powershell
+git config --global core.autocrlf false
+```
+
+After pulling `.gitattributes` changes, renormalize once on your branch:
+
+```powershell
+git add --renormalize .
+git status
+```
+
+PowerShell Core (`pwsh`) on Linux/macOS accepts LF in `.ps1` scripts; no separate CRLF rule is required.
+
 ### 2. `.env` configuration
 
 ```powershell
@@ -1374,11 +1393,13 @@ Product and brand placeholders (`productName`, `companyName`, `nginxVariants`, e
 
 Scripts live in the repository root unless noted. Run from repo root: `.\.venv\Scripts\python.exe <script>.py` (Windows) or `.venv/bin/python <script>.py` (WSL/Linux). With venv activated: `python <script>.py`.
 
+Full inventory: [`python_scripts_roster.md`](python_scripts_roster.md).
+
 ### MkDocs build
 
 | Script | Purpose |
 | --- | --- |
-| `buildhelp.py` | Build compiled web help into `compiled_help/` (uses `mkdocs_ru.yml`) |
+| `buildhelp.py` | Legacy — use `mkdocs build` directly (see `.legacy/buildhelp.py`) |
 | `pdf_build_guides.py` | Batch-build all standard PDF configs sequentially; writes `build_log.txt` |
 | `pdf_duplicate_with_date.py` | Copy PDFs from repo root to `PDF_DATED_DIR` with `YYYY.MM.DD` suffix |
 | `install/deploy_venv.py` | Create `.venv` and install `install/requirements.txt` |
@@ -1411,6 +1432,7 @@ Scripts live in the repository root unless noted. Run from repo root: `.\.venv\S
 | Script | Purpose |
 | --- | --- |
 | `tools/ssh_kb_ru.py` | SSH tunnel + MySQL connection to PHPKB |
+| `tools/text_io.py` | LF line endings for generator scripts (import only) |
 | `utilities/git_sync.py` | Commit/push in PHPKB assets repo (`--git` flag) |
 | `utilities/ssh_pull.py` | Remote `git pull` on production (`--pull` flag) |
 | `kb_html_cleanup_hook.py` | MkDocs `on_post_page` hook for PHPKB HTML (not a CLI script) |
