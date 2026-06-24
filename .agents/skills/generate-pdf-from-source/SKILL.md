@@ -1,6 +1,6 @@
 ---
 name: generate-pdf-from-source
-description: Generate a styled PDF document from external source files (Excel, CSV, JSON, XML, or other structured data) using the cbap-mkdocs-ru MkDocs/WeasyPrint PDF pipeline. Use when the user asks to create a formatted PDF report from an .xlsx, .csv, .json, or similar file, or when they want to turn a dataset into a professional document with Comindware KB styling.
+description: Generate a styled PDF from Excel, CSV, JSON, Markdown, text, or other sources (one or many files) using the cbap-mkdocs-ru MkDocs/WeasyPrint pipeline. Use for datasets, existing .md docs, or multi-file report packs with Comindware KB styling.
 ---
 
 # Generate PDF from external source files
@@ -8,6 +8,8 @@ description: Generate a styled PDF document from external source files (Excel, C
 ## Overview
 
 This skill covers the end-to-end workflow of reading data from an external structured file (Excel, CSV, JSON, etc.), generating a MkDocs-compatible Markdown document, wiring it into a YAML configuration, and building a styled PDF via the cbap-mkdocs-ru MkDocs + WeasyPrint pipeline.
+
+The same pipeline applies to **existing Markdown** (no generation step) and **multi-file** builds (one `nav` entry per file). Plain text or Word sources: convert to `.md` first.
 
 ## Directory layout expectations
 
@@ -29,6 +31,17 @@ The workflow assumes this directory structure — two sibling directories, or an
 ```
 
 If the layout differs, the `!ENV` variables in the YAML config must be set to absolute paths by the build script (see Step 4).
+
+### Existing Markdown in an external repo (Pattern B)
+
+When source `.md` already lives in the consumer repo (web + print):
+
+- Put `mkdocs.yml` + `build.ps1` in a **`pdf/` subfolder** — MkDocs rejects config inside `docs_dir`.
+- `docs_dir`: parent folder of the source file(s); `exclude_docs` selects which `.md` to include.
+- `site_dir`: consumer repo `.scratch/<project>/.site` (gitignored), **not** inside `docs_dir`.
+- Cover title/subtitle/logo stay in YAML; build script sets only dynamic `footerLeft` and output filename (see below).
+
+Never copy `pdf_templates/` into the consumer repo — set `MKDOCS_PDF_TEMPLATES` to cbap-mkdocs-ru's `pdf_templates/`.
 
 ## Pre-flight checklist (always ask before generating)
 
@@ -163,6 +176,7 @@ Rules:
 - Use `&nbsp;` for empty table cells
 - Escape `|` in cell content: `\|`
 - Replace newlines with `<br>` for inline table content
+- For long **single-file** sources (`heading_shift: false` inherited): use `#` chapters, `{: .pageBreakBefore }` on major sections; orphan H2-only docs break TOC/running headers in PDF
 
 ### Step 3: Create the YAML config
 
@@ -192,9 +206,11 @@ extra:
       headerRight: comindware.ru
       title: <Cover Title>
       subtitle: <Cover Subtitle>
-      footerLeft: !ENV ['MKDOCS_PDF_DATE', 'Опубликовано DD.MM.YYYY']
+      footerLeft: !ENV [MKDOCS_PDF_FOOTER_LEFT, "<static fallback>"]  # e.g. date, author, edition — or leave build script to set env
     pageFooter:
       left: ''
+
+copyright: '<a href="https://www.comindware.ru/" target="_blank">© 2009–2026 Comindware<sup>®</sup></a>'  # site/HTML footer; PDF uses extra.pdf.copyright above — harmless if unused
 
 nav:
   - <Nav Title>: <filename>.md
@@ -230,7 +246,9 @@ Key points:
 - `site_dir` must NOT be inside `docs_dir` (MkDocs validation error)
 - `output_path: ../<Name>.pdf` — goes up from site_dir to the source directory
 - `enabled_if_env: ''` — always enable PDF output (override inherited `PDF_OUTPUT` guard)
-- Date: `!ENV ['MKDOCS_PDF_DATE', ...]` with dynamic date from build script
+- **Cover static fields** (`title`, `subtitle`, `logo`, `headerRight`, `extra.pdf.copyright`) belong in YAML. **Only** dynamic `footerLeft` and `output_path` (often dated) come from the build script via env.
+- `extra.pdf.copyright` is plain text for PDF footers. Top-level `copyright` (HTML) is for MkDocs HTML/site output only — optional in PDF-only configs; does no harm if present.
+- `footerLeft`: build script sets `MKDOCS_PDF_FOOTER_LEFT` to whatever string the project needs (publication date, author + date, edition label, etc.). YAML fallback is static text when env is unset. Project-specific `.env` keys are fine — no fixed format required.
 
 ### Step 4: Build the PDF
 
@@ -265,7 +283,8 @@ $env:MKDOCS_OVERRIDES    = "$cbapRoot\overrides"
 $env:MKDOCS_PDF_TEMPLATES = "$cbapRoot\pdf_templates"
 $env:MKDOCS_SNIPPETS     = "$cbapRoot\docs\ru\.snippets\"
 $env:MKDOCS_DOCS_DIR     = "$cbapRoot\.scratch\"
-$env:MKDOCS_PDF_DATE     = "Опубликовано $(Get-Date -Format 'dd.MM.yyyy')"
+# Pattern B: set MKDOCS_DOCS_DIR and MKDOCS_SITE_DIR to absolute consumer-repo paths
+$env:MKDOCS_PDF_FOOTER_LEFT = "<footer text>"   # e.g. "Опубликовано $(Get-Date -Format 'dd.MM.yyyy')"
 $env:MKDOCS_PDF_OUTPUT   = "$PSScriptRoot\<OutputName>.pdf"
 
 # GTK3 for WeasyPrint (Windows-only; system-dependent path)
@@ -287,7 +306,7 @@ export MKDOCS_OVERRIDES="$cbapRoot/overrides"
 export MKDOCS_PDF_TEMPLATES="$cbapRoot/pdf_templates"
 export MKDOCS_SNIPPETS="$cbapRoot/docs/ru/.snippets/"
 export MKDOCS_DOCS_DIR="$cbapRoot/.scratch/"
-export MKDOCS_PDF_DATE="Опубликовано $(date +'%d.%m.%Y')"
+export MKDOCS_PDF_FOOTER_LEFT="<footer text>"
 export MKDOCS_PDF_OUTPUT="$(dirname "$0")/<OutputName>.pdf"
 
 # GTK3 is typically available system-wide on Linux; no extra env vars needed
@@ -311,9 +330,10 @@ The `!ENV` YAML tag resolves to an environment variable value, falling back to a
 | `INHERIT` | `MKDOCS_COMMON` | `<rel>/cbap-mkdocs-ru/mkdocs_common.yml` | Path to base config |
 | `theme.custom_dir` | `MKDOCS_OVERRIDES` | `<rel>/cbap-mkdocs-ru/overrides` | Material theme overrides |
 | `with-pdf.custom_template_path` | `MKDOCS_PDF_TEMPLATES` | `<rel>/cbap-mkdocs-ru/pdf_templates` | Cover/page templates |
-| `docs_dir` | `MKDOCS_DOCS_DIR` | `<rel>/cbap-mkdocs-ru/.scratch/` | Generated markdown location |
+| `docs_dir` | `MKDOCS_DOCS_DIR` | `<rel>/cbap-mkdocs-ru/.scratch/` | Markdown root |
+| `site_dir` | `MKDOCS_SITE_DIR` | `_pdf_out/` or `.scratch/.../.site` | HTML scratch (Pattern B) |
 | `pymdownx.snippets.base_path` | `MKDOCS_SNIPPETS` | `<rel>/cbap-mkdocs-ru/docs/ru/.snippets/` | Snippet includes |
-| `pdf.frontpage.footerLeft` | `MKDOCS_PDF_DATE` | Literal date string | Cover date |
+| `pdf.frontpage.footerLeft` | `MKDOCS_PDF_FOOTER_LEFT` | Static string | Cover footer (format chosen per project in build script) |
 | `with-pdf.output_path` | `MKDOCS_PDF_OUTPUT` | `<relative to site_dir>` | Output PDF path |
 
 The `<rel>` prefix is the relative path from the config file's directory to cbap-mkdocs-ru (e.g., `../cbap-mkdocs-ru/` when they are siblings). When env vars are set, they take precedence over the fallbacks — this is how external projects with different layouts work.
@@ -344,4 +364,7 @@ All intermediate build artifacts (`_pdf_out/`, `_pmi_pdf/`) must be cleaned up a
 3. **`enabled_if_env` guard** — `mkdocs_common.yml` sets `enabled_if_env: PDF_OUTPUT`. Override with `enabled_if_env: ''` to unconditionally enable PDF output.
 4. **Table cell escaping** — Pipe characters `|` in cell content break Markdown tables. Always replace with `\|`.
 5. **Empty cells collapse** — Empty table cells cause rendering issues. Always use `&nbsp;` as placeholder.
-6. **MkDocs working directory** — Always run the build from `cbap-mkdocs-ru/` root so that `mkdocs` finds the correct Python environment and plugin paths. Reference the config by its absolute or relative path from there.
+6. **MkDocs working directory** — Use cbap-mkdocs-ru's venv Python. Sibling builds may run from cbap root; external projects often `cd` to the config dir and pass `-f mkdocs.yml`. Both work if env paths are set.
+7. **Config inside `docs_dir`** — Put config in a `pdf/` subfolder when source `.md` lives in the parent folder.
+8. **Wrong cover** — Title shows inherited `productName`/`productVersion`, missing logo, or HTML in footer: wrong/stale `MKDOCS_PDF_TEMPLATES` path. Resolve cbap via `CBAP_MKDOCS_ROOT` → sibling checkout → vendored `.reference-repos/` copy (prefer newest). Do not fork local cover templates.
+9. **PDF file locked** — Close open PDF before rebuild (WeasyPrint permission error).
