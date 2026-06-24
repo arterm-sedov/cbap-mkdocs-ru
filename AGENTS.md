@@ -26,6 +26,7 @@ The three persons ideate, collaborate, argue and reconcile the resulting text or
   - Generate Russian text under @/docs/ru/ or a matching subfolder or English under @/docs/en/ folder or a matching subfolder
 - If asked to generate code, ask for preferred location and file name (all optional). 
 - Always generate English code comments.
+- **Before editing tracked files** — if the work could affect other operators on shared branches, see [Git branches — feature work](#git-branches--feature-work). Ask **before** the first change; do not commit to `platform_v5`, `platform_v6`, or `master` unless they explicitly choose that.
 
 ## CONTEXT
 
@@ -47,6 +48,7 @@ Comindware Platform Knowledge Base:
 | [Python environment](#python-environment) | [First-time setup](readme.md#first-time-setup) | [Первоначальная настройка](readme-ru.md#первоначальная-настройка) |
 | [Skills Reference](#skills-reference) | [Agent skills](readme.md#agent-skills-reference) | [Skills для агентов](readme-ru.md#skills-для-агентов-справка-agent-skills) |
 | [Cherry-picking](#cherry-picking-between-platform-versions) | [Merge and cherry-pick](readme.md#merge-and-cherry-pick-between-platform-versions) | [Перенос коммитов и слияние](readme-ru.md#перенос-коммитов-и-слияние-между-версиями-платформы) |
+| [Git branches — feature work](#git-branches--feature-work) | [Daily Git workflow → Feature branch](readme.md#feature-branch-ticket-work) | [Ежедневная работа с Git → Ветка тикета](readme-ru.md#ветка-тикета) |
 | [Scratch directory](#scratch-directory) | [Scratch directory](readme.md#scratch-directory) | [Каталог `.scratch/`](readme-ru.md#каталог-scratch) |
 | `phpkb_content/` — do not edit | [Repository layout](readme.md#repository-layout) | [Структура репозитория](readme-ru.md#структура-репозитория) |
 
@@ -311,9 +313,52 @@ For an explicit hard page break in PDF output, include at the break point:
 
 That snippet renders only when the build sets `pdfOutput: true`.
 
+## Git branches — feature work
+
+**`platform_v5`**, **`platform_v6`**, and **`master`** are **shared integration branches** — like `main` in [GitHub Flow](https://docs.github.com/en/get-started/using-github/github-flow) and [Azure DevOps branching guidance](https://learn.microsoft.com/en-us/azure/devops/repos/git/git-branching-guidance): they should stay **mergeable and safe for others to pull** at any time. Feature work belongs on **short-lived, ticketed branches** merged back via PR (or an explicit operator merge), not committed directly to those three branches by default.
+
+### Decision rule: impact on others, not “size”
+
+Ask the operator **before the first file change** when the work could **break, block, or surprise other people** on a shared branch — not because it is “large” or “complex” in the abstract.
+
+**Use a feature branch** when any of these are true:
+
+| Question | If yes → feature branch |
+| --- | --- |
+| Could the branch be **broken or half-finished** while others pull `platform_v5` / `platform_v6` / `master`? | WIP articles, failed builds, partial publish/RAG/import runs |
+| Would a bad commit be **hard to revert** without undoing unrelated work? | Mixed doc + `for_kb_import_ru/` + `phpkb_content*` in one push |
+| Does the change need **review or isolation** before it lands on the shared line? | New articles, kbId/map changes, skills/rules, cross-version edits |
+| Could it cause **merge or cherry-pick pain** for others? | Bulk HTML churn, `toc_depth`, version-specific `kbId` / hyperlink map |
+| Is it **more than one logical commit** or a multi-step operator workflow? | Edit → build → publish → import → bundle (see [Commit separation](#commit-separation-pattern)) |
+
+**Direct commit on a platform branch** is acceptable only when the operator **explicitly** requests it — e.g. cherry-pick propagation they named, a single agreed hotfix, or a change they judge safe for everyone pulling that branch today.
+
+**Do not** start editing on a shared branch and mention branching later when the table above already applies.
+
+### Feature branch convention
+
+Branch **from** the target platform line (`platform_v5` or `platform_v6`), not from `master`, unless the operator directs otherwise. Keep branches **short-lived and single-purpose** (industry norm: days, not weeks — [trunk-based development](https://trunkbaseddevelopment.com/short-lived-feature-branches/), [AWS DL.SCM.2](https://docs.aws.amazon.com/wellarchitected/latest/devops-guidance/dl.scm.2-keep-feature-branches-short-lived.html)).
+
+**Naming — engineering labels for humans, not agents:**
+
+- **Do not** prefix or embed coding-agent names (`auto`, `composer`, `codex`, `cursor`, model slugs, session ids, etc.). Branches are read by operators in `git branch`, PR lists, and cherry-pick logs — names must describe **work**, not which tool ran it.
+- **Do** use a clear, grep-friendly pattern: **date first**, then **ticket**, then **short English theme** (underscores, lowercase):
+
+```text
+<YYYYMMDD>_<ticket>_<short_english_theme>
+```
+
+Example: `20260624_10291999_scripts_keys`. Commits use the ticket in the message: `[#10291999] …` (see [Commit messages](#commit-messages) · `cmwhelp-commit` skill). Date in the branch name is the day work **started** (local operator date).
+
+Suggest a branch name to the operator; **do not** create or push a branch with an agent-branded name unless they explicitly choose it.
+
+Workflow: [readme.md → Feature branch](readme.md#feature-branch-ticket-work) · [readme-ru.md → Ветка тикета](readme-ru.md#ветка-тикета). Merge via PR into the matching platform branch when the operator is ready.
+
 ## Commit messages
 
 Follow the commit message rules given here: .agents/skills/cmwhelp-commit/SKILL.md
+
+**Always** pass the full `[#ticket] …` message in `git commit -m` yourself. Local `prepare-commit-msg` only **prints a suggestion** on stderr (no silent rewrite); `commit-msg` warns if the prefix is missing.
 
 ## Cherry-picking between platform versions
 
