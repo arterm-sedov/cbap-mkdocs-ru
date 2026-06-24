@@ -7,6 +7,7 @@ placeholders, hyperlink-map footer, or kb.comindware.ru link rewriting.
 
 from tools.ssh_kb_ru import establish_connection_interactive
 from tools.graceful_interrupt import safe_input, ensure_cleanup
+from tools.text_io import open_text_write
 import argparse
 import html
 import bs4
@@ -166,7 +167,7 @@ def importArtciclesInCategory(categoryId, categoryDir):
         filename = os.path.join(categoryDir, f"{base_name}.md")
         print('    Importing article: ' + filename)
 
-        with open(filename, "w+", encoding="utf-8") as b:
+        with open_text_write(filename) as b:
             print(f"  Starting BeautifulSoup processing for article {id}...")
             p = bs4.BeautifulSoup(html.unescape(content), 'html.parser')
             print(f"  BeautifulSoup completed for article {id}")
@@ -588,7 +589,7 @@ def updateMappingJson(key, value, mapping, mappingFilename):
     articles, categories = parse_mapping_file(existing)
     articles[key] = value
     payload = {"Articles": articles, "Categories": categories}
-    with open(mappingFilename, "w", encoding="utf-8") as mapping_file:
+    with open_text_write(mappingFilename) as mapping_file:
         json.dump(payload, mapping_file, indent=4, ensure_ascii=False)
         mapping_file.write("\n")
     print(f"Updated article map entry {key} -> {value}")

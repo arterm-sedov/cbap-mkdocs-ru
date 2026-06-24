@@ -72,6 +72,7 @@ if str(REPO_ROOT) not in sys.path:
 
 from tools.ssh_kb_ru import establish_connection_interactive, close_connection
 from tools.graceful_interrupt import safe_input, ensure_cleanup
+from tools.text_io import open_text_write
 from html.parser import HTMLParser
 import bs4
 from markdownify import markdownify as md
@@ -731,7 +732,7 @@ def updateMappingJson(mapping_file=None):
     #if input('Save mapping? Y / N\n').lower() == 'y':
     target = Path(mapping_file or MAPPING_FILE)
     temp = target.with_suffix(target.suffix + ".tmp")
-    with temp.open("w", encoding="utf-8") as mappingFile:
+    with open_text_write(temp) as mappingFile:
         mappingJson = json.dumps(MAPPING, indent = 4, ensure_ascii=False)
         mappingFile.write(mappingJson)
     temp.replace(target)

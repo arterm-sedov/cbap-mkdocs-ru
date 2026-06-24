@@ -193,6 +193,25 @@ python phpkb_update_articles.py --profile cmw --article-id 123 --yes
 
 Если venv сломан (неверный путь `pip`, нет плагинов), снова запустите `install/deploy_venv.py` или см. `.agents/skills/python-env-setup/SKILL.md`.
 
+### Окончания строк Git
+
+Текстовые файлы в репозитории — **LF** (`\n`). Политика в `.gitattributes` (`eol=lf`); генераторы на Python пишут через `tools/text_io.py`. Git нормализует текст при `git add` — отдельная проверка после каждого прогона не нужна.
+
+На Windows, если `git status` показывает массовые «ложные» изменения, исчезающие после `git add`, отключите глобальное CRLF-преобразование:
+
+```powershell
+git config --global core.autocrlf false
+```
+
+После обновления `.gitattributes` один раз на ветке:
+
+```powershell
+git add --renormalize .
+git status
+```
+
+Подробнее: [Git line endings](readme.md#git-line-endings) в английском readme.
+
 ### 2. Конфигурация `.env`
 
 ```powershell
@@ -1328,11 +1347,13 @@ nav:
 
 Скрипты — в корне репозитория, если не указано иное. Запуск из корня: `.\.venv\Scripts\python.exe <script>.py` (Windows) или `.venv/bin/python <script>.py` (WSL/Linux). С активированным venv: `python <script>.py`.
 
+Полный перечень: [`python_scripts_roster.md`](python_scripts_roster.md).
+
 ### Сборка MkDocs
 
 | Скрипт | Назначение |
 | --- | --- |
-| `buildhelp.py` | Сборка веб-справки в `compiled_help/` (конфиг `mkdocs_ru.yml`) |
+| `buildhelp.py` | Устарел — используйте `mkdocs build` (см. `.legacy/buildhelp.py`) |
 | `pdf_build_guides.py` | Пакетная сборка всех стандартных PDF; лог `build_log.txt` |
 | `pdf_duplicate_with_date.py` | Копии PDF из корня в `PDF_DATED_DIR` с суффиксом `YYYY.MM.DD` |
 | `install/deploy_venv.py` | Создание `.venv` и установка `install/requirements.txt` |
@@ -1365,6 +1386,7 @@ nav:
 | Скрипт | Назначение |
 | --- | --- |
 | `tools/ssh_kb_ru.py` | SSH + MySQL к PHPKB |
+| `tools/text_io.py` | LF в генераторах (только импорт) |
 | `utilities/git_sync.py` | Commit/push ассетов (`--git`) |
 | `utilities/ssh_pull.py` | `git pull` на продакшене (`--pull`) |
 | `kb_html_cleanup_hook.py` | Хук MkDocs (не CLI) |
