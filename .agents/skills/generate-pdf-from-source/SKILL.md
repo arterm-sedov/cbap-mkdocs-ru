@@ -3,8 +3,8 @@ name: generate-pdf-from-source
 description: |
   Generate styled Comindware PDFs from external source documents.
   Two workflows: (A) structured data — Excel, CSV, JSON, XML → tables/reports;
-  (B) document conversion — DOCX, plain text, HTML → styled articles with sections and images.
-  Trigger when the user asks to convert an external file into a PDF with Comindware branding,
+  (B) document conversion — DOCX, plain text, HTML, existing Markdown → styled articles;
+  multi-file nav supported. Trigger when the user asks to convert an external file into a PDF with Comindware branding,
   or says "make a PDF", "convert to PDF", "generate a styled document/report".
   Uses the cbap-mkdocs-ru pipeline: mkdocs-with-pdf, GTK3, pdf_templates, overrides.
 ---
@@ -18,6 +18,7 @@ Two workflows for converting external files into Comindware-styled PDFs via the 
 Trigger when the user:
 - Provides an Excel/CSV/JSON file and asks for a formatted PDF report
 - Provides a DOCX/text/HTML file and asks to convert it to a styled PDF
+- Has existing `.md` in an external repo (web + print) and needs a PDF build config
 - Says "make a PDF from this file", "convert to PDF", "generate a styled document"
 
 Do NOT use for:
@@ -109,6 +110,7 @@ Rules:
 - Use `&nbsp;` for empty table cells
 - Escape `|` in cell content: `\|`
 - Replace newlines with `<br>` for inline table content
+- For long **single-file** sources (`heading_shift: false` inherited): use `#` chapters, `{: .pageBreakBefore }` on major sections; orphan H2-only docs break TOC/running headers in PDF
 
 ### A4. Generate build artifacts
 
@@ -213,6 +215,8 @@ Ask the user where to create this folder. Common locations:
 - Next to the source document
 - In `.scratch/` of the repo (for temporary outputs)
 
+**Layout variant — existing Markdown in external repo:** put `mkdocs.yml` + `build.ps1` in a `pdf/` subfolder (MkDocs rejects config inside `docs_dir`). Point `docs_dir` at the parent of source `.md`; use `exclude_docs` to select file(s). Put `site_dir` in consumer repo `.scratch/<project>/.site` (gitignored). Never copy `pdf_templates/` locally — set `MKDOCS_PDF_TEMPLATES` to cbap-mkdocs-ru's `pdf_templates/`. Resolve cbap via `CBAP_MKDOCS_ROOT` → sibling checkout → vendored `.reference-repos/` copy.
+
 ### Write the MkDocs config
 
 Create `mkdocs.yml` in the target folder:
@@ -242,11 +246,11 @@ extra:
       headerRight: comindware.ru
       title: <Cover page title>
       subtitle: <Cover page subtitle>
-      footerLeft: <Month Year>
+      footerLeft: !ENV [MKDOCS_PDF_FOOTER_LEFT, "<static fallback>"]  # format per project; build script sets env
     pageFooter:
       left: ''
 
-copyright: '<a href="https://www.comindware.ru/" target="_blank">© 2009–2026 Comindware<sup>®</sup></a>'
+copyright: '<a href="https://www.comindware.ru/" target="_blank">© 2009–2026 Comindware<sup>®</sup></a>'  # site/HTML; PDF uses extra.pdf.copyright — harmless if unused
 
 nav:
   - '<Navigation title>': <article>.md
@@ -284,6 +288,8 @@ exclude_docs: |
 - `exclude_docs` — exclude all `*.md` except the target article.
 - `output_path` — relative to `site_dir`; use `../` to place PDF in folder root.
 - `site_dir` must NOT be inside `docs_dir` (MkDocs validation error).
+- **Cover static fields** (`title`, `subtitle`, `logo`, `headerRight`, `extra.pdf.copyright`) in YAML; **dynamic** `footerLeft` and dated `output_path` from build script via env.
+- `footerLeft`: `MKDOCS_PDF_FOOTER_LEFT` — any string the project needs (date, author, edition); YAML fallback when env unset.
 
 ### Write the build script
 
@@ -306,6 +312,7 @@ $env:MKDOCS_SNIPPETS      = Join-Path $cbapRoot "docs\ru\.snippets/"
 $venvPath                  = Join-Path $cbapRoot ".venv\Scripts\python.exe"
 $dateStr                   = Get-Date -Format "yyyy.MM.dd"
 
+$env:MKDOCS_PDF_FOOTER_LEFT = "<footer text>"   # e.g. publication date; project-specific
 $env:MKDOCS_PDF_OUTPUT_FILENAME = "../<Document title>. $dateStr.pdf"
 
 $configPath = Join-Path $scriptDir.FullName "mkdocs.yml"
@@ -359,8 +366,10 @@ Verify:
 | `INHERIT` | `MKDOCS_COMMON` | `<rel>/mkdocs_common.yml` | Base config |
 | `theme.custom_dir` | `MKDOCS_OVERRIDES` | `<rel>/overrides` | Theme overrides |
 | `with-pdf.custom_template_path` | `MKDOCS_PDF_TEMPLATES` | `<rel>/pdf_templates` | Cover/page templates |
+| `docs_dir` | `MKDOCS_DOCS_DIR` | `docs` or scratch path | Markdown root |
+| `site_dir` | `MKDOCS_SITE_DIR` | `.site` or `.scratch/.../.site` | HTML scratch |
 | `pymdownx.snippets.base_path` | `MKDOCS_SNIPPETS` | `<rel>/docs/ru/.snippets/` | Snippet includes |
-| `pdf.frontpage.footerLeft` | `MKDOCS_PDF_DATE` | Literal date string | Cover date |
+| `pdf.frontpage.footerLeft` | `MKDOCS_PDF_FOOTER_LEFT` | Static string | Cover footer (format per project) |
 | `with-pdf.output_path` | `MKDOCS_PDF_OUTPUT_FILENAME` | Relative to site_dir | Output PDF path |
 
 `<rel>` = relative path from the config file's directory to cbap-mkdocs-ru.
@@ -417,7 +426,7 @@ $env:MKDOCS_COMMON       = "$cbapRoot\mkdocs_common.yml"
 $env:MKDOCS_OVERRIDES    = "$cbapRoot\overrides"
 $env:MKDOCS_PDF_TEMPLATES = "$cbapRoot\pdf_templates"
 $env:MKDOCS_SNIPPETS     = "$cbapRoot\docs\ru\.snippets\"
-$env:MKDOCS_PDF_DATE     = "Опубликовано $(Get-Date -Format 'dd.MM.yyyy')"
+$env:MKDOCS_PDF_FOOTER_LEFT = "<footer text>"
 
 # GTK3 for WeasyPrint (Windows-only)
 $gtkBin = "<GTK3 bin directory>"
@@ -450,6 +459,9 @@ export MKDOCS_SNIPPETS="$cbapRoot/docs/ru/.snippets/"
 - **`enabled_if_env` guard:** `mkdocs_common.yml` sets `enabled_if_env: PDF_OUTPUT`. Override with `enabled_if_env: ''` to unconditionally enable.
 - **Table cell escaping:** Replace `|` with `\|` in cell content. Use `&nbsp;` for empty cells.
 - **MkDocs working directory:** Run build from target folder root, reference config by path.
+- **Config inside `docs_dir`:** use a `pdf/` subfolder for `mkdocs.yml` when source `.md` is in the parent folder.
+- **Wrong cover:** inherited `productName`, missing logo, or HTML in footer — wrong/stale `MKDOCS_PDF_TEMPLATES`; do not fork local cover templates.
+- **PDF file locked:** close open PDF before rebuild (WeasyPrint permission error).
 - **MkDocs 2.0 warning:** Cosmetic only, does not affect output.
 - **`faq.md` / `portal_index.md` warnings:** Root-level files in `docs/ru/`, not related to target. Safe to ignore.
 
