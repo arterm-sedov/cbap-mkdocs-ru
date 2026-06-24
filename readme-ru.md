@@ -30,8 +30,6 @@
 
 Прочее: `$env:CMW_KB_REPO_PATH` → `$CMW_KB_REPO_PATH` (сначала `export` из `.env`). Подробнее: [Первоначальная настройка → venv](#1-виртуальное-окружение-python).
 
-**Якоря в этом файле:** GitHub и VS Code формируют slug из текста заголовка (строчные буквы, пробелы → `-`, кириллица сохраняется). Синтаксис `{: #… }` работает только в MkDocs-статьях под `docs/ru/`, не в README.
-
 **Обозначения:** там, где в командах и интерфейсе Git/GitHub встречается иностранная терминология, русский термин сопровождается **английским эквивалентом в скобках** — например, перенос коммитов (*cherry-pick*), слияние веток (*merge*), отправка (*push*).
 
 ## Карта документа
@@ -74,7 +72,8 @@
 | `**{{ productName }}**` и плейсхолдеры брендов | [Имена продуктов и брендов](AGENTS.md#product--brand-names) |
 | Теги в служебной шапке (frontmatter) | [Теги](AGENTS.md#tags) |
 | `&nbsp;` и подобное | [HTML-сущности](AGENTS.md#html-entities) |
-| Якоря `{: #anchor }` в статьях БЗ (MkDocs) | [Заголовки](AGENTS.md#headings) |
+| `{: #anchor .pageBreak_* }` у заголовков (только `docs/ru/`, не README) | [Заголовки](AGENTS.md#headings) |
+| Жёсткий разрыв страницы в PDF | [Разрывы страниц в PDF](#разрывы-страниц-в-pdf) · сниппет `pdfPageBreakHard.md` |
 | Формат коммита `[#ticket]` | [Сообщения коммитов](AGENTS.md#commit-messages) · навык `cmwhelp-commit` |
 | Не править `phpkb_content/` вручную | [Контекст](AGENTS.md#context) |
 | Временные файлы только в `.scratch/` | [Каталог `.scratch/`](AGENTS.md#scratch-directory) |

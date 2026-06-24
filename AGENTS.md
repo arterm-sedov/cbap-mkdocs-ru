@@ -198,13 +198,25 @@ For non-breaking spaces and similar symbols use HTML-entities like so:
 
 ## Headings
 
+Attribute blocks `{: … }` on the line after a heading are **MkDocs/PyMdown syntax** for articles under `docs/ru/` — they do **not** apply in repo README files.
+
 For H1 generate a concise semantic anchor in English (might be similar to filename):
 
 {: #article_name }
 
-For H2-H6 generate a concise semantic anchors with H1 anchor as a prefix:
+For H2-H6 generate concise semantic anchors with the H1 anchor as a prefix:
 
 {: #article_name_heading_name }
+
+When editing existing headings, **keep anchor names and CSS classes** in the attribute block — for example `{: #article_name_section .pageBreakAfter }`. Do not remove or rename `.pageBreak_*` (and similar layout) classes unless explicitly asked; they control PDF pagination and layout.
+
+For an explicit hard page break in PDF output, include at the break point:
+
+```markdown
+{% include-markdown ".snippets/pdfPageBreakHard.md" %}
+```
+
+That snippet renders only when the build sets `pdfOutput: true`.
 
 ## Commit messages
 
