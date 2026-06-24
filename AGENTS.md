@@ -16,7 +16,7 @@ The three persons ideate, collaborate, argue and reconcile the resulting text or
 
 ## OUTPUT
 
-- Reason and answer in English (uless specifically asked to answer in Russian).
+- Reason and answer in English (unless specifically asked to answer in Russian).
 - **Human operators** editing `docs/ru/` follow the same formatting and linking rules in this file as AI agents — see `readme.md` for terminal workflows only.
 - If any context is present, output the resulting texts their original languages:
   - For Russian originals, output Russian text.
@@ -35,6 +35,20 @@ Comindware Platform Knowledge Base:
 - @/phpkb_content/ (**do not manually edit** — auto-generated from PHPKB; use @/docs/ for all content changes)
 
 **Operator workflows** (build HTML, publish to PHPKB, RAG import, PDF, image sync, **web scraping**, `mkdocs serve`, git remotes, cherry-pick, `gh` CLI): see @/readme.md. Russian operator guide: @/readme-ru.md. This file (`AGENTS.md`) covers article rules and agent behavior; `readme.md` / `readme-ru.md` cover terminal commands and MkDocs config structure.
+
+### Human operators — readme cross-reference
+
+| Topic in this file | English readme | Russian readme |
+| --- | --- | --- |
+| Article rules (links, lists, headings, tags) | [Content editing standards](readme.md#content-editing-standards) | [Стандарты редактирования](readme-ru.md#стандарты-редактирования-контента) |
+| [Link formatting](#link-formatting) (map include, autorefs) | [Jinja → Include snippets](readme.md#include-snippets) · [Link references](readme.md#link-references-in-articles) | [Подключение сниппетов](readme-ru.md#подключение-сниппетов) · [Ссылки в статьях](readme-ru.md#ссылки-в-статьях) |
+| Map `{% if %}` / guide flags | [Guide flags](readme.md#guide-flags-extra-section) · [Conditional content](readme.md#conditional-content) | [Флаги руководств](readme-ru.md#флаги-руководств-extra) · [Условный контент](readme-ru.md#условный-контент) |
+| [Headings](#headings) / PDF page breaks | [PDF page breaks](readme.md#pdf-page-breaks) | [Разрывы страниц в PDF](readme-ru.md#разрывы-страниц-в-pdf) |
+| [Python environment](#python-environment) | [First-time setup](readme.md#first-time-setup) | [Первоначальная настройка](readme-ru.md#первоначальная-настройка) |
+| [Skills Reference](#skills-reference) | [Agent skills](readme.md#agent-skills-reference) | [Skills для агентов](readme-ru.md#skills-для-агентов-справка-agent-skills) |
+| [Cherry-picking](#cherry-picking-between-platform-versions) | [Merge and cherry-pick](readme.md#merge-and-cherry-pick-between-platform-versions) | [Перенос коммитов и слияние](readme-ru.md#перенос-коммитов-и-слияние-между-версиями-платформы) |
+| [Scratch directory](#scratch-directory) | [Scratch directory](readme.md#scratch-directory) | [Каталог `.scratch/`](readme-ru.md#каталог-scratch) |
+| `phpkb_content/` — do not edit | [Repository layout](readme.md#repository-layout) | [Структура репозитория](readme-ru.md#структура-репозитория) |
 
 Platform source code (see `PLATFORM_SOURCE_CODE` in `.env`; sibling repo, for verifying feature behavior):
 
@@ -123,19 +137,100 @@ Skills are under `.agents/skills/<name>/SKILL.md`. Do not duplicate skill conten
 
 ## LINK FORMATTING
 
-**External links:** use `[link title][article_anchor]` not `[link title](article.md)` links. Where `article_anchor` is `h1 anchor` from `article.md`. Take the the anchors as named references from @hyperlinks_mkdocs_to_kb_map.md
+Articles never embed URL targets. They reference **named anchors** only; actual URLs live in `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md` (the central hub). That gives:
 
-**All absolute URLs must go through `docs/ru/.snippets/hyperlinks_mkdocs_to_kb_map.md`** — never use bare inline URLs in articles. The hyperlinks map is the single source of truth:
+- **Portability across language versions** — RU and EN articles share the same `[supportUrl]`, `[deploy_cat]`, …; only the map (or `kbArticleURLPrefix` in `extra:`) changes per locale/build.
+- **Deduplication** — define each target once as `[anchor_name]: …`; reference it from any article with `[link title][anchor_name]`.
+- **Product versioning** — KB links use `{{ kbArticleURLPrefix }}` / `{{ kbCategoryURLPrefix }}` (from `mkdocs_common.yml` `extra:`), so `platform_v5` / `platform_v6` and PHPKB export resolve to the correct ids and base URLs without editing article prose.
 
-- Portable: maps resolve to correct KB instance per environment
-- Versionable: link targets can be updated in one place
-- Localizable: supports conditional `{% if kbExport %}` blocks
-- Conditionable: PDF builds can distinguish internal vs external links
-- Maintainable: one file to update when URLs change
+**Same-article (in-page) links:** `[link title](#anchor_name)` only — hash to a heading **on the current page**. Not in the map; not `[title][anchor_name]` for same-page jumps. Fragment = `{: #anchor_name }` on the target heading (H2–H6: `{: #article_name_section_name }`).
 
-When adding a new link, always add its target to the map first, then reference it by anchor name in articles.
+**Cross-article and all other links:** `[link title][anchor_name]` only — not `[link title](path.md)`, not inline URL literals in article Markdown. Add new targets to the hyperlink map first, then use the anchor name in prose. Anchor names align with target heading ids (`{: #… }` on H1–H6) or semantic names for third-party / KB category entries (`_cat` suffix).
 
-**Internal links:** use `[link title](#article_anchor)` format.
+### How `[title][anchor]` resolves (two mechanisms)
+
+MkDocs uses **both** the hyperlink map and the **`autorefs` plugin** (`plugins.autorefs` in `mkdocs_common.yml`). Resolution order for `[link title][anchor]`:
+
+1. **Hyperlink map** — if the article ends with `{% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}` and the active build emits `[anchor]: <url>` for that anchor, Markdown turns the reference into a normal link (`<a href="…">`). Used for **external URLs**, **KB site URLs** (`{{ kbArticleURLPrefix }}…`, `{{ kbCategoryURLPrefix }}…`), and cross-refs when the target is **outside** the current `nav:` / PDF subset.
+
+2. **`mkdocs-autorefs`** — if no map definition applies, `autorefs` looks up `anchor` among headings registered in the **current build** (`{: #anchor }` on H1–H6 via `attr_list`). It produces an **internal** cross-reference — relative HTML link in `mkdocs serve` / web help, in-PDF link in `*_pdf.yml` builds (`autorefs-internal`).
+
+3. **Failure** — neither a map URL nor an in-build heading → build warning `Could not find cross-reference target '<anchor>'`. Add a map entry, fix the anchor name, or include the target page in the active YAML `nav:`.
+
+Authors write one syntax (`[title][anchor]`); the build picks map URL vs internal autoref automatically.
+
+### Hyperlink-map include (required on every article)
+
+End **every** article under `docs/` with:
+
+```markdown
+{% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
+```
+
+(For `docs/ru/` articles the path is as shown; use the locale's `.snippets/hyperlinks_mkdocs_to_kb_map.md` when other `docs/<locale>/` trees are added.)
+
+**Why always include:** so any existing or future `[title][anchor_name]` in that article resolves at build time — via **`mkdocs-autorefs`** when the target is in the current build and an internal cross-ref is appropriate, or via the **hyperlink map** when a hub-backed URL is appropriate (third-party, KB site, out-of-nav fallback, PHPKB export). Authors write one syntax; the build picks the mechanism. Do not omit on “leaf” pages: a ref that autorefs satisfies today may need the map when the article lands in a narrower PDF/guide `nav:` or when a new hub anchor is added.
+
+Snippet fragments under `docs/*/.snippets/` are not articles — they do not get their own map include; link refs in snippets resolve when the **parent** article includes the map.
+
+The include **loads named anchor definitions** (`[anchor]: url`) into the rendered page so hub-backed anchors and conditional KB URLs are available alongside autorefs.
+
+### Hyperlink map as central hub
+
+`hyperlinks_mkdocs_to_kb_map.md` is where **URL targets** are defined — articles only hold **anchor names**:
+
+```markdown
+[supportUrl]: https://www.comindware.ru/company/contact-us/#tab_support
+[forms]: {{ kbArticleURLPrefix }}5724
+[deploy_cat]: {{ kbCategoryURLPrefix }}922
+```
+
+- Third-party and corporate URLs — one named anchor each (Wikipedia, CryptoPro, …).
+- KB articles / categories — `{{ kbArticleURLPrefix }}<kbId>` and `{{ kbCategoryURLPrefix }}<id>` (version- and environment-aware).
+- Cross-guide / cross-PDF — same `[title][anchor]` in prose; map conditionals and `autorefs` choose KB URL vs in-build link (see below).
+
+Naming: prefer English semantic names matching target `{: #… }` heading ids. Categories: `_cat` suffix.
+
+### Map URLs with `kbId#section_anchor` fragments
+
+Many map entries point to a **section inside** a KB article, not just the article top:
+
+```markdown
+[backup_configure_list_view]: {{ kbArticleURLPrefix }}5566#backup_configure_list_view
+[architect_description]: {{ kbArticleURLPrefix }}5588#architect_description
+```
+
+| Part | Meaning |
+| --- | --- |
+| `{{ kbArticleURLPrefix }}5566` | PHPKB article id `5566` on the KB site for the active `site_url` / branch |
+| `#backup_configure_list_view` | Fragment — id of a heading **on that article** (`{: #article_name_backup_configure_list_view }` or matching H2–H6 anchor) |
+
+In article prose you still write `[link title][backup_configure_list_view]` (reference style). The map supplies the full KB URL with hash so PHPKB export and out-of-nav PDF/guide builds open the correct **paragraph or section** online.
+
+When the target article **is** in the current build, `autorefs` may resolve the same `[title][anchor]` to an internal `page.html#section_anchor` link instead — if no map definition takes precedence for that build.
+
+**Do not** use `kbId#section` syntax in articles — only in the map. For a link **within the same article**, use `[title](#section_anchor)` directly (see above).
+
+### How map conditionals mirror YAML configs
+
+Map sections use `{% if … %} … {% endif %}` with the same **`extra:` guide flags** as article Jinja and the leaf `mkdocs*.yml`:
+
+| Flag | Typical config | Role in the map |
+| --- | --- | --- |
+| `userGuide` | `mkdocs_guide_user_ru.yml` | KB URL defs for user-guide scope |
+| `adminGuideLinux` / `adminGuideWindows` | `mkdocs_guide_admin_*_ru.yml` | Admin-guide scope |
+| `developerGuide`, `apiGuide`, `aiGuide` | matching `mkdocs_guide_*_ru.yml` | Developer / API / AI scope |
+| `tutorial`, `completeGuide`, `gostech` | tutorial / complete / ГосТех YAMLs | Variant-specific defs |
+| `kbExport` | `mkdocs_for_kb_import_ru.yml` | Full KB URL block for PHPKB HTML |
+| `pdfOutput` | `mkdocs_guide_*_ru_pdf.yml` | Inherited with parent guide flags |
+
+**Subset guides and PDFs:** only map blocks whose `{% if %}` matches the active flags are included. For a target **in** the current `nav:`, autorefs usually supplies the **internal** link even when the map block is omitted. For a target **outside** the build, an active map block supplies the **KB site URL** so the link still works in that PDF or guide.
+
+**PHPKB export:** large blocks use `{% if kbExport %}`; guide-scoped conditions often end with `or kbExport` so export always gets KB URLs.
+
+When adding a map entry, place `[anchor]: …` in the matching conditional block; copy nearby patterns and preserve `or kbExport` on guide-scoped conditions.
+
+**Operators:** guide flags — [MkDocs configuration files](readme.md#mkdocs-configuration-files) / [Конфигурация MkDocs](readme-ru.md#конфигурация-mkdocs). Jinja — readme Jinja section.
 
 ## LIST FORMATTING
 
@@ -177,7 +272,7 @@ Replace with: **{{ companyName }}**
 
 ## Tags
 
-If there are no tags in the article populate the gags in the front matter.
+If there are no tags in the article, populate the tags in the front matter.
 
 Sort the tags: English, then Russian.
 

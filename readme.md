@@ -53,31 +53,47 @@ Other substitutions: `$env:CMW_KB_REPO_PATH` → `$CMW_KB_REPO_PATH` (export fro
 | [GitHub CLI](#github-cli-gh) | `gh pr`, `gh issue`, CI checks |
 | [PHPKB assets deploy](#phpkb-assets-repo-propagate-push-and-ssh-pull) | Sibling `kb.comindware.ru` repo + SSH pull on server |
 | [Web scraping for LLM ingestion](#web-scraping-for-llm-ingestion) | Crawl public sites → sanitize → commit |
-| [Content editing standards](#content-editing-standards) | Same rules as agents — pointers to `AGENTS.md` |
+| [Content editing standards](#content-editing-standards) | Article rules — index into `AGENTS.md` + Jinja section below |
+| [Agent skills](#agent-skills-reference) | End-to-end playbooks (full index in `AGENTS.md`) |
+| [Scratch directory](#scratch-directory) | Disposable temp files (`.scratch/`) |
 | [Troubleshooting](#troubleshooting) | Common failures |
 
-**Writing or editing `docs/ru/`?** → [`AGENTS.md`](AGENTS.md). **Running builds, imports, or scripts?** → sections below (skills index also in [`AGENTS.md` → Skills Reference](AGENTS.md#skills-reference)).
+**Writing or editing `docs/ru/`?** → [`AGENTS.md`](AGENTS.md) · [Content editing standards](#content-editing-standards). **Running builds, imports, or scripts?** → sections below · [`AGENTS.md` → Human operators cross-reference](AGENTS.md#human-operators--readme-cross-reference) · [Skills Reference](AGENTS.md#skills-reference).
 
 
 ## Content editing standards
 
-Humans and agents share one rulebook: [`AGENTS.md`](AGENTS.md). Before editing any article, skim the sections that apply to your change:
+Humans and agents share one rulebook: [`AGENTS.md`](AGENTS.md). Before editing any article, skim the rows that apply to your change.
 
-| Topic | Where in `AGENTS.md` |
-| --- | --- |
-| External and KB links, hyperlink map | [Link formatting](AGENTS.md#link-formatting) |
-| Bullet and numbered lists | [List formatting](AGENTS.md#list-formatting) |
-| Italic and bold | [_Italic_](AGENTS.md#italic) · [**Bold**](AGENTS.md#bold) |
-| `**{{ productName }}**` and brand placeholders | [Product & brand names](AGENTS.md#product--brand-names) |
-| Frontmatter tags | [Tags](AGENTS.md#tags) |
-| `&nbsp;` and similar | [HTML entities](AGENTS.md#html-entities) |
-| `{: #anchor .pageBreak_* }` on headings (`docs/ru/` articles only, not README) | [Headings](AGENTS.md#headings) |
-| Hard PDF page break | [PDF page breaks](#pdf-page-breaks) · `pdfPageBreakHard.md` snippet |
-| Commit message `[#ticket]` format | [Commit messages](AGENTS.md#commit-messages) · skill `cmwhelp-commit` |
-| Do not edit `phpkb_content/` by hand | [Context](AGENTS.md#context) |
-| Temp files in `.scratch/` only | [Scratch directory](AGENTS.md#scratch-directory) |
+**Article content**
 
-For Jinja conditionals and `{% include-markdown %}` mechanics in articles, see [Jinja templating basics](#jinja-templating-basics) below (build-time behavior). Wording and link style stay in `AGENTS.md`.
+| Topic | `AGENTS.md` | This readme (build mechanics) |
+| --- | --- | --- |
+| Cross-article `[title][anchor_name]`; named-anchor hub; `autorefs` | [Link formatting](AGENTS.md#link-formatting) | [Include snippets](#include-snippets) · [Link references](#link-references-in-articles) |
+| Same-page `[title](#anchor_name)` only | [Link formatting](AGENTS.md#link-formatting) | [Link references](#link-references-in-articles) |
+| Map include on **every** `docs/` article | [Hyperlink-map include](AGENTS.md#hyperlink-map-include-required-on-every-article) | [Include snippets](#include-snippets) |
+| KB section URLs (`kbId#fragment`) — map only | [Map URLs with fragments](AGENTS.md#map-urls-with-kbidsection_anchor-fragments) | — |
+| Map `{% if %}` vs guide / `kbExport` flags | [Map conditionals](AGENTS.md#how-map-conditionals-mirror-yaml-configs) | [Guide flags](#guide-flags-extra-section) · [Conditional content](#conditional-content) |
+| Bullet and numbered lists | [List formatting](AGENTS.md#list-formatting) | — |
+| Italic and bold | [_Italic_](AGENTS.md#italic) · [**Bold**](AGENTS.md#bold) | — |
+| `**{{ productName }}**` and brand placeholders | [Product & brand names](AGENTS.md#product--brand-names) | [Product placeholders](#product-placeholders) |
+| Frontmatter tags | [Tags](AGENTS.md#tags) | — |
+| `&nbsp;` and similar | [HTML entities](AGENTS.md#html-entities) | — |
+| `{: #anchor .pageBreak_* }` on headings (`docs/ru/` only) | [Headings](AGENTS.md#headings) · [Rules](AGENTS.md#rules) (preserve anchors/classes) | — |
+| Hard PDF page break | [Headings](AGENTS.md#headings) | [PDF page breaks](#pdf-page-breaks) |
+
+**Repo and git** (operators — full commands in sections below)
+
+| Topic | `AGENTS.md` | This readme |
+| --- | --- | --- |
+| Do not edit `phpkb_content/` by hand | [Context](AGENTS.md#context) | [Repository layout](#repository-layout) |
+| Temp files in `.scratch/` only | [Scratch directory](AGENTS.md#scratch-directory) | [Scratch directory](#scratch-directory) |
+| Commit message `[#ticket]` format | [Commit messages](AGENTS.md#commit-messages) | [Git hooks](#git-hooks) · skill `cmwhelp-commit` |
+| Cherry-pick / separate commits per artifact layer | [Cherry-picking](AGENTS.md#cherry-picking-between-platform-versions) | [Merge and cherry-pick](#merge-and-cherry-pick-between-platform-versions) |
+| Python `.venv` / script invocation | [Python environment](AGENTS.md#python-environment) | [First-time setup](#first-time-setup) |
+| End-to-end workflows | [Skills Reference](AGENTS.md#skills-reference) | [Agent skills](#agent-skills-reference) · [Quick decision tree](#quick-decision-tree) |
+
+Reverse index (readme → `AGENTS.md`): [`AGENTS.md` → Human operators cross-reference](AGENTS.md#human-operators--readme-cross-reference).
 
 
 ## Repository layout
@@ -1440,7 +1456,7 @@ Override files use **Jinja2** syntax (`{% extends %}`, `{% block %}`, `{{ config
 
 ## Jinja templating basics
 
-MkDocs processes Markdown through Jinja2. The `mkdocs-macros` plugin (`plugins.macros` in `mkdocs_common.yml`) exposes `config.extra` values as template variables. Placeholders and conditionals must still follow [`AGENTS.md`](AGENTS.md) (link style, bold product names, etc.) — below is build-time templating only.
+Build-time templating for articles — wording and link rules: [`AGENTS.md`](AGENTS.md) · [Content editing standards](#content-editing-standards). MkDocs processes Markdown through Jinja2; the `mkdocs-macros` plugin (`plugins.macros` in `mkdocs_common.yml`) exposes `config.extra` values as template variables.
 
 ### Product placeholders
 
@@ -1484,19 +1500,30 @@ Typical condition variables: `pdfOutput`, `kbExport`, `userGuide`, `adminGuideLi
 
 ### Include snippets
 
-Reusable fragments live in `docs/ru/.snippets/`. Include at the end of an article:
+Reusable fragments live in `docs/ru/.snippets/`.
+
+**Hyperlink map (required at end of every article):**
 
 ```markdown
 {% include-markdown ".snippets/hyperlinks_mkdocs_to_kb_map.md" %}
 ```
 
-The hyperlink map is the **single source of truth** for external and KB article links. In PHPKB export, the KB-specific block inside the map is wrapped in `{% if kbExport %} … {% endif %}` so PDF and web builds do not double-resolve URLs.
+Include on **every** article under `docs/` so any existing or future `[link title][anchor_name]` resolves at build time — via **`mkdocs-autorefs`** or the **hyperlink map**, whichever is appropriate (see [`AGENTS.md` → Link formatting](AGENTS.md#link-formatting)):
+
+1. **`mkdocs-autorefs`** — target article is in the **current build** (`nav:` of the active YAML) → internal cross-reference to `{: #anchor }` (HTML/PDF).
+2. **Hyperlink map** — hub-backed URL (third-party, KB site, out-of-nav fallback, PHPKB export); conditionals (`userGuide`, `adminGuideLinux`, `kbExport`, …) match active `extra:` flags.
+
+The map is the central **named-anchor** hub (portability, deduplication, versioning via `kbArticleURLPrefix`). Authors write one reference syntax; the build chooses autorefs vs map.
 
 ### Link references in articles
 
-- **External / KB links:** `[link title][article_anchor]` — anchor defined in `hyperlinks_mkdocs_to_kb_map.md`.
-- **Internal same-page links:** `[link title](#article_anchor)`.
-- Never use bare `https://` URLs in articles — add the target to the hyperlink map first.
+| Scope | Syntax | Where target is defined |
+| --- | --- | --- |
+| **Same article** (heading on this page) | `[title](#anchor_name)` | Heading `{: #anchor_name }` in this file |
+| **Cross-article / KB / third-party** | `[title][anchor_name]` | Named anchor in hyperlink map, or `autorefs` if in-build |
+
+- **In-page:** `#anchor_name` only — not in the map.
+- **Cross-article:** `[title][anchor_name]` — hub entry and/or `autorefs`; never inline URLs or `path.md` in article Markdown.
 
 ### PDF page breaks
 
@@ -1738,9 +1765,9 @@ AttributeError: property 'text' of 'Tag' object has no setter
 
 ## Agent skills (reference)
 
-End-to-end task playbooks live in `.agents/skills/<name>/SKILL.md`. **AI agents:** use the skills index in [`AGENTS.md`](AGENTS.md) — load a skill when its description matches the task; do not rely on this readme for writing rules or skill steps.
+End-to-end task playbooks live in `.agents/skills/<name>/SKILL.md`. **AI agents:** use the skills index in [`AGENTS.md`](AGENTS.md) — load a skill when its description matches the task.
 
-Humans may browse skills as extended playbooks. Common entries:
+Humans: browse skills as extended playbooks, or use the [Content editing standards](#content-editing-standards) index and [`AGENTS.md` → Human operators cross-reference](AGENTS.md#human-operators--readme-cross-reference) to jump between article rules and workflow sections.
 
 | Task | Skill |
 | --- | --- |
