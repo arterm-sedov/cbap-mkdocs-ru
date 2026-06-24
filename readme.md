@@ -71,7 +71,8 @@ Humans and agents share one rulebook: [`AGENTS.md`](AGENTS.md). Before editing a
 | `**{{ productName }}**` and brand placeholders | [Product & brand names](AGENTS.md#product--brand-names) |
 | Frontmatter tags | [Tags](AGENTS.md#tags) |
 | `&nbsp;` and similar | [HTML entities](AGENTS.md#html-entities) |
-| `{: #anchor }` on headings | [Headings](AGENTS.md#headings) |
+| `{: #anchor .pageBreak_* }` on headings (`docs/ru/` articles only, not README) | [Headings](AGENTS.md#headings) |
+| Hard PDF page break | [PDF page breaks](#pdf-page-breaks) · `pdfPageBreakHard.md` snippet |
 | Commit message `[#ticket]` format | [Commit messages](AGENTS.md#commit-messages) · skill `cmwhelp-commit` |
 | Do not edit `phpkb_content/` by hand | [Context](AGENTS.md#context) |
 | Temp files in `.scratch/` only | [Scratch directory](AGENTS.md#scratch-directory) |
