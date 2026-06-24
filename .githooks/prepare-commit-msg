@@ -1,42 +1,47 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Suggest [#XXXXX] prefix from branch or recent commits — never mutate the message file.
 # Usage: prepare-commit-msg <commit-msg-file> [<commit-source>] [<sha1>]
 MSG_FILE="$1"
-COMMIT_SOURCE="${2-}"
-SHA1="${3-}"
 
 # Skip for merge commits
 if git rev-parse -q --verify MERGE_HEAD >/dev/null 2>&1; then
   exit 0
 fi
 
-# Read the first line of the message
 first_line="$(head -n1 "$MSG_FILE" || true)"
 
-# If message already starts with [#XXXXX] or is Merge/Revert, do nothing
+# Already formatted, or merge/revert — nothing to suggest
 if printf '%s' "$first_line" | grep -qE '^\[\#[0-9]+\] '; then
   exit 0
 fi
-if printf '%s' "$first_line" | grep -qE '^(Merge|Revert) ' ; then
+if printf '%s' "$first_line" | grep -qE '^(Merge|Revert) '; then
   exit 0
 fi
 
-# Try to extract issue number from branch name
 branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || true)"
-issue="$(printf '%s' "$branch" | grep -oE '[0-9]+' | head -1 || true)"
+issue=""
 
-# Fallback: reuse latest commit's [#XXXXX] token if present
+# YYYYMMDD_<ticket>_<theme>
+if printf '%s' "$branch" | grep -qE '^[0-9]{8}_[0-9]+_'; then
+  issue="$(printf '%s' "$branch" | sed -n 's/^[0-9]\{8\}_\([0-9][0-9]*\)_.*/\1/p')"
+# Legacy <ticket>_<theme> (not a date-only prefix)
+elif printf '%s' "$branch" | grep -qE '^[0-9]+_'; then
+  issue="$(printf '%s' "$branch" | sed -n 's/^\([0-9][0-9]*\)_.*/\1/p')"
+fi
+
+# Do not infer [#6]/[#5] from platform_v6 / platform_v5 branch names — too easy to mislead.
+
 if [ -z "$issue" ]; then
   issue="$(git log -n 20 --pretty=%B | sed -n 's/^\[\#\([0-9][0-9]*\)\].*/\1/p' | head -1 || true)"
 fi
 
-# Prepend token if we found one
 if [ -n "$issue" ]; then
-  rest="$(tail -n +2 "$MSG_FILE" || true)"
-  printf '[#%s] %s\n%s' "$issue" "$first_line" "$rest" > "$MSG_FILE"
+  echo "prepare-commit-msg: suggest format [#${issue}] ${first_line}" 1>&2
+  echo "prepare-commit-msg: edit the message or use: git commit -m \"[#${issue}] ${first_line}\"" 1>&2
+else
+  echo "prepare-commit-msg: suggest prefix [#XXXXX] on the first line (see .agents/skills/cmwhelp-commit/SKILL.md)" 1>&2
 fi
 
 exit 0
-
-

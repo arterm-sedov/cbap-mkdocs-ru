@@ -1673,7 +1673,7 @@ See `.gitconfig-hooks.md` for the same instruction.
 
 | Hook | Trigger | Action |
 | --- | --- | --- |
-| `prepare-commit-msg` | Before commit message editor opens | Prepends `[#XXXXX]` from branch name or recent commits if missing |
+| `prepare-commit-msg` | Before commit message editor opens | **Suggests** `[#XXXXX] …` on stderr from branch or recent commits (does not change the message) |
 | `commit-msg` | After message written | Warns if message does not match `[#XXXXX] …` format (does not block) |
 | `pre-push` | Before push | Git LFS pre-push |
 | `post-commit` | After commit | Git LFS post-commit |
@@ -1806,9 +1806,9 @@ git remote show origin
 | `platform_v5` | v5.0 | `798` | `site_url` …/v5.0/ in import YAML |
 | `platform_v6` | v6.0 | `896` | `site_url` …/v6.0/ in import YAML |
 | `master` | — | — | Integration / default on some remotes |
-| `<ticket>_<topic>` | — | — | Short-lived feature branches off `platform_v5` or `platform_v6` |
+| `<YYYYMMDD>_<ticket>_<topic>` | — | — | Short-lived feature branches off `platform_v5` or `platform_v6` |
 
-Ticket branches (e.g. `10291999_scripts_keys`) are usually merged back into the matching platform branch via pull request.
+Ticket branches (e.g. `20260624_10291999_scripts_keys`) are usually merged back into the matching platform branch via pull request.
 
 **Never commit:** `.env`, SSH keys, passwords, or machine-specific absolute paths. Paths like `CMW_KB_REPO_PATH` belong only in `.env` (gitignored).
 
@@ -1842,7 +1842,7 @@ On Windows PowerShell, `git switch` / `git pull` are the same.
 ```bash
 git switch platform_v6
 git pull origin platform_v6
-git switch -c 10291999_scripts_keys
+git switch -c 20260624_10291999_scripts_keys
 
 # … edit docs/ru/, build, publish …
 
