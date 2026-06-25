@@ -25,6 +25,8 @@ boundaries on representative Markdown files.
 import os
 import re
 
+from tools.text_io import open_text_write
+
 # Define the directory to search for markdown files
 directory = 'docs/ru/using_the_system'
 
@@ -79,7 +81,7 @@ def process_file(filepath):
 
     # If modifications were made, write the updated content back to the file
     if modified:
-        with open(filepath, 'w', encoding='utf-8') as file:
+        with open_text_write(filepath) as file:
             file.writelines(output_lines)
         print(f"Updated: {filepath}")
     else:

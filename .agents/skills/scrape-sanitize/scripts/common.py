@@ -3,6 +3,7 @@ Shared utilities for scrape-sanitize pipeline scripts.
 Import from this module to avoid code duplication across ingestor/sanitizer.
 """
 import os
+import sys
 import json
 import argparse
 from datetime import datetime
@@ -11,6 +12,15 @@ from datetime import datetime
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(SCRIPT_DIR))))
 SCRATCH_DIR = os.path.join(REPO_ROOT, '.scratch')
+
+if REPO_ROOT not in sys.path:
+    sys.path.insert(0, REPO_ROOT)
+
+from tools.text_io import (
+    open_text_append,
+    open_text_write,
+    write_text as write_repo_text,
+)
 
 # --- Site config ---
 SITES = {
@@ -69,8 +79,8 @@ def load_json(path):
 def save_json(data, path):
     """Save JSON to file, creating dirs as needed."""
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
+    with open_text_write(path) as handle:
+        json.dump(data, handle, indent=2, ensure_ascii=False)
 
 
 def load_json_set(path):
@@ -86,12 +96,16 @@ def save_json_set(data_set, path):
 
 def append_output(text, filepath):
     """Append text to file with fsync. Creates dirs as needed."""
-    os.makedirs(os.path.dirname(filepath), exist_ok=True)
-    mode = 'a' if os.path.exists(filepath) else 'w'
-    with open(filepath, mode, encoding='utf-8') as f:
-        f.write(text)
-        f.flush()
-        os.fsync(f.fileno())
+    opener = open_text_append if os.path.exists(filepath) else open_text_write
+    with opener(filepath) as handle:
+        handle.write(text)
+        handle.flush()
+        os.fsync(handle.fileno())
+
+
+def write_output(path, content):
+    """Overwrite a text file with repository-standard LF endings."""
+    write_repo_text(path, content)
 
 
 def fresh_start(paths, what=('checkpoint', 'dirty_output', 'progress', 'sanitized')):

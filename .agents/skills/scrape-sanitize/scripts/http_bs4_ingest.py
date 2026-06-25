@@ -13,6 +13,13 @@ except ImportError:
     print("ERROR: Please install 'markdownify' (pip install markdownify)")
     exit(1)
 
+from common import (
+    append_output,
+    open_text_write,
+    save_json_set,
+    write_output,
+)
+
 # --- Logging setup ---
 logging.basicConfig(filename="cmwlab_ingest.log", level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 
@@ -35,17 +42,12 @@ def load_progress():
     return set()
 
 def save_progress(processed_urls):
-    with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
-        json.dump(list(processed_urls), f)
+    save_json_set(processed_urls, PROGRESS_FILE)
 
 def write_batch(articles):
     if not articles:
         return
-    with open(OUTPUT_MD, "a", encoding="utf-8") as f:
-        for article in articles:
-            f.write(article)
-        f.flush()
-        os.fsync(f.fileno())
+    append_output(''.join(articles), OUTPUT_MD)
     log_message(f"Wrote {len(articles)} articles.")
 
 def log_message(msg, level='info'):
@@ -187,7 +189,7 @@ def main():
     total_articles = 0
     # Write header if file doesn't exist
     if not os.path.exists(OUTPUT_MD):
-        with open(OUTPUT_MD, "w", encoding="utf-8") as f:
+        with open_text_write(OUTPUT_MD) as f:
             f.write(
                 f"\n----------------------\n\n"
                 f"Ingestion date: {ingestion_date}\n"
@@ -235,8 +237,7 @@ def main():
             "----------------------\n\n"
         )
         content = new_header + content[header_end+22:]
-        with open(OUTPUT_MD, "w", encoding="utf-8") as f:
-            f.write(content)
+        write_output(OUTPUT_MD, content)
     log_message(f"Done. {files_analyzed} files, {total_tokens} tokens.")
     log_message(f"Progress saved in {PROGRESS_FILE}")
 

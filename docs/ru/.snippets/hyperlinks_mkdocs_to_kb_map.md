@@ -3,26 +3,32 @@
  HYPERLINKS MAP — Purpose and usage
 ================================================================================
 
- This file provides portable, versionable, localizable, conditionable hyperlinks
- for the entire knowledge base. It is the SINGLE SOURCE for all cross-references:
+ Central hub: all URL targets as named anchors `[anchor_name]: <url>`.
+ Articles reference anchors only — `[title][anchor_name]` or in-page `[title](#anchor_name)`.
 
-  - When exporting to PHPKB: all {{ kbArticleURLPrefix }} references resolve to
-    the current KB instance URLs.
-  - When building a PDF guide: articles NOT included in the guide retain their
-    KB URLs (reader follows the link to the KB). Articles included in the guide
-    resolve to internal anchor links.
-  - All external URLs (e.g. wikipedia, cryptopro, telegram) are centralized here
-    for easy maintenance and consistency.
-  - The entire block is wrapped in {% if kbExport %} ... {% endif %} to avoid
-    polluting the generated PHPKB HTML with double URL resolution.
+ Why hub (see AGENTS.md): portability across language versions; deduplication;
+ product versioning via kbArticleURLPrefix / kbCategoryURLPrefix placeholders.
 
- Naming convention:
-  - For KB articles: use an English semantic anchor matching the article's H1
-    anchor (e.g. [forms]: {{ kbArticleURLPrefix }}5724).
-  - For external URLs: use a short descriptive name (e.g. [telegram_botfather]).
-  - For category links: use the _cat suffix (e.g. [deploy_cat]).
+ Cross-article: `[title][anchor]`.  Same article: `[title](#anchor_name)` only.
 
- Always add new links here instead of using bare inline URLs in articles.
+ Map URL forms:
+  - Article top:  [anchor]: kbArticleURLPrefix + article id
+  - Section:      [anchor]: kbArticleURLPrefix + article id + #section_anchor
+    (#fragment = heading id on the target article)
+
+ Resolution (see AGENTS.md → Link formatting):
+  - mkdocs-autorefs: target in current build nav → internal HTML/PDF cross-reference.
+  - This map (via include at end of article): external URLs; KB site URLs for targets
+    outside the current guide/PDF when the matching conditional map block is active.
+
+ Map conditional blocks use the same extra: guide flags as mkdocs*.yml (userGuide,
+ adminGuideLinux, kbExport, …).
+ Include at end of **every** article under docs/ (snippet fragments in .snippets/ — not articles).
+   See AGENTS.md → Link formatting (hyperlink-map include).
+ So any existing or future [title][anchor] resolves: autorefs or map, whichever applies.
+
+ Naming: English semantic anchor names; categories — _cat suffix.
+ Add new targets here first, then `[title][anchor]` in articles.
 -->
 
 <!-- Любые руководства -->

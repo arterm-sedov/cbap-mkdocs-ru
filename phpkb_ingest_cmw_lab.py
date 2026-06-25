@@ -2,6 +2,7 @@ import yaml
 from datetime import datetime
 import re
 from phpkb_ingest_utils import build_content, build_summary, build_tree, iter_markdown_files
+from tools.text_io import open_text_write
 
 
 if __name__ == "__main__":
@@ -35,7 +36,7 @@ if __name__ == "__main__":
     # Replace three or more newlines with just two newlines
     snippet_content = re.sub(r'\n{2,}', '\n', snippet_content)
     summary_short = build_summary(markdown_files, tree, content)
-    with open("kb.cmwlab.com.platform_v4_for_llm_ingestion.md", "w", encoding="utf-8-sig", newline='\r\n') as f:
+    with open_text_write("kb.cmwlab.com.platform_v4_for_llm_ingestion.md", sig=True) as f:
         f.write(
             f"\n----------------------\n\n"
             f"Ingestion date: {ingestion_date}\n"

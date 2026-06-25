@@ -1,6 +1,7 @@
 import mysql.connector
 from tools.ssh_kb_ru import establish_connection_interactive, close_connection
 from tools.graceful_interrupt import safe_input, ensure_cleanup
+from tools.text_io import open_text_write
 import html
 from html.parser import HTMLParser
 import bs4
@@ -106,7 +107,7 @@ def importArtciclesInCategory (categoryId, categoryDir):
         filename_html = os.path.join(categoryDir, f"{id}-{sanitizedTitle}.html")
         print ('    Importing article: ' + filename)
         
-        with open(filename, "w+") as b:
+        with open_text_write(filename) as b:
             print(f"  Starting BeautifulSoup processing for article {id}...")
             p = bs4.BeautifulSoup(html.unescape(content), 'html.parser')
             print(f"  BeautifulSoup completed for article {id}")
@@ -116,7 +117,7 @@ def importArtciclesInCategory (categoryId, categoryDir):
             p.insert(0, article_title)
             print(f"  Added title tag for article {id}")
             
-            with open(filename_html, "w+") as html_file:
+            with open_text_write(filename_html) as html_file:
                 html_file.write(str(p))    
             print(f"  Wrote HTML file for article {id}")
             
@@ -475,7 +476,7 @@ def findFilenameByArticleId(article_id, docs_dir):
 
 def updateMappingJson(key, value, mapping, mappingFilename):
     mapping.update({str(key):value})
-    with open(mappingFilename, "w") as mappingFile: 
+    with open_text_write(mappingFilename) as mappingFile: 
         mappingJson = json.dumps(mapping, indent = 4, ensure_ascii=False)
         print(mappingJson)
         mappingFile.write(mappingJson)

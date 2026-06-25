@@ -1,11 +1,11 @@
 ---
-title: 'Comindware Platform 6.0. Перечень стороннего программного обеспечения для Linux'
+title: 'Comindware Platform 5.0. Перечень стороннего программного обеспечения для Linux'
 kbId: 5425
 url: 'https://kb.comindware.ru/article.php?id=5425'
-updated: '2025-12-03 13:00:12'
+updated: '2026-06-22 14:15:28'
 ---
 
-# Comindware Platform 6.0. Перечень стороннего программного обеспечения для Linux
+# Comindware Platform 5.0. Перечень стороннего программного обеспечения для Linux
 
 ## Введение
 
@@ -24,7 +24,7 @@ updated: '2025-12-03 13:00:12'
 | **Наименование ПО и ссылка** | **Описание** | **Версия** | **Лицензия** |
 | --- | --- | --- | --- |
 | [apexcharts](https://apexcharts.com/) | Библиотека для построения интерактивных диаграмм на веб-страницах. | 3.35.3 | MIT License |
-| [autosize](https://github.com/jackmoore/autosize) | Скрипт для автоматического изменения высоты текстовой области по размеру текста. | 6.0.1 | MIT License |
+| [autosize](https://github.com/jackmoore/autosize) | Скрипт для автоматического изменения высоты текстовой области по размеру текста. | 5.0.1 | MIT License |
 | [backbone](https://github.com/jashkenas/backbone/) | Библиотека для разработки веб-приложений, основанная на парадигме проектирования «модель-представление-контроллер». Предусмотрено подключение к API через интерфейс RESTful JSON. | 1.4.1 | MIT License |
 | [backbone.marionette](https://github.com/marionettejs/backbone.marionette) | Библиотека для разработки больших приложений на Backbone.js. | 4.1.3 | MIT License |
 | [backbone.radio](https://github.com/marionettejs/backbone.radio) | Библиотека, предоставляющая дополнительные механизмы обмена сообщениями для приложений на Backbone.js. | 2.0.0 | MIT License |
@@ -42,7 +42,7 @@ updated: '2025-12-03 13:00:12'
 | [handlebars](https://handlebarsjs.com/) | Библиотека, предоставляющая платформу для создания шаблонов. | 4.7.7 | MIT License |
 | [html2canvas](https://www.npmjs.com/package/html2canvas) | JavaScript-визуализатор HTML . | 1.4.1 | MIT License |
 | [innersvg-polyfill](https://github.com/dnozay/innersvg-polyfill) | JavaScript-библиотека, предоставляющая свойство innerHTML для всех SVGElements. | 0.0.5 | ALv2 |
-| [inputmask](https://github.com/RobinHerbots/Inputmask) | JavaScript-библиотека для создания масок ввода. | 6.0.7 | MIT License |
+| [inputmask](https://github.com/RobinHerbots/Inputmask) | JavaScript-библиотека для создания масок ввода. | 5.0.7 | MIT License |
 | [jquery](https://jquery.com/) | JavaScript-библиотека, упрощающая обход дерева HTML DOM и манипулирование им, а также обработку событий, CSS-анимацию и Ajax. | 3.6.0 | MIT License |
 | [jsencrypt](https://github.com/travist/jsencrypt) | JavaScript-библиотека для шифрования, расшифровки и формирования ключей OpenSSL RSA. | 3.2.1 | MIT License |
 | [jssha](https://www.npmjs.com/package/jssha) | Реализация всего семейства хэшей SHA на JavaScript/TypeScript. | 2.3.1 | BSD 3-Clause License |
@@ -71,7 +71,7 @@ updated: '2025-12-03 13:00:12'
 | --- | --- | --- | --- |
 | [Antlr3.Runtime](https://github.com/antlr/antlr3) | Среда проектирования графического интерфейса пользователя для построения грамматик ANTLR v 3. | 3.3.1.7705 | BSD license |
 | [Antlr4.Runtime.Standard](https://github.com/antlr/antlr4) | Среда проектирования графического интерфейса пользователя для построения грамматик ANTLR v4. | 4.11.1.0 | BSD 3-Clause License |
-| [Apache.Ignite.Core](https://ignite.apache.org/) | Распределенная база данных для высокопроизводительных вычислений со скоростью операций в памяти. | 2.17.0 | Apache 2.0 License |
+| [Apache.Ignite.Core](https://ignite.apache.org/) | Распределенная база данных для высокопроизводительных вычислений со скоростью операций в памяти. | 2.18.0 | Apache 2.0 License |
 | [Apache.Ignite.Linq](https://ignite.apache.org/) | Компонент библиотеки Apache.Ignite.Core. | 16.10.0.0 | Apache 2.0 License |
 | [Apache.Ignite.NLog](https://ignite.apache.org/) | Компонент библиотеки Apache.Ignite.Core. | 9.0.0.0 | Apache 2.0 License |
 | [Apache.Lucene.NET](https://github.com/apache/lucenenet) | Порт библиотеки Lucene для полнотекстового поиска. | 3.0.3.0 | Apache 2.0 License |
@@ -85,29 +85,29 @@ updated: '2025-12-03 13:00:12'
 | [DDay.Collections](https://github.com/rianjs/ical.net) | Компонент iCal.NET — библиотеки классов для .NET, обеспечивает соответствие RFC 5545 и полную совместимость с популярными приложениями и библиотеками календарей. | 1.0.0.0 | MIT License |
 | [DDay.iCal](https://github.com/rianjs/ical.net) | Компонент iCal.NET — библиотеки классов для .NET, которая обеспечивает соответствие RFC 5545 и полную совместимость с популярными приложениями и библиотеками календарей. | 1.0.2.0 | MIT License |
 | [Elasticsearch.Net](https://github.com/elastic/elasticsearch-net) | Строго типизированная клиентская библиотека, обеспечивающая работу с OpenSearch (Elasticsearch). | 7.0.0.0 | Apache 2.0 License |
-| [Html Agility Pack (HAP)](https://github.com/zzzprojects/html-agility-pack) | Гибкое средство синтаксического анализа HTML, создающее модель чтения-записи DOM, с поддержкой простого XPATH или XSLT. | 1.11.16.0 | MIT License |
+| [Html Agility Pack (HAP)](https://github.com/zzzprojects/html-agility-pack) | Гибкое средство синтаксического анализа HTML, создающее модель чтения-записи DOM, с поддержкой простого XPATH или XSLT. | 1.11.15.0 | MIT License |
 | [Humanizer](https://github.com/Humanizr/Humanizer) | Библиотека CS для обработки и отображения строк, перечислений, дат, времени, промежутков времени, чисел и количества. | 2.2.0.0 | MIT License |
 | [JWT](https://github.com/jwt-dotnet/jwt) | Библиотека, реализующая JWT (JSON Web Token) для .NET. | 9.0.0.0 | CC0-1.0 License |
-| [LdapForNet](https://github.com/flamencist/ldap4net) | Порт OpenLdap для .NET Core. | 2.7.16.0 | MIT License |
+| [LdapForNet](https://github.com/flamencist/ldap4net) | Порт OpenLdap для .NET Core. | 2.7.15.0 | MIT License |
 | [LibGit2Sharp](https://github.com/libgit2/libgit2sharp) | Библиотека, позволяющая писать собственные высокопроизводительные приложения Git на любом языке. | 0.26.0.0 | MIT License |
-| [MailKit](https://github.com/jstedfast/MailKit/blob/master/LICENSE) | Кроссплатформенная клиентская библиотека для работы с почтовыми сообщениями. | 2.16.0.0 | MIT License |
+| [MailKit](https://github.com/jstedfast/MailKit/blob/master/LICENSE) | Кроссплатформенная клиентская библиотека для работы с почтовыми сообщениями. | 2.15.0.0 | MIT License |
 | [Microsoft.AspNet.SignalR.Core](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Core) | Компонент ASP.NET Framework — библиотека, реализующая .NET для SignalR. | 2.4.3.0 | Apache 2.0 License |
 | [Microsoft.AspNet.SignalR.SystemWeb](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Core) | Компонент ASP.NET Framework — библиотека, реализующая .NET для SignalR. | 2.4.3.0 | Apache 2.0 License |
 | [Microsoft.Bcl.AsyncInterfaces](https://www.nuget.org/packages/Microsoft.Bcl.AsyncInterfaces/) | Библиотека, предоставляющая интерфейсы и вспомогательные типы IAsyncEnumerable и IAsyncDisposable для .NET. | 7.0.0.0 | MIT License |
 | [Microsoft.CodeAnalysis](https://www.nuget.org/packages/Microsoft.CodeAnalysis) | Компонент компилятора Roslyn .NET — предоставляет языки C# и Visual Basic с API анализа кода. | 3.9.0.0 | MIT License |
-| [Microsoft.Data.Edm](https://www.nuget.org/packages/Microsoft.Data.Edm/) | Компонент OData. | 5.8.6.0 | MIT License |
-| [Microsoft.Data.OData](https://www.nuget.org/packages/Microsoft.Data.OData/) | Компонент OData. | 5.8.6.0 | MIT License |
+| [Microsoft.Data.Edm](https://www.nuget.org/packages/Microsoft.Data.Edm/) | Компонент OData. | 5.8.5.0 | MIT License |
+| [Microsoft.Data.OData](https://www.nuget.org/packages/Microsoft.Data.OData/) | Компонент OData. | 5.8.5.0 | MIT License |
 | [Microsoft.DiaSymReader](https://github.com/dotnet/symreader) | Управляемые определения интерфейсов COM, предоставляемые API-интерфейсами DiaSymReader. | 1.3.0.0 | MIT License |
-| [Microsoft.Exchange.WebServices](https://github.com/OfficeDev/ews-managed-api) | Управляемый API веб-служб Exchange (EWS). | 16.0.0.0 | MIT License |
+| [Microsoft.Exchange.WebServices](https://github.com/OfficeDev/ews-managed-api) | Управляемый API веб-служб Exchange (EWS). | 15.0.0.0 | MIT License |
 | [Microsoft.IdentityModel](https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet) | Библиотека для работы с OpenIdConnect и WsFederation. **Примечание:** это необязательный компонент для входа в **Comindware Platform** через Google, Azure AD/ и другие службы OpenID. Этот компонент не устанавливается по умолчанию. При необходимости его можно установить при развертывании ПО. | 5.3.0.0 | MIT License |
 | [Microsoft.OData](https://www.nuget.org/packages/Microsoft.Data.OData/) | Библиотека для работы с OData. | 7.10.0.0 | MIT License |
 | [Microsoft.Owin](https://www.nuget.org/packages/Microsoft.Owin) | Библиотека для работы с OWIN. | 4.1.1.0 | Apache 2.0 License |
 | [Microsoft.Spatial](https://www.nuget.org/packages/Microsoft.Spatial/) | Библиотека для работы с геометрическими фигурами. | 7.10.0.0 | MIT License |
 | [Microsoft.Win32.Registry](https://www.nuget.org/packages/Microsoft.Win32.Registry/) | Библиотека для работы с реестром Windows. | 4.1.3.0 | MIT License |
-| [MimeKit](https://github.com/jstedfast/MimeKit) | Библиотека для создания и обработки сообщений с использованием MIME. | 2.16.0.0 | MIT License |
+| [MimeKit](https://github.com/jstedfast/MimeKit) | Библиотека для создания и обработки сообщений с использованием MIME. | 2.15.0.0 | MIT License |
 | [Nest](https://www.nuget.org/packages/NEST) | Библиотека .NET-клиента для работы с OpenSearch (Elasticsearch). | 7.0.0.0 | Apache 2.0 License |
 | [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/) | Json.NET — это высокопроизводительная платформа JSON для .NET. | 13.0.0.0 | MIT License |
-| [NLog](https://github.com/NLog/NLog) | Платформа журналирования. | 6.0.0.0 | BSD 3-Clause License |
+| [NLog](https://github.com/NLog/NLog) | Платформа журналирования. | 5.0.0.0 | BSD 3-Clause License |
 | [Owin](https://github.com/owin/owin/issues) | Интерфейс OWIN IAppBuilder. | 1.0.0.0 | Apache 2.0 License |
 | [RazorGenerator.Mvc](https://www.nuget.org/packages/RazorGenerator.Mvc) | Библиотека для поддержки RazorView. | 2.0.0.0 | Apache 2.0 License |
 | [Remotion.Linq](https://www.nuget.org/packages/Remotion.Linq/) | Библиотека для написания своего LINQ-провайдера. | 2.1.0.0 | Apache 2.0 License |
