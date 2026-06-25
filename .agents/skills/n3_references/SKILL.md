@@ -129,6 +129,47 @@ subject predicate object.
 4. Compare attributes: `?item <Ответственный> ?responsible. ?item <Согласующий> ?responsible.`
 5. Find all groups: `?group rdf:type account:Group.`
 
+## Gotchas & Debugging Triples
+
+### Account templates (ША) are NOT iterable like record templates
+
+`object:alias` / `cmw:container` enumerate **record** templates only. Account templates
+(employee profiles, etc.) must be iterated via `a account:Account`, then filtered.
+
+Get the current user's profile and a linked attribute (e.g. role):
+
+```turtle
+cmw:securityContext cmw:currentUser ?currentUser.
+?currentUser account:fullName ?fn.
+?profile a account:Account.        # NOT: ?profile a [object:alias "ProfileTemplate"]
+?profile account:fullName ?fn.     # match profile to current user
+?profile ?roleLinkAttr ?role.
+```
+
+### Triples fail silently — debug by binary search
+
+An unbound triplet aborts the whole query and yields empty/`false` with **no error**.
+Isolate the failure: start from a minimal working subset, add one condition at a time,
+wrap each probe to force a boolean:
+
+```turtle
+@prefix assert: <http://comindware.com/logics/assert#>.
+{ ...subset of conditions... } assert:count ?c.
+if   { ?c != 0 }
+then { true  -> ?value. }
+else { false -> ?value. }.
+```
+
+### Other silent-failure causes
+
+- **Cross-solution isolation:** triples cannot reach records of a template located in
+  another solution. All referenced templates must live in the same solution.
+- **Literal system names:** `object:findProperty` / `object:alias` fail silently on any
+  mismatch (Cyrillic vs Latin, case). Verify exact system names from the app configuration.
+- **Comparison by identity vs value:** binding two record-reference variables as
+  subject–object of a property works (identity match); if it fails, fall back to
+  `?refA == ?refB`.
+
 ## Notes
 - Triplet uniqueness error: `"Транзакция нарушает уникальность триплета: cmw.account.mbox - email@<hostname>"` (see `log_files_event_examples.md`)
 - For detailed Web API methods, read `api_web.md` section by section (file is large, use line numbers)

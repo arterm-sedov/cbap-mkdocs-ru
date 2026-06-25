@@ -13,6 +13,7 @@ Session discoveries that haven't yet been migrated to durable skills or rules.
 - **Build script path navigation.** `$reposRoot = $scriptDir; for ($i=0; $i -lt N; $i++) { $reposRoot = $reposRoot.Parent }; $cbapRoot = Join-Path $reposRoot.FullName "Documents\cbap-mkdocs-ru"`. Loop count depends on folder depth relative to user's home.
 - **UTF-8 for mkdocs on Windows.** Must set `$env:PYTHONIOENCODING="utf-8"` and `$env:PYTHONUTF8="1"` (User-level env vars + PowerShell profile). Without this, colorama crashes on Unicode box-drawing characters in mkdocs-material output.
 - **`git config core.longpaths true`** required globally on Windows for repos with long Russian filenames in paths (phpkb_content/, phpkb_content_rag/).
+- **N3 triples:** account templates (ША) cannot be iterated via `object:alias`/`cmw:container` (those work for record templates only) — use `?x a account:Account` + filter by `account:fullName`. Triples fail **silently** (unbound triplet → empty/`false`, no error); debug by binary search: wrap subsets in `{...} assert:count ?c. if {?c != 0} then {true -> ?value} else {false -> ?value}`. Also: triples can't reach records of a template in another **solution**; `object:findProperty`/`object:alias` fail silently on system-name mismatch (Cyrillic vs Latin, case).
 
 ## 2026-06-20
 
